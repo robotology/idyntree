@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<robot name="pr2">
+    <joint name="fl_caster_rotation_joint" type="revolute">
+      <axis xyz="0 0 1"/>
+      <anchor xyz="0 0 0"/>
+      <limit effort="100" k_velocity="10" velocity="100"/>
+      <calibration reference_position="0.0" values="1.5 -1"/>
+      <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+  
+    <link name="fl_caster_rotation_link">
+      <parent name="base_link"/>
+      <joint name="fl_caster_rotation_joint"/>
+
+      <inertial>
+        <mass value="3.473082}"/>
+        <com xyz="0 0 0.07"/>
+        <inertia ixx="0.012411765597" ixy="-0.000711733678" ixz="0.00050272983" iyy="0.015218160428" iyz="-0.000004273467" izz="0.011763977943"/>
+      </inertial>
+</robot>
