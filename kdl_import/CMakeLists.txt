@@ -1,39 +1,12 @@
-cmake_minimum_required(VERSION 2.8.3)
+include_directories(include)
 
-project(kdl_parser_no_ros)
+add_library(kdl_import SHARED src/kdl_import.cpp)
+target_link_libraries(kdl_import ${urdfdom_libraries} ${tinyxml_libraries} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
 
-find_package(Boost REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
+# --------------------------------
 
-find_library(tinyxml_library tinyxml)
+#add_executable(check_urdf src/check_urdf.cpp)
+#target_link_libraries(check_urdf urdfdom_model urdfdom_world)
 
-find_package(catkin REQUIRED
-  COMPONENTS collada_parser orocos_kdl roscpp rosconsole urdf
-)
-
-include_directories(include ${catkin_INCLUDE_DIRS})
-
-catkin_package(
-  LIBRARIES ${PROJECT_NAME}
-  INCLUDE_DIRS include
-  CATKIN_DEPENDS collada_parser roscpp rosconsole urdf
-)
-
-add_library(${PROJECT_NAME} src/kdl_parser.cpp)
-target_link_libraries(${PROJECT_NAME}
-  ${tinyxml_library} ${catkin_LIBRARIES}
-)
-
-add_executable(check_kdl_parser src/check_kdl_parser.cpp )
-target_link_libraries(check_kdl_parser ${PROJECT_NAME})
-
-catkin_add_gtest(test_kdl_parser test/test_kdl_parser.cpp )
-target_link_libraries(test_kdl_parser ${PROJECT_NAME})
-
-# How does CATKIN do this?
-#rosbuild_add_rostest(${PROJECT_SOURCE_DIR}/test/test_kdl_parser.launch)
-install(TARGETS ${PROJECT_NAME} 
-  DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
-
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+INSTALL(TARGETS kdl_import DESTINATION lib/)
+INSTALL(DIRECTORY include/kdl_import DESTINATION include)

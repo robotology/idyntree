@@ -38,9 +38,11 @@
 #define KDL_EXPORT_H
 
 #include <kdl/tree.hpp>
+#include <kdl/joint.hpp>
 #include <string>
 #include <urdf_model/model.h>
 #include <tinyxml.h>
+
 
 namespace kdl_export{
 
@@ -78,7 +80,7 @@ namespace kdl_export{
  * \param robot_model input, output parameter, the resulting URDF robot model
  * returns true on success, false on failure
  */
-bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_model)
+bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_model);
 
 
 /** Constructs a URDF robot model from a KDL tree
@@ -87,7 +89,8 @@ bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_mode
  * \param robot_model The resulting URDF robot model
  * returns true on success, false on failure
  */
-bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf::ModelInterface& robot_model)
+bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf::ModelInterface& robot_model);
+
 }
 
 #endif

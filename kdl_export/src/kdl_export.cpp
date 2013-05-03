@@ -35,10 +35,9 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_parser/kdl_parser.hpp"
-#include <urdf/model.h>
-#include <kdl/frames_io.hpp>
-#include <ros/console.h>
+#include "kdl_export/kdl_export.hpp"
+#include <urdf_model/model.h>
+#include <console_bridge/console.h>
 
 using namespace std;
 
@@ -55,7 +54,7 @@ urdf::Vector3 toUrdf(const KDL::Vector & v)
 urdf::Rotation toUrdf(const KDL::Rotation & r) 
 {
     double x,y,z,w;
-    r.getQuaternion(x,y,z,w);
+    r.GetQuaternion(x,y,z,w);
     return urdf::Rotation(x,y,z,w);
 }
 
@@ -75,47 +74,47 @@ urdf::Joint toUrdf(const KDL::Joint & jnt)
     ret.name = jnt.getName();
     switch(jnt.getType())
     {
-        case Joint::RotAxis:
-        case Joint::RotX:
-        case Joint::RotY:
-        case Joint::RotZ:
-            ret.type = urdf::REVOLUTE;
+        case KDL::Joint::RotAxis:
+        case KDL::Joint::RotX:
+        case KDL::Joint::RotY:
+        case KDL::Joint::RotZ:
+            ret.type = urdf::Joint::REVOLUTE;
             ret.parent_to_joint_origin_transform = toUrdf(KDL::Frame(KDL::Rotation::Identity(),jnt.JointOrigin()));
             ret.axis = toUrdf(jnt.JointAxis());
         break;
-        case Joint::TransAxis:
-        case Joint::TransX:
-        case Joint::TransY:
-        case Joint::TransZ:
-            ret.type = urdf::PRISMATIC;
+        case KDL::Joint::TransAxis:
+        case KDL::Joint::TransX:
+        case KDL::Joint::TransY:
+        case KDL::Joint::TransZ:
+            ret.type = urdf::Joint::PRISMATIC;
             ret.parent_to_joint_origin_transform = toUrdf(KDL::Frame(KDL::Rotation::Identity(),jnt.JointOrigin()));
             ret.axis = toUrdf(jnt.JointAxis());
         break;
         default: 
-            lowWarn("Converting unknown joint type of joint '%s' into a fixed joint",jnt.getTypeName());
-        case Joint::None:
-            ret.type = urdf::FIXED;
+            logWarn("Converting unknown joint type of joint '%s' into a fixed joint",jnt.getTypeName().c_str());
+        case KDL::Joint::None:
+            ret.type = urdf::Joint::FIXED;
     }
     return ret;
 }
 
 // construct inertia
-urdf::Inertial toUrdf(const KDL::RigidBodyInertia i)
+urdf::Inertial toUrdf(KDL::RigidBodyInertia i)
 {
   urdf::Inertial ret;
   ret.mass = i.getMass();
-  ret.origin = toUrdf(KDL::Frame(KDL::Rotation::Identity(),ret.getCOG()));
+  ret.origin = toUrdf(KDL::Frame(KDL::Rotation::Identity(),i.getCOG()));
   // kdl specifies the inertia in the reference frame of the link, the urdf specifies the inertia in the inertia reference frame
   // however the kdl RigidBodyInertia constructor take the inertia with the COG as reference point, 
   // but the getInertia
   KDL::RotationalInertia Ic; 
-  Ic = i.RefPoint(ret.getCOG()).getRotationalInertia();
-  ret.Ixx = Ic.data[0];
-  ret.Ixy = Ic.data[1];
-  ret.Ixz = Ic.data[2];
-  ret.Iyy = Ic.data[4];
-  ret.Iyz = Ic.data[5];
-  ret.Izz = Ic.data[8];
+  Ic = i.RefPoint(i.getCOG()).getRotationalInertia();
+  ret.ixx = Ic.data[0];
+  ret.ixy = Ic.data[1];
+  ret.ixz = Ic.data[2];
+  ret.iyy = Ic.data[4];
+  ret.iyz = Ic.data[5];
+  ret.izz = Ic.data[8];
   return ret;
 }
 
@@ -155,18 +154,18 @@ bool treeToXml(TiXmlDocument *xml_doc, Tree& tree)
 bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf::ModelInterface& robot_model)
 {
     unsigned int i = 0;
-    robot_model.reset();
-    robot_model.name = robot_name;
+    robot_model.clear();
+    robot_model.name_ = robot_name;
 
     //Add all links
     KDL::SegmentMap::iterator seg;
     KDL::SegmentMap segs;
     tree.getSegments(segs);
     for( seg = segs.begin(); seg != segs.end(); seg++ ) {        
-        if (model->getLink(seg->first))
+        if (robot_model.getLink(seg->first))
         {
             logError("link '%s' is not unique.",  seg->first.c_str());
-            robot_model.reset();
+            robot_model.clear();
             return false;
         }
         else
@@ -179,22 +178,22 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
             
             //add inertial
             link->inertial.reset(new urdf::Inertial());
-            *(link->inertial) = toUrdf(seg->second.getInertial())
+            *(link->inertial) = toUrdf(seg->second.segment.getInertia());
             
             //insert link
-            robot_model->links_.insert(make_pair(seg->first,link));
+            robot_model.links_.insert(make_pair(seg->first,link));
             logDebug("successfully added a new link '%s'", link->name.c_str());
         }
     }
     
     for( seg = segs.begin(); seg != segs.end(); seg++ ) { 
         KDL::Joint jnt;
-        jnt = seg->second.getJoint();
-        if (robot_model->getJoint(jnt->getName()))
+        jnt = seg->second.segment.getJoint();
+        if (robot_model.getJoint(jnt.getName()))
         {
-            logError("joint '%s' is not unique.", jnt->getName());
-            robot_model.reset();
-            return model;
+            logError("joint '%s' is not unique.", jnt.getName().c_str());
+            robot_model.clear();
+            return false;
         }
         else
         { 
@@ -211,8 +210,8 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
             joint->child_link_name = seg->first;
             
             //insert joint
-            robot_model->joints_.insert(make_pair(seg->first,link));
-            logDebug("successfully added a new link '%s'", link->name.c_str());
+            robot_model.joints_.insert(make_pair(seg->first,joint));
+            logDebug("successfully added a new joint '%s'", jnt.getName().c_str());
         }
     }
     
@@ -222,29 +221,31 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
     parent_link_tree.clear();
     
     // building tree: name mapping
-    try 
-    {
-        robot_model->initTree(parent_link_tree);
-    }
+    //try 
+    //{
+        robot_model.initTree(parent_link_tree);
+    //}
+    /*
     catch(ParseError &e)
     {
         logError("Failed to build tree: %s", e.what());
-        robot_model.reset();
+        robot_model.clear();
         return false;
-    }
+    }*/
     
     // find the root link
-    try
-    {
-        robot_model->initRoot(parent_link_tree);
-    }
+    //try
+    //{
+        robot_model.initRoot(parent_link_tree);
+    //}
+    /*
     catch(ParseError &e)
     {
         logError("Failed to find root link: %s", e.what());
         robot_model.reset();
         return false;
     }
-        
+    */
     return true;
 }
 
@@ -257,12 +258,12 @@ bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_mode
     
     //Update all links
     for( seg = segs.begin(); seg != segs.end(); seg++ ) {  
-        boost::shared_ptr<urdf::Link> link = model->getLink(seg->first)
-        if (link)
+        if (robot_model.getLink(seg->first))
         {
+            boost::shared_ptr<urdf::Link> link = robot_model.links_[seg->first];
             //update inertial
             link->inertial.reset(new urdf::Inertial());
-            *(link->inertial) = toUrdf(seg->second.getInertial())
+            *(link->inertial) = toUrdf(seg->second.segment.getInertia());
             
             logDebug("successfully updated link '%s'", link->name.c_str());
         }
@@ -275,12 +276,14 @@ bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_mode
     
     for( seg = segs.begin(); seg != segs.end(); seg++ ) { 
         KDL::Joint jnt;
-        boost::shared_ptr<urdf::Joint> joint;
+        
         urdf::Joint new_joint;
-        jnt = seg->second.getJoint();
-        joint = model->getJoint(jnt->getName());
-        if (joint)
+        jnt = seg->second.segment.getJoint();
+        if (robot_model.getJoint(jnt.getName()))
         {
+            boost::shared_ptr<urdf::Joint> joint;
+            joint = robot_model.joints_[jnt.getName()];
+            
             //convert joint
             new_joint = toUrdf(jnt);
             
@@ -289,11 +292,11 @@ bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_mode
             joint->axis = new_joint.axis;
             joint->parent_to_joint_origin_transform = new_joint.parent_to_joint_origin_transform;
             
-            logDebug("successfully updated joint '%s'", jnt->getName());
+            logDebug("successfully updated joint '%s'", jnt.getName().c_str());
         }
         else
         { 
-            logError("joint '%s' not found.",  jnt->getName());
+            logError("joint '%s' not found.",  jnt.getName().c_str());
             return false;
         }
     }

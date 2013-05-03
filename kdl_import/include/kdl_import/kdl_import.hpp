@@ -34,8 +34,8 @@
 
 /* Author: Wim Meeussen */
 
-#ifndef KDL_PARSER_H
-#define KDL_PARSER_H
+#ifndef KDL_IMPORT_H
+#define KDL_IMPORT_H
 
 #include <kdl/tree.hpp>
 #include <string>
@@ -56,7 +56,7 @@ bool treeFromFile(const std::string& file, KDL::Tree& tree);
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeFromParam(const std::string& param, KDL::Tree& tree);
+//bool treeFromParam(const std::string& param, KDL::Tree& tree);
 
 /** Constructs a KDL tree from a string containing xml
  * \param xml A string containting the xml description of the robot
@@ -65,12 +65,13 @@ bool treeFromParam(const std::string& param, KDL::Tree& tree);
  */
 bool treeFromString(const std::string& xml, KDL::Tree& tree);
 
+
 /** Constructs a KDL tree from a TiXmlDocument
  * \param xml_doc The TiXmlDocument containting the xml description of the robot
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeFromXml(TiXmlDocument *xml_doc, KDL::Tree& tree);
+//bool treeFromXml(TiXmlDocument *xml_doc, KDL::Tree& tree);
 
 /** Constructs a KDL tree from a URDF robot model
  * \param robot_model The URDF robot model

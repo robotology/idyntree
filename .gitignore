@@ -1,5 +1,4 @@
-CMakeCache.txt
-CMakeFiles
-Makefile
-cmake_install.cmake
-install_manifest.txt
+build/*
+cmake/kdl_urdf-config.cmake
+cmake/pkgconfig/kdl_urdf.pc
+

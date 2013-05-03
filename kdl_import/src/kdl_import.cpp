@@ -34,10 +34,11 @@
 
 /* Author: Wim Meeussen */
 
-#include "kdl_parser/kdl_parser.hpp"
-#include <urdf/model.h>
-#include <kdl/frames_io.hpp>
-#include <ros/console.h>
+#include "kdl_import/kdl_import.hpp"
+#include <urdf_model/model.h>
+#include <urdf_parser/urdf_parser.h>
+#include <console_bridge/console.h>
+#include <fstream>
 
 using namespace std;
 using namespace KDL;
@@ -85,7 +86,7 @@ Joint toKdl(boost::shared_ptr<urdf::Joint> jnt)
     return Joint(jnt->name, F_parent_jnt.p, F_parent_jnt.M * axis, Joint::TransAxis);
   }
   default:{
-    ROS_WARN("Converting unknown joint type of joint '%s' into a fixed joint", jnt->name.c_str());
+    logWarn("Converting unknown joint type of joint '%s' into a fixed joint", jnt->name.c_str());
     return Joint(jnt->name, Joint::None);
   }
   }
@@ -105,7 +106,7 @@ RigidBodyInertia toKdl(boost::shared_ptr<urdf::Inertial> i)
 bool addChildrenToTree(boost::shared_ptr<const urdf::Link> root, Tree& tree)
 {
   std::vector<boost::shared_ptr<urdf::Link> > children = root->child_links;
-  ROS_DEBUG("Link %s had %i children", root->name.c_str(), (int)children.size());
+  logDebug("Link %s had %i children", root->name.c_str(), (int)children.size());
 
   // constructs the optional inertia
   RigidBodyInertia inert(0);
@@ -132,38 +133,42 @@ bool addChildrenToTree(boost::shared_ptr<const urdf::Link> root, Tree& tree)
 
 bool treeFromFile(const string& file, Tree& tree)
 {
-  TiXmlDocument urdf_xml;
-  urdf_xml.LoadFile(file);
-  return treeFromXml(&urdf_xml, tree);
+    ifstream ifs(file.c_str());
+    std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
+                       (std::istreambuf_iterator<char>()    ) );
+
+    return treeFromString(xml_string,tree);
 }
 
+/*
 bool treeFromParam(const string& param, Tree& tree)
 {
-  urdf::Model robot_model;
+  urdf::ModelInterface robot_model;
   if (!robot_model.initParam(param)){
-    ROS_ERROR("Could not generate robot model");
+    logError("Could not generate robot model");
     return false;
   }
   return treeFromUrdfModel(robot_model, tree);
 }
-
+*/
 bool treeFromString(const string& xml, Tree& tree)
 {
-  TiXmlDocument urdf_xml;
-  urdf_xml.Parse(xml.c_str());
-  return treeFromXml(&urdf_xml, tree);
+  boost::shared_ptr<urdf::ModelInterface> urdf_model;
+  urdf_model = urdf::parseURDF(xml);
+  return treeFromUrdfModel(*urdf_model,tree); 
 }
-
+/*
 bool treeFromXml(TiXmlDocument *xml_doc, Tree& tree)
 {
-  urdf::Model robot_model;
-  if (!robot_model.initXml(xml_doc)){
-    ROS_ERROR("Could not generate robot model");
+  boost::shared_ptr<ModelInterface> robot_model;
+  robot_model = urdf::parseURDF(
+  if (!robot_model.parse(xml_doc)){
+    logError("Could not generate robot model");
     return false;
   }
   return treeFromUrdfModel(robot_model, tree);
 }
-
+*/
 
 bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree)
 {
@@ -171,7 +176,7 @@ bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree)
 
   // warn if root link has inertia. KDL does not support this
   if (robot_model.getRoot()->inertial)
-    ROS_WARN("The root link %s has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.", robot_model.getRoot()->name.c_str());
+    logWarn("The root link %s has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.", robot_model.getRoot()->name.c_str());
 
   //  add all children
   for (size_t i=0; i<robot_model.getRoot()->child_links.size(); i++)
