@@ -79,7 +79,8 @@ urdf::Joint toUrdf(const KDL::Joint & jnt)
         case KDL::Joint::RotX:
         case KDL::Joint::RotY:
         case KDL::Joint::RotZ:
-            ret.type = urdf::Joint::REVOLUTE;
+            //using continuos if no joint limits are specified
+            ret.type = urdf::Joint::CONTINUOUS;
             ret.parent_to_joint_origin_transform = toUrdf(KDL::Frame(KDL::Rotation::Identity(),jnt.JointOrigin()));
             ret.axis = toUrdf(jnt.JointAxis());
         break;
