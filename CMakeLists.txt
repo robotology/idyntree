@@ -55,7 +55,7 @@ install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPON
 # Make the package config file
 if (NOT MSVC)
   set(PKG_DESC "Kinematics Dynamics Library support for Unified Robot Description Format")
-  set(PKG_DEPENDS "urdfdom_headers console_bridge") # make the list separated by spaces instead of ;
+  set(PKG_DEPENDS "Orocos-KDL urdfdom urdfdom_headers console_bridge") # make the list separated by spaces instead of ;
   set(PKG_URDF_LIBS "-lkdl_import -lkdl_export")
   set(pkg_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/pkgconfig/kdl_urdf.pc")
   configure_file("${pkg_conf_file}.in" "${pkg_conf_file}" @ONLY)

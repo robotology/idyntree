@@ -38,6 +38,7 @@
 #include "kdl_export/kdl_export.hpp"
 #include <urdf_model/model.h>
 #include <console_bridge/console.h>
+#include <iostream>
 
 using namespace std;
 
@@ -156,10 +157,14 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
     unsigned int i = 0;
     robot_model.clear();
     robot_model.name_ = robot_name;
+    
+    
 
     //Add all links
     KDL::SegmentMap::iterator seg;
     KDL::SegmentMap segs;
+    KDL::SegmentMap::const_iterator root_seg;
+    tree.getRootSegment(root_seg);
     tree.getSegments(segs);
     for( seg = segs.begin(); seg != segs.end(); seg++ ) {        
         if (robot_model.getLink(seg->first))
@@ -187,31 +192,34 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
     }
     
     for( seg = segs.begin(); seg != segs.end(); seg++ ) { 
-        KDL::Joint jnt;
-        jnt = seg->second.segment.getJoint();
-        if (robot_model.getJoint(jnt.getName()))
-        {
-            logError("joint '%s' is not unique.", jnt.getName().c_str());
-            robot_model.clear();
-            return false;
-        }
-        else
-        { 
-            boost::shared_ptr<urdf::Joint> joint;
-            joint.reset(new urdf::Joint);
-            
-            //convert joint
-            *joint = toUrdf(jnt);
-            
-            //insert parent
-            joint->parent_link_name = seg->second.parent->first;
-            
-            //insert child
-            joint->child_link_name = seg->first;
-            
-            //insert joint
-            robot_model.joints_.insert(make_pair(seg->first,joint));
-            logDebug("successfully added a new joint '%s'", jnt.getName().c_str());
+        //The fake root segment has no joint to add
+        if( seg->first != root_seg->first ) {
+            KDL::Joint jnt;
+            jnt = seg->second.segment.getJoint();
+            if (robot_model.getJoint(jnt.getName()))
+            {
+                logError("joint '%s' is not unique.", jnt.getName().c_str());
+                robot_model.clear();
+                return false;
+            }
+            else
+            { 
+                boost::shared_ptr<urdf::Joint> joint;
+                joint.reset(new urdf::Joint());
+                
+                //convert joint
+                *joint = toUrdf(jnt);
+                
+                //insert parent
+                joint->parent_link_name = seg->second.parent->first;
+                
+                //insert child
+                joint->child_link_name = seg->first;
+                
+                //insert joint
+                robot_model.joints_.insert(make_pair(seg->first,joint));
+                logDebug("successfully added a new joint '%s'", jnt.getName().c_str());
+            }
         }
     }
     

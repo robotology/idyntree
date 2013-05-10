@@ -1,7 +1,7 @@
 include_directories(include)
 
 add_library(kdl_export SHARED src/kdl_export.cpp)
-target_link_libraries(kdl_export ${tinyxml_libraries} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(kdl_export  ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
 
 # --------------------------------
 
