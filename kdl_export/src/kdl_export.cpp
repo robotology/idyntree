@@ -39,6 +39,7 @@
 #include <urdf_model/model.h>
 #include <console_bridge/console.h>
 #include <iostream>
+#include <urdf_parser/urdf_parser.h>
 
 using namespace std;
 
@@ -82,6 +83,9 @@ urdf::Joint toUrdf(const KDL::Joint & jnt)
             //using continuos if no joint limits are specified
             ret.type = urdf::Joint::CONTINUOUS;
             ret.parent_to_joint_origin_transform = toUrdf(KDL::Frame(KDL::Rotation::Identity(),jnt.JointOrigin()));
+            //std::cout << jnt.JointOrigin() << std::endl;
+            std::cout << jnt.JointOrigin().x() << " " << jnt.JointOrigin().y() << " " << jnt.JointOrigin().z() << std::endl;
+            std::cout << urdf_export_helpers::values2str(ret.parent_to_joint_origin_transform.position) << std::endl;
             ret.axis = toUrdf(jnt.JointAxis());
         break;
         case KDL::Joint::TransAxis:
