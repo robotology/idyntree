@@ -45,7 +45,6 @@ using namespace std;
 
 namespace kdl_export{
 
-
 // construct vector
 urdf::Vector3 toUrdf(const KDL::Vector & v) 
 {
@@ -69,11 +68,39 @@ urdf::Pose toUrdf(const KDL::Frame & p)
     return ret;
 }
 
-// construct joint
-urdf::Joint toUrdf(const KDL::Joint & jnt)
+KDL::Frame getH_new_old(const KDL::Segment seg)
 {
+    KDL::Frame H_new_old;
+    KDL::Joint jnt =  seg.getJoint();
+    KDL::Frame frameToTip = seg.getFrameToTip();
+    if( (jnt.JointOrigin()-frameToTip.p).Norm() < 1e-6 ) {
+        //No need of changing link frame
+        H_new_old = KDL::Frame::Identity();
+    } else {
+        H_new_old = (KDL::Frame(jnt.JointOrigin())*KDL::Frame(frameToTip.M)).Inverse()*frameToTip;
+    }
+    return H_new_old;
+}
+
+// construct joint
+urdf::Joint toUrdf(const KDL::Joint & jnt, const KDL::Frame & frameToTip, const KDL::Frame & H_new_old_predecessor, KDL::Frame & H_new_old_successor)
+{
+    //URDF constaints the successor link frame origin to lay on the axis
+    //of the joint ( see : http://www.ros.org/wiki/urdf/XML/joint )
+    //Then if the JointOrigin of the KDL joint is not zero, it is necessary
+    //to move the link frame (then it is necessary to change also the spatial inertia)
+    //and the definition of the childrens of the successor frame
     urdf::Joint ret;
     ret.name = jnt.getName();
+    if( (jnt.JointOrigin()-frameToTip.p).Norm() < 1e-6 ) {
+        //No need of changing link frame
+        ret.parent_to_joint_origin_transform = toUrdf(frameToTip);
+        H_new_old_successor = KDL::Frame::Identity();
+    } else {
+        ret.parent_to_joint_origin_transform = toUrdf(H_new_old_predecessor*KDL::Frame(jnt.JointOrigin())*KDL::Frame(frameToTip.M));
+        H_new_old_successor = (KDL::Frame(jnt.JointOrigin())*KDL::Frame(frameToTip.M)).Inverse()*frameToTip;
+    }
+    
     switch(jnt.getType())
     {
         case KDL::Joint::RotAxis:
@@ -82,19 +109,18 @@ urdf::Joint toUrdf(const KDL::Joint & jnt)
         case KDL::Joint::RotZ:
             //using continuos if no joint limits are specified
             ret.type = urdf::Joint::CONTINUOUS;
-            ret.parent_to_joint_origin_transform = toUrdf(KDL::Frame(KDL::Rotation::Identity(),jnt.JointOrigin()));
-            //std::cout << jnt.JointOrigin() << std::endl;
-            std::cout << jnt.JointOrigin().x() << " " << jnt.JointOrigin().y() << " " << jnt.JointOrigin().z() << std::endl;
-            std::cout << urdf_export_helpers::values2str(ret.parent_to_joint_origin_transform.position) << std::endl;
-            ret.axis = toUrdf(jnt.JointAxis());
+            //in urdf, the joint axis is expressed in the joint/successor frame
+            //in kdl, the joint axis is expressed in the predecessor rame
+            ret.axis = toUrdf(frameToTip.M.Inverse(jnt.JointAxis()));
         break;
         case KDL::Joint::TransAxis:
         case KDL::Joint::TransX:
         case KDL::Joint::TransY:
         case KDL::Joint::TransZ:
             ret.type = urdf::Joint::PRISMATIC;
-            ret.parent_to_joint_origin_transform = toUrdf(KDL::Frame(KDL::Rotation::Identity(),jnt.JointOrigin()));
-            ret.axis = toUrdf(jnt.JointAxis());
+            //in urdf, the joint axis is expressed in the joint/successor frame
+            //in kdl, the joint axis is expressed in the predecessor rame
+            ret.axis = toUrdf(frameToTip.M.Inverse(jnt.JointAxis()));
         break;
         default: 
             logWarn("Converting unknown joint type of joint '%s' into a fixed joint",jnt.getTypeName().c_str());
@@ -186,17 +212,17 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
             //add name
             link->name = seg->first;
             
+            //inertial added while adding joints, as link frame can change
             //add inertial
-            link->inertial.reset(new urdf::Inertial());
-            *(link->inertial) = toUrdf(seg->second.segment.getInertia());
+            //link->inertial.reset(new urdf::Inertial());
+            //*(link->inertial) = toUrdf(seg->second.segment.getInertia());
             
             //insert link
             robot_model.links_.insert(make_pair(seg->first,link));
             logDebug("successfully added a new link '%s'", link->name.c_str());
         }
-    }
-    
-    for( seg = segs.begin(); seg != segs.end(); seg++ ) { 
+        
+        //inserting joint
         //The fake root segment has no joint to add
         if( seg->first != root_seg->first ) {
             KDL::Joint jnt;
@@ -210,10 +236,13 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
             else
             { 
                 boost::shared_ptr<urdf::Joint> joint;
+                boost::shared_ptr<urdf::Link> link = robot_model.links_[seg->first];
+                KDL::Frame H_new_old_successor;
+                KDL::Frame H_new_old_predecessor = getH_new_old(seg->second.parent->second.segment);
                 joint.reset(new urdf::Joint());
                 
                 //convert joint
-                *joint = toUrdf(jnt);
+                *joint = toUrdf(jnt,seg->second.segment.getFrameToTip(),H_new_old_predecessor,H_new_old_successor);
                 
                 //insert parent
                 joint->parent_link_name = seg->second.parent->first;
@@ -224,8 +253,13 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
                 //insert joint
                 robot_model.joints_.insert(make_pair(seg->first,joint));
                 logDebug("successfully added a new joint '%s'", jnt.getName().c_str());
+                
+                //add inertial, taking in account an eventual change in the link frame
+                link->inertial.reset(new urdf::Inertial());
+                *(link->inertial) = toUrdf(H_new_old_successor*seg->second.segment.getInertia());
             }
         }
+        
     }
     
     // every link has children links and joints, but no parents, so we create a
@@ -263,8 +297,11 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
 }
 
 //update topology and parameters
+//use only on KDL models obtained from KDL_import from the corresponding urdf tree
+
 bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_model)
 {
+    /*
     KDL::SegmentMap::iterator seg;
     KDL::SegmentMap segs;
     tree.getSegments(segs);
@@ -313,6 +350,7 @@ bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_mode
             return false;
         }
     }
+    */
 }
 
 }

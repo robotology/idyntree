@@ -84,6 +84,10 @@ bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_mode
 
 
 /** Constructs a URDF robot model from a KDL tree
+ *  \note the URDF specs impose some costraints on the location of the link
+ *  frames (it is required that the origin of the frame is on the axis of the joint).
+ *  If the KDL::Tree frame does not respect these constraints, they are moved.
+ * 
  * \param tree The KDL Tree
  * \param robot_name the name of the KDL Tree
  * \param robot_model The resulting URDF robot model
