@@ -35,9 +35,8 @@ namespace KDL
     typedef std::vector<Wrench> Wrenches;
 
 	/**
-	 * \brief This <strong>abstract</strong> class encapsulates the inverse
-	 * dynamics solver for a KDL::Tree.
-	 *
+	 * \brief This  class encapsulates the routines
+     *  for calculating the current Center Of Mass of a KDL::Tree 
 	 */
 	class TreeIdSolver
 	{

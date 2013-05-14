@@ -101,13 +101,12 @@ namespace KDL{
         std::vector<Entry> db;	///indexed by segment id
         //std::vector<double> jntdb;/// indexed by joint id
         
-        std::vector<unsigned int> mu_root; //set of childrens of root
-        std::vector< std::vector<unsigned int> > mu; //set of childrens of each segment
-        std::vector< int > lambda; //set of parent of each segment
-        std::vector<unsigned int> link2joint;
-        
-        std::vector< unsigned int > recursion_order;
-        
+        //serialization quantites
+        std::vector< int> mu_root; //set of childrens of root
+        std::vector< std::vector<int> > mu; //set of childrens of each segment
+        std::vector< int > lambda; //parent of each segment
+        std::vector< int> link2joint;
+        std::vector< int > recursion_order;
         std::vector<SegmentMap::const_iterator> seg_vector;
         
         Twist ag;

@@ -38,88 +38,20 @@ namespace KDL{
     TreeIdSolver_RNE::TreeIdSolver_RNE(const Tree& tree_,Vector grav,TreeSerialization serialization)
     :tree(tree_)
     {
-        //should compile only in debug mode
         if(!serialization.is_consistent(tree)) {
             serialization = TreeSerialization(tree);
         }
         
-        //Get root name
-		root_name = tree.getRootSegment()->first;
-		
         //Initializing gravitational acceleration (if any)
         ag=-Twist(grav,Vector::Zero());
         
-        //the deprecated method is more efficient
-        const SegmentMap& sm = tree.getSegments();
-        
         //allocate vectors
         db.resize(tree.getNrOfSegments());
-        mu_root.resize(0);
-        mu.resize(tree.getNrOfSegments(),std::vector<unsigned int>(0));
-        lambda.resize(tree.getNrOfSegments());
         
-        link2joint.resize(tree.getNrOfSegments(),tree.getNrOfSegments());
-                
-        seg_vector.resize(tree.getNrOfSegments());
-        
-        
-        //create necessary vectors
-        SegmentMap::const_iterator root, i;
-        
-        tree.getRootSegment(root);
-        for( unsigned int j=0; j < root->second.children.size(); j++ ) {
-            mu_root.push_back(serialization.getLinkId(root->second.children[j]->first));
-        }
-        
-        for( SegmentMap::const_iterator i=sm.begin(); i!=sm.end(); ++i ) {
-            if( i != root ) {
-                unsigned int i_index = serialization.getLinkId(i->first);
-                seg_vector[i_index] = i;
-                
-                for( unsigned int j=0; j < i->second.children.size(); j++ ) {
-                    mu[i_index].push_back(serialization.getLinkId(i->second.children[j]->first));
-                }
-                
-                if( i->second.segment.getJoint().getType() != Joint::None ) {
-                    link2joint[i_index] = serialization.getJointId(i->first);
-                }
-                
-                if( i->second.parent == root ) {
-                    lambda[i_index] = -1;
-                } else {
-                    lambda[i_index] = serialization.getLinkId(i->second.parent->first);
-                }
-                
-            }
-		}
-        
-        //As the order of the recursion is the same, it is calculated only at configuration
-        std::vector<unsigned int> index_stack;
-        
-        index_stack.reserve(tree.getNrOfSegments());
-        recursion_order.reserve(tree.getNrOfSegments());
-        
-        index_stack.clear();
-        recursion_order.clear();
-        
-        for( unsigned int j=0; j < mu_root.size(); j++ ) {
-            index_stack.push_back(mu_root[j]);
-        }
-        
-        while( !index_stack.empty() ) {
-            
-            unsigned int curr_index = index_stack.back();
-            index_stack.pop_back();
-            
-            recursion_order.push_back(curr_index);
-            
-            //Doing the recursion on the children
-            for( unsigned int j=0; j < mu[curr_index].size(); j++ ) {
-                index_stack.push_back(mu[curr_index][j]);
-            }
-        }
-        
-        assert(recursion_order.size() == tree.getNrOfSegments());
+        //Get root name
+		root_name = tree.getRootSegment()->first;
+		
+        serialization.serialize(tree,mu_root,mu,lambda,link2joint,recursion_order,seg_vector);
         
     }
     
