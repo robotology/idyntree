@@ -72,12 +72,12 @@ namespace KDL{
         bool is_consistent(const Tree & tree);
         
         bool serialize(const Tree & tree,
-                       std::vector< int> mu_root, //set of childrens of root
-                       std::vector< std::vector<int> > mu, //array of sets of childrens of each segment
-                       std::vector< int > lambda, //array of parent of each segment
-                       std::vector< int> link2joint, //array mapping 
-                       std::vector< int > recursion_order, //Visiting order for the tree, such that a parent is visited before any of his childrens
-                       std::vector<SegmentMap::const_iterator> seg_vector //array of mapping between link index and SegmentMap iterators
+                       std::vector< int> & mu_root, //set of childrens of root
+                       std::vector< std::vector<int> > & mu, //array of sets of childrens of each segment
+                       std::vector< int > & lambda, //array of parent of each segment
+                       std::vector< int> & link2joint, //array mapping 
+                       std::vector< int > & recursion_order, //Visiting order for the tree, such that a parent is visited before any of his childrens
+                       std::vector<SegmentMap::const_iterator> & seg_vector //array of mapping between link index and SegmentMap iterators
                                          );
     };
     

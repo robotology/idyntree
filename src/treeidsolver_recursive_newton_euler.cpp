@@ -132,7 +132,7 @@ namespace KDL{
         // process processed back to front...        
         //Sweep from leafs to root, recursion order in reverse
         for(l=recursion_order.size()-1; l >= 0; l--) {
-            unsigned int curr_index = recursion_order[l];
+            int curr_index = recursion_order[l];
             
 			const Segment& seg = seg_vector[curr_index]->second.segment;
 			const Joint& jnt = seg.getJoint();
