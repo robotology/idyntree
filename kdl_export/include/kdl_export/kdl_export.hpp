@@ -1,6 +1,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
-* 
+*  
+*  Copyright (c) 2013, CoDyCo project
 *  Copyright (c) 2008, Willow Garage, Inc.
 *  All rights reserved.
 * 
@@ -46,13 +47,12 @@
 
 namespace kdl_export{
 
-
-/** Constructs a KDL tree from a file, given the file name
+/** Constructs a URDF file, given a KDL::Tree
  * \param file The filename from where to read the xml
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-//bool treeToFile(const std::string& file, KDL::Tree& tree);
+bool treeToFile(const std::string& file, const KDL::Tree& tree, const std::string & robot_name);
 
 /** Constructs a KDL tree from the parameter server, given the parameter name
  * \param param the name of the parameter on the parameter server
@@ -68,12 +68,12 @@ namespace kdl_export{
  */
 //bool treeToString(const std::string& xml, KDL::Tree& tree);
 
-/** Constructs a KDL tree from a TiXmlDocument
+/** Constructs a URDF TiXmlDocument given a KDL::Tree
  * \param xml_doc The TiXmlDocument containting the xml description of the robot
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-//bool treeToXml(TiXmlDocument *xml_doc, KDL::Tree& tree);
+bool treeToXml(TiXmlDocument * & xml_doc,  const KDL::Tree& tree, const std::string & robot_name);
 
 /** Update a URDF robot model with geometric and inertial parameters from a KDL tree 
  * \param tree The KDL Tree

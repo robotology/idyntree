@@ -42,7 +42,7 @@
 #include <urdf_model/model.h>
 #include <tinyxml.h>
 
-namespace kdl_parser{
+namespace kdl_import{
 
 /** Constructs a KDL tree from a file, given the file name
  * \param file The filename from where to read the xml

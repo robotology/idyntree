@@ -43,7 +43,7 @@
 using namespace std;
 using namespace KDL;
 
-namespace kdl_parser{
+namespace kdl_import{
 
 
 // construct vector

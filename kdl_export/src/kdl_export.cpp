@@ -73,7 +73,7 @@ KDL::Frame getH_new_old(const KDL::Segment seg)
     KDL::Frame H_new_old;
     KDL::Joint jnt =  seg.getJoint();
     KDL::Frame frameToTip = seg.getFrameToTip();
-    if( (jnt.JointOrigin()-frameToTip.p).Norm() < 1e-6 ) {
+    if( (jnt.JointOrigin()-frameToTip.p).Norm() < 1e-12 || jnt.getType() == KDL::Joint::None ) {
         //No need of changing link frame
         H_new_old = KDL::Frame::Identity();
     } else {
@@ -83,6 +83,18 @@ KDL::Frame getH_new_old(const KDL::Segment seg)
 }
 
 // construct joint
+/**
+ * 
+ * @param jnt the KDL::Joint to convert (axis and origin expressed in the
+ *          predecessor frame of reference, as by KDL convention)
+ * @param frameToTip the predecesspor/successor frame transformation 
+ * @param H_new_old_predecessor in the case the predecessor frame is being 
+ *          modified to comply to URDF constraints (frame origin on the joint axis)
+ *          this matrix old the transformation from the old frame to the new fra
+ * @param H_new_old_successor  in the case the successor frame is being 
+ *          modified to comply to URDF constraints (frame origin on the joint axis)
+ *          this matrix old the transformation from the old frame to the new fra
+ */
 urdf::Joint toUrdf(const KDL::Joint & jnt, const KDL::Frame & frameToTip, const KDL::Frame & H_new_old_predecessor, KDL::Frame & H_new_old_successor)
 {
     //URDF constaints the successor link frame origin to lay on the axis
@@ -92,11 +104,12 @@ urdf::Joint toUrdf(const KDL::Joint & jnt, const KDL::Frame & frameToTip, const 
     //and the definition of the childrens of the successor frame
     urdf::Joint ret;
     ret.name = jnt.getName();
-    if( (jnt.JointOrigin()-frameToTip.p).Norm() < 1e-6 ) {
+    if( (jnt.JointOrigin()-frameToTip.p).Norm() < 1e-12 || jnt.getType() == KDL::Joint::None ) {
         //No need of changing link frame
-        ret.parent_to_joint_origin_transform = toUrdf(frameToTip);
+        ret.parent_to_joint_origin_transform = toUrdf(H_new_old_predecessor*frameToTip);
         H_new_old_successor = KDL::Frame::Identity();
     } else {
+        logWarn("the reference frame of link connected to joint %s has to me shifted to comply to URDF constraints",jnt.getName().c_str());
         ret.parent_to_joint_origin_transform = toUrdf(H_new_old_predecessor*KDL::Frame(jnt.JointOrigin())*KDL::Frame(frameToTip.M));
         H_new_old_successor = (KDL::Frame(jnt.JointOrigin())*KDL::Frame(frameToTip.M)).Inverse()*frameToTip;
     }
@@ -150,14 +163,15 @@ urdf::Inertial toUrdf(KDL::RigidBodyInertia i)
   return ret;
 }
 
-/*
-bool treeFromFile(const string& file, Tree& tree)
+
+bool treeToFile(const string& file, const KDL::Tree& tree, const std::string & robot_name)
 {
-  TiXmlDocument urdf_xml;
-  urdf_xml.LoadFile(file);
-  return treeFromXml(&urdf_xml, tree);
+  TiXmlDocument * urdf_xml;
+  if( !treeToXml(urdf_xml, tree, robot_name) ) return false;
+  return urdf_xml->SaveFile(file);
 }
 
+/*
 bool treeFromParam(const string& param, Tree& tree)
 {
   urdf::Model robot_model;
@@ -174,14 +188,14 @@ bool treeFromString(const string& xml, Tree& tree)
   urdf_xml.Parse(xml.c_str());
   return treeFromXml(&urdf_xml, tree);
 }
-
-bool treeToXml(TiXmlDocument *xml_doc, Tree& tree)
-{
-    urdf::Model robot_model;
-    treeToUrdfModel(
-  return treeFromUrdfModel(robot_model, tree);
-}
 */
+bool treeToXml(TiXmlDocument* & xml_doc, const KDL::Tree& tree, const std::string & robot_name)
+{
+    urdf::ModelInterface robot_model;
+    if( !treeToUrdfModel(tree,robot_name,robot_model) ) return false;
+    xml_doc =  urdf::exportURDF(robot_model);
+    return true;
+}
 
 bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf::ModelInterface& robot_model)
 {
