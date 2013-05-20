@@ -35,7 +35,7 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_export/kdl_export.hpp"
+#include "kdl_urdf/kdl_export.hpp"
 #include <urdf_model/model.h>
 #include <console_bridge/console.h>
 #include <iostream>

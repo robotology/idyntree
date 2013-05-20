@@ -8,8 +8,8 @@ This software is realized for the [CoDyCo](http://www.codyco.eu/) project.
 
 kdl_import
 ----------
-Routine for parse a URDF file to a create a KDL Tree. Forked from ROS robot_model
-kdl_parser, removing dependencies on ROS and porting it to urdfdom and console_bridge.
+Routine for parse a URDF file to a create a KDL Tree. Forked from ROS [robot_model](http://ros.org/wiki/robot_model)
+[kdl_parser](http://ros.org/wiki/kdl_parser), removing dependencies on ROS and porting it to urdfdom and console_bridge.
 
 kdl_export
 ----------

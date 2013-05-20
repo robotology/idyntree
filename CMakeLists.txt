@@ -41,12 +41,23 @@ find_package(Boost REQUIRED thread)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
-add_subdirectory(kdl_import)
-add_subdirectory(kdl_export)
+include_directories(include)
+
+add_library(kdl_urdf SHARED src/kdl_export.cpp src/kdl_import.cpp)
+target_link_libraries(kdl_urdf ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
+
+# --------------------------------
+
+#add_executable(check_urdf src/check_urdf.cpp)
+#target_link_libraries(check_urdf urdfdom_model urdfdom_world)
+
+INSTALL(TARGETS kdl_urdf DESTINATION lib/)
+INSTALL(DIRECTORY include/kdl_urdf DESTINATION include)
+
 
 
 set(PKG_NAME ${PROJECT_NAME})
-set(PKG_LIBRARIES kdl_import kdl_export)
+set(PKG_LIBRARIES kdl_urdf)
 set(PKG_DEPENDS urdfdom urdfdom_headers console_bridge)
 set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_urdf-config.cmake")
 configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)

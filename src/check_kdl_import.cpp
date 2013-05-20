@@ -34,7 +34,7 @@
 
 /* Author: Wim Meeussen */
 
-#include "kdl_parser/kdl_parser.hpp"
+#include "kdl_urdf/kdl_import.hpp"
 #include <kdl/chainfksolverpos_recursive.hpp>
 #include <kdl/frames_io.hpp>
 #include <urdf/model.h>
@@ -64,7 +64,7 @@ int main(int argc, char** argv)
   {cerr << "Could not generate robot model" << endl; return false;}
 
   Tree my_tree;
-  if (!kdl_parser::treeFromUrdfModel(robot_model, my_tree)) 
+  if (!kdl_import::treeFromUrdfModel(robot_model, my_tree)) 
   {cerr << "Could not extract kdl tree" << endl; return false;}
 
   // walk through tree
