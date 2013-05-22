@@ -10,3 +10,4 @@ kdl_codyco
  * Support for floating base chain recursive Newton-Euler dynamics 
  * Support for explicit (and arbitrary) serialization of KDL::Tree joints and links (TreeSerialization)
  * Support for floating base tree recursive Newton-Euler dynamics
+ * Support for tree center of mass computation
