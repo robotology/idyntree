@@ -3,22 +3,19 @@
  * Author: Silvio Traversaro
  * website: http://www.codyco.eu
  */
- 
+
 #include "kdl_codyco/treecomsolver.hpp"
+#include <iostream>
+#include <kdl/frames_io.hpp>
 
 namespace KDL {
     
-    TreeCOMSolver::TreeCOMSolver(const Tree& tree_in, TreeSerialization serialization) : tree(tree_in)
+    TreeCOMSolver::TreeCOMSolver(const Tree& tree_in,const TreeSerialization& serialization_in) : TreeSerialSolver(tree_in,serialization_in)
     {
+ 
         subtree_COM.resize(tree.getNrOfSegments());
         subtree_mass.resize(tree.getNrOfSegments());
             
-        if(!serialization.is_consistent(tree)) {
-            serialization = TreeSerialization(tree);
-        }
-        
-        serialization.serialize(tree,mu_root,mu,lambda,link2joint,recursion_order,seg_vector);
-        
     }
     
     TreeCOMSolver::~TreeCOMSolver() {
@@ -34,12 +31,12 @@ namespace KDL {
         for(int l=recursion_order.size()-1; l >= 0; l--) {
             int index = recursion_order[l];
 
-            subtree_COM[index] = seg_vector[index]->second.segment.getInertia().getCOG();
-            subtree_mass[index] = seg_vector[index]->second.segment.getInertia().getMass();
+            subtree_COM[index] = index2segment[index]->second.segment.getInertia().getCOG();
+            subtree_mass[index] = index2segment[index]->second.segment.getInertia().getMass();
             
-            for( int j = 0; j < mu[index].size(); j++ ) { 
-                int s = mu[index][j];
-                const Segment & son_segment = seg_vector[s]->second.segment;
+            for( int j = 0; j < childrens[index].size(); j++ ) { 
+                int s = childrens[index][j];
+                const Segment & son_segment = index2segment[s]->second.segment;
                 const RigidBodyInertia & son_inertia = son_segment.getInertia();
                 double joint_position;
                 
@@ -52,8 +49,9 @@ namespace KDL {
                                          subtree_mass[s]*(son_segment.pose(joint_position)*subtree_COM[s]))
                                          /
                                          (subtree_mass[index]+subtree_mass[s]);
-                    subtree_mass[index] = subtree_mass[index]+subtree_mass[s];
+                subtree_mass[index] = subtree_mass[index]+subtree_mass[s];
             }
+            
         }
         
     

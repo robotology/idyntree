@@ -35,13 +35,17 @@ using namespace std;
 
 namespace KDL{
     
-    TreeIdSolver_RNE::TreeIdSolver_RNE(const Tree& tree_,Vector grav,TreeSerialization serialization)
-    :tree(tree_)
+    TreeIdSolver_RNE::TreeIdSolver_RNE(const Tree& tree, const TreeSerialization & serialization) 
+    : TreeSerialSolver(tree,serialization)
     {
-        if(!serialization.is_consistent(tree)) {
-            serialization = TreeSerialization(tree);
-        }
-        
+        //duplicate TreeSerialSolver inizialitation !!, should fix 
+        TreeIdSolver_RNE(tree,Vector::Zero(),serialization);
+    }
+    
+    TreeIdSolver_RNE::TreeIdSolver_RNE(const Tree& tree, Vector grav, const TreeSerialization & serialization)
+    : TreeSerialSolver(tree,serialization)
+    {
+      
         //Initializing gravitational acceleration (if any)
         ag=-Twist(grav,Vector::Zero());
         
@@ -50,9 +54,7 @@ namespace KDL{
         
         //Get root name
 		root_name = tree.getRootSegment()->first;
-		
-        serialization.serialize(tree,mu_root,mu,lambda,link2joint,recursion_order,seg_vector);
-        
+
     }
     
     int TreeIdSolver_RNE::CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Wrenches& f_ext,JntArray &torques)
@@ -75,7 +77,7 @@ namespace KDL{
             
             unsigned int curr_index = recursion_order[l];
         
-			const Segment& seg = seg_vector[curr_index]->second.segment;
+			const Segment& seg = index2segment[curr_index]->second.segment;
 			const Joint& jnt = seg.getJoint();
 			
             double q_,qdot_,qdotdot_;
@@ -106,7 +108,7 @@ namespace KDL{
             //We can take cj=0, see remark section 3.5, page 55 since the unit velocity vector S of our joints is always time constant
             //calculate velocity and acceleration of the segment (in segment coordinates)
             
-            int parent_index = lambda[curr_index];
+            int parent_index = parent[curr_index];
             Twist parent_a, parent_v;
             
             if( parent_index == -1 ) {
@@ -134,16 +136,16 @@ namespace KDL{
         for(l=recursion_order.size()-1; l >= 0; l--) {
             int curr_index = recursion_order[l];
             
-			const Segment& seg = seg_vector[curr_index]->second.segment;
+			const Segment& seg = index2segment[curr_index]->second.segment;
 			const Joint& jnt = seg.getJoint();
 			Entry& e = db[curr_index];
 			Frame& eX = e.X;
             Twist& eS = e.S;
             Wrench& ef = e.f;
     
-            int parent_index = lambda[curr_index];
+            int parent_index = parent[curr_index];
             if( parent_index >= 0 ) {
-                Entry& parent_e = db[lambda[curr_index]];
+                Entry& parent_e = db[parent[curr_index]];
                 Wrench& pre_f = parent_e.f;
                 pre_f +=eX*ef;
             } else {
@@ -155,10 +157,6 @@ namespace KDL{
         }
         
 
-        //debug
-        //for( map<string, Entry>::const_iterator i= db.begin(); i!= db.end(); ++i ){
-            //std::cout << "bLink " << i->first << " a= " << i->second.a << " f= " << i->second.f << std::endl;
-		//}
         
         return 0;
     }

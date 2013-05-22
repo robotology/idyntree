@@ -7,25 +7,23 @@
 #ifndef TREE_COM_SOLVER_H
 #define TREE_COM_SOLVER_H
 
-#include "kdl/tree.hpp"
-#include "kdl/chain.hpp"
-#include "kdl/frames.hpp"
-#include "kdl/jntarray.hpp"
+#include <kdl/tree.hpp>
+#include <kdl/frames.hpp>
+#include <kdl/jntarray.hpp>
 #include "kdl_codyco/treeserialization.hpp"
+#include "kdl_codyco/treeserialsolver.hpp"
 
 namespace KDL
 {
-
-    typedef std::vector<Wrench> Wrenches;
 
 	/**
 	 * \brief This  <strong>abstract</strong> class encapsulates the 
      *  solver for finding the Center Of Mass of a KDL::Tree 
 	 */
-	class TreeCOMSolver
+	class TreeCOMSolver : TreeSerialSolver 
 	{
 		public:
-            explicit TreeCOMSolver(const Tree& tree, TreeSerialization serialization=TreeSerialization());
+            explicit TreeCOMSolver(const Tree& tree,const TreeSerialization & serialization=TreeSerialization());
 
             virtual ~TreeCOMSolver();
             
@@ -39,7 +37,6 @@ namespace KDL
             int JntToCOM(const JntArray& q_in, Vector& p_out);
         
         private:
-            KDL::Tree tree;
             
             //vector containing the center of mass of each subtree 
             //subtree_COM[i] contains the center of mass of the subtree starting 
@@ -51,13 +48,6 @@ namespace KDL
             //at link i (included)
             std::vector<double> subtree_mass;
             
-            //serialization quantites
-            std::vector< int> mu_root; //set of childrens of root
-            std::vector< std::vector<int> > mu; //set of childrens of each segment
-            std::vector< int > lambda; //parent of each segment
-            std::vector< int> link2joint;
-            std::vector< int > recursion_order;
-            std::vector<SegmentMap::const_iterator> seg_vector;
 
 	};
 

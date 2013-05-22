@@ -79,6 +79,8 @@ namespace KDL{
                        std::vector< int > & recursion_order, //Visiting order for the tree, such that a parent is visited before any of his childrens
                        std::vector<SegmentMap::const_iterator> & seg_vector //array of mapping between link index and SegmentMap iterators
                                          );
+                                         
+        std::string toString();
     };
     
     

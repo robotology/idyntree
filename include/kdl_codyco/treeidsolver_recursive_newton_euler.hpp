@@ -25,6 +25,7 @@
 
 #include "treeidsolver.hpp"
 #include "treeserialization.hpp"
+#include "kdl_codyco/treeserialsolver.hpp"
 
 namespace KDL{
     /**
@@ -39,14 +40,18 @@ namespace KDL{
      * (expressed in the segments reference frame) and the dynamical
      * parameters of the segments.
      */
-    class TreeIdSolver_RNE : public TreeIdSolver{
+    class TreeIdSolver_RNE : public TreeIdSolver, public TreeSerialSolver {
     public:
         /**
          * Constructor for the solver, it will allocate all the necessary memory
          * \param tree The kinematic tree to calculate the inverse dynamics for, an internal copy will be made.
          * \param grav The gravity vector to use during the calculation.
          */
-        TreeIdSolver_RNE(const Tree& tree,Vector grav=Vector::Zero(),TreeSerialization serialization=TreeSerialization());
+        TreeIdSolver_RNE(const Tree& tree,Vector grav=Vector::Zero(),const TreeSerialization & serialization=TreeSerialization());
+        
+        TreeIdSolver_RNE(const Tree& tree, const TreeSerialization & serialization);
+
+        
         ~TreeIdSolver_RNE(){};
         
         /**
@@ -83,7 +88,6 @@ namespace KDL{
         int CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force);
 
 
-
     private:
 		struct Entry{
 			Frame X;
@@ -93,21 +97,11 @@ namespace KDL{
 			Wrench f;
 		};
 
-
-        Tree tree;
         std::string root_name;
         
         
         std::vector<Entry> db;	///indexed by segment id
         //std::vector<double> jntdb;/// indexed by joint id
-        
-        //serialization quantites
-        std::vector< int> mu_root; //set of childrens of root
-        std::vector< std::vector<int> > mu; //set of childrens of each segment
-        std::vector< int > lambda; //parent of each segment
-        std::vector< int> link2joint;
-        std::vector< int > recursion_order;
-        std::vector<SegmentMap::const_iterator> seg_vector;
         
         Twist ag;
     };

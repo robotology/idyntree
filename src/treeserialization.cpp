@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <sstream>
+
 
 namespace KDL {
     
@@ -205,6 +207,20 @@ namespace KDL {
         
         return true;
         
+    }
+    
+    std::string TreeSerialization::toString()
+    {
+        std::stringstream ss;
+        ss << "Link serialization:" << std::endl;
+        for( int i = 0; i < links.size(); i++ ) {
+            ss <<  i << "\t: " << links[i] << std::endl;
+        }
+        ss << "Joint serialization:" << std::endl;
+        for( int i = 0; i < joints.size(); i++ ) {
+            ss << i << "\t: " << joints[i] << std::endl;
+        }
+        return ss.str();
     }
 
 }

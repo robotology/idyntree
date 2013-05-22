@@ -74,7 +74,6 @@ namespace KDL
 			 */
         virtual int CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force)=0;
 
-
         // Need functions to return the manipulator mass, coriolis and gravity matrices - Lagrangian Formulation.
 	};
 
