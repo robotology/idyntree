@@ -170,19 +170,30 @@ bool treeFromXml(TiXmlDocument *xml_doc, Tree& tree)
 }
 */
 
-bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree)
+bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree, const bool fake_root)
 {
-  tree = Tree(robot_model.getRoot()->name);
-
-  // warn if root link has inertia. KDL does not support this
-  if (robot_model.getRoot()->inertial)
-    logWarn("The root link %s has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.", robot_model.getRoot()->name.c_str());
-
-  //  add all children
-  for (size_t i=0; i<robot_model.getRoot()->child_links.size(); i++)
-    if (!addChildrenToTree(robot_model.getRoot()->child_links[i], tree))
+  if (!fake_root) {
+    //For giving a name to the root of KDL using the robot name, 
+    //as it is not used elsewhere in the KDL tree
+    tree = Tree(robot_model.getName());
+    
+    if (!addChildrenToTree(robot_model.getRoot(),tree)
       return false;
+    
+  } else {
+    tree = Tree(robot_model.getRoot()->name);
+    
+    // warn if root link has inertia. KDL does not support this
+    if (robot_model.getRoot()->inertial)
+      ROS_WARN("The root link %s has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.", robot_model.getRoot()->name.c_str());
+    
+    //  add all children
+    for (size_t i=0; i<robot_model.getRoot()->child_links.size(); i++)
+      if (!addChildrenToTree(robot_model.getRoot()->child_links[i], tree))
+        return false;
 
+  }
+  
   return true;
 }
 
