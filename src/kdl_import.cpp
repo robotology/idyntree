@@ -177,7 +177,7 @@ bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree, cons
     //as it is not used elsewhere in the KDL tree
     tree = Tree(robot_model.getName());
     
-    if (!addChildrenToTree(robot_model.getRoot(),tree)
+    if (!addChildrenToTree(robot_model.getRoot(),tree))
       return false;
     
   } else {
@@ -185,7 +185,7 @@ bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree, cons
     
     // warn if root link has inertia. KDL does not support this
     if (robot_model.getRoot()->inertial)
-      ROS_WARN("The root link %s has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.", robot_model.getRoot()->name.c_str());
+      logWarn("The root link %s has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.", robot_model.getRoot()->name.c_str());
     
     //  add all children
     for (size_t i=0; i<robot_model.getRoot()->child_links.size(); i++)
