@@ -39,12 +39,35 @@
 #include <urdf_parser/urdf_parser.h>
 #include <console_bridge/console.h>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 using namespace KDL;
 
 namespace kdl_import{
 
+
+void printTree(boost::shared_ptr<const urdf::Link> link,int level = 0)
+{
+  level+=2;
+  int count = 0;
+  for (std::vector<boost::shared_ptr<urdf::Link> >::const_iterator child = link->child_links.begin(); child != link->child_links.end(); child++)
+  {
+    if (*child)
+    {
+      for(int j=0;j<level;j++) std::cout << "  "; //indent
+      std::cout << "child(" << (count++)+1 << "):  " << (*child)->name  << std::endl;
+      // first grandchild
+      printTree(*child,level);
+    }
+    else
+    {
+      for(int j=0;j<level;j++) std::cout << " "; //indent
+      std::cout << "root link: " << link->name << " has a null child!" << *child << std::endl;
+    }
+  }
+
+}
 
 // construct vector
 Vector toKdl(urdf::Vector3 v)
@@ -151,10 +174,32 @@ bool treeFromParam(const string& param, Tree& tree)
   return treeFromUrdfModel(robot_model, tree);
 }
 */
+
+
+int print_tree(const boost::shared_ptr<urdf::ModelInterface> & robot) {
+std::cout << "robot name is: " << robot->getName() << std::endl;
+
+  // get info from parser
+  std::cout << "---------- Successfully Parsed XML ---------------" << std::endl;
+  // get root link
+  boost::shared_ptr<const urdf::Link> root_link=robot->getRoot();
+  if (!root_link) return -1;
+
+  std::cout << "root Link: " << root_link->name << " has " << root_link->child_links.size() << " child(ren)" << std::endl;
+
+
+
+  // print entire tree
+  printTree(root_link);
+  
+  return 0;
+}
+
 bool treeFromString(const string& xml, Tree& tree)
 {
   boost::shared_ptr<urdf::ModelInterface> urdf_model;
   urdf_model = urdf::parseURDF(xml);
+  if( urdf_model.use_count() == 0 || !urdf_model ) { logError("Could not parse string to urdf::ModelInterface"); return false; }
   return treeFromUrdfModel(*urdf_model,tree); 
 }
 /*
@@ -175,25 +220,40 @@ bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree, cons
   if (!fake_root) {
     //For giving a name to the root of KDL using the robot name, 
     //as it is not used elsewhere in the KDL tree
-    tree = Tree(robot_model.getName());
+    std::string fake_root_name = "__kdl_import__" + robot_model.getName()+"__fake_root__";
+    std::string fake_root_fixed_joint_name = "__kdl_import__" + robot_model.getName()+"__fake_root_fixed_joint__";
     
-    if (!addChildrenToTree(robot_model.getRoot(),tree))
-      return false;
+    tree = Tree(fake_root_name);
     
+    boost::shared_ptr<const urdf::Link> root = robot_model.getRoot();
+    
+    // constructs the optional inertia
+    RigidBodyInertia inert(0);
+    if (root->inertial) 
+      inert = toKdl(root->inertial);
+
+    // constructs the kdl joint
+    Joint jnt = Joint(fake_root_fixed_joint_name, Joint::None);
+
+    // construct the kdl segment
+    Segment sgm(root->name, jnt, Frame::Identity(), inert);
+
+    // add segment to tree
+    tree.addSegment(sgm, fake_root_name);
+
   } else {
     tree = Tree(robot_model.getRoot()->name);
     
     // warn if root link has inertia. KDL does not support this
     if (robot_model.getRoot()->inertial)
       logWarn("The root link %s has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.", robot_model.getRoot()->name.c_str());
-    
-    //  add all children
-    for (size_t i=0; i<robot_model.getRoot()->child_links.size(); i++)
-      if (!addChildrenToTree(robot_model.getRoot()->child_links[i], tree))
-        return false;
-
   }
   
+  //  add all children
+  for (size_t i=0; i<robot_model.getRoot()->child_links.size(); i++)
+    if (!addChildrenToTree(robot_model.getRoot()->child_links[i], tree))
+      return false;
+      
   return true;
 }
 

@@ -76,11 +76,11 @@ bool treeFromString(const std::string& xml, KDL::Tree& tree);
 /** Constructs a KDL tree from a URDF robot model
  * \param robot_model The URDF robot model
  * \param tree The resulting KDL Tree
- * \param fake_root optional (default false) if true parse the first link 
+ * \param fake_root optional (default true) if true parse the first link 
  *                  of the robot model as the fake root (no inertia) of KDL tree
  * returns true on success, false on failure
  */
-bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, KDL::Tree& tree, const bool fake_root=false);
+bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, KDL::Tree& tree, const bool fake_root=true);
 }
 
 #endif

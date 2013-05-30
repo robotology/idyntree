@@ -35,9 +35,9 @@
 /* Author: Wim Meeussen */
 
 #include "kdl_urdf/kdl_import.hpp"
-#include <kdl/chainfksolverpos_recursive.hpp>
-#include <kdl/frames_io.hpp>
-#include <urdf/model.h>
+#include <kdl/tree.hpp>
+#include <urdf_model/model.h>
+#include <urdf_parser/urdf_parser.h>
 #include <iostream>
 
 using namespace KDL;
@@ -59,13 +59,10 @@ int main(int argc, char** argv)
     std::cerr << "Expect xml file to parse" << std::endl;
     return -1;
   }
-  Model robot_model;
-  if (!robot_model.initFile(argv[1]))
-  {cerr << "Could not generate robot model" << endl; return false;}
-
+  
   Tree my_tree;
-  if (!kdl_import::treeFromUrdfModel(robot_model, my_tree)) 
-  {cerr << "Could not extract kdl tree" << endl; return false;}
+  if (!kdl_import::treeFromFile(argv[1],my_tree)) 
+  {cerr << "Could not generate robot model and extract kdl tree" << endl; return false;}
 
   // walk through tree
   cout << " ======================================" << endl;

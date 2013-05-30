@@ -27,6 +27,8 @@ include_directories(${tinyxml_include_dirs})
 link_directories(${tinyxml_library_dirs})
 add_definitions(${tinyxml_cflags})
 
+find_package(Orocos-KDL REQUIRED)
+include_directories(SYSTEM  ${Orocos-KDL_INCLUDE_DIRS})
 find_package(urdfdom_headers REQUIRED)
 include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS})
 
@@ -44,7 +46,10 @@ link_directories(${Boost_LIBRARY_DIRS})
 include_directories(include)
 
 add_library(kdl_urdf SHARED src/kdl_export.cpp src/kdl_import.cpp)
-target_link_libraries(kdl_urdf ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(kdl_urdf  ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
+
+add_executable(check_kdl_import src/check_kdl_import.cpp src/kdl_import.cpp)
+target_link_libraries(check_kdl_import ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
 # --------------------------------
 
