@@ -1,5 +1,5 @@
 /**
- * Copyright  (C)  2013 CoDyCo Project
+ * Copyright  (C) 2013 CoDyCo Project
  * Author: Silvio Traversaro
  * website: http://www.codyco.eu
  */
@@ -11,19 +11,21 @@
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
 #include "kdl_codyco/treeserialization.hpp"
-#include "kdl_codyco/treeserialsolver.hpp"
+#include "kdl_codyco/treegraph.hpp"
 
 namespace KDL
+{
+namespace CoDyCo
 {
 
 	/**
 	 * \brief This  <strong>abstract</strong> class encapsulates the 
      *  solver for finding the Center Of Mass of a KDL::Tree 
 	 */
-	class TreeCOMSolver : TreeSerialSolver 
+	class TreeCOMSolver 
 	{
 		public:
-            explicit TreeCOMSolver(const Tree& tree,const TreeSerialization & serialization=TreeSerialization());
+            explicit TreeCOMSolver(const Tree& tree,TreeSerialization serialization=TreeSerialization());
 
             virtual ~TreeCOMSolver();
             
@@ -37,6 +39,7 @@ namespace KDL
             int JntToCOM(const JntArray& q_in, Vector& p_out);
         
         private:
+            TreeGraph tree_graph;
             
             //vector containing the center of mass of each subtree 
             //subtree_COM[i] contains the center of mass of the subtree starting 
@@ -50,7 +53,6 @@ namespace KDL
             
 
 	};
-
 }
-
+}
 #endif

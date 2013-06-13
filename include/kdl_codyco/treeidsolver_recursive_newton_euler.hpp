@@ -28,7 +28,10 @@
 #include "kdl_codyco/treeserialsolver.hpp"
 
 namespace KDL{
+namespace CoDyCo{
     /**
+     * \note CURRENTLY BROKEN!!!
+     * 
      * \brief Recursive newton euler inverse dynamics solver
      *
      * The algorithm implementation is based on the book "Rigid Body
@@ -89,20 +92,16 @@ namespace KDL{
 
 
     private:
-		struct Entry{
-			Frame X;
-			Twist S;
-			Twist v;
-			Twist a;
-			Wrench f;
-		};
+        std::vector<Frame> X;
+        std::vector<Twist> S;
+		std::vector<Twist> v;
+		std::vector<Twist> a;
+		std::vector<Wrench> f;
 
         std::string root_name;
         
         
-        std::vector<Entry> db;	///indexed by segment id
-        //std::vector<double> jntdb;/// indexed by joint id
-        
         Twist ag;
     };
+}
 }

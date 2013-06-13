@@ -12,6 +12,8 @@
 
 namespace KDL{
     
+    const int FIXED_JOINT = -1;
+    
     /**
      * Class for describing a Tree serialization (i.e. : a mapping between
      * the joints of the tree and 0 .. nrOfJoints-1 and 0 .. nrOfSegments-1)  
@@ -72,13 +74,14 @@ namespace KDL{
         bool is_consistent(const Tree & tree);
         
         bool serialize(const Tree & tree,
-                       std::vector< int> & mu_root, //set of childrens of root
-                       std::vector< std::vector<int> > & mu, //array of sets of childrens of each segment
-                       std::vector< int > & lambda, //array of parent of each segment
+                       std::vector< int> & children_root, //set of children of root
+                       std::vector< std::vector<int> > & children, //array of sets of children of each segment
+                       std::vector< int > & parent, //array of parent of each segment
                        std::vector< int> & link2joint, //array mapping 
-                       std::vector< int > & recursion_order, //Visiting order for the tree, such that a parent is visited before any of his childrens
-                       std::vector<SegmentMap::const_iterator> & seg_vector //array of mapping between link index and SegmentMap iterators
-                                         );
+                       std::vector< int > & visit_order, //Visiting order for the tree, such that a parent is visited before any of his children
+                       std::vector<SegmentMap::const_iterator> & seg_vector, //array of mapping between link index and SegmentMap iterators
+                       const std::string different_root_name = "" //Element used as the base link for serialization (for parent and children)
+                       );
                                          
         std::string toString();
     };

@@ -52,7 +52,7 @@ namespace KDL{
         for(unsigned int i=0;i<ns;i++){
             double q_,qdot_,qdotdot_;
             Segment segm;
-            chain.getSegment(i,segm);
+            segm = chain.getSegment(i);
             if(segm.getJoint().getType()!=Joint::None){
                 q_=q(j);
                 qdot_=q_dot(j);
@@ -88,7 +88,7 @@ namespace KDL{
         j=nj-1;
         for(int i=ns-1;i>=0;i--){
         	Segment segm;
-        	chain.getSegment(i,segm);
+        	segm = chain.getSegment(i);
             if(segm.getJoint().getType()!=Joint::None)
                 torques(j--)=dot(S[i],f[i]);
             if(i!=0)
@@ -98,7 +98,7 @@ namespace KDL{
         //debug
         for(int i=0; i < ns; i++) {
             Segment segm;
-        	chain.getSegment(i,segm);
+        	segm = chain.getSegment(i);
             //std::cout << "bLink " << segm.getName() << " a= " << a[i] << " f= " << f[i] << std::endl;
         }
         

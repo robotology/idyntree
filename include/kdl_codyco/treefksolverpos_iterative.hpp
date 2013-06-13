@@ -28,8 +28,10 @@
 #include <kdl/jntarray.hpp>
 #include <kdl_codyco/treeserialization.hpp>
 #include "kdl_codyco/treeserialsolver.hpp"
+#include "kdl_codyco/treegraph.hpp"
 
 namespace KDL {
+namespace CoDyCo {
 
     /**
      * Implementation of a iterative forward position kinematics
@@ -38,10 +40,13 @@ namespace KDL {
      * using TreeSerialization.
      *
      */
-    class TreeFkSolverPos_iterative : public TreeSerialSolver
+    class TreeFkSolverPos_iterative
     {
+    private:
+        TreeGraph tree_graph;
+    
     public:
-        TreeFkSolverPos_iterative (const Tree& tree_arg,const TreeSerialization& serialization_arg=TreeSerialization());
+        TreeFkSolverPos_iterative (const Tree& tree_arg, TreeSerialization serialization_arg=TreeSerialization());
         ~TreeFkSolverPos_iterative();
 
         int JntToCart(const JntArray& q_in, Frame& p_out, std::string segmentName);
@@ -49,6 +54,7 @@ namespace KDL {
         
     };
 
+}
 }
 
 #endif

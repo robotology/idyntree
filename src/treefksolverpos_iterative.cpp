@@ -20,28 +20,31 @@
 #include <iostream>
 
 namespace KDL {
-
-    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg, const TreeSerialization& serialization_arg): 
-                                                                        TreeSerialSolver( tree_arg, serialization_arg ) 
+namespace CoDyCo {
+    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg, TreeSerialization serialization_arg): tree_graph(tree_arg,serialization_arg)
     {
-
+    }
+    
+    TreeFkSolverPos_iterative::~TreeFkSolverPos_iterative()
+    {
     }
 
     int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, std::string segmentName)
     {
         int segmentIndex;
         
-        segmentIndex = serialization.getLinkId(segmentName);
+        //segmentIndex = serialization.getLinkId(segmentName);
     
         return JntToCart(q_in,p_out,segmentIndex);
     }
 
     int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, int segmentIndex)
     {      
+        /*
 		SegmentMap::const_iterator it;
        
         SegmentMap segments;
-        tree.getSegments(segments);
+        segments = tree.getSegments();
                 
         if(q_in.rows() != tree.getNrOfJoints() )
     	    	return -1;
@@ -58,15 +61,12 @@ namespace KDL {
                 }
                 resultFrame = currentFrame*resultFrame;
             }
-   
-            p_out = resultFrame;
+            */
+            //p_out = resultFrame;
         	return 0;        	
         }
-    }
+}
     
-    TreeFkSolverPos_iterative::~TreeFkSolverPos_iterative()
-    {
-    }
 
 
 }

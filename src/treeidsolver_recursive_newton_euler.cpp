@@ -34,6 +34,7 @@
 using namespace std;
 
 namespace KDL{
+namespace CoDyCo {
     
     TreeIdSolver_RNE::TreeIdSolver_RNE(const Tree& tree, const TreeSerialization & serialization) 
     : TreeSerialSolver(tree,serialization)
@@ -50,7 +51,12 @@ namespace KDL{
         ag=-Twist(grav,Vector::Zero());
         
         //allocate vectors
-        db.resize(tree.getNrOfSegments());
+        X.resize(tree.getNrOfSegments());
+        v.resize(tree.getNrOfSegments());
+        a.resize(tree.getNrOfSegments());
+        f.resize(tree.getNrOfSegments());
+        
+        S.resize(tree.getNrOfJoints());
         
         //Get root name
 		root_name = tree.getRootSegment()->first;
@@ -72,77 +78,20 @@ namespace KDL{
         
         int l;
 
-        //Sweep from root to leaf
-        for( l = 0; l < recursion_order.size(); l++ ) {
-            
-            unsigned int curr_index = recursion_order[l];
-        
-			const Segment& seg = index2segment[curr_index]->second.segment;
-			const Joint& jnt = seg.getJoint();
-			
-            double q_,qdot_,qdotdot_;
-            if(jnt.getType() !=Joint::None){
-				int idx = link2joint[curr_index];
-                q_=q(idx);
-                qdot_=q_dot(idx);
-                qdotdot_=q_dotdot(idx);
-            }else
-                q_=qdot_=qdotdot_=0.0;
-                
-            Entry& e = db[curr_index];
-                
-            Frame& eX  = e.X;
-            Twist& eS  = e.S;
-            Twist& ev  = e.v;
-            Twist& ea  = e.a;
-            Wrench& ef = e.f;
-                        
+        //rneaKinematicLoop(q,q_dot,q_dotdot,base_velocity,base_acceleration,recursion_order,index2segment,parent,link2joint,X,S,v,a,f);
 
-            //Calculate segment properties: X,S,vj,cj
-            eX=seg.pose(q_);//Remark this is the inverse of the 
-                            //frame for transformations from 
-                            //the parent to the current coord frame
-            //Transform velocity and unit velocity to segment frame
-            Twist vj=eX.M.Inverse(seg.twist(q_,qdot_));
-            eS=eX.M.Inverse(seg.twist(q_,1.0));
-            //We can take cj=0, see remark section 3.5, page 55 since the unit velocity vector S of our joints is always time constant
-            //calculate velocity and acceleration of the segment (in segment coordinates)
-            
-            int parent_index = parent[curr_index];
-            Twist parent_a, parent_v;
-            
-            if( parent_index == -1 ) {
-                parent_a = base_acceleration;
-                parent_v = base_velocity;
-            } else {
-                Entry& parent_entry = db[parent_index];
-            
-                parent_a = parent_entry.a;
-                parent_v = parent_entry.v;
-            }
-            
-            ev=eX.Inverse(parent_v)+vj;
-            ea=eX.Inverse(parent_a)+eS*qdotdot_+ev*vj;
-            
-            //Calculate the force for the joint
-            //Collect RigidBodyInertia and external forces
-            RigidBodyInertia Ii=seg.getInertia();
-            ef=Ii*ea+ev*(Ii*ev)-f_ext[curr_index];
-            //std::cout << "aLink " << seg.getName() << "\na= " << ea << "\nv= " << ev << "\nf= " << ef  << "\nf_ext= " << ef_ext << std::endl;
-        }
-        
         // process processed back to front...        
         //Sweep from leafs to root, recursion order in reverse
         for(l=recursion_order.size()-1; l >= 0; l--) {
             int curr_index = recursion_order[l];
             
 			const Segment& seg = index2segment[curr_index]->second.segment;
+            
 			const Joint& jnt = seg.getJoint();
-			Entry& e = db[curr_index];
-			Frame& eX = e.X;
-            Twist& eS = e.S;
-            Wrench& ef = e.f;
-    
+			Frame& eX = X[curr_index];
+            Wrench& ef = f[curr_index];
+            
+            /*
             int parent_index = parent[curr_index];
             if( parent_index >= 0 ) {
                 Entry& parent_e = db[parent[curr_index]];
@@ -152,8 +101,9 @@ namespace KDL{
                 base_force += eX*ef;
             }
 
-            if(jnt.getType()!=Joint::None)
-                torques(link2joint[curr_index])=dot(eS,ef);
+            if(link2joint[curr_index]!=FIXED_JOINT)
+                torques(link2joint[curr_index])=dot(S[link2joint[curr_index]],ef);
+            */
         }
         
 
@@ -161,5 +111,5 @@ namespace KDL{
         return 0;
     }
 
-
+}
 }//namespace

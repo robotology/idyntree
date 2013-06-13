@@ -15,7 +15,7 @@ namespace KDL {
             serialization = TreeSerialization(tree);
         }
         
-        serialization.serialize(tree,childrens_root,childrens,parent,link2joint,recursion_order,index2segment);
+        serialization.serialize(tree,children_root,children,parent,link2joint,recursion_order,index2segment);
 
     }
     
