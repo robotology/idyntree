@@ -29,6 +29,19 @@
 
 namespace KDL {
 namespace CoDyCo {
+    int globalIterator2localIndex(LinkMap::const_iterator link_iterator)
+    {
+        for(i=0; i < getNrOfAdjacentLinks(); i++ ) {
+            if( adjacent_link[i] == link_iterator ) {
+                break;
+            }
+        }
+        assert(i >= 0);
+        assert(i < link->second.getNrOfAdjacentLinks());
+        return i;
+    }
+
+    
     unsigned int TreeGraphLink::getNrOfAdjacentLinks() const
     {
         return adjacent_joint.size();
@@ -39,7 +52,6 @@ namespace CoDyCo {
         return adjacent_joint[adjacent_index]->second.pose(q,is_this_parent[adjacent_index]);
     }
     
-    
     Twist TreeGraphLink::S(int adjacent_index, const double& q) const
     {
         return adjacent_joint[adjacent_index]->second.S(q,is_this_parent[adjacent_index]);
@@ -49,6 +61,32 @@ namespace CoDyCo {
     {
         return adjacent_joint[adjacent_index]->second.vj(q,qdot,is_this_parent[adjacent_index]);
     }
+    
+    Frame TreeGraphLink::pose(LinkMap::const_iterator adjacent_iterator, const double& q) const
+    {
+        return pose(globalIterator2localIndex(adjacent_iterator),q);
+    }
+    
+    
+    Twist TreeGraphLink::S(LinkMap::const_iterator adjacent_iterator, const double& q) const
+    {
+        return S(globalIterator2localIndex(adjacent_iterator),q);
+    }
+    
+    Twist TreeGraphLink::vj(LinkMap::const_iterator adjacent_iterator, const double& q,const double& qdot) const
+    {
+        return vj(globalIterator2localIndex(adjacent_iterator),q);
+    }
+    
+    JointMap::const_iterator TreeGraphLink::getAdjacentJoint(int adjacent_index)
+    {
+        return adjacent_joint[adjacent_index];
+    }
+    JointMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator)
+    {
+        return adjacent_joint[globalIterator2localIndex(adjacent_iterator)];
+    }
+
     
     void TreeGraphJoint::update_buffers(const double & q) const
     {
@@ -177,15 +215,104 @@ namespace CoDyCo {
                 
                 getLink(i->second.parent->first,true)->second.adjacent_joint.push_back(tree_graph_joint);
                 getLink(i->second.parent->first,true)->second.is_this_parent.push_back(true);
-                
+                getLink(i->second.parent->first,true)->second.adjacent_link.push_back(getLink(i->first,true));
+
                 getLink(i->first,true)->second.adjacent_joint.push_back(tree_graph_joint);
                 getLink(i->first,true)->second.is_this_parent.push_back(false);
+                getLink(i->first,true)->second.adjacent_link.push_back(getLink(i->second.parent->first,true));
             }
         }
         
         assert(nrOfLinks == links.size());
         
     } 
+    
+    int TreeGraph::DFtraversal(Traversal & traversal, const std::string& base_link)
+    {
+        if( traversal.order.size() != getNrOfLinks() ) traversal.order.reserve(getNrOfLinks());
+        if( traversal.parent.size() != getNrOfLinks() ) traversal.parent.resize(getNrOfLinks(),links.end());
+        
+        if( traversal.order.size() != getNrOfLinks() ) traversal.order.resize(getNrOfLinks());
+        if( traversal.parent.size() != getNrOfLinks() ) traversal.parent.resize(getNrOfLinks());
+        
+        LinkMap::const_iterator base;
+        if( base_link.size() != 0 ) {
+            base = getLink(original_root);
+        } else {
+            base = getLink(base_link);
+        }
+        if( base == links.end() ) {
+            return -1;
+        }
+        
+        stack<LinkMap::const_iterator> to_visit;
+        to_visit.clear();
+        traversal.order.clear();
+        
+        visited.push_back(base);
+        traversal.parent[base.second.link_nr] = links.end();
+        
+        LinkMap::const_iterator visited_link;
+        LinkMap::const_iterator visited_child;
+        while( to_visit.size() > 0 ) {
+            visited_link = to_visit.back();
+            to_visit.pop_back();
+            
+            traversal.order.push_back(visited_link);
+            
+            for(int i=0; i < visited_link->second.getNrOfAdjacentLinks(); i++) {
+                visited_child = visited_link->second.adjacent_link[i];
+                if( visited_child != traversal.parent[visited_link.second.link_nr] ) {
+                    to_visit.push_back(visited_child);
+                    traversal.parent[base.second.link_nr] = visited_link;
+                }
+            }
+        }
+        return 0;
+    }
+    
+    int TreeGraph::BFtraversal(Traversal & traversal, const std::string& base_link)
+    {
+        if( traversal.order.size() != getNrOfLinks() ) traversal.order.resize(getNrOfLinks());
+        if( traversal.parent.size() != getNrOfLinks() ) traversal.parent.resize(getNrOfLinks());
+        
+        LinkMap::const_iterator base;
+        if( base_link.size() != 0 ) {
+            base = getLink(original_root);
+        } else {
+            base = getLink(base_link);
+        }
+        if( base == links.end() ) {
+            return -1;
+        }
+        
+        queue<LinkMap::const_iterator> to_visit;
+        to_visit.clear();
+        traversal.order.clear();
+        
+        visited.push_back(base);
+        traversal.parent[base.second.link_nr] = links.end();
+        
+        LinkMap::const_iterator visited_link;
+        LinkMap::const_iterator visited_child;
+        while( to_visit.size() > 0 ) {
+            visited_link = to_visit.front();
+            to_visit.pop_front();
+            
+            traversal.order.push_back(visited_link);
+            
+            for(int i=0; i < visited_link->second.getNrOfAdjacentLinks(); i++) {
+                visited_child = visited_link->second.adjacent_link[i];
+                if( visited_child != traversal.parent[visited_link.second.link_nr] ) {
+                    to_visit.push_back(visited_child);
+                    traversal.parent[base.second.link_nr] = visited_link;
+                }
+            }
+        }
+        return 0;
+    }
+    
+    
     
 }
 }//end of namespace

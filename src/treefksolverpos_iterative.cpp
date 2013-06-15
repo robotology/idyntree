@@ -21,8 +21,12 @@
 
 namespace KDL {
 namespace CoDyCo {
-    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg, TreeSerialization serialization_arg): tree_graph(tree_arg,serialization_arg)
+    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg, const std::string & base_link, TreeSerialization serialization_arg): tree_graph(tree_arg,serialization_arg)
     {
+        int ret = tree_graph.DFtraversal(traversal,base_link);
+        if( ret != 0 ) {
+            tree_graph.DFtraversal(traversal);
+        }
     }
     
     TreeFkSolverPos_iterative::~TreeFkSolverPos_iterative()
@@ -31,15 +35,34 @@ namespace CoDyCo {
 
     int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, std::string segmentName)
     {
-        int segmentIndex;
+        if( q_in.rows() != tree_graph.getNrOfDOFs() )
+            return -1;
+            
+        LinkMap::const_iterator it;
+        it = tree_graph.getLink(segmentName);
         
-        //segmentIndex = serialization.getLinkId(segmentName);
-    
-        return JntToCart(q_in,p_out,segmentIndex);
+        if( it == tree_grap.getInvalidLinkIterator() ) 
+            return -2;
+        
+        Frame currentFrame, resultFrame;
+        resultFrame = Frame::Identity();
+        
+        for(LinkMap::const_iterator link=it; link != traversal.order[0]; link = traversal.parent[link->second.link_nr] ) {
+            currentFrame = link->second.pose(traversal.parent[link->second.link_nr],
+                                             q_in[link->second.getAdjacentJoint(traversal.parent[link->second.link_nr]->second.q_nr]);
+            resultFrame = currentFrame*resultFrame;
+        }
+        
+        p_out = result_frame;
+        return 0;
     }
 
     int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, int segmentIndex)
-    {      
+    {
+        if( q_in.rows() != tree_graph.getNrOfDOFs() )
+            return -1;
+        
+        LinkMap::const_iterator 
         /*
 		SegmentMap::const_iterator it;
        
@@ -63,8 +86,8 @@ namespace CoDyCo {
             }
             */
             //p_out = resultFrame;
-        	return 0;        	
-        }
+        return 0;        	
+    }
 }
     
 

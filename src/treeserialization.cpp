@@ -18,7 +18,7 @@ namespace KDL {
     void TreeSerialization::addDFSrecursive(SegmentMap::const_iterator current_el,int & link_cnt)
     {
         if( current_el->second.segment.getJoint().getType() != Joint::None ) {
-            joints[current_el->second.q_nr] = current_el->first;
+            joints[current_el->second.q_nr] = current_el->second.getJoint().getJointName();
         }
         links[link_cnt] = current_el->first;
         link_cnt++;

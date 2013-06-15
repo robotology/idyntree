@@ -30,8 +30,18 @@ namespace CoDyCo
     class TreeGraphLink;
     class TreeGraphJoint;
     
+    /**
+     * \todo substitute this map based structure with vector base one
+     *       (originally implemented in this way for exploiting similarity
+     *          with KDL::Tree 
+     */ 
     typedef std::map<std::string,TreeGraphLink> LinkMap;
     typedef std::map<std::string,TreeGraphJoint> JointMap;
+    
+    struct Traversal {
+        std::vector< LinkMap::const_iterator > order;
+        std::vector< LinkMap::const_iterator > parent;
+    }
     
     //Only supporting 1 dof joints
     typedef Twist TwistSubspace;
@@ -40,11 +50,14 @@ namespace CoDyCo
     {
     private:
         TreeGraphLink(const std::string& name): link_name(name), link_nr(0) {};
+        int globalIterator2localIndex(LinkMap::const_iterator link_iterator);
+        
     public:
         std::string link_name;
         RigidBodyInertia I;
         unsigned int link_nr;
         std::vector< JointMap::const_iterator >  adjacent_joint;
+        std::vector< LinkMap::const_iterator > adjacent_link;
         std::vector< bool > is_this_parent;
         
         TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr): link_name(name), I(Inertia), link_nr(nr) { adjacent_joint.clear(); is_this_parent.clear(); };
@@ -67,6 +80,15 @@ namespace CoDyCo
         Frame pose(int adjacent_index, const double& q) const;
         
         /**
+         * Get the pose of this link with respect to an adjacent link
+         * 
+         * @param adjancent_iterator the const_iterator to the selected adjacent link
+         * @param q the position of the joint connecting *this link to the adjacent link
+         * @return  \f$ {}^a X_t\f$ the pose of this link (\f$t\f$) with respect to the adjacent link (\f$a\f$)
+         */
+        Frame pose(LinkMap::const_iterator adjacent_iterator, const double& q) const;
+        
+        /**
          * Get the motion subspace S of the joint connecting this link to an adjacent link
          * expressed in the adjacent link reference frame
          * 
@@ -81,11 +103,34 @@ namespace CoDyCo
         TwistSubspace S(int adjacent_index, const double& q) const;
         
         /**
+         * Get the motion subspace S of the joint connecting this link to an adjacent link
+         * expressed in the adjacent link reference frame
+         * 
+         * @param adjancent_iterator the const_iterator to the selected adjacent link
+         * @param q the position of the joint connecting this link to the adjacent link
+         * @return  \f$ {}^a S_{t,a}\f$ the motion subspace of the joint connecting 
+         *          this link (\f$t\f$) with the adjacent link (\f$a\f$), 
+         *          expressed in (\f$a\f$). 
+         *          It is defined such that:
+         *          \f$ {}^a v_a = {}^a v_t + {}^a S_{t,a} \dot{q}\f$ 
+         */
+        TwistSubspace S(LinkMap::const_iterator adjacent_iterator, const double& q) const;
+        
+        /**
          * Joint velocity, expressed in the adjacent link reference frame
          * @return \f$ {}^a vj_{t,a} = {}^a S_{t,a} \dot{q}\f$
          */
         Twist vj(int adjacent_index, const double& q,const double& qdot) const;
+        
+        /**
+         * Joint velocity, expressed in the adjacent link reference frame
+         * @return \f$ {}^a vj_{t,a} = {}^a S_{t,a} \dot{q}\f$
+         */
+        Twist vj(LinkMap::const_iterator adjacent_iterator, const double& q,const double& qdot) const;
         //cj for the type of implemented joint is always 0
+        
+        JointMap::const_iterator getAdjacentJoint(int adjacent_index);
+        JointMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator);
 
     };
     
@@ -159,12 +204,21 @@ namespace CoDyCo
         int nrOfDOFs;
         int nrOfLinks;
         std::string tree_name;
+        std::string original_root;
         
+        /**
+         * Private version of getLink, returning non-const iterator
+         */
         LinkMap::iterator getLink(const std::string& name, bool dummy);
         
+        /**
+         * Private version of getJoint, returning non-const iterator
+         */
         JointMap::iterator getJoint(const std::string& name, bool dummy);
 
     public:
+        LinkMap::const_iterator getInvalidLinkIterator() { return links.end(); }
+        JointMap::const_iterator getInvalidJointIterator() { return joints.end(); }
         
         /**
          * The constructor of a TreeGraph, from a classic KDL::Tree
@@ -200,6 +254,36 @@ namespace CoDyCo
         JointMap::const_iterator getJoint(const std::string& name);
         //JointMap::const_iterator getJoint(const int index); 
 
+        /**
+         * Visit the TreeGraph with a Depth-first traversal
+         * 
+         * @param order the link visit order
+         * @param parent the vector of parent for each link, for the base link 
+         *        it contains a LinkMap::end() const_iterator
+         * @param base_link the starting point of the traversal
+         * @return 0 if all went well, another integer otherwise
+         * 
+         * \note not a real time operation
+         * 
+         * \todo add real time version, by specified base_link as index
+         */
+        int DFtraversal(Traversal & traversal, const std::string& base_link="");
+
+        /**
+         * Visit the TreeGraph with a Breadth-first traversal
+         * 
+         * @param order the link visit order
+         * @param parent the vector of parent for each link, for the base link 
+         *        it contains a LinkMap::end() const_iterator
+         * @param base_link the starting point of the traversal
+         * @return 0 if all went well, another integer otherwise
+         * 
+         * \note not a real time operation
+         * 
+         * \todo add real time version, by specified base_link as index
+         */
+        int BFStraversal(Traversal & traversal, const std::string& base_link="");
+        
         ~TreeGraph(){};
 
     };
