@@ -18,14 +18,26 @@
 
 #include "kdl_codyco/treefksolverpos_iterative.hpp"
 #include <iostream>
+#include <kdl/frames_io.hpp>
 
 namespace KDL {
 namespace CoDyCo {
-    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg, const std::string & base_link, TreeSerialization serialization_arg): tree_graph(tree_arg,serialization_arg)
+    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg,
+                                                         const std::string & base_link, 
+                                                         TreeSerialization serialization_arg):    
+                tree_graph(tree_arg,serialization_arg)
+        
     {
-        int ret = tree_graph.DFtraversal(traversal,base_link);
+
+        #ifndef NDEBUG
+        std::cerr << "Check consistency in the constructor of TreeFkSolverPos" << std::endl;
+        assert(tree_graph.check_consistency() == 0);
+        #endif
+        
+        
+        int ret = tree_graph.compute_traversal(traversal,base_link);
         if( ret != 0 ) {
-            tree_graph.DFtraversal(traversal);
+            tree_graph.compute_traversal(traversal);
         }
     }
     
@@ -41,19 +53,36 @@ namespace CoDyCo {
         LinkMap::const_iterator it;
         it = tree_graph.getLink(segmentName);
         
-        if( it == tree_grap.getInvalidLinkIterator() ) 
+        if( it == tree_graph.getInvalidLinkIterator() ) 
             return -2;
         
         Frame currentFrame, resultFrame;
         resultFrame = Frame::Identity();
         
         for(LinkMap::const_iterator link=it; link != traversal.order[0]; link = traversal.parent[link->second.link_nr] ) {
+            LinkMap::const_iterator parent_link = traversal.parent[link->second.link_nr];
+            
+            double joint_position;
+            
+            if( link->second.getAdjacentJoint(parent_link)->second.joint.getType() != Joint::None ) {
+                joint_position = q_in((link->second.getAdjacentJoint(parent_link))->second.q_nr);
+            } else {
+                joint_position =0;
+            }
+            
             currentFrame = link->second.pose(traversal.parent[link->second.link_nr],
-                                             q_in[link->second.getAdjacentJoint(traversal.parent[link->second.link_nr]->second.q_nr]);
+                                             joint_position);
+                                             
+             #ifndef NDEBUG
+                std::cout << "Frame X_"<<link->second.link_nr<<"_"<<traversal.parent[link->second.link_nr]->second.link_nr << std::endl;
+                std::cout << currentFrame.Inverse() << std::endl;
+                std::cout << "Frame X_"<<traversal.parent[link->second.link_nr]->second.link_nr<<"_"<<link->second.link_nr << std::endl;
+                std::cout << currentFrame << std::endl;
+            #endif
             resultFrame = currentFrame*resultFrame;
         }
         
-        p_out = result_frame;
+        p_out = resultFrame;
         return 0;
     }
 
@@ -62,7 +91,7 @@ namespace CoDyCo {
         if( q_in.rows() != tree_graph.getNrOfDOFs() )
             return -1;
         
-        LinkMap::const_iterator 
+        LinkMap::const_iterator it;
         /*
 		SegmentMap::const_iterator it;
        

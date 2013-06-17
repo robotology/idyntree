@@ -7,6 +7,7 @@
 #include "kdl_codyco/treeserialsolver.hpp"
 
 namespace KDL {
+namespace CoDyCo {
     
     TreeSerialSolver::TreeSerialSolver(const Tree& tree_arg, const TreeSerialization & serialization_arg) : tree(tree_arg),
                                                                                                             serialization(serialization_arg)
@@ -28,5 +29,5 @@ namespace KDL {
         return serialization;
     }
     
-    
+}
 }

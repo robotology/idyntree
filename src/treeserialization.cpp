@@ -18,7 +18,7 @@ namespace KDL {
     void TreeSerialization::addDFSrecursive(SegmentMap::const_iterator current_el,int & link_cnt)
     {
         if( current_el->second.segment.getJoint().getType() != Joint::None ) {
-            joints[current_el->second.q_nr] = current_el->second.getJoint().getJointName();
+            joints[current_el->second.q_nr] = current_el->second.segment.getJoint().getName();
         }
         links[link_cnt] = current_el->first;
         link_cnt++;
@@ -31,16 +31,16 @@ namespace KDL {
     
     TreeSerialization::TreeSerialization() 
     {
-        links.clear();
-        joints.clear();
+        links = std::vector<std::string>(0);
+        joints = std::vector<std::string>(0);
     }
 
     TreeSerialization::~TreeSerialization() {}
     
     TreeSerialization::TreeSerialization(const Tree & tree) 
     {
-        links.resize(tree.getNrOfSegments());
-        joints.resize(tree.getNrOfJoints());
+        links = std::vector<std::string>(tree.getNrOfSegments());
+        joints = std::vector<std::string>(tree.getNrOfJoints());
         
         
         SegmentMap::const_iterator root;
@@ -58,8 +58,18 @@ namespace KDL {
         
     TreeSerialization::TreeSerialization(std::vector<std::string> & links_in, std::vector<std::string> & joints_in) 
     {
+
         links = links_in;
         joints = joints_in;
+    }
+    
+    
+    TreeSerialization::TreeSerialization(const TreeSerialization& x)
+    {        
+        links = std::vector<std::string>(0);
+        joints = std::vector<std::string>(0);
+        links = x.links;
+        joints = x.joints;
     }
     
     int TreeSerialization::getJointId(std::string joint_name)
@@ -99,7 +109,6 @@ namespace KDL {
         
         if( tree.getNrOfJoints() != joints.size() || tree.getNrOfSegments() !=  links.size() ) return false;
         
-        
         unsigned int i;
         
         const SegmentMap & seg_map = tree.getSegments();
@@ -109,13 +118,14 @@ namespace KDL {
             if( seg == seg_map.end() ) return false;
         }
         
-        
-        for(i = 0; i < joints.size(); i++ ) {
-            seg = tree.getSegment(joints[i]);
-            if( seg == seg_map.end() ) return false;
-            if( seg->second.segment.getJoint().getType() == Joint::None ) return false;
-
+        for(SegmentMap::const_iterator it=seg_map.begin(); it != seg_map.end(); it++) {
+            if( it->second.segment.getJoint().getType() != Joint::None ) {
+                if( joints[it->second.q_nr] != it->second.segment.getJoint().getName() ) {
+                    return false;
+                }
+            }
         }
+        
         return true;
         
     }
@@ -136,34 +146,26 @@ namespace KDL {
                                       std::vector< int > & parent, //array of parent of each segment
                                       std::vector< int> & link2joint, //array mapping 
                                       std::vector< int > & forward_visit_order, //Visiting order for the tree, such that a parent is visited before any of his children
-                                      std::vector<SegmentMap::const_iterator> & seg_vector, //array of mapping between link index and SegmentMap iterators
-                                      const std::string different_root_name
+                                      std::vector<SegmentMap::const_iterator> & seg_vector //array of mapping between link index and SegmentMap iterators
                                       )
     {
-        KDL::Tree rotated_tree;
-        
-        if( different_root_name.length() == 0 ) {
-            rotated_tree = tree;
-        } else {
-            if( !CoDyCo::tree_rotation(tree,rotated_tree,different_root_name) ) return false;
-        }
         
         //assuming that *this and tree are consistent
         //the deprecated method is more efficient
-        const SegmentMap& sm = rotated_tree.getSegments();
+        const SegmentMap& sm = tree.getSegments();
         
         children_root.resize(0);
-        children.resize(rotated_tree.getNrOfSegments(),std::vector< int >(0));
-        parent.resize(rotated_tree.getNrOfSegments());
+        children.resize(tree.getNrOfSegments(),std::vector< int >(0));
+        parent.resize(tree.getNrOfSegments());
         
-        link2joint.resize(rotated_tree.getNrOfSegments(),FIXED_JOINT);
+        link2joint.resize(tree.getNrOfSegments(),FIXED_JOINT);
                 
-        seg_vector.resize(rotated_tree.getNrOfSegments());
+        seg_vector.resize(tree.getNrOfSegments());
         
         
         SegmentMap::const_iterator root, i;
         
-        root = rotated_tree.getRootSegment();
+        root = tree.getRootSegment();
         for( unsigned int j=0; j < root->second.children.size(); j++ ) {
             children_root.push_back(this->getLinkId(root->second.children[j]->first));
         }
@@ -178,7 +180,7 @@ namespace KDL {
                 }
                 
                 if( i->second.segment.getJoint().getType() != Joint::None ) {
-                    link2joint[i_index] = this->getJointId(i->first);
+                    link2joint[i_index] = this->getJointId(i->second.segment.getJoint().getName());
                 }
                 
                 if( i->second.parent == root ) {
@@ -194,8 +196,8 @@ namespace KDL {
         //the visiting order remains the same
         std::vector<unsigned int> index_stack;
         
-        index_stack.reserve(rotated_tree.getNrOfSegments());
-        forward_visit_order.reserve(rotated_tree.getNrOfSegments());
+        index_stack.reserve(tree.getNrOfSegments());
+        forward_visit_order.reserve(tree.getNrOfSegments());
         
         index_stack.clear();
         forward_visit_order.clear();
@@ -217,7 +219,7 @@ namespace KDL {
             }
         }
 
-        assert(forward_visit_order.size() == rotated_tree.getNrOfSegments());
+        assert(forward_visit_order.size() == tree.getNrOfSegments());
         
         return true;
         

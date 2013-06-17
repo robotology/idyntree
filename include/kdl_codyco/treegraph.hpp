@@ -41,7 +41,7 @@ namespace CoDyCo
     struct Traversal {
         std::vector< LinkMap::const_iterator > order;
         std::vector< LinkMap::const_iterator > parent;
-    }
+    };
     
     //Only supporting 1 dof joints
     typedef Twist TwistSubspace;
@@ -50,7 +50,7 @@ namespace CoDyCo
     {
     private:
         TreeGraphLink(const std::string& name): link_name(name), link_nr(0) {};
-        int globalIterator2localIndex(LinkMap::const_iterator link_iterator);
+        int globalIterator2localIndex(LinkMap::const_iterator link_iterator) const;
         
     public:
         std::string link_name;
@@ -60,7 +60,7 @@ namespace CoDyCo
         std::vector< LinkMap::const_iterator > adjacent_link;
         std::vector< bool > is_this_parent;
         
-        TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr): link_name(name), I(Inertia), link_nr(nr) { adjacent_joint.clear(); is_this_parent.clear(); };
+        TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr): link_name(name), I(Inertia), link_nr(nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { };
         ~TreeGraphLink() {};
         
         /**
@@ -129,8 +129,8 @@ namespace CoDyCo
         Twist vj(LinkMap::const_iterator adjacent_iterator, const double& q,const double& qdot) const;
         //cj for the type of implemented joint is always 0
         
-        JointMap::const_iterator getAdjacentJoint(int adjacent_index);
-        JointMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator);
+        JointMap::const_iterator getAdjacentJoint(int adjacent_index) const;
+        JointMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const;
 
     };
     
@@ -142,7 +142,7 @@ namespace CoDyCo
     class TreeGraphJoint
     {
     private:
-        TreeGraphJoint(const std::string& name): joint_name(name), q_nr(0) {};
+        TreeGraphJoint(const std::string& name): joint_name(name), q_nr(0), q_previous(-1.0) { q_previous=-1.0; update_buffers(0.0);};
     
         mutable Frame relative_pose_parent_child; //\f$ {}^p X_c \f$
         mutable Twist S_child_parent; //\f$ {}^c S_{p,c} \f$
@@ -161,7 +161,7 @@ namespace CoDyCo
         LinkMap::const_iterator child;
         
         TreeGraphJoint(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const unsigned int q_nr_in = 0): 
-                               joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in) {};
+                               joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in), q_previous(-1.0) {update_buffers(0.0);};
         
         ~TreeGraphJoint() {}; 
         
@@ -215,11 +215,18 @@ namespace CoDyCo
          * Private version of getJoint, returning non-const iterator
          */
         JointMap::iterator getJoint(const std::string& name, bool dummy);
+        
 
     public:
-        LinkMap::const_iterator getInvalidLinkIterator() { return links.end(); }
-        JointMap::const_iterator getInvalidJointIterator() { return joints.end(); }
+        LinkMap::const_iterator getInvalidLinkIterator() const{ return links.end(); }
+        JointMap::const_iterator getInvalidJointIterator() const { return joints.end(); }
         
+        /**
+         * 
+         * \todo Added just for debug, remove it
+         * 
+         */
+        TreeGraph() {};
         /**
          * The constructor of a TreeGraph, from a classic KDL::Tree
          * 
@@ -232,8 +239,17 @@ namespace CoDyCo
          *       of the virtual root and the actual root, it is recommended
          *       to mantain an identity transformation between the virtual root
          *       and the real one.
+         * 
+         * \todo solve issue related to non-const TreeGraph
          */
-        TreeGraph(const Tree & tree, TreeSerialization serialization=TreeSerialization()); 
+        TreeGraph(const Tree & tree,const TreeSerialization & serialization=TreeSerialization()); 
+
+        /**
+         * Request the total number of joints in the tree.\n
+         *
+         * @return total nr of joints
+         */
+        unsigned int getNrOfJoints() const { return nrOfLinks-1; };
 
         /**
          * Request the total number of degrees of freedom in the tree.\n
@@ -248,10 +264,10 @@ namespace CoDyCo
          */
         unsigned int getNrOfLinks()const {return nrOfLinks;};
         
-        LinkMap::const_iterator getLink(const std::string& name);
+        LinkMap::const_iterator getLink(const std::string& name) const;
         //LinkMap::const_iterator getLink(const int index);
         
-        JointMap::const_iterator getJoint(const std::string& name);
+        JointMap::const_iterator getJoint(const std::string& name) const;
         //JointMap::const_iterator getJoint(const int index); 
 
         /**
@@ -267,22 +283,11 @@ namespace CoDyCo
          * 
          * \todo add real time version, by specified base_link as index
          */
-        int DFtraversal(Traversal & traversal, const std::string& base_link="");
+        int compute_traversal(Traversal & traversal, const std::string& base_link="", const bool bf_traversal=false) const;
 
-        /**
-         * Visit the TreeGraph with a Breadth-first traversal
-         * 
-         * @param order the link visit order
-         * @param parent the vector of parent for each link, for the base link 
-         *        it contains a LinkMap::end() const_iterator
-         * @param base_link the starting point of the traversal
-         * @return 0 if all went well, another integer otherwise
-         * 
-         * \note not a real time operation
-         * 
-         * \todo add real time version, by specified base_link as index
-         */
-        int BFStraversal(Traversal & traversal, const std::string& base_link="");
+        TreeSerialization getSerialization() const;
+        
+        int check_consistency() const;
         
         ~TreeGraph(){};
 

@@ -9,6 +9,8 @@ set (KDL_CODYCO_VERSION ${KDL_CODYCO_MAJOR_VERSION}.${KDL_CODYCO_MINOR_VERSION}.
 
 message (STATUS "${PROJECT_NAME} version ${KDL_CODYCO_VERSION}")
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+
 # set the default build type
 if (NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)

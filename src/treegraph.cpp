@@ -24,26 +24,33 @@
 #include <sstream>
 #include <algorithm>
 #include <map>
+#include <stack>
+#include <iostream>
+#include <cassert>
 
+#include <kdl/kinfam_io.hpp>
+#include <kdl/frames_io.hpp>
 #include "kdl_codyco/treegraph.hpp"
 
 namespace KDL {
 namespace CoDyCo {
-    int globalIterator2localIndex(LinkMap::const_iterator link_iterator)
+    int TreeGraphLink::globalIterator2localIndex(LinkMap::const_iterator link_iterator) const
     {
+        int i;
         for(i=0; i < getNrOfAdjacentLinks(); i++ ) {
             if( adjacent_link[i] == link_iterator ) {
                 break;
             }
         }
         assert(i >= 0);
-        assert(i < link->second.getNrOfAdjacentLinks());
+        assert(i < getNrOfAdjacentLinks());
         return i;
     }
 
     
     unsigned int TreeGraphLink::getNrOfAdjacentLinks() const
     {
+        assert(adjacent_joint.size() == adjacent_link.size());
         return adjacent_joint.size();
     }
      
@@ -75,16 +82,18 @@ namespace CoDyCo {
     
     Twist TreeGraphLink::vj(LinkMap::const_iterator adjacent_iterator, const double& q,const double& qdot) const
     {
-        return vj(globalIterator2localIndex(adjacent_iterator),q);
+        int adjacent_index = this->globalIterator2localIndex(adjacent_iterator);
+        return vj(adjacent_index,q,qdot);
     }
     
-    JointMap::const_iterator TreeGraphLink::getAdjacentJoint(int adjacent_index)
+    JointMap::const_iterator TreeGraphLink::getAdjacentJoint(int adjacent_index) const
     {
         return adjacent_joint[adjacent_index];
     }
-    JointMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator)
+    JointMap::const_iterator TreeGraphLink::getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const
     {
-        return adjacent_joint[globalIterator2localIndex(adjacent_iterator)];
+        int adjacent_index = globalIterator2localIndex(adjacent_iterator);
+        return adjacent_joint[adjacent_index];
     }
 
     
@@ -126,31 +135,34 @@ namespace CoDyCo {
     
     LinkMap::iterator TreeGraph::getLink(const std::string& name, bool dummy)
     {
-        return links.find(name);
+        LinkMap::iterator ret_value = links.find(name);
+        assert(ret_value != links.end());
+        return ret_value;
     }
     
     JointMap::iterator TreeGraph::getJoint(const std::string& name, bool dummy)
-    {
-        return joints.find(name);
+    {       
+        JointMap::iterator ret_value = joints.find(name);
+        assert(ret_value != joints.end());
+        return ret_value;
     }
     
-    
-    LinkMap::const_iterator TreeGraph::getLink(const std::string& name)
+    LinkMap::const_iterator TreeGraph::getLink(const std::string& name) const
     {
         return links.find(name);
     }
     
-    JointMap::const_iterator TreeGraph::getJoint(const std::string& name)
+    JointMap::const_iterator TreeGraph::getJoint(const std::string& name) const
     {
         return joints.find(name);
     }
-    
 
     
-    TreeGraph::TreeGraph(const Tree & tree, TreeSerialization serialization)
+    TreeGraph::TreeGraph(const Tree & tree, const TreeSerialization & serialization)
     {
-        if(!serialization.is_consistent(tree)) {
-            serialization = TreeSerialization(tree);
+        TreeSerialization local_serialization = serialization;
+        if(!local_serialization.is_consistent(tree)) {
+            local_serialization = TreeSerialization(tree);
         }
         
         nrOfDOFs = tree.getNrOfJoints();
@@ -162,13 +174,25 @@ namespace CoDyCo {
         
         //If the virtual base is not fixed with the actual base
         //(or the virtual base has many children, so there is no actual base
-        if( virtual_root->second.children.size() != 1 || virtual_root->second.children[0]->second.segment.getJoint().getType() == Joint::None ) {
+        if( virtual_root->second.children.size() != 1 || virtual_root->second.children[0]->second.segment.getJoint().getType() != Joint::None ) {
+            #ifndef NDEBUG
+            std::cerr << "TreeGraph constructor failed" << std::endl;
+            #endif
             nrOfDOFs = 0;
             nrOfLinks = 0;
             return;
         }
         
         real_root = virtual_root->second.children[0];
+        
+        #ifndef NDEBUG
+        std::cerr << "TreeGraph:" << std::endl;
+        std::cerr << "virtual_root " << virtual_root->first << std::endl;
+        std::cerr << "real_root " << real_root->first << std::endl;
+        #endif
+        
+        
+        original_root = real_root->first;
         
         const SegmentMap& sm = tree.getSegments();
         
@@ -182,8 +206,15 @@ namespace CoDyCo {
                     make_pair(current_segment.getName(), 
                         TreeGraphLink(current_segment.getName(),
                                       current_segment.getInertia(),
-                                      serialization.getLinkId(current_segment.getName())));
-                links.insert(paar);
+                                      local_serialization.getLinkId(current_segment.getName())));
+                        #ifndef NDEBUG
+                        //std::cerr << "Added link " << paar.second.link_name <<  " to TreeGraph with link_nr " << paar.second.link_nr << 
+                        //         "and mass " << paar.second.I.getMass() << " and cog " << paar.second.I.getCOG()(0) << std::endl;
+                        #endif
+                links.insert(make_pair(current_segment.getName(), 
+                        TreeGraphLink(current_segment.getName(),
+                                      current_segment.getInertia(),
+                                      local_serialization.getLinkId(current_segment.getName()))));
             }
             
             //Add joint
@@ -191,13 +222,12 @@ namespace CoDyCo {
                 //If the father is the root, dont'add any joint
                 //Add segment joint to TreeGraph
                 const Joint & current_joint = current_segment.getJoint();
-                std::pair< std::string , TreeGraphJoint > paar =
-                    make_pair(current_joint.getName(), 
+        
+                joints.insert(make_pair(current_joint.getName(), 
                               TreeGraphJoint(current_joint.getName(),
                                              current_joint, 
                                              current_joint.pose(0).Inverse()*current_segment.getFrameToTip(), /* Complicated way to do a simple thing: get f_tip attribute of the Segment */
-                                             serialization.getJointId(current_joint.getName())));
-                joints.insert(paar);
+                                             local_serialization.getJointId(current_joint.getName()))));
             }
         }
         
@@ -213,30 +243,55 @@ namespace CoDyCo {
                 tree_graph_joint->second.parent = getLink(i->second.parent->first);
                 tree_graph_joint->second.child = getLink(i->first);
                 
-                getLink(i->second.parent->first,true)->second.adjacent_joint.push_back(tree_graph_joint);
+                getLink(i->second.parent->first,true)->second.adjacent_joint.push_back(getJoint(current_joint.getName()));
                 getLink(i->second.parent->first,true)->second.is_this_parent.push_back(true);
-                getLink(i->second.parent->first,true)->second.adjacent_link.push_back(getLink(i->first,true));
+                assert(getLink(i->first,true)->second.link_nr >= 0);
+                getLink(i->second.parent->first,true)->second.adjacent_link.push_back(getLink(i->first));
+                #ifndef NDEBUG
+                    //std::cerr << "\tAdded link " << getLink(i->first,true)->second.link_name <<  " link_nr " << getLink(i->first,true)->second.link_nr << 
+                    //             "as neighbour of " <<getLink(i->second.parent->first,true)->second.link_name << " link_nr " << getLink(i->second.parent->first,true)->second.link_nr << std::endl;
+                #endif
 
-                getLink(i->first,true)->second.adjacent_joint.push_back(tree_graph_joint);
+                getLink(i->first,true)->second.adjacent_joint.push_back(getJoint(current_joint.getName()));
                 getLink(i->first,true)->second.is_this_parent.push_back(false);
-                getLink(i->first,true)->second.adjacent_link.push_back(getLink(i->second.parent->first,true));
+                assert(getLink(i->second.parent->first,true)->second.link_nr >= 0);
+                getLink(i->first,true)->second.adjacent_link.push_back(getLink(i->second.parent->first));
+                    #ifndef NDEBUG
+                    //std::cerr << "\tAdded link " << getLink(i->second.parent->first,true)->second.link_name <<  " link_nr " <<  getLink(i->second.parent->first,true)->second.link_nr << 
+                    //             "as neighbour of " <<getLink(i->first,true)->second.link_name << " link_nr " << getLink(i->first,true)->second.link_nr  << std::endl;
+                #endif
+                //Avoid to have uninitialized buffer
+                //KDL::Frame X = tree_graph_joint->second.pose(0.0,true);
+                //KDL::Vector v(1,2,3);
+                //do some operation to ensure this function call is not eliminated by optimization
+                //v = X*v;
             }
         }
         
+        #ifndef NDEBUG
+        std::cerr << "Check consistency exiting TreeGraph constructor " << std::endl;
+        //assert(check_consistency() == 0);
+        #endif
         assert(nrOfLinks == links.size());
         
     } 
     
-    int TreeGraph::DFtraversal(Traversal & traversal, const std::string& base_link)
+    int TreeGraph::compute_traversal(Traversal & traversal, const std::string& base_link,const bool bf_traversal) const
     {
         if( traversal.order.size() != getNrOfLinks() ) traversal.order.reserve(getNrOfLinks());
-        if( traversal.parent.size() != getNrOfLinks() ) traversal.parent.resize(getNrOfLinks(),links.end());
-        
-        if( traversal.order.size() != getNrOfLinks() ) traversal.order.resize(getNrOfLinks());
+
         if( traversal.parent.size() != getNrOfLinks() ) traversal.parent.resize(getNrOfLinks());
         
+        #ifndef NDEBUG
+        std::cerr << "Check consistency at the begin of compute_traversal " << std::endl;
+        //assert(check_consistency() == 0);
+        #endif
+        #ifndef NDEBUG
+        std::cerr << "Original base " << original_root << std::endl;
+        #endif
+        
         LinkMap::const_iterator base;
-        if( base_link.size() != 0 ) {
+        if( base_link.size() == 0 ) {
             base = getLink(original_root);
         } else {
             base = getLink(base_link);
@@ -245,74 +300,125 @@ namespace CoDyCo {
             return -1;
         }
         
-        stack<LinkMap::const_iterator> to_visit;
+        std::deque<LinkMap::const_iterator> to_visit;
         to_visit.clear();
         traversal.order.clear();
         
-        visited.push_back(base);
-        traversal.parent[base.second.link_nr] = links.end();
+        to_visit.push_back(base);
+        traversal.parent[base->second.link_nr] = getInvalidLinkIterator();
         
         LinkMap::const_iterator visited_link;
         LinkMap::const_iterator visited_child;
+        
+        
+            #ifndef NDEBUG
+            //std::cerr << "traversal.parent.size() " << traversal.parent.size() << std::endl;
+            #endif
+        
         while( to_visit.size() > 0 ) {
-            visited_link = to_visit.back();
-            to_visit.pop_back();
+            #ifndef NDEBUG
+            //std::cerr << "to_visit size: " << to_visit.size() << std::endl;
+            #endif
+            if( !bf_traversal ) {
+                //Depth first : to_visit is a stack
+                visited_link = to_visit.back();
+                to_visit.pop_back();
+            } else {
+                //Breath first : to_visit id a queue
+                visited_link = to_visit.front();
+                to_visit.pop_front();
+            }
             
             traversal.order.push_back(visited_link);
             
+            #ifndef NDEBUG
+            //std::cerr << "Going to add child of visited_link->second.link_nr " << visited_link->second.link_nr
+            //          << " " << visited_link->second.getNrOfAdjacentLinks() 
+            //          << " "  << visited_link->second.link_name << std::endl;
+            #endif
             for(int i=0; i < visited_link->second.getNrOfAdjacentLinks(); i++) {
                 visited_child = visited_link->second.adjacent_link[i];
-                if( visited_child != traversal.parent[visited_link.second.link_nr] ) {
+                assert(visited_child != links.end());
+                assert(visited_child->second.link_nr >= 0);
+                if( visited_child != traversal.parent[visited_link->second.link_nr] ) {
                     to_visit.push_back(visited_child);
-                    traversal.parent[base.second.link_nr] = visited_link;
+                    #ifndef NDEBUG
+                    //std::cerr << "Goint to add to_visit link " << visited_child->second.link_nr << std::endl; 
+                    #endif 
+                    traversal.parent[visited_child->second.link_nr] = visited_link;
+                    #ifndef NDEBUG
+                    //std::cerr << "Add to_visit link " << visited_child->second.link_nr << std::endl; 
+                    #endif 
                 }
             }
         }
+        
+        #ifndef NDEBUG
+        //std::cerr << "Traversal order: " << std::endl;
+        //for(int i=0; i < traversal.order.size(); i++ ) {
+        //    std::cerr << traversal.order[i]->second.link_name << " " << traversal.order[i]->second.link_nr << std::endl;
+        //}
+        #endif
+        
+        
+        
         return 0;
     }
+
     
-    int TreeGraph::BFtraversal(Traversal & traversal, const std::string& base_link)
+    TreeSerialization TreeGraph::getSerialization() const
     {
-        if( traversal.order.size() != getNrOfLinks() ) traversal.order.resize(getNrOfLinks());
-        if( traversal.parent.size() != getNrOfLinks() ) traversal.parent.resize(getNrOfLinks());
+        TreeSerialization ret;
+        ret.links.resize(getNrOfLinks());
+        ret.joints.resize(getNrOfDOFs());
         
-        LinkMap::const_iterator base;
-        if( base_link.size() != 0 ) {
-            base = getLink(original_root);
-        } else {
-            base = getLink(base_link);
-        }
-        if( base == links.end() ) {
-            return -1;
+        for(LinkMap::const_iterator it=links.begin(); it != links.end(); it++ ) {
+            ret.links[it->second.link_nr] = it->first;
         }
         
-        queue<LinkMap::const_iterator> to_visit;
-        to_visit.clear();
-        traversal.order.clear();
-        
-        visited.push_back(base);
-        traversal.parent[base.second.link_nr] = links.end();
-        
-        LinkMap::const_iterator visited_link;
-        LinkMap::const_iterator visited_child;
-        while( to_visit.size() > 0 ) {
-            visited_link = to_visit.front();
-            to_visit.pop_front();
-            
-            traversal.order.push_back(visited_link);
-            
-            for(int i=0; i < visited_link->second.getNrOfAdjacentLinks(); i++) {
-                visited_child = visited_link->second.adjacent_link[i];
-                if( visited_child != traversal.parent[visited_link.second.link_nr] ) {
-                    to_visit.push_back(visited_child);
-                    traversal.parent[base.second.link_nr] = visited_link;
-                }
+        for(JointMap::const_iterator it=joints.begin(); it != joints.end(); it++ ) {
+            if( it->second.joint.getType() != Joint::None ) {
+                ret.joints[it->second.q_nr] = it->first;
             }
         }
-        return 0;
+        
+        return ret;
     }
     
-    
+    int TreeGraph::check_consistency() const
+    {
+        LinkMap::const_iterator link_it;
+        JointMap::const_iterator joint_it;
+        
+        for(link_it = links.begin(); link_it != links.end(); link_it++) {
+            assert(link_it->second.link_nr >= 0 && link_it->second.link_nr < getNrOfLinks());
+            std::cerr << "Considering link " << link_it->second.link_name << " " << link_it->second.link_nr << std::endl;
+            for(int i=0; i < link_it->second.getNrOfAdjacentLinks(); i++ ) {
+                std::cerr << "\tHas joint connecting parent " << link_it->second.adjacent_joint[i]->second.parent->second.link_name << "  and  child" << link_it->second.adjacent_joint[i]->second.child->second.link_name << std::endl;
+                //std::cerr << link_it->second.adjacent_joint[i]->second.joint.pose(1.0);
+                //std::cerr << link_it->second.adjacent_joint[i]->second.pose(1.0,true);
+                std::cerr << link_it->second.pose(i,7.0);
+                if( link_it->second.adjacent_joint[i]->second.child != link_it ) {
+                    //std::cout << link_it->second.link_name<< " is not " << link_it->second.adjacent_joint[i]->second.child->second.link_name  << std::endl;
+                    //std::cout << link_it->first<< " is not " << link_it->second.adjacent_joint[i]->second.child->first  << std::endl;
+                }
+                if( link_it != getLink("eyes_tilt_link") ) {
+                    //std::cout << link_it->first << " is not " << getLink("eyes_tilt_link")->first << std::endl;
+                }
+                //std::cerr << "\tConsidering neighbour " << link_it->second.adjacent_link[i]->second.link_name << " " << link_it->second.adjacent_link[i]->second.link_nr << std::endl;
+                assert((link_it->second.adjacent_link[i] ==  link_it->second.adjacent_joint[i]->second.parent && link_it ==  link_it->second.adjacent_joint[i]->second.child) || (link_it ==  link_it->second.adjacent_joint[i]->second.parent &&  link_it->second.adjacent_link[i] ==  link_it->second.adjacent_joint[i]->second.child)) ;
+            }
+        }
+        
+                
+        for(joint_it = joints.begin(); joint_it != joints.end(); joint_it++) {
+            if(joint_it->second.joint.getType() != Joint::None ) {
+                assert(joint_it->second.q_nr >= 0 && joint_it->second.q_nr < getNrOfDOFs());
+            }
+        }
+        
+        return 0;
+    }
     
 }
 }//end of namespace

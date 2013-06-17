@@ -16,7 +16,7 @@ namespace CoDyCo {
         //create necessary vectors
         SegmentMap::const_iterator root;
         
-        tree.getRootSegment(root);
+        root = tree.getRootSegment();
         
         SegmentMap sm = tree.getSegments();
            

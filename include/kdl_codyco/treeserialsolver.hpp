@@ -12,6 +12,8 @@
 
 namespace KDL
 {
+namespace CoDyCo 
+{
     /**
 	 * \brief This is the base class for all the Tree solvers (kinematics,
      *  dynamics, COM, ... ) that use the TreeSerialization object 
@@ -59,6 +61,7 @@ namespace KDL
 
 	};
 
+}
 }
 
 #endif

@@ -43,12 +43,14 @@ namespace CoDyCo {
     class TreeFkSolverPos_iterative
     {
     private:
-        TreeGraph tree_graph;
+        const TreeGraph tree_graph;
         Traversal traversal;
     
     public:
-        TreeFkSolverPos_iterative (const Tree& tree_arg, const std::string & base_link, TreeSerialization serialization_arg=TreeSerialization());
+        TreeFkSolverPos_iterative (const Tree& tree_arg, const std::string & base_link="", TreeSerialization serialization_arg=TreeSerialization());
         ~TreeFkSolverPos_iterative();
+        
+        TreeGraph getTreeGraph() { return tree_graph; }
 
         int JntToCart(const JntArray& q_in, Frame& p_out, std::string segmentName);
         int JntToCart(const JntArray& q_in, Frame& p_out, const int segmentIndex);

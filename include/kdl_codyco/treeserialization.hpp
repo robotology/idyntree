@@ -33,10 +33,12 @@ namespace KDL{
     class TreeSerialization {
     private:
         void addDFSrecursive(SegmentMap::const_iterator current_el,int & link_cnt);
-        std::vector<std::string> links;
-        std::vector<std::string> joints;
+
         
     public:
+        std::vector<std::string> links;
+        std::vector<std::string> joints;
+    
         TreeSerialization();
         /**
          * Constructor that builds the default serialization for KDL::Tree
@@ -48,6 +50,8 @@ namespace KDL{
         TreeSerialization(std::vector<std::string> & links_in, std::vector<std::string> & joints_in);
         
         ~TreeSerialization();
+        
+        TreeSerialization(const TreeSerialization& x);
         
         /**
          * Not efficient, performs a search
@@ -79,8 +83,7 @@ namespace KDL{
                        std::vector< int > & parent, //array of parent of each segment
                        std::vector< int> & link2joint, //array mapping 
                        std::vector< int > & visit_order, //Visiting order for the tree, such that a parent is visited before any of his children
-                       std::vector<SegmentMap::const_iterator> & seg_vector, //array of mapping between link index and SegmentMap iterators
-                       const std::string different_root_name = "" //Element used as the base link for serialization (for parent and children)
+                       std::vector<SegmentMap::const_iterator> & seg_vector //array of mapping between link index and SegmentMap iterators
                        );
                                          
         std::string toString();
