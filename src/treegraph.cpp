@@ -37,21 +37,30 @@ namespace CoDyCo {
     int TreeGraphLink::globalIterator2localIndex(LinkMap::const_iterator link_iterator) const
     {
         int i;
-        for(i=0; i < getNrOfAdjacentLinks(); i++ ) {
+        for(i=0; i < (int)getNrOfAdjacentLinks(); i++ ) {
             if( adjacent_link[i] == link_iterator ) {
                 break;
             }
         }
-        assert(i >= 0);
-        assert(i < getNrOfAdjacentLinks());
-        return i;
+            assert(i >= 0);
+            assert(i < (int)getNrOfAdjacentLinks());
+            return i;
     }
 
-    
     unsigned int TreeGraphLink::getNrOfAdjacentLinks() const
     {
         assert(adjacent_joint.size() == adjacent_link.size());
         return adjacent_joint.size();
+    }
+    
+    bool TreeGraphLink::is_adjacent_to(LinkMap::const_iterator link_iterator) const
+    {
+        for(int i=0; i < (int)getNrOfAdjacentLinks(); i++ ) {
+            if( adjacent_link[i] == link_iterator ) {
+                return true;
+            }
+        }
+        return false;
     }
      
     Frame TreeGraphLink::pose(int adjacent_index, const double& q) const
@@ -96,6 +105,12 @@ namespace CoDyCo {
         return adjacent_joint[adjacent_index];
     }
 
+    std::string TreeGraphLink::toString() const
+    {
+        std::stringstream ss;
+        ss << link_name << " " << link_nr << " "  << " mass " << I.getMass();
+        return ss.str();
+    }
     
     void TreeGraphJoint::update_buffers(const double & q) const
     {
@@ -133,6 +148,13 @@ namespace CoDyCo {
         return S(q,inverse)*dq;
     }
     
+    std::string TreeGraphJoint::toString() const
+    {
+        std::stringstream ss;
+        ss << joint_name << " " << q_nr << " "  << joint.getTypeName();
+        return ss.str();
+    }
+    
     LinkMap::iterator TreeGraph::getLink(const std::string& name, bool dummy)
     {
         LinkMap::iterator ret_value = links.find(name);
@@ -161,6 +183,14 @@ namespace CoDyCo {
     TreeGraph::TreeGraph(const Tree & tree, const TreeSerialization & serialization)
     {
         TreeSerialization local_serialization = serialization;
+        #ifndef NDEBUG
+        assert( local_serialization.is_consistent(tree) == serialization.is_consistent(tree) ); 
+        if( local_serialization.is_consistent(tree)  ) {
+            std::cout << "TreeGraph constructor: using provided serialization " << std::endl;
+        } else {
+            std::cout << "TreeGraph constructor: using default serialization " << std::endl;
+        }
+        #endif
         if(!local_serialization.is_consistent(tree)) {
             local_serialization = TreeSerialization(tree);
         }
@@ -272,7 +302,7 @@ namespace CoDyCo {
         std::cerr << "Check consistency exiting TreeGraph constructor " << std::endl;
         //assert(check_consistency() == 0);
         #endif
-        assert(nrOfLinks == links.size());
+        assert(nrOfLinks == (int)links.size());
         
     } 
     
@@ -336,7 +366,7 @@ namespace CoDyCo {
             //          << " " << visited_link->second.getNrOfAdjacentLinks() 
             //          << " "  << visited_link->second.link_name << std::endl;
             #endif
-            for(int i=0; i < visited_link->second.getNrOfAdjacentLinks(); i++) {
+            for(int i=0; i < (int)visited_link->second.getNrOfAdjacentLinks(); i++) {
                 visited_child = visited_link->second.adjacent_link[i];
                 assert(visited_child != links.end());
                 assert(visited_child->second.link_nr >= 0);
@@ -393,7 +423,7 @@ namespace CoDyCo {
         for(link_it = links.begin(); link_it != links.end(); link_it++) {
             assert(link_it->second.link_nr >= 0 && link_it->second.link_nr < getNrOfLinks());
             std::cerr << "Considering link " << link_it->second.link_name << " " << link_it->second.link_nr << std::endl;
-            for(int i=0; i < link_it->second.getNrOfAdjacentLinks(); i++ ) {
+            for(int i=0; i < (int)link_it->second.getNrOfAdjacentLinks(); i++ ) {
                 std::cerr << "\tHas joint connecting parent " << link_it->second.adjacent_joint[i]->second.parent->second.link_name << "  and  child" << link_it->second.adjacent_joint[i]->second.child->second.link_name << std::endl;
                 //std::cerr << link_it->second.adjacent_joint[i]->second.joint.pose(1.0);
                 //std::cerr << link_it->second.adjacent_joint[i]->second.pose(1.0,true);
@@ -418,6 +448,40 @@ namespace CoDyCo {
         }
         
         return 0;
+    }
+    
+    int TreeGraph::check_consistency(const Traversal traversal) const
+    {
+        assert( traversal.order.size() == getNrOfLinks() );
+
+        assert( traversal.parent.size() == getNrOfLinks() );
+        
+        LinkMap::const_iterator link_it;
+        
+        for(link_it = links.begin(); link_it != links.end(); link_it++) {
+            if( traversal.parent[link_it->second.link_nr] == getInvalidLinkIterator() ) {
+                if( link_it != traversal.order[0] ) return -1;
+            } else {
+                if( !( link_it->second.is_adjacent_to(traversal.parent[link_it->second.link_nr]) ) ) return -1;
+            }
+        }
+        
+        return 0;
+    }
+    
+    std::string TreeGraph::toString() const
+    {
+        std::stringstream ss;
+        ss << "TreeGraph " << tree_name << " origina_root " << original_root << " DOFs " <<  nrOfDOFs << " nrOfLinks " << nrOfLinks << std::endl;
+        ss << "Links: " << std::endl;
+        for(LinkMap::const_iterator link_it = links.begin(); link_it != links.end(); link_it++) {
+            ss << link_it->second.toString() << std::endl;
+        }
+        ss << "Joints: " << std::endl;
+        for(JointMap::const_iterator joint_it = joints.begin(); joint_it != joints.end(); joint_it++) {
+            ss << joint_it->second.toString() << std::endl;
+        }
+        return ss.str();
     }
     
 }

@@ -71,6 +71,12 @@ namespace CoDyCo
         unsigned int getNrOfAdjacentLinks() const;
         
         /**
+         * Check if this link is adjacent to a given link
+         */    
+        bool is_adjacent_to(LinkMap::const_iterator link_iterator) const;
+
+        
+        /**
          * Get the pose of this link with respect to an adjacent link
          * 
          * @param adjancent_index the local index of the selected adjacent link
@@ -131,6 +137,9 @@ namespace CoDyCo
         
         JointMap::const_iterator getAdjacentJoint(int adjacent_index) const;
         JointMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const;
+        
+        std::string toString() const;
+
 
     };
     
@@ -142,7 +151,7 @@ namespace CoDyCo
     class TreeGraphJoint
     {
     private:
-        TreeGraphJoint(const std::string& name): joint_name(name), q_nr(0), q_previous(-1.0) { q_previous=-1.0; update_buffers(0.0);};
+        TreeGraphJoint(const std::string& name):  joint_name(name), q_nr(0) { q_previous=-1.0; update_buffers(0.0);};
     
         mutable Frame relative_pose_parent_child; //\f$ {}^p X_c \f$
         mutable Twist S_child_parent; //\f$ {}^c S_{p,c} \f$
@@ -161,7 +170,7 @@ namespace CoDyCo
         LinkMap::const_iterator child;
         
         TreeGraphJoint(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const unsigned int q_nr_in = 0): 
-                               joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in), q_previous(-1.0) {update_buffers(0.0);};
+                               joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in) { q_previous=-1.0; update_buffers(0.0);};
         
         ~TreeGraphJoint() {}; 
         
@@ -188,6 +197,8 @@ namespace CoDyCo
          * @return \f$ {}^c vj_{c,p} = {}^c S_{p,c} \dot{q} \f$
          */
         Twist vj(const double& q, const double &dq, bool inverse) const;
+        
+        std::string toString() const;
     };
 
     /**
@@ -288,6 +299,10 @@ namespace CoDyCo
         TreeSerialization getSerialization() const;
         
         int check_consistency() const;
+        
+        int check_consistency(const Traversal traversal) const;
+
+        std::string toString() const;
         
         ~TreeGraph(){};
 

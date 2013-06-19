@@ -56,26 +56,28 @@ namespace KDL{
         /**
          * Not efficient, performs a search
          */
-        int getJointId(std::string joint_name);
+        int getJointId(std::string joint_name) const;
         
         /**
          * Not efficient, performs a search
          */
-        int getLinkId(std::string link_name);
+        int getLinkId(std::string link_name) const;
         
-        std::string getJointName(int joint_id);
-        std::string getLinkName(int link_id);
+        std::string getJointName(int joint_id) const;
+        std::string getLinkName(int link_id) const;
         
-        int getNrOfSegments();
+        int getNrOfSegments() const;
         
-        int getNrOfJoints();
+        int getNrOfJoints() const;
         
         /**
          * Check if the TreeSerialization is a valid serialization for the 
-         * given Tree
+         * given Tree (checking also if the names are the wright one, not 
+         * if the DOF serialization inside the TreeSerialization is the same
+         * of the one in the Tree
          * 
          */
-        bool is_consistent(const Tree & tree);
+        bool is_consistent(const Tree & tree) const;
         
         bool serialize(const Tree & tree,
                        std::vector< int> & children_root, //set of children of root

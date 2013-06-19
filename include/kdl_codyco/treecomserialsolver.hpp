@@ -21,7 +21,7 @@ namespace CoDyCo
 	 * \brief This  <strong>abstract</strong> class encapsulates the 
      *  solver for finding the Center Of Mass of a KDL::Tree 
 	 */
-	class TreeCOMSerialSolver : TreeSerialSolver 
+	class TreeCOMSerialSolver : public TreeSerialSolver 
 	{
 		public:
             explicit TreeCOMSerialSolver(const Tree& tree,const TreeSerialization & serialization=TreeSerialization());

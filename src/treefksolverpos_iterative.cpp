@@ -26,27 +26,46 @@ namespace CoDyCo {
                                                          const std::string & base_link, 
                                                          TreeSerialization serialization_arg):    
                 tree_graph(tree_arg,serialization_arg)
-        
     {
 
         #ifndef NDEBUG
-        std::cerr << "Check consistency in the constructor of TreeFkSolverPos" << std::endl;
-        assert(tree_graph.check_consistency() == 0);
+        //std::cerr << "Check consistency in the constructor of TreeFkSolverPos" << std::endl;
+        //assert(tree_graph.check_consistency() == 0);
         #endif
         
-        
         int ret = tree_graph.compute_traversal(traversal,base_link);
+        assert(tree_graph.check_consistency(traversal) == 0);
+
         if( ret != 0 ) {
             tree_graph.compute_traversal(traversal);
+            assert(tree_graph.check_consistency(traversal) == 0);
+
         }
     }
     
     TreeFkSolverPos_iterative::~TreeFkSolverPos_iterative()
     {
     }
+    
+    int TreeFkSolverPos_iterative::setBaseLink(const std::string & base_link)
+    {
+        assert(tree_graph.check_consistency(traversal) == 0);
+        int ret = tree_graph.compute_traversal(traversal,base_link);
+        assert(tree_graph.check_consistency(traversal) == 0);
+        if( ret != 0 ) {
+            //If error, restore default state
+            tree_graph.compute_traversal(traversal);
+            assert(tree_graph.check_consistency(traversal) == 0);
+            return -1;
+        } else {
+            return 0;
+        }
+    }
 
     int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, std::string segmentName)
     {
+        assert(tree_graph.check_consistency(traversal) == 0);
+        
         if( q_in.rows() != tree_graph.getNrOfDOFs() )
             return -1;
             
@@ -61,6 +80,7 @@ namespace CoDyCo {
         
         for(LinkMap::const_iterator link=it; link != traversal.order[0]; link = traversal.parent[link->second.link_nr] ) {
             LinkMap::const_iterator parent_link = traversal.parent[link->second.link_nr];
+            assert( parent_link != tree_graph.getInvalidLinkIterator() );
             
             double joint_position;
             
@@ -70,14 +90,14 @@ namespace CoDyCo {
                 joint_position =0;
             }
             
-            currentFrame = link->second.pose(traversal.parent[link->second.link_nr],
+            currentFrame = link->second.pose(parent_link,
                                              joint_position);
                                              
              #ifndef NDEBUG
-                std::cout << "Frame X_"<<link->second.link_nr<<"_"<<traversal.parent[link->second.link_nr]->second.link_nr << std::endl;
-                std::cout << currentFrame.Inverse() << std::endl;
-                std::cout << "Frame X_"<<traversal.parent[link->second.link_nr]->second.link_nr<<"_"<<link->second.link_nr << std::endl;
-                std::cout << currentFrame << std::endl;
+                //std::cout << "Frame X_"<<link->second.link_nr<<"_"<<traversal.parent[link->second.link_nr]->second.link_nr << std::endl;
+                //std::cout << currentFrame.Inverse() << std::endl;
+                //std::cout << "Frame X_"<<traversal.parent[link->second.link_nr]->second.link_nr<<"_"<<link->second.link_nr << std::endl;
+                //std::cout << currentFrame << std::endl;
             #endif
             resultFrame = currentFrame*resultFrame;
         }

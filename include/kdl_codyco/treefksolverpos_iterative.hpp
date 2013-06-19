@@ -38,6 +38,8 @@ namespace CoDyCo {
      * algorithm to calculate the position transformation from joint
      * space to Cartesian space of a general kinematic tree (KDL::Tree),
      * using TreeSerialization.
+     * 
+     * \todo add copy constructor?: also for other solvers ? 
      *
      */
     class TreeFkSolverPos_iterative
@@ -50,7 +52,13 @@ namespace CoDyCo {
         TreeFkSolverPos_iterative (const Tree& tree_arg, const std::string & base_link="", TreeSerialization serialization_arg=TreeSerialization());
         ~TreeFkSolverPos_iterative();
         
-        TreeGraph getTreeGraph() { return tree_graph; }
+        /**
+         * Change the base_link of the solver
+         * 
+         */
+        int setBaseLink(const std::string & base_link);
+        
+        TreeGraph getTreeGraph() const { return tree_graph; }
 
         int JntToCart(const JntArray& q_in, Frame& p_out, std::string segmentName);
         int JntToCart(const JntArray& q_in, Frame& p_out, const int segmentIndex);

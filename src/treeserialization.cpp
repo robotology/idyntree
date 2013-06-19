@@ -72,9 +72,9 @@ namespace KDL {
         joints = x.joints;
     }
     
-    int TreeSerialization::getJointId(std::string joint_name)
+    int TreeSerialization::getJointId(std::string joint_name) const
     {
-        std::vector<std::string>::iterator it;
+        std::vector<std::string>::const_iterator it;
         it = std::find(joints.begin(),joints.end(),joint_name);
         if( it != joints.end() ) {
             return it - joints.begin();
@@ -83,9 +83,9 @@ namespace KDL {
         }
     }
         
-    int TreeSerialization::getLinkId(std::string link_name)
+    int TreeSerialization::getLinkId(std::string link_name) const
     {
-        std::vector<std::string>::iterator it;
+        std::vector<std::string>::const_iterator it;
         it = std::find(links.begin(),links.end(),link_name);
         if( it != links.end() ) {
             return it - links.begin();
@@ -94,20 +94,22 @@ namespace KDL {
         }
     }
     
-    std::string TreeSerialization::getJointName(int joint_id)
+    std::string TreeSerialization::getJointName(int joint_id) const
     {
         return joints[joint_id];
     }
-    std::string TreeSerialization::getLinkName(int link_id)
+    std::string TreeSerialization::getLinkName(int link_id) const
     {
         return links[link_id];
     }
     
-    bool TreeSerialization::is_consistent(const Tree & tree)
+    bool TreeSerialization::is_consistent(const Tree & tree) const
     {
         SegmentMap::const_iterator seg;
         
-        if( tree.getNrOfJoints() != joints.size() || tree.getNrOfSegments() !=  links.size() ) return false;
+        if( tree.getNrOfJoints() != joints.size() || tree.getNrOfSegments() !=  links.size() ) {
+            return false;
+        }
         
         unsigned int i;
         
@@ -115,12 +117,14 @@ namespace KDL {
         
         for(i = 0; i < links.size(); i++ ) {
             seg = tree.getSegment(links[i]);
-            if( seg == seg_map.end() ) return false;
+            if( seg == seg_map.end() ) {
+                return false;
+            }
         }
         
         for(SegmentMap::const_iterator it=seg_map.begin(); it != seg_map.end(); it++) {
             if( it->second.segment.getJoint().getType() != Joint::None ) {
-                if( joints[it->second.q_nr] != it->second.segment.getJoint().getName() ) {
+                if( getJointId( it->second.segment.getJoint().getName()) == -1 ) {
                     return false;
                 }
             }
@@ -130,12 +134,12 @@ namespace KDL {
         
     }
             
-    int TreeSerialization::getNrOfSegments() 
+    int TreeSerialization::getNrOfSegments() const
     {
         return links.size();
     }
         
-    int TreeSerialization::getNrOfJoints()
+    int TreeSerialization::getNrOfJoints() const
     {
         return joints.size();
     }
@@ -229,11 +233,11 @@ namespace KDL {
     {
         std::stringstream ss;
         ss << "Link serialization:" << std::endl;
-        for( int i = 0; i < links.size(); i++ ) {
+        for( int i = 0; i < (int)links.size(); i++ ) {
             ss <<  i << "\t: " << links[i] << std::endl;
         }
         ss << "Joint serialization:" << std::endl;
-        for( int i = 0; i < joints.size(); i++ ) {
+        for( int i = 0; i < (int)joints.size(); i++ ) {
             ss << i << "\t: " << joints[i] << std::endl;
         }
         return ss.str();
