@@ -99,6 +99,7 @@ namespace CoDyCo {
     {
         return adjacent_joint[adjacent_index];
     }
+    
     JointMap::const_iterator TreeGraphLink::getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const
     {
         int adjacent_index = globalIterator2localIndex(adjacent_iterator);

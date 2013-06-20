@@ -31,7 +31,8 @@
 
 namespace KDL
 {
-
+namespace CoDyCo 
+{
     typedef std::vector<Wrench> Wrenches;
 
 	/**
@@ -82,4 +83,5 @@ namespace KDL
         // Need functions to return the manipulator mass, coriolis and gravity matrices - Lagrangian Formulation.
 	};
 
+}
 }

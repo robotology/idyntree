@@ -6,6 +6,9 @@
  
 #include "kdl_codyco/utils.hpp"
 #include "kdl_codyco/treeserialization.hpp"
+#include <iostream>
+#include <kdl/kinfam_io.hpp>
+#include <kdl/frames_io.hpp>
 
 namespace KDL {
 namespace CoDyCo {
@@ -29,149 +32,117 @@ namespace CoDyCo {
         
         return total_mass;
     }
-    /*
-    int rneaKinematicLoop(const JntArray &q, 
-                      const JntArray &q_dot,
-                      const JntArray &q_dotdot,  
-                      const Twist& base_velocity, 
-                      const Twist& base_acceleration, 
-                      const std::vector<int>& visit_order,
-                      const std::vector<SegmentMap::const_iterator>& index2segment,
-                      const std::vector<int>& parent, 
-                      const std::vector<int>& link2joint,
-                              std::vector<Frame>& X,
-                              std::vector<Twist>& S,
-                              std::vector<Twist>& v,
-                              std::vector<Twist>& a,
-                              std::vector<Wrench>& f
-                      )
+    
+    int rneaKinematicLoop(const TreeGraph & tree_graph,
+                           const JntArray &q, 
+                           const JntArray &q_dot,
+                           const JntArray &q_dotdot,  
+                           const Traversal & kinetic_traversal,
+                           const Twist& base_velocity, 
+                           const Twist& base_acceleration, 
+                                 std::vector<Twist>& v,
+                                 std::vector<Twist>& a)
     {
-        //Sweep from root to leaf
-        for( l = 0; l < visit_order.size(); l++ ) {
-            
-            unsigned int curr_index = visit_order[l];
-        
-			const Segment& seg = index2segment[curr_index]->second.segment;
-			
-            double q_,qdot_,qdotdot_;
-            
-            int idx = link2joint[curr_index];
-            
-            if( idx != FIXED_JOINT ) {
-                q_=q(idx);
-                qdot_=q_dot(idx);
-                qdotdot_=q_dotdot(idx);
+        for(int i=0; i < (int)kinetic_traversal.order.size(); i++) {
+            double joint_pos, joint_vel, joint_acc;
+            LinkMap::const_iterator link_it = kinetic_traversal.order[i];
+            int link_nmbr = link_it->second.link_nr; 
+            if( i == 0 ) {
+                assert( kinetic_traversal.parent[link_nmbr] == tree_graph.getInvalidLinkIterator() );
+                v[link_nmbr] = base_velocity;
+                a[link_nmbr] = base_acceleration;
             } else {
-                q_=qdot_=qdotdot_=0.0;
-            }
+                LinkMap::const_iterator parent_it = kinetic_traversal.parent[link_it->second.link_nr];
+                int parent_nmbr = parent_it->second.link_nr;
                 
-            Frame& eX  = X[curr_index];
-            Twist& ev  = v[curr_index];
-            Twist& ea  = a[curr_index];
-
-            //Calculate segment properties: X,S,vj,cj
-            eX=seg.pose(q_);//Remark this is the inverse of the 
-                            //frame for transformations from 
-                            //the parent to the current coord frame
-            //Transform velocity and unit velocity to segment frame
-            Twist vj=eX.M.Inverse(seg.twist(q_,qdot_));
-            S[link2joint[curr_index]]=eX.M.Inverse(seg.twist(q_,1.0));
-            //We can take cj=0, see remark section 3.5, page 55 since the unit velocity vector S of our joints is always time constant
-            //calculate velocity and acceleration of the segment (in segment coordinates)
-            
-            int parent_index = parent[curr_index];
-            Twist parent_a, parent_v;
-            
-            if( parent_index == -1 ) {
-                parent_a = base_acceleration;
-                parent_v = base_velocity;
-            } else {
-                parent_a = a[parent_index];
-                parent_v = v[parent_index];
-            }
-            
-            ev=eX.Inverse(parent_v)+vj;
-            ea=eX.Inverse(parent_a)+eS*qdotdot_+ev*vj;
-            // end kinematic phase 
-            
-            if( f.size() != 0 ) {
-                //Collect RigidBodyInertia and external forces
-                RigidBodyInertia Ii=seg.getInertia();
-                f[curr_index]=Ii*a[curr_index]+v[curr_index]*(Ii*v[curr_index])-f_ext[curr_index];
-            }
-            
-            return 0;
-        }
-    }
-    */
-    /*
-    {
-        int l;
-        for(l=visit_order.size()-1; l >= 0; l--) {
-            int curr_index = visit_order[l];
-            
-			const Segment& seg = index2segment[curr_index]->second.segment;
-                        
-			Frame& eX = X[curr_index];
-            Twist& eS = S[curr_index];
-    
-            int parent_index = parent[curr_index];
-            if( parent_index >= 0 ) {
-                f[parent_index] += project(f[curr_index],parent_index,curr_index,kinX,kin_parent);
-            } else {
-                base_force += project(f[curr_index],parent_index,curr_index,kinX,kin_parent);
-            }
-
-            if(link2joint[curr_index]!=FIXED_JOINT) {
-                if( dyn_parent[curr_index] == kin_parent[curr_index] ) {
-                    //If nothing for this joint has changed
-                    torques(link2joint[curr_index])=dot(S(link2joint[curr_index],f[parent_index]);
+                if( link_it->second.getAdjacentJoint(parent_it)->second.joint.getType() != Joint::None ) {
+                    int dof_nr = link_it->second.getAdjacentJoint(parent_it)->second.q_nr;
+                    joint_pos = q(dof_nr);
+                    joint_vel = q_dot(dof_nr);
+                    joint_acc = q_dotdot(dof_nr);
                 } else {
-                    torques(link2joint[curr_index])=dot(project(S(link2joint[curr_index],f[current_index]);
+                    joint_pos = joint_vel = joint_acc = 0.0;
                 }
+                KDL::Frame X_son_parent = parent_it->second.pose(link_it,joint_pos);
+                KDL::Twist S_son_parent = parent_it->second.S(link_it,joint_pos);
+                KDL::Twist vj_son_parent = parent_it->second.vj(link_it,joint_pos,joint_vel);
+                v[link_nmbr] = X_son_parent*v[parent_nmbr] + vj_son_parent;
+                a[link_nmbr] = X_son_parent*a[parent_nmbr] + S_son_parent*joint_acc + v[link_nmbr]*vj_son_parent;
+                
+                #ifndef NDEBUG
+                //std::cout << "v[ " << link_it->second.link_name << " ] = " << v[link_nmbr] << std::endl;
+                //std::cout << "a[ " << link_it->second.link_name << " ] = " << a[link_nmbr] << std::endl;
+                //std::cout << "\t=" << X_son_parent*a[parent_nmbr] << " + "<< S_son_parent*joint_acc << " + " << std::endl; 
+                #endif 
+                
+                /*
+                move this code (decommenti it) in kinetic loop to improve performance
+                if( f.size() != 0 ) {
+                    //Collect RigidBodyInertia and external forces
+                    RigidBodyInertia Ii= link_it->second.I;
+                    f[link_nmbr]=Ii*a[link_nmbr]+v[link_nmbr]*(Ii*v[link_nmbr])-f_ext[link_nmbr];
+                }
+                */
             }
         }
+        return 0;
     }
     
-    Vector project(const Vector & arg,const int i,const int j,const std::vector<Frame>& X,const std::vector<int>& parent) 
+    int rneaDynamicLoop(const TreeGraph & tree_graph,
+                         const JntArray &q, 
+                         const Traversal & dynamical_traversal,
+                         const std::vector<Twist>& v,
+                         const std::vector<Twist>& a,
+                         const std::vector<Wrench>& f_ext,
+                         std::vector<Wrench>& f,
+                         JntArray &torques,
+                         Wrench & base_force)
     {
-        #ifndef NDEBUG
-        if( parent[i] != j && parent[j] != i ) return Vector::Zero();
-        #endif
-        if( parent(j) == i ) {
-            return X[j]*arg;
-        } else {
-            //parent(i) == j
-            return X[i].Inverse(arg);
+        double joint_pos;
+        //move this loop back in kinetic loop to improve performance
+        for(int l=dynamical_traversal.order.size()-1; l>=0; l-- ) {  
+            LinkMap::const_iterator link_it = dynamical_traversal.order[l];
+            int link_nmbr = link_it->second.link_nr;
+            //Collect RigidBodyInertia and external forces
+            RigidBodyInertia Ii= link_it->second.I;
+            f[link_nmbr]=Ii*a[link_nmbr]+v[link_nmbr]*(Ii*v[link_nmbr])-f_ext[link_nmbr];
+        }    
+          
+        for(int l=dynamical_traversal.order.size()-1; l>=0; l-- ) {
+            LinkMap::const_iterator link_it = dynamical_traversal.order[l];
+            int link_nmbr = link_it->second.link_nr;
+            
+            if( l != 0 ) {
+                
+                LinkMap::const_iterator parent_it = dynamical_traversal.parent[link_nmbr];
+                const int parent_nmbr = parent_it->second.link_nr;
+                JointMap::const_iterator joint_it = link_it->second.getAdjacentJoint(parent_it);
+                
+                if( joint_it->second.joint.getType() == Joint::None ) {
+                    joint_pos = 0.0;
+                } else {
+                    joint_pos = q(link_it->second.getAdjacentJoint(parent_it)->second.q_nr);
+                }
+                
+                f[parent_nmbr] += link_it->second.pose(parent_it,joint_pos)*f[link_nmbr]; 
+                #ifndef NDEBUG
+                //std::cout << "f[ " << link_it->second.link_name << " ] = " << f[link_nmbr] << std::endl;
+                #endif 
+                
+                if( joint_it->second.joint.getType() != Joint::None ) {
+                    torques(link_it->second.getAdjacentJoint(parent_it)->second.q_nr) = dot(parent_it->second.S(link_it,joint_pos),f[link_nmbr]);
+                }
+                
+            } else {
+                
+                assert( dynamical_traversal.parent[link_nmbr] == tree_graph.getInvalidLinkIterator() );
+                
+                base_force = f[link_nmbr];
+            }
         }
-    }
-    
-    Wrench project(const Wrench & arg,const int i,const int j,const std::vector<Frame>& X,const std::vector<int>& parent) 
-    {
-        #ifndef NDEBUG
-        if( parent[i] != j && parent[j] != i ) return Wrench::Zero();
-        #endif
-        if( parent(j) == i ) {
-            return X[j]*arg;
-        } else {
-            //parent(i) == j
-            return X[i].Inverse(arg);
-        }
-    }
-    
-    Twist project(const Twist & arg,const int i,const int j,const std::vector<Frame>& X,const std::vector<int>& parent) 
-    {
-        #ifndef NDEBUG
-        if( parent[i] != j && parent[j] != i ) return Twist::Zero();
-        #endif
-        if( parent(j) == i ) {
-            return X[j]*arg;
-        } else {
-            //parent(i) == j
-            return X[i].Inverse(arg);
-        }
-    }
-*/
 
+        return 0;
+        
+    } 
 }
 }

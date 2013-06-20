@@ -29,6 +29,7 @@
 
 #include "kdl_codyco/treeidsolver_recursive_newton_euler.hpp"
 #include "kdl/frames_io.hpp"
+#include <kdl_codyco/utils.hpp>
 
 #include <deque>
 using namespace std;
@@ -37,30 +38,32 @@ namespace KDL{
 namespace CoDyCo {
     
     TreeIdSolver_RNE::TreeIdSolver_RNE(const Tree& tree, const TreeSerialization & serialization) 
-    : TreeSerialSolver(tree,serialization)
+    : tree_graph(tree,serialization)
     {
-        //duplicate TreeSerialSolver inizialitation !!, should fix 
-        TreeIdSolver_RNE(tree,Vector::Zero(),serialization);
+        //Initializing gravitational acceleration (if any)
+        ag=Twist::Zero();
+        
+        //allocate vectors
+        v.resize(tree.getNrOfSegments());
+        a.resize(tree.getNrOfSegments());
+        f.resize(tree.getNrOfSegments());
+                
+        tree_graph.compute_traversal(traversal);
     }
     
     TreeIdSolver_RNE::TreeIdSolver_RNE(const Tree& tree, Vector grav, const TreeSerialization & serialization)
-    : TreeSerialSolver(tree,serialization)
+    : tree_graph(tree,serialization)
     {
       
         //Initializing gravitational acceleration (if any)
         ag=-Twist(grav,Vector::Zero());
         
         //allocate vectors
-        X.resize(tree.getNrOfSegments());
         v.resize(tree.getNrOfSegments());
         a.resize(tree.getNrOfSegments());
         f.resize(tree.getNrOfSegments());
         
-        S.resize(tree.getNrOfJoints());
-        
-        //Get root name
-		root_name = tree.getRootSegment()->first;
-
+        tree_graph.compute_traversal(traversal);
     }
     
     int TreeIdSolver_RNE::CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Wrenches& f_ext,JntArray &torques)
@@ -72,43 +75,20 @@ namespace CoDyCo {
     
     int TreeIdSolver_RNE::CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force)
     {
-        assert(torques.rows() == tree.getNrOfJoints());
+        assert(torques.rows() == tree_graph.getNrOfDOFs());
         
         base_force = Wrench::Zero();
+
+        rneaKinematicLoop(tree_graph,q,q_dot,q_dotdot,traversal,base_velocity,base_acceleration,v,a);
         
-        int l;
-
-        //rneaKinematicLoop(q,q_dot,q_dotdot,base_velocity,base_acceleration,recursion_order,index2segment,parent,link2joint,X,S,v,a,f);
-
-        // process processed back to front...        
-        //Sweep from leafs to root, recursion order in reverse
-        for(l=recursion_order.size()-1; l >= 0; l--) {
-            int curr_index = recursion_order[l];
-            
-			const Segment& seg = index2segment[curr_index]->second.segment;
-            
-			const Joint& jnt = seg.getJoint();
-			Frame& eX = X[curr_index];
-            Wrench& ef = f[curr_index];
-            
-            /*
-            int parent_index = parent[curr_index];
-            if( parent_index >= 0 ) {
-                Entry& parent_e = db[parent[curr_index]];
-                Wrench& pre_f = parent_e.f;
-                pre_f +=eX*ef;
-            } else {
-                base_force += eX*ef;
-            }
-
-            if(link2joint[curr_index]!=FIXED_JOINT)
-                torques(link2joint[curr_index])=dot(S[link2joint[curr_index]],ef);
-            */
-        }
-        
-
+        rneaDynamicLoop(tree_graph,q,traversal,v,a,f_ext,f,torques,base_force);
         
         return 0;
+    }
+    
+    TreeSerialization TreeIdSolver_RNE::getSerialization() const 
+    {
+        return tree_graph.getSerialization();
     }
 
 }

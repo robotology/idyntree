@@ -25,7 +25,7 @@
 
 #include "treeidsolver.hpp"
 #include "treeserialization.hpp"
-#include "kdl_codyco/treeserialsolver.hpp"
+#include <kdl_codyco/treegraph.hpp>
 
 namespace KDL{
 namespace CoDyCo{
@@ -43,7 +43,7 @@ namespace CoDyCo{
      * (expressed in the segments reference frame) and the dynamical
      * parameters of the segments.
      */
-    class TreeIdSolver_RNE : public TreeIdSolver, public TreeSerialSolver {
+    class TreeIdSolver_RNE : public TreeIdSolver {
     public:
         /**
          * Constructor for the solver, it will allocate all the necessary memory
@@ -90,16 +90,16 @@ namespace CoDyCo{
          */
         int CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force);
 
+        TreeSerialization getSerialization() const;
 
     private:
-        std::vector<Frame> X;
-        std::vector<Twist> S;
+        const TreeGraph tree_graph;
+    
 		std::vector<Twist> v;
 		std::vector<Twist> a;
 		std::vector<Wrench> f;
 
-        std::string root_name;
-        
+        Traversal traversal;
         
         Twist ag;
     };

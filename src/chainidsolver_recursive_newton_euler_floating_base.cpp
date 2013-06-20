@@ -96,7 +96,7 @@ namespace KDL{
         }
         base_force = X[0]*f[0];
         //debug
-        for(int i=0; i < ns; i++) {
+        for(int i=0; i < (int)ns; i++) {
             Segment segm;
         	segm = chain.getSegment(i);
             //std::cout << "bLink " << segm.getName() << " a= " << a[i] << " f= " << f[i] << std::endl;

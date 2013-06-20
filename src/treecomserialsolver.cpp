@@ -56,7 +56,7 @@ namespace CoDyCo {
         
         #ifndef NDEBUG
         std::cout << "TreeCOMSerialSolver subtree_COM: " << std::endl;
-        for( int i = 0; i != subtree_COM.size(); ++i)
+        for( int i = 0; i != (int)subtree_COM.size(); ++i)
             std::cout << i << " " << subtree_COM[i] << "\n"; 
         #endif 
         p_out = subtree_COM[0];
