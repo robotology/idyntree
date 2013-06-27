@@ -77,11 +77,13 @@ namespace CoDyCo {
                 }
             }
         }
+        
         #ifndef NDEBUG
         std::cout << "TreeCOMsolver subtree_COM: " << std::endl;
         for( int i = 0; i != (int)subtree_COM.size(); ++i)
             std::cout << i << " " << subtree_COM[i] << "\n"; 
         #endif 
+        
         p_out = subtree_COM[0];
         return 0;
         

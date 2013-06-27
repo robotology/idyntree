@@ -56,9 +56,11 @@ namespace CoDyCo
         std::string link_name;
         RigidBodyInertia I;
         unsigned int link_nr;
+        unsigned int body_part_nr;
         std::vector< JointMap::const_iterator >  adjacent_joint;
         std::vector< LinkMap::const_iterator > adjacent_link;
         std::vector< bool > is_this_parent;
+        
         
         TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr): link_name(name), I(Inertia), link_nr(nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { };
         ~TreeGraphLink() {};
@@ -165,6 +167,7 @@ namespace CoDyCo
         Joint joint;
         Frame f_tip;
         unsigned int q_nr;
+        unsigned int body_part;
         
         LinkMap::const_iterator parent;
         LinkMap::const_iterator child;
