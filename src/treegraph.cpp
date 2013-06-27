@@ -181,9 +181,11 @@ namespace CoDyCo {
     }
 
     
-    TreeGraph::TreeGraph(const Tree & tree, const TreeSerialization & serialization)
+    TreeGraph::TreeGraph(const Tree & tree, const TreeSerialization & serialization, const TreePartition & partition)
     {
         TreeSerialization local_serialization = serialization;
+        TreePartition local_partition = partition;
+        
         #ifndef NDEBUG
         assert( local_serialization.is_consistent(tree) == serialization.is_consistent(tree) ); 
         if( local_serialization.is_consistent(tree)  ) {
@@ -192,8 +194,12 @@ namespace CoDyCo {
             std::cout << "TreeGraph constructor: using default serialization " << std::endl;
         }
         #endif
-        if(!local_serialization.is_consistent(tree)) {
+        if( !local_serialization.is_consistent(tree) ) {
             local_serialization = TreeSerialization(tree);
+        }
+        
+        if( !local_partition.is_consistent(tree,local_serialization) ) {
+            local_partition = TreePartition(tree);
         }
         
         nrOfDOFs = tree.getNrOfJoints();
@@ -233,11 +239,15 @@ namespace CoDyCo {
             
             //Add link
             if( i != virtual_root ) {
+                int link_id = local_serialization.getLinkId(current_segment.getName());
+                int part_id = local_partition.getPartIDfromLink(link_id);
                 std::pair<std::string,TreeGraphLink> paar =
                     make_pair(current_segment.getName(), 
                         TreeGraphLink(current_segment.getName(),
                                       current_segment.getInertia(),
-                                      local_serialization.getLinkId(current_segment.getName())));
+                                      link_id,
+                                      part_id
+                                      ));
                         #ifndef NDEBUG
                         //std::cerr << "Added link " << paar.second.link_name <<  " to TreeGraph with link_nr " << paar.second.link_nr << 
                         //         "and mass " << paar.second.I.getMass() << " and cog " << paar.second.I.getCOG()(0) << std::endl;
@@ -245,7 +255,8 @@ namespace CoDyCo {
                 links.insert(make_pair(current_segment.getName(), 
                         TreeGraphLink(current_segment.getName(),
                                       current_segment.getInertia(),
-                                      local_serialization.getLinkId(current_segment.getName()))));
+                                      link_id,
+                                      part_id)));
             }
             
             //Add joint
@@ -253,12 +264,23 @@ namespace CoDyCo {
                 //If the father is the root, dont'add any joint
                 //Add segment joint to TreeGraph
                 const Joint & current_joint = current_segment.getJoint();
-        
-                joints.insert(make_pair(current_joint.getName(), 
-                              TreeGraphJoint(current_joint.getName(),
-                                             current_joint, 
-                                             current_joint.pose(0).Inverse()*current_segment.getFrameToTip(), /* Complicated way to do a simple thing: get f_tip attribute of the Segment */
-                                             local_serialization.getJointId(current_joint.getName()))));
+                
+                if( current_joint.getType() == Joint::None ) {
+                    joints.insert(make_pair(current_joint.getName(), 
+                                 TreeGraphJoint(current_joint.getName(),
+                                                current_joint, 
+                                                current_joint.pose(0).Inverse()*current_segment.getFrameToTip())));
+                } else {
+                    int dof_id = local_serialization.getJointId(current_joint.getName());
+                    int dof_part_ID = local_partition.getPartIDfromDOF(dof_id);
+            
+                    joints.insert(make_pair(current_joint.getName(), 
+                                TreeGraphJoint(current_joint.getName(),
+                                                current_joint, 
+                                                current_joint.pose(0).Inverse()*current_segment.getFrameToTip(), /* Complicated way to do a simple thing: get f_tip attribute of the Segment */
+                                                dof_id,
+                                                dof_part_ID)));
+                }
             }
         }
         
@@ -473,7 +495,7 @@ namespace CoDyCo {
     std::string TreeGraph::toString() const
     {
         std::stringstream ss;
-        ss << "TreeGraph " << tree_name << " origina_root " << original_root << " DOFs " <<  nrOfDOFs << " nrOfLinks " << nrOfLinks << std::endl;
+        ss << "TreeGraph " << tree_name << " original_root " << original_root << " DOFs " <<  nrOfDOFs << " nrOfLinks " << nrOfLinks << std::endl;
         ss << "Links: " << std::endl;
         for(LinkMap::const_iterator link_it = links.begin(); link_it != links.end(); link_it++) {
             ss << link_it->second.toString() << std::endl;

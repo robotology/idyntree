@@ -21,6 +21,7 @@
 #include <map>
 
 #include "kdl_codyco/treeserialization.hpp"
+#include "kdl_codyco/treepartition.hpp"
 
 namespace KDL
 {
@@ -49,7 +50,7 @@ namespace CoDyCo
     class TreeGraphLink
     {
     private:
-        TreeGraphLink(const std::string& name): link_name(name), link_nr(0) {};
+        TreeGraphLink(const std::string& name): link_name(name), link_nr(0), body_part_nr(-1) {};
         int globalIterator2localIndex(LinkMap::const_iterator link_iterator) const;
         
     public:
@@ -62,7 +63,7 @@ namespace CoDyCo
         std::vector< bool > is_this_parent;
         
         
-        TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr): link_name(name), I(Inertia), link_nr(nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { };
+        TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr, const int part_nr = -1): link_name(name), I(Inertia), link_nr(nr), body_part_nr(part_nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { };
         ~TreeGraphLink() {};
         
         /**
@@ -153,7 +154,7 @@ namespace CoDyCo
     class TreeGraphJoint
     {
     private:
-        TreeGraphJoint(const std::string& name):  joint_name(name), q_nr(0) { q_previous=-1.0; update_buffers(0.0);};
+        TreeGraphJoint(const std::string& name):  joint_name(name), q_nr(-1), body_part(-1) { q_previous=-1.0; update_buffers(0.0);};
     
         mutable Frame relative_pose_parent_child; //\f$ {}^p X_c \f$
         mutable Twist S_child_parent; //\f$ {}^c S_{p,c} \f$
@@ -166,14 +167,14 @@ namespace CoDyCo
         std::string joint_name;
         Joint joint;
         Frame f_tip;
-        unsigned int q_nr;
-        unsigned int body_part;
+        int q_nr;
+        int body_part;
         
         LinkMap::const_iterator parent;
         LinkMap::const_iterator child;
         
-        TreeGraphJoint(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const unsigned int q_nr_in = 0): 
-                               joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in) { q_previous=-1.0; update_buffers(0.0);};
+        TreeGraphJoint(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1 ): 
+                               joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in), body_part(body_part_in) { q_previous=-1.0; update_buffers(0.0);};
         
         ~TreeGraphJoint() {}; 
         
@@ -256,7 +257,7 @@ namespace CoDyCo
          * 
          * \todo solve issue related to non-const TreeGraph
          */
-        TreeGraph(const Tree & tree,const TreeSerialization & serialization=TreeSerialization()); 
+        TreeGraph(const Tree & tree,const TreeSerialization & serialization=TreeSerialization(), const TreePartition & partition=TreePartition()); 
 
         /**
          * Request the total number of joints in the tree.\n

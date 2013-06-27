@@ -14,10 +14,13 @@
 
 namespace KDL {
 namespace CoDyCo {
-    TreePart::TreePart()
+    
+    TreePart::TreePart(): part_id(-1), part_name("TreePartError"), dof_id(0), links_id(0)
     {
-        part_id = -1;
-        part_name = "TreePartError";
+    }
+    
+    TreePart::TreePart(int _part_id, std::string _part_name): part_id(_part_id), part_name(_part_name), dof_id(0), links_id(0)
+    {
     }
     
     TreePart::TreePart(int _part_id, std::string _part_name, std::vector<int> _dof_id, std::vector<int> _links_id): part_id(_part_id), part_name(_part_name), dof_id(_dof_id), links_id(_links_id)
@@ -55,40 +58,143 @@ namespace CoDyCo {
     TreePartition::~TreePartition()
     {
     }
-         
+    
+    TreePartition::TreePartition(const Tree & tree)
+    {
+        int nrOfDOFs = tree.getNrOfJoints();
+        int nrOfLinks = tree.getNrOfSegments();
+        
+        TreePart tree_part(0,"default_part");
+        
+        for(int i=0; i <nrOfDOFs; i++ )
+        {
+            tree_part.addDOF(i);
+        }
+        
+        for(int i=0; i <nrOfLinks; i++ )
+        {
+            tree_part.addLink(i);
+        }
+        
+        addPart(tree_part);
+    }
+
     bool TreePartition::addPart(TreePart & tree_part)
     {
-        if( tree_part.getPartID() != (int)parts.size() ) {
-            return false;
-        }
-        //else
         parts.push_back(tree_part);
         return true;
     }
         
-    TreePart TreePartition::getPart(int id)
+    TreePart TreePartition::getPart(int id) const
     {
-        if( id < 0 || id >= (int)parts.size() ) {
+        int local_index;
+        
+        std::map<int,int>::const_iterator it = ID_map.find(id);
+        
+        if( it == ID_map.end() ) {
             return TreePart();
         }
         
-        return parts[id];
+        local_index = it->second;
+        
+        return parts[local_index];
     }
     
-    TreePart TreePartition::getPart(std::string part_name)
+    TreePart TreePartition::getPart(std::string part_name) const
     {
-        int id;
+        int local_index;
         
-        std::map<std::string,int>::const_iterator it = map_part_id.find(part_name);
+        std::map<std::string,int>::const_iterator it = name_map.find(part_name);
         
-        if( it == map_part_id.end() ) {
+        if( it == name_map.end() ) {
             return TreePart();
         }
         
-        id = it->second;
+        local_index = it->second;
         
-        return getPart(id);
+        return parts[local_index];
     }
+    
+    int TreePartition::getPartIDfromLink(int link_id) const
+    {
+        for(int i=0; i < (int)parts.size(); i++ ) {
+            for( int j=0; j < parts[i].getNrOfLinks(); j++ ) {
+                if( parts[i].getGlobalLinkIndex(j) == link_id ) {
+                    return parts[i].getPartID();
+                }
+            }
+        }
+        return -1;
+    }
+    
+    int TreePartition::getPartIDfromDOF(int dof_id) const
+    {
+        for(int i=0; i < (int)parts.size(); i++ ) {
+            for( int j=0; j < parts[i].getNrOfDOFs(); j++ ) {
+                if( parts[i].getGlobalDOFIndex(j) == dof_id ) {
+                    return parts[i].getPartID();
+                }
+            }
+        }
+        return -1;
+    }
+
+    int TreePartition::getGlobalLinkIndex(int part_ID, int local_link_index) const
+    {    
+        int local_index;
+        
+        std::map<int,int>::const_iterator it = ID_map.find(part_ID);
+        
+        if( it == ID_map.end() ) {
+            return -1;
+        }
+        
+        local_index = it->second;
+        
+        if( local_link_index >= parts[local_index].getNrOfLinks() || local_link_index < 0 ) return -1;
+        
+        return parts[local_index].getGlobalLinkIndex(local_link_index);
+    }
+        
+    int TreePartition::getGlobalDOFIndex(int part_ID, int local_DOF_index) const
+    {
+        int local_index;
+        
+        std::map<int,int>::const_iterator it = ID_map.find(part_ID);
+        
+        if( it == ID_map.end() ) {
+            return -1;
+        }
+        
+        local_index = it->second;
+        
+        return parts[local_index].getGlobalDOFIndex(local_DOF_index);
+    }
+        
+    int TreePartition::getLocalLinkIndex(int global_link_index) const
+    {
+        for(int i=0; i < (int)parts.size(); i++ ) {
+            for( int j=0; j < parts[i].getNrOfLinks(); j++ ) {
+                if( parts[i].getGlobalLinkIndex(j) == global_link_index ) {
+                    return j;
+                }
+            }
+        }
+        return -1;
+    }
+        
+    int TreePartition::getLocalDOFIndex(int global_dof_index) const
+    {
+        for(int i=0; i < (int)parts.size(); i++ ) {
+            for( int j=0; j < parts[i].getNrOfDOFs(); j++ ) {
+                if( parts[i].getGlobalDOFIndex(j) == global_dof_index) {
+                    return j;
+                }
+            }
+        }
+        return -1;
+    }
+    
          
     /**
     * Check if the TreePartition is a valid serialization for the 
@@ -108,7 +214,6 @@ namespace CoDyCo {
         
         for(int i=0; i < (int)parts.size(); i++ ) {
             TreePart part = parts[i];
-            if( part.getPartID() != i ) return false;
             if( part.getNrOfLinks() <= 0 ) return false;
             total_links +=  part.getNrOfLinks();
         }

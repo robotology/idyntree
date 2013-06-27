@@ -25,18 +25,21 @@ namespace CoDyCo
 	class TreeCOMSolver 
 	{
 		public:
-            explicit TreeCOMSolver(const Tree& tree,TreeSerialization serialization=TreeSerialization());
+            explicit TreeCOMSolver(const Tree& tree,TreeSerialization serialization=TreeSerialization(),TreePartition partition=TreePartition());
 
             virtual ~TreeCOMSolver();
             
 			/** 
 			 * Calculate the tree COM with respect to the base frame of reference
 			 * 
-			 * @param q input joint positions
+			 * @param q_in input joint positions
+             * 
+             * @param p_out COM in the base link reference frame
+             * @param the id of the part for which the COM has to be calculated, -1 for all the body
              * 
 			 * @return if < 0 something went wrong
 			 */
-            int JntToCOM(const JntArray& q_in, Vector& p_out);
+            int JntToCOM(const JntArray& q_in, Vector& p_out, const int part_id=-1);
         
         private:
             const TreeGraph tree_graph;

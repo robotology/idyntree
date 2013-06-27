@@ -11,7 +11,7 @@
 namespace KDL {
 namespace CoDyCo {
     
-    TreeCOMSolver::TreeCOMSolver(const Tree& tree_in, TreeSerialization serialization_in): tree_graph(tree_in,serialization_in)
+    TreeCOMSolver::TreeCOMSolver(const Tree& tree_in, TreeSerialization serialization_in, TreePartition partition_in): tree_graph(tree_in,serialization_in,partition_in)
     {
         subtree_COM.resize(tree_graph.getNrOfLinks());
         subtree_mass.resize(tree_graph.getNrOfLinks());
@@ -29,7 +29,7 @@ namespace CoDyCo {
     TreeCOMSolver::~TreeCOMSolver() {
     }
     
-    int TreeCOMSolver::JntToCOM(const JntArray& q_in, Vector& p_out) {
+    int TreeCOMSolver::JntToCOM(const JntArray& q_in, Vector& p_out, const int part_id) {
         //First we check all the sizes:
         if (q_in.rows() != tree_graph.getNrOfDOFs()) {
             return -1;
@@ -47,8 +47,14 @@ namespace CoDyCo {
             //std::cerr << "Traversal size " << traversal.order.size() << std::endl;
             //std::cerr << "TreeCOMSolver: considering link " << link->second.link_name << " " << link->second.link_nr << std::endl;
             #endif
-            subtree_COM[link->second.link_nr] = link->second.I.getCOG();
-            subtree_mass[link->second.link_nr] = link->second.I.getMass();
+            //if all part is considered, or this link belong to the considered part
+            if( part_id < 0 || part_id == (int)link->second.body_part_nr ) {
+                subtree_COM[link->second.link_nr] = link->second.I.getCOG();
+                subtree_mass[link->second.link_nr] = link->second.I.getMass();
+            } else {
+                subtree_COM[link->second.link_nr] = Vector::Zero();
+                subtree_mass[link->second.link_nr] = 0.0;
+            }
             
             for(int j = 0; j < (int)link->second.getNrOfAdjacentLinks(); j++ ) {
                 LinkMap::const_iterator next_link = link->second.adjacent_link[j];
@@ -69,11 +75,16 @@ namespace CoDyCo {
                     std::cout << (link->second.pose(j,joint_position)) << std::endl;
                     #endif
                     
-                    subtree_COM[index] = (subtree_mass[index]*subtree_COM[index] +
-                                         subtree_mass[s]*((link->second.pose(j,joint_position)).Inverse()*subtree_COM[s]))
-                                         /
-                                         (subtree_mass[index]+subtree_mass[s]);
-                    subtree_mass[index] = subtree_mass[index] + subtree_mass[s];
+                    //note: very little values of mass could cause numerical problems
+                    //\todo solve
+                    if( subtree_mass[s] > 0.0 ||  subtree_mass[index] > 0.0 ) { 
+                        subtree_COM[index] = (subtree_mass[index]*subtree_COM[index] +
+                                            subtree_mass[s]*((link->second.pose(j,joint_position)).Inverse()*subtree_COM[s]))
+                                            /
+                                            (subtree_mass[index]+subtree_mass[s]);
+                        subtree_mass[index] = subtree_mass[index] + subtree_mass[s];
+                    }   
+                    
                 }
             }
         }
