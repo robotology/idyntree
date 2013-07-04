@@ -93,12 +93,6 @@ namespace CoDyCo {
             currentFrame = link->second.pose(parent_link,
                                              joint_position);
                                              
-             #ifndef NDEBUG
-                //std::cout << "Frame X_"<<link->second.link_nr<<"_"<<traversal.parent[link->second.link_nr]->second.link_nr << std::endl;
-                //std::cout << currentFrame.Inverse() << std::endl;
-                //std::cout << "Frame X_"<<traversal.parent[link->second.link_nr]->second.link_nr<<"_"<<link->second.link_nr << std::endl;
-                //std::cout << currentFrame << std::endl;
-            #endif
             resultFrame = currentFrame*resultFrame;
         }
         
@@ -112,29 +106,8 @@ namespace CoDyCo {
             return -1;
         
         LinkMap::const_iterator it;
-        /*
-		SegmentMap::const_iterator it;
-       
-        SegmentMap segments;
-        segments = tree.getSegments();
-                
-        if(q_in.rows() != tree.getNrOfJoints() )
-    	    	return -1;
-        else if( segmentIndex < 0 || segmentIndex > tree.getNrOfSegments() ) //if the segment name is not found
-         	return -2;
-        else {
-            Frame currentFrame, resultFrame;
-            resultFrame = Frame::Identity();
-            for( int seg = segmentIndex; seg != -1; seg = parent[seg] ) {
-                if(index2segment[seg]->second.segment.getJoint().getType() != Joint::None) {
-                    currentFrame = index2segment[seg]->second.segment.pose(q_in(link2joint[seg]));
-                } else {
-                    currentFrame = index2segment[seg]->second.segment.pose(q_in(0));
-                }
-                resultFrame = currentFrame*resultFrame;
-            }
-            */
-            //p_out = resultFrame;
+        
+        
         return 0;        	
     }
 }
