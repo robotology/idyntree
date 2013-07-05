@@ -36,6 +36,7 @@ namespace CoDyCo {
      * 
      * \warning Basic function designed for use inside the solver, some no
      *          error checking on input/output parameters is done
+     * 
      */
     int rneaDynamicLoop(const TreeGraph & tree_graph,
                          const JntArray &q, 

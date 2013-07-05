@@ -19,6 +19,7 @@
 #include "kdl_codyco/treefksolverpos_iterative.hpp"
 #include <iostream>
 #include <kdl/frames_io.hpp>
+#include "kdl_codyco/position_loops.hpp"
 
 namespace KDL {
 namespace CoDyCo {
@@ -50,8 +51,12 @@ namespace CoDyCo {
     int TreeFkSolverPos_iterative::setBaseLink(const std::string & base_link)
     {
         assert(tree_graph.check_consistency(traversal) == 0);
+        
+        //Compute traversal using the new specified base as root
         int ret = tree_graph.compute_traversal(traversal,base_link);
+        
         assert(tree_graph.check_consistency(traversal) == 0);
+        
         if( ret != 0 ) {
             //If error, restore default state
             tree_graph.compute_traversal(traversal);
@@ -64,51 +69,30 @@ namespace CoDyCo {
 
     int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, std::string segmentName)
     {
+        LinkMap::const_iterator it;
+        it = tree_graph.getLink(segmentName);
+        
+        if( it == tree_graph.getInvalidLinkIterator() ) 
+            return -2;
+            
+        return JntToCart(q_in,p_out,it->link_nr);
+    }
+
+    int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, int segmentIndex)
+    {
         assert(tree_graph.check_consistency(traversal) == 0);
         
         if( q_in.rows() != tree_graph.getNrOfDOFs() )
             return -1;
             
         LinkMap::const_iterator it;
-        it = tree_graph.getLink(segmentName);
+        it = tree_graph.getLink(segmentIndex);
         
         if( it == tree_graph.getInvalidLinkIterator() ) 
             return -2;
         
-        Frame currentFrame, resultFrame;
-        resultFrame = Frame::Identity();
-        
-        for(LinkMap::const_iterator link=it; link != traversal.order[0]; link = traversal.parent[link->link_nr] ) {
-            LinkMap::const_iterator parent_link = traversal.parent[link->link_nr];
-            assert( parent_link != tree_graph.getInvalidLinkIterator() );
-            
-            double joint_position;
-            
-            if( link->getAdjacentJoint(parent_link)->joint.getType() != Joint::None ) {
-                joint_position = q_in((link->getAdjacentJoint(parent_link))->q_nr);
-            } else {
-                joint_position =0;
-            }
-            
-            currentFrame = link->pose(parent_link,
-                                             joint_position);
-                                             
-            resultFrame = currentFrame*resultFrame;
-        }
-        
-        p_out = resultFrame;
-        return 0;
-    }
-
-    int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, int segmentIndex)
-    {
-        if( q_in.rows() != tree_graph.getNrOfDOFs() )
-            return -1;
-        
-        LinkMap::const_iterator it;
-        
-        
-        return 0;        	
+        getFrameLoop(tree_graph,q_in,traversal,traversal.order[0]->link_nr,segmentIndex,p_out);
+        return 0;    	
     }
 }
     
