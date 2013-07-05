@@ -78,19 +78,19 @@ namespace CoDyCo {
         Frame currentFrame, resultFrame;
         resultFrame = Frame::Identity();
         
-        for(LinkMap::const_iterator link=it; link != traversal.order[0]; link = traversal.parent[link->second.link_nr] ) {
-            LinkMap::const_iterator parent_link = traversal.parent[link->second.link_nr];
+        for(LinkMap::const_iterator link=it; link != traversal.order[0]; link = traversal.parent[link->link_nr] ) {
+            LinkMap::const_iterator parent_link = traversal.parent[link->link_nr];
             assert( parent_link != tree_graph.getInvalidLinkIterator() );
             
             double joint_position;
             
-            if( link->second.getAdjacentJoint(parent_link)->second.joint.getType() != Joint::None ) {
-                joint_position = q_in((link->second.getAdjacentJoint(parent_link))->second.q_nr);
+            if( link->getAdjacentJoint(parent_link)->joint.getType() != Joint::None ) {
+                joint_position = q_in((link->getAdjacentJoint(parent_link))->q_nr);
             } else {
                 joint_position =0;
             }
             
-            currentFrame = link->second.pose(parent_link,
+            currentFrame = link->pose(parent_link,
                                              joint_position);
                                              
             resultFrame = currentFrame*resultFrame;

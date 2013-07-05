@@ -29,15 +29,20 @@ namespace CoDyCo
 {
     //Forward declaration
     class TreeGraphLink;
-    class TreeGraphJoint;
+    class TreeGraphJunction;
     
     /**
      * \todo substitute this map based structure with vector base one
      *       (originally implemented in this way for exploiting similarity
-     *          with KDL::Tree 
+     *          with KDL::Tree - 4 Jul started doing it
      */ 
-    typedef std::map<std::string,TreeGraphLink> LinkMap;
-    typedef std::map<std::string,TreeGraphJoint> JointMap;
+    //typedef std::map<std::string,TreeGraphLink> LinkMap;
+    //typedef std::map<std::string,TreeGraphJunction> JunctionMap;
+    typedef std::vector<TreeGraphLink> LinkMap; /**< Actually a vector, named this way for backward compatibility */
+    typedef std::vector<TreeGraphJunction> JunctionMap;  /**< Actually a vector, named this way for backward compatibility */
+    
+    typedef std::map<std::string,LinkMap::iterator> LinkNameMap;
+    typedef std::map<std::string,JunctionMap::iterator> JunctionNameMap;
     
     struct Traversal {
         std::vector< LinkMap::const_iterator > order;
@@ -58,13 +63,25 @@ namespace CoDyCo
         RigidBodyInertia I;
         unsigned int link_nr;
         unsigned int body_part_nr;
-        std::vector< JointMap::const_iterator >  adjacent_joint;
+        std::vector< JunctionMap::const_iterator >  adjacent_joint;
         std::vector< LinkMap::const_iterator > adjacent_link;
         std::vector< bool > is_this_parent;
         
         
-        TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr, const int part_nr = -1): link_name(name), I(Inertia), link_nr(nr), body_part_nr(part_nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { };
+        TreeGraphLink() {};
+        TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr, const int part_nr = 0): link_name(name), I(Inertia), link_nr(nr), body_part_nr(part_nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { };
         ~TreeGraphLink() {};
+        
+        TreeGraphLink & operator=(TreeGraphLink const &x) { if ( this != &x ) { 
+            link_name = x.link_name; 
+            I = x.I;
+            link_nr = x.link_nr; 
+            body_part_nr = x.body_part_nr; 
+            adjacent_joint = x.adjacent_joint; 
+            adjacent_link = x.adjacent_link; 
+            is_this_parent = x.is_this_parent;} return *this; }
+        
+        std::string getName() const {return link_name;}
         
         /**
          * Get the number of other links connected to this link
@@ -86,7 +103,7 @@ namespace CoDyCo
          * @param q the position of the joint connecting *this link to the adjacent link
          * @return  \f$ {}^a X_t\f$ the pose of this link (\f$t\f$) with respect to the adjacent link (\f$a\f$)
          */
-        Frame pose(int adjacent_index, const double& q) const;
+        Frame & pose(int adjacent_index, const double& q) const;
         
         /**
          * Get the pose of this link with respect to an adjacent link
@@ -95,7 +112,7 @@ namespace CoDyCo
          * @param q the position of the joint connecting *this link to the adjacent link
          * @return  \f$ {}^a X_t\f$ the pose of this link (\f$t\f$) with respect to the adjacent link (\f$a\f$)
          */
-        Frame pose(LinkMap::const_iterator adjacent_iterator, const double& q) const;
+        Frame & pose(LinkMap::const_iterator adjacent_iterator, const double& q) const;
         
         /**
          * Get the motion subspace S of the joint connecting this link to an adjacent link
@@ -109,7 +126,7 @@ namespace CoDyCo
          *          It is defined such that:
          *          \f$ {}^a v_a = {}^a v_t + {}^a S_{t,a} \dot{q}\f$ 
          */
-        TwistSubspace S(int adjacent_index, const double& q) const;
+        TwistSubspace & S(int adjacent_index, const double& q) const;
         
         /**
          * Get the motion subspace S of the joint connecting this link to an adjacent link
@@ -123,7 +140,7 @@ namespace CoDyCo
          *          It is defined such that:
          *          \f$ {}^a v_a = {}^a v_t + {}^a S_{t,a} \dot{q}\f$ 
          */
-        TwistSubspace S(LinkMap::const_iterator adjacent_iterator, const double& q) const;
+        TwistSubspace & S(LinkMap::const_iterator adjacent_iterator, const double& q) const;
         
         /**
          * Joint velocity, expressed in the adjacent link reference frame
@@ -138,8 +155,8 @@ namespace CoDyCo
         Twist vj(LinkMap::const_iterator adjacent_iterator, const double& q,const double& qdot) const;
         //cj for the type of implemented joint is always 0
         
-        JointMap::const_iterator getAdjacentJoint(int adjacent_index) const;
-        JointMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const;
+        JunctionMap::const_iterator getAdjacentJoint(int adjacent_index) const;
+        JunctionMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const;
         
         std::string toString() const;
 
@@ -151,12 +168,13 @@ namespace CoDyCo
      * in the TreeGraph 
      * 
      */
-    class TreeGraphJoint
+    class TreeGraphJunction
     {
     private:
-        TreeGraphJoint(const std::string& name):  joint_name(name), q_nr(-1), body_part(-1) { q_previous=-1.0; update_buffers(0.0);};
+        TreeGraphJunction(const std::string& name):  joint_name(name), q_nr(-1), body_part(-1) { q_previous=-1.0; update_buffers(0.0);};
     
         mutable Frame relative_pose_parent_child; //\f$ {}^p X_c \f$
+        mutable Frame relative_pose_child_parent;
         mutable Twist S_child_parent; //\f$ {}^c S_{p,c} \f$
         mutable Twist S_parent_child; //\f$ {}^p S_{c,p} \f$
         mutable double q_previous;
@@ -173,10 +191,13 @@ namespace CoDyCo
         LinkMap::const_iterator parent;
         LinkMap::const_iterator child;
         
-        TreeGraphJoint(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1 ): 
+        TreeGraphJunction() {};
+        TreeGraphJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1 ): 
                                joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in), body_part(body_part_in) { q_previous=-1.0; update_buffers(0.0);};
         
-        ~TreeGraphJoint() {}; 
+        ~TreeGraphJunction() {}; 
+        
+        std::string getName() const { return joint_name; }
         
         /**
          * Get the pose of one link with respect to the other link
@@ -185,7 +206,7 @@ namespace CoDyCo
          * @return  \f$ {}^p X_c\f$ the pose of the child link (\f$c\f$) with respect to the parent link (\f$p\f$) if inverse is false
          *          \f$ {}^c X_p\f$ the pose of the parent link (\f$p\f$) with respect to the child link (\f$c\f$) if inverse is true
          */
-        Frame pose(const double& q, const bool inverse) const;
+        Frame & pose(const double& q, const bool inverse) const;
         
         /**
          * Get the motion subspace of the joint
@@ -193,7 +214,7 @@ namespace CoDyCo
          * @return \f$ {}^p S_{c,p} \f$ the motion subspace of the joint such that \f$ {}^p v_p = {}^p v_c + {}^p S_{c,p} \dot{q} \f$ if inverse is false
          *         \f$ {}^c S_{p,c} \f$ the motion subspace of the joint such that \f$ {}^c v_c = {}^c v_p + {}^c S_{p,c} \dot{q} \f$ if inverse is true
          */
-        Twist S(const double& q, bool inverse) const;
+        Twist & S(const double& q, bool inverse) const;
         
         /**
          * Joint velocity, expressed in the adjacent link reference frame
@@ -215,7 +236,11 @@ namespace CoDyCo
     {
     private:
         LinkMap links;
-        JointMap joints;
+        JunctionMap junctions;
+        
+        LinkNameMap links_names;
+        JunctionNameMap junctions_names;
+        
         int nrOfDOFs;
         int nrOfLinks;
         std::string tree_name;
@@ -229,12 +254,12 @@ namespace CoDyCo
         /**
          * Private version of getJoint, returning non-const iterator
          */
-        JointMap::iterator getJoint(const std::string& name, bool dummy);
+        JunctionMap::iterator getJunction(const std::string& name, bool dummy);
         
 
     public:
         LinkMap::const_iterator getInvalidLinkIterator() const{ return links.end(); }
-        JointMap::const_iterator getInvalidJointIterator() const { return joints.end(); }
+        JunctionMap::const_iterator getInvalidJunctionIterator() const { return junctions.end(); }
         
         /**
          * 
@@ -264,7 +289,7 @@ namespace CoDyCo
          *
          * @return total nr of joints
          */
-        unsigned int getNrOfJoints() const { return nrOfLinks-1; };
+        unsigned int getNrOfJunctions() const { return nrOfLinks-1; };
 
         /**
          * Request the total number of degrees of freedom in the tree.\n
@@ -282,8 +307,8 @@ namespace CoDyCo
         LinkMap::const_iterator getLink(const std::string& name) const;
         //LinkMap::const_iterator getLink(const int index);
         
-        JointMap::const_iterator getJoint(const std::string& name) const;
-        //JointMap::const_iterator getJoint(const int index); 
+        JunctionMap::const_iterator getJunction(const std::string& name) const;
+        //JunctionMap::const_iterator getJoint(const int index); 
 
         /**
          * Visit the TreeGraph with a Depth-first traversal

@@ -15,16 +15,36 @@
 
 namespace KDL {
     
-    void TreeSerialization::addDFSrecursive(SegmentMap::const_iterator current_el,int & link_cnt)
+    void TreeSerialization::addDFSrecursive(SegmentMap::const_iterator current_el, int & link_cnt, int & fixed_joints_cnt )
     {
         if( current_el->second.segment.getJoint().getType() != Joint::None ) {
-            joints[current_el->second.q_nr] = current_el->second.segment.getJoint().getName();
+            dofs[current_el->second.q_nr] = current_el->second.segment.getJoint().getName();
+            junctions[current_el->second.q_nr] = current_el->second.segment.getJoint().getName();
+        } else {
+            assert((int)junctions.size() == getNrOfJunctions());
+            assert(getNrOfDOFs()+fixed_joints_cnt < (int)junctions.size());
+            junctions[getNrOfDOFs()+fixed_joints_cnt] = current_el->second.segment.getJoint().getName();
+            fixed_joints_cnt++;
         }
+        
         links[link_cnt] = current_el->first;
         link_cnt++;
                 
         for( unsigned int i=0; i < current_el->second.children.size(); i++ ) {
-            addDFSrecursive(current_el->second.children[i],link_cnt);
+            addDFSrecursive(current_el->second.children[i],link_cnt,fixed_joints_cnt);
+        }
+        
+    }
+    
+    void TreeSerialization::addDFSrecursive_only_fixed(SegmentMap::const_iterator current_el, int & fixed_joints_cnt )
+    {
+        if( current_el->second.segment.getJoint().getType() == Joint::None ) {
+            junctions[getNrOfDOFs()+fixed_joints_cnt] = current_el->second.segment.getJoint().getName();
+            fixed_joints_cnt++;
+        }
+        
+        for( unsigned int i=0; i < current_el->second.children.size(); i++ ) {
+            addDFSrecursive_only_fixed(current_el->second.children[i],fixed_joints_cnt);
         }
         
     }
@@ -32,7 +52,8 @@ namespace KDL {
     TreeSerialization::TreeSerialization() 
     {
         links = std::vector<std::string>(0);
-        joints = std::vector<std::string>(0);
+        junctions = std::vector<std::string>(0);
+        dofs = std::vector<std::string>(0);
     }
 
     TreeSerialization::~TreeSerialization() {}
@@ -40,44 +61,81 @@ namespace KDL {
     TreeSerialization::TreeSerialization(const Tree & tree) 
     {
         links = std::vector<std::string>(tree.getNrOfSegments());
-        joints = std::vector<std::string>(tree.getNrOfJoints());
+        dofs = std::vector<std::string>(tree.getNrOfJoints());
+        junctions = std::vector<std::string>(tree.getNrOfSegments()-1);
         
         
-        SegmentMap::const_iterator root;
+        SegmentMap::const_iterator root, real_root;
         SegmentMap::const_iterator child;
         
         int link_cnt = 0;
         
+        int fixed_joints_cnt = 0;
+        
         root = tree.getRootSegment();
-        for( unsigned int i=0; i < root->second.children.size(); i++ ) {
-            addDFSrecursive(root->second.children[i],link_cnt);
+        //Only trees with a proper root are permitted
+        assert( root->second.children.size() == 1);
+        
+        real_root = root->second.children[0];
+        //Add real_root link without including fake joint
+        links[link_cnt] = real_root->first;
+        
+        link_cnt++;
+        
+        for( unsigned int i=0; i < real_root->second.children.size(); i++ ) {
+            addDFSrecursive(real_root->second.children[i],link_cnt,fixed_joints_cnt);
         }
         
         assert(this->is_consistent(tree));
     }
         
-    TreeSerialization::TreeSerialization(std::vector<std::string> & links_in, std::vector<std::string> & joints_in) 
+    TreeSerialization::TreeSerialization(const Tree & tree, std::vector<std::string> & links_in, std::vector<std::string> & joints_in) 
     {
-
+        assert(links_in.size() == tree.getNrOfSegments());
+        assert(joints_in.size() == tree.getNrOfSegments()-1 || joints_in.size() == tree.getNrOfJoints() );
+        
         links = links_in;
-        joints = joints_in;
+        
+        if( joints_in.size() == tree.getNrOfSegments()-1 ) {
+            junctions = joints_in;
+            
+            dofs = junctions;
+            
+            dofs.resize(tree.getNrOfJoints());
+        } else {
+            dofs = joints_in;
+            junctions = dofs;
+            junctions.resize(tree.getNrOfSegments()-1);
+            
+            int fixed_joints_cnt = 0;
+        
+            SegmentMap::const_iterator root = tree.getRootSegment();
+            for( unsigned int i=0; i < root->second.children.size(); i++ ) {
+                addDFSrecursive_only_fixed(root->second.children[i],fixed_joints_cnt);
+            }
+        
+        }
+        
+        assert(this->is_consistent(tree));
     }
     
     
     TreeSerialization::TreeSerialization(const TreeSerialization& x)
     {        
         links = std::vector<std::string>(0);
-        joints = std::vector<std::string>(0);
+        junctions = std::vector<std::string>(0);
+        dofs = std::vector<std::string>(0);
         links = x.links;
-        joints = x.joints;
+        junctions = x.junctions;
+        dofs = x.dofs;
     }
     
-    int TreeSerialization::getJointId(std::string joint_name) const
+    int TreeSerialization::getJunctionId(std::string junction_name) const
     {
         std::vector<std::string>::const_iterator it;
-        it = std::find(joints.begin(),joints.end(),joint_name);
-        if( it != joints.end() ) {
-            return it - joints.begin();
+        it = std::find(junctions.begin(),junctions.end(),junction_name);
+        if( it != junctions.end() ) {
+            return it - junctions.begin();
         } else {
             return -1;
         }
@@ -94,9 +152,25 @@ namespace KDL {
         }
     }
     
-    std::string TreeSerialization::getJointName(int joint_id) const
+    int TreeSerialization::getDOFId(std::string dof_name) const
     {
-        return joints[joint_id];
+        std::vector<std::string>::const_iterator it;
+        it = std::find(dofs.begin(),dofs.end(),dof_name);
+        if( it != dofs.end() ) {
+            return it - dofs.begin();
+        } else {
+            return -1;
+        }
+    }
+    
+    std::string TreeSerialization::getDOFName(int dof_id) const
+    {
+        return dofs[dof_id];
+    }
+    
+    std::string TreeSerialization::getJunctionName(int junction_id) const
+    {
+        return junctions[junction_id];
     }
     std::string TreeSerialization::getLinkName(int link_id) const
     {
@@ -107,7 +181,7 @@ namespace KDL {
     {
         SegmentMap::const_iterator seg;
         
-        if( tree.getNrOfJoints() != joints.size() || tree.getNrOfSegments() !=  links.size() ) {
+        if( tree.getNrOfJoints() != dofs.size() || tree.getNrOfSegments() !=  links.size() ) {
             return false;
         }
         
@@ -124,7 +198,7 @@ namespace KDL {
         
         for(SegmentMap::const_iterator it=seg_map.begin(); it != seg_map.end(); it++) {
             if( it->second.segment.getJoint().getType() != Joint::None ) {
-                if( getJointId( it->second.segment.getJoint().getName()) == -1 ) {
+                if( getJunctionId( it->second.segment.getJoint().getName()) == -1 ) {
                     return false;
                 }
             }
@@ -134,14 +208,19 @@ namespace KDL {
         
     }
             
-    int TreeSerialization::getNrOfSegments() const
+    int TreeSerialization::getNrOfLinks() const
     {
         return links.size();
     }
         
-    int TreeSerialization::getNrOfJoints() const
+    int TreeSerialization::getNrOfJunctions() const
     {
-        return joints.size();
+        return junctions.size();
+    }
+    
+    int TreeSerialization::getNrOfDOFs() const
+    {
+        return dofs.size();
     }
     
     bool TreeSerialization::serialize(const Tree & tree,
@@ -184,7 +263,7 @@ namespace KDL {
                 }
                 
                 if( i->second.segment.getJoint().getType() != Joint::None ) {
-                    link2joint[i_index] = this->getJointId(i->second.segment.getJoint().getName());
+                    link2joint[i_index] = this->getDOFId(i->second.segment.getJoint().getName());
                 }
                 
                 if( i->second.parent == root ) {
@@ -232,13 +311,17 @@ namespace KDL {
     std::string TreeSerialization::toString()
     {
         std::stringstream ss;
-        ss << "Link serialization:" << std::endl;
+        ss << "Links serialization:" << std::endl;
         for( int i = 0; i < (int)links.size(); i++ ) {
             ss <<  i << "\t: " << links[i] << std::endl;
         }
-        ss << "Joint serialization:" << std::endl;
-        for( int i = 0; i < (int)joints.size(); i++ ) {
-            ss << i << "\t: " << joints[i] << std::endl;
+        ss << "Junctions serialization:" << std::endl;
+        for( int i = 0; i < (int)junctions.size(); i++ ) {
+            ss << i << "\t: " << junctions[i] << std::endl;
+        }
+        ss << "DOFs serialization:" << std::endl;
+        for( int i = 0; i < (int)dofs.size(); i++ ) {
+            ss << i << "\t: " << dofs[i] << std::endl;
         }
         return ss.str();
     }

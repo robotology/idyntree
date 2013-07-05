@@ -48,38 +48,38 @@ namespace CoDyCo {
             //std::cerr << "TreeCOMSolver: considering link " << link->second.link_name << " " << link->second.link_nr << std::endl;
             #endif
             //if all part is considered, or this link belong to the considered part
-            if( part_id < 0 || part_id == (int)link->second.body_part_nr ) {
-                subtree_COM[link->second.link_nr] = link->second.I.getCOG();
-                subtree_mass[link->second.link_nr] = link->second.I.getMass();
+            if( part_id < 0 || part_id == (int)link->body_part_nr ) {
+                subtree_COM[link->link_nr] = link->I.getCOG();
+                subtree_mass[link->link_nr] = link->I.getMass();
             } else {
-                subtree_COM[link->second.link_nr] = Vector::Zero();
-                subtree_mass[link->second.link_nr] = 0.0;
+                subtree_COM[link->link_nr] = Vector::Zero();
+                subtree_mass[link->link_nr] = 0.0;
             }
             
-            for(int j = 0; j < (int)link->second.getNrOfAdjacentLinks(); j++ ) {
-                LinkMap::const_iterator next_link = link->second.adjacent_link[j];
-                if( next_link != traversal.parent[link->second.link_nr] ) {
-                    int index = link->second.link_nr;
-                    int s = next_link->second.link_nr;
+            for(int j = 0; j < (int)link->getNrOfAdjacentLinks(); j++ ) {
+                LinkMap::const_iterator next_link = link->adjacent_link[j];
+                if( next_link != traversal.parent[link->link_nr] ) {
+                    int index = link->link_nr;
+                    int s = next_link->link_nr;
                     double joint_position;
-                    if(link->second.adjacent_joint[j]->second.joint.getType() != Joint::None) {
-                        joint_position = q_in(link->second.adjacent_joint[j]->second.q_nr);
+                    if(link->adjacent_joint[j]->joint.getType() != Joint::None) {
+                        joint_position = q_in(link->adjacent_joint[j]->q_nr);
                     } else {
                         joint_position = 0;
                     }    
                     
                     #ifndef NDEBUG
                     std::cout << "Frame X_"<< index <<"_"<<s << std::endl;
-                    std::cout << (link->second.pose(j,joint_position)).Inverse() << std::endl;
+                    std::cout << (link->pose(j,joint_position)).Inverse() << std::endl;
                         std::cout << "Frame X_"<< s<<"_"<<index << std::endl;
-                    std::cout << (link->second.pose(j,joint_position)) << std::endl;
+                    std::cout << (link->pose(j,joint_position)) << std::endl;
                     #endif
                     
                     //note: very little values of mass could cause numerical problems
                     //\todo solve
                     if( subtree_mass[s] > 0.0 ||  subtree_mass[index] > 0.0 ) { 
                         subtree_COM[index] = (subtree_mass[index]*subtree_COM[index] +
-                                            subtree_mass[s]*((link->second.pose(j,joint_position)).Inverse()*subtree_COM[s]))
+                                            subtree_mass[s]*((link->pose(j,joint_position)).Inverse()*subtree_COM[s]))
                                             /
                                             (subtree_mass[index]+subtree_mass[s]);
                         subtree_mass[index] = subtree_mass[index] + subtree_mass[s];

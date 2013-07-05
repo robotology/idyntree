@@ -30,6 +30,7 @@
 #include "kdl_codyco/treeidsolver_recursive_newton_euler.hpp"
 #include "kdl/frames_io.hpp"
 #include <kdl_codyco/utils.hpp>
+#include <kdl_codyco/rnea_loops.hpp>
 
 #include <deque>
 using namespace std;

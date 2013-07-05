@@ -15,10 +15,14 @@ namespace KDL{
     const int FIXED_JOINT = -1;
     
     /**
-     * Class for describing a Tree serialization (i.e. : a mapping between
-     * the joints of the tree and 0 .. nrOfJoints-1 and 0 .. nrOfSegments-1)  
-     * Please note that the joints "names" are actually the name of the segments
-     * relative to the joint, so (in URDF terms) the relative link name.
+     * Class for describing a Tree serialization
+     * (i.e. a mapping between:
+     *      * Links and 0,1,...,nrOfLinks-1
+     *      * DOFs and 0,1,...,nrOfJoints-1
+     *      * Junction and 0,1,...,nrOfLinks-2 )
+     * 
+     * Please note that currently for simplicity is assumed that the Junctions with a DOF
+     * have the same id of their DOF (then all the fixed junctions have higher IDs)
      * 
      * Assuming (as currently in KDL) that joints can have only 0 (fixed) or 1 dof.
      * 
@@ -32,22 +36,35 @@ namespace KDL{
      */
     class TreeSerialization {
     private:
-        void addDFSrecursive(SegmentMap::const_iterator current_el,int & link_cnt);
+        void addDFSrecursive(SegmentMap::const_iterator current_el,int & link_cnt, int & fixed_joint_cnt);
+
+        void addDFSrecursive_only_fixed(SegmentMap::const_iterator current_el, int & fixed_joint_cnt);
 
         
     public:
         std::vector<std::string> links;
-        std::vector<std::string> joints;
+        std::vector<std::string> junctions;
+        std::vector<std::string> dofs;
     
         TreeSerialization();
+        
         /**
          * Constructor that builds the default serialization for KDL::Tree
-         * For joints the one used to build the q_nr attribute in KDL::TreeElement
-         * For links a DFS visit of the KDL tree is done 
+         * For DOFs the one used to build the q_nr attribute in KDL::TreeElement
+         * For links a DFS visit of the KDL tree is done
+         * For joints the 1DOF joints have the same ID of their DOF, otherwise they are assigned a new ID higher then getNrOfDOFs
          */
         TreeSerialization(const Tree & tree);
         
-        TreeSerialization(std::vector<std::string> & links_in, std::vector<std::string> & joints_in);
+        /**
+         * Constructor that build the serialization for KDL::Tree
+         * The link serialization is defined by the passed links_in vector
+         * 
+         * The DOF and joints serialization is defined by the joints_in vector: 
+         * depending on its length it is considered as the vector of DOF or the vector of Junctions
+         * In either cases it remains the constraint that the fixed junction have the higher IDs
+         */
+        TreeSerialization(const Tree & tree, std::vector<std::string> & links_in, std::vector<std::string> & joints_in);
         
         ~TreeSerialization();
         
@@ -56,19 +73,39 @@ namespace KDL{
         /**
          * Not efficient, performs a search
          */
-        int getJointId(std::string joint_name) const;
+        int getJunctionId(std::string joint_name) const;
+        
+        /**
+         * Not efficient, performs a search
+         */
+        int getDOFId(std::string dof_name) const;
         
         /**
          * Not efficient, performs a search
          */
         int getLinkId(std::string link_name) const;
         
-        std::string getJointName(int joint_id) const;
+        std::string getJunctionName(int joint_id) const;
+        
+        std::string getDOFName(int dof_id) const;
+        
         std::string getLinkName(int link_id) const;
         
-        int getNrOfSegments() const;
+        /**
+         * Get the number of Links
+         */
+        int getNrOfLinks() const;
         
-        int getNrOfJoints() const;
+        /**
+         * Get the number of internal degrees of freedom
+         */
+        int getNrOfDOFs() const;
+        
+        /**
+         * Get the number of joints of any DOF (not called getNrOfJoints to 
+         *   avoid confusion with the function of KDL::Tree/KDL::Chain
+         */
+        int getNrOfJunctions() const;
         
         /**
          * Check if the TreeSerialization is a valid serialization for the 
@@ -79,6 +116,10 @@ namespace KDL{
          */
         bool is_consistent(const Tree & tree) const;
         
+        /**
+         * deprecated
+         * 
+         */
         bool serialize(const Tree & tree,
                        std::vector< int> & children_root, //set of children of root
                        std::vector< std::vector<int> > & children, //array of sets of children of each segment

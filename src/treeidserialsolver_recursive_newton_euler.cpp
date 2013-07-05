@@ -73,7 +73,7 @@ namespace CoDyCo{
         int l;
 
         //Sweep from root to leaf
-        for( l = 0; l < recursion_order.size(); l++ ) {
+        for( l = 0; l < (int)recursion_order.size(); l++ ) {
             
             unsigned int curr_index = recursion_order[l];
         
