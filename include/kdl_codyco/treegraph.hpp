@@ -304,11 +304,25 @@ namespace CoDyCo
          */
         unsigned int getNrOfLinks()const {return nrOfLinks;};
         
+        /**
+         * Get a link of the graph by specifyng its name
+         */
         LinkMap::const_iterator getLink(const std::string& name) const;
-        //LinkMap::const_iterator getLink(const int index);
         
+        /**
+         * Get a link of the graph by specifyng its index
+         */
+        LinkMap::const_iterator getLink(const int index) const;
+        
+        /**
+         * Get a junction of the graph by specifyng its name
+         */
         JunctionMap::const_iterator getJunction(const std::string& name) const;
-        //JunctionMap::const_iterator getJoint(const int index); 
+        
+        /**
+         * Get a junction of the graph by specifyng its index
+         */
+        JunctionMap::const_iterator getJunction(const int index) const; 
 
         /**
          * Visit the TreeGraph with a Depth-first traversal

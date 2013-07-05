@@ -182,6 +182,18 @@ namespace CoDyCo {
         return ret_value->second;
     }
     
+    LinkMap::const_iterator TreeGraph::getLink(const int index) const
+    {
+        assert(index >= 0 && index < getNrOfLinks());
+        return links.begin()+index;
+    }
+        
+    JunctionMap::const_iterator TreeGraph::getJunction(const int index) const
+    {
+        assert(index >= 0 && index < getNrOfJunctions());
+        return junctions.begin()+index;
+    }
+    
     JunctionMap::const_iterator TreeGraph::getJunction(const std::string& name) const
     {
         JunctionNameMap::const_iterator ret_value = junctions_names.find(name);
