@@ -11,9 +11,26 @@
 #include <iostream>
 #include <sstream>
 
-
 namespace KDL {
 namespace CoDyCo {
+	/*
+	int TreePart::getLocalPartIndex(const std::string part_name)
+	{ 
+		std::map<std::string,int>::const_iterator it_si = name_map.find(part_name);
+        
+        if( it_si == name_map.end() ) { return -1; }
+        
+        int part_id = it_si->second;
+        
+                
+        std::map<int,int>::const_iterator it_ii = ID_map.find(part_id);
+        
+        if( it_ii == ID_map.end() ) { return -1; }
+        
+        int part_local_index = it_ii->second;
+        
+        return part_local_index;
+	}*/
     
     TreePart::TreePart(): part_id(-1), part_name("TreePartError"), dof_id(0), links_id(0)
     {
@@ -81,7 +98,10 @@ namespace CoDyCo {
 
     bool TreePartition::addPart(TreePart & tree_part)
     {
+		int part_index = parts.size();
         parts.push_back(tree_part);
+        ID_map.insert(std::make_pair(tree_part.getPartID(),part_index));
+        name_map.insert(std::make_pair(tree_part.getPartName(),part_index));
         return true;
     }
         
@@ -197,7 +217,7 @@ namespace CoDyCo {
     
          
     /**
-    * Check if the TreePartition is a valid serialization for the 
+    * Check if the TreePartition is a valid partition for the 
     * given Tree (and optionally the given TreeSerialization ) 
     * 
     */
@@ -220,12 +240,31 @@ namespace CoDyCo {
         
         if( total_links != (int)tree.getNrOfSegments() ) return false;
         
+        if( ID_map.size() != parts.size() ) { return false; }
+        if( name_map.size() != parts.size() ) { return false; }
+
+        
         /**
          * \todo add link/joint id level serialization
          */
         
         return true;
     }
+    
+    const std::vector<int> & TreePartition::getPartLinkIDs(std::string part_name) const
+    {   
+		//\todo error checking
+        TreePart part = getPart(part_name);
+        return part.getLinkIDs();
+	}
+
+    
+    const std::vector<int> & TreePartition::getPartDOFIDs(std::string part_name) const
+    {   
+        TreePart part = getPart(part_name);
+        return part.getDOFIDs();
+	}
+
         
     std::string TreePartition::toString() const
     {

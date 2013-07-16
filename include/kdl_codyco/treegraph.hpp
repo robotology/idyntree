@@ -44,9 +44,12 @@ namespace CoDyCo
     typedef std::map<std::string,LinkMap::iterator> LinkNameMap;
     typedef std::map<std::string,JunctionMap::iterator> JunctionNameMap;
     
-    struct Traversal {
+    class Traversal {
+		public:
         std::vector< LinkMap::const_iterator > order;
         std::vector< LinkMap::const_iterator > parent;
+        Traversal(): order(0), parent(0) {};
+        ~Traversal() {};
     };
     
     //Only supporting 1 dof joints
@@ -55,21 +58,22 @@ namespace CoDyCo
     class TreeGraphLink
     {
     private:
-        TreeGraphLink(const std::string& name): link_name(name), link_nr(0), body_part_nr(-1) {};
+        TreeGraphLink(const std::string& name): link_name(name), link_nr(-1), body_part_nr(-1), body_part_link_nr(-1) {};
         int globalIterator2localIndex(LinkMap::const_iterator link_iterator) const;
         
     public:
         std::string link_name;
         RigidBodyInertia I;
-        unsigned int link_nr;
-        unsigned int body_part_nr;
+        int link_nr;
+        int body_part_nr;
+        int body_part_link_nr;
         std::vector< JunctionMap::const_iterator >  adjacent_joint;
         std::vector< LinkMap::const_iterator > adjacent_link;
-        std::vector< bool > is_this_parent;
+        std::vector< bool > is_this_parent; /**< true if this link is the actual parent (for the KDL::Joint) of the junction, false otherwise */
         
         
         TreeGraphLink() {};
-        TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr, const int part_nr = 0): link_name(name), I(Inertia), link_nr(nr), body_part_nr(part_nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { };
+        TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr, const int part_nr = 0, const int local_link_nr = -1): link_name(name), I(Inertia), link_nr(nr), body_part_nr(part_nr), body_part_link_nr(local_link_nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { if(body_part_link_nr < 0) { body_part_link_nr = link_nr; }  };
         ~TreeGraphLink() {};
         
         TreeGraphLink & operator=(TreeGraphLink const &x) { if ( this != &x ) { 
@@ -77,11 +81,13 @@ namespace CoDyCo
             I = x.I;
             link_nr = x.link_nr; 
             body_part_nr = x.body_part_nr; 
+            body_part_link_nr = x.body_part_link_nr;
             adjacent_joint = x.adjacent_joint; 
             adjacent_link = x.adjacent_link; 
             is_this_parent = x.is_this_parent;} return *this; }
         
         std::string getName() const {return link_name;}
+        RigidBodyInertia getInertia() const {return I;}
         
         /**
          * Get the number of other links connected to this link
@@ -171,12 +177,12 @@ namespace CoDyCo
     class TreeGraphJunction
     {
     private:
-        TreeGraphJunction(const std::string& name):  joint_name(name), q_nr(-1), body_part(-1) { q_previous=-1.0; update_buffers(0.0);};
+        TreeGraphJunction(const std::string& name):  joint_name(name), q_nr(-1), body_part_q_nr(-1), body_part(-1) { q_previous=-1.0; update_buffers(0.0);};
     
-        mutable Frame relative_pose_parent_child; //\f$ {}^p X_c \f$
-        mutable Frame relative_pose_child_parent;
-        mutable Twist S_child_parent; //\f$ {}^c S_{p,c} \f$
-        mutable Twist S_parent_child; //\f$ {}^p S_{c,p} \f$
+        mutable Frame relative_pose_parent_child; /**< \f$ {}^p X_c \f$ */
+        mutable Frame relative_pose_child_parent; /**< \f$ {}^c X_p \f$ */
+        mutable Twist S_child_parent; /**< \f$ {}^c S_{p,c} \f$ */
+        mutable Twist S_parent_child; /**< \f$ {}^p S_{c,p} \f$ */
         mutable double q_previous;
         
         void update_buffers(const double & q) const;
@@ -186,14 +192,15 @@ namespace CoDyCo
         Joint joint;
         Frame f_tip;
         int q_nr;
+        int body_part_q_nr;
         int body_part;
         
         LinkMap::const_iterator parent;
         LinkMap::const_iterator child;
         
         TreeGraphJunction() {};
-        TreeGraphJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1 ): 
-                               joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in), body_part(body_part_in) { q_previous=-1.0; update_buffers(0.0);};
+        TreeGraphJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1, const int body_part_q_nr_in=-1): 
+                               joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in), body_part_q_nr(body_part_q_nr_in), body_part(body_part_in) { q_previous=-1.0; update_buffers(0.0);};
         
         ~TreeGraphJunction() {}; 
         
@@ -246,6 +253,10 @@ namespace CoDyCo
         std::string tree_name;
         std::string original_root;
         
+        std::map<int,std::string> body_part_names; 
+
+        
+        
         /**
          * Private version of getLink, returning non-const iterator
          */
@@ -255,7 +266,12 @@ namespace CoDyCo
          * Private version of getJoint, returning non-const iterator
          */
         JunctionMap::iterator getJunction(const std::string& name, bool dummy);
-        
+            
+       /**
+        * Private helper function for constructor
+        *
+        */
+        void constructor(const Tree & tree, const TreeSerialization & serialization, const TreePartition & partition);
 
     public:
         LinkMap::const_iterator getInvalidLinkIterator() const{ return links.end(); }
@@ -283,6 +299,14 @@ namespace CoDyCo
          * \todo solve issue related to non-const TreeGraph
          */
         TreeGraph(const Tree & tree,const TreeSerialization & serialization=TreeSerialization(), const TreePartition & partition=TreePartition()); 
+
+		/**
+		 * Copy constructor
+		 */
+		TreeGraph(const TreeGraph& in);
+		
+		TreeGraph& operator=(const TreeGraph& in);
+
 
         /**
          * Request the total number of joints in the tree.\n
@@ -339,7 +363,11 @@ namespace CoDyCo
          */
         int compute_traversal(Traversal & traversal, const std::string& base_link="", const bool bf_traversal=false) const;
 
+		Tree getTree(std::string base="") const;
+		
         TreeSerialization getSerialization() const;
+        
+        TreePartition getPartition() const;
         
         int check_consistency() const;
         

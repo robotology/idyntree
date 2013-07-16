@@ -23,6 +23,18 @@ namespace CoDyCo {
      */
     double computeMass(const Tree & tree);
     
+    
+    /**
+     * The position of the Joint with respect to the hook segment is defined with respect
+     * to the frame of reference of the parent. This function is used to get the joint with the polarity
+     * of the segment inverted.
+     * 
+     * \todo check the math in this function
+     * 
+     */
+	int JointInvertPolarity(const KDL::Joint & old_joint, const KDL::Frame & old_f_tip, KDL::Joint & new_joint, KDL::Frame & new_f_tip);
+    
+
 }
 }  
 

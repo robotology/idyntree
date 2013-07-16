@@ -51,18 +51,23 @@ namespace CoDyCo {
             
             int getGlobalLinkIndex(int local_link_index) const { return links_id[local_link_index]; }
             int getGlobalDOFIndex(int local_dof_index) const { return dof_id[local_dof_index]; }
+            
+            const std::vector<int> & getLinkIDs() const { return links_id; }
+			const  std::vector<int> & getDOFIDs() const { return dof_id; }
 
     };
     
     
     /**
      * Class for describing a Tree partition (in the set theory sense)
-     * (i.e. a scomposition of the Tree joints and links in non overlapping 
+     * (i.e. a scomposition of the Tree DOFs and links in non overlapping 
      * sets).
      * 
-     * The ID of a part can be any positive number. A part "induces" a local
-     * joint and link serialization, that is obtained from the global serialization
-     * by elimating the link/joints that do not belong to the part
+     * The ID of a part can be any positive number. A part is composed by 
+     * a (numbered) list of serialized DOFs and a (numbered) list of serialiazed links.
+     * 
+     * To properly initialize a TreePartition, define before the TreePart object
+     * and add them by using the addPart method
      * 
      * \note This class is not optimized, as it is used only in the inizialization
      *       of the solvers.
@@ -79,6 +84,8 @@ namespace CoDyCo {
         //Map from the part ID to the index of the TreePart in vector parts
         std::map<int,int> ID_map;
         
+        int getLocalPartIndex(const std::string part_name);
+        
     public:
         /**
          * Constructor
@@ -88,10 +95,23 @@ namespace CoDyCo {
         TreePartition(const Tree & tree);
         
         /**
-         * Distructor
+         * Destructor
          */
         ~TreePartition();
          
+        int getNrOfParts() const { return parts.size(); } ;
+        
+        /**
+         * Get the part from its local index in this partition 
+         * (the local index is different from the part ID, that can be
+         *  an arbitrary positive number, while the local index 
+         *  is a number between 0 and NrOfParts-1
+         */
+        TreePart getPartFromLocalIndex(int part_index)
+        {
+			assert( part_index >= 0 && part_index < getNrOfParts() );
+			return parts[part_index];
+		}
         
         /**
          * Add a part to a given partition
@@ -112,17 +132,44 @@ namespace CoDyCo {
          */
         TreePart getPart(std::string part_name) const; 
         
+        /**
+         * Get the part ID from the global link ID
+         * @param global_link_index the global ID for the link
+         * 
+         */
         int getPartIDfromLink(int global_link_index) const;
         
-        int getPartIDfromDOF(int global_link_index) const;
+         /**
+         * Get the part ID from the global DOF ID
+         * @param global_link_index the global ID for the degree of freedom
+         * @return the part ID
+         */
+        int getPartIDfromDOF(int global_DOF_index) const;
         
+        /**
+         * Get the global link ID from the body part ID and the local link ID
+         */
         int getGlobalLinkIndex(int part_ID, int local_link_index) const;
         
+        /**
+         * Get the global DOF ID from the couple of body part ID and local DOF ID
+         */
         int getGlobalDOFIndex(int part_ID, int local_DOF_index) const;
         
+        /**
+         * Get the local link ID from the global link ID
+         */
         int getLocalLinkIndex(int global_link_index) const;
         
+        /**
+         * Get the local DOF id from the global dof ID
+         */
         int getLocalDOFIndex(int global_dof_index) const;
+        
+        const std::vector<int> & getPartLinkIDs(std::string part_name) const;
+        
+        const std::vector<int> & getPartDOFIDs(std::string part_name) const;
+
          
         /**
          * Check if the TreePartition is a valid serialization for the 
@@ -131,7 +178,10 @@ namespace CoDyCo {
          */
         bool is_consistent(const Tree & tree ) const;
         bool is_consistent(const Tree & tree, TreeSerialization  tree_serialization) const;
-               
+        
+        /**
+         * Print to a string the TreePartition (for debug purpose)
+         */
         std::string toString() const;
     };
     

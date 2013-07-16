@@ -11,6 +11,7 @@
 #include <kdl/tree.hpp>
 
 namespace KDL{
+namespace CoDyCo{
     
     const int FIXED_JOINT = -1;
     
@@ -134,7 +135,7 @@ namespace KDL{
     
     
 }
-
+}
 
 
 #endif

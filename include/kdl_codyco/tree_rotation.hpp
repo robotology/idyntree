@@ -8,7 +8,7 @@
 #define KDL_CODYCO_TREE_ROTATION_HPP
 
 #include <kdl/tree.hpp>
-
+#include <kdl_codyco/utils.hpp>
 
 namespace KDL { 
 namespace CoDyCo {
@@ -18,11 +18,11 @@ namespace CoDyCo {
 
     bool addParentRecursive(KDL::Tree & new_tree, KDL::SegmentMap::const_iterator old_child, const std::string& dummy_root_name);
 
-
     /**
      * The position of the Joint with respect to the hook segment is defined with respect
      * to the frame of reference of the segment. This function is used to
      * change the reference frame to another one (for example while rotating a tree)
+     * @param Frame H_new_old
      * 
      */
     KDL::Joint JointChangeReference( const KDL::Frame & frame, const KDL::Joint & old_joint);

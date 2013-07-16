@@ -37,6 +37,11 @@ namespace CoDyCo {
                 const Traversal & traversal,
                 const int proximal_link_index,
                 const int distal_link_index);
+                
+	    int getFramesLoop(const TreeGraph & tree_graph,
+					  const JntArray &q, 
+					  const Traversal & traversal,
+					  std::vector<Frame> & X_base);
 }
 }  
 

@@ -54,5 +54,35 @@ namespace CoDyCo {
         getFrameLoop(tree_graph,q,traversal,proximal_link_index,distal_link_index,frame_proximal_distal);
         return frame_proximal_distal;
     }
+    
+    
+    int getFramesLoop(const TreeGraph & tree_graph,
+					  const JntArray &q, 
+					  const Traversal & traversal,
+					  std::vector<Frame> & X_base)
+    {
+          for(int i=0; i < (int)traversal.order.size(); i++) {
+            double joint_pos;
+            LinkMap::const_iterator link_it = traversal.order[i];
+            int link_nmbr = link_it->link_nr; 
+            if( i == 0 ) {
+                assert( traversal.parent[link_nmbr] == tree_graph.getInvalidLinkIterator() );
+                X_base[link_nmbr] = KDL::Frame::Identity();
+            } else {
+                LinkMap::const_iterator parent_it = traversal.parent[link_it->link_nr];
+                int parent_nmbr = parent_it->link_nr;
+                
+                if( link_it->getAdjacentJoint(parent_it)->joint.getType() != Joint::None ) {
+                    int dof_nr = link_it->getAdjacentJoint(parent_it)->q_nr;
+                    joint_pos = q(dof_nr);
+                } else {
+                    joint_pos =  0.0;
+                }
+                KDL::Frame X_parent_son = link_it->pose(parent_it,joint_pos);
+                X_base[link_nmbr] = X_base[parent_nmbr]*X_parent_son;
+            }
+        }
+        return 0;
+    }
 }
 }

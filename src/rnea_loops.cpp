@@ -39,16 +39,17 @@ namespace CoDyCo {
                 } else {
                     joint_pos = joint_vel = joint_acc = 0.0;
                 }
-                KDL::Frame X_son_parent = parent_it->pose(link_it,joint_pos);
-                KDL::Twist S_son_parent = parent_it->S(link_it,joint_pos);
-                KDL::Twist vj_son_parent = parent_it->vj(link_it,joint_pos,joint_vel);
-                v[link_nmbr] = X_son_parent*v[parent_nmbr] + vj_son_parent;
-                a[link_nmbr] = X_son_parent*a[parent_nmbr] + S_son_parent*joint_acc + v[link_nmbr]*vj_son_parent;
+                KDL::Frame X_child_parent = parent_it->pose(link_it,joint_pos);
+                KDL::Twist S_child_parent = parent_it->S(link_it,joint_pos);
+                //KDL::Twist vj_child_parent = parent_it->vj(link_it,joint_pos,joint_vel);
+				KDL::Twist vj_child_parent = S_child_parent*joint_vel;
+                v[link_nmbr] = X_child_parent*v[parent_nmbr] + vj_child_parent;
+                a[link_nmbr] = X_child_parent*a[parent_nmbr] + S_child_parent*joint_acc + v[link_nmbr]*vj_child_parent;
                 
                 #ifndef NDEBUG
                 //std::cout << "v[ " << link_it->second.link_name << " ] = " << v[link_nmbr] << std::endl;
                 //std::cout << "a[ " << link_it->second.link_name << " ] = " << a[link_nmbr] << std::endl;
-                //std::cout << "\t=" << X_son_parent*a[parent_nmbr] << " + "<< S_son_parent*joint_acc << " + " << std::endl; 
+                //std::cout << "\t=" << X_child_parent*a[parent_nmbr] << " + "<< S_child_parent*joint_acc << " + " << std::endl; 
                 #endif 
                 
                 /*

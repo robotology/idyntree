@@ -31,6 +31,7 @@
 #include <kdl/kinfam_io.hpp>
 #include <kdl/frames_io.hpp>
 #include "kdl_codyco/treegraph.hpp"
+#include <kdl_codyco/utils.hpp>
 
 namespace KDL {
 namespace CoDyCo {
@@ -97,6 +98,7 @@ namespace CoDyCo {
     
     JunctionMap::const_iterator TreeGraphLink::getAdjacentJoint(int adjacent_index) const
     {
+		assert( adjacent_index >= 0 );
         return adjacent_joint[adjacent_index];
     }
     
@@ -109,7 +111,7 @@ namespace CoDyCo {
     std::string TreeGraphLink::toString() const
     {
         std::stringstream ss;
-        ss << link_name << " " << link_nr << " "  << " mass " << I.getMass();
+        ss << link_name << " " << link_nr << " "  << " mass " << I.getMass() << " body part " << body_part_nr << " body part link nr " << body_part_link_nr;
         return ss.str();
     }
     
@@ -120,6 +122,13 @@ namespace CoDyCo {
             relative_pose_child_parent = relative_pose_parent_child.Inverse();
             //Complicated and inefficient expression, but waiting for testing before simplifyng it (it is copied from working code, so it should work)
             S_child_parent = relative_pose_parent_child.M.Inverse(joint.twist(1.0).RefPoint(joint.pose(q).M * f_tip.p));
+            //Compliated and inefficiente expression, but waiting for testing before simplifyng it
+            /*
+            KDL::Joint inverted_joint;
+            KDL::Frame inverted_f_tip;
+            JointInvertPolarity(joint,f_tip,inverted_joint,inverted_f_tip);
+            S_parent_child = (inverted_joint.pose(q)*inverted_f_tip).M.Inverse(inverted_joint.twist(1.0).RefPoint(inverted_joint.pose(q).M * inverted_f_tip.p));
+            */
             S_parent_child = -(relative_pose_parent_child*S_child_parent);
             q_previous = q;
         }
@@ -153,7 +162,7 @@ namespace CoDyCo {
     std::string TreeGraphJunction::toString() const
     {
         std::stringstream ss;
-        ss << joint_name << " " << q_nr << " "  << joint.getTypeName();
+        ss << joint_name << " " << q_nr << " "  << joint.getTypeName() << " body part " << body_part << " local q_nr " << body_part_q_nr;
         return ss.str();
     }
     
@@ -168,7 +177,7 @@ namespace CoDyCo {
     {       
         JunctionNameMap::iterator ret_value = junctions_names.find(name);
         #ifndef NDEBUG
-        std::cerr << "Called getJunction with argument: " << name << std::endl;
+        //std::cerr << "Called getJunction with argument: " << name << std::endl;
         #endif 
         assert(junctions_names.size() == getNrOfJunctions());
         assert(ret_value != junctions_names.end());
@@ -184,13 +193,13 @@ namespace CoDyCo {
     
     LinkMap::const_iterator TreeGraph::getLink(const int index) const
     {
-        assert(index >= 0 && index < getNrOfLinks());
+        assert(index >= 0 && index < (int)getNrOfLinks());
         return links.begin()+index;
     }
         
     JunctionMap::const_iterator TreeGraph::getJunction(const int index) const
     {
-        assert(index >= 0 && index < getNrOfJunctions());
+        assert(index >= 0 && index < (int)getNrOfJunctions());
         return junctions.begin()+index;
     }
     
@@ -200,9 +209,8 @@ namespace CoDyCo {
         assert(ret_value != junctions_names.end());
         return ret_value->second;
     }
-
     
-    TreeGraph::TreeGraph(const Tree & tree, const TreeSerialization & serialization, const TreePartition & partition)
+    void TreeGraph::constructor(const Tree & tree, const TreeSerialization & serialization, const TreePartition & partition)
     {
         TreeSerialization local_serialization = serialization;
         TreePartition local_partition = partition;
@@ -210,9 +218,9 @@ namespace CoDyCo {
         #ifndef NDEBUG
         assert( local_serialization.is_consistent(tree) == serialization.is_consistent(tree) ); 
         if( local_serialization.is_consistent(tree)  ) {
-            std::cout << "TreeGraph constructor: using provided serialization " << std::endl;
+            //std::cout << "TreeGraph constructor: using provided serialization " << std::endl;
         } else {
-            std::cout << "TreeGraph constructor: using default serialization " << std::endl;
+            //std::cout << "TreeGraph constructor: using default serialization " << std::endl;
         }
         #endif
         if( !local_serialization.is_consistent(tree) ) {
@@ -247,16 +255,25 @@ namespace CoDyCo {
         real_root = virtual_root->second.children[0];
         
         #ifndef NDEBUG
-        std::cerr << "TreeGraph:" << std::endl;
-        std::cerr << "virtual_root " << virtual_root->first << std::endl;
-        std::cerr << "real_root " << real_root->first << std::endl;
-        std::cerr << "Serialization " << local_serialization.toString() << std::endl;
+        //std::cerr << "TreeGraph:" << std::endl;
+        //std::cerr << "virtual_root " << virtual_root->first << std::endl;
+        //std::cerr << "real_root " << real_root->first << std::endl;
+        //std::cerr << "Serialization " << local_serialization.toString() << std::endl;
         #endif
+        
+        
+        //Add part names
+        for(int l=0; l < local_partition.getNrOfParts(); l++ ) {
+			TreePart part = local_partition.getPartFromLocalIndex(l);
+			body_part_names.insert(make_pair(part.getPartID(),part.getPartName()));
+		}
         
         
         original_root = real_root->first;
         
         const SegmentMap& sm = tree.getSegments();
+        
+   
         
         //For loop to add link and joints
         for( SegmentMap::const_iterator i=sm.begin(); i!=sm.end(); ++i ) {
@@ -266,6 +283,14 @@ namespace CoDyCo {
             if( i != virtual_root ) {
                 int link_id = local_serialization.getLinkId(current_segment.getName());
                 int part_id = local_partition.getPartIDfromLink(link_id);
+                int local_link_id = local_partition.getLocalLinkIndex(link_id);
+                
+                assert( link_id >= 0 && link_id <= nrOfLinks );
+                assert( part_id >= 0 );
+                assert( local_link_id >= 0 && local_link_id <= nrOfLinks );
+
+
+    
                         #ifndef NDEBUG
                         //std::cerr << "Added link " << paar.second.link_name <<  " to TreeGraph with link_nr " << paar.second.link_nr << 
                         //         "and mass " << paar.second.I.getMass() << " and cog " << paar.second.I.getCOG()(0) << std::endl;
@@ -275,7 +300,7 @@ namespace CoDyCo {
                         TreeGraphLink(current_segment.getName(),
                                       current_segment.getInertia(),
                                       link_id,
-                                      part_id);
+                                      part_id,local_link_id);
                                       
                 links_names.insert(make_pair(current_segment.getName(),links.begin()+link_id));
             }
@@ -288,6 +313,9 @@ namespace CoDyCo {
                 
                 if( current_joint.getType() == Joint::None ) {
                     int junction_id = local_serialization.getJunctionId(current_joint.getName());
+                    //std::cout << "failed to find joint " << current_joint.getName() << std::endl;
+                    //std::cout << "in serialization " << local_serialization.toString() << std::endl;
+                    assert(junction_id >= 0);
                     junctions[junction_id] =  TreeGraphJunction(current_joint.getName(),
                                                 current_joint, 
                                                 current_joint.pose(0).Inverse()*current_segment.getFrameToTip(),junction_id);
@@ -297,18 +325,23 @@ namespace CoDyCo {
                     // \note !!! for now, for junction with DOF junction_id == dof_id
                     int dof_id = local_serialization.getDOFId(current_joint.getName());
                     int dof_part_ID = local_partition.getPartIDfromDOF(dof_id);
+                    int local_dof_id = local_partition.getLocalDOFIndex(dof_id);
+                    //assert(dof_part_ID >= 0);
+                    //assert(local_dof_id >= 0);
             
                     junctions[dof_id] = TreeGraphJunction(current_joint.getName(),
                                                 current_joint, 
                                                 current_joint.pose(0).Inverse()*current_segment.getFrameToTip(), /* Complicated way to do a simple thing: get f_tip attribute of the Segment */
                                                 dof_id,
-                                                dof_part_ID);
+                                                dof_part_ID,local_dof_id);
                                                 
                     junctions_names.insert(make_pair(current_joint.getName(),junctions.begin()+dof_id));
 
                 }
             }
         }
+        
+        
         
         //For loop to fix references between link and joints
          for( SegmentMap::const_iterator i=sm.begin(); i!=sm.end(); ++i ) {
@@ -348,12 +381,30 @@ namespace CoDyCo {
         }
         
         #ifndef NDEBUG
-        std::cerr << "Check consistency exiting TreeGraph constructor " << std::endl;
-        //assert(check_consistency() == 0);
+        
+        //std::cerr << "TreeGraph::constructor() : check consistency exiting TreeGraph constructor " << std::endl;
+        //std::cerr << this->toString() << std::endl;
+        assert(check_consistency() == 0);
         #endif
         assert(nrOfLinks == (int)links.size());
-        
+	}
+    
+    TreeGraph::TreeGraph(const Tree & tree, const TreeSerialization & serialization, const TreePartition & partition)
+    {
+		constructor(tree,serialization,partition);
     } 
+    
+    TreeGraph::TreeGraph(const TreeGraph& in) 
+    {
+		constructor(in.getTree(),in.getSerialization(),in.getPartition());
+	}
+
+	TreeGraph& TreeGraph::operator=(const TreeGraph& in) 
+	{
+		constructor(in.getTree(),in.getSerialization(),in.getPartition());
+		return *this;
+	}
+
     
     int TreeGraph::compute_traversal(Traversal & traversal, const std::string& base_link,const bool bf_traversal) const
     {
@@ -370,7 +421,7 @@ namespace CoDyCo {
         #endif
         
         LinkMap::const_iterator base;
-        if( base_link.size() == 0 ) {
+        if( base_link.length() == 0 ) {
             base = getLink(original_root);
         } else {
             base = getLink(base_link);
@@ -384,6 +435,10 @@ namespace CoDyCo {
         traversal.order.clear();
         
         to_visit.push_back(base);
+        #ifndef NDEBUG
+        std::cerr << "Original base link_nr " << base->link_nr << std::endl;
+        std::cerr << "Traversal.parent size " << traversal.parent.size() << std::endl;
+        #endif
         traversal.parent[base->link_nr] = getInvalidLinkIterator();
         
         LinkMap::const_iterator visited_link;
@@ -443,7 +498,63 @@ namespace CoDyCo {
         
         return 0;
     }
+    
+    //Warning q_nr is dependent on the selected base, not on the serialization
+    Tree TreeGraph::getTree(std::string base) const
+    {
+		assert(this->check_consistency() == 0);
+		
+		//Define a KDL::Tree with fake link "base_link", as is usually done
+		//URDF describing humanoids
+		const std::string fake_root_name = "base_link";
 
+		KDL::Tree tree(fake_root_name);
+		Traversal traversal;
+		int ret;
+		if( base.length() > 0 ) {
+			ret  = compute_traversal(traversal,base);
+		} else {
+			ret = compute_traversal(traversal);
+		}
+		if( ret < 0 ) { std::cerr << "TreeGraph::getTree : specified base " << base << " is not part of the TreeGraph" << std::endl; return KDL::Tree("TreeGraph_getTree_error");}
+		
+		assert(this->check_consistency() == 0);
+		assert(this->check_consistency(traversal) == 0);
+		
+		for(int i=0; i < (int)traversal.order.size(); i++ ) {
+			LinkMap::const_iterator link_it = traversal.order[i];
+			if( i == 0 ) { 
+				//The selected base should be attached rigidly to the fake "base_link"
+				tree.addSegment(Segment(link_it->getName(),Joint("base_link_joint",Joint::None),KDL::Frame::Identity(),link_it->getInertia()),fake_root_name);
+			} else {
+				LinkMap::const_iterator parent_it = traversal.parent[link_it->link_nr];
+				
+				//The current link should be connected to his parent
+				assert(link_it->is_adjacent_to(parent_it));
+				JunctionMap::const_iterator junction_it = link_it->getAdjacentJoint(parent_it);
+				
+				Joint kdl_joint;
+				KDL::Frame f_tip; 
+				
+				if( parent_it == junction_it->parent ) {
+					//If the parent was the parent in the original KDL::Tree
+					//we are adding the Joint in the "same" order of the original KDL::Tree
+					kdl_joint = junction_it->joint;
+					f_tip = junction_it->f_tip;
+					
+				} else {
+					//otherwise, we have to invert the polarity of the joint
+					//std::cerr <<< "Calling JointInvertPolarity" << std::endl;
+					JointInvertPolarity(junction_it->joint,junction_it->f_tip,kdl_joint,f_tip);
+				}
+				
+				//We are setting kdl_joint.pose(0)*f_tip so that the KDL::Segment f_tip is actually f_tip
+				tree.addSegment(Segment(link_it->getName(),kdl_joint,kdl_joint.pose(0)*f_tip,link_it->getInertia()),parent_it->getName());
+			}
+		}
+		
+		return tree;
+	}
     
     TreeSerialization TreeGraph::getSerialization() const
     {
@@ -466,29 +577,128 @@ namespace CoDyCo {
         return ret;
     }
     
+    TreePartition TreeGraph::getPartition() const
+    {
+		TreePartition partition;
+		int i;
+		
+		std::vector<TreePart> parts(0);
+		std::vector< std::vector<int> > part_dofs(0);
+		std::vector< std::vector<int> > part_links(0);
+		 
+        for(LinkMap::const_iterator it=links.begin(); it != links.end(); it++ ) {
+			
+			bool part_not_found = true;
+			//Add the link to the right part
+			for(i = 0; i < (int)parts.size(); i++ ) {
+				if( parts[i].getPartID() == it->body_part_nr ) {
+					part_not_found = false;
+					break;
+				}
+			}
+			//If the part was not already found, add the part
+			if( part_not_found ) {
+				std::map<int,std::string>::const_iterator bp_name_it = body_part_names.find(it->body_part_nr);
+				if( bp_name_it == body_part_names.end() ) {
+					std::cerr << "TreeGraph:getPartition() failed: body part " <<  it->body_part_nr << " not recognized\n" << std::endl;
+					assert(false);
+					return partition;
+				}
+				std::string part_name = bp_name_it->second;
+				parts.push_back(TreePart(it->body_part_nr,part_name));
+				part_dofs.push_back(std::vector<int>(0));
+				part_links.push_back(std::vector<int>(0));
+				part_not_found = false;
+				assert(i == (int)parts.size()-1);
+			}
+			
+			assert( i < (int)part_links.size() );
+			assert( i < (int)part_dofs.size() );
+			
+			//Now that we have the part (it is parts[i]) we had the 
+			//link to the link of the part.
+			#ifndef NDEBUG
+			//std::cerr << it->toString() << std::endl;
+			#endif
+			assert( it->body_part_link_nr >= 0 );
+			if( it->body_part_link_nr >= (int)part_links[i].size() ) {
+				part_links[i].resize(it->body_part_link_nr+1);
+			}
+			part_links[i][it->body_part_link_nr] = it->link_nr;
+        }
+        
+        for(JunctionMap::const_iterator it=junctions.begin(); it != junctions.end(); it++ ) {
+            if( it->joint.getType() != Joint::None ) {
+				assert( it->body_part >= 0 );
+				bool part_not_found = true;
+				//Add the link to the right part
+				for(i = 0; i < (int)parts.size(); i++ ) {
+					if( parts[i].getPartID() == it->body_part ) {
+						part_not_found = false;
+						break;
+					}
+				}
+				//If the part was not already found, add the part
+				if( part_not_found ) {
+					std::map<int,std::string>::const_iterator bp_name_it = body_part_names.find(it->body_part);
+					if( bp_name_it == body_part_names.end() ) {
+						std::cerr << "TreeGraph:getPartition() failed: body part " <<  it->body_part << " not recognized\n" << std::endl;
+						assert(false);		
+						return partition;
+					}
+					std::string part_name = bp_name_it->second;
+					parts.push_back(TreePart(it->body_part,part_name));
+					part_dofs.push_back(std::vector<int>(0));
+					part_links.push_back(std::vector<int>(0));
+					part_not_found = false;
+					assert(i == (int)parts.size()-1);
+				}
+				
+				
+				//Now that we have the part (it is parts[i]) we had the 
+				//dof to the dofs of the part.
+				if( it->body_part_q_nr >= (int)part_dofs[i].size() ) {
+					part_dofs[i].resize(it->body_part_q_nr+1);
+				}
+				part_dofs[i][it->body_part_q_nr] = it->q_nr;
+			}
+        }
+        
+        
+        for(int j=0; j < (int)parts.size(); j++ ) {
+			parts[j] = TreePart(parts[j].getPartID(),parts[j].getPartName(),part_dofs[j],part_links[j]);
+			partition.addPart(parts[j]);
+		}
+        //add dofs to part
+        
+		return partition;
+	}
+
+    
+    
     int TreeGraph::check_consistency() const
     {
         LinkMap::const_iterator link_it;
         JunctionMap::const_iterator junction_it;
         
         for(link_it = links.begin(); link_it != links.end(); link_it++) {
-            assert(link_it->link_nr >= 0 && link_it->link_nr < getNrOfLinks());
+            assert(link_it->link_nr >= 0 && link_it->link_nr < (int)getNrOfLinks());
+            assert(link_it->body_part_link_nr >= 0 && link_it->body_part_link_nr < (int)getNrOfLinks());
+            assert(link_it->body_part_nr >= 0);
+            
             #ifndef NDEBUG
-            std::cerr << "Considering link " << link_it->link_name << " " << link_it->link_nr << std::endl;
+            //std::cerr << "Considering link " << link_it->link_name << " " << link_it->link_nr << std::endl;
             #endif
             for(int i=0; i < (int)link_it->getNrOfAdjacentLinks(); i++ ) {
                 #ifndef NDEBUG
-                std::cerr << "\tHas joint connecting parent " << link_it->adjacent_joint[i]->parent->link_name << "  and  child" << link_it->adjacent_joint[i]->child->link_name << std::endl;
+                //std::cerr << "\tHas joint connecting parent " << link_it->adjacent_joint[i]->parent->link_name << "  and  child" << link_it->adjacent_joint[i]->child->link_name << std::endl;
                 //std::cerr << link_it->adjacent_joint[i]->second.joint.pose(1.0);
                 //std::cerr << link_it->adjacent_joint[i]->second.pose(1.0,true);
-                std::cerr << link_it->pose(i,7.0);
                 if( link_it->adjacent_joint[i]->child != link_it ) {
                     //std::cout << link_it->second.link_name<< " is not " << link_it->second.adjacent_joint[i]->second.child->second.link_name  << std::endl;
                     //std::cout << link_it->first<< " is not " << link_it->second.adjacent_joint[i]->second.child->first  << std::endl;
                 }
-                if( link_it != getLink("eyes_tilt_link") ) {
-                    //std::cout << link_it->first << " is not " << getLink("eyes_tilt_link")->first << std::endl;
-                }
+       
                 //std::cerr << "\tConsidering neighbour " << link_it->second.adjacent_link[i]->second.link_name << " " << link_it->second.adjacent_link[i]->second.link_nr << std::endl;
                 #endif 
                 assert((link_it->adjacent_link[i] ==  link_it->adjacent_joint[i]->parent && link_it ==  link_it->adjacent_joint[i]->child) || (link_it ==  link_it->adjacent_joint[i]->parent &&  link_it->adjacent_link[i] ==  link_it->adjacent_joint[i]->child)) ;
@@ -498,7 +708,9 @@ namespace CoDyCo {
                 
         for(junction_it = junctions.begin(); junction_it != junctions.end(); junction_it++) {
             if(junction_it->joint.getType() != Joint::None ) {
-                assert(junction_it->q_nr >= 0 && junction_it->q_nr < (int)getNrOfDOFs());
+                if( !(junction_it->q_nr >= 0 && junction_it->q_nr < (int)getNrOfDOFs()) )  return -1;
+                if( !(junction_it->body_part_q_nr >= 0 && junction_it->body_part_q_nr < (int)getNrOfDOFs()) ) return -1;
+                if( !(junction_it->body_part >= 0) ) return -1;
             }
         }
         

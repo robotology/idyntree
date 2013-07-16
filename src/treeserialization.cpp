@@ -14,7 +14,7 @@
 
 
 namespace KDL {
-    
+namespace CoDyCo {
     void TreeSerialization::addDFSrecursive(SegmentMap::const_iterator current_el, int & link_cnt, int & fixed_joints_cnt )
     {
         if( current_el->second.segment.getJoint().getType() != Joint::None ) {
@@ -326,4 +326,5 @@ namespace KDL {
         return ss.str();
     }
 
+}
 }
