@@ -268,7 +268,11 @@ namespace CoDyCo {
         
     std::string TreePartition::toString() const
     {
-        return "";
+		std::stringstream ss;
+        for(int i=0; i <= (int)parts.size(); i++ ) {
+			ss << "part ID:" << parts[i].getPartID() << " part name: " << parts[i].getPartName() << std::endl;
+		}
+		return ss.str();
     }
 }
 }
