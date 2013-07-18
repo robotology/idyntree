@@ -44,7 +44,7 @@ if (NOT MSVC)
   install(FILES ${pkg_conf_file} DESTINATION lib/pkgconfig/ COMPONENT pkgconfig)
 endif()
 
-include_directories(include ${EIGEN3_INCLUDE_DIR})
+include_directories(include ${EIGEN3_INCLUDE_DIR} ${Orocos-KDL_INCLUDE_DIRS})
 
 file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
