@@ -51,7 +51,7 @@ file(GLOB KDL_CODYCO_SRC
 )
 
 add_library(kdl_codyco SHARED ${KDL_CODYCO_SRC})
-target_link_libraries(kdl_codyco ${Orocos-KDL_libraries})
+target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
 
 # --------------------------------
 
