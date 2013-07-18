@@ -38,6 +38,8 @@ namespace CoDyCo {
             TreePart(int _part_id, std::string _part_name);
             TreePart(int _part_id, std::string _part_name, std::vector<int> _dof_id, std::vector<int> _links_id);
             
+            TreePart& operator=(const TreePart& x);
+            
             void addDOF(int global_dof_index) { dof_id.push_back(global_dof_index); }
             void addLink(int global_link_index) { links_id.push_back(global_link_index); };
             
@@ -54,6 +56,8 @@ namespace CoDyCo {
             
             const std::vector<int> & getLinkIDs() const { return links_id; }
 			const  std::vector<int> & getDOFIDs() const { return dof_id; }
+			
+			std::string toString() const;
 
     };
     
@@ -130,7 +134,7 @@ namespace CoDyCo {
          * Get a part object by the name
          * @return the correct TreePart is all went well, otherwise an empty one
          */
-        TreePart getPart(std::string part_name) const; 
+        TreePart getPart(const std::string & part_name) const; 
         
         /**
          * Get the part ID from the global link ID
@@ -166,9 +170,9 @@ namespace CoDyCo {
          */
         int getLocalDOFIndex(int global_dof_index) const;
         
-        const std::vector<int> & getPartLinkIDs(std::string part_name) const;
+        std::vector<int> getPartLinkIDs(const std::string & part_name) const;
         
-        const std::vector<int> & getPartDOFIDs(std::string part_name) const;
+        std::vector<int> getPartDOFIDs(const std::string & part_name) const;
 
          
         /**

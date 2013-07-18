@@ -47,7 +47,18 @@ namespace CoDyCo {
     TreePart::~TreePart()
     {
     }
-            
+     
+    TreePart& TreePart::operator=(const TreePart& x) 
+	{
+		if ( this != &x ) { 
+			this->part_id = x.part_id;
+			this->part_name = x.part_name;
+			this->dof_id = x.dof_id;
+			this->links_id = x.links_id;
+		}
+		return *this;
+	}
+           
     int TreePart::getNrOfLinks() const
     {
         return links_id.size();
@@ -66,6 +77,13 @@ namespace CoDyCo {
     int TreePart::getPartID() const
     {
         return part_id;
+    }
+    
+    std::string TreePart::toString() const
+    {
+		std::stringstream ss;
+		ss << "TreePart: " << part_id << " " << part_name << std::endl;
+        return ss.str();
     }
     
     TreePartition::TreePartition()
@@ -120,7 +138,7 @@ namespace CoDyCo {
         return parts[local_index];
     }
     
-    TreePart TreePartition::getPart(std::string part_name) const
+    TreePart TreePartition::getPart(const std::string & part_name) const
     {
         int local_index;
         
@@ -251,17 +269,30 @@ namespace CoDyCo {
         return true;
     }
     
-    const std::vector<int> & TreePartition::getPartLinkIDs(std::string part_name) const
+    /**
+	 * \todo add efficient way of returning vector<int>
+	 * 
+	 */	
+    std::vector<int> TreePartition::getPartLinkIDs(const std::string & part_name) const
     {   
 		//\todo error checking
         TreePart part = getPart(part_name);
         return part.getLinkIDs();
 	}
 
-    
-    const std::vector<int> & TreePartition::getPartDOFIDs(std::string part_name) const
+	/**
+	 * \todo add efficient way of returning vector<int>
+	 * 
+	 */	
+    std::vector<int> TreePartition::getPartDOFIDs(const std::string & part_name) const
     {   
-        TreePart part = getPart(part_name);
+		#ifndef NDEBUG
+		std::cout << "getPartDOFIDs(" << part_name <<")" << std::endl;
+		#endif 
+		TreePart part = getPart(part_name);
+		#ifndef NDEBUG
+		std::cout << part.toString() << std::endl;
+		#endif
         return part.getDOFIDs();
 	}
 
@@ -269,7 +300,8 @@ namespace CoDyCo {
     std::string TreePartition::toString() const
     {
 		std::stringstream ss;
-        for(int i=0; i <= (int)parts.size(); i++ ) {
+        for(int i=0; i < (int)parts.size(); i++ ) {
+			//std::cout << "TreePartition::toString() index " << i << " " << parts[i].getPartID() << std::endl;
 			ss << "part ID:" << parts[i].getPartID() << " part name: " << parts[i].getPartName() << std::endl;
 		}
 		return ss.str();
