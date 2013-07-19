@@ -50,8 +50,11 @@ file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
 )
 
+#Temporary workaround to compile on MacOsX
 add_library(kdl_codyco SHARED ${KDL_CODYCO_SRC})
-target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
+find_library(myOrocos-KDL ${Orocos-KDL_LIBRARIES} ${Orocos-KDL_LIBRARY_DIRS})
+#target_link_libraries(kdl_codyco ${Orocos-KDL_libraries})
+target_link_libraries(kdl_codyco ${myOrocos-KDL})
 
 # --------------------------------
 
