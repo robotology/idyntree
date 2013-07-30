@@ -96,8 +96,8 @@ namespace CoDyCo {
     {
         Matrix<double, 6, 6>  ret;
         
-        ret << crossProductMatrix(v.rot),          Matrix3d::Zero(),
-               crossProductMatrix(v.vel), crossProductMatrix(v.rot);
+        ret << crossProductMatrix(v.rot), crossProductMatrix(v.vel),
+                        Matrix3d::Zero(), crossProductMatrix(v.rot);
         
         return ret;
     }
@@ -106,8 +106,8 @@ namespace CoDyCo {
     {
         Matrix<double, 6, 6> ret;
         
-        ret << crossProductMatrix(v.rot), crossProductMatrix(v.vel),
-                 Matrix3d::Zero(), crossProductMatrix(v.rot);
+        ret << crossProductMatrix(v.rot), Matrix3d::Zero(),
+               crossProductMatrix(v.vel), crossProductMatrix(v.rot);
                
                      
         return ret;
@@ -128,8 +128,8 @@ namespace CoDyCo {
     {
         Matrix<double, 6, 10> ret;
 
-        ret <<          Vector3d::Zero(), -crossProductMatrix(v.vel), rotationalMomentumRegressor(v.rot),
-               Map<const Vector3d>(v.vel.data),  crossProductMatrix(v.rot),       Matrix<double, 3, 6>::Zero();                  
+        ret <<  Map<const Vector3d>(v.vel.data),  crossProductMatrix(v.rot), Matrix<double, 3, 6>::Zero(),                   
+                          Vector3d::Zero(),      -crossProductMatrix(v.vel), rotationalMomentumRegressor(v.rot);
         
         return ret;
     }
@@ -144,8 +144,8 @@ namespace CoDyCo {
     {
         Matrix<double, 6, 6> ret;
         
-        ret <<                              Map<const Matrix<double,3,3,RowMajor> >(frame.M.data),                  Matrix3d::Zero(),
-                crossProductMatrix(frame.p)*Map<const Matrix<double,3,3,RowMajor> >(frame.M.data), Map<const Matrix<double,3,3,RowMajor> >(frame.M.data);
+        ret <<  Map<const Matrix<double,3,3,RowMajor> >(frame.M.data), crossProductMatrix(frame.p)*Map<const Matrix<double,3,3,RowMajor> >(frame.M.data),
+                Matrix3d::Zero(),                                      Map<const Matrix<double,3,3,RowMajor> >(frame.M.data);
         
         return ret;
         
@@ -155,8 +155,8 @@ namespace CoDyCo {
     {
         Matrix<double, 6, 6> ret;
         
-        ret <<  Map<const Matrix<double,3,3,RowMajor> >(frame.M.data), crossProductMatrix(frame.p)*Map<const Matrix<double,3,3,RowMajor> >(frame.M.data),
-                           Matrix3d::Zero(),                              Map<const Matrix<double,3,3,RowMajor> >(frame.M.data);
+        ret <<  Map<const Matrix<double,3,3,RowMajor> >(frame.M.data),                                       Matrix3d::Zero(), 
+                          crossProductMatrix(frame.p)*Map<const Matrix<double,3,3,RowMajor> >(frame.M.data), Map<const Matrix<double,3,3,RowMajor> >(frame.M.data);
                
         return ret;
     }
@@ -165,8 +165,8 @@ namespace CoDyCo {
     {
         Matrix<double, 6, 1> ret;
         
-        ret << Map<const Vector3d>(v.rot.data), 
-               Map<const Vector3d>(v.vel.data);
+        ret <<  Map<const Vector3d>(v.vel.data),
+                Map<const Vector3d>(v.rot.data);
         
         return ret;
     }
@@ -175,8 +175,8 @@ namespace CoDyCo {
     {
         Matrix<double, 6, 1> ret;
         
-        ret << Map<const Vector3d>(f.torque.data), 
-               Map<const Vector3d>(f.force.data);
+        ret <<  Map<const Vector3d>(f.force.data),
+                Map<const Vector3d>(f.torque.data); 
         
         return ret;
     }
