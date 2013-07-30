@@ -32,9 +32,9 @@ namespace CoDyCo
     class TreeGraphJunction;
     
     /**
-     * \todo substitute this map based structure with vector base one
-     *       (originally implemented in this way for exploiting similarity
-     *          with KDL::Tree - 4 Jul started doing it
+     * 
+     * \todo 
+     * 
      */ 
     //typedef std::map<std::string,TreeGraphLink> LinkMap;
     //typedef std::map<std::string,TreeGraphJunction> JunctionMap;
@@ -44,6 +44,12 @@ namespace CoDyCo
     typedef std::map<std::string,LinkMap::iterator> LinkNameMap;
     typedef std::map<std::string,JunctionMap::iterator> JunctionNameMap;
     
+    /**
+     * This class represent a traversal, given a root, of a KDL::CoDyCo::TreeGraph
+     * It containts: 
+     *     * a traversal order vector (the index is the visit order number) starting at the given root, that respects the property that a link is visited after his parent
+     *     * a parent vector (the index is the link id) such that for each link it returns its parent under the given root
+     */
     class Traversal {
 		public:
         std::vector< LinkMap::const_iterator > order;
@@ -87,6 +93,7 @@ namespace CoDyCo
             is_this_parent = x.is_this_parent;} return *this; }
         
         std::string getName() const {return link_name;}
+        int getLinkIndex() const {return link_nr;}
         RigidBodyInertia getInertia() const {return I;}
         
         /**
@@ -161,6 +168,10 @@ namespace CoDyCo
         Twist vj(LinkMap::const_iterator adjacent_iterator, const double& q,const double& qdot) const;
         //cj for the type of implemented joint is always 0
         
+        /**
+         * \note adjacent index is an index local to each TreeGraphLink
+         * 
+         */
         JunctionMap::const_iterator getAdjacentJoint(int adjacent_index) const;
         JunctionMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const;
         
@@ -205,6 +216,18 @@ namespace CoDyCo
         ~TreeGraphJunction() {}; 
         
         std::string getName() const { return joint_name; }
+        
+		int getJunctionIndex() const { return q_nr; }
+        
+        int getDOFIndex() const { return q_nr; } 
+        
+        /**
+         * Get the number of degrees of freedom of the junction
+         * 
+         * \note the library currently supports only 0 (Joint::None) or 1 degree of freedom 
+         * 
+         */
+        int getNrOfDOFs() const { if( joint.getType() == Joint::None ) { return 0; } else { return 1; } }
         
         /**
          * Get the pose of one link with respect to the other link

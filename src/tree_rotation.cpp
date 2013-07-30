@@ -99,7 +99,6 @@ bool addParentRecursive(Tree & new_tree, SegmentMap::const_iterator old_child, c
         SegmentMap::const_iterator old_root; //old *real* root 
         SegmentMap::const_iterator new_root; //new *real* root
         SegmentMap segments;
-        unsigned int i; 
 
         
         segments = old_tree.getSegments();

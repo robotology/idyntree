@@ -38,6 +38,11 @@ namespace CoDyCo {
     int TreeGraphLink::globalIterator2localIndex(LinkMap::const_iterator link_iterator) const
     {
         int i;
+        #ifndef NDEBUG
+        if( !is_adjacent_to(link_iterator) ) 
+        std::cerr << "TreeGraphLink::globalIterator2localIndex fatal error: " << this->getName() << " is not adjacent to " << link_iterator->getName() << std::endl;
+        #endif
+        assert( is_adjacent_to(link_iterator) );
         for(i=0; i < (int)getNrOfAdjacentLinks(); i++ ) {
             if( adjacent_link[i] == link_iterator ) {
                 break;
