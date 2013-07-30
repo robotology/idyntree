@@ -37,7 +37,7 @@ namespace CoDyCo {
          
          Vector MCOG = rbd_inertia.getMass()*rbd_inertia.getCOG();
          
-         //In RigidBodyInertia, the rotational inertia is store with 
+         //In RigidBodyInertia, the rotational inertia is stored with 
          //respect to the link frame of refence, not the COG one
          
          ret << rbd_inertia.getMass(),
@@ -180,6 +180,6 @@ namespace CoDyCo {
         
         return ret;
     }
-
+   
 }
 }

@@ -23,6 +23,8 @@
 #include "kdl_codyco/treeserialization.hpp"
 #include "kdl_codyco/treepartition.hpp"
 
+#define COMPUTE_TRAVERSAL_BASE_LINK_DEFAULT_VALUE -10000
+
 namespace KDL
 {
 namespace CoDyCo 
@@ -377,15 +379,27 @@ namespace CoDyCo
          * @param order the link visit order
          * @param parent the vector of parent for each link, for the base link 
          *        it contains a LinkMap::end() const_iterator
-         * @param base_link the starting point of the traversal
+         * @param base_link the name of the link used as the starting point of the traversal
          * @return 0 if all went well, another integer otherwise
          * 
          * \note not a real time operation
          * 
-         * \todo add real time version, by specified base_link as index
+         * \todo add real time version, by specifyng base_link as index (and by dealing with the deque)
          */
-        int compute_traversal(Traversal & traversal, const std::string& base_link="", const bool bf_traversal=false) const;
+        int compute_traversal(Traversal & traversal, const std::string& base_link, const bool bf_traversal=false) const;
 
+         /**
+         * Visit the TreeGraph with a  traversal
+         * 
+         * @param base_link_index the id of the link used as the starting point of the traversal
+         * @return 0 if all went well, another integer otherwise
+         * 
+         * \note not a real time operation
+         * 
+         * \todo add real time version, by specifyng base_link as index (and by dealing with the deque)
+         */
+        int compute_traversal(Traversal & traversal, const int base_link_index=COMPUTE_TRAVERSAL_BASE_LINK_DEFAULT_VALUE, const bool bf_traversal=false) const;
+        
 		Tree getTree(std::string base="") const;
 		
         TreeSerialization getSerialization() const;

@@ -174,6 +174,7 @@ namespace CoDyCo {
     LinkMap::iterator TreeGraph::getLink(const std::string& name, bool dummy)
     {
         LinkNameMap::iterator ret_value = links_names.find(name);
+
         assert(ret_value != links_names.end());
         return ret_value->second;
     }
@@ -192,7 +193,10 @@ namespace CoDyCo {
     LinkMap::const_iterator TreeGraph::getLink(const std::string& name) const
     {
         LinkNameMap::const_iterator ret_value = links_names.find(name);
-        assert(ret_value != links_names.end());
+        #ifndef NDEBUG
+        if( ret_value == links_names.end() ) { std::cerr << "Link " << name << " not found " << std::endl; }
+        #endif
+        //assert(ret_value != links_names.end());
         return ret_value->second;
     }
     
@@ -411,25 +415,25 @@ namespace CoDyCo {
 	}
 
     
-    int TreeGraph::compute_traversal(Traversal & traversal, const std::string& base_link,const bool bf_traversal) const
+    int TreeGraph::compute_traversal(Traversal & traversal, const int base_link_index,const bool bf_traversal) const
     {
-        if( traversal.order.size() != getNrOfLinks() ) traversal.order.reserve(getNrOfLinks());
+        if( traversal.order.capacity() < getNrOfLinks() ) traversal.order.reserve(getNrOfLinks());
 
         if( traversal.parent.size() != getNrOfLinks() ) traversal.parent.resize(getNrOfLinks());
         
         #ifndef NDEBUG
         std::cerr << "Check consistency at the begin of compute_traversal " << std::endl;
-        //assert(check_consistency() == 0);
+        assert(check_consistency() == 0);
         #endif
         #ifndef NDEBUG
         std::cerr << "Original base " << original_root << std::endl;
         #endif
         
         LinkMap::const_iterator base;
-        if( base_link.length() == 0 ) {
+        if( base_link_index == COMPUTE_TRAVERSAL_BASE_LINK_DEFAULT_VALUE) {
             base = getLink(original_root);
         } else {
-            base = getLink(base_link);
+            base = getLink(base_link_index);
         }
         if( base == links.end() ) {
             return -1;
@@ -437,6 +441,7 @@ namespace CoDyCo {
         
         std::deque<LinkMap::const_iterator> to_visit;
         to_visit.clear();
+        
         traversal.order.clear();
         
         to_visit.push_back(base);
@@ -451,12 +456,12 @@ namespace CoDyCo {
         
         
             #ifndef NDEBUG
-            //std::cerr << "traversal.parent.size() " << traversal.parent.size() << std::endl;
+            std::cerr << "traversal.parent.size() " << traversal.parent.size() << std::endl;
             #endif
         
         while( to_visit.size() > 0 ) {
             #ifndef NDEBUG
-            //std::cerr << "to_visit size: " << to_visit.size() << std::endl;
+            std::cerr << "to_visit size: " << to_visit.size() << std::endl;
             #endif
             if( !bf_traversal ) {
                 //Depth first : to_visit is a stack
@@ -471,9 +476,9 @@ namespace CoDyCo {
             traversal.order.push_back(visited_link);
             
             #ifndef NDEBUG
-            //std::cerr << "Going to add child of visited_link->second.link_nr " << visited_link->second.link_nr
-            //          << " " << visited_link->second.getNrOfAdjacentLinks() 
-            //          << " "  << visited_link->second.link_name << std::endl;
+            std::cerr << "Going to add child of visited_link->second.link_nr " << visited_link->getLinkIndex()
+                      << " " << visited_link->getNrOfAdjacentLinks() 
+                      << " "  << visited_link->getName() << std::endl;
             #endif
             for(int i=0; i < (int)visited_link->getNrOfAdjacentLinks(); i++) {
                 visited_child = visited_link->adjacent_link[i];
@@ -482,11 +487,11 @@ namespace CoDyCo {
                 if( visited_child != traversal.parent[visited_link->link_nr] ) {
                     to_visit.push_back(visited_child);
                     #ifndef NDEBUG
-                    //std::cerr << "Goint to add to_visit link " << visited_child->second.link_nr << std::endl; 
+                    std::cerr << "Goint to add to_visit link " << visited_child->getLinkIndex() << std::endl; 
                     #endif 
-                    traversal.parent[visited_child->link_nr] = visited_link;
+                    traversal.parent[visited_child->getLinkIndex()] = visited_link;
                     #ifndef NDEBUG
-                    //std::cerr << "Add to_visit link " << visited_child->second.link_nr << std::endl; 
+                    std::cerr << "Add to_visit link " << visited_child->getLinkIndex() << std::endl; 
                     #endif 
                 }
             }
@@ -494,7 +499,7 @@ namespace CoDyCo {
         
         #ifndef NDEBUG
         //std::cerr << "Traversal order: " << std::endl;
-        //for(int i=0; i < traversal.order.size(); i++ ) {
+       //for(int i=0; i < traversal.order.size(); i++ ) {
         //    std::cerr << traversal.order[i]->second.link_name << " " << traversal.order[i]->second.link_nr << std::endl;
         //}
         #endif
@@ -502,6 +507,16 @@ namespace CoDyCo {
         
         
         return 0;
+    }
+    
+    int TreeGraph::compute_traversal(Traversal & traversal, const std::string& base_link,const bool bf_traversal) const
+    {
+        #ifndef NDEBUG
+        std::cerr << "Called compute_traversal with " << base_link << "as base link " << std::endl;
+        #endif
+        LinkMap::const_iterator base_link_it = getLink(base_link);
+        if( base_link_it == getInvalidLinkIterator() ) { return -1; }
+        return compute_traversal(traversal,base_link_it->getLinkIndex(),bf_traversal);
     }
     
     //Warning q_nr is dependent on the selected base, not on the serialization

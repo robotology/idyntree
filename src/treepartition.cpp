@@ -153,6 +153,21 @@ namespace CoDyCo {
         return parts[local_index];
     }
     
+    int TreePartition::getPartIDfromPartName(const std::string & part_name) const
+    {
+       int local_index;
+        
+        std::map<std::string,int>::const_iterator it = name_map.find(part_name);
+        
+        if( it == name_map.end() ) {
+            return -1;
+        }
+        
+        local_index = it->second;
+        
+        return parts[local_index].getPartID();
+    }
+    
     int TreePartition::getPartIDfromLink(int link_id) const
     {
         for(int i=0; i < (int)parts.size(); i++ ) {
@@ -280,19 +295,19 @@ namespace CoDyCo {
         return part.getLinkIDs();
 	}
 
-	/**
-	 * \todo add efficient way of returning vector<int>
-	 * 
-	 */	
+    /**
+     * \todo add efficient way of returning vector<int>
+     * 
+     */
     std::vector<int> TreePartition::getPartDOFIDs(const std::string & part_name) const
     {   
-		#ifndef NDEBUG
-		std::cout << "getPartDOFIDs(" << part_name <<")" << std::endl;
-		#endif 
-		TreePart part = getPart(part_name);
-		#ifndef NDEBUG
-		std::cout << part.toString() << std::endl;
-		#endif
+        #ifndef NDEBUG
+        std::cout << "getPartDOFIDs(" << part_name <<")" << std::endl;
+        #endif 
+        TreePart part = getPart(part_name);
+        #ifndef NDEBUG
+        std::cout << part.toString() << std::endl;
+        #endif
         return part.getDOFIDs();
 	}
 

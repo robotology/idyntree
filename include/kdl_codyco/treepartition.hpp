@@ -137,26 +137,36 @@ namespace CoDyCo {
         TreePart getPart(const std::string & part_name) const; 
         
         /**
+         * Get the part ID from the part name
+         * @param part_name the name of the part 
+         * @return the part ID if all went well, -1 otherwise
+         */
+        int getPartIDfromPartName(const std::string & part_name) const;
+
+        /**
          * Get the part ID from the global link ID
          * @param global_link_index the global ID for the link
+         * @return the part ID if all went well, -1 otherwise
          * 
          */
         int getPartIDfromLink(int global_link_index) const;
         
          /**
          * Get the part ID from the global DOF ID
-         * @param global_link_index the global ID for the degree of freedom
-         * @return the part ID
+         * @param global_DOF_index the global ID for the degree of freedom
+         * @return the part ID if all went well, -1 otherwise
          */
         int getPartIDfromDOF(int global_DOF_index) const;
         
         /**
          * Get the global link ID from the body part ID and the local link ID
+         * @return the global link ID if all went well, -1 otherwise
          */
         int getGlobalLinkIndex(int part_ID, int local_link_index) const;
         
         /**
          * Get the global DOF ID from the couple of body part ID and local DOF ID
+         * @return the global DOF ID if all went well, -1 otherwise
          */
         int getGlobalDOFIndex(int part_ID, int local_DOF_index) const;
         
@@ -176,8 +186,8 @@ namespace CoDyCo {
 
          
         /**
-         * Check if the TreePartition is a valid serialization for the 
-         * given Tree (and optionally the given TreeSerialization ) 
+         * Check if the TreePartition is a valid partition for the 
+         * given Tree (and optionally a given TreeSerialization ) 
          * 
          */
         bool is_consistent(const Tree & tree ) const;
