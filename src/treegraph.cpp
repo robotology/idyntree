@@ -446,8 +446,8 @@ namespace CoDyCo {
         
         to_visit.push_back(base);
         #ifndef NDEBUG
-        std::cerr << "Original base link_nr " << base->link_nr << std::endl;
-        std::cerr << "Traversal.parent size " << traversal.parent.size() << std::endl;
+        //std::cerr << "Original base link_nr " << base->link_nr << std::endl;
+        //std::cerr << "Traversal.parent size " << traversal.parent.size() << std::endl;
         #endif
         traversal.parent[base->link_nr] = getInvalidLinkIterator();
         
@@ -456,12 +456,12 @@ namespace CoDyCo {
         
         
             #ifndef NDEBUG
-            std::cerr << "traversal.parent.size() " << traversal.parent.size() << std::endl;
+            //std::cerr << "traversal.parent.size() " << traversal.parent.size() << std::endl;
             #endif
         
         while( to_visit.size() > 0 ) {
             #ifndef NDEBUG
-            std::cerr << "to_visit size: " << to_visit.size() << std::endl;
+            //std::cerr << "to_visit size: " << to_visit.size() << std::endl;
             #endif
             if( !bf_traversal ) {
                 //Depth first : to_visit is a stack
@@ -476,9 +476,11 @@ namespace CoDyCo {
             traversal.order.push_back(visited_link);
             
             #ifndef NDEBUG
+            /*
             std::cerr << "Going to add child of visited_link->second.link_nr " << visited_link->getLinkIndex()
                       << " " << visited_link->getNrOfAdjacentLinks() 
                       << " "  << visited_link->getName() << std::endl;
+            */
             #endif
             for(int i=0; i < (int)visited_link->getNrOfAdjacentLinks(); i++) {
                 visited_child = visited_link->adjacent_link[i];
@@ -487,11 +489,11 @@ namespace CoDyCo {
                 if( visited_child != traversal.parent[visited_link->link_nr] ) {
                     to_visit.push_back(visited_child);
                     #ifndef NDEBUG
-                    std::cerr << "Goint to add to_visit link " << visited_child->getLinkIndex() << std::endl; 
+                    //std::cerr << "Going to add to_visit link " << visited_child->getLinkIndex() << std::endl; 
                     #endif 
                     traversal.parent[visited_child->getLinkIndex()] = visited_link;
                     #ifndef NDEBUG
-                    std::cerr << "Add to_visit link " << visited_child->getLinkIndex() << std::endl; 
+                    //std::cerr << "Add to_visit link " << visited_child->getLinkIndex() << std::endl; 
                     #endif 
                 }
             }

@@ -52,9 +52,9 @@ file(GLOB KDL_CODYCO_SRC
 
 #Temporary workaround to compile on MacOsX
 add_library(kdl_codyco SHARED ${KDL_CODYCO_SRC})
-find_library(myOrocos-KDL ${Orocos-KDL_LIBRARIES} ${Orocos-KDL_LIBRARY_DIRS})
-#target_link_libraries(kdl_codyco ${Orocos-KDL_libraries})
-target_link_libraries(kdl_codyco ${myOrocos-KDL})
+
+
+target_link_libraries(kdl_codyco ${Orocos-KDL_libraries})
 
 # --------------------------------
 

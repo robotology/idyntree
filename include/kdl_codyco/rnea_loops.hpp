@@ -1,7 +1,8 @@
 /**
- * Copyright  (C) 2013  CoDyCo Project
+ * Copyright (C) Istituto Italiano di Tecnologia
  * Author: Silvio Traversaro
- * website: http://www.codyco.eu
+ * Website: http://www.codyco.eu
+ * 
  */ 
  
 #ifndef KDL_CODYCO_RNEA_LOOPS_HPP
