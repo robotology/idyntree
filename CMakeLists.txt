@@ -46,8 +46,8 @@ endif()
 
 include_directories(include ${EIGEN3_INCLUDE_DIR} ${Orocos-KDL_INCLUDE_DIRS})
 #workaround for KDL CMake bug, check http://bugs.orocos.org/show_bug.cgi?id=1035
-link_directories(${Orocos-KDL_LIBRARY_DIRS})
-message("Library dirs for Orocos-KDL " ${Orocos-KDL_LIBRARY_DIRS})
+link_directories("${Orocos-KDL_LIBRARY_DIRS}")
+message("Library dirs for Orocos-KDL " "${Orocos-KDL_LIBRARY_DIRS}")
 message("Include directories for Orocos-KDL " ${Orocos-KDL_INCLUDE_DIRS}) 
 
 file(GLOB KDL_CODYCO_SRC
