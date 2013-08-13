@@ -1,26 +1,42 @@
-if (@PKG_NAME@_CONFIG_INCLUDED)
-  return()
-endif()
-set(@PKG_NAME@_CONFIG_INCLUDED TRUE)
+# Locate KDL install directory
 
-set(@PKG_NAME@_INCLUDE_DIRS @CMAKE_INSTALL_PREFIX@/include)
+# This module defines
+# kdl_codyco_INSTALL where to find include, lib, bin, etc.
+# kdl_codyco_FOUND, is set to true
 
-foreach(lib @PKG_LIBRARIES@)
-  set(onelib "${lib}-NOTFOUND")
-  find_library(onelib ${lib}
-    PATHS @CMAKE_INSTALL_PREFIX@/lib
-    NO_DEFAULT_PATH
-    )
-  if(NOT onelib)
-    message(FATAL_ERROR "Library '${lib}' in package @PKG_NAME@ is not installed properly")
-  endif()
-  list(APPEND @PKG_NAME@_LIBRARIES ${onelib})
-endforeach()
+# set flag for whether items are required or not
+SET(IS_REQUIRED)
+IF (kdl_codyco_FIND_REQUIRED)
+    SET(IS_REQUIRED "REQUIRED")
+ENDIF (kdl_codyco_FIND_REQUIRED)
 
-foreach(dep @PKG_DEPENDS@)
-  if(NOT ${dep}_FOUND)
-    find_package(${dep})
-  endif()
-  list(APPEND @PKG_NAME@_INCLUDE_DIRS ${${dep}_INCLUDE_DIRS})
-  list(APPEND @PKG_NAME@_LIBRARIES ${${dep}_LIBRARIES})
-endforeach()
+find_package(Eigen3 3.0 QUIET)
+# find kdl_codyco itself
+
+message( "Looking for kdl_codyco in: @CMAKE_INSTALL_PREFIX@")
+set(kdl_codyco_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include ${Orocos-KDL_INCLUDE_DIRS} ${Eigen3_INCLUDE_DIRS}" )
+set(kdl_codyco_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib ${Orocos-KDL_LIBRARY_DIRS}" )
+set(kdl_codyco_LIBRARY_RELEASE "kdl_codyco")
+set(kdl_codyco_LIBRARY_DEBUG "kdl_codycod")
+set(kdl_codyco_LIBRARIES optimized "${kdl_codyco_LIBRARY_RELEASE}" debug "${kdl_codyco_LIBRARY_DEBUG}")
+
+IF(MSVC)
+   set(CMAKE_DEBUG_POSTFIX "d")
+ENDIF(MSVC)
+
+set(kdl_codyco_FOUND TRUE)
+IF( kdl_codyco_FOUND )
+  IF(NOT kdl_codyco_FIND_QUIETLY)
+    message(STATUS "   Includes in: ${kdl_codyco_INCLUDE_DIRS}")
+    message(    "Compiler flags: ${kdl_codyco_CFLAGS}")  
+    message("   Libraries: ${kdl_codyco_LIBRARIES}")
+    message("   Libraries in: ${kdl_codyco_LIBRARY_DIRS}")
+    message("   Linker flags : ${kdl_codyco_LD_FLAGS}")
+    message("   Defines: ${kdl_codyco_DEFINES}")
+  ENDIF(NOT kdl_codyco_FIND_QUIETLY)
+
+ELSE(kdl_codyco_FOUND)  
+  IF(kdl_codyco_FIND_REQUIRED)
+    MESSAGE(FATAL_ERROR "Could not find kdl_codyco")
+  ENDIF(kdl_codyco_FIND_REQUIRED)
+ENDIF ( kdl_codyco_FOUND )
