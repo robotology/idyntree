@@ -54,8 +54,18 @@ file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
 )
 
-#Temporary workaround to compile on MacOsX
-add_library(kdl_codyco SHARED ${KDL_CODYCO_SRC})
+IF( WIN32 )
+  SET(KDL_CODYCO_BUILD_SHARED_LIBRARY OFF )
+ELSE( WIN32 )
+  SET(KDL_CODYCO_BUILD_SHARED_LIBRARY ON )
+ENDIF( WIN32 )
+
+IF( KDL_CODYCO_BUILD_SHARED_LIBRARY ) 
+    add_library(kdl_codyco SHARED ${KDL_CODYCO_SRC})
+ELSE()
+    add_library(kdl_codyco STATIC ${KDL_CODYCO_SRC})
+ENDIF()
+
 target_link_libraries(kdl_codyco ${Orocos-KDL_libraries})
 
 # --------------------------------
