@@ -1,5 +1,6 @@
 cmake_minimum_required( VERSION 2.8 FATAL_ERROR )
-project (kdl_codyco CXX)
+set(PROJECT_NAME kdl_codyco)
+project (${PROJECT_NAME} CXX)
 
 set (KDL_CODYCO_MAJOR_VERSION 0)
 set (KDL_CODYCO_MINOR_VERSION 0)
@@ -34,6 +35,7 @@ set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_codyco-config.cmake")
 configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
 install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPONENT cmake)
 INSTALL(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME})
+INSTALL(FILES ${cmake_conf_file} DESTINATION)
 
 
 # Make the package config file
