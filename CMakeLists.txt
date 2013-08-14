@@ -33,6 +33,8 @@ set(PKG_DEPENDS )
 set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_codyco-config.cmake")
 configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
 install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPONENT cmake)
+INSTALL(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME})
+
 
 # Make the package config file
 if (NOT MSVC)
