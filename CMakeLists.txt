@@ -10,7 +10,7 @@ set (KDL_CODYCO_VERSION ${KDL_CODYCO_MAJOR_VERSION}.${KDL_CODYCO_MINOR_VERSION}.
 
 message (STATUS "${PROJECT_NAME} version ${KDL_CODYCO_VERSION}")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
 # set the default build type
 if (NOT CMAKE_BUILD_TYPE)
@@ -25,12 +25,19 @@ endif (MSVC OR MSVC90 OR MSVC10)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+if(MSVC)
+    set(CMAKE_DEBUG_POSTFIX "d")
+endif(MSVC) 
+
 find_package(Eigen3 REQUIRED)
 find_package(Orocos-KDL REQUIRED)
 
 set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES kdl_codyco)
 set(PKG_DEPENDS )
+
+INSTALL(EXPORT kdl_codyco-target DESTINATION  share/${PROJECT_NAME}) 
+
 set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_codyco-config.cmake")
 configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
 install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPONENT cmake)
@@ -50,7 +57,7 @@ endif()
 
 include_directories(include ${EIGEN3_INCLUDE_DIR} ${Orocos-KDL_INCLUDE_DIRS})
 #workaround for KDL CMake bug, check http://bugs.orocos.org/show_bug.cgi?id=1035
-link_directories("${Orocos-KDL_LIBRARY_DIRS}")
+#link_directories("${Orocos-KDL_LIBRARY_DIRS}")
 message("Library dirs for Orocos-KDL ${Orocos-KDL_LIBRARY_DIRS}")
 message("Include directories for Orocos-KDL ${Orocos-KDL_INCLUDE_DIRS}") 
 
@@ -58,23 +65,18 @@ file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
 )
 
-IF( WIN32 )
-  SET(KDL_CODYCO_BUILD_SHARED_LIBRARY OFF )
-ELSE( WIN32 )
-  SET(KDL_CODYCO_BUILD_SHARED_LIBRARY ON )
-ENDIF( WIN32 )
+if(MSVC)
+    set(LIB_TYPE STATIC)
+else()
+    set(LIB_TYPE SHARED)
+endif()
 
-IF( KDL_CODYCO_BUILD_SHARED_LIBRARY ) 
-    add_library(kdl_codyco SHARED ${KDL_CODYCO_SRC})
-ELSE()
-    add_library(kdl_codyco STATIC ${KDL_CODYCO_SRC})
-ENDIF()
+add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC})
 
-target_link_libraries(kdl_codyco ${Orocos-KDL_libraries})
+target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
 
 # --------------------------------
+INSTALL(TARGETS kdl_codyco EXPORT kdl_codyco-target DESTINATION lib)
 
-INSTALL(TARGETS kdl_codyco DESTINATION lib/)
-INSTALL(DIRECTORY include/kdl_codyco DESTINATION include)
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
