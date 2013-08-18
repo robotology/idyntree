@@ -68,7 +68,7 @@ file(GLOB KDL_CODYCO_SRC
 if(MSVC)
     set(LIB_TYPE STATIC)
 else()
-    set(LIB_TYPE SHARED)
+    set(LIB_TYPE STATIC)
 endif()
 
 add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC})
