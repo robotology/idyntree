@@ -36,7 +36,7 @@ set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES kdl_codyco)
 set(PKG_DEPENDS )
 
-INSTALL(EXPORT kdl_codyco-target DESTINATION  share/${PROJECT_NAME}) 
+INSTALL(EXPORT kdl-codyco-target DESTINATION "share/${PROJECT_NAME}") 
 
 set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_codyco-config.cmake")
 configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
@@ -76,8 +76,7 @@ add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC})
 target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
 
 # --------------------------------
-INSTALL(TARGETS kdl_codyco EXPORT kdl_codyco-target DESTINATION lib)
-INSTALL(EXPORT kdl_codyco-target DESTINATION share/kdl_codyco)
+INSTALL(TARGETS kdl_codyco EXPORT kdl-codyco-target DESTINATION lib)
 
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
