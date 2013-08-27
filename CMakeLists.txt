@@ -77,6 +77,6 @@ target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
 
 # --------------------------------
 INSTALL(TARGETS kdl_codyco EXPORT kdl-codyco-target DESTINATION lib)
-
+INSTALL(DIRECTORY include/kdl_codyco DESTINATION include) 
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
