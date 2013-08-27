@@ -5,6 +5,7 @@
  */
 
 #include "kdl_codyco/treecomsolver.hpp"
+#include "kdl_codyco/com_loops.hpp"
 #include <iostream>
 #include <kdl/frames_io.hpp>
 
@@ -40,6 +41,7 @@ namespace CoDyCo {
         //assert(tree_graph.check_consistency() == 0);
         #endif
         
+        /*
         for(int l=traversal.order.size()-1; l>=0; l-- ) {
             LinkMap::const_iterator link = traversal.order[l];
             
@@ -67,16 +69,9 @@ namespace CoDyCo {
                     } else {
                         joint_position = 0;
                     }    
+                   
                     
-                    #ifndef NDEBUG
-                    std::cout << "Frame X_"<< index <<"_"<<s << std::endl;
-                    std::cout << (link->pose(j,joint_position)).Inverse() << std::endl;
-                        std::cout << "Frame X_"<< s<<"_"<<index << std::endl;
-                    std::cout << (link->pose(j,joint_position)) << std::endl;
-                    #endif
-                    
-                    //note: very little values of mass could cause numerical problems
-                    //\todo solve
+                    //\todo solve issue: very little values of mass could cause numerical problems 
                     if( subtree_mass[s] > 0.0 ||  subtree_mass[index] > 0.0 ) { 
                         subtree_COM[index] = (subtree_mass[index]*subtree_COM[index] +
                                             subtree_mass[s]*((link->pose(j,joint_position)).Inverse()*subtree_COM[s]))
@@ -89,13 +84,11 @@ namespace CoDyCo {
             }
         }
         
-        #ifndef NDEBUG
-        std::cout << "TreeCOMsolver subtree_COM: " << std::endl;
-        for( int i = 0; i != (int)subtree_COM.size(); ++i)
-            std::cout << i << " " << subtree_COM[i] << "\n"; 
-        #endif 
-        
         p_out = subtree_COM[0];
+        */
+        
+        getCenterOfMassLoop(tree_graph,q_in,traversal,subtree_COM,subtree_mass,p_out,part_id);
+        
         return 0;
         
     } 
