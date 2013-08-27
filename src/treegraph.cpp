@@ -193,29 +193,35 @@ namespace CoDyCo {
     LinkMap::const_iterator TreeGraph::getLink(const std::string& name) const
     {
         LinkNameMap::const_iterator ret_value = links_names.find(name);
-        #ifndef NDEBUG
-        if( ret_value == links_names.end() ) { std::cerr << "Link " << name << " not found " << std::endl; }
-        #endif
-        //assert(ret_value != links_names.end());
+        if( ret_value == links_names.end() ) {
+			//std::cerr << "TreeGraph: Link " << name << " not found " << std::endl; 
+			return getInvalidLinkIterator();
+		}
         return ret_value->second;
     }
     
     LinkMap::const_iterator TreeGraph::getLink(const int index) const
     {
-        assert(index >= 0 && index < (int)getNrOfLinks());
+        if(!(index >= 0 && index < (int)getNrOfLinks())) {
+			return getInvalidLinkIterator();
+		}
         return links.begin()+index;
     }
         
     JunctionMap::const_iterator TreeGraph::getJunction(const int index) const
     {
-        assert(index >= 0 && index < (int)getNrOfJunctions());
+        if( !(index >= 0 && index < (int)getNrOfJunctions()) ) {
+			return getInvalidJunctionIterator();
+		}
         return junctions.begin()+index;
     }
     
     JunctionMap::const_iterator TreeGraph::getJunction(const std::string& name) const
     {
         JunctionNameMap::const_iterator ret_value = junctions_names.find(name);
-        assert(ret_value != junctions_names.end());
+        if(ret_value == junctions_names.end()) {
+			return getInvalidJunctionIterator();
+		}
         return ret_value->second;
     }
     
