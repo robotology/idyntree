@@ -428,11 +428,11 @@ namespace CoDyCo {
         if( traversal.parent.size() != getNrOfLinks() ) traversal.parent.resize(getNrOfLinks());
         
         #ifndef NDEBUG
-        std::cerr << "Check consistency at the begin of compute_traversal " << std::endl;
+        //std::cerr << "Check consistency at the begin of compute_traversal " << std::endl;
         assert(check_consistency() == 0);
         #endif
         #ifndef NDEBUG
-        std::cerr << "Original base " << original_root << std::endl;
+        //std::cerr << "Original base " << original_root << std::endl;
         #endif
         
         LinkMap::const_iterator base;
@@ -520,7 +520,7 @@ namespace CoDyCo {
     int TreeGraph::compute_traversal(Traversal & traversal, const std::string& base_link,const bool bf_traversal) const
     {
         #ifndef NDEBUG
-        std::cerr << "Called compute_traversal with " << base_link << "as base link " << std::endl;
+        //std::cerr << "Called compute_traversal with " << base_link << "as base link " << std::endl;
         #endif
         LinkMap::const_iterator base_link_it = getLink(base_link);
         if( base_link_it == getInvalidLinkIterator() ) { return -1; }
@@ -530,7 +530,7 @@ namespace CoDyCo {
     //Warning q_nr is dependent on the selected base, not on the serialization
     Tree TreeGraph::getTree(std::string base) const
     {
-		assert(this->check_consistency() == 0);
+        assert(this->check_consistency() == 0);
 		
 		//Define a KDL::Tree with fake link "base_link", as is usually done
 		//URDF describing humanoids
