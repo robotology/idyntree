@@ -10,7 +10,7 @@
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
 #include <kdl_codyco/treegraph.hpp>
-
+#include <kdl_codyco/momentumjacobian.hpp>
 namespace KDL {
 namespace CoDyCo {
 
@@ -23,7 +23,6 @@ namespace CoDyCo {
      */
     double computeMass(const Tree & tree);
     
-    
     /**
      * The position of the Joint with respect to the hook segment is defined with respect
      * to the frame of reference of the parent. This function is used to get the joint with the polarity
@@ -32,9 +31,27 @@ namespace CoDyCo {
      * \todo check the math in this function
      * 
      */
-	int JointInvertPolarity(const KDL::Joint & old_joint, const KDL::Frame & old_f_tip, KDL::Joint & new_joint, KDL::Frame & new_f_tip);
+    int JointInvertPolarity(const KDL::Joint & old_joint, const KDL::Frame & old_f_tip, KDL::Joint & new_joint, KDL::Frame & new_f_tip);
     
+     /**
+       * calculate spatial velocity from momentum: v = inv(I)*h
+       * make sure that the spatial momentum h and the inertia are expressed in the same reference frame/point
+       * 
+       * in case the rigid body inertia as zero mass or a singular inertia tensor, returns a zero twist
+       */
+     Twist operator/(const Wrench& h, const RigidBodyInertia& I);
+     
+     bool multiplyInertiaJacobian(const Jacobian& src, const RigidBodyInertia& I, MomentumJacobian& dest);
 
+     bool divideJacobianInertia(const MomentumJacobian& src, const RigidBodyInertia& I, Jacobian& dest);
+     
+      template<class Derived>
+    inline Eigen::Matrix<typename Derived::Scalar, 3, 3> skew(const Eigen::MatrixBase<Derived> & vec)
+    {
+        EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived, 3);
+        return (Eigen::Matrix<typename Derived::Scalar, 3, 3>() << 0.0, -vec[2], vec[1], vec[2], 0.0, -vec[0], -vec[1], vec[0], 0.0).finished();
+    }
+    
 }
 }  
 

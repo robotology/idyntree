@@ -9,7 +9,9 @@
 
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
+
 #include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/momentumjacobian.hpp>
 
 namespace KDL {
 namespace CoDyCo {
@@ -24,7 +26,7 @@ namespace CoDyCo {
                             const JntArray &q, 
                             const Traversal & traversal,
                             std::vector<KDL::Vector>& subtree_COM,
-							std::vector<double>& subtree_mass,
+                            std::vector<double>& subtree_mass,
                             Vector & com,
                             int part_id = -1);
     
@@ -40,20 +42,28 @@ namespace CoDyCo {
     * \warning Basic function designed for use inside the solver,so some the
     *          error checking on input/output parameters is not guaranteed
     * 
-    * @param jac the 6x(NrOfDOFs+6) Jacobian, used for the Momentum Jacobian output
+    * @param jac the 6x(NrOfDOFs+6) MomentumJacobian, used for the Momentum Jacobian output
     * @param buffer_1 a 6x(NrOfDOFs+6) Jacobian, used for intermediate results
-    * @param buffer_2 a 6x(NrOfDOFs+6) Jacobian, used for intermediate results
+    * @param buffer_2 a 6x(NrOfDOFs+6) MomentumJacobian, used for intermediate results
     * @param the total inertia of the tree, expressed in the base reference frame (useful to convert between the momentum jacobian and the COM jacobian)
     */
    void getMomentumJacobianLoop(const TreeGraph & tree_graph,
                                 const JntArray &q, 
                                 const Traversal & traversal,
-		                        const std::vector<Frame>& X_b,
-                                Jacobian & jac,
+                                const std::vector<Frame>& X_b,
+                                MomentumJacobian & jac,
                                 Jacobian & buffer_1,
-                                Jacobian & buffer_2,
-                                RigidBodyInertia total_inertia,
+                                MomentumJacobian & buffer_2,
+                                RigidBodyInertia & total_inertia,
                                 int part_id = -1);
+   
+   void getCOMJacobianLoop(const TreeGraph & tree_graph,
+                           const JntArray &q, 
+                           const Traversal & traversal,
+                           const std::vector<Frame>& X_b,
+                           Jacobian & jac,
+                           Jacobian & buffer_jac,
+                           int part_id = -1);
 }
 }  
 
