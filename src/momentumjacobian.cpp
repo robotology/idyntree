@@ -83,7 +83,7 @@ namespace CoDyCo
     }
 
     void MomentumJacobian::changeRefPoint(const Vector& base_AB){
-        for(unsigned int i=0;i<data.cols();i++)
+        for(unsigned int i=0;i<(unsigned int)data.cols();i++)
             this->setColumn(i,this->getColumn(i).RefPoint(base_AB));
     }
 
@@ -97,7 +97,7 @@ namespace CoDyCo
     }
     
     void MomentumJacobian::changeBase(const Rotation& rot){
-        for(unsigned int i=0;i<data.cols();i++)
+        for(unsigned int i=0;i<(unsigned int)data.cols();i++)
             this->setColumn(i,rot*this->getColumn(i));;
     }
 
@@ -111,7 +111,7 @@ namespace CoDyCo
     }
 
     void MomentumJacobian::changeRefFrame(const Frame& frame){
-        for(unsigned int i=0;i<data.cols();i++)
+        for(unsigned int i=0;i<(unsigned int)data.cols();i++)
             this->setColumn(i,frame*this->getColumn(i));
     }
     
