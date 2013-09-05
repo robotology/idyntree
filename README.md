@@ -1,6 +1,8 @@
 kdl_codyco
 ==========
 
+[![Build Status](https://travis-ci.org/traversaro/kdl_codyco.png)](https://travis-ci.org/traversaro/kdl_codyco)
+
  Kinematics and Dynamics Library extensions developed in the CoDyCo project.
  
  This repositories contains several solvers for KDL developed and used by the CoDyCo project,
