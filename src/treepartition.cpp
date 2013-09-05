@@ -13,10 +13,10 @@
 
 namespace KDL {
 namespace CoDyCo {
-	/*
-	int TreePart::getLocalPartIndex(const std::string part_name)
-	{ 
-		std::map<std::string,int>::const_iterator it_si = name_map.find(part_name);
+    /*
+    int TreePart::getLocalPartIndex(const std::string part_name)
+    { 
+        std::map<std::string,int>::const_iterator it_si = name_map.find(part_name);
         
         if( it_si == name_map.end() ) { return -1; }
         
@@ -285,15 +285,15 @@ namespace CoDyCo {
     }
     
     /**
-	 * \todo add efficient way of returning vector<int>
-	 * 
-	 */	
+     * \todo add efficient way of returning vector<int>
+     * 
+     */
     std::vector<int> TreePartition::getPartLinkIDs(const std::string & part_name) const
     {   
-		//\todo error checking
+        //\todo error checking
         TreePart part = getPart(part_name);
         return part.getLinkIDs();
-	}
+    }
 
     /**
      * \todo add efficient way of returning vector<int>
@@ -301,25 +301,28 @@ namespace CoDyCo {
      */
     std::vector<int> TreePartition::getPartDOFIDs(const std::string & part_name) const
     {   
+        std::vector<int> ret;
         #ifndef NDEBUG
-        std::cout << "getPartDOFIDs(" << part_name <<")" << std::endl;
+        //std::cout << "getPartDOFIDs(" << part_name <<")" << std::endl;
         #endif 
         TreePart part = getPart(part_name);
+        ret = part.getDOFIDs();
         #ifndef NDEBUG
-        std::cout << part.toString() << std::endl;
+        //std::cout << part.toString() << std::endl;
+        //std::cout << "has " << ret.size() << " DOFs " << std::endl;
         #endif
-        return part.getDOFIDs();
-	}
+        return ret;
+    }
 
         
     std::string TreePartition::toString() const
     {
-		std::stringstream ss;
+        std::stringstream ss;
         for(int i=0; i < (int)parts.size(); i++ ) {
-			//std::cout << "TreePartition::toString() index " << i << " " << parts[i].getPartID() << std::endl;
-			ss << "part ID:" << parts[i].getPartID() << " part name: " << parts[i].getPartName() << std::endl;
-		}
-		return ss.str();
+            //std::cout << "TreePartition::toString() index " << i << " " << parts[i].getPartID() << std::endl;
+            ss << "part ID:" << parts[i].getPartID() << " part name: " << parts[i].getPartName() << std::endl;
+        }
+        return ss.str();
     }
 }
 }

@@ -79,4 +79,11 @@ target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
 INSTALL(TARGETS kdl_codyco EXPORT kdl-codyco-target DESTINATION lib)
 INSTALL(DIRECTORY include/kdl_codyco DESTINATION include) 
 
+option(CREATE_TESTS "Create regression tests using CMake" FALSE)
+
+IF(CREATE_TESTS)
+    enable_testing()
+    ADD_SUBDIRECTORY(tests)
+ENDIF(CREATE_TESTS)
+
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
