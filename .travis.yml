@@ -8,7 +8,7 @@ before_script:
   - cd orocos_kinematics_dynamics/orocos_kdl
   - mkdir build 
   - cd build
-  - ccmake ../
+  - cmake ../
   - make
   - sudo make install
   - cd ../../..
