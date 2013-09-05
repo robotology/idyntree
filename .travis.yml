@@ -1,0 +1,20 @@
+language: cpp
+
+compiler:
+  - gcc
+
+before_script:
+  - sudo apt-get install -qq libeigen3-dev 
+  - git clone https://github.com/traversaro/orocos_kinematics_dynamics
+  - cd orocos_kinematics_dynamics/orocos_kdl
+  - mkdir build 
+  - cd build
+  - cmake ../
+  - make
+  - sudo make install
+  - cd ../../..
+  - mkdir build
+  - cd build
+  - cmake -DCREATE_TESTS:BOOL=ON ..
+
+script: make && make test
