@@ -15,6 +15,6 @@ before_script:
   - cd ../../..
   - mkdir build
   - cd build
-  - cmake ..
+  - cmake -DCREATE_TESTS:BOOL=ON ..
 
-script: make
+script: make && make test
