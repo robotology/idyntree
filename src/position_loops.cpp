@@ -10,7 +10,7 @@ namespace KDL {
 namespace CoDyCo {
 
     int getFrameLoop(const TreeGraph & tree_graph,
-                const JntArray &q, 
+                const KDL::JntArray &q, 
                 const Traversal & traversal,
                 const int proximal_link_index,
                 const int distal_link_index,
@@ -45,7 +45,7 @@ namespace CoDyCo {
     }
     
     Frame getFrameLoop(const TreeGraph & tree_graph,
-                const JntArray &q, 
+                const KDL::JntArray &q, 
                 const Traversal & traversal,
                 const int proximal_link_index,
                 const int distal_link_index)
@@ -57,7 +57,7 @@ namespace CoDyCo {
     
     
     int getFramesLoop(const TreeGraph & tree_graph,
-					  const JntArray &q, 
+					  const KDL::JntArray &q, 
 					  const Traversal & traversal,
 					  std::vector<Frame> & X_base)
     {

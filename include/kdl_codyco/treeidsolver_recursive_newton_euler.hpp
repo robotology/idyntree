@@ -67,7 +67,7 @@ namespace CoDyCo{
          * Output parameters:
          * \param torques the resulting torques for the joints
          */
-        int CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Wrenches& f_ext,JntArray &torques);
+        int CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Wrenches& f_ext,JntArray &torques);
         
         /** 
          * Calculate floating base inverse dynamics, from joint positions, velocity, acceleration, 
@@ -88,7 +88,7 @@ namespace CoDyCo{
          * 
          * @return if < 0 something went wrong
          */
-        int CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force);
+        int CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force);
 
         TreeSerialization getSerialization() const;
 

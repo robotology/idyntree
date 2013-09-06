@@ -39,7 +39,7 @@ namespace CoDyCo
              * 
 			 * @return if < 0 something went wrong
 			 */
-            int JntToCOM(const JntArray& q_in, Vector& p_out, const int part_id=-1);
+            int JntToCOM(const KDL::JntArray& q_in, Vector& p_out, const int part_id=-1);
         
         private:
             const TreeGraph tree_graph;

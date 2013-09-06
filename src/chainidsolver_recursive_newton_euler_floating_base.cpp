@@ -33,7 +33,7 @@ namespace KDL{
 
     }
     
-    int ChainIdSolver_RNE_FB::CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Wrenches& f_ext, JntArray &torques)
+    int ChainIdSolver_RNE_FB::CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Wrenches& f_ext, KDL::JntArray &torques)
     {
         Wrench dummy;
         return CartToJnt(q,q_dot,q_dotdot,Twist::Zero(),ag,f_ext,torques,dummy);
@@ -41,7 +41,7 @@ namespace KDL{
 
 
 
-    int ChainIdSolver_RNE_FB::CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot,  const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext, JntArray &torques, Wrench& base_force)
+    int ChainIdSolver_RNE_FB::CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot,  const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext, KDL::JntArray &torques, Wrench& base_force)
     {
         //Check sizes when in debug mode
         if(q.rows()!=nj || q_dot.rows()!=nj || q_dotdot.rows()!=nj || torques.rows()!=nj || f_ext.size()!=ns)

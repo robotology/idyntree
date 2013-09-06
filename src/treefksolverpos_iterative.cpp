@@ -67,7 +67,7 @@ namespace CoDyCo {
         }
     }
 
-    int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, std::string segmentName)
+    int TreeFkSolverPos_iterative::JntToCart(const KDL::JntArray& q_in, Frame& p_out, std::string segmentName)
     {
         LinkMap::const_iterator it;
         it = tree_graph.getLink(segmentName);
@@ -78,7 +78,7 @@ namespace CoDyCo {
         return JntToCart(q_in,p_out,it->link_nr);
     }
 
-    int TreeFkSolverPos_iterative::JntToCart(const JntArray& q_in, Frame& p_out, int segmentIndex)
+    int TreeFkSolverPos_iterative::JntToCart(const KDL::JntArray& q_in, Frame& p_out, int segmentIndex)
     {
         assert(tree_graph.check_consistency(traversal) == 0);
         

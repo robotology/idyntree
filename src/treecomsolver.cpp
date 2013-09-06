@@ -30,7 +30,7 @@ namespace CoDyCo {
     TreeCOMSolver::~TreeCOMSolver() {
     }
     
-    int TreeCOMSolver::JntToCOM(const JntArray& q_in, Vector& p_out, const int part_id) {
+    int TreeCOMSolver::JntToCOM(const KDL::JntArray& q_in, Vector& p_out, const int part_id) {
         //First we check all the sizes:
         if (q_in.rows() != tree_graph.getNrOfDOFs()) {
             return -1;

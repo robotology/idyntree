@@ -32,7 +32,7 @@ namespace CoDyCo {
     
     
     void getCenterOfMassLoop(const TreeGraph & tree_graph,
-                            const JntArray &q, 
+                            const KDL::JntArray &q, 
                             const Traversal & traversal,
                             std::vector<KDL::Vector>& subtree_COM,
                             std::vector<double>& subtree_mass,
@@ -85,7 +85,7 @@ namespace CoDyCo {
     }
     
     void getMomentumJacobianLoop(const TreeGraph & tree_graph,
-                                 const JntArray &q, 
+                                 const KDL::JntArray &q, 
                                  const Traversal & traversal,
                                  const std::vector<Frame>& X_b,
                                  MomentumJacobian & jacobian_momentum,
@@ -135,7 +135,7 @@ namespace CoDyCo {
     }
     
     void getCOMJacobianLoop(const TreeGraph & tree_graph,
-                           const JntArray &q, 
+                           const KDL::JntArray &q, 
                            const Traversal & traversal,
                            const std::vector<Frame>& X_b,
                            Jacobian & jac,

@@ -10,9 +10,9 @@ namespace KDL {
 namespace CoDyCo {
 
     int rneaKinematicLoop(const TreeGraph & tree_graph,
-                           const JntArray &q, 
-                           const JntArray &q_dot,
-                           const JntArray &q_dotdot,  
+                           const KDL::JntArray &q, 
+                           const KDL::JntArray &q_dot,
+                           const KDL::JntArray &q_dotdot,  
                            const Traversal & kinetic_traversal,
                            const Twist& base_velocity, 
                            const Twist& base_acceleration, 
@@ -66,13 +66,13 @@ namespace CoDyCo {
     }
     
     int rneaDynamicLoop(const TreeGraph & tree_graph,
-                         const JntArray &q, 
+                         const KDL::JntArray &q, 
                          const Traversal & dynamical_traversal,
                          const std::vector<Twist>& v,
                          const std::vector<Twist>& a,
                          const std::vector<Wrench>& f_ext,
                          std::vector<Wrench>& f,
-                         JntArray &torques,
+                         KDL::JntArray &torques,
                          Wrench & base_force)
     {
         double joint_pos;

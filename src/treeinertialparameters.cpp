@@ -104,9 +104,9 @@ namespace CoDyCo {
     }
     
 
-    int TreeInertialParametersRegressor::dynamicsRegressor( const JntArray &q, 
-                                                    const JntArray &q_dot,
-                                                    const JntArray &q_dotdot,  
+    int TreeInertialParametersRegressor::dynamicsRegressor( const KDL::JntArray &q, 
+                                                    const KDL::JntArray &q_dot,
+                                                    const KDL::JntArray &q_dotdot,  
                                                     const Twist& base_velocity, 
                                                     const Twist& base_acceleration,
                                                     Eigen::MatrixXd & dynamics_regressor)

@@ -87,7 +87,7 @@ namespace CoDyCo {
              * @param dynamics_regressor a (6+nj)x(10*ns) output matrix
              *
              */
-            int dynamicsRegressor(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, Eigen::MatrixXd & dynamics_regressor);
+            int dynamicsRegressor(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, Eigen::MatrixXd & dynamics_regressor);
 
             
             /**
@@ -99,7 +99,7 @@ namespace CoDyCo {
              * @param dynamics_regressor a (6+nj)x(10*ns) output matrix
              *
              */
-            int dynamicsRegressor(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot,  const Twist& base_velocity, const Twist& base_acceleration, Eigen::MatrixXd & dynamics_regressor);
+            int dynamicsRegressor(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot,  const Twist& base_velocity, const Twist& base_acceleration, Eigen::MatrixXd & dynamics_regressor);
 
         };
 }

@@ -117,7 +117,7 @@ class FTSensorList
     public: 
         std::vector< FTSensor > ft_sensors_vector;
         
-        int getNrOfFTSensors()
+        int getNrOfFTSensors() const
         {
             return ft_sensors_vector.size();
         }
@@ -153,7 +153,7 @@ class FTSensorList
         }
         
         
-        KDL::Wrench getMeasuredWrench(int link_id,  const std::vector< KDL::Wrench > & measured_wrenches)
+        KDL::Wrench getMeasuredWrench(int link_id,  const std::vector< KDL::Wrench > & measured_wrenches) const
         {   
             KDL::Wrench ret = KDL::Wrench::Zero();
             for(int i = 0; i < (int)link_FT_sensors[link_id].size(); i++ ) {
@@ -162,11 +162,11 @@ class FTSensorList
             return ret;
         }
         
-        bool isFTSensor(int junction_index) {
+        bool isFTSensor(int junction_index) const {
             return ( junction_id2ft_sensor_id[junction_index] >= 0);
         }
         
-        int getFTSensorID(int junction_index) {
+        int getFTSensorID(int junction_index) const {
             return junction_id2ft_sensor_id[junction_index];
         }
         
@@ -183,7 +183,7 @@ class FTSensorList
             return link_FT_sensors[link_index];
         }
         
-        int getNrOfFTSensorsOnLink(int link_index)
+        int getNrOfFTSensorsOnLink(int link_index) const
         {
             if( getNrOfFTSensors() == 0 ) {
                 return 0;

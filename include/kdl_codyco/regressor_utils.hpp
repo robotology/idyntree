@@ -26,6 +26,11 @@ namespace CoDyCo {
     KDL::RigidBodyInertia deVectorize(const Eigen::Matrix<double,10,1> & vec);
     KDL::RotationalInertia devech(const Eigen::Matrix<double,6,1> & vec);
     
+    /**
+     * 
+     * crossProductMatrix(v)*u = v*u
+     * 
+     */
     Eigen::Matrix3d crossProductMatrix(const KDL::Vector & v);
     
     Eigen::Matrix<double, 6, 6> spatialCrossProductTwistMatrix(const KDL::Twist & v);
@@ -50,10 +55,25 @@ namespace CoDyCo {
      */
     Eigen::Matrix<double, 6, 10> momentumRegressor(const KDL::Twist & v);
     
+    /**
+     * Get the net wrench regressor for a given spatial twist and spatial acceleration
+     * 
+     * The momentum regressor is 6x10 matrix such that:
+     *      netWrenchRegressor(v,a) = I*a + v*I*v
+     * 
+     */
     Eigen::Matrix<double, 6, 10> netWrenchRegressor(const KDL::Twist & v, const KDL::Twist & a) ;    
     
+    /**
+     * Get a Eigen 6 element vector from a KDL::Twist (0:2 linear velocity, 3:5 angular velocity)
+     * 
+     */
     Eigen::Matrix<double, 6, 1> toEigen(const KDL::Twist & v);
     
+    /**
+     * Get an Eigen 6 element vector from a KDL::Wrench (0:2 linear force, 3:5 torque)
+     * 
+     */
     Eigen::Matrix<double, 6, 1> toEigen(const KDL::Wrench & v);
 
 }

@@ -35,7 +35,7 @@ namespace CoDyCo
              * 
 			 * @return if < 0 something went wrong
 			 */
-            int JntToCOM(const JntArray& q_in, Vector& p_out);
+            int JntToCOM(const KDL::JntArray& q_in, Vector& p_out);
         
         private:
             

@@ -16,7 +16,7 @@ namespace CoDyCo {
     
 
 void dynamicsRegressorLoop(const TreeGraph & tree_graph,
-                         const JntArray &q, 
+                         const KDL::JntArray &q, 
                          const Traversal & traversal,
                          const std::vector<Frame>& X_b,
                          const std::vector<Twist>& v,

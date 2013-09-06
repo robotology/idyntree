@@ -22,7 +22,7 @@ namespace CoDyCo {
     TreeCOMSerialSolver::~TreeCOMSerialSolver() {
     }
     
-    int TreeCOMSerialSolver::JntToCOM(const JntArray& q_in, Vector& p_out) {
+    int TreeCOMSerialSolver::JntToCOM(const KDL::JntArray& q_in, Vector& p_out) {
         //First we check all the sizes:
         if (q_in.rows() != tree.getNrOfJoints()) {
             return -1;

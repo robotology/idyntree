@@ -133,6 +133,8 @@ namespace CoDyCo
          * Get the motion subspace S of the joint connecting this link to an adjacent link
          * expressed in the adjacent link reference frame
          * 
+         * \todo Change the semantic of adjacent_index, it is confusing?
+         * 
          * @param adjancent_index the local index of the selected adjacent link
          * @param q the position of the joint connecting this link to the adjacent link
          * @return  \f$ {}^a S_{t,a}\f$ the motion subspace of the joint connecting 
@@ -172,6 +174,8 @@ namespace CoDyCo
         
         /**
          * \note adjacent index is an index local to each TreeGraphLink
+         * 
+         * \todo Change the semantic of adjacent_index, it is confusing?
          * 
          */
         JunctionMap::const_iterator getAdjacentJoint(int adjacent_index) const;

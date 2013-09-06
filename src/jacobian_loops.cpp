@@ -15,7 +15,7 @@ namespace KDL {
 namespace CoDyCo {
     
     void getRelativeJacobianLoop(const TreeGraph & tree_graph,
-                                const JntArray &q, 
+                                const KDL::JntArray &q, 
                                 const Traversal & traversal,
                                 const int link_index,
                                 Jacobian & jac)
@@ -55,7 +55,7 @@ namespace CoDyCo {
     }
     
     void getFloatingBaseJacobianLoop(const TreeGraph & tree_graph,
-                                     const JntArray &q, 
+                                     const KDL::JntArray &q, 
                                      const Traversal & traversal,
                                      const int link_index,
                                      Jacobian & jac)

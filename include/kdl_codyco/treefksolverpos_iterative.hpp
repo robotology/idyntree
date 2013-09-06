@@ -60,8 +60,8 @@ namespace CoDyCo {
         
         TreeGraph getTreeGraph() const { return tree_graph; }
 
-        int JntToCart(const JntArray& q_in, Frame& p_out, std::string segmentName);
-        int JntToCart(const JntArray& q_in, Frame& p_out, const int segmentIndex);
+        int JntToCart(const KDL::JntArray& q_in, Frame& p_out, std::string segmentName);
+        int JntToCart(const KDL::JntArray& q_in, Frame& p_out, const int segmentIndex);
         
     };
 

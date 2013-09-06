@@ -23,7 +23,7 @@ namespace CoDyCo {
     *          error checking on input/output parameters is not guaranteed
     */
    void getCenterOfMassLoop(const TreeGraph & tree_graph,
-                            const JntArray &q, 
+                            const KDL::JntArray &q, 
                             const Traversal & traversal,
                             std::vector<KDL::Vector>& subtree_COM,
                             std::vector<double>& subtree_mass,
@@ -48,7 +48,7 @@ namespace CoDyCo {
     * @param the total inertia of the tree, expressed in the base reference frame (useful to convert between the momentum jacobian and the COM jacobian)
     */
    void getMomentumJacobianLoop(const TreeGraph & tree_graph,
-                                const JntArray &q, 
+                                const KDL::JntArray &q, 
                                 const Traversal & traversal,
                                 const std::vector<Frame>& X_b,
                                 MomentumJacobian & jac,
@@ -58,7 +58,7 @@ namespace CoDyCo {
                                 int part_id = -1);
    
    void getCOMJacobianLoop(const TreeGraph & tree_graph,
-                           const JntArray &q, 
+                           const KDL::JntArray &q, 
                            const Traversal & traversal,
                            const std::vector<Frame>& X_b,
                            Jacobian & jac,

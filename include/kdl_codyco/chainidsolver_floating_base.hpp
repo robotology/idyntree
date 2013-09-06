@@ -51,7 +51,7 @@ namespace KDL
 			 * 
 			 * @return if < 0 something went wrong
 			 */
-        virtual int CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Wrenches& f_ext,JntArray &torques)=0;
+        virtual int CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Wrenches& f_ext,JntArray &torques)=0;
 
 			/** 
 			 * Calculate floating base inverse dynamics, from joint positions, velocity, acceleration, 
@@ -72,7 +72,7 @@ namespace KDL
              * 
 			 * @return if < 0 something went wrong
 			 */
-        virtual int CartToJnt(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force)=0;
+        virtual int CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force)=0;
 
         // Need functions to return the manipulator mass, coriolis and gravity matrices - Lagrangian Formulation.
 	};
