@@ -11,6 +11,13 @@
 #ifndef _DRRL_DYNAMIC_REGRESSOR_INTERFACE_
 #define _DRRL_DYNAMIC_REGRESSOR_INTERFACE_
 
+#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/ftsensor.hpp>
+#include <kdl/jntarray.hpp>
+
+#include <Eigen/Core>
+#include <Eigen/Dense>
+
 namespace DRRL 
 {
 
@@ -27,20 +34,24 @@ public:
      * 
      * \todo substitute KDL::CoDyCo::FTSensorList with a more general structure
      */
-    virtual int configure(const KDL::CoDyCo::TreeGraph & tree_graph, const KDL::CoDyCo::FTSensorList & ft_list);
+    virtual int configure() = 0;
     
-    virtual int compute_regressor(const KDL::CoDyCo::TreeGraph & tree_graph,
-                                   const JntArray &q, 
-                                   const JntArray &q_dot, 
-                                   const JntArray &q_dotdot,
-                                   const std::vector<KDL::Frame> & X_dynamic_base,
-                                   const std::vector<KDL::Twist> v,
-                                   const std::vector< KDL::Wrench > & measured_wrenches;
-                                   const KDL::JntArray measured_torques,
-                                   Eigen::MatrixXd & regressor_matrix,
-                                   Eigen::VectorXd & known_terms);
+    /**
+     * Given a robot state, compute the regressor
+     * 
+     */
+    virtual int computeRegressor(const KDL::JntArray &q,                                //state
+                                 const KDL::JntArray &q_dot, 
+                                 const KDL::JntArray &q_dotdot,
+                                 const std::vector<KDL::Frame> & X_dynamic_base,        //result of forward kinematic
+                                 const std::vector<KDL::Twist> &v,
+                                 const std::vector<KDL::Twist> &a,
+                                 const std::vector< KDL::Wrench > & measured_wrenches,  // measurments
+                                 const KDL::JntArray & measured_torques,
+                                 Eigen::MatrixXd & regressor_matrix,                    //output
+                                 Eigen::VectorXd & known_terms) = 0;
     
-}
+};
 
 }
 #endif

@@ -17,6 +17,10 @@ namespace KDL {
 namespace CoDyCo {
     void TreeSerialization::addDFSrecursive(SegmentMap::const_iterator current_el, int & link_cnt, int & fixed_joints_cnt )
     {
+        #ifndef NDEBUG
+        //std::cout << "addDFSrecursive: called with segment " << current_el->second.segment.getName() << " link_cnt " << link_cnt << " fixed_joints_cnt " << fixed_joints_cnt << std::endl; 
+        //std::cout << "nr of junctions " << getNrOfJunctions() << " nr of DOFs " << getNrOfDOFs() << std::endl;
+        #endif
         if( current_el->second.segment.getJoint().getType() != Joint::None ) {
             dofs[current_el->second.q_nr] = current_el->second.segment.getJoint().getName();
             junctions[current_el->second.q_nr] = current_el->second.segment.getJoint().getName();
@@ -77,6 +81,10 @@ namespace CoDyCo {
         assert( root->second.children.size() == 1);
         
         real_root = root->second.children[0];
+        
+        //This requires that the joint connecting the fake base to the real base is fixed
+        assert( real_root->second.segment.getJoint().getType() == Joint::None );
+        
         //Add real_root link without including fake joint
         links[link_cnt] = real_root->first;
         

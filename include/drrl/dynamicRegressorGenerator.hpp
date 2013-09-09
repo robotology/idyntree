@@ -8,6 +8,7 @@
 #define KDL_CODYCO_DYNREGRESSORGENERATOR_HPP
 
 #include <kdl/tree.hpp>
+#include <boost/graph/graph_concepts.hpp>
 
 #include <kdl_codyco/utils.hpp>
 
@@ -15,13 +16,17 @@
 
 #include <kdl_codyco/ftsensor.hpp>
 
+#include <drrl/dynamicRegressorInterface.hpp>
+#include <drrl/subtreeArticulatedDynamicsRegressor.hpp>
+
+//#include <drrl/torqueRegressor.hpp>
 
 namespace DRRL 
 {    
     
 //typedef FixedParameterIndex int;
 //typedef UnknownParameterIndex int;
-typedef ParameterIndex int;
+//typedef ParameterIndex int;
 
 /**
  * The dynamics regressor generator is a class for calculating arbitrary regressor
@@ -46,20 +51,28 @@ public:
     * @param ft_sensor_names the names of the Joints (of type Joint::None) that are Force Torque sensors
     * 
     */
-    DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base, std::vector< std::string > & ft_sensor_names=std::vector< std::string >(0), bool ft_sensor_offset=true,KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization());
+    DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base, std::vector< std::string > ft_sensor_names=std::vector< std::string >(0), bool ft_sensor_offset=true,KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization());
     
     ~DynamicRegressorGenerator() {};
     
-    void addRegressorRows(DynamicRegressorInterface & dynamic_regressor);
+    int addSubtreeRegressorRows(const std::vector< std::string>& _subtree_leaf_links);
     
+    //int addTorqueRegressorRows(const std::string & dof_name, const std::vector<bool> &_activated_ft_sensors);
+    
+
     /**
     * 
-    * Get the number of parameters used by the regressor currently generated 
+    * Get the number of parameters used by the regressor currently generated (i.e. the number of rows of the regressor)
     * (default: 10*tree.getNrOfSegments(), then depending on the type of regressor more can be added) 
     * 
     */
     int getNrOfParameters();
     
+    /**
+     * Get the number of outputs by the regressor currently generated (i.e. the number of columns of the regressor)
+     *
+     */ 
+     
     int getNrOfOutputs();
     
     //The feature of fixing/unfixing parameters would be implemented in a later version
@@ -82,6 +95,10 @@ public:
     */
     std::string getDescriptionOfParameters();
     
+    std::string getDescriptionOfOutput(int output_index);
+    
+    std::string getDescriptionOfOutputs();
+    
     //std::string getDescriptionOfFixedParameters();
     
     //std::string getDescriptionOfUnknownParameters();
@@ -90,13 +107,13 @@ public:
      * Set the state for the robot (floating base)
      * 
      */       
-    int setRobotState(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration);
+    int setRobotState(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const KDL::Twist& base_velocity, const KDL::Twist& base_acceleration);
 
     /**
      * Set the state for the robot (fixed base)
      *
      */
-    int setRobotState(const JntArray &q, const JntArray &q_dot, const JntArray &q_dotdot, const Twist& base_gravity);
+    int setRobotState(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const KDL::Twist& base_gravity);
 
     
     //Eventually the call would be only setSensor and the sensor type 
@@ -106,13 +123,13 @@ public:
      * 
      * @param ft_sensor_index the index of the FT sensor, an integer from 0 to NrOfFTSensors-1
      */
-    setFTSensorMeasurement(int ft_sensor_index, const KDL::Wrench ftm);
+    int setFTSensorMeasurement(int ft_sensor_index, const KDL::Wrench ftm);
     
     /**
      * 
      * @param dof_index the index of the degree of freedom on which the torque was measured, an interger from 0 to NrOfDOFs-1
      */
-    setTorqueSensorMeasurement(int junction_index, double measure);
+    int setTorqueSensorMeasurement(int dof_index, double measure);
     
     
     /**
@@ -120,7 +137,7 @@ public:
     * @param regressor a getNrOfOutputs() times getNrOfUnknownParameters() Matrix 
     * @param known_terms a getNrOfOutputs() parameters Vector
     */
-    int computeRegressor(MatrixXd & regressor, VectorXd & known_terms);
+    int computeRegressor(Eigen::MatrixXd & regressor, Eigen::VectorXd& known_terms);
             
 private:
     KDL::CoDyCo::TreeGraph tree_graph; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
@@ -136,7 +153,6 @@ private:
     int NrOfOutputs;
     
     //Robot state
-    
     KDL::JntArray q;
     KDL::JntArray dq;
     KDL::JntArray ddq;
@@ -157,14 +173,31 @@ private:
     std::vector<KDL::Twist> v;
     std::vector<KDL::Twist> a;
     
+    //Vector of subregressors
+    //The actual objects are mantained in two different vectors
+    //but this vector of pointers is necessary to mantain the serializations
+    std::vector<DynamicRegressorInterface *> regressors_ptrs;
+    
+    std::vector<subtreeArticulatedDynamicsRegressor *> subtree_regressors;
+    //std::vector<torqueRegressor> torque_regressors;
+    
     //Options for regressors
     bool consider_ft_offset; //if true, consider the offset of the FT sensors as parameters
     
     bool verbose;
+    
+    /** \todo Buffers to avoid dynamic memory allocation, remove them using proper stuff */
+    int updateBuffers();
+    Eigen::MatrixXd one_rows_buffer;
+    Eigen::MatrixXd six_rows_buffer;
+    Eigen::VectorXd one_rows_vector;
+    Eigen::VectorXd six_rows_vector;
+    
         
     
         
-}
+};
+
 }
 
              

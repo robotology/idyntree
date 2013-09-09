@@ -65,19 +65,24 @@ file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
 )
 
+file(GLOB DRRL_SRC 
+    "src/drrl/*.cpp"
+)
+
 if(MSVC)
     set(LIB_TYPE STATIC)
 else()
     set(LIB_TYPE STATIC)
 endif()
 
-add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC})
+add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DRRL_SRC})
 
 target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
 
 # --------------------------------
 INSTALL(TARGETS kdl_codyco EXPORT kdl-codyco-target DESTINATION lib)
 INSTALL(DIRECTORY include/kdl_codyco DESTINATION include) 
+INSTALL(DIRECTORY include/drrl       DESTINATION include)
 
 option(CREATE_TESTS "Create regression tests using CMake" FALSE)
 

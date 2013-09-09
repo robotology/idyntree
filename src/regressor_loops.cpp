@@ -21,7 +21,7 @@ void dynamicsRegressorLoop(const TreeGraph & tree_graph,
                          const std::vector<Frame>& X_b,
                          const std::vector<Twist>& v,
                          const std::vector<Twist>& a,
-                        Eigen::MatrixXd & dynamics_regressor)
+                         Eigen::MatrixXd & dynamics_regressor)
 {
         dynamics_regressor.setZero();
         

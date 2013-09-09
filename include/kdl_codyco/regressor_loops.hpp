@@ -17,13 +17,21 @@
 namespace KDL {
 namespace CoDyCo {
 
+/**
+ * Calculate the dynamics regressor, such that if a is the vector of inertial parameters_vector
+ * dynamics_regressor*a == | w   |
+ *                         | tau |
+ * 
+ * Where w is the base wrench and tau is the vector of joint torques
+ * 
+ */
 void dynamicsRegressorLoop(const TreeGraph & tree_graph,
-                         const KDL::JntArray &q, 
-                         const Traversal & traversal,
-                         const std::vector<Frame>& X_b,
-                         const std::vector<Twist>& v,
-                         const std::vector<Twist>& a,
-                        Eigen::MatrixXd & dynamics_regressor);
+                           const KDL::JntArray &q, 
+                           const Traversal & traversal,
+                           const std::vector<Frame>& X_b,
+                           const std::vector<Twist>& v,
+                           const std::vector<Twist>& a,
+                           Eigen::MatrixXd & dynamics_regressor);
 
 void inertialParametersVectorLoop(const TreeGraph & tree_graph,
                                   Eigen::VectorXd & parameters_vector);

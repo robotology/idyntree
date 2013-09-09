@@ -184,6 +184,7 @@ namespace CoDyCo {
         JunctionNameMap::iterator ret_value = junctions_names.find(name);
         #ifndef NDEBUG
         //std::cerr << "Called getJunction with argument: " << name << std::endl;
+        //std::cerr << "junction_names.size() " << junctions_names.size() << " getNrOfJunctions " << getNrOfJunctions() << std::endl;
         #endif 
         assert(junctions_names.size() == getNrOfJunctions());
         assert(ret_value != junctions_names.end());
@@ -325,6 +326,7 @@ namespace CoDyCo {
                 //If the father is the root, dont'add any joint
                 //Add segment joint to TreeGraph
                 const Joint & current_joint = current_segment.getJoint();
+               
                 
                 if( current_joint.getType() == Joint::None ) {
                     int junction_id = local_serialization.getJunctionId(current_joint.getName());
