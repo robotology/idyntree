@@ -8,7 +8,6 @@
 #define KDL_CODYCO_DYNREGRESSORGENERATOR_HPP
 
 #include <kdl/tree.hpp>
-#include <boost/graph/graph_concepts.hpp>
 
 #include <kdl_codyco/utils.hpp>
 
