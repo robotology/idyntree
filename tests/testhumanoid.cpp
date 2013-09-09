@@ -1,7 +1,6 @@
 
 #include <kdl/tree.hpp>
 #include <kdl/chain.hpp>
-#include <boost/concept_check.hpp>
 
 #include "test_models.hpp"
 
