@@ -16,8 +16,8 @@ find_package(Eigen3 3.0 QUIET)
 
 IF(MSVC)
     message( "Looking for kdl_codyco in: @CMAKE_INSTALL_PREFIX@")
-    set(kdl_codyco_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include" "${Orocos-KDL_INCLUDE_DIRS}" "${Eigen3_INCLUDE_DIRS}" )
-    set(kdl_codyco_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib" "${Orocos-KDL_LIBRARY_DIRS}" )
+    set(kdl_codyco_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include" "@Orocos-KDL_INCLUDE_DIRS@" "@Eigen3_INCLUDE_DIRS@" )
+    set(kdl_codyco_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib" "@Orocos-KDL_LIBRARY_DIRS@" )
     set(kdl_codyco_LIBRARY_RELEASE "kdl_codyco")
     set(kdl_codyco_LIBRARY_DEBUG "kdl_codycod")
     set(kdl_codyco_LIBRARIES optimized "${kdl_codyco_LIBRARY_RELEASE}" debug "${kdl_codyco_LIBRARY_DEBUG}")
@@ -30,6 +30,8 @@ ELSE()
     set(kdl_codyco_LIBRARIES "${kdl_codyco_LIBRARY}")
  
 ENDIF()
+
+include(@CMAKE_INSTALL_PREFIX@/share/kdl_codyco/kdl_codyco-target.cmake)
 
 set(kdl_codyco_FOUND TRUE)
 IF( kdl_codyco_FOUND )

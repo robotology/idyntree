@@ -4,6 +4,12 @@
 
 #include "test_models.hpp"
 
+#ifndef M_PI_2
+
+#define M_PI_2     1.57079632679489661923132169164    
+
+#endif
+
 namespace KDL {
 namespace CoDyCo {
 

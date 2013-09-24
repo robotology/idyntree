@@ -23,23 +23,19 @@ if(MSVC OR MSVC90 OR MSVC10)
   set(MSVC ON)
 endif (MSVC OR MSVC90 OR MSVC10)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
-
-
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC) 
 
-find_package(Eigen3 REQUIRED)
 find_package(Orocos-KDL REQUIRED)
 
 set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES kdl_codyco)
 set(PKG_DEPENDS )
 
-INSTALL(EXPORT kdl-codyco-target DESTINATION "share/${PROJECT_NAME}") 
+INSTALL(EXPORT kdl_codyco-target DESTINATION "share/${PROJECT_NAME}") 
 
 set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_codyco-config.cmake")
 configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
@@ -58,7 +54,7 @@ if (NOT MSVC)
   install(FILES ${pkg_conf_file} DESTINATION lib/pkgconfig/ COMPONENT pkgconfig)
 endif()
 
-include_directories(include ${EIGEN3_INCLUDE_DIR} ${Orocos-KDL_INCLUDE_DIRS})
+include_directories(include ${Orocos-KDL_INCLUDE_DIRS})
 #workaround for KDL CMake bug, check http://bugs.orocos.org/show_bug.cgi?id=1035
 #link_directories("${Orocos-KDL_LIBRARY_DIRS}")
 message("Library dirs for Orocos-KDL ${Orocos-KDL_LIBRARY_DIRS}")
@@ -83,7 +79,7 @@ add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DRRL_SRC})
 target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
 
 # --------------------------------
-INSTALL(TARGETS kdl_codyco EXPORT kdl-codyco-target DESTINATION lib)
+INSTALL(TARGETS kdl_codyco EXPORT kdl_codyco-target DESTINATION lib)
 INSTALL(DIRECTORY include/kdl_codyco DESTINATION include) 
 INSTALL(DIRECTORY include/drrl       DESTINATION include)
 
