@@ -12,8 +12,6 @@
 #define _DRRL_SUBTREE_ARTICULATED_DYNAMICS_REGRESSOR_
 
 #include <kdl/jntarray.hpp>
-#include <ace/config-posix.h>
-
 
 #include <kdl_codyco/treegraph.hpp>
 #include <drrl/dynamicRegressorInterface.hpp>
