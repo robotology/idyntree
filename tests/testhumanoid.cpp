@@ -27,7 +27,7 @@ namespace CoDyCo {
                                    RigidBodyInertia(0.82,Vector(0,.019,0),RotationalInertia(1.8e-3,1.3e-3,1.8e-3,0,0,0))));
         larm.addSegment(Segment("larm_seg4",Joint("larm_jnt4",Joint::RotZ),
                                    Frame::DH(0.0,-M_PI_2,0.0,0.0),
-                                   RigidBodyInertia(0.34,Vector::Zero(),RotationalInertia(.3e-3,.4e-3,.3e-3,0,0,0))));
+                                   RigidBodyInertia(0.00,Vector::Zero(),RotationalInertia(0.0,0.0,0.0,0,0,0))));
         larm.addSegment(Segment("larm_seg5",Joint("larm_jnt5",Joint::RotZ),
                                    Frame::DH(0.0,0.0,0.0,0.0),
                                    RigidBodyInertia(0.09,Vector(0,0,.032),RotationalInertia(.15e-3,0.15e-3,.04e-3,0,0,0))));
@@ -55,7 +55,7 @@ namespace CoDyCo {
                                    RigidBodyInertia(0.82,Vector(0,.019,0),RotationalInertia(1.8e-3,1.3e-3,1.8e-3,0,0,0))));
         rarm.addSegment(Segment("rarm_seg4",Joint("rarm_jnt4",Joint::RotZ),
                                    Frame::DH(0.0,-M_PI_2,0.0,0.0),
-                                   RigidBodyInertia(0.34,Vector::Zero(),RotationalInertia(.3e-3,.4e-3,.3e-3,0,0,0))));
+                                   RigidBodyInertia(0,Vector::Zero(),RotationalInertia(0.0,0.0,0.0,0,0,0))));
         rarm.addSegment(Segment("rarm_seg5",Joint("rarm_jnt5",Joint::RotZ),
                                    Frame::DH(0.0,0.0,0.0,0.0),
                                    RigidBodyInertia(0.09,Vector(0,0,.032),RotationalInertia(.15e-3,0.15e-3,.04e-3,0,0,0))));
@@ -84,7 +84,7 @@ namespace CoDyCo {
                                    RigidBodyInertia(0.82,Vector(0,.019,0),RotationalInertia(1.8e-3,1.3e-3,1.8e-3,0,0,0))));
         lleg.addSegment(Segment("lleg_seg4",Joint("lleg_jnt4",Joint::RotZ),
                                    Frame::DH(0.0,-M_PI_2,0.0,0.0),
-                                   RigidBodyInertia(0.34,Vector::Zero(),RotationalInertia(.3e-3,.4e-3,.3e-3,0,0,0))));
+                                   RigidBodyInertia(0,Vector::Zero(),RotationalInertia(0.0,0.0,0.0,0,0,0))));
         lleg.addSegment(Segment("lleg_seg5",Joint("lleg_jnt5",Joint::RotZ),
                                    Frame::DH(0.0,0.0,0.0,0.0),
                                    RigidBodyInertia(0.09,Vector(0,0,.032),RotationalInertia(.15e-3,0.15e-3,.04e-3,0,0,0))));
@@ -113,7 +113,7 @@ namespace CoDyCo {
                                    RigidBodyInertia(0.82,Vector(0,.019,0),RotationalInertia(1.8e-3,1.3e-3,1.8e-3,0,0,0))));
         rleg.addSegment(Segment("rleg_seg4",Joint("rleg_jnt4",Joint::RotZ),
                                    Frame::DH(0.0,-M_PI_2,0.0,0.0),
-                                   RigidBodyInertia(0.34,Vector::Zero(),RotationalInertia(.3e-3,.4e-3,.3e-3,0,0,0))));
+                                   RigidBodyInertia(0.00,Vector::Zero(),RotationalInertia(0.00,0.0,0.0,0,0,0))));
         rleg.addSegment(Segment("rleg_seg5",Joint("rleg_jnt5",Joint::RotZ),
                                    Frame::DH(0.0,0.0,0.0,0.0),
                                    RigidBodyInertia(0.09,Vector(0,0,.032),RotationalInertia(.15e-3,0.15e-3,.04e-3,0,0,0))));

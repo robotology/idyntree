@@ -50,9 +50,11 @@ public:
     * @param ft_sensor_names the names of the Joints (of type Joint::None) that are Force Torque sensors
     * 
     */
-    DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base, std::vector< std::string > ft_sensor_names=std::vector< std::string >(0), bool ft_sensor_offset=true,KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization());
+    DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base, 
+                              std::vector< std::string > ft_sensor_names=std::vector< std::string >(0), bool ft_sensor_offset=true,
+                              std::vector< std::string > fake_link_names=std::vector< std::string >(0), KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization());
     
-    ~DynamicRegressorGenerator() {};
+    ~DynamicRegressorGenerator() { delete p_ft_list; };
     
     int addSubtreeRegressorRows(const std::vector< std::string>& _subtree_leaf_links);
     
@@ -74,6 +76,8 @@ public:
      
     int getNrOfOutputs();
     
+    int getNrOfDOFs() { return tree_graph.getNrOfDOFs(); } 
+    
     //The feature of fixing/unfixing parameters would be implemented in a later version
     //int getNrOfUnknownParameters();
     
@@ -85,14 +89,18 @@ public:
     //unfixParameter(ParameterIndex par_index);
     
     
-    std::string getDescriptionOfParameter(int parameter_index);
+    
+        std::string getDescriptionOfParameter(int parameter_index,bool with_value=false,double value=-1.0);
+
+            std::string getDescriptionOfParameters();
+
     
     /**
     * Get a human readable description of the considered parameters 
     * 
     * @return a std::string containg the description of the parameters
     */
-    std::string getDescriptionOfParameters();
+    std::string getDescriptionOfParameters(const Eigen::VectorXd & values);
     
     std::string getDescriptionOfOutput(int output_index);
     
@@ -137,7 +145,25 @@ public:
     * @param known_terms a getNrOfOutputs() parameters Vector
     */
     int computeRegressor(Eigen::MatrixXd & regressor, Eigen::VectorXd& known_terms);
-            
+    
+    /**
+     * Get a matrix whose columns are the base parameters of the given regressor,
+     * i.e. a matrix whose columns are a basis for the identifiable subspace of the given regressor
+     * 
+     * The algorithm used is the one presented, using generated samples:
+     * Gautier, M. "Numerical calculation of the base inertial parameters of robots." 
+     * 
+     * @param basis the output matrix
+     * @param static_regressor if true, compute the identifiable parameter considering only static poses (default: false)
+     * @param fixed_base if true, consider the kinematic base as fixed (i.e. do not vary the position and/or the velocity/acceleration of the kinematic base) 
+     * @param gravity in case of fixed base, get the gravity vector for the fixed kinematic base
+     * @param tol the tollerance used in troncating the svd (defaul: max(sigma)*machine_eps*number_of_generated_samples)
+     * 
+     * \note This method is not real time safe.
+     */
+    int computeIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 10000, const bool verbose = false);
+
+    
 private:
     KDL::CoDyCo::TreeGraph tree_graph; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
     
@@ -145,11 +171,17 @@ private:
     KDL::CoDyCo::Traversal kinematic_traversal; /**< Traversal object: defining the kinematic base of the tree */
     
     //Violating DRY principle, but for code clarity 
+    int NrOfFakeLinks;
     int NrOfDOFs;
-    int NrOfLinks;
+    int NrOfRealLinks_gen;
     int NrOfFTSensors;
     int NrOfParameters;
     int NrOfOutputs;
+    
+    //Take in account the real and fake links
+    std::vector< bool > is_link_real;
+    std::vector< int > regrColumns2linkIndeces;
+    std::vector< int > linkIndeces2regrColumns;
     
     //Robot state
     KDL::JntArray q;
@@ -162,7 +194,7 @@ private:
     
     //measured 6 axis Force/torques
     std::vector< KDL::Wrench > measured_wrenches;
-    KDL::CoDyCo::FTSensorList ft_list;
+    KDL::CoDyCo::FTSensorList * p_ft_list;
     
     //measured joint torques
     KDL::JntArray measured_torques;
@@ -187,6 +219,7 @@ private:
     
     /** \todo Buffers to avoid dynamic memory allocation, remove them using proper stuff */
     int updateBuffers();
+    Eigen::MatrixXd& block(int start_row, int arg2, int getNrOfOutputs, int getNrOfParameters);
     Eigen::MatrixXd one_rows_buffer;
     Eigen::MatrixXd six_rows_buffer;
     Eigen::VectorXd one_rows_vector;

@@ -36,6 +36,9 @@ void dynamicsRegressorLoop(const TreeGraph & tree_graph,
 void inertialParametersVectorLoop(const TreeGraph & tree_graph,
                                   Eigen::VectorXd & parameters_vector);
 
+void inertialParametersVectorLoopFakeLinks(const TreeGraph & tree_graph,
+                                  Eigen::VectorXd & parameters_vector,
+                                  std::vector < std::string > fake_links_names);
 }
 }  
 

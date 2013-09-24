@@ -22,6 +22,8 @@ namespace CoDyCo {
 
 /**
  * 
+ * \todo fix copy operator
+ * 
  * Data structure for containing information about internal FT sensors
  * To properly describe an FT sensor, it is necessary: 
  *      * the fixed junction of the FT sensor in the TreeGraph (a name)
@@ -67,7 +69,7 @@ class FTSensor
                 parent(_parent),
                 child(_child),
                 sensor_id(_sensor_id) {}
-        
+                        
         ~FTSensor() {}
         
         std::string getName() const { return fixed_joint_name; }					
@@ -170,6 +172,9 @@ class FTSensorList
                 //std::cout << "Adding FT sensor " << i << "That connects " << parent_id << " and " << child_id << std::endl;
 #endif 
                 ft_sensors_vector.push_back(new FTSensor(tree_graph,ft_names[i],parent_id,child_id,sensor_id));
+#ifndef NDEBUG
+                //std::cout << "that have name " << ft_sensors_vector[i]->getName() << std::endl;
+#endif 
 
                 link_FT_sensors[parent_id].push_back((ft_sensors_vector[i]));
                 link_FT_sensors[child_id].push_back((ft_sensors_vector[i]));
