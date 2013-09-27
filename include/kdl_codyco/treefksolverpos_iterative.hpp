@@ -28,7 +28,7 @@
 #include <kdl/jntarray.hpp>
 #include <kdl_codyco/treeserialization.hpp>
 #include "kdl_codyco/treeserialsolver.hpp"
-#include "kdl_codyco/treegraph.hpp"
+#include "kdl_codyco/undirectedtree.hpp"
 
 namespace KDL {
 namespace CoDyCo {

@@ -11,7 +11,7 @@
 
 #include <kdl_codyco/utils.hpp>
 
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 
 #include <kdl_codyco/ftsensor.hpp>
 

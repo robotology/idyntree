@@ -1,5 +1,5 @@
 #include <kdl_codyco/utils.hpp>
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 
 #include <kdl_codyco/rnea_loops.hpp>
 #include <kdl_codyco/position_loops.hpp>

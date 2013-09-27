@@ -7,7 +7,7 @@
 #ifndef KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 #define KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 #include "regressor_utils.hpp"
 #include "treeserialization.hpp"
 

@@ -30,17 +30,17 @@
 
 #include <kdl/kinfam_io.hpp>
 #include <kdl/frames_io.hpp>
-#include "kdl_codyco/treegraph.hpp"
+#include "kdl_codyco/undirectedtree.hpp"
 #include <kdl_codyco/utils.hpp>
 
 namespace KDL {
 namespace CoDyCo {
-    int TreeGraphLink::globalIterator2localIndex(LinkMap::const_iterator link_iterator) const
+    int UndirectedTreeLink::globalIterator2localIndex(LinkMap::const_iterator link_iterator) const
     {
         int i;
         #ifndef NDEBUG
         if( !is_adjacent_to(link_iterator) ) 
-        std::cerr << "TreeGraphLink::globalIterator2localIndex fatal error: " << this->getName() << " is not adjacent to " << link_iterator->getName() << std::endl;
+        std::cerr << "UndirectedTreeLink::globalIterator2localIndex fatal error: " << this->getName() << " is not adjacent to " << link_iterator->getName() << std::endl;
         #endif
         assert( is_adjacent_to(link_iterator) );
         for(i=0; i < (int)getNrOfAdjacentLinks(); i++ ) {
@@ -53,13 +53,13 @@ namespace CoDyCo {
             return i;
     }
 
-    unsigned int TreeGraphLink::getNrOfAdjacentLinks() const
+    unsigned int UndirectedTreeLink::getNrOfAdjacentLinks() const
     {
         assert(adjacent_joint.size() == adjacent_link.size());
         return adjacent_joint.size();
     }
     
-    bool TreeGraphLink::is_adjacent_to(LinkMap::const_iterator link_iterator) const
+    bool UndirectedTreeLink::is_adjacent_to(LinkMap::const_iterator link_iterator) const
     {
         for(int i=0; i < (int)getNrOfAdjacentLinks(); i++ ) {
             if( adjacent_link[i] == link_iterator ) {
@@ -69,58 +69,58 @@ namespace CoDyCo {
         return false;
     }
      
-    Frame & TreeGraphLink::pose(int adjacent_index, const double& q) const
+    Frame & UndirectedTreeLink::pose(int adjacent_index, const double& q) const
     {
         return adjacent_joint[adjacent_index]->pose(q,is_this_parent[adjacent_index]);
     }
     
-    Twist & TreeGraphLink::S(int adjacent_index, const double& q) const
+    Twist & UndirectedTreeLink::S(int adjacent_index, const double& q) const
     {
         return adjacent_joint[adjacent_index]->S(q,is_this_parent[adjacent_index]);
     }
     
-    Twist TreeGraphLink::vj(int adjacent_index, const double& q,const double& qdot) const
+    Twist UndirectedTreeLink::vj(int adjacent_index, const double& q,const double& qdot) const
     {
         return adjacent_joint[adjacent_index]->vj(q,qdot,is_this_parent[adjacent_index]);
     }
     
-    Frame & TreeGraphLink::pose(LinkMap::const_iterator adjacent_iterator, const double& q) const
+    Frame & UndirectedTreeLink::pose(LinkMap::const_iterator adjacent_iterator, const double& q) const
     {
         return pose(globalIterator2localIndex(adjacent_iterator),q);
     }
     
     
-    Twist & TreeGraphLink::S(LinkMap::const_iterator adjacent_iterator, const double& q) const
+    Twist & UndirectedTreeLink::S(LinkMap::const_iterator adjacent_iterator, const double& q) const
     {
         return S(globalIterator2localIndex(adjacent_iterator),q);
     }
     
-    Twist TreeGraphLink::vj(LinkMap::const_iterator adjacent_iterator, const double& q,const double& qdot) const
+    Twist UndirectedTreeLink::vj(LinkMap::const_iterator adjacent_iterator, const double& q,const double& qdot) const
     {
         int adjacent_index = this->globalIterator2localIndex(adjacent_iterator);
         return vj(adjacent_index,q,qdot);
     }
     
-    JunctionMap::const_iterator TreeGraphLink::getAdjacentJoint(int adjacent_index) const
+    JunctionMap::const_iterator UndirectedTreeLink::getAdjacentJoint(int adjacent_index) const
     {
         assert( adjacent_index >= 0 );
         return adjacent_joint[adjacent_index];
     }
     
-    JunctionMap::const_iterator TreeGraphLink::getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const
+    JunctionMap::const_iterator UndirectedTreeLink::getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const
     {
         int adjacent_index = globalIterator2localIndex(adjacent_iterator);
         return adjacent_joint[adjacent_index];
     }
 
-    std::string TreeGraphLink::toString() const
+    std::string UndirectedTreeLink::toString() const
     {
         std::stringstream ss;
         ss << link_name << " " << link_nr << " "  << " mass " << I.getMass() << " body part " << body_part_nr << " body part link nr " << body_part_link_nr << " com " << I.getCOG();
         return ss.str();
     }
     
-    void TreeGraphJunction::update_buffers(const double & q) const
+    void UndirectedTreeJunction::update_buffers(const double & q) const
     {
         if (q != q_previous) {
             relative_pose_parent_child = joint.pose(q)*f_tip;
@@ -139,7 +139,7 @@ namespace CoDyCo {
         }
     }
     
-    Frame & TreeGraphJunction::pose(const double& q, const bool inverse) const
+    Frame & UndirectedTreeJunction::pose(const double& q, const bool inverse) const
     {
         update_buffers(q);
         if( !inverse ) {
@@ -149,7 +149,7 @@ namespace CoDyCo {
         }
     }
     
-    Twist & TreeGraphJunction::S(const double& q, bool inverse) const
+    Twist & UndirectedTreeJunction::S(const double& q, bool inverse) const
     {
         update_buffers(q);
         if( !inverse ) {
@@ -159,19 +159,19 @@ namespace CoDyCo {
         }
     }
     
-    Twist TreeGraphJunction::vj(const double& q, const double &dq, bool inverse) const
+    Twist UndirectedTreeJunction::vj(const double& q, const double &dq, bool inverse) const
     {
         return S(q,inverse)*dq;
     }
     
-    std::string TreeGraphJunction::toString() const
+    std::string UndirectedTreeJunction::toString() const
     {
         std::stringstream ss;
         ss << joint_name << " " << q_nr << " "  << joint.getTypeName() << " body part " << body_part << " local q_nr " << body_part_q_nr << " frame_to_tip " << f_tip;
         return ss.str();
     }
     
-    LinkMap::iterator TreeGraph::getLink(const std::string& name, bool dummy)
+    LinkMap::iterator UndirectedTree::getLink(const std::string& name, bool dummy)
     {
         LinkNameMap::iterator ret_value = links_names.find(name);
 
@@ -179,7 +179,7 @@ namespace CoDyCo {
         return ret_value->second;
     }
     
-    JunctionMap::iterator TreeGraph::getJunction(const std::string& name, bool dummy)
+    JunctionMap::iterator UndirectedTree::getJunction(const std::string& name, bool dummy)
     {       
         JunctionNameMap::iterator ret_value = junctions_names.find(name);
         #ifndef NDEBUG
@@ -191,17 +191,17 @@ namespace CoDyCo {
         return ret_value->second;
     }
     
-    LinkMap::const_iterator TreeGraph::getLink(const std::string& name) const
+    LinkMap::const_iterator UndirectedTree::getLink(const std::string& name) const
     {
         LinkNameMap::const_iterator ret_value = links_names.find(name);
         if( ret_value == links_names.end() ) {
-            //std::cerr << "TreeGraph: Link " << name << " not found " << std::endl; 
+            //std::cerr << "UndirectedTree: Link " << name << " not found " << std::endl; 
             return getInvalidLinkIterator();
         }
         return ret_value->second;
     }
     
-    LinkMap::const_iterator TreeGraph::getLink(const int index) const
+    LinkMap::const_iterator UndirectedTree::getLink(const int index) const
     {
         if(!(index >= 0 && index < (int)getNrOfLinks())) {
             return getInvalidLinkIterator();
@@ -209,7 +209,7 @@ namespace CoDyCo {
         return links.begin()+index;
     }
         
-    JunctionMap::const_iterator TreeGraph::getJunction(const int index) const
+    JunctionMap::const_iterator UndirectedTree::getJunction(const int index) const
     {
         if( !(index >= 0 && index < (int)getNrOfJunctions()) ) {
             return getInvalidJunctionIterator();
@@ -217,7 +217,7 @@ namespace CoDyCo {
         return junctions.begin()+index;
     }
     
-    JunctionMap::const_iterator TreeGraph::getJunction(const std::string& name) const
+    JunctionMap::const_iterator UndirectedTree::getJunction(const std::string& name) const
     {
         JunctionNameMap::const_iterator ret_value = junctions_names.find(name);
         if(ret_value == junctions_names.end()) {
@@ -226,7 +226,7 @@ namespace CoDyCo {
         return ret_value->second;
     }
     
-    void TreeGraph::constructor(const Tree & tree, const TreeSerialization & serialization, const TreePartition & partition)
+    void UndirectedTree::constructor(const Tree & tree, const TreeSerialization & serialization, const TreePartition & partition)
     {
         TreeSerialization local_serialization = serialization;
         TreePartition local_partition = partition;
@@ -234,9 +234,9 @@ namespace CoDyCo {
         #ifndef NDEBUG
         assert( local_serialization.is_consistent(tree) == serialization.is_consistent(tree) ); 
         if( local_serialization.is_consistent(tree)  ) {
-            //std::cout << "TreeGraph constructor: using provided serialization " << std::endl;
+            //std::cout << "UndirectedTree constructor: using provided serialization " << std::endl;
         } else {
-            //std::cout << "TreeGraph constructor: using default serialization " << std::endl;
+            //std::cout << "UndirectedTree constructor: using default serialization " << std::endl;
         }
         #endif
         if( !local_serialization.is_consistent(tree) ) {
@@ -261,7 +261,7 @@ namespace CoDyCo {
         //(or the virtual base has many children, so there is no actual base
         if( virtual_root->second.children.size() != 1 || virtual_root->second.children[0]->second.segment.getJoint().getType() != Joint::None ) {
             #ifndef NDEBUG
-            std::cerr << "TreeGraph constructor failed" << std::endl;
+            std::cerr << "UndirectedTree constructor failed" << std::endl;
             #endif
             nrOfDOFs = 0;
             nrOfLinks = 0;
@@ -271,7 +271,7 @@ namespace CoDyCo {
         real_root = virtual_root->second.children[0];
         
         #ifndef NDEBUG
-        //std::cerr << "TreeGraph:" << std::endl;
+        //std::cerr << "UndirectedTree:" << std::endl;
         //std::cerr << "virtual_root " << virtual_root->first << std::endl;
         //std::cerr << "real_root " << real_root->first << std::endl;
         //std::cerr << "Serialization " << local_serialization.toString() << std::endl;
@@ -311,12 +311,12 @@ namespace CoDyCo {
 
     
                 #ifndef NDEBUG
-                //std::cerr << "Added link " << paar.second.link_name <<  " to TreeGraph with link_nr " << paar.second.link_nr << 
+                //std::cerr << "Added link " << paar.second.link_name <<  " to UndirectedTree with link_nr " << paar.second.link_nr << 
                         //         "and mass " << paar.second.I.getMass() << " and cog " << paar.second.I.getCOG()(0) << std::endl;
                         #endif
                 assert(link_id >= 0 && link_id < (int)getNrOfLinks());
                 links[link_id] = 
-                        TreeGraphLink(current_segment.getName(),
+                        UndirectedTreeLink(current_segment.getName(),
                                       current_segment.getInertia(),
                                       link_id,
                                       part_id,local_link_id);
@@ -327,7 +327,7 @@ namespace CoDyCo {
             //Add joint
             if( i != virtual_root && i != real_root ) {
                 //If the father is the root, dont'add any joint
-                //Add segment joint to TreeGraph
+                //Add segment joint to UndirectedTree
                 const Joint & current_joint = current_segment.getJoint();
                
                 
@@ -336,7 +336,7 @@ namespace CoDyCo {
                     //std::cout << "failed to find joint " << current_joint.getName() << std::endl;
                     //std::cout << "in serialization " << local_serialization.toString() << std::endl;
                     assert(junction_id >= 0);
-                    junctions[junction_id] =  TreeGraphJunction(current_joint.getName(),
+                    junctions[junction_id] =  UndirectedTreeJunction(current_joint.getName(),
                                                 current_joint, 
                                                 current_joint.pose(0).Inverse()*current_segment.getFrameToTip(),junction_id);
                                                 
@@ -349,7 +349,7 @@ namespace CoDyCo {
                     //assert(dof_part_ID >= 0);
                     //assert(local_dof_id >= 0);
             
-                    junctions[dof_id] = TreeGraphJunction(current_joint.getName(),
+                    junctions[dof_id] = UndirectedTreeJunction(current_joint.getName(),
                                                 current_joint, 
                                                 current_joint.pose(0).Inverse()*current_segment.getFrameToTip(), /* Complicated way to do a simple thing: get f_tip attribute of the Segment */
                                                 dof_id,
@@ -369,7 +369,7 @@ namespace CoDyCo {
             
             if( i != virtual_root && i != real_root ) {
                 //If the father is the root, dont'add any joint
-                //Add segment joint to TreeGraph
+                //Add segment joint to UndirectedTree
                 const Joint & current_joint = current_segment.getJoint();
                 JunctionMap::iterator tree_graph_junction = getJunction(current_joint.getName(),true);
                 tree_graph_junction->parent = getLink(i->second.parent->second.segment.getName());
@@ -402,31 +402,31 @@ namespace CoDyCo {
         
         #ifndef NDEBUG
         
-        //std::cerr << "TreeGraph::constructor() : check consistency exiting TreeGraph constructor " << std::endl;
+        //std::cerr << "UndirectedTree::constructor() : check consistency exiting UndirectedTree constructor " << std::endl;
         //std::cerr << this->toString() << std::endl;
         assert(check_consistency() == 0);
         #endif
         assert(nrOfLinks == (int)links.size());
     }
     
-    TreeGraph::TreeGraph(const Tree & tree, const TreeSerialization & serialization, const TreePartition & partition)
+    UndirectedTree::UndirectedTree(const Tree & tree, const TreeSerialization & serialization, const TreePartition & partition)
     {
         constructor(tree,serialization,partition);
     } 
     
-    TreeGraph::TreeGraph(const TreeGraph& in) 
+    UndirectedTree::UndirectedTree(const UndirectedTree& in) 
     {
         constructor(in.getTree(),in.getSerialization(),in.getPartition());
     }
 
-    TreeGraph& TreeGraph::operator=(const TreeGraph& in) 
+    UndirectedTree& UndirectedTree::operator=(const UndirectedTree& in) 
     {
         constructor(in.getTree(),in.getSerialization(),in.getPartition());
         return *this;
     }
 
     
-    int TreeGraph::compute_traversal(Traversal & traversal, const int base_link_index,const bool bf_traversal) const
+    int UndirectedTree::compute_traversal(Traversal & traversal, const int base_link_index,const bool bf_traversal) const
     {
         if( traversal.order.capacity() < getNrOfLinks() ) traversal.order.reserve(getNrOfLinks());
 
@@ -522,7 +522,7 @@ namespace CoDyCo {
         return 0;
     }
     
-    int TreeGraph::compute_traversal(Traversal & traversal, const std::string& base_link,const bool bf_traversal) const
+    int UndirectedTree::compute_traversal(Traversal & traversal, const std::string& base_link,const bool bf_traversal) const
     {
         #ifndef NDEBUG
         //std::cerr << "Called compute_traversal with " << base_link << "as base link " << std::endl;
@@ -533,7 +533,7 @@ namespace CoDyCo {
     }
     
     //Warning q_nr is dependent on the selected base, not on the serialization
-    Tree TreeGraph::getTree(std::string base) const
+    Tree UndirectedTree::getTree(std::string base) const
     {
         assert(this->check_consistency() == 0);
         
@@ -549,7 +549,7 @@ namespace CoDyCo {
         } else {
             ret = compute_traversal(traversal);
         }
-        if( ret < 0 ) { std::cerr << "TreeGraph::getTree : specified base " << base << " is not part of the TreeGraph" << std::endl; return KDL::Tree("TreeGraph_getTree_error");}
+        if( ret < 0 ) { std::cerr << "UndirectedTree::getTree : specified base " << base << " is not part of the UndirectedTree" << std::endl; return KDL::Tree("UndirectedTree_getTree_error");}
         
         assert(this->check_consistency() == 0);
         assert(this->check_consistency(traversal) == 0);
@@ -589,7 +589,7 @@ namespace CoDyCo {
         return tree;
     }
     
-    TreeSerialization TreeGraph::getSerialization() const
+    TreeSerialization UndirectedTree::getSerialization() const
     {
         TreeSerialization ret;
         ret.links.resize(getNrOfLinks());
@@ -610,7 +610,7 @@ namespace CoDyCo {
         return ret;
     }
     
-    TreePartition TreeGraph::getPartition() const
+    TreePartition UndirectedTree::getPartition() const
     {
         TreePartition partition;
         int i;
@@ -633,7 +633,7 @@ namespace CoDyCo {
             if( part_not_found ) {
                 std::map<int,std::string>::const_iterator bp_name_it = body_part_names.find(it->body_part_nr);
                 if( bp_name_it == body_part_names.end() ) {
-                    std::cerr << "TreeGraph:getPartition() failed: body part " <<  it->body_part_nr << " not recognized (when adding link " << it->getName() << "  )\n" << std::endl;
+                    std::cerr << "UndirectedTree:getPartition() failed: body part " <<  it->body_part_nr << " not recognized (when adding link " << it->getName() << "  )\n" << std::endl;
                     assert(false);
                     return partition;
                 }
@@ -675,7 +675,7 @@ namespace CoDyCo {
                 if( part_not_found ) {
                     std::map<int,std::string>::const_iterator bp_name_it = body_part_names.find(it->body_part);
                     if( bp_name_it == body_part_names.end() ) {
-                        std::cerr << "TreeGraph:getPartition() failed: body part " <<  it->body_part << " not recognized\n" << std::endl;
+                        std::cerr << "UndirectedTree:getPartition() failed: body part " <<  it->body_part << " not recognized\n" << std::endl;
                         assert(false);        
                         return partition;
                     }
@@ -709,7 +709,7 @@ namespace CoDyCo {
 
     
     
-    int TreeGraph::check_consistency() const
+    int UndirectedTree::check_consistency() const
     {
         LinkMap::const_iterator link_it;
         JunctionMap::const_iterator junction_it;
@@ -750,7 +750,7 @@ namespace CoDyCo {
         return 0;
     }
     
-    int TreeGraph::check_consistency(const Traversal traversal) const
+    int UndirectedTree::check_consistency(const Traversal traversal) const
     {
         assert( traversal.order.size() == getNrOfLinks() );
 
@@ -769,10 +769,10 @@ namespace CoDyCo {
         return 0;
     }
     
-    std::string TreeGraph::toString() const
+    std::string UndirectedTree::toString() const
     {
         std::stringstream ss;
-        ss << "TreeGraph " << tree_name << " original_root " << original_root << " DOFs " <<  nrOfDOFs << " nrOfLinks " << nrOfLinks << std::endl;
+        ss << "UndirectedTree " << tree_name << " original_root " << original_root << " DOFs " <<  nrOfDOFs << " nrOfLinks " << nrOfLinks << std::endl;
         ss << "Links: " << std::endl;
         for(LinkMap::const_iterator link_it = links.begin(); link_it != links.end(); link_it++) {
             ss << link_it->toString() << std::endl;

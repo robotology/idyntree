@@ -13,7 +13,7 @@
 
 #include <kdl/jntarray.hpp>
 
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 #include <drrl/dynamicRegressorInterface.hpp>
 
 namespace DRRL 

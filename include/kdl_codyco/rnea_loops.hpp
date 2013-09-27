@@ -10,7 +10,7 @@
 
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 
 namespace KDL {
 namespace CoDyCo {

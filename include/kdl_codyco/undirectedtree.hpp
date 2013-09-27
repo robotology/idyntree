@@ -14,8 +14,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#ifndef KDL_CODYCO_TREE_GRAPH_HPP
-#define KDL_CODYCO_TREE_GRAPH_HPP
+#ifndef KDL_CODYCO_UNDIRECTED_TREE_HPP
+#define KDL_CODYCO_UNDIRECTED_TREE_HPP
 
 #include <string>
 #include <map>
@@ -30,30 +30,35 @@ namespace KDL
 namespace CoDyCo 
 {
     //Forward declaration
-    class TreeGraphLink;
-    class TreeGraphJunction;
+    class UndirectedTreeLink;
+    class UndirectedTreeJunction;
+    class UndirectedTree;
     
     /**
      * 
      * \todo 
      * 
      */ 
-    //typedef std::map<std::string,TreeGraphLink> LinkMap;
-    //typedef std::map<std::string,TreeGraphJunction> JunctionMap;
-    typedef std::vector<TreeGraphLink> LinkMap; /**< Actually a vector, named this way for backward compatibility */
-    typedef std::vector<TreeGraphJunction> JunctionMap;  /**< Actually a vector, named this way for backward compatibility */
+    //typedef std::map<std::string,UndirectedTreeLink> LinkMap;
+    //typedef std::map<std::string,UndirectedTreeJunction> JunctionMap;
+    typedef std::vector<UndirectedTreeLink> LinkMap; /**< Actually a vector, named this way for backward compatibility */
+    typedef std::vector<UndirectedTreeJunction> JunctionMap;  /**< Actually a vector, named this way for backward compatibility */
     
     typedef std::map<std::string,LinkMap::iterator> LinkNameMap;
     typedef std::map<std::string,JunctionMap::iterator> JunctionNameMap;
     
+    typedef UndirectedTree TreeGraph;
+    typedef UndirectedTreeLink TreeGraphLink;
+    typedef UndirectedTreeJunction TreeGraphJunction;
+    
     /**
-     * This class represent a traversal, given a root, of a KDL::CoDyCo::TreeGraph
+     * This class represent a traversal, given a root, of a KDL::CoDyCo::UndirectedTree
      * It containts: 
      *     * a traversal order vector (the index is the visit order number) starting at the given root, that respects the property that a link is visited after his parent
      *     * a parent vector (the index is the link id) such that for each link it returns its parent under the given root
      */
     class Traversal {
-		public:
+        public:
         std::vector< LinkMap::const_iterator > order;
         std::vector< LinkMap::const_iterator > parent;
         Traversal(): order(0), parent(0) {};
@@ -63,10 +68,10 @@ namespace CoDyCo
     //Only supporting 1 dof joints
     typedef Twist TwistSubspace;
 
-    class TreeGraphLink
+    class UndirectedTreeLink
     {
     private:
-        TreeGraphLink(const std::string& name): link_name(name), link_nr(-1), body_part_nr(-1), body_part_link_nr(-1) {};
+        UndirectedTreeLink(const std::string& name): link_name(name), link_nr(-1), body_part_nr(-1), body_part_link_nr(-1) {};
         int globalIterator2localIndex(LinkMap::const_iterator link_iterator) const;
         
     public:
@@ -80,11 +85,11 @@ namespace CoDyCo
         std::vector< bool > is_this_parent; /**< true if this link is the actual parent (for the KDL::Joint) of the junction, false otherwise */
         
         
-        TreeGraphLink() {};
-        TreeGraphLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr, const int part_nr = 0, const int local_link_nr = -1): link_name(name), I(Inertia), link_nr(nr), body_part_nr(part_nr), body_part_link_nr(local_link_nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { if(body_part_link_nr < 0) { body_part_link_nr = link_nr; }  };
-        ~TreeGraphLink() {};
+        UndirectedTreeLink() {};
+        UndirectedTreeLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr, const int part_nr = 0, const int local_link_nr = -1): link_name(name), I(Inertia), link_nr(nr), body_part_nr(part_nr), body_part_link_nr(local_link_nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { if(body_part_link_nr < 0) { body_part_link_nr = link_nr; }  };
+        ~UndirectedTreeLink() {};
         
-        TreeGraphLink & operator=(TreeGraphLink const &x) { if ( this != &x ) { 
+        UndirectedTreeLink & operator=(UndirectedTreeLink const &x) { if ( this != &x ) { 
             link_name = x.link_name; 
             I = x.I;
             link_nr = x.link_nr; 
@@ -173,7 +178,7 @@ namespace CoDyCo
         //cj for the type of implemented joint is always 0
         
         /**
-         * \note adjacent index is an index local to each TreeGraphLink
+         * \note adjacent index is an index local to each UndirectedTreeLink
          * 
          * \todo Change the semantic of adjacent_index, it is confusing?
          * 
@@ -188,13 +193,13 @@ namespace CoDyCo
     
     /**
      * Class for representing a joint connecting two links (parent and child) 
-     * in the TreeGraph 
+     * in the UndirectedTree 
      * 
      */
-    class TreeGraphJunction
+    class UndirectedTreeJunction
     {
     private:
-        TreeGraphJunction(const std::string& name):  joint_name(name), q_nr(-1), body_part_q_nr(-1), body_part(-1) { q_previous=-1.0; update_buffers(0.0);};
+        UndirectedTreeJunction(const std::string& name):  joint_name(name), q_nr(-1), body_part_q_nr(-1), body_part(-1) { q_previous=-1.0; update_buffers(0.0);};
     
         mutable Frame relative_pose_parent_child; /**< \f$ {}^p X_c \f$ */
         mutable Frame relative_pose_child_parent; /**< \f$ {}^c X_p \f$ */
@@ -215,11 +220,11 @@ namespace CoDyCo
         LinkMap::const_iterator parent;
         LinkMap::const_iterator child;
         
-        TreeGraphJunction() {};
-        TreeGraphJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1, const int body_part_q_nr_in=-1): 
+        UndirectedTreeJunction() {};
+        UndirectedTreeJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1, const int body_part_q_nr_in=-1): 
                                joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in), body_part_q_nr(body_part_q_nr_in), body_part(body_part_in) { q_previous=-1.0; update_buffers(0.0);};
         
-        ~TreeGraphJunction() {}; 
+        ~UndirectedTreeJunction() {}; 
         
         std::string getName() const { return joint_name; }
         
@@ -268,7 +273,7 @@ namespace CoDyCo
      *
      * @ingroup KinematicFamily
      */
-    class TreeGraph
+    class UndirectedTree
     {
     private:
         LinkMap links;
@@ -311,30 +316,30 @@ namespace CoDyCo
          * \todo Added just for debug, remove it
          * 
          */
-        TreeGraph() {};
+        UndirectedTree() {};
         /**
-         * The constructor of a TreeGraph, from a classic KDL::Tree
+         * The constructor of a UndirectedTree, from a classic KDL::Tree
          * 
-         * \note As TreeGraph must represent all and only the links complete 
+         * \note As UndirectedTree must represent all and only the links complete 
          *       with inertia, the "root" as usually represented by KDL::Tree 
          *       is not added as a link.
          *       For this reason, it is required that the first joint of the 
-         *       KDL::Tree used to create a TreeGraph is a fixed joint. 
+         *       KDL::Tree used to create a UndirectedTree is a fixed joint. 
          *       To avoid problems related to the diffent frame of reference
          *       of the virtual root and the actual root, it is recommended
          *       to mantain an identity transformation between the virtual root
          *       and the real one.
          * 
-         * \todo solve issue related to non-const TreeGraph
+         * \todo solve issue related to non-const UndirectedTree
          */
-        TreeGraph(const Tree & tree,const TreeSerialization & serialization=TreeSerialization(), const TreePartition & partition=TreePartition()); 
+        UndirectedTree(const Tree & tree,const TreeSerialization & serialization=TreeSerialization(), const TreePartition & partition=TreePartition()); 
 
-		/**
-		 * Copy constructor
-		 */
-		TreeGraph(const TreeGraph& in);
-		
-		TreeGraph& operator=(const TreeGraph& in);
+        /**
+         * Copy constructor
+         */
+        UndirectedTree(const UndirectedTree& in);
+        
+        UndirectedTree& operator=(const UndirectedTree& in);
 
 
         /**
@@ -378,7 +383,7 @@ namespace CoDyCo
         JunctionMap::const_iterator getJunction(const int index) const; 
 
         /**
-         * Visit the TreeGraph with a Depth-first traversal
+         * Visit the UndirectedTree with a Depth-first traversal
          * 
          * @param order the link visit order
          * @param parent the vector of parent for each link, for the base link 
@@ -393,7 +398,7 @@ namespace CoDyCo
         int compute_traversal(Traversal & traversal, const std::string& base_link, const bool bf_traversal=false) const;
 
          /**
-         * Visit the TreeGraph with a  traversal
+         * Visit the UndirectedTree with a  traversal
          * 
          * @param base_link_index the id of the link used as the starting point of the traversal
          * @return 0 if all went well, another integer otherwise
@@ -404,8 +409,8 @@ namespace CoDyCo
          */
         int compute_traversal(Traversal & traversal, const int base_link_index=COMPUTE_TRAVERSAL_BASE_LINK_DEFAULT_VALUE, const bool bf_traversal=false) const;
         
-		Tree getTree(std::string base="") const;
-		
+        Tree getTree(std::string base="") const;
+        
         TreeSerialization getSerialization() const;
         
         TreePartition getPartition() const;
@@ -416,7 +421,7 @@ namespace CoDyCo
 
         std::string toString() const;
         
-        ~TreeGraph(){};
+        ~UndirectedTree(){};
 
     };
 }

@@ -11,7 +11,7 @@
 #ifndef _DRRL_DYNAMIC_REGRESSOR_INTERFACE_
 #define _DRRL_DYNAMIC_REGRESSOR_INTERFACE_
 
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/ftsensor.hpp>
 #include <kdl/jntarray.hpp>
 

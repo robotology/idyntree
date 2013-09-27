@@ -42,7 +42,7 @@ namespace KDL{
         /**
          * Constructor for the solver, it will allocate all the necessary memory
          * \param chain The kinematic chain to calculate the inverse dynamics for, an internal copy will be made.
-         * \param grav The gravity vector to use during the calculation.
+         * \param grav The gravity vector to use during the calculation (not used by the floating base solver).
          */
         ChainIdSolver_RNE_FB(const Chain& chain,Vector grav=Vector::Zero());
 
@@ -64,24 +64,24 @@ namespace KDL{
         int CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Wrenches& f_ext,JntArray &torques);
 
         /** 
-			 * Calculate floating base inverse dynamics, from joint positions, velocity, acceleration, 
+             * Calculate floating base inverse dynamics, from joint positions, velocity, acceleration, 
              * base velocity, base acceleration, external forces
-			 * to joint torques/forces.
-			 * 
-			 * @param q input joint positions
-			 * @param q_dot input joint velocities
-			 * @param q_dotdot input joint accelerations
+             * to joint torques/forces.
+             * 
+             * @param q input joint positions
+             * @param q_dot input joint velocities
+             * @param q_dotdot input joint accelerations
              * @param base_velocity velocity of the floating base 
              *        (the linear part has no influence on the dynamics)
              * @param base_acceleration acceleration of the floating base 
-             *        (proper acceleration, considers also gravitational acceleration)
+             *        (proper acceleration, considering also gravitational acceleration)
              * @param f_ext external forces
-			 *
-			 * @param torque output joint torques
-			 * @param base_wrench output base wrench
+             *
+             * @param torque output joint torques
+             * @param base_wrench output base wrench
              * 
-			 * @return if < 0 something went wrong
-			 */
+             * @return if < 0 something went wrong
+             */
         int CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force);
 
 
