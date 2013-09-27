@@ -95,12 +95,10 @@ namespace CoDyCo{
     private:
         const TreeGraph tree_graph;
         Traversal traversal;
-
     
-		std::vector<Twist> v;
-		std::vector<Twist> a;
-		std::vector<Wrench> f;
-
+        std::vector<Twist> v;
+        std::vector<Twist> a;
+        std::vector<Wrench> f;
         
         Twist ag;
     };

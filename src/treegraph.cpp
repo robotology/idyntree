@@ -538,7 +538,7 @@ namespace CoDyCo {
         assert(this->check_consistency() == 0);
         
         //Define a KDL::Tree with fake link "base_link", as is usually done
-        //URDF describing humanoids
+        //in URDF describing humanoids
         const std::string fake_root_name = "base_link";
 
         KDL::Tree tree(fake_root_name);

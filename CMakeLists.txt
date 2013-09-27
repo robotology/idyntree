@@ -91,3 +91,5 @@ IF(CREATE_TESTS)
 ENDIF(CREATE_TESTS)
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
+
+add_subdirectory(doc)
