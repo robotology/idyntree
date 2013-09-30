@@ -51,10 +51,9 @@ target_link_libraries(kdl_urdf  ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} $
 add_executable(check_kdl_import src/check_kdl_import.cpp src/kdl_import.cpp)
 target_link_libraries(check_kdl_import ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
-# --------------------------------
+#add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
+#target_link_libraries(check_kdl_export ${kdl_urdf_LIBRARIES} ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
-#add_executable(check_urdf src/check_urdf.cpp)
-#target_link_libraries(check_urdf urdfdom_model urdfdom_world)
 
 INSTALL(TARGETS kdl_urdf DESTINATION lib/)
 INSTALL(DIRECTORY include/kdl_urdf DESTINATION include)
