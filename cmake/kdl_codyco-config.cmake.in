@@ -32,7 +32,7 @@ ENDIF()
 
 
 set(kdl_codyco_FOUND TRUE)
-include(@CMAKE_INSTALL_PREFIX@/share/kdl_codyco/kdl_codyco-target.cmake)
+include("@CMAKE_INSTALL_PREFIX@/share/kdl_codyco/kdl_codyco-target.cmake")
 ENDIF() 
 
 
