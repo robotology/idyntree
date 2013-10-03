@@ -61,15 +61,15 @@ TARGET_LINK_LIBRARIES(${PROJECTNAME} iDyn
 
 
 
-INSTALL(TARGETS iDynTree EXPORT iDynTargets-install DESTINATION lib)
-INSTALL(DIRECTORY include/iCub/iDynTree DESTINATION include/iCub)
+#INSTALL(TARGETS iDynTree EXPORT iDynTargets-install DESTINATION lib)
+#INSTALL(DIRECTORY include/iCub/iDynTree DESTINATION include/iCub)
 #install(EXPORT iDynTargets-install DESTINATION share/${PROJECT_NAME}/cmake )
-set(PKG_NAME ${PROJECT_NAME})
-set(PKG_LIBRARIES iDynTree)
-set(PKG_DEPENDS ICUB)
-set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/iDynTreeConfig.cmake")
-configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
-install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPONENT cmake)
+#set(PKG_NAME ${PROJECT_NAME})
+#set(PKG_LIBRARIES iDynTree)
+#set(PKG_DEPENDS ICUB)
+#set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/iDynTreeConfig.cmake")
+#configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
+#install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPONENT cmake)
 
 ## Make the package config file
 #if (NOT MSVC)
