@@ -12,7 +12,7 @@ cd urdfdom_dir
 echo "--> Compiling console_bridge"
 $git_clone "git://github.com/ros/console_bridge.git"
 cd console_bridge
-cmake
+cmake ./
 sudo make install
 cd ..
 
@@ -20,7 +20,7 @@ cd ..
 echo "--> Compiling urdfdom_headers"
 $git_clone "git://github.com/ros/urdfdom_headers.git"
 cd urdfdom_headers
-cmake 
+cmake ./
 sudo make install
 cd ..
 
@@ -28,7 +28,7 @@ cd ..
 echo "--> Compiling urdfdom"
 $git_clone "git://github.com/ros/urdfdom.git"
 cd urdfdom
-cmake 
+cmake ./
 make
 sudo make install
 cd ..
