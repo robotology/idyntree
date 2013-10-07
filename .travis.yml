@@ -23,7 +23,7 @@ before_script:
   - cmake ../
   - make
   - sudo make install
-  - cd ../../..
+  - cd ../..
   - mkdir build
   - cd build
   - cmake -DCREATE_TESTS:BOOL=ON ./..
