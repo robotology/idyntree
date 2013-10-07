@@ -4,6 +4,7 @@ compiler:
   - gcc
 
 before_script:
+  - sudo chmod +x ./.travis/build_urdfdom
   - ./.travis/build_urdfdom
   - sudo apt-get install -qq libeigen3-dev
   - git clone https://github.com/traversaro/orocos_kinematics_dynamics
