@@ -40,9 +40,8 @@ make install
 # Compile
 echo "--> Compiling urdfdom"
 cd "$build_dir"
-cd "$build_dir"
 $git_clone "git://github.com/ros/urdfdom.git"
-cd "$urdfdom_headers_dir"
+cd "$urdfdom_dir"
 cmake . -DCMAKE_INSTALL_PREFIX:STRING="$install_dir"
 make
 make install
