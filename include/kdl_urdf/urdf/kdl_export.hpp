@@ -1,8 +1,8 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *  
-*  Copyright (c) 2013, CoDyCo project
-*  Copyright (c) 2008, Willow Garage, Inc.
+*  Copyright (c) 2013, Istituto Italiano di Tecnologia,
+*   CoDyCo project
 *  All rights reserved.
 * 
 *  Redistribution and use in source and binary forms, with or without

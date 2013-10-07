@@ -45,11 +45,25 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 include_directories(include)
 
-add_library(kdl_urdf SHARED src/kdl_export.cpp src/kdl_import.cpp)
+set(EXPR_PARSER_SRCS src/symoro_par/expression_parser/error.cpp
+                     src/symoro_par/expression_parser/functions.cpp
+                     src/symoro_par/expression_parser/parser.cpp
+                     src/symoro_par/expression_parser/variablelist.cpp)
+
+add_library(kdl_urdf SHARED src/urdf/kdl_export.cpp src/urdf/kdl_import.cpp 
+                            src/symoro_par/symoro_par_import.cpp
+                            ${EXPR_PARSER_SRCS})
+                            
 target_link_libraries(kdl_urdf  ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
-add_executable(check_kdl_import src/check_kdl_import.cpp src/kdl_import.cpp)
+add_executable(check_kdl_import src/urdf/check_kdl_import.cpp src/urdf/kdl_import.cpp)
 target_link_libraries(check_kdl_import ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
+
+add_executable(check_symoro_par_import src/symoro_par/check_symoro_par_import.cpp src/symoro_par/symoro_par_import.cpp ${EXPR_PARSER_SRCS})
+target_link_libraries(check_symoro_par_import ${Orocos-KDL_LIBRARIES})
+
+add_executable(par2urdf src/utils/par2urdf.cpp)
+target_link_libraries(par2urdf kdl_urdf ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
 #target_link_libraries(check_kdl_export ${kdl_urdf_LIBRARIES} ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})

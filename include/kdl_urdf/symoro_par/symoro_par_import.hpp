@@ -1,7 +1,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 * 
-*  Copyright (c) 2008, Willow Garage, Inc.
+*  Copyright (c) 2013, Istituto Italiano di Tecnologia
 *  All rights reserved.
 * 
 *  Redistribution and use in source and binary forms, with or without
@@ -32,56 +32,39 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-/* Author: Wim Meeussen */
-/* Modified by: Silvio Traversaro */
+/* Author:  Silvio Traversaro */
 
-#ifndef KDL_IMPORT_H
-#define KDL_IMPORT_H
+#ifndef SYMORO_PAR_IMPORT_H
+#define SYMORO_PAR_IMPORT_H
 
 #include <kdl/tree.hpp>
 #include <string>
-#include <urdf_model/model.h>
-#include <tinyxml.h>
 
-namespace kdl_import{
+#include "symoro_par_model.hpp"
 
-/** Constructs a KDL tree from a file, given the file name
- * \param file The filename from where to read the xml
+namespace symoro_par{
+
+/** Constructs a KDL tree from a .par file, given the file name
+ *  The .par file is produced by the Symoro+ software 
+ * \param file The filename from where to read the .par file
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeFromFile(const std::string& file, KDL::Tree& tree);
+bool treeFromFile(const std::string& parfile_name, KDL::Tree& tree);
 
-/** Constructs a KDL tree from the parameter server, given the parameter name
- * \param param the name of the parameter on the parameter server
+/** Constructs a KDL tree from a string of the contents of the par file
+ * \param xml A string containting the Symoro+ par description of the robot
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-//bool treeFromParam(const std::string& param, KDL::Tree& tree);
+bool treeFromString(const std::string& parfile_content, KDL::Tree& tree);
 
-/** Constructs a KDL tree from a string containing xml
- * \param xml A string containting the xml description of the robot
- * \param tree The resulting KDL Tree
- * returns true on success, false on failure
- */
-bool treeFromString(const std::string& xml, KDL::Tree& tree);
+bool treeFromParModel(const symoro_par_model & par_model, KDL::Tree& tree);
 
+bool parModelFromFile(const std::string& parfile_name, symoro_par_model& tree);
 
-/** Constructs a KDL tree from a TiXmlDocument
- * \param xml_doc The TiXmlDocument containting the xml description of the robot
- * \param tree The resulting KDL Tree
- * returns true on success, false on failure
- */
-//bool treeFromXml(TiXmlDocument *xml_doc, KDL::Tree& tree);
+bool parModelFromString(const std::string& parfile_content, symoro_par_model& tree);
 
-/** Constructs a KDL tree from a URDF robot model
- * \param robot_model The URDF robot model
- * \param tree The resulting KDL Tree
- * \param fake_root optional (default true) if true parse the first link 
- *                  of the robot model as the fake root (no inertia) of KDL tree
- * returns true on success, false on failure
- */
-bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, KDL::Tree& tree, const bool fake_root=true);
 }
 
 #endif
