@@ -1,0 +1,46 @@
+#!/bin/sh
+set -ev
+
+# Directories.
+root_dir=`pwd`
+build_dir="$root_dir/_travis/build"
+install_dir="$root_dir/_travis/install"
+console_bridge_dir="$build_dir/console_bridge"
+urdfdom_headers_dir="$build_dir/urdfdom_headers"
+
+# Shortcuts.
+git_clone="git clone --quiet --recursive"
+
+# Create layout.
+rm -rf "$build_dir" "$install_dir"
+mkdir -p "$build_dir"
+mkdir -p "$install_dir"
+
+# Setup environment variables.
+export LD_LIBRARY_PATH="$install_dir/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="$install_dir/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+# Retrieve console_bridge
+echo "--> Compiling console_bridge"
+cd "$build_dir"
+$git_clone "git://github.com/ros/console_bridge.git"
+cd "$console_bridge_dir"
+cmake . -DCMAKE_INSTALL_PREFIX:STRING="$install_dir"
+make install
+
+# Retrieve urdfdom_headers
+echo "--> Compiling urdfdom_headers"
+cd "$build_dir"
+$git_clone "git://github.com/ros/urdfdom_headers.git"
+cd "$urdfdom_headers_dir"
+cmake . -DCMAKE_INSTALL_PREFIX:STRING="$install_dir"
+make install
+
+# Compile
+echo "--> Compiling urdfdom"
+cd "$root_dir"
+cmake . -DCMAKE_INSTALL_PREFIX:STRING="$install_dir"
+make
+#make check
+make install
+
