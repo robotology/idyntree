@@ -10,8 +10,8 @@ The format currently supported are:
 
 | File Format | Import | Export |
 |-------------|--------|--------|
-| URDF        |   ✔    |   ✔    |
-| SYMORO .par |   ✔    |        |
+| [URDF](http://wiki.ros.org/urdf)        |   ✔    |   ✔    |
+| [SYMORO](http://www.irccyn.ec-nantes.fr/spip.php?article601&lang=en) .par |   ✔    |        |
 
 
 symoro_par_import
