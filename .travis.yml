@@ -4,6 +4,7 @@ compiler:
   - gcc
 
 before_script:
+  - sudo apt-get install -qq libboost-system-dev libboost-thread-dev libtinyxml-dev
   - sudo chmod +x ./.travis/build_urdfdom
   - ./.travis/build_urdfdom
   - sudo apt-get install -qq libeigen3-dev
