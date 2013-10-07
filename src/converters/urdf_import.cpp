@@ -34,7 +34,7 @@
 
 /* Author: Wim Meeussen */
 
-#include "kdl_urdf/kdl_import.hpp"
+#include "kdl_format_io/urdf_import.hpp"
 #include <urdf_model/model.h>
 #include <urdf_parser/urdf_parser.h>
 #include <console_bridge/console.h>
@@ -44,7 +44,7 @@
 using namespace std;
 using namespace KDL;
 
-namespace kdl_import{
+namespace kdl_format_io{
 
 
 void printTree(boost::shared_ptr<const urdf::Link> link,int level = 0)
@@ -154,13 +154,13 @@ bool addChildrenToTree(boost::shared_ptr<const urdf::Link> root, Tree& tree)
 }
 
 
-bool treeFromFile(const string& file, Tree& tree)
+bool treeFromUrdfFile(const string& file, Tree& tree)
 {
     ifstream ifs(file.c_str());
     std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
-    return treeFromString(xml_string,tree);
+    return treeFromUrdfString(xml_string,tree);
 }
 
 /*
@@ -195,25 +195,26 @@ std::cout << "robot name is: " << robot->getName() << std::endl;
   return 0;
 }
 
-bool treeFromString(const string& xml, Tree& tree)
+bool treeFromUrdfString(const string& xml, Tree& tree)
 {
   boost::shared_ptr<urdf::ModelInterface> urdf_model;
   urdf_model = urdf::parseURDF(xml);
   if( urdf_model.use_count() == 0 || !urdf_model ) { logError("Could not parse string to urdf::ModelInterface"); return false; }
   return treeFromUrdfModel(*urdf_model,tree); 
 }
+
 /*
-bool treeFromXml(TiXmlDocument *xml_doc, Tree& tree)
+bool treeFromUrdfXml(TiXmlDocument *xml_doc, Tree& tree)
 {
-  boost::shared_ptr<ModelInterface> robot_model;
+  boost::shared_ptr<urdf::ModelInterface> robot_model;
   robot_model = urdf::parseURDF(
   if (!robot_model.parse(xml_doc)){
     logError("Could not generate robot model");
     return false;
   }
   return treeFromUrdfModel(robot_model, tree);
-}
-*/
+}*/
+
 
 bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree, const bool fake_root)
 {

@@ -42,7 +42,7 @@
 
 #include "symoro_par_model.hpp"
 
-namespace symoro_par{
+namespace kdl_format_io{
 
 /** Constructs a KDL tree from a .par file, given the file name
  *  The .par file is produced by the Symoro+ software 
@@ -50,14 +50,14 @@ namespace symoro_par{
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeFromFile(const std::string& parfile_name, KDL::Tree& tree);
+bool treeFromSymoroParFile(const std::string& parfile_name, KDL::Tree& tree);
 
 /** Constructs a KDL tree from a string of the contents of the par file
  * \param xml A string containting the Symoro+ par description of the robot
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeFromString(const std::string& parfile_content, KDL::Tree& tree);
+bool treeFromSymoroParString(const std::string& parfile_content, KDL::Tree& tree);
 
 bool treeFromParModel(const symoro_par_model & par_model, KDL::Tree& tree);
 

@@ -34,9 +34,9 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_urdf/symoro_par/symoro_par_import.hpp"
+#include "kdl_format_io/symoro_par_import.hpp"
 
-#include "expression_parser/parser.h"
+#include "../expression_parser/parser.h"
 #include <string>
 #include <boost/iterator/iterator_concepts.hpp>
 #include <iostream>
@@ -47,7 +47,7 @@
 using namespace KDL;
 using namespace std;
 
-namespace symoro_par {
+namespace kdl_format_io {
     
 Frame DH_Khalil1986_Tree(double d, double alpha, double r, double theta, double gamma, double b)
 {
@@ -66,16 +66,16 @@ Frame DH_Khalil1986_Tree(double d, double alpha, double r, double theta, double 
 }
 
     
-bool treeFromFile(const string& parfile_name, Tree& tree)
+bool treeFromSymoroParFile(const string& parfile_name, Tree& tree)
 {
     ifstream ifs(parfile_name.c_str());
     std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
-    return treeFromString(xml_string,tree);
+    return treeFromSymoroParString(xml_string,tree);
 }
 
-bool treeFromString(const string& parfile_name, Tree& tree)
+bool treeFromSymoroParString(const string& parfile_name, Tree& tree)
 {
     symoro_par_model par_model;
     if( !parModelFromString(parfile_name,par_model) ) return false;

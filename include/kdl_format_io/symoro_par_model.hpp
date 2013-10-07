@@ -43,7 +43,7 @@
 #include <iostream>
 #include <boost/iterator/iterator_concepts.hpp>
 
-namespace symoro_par{
+namespace kdl_format_io{
 
 /**
  * Class for representing the content of a SyMoRo PAR file (only geometric parameters for now)

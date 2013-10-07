@@ -45,14 +45,14 @@
 #include <tinyxml.h>
 
 
-namespace kdl_export{
+namespace kdl_format_io{
 
 /** Constructs a URDF file, given a KDL::Tree
  * \param file The filename from where to read the xml
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeToFile(const std::string& file, const KDL::Tree& tree, const std::string & robot_name);
+bool treeToUrdfFile(const std::string& file, const KDL::Tree& tree, const std::string & robot_name="URDF_generated_by_kdl_format_io");
 
 /** Constructs a KDL tree from the parameter server, given the parameter name
  * \param param the name of the parameter on the parameter server
@@ -73,7 +73,7 @@ bool treeToFile(const std::string& file, const KDL::Tree& tree, const std::strin
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeToXml(TiXmlDocument * & xml_doc,  const KDL::Tree& tree, const std::string & robot_name);
+bool treeToUrdfXml(TiXmlDocument * & xml_doc,  const KDL::Tree& tree, const std::string & robot_name="URDF_generated_by_kdl_format_io");
 
 /** Update a URDF robot model with geometric and inertial parameters from a KDL tree 
  * \param tree The KDL Tree

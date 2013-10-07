@@ -43,14 +43,14 @@
 #include <urdf_model/model.h>
 #include <tinyxml.h>
 
-namespace kdl_import{
+namespace kdl_format_io{
 
 /** Constructs a KDL tree from a file, given the file name
  * \param file The filename from where to read the xml
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeFromFile(const std::string& file, KDL::Tree& tree);
+bool treeFromUrdfFile(const std::string& file, KDL::Tree& tree);
 
 /** Constructs a KDL tree from the parameter server, given the parameter name
  * \param param the name of the parameter on the parameter server
@@ -64,7 +64,7 @@ bool treeFromFile(const std::string& file, KDL::Tree& tree);
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeFromString(const std::string& xml, KDL::Tree& tree);
+bool treeFromUrdfString(const std::string& xml, KDL::Tree& tree);
 
 
 /** Constructs a KDL tree from a TiXmlDocument

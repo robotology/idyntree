@@ -36,15 +36,14 @@
 
 #include <cstdlib>
 
-#include "kdl_urdf/symoro_par/symoro_par_model.hpp"
-#include "kdl_urdf/symoro_par/symoro_par_import.hpp"
+#include "kdl_format_io/symoro_par_model.hpp"
+#include "kdl_format_io/symoro_par_import.hpp"
 
-#include "kdl_urdf/urdf/kdl_export.hpp"
+#include "kdl_format_io/urdf_export.hpp"
 
 using namespace KDL;
 using namespace std;
-using namespace symoro_par;
-using namespace kdl_export;
+using namespace kdl_format_io;
 
 int main(int argc, char** argv)
 {
@@ -62,10 +61,10 @@ int main(int argc, char** argv)
 
   
   Tree my_tree;
-  if (!symoro_par::treeFromFile(argv[1],my_tree)) 
+  if (!treeFromSymoroParFile(argv[1],my_tree)) 
   {cerr << "Could not generate robot model and extract kdl tree" << endl; return EXIT_FAILURE;}
 
-  if( !treeToFile(argv[2],my_tree,"par_file_robot") )
+  if( !treeToUrdfFile(argv[2],my_tree,"par_file_robot") )
   {cerr << "Could not export KDL::Tree to URDF file" << endl; return EXIT_FAILURE;}
 
   return EXIT_SUCCESS;

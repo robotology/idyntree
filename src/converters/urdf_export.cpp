@@ -35,7 +35,7 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_urdf/kdl_export.hpp"
+#include "kdl_format_io/urdf_export.hpp"
 #include <urdf_model/model.h>
 #include <console_bridge/console.h>
 #include <iostream>
@@ -43,7 +43,7 @@
 
 using namespace std;
 
-namespace kdl_export{
+namespace kdl_format_io{
 
 // construct vector
 urdf::Vector3 toUrdf(const KDL::Vector & v) 
@@ -168,10 +168,10 @@ urdf::Inertial toUrdf(KDL::RigidBodyInertia i)
 }
 
 
-bool treeToFile(const string& file, const KDL::Tree& tree, const std::string & robot_name)
+bool treeToUrdfFile(const string& file, const KDL::Tree& tree, const std::string & robot_name)
 {
   TiXmlDocument * urdf_xml;
-  if( !treeToXml(urdf_xml, tree, robot_name) ) return false;
+  if( !treeToUrdfXml(urdf_xml, tree, robot_name) ) return false;
   return urdf_xml->SaveFile(file);
 }
 
@@ -193,7 +193,8 @@ bool treeFromString(const string& xml, Tree& tree)
   return treeFromXml(&urdf_xml, tree);
 }
 */
-bool treeToXml(TiXmlDocument* & xml_doc, const KDL::Tree& tree, const std::string & robot_name)
+
+bool treeToUrdfXml(TiXmlDocument* & xml_doc, const KDL::Tree& tree, const std::string & robot_name)
 {
     urdf::ModelInterface robot_model;
     if( !treeToUrdfModel(tree,robot_name,robot_model) ) return false;
