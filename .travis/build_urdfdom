@@ -1,48 +1,35 @@
 #!/bin/sh
 set -ev
 
-# Directories.
-root_dir=`pwd`
-build_dir="$root_dir/_travis/build"
-install_dir="$root_dir/_travis/install"
-console_bridge_dir="$build_dir/console_bridge"
-urdfdom_headers_dir="$build_dir/urdfdom_headers"
-urdfdom_dir="$build_dir/urdfdom"
-
 # Shortcuts.
 git_clone="git clone --quiet --recursive"
 
-# Create layout.
-rm -rf "$build_dir" "$install_dir"
-mkdir -p "$build_dir"
-mkdir -p "$install_dir"
-
-# Setup environment variables.
-export LD_LIBRARY_PATH="$install_dir/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="$install_dir/lib/pkgconfig:$PKG_CONFIG_PATH"
+#create directoring for compiling urdfdom
+mkdir urdfdom_dir
+cd urdfdom_dir
 
 # Retrieve console_bridge
 echo "--> Compiling console_bridge"
-cd "$build_dir"
 $git_clone "git://github.com/ros/console_bridge.git"
-cd "$console_bridge_dir"
-cmake . -DCMAKE_INSTALL_PREFIX:STRING="$install_dir"
-make install
+cd console_bridge
+cmake
+sudo make install
+cd ..
 
 # Retrieve urdfdom_headers
 echo "--> Compiling urdfdom_headers"
-cd "$build_dir"
 $git_clone "git://github.com/ros/urdfdom_headers.git"
-cd "$urdfdom_headers_dir"
-cmake . -DCMAKE_INSTALL_PREFIX:STRING="$install_dir"
-make install
+cd urdfdom_headers
+cmake 
+sudo make install
+cd ..
 
 # Compile
 echo "--> Compiling urdfdom"
-cd "$build_dir"
 $git_clone "git://github.com/ros/urdfdom.git"
-cd "$urdfdom_dir"
-cmake . -DCMAKE_INSTALL_PREFIX:STRING="$install_dir"
+cd urdfdom
+cmake 
 make
-make install
+sudo make install
+cd ..
 
