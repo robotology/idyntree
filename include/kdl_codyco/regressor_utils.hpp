@@ -11,6 +11,7 @@
 
 #include <kdl/rotationalinertia.hpp>
 #include <kdl/rigidbodyinertia.hpp>
+#include <kdl/jntarray.hpp>
 
 
 
@@ -75,7 +76,17 @@ namespace CoDyCo {
      * 
      */
     Eigen::Matrix<double, 6, 1> toEigen(const KDL::Wrench & v);
+    
+    Eigen::Matrix<double, 6, 6> toEigen(const KDL::RigidBodyInertia & I);
+    
+    Eigen::VectorXd toEigen(const KDL::Wrench & f, const KDL::JntArray & tau);
+    
+    Eigen::VectorXd toEigen(const KDL::Twist & v, const KDL::JntArray & dq);
 
+
+    KDL::Wrench toKDLWrench(const Eigen::Matrix<double, 6, 1> & in);
+    
+    KDL::Twist toKDLTwist(const Eigen::Matrix<double, 6, 1> & in);
 }
 }
              

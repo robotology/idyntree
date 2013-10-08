@@ -71,7 +71,7 @@ namespace CoDyCo {
     }*/
     
     TreeInertialParametersRegressor::TreeInertialParametersRegressor(Tree & _tree,Vector grav,const TreeSerialization & serialization) : tree(_tree), 
-																	  tree_graph(_tree,serialization),  
+                                                                      tree_graph(_tree,serialization),  
                                                                       ns(_tree.getNrOfSegments()),                                                                 
                                                                       X_b(ns),
                                                                       v(ns),

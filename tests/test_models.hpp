@@ -9,6 +9,10 @@ namespace CoDyCo {
 
 
 Tree TestHumanoid();
+Tree TestSingleLink();
+Tree TestSingleJoint();
+Tree TestKukaLWR();
+
 
 }
 }

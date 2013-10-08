@@ -753,9 +753,11 @@ namespace CoDyCo {
     int UndirectedTree::check_consistency(const Traversal traversal) const
     {
         assert( traversal.order.size() == getNrOfLinks() );
+        if( traversal.order.size() != getNrOfLinks() ) return -1;
 
         assert( traversal.parent.size() == getNrOfLinks() );
-        
+        if( traversal.parent.size() != getNrOfLinks() ) return -1;
+
         LinkMap::const_iterator link_it;
         
         for(link_it = links.begin(); link_it != links.end(); link_it++) {

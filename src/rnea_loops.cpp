@@ -42,7 +42,7 @@ namespace CoDyCo {
                 KDL::Frame X_child_parent = parent_it->pose(link_it,joint_pos);
                 KDL::Twist S_child_parent = parent_it->S(link_it,joint_pos);
                 //KDL::Twist vj_child_parent = parent_it->vj(link_it,joint_pos,joint_vel);
-				KDL::Twist vj_child_parent = S_child_parent*joint_vel;
+                KDL::Twist vj_child_parent = S_child_parent*joint_vel;
                 v[link_nmbr] = X_child_parent*v[parent_nmbr] + vj_child_parent;
                 a[link_nmbr] = X_child_parent*a[parent_nmbr] + S_child_parent*joint_acc + v[link_nmbr]*vj_child_parent;
                 
@@ -82,7 +82,13 @@ namespace CoDyCo {
             int link_nmbr = link_it->link_nr;
             //Collect RigidBodyInertia and external forces
             RigidBodyInertia Ii= link_it->I;
+            #ifdef NDEBUG
             f[link_nmbr]=Ii*a[link_nmbr]+v[link_nmbr]*(Ii*v[link_nmbr])-f_ext[link_nmbr];
+            #else
+            f[link_nmbr] = Ii*a[link_nmbr];
+            f[link_nmbr] = f[link_nmbr] + v[link_nmbr]*(Ii*v[link_nmbr]);
+            f[link_nmbr] = f[link_nmbr] - f_ext[link_nmbr];
+            #endif
         }    
         //end loop to move (comment) to improve performance
           

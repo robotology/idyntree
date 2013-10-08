@@ -13,9 +13,9 @@
 
 #include <kdl_codyco/regressor_utils.hpp>
 
-
-
 #include "test_models.hpp"
+
+#include <ctime>
 
 using namespace KDL;
 using namespace KDL::CoDyCo;
@@ -28,6 +28,8 @@ double random_double()
 
 int main()
 {    
+    srand(time(NULL));
+    
     Tree test_tree = TestHumanoid();
     
     //Creating relative TreeGraph
