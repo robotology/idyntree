@@ -28,6 +28,9 @@ int main()
     srand(time(NULL));
     
     Tree test_tree = TestHumanoid();
+    
+        Eigen::MatrixXd regressor;
+    
     regressor.resize(6+test_tree.getNrOfJoints(),10*test_tree.getNrOfSegments());
     
     //Creating several solvers: 
@@ -41,8 +44,7 @@ int main()
     Wrenches f,f_ext;
     Wrench base_force;
     Twist base_vel, base_acc;   
-    Eigen::MatrixXd regressor;
-    
+
     
     q = dq = ddq = torques = JntArray(test_tree.getNrOfJoints());
     f = f_ext = std::vector<Wrench>(test_tree.getNrOfSegments(),KDL::Wrench::Zero());

@@ -8,10 +8,10 @@
  * http://www.codyco.eu
  */
 
-#ifndef _DRRL_TORQUE_REGRESSOR_
-#define _DRRL_TORQUE_REGRESSOR_
+#ifndef _DIRL_TORQUE_REGRESSOR_
+#define _DIRL_TORQUE_REGRESSOR_
 
-namespace DRRL 
+namespace dirl 
 {
 
 class torqueRegressor : public DynamicRegressorInterface 

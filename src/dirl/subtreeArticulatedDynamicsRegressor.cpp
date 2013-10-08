@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
   
-#include <drrl/subtreeArticulatedDynamicsRegressor.hpp> 
+#include <dirl/subtreeArticulatedDynamicsRegressor.hpp> 
 
 #include <kdl_codyco/regressor_utils.hpp>
 
@@ -16,7 +16,7 @@
 
 using namespace KDL::CoDyCo;
 
-namespace DRRL
+namespace dirl
 {
     
 int subtreeArticulatedDynamicsRegressor::isSubtreeLeaf(const int link_id) const

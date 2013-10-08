@@ -64,8 +64,8 @@ file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
 )
 
-file(GLOB DRRL_SRC 
-    "src/drrl/*.cpp"
+file(GLOB DIRL_SRC 
+    "src/dirl/*.cpp"
 )
 
 if(MSVC)
@@ -74,7 +74,7 @@ else()
     set(LIB_TYPE SHARED)
 endif()
 
-add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DRRL_SRC})
+add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DIRL_SRC})
 
 target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
 

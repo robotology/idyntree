@@ -15,12 +15,12 @@
 
 #include <kdl_codyco/ftsensor.hpp>
 
-#include <drrl/dynamicRegressorInterface.hpp>
-#include <drrl/subtreeArticulatedDynamicsRegressor.hpp>
+#include <dirl/dynamicRegressorInterface.hpp>
+#include <dirl/subtreeArticulatedDynamicsRegressor.hpp>
 
 //#include <drrl/torqueRegressor.hpp>
 
-namespace DRRL 
+namespace dirl
 {    
     
 //typedef FixedParameterIndex int;

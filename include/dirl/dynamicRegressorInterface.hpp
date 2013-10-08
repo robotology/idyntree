@@ -8,8 +8,8 @@
  * http://www.codyco.eu
  */
 
-#ifndef _DRRL_DYNAMIC_REGRESSOR_INTERFACE_
-#define _DRRL_DYNAMIC_REGRESSOR_INTERFACE_
+#ifndef _DIRL_DYNAMIC_REGRESSOR_INTERFACE_
+#define _DIRL_DYNAMIC_REGRESSOR_INTERFACE_
 
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/ftsensor.hpp>
@@ -18,7 +18,7 @@
 #include <Eigen/Core>
 #include <Eigen/Dense>
 
-namespace DRRL 
+namespace dirl 
 {
 
 class DynamicRegressorInterface {

@@ -11,14 +11,14 @@
 #include <cmath>
 #include <cfloat>
 
-#include <drrl/dynamicRegressorGenerator.hpp>
+#include <dirl/dynamicRegressorGenerator.hpp>
 
 #include <kdl_codyco/rnea_loops.hpp>
 #include <kdl_codyco/position_loops.hpp>
 
 #include <iostream>
 
-namespace DRRL
+namespace dirl
 {
  
 DynamicRegressorGenerator::DynamicRegressorGenerator(KDL::Tree & _tree, std::string kinematic_base,

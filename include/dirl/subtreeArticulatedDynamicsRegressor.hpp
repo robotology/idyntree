@@ -8,15 +8,15 @@
  * http://www.codyco.eu
  */
 
-#ifndef _DRRL_SUBTREE_ARTICULATED_DYNAMICS_REGRESSOR_
-#define _DRRL_SUBTREE_ARTICULATED_DYNAMICS_REGRESSOR_
+#ifndef _DIRL_SUBTREE_ARTICULATED_DYNAMICS_REGRESSOR_
+#define _DIRL_SUBTREE_ARTICULATED_DYNAMICS_REGRESSOR_
 
 #include <kdl/jntarray.hpp>
 
 #include <kdl_codyco/undirectedtree.hpp>
-#include <drrl/dynamicRegressorInterface.hpp>
+#include <dirl/dynamicRegressorInterface.hpp>
 
-namespace DRRL 
+namespace dirl 
 {
 
 class subtreeArticulatedDynamicsRegressor : public DynamicRegressorInterface 

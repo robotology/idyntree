@@ -7,7 +7,7 @@
 #include <kdl/rigidbodyinertia.hpp>
 #include <kdl/frames_io.hpp>
 
-#include <drrl/dynamicRegressorGenerator.hpp>
+#include <dirl/dynamicRegressorGenerator.hpp>
 
 #include <kdl_codyco/regressor_loops.hpp>
 
@@ -19,7 +19,7 @@
 
 using namespace KDL;
 using namespace KDL::CoDyCo;
-using namespace DRRL;
+using namespace dirl;
 
 double random_double()
 {
