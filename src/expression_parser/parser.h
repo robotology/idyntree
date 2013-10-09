@@ -71,7 +71,7 @@ class Parser
 {
     // public functions
     public:
-        Parser();
+        Parser(bool _consider_unknown_variables_as_zero=false);
         char* parse(const char expr[]);
         
         Variablelist user_var;        // list with variables defined by user
@@ -100,6 +100,8 @@ class Parser
         double ans;                   // holds the result of the expression
         char ans_str[255];            // holds a string containing the result
                                       // of the expression
+                                      
+        bool consider_unknown_variables_as_zero; //if true consider unknown variables as zero instead of givin error
 
 
     // private functions

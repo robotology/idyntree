@@ -44,11 +44,22 @@
 #include <algorithm>
 #include <utility>
 
+#ifndef NDEBUG
+#include <kdl/frames_io.hpp>
+#endif
+
 using namespace KDL;
 using namespace std;
 
 namespace kdl_format_io {
-    
+
+/**
+ * Matrix defined in Symoro+ documentation. It is obtained as:
+
+ * return_matrix = Rot(z,gamma)*Trans(z,b)*Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)
+ * That for the chain case (gamma = 0, b = 0) is:
+ * return_matrix = Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)
+ */
 Frame DH_Khalil1986_Tree(double d, double alpha, double r, double theta, double gamma, double b)
 {
         double ct,st,ca,sa,cgamma,sgamma;
@@ -56,6 +67,8 @@ Frame DH_Khalil1986_Tree(double d, double alpha, double r, double theta, double 
         st = sin(theta);
         sa = sin(alpha);
         ca = cos(alpha);
+        cgamma = cos(gamma);
+        sgamma = sin(gamma);
         return Frame(Rotation(
                               cgamma*ct-sgamma*ca*st,   -cgamma*st-sgamma*ca*ct,  sgamma*sa,
                               sgamma*ct+cgamma*ca*st,   -sgamma*st+cgamma*ca*ct, -cgamma*sa,
@@ -66,21 +79,21 @@ Frame DH_Khalil1986_Tree(double d, double alpha, double r, double theta, double 
 }
 
     
-bool treeFromSymoroParFile(const string& parfile_name, Tree& tree)
+bool treeFromSymoroParFile(const string& parfile_name, Tree& tree, const bool consider_first_link_inertia)
 {
     ifstream ifs(parfile_name.c_str());
     std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
-    return treeFromSymoroParString(xml_string,tree);
+    return treeFromSymoroParString(xml_string,tree,consider_first_link_inertia);
 }
 
-bool treeFromSymoroParString(const string& parfile_name, Tree& tree)
+bool treeFromSymoroParString(const string& parfile_name, Tree& tree, const bool consider_first_link_inertia)
 {
     symoro_par_model par_model;
     if( !parModelFromString(parfile_name,par_model) ) return false;
     
-    return treeFromParModel(par_model,tree);
+    return treeFromParModel(par_model,tree,consider_first_link_inertia);
 }
 
 
@@ -224,7 +237,8 @@ bool extract_vector(const std::string & vector_string, std::string vector_name, 
     #endif
     
     //Create the parser object that is need to parse the mathematical expression that are allowed in SyMoRo+ par files
-    Parser prs;
+    //The only argument true means that all the unknown variable will be threated as zero
+    Parser prs(true);
     
     //Add the user defined variable (E/e and Pi/pi/PI are already defined in the Parser)
     for(int i=0; i < variables.size(); i++ ) {
@@ -394,18 +408,8 @@ bool parModelFromString(const string& _parfile_content, symoro_par_model & model
     return true;
 }
 
-bool treeFromParModel(const symoro_par_model& par_model, Tree& tree)
+bool treeFromParModelTree(const symoro_par_model& par_model, Tree& tree, const bool consider_first_link_inertia)
 {
-    if( par_model.Type != 1 ) { 
-        std::cerr << "Error: currently are only supported SYMORO+ .par files of Type Tree (1)" << std::endl;
-        return false;
-    }
-    
-    if( !par_model.isConsistent() ) {
-        std::cerr << "Error: the SYMORO par model is not consistent" << std::endl;
-        return false;
-    }
-    
     const std::string base_name = "fake_base";
     tree = Tree(base_name);
     //As the SYMORO .par doesn't support names for link and joints, the links will be named Link1, Link2, and joints Joint1, Joint2
@@ -434,16 +438,94 @@ bool treeFromParModel(const symoro_par_model& par_model, Tree& tree)
                                                   par_model.R[l],
                                                   par_model.Theta[l],
                                                   par_model.gamma[l],
-                                                  par_model.B[l]);
+                                          par_model.B[l]);
         
+                        #ifndef NDEBUG
+        std::cout << "f_parent_child for link " << link_name << " " << f_parent_child << std::endl;
+#endif
+
         Vector jnt_axis_parent = f_parent_child.M*Vector(0,0,1);
         Vector jnt_origin_parent = f_parent_child*Vector(0,0,0);
         
         tree.addSegment(Segment(link_name,Joint(joint_name,jnt_origin_parent,jnt_axis_parent,Joint::RotAxis),f_parent_child),precessor_link_name);
     }
-    
     return true;
     
+}
+
+bool treeFromParModelChain(const symoro_par_model& par_model, Tree& tree, const bool consider_first_link_inertia)
+{
+
+    //As the SYMORO .par doesn't support names for link and joints, the links will be named Link1, Link2, and joints Joint1, Joint2
+    const std::string link_common_name = "Link";
+    const std::string joint_common_name = "Joint";
+    
+    const std::string base_name = link_common_name + int2string(0);
+    if( !consider_first_link_inertia ) {
+        tree = Tree(base_name);
+    } else {
+        const std::string fake_base_name = "FakeBase_introduced_by_symoro_par_import";
+        tree = Tree(fake_base_name);
+        tree.addSegment(Segment(base_name,Joint("FakeFixedJoint_introduced_by_symoro_par_import",Joint::None)),fake_base_name);
+    }
+    
+    std::vector<std::string> link_names(par_model.NL+1);
+    std::vector<std::string> joint_names(par_model.NJ+1);
+    
+    link_names[0] = base_name;
+    joint_names[0] = "joint_not_existing";
+    
+    for(int l=0; l < par_model.NL; l++ ) {
+        std::string link_name = link_common_name + int2string(l+1);
+        std::string joint_name = joint_common_name + int2string(l);
+        link_names[l+1] = link_name;
+        joint_names[l+1] = joint_name;
+        std::string precessor_link_name = link_names[par_model.Ant[l]];
+        if( par_model.Ant[l] != l ) { std::cerr << "Error in the structure of par chain" << std::endl; return false; }
+        if( par_model.Sigma[l] != 0 ) { std::cerr << "Error: only rotational joint are currently supported" << std::endl; return false; }
+        
+        //The parameters use the convention explained in Khalil 1986
+        //The transformation matrix used in symoro is T_parent_child = Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)
+        //That can be factorized to fit in Segment Joint model as: 
+        //T_parent_child = Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(x,-d)*Rot(x,-alpha)*Rot(x,alpha)*Trans(x,d)*Trans(z,r)
+        //
+        Frame f_parent_child = DH_Khalil1986_Tree(par_model.d[l],
+                                                  par_model.Alpha[l],
+                                                  par_model.R[l],
+                                                  par_model.Theta[l],
+                                                  0,
+                                                  0);
+        
+        Vector jnt_axis_parent = Rotation::RotX(par_model.Alpha[l])*Vector(0,0,1);
+        Vector jnt_origin_parent = Frame(Rotation::RotX(par_model.Alpha[l]))*Frame(Vector(par_model.d[l],0,0))*Vector(0,0,0);
+        
+        #ifndef NDEBUG
+        std::cout << "f_parent_child for link " << link_name << " " << f_parent_child << std::endl;
+        #endif
+        
+        tree.addSegment(Segment(link_name,Joint(joint_name,jnt_origin_parent,jnt_axis_parent,Joint::RotAxis),f_parent_child),precessor_link_name);
+    }
+    return true;
+    
+}
+
+bool treeFromParModel(const symoro_par_model& par_model, Tree& tree, const bool consider_first_link_inertia)
+{
+    if( par_model.Type != 1 && par_model.Type != 0 ) { 
+        std::cerr << "Error: currently are only supported SYMORO+ .par files of Type Tree (1) and Simple Chain (0)" << std::endl;
+        return false;
+    }
+    
+    if( !par_model.isConsistent() ) {
+        std::cerr << "Error: the SYMORO par model is not consistent" << std::endl;
+        return false;
+    }
+    
+    if( par_model.Type == 1 ) return treeFromParModelTree(par_model,tree,consider_first_link_inertia);
+    if( par_model.Type == 0 ) return treeFromParModelChain(par_model,tree,consider_first_link_inertia);
+   
+    std::cerr << "Error: currently are only supported SYMORO+ .par files of Type Tree (1) and Simple Chain (0)" << std::endl;
+    return false;
 }
 
 

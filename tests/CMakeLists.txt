@@ -10,4 +10,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/format_examples/urdf/black_icub.urdf 
 
 target_link_libraries(check_urdf_import_export ${Orocos-KDL_LIBRARIES} kdl_codyco kdl_format_io)
 
+add_executable(check_symoro_par_import_fixed_chain_regressor check_symoro_par_import_fixed_chain_regressor.cpp)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/format_examples/symoro_par/fake_puma.par ${CMAKE_CURRENT_BINARY_DIR}/fake_puma.par)
+target_link_libraries(check_symoro_par_import_fixed_chain_regressor ${Orocos-KDL_LIBRARIES} kdl_codyco kdl_format_io)
+
+
 add_test(test_urdf_import_export check_urdf_import_export black_icub.urdf)
+
+add_test(test_par_import_fixed_chain_regressor check_symoro_par_import_fixed_chain_regressor fake_puma.par)

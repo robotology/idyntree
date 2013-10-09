@@ -108,6 +108,10 @@ public:
         
         //Type specific checks
         if( Type == 0 ) {
+            if( NL != NJ || NL != NF ) return false;
+            if( NL != Ant.size() || NL != Sigma.size() || NL != Mu.size() || NL != B.size() ||
+                NL != d.size()   || NL != R.size()     || NL != gamma.size() || NL != Alpha.size() || NL != Theta.size() ) return false;
+            for(int j=0; j < NL; j++ ) { if( B[j] != 0 || gamma[j] != 0 ) { return false; } }
         } else if ( Type == 1 ) {
             if( NL != NJ || NL != NF ) return false;
             if( NL != Ant.size() || NL != Sigma.size() || NL != Mu.size() || NL != B.size() ||

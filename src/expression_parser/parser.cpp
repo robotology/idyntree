@@ -38,7 +38,7 @@ using namespace std;
  * constructor.
  * Initializes all data with zeros and empty strings
  */
-Parser::Parser()
+Parser::Parser(bool _consider_unknown_variables_as_zero): consider_unknown_variables_as_zero(_consider_unknown_variables_as_zero)
 {
     expr[0] = '\0';
     e = NULL;
@@ -745,7 +745,9 @@ double Parser::eval_variable(const char var_name[])
     }
 
     // unknown variable
-    throw Error(row(), col(), 103, var_name);
+    if( !consider_unknown_variables_as_zero ) {
+        throw Error(row(), col(), 103, var_name);
+    } 
     return 0;
 }
 

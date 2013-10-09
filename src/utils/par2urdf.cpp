@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 
   
   Tree my_tree;
-  if (!treeFromSymoroParFile(argv[1],my_tree)) 
+  if (!treeFromSymoroParFile(argv[1],my_tree,true)) 
   {cerr << "Could not generate robot model and extract kdl tree" << endl; return EXIT_FAILURE;}
 
   if( !treeToUrdfFile(argv[2],my_tree,"par_file_robot") )

@@ -216,9 +216,9 @@ bool treeFromUrdfXml(TiXmlDocument *xml_doc, Tree& tree)
 }*/
 
 
-bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree, const bool fake_root)
+bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree, const bool consider_root_link_inertia)
 {
-  if (!fake_root) {
+  if (consider_root_link_inertia) {
     //For giving a name to the root of KDL using the robot name, 
     //as it is not used elsewhere in the KDL tree
     std::string fake_root_name = "__kdl_import__" + robot_model.getName()+"__fake_root__";
