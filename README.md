@@ -1,6 +1,8 @@
 kdl_format_io
 =============
-Routines for import and *export* of different robotic description formats in the KDL library.
+[![Build Status](https://travis-ci.org/traversaro/kdl_format_io.png)](https://travis-ci.org/traversaro/kdl_format_io)
+
+Routines for import and export of different robotic description formats in the KDL library.
 
 The library is under *ACTIVE* developement. 
 
@@ -11,7 +13,7 @@ The format currently supported are:
 | File Format | Import | Export |
 |-------------|--------|--------|
 | [URDF](http://wiki.ros.org/urdf)        |   ✔    |   ✔    |
-| [SYMORO](http://www.irccyn.ec-nantes.fr/spip.php?article601&lang=en) .par |   ✔    |        |
+| [SYMORO](http://www.irccyn.ec-nantes.fr/spip.php?article601&lang=en) .par |   ✔  (only Tree type for now)  |        |
 
 
 symoro_par_import
