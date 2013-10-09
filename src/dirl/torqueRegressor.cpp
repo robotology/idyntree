@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
   
-#include <dirl/subtreeArticulatedDynamicsRegressor.hpp> 
+#include <dirl/torqueRegressor.hpp> 
 
 #include <kdl_codyco/regressor_utils.hpp>
 
@@ -19,63 +19,55 @@ using namespace KDL::CoDyCo;
 namespace dirl
 {
     
-int subtreeArticulatedDynamicsRegressor::isSubtreeLeaf(const int link_id) const
+bool torqueRegressor::isActiveFTSensor(const int ft_sensor_id) const
 {
-    for( int i=0; i < subtree_leaf_links_indeces.size(); i++ ) {
-        if( link_id == subtree_leaf_links_indeces[i] ) return true;
-    }
-    return false;
+    if( activated_ft_sensors.size() != p_ft_list->getNrOfFTSensors() ) { return false; }
+    if( ft_sensor_id < 0 || ft_sensor_id >= p_ft_list->getNrOfFTSensors() ) { return false; }
+    return activated_ft_sensors[ft_sensor_id];
 }
 
-int subtreeArticulatedDynamicsRegressor::configure()
-{    
-    const KDL::CoDyCo::TreeGraph & tree_graph = *p_tree_graph;
+int torqueRegressor::configure()
+{      
+    const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_tree_graph;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
-    
-    //Checking if the provided subtree leafs define a proper subtree
-    subtree_leaf_links_indeces.resize(subtree_leaf_links.size());
-    
-    if( subtree_leaf_links.size() == 0 ) { 
-        if( verbose ) { std::cerr << "subtreeArticulatedDynamicsRegressor::configure error: subtree with no leaf not implemented" << std::endl; }
-        return -3;
-    }
-    
-    for(int i=0; i < subtree_leaf_links.size(); i++ ) {
-        LinkMap::const_iterator link_it = tree_graph.getLink(subtree_leaf_links[i]);
-        
-        if( link_it == tree_graph.getInvalidLinkIterator() ) {
-            if( verbose ) { std::cerr << "subtreeArticulatedDynamicsRegressor::configure error: link " << subtree_leaf_links[i] << " not found " << std::endl; }
-            return -1;
-        }
-        
-        if( ft_list.getNrOfFTSensorsOnLink(link_it->getLinkIndex()) == 0 ) {
-            if( verbose ) { std::cerr << "subtreeArticulatedDynamicsRegressor::configure error: link " << subtree_leaf_links[i] << " passed as a subtree leaf, but no FT sensor is attached to it " << std::endl; }
-            return -2;
-        }
-        
-        /** \todo add support to multiple FT sensors on the same link */
-        if( ft_list.getNrOfFTSensorsOnLink(link_it->getLinkIndex()) > 1 ) {
-            if( verbose ) { std::cerr << "subtreeArticulatedDynamicsRegressor::configure error: link " << subtree_leaf_links[i] << " passed as a subtree leaf, but more than one FT sensor is attached to it: this is not currenly implemented " << std::endl; }
-            return -4;
-        }
-        
-        
-        /** \todo add further check that the indicated subtree is a proper one */
-        subtree_leaf_links_indeces[i] = link_it->getLinkIndex(); 
-    }
+   
     
     //Now store all the links that belong to the subtree
     //We first compute the spanning starting at one (the first) of the leafs 
     KDL::CoDyCo::Traversal subtree_traversal;
     
-    tree_graph.compute_traversal(subtree_traversal,subtree_leaf_links_indeces[0]);
+    
+    JunctionMap::const_iterator torque_jnt = undirected_tree.getJunction(torque_dof);
+    if( torque_jnt == undirected_tree.getInvalidJunctionIterator() ) { 
+        if(verbose) { std::cerr << "torqueRegressor error: specified joint " << torque_dof << " not found " << std::endl; }
+        return -1; 
+    }
+    
+    torque_dof_index = torque_jnt->getJunctionIndex();
+    
+    if( torque_dof_index < 0 || torque_dof_index >= undirected_tree.getNrOfDOFs() ) {
+         if(verbose) { std::cerr << "torqueRegressor error: specified joint " << torque_dof << " has no degrees of freedom " << std::endl; }
+        return -1; 
+    }
+    
+    
+    int link_parent_id = torque_jnt->parent->link_nr;
+    int link_child_id = torque_jnt->child->link_nr;
+    
+    if( !reverse_direction ) {
+        subtree_root_link_id = link_child_id;
+    } else {
+        subtree_root_link_id = link_parent_id;
+    }
+    
+    undirected_tree.compute_traversal(subtree_traversal,subtree_root_link_id);
     
     //Then we color the nodes: if white (true) the links belongs to the subtree
     //if black (false) it does not belongs to the node
-    std::vector<bool> is_link_in_subtree(tree_graph.getNrOfLinks(),false);
+    std::vector<bool> is_link_in_subtree(undirected_tree.getNrOfLinks(),false);
     
     //the leaf that we chose as starting link clearly belongs to the subtree
-    is_link_in_subtree[subtree_leaf_links_indeces[0]] = true;
+    is_link_in_subtree[subtree_root_link_id] = true;
     
     //then, all the other links can be classified using the following rules:  
     for(int i=1; i < subtree_traversal.order.size(); i++ ) {
@@ -86,10 +78,13 @@ int subtreeArticulatedDynamicsRegressor::configure()
             //if the parent is not in the subtree (false/black) then the link is not in the subtree (false/black)
             is_link_in_subtree[link_id] == false;
         } else {
-            int junction_index = tree_graph.getLink(link_id)->getAdjacentJoint(tree_graph.getLink(parent_id))->getJunctionIndex();
+            int junction_index = undirected_tree.getLink(link_id)->getAdjacentJoint(undirected_tree.getLink(parent_id))->getJunctionIndex();
             
-            if( ft_list.isFTSensor(junction_index) && isSubtreeLeaf(parent_id) ) {
-                //if the parent is in the subtree (true/white) but it is connected to the link by an FT sensor (and the parent is a leaf of the subtree) then the link is not in the subtree (false/black)
+            if( ft_list.isFTSensor(junction_index) && isActiveFTSensor(ft_list.getFTSensorID(junction_index)) ) {
+                //if the parent is in the subtree (true/white) but it is connected to the link by an activated FT sensor
+                is_link_in_subtree[link_id] = false;
+            } else if ( junction_index == torque_dof_index ) {
+                //or if the parent is connected trought the torque regressor dof
                 is_link_in_subtree[link_id] = false;
             } else {
                 //otherwise the link is in the subtree (true/white)
@@ -109,21 +104,21 @@ int subtreeArticulatedDynamicsRegressor::configure()
     return 0;
 }
 
-int  subtreeArticulatedDynamicsRegressor::getNrOfOutputs()
+int torqueRegressor::getNrOfOutputs()
 {
-    return 6;
+    return 1;
 }
 
-int  subtreeArticulatedDynamicsRegressor::computeRegressor(const KDL::JntArray &q, 
-                                                            const KDL::JntArray &q_dot, 
-                                                            const KDL::JntArray &q_dotdot,
-                                                            const std::vector<KDL::Frame> & X_dynamic_base,
-                                                            const std::vector<KDL::Twist> & v,
-                                                            const std::vector<KDL::Twist> & a,
-                                                            const std::vector< KDL::Wrench > & measured_wrenches,
-                                                            const KDL::JntArray & measured_torques,
-                                                            Eigen::MatrixXd & regressor_matrix,
-                                                            Eigen::VectorXd & known_terms)
+int torqueRegressor::computeRegressor(const KDL::JntArray &q, 
+                                      const KDL::JntArray &q_dot, 
+                                      const KDL::JntArray &q_dotdot,
+                                      const std::vector<KDL::Frame> & X_dynamic_base,
+                                      const std::vector<KDL::Twist> & v,
+                                      const std::vector<KDL::Twist> & a,
+                                      const std::vector< KDL::Wrench > & measured_wrenches,
+                                      const KDL::JntArray & measured_torques,
+                                      Eigen::MatrixXd & regressor_matrix,
+                                      Eigen::VectorXd & known_terms)
 {
 #ifndef NDEBUG
     //std::cerr << "Called computeRegressor " << std::endl;
@@ -133,12 +128,26 @@ int  subtreeArticulatedDynamicsRegressor::computeRegressor(const KDL::JntArray &
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
 
     
-    if( regressor_matrix.rows() != 6 ) {
+    if( regressor_matrix.rows() != getNrOfOutputs() ) {
         return -1;
     }
+    
+         /**
+         * \todo move this stuff in UndirectedTree
+         * 
+         */
+        JunctionMap::const_iterator torque_dof_it = p_tree_graph->getJunction(torque_dof_index);
+        LinkMap::const_iterator parent_root_it;
+        if( torque_dof_it->child == p_tree_graph->getLink(subtree_root_link_id) ) {
+            parent_root_it = torque_dof_it->parent;
+        } else {
+            parent_root_it = torque_dof_it->child;
+        }
+        assert(torque_dof_it->getJunctionIndex() < p_tree_graph->getNrOfDOFs() && torque_dof_it->getJunctionIndex() < p_tree_graph->getNrOfDOFs() >= 0);
+        KDL::Twist S = parent_root_it->S(p_tree_graph->getLink(subtree_root_link_id),q(torque_dof_it->getJunctionIndex()));
+        
     //all other columns, beside the one relative to the inertial parameters of the links of the subtree, are zero
     regressor_matrix.setZero();
-   
     
     for(int i =0; i < (int)subtree_links_indices.size(); i++ ) {
         int link_id = subtree_links_indices[i];
@@ -146,7 +155,7 @@ int  subtreeArticulatedDynamicsRegressor::computeRegressor(const KDL::JntArray &
             
         if( linkIndeces2regrCols[link_id] != -1 ) {
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);
-            regressor_matrix.block(0,(int)(10*linkIndeces2regrCols[link_id]),6,10) = WrenchTransformationMatrix(X_dynamic_base[link_id])*netWrenchRegressor_i;
+            regressor_matrix.block(0,(int)(10*linkIndeces2regrCols[link_id]),getNrOfOutputs(),10) = toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[link_id])*netWrenchRegressor_i;
         }        
     }
     
@@ -176,18 +185,17 @@ int  subtreeArticulatedDynamicsRegressor::computeRegressor(const KDL::JntArray &
             }
             assert(10*NrOfRealLinks_subtree+6*ft_id+5 < regressor_matrix.cols());
             if( fts_link[0]->getParent() == leaf_link_id ) { 
-                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),6,6) = -WrenchTransformationMatrix(X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
+                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = -toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
             } else {
                 assert( fts_link[0]->getChild() == leaf_link_id );
-                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),6,6) = WrenchTransformationMatrix(X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
+                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
             }
             
         }
     }
     
-    //The known terms are simply all the measured wrenches acting on the subtree
-    known_terms.setZero();
-    
+    //The known terms are simply all the measured wrenches acting on the subtree projected on the axis and plus the measured torque
+    known_terms(0) = measured_torques(torque_dof_index);
     
     #ifndef NDEBUG
     //std::cerr << "computing kt " << std::endl;
@@ -207,9 +215,9 @@ int  subtreeArticulatedDynamicsRegressor::computeRegressor(const KDL::JntArray &
         
         assert(fts_link[0]->getChild() == leaf_link_id || fts_link[0]->getParent() == leaf_link_id );
 
+   
         
-        //known_terms += toEigen((X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id))*measured_wrenches[ft_id]);
-        known_terms += toEigen(X_dynamic_base[leaf_link_id]*ft_list.getMeasuredWrench(leaf_link_id,measured_wrenches));
+        known_terms(0) +=  dot(S,X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*ft_list.getMeasuredWrench(leaf_link_id,measured_wrenches));
     }
     
 #ifndef NDEBUG

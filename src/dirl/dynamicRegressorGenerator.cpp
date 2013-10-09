@@ -462,9 +462,9 @@ int DynamicRegressorGenerator::setTorqueSensorMeasurement(int dof_index, double 
 int DynamicRegressorGenerator::addSubtreeRegressorRows(const std::vector< std::string>& _subtree_leaf_links)
 {
     DynamicRegressorInterface * new_regr;
-    subtreeArticulatedDynamicsRegressor * new_st_regr;
+    subtreeBaseDynamicsRegressor * new_st_regr;
     
-    new_st_regr = new subtreeArticulatedDynamicsRegressor(tree_graph,*p_ft_list,linkIndeces2regrColumns,_subtree_leaf_links,consider_ft_offset,verbose);
+    new_st_regr = new subtreeBaseDynamicsRegressor(tree_graph,*p_ft_list,linkIndeces2regrColumns,_subtree_leaf_links,consider_ft_offset,verbose);
     
     new_regr = (DynamicRegressorInterface *) new_st_regr;
     

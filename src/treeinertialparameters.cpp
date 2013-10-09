@@ -17,6 +17,10 @@
 #include "kdl_codyco/rnea_loops.hpp"
 #include "kdl_codyco/position_loops.hpp"
 
+#ifndef NDEBUG
+#include <iostream>
+#include <kdl/frames_io.hpp>
+#endif
 
 namespace KDL {
 namespace CoDyCo {
@@ -103,6 +107,22 @@ namespace CoDyCo {
              
     }
     
+    int TreeInertialParametersRegressor::dynamicsRegressor( const KDL::JntArray &q, 
+                                                    const KDL::JntArray &q_dot,
+                                                    const KDL::JntArray &q_dotdot,  
+                                                    Eigen::MatrixXd & dynamics_regressor)
+    {
+        if(q.rows()!=tree_graph.getNrOfDOFs() || q_dot.rows()!=tree_graph.getNrOfDOFs() || q_dotdot.rows()!=tree_graph.getNrOfDOFs() || dynamics_regressor.cols()!=10*ns || dynamics_regressor.rows()!=(tree_graph.getNrOfDOFs()))
+            return -1;
+        
+        rneaKinematicLoop(tree_graph,q,q_dot,q_dotdot,traversal,Twist::Zero(),ag,v,a);
+        
+        //Frame orientation loop
+        getFramesLoop(tree_graph,q,traversal,X_b);
+        
+        dynamicsRegressorFixedBaseLoop(tree_graph,q,traversal,X_b,v,a,dynamics_regressor);
+        
+    }
 
     int TreeInertialParametersRegressor::dynamicsRegressor( const KDL::JntArray &q, 
                                                     const KDL::JntArray &q_dot,
@@ -113,16 +133,32 @@ namespace CoDyCo {
     {
         if(q.rows()!=tree_graph.getNrOfDOFs() || q_dot.rows()!=tree_graph.getNrOfDOFs() || q_dotdot.rows()!=tree_graph.getNrOfDOFs() || dynamics_regressor.cols()!=10*ns || dynamics_regressor.rows()!=(6+tree_graph.getNrOfDOFs()))
             return -1;
-		
-		//kinematic loop
+        
+        //kinematic loop
         rneaKinematicLoop(tree_graph,q,q_dot,q_dotdot,traversal,base_velocity,base_acceleration,v,a);
+        
+        #ifndef NDEBUG
+        /*
+        for(int i=0; i < v.size(); i++ ) {
+            std::cout << "Vel and acc (" << i << " ) " << std::endl;
+            std::cout << toEigen(v[i]) << std::endl;
+            std::cout << toEigen(a[i]) << std::endl;
+        }*/
+        #endif
         
         //Frame orientation loop
         getFramesLoop(tree_graph,q,traversal,X_b);
         
+        #ifndef NDEBUG
+        /*
+        for(int i=0; i < v.size(); i++ ) {
+            std::cout << "frame (" << i << " ) " << std::endl;
+            std::cout << X_b[i] << std::endl;        }*/
+        #endif
+        
         dynamicsRegressorLoop(tree_graph,q,traversal,X_b,v,a,dynamics_regressor);
 
-		/*
+        /*
         for(i=0;i<ns;i++) {
                         
             netWrenchRegressor_i = netWrenchRegressor(v[i],a[i]);

@@ -752,7 +752,7 @@ namespace CoDyCo {
     
     int UndirectedTree::check_consistency(const Traversal traversal) const
     {
-        assert( traversal.order.size() == getNrOfLinks() );
+        if( traversal.order.size() != getNrOfLinks() ) return -1;
         if( traversal.order.size() != getNrOfLinks() ) return -1;
 
         assert( traversal.parent.size() == getNrOfLinks() );

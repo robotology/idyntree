@@ -16,7 +16,7 @@
 #include <kdl_codyco/ftsensor.hpp>
 
 #include <dirl/dynamicRegressorInterface.hpp>
-#include <dirl/subtreeArticulatedDynamicsRegressor.hpp>
+#include <dirl/subtreeBaseDynamicsRegressor.hpp>
 
 //#include <drrl/torqueRegressor.hpp>
 
@@ -209,7 +209,7 @@ private:
     //but this vector of pointers is necessary to mantain the serializations
     std::vector<DynamicRegressorInterface *> regressors_ptrs;
     
-    std::vector<subtreeArticulatedDynamicsRegressor *> subtree_regressors;
+    std::vector<subtreeBaseDynamicsRegressor *> subtree_regressors;
     //std::vector<torqueRegressor> torque_regressors;
     
     //Options for regressors

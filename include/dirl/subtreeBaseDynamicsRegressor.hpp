@@ -19,7 +19,7 @@
 namespace dirl 
 {
 
-class subtreeArticulatedDynamicsRegressor : public DynamicRegressorInterface 
+class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface 
 {
     const KDL::CoDyCo::TreeGraph * p_tree_graph;
     const KDL::CoDyCo::FTSensorList * p_ft_list;
@@ -47,12 +47,12 @@ class subtreeArticulatedDynamicsRegressor : public DynamicRegressorInterface
          * 
          * @param _subtree_leaf_links the list of name of the leaf links of the considered subtree
          */
-        subtreeArticulatedDynamicsRegressor(const KDL::CoDyCo::TreeGraph & _tree_graph, 
-                                            const KDL::CoDyCo::FTSensorList & _ft_list, 
-                                            const std::vector<int> & _linkIndeces2regrCols,
-                                            std::vector< std::string> _subtree_leaf_links=std::vector< std::string>(0),
-                                            const bool _consider_ft_offset=false,
-                                            bool _verbose=true):
+        subtreeBaseDynamicsRegressor(const KDL::CoDyCo::TreeGraph & _tree_graph, 
+                                     const KDL::CoDyCo::FTSensorList & _ft_list, 
+                                     const std::vector<int> & _linkIndeces2regrCols,
+                                     std::vector< std::string> _subtree_leaf_links=std::vector< std::string>(0),
+                                     const bool _consider_ft_offset=false,
+                                     bool _verbose=true):
                                             p_tree_graph(&_tree_graph),
                                             p_ft_list(&_ft_list),
                                             linkIndeces2regrCols(_linkIndeces2regrCols),
@@ -69,7 +69,7 @@ class subtreeArticulatedDynamicsRegressor : public DynamicRegressorInterface
             assert(NrOfRealLinks_subtree <= linkIndeces2regrCols.size());
         }
                                                                                                                                              
-       ~subtreeArticulatedDynamicsRegressor() {};
+       ~subtreeBaseDynamicsRegressor() {};
         
         int getNrOfOutputs();
         

@@ -35,7 +35,6 @@ namespace CoDyCo {
         #endif
         
         int ret = tree_graph.compute_traversal(traversal,base_link);
-        assert(tree_graph.check_consistency(traversal) == 0);
 
         if( ret != 0 ) {
             tree_graph.compute_traversal(traversal);

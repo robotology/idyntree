@@ -30,7 +30,8 @@ namespace CoDyCo
         public:
             UndirectedTreeSolver(const Tree & tree_arg, const TreeSerialization & serialization_arg): 
                 undirected_tree(tree_arg,serialization_arg)
-            { undirected_tree.compute_traversal(traversal); };
+            { undirected_tree.compute_traversal(traversal); assert(undirected_tree.check_consistency(traversal) == 0);
+ };
          
             ~UndirectedTreeSolver() {};
             

@@ -33,6 +33,22 @@ void dynamicsRegressorLoop(const TreeGraph & tree_graph,
                            const std::vector<Twist>& a,
                            Eigen::MatrixXd & dynamics_regressor);
 
+/**
+ * Calculate the dynamics regressor for a fixed base robot, such that if a is the vector of inertial parameters_vector
+ * dynamics_regressor*a ==  tau 
+ * 
+ * Where tau is the vector of joint torques
+ * 
+ */
+void dynamicsRegressorFixedBaseLoop(const TreeGraph & tree_graph,
+                           const KDL::JntArray &q, 
+                           const Traversal & traversal,
+                           const std::vector<Frame>& X_b,
+                           const std::vector<Twist>& v,
+                           const std::vector<Twist>& a,
+                           Eigen::MatrixXd & dynamics_regressor);
+
+
 void inertialParametersVectorLoop(const TreeGraph & tree_graph,
                                   Eigen::VectorXd & parameters_vector);
 
