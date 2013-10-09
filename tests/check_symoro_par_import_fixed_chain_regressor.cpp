@@ -160,12 +160,11 @@ int main(int argc, char** argv)
   regr_symoro.setZero();
   regr_dirl.setZero();
   
-  if( slv.dynamicsRegressor(q,dq,ddq,regr_dirl) != 0 ) { cout << "dirl regressor failed " << endl; return EXIT_FAILURE; }
-  //if( slv_rne.CartToJnt(q,dq,ddq,tau) != 0 ) { cout << "inverse dynamics failed " << endl; return EXIT_FAILURE; }
+  //if( slv.dynamicsRegressor(q,dq,ddq,regr_dirl) != 0 ) { cout << "dirl regressor failed " << endl; return EXIT_FAILURE; }
   if( slv.dynamicsRegressor(q,dq,ddq,Twist::Zero(),Twist(Vector(0,0,-g),Vector(0,0,0)),fb_regr_dirl) != 0 ) { cout << "fb dirl regressor failed " << endl; return EXIT_FAILURE; }
   if( symoro_generated_fake_puma_regressor(q,dq,ddq,g,regr_symoro) != 0 ) { cout << "SyMoRo regressor failed " << endl; return EXIT_FAILURE; }
   
-  //regr_dirl = fb_regr_dirl.block(6,0,regr_dirl.rows(),regr_dirl.cols());
+  regr_dirl = fb_regr_dirl.block(6,0,regr_dirl.rows(),regr_dirl.cols());
   for(int i=0; i < regr_dirl.rows(); i++ ) {
       for(int j=0; j < regr_dirl.cols(); j++ ) {
           double err;
