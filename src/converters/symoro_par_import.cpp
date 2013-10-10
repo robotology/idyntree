@@ -44,9 +44,6 @@
 #include <algorithm>
 #include <utility>
 
-#ifndef NDEBUG
-#include <kdl/frames_io.hpp>
-#endif
 
 using namespace KDL;
 using namespace std;
@@ -202,10 +199,6 @@ bool extract_vector(const std::string & vector_string, std::string vector_name, 
     if( variables.size() != var_values.size() ) return false;
     if( !contains(vector_string,"={") || !contains(vector_string,"}") ) return false;
     
-#ifndef NDEBUG
-    //std::cerr << "Called extract vector with vector_string " << std::endl;
-    //std::cerr << vector_string << std::endl;
-#endif
     
     //Get position of =,{,}
     int eq_pos, open_pos, close_pos;
@@ -214,27 +207,14 @@ bool extract_vector(const std::string & vector_string, std::string vector_name, 
     close_pos = vector_string.find("}",open_pos+1);
     
     vector_name = vector_string.substr(0,eq_pos);
-    
-#ifndef NDEBUG
-    //std::cerr << "vector_name " << vector_name << std::endl;
-#endif
+   
     
     //Extracting the list of elements of the vector
     std::string vector_elems_string = vector_string.substr(open_pos+1,close_pos-open_pos-1);
     
-    #ifndef NDEBUG
-    //std::cerr << "vector_elems_string " << vector_elems_string << std::endl;
-    #endif
     
     std::vector<string> vector_elems_strs = explode(vector_elems_string,',');
-    
-    #ifndef NDEBUG
-    /*
-    std::cerr << "vector_elems_strs " << std::endl;
-    for(int cc=0; cc < vector_elems_strs.size(); cc++ ) {
-        std::cerr << "[ " << cc << " ] : " << vector_elems_strs[cc] << std::endl;
-    }*/
-    #endif
+   
     
     //Create the parser object that is need to parse the mathematical expression that are allowed in SyMoRo+ par files
     //The only argument true means that all the unknown variable will be threated as zero
@@ -431,23 +411,55 @@ bool treeFromParModelTree(const symoro_par_model& par_model, Tree& tree, const b
         if( par_model.Sigma[l] != 0 ) { std::cerr << "Error: only rotational joint are currently supported" << std::endl; return false; }
         
         //The parameters use the convention explained in Khalil 1986
-        //Note that for the Tree notation, the axis is defined in the frame of the child link
-        //While in KDL it is defined in the frame of the parent link, so it should be project
         Frame f_parent_child = DH_Khalil1986_Tree(par_model.d[l],
                                                   par_model.Alpha[l],
                                                   par_model.R[l],
                                                   par_model.Theta[l],
                                                   par_model.gamma[l],
-                                          par_model.B[l]);
+                                                  par_model.B[l]);
         
-                        #ifndef NDEBUG
-        std::cout << "f_parent_child for link " << link_name << " " << f_parent_child << std::endl;
-#endif
-
-        Vector jnt_axis_parent = f_parent_child.M*Vector(0,0,1);
-        Vector jnt_origin_parent = f_parent_child*Vector(0,0,0);
         
-        tree.addSegment(Segment(link_name,Joint(joint_name,jnt_origin_parent,jnt_axis_parent,Joint::RotAxis),f_parent_child),precessor_link_name);
+                                                 
+        switch( par_model.Sigma[l] ) {
+            case 0:
+            {
+                //Rotational joint 
+                //The parameters use the convention explained in Khalil 1986
+                //The transformation matrix used in symoro is T_parent_child = Rot(z,gamma)*Trans(z,b)*Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)
+                //That can be factorized to fit in Segment RotAxis model (theta is the joint variable)  as: 
+                //T_parent_child = Rot(z,gamma)*Trans(z,b)*Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(x,-d)*Rot(x,-alpha)*Trans(z,-b)*Rot(z,-gamma)*Rot(z,gamma)*Trans(z,b)*Rot(x,alpha)*Trans(x,d)*Trans(z,r)
+                Frame new_old_axis_ref_frame = Frame(Rotation::RotZ(par_model.gamma[l]))*Frame(Vector(0,0,par_model.B[l]))*
+                                               Frame(Rotation::RotX(par_model.Alpha[l]))*Frame(Vector(par_model.d[l],0,0));
+                Vector jnt_axis_parent = new_old_axis_ref_frame.M*Vector(0,0,1);
+                Vector jnt_origin_parent = new_old_axis_ref_frame*Vector(0,0,0);
+                tree.addSegment(Segment(link_name,Joint(joint_name,jnt_origin_parent,jnt_axis_parent,Joint::RotAxis),f_parent_child),precessor_link_name);
+            }
+            break;
+            case 1:
+            {
+                //Prismatic joint
+               //The parameters use the convention explained in Khalil 1986
+                //The transformation matrix used in symoro is T_parent_child = Rot(z,gamma)*Trans(z,b)*Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)
+                //That can be factorized to fit in Segment RotAxis model (theta is the joint variable)  as: 
+                //T_parent_child = Rot(z,gamma)*Trans(z,b)*Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)*Rot(z,-theta)*Trans(x,-d)*Rot(x,-alpha)*Trans(z,-b)*Rot(z,-gamma)*Rot(z,gamma)*Trans(z,b)*Rot(x,alpha)*Trans(x,d)               
+                
+                Frame new_old_axis_ref_frame = Frame(Rotation::RotZ(par_model.gamma[l]))*Frame(Vector(0,0,par_model.B[l]))*
+                                               Frame(Rotation::RotX(par_model.Alpha[l]))*Frame(Vector(par_model.d[l],0,0))*Frame(Rotation::RotZ(par_model.Theta[l]));                
+                Vector jnt_axis_parent = new_old_axis_ref_frame.M*Vector(0,0,1);
+                Vector jnt_origin_parent = new_old_axis_ref_frame*Vector(0,0,0);
+                tree.addSegment(Segment(link_name,Joint(joint_name,jnt_origin_parent,jnt_axis_parent,Joint::TransAxis),f_parent_child),precessor_link_name);
+            }
+            break;
+            case 2: 
+                //Fixed joint
+                tree.addSegment(Segment(link_name,Joint(joint_name,Joint::None),f_parent_child),precessor_link_name);
+            break;
+            default:
+            std::cerr << "Error: Sigma value not expected"<< std::endl; return false;
+            break;
+        }
+        
+       
     }
     return true;
     
@@ -481,29 +493,49 @@ bool treeFromParModelChain(const symoro_par_model& par_model, Tree& tree, const 
         link_names[l+1] = link_name;
         joint_names[l+1] = joint_name;
         std::string precessor_link_name = link_names[par_model.Ant[l]];
-        if( par_model.Ant[l] != l ) { std::cerr << "Error in the structure of par chain" << std::endl; return false; }
-        if( par_model.Sigma[l] != 0 ) { std::cerr << "Error: only rotational joint are currently supported" << std::endl; return false; }
-        
-        //The parameters use the convention explained in Khalil 1986
-        //The transformation matrix used in symoro is T_parent_child = Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)
-        //That can be factorized to fit in Segment Joint model as: 
-        //T_parent_child = Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(x,-d)*Rot(x,-alpha)*Rot(x,alpha)*Trans(x,d)*Trans(z,r)
-        //
+        if( par_model.Ant[l] != l ) { std::cerr << "Error in the structure of par chain" << std::endl; return false; }        
         Frame f_parent_child = DH_Khalil1986_Tree(par_model.d[l],
                                                   par_model.Alpha[l],
                                                   par_model.R[l],
                                                   par_model.Theta[l],
                                                   0,
                                                   0);
-        
-        Vector jnt_axis_parent = Rotation::RotX(par_model.Alpha[l])*Vector(0,0,1);
-        Vector jnt_origin_parent = Frame(Rotation::RotX(par_model.Alpha[l]))*Frame(Vector(par_model.d[l],0,0))*Vector(0,0,0);
-        
-        #ifndef NDEBUG
-        std::cout << "f_parent_child for link " << link_name << " " << f_parent_child << std::endl;
-        #endif
-        
-        tree.addSegment(Segment(link_name,Joint(joint_name,jnt_origin_parent,jnt_axis_parent,Joint::RotAxis),f_parent_child),precessor_link_name);
+        switch( par_model.Sigma[l] ) {
+            case 0:
+            {
+                //Rotational joint 
+                //The parameters use the convention explained in Khalil 1986
+                //The transformation matrix used in symoro is T_parent_child = Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)
+                //That can be factorized to fit in Segment RotAxis Joint model (theta is the joint variable) as: 
+                //T_parent_child = Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(x,-d)*Rot(x,-alpha)*Rot(x,alpha)*Trans(x,d)*Trans(z,r)
+                Frame new_old_axis_ref_frame = Frame(Rotation::RotX(par_model.Alpha[l]))*Frame(Vector(par_model.d[l],0,0));
+                Vector jnt_axis_parent = new_old_axis_ref_frame.M*Vector(0,0,1);
+                Vector jnt_origin_parent = new_old_axis_ref_frame*Vector(0,0,0);
+                tree.addSegment(Segment(link_name,Joint(joint_name,jnt_origin_parent,jnt_axis_parent,Joint::RotAxis),f_parent_child),precessor_link_name);
+            }
+            break;
+            case 1:
+            {
+                //Prismatic joint
+                //The parameters use the convention explained in Khalil 1986
+                //The transformation matrix used in symoro is T_parent_child = Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)
+                //That can be factorized to fit in Segment TransAxis Joint model (r is the joint variable) as: 
+                //T_parent_child = Rot(x,alpha)*Trans(x,d)*Rot(z,theta)*Trans(z,r)*Rot(z,-theta)*Trans(x,-d)*Rot(x,-alpha)*Rot(x,alpha)*Trans(x,d)*Rot(z,theta)
+                Frame new_old_axis_ref_frame = Frame(Rotation::RotX(par_model.Alpha[l]))*Frame(Vector(par_model.d[l],0,0))*Frame(Rotation::RotZ(par_model.Theta[l]));
+                Vector jnt_axis_parent = new_old_axis_ref_frame.M*Vector(0,0,1);
+                Vector jnt_origin_parent = new_old_axis_ref_frame*Vector(0,0,0);
+                tree.addSegment(Segment(link_name,Joint(joint_name,jnt_origin_parent,jnt_axis_parent,Joint::TransAxis),f_parent_child),precessor_link_name);
+            }
+            break;
+            case 2: 
+                //Fixed joint
+                tree.addSegment(Segment(link_name,Joint(joint_name,Joint::None),f_parent_child),precessor_link_name);
+            break;
+            default:
+            std::cerr << "Error: Sigma value not expected"<< std::endl; return false;
+            break;
+        }
+            
     }
     return true;
     
