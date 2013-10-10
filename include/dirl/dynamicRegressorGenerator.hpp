@@ -17,6 +17,7 @@
 
 #include <dirl/dynamicRegressorInterface.hpp>
 #include <dirl/subtreeBaseDynamicsRegressor.hpp>
+#include <dirl/torqueRegressor.hpp>
 
 //#include <drrl/torqueRegressor.hpp>
 
@@ -46,8 +47,8 @@ public:
     *       the root of the KDL::Tree
     * 
     * @param tree the KDL::Tree description of the robot structure
-    * @param kinematic_base the link used as the root for propagation of kinematic information
-    * @param ft_sensor_names the names of the Joints (of type Joint::None) that are Force Torque sensors
+    * @param kinematic_base (optional) the link used as the root for propagation of kinematic information (default: the base of the KDL::Tree )
+    * @param ft_sensor_names (optional) the names of the Joints (of type Joint::None) that are Force Torque sensors (default: no sensors)
     * 
     */
     DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base, 
@@ -58,8 +59,10 @@ public:
     
     int addSubtreeRegressorRows(const std::vector< std::string>& _subtree_leaf_links);
     
-    //int addTorqueRegressorRows(const std::string & dof_name, const std::vector<bool> &_activated_ft_sensors);
-    
+    int addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction = false, const std::vector<bool> &_activated_ft_sensors=std::vector<bool>(0));
+        
+    int addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<std::string> &_activated_ft_sensors);
+
 
     /**
     * 
@@ -130,13 +133,19 @@ public:
      * 
      * @param ft_sensor_index the index of the FT sensor, an integer from 0 to NrOfFTSensors-1
      */
-    int setFTSensorMeasurement(int ft_sensor_index, const KDL::Wrench ftm);
+    int setFTSensorMeasurement(const int ft_sensor_index, const KDL::Wrench ftm);
     
     /**
      * 
      * @param dof_index the index of the degree of freedom on which the torque was measured, an interger from 0 to NrOfDOFs-1
      */
-    int setTorqueSensorMeasurement(int dof_index, double measure);
+    int setTorqueSensorMeasurement(const int dof_index,const double measure);
+    
+    /**
+     * Add all the measured torque together
+     * 
+     */
+    int setTorqueSensorMeasurement(const KDL::JntArray & torques); 
     
     
     /**
@@ -210,7 +219,7 @@ private:
     std::vector<DynamicRegressorInterface *> regressors_ptrs;
     
     std::vector<subtreeBaseDynamicsRegressor *> subtree_regressors;
-    //std::vector<torqueRegressor> torque_regressors;
+    std::vector<torqueRegressor *> torque_regressors;
     
     //Options for regressors
     bool consider_ft_offset; //if true, consider the offset of the FT sensors as parameters

@@ -30,12 +30,12 @@ class torqueRegressor : public DynamicRegressorInterface
     std::vector< int > subtree_links_indices; /** indeces of the links belonging to the considered subtree */
   
         
-    const std::vector<int> linkIndeces2regrCols;
+    std::vector<int> linkIndeces2regrCols;
     
     
     std::string torque_dof;
     int torque_dof_index;
-    const bool reverse_direction;
+    bool reverse_direction;
     
     int subtree_root_link_id;
         
@@ -56,15 +56,19 @@ class torqueRegressor : public DynamicRegressorInterface
                         const bool _reverse_direction = false,
                         const std::vector<bool> & _activated_ft_sensors=std::vector< bool>(0),
                         const bool _consider_ft_offset=false,
-                        bool _verbose=true
+                        const bool _verbose=true
                         )
                         :   p_tree_graph(&_tree_graph),
                                             p_ft_list(&_ft_list),
                                             linkIndeces2regrCols(_linkIndeces2regrCols),
+                                            torque_dof(dof_name), 
+                                            reverse_direction(_reverse_direction), 
+                                            activated_ft_sensors(_activated_ft_sensors),
                                             consider_ft_offset(_consider_ft_offset),
                                             subtree_links_indices(0),
                                             verbose(_verbose),
-                                            NrOfRealLinks_subtree(0),torque_dof(dof_name), reverse_direction(_reverse_direction), activated_ft_sensors(_activated_ft_sensors)
+                                            NrOfRealLinks_subtree(0)
+                                         
         {
             assert(linkIndeces2regrCols.size() == p_tree_graph->getNrOfLinks());
             NrOfRealLinks_subtree = 0;

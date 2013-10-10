@@ -434,7 +434,7 @@ int DynamicRegressorGenerator::computeIdentifiableSubspace(Eigen::MatrixXd & bas
         return 0;
 }
 
-int DynamicRegressorGenerator::setFTSensorMeasurement(int ft_sensor_index, const KDL::Wrench ftm)
+int DynamicRegressorGenerator::setFTSensorMeasurement(const int ft_sensor_index, const KDL::Wrench ftm)
 {
     if( ft_sensor_index < 0 || ft_sensor_index >= NrOfFTSensors ) {
         if( verbose ) std::cerr << "DynamicsRegressorGenerator::setFTSensorMeasurement error: ft_sensor_index " << ft_sensor_index  << " out of bounds" << std::endl;
@@ -447,7 +447,7 @@ int DynamicRegressorGenerator::setFTSensorMeasurement(int ft_sensor_index, const
     return 0;
 }
     
-int DynamicRegressorGenerator::setTorqueSensorMeasurement(int dof_index, double measure)
+int DynamicRegressorGenerator::setTorqueSensorMeasurement(const int dof_index, const double measure)
 {
     if( dof_index < 0 || dof_index >= NrOfDOFs ) {
         if( verbose ) std::cerr << "DynamicsRegressorGenerator::setTorqueSensorMeasurement error: dof_index " << dof_index  << " out of bounds" << std::endl;
@@ -458,6 +458,19 @@ int DynamicRegressorGenerator::setTorqueSensorMeasurement(int dof_index, double 
     
     return 0;
 }
+
+int DynamicRegressorGenerator::setTorqueSensorMeasurement(const KDL::JntArray & torques)
+{
+    if( torques.rows() != measured_torques.rows() ) {
+        if( verbose ) std::cerr << "DynamicsRegressorGenerator::setTorqueSensorMeasurement error" << std::endl;
+        return -1;
+    }
+    
+    measured_torques = torques;
+    
+    return 0;
+}
+
   
 int DynamicRegressorGenerator::addSubtreeRegressorRows(const std::vector< std::string>& _subtree_leaf_links)
 {
@@ -471,10 +484,11 @@ int DynamicRegressorGenerator::addSubtreeRegressorRows(const std::vector< std::s
     int ret_val = new_st_regr->configure();
     if( ret_val != 0 ) {
         if( verbose ) { std::cerr << "DynamicRegressorGenerator::addSubtreeRegressorRows error: could not load regressor with error " << ret_val << std::endl; }
+        delete new_st_regr;
         return -1;
     }
    
-   subtree_regressors.push_back(new_st_regr);
+    subtree_regressors.push_back(new_st_regr);
     regressors_ptrs.push_back(new_regr);
     
     NrOfOutputs += new_regr->getNrOfOutputs();
@@ -482,28 +496,53 @@ int DynamicRegressorGenerator::addSubtreeRegressorRows(const std::vector< std::s
     return 0;
 }
 
-/*
-int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_name, const std::vector<bool> &_activated_ft_sensors)
+
+int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<bool> &_activated_ft_sensors)
 {
     DynamicRegressorInterface * new_regr;
+    torqueRegressor * new_st_regr;
     
-    torque_regressors.push_back(torqueRegressor(dof_name,_activated_ft_sensors));
+    new_st_regr = new torqueRegressor(tree_graph,*p_ft_list,linkIndeces2regrColumns,dof_name,reverse_direction,_activated_ft_sensors,consider_ft_offset,verbose);
     
-    new_regr = (DynamicRegressorInterface *) &(torque_regressors[torque_regressors.size()-1]);
+    new_regr = (DynamicRegressorInterface *) new_st_regr;
    
-    if( new_regr->configure() != 0 ) {
-        if( verbose ) { std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error: could not load regressor" << std::endl; }
-        torque_regressors.pop_back();
+    int ret_val = new_st_regr->configure();
+    if( ret_val != 0 ) {
+        if( verbose ) { std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error: could not load regressor with error " << ret_val << std::endl; }
+        delete new_st_regr;
         return -1;
     }
     
+    torque_regressors.push_back(new_st_regr);
     regressors_ptrs.push_back(new_regr);
     
     NrOfOutputs += new_regr->getNrOfOutputs();
     
     return 0;
+} 
+
+
+int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<std::string> &_activated_ft_sensors)
+{
+    std::vector<bool> flag_activated_ft_sensors(p_ft_list->getNrOfFTSensors(),false);
+    for(int i=0; i < _activated_ft_sensors.size(); i++ ) {
+       KDL::CoDyCo::LinkMap::const_iterator link_it =  tree_graph.getLink(_activated_ft_sensors[i]);
+       if( link_it == tree_graph.getInvalidLinkIterator() ) {
+            if( verbose ) { std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error: link " << _activated_ft_sensors[i]  << " does not exists" << std::endl; }
+            return -1;
+       }
+       std::vector<const KDL::CoDyCo::FTSensor*> ft_on_link = p_ft_list->getFTSensorsOnLink(link_it->getLinkIndex());
+       for(int l=0; l < ft_on_link.size(); l++ ) {
+           int ft_id = ft_on_link[l]->getID();
+           if( ft_id >= flag_activated_ft_sensors.size() || ft_id < 0 ) {
+               if( verbose ) { std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error while adding subtree with leaf: " << _activated_ft_sensors[i]  << std::endl; }
+               return -1;
+           }
+           flag_activated_ft_sensors[ft_id] = true;
+       }
+    }
+    return addTorqueRegressorRows(dof_name,reverse_direction,flag_activated_ft_sensors);
 }
-*/
 
 int DynamicRegressorGenerator::updateBuffers()
 {

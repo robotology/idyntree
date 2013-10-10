@@ -87,9 +87,6 @@ void dynamicsRegressorFixedBaseLoop(const TreeGraph & tree_graph,
             LinkMap::const_iterator parent_link=traversal.parent[link->getLinkIndex()];
             while( child_link != traversal.order[0] ) {
                 if( child_link->getAdjacentJoint(parent_link)->getNrOfDOFs() == 1 ) {
-                    #ifndef NDEBUG
-                    //std::cerr << "Calculating regressor columns for link " << link->getName() << " and joint " << child_link->getAdjacentJoint(parent_link)->getName() << std::endl;
-                    #endif
                     int dof_index = child_link->getAdjacentJoint(parent_link)->getDOFIndex();
                     int child_index = child_link->getLinkIndex();
                     Frame X_j_i = X_b[child_index].Inverse()*X_b[i];
@@ -97,10 +94,6 @@ void dynamicsRegressorFixedBaseLoop(const TreeGraph & tree_graph,
                             toEigen(parent_link->S(child_link,q(dof_index))).transpose()*WrenchTransformationMatrix(X_j_i)*netWrenchRegressor_i;
                 }
                 child_link = parent_link;
-                #ifndef NDEBUG
-                //std::cout << "Getting parent link of link of index " << child_link->getName() << " " << child_link->getLinkIndex() << std::endl;
-                //std::cout << "Current base " << traversal.order[0]->getName() << " " << traversal.order[0]->getLinkIndex() << std::endl;
-                #endif
                 parent_link = traversal.parent[child_link->getLinkIndex()];
             } 
         }

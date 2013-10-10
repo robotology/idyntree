@@ -159,14 +159,29 @@ int main()
     if( ret_val != 0 ) { std::cerr << "Problem in adding regressor of thigh " << std::endl; return -1; }
     ret_val = regressor.addSubtreeRegressorRows(subtree_head);
     if( ret_val != 0 ) { std::cerr << "Problem in adding regressor of head  " << std::endl; return -1; }
-
+    
+    
+    //Adding some torque regressors 
+    ret_val = regressor.addTorqueRegressorRows("larm_jnt4");
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
+    ret_val = regressor.addTorqueRegressorRows("torso_jnt2");
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
+    ret_val = regressor.addTorqueRegressorRows("head_jnt2");
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
+    ret_val = regressor.addTorqueRegressorRows("torso_jnt1",false,subtree_bigger_torso);
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
+    ret_val = regressor.addTorqueRegressorRows("lleg_jnt4",true,subtree_middle_lleg);
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
     
     
     regressor.setRobotState(q,dq,ddq,base_vel,base_acc);
 
+    //Adding measured wrenches, obtained from inverse dynamics
     for( int i=0; i < ft_names.size(); i++ ) {
         regressor.setFTSensorMeasurement(i,measured_wrenches[i]);
     }
+    //Adding measured torques, obtaiend from inverse dynamics
+    regressor.setTorqueSensorMeasurement(torques);
     
     Eigen::MatrixXd regr(regressor.getNrOfOutputs(),regressor.getNrOfParameters());
     Eigen::VectorXd kt(regressor.getNrOfOutputs());
@@ -196,8 +211,7 @@ int main()
     
     Eigen::VectorXd kt_obtained = regr*parameters;
         
-  
-    
+    std::cout << "kt.size(): " << kt.rows() << " ( should be 6*6 + 3*1 )"<< std::endl; 
     std::cout << "kt" << std::endl;
     std::cout << (kt) << std::endl;
     
