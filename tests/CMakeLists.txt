@@ -16,6 +16,6 @@ target_link_libraries(inversedynamics_crba_test orocos-kdl kdl_codyco )
 
 add_test(test_inverse_inertia inverse_inertia_test)
 add_test(test_regressor_utils regressor_utils_test)
-add_test(test_subtree_regressor subtree_regressor_test)
+#add_test(test_subtree_regressor subtree_regressor_test)
 add_test(test_inversedynamics_regressor inversedynamics_regressor_test)
 add_test(test_inversedynamics_crba inversedynamics_crba_test)
