@@ -6,12 +6,15 @@ add_executable(regressor_utils_test regressor_utils_test.cpp)
 add_executable(subtree_regressor_test subtree_regressor_test.cpp testhumanoid.cpp)
 add_executable(inversedynamics_regressor_test inversedynamics_regressor_test.cpp testhumanoid.cpp)
 add_executable(inversedynamics_crba_test inversedynamics_crba_test.cpp testhumanoid.cpp testsinglelink.cpp testsinglejoint.cpp testkukalwr.cpp)
+add_executable(comjacobian_test comjacobian_test.cpp testhumanoid.cpp)
+
 
 target_link_libraries(inverse_inertia_test ${Orocos-KDL_LIBRARIES} kdl_codyco )
 target_link_libraries(regressor_utils_test ${Orocos-KDL_LIBRARIES} kdl_codyco )
 target_link_libraries(subtree_regressor_test ${Orocos-KDL_LIBRARIES} kdl_codyco )
 target_link_libraries(inversedynamics_regressor_test orocos-kdl kdl_codyco )
 target_link_libraries(inversedynamics_crba_test orocos-kdl kdl_codyco )
+target_link_libraries(comjacobian_test orocos-kdl kdl_codyco )
 
 
 add_test(test_inverse_inertia inverse_inertia_test)
@@ -19,3 +22,4 @@ add_test(test_regressor_utils regressor_utils_test)
 #add_test(test_subtree_regressor subtree_regressor_test)
 add_test(test_inversedynamics_regressor inversedynamics_regressor_test)
 add_test(test_inversedynamics_crba inversedynamics_crba_test)
+add_test(test_comjacobian comjacobian_test)
