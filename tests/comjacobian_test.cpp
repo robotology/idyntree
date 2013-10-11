@@ -17,8 +17,6 @@
 #include "test_models.hpp"
 
 #include <ctime>
-#include <boost/concept_check.hpp>
-
 #include <kdl_codyco/jacobian_loops.hpp>
 
 using namespace KDL;
