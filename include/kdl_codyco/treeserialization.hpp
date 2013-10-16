@@ -92,10 +92,21 @@ namespace CoDyCo{
         
         std::string getLinkName(int link_id) const;
         
+        
+        /**
+         * Set the number of Links
+         */
+        int setNrOfLinks(const int new_size);
+        
         /**
          * Get the number of Links
          */
         int getNrOfLinks() const;
+        
+        /**
+         * Get the number of internal degrees of freedom
+         */
+        int setNrOfDOFs(const int new_size);
         
         /**
          * Get the number of internal degrees of freedom

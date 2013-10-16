@@ -76,10 +76,10 @@ namespace CoDyCo {
     
     TreeInertialParametersRegressor::TreeInertialParametersRegressor(Tree & _tree,Vector grav,const TreeSerialization & serialization) : tree(_tree), 
                                                                       tree_graph(_tree,serialization),  
-                                                                      ns(_tree.getNrOfSegments()),                                                                 
-                                                                      X_b(ns),
-                                                                      v(ns),
-                                                                      a(ns)
+                                                                      nrOfLinks(tree_graph.getNrOfLinks()),                                                                 
+                                                                      X_b(nrOfLinks),
+                                                                      v(nrOfLinks),
+                                                                      a(nrOfLinks)
     {
         //Initializing gravitational acceleration (if any)
         ag=-Twist(grav,Vector::Zero());
@@ -112,7 +112,7 @@ namespace CoDyCo {
                                                     const KDL::JntArray &q_dotdot,  
                                                     Eigen::MatrixXd & dynamics_regressor)
     {
-        if(q.rows()!=tree_graph.getNrOfDOFs() || q_dot.rows()!=tree_graph.getNrOfDOFs() || q_dotdot.rows()!=tree_graph.getNrOfDOFs() || dynamics_regressor.cols()!=10*ns || dynamics_regressor.rows()!=(tree_graph.getNrOfDOFs()))
+        if(q.rows()!=tree_graph.getNrOfDOFs() || q_dot.rows()!=tree_graph.getNrOfDOFs() || q_dotdot.rows()!=tree_graph.getNrOfDOFs() || dynamics_regressor.cols()!=tree_graph.getNrOfLinks()*10 || dynamics_regressor.rows()!=(tree_graph.getNrOfDOFs()))
             return -1;
         
         rneaKinematicLoop(tree_graph,q,q_dot,q_dotdot,traversal,Twist::Zero(),ag,v,a);
@@ -131,7 +131,7 @@ namespace CoDyCo {
                                                     const Twist& base_acceleration,
                                                     Eigen::MatrixXd & dynamics_regressor)
     {
-        if(q.rows()!=tree_graph.getNrOfDOFs() || q_dot.rows()!=tree_graph.getNrOfDOFs() || q_dotdot.rows()!=tree_graph.getNrOfDOFs() || dynamics_regressor.cols()!=10*ns || dynamics_regressor.rows()!=(6+tree_graph.getNrOfDOFs()))
+        if(q.rows()!=tree_graph.getNrOfDOFs() || q_dot.rows()!=tree_graph.getNrOfDOFs() || q_dotdot.rows()!=tree_graph.getNrOfDOFs() || dynamics_regressor.cols()!=10*tree_graph.getNrOfLinks() || dynamics_regressor.rows()!=(6+tree_graph.getNrOfDOFs()))
             return -1;
         
         //kinematic loop

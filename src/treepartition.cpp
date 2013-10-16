@@ -101,6 +101,18 @@ namespace CoDyCo {
         
         TreePart tree_part(0,"default_part");
         
+        SegmentMap::const_iterator root = tree.getRootSegment();
+        
+        /** \todo remove this assumption */
+        assert(root->second.children.size() != 0);
+        SegmentMap::const_iterator root_child = root->second.children[0];
+        
+         //This should be coherent with the behaviour of UndirectedTree
+        if( root->second.children.size() != 1 || root_child->second.segment.getJoint().getType() != Joint::None )
+        {
+            nrOfLinks++;
+        } 
+        
         for(int i=0; i <nrOfDOFs; i++ )
         {
             tree_part.addDOF(i);

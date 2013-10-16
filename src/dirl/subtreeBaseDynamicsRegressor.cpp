@@ -106,6 +106,22 @@ int subtreeBaseDynamicsRegressor::configure()
         }
     }
     
+    //Configuring the relative_junctions vector
+    relative_junctions.resize(0);
+    
+    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indeces.size(); leaf_id++ ) {
+        if( consider_ft_offset ) {
+            int leaf_link_id = subtree_leaf_links_indeces[leaf_id];
+            
+            std::vector<const FTSensor *> fts_link = ft_list.getFTSensorsOnLink(leaf_link_id);
+             
+            assert(fts_link.size()==1);
+            
+            relative_junctions.push_back(fts_link[0]->getJunctionID());
+            
+        }
+    }
+    
     return 0;
 }
 
@@ -113,6 +129,12 @@ int  subtreeBaseDynamicsRegressor::getNrOfOutputs()
 {
     return 6;
 }
+
+std::vector<int> subtreeBaseDynamicsRegressor::getRelativeJunctions()
+{
+    return relative_junctions;
+}
+
 
 int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &q, 
                                                             const KDL::JntArray &q_dot, 

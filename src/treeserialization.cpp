@@ -11,6 +11,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <boost/config/posix_features.hpp>
 
 
 namespace KDL {
@@ -76,14 +77,21 @@ namespace CoDyCo {
         
         int fixed_joints_cnt = 0;
         
-        root = tree.getRootSegment();
-        //Only trees with a proper root are permitted
-        assert( root->second.children.size() == 1);
+         root = tree.getRootSegment();
         
-        real_root = root->second.children[0];
+        /** \todo remove this assumption */
+        assert(root->second.children.size() != 0);
+        SegmentMap::const_iterator root_child = root->second.children[0];
         
-        //This requires that the joint connecting the fake base to the real base is fixed
-        assert( real_root->second.segment.getJoint().getType() == Joint::None );
+        //This should be coherent with the behaviour of UndirectedTree
+        if( root->second.children.size() != 1 || root_child->second.segment.getJoint().getType() != Joint::None )
+        {
+            real_root = root;
+            links.resize(links.size()+1);
+            junctions.resize(junctions.size()+1);
+        } else {
+            real_root = root->second.children[0];
+        }
         
         //Add real_root link without including fake joint
         links[link_cnt] = real_root->first;
@@ -189,9 +197,23 @@ namespace CoDyCo {
     {
         SegmentMap::const_iterator seg;
         
-        if( tree.getNrOfJoints() != dofs.size() || tree.getNrOfSegments() !=  links.size() ) {
-            return false;
-        }
+       SegmentMap::const_iterator root = tree.getRootSegment();
+        
+       /** \todo remove this assumption */
+       assert(root->second.children.size() != 0);
+       SegmentMap::const_iterator root_child = root->second.children[0];
+        
+       //This should be coherent with the behaviour of UndirectedTree
+       if( root->second.children.size() != 1 || root_child->second.segment.getJoint().getType() != Joint::None )
+       {  
+           if( tree.getNrOfJoints() != dofs.size() || tree.getNrOfSegments()+1 !=  links.size() ) {
+                return false;
+           }
+       } else {
+           if( tree.getNrOfJoints() != dofs.size() || tree.getNrOfSegments() !=  links.size() ) {
+                return false;
+           }
+       }
         
         unsigned int i;
         
@@ -215,15 +237,33 @@ namespace CoDyCo {
         return true;
         
     }
+    
+    int TreeSerialization::setNrOfLinks(const int new_size)
+    {
+        links.resize(new_size);
+        if( new_size > 0 ) { 
+            junctions.resize(new_size-1);
+        } else {
+            junctions.resize(0);
+        }
+        return links.size();
+    }
             
     int TreeSerialization::getNrOfLinks() const
     {
         return links.size();
     }
-        
+    
+
     int TreeSerialization::getNrOfJunctions() const
     {
         return junctions.size();
+    }
+    
+    int TreeSerialization::setNrOfDOFs(const int new_size)
+    {
+        dofs.resize(new_size);
+        return dofs.size();
     }
     
     int TreeSerialization::getNrOfDOFs() const

@@ -65,7 +65,7 @@ namespace CoDyCo {
                                                    Vector(0.0,0.0080787,0.0),
                                                    RotationalInertia(0.0010431,0.0,0.0036376,0.0,0.0,0.0000101))));
     //joint 7
-    kukaLWR_DHnew.addSegment(Segment("seg7",Joint("seg7",Joint::RotZ),
+    kukaLWR_DHnew.addSegment(Segment("seg7",Joint("jnt7",Joint::RotZ),
                    Frame::Identity(),
                    RigidBodyInertia(10,
                                                    Vector::Zero(),

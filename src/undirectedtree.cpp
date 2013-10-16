@@ -103,8 +103,19 @@ namespace CoDyCo {
     
     JunctionMap::const_iterator UndirectedTreeLink::getAdjacentJoint(int adjacent_index) const
     {
-        assert( adjacent_index >= 0 );
+        assert( adjacent_index >= 0 && adjacent_index < adjacent_joint.size() );
         return adjacent_joint[adjacent_index];
+    }
+    
+    LinkMap::const_iterator UndirectedTreeLink::getAdjacentLink(int adjacent_index) const
+    {
+        assert( adjacent_index >= 0 && adjacent_index < adjacent_joint.size());
+        if( adjacent_joint[adjacent_index]->parent->getLinkIndex() == getLinkIndex() ) {
+            return adjacent_joint[adjacent_index]->child;
+        } else {
+            assert( adjacent_joint[adjacent_index]->child->getLinkIndex() == getLinkIndex() );
+            return adjacent_joint[adjacent_index]->parent;
+        }
     }
     
     JunctionMap::const_iterator UndirectedTreeLink::getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const
@@ -247,28 +258,37 @@ namespace CoDyCo {
             local_partition = TreePartition(tree);
         }
         
-        nrOfDOFs = tree.getNrOfJoints();
-        nrOfLinks = tree.getNrOfSegments();
-        
-        links.resize(nrOfLinks);
-        junctions.resize(nrOfLinks-1);
+  
         
         SegmentMap::const_iterator virtual_root, i, real_root;
         
         virtual_root = tree.getRootSegment();
         
+        const SegmentMap& sm = tree.getSegments();
+        
+        int nrOfLinks;
+        
         //If the virtual base is not fixed with the actual base
-        //(or the virtual base has many children, so there is no actual base
+        //(or the virtual base has many children, so there is no actual base)
+        //Insert a dummy base link explicitly in the constructed UndirectedTree
         if( virtual_root->second.children.size() != 1 || virtual_root->second.children[0]->second.segment.getJoint().getType() != Joint::None ) {
             #ifndef NDEBUG
-            std::cerr << "UndirectedTree constructor failed" << std::endl;
+            std::cerr << "UndirectedTree constructor: no fake base found" << std::endl;
             #endif
-            nrOfDOFs = 0;
-            nrOfLinks = 0;
-            return;
+            real_root = virtual_root;
+            virtual_root = sm.end();
+            nrOfLinks = tree.getNrOfSegments()+1;
+        } else {
+            real_root = virtual_root->second.children[0];
+            nrOfLinks = tree.getNrOfSegments();
         }
         
-        real_root = virtual_root->second.children[0];
+        nrOfDOFs = tree.getNrOfJoints();
+        
+        
+        links.resize(nrOfLinks);
+        junctions.resize(nrOfLinks-1);
+        
         
         #ifndef NDEBUG
         //std::cerr << "UndirectedTree:" << std::endl;
@@ -287,7 +307,6 @@ namespace CoDyCo {
         
         original_root = real_root->first;
         
-        const SegmentMap& sm = tree.getSegments();
         
    
         
@@ -311,9 +330,9 @@ namespace CoDyCo {
 
     
                 #ifndef NDEBUG
-                //std::cerr << "Added link " << paar.second.link_name <<  " to UndirectedTree with link_nr " << paar.second.link_nr << 
-                        //         "and mass " << paar.second.I.getMass() << " and cog " << paar.second.I.getCOG()(0) << std::endl;
-                        #endif
+                //std::cerr << "Added link " << current_segment.getName() <<  " to UndirectedTree with link_nr " << link_id << 
+                //         "and mass " << current_segment.getInertia().getMass() << " and cog " << current_segment.getInertia().getCOG()(0) << std::endl;
+                #endif
                 assert(link_id >= 0 && link_id < (int)getNrOfLinks());
                 links[link_id] = 
                         UndirectedTreeLink(current_segment.getName(),
@@ -774,7 +793,7 @@ namespace CoDyCo {
     std::string UndirectedTree::toString() const
     {
         std::stringstream ss;
-        ss << "UndirectedTree " << tree_name << " original_root " << original_root << " DOFs " <<  nrOfDOFs << " nrOfLinks " << nrOfLinks << std::endl;
+        ss << "UndirectedTree " << tree_name << " original_root " << original_root << " DOFs " <<  nrOfDOFs << " nrOfLinks " << getNrOfLinks() << std::endl;
         ss << "Links: " << std::endl;
         for(LinkMap::const_iterator link_it = links.begin(); link_it != links.end(); link_it++) {
             ss << link_it->toString() << std::endl;

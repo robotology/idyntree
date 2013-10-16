@@ -8,6 +8,8 @@
 #define KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 
 #include <kdl_codyco/undirectedtree.hpp>
+#include <kdl_codyco/undirectedtreesolver.hpp>
+
 #include "regressor_utils.hpp"
 #include "treeserialization.hpp"
 
@@ -33,17 +35,15 @@ namespace CoDyCo {
             void updateParams();
             bool changeInertialParametersRecursive(const Eigen::VectorXd & new_chain_param, Tree & new_tree, SegmentMap::const_iterator root, const std::string& hook_name) ;
          
-         
             Tree tree;
             
-            const TreeGraph tree_graph;
-
-            int ns;
+            UndirectedTree tree_graph;
+            Traversal traversal;
+            
+            int nrOfLinks;
             
             std::string root_name;
-
-            Traversal traversal;
-
+            
             std::vector<Twist> v;
             std::vector<Twist> a;
 
@@ -67,6 +67,8 @@ namespace CoDyCo {
             ~TreeInertialParametersRegressor(){};
             
             Eigen::VectorXd getInertialParameters();
+            
+            UndirectedTree getUndirectedTree() { return tree_graph; };
              
              /**
              * Get a copy of the current KDL::Tree, with modified inertial parameters.

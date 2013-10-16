@@ -41,6 +41,8 @@ class torqueRegressor : public DynamicRegressorInterface
         
     std::vector<bool> activated_ft_sensors;
     
+    std::vector<int> relative_junction;
+    
     int NrOfRealLinks_subtree;
 
     
@@ -84,6 +86,8 @@ class torqueRegressor : public DynamicRegressorInterface
         int configure();
         
         int getNrOfOutputs();
+        
+        std::vector<int> getRelativeJunctions();
         
         int computeRegressor(const KDL::JntArray &q, 
                               const KDL::JntArray &q_dot, 

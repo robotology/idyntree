@@ -184,6 +184,8 @@ namespace CoDyCo
          * 
          */
         JunctionMap::const_iterator getAdjacentJoint(int adjacent_index) const;
+        LinkMap::const_iterator getAdjacentLink(int adjacent_index) const;
+        
         JunctionMap::const_iterator getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const;
         
         std::string toString() const;
@@ -283,7 +285,8 @@ namespace CoDyCo
         JunctionNameMap junctions_names;
         
         int nrOfDOFs;
-        int nrOfLinks;
+        //int nrOfLinks;
+        
         std::string tree_name;
         std::string original_root;
         
@@ -347,7 +350,7 @@ namespace CoDyCo
          *
          * @return total nr of joints
          */
-        unsigned int getNrOfJunctions() const { return nrOfLinks-1; };
+        unsigned int getNrOfJunctions() const { return getNrOfLinks()-1; };
 
         /**
          * Request the total number of degrees of freedom in the tree.\n
@@ -360,7 +363,7 @@ namespace CoDyCo
          * Request the total number of links in the tree.
          * @return total number of links
          */
-        unsigned int getNrOfLinks()const {return nrOfLinks;};
+        unsigned int getNrOfLinks() const {return links.size();};
         
         /**
          * Get a link of the graph by specifyng its name

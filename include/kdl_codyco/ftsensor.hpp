@@ -41,6 +41,7 @@ class FTSensor
         KDL::Frame H_parent_sensor;
         int parent;
         int child;
+        int junction_id;
         int sensor_id;
       
         
@@ -55,8 +56,8 @@ class FTSensor
                 H_parent_sensor(KDL::Frame::Identity()),
                 parent(_parent),
                 child(_child),
-                sensor_id(_sensor_id) {}
-        
+                sensor_id(_sensor_id) {junction_id = tree_graph->getLink(child)->getAdjacentJoint(tree_graph->getLink(parent))->getJunctionIndex();}
+    
         FTSensor(const KDL::CoDyCo::TreeGraph & _tree_graph, 
                 const std::string _fixed_joint_name,
                 const KDL::Frame _H_parent_sensor,
@@ -68,7 +69,8 @@ class FTSensor
                 H_parent_sensor(_H_parent_sensor),
                 parent(_parent),
                 child(_child),
-                sensor_id(_sensor_id) {}
+                sensor_id(_sensor_id) {junction_id = tree_graph->getLink(child)->getAdjacentJoint(tree_graph->getLink(parent))->getJunctionIndex();}
+
                         
         ~FTSensor() {}
         
@@ -84,7 +86,7 @@ class FTSensor
                 return -(H_parent_sensor*measured_wrenches[sensor_id]);
             } else {
                 //The junction connected to an F/T sensor should be one with 0 DOF
-                assert(tree_graph->getLink(child)->getAdjacentJoint(tree_graph->getLink(parent))->joint.getType() == KDL::Joint::None );
+                assert( tree_graph->getLink(child)->getAdjacentJoint(tree_graph->getLink(parent))->joint.getType() == KDL::Joint::None );
                 KDL::Frame H_child_parent = tree_graph->getLink(parent)->pose(tree_graph->getLink(child),0.0);
                 assert(current_link == child);
                 return (H_child_parent*(H_parent_sensor*measured_wrenches[sensor_id]));
@@ -125,6 +127,11 @@ class FTSensor
         int getParent() const
         {
             return parent;
+        }
+        
+        int getJunctionID() const 
+        {
+            return junction_id;
         }
         
         int getID() const 

@@ -26,6 +26,8 @@ class DynamicRegressorInterface {
 public:
     virtual int getNrOfOutputs() = 0;
     
+    virtual std::vector<int> getRelativeJunctions() = 0;
+    
     /**
      * Configure the regressor given a TreeGraph (for example allocating 
      * the necessary datastructures)

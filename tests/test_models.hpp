@@ -12,7 +12,7 @@ Tree TestHumanoid();
 Tree TestSingleLink();
 Tree TestSingleJoint();
 Tree TestKukaLWR();
-
+Tree TestDoubleJoint();
 
 }
 }

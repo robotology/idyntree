@@ -45,6 +45,10 @@ int torqueRegressor::configure()
     
     torque_dof_index = torque_jnt->getJunctionIndex();
     
+    relative_junction.resize(1);
+    relative_junction[0] = torque_dof_index;
+    
+    
     if( torque_dof_index < 0 || torque_dof_index >= undirected_tree.getNrOfDOFs() ) {
          if(verbose) { std::cerr << "torqueRegressor error: specified joint " << torque_dof << " has no degrees of freedom " << std::endl; }
         return -1; 
@@ -107,6 +111,11 @@ int torqueRegressor::configure()
 int torqueRegressor::getNrOfOutputs()
 {
     return 1;
+}
+
+std::vector<int> torqueRegressor::getRelativeJunctions()
+{
+    return relative_junction;
 }
 
 int torqueRegressor::computeRegressor(const KDL::JntArray &q, 

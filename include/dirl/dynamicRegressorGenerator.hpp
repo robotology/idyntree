@@ -15,11 +15,11 @@
 
 #include <kdl_codyco/ftsensor.hpp>
 
+//Type of regressors
 #include <dirl/dynamicRegressorInterface.hpp>
 #include <dirl/subtreeBaseDynamicsRegressor.hpp>
 #include <dirl/torqueRegressor.hpp>
-
-//#include <drrl/torqueRegressor.hpp>
+#include <dirl/baseDynamicsRegressor.hpp>
 
 namespace dirl
 {    
@@ -51,7 +51,7 @@ public:
     * @param ft_sensor_names (optional) the names of the Joints (of type Joint::None) that are Force Torque sensors (default: no sensors)
     * 
     */
-    DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base, 
+    DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base="", 
                               std::vector< std::string > ft_sensor_names=std::vector< std::string >(0), bool ft_sensor_offset=true,
                               std::vector< std::string > fake_link_names=std::vector< std::string >(0), KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization());
     
@@ -63,6 +63,9 @@ public:
         
     int addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<std::string> &_activated_ft_sensors);
 
+    int addAllTorqueRegressorRows();
+    
+    int addBaseRegressorRows();
 
     /**
     * 
@@ -93,9 +96,9 @@ public:
     
     
     
-        std::string getDescriptionOfParameter(int parameter_index,bool with_value=false,double value=-1.0);
+    std::string getDescriptionOfParameter(int parameter_index,bool with_value=false,double value=-1.0);
 
-            std::string getDescriptionOfParameters();
+    std::string getDescriptionOfParameters();
 
     
     /**
@@ -162,7 +165,7 @@ public:
      * The algorithm used is the one presented, using generated samples:
      * Gautier, M. "Numerical calculation of the base inertial parameters of robots." 
      * 
-     * @param basis the output matrix
+     * @param basis the orthogonal matrix whose columns are a basis of the identifiable subspace
      * @param static_regressor if true, compute the identifiable parameter considering only static poses (default: false)
      * @param fixed_base if true, consider the kinematic base as fixed (i.e. do not vary the position and/or the velocity/acceleration of the kinematic base) 
      * @param gravity in case of fixed base, get the gravity vector for the fixed kinematic base
@@ -170,11 +173,18 @@ public:
      * 
      * \note This method is not real time safe.
      */
-    int computeIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 10000, const bool verbose = false);
+    int computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
+
+    /**
+     * Algorithm under development
+     */
+    int computeSparseNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
+    
+    int computeForwardSparseNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
 
     
 private:
-    KDL::CoDyCo::TreeGraph tree_graph; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
+    KDL::CoDyCo::UndirectedTree tree_graph; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
     
     KDL::CoDyCo::Traversal dynamic_traversal; 
     KDL::CoDyCo::Traversal kinematic_traversal; /**< Traversal object: defining the kinematic base of the tree */
@@ -218,6 +228,7 @@ private:
     //but this vector of pointers is necessary to mantain the serializations
     std::vector<DynamicRegressorInterface *> regressors_ptrs;
     
+    std::vector<baseDynamicsRegressor *> base_regressors;
     std::vector<subtreeBaseDynamicsRegressor *> subtree_regressors;
     std::vector<torqueRegressor *> torque_regressors;
     
@@ -234,8 +245,15 @@ private:
     Eigen::VectorXd one_rows_vector;
     Eigen::VectorXd six_rows_vector;
     
-        
-    
+    /**
+    * @param input_matrix a n x m matrix
+    * @param row_space_basis_matrix a m X rank matrix, whose columns form a base for the row space of input_matrix
+    * @param tol (optional) tollerance to use for calculating the rank of the matrix (default: max(n,m)*max(sigma)*machine_epslion)
+    * 
+    * \note This function allocate dynamically memory, so it is not real time safe
+    */
+    int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol = -1.0);
+
         
 };
 
