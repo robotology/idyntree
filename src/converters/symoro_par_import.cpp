@@ -44,7 +44,6 @@
 #include <algorithm>
 #include <utility>
 
-
 using namespace KDL;
 using namespace std;
 
@@ -390,7 +389,7 @@ bool parModelFromString(const string& _parfile_content, symoro_par_model & model
 
 bool treeFromParModelTree(const symoro_par_model& par_model, Tree& tree, const bool consider_first_link_inertia)
 {
-    const std::string base_name = "fake_base";
+    const std::string base_name = "SymoroParModel_base";
     tree = Tree(base_name);
     //As the SYMORO .par doesn't support names for link and joints, the links will be named Link1, Link2, and joints Joint1, Joint2
     const std::string link_common_name = "Link";

@@ -2,58 +2,58 @@
 
 int symoro_generated_ee_transform(const KDL::JntArray &q, KDL::Frame & T)
 {
-	if( q.rows() != 6 ) return -1;
-	
-	double t1 = q(0);
-	double t2 = q(1);
-	double t3 = q(2);
-	double t4 = q(3);
-	double t5 = q(4);
-	double t6 = q(5);
-	
-	T.M(0,0) = cos(t1)*cos(t2 + t3)*cos(t4)*cos(t5)*cos(t6) - 
-	cos(t5)*cos(t6)*sin(t1)*sin(t4) - 
-	cos(t1)*cos(t6)*sin(t2 + t3)*sin(t5) - cos(t4)*sin(t1)*sin(t6) - 
-	cos(t1)*cos(t2 + t3)*sin(t4)*sin(t6);
-	
-	T.M(1,0) = cos(t2 + t3)*cos(t4)*cos(t5)*cos(t6)*sin(t1) + 
-	cos(t1)*cos(t5)*cos(t6)*sin(t4) - 
-	cos(t6)*sin(t1)*sin(t2 + t3)*sin(t5) + cos(t1)*cos(t4)*sin(t6) - 
-	cos(t2 + t3)*sin(t1)*sin(t4)*sin(t6);
-	
-	T.M(2,0) = cos(t4)*cos(t5)*cos(t6)*sin(t2 + t3) + cos(t2 + t3)*cos(t6)*sin(t5) - 
-	sin(t2 + t3)*sin(t4)*sin(t6);
-	
-	T.M(0,1) = -(cos(t4)*cos(t6)*sin(t1)) - cos(t1)*cos(t2 + t3)*cos(t6)*sin(t4) - 
-	cos(t1)*cos(t2 + t3)*cos(t4)*cos(t5)*sin(t6) + 
-	cos(t5)*sin(t1)*sin(t4)*sin(t6) + 
-	cos(t1)*sin(t2 + t3)*sin(t5)*sin(t6);
-	
-	T.M(1,1) = cos(t1)*cos(t4)*cos(t6) - cos(t2 + t3)*cos(t6)*sin(t1)*sin(t4) - 
-	cos(t2 + t3)*cos(t4)*cos(t5)*sin(t1)*sin(t6) - 
-	cos(t1)*cos(t5)*sin(t4)*sin(t6) + 
-	sin(t1)*sin(t2 + t3)*sin(t5)*sin(t6);
-	
-	T.M(2,1) = -(cos(t6)*sin(t2 + t3)*sin(t4)) - 
-	cos(t4)*cos(t5)*sin(t2 + t3)*sin(t6) - cos(t2 + t3)*sin(t5)*sin(t6);
-	
-	T.M(0,2) = -(cos(t1)*cos(t5)*sin(t2 + t3)) - 
-	cos(t1)*cos(t2 + t3)*cos(t4)*sin(t5) + sin(t1)*sin(t4)*sin(t5);
-	
-	T.M(1,2) = -(cos(t5)*sin(t1)*sin(t2 + t3)) - 
-	cos(t2 + t3)*cos(t4)*sin(t1)*sin(t5) - cos(t1)*sin(t4)*sin(t5);
+    if( q.rows() != 6 ) return -1;
+    
+    double t1 = q(0);
+    double t2 = q(1);
+    double t3 = q(2);
+    double t4 = q(3);
+    double t5 = q(4);
+    double t6 = q(5);
+    
+    T.M(0,0) = cos(t1)*cos(t2 + t3)*cos(t4)*cos(t5)*cos(t6) - 
+    cos(t5)*cos(t6)*sin(t1)*sin(t4) - 
+    cos(t1)*cos(t6)*sin(t2 + t3)*sin(t5) - cos(t4)*sin(t1)*sin(t6) - 
+    cos(t1)*cos(t2 + t3)*sin(t4)*sin(t6);
+    
+    T.M(1,0) = cos(t2 + t3)*cos(t4)*cos(t5)*cos(t6)*sin(t1) + 
+    cos(t1)*cos(t5)*cos(t6)*sin(t4) - 
+    cos(t6)*sin(t1)*sin(t2 + t3)*sin(t5) + cos(t1)*cos(t4)*sin(t6) - 
+    cos(t2 + t3)*sin(t1)*sin(t4)*sin(t6);
+    
+    T.M(2,0) = cos(t4)*cos(t5)*cos(t6)*sin(t2 + t3) + cos(t2 + t3)*cos(t6)*sin(t5) - 
+    sin(t2 + t3)*sin(t4)*sin(t6);
+    
+    T.M(0,1) = -(cos(t4)*cos(t6)*sin(t1)) - cos(t1)*cos(t2 + t3)*cos(t6)*sin(t4) - 
+    cos(t1)*cos(t2 + t3)*cos(t4)*cos(t5)*sin(t6) + 
+    cos(t5)*sin(t1)*sin(t4)*sin(t6) + 
+    cos(t1)*sin(t2 + t3)*sin(t5)*sin(t6);
+    
+    T.M(1,1) = cos(t1)*cos(t4)*cos(t6) - cos(t2 + t3)*cos(t6)*sin(t1)*sin(t4) - 
+    cos(t2 + t3)*cos(t4)*cos(t5)*sin(t1)*sin(t6) - 
+    cos(t1)*cos(t5)*sin(t4)*sin(t6) + 
+    sin(t1)*sin(t2 + t3)*sin(t5)*sin(t6);
+    
+    T.M(2,1) = -(cos(t6)*sin(t2 + t3)*sin(t4)) - 
+    cos(t4)*cos(t5)*sin(t2 + t3)*sin(t6) - cos(t2 + t3)*sin(t5)*sin(t6);
+    
+    T.M(0,2) = -(cos(t1)*cos(t5)*sin(t2 + t3)) - 
+    cos(t1)*cos(t2 + t3)*cos(t4)*sin(t5) + sin(t1)*sin(t4)*sin(t5);
+    
+    T.M(1,2) = -(cos(t5)*sin(t1)*sin(t2 + t3)) - 
+    cos(t2 + t3)*cos(t4)*sin(t1)*sin(t5) - cos(t1)*sin(t4)*sin(t5);
 
-	T.M(2,2) = cos(t2 + t3)*cos(t5) - cos(t4)*sin(t2 + t3)*sin(t5);
-	
-	T.p(0) = 10*cos(t1)*cos(t2) - 5*cos(t1)*cos(t2 + t3) - 20*sin(t1) - 
-	7*cos(t1)*sin(t2 + t3);
-	
-	T.p(1) = 20*cos(t1) + 10*cos(t2)*sin(t1) - 5*cos(t2 + t3)*sin(t1) - 
-	7*sin(t1)*sin(t2 + t3);
-	
-	T.p(2) = 7*cos(t2 + t3) + 10*sin(t2) - 5*sin(t2 + t3);
-	
-	return 0;
+    T.M(2,2) = cos(t2 + t3)*cos(t5) - cos(t4)*sin(t2 + t3)*sin(t5);
+    
+    T.p(0) = 10*cos(t1)*cos(t2) - 5*cos(t1)*cos(t2 + t3) - 20*sin(t1) - 
+    7*cos(t1)*sin(t2 + t3);
+    
+    T.p(1) = 20*cos(t1) + 10*cos(t2)*sin(t1) - 5*cos(t2 + t3)*sin(t1) - 
+    7*sin(t1)*sin(t2 + t3);
+    
+    T.p(2) = 7*cos(t2 + t3) + 10*sin(t2) - 5*sin(t2 + t3);
+    
+    return 0;
 }
 
 
@@ -95,6 +95,8 @@ int symoro_generated_fake_puma_regressor(const KDL::JntArray &q, const KDL::JntA
     QDP6 = q_dotdot(5);
     
     G3 = g;
+    
+    
 
 
     /* Declaration of global output variables */
@@ -1000,7 +1002,7 @@ int symoro_generated_fake_puma_regressor(const KDL::JntArray &q, const KDL::JntA
     dynamics_regressor.block(0,0,6,10).setZero();
     
     //Then we map the rest
-    //Actually python generated code
+    //python generated code
     dynamics_regressor(0,10) = DG1M1;
     dynamics_regressor(0,11) = DG1MX1;
     dynamics_regressor(0,12) = DG1MY1;

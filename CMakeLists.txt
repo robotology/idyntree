@@ -31,6 +31,9 @@ option(ENABLE_URDF "Enable support for URDF input/output" TRUE)
 ## SYMORO par file format support
 option(ENABLE_SYMORO_PAR "Enable support for SYMORO par input" TRUE)
 
+## KDL::CoDyCo::TreeSerialization support
+option(ENABLE_SERIALIZATION_IO "Enable support for parsing and writing serialization (need kdl_codyco)" TRUE)
+
 find_package(Orocos-KDL REQUIRED)
 include_directories(SYSTEM  ${Orocos-KDL_INCLUDE_DIRS})
 
@@ -86,6 +89,17 @@ IF( ENABLE_URDF )
     ENDIF()
 ENDIF()
 
+IF(ENABLE_SERIALIZATION_IO)
+    find_package(kdl_codyco)
+    IF( NOT kdl_codyco_FOUND )
+        message("Disabling Serialization as no kdl_codyco was found")
+        set(ENABLE_SERIALIZATION_IO FALSE)
+    ELSE()
+         include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
+         link_directories(${kdl_codyco_LIBRARY_DIRS})
+    ENDIF()
+ENDIF()
+
 include_directories(include)
 
 
@@ -101,11 +115,18 @@ if(ENABLE_SYMORO_PAR)
                      src/expression_parser/parser.cpp
                      src/expression_parser/variablelist.cpp)
     set(SYMORO_PAR_SRCS src/converters/symoro_par_import.cpp ${EXPR_PARSER_SRCS})
+    if(ENABLE_SERIALIZATION_IO)
+        set(SYMORO_PAR_SRCS ${SYMORO_PAR_SRCS} src/converters/symoro_par_import_serialization.cpp)
+    endif()
 endif()
 
 add_library(kdl_format_io SHARED ${URDF_SRCS} ${SYMORO_PAR_SRCS})
 
-target_link_libraries(kdl_format_io ${URDF_LIBS}  ${Orocos-KDL_LIBRARIES})
+IF(ENABLE_SERIALIZATION_IO)
+    target_link_libraries(kdl_format_io kdl_codyco ${URDF_LIBS}  ${Orocos-KDL_LIBRARIES})
+ELSE()
+    target_link_libraries(kdl_format_io ${URDF_LIBS}  ${Orocos-KDL_LIBRARIES})
+ENDIF()
 
 
 IF( ENABLE_URDF AND ENABLE_SYMORO_PAR )
