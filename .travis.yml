@@ -27,6 +27,6 @@ before_script:
   - cd ../..
   - mkdir build
   - cd build
-  - cmake -DCREATE_TESTS:BOOL=ON ./..
+  - cmake -DCREATE_TESTS:BOOL=ON -DCMAKE_BUILD_TYPE=Debug ./..
 
 script: make && make test
