@@ -11,7 +11,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <boost/config/posix_features.hpp>
 
 
 namespace KDL {
