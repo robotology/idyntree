@@ -263,7 +263,7 @@ class FTSensorList
         std::string toString() const
         {
             std::stringstream ss;
-            for(int i=0; i < ft_sensors_vector.size(); i++ ) {
+            for(int i=0; i < (int)ft_sensors_vector.size(); i++ ) {
                 int parent_id = ft_sensors_vector[i]->getParent();
                 int child_id = ft_sensors_vector[i]->getChild();
                 ss << "FT sensor " << i << " ( " << ft_sensors_vector[i]->getName() << " ) " << " connects links " << parent_id << " and " << child_id << std::endl;
