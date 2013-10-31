@@ -40,6 +40,10 @@ class DynamicRegressorGenerator {
 
 public:
 
+     /** @name Constructor/Destructor 
+       */
+    //@{
+	
     /**
     * Constructor for DynamicRegressorGenerator
     * 
@@ -56,7 +60,13 @@ public:
                               std::vector< std::string > fake_link_names=std::vector< std::string >(0), KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization());
     
     ~DynamicRegressorGenerator() { delete p_ft_list; };
+    //@}
     
+     /** @name Methods to add rows to the regressor
+       *  This methods are used to build the structure of your regressor, adding rows to it. 
+       */
+    //@{
+		
     /**
      * Add the regressor relative to a set of internal 6 axis force/torque sensors.
      * 
@@ -86,9 +96,17 @@ public:
      * Add the base dynamics regressor (i.e. the force/torque plate regressor). 
      * The regressor output wrench reference frame will be coincident to the base link.
      * 
+     * \note for this regressor no known terms are automatically calculated
+     * 
+     * \todo add a proper force/plate sensor
      */
     int addBaseRegressorRows();
+    
+    //@}
 
+     /** @name Methods to get informations the regressor
+       */
+    //@{
     /**
     * 
     * Get the number of parameters used by the regressor currently generated (i.e. the number of rows of the regressor)
@@ -151,10 +169,17 @@ public:
      */
     std::string getDescriptionOfOutputs();
     
+    //@}
+    
     //std::string getDescriptionOfFixedParameters();
     
     //std::string getDescriptionOfUnknownParameters();
     
+    /**
+      * @name Methods to submit the input data for calculating the regressor and the known terms
+      * This methods are used to submit the input data (such as the robot state and the sensor readings) to calculate the regressor and the known terms
+      */
+    //@{
     /**
      * Set the state for the robot (floating base)
      * 
@@ -190,20 +215,27 @@ public:
      * 
      */
     int setTorqueSensorMeasurement(const KDL::JntArray & torques); 
+    //@}
     
-    
+    /** @name Method to calculate the regressor
+       */
+    //@{
     /**
     * Return the compute regressor and the corresponding output (calculate from sensor readings)
     * @param regressor a getNrOfOutputs() times getNrOfUnknownParameters() Matrix 
     * @param known_terms a getNrOfOutputs() parameters Vector
     */
     int computeRegressor(Eigen::MatrixXd & regressor, Eigen::VectorXd& known_terms);
-    
+    //@}
+
+    /** @name Methods used to obtain the base parameters for the regressor
+       */
+    //@{
     /**
      * Get a matrix whose columns are the base parameters of the given regressor,
      * i.e. a matrix whose columns are a basis for the identifiable subspace of the given regressor
      * 
-     * The algorithm used is the one presented, using generated samples:
+     * The algorithm used is the one presented in:
      * Gautier, M. "Numerical calculation of the base inertial parameters of robots." 
      * 
      * @param basis the orthogonal matrix whose columns are a basis of the identifiable subspace
@@ -225,7 +257,7 @@ public:
      * Algorithm under development
      */
     int computeForwardSparseNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
-
+    //@}
     
 private:
     KDL::CoDyCo::UndirectedTree tree_graph; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
