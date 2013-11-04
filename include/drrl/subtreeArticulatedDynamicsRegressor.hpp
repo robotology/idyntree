@@ -64,9 +64,9 @@ class subtreeArticulatedDynamicsRegressor : public DynamicRegressorInterface
         {
             assert(linkIndeces2regrCols.size() == p_tree_graph->getNrOfLinks());
             NrOfRealLinks_subtree = 0;
-            for(int ll=0; ll < linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
+            for(unsigned int ll=0; ll < linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
             assert(NrOfRealLinks_subtree >= 0);
-            assert(NrOfRealLinks_subtree <= linkIndeces2regrCols.size());
+            assert(NrOfRealLinks_subtree <= (int)linkIndeces2regrCols.size());
         }
                                                                                                                                              
        ~subtreeArticulatedDynamicsRegressor() {};

@@ -95,14 +95,14 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(KDL::Tree & _tree, std::str
     is_link_real.resize(tree_graph.getNrOfLinks(),true);
     linkIndeces2regrColumns.resize(tree_graph.getNrOfLinks(),-1);
     regrColumns2linkIndeces.resize(NrOfRealLinks_gen,-1);
-    for(int ll=0; ll < fake_links_names.size(); ll++ ) {
+    for(unsigned int ll=0; ll < fake_links_names.size(); ll++ ) {
         KDL::CoDyCo::LinkMap::const_iterator link_it = tree_graph.getLink(fake_links_names[ll]);
         if( link_it == tree_graph.getInvalidLinkIterator() ) { NrOfDOFs = NrOfRealLinks_gen = NrOfOutputs = NrOfParameters = 0; return; }
         is_link_real[link_it->getLinkIndex()]=false;
     }
     
     int regressor_link_index = 0;
-    for(int link_index=0; link_index < tree_graph.getNrOfLinks(); link_index++ ) {
+    for(unsigned int link_index=0; link_index < tree_graph.getNrOfLinks(); link_index++ ) {
         if( is_link_real[link_index] ) {
             assert( regressor_link_index < NrOfRealLinks_gen );
             linkIndeces2regrColumns[link_index] = regressor_link_index;
@@ -304,7 +304,7 @@ int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Ei
     
     //Call specific regressors
     int start_row = 0;
-    for(int i=0; i < regressors_ptrs.size(); i++ ) {
+    for(unsigned int i=0; i < regressors_ptrs.size(); i++ ) {
         DynamicRegressorInterface * regr_ptr = regressors_ptrs[i];
         
         /**

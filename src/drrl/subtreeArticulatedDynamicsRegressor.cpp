@@ -21,7 +21,7 @@ namespace DRRL
     
 int subtreeArticulatedDynamicsRegressor::isSubtreeLeaf(const int link_id) const
 {
-    for( int i=0; i < subtree_leaf_links_indeces.size(); i++ ) {
+    for(unsigned int i=0; i < subtree_leaf_links_indeces.size(); i++ ) {
         if( link_id == subtree_leaf_links_indeces[i] ) return true;
     }
     return false;
@@ -40,7 +40,7 @@ int subtreeArticulatedDynamicsRegressor::configure()
         return -3;
     }
     
-    for(int i=0; i < subtree_leaf_links.size(); i++ ) {
+    for(unsigned int i=0; i < subtree_leaf_links.size(); i++ ) {
         LinkMap::const_iterator link_it = tree_graph.getLink(subtree_leaf_links[i]);
         
         if( link_it == tree_graph.getInvalidLinkIterator() ) {
@@ -78,13 +78,13 @@ int subtreeArticulatedDynamicsRegressor::configure()
     is_link_in_subtree[subtree_leaf_links_indeces[0]] = true;
     
     //then, all the other links can be classified using the following rules:  
-    for(int i=1; i < subtree_traversal.order.size(); i++ ) {
+    for(unsigned int i=1; i < subtree_traversal.order.size(); i++ ) {
         int link_id = subtree_traversal.order[i]->getLinkIndex();
         int parent_id = subtree_traversal.parent[link_id]->getLinkIndex();
         
         if( is_link_in_subtree[parent_id] == false ) {
             //if the parent is not in the subtree (false/black) then the link is not in the subtree (false/black)
-            is_link_in_subtree[link_id] == false;
+            is_link_in_subtree[link_id] = false;
         } else {
             int junction_index = tree_graph.getLink(link_id)->getAdjacentJoint(tree_graph.getLink(parent_id))->getJunctionIndex();
             
@@ -100,7 +100,7 @@ int subtreeArticulatedDynamicsRegressor::configure()
     
     //after all the links belonging to the subtree have been identified, it is possible to save only the id of the one in the subtree
     assert( subtree_links_indices.size() == 0 );
-    for( int i=0; i < is_link_in_subtree.size(); i++ ) {
+    for(unsigned int i=0; i < is_link_in_subtree.size(); i++ ) {
         if( is_link_in_subtree[i] ) {
             subtree_links_indices.push_back(i);
         }
