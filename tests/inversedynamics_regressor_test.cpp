@@ -49,7 +49,7 @@ int main()
     q = dq = ddq = torques = JntArray(test_tree.getNrOfJoints());
     f = f_ext = std::vector<Wrench>(test_tree.getNrOfSegments(),KDL::Wrench::Zero());
     
-    for(int i=0; i < test_tree.getNrOfJoints(); i++ )
+    for(int i=0; i < (int)test_tree.getNrOfJoints(); i++ )
     {
         q(i) = random_double();
         dq(i) = random_double();

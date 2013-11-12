@@ -103,13 +103,13 @@ namespace CoDyCo {
     
     JunctionMap::const_iterator UndirectedTreeLink::getAdjacentJoint(int adjacent_index) const
     {
-        assert( adjacent_index >= 0 && adjacent_index < adjacent_joint.size() );
+        assert( adjacent_index >= 0 && adjacent_index < (int)adjacent_joint.size() );
         return adjacent_joint[adjacent_index];
     }
     
     LinkMap::const_iterator UndirectedTreeLink::getAdjacentLink(int adjacent_index) const
     {
-        assert( adjacent_index >= 0 && adjacent_index < adjacent_joint.size());
+        assert( adjacent_index >= 0 && adjacent_index < (int)adjacent_joint.size());
         if( adjacent_joint[adjacent_index]->parent->getLinkIndex() == getLinkIndex() ) {
             return adjacent_joint[adjacent_index]->child;
         } else {

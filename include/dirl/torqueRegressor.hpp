@@ -77,7 +77,7 @@ class torqueRegressor : public DynamicRegressorInterface
             NrOfRealLinks_subtree = 0;
             for(int ll=0; ll < (int)linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
             assert(NrOfRealLinks_subtree >= 0);
-            assert(NrOfRealLinks_subtree <= linkIndeces2regrCols.size());
+            assert(NrOfRealLinks_subtree <= (int)linkIndeces2regrCols.size());
         }
         
         virtual ~torqueRegressor() {};

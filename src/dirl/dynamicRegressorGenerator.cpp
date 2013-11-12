@@ -248,7 +248,7 @@ std::string DynamicRegressorGenerator::getDescriptionOfParameter(int parameter_i
         int ft_sensor_index = parameter_index_offset/6;
 
         assert(ft_sensor_index < NrOfFTSensors);
-        assert(p_ft_list->ft_sensors_vector.size() == NrOfFTSensors);
+        assert((int)p_ft_list->ft_sensors_vector.size() == NrOfFTSensors);
         
         ss << "Parameter " 
            << parameter_index 

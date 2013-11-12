@@ -54,7 +54,7 @@ int main()
     std::cout << "Mass Matrix" << std::endl;
     std::cout << mass_matrix.data << std::endl;
     
-    for(int i=0; i < test_tree.getNrOfJoints(); i++ )
+    for(int i=0; i < (int)test_tree.getNrOfJoints(); i++ )
     {
         q(i) = random_double();
         dq(i) = random_double();

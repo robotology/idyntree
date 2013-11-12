@@ -93,7 +93,7 @@ int main()
     q = JntArray(test_tree.getNrOfJoints());
     com_jac = Jacobian(test_tree.getNrOfJoints()+6);
     
-    for(int i=0; i < test_tree.getNrOfJoints(); i++ )
+    for(int i=0; i < (int)test_tree.getNrOfJoints(); i++ )
     {
         q(i) = random_double();
     }

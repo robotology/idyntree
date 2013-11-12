@@ -62,7 +62,7 @@ namespace CoDyCo {
     {
         Frame T_total = Frame::Identity(); //The transformation between link_index frame and current_link frame
         
-        assert(link_index < tree_graph.getNrOfLinks());
+        assert(link_index < (int)tree_graph.getNrOfLinks());
         
         KDL::CoDyCo::LinkMap::const_iterator current_link;
         current_link = tree_graph.getLink(link_index);
@@ -83,8 +83,8 @@ namespace CoDyCo {
                 
                 jac_col = T_total*S_current_parent;
                 
-                assert(6+dof_index < jac.columns());
-                assert( dof_index < tree_graph.getNrOfDOFs() );
+                assert(6+dof_index < (int)jac.columns());
+                assert( dof_index < (int)tree_graph.getNrOfDOFs() );
                 jac.setColumn(6+dof_index,jac_col);
             }
             

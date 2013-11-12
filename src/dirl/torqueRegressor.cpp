@@ -156,7 +156,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         } else {
             parent_root_it = torque_dof_it->child;
         }
-        assert(torque_dof_it->getJunctionIndex() < p_tree_graph->getNrOfDOFs() && torque_dof_it->getJunctionIndex() < p_tree_graph->getNrOfDOFs() >= 0);
+        assert(torque_dof_it->getJunctionIndex() < (int)p_tree_graph->getNrOfDOFs());
         KDL::Twist S = parent_root_it->S(p_tree_graph->getLink(subtree_root_link_id),q(torque_dof_it->getJunctionIndex()));
         
     //all other columns, beside the one relative to the inertial parameters of the links of the subtree, are zero
