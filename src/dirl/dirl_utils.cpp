@@ -14,6 +14,8 @@
 
 #include <iostream>
 
+#include <cfloat>
+
 using namespace KDL::CoDyCo;
 
 namespace dirl
