@@ -2,6 +2,7 @@ language: cpp
 
 compiler:
   - gcc
+  - clang
 
 before_script:
   - sudo apt-get install -qq libeigen3-dev 
@@ -15,6 +16,6 @@ before_script:
   - cd ../../..
   - mkdir build
   - cd build
-  - cmake -DCREATE_TESTS:BOOL=ON ./..
+  - cmake -DCREATE_TESTS:BOOL=ON -DCMAKE_CXX_FLAGS:STRING="-Wall" ./..
 
 script: make && make test
