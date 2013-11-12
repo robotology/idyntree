@@ -8,8 +8,8 @@ add_executable(inversedynamics_regressor_test inversedynamics_regressor_test.cpp
 add_executable(inversedynamics_crba_test inversedynamics_crba_test.cpp testhumanoid.cpp testsinglelink.cpp testsinglejoint.cpp testkukalwr.cpp)
 add_executable(comjacobian_test comjacobian_test.cpp testhumanoid.cpp)
 
-set_source_files_properties(sparse_numerical_subspace_test.cpp PROPERTIES COMPILE_FLAGS -std=c++11)
-add_executable(sparse_numerical_subspace_test sparse_numerical_subspace_test.cpp testhumanoid.cpp testdoublejoint.cpp testsinglelink.cpp testsinglejoint.cpp testkukalwr.cpp)
+#set_source_files_properties(sparse_numerical_subspace_test.cpp PROPERTIES COMPILE_FLAGS -std=c++11)
+#add_executable(sparse_numerical_subspace_test sparse_numerical_subspace_test.cpp testhumanoid.cpp testdoublejoint.cpp testsinglelink.cpp testsinglejoint.cpp testkukalwr.cpp)
 
 target_link_libraries(inverse_inertia_test ${Orocos-KDL_LIBRARIES} kdl_codyco )
 target_link_libraries(regressor_utils_test ${Orocos-KDL_LIBRARIES} kdl_codyco )
@@ -17,7 +17,7 @@ target_link_libraries(subtree_regressor_test ${Orocos-KDL_LIBRARIES} kdl_codyco 
 target_link_libraries(inversedynamics_regressor_test orocos-kdl kdl_codyco )
 target_link_libraries(inversedynamics_crba_test orocos-kdl kdl_codyco )
 target_link_libraries(comjacobian_test orocos-kdl kdl_codyco )
-target_link_libraries(sparse_numerical_subspace_test orocos-kdl kdl_codyco )
+#target_link_libraries(sparse_numerical_subspace_test orocos-kdl kdl_codyco )
 
 
 add_test(test_inverse_inertia inverse_inertia_test)
