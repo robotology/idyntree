@@ -48,6 +48,9 @@ int main()
     tree_graph.compute_traversal(kinematic_traversal,kinematic_base);
     Traversal dynamic_traversal;
     
+    bool consider_ft_offsets = true;
+
+    
     //It is necessary to use a dynamic base that is not in the considered subtree for the regressors
     tree_graph.compute_traversal(dynamic_traversal,"rleg_seg8");
     //tree_graph.compute_traversal(dynamic_traversal);
@@ -107,11 +110,15 @@ int main()
     //Get measured wrenches from RNEA
     std::vector<Wrench> measured_wrenches(ft_names.size());
     for( int i=0; i < ft_names.size(); i++ ) {
-        measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f) + measured_wrenches_offset[i];
+        if( consider_ft_offsets ) { 
+            measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f) + measured_wrenches_offset[i];
+        } else {
+            measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f);
+        }
     }
       
     //Then create the regressor generator 
-    DynamicRegressorGenerator regressor(test_tree,kinematic_base,ft_names,true,fake_links);
+    DynamicRegressorGenerator regressor(test_tree,kinematic_base,ft_names,consider_ft_offsets,fake_links);
     
     //Adding some subtrees
     std::vector< std::string > subtree_torso;
@@ -147,6 +154,7 @@ int main()
     
     int ret_val = 0;
     
+    
     ret_val = regressor.addSubtreeRegressorRows(subtree_torso);
     if( ret_val != 0 ) { std::cerr << "Problem in adding regressor of torso " << std::endl; return -1; }
     ret_val = regressor.addSubtreeRegressorRows(subtree_bigger_torso);
@@ -168,6 +176,7 @@ int main()
     if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
     ret_val = regressor.addTorqueRegressorRows("head_jnt2");
     if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
+    
     ret_val = regressor.addTorqueRegressorRows("torso_jnt1",false,subtree_bigger_torso);
     if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
     ret_val = regressor.addTorqueRegressorRows("lleg_jnt4",true,subtree_middle_lleg);
@@ -191,7 +200,7 @@ int main()
     #ifndef NDEBUG
     std::cout << "Tree graph nrOfLinks" << tree_graph.getNrOfLinks() << std::endl;
     std::cout << "Regressor nrOfParam: " << regressor.getNrOfParameters() << " nrOfOutputs " << regressor.getNrOfOutputs() << std::endl;
-    std::cout << regressor.getDescriptionOfParameters() << std::endl;
+    //std::cout << regressor.getDescriptionOfParameters() << std::endl;
     #endif
     
     
@@ -201,11 +210,14 @@ int main()
     
     inertialParametersVectorLoopFakeLinks(tree_graph,parameters,fake_links);
     //Adding fake ft offsets
-    int NrOfRealLinks = 10*(tree_graph.getNrOfLinks()-fake_links.size());
-    for( int ft_id =0; ft_id < ft_names.size(); ft_id++ ) {
-      for( int www=0; www < 6; www++ ) {
-        parameters[NrOfRealLinks+6*ft_id+www] = measured_wrenches_offset[ft_id](www);
-      }
+    if( consider_ft_offsets ) {
+        int NrOfRealLinksParameters = 10*(tree_graph.getNrOfLinks()-fake_links.size());
+    
+        for( int ft_id =0; ft_id < ft_names.size(); ft_id++ ) {
+            for( int www=0; www < 6; www++ ) {
+                parameters[NrOfRealLinksParameters+6*ft_id+www] = measured_wrenches_offset[ft_id](www);
+            }
+        }
     }
     
     

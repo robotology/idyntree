@@ -84,7 +84,7 @@ int subtreeBaseDynamicsRegressor::configure()
         
         if( is_link_in_subtree[parent_id] == false ) {
             //if the parent is not in the subtree (false/black) then the link is not in the subtree (false/black)
-            is_link_in_subtree[link_id] == false;
+            is_link_in_subtree[link_id] = false;
         } else {
             int junction_index = tree_graph.getLink(link_id)->getAdjacentJoint(tree_graph.getLink(parent_id))->getJunctionIndex();
             

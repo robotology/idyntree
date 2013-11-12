@@ -24,11 +24,13 @@ namespace CoDyCo {
                   Frame::DH_Craig1989(4.0, 3.0, 0.31, 2.0), RigidBodyInertia(3)
                   ));
         //joint 1
+        
         kukaLWR_DHnew.addSegment(Segment("seg1",Joint("jnt1",Joint::RotZ),
                   Frame::DH_Craig1989(4.0, 1.5707963, 2.0, -3.0),
                   Frame::DH_Craig1989(-5.0, 1.5707963, 2.0, -3.0).Inverse()*RigidBodyInertia(1,
                                                  Vector::Zero(),
                                                  RotationalInertia(0.0,0.0,0.0115343,0.0,0.0,0.0))));
+        
                    
     //joint 2 
     kukaLWR_DHnew.addSegment(Segment("seg2",Joint("jnt2",Joint::RotZ),
@@ -36,7 +38,7 @@ namespace CoDyCo {
                   Frame::DH_Craig1989(-5.0, -1.5707963, 0.4, -5.0).Inverse()*RigidBodyInertia(4,
                                                    Vector(0.0,-0.3120511,-0.0038871),
                                                    RotationalInertia(-0.5471572,-0.0000302,-0.5423253,0.0,0.0,0.0018828))));
-                  
+                
     //joint 3
     kukaLWR_DHnew.addSegment(Segment("seg3",Joint("jnt3",Joint::RotZ),
                   Frame::DH_Craig1989(0.0, -1.5707963, 0.0, 0.0),
@@ -49,15 +51,15 @@ namespace CoDyCo {
                   Frame::DH_Craig1989(4.0, 1.5707963, 0.39, 0.0),
                   Frame::DH_Craig1989(4.0, 1.5707963, 0.39, 0.0).Inverse()*RigidBodyInertia(2,
                                                    Vector(0.0,0.5216809,0.0),
-                                                   RotationalInertia(-1.0436952,0.0,-1.0392780,0.0,0.0,0.0005324))));
-                  
+                                                   RotationalInertia(1.0436952,0.0,1.0392780,0.0,0.0,0.0005324))));
+     
     //joint 5
     kukaLWR_DHnew.addSegment(Segment("seg5",Joint("jnt5",Joint::RotZ),
                   Frame::DH_Craig1989(0.0, 1.5707963, 4.0, 0.0),
                   Frame::DH_Craig1989(0.0, 1.5707963, 4.0, 0.0).Inverse()*RigidBodyInertia(2,
                                                    Vector(0.0,0.0119891,0.0),
                                                    RotationalInertia(0.0036654,0.0,0.0060429,0.0,0.0,0.0004226))));
-                  
+      
     //joint 6
     kukaLWR_DHnew.addSegment(Segment("seg6",Joint("jnt6",Joint::RotZ),
                   Frame::DH_Craig1989(0.0, -1.5707963, -4.0, 0.0),
@@ -70,7 +72,7 @@ namespace CoDyCo {
                    RigidBodyInertia(10,
                                                    Vector::Zero(),
                                                    RotationalInertia(0.000001,0.0,0.0001203,0.0,0.0,0.0))));
-
+     
         single_link.addChain(kukaLWR_DHnew,"fake_root_link");
         return single_link;
     }

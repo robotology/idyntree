@@ -80,13 +80,16 @@ int torqueRegressor::configure()
         
         if( is_link_in_subtree[parent_id] == false ) {
             //if the parent is not in the subtree (false/black) then the link is not in the subtree (false/black)
-            is_link_in_subtree[link_id] == false;
+            is_link_in_subtree[link_id] = false;
         } else {
             int junction_index = undirected_tree.getLink(link_id)->getAdjacentJoint(undirected_tree.getLink(parent_id))->getJunctionIndex();
             
             if( ft_list.isFTSensor(junction_index) && isActiveFTSensor(ft_list.getFTSensorID(junction_index)) ) {
                 //if the parent is in the subtree (true/white) but it is connected to the link by an activated FT sensor
                 is_link_in_subtree[link_id] = false;
+                //In this case we have to add the parent to subtree_leaf_links_indeces
+                subtree_leaf_links_indeces.push_back(parent_id);
+                
             } else if ( junction_index == torque_dof_index ) {
                 //or if the parent is connected trought the torque regressor dof
                 is_link_in_subtree[link_id] = false;
@@ -104,6 +107,8 @@ int torqueRegressor::configure()
             subtree_links_indices.push_back(i);
         }
     }
+   
+    
     
     return 0;
 }
@@ -130,8 +135,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
                                       Eigen::VectorXd & known_terms)
 {
 #ifndef NDEBUG
-    //std::cerr << "Called computeRegressor " << std::endl;
-    //std::cerr << (*p_ft_list).toString();
+    std::cerr << "Called torqueRegressor::computeRegressor " << std::endl;
 #endif 
     const KDL::CoDyCo::TreeGraph & tree_graph = *p_tree_graph;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
@@ -160,7 +164,10 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
     
     for(int i =0; i < (int)subtree_links_indices.size(); i++ ) {
         int link_id = subtree_links_indices[i];
-     
+        
+        #ifndef NDEBUG
+        std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the regressor relative to link " << p_tree_graph->getLink(link_id)->getName() << std::endl;
+        #endif
             
         if( linkIndeces2regrCols[link_id] != -1 ) {
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);
@@ -168,6 +175,14 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         }        
     }
     
+#ifndef NDEBUG
+    if( consider_ft_offset ) {
+        std::cerr << "considering ft offset" << std::endl;
+    } else {
+        std::cerr << "not considering ft offset" << std::endl;
+    }
+    std::cerr << "subtree_leaf_links_indeces size " << subtree_leaf_links_indeces.size() << std::endl;
+#endif
     //if the ft offset is condidered, we have to set also the columns relative to the offset 
     //For each subgraph, we consider the measured wrenches as the one excerted from the remain of the tree to the considered subtree 
     //So the sign of the offset should be consistent with the other place where it is defined. In particular, the offset of a sensor is considered
@@ -184,6 +199,9 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
             int ft_id = fts_link[0]->getID();
             assert(fts_link[0]->getChild() == leaf_link_id || fts_link[0]->getParent() == leaf_link_id );
             
+            #ifndef NDEBUG
+            std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the columns relative to offset of ft sensor " << fts_link[0]->getName() << std::endl;
+            #endif
             
             /** \todo find a more robust way to get columns indeces relative to a given parameters */
             assert(ft_id >= 0 && ft_id < 100);

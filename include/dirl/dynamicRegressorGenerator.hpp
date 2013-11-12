@@ -49,13 +49,21 @@ public:
     * @param tree the KDL::Tree description of the robot structure
     * @param kinematic_base (optional) the link used as the root for propagation of kinematic information (default: the base of the KDL::Tree )
     * @param ft_sensor_names (optional) the names of the Joints (of type Joint::None) that are Force Torque sensors (default: no sensors)
-    * 
+    * @param ft_sensor_offset (optional) consider the ft offset as parameters while building the regressor and the known terms (default: true)
+    * @param fake_link_names (optional) a list of names of links to consider without inertia (i.e. with all zero inertial parameters) (default: no links)
+    * @param serialization (optional) explicit serialization of link and joints of input KDL::Tree (default: KDL::CoDyCo::TreeSerialization(tree))
     */
     DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base="", 
-                              std::vector< std::string > ft_sensor_names=std::vector< std::string >(0), bool ft_sensor_offset=true,
-                              std::vector< std::string > fake_link_names=std::vector< std::string >(0), KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization());
+                              std::vector< std::string > ft_sensor_names=std::vector< std::string >(0), 
+                              bool ft_sensor_offset=true,
+                              std::vector< std::string > fake_link_names=std::vector< std::string >(0), 
+                              KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization());
     
     ~DynamicRegressorGenerator() { delete p_ft_list; };
+    
+    int changeDynamicBase(std::string new_dynamic_base_name);
+    
+    int changeKinematicBase(std::string new_kinematic_base_name);
     
     int addSubtreeRegressorRows(const std::vector< std::string>& _subtree_leaf_links);
     
@@ -174,14 +182,36 @@ public:
      * \note This method is not real time safe.
      */
     int computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
-
-    /**
-     * Algorithm under development
-     */
-    int computeSparseNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
+   
     
-    int computeForwardSparseNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
+    std::string analyseBaseSubspace(const Eigen::MatrixXd & basis, double tol = -1.0);
 
+    std::string analyseSparseBaseSubspace(const Eigen::MatrixXd & basis, double tol=-1.0, bool only_summary = true);
+
+    
+    /**
+     * Under testing
+     *
+     */
+    int computeSparseNumericalIdentifiableSubspaceV1( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 50, const bool verbose = false);
+    
+    /**
+     * 
+     *
+     */
+    int computeSparseNumericalIdentifiableSubspaceV2( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
+    
+    
+    int computeSparseNumericalIdentifiableSubspaceSimpleAlgorithm( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 100, const bool verbose = false);
+
+    int computeSparseNumericalIdentifiableSubspaceAdvancedAlgorithm( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 100, const bool verbose = false);
+    
+    int computeSparseNumericalIdentifiableSubspaceSimplePaper( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 100, const bool verbose = false);
+    
+    int computeSparseNumericalIdentifiableSubspaceSimpleGolub( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 100, const bool verbose = false);
+    
+    int computeSparseNumericalIdentifiableSubspaceAdvancedPaper( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 100, const bool verbose = false);
+    
     
 private:
     KDL::CoDyCo::UndirectedTree tree_graph; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
@@ -245,16 +275,11 @@ private:
     Eigen::VectorXd one_rows_vector;
     Eigen::VectorXd six_rows_vector;
     
-    /**
-    * @param input_matrix a n x m matrix
-    * @param row_space_basis_matrix a m X rank matrix, whose columns form a base for the row space of input_matrix
-    * @param tol (optional) tollerance to use for calculating the rank of the matrix (default: max(n,m)*max(sigma)*machine_epslion)
-    * 
-    * \note This function allocate dynamically memory, so it is not real time safe
-    */
-    int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol = -1.0);
+    //utility function for generating a random regressor for numerical base parameter calculation
+    //Given n_samples, the Y (n_samples*getNrOfOutputs() X getNrOfParameters() ) regressor is obtained by stacking the n_samples generated regressors
+    //This function returns Y^T Y (getNrOfParameters() X getNrOfParameters() ) (that share the row space with Y)
+    int generate_random_regressors(Eigen::MatrixXd & output_matrix, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), int n_samples = 1000, const bool verbose = false);
 
-        
 };
 
 }

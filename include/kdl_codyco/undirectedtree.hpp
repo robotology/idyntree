@@ -230,7 +230,7 @@ namespace CoDyCo
         
         std::string getName() const { return joint_name; }
         
-		int getJunctionIndex() const { return q_nr; }
+        int getJunctionIndex() const { return q_nr; }
         
         int getDOFIndex() const { return q_nr; } 
         

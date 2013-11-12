@@ -19,10 +19,10 @@ namespace CoDyCo {
         
         //Creating random left arm, with embedded ft sensor
         single_link.addSegment(Segment("first_link",Joint("fake_fixed_joint",Joint::None),
-                                   Frame::DH(4.0,M_PI_2/2,-3.0,-3.0),
+                                   Frame::DH(0,0,0,0),
                                    RigidBodyInertia(10,Vector(3,-4,-5),RotationalInertia(0,0.35,0,4,2,0))),"fake_root_link");        
         single_link.addSegment(Segment("second_link",Joint("first_joint",Joint::RotZ),
-                                   Frame::DH(4.0,M_PI_2/2,-3.0,-3.0),
+                                   Frame::DH(1,1,1,1),
                                    RigidBodyInertia(10,Vector(3,-4,-5),RotationalInertia(0,0.35,0,4,2,0))),"first_link");
 
         return single_link;

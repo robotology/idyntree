@@ -15,7 +15,7 @@
 
 namespace dirl 
 {
-
+/** \todo fix the case where the dynamic base has changed */
 class torqueRegressor : public DynamicRegressorInterface 
 {   
     const KDL::CoDyCo::TreeGraph * p_tree_graph;
