@@ -13,9 +13,6 @@
 #include <kdl_codyco/regressor_utils.hpp>
 
 #include <iostream>
-#include <boost/concept_check.hpp>
-
-#include <cfloat>
 
 using namespace KDL::CoDyCo;
 
