@@ -122,6 +122,7 @@ namespace CoDyCo {
         
         dynamicsRegressorFixedBaseLoop(tree_graph,q,traversal,X_b,v,a,dynamics_regressor);
         
+        return 0;
     }
 
     int TreeInertialParametersRegressor::dynamicsRegressor( const KDL::JntArray &q, 

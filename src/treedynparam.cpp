@@ -36,12 +36,12 @@ namespace CoDyCo {
     
     TreeDynParam::TreeDynParam(const Tree& _tree, Vector _grav, const TreeSerialization & _serialization):
         UndirectedTreeSolver(_tree,_serialization),
-        grav(_grav),
-        treeidsolver_coriolis( _tree, Vector::Zero()),
-        treeidsolver_gravity( _tree, grav),
         nj(_tree.getNrOfJoints()),
         ns(_tree.getNrOfSegments()),
+        grav(_grav),
         jntarraynull(nj),
+        treeidsolver_coriolis( _tree, Vector::Zero()),
+        treeidsolver_gravity( _tree, grav),
         wrenchnull(ns,Wrench::Zero()),
         Ic(ns)
     {

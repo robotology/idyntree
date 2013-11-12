@@ -21,7 +21,6 @@ namespace KDL {
 namespace CoDyCo {
 
     int crba_fixed_base_loop(const UndirectedTree & undirected_tree, const Traversal & traversal, const JntArray & q, std::vector<RigidBodyInertia> & Ic, JntSpaceInertiaMatrix & H) {
-        unsigned int k=0;
         double q_;
         Wrench F;
         
@@ -106,6 +105,7 @@ namespace CoDyCo {
             }
         }
         
+        return 0;
     }
     
     
@@ -293,9 +293,7 @@ namespace CoDyCo {
                             q__ = 0.0;
                             dof_id_ = -1;
                         } 
-                        
-                        Twist S_successor_predecessor = predecessor_it->S(successor_it,q__);
-                        
+                                                
                         
                     }
                     if( dof_id >= 0 ) { 

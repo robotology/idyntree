@@ -185,7 +185,7 @@ namespace CoDyCo {
     {
         VectorXd ret(6+tau.rows());
         ret.segment(0,6) = toEigen(f);
-        for(int i=0; i < tau.rows(); i++ ) { ret(6+i) = tau(i); }
+        for(int i=0; i < (int)tau.rows(); i++ ) { ret(6+i) = tau(i); }
         return ret;
     }
     
@@ -194,7 +194,7 @@ namespace CoDyCo {
     {
         VectorXd ret(6+dq.rows());
         ret.segment(0,6) = toEigen(v);
-        for(int i=0; i < dq.rows(); i++ ) { ret(6+i) = dq(i); }
+        for(int i=0; i < (int)dq.rows(); i++ ) { ret(6+i) = dq(i); }
         return ret;
     }
     

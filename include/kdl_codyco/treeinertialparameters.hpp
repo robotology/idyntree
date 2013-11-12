@@ -44,14 +44,16 @@ namespace CoDyCo {
             
             std::string root_name;
             
+            //Frame of link i with respect to the base
+            std::vector<Frame> X_b;
+            
+            
             std::vector<Twist> v;
             std::vector<Twist> a;
 
             Twist ag;
             
-            //Frame of link i with respect to the base
-            std::vector<Frame> X_b;
-            
+
             Eigen::VectorXd tree_param;
  
             //Indicator function

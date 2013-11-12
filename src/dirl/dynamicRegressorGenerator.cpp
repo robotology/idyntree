@@ -37,8 +37,8 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(KDL::Tree & _tree, std::str
                                                       bool ft_sensor_offset,
                                                       std::vector< std::string > fake_links_names, 
                                                       KDL::CoDyCo::TreeSerialization serialization): 
-                                                      consider_ft_offset(ft_sensor_offset),
                                                       regressors_ptrs(0),
+                                                      consider_ft_offset(ft_sensor_offset),
                                                       verbose(true)
 {
 #ifndef NDEBUG
@@ -112,14 +112,14 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(KDL::Tree & _tree, std::str
     is_link_real.resize(tree_graph.getNrOfLinks(),true);
     linkIndeces2regrColumns.resize(tree_graph.getNrOfLinks(),-1);
     regrColumns2linkIndeces.resize(NrOfRealLinks_gen,-1);
-    for(int ll=0; ll < fake_links_names.size(); ll++ ) {
+    for(int ll=0; ll < (int)fake_links_names.size(); ll++ ) {
         KDL::CoDyCo::LinkMap::const_iterator link_it = tree_graph.getLink(fake_links_names[ll]);
         if( link_it == tree_graph.getInvalidLinkIterator() ) { NrOfDOFs = NrOfRealLinks_gen = NrOfOutputs = NrOfParameters = 0; return; }
         is_link_real[link_it->getLinkIndex()]=false;
     }
     
     int regressor_link_index = 0;
-    for(int link_index=0; link_index < tree_graph.getNrOfLinks(); link_index++ ) {
+    for(int link_index=0; link_index < (int)tree_graph.getNrOfLinks(); link_index++ ) {
         if( is_link_real[link_index] ) {
             assert( regressor_link_index < NrOfRealLinks_gen );
             linkIndeces2regrColumns[link_index] = regressor_link_index;
@@ -309,7 +309,7 @@ std::string DynamicRegressorGenerator::getDescriptionOfOutputs()
      
 int DynamicRegressorGenerator::setRobotState(const KDL::JntArray &_q, const KDL::JntArray &_q_dot, const KDL::JntArray &_q_dotdot, const KDL::Twist& _base_velocity, const KDL::Twist& _base_acceleration)
 {
-    if( _q.rows() != NrOfDOFs || _q_dot.rows() != NrOfDOFs || _q_dotdot.rows() != NrOfDOFs ) {
+    if( (int)_q.rows() != NrOfDOFs || (int)_q_dot.rows() != NrOfDOFs || (int)_q_dotdot.rows() != NrOfDOFs ) {
         if( verbose ) { std::cerr << "DynamicRegressorGenerator::setRobotState error: input size error" << std::endl; }
         return -1;
     }
@@ -343,7 +343,7 @@ int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Ei
     
     //Call specific regressors
     int start_row = 0;
-    for(int i=0; i < regressors_ptrs.size(); i++ ) {
+    for(int i=0; i < (int)regressors_ptrs.size(); i++ ) {
         DynamicRegressorInterface * regr_ptr = regressors_ptrs[i];
         
         /**
@@ -537,7 +537,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV1(Eige
                 link_to_visit.pop_front();
                 KDL::CoDyCo::LinkMap::const_iterator considered_link_it = tree_graph.getLink(considered_link_index);
                 
-                for(int child=0; child < considered_link_it->getNrOfAdjacentLinks(); child++ ) {
+                for(int child=0; child < (int)considered_link_it->getNrOfAdjacentLinks(); child++ ) {
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
@@ -582,7 +582,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV1(Eige
             //Should be better to avoid computing this lines, but for now it easier to elimate them
             std::vector<bool> keep_regressor(regressors_ptrs.size());
             int reduced_regressor_rows = 0;
-            for(int regr = 0; regr < regressors_ptrs.size(); regr++ ) {
+            for(int regr = 0; regr < (int)regressors_ptrs.size(); regr++ ) {
                 bool keep_regressor_rows = false;
                 DynamicRegressorInterface * considered_regr = regressors_ptrs[regr];
                 
@@ -602,7 +602,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV1(Eige
                     
                 } else {
                     
-                    for(int relative_junction_id = 0; relative_junction_id < relative_junctions.size(); relative_junction_id++ ) {
+                    for(int relative_junction_id = 0; relative_junction_id < (int)relative_junctions.size(); relative_junction_id++ ) {
                         int relative_junction = relative_junctions[relative_junction_id];
                         //If all the junction of the regressor are considered, keep the regressor
                         if( considered_junctions[relative_junction] ) {
@@ -626,7 +626,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV1(Eige
             
             int reduced_regressor_rows_offset = 0;
             int regressor_rows_offset = 0;
-            for(int regr = 0; regr < regressors_ptrs.size(); regr++ ) {
+            for(int regr = 0; regr < (int)regressors_ptrs.size(); regr++ ) {
                 if( keep_regressor[regr] ) { 
                     reduced_regressor.block(reduced_regressor_rows_offset,0,regressors_ptrs[regr]->getNrOfOutputs(),regressor.cols()) =
                         regressor.block(regressor_rows_offset,0,regressors_ptrs[regr]->getNrOfOutputs(),regressor.cols());
@@ -649,7 +649,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV1(Eige
         //std::cout<<"~~~~~~~~~~~~~~~~~~~~~obtained dense basis~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
         //std::cout << dense_basis << std::endl;
         
-        if( i == tree_graph.getNrOfLinks()-1 ) {
+        if( i == (int)tree_graph.getNrOfLinks()-1 ) {
             #ifndef NDEBUG
             std::cout << "Adding link " << link_it->getName() << " adds " << dense_basis.cols() << " base parameters" << std::endl;
             #endif
@@ -796,7 +796,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV2(Eige
                 
                 link_is_descendant[considered_link_index] = true;
                 
-                for(int child=0; child < considered_link_it->getNrOfAdjacentLinks(); child++ ) {
+                for(int child=0; child < (int)considered_link_it->getNrOfAdjacentLinks(); child++ ) {
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
@@ -814,9 +814,9 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV2(Eige
          
          //Suboptimal
          /** \todo improve */
-         for(int n = 0; n < tree_graph.getNrOfLinks(); n++ ) {
+         for(int n = 0; n < (int)tree_graph.getNrOfLinks(); n++ ) {
              if( !link_is_descendant[n] || linkIndeces2regrColumns[n] == -1 ) { continue; }
-             for(int m = 0; m < tree_graph.getNrOfLinks(); m++ ) {
+             for(int m = 0; m < (int)tree_graph.getNrOfLinks(); m++ ) {
                 if( !link_is_descendant[m] || linkIndeces2regrColumns[m] == -1) { continue; }
                 
                 sparseA.block<10,10>(10*linkIndeces2regrColumns[n],10*linkIndeces2regrColumns[m]) =
@@ -1257,7 +1257,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceAdvance
                 
                 link_is_descendant[considered_link_index] = true;
                 
-                for(int child=0; child < considered_link_it->getNrOfAdjacentLinks(); child++ ) {
+                for(int child=0; child < (int)considered_link_it->getNrOfAdjacentLinks(); child++ ) {
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
@@ -1275,7 +1275,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceAdvance
          
          //Suboptimal
          /** \todo improve */
-         for(int n = 0; n < tree_graph.getNrOfLinks(); n++ ) {
+         for(int n = 0; n < (int)tree_graph.getNrOfLinks(); n++ ) {
              if( !link_is_descendant[n] || linkIndeces2regrColumns[n] == -1 ) { continue; }
             
               projector_B_nu_i.block<10,10>(10*linkIndeces2regrColumns[n],10*linkIndeces2regrColumns[n]) = Eigen::Matrix<double,10,10>::Identity();
@@ -1373,12 +1373,13 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleP
         ////////////////////////////////////////////
         //// ADDING TYPE III BASE PARAMETERS BASIS
         /////////////////////////////////////////////
+        /*
         double tol_III;
         if( tol <= 0.0 ) {
             tol_III = 1e-7;
         } else {
             tol_III = tol;
-        }
+        }*/
         
         ////////////////////////////////////////////////////////
         //// ADDING TYPE I BASE PARAMETERS BASIS
@@ -1400,7 +1401,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleP
                 
                 link_is_descendant[considered_link_index] = true;
                 
-                for(int child=0; child < considered_link_it->getNrOfAdjacentLinks(); child++ ) {
+                for(int child=0; child < (int)considered_link_it->getNrOfAdjacentLinks(); child++ ) {
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
@@ -1418,7 +1419,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleP
          
          //Suboptimal
          /** \todo improve */
-         for(int n = 0; n < tree_graph.getNrOfLinks(); n++ ) {
+         for(int n = 0; n < (int)tree_graph.getNrOfLinks(); n++ ) {
              if( !link_is_descendant[n] || linkIndeces2regrColumns[n] == -1 ) { continue; }
             
               projector_B_nu_i.block<10,10>(10*linkIndeces2regrColumns[n],10*linkIndeces2regrColumns[n]) = Eigen::Matrix<double,10,10>::Identity();
@@ -1512,12 +1513,13 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleG
         ////////////////////////////////////////////
         //// ADDING TYPE III BASE PARAMETERS BASIS
         /////////////////////////////////////////////
+        /*
         double tol_III;
         if( tol <= 0.0 ) {
             tol_III = 1e-7;
         } else {
             tol_III = tol;
-        }
+        }*/
         
         ////////////////////////////////////////////////////////
         //// ADDING TYPE I BASE PARAMETERS BASIS
@@ -1541,7 +1543,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleG
                 link_is_descendant[considered_link_index] = true;
                 B_nu_i_size += 10;
                 
-                for(int child=0; child < considered_link_it->getNrOfAdjacentLinks(); child++ ) {
+                for(int child=0; child < (int)considered_link_it->getNrOfAdjacentLinks(); child++ ) {
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
@@ -1562,7 +1564,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleG
          //Suboptimal
          /** \todo improve */
          int free_column = 0;
-         for(int n = 0; n < tree_graph.getNrOfLinks(); n++ ) {
+         for(int n = 0; n < (int)tree_graph.getNrOfLinks(); n++ ) {
              if( !link_is_descendant[n] || linkIndeces2regrColumns[n] == -1 ) { continue; }
             
               B_nu_i.block<10,10>(10*linkIndeces2regrColumns[n],free_column) = Eigen::Matrix<double,10,10>::Identity();
@@ -1591,6 +1593,8 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleG
         int ret;
         ret = getKernelSpaceBasis(sparse_basis_Z_s.transpose(),new_sbnp_basis,tol,true);
         assert(ret == 0);
+        //To avoid warnings
+        ((void)ret);
         std::cout << "new_sbnp_basis.cols: " << new_sbnp_basis.cols() << std::endl;
         std::cout << "sparse_basis_Z_s cols " << sparse_basis_Z_s.cols() << std::endl;
         ret = getSubSpaceIntersection(new_sbnp_basis,B_nu_i,intermediate_intersection,tol);
@@ -1690,7 +1694,7 @@ std::string DynamicRegressorGenerator::analyseSparseBaseSubspace(const Eigen::Ma
     
     std::stringstream ss;
     
-    int np = getNrOfParameters();
+    //int np = getNrOfParameters();
     int nbp = basis.cols();
     int nbp_I = 0;
     int nbp_II = 0;
@@ -1702,11 +1706,11 @@ std::string DynamicRegressorGenerator::analyseSparseBaseSubspace(const Eigen::Ma
     int parameter_type = -1; //Can be 1,2 or 3
     int comp_ident_parameter = -1;
     
-    for(int bp=0; bp < nbp; bp++ ) {
+    for(int bp=0; bp < (int)nbp; bp++ ) {
         //For a given base parameter, we try to understand is type
         relative_link = -1;
         parameter_type = -1;
-        for(int link_id = 0; link_id < tree_graph.getNrOfLinks(); link_id++) {
+        for(int link_id = 0; link_id < (int)tree_graph.getNrOfLinks(); link_id++) {
             //std::cout << "analyseSparseBaseSubspace: bp " << bp << " considering link " << link_id << std::endl;
             if( linkIndeces2regrColumns[link_id] == -1 ) { continue; } // fake link, don't consider 
             int regr_link_id = linkIndeces2regrColumns[link_id];
@@ -1868,16 +1872,16 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
 int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<std::string> &_activated_ft_sensors)
 {
     std::vector<bool> flag_activated_ft_sensors(p_ft_list->getNrOfFTSensors(),false);
-    for(int i=0; i < _activated_ft_sensors.size(); i++ ) {
+    for(int i=0; i < (int)_activated_ft_sensors.size(); i++ ) {
        KDL::CoDyCo::LinkMap::const_iterator link_it =  tree_graph.getLink(_activated_ft_sensors[i]);
        if( link_it == tree_graph.getInvalidLinkIterator() ) {
             if( verbose ) { std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error: link " << _activated_ft_sensors[i]  << " does not exists" << std::endl; }
             return -1;
        }
        std::vector<const KDL::CoDyCo::FTSensor*> ft_on_link = p_ft_list->getFTSensorsOnLink(link_it->getLinkIndex());
-       for(int l=0; l < ft_on_link.size(); l++ ) {
+       for(int l=0; l < (int)ft_on_link.size(); l++ ) {
            int ft_id = ft_on_link[l]->getID();
-           if( ft_id >= flag_activated_ft_sensors.size() || ft_id < 0 ) {
+           if( ft_id >= (int)flag_activated_ft_sensors.size() || ft_id < 0 ) {
                if( verbose ) { std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error while adding subtree with leaf: " << _activated_ft_sensors[i]  << std::endl; }
                return -1;
            }
@@ -1891,7 +1895,7 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
 int DynamicRegressorGenerator::addAllTorqueRegressorRows()
 {
     int ret_val;
-    for(int i=0; i < tree_graph.getNrOfDOFs(); i++ ) {
+    for(int i=0; i < (int)tree_graph.getNrOfDOFs(); i++ ) {
         ret_val = addTorqueRegressorRows(tree_graph.getJunction(i)->getName());
         if( ret_val != 0 ) { return ret_val; }
     }

@@ -21,7 +21,7 @@ namespace dirl
     
 int subtreeBaseDynamicsRegressor::isSubtreeLeaf(const int link_id) const
 {
-    for( int i=0; i < subtree_leaf_links_indeces.size(); i++ ) {
+    for( int i=0; i < (int)subtree_leaf_links_indeces.size(); i++ ) {
         if( link_id == subtree_leaf_links_indeces[i] ) return true;
     }
     return false;
@@ -40,7 +40,7 @@ int subtreeBaseDynamicsRegressor::configure()
         return -3;
     }
     
-    for(int i=0; i < subtree_leaf_links.size(); i++ ) {
+    for(int i=0; i < (int)subtree_leaf_links.size(); i++ ) {
         LinkMap::const_iterator link_it = tree_graph.getLink(subtree_leaf_links[i]);
         
         if( link_it == tree_graph.getInvalidLinkIterator() ) {
@@ -78,7 +78,7 @@ int subtreeBaseDynamicsRegressor::configure()
     is_link_in_subtree[subtree_leaf_links_indeces[0]] = true;
     
     //then, all the other links can be classified using the following rules:  
-    for(int i=1; i < subtree_traversal.order.size(); i++ ) {
+    for(int i=1; i < (int)subtree_traversal.order.size(); i++ ) {
         int link_id = subtree_traversal.order[i]->getLinkIndex();
         int parent_id = subtree_traversal.parent[link_id]->getLinkIndex();
         
@@ -100,7 +100,7 @@ int subtreeBaseDynamicsRegressor::configure()
     
     //after all the links belonging to the subtree have been identified, it is possible to save only the id of the one in the subtree
     assert( subtree_links_indices.size() == 0 );
-    for( int i=0; i < is_link_in_subtree.size(); i++ ) {
+    for( int i=0; i < (int)is_link_in_subtree.size(); i++ ) {
         if( is_link_in_subtree[i] ) {
             subtree_links_indices.push_back(i);
         }
@@ -151,7 +151,7 @@ int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
     //std::cerr << "Called computeRegressor " << std::endl;
     //std::cerr << (*p_ft_list).toString();
 #endif 
-    const KDL::CoDyCo::TreeGraph & tree_graph = *p_tree_graph;
+    //const KDL::CoDyCo::TreeGraph & tree_graph = *p_tree_graph;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
 
     
@@ -222,7 +222,7 @@ int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
              
         assert(fts_link.size()==1);
             
-        int ft_id = fts_link[0]->getID();
+        //int ft_id = fts_link[0]->getID();
 #ifndef NDEBUG
         //std::cerr << "For leaf " << leaf_link_id << " found ft sensor " << ft_id << " that connects " << fts_link[0]->getParent() << " and " << fts_link[0]->getChild() << std::endl;
 #endif

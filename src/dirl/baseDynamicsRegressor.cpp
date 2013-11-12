@@ -20,9 +20,7 @@ namespace dirl
 {
     
 int baseDynamicsRegressor::configure()
-{      
-    const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_tree_graph;
-    
+{          
     return 0;
 }
 
@@ -61,7 +59,7 @@ int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
     //all other columns, beside the one relative to the inertial parameters of the links of the subtree, are zero
     regressor_matrix.setZero();
     
-    for(int link_id =0; link_id < tree_graph.getNrOfLinks(); link_id++ ) {
+    for(int link_id =0; link_id < (int)tree_graph.getNrOfLinks(); link_id++ ) {
      
         if( linkIndeces2regrCols[link_id] != -1 ) {
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);

@@ -21,7 +21,7 @@ namespace dirl
     
 bool torqueRegressor::isActiveFTSensor(const int ft_sensor_id) const
 {
-    if( activated_ft_sensors.size() != p_ft_list->getNrOfFTSensors() ) { return false; }
+    if( activated_ft_sensors.size() != (unsigned int)p_ft_list->getNrOfFTSensors() ) { return false; }
     if( ft_sensor_id < 0 || ft_sensor_id >= p_ft_list->getNrOfFTSensors() ) { return false; }
     return activated_ft_sensors[ft_sensor_id];
 }
@@ -49,7 +49,7 @@ int torqueRegressor::configure()
     relative_junction[0] = torque_dof_index;
     
     
-    if( torque_dof_index < 0 || torque_dof_index >= undirected_tree.getNrOfDOFs() ) {
+    if( torque_dof_index < 0 || torque_dof_index >= (int)undirected_tree.getNrOfDOFs() ) {
          if(verbose) { std::cerr << "torqueRegressor error: specified joint " << torque_dof << " has no degrees of freedom " << std::endl; }
         return -1; 
     }
@@ -74,7 +74,7 @@ int torqueRegressor::configure()
     is_link_in_subtree[subtree_root_link_id] = true;
     
     //then, all the other links can be classified using the following rules:  
-    for(int i=1; i < subtree_traversal.order.size(); i++ ) {
+    for(int i=1; i < (int)subtree_traversal.order.size(); i++ ) {
         int link_id = subtree_traversal.order[i]->getLinkIndex();
         int parent_id = subtree_traversal.parent[link_id]->getLinkIndex();
         
@@ -102,7 +102,7 @@ int torqueRegressor::configure()
     
     //after all the links belonging to the subtree have been identified, it is possible to save only the id of the one in the subtree
     assert( subtree_links_indices.size() == 0 );
-    for( int i=0; i < is_link_in_subtree.size(); i++ ) {
+    for( int i=0; i < (int)is_link_in_subtree.size(); i++ ) {
         if( is_link_in_subtree[i] ) {
             subtree_links_indices.push_back(i);
         }
@@ -137,7 +137,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
 #ifndef NDEBUG
     std::cerr << "Called torqueRegressor::computeRegressor " << std::endl;
 #endif 
-    const KDL::CoDyCo::TreeGraph & tree_graph = *p_tree_graph;
+    //const KDL::CoDyCo::TreeGraph & tree_graph = *p_tree_graph;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
 
     
@@ -235,7 +235,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
              
         assert(fts_link.size()==1);
             
-        int ft_id = fts_link[0]->getID();
+        //int ft_id = fts_link[0]->getID();
 #ifndef NDEBUG
         //std::cerr << "For leaf " << leaf_link_id << " found ft sensor " << ft_id << " that connects " << fts_link[0]->getParent() << " and " << fts_link[0]->getChild() << std::endl;
 #endif

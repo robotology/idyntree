@@ -22,9 +22,9 @@ namespace CoDyCo {
         #endif
         //Using default base
         int ret = tree_graph.compute_traversal(traversal);
-        #ifndef NDEBUG
         assert( ret==0 );
-        #endif
+        //Avoiding unused variable warning
+        ((void)ret);
     }
 
     TreeCOMSolver::~TreeCOMSolver() {

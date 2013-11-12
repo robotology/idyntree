@@ -58,7 +58,7 @@ int main()
     v = a = std::vector<Twist>(tree_graph.getNrOfLinks());
     f = f_ext = std::vector<Wrench>(tree_graph.getNrOfLinks(),KDL::Wrench::Zero());
     
-    for(int i=0; i < tree_graph.getNrOfDOFs(); i++ )
+    for(int i=0; i < (int)tree_graph.getNrOfDOFs(); i++ )
     {
         q(i) = random_double();
         dq(i) = random_double();
@@ -103,13 +103,13 @@ int main()
     
     //Generate random offset data
     std::vector<Wrench> measured_wrenches_offset(ft_names.size());
-    for( int i=0; i < ft_names.size(); i++ ) {
+    for( int i=0; i < (int)ft_names.size(); i++ ) {
         measured_wrenches_offset[i] =  Wrench(Vector(random_double(),random_double(),random_double()),Vector(random_double(),random_double(),random_double()));
     }
     
     //Get measured wrenches from RNEA
     std::vector<Wrench> measured_wrenches(ft_names.size());
-    for( int i=0; i < ft_names.size(); i++ ) {
+    for( int i=0; i < (int)ft_names.size(); i++ ) {
         if( consider_ft_offsets ) { 
             measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f) + measured_wrenches_offset[i];
         } else {
@@ -186,7 +186,7 @@ int main()
     regressor.setRobotState(q,dq,ddq,base_vel,base_acc);
 
     //Adding measured wrenches, obtained from inverse dynamics
-    for( int i=0; i < ft_names.size(); i++ ) {
+    for( int i=0; i < (int)ft_names.size(); i++ ) {
         regressor.setFTSensorMeasurement(i,measured_wrenches[i]);
     }
     //Adding measured torques, obtaiend from inverse dynamics
@@ -213,7 +213,7 @@ int main()
     if( consider_ft_offsets ) {
         int NrOfRealLinksParameters = 10*(tree_graph.getNrOfLinks()-fake_links.size());
     
-        for( int ft_id =0; ft_id < ft_names.size(); ft_id++ ) {
+        for( int ft_id =0; ft_id < (int)ft_names.size(); ft_id++ ) {
             for( int www=0; www < 6; www++ ) {
                 parameters[NrOfRealLinksParameters+6*ft_id+www] = measured_wrenches_offset[ft_id](www);
             }

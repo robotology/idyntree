@@ -24,18 +24,20 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
     const KDL::CoDyCo::TreeGraph * p_tree_graph;
     const KDL::CoDyCo::FTSensorList * p_ft_list;
     
-    bool verbose;
+    const std::vector<int> linkIndeces2regrCols;
+                
+    std::vector< std::string > subtree_leaf_links;
     
     bool consider_ft_offset;
     
-    std::vector< std::string > subtree_leaf_links;
+    std::vector< int > subtree_links_indices; /** indeces of the links belonging to the considered subtree */
+    
     std::vector< int > subtree_leaf_links_indeces;
     
-    std::vector< int > subtree_links_indices; /** indeces of the links belonging to the considered subtree */
+    bool verbose;
     
     std::vector< int > relative_junctions;
     
-    const std::vector<int> linkIndeces2regrCols;
     
     int NrOfRealLinks_subtree;
     
@@ -66,12 +68,12 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
         {
             assert(linkIndeces2regrCols.size() == p_tree_graph->getNrOfLinks());
             NrOfRealLinks_subtree = 0;
-            for(int ll=0; ll < linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
+            for(int ll=0; ll < (int)linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
             assert(NrOfRealLinks_subtree >= 0);
             assert(NrOfRealLinks_subtree <= linkIndeces2regrCols.size());
         }
                                                                                                                                              
-       ~subtreeBaseDynamicsRegressor() {};
+        virtual ~subtreeBaseDynamicsRegressor() {};
         
         int getNrOfOutputs();
         

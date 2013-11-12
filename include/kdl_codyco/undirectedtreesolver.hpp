@@ -30,8 +30,7 @@ namespace CoDyCo
         public:
             UndirectedTreeSolver(const Tree & tree_arg, const TreeSerialization & serialization_arg): 
                 undirected_tree(tree_arg,serialization_arg)
-            { undirected_tree.compute_traversal(traversal); assert(undirected_tree.check_consistency(traversal) == 0);
- };
+            { undirected_tree.compute_traversal(traversal); assert(undirected_tree.check_consistency(traversal) == 0);};
          
             ~UndirectedTreeSolver() {};
             
@@ -44,7 +43,7 @@ namespace CoDyCo
             
             bool changeBase(int new_base_id)
             {
-                if( new_base_id < 0 || new_base_id >= undirected_tree.getNrOfLinks() ) {
+                if( new_base_id < 0 || new_base_id >= (int)undirected_tree.getNrOfLinks() ) {
                     return false;
                 }
                

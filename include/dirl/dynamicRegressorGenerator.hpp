@@ -337,7 +337,7 @@ private:
     
     //Options for regressors
     bool consider_ft_offset; //if true, consider the offset of the FT sensors as parameters
-    
+
     bool verbose;
     
     /** \todo Buffers to avoid dynamic memory allocation, remove them using proper stuff */

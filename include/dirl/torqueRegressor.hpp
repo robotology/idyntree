@@ -19,27 +19,28 @@ namespace dirl
 class torqueRegressor : public DynamicRegressorInterface 
 {   
     const KDL::CoDyCo::TreeGraph * p_tree_graph;
-    const KDL::CoDyCo::FTSensorList * p_ft_list;
-    
-    bool verbose;
-    
-    bool consider_ft_offset;
-        
-    std::vector< int > subtree_leaf_links_indeces; /** indices of the leafs (excluding the root) */
-    
-    std::vector< int > subtree_links_indices; /** indeces of the links belonging to the considered subtree */
-  
+    const KDL::CoDyCo::FTSensorList * p_ft_list;    
+            
+    std::vector< int > subtree_leaf_links_indeces; /** indices of the leafs (excluding the root) */  
         
     std::vector<int> linkIndeces2regrCols;
     
-    
     std::string torque_dof;
-    int torque_dof_index;
+    
     bool reverse_direction;
+    
+    std::vector<bool> activated_ft_sensors;
+    
+    bool consider_ft_offset;
+    
+    std::vector< int > subtree_links_indices; /** indeces of the links belonging to the considered subtree */
+    
+    bool verbose;
+    
+    int torque_dof_index;
     
     int subtree_root_link_id;
         
-    std::vector<bool> activated_ft_sensors;
     
     std::vector<int> relative_junction;
     
@@ -74,12 +75,12 @@ class torqueRegressor : public DynamicRegressorInterface
         {
             assert(linkIndeces2regrCols.size() == p_tree_graph->getNrOfLinks());
             NrOfRealLinks_subtree = 0;
-            for(int ll=0; ll < linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
+            for(int ll=0; ll < (int)linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
             assert(NrOfRealLinks_subtree >= 0);
             assert(NrOfRealLinks_subtree <= linkIndeces2regrCols.size());
         }
         
-        ~torqueRegressor() {};
+        virtual ~torqueRegressor() {};
         
         bool isActiveFTSensor(const int ft_sensor_id) const;
         
