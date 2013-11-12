@@ -23,7 +23,6 @@
 #include <deque>
 
 #include <Eigen/LU>
-#include <boost/config/posix_features.hpp>
 
 namespace dirl
 {

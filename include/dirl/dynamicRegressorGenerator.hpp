@@ -65,13 +65,11 @@ public:
     
     ~DynamicRegressorGenerator() { delete p_ft_list; };
     //@}
-    
-<<<<<<< HEAD
     int changeDynamicBase(std::string new_dynamic_base_name);
     
     int changeKinematicBase(std::string new_kinematic_base_name);
     
-=======
+
      /** @name Methods to add rows to the regressor
        *  This methods are used to build the structure of your regressor, adding rows to it. 
        */
@@ -82,7 +80,6 @@ public:
      * 
      * 
      */
->>>>>>> 6f9ab752cadf00210f8f74faa5a6400c96871940
     int addSubtreeRegressorRows(const std::vector< std::string>& _subtree_leaf_links);
     
     /**
@@ -272,7 +269,6 @@ public:
     int computeSparseNumericalIdentifiableSubspaceV1( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 50, const bool verbose = false);
     
     /**
-<<<<<<< HEAD
      * 
      *
      */
@@ -288,13 +284,7 @@ public:
     int computeSparseNumericalIdentifiableSubspaceSimpleGolub( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 100, const bool verbose = false);
     
     int computeSparseNumericalIdentifiableSubspaceAdvancedPaper( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 100, const bool verbose = false);
-    
-=======
-     * Algorithm under development
-     */
-    int computeForwardSparseNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
-    //@}
->>>>>>> 6f9ab752cadf00210f8f74faa5a6400c96871940
+   
     
 private:
     KDL::CoDyCo::UndirectedTree tree_graph; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
