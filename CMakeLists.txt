@@ -19,7 +19,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
 find_package(Eigen3 REQUIRED)
-find_package(Orocos-KDL REQUIRED)
+find_package(orocos_kdl REQUIRED)
 find_package(kdl_codyco REQUIRED)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
@@ -46,7 +46,7 @@ INCLUDE_DIRECTORIES(include
                     ${iDyn_INCLUDE_DIRS}
                     ${GSL_INCLUDE_DIRS}
                     ${YARP_INCLUDE_DIRS}
-                    ${Orocos-KDL_INCLUDE_DIRS}
+                    ${orocos_kdl_INCLUDE_DIRS}
                     ${kdl_codyco_INCLUDE_DIRS}
                     ${EIGEN3_INCLUDE_DIR})
 
@@ -56,7 +56,7 @@ TARGET_LINK_LIBRARIES(${PROJECTNAME} iDyn
                                      ${ICUB_LIBRARIES}
                                      ${GSL_LIBRARIES}
                                      ${YARP_LIBRARIES}
-                                     ${Orocos-KDL_LIBRARIES} 
+                                     ${orocos_kdl_LIBRARIES} 
                                      ${kdl_codyco_LIBRARIES})
 
 
