@@ -29,7 +29,7 @@ if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC) 
 
-find_package(Orocos-KDL REQUIRED)
+find_package(orocos_kdl REQUIRED)
 
 set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES kdl_codyco)
@@ -47,18 +47,14 @@ INSTALL(FILES ${cmake_conf_file} DESTINATION ${CMAKE_INSTALL_PREFIX})
 # Make the package config file
 if (NOT MSVC)
   set(PKG_DESC "Kinematics Dynamics Library additional solvers by CoDyCo project")
-  set(PKG_DEPENDS "Orocos-KDL eigen3") # make the list separated by spaces instead of ;
+  set(PKG_DEPENDS "orocos-kdl eigen3") # make the list separated by spaces instead of ;
   set(PKG_LIBS "")
   set(pkg_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/pkgconfig/kdl_codyco.pc")
   configure_file("${pkg_conf_file}.in" "${pkg_conf_file}" @ONLY)
   install(FILES ${pkg_conf_file} DESTINATION lib/pkgconfig/ COMPONENT pkgconfig)
 endif()
 
-include_directories(include ${Orocos-KDL_INCLUDE_DIRS})
-#workaround for KDL CMake bug, check http://bugs.orocos.org/show_bug.cgi?id=1035
-#link_directories("${Orocos-KDL_LIBRARY_DIRS}")
-message("Library dirs for Orocos-KDL ${Orocos-KDL_LIBRARY_DIRS}")
-message("Include directories for Orocos-KDL ${Orocos-KDL_INCLUDE_DIRS}") 
+include_directories(include ${orocos_kdl_INCLUDE_DIRS})
 
 file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
@@ -76,7 +72,7 @@ endif()
 
 add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DRRL_SRC})
 
-target_link_libraries(kdl_codyco ${Orocos-KDL_LIBRARIES})
+target_link_libraries(kdl_codyco ${orocos_kdl_LIBRARIES})
 
 # --------------------------------
 INSTALL(TARGETS kdl_codyco EXPORT kdl_codyco-target DESTINATION lib)

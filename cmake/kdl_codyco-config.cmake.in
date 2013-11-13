@@ -1,55 +1,24 @@
-# Locate KDL install directory
+# Locate kld_codyco install directory
 
 # This module defines
-# kdl_codyco_INSTALL where to find include, lib, bin, etc.
+# kdl_codyco_INCLUDE_DIRS
+# kdl_codyco_LIBRARIES
 # kdl_codyco_FOUND, is set to true
 
-# set flag for whether items are required or not
-SET(IS_REQUIRED)
-IF (kdl_codyco_FIND_REQUIRED)
-    SET(IS_REQUIRED "REQUIRED")
-ENDIF (kdl_codyco_FIND_REQUIRED)
+if(NOT kdl_codyco_FOUND)
+    message( "Looking for KDL in: @CMAKE_INSTALL_PREFIX@")
 
-# find kdl_codyco itself
+  # Version
+  set(kdl_codyco_VERSION_MAJOR "@KDL_CODYCO_VERSION_MAJOR@")
+  set(kdl_codyco_VERSION_MINOR "@KDL_CODYCO_VERSION_MINOR@")
+  set(kdl_codyco_VERSION_PATCH "@KDL_CODYCO_VERSION_PATCH@")
 
+  set(kdl_codyco_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include" ${orocos_kdl_INCLUDE_DIRS} )
+  set(kdl_codyco_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib" ${orocos_kdl_LIBRARY_DIRS} )
+  set(kdl_codyco_LIBRARIES kdl_codyco ${orocos_kdl_LIBRARIES})
+  include("@CMAKE_INSTALL_PREFIX@/share/kdl_codyco/kdl_codyco-target.cmake")
+  set(kdl_codyco_FOUND TRUE)
 
-IF( NOT kdl_codyco_FOUND) 
-IF(MSVC)
-    message( "Looking for kdl_codyco in: @CMAKE_INSTALL_PREFIX@")
-    set(kdl_codyco_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include" "@Orocos-KDL_INCLUDE_DIRS@" "@Eigen3_INCLUDE_DIRS@" )
-    set(kdl_codyco_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib" "@Orocos-KDL_LIBRARY_DIRS@" )
-    set(kdl_codyco_LIBRARY_RELEASE "kdl_codyco")
-    set(kdl_codyco_LIBRARY_DEBUG "kdl_codycod")
-    set(kdl_codyco_LIBRARIES optimized "${kdl_codyco_LIBRARY_RELEASE}" debug "${kdl_codyco_LIBRARY_DEBUG}")
-   set(CMAKE_DEBUG_POSTFIX "d")
-ELSE()
-    message( "Looking for kdl_codyco in: @CMAKE_INSTALL_PREFIX@")
-    set(kdl_codyco_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include" "${Orocos-KDL_INCLUDE_DIRS}" "${Eigen3_INCLUDE_DIRS}" )
-    set(kdl_codyco_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib" "${Orocos-KDL_LIBRARY_DIRS}" )
-    set(kdl_codyco_LIBRARY "kdl_codyco")
-    set(kdl_codyco_LIBRARIES "${kdl_codyco_LIBRARY}")
-ENDIF()
+endif(NOT kdl_codyco_FOUND)
 
 
-set(kdl_codyco_FOUND TRUE)
-include("@CMAKE_INSTALL_PREFIX@/share/kdl_codyco/kdl_codyco-target.cmake")
-ENDIF() 
-
-
-
-set(kdl_codyco_FOUND TRUE)
-IF( kdl_codyco_FOUND )
-  IF(NOT kdl_codyco_FIND_QUIETLY)
-    message(STATUS "   Includes in: ${kdl_codyco_INCLUDE_DIRS}")
-    message(    "Compiler flags: ${kdl_codyco_CFLAGS}")  
-    message("   Libraries: ${kdl_codyco_LIBRARIES}")
-    message("   Libraries in: ${kdl_codyco_LIBRARY_DIRS}")
-    message("   Linker flags : ${kdl_codyco_LD_FLAGS}")
-    message("   Defines: ${kdl_codyco_DEFINES}")
-  ENDIF(NOT kdl_codyco_FIND_QUIETLY)
-
-ELSE(kdl_codyco_FOUND)  
-  IF(kdl_codyco_FIND_REQUIRED)
-    MESSAGE(FATAL_ERROR "Could not find kdl_codyco")
-  ENDIF(kdl_codyco_FIND_REQUIRED)
-ENDIF ( kdl_codyco_FOUND )
