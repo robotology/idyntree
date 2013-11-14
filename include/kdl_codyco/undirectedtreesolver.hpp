@@ -17,9 +17,12 @@ namespace CoDyCo
 {
     /**
     * \brief This is the base class for all the Tree solvers (kinematics,
-     *  dynamics, COM, ... ) that use the UndirectedTree object 
-     * 
-     *  
+     *  dynamics, COM, ... ) that use the UndirectedTree object.
+     *  If a solver uses this base class, then for that solver 
+     *  it will be possible to define a custom serialization for joints
+     *  and links using a KDL::CoDyCo::TreeSerialization object. 
+     * It will also be possible to change online the base of the
+     * tree using the changeBase method.
      */
     class UndirectedTreeSolver
     {
@@ -34,14 +37,27 @@ namespace CoDyCo
          
             ~UndirectedTreeSolver() {};
             
-            bool changeBase(std::string new_base_name)
+            /**
+             * Change the link used as the base one in the solver
+             * 
+             * @param[in] new_base_name the name of the new base
+             * @return true if all went well, false otherwise
+             */
+            bool changeBase(const std::string new_base_name)
             {
                int ret = undirected_tree.compute_traversal(traversal,new_base_name);
                if( ret != 0 ) { return false; }
                
-               return true;            }
+               return true;            
+            }
             
-            bool changeBase(int new_base_id)
+            /**
+             * Change the link used as the base one in the solver
+             * 
+             * @param[in] new_base_id the ID of the new base (as specified in getSerialization()
+             * @return true if all went well, false otherwise
+             */
+            bool changeBase(const int new_base_id)
             {
                 if( new_base_id < 0 || new_base_id >= (int)undirected_tree.getNrOfLinks() ) {
                     return false;
@@ -53,6 +69,13 @@ namespace CoDyCo
                return true;
             }
             
+            /**
+             * Return the KDL::CoDyCo::TreeSerialization object used for the solver. 
+             * If it was not specified in the constructor, it is the default one of
+             * input KDL::Tree (i.e. if tree is the input tree: TreeSerialization(tree))
+             * 
+             * @return the TreeSerialization object
+             */
             const TreeSerialization getSerialization() const
             {
                 return undirected_tree.getSerialization();
