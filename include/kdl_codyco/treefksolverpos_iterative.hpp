@@ -27,8 +27,8 @@
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
 #include <kdl_codyco/treeserialization.hpp>
-#include "kdl_codyco/treeserialsolver.hpp"
-#include "kdl_codyco/undirectedtree.hpp"
+#include <kdl_codyco/undirectedtree.hpp>
+#include <kdl_codyco/undirectedtreesolver.hpp>
 
 namespace KDL {
 namespace CoDyCo {
@@ -36,30 +36,19 @@ namespace CoDyCo {
     /**
      * Implementation of a iterative forward position kinematics
      * algorithm to calculate the position transformation from joint
-     * space to Cartesian space of a general kinematic tree (KDL::Tree),
-     * using TreeSerialization.
+     * space to Cartesian space of a general kinematic tree (KDL::Tree).
      * 
      * \todo add copy constructor?: also for other solvers ? 
      *
      */
-    class TreeFkSolverPos_iterative
+    class TreeFkSolverPos_iterative: public UndirectedTreeSolver
     {
     private:
-        const TreeGraph tree_graph;
-        Traversal traversal;
     
     public:
-        TreeFkSolverPos_iterative (const Tree& tree_arg, const std::string & base_link="", TreeSerialization serialization_arg=TreeSerialization());
+        TreeFkSolverPos_iterative (const Tree& tree_arg, TreeSerialization serialization_arg=TreeSerialization());
         ~TreeFkSolverPos_iterative();
         
-        /**
-         * Change the base_link of the solver
-         * 
-         */
-        int setBaseLink(const std::string & base_link);
-        
-        TreeGraph getTreeGraph() const { return tree_graph; }
-
         int JntToCart(const KDL::JntArray& q_in, Frame& p_out, std::string segmentName);
         int JntToCart(const KDL::JntArray& q_in, Frame& p_out, const int segmentIndex);
         

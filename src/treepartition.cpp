@@ -30,7 +30,7 @@ namespace CoDyCo {
         int part_local_index = it_ii->second;
         
         return part_local_index;
-	}*/
+    }*/
     
     TreePart::TreePart(): part_id(-1), part_name("TreePartError"), dof_id(0), links_id(0)
     {
@@ -49,15 +49,15 @@ namespace CoDyCo {
     }
      
     TreePart& TreePart::operator=(const TreePart& x) 
-	{
-		if ( this != &x ) { 
-			this->part_id = x.part_id;
-			this->part_name = x.part_name;
-			this->dof_id = x.dof_id;
-			this->links_id = x.links_id;
-		}
-		return *this;
-	}
+    {
+        if ( this != &x ) { 
+            this->part_id = x.part_id;
+            this->part_name = x.part_name;
+            this->dof_id = x.dof_id;
+            this->links_id = x.links_id;
+        }
+        return *this;
+    }
            
     int TreePart::getNrOfLinks() const
     {
@@ -81,8 +81,8 @@ namespace CoDyCo {
     
     std::string TreePart::toString() const
     {
-		std::stringstream ss;
-		ss << "TreePart: " << part_id << " " << part_name << std::endl;
+        std::stringstream ss;
+        ss << "TreePart: " << part_id << " " << part_name << std::endl;
         return ss.str();
     }
     
@@ -128,7 +128,7 @@ namespace CoDyCo {
 
     bool TreePartition::addPart(TreePart & tree_part)
     {
-		int part_index = parts.size();
+        int part_index = parts.size();
         parts.push_back(tree_part);
         ID_map.insert(std::make_pair(tree_part.getPartID(),part_index));
         name_map.insert(std::make_pair(tree_part.getPartName(),part_index));

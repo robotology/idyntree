@@ -23,55 +23,23 @@
 
 namespace KDL {
 namespace CoDyCo {
-    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg,
-                                                         const std::string & base_link, 
+    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg, 
                                                          TreeSerialization serialization_arg):    
-                tree_graph(tree_arg,serialization_arg)
+                UndirectedTreeSolver(tree_arg,serialization_arg)
     {
-
-        #ifndef NDEBUG
-        //std::cerr << "Check consistency in the constructor of TreeFkSolverPos" << std::endl;
-        //assert(tree_graph.check_consistency() == 0);
-        #endif
-        
-        int ret = tree_graph.compute_traversal(traversal,base_link);
-
-        if( ret != 0 ) {
-            tree_graph.compute_traversal(traversal);
-            assert(tree_graph.check_consistency(traversal) == 0);
-
-        }
     }
     
     TreeFkSolverPos_iterative::~TreeFkSolverPos_iterative()
     {
     }
     
-    int TreeFkSolverPos_iterative::setBaseLink(const std::string & base_link)
-    {
-        assert(tree_graph.check_consistency(traversal) == 0);
-        
-        //Compute traversal using the new specified base as root
-        int ret = tree_graph.compute_traversal(traversal,base_link);
-        
-        assert(tree_graph.check_consistency(traversal) == 0);
-        
-        if( ret != 0 ) {
-            //If error, restore default state
-            tree_graph.compute_traversal(traversal);
-            assert(tree_graph.check_consistency(traversal) == 0);
-            return -1;
-        } else {
-            return 0;
-        }
-    }
 
     int TreeFkSolverPos_iterative::JntToCart(const KDL::JntArray& q_in, Frame& p_out, std::string segmentName)
     {
         LinkMap::const_iterator it;
-        it = tree_graph.getLink(segmentName);
+        it = undirected_tree.getLink(segmentName);
         
-        if( it == tree_graph.getInvalidLinkIterator() ) 
+        if( it == undirected_tree.getInvalidLinkIterator() ) 
             return -2;
             
         return JntToCart(q_in,p_out,it->link_nr);
@@ -81,16 +49,16 @@ namespace CoDyCo {
     {
         assert(tree_graph.check_consistency(traversal) == 0);
         
-        if( q_in.rows() != tree_graph.getNrOfDOFs() )
+        if( q_in.rows() != undirected_tree.getNrOfDOFs() )
             return -1;
             
         LinkMap::const_iterator it;
-        it = tree_graph.getLink(segmentIndex);
+        it = undirected_tree.getLink(segmentIndex);
         
-        if( it == tree_graph.getInvalidLinkIterator() ) 
+        if( it == undirected_tree.getInvalidLinkIterator() ) 
             return -2;
         
-        getFrameLoop(tree_graph,q_in,traversal,traversal.order[0]->link_nr,segmentIndex,p_out);
+        getFrameLoop(undirected_tree,q_in,traversal,traversal.order[0]->link_nr,segmentIndex,p_out);
         return 0;    	
     }
 }

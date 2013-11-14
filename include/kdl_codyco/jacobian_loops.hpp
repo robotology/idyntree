@@ -28,7 +28,7 @@ namespace CoDyCo {
    /**
     * Loop for calculating, given a TreeGraph and a Traversal, the 
     * floating base jacobian for a given link with respect to the base defined in the Traversal
-    * @param jac a 6 x (nrOfDOFs+6) Jacobian such that \f$ v_link_index = J dq_fl \f$ expressed in link_index frame
+    * @param jac a 6 x (nrOfDOFs+6) Jacobian such that \f$ v_link_index = J dq_fl \f$ expressed in the frame of the link with ID link_index frame
     */
    void getFloatingBaseJacobianLoop(const TreeGraph & tree_graph,
                                    const KDL::JntArray &q, 
