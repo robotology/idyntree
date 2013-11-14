@@ -42,7 +42,7 @@ if(NOT orocos_kdl_FOUND)
       set(orocos_kdl_LIBRARIES ${Orocos-KDL_LIBRARIES})
       set(orocos_kdl_FOUND true)
    endif(NOT Orocos-KDL_FOUND)
-endif(NOT kdl_codyco_FOUND)
+endif(NOT orocos_kdl_FOUND)
 
 set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES kdl_codyco)
