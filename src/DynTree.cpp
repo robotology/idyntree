@@ -469,7 +469,7 @@ yarp::sig::Vector DynTree::setAng(const yarp::sig::Vector & _q, const std::strin
     } else { // if part_name.length > 0 
         std::vector<int> dof_ids;
         dof_ids = partition.getPartDOFIDs(part_name);
-        if( dof_ids.size() != _q.size() ) { std::cerr << "setAng: Input vector has a wrong number of elements (or part_name wrong)" << std::endl; return yarp::sig::Vector(0); }
+        if( dof_ids.size() != _q.size() ) { std::cerr << "setAng: Input vector has a wrong number of elements (or part_name " << part_name << " wrong)" << std::endl; return yarp::sig::Vector(0); }
         for(int i = 0; i < (int)dof_ids.size(); i++ ) {
             ret_q[i] = setAng(_q[i],dof_ids[i]);
         }
@@ -503,7 +503,7 @@ yarp::sig::Vector DynTree::setDAng(const yarp::sig::Vector & _q, const std::stri
     else 
     {
         const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
-        if( dof_ids.size() != _q.size() ) { std::cerr << "setDAng: Input vector has a wrong number of elements (or part_name wrong)" << std::endl; return yarp::sig::Vector(0); }
+        if( dof_ids.size() != _q.size() ) { std::cerr << "setDAng: Input vector has a wrong number of elements (or part_name " << part_name << " wrong)" << std::endl; return yarp::sig::Vector(0); }
         for(int i = 0; i < (int)dof_ids.size(); i++ ) {
             dq(dof_ids[i]) = _q[i];
         }
@@ -547,7 +547,7 @@ yarp::sig::Vector DynTree::setD2Ang(const yarp::sig::Vector & _q, const std::str
     else 
     {
         const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
-        if( dof_ids.size() != _q.size() ) { std::cerr << "setD2Ang: Input vector has a wrong number of elements (or part_name wrong)" << std::endl; return yarp::sig::Vector(0); }
+        if( dof_ids.size() != _q.size() ) { std::cerr << "setD2Ang: Input vector has a wrong number of elements (or part_name " << part_name << " wrong)" << std::endl; return yarp::sig::Vector(0); }
         for(int i = 0; i < (int)dof_ids.size(); i++ ) {
             ddq(dof_ids[i]) = _q[i];
         }
