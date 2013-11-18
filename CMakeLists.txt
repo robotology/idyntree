@@ -34,8 +34,24 @@ option(ENABLE_SYMORO_PAR "Enable support for SYMORO par input" TRUE)
 ## KDL::CoDyCo::TreeSerialization support
 option(ENABLE_SERIALIZATION_IO "Enable support for parsing and writing serialization (need kdl_codyco)" TRUE)
 
-find_package(Orocos-KDL REQUIRED)
-include_directories(SYSTEM  ${Orocos-KDL_INCLUDE_DIRS})
+find_package(orocos_kdl REQUIRED)
+
+#support also for the old version of kdl cmake package
+if(NOT orocos_kdl_FOUND)
+   find_package(Orocos-KDL)
+   if(NOT Orocos-KDL_FOUND)
+      message(WARNING "KDL not found: neither orocos_kdl or Orocos-KDL cmake packages are available")
+   else(NOT Orocos-KDL_FOUND)
+      set(orocos_kdl_INCLUDE_DIRS ${Orocos-KDL_INCLUDE_DIRS})
+      set(orocos_kdl_LIBRARY_DIRS ${Orocos-KDL_LIBRARY_DIRS})
+      set(orocos_kdl_LIBRARIES ${Orocos-KDL_LIBRARIES})
+      set(orocos_kdl_FOUND true)
+   endif(NOT Orocos-KDL_FOUND)
+endif(NOT orocos_kdl_FOUND)
+
+
+
+include_directories(SYSTEM  ${orocos_kdl_INCLUDE_DIRS})
 
 IF( ENABLE_URDF ) 
     find_package(TinyXML)
@@ -123,15 +139,15 @@ endif()
 add_library(kdl_format_io SHARED ${URDF_SRCS} ${SYMORO_PAR_SRCS})
 
 IF(ENABLE_SERIALIZATION_IO)
-    target_link_libraries(kdl_format_io kdl_codyco ${URDF_LIBS}  ${Orocos-KDL_LIBRARIES})
+    target_link_libraries(kdl_format_io kdl_codyco ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
 ELSE()
-    target_link_libraries(kdl_format_io ${URDF_LIBS}  ${Orocos-KDL_LIBRARIES})
+    target_link_libraries(kdl_format_io ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
 ENDIF()
 
 
 IF( ENABLE_URDF AND ENABLE_SYMORO_PAR )
     add_executable(par2urdf src/utils/par2urdf.cpp)
-    target_link_libraries(par2urdf kdl_format_io ${URDF_LIBS} ${Orocos-KDL_LIBRARIES})
+    target_link_libraries(par2urdf kdl_format_io ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
@@ -153,7 +169,7 @@ install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPON
 # Make the package config file
 if (NOT MSVC)
   set(PKG_DESC "Kinematics Dynamics Library support for various robot description formats")
-  set(PKG_DEPENDS "Orocos-KDL urdfdom urdfdom_headers console_bridge") # make the list separated by spaces instead of ;
+  set(PKG_DEPENDS "orocos_kdl urdfdom urdfdom_headers console_bridge") # make the list separated by spaces instead of ;
   set(PKG_URDF_LIBS "-lkdl_format_io")
   set(pkg_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/pkgconfig/kdl_format_io.pc")
   configure_file("${pkg_conf_file}.in" "${pkg_conf_file}" @ONLY)
