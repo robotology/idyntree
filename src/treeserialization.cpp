@@ -5,7 +5,6 @@
  */
   
 #include "kdl_codyco/treeserialization.hpp"
-#include "kdl_codyco/tree_rotation.hpp"
 #include <kdl/joint.hpp>
 #include <algorithm>
 #include <cassert>
