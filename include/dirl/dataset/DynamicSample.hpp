@@ -12,7 +12,6 @@
 #include <Eigen/Core>
 
 #include <vector>
-#include <boost/concept_check.hpp>
 
 /*! \file DynamicSample.hpp define structures for state and sensor sample representation */
 
