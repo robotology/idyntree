@@ -74,6 +74,7 @@ KDL::Twist DynamicStateSample::getBaseVelocity() const
 bool DynamicStateSample::setBaseVelocity(const KDL::Twist & _base_vel)
 {
     base_vel = _base_vel;
+    return true;
 }
 
 KDL::Twist DynamicStateSample::getBaseSpatialAcceleration() const
@@ -84,6 +85,7 @@ KDL::Twist DynamicStateSample::getBaseSpatialAcceleration() const
 bool DynamicStateSample::setBaseSpatialAcceleration(const KDL::Twist & _base_acc)
 {
     base_acc = _base_acc;
+    return true;
 }
 
 
@@ -109,6 +111,7 @@ bool DynamicStateSample::setBaseClassicalAcceleration(const KDL::Twist & classic
      */
     base_acc.rot = classical_base_acc.rot;
     base_acc.rot = classical_base_acc.vel + base_vel.vel*base_vel.rot; 
+    return true;
 }
     
 const KDL::JntArray & DynamicStateSample::getJointPosition() const

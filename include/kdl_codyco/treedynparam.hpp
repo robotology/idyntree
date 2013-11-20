@@ -56,7 +56,6 @@ namespace CoDyCo {
         virtual int JntToMass(const JntArray &q, FloatingJntSpaceInertiaMatrix& H); 
 
     private:
-        int nr;
         unsigned int nj;
         unsigned int ns;	
         Vector grav;

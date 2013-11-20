@@ -119,8 +119,8 @@ public:
 
 class DynamicSensorSample {
 private:
-    int nrOfWrenchSensors;
     int nrOfTorqueSensors;
+    int nrOfWrenchSensors;
     int nrOfThreeAxisFTSensors;
     KDL::JntArray torque_sensors_measures;
     std::vector<KDL::Wrench> wrench_sensors_measures;
