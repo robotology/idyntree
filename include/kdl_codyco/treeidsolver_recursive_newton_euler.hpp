@@ -31,7 +31,6 @@
 namespace KDL{
 namespace CoDyCo{
     /**
-     * \note CURRENTLY BROKEN!!!
      * 
      * \brief Recursive newton euler inverse dynamics solver
      *

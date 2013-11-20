@@ -35,7 +35,7 @@ namespace CoDyCo {
     {
     }
     
-    int TreeJntToCOMJacSolver::JntToJac(const JntArray& q_in, Jacobian& jac)
+    int TreeJntToCOMJacSolver::JntToCOMJac(const JntArray& q_in, Jacobian& jac)
     {
         if( q_in.rows() != undirected_tree.getNrOfDOFs() ||
             jac.columns() != (undirected_tree.getNrOfDOFs() + 6) ) return -1;
@@ -49,6 +49,17 @@ namespace CoDyCo {
         jac.data.block(0,0,3,jac.data.cols()) = (1/m)*h_jac.data.block(0,0,3,h_jac.data.cols());
         jac.data.block(3,0,3,jac.data.cols()) = Eigen::Map<Eigen::Matrix3d>(com_inertia.data).inverse()*h_jac.data.block(3,0,3,h_jac.data.cols());
         
+        return 0;
+    }
+    
+    int TreeJntToCOMJacSolver::JntToMomentumJac(const JntArray& q_in, MomentumJacobian& jac)
+    {
+        if( q_in.rows() != undirected_tree.getNrOfDOFs() ||
+            jac.columns() != (undirected_tree.getNrOfDOFs() + 6) ) return -1;
+        
+        //Get centroidal momentum jacobian and com spatial inertia
+        if( crba_momentum_jacobian_loop(undirected_tree,traversal,q_in,Ic,jac,I_com) != 0 ) return -2;
+              
         return 0;
     }
 

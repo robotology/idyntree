@@ -47,7 +47,7 @@ namespace CoDyCo {
 
     int TreeFkSolverPos_iterative::JntToCart(const KDL::JntArray& q_in, Frame& p_out, int segmentIndex)
     {
-        assert(tree_graph.check_consistency(traversal) == 0);
+        assert(undirected_tree.check_consistency(traversal) == 0);
         
         if( q_in.rows() != undirected_tree.getNrOfDOFs() )
             return -1;

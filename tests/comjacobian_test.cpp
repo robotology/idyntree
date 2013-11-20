@@ -99,7 +99,7 @@ int main()
     }
     
     //Inserting the random input data in both solvers, while checking all went well
-    int ret = com_jac_slv.JntToJac(q,com_jac);
+    int ret = com_jac_slv.JntToCOMJac(q,com_jac);
     if( ret != 0 ) { std::cerr << "Error " << ret << " in jacobian solver" << std::endl; return -1; }
 
     //Tryng to get the same result with local O(n^2) algorithm

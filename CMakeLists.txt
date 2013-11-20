@@ -54,14 +54,14 @@ if (NOT MSVC)
   install(FILES ${pkg_conf_file} DESTINATION lib/pkgconfig/ COMPONENT pkgconfig)
 endif()
 
-include_directories(include ${orocos_kdl_INCLUDE_DIRS})
+include_directories(include ./include/dirl ./include/dirl/dataset ${orocos_kdl_INCLUDE_DIRS})
 
 file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
 )
 
 file(GLOB DIRL_SRC 
-    "src/dirl/*.cpp"
+    "src/dirl/*.cpp" "src/dirl/dataset/*.cpp"
 )
 
 if(MSVC)
@@ -78,6 +78,9 @@ target_link_libraries(kdl_codyco ${orocos_kdl_LIBRARIES})
 INSTALL(TARGETS kdl_codyco EXPORT kdl_codyco-target DESTINATION lib)
 INSTALL(DIRECTORY include/kdl_codyco DESTINATION include) 
 INSTALL(DIRECTORY include/dirl       DESTINATION include)
+INSTALL(DIRECTORY include/dirl/dataset       DESTINATION include/dirl)
+
+
 
 option(CREATE_TESTS "Create regression tests using CMake" FALSE)
 

@@ -12,9 +12,7 @@
 
 namespace KDL{
 namespace CoDyCo{
-    
-    const int FIXED_JOINT = -1;
-    
+        
     /**
      * Class for describing a Tree serialization
      * (i.e. a mapping between:
@@ -127,20 +125,7 @@ namespace CoDyCo{
          * 
          */
         bool is_consistent(const Tree & tree) const;
-        
-        /**
-         * deprecated
-         * 
-         */
-        bool serialize(const Tree & tree,
-                       std::vector< int> & children_root, //set of children of root
-                       std::vector< std::vector<int> > & children, //array of sets of children of each segment
-                       std::vector< int > & parent, //array of parent of each segment
-                       std::vector< int> & link2joint, //array mapping 
-                       std::vector< int > & visit_order, //Visiting order for the tree, such that a parent is visited before any of his children
-                       std::vector<SegmentMap::const_iterator> & seg_vector //array of mapping between link index and SegmentMap iterators
-                       );
-                                         
+              
         std::string toString();
     };
     
