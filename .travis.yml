@@ -4,6 +4,10 @@ compiler:
   - gcc
   - clang
 
+matrix:
+  exclude:
+    - compiler: clang
+
 before_script:
   - sudo apt-get install -qq libboost-system-dev libboost-thread-dev libtinyxml-dev
   - sudo chmod +x ./.travis/build_urdfdom
