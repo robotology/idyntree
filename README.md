@@ -60,3 +60,14 @@ sudo make install
 ### urdfdom
 To compile URDF support in kdl_format_io, you have to install the [urdfdom library](https://github.com/ros/urdfdom).
 
+### kdl_format_io
+The installation is based on CMake, for example on Linux you can install it with this commands:
+```
+git clone https://github.com/traversaro/kdl_format_io.git
+cd kdl_format_io
+mkdir build
+cd build
+ccmake ../
+make
+sudo make install
+```
