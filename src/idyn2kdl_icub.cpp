@@ -7,8 +7,6 @@
 
 #include <iCub/iDynTree/idyn2kdl_icub.h>
 
-#include <kdl_codyco/treegraph.hpp>
-
 template<typename T, size_t N>
 T * end(T (&ra)[N]) {
     return ra + N;
@@ -263,7 +261,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn, KDL::Tree & icub_kdl, KD
     KDL::Segment kdlSegment = KDL::Segment("torso",KDL::Joint("torso_joint",KDL::Joint::None));
     icub_kdl.addSegment(kdlSegment,arms_head_base_name);    
     
-    //std::cout << "Returning from KDL: " << KDL::CoDyCo::TreeGraph(icub_kdl).toString() << std::endl;
+    //std::cout << "Returning from KDL: " << KDL::CoDyCo::UndirectedTree(icub_kdl).toString() << std::endl;
     
     return true;
     

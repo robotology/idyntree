@@ -51,7 +51,7 @@ DynTree::DynTree(const KDL::Tree & _tree,
                    const std::string & imu_link_name,
                    KDL::CoDyCo::TreeSerialization serialization,
                    KDL::CoDyCo::TreePartition _partition
-                   ):  tree_graph(_tree,serialization,_partition)
+                   ):  undirected_tree(_tree,serialization,_partition)
 {constructor(_tree,joint_sensor_names,imu_link_name,serialization,_partition);
 }
 
@@ -65,7 +65,7 @@ void DynTree::constructor(const KDL::Tree & _tree,
 {
 int ret;
     
-    tree_graph = KDL::CoDyCo::TreeGraph(_tree,serialization,_partition);  
+    undirected_tree = KDL::CoDyCo::UndirectedTree(_tree,serialization,_partition);  
     partition = _partition;
     
     //Setting useful constants
@@ -74,8 +74,8 @@ int ret;
     NrOfFTSensors = joint_sensor_names.size();
     NrOfDynamicSubGraphs = NrOfFTSensors + 1;
     
-    assert((int)tree_graph.getNrOfDOFs() == NrOfDOFs);
-    assert((int)tree_graph.getNrOfLinks() == NrOfLinks);
+    assert((int)undirected_tree.getNrOfDOFs() == NrOfDOFs);
+    assert((int)undirected_tree.getNrOfLinks() == NrOfLinks);
     
     world_base_frame = KDL::Frame::Identity();
     
@@ -106,7 +106,7 @@ int ret;
     f_ext = std::vector<KDL::Wrench>(NrOfLinks,KDL::Wrench::Zero());     
         
     //Create default kinematic traversal (if imu_names is wrong, creating the default one)   
-    ret = tree_graph.compute_traversal(kinematic_traversal,imu_link_name);
+    ret = undirected_tree.compute_traversal(kinematic_traversal,imu_link_name);
     
     if( ret < 0 ) { std::cerr << "iDynTree constructor: imu_link_name not found" << std::endl; }
     assert(ret == 0);
@@ -116,7 +116,7 @@ int ret;
     //wrenches are not estimated and are assume acting on the base. 
     //If the external forces are properly estimated, the base link for dynamic loop should not 
     //affect the results (i.e. 
-    ret = tree_graph.compute_traversal(dynamic_traversal);
+    ret = undirected_tree.compute_traversal(dynamic_traversal);
     assert(ret == 0);
     
     //iDynTreeContact
@@ -184,7 +184,7 @@ int DynTree::buildSubGraphStructure(const std::vector<std::string> & ft_names)
         if( i == 0 ) {
             
             //Starting with the dynamical base link, assign an index to the subgraph
-            assert( dynamic_traversal.parent[link_nmbr] == tree_graph.getInvalidLinkIterator() );
+            assert( dynamic_traversal.parent[link_nmbr] == undirected_tree.getInvalidLinkIterator() );
             link2subgraph_index[link_nmbr] = next_id;
             
             //The dynamical base link is the root of its subgraph
@@ -219,7 +219,7 @@ int DynTree::buildSubGraphStructure(const std::vector<std::string> & ft_names)
     }
     
     //Building Force/Torque sensors data structures
-    ft_list = KDL::CoDyCo::FTSensorList(tree_graph,ft_names);
+    ft_list = KDL::CoDyCo::FTSensorList(undirected_tree,ft_names);
 
     //The numbers of ids must be equal to the number of subgraphs
     if(next_id == NrOfDynamicSubGraphs) {
@@ -330,7 +330,7 @@ void DynTree::buildAb_contacts()
             
             //Get Frame transform between contact link and subgraph root
             //Inefficient but leads to cleaner code, if necessary can be improved 
-            KDL::Frame H_root_link = getFrameLoop(tree_graph,q,dynamic_traversal,subgraph_root,link_contact_index);
+            KDL::Frame H_root_link = getFrameLoop(undirected_tree,q,dynamic_traversal,subgraph_root,link_contact_index);
             
             KDL::Vector COP;
             YarptoKDL(it->getCoP(),COP); 
@@ -717,7 +717,7 @@ bool DynTree::getConstraint(unsigned int i) { return constrained[i]; }
 
 yarp::sig::Matrix DynTree::getPosition(const int link_index,bool inverse) const
 {
-    if( link_index < 0 || link_index >= (int)tree_graph.getNrOfLinks() ) { std::cerr << "DynTree::getPosition: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Matrix(0,0); }
+    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getPosition: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Matrix(0,0); }
     computePositions();
     if( !inverse ) {
         return KDLtoYarp_position(world_base_frame*X_dynamic_base[link_index]);
@@ -728,15 +728,15 @@ yarp::sig::Matrix DynTree::getPosition(const int link_index,bool inverse) const
 
 yarp::sig::Matrix DynTree::getPosition(const int first_link, const int second_link) const
 {
-   if( first_link < 0 || first_link >= (int)tree_graph.getNrOfLinks() ) { std::cerr << "DynTree::getPosition: link index " << first_link <<  " out of bounds" << std::endl; return yarp::sig::Matrix(0,0); }
-   if( second_link < 0 || second_link >= (int)tree_graph.getNrOfLinks() ) { std::cerr << "DynTree::getPosition: link index " << second_link <<  " out of bounds" << std::endl; return yarp::sig::Matrix(0,0); }
+   if( first_link < 0 || first_link >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getPosition: link index " << first_link <<  " out of bounds" << std::endl; return yarp::sig::Matrix(0,0); }
+   if( second_link < 0 || second_link >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getPosition: link index " << second_link <<  " out of bounds" << std::endl; return yarp::sig::Matrix(0,0); }
    computePositions();
    return KDLtoYarp_position(X_dynamic_base[first_link].Inverse()*X_dynamic_base[second_link]);
 }
 
 yarp::sig::Vector DynTree::getVel(const int link_index, bool local) const
 {
-    if( link_index < 0 || link_index >= (int)tree_graph.getNrOfLinks() ) { std::cerr << "DynTree::getVel: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
+    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getVel: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
     yarp::sig::Vector ret(6), lin_vel(3), ang_vel(3);
     KDL::Twist return_twist;
     
@@ -756,7 +756,7 @@ yarp::sig::Vector DynTree::getVel(const int link_index, bool local) const
 
 yarp::sig::Vector DynTree::getAcc(const int link_index) const
 {
-    if( link_index < 0 || link_index >= (int)tree_graph.getNrOfLinks() ) { std::cerr << "DynTree::getAcc: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
+    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getAcc: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
     yarp::sig::Vector ret(6), classical_lin_acc(3), ang_acc(3);
     KDLtoYarp(a[link_index].vel+v[link_index].rot*v[link_index].vel,classical_lin_acc);
     KDLtoYarp(a[link_index].rot,ang_acc);
@@ -838,8 +838,8 @@ const iCub::skinDynLib::dynContactList DynTree::getContacts() const
 bool DynTree::computePositions() const
 {
     if( !is_X_dynamic_base_updated ) { 
-        if(X_dynamic_base.size() != tree_graph.getNrOfLinks()) { X_dynamic_base.resize(tree_graph.getNrOfLinks()); }
-        if( getFramesLoop(tree_graph,q,dynamic_traversal,X_dynamic_base) == 0 ) {
+        if(X_dynamic_base.size() != undirected_tree.getNrOfLinks()) { X_dynamic_base.resize(undirected_tree.getNrOfLinks()); }
+        if( getFramesLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base) == 0 ) {
             is_X_dynamic_base_updated = true;
             return true;
         }
@@ -853,7 +853,7 @@ bool DynTree::computePositions() const
 bool DynTree::kinematicRNEA()
 {
     int ret;
-    ret = rneaKinematicLoop(tree_graph,q,dq,ddq,kinematic_traversal,imu_velocity,imu_acceleration,v,a);
+    ret = rneaKinematicLoop(undirected_tree,q,dq,ddq,kinematic_traversal,imu_velocity,imu_acceleration,v,a);
     
     are_contact_estimated = false;
     
@@ -878,7 +878,7 @@ bool DynTree::dynamicRNEA()
 {
     int ret;
     KDL::Wrench base_force;
-    ret = rneaDynamicLoop(tree_graph,q,dynamic_traversal,v,a,f_ext,f,torques,base_force);
+    ret = rneaDynamicLoop(undirected_tree,q,dynamic_traversal,v,a,f_ext,f,torques,base_force);
     //Check base force: if estimate contact was called, it should be zero
     if( are_contact_estimated == true ) {
         //If the force were estimated wright
@@ -917,7 +917,7 @@ bool DynTree::dynamicRNEA()
 
 yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index) 
 {
-    if( (link_index < 0 || link_index >= (int)tree_graph.getNrOfLinks()) && link_index != -1 ) { std::cerr << "DynTree::getCOM: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
+    if( (link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks()) && link_index != -1 ) { std::cerr << "DynTree::getCOM: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
     if( com_yarp.size() != 3 ) { com_yarp.resize(3); }
     if( (int)subtree_COM.size() != getNrOfLinks() ) { subtree_COM.resize(getNrOfLinks()); }
     if( (int)subtree_mass.size() != getNrOfLinks() ) { subtree_mass.resize(getNrOfLinks()); }
@@ -931,7 +931,7 @@ yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index)
     } 
     
     KDL::Vector com;                   
-    getCenterOfMassLoop(tree_graph,q,dynamic_traversal,subtree_COM,subtree_mass,com,part_id);
+    getCenterOfMassLoop(undirected_tree,q,dynamic_traversal,subtree_COM,subtree_mass,com,part_id);
     
     KDL::Vector com_world, com_return;
     
@@ -952,35 +952,6 @@ yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index)
 
 bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, const std::string & part_name) 
 {
-    /*
-    if( (int)com_jacobian.columns() != 6+getNrOfDOFs() ) { com_jacobian.resize(6+getNrOfDOFs()); }
-    if( (int)com_jac_buffer.columns() != 6+getNrOfDOFs() ) { com_jac_buffer.resize(6+getNrOfDOFs()); }
-    
-    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+tree_graph.getNrOfDOFs()) ) {
-        jac.resize(6,6+tree_graph.getNrOfDOFs());
-    }
-    
-    int part_id;
-    if( part_name.length() == 0 ) {
-        part_id = -1; 
-    } else {
-        part_id = partition.getPartIDfromPartName(part_name);
-        if( part_id == -1 ) { std::cerr << "getCOMJacobian error: Part name " << part_name << " not recognized " << std::endl; return false; }
-    } 
-    
-    computePositions();
-    
-    getCOMJacobianLoop(tree_graph,q,dynamic_traversal,X_dynamic_base,com_jacobian,com_jac_buffer,part_id);
-    
-    //Rotate the jacobian to the world 
-    com_jacobian.changeBase(world_base_frame.M);
-    
-    Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_jacobian(jac.data(),jac.rows(),jac.cols());
-
-    mapped_jacobian = com_jacobian.data;
-    
-    return true;
-    */
     yarp::sig::Matrix dummy;
     return getCOMJacobian(jac,dummy,part_name);
 }
@@ -992,12 +963,12 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & moment
     if( (int)com_jac_buffer.columns() != 6+getNrOfDOFs() ) { com_jac_buffer.resize(6+getNrOfDOFs()); }
     if( (int)momentum_jac_buffer.columns() != 6+getNrOfDOFs() ) { momentum_jac_buffer.resize(6+getNrOfDOFs()); }
     
-    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+tree_graph.getNrOfDOFs()) ) {
-        jac.resize(6,6+tree_graph.getNrOfDOFs());
+    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+        jac.resize(6,6+undirected_tree.getNrOfDOFs());
     }
     
-    if( momentum_jac.rows() != (int)(6) || momentum_jac.cols() != (int)(6+tree_graph.getNrOfDOFs()) ) {
-        momentum_jac.resize(6,6+tree_graph.getNrOfDOFs());
+    if( momentum_jac.rows() != (int)(6) || momentum_jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+        momentum_jac.resize(6,6+undirected_tree.getNrOfDOFs());
     }
     
     int part_id;
@@ -1012,7 +983,7 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & moment
     
     KDL::RigidBodyInertia base_total_inertia;
     
-    getMomentumJacobianLoop(tree_graph,q,dynamic_traversal,X_dynamic_base,momentum_jacobian,com_jac_buffer,momentum_jac_buffer,base_total_inertia,part_id);
+    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jacobian,com_jac_buffer,momentum_jac_buffer,base_total_inertia,part_id);
 
     
     momentum_jacobian.changeRefFrame(world_base_frame);
@@ -1062,8 +1033,8 @@ yarp::sig::Vector DynTree::getVelCOM()
     KDL::Vector mdcom_world;
     KDL::Vector dcom_world;
     for(int i=0; i < getNrOfLinks(); i++ ) {
-        double m_i = tree_graph.getLink(i)->getInertia().getMass();
-        KDL::Vector com_i = tree_graph.getLink(i)->getInertia().getCOG();
+        double m_i = undirected_tree.getLink(i)->getInertia().getMass();
+        KDL::Vector com_i = undirected_tree.getLink(i)->getInertia().getCOG();
         mdcom += X_dynamic_base[i].M*(m_i*(v[i].RefPoint(com_i)).vel);
         m += m_i;
     }
@@ -1089,8 +1060,8 @@ yarp::sig::Vector DynTree::getMomentum()
     KDL::Wrench mom;
     KDL::Wrench mom_world;
     for(int i=0; i < getNrOfLinks(); i++ ) {
-        double m_i = tree_graph.getLink(i)->getInertia().getMass();
-        mom += (X_dynamic_base[i]*(tree_graph.getLink(i)->getInertia()*v[i]));
+        double m_i = undirected_tree.getLink(i)->getInertia().getMass();
+        mom += (X_dynamic_base[i]*(undirected_tree.getLink(i)->getInertia()*v[i]));
         m += m_i;
     }
     
@@ -1108,14 +1079,14 @@ yarp::sig::Vector DynTree::getMomentum()
 ////////////////////////////////////////////////////////////////////////
 bool DynTree::getJacobian(const int link_index, yarp::sig::Matrix & jac, bool local)
 {
-    if( link_index < 0 || link_index >= (int)tree_graph.getNrOfLinks() ) { std::cerr << "DynTree::getJacobian: link index " << link_index <<  " out of bounds" << std::endl; return false; }
-    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+tree_graph.getNrOfDOFs()) ) {
-        jac.resize(6,6+tree_graph.getNrOfDOFs());
+    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getJacobian: link index " << link_index <<  " out of bounds" << std::endl; return false; }
+    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+        jac.resize(6,6+undirected_tree.getNrOfDOFs());
     }
     
-    if( abs_jacobian.rows() != 6 || abs_jacobian.columns() != 6+tree_graph.getNrOfDOFs() ) { abs_jacobian.resize(6+tree_graph.getNrOfDOFs()); } 
+    if( abs_jacobian.rows() != 6 || abs_jacobian.columns() != 6+undirected_tree.getNrOfDOFs() ) { abs_jacobian.resize(6+undirected_tree.getNrOfDOFs()); } 
     
-    getFloatingBaseJacobianLoop(tree_graph,q,dynamic_traversal,link_index,abs_jacobian);
+    getFloatingBaseJacobianLoop(undirected_tree,q,dynamic_traversal,link_index,abs_jacobian);
     
     /** \todo compute only the needed rototranslation */
     computePositions();
@@ -1156,11 +1127,11 @@ bool DynTree::getJacobian(const int link_index, yarp::sig::Matrix & jac, bool lo
     
 bool DynTree::getRelativeJacobian(const int jacobian_distal_link, const int jacobian_base_link, yarp::sig::Matrix & jac, bool global)
 {    
-    if( jac.rows() != (int)(6) || jac.cols() != (int)(tree_graph.getNrOfDOFs()) ) {
-        jac.resize(6,tree_graph.getNrOfDOFs());
+    if( jac.rows() != (int)(6) || jac.cols() != (int)(undirected_tree.getNrOfDOFs()) ) {
+        jac.resize(6,undirected_tree.getNrOfDOFs());
     }
     
-    if( rel_jacobian.rows() != 6 || rel_jacobian.columns() != tree_graph.getNrOfDOFs() ) { rel_jacobian.resize(tree_graph.getNrOfDOFs()); } 
+    if( rel_jacobian.rows() != 6 || rel_jacobian.columns() != undirected_tree.getNrOfDOFs() ) { rel_jacobian.resize(undirected_tree.getNrOfDOFs()); } 
     
     /*
      if the specified jacobian_base_link is the base in dynamic_traversal, kinematic_traversal or rel_jacobian_traversal
@@ -1173,15 +1144,15 @@ bool DynTree::getRelativeJacobian(const int jacobian_distal_link, const int jaco
     } else if ( kinematic_traversal.order[0]->getLinkIndex() == jacobian_base_link ) {
         p_traversal = &kinematic_traversal;
     } else {
-       if( rel_jacobian_traversal.order.size() != tree_graph.getNrOfLinks() ||  rel_jacobian_traversal.order[0]->getLinkIndex() == jacobian_base_link  ) {
-            tree_graph.compute_traversal(rel_jacobian_traversal,jacobian_base_link);
+       if( rel_jacobian_traversal.order.size() != undirected_tree.getNrOfLinks() ||  rel_jacobian_traversal.order[0]->getLinkIndex() == jacobian_base_link  ) {
+            undirected_tree.compute_traversal(rel_jacobian_traversal,jacobian_base_link);
        }
        p_traversal = &rel_jacobian_traversal;
     }
     
     assert( p_traversal->order[0]->getLinkIndex() == jacobian_base_link );
     
-    getRelativeJacobianLoop(tree_graph,q,*p_traversal,jacobian_distal_link,rel_jacobian);
+    getRelativeJacobianLoop(undirected_tree,q,*p_traversal,jacobian_distal_link,rel_jacobian);
     
     if( global ) {
         computePositions();
@@ -1202,8 +1173,8 @@ bool DynTree::getRelativeJacobian(const int jacobian_distal_link, const int jaco
 bool DynTree::getDynamicsRegressor(yarp::sig::Matrix & mat)
 {
     //If the incoming matrix have the wrong number of rows/colums, resize it
-    if( mat.rows() != (int)(6+tree_graph.getNrOfDOFs()) || mat.cols() != (int)(10*tree_graph.getNrOfLinks()) ) {
-        mat.resize(6+tree_graph.getNrOfDOFs(),10*tree_graph.getNrOfLinks());
+    if( mat.rows() != (int)(6+undirected_tree.getNrOfDOFs()) || mat.cols() != (int)(10*undirected_tree.getNrOfLinks()) ) {
+        mat.resize(6+undirected_tree.getNrOfDOFs(),10*undirected_tree.getNrOfLinks());
     }
     
     //Calculate the result directly in the output matrix
@@ -1213,10 +1184,10 @@ bool DynTree::getDynamicsRegressor(yarp::sig::Matrix & mat)
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_dynamics_regressor(mat.data(),mat.rows(),mat.cols());
     
     Eigen::MatrixXd dynamics_regressor;
-    dynamics_regressor.resize(6+tree_graph.getNrOfDOFs(),10*tree_graph.getNrOfLinks());
+    dynamics_regressor.resize(6+undirected_tree.getNrOfDOFs(),10*undirected_tree.getNrOfLinks());
     
     computePositions();
-    dynamicsRegressorLoop(tree_graph,q,dynamic_traversal,X_dynamic_base,v,a,dynamics_regressor);
+    dynamicsRegressorLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,v,a,dynamics_regressor);
     
     mapped_dynamics_regressor = dynamics_regressor;
     
@@ -1225,15 +1196,15 @@ bool DynTree::getDynamicsRegressor(yarp::sig::Matrix & mat)
     
 bool DynTree::getDynamicsParameters(yarp::sig::Vector & vec)
 {
-    if( vec.size() != 10*tree_graph.getNrOfLinks() ) {
-        vec.resize(10*tree_graph.getNrOfLinks());
+    if( vec.size() != 10*undirected_tree.getNrOfLinks() ) {
+        vec.resize(10*undirected_tree.getNrOfLinks());
     }
     
-    Eigen::Map< Eigen::VectorXd > mapped_vector(vec.data(),10*tree_graph.getNrOfLinks());
+    Eigen::Map< Eigen::VectorXd > mapped_vector(vec.data(),10*undirected_tree.getNrOfLinks());
     Eigen::VectorXd inertial_parameters;
-    inertial_parameters.resize(10*tree_graph.getNrOfLinks());
+    inertial_parameters.resize(10*undirected_tree.getNrOfLinks());
     
-    inertialParametersVectorLoop(tree_graph,inertial_parameters);
+    inertialParametersVectorLoop(undirected_tree,inertial_parameters);
     
     mapped_vector = inertial_parameters;
     
@@ -1246,7 +1217,7 @@ int DynTree::getNrOfDOFs(const std::string & part_name)
     if( part_name.length() ==  0 ) 
     { 
         //No part specified
-        return tree_graph.getNrOfDOFs();        
+        return undirected_tree.getNrOfDOFs();        
     } else { // if part_name.length > 0 
         std::vector<int> dof_ids;
         dof_ids = partition.getPartDOFIDs(part_name);
@@ -1257,20 +1228,20 @@ int DynTree::getNrOfDOFs(const std::string & part_name)
         
 int DynTree::getNrOfLinks()
 {
-    return tree_graph.getNrOfLinks();
+    return undirected_tree.getNrOfLinks();
 }
 
 int DynTree::getLinkIndex(const std::string & link_name)
 {
-    KDL::CoDyCo::LinkMap::const_iterator link_it = tree_graph.getLink(link_name);
-    if( link_it == tree_graph.getInvalidLinkIterator() ) { std::cerr << "DynTree::getLinkIndex : link " << link_name << " not found" << std::endl; return -1; }
+    KDL::CoDyCo::LinkMap::const_iterator link_it = undirected_tree.getLink(link_name);
+    if( link_it == undirected_tree.getInvalidLinkIterator() ) { std::cerr << "DynTree::getLinkIndex : link " << link_name << " not found" << std::endl; return -1; }
     return link_it->getLinkIndex();
 }
        
 int DynTree::getDOFIndex(const std::string & dof_name)
 {
-    KDL::CoDyCo::JunctionMap::const_iterator junction_it = tree_graph.getJunction(dof_name);
-    if( junction_it == tree_graph.getInvalidJunctionIterator() || junction_it->getNrOfDOFs() != 1 ) { std::cerr << "DynTree::getDOFIndex : DOF " << dof_name << " not found" << std::endl; return -1; }
+    KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(dof_name);
+    if( junction_it == undirected_tree.getInvalidJunctionIterator() || junction_it->getNrOfDOFs() != 1 ) { std::cerr << "DynTree::getDOFIndex : DOF " << dof_name << " not found" << std::endl; return -1; }
     return junction_it->getDOFIndex();
 }
 

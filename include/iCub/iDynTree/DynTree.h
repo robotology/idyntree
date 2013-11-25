@@ -67,7 +67,7 @@
 
 #include <kdl_codyco/treeserialization.hpp>
 #include <kdl_codyco/treepartition.hpp>
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/momentumjacobian.hpp>
 
 #include <kdl_codyco/ftsensor.hpp>
@@ -101,7 +101,7 @@ namespace iDynTree
  */
 class DynTree  {
     private:
-        KDL::CoDyCo::TreeGraph tree_graph; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
+        KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization and the TreePartition */
         KDL::CoDyCo::TreePartition partition; /**< TreePartition object explicit present as it is conventient to encode/decode dynContact objects */
         
         //Violating DRY principle, but for code clarity 
@@ -707,9 +707,9 @@ class DynTree  {
         virtual bool getDynamicsParameters(yarp::sig::Vector & vet);
         //@} 
 
-        KDL::Tree getKDLTree() { return tree_graph.getTree(); }
+        KDL::Tree getKDLTree() { return undirected_tree.getTree(); }
         
-        KDL::CoDyCo::TreeGraph getKDLUndirectedTree() { return tree_graph; }
+        KDL::CoDyCo::UndirectedTree getKDLUndirectedTree() { return undirected_tree; }
     
 };
 
