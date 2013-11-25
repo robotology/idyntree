@@ -25,7 +25,7 @@ private:
 public:
     DynamicDatasetFile();
     
-    bool loadFromFile(std::string filename);
+    bool loadFromFile(std::string filename, const bool append=false);
     
     ~DynamicDatasetFile();
     

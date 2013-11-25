@@ -39,7 +39,7 @@ double get_next_double(std::stringstream & ss,std::string & data_buffer)
     return atof(data_buffer.c_str());
 }
 
-bool DynamicDatasetFile::loadFromFile(const std::string file_name)
+bool DynamicDatasetFile::loadFromFile(const std::string file_name, const bool append)
 {
     std::string data_buffer;
     std::string line_buffer;
@@ -66,29 +66,61 @@ bool DynamicDatasetFile::loadFromFile(const std::string file_name)
     
     //Second row: //N_DOFS,N_MEASURED_TORQUES,N_MEASURED_WRENCHES,N_MEASURED_3AXIS_FT,N_ADDITIONAL_ME
     getline(csv_file,data_buffer,',');
-    nrOfDOFs = atoi(data_buffer.c_str());
+    if( !append ) {
+        nrOfDOFs = atoi(data_buffer.c_str());
+    } else {
+        if( nrOfDOFs != atoi(data_buffer.c_str()) ) {
+            std::cerr << "DynamicDatasetFile error: it was not possible to append file " << file_name 
+                      << " because it has a different number of DOFs " << std::endl;
+            return false;
+        }
+    }
     
     #ifndef NDEBUG
     std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfDOFs: " << nrOfDOFs << std::endl; 
     #endif
     
     getline(csv_file,data_buffer,',');
-    nrOfMeasuredTorques = atoi(data_buffer.c_str());
+    if( !append) {
+        nrOfMeasuredTorques = atoi(data_buffer.c_str());
+    } else {
+        if( nrOfMeasuredTorques != atoi(data_buffer.c_str()) ) {
+            std::cerr << "DynamicDatasetFile error: it was not possible to append file " << file_name  
+                      << " because it has a different number of measured torques " << std::endl;
+            return false;
+        }
+    }
+    
     
     #ifndef NDEBUG
     std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfMeasuredTorques: " << nrOfMeasuredTorques << std::endl; 
     #endif
     
     getline(csv_file,data_buffer,',');
-    nrOfMeasuredWrenches = atoi(data_buffer.c_str());
-    
+    if( !append) {
+        nrOfMeasuredWrenches = atoi(data_buffer.c_str());
+    } else {
+        if( nrOfMeasuredWrenches != atoi(data_buffer.c_str()) ) {
+            std::cerr << "DynamicDatasetFile error: it was not possible to append file " << file_name
+                      << " because it has a different number of wrenches " << std::endl;
+            return false;
+        }
+    }
+        
     #ifndef NDEBUG
     std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfMeasuredWrenches: " << nrOfMeasuredWrenches << std::endl; 
     #endif
     
     getline(csv_file,data_buffer,',');
-    nrOfMeasured3AxisFT = atoi(data_buffer.c_str());
-    
+    if( !append) {
+        nrOfMeasured3AxisFT = atoi(data_buffer.c_str());
+    } else {
+        if( nrOfMeasured3AxisFT != atoi(data_buffer.c_str()) ) {
+            std::cerr << "DynamicDatasetFile error: it was not possible to append file " << file_name
+                      << " because it has a different number of 3 axis ft measures " << std::endl;
+            return false;
+        }
+    }    
     #ifndef NDEBUG
     std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfMeasured3AxisFT: " << nrOfMeasured3AxisFT << std::endl; 
     #endif
@@ -107,8 +139,10 @@ bool DynamicDatasetFile::loadFromFile(const std::string file_name)
     #endif
     
     //All remaining rows are data
-    DynamicSample sample(nrOfDOFs,nrOfMeasuredTorques,nrOfMeasuredWrenches,nrOfMeasured3AxisFT);
-    dynamic_samples.resize(0,sample);
+    if( !append ) {
+        DynamicSample sample(nrOfDOFs,nrOfMeasuredTorques,nrOfMeasuredWrenches,nrOfMeasured3AxisFT);
+        dynamic_samples.resize(0,sample);
+    }
     
     #ifndef NDEBUG
     int count = 4;
