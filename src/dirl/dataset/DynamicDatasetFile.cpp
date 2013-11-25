@@ -147,7 +147,9 @@ bool DynamicDatasetFile::loadFromFile(const std::string file_name, const bool ap
     #ifndef NDEBUG
     int count = 4;
     #endif
-        
+   
+    DynamicSample sample;
+    
     while(getline(csv_file,line_buffer)) {
         std::stringstream ss(line_buffer);
         
