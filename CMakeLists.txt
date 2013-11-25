@@ -2,11 +2,11 @@ cmake_minimum_required( VERSION 2.8 FATAL_ERROR )
 set(PROJECT_NAME kdl_codyco)
 project (${PROJECT_NAME} CXX)
 
-set (KDL_CODYCO_MAJOR_VERSION 0)
-set (KDL_CODYCO_MINOR_VERSION 0)
-set (KDL_CODYCO_PATCH_VERSION 2)
+set (KDL_CODYCO_VERSION_MAJOR 0)
+set (KDL_CODYCO_VERSION_MINOR 0)
+set (KDL_CODYCO_VERSION_PATCH 2)
 
-set (KDL_CODYCO_VERSION ${KDL_CODYCO_MAJOR_VERSION}.${KDL_CODYCO_MINOR_VERSION}.${KDL_CODYCO_PATCH_VERSION})
+set (KDL_CODYCO_VERSION ${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}.${KDL_CODYCO_VERSION_PATCH})
 
 message (STATUS "${PROJECT_NAME} version ${KDL_CODYCO_VERSION}")
 
@@ -29,7 +29,20 @@ if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC) 
 
-find_package(orocos_kdl REQUIRED)
+find_package(orocos_kdl)
+
+#support also for the old version of kdl cmake package
+if(NOT orocos_kdl_FOUND)
+   find_package(Orocos-KDL)
+   if(NOT Orocos-KDL_FOUND) 
+      message(WARNING "KDL not found: neither orocos_kdl or Orocos-KDL cmake packages are available")
+   else(NOT Orocos-KDL_FOUND)
+      set(orocos_kdl_INCLUDE_DIRS ${Orocos-KDL_INCLUDE_DIRS})
+      set(orocos_kdl_LIBRARY_DIRS ${Orocos-KDL_LIBRARY_DIRS})
+      set(orocos_kdl_LIBRARIES ${Orocos-KDL_LIBRARIES})
+      set(orocos_kdl_FOUND true)
+   endif(NOT Orocos-KDL_FOUND)
+endif(NOT orocos_kdl_FOUND)
 
 set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES kdl_codyco)
