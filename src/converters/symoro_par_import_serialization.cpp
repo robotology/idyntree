@@ -91,6 +91,7 @@ bool treeSerializationFromParModelTree(const symoro_par_model& par_model, KDL::C
     
     //Return value
     serialization.setNrOfLinks(par_model.NL+1);
+    serialization.setNrOfJunctions(par_model.NL);
     serialization.setNrOfDOFs(par_model.NJ);
     
     int link_cnt = 0;
@@ -98,26 +99,31 @@ bool treeSerializationFromParModelTree(const symoro_par_model& par_model, KDL::C
     int fixed_junction_cnt = 0;
         
     /** \todo fix inconsistencies */
-    serialization.links[link_cnt] = base_name;
+    //serialization.links[link_cnt] = base_name;
+    serialization.setLinkNameID(base_name,link_cnt);
     link_cnt++;
     
     for(int l=0; l < par_model.NL; l++ ) {
         std::string link_name = link_common_name + int2string_serialization(l+1);
         std::string joint_name = joint_common_name + int2string_serialization(l+1);
-        serialization.links[link_cnt] = link_name;
+        //serialization.links[link_cnt] = link_name;
+        serialization.setLinkNameID(link_name,link_cnt);
         link_cnt++;
                                   
         switch( par_model.Sigma[l] ) {
             case 0:
             case 1:
                 //Moving joint
-                serialization.dofs[dof_cnt] = joint_name;
-                serialization.junctions[dof_cnt] = joint_name;
+                //serialization.dofs[dof_cnt] = joint_name;
+                //serialization.junctions[dof_cnt] = joint_name;
+                serialization.setDOFNameID(joint_name,dof_cnt);
+                serialization.setJunctionNameID(joint_name,dof_cnt);
                 dof_cnt++;
             break;
             case 2: 
                 //Fixed joint
-                serialization.junctions[serialization.getNrOfDOFs()+fixed_junction_cnt] = joint_name;
+                //serialization.junctions[serialization.getNrOfDOFs()+fixed_junction_cnt] = joint_name;
+                serialization.setJunctionNameID(joint_name,serialization.getNrOfDOFs()+fixed_junction_cnt);
                 fixed_junction_cnt++;
             break;
             default:
