@@ -144,7 +144,7 @@ namespace CoDyCo {
         dofs = x.dofs;
     }
     
-    int TreeSerialization::getJunctionId(std::string junction_name) const
+    int TreeSerialization::getJunctionID(std::string junction_name) const
     {
         std::vector<std::string>::const_iterator it;
         it = std::find(junctions.begin(),junctions.end(),junction_name);
@@ -155,7 +155,7 @@ namespace CoDyCo {
         }
     }
         
-    int TreeSerialization::getLinkId(std::string link_name) const
+    int TreeSerialization::getLinkID(std::string link_name) const
     {
         std::vector<std::string>::const_iterator it;
         it = std::find(links.begin(),links.end(),link_name);
@@ -166,7 +166,7 @@ namespace CoDyCo {
         }
     }
     
-    int TreeSerialization::getDOFId(std::string dof_name) const
+    int TreeSerialization::getDOFID(std::string dof_name) const
     {
         std::vector<std::string>::const_iterator it;
         it = std::find(dofs.begin(),dofs.end(),dof_name);
@@ -190,6 +190,28 @@ namespace CoDyCo {
     {
         return links[link_id];
     }
+    
+    bool TreeSerialization::setDOFNameID(const std::string dof_name, const int new_ID)
+    {
+        if( new_ID < 0 || new_ID >= getNrOfDOFs() ) { return false; }
+        dofs[new_ID] = dof_name;
+        return true;
+    }
+    
+    bool TreeSerialization::setJunctionNameID(const std::string junction_name, const int new_ID)
+    {
+        if( new_ID < 0 || new_ID >= getNrOfJunctions() ) { return false; }
+        junctions[new_ID] = junction_name;
+        return true;
+    }
+    
+    bool TreeSerialization::setLinkNameID(const std::string link_name, const int new_ID)
+    {
+        if( new_ID < 0 || new_ID >= getNrOfLinks() ) { return false; }
+        links[new_ID] = link_name;
+        return true;
+    }
+
     
     bool TreeSerialization::is_consistent(const Tree & tree) const
     {
@@ -226,7 +248,7 @@ namespace CoDyCo {
         
         for(SegmentMap::const_iterator it=seg_map.begin(); it != seg_map.end(); it++) {
             if( it->second.segment.getJoint().getType() != Joint::None ) {
-                if( getJunctionId( it->second.segment.getJoint().getName()) == -1 ) {
+                if( getJunctionID( it->second.segment.getJoint().getName()) == -1 ) {
                     return false;
                 }
             }
@@ -239,11 +261,6 @@ namespace CoDyCo {
     int TreeSerialization::setNrOfLinks(const int new_size)
     {
         links.resize(new_size);
-        if( new_size > 0 ) { 
-            junctions.resize(new_size-1);
-        } else {
-            junctions.resize(0);
-        }
         return links.size();
     }
             
@@ -252,6 +269,11 @@ namespace CoDyCo {
         return links.size();
     }
     
+    int TreeSerialization::setNrOfJunctions(const int new_size)
+    {
+        junctions.resize(new_size);
+        return junctions.size();
+    }
 
     int TreeSerialization::getNrOfJunctions() const
     {

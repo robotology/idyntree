@@ -166,7 +166,7 @@ namespace CoDyCo {
             
             //Add link
             if( i != virtual_root ) {
-                int link_id = local_serialization.getLinkId(current_segment.getName());
+                int link_id = local_serialization.getLinkID(current_segment.getName());
                 int part_id = local_partition.getPartIDfromLink(link_id);
                 int local_link_id = local_partition.getLocalLinkIndex(link_id);
                 
@@ -201,7 +201,7 @@ namespace CoDyCo {
                
                 
                 if( current_joint.getType() == Joint::None ) {
-                    int junction_id = local_serialization.getJunctionId(current_joint.getName());
+                    int junction_id = local_serialization.getJunctionID(current_joint.getName());
                     //std::cout << "failed to find joint " << current_joint.getName() << std::endl;
                     //std::cout << "in serialization " << local_serialization.toString() << std::endl;
                     assert(junction_id >= 0);
@@ -212,7 +212,7 @@ namespace CoDyCo {
                     junctions_names.insert(make_pair(current_joint.getName(),junctions.begin()+junction_id));
                 } else {
                     // \note !!! for now, for junction with DOF junction_id == dof_id
-                    int dof_id = local_serialization.getDOFId(current_joint.getName());
+                    int dof_id = local_serialization.getDOFID(current_joint.getName());
                     int dof_part_ID = local_partition.getPartIDfromDOF(dof_id);
                     int local_dof_id = local_partition.getLocalDOFIndex(dof_id);
                     //assert(dof_part_ID >= 0);
@@ -461,19 +461,22 @@ namespace CoDyCo {
     TreeSerialization UndirectedTree::getSerialization() const
     {
         TreeSerialization ret;
-        ret.links.resize(getNrOfLinks());
-        ret.dofs.resize(getNrOfDOFs());
-        ret.junctions.resize(getNrOfJunctions());
+        ret.setNrOfLinks(getNrOfLinks());
+        ret.setNrOfDOFs(getNrOfDOFs());
+        ret.setNrOfJunctions(getNrOfJunctions());
         
         for(LinkMap::const_iterator it=links.begin(); it != links.end(); it++ ) {
-            ret.links[it->link_nr] = it->getName();
+            //ret.links[it->link_nr] = it->getName();
+            ret.setLinkNameID(it->getName(),it->link_nr);
         }
         
         for(JunctionMap::const_iterator it=junctions.begin(); it != junctions.end(); it++ ) {
             if( it->joint.getType() != Joint::None ) {
-                ret.dofs[it->q_nr] = it->getName();
+                //ret.dofs[it->q_nr] = it->getName();
+                ret.setDOFNameID(it->getName(),it->q_nr);
             }
-            ret.junctions[it->q_nr] = it->getName();
+            //ret.junctions[it->q_nr] = it->getName();
+            ret.setJunctionNameID(it->getName(),it->q_nr);
         }
         
         return ret;

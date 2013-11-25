@@ -39,11 +39,12 @@ namespace CoDyCo{
 
         void addDFSrecursive_only_fixed(SegmentMap::const_iterator current_el, int & fixed_joint_cnt);
 
-        
-    public:
         std::vector<std::string> links;
         std::vector<std::string> junctions;
         std::vector<std::string> dofs;
+        
+    public:
+
     
         TreeSerialization();
         
@@ -70,26 +71,47 @@ namespace CoDyCo{
         TreeSerialization(const TreeSerialization& x);
         
         /**
-         * Not efficient, performs a search
+         * Returns the ID of a given junction in the serialization
+         * 
+         * @param[in] joint_name the name of the junction for which the ID is requested
+         * @return the requested ID of the junction
+         * 
+         * \note Not efficient, performs a search
          */
-        int getJunctionId(std::string joint_name) const;
+        int getJunctionID(const std::string joint_name) const;
+        
+        bool setJunctionNameID(const std::string junction_name, const int new_ID);
         
         /**
-         * Not efficient, performs a search
+         * Returns the ID of a given degree of freedom in the serialization
+         * 
+         * @param[in] dof_name the name of the degree of freedom for which the ID is requested
+         * @return the requested ID of the degree of freedom
+         * 
+         * \note Not efficient, performs a search
          */
-        int getDOFId(std::string dof_name) const;
+        int getDOFID(const std::string dof_name) const;
+        
+        bool setDOFNameID(const std::string dof_name, const int new_ID);
+
         
         /**
-         * Not efficient, performs a search
+         * Returns the ID of a given link in the serialization
+         * 
+         * @param[in] link_name the name of the link for which the ID is requested
+         * @return the requested ID of the link
+         * 
+         * \note Not efficient, performs a search
          */
-        int getLinkId(std::string link_name) const;
+        int getLinkID(const std::string link_name) const;
+        
+        bool setLinkNameID(const std::string link_name, const int new_ID);
         
         std::string getJunctionName(int joint_id) const;
         
         std::string getDOFName(int dof_id) const;
         
         std::string getLinkName(int link_id) const;
-        
         
         /**
          * Set the number of Links
@@ -112,8 +134,14 @@ namespace CoDyCo{
         int getNrOfDOFs() const;
         
         /**
+         * Set the number of junctions
+         */
+        int setNrOfJunctions(const int new_size);
+
+        
+        /**
          * Get the number of joints of any DOF (not called getNrOfJoints to 
-         *   avoid confusion with the function of KDL::Tree/KDL::Chain
+         *   avoid confusion with the function of KDL::Tree/KDL::Chain)
          */
         int getNrOfJunctions() const;
         
