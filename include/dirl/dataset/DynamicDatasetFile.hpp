@@ -34,6 +34,23 @@ public:
     bool getSample(const int sample_n,DynamicSample & sample);
 };
 
+class DynamicDatasetFileCollection : public std::vector<DynamicDatasetFile>
+{
+private:
+    int nrOfDOFs;
+    
+    int nrOfMeasuredWrenches;
+    int nrOfMeasuredTorques;
+    int nrOfMeasured3AxisFT;
+
+public:
+    DynamicDatasetFileCollection();
+    ~DynamicDatasetFileCollection();
+    
+    bool loadDatasetFilesFromFilenameVector(const std::vector<std::string> & filenames);
+    bool loadDatasetFilesFromFile(const std::string & file_name);
+};
+
 }
 
 #endif

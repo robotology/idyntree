@@ -133,7 +133,7 @@ public:
      * Get the number of degrees of freedom of the considered structure
      *
      */
-    int getNrOfDOFs() { return tree_graph.getNrOfDOFs(); } 
+    int getNrOfDOFs() { return undirected_tree.getNrOfDOFs(); } 
     
     //The feature of fixing/unfixing parameters would be implemented in a later version
     //int getNrOfUnknownParameters();
@@ -287,7 +287,7 @@ public:
    
     
 private:
-    KDL::CoDyCo::UndirectedTree tree_graph; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
+    KDL::CoDyCo::UndirectedTree undirected_tree; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
     
     KDL::CoDyCo::Traversal dynamic_traversal; 
     KDL::CoDyCo::Traversal kinematic_traversal; /**< Traversal object: defining the kinematic base of the tree */

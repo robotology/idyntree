@@ -153,7 +153,52 @@ namespace CoDyCo{
          * 
          */
         bool is_consistent(const Tree & tree) const;
-              
+        
+        /**
+         * Load the serialization of the links from a vector of strings
+         * @param[in] links_serialization a vector of string of getNrOfLinks() size
+         * 
+         * @return true if the loading was ok, false if something went wrong (name of alink not recognized, error in vector size)
+         *
+         * \note this method does not affect the Junctions/DOFs serialization 
+         */
+        bool loadLinksFromStringVector(const std::vector<std::string> & links_serialization);
+        
+        /**
+         * Load the serialization of the links from a file
+         * @param[in] file_name the name of the file that contains getNrOfLinks() lines, each one is the name of a link
+         *
+         * @return true if the loading was ok, false if something went wrong (name of alink not recognized, error in vector size)
+         *
+         * \note this method does not affect the Junctions/DOFs serialization  
+         */
+        bool loadLinksFromFile(const std::string file_name);
+        
+        /**
+         * Load the serialization of the junctions (and consequently of the DOFs) from a vector of strings
+         * @param[in] junctions_serialization a vector of string of getNrOfJunctions() size, where the first getNrOfDOFs() junction are 
+         *  the non-fixed junctions
+         * 
+         * @return true if the loading was ok, false if something went wrong (name of alink not recognized, error in vector size)
+         *
+         * \note this method does not affect the links serialization
+         */
+        bool loadJunctionsDOFsFromStringVector(const std::vector<std::string> & junctions_serialization);
+        
+        /**
+         * Load the serialization of the links from a file
+         * @param[in] file_name the name of the file that contains getNrOfJunctions() lines, each one is the name of a junction,
+         *  where the first getNrOfDOFs() junction are  the non-fixed junctions
+         *
+         * @return true if the loading was ok, false if something went wrong (name of alink not recognized, error in vector size)
+         *
+         * \note this method does not affect the link serialization 
+         */
+        bool loadJunctionsDOFsFromFile(const std::string file_name);
+
+        /**
+         * Convert the content of the serialization to a string.
+         */
         std::string toString();
     };
     

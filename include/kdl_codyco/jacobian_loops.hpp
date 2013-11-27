@@ -20,7 +20,7 @@ namespace CoDyCo {
     * fixed base (relative) jacobian for a given link 
     * @param jac a 6 x nrOfDOFs Jacobian such that \f$ v_link_index = J dq + v_traversal_base \f$ expressed in link_index frame
     */
-   void getRelativeJacobianLoop(const TreeGraph & tree_graph,
+   void getRelativeJacobianLoop(const TreeGraph & ,
                                 const KDL::JntArray &q, 
                                 const Traversal & traversal,
                                 const int link_index,
@@ -30,7 +30,7 @@ namespace CoDyCo {
     * floating base jacobian for a given link with respect to the base defined in the Traversal
     * @param jac a 6 x (nrOfDOFs+6) Jacobian such that \f$ v_link_index = J dq_fl \f$ expressed in the frame of the link with ID link_index frame
     */
-   void getFloatingBaseJacobianLoop(const TreeGraph & tree_graph,
+   void getFloatingBaseJacobianLoop(const TreeGraph & ,
                                    const KDL::JntArray &q, 
                                    const Traversal & traversal,
                                    const int link_index,

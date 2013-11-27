@@ -25,7 +25,7 @@ namespace CoDyCo {
     * \todo add version of the loop with using link names or references
     * 
     */
-   int getFrameLoop(const TreeGraph & tree_graph,
+   int getFrameLoop(const TreeGraph & undirected_tree,
                 const KDL::JntArray &q, 
                 const Traversal & traversal,
                 const int proximal_link_index,
@@ -43,11 +43,11 @@ namespace CoDyCo {
     * \todo add version of the loop with using link names or references
     * 
     */
-    Frame getFrameLoop(const TreeGraph & tree_graph,
-                const KDL::JntArray &q, 
-                const Traversal & traversal,
-                const int proximal_link_index,
-                const int distal_link_index);
+    Frame getFrameLoop(const UndirectedTree & undirected_tree,
+                       const KDL::JntArray &q, 
+                       const Traversal & traversal,
+                       const int proximal_link_index,
+                       const int distal_link_index);
                 
 	
    /**
@@ -61,7 +61,7 @@ namespace CoDyCo {
     * \todo add version of the loop with using link names or references
     * 
     */
-    int getFramesLoop(const TreeGraph & tree_graph,
+    int getFramesLoop(const TreeGraph & undirected_tree,
 					  const KDL::JntArray &q, 
 					  const Traversal & traversal,
 					  std::vector<Frame> & X_base);

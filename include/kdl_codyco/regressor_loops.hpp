@@ -25,7 +25,7 @@ namespace CoDyCo {
  * Where w is the base wrench and tau is the vector of joint torques
  * 
  */
-void dynamicsRegressorLoop(const TreeGraph & tree_graph,
+void dynamicsRegressorLoop(const TreeGraph & ,
                            const KDL::JntArray &q, 
                            const Traversal & traversal,
                            const std::vector<Frame>& X_b,
@@ -40,7 +40,7 @@ void dynamicsRegressorLoop(const TreeGraph & tree_graph,
  * Where tau is the vector of joint torques
  * 
  */
-void dynamicsRegressorFixedBaseLoop(const TreeGraph & tree_graph,
+void dynamicsRegressorFixedBaseLoop(const TreeGraph & ,
                            const KDL::JntArray &q, 
                            const Traversal & traversal,
                            const std::vector<Frame>& X_b,
@@ -49,10 +49,10 @@ void dynamicsRegressorFixedBaseLoop(const TreeGraph & tree_graph,
                            Eigen::MatrixXd & dynamics_regressor);
 
 
-void inertialParametersVectorLoop(const TreeGraph & tree_graph,
+void inertialParametersVectorLoop(const TreeGraph & ,
                                   Eigen::VectorXd & parameters_vector);
 
-void inertialParametersVectorLoopFakeLinks(const TreeGraph & tree_graph,
+void inertialParametersVectorLoopFakeLinks(const TreeGraph & ,
                                   Eigen::VectorXd & parameters_vector,
                                   std::vector < std::string > fake_links_names);
 }

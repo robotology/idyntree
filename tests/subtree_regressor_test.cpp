@@ -33,32 +33,32 @@ int main()
     Tree test_tree = TestHumanoid();
     
     //Creating relative TreeGraph
-    TreeGraph tree_graph(test_tree);
+    UndirectedTree undirected_tree(test_tree);
     
     JntArray q,dq,ddq,torques;
     KDL::Twist base_vel, base_acc;
     Wrench base_wrench;
     std::vector<Twist> v,a;
     std::vector<Wrench> f,f_ext;
-    std::vector<Frame> X_dynamic_base(tree_graph.getNrOfLinks());
+    std::vector<Frame> X_dynamic_base(undirected_tree.getNrOfLinks());
     
     //arbitrary traversal
     std::string kinematic_base = "lleg_seg4";
     Traversal kinematic_traversal;
-    tree_graph.compute_traversal(kinematic_traversal,kinematic_base);
+    undirected_tree.compute_traversal(kinematic_traversal,kinematic_base);
     Traversal dynamic_traversal;
     
     bool consider_ft_offsets = true;
 
     
     //It is necessary to use a dynamic base that is not in the considered subtree for the regressors
-    tree_graph.compute_traversal(dynamic_traversal,"rleg_seg8");
-    //tree_graph.compute_traversal(dynamic_traversal);
-    q = dq = ddq = torques = JntArray(tree_graph.getNrOfDOFs());
-    v = a = std::vector<Twist>(tree_graph.getNrOfLinks());
-    f = f_ext = std::vector<Wrench>(tree_graph.getNrOfLinks(),KDL::Wrench::Zero());
+    undirected_tree.compute_traversal(dynamic_traversal,"rleg_seg8");
+    //.compute_traversal(dynamic_traversal);
+    q = dq = ddq = torques = JntArray(undirected_tree.getNrOfDOFs());
+    v = a = std::vector<Twist>(undirected_tree.getNrOfLinks());
+    f = f_ext = std::vector<Wrench>(undirected_tree.getNrOfLinks(),KDL::Wrench::Zero());
     
-    for(int i=0; i < (int)tree_graph.getNrOfDOFs(); i++ )
+    for(int i=0; i < (int)undirected_tree.getNrOfDOFs(); i++ )
     {
         q(i) = random_double();
         dq(i) = random_double();
@@ -70,11 +70,11 @@ int main()
 
     
     //Calculating the velocity and acceleration for each link
-    rneaKinematicLoop(tree_graph,q,dq,ddq,kinematic_traversal,base_vel,base_acc,v,a);
-    rneaDynamicLoop(tree_graph,q,dynamic_traversal,v,a,f_ext,f,torques,base_wrench);
+    rneaKinematicLoop(undirected_tree,q,dq,ddq,kinematic_traversal,base_vel,base_acc,v,a);
+    rneaDynamicLoop(undirected_tree,q,dynamic_traversal,v,a,f_ext,f,torques,base_wrench);
     
     //Get the frame between each link and the base
-    getFramesLoop(tree_graph,q,dynamic_traversal,X_dynamic_base);
+    getFramesLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base);
    
     //Create ft_list
     std::vector<std::string> ft_names;
@@ -96,10 +96,10 @@ int main()
     fake_links.push_back("rleg_seg4");
     
 #ifndef NDEBUG
-    std::cout << "There are " << tree_graph.getNrOfLinks() << " links , " << tree_graph.getNrOfLinks()-fake_links.size() << " real and " << fake_links.size() << " fake " << std::endl;
+    std::cout << "There are " << undirected_tree.getNrOfLinks() << " links , " << undirected_tree.getNrOfLinks()-fake_links.size() << " real and " << fake_links.size() << " fake " << std::endl;
 #endif
     
-    FTSensorList ft_list(tree_graph,ft_names);
+    FTSensorList ft_list(undirected_tree,ft_names);
     
     //Generate random offset data
     std::vector<Wrench> measured_wrenches_offset(ft_names.size());
@@ -198,7 +198,7 @@ int main()
     regressor.computeRegressor(regr,kt);
     
     #ifndef NDEBUG
-    std::cout << "Tree graph nrOfLinks" << tree_graph.getNrOfLinks() << std::endl;
+    std::cout << "Tree graph nrOfLinks" << undirected_tree.getNrOfLinks() << std::endl;
     std::cout << "Regressor nrOfParam: " << regressor.getNrOfParameters() << " nrOfOutputs " << regressor.getNrOfOutputs() << std::endl;
     //std::cout << regressor.getDescriptionOfParameters() << std::endl;
     #endif
@@ -208,10 +208,10 @@ int main()
     Eigen::VectorXd parameters(regressor.getNrOfParameters());
     parameters.setZero();
     
-    inertialParametersVectorLoopFakeLinks(tree_graph,parameters,fake_links);
+    inertialParametersVectorLoopFakeLinks(undirected_tree,parameters,fake_links);
     //Adding fake ft offsets
     if( consider_ft_offsets ) {
-        int NrOfRealLinksParameters = 10*(tree_graph.getNrOfLinks()-fake_links.size());
+        int NrOfRealLinksParameters = 10*(undirected_tree.getNrOfLinks()-fake_links.size());
     
         for( int ft_id =0; ft_id < (int)ft_names.size(); ft_id++ ) {
             for( int www=0; www < 6; www++ ) {

@@ -137,7 +137,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
 #ifndef NDEBUG
     std::cerr << "Called torqueRegressor::computeRegressor " << std::endl;
 #endif 
-    //const KDL::CoDyCo::TreeGraph & tree_graph = *p_tree_graph;
+    //const KDL::CoDyCo::TreeGraph &  = *p_tree_graph;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
 
     

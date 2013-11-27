@@ -37,7 +37,7 @@ namespace CoDyCo {
          
             Tree tree;
             
-            UndirectedTree tree_graph;
+            UndirectedTree undirected_tree;
             Traversal traversal;
             
             int nrOfLinks;
@@ -70,7 +70,7 @@ namespace CoDyCo {
             
             Eigen::VectorXd getInertialParameters();
             
-            UndirectedTree getUndirectedTree() { return tree_graph; };
+            UndirectedTree getUndirectedTree() { return undirected_tree; };
              
              /**
              * Get a copy of the current KDL::Tree, with modified inertial parameters.

@@ -42,7 +42,7 @@ namespace CoDyCo
             int JntToCOM(const KDL::JntArray& q_in, Vector& p_out, const int part_id=-1);
         
         private:
-            const TreeGraph tree_graph;
+            const UndirectedTree undirected_tree;
             Traversal traversal;
             
             //vector containing the center of mass of each subtree 

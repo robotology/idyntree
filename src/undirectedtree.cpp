@@ -316,6 +316,7 @@ namespace CoDyCo {
             base = getLink(base_link_index);
         }
         if( base == links.end() ) {
+            std::cerr << "UndirectedTree::compute_traversal error: link with index " << base_link_index << " not found " << std::endl;
             return -1;
         }
         
@@ -397,7 +398,10 @@ namespace CoDyCo {
         //std::cerr << "Called compute_traversal with " << base_link << "as base link " << std::endl;
         #endif
         LinkMap::const_iterator base_link_it = getLink(base_link);
-        if( base_link_it == getInvalidLinkIterator() ) { return -1; }
+        if( base_link_it == getInvalidLinkIterator() ) { 
+            std::cerr << "UndirectedTree::compute_traversal error: link " << base_link << " not found " << std::endl;
+            return -1;
+        }
         return compute_traversal(traversal,base_link_it->getLinkIndex(),bf_traversal);
     }
     

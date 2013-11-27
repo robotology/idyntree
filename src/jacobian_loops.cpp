@@ -14,7 +14,7 @@
 namespace KDL {
 namespace CoDyCo {
     
-    void getRelativeJacobianLoop(const TreeGraph & tree_graph,
+    void getRelativeJacobianLoop(const UndirectedTree & undirected_tree,
                                 const KDL::JntArray &q, 
                                 const Traversal & traversal,
                                 const int link_index,
@@ -23,7 +23,7 @@ namespace CoDyCo {
         Frame T_total = Frame::Identity(); //The transformation between link_index frame and current_link frame
         
         KDL::CoDyCo::LinkMap::const_iterator current_link;
-        current_link = tree_graph.getLink(link_index);
+        current_link = undirected_tree.getLink(link_index);
         
         //All the columns not modified are zero
         SetToZero(jac);
@@ -54,7 +54,7 @@ namespace CoDyCo {
 
     }
     
-    void getFloatingBaseJacobianLoop(const TreeGraph & tree_graph,
+    void getFloatingBaseJacobianLoop(const UndirectedTree & undirected_tree,
                                      const KDL::JntArray &q, 
                                      const Traversal & traversal,
                                      const int link_index,
@@ -62,10 +62,10 @@ namespace CoDyCo {
     {
         Frame T_total = Frame::Identity(); //The transformation between link_index frame and current_link frame
         
-        assert(link_index < (int)tree_graph.getNrOfLinks());
+        assert(link_index < (int)undirected_tree.getNrOfLinks());
         
         KDL::CoDyCo::LinkMap::const_iterator current_link;
-        current_link = tree_graph.getLink(link_index);
+        current_link = undirected_tree.getLink(link_index);
         
         //All the columns not modified are zero
         SetToZero(jac);
@@ -84,7 +84,7 @@ namespace CoDyCo {
                 jac_col = T_total*S_current_parent;
                 
                 assert(6+dof_index < (int)jac.columns());
-                assert( dof_index < (int)tree_graph.getNrOfDOFs() );
+                assert( dof_index < (int)undirected_tree.getNrOfDOFs() );
                 jac.setColumn(6+dof_index,jac_col);
             }
             

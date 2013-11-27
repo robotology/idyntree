@@ -29,7 +29,7 @@ int subtreeBaseDynamicsRegressor::isSubtreeLeaf(const int link_id) const
 
 int subtreeBaseDynamicsRegressor::configure()
 {    
-    const KDL::CoDyCo::TreeGraph & tree_graph = *p_tree_graph;
+    const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_tree_graph;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
     
     //Checking if the provided subtree leafs define a proper subtree
@@ -41,9 +41,9 @@ int subtreeBaseDynamicsRegressor::configure()
     }
     
     for(int i=0; i < (int)subtree_leaf_links.size(); i++ ) {
-        LinkMap::const_iterator link_it = tree_graph.getLink(subtree_leaf_links[i]);
+        LinkMap::const_iterator link_it = undirected_tree.getLink(subtree_leaf_links[i]);
         
-        if( link_it == tree_graph.getInvalidLinkIterator() ) {
+        if( link_it == undirected_tree.getInvalidLinkIterator() ) {
             if( verbose ) { std::cerr << "subtreeBaseDynamicsRegressor::configure error: link " << subtree_leaf_links[i] << " not found " << std::endl; }
             return -1;
         }
@@ -68,11 +68,11 @@ int subtreeBaseDynamicsRegressor::configure()
     //We first compute the spanning starting at one (the first) of the leafs 
     KDL::CoDyCo::Traversal subtree_traversal;
     
-    tree_graph.compute_traversal(subtree_traversal,subtree_leaf_links_indeces[0]);
+    undirected_tree.compute_traversal(subtree_traversal,subtree_leaf_links_indeces[0]);
     
     //Then we color the nodes: if white (true) the links belongs to the subtree
     //if black (false) it does not belongs to the node
-    std::vector<bool> is_link_in_subtree(tree_graph.getNrOfLinks(),false);
+    std::vector<bool> is_link_in_subtree(undirected_tree.getNrOfLinks(),false);
     
     //the leaf that we chose as starting link clearly belongs to the subtree
     is_link_in_subtree[subtree_leaf_links_indeces[0]] = true;
@@ -86,7 +86,7 @@ int subtreeBaseDynamicsRegressor::configure()
             //if the parent is not in the subtree (false/black) then the link is not in the subtree (false/black)
             is_link_in_subtree[link_id] = false;
         } else {
-            int junction_index = tree_graph.getLink(link_id)->getAdjacentJoint(tree_graph.getLink(parent_id))->getJunctionIndex();
+            int junction_index = undirected_tree.getLink(link_id)->getAdjacentJoint(undirected_tree.getLink(parent_id))->getJunctionIndex();
             
             if( ft_list.isFTSensor(junction_index) && isSubtreeLeaf(parent_id) ) {
                 //if the parent is in the subtree (true/white) but it is connected to the link by an FT sensor (and the parent is a leaf of the subtree) then the link is not in the subtree (false/black)
@@ -151,7 +151,7 @@ int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
     //std::cerr << "Called computeRegressor " << std::endl;
     //std::cerr << (*p_ft_list).toString();
 #endif 
-    //const KDL::CoDyCo::TreeGraph & tree_graph = *p_tree_graph;
+    //const KDL::CoDyCo::TreeGraph &  = *p_tree_graph;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
 
     

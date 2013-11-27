@@ -10,7 +10,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
+#include <boost/config/posix_features.hpp>
+#include <fstream>
 
 namespace KDL {
 namespace CoDyCo {
@@ -307,6 +308,87 @@ namespace CoDyCo {
             ss << i << "\t: " << dofs[i] << std::endl;
         }
         return ss.str();
+    }
+    
+    bool TreeSerialization::loadLinksFromStringVector(const std::vector<std::string> & links_serialization)
+    {
+        if( links_serialization.size() != getNrOfLinks() ) {
+            return false;
+        }
+        
+        for(int i=0; i < getNrOfLinks(); i++ ) {
+            setLinkNameID(links_serialization[i],i);
+        }
+        
+        return true;
+    }
+        
+    bool TreeSerialization::loadLinksFromFile(const std::string file_name)
+    {
+        std::vector<std::string> links_serialization(getNrOfLinks());
+        
+        std::ifstream links_file;
+ 
+        links_file.open (file_name.c_str(), std::ifstream::in);
+        
+        if( !links_file ) {
+            std::cerr << "TreeSerialization::loadLinksFromFile error: could not load file " << file_name << std::endl;
+            return false;
+        }
+        
+        std::string data_buffer;
+        for(int i=0; i < getNrOfLinks(); i++ ) {
+            getline(links_file,data_buffer);
+            if( data_buffer == "" ) {
+                std::cerr << "TreeSerialization::loadLinksFromFile error: file " << file_name << " is not properly formatted";
+                return false;
+            }
+            links_serialization[i] = data_buffer;
+        }
+        
+        return loadLinksFromStringVector(links_serialization);
+    }
+        
+    bool TreeSerialization::loadJunctionsDOFsFromStringVector(const std::vector<std::string> & junctions_serialization)
+    {
+        if( junctions_serialization.size() != getNrOfJunctions() ) {
+            return false;
+        }
+        
+        for(int i=0; i < getNrOfJunctions(); i++ ) {
+            if( i < getNrOfDOFs() ) {
+                setDOFNameID(junctions_serialization[i],i);
+            }
+            setJunctionNameID(junctions_serialization[i],i);
+        }
+        
+        return true;
+    }
+        
+    bool TreeSerialization::loadJunctionsDOFsFromFile(const std::string file_name)
+    {
+        std::vector<std::string> junctions_serialization(getNrOfJunctions());
+        
+        std::ifstream links_file;
+ 
+        links_file.open (file_name.c_str(), std::ifstream::in);
+        
+        if( !links_file ) {
+            std::cerr << "TreeSerialization::loadJunctionDOFsFromFile error: could not load file " << file_name << std::endl;
+            return false;
+        }
+        
+        std::string data_buffer;
+        for(int i=0; i < getNrOfJunctions(); i++ ) {
+            getline(links_file,data_buffer);
+            if( data_buffer == "" ) {
+                std::cerr << "TreeSerialization::loadJunctionsFromFile error: file " << file_name << " is not properly formatted at line " << i << std::endl;
+                return false;
+            }
+            junctions_serialization[i] = data_buffer;
+        }
+        
+        return loadJunctionsDOFsFromStringVector(junctions_serialization);
     }
 
 }

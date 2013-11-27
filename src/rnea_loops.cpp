@@ -9,7 +9,7 @@
 namespace KDL {
 namespace CoDyCo {
 
-    int rneaKinematicLoop(const TreeGraph & tree_graph,
+    int rneaKinematicLoop(const UndirectedTree & undirected_tree,
                            const KDL::JntArray &q, 
                            const KDL::JntArray &q_dot,
                            const KDL::JntArray &q_dotdot,  
@@ -24,7 +24,7 @@ namespace CoDyCo {
             LinkMap::const_iterator link_it = kinetic_traversal.order[i];
             int link_nmbr = link_it->link_nr; 
             if( i == 0 ) {
-                assert( kinetic_traversal.parent[link_nmbr] == tree_graph.getInvalidLinkIterator() );
+                assert( kinetic_traversal.parent[link_nmbr] == undirected_tree.getInvalidLinkIterator() );
                 v[link_nmbr] = base_velocity;
                 a[link_nmbr] = base_acceleration;
             } else {
@@ -65,7 +65,7 @@ namespace CoDyCo {
         return 0;
     }
     
-    int rneaDynamicLoop(const TreeGraph & tree_graph,
+    int rneaDynamicLoop(const UndirectedTree & undirected_tree,
                          const KDL::JntArray &q, 
                          const Traversal & dynamical_traversal,
                          const std::vector<Twist>& v,
@@ -120,7 +120,7 @@ namespace CoDyCo {
                 
             } else {
                 
-                assert( dynamical_traversal.parent[link_nmbr] == tree_graph.getInvalidLinkIterator() );
+                assert( dynamical_traversal.parent[link_nmbr] == undirected_tree.getInvalidLinkIterator() );
                 
                 base_force = f[link_nmbr];
             }

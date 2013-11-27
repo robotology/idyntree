@@ -31,7 +31,7 @@ namespace CoDyCo {
     }
     
     
-    void getCenterOfMassLoop(const TreeGraph & tree_graph,
+    void getCenterOfMassLoop(const TreeGraph & ,
                             const KDL::JntArray &q, 
                             const Traversal & traversal,
                             std::vector<KDL::Vector>& subtree_COM,
@@ -84,7 +84,7 @@ namespace CoDyCo {
         com = subtree_COM[0];
     }
     
-    void getMomentumJacobianLoop(const TreeGraph & tree_graph,
+    void getMomentumJacobianLoop(const UndirectedTree & undirected_tree,
                                  const KDL::JntArray &q, 
                                  const Traversal & traversal,
                                  const std::vector<Frame>& X_b,
@@ -110,7 +110,7 @@ namespace CoDyCo {
                 //\todo improve this code, that is like o(n^2)
                 //It is easy to implement a o(n) version of it
                 //Get the floating base jacobian for current link (expressed in local frame)
-                getFloatingBaseJacobianLoop(tree_graph,q,traversal,link->link_nr,buffer_jac);
+                getFloatingBaseJacobianLoop(undirected_tree,q,traversal,link->link_nr,buffer_jac);
                 
                 //Multiply the jacobian with the 6DOF inertia
                 /** \todo add a proper method for doing this operation */
@@ -134,7 +134,7 @@ namespace CoDyCo {
         return;
     }
     
-    void getCOMJacobianLoop(const TreeGraph & tree_graph,
+    void getCOMJacobianLoop(const UndirectedTree & undirected_tree,
                            const KDL::JntArray &q, 
                            const Traversal & traversal,
                            const std::vector<Frame>& X_b,
@@ -143,7 +143,7 @@ namespace CoDyCo {
                            int part_id)
     {
         
-        assert(tree_graph.getNrOfDOFs()+6 == jac.columns());
+        assert(undirected_tree.getNrOfDOFs()+6 == jac.columns());
         
         SetToZero(jac);
     
@@ -158,7 +158,7 @@ namespace CoDyCo {
                 //\todo improve this code, that is like o(n^2)
                 //It is easy to implement a o(n) version of it
                 //Get the floating base jacobian for current link (expressed in local frame)
-                getFloatingBaseJacobianLoop(tree_graph,q,traversal,link->link_nr,buffer_jac);
+                getFloatingBaseJacobianLoop(undirected_tree,q,traversal,link->link_nr,buffer_jac);
                 
                 double m_i = link->I.getMass();
                 

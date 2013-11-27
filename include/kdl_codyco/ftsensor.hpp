@@ -36,7 +36,7 @@ namespace CoDyCo {
 class FTSensor
 {
     private:
-        const KDL::CoDyCo::TreeGraph * tree_graph;
+        const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
         std::string fixed_joint_name;
         KDL::Frame H_parent_sensor;
         int parent;
@@ -46,30 +46,30 @@ class FTSensor
       
         
     public:
-        FTSensor(const KDL::CoDyCo::TreeGraph & _tree_graph, 
+        FTSensor(const KDL::CoDyCo::UndirectedTree & _undirected_tree, 
                 const std::string _fixed_joint_name,
                 const int _parent,
                 const int _child,
                 const int _sensor_id) : 
-                tree_graph(&_tree_graph),
+                p_undirected_tree(&_undirected_tree),
                 fixed_joint_name(_fixed_joint_name),
                 H_parent_sensor(KDL::Frame::Identity()),
                 parent(_parent),
                 child(_child),
-                sensor_id(_sensor_id) {junction_id = tree_graph->getLink(child)->getAdjacentJoint(tree_graph->getLink(parent))->getJunctionIndex();}
+                sensor_id(_sensor_id) {junction_id = p_undirected_tree->getLink(child)->getAdjacentJoint(p_undirected_tree->getLink(parent))->getJunctionIndex();}
     
-        FTSensor(const KDL::CoDyCo::TreeGraph & _tree_graph, 
+        FTSensor(const KDL::CoDyCo::UndirectedTree & _undirected_tree, 
                 const std::string _fixed_joint_name,
                 const KDL::Frame _H_parent_sensor,
                 const int _parent,
                 const int _child,
                 const int _sensor_id) : 
-                tree_graph(&_tree_graph),
+                p_undirected_tree(&_undirected_tree),
                 fixed_joint_name(_fixed_joint_name),
                 H_parent_sensor(_H_parent_sensor),
                 parent(_parent),
                 child(_child),
-                sensor_id(_sensor_id) {junction_id = tree_graph->getLink(child)->getAdjacentJoint(tree_graph->getLink(parent))->getJunctionIndex();}
+                sensor_id(_sensor_id) {junction_id = p_undirected_tree->getLink(child)->getAdjacentJoint(p_undirected_tree->getLink(parent))->getJunctionIndex();}
 
                         
         ~FTSensor() {}
@@ -86,8 +86,8 @@ class FTSensor
                 return -(H_parent_sensor*measured_wrenches[sensor_id]);
             } else {
                 //The junction connected to an F/T sensor should be one with 0 DOF
-                assert( tree_graph->getLink(child)->getAdjacentJoint(tree_graph->getLink(parent))->joint.getType() == KDL::Joint::None );
-                KDL::Frame H_child_parent = tree_graph->getLink(parent)->pose(tree_graph->getLink(child),0.0);
+                assert( p_undirected_tree->getLink(child)->getAdjacentJoint(p_undirected_tree->getLink(parent))->joint.getType() == KDL::Joint::None );
+                KDL::Frame H_child_parent = p_undirected_tree->getLink(parent)->pose(p_undirected_tree->getLink(child),0.0);
                 assert(current_link == child);
                 return (H_child_parent*(H_parent_sensor*measured_wrenches[sensor_id]));
             }
@@ -100,9 +100,9 @@ class FTSensor
         
         KDL::Frame getH_child_sensor() const 
         {
-            assert(tree_graph->getLink(child)->getAdjacentJoint(tree_graph->getLink(parent))->joint.getType() == KDL::Joint::None );
-            assert(tree_graph->getLink(parent)->getAdjacentJoint(tree_graph->getLink(child))->joint.getType() == KDL::Joint::None );
-            KDL::Frame H_child_parent = tree_graph->getLink(parent)->pose(tree_graph->getLink(child),0.0);
+            assert(p_undirected_tree->getLink(child)->getAdjacentJoint(p_undirected_tree->getLink(parent))->joint.getType() == KDL::Joint::None );
+            assert(p_undirected_tree->getLink(parent)->getAdjacentJoint(p_undirected_tree->getLink(child))->joint.getType() == KDL::Joint::None );
+            KDL::Frame H_child_parent = p_undirected_tree->getLink(parent)->pose(p_undirected_tree->getLink(child),0.0);
             return H_child_parent*H_parent_sensor;
         }
         
@@ -162,23 +162,23 @@ class FTSensorList
             junction_id2ft_sensor_id.clear();
         }
     
-        FTSensorList(const KDL::CoDyCo::TreeGraph & tree_graph, const std::vector<std::string> & ft_names)
+        FTSensorList(const KDL::CoDyCo::UndirectedTree & undirected_tree, const std::vector<std::string> & ft_names)
         {
             link_FT_sensors.clear();
-            link_FT_sensors.resize(tree_graph.getNrOfLinks(),std::vector<const FTSensor *>(0));
+            link_FT_sensors.resize(undirected_tree.getNrOfLinks(),std::vector<const FTSensor *>(0));
             junction_id2ft_sensor_id.clear();
-            junction_id2ft_sensor_id.resize(tree_graph.getNrOfJunctions(),-1);
+            junction_id2ft_sensor_id.resize(undirected_tree.getNrOfJunctions(),-1);
             
             for(int i=0; i < (int)ft_names.size(); i++ ) {
-                KDL::CoDyCo::JunctionMap::const_iterator junction_it = tree_graph.getJunction(ft_names[i]);
-                if( junction_it == tree_graph.getInvalidJunctionIterator() ) { link_FT_sensors.clear(); junction_id2ft_sensor_id.clear(); ft_sensors_vector.clear(); return; }
+                KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(ft_names[i]);
+                if( junction_it == undirected_tree.getInvalidJunctionIterator() ) { link_FT_sensors.clear(); junction_id2ft_sensor_id.clear(); ft_sensors_vector.clear(); return; }
                 int parent_id = junction_it->parent->link_nr;
                 int child_id = junction_it->child->link_nr;
                 int sensor_id = i;
 #ifndef NDEBUG
                 //std::cout << "Adding FT sensor " << i << "That connects " << parent_id << " and " << child_id << std::endl;
 #endif 
-                ft_sensors_vector.push_back(new FTSensor(tree_graph,ft_names[i],parent_id,child_id,sensor_id));
+                ft_sensors_vector.push_back(new FTSensor(undirected_tree,ft_names[i],parent_id,child_id,sensor_id));
 #ifndef NDEBUG
                 //std::cout << "that have name " << ft_sensors_vector[i]->getName() << std::endl;
 #endif 
@@ -215,7 +215,7 @@ class FTSensorList
         std::vector<const FTSensor *> getFTSensorsOnLink(int link_index) const
         {
             /*
-            if( link_index < 0 || link_index >= tree_graph.getNrOfLinks() ) {
+            if( link_index < 0 || link_index >= .getNrOfLinks() ) {
                 /// \todo add verbose option
                 #ifndef NDEBUG
                 std::cerr << "FTSensorList::getFTSensorsOnLink error: link index out of bounds" << std::endl;
@@ -232,7 +232,7 @@ class FTSensorList
             } 
             
             /*
-            if( link_index < 0 || link_index >= tree_graph->getNrOfLinks() ) {
+            if( link_index < 0 || link_index >= ->getNrOfLinks() ) {
                 /// \todo add verbose option
                 #ifndef NDEBUG
                 std::cerr << "FTSensorList::getNrOfFTSensorsOnLink error: link index out of bounds" << std::endl;

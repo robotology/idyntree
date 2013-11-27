@@ -30,7 +30,6 @@ public:
      * It return the requested sample
      * @param[in] sample_nr the number of the requested sample
      * @param[out] sample the requested sample
-     * @param[out] timestamp the timestamp of the obtained sample
      * @return true if all went well, false otherwise
      */
     virtual bool getSample(const int sample_nr, DynamicSample & sample) = 0;

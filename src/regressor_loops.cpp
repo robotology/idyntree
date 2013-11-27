@@ -15,7 +15,7 @@ namespace KDL {
 namespace CoDyCo {
     
 
-void dynamicsRegressorLoop(const TreeGraph & tree_graph,
+void dynamicsRegressorLoop(const TreeGraph & ,
                          const KDL::JntArray &q, 
                          const Traversal & traversal,
                          const std::vector<Frame>& X_b,
@@ -62,7 +62,7 @@ void dynamicsRegressorLoop(const TreeGraph & tree_graph,
         }
 }
 
-void dynamicsRegressorFixedBaseLoop(const TreeGraph & tree_graph,
+void dynamicsRegressorFixedBaseLoop(const TreeGraph & ,
                          const KDL::JntArray &q, 
                          const Traversal & traversal,
                          const std::vector<Frame>& X_b,
@@ -99,23 +99,23 @@ void dynamicsRegressorFixedBaseLoop(const TreeGraph & tree_graph,
         }
 }
 
-void inertialParametersVectorLoop(const TreeGraph & tree_graph,
+void inertialParametersVectorLoop(const UndirectedTree & undirected_tree,
                                   Eigen::VectorXd & parameters_vector)
 {
-    for(int i=0; i < (int)tree_graph.getNrOfLinks(); i++ ) {
-            parameters_vector.segment(i*10,10) = Vectorize(tree_graph.getLink(i)->getInertia());
+    for(int i=0; i < (int)undirected_tree.getNrOfLinks(); i++ ) {
+            parameters_vector.segment(i*10,10) = Vectorize(undirected_tree.getLink(i)->getInertia());
     }
 }
 
-void inertialParametersVectorLoopFakeLinks(const TreeGraph & tree_graph,
+void inertialParametersVectorLoopFakeLinks(const UndirectedTree & undirected_tree,
                                   Eigen::VectorXd & parameters_vector,
                                   std::vector< std::string > fake_links_names
                                  )
 {
     int real_index_loop = 0;
-    for(int i=0; i < (int)tree_graph.getNrOfLinks(); i++ ) {
-        if( std::find(fake_links_names.begin(), fake_links_names.end(), tree_graph.getLink(i)->getName()) == fake_links_names.end() ) {
-            parameters_vector.segment(real_index_loop*10,10) = Vectorize(tree_graph.getLink(i)->getInertia());
+    for(int i=0; i < (int)undirected_tree.getNrOfLinks(); i++ ) {
+        if( std::find(fake_links_names.begin(), fake_links_names.end(), undirected_tree.getLink(i)->getName()) == fake_links_names.end() ) {
+            parameters_vector.segment(real_index_loop*10,10) = Vectorize(undirected_tree.getLink(i)->getInertia());
             real_index_loop++;
         }
     }
