@@ -10,7 +10,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <boost/config/posix_features.hpp>
 #include <fstream>
 
 namespace KDL {
