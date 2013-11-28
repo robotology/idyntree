@@ -74,7 +74,7 @@ class iCubTree : public DynTree
      */
      iCubTree(iCubTree_version_tag version, bool foot_ft=false, iCubTree_serialization_tag serial=SKINDYNLIB_SERIALIZATION,  unsigned int verbose=0);
 
-    ~iCubTree();
+    virtual ~iCubTree();
 };
 
 }//end namespace
