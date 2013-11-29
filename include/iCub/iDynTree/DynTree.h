@@ -9,7 +9,7 @@
 /**
  * \defgroup iDynTree iDynTree 
  *    
- * @ingroup codyco_modules
+ * @ingroup codyco_libraries
  *
  * \note <b>SI units adopted</b>: meters for lengths and radians
  *       for angles.
