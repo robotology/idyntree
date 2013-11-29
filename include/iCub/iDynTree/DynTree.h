@@ -10,6 +10,8 @@
  * \defgroup iDynTree iDynTree 
  *    
  * @ingroup codyco_libraries
+ * 
+ * YARP based Robot dynamics library 
  *
  * \note <b>SI units adopted</b>: meters for lengths and radians
  *       for angles.
