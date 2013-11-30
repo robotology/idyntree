@@ -48,6 +48,7 @@ set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES kdl_codyco)
 set(PKG_DEPENDS )
 
+INSTALL(EXPORT kdl_codyco-target DESTINATION "share/${PROJECT_NAME}") 
 
 set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_codyco-config.cmake")
 configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
