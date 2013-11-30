@@ -114,10 +114,6 @@ IF(CREATE_TESTS)
     ADD_SUBDIRECTORY(tests)
 ENDIF(CREATE_TESTS)
 
-export(PACKAGE orocos_kdl)
-
-
-INSTALL(EXPORT kdl_codyco-target DESTINATION share/kdl_codyco)
-
+export(PACKAGE kdl_codyco)
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
