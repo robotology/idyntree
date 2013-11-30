@@ -52,9 +52,7 @@ set(PKG_DEPENDS )
 
 INSTALL(EXPORT kdl_codyco-target DESTINATION "share/${PROJECT_NAME}") 
 
-set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_codyco-config.cmake")
-configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
-INSTALL(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME})
+
 
 
 # Make the package config file
@@ -120,5 +118,10 @@ ENDIF(CREATE_TESTS)
 export(TARGETS kdl_codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
 
 export(PACKAGE kdl_codyco)
+
+set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_codyco-config.cmake")
+configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
+INSTALL(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME})
+INSTALL(EXPORT kdl_codyco-target  DESTINATION share/${PROJECT_NAME})
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
