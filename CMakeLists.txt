@@ -46,24 +46,6 @@ if(NOT orocos_kdl_FOUND)
    endif(NOT Orocos-KDL_FOUND)
 endif(NOT orocos_kdl_FOUND)
 
-set(PKG_NAME ${PROJECT_NAME})
-set(PKG_LIBRARIES kdl_codyco)
-set(PKG_DEPENDS )
-
-INSTALL(EXPORT kdl_codyco-target DESTINATION "share/${PROJECT_NAME}") 
-
-
-
-
-# Make the package config file
-if (NOT MSVC)
-  set(PKG_DESC "Kinematics Dynamics Library additional solvers by CoDyCo project")
-  set(PKG_DEPENDS "orocos-kdl eigen3") # make the list separated by spaces instead of ;
-  set(PKG_LIBS "")
-  set(pkg_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/pkgconfig/kdl_codyco.pc")
-  configure_file("${pkg_conf_file}.in" "${pkg_conf_file}" @ONLY)
-  install(FILES ${pkg_conf_file} DESTINATION lib/pkgconfig/ COMPONENT pkgconfig)
-endif()
 
 include_directories(include ${orocos_kdl_INCLUDE_DIRS})
 
@@ -117,11 +99,13 @@ ENDIF(CREATE_TESTS)
 
 export(TARGETS kdl_codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
 
-export(PACKAGE kdl_codyco)
+EXPORT(PACKAGE kdl_codyco)
 
-set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_codyco-config.cmake")
-configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
-INSTALL(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME})
-INSTALL(EXPORT kdl_codyco-target  DESTINATION share/${PROJECT_NAME})
+CONFIGURE_FILE(cmake/kdl_codyco-config.cmake.in
+  ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake @ONLY)
+
+set(cmake_conf_file "${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake")
+INSTALL(FILES ${cmake_conf_file} DESTINATION share/kdl_codyco)
+INSTALL(EXPORT kdl_codyco-target  DESTINATION share/kdl_codyco)
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
