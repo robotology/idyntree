@@ -114,6 +114,8 @@ IF(CREATE_TESTS)
     ADD_SUBDIRECTORY(tests)
 ENDIF(CREATE_TESTS)
 
+export(TARGETS kdl_codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
+
 export(PACKAGE kdl_codyco)
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
