@@ -24,7 +24,7 @@ public:
      * It returns the number of samples contained in the dataset
      * @return number of the samples
      */
-    virtual int getNrOfSamples() = 0;
+    virtual int getNrOfSamples() const = 0;
     
     /**
      * It return the requested sample
@@ -32,7 +32,7 @@ public:
      * @param[out] sample the requested sample
      * @return true if all went well, false otherwise
      */
-    virtual bool getSample(const int sample_nr, DynamicSample & sample) = 0;
+    virtual bool getSample(const int sample_nr, DynamicSample & sample) const = 0;
 };
 
 /**

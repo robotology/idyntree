@@ -21,6 +21,8 @@
 #include <dirl/torqueRegressor.hpp>
 #include <dirl/baseDynamicsRegressor.hpp>
 
+#include <dirl/dataset/DynamicSample.hpp>
+
 namespace dirl
 {    
     
@@ -121,19 +123,25 @@ public:
     * (default: 10*tree.getNrOfSegments(), then depending on the type of regressor more can be added) 
     * 
     */
-    int getNrOfParameters();
+    int getNrOfParameters() const;
     
     /**
      * Get the number of outputs by the regressor currently generated (i.e. the number of columns of the regressor)
      *
      */ 
-    int getNrOfOutputs();
+    int getNrOfOutputs() const;
 
     /**
      * Get the number of degrees of freedom of the considered structure
      *
      */
-    int getNrOfDOFs() { return undirected_tree.getNrOfDOFs(); } 
+    int getNrOfDOFs() const;
+    
+    /**
+     * Get the number of wrench (force/torque) sensor of the regressor 
+     * 
+     */
+    int getNrOfWrenchSensors() const;
     
     //The feature of fixing/unfixing parameters would be implemented in a later version
     //int getNrOfUnknownParameters();
@@ -200,6 +208,13 @@ public:
      */
     int setRobotState(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const KDL::Twist& base_gravity);
 
+    /**
+     * Set the state of the robot and the sensor measures
+     * 
+     * @param sample the dirl::DynamicSample object containg the information about the robot state and
+     *               the sensor samples
+     */
+    int setRobotStateAndSensors(const DynamicSample & sample);
     
     //Eventually the call would be only setSensor and the sensor type 
     //subsystem would be more flexible, for now we do in this way

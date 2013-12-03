@@ -21,12 +21,12 @@ DynamicDatasetFile::~DynamicDatasetFile()
     
 }
 
-int DynamicDatasetFile::getNrOfSamples()
+int DynamicDatasetFile::getNrOfSamples() const
 {
     return dynamic_samples.size();
 }
 
-bool DynamicDatasetFile::getSample(int sample_n, DynamicSample & sample)
+bool DynamicDatasetFile::getSample(int sample_n, DynamicSample & sample) const
 {
     if( sample_n < 0 || sample_n >= getNrOfSamples() ) { return false; }
     sample = dynamic_samples[sample_n];

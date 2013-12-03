@@ -155,16 +155,26 @@ int DynamicRegressorGenerator::changeKinematicBase(std::string new_kinematic_bas
     return 0;
 }
 
-int DynamicRegressorGenerator::getNrOfParameters()
+int DynamicRegressorGenerator::getNrOfParameters() const
 {
     return NrOfParameters;
 }
     
-int DynamicRegressorGenerator::getNrOfOutputs()
+int DynamicRegressorGenerator::getNrOfOutputs() const
 {
     return NrOfOutputs;
 }
 
+int DynamicRegressorGenerator::getNrOfDOFs() const
+{
+    return undirected_tree.getNrOfDOFs();
+}
+
+
+int DynamicRegressorGenerator::getNrOfWrenchSensors() const
+{
+    return NrOfFTSensors;
+}
 
 
 std::string DynamicRegressorGenerator::getDescriptionOfParameter(int parameter_index, bool with_value, double value)
@@ -326,6 +336,27 @@ int DynamicRegressorGenerator::setRobotState(const KDL::JntArray &q, const KDL::
 {
     KDL::Twist dummy = KDL::Twist::Zero();
     return setRobotState(q,q_dot,q_dotdot,dummy,base_gravity);
+}
+
+int DynamicRegressorGenerator::setRobotStateAndSensors(const DynamicSample & sample)
+{
+    if( sample.getNrOfDOFs() != getNrOfDOFs() ) { return -1; }
+    if( sample.getNrOfWrenchSensors() != getNrOfWrenchSensors() ) { return -2; }
+    //if( sample.getNrOfTorqueSensors() != getNrOfTorqueSensors() ) { return -3; } 
+    
+    q = sample.getJointPosition();
+    dq = sample.getJointVelocity();
+    ddq = sample.getJointAcceleration();
+    kinematic_base_velocity = sample.getBaseVelocity();
+    kinematic_base_acceleration = sample.getBaseSpatialAcceleration();
+    
+    for(int i=0; i < getNrOfWrenchSensors(); i++ ) {
+        measured_wrenches[i] =  sample.getWrenchMeasure(i);
+    }
+    
+    /** \todo implement reading torque from sample, adding proper support for torque sensors */
+    
+    return 0;
 }
 
 int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Eigen::VectorXd & known_terms)
