@@ -57,7 +57,7 @@ namespace CoDyCo {
      * 
      * @param line_to_read if it is > 0, it indicates the numer of lines to read, otherwise all the line will be read
      */
-    bool stringVectorFromFile(const std::string filename, std::vector<std::string> strings, int line_to_read);
+    bool stringVectorFromFile(const std::string filename, std::vector<std::string> strings, int line_to_read=0);
     
 }
 }  

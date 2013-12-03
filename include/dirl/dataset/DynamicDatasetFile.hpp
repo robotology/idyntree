@@ -8,6 +8,7 @@
 
 #include <dirl/dataset/DynamicDatasetInterfaces.hpp>
 #include <dirl/dataset/DynamicSample.hpp>
+#include <boost/iterator/iterator_concepts.hpp>
 
 namespace dirl {
 
@@ -34,7 +35,7 @@ public:
     bool getSample(const int sample_n,DynamicSample & sample) const;
 };
 
-class DynamicDatasetFileCollection : public std::vector<DynamicDatasetFile>
+class DynamicDatasetFileCollection : public std::vector<DynamicDatasetFile>, public IBatchDynamicDataset
 {
 private:
     int nrOfDOFs;
@@ -42,13 +43,19 @@ private:
     int nrOfMeasuredWrenches;
     int nrOfMeasuredTorques;
     int nrOfMeasured3AxisFT;
-
+    
+    std::vector<int> datasets_samples;
+    int nr_of_samples;
 public:
     DynamicDatasetFileCollection();
     ~DynamicDatasetFileCollection();
         
     bool loadDatasetFilesFromFilenameVector(const std::vector<std::string> & filenames);
     bool loadDatasetFilesFromFile(const std::string & file_name);
+    
+    int getNrOfSamples() const;
+    
+    bool getSample(const int sample_n,DynamicSample & sample) const;
 };
 
 }
