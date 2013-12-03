@@ -9,8 +9,8 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
-#include <sstream>
-#include <fstream>
+
+#include <kdl_codyco/utils.hpp>
 
 namespace KDL {
 namespace CoDyCo {
@@ -326,24 +326,8 @@ namespace CoDyCo {
     {
         std::vector<std::string> links_serialization(getNrOfLinks());
         
-        std::ifstream links_file;
- 
-        links_file.open (file_name.c_str(), std::ifstream::in);
-        
-        if( !links_file ) {
-            std::cerr << "TreeSerialization::loadLinksFromFile error: could not load file " << file_name << std::endl;
-            return false;
-        }
-        
-        std::string data_buffer;
-        for(int i=0; i < getNrOfLinks(); i++ ) {
-            getline(links_file,data_buffer);
-            if( data_buffer == "" ) {
-                std::cerr << "TreeSerialization::loadLinksFromFile error: file " << file_name << " is not properly formatted";
-                return false;
-            }
-            links_serialization[i] = data_buffer;
-        }
+        if( !stringVectorFromFile(file_name,links_serialization,getNrOfLinks()) ) { return false; }
+
         
         return loadLinksFromStringVector(links_serialization);
     }
@@ -368,24 +352,7 @@ namespace CoDyCo {
     {
         std::vector<std::string> junctions_serialization(getNrOfJunctions());
         
-        std::ifstream links_file;
- 
-        links_file.open (file_name.c_str(), std::ifstream::in);
-        
-        if( !links_file ) {
-            std::cerr << "TreeSerialization::loadJunctionDOFsFromFile error: could not load file " << file_name << std::endl;
-            return false;
-        }
-        
-        std::string data_buffer;
-        for(int i=0; i < getNrOfJunctions(); i++ ) {
-            getline(links_file,data_buffer);
-            if( data_buffer == "" ) {
-                std::cerr << "TreeSerialization::loadJunctionsFromFile error: file " << file_name << " is not properly formatted at line " << i << std::endl;
-                return false;
-            }
-            junctions_serialization[i] = data_buffer;
-        }
+        if( !stringVectorFromFile(file_name,junctions_serialization,getNrOfJunctions()) ) { return false; }
         
         return loadJunctionsDOFsFromStringVector(junctions_serialization);
     }

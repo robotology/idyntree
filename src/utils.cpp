@@ -9,6 +9,8 @@
 #include <iostream>
 #include <kdl/kinfam_io.hpp>
 #include <kdl/frames_io.hpp>
+#include <sstream>
+#include <fstream>
 
 #include <Eigen/LU>
 
@@ -121,5 +123,42 @@ namespace CoDyCo {
             dest.setColumn(i,src.getColumn(i)/I);
         return true;
     }
+    
+    bool stringVectorFromFile(const std::string filename, std::vector<std::string> strings, int nr_of_string_to_read)
+    {
+        std::ifstream links_file;
+ 
+        links_file.open (filename.c_str(), std::ifstream::in);
+        
+        if( !links_file ) {
+            std::cerr << "KDL::CoDyCo::stringVectorFromFile error: could not load file " << filename << std::endl;
+            return false;
+        }
+        
+        std::string data_buffer;
+        
+        if( nr_of_string_to_read > 0 ) {
+            if( strings.size() != nr_of_string_to_read ) { strings.resize(nr_of_string_to_read); }
+            
+            for(int i=0; i < nr_of_string_to_read; i++ ) {
+                getline(links_file,data_buffer);
+                if( data_buffer == "" ) {
+                    std::cerr << "KDL::CoDyCo::stringVectorFromFile error: file " << filename << " is not properly formatted at line " << i << std::endl;
+                    return false;
+                }
+                strings[i] = data_buffer;
+            }
+        } else {
+            strings.resize(0);
+            while(getline(links_file,data_buffer) ) {
+                if( data_buffer == "" ) {
+                    std::cerr << "KDL::CoDyCo::stringVectorFromFile error: file " << filename << " is not properly formatted at line " << strings.size()+1 << std::endl;
+                    return false;
+                }
+                strings.push_back(data_buffer);
+            }
+        }
+    }
+
 }
 }

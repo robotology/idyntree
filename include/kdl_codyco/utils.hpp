@@ -52,6 +52,13 @@ namespace CoDyCo {
         return (Eigen::Matrix<typename Derived::Scalar, 3, 3>() << 0.0, -vec[2], vec[1], vec[2], 0.0, -vec[0], -vec[1], vec[0], 0.0).finished();
     }
     
+    /**
+     * Get a std::vector<std::string> where each element is a line of a given file
+     * 
+     * @param line_to_read if it is > 0, it indicates the numer of lines to read, otherwise all the line will be read
+     */
+    bool stringVectorFromFile(const std::string filename, std::vector<std::string> strings, int line_to_read);
+    
 }
 }  
 
