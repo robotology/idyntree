@@ -80,7 +80,7 @@ std::string int2string_serialization(const int in)
 bool treeSerializationFromParModelTree(const symoro_par_model& par_model, KDL::CoDyCo::TreeSerialization& serialization, const bool consider_first_link_inertia)
 {
     /** \todo move this names in general header */
-    const std::string base_name = "SymoroParModel_base";
+    const std::string base_name = "Link0";
     
     //As the SYMORO .par doesn't support names for link and joints, the links will be named Link1, Link2, and joints Joint1, Joint2
     const std::string link_common_name = "Link";
