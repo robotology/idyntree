@@ -8,7 +8,6 @@
 
 #include <dirl/dataset/DynamicDatasetInterfaces.hpp>
 #include <dirl/dataset/DynamicSample.hpp>
-#include <boost/iterator/iterator_concepts.hpp>
 
 namespace dirl {
 
