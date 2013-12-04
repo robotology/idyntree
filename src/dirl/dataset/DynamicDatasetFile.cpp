@@ -30,6 +30,9 @@ bool DynamicDatasetFile::getSample(int sample_n, DynamicSample & sample) const
 {
     if( sample_n < 0 || sample_n >= getNrOfSamples() ) { return false; }
     sample = dynamic_samples[sample_n];
+#ifndef NDEBUG
+    std::cerr << "DynamicDatasetFile::getSample("<<sample_n<<",..) returning sample with " << sample.getNrOfDOFs() << " dofs " << std::endl;
+#endif
     return true;
 }
 
@@ -39,18 +42,21 @@ double get_next_double(std::stringstream & ss,std::string & data_buffer)
     return atof(data_buffer.c_str());
 }
 
-bool DynamicDatasetFile::loadFromFile(const std::string file_name, const bool append)
+bool DynamicDatasetFile::loadFromFile(const std::string filename, const bool append)
 {
+    file_name = filename;
+    
     std::string data_buffer;
     std::string line_buffer;
     
     std::ifstream csv_file;
     
     #ifndef NDEBUG
-    bool verbose = true;
+    bool verbose = false;
     #endif 
     
-    csv_file.open (file_name.c_str(), std::ifstream::in);
+    csv_file.open (filename.c_str(), std::ifstream::in);
+    
     
     if( !csv_file ) {
         std::cerr << "DynamicDatasetFile error: it was not possible to open file " << file_name << std::endl;
@@ -61,7 +67,7 @@ bool DynamicDatasetFile::loadFromFile(const std::string file_name, const bool ap
     getline(csv_file,data_buffer);
     
     #ifndef NDEBUG
-    std::cout << "DynamicDatasetFile::loadFromFile: Reading first row: " << data_buffer << std::endl; 
+    if(verbose) std::cout << "DynamicDatasetFile::loadFromFile: Reading first row: " << data_buffer << std::endl; 
     #endif
     
     //Second row: //N_DOFS,N_MEASURED_TORQUES,N_MEASURED_WRENCHES,N_MEASURED_3AXIS_FT,N_ADDITIONAL_ME
@@ -77,7 +83,7 @@ bool DynamicDatasetFile::loadFromFile(const std::string file_name, const bool ap
     }
     
     #ifndef NDEBUG
-    std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfDOFs: " << nrOfDOFs << std::endl; 
+    if(verbose) std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfDOFs: " << nrOfDOFs << std::endl; 
     #endif
     
     getline(csv_file,data_buffer,',');
@@ -93,7 +99,7 @@ bool DynamicDatasetFile::loadFromFile(const std::string file_name, const bool ap
     
     
     #ifndef NDEBUG
-    std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfMeasuredTorques: " << nrOfMeasuredTorques << std::endl; 
+    if(verbose) std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfMeasuredTorques: " << nrOfMeasuredTorques << std::endl; 
     #endif
     
     getline(csv_file,data_buffer,',');
@@ -108,7 +114,7 @@ bool DynamicDatasetFile::loadFromFile(const std::string file_name, const bool ap
     }
         
     #ifndef NDEBUG
-    std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfMeasuredWrenches: " << nrOfMeasuredWrenches << std::endl; 
+    if(verbose) std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfMeasuredWrenches: " << nrOfMeasuredWrenches << std::endl; 
     #endif
     
     getline(csv_file,data_buffer,',');
@@ -122,39 +128,37 @@ bool DynamicDatasetFile::loadFromFile(const std::string file_name, const bool ap
         }
     }    
     #ifndef NDEBUG
-    std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfMeasured3AxisFT: " << nrOfMeasured3AxisFT << std::endl; 
+    if(verbose) std::cout << "DynamicDatasetFile::loadFromFile: Reading nrOfMeasured3AxisFT: " << nrOfMeasured3AxisFT << std::endl; 
     #endif
     
     getline(csv_file,data_buffer);
     
     #ifndef NDEBUG
-    std::cout << "DynamicDatasetFile::loadFromFile: Reading rest of second line: " << data_buffer << std::endl; 
+    if(verbose) std::cout << "DynamicDatasetFile::loadFromFile: Reading rest of second line: " << data_buffer << std::endl; 
     #endif
     
     //Third row: field names of the data (not parsed)
     getline(csv_file,data_buffer);
     
     #ifndef NDEBUG
-    std::cout << "DynamicDatasetFile::loadFromFile: Reading third line: " << data_buffer << std::endl; 
+    if(verbose) std::cout << "DynamicDatasetFile::loadFromFile: Reading third line: " << data_buffer << std::endl; 
     #endif
     
     //All remaining rows are data
+    DynamicSample sample(nrOfDOFs,nrOfMeasuredTorques,nrOfMeasuredWrenches,nrOfMeasured3AxisFT);
     if( !append ) {
-        DynamicSample sample(nrOfDOFs,nrOfMeasuredTorques,nrOfMeasuredWrenches,nrOfMeasured3AxisFT);
         dynamic_samples.resize(0,sample);
     }
     
     #ifndef NDEBUG
     int count = 4;
     #endif
-   
-    DynamicSample sample;
-    
+       
     while(getline(csv_file,line_buffer)) {
         std::stringstream ss(line_buffer);
         
          #ifndef NDEBUG
-         std::cout << "DynamicDatasetFile::loadFromFile: Reading " << count << "th line : " << line_buffer << std::endl; 
+         if(verbose) std::cout << "DynamicDatasetFile::loadFromFile: Reading " << count << "th line : " << line_buffer << std::endl; 
          count++;
          #endif
     
@@ -247,5 +251,11 @@ bool DynamicDatasetFile::loadFromFile(const std::string file_name, const bool ap
     
     return true;
 }
+
+std::string DynamicDatasetFile::getFileName() const
+{
+    return file_name;
+}
+
 
 }

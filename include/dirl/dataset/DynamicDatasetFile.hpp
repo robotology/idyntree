@@ -15,6 +15,8 @@ namespace dirl {
 class DynamicDatasetFile : public IBatchDynamicDataset
 {
 private:
+    std::string file_name;
+    
     int nrOfDOFs;
     
     int nrOfMeasuredWrenches;
@@ -33,6 +35,8 @@ public:
     int getNrOfSamples() const;
     
     bool getSample(const int sample_n,DynamicSample & sample) const;
+    
+    std::string getFileName() const;
 };
 
 class DynamicDatasetFileCollection : public std::vector<DynamicDatasetFile>, public IBatchDynamicDataset
