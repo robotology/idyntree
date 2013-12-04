@@ -3,6 +3,10 @@ language: cpp
 compiler:
   - gcc
   - clang
+  
+env:
+  - KDL_CODYCO_BUILD_TYPE=Debug
+  - KDL_CODYCO_BUILD_TYPE=Release
 
 before_script:
   - sudo apt-get install -qq libeigen3-dev 
@@ -16,6 +20,6 @@ before_script:
   - cd ../../..
   - mkdir build
   - cd build
-  - cmake -DCREATE_TESTS:BOOL=ON -DCMAKE_CXX_FLAGS:STRING="-Wall" ./..
+  - cmake -DCREATE_TESTS:BOOL=ON -DCMAKE_CXX_FLAGS:STRING="-Wall" -DCMAKE_BUILD_TYPE=${KDL_CODYCO_BUILD_TYPE} ./..
 
 script: make && make test
