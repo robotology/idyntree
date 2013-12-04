@@ -227,10 +227,16 @@ namespace CoDyCo {
        if( root->second.children.size() != 1 || root_child->second.segment.getJoint().getType() != Joint::None )
        {  
            if( tree.getNrOfJoints() != dofs.size() || tree.getNrOfSegments()+1 !=  links.size() ) {
+                std::cerr << "TreeSerialization::is_consistent returning false: because: tree is (dofs,links) " <<
+                             tree.getNrOfJoints() << " " <<  tree.getNrOfSegments()+1 << " while serialization " <<
+                             dofs.size() << " " << links.size() << std::endl;
                 return false;
            }
        } else {
            if( tree.getNrOfJoints() != dofs.size() || tree.getNrOfSegments() !=  links.size() ) {
+                 std::cerr << "TreeSerialization::is_consistent returning false: because: tree is (dofs,links) " <<
+                             tree.getNrOfJoints() << " " <<  tree.getNrOfSegments() << " while serialization " <<
+                             dofs.size() << " " << links.size() << std::endl;
                 return false;
            }
        }
