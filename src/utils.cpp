@@ -124,7 +124,7 @@ namespace CoDyCo {
         return true;
     }
     
-    bool stringVectorFromFile(const std::string filename, std::vector<std::string> strings, int nr_of_string_to_read)
+    bool stringVectorFromFile(const std::string filename, std::vector<std::string> & strings, int nr_of_string_to_read)
     {
         std::ifstream links_file;
  
@@ -158,6 +158,8 @@ namespace CoDyCo {
                 strings.push_back(data_buffer);
             }
         }
+        
+        return true;
     }
 
 }
