@@ -45,7 +45,7 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(KDL::Tree & _tree, std::str
     std::cout << "called DynamicRegressorGenerator with " << ft_sensor_names.size() << " ft sensor " <<  std::endl;
 #endif
     undirected_tree = KDL::CoDyCo::UndirectedTree(_tree,serialization);  
-    assert(serialization.is_consistent(_tree));
+    assert(undirected_tree.getSerialization().is_consistent(_tree));
     NrOfFakeLinks = fake_links_names.size();
     NrOfDOFs = _tree.getNrOfJoints();
     NrOfRealLinks_gen = undirected_tree.getNrOfLinks()-NrOfFakeLinks;
@@ -387,7 +387,11 @@ int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Ei
         switch( regr_ptr->getNrOfOutputs() )
         {
             case 6: 
-                assert(six_rows_buffer.cols() == 10*NrOfRealLinks_gen+6*NrOfFTSensors); 
+                if( consider_ft_offset ) {
+                    assert(six_rows_buffer.cols() == 10*NrOfRealLinks_gen+6*NrOfFTSensors); 
+                } else {
+                    assert(six_rows_buffer.cols() == 10*NrOfRealLinks_gen); 
+                }
                 regr_ptr->computeRegressor(q,dq,ddq,X_dynamic_base,v,a,measured_wrenches,measured_torques,six_rows_buffer,six_rows_vector);
                 regressor.block(start_row,0,regr_ptr->getNrOfOutputs(),getNrOfParameters()) = six_rows_buffer;
                 known_terms.segment(start_row,regr_ptr->getNrOfOutputs()) = six_rows_vector;
@@ -474,7 +478,9 @@ int DynamicRegressorGenerator::generate_random_regressors(Eigen::MatrixXd & A, c
                
                 if( static_regressor ) {
                     //In the case of the static regressor, only the acceleration (i.e. gravitational acceleration) is random
-
+                    Eigen::Map<Eigen::Vector3d>(a.rot.data) = M_PI*Eigen::Vector3d::Zero();
+                    Eigen::Map<Eigen::Vector3d>(v.vel.data) = M_PI*Eigen::Vector3d::Zero();
+                    Eigen::Map<Eigen::Vector3d>(v.rot.data) = M_PI*Eigen::Vector3d::Zero();
                 }
                 
                 
