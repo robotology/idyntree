@@ -4,6 +4,10 @@ compiler:
   - gcc
   - clang
 
+env:
+  - KDL_CODYCO_BUILD_TYPE=Debug
+  - KDL_CODYCO_BUILD_TYPE=Release
+
 before_script:
   - sudo apt-get install -qq libeigen3-dev 
   - git clone https://github.com/traversaro/orocos_kinematics_dynamics
@@ -16,6 +20,6 @@ before_script:
   - cd ../../..
   - mkdir build
   - cd build
-  - cmake -DCREATE_TESTS:BOOL=ON ./..
+  - cmake -DCREATE_TESTS:BOOL=ON -DCMAKE_BUILD_TYPE=${KDL_CODYCO_BUILD_TYPE} ./..
 
 script: make && make test
