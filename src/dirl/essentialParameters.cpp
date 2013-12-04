@@ -10,6 +10,7 @@
  
 #include <dirl/essentialParameters.hpp>
 #include <dirl/dirl_utils.hpp>
+#include <iostream>
 
 namespace dirl
 {
@@ -18,7 +19,7 @@ namespace dirl
                                              Eigen::MatrixXd & essential_parameters_subspace, 
                                              const double tol) 
     {        
-        if( regressor_generator.getNrOfParameters() <= 0 ) { return -2; }
+        if( regressor_generator.getNrOfParameters() <= 0 ) { std::cerr << "calculateEssentialParametersSubspace error: regressor_generator not consistent" << std::endl; return -2; }
         
         //Y^T*Y nrOfParams x nfOfParams matrix encoding the essential parameters subspace 
         Eigen::MatrixXd YTY(regressor_generator.getNrOfParameters(),regressor_generator.getNrOfParameters());
@@ -36,7 +37,12 @@ namespace dirl
             bool status = dataset.getSample(i,sample);
             if( !status ) { return -3; }
             
-            if( regressor_generator.getNrOfDOFs() != sample.getNrOfDOFs() ) { return -1; }
+            if( regressor_generator.getNrOfDOFs() != sample.getNrOfDOFs() ) {
+                std::cerr << "calculateEssentialParametersSubspace error: mismatch between regressor generator ( " 
+                          << regressor_generator.getNrOfDOFs() << " dofs ) and data sample (" << sample.getNrOfDOFs() << " dofs ) " <<std::endl;
+                return -1;
+                
+            }
 
             
             //Set robot state and sensors
@@ -50,7 +56,7 @@ namespace dirl
         
         int status = getRowSpaceBasis(YTY,essential_parameters_subspace,tol,true);
         
-        if( status != 0 ) { return -4; }
+        if( status != 0 ) { std::cerr << "calculateEssentialParametersSubspace error: getRowSpaceBasis failed" << std::endl;  return -4; }
         
         return 0;
     }
