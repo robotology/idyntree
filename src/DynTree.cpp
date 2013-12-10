@@ -25,7 +25,6 @@
 #include <yarp/math/SVD.h>
 
 #include <vector>
-#include <boost/concept_check.hpp>
 
 using namespace yarp::sig;
 using namespace yarp::math;
