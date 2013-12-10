@@ -25,6 +25,7 @@
 #include <yarp/math/SVD.h>
 
 #include <vector>
+#include <boost/concept_check.hpp>
 
 using namespace yarp::sig;
 using namespace yarp::math;
@@ -41,6 +42,7 @@ using namespace yarp::math;
  
 namespace iCub {
 namespace iDynTree {
+    
     
 DynTree::DynTree()
 {
@@ -764,6 +766,30 @@ yarp::sig::Vector DynTree::getAcc(const int link_index) const
     ret.setSubvector(3,ang_acc);
     return ret;
 }
+
+yarp::sig::Vector DynTree::getBaseForceTorque(int frame_link)
+{
+    bool check = true;
+    yarp::sig::Vector ret(6), ret_force(3), ret_torque(3);
+    KDL::Wrench ret_kdl;
+    if( frame_link == DEFAULT_INDEX_VALUE ) { frame_link = dynamic_traversal.order[0]->getLinkIndex(); }
+    
+    if( frame_link != WORLD_FRAME && (frame_link < 0 || frame_link >= getNrOfLinks()) ) { std::cerr << "DynTree::getBaseFroceTorque: link index " << frame_link <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
+    if( frame_link == dynamic_traversal.order[0]->getLinkIndex() ) 
+    {
+        ret_kdl = base_residual_f;
+    } else if( frame_link == WORLD_FRAME ) {
+        ret_kdl = world_base_frame*base_residual_f;
+    } else {
+        computePositions();
+        ret_kdl = X_dynamic_base[frame_link].Inverse(base_residual_f);
+    }
+    KDLtoYarp(ret_kdl.force,ret_force);
+    KDLtoYarp(ret_kdl.torque,ret_torque);
+    ret.setSubvector(0,ret_force);
+    ret.setSubvector(3,ret_torque);
+    return ret;
+}
     
 yarp::sig::Vector DynTree::getTorques(const std::string & part_name) const
 {
@@ -877,13 +903,12 @@ bool DynTree::estimateContactForces()
 bool DynTree::dynamicRNEA()
 {
     int ret;
-    KDL::Wrench base_force;
-    ret = rneaDynamicLoop(tree_graph,q,dynamic_traversal,v,a,f_ext,f,torques,base_force);
+    ret = rneaDynamicLoop(tree_graph,q,dynamic_traversal,v,a,f_ext,f,torques,base_residual_f);
     //Check base force: if estimate contact was called, it should be zero
     if( are_contact_estimated == true ) {
         //If the force were estimated wright
-        assert( base_force.force.Norm() < 1e-5 );
-        assert( base_force.torque.Norm() < 1e-5 );
+        assert( base_residual_f.force.Norm() < 1e-5 );
+        assert( base_residual_f.torque.Norm() < 1e-5 );
         //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
         for(int i=0; i < NrOfFTSensors; i++ ) {
             #ifndef NDEBUG
