@@ -28,14 +28,15 @@ namespace dirl
      */
     Eigen::MatrixXd zeroToZero(const Eigen::MatrixXd & input_mat, double tol=1e-5);
     
-      /**
+   /**
     * @param input_matrix a n x m matrix
     * @param row_space_basis_matrix a m X rank matrix, whose columns form a base for the row space of input_matrix
     * @param tol (optional) tollerance to use for calculating the rank of the matrix (default: max(n,m)*max(sigma)*machine_epslion)
     * 
     * \note This function allocate dynamically memory, so it is not real time safe
     */
-    int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol = -1.0, bool verbose = false);
+    int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol = -1.0, bool verbose = false );
+    int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol, bool verbose, Eigen::VectorXd & sigma);
     
     /**
      * Calculate the intersection of two given subspaces using Golub Principal Angles Algorithm from section 12.4.4 of Golub - Van Lohan Matrix Computation book

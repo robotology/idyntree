@@ -73,7 +73,7 @@ bool DynamicDatasetFileCollection::getSample(int sample_n, DynamicSample & sampl
 {
     if( sample_n < 0 || sample_n > getNrOfSamples() ) { return false; }
 #ifndef NDEBUG
-    std::cerr << " DynamicDatasetFileCollection::("<<sample_n<<",..) returning sample with " << sample.getNrOfDOFs() << " dofs " << std::endl;
+    //std::cerr << " DynamicDatasetFileCollection::("<<sample_n<<",..) returning sample with " << sample.getNrOfDOFs() << " dofs " << std::endl;
 #endif 
     int start_sample_index = 0;
     for(int dataset_index=0; dataset_index < size(); dataset_index++ ) {

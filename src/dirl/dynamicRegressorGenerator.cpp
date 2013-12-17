@@ -507,7 +507,7 @@ int DynamicRegressorGenerator::computeNumericalIdentifiableSubspace(Eigen::Matri
 {
     Eigen::MatrixXd A(getNrOfParameters(),getNrOfParameters());
     generate_random_regressors(A,static_regressor,fixed_base,grav_direction,n_samples,verbose);
-    return getRowSpaceBasis(A,basis);       
+    return getRowSpaceBasis(A,basis,-1.0,true);       
 }
 
 

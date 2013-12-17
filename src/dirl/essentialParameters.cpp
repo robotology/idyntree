@@ -14,18 +14,31 @@
 
 namespace dirl
 {
+    
     int calculateEssentialParametersSubspace(DynamicRegressorGenerator & regressor_generator, 
                                              const IBatchDynamicDataset & dataset,
                                              Eigen::MatrixXd & essential_parameters_subspace, 
-                                             const double tol) 
+                                             const double tol
+                                            )
+    {
+        Eigen::VectorXd dummy;
+        return calculateEssentialParametersSubspace(regressor_generator,dataset,essential_parameters_subspace,dummy,tol);
+    }
+    
+    int calculateEssentialParametersSubspace(DynamicRegressorGenerator & regressor_generator, 
+                                             const IBatchDynamicDataset & dataset,
+                                             Eigen::MatrixXd & essential_parameters_subspace, 
+                                             Eigen::VectorXd & sigma,
+                                             const double tol
+                                            ) 
     {        
         if( regressor_generator.getNrOfParameters() <= 0 ) { std::cerr << "calculateEssentialParametersSubspace error: regressor_generator not consistent" << std::endl; return -2; }
         
         //Y^T*Y nrOfParams x nfOfParams matrix encoding the essential parameters subspace 
         Eigen::MatrixXd YTY(regressor_generator.getNrOfParameters(),regressor_generator.getNrOfParameters());
         
-        Eigen::MatrixXd regressor;
-        Eigen::VectorXd known_terms;
+        Eigen::MatrixXd regressor(regressor_generator.getNrOfOutputs(),regressor_generator.getNrOfParameters());
+        Eigen::VectorXd known_terms(regressor_generator.getNrOfOutputs());
         
         DynamicSample sample;
         

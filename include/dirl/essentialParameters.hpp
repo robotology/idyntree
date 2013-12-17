@@ -25,6 +25,12 @@ namespace dirl
                                              const IBatchDynamicDataset & dataset, 
                                              Eigen::MatrixXd & essential_parameter_basis, 
                                              const double tol = 1e-6);
+    
+    int calculateEssentialParametersSubspace(DynamicRegressorGenerator & regressor, 
+                                             const IBatchDynamicDataset & dataset, 
+                                             Eigen::MatrixXd & essential_parameter_basis, 
+                                             Eigen::VectorXd & sigma,
+                                             const double tol = 1e-6);
 }
 
              

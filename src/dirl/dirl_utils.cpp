@@ -154,8 +154,14 @@ int getSubSpaceIntersection(const Eigen::MatrixXd & first_subspace, const Eigen:
 
     return 0;
 }
-    
+
 int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol, bool verbose)
+{
+    Eigen::VectorXd dummy;
+    return getRowSpaceBasis(input_matrix,row_space_basis_matrix,tol,verbose,dummy);
+}
+    
+int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol, bool verbose, Eigen::VectorXd & sigma)
 {
     if( input_matrix.rows() == 0 ) {
         row_space_basis_matrix.resize(input_matrix.cols(),0);
@@ -172,9 +178,8 @@ int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row
         int n = input_matrix.rows();
         int m = input_matrix.cols();
         
-        Eigen::VectorXd sigma = svd.singularValues();
+        sigma = svd.singularValues();
         
-        if(verbose) {  std::cout << "Singular values " << std::endl; std::cout << sigma << std::endl; }
         
         if( tol <= 0 ) {
             /** \todo find a better and consistend heuristic */
