@@ -21,7 +21,7 @@ namespace dirl
 
 class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface 
 {
-    const KDL::CoDyCo::TreeGraph * p_tree_graph;
+    const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
     const KDL::CoDyCo::FTSensorList * p_ft_list;
     
     const std::vector<int> linkIndeces2regrCols;
@@ -51,13 +51,13 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
          * 
          * @param _subtree_leaf_links the list of name of the leaf links of the considered subtree
          */
-        subtreeBaseDynamicsRegressor(const KDL::CoDyCo::TreeGraph & _tree_graph, 
+        subtreeBaseDynamicsRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree, 
                                      const KDL::CoDyCo::FTSensorList & _ft_list, 
                                      const std::vector<int> & _linkIndeces2regrCols,
                                      std::vector< std::string> _subtree_leaf_links=std::vector< std::string>(0),
                                      const bool _consider_ft_offset=false,
                                      bool _verbose=true):
-                                            p_tree_graph(&_tree_graph),
+                                            p_undirected_tree(&_undirected_tree),
                                             p_ft_list(&_ft_list),
                                             linkIndeces2regrCols(_linkIndeces2regrCols),
                                             subtree_leaf_links(_subtree_leaf_links),
@@ -66,7 +66,7 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
                                             verbose(_verbose),
                                             NrOfRealLinks_subtree(0)
         {
-            assert(linkIndeces2regrCols.size() == p_tree_graph->getNrOfLinks());
+            assert(linkIndeces2regrCols.size() == p_undirected_tree->getNrOfLinks());
             NrOfRealLinks_subtree = 0;
             for(int ll=0; ll < (int)linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
             assert(NrOfRealLinks_subtree >= 0);

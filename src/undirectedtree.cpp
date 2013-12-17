@@ -240,9 +240,9 @@ namespace CoDyCo {
                 //If the father is the root, dont'add any joint
                 //Add segment joint to UndirectedTree
                 const Joint & current_joint = current_segment.getJoint();
-                JunctionMap::iterator tree_graph_junction = getJunction(current_joint.getName(),true);
-                tree_graph_junction->parent = getLink(i->second.parent->second.segment.getName());
-                tree_graph_junction->child = getLink(i->second.segment.getName());
+                JunctionMap::iterator undirected_tree_junction = getJunction(current_joint.getName(),true);
+                undirected_tree_junction->parent = getLink(i->second.parent->second.segment.getName());
+                undirected_tree_junction->child = getLink(i->second.segment.getName());
                 
                 getLink(i->second.parent->first,true)->adjacent_joint.push_back(getJunction(current_joint.getName()));
                 getLink(i->second.parent->first,true)->is_this_parent.push_back(true);
@@ -262,7 +262,7 @@ namespace CoDyCo {
                     //             "as neighbour of " <<getLink(i->first,true)->second.link_name << " link_nr " << getLink(i->first,true)->second.link_nr  << std::endl;
                 #endif
                 //Avoid to have uninitialized buffer
-                //KDL::Frame X = tree_graph_joint->second.pose(0.0,true);
+                //KDL::Frame X = undirected_tree_joint->second.pose(0.0,true);
                 //KDL::Vector v(1,2,3);
                 //do some operation to ensure this function call is not eliminated by optimization
                 //v = X*v;

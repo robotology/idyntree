@@ -15,7 +15,7 @@ namespace KDL {
 namespace CoDyCo {
     
 
-void dynamicsRegressorLoop(const TreeGraph & ,
+void dynamicsRegressorLoop(const UndirectedTree & ,
                          const KDL::JntArray &q, 
                          const Traversal & traversal,
                          const std::vector<Frame>& X_b,
@@ -62,7 +62,7 @@ void dynamicsRegressorLoop(const TreeGraph & ,
         }
 }
 
-void dynamicsRegressorFixedBaseLoop(const TreeGraph & ,
+void dynamicsRegressorFixedBaseLoop(const UndirectedTree & ,
                          const KDL::JntArray &q, 
                          const Traversal & traversal,
                          const std::vector<Frame>& X_b,

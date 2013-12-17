@@ -32,7 +32,7 @@ int main()
     
     Tree test_tree = TestHumanoid();
     
-    //Creating relative TreeGraph
+    //Creating relative UndirectedTree
     UndirectedTree undirected_tree(test_tree);
     
     JntArray q,dq,ddq,torques;

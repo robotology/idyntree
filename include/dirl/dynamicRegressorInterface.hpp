@@ -29,7 +29,7 @@ public:
     virtual std::vector<int> getRelativeJunctions() = 0;
     
     /**
-     * Configure the regressor given a TreeGraph (for example allocating 
+     * Configure the regressor given a UndirectedTree (for example allocating 
      * the necessary datastructures)
      * 
      * Return 0 if all went well, a negative number otherwise

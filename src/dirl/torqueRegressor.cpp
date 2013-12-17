@@ -28,7 +28,7 @@ bool torqueRegressor::isActiveFTSensor(const int ft_sensor_id) const
 
 int torqueRegressor::configure()
 {      
-    const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_tree_graph;
+    const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_undirected_tree;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
    
     
@@ -137,7 +137,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
 #ifndef NDEBUG
     std::cerr << "Called torqueRegressor::computeRegressor " << std::endl;
 #endif 
-    //const KDL::CoDyCo::TreeGraph &  = *p_tree_graph;
+    //const KDL::CoDyCo::UndirectedTree &  = *p_undirected_tree;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
 
     
@@ -149,15 +149,15 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
          * \todo move this stuff in UndirectedTree
          * 
          */
-        JunctionMap::const_iterator torque_dof_it = p_tree_graph->getJunction(torque_dof_index);
+        JunctionMap::const_iterator torque_dof_it = p_undirected_tree->getJunction(torque_dof_index);
         LinkMap::const_iterator parent_root_it;
-        if( torque_dof_it->getChildLink() == p_tree_graph->getLink(subtree_root_link_id) ) {
+        if( torque_dof_it->getChildLink() == p_undirected_tree->getLink(subtree_root_link_id) ) {
             parent_root_it = torque_dof_it->getParentLink();
         } else {
             parent_root_it = torque_dof_it->getChildLink();
         }
-        assert(torque_dof_it->getJunctionIndex() < (int)p_tree_graph->getNrOfDOFs());
-        KDL::Twist S = parent_root_it->S(p_tree_graph->getLink(subtree_root_link_id),q(torque_dof_it->getJunctionIndex()));
+        assert(torque_dof_it->getJunctionIndex() < (int)p_undirected_tree->getNrOfDOFs());
+        KDL::Twist S = parent_root_it->S(p_undirected_tree->getLink(subtree_root_link_id),q(torque_dof_it->getJunctionIndex()));
         
     //all other columns, beside the one relative to the inertial parameters of the links of the subtree, are zero
     regressor_matrix.setZero();
@@ -166,7 +166,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         int link_id = subtree_links_indices[i];
         
         #ifndef NDEBUG
-        std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the regressor relative to link " << p_tree_graph->getLink(link_id)->getName() << std::endl;
+        std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the regressor relative to link " << p_undirected_tree->getLink(link_id)->getName() << std::endl;
         #endif
             
         if( linkIndeces2regrCols[link_id] != -1 ) {

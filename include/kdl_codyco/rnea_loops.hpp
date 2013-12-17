@@ -21,7 +21,7 @@ namespace CoDyCo {
      * \warning Basic function designed for use inside the solver, some no
      *          error checking on input/output parameters is done
      */
-     int rneaKinematicLoop(const TreeGraph & ,
+     int rneaKinematicLoop(const UndirectedTree & ,
                            const KDL::JntArray &q, 
                            const KDL::JntArray &q_dot,
                            const KDL::JntArray &q_dotdot,  
@@ -39,7 +39,7 @@ namespace CoDyCo {
      *          error checking on input/output parameters is done
      * 
      */
-    int rneaDynamicLoop(const TreeGraph & ,
+    int rneaDynamicLoop(const UndirectedTree & ,
                          const KDL::JntArray &q, 
                          const Traversal & dynamical_traversal,
                          const std::vector<Twist>& v,

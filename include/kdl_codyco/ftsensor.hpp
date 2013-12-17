@@ -26,7 +26,7 @@ namespace CoDyCo {
  * 
  * Data structure for containing information about internal FT sensors
  * To properly describe an FT sensor, it is necessary: 
- *      * the fixed junction of the FT sensor in the TreeGraph (a name)
+ *      * the fixed junction of the FT sensor in the UndirectedTree (a name)
  *      * the transformation from the *parent* KDL::Tree link to the the reference
  *        frame of the FT measurement ( H_p_s ) such that given the measure f_s, the 
  *        wrench applied by the parent on the child expressed in the parent frame ( f_p )

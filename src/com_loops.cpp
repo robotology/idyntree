@@ -31,7 +31,7 @@ namespace CoDyCo {
     }
     
     
-    void getCenterOfMassLoop(const TreeGraph & ,
+    void getCenterOfMassLoop(const UndirectedTree & ,
                             const KDL::JntArray &q, 
                             const Traversal & traversal,
                             std::vector<KDL::Vector>& subtree_COM,

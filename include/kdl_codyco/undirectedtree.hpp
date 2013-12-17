@@ -47,10 +47,6 @@ namespace CoDyCo
     typedef std::map<std::string,LinkMap::iterator> LinkNameMap;
     typedef std::map<std::string,JunctionMap::iterator> JunctionNameMap;
     
-    typedef UndirectedTree TreeGraph;
-    typedef UndirectedTreeLink TreeGraphLink;
-    typedef UndirectedTreeJunction TreeGraphJunction;
-    
     /**
      * This class represent a traversal, given a root, of a KDL::CoDyCo::UndirectedTree
      * It containts: 

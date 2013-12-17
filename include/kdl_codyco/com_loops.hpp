@@ -16,13 +16,13 @@
 namespace KDL {
 namespace CoDyCo {
    /**
-    * Loop for calculating, given a TreeGraph and a Traversal, the center
+    * Loop for calculating, given a UndirectedTree and a Traversal, the center
     * of mass of the tree, expressed in frame of the root link of the Traversal
     * 
     * \warning Basic function designed for use inside the solver,so some the
     *          error checking on input/output parameters is not guaranteed
     */
-   void getCenterOfMassLoop(const TreeGraph & ,
+   void getCenterOfMassLoop(const UndirectedTree & ,
                             const KDL::JntArray &q, 
                             const Traversal & traversal,
                             std::vector<KDL::Vector>& subtree_COM,
@@ -32,7 +32,7 @@ namespace CoDyCo {
     
     
    /**
-    * Loop for calculating, given a TreeGraph and a Traversal, the floating 
+    * Loop for calculating, given a UndirectedTree and a Traversal, the floating 
     * base jacobian (with the same assumptions of getAbsoluteJacobian)
     * of the momentum expressed in the frame of the base link of the Traversal,
     * divided by the overall mass of the tree. The first 
@@ -47,7 +47,7 @@ namespace CoDyCo {
     * @param buffer_2 a 6x(NrOfDOFs+6) MomentumJacobian, used for intermediate results
     * @param the total inertia of the tree, expressed in the base reference frame (useful to convert between the momentum jacobian and the COM jacobian)
     */
-   void getMomentumJacobianLoop(const TreeGraph & ,
+   void getMomentumJacobianLoop(const UndirectedTree & ,
                                 const KDL::JntArray &q, 
                                 const Traversal & traversal,
                                 const std::vector<Frame>& X_b,
@@ -57,7 +57,7 @@ namespace CoDyCo {
                                 RigidBodyInertia & total_inertia,
                                 int part_id = -1);
    
-   void getCOMJacobianLoop(const TreeGraph & ,
+   void getCOMJacobianLoop(const UndirectedTree & ,
                            const KDL::JntArray &q, 
                            const Traversal & traversal,
                            const std::vector<Frame>& X_b,

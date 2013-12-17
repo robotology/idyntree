@@ -29,7 +29,7 @@ int subtreeBaseDynamicsRegressor::isSubtreeLeaf(const int link_id) const
 
 int subtreeBaseDynamicsRegressor::configure()
 {    
-    const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_tree_graph;
+    const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_undirected_tree;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
     
     //Checking if the provided subtree leafs define a proper subtree
@@ -151,7 +151,7 @@ int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
     //std::cerr << "Called computeRegressor " << std::endl;
     //std::cerr << (*p_ft_list).toString();
 #endif 
-    //const KDL::CoDyCo::TreeGraph &  = *p_tree_graph;
+    //const KDL::CoDyCo::UndirectedTree &  = *p_undirected_tree;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
 
     

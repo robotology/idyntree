@@ -49,7 +49,7 @@ int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
     //std::cerr << "Called computeRegressor " << std::endl;
     //std::cerr << (*p_ft_list).toString();
 #endif 
-    const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_tree_graph;
+    const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_undirected_tree;
 
     
     if( regressor_matrix.rows() != getNrOfOutputs() ) {

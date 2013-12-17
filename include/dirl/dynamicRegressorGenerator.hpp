@@ -302,7 +302,7 @@ public:
    
     
 private:
-    KDL::CoDyCo::UndirectedTree undirected_tree; /**< TreeGraph object: it encodes the TreeSerialization and the TreePartition */
+    KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization and the TreePartition */
     
     KDL::CoDyCo::Traversal dynamic_traversal; 
     KDL::CoDyCo::Traversal kinematic_traversal; /**< Traversal object: defining the kinematic base of the tree */
