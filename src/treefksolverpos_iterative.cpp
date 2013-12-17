@@ -42,7 +42,7 @@ namespace CoDyCo {
         if( it == undirected_tree.getInvalidLinkIterator() ) 
             return -2;
             
-        return JntToCart(q_in,p_out,it->link_nr);
+        return JntToCart(q_in,p_out,it->getLinkIndex());
     }
 
     int TreeFkSolverPos_iterative::JntToCart(const KDL::JntArray& q_in, Frame& p_out, int segmentIndex)
@@ -58,7 +58,7 @@ namespace CoDyCo {
         if( it == undirected_tree.getInvalidLinkIterator() ) 
             return -2;
         
-        getFrameLoop(undirected_tree,q_in,traversal,traversal.order[0]->link_nr,segmentIndex,p_out);
+        getFrameLoop(undirected_tree,q_in,traversal,traversal.getOrderedLink(0)->getLinkIndex(),segmentIndex,p_out);
         return 0;    	
     }
 }

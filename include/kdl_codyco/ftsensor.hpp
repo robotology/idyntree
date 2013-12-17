@@ -86,7 +86,7 @@ class FTSensor
                 return -(H_parent_sensor*measured_wrenches[sensor_id]);
             } else {
                 //The junction connected to an F/T sensor should be one with 0 DOF
-                assert( p_undirected_tree->getLink(child)->getAdjacentJoint(p_undirected_tree->getLink(parent))->joint.getType() == KDL::Joint::None );
+                assert( p_undirected_tree->getLink(child)->getAdjacentJoint(p_undirected_tree->getLink(parent))->getJoint().getType() == KDL::Joint::None );
                 KDL::Frame H_child_parent = p_undirected_tree->getLink(parent)->pose(p_undirected_tree->getLink(child),0.0);
                 assert(current_link == child);
                 return (H_child_parent*(H_parent_sensor*measured_wrenches[sensor_id]));
@@ -100,8 +100,8 @@ class FTSensor
         
         KDL::Frame getH_child_sensor() const 
         {
-            assert(p_undirected_tree->getLink(child)->getAdjacentJoint(p_undirected_tree->getLink(parent))->joint.getType() == KDL::Joint::None );
-            assert(p_undirected_tree->getLink(parent)->getAdjacentJoint(p_undirected_tree->getLink(child))->joint.getType() == KDL::Joint::None );
+            assert(p_undirected_tree->getLink(child)->getAdjacentJoint(p_undirected_tree->getLink(parent))->getJoint().getType() == KDL::Joint::None );
+            assert(p_undirected_tree->getLink(parent)->getAdjacentJoint(p_undirected_tree->getLink(child))->getJoint().getType() == KDL::Joint::None );
             KDL::Frame H_child_parent = p_undirected_tree->getLink(parent)->pose(p_undirected_tree->getLink(child),0.0);
             return H_child_parent*H_parent_sensor;
         }
@@ -172,8 +172,8 @@ class FTSensorList
             for(int i=0; i < (int)ft_names.size(); i++ ) {
                 KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(ft_names[i]);
                 if( junction_it == undirected_tree.getInvalidJunctionIterator() ) { link_FT_sensors.clear(); junction_id2ft_sensor_id.clear(); ft_sensors_vector.clear(); return; }
-                int parent_id = junction_it->parent->link_nr;
-                int child_id = junction_it->child->link_nr;
+                int parent_id = junction_it->getParentLink()->getLinkIndex();
+                int child_id = junction_it->getChildLink()->getLinkIndex();
                 int sensor_id = i;
 #ifndef NDEBUG
                 //std::cout << "Adding FT sensor " << i << "That connects " << parent_id << " and " << child_id << std::endl;
@@ -257,9 +257,9 @@ class FTSensorList
             int child_id = ft_sensors_vector[ft_sensor_id]->getChild();
             int parent_id = ft_sensors_vector[ft_sensor_id]->getParent();
             
-            if(  parent_id == dynamic_traversal.parent[child_id]->getLinkIndex()  ) {
+            if(  parent_id == dynamic_traversal.getParentLink(child_id)->getLinkIndex()  ) {
                  return ft_sensors_vector[ft_sensor_id]->getH_child_sensor().Inverse(f[child_id]);
-            } else if (child_id == dynamic_traversal.parent[parent_id]->getLinkIndex() ) {
+            } else if (child_id == dynamic_traversal.getParentLink(parent_id)->getLinkIndex() ) {
                  return -ft_sensors_vector[ft_sensor_id]->getH_parent_sensor().Inverse(f[parent_id]);
             } else {
                 assert(false);

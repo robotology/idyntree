@@ -637,10 +637,10 @@ namespace CoDyCo {
         LinkMap::const_iterator link_it;
         
         for(link_it = links.begin(); link_it != links.end(); link_it++) {
-            if( traversal.parent[link_it->link_nr] == getInvalidLinkIterator() ) {
-                if( link_it != traversal.order[0] ) return -1;
+            if( traversal.getParentLink(link_it) == getInvalidLinkIterator() ) {
+                if( link_it != traversal.getBaseLink() ) return -1;
             } else {
-                if( !( link_it->is_adjacent_to(traversal.parent[link_it->link_nr]) ) ) return -1;
+                if( !( link_it->is_adjacent_to(traversal.getParentLink(link_it)) ) ) return -1;
             }
         }
         

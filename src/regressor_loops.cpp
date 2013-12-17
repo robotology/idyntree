@@ -27,8 +27,8 @@ void dynamicsRegressorLoop(const TreeGraph & ,
         
         Eigen::Matrix<double, 6, 10> netWrenchRegressor_i;
         
-        for(int l =(int)traversal.order.size()-1; l >= 0; l-- ) {
-            LinkMap::const_iterator link = traversal.order[l];
+        for(int l =(int)traversal.getNrOfVisitedLinks()-1; l >= 0; l-- ) {
+            LinkMap::const_iterator link = traversal.getOrderedLink(l);
             int i = link->getLinkIndex();
      
             //Each link affects the dynamics of the joints from itself to the base
@@ -40,8 +40,8 @@ void dynamicsRegressorLoop(const TreeGraph & ,
             //dynamics_regressor.block(0,(int)(10*i),6,10) = WrenchTransformationMatrix(X_b[i])*netWrenchRegressor_i;
     
             LinkMap::const_iterator child_link = link;
-            LinkMap::const_iterator parent_link=traversal.parent[link->getLinkIndex()];
-            while( child_link != traversal.order[0] ) {
+            LinkMap::const_iterator parent_link=traversal.getParentLink(link);
+            while( child_link != traversal.getOrderedLink(0) ) {
                 if( child_link->getAdjacentJoint(parent_link)->getNrOfDOFs() == 1 ) {
                     #ifndef NDEBUG
                     //std::cerr << "Calculating regressor columns for link " << link->getName() << " and joint " << child_link->getAdjacentJoint(parent_link)->getName() << std::endl;
@@ -57,7 +57,7 @@ void dynamicsRegressorLoop(const TreeGraph & ,
                 //std::cout << "Getting parent link of link of index " << child_link->getName() << " " << child_link->getLinkIndex() << std::endl;
                 //std::cout << "Current base " << traversal.order[0]->getName() << " " << traversal.order[0]->getLinkIndex() << std::endl;
                 #endif
-                parent_link = traversal.parent[child_link->getLinkIndex()];
+                parent_link = traversal.getParentLink(child_link);
             } 
         }
 }
@@ -74,8 +74,8 @@ void dynamicsRegressorFixedBaseLoop(const TreeGraph & ,
         
         Eigen::Matrix<double, 6, 10> netWrenchRegressor_i;
         
-        for(int l =(int)traversal.order.size()-1; l >= 0; l-- ) {
-            LinkMap::const_iterator link = traversal.order[l];
+        for(int l =(int)traversal.getNrOfVisitedLinks()-1; l >= 0; l-- ) {
+            LinkMap::const_iterator link = traversal.getOrderedLink(l);
             int i = link->getLinkIndex();
      
             //Each link affects the dynamics of the joints from itself to the base
@@ -84,8 +84,8 @@ void dynamicsRegressorFixedBaseLoop(const TreeGraph & ,
              //dynamics_regressor.block(0,(int)(10*i),6,10) = WrenchTransformationMatrix(X_b[i])*netWrenchRegressor_i;
     
             LinkMap::const_iterator child_link = link;
-            LinkMap::const_iterator parent_link=traversal.parent[link->getLinkIndex()];
-            while( child_link != traversal.order[0] ) {
+            LinkMap::const_iterator parent_link=traversal.getParentLink(link);
+            while( child_link != traversal.getOrderedLink(0) ) {
                 if( child_link->getAdjacentJoint(parent_link)->getNrOfDOFs() == 1 ) {
                     int dof_index = child_link->getAdjacentJoint(parent_link)->getDOFIndex();
                     int child_index = child_link->getLinkIndex();
@@ -94,7 +94,7 @@ void dynamicsRegressorFixedBaseLoop(const TreeGraph & ,
                             toEigen(parent_link->S(child_link,q(dof_index))).transpose()*WrenchTransformationMatrix(X_j_i)*netWrenchRegressor_i;
                 }
                 child_link = parent_link;
-                parent_link = traversal.parent[child_link->getLinkIndex()];
+                parent_link = traversal.getParentLink(child_link);
             } 
         }
 }

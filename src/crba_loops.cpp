@@ -25,9 +25,9 @@ namespace CoDyCo {
         Wrench F;
         
         //Sweep from root to leaf
-        for(int i=0;i<(int)traversal.order.size();i++)
+        for(int i=0;i<(int)traversal.getNrOfVisitedLinks();i++)
         {
-          LinkMap::const_iterator link_it = traversal.order[i];
+          LinkMap::const_iterator link_it = traversal.getOrderedLink(i);
           int link_index = link_it->getLinkIndex();
           
           //Collect RigidBodyInertia
@@ -35,12 +35,12 @@ namespace CoDyCo {
         
         }
         
-        for(int i=(int)traversal.order.size()-1; i >= 1; i-- ) {
+        for(int i=(int)traversal.getNrOfVisitedLinks()-1; i >= 1; i-- ) {
             int dof_id;
-            LinkMap::const_iterator link_it = traversal.order[i];
+            LinkMap::const_iterator link_it = traversal.getOrderedLink(i);
             int link_index = link_it->getLinkIndex();
          
-            LinkMap::const_iterator parent_it = traversal.parent[link_index];
+            LinkMap::const_iterator parent_it = traversal.getParentLink(link_index);
             int parent_index = parent_it->getLinkIndex();
                 
             if( link_it->getAdjacentJoint(parent_it)->getNrOfDOFs() == 1 ) {
@@ -62,7 +62,7 @@ namespace CoDyCo {
                     assert(parent_it != undirected_tree.getInvalidLinkIterator());
                     double q__;
                     int dof_id_;
-                    LinkMap::const_iterator predecessor_it = traversal.parent[link_it->getLinkIndex()];
+                    LinkMap::const_iterator predecessor_it = traversal.getParentLink(link_it);
                     LinkMap::const_iterator successor_it = link_it;
                     while( true ) {
                         
@@ -75,7 +75,7 @@ namespace CoDyCo {
                         F = successor_it->pose(predecessor_it,q__)*F;
                         
                         successor_it = predecessor_it;
-                        predecessor_it = traversal.parent[predecessor_it->getLinkIndex()];
+                        predecessor_it = traversal.getParentLink(predecessor_it);
                         
                         if( predecessor_it == undirected_tree.getInvalidLinkIterator() ) {
                             break;
@@ -114,9 +114,9 @@ namespace CoDyCo {
        Wrench F = Wrench::Zero();
         
         //Sweep from root to leaf
-        for(int i=0;i<(int)traversal.order.size();i++)
+        for(int i=0;i<(int)traversal.getNrOfVisitedLinks();i++)
         {
-          LinkMap::const_iterator link_it = traversal.order[i];
+          LinkMap::const_iterator link_it = traversal.getOrderedLink(i);
           int link_index = link_it->getLinkIndex();
           
           //Collect RigidBodyInertia
@@ -124,12 +124,12 @@ namespace CoDyCo {
 
         }
         
-        for(int i=(int)traversal.order.size()-1; i >= 1; i-- ) {
+        for(int i=(int)traversal.getNrOfVisitedLinks()-1; i >= 1; i-- ) {
             int dof_id;
-            LinkMap::const_iterator link_it = traversal.order[i];
+            LinkMap::const_iterator link_it = traversal.getOrderedLink(i);
             int link_index = link_it->getLinkIndex();
          
-            LinkMap::const_iterator parent_it = traversal.parent[link_index];
+            LinkMap::const_iterator parent_it = traversal.getParentLink(link_index);
             int parent_index = parent_it->getLinkIndex();
                 
             if( link_it->getAdjacentJoint(parent_it)->getNrOfDOFs() == 1 ) {
@@ -150,10 +150,10 @@ namespace CoDyCo {
                 F = Ic[link_index]*S_link_parent;
                 H(6+dof_id,6+dof_id) = dot(S_link_parent,F); 
                 
-                if( traversal.parent[link_it->getLinkIndex()] != undirected_tree.getInvalidLinkIterator() ) {
+                if( traversal.getParentLink(link_it) != undirected_tree.getInvalidLinkIterator() ) {
                     double q__;
                     int dof_id_;
-                    LinkMap::const_iterator predecessor_it = traversal.parent[link_it->getLinkIndex()];
+                    LinkMap::const_iterator predecessor_it = traversal.getParentLink(link_it);
                         LinkMap::const_iterator successor_it = link_it;
                     while(true) {
                         
@@ -169,7 +169,7 @@ namespace CoDyCo {
                         F = successor_it->pose(predecessor_it,q__)*F;
                         
                         successor_it = predecessor_it;
-                        predecessor_it = traversal.parent[predecessor_it->getLinkIndex()];
+                        predecessor_it = traversal.getParentLink(predecessor_it);
                         
                         if( predecessor_it == undirected_tree.getInvalidLinkIterator() ) { break; }
                         
@@ -205,7 +205,7 @@ namespace CoDyCo {
         
         //The first 6x6 submatrix of the FlotingBase Inertia Matrix are simply the spatial inertia 
         //of all the structure expressed in the base reference frame
-        H.data.block(0,0,6,6) = toEigen(Ic[traversal.order[0]->getLinkIndex()]);
+        H.data.block(0,0,6,6) = toEigen(Ic[traversal.getBaseLink()->getLinkIndex()]);
      
         return 0;
     }
@@ -219,7 +219,7 @@ namespace CoDyCo {
                                    )
     {
         #ifndef NDEBUG
-        if( undirected_tree.getNrOfLinks() != traversal.order.size() ||
+        if( undirected_tree.getNrOfLinks() != traversal.getNrOfVisitedLinks() ||
             undirected_tree.getNrOfDOFs() != q.rows() || 
             Ic.size() != undirected_tree.getNrOfLinks() ||
             H.columns() != (undirected_tree.getNrOfDOFs() + 6) ) 
@@ -233,9 +233,9 @@ namespace CoDyCo {
         Wrench F = Wrench::Zero();
         
         //Sweep from root to leaf
-        for(int i=0;i<(int)traversal.order.size();i++)
+        for(int i=0;i<(int)traversal.getNrOfVisitedLinks();i++)
         {
-          LinkMap::const_iterator link_it = traversal.order[i];
+          LinkMap::const_iterator link_it = traversal.getOrderedLink(i);
           int link_index = link_it->getLinkIndex();
           
           //Collect RigidBodyInertia
@@ -243,12 +243,12 @@ namespace CoDyCo {
 
         }
         
-        for(int i=(int)traversal.order.size()-1; i >= 1; i-- ) {
+        for(int i=(int)traversal.getNrOfVisitedLinks()-1; i >= 1; i-- ) {
             int dof_id;
-            LinkMap::const_iterator link_it = traversal.order[i];
+            LinkMap::const_iterator link_it = traversal.getOrderedLink(i);
             int link_index = link_it->getLinkIndex();
          
-            LinkMap::const_iterator parent_it = traversal.parent[link_index];
+            LinkMap::const_iterator parent_it = traversal.getParentLink(link_index);
             int parent_index = parent_it->getLinkIndex();
                 
             if( link_it->getAdjacentJoint(parent_it)->getNrOfDOFs() == 1 ) {
@@ -265,10 +265,10 @@ namespace CoDyCo {
                 KDL::Twist S_link_parent = parent_it->S(link_it,q_);
                 F = Ic[link_index]*S_link_parent;
                 
-                if( traversal.parent[link_it->getLinkIndex()] != undirected_tree.getInvalidLinkIterator() ) {
+                if( traversal.getParentLink(link_it) != undirected_tree.getInvalidLinkIterator() ) {
                     double q__;
                     int dof_id_;
-                    LinkMap::const_iterator predecessor_it = traversal.parent[link_it->getLinkIndex()];
+                    LinkMap::const_iterator predecessor_it = traversal.getParentLink(link_it);
                     LinkMap::const_iterator successor_it = link_it;
                     
                     while(true) {
@@ -282,7 +282,7 @@ namespace CoDyCo {
                         F = successor_it->pose(predecessor_it,q__)*F;
                         
                         successor_it = predecessor_it;
-                        predecessor_it = traversal.parent[predecessor_it->getLinkIndex()];
+                        predecessor_it = traversal.getParentLink(predecessor_it);
                         
                         if( predecessor_it == undirected_tree.getInvalidLinkIterator() ) { break; }
                         
@@ -302,7 +302,7 @@ namespace CoDyCo {
                      
                     //The first 6x6 submatrix of the Momentum Jacobian are simply the spatial inertia 
                     //of all the structure expressed in the base reference frame
-                    H.data.block(0,0,6,6) = toEigen(Ic[traversal.order[0]->getLinkIndex()]);
+                    H.data.block(0,0,6,6) = toEigen(Ic[traversal.getBaseLink()->getLinkIndex()]);
      
                     
                 }
@@ -313,10 +313,10 @@ namespace CoDyCo {
         //We have then to translate the reference point of the obtained jacobian to the com
         //The Ic[traversal.order[0]->getLink(index)] contain the spatial inertial of all the tree
         //expressed in link coordite frames
-        Vector com = Ic[traversal.order[0]->getLinkIndex()].getCOG();
+        Vector com = Ic[traversal.getBaseLink()->getLinkIndex()].getCOG();
         H.changeRefPoint(com);
         
-        InertiaCOM = Frame(com)*Ic[traversal.order[0]->getLinkIndex()];
+        InertiaCOM = Frame(com)*Ic[traversal.getBaseLink()->getLinkIndex()];
         
         return 0;
     }

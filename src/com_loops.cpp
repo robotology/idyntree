@@ -39,30 +39,30 @@ namespace CoDyCo {
                             Vector & com,
                             int part_id)
     {
-        for(int l=traversal.order.size()-1; l>=0; l-- ) {
-            LinkMap::const_iterator link = traversal.order[l];
+        for(int l=traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
+            LinkMap::const_iterator link = traversal.getOrderedLink(l);
             
             #ifndef NDEBUG
             //std::cerr << "Traversal size " << traversal.order.size() << std::endl;
             //std::cerr << "TreeCOMSolver: considering link " << link->second.link_name << " " << link->second.link_nr << std::endl;
             #endif
             //if all part is considered, or this link belong to the considered part
-            if( part_id < 0 || part_id == (int)link->body_part_nr ) {
-                subtree_COM[link->link_nr] = link->I.getCOG();
-                subtree_mass[link->link_nr] = link->I.getMass();
+            if( part_id < 0 || part_id == (int)link->getBodyPartIndex() ) {
+                subtree_COM[link->getLinkIndex()] = link->getInertia().getCOG();
+                subtree_mass[link->getLinkIndex()] = link->getInertia().getMass();
             } else {
-                subtree_COM[link->link_nr] = Vector::Zero();
-                subtree_mass[link->link_nr] = 0.0;
+                subtree_COM[link->getLinkIndex()] = Vector::Zero();
+                subtree_mass[link->getLinkIndex()] = 0.0;
             }
             
             for(int j = 0; j < (int)link->getNrOfAdjacentLinks(); j++ ) {
-                LinkMap::const_iterator next_link = link->adjacent_link[j];
-                if( next_link != traversal.parent[link->link_nr] ) {
-                    int index = link->link_nr;
-                    int s = next_link->link_nr;
+                LinkMap::const_iterator next_link = link->getAdjacentLink(j);
+                if( next_link != traversal.getParentLink(link) ) {
+                    int index = link->getLinkIndex();
+                    int s = next_link->getLinkIndex();
                     double joint_position;
-                    if(link->adjacent_joint[j]->joint.getType() != Joint::None) {
-                        joint_position = q(link->adjacent_joint[j]->q_nr);
+                    if(link->getAdjacentJoint(j)->getJoint().getType() != Joint::None) {
+                        joint_position = q(link->getAdjacentJoint(j)->getDOFIndex());
                     } else {
                         joint_position = 0;
                     }    
@@ -101,16 +101,16 @@ namespace CoDyCo {
     
         total_inertia = RigidBodyInertia::Zero();
         
-        for(int l=traversal.order.size()-1; l>=0; l-- ) {
+        for(int l=traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
             
-            LinkMap::const_iterator link = traversal.order[l];
+            LinkMap::const_iterator link = traversal.getOrderedLink(l);
 
             //if all part is considered, or this link belong to the considered part
-            if( part_id < 0 || part_id == (int)link->body_part_nr ) {
+            if( part_id < 0 || part_id == (int)link->getBodyPartIndex() ) {
                 //\todo improve this code, that is like o(n^2)
                 //It is easy to implement a o(n) version of it
                 //Get the floating base jacobian for current link (expressed in local frame)
-                getFloatingBaseJacobianLoop(undirected_tree,q,traversal,link->link_nr,buffer_jac);
+                getFloatingBaseJacobianLoop(undirected_tree,q,traversal,link->getLinkIndex(),buffer_jac);
                 
                 //Multiply the jacobian with the 6DOF inertia
                 /** \todo add a proper method for doing this operation */
@@ -118,7 +118,7 @@ namespace CoDyCo {
                 multiplyInertiaJacobian(buffer_jac,link->getInertia(),buffer_momentum_jac);
                 
                 //Project the jacobian to the base frame
-                buffer_momentum_jac.changeRefFrame(X_b[link->link_nr]);
+                buffer_momentum_jac.changeRefFrame(X_b[link->getLinkIndex()]);
 
                 //Add the compute jacobian to the total one
                 jacobian_momentum.data += buffer_momentum_jac.data;
@@ -127,7 +127,7 @@ namespace CoDyCo {
                 #ifndef NDEBUG
                 //std::cerr << "Total_inertia mass " << total_inertia.getMass() << std::endl;
                 #endif
-                kdl_inertia = total_inertia + X_b[link->link_nr]*link->getInertia();
+                kdl_inertia = total_inertia + X_b[link->getLinkIndex()]*link->getInertia();
                 total_inertia = kdl_inertia;
             }
         }
@@ -149,24 +149,24 @@ namespace CoDyCo {
     
         double m = 0;
             
-        for(int l=traversal.order.size()-1; l>=0; l-- ) {
+        for(int l=traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
             
-            LinkMap::const_iterator link = traversal.order[l];
+            LinkMap::const_iterator link = traversal.getOrderedLink(l);
 
             //if all part is considered, or this link belong to the considered part
-            if( part_id < 0 || part_id == (int)link->body_part_nr ) {
+            if( part_id < 0 || part_id == (int)link->getBodyPartIndex() ) {
                 //\todo improve this code, that is like o(n^2)
                 //It is easy to implement a o(n) version of it
                 //Get the floating base jacobian for current link (expressed in local frame)
-                getFloatingBaseJacobianLoop(undirected_tree,q,traversal,link->link_nr,buffer_jac);
+                getFloatingBaseJacobianLoop(undirected_tree,q,traversal,link->getLinkIndex(),buffer_jac);
                 
-                double m_i = link->I.getMass();
+                double m_i = link->getInertia().getMass();
                 
                 //Change the pole of the jacobian in the link COM
-                buffer_jac.changeRefPoint(link->I.getCOG());
+                buffer_jac.changeRefPoint(link->getInertia().getCOG());
                 
                 //Change the orientation to the one of the base
-                buffer_jac.changeBase(X_b[link->link_nr].M);
+                buffer_jac.changeBase(X_b[link->getLinkIndex()].M);
 
                 //Add the computed jacobian to the total one, multiplied by the link mass
                 jac.data += m_i*buffer_jac.data;

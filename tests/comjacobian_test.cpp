@@ -38,24 +38,24 @@ using namespace KDL::CoDyCo;
     
         double m = 0;
             
-        for(int l=traversal.order.size()-1; l>=0; l-- ) {
+        for(int l=traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
             
-            LinkMap::const_iterator link = traversal.order[l];
+            LinkMap::const_iterator link = traversal.getOrderedLink(l);
 
             //if all part is considered, or this link belong to the considered part
-            if( part_id < 0 || part_id == (int)link->body_part_nr ) {
+            if( part_id < 0 || part_id == (int)link->getBodyPartIndex() ) {
                 //\todo improve this code, that is like o(n^2)
                 //It is easy to implement a o(n) version of it
                 //Get the floating base jacobian for current link (expressed in local frame)
-                getFloatingBaseJacobianLoop(undirected_tree,q,traversal,link->link_nr,buffer_jac);
+                getFloatingBaseJacobianLoop(undirected_tree,q,traversal,link->getLinkIndex(),buffer_jac);
                 
-                double m_i = link->I.getMass();
+                double m_i = link->getInertia().getMass();
                 
                 //Change the pole of the jacobian in the link COM
-                buffer_jac.changeRefPoint(link->I.getCOG());
+                buffer_jac.changeRefPoint(link->getInertia().getCOG());
                 
                 //Change the orientation to the one of the base
-                buffer_jac.changeBase(X_b[link->link_nr].M);
+                buffer_jac.changeBase(X_b[link->getLinkIndex()].M);
 
                 //Add the computed jacobian to the total one, multiplied by the link mass
                 jac.data += m_i*buffer_jac.data;

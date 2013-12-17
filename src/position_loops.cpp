@@ -21,14 +21,14 @@ namespace CoDyCo {
         
         Frame currentFrame;
         Frame resultFrame = Frame::Identity();
-        for(LinkMap::const_iterator link=distal_it; link != proximal_it; link = traversal.parent[link->link_nr] ) {
-            LinkMap::const_iterator parent_link = traversal.parent[link->link_nr];
+        for(LinkMap::const_iterator link=distal_it; link != proximal_it; link = traversal.getParentLink(link) ) {
+            LinkMap::const_iterator parent_link = traversal.getParentLink(link);
             assert( parent_link != undirected_tree.getInvalidLinkIterator() );
             
             double joint_position;
             
-            if( link->getAdjacentJoint(parent_link)->joint.getType() != Joint::None ) {
-                joint_position = q((link->getAdjacentJoint(parent_link))->q_nr);
+            if( link->getAdjacentJoint(parent_link)->getJoint().getType() != Joint::None ) {
+                joint_position = q((link->getAdjacentJoint(parent_link))->getDOFIndex());
             } else {
                 joint_position =0;
             }
@@ -61,19 +61,19 @@ namespace CoDyCo {
                       const Traversal & traversal,
                       std::vector<Frame> & X_base)
     {
-          for(int i=0; i < (int)traversal.order.size(); i++) {
+          for(int i=0; i < (int)traversal.getNrOfVisitedLinks(); i++) {
             double joint_pos;
-            LinkMap::const_iterator link_it = traversal.order[i];
-            int link_nmbr = link_it->link_nr; 
+            LinkMap::const_iterator link_it = traversal.getOrderedLink(i);
+            int link_nmbr = link_it->getLinkIndex(); 
             if( i == 0 ) {
-                assert( traversal.parent[link_nmbr] == undirected_tree.getInvalidLinkIterator() );
+                assert( traversal.getParentLink(link_nmbr) == undirected_tree.getInvalidLinkIterator() );
                 X_base[link_nmbr] = KDL::Frame::Identity();
             } else {
-                LinkMap::const_iterator parent_it = traversal.parent[link_it->link_nr];
-                int parent_nmbr = parent_it->link_nr;
+                LinkMap::const_iterator parent_it = traversal.getParentLink(link_it);
+                int parent_nmbr = parent_it->getLinkIndex();
                 
-                if( link_it->getAdjacentJoint(parent_it)->joint.getType() != Joint::None ) {
-                    int dof_nr = link_it->getAdjacentJoint(parent_it)->q_nr;
+                if( link_it->getAdjacentJoint(parent_it)->getJoint().getType() != Joint::None ) {
+                    int dof_nr = link_it->getAdjacentJoint(parent_it)->getDOFIndex();
                     joint_pos = q(dof_nr);
                 } else {
                     joint_pos =  0.0;

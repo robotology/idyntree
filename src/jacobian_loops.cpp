@@ -28,8 +28,8 @@ namespace CoDyCo {
         //All the columns not modified are zero
         SetToZero(jac);
         
-        KDL::CoDyCo::LinkMap::const_iterator parent_link=traversal.parent[current_link->getLinkIndex()];
-        while(current_link != traversal.order[0]) {
+        KDL::CoDyCo::LinkMap::const_iterator parent_link=traversal.getParentLink(current_link);
+        while(current_link != traversal.getBaseLink()) {
             double joint_pos = 0.0;
             if( current_link->getAdjacentJoint(parent_link)->getNrOfDOFs() == 1 ) {
                 KDL::Twist jac_col;
@@ -49,7 +49,7 @@ namespace CoDyCo {
             T_total = T_total*X_current_parent;
             
             current_link = parent_link;
-            parent_link = traversal.parent[current_link->getLinkIndex()];
+            parent_link = traversal.getParentLink(current_link);
         }
 
     }
@@ -70,8 +70,8 @@ namespace CoDyCo {
         //All the columns not modified are zero
         SetToZero(jac);
         
-        KDL::CoDyCo::LinkMap::const_iterator parent_link=traversal.parent[current_link->getLinkIndex()];
-        while(current_link != traversal.order[0]) {
+        KDL::CoDyCo::LinkMap::const_iterator parent_link=traversal.getParentLink(current_link);
+        while(current_link != traversal.getBaseLink()) {
             double joint_pos = 0.0;
             if( current_link->getAdjacentJoint(parent_link)->getNrOfDOFs() == 1 ) {
                 KDL::Twist jac_col;
@@ -93,7 +93,7 @@ namespace CoDyCo {
             T_total = T_total*X_current_parent;
             
             current_link = parent_link;
-            parent_link = traversal.parent[current_link->getLinkIndex()];
+            parent_link = traversal.getParentLink(current_link);
         }
         
         //Setting the floating part of the Jacobian

@@ -106,9 +106,11 @@ namespace CoDyCo {
     {
         assert( adjacent_index >= 0 && adjacent_index < (int)adjacent_joint.size());
         if( adjacent_joint[adjacent_index]->parent->getLinkIndex() == getLinkIndex() ) {
+            assert( adjacent_joint[adjacent_index]->child == adjacent_link[adjacent_index] );
             return adjacent_joint[adjacent_index]->child;
         } else {
             assert( adjacent_joint[adjacent_index]->child->getLinkIndex() == getLinkIndex() );
+            assert( adjacent_joint[adjacent_index]->parent == adjacent_link[adjacent_index] );
             return adjacent_joint[adjacent_index]->parent;
         }
     }

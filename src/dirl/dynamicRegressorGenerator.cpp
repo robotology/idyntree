@@ -543,7 +543,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV1(Eige
         /////////////////////////////////////////
         /// Subspace till a given tree
         /////////////////////////////////////////
-        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.order[i];
+        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.getOrderedLink(i);
         
         #ifndef NDEBUG
         std::cerr << "Generating samples for all DOFs " << link_it->getName() << std::endl;
@@ -579,7 +579,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV1(Eige
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
-                    if( considered_next_link == dynamic_traversal.parent[considered_link_index] ) {
+                    if( considered_next_link == dynamic_traversal.getParentLink(considered_link_index) ) {
                         //This is the parent of the link, already considered
                         continue;
                     }
@@ -805,8 +805,8 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV2(Eige
     //Regroup from the leafs
     std::vector<bool> link_is_descendant(undirected_tree.getNrOfLinks(),false);
     
-    for(int i = dynamic_traversal.order.size()-1; i >=0 ; i-- ) {
-        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.order[i];
+    for(int i = dynamic_traversal.getNrOfVisitedLinks()-1; i >=0 ; i-- ) {
+        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.getOrderedLink(i);
         
         int link_index = link_it->getLinkIndex();
         
@@ -838,7 +838,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV2(Eige
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
-                    if( considered_next_link == dynamic_traversal.parent[considered_link_index] ) {
+                    if( considered_next_link == dynamic_traversal.getParentLink(considered_link_index) ) {
                         //This is the parent of the link, already considered
                         continue;
                     }
@@ -959,8 +959,8 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleA
    Eigen::MatrixXd identifiable_subspace_projector = complete_identifiable_space_dense_basis*complete_identifiable_space_dense_basis.transpose();
    Eigen::MatrixXd nonidentifiable_subspace_projector = Eigen::MatrixXd::Identity(np,np)-identifiable_subspace_projector;
   
-    for(int i = dynamic_traversal.order.size()-1; i >=0 ; i-- ) {
-        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.order[i];
+    for(int i = dynamic_traversal.getNrOfVisitedLinks()-1; i >=0 ; i-- ) {
+        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.getOrderedLink(i);
         
         int link_index = link_it->getLinkIndex();
         
@@ -1055,8 +1055,8 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceAdvance
    Eigen::MatrixXd identifiable_subspace_projector = complete_identifiable_space_dense_basis*complete_identifiable_space_dense_basis.transpose();
    Eigen::MatrixXd nonidentifiable_subspace_projector = Eigen::MatrixXd::Identity(np,np)-identifiable_subspace_projector;
   
-    for(int i = dynamic_traversal.order.size()-1; i >=0 ; i-- ) {
-        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.order[i];
+    for(int i = dynamic_traversal.getNrOfVisitedLinks()-1; i >=0 ; i-- ) {
+        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.getOrderedLink(i);
         
         int link_index = link_it->getLinkIndex();
         
@@ -1206,8 +1206,8 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceAdvance
     Eigen::MatrixXd identifiable_subspace_projector = dense_basis*dense_basis.transpose();
     Eigen::MatrixXd nonidentifiable_subspace_projector = Eigen::MatrixXd::Identity(np,np)-identifiable_subspace_projector;
   
-    for(int i = dynamic_traversal.order.size()-1; i >=0 ; i-- ) {
-        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.order[i];
+    for(int i = dynamic_traversal.getNrOfVisitedLinks()-1; i >=0 ; i-- ) {
+        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.getOrderedLink(i);
         
         int link_index = link_it->getLinkIndex();
         
@@ -1299,7 +1299,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceAdvance
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
-                    if( considered_next_link == dynamic_traversal.parent[considered_link_index] ) {
+                    if( considered_next_link == dynamic_traversal.getParentLink(considered_link_index) ) {
                         //This is the parent of the link, already considered
                         continue;
                     }
@@ -1396,8 +1396,8 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleP
     Eigen::MatrixXd identifiable_subspace_projector = dense_basis*dense_basis.transpose();
     Eigen::MatrixXd nonidentifiable_subspace_projector = Eigen::MatrixXd::Identity(np,np)-identifiable_subspace_projector;
   
-    for(int i = dynamic_traversal.order.size()-1; i >=0 ; i-- ) {
-        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.order[i];
+    for(int i = dynamic_traversal.getNrOfVisitedLinks()-1; i >=0 ; i-- ) {
+        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.getOrderedLink(i);
         
         int link_index = link_it->getLinkIndex();
         
@@ -1443,7 +1443,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleP
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
-                    if( considered_next_link == dynamic_traversal.parent[considered_link_index] ) {
+                    if( considered_next_link == dynamic_traversal.getParentLink(considered_link_index) ) {
                         //This is the parent of the link, already considered
                         continue;
                     }
@@ -1536,8 +1536,8 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleG
     getRowSpaceBasis(A,dense_basis);
 
   
-    for(int i = dynamic_traversal.order.size()-1; i >=0 ; i-- ) {
-        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.order[i];
+    for(int i = dynamic_traversal.getNrOfVisitedLinks()-1; i >=0 ; i-- ) {
+        KDL::CoDyCo::LinkMap::const_iterator link_it =  dynamic_traversal.getOrderedLink(i);
         
         int link_index = link_it->getLinkIndex();
         
@@ -1585,7 +1585,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleG
                     KDL::CoDyCo::JunctionMap::const_iterator considered_junction = considered_link_it->getAdjacentJoint(child);
                     KDL::CoDyCo::LinkMap::const_iterator considered_next_link = considered_link_it->getAdjacentLink(child);
                     
-                    if( considered_next_link == dynamic_traversal.parent[considered_link_index] ) {
+                    if( considered_next_link == dynamic_traversal.getParentLink(considered_link_index) ) {
                         //This is the parent of the link, already considered
                         continue;
                     }

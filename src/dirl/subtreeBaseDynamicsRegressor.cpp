@@ -78,9 +78,9 @@ int subtreeBaseDynamicsRegressor::configure()
     is_link_in_subtree[subtree_leaf_links_indeces[0]] = true;
     
     //then, all the other links can be classified using the following rules:  
-    for(int i=1; i < (int)subtree_traversal.order.size(); i++ ) {
-        int link_id = subtree_traversal.order[i]->getLinkIndex();
-        int parent_id = subtree_traversal.parent[link_id]->getLinkIndex();
+    for(int i=1; i < (int)subtree_traversal.getNrOfVisitedLinks(); i++ ) {
+        int link_id = subtree_traversal.getOrderedLink(i)->getLinkIndex();
+        int parent_id = subtree_traversal.getParentLink(link_id)->getLinkIndex();
         
         if( is_link_in_subtree[parent_id] == false ) {
             //if the parent is not in the subtree (false/black) then the link is not in the subtree (false/black)

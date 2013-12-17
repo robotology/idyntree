@@ -58,11 +58,52 @@ namespace CoDyCo
      *     * a parent vector (the index is the link id) such that for each link it returns its parent under the given root
      */
     class Traversal {
-        public:
+    
+    friend class UndirectedTree;
+        
+    private:
         std::vector< LinkMap::const_iterator > order;
         std::vector< LinkMap::const_iterator > parent;
+    
+    public:
         Traversal(): order(0), parent(0) {};
         ~Traversal() {};
+        
+        /**
+         * Get the number of visited links. 
+         * This is the nrOfLinks of the relative KDL::CoDyCo::UndirectedTree if the traversal is a FullTreeTraversal,
+         * or a number between 0 and nrOfLinks it this is a SubTreeTraversal.
+         * 
+         * @return the number of links in the Traversal
+         */
+        int getNrOfVisitedLinks() const;
+        
+        /**
+         * Get a link visited by the traversal given its order in the traversal (a number between 0 and getNrOfVisitedLinks()-1
+         * 
+         * @param order_number a number between 0 and getNrOfVisitedLinks()-1 specifyng the order position in the Traversal
+         *        of the requested link
+         * 
+         * @return a LinkMap::const_iterator of the requested element 
+         */
+        LinkMap::const_iterator getOrderedLink(int order_number) const;
+        
+        /**
+         * Get the base link (i.e. the first link) of the traversal
+         * 
+         * @return the same thing as getOrderedLink(0)
+         */
+        LinkMap::const_iterator getBaseLink() const;
+        
+        /**
+         * Get the parent of a link in the considered traversal 
+         */
+        LinkMap::const_iterator getParentLink(int link_number) const;
+        
+        /**
+         * Get the parent of a link in the considered traversal 
+         */
+        LinkMap::const_iterator getParentLink(LinkMap::const_iterator) const;
     };
     
     //Only supporting 1 dof joints
@@ -70,11 +111,14 @@ namespace CoDyCo
 
     class UndirectedTreeLink
     {
+        
+    friend class UndirectedTree; 
+    friend class UndirectedTreeJunction;
+        
     private:
         UndirectedTreeLink(const std::string& name): link_name(name), link_nr(-1), body_part_nr(-1), body_part_link_nr(-1) {};
         int globalIterator2localIndex(LinkMap::const_iterator link_iterator) const;
         
-    public:
         std::string link_name;
         RigidBodyInertia I;
         int link_nr;
@@ -83,8 +127,9 @@ namespace CoDyCo
         std::vector< JunctionMap::const_iterator >  adjacent_joint;
         std::vector< LinkMap::const_iterator > adjacent_link;
         std::vector< bool > is_this_parent; /**< true if this link is the actual parent (for the KDL::Joint) of the junction, false otherwise */
-        
-        
+                
+    public:
+
         UndirectedTreeLink() {};
         UndirectedTreeLink(const std::string& name, const RigidBodyInertia & Inertia, const int nr, const int part_nr = 0, const int local_link_nr = -1): link_name(name), I(Inertia), link_nr(nr), body_part_nr(part_nr), body_part_link_nr(local_link_nr), adjacent_joint(0), adjacent_link(0), is_this_parent(0) { if(body_part_link_nr < 0) { body_part_link_nr = link_nr; }  };
         ~UndirectedTreeLink() {};
@@ -102,6 +147,10 @@ namespace CoDyCo
         std::string getName() const {return link_name;}
         int getLinkIndex() const {return link_nr;}
         RigidBodyInertia getInertia() const {return I;}
+        
+        int getBodyPartIndex() const {return body_part_nr; }
+        
+        int getBodyPartLinkIndex() const {return body_part_link_nr; }
         
         /**
          * Get the number of other links connected to this link
@@ -200,6 +249,10 @@ namespace CoDyCo
      */
     class UndirectedTreeJunction
     {
+    
+    friend class UndirectedTree;
+    friend class UndirectedTreeLink;
+        
     private:
         UndirectedTreeJunction(const std::string& name):  joint_name(name), q_nr(-1), body_part_q_nr(-1), body_part(-1) { q_previous=-1.0; update_buffers(0.0);};
     
@@ -211,7 +264,6 @@ namespace CoDyCo
         
         void update_buffers(const double & q) const;
         
-    public:
         std::string joint_name;
         Joint joint;
         Frame f_tip;
@@ -221,6 +273,8 @@ namespace CoDyCo
         
         LinkMap::const_iterator parent;
         LinkMap::const_iterator child;
+        
+    public:
         
         UndirectedTreeJunction() {};
         UndirectedTreeJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1, const int body_part_q_nr_in=-1): 
@@ -233,6 +287,19 @@ namespace CoDyCo
         int getJunctionIndex() const { return q_nr; }
         
         int getDOFIndex() const { return q_nr; } 
+        
+        const Joint & getJoint() const { return joint; }
+        
+        int getBodyPartIndex() const { return body_part; }
+        
+        int getBodyPartDOFIndex() const { return body_part_q_nr; }
+        
+        LinkMap::const_iterator getParentLink() const { return parent; }
+       
+        LinkMap::const_iterator getChildLink() const { return child; }
+
+
+        
         
         /**
          * Get the number of degrees of freedom of the junction

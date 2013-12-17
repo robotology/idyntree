@@ -55,8 +55,8 @@ int torqueRegressor::configure()
     }
     
     
-    int link_parent_id = torque_jnt->parent->link_nr;
-    int link_child_id = torque_jnt->child->link_nr;
+    int link_parent_id = torque_jnt->getParentLink()->getLinkIndex();
+    int link_child_id = torque_jnt->getChildLink()->getLinkIndex();
     
     if( !reverse_direction ) {
         subtree_root_link_id = link_child_id;
@@ -74,9 +74,9 @@ int torqueRegressor::configure()
     is_link_in_subtree[subtree_root_link_id] = true;
     
     //then, all the other links can be classified using the following rules:  
-    for(int i=1; i < (int)subtree_traversal.order.size(); i++ ) {
-        int link_id = subtree_traversal.order[i]->getLinkIndex();
-        int parent_id = subtree_traversal.parent[link_id]->getLinkIndex();
+    for(int i=1; i < (int)subtree_traversal.getNrOfVisitedLinks(); i++ ) {
+        int link_id = subtree_traversal.getOrderedLink(i)->getLinkIndex();
+        int parent_id = subtree_traversal.getParentLink(link_id)->getLinkIndex();
         
         if( is_link_in_subtree[parent_id] == false ) {
             //if the parent is not in the subtree (false/black) then the link is not in the subtree (false/black)
@@ -151,10 +151,10 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
          */
         JunctionMap::const_iterator torque_dof_it = p_tree_graph->getJunction(torque_dof_index);
         LinkMap::const_iterator parent_root_it;
-        if( torque_dof_it->child == p_tree_graph->getLink(subtree_root_link_id) ) {
-            parent_root_it = torque_dof_it->parent;
+        if( torque_dof_it->getChildLink() == p_tree_graph->getLink(subtree_root_link_id) ) {
+            parent_root_it = torque_dof_it->getParentLink();
         } else {
-            parent_root_it = torque_dof_it->child;
+            parent_root_it = torque_dof_it->getChildLink();
         }
         assert(torque_dof_it->getJunctionIndex() < (int)p_tree_graph->getNrOfDOFs());
         KDL::Twist S = parent_root_it->S(p_tree_graph->getLink(subtree_root_link_id),q(torque_dof_it->getJunctionIndex()));
