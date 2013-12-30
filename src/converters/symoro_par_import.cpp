@@ -407,7 +407,7 @@ bool treeFromParModelTree(const symoro_par_model& par_model, Tree& tree, const b
         link_names[l+1] = link_name;
         joint_names[l+1] = joint_name;
         std::string precessor_link_name = link_names[par_model.Ant[l]];
-        if( par_model.Sigma[l] != 0 ) { std::cerr << "Error: only rotational joint are currently supported" << std::endl; return false; }
+        if( par_model.Sigma[l] != 0 ) { std::cerr << "Warning: only rotational joint are currently tested" << std::endl; }
         
         //The parameters use the convention explained in Khalil 1986
         Frame f_parent_child = DH_Khalil1986_Tree(par_model.d[l],
