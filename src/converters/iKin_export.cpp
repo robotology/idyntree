@@ -92,6 +92,89 @@ bool closestPoints(const KDL::Vector direction_line_A,
     return true;
 }
 
+/**
+ * Given two lines, find the dh parameters that describe  the transformation between the two axis 
+ *                  and return the origin and the x,y axis of the DH reference frame
+ *                  (run step 3,4,5,7 of section 3.2.3 of http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf )
+ *                  The input lines and the output origin are expressed in the same frame
+ */
+bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1, 
+                 const KDL::Vector direction_axis_x_n_minus_1,
+                   const KDL::Vector origin_n_minus_1,
+                   const KDL::Vector direction_axis_z_n,
+                   const KDL::Vector origin_axis_z_n,
+                   KDL::Vector & dh_origin_n,
+                   KDL::Vector & dh_direction_axis_x_n,
+                   KDL::Vector & dh_direction_axis_y_n,
+                   double & a_i,
+                   double & d_i,
+                   double & alpha_i,
+                   double & theta_i,
+                   double tol = 1e-6
+                  )
+{
+    //STEP 3
+    bool not_parallel;
+    KDL::Vector buffer_vector;
+    
+    not_parallel = closestPoints(direction_axis_z_n_minus_1,
+                                 direction_axis_z_n,
+                                 origin_axis_z_n,
+                                 buffer_vector,
+                                 dh_origin_n,
+                                 tol);
+    if( !not_parallel ) {
+        dh_O_n = origin_axis_z_n;
+    }
+    
+    //STEP 4 
+    if( !not_parallel ) {
+        //If the axis are parallel, the x axis is the common normal of the two axis
+        KDL::Vector origin_diff = origin_n_minus_1-dh_origin_n;
+        dh_direction_axis_x_n = origin_diff-dot(origin_diff,direction_axis_z_n)*direction_axis_z_n;
+        dh_direction_axis_x_n.Normalize();
+    } else {
+        bool incident = false;
+        if( (buffer_vector-dh_origin_n).Norm() < tol ) { incident = true; }
+        if( incident ) { 
+            dh_direction_axis_x_n = direction_axis_z_n_minus_1*direction_axis_z_n;
+        } else {
+            //if the two axis are not incident, the x axis is still the common normal
+            dh_direction_axis_x_n  = buffer_vector-dh_origin_n;
+            dh_direction_axis_x_n .Normalize();
+        }
+    }
+    dh_direction_axis_y_n = direction_axis_z_n*dh_direction_axis_x_n;
+    
+    //STEP 5
+    
+    //calculation of a_i
+    //distance along x_i from O_i to the intersection of the x_i and z_{i-1} axes
+    KDL::Vector x_i_z_i_minus_1_intersection_A, x_i_z_i_minus_1_intersection_B;
+    
+    closestPoints(direction_axis_z_n_minus_1,origin_n_minus_1,direction_axis_z_n,dh_origin_n,x_i_z_i_minus_1_intersection_A,x_i_z_i_minus_1_intersection_B,tol);
+    
+    //x_i and z_{i-1} should intersecate
+    assert((x_i_z_i_minus_1_intersection_A-x_i_z_i_minus_1_intersection_B).Norm() < tol);
+    
+    a_i = (x_i_z_i_minus_1_intersection_B-dh_origin_n).Norm();
+    
+    //calculation of d_i
+    //distance along z_{i-1} from O_{i-1} to the intersection of the x_i and z_{i-1} axes
+    d_i = (x_i_z_i_minus_1_intersection_A-origin_n_minus_1).Norm();
+        
+    //calculation of alpha_i
+    //angle between z_{i-1} and z_i measured about x_i
+    //alpha_i = acos(dot(z_i_minus_i,z_i))
+    
+    //calculation of theta_i
+    //angle between x_{i-1} and x_i measure about z_{i-1}
+    //theta_i = acos(dot(x_i_minus_i,x_i))
+
+    
+}
+
+
 bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& iKin_chain)
 {
     iCub::iKin::iKinChain converted_iKin_chain;
@@ -143,7 +226,7 @@ bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& i
     if( !not_parallel ) {
         //If the axis are parallel, the x axis is the common normal of the two axis
         KDL::Vector origin_diff = origin-joint_origin;
-        new_x_axis = origin_diff-(origin_diff*joint_axis)*joint_axis;
+        new_x_axis = origin_diff-dot(origin_diff,joint_axis)*joint_axis;
         new_x_axis.Normalize();
     } else {
         if( incident ) { 
