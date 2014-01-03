@@ -124,6 +124,8 @@ int main(int argc, char** argv)
   iCub::iKin::iKinChain ikin_random_chain;
   bool result = iKinChainFromKDLChain(kdl_random_chain,ikin_random_chain);
   
+  if( !result) { std::cerr << "Error in KDL - iKin conversion" << std::endl; return EXIT_FAILURE; }
+  
   //Generate random state to validate
   KDL::JntArray q_kdl(kdl_random_chain.getNrOfJoints());
   yarp::sig::Vector q_yarp(ikin_random_chain.getDOF());
