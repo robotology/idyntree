@@ -35,14 +35,91 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_format_io/iKin_export.hpp"'
+#include "kdl_format_io/iKin_export.hpp"
 #include <kdl/joint.hpp>
-#include <ace/config-posix.h>
-
+#include <iCub/iKin/iKinFwd.h>
+#include <kdl/chainfksolverpos_recursive.hpp>
 
 using namespace std;
 
 namespace kdl_format_io{
+    
+//Conversion functions
+bool YarptoKDL(const yarp::sig::Vector & yarpVector, KDL::Vector & kdlVector)
+{
+    if( yarpVector.size() != 3 ) return false;
+    memcpy(kdlVector.data,yarpVector.data(),3*sizeof(double));
+    return true;
+}    
+
+bool YarptoKDL(const yarp::sig::Matrix & idynMatrix, KDL::Rotation & kdlRotation)
+{
+    if(idynMatrix.cols() != 3 || idynMatrix.rows() != 3) return false;
+    kdlRotation = KDL::Rotation(idynMatrix(0,0),idynMatrix(0,1),idynMatrix(0,2),
+                                idynMatrix(1,0),idynMatrix(1,1),idynMatrix(1,2),
+                                idynMatrix(2,0),idynMatrix(2,1),idynMatrix(2,2));
+    return true;
+}
+
+bool YarptoKDL(const yarp::sig::Matrix & idynMatrix, KDL::Frame & kdlFrame)
+{
+    if( idynMatrix.cols() != 4 || idynMatrix.rows() != 4 ) return false;
+    KDL::Rotation kdlRotation;
+    KDL::Vector kdlVector;
+    yarp::sig::Matrix rot_matrix = idynMatrix.submatrix(0,2,0,2);
+    yarp::sig::Vector pos_vector = idynMatrix.subcol(0,3,3);
+    YarptoKDL(rot_matrix,kdlRotation);
+    YarptoKDL(pos_vector,kdlVector);
+    kdlFrame = KDL::Frame(kdlRotation,kdlVector);
+    return true;
+}
+    
+bool KDLtoYarp(const KDL::Vector & kdlVector,yarp::sig::Vector & yarpVector)
+{
+    if( yarpVector.size() != 3 ) { yarpVector.resize(3); }
+    memcpy(yarpVector.data(),kdlVector.data,3*sizeof(double));
+    return true;
+}
+
+yarp::sig::Vector KDLtoYarp(const KDL::Vector & kdlVector)
+{
+    yarp::sig::Vector yarpVector;
+    KDLtoYarp(kdlVector,yarpVector);
+    return yarpVector;
+}
+
+bool KDLtoYarp(const KDL::Rotation & kdlRotation, yarp::sig::Matrix & yarpMatrix3_3)
+{
+    if( yarpMatrix3_3.rows() != 3 || yarpMatrix3_3.cols() != 3 ) { yarpMatrix3_3.resize(3,3); }
+    //Both kdl and yarp store the rotation matrix in row major order
+    memcpy(yarpMatrix3_3.data(),kdlRotation.data,3*3*sizeof(double));
+    return true;
+}
+    
+bool KDLtoYarp_position(const KDL::Frame & kdlFrame, yarp::sig::Matrix & yarpMatrix4_4 )
+{
+    yarp::sig::Matrix R(3,3);
+    yarp::sig::Vector p(3);
+
+    KDLtoYarp(kdlFrame.M,R);
+    KDLtoYarp(kdlFrame.p,p);
+    
+    if( yarpMatrix4_4.rows() != 4 || yarpMatrix4_4.cols() != 4 ) { yarpMatrix4_4.resize(4,4); }
+    yarpMatrix4_4.zero();
+    
+    yarpMatrix4_4.setSubmatrix(R,0,0);
+    yarpMatrix4_4.setSubcol(p,0,3);
+    yarpMatrix4_4(3,3) = 1;
+    
+    return true;
+}    
+    
+yarp::sig::Matrix KDLtoYarp_position(const KDL::Frame & kdlFrame)
+{
+    yarp::sig::Matrix yarpMatrix4_4(4,4);
+    KDLtoYarp_position(kdlFrame,yarpMatrix4_4);
+    return yarpMatrix4_4;
+}
 
 /**
  * Given two lines, find their closest points (i.e. the points belonging to the common normal)
@@ -70,11 +147,11 @@ bool closestPoints(const KDL::Vector direction_line_A,
       closest_point_line_B is Q_C
     */
     KDL::Vector w0 = origin_line_A-origin_line_B;
-    double a = direction_line_A*direction_line_A;
-    double b = direction_line_A*direction_line_B;
-    double c = direction_line_B*direction_line_B;
-    double d = direction_line_A*w0;
-    double e = direction_line_B*w0;
+    double a = dot(direction_line_A,direction_line_A);
+    double b = dot(direction_line_A,direction_line_B);
+    double c = dot(direction_line_B,direction_line_B);
+    double d = dot(direction_line_A,w0);
+    double e = dot(direction_line_B,w0);
     
     double denominator = a*c-b*b;
     
@@ -118,17 +195,21 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
     KDL::Vector buffer_vector;
     
     not_parallel = closestPoints(direction_axis_z_n_minus_1,
+                                 origin_n_minus_1,
                                  direction_axis_z_n,
                                  origin_axis_z_n,
                                  buffer_vector,
                                  dh_origin_n,
                                  tol);
     if( !not_parallel ) {
-        dh_O_n = origin_axis_z_n;
+        dh_origin_n = origin_axis_z_n;
     }
     
     //STEP 4 
     if( !not_parallel ) {
+        #ifndef NDEBUG
+        std::cerr << "axis_z_n_minus_1 and axis_z_n are parallel" << std::endl;
+        #endif
         //If the axis are parallel, the x axis is the common normal of the two axis
         KDL::Vector origin_diff = origin_n_minus_1-dh_origin_n;
         dh_direction_axis_x_n = origin_diff-dot(origin_diff,direction_axis_z_n)*direction_axis_z_n;
@@ -137,8 +218,14 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
         bool incident = false;
         if( (buffer_vector-dh_origin_n).Norm() < tol ) { incident = true; }
         if( incident ) { 
+            #ifndef NDEBUG
+            std::cerr << "axis_z_n_minus_1 and axis_z_n are incident" << std::endl;
+            #endif
             dh_direction_axis_x_n = direction_axis_z_n_minus_1*direction_axis_z_n;
         } else {
+            #ifndef NDEBUG
+            std::cerr << "axis_z_n_minus_1 and axis_z_n are not incident" << std::endl;
+            #endif
             //if the two axis are not incident, the x axis is still the common normal
             dh_direction_axis_x_n  = buffer_vector-dh_origin_n;
             dh_direction_axis_x_n .Normalize();
@@ -152,9 +239,14 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
     //distance along x_i from O_i to the intersection of the x_i and z_{i-1} axes
     KDL::Vector x_i_z_i_minus_1_intersection_A, x_i_z_i_minus_1_intersection_B;
     
-    closestPoints(direction_axis_z_n_minus_1,origin_n_minus_1,direction_axis_z_n,dh_origin_n,x_i_z_i_minus_1_intersection_A,x_i_z_i_minus_1_intersection_B,tol);
+    bool is_not_parallel = closestPoints(direction_axis_z_n_minus_1,origin_n_minus_1,dh_direction_axis_x_n,dh_origin_n,x_i_z_i_minus_1_intersection_A,x_i_z_i_minus_1_intersection_B,tol);
+    
+    assert(is_not_parallel);
     
     //x_i and z_{i-1} should intersecate
+#ifndef NDEBUG
+    std::cerr << "Distance between x_i and z_i_minus_1: " << (x_i_z_i_minus_1_intersection_A-x_i_z_i_minus_1_intersection_B).Norm() << std::endl;
+#endif
     assert((x_i_z_i_minus_1_intersection_A-x_i_z_i_minus_1_intersection_B).Norm() < tol);
     
     a_i = (x_i_z_i_minus_1_intersection_B-dh_origin_n).Norm();
@@ -165,20 +257,22 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
         
     //calculation of alpha_i
     //angle between z_{i-1} and z_i measured about x_i
-    //alpha_i = acos(dot(z_i_minus_i,z_i))
+    double cos_alpha_i = dot(direction_axis_z_n_minus_1,direction_axis_z_n);
+    double sin_alpha_i = dot(direction_axis_z_n_minus_1*direction_axis_z_n,dh_direction_axis_x_n);
+    alpha_i = atan2(sin_alpha_i,cos_alpha_i);
     
     //calculation of theta_i
     //angle between x_{i-1} and x_i measure about z_{i-1}
-    //theta_i = acos(dot(x_i_minus_i,x_i))
+    double cos_theta_i = dot(direction_axis_x_n_minus_1,dh_direction_axis_x_n);
+    double sin_theta_i = dot(direction_axis_x_n_minus_1*dh_direction_axis_x_n,direction_axis_z_n_minus_1);
+    theta_i = atan2(sin_theta_i,cos_theta_i);
 
-    
+    return true;
 }
 
 
 bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& iKin_chain)
-{
-    iCub::iKin::iKinChain converted_iKin_chain;
-    
+{    
     //Getting Denavit Hartenberg parameters using the algorithm 
     //in section 3.2.3 of http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf 
     //First version, not using fixed joints
@@ -193,61 +287,124 @@ bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& i
         }
     }
     
-    //STEP 3 
-    //The initial frame is defined implicitly in the chain, the next frame for DH
-    //is defined by the axis of the first rotational joint
-    //locate new_origin following Step 3 of algorithm
-    KDL::Vector new_origin, dummy;
-    KDL::Vector z_axis(0,0,1);
-    KDL::Vector origin(0,0,0);
+    int nj = kdl_chain.getNrOfJoints();
     
-    KDL::Vector joint_axis =  kdl_chain.getSegment(0).getJoint().JointAxis();
-    KDL::Vector joint_origin = kdl_chain.getSegment(0).getJoint().JointOrigin();
+    //Calculate the ef transform with all joint at zero for future use
+    KDL::Frame H_ef_kdl_chain;
+    KDL::ChainFkSolverPos_recursive pos_solver(kdl_chain);
+    KDL::JntArray q_kdl(nj);
+    SetToZero(q_kdl);
+    pos_solver.JntToCart(q_kdl,H_ef_kdl_chain);
     
-    joint_axis.Normalize();
-    
-    bool not_parallel;
-    not_parallel = closestPoints(z_axis,
-                   origin,
-                   joint_axis,
-                   joint_origin,
-                   dummy,
-                   new_origin,
-                   1e-4
-                 );
-    
-    if( !not_parallel ) {
-        //if the axis are parallel use the old origin of the joint frame
-        new_origin = joint_origin;
-    }
-    
-    //STEP 4
-    KDL::Vector new_x_axis;
-    if( !not_parallel ) {
-        //If the axis are parallel, the x axis is the common normal of the two axis
-        KDL::Vector origin_diff = origin-joint_origin;
-        new_x_axis = origin_diff-dot(origin_diff,joint_axis)*joint_axis;
-        new_x_axis.Normalize();
-    } else {
-        if( incident ) { 
-            
-        } else {
-            //if the two axis are not incident, the x axis is still the common normal
-            new_x_axis = dummy-new_origin;
-            new_x_axis.Normalize();
-        }
-    }
-    
-    
-    
-    //STEP 5 
-    
+    //Get all joint axis in the base reference frames
+    std::vector<KDL::Vector> axis_z_i(kdl_chain.getNrOfJoints()+1);
+    std::vector<KDL::Vector> origin_O_i(kdl_chain.getNrOfJoints()+1);
+    int jnt = 0;
+    KDL::Frame H = KDL::Frame::Identity();
     for(int i=0; i < kdl_chain.getNrOfSegments(); i++ ) {
+        KDL::Joint::JointType type = kdl_chain.getSegment(i).getJoint().getType();
+        if( type == KDL::Joint::RotX ||
+            type == KDL::Joint::RotY ||
+            type == KDL::Joint::RotZ ||
+            type == KDL::Joint::RotAxis ) {
+            
+            axis_z_i[jnt] = H*kdl_chain.getSegment(i).getJoint().JointAxis();
+            origin_O_i[jnt] = H*kdl_chain.getSegment(i).getJoint().JointOrigin();
+            
+            jnt++;
+        }
         
+        H = H*kdl_chain.getSegment(i).pose(0.0);
     }
     
+    assert(jnt == kdl_chain.getNrOfJoints());
+    //The last DH frame is in the end effector
+    axis_z_i[jnt] = H_ef_kdl_chain.M.UnitZ();
+    origin_O_i[jnt] = H_ef_kdl_chain.p;
     
-    iKin_chain = converted_iKin_chain;
+    
+    //Get all DH parameters, computing also the relative x_i and y_i axes
+    std::vector<KDL::Vector> axis_x_i(nj+1);
+    std::vector<KDL::Vector> axis_y_i(nj+1);
+    std::vector<KDL::Vector> dh_origin_O_i(nj+1);
+    
+    std::vector<double> a_i(nj+1);
+    std::vector<double> d_i(nj+1);
+    std::vector<double> alpha_i(nj+1);
+    std::vector<double> theta_i(nj+1);
+    
+    //Get arbitrary initial axis (\todo: make a choice that preserve iKin parameters)
+    KDL::Vector cross_product = KDL::Vector(0,0,1)*axis_z_i[0];
+    
+    KDL::Vector rot_axis = cross_product;
+    rot_axis.Normalize();
+    
+    double rot_angle = asin(dot(rot_axis,cross_product));
+    
+    KDL::Rotation rot_base_0 = KDL::Rotation::Rot(rot_axis,rot_angle);
+    
+    axis_x_i[0] = rot_base_0.UnitX();
+    axis_y_i[0] = rot_base_0.UnitY();
+    
+    double tol = 1e-5;
+    
+    assert(dot(axis_x_i[0],axis_z_i[0]) < tol);
+    assert(dot(axis_y_i[0],axis_z_i[0]) < tol);
+    
+    dh_origin_O_i[0] = origin_O_i[0];
+    
+    
+    for(int i=0; i < nj; i++ ) {
+        calculateDH(axis_z_i[i],
+                    axis_x_i[i],
+                    dh_origin_O_i[i],
+                    axis_z_i[i+1],
+                    origin_O_i[i+1],
+                    dh_origin_O_i[i+1],
+                    axis_x_i[i+1],
+                    axis_y_i[i+1],
+                    a_i[i+1],
+                    d_i[i+1],
+                    alpha_i[i+1],
+                    theta_i[i+1],
+                    tol);
+    }
+    
+    KDL::Frame H0_kdl; //rigid roto-translation matrix from the root reference frame to the 0th frames
+    KDL::Frame HN_kdl; //the rigid roto-translation matrix from the Nth frame to the end-effector. 
+    
+    H0_kdl = KDL::Frame(KDL::Rotation(axis_x_i[0],axis_y_i[0],axis_z_i[0]),origin_O_i[0]);
+    
+    //iCub::iKin::iKinChain converted_iKin_chain;
+    
+    //Create converted_iKin_chain 
+    iKin_chain.clear();
+    
+    iKin_chain.setH0(KDLtoYarp_position(H0_kdl));
+    
+    for(int i=0; i < nj; i++ ) {
+        iCub::iKin::iKinLink new_link(a_i[i+1],d_i[i+1],alpha_i[i],theta_i[i]);
+        iKin_chain << new_link;
+    }
+    
+    //Calculate the base pose with iKinChain (with HN = Identity) and the KDL::Chain . The difference is the desired HN
+
+    
+    KDL::Frame H_ef_iKinChain;
+    for(int i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); iKin_chain.setAng(i,0.0); }
+    yarp::sig::Matrix H_ef_iKinChain_yarp = iKin_chain.getH();
+    YarptoKDL(H_ef_iKinChain_yarp,H_ef_iKinChain);
+    
+    HN_kdl = H_ef_iKinChain*H_ef_kdl_chain.Inverse();
+    
+    iKin_chain.setHN(KDLtoYarp_position(HN_kdl));
+    
+   
+    
+    //iKin_chain = converted_iKin_chain;
+    
+    for(int i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); }
+    
     return true;
 }
 

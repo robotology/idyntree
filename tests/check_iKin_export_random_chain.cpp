@@ -43,7 +43,6 @@
 using namespace KDL;
 using namespace std;
 using namespace kdl_format_io;
-using namespace KDL::CoDyCo;
 
 double random_double(double range)
 {
@@ -57,7 +56,7 @@ int random_integer(int range)
 
 KDL::Joint generateRandomKDLJoint(bool use_translational_joints, bool use_fixed_joints)
 {
-    KDL::JointType random_joint_type;
+    KDL::Joint::JointType random_joint_type;
     int nr_of_choices = 3;
     if( use_translational_joints ) { nr_of_choices += 3; }
     if( use_fixed_joints ) { nr_of_choices++; }
@@ -98,7 +97,7 @@ KDL::Joint generateRandomKDLJoint(bool use_translational_joints, bool use_fixed_
 KDL::Frame generateRandomKDLFrame()
 {
     KDL::Rotation random_rotation = KDL::Rotation::EulerZYZ(random_double(2*M_PI),random_double(2*M_PI),random_double(2*M_PI));
-    KDL::Rotation random_vector = KDL::Vector(random_double(10),random_double(10),random_double(10));
+    KDL::Vector random_vector = KDL::Vector(random_double(10),random_double(10),random_double(10));
     
     return KDL::Frame(random_rotation,random_vector);
 }
@@ -107,7 +106,7 @@ KDL::Chain generateRandomKDLChain(int nr_of_segments, bool use_translational_joi
 {
     KDL::Chain random_chain;
     for(int i=0; i < nr_of_segments; i++ ) {
-        random_chain.addSegment(KDL::Segment(generateRandomKDLFrame(),generateRandomKDLJoint(use_translational_joints,use_fixed_joints)));
+        random_chain.addSegment(KDL::Segment(generateRandomKDLJoint(use_translational_joints,use_fixed_joints),generateRandomKDLFrame()));
     }
     return random_chain;
 }
@@ -126,7 +125,7 @@ int main(int argc, char** argv)
   
   if( !result) { std::cerr << "Error in KDL - iKin conversion" << std::endl; return EXIT_FAILURE; }
   
-  //Generate random state to validate
+  //Generate random state to validate  
   KDL::JntArray q_kdl(kdl_random_chain.getNrOfJoints());
   yarp::sig::Vector q_yarp(ikin_random_chain.getDOF());
   
@@ -140,15 +139,17 @@ int main(int argc, char** argv)
   kdl_pos_solver.JntToCart(q_kdl,H_kdl);
   
   //Get H_ef_base for iKinChain
+  for(int i=0; i < ikin_random_chain.getN(); i++ ) { ikin_random_chain.releaseLink(i); }
+  std::cout << "iKin_export_random_chain: Setting angles value in iKin" << std::endl; 
   ikin_random_chain.setAng(q_yarp);
   yarp::sig::Matrix H_yarp = ikin_random_chain.getH();
   
   //Check that the matrix are equal
-  tol = 1e-8;
+  double tol = 1e-8;
   
   for(int i=0; i < 4; i++ ) {
       for(int j=0; j < 3; j++ ) {
-          if( fabs(H_kdl(i,j)-H_yarp(i,j)) > tol ) { std::cerr << "Element " << i << " " << j << "of the result matrix does not match" << std::end; return EXIT_FAILURE; }
+          if( fabs(H_kdl(i,j)-H_yarp(i,j)) > tol ) { std::cerr << "Element " << i << " " << j << "of the result matrix does not match" << std::endl; return EXIT_FAILURE; }
       }
   }
  
