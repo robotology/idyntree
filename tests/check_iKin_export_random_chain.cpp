@@ -44,6 +44,46 @@ using namespace KDL;
 using namespace std;
 using namespace kdl_format_io;
 
+bool KDLtoYarp(const KDL::Vector & kdlVector,yarp::sig::Vector & yarpVector)
+{
+    if( yarpVector.size() != 3 ) { yarpVector.resize(3); }
+    memcpy(yarpVector.data(),kdlVector.data,3*sizeof(double));
+    return true;
+}
+
+bool KDLtoYarp(const KDL::Rotation & kdlRotation, yarp::sig::Matrix & yarpMatrix3_3)
+{
+    if( yarpMatrix3_3.rows() != 3 || yarpMatrix3_3.cols() != 3 ) { yarpMatrix3_3.resize(3,3); }
+    //Both kdl and yarp store the rotation matrix in row major order
+    memcpy(yarpMatrix3_3.data(),kdlRotation.data,3*3*sizeof(double));
+    return true;
+}
+    
+bool KDLtoYarp_position(const KDL::Frame & kdlFrame, yarp::sig::Matrix & yarpMatrix4_4 )
+{
+    yarp::sig::Matrix R(3,3);
+    yarp::sig::Vector p(3);
+
+    KDLtoYarp(kdlFrame.M,R);
+    KDLtoYarp(kdlFrame.p,p);
+    
+    if( yarpMatrix4_4.rows() != 4 || yarpMatrix4_4.cols() != 4 ) { yarpMatrix4_4.resize(4,4); }
+    yarpMatrix4_4.zero();
+    
+    yarpMatrix4_4.setSubmatrix(R,0,0);
+    yarpMatrix4_4.setSubcol(p,0,3);
+    yarpMatrix4_4(3,3) = 1;
+    
+    return true;
+}    
+    
+yarp::sig::Matrix KDLtoYarp_position(const KDL::Frame & kdlFrame)
+{
+    yarp::sig::Matrix yarpMatrix4_4(4,4);
+    KDLtoYarp_position(kdlFrame,yarpMatrix4_4);
+    return yarpMatrix4_4;
+}
+
 double random_double(double range)
 {
     return range*((double)rand()-(RAND_MAX/2))/((double)RAND_MAX);
@@ -111,17 +151,47 @@ KDL::Chain generateRandomKDLChain(int nr_of_segments, bool use_translational_joi
     return random_chain;
 }
 
+KDL::Chain generateSimpleKDLChain(int nr_of_segments=1)
+{
+    KDL::Chain simple_chain;
+    
+    for(int i=0; i < nr_of_segments; i++ ) {
+    double a = random_double(10);
+    double d = random_double(10);
+    double alpha = random_double(2*M_PI);
+    double theta = random_double(2*M_PI);
+    
+    //double a = 10; //random_double(10);
+    //double d = 0; //random_double(10);
+    //double alpha = 0; //random_double(2*M_PI);
+    //double theta = 0; //random_double(2*M_PI);
+    
+    std::cout << "Generated chain " << a << " " << d  << " " << alpha << " " << theta  << std::endl;
+    std::cout << "cos(alpha) " << cos(alpha) << std::endl;
+    std::cout << "sin(alpha) " << sin(alpha) << std::endl;
+    KDL::Frame kdlFrame = KDL::Frame::DH(a,alpha,d,theta);
+    simple_chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),kdlFrame));
+    }
+    
+    return simple_chain;
+}
+
 int main(int argc, char** argv)
 {
   srand(time(NULL));
- 
+  
   //Generate random chain
-  int nr_of_segments = 20;
-  KDL::Chain kdl_random_chain = generateRandomKDLChain(nr_of_segments,false,false);
+  int nr_of_segments = 1;
+  KDL::Chain kdl_random_chain = generateSimpleKDLChain(2);
+  //KDL::Chain kdl_random_chain = generateRandomKDLChain(nr_of_segments,false,false);
   
   //Convert random KDL::Chain to iKinChain
   iCub::iKin::iKinChain ikin_random_chain;
   bool result = iKinChainFromKDLChain(kdl_random_chain,ikin_random_chain);
+  
+  #ifndef NDEBUG
+  std::cout << "check_iKin_export_random_chain: converted chain" << std::endl;
+  #endif
   
   if( !result) { std::cerr << "Error in KDL - iKin conversion" << std::endl; return EXIT_FAILURE; }
   
@@ -139,19 +209,25 @@ int main(int argc, char** argv)
   kdl_pos_solver.JntToCart(q_kdl,H_kdl);
   
   //Get H_ef_base for iKinChain
-  for(int i=0; i < ikin_random_chain.getN(); i++ ) { ikin_random_chain.releaseLink(i); }
+  //for(int i=0; i < ikin_random_chain.getN(); i++ ) { ikin_random_chain.releaseLink(i); }
   std::cout << "iKin_export_random_chain: Setting angles value in iKin" << std::endl; 
   ikin_random_chain.setAng(q_yarp);
   yarp::sig::Matrix H_yarp = ikin_random_chain.getH();
   
+  yarp::sig::Matrix H_yarp_kdl = KDLtoYarp_position(H_kdl);
+  
   //Check that the matrix are equal
   double tol = 1e-8;
   
+  std::cout << "H_yarp" << std::endl << H_yarp.toString() << std::endl  << "H_kdl" << std::endl << H_yarp_kdl.toString() << std::endl << H_kdl << std::endl; 
+
+  
   for(int i=0; i < 4; i++ ) {
-      for(int j=0; j < 3; j++ ) {
-          if( fabs(H_kdl(i,j)-H_yarp(i,j)) > tol ) { std::cerr << "Element " << i << " " << j << "of the result matrix does not match" << std::endl; return EXIT_FAILURE; }
+      for(int j=0; j < 4; j++ ) {
+          if( fabs(H_yarp_kdl(i,j)-H_yarp(i,j)) > tol ) { std::cerr << "Element " << i << " " << j << " of the result matrix does not match" << std::endl; return EXIT_FAILURE; }
       }
   }
+ 
  
   return EXIT_SUCCESS;
 }

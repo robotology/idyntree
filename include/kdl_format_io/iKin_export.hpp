@@ -43,9 +43,10 @@
 #include <string>
 #include <iCub/iKin/iKinFwd.h>
 
+#include <iostream>
+
 
 namespace kdl_format_io{
-
 
 
 /** Constructs a iKin chain model from a KDL Chain

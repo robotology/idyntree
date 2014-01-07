@@ -40,6 +40,10 @@
 #include <iCub/iKin/iKinFwd.h>
 #include <kdl/chainfksolverpos_recursive.hpp>
 
+#ifndef NDEBUG
+#include <kdl/frames_io.hpp>
+#endif
+
 using namespace std;
 
 namespace kdl_format_io{
@@ -222,12 +226,13 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
             std::cerr << "axis_z_n_minus_1 and axis_z_n are incident" << std::endl;
             #endif
             dh_direction_axis_x_n = direction_axis_z_n_minus_1*direction_axis_z_n;
+            dh_direction_axis_x_n.Normalize();
         } else {
             #ifndef NDEBUG
             std::cerr << "axis_z_n_minus_1 and axis_z_n are not incident" << std::endl;
             #endif
             //if the two axis are not incident, the x axis is still the common normal
-            dh_direction_axis_x_n  = buffer_vector-dh_origin_n;
+            dh_direction_axis_x_n  = dh_origin_n-buffer_vector;
             dh_direction_axis_x_n .Normalize();
         }
     }
@@ -245,27 +250,39 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
     
     //x_i and z_{i-1} should intersecate
 #ifndef NDEBUG
-    std::cerr << "Distance between x_i and z_i_minus_1: " << (x_i_z_i_minus_1_intersection_A-x_i_z_i_minus_1_intersection_B).Norm() << std::endl;
+    //std::cerr << "Distance between x_i and z_i_minus_1: " << (x_i_z_i_minus_1_intersection_A-x_i_z_i_minus_1_intersection_B).Norm() << std::endl;
 #endif
     assert((x_i_z_i_minus_1_intersection_A-x_i_z_i_minus_1_intersection_B).Norm() < tol);
     
-    a_i = (x_i_z_i_minus_1_intersection_B-dh_origin_n).Norm();
+    a_i = dot(x_i_z_i_minus_1_intersection_B-dh_origin_n,dh_direction_axis_x_n);
     
     //calculation of d_i
     //distance along z_{i-1} from O_{i-1} to the intersection of the x_i and z_{i-1} axes
-    d_i = (x_i_z_i_minus_1_intersection_A-origin_n_minus_1).Norm();
+    d_i = dot(x_i_z_i_minus_1_intersection_A-origin_n_minus_1,direction_axis_z_n_minus_1);
         
     //calculation of alpha_i
     //angle between z_{i-1} and z_i measured about x_i
     double cos_alpha_i = dot(direction_axis_z_n_minus_1,direction_axis_z_n);
+    assert(((direction_axis_z_n_minus_1*direction_axis_z_n)*dh_direction_axis_x_n).Norm() < tol);
     double sin_alpha_i = dot(direction_axis_z_n_minus_1*direction_axis_z_n,dh_direction_axis_x_n);
-    alpha_i = atan2(sin_alpha_i,cos_alpha_i);
+    
+    std::cout << " cos_alpha_i "<<  cos_alpha_i << std::endl;
+    std::cout << " sin_alpha_i "<<  sin_alpha_i << std::endl;
+    if( not_parallel ) {
+        alpha_i = atan2(sin_alpha_i,cos_alpha_i);
+    } else {
+        alpha_i = 0;
+    }
     
     //calculation of theta_i
     //angle between x_{i-1} and x_i measure about z_{i-1}
-    double cos_theta_i = dot(direction_axis_x_n_minus_1,dh_direction_axis_x_n);
-    double sin_theta_i = dot(direction_axis_x_n_minus_1*dh_direction_axis_x_n,direction_axis_z_n_minus_1);
+    double cos_theta_i = -dot(direction_axis_x_n_minus_1,dh_direction_axis_x_n);
+    double sin_theta_i = -dot(direction_axis_x_n_minus_1*dh_direction_axis_x_n,direction_axis_z_n_minus_1);
+    std::cout << " cos_theta_i "<<  cos_theta_i << std::endl;
+    std::cout << " sin_theta_i "<<  sin_theta_i << std::endl;
     theta_i = atan2(sin_theta_i,cos_theta_i);
+    
+    if( (theta_i+M_PI) < tol ) { theta_i = 0; a_i = -a_i; }
 
     return true;
 }
@@ -382,28 +399,44 @@ bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& i
     
     iKin_chain.setH0(KDLtoYarp_position(H0_kdl));
     
+#ifndef NDEBUG
+    std::cout << "H0: " << std::endl;
+    std::cout << H0_kdl << std::endl;
+#endif
     for(int i=0; i < nj; i++ ) {
-        iCub::iKin::iKinLink new_link(a_i[i+1],d_i[i+1],alpha_i[i],theta_i[i]);
-        iKin_chain << new_link;
+        iCub::iKin::iKinLink * p_new_link = new iCub::iKin::iKinLink(a_i[i+1],d_i[i+1],alpha_i[i+1],theta_i[i+1]);
+        //iKin_chain.pushLink new new_link;
+        iKin_chain.pushLink(*p_new_link);
+#ifndef NDEBUG
+        std::cout << "iKinLink DH " << i << " : " << a_i[i+1] << " " << d_i[i+1] << " " << alpha_i[i+1] << " " << theta_i[i+1] << std::endl;
+#endif
     }
     
     //Calculate the base pose with iKinChain (with HN = Identity) and the KDL::Chain . The difference is the desired HN
 
     
     KDL::Frame H_ef_iKinChain;
-    for(int i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); iKin_chain.setAng(i,0.0); }
+    for(int i=0; i < nj; i++ ) { iKin_chain.setAng(i,0.0); }
     yarp::sig::Matrix H_ef_iKinChain_yarp = iKin_chain.getH();
     YarptoKDL(H_ef_iKinChain_yarp,H_ef_iKinChain);
     
-    HN_kdl = H_ef_iKinChain*H_ef_kdl_chain.Inverse();
+    HN_kdl = H_ef_iKinChain.Inverse()*H_ef_kdl_chain;
     
-    iKin_chain.setHN(KDLtoYarp_position(HN_kdl));
-    
+    bool ret = iKin_chain.setHN(KDLtoYarp_position(HN_kdl));
+    assert(ret);
+#ifndef NDEBUG
+    std::cout << "HN: " << std::endl;
+    std::cout << HN_kdl << std::endl;
+#endif
    
     
     //iKin_chain = converted_iKin_chain;
     
     for(int i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); }
+    
+    #ifndef NDEBUG
+    std::cout << "iKinChainFromKDLChain: closing routine" << std::endl;
+    #endif
     
     return true;
 }
