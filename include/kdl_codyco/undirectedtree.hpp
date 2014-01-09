@@ -102,6 +102,21 @@ namespace CoDyCo
         LinkMap::const_iterator getParentLink(LinkMap::const_iterator) const;
     };
     
+    class FullTreeTraversal : public Traversal
+    {
+    public:
+        FullTreeTraversal(const KDL::CoDyCo::UndirectedTree & undirected_tree, std::string base_link );
+        FullTreeTraversal(const KDL::CoDyCo::UndirectedTree & undirected_tree, int base_link_index );
+        ~FullTreeTraversal() {};
+    };
+    
+    class SubTreeTraversal : public Traversal
+    {
+        SubTreeTraversal(const KDL::CoDyCo::UndirectedTree & undirected_tree, std::string base_link, std::vector<std::string> cut_junctions );
+        SubTreeTraversal(const KDL::CoDyCo::UndirectedTree & undirected_tree, int base_link_index, std::vector<int> cut_junctions_indeces );
+        ~SubTreeTraversal() {};
+    };
+    
     //Only supporting 1 dof joints
     typedef Twist TwistSubspace;
 
@@ -474,6 +489,31 @@ namespace CoDyCo
          * \todo add real time version, by specifyng base_link as index (and by dealing with the deque)
          */
         int compute_traversal(Traversal & traversal, const int base_link_index=COMPUTE_TRAVERSAL_BASE_LINK_DEFAULT_VALUE, const bool bf_traversal=false) const;
+        
+        /**
+         * Compute the traversal for a subtree of the undirected tree.
+         * For specifyng the subtree, it is necessary to specify the base link and 
+         * the junctions that separate the subtree for the rest of the tree 
+         * 
+         * @param traversal the result traversal
+         * @param base_link the name of the base link
+         * @param cut_junctions a vector of the names of the junctions that separated the subtree from the rest of the tree
+         * @return 0 if all went well, another integer if there where errors 
+         */
+        int compute_traversal_subtree(Traversal & traversal, const std::string& base_link, const std::vector<std::string> & cut_junctions ); 
+        
+        /**
+         * Compute the traversal for a subtree of the undirected tree.
+         * For specifyng the subtree, it is necessary to specify the base link and 
+         * the junctions that separate the subtree for the rest of the tree 
+         * 
+         * @param traversal the result traversal
+         * @param base_link the index of the base link
+         * @param cut_junctions a vector of the indeces of the junctions that separated the subtree from the rest of the tree
+         * @return 0 if all went well, another integer if there where errors 
+         */
+        int compute_traversal_subtree(Traversal & traversal, const int base_link_index, const std::vector<int> & cut_junctions_indeces); 
+
         
         Tree getTree(std::string base="") const;
         
