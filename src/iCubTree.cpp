@@ -21,7 +21,7 @@ using namespace iCub::skinDynLib;
 namespace iCub {
 namespace iDynTree {
 
-iCubTree::iCubTree(iCubTree_version_tag version, bool ft_feet, iCubTree_serialization_tag serial_tag, unsigned int verbose)
+iCubTree::iCubTree(iCubTree_version_tag version, bool ft_feet, iCubTree_serialization_tag serial_tag, unsigned int verbose, std::string imu_link_name)
 {
     yarp::sig::Vector q_min_yarp, q_max_yarp;
     KDL::JntArray q_min_kdl, q_max_kdl;
@@ -42,9 +42,6 @@ iCubTree::iCubTree(iCubTree_version_tag version, bool ft_feet, iCubTree_serializ
         if( verbose ) { std::cerr << "iCubTree: error in costructor" << std::endl; }
         return;
     }
-    
-    //Imu link name
-    std::string imu_link_name = "imu_frame";
     
     //Construct F/T sensor name list
     std::vector< std::string > ft_names(0);

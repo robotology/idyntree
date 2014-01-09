@@ -9,7 +9,9 @@
 /**
  * \defgroup iDynTree iDynTree 
  *    
- * @ingroup codyco_modules
+ * @ingroup codyco_libraries
+ * 
+ * YARP based Robot dynamics library 
  *
  * \note <b>SI units adopted</b>: meters for lengths and radians
  *       for angles.
@@ -83,7 +85,10 @@ namespace iCub
 {
 
 namespace iDynTree
-{    
+{
+    
+const int WORLD_FRAME = -10;
+const int DEFAULT_INDEX_VALUE = -20;
     
 /**
  * \ingroup iDynTree
@@ -146,6 +151,9 @@ class DynTree  {
         //Link quantities
         std::vector<KDL::Twist> v;
         std::vector<KDL::Twist> a;
+        
+        //Base force, calculated as output of the dynamic RNEA (expressed in the base reference frame)
+        KDL::Wrench base_residual_f;
         
         //External forces
         std::vector<KDL::Wrench> f_ext; /**< External wrench acting on a link */
@@ -390,6 +398,7 @@ class DynTree  {
         * @param w0 a 3x1 vector with the initial/measured angular velocity
         * @param dw0 a 3x1 vector with the initial/measured angular acceleration
         * @param ddp0 a 3x1 vector with the initial/measured 3D proper (with gravity) linear acceleration
+        * @param frame_link the reference frame in which 
         * @return true if succeeds (correct vectors size), false otherwise
         */
         virtual bool setInertialMeasure(const yarp::sig::Vector &w0, const yarp::sig::Vector &dw0, const yarp::sig::Vector &ddp0);
@@ -555,6 +564,14 @@ class DynTree  {
         */
         virtual yarp::sig::Vector getAcc(const int link_index) const;
     
+        /**
+         * Get the base link force torque, calculated with the dynamic recursive newton euler loop
+         * 
+         * @param frame_link specify the frame of reference in which express the return value (default: teh dynamic base link)
+         * @return a 6x1 vector with linear force \f$ {}^b f_b \f$(0:2) and angular torque\f$ {}^b\tau_b \f$ (3:5)
+         */
+        virtual yarp::sig::Vector getBaseForceTorque(int frame_link=DEFAULT_INDEX_VALUE);
+
         
         /**
         * Get joint torques in the specified part (if no part 
