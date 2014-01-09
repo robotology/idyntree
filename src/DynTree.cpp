@@ -177,10 +177,10 @@ int DynTree::buildSubGraphStructure(const std::vector<std::string> & ft_names)
     
     int next_id = 0;
     
-    for(int i=0; i < (int)dynamic_traversal.order.size(); i++) {
+    for(int i=0; i < (int)dynamic_traversal.getNrOfVisitedLinks(); i++) {
         
-        KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.order[i];
-        int link_nmbr = link_it->link_nr; 
+        KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.getOrderedLink(i);
+        int link_nmbr = link_it->getLinkIndex(); 
         
         if( i == 0 ) {
             
@@ -196,10 +196,10 @@ int DynTree::buildSubGraphStructure(const std::vector<std::string> & ft_names)
             
         } else {
             //For every link, the subgraph is the same of its parent, unless it is connected to it by an FT sensor
-            KDL::CoDyCo::LinkMap::const_iterator parent_it = dynamic_traversal.parent[link_it->link_nr];
-            int parent_nmbr = parent_it->link_nr;
+            KDL::CoDyCo::LinkMap::const_iterator parent_it = dynamic_traversal.getParentLink(link_it->getLinkIndex());
+            int parent_nmbr = parent_it->getLinkIndex();
             
-            if( isFTsensor(link_it->getAdjacentJoint(parent_it)->joint.getName(),ft_names) ) {
+            if( isFTsensor(link_it->getAdjacentJoint(parent_it)->getJoint().getName(),ft_names) ) {
                 //The FT sensor should be a fixed joint ? probably not
                 //assert(link_it->getAdjacentJoint(parent_it)->joint.getType() == Joint::None);
 
@@ -241,34 +241,34 @@ void DynTree::buildAb_contacts()
     //First calculate the known terms b related to inertial, gravitational and 
     //measured F/T 
     
-    for(int l=dynamic_traversal.order.size()-1; l>=0; l-- ) {  
-            KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.order[l];
-            int link_nmbr = link_it->link_nr;
+    for(int l=dynamic_traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {  
+            KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.getOrderedLink(l);
+            int link_nmbr = link_it->getLinkIndex();
             //Collect RigidBodyInertia and external forces
-            KDL::RigidBodyInertia Ii= link_it->I;
+            KDL::RigidBodyInertia Ii= link_it->getInertia();
             //This calculation should be done one time in forward kineamtic loop and stored \todo
             b_contacts_subtree[link_nmbr] = Ii*a[link_nmbr]+v[link_nmbr]*(Ii*v[link_nmbr]) - getMeasuredWrench(link_nmbr);
     }
     
 
-    for(int l=dynamic_traversal.order.size()-1; l>=0; l-- ) {
+    for(int l=dynamic_traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
             
-        KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.order[l];
-        int link_nmbr = link_it->link_nr;
+        KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.getOrderedLink(l);
+        int link_nmbr = link_it->getLinkIndex();
 
         if( l != 0 ) {
 
-            KDL::CoDyCo::LinkMap::const_iterator parent_it = dynamic_traversal.parent[link_nmbr];
-            const int parent_nmbr = parent_it->link_nr;
+            KDL::CoDyCo::LinkMap::const_iterator parent_it = dynamic_traversal.getParentLink(link_nmbr);
+            const int parent_nmbr = parent_it->getLinkIndex();
             //If this link is a subgraph root, store the result, otherwise project it to the parent
             if( !isSubGraphRoot(link_nmbr) ) {
                 double joint_pos;
 
             KDL::CoDyCo::JunctionMap::const_iterator joint_it = link_it->getAdjacentJoint(parent_it);
-                if( joint_it->joint.getType() == KDL::Joint::None ) {
+                if( joint_it->getJoint().getType() == KDL::Joint::None ) {
                     joint_pos = 0.0;
                 } else {
-                    joint_pos = q(link_it->getAdjacentJoint(parent_it)->q_nr);
+                    joint_pos = q(link_it->getAdjacentJoint(parent_it)->getDOFIndex());
                 }
              
 
@@ -374,8 +374,8 @@ void DynTree::buildAb_contacts()
 void DynTree::store_contacts_results()
 {
     //Make sure that the external forces are equal to zero before storing the results
-    for(int l=dynamic_traversal.order.size()-1; l>=0; l-- ) {  
-        f_ext[dynamic_traversal.order[l]->link_nr] = KDL::Wrench::Zero();
+    for(int l=dynamic_traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {  
+        f_ext[dynamic_traversal.getOrderedLink(l)->getLinkIndex()] = KDL::Wrench::Zero();
     }
 
     for(int sg=0; sg < NrOfDynamicSubGraphs; sg++ ) {
@@ -536,7 +536,7 @@ yarp::sig::Vector DynTree::getDQ_fb() const
      * 
      * \todo checking it is possible to return something which have sense
      */
-    return cat(getVel(dynamic_traversal.order[0]->getLinkIndex()),getDAng());
+    return cat(getVel(dynamic_traversal.getBaseLink()->getLinkIndex()),getDAng());
 }
 
 yarp::sig::Vector DynTree::setD2Ang(const yarp::sig::Vector & _q, const std::string & part_name)
@@ -771,10 +771,10 @@ yarp::sig::Vector DynTree::getBaseForceTorque(int frame_link)
     bool check = true;
     yarp::sig::Vector ret(6), ret_force(3), ret_torque(3);
     KDL::Wrench ret_kdl;
-    if( frame_link == DEFAULT_INDEX_VALUE ) { frame_link = dynamic_traversal.order[0]->getLinkIndex(); }
+    if( frame_link == DEFAULT_INDEX_VALUE ) { frame_link = dynamic_traversal.getBaseLink()->getLinkIndex(); }
     
     if( frame_link != WORLD_FRAME && (frame_link < 0 || frame_link >= getNrOfLinks()) ) { std::cerr << "DynTree::getBaseFroceTorque: link index " << frame_link <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
-    if( frame_link == dynamic_traversal.order[0]->getLinkIndex() ) 
+    if( frame_link == dynamic_traversal.getBaseLink()->getLinkIndex() ) 
     {
         ret_kdl = base_residual_f;
     } else if( frame_link == WORLD_FRAME ) {
@@ -1163,12 +1163,12 @@ bool DynTree::getRelativeJacobian(const int jacobian_distal_link, const int jaco
     */
     KDL::CoDyCo::Traversal * p_traversal;
    
-    if( dynamic_traversal.order[0]->getLinkIndex() == jacobian_base_link ) {
+    if( dynamic_traversal.getBaseLink()->getLinkIndex() == jacobian_base_link ) {
         p_traversal = &dynamic_traversal;
-    } else if ( kinematic_traversal.order[0]->getLinkIndex() == jacobian_base_link ) {
+    } else if ( kinematic_traversal.getBaseLink()->getLinkIndex() == jacobian_base_link ) {
         p_traversal = &kinematic_traversal;
     } else {
-       if( rel_jacobian_traversal.order.size() != undirected_tree.getNrOfLinks() ||  rel_jacobian_traversal.order[0]->getLinkIndex() == jacobian_base_link  ) {
+       if( rel_jacobian_traversal.getNrOfVisitedLinks() != undirected_tree.getNrOfLinks() ||  rel_jacobian_traversal.getBaseLink()->getLinkIndex() == jacobian_base_link  ) {
             undirected_tree.compute_traversal(rel_jacobian_traversal,jacobian_base_link);
        }
        p_traversal = &rel_jacobian_traversal;
