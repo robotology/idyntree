@@ -3,7 +3,7 @@ language: cpp
 compiler:
   - gcc
   - clang
-  
+
 env:
   - KDL_CODYCO_BUILD_TYPE=Debug
   - KDL_CODYCO_BUILD_TYPE=Release
