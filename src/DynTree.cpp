@@ -185,7 +185,7 @@ int DynTree::buildSubGraphStructure(const std::vector<std::string> & ft_names)
         if( i == 0 ) {
             
             //Starting with the dynamical base link, assign an index to the subgraph
-            assert( dynamic_traversal.parent[link_nmbr] == undirected_tree.getInvalidLinkIterator() );
+            assert( dynamic_traversal.getParentLink(link_nmbr) == undirected_tree.getInvalidLinkIterator() );
             link2subgraph_index[link_nmbr] = next_id;
             
             //The dynamical base link is the root of its subgraph
@@ -1174,7 +1174,7 @@ bool DynTree::getRelativeJacobian(const int jacobian_distal_link, const int jaco
        p_traversal = &rel_jacobian_traversal;
     }
     
-    assert( p_traversal->order[0]->getLinkIndex() == jacobian_base_link );
+    assert( p_traversal->getBaseLink()->getLinkIndex() == jacobian_base_link );
     
     getRelativeJacobianLoop(undirected_tree,q,*p_traversal,jacobian_distal_link,rel_jacobian);
     
