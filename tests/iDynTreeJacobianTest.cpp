@@ -27,22 +27,22 @@ using namespace std;
 
 void set_random_vector(yarp::sig::Vector & vec, yarp::os::Random & rng, double coeff=1.0)
 {
-	for( int i=0; i < (int)vec.size(); i++ ) {
-		vec[i] =  coeff*M_PI*rng.uniform();
-	}
+    for( int i=0; i < (int)vec.size(); i++ ) {
+        vec[i] =  coeff*M_PI*rng.uniform();
+    }
 }
 
 Matrix adjoint_twist(Matrix H)
 {
-	Matrix R = H.submatrix(0,2,0,2);
-	Vector r = H.submatrix(0,2,0,3).getCol(3);
-	//std::cout << "~~~~~~~ " << std::endl << " r " << r.toString() << std::endl;
-	Matrix adj(6,6);
-	adj.zero();
-	adj.setSubmatrix(R,0,0);
-	adj.setSubmatrix(R,3,3);
-	adj.setSubmatrix(crossProductMatrix(r)*R,0,3);
-	return adj;
+    Matrix R = H.submatrix(0,2,0,2);
+    Vector r = H.submatrix(0,2,0,3).getCol(3);
+    //std::cout << "~~~~~~~ " << std::endl << " r " << r.toString() << std::endl;
+    Matrix adj(6,6);
+    adj.zero();
+    adj.setSubmatrix(R,0,0);
+    adj.setSubmatrix(R,3,3);
+    adj.setSubmatrix(crossProductMatrix(r)*R,0,3);
+    return adj;
 }
 
 Matrix SE3Inv(const Matrix &H)
@@ -74,39 +74,39 @@ Matrix SE3Inv(const Matrix &H)
 
 void iDyn_print_velocity_acceleration(const yarp::sig::Vector & lin_vel, const yarp::sig::Vector & ang_vel, const yarp::sig::Vector & lin_acc, const yarp::sig::Vector & ang_acc, std::string link_name)
 {
-	Vector v(6), a(6);
+    Vector v(6), a(6);
     v.setSubvector(0,lin_vel);
     v.setSubvector(3,ang_vel);
 
     a.setSubvector(0,lin_acc);
     a.setSubvector(3,ang_acc);
 
-	std::cout <<"Velocity of the " << link_name << endl
-	<< v.toString() << endl
-	<<"Acceleration of the " << link_name << endl
-	<< a.toString() << endl;
-	return;
+    std::cout <<"Velocity of the " << link_name << endl
+    << v.toString() << endl
+    <<"Acceleration of the " << link_name << endl
+    << a.toString() << endl;
+    return;
 }
 
 void iDyn_compose_velocity_acceleration(const yarp::sig::Vector & lin_vel, const yarp::sig::Vector & ang_vel, const yarp::sig::Vector & lin_acc, const yarp::sig::Vector & ang_acc, Vector & v, Vector & a)
 {
-	v = Vector(6);
-	a = Vector(6);
+    v = Vector(6);
+    a = Vector(6);
     v.setSubvector(0,lin_vel);
     v.setSubvector(3,ang_vel);
 
     a.setSubvector(0,lin_acc);
     a.setSubvector(3,ang_acc);
-	return;
+    return;
 }
 
 
 void iDynTree_print_velocity_acceleration(DynTree & icub_idyntree, const std::string link_name)
-{	
-	std::cout <<"Velocity of the " << link_name << endl;
-	cout << icub_idyntree.getVel(icub_idyntree.getLinkIndex((link_name))).toString() << endl;
-	cout <<"Acceleration of " << link_name << endl;
-	cout << icub_idyntree.getAcc(icub_idyntree.getLinkIndex(link_name)).toString() << endl;
+{    
+    std::cout <<"Velocity of the " << link_name << endl;
+    cout << icub_idyntree.getVel(icub_idyntree.getLinkIndex((link_name))).toString() << endl;
+    cout <<"Acceleration of " << link_name << endl;
+    cout << icub_idyntree.getAcc(icub_idyntree.getLinkIndex(link_name)).toString() << endl;
 }
 
 void set_random_q_dq_ddq(yarp::os::Random & rng, iCubTree & icub_tree)
@@ -115,16 +115,16 @@ void set_random_q_dq_ddq(yarp::os::Random & rng, iCubTree & icub_tree)
     pos_c = 2.0;
     vel_c = 1.0;
     acc_c = 4.0;
-    Vector q(icub_tree.getNrOfDOFs());			
+    Vector q(icub_tree.getNrOfDOFs());            
     set_random_vector(q,rng,pos_c);
     icub_tree.setAng(q);
     
-    Vector dq(icub_tree.getNrOfDOFs());			
+    Vector dq(icub_tree.getNrOfDOFs());            
     set_random_vector(dq,rng,vel_c);
     dq[1] = 1000.0;
     icub_tree.setDAng(dq);
 
-    Vector ddq(icub_tree.getNrOfDOFs());			
+    Vector ddq(icub_tree.getNrOfDOFs());            
     set_random_vector(ddq,rng,acc_c);
     icub_tree.setD2Ang(ddq);
     
@@ -133,16 +133,16 @@ void set_random_q_dq_ddq(yarp::os::Random & rng, iCubTree & icub_tree)
 
 int main()
 {
-	
-	//Initializing the random number generator
-	yarp::os::Random rng;
-	rng.seed(yarp::os::Time::now());
-	
-	////////////////////////////////////////////////////////////////////
-	//// iCubTree 
-	////////////////////////////////////////////////////////////////////	
-	//Similarly in iDynTree a iCubTree_version_tag structure is defined
-	iCubTree_version_tag icub_idyntree_version;
+    
+    //Initializing the random number generator
+    yarp::os::Random rng;
+    rng.seed(yarp::os::Time::now());
+    
+    ////////////////////////////////////////////////////////////////////
+    //// iCubTree 
+    ////////////////////////////////////////////////////////////////////    
+    //Similarly in iDynTree a iCubTree_version_tag structure is defined
+    iCubTree_version_tag icub_idyntree_version;
     
     icub_idyntree_version.head_version = 2;
     icub_idyntree_version.legs_version = 2;
