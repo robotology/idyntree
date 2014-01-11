@@ -238,7 +238,7 @@ class DynTree  {
     public:
         DynTree();
  
-        void constructor(const KDL::Tree & _tree, const std::vector<std::string> & joint_sensor_names, const std::string & imu_link_name, 
+        void constructor(const KDL::Tree & _tree, const std::vector<std::string> & joint_ft_sensor_names, const std::string & imu_link_name, 
                          KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(), KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition(), std::vector<KDL::Frame> parent_sensor_transforms=std::vector<KDL::Frame>(0));
 
     
@@ -724,9 +724,22 @@ class DynTree  {
         virtual bool getDynamicsParameters(yarp::sig::Vector & vet);
         //@} 
 
+        /** 
+         * @name Methods related to debug
+        * 
+        * 
+        */
+        //@{
         KDL::Tree getKDLTree() { return undirected_tree.getTree(); }
         
         KDL::CoDyCo::UndirectedTree getKDLUndirectedTree() { return undirected_tree; }
+        
+        /**
+         * Get a list of wrenches that are the internal dynamics (base link M(q)ddq + C(q,dq)dq + n(q))
+         * of each subtree, expressed in the world reference frame, with respect to the world origin
+         */
+        std::vector<yarp::Vector> getSubTreeInternalDynamics();
+        //@} 
     
 };
 

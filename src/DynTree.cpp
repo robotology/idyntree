@@ -1293,5 +1293,21 @@ int DynTree::getDOFIndex(const std::string & part_name, const int local_DOF_inde
     return getDOFIndex(partition.getPartIDfromPartName(part_name),local_DOF_index);
 }
 
+std::vector<yarp::sig::Vector> DynTree::getSubTreeInternalDynamics()
+{
+    std::vector<yarp::sig::Vector> return_value(NrOfDynamicSubGraphs,Vector(6,0.0));
+    
+    std::vector<KDL::Wrench> return_value_kdl(NrOfDynamicSubGraphs,KDL::Wrench::Zero());
+    
+    for(int i=0; i < dynamic_traversal.getNrOfVisitedLinks(); i++ ) {
+        KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.getOrderedLink(i);
+        return_value_kdl[link2subgraph_index[link_it->getLinkNumber()]] += X_dynamic_base[link_it->getLinkNumber()]*f_gi[link_it->getLinkNumber()];
+    }
+    
+    for(int i=0; i < NrOfDynamicSubGraphs; i++ ) {
+        
+    }
+}
+
 }
 }
