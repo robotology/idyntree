@@ -738,7 +738,7 @@ class DynTree  {
          * Get a list of wrenches that are the internal dynamics (base link M(q)ddq + C(q,dq)dq + n(q))
          * of each subtree, expressed in the world reference frame, with respect to the world origin
          */
-        std::vector<yarp::Vector> getSubTreeInternalDynamics();
+        std::vector<yarp::sig::Vector> getSubTreeInternalDynamics();
         //@} 
     
 };

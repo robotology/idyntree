@@ -1301,7 +1301,7 @@ std::vector<yarp::sig::Vector> DynTree::getSubTreeInternalDynamics()
     
     for(int i=0; i < dynamic_traversal.getNrOfVisitedLinks(); i++ ) {
         KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.getOrderedLink(i);
-        return_value_kdl[link2subgraph_index[link_it->getLinkNumber()]] += X_dynamic_base[link_it->getLinkNumber()]*f_gi[link_it->getLinkNumber()];
+        return_value_kdl[link2subgraph_index[link_it->getLinkIndex()]] += X_dynamic_base[link_it->getLinkIndex()]*f_gi[link_it->getLinkIndex()];
     }
     
     for(int i=0; i < NrOfDynamicSubGraphs; i++ ) {
