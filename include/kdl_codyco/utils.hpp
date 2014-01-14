@@ -59,6 +59,19 @@ namespace CoDyCo {
      */
     bool stringVectorFromFile(const std::string filename, std::vector<std::string> & strings, int line_to_read=0);
     
+    /**
+     * Return true if the base of the input KDL::Tree is a fake base
+     * (i.e. a link with only one child, attached to it with a fixed joint and 
+     *       sharing with it the reference frame) 
+     * or false if the base link has to be considered a real link.
+     * 
+     * This function is necessary because in KDL::Tree the "base" link cannot have an dynamic inertia (mass, center of mass, ..)
+     * so it is custom to use a fake "base" to overcome this problem, but we don't want this "fake"
+     * base to be a link in the KDL::CoDyCo::UndirectedTree
+     * 
+     */
+    bool isBaseLinkFake(const KDL::Tree & tree);
+    
 }
 }  
 

@@ -36,7 +36,7 @@ namespace CoDyCo {
             if( i != root ) {
                total_mass += i->second.segment.getInertia().getMass();
             }
-		}
+        }
         
         return total_mass;
     }
@@ -161,6 +161,19 @@ namespace CoDyCo {
         
         return true;
     }
+    
+    bool isBaseLinkFake(const KDL::Tree & tree)
+    {
+        KDL::SegmentMap::const_iterator root = tree.getRootSegment();
+        bool return_value;
+        if( root->second.children.size() == 1 && root->second.children[0]->second.segment.getJoint().getType() == Joint::None ) {
+            return_value = true;
+        } else {
+            return_value = false;
+        }
+        return return_value;
+    }
+
 
 }
 }

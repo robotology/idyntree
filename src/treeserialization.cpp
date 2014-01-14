@@ -82,7 +82,7 @@ namespace CoDyCo {
         SegmentMap::const_iterator root_child = root->second.children[0];
         
         //This should be coherent with the behaviour of UndirectedTree
-        if( root->second.children.size() != 1 || root_child->second.segment.getJoint().getType() != Joint::None )
+        if( !isBaseLinkFake(tree) )
         {
             real_root = root;
             links.resize(links.size()+1);
@@ -224,7 +224,7 @@ namespace CoDyCo {
        SegmentMap::const_iterator root_child = root->second.children[0];
         
        //This should be coherent with the behaviour of UndirectedTree
-       if( root->second.children.size() != 1 || root_child->second.segment.getJoint().getType() != Joint::None )
+       if( !isBaseLinkFake(tree) )
        {  
            if( tree.getNrOfJoints() != dofs.size() || tree.getNrOfSegments()+1 !=  links.size() ) {
                 std::cerr << "TreeSerialization::is_consistent returning false: because: tree is (dofs,links) " <<

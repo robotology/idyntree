@@ -95,13 +95,17 @@ namespace CoDyCo {
         #ifndef NDEBUG
         assert( local_serialization.is_consistent(tree) == serialization.is_consistent(tree) ); 
         if( local_serialization.is_consistent(tree)  ) {
-            //std::cout << "UndirectedTree constructor: using provided serialization " << std::endl;
+            std::cerr << "UndirectedTree constructor: using provided serialization " << std::endl;
         } else {
-            //std::cout << "UndirectedTree constructor: using default serialization " << std::endl;
+            std::cerr << "UndirectedTree constructor: using default serialization " << std::endl;
         }
         #endif
         if( !local_serialization.is_consistent(tree) ) {
             local_serialization = TreeSerialization(tree);
+            assert(local_serialization.is_consistent(tree));
+            #ifndef NDEBUG
+            std::cerr << "UndirectedTree constructor: found consistent serialization" << std::endl;
+            #endif
         }
         
         if( !local_partition.is_consistent(tree,local_serialization) ) {
@@ -121,7 +125,7 @@ namespace CoDyCo {
         //If the virtual base is not fixed with the actual base
         //(or the virtual base has many children, so there is no actual base)
         //Insert a dummy base link explicitly in the constructed UndirectedTree
-        if( virtual_root->second.children.size() != 1 || virtual_root->second.children[0]->second.segment.getJoint().getType() != Joint::None ) {
+        if( !isBaseLinkFake(tree) ) {
             #ifndef NDEBUG
             std::cerr << "UndirectedTree constructor: no fake base found" << std::endl;
             #endif

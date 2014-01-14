@@ -10,6 +10,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include "kdl_codyco/utils.hpp"
 
 namespace KDL {
 namespace CoDyCo {
@@ -108,7 +109,7 @@ namespace CoDyCo {
         SegmentMap::const_iterator root_child = root->second.children[0];
         
          //This should be coherent with the behaviour of UndirectedTree
-        if( root->second.children.size() != 1 || root_child->second.segment.getJoint().getType() != Joint::None )
+        if( !isBaseLinkFake(tree) )
         {
             nrOfLinks++;
         } 
