@@ -1,0 +1,14 @@
+
+include_directories(${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
+
+add_executable(iDynTreeJacobianTest iDynTreeJacobianTest.cpp)
+add_executable(iDynTreeWholeBodyFTsensorEstimateTest iDynTreeWholeBodyFTsensorEstimateTest.cpp)
+add_executable(iDynTreeExternalWrenchesEstimationTest iDynTreeExternalWrenchesEstimationTest.cpp)
+
+target_link_libraries(iDynTreeJacobianTest iDynTree ${ICUB_LIBRARIES} ${orocos_kdl_LIBRARIES} kdl_codyco )
+target_link_libraries(iDynTreeWholeBodyFTsensorEstimateTest iDynTree ${ICUB_LIBRARIES} ${orocos_kdl_LIBRARIES} kdl_codyco )
+target_link_libraries(iDynTreeExternalWrenchesEstimationTest iDynTree ${ICUB_LIBRARIES} ${orocos_kdl_LIBRARIES} kdl_codyco )
+
+add_test(test_iDynTreeJacobianTest iDynTreeJacobianTest)
+add_test(test_iDynTreeWholeBodyFTsensorEstimateTest iDynTreeWholeBodyFTsensorEstimateTest)
+add_test(test_iDynTreeExternalWrenchesEstimationTest iDynTreeExternalWrenchesEstimationTest)
