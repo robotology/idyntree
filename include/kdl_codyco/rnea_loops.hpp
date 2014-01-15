@@ -21,7 +21,7 @@ namespace CoDyCo {
      * \warning Basic function designed for use inside the solver, some no
      *          error checking on input/output parameters is done
      */
-     int rneaKinematicLoop(const UndirectedTree & ,
+     int rneaKinematicLoop(const UndirectedTree & undirected_tree,
                            const KDL::JntArray &q, 
                            const KDL::JntArray &q_dot,
                            const KDL::JntArray &q_dotdot,  
@@ -31,13 +31,13 @@ namespace CoDyCo {
                                  std::vector<Twist>& v,
                                  std::vector<Twist>& a);
      
-         /**
+    /**
      * Perform the kinetic phase of the RNEA algorithm 
      * 
      * \warning Basic function designed for use inside the solver, some no
      *          error checking on input/output parameters is done
      */
-     int rneaKinematicLoop(const UndirectedTree & ,
+     int rneaKinematicLoop(const UndirectedTree & undirected_tree,
                            const KDL::JntArray &q, 
                            const KDL::JntArray &q_dot,
                            const KDL::JntArray &q_dotdot,  
@@ -57,7 +57,7 @@ namespace CoDyCo {
      *          error checking on input/output parameters is done
      * 
      */
-    int rneaDynamicLoop(const UndirectedTree & ,
+    int rneaDynamicLoop(const UndirectedTree & undirected_tree,
                          const KDL::JntArray &q, 
                          const Traversal & dynamical_traversal,
                          const std::vector<Twist>& v,
@@ -67,17 +67,15 @@ namespace CoDyCo {
                          KDL::JntArray &torques,
                          Wrench & base_force);       
     
-     int rneaDynamicLoop(const UndirectedTree & ,
+     int rneaDynamicLoop(const UndirectedTree & undirected_tree,
                          const KDL::JntArray &q, 
                          const Traversal & dynamical_traversal,
-                         const std::vector<Twist>& v,
-                         const std::vector<Twist>& a,
-                         const std::vector<Wrench>& f_ext,
                          const std::vector<Wrench>& f_gi,
+                         const std::vector<Wrench>& f_ext,
                          std::vector<Wrench>& f,
                          KDL::JntArray &torques,
                          Wrench & base_force);        
-      
+     
 }
 }  
 

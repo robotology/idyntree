@@ -109,13 +109,13 @@ namespace CoDyCo {
                 //std::cout << "a[ " << link_it->second.link_name << " ] = " << a[link_nmbr] << std::endl;
                 //std::cout << "\t=" << X_child_parent*a[parent_nmbr] << " + "<< S_child_parent*joint_acc << " + " << std::endl; 
                 #endif 
-                
-                
-                if( f.size() != 0 ) {
+            
+            }
+            
+            if( f_gi.size() != 0 ) {
                     //Collect RigidBodyInertia and external forces
-                    RigidBodyInertia Ii= link_it->second.I;
-                    f[link_nmbr]=Ii*a[link_nmbr]+v[link_nmbr]*(Ii*v[link_nmbr])-f_ext[link_nmbr];
-                }
+                    RigidBodyInertia Ii = link_it->getInertia();
+                    f_gi[link_nmbr]=Ii*a[link_nmbr]+v[link_nmbr]*(Ii*v[link_nmbr]);
             }
         }
         return 0;
@@ -188,6 +188,7 @@ namespace CoDyCo {
     } 
     
     
+    
      int rneaDynamicLoop(const UndirectedTree & undirected_tree,
                          const KDL::JntArray &q, 
                          const Traversal & dynamical_traversal,
@@ -198,9 +199,15 @@ namespace CoDyCo {
                          Wrench & base_force)
     {
         double joint_pos;
-        f = f_gi;
-        //end loop to move (comment) to improve performance
-          
+        assert(f.size() == f_gi.size());
+        assert(f.size() == f_ext.size());
+        
+        for(int i=0; i < (int)dynamical_traversal.getNrOfVisitedLinks(); i++) {
+            LinkMap::const_iterator link_it = dynamical_traversal.getOrderedLink(i);
+            int link_nmbr = link_it->getLinkIndex();
+            f[link_nmbr] = f_gi[link_nmbr] - f_ext[link_nmbr];
+        }
+        
         //Proper dynamic recursive loop for wrench calculations
         for(int l=dynamical_traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
             LinkMap::const_iterator link_it = dynamical_traversal.getOrderedLink(l);
