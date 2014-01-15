@@ -167,8 +167,8 @@ class DynTree  {
         std::vector<int> subgraph_index2root_link; /**< for each subgraph, return the index of the root */
         bool are_contact_estimated;
         
-        int getSubGraphIndex(int link_index) { return link2subgraph_index[link_index]; }
-        bool isSubGraphRoot(int link_index) { return link_is_subgraph_root[link_index]; }
+        int getSubGraphIndex(int link_index) { assert(link_index >= 0); assert(link_index < link2subgraph_index.size()); assert(link2subgraph_index.size() == this->getNrOfLinks()); return link2subgraph_index[link_index]; }
+        bool isSubGraphRoot(int link_index) {  assert(link_is_subgraph_root.size() == this->getNrOfLinks()); return link_is_subgraph_root[link_index]; }
         
         int buildSubGraphStructure(const std::vector<std::string> & ft_names);
         

@@ -31,11 +31,7 @@ using namespace yarp::math;
 
 /**
  * 
- * 
- * 
- * 
- * \todo implement range checking and part handling
- * \todo iDynTreeContact solve dynamic allocation of regressor matrix for contacts
+ * \todo refactor iDynTreeContact and solve dynamic allocation of regressor matrix for contacts
  * 
  */ 
  
@@ -67,7 +63,7 @@ void DynTree::constructor(const KDL::Tree & _tree,
 int ret;
     
     undirected_tree = KDL::CoDyCo::UndirectedTree(_tree,serialization,_partition);  
-    partition = _partition;
+    partition = undirected_tree.getPartition();
     
     //Setting useful constants
     NrOfDOFs = _tree.getNrOfJoints();
@@ -103,7 +99,8 @@ int ret;
     a = std::vector<KDL::Twist>(NrOfLinks);
     
     f = std::vector<KDL::Wrench>(NrOfLinks); /**< wrench trasmitted by a link to the predecessor (note that predecessor definition depends on the selected dynamic base */
-        
+    f_gi = std::vector<KDL::Wrench>(NrOfLinks); 
+    
     f_ext = std::vector<KDL::Wrench>(NrOfLinks,KDL::Wrench::Zero());     
         
     //Create default kinematic traversal (if imu_names is wrong, creating the default one)   
@@ -125,8 +122,10 @@ int ret;
     if( ret != 0 ) { std::cerr << "iDynTree constructor: ft sensor specified not found" << std::endl; }
     
     //building matrix and vectors for each subgraph
+    contacts.resize(NrOfDynamicSubGraphs);
     A_contacts.resize(NrOfDynamicSubGraphs);
-    b_contacts.resize(NrOfDynamicSubGraphs);
+    b_contacts.resize(NrOfDynamicSubGraphs,Vector(6,0.0));
+    x_contacts.resize(NrOfDynamicSubGraphs);
     
     b_contacts_subtree.resize(NrOfLinks);
     
@@ -248,6 +247,13 @@ void DynTree::buildAb_contacts()
             KDL::RigidBodyInertia Ii= link_it->getInertia();
             //This calculation should be done one time in forward kineamtic loop and stored \todo
             b_contacts_subtree[link_nmbr] = Ii*a[link_nmbr]+v[link_nmbr]*(Ii*v[link_nmbr]) - getMeasuredWrench(link_nmbr);
+            #ifndef NDEBUG
+            std::cerr << "link_nmbr : " << link_nmbr << std::endl;
+            std::cerr << "b_contacts_subtree: " << b_contacts_subtree[link_nmbr] << std::endl;
+            std::cerr << "a " << a[link_nmbr] << std::endl;
+            std::cerr << "v " << v[link_nmbr] << std::endl;
+            std::cerr << "getMeasuredWrench " << getMeasuredWrench(link_nmbr) << std::endl;
+            #endif
     }
     
 
@@ -261,10 +267,14 @@ void DynTree::buildAb_contacts()
             KDL::CoDyCo::LinkMap::const_iterator parent_it = dynamic_traversal.getParentLink(link_nmbr);
             const int parent_nmbr = parent_it->getLinkIndex();
             //If this link is a subgraph root, store the result, otherwise project it to the parent
+            #ifndef NDEBUG
+            std::cerr << "Link_nmbr " << link_nmbr << std::endl;
+            std::cerr << "isSubGraphRoot(" << link_nmbr << ") " << isSubGraphRoot(link_nmbr) << std::endl;
+            #endif
             if( !isSubGraphRoot(link_nmbr) ) {
                 double joint_pos;
 
-            KDL::CoDyCo::JunctionMap::const_iterator joint_it = link_it->getAdjacentJoint(parent_it);
+                KDL::CoDyCo::JunctionMap::const_iterator joint_it = link_it->getAdjacentJoint(parent_it);
                 if( joint_it->getJoint().getType() == KDL::Joint::None ) {
                     joint_pos = 0.0;
                 } else {
@@ -273,11 +283,16 @@ void DynTree::buildAb_contacts()
              
 
                 b_contacts_subtree[parent_nmbr] += link_it->pose(parent_it,joint_pos)*b_contacts_subtree[link_nmbr]; 
-            } else {
+            } 
+       }
+       
+       if( isSubGraphRoot(link_nmbr ) )
+       {
                 b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(0,KDLtoYarp(b_contacts_subtree[link_nmbr].torque));
                 b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(3,KDLtoYarp(b_contacts_subtree[link_nmbr].force));
-            }
        }
+       
+       
     }
     
     //Then calculate the A and b related to unknown contacts
@@ -818,6 +833,7 @@ yarp::sig::Vector DynTree::getTorques(const std::string & part_name) const
     
 bool DynTree::setContacts(const iCub::skinDynLib::dynContactList & contacts_list)
 {
+    assert(contacts.size() == NrOfDynamicSubGraphs);
     for(int sg = 0; sg < NrOfDynamicSubGraphs; sg++ ) {
         contacts[sg].resize(0);
     }
@@ -830,6 +846,12 @@ bool DynTree::setContacts(const iCub::skinDynLib::dynContactList & contacts_list
         int body_part = it->getBodyPart();
         int local_link_index = it->getLinkNumber();
         int link_contact_index = partition.getGlobalLinkIndex(body_part,local_link_index);
+        if( link_contact_index == -1 ) {
+            #ifndef NDEBUG
+            std::cerr << "partition.getGlobalLinkIndex() returned -1 for body_part " << body_part << " local_link_index " << local_link_index << std::endl;
+            #endif
+            return false;
+        }
         
         int subgraph_id = getSubGraphIndex(link_contact_index);
         
@@ -878,7 +900,9 @@ bool DynTree::computePositions() const
 bool DynTree::kinematicRNEA()
 {
     int ret;
-    ret = rneaKinematicLoop(undirected_tree,q,dq,ddq,kinematic_traversal,imu_velocity,imu_acceleration,v,a);
+    
+    //ret = rneaKinematicLoop(undirected_tree,q,dq,ddq,kinematic_traversal,imu_velocity,imu_acceleration,v,a);
+    ret = rneaKinematicLoop(undirected_tree,q,dq,ddq,kinematic_traversal,imu_velocity,imu_acceleration,v,a,f_gi);
     
     are_contact_estimated = false;
     
@@ -892,7 +916,17 @@ bool DynTree::estimateContactForces()
     double tol = 1e-7; /**< value extracted from old iDynContact */
     buildAb_contacts();
     for(int i=0; i < NrOfDynamicSubGraphs; i++ ) {
+        #ifndef NDEBUG
+        std::cout << "A_contacts " << i << " has size " << A_contacts[i].rows() << " " << A_contacts[i].cols() << std::endl;
+        std::cout << A_contacts[i].toString() << std::endl;
+        std::cout << "b_contacts " << i << " has size " << b_contacts[i].size() << std::endl;
+        std::cout << b_contacts[i].toString() << std::endl;
+        #endif 
         x_contacts[i] = yarp::math::pinv(A_contacts[i],tol)*b_contacts[i];
+        #ifndef NDEBUG
+        std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
+        std::cout << x_contacts[i].toString() << std::endl;
+        #endif
     }
     store_contacts_results();
     are_contact_estimated = true;
@@ -902,10 +936,19 @@ bool DynTree::estimateContactForces()
 bool DynTree::dynamicRNEA()
 {
     int ret;
-    ret = rneaDynamicLoop(undirected_tree,q,dynamic_traversal,v,a,f_ext,f,torques,base_residual_f);
+    //ret = rneaDynamicLoop(undirected_tree,q,dynamic_traversal,v,a,f_ext,f,torques,base_residual_f);
+    ret = rneaDynamicLoop(undirected_tree,q,dynamic_traversal,f_gi,f_ext,f,torques,base_residual_f);
     //Check base force: if estimate contact was called, it should be zero
     if( are_contact_estimated == true ) {
         //If the force were estimated wright
+        #ifndef NDEBUG
+        //std::cout << "q:   " << q << std::endl;
+        //std::cout << "dq:  " << dq << std::endl;
+        //std::cout << "ddq: " << ddq << std::endl;
+        for(int i=0; i < f_ext.size(); i++ ) { std::cout << "f_ext[" << i << "]: " << f_ext[i] << std::endl; }
+        std::cerr << "base_residual_f.force.Norm " << base_residual_f.force.Norm() << std::endl;
+        std::cerr << "base_residual_f.force.Norm " << base_residual_f.torque.Norm() << std::endl;
+        #endif
         assert( base_residual_f.force.Norm() < 1e-5 );
         assert( base_residual_f.torque.Norm() < 1e-5 );
         //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
@@ -1295,6 +1338,7 @@ int DynTree::getDOFIndex(const std::string & part_name, const int local_DOF_inde
 
 std::vector<yarp::sig::Vector> DynTree::getSubTreeInternalDynamics()
 {
+    computePositions();
     std::vector<yarp::sig::Vector> return_value(NrOfDynamicSubGraphs,Vector(6,0.0));
     
     std::vector<KDL::Wrench> return_value_kdl(NrOfDynamicSubGraphs,KDL::Wrench::Zero());
@@ -1305,8 +1349,12 @@ std::vector<yarp::sig::Vector> DynTree::getSubTreeInternalDynamics()
     }
     
     for(int i=0; i < NrOfDynamicSubGraphs; i++ ) {
-        
+        for(int j=0; j < 6; j++ ) {
+            return_value[i][j] = return_value_kdl[i](j);
+        }
     }
+    
+    return return_value;
 }
 
 }

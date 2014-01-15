@@ -142,33 +142,38 @@ void set_random_IMU_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree)
 KDL::Tree getSnake()
 {
     KDL::Tree snake("fake_base_link");
-    snake.addSegment(KDL::Segment("snake_seg0",KDL::Joint("snake_jnt0",KDL::Joint::None),
+    KDL::Chain snake_chain;
+    snake_chain.addSegment(KDL::Segment("snake_seg0",KDL::Joint("snake_jnt0",KDL::Joint::None),
                                    KDL::Frame::DH(2.5,M_PI_2,3,0.3),
                                    KDL::RigidBodyInertia(10,KDL::Vector(1,2,3),KDL::RotationalInertia(1,3,4))));
-    snake.addSegment(KDL::Segment("snake_seg1",KDL::Joint("snake_jnt1",KDL::Joint::RotZ),
+    snake_chain.addSegment(KDL::Segment("snake_seg1",KDL::Joint("snake_jnt1",KDL::Joint::RotZ),
                                    KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
                                    KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake.addSegment(KDL::Segment("snake_seg2",KDL::Joint("snake_jnt2",KDL::Joint::RotZ),
+    snake_chain.addSegment(KDL::Segment("snake_seg2",KDL::Joint("snake_jnt2",KDL::Joint::RotZ),
                                    KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
                                    KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake.addSegment(KDL::Segment("snake_seg3",KDL::Joint("snake_jnt3",KDL::Joint::RotZ),
+    snake_chain.addSegment(KDL::Segment("snake_seg3",KDL::Joint("snake_jnt3",KDL::Joint::RotZ),
                                    KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
                                    KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake.addSegment(KDL::Segment("snake_seg4",KDL::Joint("snake_ft0",KDL::Joint::None),
+    snake_chain.addSegment(KDL::Segment("snake_seg4",KDL::Joint("snake_ft0",KDL::Joint::None),
                                    KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
                                    KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake.addSegment(KDL::Segment("snake_seg5",KDL::Joint("snake_jnt5",KDL::Joint::RotZ),
+    snake_chain.addSegment(KDL::Segment("snake_seg5",KDL::Joint("snake_jnt5",KDL::Joint::RotZ),
                                    KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
                                    KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake.addSegment(KDL::Segment("snake_seg6",KDL::Joint("snake_jnt6",KDL::Joint::RotZ),
+    snake_chain.addSegment(KDL::Segment("snake_seg6",KDL::Joint("snake_jnt6",KDL::Joint::RotZ),
                                    KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
                                    KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake.addSegment(KDL::Segment("snake_seg7",KDL::Joint("snake_jnt7",KDL::Joint::RotZ),
+    snake_chain.addSegment(KDL::Segment("snake_seg7",KDL::Joint("snake_jnt7",KDL::Joint::RotZ),
                                    KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
                                    KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake.addSegment(KDL::Segment("snake_seg8",KDL::Joint("snake_jnt8",KDL::Joint::RotZ),
+    snake_chain.addSegment(KDL::Segment("snake_seg8",KDL::Joint("snake_jnt8",KDL::Joint::RotZ),
                                    KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
                                    KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
+    
+    snake.addChain(snake_chain,"fake_base_link");
+    
+    return snake;
 }
 
 int main()
@@ -182,7 +187,8 @@ int main()
     KDL::Tree snake = getSnake();
     std::vector<std::string> ft_sensors;
     ft_sensors.push_back("snake_ft0");
-    iCub::iDynTree::DynTree snake_dyntree(snake,ft_sensors,"snake_seg2");
+    std::string imu_link = "snake_seg2";
+    iCub::iDynTree::DynTree snake_dyntree(snake,ft_sensors,imu_link);
     
     //Assign random kinematic state
     set_random_IMU_q_dq_ddq(rng,snake_dyntree);
@@ -191,17 +197,21 @@ int main()
     Vector ft_sensor(6);
     set_random_vector(ft_sensor,rng,10);
     
-    snake_dyntree.setSensorMeasurement(ft_sensor);
+    snake_dyntree.setSensorMeasurement(0,ft_sensor);
 
     //Set only two unknown wrenches, one for subchain, so the estimation problem is well posed
-    int DEFAULT_BODY_PART_ID = 0;
+    iCub::skinDynLib::BodyPart DEFAULT_BODY_PART_ID = (iCub::skinDynLib::BodyPart)0;
     
     dynContactList input_contact_list, output_contact_list;
-    dynContact first_contact(DEFAULT_BODY_PART_ID,1);
-    dynContact second_contact(DEFAULT_BODY_PART_ID,7);
+    const int first_contact_link = 1;
+    const int second_contact_link = 7;
+    dynContact first_contact(DEFAULT_BODY_PART_ID,first_contact_link,yarp::sig::Vector(3,0.0));
+    dynContact second_contact(DEFAULT_BODY_PART_ID,second_contact_link,yarp::sig::Vector(3,0.0));
     
     input_contact_list.push_back(first_contact);
     input_contact_list.push_back(second_contact);
+    
+    std::cout << "Snake_dyntree partition: " << snake_dyntree.getKDLUndirectedTree().getPartition().toString() << std::endl;
     
     snake_dyntree.setContacts(input_contact_list);
     
@@ -211,6 +221,59 @@ int main()
     
     output_contact_list = snake_dyntree.getContacts();
     
+    if( output_contact_list.size() != 2 ) { std::cout << "Error: Estimated more than two contacts."; return EXIT_FAILURE; }
     
+    dynContact first_contact_estimated = output_contact_list[0];
+    dynContact second_contact_estimated = output_contact_list[1];
+
+    //Get internal subtree dynamics
+    std::vector<yarp::sig::Vector> int_dyn = snake_dyntree.getSubTreeInternalDynamics();
+    
+    //All the forces should be have an equilibrium on each subgraph
+    yarp::sig::Vector ext_f_1 = snake_dyntree.getPosition(first_contact_link).submatrix(0,2,0,2)*first_contact_estimated.getForce();
+    yarp::sig::Vector ext_f_2 = snake_dyntree.getPosition(second_contact_link).submatrix(0,2,0,2)*second_contact_estimated.getForce();
+    
+    yarp::sig::Vector int_f_1 = int_dyn[0].subVector(0,2);
+    yarp::sig::Vector int_f_2 = int_dyn[1].subVector(0,2);
+    
+    yarp::sig::Vector ext_t_1 = snake_dyntree.getPosition(first_contact_link).submatrix(0,2,0,2)*first_contact_estimated.getMoment();
+    yarp::sig::Vector ext_t_2 = snake_dyntree.getPosition(second_contact_link).submatrix(0,2,0,2)*second_contact_estimated.getMoment();
+    
+    yarp::sig::Vector int_w_1 = int_dyn[0];
+    yarp::sig::Vector int_w_2 = int_dyn[1];
+    
+    yarp::sig::Vector ext_w_1 = cat(ext_f_1,ext_t_1);
+    yarp::sig::Vector ext_w_2 = cat(ext_f_2,ext_t_2);
+    
+    
+    yarp::sig::Vector sens_f_1 = ft_sensor.subVector(0,2);
+    yarp::sig::Vector sens_f_2 = -1*sens_f_1;
+    
+    yarp::sig::Vector sens_w_1 = ft_sensor;
+    yarp::sig::Vector sens_w_2 = -1*sens_w_1;
+    
+    
+    //
+    std::cout << "ext_f_1 norm: " << yarp::math::norm(ext_f_1) << std::endl;
+    std::cout << "ext_f_2 norm: " << yarp::math::norm(ext_f_2) << std::endl;
+    std::cout << "int_f_1 norm: " << yarp::math::norm(int_f_1) << std::endl;
+    std::cout << "int_f_2 norm: " << yarp::math::norm(int_f_2) << std::endl;
+    std::cout << "sens_f_1 norm: " << yarp::math::norm(sens_f_1) << std::endl;
+    std::cout << "sens_f_2 norm: " << yarp::math::norm(sens_f_2) << std::endl;
+    std::cout << "ext_f_1 " << ext_f_1.size() << " " << int_f_1.size() << std::endl;
+    std::cout << "ext_f_1-int_f_1 norm: " << yarp::math::norm(ext_f_1-int_f_1) << std::endl;
+    std::cout << "ext_f_2-int_f_2 norm: " << yarp::math::norm(ext_f_2-int_f_2) << std::endl;
+    
+    /*
+    std::cout << "ext_w_1 norm: " << yarp::math::norm(ext_w_1) << std::endl;
+    std::cout << "ext_w_2 norm: " << yarp::math::norm(ext_w_2) << std::endl;
+    std::cout << "int_w_1 norm: " << yarp::math::norm(int_w_1) << std::endl;
+    std::cout << "int_w_2 norm: " << yarp::math::norm(int_w_2) << std::endl;
+    std::cout << "sens_w_1 norm: " << yarp::math::norm(sens_w_1) << std::endl;
+    std::cout << "sens_w_2 norm: " << yarp::math::norm(sens_w_2) << std::endl;
+    std::cout << "ext_w_1 " << ext_w_1.size() << " " << int_w_1.size() << std::endl;
+    std::cout << "ext_w_1-int_w_1 norm: " << yarp::math::norm(ext_w_1-int_w_1) << std::endl;
+    std::cout << "ext_w_2-int_w_2 norm: " << yarp::math::norm(ext_w_2-int_w_2) << std::endl;
+    */
     
 }

@@ -93,7 +93,7 @@ KDL::CoDyCo::TreePartition iCubTree::get_iCub_partition(const KDL::CoDyCo::TreeS
     head.addLink(icub_serialization.getLinkID("neck_1"));
     head.addLink(icub_serialization.getLinkID("neck_2"));    
     head.addLink(icub_serialization.getLinkID("head"));    
-    head.addLink(icub_serialization.getLinkID("imu_frame"));    
+    head.addLink(icub_serialization.getLinkID(ICUB_IMU_LINK_NAME ));    
     
     KDL::CoDyCo::TreePart torso(TORSO,BodyPart_s[TORSO]);
     torso.addDOF(icub_serialization.getDOFID("torso_pitch"));

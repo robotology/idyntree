@@ -18,6 +18,8 @@ namespace iCub
 namespace iDynTree
 {
 
+const std::string ICUB_IMU_LINK_NAME = "imu_frame";  
+  
 /**
  * Struct for describing the version of the parts of an iCubTree
  */
@@ -73,7 +75,7 @@ class iCubTree : public DynTree
      * @param verbose level of verbosity: 0 if no output is requested, 1 to have output messages (default is 0) 
      * @param imu_link_name name of the link to consider as imu (default: "imu_link")
      */
-     iCubTree(iCubTree_version_tag version, bool foot_ft=false, iCubTree_serialization_tag serial=SKINDYNLIB_SERIALIZATION,  unsigned int verbose=0, std::string imu_link_name = "imu_link" );
+     iCubTree(iCubTree_version_tag version, bool foot_ft=false, iCubTree_serialization_tag serial=SKINDYNLIB_SERIALIZATION,  unsigned int verbose=0, std::string imu_link_name = ICUB_IMU_LINK_NAME  );
 
     virtual ~iCubTree();
 };
