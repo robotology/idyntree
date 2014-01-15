@@ -30,6 +30,24 @@ namespace CoDyCo {
                            const Twist& base_acceleration, 
                                  std::vector<Twist>& v,
                                  std::vector<Twist>& a);
+     
+         /**
+     * Perform the kinetic phase of the RNEA algorithm 
+     * 
+     * \warning Basic function designed for use inside the solver, some no
+     *          error checking on input/output parameters is done
+     */
+     int rneaKinematicLoop(const UndirectedTree & ,
+                           const KDL::JntArray &q, 
+                           const KDL::JntArray &q_dot,
+                           const KDL::JntArray &q_dotdot,  
+                           const Traversal & kinetic_traversal,
+                           const Twist& base_velocity, 
+                           const Twist& base_acceleration, 
+                                 std::vector<Twist>& v,
+                                 std::vector<Twist>& a,
+                                 std::vector<Wrench>& f_gi
+                          );
                        
     /**
      * Perform the dynamics phase of the RNEA algorithm, where the kinematic
@@ -47,7 +65,18 @@ namespace CoDyCo {
                          const std::vector<Wrench>& f_ext,
                          std::vector<Wrench>& f,
                          KDL::JntArray &torques,
-                         Wrench & base_force);             
+                         Wrench & base_force);       
+    
+     int rneaDynamicLoop(const UndirectedTree & ,
+                         const KDL::JntArray &q, 
+                         const Traversal & dynamical_traversal,
+                         const std::vector<Twist>& v,
+                         const std::vector<Twist>& a,
+                         const std::vector<Wrench>& f_ext,
+                         const std::vector<Wrench>& f_gi,
+                         std::vector<Wrench>& f,
+                         KDL::JntArray &torques,
+                         Wrench & base_force);        
       
 }
 }  
