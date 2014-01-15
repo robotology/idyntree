@@ -18,7 +18,6 @@
 #include "test_models.hpp"
 
 #include <ctime>
-#include <boost/concept_check.hpp>
 
 using namespace KDL;
 using namespace KDL::CoDyCo;
