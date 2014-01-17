@@ -51,10 +51,11 @@ iCubTree::iCubTree(iCubTree_version_tag version, bool ft_feet, iCubTree_serializ
     ft_names.push_back("l_arm_ft_sensor");
     ft_names.push_back("r_arm_ft_sensor");
     ft_names.push_back("l_leg_ft_sensor");
-    ft_names.push_back("r_leg_ft_sensor");
-    
     if(ft_feet) {
         ft_names.push_back("l_foot_ft_sensor");
+    }
+    ft_names.push_back("r_leg_ft_sensor");
+    if(ft_feet) {
         ft_names.push_back("r_foot_ft_sensor");
     }
     

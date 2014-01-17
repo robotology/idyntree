@@ -1298,6 +1298,16 @@ int DynTree::getNrOfLinks()
     return undirected_tree.getNrOfLinks();
 }
 
+int DynTree::getNrOfFTSensors()
+{
+    return undirected_tree.getNrOfLinks();
+}
+
+int DynTree::getNrOfIMUs()
+{
+    return 1;
+}
+
 int DynTree::getLinkIndex(const std::string & link_name)
 {
     KDL::CoDyCo::LinkMap::const_iterator link_it = undirected_tree.getLink(link_name);
@@ -1310,6 +1320,24 @@ int DynTree::getDOFIndex(const std::string & dof_name)
     KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(dof_name);
     if( junction_it == undirected_tree.getInvalidJunctionIterator() || junction_it->getNrOfDOFs() != 1 ) { std::cerr << "DynTree::getDOFIndex : DOF " << dof_name << " not found" << std::endl; return -1; }
     return junction_it->getDOFIndex();
+}
+
+int DynTree::getFTSensorIndex(const std::string & ft_name)
+{
+    KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(ft_name);
+    if( junction_it == undirected_tree.getInvalidJunctionIterator() || !ft_list.isFTSensor(junction_it->getJunctionIndex()) ) { std::cerr << "DynTree::getFTSensorIndex : DOF " << ft_name << " not found" << std::endl; return -1; }
+    if( junction_it->getNrOfDOFs() > 0 ) { std::cerr << "DynTree::getFTSensorIndex warning: " << ft_name << " is not a fixed junction " << std::endl; }
+    return ft_list.getFTSensorID(junction_it->getJunctionIndex());
+}
+
+int DynTree::getIMUIndex(const std::string & imu_name)
+{
+    if( imu_name == kinematic_traversal.getBaseLink()->getName() ) {
+        return 0;        
+    } else {
+         std::cerr << "DynTree::getIMUIndex : IMU " << imu_name << " not found" << std::endl; 
+         return -1; 
+    }
 }
 
 int DynTree::getLinkIndex(const int part_id, const int local_link_index)

@@ -192,10 +192,7 @@ class DynTree  {
          */
         void buildAb_contacts();
         
-        /**
-         * 
-         * 
-         */
+        /** store contacts results */
         void store_contacts_results();
         
         /**
@@ -273,6 +270,18 @@ class DynTree  {
         int getNrOfLinks();
         
         /**
+         * Get the number of 6-axis Force Torque sensors
+         * 
+         */
+        int getNrOfFTSensors();
+        
+        /**
+         * Get the number of IMUs
+         *
+         */
+        int getNrOfIMUs();
+       
+        /**
          * Get the global index for a link, given a link name
          * @param link_name the name of the link
          * @return an index between 0..getNrOfLinks()-1 if all went well, -1 otherwise
@@ -287,6 +296,17 @@ class DynTree  {
          */
         int getDOFIndex(const std::string & dof_name);
         
+        /**
+         * Get the global index of a FT sensor, given the FT sensor name 
+         * 
+         */
+        int getFTSensorIndex(const std::string & ft_sensor_name);
+        
+        /** 
+         * Get the global index of a IMU, given the IMU name
+         * 
+         */
+        int getIMUIndex(const std::string & imu_name);
         
          /**
          * Get the global index for a link, given a part and a part local index

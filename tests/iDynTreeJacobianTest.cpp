@@ -216,9 +216,9 @@ int main()
     //v_rhand_rel_jac = rel_jacobian*icub_idyntree.getDAng() + adjoint_twist(icub_idyntree.getPosition(r_hand_index,l_hand_index))*icub_idyntree.getVel(l_hand_index);
     
     std::cout << "Comparison between velocities" << std::endl 
-             << "Real one          " << v_rhand.toString() << std::endl
-             << "Relative jacobian " << v_rhand_rel_jac.toString() << std::endl
-             << "Absolute jacobian " << v_rhand_abs_jac.toString() << std::endl;
+              << "Real one          " << v_rhand.toString() << std::endl
+              << "Relative jacobian " << v_rhand_rel_jac.toString() << std::endl
+              << "Absolute jacobian " << v_rhand_abs_jac.toString() << std::endl;
              
     //For testing, it is also possible to check that the absolute velocity is computed correctly
     yarp::sig::Vector abs_v_rhand, abs_v_rhand_abs_jac;
@@ -227,8 +227,8 @@ int main()
     abs_v_rhand_abs_jac = abs_jacobian*icub_idyntree.getDQ_fb();
          
     std::cout << "Comparison between velocities expressed in world frame" << std::endl 
-             << "Real one          " << abs_v_rhand.toString() << std::endl
-             << "Absolute jacobian " << abs_v_rhand_abs_jac.toString() << std::endl;
+              << "Real one          " << abs_v_rhand.toString() << std::endl
+              << "Absolute jacobian " << abs_v_rhand_abs_jac.toString() << std::endl;
              
              
     
