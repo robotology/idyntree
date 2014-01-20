@@ -304,8 +304,9 @@ int main()
     <<" left leg: " <<  (icub.lowerTorso->getAng("left_leg")-icub_tree.getAng("left_leg")).toString() << endl
     <<" right leg: " <<  (icub.lowerTorso->getAng("right_leg")-icub_tree.getAng("right_leg")).toString() << endl
 
-    << "Difference in COM" << (com-icub_tree.getCOM()).toString() << std::endl;
-    
+    << "Difference in COM " << (com-icub_tree.getCOM()).toString() << std::endl
+    << "Original COM " << com.toString() << std::endl
+    << "iDynTree COM " << ((icub_tree.getCOM())).toString() << std::endl;
     
     return 0;
 }
