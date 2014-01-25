@@ -120,6 +120,7 @@ namespace CoDyCo{
         
         /**
          * Get the number of Links
+         * 
          */
         int getNrOfLinks() const;
         
@@ -147,10 +148,10 @@ namespace CoDyCo{
         
         /**
          * Check if the TreeSerialization is a valid serialization for the 
-         * given Tree (checking also if the names are the wright one, not 
-         * if the DOF serialization inside the TreeSerialization is the same
-         * of the one in the Tree
+         * given Tree (checking also if the names in the serialization are 
+         *  the same of those in the tree)
          * 
+         * \note 
          */
         bool is_consistent(const Tree & tree) const;
         
