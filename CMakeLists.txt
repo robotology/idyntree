@@ -50,11 +50,7 @@ TARGET_LINK_LIBRARIES(${PROJECTNAME} iDyn
 icub_export_library(${PROJECTNAME} INTERNAL_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
                                    DESTINATION include/iCub/iDynTree
                                    FILES ${folder_header})
-                                   
-IF(CODYCO_BUILD_TESTS)
-    ENABLE_TESTING()
-    ADD_SUBDIRECTORY(tests)
-ENDIF(CODYCO_BUILD_TESTS)
+                                  
 
 
 message(STATUS "Configuration successful. Type make to compile iDynTree")
