@@ -211,11 +211,19 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
                 std::cout << "ft_list " << ft_list.toString() << std::endl;
             }
             assert(10*NrOfRealLinks_subtree+6*ft_id+5 < regressor_matrix.cols());
+            
+            double sign;
+            if( fts_link[0]->isWrenchAppliedFromParentToChild() ) {
+                sign = 1.0;
+            } else {
+                sign = -1.0;
+            }
+            
             if( fts_link[0]->getParent() == leaf_link_id ) { 
-                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = -toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
+                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = -sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
             } else {
                 assert( fts_link[0]->getChild() == leaf_link_id );
-                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
+                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
             }
             
         }
