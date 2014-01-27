@@ -54,7 +54,7 @@ namespace CoDyCo
             /**
              * Change the link used as the base one in the solver
              * 
-             * @param[in] new_base_id the ID of the new base (as specified in getSerialization()
+             * @param[in] new_base_id the ID of the new base (as specified in getSerialization())
              * @return true if all went well, false otherwise
              */
             bool changeBase(const int new_base_id)
