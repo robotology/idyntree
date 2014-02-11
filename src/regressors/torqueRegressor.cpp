@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
   
-#include <dirl/torqueRegressor.hpp> 
+#include <kdl_codyco/regressors/torqueRegressor.hpp> 
 
 #include <kdl_codyco/regressor_utils.hpp>
 
@@ -16,8 +16,9 @@
 
 using namespace KDL::CoDyCo;
 
-namespace dirl
-{
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {
     
 bool torqueRegressor::isActiveFTSensor(const int ft_sensor_id) const
 {
@@ -135,7 +136,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
                                       Eigen::VectorXd & known_terms)
 {
 #ifndef NDEBUG
-    std::cerr << "Called torqueRegressor::computeRegressor " << std::endl;
+    if( verbose ) std::cerr << "Called torqueRegressor::computeRegressor " << std::endl;
 #endif 
     //const KDL::CoDyCo::UndirectedTree &  = *p_undirected_tree;
     const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
@@ -166,7 +167,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         int link_id = subtree_links_indices[i];
         
         #ifndef NDEBUG
-        std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the regressor relative to link " << p_undirected_tree->getLink(link_id)->getName() << std::endl;
+        if( verbose ) std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the regressor relative to link " << p_undirected_tree->getLink(link_id)->getName() << std::endl;
         #endif
             
         if( linkIndeces2regrCols[link_id] != -1 ) {
@@ -177,11 +178,10 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
     
 #ifndef NDEBUG
     if( consider_ft_offset ) {
-        std::cerr << "considering ft offset" << std::endl;
+        if( verbose ) std::cerr << "considering ft offset" << std::endl;
     } else {
-        std::cerr << "not considering ft offset" << std::endl;
+        if( verbose ) std::cerr << "not considering ft offset" << std::endl;
     }
-    std::cerr << "subtree_leaf_links_indeces size " << subtree_leaf_links_indeces.size() << std::endl;
 #endif
     //if the ft offset is condidered, we have to set also the columns relative to the offset 
     //For each subgraph, we consider the measured wrenches as the one excerted from the remain of the tree to the considered subtree 
@@ -200,16 +200,11 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
             assert(fts_link[0]->getChild() == leaf_link_id || fts_link[0]->getParent() == leaf_link_id );
             
             #ifndef NDEBUG
-            std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the columns relative to offset of ft sensor " << fts_link[0]->getName() << std::endl;
+            if( verbose ) std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the columns relative to offset of ft sensor " << fts_link[0]->getName() << std::endl;
             #endif
             
             /** \todo find a more robust way to get columns indeces relative to a given parameters */
             assert(ft_id >= 0 && ft_id < 100);
-            if( !(10*NrOfRealLinks_subtree+6*ft_id+5 < regressor_matrix.cols()) ) {
-                std::cout << "NrOfRealLinks " << NrOfRealLinks_subtree << std::endl;
-                std::cout << "ft_id         " << ft_id << std::endl;
-                std::cout << "ft_list " << ft_list.toString() << std::endl;
-            }
             assert(10*NrOfRealLinks_subtree+6*ft_id+5 < regressor_matrix.cols());
             
             double sign;
@@ -250,8 +245,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         
         assert(fts_link[0]->getChild() == leaf_link_id || fts_link[0]->getParent() == leaf_link_id );
 
-   
-        
+
         known_terms(0) +=  dot(S,X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*ft_list.getMeasuredWrench(leaf_link_id,measured_wrenches));
     }
     
@@ -266,6 +260,10 @@ std::cout << known_terms << std::endl;
 #endif
     
     return 0;
+}
+
+}
+
 }
 
 }

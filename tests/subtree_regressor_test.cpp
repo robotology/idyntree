@@ -7,7 +7,7 @@
 #include <kdl/rigidbodyinertia.hpp>
 #include <kdl/frames_io.hpp>
 
-#include <dirl/dynamicRegressorGenerator.hpp>
+#include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
 
 #include <kdl_codyco/regressor_loops.hpp>
 
@@ -16,10 +16,11 @@
 #include "test_models.hpp"
 
 #include <ctime>
+#include <boost/concept_check.hpp>
 
 using namespace KDL;
 using namespace KDL::CoDyCo;
-using namespace dirl;
+using namespace KDL::CoDyCo::Regressors;
 
 double random_double()
 {
@@ -52,7 +53,8 @@ int main()
 
     
     //It is necessary to use a dynamic base that is not in the considered subtree for the regressors
-    undirected_tree.compute_traversal(dynamic_traversal,"rleg_seg8");
+    std::string dynamic_base = "rleg_seg8";
+    undirected_tree.compute_traversal(dynamic_traversal,dynamic_base);
     //.compute_traversal(dynamic_traversal);
     q = dq = ddq = torques = JntArray(undirected_tree.getNrOfDOFs());
     v = a = std::vector<Twist>(undirected_tree.getNrOfLinks());
@@ -119,6 +121,7 @@ int main()
       
     //Then create the regressor generator 
     DynamicRegressorGenerator regressor(test_tree,kinematic_base,ft_names,consider_ft_offsets,fake_links);
+    regressor.changeDynamicBase(dynamic_base);
     
     //Adding some subtrees
     std::vector< std::string > subtree_torso;

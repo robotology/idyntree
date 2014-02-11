@@ -7,11 +7,12 @@
 #ifndef DIRL_ESSENTIAL_PARAMETERS_HPP
 #define DIRL_ESSENTIAL_PARAMETERS_HPP
 
-#include <dirl/dynamicRegressorGenerator.hpp>
-#include <dirl/dataset/DynamicDatasetInterfaces.hpp>
+#include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
+#include <kdl_codyco/regressors/dataset/DynamicDatasetInterfaces.hpp>
 
-namespace dirl
-{   
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {   
     /**
      * For a given regressor and a given dataset, calculate the essential parameters
      * 
@@ -33,5 +34,8 @@ namespace dirl
                                              const double tol = 1e-6);
 }
 
+}
+
+}
              
 #endif

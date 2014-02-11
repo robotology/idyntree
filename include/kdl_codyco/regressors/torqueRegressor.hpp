@@ -11,10 +11,11 @@
 #ifndef _DIRL_TORQUE_REGRESSOR_
 #define _DIRL_TORQUE_REGRESSOR_
 
-#include <dirl/dynamicRegressorInterface.hpp>
+#include <kdl_codyco/regressors/dynamicRegressorInterface.hpp>
 
-namespace dirl 
-{
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {
 /** \todo fix the case where the dynamic base has changed */
 class torqueRegressor : public DynamicRegressorInterface 
 {   
@@ -102,6 +103,10 @@ class torqueRegressor : public DynamicRegressorInterface
                               Eigen::VectorXd & known_terms);
     
 };
+
+}
+
+}
 
 }
 #endif

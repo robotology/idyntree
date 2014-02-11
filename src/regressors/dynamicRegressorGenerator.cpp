@@ -11,8 +11,8 @@
 #include <cmath>
 #include <cfloat>
 
-#include <dirl/dynamicRegressorGenerator.hpp>
-#include <dirl/dirl_utils.hpp>
+#include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
+#include <kdl_codyco/regressors/dirl_utils.hpp>
 
 #include <kdl_codyco/rnea_loops.hpp>
 #include <kdl_codyco/position_loops.hpp>
@@ -24,8 +24,9 @@
 
 #include <Eigen/LU>
 
-namespace dirl
-{
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {
  
 double random_double()
 {
@@ -36,10 +37,12 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(KDL::Tree & _tree, std::str
                                                       std::vector< std::string > ft_sensor_names, 
                                                       bool ft_sensor_offset,
                                                       std::vector< std::string > fake_links_names, 
-                                                      KDL::CoDyCo::TreeSerialization serialization): 
+                                                      KDL::CoDyCo::TreeSerialization serialization,
+                                                      const bool _verbose
+                                                    ): 
                                                       regressors_ptrs(0),
                                                       consider_ft_offset(ft_sensor_offset),
-                                                      verbose(true)
+                                                      verbose(_verbose)
 {
 #ifndef NDEBUG
     std::cout << "called DynamicRegressorGenerator with " << ft_sensor_names.size() << " ft sensor " <<  std::endl;
@@ -138,9 +141,13 @@ int DynamicRegressorGenerator::changeDynamicBase(std::string new_dynamic_base_na
     KDL::CoDyCo::LinkMap::const_iterator link_it = undirected_tree.getLink(new_dynamic_base_name);
     if( link_it == undirected_tree.getInvalidLinkIterator() ) {
         if( verbose ) { std::cerr << "DynamicRegressorGenerator::changeDynamicBase error " << new_dynamic_base_name << " link not found" << std::endl; }
-        return 1;
+        return -1;
     }
-    undirected_tree.compute_traversal(dynamic_traversal);
+    int ret = undirected_tree.compute_traversal(dynamic_traversal,link_it->getLinkIndex());
+    if( ret != 0 ) { 
+        if( verbose ) { std::cerr << "DynamicRegressorGenerator::changeDynamicBase error " << new_dynamic_base_name << " compute traversal failed" << std::endl; }
+        return -2;
+    }
     return 0;
 }
     
@@ -151,7 +158,11 @@ int DynamicRegressorGenerator::changeKinematicBase(std::string new_kinematic_bas
         if( verbose ) { std::cerr << "DynamicRegressorGenerator::changeKinematicBase error " << new_kinematic_base_name << " link not found" << std::endl; }
         return 1;
     }
-    undirected_tree.compute_traversal(kinematic_traversal);
+    int ret = undirected_tree.compute_traversal(kinematic_traversal,link_it->getLinkIndex());
+    if( ret != 0 ) { 
+        if( verbose ) { std::cerr << "DynamicRegressorGenerator::changeKinematicBase error " << new_kinematic_base_name << " compute traversal failed" << std::endl; }
+        return -2;
+    }
     return 0;
 }
 
@@ -371,6 +382,9 @@ int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Ei
     rneaKinematicLoop(undirected_tree,q,dq,ddq,kinematic_traversal,kinematic_base_velocity,kinematic_base_acceleration,v,a);
     
     //Get the frame between each link and the base
+#ifndef NDEBUG
+    if( verbose ) { std::cout << "DynamicsRegressorGenerator::computeRegressor computing regressor using as base frame: " << dynamic_traversal.getBaseLink()->getName() << std::endl; }
+#endif
     getFramesLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base);
     
     //Call specific regressors
@@ -502,11 +516,19 @@ int DynamicRegressorGenerator::generate_random_regressors(Eigen::MatrixXd & A, c
         return 0;
 }
 
+int DynamicRegressorGenerator::computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor, int n_samples,  double tol, const bool verbose)
+{
+    KDL::Vector dummy;
+    return computeNumericalIdentifiableSubspace(basis,static_regressor,false,dummy,tol,n_samples,verbose);
+}
+
 
 int DynamicRegressorGenerator::computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor, const bool fixed_base, const KDL::Vector grav_direction, double tol, int n_samples, bool verbose)
 {
     Eigen::MatrixXd A(getNrOfParameters(),getNrOfParameters());
+    std::cout << "generate_random_regressors" << std::endl;
     generate_random_regressors(A,static_regressor,fixed_base,grav_direction,n_samples,verbose);
+    std::cout << "generate_random_regressors" << std::endl;
     return getRowSpaceBasis(A,basis,-1.0,true);       
 }
 
@@ -1976,7 +1998,9 @@ int DynamicRegressorGenerator::updateBuffers()
 }
     
 
+}
 
+}
 
 
 }

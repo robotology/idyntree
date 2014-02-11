@@ -8,42 +8,64 @@
  * http://www.codyco.eu
  */
 
-#ifndef _DIRL_BASE_DYNAMICS_REGRESSOR_
-#define _DIRL_BASE_DYNAMICS_REGRESSOR_
+#ifndef _DIRL_SUBTREE_ARTICULATED_DYNAMICS_REGRESSOR_
+#define _DIRL_SUBTREE_ARTICULATED_DYNAMICS_REGRESSOR_
 
 #include <kdl/jntarray.hpp>
 
 #include <kdl_codyco/undirectedtree.hpp>
-#include <dirl/dynamicRegressorInterface.hpp>
+#include <kdl_codyco/regressors/dynamicRegressorInterface.hpp>
 
-namespace dirl 
-{
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {
 
-class baseDynamicsRegressor : public DynamicRegressorInterface 
+class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface 
 {
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
     const KDL::CoDyCo::FTSensorList * p_ft_list;
-       
+    
     const std::vector<int> linkIndeces2regrCols;
+                
+    std::vector< std::string > subtree_leaf_links;
+    
+    bool consider_ft_offset;
+    
+    std::vector< int > subtree_links_indices; /** indeces of the links belonging to the considered subtree */
+    
+    std::vector< int > subtree_leaf_links_indeces;
     
     bool verbose;
-
+    
+    std::vector< int > relative_junctions;
+    
+    
     int NrOfRealLinks_subtree;
     
+    int isSubtreeLeaf(const int link_id) const;
 
 
     
     public:
         /**
-         * Constructor for base dynamics regressor 
+         * Constructor for subtree articulated dynamics regressor 
          * 
+         * @param _subtree_leaf_links the list of name of the leaf links of the considered subtree
          */
-        baseDynamicsRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree, 
-                              const std::vector<int> & _linkIndeces2regrCols,
+        subtreeBaseDynamicsRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree, 
+                                     const KDL::CoDyCo::FTSensorList & _ft_list, 
+                                     const std::vector<int> & _linkIndeces2regrCols,
+                                     std::vector< std::string> _subtree_leaf_links=std::vector< std::string>(0),
+                                     const bool _consider_ft_offset=false,
                                      bool _verbose=true):
                                             p_undirected_tree(&_undirected_tree),
+                                            p_ft_list(&_ft_list),
                                             linkIndeces2regrCols(_linkIndeces2regrCols),
-                                            verbose(_verbose)
+                                            subtree_leaf_links(_subtree_leaf_links),
+                                            consider_ft_offset(_consider_ft_offset),
+                                            subtree_links_indices(0),
+                                            verbose(_verbose),
+                                            NrOfRealLinks_subtree(0)
         {
             assert(linkIndeces2regrCols.size() == p_undirected_tree->getNrOfLinks());
             NrOfRealLinks_subtree = 0;
@@ -52,12 +74,13 @@ class baseDynamicsRegressor : public DynamicRegressorInterface
             assert(NrOfRealLinks_subtree <= (int)linkIndeces2regrCols.size());
         }
                                                                                                                                              
-        virtual ~baseDynamicsRegressor() {};
+        virtual ~subtreeBaseDynamicsRegressor() {};
         
         int getNrOfOutputs();
         
         std::vector<int> getRelativeJunctions();
 
+        
         int computeRegressor(const KDL::JntArray &q, 
                               const KDL::JntArray &q_dot, 
                               const KDL::JntArray &q_dotdot,
@@ -73,6 +96,10 @@ class baseDynamicsRegressor : public DynamicRegressorInterface
         
     
 };
+
+}
+
+}
 
 }
 #endif

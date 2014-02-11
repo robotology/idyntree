@@ -49,7 +49,7 @@ endif(NOT orocos_kdl_FOUND)
 
 include_directories(include ${orocos_kdl_INCLUDE_DIRS})
 
-include_directories(include ./include/dirl ./include/dirl/dataset ${orocos_kdl_INCLUDE_DIRS})
+include_directories(include ./include/kdl_codyco/regressors ./include/kdl_codyco/regressors/dataset ${orocos_kdl_INCLUDE_DIRS})
 
 file(GLOB KDL_CODYCO_HPPS
      "include/kdl_codyco/*.hpp"
@@ -60,7 +60,7 @@ file(GLOB KDL_CODYCO_SRC
 )
 
 file(GLOB DIRL_SRC 
-    "src/dirl/*.cpp" "src/dirl/dataset/*.cpp"
+    "src/regressors/*.cpp" "src/regressors/dataset/*.cpp"
 )
 
 if(MSVC)
@@ -91,8 +91,6 @@ INSTALL(TARGETS kdl_codyco
 
 # --------------------------------
 INSTALL(DIRECTORY include/kdl_codyco DESTINATION include) 
-INSTALL(DIRECTORY include/dirl       DESTINATION include)
-INSTALL(DIRECTORY include/dirl/dataset       DESTINATION include/dirl)
 
 option(CREATE_TESTS "Create regression tests using CMake" FALSE)
 

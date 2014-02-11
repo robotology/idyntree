@@ -8,16 +8,16 @@
  * http://www.codyco.eu
  */
   
-#include <dirl/sparseNumericalBaseParameters.hpp>
+#include <kdl_codyco/regressors/sparseNumericalBaseParameters.hpp>
 
 #include <cmath>
 #include <iostream>
 
 using namespace KDL::CoDyCo;
 
-namespace dirl
-{
-
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {   
 /*
 int DynamicRegressorGenerator::computeForwardSparseNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor, const bool fixed_base, const KDL::Vector grav_direction, double tol, int n_samples, bool verbose)
 {
@@ -241,5 +241,6 @@ int DynamicRegressorGenerator::computeForwardSparseNumericalIdentifiableSubspace
 }
 */
 
-
+}
+}
 }

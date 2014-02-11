@@ -7,8 +7,8 @@
 #include <kdl/rigidbodyinertia.hpp>
 #include <kdl/frames_io.hpp>
 
-#include <dirl/dynamicRegressorGenerator.hpp>
-#include <dirl/dirl_utils.hpp>
+#include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
+#include <kdl_codyco/regressors/dirl_utils.hpp>
 
 #include <chrono>
 

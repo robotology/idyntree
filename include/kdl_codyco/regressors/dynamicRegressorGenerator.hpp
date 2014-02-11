@@ -16,15 +16,16 @@
 #include <kdl_codyco/ftsensor.hpp>
 
 //Type of regressors
-#include <dirl/dynamicRegressorInterface.hpp>
-#include <dirl/subtreeBaseDynamicsRegressor.hpp>
-#include <dirl/torqueRegressor.hpp>
-#include <dirl/baseDynamicsRegressor.hpp>
+#include <kdl_codyco/regressors/dynamicRegressorInterface.hpp>
+#include <kdl_codyco/regressors/subtreeBaseDynamicsRegressor.hpp>
+#include <kdl_codyco/regressors/torqueRegressor.hpp>
+#include <kdl_codyco/regressors/baseDynamicsRegressor.hpp>
 
-#include <dirl/dataset/DynamicSample.hpp>
+#include <kdl_codyco/regressors/dataset/DynamicSample.hpp>
 
-namespace dirl
-{    
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {    
     
 //typedef FixedParameterIndex int;
 //typedef UnknownParameterIndex int;
@@ -63,7 +64,9 @@ public:
                               std::vector< std::string > ft_sensor_names=std::vector< std::string >(0), 
                               bool ft_sensor_offset=true,
                               std::vector< std::string > fake_link_names=std::vector< std::string >(0), 
-                              KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization());
+                              KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization(),
+                              const bool _verbose=false
+                             );
     
     ~DynamicRegressorGenerator() { delete p_ft_list; };
     //@}
@@ -271,6 +274,22 @@ public:
      */
     int computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
    
+    /**
+     * Get a matrix whose columns are the base parameters of the given regressor,
+     * i.e. a matrix whose columns are a basis for the identifiable subspace of the given regressor
+     * 
+     * The algorithm used is the one presented in:
+     * Gautier, M. "Numerical calculation of the base inertial parameters of robots." 
+     * 
+     * @param basis the orthogonal matrix whose columns are a basis of the identifiable subspace
+     * @param static_regressor if true, compute the identifiable parameter considering only static poses (default: false)
+     * @param n_samples the number of random regressors to calculate to estimate the identifable subspace
+     * @param tol the tollerance used in troncating the svd (defaul: max(sigma)*machine_eps*number_of_generated_samples)
+     * 
+     * \note This method is not real time safe.
+     */
+    int computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor, int n_samples = 1000,  double tol = -1.0, const bool verbose = false);
+
     
     std::string analyseBaseSubspace(const Eigen::MatrixXd & basis, double tol = -1.0);
 
@@ -369,6 +388,10 @@ private:
     int generate_random_regressors(Eigen::MatrixXd & output_matrix, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), int n_samples = 1000, const bool verbose = false);
 
 };
+
+}
+
+}
 
 }
 

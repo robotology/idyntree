@@ -7,11 +7,13 @@
 #include <iostream>
 #include <sstream>
 
-#include <dirl/dataset/DynamicDatasetFile.hpp>
+#include <kdl_codyco/regressors/dataset/DynamicDatasetFile.hpp>
 
-namespace dirl {
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {   
    
-DynamicDatasetFile::DynamicDatasetFile()
+DynamicDatasetFile::DynamicDatasetFile(const bool _verbose): verbose(_verbose)
 {
     
 }
@@ -51,9 +53,6 @@ bool DynamicDatasetFile::loadFromFile(const std::string filename, const bool app
     
     std::ifstream csv_file;
     
-    #ifndef NDEBUG
-    bool verbose = false;
-    #endif 
     
     csv_file.open (filename.c_str(), std::ifstream::in);
     
@@ -158,7 +157,7 @@ bool DynamicDatasetFile::loadFromFile(const std::string filename, const bool app
         std::stringstream ss(line_buffer);
         
          #ifndef NDEBUG
-         if(verbose) std::cout << "DynamicDatasetFile::loadFromFile: Reading " << count << "th line : " << line_buffer << std::endl; 
+         if(verbose &&  count % 10000 == 0) { std::cout << "DynamicDatasetFile::loadFromFile: Reading " << count << "th line : " << line_buffer << std::endl; } 
          count++;
          #endif
     
@@ -257,5 +256,6 @@ std::string DynamicDatasetFile::getFileName() const
     return file_name;
 }
 
-
+}
+}
 }

@@ -13,7 +13,9 @@
 
 #include <Eigen/Dense>
 
-namespace dirl 
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors 
 {
     /**
      * Measure of sparsity of a matrix, equal to the ratio of the zero elements on the total elements
@@ -46,6 +48,10 @@ namespace dirl
     int getSubSpaceIntersection(const Eigen::MatrixXd & first_subspace, const Eigen::MatrixXd & second_subspace, Eigen::MatrixXd & result, double tol=-1.0, bool verbose=false);
 
     int getKernelSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol = -1.0, bool verbose = false);
+
+}
+
+}
 
 }
 

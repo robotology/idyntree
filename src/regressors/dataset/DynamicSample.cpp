@@ -7,9 +7,11 @@
 #include <kdl/jntarray.hpp>
 #include <kdl/kinfam.hpp>
 
-#include <dirl/dataset/DynamicSample.hpp>
+#include <kdl_codyco/regressors/dataset/DynamicSample.hpp>
 
-namespace dirl {
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {   
 
 DynamicStateSample::DynamicStateSample(const int NrOfDOFs, const double ts): n_dof(NrOfDOFs),
                                                                              timestamp(ts),
@@ -288,6 +290,10 @@ DynamicSample::DynamicSample(const DynamicSample & sample):
     
 DynamicSample::~DynamicSample()
 {
+}
+
+}
+
 }
 
 }

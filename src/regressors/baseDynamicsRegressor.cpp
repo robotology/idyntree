@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
   
-#include <dirl/baseDynamicsRegressor.hpp>
+#include <kdl_codyco/regressors/baseDynamicsRegressor.hpp>
 
 #include <kdl_codyco/regressor_utils.hpp>
 
@@ -16,8 +16,9 @@
 
 using namespace KDL::CoDyCo;
 
-namespace dirl
-{
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {   
     
 int baseDynamicsRegressor::configure()
 {          
@@ -69,6 +70,10 @@ int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
  
     
     return 0;
+}
+
+}
+
 }
 
 }

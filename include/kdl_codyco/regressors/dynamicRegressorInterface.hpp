@@ -18,8 +18,9 @@
 #include <Eigen/Core>
 #include <Eigen/Dense>
 
-namespace dirl 
-{
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {
 
 class DynamicRegressorInterface {
 
@@ -54,6 +55,10 @@ public:
                                  Eigen::VectorXd & known_terms) = 0;
     
 };
+
+}
+
+}
 
 }
 #endif

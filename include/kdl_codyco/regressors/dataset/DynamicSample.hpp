@@ -3,8 +3,8 @@
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  */
 
-#ifndef __DIRL_DYNAMIC_SAMPLE__
-#define __DIRL_DYNAMIC_SAMPLE__
+#ifndef __KDL_CODYCO_REGRESSOR_DYNAMIC_SAMPLE__
+#define __KDL_CODYCO_REGRESSOR_DYNAMIC_SAMPLE__
 
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
@@ -15,7 +15,9 @@
 
 /*! \file DynamicSample.hpp define structures for state and sensor sample representation */
 
-namespace dirl {
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {
 
 /**
  *
@@ -176,7 +178,11 @@ public:
                        
 };
 
+}
 
 }
+    
+}
+
 
 #endif

@@ -3,12 +3,14 @@
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  */
 
-#ifndef __DIRL_DATASET_INTERFACES__
-#define __DIRL_DATASET_INTERFACES__
+#ifndef __KDL_CODYCO_REGRESSOR_DATASET_INTERFACES__
+#define __KDL_CODYCO_REGRESSOR_DATASET_INTERFACES__
 
-#include <dirl/dataset/DynamicSample.hpp>
+#include <kdl_codyco/regressors/dataset/DynamicSample.hpp>
 
-namespace dirl {
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {
 
 /*! \file DynamicDatasetInterfaces.hpp define interfaces for a dynamic identification dataset (online and offline)*/
 
@@ -56,6 +58,10 @@ public:
      */
     virtual bool isNewSampleAvailable() = 0;
 };
+
+}
+
+}
 
 }
 #endif

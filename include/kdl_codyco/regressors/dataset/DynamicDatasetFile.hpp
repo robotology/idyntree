@@ -3,13 +3,15 @@
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  */
 
-#ifndef __DIRL_DATASET_FILE__
-#define __DIRL_DATASET_FILE__
+#ifndef __KDL_CODYCO_REGRESSOR_DATASET_FILE__
+#define __KDL_CODYCO_REGRESSOR_DATASET_FILE__
 
-#include <dirl/dataset/DynamicDatasetInterfaces.hpp>
-#include <dirl/dataset/DynamicSample.hpp>
+#include <kdl_codyco/regressors/dataset/DynamicDatasetInterfaces.hpp>
+#include <kdl_codyco/regressors/dataset/DynamicSample.hpp>
 
-namespace dirl {
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {
 
 class DynamicDatasetFile : public IBatchDynamicDataset
 {
@@ -24,8 +26,10 @@ private:
     
     std::vector<DynamicSample> dynamic_samples;
     
+    bool verbose;
+    
 public:
-    DynamicDatasetFile();
+    DynamicDatasetFile(bool _verbose=true);
     
     bool loadFromFile(std::string filename, const bool append=false);
     
@@ -61,6 +65,10 @@ public:
     bool getSample(const int sample_n,DynamicSample & sample) const;
 };
 
+}
+
+}
+    
 }
 
 #endif

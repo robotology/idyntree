@@ -8,12 +8,13 @@
  * http://www.codyco.eu
  */
  
-#include <dirl/essentialParameters.hpp>
-#include <dirl/dirl_utils.hpp>
+#include <kdl_codyco/regressors/essentialParameters.hpp>
+#include <kdl_codyco/regressors/dirl_utils.hpp>
 #include <iostream>
 
-namespace dirl
-{
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {   
     
     int calculateEssentialParametersSubspace(DynamicRegressorGenerator & regressor_generator, 
                                              const IBatchDynamicDataset & dataset,
@@ -73,4 +74,8 @@ namespace dirl
         
         return 0;
     }
+}
+
+}
+
 }

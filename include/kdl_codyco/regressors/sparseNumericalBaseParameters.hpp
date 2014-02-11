@@ -14,10 +14,12 @@
 #include <kdl/jntarray.hpp>
 
 #include <kdl_codyco/undirectedtree.hpp>
-#include <dirl/dynamicRegressorGenerator.hpp>
+#include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
 
-namespace dirl 
-{
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors { 
+
 
      /**
      * Algorithm under development
@@ -29,5 +31,9 @@ namespace dirl
     /*
     int computeForwardSparseNumericalIdentifiableSubspace(const DynamicRegressorGenerator & regr_gen, Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
     */
+}
+
+}
+
 }
 #endif

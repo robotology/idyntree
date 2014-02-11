@@ -7,9 +7,11 @@
 #include <iostream>
 #include <sstream>
 
-#include <dirl/dataset/DynamicDatasetFile.hpp>
+#include <kdl_codyco/regressors/dataset/DynamicDatasetFile.hpp>
 
-namespace dirl {
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {   
    
 DynamicDatasetFileCollection::DynamicDatasetFileCollection()
 {
@@ -86,6 +88,8 @@ bool DynamicDatasetFileCollection::getSample(int sample_n, DynamicSample & sampl
     }
 }
 
+}
 
+}
 
 }

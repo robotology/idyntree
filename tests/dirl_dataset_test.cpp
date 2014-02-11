@@ -1,12 +1,12 @@
 #include <kdl_codyco/utils.hpp>
 #include <kdl/rigidbodyinertia.hpp>
 #include <kdl/frames_io.hpp>
-#include <dirl/dataset/DynamicDatasetFile.hpp>
+#include <kdl_codyco/regressors/dataset/DynamicDatasetFile.hpp>
 #include <cstdlib>
 
 using namespace KDL;
 using namespace KDL::CoDyCo;
-using namespace dirl;
+using namespace KDL::CoDyCo::Regressors;
 
 int main(int argc, char ** argv)
 {

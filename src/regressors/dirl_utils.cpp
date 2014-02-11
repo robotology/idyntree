@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
   
-#include <dirl/dirl_utils.hpp>
+#include <kdl_codyco/regressors/dirl_utils.hpp>
 
 #include <kdl_codyco/regressor_utils.hpp>
 
@@ -16,10 +16,10 @@
 
 #include <cfloat>
 
-using namespace KDL::CoDyCo;
 
-namespace dirl
-{
+namespace KDL {
+namespace CoDyCo {
+namespace Regressors {   
     
 double sparsity_index(const Eigen::MatrixXd & mat, const double tol)
     {
@@ -211,6 +211,10 @@ int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row
         std::cout << "basis calculated, tol used " << tol << std::endl; 
         
         return 0;
+}
+
+}
+
 }
 
 }
