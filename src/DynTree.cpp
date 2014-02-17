@@ -248,11 +248,11 @@ void DynTree::buildAb_contacts()
             //This calculation should be done one time in forward kineamtic loop and stored \todo
             b_contacts_subtree[link_nmbr] = Ii*a[link_nmbr]+v[link_nmbr]*(Ii*v[link_nmbr]) - getMeasuredWrench(link_nmbr);
             #ifndef NDEBUG
-            std::cerr << "link_nmbr : " << link_nmbr << std::endl;
-            std::cerr << "b_contacts_subtree: " << b_contacts_subtree[link_nmbr] << std::endl;
-            std::cerr << "a " << a[link_nmbr] << std::endl;
-            std::cerr << "v " << v[link_nmbr] << std::endl;
-            std::cerr << "getMeasuredWrench " << getMeasuredWrench(link_nmbr) << std::endl;
+            //std::cerr << "link_nmbr : " << link_nmbr << std::endl;
+            //std::cerr << "b_contacts_subtree: " << b_contacts_subtree[link_nmbr] << std::endl;
+            //std::cerr << "a " << a[link_nmbr] << std::endl;
+            //std::cerr << "v " << v[link_nmbr] << std::endl;
+            //std::cerr << "getMeasuredWrench " << getMeasuredWrench(link_nmbr) << std::endl;
             #endif
     }
     
@@ -268,8 +268,8 @@ void DynTree::buildAb_contacts()
             const int parent_nmbr = parent_it->getLinkIndex();
             //If this link is a subgraph root, store the result, otherwise project it to the parent
             #ifndef NDEBUG
-            std::cerr << "Link_nmbr " << link_nmbr << std::endl;
-            std::cerr << "isSubGraphRoot(" << link_nmbr << ") " << isSubGraphRoot(link_nmbr) << std::endl;
+            //std::cerr << "Link_nmbr " << link_nmbr << std::endl;
+            //std::cerr << "isSubGraphRoot(" << link_nmbr << ") " << isSubGraphRoot(link_nmbr) << std::endl;
             #endif
             if( !isSubGraphRoot(link_nmbr) ) {
                 double joint_pos;
@@ -409,12 +409,15 @@ void DynTree::store_contacts_results()
                 if(it->isMomentKnown())
                 {
                     //3 UNKNOWN
+                    assert( unknownInd+2 < x_contacts[sg].size() ); 
                     it->setForce(x_contacts[sg].subVector(unknownInd, unknownInd+2));
                     unknownInd += 3;                
                 } else {
                     //6 UNKNOWN
+                    assert( unknownInd+2 < x_contacts[sg].size() ); 
                     it->setMoment(x_contacts[sg].subVector(unknownInd, unknownInd+2));
                     unknownInd += 3;
+                    assert( unknownInd+2 < x_contacts[sg].size() ); 
                     it->setForce(x_contacts[sg].subVector(unknownInd, unknownInd+2));
                     unknownInd += 3;
 
@@ -917,15 +920,19 @@ bool DynTree::estimateContactForces()
     buildAb_contacts();
     for(int i=0; i < NrOfDynamicSubGraphs; i++ ) {
         #ifndef NDEBUG
+        
         std::cout << "A_contacts " << i << " has size " << A_contacts[i].rows() << " " << A_contacts[i].cols() << std::endl;
         std::cout << A_contacts[i].toString() << std::endl;
         std::cout << "b_contacts " << i << " has size " << b_contacts[i].size() << std::endl;
         std::cout << b_contacts[i].toString() << std::endl;
+        
         #endif 
         x_contacts[i] = yarp::math::pinv(A_contacts[i],tol)*b_contacts[i];
         #ifndef NDEBUG
+        
         std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
         std::cout << x_contacts[i].toString() << std::endl;
+        
         #endif
     }
     store_contacts_results();
@@ -945,7 +952,7 @@ bool DynTree::dynamicRNEA()
         //std::cout << "q:   " << q << std::endl;
         //std::cout << "dq:  " << dq << std::endl;
         //std::cout << "ddq: " << ddq << std::endl;
-        for(int i=0; i < f_ext.size(); i++ ) { std::cout << "f_ext[" << i << "]: " << f_ext[i] << std::endl; }
+        //for(int i=0; i < f_ext.size(); i++ ) { std::cout << "f_ext[" << i << "]: " << f_ext[i] << std::endl; }
         std::cerr << "base_residual_f.force.Norm " << base_residual_f.force.Norm() << std::endl;
         std::cerr << "base_residual_f.force.Norm " << base_residual_f.torque.Norm() << std::endl;
         #endif

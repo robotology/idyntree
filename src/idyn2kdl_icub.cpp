@@ -48,6 +48,8 @@ KDL::RigidBodyInertia operator-(const KDL::RigidBodyInertia& Ia, const KDL::Rigi
 
 bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn, KDL::Tree & icub_kdl, KDL::JntArray & q_min, KDL::JntArray & q_max,  iCub::iDynTree::iCubTree_serialization_tag serial, bool ft_foot, bool add_root_weight, bool debug)
 {
+    std::cout << "toKDL(..) function called" << std::endl;
+    
     bool status_ok = true;
     //Joint names extracted from http://eris.liralab.it/wiki/ICub_joints
     
@@ -172,6 +174,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn, KDL::Tree & icub_kdl, KD
     
     //For the foot, it is possible that is present the ft sensor
     if( ft_foot ) { 
+        std::cerr << "toKDL: adding feet FT sensors" << std::endl;
         KDL::Chain no_ft_rl, no_ft_ll;
         KDL::Frame T_ss_ee(KDL::Rotation(0,0,1,0,1,0,-1,0,0),KDL::Vector(0,0,0.075)); //transformation between the end effector and the sensor
         KDL::Frame T_ee_ss = T_ss_ee.Inverse();
