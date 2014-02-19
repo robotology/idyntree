@@ -280,16 +280,17 @@ void DynTree::buildAb_contacts()
                 } else {
                     joint_pos = q(link_it->getAdjacentJoint(parent_it)->getDOFIndex());
                 }
-             
-
                 b_contacts_subtree[parent_nmbr] += link_it->pose(parent_it,joint_pos)*b_contacts_subtree[link_nmbr]; 
             } 
        }
        
        if( isSubGraphRoot(link_nmbr ) )
        {
-                b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(0,KDLtoYarp(b_contacts_subtree[link_nmbr].torque));
-                b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(3,KDLtoYarp(b_contacts_subtree[link_nmbr].force));
+           //std::cout << " setting b_contact [ " << getSubGraphIndex(link_nmbr) << " ] ";
+           //std::cout << "to " << b_contacts_subtree[link_nmbr] << std::endl;
+           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(0,KDLtoYarp(b_contacts_subtree[link_nmbr].torque));
+           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(3,KDLtoYarp(b_contacts_subtree[link_nmbr].force));
+           //std::cout << " b_contacts [ " << getSubGraphIndex(link_nmbr) << " ] is " << b_contacts[getSubGraphIndex(link_nmbr)].toString() << std::endl;
        }
        
        
@@ -453,7 +454,7 @@ bool DynTree::setWorldBasePose(const yarp::sig::Matrix & H_w_b)
     else
     {
         if (verbose)
-            std::cerr << "Attempt to reference a wrong matrix H_w_p (not 4x4)" << std::endl;
+            std::cerr << "DynTree::setWorldBasePose: Attempt to reference a wrong matrix H_w_p (not 4x4)" << std::endl;
 
         return false;
     }
@@ -920,18 +921,19 @@ bool DynTree::estimateContactForces()
     buildAb_contacts();
     for(int i=0; i < NrOfDynamicSubGraphs; i++ ) {
         #ifndef NDEBUG
-        
+        /*
         std::cout << "A_contacts " << i << " has size " << A_contacts[i].rows() << " " << A_contacts[i].cols() << std::endl;
         std::cout << A_contacts[i].toString() << std::endl;
         std::cout << "b_contacts " << i << " has size " << b_contacts[i].size() << std::endl;
         std::cout << b_contacts[i].toString() << std::endl;
-        
+        */
         #endif 
         x_contacts[i] = yarp::math::pinv(A_contacts[i],tol)*b_contacts[i];
         #ifndef NDEBUG
+        //std::string contacts_string = x_contacts[i].toString();
         
-        std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
-        std::cout << x_contacts[i].toString() << std::endl;
+        //std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
+        //std::cout << x_contacts[i].toString() << std::endl;
         
         #endif
     }
@@ -953,8 +955,8 @@ bool DynTree::dynamicRNEA()
         //std::cout << "dq:  " << dq << std::endl;
         //std::cout << "ddq: " << ddq << std::endl;
         //for(int i=0; i < f_ext.size(); i++ ) { std::cout << "f_ext[" << i << "]: " << f_ext[i] << std::endl; }
-        std::cerr << "base_residual_f.force.Norm " << base_residual_f.force.Norm() << std::endl;
-        std::cerr << "base_residual_f.force.Norm " << base_residual_f.torque.Norm() << std::endl;
+        //std::cerr << "base_residual_f.force.Norm " << base_residual_f.force.Norm() << std::endl;
+        //std::cerr << "base_residual_f.force.Norm " << base_residual_f.torque.Norm() << std::endl;
         #endif
         assert( base_residual_f.force.Norm() < 1e-5 );
         assert( base_residual_f.torque.Norm() < 1e-5 );
@@ -1309,7 +1311,7 @@ int DynTree::getNrOfLinks()
 
 int DynTree::getNrOfFTSensors()
 {
-    return undirected_tree.getNrOfLinks();
+    return NrOfFTSensors;
 }
 
 int DynTree::getNrOfIMUs()
