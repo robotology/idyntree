@@ -757,13 +757,24 @@ yarp::sig::Vector DynTree::getVel(const int link_index, bool local) const
 
 yarp::sig::Vector DynTree::getAcc(const int link_index) const
 {
-    if( link_index < 0 || link_index >= (int)tree_graph.getNrOfLinks() ) { std::cerr << "DynTree::getAcc: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
-    yarp::sig::Vector ret(6), classical_lin_acc(3), ang_acc(3);
-    KDLtoYarp(a[link_index].vel+v[link_index].rot*v[link_index].vel,classical_lin_acc);
-    KDLtoYarp(a[link_index].rot,ang_acc);
-    ret.setSubvector(0,classical_lin_acc);
-    ret.setSubvector(3,ang_acc);
-    return ret;
+    yarp::sig::Vector ret(6);
+    if (getAcc(link_index, ret))
+        return ret;
+    return yarp::sig::Vector(0);
+}
+    
+bool DynTree::getAcc(const int link_index, yarp::sig::Vector& acceleration) const
+{
+    if (link_index < 0 || link_index >= (int)tree_graph.getNrOfLinks()) {
+        std::cerr << "DynTree::getAcc: link index " << link_index <<  " out of bounds" << std::endl;
+        return false;
+    }
+    yarp::sig::Vector classical_lin_acc(3), ang_acc(3);
+    KDLtoYarp(a[link_index].vel + v[link_index].rot * v[link_index].vel, classical_lin_acc);
+    KDLtoYarp(a[link_index].rot, ang_acc);
+    acceleration.setSubvector(0, classical_lin_acc);
+    acceleration.setSubvector(3, ang_acc);
+    return true;
 }
 
 yarp::sig::Vector DynTree::getBaseForceTorque(int frame_link)

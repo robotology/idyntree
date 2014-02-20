@@ -63,6 +63,18 @@
  * 
  **/ 
 
+#ifndef __DYNTREE_H__
+#define __DYNTREE_H__
+
+#if defined(__GNUC__) || defined(__clang__) //clang defines also __GNUC__, but I check for it anyway
+#define IDYN_DEPRECATED __attribute__((deprecated))
+#elif defined(_MSC_VER)
+#define IDYN_DEPRECATED __declspec(deprecated)
+#else
+#pragma message("WARNING: You need to implement DEPRECATED for this compiler")
+#define IDYN_DEPRECATED
+#endif
+
 #include <yarp/sig/Matrix.h>
 #include <yarp/sig/Vector.h>
 #include <iCub/skinDynLib/dynContactList.h>
@@ -78,8 +90,7 @@
 #include <kdl/tree.hpp>
 
 #include <iostream>
-#ifndef __DYNTREE_H__
-#define __DYNTREE_H__
+
 
 namespace iCub
 {
@@ -562,7 +573,17 @@ class DynTree  {
         *
         * \note This function returns the classical linear acceleration, not the spatial one
         */
-        virtual yarp::sig::Vector getAcc(const int link_index) const;
+        IDYN_DEPRECATED virtual yarp::sig::Vector getAcc(const int link_index) const;
+
+        /**
+         * Get the acceleration of the specified link, expressed in the link local reference frame
+         * @param link_index the index of the link
+         * @param a 6x1 vector with linear acc \f$ {}^ia_i \f$(0:2) and angular acceleration \f$ {}^i\dot{\omega}_i \f$ (3:5)
+         * @return true if input parameters are valid. False otherwise.
+         *
+         * \note This function returns the classical linear acceleration, not the spatial one
+         */
+        virtual bool getAcc(const int link_index, yarp::sig::Vector& acceleration) const;
     
         /**
          * Get the base link force torque, calculated with the dynamic recursive newton euler loop
@@ -589,7 +610,7 @@ class DynTree  {
         *  unkown contacts via setContacts, and also to get the result of the
         *  estimation via getContacts
         * 
-        *  \note If for a given subtree no contact is given, a default concact 
+        *  \note If for a given subtree no contact is given, a default contact
         *  is assumed, for example ad the end effector
         */
         //@{
@@ -733,5 +754,7 @@ class DynTree  {
 }//end namespace
 
 }
+
+#undef IDYN_DEPRECATED
 
 #endif
