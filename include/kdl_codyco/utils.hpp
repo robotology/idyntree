@@ -72,6 +72,38 @@ namespace CoDyCo {
      */
     bool isBaseLinkFake(const KDL::Tree & tree);
     
+    /**
+     * Convert a spatial acceleration to a classical (6d) acceleration 
+     *
+     * If you have doubt on this conversion, check:
+     *    * Featherstone - Rigid Body Dynamics Algorithms - 2008 - Section 2.11 
+     *    * Featherstone, Roy. "The acceleration vector of a rigid body." The International Journal of Robotics Research 20.11 (2001): 841-846.
+     * 
+     * @param spatial_acc the input spatial acceleration
+     * @param velocity the input  velocity 
+     * @param conventional_acc the output conventional acceleration
+     */
+    void spatialToConventionalAcceleration(const KDL::Twist spatial_acc, 
+                                           const KDL::Twist velocity,
+                                                 KDL::Twist & conventional_acc);
+    
+     /**
+     * Convert a conventional acceleration to a spatial acceleration
+     *  
+     * If you have doubt on this conversion, check:
+     *    * Featherstone - Rigid Body Dynamics Algorithms - 2008 - Section 2.11 
+     *    * Featherstone, Roy. "The acceleration vector of a rigid body." The International Journal of Robotics Research 20.11 (2001): 841-846.
+     * 
+     * @param conventional_acc the input conventional acceleration
+     * @param velocity the input velocity 
+     * @param spatial_acc the output spatial acceleration
+     * 
+     */
+    void conventionalToSpatialAcceleration(const KDL::Twist conventional_acc, 
+                                           const KDL::Twist velocity,
+                                                 KDL::Twist & spatial_acc);
+    
+    
 }
 }  
 

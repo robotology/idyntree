@@ -100,7 +100,7 @@ KDL::Twist DynamicStateSample::getBaseClassicalAcceleration() const
      */
     KDL::Twist classical_base_acc;
     classical_base_acc.rot = base_acc.rot;
-    classical_base_acc.vel = base_acc.rot-base_vel.vel*base_vel.rot; 
+    classical_base_acc.vel = base_acc.vel-base_vel.vel*base_vel.rot; 
     return classical_base_acc;
 }
     
@@ -109,10 +109,9 @@ bool DynamicStateSample::setBaseClassicalAcceleration(const KDL::Twist & classic
     /**
      * If you have doubt of this formula, check 
      * Featherstone - Rigid Body Dynamics Algorithms - 2008 - Section 2.11
-     * 
      */
     base_acc.rot = classical_base_acc.rot;
-    base_acc.rot = classical_base_acc.vel + base_vel.vel*base_vel.rot; 
+    base_acc.vel = classical_base_acc.vel + base_vel.vel*base_vel.rot; 
     return true;
 }
     

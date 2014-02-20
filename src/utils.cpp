@@ -173,6 +173,22 @@ namespace CoDyCo {
         }
         return return_value;
     }
+    
+    void spatialToConventionalAcceleration(const KDL::Twist spatial_acc, 
+                                           const KDL::Twist velocity,
+                                                 KDL::Twist & conventional_acc)
+    {
+         conventional_acc.rot = spatial_acc.rot;
+         conventional_acc.vel = spatial_acc.vel-velocity.vel*velocity.rot; 
+    }
+    
+    void conventionalToSpatialAcceleration(const KDL::Twist conventional_acc, 
+                                           const KDL::Twist velocity,
+                                                 KDL::Twist & spatial_acc)
+    {
+         spatial_acc.rot = conventional_acc.rot;
+         spatial_acc.vel = conventional_acc.vel+velocity.vel*velocity.rot; 
+    }
 
 
 }
