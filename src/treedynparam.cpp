@@ -36,8 +36,8 @@ namespace CoDyCo {
     
     TreeDynParam::TreeDynParam(const Tree& _tree, Vector _grav, const TreeSerialization & _serialization):
         UndirectedTreeSolver(_tree,_serialization),
-        nj(_tree.getNrOfJoints()),
-        ns(_tree.getNrOfSegments()),
+        nj(undirected_tree.getNrOfDOFs()),
+        ns(undirected_tree.getNrOfLinks()),
         grav(_grav),
         jntarraynull(nj),
         treeidsolver_coriolis( _tree, Vector::Zero()),
