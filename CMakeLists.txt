@@ -36,7 +36,8 @@ INCLUDE_DIRECTORIES(include
                     ${iDyn_INCLUDE_DIRS}
                     ${GSL_INCLUDE_DIRS}
                     ${YARP_INCLUDE_DIRS}
-                    ${kdl_codyco_INCLUDE_DIRS})
+                    ${kdl_codyco_INCLUDE_DIRS}
+                    ${Eigen3_INCLUDE_DIR})
 
 ADD_LIBRARY(${PROJECTNAME} ${folder_source} ${folder_header})
 

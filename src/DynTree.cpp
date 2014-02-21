@@ -15,7 +15,9 @@
 #include <kdl_codyco/regressor_loops.hpp>
 #include <kdl_codyco/jacobian_loops.hpp>
 #include <kdl_codyco/com_loops.hpp>
+#include <kdl_codyco/crba_loops.hpp>
 #include <kdl_codyco/utils.hpp>
+#include <kdl_codyco/regressor_utils.hpp>
 
 #ifndef NDEBUG
 #include <kdl/frames_io.hpp>
@@ -754,9 +756,12 @@ yarp::sig::Matrix DynTree::getPosition(const int first_link, const int second_li
    return KDLtoYarp_position(X_dynamic_base[first_link].Inverse()*X_dynamic_base[second_link]);
 }
 
-yarp::sig::Vector DynTree::getVel(const int link_index, bool local) const
+yarp::sig::Vector DynTree::getVel(const int link_index, const bool local) const
 {
-    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getVel: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
+    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) { 
+        std::cerr << "DynTree::getVel: link index " << link_index <<  " out of bounds" << std::endl;
+        return yarp::sig::Vector(0);
+    }
     yarp::sig::Vector ret(6), lin_vel(3), ang_vel(3);
     KDL::Twist return_twist;
     
@@ -774,15 +779,33 @@ yarp::sig::Vector DynTree::getVel(const int link_index, bool local) const
     return ret;
 }
 
-yarp::sig::Vector DynTree::getAcc(const int link_index) const
+yarp::sig::Vector DynTree::getAcc(const int link_index, const bool local) const
 {
-    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getAcc: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
+    yarp::sig::Vector acc(6);
+    bool successfull_return = getAcc(link_index,acc,local);
+    if( successfull_return ) {
+        return acc;
+    } else {
+        return yarp::sig::Vector(0);
+    }
+}
+
+bool DynTree::getAcc(const int link_index, yarp::sig::Vector & acc, const bool local) const
+{
+    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) {
+        std::cerr << "DynTree::getAcc: link index " << link_index <<  " out of bounds" << std::endl;
+        return false; 
+    }
+    /*
     yarp::sig::Vector ret(6), classical_lin_acc(3), ang_acc(3);
     KDLtoYarp(a[link_index].vel+v[link_index].rot*v[link_index].vel,classical_lin_acc);
     KDLtoYarp(a[link_index].rot,ang_acc);
     ret.setSubvector(0,classical_lin_acc);
     ret.setSubvector(3,ang_acc);
-    return ret;
+    */
+    KDL::Twist classical_acc;
+    KDL::CoDyCo::spatialToConventionalAcceleration(a[link_index],v[link_index],classical_acc);
+    return KDLtoYarp(classical_acc,acc);
 }
 
 yarp::sig::Vector DynTree::getBaseForceTorque(int frame_link)
@@ -1243,6 +1266,63 @@ bool DynTree::getRelativeJacobian(const int jacobian_distal_link, const int jaco
     
     return true;
 }
+
+////////////////////////////////////////////////////////////////////////
+////// Mass Matrix (CRBA) related methods
+////////////////////////////////////////////////////////////////////////
+bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
+{
+    //If the incoming matrix have the wrong number of rows/colums, resize it
+    if( fb_mass_matrix.rows() != (int)(6+undirected_tree.getNrOfDOFs()) 
+        || fb_mass_matrix.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+        fb_mass_matrix.resize(6+undirected_tree.getNrOfDOFs(),10*undirected_tree.getNrOfLinks());
+    }
+    
+    //Calculate the result directly in the output matrix
+    /**
+     * \todo TODO check that X_b,v and are computed
+     * \todo TODO modify crba loops in a way that it can run directly in the fb_mass_matrix.data();
+     */
+    Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_mass_matrix(fb_mass_matrix.data(),fb_mass_matrix.rows(),fb_mass_matrix.cols());
+    
+    if( fb_jnt_mass_matrix.rows() != (int)(6+undirected_tree.getNrOfDOFs()) 
+        || fb_jnt_mass_matrix.columns() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+        fb_jnt_mass_matrix.resize(6+undirected_tree.getNrOfDOFs());
+    }
+    
+    if( subtree_crbi.size() != undirected_tree.getNrOfLinks() ) { subtree_crbi.resize(undirected_tree.getNrOfLinks()); };
+    
+    int successfull_return = KDL::CoDyCo::crba_floating_base_loop(undirected_tree,dynamic_traversal,q,subtree_crbi,fb_jnt_mass_matrix);
+
+    if( successfull_return != 0 ) {
+        return false;
+    }
+    
+    //Fixed base mass matrix (the n x n bottom right submatrix) is ok in this way
+    //but the other submatrices must be changed, as iDynTree express all velocities/accelerations (also the base one) in world orientation
+    //while kdl_codyco express the velocities in base orientation
+    KDL::Frame world_base_rotation = KDL::Frame(world_base_frame.M);
+    //As the transformation is a rotation, the adjoint trasformation is the same for both twist and wrenches 
+    //Additionally, the inverse of the adjoint matrix is simply the transpose
+    Eigen::Matrix< double, 6, 6> world_base_rotation_adjoint_transformation = KDL::CoDyCo::WrenchTransformationMatrix(world_base_rotation);
+    
+    //Modification of 6x6 left upper submatrix (spatial inertia)
+    // doing some moltiplication by zero (inefficient? ) 
+    fb_jnt_mass_matrix.data.block<6,6>(0,0) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,6>(0,0); 
+    fb_jnt_mass_matrix.data.block<6,6>(0,0) = fb_jnt_mass_matrix.data.block<6,6>(0,0)*world_base_rotation_adjoint_transformation.transpose();
+
+    for(int dof=0; dof < undirected_tree.getNrOfDOFs(); dof++ ) {
+        fb_jnt_mass_matrix.data.block<6,1>(0,6+dof) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,1>(0,6+dof);
+        fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = fb_jnt_mass_matrix.data.block<6,1>(0,6+dof).transpose();
+    }
+    
+    //This copy does not exploit the matrix sparsness.. 
+    //but I guess that exploiting it would lead to slower code
+    mapped_mass_matrix = fb_jnt_mass_matrix.data;
+    
+    return true;
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////

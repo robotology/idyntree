@@ -71,6 +71,7 @@
 #include <kdl_codyco/treepartition.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/momentumjacobian.hpp>
+#include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
 
 #include <kdl_codyco/ftsensor.hpp>
 
@@ -230,6 +231,10 @@ class DynTree  {
         std::vector<KDL::Vector> subtree_COM;
         std::vector<double> subtree_mass;
         KDL::RigidBodyInertia total_inertia;
+        
+        //MassMatrix
+        KDL::CoDyCo::FloatingJntSpaceInertiaMatrix fb_jnt_mass_matrix;
+        std::vector<KDL::RigidBodyInertia> subtree_crbi;
 
         
     public:
@@ -567,22 +572,38 @@ class DynTree  {
         virtual yarp::sig::Matrix getPosition(const int first_link, const int second_link) const;
         
         /**
+         * 
+         * \todo TODO add getVel with output reference parameters
         * Get the velocity of the specified link, expressed in the world reference frame, but using as reference point
         * the origin of the link local reference frame
         * @param link_index the index of the link 
-        * @param if true, return the velocity expressed in the link local frame
+        * @param local if true, return the velocity expressed in the link local frame (default: false)
         * @return a 6x1 vector with linear velocity \f$ {}^wv_i \f$ (0:2) and angular velocity \f$ {}^w\omega_i\f$ (3:5)
         */
-        virtual yarp::sig::Vector getVel(const int link_index, bool local=false) const;
+        virtual yarp::sig::Vector getVel(const int link_index, const bool local=false) const;
     
-        /**
-        * Get the acceleration of the specified link, expressed in the link local reference frame
+        
+       /**
+        * Get the classical acceleration of the origin of the specified link, expressed in the world reference frame
         * @param link_index the index of the link 
+        * @param acc a 6x1 vector with linear acc \f$ {}^ia_i \f$(0:2) and angular acceleration \f$ {}^i\dot{\omega}_i \f$ (3:5)
+        * @param local if true, return the velocity expressed in the link local frame (default: false)
+        * @return true if all went well, false otherwise
+        *
+        * \note This function returns the classical/conventional linear acceleration, not the spatial one
+        */
+        virtual bool getAcc(const int link_index, yarp::sig::Vector & acc, const bool local=false) const;
+        
+        /**
+        * Get the classical acceleration of the origin of the specified link, expressed in the world reference frame
+        * @param link_index the index of the link 
+        * @param local if true, return the velocity expressed in the link local frame (default: false)
         * @return a 6x1 vector with linear acc \f$ {}^ia_i \f$(0:2) and angular acceleration \f$ {}^i\dot{\omega}_i \f$ (3:5)
         *
-        * \note This function returns the classical linear acceleration, not the spatial one
+        * \note This function returns the classical/conventional linear acceleration, not the spatial one
         */
-        virtual yarp::sig::Vector getAcc(const int link_index) const;
+        virtual yarp::sig::Vector getAcc(const int link_index, const bool local=false) const;
+        
     
         /**
          * Get the base link force torque, calculated with the dynamic recursive newton euler loop
@@ -720,6 +741,31 @@ class DynTree  {
         
         yarp::sig::Vector getMomentum();
 
+        //@}
+        
+                
+        /** @name Methods related to mass matrix computations
+        * 
+        * 
+        */
+        //@{
+        
+        /**
+         * Return the (6+n_dof)x(6+n_dof) floating base mass matrix \f[ \mathbf{M} \f], such that the kinematic energy 
+         * of the system is given by:
+         * \f[
+         *  \dot{\mathbf{q}}^\top \mathbf{M} \dot{\mathbf{q}}  
+         * \f]
+         * where \f[ \dot{\mathbf{q}} \in \mathbb{R}^{6+n} \f] is defined by abuse of notation as the concatenation of 
+         * \f[ {}^w \mathbf{v} \in \mathbb{R}^6 \f] (the floating base origin velocity expressed in world frame) and
+         * \f[ {}^w \dot{\boldsymbol\theta} \in \mathbb{R}^n \f] (the joint velocity vector)
+         * 
+         * @param fb_mass_matrix the yarp::sig::Matrix used to return the mass matrix, it will be resized if not \f[ {}^w \mathbf{v} \in \mathbb{R}^6 \f]
+         * @return true if all went well, false otherwise
+         */
+        bool getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix);
+       
+        
         //@}
         
         /** @name Methods related to inertial parameters regressor 
