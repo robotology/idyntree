@@ -63,6 +63,18 @@
  * 
  **/ 
 
+#ifndef __DYNTREE_H__
+#define __DYNTREE_H__
+
+#if defined(__GNUC__) || defined(__clang__) //clang defines also __GNUC__, but I check for it anyway
+#define IDYN_DEPRECATED __attribute__((deprecated))
+#elif defined(_MSC_VER)
+#define IDYN_DEPRECATED __declspec(deprecated)
+#else
+#pragma message("WARNING: You need to implement DEPRECATED for this compiler")
+#define IDYN_DEPRECATED
+#endif
+
 #include <yarp/sig/Matrix.h>
 #include <yarp/sig/Vector.h>
 #include <iCub/skinDynLib/dynContactList.h>
@@ -79,8 +91,7 @@
 #include <kdl/tree.hpp>
 
 #include <iostream>
-#ifndef __DYNTREE_H__
-#define __DYNTREE_H__
+
 
 namespace iCub
 {
@@ -627,8 +638,7 @@ class DynTree  {
         *
         * \note This function returns the classical/conventional linear acceleration, not the spatial one
         */
-        virtual yarp::sig::Vector getAcc(const int link_index, const bool local=false) const;
-        
+        IDYN_DEPRECATED virtual yarp::sig::Vector getAcc(const int link_index, const bool local=false) const;
     
         /**
          * Get the base link force torque, calculated with the dynamic recursive newton euler loop
@@ -655,7 +665,7 @@ class DynTree  {
         *  unkown contacts via setContacts, and also to get the result of the
         *  estimation via getContacts
         * 
-        *  \note If for a given subtree no contact is given, a default concact 
+        *  \note If for a given subtree no contact is given, a default contact
         *  is assumed, for example ad the end effector
         */
         //@{
@@ -857,5 +867,7 @@ class DynTree  {
 }//end namespace
 
 }
+
+#undef IDYN_DEPRECATED
 
 #endif

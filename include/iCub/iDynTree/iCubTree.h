@@ -5,12 +5,12 @@
  *
  */
 
+#ifndef __ICUBTREE_H__
+#define __ICUBTREE_H__
+
 #include <iCub/iDynTree/DynTree.h>
 
 #include <iostream>
-
-#ifndef __ICUBTREE_H__
-#define __ICUBTREE_H__
 
 namespace iCub
 {

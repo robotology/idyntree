@@ -814,8 +814,7 @@ yarp::sig::Vector DynTree::getVel(const int link_index, const bool local) const
 yarp::sig::Vector DynTree::getAcc(const int link_index, const bool local) const
 {
     yarp::sig::Vector acc(6);
-    bool successfull_return = getAcc(link_index,acc,local);
-    if( successfull_return ) {
+    if( getAcc(link_index,acc,local) ) {
         return acc;
     } else {
         return yarp::sig::Vector(0);
