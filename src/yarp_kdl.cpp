@@ -55,6 +55,22 @@ bool YarptoKDL(const yarp::sig::Vector & yarpVector, KDL::JntArray & kdlJntArray
     return true;
 }
 
+bool YarptoKDL(const yarp::sig::Vector & yarpVector, KDL::Wrench & kdlWrench)
+{
+    if( yarpVector.size() != 6 ) return false;
+    memcpy(kdlWrench.force.data,yarpVector.data(),3*sizeof(double));
+    memcpy(kdlWrench.torque.data,yarpVector.data()+3,3*sizeof(double));
+    return true;
+}
+
+bool YarptoKDL(const yarp::sig::Vector & yarpVector, KDL::Twist & kdlTwist)
+{
+    if( yarpVector.size() != 6 ) return false;
+    memcpy(kdlTwist.vel.data,yarpVector.data(),3*sizeof(double));
+    memcpy(kdlTwist.rot.data,yarpVector.data()+3,3*sizeof(double));
+    return true;
+}
+
 
 bool KDLtoYarp(const KDL::Vector & kdlVector,yarp::sig::Vector & yarpVector)
 {

@@ -50,6 +50,22 @@ bool YarptoKDL(const yarp::sig::Matrix & yarpMatrix, KDL::Rotation & kdlRotation
 bool YarptoKDL(const yarp::sig::Vector & yarpVector, KDL::Vector & kdlVector);
 
 
+/**
+ * Convert a yarp::sig::Vector to a KDL::Twist
+ * @param yarpVector yarp::sig::Vector input
+ * @param kdlTwist KDL::Twist output
+ * @return true if conversion was successful, false otherwise
+ */
+bool YarptoKDL(const yarp::sig::Vector & yarpVector, KDL::Twist & kdlTwist);
+
+/**
+ * Convert a yarp::sig::Vector to a KDL::Wrench
+ * @param yarpVector yarp::sig::Vector input
+ * @param kdlWrench KDL::Wrench output
+ * @return true if conversion was successful, false otherwise
+ */
+bool YarptoKDL(const yarp::sig::Vector & yarpVector, KDL::Wrench & kdlWrench);
+
 
 /**
  * Convert a yarp::sig::Vector to a KDL::JntArray

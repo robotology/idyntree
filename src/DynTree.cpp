@@ -560,6 +560,15 @@ yarp::sig::Vector DynTree::getDQ_fb() const
     return cat(getVel(dynamic_traversal.getBaseLink()->getLinkIndex()),getDAng());
 }
 
+yarp::sig::Vector DynTree::getD2Q_fb() const
+{
+    /**
+     * 
+     * \todo checking it is possible to return something which have sense
+     */
+    return cat(getAcc(dynamic_traversal.getBaseLink()->getLinkIndex()),getD2Ang());
+}
+
 yarp::sig::Vector DynTree::setD2Ang(const yarp::sig::Vector & _q, const std::string & part_name)
 {
     if( part_name.length() == 0 ) {
@@ -594,26 +603,49 @@ yarp::sig::Vector DynTree::getD2Ang(const std::string & part_name) const
     return ret;
 }
 
-bool DynTree::setInertialMeasure(const yarp::sig::Vector &w0, const yarp::sig::Vector &dw0, const yarp::sig::Vector &ddp0)
+bool DynTree::setInertialMeasureAndLinearVelocity(const yarp::sig::Vector &dp0, const yarp::sig::Vector &w0, const yarp::sig::Vector &ddp0, const yarp::sig::Vector &dw0)
 {
-    KDL::Vector w0_kdl, dw0_kdl, ddp0_kdl;
+    KDL::Twist imu_classical_acceleration;
+    KDL::Vector w0_kdl, dw0_kdl, dp0_kdl, ddp0_kdl;
+    YarptoKDL(dp0,dp0_kdl);
     YarptoKDL(w0,w0_kdl);
     YarptoKDL(dw0,dw0_kdl);
     YarptoKDL(ddp0,ddp0_kdl);
-    imu_velocity.vel = KDL::Vector::Zero();
+    imu_velocity.vel = dp0_kdl;
     imu_velocity.rot = w0_kdl;
-    imu_acceleration.vel = ddp0_kdl;
-    imu_acceleration.rot = dw0_kdl;
+    imu_classical_acceleration.vel = ddp0_kdl;
+    imu_classical_acceleration.rot = dw0_kdl;
+    KDL::CoDyCo::conventionalToSpatialAcceleration(imu_classical_acceleration,imu_velocity,imu_acceleration);    
+    return true;
+}
+
+bool DynTree::setInertialMeasure(const yarp::sig::Vector &w0, const yarp::sig::Vector &dw0, const yarp::sig::Vector &ddp0)
+{
+    if( com_yarp.size() != 3 ) { com_yarp.resize(3); }
+    com_yarp.zero();
+    return setInertialMeasureAndLinearVelocity(com_yarp,w0,ddp0,dw0);
+}
+
+bool DynTree::setKinematicBaseVelAcc(const yarp::sig::Vector &base_vel, const yarp::sig::Vector &base_classical_acc)
+{
+    KDL::Twist base_vel_kdl, base_classical_acc_kdl, base_spatial_acc_kdl;
+    YarptoKDL(base_vel,base_vel_kdl);
+    YarptoKDL(base_classical_acc,base_classical_acc_kdl);
+    KDL::CoDyCo::conventionalToSpatialAcceleration(base_classical_acc_kdl,base_vel_kdl,base_spatial_acc_kdl);
+    imu_velocity = world_base_frame.M.Inverse(base_vel_kdl);
+    imu_acceleration = world_base_frame.M.Inverse(base_spatial_acc_kdl);
     return true;
 }
 
 bool DynTree::getInertialMeasure(yarp::sig::Vector &w0, yarp::sig::Vector &dw0, yarp::sig::Vector &ddp0) const
 {
-    //should care about returning the 3d acceleration instead of the spatial one? 
+    //should care about returning the 3d acceleration instead of the spatial one? yes 
     //assuming the base linear velocity as 0, they are the same
+    KDL::Twist imu_classical_acceleration;
+    KDL::CoDyCo::spatialToConventionalAcceleration(imu_acceleration,imu_velocity,imu_classical_acceleration);
     KDLtoYarp(imu_velocity.rot,w0);
-    KDLtoYarp(imu_acceleration.vel,ddp0);
-    KDLtoYarp(imu_acceleration.rot,dw0);
+    KDLtoYarp(imu_classical_acceleration.vel,ddp0);
+    KDLtoYarp(imu_classical_acceleration.rot,dw0);
     return true;
 }
 
@@ -803,8 +835,16 @@ bool DynTree::getAcc(const int link_index, yarp::sig::Vector & acc, const bool l
     ret.setSubvector(0,classical_lin_acc);
     ret.setSubvector(3,ang_acc);
     */
-    KDL::Twist classical_acc;
+    KDL::Twist classical_acc, return_acc;
     KDL::CoDyCo::spatialToConventionalAcceleration(a[link_index],v[link_index],classical_acc);
+    
+    if( !local ) {
+        computePositions();
+        return_acc = (world_base_frame*X_dynamic_base[link_index]).M*(classical_acc);
+    } else {
+        return_acc = classical_acc;
+    }
+    
     return KDLtoYarp(classical_acc,acc);
 }
 
@@ -1147,6 +1187,47 @@ yarp::sig::Vector DynTree::getVelCOM()
     memcpy(com_yarp.data(),dcom_world.data,3*sizeof(double));
 
     return com_yarp;
+}
+
+yarp::sig::Vector DynTree::getAccCOM() 
+{
+    if( com_yarp.size() != 3 ) { com_yarp.resize(3); }
+    getAccCOM(com_yarp);
+    return com_yarp;
+}
+
+
+bool DynTree::getAccCOM(yarp::sig::Vector & com_acceleration) 
+{
+  if( com_acceleration.size() != 3 ) { com_acceleration.resize(3); }
+    
+    /** \todo add controls like for computePositions() */
+    kinematicRNEA();
+    computePositions();
+    
+    double m = 0; /// \< Mass of the complete robot
+    KDL::Vector m_d2com; /// \< sum (expressed in base frame) of all the com accelerations of a link multiplied by the link mass
+    KDL::Vector m_d2com_world; /// \< as m_d2com, but expressed with respect to world orientation
+    KDL::Vector d2com_world; /// \< com acceleration expressed in the world frame
+    for(int i=0; i < getNrOfLinks(); i++ ) {
+        double m_i = undirected_tree.getLink(i)->getInertia().getMass();
+        KDL::Vector com_i = undirected_tree.getLink(i)->getInertia().getCOG();
+        KDL::Twist vel_link_com = v[i].RefPoint(com_i);
+        KDL::Twist spatial_acc_link_com = a[i].RefPoint(com_i);
+        KDL::Twist classical_acc_link_com;
+        KDL::CoDyCo::spatialToConventionalAcceleration(spatial_acc_link_com,vel_link_com,classical_acc_link_com);
+        m_d2com += X_dynamic_base[i].M*(m_i*classical_acc_link_com.vel);
+        m += m_i;
+    }
+       
+    m_d2com_world = world_base_frame.M*m_d2com;
+    
+    d2com_world = m_d2com_world/m;
+    
+    memcpy(com_acceleration.data(),d2com_world.data,3*sizeof(double));
+
+    
+    return true;
 }
 
 yarp::sig::Vector DynTree::getMomentum() 

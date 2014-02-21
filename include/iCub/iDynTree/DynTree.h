@@ -216,6 +216,9 @@ class DynTree  {
         //Buffer 
         yarp::sig::Matrix _H_w_b;
         
+        //Generic 3d buffer
+        yarp::sig::Vector com_yarp;
+        
         //Jacobian related quantities
         //all this variable are defined once in the class to avoid dynamic memory allocation at each method call
         KDL::Jacobian rel_jacobian; /**< dummy variable used by getRelativeJacobian */
@@ -227,7 +230,6 @@ class DynTree  {
         KDL::CoDyCo::MomentumJacobian momentum_jacobian;
         KDL::Jacobian com_jac_buffer;
         KDL::CoDyCo::MomentumJacobian momentum_jac_buffer;
-        yarp::sig::Vector com_yarp;
         std::vector<KDL::Vector> subtree_COM;
         std::vector<double> subtree_mass;
         KDL::RigidBodyInertia total_inertia;
@@ -423,10 +425,33 @@ class DynTree  {
         * @param w0 a 3x1 vector with the initial/measured angular velocity
         * @param dw0 a 3x1 vector with the initial/measured angular acceleration
         * @param ddp0 a 3x1 vector with the initial/measured 3D proper (with gravity) linear acceleration
-        * @param frame_link the reference frame in which 
         * @return true if succeeds (correct vectors size), false otherwise
+        * 
+        * \note this variables are considered to be in **base** reference frame
         */
         virtual bool setInertialMeasure(const yarp::sig::Vector &w0, const yarp::sig::Vector &dw0, const yarp::sig::Vector &ddp0);
+        
+        /**
+        * Set the inertial sensor measurements 
+        * @param dp0 a 3x1 vector with the initial/measured 3D proper (with gravity) linear acceleration
+        * @param w0 a 3x1 vector with the initial/measured angular velocity
+        * @param ddp0 a 3x1 vector with the initial/measured 3D proper (with gravity) linear acceleration
+        * @param dw0 a 3x1 vector with the initial/measured angular acceleration
+        * @return true if succeeds (correct vectors size), false otherwise
+        * 
+        * \note this variables are considered in **base** reference frame
+        */
+        virtual bool setInertialMeasureAndLinearVelocity(const yarp::sig::Vector &dp0, const yarp::sig::Vector &w0, const yarp::sig::Vector &ddp0, const yarp::sig::Vector &dw0);
+       
+        /**
+         * Set the kinematic base (IMU) velocity and acceleration, expressed in world frame
+         * @param base_vel a 6x1 vector with lin/rot velocity (the one that will be returned by getVel(kinematic_base)
+         * @param base_acc a 6x1 vector with lin/rot acceleration (the one that will be returned by getAcc(kinematic_base)
+         * 
+         * \note this variables are considered in **world** reference frame
+         */
+        virtual bool setKinematicBaseVelAcc(const yarp::sig::Vector &base_vel, const yarp::sig::Vector &base_classical_acc);
+
         
         /**
         * Get the inertial sensor measurements 
@@ -680,7 +705,12 @@ class DynTree  {
         */
         virtual yarp::sig::Vector getDQ_fb() const;
         
-        //virtual yarp::sig::Vector getD2Q_fb() const;
+        /**
+        * Get the 6+getNrOfDOFs() yarp::sig::Vector, characterizing the floating base acceleration of the tree
+        * @return a vector where the 0:5 elements are the one of the dynamic base expressed in the world frame (the same that are obtained calling
+        *         getAcc(dynamic_base_index), while the 6:6+getNrOfDOFs()-1 elements are the joint accelerations
+        */
+        virtual yarp::sig::Vector getD2Q_fb() const;
         
         
         /**
@@ -738,6 +768,21 @@ class DynTree  {
         * @return velocity of Center of Mass vector
         */
         yarp::sig::Vector getVelCOM();
+        
+       /**
+        * Get the acceleration (3d) of the Center of Mass of the 
+        * robot expressed in the world frame 
+        * @return acceleration of Center of Mass vector
+        */
+        yarp::sig::Vector getAccCOM();
+        
+       /**
+        * Get the acceleration (3d) of the Center of Mass of the 
+        * robot expressed in the world frame 
+        * @param com_acceleration the output vector for acceleration of Center of Mass vector
+        * @return true if all went well, false otherwise
+        */
+        bool getAccCOM(yarp::sig::Vector & com_acceleration);
         
         yarp::sig::Vector getMomentum();
 
