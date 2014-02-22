@@ -859,10 +859,10 @@ yarp::sig::Vector DynTree::getBaseForceTorque(int frame_link)
     {
         ret_kdl = base_residual_f;
     } else if( frame_link == WORLD_FRAME ) {
-        ret_kdl = world_base_frame*base_residual_f;
+        ret_kdl = world_base_frame.M*base_residual_f;
     } else {
         computePositions();
-        ret_kdl = X_dynamic_base[frame_link].Inverse(base_residual_f);
+        ret_kdl = X_dynamic_base[frame_link].M.Inverse(base_residual_f);
     }
     KDLtoYarp(ret_kdl.force,ret_force);
     KDLtoYarp(ret_kdl.torque,ret_torque);
@@ -1355,7 +1355,7 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
     //If the incoming matrix have the wrong number of rows/colums, resize it
     if( fb_mass_matrix.rows() != (int)(6+undirected_tree.getNrOfDOFs()) 
         || fb_mass_matrix.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
-        fb_mass_matrix.resize(6+undirected_tree.getNrOfDOFs(),10*undirected_tree.getNrOfLinks());
+        fb_mass_matrix.resize(6+undirected_tree.getNrOfDOFs(),6+undirected_tree.getNrOfDOFs());
     }
     
     //Calculate the result directly in the output matrix
@@ -1386,18 +1386,32 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
     //Additionally, the inverse of the adjoint matrix is simply the transpose
     Eigen::Matrix< double, 6, 6> world_base_rotation_adjoint_transformation = KDL::CoDyCo::WrenchTransformationMatrix(world_base_rotation);
     
+    std::cout << "fb jnt mass matrix " << std::endl << fb_jnt_mass_matrix.data.block<6,6>(0,0) << std::endl;
+    std::cout << "world_base_rotation_adjoint_transformation " << std::endl <<  world_base_rotation_adjoint_transformation << std::endl;
+    std::cout << "world_base_rotation_adjoint_transformation " << std::endl <<  world_base_rotation_adjoint_transformation.transpose() << std::endl;
+    
     //Modification of 6x6 left upper submatrix (spatial inertia)
     // doing some moltiplication by zero (inefficient? ) 
-    fb_jnt_mass_matrix.data.block<6,6>(0,0) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,6>(0,0); 
-    fb_jnt_mass_matrix.data.block<6,6>(0,0) = fb_jnt_mass_matrix.data.block<6,6>(0,0)*world_base_rotation_adjoint_transformation.transpose();
-
+    //fb_jnt_mass_matrix.data.block<6,6>(0,0) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,6>(0,0); 
+    //fb_jnt_mass_matrix.data.block<6,6>(0,0) = fb_jnt_mass_matrix.data.block<6,6>(0,0)*world_base_rotation_adjoint_transformation.transpose();
+    Eigen::Matrix<double,6,6> buffer_mat_six_six =  world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,6>(0,0);
+    fb_jnt_mass_matrix.data.block<6,6>(0,0) = buffer_mat_six_six*(world_base_rotation_adjoint_transformation.transpose());
+    
     for(int dof=0; dof < undirected_tree.getNrOfDOFs(); dof++ ) {
-        fb_jnt_mass_matrix.data.block<6,1>(0,6+dof) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,1>(0,6+dof);
-        fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = fb_jnt_mass_matrix.data.block<6,1>(0,6+dof).transpose();
+        //fb_jnt_mass_matrix.data.block<6,1>(0,6+dof) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,1>(0,6+dof);
+        //fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = fb_jnt_mass_matrix.data.block<6,1>(0,6+dof).transpose();
+        Eigen::Matrix<double,6,1> buffer_vec_six = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,1>(0,6+dof);
+        fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = buffer_vec_six.transpose();
     }
+    
+    std::cout << "fb jnt mass matrix " << std::endl << fb_jnt_mass_matrix.data.block<6,6>(0,0) << std::endl;
+
     
     //This copy does not exploit the matrix sparsness.. 
     //but I guess that exploiting it would lead to slower code
+    assert(fb_jnt_mass_matrix.rows() == fb_jnt_mass_matrix.columns());
+    assert(fb_mass_matrix.rows() == fb_jnt_mass_matrix.rows());
+    assert(fb_mass_matrix.cols() == fb_jnt_mass_matrix.columns());
     mapped_mass_matrix = fb_jnt_mass_matrix.data;
     
     return true;
