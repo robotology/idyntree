@@ -1356,6 +1356,7 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
     if( fb_mass_matrix.rows() != (int)(6+undirected_tree.getNrOfDOFs()) 
         || fb_mass_matrix.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
         fb_mass_matrix.resize(6+undirected_tree.getNrOfDOFs(),6+undirected_tree.getNrOfDOFs());
+        fb_mass_matrix.zero();
     }
     
     //Calculate the result directly in the output matrix
@@ -1368,6 +1369,7 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
     if( fb_jnt_mass_matrix.rows() != (int)(6+undirected_tree.getNrOfDOFs()) 
         || fb_jnt_mass_matrix.columns() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
         fb_jnt_mass_matrix.resize(6+undirected_tree.getNrOfDOFs());
+        SetToZero(fb_jnt_mass_matrix);
     }
     
     if( subtree_crbi.size() != undirected_tree.getNrOfLinks() ) { subtree_crbi.resize(undirected_tree.getNrOfLinks()); };
