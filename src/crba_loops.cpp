@@ -164,7 +164,7 @@ namespace CoDyCo {
                         } 
                         
                         #ifndef NDEBUG
-                        std::cout << "F migrated from frame " << successor_it->getLinkIndex() << " to frame " << successor_it->getLinkIndex() << std::endl;
+                        //std::cout << "F migrated from frame " << successor_it->getLinkIndex() << " to frame " << successor_it->getLinkIndex() << std::endl;
                         #endif
                         F = successor_it->pose(predecessor_it,q__)*F;
                         
