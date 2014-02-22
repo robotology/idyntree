@@ -1386,9 +1386,11 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
     //Additionally, the inverse of the adjoint matrix is simply the transpose
     Eigen::Matrix< double, 6, 6> world_base_rotation_adjoint_transformation = KDL::CoDyCo::WrenchTransformationMatrix(world_base_rotation);
     
+    /*
     std::cout << "fb jnt mass matrix " << std::endl << fb_jnt_mass_matrix.data.block<6,6>(0,0) << std::endl;
     std::cout << "world_base_rotation_adjoint_transformation " << std::endl <<  world_base_rotation_adjoint_transformation << std::endl;
     std::cout << "world_base_rotation_adjoint_transformation " << std::endl <<  world_base_rotation_adjoint_transformation.transpose() << std::endl;
+    */
     
     //Modification of 6x6 left upper submatrix (spatial inertia)
     // doing some moltiplication by zero (inefficient? ) 
@@ -1404,7 +1406,7 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
         fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = buffer_vec_six.transpose();
     }
     
-    std::cout << "fb jnt mass matrix " << std::endl << fb_jnt_mass_matrix.data.block<6,6>(0,0) << std::endl;
+    //std::cout << "fb jnt mass matrix " << std::endl << fb_jnt_mass_matrix.data.block<6,6>(0,0) << std::endl;
 
     
     //This copy does not exploit the matrix sparsness.. 
