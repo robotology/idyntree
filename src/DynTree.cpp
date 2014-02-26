@@ -1013,12 +1013,15 @@ bool DynTree::dynamicRNEA()
     if( are_contact_estimated == true ) {
         //If the force were estimated wright
         #ifndef NDEBUG
-        //std::cout << "q:   " << q << std::endl;
-        //std::cout << "dq:  " << dq << std::endl;
-        //std::cout << "ddq: " << ddq << std::endl;
-        //for(int i=0; i < f_ext.size(); i++ ) { std::cout << "f_ext[" << i << "]: " << f_ext[i] << std::endl; }
+        /*
+        std::cout << "q:   " << q.data << std::endl;
+        std::cout << "dq:  " << dq.data << std::endl;
+        std::cout << "ddq: " << ddq.data << std::endl;
+        for(int i=0; i < f_ext.size(); i++ ) { std::cout << "f_ext[" << i << "]: " << f_ext[i] << std::endl; }
+        */
         //std::cerr << "base_residual_f.force.Norm " << base_residual_f.force.Norm() << std::endl;
         //std::cerr << "base_residual_f.force.Norm " << base_residual_f.torque.Norm() << std::endl;
+        
         #endif
         assert( base_residual_f.force.Norm() < 1e-5 );
         assert( base_residual_f.torque.Norm() < 1e-5 );

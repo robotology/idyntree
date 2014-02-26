@@ -21,7 +21,7 @@ using namespace iCub::skinDynLib;
 namespace iCub {
 namespace iDynTree {
 
-iCubTree::iCubTree(iCubTree_version_tag version, bool ft_feet, iCubTree_serialization_tag serial_tag, unsigned int verbose, std::string imu_link_name)
+iCubTree::iCubTree(iCubTree_version_tag version, iCubTree_serialization_tag serial_tag, unsigned int verbose, std::string imu_link_name)
 {
     yarp::sig::Vector q_min_yarp, q_max_yarp;
     KDL::JntArray q_min_kdl, q_max_kdl;
@@ -29,6 +29,7 @@ iCubTree::iCubTree(iCubTree_version_tag version, bool ft_feet, iCubTree_serializ
     iCub::iDyn::version_tag ver;
     ver.head_version = version.head_version;
     ver.legs_version = version.legs_version;
+    bool ft_feet = version.feet_ft;
     
     //std::cout << "Creating iCubTree with head version " << ver.head_version << " and legs version " << ver.legs_version << std::endl;
     
