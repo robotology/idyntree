@@ -216,6 +216,13 @@ class FTSensorList
             return;
         }
         
+        ~FTSensorList()
+        {
+            for(int ft_id=0; i < ft_sensors_vector.size(); i++ ) {
+                delete ft_sensors_vector[i];
+            }
+            ft_sensors_vector.resize();
+        }
         
         KDL::Wrench getMeasuredWrench(int link_id,  const std::vector< KDL::Wrench > & measured_wrenches) const
         {   
