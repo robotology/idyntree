@@ -218,10 +218,10 @@ class FTSensorList
         
         ~FTSensorList()
         {
-            for(int ft_id=0; i < ft_sensors_vector.size(); i++ ) {
-                delete ft_sensors_vector[i];
+            for(int ft_id=0; ft_id < ft_sensors_vector.size(); ft_id++ ) {
+                delete ft_sensors_vector[ft_id];
             }
-            ft_sensors_vector.resize();
+            ft_sensors_vector.resize(0);
         }
         
         KDL::Wrench getMeasuredWrench(int link_id,  const std::vector< KDL::Wrench > & measured_wrenches) const
