@@ -275,7 +275,7 @@ std::string DynamicRegressorGenerator::getDescriptionOfParameter(int parameter_i
         ss << "Parameter " 
            << parameter_index 
            << ": " << ft_offset_type << " of link " 
-           << p_ft_list->ft_sensors_vector[ft_sensor_index]->getName() << 
+           << p_ft_list->ft_sensors_vector[ft_sensor_index].getName() << 
            " (" << ft_sensor_index << ")";
     }
     }
@@ -1938,9 +1938,9 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
             if( verbose ) { std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error: link " << _activated_ft_sensors[i]  << " does not exists" << std::endl; }
             return -1;
        }
-       std::vector<const KDL::CoDyCo::FTSensor*> ft_on_link = p_ft_list->getFTSensorsOnLink(link_it->getLinkIndex());
+       std::vector<KDL::CoDyCo::FTSensor> ft_on_link = p_ft_list->getFTSensorsOnLink(link_it->getLinkIndex());
        for(int l=0; l < (int)ft_on_link.size(); l++ ) {
-           int ft_id = ft_on_link[l]->getID();
+           int ft_id = ft_on_link[l].getID();
            if( ft_id >= (int)flag_activated_ft_sensors.size() || ft_id < 0 ) {
                if( verbose ) { std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error while adding subtree with leaf: " << _activated_ft_sensors[i]  << std::endl; }
                return -1;

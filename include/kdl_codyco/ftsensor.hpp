@@ -47,6 +47,14 @@ class FTSensor
         bool measured_wrench_is_from_parent_to_child;
         
     public:
+        FTSensor()
+        {
+            p_undirected_tree =0;
+            H_parent_sensor = KDL::Frame::Identity();
+            parent = child = junction_id = sensor_id = -1;
+            measured_wrench_is_from_parent_to_child = false;
+            fixed_joint_name = "FT_SENSOR_ERROR";
+        }
         FTSensor(const KDL::CoDyCo::UndirectedTree & _undirected_tree, 
                 const std::string _fixed_joint_name,
                 const int _parent,
@@ -166,11 +174,11 @@ class FTSensor
 class FTSensorList
 {
     private:
-        std::vector< std::vector<const FTSensor *> > link_FT_sensors;
+        std::vector< std::vector< FTSensor > > link_FT_sensors;
         std::vector< int > junction_id2ft_sensor_id;
     
     public: 
-        std::vector< FTSensor * > ft_sensors_vector;
+        std::vector< FTSensor > ft_sensors_vector;
         
         int getNrOfFTSensors() const
         {
@@ -187,7 +195,8 @@ class FTSensorList
         FTSensorList(const KDL::CoDyCo::UndirectedTree & undirected_tree, const std::vector<std::string> & ft_names)
         {
             link_FT_sensors.clear();
-            link_FT_sensors.resize(undirected_tree.getNrOfLinks(),std::vector<const FTSensor *>(0));
+            std::vector<FTSensor> empty_ft_list;
+            link_FT_sensors.resize(undirected_tree.getNrOfLinks(),empty_ft_list);
             junction_id2ft_sensor_id.clear();
             junction_id2ft_sensor_id.resize(undirected_tree.getNrOfJunctions(),-1);
             
@@ -200,7 +209,7 @@ class FTSensorList
 #ifndef NDEBUG
                 //std::cout << "Adding FT sensor " << i << "That connects " << parent_id << " and " << child_id << std::endl;
 #endif 
-                ft_sensors_vector.push_back(new FTSensor(undirected_tree,ft_names[i],parent_id,child_id,sensor_id));
+                ft_sensors_vector.push_back(FTSensor(undirected_tree,ft_names[i],parent_id,child_id,sensor_id));
 #ifndef NDEBUG
                 //std::cout << "that have name " << ft_sensors_vector[i]->getName() << std::endl;
 #endif 
@@ -218,17 +227,18 @@ class FTSensorList
         
         ~FTSensorList()
         {
+            /*
             for(int ft_id=0; ft_id < ft_sensors_vector.size(); ft_id++ ) {
-                delete ft_sensors_vector[ft_id];
-            }
-            ft_sensors_vector.resize(0);
+                if(ft_sensors_vector[ft_id]) { delete ft_sensors_vector[ft_id]; ft_sensors_vector[ft_id] = 0; }
+            }*/
+            //ft_sensors_vector.resize(0);
         }
         
         KDL::Wrench getMeasuredWrench(int link_id,  const std::vector< KDL::Wrench > & measured_wrenches) const
         {   
             KDL::Wrench ret = KDL::Wrench::Zero();
             for(int i = 0; i < (int)link_FT_sensors[link_id].size(); i++ ) {
-                ret += link_FT_sensors[link_id][i]->getWrenchExcertedOnSubGraph(link_id,measured_wrenches);
+                ret += link_FT_sensors[link_id][i].getWrenchExcertedOnSubGraph(link_id,measured_wrenches);
             }
             return ret;
         }
@@ -241,7 +251,7 @@ class FTSensorList
             return junction_id2ft_sensor_id[junction_index];
         }
         
-        std::vector<const FTSensor *> getFTSensorsOnLink(int link_index) const
+        std::vector< FTSensor> getFTSensorsOnLink(int link_index) const
         {
             /*
             if( link_index < 0 || link_index >= .getNrOfLinks() ) {
@@ -283,20 +293,20 @@ class FTSensorList
             //std::cerr << "is ft_sensor " << ft_sensors_vector[ft_sensor_id]->getName() << " ( " << ft_sensor_id << " )  that connects "
             //<< ft_sensors_vector[ft_sensor_id]->getParent() << " and " << ft_sensors_vector[ft_sensor_id]->getChild() << std::endl;
 #endif
-            int child_id = ft_sensors_vector[ft_sensor_id]->getChild();
-            int parent_id = ft_sensors_vector[ft_sensor_id]->getParent();
+            int child_id = ft_sensors_vector[ft_sensor_id].getChild();
+            int parent_id = ft_sensors_vector[ft_sensor_id].getParent();
             
             double sign;
-            if( ft_sensors_vector[ft_sensor_id]->isWrenchAppliedFromParentToChild() ) {
+            if( ft_sensors_vector[ft_sensor_id].isWrenchAppliedFromParentToChild() ) {
                 sign = +1.0;
             } else {
                 sign = -1.0;
             }
             
             if(  parent_id == dynamic_traversal.getParentLink(child_id)->getLinkIndex()  ) {
-                 return sign*ft_sensors_vector[ft_sensor_id]->getH_child_sensor().Inverse(f[child_id]);
+                 return sign*ft_sensors_vector[ft_sensor_id].getH_child_sensor().Inverse(f[child_id]);
             } else if (child_id == dynamic_traversal.getParentLink(parent_id)->getLinkIndex() ) {
-                 return -sign*ft_sensors_vector[ft_sensor_id]->getH_parent_sensor().Inverse(f[parent_id]);
+                 return -sign*ft_sensors_vector[ft_sensor_id].getH_parent_sensor().Inverse(f[parent_id]);
             } else {
                 assert(false);
                 return KDL::Wrench::Zero();
@@ -307,11 +317,11 @@ class FTSensorList
         {
             std::stringstream ss;
             for(int i=0; i < (int)ft_sensors_vector.size(); i++ ) {
-                int parent_id = ft_sensors_vector[i]->getParent();
-                int child_id = ft_sensors_vector[i]->getChild();
-                ss << "FT sensor " << i << " ( " << ft_sensors_vector[i]->getName() << " ) " << " connects links " << parent_id << " and " << child_id << std::endl;
-                ss << "Link " << parent_id << "has sensor " << link_FT_sensors[parent_id][0]->getID() << std::endl;
-                ss << "Link " << child_id << "has sensor " << link_FT_sensors[child_id][0]->getID() << std::endl;
+                int parent_id = ft_sensors_vector[i].getParent();
+                int child_id = ft_sensors_vector[i].getChild();
+                ss << "FT sensor " << i << " ( " << ft_sensors_vector[i].getName() << " ) " << " connects links " << parent_id << " and " << child_id << std::endl;
+                ss << "Link " << parent_id << "has sensor " << link_FT_sensors[parent_id][0].getID() << std::endl;
+                ss << "Link " << child_id << "has sensor " << link_FT_sensors[child_id][0].getID() << std::endl;
             }
             return ss.str();
         }

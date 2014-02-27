@@ -192,15 +192,15 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         if( consider_ft_offset ) {
             int leaf_link_id = subtree_leaf_links_indeces[leaf_id];
             
-            std::vector<const FTSensor *> fts_link = ft_list.getFTSensorsOnLink(leaf_link_id);
+            std::vector< FTSensor> fts_link = ft_list.getFTSensorsOnLink(leaf_link_id);
              
             assert(fts_link.size()==1);
             
-            int ft_id = fts_link[0]->getID();
-            assert(fts_link[0]->getChild() == leaf_link_id || fts_link[0]->getParent() == leaf_link_id );
+            int ft_id = fts_link[0].getID();
+            assert(fts_link[0].getChild() == leaf_link_id || fts_link[0].getParent() == leaf_link_id );
             
             #ifndef NDEBUG
-            if( verbose ) std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the columns relative to offset of ft sensor " << fts_link[0]->getName() << std::endl;
+            if( verbose ) std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the columns relative to offset of ft sensor " << fts_link[0].getName() << std::endl;
             #endif
             
             /** \todo find a more robust way to get columns indeces relative to a given parameters */
@@ -208,17 +208,17 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
             assert(10*NrOfRealLinks_subtree+6*ft_id+5 < regressor_matrix.cols());
             
             double sign;
-            if( fts_link[0]->isWrenchAppliedFromParentToChild() ) {
+            if( fts_link[0].isWrenchAppliedFromParentToChild() ) {
                 sign = 1.0;
             } else {
                 sign = -1.0;
             }
             
-            if( fts_link[0]->getParent() == leaf_link_id ) { 
-                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = -sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
+            if( fts_link[0].getParent() == leaf_link_id ) { 
+                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = -sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0].getH_link_sensor(leaf_link_id));
             } else {
-                assert( fts_link[0]->getChild() == leaf_link_id );
-                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0]->getH_link_sensor(leaf_link_id));
+                assert( fts_link[0].getChild() == leaf_link_id );
+                regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6) = sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*fts_link[0].getH_link_sensor(leaf_link_id));
             }
             
         }
@@ -234,16 +234,16 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
     for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indeces.size(); leaf_id++ ) {
         int leaf_link_id = subtree_leaf_links_indeces[leaf_id];
             
-        std::vector<const FTSensor *> fts_link = ft_list.getFTSensorsOnLink(leaf_link_id);
+        std::vector< FTSensor> fts_link = ft_list.getFTSensorsOnLink(leaf_link_id);
              
         assert(fts_link.size()==1);
             
-        //int ft_id = fts_link[0]->getID();
+        //int ft_id = fts_link[0].getID();
 #ifndef NDEBUG
-        //std::cerr << "For leaf " << leaf_link_id << " found ft sensor " << ft_id << " that connects " << fts_link[0]->getParent() << " and " << fts_link[0]->getChild() << std::endl;
+        //std::cerr << "For leaf " << leaf_link_id << " found ft sensor " << ft_id << " that connects " << fts_link[0].getParent() << " and " << fts_link[0].getChild() << std::endl;
 #endif
         
-        assert(fts_link[0]->getChild() == leaf_link_id || fts_link[0]->getParent() == leaf_link_id );
+        assert(fts_link[0].getChild() == leaf_link_id || fts_link[0].getParent() == leaf_link_id );
 
 
         known_terms(0) +=  dot(S,X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*ft_list.getMeasuredWrench(leaf_link_id,measured_wrenches));
