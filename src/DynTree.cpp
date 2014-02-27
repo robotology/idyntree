@@ -1028,9 +1028,9 @@ bool DynTree::dynamicRNEA()
         //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
         for(int i=0; i < NrOfFTSensors; i++ ) {
             #ifndef NDEBUG
-            double sign = ft_list.ft_sensors_vector[i]->isWrenchAppliedFromParentToChild() ? 1.0 : -1.0;
+            double sign = ft_list.ft_sensors_vector[i].isWrenchAppliedFromParentToChild() ? 1.0 : -1.0;
             
-            KDL::Wrench residual = measured_wrenches[i] - sign*ft_list.ft_sensors_vector[i]->getH_child_sensor().Inverse(f[ft_list.ft_sensors_vector[i]->getChild()]);
+            KDL::Wrench residual = measured_wrenches[i] - sign*ft_list.ft_sensors_vector[i].getH_child_sensor().Inverse(f[ft_list.ft_sensors_vector[i].getChild()]);
             assert( residual.force.Norm() < 1e-5 );
             assert( residual.torque.Norm() < 1e-5 );
             #endif //NDEBUG
