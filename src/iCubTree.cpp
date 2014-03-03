@@ -20,6 +20,8 @@ using namespace iCub::skinDynLib;
 
 namespace iCub {
 namespace iDynTree {
+    
+const std::string ICUB_IMU_LINK_NAME = "imu_frame";
 
 iCubTree::iCubTree(iCubTree_version_tag version, iCubTree_serialization_tag serial_tag, unsigned int verbose, std::string imu_link_name)
 {

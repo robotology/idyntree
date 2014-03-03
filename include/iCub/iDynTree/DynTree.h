@@ -13,7 +13,7 @@
  * 
  * YARP based Robot dynamics library 
  *
- * \note <b>SI units adopted</b>: meters for lengths and radians
+ * \note <b>SI units adopted</b>: meters for lengths and radiants
  *       for angles.
  *
  * \section dep_sec Dependencies 
@@ -63,8 +63,8 @@
  * 
  **/ 
 
-#ifndef __DYNTREE_H__
-#define __DYNTREE_H__
+#ifndef IDYNTREE_H
+#define IDYNTREE_H
 
 #if defined(__GNUC__) || defined(__clang__) //clang defines also __GNUC__, but I check for it anyway
 #define IDYN_DEPRECATED __attribute__((deprecated))
@@ -179,8 +179,17 @@ class DynTree  {
         std::vector<int> subgraph_index2root_link; /**< for each subgraph, return the index of the root */
         bool are_contact_estimated;
         
-        int getSubGraphIndex(int link_index) { assert(link_index >= 0); assert(link_index < link2subgraph_index.size()); assert(link2subgraph_index.size() == this->getNrOfLinks()); return link2subgraph_index[link_index]; }
-        bool isSubGraphRoot(int link_index) {  assert(link_is_subgraph_root.size() == this->getNrOfLinks()); return link_is_subgraph_root[link_index]; }
+        int getSubGraphIndex(int link_index) {
+            assert(link_index >= 0);
+            assert(link_index < link2subgraph_index.size());
+            assert(link2subgraph_index.size() == this->getNrOfLinks());
+            return link2subgraph_index[link_index];
+        }
+    
+        bool isSubGraphRoot(int link_index) {
+            assert(link_is_subgraph_root.size() == this->getNrOfLinks());
+            return link_is_subgraph_root[link_index];
+        }
         
         int buildSubGraphStructure(const std::vector<std::string> & ft_names);
         
@@ -270,7 +279,7 @@ class DynTree  {
          */
         DynTree(const KDL::Tree & _tree, const std::vector<std::string> & joint_sensor_names, const std::string & imu_link_name, KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(), KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition());
         
-        ~DynTree();
+        virtual ~DynTree();
         
         /**
          * Get the number of (internal) degrees of freedom of the tree
@@ -457,7 +466,7 @@ class DynTree  {
         /**
          * Set the kinematic base (IMU) velocity and acceleration, expressed in world frame
          * @param base_vel a 6x1 vector with lin/rot velocity (the one that will be returned by getVel(kinematic_base)
-         * @param base_acc a 6x1 vector with lin/rot acceleration (the one that will be returned by getAcc(kinematic_base)
+         * @param base_classical_acc a 6x1 vector with lin/rot acceleration (the one that will be returned by getAcc(kinematic_base)
          * 
          * \note this variables are considered in **world** reference frame
          */
@@ -672,7 +681,7 @@ class DynTree  {
         
         /**
         * Set the unknown contacts
-        * @param contacts the list of the contacts on the DynTree
+        * @param contacts_list the list of the contacts on the DynTree
         * @return true if operation succeeded, false otherwise
         */
         virtual bool setContacts(const iCub::skinDynLib::dynContactList &contacts_list);
@@ -771,14 +780,11 @@ class DynTree  {
 
         
         /**
-        * Get Velocity of the Center of Mass of the specified part (if no part 
-        * is specified, get the velocity of the center of mass of all tree) expressed
-        * in the world frame 
-        * @param part_name optional: the name of the part of joints to get
+        * Get Velocity of the Center of Mass of the robot expressed in the world frame
         * @return velocity of Center of Mass vector
         */
         yarp::sig::Vector getVelCOM();
-        
+    
        /**
         * Get the acceleration (3d) of the Center of Mass of the 
         * robot expressed in the world frame 
@@ -870,4 +876,4 @@ class DynTree  {
 
 #undef IDYN_DEPRECATED
 
-#endif
+#endif //end IDYNTREE_H

@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __ICUBTREE_H__
-#define __ICUBTREE_H__
+#ifndef ICUBTREE_H
+#define ICUBTREE_H
 
 #include <iCub/iDynTree/DynTree.h>
 
@@ -18,7 +18,7 @@ namespace iCub
 namespace iDynTree
 {
 
-const std::string ICUB_IMU_LINK_NAME = "imu_frame";  
+extern const std::string ICUB_IMU_LINK_NAME;
   
 /**
  * Struct for describing the version of the parts of an iCubTree
