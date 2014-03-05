@@ -302,7 +302,7 @@ class DynTree  {
          * @param partition (optional) a partition of the tree (division of the links and DOFs in non-overlapping sets)
          *
          */
-        DynTree(const string urdf_file, 
+        DynTree(const std::string urdf_file, 
                 const std::vector<std::string> & joint_sensor_names, 
                 const std::string & imu_link_name, 
                 KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(), 

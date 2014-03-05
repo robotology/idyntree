@@ -19,6 +19,11 @@
 #include <kdl_codyco/utils.hpp>
 #include <kdl_codyco/regressor_utils.hpp>
 
+#ifdef CODYCO_USES_URDFDOM
+//Urdf import from kdl_format_io
+#include <kdl_format_io/urdf_import.hpp>
+#endif
+
 #ifndef NDEBUG
 #include <kdl/frames_io.hpp>
 #endif
@@ -56,16 +61,16 @@ DynTree::DynTree(const KDL::Tree & _tree,
 }
 
 #ifdef CODYCO_USES_URDFDOM
-DynTree::DynTree(const string urdf_file, 
+DynTree::DynTree(const std::string urdf_file, 
                  const std::vector<std::string> & joint_sensor_names, 
                  const std::string & imu_link_name, 
-                 KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(), 
-                 KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition())
+                 KDL::CoDyCo::TreeSerialization  serialization, 
+                 KDL::CoDyCo::TreePartition partition)
 {
     KDL::Tree my_tree;
     if (!kdl_format_io::treeFromUrdfFile(urdf_file,my_tree))
     {
-        cerr << "DynTree constructor: Could not generate robot model and extract kdl tree" << endl; assert(false);
+        std::cerr << "DynTree constructor: Could not generate robot model and extract kdl tree" << std::endl; assert(false);
     }
     constructor(my_tree,joint_sensor_names,imu_link_name,serialization,partition);
 }
@@ -83,6 +88,9 @@ int ret;
     
     undirected_tree = KDL::CoDyCo::UndirectedTree(_tree,serialization,_partition);  
     partition = undirected_tree.getPartition();
+    
+    std::cout << "DynTree serialization " << undirected_tree.getSerialization().toString() << std::endl;
+    std::cout << "DynTree partition: " << partition.toString() << std::endl;
     
     //Setting useful constants
     NrOfDOFs = _tree.getNrOfJoints();
