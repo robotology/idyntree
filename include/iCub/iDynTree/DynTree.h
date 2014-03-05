@@ -181,13 +181,13 @@ class DynTree  {
         
         int getSubGraphIndex(int link_index) {
             assert(link_index >= 0);
-            assert(link_index < link2subgraph_index.size());
-            assert(link2subgraph_index.size() == this->getNrOfLinks());
+            assert(link_index < (int)link2subgraph_index.size());
+            assert((int)link2subgraph_index.size() == this->getNrOfLinks());
             return link2subgraph_index[link_index];
         }
     
         bool isSubGraphRoot(int link_index) {
-            assert(link_is_subgraph_root.size() == this->getNrOfLinks());
+            assert((int)link_is_subgraph_root.size() == this->getNrOfLinks());
             return link_is_subgraph_root[link_index];
         }
         
@@ -257,13 +257,20 @@ class DynTree  {
         //MassMatrix
         KDL::CoDyCo::FloatingJntSpaceInertiaMatrix fb_jnt_mass_matrix;
         std::vector<KDL::RigidBodyInertia> subtree_crbi;
+        
+        //Flag set to true if the object was correctly configured
+        bool correctly_configure;
 
         
     public:
         DynTree();
  
-        void constructor(const KDL::Tree & _tree, const std::vector<std::string> & joint_ft_sensor_names, const std::string & imu_link_name, 
-                         KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(), KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition(), std::vector<KDL::Frame> parent_sensor_transforms=std::vector<KDL::Frame>(0));
+        void constructor(const KDL::Tree & _tree, 
+                         const std::vector<std::string> & joint_ft_sensor_names, 
+                         const std::string & imu_link_name, 
+                         KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(),
+                         KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition(), 
+                         std::vector<KDL::Frame> parent_sensor_transforms=std::vector<KDL::Frame>(0));
 
     
         /**
@@ -277,7 +284,30 @@ class DynTree  {
          * @param partition (optional) a partition of the tree (division of the links and DOFs in non-overlapping sets)
          *
          */
-        DynTree(const KDL::Tree & _tree, const std::vector<std::string> & joint_sensor_names, const std::string & imu_link_name, KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(), KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition());
+        DynTree(const KDL::Tree & _tree, 
+                const std::vector<std::string> & joint_sensor_names, 
+                const std::string & imu_link_name, 
+                KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(), 
+                KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition());
+        
+        #ifdef CODYCO_USES_URDFDOM
+        /**
+         * Constructor for DynTree
+         * 
+         * @param urdf_file the URDF file used for loading the structure of the model
+         * @param joint_sensor_names the names of the joint that should 
+         *        be considered as FT sensors
+         * @param imu_link_name name of the link considered the IMU sensor
+         * @param serialization (optional) an explicit serialization of tree links and DOFs
+         * @param partition (optional) a partition of the tree (division of the links and DOFs in non-overlapping sets)
+         *
+         */
+        DynTree(const string urdf_file, 
+                const std::vector<std::string> & joint_sensor_names, 
+                const std::string & imu_link_name, 
+                KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(), 
+                KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition());
+        #endif
         
         virtual ~DynTree();
         

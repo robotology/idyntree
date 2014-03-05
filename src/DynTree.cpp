@@ -51,15 +51,32 @@ DynTree::DynTree(const KDL::Tree & _tree,
                    KDL::CoDyCo::TreeSerialization serialization,
                    KDL::CoDyCo::TreePartition _partition
                    ):  undirected_tree(_tree,serialization,_partition)
-{constructor(_tree,joint_sensor_names,imu_link_name,serialization,_partition);
+{
+    constructor(_tree,joint_sensor_names,imu_link_name,serialization,_partition);
 }
+
+#ifdef CODYCO_USES_URDFDOM
+DynTree::DynTree(const string urdf_file, 
+                 const std::vector<std::string> & joint_sensor_names, 
+                 const std::string & imu_link_name, 
+                 KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(), 
+                 KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition())
+{
+    KDL::Tree my_tree;
+    if (!kdl_format_io::treeFromUrdfFile(urdf_file,my_tree))
+    {
+        cerr << "DynTree constructor: Could not generate robot model and extract kdl tree" << endl; assert(false);
+    }
+    constructor(my_tree,joint_sensor_names,imu_link_name,serialization,partition);
+}
+#endif
 
 void DynTree::constructor(const KDL::Tree & _tree, 
                           const std::vector<std::string> & joint_sensor_names,
-                      const std::string & imu_link_name,
-                      KDL::CoDyCo::TreeSerialization serialization,
-                      KDL::CoDyCo::TreePartition _partition,
-                      std::vector<KDL::Frame> child_sensor_transforms
+                          const std::string & imu_link_name,
+                          KDL::CoDyCo::TreeSerialization serialization,
+                          KDL::CoDyCo::TreePartition _partition,
+                          std::vector<KDL::Frame> child_sensor_transforms
 )
 {
 int ret;
@@ -105,8 +122,12 @@ int ret;
     
     f_ext = std::vector<KDL::Wrench>(NrOfLinks,KDL::Wrench::Zero());     
         
-    //Create default kinematic traversal (if imu_names is wrong, creating the default one)   
-    ret = undirected_tree.compute_traversal(kinematic_traversal,imu_link_name);
+    //Create default kinematic traversal (if imu_names is wrong, creating the default one)
+    if( imu_link_name != "" ) {
+        ret = undirected_tree.compute_traversal(kinematic_traversal,imu_link_name);
+    } else {
+        ret = undirected_tree.compute_traversal(kinematic_traversal);
+    }
     
     if( ret < 0 ) { std::cerr << "iDynTree constructor: imu_link_name not found" << std::endl; }
     assert(ret == 0);
@@ -135,6 +156,7 @@ int ret;
 
     
     assert(ret == 0);
+    correctly_configure = true;
 }
 
 DynTree::~DynTree() { } ;
@@ -849,7 +871,6 @@ bool DynTree::getAcc(const int link_index, yarp::sig::Vector & acc, const bool l
 
 yarp::sig::Vector DynTree::getBaseForceTorque(int frame_link)
 {
-    bool check = true;
     yarp::sig::Vector ret(6), ret_force(3), ret_torque(3);
     KDL::Wrench ret_kdl;
     if( frame_link == DEFAULT_INDEX_VALUE ) { frame_link = dynamic_traversal.getBaseLink()->getLinkIndex(); }
@@ -899,7 +920,7 @@ yarp::sig::Vector DynTree::getTorques(const std::string & part_name) const
     
 bool DynTree::setContacts(const iCub::skinDynLib::dynContactList & contacts_list)
 {
-    assert(contacts.size() == NrOfDynamicSubGraphs);
+    assert((int)contacts.size() == NrOfDynamicSubGraphs);
     for(int sg = 0; sg < NrOfDynamicSubGraphs; sg++ ) {
         contacts[sg].resize(0);
     }
@@ -1328,7 +1349,7 @@ bool DynTree::getRelativeJacobian(const int jacobian_distal_link, const int jaco
     } else if ( kinematic_traversal.getBaseLink()->getLinkIndex() == jacobian_base_link ) {
         p_traversal = &kinematic_traversal;
     } else {
-       if( rel_jacobian_traversal.getNrOfVisitedLinks() != undirected_tree.getNrOfLinks() ||  rel_jacobian_traversal.getBaseLink()->getLinkIndex() == jacobian_base_link  ) {
+       if( rel_jacobian_traversal.getNrOfVisitedLinks() != (int)undirected_tree.getNrOfLinks() ||  rel_jacobian_traversal.getBaseLink()->getLinkIndex() == jacobian_base_link  ) {
             undirected_tree.compute_traversal(rel_jacobian_traversal,jacobian_base_link);
        }
        p_traversal = &rel_jacobian_traversal;
@@ -1369,8 +1390,8 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
      */
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_mass_matrix(fb_mass_matrix.data(),fb_mass_matrix.rows(),fb_mass_matrix.cols());
     
-    if( fb_jnt_mass_matrix.rows() != (int)(6+undirected_tree.getNrOfDOFs()) 
-        || fb_jnt_mass_matrix.columns() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+    if( fb_jnt_mass_matrix.rows() != (6+undirected_tree.getNrOfDOFs()) 
+        || fb_jnt_mass_matrix.columns() != (6+undirected_tree.getNrOfDOFs()) ) {
         fb_jnt_mass_matrix.resize(6+undirected_tree.getNrOfDOFs());
         SetToZero(fb_jnt_mass_matrix);
     }
@@ -1417,8 +1438,8 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
     //This copy does not exploit the matrix sparsness.. 
     //but I guess that exploiting it would lead to slower code
     assert(fb_jnt_mass_matrix.rows() == fb_jnt_mass_matrix.columns());
-    assert(fb_mass_matrix.rows() == fb_jnt_mass_matrix.rows());
-    assert(fb_mass_matrix.cols() == fb_jnt_mass_matrix.columns());
+    assert(fb_mass_matrix.rows() == (int)fb_jnt_mass_matrix.rows());
+    assert(fb_mass_matrix.cols() == (int)fb_jnt_mass_matrix.columns());
     mapped_mass_matrix = fb_jnt_mass_matrix.data;
     
     return true;
