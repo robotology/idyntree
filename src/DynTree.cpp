@@ -92,7 +92,6 @@ int ret;
     #ifndef NDEBUG
     std::cout << "DynTree serialization " << undirected_tree.getSerialization().toString() << std::endl;
     std::cout << "DynTree partition: " << partition.toString() << std::endl;
-    assert(partition.is_consistent());
     #endif
     //Setting useful constants
     NrOfDOFs = _tree.getNrOfJoints();
