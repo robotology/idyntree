@@ -89,9 +89,11 @@ int ret;
     undirected_tree = KDL::CoDyCo::UndirectedTree(_tree,serialization,_partition);  
     partition = undirected_tree.getPartition();
     
+    #ifndef NDEBUG
     std::cout << "DynTree serialization " << undirected_tree.getSerialization().toString() << std::endl;
     std::cout << "DynTree partition: " << partition.toString() << std::endl;
-    
+    assert(partition.is_consistent());
+    #endif
     //Setting useful constants
     NrOfDOFs = _tree.getNrOfJoints();
     NrOfLinks = _tree.getNrOfSegments();
