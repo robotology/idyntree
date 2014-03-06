@@ -270,6 +270,9 @@ KDL::Wrench DynTree::getMeasuredWrench(int link_id)
 
 void DynTree::buildAb_contacts()
 {
+    #ifndef NDEBUG
+    bool extreme_verbose = false;
+    #endif
     //First calculate the known terms b related to inertial, gravitational and 
     //measured F/T 
     
@@ -281,11 +284,15 @@ void DynTree::buildAb_contacts()
             //This calculation should be done one time in forward kineamtic loop and stored \todo
             b_contacts_subtree[link_nmbr] = Ii*a[link_nmbr]+v[link_nmbr]*(Ii*v[link_nmbr]) - getMeasuredWrench(link_nmbr);
             #ifndef NDEBUG
-            //std::cerr << "link_nmbr : " << link_nmbr << std::endl;
-            //std::cerr << "b_contacts_subtree: " << b_contacts_subtree[link_nmbr] << std::endl;
-            //std::cerr << "a " << a[link_nmbr] << std::endl;
-            //std::cerr << "v " << v[link_nmbr] << std::endl;
-            //std::cerr << "getMeasuredWrench " << getMeasuredWrench(link_nmbr) << std::endl;
+            /*
+            if(extreme_verbose) {
+            std::cerr << "link_nmbr : " << link_nmbr << std::endl;
+            std::cerr << "b_contacts_subtree: " << b_contacts_subtree[link_nmbr] << std::endl;
+            std::cerr << "a " << a[link_nmbr] << std::endl;
+            std::cerr << "v " << v[link_nmbr] << std::endl;
+            std::cerr << "getMeasuredWrench " << getMeasuredWrench(link_nmbr) << std::endl;
+            }
+            */
             #endif
     }
     
@@ -1022,11 +1029,12 @@ bool DynTree::estimateContactForces()
         #endif 
         x_contacts[i] = yarp::math::pinv(A_contacts[i],tol)*b_contacts[i];
         #ifndef NDEBUG
-        //std::string contacts_string = x_contacts[i].toString();
+        /*
+        std::string contacts_string = x_contacts[i].toString();
         
-        //std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
-        //std::cout << x_contacts[i].toString() << std::endl;
-        
+        std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
+        std::cout << x_contacts[i].toString() << std::endl;
+        */
         #endif
     }
     store_contacts_results();
