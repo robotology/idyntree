@@ -1009,23 +1009,27 @@ bool DynTree::kinematicRNEA()
 
 bool DynTree::estimateContactForces()
 {
+    #ifndef NDEBUG
+    std::cout << "DynTree::estimateContactForces " << std::endl;
+    #endif
+    
     double tol = 1e-7; /**< value extracted from old iDynContact */
     buildAb_contacts();
     for(int i=0; i < NrOfDynamicSubGraphs; i++ ) {
         #ifndef NDEBUG
-        /*
+        
         std::cout << "A_contacts " << i << " has size " << A_contacts[i].rows() << " " << A_contacts[i].cols() << std::endl;
         std::cout << A_contacts[i].toString() << std::endl;
         std::cout << "b_contacts " << i << " has size " << b_contacts[i].size() << std::endl;
         std::cout << b_contacts[i].toString() << std::endl;
-        */
+        
         #endif 
         x_contacts[i] = yarp::math::pinv(A_contacts[i],tol)*b_contacts[i];
         #ifndef NDEBUG
-        //std::string contacts_string = x_contacts[i].toString();
+        std::string contacts_string = x_contacts[i].toString();
         
-        //std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
-        //std::cout << x_contacts[i].toString() << std::endl;
+        std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
+        std::cout << x_contacts[i].toString() << std::endl;
         
         #endif
     }
