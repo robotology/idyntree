@@ -46,7 +46,7 @@ namespace CoDyCo {
     {
     public:
         TreeDynParam(const Tree& chain, Vector _grav=Vector::Zero(), const TreeSerialization & _serialization=TreeSerialization());
-        ~TreeDynParam();
+        virtual ~TreeDynParam();
 
         virtual int JntToCoriolis(const JntArray &q, const JntArray &q_dot, JntArray &coriolis);
         virtual int JntToMass(const JntArray &q, JntSpaceInertiaMatrix& H); 

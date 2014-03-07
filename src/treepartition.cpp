@@ -114,7 +114,7 @@ namespace CoDyCo {
         
         /** \todo remove this assumption */
         assert(root->second.children.size() != 0);
-        SegmentMap::const_iterator root_child = root->second.children[0];
+//        SegmentMap::const_iterator root_child = root->second.children[0];
         
          //This should be coherent with the behaviour of UndirectedTree
         if( !isBaseLinkFake(tree) )

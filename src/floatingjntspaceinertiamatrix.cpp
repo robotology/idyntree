@@ -124,7 +124,8 @@ namespace CoDyCo
         return src1.data.isApprox(src2.data,eps);
     }
 
-    bool operator==(const FloatingJntSpaceInertiaMatrix& src1,const FloatingJntSpaceInertiaMatrix& src2){return Equal(src1,src2);};
+    bool operator==(const FloatingJntSpaceInertiaMatrix& src1, const FloatingJntSpaceInertiaMatrix& src2)
+    {return Equal(src1,src2);}
     //bool operator!=(const FloatingJntSpaceInertiaMatrix& src1,const FloatingJntSpaceInertiaMatrix& src2){return Equal(src1,src2);};
 
 }

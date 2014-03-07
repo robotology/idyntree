@@ -137,14 +137,14 @@ std::vector<int> subtreeBaseDynamicsRegressor::getRelativeJunctions()
 }
 
 
-int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &q, 
-                                                            const KDL::JntArray &q_dot, 
-                                                            const KDL::JntArray &q_dotdot,
+int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &,
+                                                            const KDL::JntArray &,
+                                                            const KDL::JntArray &,
                                                             const std::vector<KDL::Frame> & X_dynamic_base,
                                                             const std::vector<KDL::Twist> & v,
                                                             const std::vector<KDL::Twist> & a,
                                                             const std::vector< KDL::Wrench > & measured_wrenches,
-                                                            const KDL::JntArray & measured_torques,
+                                                            const KDL::JntArray &,
                                                             Eigen::MatrixXd & regressor_matrix,
                                                             Eigen::VectorXd & known_terms)
 {

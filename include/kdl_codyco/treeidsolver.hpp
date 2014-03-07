@@ -43,6 +43,9 @@ namespace CoDyCo
     class TreeIdSolver
     {
         public:
+        
+        
+        virtual ~TreeIdSolver() {}
             /** 
              * Calculate inverse dynamics, from joint positions, velocity, acceleration, external forces
              * to joint torques/forces.
@@ -51,7 +54,8 @@ namespace CoDyCo
              * @param q_dot input joint velocities
              * @param q_dotdot input joint accelerations
              *
-             * @param torque output joint torques
+             * @param f_ext external forces
+             * @param torques output joint torques
              * 
              * @return if < 0 something went wrong
              */
@@ -72,8 +76,8 @@ namespace CoDyCo
              *        (proper acceleration, considers also gravitational acceleration)
              * @param f_ext external forces
              *
-             * @param torque output joint torques
-             * @param base_wrench output base wrench
+             * @param torques output joint torques
+             * @param base_force output base wrench
              * 
              * @return if < 0 something went wrong
              */

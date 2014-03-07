@@ -52,7 +52,7 @@ namespace CoDyCo{
          */
         TreeIdSolver_RNE(const Tree& tree,Vector grav=Vector::Zero(),const TreeSerialization & serialization=TreeSerialization());
         
-        ~TreeIdSolver_RNE(){};
+        virtual ~TreeIdSolver_RNE(){};
         
         /**
          * Function to calculate from Cartesian forces to joint torques.
@@ -80,8 +80,8 @@ namespace CoDyCo{
          *        (proper acceleration, considers also gravitational acceleration)
          * @param f_ext external forces
          *
-         * @param torque output joint torques
-         * @param base_wrench output base wrench
+         * @param torques output joint torques
+         * @param base_force output base wrench
          * 
          * @return if < 0 something went wrong
          */

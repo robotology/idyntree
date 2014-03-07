@@ -51,7 +51,7 @@ class torqueRegressor : public DynamicRegressorInterface
     public:
         /** 
          * 
-         * @param reverse_direction if true, reverse the direction of the regressor (root to joint instead of leaf to joint) default:false
+         * @param _reverse_direction if true, reverse the direction of the regressor (root to joint instead of leaf to joint) default:false
          */
         torqueRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree, 
                         const KDL::CoDyCo::FTSensorList & _ft_list,

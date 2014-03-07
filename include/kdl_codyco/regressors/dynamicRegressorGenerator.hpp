@@ -267,8 +267,10 @@ public:
      * @param basis the orthogonal matrix whose columns are a basis of the identifiable subspace
      * @param static_regressor if true, compute the identifiable parameter considering only static poses (default: false)
      * @param fixed_base if true, consider the kinematic base as fixed (i.e. do not vary the position and/or the velocity/acceleration of the kinematic base) 
-     * @param gravity in case of fixed base, get the gravity vector for the fixed kinematic base
+     * @param grav_direction in case of fixed base, get the gravity vector for the fixed kinematic base
      * @param tol the tollerance used in troncating the svd (defaul: max(sigma)*machine_eps*number_of_generated_samples)
+     * @param n_samples
+     * @param verbose
      * 
      * \note This method is not real time safe.
      */
