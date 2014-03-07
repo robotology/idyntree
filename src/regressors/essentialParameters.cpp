@@ -29,7 +29,7 @@ namespace Regressors {
     int calculateEssentialParametersSubspace(DynamicRegressorGenerator & regressor_generator, 
                                              const IBatchDynamicDataset & dataset,
                                              Eigen::MatrixXd & essential_parameters_subspace, 
-                                             Eigen::VectorXd &,
+                                             Eigen::VectorXd & /*sigma*/,
                                              const double tol
                                             ) 
     {        

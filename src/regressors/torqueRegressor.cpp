@@ -125,8 +125,8 @@ std::vector<int> torqueRegressor::getRelativeJunctions()
 }
 
 int torqueRegressor::computeRegressor(const KDL::JntArray &q, 
-                                      const KDL::JntArray &,
-                                      const KDL::JntArray &,
+                                      const KDL::JntArray &/*q_dot*/,
+                                      const KDL::JntArray &/*q_dotdot*/,
                                       const std::vector<KDL::Frame> & X_dynamic_base,
                                       const std::vector<KDL::Twist> & v,
                                       const std::vector<KDL::Twist> & a,

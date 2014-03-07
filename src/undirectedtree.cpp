@@ -32,7 +32,7 @@ namespace KDL {
 namespace CoDyCo {
 
     
-    LinkMap::iterator UndirectedTree::getLink(const std::string& name, bool)
+    LinkMap::iterator UndirectedTree::getLink(const std::string& name, bool /*dummy*/)
     {
         LinkNameMap::iterator ret_value = links_names.find(name);
 
@@ -40,7 +40,7 @@ namespace CoDyCo {
         return ret_value->second;
     }
     
-    JunctionMap::iterator UndirectedTree::getJunction(const std::string& name, bool)
+    JunctionMap::iterator UndirectedTree::getJunction(const std::string& name, bool /*dummy*/)
     {       
         JunctionNameMap::iterator ret_value = junctions_names.find(name);
         #ifndef NDEBUG
