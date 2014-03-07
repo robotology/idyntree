@@ -63,13 +63,16 @@ file(GLOB DIRL_SRC
     "src/regressors/*.cpp" "src/regressors/dataset/*.cpp"
 )
 
+SOURCE_GROUP("Source Files" FILES ${KDL_CODYCO_SRC} ${DIRL_SRC})
+SOURCE_GROUP("Header Files" FILES ${KDL_CODYCO_HPPS})
+
 if(MSVC)
     set(LIB_TYPE STATIC)
 else()
     set(LIB_TYPE SHARED)
 endif()
 
-add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DIRL_SRC})
+add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DIRL_SRC} ${KDL_CODYCO_HPPS})
 
 target_link_libraries(kdl_codyco ${orocos_kdl_LIBRARIES})
 

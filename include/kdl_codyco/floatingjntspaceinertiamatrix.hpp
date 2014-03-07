@@ -161,7 +161,7 @@ namespace CoDyCo
         /**
          * Function to set all the values of the array to 0
          *
-         * @param array
+         * @param matrix
          */
         friend void SetToZero(FloatingJntSpaceInertiaMatrix& matrix);
         /**

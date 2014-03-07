@@ -32,7 +32,7 @@ namespace KDL {
 namespace CoDyCo {
 
     
-    LinkMap::iterator UndirectedTree::getLink(const std::string& name, bool dummy)
+    LinkMap::iterator UndirectedTree::getLink(const std::string& name, bool /*dummy*/)
     {
         LinkNameMap::iterator ret_value = links_names.find(name);
 
@@ -40,7 +40,7 @@ namespace CoDyCo {
         return ret_value->second;
     }
     
-    JunctionMap::iterator UndirectedTree::getJunction(const std::string& name, bool dummy)
+    JunctionMap::iterator UndirectedTree::getJunction(const std::string& name, bool /*dummy*/)
     {       
         JunctionNameMap::iterator ret_value = junctions_names.find(name);
         #ifndef NDEBUG
@@ -165,7 +165,7 @@ namespace CoDyCo {
    
         
         //For loop to add link and joints
-        for( SegmentMap::const_iterator i=sm.begin(); i!=sm.end(); ++i ) {
+        for(i = sm.begin(); i != sm.end(); ++i) {
             const Segment & current_segment =  i->second.segment;
             
             //Add link
@@ -237,7 +237,7 @@ namespace CoDyCo {
         
         
         //For loop to fix references between link and joints
-         for( SegmentMap::const_iterator i=sm.begin(); i!=sm.end(); ++i ) {
+         for(i = sm.begin(); i != sm.end(); ++i) {
             const Segment & current_segment =  i->second.segment;
             
             if( i != virtual_root && i != real_root ) {

@@ -102,7 +102,7 @@ int getKernelSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & 
         return 0;
 }
 
-int getSubSpaceIntersection(const Eigen::MatrixXd & first_subspace, const Eigen::MatrixXd & second_subspace, Eigen::MatrixXd & result, double tol, bool verbose)
+int getSubSpaceIntersection(const Eigen::MatrixXd & first_subspace, const Eigen::MatrixXd & second_subspace, Eigen::MatrixXd & result, double tol, bool /*verbose*/)
 {
     std::cout << "getSubSpaceIntersection" << std::endl;
     
@@ -161,7 +161,7 @@ int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row
     return getRowSpaceBasis(input_matrix,row_space_basis_matrix,tol,verbose,dummy);
 }
     
-int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol, bool verbose, Eigen::VectorXd & sigma)
+int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol, bool /*verbose*/, Eigen::VectorXd & sigma)
 {
     if( input_matrix.rows() == 0 ) {
         row_space_basis_matrix.resize(input_matrix.cols(),0);

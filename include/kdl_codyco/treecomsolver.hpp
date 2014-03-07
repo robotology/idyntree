@@ -35,7 +35,7 @@ namespace CoDyCo
              * @param q_in input joint positions
              * 
              * @param p_out COM in the base link reference frame
-             * @param the id of the part for which the COM has to be calculated, -1 for all the body
+             * @param part_id the id of the part for which the COM has to be calculated, -1 for all the body
              * 
              * @return if < 0 something went wrong
              */

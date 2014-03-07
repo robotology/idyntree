@@ -76,7 +76,7 @@ namespace CoDyCo {
              * Get a copy of the current KDL::Tree, with modified inertial parameters.
              * 
              * @param new_chain_param the inertial parameters vector
-             * @param new_chain a reference to the output chain
+             * @param new_tree a reference to the output chain
              * @return false in case of some error, true otherwise
              */
             bool changeInertialParameters(const Eigen::VectorXd & new_chain_param, Tree& new_tree);

@@ -25,6 +25,8 @@ namespace Regressors {
 class DynamicRegressorInterface {
 
 public:
+    virtual ~DynamicRegressorInterface(){}
+    
     virtual int getNrOfOutputs() = 0;
     
     virtual std::vector<int> getRelativeJunctions() = 0;
