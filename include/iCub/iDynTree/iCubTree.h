@@ -87,6 +87,23 @@ class iCubTree : public DynTree
      */
      iCubTree(iCubTree_version_tag version, iCubTree_serialization_tag serial=SKINDYNLIB_SERIALIZATION,  unsigned int verbose=0, std::string imu_link_name = ICUB_IMU_LINK_NAME  );
 
+    #ifdef CODYCO_USES_URDFDOM
+    /**
+     * Constructor for iCubTree
+     * 
+     * \note the FT sensor serialization is (0) LEFT_ARM (1) RIGHT_ARM (2) LEFT_LEG (3) RIGHT_LEG
+     * \note currently the iCub model is loaded from iCub::iDyn::iCubWholeBody. This is a temporary workaround for initial deployment, 
+     *       while in the final version of iDynTree the structure of the iCub should be loaded from a file description.
+     *       
+     * @param version a iCubTree_version_tag structure for defining the version of the parts composing the iCubTree
+     * @param serial a iCubTree_serialization_tag for defining the serialization (default is SKINDYNLIB_SERIALIZATION)
+     * @param verbose level of verbosity: 0 if no output is requested, 1 to have output messages (default is 0) 
+     * @param imu_link_name name of the link to consider as imu (default: "imu_link")
+     */
+     iCubTree(iCubTree_version_tag version, std::string urdf_file, iCubTree_serialization_tag serial=SKINDYNLIB_SERIALIZATION,  unsigned int verbose=0, std::string imu_link_name = ICUB_IMU_LINK_NAME  );
+    #endif
+
+     
     virtual ~iCubTree();
 };
 

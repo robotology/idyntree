@@ -16,6 +16,11 @@
 
 #include <iCub/skinDynLib/common.h>
 
+#ifdef CODYCO_USES_URDFDOM
+//Urdf import from kdl_format_io
+#include <kdl_format_io/urdf_import.hpp>
+#endif
+
 using namespace iCub::skinDynLib;
 
 namespace iCub {
@@ -83,6 +88,72 @@ iCubTree::iCubTree(iCubTree_version_tag version, iCubTree_serialization_tag seri
     
     return;
 }
+
+
+#ifdef CODYCO_USES_URDFDOM
+iCubTree::iCubTree(iCubTree_version_tag version, std::string urdf_file, iCubTree_serialization_tag serial_tag, unsigned int verbose, std::string imu_link_name)
+{
+    yarp::sig::Vector q_min_yarp, q_max_yarp;
+    KDL::JntArray q_min_kdl, q_max_kdl;
+    //Allocate an old iCubWholeBody object, with right version
+    iCub::iDyn::version_tag ver;
+    ver.head_version = version.head_version;
+    ver.legs_version = version.legs_version;
+    bool ft_feet = version.feet_ft;
+    
+    //std::cout << "Creating iCubTree with head version " << ver.head_version << " and legs version " << ver.legs_version << std::endl;
+    
+    iCub::iDyn::iCubWholeBody icub_idyn(ver);
+    
+    //Convert it to a KDL::Tree (this preserve all the frame of reference, is the conversion to URDF that changes them)
+    KDL::Tree icub_kdl;
+
+    bool ret = kdl_format_io::treeFromUrdfFile(urdf_file,icub_kdl);
+    
+    assert(ret);
+    if( !ret ) {
+        if( verbose ) { std::cerr << "iCubTree: error in costructor" << std::endl; }
+        return;
+    }
+    
+    //Construct F/T sensor name list
+    std::vector< std::string > ft_names(0);
+    std::vector<KDL::Frame> child_sensor_transforms(0);
+    KDL::Frame kdlFrame; 
+    
+    ft_names.push_back("l_arm_ft_sensor");
+    ft_names.push_back("r_arm_ft_sensor");
+    ft_names.push_back("l_leg_ft_sensor");
+    if(ft_feet) {
+        ft_names.push_back("l_foot_ft_sensor");
+    }
+    ft_names.push_back("r_leg_ft_sensor");
+    if(ft_feet) {
+        ft_names.push_back("r_foot_ft_sensor");
+    }
+    
+    //Define an explicit serialization of the links and the DOFs of the iCub
+    //The DOF serialization done in icub_kdl construction is ok
+    KDL::CoDyCo::TreeSerialization serial = KDL::CoDyCo::TreeSerialization(icub_kdl);
+    
+    KDL::CoDyCo::TreePartition icub_partition = get_iCub_partition(serial,ft_feet);
+    
+    this->constructor(icub_kdl,ft_names,imu_link_name,serial,icub_partition);
+    
+    //Set joint limits 
+ 
+    int jjj;
+    q_min_yarp.resize(q_min_kdl.rows());
+    q_max_yarp.resize(q_max_kdl.rows());
+    for(jjj=0; jjj<(int)q_min_kdl.rows(); jjj++) { q_min_yarp(jjj) = q_min_kdl(jjj); }
+    for(jjj=0; jjj<(int)q_max_kdl.rows(); jjj++) { q_max_yarp(jjj) = q_max_kdl(jjj); }
+    
+    this->setJointBoundMin(q_min_yarp);
+    this->setJointBoundMax(q_max_yarp);
+    
+    return;
+}
+#endif
 
 KDL::CoDyCo::TreePartition iCubTree::get_iCub_partition(const KDL::CoDyCo::TreeSerialization & icub_serialization,bool ft_feet)
 {
