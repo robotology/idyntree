@@ -29,7 +29,8 @@ SET(folder_header include/iCub/iDynTree/DynTree.h
                   include/iCub/iDynTree/idyn2kdl_icub.h)
                   
 if(CODYCO_USES_URDFDOM)
-add_definitions(-DCODYCO_USES_URDFDOM)
+     find_package(Boost REQUIRED)
+     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 endif()
         
 SOURCE_GROUP("Source Files" FILES ${folder_source})
@@ -51,7 +52,8 @@ TARGET_LINK_LIBRARIES(${PROJECTNAME} iDyn
                                      ${GSL_LIBRARIES}
                                      ${YARP_LIBRARIES}
                                      ${kdl_codyco_LIBRARIES}
-                                     ${kdl_format_io_LIBRARIES})
+                                     ${kdl_format_io_LIBRARIES}
+				                     ${Boost_LIBRARIES})
 
 
 icub_export_library(${PROJECTNAME} INTERNAL_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
