@@ -1206,6 +1206,73 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & moment
     return true;
 }
 
+bool DynTree::getCentroidalMomentumJacobian(yarp::sig::Matrix & momentum_jac)
+{
+    if( (int)momentum_jacobian.columns() != 6+getNrOfDOFs() ) { momentum_jacobian.resize(6+getNrOfDOFs()); }
+    if( (int)momentum_jac_buffer.columns() != 6+getNrOfDOFs() ) { momentum_jac_buffer.resize(6+getNrOfDOFs()); }
+    
+    if( momentum_jac.rows() != (int)(6) || momentum_jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+        momentum_jac.resize(6,6+undirected_tree.getNrOfDOFs());
+    }
+    
+    
+    computePositions();
+    
+    KDL::RigidBodyInertia base_total_inertia;
+    
+    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jacobian,com_jac_buffer,momentum_jac_buffer,base_total_inertia);
+
+    momentum_jacobian.changeRefFrame(world_base_frame);
+   
+    total_inertia = world_base_frame*base_total_inertia;
+
+    
+    momentum_jacobian.changeRefPoint(total_inertia.getCOG());
+    
+    Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_momentum_jacobian(momentum_jac.data(),momentum_jac.rows(),momentum_jac.cols());
+
+    mapped_momentum_jacobian = momentum_jacobian.data;
+
+    return true;
+}
+
+
+yarp::sig::Vector DynTree::getCentroidalMomentum() 
+{
+    yarp::sig::Vector momentum_yarp(6);
+    yarp::sig::Vector lin_vel(3), ang_vel(3);
+    yarp::sig::Vector com(3);
+    /** \todo add controls like for computePositions() */
+    kinematicRNEA();
+    computePositions();
+    
+    double m = 0;
+    KDL::Wrench mom;
+    KDL::Wrench mom_world;
+    for(int i=0; i < getNrOfLinks(); i++ ) {
+        double m_i = undirected_tree.getLink(i)->getInertia().getMass();
+        mom += (X_dynamic_base[i]*(undirected_tree.getLink(i)->getInertia()*v[i]));
+        m += m_i;
+    }
+    
+    mom_world = world_base_frame*mom;
+    
+    com = getCOM();
+    KDL::Vector com_kdl;
+    
+    YarptoKDL(com,com_kdl);
+   
+    
+    KDL::Wrench mom_out =  mom_world.RefPoint(com_kdl);
+    
+    KDLtoYarp(mom_out.force,lin_vel);
+    KDLtoYarp(mom_out.torque,ang_vel);
+    momentum_yarp.setSubvector(0,lin_vel);
+    momentum_yarp.setSubvector(3,ang_vel);
+    return momentum_yarp;
+}
+
+
 yarp::sig::Vector DynTree::getVelCOM() 
 {
     if( com_yarp.size() != 3 ) { com_yarp.resize(3); }
@@ -1300,6 +1367,7 @@ yarp::sig::Vector DynTree::getMomentum()
     momentum_yarp.setSubvector(3,ang_vel);
     return momentum_yarp;
 }
+
 
 ////////////////////////////////////////////////////////////////////////
 ////// Jacobian related methods

@@ -808,6 +808,12 @@ class DynTree  {
          */
         virtual bool getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & momentum_jac, const std::string & part_name="");
 
+        /**
+         * Temporary function, do not use.
+         * 
+         */
+        virtual bool getCentroidalMomentumJacobian(yarp::sig::Matrix & jac);
+
         
         /**
         * Get Velocity of the Center of Mass of the robot expressed in the world frame
@@ -831,6 +837,8 @@ class DynTree  {
         bool getAccCOM(yarp::sig::Vector & com_acceleration);
         
         yarp::sig::Vector getMomentum();
+        yarp::sig::Vector getCentroidalMomentum();
+        
 
         //@}
         
