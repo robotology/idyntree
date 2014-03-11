@@ -1176,7 +1176,7 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & moment
     
     momentum_jacobian.changeRefFrame(world_base_frame);
     
-    total_inertia = world_base_frame*base_total_inertia;
+    total_inertia = KDL::Frame(world_base_frame.M)*base_total_inertia;
     
     if( total_inertia.getMass() == 0 ) {  std::cerr << "getCOMJacobian error: Tree has no mass " << std::endl; return false; }
     
@@ -1396,6 +1396,7 @@ bool DynTree::getJacobian(const int link_index, yarp::sig::Matrix & jac, bool lo
         abs_jacobian.changeBase((world_base_frame*X_dynamic_base[link_index]).M);
         
         KDL::Vector dist_base_link = (KDL::Frame(world_base_frame.M)*X_dynamic_base[link_index]).p;
+         //KDL::Vector dist_base_link = (KDL::Frame(world_base_frame)*X_dynamic_base[link_index]).p;
         
         //As in iDynTree the base twist is expressed in the world frame, the first six columns are always the identity
         abs_jacobian.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
