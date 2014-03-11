@@ -24,6 +24,8 @@
 #include <kdl_format_io/urdf_import.hpp>
 #endif
 
+#include <kdl/frames_io.hpp>
+
 #ifndef NDEBUG
 #include <kdl/frames_io.hpp>
 #endif
@@ -1228,6 +1230,8 @@ bool DynTree::getCentroidalMomentumJacobian(yarp::sig::Matrix & momentum_jac)
 
     
     momentum_jacobian.changeRefPoint(total_inertia.getCOG());
+    
+    std::cout << "Total inertia test " << total_inertia.RefPoint(total_inertia.getCOG()).getCOG() << std::endl;
     
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_momentum_jacobian(momentum_jac.data(),momentum_jac.rows(),momentum_jac.cols());
 
