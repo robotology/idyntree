@@ -1226,7 +1226,31 @@ bool DynTree::getCentroidalMomentumJacobian(yarp::sig::Matrix & momentum_jac)
     
     getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jacobian,com_jac_buffer,momentum_jac_buffer,base_total_inertia);
 
-    momentum_jacobian.changeRefFrame(KDL::Frame(world_base_frame.M));
+   
+    //Fixed base mass matrix (the n x n bottom right submatrix) is ok in this way
+    //but the other submatrices must be changed, as iDynTree express all velocities/accelerations (also the base one) in world orientation
+    //while kdl_codyco express the velocities in base orientation
+    KDL::Frame world_base_rotation = KDL::Frame(world_base_frame.M);
+    
+    //As the transformation is a rotation, the adjoint trasformation is the same for both twist and wrenches 
+    //Additionally, the inverse of the adjoint matrix is simply the transpose
+    Eigen::Matrix< double, 6, 6> world_base_rotation_adjoint_transformation = KDL::CoDyCo::WrenchTransformationMatrix(world_base_rotation);
+    
+    
+    //Modification of 6x6 left upper submatrix (spatial inertia)
+    // doing some moltiplication by zero (inefficient? ) 
+    //fb_jnt_mass_matrix.data.block<6,6>(0,0) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,6>(0,0); 
+    //fb_jnt_mass_matrix.data.block<6,6>(0,0) = fb_jnt_mass_matrix.data.block<6,6>(0,0)*world_base_rotation_adjoint_transformation.transpose();
+    Eigen::Matrix<double,6,6> buffer_mat_six_six =  world_base_rotation_adjoint_transformation* momentum_jacobian.data.block<6,6>(0,0);
+    momentum_jacobian.data.block<6,6>(0,0) = buffer_mat_six_six*(world_base_rotation_adjoint_transformation.transpose());
+    
+    for(int dof=0; dof < undirected_tree.getNrOfDOFs(); dof++ ) {
+        //fb_jnt_mass_matrix.data.block<6,1>(0,6+dof) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,1>(0,6+dof);
+        //fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = fb_jnt_mass_matrix.data.block<6,1>(0,6+dof).transpose();
+        Eigen::Matrix<double,6,1> buffer_vec_six = world_base_rotation_adjoint_transformation*momentum_jacobian.data.block<6,1>(0,6+dof);
+        momentum_jacobian.data.block<6,1>(0,6+dof) = buffer_vec_six.transpose();
+    }
+
    
     total_inertia = (KDL::Frame(world_base_frame.M))*base_total_inertia;
 
@@ -1526,6 +1550,7 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
         //fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = fb_jnt_mass_matrix.data.block<6,1>(0,6+dof).transpose();
         Eigen::Matrix<double,6,1> buffer_vec_six = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,1>(0,6+dof);
         fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = buffer_vec_six.transpose();
+        fb_jnt_mass_matrix.data.block<6,1>(0,6+dof) = buffer_vec_six;
     }
     
     //std::cout << "fb jnt mass matrix " << std::endl << fb_jnt_mass_matrix.data.block<6,6>(0,0) << std::endl;
