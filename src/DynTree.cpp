@@ -672,8 +672,10 @@ bool DynTree::setKinematicBaseVelAcc(const yarp::sig::Vector &base_vel, const ya
     YarptoKDL(base_vel,base_vel_kdl);
     YarptoKDL(base_classical_acc,base_classical_acc_kdl);
     KDL::CoDyCo::conventionalToSpatialAcceleration(base_classical_acc_kdl,base_vel_kdl,base_spatial_acc_kdl);
-    imu_velocity = world_base_frame.M.Inverse(base_vel_kdl);
-    imu_acceleration = world_base_frame.M.Inverse(base_spatial_acc_kdl);
+    computePositions();
+    imu_velocity = (world_base_frame*X_dynamic_base[kinematic_traversal.getBaseLink()->getLinkIndex()]).M.Inverse(base_vel_kdl);
+    imu_acceleration = (world_base_frame*X_dynamic_base[kinematic_traversal.getBaseLink()->getLinkIndex()]).M.Inverse(base_spatial_acc_kdl);
+    
     return true;
 }
 
@@ -884,7 +886,7 @@ bool DynTree::getAcc(const int link_index, yarp::sig::Vector & acc, const bool l
         return_acc = classical_acc;
     }
     
-    return KDLtoYarp(classical_acc,acc);
+    return KDLtoYarp(return_acc,acc);
 }
 
 yarp::sig::Vector DynTree::getBaseForceTorque(int frame_link)
@@ -1174,7 +1176,7 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & moment
     getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jacobian,com_jac_buffer,momentum_jac_buffer,base_total_inertia,part_id);
 
     
-    momentum_jacobian.changeRefFrame(world_base_frame);
+    momentum_jacobian.changeRefFrame(KDL::Frame(world_base_frame.M));
     
     total_inertia = KDL::Frame(world_base_frame.M)*base_total_inertia;
     
@@ -1224,11 +1226,10 @@ bool DynTree::getCentroidalMomentumJacobian(yarp::sig::Matrix & momentum_jac)
     
     getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jacobian,com_jac_buffer,momentum_jac_buffer,base_total_inertia);
 
-    momentum_jacobian.changeRefFrame(world_base_frame);
+    momentum_jacobian.changeRefFrame(KDL::Frame(world_base_frame.M));
    
-    total_inertia = world_base_frame*base_total_inertia;
+    total_inertia = (KDL::Frame(world_base_frame.M))*base_total_inertia;
 
-    
     momentum_jacobian.changeRefPoint(total_inertia.getCOG());
     
     //std::cout << "Total inertia test " << total_inertia.RefPoint(total_inertia.getCOG()).getCOG() << std::endl;
