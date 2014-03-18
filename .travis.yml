@@ -1,0 +1,52 @@
+language: cpp
+
+compiler:
+  - gcc
+  - clang
+
+env:
+  - IDYNTREE_TRAVIS_BUILD_TYPE=Debug
+  - IDYNTREE_TRAVIS_BUILD_TYPE=Release
+
+install:
+  - sudo sh -c 'echo "deb http://www.icub.org/ubuntu precise contrib/science" > /etc/apt/sources.list.d/icub.list'
+  - sudo apt-get update
+  - sudo apt-get install -qq libeigen3-dev
+  - sudo apt-get --force-yes install icub
+
+before_script:
+  - cmake --version
+  # Build orocos_kinematics_dynamics and install it in a local directory
+  - git clone https://github.com/orocos/orocos_kinematics_dynamics
+  - cd orocos_kinematics_dynamics
+  - git checkout v1.2.1
+  - cd orocos_kdl
+  - mkdir build
+  - cd build
+  - mkdir local_install
+  - cmake -DCMAKE_INSTALL_PREFIX="./local_install" -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
+  - make
+  - make install
+  - cd ../../..
+  # Build kdl_codyco and install it in a local directory
+  - git clone https://github.com/traversaro/kdl_codyco
+  - cd kdl_codyco
+  - mkdir build
+  - cd build
+  - mkdir local_install
+  - cmake -DCMAKE_INSTALL_PREFIX="./local_install" -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
+  - make
+  - make install
+  - cd ../..
+  # Prepare codyco build
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
+
+script:
+  - make
+  - sudo make install
+
+notifications:
+  email:
+    - pegua1@gmail.com
