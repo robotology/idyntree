@@ -18,6 +18,7 @@ install:
 
 before_script:
   - cmake --version
+  - cd ..
   # Build orocos_kinematics_dynamics and install it in a local directory
   - git clone https://github.com/orocos/orocos_kinematics_dynamics
   - cd orocos_kinematics_dynamics
@@ -62,6 +63,7 @@ before_script:
   - sudo make install
   - cd ../..
   # Prepare iDynTree build
+  - cd iDynTree
   - mkdir build
   - cd build
   - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
