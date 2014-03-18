@@ -48,10 +48,9 @@ before_script:
   - cd kdl_format_io
   - mkdir build
   - cd build
-  - mkdir local_install
-  - cmake -DCMAKE_INSTALL_PREFIX="./local_install" -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
+  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
   - make
-  - make install
+  - sudo make install
   - cd ../..
   # Build and install YCM
   - git clone https://github.com/robotology/ycm.git
