@@ -1,0 +1,35 @@
+#!/bin/sh
+set -ev
+
+# Shortcuts.
+git_clone="git clone --quiet --recursive"
+
+#create directoring for compiling urdfdom
+mkdir urdfdom_dir
+cd urdfdom_dir
+
+# Retrieve console_bridge
+echo "--> Compiling console_bridge"
+$git_clone "git://github.com/ros/console_bridge.git"
+cd console_bridge
+cmake ./
+sudo make install
+cd ..
+
+# Retrieve urdfdom_headers
+echo "--> Compiling urdfdom_headers"
+$git_clone "git://github.com/ros/urdfdom_headers.git"
+cd urdfdom_headers
+cmake ./
+sudo make install
+cd ..
+
+# Compile
+echo "--> Compiling urdfdom"
+$git_clone "git://github.com/ros/urdfdom.git"
+cd urdfdom
+cmake ./
+make
+sudo make install
+cd ..
+
