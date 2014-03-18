@@ -12,11 +12,16 @@ find_package(YCM REQUIRED)
 include(YCMDefaultDirs)
 ycm_default_dirs(${VARS_PREFIX})
 
+option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
+
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
 find_package(orocos_kdl REQUIRED)
 find_package(kdl_codyco REQUIRED)
+
+if(IDYNTREE_ENABLE_URDF)
 find_package(kdl_format_io REQUIRED)
+endif()
 
 SET(folder_source src/DynTree.cpp
                   src/yarp_kdl.cpp
