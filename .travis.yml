@@ -52,7 +52,6 @@ before_script:
   - cmake -DCMAKE_INSTALL_PREFIX="./local_install" -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
   - make
   - make install
-  - cd ../..
   # Build and install YCM
   - git clone https://github.com/robotology/ycm.git
   - cd ycm
@@ -61,6 +60,7 @@ before_script:
   - cmake ..
   - make 
   - sudo make install
+  - cd ../..
   # Prepare iDynTree build
   - mkdir build
   - cd build
