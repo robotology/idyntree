@@ -14,6 +14,7 @@ install:
   - sudo apt-get update
   - sudo apt-get install -qq libeigen3-dev
   - sudo apt-get --force-yes install icub
+  - sudo apt-get upgrade
 
 before_script:
   - cmake --version
@@ -32,6 +33,19 @@ before_script:
   # Build kdl_codyco and install it in a local directory
   - git clone https://github.com/traversaro/kdl_codyco
   - cd kdl_codyco
+  - git checkout rovereto
+  - mkdir build
+  - cd build
+  - mkdir local_install
+  - cmake -DCMAKE_INSTALL_PREFIX="./local_install" -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
+  - make
+  - make install
+  - cd ../..
+  # Build kdl_format_io and install it in a local directory
+  - sudo chmod +x ./.travis/build_urdfdom
+  - ./.travis/build_urdfdom
+  - git clone https://github.com/traversaro/kdl_format_io
+  - cd kdl_format_io
   - mkdir build
   - cd build
   - mkdir local_install
