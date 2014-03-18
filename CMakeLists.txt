@@ -118,10 +118,10 @@ ENDIF()
 
 include_directories(include)
 
-
                      
 if(ENABLE_URDF) 
     set(URDF_SRCS src/converters/urdf_export.cpp src/converters/urdf_import.cpp)
+    set(URDF_HPPS include/kdl_format_io/urdf_import.hpp include/kdl_format_io/urdf_export.hpp)
     set(URDF_LIBS ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
 endIF()
 
@@ -131,10 +131,14 @@ if(ENABLE_SYMORO_PAR)
                      src/expression_parser/parser.cpp
                      src/expression_parser/variablelist.cpp)
     set(SYMORO_PAR_SRCS src/converters/symoro_par_import.cpp ${EXPR_PARSER_SRCS})
+    set(SYMORO_PAR_HPPS include/kdl_format_io/symoro_par_import.hpp include/kdl_format_io/symoro_par_model.hpp)
     if(ENABLE_SERIALIZATION_IO)
+        set(SYMORO_PAR_HPPS ${SYMORO_PAR_HPPS} include/kdl_format_io/symoro_par_import_serialization.hpp)
         set(SYMORO_PAR_SRCS ${SYMORO_PAR_SRCS} src/converters/symoro_par_import_serialization.cpp)
     endif()
 endif()
+
+set(KDL_FORMAT_IO_HPPS ${SYMORO_PAR_HPPS} ${URDF_HPPS}) 
 
 add_library(kdl_format_io SHARED ${URDF_SRCS} ${SYMORO_PAR_SRCS})
 
@@ -153,11 +157,26 @@ ENDIF()
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
 #target_link_libraries(check_kdl_export ${kdl_format_io_LIBRARIES} ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
+SET_TARGET_PROPERTIES( kdl_format_io PROPERTIES
+  SOVERSION "${KDL_FORMAT_IO_VERSION_MAJOR}.${KDL_FORMAT_IO_VERSION_MINOR}"
+  VERSION "${KDL_FORMAT_IO_VERSION}"
+  COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
+  INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
+  PUBLIC_HEADER "${KDL_FORMAT_IO_HPPS}"
+  )
 
-INSTALL(TARGETS kdl_format_io DESTINATION lib/)
-INSTALL(DIRECTORY include/kdl_format_io DESTINATION include)
+
+INSTALL(TARGETS kdl_format_io
+  EXPORT kdl_format_io-target
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  PUBLIC_HEADER DESTINATION include/kdl_format_io
+)
 
 
+export(TARGETS kdl_format_io FILE "${PROJECT_BINARY_DIR}/kdl_format_io-target.cmake")
+
+EXPORT(PACKAGE kdl_format_io)
 
 set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES kdl_format_io)
@@ -175,6 +194,13 @@ if (NOT MSVC)
   configure_file("${pkg_conf_file}.in" "${pkg_conf_file}" @ONLY)
   install(FILES ${pkg_conf_file} DESTINATION lib/pkgconfig/ COMPONENT pkgconfig)
 endif()
+
+CONFIGURE_FILE(cmake/kdl_format_io-config.cmake.in
+  ${PROJECT_BINARY_DIR}/kdl_format_io-config.cmake @ONLY)
+
+set(cmake_conf_file "${PROJECT_BINARY_DIR}/kdl_format_io-config.cmake")
+INSTALL(FILES ${cmake_conf_file} DESTINATION share/kdl_format_io)
+INSTALL(EXPORT kdl_format_io-target  DESTINATION share/kdl_format_io)
 
 option(CREATE_TESTS "Create regression tests using CMake" FALSE)
 
