@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.11)
 project(iDynTree CXX)
 
-set(VARS_PREFIX "IDYNTREE")
+set(VARS_PREFIX "iDynTree")
 
 set(${VARS_PREFIX}_MAJOR_VERSION 0)
 set(${VARS_PREFIX}_MINOR_VERSION 0)
