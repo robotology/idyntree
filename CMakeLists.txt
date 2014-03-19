@@ -44,7 +44,7 @@ set_target_properties(idyntree  PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            SOVERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${folder_header}")
                                            
-message("${VARS_PREFIX}_INSTALL_INCLUDEDIR = ${${VARS_PREFIX}_INSTALL_INCLUDEDIR}")
+message("kdl_codyco_INCLUDE_DIRS = ${kdl_codyco_INCLUDE_DIRS}")
 target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
                                             ${skinDynLib_INCLUDE_DIRS}
