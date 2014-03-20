@@ -32,6 +32,10 @@ namespace KDL
 {
 namespace CoDyCo 
 {
+    class FloatingJntSpaceInertiaMatrix;
+    // Equal is friend function, but default arguments for friends are forbidden (§8.3.6.4)
+    bool Equal(const FloatingJntSpaceInertiaMatrix& src1,const FloatingJntSpaceInertiaMatrix& src2,double eps=epsilon);
+    
     /**
      * @brief This class represents an fixed size matrix containing
      * the Floating Base Joint-Space Inertia Matrix of a KDL::Tree.
@@ -174,7 +178,7 @@ namespace CoDyCo
          * @return true if each element of src1 is within eps of the same
 		 * element in src2, or if both src1 and src2 have no data (ie 0==rows())
          */
-        friend bool Equal(const FloatingJntSpaceInertiaMatrix& src1,const FloatingJntSpaceInertiaMatrix& src2,double eps=epsilon);
+        friend bool Equal(const FloatingJntSpaceInertiaMatrix& src1,const FloatingJntSpaceInertiaMatrix& src2,double eps);
 
         friend bool operator==(const FloatingJntSpaceInertiaMatrix& src1,const FloatingJntSpaceInertiaMatrix& src2);
         //friend bool operator!=(const FloatingJntSpaceInertiaMatrix& src1,const FloatingJntSpaceInertiaMatrix& src2);

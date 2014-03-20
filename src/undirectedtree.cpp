@@ -133,7 +133,7 @@ namespace CoDyCo {
             virtual_root = sm.end();
             nrOfLinks = tree.getNrOfSegments()+1;
         } else {
-            real_root = virtual_root->second.children[0];
+            real_root = virtual_root->second->children[0];
             nrOfLinks = tree.getNrOfSegments();
         }
         
@@ -166,7 +166,7 @@ namespace CoDyCo {
         
         //For loop to add link and joints
         for(i = sm.begin(); i != sm.end(); ++i) {
-            const Segment & current_segment =  i->second.segment;
+            const Segment & current_segment =  i->second->segment;
             
             //Add link
             if( i != virtual_root ) {
@@ -238,20 +238,20 @@ namespace CoDyCo {
         
         //For loop to fix references between link and joints
          for(i = sm.begin(); i != sm.end(); ++i) {
-            const Segment & current_segment =  i->second.segment;
+            const Segment & current_segment =  i->second->segment;
             
             if( i != virtual_root && i != real_root ) {
                 //If the father is the root, dont'add any joint
                 //Add segment joint to UndirectedTree
                 const Joint & current_joint = current_segment.getJoint();
                 JunctionMap::iterator undirected_tree_junction = getJunction(current_joint.getName(),true);
-                undirected_tree_junction->parent = getLink(i->second.parent->second.segment.getName());
-                undirected_tree_junction->child = getLink(i->second.segment.getName());
+                undirected_tree_junction->parent = getLink(i->second->parent->second->segment.getName());
+                undirected_tree_junction->child = getLink(i->second->segment.getName());
                 
-                getLink(i->second.parent->first,true)->adjacent_joint.push_back(getJunction(current_joint.getName()));
-                getLink(i->second.parent->first,true)->is_this_parent.push_back(true);
+                getLink(i->second->parent->first,true)->adjacent_joint.push_back(getJunction(current_joint.getName()));
+                getLink(i->second->parent->first,true)->is_this_parent.push_back(true);
                 assert(getLink(i->first,true)->link_nr >= 0);
-                getLink(i->second.parent->first,true)->adjacent_link.push_back(getLink(i->first));
+                getLink(i->second->parent->first,true)->adjacent_link.push_back(getLink(i->first));
                 #ifndef NDEBUG
                     //std::cerr << "\tAdded link " << getLink(i->first,true)->second.link_name <<  " link_nr " << getLink(i->first,true)->second.link_nr << 
                     //             "as neighbour of " <<getLink(i->second.parent->first,true)->second.link_name << " link_nr " << getLink(i->second.parent->first,true)->second.link_nr << std::endl;
@@ -259,8 +259,8 @@ namespace CoDyCo {
 
                 getLink(i->first,true)->adjacent_joint.push_back(getJunction(current_joint.getName()));
                 getLink(i->first,true)->is_this_parent.push_back(false);
-                assert(getLink(i->second.parent->first,true)->link_nr >= 0);
-                getLink(i->first,true)->adjacent_link.push_back(getLink(i->second.parent->first));
+                assert(getLink(i->second->parent->first,true)->link_nr >= 0);
+                getLink(i->first,true)->adjacent_link.push_back(getLink(i->second->parent->first));
                     #ifndef NDEBUG
                     //std::cerr << "\tAdded link " << getLink(i->second.parent->first,true)->second.link_name <<  " link_nr " <<  getLink(i->second.parent->first,true)->second.link_nr << 
                     //             "as neighbour of " <<getLink(i->first,true)->second.link_name << " link_nr " << getLink(i->first,true)->second.link_nr  << std::endl;

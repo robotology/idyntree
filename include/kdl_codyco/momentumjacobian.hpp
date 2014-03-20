@@ -26,6 +26,10 @@ namespace KDL
 {
 namespace CoDyCo
 {
+    class MomentumJacobian;
+    // Equal is friend function, but default arguments for friends are forbidden (§8.3.6.4)
+    bool Equal(const MomentumJacobian& a,const MomentumJacobian& b,double eps=epsilon);
+    
     /**
      * This is basically a copy of the KDL::Jacobian class, the only difference is that 
      * its columns are Wrenches, while in ordinary Jacobians the columns are Twists. This is useful 
@@ -52,7 +56,7 @@ namespace CoDyCo
         bool operator ==(const MomentumJacobian& arg)const;
         bool operator !=(const MomentumJacobian& arg)const;
         
-        friend bool Equal(const MomentumJacobian& a,const MomentumJacobian& b,double eps=epsilon);
+        friend bool Equal(const MomentumJacobian& a,const MomentumJacobian& b,double eps);
         
 
         ~MomentumJacobian();
