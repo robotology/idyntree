@@ -20,34 +20,34 @@ namespace CoDyCo {
         //std::cout << "addDFSrecursive: called with segment " << current_el->second.segment.getName() << " link_cnt " << link_cnt << " fixed_joints_cnt " << fixed_joints_cnt << std::endl; 
         //std::cout << "nr of junctions " << getNrOfJunctions() << " nr of DOFs " << getNrOfDOFs() << std::endl;
         #endif
-        if( current_el->second->segment.getJoint().getType() != Joint::None ) {
-            dofs[current_el->second->q_nr] = current_el->second->segment.getJoint().getName();
-            junctions[current_el->second->q_nr] = current_el->second->segment.getJoint().getName();
+        if (GetTreeElementSegment(current_el->second).getJoint().getType() != Joint::None) {
+            dofs[GetTreeElementQNr(current_el->second)] = GetTreeElementSegment(current_el->second).getJoint().getName();
+            junctions[GetTreeElementQNr(current_el->second)] = GetTreeElementSegment(current_el->second).getJoint().getName();
         } else {
             assert((int)junctions.size() == getNrOfJunctions());
             assert(getNrOfDOFs()+fixed_joints_cnt < (int)junctions.size());
-            junctions[getNrOfDOFs()+fixed_joints_cnt] = current_el->second->segment.getJoint().getName();
+            junctions[getNrOfDOFs()+fixed_joints_cnt] = GetTreeElementSegment(current_el->second).getJoint().getName();
             fixed_joints_cnt++;
         }
         
         links[link_cnt] = current_el->first;
         link_cnt++;
                 
-        for( unsigned int i=0; i < current_el->second->children.size(); i++ ) {
-            addDFSrecursive(current_el->second->children[i],link_cnt,fixed_joints_cnt);
+        for( unsigned int i=0; i < GetTreeElementChildren(current_el->second).size(); i++ ) {
+            addDFSrecursive(GetTreeElementChildren(current_el->second)[i],link_cnt,fixed_joints_cnt);
         }
         
     }
     
     void TreeSerialization::addDFSrecursive_only_fixed(SegmentMap::const_iterator current_el, int & fixed_joints_cnt )
     {
-        if( current_el->second->segment.getJoint().getType() == Joint::None ) {
-            junctions[getNrOfDOFs()+fixed_joints_cnt] = current_el->second->segment.getJoint().getName();
+        if (GetTreeElementSegment(current_el->second).getJoint().getType() == Joint::None) {
+            junctions[getNrOfDOFs() + fixed_joints_cnt] = GetTreeElementSegment(current_el->second).getJoint().getName();
             fixed_joints_cnt++;
         }
         
-        for( unsigned int i=0; i < current_el->second->children.size(); i++ ) {
-            addDFSrecursive_only_fixed(current_el->second->children[i],fixed_joints_cnt);
+        for (unsigned int i=0; i < GetTreeElementChildren(current_el->second).size(); i++) {
+            addDFSrecursive_only_fixed(GetTreeElementChildren(current_el->second)[i],fixed_joints_cnt);
         }
         
     }
@@ -78,7 +78,7 @@ namespace CoDyCo {
          root = tree.getRootSegment();
         
         /** \todo remove this assumption */
-        assert(root->second->children.size() != 0);
+        assert(GetTreeElementChildren(root->second).size() != 0);
 //        SegmentMap::const_iterator root_child = root->second.children[0];
         
         //This should be coherent with the behaviour of UndirectedTree
@@ -88,7 +88,7 @@ namespace CoDyCo {
             links.resize(links.size()+1);
             junctions.resize(junctions.size()+1);
         } else {
-            real_root = root->second->children[0];
+            real_root = GetTreeElementChildren(root->second)[0];
         }
         
         //Add real_root link without including fake joint
@@ -96,8 +96,8 @@ namespace CoDyCo {
         
         link_cnt++;
         
-        for( unsigned int i=0; i < real_root->second->children.size(); i++ ) {
-            addDFSrecursive(real_root->second->children[i],link_cnt,fixed_joints_cnt);
+        for (unsigned int i=0; i < GetTreeElementChildren(real_root->second).size(); i++) {
+            addDFSrecursive(GetTreeElementChildren(real_root->second)[i],link_cnt,fixed_joints_cnt);
         }
         
         assert(this->is_consistent(tree));
@@ -124,8 +124,8 @@ namespace CoDyCo {
             int fixed_joints_cnt = 0;
         
             SegmentMap::const_iterator root = tree.getRootSegment();
-            for( unsigned int i=0; i < root->second->children.size(); i++ ) {
-                addDFSrecursive_only_fixed(root->second->children[i],fixed_joints_cnt);
+            for (unsigned int i=0; i < GetTreeElementChildren(root->second).size(); i++) {
+                addDFSrecursive_only_fixed(GetTreeElementChildren(root->second)[i],fixed_joints_cnt);
             }
         
         }
@@ -220,7 +220,7 @@ namespace CoDyCo {
        SegmentMap::const_iterator root = tree.getRootSegment();
         
        /** \todo remove this assumption */
-       assert(root->second->children.size() != 0);
+       assert(GetTreeElementChildren(root->second).size() != 0);
 //       SegmentMap::const_iterator root_child = root->second.children[0];
         
        //This should be coherent with the behaviour of UndirectedTree
@@ -260,8 +260,8 @@ namespace CoDyCo {
         for(SegmentMap::const_iterator it=seg_map.begin(); it != seg_map.end(); it++) {
             if( it == tree.getRootSegment() ) { continue; }
             //If the segment base is fake, the first junction is not considered in the serialization
-            if( isBaseLinkFake(tree) && it == root->second->children[0] ) { continue; }
-            std::string joint_name = it->second->segment.getJoint().getName();
+            if (isBaseLinkFake(tree) && it == GetTreeElementChildren(root->second)[0]) { continue; }
+            std::string joint_name = GetTreeElementSegment(it->second).getJoint().getName();
             int junction_id = getJunctionID( joint_name );
             int dof_id = getDOFID(joint_name);
             if( junction_id == -1 ) {
@@ -269,24 +269,24 @@ namespace CoDyCo {
                               << "the " << joint_name << " junction in KDL::Tree is not in the serialization" << std::endl; 
                     return false;
             }
-            if( it->second->segment.getJoint().getType() == KDL::Joint::None ) {
-                if( dof_id != -1 ) { 
+            if (GetTreeElementSegment(it->second).getJoint().getType() == KDL::Joint::None) {
+                if (dof_id != -1) {
                     std::cerr << "TreeSerialization::is_consistent returning false: "
                               << "the " << joint_name << "  fixed junction has a dofID" << std::endl; 
                     return false; 
                 }
-                if( junction_id < this->getNrOfDOFs() ) { 
+                if (junction_id < this->getNrOfDOFs()) {
                     std::cerr << "TreeSerialization::is_consistent returning false: "
                               << "the " << joint_name << "  fixed junction has a ID lower than the number of DOFs" << std::endl; 
                     return false; 
                 }
             } else {
-                if( dof_id == -1 ) { 
+                if (dof_id == -1) {
                     std::cerr << "TreeSerialization::is_consistent returning false: "
                               << "the " << joint_name << "  non fixed junction has not a dofID" << std::endl; 
                     return false; 
                 }
-                if( dof_id != junction_id ) { 
+                if (dof_id != junction_id) {
                     std::cerr << "TreeSerialization::is_consistent returning false: "
                               << "the " << joint_name << "  non fixed junction has a dofID different from the junction_id" << std::endl; 
                     return false; 

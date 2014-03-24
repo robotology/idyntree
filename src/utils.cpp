@@ -34,7 +34,7 @@ namespace CoDyCo {
         for( SegmentMap::const_iterator i=sm.begin(); i!=sm.end(); ++i ) {
             //root has no mass
             if( i != root ) {
-               total_mass += i->second->segment.getInertia().getMass();
+               total_mass += GetTreeElementSegment(i->second).getInertia().getMass();
             }
         }
         
@@ -166,7 +166,7 @@ namespace CoDyCo {
     {
         KDL::SegmentMap::const_iterator root = tree.getRootSegment();
         bool return_value;
-        if( root->second->children.size() == 1 && root->second->children[0]->second->segment.getJoint().getType() == Joint::None ) {
+        if (GetTreeElementChildren(root->second).size() == 1 && GetTreeElementSegment(GetTreeElementChildren(root->second)[0]->second).getJoint().getType() == Joint::None) {
             return_value = true;
         } else {
             return_value = false;
