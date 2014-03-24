@@ -11,6 +11,7 @@
 #include <iostream>
 #include <sstream>
 #include "kdl_codyco/utils.hpp"
+#include "kdl_codyco/config.h"
 
 namespace KDL {
 namespace CoDyCo {

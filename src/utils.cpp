@@ -3,17 +3,17 @@
  * Author: Silvio Traversaro
  * website: http://www.codyco.eu
  */
- 
-#include "kdl_codyco/utils.hpp"
-#include "kdl_codyco/treeserialization.hpp"
+
 #include <iostream>
 #include <kdl/kinfam_io.hpp>
 #include <kdl/frames_io.hpp>
 #include <sstream>
 #include <fstream>
-
 #include <Eigen/LU>
 
+#include "kdl_codyco/utils.hpp"
+#include "kdl_codyco/treeserialization.hpp"
+#include "kdl_codyco/config.h"
 
 namespace KDL {
 namespace CoDyCo {

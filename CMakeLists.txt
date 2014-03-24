@@ -31,7 +31,11 @@ if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC) 
 
-find_package(orocos_kdl)
+find_package(orocos_kdl 1.2.3)
+if (NOT orocos_kdl_FOUND)
+    SET(OROCOS_KDL_OLDVERSION On)
+    find_package(orocos_kdl)
+endif(NOT orocos_kdl_FOUND)
 
 #support also for the old version of kdl cmake package
 if(NOT orocos_kdl_FOUND)
@@ -46,12 +50,20 @@ if(NOT orocos_kdl_FOUND)
    endif(NOT Orocos-KDL_FOUND)
 endif(NOT orocos_kdl_FOUND)
 
+if (OROCOS_KDL_OLDVERSION)
+    configure_file(./include/kdl_codyco/config.h.in ./include/kdl_codyco/config.h)
+    message(STATUS "Old orocos kdl version. Adding include file to define compatibility macros.")
+else(OROCOS_KDL_OLDVERSION)
+    file(WRITE ./include/kdl_codyco/config.h "/**\n * Copyright  (C) 2013  CoDyCo Project\n * Author: Silvio Traversaro\n * website: http://www.codyco.eu\n */ ")
+endif (OROCOS_KDL_OLDVERSION)
+
 include_directories(include ${orocos_kdl_INCLUDE_DIRS})
 
 include_directories(include ./include/kdl_codyco/regressors ./include/kdl_codyco/regressors/dataset ${orocos_kdl_INCLUDE_DIRS})
 
 file(GLOB KDL_CODYCO_HPPS
      "include/kdl_codyco/*.hpp"
+     "include/kdl_codyco/config.h"
 )
 
 file(GLOB KDL_CODYCO_SRC
