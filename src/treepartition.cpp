@@ -11,6 +11,7 @@
 #include <iostream>
 #include <sstream>
 #include "kdl_codyco/utils.hpp"
+#include "kdl_codyco/config.h"
 
 namespace KDL {
 namespace CoDyCo {
@@ -113,7 +114,7 @@ namespace CoDyCo {
         SegmentMap::const_iterator root = tree.getRootSegment();
         
         /** \todo remove this assumption */
-        assert(root->second.children.size() != 0);
+        assert(GetTreeElementChildren(root->second).size() != 0);
 //        SegmentMap::const_iterator root_child = root->second.children[0];
         
          //This should be coherent with the behaviour of UndirectedTree

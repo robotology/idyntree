@@ -1,0 +1,18 @@
+/**
+ * Copyright  (C) 2013  CoDyCo Project
+ * Author: Silvio Traversaro
+ * website: http://www.codyco.eu
+ */ 
+
+#ifndef KDL_CODYCO_CONFIG_H
+#define KDL_CODYCO_CONFIG_H
+
+//#cmakedefine OROCOS_KDL_OLDVERSION  
+//#ifdef OROCOS_KDL_OLDVERSION
+#define GetTreeElementChildren(tree_element) (tree_element).children
+#define GetTreeElementParent(tree_element) (tree_element).parent
+#define GetTreeElementQNr(tree_element) (tree_element).q_nr
+#define GetTreeElementSegment(tree_element) (tree_element).segment
+//#endif
+
+#endif
