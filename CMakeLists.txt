@@ -46,9 +46,6 @@ if(NOT orocos_kdl_FOUND)
    endif(NOT Orocos-KDL_FOUND)
 endif(NOT orocos_kdl_FOUND)
 
-find_package(Boost)
-include_directories(${Boost_INCLUDE_DIRS})
-
 include_directories(include ${orocos_kdl_INCLUDE_DIRS})
 
 include_directories(include ./include/kdl_codyco/regressors ./include/kdl_codyco/regressors/dataset ${orocos_kdl_INCLUDE_DIRS})
