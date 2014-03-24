@@ -51,7 +51,7 @@ if(NOT orocos_kdl_FOUND)
 endif(NOT orocos_kdl_FOUND)
 
 if (OROCOS_KDL_OLDVERSION)
-    configure_file(./include/kdl_codyco/config.h.in ./include/kdl_codyco/config.h)
+    configure_file(include/kdl_codyco/config.h.in ${CMAKE_SOURCE_DIR}/include/kdl_codyco/config.h)
     message(STATUS "Old orocos kdl version. Adding include file to define compatibility macros.")
 else(OROCOS_KDL_OLDVERSION)
     file(WRITE ./include/kdl_codyco/config.h "/**\n * Copyright  (C) 2013  CoDyCo Project\n * Author: Silvio Traversaro\n * website: http://www.codyco.eu\n */ ")
