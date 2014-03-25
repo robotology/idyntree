@@ -120,8 +120,8 @@ EXPORT(PACKAGE kdl_codyco)
 CONFIGURE_FILE(cmake/kdl_codyco-config.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake @ONLY)
 CONFIGURE_FILE(cmake/kdl_codyco-config-version.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config-version.cmake @ONLY)
 
-INSTALL(FILES ${PROJECT_BINARY_DIR}/orocos_kdl-config.cmake DESTINATION share/kdl_codyco)
-INSTALL(FILES ${PROJECT_BINARY_DIR}/orocos_kdl-config-version.cmake DESTINATION share/kdl_codyco)
+INSTALL(FILES ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake DESTINATION share/kdl_codyco)
+INSTALL(FILES ${PROJECT_BINARY_DIR}/kdl_codyco-config-version.cmake DESTINATION share/kdl_codyco)
 INSTALL(EXPORT kdl_codyco-target  DESTINATION share/kdl_codyco)
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
