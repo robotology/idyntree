@@ -17,7 +17,7 @@ option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
 find_package(orocos_kdl REQUIRED)
-find_package(kdl_codyco REQUIRED)
+find_package(kdl_codyco 0.0.3 REQUIRED)
 
 if(IDYNTREE_ENABLE_URDF)
 find_package(kdl_format_io REQUIRED)
