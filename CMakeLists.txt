@@ -153,7 +153,7 @@ ENDIF()
 
 IF( ENABLE_URDF AND ENABLE_SYMORO_PAR )
     add_executable(par2urdf src/utils/par2urdf.cpp)
-    target_link_libraries(par2urdf kdl_format_io ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(par2urdf kdl-format-io ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
