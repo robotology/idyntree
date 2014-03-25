@@ -1,26 +1,30 @@
-if (@PKG_NAME@_CONFIG_INCLUDED)
-  return()
-endif()
-set(@PKG_NAME@_CONFIG_INCLUDED TRUE)
+# Locate kdl_format_io install directory
 
-set(@PKG_NAME@_INCLUDE_DIRS @CMAKE_INSTALL_PREFIX@/include)
+# This module defines
+# kdl_format_io_VERSION_MAJOR
+# kdl_format_io_VERSION_MINOR
+# kdl_format_io_VERSION_PATCH
+# kdl_format_io_INCLUDE_DIRS
+# kdl_format_io_LIBRARIES
+# kdl_format_io_FOUND, is set to true
 
-foreach(lib @PKG_LIBRARIES@)
-  set(onelib "${lib}-NOTFOUND")
-  find_library(onelib ${lib}
-    PATHS @CMAKE_INSTALL_PREFIX@/lib
-    NO_DEFAULT_PATH
-    )
-  if(NOT onelib)
-    message(FATAL_ERROR "Library '${lib}' in package @PKG_NAME@ is not installed properly")
-  endif()
-  list(APPEND @PKG_NAME@_LIBRARIES ${onelib})
-endforeach()
 
-foreach(dep @PKG_DEPENDS@)
-  if(NOT ${dep}_FOUND)
-    find_package(${dep})
-  endif()
-  list(APPEND @PKG_NAME@_INCLUDE_DIRS ${${dep}_INCLUDE_DIRS})
-  list(APPEND @PKG_NAME@_LIBRARIES ${${dep}_LIBRARIES})
-endforeach()
+if(NOT kdl_format_io_FOUND)
+  message( "Looking for KDL in: @CMAKE_INSTALL_PREFIX@")
+
+  # Version
+  set(kdl_format_io_VERSION "@KDL_FORMAT_IO_VERSION@")
+  set(kdl_format_io_VERSION_MAJOR "@KDL_FORMAT_IO_VERSION_MAJOR@")
+  set(kdl_format_io_VERSION_MINOR "@KDL_FORMAT_IO_VERSION_MINOR@")
+  set(kdl_format_io_VERSION_PATCH "@KDL_FORMAT_IO_VERSION_PATCH@")
+  set(kdl_format_io_VERSION_TWEAK "")
+
+  set(kdl_format_io_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include""@KDL_FORMAT_IO_INCLUDE_DIRS@" )
+  set(kdl_format_io_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib" "@KDL_FORMAT_IO_LIBRARY_DIRS@" )
+  set(kdl_format_io_LIBRARIES kdl_format_io ""@KDL_FORMAT_IO_LIBRARY_DIRS@")
+  include("@CMAKE_INSTALL_PREFIX@/share/kdl_format_io/kdl_format_io-target.cmake")
+  set(kdl_format_io_FOUND TRUE)
+
+endif(NOT kdl_format_io_FOUND)
+
+
