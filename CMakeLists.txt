@@ -67,11 +67,11 @@ else()
     set(LIB_TYPE SHARED)
 endif()
 
-add_library(kdl_codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DRRL_SRC})
+add_library(kdl-codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DRRL_SRC})
 
-target_link_libraries(kdl_codyco ${orocos_kdl_LIBRARIES})
+target_link_libraries(kdl-codyco ${orocos_kdl_LIBRARIES})
 
-SET_TARGET_PROPERTIES( kdl_codyco PROPERTIES
+SET_TARGET_PROPERTIES( kdl-codyco PROPERTIES
   SOVERSION "${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}"
   VERSION "${KDL_CODYCO_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
@@ -80,7 +80,7 @@ SET_TARGET_PROPERTIES( kdl_codyco PROPERTIES
   )
 
 
-INSTALL(TARGETS kdl_codyco
+INSTALL(TARGETS kdl-codyco
   EXPORT kdl_codyco-target
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -97,7 +97,7 @@ IF(CREATE_TESTS)
     ADD_SUBDIRECTORY(tests)
 ENDIF(CREATE_TESTS)
 
-export(TARGETS kdl_codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
+export(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
 
 EXPORT(PACKAGE kdl_codyco)
 
