@@ -38,7 +38,7 @@ SET(folder_header include/iCub/iDynTree/DynTree.h
 SOURCE_GROUP("Source Files" FILES ${folder_source})
 SOURCE_GROUP("Header Files" FILES ${folder_header})
 
-add_library(idyntree SHARED ${folder_source} ${folder_header})
+add_library(idyntree STATIC ${folder_source} ${folder_header})
 
 set_target_properties(idyntree  PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            SOVERSION ${${VARS_PREFIX}_VERSION}
@@ -66,6 +66,7 @@ install(TARGETS idyntree
         EXPORT iDynTree
         RUNTIME DESTINATION "${${VARS_PREFIX}_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT shlib
+        ARCHIVE DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT lib
         PUBLIC_HEADER DESTINATION "${${VARS_PREFIX}_INSTALL_INCLUDEDIR}/iCub/iDynTree" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree)
