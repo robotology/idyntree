@@ -13,6 +13,7 @@ include(YCMDefaultDirs)
 ycm_default_dirs(${VARS_PREFIX})
 
 option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
+option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
 
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
@@ -38,7 +39,19 @@ SET(folder_header include/iCub/iDynTree/DynTree.h
 SOURCE_GROUP("Source Files" FILES ${folder_source})
 SOURCE_GROUP("Header Files" FILES ${folder_header})
 
-add_library(idyntree STATIC ${folder_source} ${folder_header})
+if(MSVC)
+    message(STATUS "Building iDynTree as a shared library is not currently supported on Windows")
+    set(IDYNTREE_SHARED_LIBRARY FALSE)
+endif()
+
+if(IDYNTREE_SHARED_LIBRARY)
+    set(LIB_TYPE SHARED)
+else()
+    set(LIB_TYPE STATIC)
+endif()
+
+
+add_library(idyntree ${LIB_TYPE} ${folder_source} ${folder_header})
 
 set_target_properties(idyntree  PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            SOVERSION ${${VARS_PREFIX}_VERSION}
