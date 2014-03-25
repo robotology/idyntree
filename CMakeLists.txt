@@ -52,7 +52,7 @@ endif(NOT orocos_kdl_FOUND)
 
 
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS})
-set(KDL_FORMAT_IO_INCLUDE_DIRS "${KDL_FORMAT_IO_INCLUDE_DIRS} " ${orocos_kdl_INCLUDE_DIRS})
+set(KDL_FORMAT_IO_INCLUDE_DIRS "${KDL_FORMAT_IO_INCLUDE_DIRS}" ${orocos_kdl_INCLUDE_DIRS})
 
 IF( ENABLE_URDF ) 
     find_package(TinyXML)
@@ -101,9 +101,9 @@ IF(ENABLE_SERIALIZATION_IO)
         set(ENABLE_SERIALIZATION_IO FALSE)
     ELSE()
          include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
-         set(KDL_FORMAT_IO_INCLUDE_DIRS "${KDL_FORMAT_IO_INCLUDE_DIRS} " ${kdl_codyco_INCLUDE_DIRS})
+         set(KDL_FORMAT_IO_INCLUDE_DIRS ${KDL_FORMAT_IO_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
          link_directories(${kdl_codyco_LIBRARY_DIRS})
-         set(KDL_FORMAT_IO_LIBRARY_DIRS "${KDL_FORMAT_IO_LIBRARY_DIRS} " ${kdl_codyco_LIBRARY_DIRS})
+         set(KDL_FORMAT_IO_LIBRARY_DIRS ${KDL_FORMAT_IO_LIBRARY_DIRS} ${kdl_codyco_LIBRARY_DIRS})
     ENDIF()
 ENDIF()
 
@@ -115,10 +115,10 @@ if(ENABLE_URDF)
     include_directories(SYSTEM ${urdfdom_INCLUDE_DIRS})
     include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS})
     include_directories(SYSTEM ${console_bridge_INCLUDE_DIRS})
-    set(KDL_FORMAT_IO_INCLUDE_DIRS "${KDL_FORMAT_IO_INCLUDE_DIRS} " ${TinyXML_INCLUDE_DIRS} ${urdfdom_INCLUDE_DIRS} ${urdfdom_headers_INCLUDE_DIRS} ${console_bridge_INCLUDE_DIRS})
+    set(KDL_FORMAT_IO_INCLUDE_DIRS "${KDL_FORMAT_IO_INCLUDE_DIRS}" ${TinyXML_INCLUDE_DIRS} ${urdfdom_INCLUDE_DIRS} ${urdfdom_headers_INCLUDE_DIRS} ${console_bridge_INCLUDE_DIRS})
 
     link_directories(${console_bridge_LIBRARY_DIRS})
-    set(KDL_FORMAT_IO_LIBRARY_DIRS "${KDL_FORMAT_IO_LIBRARY_DIRS} " ${console_bridge_LIBRARY_DIRS})
+    set(KDL_FORMAT_IO_LIBRARY_DIRS "${KDL_FORMAT_IO_LIBRARY_DIRS}" ${console_bridge_LIBRARY_DIRS})
 
     set(URDF_SRCS src/converters/urdf_export.cpp src/converters/urdf_import.cpp)
     set(URDF_HPPS include/kdl_format_io/urdf_import.hpp include/kdl_format_io/urdf_export.hpp)
@@ -147,7 +147,7 @@ IF(ENABLE_SERIALIZATION_IO)
     set(KDL_FORMAT_IO_LIBRARIES ${kdl_codyco_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ELSE()
     target_link_libraries(kdl-format-io ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
-    set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
+    set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
 
