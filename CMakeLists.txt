@@ -117,8 +117,8 @@ EXPORT(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
 
 EXPORT(PACKAGE kdl_codyco)
 
-CONFIGURE_FILE(cmake/kdl_codyco-config.cmake.in ${PROJECT_BINARY_DIR}/orocos_kdl-config.cmake @ONLY)
-CONFIGURE_FILE(cmake/kdl_codyco-config-version.cmake.in ${PROJECT_BINARY_DIR}/orocos_kdl-config-version.cmake @ONLY)
+CONFIGURE_FILE(cmake/kdl_codyco-config.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake @ONLY)
+CONFIGURE_FILE(cmake/kdl_codyco-config-version.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config-version.cmake @ONLY)
 
 INSTALL(FILES ${PROJECT_BINARY_DIR}/orocos_kdl-config.cmake DESTINATION share/kdl_codyco)
 INSTALL(FILES ${PROJECT_BINARY_DIR}/orocos_kdl-config-version.cmake DESTINATION share/kdl_codyco)
