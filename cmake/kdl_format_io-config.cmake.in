@@ -21,7 +21,7 @@ if(NOT kdl_format_io_FOUND)
 
   set(kdl_format_io_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include""@KDL_FORMAT_IO_INCLUDE_DIRS@" )
   set(kdl_format_io_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib" "@KDL_FORMAT_IO_LIBRARY_DIRS@" )
-  set(kdl_format_io_LIBRARIES kdl_format_io ""@KDL_FORMAT_IO_LIBRARY_DIRS@")
+  set(kdl_format_io_LIBRARIES kdl_format_io "@KDL_FORMAT_IO_LIBRARY_DIRS@")
   include("@CMAKE_INSTALL_PREFIX@/share/kdl_format_io/kdl_format_io-target.cmake")
   set(kdl_format_io_FOUND TRUE)
 
