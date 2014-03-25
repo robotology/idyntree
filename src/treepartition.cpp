@@ -235,6 +235,7 @@ namespace CoDyCo {
     {
         int local_index;
         
+        assert(ID_map.size() == parts.size());
         std::map<int,int>::const_iterator it = ID_map.find(part_ID);
         
         if( it == ID_map.end() ) {
