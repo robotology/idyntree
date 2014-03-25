@@ -10,7 +10,7 @@
 
 
 if(NOT kdl_codyco_FOUND)
-    message( "Looking for KDL in: @CMAKE_INSTALL_PREFIX@")
+  message( "Looking for KDL in: @CMAKE_INSTALL_PREFIX@")
 
   # Version
   set(kdl_codyco_VERSION "@KDL_CODYCO_VERSION@")

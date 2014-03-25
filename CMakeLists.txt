@@ -1,3 +1,6 @@
+#
+# Test CMake version
+#
 cmake_minimum_required( VERSION 2.8 FATAL_ERROR )
 set(PROJECT_NAME kdl_codyco)
 project (${PROJECT_NAME} CXX)
@@ -10,7 +13,6 @@ set (KDL_CODYCO_VERSION ${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}.
 
 message (STATUS "${PROJECT_NAME} version ${KDL_CODYCO_VERSION}")
 
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 SET( PROJ_SOURCE_DIR ${kdl_codyco_SOURCE_DIR} )
 SET( PROJ_BINARY_DIR ${kdl_codyco_BINARY_DIR} )
 
@@ -103,25 +105,23 @@ INSTALL(TARGETS kdl-codyco
   PUBLIC_HEADER DESTINATION include/kdl_codyco
 )
 
-# --------------------------------
-INSTALL(DIRECTORY include/kdl_codyco DESTINATION include) 
 
-option(CREATE_TESTS "Create regression tests using CMake" FALSE)
+OPTION(CREATE_TESTS "Create regression tests using CMake" FALSE)
 
 IF(CREATE_TESTS)
     enable_testing()
     ADD_SUBDIRECTORY(tests)
 ENDIF(CREATE_TESTS)
 
-export(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
+EXPORT(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
 
 EXPORT(PACKAGE kdl_codyco)
 
-CONFIGURE_FILE(cmake/kdl_codyco-config.cmake.in
-  ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake @ONLY)
+CONFIGURE_FILE(cmake/kdl_codyco-config.cmake.in ${PROJECT_BINARY_DIR}/orocos_kdl-config.cmake @ONLY)
+CONFIGURE_FILE(cmake/kdl_codyco-config-version.cmake.in ${PROJECT_BINARY_DIR}/orocos_kdl-config-version.cmake @ONLY)
 
-set(cmake_conf_file "${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake")
-INSTALL(FILES ${cmake_conf_file} DESTINATION share/kdl_codyco)
+INSTALL(FILES ${PROJECT_BINARY_DIR}/orocos_kdl-config.cmake DESTINATION share/kdl_codyco)
+INSTALL(FILES ${PROJECT_BINARY_DIR}/orocos_kdl-config-version.cmake DESTINATION share/kdl_codyco)
 INSTALL(EXPORT kdl_codyco-target  DESTINATION share/kdl_codyco)
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
