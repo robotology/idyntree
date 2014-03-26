@@ -120,8 +120,9 @@ Joint toKdl(boost::shared_ptr<urdf::Joint> jnt)
 RigidBodyInertia toKdl(boost::shared_ptr<urdf::Inertial> i)
 {
   Frame origin = toKdl(i->origin);
+  // kdl and urdf both specify the com position in the reference frame of the link
   // kdl specifies the inertia in the reference frame of the link, the urdf specifies the inertia in the inertia reference frame
-  return  RigidBodyInertia(i->mass, origin.p, origin.M *RotationalInertia(i->ixx, i->iyy, i->izz, i->ixy, i->ixz, i->iyz));
+  return  origin.M *RigidBodyInertia(i->mass, origin.p, RotationalInertia(i->ixx, i->iyy, i->izz, i->ixy, i->ixz, i->iyz));
 }
 
 
