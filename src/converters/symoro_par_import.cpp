@@ -43,6 +43,7 @@
 #include <fstream>
 #include <algorithm>
 #include <utility>
+#include <kdl/tree.hpp>
 
 using namespace KDL;
 using namespace std;

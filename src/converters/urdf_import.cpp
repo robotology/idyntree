@@ -39,7 +39,8 @@
 #include <urdf_parser/urdf_parser.h>
 #include <console_bridge/console.h>
 #include <fstream>
-#include <iostream>
+#include <kdl/tree.hpp>
+#include <tinyxml.h>
 
 using namespace std;
 using namespace KDL;

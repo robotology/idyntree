@@ -24,6 +24,10 @@
 
 //#include "constants.h"
 #include "error.h"
+#include <cstdio>
+#include <cstdarg>
+#include <cstring>
+
 
 using namespace std;
 
@@ -43,7 +47,7 @@ Error::Error(const int row, const int col, const int id, ...)
     const char* msg_desc = msgdesc(id);
 
     va_list args;
-    va_start(args, msg_desc);
+    va_start(args, id);
     vsnprintf(msg, sizeof(msg)-1, msg_desc, args);
     msg[sizeof(msg)-1] = '\0';
     va_end(args);

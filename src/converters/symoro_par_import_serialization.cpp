@@ -43,6 +43,8 @@
 #include <fstream>
 #include <algorithm>
 #include <utility>
+#include <kdl/tree.hpp>
+#include <kdl_codyco/treeserialization.hpp>
 
 using namespace KDL;
 using namespace std;

@@ -34,7 +34,11 @@ option(ENABLE_SYMORO_PAR "Enable support for SYMORO par input" TRUE)
 ## KDL::CoDyCo::TreeSerialization support
 option(ENABLE_SERIALIZATION_IO "Enable support for parsing and writing serialization (need kdl_codyco)" TRUE)
 
-find_package(orocos_kdl REQUIRED)
+find_package(orocos_kdl 1.2.3 QUIET)
+if (NOT orocos_kdl_FOUND)
+    SET(OROCOS_KDL_OLDVERSION On)
+    find_package(orocos_kdl REQUIRED)
+endif(NOT orocos_kdl_FOUND)
 
 #support also for the old version of kdl cmake package
 if(NOT orocos_kdl_FOUND)
@@ -49,6 +53,12 @@ if(NOT orocos_kdl_FOUND)
    endif(NOT Orocos-KDL_FOUND)
 endif(NOT orocos_kdl_FOUND)
 
+if (OROCOS_KDL_OLDVERSION)
+    configure_file(include/kdl_format_io/config.h.in ${CMAKE_SOURCE_DIR}/include/kdl_format_io/config.h)
+    message(STATUS "Old orocos kdl version. Adding include file to define compatibility macros.")
+else(OROCOS_KDL_OLDVERSION)
+    file(WRITE include/kdl_format_io/config.h "/**\n * Copyright  (C) 2013  CoDyCo Project\n * Author: Silvio Traversaro\n * website: http://www.codyco.eu\n */ ")
+endif (OROCOS_KDL_OLDVERSION)
 
 
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS})
@@ -140,14 +150,14 @@ endif()
 
 set(KDL_FORMAT_IO_HPPS ${SYMORO_PAR_HPPS} ${URDF_HPPS}) 
 
-add_library(kdl-format-io SHARED ${URDF_SRCS} ${SYMORO_PAR_SRCS})
+add_library(kdl-format-io SHARED ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS})
 
 IF(ENABLE_SERIALIZATION_IO)
-    target_link_libraries(kdl-format-io ${kdl_codyco_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
-    set(KDL_FORMAT_IO_LIBRARIES ${kdl_codyco_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(kdl-format-io ${kdl_codyco_LIBRARIES} ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
+    set(KDL_FORMAT_IO_LIBRARIES ${kdl_codyco_LIBRARIES} ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ELSE()
-    target_link_libraries(kdl-format-io ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
-    set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(kdl-format-io ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
 
