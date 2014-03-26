@@ -40,6 +40,7 @@
 #include "kdl_format_io/symoro_par_import.hpp"
 
 #include "kdl_format_io/urdf_export.hpp"
+#include <kdl/tree.hpp>
 
 using namespace KDL;
 using namespace std;
