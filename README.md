@@ -43,10 +43,6 @@ It is possible to install it from the [official repository](https://github.com/o
 ```bash
 git clone https://github.com/orocos/orocos_kinematics_dynamics
 ```
-If instead you use a Windows enviroment, please download this fork:
-```bash
-git clone https://github.com/traversaro/orocos_kinematics_dynamics
-```
 For example, on Linux then the installation can be completed with the following commands:
 ```
 cd orocos_kinematics_dynamics/orocos_kdl
