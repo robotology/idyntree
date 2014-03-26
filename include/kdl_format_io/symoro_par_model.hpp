@@ -40,6 +40,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <vector>
 
 namespace kdl_format_io {
 
