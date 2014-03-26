@@ -34,7 +34,7 @@ option(ENABLE_SYMORO_PAR "Enable support for SYMORO par input" TRUE)
 ## KDL::CoDyCo::TreeSerialization support
 option(ENABLE_SERIALIZATION_IO "Enable support for parsing and writing serialization (need kdl_codyco)" TRUE)
 
-find_package(orocos_kdl 1.2.3)
+find_package(orocos_kdl 1.2.3 QUIET)
 if (NOT orocos_kdl_FOUND)
     SET(OROCOS_KDL_OLDVERSION On)
     find_package(orocos_kdl REQUIRED)
