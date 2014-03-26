@@ -38,10 +38,16 @@
 #ifndef KDL_IMPORT_H
 #define KDL_IMPORT_H
 
-#include <kdl/tree.hpp>
 #include <string>
-#include <urdf_model/model.h>
-#include <tinyxml.h>
+
+class TiXmlDocument;
+namespace urdf {
+    class ModelInterface;
+}
+
+namespace KDL {
+    class Tree;
+}
 
 namespace kdl_format_io{
 

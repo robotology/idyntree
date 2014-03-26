@@ -37,13 +37,11 @@
 #ifndef SYMORO_PAR_MODEL_H
 #define SYMORO_PAR_MODEL_H
 
-#include <kdl/tree.hpp>
 #include <string>
 #include <sstream>
 #include <iostream>
-#include <boost/iterator/iterator_concepts.hpp>
 
-namespace kdl_format_io{
+namespace kdl_format_io {
 
 /**
  * Class for representing the content of a SyMoRo PAR file (only geometric parameters for now)

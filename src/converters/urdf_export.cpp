@@ -40,10 +40,15 @@
 #include <console_bridge/console.h>
 #include <iostream>
 #include <urdf_parser/urdf_parser.h>
+#include <tinyxml.h>
+#include <kdl/tree.hpp>
+#include <urdf_model/model.h>
+#include <kdl/joint.hpp>
+#include "kdl_format_io/config.h"
 
 using namespace std;
 
-namespace kdl_format_io{
+namespace kdl_format_io {
 
 // construct vector
 urdf::Vector3 toUrdf(const KDL::Vector & v) 
@@ -172,7 +177,7 @@ bool treeToUrdfFile(const string& file, const KDL::Tree& tree, const std::string
 {
   TiXmlDocument * urdf_xml;
   if( !treeToUrdfXml(urdf_xml, tree, robot_name) ) return false;
-  return urdf_xml->SaveFile(file);
+    return urdf_xml->SaveFile(file);
 }
 
 /*
@@ -237,7 +242,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
         //The fake root segment has no joint to add
         if( seg->first != root_seg->first ) {
             KDL::Joint jnt;
-            jnt = seg->second.segment.getJoint();
+            jnt = GetTreeElementSegment(seg->second).getJoint();
             if (robot_model.getJoint(jnt.getName()))
             {
                 logError("joint '%s' is not unique.", jnt.getName().c_str());
@@ -250,14 +255,14 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
                 boost::shared_ptr<urdf::Link> link = robot_model.links_[seg->first];
                 //This variable will be set by toUrdf
                 KDL::Frame H_new_old_successor;
-                KDL::Frame H_new_old_predecessor = getH_new_old(seg->second.parent->second.segment);
+                KDL::Frame H_new_old_predecessor = getH_new_old(GetTreeElementSegment(GetTreeElementParent(seg->second)->second));
                 joint.reset(new urdf::Joint());
                 
                 //convert joint
-                *joint = toUrdf(jnt,seg->second.segment.getFrameToTip(),H_new_old_predecessor,H_new_old_successor);
+                *joint = toUrdf(jnt, GetTreeElementSegment(seg->second).getFrameToTip(),H_new_old_predecessor,H_new_old_successor);
                 
                 //insert parent
-                joint->parent_link_name = seg->second.parent->first;
+                joint->parent_link_name = GetTreeElementParent(seg->second)->first;
                 
                 //insert child
                 joint->child_link_name = seg->first;
@@ -268,7 +273,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
                 
                 //add inertial, taking in account an eventual change in the link frame
                 link->inertial.reset(new urdf::Inertial());
-                *(link->inertial) = toUrdf(H_new_old_successor*seg->second.segment.getInertia());
+                *(link->inertial) = toUrdf(H_new_old_successor * GetTreeElementSegment(seg->second).getInertia());
             }
         }
         

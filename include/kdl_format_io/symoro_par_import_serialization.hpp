@@ -37,13 +37,18 @@
 #ifndef SYMORO_PAR_IMPORT_SERIALIZATION_H
 #define SYMORO_PAR_IMPORT_SERIALIZATION_H
 
-#include <kdl/tree.hpp>
-#include <kdl_codyco/treeserialization.hpp>
-
 #include <string>
 
 #include "symoro_par_import.hpp"
 #include "symoro_par_model.hpp"
+
+namespace KDL {
+    class Tree;
+    
+    namespace CoDyCo {
+        class TreeSerialization;
+    }
+}
 
 namespace kdl_format_io{
 

@@ -37,12 +37,15 @@
 #ifndef SYMORO_PAR_IMPORT_H
 #define SYMORO_PAR_IMPORT_H
 
-#include <kdl/tree.hpp>
 #include <string>
 
 #include "symoro_par_model.hpp"
 
-namespace kdl_format_io{
+namespace KDL {
+    class Tree;
+}
+
+namespace kdl_format_io {
 
 /** Constructs a KDL tree from a .par file, given the file name
  *  The .par file is produced by the Symoro+ software 
