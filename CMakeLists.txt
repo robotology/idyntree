@@ -65,7 +65,10 @@ include_directories(include ./include/kdl_codyco/regressors ./include/kdl_codyco
 
 file(GLOB KDL_CODYCO_HPPS
      "include/kdl_codyco/*.hpp"
-     "include/kdl_codyco/config.h"
+ )
+
+file (GLOB KDL_CODYCO_PRIVATE_INCLUDES
+    "include/kdl_codyco/config.h"
 )
 
 file(GLOB KDL_CODYCO_SRC
@@ -77,7 +80,8 @@ file(GLOB DIRL_SRC
 )
 
 SOURCE_GROUP("Source Files" FILES ${KDL_CODYCO_SRC} ${DIRL_SRC})
-SOURCE_GROUP("Header Files" FILES ${KDL_CODYCO_HPPS})
+SOURCE_GROUP("Header Files" FILES ${KDL_CODYCO_HPPS} ${KDL_CODYCO_PRIVATE_INCLUDES})
+
 
 if(MSVC)
     set(LIB_TYPE STATIC)
@@ -85,11 +89,11 @@ else()
     set(LIB_TYPE SHARED)
 endif()
 
-add_library(kdl-codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DIRL_SRC} ${KDL_CODYCO_HPPS})
+add_library(kdl-codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DIRL_SRC} ${KDL_CODYCO_HPPS} ${KDL_CODYCO_PRIVATE_INCLUDES})
 
 target_link_libraries(kdl-codyco ${orocos_kdl_LIBRARIES})
 
-SET_TARGET_PROPERTIES( kdl-codyco PROPERTIES
+SET_TARGET_PROPERTIES(kdl-codyco PROPERTIES
   SOVERSION "${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}"
   VERSION "${KDL_CODYCO_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
