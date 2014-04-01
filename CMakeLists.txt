@@ -14,6 +14,7 @@ ycm_default_dirs(${VARS_PREFIX})
 
 option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
+option(IDYNTREE_BUILD_TESTS "Compile iDynTree tests" TRUE)
 
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
@@ -53,7 +54,7 @@ endif()
 
 add_library(idyntree ${LIB_TYPE} ${folder_source} ${folder_header})
 
-set_target_properties(idyntree  PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
+set_target_properties(idyntree PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            SOVERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${folder_header}")
                                            
@@ -68,7 +69,7 @@ target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR
                                             ${Eigen3_INCLUDE_DIR}
                                             ${kdl_format_io_INCLUDE_DIRS})
                                             
-target_link_libraries(idyntree       iDyn
+target_link_libraries(idyntree iDyn
                                      ${GSL_LIBRARIES}
                                      ${YARP_LIBRARIES}
                                      ${kdl_codyco_LIBRARIES}
@@ -85,10 +86,15 @@ install(TARGETS idyntree
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree)
 
 include(InstallBasicPackageFiles)
-install_basic_package_files(iDynTree    VARS_PREFIX ${VARS_PREFIX}
+install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
                                         VERSION ${${VARS_PREFIX}_VERSION}
                                         COMPATIBILITY SameMajorVersion
                                         TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
                                         NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 
 include(AddUninstallTarget)
+
+if(IDYNTREE_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif(IDYNTREE_BUILD_TESTS)
