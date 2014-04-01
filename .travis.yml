@@ -66,11 +66,12 @@ before_script:
   - cd iDynTree
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
+  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_BUILD_TESTS:BOOL=ON ..
 
 script:
   - make
   - sudo make install
+  - ctest -V
 
 notifications:
   email:
