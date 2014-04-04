@@ -117,11 +117,7 @@ IF(CREATE_TESTS)
     ADD_SUBDIRECTORY(tests)
 ENDIF(CREATE_TESTS)
 
-<<<<<<< HEAD
-export(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
-=======
 EXPORT(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
->>>>>>> rovereto
 
 EXPORT(PACKAGE kdl_codyco)
 
