@@ -1,5 +1,5 @@
 #include <kdl_codyco/utils.hpp>
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 
 #include <kdl_codyco/rnea_loops.hpp>
 #include <kdl_codyco/position_loops.hpp>
@@ -7,19 +7,19 @@
 #include <kdl/rigidbodyinertia.hpp>
 #include <kdl/frames_io.hpp>
 
-#include <drrl/dynamicRegressorGenerator.hpp>
+#include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
 
 #include <kdl_codyco/regressor_loops.hpp>
 
 #include <kdl_codyco/regressor_utils.hpp>
 
-
-
 #include "test_models.hpp"
+
+#include <ctime>
 
 using namespace KDL;
 using namespace KDL::CoDyCo;
-using namespace DRRL;
+using namespace KDL::CoDyCo::Regressors;
 
 double random_double()
 {
@@ -28,32 +28,38 @@ double random_double()
 
 int main()
 {    
+    srand(time(NULL));
+    
     Tree test_tree = TestHumanoid();
     
-    //Creating relative TreeGraph
-    TreeGraph tree_graph(test_tree);
+    //Creating relative UndirectedTree
+    UndirectedTree undirected_tree(test_tree);
     
     JntArray q,dq,ddq,torques;
     KDL::Twist base_vel, base_acc;
     Wrench base_wrench;
     std::vector<Twist> v,a;
     std::vector<Wrench> f,f_ext;
-    std::vector<Frame> X_dynamic_base(tree_graph.getNrOfLinks());
+    std::vector<Frame> X_dynamic_base(undirected_tree.getNrOfLinks());
     
     //arbitrary traversal
     std::string kinematic_base = "lleg_seg4";
     Traversal kinematic_traversal;
-    tree_graph.compute_traversal(kinematic_traversal,kinematic_base);
+    undirected_tree.compute_traversal(kinematic_traversal,kinematic_base);
     Traversal dynamic_traversal;
     
-    //It is necessary to use a dynamic base that is not in the considered subtree for the regressors
-    tree_graph.compute_traversal(dynamic_traversal,"rleg_seg8");
-    //tree_graph.compute_traversal(dynamic_traversal);
-    q = dq = ddq = torques = JntArray(tree_graph.getNrOfDOFs());
-    v = a = std::vector<Twist>(tree_graph.getNrOfLinks());
-    f = f_ext = std::vector<Wrench>(tree_graph.getNrOfLinks(),KDL::Wrench::Zero());
+    bool consider_ft_offsets = true;
+
     
-    for(int i=0; i < tree_graph.getNrOfDOFs(); i++ )
+    //It is necessary to use a dynamic base that is not in the considered subtree for the regressors
+    std::string dynamic_base = "rleg_seg8";
+    undirected_tree.compute_traversal(dynamic_traversal,dynamic_base);
+    //.compute_traversal(dynamic_traversal);
+    q = dq = ddq = torques = JntArray(undirected_tree.getNrOfDOFs());
+    v = a = std::vector<Twist>(undirected_tree.getNrOfLinks());
+    f = f_ext = std::vector<Wrench>(undirected_tree.getNrOfLinks(),KDL::Wrench::Zero());
+    
+    for(int i=0; i < (int)undirected_tree.getNrOfDOFs(); i++ )
     {
         q(i) = random_double();
         dq(i) = random_double();
@@ -65,11 +71,11 @@ int main()
 
     
     //Calculating the velocity and acceleration for each link
-    rneaKinematicLoop(tree_graph,q,dq,ddq,kinematic_traversal,base_vel,base_acc,v,a);
-    rneaDynamicLoop(tree_graph,q,dynamic_traversal,v,a,f_ext,f,torques,base_wrench);
+    rneaKinematicLoop(undirected_tree,q,dq,ddq,kinematic_traversal,base_vel,base_acc,v,a);
+    rneaDynamicLoop(undirected_tree,q,dynamic_traversal,v,a,f_ext,f,torques,base_wrench);
     
     //Get the frame between each link and the base
-    getFramesLoop(tree_graph,q,dynamic_traversal,X_dynamic_base);
+    getFramesLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base);
    
     //Create ft_list
     std::vector<std::string> ft_names;
@@ -91,25 +97,30 @@ int main()
     fake_links.push_back("rleg_seg4");
     
 #ifndef NDEBUG
-    std::cout << "There are " << tree_graph.getNrOfLinks() << " links , " << tree_graph.getNrOfLinks()-fake_links.size() << " real and " << fake_links.size() << " fake " << std::endl;
+    std::cout << "There are " << undirected_tree.getNrOfLinks() << " links , " << undirected_tree.getNrOfLinks()-fake_links.size() << " real and " << fake_links.size() << " fake " << std::endl;
 #endif
     
-    FTSensorList ft_list(tree_graph,ft_names);
+    FTSensorList ft_list(undirected_tree,ft_names);
     
     //Generate random offset data
     std::vector<Wrench> measured_wrenches_offset(ft_names.size());
-    for( int i=0; i < ft_names.size(); i++ ) {
+    for( int i=0; i < (int)ft_names.size(); i++ ) {
         measured_wrenches_offset[i] =  Wrench(Vector(random_double(),random_double(),random_double()),Vector(random_double(),random_double(),random_double()));
     }
     
     //Get measured wrenches from RNEA
     std::vector<Wrench> measured_wrenches(ft_names.size());
-    for( int i=0; i < ft_names.size(); i++ ) {
-        measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f) + measured_wrenches_offset[i];
+    for( int i=0; i < (int)ft_names.size(); i++ ) {
+        if( consider_ft_offsets ) { 
+            measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f) + measured_wrenches_offset[i];
+        } else {
+            measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f);
+        }
     }
       
     //Then create the regressor generator 
-    DynamicRegressorGenerator regressor(test_tree,kinematic_base,ft_names,true,fake_links);
+    DynamicRegressorGenerator regressor(test_tree,kinematic_base,ft_names,consider_ft_offsets,fake_links);
+    regressor.changeDynamicBase(dynamic_base);
     
     //Adding some subtrees
     std::vector< std::string > subtree_torso;
@@ -145,6 +156,7 @@ int main()
     
     int ret_val = 0;
     
+    
     ret_val = regressor.addSubtreeRegressorRows(subtree_torso);
     if( ret_val != 0 ) { std::cerr << "Problem in adding regressor of torso " << std::endl; return -1; }
     ret_val = regressor.addSubtreeRegressorRows(subtree_bigger_torso);
@@ -157,14 +169,30 @@ int main()
     if( ret_val != 0 ) { std::cerr << "Problem in adding regressor of thigh " << std::endl; return -1; }
     ret_val = regressor.addSubtreeRegressorRows(subtree_head);
     if( ret_val != 0 ) { std::cerr << "Problem in adding regressor of head  " << std::endl; return -1; }
-
+    
+    
+    //Adding some torque regressors 
+    ret_val = regressor.addTorqueRegressorRows("larm_jnt4");
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
+    ret_val = regressor.addTorqueRegressorRows("torso_jnt2");
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
+    ret_val = regressor.addTorqueRegressorRows("head_jnt2");
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
+    
+    ret_val = regressor.addTorqueRegressorRows("torso_jnt1",false,subtree_bigger_torso);
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
+    ret_val = regressor.addTorqueRegressorRows("lleg_jnt4",true,subtree_middle_lleg);
+    if( ret_val != 0 ) { std::cerr << "Problem in adding torque regressor " << std::endl; } 
     
     
     regressor.setRobotState(q,dq,ddq,base_vel,base_acc);
 
-    for( int i=0; i < ft_names.size(); i++ ) {
+    //Adding measured wrenches, obtained from inverse dynamics
+    for( int i=0; i < (int)ft_names.size(); i++ ) {
         regressor.setFTSensorMeasurement(i,measured_wrenches[i]);
     }
+    //Adding measured torques, obtaiend from inverse dynamics
+    regressor.setTorqueSensorMeasurement(torques);
     
     Eigen::MatrixXd regr(regressor.getNrOfOutputs(),regressor.getNrOfParameters());
     Eigen::VectorXd kt(regressor.getNrOfOutputs());
@@ -172,9 +200,9 @@ int main()
     regressor.computeRegressor(regr,kt);
     
     #ifndef NDEBUG
-    std::cout << "Tree graph nrOfLinks" << tree_graph.getNrOfLinks() << std::endl;
+    std::cout << "Tree graph nrOfLinks" << undirected_tree.getNrOfLinks() << std::endl;
     std::cout << "Regressor nrOfParam: " << regressor.getNrOfParameters() << " nrOfOutputs " << regressor.getNrOfOutputs() << std::endl;
-    std::cout << regressor.getDescriptionOfParameters() << std::endl;
+    //std::cout << regressor.getDescriptionOfParameters() << std::endl;
     #endif
     
     
@@ -182,20 +210,22 @@ int main()
     Eigen::VectorXd parameters(regressor.getNrOfParameters());
     parameters.setZero();
     
-    inertialParametersVectorLoopFakeLinks(tree_graph,parameters,fake_links);
+    inertialParametersVectorLoopFakeLinks(undirected_tree,parameters,fake_links);
     //Adding fake ft offsets
-    int NrOfRealLinks = 10*(tree_graph.getNrOfLinks()-fake_links.size());
-    for( int ft_id =0; ft_id < ft_names.size(); ft_id++ ) {
-      for( int www=0; www < 6; www++ ) {
-        parameters[NrOfRealLinks+6*ft_id+www] = measured_wrenches_offset[ft_id](www);
-      }
+    if( consider_ft_offsets ) {
+        int NrOfRealLinksParameters = 10*(undirected_tree.getNrOfLinks()-fake_links.size());
+    
+        for( int ft_id =0; ft_id < (int)ft_names.size(); ft_id++ ) {
+            for( int www=0; www < 6; www++ ) {
+                parameters[NrOfRealLinksParameters+6*ft_id+www] = measured_wrenches_offset[ft_id](www);
+            }
+        }
     }
     
     
     Eigen::VectorXd kt_obtained = regr*parameters;
         
-  
-    
+    std::cout << "kt.size(): " << kt.rows() << " ( should be 6*6 + 3*1 )"<< std::endl; 
     std::cout << "kt" << std::endl;
     std::cout << (kt) << std::endl;
     

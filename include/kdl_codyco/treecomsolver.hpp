@@ -11,7 +11,7 @@
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
 #include "kdl_codyco/treeserialization.hpp"
-#include "kdl_codyco/treegraph.hpp"
+#include "kdl_codyco/undirectedtree.hpp"
 
 namespace KDL
 {
@@ -24,25 +24,25 @@ namespace CoDyCo
 	 */
 	class TreeCOMSolver 
 	{
-		public:
+        public:
             explicit TreeCOMSolver(const Tree& tree,TreeSerialization serialization=TreeSerialization(),TreePartition partition=TreePartition());
 
             virtual ~TreeCOMSolver();
             
-			/** 
-			 * Calculate the tree COM with respect to the base frame of reference
-			 * 
-			 * @param q_in input joint positions
+            /** 
+             * Calculate the tree COM with respect to the base frame of reference
+             * 
+             * @param q_in input joint positions
              * 
              * @param p_out COM in the base link reference frame
-             * @param the id of the part for which the COM has to be calculated, -1 for all the body
+             * @param part_id the id of the part for which the COM has to be calculated, -1 for all the body
              * 
-			 * @return if < 0 something went wrong
-			 */
+             * @return if < 0 something went wrong
+             */
             int JntToCOM(const KDL::JntArray& q_in, Vector& p_out, const int part_id=-1);
         
         private:
-            const TreeGraph tree_graph;
+            const UndirectedTree undirected_tree;
             Traversal traversal;
             
             //vector containing the center of mass of each subtree 

@@ -17,20 +17,24 @@
 #include "kdl_codyco/rnea_loops.hpp"
 #include "kdl_codyco/position_loops.hpp"
 
+#ifndef NDEBUG
+#include <iostream>
+#include <kdl/frames_io.hpp>
+#endif
 
 namespace KDL {
 namespace CoDyCo {
 
     void TreeInertialParametersRegressor::updateParams()
     {
-        tree_param.resize(10*tree_graph.getNrOfLinks());
+        tree_param.resize(10*undirected_tree.getNrOfLinks());
         
-        inertialParametersVectorLoop(tree_graph,tree_param);
+        inertialParametersVectorLoop(undirected_tree,tree_param);
     }    
     
     Eigen::VectorXd TreeInertialParametersRegressor::getInertialParameters()
     {
-        if( tree_param.rows() != 10*tree_graph.getNrOfLinks() ) updateParams();
+        if( tree_param.rows() != 10*undirected_tree.getNrOfLinks() ) updateParams();
         return tree_param;
     }
     
@@ -71,16 +75,16 @@ namespace CoDyCo {
     }*/
     
     TreeInertialParametersRegressor::TreeInertialParametersRegressor(Tree & _tree,Vector grav,const TreeSerialization & serialization) : tree(_tree), 
-																	  tree_graph(_tree,serialization),  
-                                                                      ns(_tree.getNrOfSegments()),                                                                 
-                                                                      X_b(ns),
-                                                                      v(ns),
-                                                                      a(ns)
+                                                                      undirected_tree(_tree,serialization),  
+                                                                      nrOfLinks(undirected_tree.getNrOfLinks()),                                                                 
+                                                                      X_b(nrOfLinks),
+                                                                      v(nrOfLinks),
+                                                                      a(nrOfLinks)
     {
         //Initializing gravitational acceleration (if any)
         ag=-Twist(grav,Vector::Zero());
         
-        tree_graph.compute_traversal(traversal);
+        undirected_tree.compute_traversal(traversal);
         
         //Compiling indicator function;
         /*
@@ -103,6 +107,23 @@ namespace CoDyCo {
              
     }
     
+    int TreeInertialParametersRegressor::dynamicsRegressor( const KDL::JntArray &q, 
+                                                    const KDL::JntArray &q_dot,
+                                                    const KDL::JntArray &q_dotdot,  
+                                                    Eigen::MatrixXd & dynamics_regressor)
+    {
+        if(q.rows()!=undirected_tree.getNrOfDOFs() || q_dot.rows()!=undirected_tree.getNrOfDOFs() || q_dotdot.rows()!=undirected_tree.getNrOfDOFs() || dynamics_regressor.cols()!=undirected_tree.getNrOfLinks()*10 || dynamics_regressor.rows()!=(undirected_tree.getNrOfDOFs()))
+            return -1;
+        
+        rneaKinematicLoop(undirected_tree,q,q_dot,q_dotdot,traversal,Twist::Zero(),ag,v,a);
+        
+        //Frame orientation loop
+        getFramesLoop(undirected_tree,q,traversal,X_b);
+        
+        dynamicsRegressorFixedBaseLoop(undirected_tree,q,traversal,X_b,v,a,dynamics_regressor);
+        
+        return 0;
+    }
 
     int TreeInertialParametersRegressor::dynamicsRegressor( const KDL::JntArray &q, 
                                                     const KDL::JntArray &q_dot,
@@ -111,18 +132,34 @@ namespace CoDyCo {
                                                     const Twist& base_acceleration,
                                                     Eigen::MatrixXd & dynamics_regressor)
     {
-        if(q.rows()!=tree_graph.getNrOfDOFs() || q_dot.rows()!=tree_graph.getNrOfDOFs() || q_dotdot.rows()!=tree_graph.getNrOfDOFs() || dynamics_regressor.cols()!=10*ns || dynamics_regressor.rows()!=(6+tree_graph.getNrOfDOFs()))
+        if(q.rows()!=undirected_tree.getNrOfDOFs() || q_dot.rows()!=undirected_tree.getNrOfDOFs() || q_dotdot.rows()!=undirected_tree.getNrOfDOFs() || dynamics_regressor.cols()!=10*undirected_tree.getNrOfLinks() || dynamics_regressor.rows()!=(6+undirected_tree.getNrOfDOFs()))
             return -1;
-		
-		//kinematic loop
-        rneaKinematicLoop(tree_graph,q,q_dot,q_dotdot,traversal,base_velocity,base_acceleration,v,a);
+        
+        //kinematic loop
+        rneaKinematicLoop(undirected_tree,q,q_dot,q_dotdot,traversal,base_velocity,base_acceleration,v,a);
+        
+        #ifndef NDEBUG
+        /*
+        for(int i=0; i < v.size(); i++ ) {
+            std::cout << "Vel and acc (" << i << " ) " << std::endl;
+            std::cout << toEigen(v[i]) << std::endl;
+            std::cout << toEigen(a[i]) << std::endl;
+        }*/
+        #endif
         
         //Frame orientation loop
-        getFramesLoop(tree_graph,q,traversal,X_b);
+        getFramesLoop(undirected_tree,q,traversal,X_b);
         
-        dynamicsRegressorLoop(tree_graph,q,traversal,X_b,v,a,dynamics_regressor);
+        #ifndef NDEBUG
+        /*
+        for(int i=0; i < v.size(); i++ ) {
+            std::cout << "frame (" << i << " ) " << std::endl;
+            std::cout << X_b[i] << std::endl;        }*/
+        #endif
+        
+        dynamicsRegressorLoop(undirected_tree,q,traversal,X_b,v,a,dynamics_regressor);
 
-		/*
+        /*
         for(i=0;i<ns;i++) {
                         
             netWrenchRegressor_i = netWrenchRegressor(v[i],a[i]);

@@ -12,19 +12,19 @@
 namespace KDL {
 namespace CoDyCo {
     
-    TreeCOMSolver::TreeCOMSolver(const Tree& tree_in, TreeSerialization serialization_in, TreePartition partition_in): tree_graph(tree_in,serialization_in,partition_in)
+    TreeCOMSolver::TreeCOMSolver(const Tree& tree_in, TreeSerialization serialization_in, TreePartition partition_in): undirected_tree(tree_in,serialization_in,partition_in)
     {
-        subtree_COM.resize(tree_graph.getNrOfLinks());
-        subtree_mass.resize(tree_graph.getNrOfLinks());
+        subtree_COM.resize(undirected_tree.getNrOfLinks());
+        subtree_mass.resize(undirected_tree.getNrOfLinks());
         #ifndef NDEBUG
         std::cerr << "Check consistency in the constructor of TreeComSolver" << std::endl;
-        //assert(tree_graph.check_consistency() == 0);
+        //assert(.check_consistency() == 0);
         #endif
         //Using default base
-        int ret = tree_graph.compute_traversal(traversal);
-        #ifndef NDEBUG
+        int ret = undirected_tree.compute_traversal(traversal);
         assert( ret==0 );
-        #endif
+        //Avoiding unused variable warning
+        ((void)ret);
     }
 
     TreeCOMSolver::~TreeCOMSolver() {
@@ -32,13 +32,13 @@ namespace CoDyCo {
     
     int TreeCOMSolver::JntToCOM(const KDL::JntArray& q_in, Vector& p_out, const int part_id) {
         //First we check all the sizes:
-        if (q_in.rows() != tree_graph.getNrOfDOFs()) {
+        if (q_in.rows() != undirected_tree.getNrOfDOFs()) {
             return -1;
         }
         
         #ifndef NDEBUG
         std::cerr << "Check consistency in TreeCOMSolver::JntToCOM" << std::endl;
-        //assert(tree_graph.check_consistency() == 0);
+        //assert(.check_consistency() == 0);
         #endif
         
         /*
@@ -87,7 +87,7 @@ namespace CoDyCo {
         p_out = subtree_COM[0];
         */
         
-        getCenterOfMassLoop(tree_graph,q_in,traversal,subtree_COM,subtree_mass,p_out,part_id);
+        getCenterOfMassLoop(undirected_tree,q_in,traversal,subtree_COM,subtree_mass,p_out,part_id);
         
         return 0;
         

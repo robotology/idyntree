@@ -7,7 +7,9 @@
 #ifndef KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 #define KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
+#include <kdl_codyco/undirectedtreesolver.hpp>
+
 #include "regressor_utils.hpp"
 #include "treeserialization.hpp"
 
@@ -33,25 +35,25 @@ namespace CoDyCo {
             void updateParams();
             bool changeInertialParametersRecursive(const Eigen::VectorXd & new_chain_param, Tree & new_tree, SegmentMap::const_iterator root, const std::string& hook_name) ;
          
-         
             Tree tree;
             
-            const TreeGraph tree_graph;
-
-            int ns;
+            UndirectedTree undirected_tree;
+            Traversal traversal;
+            
+            int nrOfLinks;
             
             std::string root_name;
-
-            Traversal traversal;
-
+            
+            //Frame of link i with respect to the base
+            std::vector<Frame> X_b;
+            
+            
             std::vector<Twist> v;
             std::vector<Twist> a;
 
             Twist ag;
             
-            //Frame of link i with respect to the base
-            std::vector<Frame> X_b;
-            
+
             Eigen::VectorXd tree_param;
  
             //Indicator function
@@ -67,12 +69,14 @@ namespace CoDyCo {
             ~TreeInertialParametersRegressor(){};
             
             Eigen::VectorXd getInertialParameters();
+            
+            UndirectedTree getUndirectedTree() { return undirected_tree; };
              
              /**
              * Get a copy of the current KDL::Tree, with modified inertial parameters.
              * 
              * @param new_chain_param the inertial parameters vector
-             * @param new_chain a reference to the output chain
+             * @param new_tree a reference to the output chain
              * @return false in case of some error, true otherwise
              */
             bool changeInertialParameters(const Eigen::VectorXd & new_chain_param, Tree& new_tree);

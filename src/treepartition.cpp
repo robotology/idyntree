@@ -10,6 +10,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include "kdl_codyco/utils.hpp"
+#include "kdl_codyco/config.h"
 
 namespace KDL {
 namespace CoDyCo {
@@ -30,7 +32,7 @@ namespace CoDyCo {
         int part_local_index = it_ii->second;
         
         return part_local_index;
-	}*/
+    }*/
     
     TreePart::TreePart(): part_id(-1), part_name("TreePartError"), dof_id(0), links_id(0)
     {
@@ -49,15 +51,15 @@ namespace CoDyCo {
     }
      
     TreePart& TreePart::operator=(const TreePart& x) 
-	{
-		if ( this != &x ) { 
-			this->part_id = x.part_id;
-			this->part_name = x.part_name;
-			this->dof_id = x.dof_id;
-			this->links_id = x.links_id;
-		}
-		return *this;
-	}
+    {
+        if ( this != &x ) { 
+            this->part_id = x.part_id;
+            this->part_name = x.part_name;
+            this->dof_id = x.dof_id;
+            this->links_id = x.links_id;
+        }
+        return *this;
+    }
            
     int TreePart::getNrOfLinks() const
     {
@@ -81,8 +83,16 @@ namespace CoDyCo {
     
     std::string TreePart::toString() const
     {
-		std::stringstream ss;
-		ss << "TreePart: " << part_id << " " << part_name << std::endl;
+        std::stringstream ss;
+        ss << "TreePart: " << part_id << " " << part_name << std::endl;
+        ss << "Links: " << std::endl;
+        for(int link = 0; link < getNrOfLinks(); link++ ) {
+            ss << "Local link " << link << " is global link " << links_id[link] << std::endl;
+        } 
+        ss << "Joints: " << std::endl;
+        for(int joint = 0; joint < getNrOfDOFs(); joint++ ) {
+            ss << "Local dof id " << joint << " is global dof " << dof_id[joint] << std::endl;
+        }
         return ss.str();
     }
     
@@ -101,6 +111,18 @@ namespace CoDyCo {
         
         TreePart tree_part(0,"default_part");
         
+        SegmentMap::const_iterator root = tree.getRootSegment();
+        
+        /** \todo remove this assumption */
+        assert(GetTreeElementChildren(root->second).size() != 0);
+//        SegmentMap::const_iterator root_child = root->second.children[0];
+        
+         //This should be coherent with the behaviour of UndirectedTree
+        if( !isBaseLinkFake(tree) )
+        {
+            nrOfLinks++;
+        } 
+        
         for(int i=0; i <nrOfDOFs; i++ )
         {
             tree_part.addDOF(i);
@@ -116,7 +138,7 @@ namespace CoDyCo {
 
     bool TreePartition::addPart(TreePart & tree_part)
     {
-		int part_index = parts.size();
+        int part_index = parts.size();
         parts.push_back(tree_part);
         ID_map.insert(std::make_pair(tree_part.getPartID(),part_index));
         name_map.insert(std::make_pair(tree_part.getPartName(),part_index));
@@ -204,7 +226,7 @@ namespace CoDyCo {
         
         local_index = it->second;
         
-        if( local_link_index >= parts[local_index].getNrOfLinks() || local_link_index < 0 ) return -1;
+        if( local_link_index >= parts[local_index].getNrOfLinks() || local_link_index < 0 ) return -2;
         
         return parts[local_index].getGlobalLinkIndex(local_link_index);
     }
@@ -213,6 +235,7 @@ namespace CoDyCo {
     {
         int local_index;
         
+        assert(ID_map.size() == parts.size());
         std::map<int,int>::const_iterator it = ID_map.find(part_ID);
         
         if( it == ID_map.end() ) {
@@ -319,8 +342,11 @@ namespace CoDyCo {
     {
         std::stringstream ss;
         for(int i=0; i < (int)parts.size(); i++ ) {
-            //std::cout << "TreePartition::toString() index " << i << " " << parts[i].getPartID() << std::endl;
-            ss << "part ID:" << parts[i].getPartID() << " part name: " << parts[i].getPartName() << std::endl;
+            ss << parts[i].toString() << std::endl;
+            int part_id = parts[i].getPartID();
+            std::map<int,int>::const_iterator it = ID_map.find(part_id);
+            int local_vector_index = it->second;
+            ss << "Part with ID " << parts[i].getPartID() << " has index in local part vector" << local_vector_index << std::endl;
         }
         return ss.str();
     }

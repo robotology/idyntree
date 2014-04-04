@@ -180,6 +180,47 @@ namespace CoDyCo {
         
         return ret;
     }
+    
+    Eigen::VectorXd toEigen(const KDL::Wrench & f, const KDL::JntArray & tau)
+    {
+        VectorXd ret(6+tau.rows());
+        ret.segment(0,6) = toEigen(f);
+        for(int i=0; i < (int)tau.rows(); i++ ) { ret(6+i) = tau(i); }
+        return ret;
+    }
+    
+        
+    Eigen::VectorXd toEigen(const KDL::Twist & v, const KDL::JntArray & dq)
+    {
+        VectorXd ret(6+dq.rows());
+        ret.segment(0,6) = toEigen(v);
+        for(int i=0; i < (int)dq.rows(); i++ ) { ret(6+i) = dq(i); }
+        return ret;
+    }
+    
+    KDL::Wrench toKDLWrench(const Matrix<double, 6, 1> & in)
+    {
+        KDL::Wrench ret;
+        Map< Vector3d >(ret.force.data) = in.segment(0,3);
+        Map< Vector3d >(ret.torque.data) = in.segment(3,3);
+        return ret;
+    }
+    
+    KDL::Twist toKDLTwist(const Matrix<double, 6, 1> & in)
+    {
+        KDL::Twist ret;
+        Map< Vector3d >(ret.vel.data) = in.segment(0,3);
+        Map< Vector3d >(ret.rot.data) = in.segment(3,3);
+        return ret;
+    }
+    
+    Matrix<double, 6, 6> toEigen(const KDL::RigidBodyInertia & I)
+    {
+        Matrix<double, 6, 6> ret;
+        ret <<  I.getMass()*Matrix3d::Identity(), -crossProductMatrix(I.getMass()*I.getCOG()),
+                crossProductMatrix(I.getMass()*I.getCOG()), Map< Matrix3d >(I.getRotationalInertia().data);
+        return ret;
+    }
    
 }
 }

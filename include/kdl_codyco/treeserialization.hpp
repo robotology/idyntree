@@ -12,9 +12,7 @@
 
 namespace KDL{
 namespace CoDyCo{
-    
-    const int FIXED_JOINT = -1;
-    
+        
     /**
      * Class for describing a Tree serialization
      * (i.e. a mapping between:
@@ -41,11 +39,12 @@ namespace CoDyCo{
 
         void addDFSrecursive_only_fixed(SegmentMap::const_iterator current_el, int & fixed_joint_cnt);
 
-        
-    public:
         std::vector<std::string> links;
         std::vector<std::string> junctions;
         std::vector<std::string> dofs;
+        
+    public:
+
     
         TreeSerialization();
         
@@ -72,19 +71,41 @@ namespace CoDyCo{
         TreeSerialization(const TreeSerialization& x);
         
         /**
-         * Not efficient, performs a search
+         * Returns the ID of a given junction in the serialization
+         * 
+         * @param[in] joint_name the name of the junction for which the ID is requested
+         * @return the requested ID of the junction
+         * 
+         * \note Not efficient, performs a search
          */
-        int getJunctionId(std::string joint_name) const;
+        int getJunctionID(const std::string joint_name) const;
+        
+        bool setJunctionNameID(const std::string junction_name, const int new_ID);
         
         /**
-         * Not efficient, performs a search
+         * Returns the ID of a given degree of freedom in the serialization
+         * 
+         * @param[in] dof_name the name of the degree of freedom for which the ID is requested
+         * @return the requested ID of the degree of freedom
+         * 
+         * \note Not efficient, performs a search
          */
-        int getDOFId(std::string dof_name) const;
+        int getDOFID(const std::string dof_name) const;
+        
+        bool setDOFNameID(const std::string dof_name, const int new_ID);
+
         
         /**
-         * Not efficient, performs a search
+         * Returns the ID of a given link in the serialization
+         * 
+         * @param[in] link_name the name of the link for which the ID is requested
+         * @return the requested ID of the link
+         * 
+         * \note Not efficient, performs a search
          */
-        int getLinkId(std::string link_name) const;
+        int getLinkID(const std::string link_name) const;
+        
+        bool setLinkNameID(const std::string link_name, const int new_ID);
         
         std::string getJunctionName(int joint_id) const;
         
@@ -93,9 +114,20 @@ namespace CoDyCo{
         std::string getLinkName(int link_id) const;
         
         /**
+         * Set the number of Links
+         */
+        int setNrOfLinks(const int new_size);
+        
+        /**
          * Get the number of Links
+         * 
          */
         int getNrOfLinks() const;
+        
+        /**
+         * Get the number of internal degrees of freedom
+         */
+        int setNrOfDOFs(const int new_size);
         
         /**
          * Get the number of internal degrees of freedom
@@ -103,33 +135,71 @@ namespace CoDyCo{
         int getNrOfDOFs() const;
         
         /**
+         * Set the number of junctions
+         */
+        int setNrOfJunctions(const int new_size);
+
+        
+        /**
          * Get the number of joints of any DOF (not called getNrOfJoints to 
-         *   avoid confusion with the function of KDL::Tree/KDL::Chain
+         *   avoid confusion with the function of KDL::Tree/KDL::Chain)
          */
         int getNrOfJunctions() const;
         
         /**
          * Check if the TreeSerialization is a valid serialization for the 
-         * given Tree (checking also if the names are the wright one, not 
-         * if the DOF serialization inside the TreeSerialization is the same
-         * of the one in the Tree
+         * given Tree (checking also if the names in the serialization are 
+         *  the same of those in the tree)
          * 
+         * \note 
          */
         bool is_consistent(const Tree & tree) const;
         
         /**
-         * deprecated
+         * Load the serialization of the links from a vector of strings
+         * @param[in] links_serialization a vector of string of getNrOfLinks() size
          * 
+         * @return true if the loading was ok, false if something went wrong (name of alink not recognized, error in vector size)
+         *
+         * \note this method does not affect the Junctions/DOFs serialization 
          */
-        bool serialize(const Tree & tree,
-                       std::vector< int> & children_root, //set of children of root
-                       std::vector< std::vector<int> > & children, //array of sets of children of each segment
-                       std::vector< int > & parent, //array of parent of each segment
-                       std::vector< int> & link2joint, //array mapping 
-                       std::vector< int > & visit_order, //Visiting order for the tree, such that a parent is visited before any of his children
-                       std::vector<SegmentMap::const_iterator> & seg_vector //array of mapping between link index and SegmentMap iterators
-                       );
-                                         
+        bool loadLinksFromStringVector(const std::vector<std::string> & links_serialization);
+        
+        /**
+         * Load the serialization of the links from a file
+         * @param[in] file_name the name of the file that contains getNrOfLinks() lines, each one is the name of a link
+         *
+         * @return true if the loading was ok, false if something went wrong (name of alink not recognized, error in vector size)
+         *
+         * \note this method does not affect the Junctions/DOFs serialization  
+         */
+        bool loadLinksFromFile(const std::string file_name);
+        
+        /**
+         * Load the serialization of the junctions (and consequently of the DOFs) from a vector of strings
+         * @param[in] junctions_serialization a vector of string of getNrOfJunctions() size, where the first getNrOfDOFs() junction are 
+         *  the non-fixed junctions
+         * 
+         * @return true if the loading was ok, false if something went wrong (name of alink not recognized, error in vector size)
+         *
+         * \note this method does not affect the links serialization
+         */
+        bool loadJunctionsDOFsFromStringVector(const std::vector<std::string> & junctions_serialization);
+        
+        /**
+         * Load the serialization of the links from a file
+         * @param[in] file_name the name of the file that contains getNrOfJunctions() lines, each one is the name of a junction,
+         *  where the first getNrOfDOFs() junction are  the non-fixed junctions
+         *
+         * @return true if the loading was ok, false if something went wrong (name of alink not recognized, error in vector size)
+         *
+         * \note this method does not affect the link serialization 
+         */
+        bool loadJunctionsDOFsFromFile(const std::string file_name);
+
+        /**
+         * Convert the content of the serialization to a string.
+         */
         std::string toString();
     };
     

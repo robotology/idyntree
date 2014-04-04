@@ -38,33 +38,19 @@ using namespace std;
 namespace KDL{
 namespace CoDyCo {
     
-    TreeIdSolver_RNE::TreeIdSolver_RNE(const Tree& tree, const TreeSerialization & serialization) 
-    : tree_graph(tree,serialization)
-    {
-        //Initializing gravitational acceleration (if any)
-        ag=Twist::Zero();
-        
-        //allocate vectors
-        v.resize(tree.getNrOfSegments());
-        a.resize(tree.getNrOfSegments());
-        f.resize(tree.getNrOfSegments());
-                
-        tree_graph.compute_traversal(traversal);
-    }
     
     TreeIdSolver_RNE::TreeIdSolver_RNE(const Tree& tree, Vector grav, const TreeSerialization & serialization)
-    : tree_graph(tree,serialization)
+    : UndirectedTreeSolver(tree,serialization)
     {
       
         //Initializing gravitational acceleration (if any)
         ag=-Twist(grav,Vector::Zero());
         
         //allocate vectors
-        v.resize(tree.getNrOfSegments());
-        a.resize(tree.getNrOfSegments());
-        f.resize(tree.getNrOfSegments());
+        v.resize(tree.getNrOfSegments(),Twist::Zero());
+        a.resize(tree.getNrOfSegments(),Twist::Zero());
+        f.resize(tree.getNrOfSegments(),Wrench::Zero());
         
-        tree_graph.compute_traversal(traversal);
     }
     
     int TreeIdSolver_RNE::CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Wrenches& f_ext,JntArray &torques)
@@ -76,21 +62,21 @@ namespace CoDyCo {
     
     int TreeIdSolver_RNE::CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force)
     {
-        assert(torques.rows() == tree_graph.getNrOfDOFs());
+        if( q.rows() != undirected_tree.getNrOfDOFs() ||
+            q_dot.rows() != q.rows()                  ||
+            q_dotdot.rows() != q.rows()               ||
+            f_ext.size() != undirected_tree.getNrOfLinks() ||
+            torques.rows() != q.rows() ) return -1; 
         
         base_force = Wrench::Zero();
 
-        rneaKinematicLoop(tree_graph,q,q_dot,q_dotdot,traversal,base_velocity,base_acceleration,v,a);
+        rneaKinematicLoop(undirected_tree,q,q_dot,q_dotdot,traversal,base_velocity,base_acceleration,v,a);
         
-        rneaDynamicLoop(tree_graph,q,traversal,v,a,f_ext,f,torques,base_force);
+        rneaDynamicLoop(undirected_tree,q,traversal,v,a,f_ext,f,torques,base_force);
         
         return 0;
     }
     
-    TreeSerialization TreeIdSolver_RNE::getSerialization() const 
-    {
-        return tree_graph.getSerialization();
-    }
 
 }
 }//namespace

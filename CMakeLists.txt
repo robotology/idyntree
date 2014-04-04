@@ -1,16 +1,18 @@
+#
+# Test CMake version
+#
 cmake_minimum_required( VERSION 2.8 FATAL_ERROR )
 set(PROJECT_NAME kdl_codyco)
 project (${PROJECT_NAME} CXX)
 
 set (KDL_CODYCO_VERSION_MAJOR 0)
 set (KDL_CODYCO_VERSION_MINOR 0)
-set (KDL_CODYCO_VERSION_PATCH 1)
+set (KDL_CODYCO_VERSION_PATCH 3)
 
 set (KDL_CODYCO_VERSION ${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}.${KDL_CODYCO_VERSION_PATCH})
 
 message (STATUS "${PROJECT_NAME} version ${KDL_CODYCO_VERSION}")
 
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 SET( PROJ_SOURCE_DIR ${kdl_codyco_SOURCE_DIR} )
 SET( PROJ_BINARY_DIR ${kdl_codyco_BINARY_DIR} )
 
@@ -31,7 +33,11 @@ if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC) 
 
-find_package(orocos_kdl)
+find_package(orocos_kdl 1.2.3 QUIET)
+if (NOT orocos_kdl_FOUND)
+    SET(OROCOS_KDL_OLDVERSION On)
+    find_package(orocos_kdl)
+endif(NOT orocos_kdl_FOUND)
 
 #support also for the old version of kdl cmake package
 if(NOT orocos_kdl_FOUND)
@@ -46,20 +52,36 @@ if(NOT orocos_kdl_FOUND)
    endif(NOT Orocos-KDL_FOUND)
 endif(NOT orocos_kdl_FOUND)
 
+if (OROCOS_KDL_OLDVERSION)
+    configure_file(include/kdl_codyco/config.h.in ${CMAKE_SOURCE_DIR}/include/kdl_codyco/config.h)
+    message(STATUS "Old orocos kdl version. Adding include file to define compatibility macros.")
+else(OROCOS_KDL_OLDVERSION)
+    file(WRITE ./include/kdl_codyco/config.h "/**\n * Copyright  (C) 2013  CoDyCo Project\n * Author: Silvio Traversaro\n * website: http://www.codyco.eu\n */ ")
+endif (OROCOS_KDL_OLDVERSION)
 
 include_directories(include ${orocos_kdl_INCLUDE_DIRS})
 
+include_directories(include ./include/kdl_codyco/regressors ./include/kdl_codyco/regressors/dataset ${orocos_kdl_INCLUDE_DIRS})
+
 file(GLOB KDL_CODYCO_HPPS
      "include/kdl_codyco/*.hpp"
+ )
+
+file (GLOB KDL_CODYCO_PRIVATE_INCLUDES
+    "include/kdl_codyco/config.h"
 )
 
 file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
 )
 
-file(GLOB DRRL_SRC 
-    "src/drrl/*.cpp"
+file(GLOB DIRL_SRC 
+    "src/regressors/*.cpp" "src/regressors/dataset/*.cpp"
 )
+
+SOURCE_GROUP("Source Files" FILES ${KDL_CODYCO_SRC} ${DIRL_SRC})
+SOURCE_GROUP("Header Files" FILES ${KDL_CODYCO_HPPS} ${KDL_CODYCO_PRIVATE_INCLUDES})
+
 
 if(MSVC)
     set(LIB_TYPE STATIC)
@@ -67,11 +89,11 @@ else()
     set(LIB_TYPE SHARED)
 endif()
 
-add_library(kdl-codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DRRL_SRC})
+add_library(kdl-codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DIRL_SRC} ${KDL_CODYCO_HPPS} ${KDL_CODYCO_PRIVATE_INCLUDES})
 
 target_link_libraries(kdl-codyco ${orocos_kdl_LIBRARIES})
 
-SET_TARGET_PROPERTIES( kdl-codyco PROPERTIES
+SET_TARGET_PROPERTIES(kdl-codyco PROPERTIES
   SOVERSION "${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}"
   VERSION "${KDL_CODYCO_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
@@ -87,25 +109,29 @@ INSTALL(TARGETS kdl-codyco
   PUBLIC_HEADER DESTINATION include/kdl_codyco
 )
 
-# --------------------------------
-INSTALL(DIRECTORY include/drrl       DESTINATION include)
 
-option(CREATE_TESTS "Create regression tests using CMake" FALSE)
+OPTION(CREATE_TESTS "Create regression tests using CMake" FALSE)
 
 IF(CREATE_TESTS)
     enable_testing()
     ADD_SUBDIRECTORY(tests)
 ENDIF(CREATE_TESTS)
 
+<<<<<<< HEAD
 export(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
+=======
+EXPORT(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
+>>>>>>> rovereto
 
 EXPORT(PACKAGE kdl_codyco)
 
-CONFIGURE_FILE(cmake/kdl_codyco-config.cmake.in
-  ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake @ONLY)
+CONFIGURE_FILE(cmake/kdl_codyco-config.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake @ONLY)
+CONFIGURE_FILE(cmake/kdl_codyco-config-version.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config-version.cmake @ONLY)
 
-set(cmake_conf_file "${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake")
-INSTALL(FILES ${cmake_conf_file} DESTINATION share/kdl_codyco)
+INSTALL(FILES ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake DESTINATION share/kdl_codyco)
+INSTALL(FILES ${PROJECT_BINARY_DIR}/kdl_codyco-config-version.cmake DESTINATION share/kdl_codyco)
 INSTALL(EXPORT kdl_codyco-target  DESTINATION share/kdl_codyco)
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
+
+add_subdirectory(doc)

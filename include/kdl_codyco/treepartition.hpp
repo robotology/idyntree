@@ -55,9 +55,9 @@ namespace CoDyCo {
             int getGlobalDOFIndex(int local_dof_index) const { return dof_id[local_dof_index]; }
             
             const std::vector<int> & getLinkIDs() const { return links_id; }
-			const  std::vector<int> & getDOFIDs() const { return dof_id; }
-			
-			std::string toString() const;
+            const  std::vector<int> & getDOFIDs() const { return dof_id; }
+
+            std::string toString() const;
 
     };
     
@@ -113,9 +113,9 @@ namespace CoDyCo {
          */
         TreePart getPartFromLocalIndex(int part_index)
         {
-			assert( part_index >= 0 && part_index < getNrOfParts() );
-			return parts[part_index];
-		}
+            assert( part_index >= 0 && part_index < getNrOfParts() );
+            return parts[part_index];
+        }
         
         /**
          * Add a part to a given partition

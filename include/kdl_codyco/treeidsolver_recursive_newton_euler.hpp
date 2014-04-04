@@ -25,12 +25,12 @@
 
 #include "treeidsolver.hpp"
 #include "treeserialization.hpp"
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
+#include <kdl_codyco/undirectedtreesolver.hpp>
 
 namespace KDL{
 namespace CoDyCo{
     /**
-     * \note CURRENTLY BROKEN!!!
      * 
      * \brief Recursive newton euler inverse dynamics solver
      *
@@ -43,7 +43,7 @@ namespace CoDyCo{
      * (expressed in the segments reference frame) and the dynamical
      * parameters of the segments.
      */
-    class TreeIdSolver_RNE : public TreeIdSolver {
+    class TreeIdSolver_RNE : public TreeIdSolver, UndirectedTreeSolver {
     public:
         /**
          * Constructor for the solver, it will allocate all the necessary memory
@@ -52,10 +52,7 @@ namespace CoDyCo{
          */
         TreeIdSolver_RNE(const Tree& tree,Vector grav=Vector::Zero(),const TreeSerialization & serialization=TreeSerialization());
         
-        TreeIdSolver_RNE(const Tree& tree, const TreeSerialization & serialization);
-
-        
-        ~TreeIdSolver_RNE(){};
+        virtual ~TreeIdSolver_RNE(){};
         
         /**
          * Function to calculate from Cartesian forces to joint torques.
@@ -83,24 +80,18 @@ namespace CoDyCo{
          *        (proper acceleration, considers also gravitational acceleration)
          * @param f_ext external forces
          *
-         * @param torque output joint torques
-         * @param base_wrench output base wrench
+         * @param torques output joint torques
+         * @param base_force output base wrench
          * 
          * @return if < 0 something went wrong
          */
         int CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force);
 
-        TreeSerialization getSerialization() const;
 
     private:
-        const TreeGraph tree_graph;
-        Traversal traversal;
-
-    
-		std::vector<Twist> v;
-		std::vector<Twist> a;
-		std::vector<Wrench> f;
-
+        std::vector<Twist> v;
+        std::vector<Twist> a;
+        std::vector<Wrench> f;
         
         Twist ag;
     };

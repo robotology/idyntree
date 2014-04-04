@@ -3,15 +3,17 @@
  * Author: Silvio Traversaro
  * website: http://www.codyco.eu
  */
- 
-#include "kdl_codyco/utils.hpp"
-#include "kdl_codyco/treeserialization.hpp"
+
 #include <iostream>
 #include <kdl/kinfam_io.hpp>
 #include <kdl/frames_io.hpp>
-
+#include <sstream>
+#include <fstream>
 #include <Eigen/LU>
 
+#include "kdl_codyco/utils.hpp"
+#include "kdl_codyco/treeserialization.hpp"
+#include "kdl_codyco/config.h"
 
 namespace KDL {
 namespace CoDyCo {
@@ -32,9 +34,9 @@ namespace CoDyCo {
         for( SegmentMap::const_iterator i=sm.begin(); i!=sm.end(); ++i ) {
             //root has no mass
             if( i != root ) {
-               total_mass += i->second.segment.getInertia().getMass();
+               total_mass += GetTreeElementSegment(i->second).getInertia().getMass();
             }
-		}
+        }
         
         return total_mass;
     }
@@ -121,5 +123,73 @@ namespace CoDyCo {
             dest.setColumn(i,src.getColumn(i)/I);
         return true;
     }
+    
+    bool stringVectorFromFile(const std::string filename, std::vector<std::string> & strings, int nr_of_string_to_read)
+    {
+        std::ifstream links_file;
+ 
+        links_file.open (filename.c_str(), std::ifstream::in);
+        
+        if( !links_file ) {
+            std::cerr << "KDL::CoDyCo::stringVectorFromFile error: could not load file " << filename << std::endl;
+            return false;
+        }
+        
+        std::string data_buffer;
+        
+        if( nr_of_string_to_read > 0 ) {
+            if( strings.size() != nr_of_string_to_read ) { strings.resize(nr_of_string_to_read); }
+            
+            for(int i=0; i < nr_of_string_to_read; i++ ) {
+                getline(links_file,data_buffer);
+                if( data_buffer == "" ) {
+                    std::cerr << "KDL::CoDyCo::stringVectorFromFile error: file " << filename << " is not properly formatted at line " << i << std::endl;
+                    return false;
+                }
+                strings[i] = data_buffer;
+            }
+        } else {
+            strings.resize(0);
+            while(getline(links_file,data_buffer) ) {
+                if( data_buffer == "" ) {
+                    std::cerr << "KDL::CoDyCo::stringVectorFromFile error: file " << filename << " is not properly formatted at line " << strings.size()+1 << std::endl;
+                    return false;
+                }
+                strings.push_back(data_buffer);
+            }
+        }
+        
+        return true;
+    }
+    
+    bool isBaseLinkFake(const KDL::Tree & tree)
+    {
+        KDL::SegmentMap::const_iterator root = tree.getRootSegment();
+        bool return_value;
+        if (GetTreeElementChildren(root->second).size() == 1 && GetTreeElementSegment(GetTreeElementChildren(root->second)[0]->second).getJoint().getType() == Joint::None) {
+            return_value = true;
+        } else {
+            return_value = false;
+        }
+        return return_value;
+    }
+    
+    void spatialToConventionalAcceleration(const KDL::Twist spatial_acc, 
+                                           const KDL::Twist velocity,
+                                                 KDL::Twist & conventional_acc)
+    {
+         conventional_acc.rot = spatial_acc.rot;
+         conventional_acc.vel = spatial_acc.vel-velocity.vel*velocity.rot; 
+    }
+    
+    void conventionalToSpatialAcceleration(const KDL::Twist conventional_acc, 
+                                           const KDL::Twist velocity,
+                                                 KDL::Twist & spatial_acc)
+    {
+         spatial_acc.rot = conventional_acc.rot;
+         spatial_acc.vel = conventional_acc.vel+velocity.vel*velocity.rot; 
+    }
+
+
 }
 }

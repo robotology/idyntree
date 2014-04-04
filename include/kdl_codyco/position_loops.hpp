@@ -9,13 +9,13 @@
 
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
-#include <kdl_codyco/treegraph.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 
 namespace KDL {
 namespace CoDyCo {
 
    /**
-    * Loop for calculating, given a TreeGraph and a Traversal, the Frame
+    * Loop for calculating, given a UndirectedTree and a Traversal, the Frame
     * between a distal link and a proximal link (with the proximal link ancestor (given the Traversal)
     * of the distal one). The function return the frame of the distal with respect to the base ( ${}^{base}H_{distal}$)
     * 
@@ -25,7 +25,7 @@ namespace CoDyCo {
     * \todo add version of the loop with using link names or references
     * 
     */
-   int getFrameLoop(const TreeGraph & tree_graph,
+   int getFrameLoop(const UndirectedTree & undirected_tree,
                 const KDL::JntArray &q, 
                 const Traversal & traversal,
                 const int proximal_link_index,
@@ -33,7 +33,7 @@ namespace CoDyCo {
                 Frame & frame_proximal_distal);
     
    /**
-    * Loop for calculating, given a TreeGraph and a Traversal, the Frame
+    * Loop for calculating, given a UndirectedTree and a Traversal, the Frame
     * between a distal link and a proximal link (with the proximal link ancestor (given the Traversal)
     * of the distal one). The function return the frame of the distal with respect to the base ( ${}^{base}H_{distal}$)
     * 
@@ -43,15 +43,15 @@ namespace CoDyCo {
     * \todo add version of the loop with using link names or references
     * 
     */
-    Frame getFrameLoop(const TreeGraph & tree_graph,
-                const KDL::JntArray &q, 
-                const Traversal & traversal,
-                const int proximal_link_index,
-                const int distal_link_index);
+    Frame getFrameLoop(const UndirectedTree & undirected_tree,
+                       const KDL::JntArray &q, 
+                       const Traversal & traversal,
+                       const int proximal_link_index,
+                       const int distal_link_index);
                 
 	
    /**
-    * Loop for calculating, given a TreeGraph and a Traversal, the Frame
+    * Loop for calculating, given a UndirectedTree and a Traversal, the Frame
     * between a distal link and a proximal link (with the proximal link ancestor (given the Traversal)
     * of the distal one). The function return the frame of the distal with respect to the base ( ${}^{base}H_{distal}$)
     * 
@@ -61,7 +61,7 @@ namespace CoDyCo {
     * \todo add version of the loop with using link names or references
     * 
     */
-    int getFramesLoop(const TreeGraph & tree_graph,
+    int getFramesLoop(const UndirectedTree & undirected_tree,
 					  const KDL::JntArray &q, 
 					  const Traversal & traversal,
 					  std::vector<Frame> & X_base);
