@@ -37,7 +37,7 @@ option(ENABLE_SERIALIZATION_IO "Enable support for parsing and writing serializa
 find_package(orocos_kdl 1.2.3 QUIET)
 if (NOT orocos_kdl_FOUND)
     SET(OROCOS_KDL_OLDVERSION On)
-    find_package(orocos_kdl REQUIRED)
+    find_package(orocos_kdl)
 endif(NOT orocos_kdl_FOUND)
 
 #support also for the old version of kdl cmake package
