@@ -30,7 +30,7 @@
 
 namespace KDL {
 namespace CoDyCo {
-    
+
     void UndirectedTreeJunction::update_buffers(const double & q) const
     {
         if (q != q_previous) {
@@ -49,7 +49,7 @@ namespace CoDyCo {
             q_previous = q;
         }
     }
-    
+
     Frame & UndirectedTreeJunction::pose(const double& q, const bool inverse) const
     {
         update_buffers(q);
@@ -59,7 +59,7 @@ namespace CoDyCo {
             return relative_pose_child_parent;
         }
     }
-    
+
     Twist & UndirectedTreeJunction::S(const double& q, bool inverse) const
     {
         update_buffers(q);
@@ -69,18 +69,18 @@ namespace CoDyCo {
             return S_child_parent;
         }
     }
-    
+
     Twist UndirectedTreeJunction::vj(const double& q, const double &dq, bool inverse) const
     {
         return S(q,inverse)*dq;
     }
-    
+
     std::string UndirectedTreeJunction::toString() const
     {
         std::stringstream ss;
-        ss << joint_name << " " << q_nr << " "  << joint.getTypeName() << " body part " << body_part << " local q_nr " << body_part_q_nr << " frame_to_tip " << f_tip;
+        ss << joint_name << " " << q_nr << " "  << joint.getTypeName() << " frame_to_tip " << f_tip;
         return ss.str();
     }
-    
+
 }
 }//end of namespace

@@ -34,7 +34,7 @@ namespace CoDyCo {
     {
         int i;
         #ifndef NDEBUG
-        if( !is_adjacent_to(link_iterator) ) 
+        if( !is_adjacent_to(link_iterator) )
         std::cerr << "UndirectedTreeLink::globalIterator2localIndex fatal error: " << this->getName() << " is not adjacent to " << link_iterator->getName() << std::endl;
         #endif
         assert( is_adjacent_to(link_iterator) );
@@ -53,7 +53,7 @@ namespace CoDyCo {
         assert(adjacent_joint.size() == adjacent_link.size());
         return adjacent_joint.size();
     }
-    
+
     bool UndirectedTreeLink::is_adjacent_to(LinkMap::const_iterator link_iterator) const
     {
         for(int i=0; i < (int)getNrOfAdjacentLinks(); i++ ) {
@@ -63,45 +63,45 @@ namespace CoDyCo {
         }
         return false;
     }
-     
+
     Frame & UndirectedTreeLink::pose(int adjacent_index, const double& q) const
     {
         return adjacent_joint[adjacent_index]->pose(q,is_this_parent[adjacent_index]);
     }
-    
+
     Twist & UndirectedTreeLink::S(int adjacent_index, const double& q) const
     {
         return adjacent_joint[adjacent_index]->S(q,is_this_parent[adjacent_index]);
     }
-    
+
     Twist UndirectedTreeLink::vj(int adjacent_index, const double& q,const double& qdot) const
     {
         return adjacent_joint[adjacent_index]->vj(q,qdot,is_this_parent[adjacent_index]);
     }
-    
+
     Frame & UndirectedTreeLink::pose(LinkMap::const_iterator adjacent_iterator, const double& q) const
     {
         return pose(globalIterator2localIndex(adjacent_iterator),q);
     }
-    
-    
+
+
     Twist & UndirectedTreeLink::S(LinkMap::const_iterator adjacent_iterator, const double& q) const
     {
         return S(globalIterator2localIndex(adjacent_iterator),q);
     }
-    
+
     Twist UndirectedTreeLink::vj(LinkMap::const_iterator adjacent_iterator, const double& q,const double& qdot) const
     {
         int adjacent_index = this->globalIterator2localIndex(adjacent_iterator);
         return vj(adjacent_index,q,qdot);
     }
-    
+
     JunctionMap::const_iterator UndirectedTreeLink::getAdjacentJoint(int adjacent_index) const
     {
         assert( adjacent_index >= 0 && adjacent_index < (int)adjacent_joint.size() );
         return adjacent_joint[adjacent_index];
     }
-    
+
     LinkMap::const_iterator UndirectedTreeLink::getAdjacentLink(int adjacent_index) const
     {
         assert( adjacent_index >= 0 && adjacent_index < (int)adjacent_joint.size());
@@ -114,7 +114,7 @@ namespace CoDyCo {
             return adjacent_joint[adjacent_index]->parent;
         }
     }
-    
+
     JunctionMap::const_iterator UndirectedTreeLink::getAdjacentJoint(LinkMap::const_iterator adjacent_iterator) const
     {
         int adjacent_index = globalIterator2localIndex(adjacent_iterator);
@@ -124,10 +124,10 @@ namespace CoDyCo {
     std::string UndirectedTreeLink::toString() const
     {
         std::stringstream ss;
-        ss << link_name << " " << link_nr << " "  << " mass " << I.getMass() << " body part " << body_part_nr << " body part link nr " << body_part_link_nr << " com " << I.getCOG();
+        ss << link_name << " " << link_nr << " "  << " mass " << I.getMass() << " com " << I.getCOG();
         return ss.str();
     }
-    
-    
+
+
 }
 }//end of namespace
