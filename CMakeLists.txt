@@ -7,7 +7,7 @@ project (${PROJECT_NAME} CXX)
 
 set (KDL_CODYCO_VERSION_MAJOR 0)
 set (KDL_CODYCO_VERSION_MINOR 0)
-set (KDL_CODYCO_VERSION_PATCH 3)
+set (KDL_CODYCO_VERSION_PATCH 5)
 
 set (KDL_CODYCO_VERSION ${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}.${KDL_CODYCO_VERSION_PATCH})
 
@@ -31,7 +31,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
-endif(MSVC) 
+endif(MSVC)
 
 find_package(orocos_kdl 1.2.3)
 if (NOT orocos_kdl_FOUND)
@@ -42,7 +42,7 @@ endif(NOT orocos_kdl_FOUND)
 #support also for the old version of kdl cmake package
 if(NOT orocos_kdl_FOUND)
    find_package(Orocos-KDL)
-   if(NOT Orocos-KDL_FOUND) 
+   if(NOT Orocos-KDL_FOUND)
       message(WARNING "KDL not found: neither orocos_kdl or Orocos-KDL cmake packages are available")
    else(NOT Orocos-KDL_FOUND)
       set(orocos_kdl_INCLUDE_DIRS ${Orocos-KDL_INCLUDE_DIRS})
@@ -72,7 +72,7 @@ file(GLOB KDL_CODYCO_SRC
     "src/*.cpp"
 )
 
-file(GLOB DIRL_SRC 
+file(GLOB DIRL_SRC
     "src/regressors/*.cpp" "src/regressors/dataset/*.cpp"
 )
 
