@@ -86,8 +86,7 @@ namespace CoDyCo {
                                  MomentumJacobian & jacobian_momentum,
                                  Jacobian & buffer_jac,
                                  MomentumJacobian & buffer_momentum_jac,
-                                 RigidBodyInertia & total_inertia,
-                                 int part_id)
+                                 RigidBodyInertia & total_inertia)
     {
         Eigen::Matrix<double, 6, 6> eigen_inertia; //The spatial inertia matrix
         KDL::RigidBodyInertia kdl_inertia;
@@ -132,8 +131,7 @@ namespace CoDyCo {
                            const Traversal & traversal,
                            const std::vector<Frame>& X_b,
                            Jacobian & jac,
-                           Jacobian & buffer_jac,
-                           int part_id)
+                           Jacobian & buffer_jac)
     {
 
         assert(undirected_tree.getNrOfDOFs()+6 == jac.columns());
