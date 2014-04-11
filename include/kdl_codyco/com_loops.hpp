@@ -27,8 +27,7 @@ namespace CoDyCo {
                             const Traversal & traversal,
                             std::vector<KDL::Vector>& subtree_COM,
                             std::vector<double>& subtree_mass,
-                            Vector & com,
-                            int part_id = -1);
+                            Vector & com);
 
 
    /**
@@ -54,16 +53,14 @@ namespace CoDyCo {
                                 MomentumJacobian & jac,
                                 Jacobian & buffer_1,
                                 MomentumJacobian & buffer_2,
-                                RigidBodyInertia & total_inertia,
-                                int part_id = -1);
+                                RigidBodyInertia & total_inertia);
 
    void getCOMJacobianLoop(const UndirectedTree & ,
                            const KDL::JntArray &q,
                            const Traversal & traversal,
                            const std::vector<Frame>& X_b,
                            Jacobian & jac,
-                           Jacobian & buffer_jac,
-                           int part_id = -1);
+                           Jacobian & buffer_jac);
 }
 }
 
