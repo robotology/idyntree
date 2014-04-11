@@ -255,8 +255,6 @@ namespace CoDyCo {
         //std::cerr << "UndirectedTree::constructor() : check consistency exiting UndirectedTree constructor " << std::endl;
         //std::cerr << this->toString() << std::endl;
         assert(check_consistency() == 0);
-        assert(this->getPartition().is_consistent(this->getTree()));
-        assert(local_partition.is_consistent(tree));
         assert(local_serialization.is_consistent(tree));
         #endif
         assert(nrOfLinks == (int)links.size());
@@ -478,8 +476,6 @@ namespace CoDyCo {
 
         for(link_it = links.begin(); link_it != links.end(); link_it++) {
             assert(link_it->link_nr >= 0 && link_it->link_nr < (int)getNrOfLinks());
-            assert(link_it->body_part_link_nr >= 0 && link_it->body_part_link_nr < (int)getNrOfLinks());
-            assert(link_it->body_part_nr >= 0);
 
             #ifndef NDEBUG
             //std::cerr << "Considering link " << link_it->link_name << " " << link_it->link_nr << std::endl;
