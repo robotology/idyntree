@@ -15,6 +15,7 @@ ycm_default_dirs(${VARS_PREFIX})
 option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
 option(IDYNTREE_BUILD_TESTS "Compile iDynTree tests" TRUE)
+option(IDYNTREE_BUILD_FT_TESTS "Compile iDynTree on FT sensors, that require ICUB v1.1.14 or greater" FALSE)
 
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
@@ -57,7 +58,7 @@ add_library(idyntree ${LIB_TYPE} ${folder_source} ${folder_header})
 set_target_properties(idyntree PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            SOVERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${folder_header}")
-                                           
+
 message("kdl_codyco_INCLUDE_DIRS = ${kdl_codyco_INCLUDE_DIRS}")
 target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
@@ -68,7 +69,7 @@ target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR
                                             ${kdl_codyco_INCLUDE_DIRS}
                                             ${Eigen3_INCLUDE_DIR}
                                             ${kdl_format_io_INCLUDE_DIRS})
-                                            
+
 target_link_libraries(idyntree iDyn
                                      ${GSL_LIBRARIES}
                                      ${YARP_LIBRARIES}
