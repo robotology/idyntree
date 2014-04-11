@@ -34,7 +34,7 @@ before_script:
   # Build kdl_codyco and install it in a local directory
   - git clone https://github.com/traversaro/kdl_codyco
   - cd kdl_codyco
-  - git checkout rovereto
+  - git checkout development
   - mkdir build
   - cd build
   - mkdir local_install
