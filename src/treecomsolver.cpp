@@ -14,21 +14,24 @@ namespace CoDyCo {
 
     TreeCOMSolver::TreeCOMSolver(const Tree& tree_in, TreeSerialization serialization_in):
                                 UndirectedTreeSolver(tree_in,serialization_in),
-                                subtree_COM(undirected_tree.getNrOfLinks()),
+                                subtree_first_moment_of_mass(undirected_tree.getNrOfLinks()),
                                 subtree_mass(undirected_tree.getNrOfLinks())
     {
     }
 
-    TreeCOMSolver::~TreeCOMSolver() {
+    TreeCOMSolver::~TreeCOMSolver()
+    {
     }
 
-    int TreeCOMSolver::JntToCOM(const KDL::JntArray& q_in, Vector& p_out) {
+    int TreeCOMSolver::JntToCOM(const KDL::CoDyCo::GeneralizedJntPositions& q_in,
+                                Vector& p_out)
+    {
         //First we check all the sizes:
-        if (q_in.rows() != undirected_tree.getNrOfDOFs()) {
+        if (q_in.jnt_pos.rows() != undirected_tree.getNrOfDOFs()) {
             return -1;
         }
 
-        getCenterOfMassLoop(undirected_tree,q_in,traversal,subtree_COM,subtree_mass,p_out);
+        getCenterOfMassLoop(undirected_tree,q_in,traversal,subtree_first_moment_of_mass,subtree_mass,p_out);
 
         return 0;
 

@@ -15,6 +15,7 @@
 #include <iostream>
 #endif
 
+#include <kdl/frames_io.hpp>
 #include <Eigen/Core>
 
 namespace KDL {
@@ -31,8 +32,137 @@ namespace CoDyCo {
     }
 
 
+
+/*
+    void getCenterOfMassLoop(const UndirectedTree &  undirected_tree,
+                             const KDL::CoDyCo::GeneralizedJntPositions &q,
+                             const Traversal & traversal,
+                             std::vector<KDL::Vector>& subtree_first_moment_of_mass,
+                             std::vector<double>& subtree_mass,
+                             Vector & com)
+    {
+        for(int l=traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
+            LinkMap::const_iterator link = traversal.getOrderedLink(l);
+            int link_id = link->getLinkIndex();
+
+            #ifndef NDEBUG
+            //std::cerr << "Traversal size " << traversal.order.size() << std::endl;
+            //std::cerr << "TreeCOMSolver: considering link " << link->second.link_name << " " << link->second.link_nr << std::endl;
+            #endif
+            subtree_mass[link_id] = link->getInertia().getMass();
+            subtree_first_moment_of_mass[link_id] = subtree_mass[link_id]*(link->getInertia().getCOG());
+
+            for(int j = 0; j < (int)link->getNrOfAdjacentLinks(); j++ ) {
+                LinkMap::const_iterator child_link = link->getAdjacentLink(j);
+                if( child_link != traversal.getParentLink(link) ) {
+                    int child_link_id = child_link->getLinkIndex();
+                    double joint_position;
+                    if(link->getAdjacentJoint(j)->getJoint().getType() != Joint::None) {
+                        joint_position = q.jnt_pos(link->getAdjacentJoint(j)->getDOFIndex());
+                    } else {
+                        joint_position = 0;
+                    }
+
+                   subtree_first_moment_of_mass[link_id] = subtree_first_moment_of_mass[link_id] +
+                                            link->pose(j,joint_position).Inverse(subtree_first_moment_of_mass[child_link_id]);
+
+                   subtree_mass[link_id] = subtree_mass[link_id] + subtree_mass[child_link_id];
+                }
+            }
+        }
+
+        com = q.base_pos*(subtree_first_moment_of_mass[0]/subtree_mass[0]);
+    }
+
+
+
     void getCenterOfMassLoop(const UndirectedTree & ,
-                            const KDL::JntArray &q,
+                            const KDL::CoDyCo::GeneralizedJntPositions &q,
+                            const Traversal & traversal,
+                            std::vector<KDL::Vector>& subtree_COM,
+                            std::vector<double>& subtree_mass,
+                            Vector & com)
+    {
+        std::vector<KDL::Vector> subtree_COM_debug = subtree_COM;
+        std::vector<double> subtree_mass_debug = subtree_mass;
+
+        for(int l=traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
+            LinkMap::const_iterator link = traversal.getOrderedLink(l);
+
+#ifndef NDEBUG
+            //std::cerr << "Traversal size " << traversal.order.size() << std::endl;
+            //std::cerr << "TreeCOMSolver: considering link " << link->second.link_name << " " << link->second.link_nr << std::endl;
+#endif
+            //if all part is considered, or this link belong to the considered part
+            subtree_mass_debug[link->getLinkIndex()] = link->getInertia().getMass();
+            subtree_COM_debug[link->getLinkIndex()] = link->getInertia().getCOG();
+
+            subtree_mass[link->getLinkIndex()] = link->getInertia().getMass();
+            subtree_COM[link->getLinkIndex()] = (link->getInertia().getMass())*(link->getInertia().getCOG());
+
+        }
+
+                std::cout << "BEFORE ~~~~~~~~~~~~~~~~` " << std::endl;
+            for(int link_debug_i=0; link_debug_i < traversal.getNrOfVisitedLinks(); link_debug_i++ ) {
+                                int link_debug = traversal.getOrderedLink(link_debug_i)->getLinkIndex();
+                std::cout << "subtree_mass_debug " << link_debug << " " << subtree_mass_debug[link_debug] << std::endl;
+                std::cout << "subtree_com_debug " << link_debug << " " << subtree_COM_debug[link_debug] << std::endl;
+                std::cout << "subtree_mass " << link_debug << " " << subtree_mass[link_debug] << std::endl;
+                std::cout << "subtree_com " << link_debug << " " << subtree_COM[link_debug]/subtree_mass[link_debug] << std::endl;
+            }
+        std::cout << "BEFORE ~~~~~~~~~~~~~~~~` " << std::endl;
+
+        for(int l=traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
+            LinkMap::const_iterator link = traversal.getOrderedLink(l);
+            for(int j = 0; j < (int)link->getNrOfAdjacentLinks(); j++ ) {
+                LinkMap::const_iterator next_link = link->getAdjacentLink(j);
+                if( next_link != traversal.getParentLink(link) ) {
+                    int index = link->getLinkIndex();
+                    int s = next_link->getLinkIndex();
+                    double joint_position;
+                    if(link->getAdjacentJoint(j)->getJoint().getType() != Joint::None) {
+                        joint_position = q.jnt_pos(link->getAdjacentJoint(j)->getDOFIndex());
+                    } else {
+                        joint_position = 0;
+                    }
+
+                    /// \todo solve issue: very little values of mass could cause numerical problems
+
+                    if( subtree_mass_debug[s] > 0.0 || subtree_mass_debug[index] > 0.0 ) {
+                        subtree_COM_debug[index] = (subtree_mass_debug[index]*subtree_COM_debug[index] +
+                                            subtree_mass_debug[s]*((link->pose(j,joint_position)).Inverse()*subtree_COM_debug[s]))
+                                            /
+                                            (subtree_mass_debug[index]+subtree_mass_debug[s]);
+                        subtree_mass_debug[index] = subtree_mass_debug[index] + subtree_mass_debug[s];
+                    }
+                    subtree_mass[index] = subtree_mass[index] + subtree_mass[s];
+                    subtree_COM[index] = subtree_COM[index] + (link->pose(j,joint_position)).Inverse()*subtree_COM[s];
+
+                }
+            }
+        }
+        std::cout << "AFTER ~~~~~~~~~~~~~~~~` " << std::endl;
+        for(int link_debug_i=0; link_debug_i < traversal.getNrOfVisitedLinks(); link_debug_i++ ) {
+                int link_debug = traversal.getOrderedLink(link_debug_i)->getLinkIndex();
+                std::cout << traversal.getOrderedLink(link_debug_i)->getName() << std::endl;
+                std::cout << "subtree_mass_debug " << link_debug << " " << subtree_mass_debug[link_debug] << std::endl;
+                std::cout << "subtree_com_debug " << link_debug << " " << subtree_COM_debug[link_debug] << std::endl;
+                std::cout << "subtree_mass " << link_debug << " " << subtree_mass[link_debug] << std::endl;
+                std::cout << "subtree_com " << link_debug << " " << subtree_COM[link_debug]/subtree_mass[link_debug] << std::endl;
+                std::cout << "subtree_first_mom " << link_debug << " " << subtree_COM[link_debug] << std::endl;
+
+            }
+        std::cout << " ~~~~~~~~~~~~~~~~` " << std::endl;
+
+
+
+        std::cout << "subtree mass " << subtree_mass[traversal.getBaseLink()->getLinkIndex()] << std::endl;
+        com = q.base_pos*subtree_COM[traversal.getBaseLink()->getLinkIndex()]/subtree_mass[traversal.getBaseLink()->getLinkIndex()];
+    }
+*/
+
+ void getCenterOfMassLoop(const UndirectedTree & ,
+                            const KDL::CoDyCo::GeneralizedJntPositions &q,
                             const Traversal & traversal,
                             std::vector<KDL::Vector>& subtree_COM,
                             std::vector<double>& subtree_mass,
@@ -41,10 +171,10 @@ namespace CoDyCo {
         for(int l=traversal.getNrOfVisitedLinks()-1; l>=0; l-- ) {
             LinkMap::const_iterator link = traversal.getOrderedLink(l);
 
-            #ifndef NDEBUG
+#ifndef NDEBUG
             //std::cerr << "Traversal size " << traversal.order.size() << std::endl;
             //std::cerr << "TreeCOMSolver: considering link " << link->second.link_name << " " << link->second.link_nr << std::endl;
-            #endif
+#endif
             //if all part is considered, or this link belong to the considered part
             subtree_COM[link->getLinkIndex()] = link->getInertia().getCOG();
             subtree_mass[link->getLinkIndex()] = link->getInertia().getMass();
@@ -57,14 +187,14 @@ namespace CoDyCo {
                     int s = next_link->getLinkIndex();
                     double joint_position;
                     if(link->getAdjacentJoint(j)->getJoint().getType() != Joint::None) {
-                        joint_position = q(link->getAdjacentJoint(j)->getDOFIndex());
+                        joint_position = q.jnt_pos(link->getAdjacentJoint(j)->getDOFIndex());
                     } else {
                         joint_position = 0;
                     }
 
 
                     /**\todo solve issue: very little values of mass could cause numerical problems */
-                    if( subtree_mass[s] > 0.0 ||  subtree_mass[index] > 0.0 ) {
+                    if( subtree_mass[s] > 0.0 || subtree_mass[index] > 0.0 ) {
                         subtree_COM[index] = (subtree_mass[index]*subtree_COM[index] +
                                             subtree_mass[s]*((link->pose(j,joint_position)).Inverse()*subtree_COM[s]))
                                             /
@@ -76,7 +206,7 @@ namespace CoDyCo {
             }
         }
 
-        com = subtree_COM[0];
+        com = q.base_pos*subtree_COM[0];
     }
 
     void getMomentumJacobianLoop(const UndirectedTree & undirected_tree,

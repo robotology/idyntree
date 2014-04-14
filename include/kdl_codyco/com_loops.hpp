@@ -12,20 +12,21 @@
 
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/momentumjacobian.hpp>
+#include "kdl_codyco/generalizedjntpositions.hpp"
 
 namespace KDL {
 namespace CoDyCo {
    /**
     * Loop for calculating, given a UndirectedTree and a Traversal, the center
-    * of mass of the tree, expressed in world frame of the root link of the Traversal
+    * of mass of the tree, expressed in world frame
     *
     * \warning Basic function designed for use inside the solver,so some the
     *          error checking on input/output parameters is not guaranteed
     */
    void getCenterOfMassLoop(const UndirectedTree & ,
-                            const KDL::JntArray &q,
+                            const KDL::CoDyCo::GeneralizedJntPositions &q,
                             const Traversal & traversal,
-                            std::vector<KDL::Vector>& subtree_COM,
+                            std::vector<KDL::Vector>& subtree_first_moment_of_mass,
                             std::vector<double>& subtree_mass,
                             Vector & com);
 

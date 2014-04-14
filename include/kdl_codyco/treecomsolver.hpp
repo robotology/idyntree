@@ -13,6 +13,7 @@
 #include "kdl_codyco/treeserialization.hpp"
 #include "kdl_codyco/undirectedtree.hpp"
 #include "kdl_codyco/undirectedtreesolver.hpp"
+#include "kdl_codyco/generalizedjntpositions.hpp"
 
 namespace KDL
 {
@@ -31,22 +32,21 @@ namespace CoDyCo
             virtual ~TreeCOMSolver();
 
             /**
-             * Calculate the tree COM with respect to the base frame of reference
+             * Calculate the tree COM with respect to the world frame of reference
              *
-             * @param q_in input joint positions
+             * @param q_in input generalized joint positions
              *
              * @param p_out COM in the base link reference frame
-             * @param part_id the id of the part for which the COM has to be calculated, -1 for all the body
              *
              * @return if < 0 something went wrong
              */
-            int JntToCOM(const KDL::JntArray& q_in, Vector& p_out);
+            int JntToCOM(const KDL::CoDyCo::GeneralizedJntPositions & q_in, Vector& p_out);
 
         private:
             //vector containing the center of mass of each subtree
             //subtree_COM[i] contains the center of mass of the subtree starting
             //at link i (included)
-            std::vector<KDL::Vector> subtree_COM;
+            std::vector<KDL::Vector> subtree_first_moment_of_mass;
 
             //vector containing the mass of each subtree
             //subtree_mass[i] contains the mass of the subtree starting
