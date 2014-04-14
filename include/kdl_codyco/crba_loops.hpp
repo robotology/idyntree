@@ -2,8 +2,8 @@
  * Copyright  (C) 2013  CoDyCo Project
  * Author: Silvio Traversaro
  * website: http://www.codyco.eu
- */ 
- 
+ */
+
 #ifndef KDL_CODYCO_CRBA_LOOPS_HPP
 #define KDL_CODYCO_CRBA_LOOPS_HPP
 
@@ -15,31 +15,56 @@
 
 #include "kdl_codyco/floatingjntspaceinertiamatrix.hpp"
 #include "kdl_codyco/momentumjacobian.hpp"
+#include "kdl_codyco/generalizedjntpositions.hpp"
 
 namespace KDL {
 namespace CoDyCo {
    /**
     * Loop for calculating, given a UndirectedTree, a Traversal and the joint position,
     * the fixed base mass matrix
-    * 
+    *
     * \warning Basic function designed for use inside the solver,so some the
     *          error checking on input/output parameters is not guaranteed
     */
     int crba_fixed_base_loop(const UndirectedTree & undirected_tree, const Traversal & traversal, const JntArray & q, std::vector<RigidBodyInertia> & Ic, JntSpaceInertiaMatrix & H);
-  
-   /**
-    * Loop for calculating, given a UndirectedTree, a Traversal and the joint position,
-    * the floating base mass matrix
-    * 
-    * \warning Basic function designed for use inside the solver,so some the
-    *          error checking on input/output parameters is not guaranteed
-    */
-   int crba_floating_base_loop(const UndirectedTree & undirected_tree, const Traversal & traversal, const JntArray & q, std::vector<RigidBodyInertia> & Ic, FloatingJntSpaceInertiaMatrix & H);
 
    /**
     * Loop for calculating, given a UndirectedTree, a Traversal and the joint position,
-    * the jacobian of the momentum expressed with the orientation of the base link 
-    * and with respect to the center of mass. The algorithm used is a modified 
+    * the floating base mass matrix
+    *
+    * \warning Basic function designed for use inside the solver,so some the
+    *          error checking on input/output parameters is not guaranteed
+    */
+   int crba_floating_base_loop(const UndirectedTree & undirected_tree,
+                               const Traversal & traversal,
+                               const JntArray & q,
+                               std::vector<RigidBodyInertia> & Ic,
+                               FloatingJntSpaceInertiaMatrix & H);
+
+   /**
+    * Loop for calculating, given a UndirectedTree, a Traversal and the joint position,
+    * the (6+n_dof)x(6+n_dof) floating base mass matrix \f[ \mathbf{M} \f], such that the kinematic energy
+    * of the system is given by:
+    * \f[
+    *  \dot{\mathbf{q}}^\top \mathbf{M} \dot{\mathbf{q}}
+    * \f]
+    * where \f[ \dot{\mathbf{q}} \in \mathbb{R}^{6+n} \f] is defined by abuse of notation as the concatenation of
+    * \f[ {}^w \mathbf{v} \in \mathbb{R}^6 \f] (the floating base origin velocity expressed in world frame) and
+    * \f[ {}^w \dot{\boldsymbol\theta} \in \mathbb{R}^n \f] (the joint velocity vector)
+    *
+    * \warning Basic function designed for use inside the solver,so some the
+    *          error checking on input/output parameters is not guaranteed
+    */
+   int crba_floating_base_loop(const UndirectedTree & undirected_tree,
+                               const Traversal & traversal,
+                               const GeneralizedJntPositions & q,
+                               std::vector<RigidBodyInertia> & Ic,
+                               FloatingJntSpaceInertiaMatrix & H);
+
+   /**
+    * Loop for calculating, given a UndirectedTree, a Traversal and the joint position,
+    * the jacobian of the momentum expressed with the orientation of the base link
+    * and with respect to the center of mass. The algorithm used is a modified
     * version of the CRBA, as explained in:
      * @article{Orin2013,
      *      author = {Orin, David E. and Goswami, Ambarish and Lee, Sung-Hee},
@@ -51,19 +76,19 @@ namespace CoDyCo {
      *      year = {2013}
      * }
      *  In this paper this momentum jacobian is called "Centroidal Momentum Matrix"
-    * 
+    *
     * \warning Basic function designed for use inside the solver,so some the
     *          error checking on input/output parameters is not guaranteed
     */
-   int crba_momentum_jacobian_loop(const UndirectedTree & undirected_tree, 
-                                    const Traversal & traversal, 
-                                    const JntArray & q, 
-                                    std::vector<RigidBodyInertia> & Ic, 
+   int crba_momentum_jacobian_loop(const UndirectedTree & undirected_tree,
+                                    const Traversal & traversal,
+                                    const JntArray & q,
+                                    std::vector<RigidBodyInertia> & Ic,
                                     MomentumJacobian & H,
                                     RigidBodyInertia & InertiaCOM
                                    );
 }
-}  
+}
 
 
 
