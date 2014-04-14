@@ -29,6 +29,7 @@
 #include <kdl_codyco/treeserialization.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/undirectedtreesolver.hpp>
+#include "kdl_codyco/generalizedjntpositions.hpp"
 
 namespace KDL {
 namespace CoDyCo {
@@ -37,21 +38,23 @@ namespace CoDyCo {
      * Implementation of a iterative forward position kinematics
      * algorithm to calculate the position transformation from joint
      * space to Cartesian space of a general kinematic tree (KDL::Tree).
-     * 
-     * \todo add copy constructor?: also for other solvers ? 
+     *
+     * \todo add copy constructor?: also for other solvers ?
      *
      */
     class TreeFkSolverPos_iterative: public UndirectedTreeSolver
     {
     private:
-    
+
     public:
         TreeFkSolverPos_iterative (const Tree& tree_arg, TreeSerialization serialization_arg=TreeSerialization());
         ~TreeFkSolverPos_iterative();
-        
-        int JntToCart(const KDL::JntArray& q_in, Frame& p_out, std::string segmentName);
-        int JntToCart(const KDL::JntArray& q_in, Frame& p_out, const int segmentIndex);
-        
+
+        int JntToCart(const KDL::CoDyCo::GeneralizedJntPositions& q_in,
+                      Frame& p_out, std::string segmentName);
+        int JntToCart(const KDL::CoDyCo::GeneralizedJntPositions& q_in,
+                      Frame& p_out, const int segmentIndex);
+
     };
 
 }

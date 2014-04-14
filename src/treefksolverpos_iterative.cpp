@@ -23,46 +23,50 @@
 
 namespace KDL {
 namespace CoDyCo {
-    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg, 
-                                                         TreeSerialization serialization_arg):    
+    TreeFkSolverPos_iterative::TreeFkSolverPos_iterative(const Tree& tree_arg,
+                                                         TreeSerialization serialization_arg):
                 UndirectedTreeSolver(tree_arg,serialization_arg)
     {
     }
-    
+
     TreeFkSolverPos_iterative::~TreeFkSolverPos_iterative()
     {
     }
-    
 
-    int TreeFkSolverPos_iterative::JntToCart(const KDL::JntArray& q_in, Frame& p_out, std::string segmentName)
+
+    int TreeFkSolverPos_iterative::JntToCart(const KDL::CoDyCo::GeneralizedJntPositions& q_in,
+                                             Frame& p_out, std::string segmentName)
     {
         LinkMap::const_iterator it;
         it = undirected_tree.getLink(segmentName);
-        
-        if( it == undirected_tree.getInvalidLinkIterator() ) 
+
+        if( it == undirected_tree.getInvalidLinkIterator() )
             return -2;
-            
+
         return JntToCart(q_in,p_out,it->getLinkIndex());
     }
 
-    int TreeFkSolverPos_iterative::JntToCart(const KDL::JntArray& q_in, Frame& p_out, int segmentIndex)
+    int TreeFkSolverPos_iterative::JntToCart(const KDL::CoDyCo::GeneralizedJntPositions& q_in,
+                                             Frame& p_out, int segmentIndex)
     {
         assert(undirected_tree.check_consistency(traversal) == 0);
-        
-        if( q_in.rows() != undirected_tree.getNrOfDOFs() )
+
+        if( q_in.jnt_pos.rows() != undirected_tree.getNrOfDOFs() )
             return -1;
-            
+
         LinkMap::const_iterator it;
         it = undirected_tree.getLink(segmentIndex);
-        
-        if( it == undirected_tree.getInvalidLinkIterator() ) 
+
+        if( it == undirected_tree.getInvalidLinkIterator() )
             return -2;
+
+        getWorldFrameLoop(undirected_tree,q_in,traversal,segmentIndex,p_out);
         
-        getFrameLoop(undirected_tree,q_in,traversal,traversal.getOrderedLink(0)->getLinkIndex(),segmentIndex,p_out);
-        return 0;    	
+
+        return 0;
     }
 }
-    
+
 
 
 }
