@@ -1136,18 +1136,19 @@ yarp::sig::Vector DynTree::getCOM(int link_index)
     if( (int)subtree_COM.size() != getNrOfLinks() ) { subtree_COM.resize(getNrOfLinks()); }
     if( (int)subtree_mass.size() != getNrOfLinks() ) { subtree_mass.resize(getNrOfLinks()); }
 
-    KDL::Vector com;
-    getCenterOfMassLoop(undirected_tree,q,dynamic_traversal,subtree_COM,subtree_mass,com);
-
     KDL::Vector com_world, com_return;
+    KDL::CoDyCo::GeneralizedJntPositions q_fb(world_base_frame,q);
+    getCenterOfMassLoop(undirected_tree,q_fb,dynamic_traversal,subtree_COM,subtree_mass,com_world);
 
-    com_world = world_base_frame*com;
+    std::cout << "world base frame: " << world_base_frame << std::endl;
 
-    if( link_index != -1 ) {
-        com_return = X_dynamic_base[link_index].Inverse(com);
-    } else {
-        //if no reference frame for the return is specified, used the world reference frame
+    if( link_index == -1 ) {
+        //if no reference frame for the return is specified, use the world reference frame
         com_return = com_world;
+    } else {
+        // com_return =  H_link_base*H_base_world*com_world
+        computePositions();
+        com_return = X_dynamic_base[link_index].Inverse(world_base_frame.Inverse(com_world));
     }
 
     memcpy(com_yarp.data(),com_return.data,3*sizeof(double));
