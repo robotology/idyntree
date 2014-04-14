@@ -7,11 +7,10 @@
 #ifndef KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 #define KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 
-#include <kdl_codyco/undirectedtree.hpp>
-#include <kdl_codyco/undirectedtreesolver.hpp>
-
-#include "regressor_utils.hpp"
-#include "treeserialization.hpp"
+#include "kdl_codyco/undirectedtree.hpp"
+#include "kdl_codyco/undirectedtreesolver.hpp"
+#include "kdl_codyco/regressor_utils.hpp"
+#include "kdl_codyco/treeserialization.hpp"
 
 #include <Eigen/Core>
 
@@ -23,42 +22,40 @@
 
 namespace KDL {
 namespace CoDyCo {
-    
 
-    
+
+
     /**
      * \brief class encapsulating methods relative to inertial parameters
      * \todo What if Chain changes?
      */
-     class TreeInertialParametersRegressor {
+     class TreeInertialParametersRegressor : public UndirectedTreeSolver
+     {
          private:
             void updateParams();
             bool changeInertialParametersRecursive(const Eigen::VectorXd & new_chain_param, Tree & new_tree, SegmentMap::const_iterator root, const std::string& hook_name) ;
-         
+
             Tree tree;
-            
-            UndirectedTree undirected_tree;
-            Traversal traversal;
-            
+
             int nrOfLinks;
-            
+
             std::string root_name;
-            
+
             //Frame of link i with respect to the base
             std::vector<Frame> X_b;
-            
-            
+
+
             std::vector<Twist> v;
             std::vector<Twist> a;
 
             Twist ag;
-            
+
 
             Eigen::VectorXd tree_param;
- 
+
             //Indicator function
             //std::vector< std::vector<bool> > indicator_function; /**< Indicator function: indicator_function(i,j) == true iff link i has en effect on dynamics of joint j*/
-            
+
         public:
             /**
              * Constructor, it will allocate all the necessary memory.
@@ -67,39 +64,39 @@ namespace CoDyCo {
              */
             TreeInertialParametersRegressor(Tree& tree, Vector grav=Vector::Zero(),const TreeSerialization & serialization=TreeSerialization());
             ~TreeInertialParametersRegressor(){};
-            
+
             Eigen::VectorXd getInertialParameters();
-            
+
             UndirectedTree getUndirectedTree() { return undirected_tree; };
-             
+
              /**
              * Get a copy of the current KDL::Tree, with modified inertial parameters.
-             * 
+             *
              * @param new_chain_param the inertial parameters vector
              * @param new_tree a reference to the output chain
              * @return false in case of some error, true otherwise
              */
             bool changeInertialParameters(const Eigen::VectorXd & new_chain_param, Tree& new_tree);
-            
-            
+
+
              /**
-             * Return the regressor for fixed base dynamics 
-             * 
-             * It replicates the TreeIdSolver_RNE::CartToJnt, the only difference 
-             * it is that it outputs the regressor matrix instead of result. 
-             * 
+             * Return the regressor for fixed base dynamics
+             *
+             * It replicates the TreeIdSolver_RNE::CartToJnt, the only difference
+             * it is that it outputs the regressor matrix instead of result.
+             *
              * @param dynamics_regressor a (6+nj)x(10*ns) output matrix
              *
              */
             int dynamicsRegressor(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, Eigen::MatrixXd & dynamics_regressor);
 
-            
+
             /**
-             * Return the regressor for floating base dynamics 
-             * 
-             * It replicates the TreeIdSolver_RNE::CartToJnt, the only difference 
-             * it is that it outputs the regressor matrix instead of result. 
-             * 
+             * Return the regressor for floating base dynamics
+             *
+             * It replicates the TreeIdSolver_RNE::CartToJnt, the only difference
+             * it is that it outputs the regressor matrix instead of result.
+             *
              * @param dynamics_regressor a (6+nj)x(10*ns) output matrix
              *
              */
@@ -110,4 +107,4 @@ namespace CoDyCo {
 }
 
 
-#endif 
+#endif
