@@ -12,18 +12,19 @@
 #include <kdl/jntarray.hpp>
 #include "kdl_codyco/treeserialization.hpp"
 #include "kdl_codyco/undirectedtree.hpp"
+#include "kdl_codyco/undirectedtreesolver.hpp"
 
 namespace KDL
 {
 namespace CoDyCo
 {
 
-	/**
-	 * \brief This  <strong>abstract</strong> class encapsulates the
-     *  solver for finding the Center Of Mass of a KDL::Tree
-	 */
-	class TreeCOMSolver
-	{
+        /**
+          * \brief This  class encapsulates the
+          *  solver for finding the Center Of Mass of a KDL::Tree
+          */
+        class TreeCOMSolver : public UndirectedTreeSolver
+        {
         public:
             explicit TreeCOMSolver(const Tree& tree,TreeSerialization serialization=TreeSerialization());
 
@@ -42,9 +43,6 @@ namespace CoDyCo
             int JntToCOM(const KDL::JntArray& q_in, Vector& p_out);
 
         private:
-            const UndirectedTree undirected_tree;
-            Traversal traversal;
-
             //vector containing the center of mass of each subtree
             //subtree_COM[i] contains the center of mass of the subtree starting
             //at link i (included)

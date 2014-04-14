@@ -12,19 +12,11 @@
 namespace KDL {
 namespace CoDyCo {
 
-    TreeCOMSolver::TreeCOMSolver(const Tree& tree_in, TreeSerialization serialization_in): undirected_tree(tree_in,serialization_in)
+    TreeCOMSolver::TreeCOMSolver(const Tree& tree_in, TreeSerialization serialization_in):
+                                UndirectedTreeSolver(tree_in,serialization_in),
+                                subtree_COM(undirected_tree.getNrOfLinks()),
+                                subtree_mass(undirected_tree.getNrOfLinks())
     {
-        subtree_COM.resize(undirected_tree.getNrOfLinks());
-        subtree_mass.resize(undirected_tree.getNrOfLinks());
-        #ifndef NDEBUG
-        std::cerr << "Check consistency in the constructor of TreeComSolver" << std::endl;
-        //assert(.check_consistency() == 0);
-        #endif
-        //Using default base
-        int ret = undirected_tree.compute_traversal(traversal);
-        assert( ret==0 );
-        //Avoiding unused variable warning
-        ((void)ret);
     }
 
     TreeCOMSolver::~TreeCOMSolver() {
