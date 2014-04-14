@@ -18,6 +18,7 @@
 #include <kdl_codyco/crba_loops.hpp>
 #include <kdl_codyco/utils.hpp>
 #include <kdl_codyco/regressor_utils.hpp>
+#include <kdl_codyco/generalizedjntpositions.hpp>
 
 #ifdef CODYCO_USES_URDFDOM
 //Urdf import from kdl_format_io
@@ -119,8 +120,8 @@ int ret;
 
     torques = KDL::JntArray(NrOfDOFs);
 
-    q_min = KDL::JntArray(NrOfDOFs);
-    q_max = KDL::JntArray(NrOfDOFs);
+    q_jnt_min = KDL::JntArray(NrOfDOFs);
+    q_jnt_max = KDL::JntArray(NrOfDOFs);
     constrained = std::vector<bool>(NrOfDOFs,false);
     constrained_count = 0;
 
@@ -181,7 +182,7 @@ double DynTree::setAng(const double q_in, const int i)
     is_X_dynamic_base_updated = false;
 
     if (constrained[i]) {
-        q(i) = (q_in<q_min(i)) ? q_min(i) : ((q_in>q_max(i)) ? q_max(i) : q_in);
+        q(i) = (q_in<q_jnt_min(i)) ? q_jnt_min(i) : ((q_in>q_jnt_max(i)) ? q_jnt_max(i) : q_in);
     } else {
         q(i) = q_in;
     }
@@ -726,13 +727,13 @@ yarp::sig::Vector DynTree::getJointBoundMin(const std::string & part_name)
     yarp::sig::Vector ret;
     if( part_name.length() == 0 )
     {
-        KDLtoYarp(q_min,ret);
+        KDLtoYarp(q_jnt_min,ret);
     } else {
         const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
         if( dof_ids.size() ==0  ) { std::cerr << "getJointBoundMin: wrong part_name (or part with 0 DOFs)" << std::endl; return yarp::sig::Vector(0); }
         ret.resize(dof_ids.size());
         for(int i = 0; i < (int)dof_ids.size(); i++ ) {
-            ret[i] = q_min(dof_ids[i]);
+            ret[i] = q_jnt_min(dof_ids[i]);
         }
     }
     return ret;
@@ -743,13 +744,13 @@ yarp::sig::Vector DynTree::getJointBoundMax(const std::string & part_name)
     yarp::sig::Vector ret;
     if( part_name.length() == 0 )
     {
-        KDLtoYarp(q_max,ret);
+        KDLtoYarp(q_jnt_max,ret);
     } else {
         const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
         if( dof_ids.size() ==0  ) { std::cerr << "getJointBoundMax: wrong part_name (or part with 0 DOFs)" << std::endl; return yarp::sig::Vector(0); }
         ret.resize(dof_ids.size());
         for(int i = 0; i < (int)dof_ids.size(); i++ ) {
-            ret[i] = q_max(dof_ids[i]);
+            ret[i] = q_jnt_max(dof_ids[i]);
         }
     }
     return ret;
@@ -759,14 +760,14 @@ bool DynTree::setJointBoundMin(const yarp::sig::Vector & _q, const std::string &
 {
     if( part_name.length() == 0 ) {
         if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMin error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
-        YarptoKDL(_q,q_min);
+        YarptoKDL(_q,q_jnt_min);
     }
     else
     {
         const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
         if( dof_ids.size() != _q.size() ) { std::cerr << "setJointBoundMax error: Input vector has a wrong number of elements (or part_name wrong)" << std::endl; return false; }
         for(int i = 0; i < (int)dof_ids.size(); i++ ) {
-            q_min(dof_ids[i]) = _q[i];
+            q_jnt_min(dof_ids[i]) = _q[i];
         }
     }
     return true;
@@ -776,14 +777,14 @@ bool DynTree::setJointBoundMax(const yarp::sig::Vector & _q, const std::string &
 {
     if( part_name.length() == 0 ) {
         if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMax error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
-        YarptoKDL(_q,q_max);
+        YarptoKDL(_q,q_jnt_max);
     }
     else
     {
         const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
         if( dof_ids.size() != _q.size() ) { std::cerr << "setJointBoundMax error: Input vector has a wrong number of elements (or part_name wrong)" << std::endl; return false; }
         for(int i = 0; i < (int)dof_ids.size(); i++ ) {
-            q_max(dof_ids[i]) = _q[i];
+            q_jnt_max(dof_ids[i]) = _q[i];
         }
     }
     return true;
@@ -1409,47 +1410,31 @@ yarp::sig::Vector DynTree::getMomentum()
 ////////////////////////////////////////////////////////////////////////
 ////// Jacobian related methods
 ////////////////////////////////////////////////////////////////////////
-bool DynTree::getJacobian(const int link_index, yarp::sig::Matrix & jac, bool local)
+bool DynTree::getJacobian(const int link_index, yarp::sig::Matrix & jac)
 {
-    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getJacobian: link index " << link_index <<  " out of bounds" << std::endl; return false; }
-    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+    if( link_index < 0 ||
+        link_index >= (int)undirected_tree.getNrOfLinks() )
+    {
+        std::cerr << "DynTree::getJacobian: link index " << link_index <<  " out of bounds" << std::endl;
+        return false;
+    }
+
+    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) )
+    {
         jac.resize(6,6+undirected_tree.getNrOfDOFs());
     }
 
-    if( abs_jacobian.rows() != 6 || abs_jacobian.columns() != 6+undirected_tree.getNrOfDOFs() ) { abs_jacobian.resize(6+undirected_tree.getNrOfDOFs()); }
-
-    getFloatingBaseJacobianLoop(undirected_tree,q,dynamic_traversal,link_index,abs_jacobian);
-
-    /** \todo compute only the needed rototranslation */
-    computePositions();
-
-    if( !local ) {
-        //Compute the position of the world n
-
-        abs_jacobian.changeBase((world_base_frame*X_dynamic_base[link_index]).M);
-
-        KDL::Vector dist_base_link = (KDL::Frame(world_base_frame.M)*X_dynamic_base[link_index]).p;
-         //KDL::Vector dist_base_link = (KDL::Frame(world_base_frame)*X_dynamic_base[link_index]).p;
-
-        //As in iDynTree the base twist is expressed in the world frame, the first six columns are always the identity
-        abs_jacobian.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(1,KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(2,KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(3,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(dist_base_link));
-    } else {
-        //The first 6 columns should be the transformation between world and the local frame
-        //in kdl_codyco the velocity of the base twist is expressed in the base frame
-        KDL::Frame H_link_world = (world_base_frame*X_dynamic_base[link_index]).Inverse();
-
-        abs_jacobian.setColumn(0,H_link_world*KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)));
-        abs_jacobian.setColumn(1,H_link_world*KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)));
-        abs_jacobian.setColumn(2,H_link_world*KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)));
-        abs_jacobian.setColumn(3,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)));
-        abs_jacobian.setColumn(4,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)));
-        abs_jacobian.setColumn(5,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)));
+    if( abs_jacobian.rows() != 6 ||
+        abs_jacobian.columns() != 6+undirected_tree.getNrOfDOFs() )
+    {
+        abs_jacobian.resize(6+undirected_tree.getNrOfDOFs());
     }
+
+    getFloatingBaseJacobianLoop(undirected_tree,
+                                KDL::CoDyCo::GeneralizedJntPositions(world_base_frame,q),
+                                dynamic_traversal,
+                                link_index,
+                                abs_jacobian);
 
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_jacobian(jac.data(),jac.rows(),jac.cols());
 
@@ -1506,66 +1491,44 @@ bool DynTree::getFloatingBaseMassMatrix(yarp::sig::Matrix & fb_mass_matrix)
 {
     //If the incoming matrix have the wrong number of rows/colums, resize it
     if( fb_mass_matrix.rows() != (int)(6+undirected_tree.getNrOfDOFs())
-        || fb_mass_matrix.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+        || fb_mass_matrix.cols() != (int)(6+undirected_tree.getNrOfDOFs()) )
+    {
         fb_mass_matrix.resize(6+undirected_tree.getNrOfDOFs(),6+undirected_tree.getNrOfDOFs());
         fb_mass_matrix.zero();
     }
 
     //Calculate the result directly in the output matrix
     /**
-     * \todo TODO check that X_b,v and are computed
      * \todo TODO modify crba loops in a way that it can run directly in the fb_mass_matrix.data();
      */
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_mass_matrix(fb_mass_matrix.data(),fb_mass_matrix.rows(),fb_mass_matrix.cols());
 
     if( fb_jnt_mass_matrix.rows() != (6+undirected_tree.getNrOfDOFs())
-        || fb_jnt_mass_matrix.columns() != (6+undirected_tree.getNrOfDOFs()) ) {
+        || fb_jnt_mass_matrix.columns() != (6+undirected_tree.getNrOfDOFs()) )
+    {
         fb_jnt_mass_matrix.resize(6+undirected_tree.getNrOfDOFs());
         SetToZero(fb_jnt_mass_matrix);
     }
 
-    if( subtree_crbi.size() != undirected_tree.getNrOfLinks() ) { subtree_crbi.resize(undirected_tree.getNrOfLinks()); };
+    if( subtree_crbi.size() != undirected_tree.getNrOfLinks() ) {
+        subtree_crbi.resize(undirected_tree.getNrOfLinks());
 
-    int successfull_return = KDL::CoDyCo::crba_floating_base_loop(undirected_tree,dynamic_traversal,q,subtree_crbi,fb_jnt_mass_matrix);
+    };
+
+    KDL::CoDyCo::GeneralizedJntPositions q_fb(world_base_frame,q);
+    int successfull_return = KDL::CoDyCo::crba_floating_base_loop(undirected_tree,
+                                                                  dynamic_traversal,
+                                                                  q_fb,
+                                                                  subtree_crbi,
+                                                                  fb_jnt_mass_matrix);
 
     if( successfull_return != 0 ) {
         return false;
     }
 
-    //Fixed base mass matrix (the n x n bottom right submatrix) is ok in this way
-    //but the other submatrices must be changed, as iDynTree express all velocities/accelerations (also the base one) in world orientation
-    //while kdl_codyco express the velocities in base orientation
-    KDL::Frame world_base_rotation = KDL::Frame(world_base_frame.M);
-    //As the transformation is a rotation, the adjoint trasformation is the same for both twist and wrenches
-    //Additionally, the inverse of the adjoint matrix is simply the transpose
-    Eigen::Matrix< double, 6, 6> world_base_rotation_adjoint_transformation = KDL::CoDyCo::WrenchTransformationMatrix(world_base_rotation);
-
-    /*
-    std::cout << "fb jnt mass matrix " << std::endl << fb_jnt_mass_matrix.data.block<6,6>(0,0) << std::endl;
-    std::cout << "world_base_rotation_adjoint_transformation " << std::endl <<  world_base_rotation_adjoint_transformation << std::endl;
-    std::cout << "world_base_rotation_adjoint_transformation " << std::endl <<  world_base_rotation_adjoint_transformation.transpose() << std::endl;
-    */
-
-    //Modification of 6x6 left upper submatrix (spatial inertia)
-    // doing some moltiplication by zero (inefficient? )
-    //fb_jnt_mass_matrix.data.block<6,6>(0,0) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,6>(0,0);
-    //fb_jnt_mass_matrix.data.block<6,6>(0,0) = fb_jnt_mass_matrix.data.block<6,6>(0,0)*world_base_rotation_adjoint_transformation.transpose();
-    Eigen::Matrix<double,6,6> buffer_mat_six_six =  world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,6>(0,0);
-    fb_jnt_mass_matrix.data.block<6,6>(0,0) = buffer_mat_six_six*(world_base_rotation_adjoint_transformation.transpose());
-
-    for(int dof=0; dof < undirected_tree.getNrOfDOFs(); dof++ ) {
-        //fb_jnt_mass_matrix.data.block<6,1>(0,6+dof) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,1>(0,6+dof);
-        //fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = fb_jnt_mass_matrix.data.block<6,1>(0,6+dof).transpose();
-        Eigen::Matrix<double,6,1> buffer_vec_six = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,1>(0,6+dof);
-        fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = buffer_vec_six.transpose();
-        fb_jnt_mass_matrix.data.block<6,1>(0,6+dof) = buffer_vec_six;
-    }
-
-    //std::cout << "fb jnt mass matrix " << std::endl << fb_jnt_mass_matrix.data.block<6,6>(0,0) << std::endl;
-
-
     //This copy does not exploit the matrix sparsness..
-    //but I guess that exploiting it would lead to slower code
+    //but I guess that manually exploiting it would lead to slower code
+
     assert(fb_jnt_mass_matrix.rows() == fb_jnt_mass_matrix.columns());
     assert(fb_mass_matrix.rows() == (int)fb_jnt_mass_matrix.rows());
     assert(fb_mass_matrix.cols() == (int)fb_jnt_mass_matrix.columns());

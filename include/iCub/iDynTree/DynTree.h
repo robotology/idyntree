@@ -128,18 +128,22 @@ class DynTree  {
         int NrOfDynamicSubGraphs;
 
         //state of the robot
-        KDL::Frame world_base_frame; /**< the position of the floating base frame with respect to the world reference frame \f$ {}^w H_b \f$ */
+
+
+        KDL::Frame world_base_frame; ///< the position of the floating base frame with respect to the world reference frame \f$ {}^w H_b \f$
 
         KDL::JntArray q;
         KDL::JntArray dq;
         KDL::JntArray ddq;
 
         KDL::Twist imu_velocity;
-        KDL::Twist imu_acceleration; /**< KDL acceleration: spatial proper acceleration */
+        KDL::Twist imu_acceleration;  /**< KDL acceleration: spatial proper acceleration */
+
+
 
         //joint position limits
-        KDL::JntArray q_min;
-        KDL::JntArray q_max;
+        KDL::JntArray q_jnt_min;
+        KDL::JntArray q_jnt_max;
         std::vector<bool> constrained; /**< true if the DOF is subject to limit check, false otherwise */
 
         int constrained_count; /**< the number of DOFs that are constrained */
@@ -489,7 +493,7 @@ class DynTree  {
         * @param dw0 a 3x1 vector with the initial/measured angular acceleration
         * @return true if succeeds (correct vectors size), false otherwise
         *
-        * \note this variables are considered in **base** reference frame
+        * \note this variables are considered in **kinematic base** reference frame
         */
         virtual bool setInertialMeasureAndLinearVelocity(const yarp::sig::Vector &dp0, const yarp::sig::Vector &w0, const yarp::sig::Vector &ddp0, const yarp::sig::Vector &dw0);
 
@@ -761,13 +765,12 @@ class DynTree  {
         * are the proper joint velocities.
         * @param link_index the index of the link
         * @param jac the output yarp::sig::Matrix
-        * @param local if true, return \f$ {}^iJ_i \f$ (the Jacobian expressed in the local frame of link i) (default: false)
         * @return true if all went well, false otherwise
         *
         * \note the link used as a floating base is the base used for the dynamical loop
         * \note {}^w v_i is expressed in the world reference frame, but its reference point is the origin of the frame of link i
         */
-        virtual bool getJacobian(const int link_index, yarp::sig::Matrix & jac, bool local=false);
+        virtual bool getJacobian(const int link_index, yarp::sig::Matrix & jac);
 
         /**
         * Get the 6+getNrOfDOFs() yarp::sig::Vector, characterizing the floating base velocities of the tree
@@ -794,7 +797,7 @@ class DynTree  {
         * @param global if true, return \f$ {}^wJ_{s,f} \f$ (the Jacobian expressed in the world frame) (default: false)
         * @return true if all went well, false otherwise
         */
-        virtual bool getRelativeJacobian(const int jacobian_distal_link, const int jacobian_base_link, yarp::sig::Matrix & jac, bool global=false);
+        IDYN_DEPRECATED virtual bool getRelativeJacobian(const int jacobian_distal_link, const int jacobian_base_link, yarp::sig::Matrix & jac, bool global=false);
 
         //@}
         /** @name Methods related to Center of Mass calculation
