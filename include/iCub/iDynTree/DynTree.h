@@ -141,6 +141,9 @@ class DynTree  {
         KDL::JntArray q_min;
         KDL::JntArray q_max;
         std::vector<bool> constrained; /**< true if the DOF is subject to limit check, false otherwise */
+
+        //joint torque limits
+        KDL::JntArray tau_max;
         
         int constrained_count; /**< the number of DOFs that are constrained */
         
@@ -555,6 +558,11 @@ class DynTree  {
          * Returns a list containing the max value for each joint.
          */
         virtual yarp::sig::Vector getJointBoundMax(const std::string & part_name="");
+
+        /**
+          * Returns a list containing the max torque value for each joint.
+          */
+        virtual yarp::sig::Vector getJointTorqueMax(const std::string & part_name="");
         
         /**
          * Set a list containing the min value for each joint. 
@@ -565,6 +573,11 @@ class DynTree  {
          * Set a list containing the max value for each joint.
          */
         virtual bool setJointBoundMax(const yarp::sig::Vector & _q, const std::string & part_name="");
+
+        /**
+         * Set a list containing the max torque value for each joint.
+         */
+        virtual bool setJointTorqueBoundMax(const yarp::sig::Vector & _tau, const std::string & part_name="");
 
        /**
         * Sets the constraint status of all chain links.
