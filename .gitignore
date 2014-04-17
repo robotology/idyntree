@@ -1,1 +1,4 @@
 html/
+include/kdl_codyco/config.h
+*kdev4
+build/
