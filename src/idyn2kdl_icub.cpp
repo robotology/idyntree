@@ -26,7 +26,7 @@ bool names2links_joints(const std::vector<std::string> names,std::vector<std::st
 }
 */
 
-const root_link_weight = 4.72;
+cons double root_link_weight = 4.72;
 
 KDL::RotationalInertia operator-(const KDL::RotationalInertia& Ia, const KDL::RotationalInertia& Ib){
     KDL::RotationalInertia result;
