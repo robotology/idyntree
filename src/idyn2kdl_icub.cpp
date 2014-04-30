@@ -26,6 +26,8 @@ bool names2links_joints(const std::vector<std::string> names,std::vector<std::st
 }
 */
 
+const root_link_weight = 4.72;
+
 KDL::RotationalInertia operator-(const KDL::RotationalInertia& Ia, const KDL::RotationalInertia& Ib){
     KDL::RotationalInertia result;
     Eigen::Map<Eigen::Matrix3d>(result.data)=Eigen::Map<const Eigen::Matrix3d>(Ia.data)-Eigen::Map<const Eigen::Matrix3d>(Ib.data);
@@ -142,7 +144,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn, KDL::Tree & icub_kdl, KD
     if( !add_root_weight ) {
         I_root = KDL::RigidBodyInertia();
     } else {
-        I_root = KDL::RigidBodyInertia(1.2);
+        I_root = KDL::RigidBodyInertia(root_link_weight);
     }
         
         status_ok = icub_kdl.addSegment(KDL::Segment(real_root_name,KDL::Joint("base_fixed_joint",KDL::Joint::None),KDL::Frame::Identity(),I_root),fake_root_name);
