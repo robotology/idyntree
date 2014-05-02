@@ -22,7 +22,6 @@ before_script:
   # Build orocos_kinematics_dynamics and install it in a local directory
   - git clone https://github.com/orocos/orocos_kinematics_dynamics
   - cd orocos_kinematics_dynamics
-  - git checkout v1.2.1
   - cd orocos_kdl
   - mkdir build
   - cd build
