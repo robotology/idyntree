@@ -11,11 +11,13 @@
 #include <cmath>
 #include <cfloat>
 
-#include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
-#include <kdl_codyco/regressors/dirl_utils.hpp>
+#include "kdl_codyco/regressors/dynamicRegressorGenerator.hpp"
+#include "kdl_codyco/regressors/dirl_utils.hpp"
 
-#include <kdl_codyco/rnea_loops.hpp>
-#include <kdl_codyco/position_loops.hpp>
+#include "kdl_codyco/regressor_loops.hpp"
+
+#include "kdl_codyco/rnea_loops.hpp"
+#include "kdl_codyco/position_loops.hpp"
 
 #include <iostream>
 
@@ -36,12 +38,13 @@ double random_double()
 DynamicRegressorGenerator::DynamicRegressorGenerator(KDL::Tree & _tree, std::string kinematic_base,
                                                       std::vector< std::string > ft_sensor_names,
                                                       bool ft_sensor_offset,
-                                                      std::vector< std::string > fake_links_names,
+                                                      std::vector< std::string > _fake_links_names,
                                                       KDL::CoDyCo::TreeSerialization serialization,
                                                       const bool _verbose
                                                     ):
                                                       regressors_ptrs(0),
                                                       consider_ft_offset(ft_sensor_offset),
+                                                      fake_links_names(_fake_links_names),
                                                       verbose(_verbose)
 {
 #ifndef NDEBUG
@@ -2015,6 +2018,46 @@ int DynamicRegressorGenerator::updateBuffers()
     six_rows_vector = Eigen::VectorXd(6);
 
     return -1;
+}
+
+int DynamicRegressorGenerator::getUpdatedModel(const Eigen::VectorXd & values,
+                                               KDL::CoDyCo::UndirectedTree & updated_model)
+{
+    if( values.rows() != NrOfParameters )
+    {
+        return -1;
+    }
+
+    updated_model = undirected_tree;
+
+    /** \todo TODO remove dynamic memory allocation */
+    Eigen::VectorXd inertial_parameters = values.segment(0,10*NrOfRealLinks_gen);
+
+    assert(fake_links_names.size()+(inertial_parameters.rows()/10)==undirected_tree.getNrOfLinks());
+
+    inertialParametersVectorToUndirectedTreeLoopFakeLinks(inertial_parameters,updated_model,fake_links_names);
+
+    return 0;
+}
+
+int DynamicRegressorGenerator::getModelParameters(Eigen::VectorXd & values)
+{
+    if( values.rows() != NrOfParameters )
+    {
+        values.resize(NrOfParameters);
+    }
+
+    /** \todo TODO remove dynamic memory allocation */
+    values.setZero();
+    Eigen::VectorXd inertial_parameters = values.segment(0,10*NrOfRealLinks_gen);
+
+    assert(fake_links_names.size()+(inertial_parameters.rows()/10)==undirected_tree.getNrOfLinks());
+
+    inertialParametersVectorLoopFakeLinks(undirected_tree,inertial_parameters,fake_links_names);
+
+    values.segment(0,10*NrOfRealLinks_gen) = inertial_parameters;
+
+    return 0;
 }
 
 

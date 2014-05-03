@@ -99,7 +99,7 @@ public:
      */
     int addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<std::string> &_activated_ft_sensors);
 
-	/**
+    /**
      * Add to the regressor the rows relative to all the torque of the (internal) degrees of freedom of the robot
      *
      */
@@ -324,6 +324,13 @@ public:
 
     int computeSparseNumericalIdentifiableSubspaceAdvancedPaper( Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 100, const bool verbose = false);
 
+    /**
+     * Get an updated Undirected Tree model with the parameters specified in input
+     * @return 0 if all went well, -1 otherwise
+     */
+    int getUpdatedModel(const Eigen::VectorXd & values, KDL::CoDyCo::UndirectedTree & updated_model);
+
+    int getModelParameters(Eigen::VectorXd & values);
 
 private:
     KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization */
@@ -344,6 +351,7 @@ private:
     std::vector< bool > is_link_real;
     std::vector< int > regrColumns2linkIndeces;
     std::vector< int > linkIndeces2regrColumns;
+    std::vector< std::string > fake_links_names;
 
     //Robot state
     KDL::JntArray q;
@@ -391,7 +399,11 @@ private:
     //utility function for generating a random regressor for numerical base parameter calculation
     //Given n_samples, the Y (n_samples*getNrOfOutputs() X getNrOfParameters() ) regressor is obtained by stacking the n_samples generated regressors
     //This function returns Y^T Y (getNrOfParameters() X getNrOfParameters() ) (that share the row space with Y)
-    int generate_random_regressors(Eigen::MatrixXd & output_matrix, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), int n_samples = 1000, const bool verbose = false);
+    int generate_random_regressors(Eigen::MatrixXd & output_matrix,
+                                   const bool static_regressor = false,
+                                   const bool fixed_base = false,
+                                   const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8),
+                                   int n_samples = 1000, const bool verbose = false);
 
 };
 
