@@ -13,10 +13,11 @@ before_script:
   - git clone https://github.com/orocos/orocos_kinematics_dynamics
   - cd orocos_kinematics_dynamics/orocos_kdl
   - mkdir build 
-  - cd build
-  - cmake ../
+  - cd build  
+  - mkdir local_install
+  - cmake -DCMAKE_INSTALL_PREFIX="./local_install" ../
   - make
-  - sudo make install
+  - make install
   - cd ../../..
   - mkdir build
   - cd build
