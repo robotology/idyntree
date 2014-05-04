@@ -22,7 +22,6 @@ before_script:
   # Build orocos_kinematics_dynamics and install it in a local directory
   - git clone https://github.com/orocos/orocos_kinematics_dynamics
   - cd orocos_kinematics_dynamics
-  - git checkout v1.2.1
   - cd orocos_kdl
   - mkdir build
   - cd build
@@ -34,7 +33,6 @@ before_script:
   # Build kdl_codyco and install it in a local directory
   - git clone https://github.com/traversaro/kdl_codyco
   - cd kdl_codyco
-  - git checkout rovereto
   - mkdir build
   - cd build
   - mkdir local_install

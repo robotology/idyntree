@@ -26,6 +26,8 @@ bool names2links_joints(const std::vector<std::string> names,std::vector<std::st
 }
 */
 
+const double root_link_weight = 4.72;
+
 KDL::RotationalInertia operator-(const KDL::RotationalInertia& Ia, const KDL::RotationalInertia& Ib){
     KDL::RotationalInertia result;
     Eigen::Map<Eigen::Matrix3d>(result.data)=Eigen::Map<const Eigen::Matrix3d>(Ia.data)-Eigen::Map<const Eigen::Matrix3d>(Ib.data);
