@@ -281,7 +281,15 @@ public:
      *
      * \note This method is not real time safe.
      */
-    int computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor = false, const bool fixed_base = false, const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8), double tol = -1.0, int n_samples = 1000, const bool verbose = false);
+    int computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis,
+                                             const bool static_regressor = false,
+                                             const bool fixed_base = false,
+                                             const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8),
+                                             const std::vector<int> fixed_dofs=std::vector<int>(0),
+                                             const std::vector<double> fixed_dofs_values=std::vector<double>(0),
+                                             double tol = -1.0,
+                                             int n_samples = 1000,
+                                             const bool verbose = false);
 
     /**
      * Get a matrix whose columns are the base parameters of the given regressor,
@@ -404,6 +412,14 @@ private:
                                    const bool fixed_base = false,
                                    const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8),
                                    int n_samples = 1000, const bool verbose = false);
+
+    int generate_random_regressors(Eigen::MatrixXd & output_matrix,
+                                   const bool static_regressor,
+                                   const bool fixed_base,
+                                   const KDL::Vector grav_direction,
+                                   std::vector<int> fixed_dofs,
+                                   std::vector<double> fixed_dofs_values,
+                                   int n_samples, const bool verbose);
 
 };
 

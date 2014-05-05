@@ -25,6 +25,7 @@
 #include <deque>
 
 #include <Eigen/LU>
+#include <boost/concept_check.hpp>
 
 namespace KDL {
 namespace CoDyCo {
@@ -451,8 +452,34 @@ class FloatingBaseRobotState
         JntArray ddq;
 }*/
 
+int DynamicRegressorGenerator::generate_random_regressors(Eigen::MatrixXd & A,
+                                                          const bool static_regressor,
+                                                          const bool fixed_base,
+                                                          const KDL::Vector grav_direction,
+                                                          int n_samples,
+                                                          const bool verbose)
+{
+    std::vector<int> dummy_int_vector;
+    std::vector<double> dummy_double_vector;
+    return generate_random_regressors(A,
+                                      static_regressor,
+                                      fixed_base,
+                                      grav_direction,
+                                      dummy_int_vector,
+                                      dummy_double_vector,
+                                      n_samples,
+                                      verbose);
+}
 
-int DynamicRegressorGenerator::generate_random_regressors(Eigen::MatrixXd & A, const bool static_regressor , const bool fixed_base, const KDL::Vector grav_direction, int n_samples, const bool verbose)
+
+int DynamicRegressorGenerator::generate_random_regressors(Eigen::MatrixXd & A,
+                                                          const bool static_regressor,
+                                                          const bool fixed_base,
+                                                          const KDL::Vector grav_direction,
+                                                          std::vector<int> fixed_dofs,
+                                                          std::vector<double> fixed_dofs_values,
+                                                          int n_samples,
+                                                          const bool verbose)
 {
     if( n_samples < 0 ) return -1;
         int no = getNrOfOutputs();
@@ -486,6 +513,15 @@ int DynamicRegressorGenerator::generate_random_regressors(Eigen::MatrixXd & A, c
             } else {
                 dq.data = M_PI*Eigen::VectorXd::Random(nj);
                 ddq.data = M_PI*Eigen::VectorXd::Random(nj);
+            }
+
+            for(int d=0; d < fixed_dofs.size(); d++ )
+            {
+                int fixed_dof = fixed_dofs[d];
+                double fixed_dof_value = fixed_dofs_values[d];
+                q(fixed_dof) = fixed_dof_value;
+                dq(fixed_dof) = 0.0;
+                ddq(fixed_dof) = 0.0;
             }
 
             if( fixed_base ) {
@@ -522,18 +558,51 @@ int DynamicRegressorGenerator::generate_random_regressors(Eigen::MatrixXd & A, c
         return 0;
 }
 
-int DynamicRegressorGenerator::computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor, int n_samples,  double tol, const bool verbose)
+int DynamicRegressorGenerator::computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis,
+                                                                    const bool static_regressor,
+                                                                    int n_samples,
+                                                                    double tol,
+                                                                    const bool verbose)
 {
-    KDL::Vector dummy;
-    return computeNumericalIdentifiableSubspace(basis,static_regressor,false,dummy,tol,n_samples,verbose);
+    bool fixed_base=false;
+    KDL::Vector dummy_gravity;
+    std::vector<int> dummy_int_vector;
+    std::vector<double> dummy_double_vector;
+    return computeNumericalIdentifiableSubspace(basis,
+                                                static_regressor,
+                                                fixed_base,
+                                                dummy_gravity,
+                                                dummy_int_vector,
+                                                dummy_double_vector,
+                                                n_samples,
+                                                verbose);
 }
 
 
-int DynamicRegressorGenerator::computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis, const bool static_regressor, const bool fixed_base, const KDL::Vector grav_direction, double tol, int n_samples, bool verbose)
+int DynamicRegressorGenerator::computeNumericalIdentifiableSubspace(Eigen::MatrixXd & basis,
+                                                                    const bool static_regressor,
+                                                                    const bool fixed_base,
+                                                                    const KDL::Vector grav_direction,
+                                                                    const std::vector<int> fixed_dofs,
+                                                                    const std::vector<double> fixed_dofs_values,
+                                                                    double tol,
+                                                                    int n_samples,
+                                                                    bool verbose)
 {
+    if( fixed_dofs.size() != fixed_dofs_values.size() )
+    {
+        return -1;
+    }
     Eigen::MatrixXd A(getNrOfParameters(),getNrOfParameters());
     //std::cout << "generate_random_regressors" << std::endl;
-    generate_random_regressors(A,static_regressor,fixed_base,grav_direction,n_samples,verbose);
+    generate_random_regressors(A,
+                               static_regressor,
+                               fixed_base,
+                               grav_direction,
+                               fixed_dofs,
+                               fixed_dofs_values,
+                               n_samples,
+                               verbose);
     //std::cout << "generate_random_regressors" << std::endl;
     return getRowSpaceBasis(A,basis,-1.0,true);
 }
@@ -773,7 +842,17 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV1(Eige
 
         Eigen::MatrixXd dense_basis;
 
-        computeNumericalIdentifiableSubspace(dense_basis,static_regressor,fixed_base, grav_direction, tol,n_samples, verbose);
+        std::vector<int> dummy_int_vector;
+        std::vector<double> dummy_double_vector;
+        computeNumericalIdentifiableSubspace(dense_basis,
+                                             static_regressor,
+                                             fixed_base,
+                                             grav_direction,
+                                             dummy_int_vector,
+                                             dummy_double_vector,
+                                             tol,
+                                             n_samples,
+                                             verbose);
 
         Eigen::MatrixXd nullspace_dense_basis =  (Eigen::MatrixXd::Identity(np,np)-sparse_basis*sparse_basis.transpose())*dense_basis;
 
