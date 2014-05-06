@@ -25,7 +25,6 @@
 #include <deque>
 
 #include <Eigen/LU>
-#include <boost/concept_check.hpp>
 
 namespace KDL {
 namespace CoDyCo {
