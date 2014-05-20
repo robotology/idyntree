@@ -47,6 +47,7 @@ KDL::RigidBodyInertia operator-(const KDL::RigidBodyInertia& Ia, const KDL::Rigi
 
     return KDL::RigidBodyInertia(new_mass,new_cog,new_inertia_cog);
 }
+
 bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
            KDL::Tree & icub_kdl,
            KDL::JntArray & q_min,
@@ -307,7 +308,6 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     return true;
 
 }
-
 
 /*
 bool toKDL_iDynDebug(const iCub::iDyn::iCubWholeBody & icub_idyn, KDL::Tree & icub_kdl, bool debug)
