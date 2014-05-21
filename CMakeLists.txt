@@ -12,7 +12,7 @@ find_package(YCM REQUIRED)
 include(YCMDefaultDirs)
 ycm_default_dirs(${VARS_PREFIX})
 
-option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" TRUE)
+option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
 option(IDYNTREE_BUILD_TESTS "Compile iDynTree tests" TRUE)
 
