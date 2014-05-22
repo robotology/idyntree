@@ -23,6 +23,7 @@ find_package(kdl_codyco 0.0.3 REQUIRED)
 
 if(IDYNTREE_ENABLE_URDF)
 find_package(kdl_format_io REQUIRED)
+add_definitions(-DCODYCO_USES_URDFDOM)
 endif()
 
 SET(folder_source src/DynTree.cpp
@@ -57,7 +58,7 @@ add_library(idyntree ${LIB_TYPE} ${folder_source} ${folder_header})
 set_target_properties(idyntree PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            SOVERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${folder_header}")
-                                           
+
 message("kdl_codyco_INCLUDE_DIRS = ${kdl_codyco_INCLUDE_DIRS}")
 target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
@@ -68,7 +69,7 @@ target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR
                                             ${kdl_codyco_INCLUDE_DIRS}
                                             ${Eigen3_INCLUDE_DIR}
                                             ${kdl_format_io_INCLUDE_DIRS})
-                                            
+
 target_link_libraries(idyntree iDyn
                                      ${GSL_LIBRARIES}
                                      ${YARP_LIBRARIES}
