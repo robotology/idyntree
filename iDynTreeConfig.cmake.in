@@ -1,0 +1,15 @@
+find_package(kdl_codyco REQUIRED)
+
+set(iDynTree_VERSION @iDynTree_VERSION@)
+
+@PACKAGE_INIT@
+
+set_and_check(iDynTree_INCLUDEDIR "@PACKAGE_iDynTree_INCLUDEDIR@")
+
+if(NOT TARGET iDynTree::idyntree)
+  include("${CMAKE_CURRENT_LIST_DIR}/iDynTreeTargets.cmake")
+endif()
+
+# Compatibility
+set(iDynTree_LIBRARIES iDynTree::idyntree)
+set(iDynTree_INCLUDE_DIRS ${iDynTree_INCLUDEDIR})
