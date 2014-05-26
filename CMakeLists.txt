@@ -86,6 +86,12 @@ install(TARGETS idyntree
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree)
 
+#hack to include find_project(kdl_formato_io) only
+#if IDYNTREE_ENABLE_URDF is true
+if(IDYNTREE_ENABLE_URDF)
+    set(FIND_KDL_CODYCO_IDYNTREE_CONFIG "find_project(kdl_format_io REQUIRED)")
+endif()
+
 include(InstallBasicPackageFiles)
 install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
                                         VERSION ${${VARS_PREFIX}_VERSION}

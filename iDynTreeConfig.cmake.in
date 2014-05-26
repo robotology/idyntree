@@ -14,6 +14,8 @@ endif(NOT orocos_kdl_FOUND)
 
 find_package(kdl_codyco REQUIRED)
 
+@FIND_KDL_CODYCO_IDYNTREE_CONFIG@
+
 set(iDynTree_VERSION @iDynTree_VERSION@)
 
 @PACKAGE_INIT@
