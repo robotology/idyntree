@@ -14,7 +14,7 @@ ycm_default_dirs(${VARS_PREFIX})
 
 option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
-option(IDYNTREE_BUILD_TESTS "Compile iDynTree tests" TRUE)
+option(IDYNTREE_BUILD_TESTS "Compile iDynTree tests" FALSE)
 
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
