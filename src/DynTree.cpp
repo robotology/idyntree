@@ -116,6 +116,8 @@ int ret;
 
     q_min = KDL::JntArray(NrOfDOFs);
     q_max = KDL::JntArray(NrOfDOFs);
+    tau_max = KDL::JntArray(NrOfDOFs);
+
     constrained = std::vector<bool>(NrOfDOFs,false);
     constrained_count = 0;
 
@@ -733,6 +735,23 @@ yarp::sig::Vector DynTree::getJointBoundMin(const std::string & part_name)
     return ret;
 }
 
+yarp::sig::Vector DynTree::getJointTorqueMax(const std::string & part_name)
+{
+    yarp::sig::Vector ret;
+    if( part_name.length() == 0 )
+    {
+        KDLtoYarp(tau_max,ret);
+    } else {
+        const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
+        if( dof_ids.size() ==0  ) { std::cerr << "getJointBoundMin: wrong part_name (or part with 0 DOFs)" << std::endl; return yarp::sig::Vector(0); }
+        ret.resize(dof_ids.size());
+        for(int i = 0; i < (int)dof_ids.size(); i++ ) {
+            ret[i] = tau_max(dof_ids[i]);
+        }
+    }
+    return ret;
+}
+
 yarp::sig::Vector DynTree::getJointBoundMax(const std::string & part_name)
 {
     yarp::sig::Vector ret;
@@ -779,6 +798,23 @@ bool DynTree::setJointBoundMax(const yarp::sig::Vector & _q, const std::string &
         if( dof_ids.size() != _q.size() ) { std::cerr << "setJointBoundMax error: Input vector has a wrong number of elements (or part_name wrong)" << std::endl; return false; }
         for(int i = 0; i < (int)dof_ids.size(); i++ ) {
             q_max(dof_ids[i]) = _q[i];
+        }
+    }
+    return true;
+}
+
+bool DynTree::setJointTorqueBoundMax(const yarp::sig::Vector & _tau, const std::string & part_name)
+{
+    if( part_name.length() == 0 ) {
+        if( (int)_tau.size() != NrOfDOFs  ) { std::cerr << "setTorqueJointBoundMax error: input vector has size " << _tau.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
+        YarptoKDL(_tau,tau_max);
+    }
+    else
+    {
+        const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
+        if( dof_ids.size() != _tau.size() ) { std::cerr << "setTorqueJointBoundMax error: Input vector has a wrong number of elements (or part_name wrong)" << std::endl; return false; }
+        for(int i = 0; i < (int)dof_ids.size(); i++ ) {
+            tau_max(dof_ids[i]) = _tau[i];
         }
     }
     return true;
