@@ -845,6 +845,26 @@ void DynTree::setConstraint(unsigned int i, bool _constrained)
 
 bool DynTree::getConstraint(unsigned int i) { return constrained[i]; }
 
+bool DynTree::setFloatingBaseLink(const int link_index)
+{
+    // \todo add a method to invalidate all the buffers
+    int old_flt_base_link = getFloatingBaseLink();
+    is_X_dynamic_base_updated = false;
+    if( undirected_tree.compute_traversal(dynamic_traversal,link_index) == 0)
+    {
+        return true;
+    } else {
+        int check = undirected_tree.compute_traversal(dynamic_traversal,old_flt_base_link);
+        assert(check==0);
+        return false;
+    }
+}
+
+int DynTree::getFloatingBaseLink()
+{
+    return dynamic_traversal.getBaseLink()->getLinkIndex();
+}
+
 
 yarp::sig::Matrix DynTree::getPosition(const int link_index,bool inverse) const
 {

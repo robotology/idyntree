@@ -600,7 +600,30 @@ class DynTree  {
         */
         virtual bool getConstraint(unsigned int i);
 
+//@}
 
+
+
+        /** @name Methods to change the floating base of the robot
+        *  Methods to change the floating base of the robot
+        */
+        //@{
+
+        /**
+         * Set the floating base link used for all the algorithms in iDynTree
+         * (except for kinematicRNEA progation, for which the imu link is used).
+         * @param link_index the index of the link desired to be the floating base
+         * @return true if all went well, false otherwise
+         */
+        bool setFloatingBaseLink(const int link_index);
+
+        /**
+         * Get the floating base link used for all the algorithms in iDynTree
+         * (except for kinematicRNEA progation, for which the imu link is used).
+         *
+         * @return the link index of the floating base link
+         */
+        int getFloatingBaseLink();
 
         //@}
 
