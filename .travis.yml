@@ -72,7 +72,7 @@ before_script:
 script:
   - make
   - sudo make install
-  - if[ $IDYNTREE_USES_ICUB ]; then ctest -V ; fi
+  - if [ $IDYNTREE_USES_ICUB ]; then ctest -V ; fi
 
 notifications:
   email:
