@@ -7,8 +7,7 @@ compiler:
 env:
   - IDYNTREE_TRAVIS_BUILD_TYPE=Debug, IDYNTREE_USES_ICUB=TRUE
   - IDYNTREE_TRAVIS_BUILD_TYPE=Release, IDYNTREE_USES_ICUB=TRUE
-  - IDYNTREE_USES_ICUB=
-  FALSE
+  - IDYNTREE_USES_ICUB=FALSE
 
 install:
   - sudo sh -c 'echo "deb http://www.icub.org/ubuntu precise contrib/science" > /etc/apt/sources.list.d/icub.list'
