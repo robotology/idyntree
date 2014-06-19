@@ -66,7 +66,8 @@ before_script:
   - cd iDynTree
   - mkdir build
   - cd build
-  - if[ $IDYNTREE_USES_ICUB ]; then cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_BUILD_TESTS:BOOL=ON ..; fi
+  - if[ $IDYNTREE_USES_ICUB ]; then echo "papaveri"; fi
+  - if[ $IDYNTREE_USES_ICUB ]; then cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_BUILD_TESTS:BOOL=ON ../../iDynTree; fi
   - if[ "$IDYNTREE_USES_ICUB" = "FALSE" ]; then cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_USES_ICUB:BOOL=OFF ..; fi
   
 script:
