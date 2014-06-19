@@ -5,9 +5,10 @@ compiler:
   - clang
 
 env:
-  - IDYNTREE_TRAVIS_BUILD_TYPE=Debug
-  - IDYNTREE_TRAVIS_BUILD_TYPE=Release
-  - IDYNTREE_USES_ICUB=TRUE
+  - IDYNTREE_TRAVIS_BUILD_TYPE=Debug, IDYNTREE_USES_ICUB=TRUE
+  - IDYNTREE_TRAVIS_BUILD_TYPE=Release, IDYNTREE_USES_ICUB=TRUE
+  - IDYNTREE_USES_ICUB=
+  FALSE
 
 install:
   - sudo sh -c 'echo "deb http://www.icub.org/ubuntu precise contrib/science" > /etc/apt/sources.list.d/icub.list'
@@ -66,12 +67,13 @@ before_script:
   - cd iDynTree
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_BUILD_TESTS:BOOL=ON ..
-
+  - if[ $IDYNTREE_USES_ICUB ]; then cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_BUILD_TESTS:BOOL=ON .. ; fi
+  - if[ "$IDYNTREE_USES_ICUB" = "FALSE" ]; then cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_USES_ICUB:BOOL=OFF .. ; fi
+  
 script:
   - make
   - sudo make install
-  - ctest -V
+  - if[ $IDYNTREE_USES_ICUB ]; then ctest -V ; fi
 
 notifications:
   email:
