@@ -1,4 +1,5 @@
 
+if(IDYNTREE_USES_ICUB)
 find_package(kdl_format_io)
 include_directories(${CMAKE_SOURCE_DIR}/include ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS} ${iDynTree_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
 
@@ -14,3 +15,4 @@ target_link_libraries(iDynTreeExternalWrenchesEstimationTest idyntree ${ICUB_LIB
 add_test(NAME test_iDynTreeJacobianTest COMMAND iDynTreeJacobianTest)
 #add_test(NAME test_iDynTreeWholeBodyFTsensorEstimateTest COMMAND iDynTreeWholeBodyFTsensorEstimateTest)
 add_test(NAME test_iDynTreeExternalWrenchesEstimationTest COMMAND iDynTreeExternalWrenchesEstimationTest)
+endif(IDYNTREE_USES_ICUB)

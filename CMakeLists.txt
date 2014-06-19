@@ -13,11 +13,14 @@ include(YCMDefaultDirs)
 ycm_default_dirs(${VARS_PREFIX})
 
 option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
+option(IDYNTREE_USES_ICUB "Compile iDynTree with support for loading parameters from legacy dynamic library iDyn" TRUE)
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
 option(IDYNTREE_BUILD_TESTS "Compile iDynTree tests" FALSE)
 
 find_package(YARP REQUIRED)
-find_package(ICUB REQUIRED)
+IF(IDYNTREE_USES_ICUB)
+    find_package(ICUB REQUIRED)
+ENDIF(IDYNTREE_USES_ICUB)
 find_package(orocos_kdl REQUIRED)
 find_package(kdl_codyco 0.0.3 REQUIRED)
 
@@ -26,17 +29,25 @@ find_package(kdl_format_io REQUIRED)
 add_definitions(-DCODYCO_USES_URDFDOM)
 endif()
 
-SET(folder_source src/DynTree.cpp
-                  src/yarp_kdl.cpp
-                  src/iCubTree.cpp
-                  src/iDyn2KDL.cpp
-                  src/idyn2kdl_icub.cpp)
+IF(IDYNTREE_USES_ICUB)
+    SET(folder_source src/DynTree.cpp
+                      src/yarp_kdl.cpp
+                      src/iCubTree.cpp
+                      src/iDyn2KDL.cpp
+                      src/idyn2kdl_icub.cpp)
 
-SET(folder_header include/iCub/iDynTree/DynTree.h
-                  include/iCub/iDynTree/yarp_kdl.h
-                  include/iCub/iDynTree/iDyn2KDL.h
-                  include/iCub/iDynTree/iCubTree.h
-                  include/iCub/iDynTree/idyn2kdl_icub.h)
+    SET(folder_header include/iCub/iDynTree/DynTree.h
+                      include/iCub/iDynTree/yarp_kdl.h
+                      include/iCub/iDynTree/iDyn2KDL.h
+                      include/iCub/iDynTree/iCubTree.h
+                      include/iCub/iDynTree/idyn2kdl_icub.h)
+ELSE(IDYNTREE_USES_ICUB)
+    SET(folder_source src/DynTree.cpp
+                      src/yarp_kdl.cpp)
+
+    SET(folder_header include/iCub/iDynTree/DynTree.h
+                      include/iCub/iDynTree/yarp_kdl.h)
+ENDIF(IDYNTREE_USES_ICUB)
 
 SOURCE_GROUP("Source Files" FILES ${folder_source})
 SOURCE_GROUP("Header Files" FILES ${folder_header})
@@ -59,8 +70,8 @@ set_target_properties(idyntree PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            SOVERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${folder_header}")
 
-message("kdl_codyco_INCLUDE_DIRS = ${kdl_codyco_INCLUDE_DIRS}")
-target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
+IF(IDYNTREE_USES_ICUB)
+    target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
                                             ${skinDynLib_INCLUDE_DIRS}
                                             ${iDyn_INCLUDE_DIRS}
@@ -70,13 +81,27 @@ target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR
                                             ${Eigen3_INCLUDE_DIR}
                                             ${kdl_format_io_INCLUDE_DIRS})
 
-target_link_libraries(idyntree LINK_PUBLIC  iDyn
+    target_link_libraries(idyntree LINK_PUBLIC  iDyn
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}
                                             ${kdl_codyco_LIBRARIES}
                                             ${kdl_format_io_LIBRARIES}
                                             ${Boost_LIBRARIES})
+ELSE(IDYNTREE_USES_ICUB)
+    target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
+                                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
+                                            ${GSL_INCLUDE_DIRS}
+                                            ${YARP_INCLUDE_DIRS}
+                                            ${kdl_codyco_INCLUDE_DIRS}
+                                            ${Eigen3_INCLUDE_DIR}
+                                            ${kdl_format_io_INCLUDE_DIRS})
 
+    target_link_libraries(idyntree LINK_PUBLIC  ${GSL_LIBRARIES}
+                                            ${YARP_LIBRARIES}
+                                            ${kdl_codyco_LIBRARIES}
+                                            ${kdl_format_io_LIBRARIES}
+                                            ${Boost_LIBRARIES})
+ENDIF(IDYNTREE_USES_ICUB)
 install(TARGETS idyntree
         EXPORT iDynTree
         RUNTIME DESTINATION "${${VARS_PREFIX}_INSTALL_BINDIR}" COMPONENT bin

@@ -7,13 +7,15 @@ compiler:
 env:
   - IDYNTREE_TRAVIS_BUILD_TYPE=Debug
   - IDYNTREE_TRAVIS_BUILD_TYPE=Release
+  - IDYNTREE_USES_ICUB=TRUE
 
 install:
   - sudo sh -c 'echo "deb http://www.icub.org/ubuntu precise contrib/science" > /etc/apt/sources.list.d/icub.list'
   - sudo add-apt-repository -y ppa:kalakris/cmake
   - sudo apt-get update
   - sudo apt-get install -qq libeigen3-dev libboost-system-dev libboost-thread-dev libtinyxml-dev
-  - sudo apt-get --force-yes install icub
+  - sudo apt-get --force-yes install yarp
+  - if [ $IDYNTREE_USES_ICUB ]; then sudo apt-get --force-yes install icub; fi
   - sudo apt-get install cmake
 
 before_script:
@@ -55,9 +57,9 @@ before_script:
   - git clone https://github.com/robotology/ycm.git
   - cd ycm
   - mkdir build
-  - cd build 
+  - cd build
   - cmake ..
-  - make 
+  - make
   - sudo make install
   - cd ../..
   # Prepare iDynTree build

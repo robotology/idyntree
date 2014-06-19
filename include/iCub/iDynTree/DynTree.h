@@ -77,7 +77,10 @@
 
 #include <yarp/sig/Matrix.h>
 #include <yarp/sig/Vector.h>
+
+#ifdef IDYNTREE_USES_ICUB
 #include <iCub/skinDynLib/dynContactList.h>
+#endif
 
 #include <kdl_codyco/treeserialization.hpp>
 #include <kdl_codyco/treepartition.hpp>
@@ -149,8 +152,10 @@ class DynTree  {
 
         double setAng(const double q, const int i);
 
+        #ifdef IDYNTREE_USES_ICUB
         //dynContact stuff
         std::vector< iCub::skinDynLib::dynContactList > contacts; /**< a vector of dynContactList, one for each dynamic subgraph */
+        #endif
 
         //Sensors measures
         std::vector< KDL::Wrench > measured_wrenches;
@@ -177,10 +182,12 @@ class DynTree  {
         std::vector<KDL::Wrench> f_gi; /**< Gravitational and inertial wrench acting on a link */
 
         //DynTreeContact data structures
+        bool are_contact_estimated;
+
+        #ifdef IDYNTREE_USES_ICUB
         std::vector<int> link2subgraph_index; /**< for each link, return the correspondent dynamics subgraph index */
         std::vector<bool> link_is_subgraph_root; /**< for each link, return if it is a subgraph root */
         std::vector<int> subgraph_index2root_link; /**< for each subgraph, return the index of the root */
-        bool are_contact_estimated;
 
         int getSubGraphIndex(int link_index) {
             assert(link_index >= 0);
@@ -225,7 +232,7 @@ class DynTree  {
          *
          */
         KDL::Wrench getMeasuredWrench(int link_id);
-
+        #endif
         //end DynTreeContact data structures
 
         //Position related quantites
@@ -742,7 +749,7 @@ class DynTree  {
         */
         virtual yarp::sig::Vector getTorques(const std::string & part_name="") const;
 
-
+#ifdef IDYNTREE_USES_ICUB
         //@}
         /** @name Methods related to contact forces
         *  This methods are related both to input and output of the esimation:
@@ -762,13 +769,14 @@ class DynTree  {
         */
         virtual bool setContacts(const iCub::skinDynLib::dynContactList &contacts_list);
 
+
         /**
         * Get the contacts list, containing the results of the estimation if
         * estimateContacts was called
         * @return A reference to the external contact list
         */
         virtual const iCub::skinDynLib::dynContactList getContacts() const;
-
+#endif
         //@}
 
         //@}
