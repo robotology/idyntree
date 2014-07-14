@@ -728,7 +728,7 @@ class DynTree  {
         /**
          * Get the base link force torque, calculated with the dynamic recursive newton euler loop
          *
-         * @param frame_link specify the frame of reference in which express the return value (default: teh dynamic base link)
+         * @param frame_link specify the frame of reference in which express the return value (default: the dynamic base link)
          * @return a 6x1 vector with linear force \f$ {}^b f_b \f$(0:2) and angular torque\f$ {}^b\tau_b \f$ (3:5)
          */
         virtual yarp::sig::Vector getBaseForceTorque(int frame_link=DEFAULT_INDEX_VALUE);
@@ -741,6 +741,18 @@ class DynTree  {
         * @return vector of joint torques
         */
         virtual yarp::sig::Vector getTorques(const std::string & part_name="") const;
+
+        /**
+         * Get the ForceTorque transmitted through joint joint_index.
+         * This method returns the force applied by the child link
+         * on the parent link of the joint, expressed in the child Pluker coordinate frame.
+         * \note the definition of parent and child link of the joint depend
+         *       on the link selected as the dynamic base. The parent link
+         *       is the one "closer" to the dynamic base.
+         *
+         * @return a 6x1 vector with linear force \f$ {}^b f_b \f$(0:2) and angular torque\f$ {}^b\tau_b \f$ (3:5)
+         */
+        yarp::sig::Vector getJointForceTorque(int joint_index) const;
 
 
         //@}

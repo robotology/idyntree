@@ -71,7 +71,7 @@ DynTree::DynTree(const std::string urdf_file,
     KDL::Tree my_tree;
     if (!kdl_format_io::treeFromUrdfFile(urdf_file,my_tree))
     {
-        std::cerr << "DynTree constructor: Could not generate robot model and extract kdl tree" << std::endl; assert(false);
+        std::cerr << "DynTree constructor: Could not generate robot model from file " << urdf_file << "  and extract kdl tree" << std::endl; assert(false);
     }
     constructor(my_tree,joint_sensor_names,imu_link_name,serialization,partition);
 }
@@ -96,12 +96,13 @@ int ret;
     #endif
     //Setting useful constants
     NrOfDOFs = _tree.getNrOfJoints();
-    NrOfLinks = _tree.getNrOfSegments();
+    NrOfLinks = undirected_tree.getNrOfLinks();
     NrOfFTSensors = joint_sensor_names.size();
     NrOfDynamicSubGraphs = NrOfFTSensors + 1;
 
     assert((int)undirected_tree.getNrOfDOFs() == NrOfDOFs);
-    assert((int)undirected_tree.getNrOfLinks() == NrOfLinks);
+    //Remve assertion for robot without a proper fixed base
+    //assert((int)undirected_tree.getNrOfLinks() == NrOfLinks);
 
     world_base_frame = KDL::Frame::Identity();
 
@@ -669,12 +670,17 @@ bool DynTree::setInertialMeasure(const yarp::sig::Vector &w0, const yarp::sig::V
 
 bool DynTree::setKinematicBaseVelAcc(const yarp::sig::Vector &base_vel, const yarp::sig::Vector &base_classical_acc)
 {
+    //std::cout << "base vel " << base_vel.toString() << std::endl;
     KDL::Twist base_vel_kdl, base_classical_acc_kdl, base_spatial_acc_kdl;
     YarptoKDL(base_vel,base_vel_kdl);
+    //std::cout << "base_vel_kdl " << base_vel_kdl << std::endl;
     YarptoKDL(base_classical_acc,base_classical_acc_kdl);
     KDL::CoDyCo::conventionalToSpatialAcceleration(base_classical_acc_kdl,base_vel_kdl,base_spatial_acc_kdl);
     computePositions();
+    //std::cout << "world_base_frame " << world_base_frame << std::endl;
+    //std::cout << "X_dynamic_base_kinematic_base " << X_dynamic_base[kinematic_traversal.getBaseLink()->getLinkIndex()] << std::endl;
     imu_velocity = (world_base_frame*X_dynamic_base[kinematic_traversal.getBaseLink()->getLinkIndex()]).M.Inverse(base_vel_kdl);
+    //std::cout << "imu_velocity " << imu_velocity << std::endl;
     imu_acceleration = (world_base_frame*X_dynamic_base[kinematic_traversal.getBaseLink()->getLinkIndex()]).M.Inverse(base_spatial_acc_kdl);
 
     return true;
@@ -922,10 +928,7 @@ yarp::sig::Vector DynTree::getVel(const int link_index, const bool local) const
         return_twist = v[link_index];
     }
 
-    KDLtoYarp(return_twist.vel,lin_vel);
-    KDLtoYarp(return_twist.rot,ang_vel);
-    ret.setSubvector(0,lin_vel);
-    ret.setSubvector(3,ang_vel);
+
     return ret;
 }
 
@@ -1012,6 +1015,26 @@ yarp::sig::Vector DynTree::getTorques(const std::string & part_name) const
         }
         return ret;
     }
+}
+
+yarp::sig::Vector DynTree::getJointForceTorque(int joint_index) const
+{
+    if( joint_index < 0 || joint_index >= f.size() )
+    {
+        std::cerr << "getJointForceTorque: joint_index " << joint_index << " out of bounds " << std::endl;
+        return yarp::sig::Vector(0);
+    }
+
+    KDL::Wrench return_wrench;
+
+    return_wrench = f[joint_index];
+
+    yarp::sig::Vector ret(6), force(3), torque(3);
+    KDLtoYarp(return_wrench.force,force);
+    KDLtoYarp(return_wrench.torque,torque);
+    ret.setSubvector(0,force);
+    ret.setSubvector(3,torque);
+    return ret;
 }
 
 bool DynTree::setContacts(const iCub::skinDynLib::dynContactList & contacts_list)
@@ -1457,6 +1480,9 @@ yarp::sig::Vector DynTree::getCentroidalMomentum()
     kinematicRNEA();
     computePositions();
 
+    //std::cout << imu_velocity << std::endl;
+    //std::cout << "dq: " << dq(0) << " " << dq(1) << std::endl;
+
     double m = 0;
     KDL::Wrench mom;
     KDL::Wrench mom_world;
@@ -1464,7 +1490,11 @@ yarp::sig::Vector DynTree::getCentroidalMomentum()
         double m_i = undirected_tree.getLink(i)->getInertia().getMass();
         mom += (X_dynamic_base[i]*(undirected_tree.getLink(i)->getInertia()*v[i]));
         m += m_i;
+        //std::cout << v[i] << std::endl;
+        //std::cout << mom << std::endl;
     }
+
+
 
     mom_world = world_base_frame*mom;
 
