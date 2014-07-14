@@ -323,25 +323,25 @@ class DynTree  {
          *       DOFs of the floating base
          *
          */
-        int getNrOfDOFs(const std::string & part_name="");
+        int getNrOfDOFs(const std::string & part_name="") const;
 
         /**
          * Get the number of links of the tree
          *
          */
-        int getNrOfLinks();
+        int getNrOfLinks() const;
 
         /**
          * Get the number of 6-axis Force Torque sensors
          *
          */
-        int getNrOfFTSensors();
+        int getNrOfFTSensors() const;
 
         /**
          * Get the number of IMUs
          *
          */
-        int getNrOfIMUs();
+        int getNrOfIMUs() const;
 
         /**
          * Get the global index for a link, given a link name
@@ -746,13 +746,16 @@ class DynTree  {
          * Get the ForceTorque transmitted through joint joint_index.
          * This method returns the force applied by the child link
          * on the parent link of the joint, expressed in the child Pluker coordinate frame.
+         *
+         * @param joint_index joint of the requested forcetorque
+         * @param frame_link  specify the frame of reference in which express the return value (default: the child link)
          * \note the definition of parent and child link of the joint depend
          *       on the link selected as the dynamic base. The parent link
          *       is the one "closer" to the dynamic base.
          *
          * @return a 6x1 vector with linear force \f$ {}^b f_b \f$(0:2) and angular torque\f$ {}^b\tau_b \f$ (3:5)
          */
-        yarp::sig::Vector getJointForceTorque(int joint_index) const;
+        yarp::sig::Vector getJointForceTorque(int joint_index, int frame_link) const;
 
 
         //@}

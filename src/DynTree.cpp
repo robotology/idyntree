@@ -1017,7 +1017,7 @@ yarp::sig::Vector DynTree::getTorques(const std::string & part_name) const
     }
 }
 
-yarp::sig::Vector DynTree::getJointForceTorque(int joint_index) const
+yarp::sig::Vector DynTree::getJointForceTorque(int joint_index, int frame_link) const
 {
     if( joint_index < 0 || joint_index >= f.size() )
     {
@@ -1025,13 +1025,55 @@ yarp::sig::Vector DynTree::getJointForceTorque(int joint_index) const
         return yarp::sig::Vector(0);
     }
 
-    KDL::Wrench return_wrench;
+    //Get the two links connected to the joint
+    int link1 = undirected_tree.getJunction(joint_index)->getParentLink()->getLinkIndex();
+    int link2 = undirected_tree.getJunction(joint_index)->getChildLink()->getLinkIndex();
+    int parent_link, child_link;
 
-    return_wrench = f[joint_index];
+    //Get the child link (given the traversal)
+    if( link1 == dynamic_traversal.getParentLink(link2)->getLinkIndex() )
+    {
+        parent_link = link1;
+        child_link = link2;
+    }
+    else
+    {
+        if(link2 != dynamic_traversal.getParentLink(link1)->getLinkIndex() )
+        {
+            std::cerr << "getJointForceTorque: inconsistent dynamic_traversal object " << std::endl;
+            return yarp::sig::Vector(0);
+        }
+        parent_link = link2;
+        child_link = link1;
+    }
+
+
+    KDL::Wrench ret_kdl;
+    if( frame_link == DEFAULT_INDEX_VALUE )
+    {
+        frame_link = child_link;
+    }
+
+    if( frame_link != WORLD_FRAME && (frame_link < 0 || frame_link >= getNrOfLinks()) )
+    {
+        std::cerr << "DynTree::getBaseFroceTorque: link index " << frame_link
+                  <<  " out of bounds" << std::endl; return yarp::sig::Vector(0);
+    }
+
+    if( frame_link == child_link )
+    {
+        ret_kdl = f[child_link];
+    } else if( frame_link == WORLD_FRAME ) {
+        computePositions();
+        ret_kdl = (world_base_frame*X_dynamic_base[child_link]).M*f[child_link];
+    } else {
+        computePositions();
+        ret_kdl = X_dynamic_base[frame_link].M.Inverse()*X_dynamic_base[child_link].M*f[child_link];
+    }
 
     yarp::sig::Vector ret(6), force(3), torque(3);
-    KDLtoYarp(return_wrench.force,force);
-    KDLtoYarp(return_wrench.torque,torque);
+    KDLtoYarp(ret_kdl.force,force);
+    KDLtoYarp(ret_kdl.torque,torque);
     ret.setSubvector(0,force);
     ret.setSubvector(3,torque);
     return ret;
@@ -1831,7 +1873,7 @@ bool DynTree::getDynamicsParameters(yarp::sig::Vector & vec)
     return true;
 }
 
-int DynTree::getNrOfDOFs(const std::string & part_name)
+int DynTree::getNrOfDOFs(const std::string & part_name) const
 {
 
     if( part_name.length() ==  0 )
@@ -1846,17 +1888,17 @@ int DynTree::getNrOfDOFs(const std::string & part_name)
     }
 }
 
-int DynTree::getNrOfLinks()
+int DynTree::getNrOfLinks() const
 {
     return undirected_tree.getNrOfLinks();
 }
 
-int DynTree::getNrOfFTSensors()
+int DynTree::getNrOfFTSensors() const
 {
     return NrOfFTSensors;
 }
 
-int DynTree::getNrOfIMUs()
+int DynTree::getNrOfIMUs() const
 {
     return 1;
 }
