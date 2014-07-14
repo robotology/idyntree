@@ -928,6 +928,11 @@ yarp::sig::Vector DynTree::getVel(const int link_index, const bool local) const
         return_twist = v[link_index];
     }
 
+    KDLtoYarp(return_twist.vel,lin_vel);
+    KDLtoYarp(return_twist.rot,ang_vel);
+    ret.setSubvector(0,lin_vel);
+    ret.setSubvector(3,ang_vel);
+
 
     return ret;
 }
