@@ -41,8 +41,8 @@ before_script:
   - make install
   - cd ../..
   # Build kdl_format_io and install it in a local directory
-  - sudo chmod +x ./iDynTree/.travis/build_urdfdom
-  - ./iDynTree/.travis/build_urdfdom
+  - sudo chmod +x ./idyntree/.travis/build_urdfdom
+  - ./idyntree/.travis/build_urdfdom
   - git clone https://github.com/traversaro/kdl_format_io
   - cd kdl_format_io
   - mkdir build
@@ -61,7 +61,7 @@ before_script:
   - sudo make install
   - cd ../..
   # Prepare iDynTree build
-  - cd iDynTree
+  - cd idyntree
   - mkdir build
   - cd build
   - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_BUILD_TESTS:BOOL=ON ..
