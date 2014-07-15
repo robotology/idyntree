@@ -1030,6 +1030,8 @@ yarp::sig::Vector DynTree::getJointForceTorque(int joint_index, int frame_link) 
         return yarp::sig::Vector(0);
     }
 
+    bool is_child_to_parent = false;
+
     //Get the two links connected to the joint
     int link1 = undirected_tree.getJunction(joint_index)->getParentLink()->getLinkIndex();
     int link2 = undirected_tree.getJunction(joint_index)->getChildLink()->getLinkIndex();
@@ -1040,6 +1042,7 @@ yarp::sig::Vector DynTree::getJointForceTorque(int joint_index, int frame_link) 
     {
         parent_link = link1;
         child_link = link2;
+        is_child_to_parent = true;
     }
     else
     {
@@ -1050,6 +1053,7 @@ yarp::sig::Vector DynTree::getJointForceTorque(int joint_index, int frame_link) 
         }
         parent_link = link2;
         child_link = link1;
+        is_child_to_parent = false;
     }
 
 
@@ -1070,10 +1074,15 @@ yarp::sig::Vector DynTree::getJointForceTorque(int joint_index, int frame_link) 
         ret_kdl = f[child_link];
     } else if( frame_link == WORLD_FRAME ) {
         computePositions();
-        ret_kdl = (world_base_frame*X_dynamic_base[child_link]).M*f[child_link];
+        ret_kdl = (world_base_frame*X_dynamic_base[child_link])*f[child_link];
     } else {
         computePositions();
-        ret_kdl = X_dynamic_base[frame_link].M.Inverse()*X_dynamic_base[child_link].M*f[child_link];
+        ret_kdl = X_dynamic_base[frame_link].Inverse()*X_dynamic_base[child_link]*f[child_link];
+    }
+
+    if(!is_child_to_parent)
+    {
+        ret_kdl = -ret_kdl;
     }
 
     yarp::sig::Vector ret(6), force(3), torque(3);
@@ -1920,6 +1929,13 @@ int DynTree::getDOFIndex(const std::string & dof_name)
     KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(dof_name);
     if( junction_it == undirected_tree.getInvalidJunctionIterator() || junction_it->getNrOfDOFs() != 1 ) { std::cerr << "DynTree::getDOFIndex : DOF " << dof_name << " not found" << std::endl; return -1; }
     return junction_it->getDOFIndex();
+}
+
+int DynTree::getJunctionIndex(const std::string & junction_name)
+{
+    KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(junction_name);
+    if( junction_it == undirected_tree.getInvalidJunctionIterator() || junction_it->getNrOfDOFs() != 1 ) { std::cerr << "DynTree::getDOFIndex : DOF " << junction_name << " not found" << std::endl; return -1; }
+    return junction_it->getJunctionIndex();
 }
 
 int DynTree::getFTSensorIndex(const std::string & ft_name)

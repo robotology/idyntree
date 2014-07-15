@@ -359,6 +359,14 @@ class DynTree  {
         int getDOFIndex(const std::string & dof_name);
 
         /**
+         * Get the global index for a junction, given a junction name
+         * @param junction_name the name of the dof
+         *
+         */
+        int getJunctionIndex(const std::string & junction_name);
+
+
+        /**
          * Get the global index of a FT sensor, given the FT sensor name
          *
          */
@@ -748,10 +756,9 @@ class DynTree  {
          * on the parent link of the joint, expressed in the child Pluker coordinate frame.
          *
          * @param joint_index joint of the requested forcetorque
-         * @param frame_link  specify the frame of reference in which express the return value (default: the child link)
-         * \note the definition of parent and child link of the joint depend
-         *       on the link selected as the dynamic base. The parent link
-         *       is the one "closer" to the dynamic base.
+         * @param frame_link  specify the plucker frame of reference in which express the return value (default: the child link)
+         * \note the definition of parent and child link is the one stored in the joint, so the "original one" of the model,
+         *       not the one modified by changing the base
          *
          * @return a 6x1 vector with linear force \f$ {}^b f_b \f$(0:2) and angular torque\f$ {}^b\tau_b \f$ (3:5)
          */
