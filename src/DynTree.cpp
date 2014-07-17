@@ -489,6 +489,11 @@ void DynTree::store_contacts_results()
 //      Set/Get methods
 //
 //====================================
+bool DynTree::setWorldBasePoseKDL(const KDL::Frame & H_w_b)
+{
+    world_base_frame = H_w_b;
+}
+
 bool DynTree::setWorldBasePose(const yarp::sig::Matrix & H_w_b)
 {
     if ((H_w_b.rows()==4) && (H_w_b.cols()==4))
@@ -504,12 +509,68 @@ bool DynTree::setWorldBasePose(const yarp::sig::Matrix & H_w_b)
     }
 }
 
+KDL::Frame DynTree::getWorldBasePoseKDL()
+{
+    return world_base_frame;
+}
+
+
 yarp::sig::Matrix DynTree::getWorldBasePose()
 {
     KDLtoYarp_position(world_base_frame,_H_w_b);
     return _H_w_b;
 }
 
+
+
+yarp::sig::Vector DynTree::getAng(const std::string & part_name) const
+{
+    yarp::sig::Vector ret;
+    if( part_name.length() == 0 )
+    {
+        KDLtoYarp(q,ret);
+    } else {
+        const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
+        if( dof_ids.size() ==0  ) { std::cerr << "getAng: wrong part_name (or part with 0 DOFs)" << std::endl; return yarp::sig::Vector(0); }
+        ret.resize(dof_ids.size());
+        for(int i = 0; i < (int)dof_ids.size(); i++ ) {
+            ret[i] = q(dof_ids[i]);
+        }
+    }
+    return ret;
+}
+
+bool DynTree::setAngKDL(const KDL::JntArray & _q, const std::string & part_name)
+{
+    is_X_dynamic_base_updated = false;
+
+    if( part_name.length() ==  0 )
+    {
+        //No part specified
+        if( (int)_q.rows() != NrOfDOFs )
+        {
+            std::cerr << "setAng: Input vector has a wrong number of elements" << std::endl;
+            return false;
+        }
+        if( constrained_count == 0 ) {
+            //if all are not constrained, use a quicker way to copy
+            q = _q;
+        } else {
+            for(int i =0; i < NrOfDOFs; i++ ){
+                setAng(_q(i),i);
+            }
+        }
+
+    } else { // if part_name.length > 0
+        std::vector<int> dof_ids;
+        dof_ids = partition.getPartDOFIDs(part_name);
+        if( dof_ids.size() != _q.rows() ) { std::cerr << "setAng: Input vector has a wrong number of elements (or part_name " << part_name << " wrong)" << std::endl; return false; }
+        for(int i = 0; i < (int)dof_ids.size(); i++ ) {
+            setAng(_q(i),dof_ids[i]);
+        }
+    }
+    return true;
+}
 
 yarp::sig::Vector DynTree::setAng(const yarp::sig::Vector & _q, const std::string & part_name)
 {
@@ -541,6 +602,24 @@ yarp::sig::Vector DynTree::setAng(const yarp::sig::Vector & _q, const std::strin
     return ret_q;
 }
 
+bool DynTree::getAngKDL(KDL::JntArray & ret_q, const std::string & part_name) const
+{
+    if( part_name.length() == 0 )
+    {
+        ret_q.resize(q.rows());
+        ret_q = q;
+    } else {
+        const std::vector<int> & dof_ids = partition.getPartDOFIDs(part_name);
+        if( dof_ids.size() ==0  ) { std::cerr << "getAng: wrong part_name (or part with 0 DOFs)" << std::endl; return false; }
+        ret_q.resize(dof_ids.size());
+        for(int i = 0; i < (int)dof_ids.size(); i++ ) {
+            ret_q(i)= q(dof_ids[i]);
+        }
+    }
+    return true;
+}
+
+/*
 yarp::sig::Vector DynTree::getAng(const std::string & part_name) const
 {
     yarp::sig::Vector ret;
@@ -556,7 +635,7 @@ yarp::sig::Vector DynTree::getAng(const std::string & part_name) const
         }
     }
     return ret;
-}
+}*/
 
 yarp::sig::Vector DynTree::setDAng(const yarp::sig::Vector & _q, const std::string & part_name)
 {
@@ -1355,10 +1434,13 @@ bool DynTree::dynamicRNEA()
 ////// COM related methods
 ////////////////////////////////////////////////////////////////////////
 
-yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index)
+KDL::Vector DynTree::getCOMKDL(const std::string & part_name, int link_index)
 {
-    if( (link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks()) && link_index != -1 ) { std::cerr << "DynTree::getCOM: link index " << link_index <<  " out of bounds" << std::endl; return yarp::sig::Vector(0); }
-    if( com_yarp.size() != 3 ) { com_yarp.resize(3); }
+    if( (link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks()) && link_index != -1 )
+    {
+        std::cerr << "DynTree::getCOM: link index " << link_index <<  " out of bounds" << std::endl;
+        return KDL::Vector(0.0,0.0,0.0);
+    }
     if( (int)subtree_COM.size() != getNrOfLinks() ) { subtree_COM.resize(getNrOfLinks()); }
     if( (int)subtree_mass.size() != getNrOfLinks() ) { subtree_mass.resize(getNrOfLinks()); }
 
@@ -1367,7 +1449,11 @@ yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index)
          part_id = -1;
     } else {
          part_id = partition.getPartIDfromPartName(part_name);
-         if( part_id == -1 ) { std::cerr << "getCOM: Part name " << part_name << " not recognized " << std::endl; return yarp::sig::Vector(0); }
+         if( part_id == -1 )
+         {
+             std::cerr << "getCOM: Part name " << part_name << " not recognized " << std::endl;
+             return KDL::Vector(0.0,0.0,0.0);
+        }
     }
 
     KDL::Vector com;
@@ -1384,9 +1470,79 @@ yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index)
         com_return = com_world;
     }
 
+    return com_world;
+}
+
+yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index)
+{
+    KDL::Vector com_return = getCOMKDL(part_name,link_index);
+
     memcpy(com_yarp.data(),com_return.data,3*sizeof(double));
 
     return com_yarp;
+}
+
+
+bool DynTree::getCOMJacobianKDL(KDL::Jacobian & jac, const std::string & part_name)
+{
+    KDL::CoDyCo::MomentumJacobian dummy;
+    return getCOMJacobianKDL(jac,dummy,part_name);
+}
+
+bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJacobian & momentum_jac, const std::string & part_name)
+{
+    if( (int)com_jac.columns() != 6+getNrOfDOFs() ) { com_jac.resize(6+getNrOfDOFs()); }
+    if( (int)momentum_jac.columns() != 6+getNrOfDOFs() ) { momentum_jac.resize(6+getNrOfDOFs()); }
+    if( (int)com_jac_buffer.columns() != 6+getNrOfDOFs() ) { com_jac_buffer.resize(6+getNrOfDOFs()); }
+    if( (int)momentum_jac_buffer.columns() != 6+getNrOfDOFs() ) { momentum_jac_buffer.resize(6+getNrOfDOFs()); }
+
+    SetToZero(com_jac);
+    SetToZero(momentum_jac);
+    SetToZero(com_jac_buffer);
+    SetToZero(momentum_jac_buffer);
+
+    int part_id;
+    if( part_name.length() == 0 ) {
+        part_id = -1;
+    } else {
+        part_id = partition.getPartIDfromPartName(part_name);
+        if( part_id == -1 ) { std::cerr << "getCOMJacobian error: Part name " << part_name << " not recognized " << std::endl; return false; }
+    }
+
+    computePositions();
+
+    KDL::RigidBodyInertia base_total_inertia;
+
+    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jac,com_jac_buffer,momentum_jac_buffer,base_total_inertia,part_id);
+
+
+    momentum_jac.changeRefFrame(KDL::Frame(world_base_frame.M));
+
+    total_inertia = KDL::Frame(world_base_frame.M)*base_total_inertia;
+
+    if( total_inertia.getMass() == 0 )
+    {
+        std::cerr << "iDynTree::getCOMJacobian error: Tree has no mass " << std::endl;
+        return false;
+    }
+
+    momentum_jac.changeRefPoint(total_inertia.getCOG());
+
+    /** \todo add a meaniful transformation for the rotational part of the jacobian */
+    //KDL::CoDyCo::divideJacobianInertia(momentum_jacobian,total_inertia,com_jacobian);
+    com_jac.data = momentum_jacobian.data/total_inertia.getMass();
+
+    //As in iDynTree the base twist is expressed in the world frame, the first six columns are always the identity
+    com_jac.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
+    com_jac.setColumn(1,KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
+    com_jac.setColumn(2,KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
+    com_jac.setColumn(3,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)).RefPoint(total_inertia.getCOG()));
+    com_jac.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(total_inertia.getCOG()));
+    com_jac.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(total_inertia.getCOG()));
+
+    momentum_jac.changeRefPoint(-total_inertia.getCOG());
+
+    return true;
 }
 
 
@@ -1418,43 +1574,7 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & moment
     jac.zero();
     momentum_jac.zero();
 
-    int part_id;
-    if( part_name.length() == 0 ) {
-        part_id = -1;
-    } else {
-        part_id = partition.getPartIDfromPartName(part_name);
-        if( part_id == -1 ) { std::cerr << "getCOMJacobian error: Part name " << part_name << " not recognized " << std::endl; return false; }
-    }
-
-    computePositions();
-
-    KDL::RigidBodyInertia base_total_inertia;
-
-    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jacobian,com_jac_buffer,momentum_jac_buffer,base_total_inertia,part_id);
-
-
-    momentum_jacobian.changeRefFrame(KDL::Frame(world_base_frame.M));
-
-    total_inertia = KDL::Frame(world_base_frame.M)*base_total_inertia;
-
-    if( total_inertia.getMass() == 0 ) {  std::cerr << "getCOMJacobian error: Tree has no mass " << std::endl; return false; }
-
-    momentum_jacobian.changeRefPoint(total_inertia.getCOG());
-
-    /** \todo add a meaniful transformation for the rotational part of the jacobian */
-    //KDL::CoDyCo::divideJacobianInertia(momentum_jacobian,total_inertia,com_jacobian);
-    com_jacobian.data = momentum_jacobian.data/total_inertia.getMass();
-
-
-    //As in iDynTree the base twist is expressed in the world frame, the first six columns are always the identity
-    com_jacobian.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
-    com_jacobian.setColumn(1,KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
-    com_jacobian.setColumn(2,KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
-    com_jacobian.setColumn(3,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)).RefPoint(total_inertia.getCOG()));
-    com_jacobian.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(total_inertia.getCOG()));
-    com_jacobian.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(total_inertia.getCOG()));
-
-    momentum_jacobian.changeRefPoint(-total_inertia.getCOG());
+    getCOMJacobianKDL(com_jacobian,momentum_jacobian,part_name);
 
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_jacobian(jac.data(),jac.rows(),jac.cols());
 
@@ -1466,6 +1586,8 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & moment
 
     return true;
 }
+
+
 
 bool DynTree::getCentroidalMomentumJacobian(yarp::sig::Matrix & momentum_jac)
 {
@@ -1669,20 +1791,24 @@ yarp::sig::Vector DynTree::getMomentum()
 ////////////////////////////////////////////////////////////////////////
 ////// Jacobian related methods
 ////////////////////////////////////////////////////////////////////////
-bool DynTree::getJacobian(const int link_index, yarp::sig::Matrix & jac, bool local)
+bool DynTree::getJacobianKDL(const int link_index, KDL::Jacobian & abs_jac, bool local)
 {
-    if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) { std::cerr << "DynTree::getJacobian: link index " << link_index <<  " out of bounds" << std::endl; return false; }
-    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
-        jac.resize(6,6+undirected_tree.getNrOfDOFs());
+    if( link_index < 0 ||
+        link_index >= (int)undirected_tree.getNrOfLinks() )
+    {
+        std::cerr << "DynTree::getJacobian: link index " << link_index <<  " out of bounds" << std::endl;
+        return false;
     }
 
+    if( abs_jac.rows() != 6 ||
+        abs_jac.columns() != 6+undirected_tree.getNrOfDOFs() )
+    {
+        abs_jac.resize(6+undirected_tree.getNrOfDOFs());
+    }
 
-    if( abs_jacobian.rows() != 6 || abs_jacobian.columns() != 6+undirected_tree.getNrOfDOFs() ) { abs_jacobian.resize(6+undirected_tree.getNrOfDOFs()); }
+    SetToZero(abs_jac);
 
-    SetToZero(abs_jacobian);
-    jac.zero();
-
-    getFloatingBaseJacobianLoop(undirected_tree,q,dynamic_traversal,link_index,abs_jacobian);
+    getFloatingBaseJacobianLoop(undirected_tree,q,dynamic_traversal,link_index,abs_jac);
 
     /** \todo compute only the needed rototranslation */
     computePositions();
@@ -1690,30 +1816,49 @@ bool DynTree::getJacobian(const int link_index, yarp::sig::Matrix & jac, bool lo
     if( !local ) {
         //Compute the position of the world n
 
-        abs_jacobian.changeBase((world_base_frame*X_dynamic_base[link_index]).M);
+        abs_jac.changeBase((world_base_frame*X_dynamic_base[link_index]).M);
 
         KDL::Vector dist_base_link = (KDL::Frame(world_base_frame.M)*X_dynamic_base[link_index]).p;
          //KDL::Vector dist_base_link = (KDL::Frame(world_base_frame)*X_dynamic_base[link_index]).p;
 
         //As in iDynTree the base twist is expressed in the world frame, the first six columns are always the identity
-        abs_jacobian.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(1,KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(2,KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(3,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(dist_base_link));
-        abs_jacobian.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(dist_base_link));
+        abs_jac.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
+        abs_jac.setColumn(1,KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
+        abs_jac.setColumn(2,KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)).RefPoint(dist_base_link));
+        abs_jac.setColumn(3,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)).RefPoint(dist_base_link));
+        abs_jac.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(dist_base_link));
+        abs_jac.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(dist_base_link));
     } else {
         //The first 6 columns should be the transformation between world and the local frame
         //in kdl_codyco the velocity of the base twist is expressed in the base frame
         KDL::Frame H_link_world = (world_base_frame*X_dynamic_base[link_index]).Inverse();
 
-        abs_jacobian.setColumn(0,H_link_world*KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)));
-        abs_jacobian.setColumn(1,H_link_world*KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)));
-        abs_jacobian.setColumn(2,H_link_world*KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)));
-        abs_jacobian.setColumn(3,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)));
-        abs_jacobian.setColumn(4,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)));
-        abs_jacobian.setColumn(5,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)));
+        abs_jac.setColumn(0,H_link_world*KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)));
+        abs_jac.setColumn(1,H_link_world*KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)));
+        abs_jac.setColumn(2,H_link_world*KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)));
+        abs_jac.setColumn(3,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)));
+        abs_jac.setColumn(4,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)));
+        abs_jac.setColumn(5,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)));
     }
+
+    return true;
+}
+
+bool DynTree::getJacobian(const int link_index, yarp::sig::Matrix & jac, bool local)
+{
+    if( link_index < 0 ||
+        link_index >= (int)undirected_tree.getNrOfLinks() )
+    {
+        std::cerr << "DynTree::getJacobian: link index " << link_index
+                  <<  " out of bounds" << std::endl;
+        return false;
+
+    }
+    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
+        jac.resize(6,6+undirected_tree.getNrOfDOFs());
+    }
+
+    getJacobianKDL(link_index,abs_jacobian,local);
 
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_jacobian(jac.data(),jac.rows(),jac.cols());
 
@@ -1722,13 +1867,16 @@ bool DynTree::getJacobian(const int link_index, yarp::sig::Matrix & jac, bool lo
     return true;
 }
 
-bool DynTree::getRelativeJacobian(const int jacobian_distal_link, const int jacobian_base_link, yarp::sig::Matrix & jac, bool global)
+bool DynTree::getRelativeJacobianKDL(const int jacobian_distal_link,
+                                     const int jacobian_base_link,
+                                     KDL::Jacobian & rel_jac,
+                                     bool global)
 {
-    if( jac.rows() != (int)(6) || jac.cols() != (int)(undirected_tree.getNrOfDOFs()) ) {
-        jac.resize(6,undirected_tree.getNrOfDOFs());
+    if( rel_jac.rows() != 6 ||
+        rel_jac.columns() != undirected_tree.getNrOfDOFs() )
+    {
+        rel_jac.resize(undirected_tree.getNrOfDOFs());
     }
-
-    if( rel_jacobian.rows() != 6 || rel_jacobian.columns() != undirected_tree.getNrOfDOFs() ) { rel_jacobian.resize(undirected_tree.getNrOfDOFs()); }
 
     /*
      if the specified jacobian_base_link is the base in dynamic_traversal, kinematic_traversal or rel_jacobian_traversal
@@ -1753,8 +1901,24 @@ bool DynTree::getRelativeJacobian(const int jacobian_distal_link, const int jaco
 
     if( global ) {
         computePositions();
-        rel_jacobian.changeRefFrame(world_base_frame*X_dynamic_base[jacobian_distal_link]);
+        rel_jac.changeRefFrame(world_base_frame*X_dynamic_base[jacobian_distal_link]);
     }
+
+    return true;
+}
+
+bool DynTree::getRelativeJacobian(const int jacobian_distal_link,
+                                  const int jacobian_base_link,
+                                  yarp::sig::Matrix & jac,
+                                  bool global)
+{
+    if( jac.rows() != (int)(6) ||
+        jac.cols() != (int)(undirected_tree.getNrOfDOFs()) )
+    {
+        jac.resize(6,undirected_tree.getNrOfDOFs());
+    }
+
+    getRelativeJacobianKDL(jacobian_distal_link,jacobian_base_link,rel_jacobian,global);
 
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_jacobian(jac.data(),jac.rows(),jac.cols());
 
