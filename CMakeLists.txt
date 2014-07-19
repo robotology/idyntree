@@ -23,6 +23,7 @@ find_package(kdl_codyco 0.0.3 REQUIRED)
 
 if(IDYNTREE_ENABLE_URDF)
 find_package(kdl_format_io REQUIRED)
+find_package(TinyXML REQUIRED)
 add_definitions(-DCODYCO_USES_URDFDOM)
 endif()
 
@@ -75,7 +76,8 @@ target_link_libraries(idyntree LINK_PUBLIC  iDyn
                                             ${YARP_LIBRARIES}
                                             ${kdl_codyco_LIBRARIES}
                                             ${kdl_format_io_LIBRARIES}
-                                            ${Boost_LIBRARIES})
+                                            ${Boost_LIBRARIES}
+                                            ${TinyXML_LIBRARIES})
 
 install(TARGETS idyntree
         EXPORT iDynTree
