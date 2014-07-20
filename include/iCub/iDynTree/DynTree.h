@@ -421,6 +421,8 @@ class DynTree  {
         */
         bool setWorldBasePose(const yarp::sig::Matrix & H_w_p);
 
+        bool setWorldBasePoseKDL(const KDL::Frame & H_w_p);
+
         /**
         * Get the rototranslation between the world and the base reference
         * frames, expressed in the world reference frame \f$ {}^wH_b \f$
@@ -428,6 +430,9 @@ class DynTree  {
         * @return H_w_p a 4x4 rototranslation matrix
         */
         yarp::sig::Matrix getWorldBasePose();
+
+        KDL::Frame getWorldBasePoseKDL();
+
 
         /**
         * Set joint positions in the specified part (if no part
@@ -438,6 +443,9 @@ class DynTree  {
         */
         virtual yarp::sig::Vector setAng(const yarp::sig::Vector & _q, const std::string & part_name="") ;
 
+        virtual bool setAngKDL(const KDL::JntArray & _q, const std::string & part_name="") ;
+
+
         /**
         * Get joint positions in the specified part (if no part
         * is specified, get the joint positions of all the tree)
@@ -445,6 +453,10 @@ class DynTree  {
         * @return vector of joint positions
         */
         virtual yarp::sig::Vector getAng(const std::string & part_name="") const;
+
+        virtual bool getAngKDL(KDL::JntArray & q, const std::string & part_name="") const;
+
+
 
         /**
         * Set joint speeds in the specified part (if no part
@@ -799,6 +811,11 @@ class DynTree  {
         *
         */
         //@{
+
+
+        virtual bool getJacobianKDL(const int link_index, KDL::Jacobian & jac, bool local=false);
+
+
         /**
         * For a floating base structure, outpus a 6x(nrOfDOFs+6) yarp::sig::Matrix \f$ {}^i J_i \f$ such
         * that \f$ {}^w v_i = {}^wJ_i  dq_{fb} \f$
@@ -830,6 +847,9 @@ class DynTree  {
         virtual yarp::sig::Vector getD2Q_fb() const;
 
 
+        virtual bool getRelativeJacobianKDL(const int jacobian_distal_link, const int jacobian_base_link, KDL::Jacobian & jac, bool global=false);
+
+
         /**
         * For a floating base structure, if d is the distal link index and b is the jacobian base link index
         * outputs a 6x(nrOfDOFs) yarp::sig::Matrix \f$ {}^d J_{b,d} \f$ such
@@ -849,6 +869,10 @@ class DynTree  {
         */
         //@{
 
+
+        KDL::Vector getCOMKDL(const std::string & part_name="", const int link_index = -1);
+
+
         /**
         * Get Center of Mass of the specified part (if no part
         * is specified, get the COM of all the tree) expressed
@@ -860,6 +884,9 @@ class DynTree  {
         */
         virtual yarp::sig::Vector getCOM(const std::string & part_name="", const int link_index = -1);
 
+
+        virtual bool getCOMJacobianKDL(KDL::Jacobian & jac, const std::string & part_name="");
+
         /**
         * Get Center of Mass Jacobian of the specified part (if no part
         * is specified, get the Jacobian of the COM of all the tree) expressed in
@@ -869,6 +896,10 @@ class DynTree  {
         * @return true if succeeds, false otherwise
         */
         virtual bool getCOMJacobian(yarp::sig::Matrix & jac, const std::string & part_name="");
+
+
+        virtual bool getCOMJacobianKDL(KDL::Jacobian & jac, KDL::CoDyCo::MomentumJacobian & momentum_jac, const std::string & part_name="");
+
 
         /**
          * Temporary function, do not use.
