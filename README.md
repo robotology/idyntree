@@ -1,6 +1,6 @@
 kdl_format_io
 =============
-[![Build Status](https://travis-ci.org/traversaro/kdl_format_io.png)](https://travis-ci.org/traversaro/kdl_format_io)
+[![Build Status](https://travis-ci.org/robotology-playground/kdl_format_io.png)](https://travis-ci.org/robotology-playground/kdl_format_io)
 
 Routines for import and export of different robotic description formats in the KDL library.
 
