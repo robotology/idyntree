@@ -4,10 +4,6 @@ compiler:
   - gcc
   - clang
 
-matrix:
-  exclude:
-    - compiler: clang
-
 before_script:
   - sudo apt-get install -qq libboost-system-dev libboost-thread-dev libtinyxml-dev
   - sudo chmod +x ./.travis/build_urdfdom
@@ -21,9 +17,8 @@ before_script:
   - make
   - sudo make install
   - cd ../../..
-  - git clone https://github.com/traversaro/kdl_codyco
+  - git clone https://github.com/robotology-playground/kdl_codyco
   - cd kdl_codyco
-  - git checkout rovereto
   - mkdir build
   - cd build
   - cmake ../
