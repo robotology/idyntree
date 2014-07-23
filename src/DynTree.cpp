@@ -1476,6 +1476,8 @@ KDL::Vector DynTree::getCOMKDL(const std::string & part_name, int link_index)
 yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index)
 {
     KDL::Vector com_return = getCOMKDL(part_name,link_index);
+    size_t com_return_size = sizeof(com_return)/sizeof(double);
+    com_yarp.resize(com_return_size,0);
 
     memcpy(com_yarp.data(),com_return.data,3*sizeof(double));
 
