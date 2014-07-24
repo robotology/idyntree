@@ -57,7 +57,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
            bool add_root_weight,
            bool debug)
 {
-    std::cout << "toKDL(..) function called" << std::endl;
+    //sstd::cout << "toKDL(..) function called" << std::endl;
 
     bool status_ok = true;
     //Joint names extracted from http://eris.liralab.it/wiki/ICub_joints
@@ -210,7 +210,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
         //End legs v2 part
 
 
-        std::cerr << "toKDL: adding feet FT sensors" << std::endl;
+        //std::cerr << "toKDL: adding feet FT sensors" << std::endl;
         KDL::Chain no_ft_rl, no_ft_ll, no_ft_rlV2, no_ft_llV2;
         KDL::Frame T_ss_ee(KDL::Rotation(0,0,1,0,1,0,-1,0,0),KDL::Vector(0,0,0.075)); //transformation between the end effector and the sensor
         KDL::Frame T_ee_ss = T_ss_ee.Inverse();
