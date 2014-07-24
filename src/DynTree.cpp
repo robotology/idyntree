@@ -91,8 +91,8 @@ int ret;
     partition = undirected_tree.getPartition();
 
     #ifndef NDEBUG
-    std::cout << "DynTree serialization " << undirected_tree.getSerialization().toString() << std::endl;
-    std::cout << "DynTree partition: " << partition.toString() << std::endl;
+    //std::cout << "DynTree serialization " << undirected_tree.getSerialization().toString() << std::endl;
+    //std::cout << "DynTree partition: " << partition.toString() << std::endl;
     #endif
     //Setting useful constants
     NrOfDOFs = _tree.getNrOfJoints();
