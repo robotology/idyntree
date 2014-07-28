@@ -38,7 +38,6 @@
 
 #include "../expression_parser/parser.h"
 #include <string>
-#include <boost/iterator/iterator_concepts.hpp>
 #include <iostream>
 #include <fstream>
 #include <algorithm>
