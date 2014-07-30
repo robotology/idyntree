@@ -1398,18 +1398,24 @@ bool DynTree::dynamicRNEA()
         //std::cerr << "base_residual_f.force.Norm " << base_residual_f.torque.Norm() << std::endl;
 
         #endif
-        assert( base_residual_f.force.Norm() < 1e-5 );
-        assert( base_residual_f.torque.Norm() < 1e-5 );
+        if(  base_residual_f.force.Norm() > 1e-5 )
+        {
+            std::cout << "iDynTree WARNING: base_residual_f.force.Norm() is " << base_residual_f.force.Norm() << " instead of zero." << std::endl;
+        }
+        if(  base_residual_f.torque.Norm() > 1e-5 )
+        {
+            std::cout << "iDynTree WARNING: base_residual_f.torque.Norm() is " << base_residual_f.torque.Norm() << " instead of zero." << std::endl;
+        }
         //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
+        /*
         for(int i=0; i < NrOfFTSensors; i++ ) {
-            #ifndef NDEBUG
             double sign = ft_list.ft_sensors_vector[i].isWrenchAppliedFromParentToChild() ? 1.0 : -1.0;
 
             KDL::Wrench residual = measured_wrenches[i] - sign*ft_list.ft_sensors_vector[i].getH_child_sensor().Inverse(f[ft_list.ft_sensors_vector[i].getChild()]);
-            assert( residual.force.Norm() < 1e-5 );
+            if( base_residual_f.force.Norm() > 1e-5;
+            if( residual.force.Norm() > 1e-5 );
             assert( residual.torque.Norm() < 1e-5 );
-            #endif //NDEBUG
-        }
+        }*/
     }
     else
     {
@@ -1470,6 +1476,15 @@ KDL::Vector DynTree::getCOMKDL(const std::string & part_name, int link_index)
         com_return = com_world;
     }
 
+    /*
+     std::vector<KDL::Frame> Xb;
+
+     Xb.resize(undirected_tree.getNrOfLinks());
+
+    KDL::RigidBodyInertia total_inertia;
+    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,Xb,momentum_jac_buffer,com_jac_buffer,momentum_jacobian,total_inertia,part_id);
+    */
+    
     return com_world;
 }
 
@@ -1516,6 +1531,12 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
     KDL::RigidBodyInertia base_total_inertia;
 
     getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jac,com_jac_buffer,momentum_jac_buffer,base_total_inertia,part_id);
+
+
+    std::cout << "Total Inertia for part " << part_name << " : " << std::endl
+              << " mass : " << base_total_inertia.getMass() << " " << std::endl
+              << " cog "  << base_total_inertia.getCOG() <<  std::endl
+              <<  " inertia around the origin " << Eigen::Map<Eigen::Matrix3d>(base_total_inertia.getRotationalInertia().data) << std::endl;
 
 
     momentum_jac.changeRefFrame(KDL::Frame(world_base_frame.M));
