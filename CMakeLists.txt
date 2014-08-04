@@ -128,7 +128,7 @@ if(ENABLE_URDF)
     set(KDL_FORMAT_IO_INCLUDE_DIRS "${KDL_FORMAT_IO_INCLUDE_DIRS}" ${TinyXML_INCLUDE_DIRS} ${urdfdom_INCLUDE_DIRS} ${urdfdom_headers_INCLUDE_DIRS} ${console_bridge_INCLUDE_DIRS})
 
     link_directories(${console_bridge_LIBRARY_DIRS})
-    set(KDL_FORMAT_IO_LIBRARY_DIRS "${KDL_FORMAT_IO_LIBRARY_DIRS}" ${console_bridge_LIBRARY_DIRS})
+    set(KDL_FORMAT_IO_LIBRARY_DIRS "${KDL_FORMAT_IO_LIBRARY_DIRS}" ${console_bridge_LIBRARY_DIRS} ${urdfdom_LIBRARY_DIRS})
 
     set(URDF_SRCS src/converters/urdf_export.cpp src/converters/urdf_import.cpp)
     set(URDF_HPPS include/kdl_format_io/urdf_import.hpp include/kdl_format_io/urdf_export.hpp)
