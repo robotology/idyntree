@@ -59,12 +59,12 @@ namespace kdl_format_io {
 Frame DH_Khalil1986_Tree(double d, double alpha, double r, double theta, double gamma, double b)
 {
         double ct,st,ca,sa,cgamma,sgamma;
-        ct = cos(theta);
-        st = sin(theta);
-        sa = sin(alpha);
-        ca = cos(alpha);
-        cgamma = cos(gamma);
-        sgamma = sin(gamma);
+        ct = ::cos(theta);
+        st = ::sin(theta);
+        sa = ::sin(alpha);
+        ca = ::cos(alpha);
+        cgamma = ::cos(gamma);
+        sgamma = ::sin(gamma);
         return Frame(Rotation(
                               cgamma*ct-sgamma*ca*st,   -cgamma*st-sgamma*ca*ct,  sgamma*sa,
                               sgamma*ct+cgamma*ca*st,   -sgamma*st+cgamma*ca*ct, -cgamma*sa,

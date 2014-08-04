@@ -92,18 +92,20 @@ char* Parser::parse(const char new_expr[])
 
         // add the answer to memory as variable "Ans"
         user_var.add("Ans", ans);
-
-        snprintf(ans_str, sizeof(ans_str), "Ans = %g", ans);
+        //todo: restore snprintf
+        sprintf(ans_str, "Ans = %g", ans);
     }
     catch (Error err)
     {
         if (err.get_row() == -1)
         {
-            snprintf(ans_str, sizeof(ans_str), "Error: %s (col %i)", err.get_msg(), err.get_col());
+		    //todo: restore snprintf
+            sprintf(ans_str, "Error: %s (col %i)", err.get_msg(), err.get_col());
         }
         else
         {
-            snprintf(ans_str, sizeof(ans_str), "Error: %s (ln %i, col %i)", err.get_msg(), err.get_row(), err.get_col());
+		    //todo: restore snprintf
+            sprintf(ans_str, "Error: %s (ln %i, col %i)", err.get_msg(), err.get_row(), err.get_col());
         }
     }
 
