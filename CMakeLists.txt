@@ -150,7 +150,16 @@ endif()
 
 set(KDL_FORMAT_IO_HPPS ${SYMORO_PAR_HPPS} ${URDF_HPPS}) 
 
-add_library(kdl-format-io SHARED ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS})
+
+
+if(MSVC)
+    set(CMAKE_DEBUG_POSTFIX "d")
+    set(LIB_TYPE STATIC)
+else()
+    set(LIB_TYPE SHARED)
+endif()
+
+add_library(kdl-format-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS})
 
 IF(ENABLE_SERIALIZATION_IO)
     target_link_libraries(kdl-format-io ${kdl_codyco_LIBRARIES} ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
