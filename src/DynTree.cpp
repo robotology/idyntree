@@ -492,6 +492,7 @@ void DynTree::store_contacts_results()
 bool DynTree::setWorldBasePoseKDL(const KDL::Frame & H_w_b)
 {
     world_base_frame = H_w_b;
+	return true;
 }
 
 bool DynTree::setWorldBasePose(const yarp::sig::Matrix & H_w_b)
@@ -1294,7 +1295,7 @@ bool DynTree::estimateContactForcesFromSkin()
     return true;
 }
 
-void pseudoInverse(const Eigen::Matrix<double, 6, 6+6> A,
+void pseudoInverse(const Eigen::Matrix<double, 6, 6+6>& A,
                                                         double tol,
                                                          Eigen::Matrix<double, 6+6, 6>& Apinv)
 {
@@ -1302,7 +1303,7 @@ void pseudoInverse(const Eigen::Matrix<double, 6, 6+6> A,
 
             int m = A.rows(), n = A.cols(), k = m < n ? m : n;
             Eigen::JacobiSVD< Eigen::Matrix<double, 6, 6+6> > svd(A,Eigen::ComputeFullU|Eigen::ComputeFullV);
-            const typename JacobiSVD< Eigen::Matrix<double, 6, 6+6> >::SingularValuesType& singularValues = svd.singularValues();
+            const JacobiSVD< Eigen::Matrix<double, 6, 6+6> >::SingularValuesType& singularValues = svd.singularValues();
             Eigen::Matrix<double, 12, 6> invSinValues;
             invSinValues.setZero();
             for (int idx = 0; idx < singularValues.size(); idx++)
