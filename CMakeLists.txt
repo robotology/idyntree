@@ -68,7 +68,9 @@ add_definitions(-DOROCOS_KDL_VERSION_PATCH=${orocos_kdl_VERSION_PATCH})
 #     file(WRITE ./include/kdl_codyco/config.h "/**\n * Copyright  (C) 2013  CoDyCo Project\n * Author: Silvio Traversaro\n * website: http://www.codyco.eu\n */ ")
 # endif (OROCOS_KDL_OLDVERSION)
 
-include_directories(include ${orocos_kdl_INCLUDE_DIRS})
+find_package(Eigen3 REQUIRED)
+
+include_directories(include ${orocos_kdl_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
 
 include_directories(include ./include/kdl_codyco/regressors ./include/kdl_codyco/regressors/dataset ${orocos_kdl_INCLUDE_DIRS})
 
