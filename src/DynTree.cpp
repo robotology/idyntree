@@ -1533,12 +1533,12 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
 
     getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jac,com_jac_buffer,momentum_jac_buffer,base_total_inertia,part_id);
 
-
+    /*
     std::cout << "Total Inertia for part " << part_name << " : " << std::endl
               << " mass : " << base_total_inertia.getMass() << " " << std::endl
               << " cog "  << base_total_inertia.getCOG() <<  std::endl
               <<  " inertia around the origin " << Eigen::Map<Eigen::Matrix3d>(base_total_inertia.getRotationalInertia().data) << std::endl;
-
+    */
 
     momentum_jac.changeRefFrame(KDL::Frame(world_base_frame.M));
 
