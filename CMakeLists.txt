@@ -34,6 +34,8 @@ option(ENABLE_SYMORO_PAR "Enable support for SYMORO par input" TRUE)
 ## KDL::CoDyCo::TreeSerialization support
 option(ENABLE_SERIALIZATION_IO "Enable support for parsing and writing serialization (need kdl_codyco)" TRUE)
 
+option(KDL_FORMAT_IO_DISABLE_RPATH "Disable RPATH for the library" FALSE)
+
 find_package(orocos_kdl 1.2.3 QUIET)
 if (NOT orocos_kdl_FOUND)
     SET(OROCOS_KDL_OLDVERSION On)
@@ -150,14 +152,38 @@ endif()
 
 set(KDL_FORMAT_IO_HPPS ${SYMORO_PAR_HPPS} ${URDF_HPPS}) 
 
-
-
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
     set(LIB_TYPE STATIC)
 else()
     set(LIB_TYPE SHARED)
 endif()
+
+#Configure RPATH
+set(CMAKE_MACOSX_RPATH 1) #enable RPATH on OSX. This also suppress warnings on CMake >= 3.0
+# when building, don't use the install RPATH already
+# (but later on when installing)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+# set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+#This is relative RPATH for libraries built in the same project
+#I assume that the directory is 
+# - install_dir/something for binaries
+# - install_dir/lib for libraries
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_INSTALL_RPATH "@loader_path/../lib")
+else(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_INSTALL_RPATH "\$ORIGIN/../lib")
+endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+# add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the install RPATH
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE) #very important!
+
+
+if(KDL_FORMAT_IO_DISABLE_RPATH)
+    set(CMAKE_SKIP_BUILD_RPATH TRUE)
+else(KDL_FORMAT_IO_DISABLE_RPATH)
+    set(CMAKE_SKIP_BUILD_RPATH FALSE)
+endif(KDL_FORMAT_IO_DISABLE_RPATH)
 
 add_library(kdl-format-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS})
 
@@ -178,13 +204,23 @@ ENDIF()
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
 #target_link_libraries(check_kdl_export ${kdl_format_io_LIBRARIES} ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
-SET_TARGET_PROPERTIES( kdl-format-io PROPERTIES
+set_target_properties( kdl-format-io PROPERTIES
   SOVERSION "${KDL_FORMAT_IO_VERSION_MAJOR}.${KDL_FORMAT_IO_VERSION_MINOR}"
   VERSION "${KDL_FORMAT_IO_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
-  INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
   PUBLIC_HEADER "${KDL_FORMAT_IO_HPPS}"
   )
+  
+if(${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_GREATER "2.8.12")
+  message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. This check can be removed.")
+endif()
+if(CMAKE_VERSION VERSION_LESS 2.8.12)
+  if(NOT KDL_FORMAT_IO_DISABLE_RPATH)
+      set_target_properties(kdl-format-io PROPERTIES
+          INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
+      )
+  endif(NOT KDL_FORMAT_IO_DISABLE_RPATH)
+endif(CMAKE_VERSION VERSION_LESS 2.8.12)
 
 
 INSTALL(TARGETS kdl-format-io
