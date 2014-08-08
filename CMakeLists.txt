@@ -13,8 +13,10 @@ set (KDL_CODYCO_VERSION ${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}.
 
 message (STATUS "${PROJECT_NAME} version ${KDL_CODYCO_VERSION}")
 
-SET( PROJ_SOURCE_DIR ${kdl_codyco_SOURCE_DIR} )
-SET( PROJ_BINARY_DIR ${kdl_codyco_BINARY_DIR} )
+set( PROJ_SOURCE_DIR ${kdl_codyco_SOURCE_DIR} )
+set( PROJ_BINARY_DIR ${kdl_codyco_BINARY_DIR} )
+
+option(KDL_CODYCO_DISABLE_RPATH "Disable RPATH for the library" FALSE)
 
 # set the default build type
 if (NOT CMAKE_BUILD_TYPE)
@@ -60,14 +62,6 @@ add_definitions(-DOROCOS_KDL_VERSION_MAJOR=${orocos_kdl_VERSION_MAJOR})
 add_definitions(-DOROCOS_KDL_VERSION_MINOR=${orocos_kdl_VERSION_MINOR})
 add_definitions(-DOROCOS_KDL_VERSION_PATCH=${orocos_kdl_VERSION_PATCH})
 
-
-# if (OROCOS_KDL_OLDVERSION)
-#     configure_file(include/kdl_codyco/config.h.in ${CMAKE_SOURCE_DIR}/include/kdl_codyco/config.h)
-#     message(STATUS "Old orocos kdl version. Adding include file to define compatibility macros.")
-# else(OROCOS_KDL_OLDVERSION)
-#     file(WRITE ./include/kdl_codyco/config.h "/**\n * Copyright  (C) 2013  CoDyCo Project\n * Author: Silvio Traversaro\n * website: http://www.codyco.eu\n */ ")
-# endif (OROCOS_KDL_OLDVERSION)
-
 find_package(Eigen3 REQUIRED)
 
 include_directories(include ${orocos_kdl_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
@@ -100,47 +94,81 @@ else()
     set(LIB_TYPE SHARED)
 endif()
 
+#Configure RPATH
+set(CMAKE_MACOSX_RPATH 1) #enable RPATH on OSX. This also suppress warnings on CMake >= 3.0
+# when building, don't use the install RPATH already
+# (but later on when installing)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+# set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+#This is relative RPATH for libraries built in the same project
+#I assume that the directory is 
+# - install_dir/something for binaries
+# - install_dir/lib for libraries
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_INSTALL_RPATH "@loader_path/../lib")
+else(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_INSTALL_RPATH "\$ORIGIN/../lib")
+endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+# add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the install RPATH
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE) #very important!
+
+if(KDL_CODYCO_DISABLE_RPATH)
+    set(CMAKE_SKIP_BUILD_RPATH TRUE)
+else(KDL_CODYCO_DISABLE_RPATH)
+    set(CMAKE_SKIP_BUILD_RPATH FALSE)
+endif(KDL_CODYCO_DISABLE_RPATH)
+
 add_library(kdl-codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DIRL_SRC} ${KDL_CODYCO_HPPS} ${KDL_CODYCO_PRIVATE_INCLUDES})
 
 target_link_libraries(kdl-codyco ${orocos_kdl_LIBRARIES})
 
-SET_TARGET_PROPERTIES(kdl-codyco PROPERTIES
+set_target_properties(kdl-codyco PROPERTIES
   SOVERSION "${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}"
   VERSION "${KDL_CODYCO_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
-  INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
   PUBLIC_HEADER "${KDL_CODYCO_HPPS}"
   )
 
+if(${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_GREATER "2.8.12")
+    message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. This check can be removed.")
+endif()
+if(CMAKE_VERSION VERSION_LESS 2.8.12)
+    if(NOT KDL_CODYCO_DISABLE_RPATH)
+        set_target_properties(kdl-codyco PROPERTIES
+            INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
+        )
+    endif(NOT KDL_CODYCO_DISABLE_RPATH)
+endif(CMAKE_VERSION VERSION_LESS 2.8.12)
 
-INSTALL(TARGETS kdl-codyco
+install(TARGETS kdl-codyco
   EXPORT kdl_codyco-target
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   PUBLIC_HEADER DESTINATION include/kdl_codyco
 )
 
-INSTALL(DIRECTORY include/kdl_codyco/regressors DESTINATION include/kdl_codyco)
-INSTALL(DIRECTORY include/kdl_codyco/regressors/dataset DESTINATION include/kdl_codyco)
+install(DIRECTORY include/kdl_codyco/regressors DESTINATION include/kdl_codyco)
+install(DIRECTORY include/kdl_codyco/regressors/dataset DESTINATION include/kdl_codyco)
 
 
-OPTION(CREATE_TESTS "Create regression tests using CMake" FALSE)
+option(CREATE_TESTS "Create regression tests using CMake" FALSE)
 
-IF(CREATE_TESTS)
+if(CREATE_TESTS)
     enable_testing()
-    ADD_SUBDIRECTORY(tests)
-ENDIF(CREATE_TESTS)
+    add_subdirectory(tests)
+endif(CREATE_TESTS)
 
-EXPORT(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
+export(TARGETS kdl-codyco FILE "${PROJECT_BINARY_DIR}/kdl_codyco-target.cmake")
 
-EXPORT(PACKAGE kdl_codyco)
+export(PACKAGE kdl_codyco)
 
-CONFIGURE_FILE(cmake/kdl_codyco-config.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake @ONLY)
-CONFIGURE_FILE(cmake/kdl_codyco-config-version.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config-version.cmake @ONLY)
+configure_file(cmake/kdl_codyco-config.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake @ONLY)
+configure_file(cmake/kdl_codyco-config-version.cmake.in ${PROJECT_BINARY_DIR}/kdl_codyco-config-version.cmake @ONLY)
 
-INSTALL(FILES ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake DESTINATION share/kdl_codyco)
-INSTALL(FILES ${PROJECT_BINARY_DIR}/kdl_codyco-config-version.cmake DESTINATION share/kdl_codyco)
-INSTALL(EXPORT kdl_codyco-target  DESTINATION share/kdl_codyco)
+install(FILES ${PROJECT_BINARY_DIR}/kdl_codyco-config.cmake DESTINATION share/kdl_codyco)
+install(FILES ${PROJECT_BINARY_DIR}/kdl_codyco-config-version.cmake DESTINATION share/kdl_codyco)
+install(EXPORT kdl_codyco-target  DESTINATION share/kdl_codyco)
 
 message(STATUS "Configuration successful. Type make to compile kdl_codyco")
 
