@@ -12,9 +12,11 @@ find_package(YCM REQUIRED)
 include(YCMDefaultDirs)
 ycm_default_dirs(${VARS_PREFIX})
 
+
 option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
 option(IDYNTREE_BUILD_TESTS "Compile iDynTree tests" FALSE)
+option(IDYNTREE_DISABLE_RPATH "Disable RPATH for the library" FALSE)
 
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
@@ -53,6 +55,37 @@ else()
     set(LIB_TYPE STATIC)
 endif()
 
+#Configure RPATH
+set(CMAKE_MACOSX_RPATH 1) #enable RPATH on OSX. This also suppress warnings on CMake >= 3.0
+# when building, don't use the install RPATH already
+# (but later on when installing)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+# set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+#This is relative RPATH for libraries built in the same project
+#I assume that the directory is 
+# - install_dir/something for binaries
+# - install_dir/lib for libraries
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_INSTALL_RPATH "@loader_path/../lib")
+else(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_INSTALL_RPATH "\$ORIGIN/../lib")
+endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+# add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the install RPATH
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE) #very important!
+
+# the RPATH to be used when installing, but only if it's not a system directory
+#This is in the WIKI, but I don't understand its use.
+# list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
+# if("${isSystemDir}" STREQUAL "-1")
+#    set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+# endif("${isSystemDir}" STREQUAL "-1")
+
+if(IDYNTREE_DISABLE_RPATH)
+    set(CMAKE_SKIP_BUILD_RPATH TRUE)
+else(IDYNTREE_DISABLE_RPATH)
+    set(CMAKE_SKIP_BUILD_RPATH FALSE)
+endif(IDYNTREE_DISABLE_RPATH)
 
 add_library(idyntree ${LIB_TYPE} ${folder_source} ${folder_header})
 
