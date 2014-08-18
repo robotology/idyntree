@@ -99,16 +99,23 @@ set(CMAKE_MACOSX_RPATH 1) #enable RPATH on OSX. This also suppress warnings on C
 # when building, don't use the install RPATH already
 # (but later on when installing)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
-# set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 #This is relative RPATH for libraries built in the same project
 #I assume that the directory is 
 # - install_dir/something for binaries
 # - install_dir/lib for libraries
+# Maintain back-compatibility
+# This is relative RPATH for libraries built in the same project
+# I assume that the directory is 
+#  - install_dir/something for binaries
+#  - install_dir/lib for libraries
+# in this way if libraries and executables are moved together everything will continue to work
+file(RELATIVE_PATH _rel_path "${CMAKE_INSTALL_PREFIX}/bin" "${CMAKE_INSTALL_PREFIX}/lib")
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(CMAKE_INSTALL_RPATH "@loader_path/../lib")
-else(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(CMAKE_INSTALL_RPATH "\$ORIGIN/../lib")
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_INSTALL_RPATH "@loader_path/${_rel_path}")
+else()
+    set(CMAKE_INSTALL_RPATH "\$ORIGIN/${_rel_path}")
+endif()
+
 # add the automatically determined parts of the RPATH
 # which point to directories outside the build tree to the install RPATH
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE) #very important!
