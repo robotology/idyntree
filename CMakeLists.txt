@@ -65,11 +65,12 @@ set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 #I assume that the directory is 
 # - install_dir/something for binaries
 # - install_dir/lib for libraries
+file(RELATIVE_PATH _rel_path "${CMAKE_INSTALL_PREFIX}/bin" "${CMAKE_INSTALL_PREFIX}/lib")
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(CMAKE_INSTALL_RPATH "@loader_path/../lib")
-else(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(CMAKE_INSTALL_RPATH "\$ORIGIN/../lib")
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+ set(CMAKE_INSTALL_RPATH "@loader_path/${_rel_path}")
+else()
+ set(CMAKE_INSTALL_RPATH "\$ORIGIN/${_rel_path}")
+endif()
 # add the automatically determined parts of the RPATH
 # which point to directories outside the build tree to the install RPATH
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE) #very important!
