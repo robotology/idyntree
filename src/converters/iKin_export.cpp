@@ -162,7 +162,7 @@ bool closestPoints(const KDL::Vector direction_line_A,
     //Denominator should be nonnegative
     assert(denominator >= 0.0);
     
-    if( denominator < tol ) { return false; }
+    if( denominator < tol ) { /*std::cout << "denominator: " << denominator << std::endl;*/ return false; }
     
     double s_C = (b*e-c*d)/denominator;
     double t_C = (a*e-b*d)/denominator;
@@ -176,14 +176,19 @@ bool closestPoints(const KDL::Vector direction_line_A,
 /**
  * Given two lines, find the dh parameters that describe  the transformation between the two axis 
  *                  and return the origin and the x,y axis of the DH reference frame
- *                  (run step 3,4,5,7 of section 3.2.3 of http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf )
+ *                  (run step 3,4,5,7 of section 3.2.3 of 
+ *                       http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf )
  *                  The input lines and the output origin are expressed in the same frame
+ * 
+ * The _hint variable are necessary when the DH convention allow freedom of choice in choosing dh_direction_axis_x_n or
+ *   dh_origin_n, to preserve injectivity.   
  */
 bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1, 
                  const KDL::Vector direction_axis_x_n_minus_1,
                    const KDL::Vector origin_n_minus_1,
                    const KDL::Vector direction_axis_z_n,
                    const KDL::Vector origin_axis_z_n,
+                   const KDL::Vector direction_axis_x_n_hint,
                    KDL::Vector & dh_origin_n,
                    KDL::Vector & dh_direction_axis_x_n,
                    KDL::Vector & dh_direction_axis_y_n,
@@ -193,7 +198,22 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
                    double & theta_i,
                    double tol = 1e-6
                   )
-{
+{ 
+    /*
+    std::cout << "calculateDH called with: " << std::endl;
+    std::cout << "direction_axis_z_n_minus_1 " << direction_axis_z_n_minus_1 << std::endl;  
+    std::cout << "direction_axis_x_n_minus_1 " << direction_axis_x_n_minus_1 << std::endl;  
+    std::cout << "origin_n_minus_1 " << origin_n_minus_1 << std::endl;  
+    std::cout << "direction_axis_z_n " << direction_axis_z_n << std::endl;  
+    std::cout << "origin_axis_z_n " << origin_axis_z_n << std::endl;  
+    std::cout << "direction_axis_x_n_hint " << direction_axis_x_n_hint << std::endl;  
+    */
+    
+    assert(fabs(direction_axis_z_n_minus_1.Norm()-1) < tol);
+    assert(fabs(direction_axis_x_n_minus_1.Norm()-1) < tol);
+    assert(fabs(direction_axis_z_n.Norm()-1) < tol);
+    assert(fabs(direction_axis_x_n_hint.Norm()-1) < tol);
+
     //STEP 3
     bool not_parallel;
     KDL::Vector buffer_vector;
@@ -206,8 +226,12 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
                                  dh_origin_n,
                                  tol);
     if( !not_parallel ) {
+        //if parallel, the origin is not specified and we resort to the original one
         dh_origin_n = origin_axis_z_n;
-    }
+    } 
+    
+    bool incident = false;
+    if( (buffer_vector-dh_origin_n).Norm() < tol ) { incident = true; }
     
     //STEP 4 
     if( !not_parallel ) {
@@ -216,32 +240,57 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
         #endif
         //If the axis are parallel, the x axis is the common normal of the two axis
         KDL::Vector origin_diff = origin_n_minus_1-dh_origin_n;
-        dh_direction_axis_x_n = origin_diff-dot(origin_diff,direction_axis_z_n)*direction_axis_z_n;
+        dh_direction_axis_x_n = dot(origin_diff,direction_axis_z_n_minus_1)*direction_axis_z_n_minus_1-origin_diff;
         dh_direction_axis_x_n.Normalize();
+        
+         //The positive direction of the axis_x_n is arbitrary, however for dealing with limit case (link where 
+        // only alpha is different from zero)
+        //it is better to have the x_n axis to point in the same direction of the x_n of the original structure description
+        //\todo if theta different from zero ? 
+        //double dh_direction_axis_x_n_sign = dot(dh_direction_axis_x_n, direction_axis_x_n_minus_1);
+        double dh_direction_axis_x_n_sign = dot(dh_direction_axis_x_n, direction_axis_x_n_hint);
+        dh_direction_axis_x_n = dh_direction_axis_x_n_sign >= 0 ? dh_direction_axis_x_n : -dh_direction_axis_x_n; 
+        
+        assert((dh_direction_axis_x_n.Norm()-1) < tol);
+        
+        std::cout << "Norm : " <<  dh_direction_axis_x_n.Norm() << std::endl;
+
     } else {
-        bool incident = false;
-        if( (buffer_vector-dh_origin_n).Norm() < tol ) { incident = true; }
+
         if( incident ) { 
             #ifndef NDEBUG
             std::cerr << "axis_z_n_minus_1 and axis_z_n are incident" << std::endl;
             #endif
             dh_direction_axis_x_n = direction_axis_z_n_minus_1*direction_axis_z_n;
             dh_direction_axis_x_n.Normalize();
+                      
         } else {
             #ifndef NDEBUG
             std::cerr << "axis_z_n_minus_1 and axis_z_n are not incident" << std::endl;
             #endif
             //if the two axis are not incident, the x axis is still the common normal
             dh_direction_axis_x_n  = dh_origin_n-buffer_vector;
-            dh_direction_axis_x_n .Normalize();
+            dh_direction_axis_x_n.Normalize();
+                 
         }
+        
+        //todo TODO add case where z_n_minus_1 and z_n are coincident
+         //The positive direction of the axis_x_n is arbitrary, however for dealing with limit case (link where 
+        // only alpha is different from zero)
+        //it is better to have the x_n axis to point in the same direction of the x_n of the original structure description
+        //\todo if theta different from zero ? 
+        //double dh_direction_axis_x_n_sign = dot(dh_direction_axis_x_n, direction_axis_x_n_minus_1);
+        double dh_direction_axis_x_n_sign = dot(dh_direction_axis_x_n, direction_axis_x_n_hint);
+        dh_direction_axis_x_n = dh_direction_axis_x_n_sign >= 0 ? dh_direction_axis_x_n : -dh_direction_axis_x_n; 
+
+       
     }
     dh_direction_axis_y_n = direction_axis_z_n*dh_direction_axis_x_n;
     
     //STEP 5
     
     //calculation of a_i
-    //distance along x_i from O_i to the intersection of the x_i and z_{i-1} axes
+      //distance along x_i from O_i to the intersection of the x_i and z_{i-1} axes
     KDL::Vector x_i_z_i_minus_1_intersection_A, x_i_z_i_minus_1_intersection_B;
     
     bool is_not_parallel = closestPoints(direction_axis_z_n_minus_1,origin_n_minus_1,dh_direction_axis_x_n,dh_origin_n,x_i_z_i_minus_1_intersection_A,x_i_z_i_minus_1_intersection_B,tol);
@@ -254,7 +303,21 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
 #endif
     assert((x_i_z_i_minus_1_intersection_A-x_i_z_i_minus_1_intersection_B).Norm() < tol);
     
-    a_i = dot(x_i_z_i_minus_1_intersection_B-dh_origin_n,dh_direction_axis_x_n);
+    /*
+    std::cout << "dh_origin_n " << dh_origin_n << std::endl;  
+    std::cout << "dh_direction_axis_x_n " << dh_direction_axis_x_n << std::endl;  
+    std::cout << "dh_direction_axis_y_n " << dh_direction_axis_y_n << std::endl;  
+    */
+    
+    if( not_parallel ) 
+    {
+
+      a_i = -dot(x_i_z_i_minus_1_intersection_B-dh_origin_n,dh_direction_axis_x_n);
+    } 
+    else
+    {
+      a_i = -dot(x_i_z_i_minus_1_intersection_B-dh_origin_n,dh_direction_axis_x_n);
+    }
     
     //calculation of d_i
     //distance along z_{i-1} from O_{i-1} to the intersection of the x_i and z_{i-1} axes
@@ -263,11 +326,13 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
     //calculation of alpha_i
     //angle between z_{i-1} and z_i measured about x_i
     double cos_alpha_i = dot(direction_axis_z_n_minus_1,direction_axis_z_n);
+    //std::cout << ((direction_axis_z_n_minus_1*direction_axis_z_n)*dh_direction_axis_x_n).Norm() << std::endl;
     assert(((direction_axis_z_n_minus_1*direction_axis_z_n)*dh_direction_axis_x_n).Norm() < tol);
     double sin_alpha_i = dot(direction_axis_z_n_minus_1*direction_axis_z_n,dh_direction_axis_x_n);
+    assert( fabs(cos_alpha_i*cos_alpha_i + sin_alpha_i*sin_alpha_i - 1) < tol);
     
-    std::cout << " cos_alpha_i "<<  cos_alpha_i << std::endl;
-    std::cout << " sin_alpha_i "<<  sin_alpha_i << std::endl;
+    //std::cout << " cos_alpha_i "<<  cos_alpha_i << std::endl;
+    //std::cout << " sin_alpha_i "<<  sin_alpha_i << std::endl;
     if( not_parallel ) {
         alpha_i = atan2(sin_alpha_i,cos_alpha_i);
     } else {
@@ -276,10 +341,10 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
     
     //calculation of theta_i
     //angle between x_{i-1} and x_i measure about z_{i-1}
-    double cos_theta_i = -dot(direction_axis_x_n_minus_1,dh_direction_axis_x_n);
-    double sin_theta_i = -dot(direction_axis_x_n_minus_1*dh_direction_axis_x_n,direction_axis_z_n_minus_1);
-    std::cout << " cos_theta_i "<<  cos_theta_i << std::endl;
-    std::cout << " sin_theta_i "<<  sin_theta_i << std::endl;
+    double cos_theta_i = dot(direction_axis_x_n_minus_1,dh_direction_axis_x_n);
+    double sin_theta_i = dot(direction_axis_x_n_minus_1*dh_direction_axis_x_n,direction_axis_z_n_minus_1);
+    //std::cout << " cos_theta_i "<<  cos_theta_i << std::endl;
+    //std::cout << " sin_theta_i "<<  sin_theta_i << std::endl;
     theta_i = atan2(sin_theta_i,cos_theta_i);
     
     if( (theta_i+M_PI) < tol ) { theta_i = 0; a_i = -a_i; }
@@ -316,6 +381,9 @@ bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& i
     //Get all joint axis in the base reference frames
     std::vector<KDL::Vector> axis_z_i(kdl_chain.getNrOfJoints()+1);
     std::vector<KDL::Vector> origin_O_i(kdl_chain.getNrOfJoints()+1);
+    //Get also the original x axis for when the DH convention is ambiguous
+    std::vector<KDL::Vector> axis_x_i_old(kdl_chain.getNrOfJoints()+1);
+
     int jnt = 0;
     KDL::Frame H = KDL::Frame::Identity();
     for(int i=0; i < kdl_chain.getNrOfSegments(); i++ ) {
@@ -325,19 +393,31 @@ bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& i
             type == KDL::Joint::RotZ ||
             type == KDL::Joint::RotAxis ) {
             
-            axis_z_i[jnt] = H*kdl_chain.getSegment(i).getJoint().JointAxis();
+            axis_z_i[jnt] = H.M*kdl_chain.getSegment(i).getJoint().JointAxis();
             origin_O_i[jnt] = H*kdl_chain.getSegment(i).getJoint().JointOrigin();
+            axis_x_i_old[jnt] = H.M.UnitX();    
             
+            KDL::Vector axis_z_i_print = axis_z_i[jnt];
+            KDL::Vector origin_O_i_print = origin_O_i[jnt];
+            KDL::Vector axis_x_i_old_print = axis_x_i_old[jnt];
+            //std::cout << "axis_z_i for jnt " << jnt << " : " << axis_z_i_print  << std::endl;
+            //std::cout << "origin_O_i for jnt " << jnt << " : " << origin_O_i_print << std::endl;
+            //std::cout << "axis_x_i_old for jnt " << jnt < " : " << axis_x_i_old_print << std::endl;
+
             jnt++;
+
         }
         
         H = H*kdl_chain.getSegment(i).pose(0.0);
+        
+        //std::cout << "H for segment " << i << " : " << H << std::endl;
     }
     
     assert(jnt == kdl_chain.getNrOfJoints());
     //The last DH frame is in the end effector
     axis_z_i[jnt] = H_ef_kdl_chain.M.UnitZ();
     origin_O_i[jnt] = H_ef_kdl_chain.p;
+    axis_x_i_old[jnt] = H_ef_kdl_chain.M.UnitX();
     
     
     //Get all DH parameters, computing also the relative x_i and y_i axes
@@ -350,7 +430,7 @@ bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& i
     std::vector<double> alpha_i(nj+1);
     std::vector<double> theta_i(nj+1);
     
-    //Get arbitrary initial axis (\todo: make a choice that preserve iKin parameters)
+    //Get arbitrary initial axis (TODO \todo: make a choice that preserve iKin parameters)
     KDL::Vector cross_product = KDL::Vector(0,0,1)*axis_z_i[0];
     
     KDL::Vector rot_axis = cross_product;
@@ -370,13 +450,18 @@ bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& i
     
     dh_origin_O_i[0] = origin_O_i[0];
     
+
     
     for(int i=0; i < nj; i++ ) {
+        //std::cout << "i: " << i << std::endl;
+        assert(fabs(axis_z_i[i].Norm()-1) < tol);
+        assert(fabs(axis_z_i[i+1].Norm()-1) < tol);
         calculateDH(axis_z_i[i],
                     axis_x_i[i],
                     dh_origin_O_i[i],
                     axis_z_i[i+1],
                     origin_O_i[i+1],
+                    axis_x_i_old[i+1],
                     dh_origin_O_i[i+1],
                     axis_x_i[i+1],
                     axis_y_i[i+1],

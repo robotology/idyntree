@@ -186,7 +186,13 @@ else(KDL_FORMAT_IO_DISABLE_RPATH)
     set(CMAKE_SKIP_BUILD_RPATH FALSE)
 endif(KDL_FORMAT_IO_DISABLE_RPATH)
 
-add_library(kdl-format-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS})
+option(ENABLE_IKIN "Enable support for exporting iKin chains" FALSE)
+
+if(ENABLE_IKIN)
+  set(IKIN_SRCS src/converters/iKin_export.cpp)
+endif()
+
+add_library(kdl-format-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS} ${IKIN_SRCS})
 
 IF(ENABLE_SERIALIZATION_IO)
     target_link_libraries(kdl-format-io ${kdl_codyco_LIBRARIES} ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
@@ -196,6 +202,12 @@ ELSE()
     set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
+if(ENABLE_IKIN)
+    find_package(YARP REQUIRED)
+    find_package(ICUB REQUIRED)
+    target_link_libraries(kdl-format-io ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    set(KDL_FORMAT_IO_LIBRARIES  ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+endif()
 
 IF( ENABLE_URDF AND ENABLE_SYMORO_PAR )
     add_executable(par2urdf src/utils/par2urdf.cpp)

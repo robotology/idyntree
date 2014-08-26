@@ -84,6 +84,11 @@ yarp::sig::Matrix KDLtoYarp_position(const KDL::Frame & kdlFrame)
     return yarpMatrix4_4;
 }
 
+double random_positive_double(double range)
+{
+    return range*((double)rand())/((double)RAND_MAX);
+}
+
 double random_double(double range)
 {
     return range*((double)rand()-(RAND_MAX/2))/((double)RAND_MAX);
@@ -151,24 +156,30 @@ KDL::Chain generateRandomKDLChain(int nr_of_segments, bool use_translational_joi
     return random_chain;
 }
 
-KDL::Chain generateSimpleKDLChain(int nr_of_segments=1)
+KDL::Chain generateSimpleKDLChain(int nr_of_segments=1,                      
+                                  double a_gain = 1.0, 
+                       double d_gain = 1.0,
+                       double alpha_gain = 1.0, 
+                       double offset_gain = 1.0)
 {
     KDL::Chain simple_chain;
     
     for(int i=0; i < nr_of_segments; i++ ) {
-    double a = random_double(10);
-    double d = random_double(10);
-    double alpha = random_double(2*M_PI);
-    double theta = random_double(2*M_PI);
+    double a = a_gain*random_double(10);
+    double d = d_gain*random_double(10);
+    double alpha = alpha_gain*random_double(2*M_PI);
+    double theta = offset_gain*random_double(2*M_PI);
     
     //double a = 10; //random_double(10);
     //double d = 0; //random_double(10);
     //double alpha = 0; //random_double(2*M_PI);
     //double theta = 0; //random_double(2*M_PI);
     
-    std::cout << "Generated chain " << a << " " << d  << " " << alpha << " " << theta  << std::endl;
+    //std::cout << "Generated chain " << a << " " << d  << " " << alpha << " " << theta  << std::endl;
+    /*
     std::cout << "cos(alpha) " << cos(alpha) << std::endl;
     std::cout << "sin(alpha) " << sin(alpha) << std::endl;
+    */
     KDL::Frame kdlFrame = KDL::Frame::DH(a,alpha,d,theta);
     simple_chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),kdlFrame));
     }
@@ -176,32 +187,55 @@ KDL::Chain generateSimpleKDLChain(int nr_of_segments=1)
     return simple_chain;
 }
 
-int main(int argc, char** argv)
+
+int checkRandomKDLtoDH(int nr_of_joints, 
+                       std::string chain_type, 
+                       double a_gain = 1.0, 
+                       double d_gain = 1.0,
+                       double alpha_gain = 1.0, 
+                       double offset_gain = 1.0)
 {
-  srand(time(NULL));
-  
-  //Generate random chain
-  int nr_of_segments = 1;
-  KDL::Chain kdl_random_chain = generateSimpleKDLChain(2);
-  //KDL::Chain kdl_random_chain = generateRandomKDLChain(nr_of_segments,false,false);
+  //Generate    random chain
+  KDL::Chain kdl_random_chain;
+  if( chain_type == "dh" ) 
+  {
+      kdl_random_chain = generateSimpleKDLChain(nr_of_joints,a_gain,d_gain,alpha_gain,offset_gain);
+  } 
+  else if( chain_type == "random") 
+  {
+      kdl_random_chain = generateRandomKDLChain(nr_of_joints,false,false);
+  } 
+  else 
+  {
+      std::cout << "chain_type not supported" << std::endl;
+      return 1;
+  }
   
   //Convert random KDL::Chain to iKinChain
   iCub::iKin::iKinChain ikin_random_chain;
   bool result = iKinChainFromKDLChain(kdl_random_chain,ikin_random_chain);
   
-  #ifndef NDEBUG
+  /*
   std::cout << "check_iKin_export_random_chain: converted chain" << std::endl;
-  #endif
+  std::cout << ikin_random_chain.getH0().toString() << std::endl;
+  for(int i=0; i < ikin_random_chain.getDOF(); i++ )
+  {
+    std::cout << ikin_random_chain[i].getA() << " " << ikin_random_chain[i].getD() << " " <<
+                 ikin_random_chain[i].getAlpha() << " " << ikin_random_chain[i].getOffset() << std::endl;
+  }
+  std::cout << ikin_random_chain.getHN().toString() << std::endl;
+  */
   
-  if( !result) { std::cerr << "Error in KDL - iKin conversion" << std::endl; return EXIT_FAILURE; }
+  if( !result) { std::cerr << "Error in KDL - iKin conversion" << std::endl; return 0; }
   
   //Generate random state to validate  
   KDL::JntArray q_kdl(kdl_random_chain.getNrOfJoints());
   yarp::sig::Vector q_yarp(ikin_random_chain.getDOF());
   
-  if( kdl_random_chain.getNrOfJoints() != ikin_random_chain.getDOF() ) { std::cerr << "The number of DOFs of the KDL::Chain and the iKinChain does not match " << std::endl; return EXIT_FAILURE; }
+  if( kdl_random_chain.getNrOfJoints() != ikin_random_chain.getDOF() ) { std::cerr << "The number of DOFs of the KDL::Chain and the iKinChain does not match " << std::endl; return 0; }
   
-  for(int i=0; i < q_yarp.size(); i++ ) { q_kdl(i) = q_yarp(i) = random_double(2*M_PI); } 
+  //srand(time(0));
+  for(int i=0; i < q_yarp.size(); i++ ) { q_kdl(i) = q_yarp(i) = 1*random_double(2*M_PI); } 
   
   //Get H_ef_base for KDL::Chain
   KDL::Frame H_kdl;
@@ -211,6 +245,7 @@ int main(int argc, char** argv)
   //Get H_ef_base for iKinChain
   //for(int i=0; i < ikin_random_chain.getN(); i++ ) { ikin_random_chain.releaseLink(i); }
   std::cout << "iKin_export_random_chain: Setting angles value in iKin" << std::endl; 
+  std::cout << q_yarp.toString() << std::endl;
   ikin_random_chain.setAng(q_yarp);
   yarp::sig::Matrix H_yarp = ikin_random_chain.getH();
   
@@ -219,17 +254,55 @@ int main(int argc, char** argv)
   //Check that the matrix are equal
   double tol = 1e-8;
   
-  std::cout << "H_yarp" << std::endl << H_yarp.toString() << std::endl  << "H_kdl" << std::endl << H_yarp_kdl.toString() << std::endl << H_kdl << std::endl; 
+  std::cout << "H_yarp" << std::endl << H_yarp.toString() << std::endl  << "H_kdl" << std::endl << H_yarp_kdl.toString() << std::endl; 
 
   
   for(int i=0; i < 4; i++ ) {
       for(int j=0; j < 4; j++ ) {
-          if( fabs(H_yarp_kdl(i,j)-H_yarp(i,j)) > tol ) { std::cerr << "Element " << i << " " << j << " of the result matrix does not match" << std::endl; return EXIT_FAILURE; }
+          if( fabs(H_yarp_kdl(i,j)-H_yarp(i,j)) > tol ) { std::cerr << "Element " << i << " " << j << " of the result matrix does not match" << std::endl; return 0; }
       }
   }
  
- 
-  return EXIT_SUCCESS;
+  return 1;
+}
+
+//List of tests to do:
+//1 dof: dh generated random d,a,alpha,theta separated, couples, triple, all of them
+//2 dof 
+
+int main(int argc, char** argv)
+{
+    srand(time(0));
+    for(int i=0;i<100;i++) 
+    { 
+        for(int permutation=0; permutation < 16; permutation++ ) 
+        {
+            double a_gain = (permutation % 2)/1 == 0 ? 0.0 : 1.0;
+            double d_gain = (permutation % 4)/2 == 0 ? 0.0 : 1.0;
+            double alpha_gain = (permutation % 8)/4 == 0 ? 0.0 : 1.0;
+            double offset_gain = (permutation % 16)/8 == 0 ? 0.0 : 1.0;
+
+            if( !checkRandomKDLtoDH(i,"dh",a_gain,d_gain,alpha_gain,1.0*offset_gain) ) 
+            {
+                std::cout << "DH to DH conversion failing for: " << std::endl;
+                std::cout << i << " " << a_gain << " " << d_gain << " " << alpha_gain << " " << offset_gain << std::endl;
+                return EXIT_FAILURE;
+            }
+        }
+    }
+    
+    for(int i=0;i<100;i++) 
+    { 
+            /*
+            if( !checkRandomKDLtoDH(i,"random") ) 
+            {
+                std::cout << "Random to DH conversion failing for nr_of_joints = " << i << std::endl;
+                return EXIT_FAILURE;
+            }*/
+    }
+    
+    std::cout << "All DH conversion test completed successfully." << std::endl;
+    return EXIT_SUCCESS;
 }
 
 
