@@ -53,9 +53,9 @@ using namespace KDL::CoDyCo;
 
 void printLink(const SegmentMap::const_iterator& link, const std::string& prefix)
 {
-  cout << prefix << "- Segment " << GetTreeElementSegment(link->second).segment.getName() << " has " << GetTreeElementSegment(link->second)children.size() << " children" << endl;
-  for (unsigned int i=0; i<GetTreeElementSegment(link->second).children.size(); i++)
-    printLink(GetTreeElementSegment(link->second).children[i], prefix + "  ");
+  cout << prefix << "- Segment " << GetTreeElementSegment(link->second).getName() << " has " << GetTreeElementChildren(link->second).size() << " children" << endl;
+  for (unsigned int i=0; i<GetTreeElementChildren(link->second)size(); i++)
+    printLink(GetTreeElementChildren(link->second)[i], prefix + "  ");
 }
 
 
