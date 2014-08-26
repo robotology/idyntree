@@ -1,7 +1,9 @@
 find_package(kdl_codyco REQUIRED)
+
+if(ENABLE_IKIN)
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
-
+endif()
 
 include_directories(${Orocos-KDL_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS} )
 
@@ -15,9 +17,10 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/format_examples/symoro_par/fake_puma.
 target_link_libraries(check_symoro_par_import_fixed_chain_regressor ${kdl_codyco_LIBRARIES} kdl-format-io)
 add_test(test_par_import_fixed_chain_regressor check_symoro_par_import_fixed_chain_regressor fake_puma.par)
 
+
 #check iKin Denavit Hartenberg parameters export
-add_executable(check_iKin_export_random_chain check_iKin_export_random_chain.cpp)
-target_link_libraries(check_iKin_export_random_chain ${kdl_codyco_LIBRARIES} ${YARP_LIBRARIES} ${ICUB_LIBRARIES} kdl-format-io)
+#add_executable(check_iKin_export_random_chain check_iKin_export_random_chain.cpp)
+#target_link_libraries(check_iKin_export_random_chain ${kdl_codyco_LIBRARIES} ${YARP_LIBRARIES} ${ICUB_LIBRARIES} kdl-format-io)
 
 
 #In Release mode, don't compile the HRP2 Regressor model because it takes a lot of time
