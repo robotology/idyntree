@@ -253,8 +253,8 @@ namespace CoDyCo {
         for(i = 0; i < links.size(); i++ ) {
             seg = tree.getSegment(links[i]);
             if( seg == seg_map.end() ) {
-                std::cerr << "TreeSerialization::is_consistent returning false: "
-                              << "the " << links[i] << " link the serialization is not in the KDL::Tree" << std::endl;
+                //std::cerr << "TreeSerialization::is_consistent returning false: "
+                //              << "the " << links[i] << " link the serialization is not in the KDL::Tree" << std::endl;
                 return false;
             }
         }
@@ -270,30 +270,30 @@ namespace CoDyCo {
             int junction_id = getJunctionID( joint_name );
             int dof_id = getDOFID(joint_name);
             if( junction_id == -1 ) {
-                    std::cerr << "TreeSerialization::is_consistent returning false: "
-                              << "the " << joint_name << " junction in KDL::Tree is not in the serialization" << std::endl;
+                    //std::cerr << "TreeSerialization::is_consistent returning false: "
+                    //          << "the " << joint_name << " junction in KDL::Tree is not in the serialization" << std::endl;
                     return false;
             }
             if (GetTreeElementSegment(it->second).getJoint().getType() == KDL::Joint::None) {
                 if (dof_id != -1) {
-                    std::cerr << "TreeSerialization::is_consistent returning false: "
-                              << "the " << joint_name << "  fixed junction has a dofID" << std::endl;
+                    //std::cerr << "TreeSerialization::is_consistent returning false: "
+                    //          << "the " << joint_name << "  fixed junction has a dofID" << std::endl;
                     return false;
                 }
                 if (junction_id < this->getNrOfDOFs()) {
-                    std::cerr << "TreeSerialization::is_consistent returning false: "
-                              << "the " << joint_name << "  fixed junction has a ID lower than the number of DOFs" << std::endl;
+                    //std::cerr << "TreeSerialization::is_consistent returning false: "
+                    //          << "the " << joint_name << "  fixed junction has a ID lower than the number of DOFs" << std::endl;
                     return false;
                 }
             } else {
                 if (dof_id == -1) {
-                    std::cerr << "TreeSerialization::is_consistent returning false: "
-                              << "the " << joint_name << "  non fixed junction has not a dofID" << std::endl;
+                    //std::cerr << "TreeSerialization::is_consistent returning false: "
+                    //          << "the " << joint_name << "  non fixed junction has not a dofID" << std::endl;
                     return false;
                 }
                 if (dof_id != junction_id) {
-                    std::cerr << "TreeSerialization::is_consistent returning false: "
-                              << "the " << joint_name << "  non fixed junction has a dofID different from the junction_id" << std::endl;
+                    //std::cerr << "TreeSerialization::is_consistent returning false: "
+                    //          << "the " << joint_name << "  non fixed junction has a dofID different from the junction_id" << std::endl;
                     return false;
                 }
 
