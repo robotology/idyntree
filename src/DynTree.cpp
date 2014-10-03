@@ -2085,7 +2085,7 @@ int DynTree::getNrOfDOFs(const std::string & part_name) const
     } else { // if part_name.length > 0
         std::vector<int> dof_ids;
         dof_ids = partition.getPartDOFIDs(part_name);
-        std::cout << "DynTree::getNrOfDOFs " << part_name << " has " << dof_ids.size() << std::endl;
+        //std::cout << "DynTree::getNrOfDOFs " << part_name << " has " << dof_ids.size() << std::endl;
         return dof_ids.size();
     }
 }
