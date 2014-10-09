@@ -1486,7 +1486,7 @@ KDL::Vector DynTree::getCOMKDL(const std::string & part_name, int link_index)
     getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,Xb,momentum_jac_buffer,com_jac_buffer,momentum_jacobian,total_inertia,part_id);
     */
     
-    return com_world;
+    return com_return;
 }
 
 yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index)
