@@ -353,7 +353,7 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
 }
 
 
-bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& iKin_chain)
+bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinLimb& iKin_limb)
 {    
     //Getting Denavit Hartenberg parameters using the algorithm 
     //in section 3.2.3 of http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf 
@@ -480,6 +480,8 @@ bool iKinChainFromKDLChain(const KDL::Chain& kdl_chain, iCub::iKin::iKinChain& i
     //iCub::iKin::iKinChain converted_iKin_chain;
     
     //Create converted_iKin_chain 
+    iCub::iKin::iKinChain & iKin_chain = *(iKin_limb.asChain());
+    
     iKin_chain.clear();
     
     iKin_chain.setH0(KDLtoYarp_position(H0_kdl));

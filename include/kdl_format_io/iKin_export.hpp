@@ -49,8 +49,8 @@
 namespace kdl_format_io{
 
 
-/** Constructs a iKin chain model from a KDL Chain
- *  \note iKinChain supports only rotational joints
+/** Constructs a iKin limb model from a KDL Chain
+ *  \note iKinLimb supports only rotational joints
  *        links connected by fixed joints are wielded
  *        if a translational joint is found an error is returned
  * 
@@ -58,7 +58,7 @@ namespace kdl_format_io{
  * \param iKin_chain The resulting iKinChain
  * returns true on success, false on failure
  */
-bool iKinChainFromKDLChain(const KDL::Chain& tree, iCub::iKin::iKinChain& iKin_chain);
+bool iKinLimbFromKDLChain(const KDL::Chain& tree, iCub::iKin::iKinLimb& iKin_limb);
 
 }
 

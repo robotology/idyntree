@@ -214,6 +214,11 @@ IF( ENABLE_URDF AND ENABLE_SYMORO_PAR )
     target_link_libraries(par2urdf kdl-format-io ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
+IF( ENABLE_URDF AND ENABLE_IKIN )
+    add_executable(urdf2dh src/utils/urdf2dh.cpp)
+    target_link_libraries(urdf2dh kdl-format-io ${URDF_LIBS} ${orocos_kdl_LIBRARIES} ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES})
+ENDIF()
+
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
 #target_link_libraries(check_kdl_export ${kdl_format_io_LIBRARIES} ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
@@ -243,6 +248,14 @@ INSTALL(TARGETS kdl-format-io
   PUBLIC_HEADER DESTINATION include/kdl_format_io
 )
 
+#install utilities
+if( ENABLE_URDF AND ENABLE_SYMORO_PAR )
+    install(TARGETS par2urdf DESTINATION bin)
+endif()
+
+if( ENABLE_URDF AND ENABLE_IKIN )
+    install(TARGETS urdf2dh DESTINATION bin)
+endif()
 
 EXPORT(TARGETS kdl-format-io FILE "${PROJECT_BINARY_DIR}/kdl_format_io-target.cmake")
 
