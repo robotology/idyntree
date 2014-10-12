@@ -40,6 +40,8 @@
 
 #include <kdl/tree.hpp>
 #include <kdl/joint.hpp>
+#include <kdl/jntarray.hpp>
+
 #include <string>
 #include <iCub/iKin/iKinFwd.h>
 
@@ -56,9 +58,14 @@ namespace kdl_format_io{
  * 
  * \param kdl_chain The KDL::Chain
  * \param iKin_chain The resulting iKinChain
+ * \param min (optional) array of minimum values for joint position
+ * \param max (optional) array of maximum values for joint position
  * returns true on success, false on failure
  */
-bool iKinLimbFromKDLChain(const KDL::Chain& tree, iCub::iKin::iKinLimb& iKin_limb);
+bool iKinLimbFromKDLChain(const KDL::Chain& tree, 
+                          iCub::iKin::iKinLimb& iKin_limb,
+                          const KDL::JntArray & min,
+                          const KDL::JntArray & max);
 
 }
 

@@ -39,6 +39,7 @@
 #define KDL_IMPORT_H
 
 #include <string>
+#include <vector>
 
 class TiXmlDocument;
 namespace urdf {
@@ -47,6 +48,7 @@ namespace urdf {
 
 namespace KDL {
     class Tree;
+    class JntArray;
 }
 
 namespace kdl_format_io{
@@ -56,7 +58,7 @@ namespace kdl_format_io{
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeFromUrdfFile(const std::string& file, KDL::Tree& tree);
+bool treeFromUrdfFile(const std::string& file, KDL::Tree& tree, const bool consider_root_link_inertia=false);
 
 /** Constructs a KDL tree from the parameter server, given the parameter name
  * \param param the name of the parameter on the parameter server
@@ -70,7 +72,7 @@ bool treeFromUrdfFile(const std::string& file, KDL::Tree& tree);
  * \param tree The resulting KDL Tree
  * returns true on success, false on failure
  */
-bool treeFromUrdfString(const std::string& xml, KDL::Tree& tree);
+bool treeFromUrdfString(const std::string& xml, KDL::Tree& tree, const bool consider_root_link_inertia=false);
 
 
 /** Constructs a KDL tree from a TiXmlDocument
@@ -89,6 +91,15 @@ bool treeFromUrdfString(const std::string& xml, KDL::Tree& tree);
  * returns true on success, false on failure
  */
 bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, KDL::Tree& tree, const bool consider_root_link_inertia=false);
+
+/**
+ * \todo TODO FIXME write proper JointLimit/JointPosLimits to replace use of joint_names,min,max 
+ *
+ */
+bool jointPosLimitsFromUrdfFile(const std::string& file, std::vector<std::string> & joint_names, KDL::JntArray & min, KDL::JntArray & max);
+bool jointPosLimitsFromUrdfString(const std::string& urdf_xml,std::vector<std::string> & joint_names, KDL::JntArray & min, KDL::JntArray & max);
+bool jointPosLimitsFromUrdfModel(const urdf::ModelInterface& robot_model, std::vector<std::string> & joint_names, KDL::JntArray & min, KDL::JntArray & max);
+
 }
 
 #endif
