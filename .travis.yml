@@ -33,4 +33,4 @@ before_script:
   - cd build
   - cmake -DCREATE_TESTS:BOOL=ON -DCMAKE_BUILD_TYPE=Debug ./..
 
-script: make && ctest -V && urdf2dh
+script: make && ctest -V && sudo make install & urdf2dh
