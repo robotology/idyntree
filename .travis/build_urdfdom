@@ -28,6 +28,7 @@ cd ..
 echo "--> Compiling urdfdom"
 $git_clone "git://github.com/ros/urdfdom.git"
 cd urdfdom
+git checkout 0.3.0
 cmake ./
 make
 sudo make install
