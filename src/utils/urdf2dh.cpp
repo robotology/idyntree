@@ -39,6 +39,7 @@
 #include <fstream>
 
 #include <ctime>
+#include <boost/concept_check.hpp>
 
 #include "kdl_format_io/iKin_export.hpp"
 
@@ -162,17 +163,31 @@ bool checkChainsAreEqual(KDL::Chain kdl_random_chain, iCub::iKin::iKinLimb & iki
   return true;
 }
 
-int main(int argc, char** argv)
+void printHelp()
 {
-  if (argc != 5)
-  {
     std::cerr << "URDF to Denavit-Hartenberg parameter converter." << std::endl;
     std::cerr << "This utility will extract any chain, and it will output" << std::endl;
-    std::cerr << "the Denatvit-Hartenberg parameters in iKin .ini format." << std::endl;
+    std::cerr << "the Denavit-Hartenberg parameters in iKin .ini format." << std::endl;
     std::cerr << "For more information about the iKin .ini format, check:" << std::endl;
     std::cerr << "      http://wiki.icub.org/iCub/main/dox/html/classiCub_1_1iKin_1_1iKinLimb.html#a76c93aae76bb0f7ef9470b81d0da0e26" << std::endl;
     std::cerr << "Usage: urdf2dh robot.urdf base_link_name end_effector_link_name dhParams.ini" << std::endl;
-    return -1;
+}
+
+int main(int argc, char** argv)
+{
+  if ( argc == 2 )
+  {
+      if( (std::string(argv[1]) == "--help" ||
+           std::string(argv[1]) == "-h" ) )
+      {
+          printHelp();
+          return 0;
+      }
+  }
+  if (argc != 5)
+  {
+      printHelp();
+      return -1;
   }
 
   std::string urdf_file_name         = argv[1];
