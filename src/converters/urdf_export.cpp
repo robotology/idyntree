@@ -220,7 +220,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
     for( seg = segs.begin(); seg != segs.end(); seg++ ) {
         if (robot_model.getLink(seg->first))
         {
-            logError("link '%s' is not unique.",  seg->first.c_str());
+            std::cerr << "[ERR] link " << seg->first << " is not unique." << std::endl;
             robot_model.clear();
             return false;
         }
@@ -234,7 +234,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
 
             //insert link
             robot_model.links_.insert(make_pair(seg->first,link));
-            logDebug("successfully added a new link '%s'", link->name.c_str());
+            std::cerr << "[DEBUG] successfully added a new link " << link->name << std::endl;
         }
 
         //inserting joint
@@ -244,7 +244,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
             jnt = GetTreeElementSegment(seg->second).getJoint();
             if (robot_model.getJoint(jnt.getName()))
             {
-                logError("joint '%s' is not unique.", jnt.getName().c_str());
+                std::cerr << "[ERR] joint " <<  jnt.getName() << " is not unique." << std::endl;
                 robot_model.clear();
                 return false;
             }
@@ -268,7 +268,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
 
                 //insert joint
                 robot_model.joints_.insert(make_pair(seg->first,joint));
-                logDebug("successfully added a new joint '%s'", jnt.getName().c_str());
+                std::cerr << "[DEBUG] successfully added a new joint" << jnt.getName() << std::endl;
 
                 //add inertial, taking in account an eventual change in the link frame
                 link->inertial.reset(new urdf::Inertial());
