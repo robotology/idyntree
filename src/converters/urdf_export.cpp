@@ -37,7 +37,6 @@
 
 #include "kdl_format_io/urdf_export.hpp"
 #include <urdf_model/model.h>
-#include <console_bridge/console.h>
 #include <iostream>
 #include <urdf_parser/urdf_parser.h>
 #include <tinyxml.h>
