@@ -66,7 +66,7 @@ add_definitions(-DOROCOS_KDL_VERSION_PATCH=${orocos_kdl_VERSION_PATCH})
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS})
 set(KDL_FORMAT_IO_INCLUDE_DIRS "${KDL_FORMAT_IO_INCLUDE_DIRS}" ${orocos_kdl_INCLUDE_DIRS})
 
-IF( ENABLE_URDF ) 
+IF( ENABLE_URDF )
     find_package(TinyXML)
     IF( NOT TinyXML_FOUND )
         message("Disabling URDF support as no TinyXML was found")
@@ -74,7 +74,7 @@ IF( ENABLE_URDF )
     ENDIF()
 ENDIF()
 
-IF( ENABLE_URDF ) 
+IF( ENABLE_URDF )
     find_package(urdfdom_headers)
     IF( NOT urdfdom_headers_CONFIG_INCLUDED )
         message("Disabling URDF support as no urdfdom_headers was found")
@@ -82,26 +82,10 @@ IF( ENABLE_URDF )
     ENDIF()
 ENDIF()
 
-IF( ENABLE_URDF ) 
+IF( ENABLE_URDF )
     find_package(urdfdom)
     IF( NOT urdfdom_CONFIG_INCLUDED )
         message("Disabling URDF support as no urdfdom was found")
-        set(ENABLE_URDF FALSE)
-    ENDIF()
-ENDIF()
-
-IF( ENABLE_URDF ) 
-    find_package(console_bridge)
-    IF( NOT ${console_bridge_CONFIG_INCLUDED} )
-        message("Disabling URDF support as no console_bridge was found")
-        set(ENABLE_URDF FALSE)
-    ENDIF()
-ENDIF()
-
-IF( ENABLE_URDF ) 
-    find_package(Boost REQUIRED thread)
-    IF( NOT ${Boost_FOUND} )
-        message("Disabling URDF support as no Boost was found")
         set(ENABLE_URDF FALSE)
     ENDIF()
 ENDIF()
@@ -121,8 +105,8 @@ ENDIF()
 
 include_directories(include)
 
-                     
-if(ENABLE_URDF) 
+
+if(ENABLE_URDF)
     include_directories(SYSTEM ${TinyXML_INCLUDE_DIRS})
     include_directories(SYSTEM ${urdfdom_INCLUDE_DIRS})
     include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS})
@@ -150,7 +134,7 @@ if(ENABLE_SYMORO_PAR)
     endif()
 endif()
 
-set(KDL_FORMAT_IO_HPPS ${SYMORO_PAR_HPPS} ${URDF_HPPS}) 
+set(KDL_FORMAT_IO_HPPS ${SYMORO_PAR_HPPS} ${URDF_HPPS})
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
@@ -163,10 +147,10 @@ endif()
 set(CMAKE_MACOSX_RPATH 1) #enable RPATH on OSX. This also suppress warnings on CMake >= 3.0
 # when building, don't use the install RPATH already
 # (but later on when installing)
-set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 # set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 #This is relative RPATH for libraries built in the same project
-#I assume that the directory is 
+#I assume that the directory is
 # - install_dir/something for binaries
 # - install_dir/lib for libraries
 file(RELATIVE_PATH _rel_path "${CMAKE_INSTALL_PREFIX}/bin" "${CMAKE_INSTALL_PREFIX}/lib")
@@ -228,7 +212,7 @@ set_target_properties( kdl-format-io PROPERTIES
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
   PUBLIC_HEADER "${KDL_FORMAT_IO_HPPS}"
   )
-  
+
 if(${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_GREATER "2.8.12")
   message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. This check can be removed.")
 endif()

@@ -37,7 +37,6 @@
 #include "kdl_format_io/urdf_import.hpp"
 #include <urdf_model/model.h>
 #include <urdf_parser/urdf_parser.h>
-#include <console_bridge/console.h>
 #include <fstream>
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
@@ -111,7 +110,7 @@ Joint toKdl(boost::shared_ptr<urdf::Joint> jnt)
     return Joint(jnt->name, F_parent_jnt.p, F_parent_jnt.M * axis, Joint::TransAxis);
   }
   default:{
-    logWarn("Converting unknown joint type of joint '%s' into a fixed joint", jnt->name.c_str());
+    std::cerr << "Converting unknown joint type of joint " << jnt->name << " into a fixed joint" << std::endl;
     return Joint(jnt->name, Joint::None);
   }
   }
@@ -153,7 +152,7 @@ RigidBodyInertia toKdl(boost::shared_ptr<urdf::Inertial> i)
 bool addChildrenToTree(boost::shared_ptr<const urdf::Link> root, Tree& tree)
 {
   std::vector<boost::shared_ptr<urdf::Link> > children = root->child_links;
-  logDebug("Link %s had %i children", root->name.c_str(), (int)children.size());
+  std::cerr << "[INFO] Link " << root->name << " had " << children.size() << " children" << std::endl;
 
   // constructs the optional inertia
   RigidBodyInertia inert(0);
@@ -223,7 +222,11 @@ bool treeFromUrdfString(const string& xml, Tree& tree, const bool consider_root_
 {
   boost::shared_ptr<urdf::ModelInterface> urdf_model;
   urdf_model = urdf::parseURDF(xml);
-  if( urdf_model.use_count() == 0 || !urdf_model ) { logError("Could not parse string to urdf::ModelInterface"); return false; }
+  if( urdf_model.use_count() == 0 || !urdf_model )
+  {
+      std::cerr << "[ERR] Could not parse string to urdf::ModelInterface" << std::endl;
+      return false;
+  }
   return treeFromUrdfModel(*urdf_model,tree,consider_root_link_inertia);
 }
 
@@ -271,7 +274,8 @@ bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree, cons
 
     // warn if root link has inertia. KDL does not support this
     if (robot_model.getRoot()->inertial)
-      logWarn("The root link %s has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.", robot_model.getRoot()->name.c_str());
+      std::cerr << "The root link " << robot_model.getRoot()->name <<
+                   " has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF." << std::endl;
   }
 
   //  add all children
@@ -303,7 +307,11 @@ bool jointPosLimitsFromUrdfString(const std::string& urdf_xml,
 {
   boost::shared_ptr<urdf::ModelInterface> urdf_model;
   urdf_model = urdf::parseURDF(urdf_xml);
-  if( urdf_model.use_count() == 0 || !urdf_model ) { logError("Could not parse string to urdf::ModelInterface"); return false; }
+  if( urdf_model.use_count() == 0 || !urdf_model )
+  {
+      std::cerr << "[ERR] Could not parse string to urdf::ModelInterface" << std::endl;
+      return false;
+  }
   return jointPosLimitsFromUrdfModel(*urdf_model,joint_names,min,max);
 }
 
@@ -321,7 +329,7 @@ bool jointPosLimitsFromUrdfModel(const urdf::ModelInterface& robot_model,
             nrOfJointsWithLimits++;
         }
     }
-    
+
     joint_names.resize(nrOfJointsWithLimits);
     min.resize(nrOfJointsWithLimits);
     max.resize(nrOfJointsWithLimits);
