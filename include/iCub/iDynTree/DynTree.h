@@ -176,6 +176,8 @@ class DynTree  {
         std::vector<KDL::Wrench> f; /**< For a link the wrench transmitted from the link to its parent in the dynamical traversal \warning it is traversal dependent */
         std::vector<KDL::Wrench> f_gi; /**< Gravitational and inertial wrench acting on a link */
 
+        int getLinkFromSkinDynLibID(int body_part, int link);
+
         //DynTreeContact data structures
         std::vector<int> link2subgraph_index; /**< for each link, return the correspondent dynamics subgraph index */
         std::vector<bool> link_is_subgraph_root; /**< for each link, return if it is a subgraph root */
@@ -274,7 +276,6 @@ class DynTree  {
                          const std::vector<std::string> & joint_ft_sensor_names,
                          const std::string & imu_link_name,
                          KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(),
-                         KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition(),
                          std::vector<KDL::Frame> parent_sensor_transforms=std::vector<KDL::Frame>(0));
 
 
@@ -292,10 +293,8 @@ class DynTree  {
         DynTree(const KDL::Tree & _tree,
                 const std::vector<std::string> & joint_sensor_names,
                 const std::string & imu_link_name,
-                KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(),
-                KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition());
+                KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization());
 
-        #ifdef CODYCO_USES_URDFDOM
         /**
          * Constructor for DynTree
          *
@@ -310,9 +309,7 @@ class DynTree  {
         DynTree(const std::string urdf_file,
                 const std::vector<std::string> & joint_sensor_names,
                 const std::string & imu_link_name,
-                KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(),
-                KDL::CoDyCo::TreePartition partition=KDL::CoDyCo::TreePartition());
-        #endif
+                KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization());
 
         virtual ~DynTree();
 
@@ -323,7 +320,7 @@ class DynTree  {
          *       DOFs of the floating base
          *
          */
-        int getNrOfDOFs(const std::string & part_name="") const;
+        int getNrOfDOFs() const;
 
         /**
          * Get the number of links of the tree
@@ -384,7 +381,7 @@ class DynTree  {
          * @param local_link_index the index of the link in the given part
          * @return an index between 0..getNrOfLinks()-1 if all went well, -1 otherwise
          */
-        int getLinkIndex(const int part_id, const int local_link_index);
+        //int getLinkIndex(const int part_id, const int local_link_index);
 
         /**
          * Get the global index for a DOF, given a part id and a DOF part local index
@@ -393,7 +390,7 @@ class DynTree  {
          * @return an index between 0..getNrOfDOFs()-1 if all went well, -1 otherwise
          *
          */
-        int getDOFIndex(const int part_id, const int local_DOF_index);
+        //int getDOFIndex(const int part_id, const int local_DOF_index);
 
         /**
          * Get the global index for a link, given a part and a part local index
@@ -401,7 +398,7 @@ class DynTree  {
          * @param local_link_index the index of the link in the given part
          * @return an index between 0..getNrOfLinks()-1 if all went well, -1 otherwise
          */
-        int getLinkIndex(const std::string & part_name, const int local_link_index);
+        //int getLinkIndex(const std::string & part_name, const int local_link_index);
 
         /**
          * Get the global index for a DOF, given a part id and a part local index
@@ -410,7 +407,7 @@ class DynTree  {
          * @return an index between 0..getNrOfDOFs()-1 if all went well, -1 otherwise
          *
          */
-        int getDOFIndex(const std::string & part_name, const int local_DOF_index);
+       // int getDOFIndex(const std::string & part_name, const int local_DOF_index);
 
         /**
         * Set the rototranslation between the world and the base reference
@@ -441,9 +438,9 @@ class DynTree  {
         * @param part_name optional: the name of the part of joint to set
         * @return the effective joint positions, considering min/max values
         */
-        virtual yarp::sig::Vector setAng(const yarp::sig::Vector & _q, const std::string & part_name="") ;
+        virtual yarp::sig::Vector setAng(const yarp::sig::Vector & _q) ;
 
-        virtual bool setAngKDL(const KDL::JntArray & _q, const std::string & part_name="") ;
+        virtual bool setAngKDL(const KDL::JntArray & _q) ;
 
 
         /**
@@ -452,9 +449,9 @@ class DynTree  {
         * @param part_name optional: the name of the part of joints to set
         * @return vector of joint positions
         */
-        virtual yarp::sig::Vector getAng(const std::string & part_name="") const;
+        virtual yarp::sig::Vector getAng() const;
 
-        virtual bool getAngKDL(KDL::JntArray & q, const std::string & part_name="") const;
+        virtual bool getAngKDL(KDL::JntArray & q) const;
 
 
 
@@ -465,7 +462,7 @@ class DynTree  {
         * @param part_name optional: the name of the part of joints to set
         * @return the effective joint speeds, considering min/max values
         */
-        virtual yarp::sig::Vector setDAng(const yarp::sig::Vector & _q, const std::string & part_name="");
+        virtual yarp::sig::Vector setDAng(const yarp::sig::Vector & _q);
 
         /**
         * Get joint speeds in the specified part (if no part
@@ -475,7 +472,7 @@ class DynTree  {
         *
         * \note please note that this does returns a vector of size getNrOfDOFs()
         */
-        virtual yarp::sig::Vector getDAng(const std::string & part_name="") const;
+        virtual yarp::sig::Vector getDAng() const;
 
         /**
         * Set joint accelerations in the specified part (if no part
@@ -484,7 +481,7 @@ class DynTree  {
         * @param part_name optional: the name of the part of joints to set
         * @return the effective joint accelerations, considering min/max values
         */
-        virtual yarp::sig::Vector setD2Ang(const yarp::sig::Vector & _q, const std::string & part_name="");
+        virtual yarp::sig::Vector setD2Ang(const yarp::sig::Vector & _q);
 
         /**
         * Get joint speeds in the specified part (if no part
@@ -492,7 +489,7 @@ class DynTree  {
         * @param part_name optional: the name of the part of joints to get
         * @return vector of joint accelerations
         */
-        virtual yarp::sig::Vector getD2Ang(const std::string & part_name="") const;
+        virtual yarp::sig::Vector getD2Ang() const;
 
 
         /**
@@ -572,35 +569,35 @@ class DynTree  {
         /**
          * Returns a list containing the min value for each joint.
          */
-        virtual yarp::sig::Vector getJointBoundMin(const std::string & part_name="");
+        virtual yarp::sig::Vector getJointBoundMin();
 
         /**
          * Returns a list containing the max value for each joint.
          */
-        virtual yarp::sig::Vector getJointBoundMax(const std::string & part_name="");
+        virtual yarp::sig::Vector getJointBoundMax();
 
         /**
           * Returns a list containing the max torque value for each joint.
           */
-        virtual yarp::sig::Vector getJointTorqueMax(const std::string & part_name="");
+        virtual yarp::sig::Vector getJointTorqueMax();
 
 
         /**
          * Set a list containing the max torque value for each joint.
          */
-        virtual bool setJointTorqueBoundMax(const yarp::sig::Vector & _tau, const std::string & part_name="");
+        virtual bool setJointTorqueBoundMax(const yarp::sig::Vector & _tau);
 
 
 
         /**
          * Set a list containing the min value for each joint.
          */
-        virtual bool setJointBoundMin(const yarp::sig::Vector & _q, const std::string & part_name="");
+        virtual bool setJointBoundMin(const yarp::sig::Vector & _q);
 
         /**
          * Set a list containing the max value for each joint.
          */
-        virtual bool setJointBoundMax(const yarp::sig::Vector & _q, const std::string & part_name="");
+        virtual bool setJointBoundMax(const yarp::sig::Vector & _q);
 
        /**
         * Sets the constraint status of all chain links.
@@ -760,7 +757,7 @@ class DynTree  {
         * @param part_name optional: the name of the part of joints to get
         * @return vector of joint torques
         */
-        virtual yarp::sig::Vector getTorques(const std::string & part_name="") const;
+        virtual yarp::sig::Vector getTorques() const;
 
         /**
          * Get the ForceTorque transmitted through joint joint_index.
@@ -870,7 +867,7 @@ class DynTree  {
         //@{
 
 
-        KDL::Vector getCOMKDL(const std::string & part_name="", const int link_index = -1);
+        KDL::Vector getCOMKDL(const std::string part_name="", const int link_index = -1);
 
 
         /**
@@ -882,10 +879,10 @@ class DynTree  {
         *
         * \todo prepare a suitable interface for specifing both an arbitrary part and a arbitrary frame of expression
         */
-        virtual yarp::sig::Vector getCOM(const std::string & part_name="", const int link_index = -1);
+        virtual yarp::sig::Vector getCOM(const std::string part_name="", const int link_index = -1);
 
 
-        virtual bool getCOMJacobianKDL(KDL::Jacobian & jac, const std::string & part_name="");
+        virtual bool getCOMJacobianKDL(KDL::Jacobian & jac);
 
         /**
         * Get Center of Mass Jacobian of the specified part (if no part
@@ -895,17 +892,17 @@ class DynTree  {
         * @param part_name optional: the name of the part of joints to get
         * @return true if succeeds, false otherwise
         */
-        virtual bool getCOMJacobian(yarp::sig::Matrix & jac, const std::string & part_name="");
+        virtual bool getCOMJacobian(yarp::sig::Matrix & jac);
 
 
-        virtual bool getCOMJacobianKDL(KDL::Jacobian & jac, KDL::CoDyCo::MomentumJacobian & momentum_jac, const std::string & part_name="");
+        virtual bool getCOMJacobianKDL(KDL::Jacobian & jac, KDL::CoDyCo::MomentumJacobian & momentum_jac);
 
 
         /**
          * Temporary function, do not use.
          *
          */
-        virtual bool getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & momentum_jac, const std::string & part_name="");
+        virtual bool getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & momentum_jac);
 
         /**
          * Temporary function, do not use.
