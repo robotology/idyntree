@@ -116,8 +116,13 @@ if(ENABLE_URDF)
     link_directories(${console_bridge_LIBRARY_DIRS})
     set(KDL_FORMAT_IO_LIBRARY_DIRS "${KDL_FORMAT_IO_LIBRARY_DIRS}" ${console_bridge_LIBRARY_DIRS} ${urdfdom_LIBRARY_DIRS})
 
-    set(URDF_SRCS src/converters/urdf_export.cpp src/converters/urdf_import.cpp)
-    set(URDF_HPPS include/kdl_format_io/urdf_import.hpp include/kdl_format_io/urdf_export.hpp)
+    set(URDF_SRCS src/converters/urdf_export.cpp
+                  src/converters/urdf_import.cpp
+                  src/converters/urdf_sensor_import.cpp)
+
+    set(URDF_HPPS include/kdl_format_io/urdf_import.hpp
+                  include/kdl_format_io/urdf_export.hpp
+                  include/kdl_format_io/urdf_sensor_import.hpp)
     set(URDF_LIBS ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
 endIF()
 
