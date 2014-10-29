@@ -30,7 +30,7 @@ iCubTree::iCubTree(std::string urdf_filename, std::string fixed_link, unsigned i
 
     assert(ret);
     if( !ret ) {
-        if( verbose ) { std::cerr << "iCubTree: error in costructor" << std::endl; }
+        { std::cerr << "[INFO] iCubTree: error in costructor" << std::endl; }
         return;
     }
 
@@ -39,7 +39,7 @@ iCubTree::iCubTree(std::string urdf_filename, std::string fixed_link, unsigned i
     ret = kdl_format_io::ftSensorsFromUrdfFile(urdf_filename, ft_sensors);
 
     if( !ret ) {
-        if( verbose ) { std::cerr << "iCubTree: error in loading ft_sensors" << std::endl; }
+        { std::cerr << "[INFO] iCubTree: error in loading ft_sensors" << std::endl; }
         return;
     }
 
@@ -75,6 +75,10 @@ iCubTree::iCubTree(std::string urdf_filename, std::string fixed_link, unsigned i
     }
 
     this->constructor(icub_kdl,ft_names,imu_link_name,serial);
+
+    std::cout << "[INFO] iCubTree constructor: loaded urdf with " << this->getNrOfDOFs() << "dofs" << std::endl;
+    
+    assert(this->getNrOfDOFs() > 0);
 
     //Set joint limits
     KDL::JntArray q_min_kdl(serial.getNrOfDOFs()), q_max_kdl(serial.getNrOfDOFs());

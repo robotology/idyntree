@@ -91,6 +91,7 @@
 #include <kdl/tree.hpp>
 
 #include <iostream>
+#include <map>
 
 
 namespace iCub
@@ -101,6 +102,29 @@ namespace iDynTree
 
 const int WORLD_FRAME = -10;
 const int DEFAULT_INDEX_VALUE = -20;
+ 
+class skinDynLibLinkID {
+     public:
+          int body_part;
+          int local_link_index;
+
+    bool operator<(const skinDynLibLinkID& k) const
+    {
+        if(this->body_part < k.body_part)
+        {
+           return true;
+        } 
+        else if(this->body_part < k.body_part)
+        {
+           return false;
+        } 
+        else 
+        {
+            return this->local_link_index < k.local_link_index;
+        }
+    }
+};
+
 
 /**
  * \ingroup iDynTree
@@ -268,6 +292,10 @@ class DynTree  {
         //Flag set to true if the object was correctly configured
         bool correctly_configure;
 
+        //Map for correctly deal with skinDynLib IDs
+
+        std::map<skinDynLibLinkID,int> skinDynLibLinkMap;
+
 
     public:
         DynTree();
@@ -374,6 +402,18 @@ class DynTree  {
          *
          */
         int getIMUIndex(const std::string & imu_name);
+
+        /**
+         * Add a alias in the form (body_part, link_index) for a link
+         */
+        bool addSkinDynLibAlias(std::string link, int body_part, int local_link_index);
+
+        bool getSkinDynLibAlias(std::string link, int & body_part, int & local_link_index);
+        
+        /**
+         * Remove a alias in the form (body_part, link_index) for a link
+         */
+        bool removeSkinDynLibAlias(std::string link);
 
          /**
          * Get the global index for a link, given a part and a part local index

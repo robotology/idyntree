@@ -266,9 +266,19 @@ KDL::Wrench DynTree::getMeasuredWrench(int link_id)
 
 int DynTree::getLinkFromSkinDynLibID(int body_part, int link)
 {
-    assert(false);
-    (false);
-}
+    skinDynLibLinkID sdl_id;
+    sdl_id.body_part = body_part;
+    sdl_id.local_link_index = link;
+    std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.find(sdl_id);
+    if( it != skinDynLibLinkMap.end() )
+    {
+        return it->second;
+    } 
+    else
+    {
+        return -1;
+    }
+} 
 
 void DynTree::buildAb_contacts()
 {
@@ -1052,6 +1062,7 @@ bool DynTree::setContacts(const iCub::skinDynLib::dynContactList & contacts_list
         if( link_contact_index == -1 ) {
             #ifndef NDEBUG
             std::cerr << "partition.getGlobalLinkIndex() returned -1 for body_part " << body_part << " local_link_index " << local_link_index << std::endl;
+            assert(false);
             #endif
             return false;
         }
@@ -2027,6 +2038,74 @@ std::vector<yarp::sig::Vector> DynTree::getSubTreeInternalDynamics()
     }
 
     return return_value;
+}
+
+bool DynTree::addSkinDynLibAlias(std::string link, int body_part, int local_link_index)
+{
+   int link_index = this->getLinkIndex(link);
+   if( link_index < 0 )
+   {
+       std::cerr << "[ERR] addSkinDynLibAlias : link " << link << " not found " << std::endl;
+   }
+
+   skinDynLibLinkID sdl_id;
+   sdl_id.body_part = body_part;
+   sdl_id.local_link_index = local_link_index;
+
+   //Remove any existing alias for this link to avoid anomalies
+   this->removeSkinDynLibAlias(link);
+
+   skinDynLibLinkMap.insert(std::pair<skinDynLibLinkID,int>(sdl_id,link_index));
+
+   return true;
+}
+
+bool DynTree::getSkinDynLibAlias(std::string link, int & body_part, int & local_link_index)
+{
+   int link_index = this->getLinkIndex(link);
+   if( link_index < 0 )
+   {
+       std::cerr << "[ERR] getSkinDynLibAlias : link " << link << " not found " << std::endl;
+   }
+
+   skinDynLibLinkID sdl_id;
+   sdl_id.body_part = body_part;
+   sdl_id.local_link_index = local_link_index;
+
+   for(std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
+       it != skinDynLibLinkMap.end(); it++ )
+   {
+       if( it->second == link_index ) 
+       {
+           body_part = it->first.body_part;
+           local_link_index = it->first.local_link_index;
+           break;
+       }
+   }
+
+   return true;
+   
+}
+
+bool DynTree::removeSkinDynLibAlias(std::string link)
+{
+   int link_index = this->getLinkIndex(link);
+   if( link_index < 0 )
+   {
+       std::cerr << "[ERR] removeSkinDynLibAlias : link " << link << " not found " << std::endl;
+   }
+
+   for(std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
+       it != skinDynLibLinkMap.end(); it++ )
+   {
+       if( it->second == link_index ) 
+       {
+           skinDynLibLinkMap.erase(it);
+           break;
+       }
+   }
+
+   return true;
 }
 
 }
