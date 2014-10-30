@@ -123,6 +123,12 @@ class skinDynLibLinkID {
             return this->local_link_index < k.local_link_index;
         }
     }
+
+    bool operator==(const skinDynLibLinkID& k) const
+    {
+        return (this->body_part == k.body_part &&
+                this->local_link_index == k.local_link_index);
+    }
 };
 
 
@@ -200,7 +206,6 @@ class DynTree  {
         std::vector<KDL::Wrench> f; /**< For a link the wrench transmitted from the link to its parent in the dynamical traversal \warning it is traversal dependent */
         std::vector<KDL::Wrench> f_gi; /**< Gravitational and inertial wrench acting on a link */
 
-        int getLinkFromSkinDynLibID(int body_part, int link);
 
         //DynTreeContact data structures
         std::vector<int> link2subgraph_index; /**< for each link, return the correspondent dynamics subgraph index */
@@ -410,6 +415,10 @@ class DynTree  {
 
         bool getSkinDynLibAlias(std::string link, int & body_part, int & local_link_index);
         
+        bool getSkinDynLibAlias(int global_link_index, int & body_part, int & local_link_index);
+
+        int getLinkFromSkinDynLibID(int body_part, int link);
+
         /**
          * Remove a alias in the form (body_part, link_index) for a link
          */

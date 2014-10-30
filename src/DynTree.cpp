@@ -266,18 +266,20 @@ KDL::Wrench DynTree::getMeasuredWrench(int link_id)
 
 int DynTree::getLinkFromSkinDynLibID(int body_part, int link)
 {
+    // std::cout << "getLinkFromSkinDynLibID" << body_part << " " << link << std::endl;
     skinDynLibLinkID sdl_id;
     sdl_id.body_part = body_part;
     sdl_id.local_link_index = link;
-    std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.find(sdl_id);
-    if( it != skinDynLibLinkMap.end() )
+    for( std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
+         it != skinDynLibLinkMap.end(); it++ )
     {
-        return it->second;
-    } 
-    else
-    {
-        return -1;
+        if( it->first.body_part == body_part &&
+            it->first.local_link_index == link)
+        {
+            return it->second;
+        }
     }
+    return -1;
 } 
 
 void DynTree::buildAb_contacts()
@@ -2055,6 +2057,7 @@ bool DynTree::addSkinDynLibAlias(std::string link, int body_part, int local_link
    //Remove any existing alias for this link to avoid anomalies
    this->removeSkinDynLibAlias(link);
 
+   std::cout << "[DEBUG] inserting skinDynLib alias " << link_index << "= " << body_part << " , " << local_link_index << std::endl;
    skinDynLibLinkMap.insert(std::pair<skinDynLibLinkID,int>(sdl_id,link_index));
 
    return true;
@@ -2066,6 +2069,7 @@ bool DynTree::getSkinDynLibAlias(std::string link, int & body_part, int & local_
    if( link_index < 0 )
    {
        std::cerr << "[ERR] getSkinDynLibAlias : link " << link << " not found " << std::endl;
+       return false;
    }
 
    skinDynLibLinkID sdl_id;
@@ -2085,6 +2089,28 @@ bool DynTree::getSkinDynLibAlias(std::string link, int & body_part, int & local_
 
    return true;
    
+}
+
+//FIXME TODO \todo implemente this method with an appropriate data structure, such that
+//  it has a complexity of O(1)
+bool DynTree::getSkinDynLibAlias(int global_link_index, int & body_part, int & local_link_index)
+{
+  if( global_link_index < 0 || global_link_index >= this->getNrOfLinks() ) return false;
+  int link_index = global_link_index;
+
+   for(std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
+       it != skinDynLibLinkMap.end(); it++ )
+   {
+       if( it->second == link_index )
+       {
+           body_part = it->first.body_part;
+           local_link_index = it->first.local_link_index;
+           return true;
+       }
+   }
+
+   return false;
+
 }
 
 bool DynTree::removeSkinDynLibAlias(std::string link)

@@ -15,11 +15,13 @@
 #include <kdl_format_io/urdf_import.hpp>
 #include <kdl_format_io/urdf_sensor_import.hpp>
 
+#include <vector>
+
 namespace iCub {
 namespace iDynTree {
 
 
-iCubTree::iCubTree(std::string urdf_filename, std::string fixed_link, unsigned int verbose)
+TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename, std::vector<std::string> dof_serialization, std::vector<std::string> ft_serialization, std::string fixed_link, unsigned int verbose)
 {
     yarp::sig::Vector q_min_yarp, q_max_yarp;
 
@@ -30,7 +32,7 @@ iCubTree::iCubTree(std::string urdf_filename, std::string fixed_link, unsigned i
 
     assert(ret);
     if( !ret ) {
-        { std::cerr << "[INFO] iCubTree: error in costructor" << std::endl; }
+        { std::cerr << "[INFO] TorqueEstimationTree: error in costructor" << std::endl; }
         return;
     }
 
@@ -39,33 +41,75 @@ iCubTree::iCubTree(std::string urdf_filename, std::string fixed_link, unsigned i
     ret = kdl_format_io::ftSensorsFromUrdfFile(urdf_filename, ft_sensors);
 
     if( !ret ) {
-        { std::cerr << "[INFO] iCubTree: error in loading ft_sensors" << std::endl; }
+        { std::cerr << "[ERR] TorqueEstimationTree: error in loading ft_sensors" << std::endl; }
         return;
     }
 
 
-    std::vector< std::string > ft_names(0);
-    std::vector<KDL::Frame> child_sensor_transforms(0);
+    std::vector< std::string > ft_names(ft_sensors.size());
+    std::vector<KDL::Frame> child_sensor_transforms(ft_sensors.size());
     KDL::Frame kdlFrame;
 
     for(int ft_sens=0; ft_sens < ft_sensors.size(); ft_sens++ )
     {
-        ft_names.push_back(ft_sensors[ft_sens].reference_joint);
+        std::string ft_sens_name = ft_sensors[ft_sens].reference_joint;
+        int ft_sens_id;
+        if( ft_serialization.size() > 0)
+        {
+            for(int serialization_id=0; serialization_id < ft_serialization.size(); serialization_id++)
+            {
+                if( ft_serialization[serialization_id] == ft_sens_name)
+                {
+                    ft_sens_id = serialization_id;
+                    break;
+                }
+                if( serialization_id == ft_serialization.size()-1)
+                {
+                    std::cerr << "[ERR] TorqueEstimationTree: ft sensor " << ft_sens_name << " not found in model file." << std::endl;
+                }
+            }
+        }
+        else
+        {
+            ft_sens_id = ft_sens;
+        }
+
+        ft_names[ft_sens_id] = ft_sens_name;
         // \todo TODO FIXME properly address also parent and child cases
         //                  and measure_direction
         if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::SENSOR_FRAME )
         {
-            child_sensor_transforms.push_back(KDL::Frame(ft_sensors[ft_sens].sensor_pose.M));
+            child_sensor_transforms[ft_sens_id] = KDL::Frame(ft_sensors[ft_sens].sensor_pose.M);
         }
         else
         {
-            child_sensor_transforms.push_back(KDL::Frame::Identity());
+            child_sensor_transforms[ft_sens_id] = KDL::Frame::Identity();
         }
     }
 
     //Define an explicit serialization of the links and the DOFs of the iCub
     //The DOF serialization done in icub_kdl construction is ok
     KDL::CoDyCo::TreeSerialization serial = KDL::CoDyCo::TreeSerialization(icub_kdl);
+
+    //Setting a custom dof serialization (\todo TODO FIXME : quite an hack, substitute with proper)
+    if( dof_serialization.size() != 0 )
+    {
+        YARP_ASSERT(dof_serialization.size() == serial.getNrOfDOFs());
+        for(int dof=0; dof < dof_serialization.size(); dof++)
+        {
+            std::string dof_string = dof_serialization[dof];
+            YARP_ASSERT(serial.getDOFID(dof_string) != -1);
+            YARP_ASSERT(serial.getJunctionID(dof_string) != -1);
+        }
+
+        for(int dof=0; dof < dof_serialization.size(); dof++)
+        {
+            std::string dof_string = dof_serialization[dof];
+            std::cout << "[DEBUG] TorqueEstimationTree: Setting id of dof " << dof_string << " to " << dof << std::endl;
+            serial.setDOFNameID(dof_string,dof);
+            serial.setJunctionNameID(dof_string,dof);
+        }
+    }
 
     std::string imu_link_name = "imu_frame";
 
@@ -76,7 +120,7 @@ iCubTree::iCubTree(std::string urdf_filename, std::string fixed_link, unsigned i
 
     this->constructor(icub_kdl,ft_names,imu_link_name,serial);
 
-    std::cout << "[INFO] iCubTree constructor: loaded urdf with " << this->getNrOfDOFs() << "dofs" << std::endl;
+    std::cout << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << this->getNrOfDOFs() << "dofs" << std::endl;
     
     assert(this->getNrOfDOFs() > 0);
 
@@ -108,7 +152,7 @@ iCubTree::iCubTree(std::string urdf_filename, std::string fixed_link, unsigned i
     return;
 }
 
-iCubTree::~iCubTree() {}
+TorqueEstimationTree::~TorqueEstimationTree() {}
 
 }
 }
