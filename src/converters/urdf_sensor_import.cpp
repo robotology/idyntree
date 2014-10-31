@@ -52,7 +52,7 @@ bool ftSensorsFromUrdfFile(const std::string& file, std::vector<FTSensorData> & 
     std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
-    return ftSensorsFromUrdfFile(xml_string,ft_sensors);
+    return ftSensorsFromUrdfString(xml_string,ft_sensors);
 }
 
 std::vector<std::string> &split(const std::string &s, std::vector<std::string> &elems) {
@@ -166,6 +166,8 @@ bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorDa
             }
         }
     }
+
+    return true;
 }
 
 }
