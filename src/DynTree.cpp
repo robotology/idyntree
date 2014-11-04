@@ -280,7 +280,7 @@ int DynTree::getLinkFromSkinDynLibID(int body_part, int link)
         }
     }
     return -1;
-} 
+}
 
 void DynTree::buildAb_contacts()
 {
@@ -1948,6 +1948,12 @@ int DynTree::getNrOfLinks() const
     return undirected_tree.getNrOfLinks();
 }
 
+//\todo FIXME TODO properly implement frame support
+int DynTree::getNrOfFrames() const
+{
+    return getNrOfLinks();
+}
+
 int DynTree::getNrOfFTSensors() const
 {
     return NrOfFTSensors;
@@ -1965,6 +1971,27 @@ int DynTree::getLinkIndex(const std::string & link_name)
     return link_it->getLinkIndex();
 }
 
+bool DynTree::getLinkName(const int link_index, std::string & link_name)
+{
+    if( link_index < 0 || link_index >= this->getNrOfLinks() )
+    {
+        return false;
+    }
+    link_name = undirected_tree.getLink(link_index)->getName();
+    return true;
+}
+
+int DynTree::getFrameIndex(const std::string & frame_name)
+{
+    return getLinkIndex(frame_name);
+}
+
+bool DynTree::getFrameName(const int frame_index, std::string & frame_name)
+{
+    return getLinkName(frame_index, frame_name);
+}
+
+
 int DynTree::getDOFIndex(const std::string & dof_name)
 {
     KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(dof_name);
@@ -1972,12 +1999,44 @@ int DynTree::getDOFIndex(const std::string & dof_name)
     return junction_it->getDOFIndex();
 }
 
+bool DynTree::getDOFName(const int dof_index, std::string & dof_name)
+{
+    KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(dof_index);
+    if( junction_it == undirected_tree.getInvalidJunctionIterator()
+        || junction_it->getNrOfDOFs() != 1 )
+    {
+        std::cerr << "DynTree::getDOFName : DOF " << dof_name << " not found" << std::endl;
+        return false;
+    }
+    dof_name = junction_it->getName();
+    return true;
+}
+
 int DynTree::getJunctionIndex(const std::string & junction_name)
 {
     KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(junction_name);
-    if( junction_it == undirected_tree.getInvalidJunctionIterator() || junction_it->getNrOfDOFs() != 1 ) { std::cerr << "DynTree::getDOFIndex : DOF " << junction_name << " not found" << std::endl; return -1; }
+    if( junction_it == undirected_tree.getInvalidJunctionIterator() ) { std::cerr << "DynTree::getJunctionIndex : Junction " << junction_name << " not found" << std::endl; return -1; }
     return junction_it->getJunctionIndex();
 }
+
+bool DynTree::getJunctionName(const int junction_index, std::string & junction_name)
+{
+    KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(junction_index);
+    if( junction_it == undirected_tree.getInvalidJunctionIterator() )
+    {
+        std::cerr << "DynTree::getJunctionName : Junction " << junction_name << " not found" << std::endl;
+        return false;
+    }
+    junction_name = junction_it->getName();
+    return true;
+}
+
+// \todo TODO FIXME implement this method
+bool DynTree::getFTSensorName(const int junction_index, std::string & junction_name)
+{
+    return false;
+}
+
 
 int DynTree::getFTSensorIndex(const std::string & ft_name)
 {
@@ -1996,6 +2055,13 @@ int DynTree::getIMUIndex(const std::string & imu_name)
          return -1;
     }
 }
+
+// \todo TODO FIXME implement this method
+bool DynTree::getIMUName(const int junction_index, std::string & junction_name)
+{
+    return false;
+}
+
 
 //int DynTree::getLinkIndex(const int part_id, const int local_link_index)
 //{
@@ -2079,7 +2145,7 @@ bool DynTree::getSkinDynLibAlias(std::string link, int & body_part, int & local_
    for(std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
        it != skinDynLibLinkMap.end(); it++ )
    {
-       if( it->second == link_index ) 
+       if( it->second == link_index )
        {
            body_part = it->first.body_part;
            local_link_index = it->first.local_link_index;
@@ -2088,7 +2154,7 @@ bool DynTree::getSkinDynLibAlias(std::string link, int & body_part, int & local_
    }
 
    return true;
-   
+
 }
 
 //FIXME TODO \todo implemente this method with an appropriate data structure, such that
@@ -2124,7 +2190,7 @@ bool DynTree::removeSkinDynLibAlias(std::string link)
    for(std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
        it != skinDynLibLinkMap.end(); it++ )
    {
-       if( it->second == link_index ) 
+       if( it->second == link_index )
        {
            skinDynLibLinkMap.erase(it);
            break;

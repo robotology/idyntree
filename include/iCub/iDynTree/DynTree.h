@@ -102,7 +102,7 @@ namespace iDynTree
 
 const int WORLD_FRAME = -10;
 const int DEFAULT_INDEX_VALUE = -20;
- 
+
 class skinDynLibLinkID {
      public:
           int body_part;
@@ -113,12 +113,12 @@ class skinDynLibLinkID {
         if(this->body_part < k.body_part)
         {
            return true;
-        } 
+        }
         else if(this->body_part < k.body_part)
         {
            return false;
-        } 
-        else 
+        }
+        else
         {
             return this->local_link_index < k.local_link_index;
         }
@@ -362,6 +362,12 @@ class DynTree  {
         int getNrOfLinks() const;
 
         /**
+         * Get the number of frames of the tree
+         *
+         */
+        int getNrOfFrames() const;
+
+        /**
          * Get the number of 6-axis Force Torque sensors
          *
          */
@@ -380,6 +386,12 @@ class DynTree  {
          */
         int getLinkIndex(const std::string & link_name);
 
+        bool getLinkName(const int link_index, std::string & link_name);
+
+        int getFrameIndex(const std::string & frame_name);
+
+        bool getFrameName(const int frame_index, std::string & frame_name);
+
         /**
          * Get the global index for a DOF, given a DOF name
          * @param dof_name the name of the dof
@@ -388,12 +400,18 @@ class DynTree  {
          */
         int getDOFIndex(const std::string & dof_name);
 
+        bool getDOFName(const int dof_index, std::string & dof_name);
+
+
+
         /**
          * Get the global index for a junction, given a junction name
          * @param junction_name the name of the dof
          *
          */
         int getJunctionIndex(const std::string & junction_name);
+
+        bool getJunctionName(const int junction_index, std::string & junction_name);
 
 
         /**
@@ -402,11 +420,17 @@ class DynTree  {
          */
         int getFTSensorIndex(const std::string & ft_sensor_name);
 
+        bool getFTSensorName(const int ft_sensor_index, std::string & ft_sensor_name);
+
+
         /**
          * Get the global index of a IMU, given the IMU name
          *
          */
         int getIMUIndex(const std::string & imu_name);
+
+        bool getIMUName(const int imu_sensor_index, std::string & imu_name);
+
 
         /**
          * Add a alias in the form (body_part, link_index) for a link
@@ -414,7 +438,7 @@ class DynTree  {
         bool addSkinDynLibAlias(std::string link, int body_part, int local_link_index);
 
         bool getSkinDynLibAlias(std::string link, int & body_part, int & local_link_index);
-        
+
         bool getSkinDynLibAlias(int global_link_index, int & body_part, int & local_link_index);
 
         int getLinkFromSkinDynLibID(int body_part, int link);
