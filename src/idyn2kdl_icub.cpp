@@ -305,11 +305,11 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     
     //Export old frames for legacy code (skin)
     icub_kdl.addSegment(KDL::Segment("l_forearm_dh_frame",
-                        KDL::Joint("l_forearm_dh_frame_fixed_joint",KDL::Joint::None),
+                        KDL::Joint("l_forearm_dh_frame_fixed_joint",KDL::Joint::None)),
                         "l_forearm");
                         
    icub_kdl.addSegment(KDL::Segment("r_forearm_dh_frame",
-                        KDL::Joint("r_forearm_dh_frame_fixed_joint",KDL::Joint::None),
+                        KDL::Joint("r_forearm_dh_frame_fixed_joint",KDL::Joint::None)),
                         "r_forearm");
 
 
