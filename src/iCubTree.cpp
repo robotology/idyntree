@@ -207,7 +207,7 @@ KDL::CoDyCo::TreePartition iCubTree::get_iCub_partition(const KDL::CoDyCo::TreeS
     //new links
     left_arm.addLink(icub_serialization.getLinkID("l_upper_arm"));
     left_arm.addLink(icub_serialization.getLinkID("l_gripper"));
-    left_arm.addLink(icub_serialization.getLinkID("l_forearm_dh_frame"));
+    //left_arm.addLink(icub_serialization.getLinkID("l_forearm_dh_frame"));
 
 
     KDL::CoDyCo::TreePart right_arm(RIGHT_ARM,BodyPart_s[RIGHT_ARM]);
@@ -228,8 +228,8 @@ KDL::CoDyCo::TreePartition iCubTree::get_iCub_partition(const KDL::CoDyCo::TreeS
     right_arm.addLink(icub_serialization.getLinkID("r_forearm"));
     right_arm.addLink(icub_serialization.getLinkID("r_wrist_1"));
     right_arm.addLink(icub_serialization.getLinkID("r_hand"));
-    right_arm.addLink(icub_serialization.getLinkID("r_forearm_dh_frame"));
-    
+    //right_arm.addLink(icub_serialization.getLinkID("r_forearm_dh_frame"));
+
     //new links
     right_arm.addLink(icub_serialization.getLinkID("r_upper_arm"));
     right_arm.addLink(icub_serialization.getLinkID("r_gripper"));
