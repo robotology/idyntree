@@ -59,10 +59,10 @@ endif()
 set(CMAKE_MACOSX_RPATH 1) #enable RPATH on OSX. This also suppress warnings on CMake >= 3.0
 # when building, don't use the install RPATH already
 # (but later on when installing)
-set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 # set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 #This is relative RPATH for libraries built in the same project
-#I assume that the directory is 
+#I assume that the directory is
 # - install_dir/something for binaries
 # - install_dir/lib for libraries
 file(RELATIVE_PATH _rel_path "${CMAKE_INSTALL_PREFIX}/bin" "${CMAKE_INSTALL_PREFIX}/lib")
@@ -105,7 +105,7 @@ target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR
                                             ${Eigen3_INCLUDE_DIR}
                                             ${kdl_format_io_INCLUDE_DIRS})
 
-target_link_libraries(idyntree LINK_PUBLIC  iDyn
+target_link_libraries(idyntree LINK_PUBLIC  ${ICUB_LIBRARIES}
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}
                                             ${kdl_codyco_LIBRARIES}
