@@ -23,6 +23,12 @@ find_package(ICUB REQUIRED)
 find_package(orocos_kdl REQUIRED)
 find_package(kdl_codyco 0.0.3 REQUIRED)
 
+if (YARP_HAS_MATH_LIB)
+    message(STATUS "found libYARP_math")
+else(YARP_HAS_MATH_LIB)
+    message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
+endif(YARP_HAS_MATH_LIB)
+
 if(IDYNTREE_ENABLE_URDF)
 find_package(kdl_format_io REQUIRED)
 find_package(TinyXML REQUIRED)
