@@ -127,7 +127,7 @@ target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR
                                             ${Eigen3_INCLUDE_DIR}
                                             ${kdl_format_io_INCLUDE_DIRS})
 
-target_link_libraries(idyntree LINK_PUBLIC  ${ICUB_LIBRARIES}
+target_link_libraries(idyntree LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}
                                             ${kdl_codyco_LIBRARIES}
