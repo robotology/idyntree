@@ -1471,6 +1471,7 @@ KDL::Vector DynTree::getCOMKDL(const std::string & part_name, int link_index)
     com_world = world_base_frame*com;
 
     if( link_index != -1 ) {
+    	computePositions();
         com_return = X_dynamic_base[link_index].Inverse(com);
     } else {
         //if no reference frame for the return is specified, used the world reference frame
