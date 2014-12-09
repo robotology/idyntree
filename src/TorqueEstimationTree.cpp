@@ -8,8 +8,8 @@
  * http://www.codyco.eu
  */
 
-#include <iCub/iDynTree/iCubTree.h>
-#include <iCub/iDynTree/idyn2kdl_icub.h>
+#include "iCub/iDynTree/TorqueEstimationTree.h"
+#include "iCub/iDynTree/idyn2kdl_icub.h"
 
 //Urdf import from kdl_format_io
 #include <kdl_format_io/urdf_import.hpp>
@@ -21,7 +21,10 @@ namespace iCub {
 namespace iDynTree {
 
 
-TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename, std::vector<std::string> dof_serialization, std::vector<std::string> ft_serialization, std::string fixed_link, unsigned int verbose)
+TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
+                                           std::vector<std::string> dof_serialization,
+                                           std::vector<std::string> ft_serialization,
+                                           std::string fixed_link, unsigned int verbose)
 {
     yarp::sig::Vector q_min_yarp, q_max_yarp;
 
@@ -121,7 +124,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename, std::vecto
     this->constructor(icub_kdl,ft_names,imu_link_name,serial);
 
     std::cout << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << this->getNrOfDOFs() << "dofs" << std::endl;
-    
+
     assert(this->getNrOfDOFs() > 0);
 
     //Set joint limits

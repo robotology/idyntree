@@ -37,14 +37,14 @@ endif()
 
 SET(folder_source src/DynTree.cpp
                   src/yarp_kdl.cpp
-                  src/iCubTree.cpp
+                  src/TorqueEstimationTree.cpp
                   src/iDyn2KDL.cpp
                   src/idyn2kdl_icub.cpp)
 
 SET(folder_header include/iCub/iDynTree/DynTree.h
                   include/iCub/iDynTree/yarp_kdl.h
                   include/iCub/iDynTree/iDyn2KDL.h
-                  include/iCub/iDynTree/iCubTree.h
+                  include/iCub/iDynTree/TorqueEstimationTree.h
                   include/iCub/iDynTree/idyn2kdl_icub.h)
 
 SOURCE_GROUP("Source Files" FILES ${folder_source})
@@ -76,12 +76,12 @@ if(NOT (CMAKE_VERSION VERSION_LESS 2.8.12))
     set(CMAKE_MACOSX_RPATH 1) #enable RPATH on OSX. This also suppress warnings on CMake >= 3.0
     # when building, don't use the install RPATH already
     # (but later on when installing)
-    set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+    set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
     #build directory by default is built with RPATH
     set(CMAKE_SKIP_BUILD_RPATH  FALSE)
 
     #This is relative RPATH for libraries built in the same project
-    #I assume that the directory is 
+    #I assume that the directory is
     # - install_dir/something for binaries
     # - install_dir/lib for libraries
     file(RELATIVE_PATH _rel_path "${CMAKE_INSTALL_PREFIX}/bin" "${CMAKE_INSTALL_PREFIX}/lib")
@@ -110,6 +110,7 @@ if(NOT (CMAKE_VERSION VERSION_LESS 2.8.12))
 endif()
 ####end RPATH
 
+message("Add library idyntree " ${LIB_TIPE}  ${folder_source} ${folder_header})
 add_library(idyntree ${LIB_TYPE} ${folder_source} ${folder_header})
 
 set_target_properties(idyntree PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}

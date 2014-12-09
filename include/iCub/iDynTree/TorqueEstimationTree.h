@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef ICUBTREE_H
-#define ICUBTREE_H
+#ifndef TORQUE_ESTIMATION_TREE_H
+#define TORQUE_ESTIMATION_TREE_H
 
 #include <iCub/iDynTree/DynTree.h>
 
