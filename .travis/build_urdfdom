@@ -26,7 +26,7 @@ cd ..
 
 # Compile
 echo "--> Compiling urdfdom"
-$git_clone "git://github.com/ros/urdfdom.git"
+$git_clone "git://github.com/traversaro/urdfdom.git"
 cd urdfdom
 cmake ./
 make
