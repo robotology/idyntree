@@ -1486,7 +1486,7 @@ KDL::Vector DynTree::getCOMKDL(const std::string & part_name, int link_index)
     KDL::RigidBodyInertia total_inertia;
     getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,Xb,momentum_jac_buffer,com_jac_buffer,momentum_jacobian,total_inertia,part_id);
     */
-    
+
     return com_return;
 }
 
@@ -1903,6 +1903,23 @@ bool DynTree::getRelativeJacobianKDL(const int jacobian_distal_link,
         rel_jac.resize(undirected_tree.getNrOfDOFs());
     }
 
+    if( jacobian_base_link < 0 ||
+        jacobian_base_link >= this->getNrOfLinks() )
+    {
+        std::cerr << "[ERROR] DynTree::getRelativeJacobianKDL : jacobian_base_link "
+                 << jacobian_base_link << " is out of bounds" << std::endl;
+        return false;
+    }
+
+    if( jacobian_distal_link < 0 ||
+        jacobian_distal_link >= this->getNrOfLinks() )
+    {
+        std::cerr << "[ERROR] DynTree::getRelativeJacobianKDL : jacobian_distal_link "
+                 << jacobian_distal_link << " is out of bounds" << std::endl;
+        return false;
+    }
+
+
     /*
      if the specified jacobian_base_link is the base in dynamic_traversal, kinematic_traversal or rel_jacobian_traversal
      use the traversal already available, otherwise overwrite the rel_jacobian_traversal with the traversal with base at jacobian_base_link
@@ -1915,7 +1932,13 @@ bool DynTree::getRelativeJacobianKDL(const int jacobian_distal_link,
         p_traversal = &kinematic_traversal;
     } else {
        if( rel_jacobian_traversal.getNrOfVisitedLinks() != (int)undirected_tree.getNrOfLinks() ||  rel_jacobian_traversal.getBaseLink()->getLinkIndex() == jacobian_base_link  ) {
-            undirected_tree.compute_traversal(rel_jacobian_traversal,jacobian_base_link);
+            int ret_ct = undirected_tree.compute_traversal(rel_jacobian_traversal,jacobian_base_link);
+            if( ret_ct != 0 )
+            {
+                std::cerr << "[ERROR] DynTree::getRelativeJacobianKDL : compute_traversal failed for jacobian_base_link equal to"
+                          << jacobian_base_link << std::endl;
+                return false;
+            }
        }
        p_traversal = &rel_jacobian_traversal;
     }
