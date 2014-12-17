@@ -43,52 +43,65 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
     std::vector<kdl_format_io::FTSensorData> ft_sensors;
     ret = kdl_format_io::ftSensorsFromUrdfFile(urdf_filename, ft_sensors);
 
-    if( !ret ) {
-        { std::cerr << "[ERR] TorqueEstimationTree: error in loading ft_sensors" << std::endl; }
+    if( !ret )
+    {
+        {
+            std::cerr << "[ERR] TorqueEstimationTree: error in loading ft_sensors" << std::endl;
+            assert(false);
+        }
         return;
     }
 
-
-    std::vector< std::string > ft_names(ft_sensors.size());
-    std::vector<KDL::Frame> child_sensor_transforms(ft_sensors.size());
+    std::vector< std::string > ft_names(ft_serialization.size());
+    std::vector<KDL::Frame> child_sensor_transforms(ft_serialization.size());
     KDL::Frame kdlFrame;
 
-    for(int ft_sens=0; ft_sens < ft_sensors.size(); ft_sens++ )
+    for(int serialization_id=0; serialization_id < ft_serialization.size(); serialization_id++)
     {
-        std::string ft_sens_name = ft_sensors[ft_sens].reference_joint;
-        int ft_sens_id;
-        if( ft_serialization.size() > 0)
+        if( 0 == ft_sensors.size() )
         {
-            for(int serialization_id=0; serialization_id < ft_serialization.size(); serialization_id++)
+                std::cerr << "[ERR] TorqueEstimationTree: ft sensor " << ft_serialization[serialization_id] << " not found in model file." << std::endl;
+                assert(false);
+                return;
+        }
+        for(int ft_sens=0; ft_sens < ft_sensors.size(); ft_sens++ )
+        {
+            std::string ft_sens_name = ft_sensors[ft_sens].reference_joint;
+            int ft_sens_id;
+
+            std::cout << "ft_sens" << ft_sens << std::endl;
+
+            if( ft_serialization[serialization_id] == ft_sens_name)
             {
-                if( ft_serialization[serialization_id] == ft_sens_name)
+                std::cout << "Found ft sensor " << ft_sens_name << " in urdf " << std::endl;
+                ft_sens_id = serialization_id;
+
+                ft_names[ft_sens_id] = ft_sens_name;
+                // \todo TODO FIXME properly address also parent and child cases
+                //                  and measure_direction
+                if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::SENSOR_FRAME )
                 {
-                    ft_sens_id = serialization_id;
-                    break;
+                    child_sensor_transforms[ft_sens_id] = KDL::Frame(ft_sensors[ft_sens].sensor_pose.M);
                 }
-                if( serialization_id == ft_serialization.size()-1)
+                else
                 {
-                    std::cerr << "[ERR] TorqueEstimationTree: ft sensor " << ft_sens_name << " not found in model file." << std::endl;
+                    child_sensor_transforms[ft_sens_id] = KDL::Frame::Identity();
                 }
+
+                break;
+            }
+
+            if( ft_sens == ft_sensors.size() -1 )
+            {
+                std::cerr << "[ERR] TorqueEstimationTree: ft sensor " << ft_sens_name << " not found in model file." << std::endl;
+                assert(false);
+                return;
             }
         }
-        else
-        {
-            ft_sens_id = ft_sens;
-        }
-
-        ft_names[ft_sens_id] = ft_sens_name;
-        // \todo TODO FIXME properly address also parent and child cases
-        //                  and measure_direction
-        if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::SENSOR_FRAME )
-        {
-            child_sensor_transforms[ft_sens_id] = KDL::Frame(ft_sensors[ft_sens].sensor_pose.M);
-        }
-        else
-        {
-            child_sensor_transforms[ft_sens_id] = KDL::Frame::Identity();
-        }
     }
+
+        std::cerr << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << this->getNrOfDOFs()
+              << "dofs and " << ft_names.size() << " fts ( " << ft_serialization.size() <<  ") " << std::endl;
 
     //Define an explicit serialization of the links and the DOFs of the iCub
     //The DOF serialization done in icub_kdl construction is ok
@@ -123,7 +136,8 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
 
     this->constructor(icub_kdl,ft_names,imu_link_name,serial);
 
-    std::cout << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << this->getNrOfDOFs() << "dofs" << std::endl;
+    std::cerr << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << this->getNrOfDOFs()
+              << "dofs and " << ft_names.size() << " fts ( " << ft_serialization.size() <<  ") " << std::endl;
 
     assert(this->getNrOfDOFs() > 0);
 

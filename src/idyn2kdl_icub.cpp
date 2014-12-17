@@ -26,7 +26,10 @@ bool names2links_joints(const std::vector<std::string> names,std::vector<std::st
 }
 */
 
+// For more informations on this values, check
+// https://github.com/robotology/codyco-modules/issues/49
 const double root_link_weight = 4.72;
+const double head_weight      = 3.0;
 
 KDL::RotationalInertia operator-(const KDL::RotationalInertia& Ia, const KDL::RotationalInertia& Ib){
     KDL::RotationalInertia result;
