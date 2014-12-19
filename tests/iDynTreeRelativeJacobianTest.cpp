@@ -240,6 +240,35 @@ int main(int argc, char** argv)
         }
     }
 
+    for(int i=0; i < n_tests; i++ )
+    {
+        int random_link_1 = rng.uniform(0,icub_idyntree.getNrOfFrames()-1);
+
+        for(int j=0; j < 100; j++ )
+        {
+            int random_link_2 = rng.uniform(0,icub_idyntree.getNrOfFrames()-1);
+            std::string link_1;
+            std::string link_2;
+            icub_idyntree.getLinkName(random_link_1,link_1);
+            icub_idyntree.getLinkName(random_link_2,link_2);
+
+            //The relative jacobian is instead by default expressed in local coordinates
+            //In this example we calculate the Jacobian between the two hands
+            bool ok = icub_idyntree.getRelativeJacobian(random_link_1,random_link_2,rel_jacobian);
+            if( ok )
+            {
+                std::cout << "getRelativeJacobian between " << link_1
+                        << " and " << link_2 << " returned true" << std::endl;
+            }
+            else
+            {
+                std::cout << "getRelativeJacobian between " << link_1
+                      << " and " << link_2 << " failed" << std::endl;
+                return -1;
+            }
+        }
+    }
+
 
     return 0;
 
