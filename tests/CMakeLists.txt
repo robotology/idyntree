@@ -12,8 +12,8 @@ add_executable(iDynTreeRelativeJacobianTest iDynTreeRelativeJacobianTest.cpp)
 #add_executable(iDynTreeCOM iDynTreeCOM.cpp)
 
 
-target_link_libraries(iDynTreeJacobianTest idyntree ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES} )
-target_link_libraries(iDynTreeRelativeJacobianTest idyntree ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES} )
+target_link_libraries(iDynTreeJacobianTest idyntree ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES} ${kdl_format_io_LIBRARIES})
+target_link_libraries(iDynTreeRelativeJacobianTest idyntree ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES} ${kdl_format_io_LIBRARIES})
 
 #target_link_libraries(iDynTreeWholeBodyFTsensorEstimateTest iDynTree ${ICUB_LIBRARIES} ${orocos_kdl_LIBRARIES} {kdl_codyco_LIBRARIES})
 #target_link_libraries(iDynTreeExternalWrenchesEstimationTest idyntree ${ICUB_LIBRARIES} ${orocos_kdl_LIBRARIES} ${kdl_codyco_LIBRARIES} )
