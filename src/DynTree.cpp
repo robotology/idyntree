@@ -1505,7 +1505,14 @@ yarp::sig::Vector DynTree::getCOM(const std::string & part_name, int link_index)
 bool DynTree::getCOMJacobianKDL(KDL::Jacobian & jac, const std::string & part_name)
 {
     KDL::CoDyCo::MomentumJacobian dummy;
-    return getCOMJacobianKDL(jac,dummy,part_name);
+    if( (int)com_jacobian.columns() != 6+getNrOfDOFs() ) { com_jacobian.resize(6+getNrOfDOFs()); }
+    if( (int)momentum_jacobian.columns() != 6+getNrOfDOFs() ) { momentum_jacobian.resize(6+getNrOfDOFs()); }
+    SetToZero(com_jacobian);
+    SetToZero(momentum_jacobian);
+    bool result= getCOMJacobianKDL(com_jacobian,momentum_jacobian,part_name);
+    jac=com_jacobian;
+
+    return result;
 }
 
 bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJacobian & momentum_jac, const std::string & part_name)
