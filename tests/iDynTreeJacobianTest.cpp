@@ -1,5 +1,5 @@
 
-#include <iCub/iDynTree/iCubTree.h>
+#include <iCub/iDynTree/TorqueEstimationTree.h>
 
 #include <iCub/iDyn/iDyn.h>
 #include <iCub/iDyn/iDynBody.h>
@@ -109,7 +109,7 @@ void iDynTree_print_velocity_acceleration(DynTree & icub_idyntree, const std::st
     cout << icub_idyntree.getAcc(icub_idyntree.getLinkIndex(link_name)).toString() << endl;
 }
 
-void set_random_q_dq_ddq(yarp::os::Random & rng, iCubTree & icub_tree)
+void set_random_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree)
 {
     double pos_c = 0.0,vel_c = 0.0,acc_c =0.0;
 
@@ -174,7 +174,7 @@ void set_random_q_dq_ddq(yarp::os::Random & rng, iCubTree & icub_tree)
     return;
 }
 
-int main()
+int main(int argc, char** argv)
 {
 
     //To compare real com acceleration and the one calculated with the jacobian
@@ -190,18 +190,15 @@ int main()
     ////////////////////////////////////////////////////////////////////
     //// iCubTree
     ////////////////////////////////////////////////////////////////////
-    //Similarly in iDynTree a iCubTree_version_tag structure is defined
-    iCubTree_version_tag icub_idyntree_version;
 
-    icub_idyntree_version.head_version = 2;
-    icub_idyntree_version.legs_version = 2;
-    icub_idyntree_version.feet_ft = true;
 
     //The iCubTree is istantiated
     //note that the serialization used is the one used in iDyn, while the
     //default one is the one used in skinDynLib
+    std::string urdf_filename(argv[1]);
     int verbose = 1;
-    iCubTree icub_idyntree(icub_idyntree_version,kinematic_base_link_name,IDYN_SERIALIZATION,verbose);
+    std::vector<std::string> sensors;
+    DynTree icub_idyntree(urdf_filename,sensors,"imu_frame");
 
     //We fill the robot state with random values, for testing
     //in reality this should be filled with value read from the robot
@@ -321,7 +318,7 @@ int main()
 
 
 
-    iCub::iDynTree::iCubTree waist_imu_icub(icub_idyntree_version,kinematic_base_link_name,IDYN_SERIALIZATION,0);
+    iCub::iDynTree::DynTree waist_imu_icub(urdf_filename,sensors,"root_link");
     yarp::sig::Vector a_com, a_com_jacobian;
     a_com = icub_idyntree.getAccCOM();
 

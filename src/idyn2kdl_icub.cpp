@@ -26,7 +26,10 @@ bool names2links_joints(const std::vector<std::string> names,std::vector<std::st
 }
 */
 
+// For more informations on this values, check
+// https://github.com/robotology/codyco-modules/issues/49
 const double root_link_weight = 4.72;
+const double head_weight      = 3.0;
 
 KDL::RotationalInertia operator-(const KDL::RotationalInertia& Ia, const KDL::RotationalInertia& Ib){
     KDL::RotationalInertia result;
@@ -81,7 +84,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     KDL::Chain torso, old_torso;
     const char *torso_joints_cstr[] = {"torso_pitch","torso_roll","torso_yaw"};
     std::vector<std::string> torso_joints(torso_joints_cstr,end(torso_joints_cstr));
-    const char *torso_links_cstr[] = {"lap_belt_1","lap_belt_2",ARMS_HEAD_BASE_NAME};
+    const char *torso_links_cstr[] = {"torso_1","torso_2",ARMS_HEAD_BASE_NAME};
     std::vector<std::string> torso_links(torso_links_cstr,end(torso_links_cstr));
     //names2links_joints(torso_joints,links,joints);
     status_ok = idynChain2kdlChain(*(icub_idyn.lowerTorso->up),old_torso,torso_links,torso_joints);
@@ -124,7 +127,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     const char *ll_joints_cstr[] = {"l_hip_pitch", "l_hip_roll", "l_leg_ft_sensor", "l_hip_yaw", "l_knee", "l_ankle_pitch", "l_ankle_roll"};
     std::vector<std::string> ll_joints(ll_joints_cstr,end(ll_joints_cstr));
     //names2links_joints(ll_joints,links,joints);
-    const char *ll_links_cstr[] = {"l_hip_1", "l_hip_2", "l_hip_3", "l_thigh", "l_shank", "l_ankle_1", "l_foot"};
+    const char *ll_links_cstr[] = {"l_hip_1", "l_hip_2", "l_hip_3", "l_thigh", "l_leg", "l_ankle_1", "l_foot"};
     std::vector<std::string> ll_links(ll_links_cstr,end(ll_links_cstr));
 
     status_ok = idynSensorChain2kdlChain(*(icub_idyn.lowerTorso->left),*(icub_idyn.lowerTorso->leftSensor),old_ll,ll_links,ll_joints,"l_sole");
@@ -136,7 +139,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     const char *rl_joints_cstr[] = {"r_hip_pitch", "r_hip_roll", "r_leg_ft_sensor", "r_hip_yaw", "r_knee", "r_ankle_pitch", "r_ankle_roll"};
     std::vector<std::string> rl_joints(rl_joints_cstr,end(rl_joints_cstr));
     //names2links_joints(rl_joints,links,joints);
-    const char *rl_links_cstr[] = {"r_hip_1", "r_hip_2", "r_hip_3", "r_thigh", "r_shank", "r_ankle_1", "r_foot"};
+    const char *rl_links_cstr[] = {"r_hip_1", "r_hip_2", "r_hip_3", "r_thigh", "r_leg", "r_ankle_1", "r_foot"};
     std::vector<std::string> rl_links(rl_links_cstr,end(rl_links_cstr));
 
     status_ok = idynSensorChain2kdlChain(*(icub_idyn.lowerTorso->right),*(icub_idyn.lowerTorso->rightSensor),old_rl,rl_links,rl_joints,"r_sole");

@@ -1,5 +1,5 @@
 
-#include <iCub/iDynTree/iCubTree.h>
+#include <iCub/iDynTree/TorqueEstimationTree.h>
 
 #include <iCub/iDyn/iDyn.h>
 #include <iCub/iDyn/iDynBody.h>
