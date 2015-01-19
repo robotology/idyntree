@@ -177,9 +177,6 @@ void set_random_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree)
 int main(int argc, char** argv)
 {
 
-    //To compare real com acceleration and the one calculated with the jacobian
-    //We need to compute kinematicRNEA using root link as the kinematic source
-    std::string kinematic_base_link_name = "root_link";
 
     double tol = 1e-5;
 
@@ -198,7 +195,8 @@ int main(int argc, char** argv)
     std::string urdf_filename(argv[1]);
     int verbose = 1;
     std::vector<std::string> sensors;
-    DynTree icub_idyntree(urdf_filename,sensors,"imu_frame");
+    std::string kinematic_base = argv[2];
+    DynTree icub_idyntree(urdf_filename,sensors,kinematic_base);
 
     //We fill the robot state with random values, for testing
     //in reality this should be filled with value read from the robot
