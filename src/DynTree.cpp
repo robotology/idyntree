@@ -1800,7 +1800,8 @@ bool DynTree::getRelativeJacobianKDL(const int jacobian_distal_link,
     } else if ( kinematic_traversal.getBaseLink()->getLinkIndex() == jacobian_base_link ) {
         p_traversal = &kinematic_traversal;
     } else {
-       if( rel_jacobian_traversal.getNrOfVisitedLinks() != (int)undirected_tree.getNrOfLinks() ||  rel_jacobian_traversal.getBaseLink()->getLinkIndex() == jacobian_base_link  ) {
+       if( rel_jacobian_traversal.getNrOfVisitedLinks() != (int)undirected_tree.getNrOfLinks() ||
+           rel_jacobian_traversal.getBaseLink()->getLinkIndex() != jacobian_base_link  ) {
             int ret_ct = undirected_tree.compute_traversal(rel_jacobian_traversal,jacobian_base_link);
             if( ret_ct != 0 )
             {
