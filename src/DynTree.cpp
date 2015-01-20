@@ -1375,7 +1375,7 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & jac)
     if( (int)momentum_jacobian.columns() != 6+getNrOfDOFs() ) { momentum_jacobian.resize(6+getNrOfDOFs()); }
     SetToZero(com_jacobian);
     SetToZero(momentum_jacobian);
-    bool result= getCOMJacobianKDL(com_jacobian,momentum_jacobian,part_name);
+    bool result= getCOMJacobianKDL(com_jacobian,momentum_jacobian);
     jac=com_jacobian;
 
     return result;
