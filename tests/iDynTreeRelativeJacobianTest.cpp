@@ -212,7 +212,7 @@ int main(int argc, char** argv)
 
     //try the relative jacobian on random links
 
-    int n_tests = 1000;
+    int n_tests = 100;
     for(int i=0; i < n_tests; i++ )
     {
         int random_link_1 = rng.uniform(0,icub_idyntree.getNrOfFrames()-1);
@@ -227,8 +227,8 @@ int main(int argc, char** argv)
         bool ok = icub_idyntree.getRelativeJacobian(random_link_1,random_link_2,rel_jacobian);
         if( ok )
         {
-            std::cout << "getRelativeJacobian between " << link_1
-                      << " and " << link_2 << " returned true" << std::endl;
+            //std::cout << "getRelativeJacobian between " << link_1
+            //          << " and " << link_2 << " returned true" << std::endl;
         }
         else
         {
