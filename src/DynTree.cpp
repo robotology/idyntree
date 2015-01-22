@@ -69,6 +69,14 @@ DynTree::DynTree(const std::string urdf_file,
         std::cerr << "DynTree constructor: Could not generate robot model from file " << urdf_file << "  and extract kdl tree" << std::endl; assert(false);
     }
     constructor(my_tree,joint_sensor_names,imu_link_name,serialization);
+
+
+    //Loading joint limits from URDF
+    yarp::sig::Vector yarpJointMinLimit(NrOfDOFs), yarpJointMaxLimit(NrOfDOFs);
+    DynTree::loadJointLimitsFromURDFFile(urdf_file, undirected_tree, yarpJointMinLimit, yarpJointMaxLimit);
+
+    this->setJointBoundMin(yarpJointMinLimit);
+    this->setJointBoundMax(yarpJointMaxLimit);
 }
 
 void DynTree::constructor(const KDL::Tree & _tree,
@@ -772,8 +780,8 @@ yarp::sig::Vector DynTree::getJointBoundMax()
 
 bool DynTree::setJointBoundMin(const yarp::sig::Vector & _q)
 {
-        if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMin error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
-        YarptoKDL(_q,q_min);
+    if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMin error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
+    YarptoKDL(_q,q_min);
 
     return true;
 }
@@ -2234,6 +2242,38 @@ bool DynTree::removeSkinDynLibAlias(std::string link)
 
    return true;
 }
+
+
+    bool DynTree::loadJointLimitsFromURDFFile(std::string urdfFile, KDL::CoDyCo::UndirectedTree undirectedTree, yarp::sig::Vector &yarpJointMinLimit, yarp::sig::Vector &yarpJointMaxLimit) {
+
+        unsigned int NrOfDOFs = undirectedTree.getNrOfDOFs();
+        KDL::JntArray kdlJointMinLimit(NrOfDOFs), kdlJointMaxLimit(NrOfDOFs);
+        std::vector<std::string> jointLimitsNames;
+        kdl_format_io::jointPosLimitsFromUrdfFile(urdfFile, jointLimitsNames, kdlJointMinLimit, kdlJointMaxLimit);
+
+        if (yarpJointMinLimit.size() != NrOfDOFs)
+            yarpJointMinLimit.resize(NrOfDOFs);
+        if (yarpJointMaxLimit.size() != NrOfDOFs)
+            yarpJointMaxLimit.resize(NrOfDOFs);
+
+        KDL::CoDyCo::TreeSerialization treeSerialization = undirectedTree.getSerialization();
+
+        for (int dof = 0; dof < NrOfDOFs; dof++)
+        {
+            std::string dof_name = treeSerialization.getDOFName(dof);
+            for (int lim = 0; lim < jointLimitsNames.size(); lim++)
+            {
+                if (jointLimitsNames[lim] == dof_name)
+                {
+                    yarpJointMinLimit[dof] = kdlJointMinLimit(lim);
+                    yarpJointMaxLimit[dof] = kdlJointMaxLimit(lim);
+                    break;
+                }
+            }
+        }
+
+        return true;
+    }
 
 }
 }

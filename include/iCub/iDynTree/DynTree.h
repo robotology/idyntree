@@ -302,6 +302,8 @@ class DynTree  {
         std::map<skinDynLibLinkID,int> skinDynLibLinkMap;
 
 
+    static bool loadJointLimitsFromURDFFile(std::string urdfFile, KDL::CoDyCo::UndirectedTree undirectedTree, yarp::sig::Vector &yarpJointMinLimit, yarp::sig::Vector &yarpJointMaxLimit);
+    
     public:
         DynTree();
 
