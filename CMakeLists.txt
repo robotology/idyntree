@@ -95,7 +95,8 @@ else()
     set(LIB_TYPE SHARED)
 endif()
 
-find_package(YCM REQUIRED)
+find_package(YCM)
+if(YCM_FOUND)
 include(YCMDefaultDirs)
 
 include(AddInstallRPATHSupport)
@@ -103,6 +104,8 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
                           DEPENDS KDL_CODYCO_ENABLE_RPATH
                           USE_LINK_PATH)
+
+endif()
 
 add_library(kdl-codyco ${LIB_TYPE} ${KDL_CODYCO_SRC} ${DIRL_SRC} ${KDL_CODYCO_HPPS} ${KDL_CODYCO_PRIVATE_INCLUDES})
 
