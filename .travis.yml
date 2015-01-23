@@ -5,8 +5,8 @@ compiler:
   - clang
 
 env:
-  - IDYNTREE_TRAVIS_BUILD_TYPE=Debug
-  - IDYNTREE_TRAVIS_BUILD_TYPE=Release
+  - TRAVIS_BUILD_TYPE=Debug, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", 
+  - TRAVIS_BUILD_TYPE=Release, TRAVIS_CMAKE_GENERATOR="Unix Makefiles",
 
 install:
   - sudo sh -c 'echo "deb http://www.icub.org/ubuntu precise contrib/science" > /etc/apt/sources.list.d/icub.list'
@@ -19,47 +19,13 @@ install:
 before_script:
   - cmake --version
   - cd ..
-  # Build orocos_kinematics_dynamics and install it in a local directory
-  - git clone https://github.com/orocos/orocos_kinematics_dynamics
-  - cd orocos_kinematics_dynamics
-  - cd orocos_kdl
+  # use superbuild for getting iDynTree dependencies 
+  - git clone https://github.com/robotology/codyco-superbuild
+  - cd codyco-superbuild
   - mkdir build
-  - cd build
-  - mkdir local_install
-  - cmake -DCMAKE_INSTALL_PREFIX="./local_install" -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
-  - make
-  - make install
-  - cd ../../..
-  # Build kdl_codyco and install it in a local directory
-  - git clone https://github.com/traversaro/kdl_codyco
-  - cd kdl_codyco
-  - mkdir build
-  - cd build
-  - mkdir local_install
-  - cmake -DCMAKE_INSTALL_PREFIX="./local_install" -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
-  - make
-  - make install
-  - cd ../..
-  # Build kdl_format_io and install it in a local directory
-  - sudo chmod +x ./idyntree/.travis/build_urdfdom
-  - ./idyntree/.travis/build_urdfdom
-  - git clone https://github.com/traversaro/kdl_format_io
-  - cd kdl_format_io
-  - mkdir build
-  - cd build
-  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
-  - make
-  - sudo make install
-  - cd ../..
-  # Build and install YCM
-  - git clone https://github.com/robotology/ycm.git
-  - cd ycm
-  - mkdir build
-  - cd build 
-  - cmake ..
-  - make 
-  - sudo make install
-  - cd ../..
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DNON_INTERACTIVE_BUILD:BOOL=TRUE ..
+  - make iDynTree-dependees
+  - pwd 
   # Prepare iDynTree build
   - cd idyntree
   - mkdir build
