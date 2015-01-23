@@ -30,6 +30,8 @@ before_script:
   - make iDynTree-dependees
   - pwd
   - cd ../..
+  # deal with TinyXML linking problems
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/travis/build/robotology-playground/codyco-superbuild/build/install/lib
   # Prepare iDynTree build
   - cd idyntree
   - mkdir build
