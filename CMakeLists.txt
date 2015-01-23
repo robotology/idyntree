@@ -149,7 +149,10 @@ else()
     set(LIB_TYPE SHARED)
 endif()
 
+
 find_package(YCM REQUIRED)
+
+if(YCM_FOUND)
 include(YCMDefaultDirs)
 
 include(AddInstallRPATHSupport)
@@ -157,6 +160,8 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
                           DEPENDS KDL_FORMAT_IO_ENABLE_RPATH
                           USE_LINK_PATH)
+
+endif()
 
 option(ENABLE_IKIN "Enable support for exporting iKin chains" FALSE)
 
