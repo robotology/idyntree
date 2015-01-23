@@ -35,6 +35,7 @@ before_script:
   - ls /home/travis/build/robotology-playground/codyco-superbuild/build/install/lib
   - echo $LD_LIBRARY_PATH
   - ldconfig
+  - dpkg -s libtinyxml-dev 
   # Prepare iDynTree build
   - cd idyntree
   - mkdir build
