@@ -24,7 +24,8 @@ before_script:
   - cd codyco-superbuild
   - mkdir build
   - cd build
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DNON_INTERACTIVE_BUILD:BOOL=TRUE ..
+  # using the YCM_EP_MAINTAINER_MODE variable to enable the subproject-dependees target 
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DYCM_EP_MAINTAINER_MODE:BOOL=ON -DNON_INTERACTIVE_BUILD:BOOL=TRUE ..
   - make iDynTree-dependees
   - pwd
   - cd ../..
