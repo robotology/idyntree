@@ -23,9 +23,11 @@ before_script:
   - git clone https://github.com/robotology/codyco-superbuild
   - cd codyco-superbuild
   - mkdir build
+  - cd 
   - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DNON_INTERACTIVE_BUILD:BOOL=TRUE ..
   - make iDynTree-dependees
-  - pwd 
+  - pwd
+  - cd ../..
   # Prepare iDynTree build
   - cd idyntree
   - mkdir build
