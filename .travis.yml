@@ -5,8 +5,9 @@ compiler:
   - clang
 
 env:
-  - TRAVIS_BUILD_TYPE=Debug, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", 
-  - TRAVIS_BUILD_TYPE=Release, TRAVIS_CMAKE_GENERATOR="Unix Makefiles",
+# set the CMAKE_PREFIX_PATH enviroment variable to get software installed by the superbuild
+  - TRAVIS_BUILD_TYPE=Debug, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", CMAKE_PREFIX_PATH="/home/travis/build/robotology-playground/codyco-superbuild/build/install"
+  - TRAVIS_BUILD_TYPE=Release, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", CMAKE_PREFIX_PATH="/home/travis/build/robotology-playground/codyco-superbuild/build/install"
 
 install:
   - sudo sh -c 'echo "deb http://www.icub.org/ubuntu precise contrib/science" > /etc/apt/sources.list.d/icub.list'
