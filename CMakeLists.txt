@@ -173,10 +173,10 @@ add_library(kdl-format-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORM
 
 IF(ENABLE_SERIALIZATION_IO)
     target_link_libraries(kdl-format-io ${kdl_codyco_LIBRARIES} ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
-    set(KDL_FORMAT_IO_LIBRARIES ${kdl_codyco_LIBRARIES} ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+    set(KDL_FORMAT_IO_LIBRARIES ${kdl_codyco_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ELSE()
     target_link_libraries(kdl-format-io ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
-    set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
 if(ENABLE_IKIN)
