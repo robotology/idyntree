@@ -150,7 +150,7 @@ else()
 endif()
 
 
-find_package(YCM REQUIRED)
+find_package(YCM)
 
 if(YCM_FOUND)
 include(YCMDefaultDirs)
