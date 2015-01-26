@@ -5,66 +5,41 @@ compiler:
   - clang
 
 env:
-  - IDYNTREE_TRAVIS_BUILD_TYPE=Debug
-  - IDYNTREE_TRAVIS_BUILD_TYPE=Release
+# set the CMAKE_PREFIX_PATH enviroment variable to get software installed by the superbuild
+  - TRAVIS_BUILD_TYPE=Debug, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", CMAKE_PREFIX_PATH="/home/travis/build/robotology-playground/codyco-superbuild/build/install"
+  - TRAVIS_BUILD_TYPE=Release, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", CMAKE_PREFIX_PATH="/home/travis/build/robotology-playground/codyco-superbuild/build/install"
 
 install:
   - sudo sh -c 'echo "deb http://www.icub.org/ubuntu precise contrib/science" > /etc/apt/sources.list.d/icub.list'
   - sudo add-apt-repository -y ppa:kalakris/cmake
   - sudo apt-get update
-  - sudo apt-get install -qq libeigen3-dev libboost-system-dev libboost-thread-dev libtinyxml-dev libboost-test-dev
-  - sudo apt-get --force-yes install icub
+  - sudo apt-get install -qq libeigen3-dev libboost-system-dev libboost-thread-dev libboost-test-dev
+  - sudo apt-get --force-yes install icub-common
   - sudo apt-get install cmake
 
 before_script:
   - cmake --version
   - cd ..
-  # Build orocos_kinematics_dynamics and install it in a local directory
-  - git clone https://github.com/orocos/orocos_kinematics_dynamics
-  - cd orocos_kinematics_dynamics
-  - cd orocos_kdl
+  # use superbuild for getting iDynTree dependencies 
+  - git clone https://github.com/robotology/codyco-superbuild
+  - cd codyco-superbuild
   - mkdir build
   - cd build
-  - mkdir local_install
-  - cmake -DCMAKE_INSTALL_PREFIX="./local_install" -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
-  - make
-  - make install
-  - cd ../../..
-  # Build kdl_codyco and install it in a local directory
-  - git clone https://github.com/traversaro/kdl_codyco
-  - cd kdl_codyco
-  - mkdir build
-  - cd build
-  - mkdir local_install
-  - cmake -DCMAKE_INSTALL_PREFIX="./local_install" -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
-  - make
-  - make install
+  # using the YCM_EP_MAINTAINER_MODE variable to enable the subproject-dependees target 
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DSTANDARD_FIND_MODULE_DEBUG:BOOL=ON -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DYCM_EP_MAINTAINER_MODE:BOOL=ON -DNON_INTERACTIVE_BUILD:BOOL=TRUE ..
+  - make iDynTree-dependees
+  - pwd
   - cd ../..
-  # Build kdl_format_io and install it in a local directory
-  - sudo chmod +x ./idyntree/.travis/build_urdfdom
-  - ./idyntree/.travis/build_urdfdom
-  - git clone https://github.com/traversaro/kdl_format_io
-  - cd kdl_format_io
-  - mkdir build
-  - cd build
-  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} ..
-  - make
-  - sudo make install
-  - cd ../..
-  # Build and install YCM
-  - git clone https://github.com/robotology/ycm.git
-  - cd ycm
-  - mkdir build
-  - cd build 
-  - cmake ..
-  - make 
-  - sudo make install
-  - cd ../..
+  # deal with TinyXML linking problems
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/travis/build/robotology-playground/codyco-superbuild/build/install/lib
+  - ls /home/travis/build/robotology-playground/codyco-superbuild/build/install/lib
+  - echo $LD_LIBRARY_PATH
+  - sudo ldconfig
   # Prepare iDynTree build
   - cd idyntree
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_BUILD_TESTS:BOOL=ON ..
+  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_BUILD_TESTS:BOOL=ON  -DSTANDARD_FIND_MODULE_DEBUG:BOOL=ON ..
 
 script:
   - make
