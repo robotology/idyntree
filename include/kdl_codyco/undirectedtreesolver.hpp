@@ -73,6 +73,20 @@ namespace CoDyCo
                return true;
             }
 
+
+            /**
+             * Return the KDL::CoDyCo::UndirectedTree object used for the solver.
+             * The KDL::CoDyCo::UndirectedTree object is generated in the constructor
+             * compining the information from the KDL::Tree and (if present) the
+             * TreeSerialization object.
+             *
+             * @return the TreeSerialization object
+             */
+            const UndirectedTree & getUndirectedTree() const
+            {
+                return undirected_tree;
+            }
+
             /**
              * Return the KDL::CoDyCo::TreeSerialization object used for the solver.
              * If it was not specified in the constructor, it is the default one of

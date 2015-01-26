@@ -63,6 +63,20 @@ namespace CoDyCo {
         return ret_value->second;
     }
 
+
+    LinkMap::iterator UndirectedTree::getLink(const int index,  bool /*dummy*/)
+    {
+        assert((index >= 0 && index < (int)getNrOfLinks()));
+        return links.begin()+index;
+    }
+
+    JunctionMap::iterator UndirectedTree::getJunction(const int index,  bool /*dummy*/)
+    {
+        assert(index >= 0 && index < (int)getNrOfJunctions());
+        return junctions.begin()+index;
+    }
+
+
     LinkMap::const_iterator UndirectedTree::getLink(const int index) const
     {
         if(!(index >= 0 && index < (int)getNrOfLinks())) {
@@ -87,6 +101,7 @@ namespace CoDyCo {
         }
         return ret_value->second;
     }
+
 
     void UndirectedTree::constructor(const Tree & tree, const TreeSerialization & serialization)
     {
@@ -148,7 +163,6 @@ namespace CoDyCo {
 
 
 
-
         original_root = real_root->first;
 
 
@@ -163,8 +177,8 @@ namespace CoDyCo {
                 int link_id = local_serialization.getLinkID(current_segment.getName());
 
 
-                assert( link_id >= 0 && link_id <= nrOfLinks );
 
+                assert( link_id >= 0 && link_id <= nrOfLinks );
 
                 #ifndef NDEBUG
                 //std::cerr << "Added link " << current_segment.getName() <<  " to UndirectedTree with link_nr " << link_id <<
@@ -467,7 +481,6 @@ namespace CoDyCo {
 
         return ret;
     }
-
 
     int UndirectedTree::check_consistency() const
     {

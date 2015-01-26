@@ -46,10 +46,13 @@ namespace CoDyCo {
         new_tree = Tree(root->first);
         return changeInertialParametersRecursive(new_chain_param,new_tree,root,root->first);
     }
-    /*
+
     //code modified from bool Tree::addTreeRecursive(..)
+
+    /*
     bool TreeInertialParametersRegressor::changeInertialParametersRecursive(const Eigen::VectorXd & new_chain_param, Tree & new_tree, SegmentMap::const_iterator root, const std::string& hook_name)
     {
+
         //Working segment object
         Segment seg;
         //get iterator for root-segment
@@ -84,6 +87,9 @@ namespace CoDyCo {
         //Initializing gravitational acceleration (if any)
         ag=-Twist(grav,Vector::Zero());
 
+
+        undirected_tree.compute_traversal(traversal);
+
         //Compiling indicator function;
         /*
         for(unsigned int j=0; j < ns; j++ ) {
@@ -91,7 +97,7 @@ namespace CoDyCo {
         }
 
         for(int l =(int)traversal.order.size()-1; l >= 0; l-- ) {
-			LinkMap::const_iterator link = traversal.order[l];
+                         LinkMap::const_iterator link = traversal.order[l];
 			//Each link affects the dynamics of the joints from itself to the base
 			LinkMap::const_iterator child_link = link;
 			LinkMap::const_iterator parent_link=traversal.parent[link->getIndex()];

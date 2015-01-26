@@ -206,7 +206,8 @@ namespace CoDyCo {
             }
         }
 
-        com = q.base_pos*subtree_COM[0];
+        com = q.base_pos*subtree_COM[traversal.getBaseLink()->getLinkIndex()];
+
     }
 
     void getMomentumJacobianLoop(const UndirectedTree & undirected_tree,

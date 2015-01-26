@@ -146,13 +146,18 @@ namespace CoDyCo
             link_name = x.link_name;
             I = x.I;
             link_nr = x.link_nr;
+
             adjacent_joint = x.adjacent_joint;
             adjacent_link = x.adjacent_link;
             is_this_parent = x.is_this_parent;} return *this; }
 
         std::string getName() const {return link_name;}
+
         int getLinkIndex() const {return link_nr;}
+
         RigidBodyInertia getInertia() const {return I;}
+
+        void setInertia(const RigidBodyInertia & Inertia) { this->I = Inertia; }
 
 
         /**
@@ -259,6 +264,7 @@ namespace CoDyCo
     private:
         UndirectedTreeJunction(const std::string& name):  joint_name(name), q_nr(-1) { q_previous=-1.0; update_buffers(0.0);};
 
+
         mutable Frame relative_pose_parent_child; /**< \f$ {}^p X_c \f$ */
         mutable Frame relative_pose_child_parent; /**< \f$ {}^c X_p \f$ */
         mutable Twist S_child_parent; /**< \f$ {}^c S_{p,c} \f$ */
@@ -280,6 +286,7 @@ namespace CoDyCo
         UndirectedTreeJunction() {};
         UndirectedTreeJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1, const int body_part_q_nr_in=-1):
                                joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in) { q_previous=-1.0; update_buffers(0.0);};
+
 
         ~UndirectedTreeJunction() {};
 
@@ -355,15 +362,8 @@ namespace CoDyCo
         std::string original_root;
 
 
-        /**
-         * Private version of getLink, returning non-const iterator
-         */
-        LinkMap::iterator getLink(const std::string& name, bool dummy);
 
-        /**
-         * Private version of getJoint, returning non-const iterator
-         */
-        JunctionMap::iterator getJunction(const std::string& name, bool dummy);
+
 
        /**
         * Private helper function for constructor
@@ -374,6 +374,28 @@ namespace CoDyCo
     public:
         LinkMap::const_iterator getInvalidLinkIterator() const{ return links.end(); }
         JunctionMap::const_iterator getInvalidJunctionIterator() const { return junctions.end(); }
+
+        /**
+         * Private version of getLink, returning non-const iterator
+         */
+        LinkMap::iterator getLink(const std::string& name, bool dummy);
+
+        /**
+         * Private version of getJoint, returning non-const iterator
+         */
+        JunctionMap::iterator getJunction(const std::string& name, bool dummy);
+
+        /**
+         * Reserved version of getLink, returning non-const iterator
+         */
+        LinkMap::iterator getLink(const int index, bool dummy);
+
+        /**
+         * Reserved version of getJoint, returning non-const iterator
+         */
+        JunctionMap::iterator getJunction(const int index, bool dummy);
+
+
 
         /**
          *
@@ -397,6 +419,7 @@ namespace CoDyCo
          * \todo solve issue related to non-const UndirectedTree
          */
         UndirectedTree(const Tree & tree,const TreeSerialization & serialization=TreeSerialization());
+
 
         /**
          * Copy constructor
@@ -501,6 +524,7 @@ namespace CoDyCo
         Tree getTree(std::string base="") const;
 
         TreeSerialization getSerialization() const;
+
 
         int check_consistency() const;
 

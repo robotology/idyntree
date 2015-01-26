@@ -31,19 +31,19 @@
 namespace KDL{
 namespace CoDyCo{
     /**
-     * 
+     *
      * \brief Recursive newton euler inverse dynamics solver
      *
      * The algorithm implementation is based on the book "Rigid Body
      * Dynamics Algorithms" of Roy Featherstone, 2008
      * (ISBN:978-0-387-74314-1) See page 96 for the pseudo-code.
-     * 
+     *
      * It calculates the torques for the joints, given the motion of
      * the joints (q,qdot,qdotdot), external forces on the segments
      * (expressed in the segments reference frame) and the dynamical
      * parameters of the segments.
      */
-    class TreeIdSolver_RNE : public TreeIdSolver, UndirectedTreeSolver {
+    class TreeIdSolver_RNE : public TreeIdSolver, public UndirectedTreeSolver {
     public:
         /**
          * Constructor for the solver, it will allocate all the necessary memory
@@ -51,9 +51,9 @@ namespace CoDyCo{
          * \param grav The gravity vector to use during the calculation.
          */
         TreeIdSolver_RNE(const Tree& tree,Vector grav=Vector::Zero(),const TreeSerialization & serialization=TreeSerialization());
-        
+
         virtual ~TreeIdSolver_RNE(){};
-        
+
         /**
          * Function to calculate from Cartesian forces to joint torques.
          * Input parameters;
@@ -65,24 +65,24 @@ namespace CoDyCo{
          * \param torques the resulting torques for the joints
          */
         int CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Wrenches& f_ext,JntArray &torques);
-        
-        /** 
-         * Calculate floating base inverse dynamics, from joint positions, velocity, acceleration, 
+
+        /**
+         * Calculate floating base inverse dynamics, from joint positions, velocity, acceleration,
          * base velocity, base acceleration, external forces
          * to joint torques/forces.
-         * 
+         *
          * @param q input joint positions
          * @param q_dot input joint velocities
          * @param q_dotdot input joint accelerations
-         * @param base_velocity velocity of the floating base 
+         * @param base_velocity velocity of the floating base
          *        (the linear part has no influence on the dynamics)
-         * @param base_acceleration acceleration of the floating base 
+         * @param base_acceleration acceleration of the floating base
          *        (proper acceleration, considers also gravitational acceleration)
          * @param f_ext external forces
          *
          * @param torques output joint torques
          * @param base_force output base wrench
-         * 
+         *
          * @return if < 0 something went wrong
          */
         int CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Twist& base_velocity, const Twist& base_acceleration, const Wrenches& f_ext,JntArray &torques, Wrench& base_force);
@@ -92,7 +92,7 @@ namespace CoDyCo{
         std::vector<Twist> v;
         std::vector<Twist> a;
         std::vector<Wrench> f;
-        
+
         Twist ag;
     };
 }
