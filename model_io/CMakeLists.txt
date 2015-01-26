@@ -1,13 +1,8 @@
-cmake_minimum_required( VERSION 2.8 FATAL_ERROR )
-project (kdl_format_io CXX)
+# Copyright: (C) 2015 Fondazione Istituto Italiano di Tecnologia
+# Authors: Silvio Traversaro
+# CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
 
-set (KDL_FORMAT_IO_VERSION_MAJOR 0)
-set (KDL_FORMAT_IO_VERSION_MINOR 0)
-set (KDL_FORMAT_IO_VERSION_PATCH 1)
-
-set (KDL_FORMAT_IO_VERSION ${KDL_FORMAT_IO_VERSION_MAJOR}.${KDL_FORMAT_IO_VERSION_MINOR}.${KDL_FORMAT_IO_VERSION_PATCH})
-
-message (STATUS "${PROJECT_NAME} version ${KDL_FORMAT_IO_VERSION}")
+project(iDynTree_ModelIO CXX)
 
 # set the default build type
 if (NOT CMAKE_BUILD_TYPE)
@@ -169,37 +164,37 @@ if(ENABLE_IKIN)
   set(IKIN_SRCS src/converters/iKin_export.cpp)
 endif()
 
-add_library(kdl-format-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS} ${IKIN_SRCS})
+add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS} ${IKIN_SRCS})
 
 IF(ENABLE_SERIALIZATION_IO)
-    target_link_libraries(kdl-format-io ${kdl_codyco_LIBRARIES} ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
+    target_link_libraries(idyntree-model-io ${kdl_codyco_LIBRARIES} ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
     set(KDL_FORMAT_IO_LIBRARIES ${kdl_codyco_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ELSE()
-    target_link_libraries(kdl-format-io ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(idyntree-model-io ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
     set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
 if(ENABLE_IKIN)
     find_package(YARP REQUIRED)
     find_package(ICUB REQUIRED)
-    target_link_libraries(kdl-format-io ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(idyntree-model-io ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
     set(KDL_FORMAT_IO_LIBRARIES  ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 endif()
 
 IF( ENABLE_URDF AND ENABLE_SYMORO_PAR )
     add_executable(par2urdf src/utils/par2urdf.cpp)
-    target_link_libraries(par2urdf kdl-format-io ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(par2urdf idyntree-model-io ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
 IF( ENABLE_URDF AND ENABLE_IKIN )
     add_executable(urdf2dh src/utils/urdf2dh.cpp)
-    target_link_libraries(urdf2dh kdl-format-io ${URDF_LIBS} ${orocos_kdl_LIBRARIES} ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES})
+    target_link_libraries(urdf2dh idyntree-model-io ${URDF_LIBS} ${orocos_kdl_LIBRARIES} ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES})
 ENDIF()
 
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
 #target_link_libraries(check_kdl_export ${kdl_format_io_LIBRARIES} ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
-set_target_properties( kdl-format-io PROPERTIES
+set_target_properties( idyntree-model-io PROPERTIES
   SOVERSION "${KDL_FORMAT_IO_VERSION_MAJOR}.${KDL_FORMAT_IO_VERSION_MINOR}"
   VERSION "${KDL_FORMAT_IO_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
@@ -211,19 +206,22 @@ if(${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_GREATER "2.8.12")
 endif()
 if(CMAKE_VERSION VERSION_LESS 2.8.12)
   if(NOT KDL_FORMAT_IO_DISABLE_RPATH)
-      set_target_properties(kdl-format-io PROPERTIES
+      set_target_properties(idyntree-model-io PROPERTIES
           INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
       )
   endif(NOT KDL_FORMAT_IO_DISABLE_RPATH)
 endif(CMAKE_VERSION VERSION_LESS 2.8.12)
 
 
-INSTALL(TARGETS kdl-format-io
-  EXPORT kdl_format_io-target
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  PUBLIC_HEADER DESTINATION include/kdl_format_io
-)
+install(TARGETS idyntree-model-io
+        EXPORT iDynTree
+        RUNTIME DESTINATION "${${VARS_PREFIX}_INSTALL_BINDIR}" COMPONENT bin
+        LIBRARY DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT shlib
+        ARCHIVE DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT lib
+        PUBLIC_HEADER DESTINATION "${${VARS_PREFIX}_INSTALL_INCLUDEDIR}/kdl_format_io" COMPONENT dev)
+
+set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-model-io)
+
 
 #install utilities
 if( ENABLE_URDF AND ENABLE_SYMORO_PAR )
@@ -234,22 +232,6 @@ if( ENABLE_URDF AND ENABLE_IKIN )
     install(TARGETS urdf2dh DESTINATION bin)
 endif()
 
-EXPORT(TARGETS kdl-format-io FILE "${PROJECT_BINARY_DIR}/kdl_format_io-target.cmake")
-
-EXPORT(PACKAGE kdl_format_io)
-
-set(cmake_conf_file_raw "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_format_io-config.cmake.in")
-set(cmake_conf_file "${PROJECT_BINARY_DIR}/kdl_format_io-config.cmake")
-configure_file("${cmake_conf_file_raw}" "${cmake_conf_file}" @ONLY)
-install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME})
-
-set(cmake_version_conf_file_raw "${CMAKE_CURRENT_SOURCE_DIR}/cmake/kdl_format_io-config-version.cmake.in")
-set(cmake_version_conf_file "${PROJECT_BINARY_DIR}/kdl_format_io-config-version.cmake")
-configure_file("${cmake_version_conf_file_raw}" "${cmake_version_conf_file}" @ONLY)
-install(FILES ${cmake_version_conf_file} DESTINATION share/${PROJECT_NAME})
-
-INSTALL(EXPORT kdl_format_io-target  DESTINATION share/kdl_format_io)
-
 option(CREATE_TESTS "Create regression tests using CMake" FALSE)
 
 IF(CREATE_TESTS)
@@ -257,5 +239,3 @@ IF(CREATE_TESTS)
     ADD_SUBDIRECTORY(tests)
 ENDIF(CREATE_TESTS)
 
-
-message(STATUS "Configuration successful. Type make to compile kdl_format_io")
