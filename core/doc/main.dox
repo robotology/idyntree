@@ -1,0 +1,36 @@
+/**
+
+\image html kdl_codyco_logo.png ""
+
+\section kdl_codyco KDL_CoDyCo
+
+Kinematics and Dynamics Library extensions developed in the CoDyCo project.
+
+This repository contains several solvers based the <a href="http://www.orocos.org/kdl/">Orocos-KDL</a> library (  developed and used by the CoDyCo project, but that can be of general interest.
+
+The main features are:
+	- Undirected Tree data structure implementation
+	- Explicit (and arbitrary) serialization of KDL::Tree joints and links (TreeSerialization)
+    - Support for floating base 
+    - Strict separation between the solvers and sweeps and loops
+    - Full support for inverse (and coming soon) direct dynamics of trees
+
+Topics:
+    
+
+This documentation is developed by scanning all source code 
+in the src directory of the repository. You can produce this documentation on 
+your computer by running:
+
+\verbatim
+  doxygen doc/Doxyfile.in
+\endverbatim
+
+locally on your repository, to figure out what's going on.
+The output can be browsed at doc/html/index.html.
+
+This page can be edited at doc/main.dox.
+
+*
+*/
+

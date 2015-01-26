@@ -1,4 +1,3 @@
 build/*
-cmake/kdl_urdf-config.cmake
-cmake/pkgconfig/kdl_urdf.pc
+*kdev4
 
