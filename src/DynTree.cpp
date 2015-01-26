@@ -550,6 +550,13 @@ yarp::sig::Vector DynTree::getAng() const
     return ret;
 }
 
+bool DynTree::getAngKDL(KDL::JntArray & _q) const
+{
+    _q = q;
+    return true;
+}
+
+
 bool DynTree::setAngKDL(const KDL::JntArray & _q)
 {
     is_X_dynamic_base_updated = false;
@@ -729,7 +736,7 @@ yarp::sig::Vector DynTree::getJointBoundMin()
 {
     yarp::sig::Vector ret;
 
-    KDLtoYarp(q_min,ret);
+    KDLtoYarp(q_jnt_min,ret);
 
 
     return ret;
@@ -748,7 +755,7 @@ yarp::sig::Vector DynTree::getJointBoundMax()
 {
     yarp::sig::Vector ret;
 
-    KDLtoYarp(q_max,ret);
+    KDLtoYarp(q_jnt_max,ret);
 
     return ret;
 }
@@ -756,7 +763,7 @@ yarp::sig::Vector DynTree::getJointBoundMax()
 bool DynTree::setJointBoundMin(const yarp::sig::Vector & _q)
 {
     if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMin error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
-    YarptoKDL(_q,q_min);
+    YarptoKDL(_q,q_jnt_min);
 
     return true;
 }
@@ -764,7 +771,7 @@ bool DynTree::setJointBoundMin(const yarp::sig::Vector & _q)
 bool DynTree::setJointBoundMax(const yarp::sig::Vector & _q)
 {
         if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMax error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
-        YarptoKDL(_q,q_max);
+        YarptoKDL(_q,q_jnt_max);
 
     return true;
 }
@@ -1266,9 +1273,9 @@ bool DynTree::dynamicRNEA()
             std::cout << "iDynTree WARNING: base_residual_f.torque.Norm() is " << base_residual_f.torque.Norm() << " instead of zero." << std::endl;
         }
         //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
-    } 
+    }
     else
-    { 
+    {
         //In case contacts forces where not estimated, the sensor values have
         //to be calculated from the RNEA
         for(int i=0; i < NrOfFTSensors; i++ )
@@ -1291,7 +1298,7 @@ bool DynTree::dynamicRNEA()
 ////////////////////////////////////////////////////////////////////////
 
 
-KDL::Vector DynTree::getCOMKDL(const std::string part_name, int link_index)
+KDL::Vector DynTree::getCOMKDL(int link_index)
 {
     if( (link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks()) && link_index != -1 )
     {
@@ -1326,9 +1333,9 @@ KDL::Vector DynTree::getCOMKDL(const std::string part_name, int link_index)
     return com_return;
 }
 
-yarp::sig::Vector DynTree::getCOM(const std::string part_name, int link_index)
+yarp::sig::Vector DynTree::getCOM(int link_index)
 {
-    KDL::Vector com_return = getCOMKDL(part_name,link_index);
+    KDL::Vector com_return = getCOMKDL(link_index);
     size_t com_return_size = sizeof(com_return)/sizeof(double);
     com_yarp.resize(com_return_size,0);
 
@@ -1372,7 +1379,7 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
 
     KDL::RigidBodyInertia base_total_inertia;
 
-    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jac,com_jac_buffer,momentum_jac_buffer,base_total_inertia,part_id);
+    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jac,com_jac_buffer,momentum_jac_buffer,base_total_inertia);
 
     /*
     std::cout << "Total Inertia for part " << part_name << " : " << std::endl
@@ -1658,11 +1665,6 @@ bool DynTree::getJacobianKDL(const int link_index, KDL::Jacobian & abs_jac, bool
     {
         std::cerr << "DynTree::getJacobian: link index " << link_index <<  " out of bounds" << std::endl;
         return false;
-    }
-
-    if( jac.rows() != (int)(6) || jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) )
-    {
-        jac.resize(6,6+undirected_tree.getNrOfDOFs());
     }
 
     if( abs_jacobian.rows() != 6 ||

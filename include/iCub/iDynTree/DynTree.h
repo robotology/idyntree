@@ -132,7 +132,6 @@ class skinDynLibLinkID {
 };
 
 
->>>>>>> master
 /**
  * \ingroup iDynTree
  *
@@ -310,7 +309,7 @@ class DynTree  {
 
 
     static bool loadJointLimitsFromURDFFile(std::string urdfFile, KDL::CoDyCo::UndirectedTree undirectedTree, yarp::sig::Vector &yarpJointMinLimit, yarp::sig::Vector &yarpJointMaxLimit);
-    
+
 
     public:
         DynTree();
@@ -492,7 +491,7 @@ class DynTree  {
 
 
         /**
-        * Get joint positions 
+        * Get joint positions
         * @return vector of joint positions
         */
         virtual yarp::sig::Vector getAng() const;
@@ -510,7 +509,7 @@ class DynTree  {
         virtual yarp::sig::Vector setDAng(const yarp::sig::Vector & _q);
 
         /**
-        * Get joint speeds 
+        * Get joint speeds
         * @return vector of joint speeds
         *
         * \note please note that this does returns a vector of size getNrOfDOFs()
@@ -527,7 +526,7 @@ class DynTree  {
 
 
         /**
-        * Get joint speeds 
+        * Get joint speeds
         * @return vector of joint accelerations
         */
         virtual yarp::sig::Vector getD2Ang() const;
@@ -913,13 +912,11 @@ class DynTree  {
         */
         //@{
 
-        KDL::Vector getCOMKDL(const std::string part_name="", const int link_index = -1);
+        KDL::Vector getCOMKDL(const int link_index = -1);
 
 
         /**
-        * Get Center of Mass of the specified part (if no part
-        * is specified, get the COM of all the tree) expressed
-        * in the world frame
+        * Get Center of Mass of the robot expressed in the world frame
         * @param link_index if indicated, express the returned center of mass in the link reference frame
         * @return Center of Mass vector
         *
