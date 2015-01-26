@@ -1,5 +1,5 @@
 
-#include <iCub/iDynTree/iCubTree.h>
+#include <iCub/iDynTree/TorqueEstimationTree.h>
 
 #include <iCub/iDyn/iDyn.h>
 #include <iCub/iDyn/iDynBody.h>
@@ -210,11 +210,11 @@ int main()
 
     input_contact_list.push_back(first_contact);
     input_contact_list.push_back(second_contact);
-    
+
     snake_dyntree.setContacts(input_contact_list);
 
     snake_dyntree.kinematicRNEA();
-    snake_dyntree.estimateContactForces();
+    snake_dyntree.estimateContactForcesFromSkin();
     snake_dyntree.dynamicRNEA();
 
     output_contact_list = snake_dyntree.getContacts();
