@@ -4,17 +4,6 @@
 
 project(iDynTree_ModelIO CXX)
 
-# set the default build type
-if (NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
-endif()
-
-# This shouldn't be necessary, but there has been trouble
-# with MSVC being set off, but MSVCXX ON.
-if(MSVC OR MSVC90 OR MSVC10)
-  set(MSVC ON)
-endif (MSVC OR MSVC90 OR MSVC10)
-
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 #define the support for specific file formats
@@ -87,16 +76,10 @@ IF( ENABLE_URDF )
 ENDIF()
 
 IF(ENABLE_SERIALIZATION_IO)
-    find_package(kdl_codyco)
-    IF( NOT kdl_codyco_FOUND )
-        message("Disabling Serialization as no kdl_codyco was found")
-        set(ENABLE_SERIALIZATION_IO FALSE)
-    ELSE()
          include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
          set(KDL_FORMAT_IO_INCLUDE_DIRS ${KDL_FORMAT_IO_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
          link_directories(${kdl_codyco_LIBRARY_DIRS})
          set(KDL_FORMAT_IO_LIBRARY_DIRS ${KDL_FORMAT_IO_LIBRARY_DIRS} ${kdl_codyco_LIBRARY_DIRS})
-    ENDIF()
 ENDIF()
 
 include_directories(include)
@@ -144,6 +127,11 @@ else()
     set(LIB_TYPE SHARED)
 endif()
 
+# share headers with all iDynTree targes
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+
+include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 find_package(YCM)
 
@@ -167,8 +155,8 @@ endif()
 add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS} ${IKIN_SRCS})
 
 IF(ENABLE_SERIALIZATION_IO)
-    target_link_libraries(idyntree-model-io ${kdl_codyco_LIBRARIES} ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
-    set(KDL_FORMAT_IO_LIBRARIES ${kdl_codyco_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
+    set(KDL_FORMAT_IO_LIBRARIES idyntree-core ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ELSE()
     target_link_libraries(idyntree-model-io ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
     set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
@@ -177,18 +165,18 @@ ENDIF()
 if(ENABLE_IKIN)
     find_package(YARP REQUIRED)
     find_package(ICUB REQUIRED)
-    target_link_libraries(idyntree-model-io ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(idyntree-model-io idyntree-core ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
     set(KDL_FORMAT_IO_LIBRARIES  ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 endif()
 
 IF( ENABLE_URDF AND ENABLE_SYMORO_PAR )
     add_executable(par2urdf src/utils/par2urdf.cpp)
-    target_link_libraries(par2urdf idyntree-model-io ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(par2urdf idyntree-model-io idyntree-core ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 ENDIF()
 
 IF( ENABLE_URDF AND ENABLE_IKIN )
     add_executable(urdf2dh src/utils/urdf2dh.cpp)
-    target_link_libraries(urdf2dh idyntree-model-io ${URDF_LIBS} ${orocos_kdl_LIBRARIES} ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES})
+    target_link_libraries(urdf2dh idyntree-model-io idyntree-core ${URDF_LIBS} ${orocos_kdl_LIBRARIES} ${YARP_LIBRARIES} ${ICUB_LIBRARIES})
 ENDIF()
 
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)

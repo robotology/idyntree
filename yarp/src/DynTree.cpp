@@ -116,8 +116,8 @@ int ret;
 
     torques = KDL::JntArray(NrOfDOFs);
 
-    q_max = KDL::JntArray(NrOfDOFs);
-    q_min = KDL::JntArray(NrOfDOFs);
+    q_jnt_max = KDL::JntArray(NrOfDOFs);
+    q_jnt_min = KDL::JntArray(NrOfDOFs);
     tau_max = KDL::JntArray(NrOfDOFs);
 
     constrained = std::vector<bool>(NrOfDOFs,false);

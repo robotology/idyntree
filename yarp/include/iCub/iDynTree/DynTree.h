@@ -80,7 +80,6 @@
 #include <iCub/skinDynLib/dynContactList.h>
 
 #include <kdl_codyco/treeserialization.hpp>
-#include <kdl_codyco/treepartition.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/momentumjacobian.hpp>
 #include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
@@ -149,7 +148,6 @@ class skinDynLibLinkID {
 class DynTree  {
     private:
         KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization and the TreePartition */
-        KDL::CoDyCo::TreePartition partition; /**< TreePartition object explicit present as it is conventient to encode/decode dynContact objects */
 
         //Violating DRY principle, but for code clarity
         int NrOfDOFs;
