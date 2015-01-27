@@ -82,10 +82,7 @@ set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-core)
 install(DIRECTORY include/kdl_codyco/regressors DESTINATION include/kdl_codyco)
 install(DIRECTORY include/kdl_codyco/regressors/dataset DESTINATION include/kdl_codyco)
 
-option(CREATE_TESTS "Create regression tests using CMake" FALSE)
-
-if(CREATE_TESTS)
-    enable_testing()
+if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)
-endif(CREATE_TESTS)
+endif(IDYNTREE_COMPILE_TESTS)
 

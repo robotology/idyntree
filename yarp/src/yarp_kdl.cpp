@@ -4,7 +4,7 @@
  * CopyPolicy: Released under the terms of the GNU LGPL v2.0 (or any later version)
  *
  */
- 
+
 #include "iCub/iDynTree/yarp_kdl.h"
 
 #include <yarp/math/Math.h>
@@ -126,14 +126,14 @@ bool KDLtoYarp_position(const KDL::Frame & kdlFrame, yarp::sig::Matrix & yarpMat
 
     KDLtoYarp(kdlFrame.M,R);
     KDLtoYarp(kdlFrame.p,p);
-    
+
     if( yarpMatrix4_4.rows() != 4 || yarpMatrix4_4.cols() != 4 ) { yarpMatrix4_4.resize(4,4); }
     yarpMatrix4_4.zero();
-    
+
     yarpMatrix4_4.setSubmatrix(R,0,0);
     yarpMatrix4_4.setSubcol(p,0,3);
     yarpMatrix4_4(3,3) = 1;
-    
+
     return true;
 }
 
@@ -152,14 +152,14 @@ bool KDLtoYarp_twist(const KDL::Frame & kdlFrame, yarp::sig::Matrix & yarpMatrix
 
     KDLtoYarp(kdlFrame.M,R);
     KDLtoYarp(kdlFrame.p,p);
-    
+
     if( yarpMatrix6_6.rows() != 6 || yarpMatrix6_6.cols() != 6 ) { yarpMatrix6_6.resize(6,6); }
     yarpMatrix6_6.zero();
-    
+
     yarpMatrix6_6.setSubmatrix(R,0,0);
     yarpMatrix6_6.setSubmatrix(R,3,3);
     yarpMatrix6_6.setSubmatrix(yarp::math::crossProductMatrix(p)*R,3,0);
-    
+
     return true;
 }
 
@@ -178,14 +178,14 @@ bool KDLtoYarp_wrench(const KDL::Frame &kdlFrame, yarp::sig::Matrix & yarpMatrix
 
     KDLtoYarp(kdlFrame.M,R);
     KDLtoYarp(kdlFrame.p,p);
-    
+
     if( yarpMatrix6_6.rows() != 6 || yarpMatrix6_6.cols() != 6 ) { yarpMatrix6_6.resize(6,6); }
     yarpMatrix6_6.zero();
-    
+
     yarpMatrix6_6.setSubmatrix(R,0,0);
     yarpMatrix6_6.setSubmatrix(R,3,3);
     yarpMatrix6_6.setSubmatrix(yarp::math::crossProductMatrix(p)*R,0,3);
-    
+
     return true;
 }
 

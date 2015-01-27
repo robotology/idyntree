@@ -232,10 +232,8 @@ if( ENABLE_URDF AND ENABLE_IKIN )
     install(TARGETS urdf2dh DESTINATION bin)
 endif()
 
-option(CREATE_TESTS "Create regression tests using CMake" FALSE)
 
-IF(CREATE_TESTS)
-    enable_testing()
-    ADD_SUBDIRECTORY(tests)
-ENDIF(CREATE_TESTS)
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif(IDYNTREE_COMPILE_TESTS)
 

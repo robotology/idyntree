@@ -12,18 +12,20 @@ find_package(YCM REQUIRED)
 include(YCMDefaultDirs)
 ycm_default_dirs(${VARS_PREFIX})
 
+# Pick up our CMake scripts - they are all in the cmake subdirectory.
+set(IDYNTREE_MODULE_DIR ${PROJECT_SOURCE_DIR}/cmake)
+set(IDYNTREE_MODULE_PATH ${IDYNTREE_MODULE_DIR})
+list(APPEND CMAKE_MODULE_PATH ${IDYNTREE_MODULE_PATH})
 
-#Options
-option(IDYNTREE_ENABLE_URDF "Compile iDynTree with URDF support" FALSE)
-option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
-option(IDYNTREE_BUILD_TESTS "Compile iDynTree tests" FALSE)
-option(IDYNTREE_ENABLE_RPATH "Enable RPATH for the library" TRUE)
-mark_as_advanced(IDYNTREE_ENABLE_RPATH)
+message(${CMAKE_MODULE_PATH})
+#Use options specified in iDynTreeOptions.cmake file
+include(iDynTreeOptions)
 
 # Find dependecies
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
 find_package(orocos_kdl REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 if (YARP_HAS_MATH_LIB)
     message(STATUS "found libYARP_math")
