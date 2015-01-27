@@ -30,6 +30,7 @@ before_script:
   - make urdfdom
   - make YARP
   - make ICUB
+  - make orocos_kdl
   - pwd
   - cd ../..
   # deal with TinyXML linking problems
