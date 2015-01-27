@@ -27,7 +27,9 @@ before_script:
   - cd build
   # using the YCM_EP_MAINTAINER_MODE variable to enable the subproject-dependees target 
   - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -Dkdl_codyco_TAG:STRING="development" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DYCM_EP_MAINTAINER_MODE:BOOL=ON -DNON_INTERACTIVE_BUILD:BOOL=TRUE ..
-  - make iDynTree-dependees
+  - make urdfdom
+  - make YARP
+  - make ICUB
   - pwd
   - cd ../..
   # deal with TinyXML linking problems
