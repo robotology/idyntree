@@ -1,7 +1,6 @@
 
 
 find_package(TinyXML       REQUIRED)
-find_package(kdl_format_io REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/include ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS} ${iDynTree_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
 
 
