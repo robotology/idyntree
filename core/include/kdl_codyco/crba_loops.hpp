@@ -25,8 +25,19 @@ namespace CoDyCo {
     *
     * \warning Basic function designed for use inside the solver,so some the
     *          error checking on input/output parameters is not guaranteed
+    *
+    * \param[in] undirected_tree the UndirectedTree model of the robot
+    * \param[in] traversal       the traversal (containg the information about the used base link)
+    * \param[in] q               vector (size: getNrOfDOFs() ) joint positions
+    * \param[out] Ic             vector (size: getNrOfDOFs() ) temporary buffer
+    *                            Ic[i] contains the composite rigid body inertia seen at joint i
+    * \param[out] H              matrix (size: getNrOfDOFs() X getNrOfDOFs) containg the joint space Mass matrix
     */
-    int crba_fixed_base_loop(const UndirectedTree & undirected_tree, const Traversal & traversal, const JntArray & q, std::vector<RigidBodyInertia> & Ic, JntSpaceInertiaMatrix & H);
+    int crba_fixed_base_loop(const UndirectedTree & undirected_tree,
+                             const Traversal & traversal,
+                             const JntArray & q,
+                             std::vector<RigidBodyInertia> & Ic,
+                             JntSpaceInertiaMatrix & H);
 
    /**
     * Loop for calculating, given a UndirectedTree, a Traversal and the joint position,
@@ -34,6 +45,7 @@ namespace CoDyCo {
     *
     * \warning Basic function designed for use inside the solver,so some the
     *          error checking on input/output parameters is not guaranteed
+    * \warning DEPRECATED.. do not use, use instead GeneralizedJntPositions
     */
    int crba_floating_base_loop(const UndirectedTree & undirected_tree,
                                const Traversal & traversal,

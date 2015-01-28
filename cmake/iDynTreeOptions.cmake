@@ -3,9 +3,11 @@
 
 #########################################################################
 # Control whether libraries are shared or static.
-
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
 
+#########################################################################
+# Use position indipendent code
+set (CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
 #########################################################################
 # Turn on testing.
