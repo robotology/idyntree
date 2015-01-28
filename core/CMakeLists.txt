@@ -72,16 +72,15 @@ set_target_properties(idyntree-core PROPERTIES
   VERSION "${KDL_CODYCO_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}")
 
-message(STATUS "papare  : " ${KDL_CODYCO_HPPS})
-set_property(TARGET idyntree-core PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_HDRS})
 
+set_property(TARGET idyntree-core PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_HDRS})
 
 if(${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_GREATER "2.8.12")
     message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. This check can be removed.")
 endif()
 if(CMAKE_VERSION VERSION_LESS 2.8.12)
     if(NOT KDL_CODYCO_DISABLE_RPATH)
-        set_target_properties(kdl-codyco PROPERTIES
+        set_target_properties(idyntree-core PROPERTIES
             INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
         )
     endif(NOT KDL_CODYCO_DISABLE_RPATH)

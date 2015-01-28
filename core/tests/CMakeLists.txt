@@ -22,14 +22,14 @@ target_link_libraries(inversedynamics_different_loops_test ${orocos_kdl_LIBRARIE
 #target_link_libraries(sparse_numerical_subspace_test ${orocos_kdl_LIBRARIES} idyntree-core  )
 
 
-add_test(test_inverse_inertia inverse_inertia_test)
-add_test(test_regressor_utils regressor_utils_test)
-add_test(test_subtree_regressor subtree_regressor_test)
-add_test(test_inversedynamics_regressor inversedynamics_regressor_test)
-add_test(test_inversedynamics_crba inversedynamics_crba_test)
-add_test(test_comjacobian comjacobian_test)
+add_test(NAME test_inverse_inertia    COMMAND inverse_inertia_test)
+add_test(NAME test_regressor_utils    COMMAND regressor_utils_test)
+add_test(NAME test_subtree_regressor  COMMAND subtree_regressor_test)
+add_test(NAME test_inversedynamics_regressor COMMAND inversedynamics_regressor_test)
+add_test(NAME test_inversedynamics_crba COMMAND inversedynamics_crba_test)
+add_test(NAME test_comjacobian COMMAND comjacobian_test)
 #add_test(test_sparse_numerical_subspace sparse_numerical_subspace_test)
-add_test(test_inversedynamics_different_loops inversedynamics_different_loops_test)
+add_test(NAME test_inversedynamics_different_loops COMMAND inversedynamics_different_loops_test)
 
 #dirl related test
 add_executable(dirl_dataset_test dirl_dataset_test.cpp)
@@ -37,4 +37,4 @@ add_executable(dirl_dataset_test dirl_dataset_test.cpp)
 target_link_libraries(dirl_dataset_test ${orocos_kdl_LIBRARIES} idyntree-core )
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dirl_dataset_examples/hrp2_100samples.csv ${CMAKE_CURRENT_BINARY_DIR}/hrp2_100samples.csv)
 #First argument of the test: dataset example, second argument: number of expected samples
-add_test(test_dirl_dataset_hrp2 dirl_dataset_test hrp2_100samples.csv 100)
+add_test(NAME test_dirl_dataset_hrp2 COMMAND dirl_dataset_test hrp2_100samples.csv 100)
