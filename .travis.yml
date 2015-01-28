@@ -19,6 +19,9 @@ install:
   - sudo apt-get install cmake
 
 before_script:
+  # workaround around opencv linking problem in clang:
+  # http://stackoverflow.com/questions/12689304/ctypes-error-libdc1394-error-failed-to-initialize-libdc1394
+  - sudo ln /dev/null /dev/raw1394
   - cmake --version
   - cd ..
   # use superbuild for getting iDynTree dependencies 
