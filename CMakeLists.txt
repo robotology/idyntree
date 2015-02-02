@@ -68,23 +68,23 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           DEPENDS IDYNTREE_ENABLE_RPATH
                           USE_LINK_PATH)
 
-message("Add library idyntree " ${LIB_TIPE}  ${folder_source} ${folder_header})
 add_library(idyntree ${LIB_TYPE} ${folder_source} ${folder_header})
 
 set_target_properties(idyntree PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            SOVERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${folder_header}")
 
-message("kdl_codyco_INCLUDE_DIRS = ${kdl_codyco_INCLUDE_DIRS}")
 target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
-                                            ${skinDynLib_INCLUDE_DIRS}
-                                            ${iDyn_INCLUDE_DIRS}
-                                            ${GSL_INCLUDE_DIRS}
-                                            ${YARP_INCLUDE_DIRS}
-                                            ${kdl_codyco_INCLUDE_DIRS}
-                                            ${Eigen3_INCLUDE_DIR}
-                                            ${kdl_format_io_INCLUDE_DIRS})
+                                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
+
+target_include_directories(idyntree SYSTEM PUBLIC
+                                    ${skinDynLib_INCLUDE_DIRS}
+                                    ${iDyn_INCLUDE_DIRS}
+                                    ${GSL_INCLUDE_DIRS}
+                                    ${YARP_INCLUDE_DIRS}
+                                    ${kdl_codyco_INCLUDE_DIRS}
+                                    ${Eigen3_INCLUDE_DIR}
+                                    ${kdl_format_io_INCLUDE_DIRS})
 
 target_link_libraries(idyntree LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${GSL_LIBRARIES}
