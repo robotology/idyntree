@@ -113,6 +113,12 @@ yarp::sig::Vector KDLtoYarp(const KDL::Vector & kdlVector);
 bool KDLtoYarp(const KDL::JntArray & kdlJntArray,yarp::sig::Vector & yarpVector);
 
 /**
+* Convert a KDL::Rotation to a yarp::sig::Matrix
+* @return true if conversion was successful, false otherwise
+*/
+bool KDLtoYarp(const KDL::Rotation & kdlRotation, yarp::sig::Matrix & yarpMatrix3_3);
+
+/**
  * Convert a KDL::Frame in a 4x4 rototranslation yarp::sig::Matrix 
  * @return true if conversion was successful, false otherwise
  */

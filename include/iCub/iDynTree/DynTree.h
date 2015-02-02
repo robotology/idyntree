@@ -91,6 +91,7 @@
 #include <kdl/tree.hpp>
 
 #include <iostream>
+#include <vector>
 #include <map>
 
 
@@ -152,10 +153,10 @@ class DynTree  {
         KDL::CoDyCo::TreePartition partition; /**< TreePartition object explicit present as it is conventient to encode/decode dynContact objects */
 
         //Violating DRY principle, but for code clarity
-        int NrOfDOFs;
-        int NrOfLinks;
-        int NrOfFTSensors;
-        int NrOfDynamicSubGraphs;
+        unsigned NrOfDOFs;
+        unsigned NrOfLinks;
+        unsigned NrOfFTSensors;
+        unsigned NrOfDynamicSubGraphs;
 
         //state of the robot
         KDL::Frame world_base_frame; /**< the position of the floating base frame with respect to the world reference frame \f$ {}^w H_b \f$ */
@@ -175,7 +176,7 @@ class DynTree  {
         //joint torque limits
         KDL::JntArray tau_max;
 
-        int constrained_count; /**< the number of DOFs that are constrained */
+        unsigned constrained_count; /**< the number of DOFs that are constrained */
 
         double setAng(const double q, const int i);
 
@@ -322,7 +323,6 @@ class DynTree  {
          *        be considered as FT sensors
          * @param imu_link_name name of the link considered the IMU sensor
          * @param serialization (optional) an explicit serialization of tree links and DOFs
-         * @param partition (optional) a partition of the tree (division of the links and DOFs in non-overlapping sets)
          *
          */
         DynTree(const KDL::Tree & _tree,
@@ -338,7 +338,6 @@ class DynTree  {
          *        be considered as FT sensors
          * @param imu_link_name name of the link considered the IMU sensor
          * @param serialization (optional) an explicit serialization of tree links and DOFs
-         * @param partition (optional) a partition of the tree (division of the links and DOFs in non-overlapping sets)
          *
          */
         DynTree(const std::string urdf_file,
@@ -510,7 +509,6 @@ class DynTree  {
         * Set joint positions in the specified part (if no part
         * is specified, set the joint positions of all the tree)
         * @param _q vector of joints position
-        * @param part_name optional: the name of the part of joint to set
         * @return the effective joint positions, considering min/max values
         */
         virtual yarp::sig::Vector setAng(const yarp::sig::Vector & _q) ;
@@ -521,7 +519,6 @@ class DynTree  {
         /**
         * Get joint positions in the specified part (if no part
         * is specified, get the joint positions of all the tree)
-        * @param part_name optional: the name of the part of joints to set
         * @return vector of joint positions
         */
         virtual yarp::sig::Vector getAng() const;
@@ -534,7 +531,6 @@ class DynTree  {
         * Set joint speeds in the specified part (if no part
         * is specified, set the joint speeds of all the tree)
         * @param _q vector of joint speeds
-        * @param part_name optional: the name of the part of joints to set
         * @return the effective joint speeds, considering min/max values
         */
         virtual yarp::sig::Vector setDAng(const yarp::sig::Vector & _q);
@@ -542,7 +538,6 @@ class DynTree  {
         /**
         * Get joint speeds in the specified part (if no part
         * is specified, get the joint speeds of all the tree)
-        * @param part_name optional: the name of the part of joints to get
         * @return vector of joint speeds
         *
         * \note please note that this does returns a vector of size getNrOfDOFs()
@@ -553,7 +548,6 @@ class DynTree  {
         * Set joint accelerations in the specified part (if no part
         * is specified, set the joint accelerations of all the tree)
         * @param _q vector of joint speeds
-        * @param part_name optional: the name of the part of joints to set
         * @return the effective joint accelerations, considering min/max values
         */
         virtual yarp::sig::Vector setD2Ang(const yarp::sig::Vector & _q);
@@ -561,7 +555,6 @@ class DynTree  {
         /**
         * Get joint speeds in the specified part (if no part
         * is specified, get the joint speeds of all the tree)
-        * @param part_name optional: the name of the part of joints to get
         * @return vector of joint accelerations
         */
         virtual yarp::sig::Vector getD2Ang() const;
@@ -829,7 +822,6 @@ class DynTree  {
         /**
         * Get joint torques in the specified part (if no part
         * is specified, get the joint torques of all the tree)
-        * @param part_name optional: the name of the part of joints to get
         * @return vector of joint torques
         */
         virtual yarp::sig::Vector getTorques() const;
@@ -964,7 +956,6 @@ class DynTree  {
         * is specified, get the Jacobian of the COM of all the tree) expressed in
         * the world frame
         * @param jac the output jacobiam matrix
-        * @param part_name optional: the name of the part of joints to get
         * @return true if succeeds, false otherwise
         */
         virtual bool getCOMJacobian(yarp::sig::Matrix & jac);
