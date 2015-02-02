@@ -77,14 +77,25 @@ set_target_properties(idyntree PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
 target_include_directories(idyntree PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
 
-target_include_directories(idyntree SYSTEM PUBLIC
-                                    ${skinDynLib_INCLUDE_DIRS}
-                                    ${iDyn_INCLUDE_DIRS}
-                                    ${GSL_INCLUDE_DIRS}
-                                    ${YARP_INCLUDE_DIRS}
-                                    ${kdl_codyco_INCLUDE_DIRS}
-                                    ${Eigen3_INCLUDE_DIR}
-                                    ${kdl_format_io_INCLUDE_DIRS})
+if (CMAKE_VERSION VERSION_GREATER 2.8.12)
+   target_include_directories(idyntree SYSTEM PUBLIC
+                                       ${skinDynLib_INCLUDE_DIRS}
+                                       ${iDyn_INCLUDE_DIRS}
+                                       ${GSL_INCLUDE_DIRS}
+                                       ${YARP_INCLUDE_DIRS}
+                                       ${kdl_codyco_INCLUDE_DIRS}
+                                       ${Eigen3_INCLUDE_DIR}
+                                       ${kdl_format_io_INCLUDE_DIRS})
+else()
+   target_include_directories(idyntree PUBLIC
+                                       ${skinDynLib_INCLUDE_DIRS}
+                                       ${iDyn_INCLUDE_DIRS}
+                                       ${GSL_INCLUDE_DIRS}
+                                       ${YARP_INCLUDE_DIRS}
+                                       ${kdl_codyco_INCLUDE_DIRS}
+                                       ${Eigen3_INCLUDE_DIR}
+                                       ${kdl_format_io_INCLUDE_DIRS})
+endif()
 
 target_link_libraries(idyntree LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${GSL_LIBRARIES}

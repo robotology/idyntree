@@ -5,18 +5,38 @@
  */
 
 #include <iCub/iDynTree/iDyn2KDL.h>
+#include <iCub/iDyn/iDyn.h>
+#include <yarp/os/all.h>
+#include <yarp/dev/all.h>
+#include <yarp/sig/all.h>
+
+#include <iCub/ctrl/math.h>
+#include <iCub/ctrl/adaptWinPolyEstimator.h>
+#include <iCub/iDyn/iDynInv.h>
+#include <iCub/iDyn/iDynBody.h>
+#include <iCub/skinDynLib/skinContactList.h>
+
+#include <kdl/chain.hpp>
+#include <kdl/frames.hpp>
+#include <kdl/frames_io.hpp>
+#include <kdl/kinfam_io.hpp>
+
+#include <yarp/math/Math.h>
+#include <yarp/math/api.h>
+
+using namespace yarp::math;
 
 bool idynChain2kdlChain(iCub::iDyn::iDynChain & idynChain,KDL::Chain & kdlChain,std::vector<std::string> link_names,std::vector<std::string> joint_names, std::string final_frame_name, std::string initial_frame_name, int max_links)
 {
-    int n_links, i;
+    unsigned n_links;
     bool use_names;
     n_links = idynChain.getN();
     //In iDyn, the joints are only 1 DOF (not 0, not more)
-    int n_joints = idynChain.getN();
+    unsigned n_joints = idynChain.getN();
     
     if(n_links <= 0 ) return false;
     
-    if( (int)link_names.size() < n_links || (int)joint_names.size() < n_joints ) {
+    if( link_names.size() < n_links || joint_names.size() < n_joints ) {
         use_names = false;
     } else {
         use_names = true;
@@ -38,7 +58,7 @@ bool idynChain2kdlChain(iCub::iDyn::iDynChain & idynChain,KDL::Chain & kdlChain,
     }
     
     
-    for(i=0;i<n_links && i < max_links;i++) 
+    for(unsigned i=0;i<n_links && (int)i < max_links;i++)
     {
         //forgive him, as he does not know what is doing
         iCub::iKin::iKinLink & link_current = idynChain[i];
@@ -103,16 +123,17 @@ bool idynChain2kdlChain(iCub::iDyn::iDynChain & idynChain,KDL::Chain & kdlChain,
 bool idynSensorChain2kdlChain(iCub::iDyn::iDynChain & idynChain,iCub::iDyn::iDynInvSensor & idynSensor ,KDL::Chain & kdlChain, std::vector<std::string> link_names,std::vector<std::string> joint_names, std::string final_frame_name, std::string initial_frame_name, int max_links)
 {
     bool use_names;
-    int n_links, i, sensor_link;
+    unsigned n_links, sensor_link;
+
     n_links = idynChain.getN();
     sensor_link = idynSensor.getSensorLink();
     
-    int kdl_links = n_links + 1; //The sensor links transform a link in two different links
-    int kdl_joints = kdl_links;
+    unsigned kdl_links = n_links + 1; //The sensor links transform a link in two different links
+    unsigned kdl_joints = kdl_links;
 
     if(n_links <= 0 ) return false;
     
-    if( (int)link_names.size() < kdl_links || (int)joint_names.size() < kdl_joints ) {
+    if( link_names.size() < kdl_links || joint_names.size() < kdl_joints ) {
         use_names = false;
     } else {
         use_names = true;
@@ -133,7 +154,7 @@ bool idynSensorChain2kdlChain(iCub::iDyn::iDynChain & idynChain,iCub::iDyn::iDyn
             kdlChain.addSegment(kdlSegment);
     }
     
-    for(i=0;i<n_links;i++) 
+    for(unsigned i=0;i<n_links;i++)
     {
         if( i != sensor_link ) {
             //forgive him, as he does not know what is doing
@@ -358,7 +379,7 @@ bool idynVector2kdlVector(const yarp::sig::Vector & idynVector, KDL::Vector & kd
 void printKDLchain(std::string s,const KDL::Chain & kdlChain)
 {
     std::cout << s << std::endl;
-    for(int p=0;p < (int)kdlChain.getNrOfSegments();p++)
+    for(unsigned p=0;p < kdlChain.getNrOfSegments();p++)
     {
         std::cout << "Segment " << p << ":" << std::endl;
         KDL::Segment seg = kdlChain.getSegment(p);
@@ -403,7 +424,7 @@ yarp::sig::Matrix localSE3inv(const yarp::sig::Matrix &H, unsigned int verbose)
 }
 
 
-bool addBaseTransformation(const KDL::Chain & old_chain, KDL::Chain & new_chain, KDL::Frame H_new_old)
+bool addBaseTransformation(const KDL::Chain & old_chain, KDL::Chain & new_chain, KDL::Frame & H_new_old)
 {
     new_chain = KDL::Chain();
     for(unsigned int i=0;i<old_chain.getNrOfSegments();i++){

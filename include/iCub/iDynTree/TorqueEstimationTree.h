@@ -31,8 +31,11 @@ class TorqueEstimationTree : public DynTree
      * Constructor for TorqueEstimationTree
      *
      *
-     * @param urdf_filename
-     * @param verbose
+     * @param urdf_filename urdf filename
+     * @param dof_serialization dof serialization. Default empty vector
+     * @param ft_serialization force torque serialization. Default empty vector
+     * @param fixed_link name of the fixed link. Default empty string
+     * @param verbose verbosity level. Default 0
      */
     TorqueEstimationTree(std::string urdf_filename,
                          std::vector<std::string> dof_serialization=std::vector<std::string>(0),

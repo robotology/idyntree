@@ -15,6 +15,8 @@
 #include <kdl_format_io/urdf_import.hpp>
 #include <kdl_format_io/urdf_sensor_import.hpp>
 
+#include <yarp/os/Log.h>
+
 #include <vector>
 
 namespace iCub {
@@ -24,7 +26,8 @@ namespace iDynTree {
 TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
                                            std::vector<std::string> dof_serialization,
                                            std::vector<std::string> ft_serialization,
-                                           std::string fixed_link, unsigned int verbose)
+                                           std::string fixed_link,
+                                           unsigned int /*verbose*/)
 {
     yarp::sig::Vector q_min_yarp, q_max_yarp;
 
@@ -56,7 +59,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
     std::vector<KDL::Frame> child_sensor_transforms(ft_serialization.size());
     KDL::Frame kdlFrame;
 
-    for(int serialization_id=0; serialization_id < ft_serialization.size(); serialization_id++)
+    for(std::size_t serialization_id=0; serialization_id < ft_serialization.size(); serialization_id++)
     {
         if( 0 == ft_sensors.size() )
         {
@@ -64,10 +67,10 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
                 assert(false);
                 return;
         }
-        for(int ft_sens=0; ft_sens < ft_sensors.size(); ft_sens++ )
+        for(std::size_t ft_sens=0; ft_sens < ft_sensors.size(); ft_sens++ )
         {
             std::string ft_sens_name = ft_sensors[ft_sens].reference_joint;
-            int ft_sens_id;
+            std::size_t ft_sens_id;
 
             std::cout << "ft_sens" << ft_sens << std::endl;
 
@@ -111,19 +114,19 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
     if( dof_serialization.size() != 0 )
     {
         YARP_ASSERT(dof_serialization.size() == serial.getNrOfDOFs());
-        for(int dof=0; dof < dof_serialization.size(); dof++)
+        for(std::size_t dof=0; dof < dof_serialization.size(); dof++)
         {
             std::string dof_string = dof_serialization[dof];
             YARP_ASSERT(serial.getDOFID(dof_string) != -1);
             YARP_ASSERT(serial.getJunctionID(dof_string) != -1);
         }
 
-        for(int dof=0; dof < dof_serialization.size(); dof++)
+        for(std::size_t dof=0; dof < dof_serialization.size(); dof++)
         {
             std::string dof_string = dof_serialization[dof];
             std::cout << "[DEBUG] TorqueEstimationTree: Setting id of dof " << dof_string << " to " << dof << std::endl;
-            serial.setDOFNameID(dof_string,dof);
-            serial.setJunctionNameID(dof_string,dof);
+            serial.setDOFNameID(dof_string, (int)dof);
+            serial.setJunctionNameID(dof_string, (int)dof);
         }
     }
 
@@ -152,7 +155,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
     for(int dof = 0; dof < serial.getNrOfDOFs(); dof++ )
     {
         std::string dof_name = serial.getDOFName(dof);
-        for(int lim = 0; lim < joint_limits_names.size(); lim++ )
+        for(std::size_t lim = 0; lim < joint_limits_names.size(); lim++ )
         {
             if( joint_limits_names[lim] == dof_name )
             {
