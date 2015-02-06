@@ -77,3 +77,4 @@ int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
 }
 
 }
+
