@@ -1,7 +1,7 @@
 #include <kdl_codyco/utils.hpp>
 #include <kdl/rigidbodyinertia.hpp>
 #include <kdl/frames_io.hpp>
-#include <kdl_codyco/regressors/dataset/DynamicDatasetFile.hpp>
+#include <kdl_codyco/regressors/DynamicDatasetFile.hpp>
 #include <cstdlib>
 
 using namespace KDL;
