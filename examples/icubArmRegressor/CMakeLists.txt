@@ -18,6 +18,8 @@ SET(folder_source main.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${folder_source})
 
+message(STATUS "iDynTree_INCLUDE_DIRS is ${iDynTree_INCLUDE_DIRS}")
+
 INCLUDE_DIRECTORIES(${iDynTree_INCLUDE_DIRS}
                     ${YARP_INCLUDE_DIRS})
 

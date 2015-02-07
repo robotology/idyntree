@@ -14,7 +14,7 @@ add_executable(inversedynamics_different_loops_test inversedynamics_different_lo
 
 target_link_libraries(inverse_inertia_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io )
 target_link_libraries(regressor_utils_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io )
-target_link_libraries(subtree_regressor_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-model-io )
+target_link_libraries(subtree_regressor_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io )
 target_link_libraries(inversedynamics_regressor_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors  idyntree-model-io)
 target_link_libraries(inversedynamics_crba_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io)
 target_link_libraries(comjacobian_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io)

@@ -22,10 +22,10 @@ set(iDynTree_VERSION @iDynTree_VERSION@)
 
 set_and_check(iDynTree_INCLUDEDIR "@PACKAGE_iDynTree_INCLUDEDIR@")
 
-if(NOT TARGET iDynTree::idyntree)
+if(NOT TARGET iDynTree::idyntree-core)
   include("${CMAKE_CURRENT_LIST_DIR}/iDynTreeTargets.cmake")
 endif()
 
 # Compatibility
-set(iDynTree_LIBRARIES iDynTree::idyntree)
-set(iDynTree_INCLUDE_DIRS ${iDynTree_INCLUDEDIR})
+set(iDynTree_LIBRARIES iDynTree::idyntree-core;iDynTree::idyntree-regressors;iDynTree::idyntree-model-io;iDynTree::idyntree-yarp)
+set(iDynTree_INCLUDE_DIRS ${iDynTree_INCLUDEDIR} "@EIGEN3_INCLUDE_DIR@")

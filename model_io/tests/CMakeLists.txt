@@ -3,7 +3,7 @@ find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
 endif()
 
-include_directories(${Orocos-KDL_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS} )
+include_directories(${Orocos-KDL_INCLUDE_DIRS} ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 add_executable(check_urdf_import_export check_urdf_import_export.cpp)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/format_examples/urdf/black_icub.urdf ${CMAKE_CURRENT_BINARY_DIR}/black_icub.urdf)

@@ -55,3 +55,7 @@ install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
                                      NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 
 include(AddUninstallTarget)
+
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif(IDYNTREE_COMPILE_TESTS)

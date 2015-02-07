@@ -37,7 +37,8 @@ include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 add_library(idyntree-core ${KDL_CODYCO_SRC} ${DIRL_SRC} ${KDL_CODYCO_HPPS} ${KDL_CODYCO_PRIVATE_INCLUDES})
 
 target_include_directories(idyntree-core PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
+                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
+                                                ${EIGEN3_INCLUDE_DIR})
 
 target_link_libraries(idyntree-core ${orocos_kdl_LIBRARIES})
 
