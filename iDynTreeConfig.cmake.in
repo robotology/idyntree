@@ -12,10 +12,9 @@ if(NOT orocos_kdl_FOUND)
    endif(NOT Orocos-KDL_FOUND)
 endif(NOT orocos_kdl_FOUND)
 
-find_package(kdl_codyco REQUIRED)
-
-@FIND_KDL_CODYCO_IDYNTREE_CONFIG@
-@FIND_TINYXML_IDYNTREE_CONFIG@
+find_package(YARP QUIET)
+find_package(ICUB QUIET)
+find_package(TinyXML QUIET)
 
 set(iDynTree_VERSION @iDynTree_VERSION@)
 

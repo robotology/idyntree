@@ -21,7 +21,7 @@
 #include <kdl_codyco/regressors/torqueRegressor.hpp>
 #include <kdl_codyco/regressors/baseDynamicsRegressor.hpp>
 
-#include <kdl_codyco/regressors/dataset/DynamicSample.hpp>
+#include <kdl_codyco/regressors/DynamicSample.hpp>
 
 namespace KDL {
 namespace CoDyCo {

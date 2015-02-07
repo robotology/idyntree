@@ -8,7 +8,7 @@
 #define DIRL_ESSENTIAL_PARAMETERS_HPP
 
 #include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
-#include <kdl_codyco/regressors/dataset/DynamicDatasetInterfaces.hpp>
+#include <kdl_codyco/regressors/DynamicDatasetInterfaces.hpp>
 
 namespace KDL {
 namespace CoDyCo {

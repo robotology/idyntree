@@ -6,7 +6,7 @@
 #ifndef __KDL_CODYCO_REGRESSOR_DATASET_INTERFACES__
 #define __KDL_CODYCO_REGRESSOR_DATASET_INTERFACES__
 
-#include <kdl_codyco/regressors/dataset/DynamicSample.hpp>
+#include <kdl_codyco/regressors/DynamicSample.hpp>
 
 namespace KDL {
 namespace CoDyCo {
@@ -27,7 +27,7 @@ public:
      * @return number of the samples
      */
     virtual int getNrOfSamples() const = 0;
-    
+
     /**
      * It return the requested sample
      * @param[in] sample_nr the number of the requested sample
@@ -44,14 +44,14 @@ public:
 class IOnlineDynamicDataset {
 public:
     virtual ~IOnlineDynamicDataset() {}
-    
+
     /**
      * It return the new sample (blocking call)
      * @param[out] sample the requested sample
      * @return true if all went well, false otherwise
      */
     virtual bool getNewSample(DynamicSample & sample) = 0;
-    
+
     /**
      * Check if a new sample is available, or it is necessary to wait
      * @return true if a new sample is available, false if not
@@ -64,5 +64,6 @@ public:
 }
 
 }
+
 #endif
 //

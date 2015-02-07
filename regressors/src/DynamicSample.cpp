@@ -7,7 +7,7 @@
 #include <kdl/jntarray.hpp>
 #include <kdl/kinfam.hpp>
 
-#include <kdl_codyco/regressors/dataset/DynamicSample.hpp>
+#include <kdl_codyco/regressors/DynamicSample.hpp>
 
 namespace KDL {
 namespace CoDyCo {

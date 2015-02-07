@@ -35,24 +35,23 @@ endif(YARP_HAS_MATH_LIB)
 
 find_package(TinyXML REQUIRED)
 
-
-add_subdirectory(core)
-add_subdirectory(model_io)
-add_subdirectory(yarp)
-
-
 include(AddInstallRPATHSupport)
 add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
                           DEPENDS IDYNTREE_ENABLE_RPATH
                           USE_LINK_PATH)
 
+add_subdirectory(core)
+add_subdirectory(regressors)
+add_subdirectory(model_io)
+add_subdirectory(yarp)
+
 
 include(InstallBasicPackageFiles)
 install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
-                                        VERSION ${${VARS_PREFIX}_VERSION}
-                                        COMPATIBILITY SameMajorVersion
-                                        TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
-                                        NO_CHECK_REQUIRED_COMPONENTS_MACRO)
+                                     VERSION ${${VARS_PREFIX}_VERSION}
+                                     COMPATIBILITY SameMajorVersion
+                                     TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
+                                     NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 
 include(AddUninstallTarget)

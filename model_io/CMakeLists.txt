@@ -131,20 +131,6 @@ endif()
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
-
-find_package(YCM)
-
-if(YCM_FOUND)
-include(YCMDefaultDirs)
-
-include(AddInstallRPATHSupport)
-add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
-                          LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
-                          DEPENDS KDL_FORMAT_IO_ENABLE_RPATH
-                          USE_LINK_PATH)
-
-endif()
 
 option(ENABLE_IKIN "Enable support for exporting iKin chains" FALSE)
 
@@ -168,16 +154,6 @@ if(ENABLE_IKIN)
     target_link_libraries(idyntree-model-io idyntree-core ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
     set(KDL_FORMAT_IO_LIBRARIES  ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 endif()
-
-IF( ENABLE_URDF AND ENABLE_SYMORO_PAR )
-    add_executable(par2urdf src/utils/par2urdf.cpp)
-    target_link_libraries(par2urdf idyntree-model-io idyntree-core ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
-ENDIF()
-
-IF( ENABLE_URDF AND ENABLE_IKIN )
-    add_executable(urdf2dh src/utils/urdf2dh.cpp)
-    target_link_libraries(urdf2dh idyntree-model-io idyntree-core ${URDF_LIBS} ${orocos_kdl_LIBRARIES} ${YARP_LIBRARIES} ${ICUB_LIBRARIES})
-ENDIF()
 
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
 #target_link_libraries(check_kdl_export ${kdl_format_io_LIBRARIES} ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
@@ -209,16 +185,6 @@ install(TARGETS idyntree-model-io
         PUBLIC_HEADER DESTINATION "${${VARS_PREFIX}_INSTALL_INCLUDEDIR}/kdl_format_io" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-model-io)
-
-
-#install utilities
-if( ENABLE_URDF AND ENABLE_SYMORO_PAR )
-    install(TARGETS par2urdf DESTINATION bin)
-endif()
-
-if( ENABLE_URDF AND ENABLE_IKIN )
-    install(TARGETS urdf2dh DESTINATION bin)
-endif()
 
 
 if(IDYNTREE_COMPILE_TESTS)

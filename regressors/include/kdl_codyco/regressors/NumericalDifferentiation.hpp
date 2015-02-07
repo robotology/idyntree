@@ -6,7 +6,7 @@
 #ifndef __KDL_CODYCO_REGRESSOR_FIRST_ORDER_NUMERICAL_DIFFERENTIATION_FILE__
 #define __KDL_CODYCO_REGRESSOR_FIRST_ORDER_NUMERICAL_DIFFERENTIATION_FILE__
 
-#include <kdl_codyco/regressors/dataset/DynamicDatasetInterfaces.hpp>
+#include <kdl_codyco/regressors/DynamicDatasetInterfaces.hpp>
 
 namespace KDL::CoDyCo::Regressors {
     

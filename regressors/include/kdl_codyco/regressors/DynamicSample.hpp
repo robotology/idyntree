@@ -18,7 +18,6 @@
 namespace KDL {
 namespace CoDyCo {
 namespace Regressors {
-
 /**
  *
  * A generic interface to dynamic identification offline dataset
@@ -190,6 +189,5 @@ public:
 }
 
 }
-
 
 #endif
