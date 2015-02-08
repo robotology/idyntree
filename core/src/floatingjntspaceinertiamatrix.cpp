@@ -24,7 +24,7 @@
 
 namespace KDL
 {
-namespace CoDyCo 
+namespace CoDyCo
 {
     using namespace Eigen;
 
@@ -58,6 +58,7 @@ namespace CoDyCo
     void FloatingJntSpaceInertiaMatrix::resize(unsigned int newSize)
     {
         data.resize(newSize,newSize);
+        data.setZero();
     }
 
     double FloatingJntSpaceInertiaMatrix::operator()(unsigned int i,unsigned int j)const
@@ -79,7 +80,7 @@ namespace CoDyCo
     {
         return data.cols();
     }
-    
+
 
     void Add(const FloatingJntSpaceInertiaMatrix& src1,const FloatingJntSpaceInertiaMatrix& src2,FloatingJntSpaceInertiaMatrix& dest)
     {
@@ -107,11 +108,11 @@ namespace CoDyCo
         Eigen::Matrix<double,6,1> wrench_eigen;
         wrench_eigen = src.data.block(0,0,6,6)*toEigen(base_vel) + src.data.block(0,6,6,src.data.cols()-6)*ddq.data;
         base_wrench = toKDLWrench(wrench_eigen);
-        
+
         //Calculate output torque
         tau.data= src.data.block(6,0,src.rows()-6,6)*toEigen(base_vel) + src.data.block(6,6,src.data.rows()-6,src.data.cols()-6)*ddq.data;
     }
-    
+
     void SetToZero(FloatingJntSpaceInertiaMatrix& mat)
     {
         mat.data.setZero();
