@@ -23,11 +23,11 @@ add_executable(iDynTreeExternalWrenchesEstimationTest iDynTreeExternalWrenchesEs
 #add_executable(iDynTreeCOM iDynTreeCOM.cpp)
 
 
-target_link_libraries(iDynTreeJacobianTest ${ICUB_LIBRARIES} idyntree-yarp)
-target_link_libraries(iDynTreeRelativeJacobianTest ${ICUB_LIBRARIES} idyntree-yarp)
-target_link_libraries(iDynTreeWholeBodyFTsensorEstimateTest ${ICUB_LIBRARIES} ${orocos_kdl_LIBRARIES} idyntree-yarp)
-target_link_libraries(iDynTreeExportFixedJointsFrames ${ICUB_LIBRARIES} ${orocos_kdl_LIBRARIES} idyntree-yarp)
-target_link_libraries(iDynTreeExternalWrenchesEstimationTest idyntree-yarp ${ICUB_LIBRARIES} ${orocos_kdl_LIBRARIES} ${kdl_codyco_LIBRARIES} )
+target_link_libraries(iDynTreeJacobianTest idyntree-yarp)
+target_link_libraries(iDynTreeRelativeJacobianTest idyntree-yarp)
+target_link_libraries(iDynTreeWholeBodyFTsensorEstimateTest ${orocos_kdl_LIBRARIES} idyntree-yarp)
+target_link_libraries(iDynTreeExportFixedJointsFrames ${orocos_kdl_LIBRARIES} idyntree-yarp)
+target_link_libraries(iDynTreeExternalWrenchesEstimationTest idyntree-yarp ${orocos_kdl_LIBRARIES} ${kdl_codyco_LIBRARIES} )
 #target_link_libraries(iDynTreeCOM idyntree ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES} )
 
 add_test(NAME test_iDynTreeJacobianTest                COMMAND iDynTreeJacobianTest         icub.urdf)
