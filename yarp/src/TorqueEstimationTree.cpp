@@ -28,7 +28,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
 {
     yarp::sig::Vector q_min_yarp, q_max_yarp;
 
-    //Convert it to a KDL::Tree (this preserve all the frame of reference, is the conversion to URDF that changes them)
+    //Parse a KDL::Tree from URDF
     KDL::Tree icub_kdl;
 
     bool ret = kdl_format_io::treeFromUrdfFile(urdf_filename,icub_kdl);
@@ -39,7 +39,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
         return;
     }
 
-    //Construct F/T sensor name list
+    //Construct F/T sensor name list from URDF gazebo extensions
     std::vector<kdl_format_io::FTSensorData> ft_sensors;
     ret = kdl_format_io::ftSensorsFromUrdfFile(urdf_filename, ft_sensors);
 
@@ -52,6 +52,76 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
         return;
     }
 
+
+    int nrOfDofs = dof_serialization.size();
+    KDL::JntArray q_min_kdl(nrOfDofs), q_max_kdl(nrOfDofs);
+    std::vector<std::string> joint_limits_names;
+    kdl_format_io::jointPosLimitsFromUrdfFile(urdf_filename,joint_limits_names,q_min_kdl,q_max_kdl);
+
+
+    //Set joint limits
+    q_min_yarp.resize(nrOfDofs);
+    q_max_yarp.resize(nrOfDofs);
+
+    for(int dof = 0; dof < nrOfDofs; dof++ )
+    {
+        std::string dof_name = dof_serialization[dof];
+        for(int lim = 0; lim < joint_limits_names.size(); lim++ )
+        {
+            if( joint_limits_names[lim] == dof_name )
+            {
+                q_min_yarp[dof] = q_min_kdl(lim);
+                q_max_yarp[dof] = q_max_yarp(lim);
+                break;
+            }
+        }
+    }
+
+    this->TorqueEstimationConstructor(icub_kdl,ft_sensors,
+                                      dof_serialization,ft_serialization,
+                                      q_min_yarp,q_max_yarp,fixed_link,verbose);
+
+}
+
+TorqueEstimationTree::TorqueEstimationTree(KDL::Tree& icub_kdl,
+                                          std::vector< kdl_format_io::FTSensorData > ft_sensors,
+                                          std::vector< std::string > dof_serialization,
+                                          std::vector< std::string > ft_serialization,
+                                          yarp::sig::Vector& q_min, yarp::sig::Vector& q_max,
+                                          std::string fixed_link, unsigned int verbose)
+{
+    TorqueEstimationConstructor(icub_kdl,ft_sensors,dof_serialization,ft_serialization,q_min,q_max,fixed_link,verbose);
+}
+
+TorqueEstimationTree::TorqueEstimationTree(KDL::Tree& icub_kdl,
+                                          std::vector< kdl_format_io::FTSensorData > ft_sensors,
+                                          std::vector< std::string > ft_serialization,
+                                          std::string fixed_link, unsigned int verbose)
+{
+    yarp::sig::Vector q_max(icub_kdl.getNrOfJoints(),1000.0);
+    yarp::sig::Vector q_min(icub_kdl.getNrOfJoints(),-1000.0);
+
+    KDL::CoDyCo::TreeSerialization serial(icub_kdl);
+
+    std::vector<std::string> dof_serialization;
+
+    for(int i = 0; i < serial.getNrOfDOFs(); i++ )
+    {
+        dof_serialization.push_back(serial.getDOFName(i));
+    }
+
+    TorqueEstimationConstructor(icub_kdl,ft_sensors,dof_serialization,ft_serialization,q_min,q_max,fixed_link,verbose);
+}
+
+
+
+void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
+                                                  std::vector<kdl_format_io::FTSensorData> ft_sensors,
+                                                  std::vector<std::string> dof_serialization,
+                                                  std::vector<std::string> ft_serialization,
+                                                  yarp::sig::Vector & q_min_yarp, yarp::sig::Vector & q_max_yarp,
+                                                  std::string fixed_link, unsigned int verbose)
+{
     std::vector< std::string > ft_names(ft_serialization.size());
     std::vector<KDL::Frame> child_sensor_transforms(ft_serialization.size());
     KDL::Frame kdlFrame;
@@ -100,7 +170,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
         }
     }
 
-        std::cerr << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << this->getNrOfDOFs()
+        std::cerr << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << dof_serialization.size()
               << "dofs and " << ft_names.size() << " fts ( " << ft_serialization.size() <<  ") " << std::endl;
 
     //Define an explicit serialization of the links and the DOFs of the iCub
@@ -140,28 +210,6 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
               << "dofs and " << ft_names.size() << " fts ( " << ft_serialization.size() <<  ") " << std::endl;
 
     assert(this->getNrOfDOFs() > 0);
-
-    //Set joint limits
-    KDL::JntArray q_min_kdl(serial.getNrOfDOFs()), q_max_kdl(serial.getNrOfDOFs());
-    std::vector<std::string> joint_limits_names;
-    kdl_format_io::jointPosLimitsFromUrdfFile(urdf_filename,joint_limits_names,q_min_kdl,q_max_kdl);
-
-    q_min_yarp.resize(serial.getNrOfDOFs());
-    q_max_yarp.resize(serial.getNrOfDOFs());
-
-    for(int dof = 0; dof < serial.getNrOfDOFs(); dof++ )
-    {
-        std::string dof_name = serial.getDOFName(dof);
-        for(int lim = 0; lim < joint_limits_names.size(); lim++ )
-        {
-            if( joint_limits_names[lim] == dof_name )
-            {
-                q_min_yarp[dof] = q_min_kdl(lim);
-                q_max_yarp[dof] = q_max_yarp(lim);
-                break;
-            }
-        }
-    }
 
     this->setJointBoundMin(q_min_yarp);
     this->setJointBoundMax(q_max_yarp);

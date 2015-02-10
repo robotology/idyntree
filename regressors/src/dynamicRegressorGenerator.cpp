@@ -36,8 +36,7 @@ double random_double()
 }
 
 DynamicRegressorGenerator::DynamicRegressorGenerator(KDL::Tree & _tree, std::string kinematic_base,
-                                                      std::vector< std::string > ft_sensor_names,
-                                                      bool ft_sensor_offset,
+                                                      std::vector< std::string > ft_sensor_names,                                                      bool ft_sensor_offset,
                                                       std::vector< std::string > _fake_links_names,
                                                       KDL::CoDyCo::TreeSerialization serialization,
                                                       const bool _verbose
@@ -109,8 +108,8 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(KDL::Tree & _tree, std::str
     assert( ret >= 0 );
     if( ret < 0 ) { return; }
 
-    //ft_list = KDL::CoDyCo::FTSensorList(undirected_tree,ft_sensor_names);
-    p_ft_list = new KDL::CoDyCo::FTSensorList(undirected_tree,ft_sensor_names);
+    std::vector<bool> is_measure_direction_child_to_parent(ft_sensor_names.size(),true);
+    p_ft_list = new KDL::CoDyCo::FTSensorList(undirected_tree,ft_sensor_names,is_measure_direction_child_to_parent);
 
     //Check that verything ok
     assert( p_ft_list->getNrOfFTSensors() == NrOfFTSensors );

@@ -315,8 +315,7 @@ class DynTree  {
         void constructor(const KDL::Tree & _tree,
                          const std::vector<std::string> & joint_ft_sensor_names,
                          const std::string & imu_link_name,
-                         KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization(),
-                         std::vector<KDL::Frame> parent_sensor_transforms=std::vector<KDL::Frame>(0));
+                         KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization());
 
 
         /**

@@ -161,8 +161,7 @@ endif()
 #target_link_libraries(check_kdl_export ${kdl_format_io_LIBRARIES} ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
 
 set_target_properties( idyntree-model-io PROPERTIES
-  SOVERSION "${KDL_FORMAT_IO_VERSION_MAJOR}.${KDL_FORMAT_IO_VERSION_MINOR}"
-  VERSION "${KDL_FORMAT_IO_VERSION}"
+VERSION "${KDL_FORMAT_IO_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
   PUBLIC_HEADER "${KDL_FORMAT_IO_HPPS}"
   )

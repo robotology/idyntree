@@ -176,6 +176,25 @@ KDL::Tree getSnake()
     return snake;
 }
 
+std::vector<kdl_format_io::FTSensorData> get_default_ft_sensors(std::vector<std::string> ft_serialization)
+{
+    std::vector<kdl_format_io::FTSensorData> ret;
+    for(int i =0; i < ft_serialization.size(); i++ )
+    {
+        kdl_format_io::FTSensorData dat;
+        dat.reference_joint = ft_serialization[i];
+        dat.sensor_name = dat.reference_joint+"_sensor";
+        dat.measure_direction = kdl_format_io::FTSensorData::CHILD_TO_PARENT;
+        dat.frame = kdl_format_io::FTSensorData::CHILD_LINK_FRAME;
+        dat.sensor_pose = KDL::Frame::Identity();
+
+        ret.push_back(dat);
+    }
+
+    return ret;
+}
+
+
 int main()
 {
 
@@ -185,10 +204,14 @@ int main()
 
     //Creating the DynTree : kinematic/dynamics structure, force torque sensors, imu sensor
     KDL::Tree snake = getSnake();
-    std::vector<std::string> ft_sensors;
-    ft_sensors.push_back("snake_ft0");
+    std::vector<std::string> ft_serialization;
+    ft_serialization.push_back("snake_ft0");
     std::string imu_link = "snake_seg2";
-    iCub::iDynTree::DynTree snake_dyntree(snake,ft_sensors,imu_link);
+
+
+    std::vector<kdl_format_io::FTSensorData> ft_sensors = get_default_ft_sensors(ft_serialization);
+
+    iCub::iDynTree::TorqueEstimationTree snake_dyntree(snake,ft_sensors,ft_serialization,imu_link);
 
     //Assign random kinematic state
     set_random_IMU_q_dq_ddq(rng,snake_dyntree);
@@ -210,6 +233,9 @@ int main()
 
     input_contact_list.push_back(first_contact);
     input_contact_list.push_back(second_contact);
+
+    snake_dyntree.addSkinDynLibAlias("snake_seg1",DEFAULT_BODY_PART_ID,first_contact_link);
+    snake_dyntree.addSkinDynLibAlias("snake_seg7",DEFAULT_BODY_PART_ID,second_contact_link);
 
     snake_dyntree.setContacts(input_contact_list);
 

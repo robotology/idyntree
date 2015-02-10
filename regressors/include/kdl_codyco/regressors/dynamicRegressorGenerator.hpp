@@ -61,8 +61,7 @@ public:
     * @param serialization (optional) explicit serialization of link and joints of input KDL::Tree (default: KDL::CoDyCo::TreeSerialization(tree))
     */
     DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base="",
-                              std::vector< std::string > ft_sensor_names=std::vector< std::string >(0),
-                              bool ft_sensor_offset=true,
+                              std::vector< std::string > ft_sensor_names=std::vector< std::string >(0),                              bool ft_sensor_offset=true,
                               std::vector< std::string > fake_link_names=std::vector< std::string >(0),
                               KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization(),
                               const bool _verbose=false

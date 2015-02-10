@@ -83,8 +83,7 @@ DynTree::DynTree(const std::string urdf_file,
 void DynTree::constructor(const KDL::Tree & _tree,
                           const std::vector<std::string> & joint_sensor_names,
                           const std::string & imu_link_name,
-                          KDL::CoDyCo::TreeSerialization serialization,
-                          std::vector<KDL::Frame> child_sensor_transforms
+                          KDL::CoDyCo::TreeSerialization serialization
 )
 {
 int ret;
@@ -257,7 +256,8 @@ int DynTree::buildSubGraphStructure(const std::vector<std::string> & ft_names)
     }
 
     //Building Force/Torque sensors data structures
-    ft_list = KDL::CoDyCo::FTSensorList(undirected_tree,ft_names);
+    std::vector<bool> is_measure_direction_child_to_parent(ft_names.size(),true);
+    ft_list = KDL::CoDyCo::FTSensorList(undirected_tree,ft_names,is_measure_direction_child_to_parent);
 
     //The numbers of ids must be equal to the number of subgraphs
     if(next_id == NrOfDynamicSubGraphs) {
@@ -1054,7 +1054,7 @@ bool DynTree::setContacts(const iCub::skinDynLib::dynContactList & contacts_list
         int link_contact_index = getLinkFromSkinDynLibID(body_part,local_link_index);
         if( link_contact_index == -1 ) {
             #ifndef NDEBUG
-            std::cerr << "partition.getGlobalLinkIndex() returned -1 for body_part " << body_part << " local_link_index " << local_link_index << std::endl;
+            std::cerr << "getLinkFromSkinDynLibID() returned -1 for body_part " << body_part << " local_link_index " << local_link_index << std::endl;
             assert(false);
             #endif
             return false;

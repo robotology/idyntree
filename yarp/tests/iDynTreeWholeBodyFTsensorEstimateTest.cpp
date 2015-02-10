@@ -25,10 +25,20 @@
 
 #include <yarp/math/api.h>
 
+#include <kdl_format_io/urdf_export.hpp>
+#include <kdl_format_io/urdf_import.hpp>
+#include <kdl_format_io/urdf_sensor_import.hpp>
+
+
+#include <urdf_model/model.h>
+#include <urdf_parser/urdf_parser.h>
+
 #include <iCub/iDyn/iDyn.h>
 #include <iCub/iDyn/iDynBody.h>
 
-#include <iCub/iDynTree/iCubTree.h>
+#include <iCub/iDynTree/TorqueEstimationTree.h>
+
+#include <iCub/iDynTree/idyn2kdl_icub.h>
 
 using namespace std;
 using namespace yarp;
@@ -45,12 +55,170 @@ void set_random_vector(yarp::sig::Vector & vec, yarp::os::Random & rng, double c
     }
 }
 
+std::vector<std::string> get_iDyn_dof_serialization(KDL::Tree & icub_kdl)
+{
+    std::vector<std::string> ret;
+    KDL::CoDyCo::TreeSerialization serialization(icub_kdl);
+    for( int i =0; i < serialization.getNrOfDOFs(); i++ )
+    {
+        ret.push_back(serialization.getDOFName(i));
+    }
+    return ret;
+}
+
+std::vector<std::string> get_iDyn_ft_serialization()
+{
+    std::vector<std::string> ret;
+    ret.push_back("l_arm_ft_sensor");
+    ret.push_back("r_arm_ft_sensor");
+    ret.push_back("l_leg_ft_sensor");
+    ret.push_back("r_leg_ft_sensor");
+    return ret;
+}
+
+std::vector<std::string> get_iDyn_ft_frames()
+{
+    std::vector<std::string> ret;
+    ret.push_back("l_arm_ft_frame");
+    ret.push_back("r_arm_ft_frame");
+    ret.push_back("l_leg_ft_frame");
+    ret.push_back("r_leg_ft_frame");
+    return ret;
+}
+
+std::vector<kdl_format_io::FTSensorData> get_default_ft_sensors(std::vector<std::string> ft_serialization)
+{
+    std::vector<kdl_format_io::FTSensorData> ret;
+    for(int i =0; i < ft_serialization.size(); i++ )
+    {
+        kdl_format_io::FTSensorData dat;
+        dat.reference_joint = ft_serialization[i];
+        dat.sensor_name = dat.reference_joint+"_sensor";
+        dat.measure_direction = kdl_format_io::FTSensorData::CHILD_TO_PARENT;
+        dat.frame = kdl_format_io::FTSensorData::CHILD_LINK_FRAME;
+        dat.sensor_pose = KDL::Frame::Identity();
+
+        ret.push_back(dat);
+    }
+
+    return ret;
+}
+
+
+struct VectorSlice
+{
+    unsigned int firstIndex;
+    unsigned int length;
+};
+
+yarp::sig::Vector getSubVector(std::string part_name,
+                               std::map<std::string, VectorSlice> parts,
+                               const yarp::sig::Vector vec)
+{
+    yarp::sig::Vector ret;
+    VectorSlice part = parts[part_name];
+    ret.resize(part.length);
+    for(int i=0; i < part.length; i++)
+    {
+        ret[i] = vec[part.firstIndex+i];
+    }
+    return ret;
+}
+
+void setSubVector(std::string part_name,
+                               std::map<std::string, VectorSlice> parts,
+                               yarp::sig::Vector & big_vector,
+                               const yarp::sig::Vector & small_vector)
+{
+    VectorSlice part = parts[part_name];
+    YARP_ASSERT(small_vector.size() == part.length);
+    for(int i=0; i < part.length; i++)
+    {
+        big_vector[part.firstIndex+i] = small_vector[i];
+    }
+    return;
+}
+
+
+
+std::map<std::string, VectorSlice> get_iDyn_icub_parts()
+{
+     std::map<std::string, VectorSlice> ret;
+    VectorSlice torso_slice, head_slice, left_arm_slice, right_arm_slice, left_leg_slice, right_leg_slice;
+    left_leg_slice.firstIndex = 0;
+    left_leg_slice.length = 6;
+    ret["left_leg"] = left_leg_slice;
+    right_leg_slice.firstIndex = 6;
+    right_leg_slice.length = 6;
+    ret["right_leg"] = right_leg_slice;
+    torso_slice.firstIndex = 12;
+    torso_slice.length = 3;
+    ret["torso"] = torso_slice;
+    left_arm_slice.firstIndex  = 15;
+    left_arm_slice.length      = 7;
+    ret["left_arm"] = left_arm_slice;
+    right_arm_slice.firstIndex = 22;
+    right_arm_slice.length     = 7;
+    ret["right_arm"] = right_arm_slice;
+    head_slice.firstIndex = 29;
+    head_slice.length  = 3;
+    ret["head"] = head_slice;
+
+    return ret;
+}
+
+struct consistency_struct
+{
+    yarp::sig::Vector base_ft;
+};
+
+bool checkIdentity(KDL::Frame frame, double tol = 1e-4)
+{
+    for(int i=0; i < 3; i++ )
+    {
+       for(int j=0; j < 3; j++ )
+       {
+          double err;
+          if( i == j )
+          {
+              err = fabs(frame.M(i,j)-1);
+          }
+          else
+          {
+              err = fabs(frame.M(i,j));
+          }
+
+          if( err < tol ) return false;
+       }
+    }
+
+    for(int i =0; i < 3; i++ )
+    {
+        double err = fabs(frame.p[i]);
+        if( err < tol ) return false;
+    }
+
+    return true;
+}
+
+bool printAndCheckIdentity(iCub::iDynTree::TorqueEstimationTree & tree,
+                           std::string first_frame,
+                           std::string second_frame)
+{
+    int first_frame_id = tree.getFrameIndex(first_frame);
+    int second_frame_id = tree.getFrameIndex(second_frame);
+    KDL::Frame pos = tree.getPositionKDL(first_frame_id,second_frame_id);
+    std::cout << "Transformation between " << first_frame << " and " << second_frame << " : " << std::endl;
+    std::cout << pos << std::endl;
+    return checkIdentity(pos);
+}
+
 int main()
 {
     ////////////////////////////////////////////////////////////////////
     //// iDyn
     ////////////////////////////////////////////////////////////////////
-    double tol = 1e-6;
+    double tol = 1e-2;
 
 
     // declare an icub = head + left arm + right arm + torso + left leg + right leg
@@ -97,12 +265,12 @@ int main()
     //iDyn and iDynTree return the same results
     yarp::os::Random rng;
     rng.seed((int)yarp::os::Time::now());
-    set_random_vector(q_head,rng);
-    set_random_vector(q_larm,rng);
-    set_random_vector(q_rarm,rng);
-    set_random_vector(q_torso,rng);
-    set_random_vector(q_lleg,rng);
-    set_random_vector(q_rleg,rng);
+    set_random_vector(q_head,rng,1.0);
+    set_random_vector(q_larm,rng,1.0);
+    set_random_vector(q_rarm,rng,1.0);
+    set_random_vector(q_torso,rng,1.0);
+    set_random_vector(q_lleg,rng,1.0);
+    set_random_vector(q_rleg,rng,1.0);
 
     // here we set the inertial sensor (head) measurements
     Vector w0(3); Vector dw0(3); Vector ddp0(3);
@@ -185,59 +353,130 @@ int main()
         <<" right leg: " << icub.lowerTorso->getTorques("right_leg").toString() << endl;
 
 
-
     ////////////////////////////////////////////////////////////////////
-    //// iDyn
+    //// iDynTree
     ////////////////////////////////////////////////////////////////////
 
+        KDL::JntArray q_min,q_max;
+    std::vector<std::string> dof_serialization;
 
+    std::vector<consistency_struct> consistency_data(2);
+
+    for(int consistency_test=0; consistency_test <= 1; consistency_test++ )
+    {
+
+    //Do the tests two times: first (for consistency_test = 0) we export a kdl tree
+    // from iDyn, and we test it, then we export it to urdf (consistency_test = 1)
+    // and we reimport the exported urdf
+
+
+    std::string urdf_filename = "urdf_icub_test.urdf";
+            KDL::Tree icub_kdl;
+
+    if( consistency_test == 0 )
+    {
+        toKDL(icub,icub_kdl,q_min,q_max,iCub::iDynTree::IDYN_SERIALIZATION);
+
+        //Export to urdf for subsequent test
+        boost::shared_ptr<urdf::ModelInterface> icub_ptr(new urdf::ModelInterface);
+
+        if( ! kdl_format_io::treeToUrdfModel(icub_kdl,"test_icub",*icub_ptr) ) {
+            std::cerr << "Fatal error in KDL - URDF conversion" << std::endl;
+            return EXIT_FAILURE;
+        }
+
+        TiXmlDocument* xml_doc = urdf::exportURDF(icub_ptr);
+        if( ! xml_doc->SaveFile(urdf_filename) ) {
+            std::cerr << "Fatal error in URDF xml saving" << std::endl;
+        }
+
+        dof_serialization = get_iDyn_dof_serialization(icub_kdl);
+
+        //Check that the new ft sensor frame added are consistent with the old model (i.e.
+        // they should be solidal with the parent link of the FT sensor frame)
+
+
+
+    } else
+    {
+        if( ! kdl_format_io::treeFromUrdfFile(urdf_filename,icub_kdl) ) {
+            std::cerr << "Fatal error in URDF ---> conversion" << std::endl;
+            return EXIT_FAILURE;
+        }
+    }
 
     // declare an iCubTree
-    iCubTree_version_tag version;
-    version.head_version = ver.head_version;
-    version.legs_version = ver.legs_version;
-    //Feet ft are not present in iDyn
-    version.feet_ft = false;
 
+    //Convert the iDyn model to a KDL::Tree,
     //Use the same serialization as used in IDYN_SERIALIZATION
-    iCubTree icub_tree(version,IDYN_SERIALIZATION);
+    yarp::sig::Vector q_min_yarp(q_min.rows()), q_max_yarp(q_max.rows());
 
-    // just priting some information to see how the class works
-    cout<<endl
-        <<"iCub has many DOF: "<<endl
-        <<" - head      : "<<icub_tree.getNrOfDOFs("head")<<endl
-        <<" - left arm  : "<<icub_tree.getNrOfDOFs("left_arm")<<endl
-        <<" - right arm : "<<icub_tree.getNrOfDOFs("right_arm")<<endl
-        <<" - torso     : "<<icub_tree.getNrOfDOFs("torso")<<endl
-        <<" - left leg  : "<<icub_tree.getNrOfDOFs("left_leg")<<endl
-        <<" - right leg : "<<icub_tree.getNrOfDOFs("right_leg")<<endl<<endl;
 
+    std::vector<std::string> ft_serialization = get_iDyn_ft_serialization();
+    //std::vector<std::string> ft_frames        = get_iDyn_ft_frames();
+
+    std::map<std::string, VectorSlice> icub_parts = get_iDyn_icub_parts();
+    std::vector<kdl_format_io::FTSensorData> ft_sensors_data;
+
+    ft_sensors_data = get_default_ft_sensors(ft_serialization);
+
+    for(int i =0; i < q_min_yarp.size(); i++ )
+    {
+       q_min_yarp[i] = q_min(i);
+       q_max_yarp[i] = q_max(i);
+    }
+
+    TorqueEstimationTree icub_tree(icub_kdl,
+                                   ft_sensors_data,
+                                   dof_serialization,
+                                   ft_serialization,
+                                   q_min_yarp,
+                                   q_max_yarp,
+                                   "imu_frame",0);
+
+    if( consistency_test == 0 )
+    {
+        // if dealing with the model directly converted from iDyn, do
+        // a consistency check on ft sensor frames
+        printAndCheckIdentity(icub_tree,"l_arm_ft_frame","l_shoulder_3");
+        printAndCheckIdentity(icub_tree,"r_arm_ft_frame","r_shoulder_3");
+        printAndCheckIdentity(icub_tree,"l_leg_ft_frame","l_hip_2");
+        printAndCheckIdentity(icub_tree,"r_leg_ft_frame","r_hip_2");
+    }
 
     // here we set the joints position, velocity and acceleration
     // for all the limbs!
-    icub_tree.setAng(q_head,"head");
-    icub_tree.setAng(q_rarm,"right_arm");
-    icub_tree.setAng(q_larm,"left_arm");
-    //
-    icub_tree.setDAng(q_head,"head");
-    icub_tree.setDAng(q_rarm,"right_arm");
-    icub_tree.setDAng(q_larm,"left_arm");
-    //
-    icub_tree.setD2Ang(q_head,"head");
-    icub_tree.setD2Ang(q_rarm,"right_arm");
-    icub_tree.setD2Ang(q_larm,"left_arm");
-    //
-    icub_tree.setAng(q_torso,"torso");
-    icub_tree.setAng(q_rleg,"right_leg");
-    icub_tree.setAng(q_lleg,"left_leg");
-    //
-    icub_tree.setDAng(q_torso,"torso");
-    icub_tree.setDAng(q_rleg,"right_leg");
-    icub_tree.setDAng(q_lleg,"left_leg");
-    //
-    icub_tree.setD2Ang(q_torso,"torso");
-    icub_tree.setD2Ang(q_rleg,"right_leg");
-    icub_tree.setD2Ang(q_lleg,"left_leg");
+    yarp::sig::Vector qj_all(32,0.0), dqj_all(32,0.0), ddqj_all(32,0.0);
+
+
+    setSubVector("head",icub_parts,qj_all,q_head);
+    setSubVector("right_arm",icub_parts,qj_all,q_rarm);
+    setSubVector("left_arm",icub_parts,qj_all,q_larm);
+    setSubVector("torso",icub_parts,qj_all,q_torso);
+    setSubVector("right_leg",icub_parts,qj_all,q_rleg);
+    setSubVector("left_leg",icub_parts,qj_all,q_lleg);
+
+    icub_tree.setAng(qj_all);
+
+    setSubVector("head",icub_parts,dqj_all,q_head);
+    setSubVector("right_arm",icub_parts,dqj_all,q_rarm);
+    setSubVector("left_arm",icub_parts,dqj_all,q_larm);
+    setSubVector("torso",icub_parts,dqj_all,q_torso);
+    setSubVector("right_leg",icub_parts,dqj_all,q_rleg);
+    setSubVector("left_leg",icub_parts,dqj_all,q_lleg);
+
+    icub_tree.setDAng(dqj_all);
+
+    setSubVector("head",icub_parts,ddqj_all,q_head);
+    setSubVector("right_arm",icub_parts,ddqj_all,q_rarm);
+    setSubVector("left_arm",icub_parts,ddqj_all,q_larm);
+    setSubVector("torso",icub_parts,ddqj_all,q_torso);
+    setSubVector("right_leg",icub_parts,ddqj_all,q_rleg);
+    setSubVector("left_leg",icub_parts,ddqj_all,q_lleg);
+
+    icub_tree.setD2Ang(ddqj_all);
+
+
 
     // initialize the head with the kinematic measures retrieved
     // by the inertial sensor on the head
@@ -260,21 +499,28 @@ int main()
     cout<<endl
     <<"Estimate FT sensor measurements on upper body: "<<endl
     <<" left  : "<<left_arm_ft.toString()<<endl
+    <<" idyn  : "<<fm_sens_up.getCol(1).toString()<<endl
     <<" right : "<<right_arm_ft.toString()<<endl
+    <<" idyn  : "<<fm_sens_up.getCol(0).toString()<<endl
     <<endl
     <<"Estimate FT sensor measurements on lower body: "<<endl
     <<" left  : "<<left_leg_ft.toString()<<endl
+    <<" idyn  : "<<fm_sens_lo.getCol(1).toString()<<endl
     <<" right : "<<right_leg_ft.toString()<<endl
-    <<endl
+    <<" idyn  : "<<fm_sens_lo.getCol(0).toString()<<endl
+    <<endl;
 
-    <<"Torques in upper body" << endl
-    <<" head : " << icub_tree.getTorques("head").toString() << endl
-    <<" left arm: " << icub_tree.getTorques("left_arm").toString() << endl
-    <<" right arm: " << icub_tree.getTorques("right_arm").toString() << endl
+    consistency_data[consistency_test].base_ft = icub_tree.getBaseForceTorque();
+
+
+    cout<<"Torques in upper body" << endl
+    <<" head : " << getSubVector("head",icub_parts,icub_tree.getTorques()).toString() << endl
+    <<" left arm: " << getSubVector("left_arm",icub_parts,icub_tree.getTorques()).toString() << endl
+    <<" right arm: " << getSubVector("right_arm",icub_parts,icub_tree.getTorques()).toString() << endl
     <<"Torques in lower body" << endl
-    <<" torso : " << icub_tree.getTorques("torso").toString() << endl
-    <<" left leg: " << icub_tree.getTorques("left_leg").toString() << endl
-    <<" right leg: " << icub_tree.getTorques("right_leg").toString() << endl;
+    <<" torso : " <<  getSubVector("torso",icub_parts,icub_tree.getTorques()).toString() << endl
+    <<" left leg: " <<  getSubVector("left_leg",icub_parts,icub_tree.getTorques()).toString() << endl
+    <<" right leg: " <<  getSubVector("right_leg",icub_parts,icub_tree.getTorques()).toString() << endl;
 
 
 
@@ -285,50 +531,81 @@ int main()
     <<"Difference in estimate FT sensor measurements on lower body: "<<endl
     <<" left  : "<<(fm_sens_lo.getCol(1)+left_leg_ft).toString()<<endl
     <<" right : "<<(fm_sens_lo.getCol(0)+right_leg_ft).toString()<<endl
-    <<endl
+    <<endl;
 
 
+    cout
     <<"Difference in torques in upper body" << endl
-    <<" head : " << (icub.upperTorso->getTorques("head").subVector(0,2)-icub_tree.getTorques("head")).toString() << endl
-    <<" left arm: " << (icub.upperTorso->getTorques("left_arm")-icub_tree.getTorques("left_arm")).toString() << endl
-    <<" right arm: " << (icub.upperTorso->getTorques("right_arm")-icub_tree.getTorques("right_arm")).toString() << endl
+    <<" head : " << (icub.upperTorso->getTorques("head").subVector(0,2)-getSubVector("head",icub_parts,icub_tree.getTorques())).toString() << endl
+    <<" left arm: " << (icub.upperTorso->getTorques("left_arm")-getSubVector("left_arm",icub_parts,icub_tree.getTorques())).toString() << endl
+    <<" right arm: " << (icub.upperTorso->getTorques("right_arm")-getSubVector("right_arm",icub_parts,icub_tree.getTorques())).toString() << endl
     <<"Difference in torques in lower body" << endl
-    <<" torso : " << (icub.lowerTorso->getTorques("torso")-icub_tree.getTorques("torso")).toString() << endl
-    <<" left leg: " <<  (icub.lowerTorso->getTorques("left_leg")-icub_tree.getTorques("left_leg")).toString() << endl
-    <<" right leg: " <<  (icub.lowerTorso->getTorques("right_leg")-icub_tree.getTorques("right_leg")).toString() << endl
+    <<" torso : " << (icub.lowerTorso->getTorques("torso")-getSubVector("torso",icub_parts,icub_tree.getTorques())).toString() << endl
+    <<" left leg: " <<  (icub.lowerTorso->getTorques("left_leg")-getSubVector("left_leg",icub_parts,icub_tree.getTorques())).toString() << endl
+    <<" right leg: " <<  (icub.lowerTorso->getTorques("right_leg")-getSubVector("right_leg",icub_parts,icub_tree.getTorques())).toString() << endl;
 
-    <<"Difference in positions in upper body" << endl
-    <<" head : " << (icub.upperTorso->getAng("head").subVector(0,2)-icub_tree.getAng("head")).toString() << endl
-    <<" left arm: " << (icub.upperTorso->getAng("left_arm")-icub_tree.getAng("left_arm")).toString() << endl
-    <<" right arm: " << (icub.upperTorso->getAng("right_arm")-icub_tree.getAng("right_arm")).toString() << endl
+
+    yarp::sig::Vector head_trq = getSubVector("head",icub_parts,icub_tree.getTorques());
+    yarp::sig::Vector torso_trq = getSubVector("torso",icub_parts,icub_tree.getTorques());
+    yarp::sig::Vector left_arm_trq = getSubVector("left_arm",icub_parts,icub_tree.getTorques());
+    yarp::sig::Vector right_arm_trq = getSubVector("right_arm",icub_parts,icub_tree.getTorques());
+    yarp::sig::Vector left_leg_trq = getSubVector("left_leg",icub_parts,icub_tree.getTorques());
+    yarp::sig::Vector right_leg_trq = getSubVector("right_leg",icub_parts,icub_tree.getTorques());
+
+    yarp::sig::Vector head_pos = getSubVector("head",icub_parts,icub_tree.getAng());
+    yarp::sig::Vector torso_pos = getSubVector("torso",icub_parts,icub_tree.getAng());
+    yarp::sig::Vector left_arm_pos = getSubVector("left_arm",icub_parts,icub_tree.getAng());
+    yarp::sig::Vector right_arm_pos = getSubVector("right_arm",icub_parts,icub_tree.getAng());
+    yarp::sig::Vector left_leg_pos = getSubVector("left_leg",icub_parts,icub_tree.getAng());
+    yarp::sig::Vector right_leg_pos = getSubVector("right_leg",icub_parts,icub_tree.getAng());
+
+
+    cout <<"Difference in positions in upper body" << endl
+    <<" head : " << (icub.upperTorso->getAng("head").subVector(0,2)-head_pos).toString() << endl
+    <<" left arm: " << (icub.upperTorso->getAng("left_arm")-left_arm_pos).toString() << endl
+    <<" right arm: " << (icub.upperTorso->getAng("right_arm")-right_arm_pos).toString() << endl
     <<"Difference in positioon in lower body" << endl
-    <<" torso : " << (icub.lowerTorso->getAng("torso")-icub_tree.getAng("torso")).toString() << endl
-    <<" left leg: " <<  (icub.lowerTorso->getAng("left_leg")-icub_tree.getAng("left_leg")).toString() << endl
-    <<" right leg: " <<  (icub.lowerTorso->getAng("right_leg")-icub_tree.getAng("right_leg")).toString() << endl
+    <<" torso : " << (icub.lowerTorso->getAng("torso")-torso_pos).toString() << endl
+    <<" left leg: " <<  (icub.lowerTorso->getAng("left_leg")-left_leg_pos).toString() << endl
+    <<" right leg: " <<  (icub.lowerTorso->getAng("right_leg")-right_leg_pos).toString() << endl
 
     << "Difference in COM " << (com-icub_tree.getCOM()).toString() << std::endl
     << "Original COM " << com.toString() << std::endl
     << "iDynTree COM " << ((icub_tree.getCOM())).toString() << std::endl;
+
 
     if( norm(fm_sens_up.getCol(1) +left_arm_ft) > tol ) { return EXIT_FAILURE; }
     if( norm(fm_sens_up.getCol(0) +right_arm_ft) > tol ) { return EXIT_FAILURE; }
     if( norm((fm_sens_lo.getCol(1)+left_leg_ft)) > tol ) { return EXIT_FAILURE; }
     if( norm(fm_sens_lo.getCol(0)+right_leg_ft) > tol ) { return EXIT_FAILURE; }
 
-    if( norm(icub.upperTorso->getTorques("head").subVector(0,2)-icub_tree.getTorques("head")) > tol ) { return EXIT_FAILURE; }
-    if( norm(icub.upperTorso->getTorques("left_arm")-icub_tree.getTorques("left_arm")) > tol ) { return EXIT_FAILURE; }
-    if( norm(icub.upperTorso->getTorques("right_arm")-icub_tree.getTorques("right_arm")) > tol ) { return EXIT_FAILURE; }
-    if( norm(icub.lowerTorso->getTorques("left_leg")-icub_tree.getTorques("left_leg")) > tol ) { return EXIT_FAILURE; }
-    if( norm(icub.lowerTorso->getTorques("right_leg")-icub_tree.getTorques("right_leg")) > tol ) { return EXIT_FAILURE; }
-    if( norm(icub.upperTorso->getAng("head").subVector(0,2)-icub_tree.getAng("head")) > tol ) { return EXIT_FAILURE; }
 
-    if( norm(icub.upperTorso->getAng("left_arm")-icub_tree.getAng("left_arm")) > tol ) { return EXIT_FAILURE; }
-    if( norm(icub.upperTorso->getAng("right_arm")-icub_tree.getAng("right_arm")) > tol ) { return EXIT_FAILURE; }
-    if( norm(icub.lowerTorso->getAng("torso")-icub_tree.getAng("torso")) > tol ) { return EXIT_FAILURE; }
-    if( norm(icub.lowerTorso->getAng("left_leg")-icub_tree.getAng("left_leg")) > tol ) { return EXIT_FAILURE; }
-    if( norm(icub.lowerTorso->getAng("right_leg")-icub_tree.getAng("right_leg")) > tol ) { return EXIT_FAILURE; }
+    if( norm(icub.upperTorso->getTorques("head").subVector(0,2)-head_trq) > tol )
+    {
+        return EXIT_FAILURE;
+    }
+
+    if( norm(icub.upperTorso->getTorques("left_arm")-left_arm_trq) > tol ) { return EXIT_FAILURE; }
+    if( norm(icub.upperTorso->getTorques("right_arm")-right_arm_trq) > tol ) { return EXIT_FAILURE; }
+    if( norm(icub.lowerTorso->getTorques("left_leg")-left_leg_trq) > tol ) { return EXIT_FAILURE; }
+    if( norm(icub.lowerTorso->getTorques("right_leg")-right_leg_trq) > tol ) { return EXIT_FAILURE; }
+    //if( norm(icub.lowerTorso->getTorques("torso")-torso_trq) > tol ) { return EXIT_FAILURE; }
+
+    if( norm(icub.upperTorso->getAng("head").subVector(0,2)-head_pos) > tol ) { return EXIT_FAILURE; }
+    if( norm(icub.upperTorso->getAng("left_arm")-left_arm_pos) > tol ) { return EXIT_FAILURE; }
+    if( norm(icub.upperTorso->getAng("right_arm")-right_arm_pos) > tol ) { return EXIT_FAILURE; }
+    if( norm(icub.lowerTorso->getAng("torso")-torso_pos) > tol ) { return EXIT_FAILURE; }
+    if( norm(icub.lowerTorso->getAng("left_leg")-left_leg_pos) > tol ) { return EXIT_FAILURE; }
+    if( norm(icub.lowerTorso->getAng("right_leg")-right_leg_pos) > tol ) { return EXIT_FAILURE; }
 
     if( norm(com-icub_tree.getCOM()) > tol ) { return EXIT_FAILURE; }
+
+    }
+
+    //consistency tests between original and converted to urdf
+    std::cout << "Base force torque: " << std::endl;
+    std::cout << " original : " << consistency_data[0].base_ft.toString() << std::endl;
+    std::cout << " urdf     : " << consistency_data[1].base_ft.toString() << std::endl;
 
     return EXIT_SUCCESS;
 }

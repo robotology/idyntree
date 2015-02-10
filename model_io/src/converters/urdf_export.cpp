@@ -108,7 +108,10 @@ KDL::Frame getH_new_old(KDL::Segment seg)
  *          modified to comply to URDF constraints (frame origin on the joint axis)
  *          this matrix the transformation from the old frame to the new frame (H_new_old)
  */
-urdf::Joint toUrdf(const KDL::Joint & jnt, const KDL::Frame & frameToTip, const KDL::Frame & H_new_old_predecessor, KDL::Frame & H_new_old_successor)
+urdf::Joint toUrdf(const KDL::Joint & jnt,
+                   const KDL::Frame & frameToTip,
+                   const KDL::Frame & H_new_old_predecessor,
+                   KDL::Frame & H_new_old_successor)
 {
     //URDF constaints the successor link frame origin to lay on the axis
     //of the joint ( see : http://www.ros.org/wiki/urdf/XML/joint )

@@ -35,8 +35,8 @@ using namespace yarp::math;
  * @param kdlChain KDL::Chain object output
  * @param link_names vector of the names of the links
  * @param joint_names vector of the names of the joints
- * @param final_frame_name if specified, the HN transformation is explicitly added as a virtual fixed link 
- * @param initial_frame_name if specified, the H0 transformation is explicitly added as a virtual fixed link 
+ * @param final_frame_name if specified, the HN transformation is explicitly added as a virtual fixed link
+ * @param initial_frame_name if specified, the H0 transformation is explicitly added as a virtual fixed link
  * @return true if conversion was successful, false otherwise
  */
 bool idynChain2kdlChain(iCub::iDyn::iDynChain & idynChain,
@@ -52,15 +52,18 @@ bool idynChain2kdlChain(iCub::iDyn::iDynChain & idynChain,
  * If idynChain has N links, the create kdlChain has N+1 links, with the sensor link divided by the sensor in two semilinks
  * @param idynChain iCub::iDyn::iDynChain object input
  * @param kdlChain KDL::Chain object output
+ * @param H_sensor_child KDL::Frame representing ${}^sensor H_child$
  * @param link_names vector of the names of the links
  * @param joint_names vector of the names of the joints
- * @param final_frame_name if specified, the HN transformation is explicitly added as a virtual fixed link 
- * @param initial_frame_name if specified, the H0 transformation is explicitly added as a virtual fixed link 
+ * @param final_frame_name if specified, the HN transformation is explicitly added as a virtual fixed link
+ * @param initial_frame_name if specified, the H0 transformation is explicitly added as a virtual fixed link
+ * @param sensor_frame_name  if specified, the sensor frame is added as a "frame" (a link with zero mass)
  * @return true if conversion was successful, false otherwise
  */
 bool idynSensorChain2kdlChain(iCub::iDyn::iDynChain & idynChain,
                               iCub::iDyn::iDynInvSensor & idynSensor,
                               KDL::Chain & kdlChain, 
+                              KDL::Frame & H_sensor_child,
                               std::vector<std::string> link_names = std::vector<std::string>(0),
                               std::vector<std::string> joint_names = std::vector<std::string>(0),
                               std::string final_frame_name = "",
@@ -78,7 +81,7 @@ bool idynSensorChain2kdlChain(iCub::iDyn::iDynChain & idynChain,
  * @param kdlRigidBodyInertia KDL::RigidBodyInertia object output
  * @return true if conversion was successful, false otherwise
  */
-bool idynDynamicalParameters2kdlRigidBodyInertia(const double mass,const yarp::sig::Vector & rC,const yarp::sig::Matrix & I,KDL::RigidBodyInertia & kdlRigidBodyInertia);  
+bool idynDynamicalParameters2kdlRigidBodyInertia(const double mass,const yarp::sig::Vector & rC,const yarp::sig::Matrix & I,KDL::RigidBodyInertia & kdlRigidBodyInertia);
 
 /**
  * Convert a 3x3 yarp::sig::Matrix representing the Inertia matrix of the iDynLink object, to a KDL::RotationalInertia object
@@ -123,18 +126,18 @@ void printKDLchain(std::string s,const KDL::Chain & kldChain);
  * @param new_chain the output chain
  * @param H_new_old tranformation from the old base reference frame to the new one ({}^{new}H_old)
  * @return true if conversion was successful, false otherwise
- * 
- */ 
+ *
+ */
 bool addBaseTransformation(const KDL::Chain & old_chain, KDL::Chain & new_chain, KDL::Frame H_new_old);
 
 /**
 *
-* Returns the inverse of a 4 by 4 rototranslational matrix 
+* Returns the inverse of a 4 by 4 rototranslational matrix
 * @param H is the 4 by 4 rototranslational matrix.
-* @param verbose sets some verbosity.  
-* @return inverse of 4 by 4 rototranslational matrix. 
-*  
-* @note about 5 times faster than pinv() 
+* @param verbose sets some verbosity.
+* @return inverse of 4 by 4 rototranslational matrix.
+*
+* @note about 5 times faster than pinv()
 */
 yarp::sig::Matrix localSE3inv(const yarp::sig::Matrix &H, unsigned int verbose=0);
 
