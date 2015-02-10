@@ -7,27 +7,32 @@
 #ifndef IDYN2KDL_H
 #define IDYN2KDL_H
 
-#include <iCub/iDyn/iDyn.h>
-#include <yarp/os/all.h>
-#include <yarp/dev/all.h>
-#include <yarp/sig/all.h>
-#include <yarp/math/Math.h>
-#include <yarp/math/api.h>
-
-#include <iCub/ctrl/math.h>
-#include <iCub/ctrl/adaptWinPolyEstimator.h>
-#include <iCub/iDyn/iDynInv.h>
-#include <iCub/iDyn/iDynBody.h>
-#include <iCub/skinDynLib/skinContactList.h>
-
-#include <kdl/chain.hpp>
-#include <kdl/frames.hpp>
-#include <kdl/frames_io.hpp>
-#include <kdl/kinfam_io.hpp>
-
+#include <vector>
+#include <string>
 #include <cassert>
 
-using namespace yarp::math;
+namespace iCub {
+    namespace iDyn {
+        class iDynChain;
+        class iDynInvSensor;
+    }
+}
+
+namespace KDL {
+    class Chain;
+    class RigidBodyInertia;
+    class RotationalInertia;
+    class Frame;
+    class Rotation;
+    class Vector;
+}
+
+namespace yarp {
+    namespace sig {
+        class Vector;
+        class Matrix;
+    }
+}
 
 /**
  * Convert an iCub::iDyn::iDynChain object to a KDL::Chain object
@@ -62,7 +67,7 @@ bool idynChain2kdlChain(iCub::iDyn::iDynChain & idynChain,
  */
 bool idynSensorChain2kdlChain(iCub::iDyn::iDynChain & idynChain,
                               iCub::iDyn::iDynInvSensor & idynSensor,
-                              KDL::Chain & kdlChain, 
+                              KDL::Chain & kdlChain,
                               KDL::Frame & H_sensor_child,
                               std::vector<std::string> link_names = std::vector<std::string>(0),
                               std::vector<std::string> joint_names = std::vector<std::string>(0),
@@ -129,6 +134,7 @@ void printKDLchain(std::string s,const KDL::Chain & kldChain);
  *
  */
 bool addBaseTransformation(const KDL::Chain & old_chain, KDL::Chain & new_chain, KDL::Frame H_new_old);
+
 
 /**
 *

@@ -5,6 +5,30 @@
  */
 
 #include <iCub/iDynTree/iDyn2KDL.h>
+#include <iCub/iDyn/iDyn.h>
+#include <kdl/frames.hpp>
+#include <kdl/chain.hpp>
+
+#include <iCub/iDyn/iDyn.h>
+#include <yarp/os/all.h>
+#include <yarp/dev/all.h>
+#include <yarp/sig/all.h>
+
+#include <iCub/ctrl/math.h>
+#include <iCub/ctrl/adaptWinPolyEstimator.h>
+#include <iCub/iDyn/iDynInv.h>
+#include <iCub/iDyn/iDynBody.h>
+#include <iCub/skinDynLib/skinContactList.h>
+
+#include <kdl/chain.hpp>
+#include <kdl/frames.hpp>
+#include <kdl/frames_io.hpp>
+#include <kdl/kinfam_io.hpp>
+
+#include <yarp/math/Math.h>
+#include <yarp/math/api.h>
+
+using namespace yarp::math;
 
 bool idynChain2kdlChain(iCub::iDyn::iDynChain & idynChain,KDL::Chain & kdlChain,std::vector<std::string> link_names,std::vector<std::string> joint_names, std::string final_frame_name, std::string initial_frame_name, int max_links)
 {

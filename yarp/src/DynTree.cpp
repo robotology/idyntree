@@ -86,7 +86,7 @@ void DynTree::constructor(const KDL::Tree & _tree,
                           KDL::CoDyCo::TreeSerialization serialization
 )
 {
-int ret;
+    int ret;
 
     undirected_tree = KDL::CoDyCo::UndirectedTree(_tree,serialization);
 
@@ -100,7 +100,7 @@ int ret;
     NrOfFTSensors = joint_sensor_names.size();
     NrOfDynamicSubGraphs = NrOfFTSensors + 1;
 
-    assert((int)undirected_tree.getNrOfDOFs() == NrOfDOFs);
+    assert(undirected_tree.getNrOfDOFs() == NrOfDOFs);
     //Remve assertion for robot without a proper fixed base
     //assert((int)undirected_tree.getNrOfLinks() == NrOfLinks);
 
@@ -172,7 +172,7 @@ int ret;
     correctly_configure = true;
 }
 
-DynTree::~DynTree() { } ;
+DynTree::~DynTree() { }
 
 double DynTree::setAng(const double q_in, const int i)
 {
@@ -213,7 +213,7 @@ int DynTree::buildSubGraphStructure(const std::vector<std::string> & ft_names)
 
     int next_id = 0;
 
-    for(int i=0; i < (int)dynamic_traversal.getNrOfVisitedLinks(); i++) {
+    for(int i=0; i < dynamic_traversal.getNrOfVisitedLinks(); i++) {
 
         KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.getOrderedLink(i);
         int link_nmbr = link_it->getLinkIndex();
@@ -293,9 +293,9 @@ int DynTree::getLinkFromSkinDynLibID(int body_part, int link)
 
 void DynTree::buildAb_contacts()
 {
-    #ifndef NDEBUG
-    bool extreme_verbose = false;
-    #endif
+//    #ifndef NDEBUG
+//    bool extreme_verbose = false;
+//    #endif
     //First calculate the known terms b related to inertial, gravitational and
     //measured F/T
 
@@ -788,11 +788,11 @@ void DynTree::setAllConstraints(bool _constrained)
 {
     if( _constrained ) {
         //all joints are now not constrained
-        for(int i=0; i < (int)constrained.size(); i++ ) constrained[i] = false;
+        for(size_t i=0; i < constrained.size(); i++ ) constrained[i] = false;
         constrained_count = 0;
     } else {
         //all joints are now constrained
-        for(int i=0; i < (int)constrained.size(); i++ ) constrained[i] = true;
+        for(size_t i=0; i < constrained.size(); i++ ) constrained[i] = true;
         constrained_count = constrained.size();
     }
 }
@@ -1164,27 +1164,27 @@ void pseudoInverse(const Eigen::Matrix<double, 6, 6+6>& A,
                                                         double tol,
                                                          Eigen::Matrix<double, 6+6, 6>& Apinv)
 {
-            using namespace Eigen;
+    using namespace Eigen;
 
-            int m = A.rows(), n = A.cols(), k = m < n ? m : n;
-            Eigen::JacobiSVD< Eigen::Matrix<double, 6, 6+6> > svd(A,Eigen::ComputeFullU|Eigen::ComputeFullV);
-            const JacobiSVD< Eigen::Matrix<double, 6, 6+6> >::SingularValuesType& singularValues = svd.singularValues();
-            Eigen::Matrix<double, 12, 6> invSinValues;
-            invSinValues.setZero();
-            for (int idx = 0; idx < singularValues.size(); idx++)
-            {
-                if( idx < singularValues.size() )
-                {
-                    invSinValues(idx,idx) = tol > 0 && singularValues(idx) > tol ? 1.0 / singularValues(idx) : 0.0;
-                }
-            }
-            //std::cout << "singularValues: " << singularValues << std::endl;
-            //std::cout << "invSinValues : " << invSinValues << std::endl;
-            Eigen::Matrix<double, 12, 12> V = svd.matrixV();
-            Eigen::Matrix<double, 6, 6> U = svd.matrixU();
-            //std::cout << "V " << V << std::endl;
-            //std::cout << "U " << U << std::endl;
-            Apinv =  V * invSinValues * U.transpose(); // damped pseudoinverse
+//    int m = A.rows(), n = A.cols(), k = m < n ? m : n;
+    Eigen::JacobiSVD< Eigen::Matrix<double, 6, 6+6> > svd(A,Eigen::ComputeFullU|Eigen::ComputeFullV);
+    const JacobiSVD< Eigen::Matrix<double, 6, 6+6> >::SingularValuesType& singularValues = svd.singularValues();
+    Eigen::Matrix<double, 12, 6> invSinValues;
+    invSinValues.setZero();
+    for (int idx = 0; idx < singularValues.size(); idx++)
+    {
+        if( idx < singularValues.size() )
+        {
+            invSinValues(idx,idx) = tol > 0 && singularValues(idx) > tol ? 1.0 / singularValues(idx) : 0.0;
+        }
+    }
+    //std::cout << "singularValues: " << singularValues << std::endl;
+    //std::cout << "invSinValues : " << invSinValues << std::endl;
+    Eigen::Matrix<double, 12, 12> V = svd.matrixV();
+    Eigen::Matrix<double, 6, 6> U = svd.matrixU();
+    //std::cout << "V " << V << std::endl;
+    //std::cout << "U " << U << std::endl;
+    Apinv =  V * invSinValues * U.transpose(); // damped pseudoinverse
 }
 
 bool DynTree::estimateDoubleSupportContactForce(int left_foot_id, int right_foot_id)
@@ -1987,7 +1987,7 @@ bool DynTree::getJunctionName(const int junction_index, std::string & junction_n
 }
 
 // \todo TODO FIXME implement this method
-bool DynTree::getFTSensorName(const int junction_index, std::string & junction_name)
+bool DynTree::getFTSensorName(const int /*junction_index*/, std::string & /*junction_name*/)
 {
     return false;
 }
@@ -2012,7 +2012,7 @@ int DynTree::getIMUIndex(const std::string & imu_name)
 }
 
 // \todo TODO FIXME implement this method
-bool DynTree::getIMUName(const int junction_index, std::string & junction_name)
+bool DynTree::getIMUName(const int /*junction_index*/, std::string & /*junction_name*/)
 {
     return false;
 }

@@ -90,6 +90,7 @@
 #include <kdl/tree.hpp>
 
 #include <iostream>
+#include <vector>
 #include <map>
 
 
@@ -150,10 +151,10 @@ class DynTree  {
         KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization and the TreePartition */
 
         //Violating DRY principle, but for code clarity
-        int NrOfDOFs;
-        int NrOfLinks;
-        int NrOfFTSensors;
-        int NrOfDynamicSubGraphs;
+        unsigned NrOfDOFs;
+        unsigned NrOfLinks;
+        unsigned NrOfFTSensors;
+        unsigned NrOfDynamicSubGraphs;
 
         //state of the robot
 
@@ -178,7 +179,7 @@ class DynTree  {
         //joint torque limits
         KDL::JntArray tau_max;
 
-        int constrained_count; /**< the number of DOFs that are constrained */
+        unsigned constrained_count; /**< the number of DOFs that are constrained */
 
         double setAng(const double q, const int i);
 
@@ -326,7 +327,6 @@ class DynTree  {
          *        be considered as FT sensors
          * @param imu_link_name name of the link considered the IMU sensor
          * @param serialization (optional) an explicit serialization of tree links and DOFs
-         * @param partition (optional) a partition of the tree (division of the links and DOFs in non-overlapping sets)
          *
          */
         DynTree(const KDL::Tree & _tree,
@@ -342,7 +342,6 @@ class DynTree  {
          *        be considered as FT sensors
          * @param imu_link_name name of the link considered the IMU sensor
          * @param serialization (optional) an explicit serialization of tree links and DOFs
-         * @param partition (optional) a partition of the tree (division of the links and DOFs in non-overlapping sets)
          *
          */
         DynTree(const std::string urdf_file,
@@ -481,6 +480,11 @@ class DynTree  {
         KDL::Frame getWorldBasePoseKDL();
 
 
+        /**
+        * Set joint positions in the specified part
+        * @param _q vector of joints position
+        * @return the actual joint positions, considering min/max values
+        */
         virtual yarp::sig::Vector setAng(const yarp::sig::Vector & _q) ;
 
         virtual bool setAngKDL(const KDL::JntArray & _q) ;
@@ -523,7 +527,7 @@ class DynTree  {
 
 
         /**
-        * Get joint speeds
+        * Get joint accelerations
         * @return vector of joint accelerations
         */
         virtual yarp::sig::Vector getD2Ang() const;

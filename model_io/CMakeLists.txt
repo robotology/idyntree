@@ -142,7 +142,7 @@ add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_
 target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES} iKin)
 set(KDL_FORMAT_IO_LIBRARIES idyntree-core ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 
-if(ENABLE_IKIN)
+if(IDYNTREE_USE_ICUB_MAIN)
     find_package(YARP REQUIRED)
     find_package(ICUB REQUIRED)
     INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})

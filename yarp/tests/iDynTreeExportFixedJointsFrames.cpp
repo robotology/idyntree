@@ -23,6 +23,8 @@
 #include <yarp/os/Time.h>
 #include <yarp/os/Random.h>
 
+#include <yarp/os/Log.h>
+
 #include <yarp/math/api.h>
 
 #include <kdl_format_io/urdf_export.hpp>

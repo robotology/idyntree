@@ -40,6 +40,8 @@
 
 #include <iCub/iDynTree/idyn2kdl_icub.h>
 
+#include <yarp/os/Log.h>
+
 using namespace std;
 using namespace yarp;
 using namespace yarp::sig;

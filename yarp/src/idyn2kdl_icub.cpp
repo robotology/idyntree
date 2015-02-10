@@ -6,6 +6,9 @@
 
 
 #include <iCub/iDynTree/idyn2kdl_icub.h>
+#include <yarp/math/Math.h>
+
+using yarp::math::cat;
 
 template<typename T, size_t N>
 T * end(T (&ra)[N]) {
@@ -29,7 +32,7 @@ bool names2links_joints(const std::vector<std::string> names,std::vector<std::st
 // For more informations on this values, check
 // https://github.com/robotology/codyco-modules/issues/49
 const double root_link_weight = 4.72;
-const double head_weight      = 3.0;
+//const double head_weight      = 3.0;
 
 KDL::RotationalInertia operator-(const KDL::RotationalInertia& Ia, const KDL::RotationalInertia& Ib){
     KDL::RotationalInertia result;
@@ -64,7 +67,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
            iCub::iDynTree::iCubTree_serialization_tag serial,
            bool ft_foot,
            bool add_root_weight,
-           bool debug)
+           bool /*debug*/)
 {
     //sstd::cout << "toKDL(..) function called" << std::endl;
 
@@ -314,9 +317,8 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     q_min.resize(q_min_yarp.size());
     q_max.resize(q_max_yarp.size());
 
-    int jjj;
-    for(jjj=0; jjj<(int)q_min.rows(); jjj++) { q_min(jjj) = q_min_yarp(jjj); }
-    for(jjj=0; jjj<(int)q_max.rows(); jjj++) { q_max(jjj) = q_max_yarp(jjj); }
+    for(unsigned jjj=0; jjj<q_min.rows(); jjj++) { q_min(jjj) = q_min_yarp(jjj); }
+    for(unsigned jjj=0; jjj<q_max.rows(); jjj++) { q_max(jjj) = q_max_yarp(jjj); }
 
     //REP 120
 
