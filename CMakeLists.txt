@@ -46,6 +46,8 @@ add_subdirectory(regressors)
 add_subdirectory(model_io)
 add_subdirectory(yarp)
 
+# compile simple command line tools
+add_subdirectory(tools)
 
 include(InstallBasicPackageFiles)
 install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}

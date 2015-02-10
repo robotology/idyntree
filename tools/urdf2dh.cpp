@@ -39,8 +39,6 @@
 #include <fstream>
 
 #include <ctime>
-#include <boost/concept_check.hpp>
-
 #include "kdl_format_io/iKin_export.hpp"
 
 #include "kdl_format_io/urdf_import.hpp"

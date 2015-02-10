@@ -15,8 +15,6 @@ option(ENABLE_URDF "Enable support for URDF input/output" TRUE)
 ## SYMORO par file format support
 option(ENABLE_SYMORO_PAR "Enable support for SYMORO par input" TRUE)
 
-## KDL::CoDyCo::TreeSerialization support
-option(ENABLE_SERIALIZATION_IO "Enable support for parsing and writing serialization (need kdl_codyco)" TRUE)
 
 option(KDL_FORMAT_IO_ENABLE_RPATH "Enable RPATH for the library" TRUE)
 mark_as_advanced(KDL_FORMAT_IO_ENABLE_RPATH)
@@ -75,12 +73,9 @@ IF( ENABLE_URDF )
     ENDIF()
 ENDIF()
 
-IF(ENABLE_SERIALIZATION_IO)
-         include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
-         set(KDL_FORMAT_IO_INCLUDE_DIRS ${KDL_FORMAT_IO_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
-         link_directories(${kdl_codyco_LIBRARY_DIRS})
-         set(KDL_FORMAT_IO_LIBRARY_DIRS ${KDL_FORMAT_IO_LIBRARY_DIRS} ${kdl_codyco_LIBRARY_DIRS})
-ENDIF()
+include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
+set(KDL_FORMAT_IO_INCLUDE_DIRS ${KDL_FORMAT_IO_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
+link_directories(${kdl_codyco_LIBRARY_DIRS})
 
 include_directories(include)
 
@@ -102,6 +97,7 @@ if(ENABLE_URDF)
     set(URDF_HPPS include/kdl_format_io/urdf_import.hpp
                   include/kdl_format_io/urdf_export.hpp
                   include/kdl_format_io/urdf_sensor_import.hpp)
+
     set(URDF_LIBS ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
 endIF()
 
@@ -118,7 +114,13 @@ if(ENABLE_SYMORO_PAR)
     endif()
 endif()
 
-set(KDL_FORMAT_IO_HPPS ${SYMORO_PAR_HPPS} ${URDF_HPPS})
+if(IDYNTREE_USE_ICUB_MAIN)
+  set(IKIN_HPPS include/kdl_format_io/iKin_export.hpp)
+  set(IKIN_SRCS src/converters/iKin_export.cpp)
+endif()
+
+
+set(KDL_FORMAT_IO_HPPS ${SYMORO_PAR_HPPS} ${URDF_HPPS} ${IKIN_HPPS})
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
@@ -134,27 +136,17 @@ get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DI
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 
-option(ENABLE_IKIN "Enable support for exporting iKin chains" FALSE)
-
-if(ENABLE_IKIN)
-  set(IKIN_SRCS src/converters/iKin_export.cpp)
-endif()
 
 add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS} ${IKIN_SRCS})
 
-IF(ENABLE_SERIALIZATION_IO)
-    target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES})
-    set(KDL_FORMAT_IO_LIBRARIES idyntree-core ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
-ELSE()
-    target_link_libraries(idyntree-model-io ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
-    set(KDL_FORMAT_IO_LIBRARIES ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
-ENDIF()
+target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES} iKin)
+set(KDL_FORMAT_IO_LIBRARIES idyntree-core ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 
 if(ENABLE_IKIN)
     find_package(YARP REQUIRED)
     find_package(ICUB REQUIRED)
-    target_link_libraries(idyntree-model-io idyntree-core ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
-    set(KDL_FORMAT_IO_LIBRARIES  ${YARP_LIBRARIES} ${ICUB_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+    INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+    target_link_libraries(idyntree-model-io idyntree-core ${YARP_LIBRARIES} iKin ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
 endif()
 
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
