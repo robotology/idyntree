@@ -11,7 +11,7 @@ set (CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
 #########################################################################
 # Turn on testing.
-option(IDYNTREE_COMPILE_TESTS "Compile iDynTree tests" TRUE)
+option(IDYNTREE_COMPILE_TESTS "Compile iDynTree tests" FALSE)
 if(IDYNTREE_COMPILE_TESTS)
    enable_testing()
 endif()
