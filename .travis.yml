@@ -53,10 +53,11 @@ before_script:
   - cd idyntree
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_BUILD_TESTS:BOOL=ON  -DSTANDARD_FIND_MODULE_DEBUG:BOOL=ON ..
+  - cmake -DCMAKE_BUILD_TYPE=${IDYNTREE_TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON  -DSTANDARD_FIND_MODULE_DEBUG:BOOL=ON ..
 
 script:
   - make
+  - make test
   - sudo make install
   - ctest -V
 
