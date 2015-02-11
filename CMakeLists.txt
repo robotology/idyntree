@@ -21,9 +21,11 @@ message(${CMAKE_MODULE_PATH})
 #Use options specified in iDynTreeOptions.cmake file
 include(iDynTreeOptions)
 
+
 # Find dependecies
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
+include(OrocosKDLFindLogic)
 find_package(orocos_kdl REQUIRED)
 find_package(Eigen3 REQUIRED)
 
