@@ -1,0 +1,11 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: kdl_codyco
+Description: Orocos Kinematics and Dynamics Library extensions for the CoDyCo project
+Requires: 
+Version: @KDL_CODYCO_VERSION@
+Libs: -L${libdir} -lkdl_codyco
+Cflags: -I${includedir} @KDL_CODYCO_CFLAGS@
+

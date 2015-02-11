@@ -1,0 +1,30 @@
+# Locate kdl_format_io install directory
+
+# This module defines
+# kdl_format_io_VERSION_MAJOR
+# kdl_format_io_VERSION_MINOR
+# kdl_format_io_VERSION_PATCH
+# kdl_format_io_INCLUDE_DIRS
+# kdl_format_io_LIBRARIES
+# kdl_format_io_FOUND, is set to true
+
+
+if(NOT kdl_format_io_FOUND)
+  message( "Looking for KDL in: @CMAKE_INSTALL_PREFIX@")
+
+  # Version
+  set(kdl_format_io_VERSION "@KDL_FORMAT_IO_VERSION@")
+  set(kdl_format_io_VERSION_MAJOR "@KDL_FORMAT_IO_VERSION_MAJOR@")
+  set(kdl_format_io_VERSION_MINOR "@KDL_FORMAT_IO_VERSION_MINOR@")
+  set(kdl_format_io_VERSION_PATCH "@KDL_FORMAT_IO_VERSION_PATCH@")
+  set(kdl_format_io_VERSION_TWEAK "")
+
+  set(kdl_format_io_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include" "@KDL_FORMAT_IO_INCLUDE_DIRS@")
+  set(kdl_format_io_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib" "@KDL_FORMAT_IO_LIBRARY_DIRS@")
+  set(kdl_format_io_LIBRARIES kdl-format-io "@KDL_FORMAT_IO_LIBRARIES@")
+  include("@CMAKE_INSTALL_PREFIX@/share/kdl_format_io/kdl_format_io-target.cmake")
+  set(kdl_format_io_FOUND TRUE)
+
+endif(NOT kdl_format_io_FOUND)
+
+
