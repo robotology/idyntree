@@ -15,40 +15,6 @@ option(ENABLE_URDF "Enable support for URDF input/output" TRUE)
 ## SYMORO par file format support
 option(ENABLE_SYMORO_PAR "Enable support for SYMORO par input" TRUE)
 
-
-option(KDL_FORMAT_IO_ENABLE_RPATH "Enable RPATH for the library" TRUE)
-mark_as_advanced(KDL_FORMAT_IO_ENABLE_RPATH)
-
-find_package(orocos_kdl 1.2.3 QUIET)
-if (NOT orocos_kdl_FOUND)
-    SET(OROCOS_KDL_OLDVERSION On)
-    find_package(orocos_kdl)
-endif(NOT orocos_kdl_FOUND)
-
-#support also for the old version of kdl cmake package
-if(NOT orocos_kdl_FOUND)
-   find_package(Orocos-KDL)
-   if(NOT Orocos-KDL_FOUND)
-      message(WARNING "KDL not found: neither orocos_kdl or Orocos-KDL cmake packages are available")
-   else(NOT Orocos-KDL_FOUND)
-      set(orocos_kdl_INCLUDE_DIRS ${Orocos-KDL_INCLUDE_DIRS})
-      set(orocos_kdl_LIBRARY_DIRS ${Orocos-KDL_LIBRARY_DIRS})
-      set(orocos_kdl_LIBRARIES ${Orocos-KDL_LIBRARIES})
-      set(orocos_kdl_FOUND true)
-      set(orocos_kdl_VERSION ${Orocos-KDL_VERSION})
-      set(orocos_kdl_VERSION_MAJOR ${Orocos-KDL_VERSION_MAJOR})
-      set(orocos_kdl_VERSION_MINOR ${Orocos-KDL_VERSION_MINOR})
-      set(orocos_kdl_VERSION_PATCH ${Orocos-KDL_VERSION_PATCH})
-   endif(NOT Orocos-KDL_FOUND)
-endif(NOT orocos_kdl_FOUND)
-
-add_definitions(-DOROCOS_KDL_VERSION_MAJOR=${orocos_kdl_VERSION_MAJOR})
-add_definitions(-DOROCOS_KDL_VERSION_MINOR=${orocos_kdl_VERSION_MINOR})
-add_definitions(-DOROCOS_KDL_VERSION_PATCH=${orocos_kdl_VERSION_PATCH})
-
-include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS})
-set(KDL_FORMAT_IO_INCLUDE_DIRS "${KDL_FORMAT_IO_INCLUDE_DIRS}" ${orocos_kdl_INCLUDE_DIRS})
-
 IF( ENABLE_URDF )
     find_package(TinyXML)
     IF( NOT TinyXML_FOUND )
@@ -73,23 +39,18 @@ IF( ENABLE_URDF )
     ENDIF()
 ENDIF()
 
-include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
-set(KDL_FORMAT_IO_INCLUDE_DIRS ${KDL_FORMAT_IO_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
-link_directories(${kdl_codyco_LIBRARY_DIRS})
+include_directories(include/kdl_format_io)
 
-include_directories(include)
-
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
+# link_directories(${kdl_codyco_LIBRARY_DIRS})
 
 if(ENABLE_URDF)
     include_directories(SYSTEM ${TinyXML_INCLUDE_DIRS})
     include_directories(SYSTEM ${urdfdom_INCLUDE_DIRS})
     include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS})
     include_directories(SYSTEM ${console_bridge_INCLUDE_DIRS})
-    set(KDL_FORMAT_IO_INCLUDE_DIRS "${KDL_FORMAT_IO_INCLUDE_DIRS}" ${TinyXML_INCLUDE_DIRS} ${urdfdom_INCLUDE_DIRS} ${urdfdom_headers_INCLUDE_DIRS} ${console_bridge_INCLUDE_DIRS})
-
-    link_directories(${console_bridge_LIBRARY_DIRS})
-    set(KDL_FORMAT_IO_LIBRARY_DIRS "${KDL_FORMAT_IO_LIBRARY_DIRS}" ${console_bridge_LIBRARY_DIRS} ${urdfdom_LIBRARY_DIRS})
-
+    
     set(URDF_SRCS src/converters/urdf_export.cpp
                   src/converters/urdf_import.cpp
                   src/converters/urdf_sensor_import.cpp)
@@ -98,54 +59,67 @@ if(ENABLE_URDF)
                   include/kdl_format_io/urdf_export.hpp
                   include/kdl_format_io/urdf_sensor_import.hpp)
 
-    set(URDF_LIBS ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES})
+    set(URDF_LIBS ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${TinyXML_LIBRARIES})
+    
+    SOURCE_GROUP("URDF\\Source Files" FILES ${URDF_SRCS})
+    SOURCE_GROUP("URDF\\Header Files" FILES ${URDF_HPPS})
+    
 endIF()
 
 if(ENABLE_SYMORO_PAR)
-    set(EXPR_PARSER_SRCS src/expression_parser/error.cpp
-                     src/expression_parser/functions.cpp
-                     src/expression_parser/parser.cpp
-                     src/expression_parser/variablelist.cpp)
-    set(SYMORO_PAR_SRCS src/converters/symoro_par_import.cpp ${EXPR_PARSER_SRCS})
+    add_subdirectory(expression_parser)
+    
+    include_directories(SYSTEM "${expression-parser_SOURCE_DIR}/include")
+    
+    set(SYMORO_PAR_SRCS src/converters/symoro_par_import.cpp)
     set(SYMORO_PAR_HPPS include/kdl_format_io/symoro_par_import.hpp include/kdl_format_io/symoro_par_model.hpp)
     if(ENABLE_SERIALIZATION_IO)
         set(SYMORO_PAR_HPPS ${SYMORO_PAR_HPPS} include/kdl_format_io/symoro_par_import_serialization.hpp)
         set(SYMORO_PAR_SRCS ${SYMORO_PAR_SRCS} src/converters/symoro_par_import_serialization.cpp)
     endif()
+    
+    SOURCE_GROUP("Symoro\\Source Files" FILES ${SYMORO_PAR_SRCS})
+    SOURCE_GROUP("Symoro\\Header Files" FILES ${SYMORO_PAR_HPPS})
 endif()
 
 if(IDYNTREE_USE_ICUB_MAIN)
   set(IKIN_HPPS include/kdl_format_io/iKin_export.hpp)
   set(IKIN_SRCS src/converters/iKin_export.cpp)
+  
+  SOURCE_GROUP("iKin\\Source Files" FILES ${IKIN_SRCS})
+  SOURCE_GROUP("iKin\\Header Files" FILES ${IKIN_HPPS})
+  
 endif()
 
-
-set(KDL_FORMAT_IO_HPPS ${SYMORO_PAR_HPPS} ${URDF_HPPS} ${IKIN_HPPS})
+set(IDYNTREE_MODEL_IO_HEADERS ${SYMORO_PAR_HPPS} ${URDF_HPPS} ${IKIN_HPPS})
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
     set(LIB_TYPE STATIC)
-else()
+elseif(BUILD_SHARED_LIBS)
     set(LIB_TYPE SHARED)
+else()
+    set(LIB_TYPE STATIC)
 endif()
 
 # share headers with all iDynTree targes
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
+include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS})
+include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
 
+add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${IDYNTREE_MODEL_IO_HEADERS} ${IKIN_SRCS})
 
+target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES} iKin)
 
-add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${KDL_FORMAT_IO_HPPS} ${IKIN_SRCS})
-
-target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS}  ${orocos_kdl_LIBRARIES} iKin)
-set(KDL_FORMAT_IO_LIBRARIES idyntree-core ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+if(ENABLE_SYMORO_PAR)
+    target_link_libraries(idyntree-model-io expression-parser)
+endif()
 
 if(IDYNTREE_USE_ICUB_MAIN)
     find_package(YARP REQUIRED)
     find_package(ICUB REQUIRED)
-    INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+    include_directories(SYSTEM ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
     target_link_libraries(idyntree-model-io idyntree-core ${YARP_LIBRARIES} iKin ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
 endif()
 
@@ -155,20 +129,8 @@ endif()
 set_target_properties( idyntree-model-io PROPERTIES
 VERSION "${KDL_FORMAT_IO_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
-  PUBLIC_HEADER "${KDL_FORMAT_IO_HPPS}"
+  PUBLIC_HEADER "${IDYNTREE_MODEL_IO_HEADERS}"
   )
-
-if(${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_GREATER "2.8.12")
-  message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. This check can be removed.")
-endif()
-if(CMAKE_VERSION VERSION_LESS 2.8.12)
-  if(NOT KDL_FORMAT_IO_DISABLE_RPATH)
-      set_target_properties(idyntree-model-io PROPERTIES
-          INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
-      )
-  endif(NOT KDL_FORMAT_IO_DISABLE_RPATH)
-endif(CMAKE_VERSION VERSION_LESS 2.8.12)
-
 
 install(TARGETS idyntree-model-io
         EXPORT iDynTree

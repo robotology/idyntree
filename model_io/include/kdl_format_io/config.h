@@ -4,8 +4,8 @@
  * website: http://www.codyco.eu
  */ 
 
-#ifndef KDL_CODYCO_CONFIG_H
-#define KDL_CODYCO_CONFIG_H
+#ifndef IDYNTREE_MODELIO_CONFIG_H
+#define IDYNTREE_MODELIO_CONFIG_H
 
 #ifndef KDLCodycoOrocosKDLMinVersion
 #define KDLCodycoOrocosKDLMinVersion(Major, Minor, Patch) \

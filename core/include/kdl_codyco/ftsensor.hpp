@@ -15,9 +15,9 @@
 #include <iostream>
 #include <kdl/frames_io.hpp>
 #endif
-
 #include <sstream>
-#include <kdl_codyco/treefksolverpos_iterative.hpp>
+
+#include "treefksolverpos_iterative.hpp"
 
 namespace KDL {
 namespace CoDyCo {

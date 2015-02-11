@@ -9,8 +9,9 @@
 
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
-#include <kdl_codyco/undirectedtree.hpp>
-#include <kdl_codyco/momentumjacobian.hpp>
+#include "undirectedtree.hpp"
+#include "momentumjacobian.hpp"
+
 namespace KDL {
 namespace CoDyCo {
 

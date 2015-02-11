@@ -11,13 +11,12 @@
 #include <cmath>
 #include <cfloat>
 
-#include "kdl_codyco/regressors/dynamicRegressorGenerator.hpp"
-#include "kdl_codyco/regressors/dirl_utils.hpp"
+#include "dynamicRegressorGenerator.hpp"
+#include "dirl_utils.hpp"
 
-#include "kdl_codyco/regressor_loops.hpp"
-
-#include "kdl_codyco/rnea_loops.hpp"
-#include "kdl_codyco/position_loops.hpp"
+#include <kdl_codyco/regressor_loops.hpp>
+#include <kdl_codyco/rnea_loops.hpp>
+#include <kdl_codyco/position_loops.hpp>
 
 #include <iostream>
 

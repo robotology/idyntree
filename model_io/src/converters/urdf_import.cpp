@@ -34,7 +34,7 @@
 
 /* Author: Wim Meeussen */
 
-#include "kdl_format_io/urdf_import.hpp"
+#include "urdf_import.hpp"
 #include <urdf_model/model.h>
 #include <urdf_parser/urdf_parser.h>
 #include <fstream>

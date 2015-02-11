@@ -6,8 +6,8 @@
 #ifndef __KDL_CODYCO_REGRESSOR_DATASET_FILE__
 #define __KDL_CODYCO_REGRESSOR_DATASET_FILE__
 
-#include <kdl_codyco/regressors/DynamicDatasetInterfaces.hpp>
-#include <kdl_codyco/regressors/DynamicSample.hpp>
+#include "DynamicDatasetInterfaces.hpp"
+#include "DynamicSample.hpp"
 
 namespace KDL {
 namespace CoDyCo {

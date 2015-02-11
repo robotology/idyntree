@@ -1,11 +1,12 @@
-
-
-
 #########################################################################
 find_package(orocos_kdl 1.2.3 QUIET)
-if (NOT orocos_kdl_FOUND)
+if(NOT orocos_kdl_FOUND)
     SET(OROCOS_KDL_OLDVERSION On)
     find_package(orocos_kdl)
+else()
+    if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+        find_package(Boost REQUIRED)
+    endif()
 endif(NOT orocos_kdl_FOUND)
 
 #support also for the old version of kdl cmake package

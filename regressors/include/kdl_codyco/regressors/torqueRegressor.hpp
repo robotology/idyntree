@@ -11,7 +11,7 @@
 #ifndef _DIRL_TORQUE_REGRESSOR_
 #define _DIRL_TORQUE_REGRESSOR_
 
-#include <kdl_codyco/regressors/dynamicRegressorInterface.hpp>
+#include "dynamicRegressorInterface.hpp"
 
 namespace KDL {
 namespace CoDyCo {

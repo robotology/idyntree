@@ -4,14 +4,16 @@
  * website: http://www.codyco.eu
  */
 
-#include "kdl_codyco/treeserialization.hpp"
+#include "treeserialization.hpp"
+
+#include "utils.hpp"
+#include "config.h"
+
 #include <kdl/joint.hpp>
 #include <algorithm>
 #include <cassert>
 #include <iostream>
 
-#include <kdl_codyco/utils.hpp>
-#include "kdl_codyco/config.h"
 
 namespace KDL {
 namespace CoDyCo {

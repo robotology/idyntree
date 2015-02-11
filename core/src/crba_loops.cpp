@@ -4,12 +4,12 @@
  * website: http://www.codyco.eu
  */
 
-#include "kdl_codyco/crba_loops.hpp"
+#include "crba_loops.hpp"
+#include "regressor_utils.hpp"
+#include "undirectedtree.hpp"
+
 
 #include <kdl/kinfam.hpp>
-
-#include <kdl_codyco/regressor_utils.hpp>
-#include "kdl_codyco/undirectedtree.hpp"
 
 #ifndef NDEBUG
 #include <iostream>

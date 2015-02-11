@@ -8,8 +8,8 @@
 #define UNDIRECTED_TREE_SOLVER_H
 
 #include <kdl/tree.hpp>
-#include <kdl_codyco/undirectedtree.hpp>
-#include "kdl_codyco/treeserialization.hpp"
+#include "undirectedtree.hpp"
+#include "treeserialization.hpp"
 
 namespace KDL
 {

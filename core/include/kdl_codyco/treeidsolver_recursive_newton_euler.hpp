@@ -25,8 +25,9 @@
 
 #include "treeidsolver.hpp"
 #include "treeserialization.hpp"
-#include <kdl_codyco/undirectedtree.hpp>
-#include <kdl_codyco/undirectedtreesolver.hpp>
+
+#include "undirectedtree.hpp"
+#include "undirectedtreesolver.hpp"
 
 namespace KDL{
 namespace CoDyCo{

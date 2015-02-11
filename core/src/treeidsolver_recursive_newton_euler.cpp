@@ -27,11 +27,11 @@
 
 //versione extracted from r2_controllers
 
-#include "kdl_codyco/treeidsolver_recursive_newton_euler.hpp"
-#include "kdl/frames_io.hpp"
-#include <kdl_codyco/utils.hpp>
-#include <kdl_codyco/rnea_loops.hpp>
+#include "treeidsolver_recursive_newton_euler.hpp"
+#include "utils.hpp"
+#include "rnea_loops.hpp"
 
+#include <kdl/frames_io.hpp>
 #include <deque>
 using namespace std;
 

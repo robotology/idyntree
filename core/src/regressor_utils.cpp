@@ -8,7 +8,7 @@
 #include <Eigen/Core>
 #include <Eigen/Dense>
 #include <kdl/rigidbodyinertia.hpp>
-#include "kdl_codyco/regressor_utils.hpp"
+#include "regressor_utils.hpp"
 
 
 using namespace Eigen;

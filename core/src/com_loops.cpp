@@ -4,12 +4,10 @@
  * website: http://www.codyco.eu
  */
 
-#include "kdl_codyco/com_loops.hpp"
-#include "kdl_codyco/jacobian_loops.hpp"
-
-#include "kdl_codyco/momentumjacobian.hpp"
-
-#include "kdl_codyco/utils.hpp"
+#include "com_loops.hpp"
+#include "jacobian_loops.hpp"
+#include "momentumjacobian.hpp"
+#include "utils.hpp"
 
 #ifndef NDEBUG
 #include <iostream>

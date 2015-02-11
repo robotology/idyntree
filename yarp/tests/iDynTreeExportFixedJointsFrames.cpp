@@ -46,6 +46,8 @@
 
 #include <kdl/frames_io.hpp>
 
+#include <kdl_codyco/config.h>
+
 using namespace std;
 using namespace yarp;
 using namespace yarp::sig;
@@ -170,9 +172,9 @@ std::vector<std::string> getLinkAttachedToFixedJoints(KDL::Tree & tree)
         seg != tree.getSegments().end();
         seg++)
     {
-        if( seg->second.segment.getJoint().getType() == KDL::Joint::None )
+        if( GetTreeElementSegment(seg->second).getJoint().getType() == KDL::Joint::None )
         {
-            ret.push_back(seg->second.segment.getName());
+            ret.push_back(GetTreeElementSegment(seg->second).getName());
         }
     }
     return ret;

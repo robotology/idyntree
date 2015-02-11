@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
   
-#include <kdl_codyco/regressors/dirl_utils.hpp>
+#include "dirl_utils.hpp"
 
 #include <kdl_codyco/regressor_utils.hpp>
 

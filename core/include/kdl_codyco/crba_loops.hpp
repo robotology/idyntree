@@ -11,11 +11,10 @@
 #include <kdl/jntarray.hpp>
 #include <kdl/jntspaceinertiamatrix.hpp>
 
-#include "kdl_codyco/undirectedtree.hpp"
-
-#include "kdl_codyco/floatingjntspaceinertiamatrix.hpp"
-#include "kdl_codyco/momentumjacobian.hpp"
-#include "kdl_codyco/generalizedjntpositions.hpp"
+#include "undirectedtree.hpp"
+#include "floatingjntspaceinertiamatrix.hpp"
+#include "momentumjacobian.hpp"
+#include "generalizedjntpositions.hpp"
 
 namespace KDL {
 namespace CoDyCo {
