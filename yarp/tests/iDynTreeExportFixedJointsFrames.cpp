@@ -44,6 +44,8 @@
 
 #include <kdl_codyco/treefksolverpos_iterative.hpp>
 
+#include <kdl/frames_io.hpp>
+
 using namespace std;
 using namespace yarp;
 using namespace yarp::sig;

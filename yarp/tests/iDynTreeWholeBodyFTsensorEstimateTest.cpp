@@ -42,6 +42,8 @@
 
 #include <yarp/os/Log.h>
 
+#include <kdl/frames_io.hpp>
+
 using namespace std;
 using namespace yarp;
 using namespace yarp::sig;
