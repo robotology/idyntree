@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
   
-#include <kdl_codyco/regressors/sparseNumericalBaseParameters.hpp>
+#include "sparseNumericalBaseParameters.hpp"
 
 #include <cmath>
 #include <iostream>

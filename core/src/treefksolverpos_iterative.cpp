@@ -16,10 +16,12 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#include "kdl_codyco/treefksolverpos_iterative.hpp"
+#include "treefksolverpos_iterative.hpp"
+#include "position_loops.hpp"
+
 #include <iostream>
 #include <kdl/frames_io.hpp>
-#include "kdl_codyco/position_loops.hpp"
+
 
 namespace KDL {
 namespace CoDyCo {

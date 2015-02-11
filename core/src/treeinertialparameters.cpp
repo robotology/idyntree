@@ -12,10 +12,10 @@
 #include <kdl/rigidbodyinertia.hpp>
 #include <kdl/tree.hpp>
 
-#include "kdl_codyco/treeinertialparameters.hpp"
-#include "kdl_codyco/regressor_loops.hpp"
-#include "kdl_codyco/rnea_loops.hpp"
-#include "kdl_codyco/position_loops.hpp"
+#include "treeinertialparameters.hpp"
+#include "regressor_loops.hpp"
+#include "rnea_loops.hpp"
+#include "position_loops.hpp"
 
 #ifndef NDEBUG
 #include <iostream>

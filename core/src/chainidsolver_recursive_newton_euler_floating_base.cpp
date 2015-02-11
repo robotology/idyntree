@@ -19,7 +19,7 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#include "kdl_codyco/chainidsolver_recursive_newton_euler_floating_base.hpp"
+#include "chainidsolver_recursive_newton_euler_floating_base.hpp"
 #include <kdl/frames_io.hpp>
 
 namespace KDL{

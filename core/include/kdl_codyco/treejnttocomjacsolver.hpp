@@ -9,12 +9,12 @@
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
 
-#include <kdl_codyco/treeserialization.hpp>
-#include <kdl_codyco/undirectedtree.hpp>
-#include <kdl_codyco/undirectedtreesolver.hpp>
-#include <kdl_codyco/crba_loops.hpp>
+#include "treeserialization.hpp"
+#include "undirectedtree.hpp"
+#include "undirectedtreesolver.hpp"
+#include "crba_loops.hpp"
 
-#include <kdl_codyco/momentumjacobian.hpp>
+#include "momentumjacobian.hpp"
 
 namespace KDL {
 namespace CoDyCo {

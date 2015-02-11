@@ -8,8 +8,8 @@
  * http://www.codyco.eu
  */
  
-#include <kdl_codyco/regressors/essentialParameters.hpp>
-#include <kdl_codyco/regressors/dirl_utils.hpp>
+#include "essentialParameters.hpp"
+#include "dirl_utils.hpp"
 #include <iostream>
 
 namespace KDL {

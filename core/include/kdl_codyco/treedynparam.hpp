@@ -20,9 +20,9 @@
 #include <kdl/articulatedbodyinertia.hpp>
 #include <kdl/jntspaceinertiamatrix.hpp>
 
-#include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
-#include <kdl_codyco/undirectedtreesolver.hpp>
-#include <kdl_codyco/treeidsolver_recursive_newton_euler.hpp>
+#include "floatingjntspaceinertiamatrix.hpp"
+#include "undirectedtreesolver.hpp"
+#include "treeidsolver_recursive_newton_euler.hpp"
 
 namespace KDL {
 namespace CoDyCo {

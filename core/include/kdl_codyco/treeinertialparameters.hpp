@@ -7,10 +7,10 @@
 #ifndef KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 #define KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 
-#include "kdl_codyco/undirectedtree.hpp"
-#include "kdl_codyco/undirectedtreesolver.hpp"
-#include "kdl_codyco/regressor_utils.hpp"
-#include "kdl_codyco/treeserialization.hpp"
+#include "undirectedtree.hpp"
+#include "undirectedtreesolver.hpp"
+#include "regressor_utils.hpp"
+#include "treeserialization.hpp"
 
 #include <Eigen/Core>
 

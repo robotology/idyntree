@@ -17,10 +17,8 @@ set(IDYNTREE_MODULE_DIR ${PROJECT_SOURCE_DIR}/cmake)
 set(IDYNTREE_MODULE_PATH ${IDYNTREE_MODULE_DIR})
 list(APPEND CMAKE_MODULE_PATH ${IDYNTREE_MODULE_PATH})
 
-message(${CMAKE_MODULE_PATH})
 #Use options specified in iDynTreeOptions.cmake file
 include(iDynTreeOptions)
-
 
 # Find dependecies
 find_package(YARP REQUIRED)
@@ -47,7 +45,6 @@ add_subdirectory(core)
 add_subdirectory(regressors)
 add_subdirectory(model_io)
 add_subdirectory(yarp)
-
 
 # compile simple command line tools
 add_subdirectory(tools)

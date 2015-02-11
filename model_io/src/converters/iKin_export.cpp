@@ -35,7 +35,8 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_format_io/iKin_export.hpp"
+#include "iKin_export.hpp"
+
 #include <kdl/joint.hpp>
 #include <iCub/iKin/iKinFwd.h>
 #include <kdl/chainfksolverpos_recursive.hpp>

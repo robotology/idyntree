@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
   
-#include <kdl_codyco/regressors/baseDynamicsRegressor.hpp>
+#include "baseDynamicsRegressor.hpp"
 
 #include <kdl_codyco/regressor_utils.hpp>
 

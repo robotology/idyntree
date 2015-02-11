@@ -1,5 +1,8 @@
-include_directories(${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS} )
 
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+
+include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
+include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS} ${orocos_kdl_INCLUDE_DIRS})
 
 add_executable(inverse_inertia_test inverse_inertia.cpp)
 add_executable(regressor_utils_test regressor_utils_test.cpp)
@@ -12,13 +15,13 @@ add_executable(inversedynamics_different_loops_test inversedynamics_different_lo
 #set_source_files_properties(sparse_numerical_subspace_test.cpp PROPERTIES COMPILE_FLAGS -std=c++11)
 #add_executable(sparse_numerical_subspace_test sparse_numerical_subspace_test.cpp testhumanoid.cpp testdoublejoint.cpp testsinglelink.cpp testsinglejoint.cpp testkukalwr.cpp)
 
-target_link_libraries(inverse_inertia_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io )
-target_link_libraries(regressor_utils_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io )
-target_link_libraries(subtree_regressor_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io )
-target_link_libraries(inversedynamics_regressor_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors  idyntree-model-io)
-target_link_libraries(inversedynamics_crba_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io)
-target_link_libraries(comjacobian_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io)
-target_link_libraries(inversedynamics_different_loops_test ${orocos_kdl_LIBRARIES} idyntree-core idyntree-regressors idyntree-model-io)
+target_link_libraries(inverse_inertia_test                  idyntree-core idyntree-regressors idyntree-model-io   ${orocos_kdl_LIBRARIES} )
+target_link_libraries(regressor_utils_test                  idyntree-core idyntree-regressors idyntree-model-io   ${orocos_kdl_LIBRARIES} )
+target_link_libraries(subtree_regressor_test                idyntree-core idyntree-regressors idyntree-model-io   ${orocos_kdl_LIBRARIES} )
+target_link_libraries(inversedynamics_regressor_test        idyntree-core idyntree-regressors  idyntree-model-io  ${orocos_kdl_LIBRARIES} )
+target_link_libraries(inversedynamics_crba_test             idyntree-core idyntree-regressors idyntree-model-io  ${orocos_kdl_LIBRARIES} )
+target_link_libraries(comjacobian_test                      idyntree-core idyntree-regressors idyntree-model-io  ${orocos_kdl_LIBRARIES} )
+target_link_libraries(inversedynamics_different_loops_test  idyntree-core idyntree-regressors idyntree-model-io  ${orocos_kdl_LIBRARIES} )
 #target_link_libraries(sparse_numerical_subspace_test ${orocos_kdl_LIBRARIES} idyntree-core  )
 
 
@@ -40,12 +43,8 @@ add_test(NAME test_inversedynamics_different_loops COMMAND inversedynamics_diffe
 #add_test(NAME test_dirl_dataset_hrp2 COMMAND dirl_dataset_test hrp2_100samples.csv 100)
 
 
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS})
-
 add_executable(urdf_forward_kinematics urdf_forward_kinematics.cpp)
-target_link_libraries(urdf_forward_kinematics  ${orocos_kdl_LIBRARIES} idyntree-core idyntree-model-io)
+target_link_libraries(urdf_forward_kinematics idyntree-core idyntree-model-io ${orocos_kdl_LIBRARIES})
 
 #add_test(NAME test_urdf_forward_kinematics  COMMAND urdf_forward_kinematics black_icub.urdf root_link r_hip_3)
 

@@ -20,7 +20,7 @@
 #include <string>
 #include <map>
 
-#include "kdl_codyco/treeserialization.hpp"
+#include "treeserialization.hpp"
 
 #define COMPUTE_TRAVERSAL_BASE_LINK_DEFAULT_VALUE -10000
 

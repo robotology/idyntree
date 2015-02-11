@@ -8,20 +8,17 @@
 #define KDL_CODYCO_DYNREGRESSORGENERATOR_HPP
 
 #include <kdl/tree.hpp>
-
 #include <kdl_codyco/utils.hpp>
-
 #include <kdl_codyco/undirectedtree.hpp>
-
 #include <kdl_codyco/ftsensor.hpp>
 
 //Type of regressors
-#include <kdl_codyco/regressors/dynamicRegressorInterface.hpp>
-#include <kdl_codyco/regressors/subtreeBaseDynamicsRegressor.hpp>
-#include <kdl_codyco/regressors/torqueRegressor.hpp>
-#include <kdl_codyco/regressors/baseDynamicsRegressor.hpp>
+#include "dynamicRegressorInterface.hpp"
+#include "subtreeBaseDynamicsRegressor.hpp"
+#include "torqueRegressor.hpp"
+#include "baseDynamicsRegressor.hpp"
 
-#include <kdl_codyco/regressors/DynamicSample.hpp>
+#include "DynamicSample.hpp"
 
 namespace KDL {
 namespace CoDyCo {

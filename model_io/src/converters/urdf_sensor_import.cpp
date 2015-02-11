@@ -34,7 +34,7 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_format_io/urdf_sensor_import.hpp"
+#include "urdf_sensor_import.hpp"
 #include <fstream>
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>

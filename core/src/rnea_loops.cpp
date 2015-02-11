@@ -4,7 +4,7 @@
  * website: http://www.codyco.eu
  */
  
-#include "kdl_codyco/rnea_loops.hpp"
+#include "rnea_loops.hpp"
 
 namespace KDL {
 namespace CoDyCo {

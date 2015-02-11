@@ -25,8 +25,8 @@
 
 #include <kdl/kinfam_io.hpp>
 #include <kdl/frames_io.hpp>
-#include "kdl_codyco/undirectedtree.hpp"
-#include <kdl_codyco/utils.hpp>
+#include "undirectedtree.hpp"
+#include "utils.hpp"
 
 namespace KDL {
 namespace CoDyCo {

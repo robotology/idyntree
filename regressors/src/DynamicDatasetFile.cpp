@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 
-#include <kdl_codyco/regressors/DynamicDatasetFile.hpp>
+#include "DynamicDatasetFile.hpp"
 
 namespace KDL {
 namespace CoDyCo {

@@ -4,8 +4,9 @@
  * website: http://www.codyco.eu
  */
 
-#include "kdl_codyco/treecomsolver.hpp"
-#include "kdl_codyco/com_loops.hpp"
+#include "treecomsolver.hpp"
+#include "com_loops.hpp"
+
 #include <iostream>
 #include <kdl/frames_io.hpp>
 

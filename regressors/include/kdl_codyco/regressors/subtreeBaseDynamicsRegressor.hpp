@@ -14,7 +14,7 @@
 #include <kdl/jntarray.hpp>
 
 #include <kdl_codyco/undirectedtree.hpp>
-#include <kdl_codyco/regressors/dynamicRegressorInterface.hpp>
+#include "dynamicRegressorInterface.hpp"
 
 namespace KDL {
 namespace CoDyCo {

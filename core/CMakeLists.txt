@@ -8,33 +8,33 @@ if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC)
 
-include_directories(include ${orocos_kdl_INCLUDE_DIRS}
-                            ${EIGEN3_INCLUDE_DIR})
+#local headers
+include_directories(include/kdl_codyco)
 
-file(GLOB  IDYNTREE_CORE_HDRS
+file(GLOB IDYNTREE_CORE_HEADERS
      "include/kdl_codyco/*.hpp"
  )
 
-#set(IDYNTREE_CORE_HDRS include/kdl_codyco/treeserialization.hpp)
-
-file (GLOB KDL_CODYCO_PRIVATE_INCLUDES
+file (GLOB IDYNTREE_CORE_PRIVATE_INCLUDES
     "include/kdl_codyco/config.h"
 )
 
-file(GLOB KDL_CODYCO_SRC
+file(GLOB IDYNTREE_CORE_SOURCES
     "src/*.cpp"
 )
 
-SOURCE_GROUP("Source Files" FILES ${KDL_CODYCO_SRC} ${DIRL_SRC})
-SOURCE_GROUP("Header Files" FILES ${KDL_CODYCO_HPPS} ${KDL_CODYCO_PRIVATE_INCLUDES})
+SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_SOURCES})
+SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_HEADERS})
+SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_CORE_PRIVATE_INCLUDES})
 
 # share headers with all iDynTree targes
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
+#include system headers
+include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
+                            ${EIGEN3_INCLUDE_DIR})
 
-add_library(idyntree-core ${KDL_CODYCO_SRC} ${DIRL_SRC} ${KDL_CODYCO_HPPS} ${KDL_CODYCO_PRIVATE_INCLUDES})
+add_library(idyntree-core ${IDYNTREE_CORE_SOURCES} ${IDYNTREE_CORE_HEADERS} ${IDYNTREE_CORE_PRIVATE_INCLUDES})
 
 target_include_directories(idyntree-core PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
@@ -42,7 +42,7 @@ target_include_directories(idyntree-core PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURC
 
 target_link_libraries(idyntree-core ${orocos_kdl_LIBRARIES})
 
-set_property(TARGET idyntree-core PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_HDRS})
+set_property(TARGET idyntree-core PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_HEADERS})
 
 install(TARGETS idyntree-core
         EXPORT iDynTree

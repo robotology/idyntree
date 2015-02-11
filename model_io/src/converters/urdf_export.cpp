@@ -35,7 +35,9 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_format_io/urdf_export.hpp"
+#include "urdf_export.hpp"
+#include "config.h"
+
 #include <urdf_model/model.h>
 #include <iostream>
 #include <urdf_parser/urdf_parser.h>
@@ -43,7 +45,7 @@
 #include <kdl/tree.hpp>
 #include <urdf_model/model.h>
 #include <kdl/joint.hpp>
-#include "kdl_format_io/config.h"
+
 
 using namespace std;
 

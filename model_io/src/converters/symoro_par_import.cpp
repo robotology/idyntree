@@ -34,9 +34,9 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_format_io/symoro_par_import.hpp"
+#include "symoro_par_import.hpp"
 
-#include "../expression_parser/parser.h"
+#include <expression_parser/parser.h>
 #include <string>
 #include <iostream>
 #include <fstream>
