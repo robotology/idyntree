@@ -7,6 +7,9 @@
 
 #include <iCub/iDynTree/idyn2kdl_icub.h>
 #include <yarp/math/Math.h>
+#include <yarp/os/Log.h>
+
+#include <kdl_codyco/treefksolverpos_iterative.hpp>
 
 using yarp::math::cat;
 
@@ -117,8 +120,8 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     //names2links_joints(la_joints,links,joints);
     const char *la_links_cstr[] = {"l_shoulder_1", "l_shoulder_2","l_shoulder_3" ,"l_upper_arm" , "l_elbow_1", "l_forearm", "l_wrist_1","l_hand",};
     std::vector<std::string> la_links(la_links_cstr,end(la_links_cstr));
-    KDL::Frame ft_la_H_sensor_child;
-    status_ok = idynSensorChain2kdlChain(*(icub_idyn.upperTorso->left),*(icub_idyn.upperTorso->leftSensor),old_la,ft_la_H_sensor_child,la_links,la_joints,"l_gripper");
+    KDL::Frame ft_la_H_sensor_dh_child;
+    status_ok = idynSensorChain2kdlChain(*(icub_idyn.upperTorso->left),*(icub_idyn.upperTorso->leftSensor),old_la,ft_la_H_sensor_dh_child,la_links,la_joints,"l_gripper");
     if(!status_ok) return false;
 
 
@@ -129,8 +132,8 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     //names2links_joints(ra_joints,links,joints);
     const char *ra_links_cstr[] = {"r_shoulder_1", "r_shoulder_2","r_shoulder_3" ,"r_upper_arm" , "r_elbow_1", "r_forearm", "r_wrist_1","r_hand",};
     std::vector<std::string> ra_links(ra_links_cstr,end(ra_links_cstr));
-    KDL::Frame ft_ra_H_sensor_child;
-    status_ok = idynSensorChain2kdlChain(*(icub_idyn.upperTorso->right),*(icub_idyn.upperTorso->rightSensor),old_ra,ft_ra_H_sensor_child,ra_links,ra_joints,"r_gripper");
+    KDL::Frame ft_ra_H_sensor_dh_child;
+    status_ok = idynSensorChain2kdlChain(*(icub_idyn.upperTorso->right),*(icub_idyn.upperTorso->rightSensor),old_ra,ft_ra_H_sensor_dh_child,ra_links,ra_joints,"r_gripper");
     if(!status_ok) return false;
 
     //Creating left leg
@@ -140,9 +143,9 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     //names2links_joints(ll_joints,links,joints);
     const char *ll_links_cstr[] = {"l_hip_1", "l_hip_2", "l_hip_3", "l_upper_leg", "l_lower_leg", "l_ankle_1", "l_foot"};
     std::vector<std::string> ll_links(ll_links_cstr,end(ll_links_cstr));
-    KDL::Frame ft_ll_H_sensor_child;
+    KDL::Frame ft_ll_H_sensor_dh_child;
     status_ok = idynSensorChain2kdlChain(*(icub_idyn.lowerTorso->left),
-                                         *(icub_idyn.lowerTorso->leftSensor),old_ll,ft_ll_H_sensor_child,ll_links,ll_joints,"l_sole");
+                                         *(icub_idyn.lowerTorso->leftSensor),old_ll,ft_ll_H_sensor_dh_child,ll_links,ll_joints,"l_sole");
     if(!status_ok) return false;
 
 
@@ -153,8 +156,8 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     //names2links_joints(rl_joints,links,joints);
     const char *rl_links_cstr[] = {"r_hip_1", "r_hip_2", "r_hip_3", "r_upper_leg", "r_lower_leg", "r_ankle_1", "r_foot"};
     std::vector<std::string> rl_links(rl_links_cstr,end(rl_links_cstr));
-    KDL::Frame ft_rl_H_sensor_child;
-    status_ok = idynSensorChain2kdlChain(*(icub_idyn.lowerTorso->right),*(icub_idyn.lowerTorso->rightSensor),old_rl,ft_rl_H_sensor_child,rl_links,rl_joints,"r_sole");
+    KDL::Frame ft_rl_H_sensor_dh_child;
+    status_ok = idynSensorChain2kdlChain(*(icub_idyn.lowerTorso->right),*(icub_idyn.lowerTorso->rightSensor),old_rl,ft_rl_H_sensor_dh_child,rl_links,rl_joints,"r_sole");
     if(!status_ok) return false;
 
 
@@ -211,12 +214,12 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
         iCub::iDyn::iCubWholeBody icub_idyn_feetv2(tag_feetV2);
 
         KDL::Chain llV2, old_llV2;
-        status_ok = idynSensorChain2kdlChain(*(icub_idyn_feetv2.lowerTorso->left),*(icub_idyn_feetv2.lowerTorso->leftSensor),old_llV2,ft_ll_H_sensor_child,ll_links,ll_joints,"l_sole");
+        status_ok = idynSensorChain2kdlChain(*(icub_idyn_feetv2.lowerTorso->left),*(icub_idyn_feetv2.lowerTorso->leftSensor),old_llV2,ft_ll_H_sensor_dh_child,ll_links,ll_joints,"l_sole");
         if(!status_ok) return false;
 
         //Creating right leg
         KDL::Chain rlV2, old_rlV2;
-        status_ok = idynSensorChain2kdlChain(*(icub_idyn_feetv2.lowerTorso->right),*(icub_idyn_feetv2.lowerTorso->rightSensor),old_rlV2,ft_rl_H_sensor_child,rl_links,rl_joints,"r_sole");
+        status_ok = idynSensorChain2kdlChain(*(icub_idyn_feetv2.lowerTorso->right),*(icub_idyn_feetv2.lowerTorso->rightSensor),old_rlV2,ft_rl_H_sensor_dh_child,rl_links,rl_joints,"r_sole");
         if(!status_ok) return false;
 
         idynMatrix2kdlFrame(icub_idyn_feetv2.lowerTorso->HLeft,kdlFrame);
@@ -328,28 +331,59 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     // Export FT Sensor frames
 
     /*
-    addFrame(icub_kdl,ft_la_H_sensor_child.Inverse(),"l_upper_arm","l_arm_ft_frame");
-    addFrame(icub_kdl,ft_ra_H_sensor_child.Inverse(),"r_upper_arm","r_arm_ft_frame");
-    addFrame(icub_kdl,ft_ll_H_sensor_child.Inverse(),"l_hip_3","l_leg_ft_frame");
-    addFrame(icub_kdl,ft_rl_H_sensor_child.Inverse(),"r_hip_3","r_leg_ft_frame");
+    addFrame(icub_kdl,KDL::Frame::Identity(),"l_upper_arm","l_arm_ft_frame");
+    addFrame(icub_kdl,KDL::Frame::Identity(),"r_upper_arm","r_arm_ft_frame");
+    addFrame(icub_kdl,KDL::Frame::Identity(),"l_hip_3","l_leg_ft_frame");
+    addFrame(icub_kdl,KDL::Frame::Identity(),"r_hip_3","r_leg_ft_frame");
 
     if( ft_foot )
     {
-        addFrame(icub_kdl,ft_lf_H_sensor_child.Inverse(),"l_foot_ft_frame","l_foot");
-        addFrame(icub_kdl,ft_rf_H_sensor_child.Inverse(),"r_foot_ft_frame","r_foot");
+        addFrame(icub_kdl,KDL::Frame::Identity(),"l_foot_ft_frame","l_foot");
+        addFrame(icub_kdl,KDL::Frame::Identity(),"r_foot_ft_frame","r_foot");
     }*/
 
 
-    //Export old frames for legacy code (skin)
-    /*
-    icub_kdl.addSegment(KDL::Segment("l_forearm_dh_frame",
-                        KDL::Joint("l_forearm_dh_frame_fixed_joint",KDL::Joint::None)),
-                        "l_forearm");
+    KDL::CoDyCo::TreeFkSolverPos_iterative pos_solv(icub_kdl);
+    KDL::CoDyCo::GeneralizedJntPositions pos(icub_kdl.getNrOfJoints());
 
-   icub_kdl.addSegment(KDL::Segment("r_forearm_dh_frame",
-                        KDL::Joint("r_forearm_dh_frame_fixed_joint",KDL::Joint::None)),
-                        "r_forearm");
-    */
+    //Export dh frames (used by iKin and skin software)
+    //Before urdf conversion, KDL link frames == iKin link frames
+    addFrame(icub_kdl,KDL::Frame::Identity(),"l_forearm","l_forearm_dh_frame");
+    addFrame(icub_kdl,KDL::Frame::Identity(),"r_forearm","r_forearm_dh_frame");
+    addFrame(icub_kdl,KDL::Frame::Identity(),"l_hand","l_hand_dh_frame");
+    addFrame(icub_kdl,KDL::Frame::Identity(),"r_hand","r_hand_dh_frame");
+    //expect for link attached to ft sensors, for which KDL link frame == FT sensor frame
+    addFrame(icub_kdl,ft_la_H_sensor_dh_child,"l_upper_arm","l_upper_arm_dh_frame");
+    addFrame(icub_kdl,ft_ra_H_sensor_dh_child,"r_upper_arm","r_upper_arm_dh_frame");
+
+    KDL::Frame root_link_H_l_sole, root_link_H_l_foot,l_sole_H_l_foot;
+    int ret = pos_solv.JntToCart(pos,root_link_H_l_sole,"l_sole");
+    YARP_ASSERT(ret == 0);
+    ret = pos_solv.JntToCart(pos,root_link_H_l_foot,"l_foot");
+    YARP_ASSERT(ret == 0);
+    l_sole_H_l_foot = root_link_H_l_sole.Inverse()*root_link_H_l_foot;
+    addFrame(icub_kdl,l_sole_H_l_foot.Inverse(),"l_foot","l_foot_dh_frame");
+
+    KDL::Frame root_link_H_r_sole, root_link_H_r_foot,r_sole_H_r_foot;
+    ret = pos_solv.JntToCart(pos,root_link_H_r_sole,"r_sole");
+    YARP_ASSERT(ret == 0);
+    ret = pos_solv.JntToCart(pos,root_link_H_r_foot,"r_foot");
+    YARP_ASSERT(ret == 0);
+    r_sole_H_r_foot = root_link_H_l_sole.Inverse()*root_link_H_r_foot;
+    addFrame(icub_kdl,r_sole_H_r_foot.Inverse(),"r_foot","r_foot_dh_frame");
+
+
+    //Export the world frame used by codyco balancing demo
+    KDL::Frame H_l_sole_world;
+    H_l_sole_world.M = KDL::Rotation (0, 0, 1, 0, -1, 0, 1, 0, 0);
+
+    KDL::Frame H_world_l_sole = H_l_sole_world.Inverse();
+
+
+    KDL::Frame H_world_l_foot = H_world_l_sole*l_sole_H_l_foot;
+
+    addFrame(icub_kdl,H_world_l_foot.Inverse(),"l_foot","codyco_balancing_world");
+
 
     //std::cout << "Returning from KDL: " << KDL::CoDyCo::UndirectedTree(icub_kdl).toString() << std::endl;
 

@@ -127,7 +127,7 @@ bool idynChain2kdlChain(iCub::iDyn::iDynChain & idynChain,KDL::Chain & kdlChain,
 bool idynSensorChain2kdlChain(iCub::iDyn::iDynChain & idynChain,
                               iCub::iDyn::iDynInvSensor & idynSensor,
                               KDL::Chain & kdlChain,
-                              KDL::Frame & H_sensor_child,
+                              KDL::Frame & H_sensor_dh_child,
                               std::vector<std::string> link_names,std::vector<std::string> joint_names, std::string final_frame_name, std::string initial_frame_name, int max_links)
 {
     bool use_names;
@@ -230,9 +230,9 @@ bool idynSensorChain2kdlChain(iCub::iDyn::iDynChain & idynChain,
             idynMatrix2kdlFrame(H_0,kdlFrame_0);
             idynMatrix2kdlFrame(H_1,kdlFrame_1);
 
-            H_sensor_child = KDL::Frame::Identity();
-
             remainder_frame = kdlFrame_1;
+
+            H_sensor_dh_child = remainder_frame;
 
             kdlFrame_1 = KDL::Frame::Identity();
 
