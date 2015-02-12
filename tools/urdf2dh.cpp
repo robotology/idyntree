@@ -1,7 +1,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-*  Copyright (c) 2013 Istituto Italiano di Tecnologia
+*  Copyright (c) 2013-2015 Fondazione Istituto Italiano di Tecnologia
 *  All rights reserved.
 *
 *  Redistribution and use in source and binary forms, with or without
@@ -37,6 +37,7 @@
 #include <cstdlib>
 
 #include <fstream>
+#include <sstream>
 
 #include <ctime>
 #include "kdl_format_io/iKin_export.hpp"
@@ -110,6 +111,10 @@ yarp::sig::Matrix KDLtoYarp_position(const KDL::Frame & kdlFrame)
 
 bool checkChainsAreEqual(KDL::Chain kdl_random_chain, iCub::iKin::iKinLimb & ikin_random_chain)
 {
+  srand(0);
+
+  for(int i =0; i < 10; i++ )
+  {
   if( kdl_random_chain.getNrOfJoints() != ikin_random_chain.getDOF() )
   {
       std::cerr << "urdf2dh: error in conversion, number of DOFs does not match" << std::endl;
@@ -121,13 +126,13 @@ bool checkChainsAreEqual(KDL::Chain kdl_random_chain, iCub::iKin::iKinLimb & iki
   KDL::JntArray q_kdl(kdl_random_chain.getNrOfJoints());
   yarp::sig::Vector q_yarp(ikin_random_chain.getDOF());
 
-  srand(time(0));
   for(int i=0; i < q_yarp.size(); i++ ) { q_kdl(i) = q_yarp(i) = 1*random_double(2*M_PI); }
 
   //Get H_ef_base for iKinChain
   //for(int i=0; i < ikin_random_chain.getN(); i++ ) { ikin_random_chain.releaseLink(i); }
   //std::cout << "iKin_export_random_chain: Setting angles value in iKin" << std::endl;
   //std::cout << q_yarp.toString() << std::endl;
+  ikin_random_chain.setAllConstraints(false);
   yarp::sig::Vector q_yarp_constrained = ikin_random_chain.setAng(q_yarp);
   yarp::sig::Matrix H_yarp = ikin_random_chain.getH();
 
@@ -144,7 +149,6 @@ bool checkChainsAreEqual(KDL::Chain kdl_random_chain, iCub::iKin::iKinLimb & iki
   //Check that the matrix are equal
   double tol = 1e-3;
 
-  //std::cout << "H_yarp" << std::endl << H_yarp.toString() << std::endl  << "H_kdl" << std::endl << H_yarp_kdl.toString() << std::endl;
 
 
   for(int i=0; i < 4; i++ ) {
@@ -152,12 +156,15 @@ bool checkChainsAreEqual(KDL::Chain kdl_random_chain, iCub::iKin::iKinLimb & iki
           if( fabs(H_yarp_kdl(i,j)-H_yarp(i,j)) > tol )
           {
               std::cerr << "urdf2dh Element " << i << " " << j << " of the result matrix does not match" << std::endl;
+              std::cerr << "H from iKinChain: " << std::endl << H_yarp.toString() << std::endl
+                        << "H from KDL::Chain " << std::endl << H_yarp_kdl.toString() << std::endl;
+              std::cerr << "Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
               return false;
           }
 
       }
   }
-
+  }
   return true;
 }
 
@@ -169,6 +176,13 @@ void printHelp()
     std::cerr << "For more information about the iKin .ini format, check:" << std::endl;
     std::cerr << "      http://wiki.icub.org/iCub/main/dox/html/classiCub_1_1iKin_1_1iKinLimb.html#a76c93aae76bb0f7ef9470b81d0da0e26" << std::endl;
     std::cerr << "Usage: urdf2dh robot.urdf base_link_name end_effector_link_name dhParams.ini" << std::endl;
+}
+
+std::string int2string(int arg)
+{
+    std::ostringstream s;
+    s << arg;
+    return s.str();
 }
 
 int main(int argc, char** argv)
@@ -205,7 +219,9 @@ int main(int argc, char** argv)
   bool root_inertia_workaround = true;
   if( !treeFromUrdfFile(urdf_file_name,kdl_tree,root_inertia_workaround) )
   {
-      cerr << "Could not parse urdf robot model" << endl;
+      cerr << "urdf2dh: Could not parse urdf robot model" << endl;
+      std::cerr << "urdf2dh: Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
+
       return EXIT_FAILURE;
   }
 
@@ -239,7 +255,8 @@ int main(int argc, char** argv)
   bool result = kdl_rotated_tree.getChain(base_link_name,end_effector_link_name,kdl_chain);
   if( !result )
   {
-      cerr << "Could not extract KDL::Chain from KDL::CoDyCo::UndirectedTree" << endl;
+      cerr << "urdf2dh: Impossible to find " << base_link_name << " or "
+           << end_effector_link_name << " in the URDF."  << endl;
       return EXIT_FAILURE;
   }
 
@@ -289,24 +306,26 @@ int main(int argc, char** argv)
   result = iKinLimbFromKDLChain(kdl_chain,ikin_limb,chain_min,chain_max);
   if( !result )
   {
-      cerr << "urdf2dh error: Could not export KDL::Tree to iKinChain" << endl;
+      cerr << "urdf2dh: Could not export KDL::Tree to iKinChain" << endl;
       return EXIT_FAILURE;
   }
 
+  bool result_corrupted = false;
   if( !checkChainsAreEqual(kdl_chain,ikin_limb) )
   {
       cerr << "urdf2dh error: KDL::Chain and iKinChain results does not match" << endl;
-      return EXIT_FAILURE;
+      std::cerr << "urdf2dh: Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
+      return false;
   }
 
   yarp::os::Property prop;
   result = ikin_limb.toLinksProperties(prop);
   if( !result )
   {
-      cerr << "Could not export Link Properties from ikin_limb" << endl;
+      cerr << "urdf2dh: Could not export Link Properties from ikin_limb" << endl;
       return EXIT_FAILURE;
   } else {
-      std::cout << "Conversion to iKin DH chain completed correctly" << std::endl;
+      std::cout << "urdf2dh: Conversion to iKin DH chain completed correctly" << std::endl;
   }
 
   std::string ikin_prop = prop.toString();
@@ -316,15 +335,28 @@ int main(int argc, char** argv)
   //Write the properties to file
    std::ofstream ofs (ikin_ini_file_name.c_str(), std::ofstream::out);
 
-
-   for(int i=0; i < prop_bot.size(); i++ )
+   ofs << prop_bot.findGroup("type").toString() << std::endl;
+   ofs << prop_bot.findGroup("numLinks").toString() << std::endl;
+   ofs << prop_bot.findGroup("H0").toString() << std::endl;
+   for( int link = 0; link < ikin_limb.getN(); link++ )
    {
-       ofs << prop_bot.get(i).asList()->toString() << std::endl;
+        std::string link_name = "link_" + int2string(link);
+        ofs << prop_bot.findGroup(link_name).toString() << std::endl;
+
    }
+   ofs << prop_bot.findGroup("HN").toString() << std::endl;
+
 
    ofs.close();
 
-  return EXIT_SUCCESS;
+   if( result_corrupted )
+   {
+       return EXIT_FAILURE;
+   }
+   else
+   {
+     return EXIT_SUCCESS;
+   }
 }
 
 

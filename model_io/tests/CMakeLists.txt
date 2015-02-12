@@ -1,7 +1,4 @@
-if(ENABLE_IKIN)
-    find_package(YARP REQUIRED)
-    find_package(ICUB REQUIRED)
-endif()
+
 
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
@@ -17,6 +14,15 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/format_examples/symoro_par/fake_puma.
 target_link_libraries(check_symoro_par_import_fixed_chain_regressor idyntree-core idyntree-model-io ${orocos_kdl_LIBRARIES})
 add_test(NAME test_par_import_fixed_chain_regressor COMMAND check_symoro_par_import_fixed_chain_regressor fake_puma.par)
 
+if(IDYNTREE_USE_ICUB_MAIN)
+    find_package(YARP REQUIRED)
+    find_package(ICUB REQUIRED)
+    include_directories(SYSTEM ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+    add_executable(check_iKin_export_random_chain check_iKin_export_random_chain.cpp)
+    target_link_libraries(check_iKin_export_random_chain idyntree-core idyntree-model-io ${YARP_LIBRARIES} iKin)
+    add_test(NAME test_check_iKin_export_random_chain COMMAND check_iKin_export_random_chain)
+
+endif()
 
 #check iKin Denavit Hartenberg parameters export
 #add_executable(check_iKin_export_random_chain check_iKin_export_random_chain.cpp)

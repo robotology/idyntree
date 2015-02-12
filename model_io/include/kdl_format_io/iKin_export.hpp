@@ -1,14 +1,14 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
-*  
+*
 *  Copyright (c) 2013, Istituto Italiano di Tecnologia,
 *   CoDyCo project
 *  All rights reserved.
-* 
+*
 *  Redistribution and use in source and binary forms, with or without
 *  modification, are permitted provided that the following conditions
 *  are met:
-* 
+*
 *   * Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   * Redistributions in binary form must reproduce the above
@@ -18,7 +18,7 @@
 *   * Neither the name of the Willow Garage nor the names of its
 *     contributors may be used to endorse or promote products derived
 *     from this software without specific prior written permission.
-* 
+*
 *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -55,17 +55,19 @@ namespace kdl_format_io{
  *  \note iKinLimb supports only rotational joints
  *        links connected by fixed joints are wielded
  *        if a translational joint is found an error is returned
- * 
+ *
  * \param kdl_chain The KDL::Chain
  * \param iKin_chain The resulting iKinChain
  * \param min (optional) array of minimum values for joint position
  * \param max (optional) array of maximum values for joint position
+ * @param verbose Verbosity level, default 0
  * returns true on success, false on failure
  */
-bool iKinLimbFromKDLChain(const KDL::Chain& tree, 
+bool iKinLimbFromKDLChain(const KDL::Chain& tree,
                           iCub::iKin::iKinLimb& iKin_limb,
                           const KDL::JntArray & min,
-                          const KDL::JntArray & max);
+                          const KDL::JntArray & max,
+                          int verbose=0);
 
 }
 

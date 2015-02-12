@@ -163,7 +163,8 @@ bool closestPoints(const KDL::Vector direction_line_A,
     //Denominator should be nonnegative
     assert(denominator >= 0.0);
 
-    if( denominator < tol ) { /*std::cout << "denominator: " << denominator << std::endl;*/ return false; }
+    //std::cout << "denominator: " << denominator << std::endl;
+    if( denominator < tol ) { return false; }
 
     double s_C = (b*e-c*d)/denominator;
     double t_C = (a*e-b*d)/denominator;
@@ -197,10 +198,12 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
                    double & d_i,
                    double & alpha_i,
                    double & theta_i,
-                   double tol = 1e-6
+                   double tol = 1e-6,
+                   int verbose = 0
                   )
 {
-    /*
+    if( verbose > 4 )
+    {
     std::cout << "calculateDH called with: " << std::endl;
     std::cout << "direction_axis_z_n_minus_1 " << direction_axis_z_n_minus_1 << std::endl;
     std::cout << "direction_axis_x_n_minus_1 " << direction_axis_x_n_minus_1 << std::endl;
@@ -208,7 +211,7 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
     std::cout << "direction_axis_z_n " << direction_axis_z_n << std::endl;
     std::cout << "origin_axis_z_n " << origin_axis_z_n << std::endl;
     std::cout << "direction_axis_x_n_hint " << direction_axis_x_n_hint << std::endl;
-    */
+    }
 
     assert(fabs(direction_axis_z_n_minus_1.Norm()-1) < tol);
     assert(fabs(direction_axis_x_n_minus_1.Norm()-1) < tol);
@@ -236,46 +239,78 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
 
     //STEP 4
     if( !not_parallel ) {
-        #ifndef NDEBUG
-        std::cerr << "axis_z_n_minus_1 and axis_z_n are parallel" << std::endl;
-        #endif
+
         //If the axis are parallel, the x axis is the common normal of the two axis
         KDL::Vector origin_diff = origin_n_minus_1-dh_origin_n;
-        dh_direction_axis_x_n = dot(origin_diff,direction_axis_z_n_minus_1)*direction_axis_z_n_minus_1-origin_diff;
-        dh_direction_axis_x_n.Normalize();
+        if( origin_diff.Norm() > tol )
+        {
+            if( verbose > 3 )
+            {
+                std::cerr << "axis_z_n_minus_1 and axis_z_n are parallel" << std::endl;
+            }
+            dh_direction_axis_x_n = dot(origin_diff,direction_axis_z_n_minus_1)*direction_axis_z_n_minus_1-origin_diff;
+            if( verbose > 7 )
+            {
+                std::cerr << "origin_diff : " << origin_diff << std::endl;
+                std::cerr << "dh_direction_axis_x_n : " << dh_direction_axis_x_n << std::endl;
+            }
+            dh_direction_axis_x_n.Normalize();
 
-         //The positive direction of the axis_x_n is arbitrary, however for dealing with limit case (link where
-        // only alpha is different from zero)
-        //it is better to have the x_n axis to point in the same direction of the x_n of the original structure description
-        //\todo if theta different from zero ?
-        //double dh_direction_axis_x_n_sign = dot(dh_direction_axis_x_n, direction_axis_x_n_minus_1);
-        double dh_direction_axis_x_n_sign = dot(dh_direction_axis_x_n, direction_axis_x_n_hint);
-        dh_direction_axis_x_n = dh_direction_axis_x_n_sign >= 0 ? dh_direction_axis_x_n : -dh_direction_axis_x_n;
+            if( verbose > 6 )
+            {
+                std::cerr << "direction_axis_z_n_minus_1 : " << direction_axis_z_n_minus_1 << std::endl;
+                std::cerr << "direction_axis_z_n : " << direction_axis_z_n << std::endl;
+                std::cerr << "direction_axis_x_n : " << dh_direction_axis_x_n << std::endl;
+            }
 
-        assert((dh_direction_axis_x_n.Norm()-1) < tol);
+            //The positive direction of the axis_x_n is arbitrary, however for dealing with limit case (link where
+            // only alpha is different from zero)
+            //it is better to have the x_n axis to point in the same direction of the x_n of the original structure description
+            //\todo if theta different from zero ?
+            //double dh_direction_axis_x_n_sign = dot(dh_direction_axis_x_n, direction_axis_x_n_minus_1);
+            double dh_direction_axis_x_n_sign = dot(dh_direction_axis_x_n, direction_axis_x_n_hint);
+            dh_direction_axis_x_n = dh_direction_axis_x_n_sign >= 0 ? dh_direction_axis_x_n : -dh_direction_axis_x_n;
 
-        //std::cout << "Norm : " <<  dh_direction_axis_x_n.Norm() << std::endl;
+            assert((dh_direction_axis_x_n.Norm()-1) < tol);
+
+            //std::cout << "Norm : " <<  dh_direction_axis_x_n.Norm() << std::endl;
+         }
+         else
+         {
+            if( verbose > 3 )
+            {
+                std::cerr << "axis_z_n_minus_1 and axis_z_n are coincident" << std::endl;
+            }
+            // if the two axis are coincident, the direction of dh_direction_axis_x_n is totally arbitrary
+            // as long as it is perpendicular. We will take then the hint provided by : direction_axis_x_n_hint
+            // to get the dh_direction_axis_x_n, we will project direction_axis_x_n_hint onto the plane
+            // perpendicular to axis_z_n_minus_1 == axis_z_n, and will normalize the resulting vector
+            KDL::Vector _direction_axis_z_n = direction_axis_z_n;
+            KDL::Vector _direction_axis_x_n_hint = direction_axis_x_n_hint;
+            _direction_axis_x_n_hint.Normalize();
+            _direction_axis_z_n.Normalize();
+            dh_direction_axis_x_n = _direction_axis_x_n_hint-dot(_direction_axis_z_n,_direction_axis_x_n_hint)*_direction_axis_z_n;
+            dh_direction_axis_x_n.Normalize();
+         }
 
     } else {
 
         if( incident ) {
-            #ifndef NDEBUG
-            std::cerr << "axis_z_n_minus_1 and axis_z_n are incident" << std::endl;
-            #endif
+            if(verbose > 3)
+                std::cerr << "axis_z_n_minus_1 and axis_z_n are incident" << std::endl;
+
             dh_direction_axis_x_n = direction_axis_z_n_minus_1*direction_axis_z_n;
             dh_direction_axis_x_n.Normalize();
 
         } else {
-            #ifndef NDEBUG
-            std::cerr << "axis_z_n_minus_1 and axis_z_n are not incident" << std::endl;
-            #endif
+            if(verbose > 4)
+                std::cerr << "axis_z_n_minus_1 and axis_z_n are not incident" << std::endl;
+
             //if the two axis are not incident, the x axis is still the common normal
             dh_direction_axis_x_n  = dh_origin_n-buffer_vector;
             dh_direction_axis_x_n.Normalize();
 
         }
-
-        //todo TODO add case where z_n_minus_1 and z_n are coincident
          //The positive direction of the axis_x_n is arbitrary, however for dealing with limit case (link where
         // only alpha is different from zero)
         //it is better to have the x_n axis to point in the same direction of the x_n of the original structure description
@@ -294,7 +329,14 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
       //distance along x_i from O_i to the intersection of the x_i and z_{i-1} axes
     KDL::Vector x_i_z_i_minus_1_intersection_A, x_i_z_i_minus_1_intersection_B;
 
-    bool is_not_parallel = closestPoints(direction_axis_z_n_minus_1,origin_n_minus_1,dh_direction_axis_x_n,dh_origin_n,x_i_z_i_minus_1_intersection_A,x_i_z_i_minus_1_intersection_B,tol);
+    if( verbose > 4 )
+    {
+        std::cout << "dh_direction_axis_x_n      " << dh_direction_axis_x_n << std::endl;
+    }
+
+    bool is_not_parallel = closestPoints(direction_axis_z_n_minus_1,origin_n_minus_1,
+                                         dh_direction_axis_x_n,dh_origin_n,
+                                         x_i_z_i_minus_1_intersection_A,x_i_z_i_minus_1_intersection_B,tol);
 
     assert(is_not_parallel);
 
@@ -348,8 +390,6 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
     //std::cout << " sin_theta_i "<<  sin_theta_i << std::endl;
     theta_i = atan2(sin_theta_i,cos_theta_i);
 
-    if( (theta_i+M_PI) < tol ) { theta_i = 0; a_i = -a_i; }
-
     return true;
 }
 
@@ -357,8 +397,13 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
 bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
                           iCub::iKin::iKinLimb& iKin_limb,
                           const KDL::JntArray & min,
-                          const KDL::JntArray & max)
+                          const KDL::JntArray & max,
+                          int verbose)
 {
+    if( verbose > 2)
+        std::cout << "iKinLimbFromKDLChain called" << std::endl;
+
+
     //Getting Denavit Hartenberg parameters using the algorithm
     //in section 3.2.3 of http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf
     //First version, not using fixed joints
@@ -479,7 +524,8 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
                     d_i[i+1],
                     alpha_i[i+1],
                     theta_i[i+1],
-                    tol);
+                    tol,
+                    verbose);
     }
 
     KDL::Frame H0_kdl; //rigid roto-translation matrix from the root reference frame to the 0th frames
@@ -497,8 +543,8 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
     iKin_chain.setH0(KDLtoYarp_position(H0_kdl));
 
 #ifndef NDEBUG
-    std::cout << "H0: " << std::endl;
-    std::cout << H0_kdl << std::endl;
+    //std::cout << "H0: " << std::endl;
+    //std::cout << H0_kdl << std::endl;
 #endif
     for(int i=0; i < nj; i++ )
     {
@@ -515,7 +561,7 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
         //iKin_chain.pushLink new new_link;
         iKin_chain.pushLink(*p_new_link);
 #ifndef NDEBUG
-        std::cout << "iKinLink DH " << i << " : " << a_i[i+1] << " " << d_i[i+1] << " " << alpha_i[i+1] << " " << theta_i[i+1] << std::endl;
+        //std::cout << "iKinLink DH " << i << " : " << a_i[i+1] << " " << d_i[i+1] << " " << alpha_i[i+1] << " " << theta_i[i+1] << std::endl;
 #endif
     }
 
@@ -532,8 +578,8 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
     bool ret = iKin_chain.setHN(KDLtoYarp_position(HN_kdl));
     assert(ret);
 #ifndef NDEBUG
-    std::cout << "HN: " << std::endl;
-    std::cout << HN_kdl << std::endl;
+    //std::cout << "HN: " << std::endl;
+    //std::cout << HN_kdl << std::endl;
 #endif
 
 
@@ -541,9 +587,9 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
 
     for(int i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); }
 
-    #ifndef NDEBUG
-    std::cout << "iKinChainFromKDLChain: closing routine" << std::endl;
-    #endif
+    if(verbose >2)
+        std::cout << "iKinChainFromKDLChain: closing routine" << std::endl;
+
 
     return true;
 }
