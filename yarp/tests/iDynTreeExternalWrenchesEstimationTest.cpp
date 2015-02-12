@@ -234,8 +234,8 @@ int main()
     input_contact_list.push_back(first_contact);
     input_contact_list.push_back(second_contact);
 
-    snake_dyntree.addSkinDynLibAlias("snake_seg1",DEFAULT_BODY_PART_ID,first_contact_link);
-    snake_dyntree.addSkinDynLibAlias("snake_seg7",DEFAULT_BODY_PART_ID,second_contact_link);
+    snake_dyntree.addSkinDynLibAlias("snake_seg1","snake_seg1",DEFAULT_BODY_PART_ID,first_contact_link);
+    snake_dyntree.addSkinDynLibAlias("snake_seg7","snake_seg7",DEFAULT_BODY_PART_ID,second_contact_link);
 
     snake_dyntree.setContacts(input_contact_list);
 

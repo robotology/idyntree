@@ -273,13 +273,14 @@ KDL::Wrench DynTree::getMeasuredWrench(int link_id)
   return ft_list.getMeasuredWrench(link_id,measured_wrenches);
 }
 
-int DynTree::getLinkFromSkinDynLibID(int body_part, int link)
+/*
+iDynTreeLinkAndFrame DynTree::getiDynTreeLinkFrameFromSkinDynLibID(int body_part, int link)
 {
     // std::cout << "getLinkFromSkinDynLibID" << body_part << " " << link << std::endl;
     skinDynLibLinkID sdl_id;
     sdl_id.body_part = body_part;
     sdl_id.local_link_index = link;
-    for( std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
+    for( std::map<skinDynLibLinkID,iDynTreeLinkFrame>::iterator it = skinDynLibLinkMap.begin();
          it != skinDynLibLinkMap.end(); it++ )
     {
         if( it->first.body_part == body_part &&
@@ -288,8 +289,11 @@ int DynTree::getLinkFromSkinDynLibID(int body_part, int link)
             return it->second;
         }
     }
-    return -1;
-}
+    iDynTreeLinkAndFrame error_id;
+    error_id.link_index = -1;
+    error_id.frame_index = -1;
+    return error_id;
+}*/
 
 void DynTree::buildAb_contacts()
 {
@@ -369,6 +373,22 @@ void DynTree::buildAb_contacts()
     for(int sg=0; sg < NrOfDynamicSubGraphs; sg++ ) {
         for(it = contacts[sg].begin(); it!=contacts[sg].end(); it++)
         {
+            //get link index
+            int skinDynLib_body_part = it->getBodyPart();
+            int skinDynLib_link_index = it->getLinkNumber();
+
+            int iDynTree_link_index = -1;
+            int iDynTree_skinFrame_index = -1;
+
+            bool skinDynLib_ID_found = skinDynLib2iDynTree(skinDynLib_body_part,skinDynLib_link_index,
+                                                           iDynTree_link_index,iDynTree_skinFrame_index);
+
+            if( !skinDynLib_ID_found )
+            {
+                std::cerr << "[ERR] DynTree::buildAb_contacts() not found, skipping contact" << std::endl;
+                continue;
+            }
+
             if(it->isMomentKnown())
             {
                 if(it->isForceDirectionKnown())
@@ -397,27 +417,51 @@ void DynTree::buildAb_contacts()
         for( it = contacts[sg].begin(); it!=contacts[sg].end(); it++)
         {
             //get link index
-            int body_part = it->getBodyPart();
-            int local_link_index = it->getLinkNumber();
-            int link_contact_index = getLinkFromSkinDynLibID(body_part,local_link_index);
-            //partition.getGlobalLinkIndex(body_part,local_link_index);
+            int skinDynLib_body_part = it->getBodyPart();
+            int skinDynLib_link_index = it->getLinkNumber();
+
+            int iDynTree_link_index = -1;
+            int iDynTree_skinFrame_index = -1;
+
+            bool skinDynLib_ID_found = skinDynLib2iDynTree(skinDynLib_body_part,skinDynLib_link_index,
+                                                           iDynTree_link_index,iDynTree_skinFrame_index);
+
+            if( !skinDynLib_ID_found )
+            {
+                std::cerr << "[ERR] DynTree::buildAb_contacts() not found, skipping contact" << std::endl;
+                continue;
+            }
 
             //Subgraph information
-            int subgraph_index = link2subgraph_index[link_contact_index];
+            int subgraph_index = link2subgraph_index[iDynTree_link_index];
 
             assert(subgraph_index == sg);
 
+            // We will write the force estimation minimization problem in
+            // the plucker frame of the root link of the subgraph
             int subgraph_root = subgraph_index2root_link[subgraph_index];
 
             //Get Frame transform between contact link and subgraph root
             //Inefficient but leads to cleaner code, if necessary can be improved
-            KDL::Frame H_root_link = getFrameLoop(undirected_tree,q,dynamic_traversal,subgraph_root,link_contact_index);
+            KDL::Frame H_root_link = getFrameLoop(undirected_tree,q,dynamic_traversal,subgraph_root,iDynTree_link_index);
+            // \todo TODO this transformation is constant, just store it somewhere
+            KDL::Frame H_link_skinFrame = getFrameLoop(undirected_tree,q,dynamic_traversal,iDynTree_link_index,iDynTree_skinFrame_index);
 
-            KDL::Vector COP;
-            YarptoKDL(it->getCoP(),COP);
+            // skinDynLib express the force in a frame that can be
+            // different from iDynTree link frame, we will call this
+            // skinFrame . The COP got from the the skinContactList is
+            // expressed in this skinFrame, and we will estimate the force
+            // and the torque in this skinFrame because the force will be
+            // still streamed out in a skinContactList form.
+            KDL::Vector COP_skinFrame;
+            YarptoKDL(it->getCoP(),COP_skinFrame);
 
-            KDL::Frame H_link_contact = KDL::Frame(COP);
-            KDL::Frame H_root_contact = H_root_link*H_link_contact;
+            // An additional frame is the frame oriented as the skinFrame, but
+            // with the origin in the contact COP . We will call this frame the
+            // "contactFrame"
+
+            KDL::Frame H_skinFrame_contactFrame = KDL::Frame(COP_skinFrame);
+            KDL::Frame H_root_contactFrame = H_root_link*H_link_skinFrame*H_skinFrame_contactFrame;
 
             if(it->isForceDirectionKnown())
             {
@@ -425,7 +469,7 @@ void DynTree::buildAb_contacts()
                 yarp::sig::Matrix un(6,1);
                 un.zero();
                 un.setSubcol(it->getForceDirection(),3,0); // force direction unit vector
-                yarp::sig::Matrix H_adj_root_contact = KDLtoYarp_wrench(H_root_contact);
+                yarp::sig::Matrix H_adj_root_contact = KDLtoYarp_wrench(H_root_contactFrame);
                 yarp::sig::Matrix col = H_adj_root_contact*un;
                 A_contacts[sg].setSubmatrix(col,0,colInd);
                 colInd += 1;
@@ -435,12 +479,12 @@ void DynTree::buildAb_contacts()
             {
                 if( it->isMomentKnown() ) {
                     // 3 UNKNOWNS: FORCE
-                    A_contacts[sg].setSubmatrix(KDLtoYarp_wrench(H_root_contact).submatrix(0,5,3,5),0,colInd);
+                    A_contacts[sg].setSubmatrix(KDLtoYarp_wrench(H_root_contactFrame).submatrix(0,5,3,5),0,colInd);
                     colInd += 3;
 
                 } else {
                     // 6 UNKNOWNS: FORCE AND MOMENT
-                    A_contacts[sg].setSubmatrix(KDLtoYarp_wrench(H_root_contact),0,colInd);
+                    A_contacts[sg].setSubmatrix(KDLtoYarp_wrench(H_root_contactFrame),0,colInd);
                     colInd += 6;
                 }
 
@@ -463,6 +507,21 @@ void DynTree::store_contacts_results()
         iCub::skinDynLib::dynContactList::iterator it;
         for(it = contacts[sg].begin(); it!=contacts[sg].end(); it++)
         {
+            //get link index
+            int skinDynLib_body_part = it->getBodyPart();
+            int skinDynLib_link_index = it->getLinkNumber();
+
+            int iDynTree_link_index = -1;
+            int iDynTree_skinFrame_index = -1;
+
+            bool skinDynLib_ID_found = skinDynLib2iDynTree(skinDynLib_body_part,skinDynLib_link_index,
+                                                           iDynTree_link_index,iDynTree_skinFrame_index);
+
+            if( !skinDynLib_ID_found )
+            {
+                std::cerr << "[ERR] DynTree::buildAb_contacts() not found, skipping contact" << std::endl;
+                continue;
+            }
 
             //Store the result in dynContactList, for output
             if(it->isForceDirectionKnown()) {
@@ -490,16 +549,22 @@ void DynTree::store_contacts_results()
             }
 
             //Store the results in f_ext, for RNEA dynamic loop
+            // f_ext is expressed in the link Plucker frame,
+            // while skinContactList wrenches are expressed in the contactFrame
             KDL::Vector COP, force, moment;
             YarptoKDL(it->getCoP(),COP);
-            KDL::Frame H_link_contact = KDL::Frame(COP);
+            KDL::Frame H_skinFrame_contactFrame = KDL::Frame(COP);
             YarptoKDL(it->getForce(),force);
             YarptoKDL(it->getMoment(),moment);
 
-            KDL::Wrench f_contact = KDL::Wrench(force,moment);
-            //Get global link index from part ID and local index
-            int link_nmbr = getLinkFromSkinDynLibID(it->getBodyPart(),it->getLinkNumber());
-            f_ext[link_nmbr] = H_link_contact*f_contact;
+            KDL::Wrench f_ext_contactFrame = KDL::Wrench(force,moment);
+
+            // Todo store and avoid repeated computations
+            KDL::Frame H_link_skinFrame = getFrameLoop(undirected_tree,q,dynamic_traversal,iDynTree_link_index,iDynTree_skinFrame_index);
+
+            KDL::Frame H_link_contactFrame = H_link_skinFrame*H_skinFrame_contactFrame;
+
+            f_ext[iDynTree_link_index] = H_link_contactFrame*f_ext_contactFrame;
         }
     }
 }
@@ -1048,19 +1113,24 @@ bool DynTree::setContacts(const iCub::skinDynLib::dynContactList & contacts_list
     for(iCub::skinDynLib::dynContactList::const_iterator it = contacts_list.begin();
             it != contacts_list.end(); it++ )
     {
-        //get link index
-        int body_part = it->getBodyPart();
-        int local_link_index = it->getLinkNumber();
-        int link_contact_index = getLinkFromSkinDynLibID(body_part,local_link_index);
-        if( link_contact_index == -1 ) {
-            #ifndef NDEBUG
-            std::cerr << "getLinkFromSkinDynLibID() returned -1 for body_part " << body_part << " local_link_index " << local_link_index << std::endl;
-            assert(false);
-            #endif
-            return false;
-        }
+            //get link index
+            int skinDynLib_body_part = it->getBodyPart();
+            int skinDynLib_link_index = it->getLinkNumber();
 
-        int subgraph_id = getSubGraphIndex(link_contact_index);
+            int iDynTree_link_index = -1;
+            int iDynTree_skinFrame_index = -1;
+
+            bool skinDynLib_ID_found = skinDynLib2iDynTree(skinDynLib_body_part,skinDynLib_link_index,
+                                                           iDynTree_link_index,iDynTree_skinFrame_index);
+
+            if( !skinDynLib_ID_found )
+            {
+                std::cerr << "[ERR] DynTree::buildAb_contacts() not found, skipping contact" << std::endl;
+                continue;
+            }
+
+
+        int subgraph_id = getSubGraphIndex(iDynTree_link_index);
 
         contacts[subgraph_id].push_back(*it);
     }
@@ -2063,47 +2133,61 @@ std::vector<yarp::sig::Vector> DynTree::getSubTreeInternalDynamics()
     return return_value;
 }
 
-bool DynTree::addSkinDynLibAlias(std::string link, int body_part, int local_link_index)
+bool DynTree::addSkinDynLibAlias(const std::string iDynTree_link_name, const std::string iDynTree_frame_name,
+                                const int skinDynLib_body_part, const int skinDynLib_link_index)
 {
-   int link_index = this->getLinkIndex(link);
-   if( link_index < 0 )
+   int iDynTree_link_index = this->getLinkIndex(iDynTree_link_name);
+   if( iDynTree_link_index < 0 )
    {
-       std::cerr << "[ERR] addSkinDynLibAlias : link " << link << " not found " << std::endl;
+       std::cerr << "[ERR] addSkinDynLibAlias : link " << iDynTree_link_name << " not found in the model " << std::endl;
+   }
+
+   int iDynTree_frame_index = this->getLinkIndex(iDynTree_frame_name);
+   if( iDynTree_frame_index < 0 )
+   {
+       std::cerr << "[ERR] addSkinDynLibAlias : frame " << iDynTree_frame_name << " not found in the model " << std::endl;
    }
 
    skinDynLibLinkID sdl_id;
-   sdl_id.body_part = body_part;
-   sdl_id.local_link_index = local_link_index;
+   sdl_id.body_part = skinDynLib_body_part;
+   sdl_id.local_link_index = skinDynLib_link_index;
+
+   iDynTreeLinkAndFrame idyntree_id;
+   idyntree_id.link_index = iDynTree_link_index;
+   idyntree_id.frame_index = iDynTree_frame_index;
 
    //Remove any existing alias for this link to avoid anomalies
-   this->removeSkinDynLibAlias(link);
+   this->removeSkinDynLibAlias(iDynTree_link_name);
 
-   std::cout << "[DEBUG] inserting skinDynLib alias " << link_index << "= " << body_part << " , " << local_link_index << std::endl;
-   skinDynLibLinkMap.insert(std::pair<skinDynLibLinkID,int>(sdl_id,link_index));
+   skinDynLibLinkMap.insert(std::pair<skinDynLibLinkID,iDynTreeLinkAndFrame>(sdl_id,idyntree_id));
 
    return true;
 }
 
-bool DynTree::getSkinDynLibAlias(std::string link, int & body_part, int & local_link_index)
+bool DynTree::getSkinDynLibAlias(const std::string iDynTree_link_name, std::string & iDynTree_frame_name,
+                                int & skinDynLib_body_part, int & skinDynLib_link_index)
 {
-   int link_index = this->getLinkIndex(link);
-   if( link_index < 0 )
+   int iDynTree_link_index = this->getLinkIndex(iDynTree_link_name);
+   if( iDynTree_link_index < 0 )
    {
-       std::cerr << "[ERR] getSkinDynLibAlias : link " << link << " not found " << std::endl;
+       std::cerr << "[ERR] getSkinDynLibAlias : link " << iDynTree_link_name << " not found " << std::endl;
        return false;
    }
 
    skinDynLibLinkID sdl_id;
-   sdl_id.body_part = body_part;
-   sdl_id.local_link_index = local_link_index;
+   sdl_id.body_part = skinDynLib_body_part;
+   sdl_id.local_link_index = skinDynLib_link_index;
 
-   for(std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
+     // TODO \todo What is this crazyness??? Linear search of a map??
+   for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.begin();
        it != skinDynLibLinkMap.end(); it++ )
    {
-       if( it->second == link_index )
+       if( it->second.link_index == iDynTree_link_index )
        {
-           body_part = it->first.body_part;
-           local_link_index = it->first.local_link_index;
+           skinDynLib_body_part = it->first.body_part;
+           skinDynLib_link_index = it->first.local_link_index;
+           int iDynTree_frame_index = it->second.frame_index;
+           iDynTree_frame_name = undirected_tree.getLink(iDynTree_frame_index)->getName();
            break;
        }
    }
@@ -2114,18 +2198,20 @@ bool DynTree::getSkinDynLibAlias(std::string link, int & body_part, int & local_
 
 //FIXME TODO \todo implemente this method with an appropriate data structure, such that
 //  it has a complexity of O(1)
-bool DynTree::getSkinDynLibAlias(int global_link_index, int & body_part, int & local_link_index)
+bool DynTree::getSkinDynLibAlias(const int iDynTree_link_index, int & iDynTree_frame_index,
+                        int & skinDynLib_body_part, int & skinDynLib_link_index)
 {
-  if( global_link_index < 0 || global_link_index >= this->getNrOfLinks() ) return false;
-  int link_index = global_link_index;
+  if( iDynTree_link_index < 0 || iDynTree_link_index >= this->getNrOfLinks() ) return false;
 
-   for(std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
+  // TODO \todo What is this crazyness??? Linear search of a map??
+   for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.begin();
        it != skinDynLibLinkMap.end(); it++ )
    {
-       if( it->second == link_index )
+       if( it->second.link_index == iDynTree_link_index )
        {
-           body_part = it->first.body_part;
-           local_link_index = it->first.local_link_index;
+           skinDynLib_body_part = it->first.body_part;
+           skinDynLib_link_index = it->first.local_link_index;
+           iDynTree_frame_index = it->second.frame_index;
            return true;
        }
    }
@@ -2142,10 +2228,10 @@ bool DynTree::removeSkinDynLibAlias(std::string link)
        std::cerr << "[ERR] removeSkinDynLibAlias : link " << link << " not found " << std::endl;
    }
 
-   for(std::map<skinDynLibLinkID,int>::iterator it = skinDynLibLinkMap.begin();
+   for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.begin();
        it != skinDynLibLinkMap.end(); it++ )
    {
-       if( it->second == link_index )
+       if( it->second.link_index == link_index )
        {
            skinDynLibLinkMap.erase(it);
            break;
@@ -2155,8 +2241,31 @@ bool DynTree::removeSkinDynLibAlias(std::string link)
    return true;
 }
 
+bool DynTree::skinDynLib2iDynTree(const int skinDynLib_body_part,
+                                 const int skinDynLib_link_index,
+                                 int & iDynTree_link_index,
+                                 int & iDynTree_frame_index)
+{
+    skinDynLibLinkID skinID;
+    skinID.body_part = skinDynLib_body_part;
+    skinID.local_link_index = skinDynLib_link_index;
 
-    bool DynTree::loadJointLimitsFromURDFFile(std::string urdfFile, KDL::CoDyCo::UndirectedTree undirectedTree, yarp::sig::Vector &yarpJointMinLimit, yarp::sig::Vector &yarpJointMaxLimit) {
+    std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.find(skinID);
+
+    if( it == skinDynLibLinkMap.end() )
+    {
+        std::cerr << "[ERR] DynTree::skinDynLib2iDynTree : skinDynLib link "
+                  << skinDynLib_body_part << " " << skinDynLib_link_index << " not found " << std::endl;
+        return false;
+    }
+
+    iDynTree_link_index  = it->second.link_index;
+    iDynTree_frame_index = it->second.frame_index;
+
+    return true;
+}
+
+bool DynTree::loadJointLimitsFromURDFFile(std::string urdfFile, KDL::CoDyCo::UndirectedTree undirectedTree, yarp::sig::Vector &yarpJointMinLimit, yarp::sig::Vector &yarpJointMaxLimit) {
 
         unsigned int NrOfDOFs = undirectedTree.getNrOfDOFs();
         KDL::JntArray kdlJointMinLimit(NrOfDOFs), kdlJointMaxLimit(NrOfDOFs);

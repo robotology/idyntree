@@ -85,6 +85,7 @@
 #include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
 
 #include <kdl_codyco/ftsensor.hpp>
+#include "iDyn2KDL.h"
 
 #include <kdl/jntarray.hpp>
 #include <kdl/tree.hpp>
@@ -114,7 +115,7 @@ class skinDynLibLinkID {
         {
            return true;
         }
-        else if(this->body_part < k.body_part)
+        else if(this->body_part > k.body_part)
         {
            return false;
         }
@@ -130,6 +131,13 @@ class skinDynLibLinkID {
                 this->local_link_index == k.local_link_index);
     }
 };
+
+class iDynTreeLinkAndFrame {
+     public:
+          int link_index;
+          int frame_index;
+};
+
 
 
 /**
@@ -304,7 +312,7 @@ class DynTree  {
 
         //Map for correctly deal with skinDynLib IDs
 
-        std::map<skinDynLibLinkID,int> skinDynLibLinkMap;
+        std::map<skinDynLibLinkID,iDynTreeLinkAndFrame> skinDynLibLinkMap;
 
 
     static bool loadJointLimitsFromURDFFile(std::string urdfFile, KDL::CoDyCo::UndirectedTree undirectedTree, yarp::sig::Vector &yarpJointMinLimit, yarp::sig::Vector &yarpJointMaxLimit);
@@ -442,16 +450,46 @@ class DynTree  {
 
 
         /**
-         * Add a alias in the form (body_part, link_index) for a link
+         * This function enables interoperability between the iDynTree library
+         * and the iCub skinDynLib library.
+         *
+         * This function can be used to assign a match between a skinDynLib link,
+         * and a iDynTree link.
+         * In skinDynLib a link is represented by two numbers:
+         *   * the bodyPart, a numeric id representing a part of the robot
+         *   * the linkIndex, a progressive numeric id uniquely identifyng  the link in the part
+         * We associate this to two iDynTree concept
+         *   * the link_name of the considered link
+         *   * the frame_name of the frame used by skinDynLib when dealing with that link.
+         *         This frame can be the link frame, in this case frame_name == link_name,
+         *          otherwise another frame can be used, under the constraint that this frame
+         *          must be rigidly attached to the considered link.
+         *
          */
-        bool addSkinDynLibAlias(std::string link, int body_part, int local_link_index);
+        bool addSkinDynLibAlias(const std::string iDynTree_link_name, const std::string iDynTree_frame_name,
+                                const int skinDynLib_body_part, const int skinDynLib_link_index);
 
-        bool getSkinDynLibAlias(std::string link, int & body_part, int & local_link_index);
+        /**
+         * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method.
+         */
+        bool getSkinDynLibAlias(const std::string iDynTree_link_name, std::string & iDynTree_frame_name,
+                                int & skinDynLib_body_part, int & skinDynLib_link_index);
 
-        bool getSkinDynLibAlias(int global_link_index, int & body_part, int & local_link_index);
+        /**
+         * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method.
+         */
+        bool getSkinDynLibAlias(const int iDynTree_link_index,
+                                 int & iDynTree_frame_index,
+                                 int & skinDynLib_body_part,
+                                 int & skinDynLib_link_index);
 
-        int getLinkFromSkinDynLibID(int body_part, int link);
-
+        /**
+         * Convert a skinDynLib identifier to a iDynTree link/frame identifier.
+         */
+        bool skinDynLib2iDynTree(const int skinDynLib_body_part,
+                                 const int skinDynLib_link_index,
+                                 int & iDynTree_link_index,
+                                 int & iDynTree_frame_index);
         /**
          * Remove a alias in the form (body_part, link_index) for a link
          */
