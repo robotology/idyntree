@@ -115,7 +115,7 @@ class skinDynLibLinkID {
         {
            return true;
         }
-        else if(this->body_part < k.body_part)
+        else if(this->body_part > k.body_part)
         {
            return false;
         }
