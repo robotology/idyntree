@@ -50,7 +50,7 @@ if(ENABLE_URDF)
     include_directories(SYSTEM ${urdfdom_INCLUDE_DIRS})
     include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS})
     include_directories(SYSTEM ${console_bridge_INCLUDE_DIRS})
-    
+
     set(URDF_SRCS src/converters/urdf_export.cpp
                   src/converters/urdf_import.cpp
                   src/converters/urdf_sensor_import.cpp)
@@ -60,24 +60,24 @@ if(ENABLE_URDF)
                   include/kdl_format_io/urdf_sensor_import.hpp)
 
     set(URDF_LIBS ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${TinyXML_LIBRARIES})
-    
+
     SOURCE_GROUP("URDF\\Source Files" FILES ${URDF_SRCS})
     SOURCE_GROUP("URDF\\Header Files" FILES ${URDF_HPPS})
-    
+
 endIF()
 
 if(ENABLE_SYMORO_PAR)
     add_subdirectory(expression_parser)
-    
+
     include_directories(SYSTEM "${expression-parser_SOURCE_DIR}/include")
-    
-    set(SYMORO_PAR_SRCS src/converters/symoro_par_import.cpp)
-    set(SYMORO_PAR_HPPS include/kdl_format_io/symoro_par_import.hpp include/kdl_format_io/symoro_par_model.hpp)
+
+    set(SYMORO_PAR_SRCS src/converters/symoro_par_import.cpp src/converters/symoro_par_import_serialization.cpp)
+    set(SYMORO_PAR_HPPS include/kdl_format_io/symoro_par_import.hpp include/kdl_format_io/symoro_par_model.hpp include/kdl_format_io/symoro_par_import_serialization.hpp)
     if(ENABLE_SERIALIZATION_IO)
         set(SYMORO_PAR_HPPS ${SYMORO_PAR_HPPS} include/kdl_format_io/symoro_par_import_serialization.hpp)
         set(SYMORO_PAR_SRCS ${SYMORO_PAR_SRCS} src/converters/symoro_par_import_serialization.cpp)
     endif()
-    
+
     SOURCE_GROUP("Symoro\\Source Files" FILES ${SYMORO_PAR_SRCS})
     SOURCE_GROUP("Symoro\\Header Files" FILES ${SYMORO_PAR_HPPS})
 endif()
@@ -85,10 +85,10 @@ endif()
 if(IDYNTREE_USE_ICUB_MAIN)
   set(IKIN_HPPS include/kdl_format_io/iKin_export.hpp)
   set(IKIN_SRCS src/converters/iKin_export.cpp)
-  
+
   SOURCE_GROUP("iKin\\Source Files" FILES ${IKIN_SRCS})
   SOURCE_GROUP("iKin\\Header Files" FILES ${IKIN_HPPS})
-  
+
 endif()
 
 set(IDYNTREE_MODEL_IO_HEADERS ${SYMORO_PAR_HPPS} ${URDF_HPPS} ${IKIN_HPPS})

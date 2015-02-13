@@ -41,9 +41,7 @@
 #include <iCub/iKin/iKinFwd.h>
 #include <kdl/chainfksolverpos_recursive.hpp>
 
-#ifndef NDEBUG
 #include <kdl/frames_io.hpp>
-#endif
 
 using namespace std;
 
