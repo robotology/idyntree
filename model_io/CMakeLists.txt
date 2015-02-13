@@ -120,7 +120,7 @@ if(IDYNTREE_USE_ICUB_MAIN)
     find_package(YARP REQUIRED)
     find_package(ICUB REQUIRED)
     include_directories(SYSTEM ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
-    target_link_libraries(idyntree-model-io idyntree-core ${YARP_LIBRARIES} iKin ${ICUB_LIBRARIES} ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(idyntree-model-io idyntree-core ${YARP_LIBRARIES} iKin ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
 endif()
 
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
