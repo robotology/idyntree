@@ -1359,8 +1359,7 @@ bool DynTree::dynamicRNEA()
             measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f);
         }
     }
-    if( ret < 0 ) return false;
-    return true;
+    return ret >= 0;
 }
 
 ////////////////////////////////////////////////////////////////////////

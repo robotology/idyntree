@@ -17,6 +17,18 @@
 
 namespace KDL {
 namespace CoDyCo {
+
+    void TreeSerialization::addDFSrecursive_only_links(SegmentMap::const_iterator current_el, int & link_cnt )
+    {
+        links[link_cnt] = current_el->first;
+        link_cnt++;
+
+        for( unsigned int i=0; i < GetTreeElementChildren(current_el->second).size(); i++ ) {
+            addDFSrecursive_only_links(GetTreeElementChildren(current_el->second)[i],link_cnt);
+        }
+
+    }
+
     void TreeSerialization::addDFSrecursive(SegmentMap::const_iterator current_el, int & link_cnt, int & fixed_joints_cnt )
     {
         #ifndef NDEBUG
@@ -106,7 +118,9 @@ namespace CoDyCo {
         assert(this->is_consistent(tree));
     }
 
-    TreeSerialization::TreeSerialization(const Tree & tree, std::vector<std::string> & links_in, std::vector<std::string> & joints_in)
+    TreeSerialization::TreeSerialization(const Tree & tree,
+                                         std::vector<std::string> & links_in,
+                                         std::vector<std::string> & joints_in)
     {
         assert(links_in.size() == tree.getNrOfSegments());
         assert(joints_in.size() == tree.getNrOfSegments()-1 || joints_in.size() == tree.getNrOfJoints() );
@@ -133,6 +147,65 @@ namespace CoDyCo {
 
         }
 
+        assert(this->is_consistent(tree));
+    }
+
+    TreeSerialization::TreeSerialization(const Tree & tree,
+                                         std::vector<std::string> & joints_in)
+    {
+
+        //Deal with joints
+        assert(joints_in.size() == tree.getNrOfSegments()-1 || joints_in.size() == tree.getNrOfJoints() );
+
+        if( joints_in.size() == tree.getNrOfSegments()-1 ) {
+            junctions = joints_in;
+
+            dofs = junctions;
+
+            dofs.resize(tree.getNrOfJoints());
+        } else {
+            dofs = joints_in;
+            junctions = dofs;
+            junctions.resize(tree.getNrOfSegments()-1);
+
+            int fixed_joints_cnt = 0;
+
+            SegmentMap::const_iterator root = tree.getRootSegment();
+            for (unsigned int i=0; i < GetTreeElementChildren(root->second).size(); i++) {
+                addDFSrecursive_only_fixed(GetTreeElementChildren(root->second)[i],fixed_joints_cnt);
+            }
+
+        }
+
+        //Deal with links
+        SegmentMap::const_iterator root, real_root;
+        SegmentMap::const_iterator child;
+
+        int link_cnt = 0;
+
+         root = tree.getRootSegment();
+        /** \todo remove this assumption */
+        assert(GetTreeElementChildren(root->second).size() != 0);
+        //SegmentMap::const_iterator root_child = root->second.children[0];
+
+        //This should be coherent with the behaviour of UndirectedTree
+        if( !isBaseLinkFake(tree) )
+        {
+            real_root = root;
+            links.resize(links.size()+1);
+            junctions.resize(junctions.size()+1);
+        } else {
+            real_root = GetTreeElementChildren(root->second)[0];
+        }
+
+        //Add real_root link without including fake joint
+        links[link_cnt] = real_root->first;
+
+        link_cnt++;
+
+        for (unsigned int i=0; i < GetTreeElementChildren(real_root->second).size(); i++) {
+            addDFSrecursive_only_links(GetTreeElementChildren(real_root->second)[i],link_cnt);
+        }
         assert(this->is_consistent(tree));
     }
 
