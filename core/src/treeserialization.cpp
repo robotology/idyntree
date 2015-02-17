@@ -219,6 +219,8 @@ namespace CoDyCo {
         }
 
         //Deal with links
+        links = std::vector<std::string>(tree.getNrOfSegments());
+
         SegmentMap::const_iterator root, real_root;
         SegmentMap::const_iterator child;
 
