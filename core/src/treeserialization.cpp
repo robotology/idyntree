@@ -57,6 +57,8 @@ namespace CoDyCo {
     void TreeSerialization::addDFSrecursive_only_fixed(SegmentMap::const_iterator current_el, int & fixed_joints_cnt )
     {
         if (GetTreeElementSegment(current_el->second).getJoint().getType() == Joint::None) {
+            assert((int)junctions.size() == getNrOfJunctions());
+            assert(getNrOfDOFs()+fixed_joints_cnt < (int)junctions.size());
             junctions[getNrOfDOFs() + fixed_joints_cnt] = GetTreeElementSegment(current_el->second).getJoint().getName();
             fixed_joints_cnt++;
         }
@@ -138,12 +140,34 @@ namespace CoDyCo {
             junctions = dofs;
             junctions.resize(tree.getNrOfSegments()-1);
 
+
+              SegmentMap::const_iterator root, real_root;
+            SegmentMap::const_iterator child;
+
             int fixed_joints_cnt = 0;
 
-            SegmentMap::const_iterator root = tree.getRootSegment();
-            for (unsigned int i=0; i < GetTreeElementChildren(root->second).size(); i++) {
-                addDFSrecursive_only_fixed(GetTreeElementChildren(root->second)[i],fixed_joints_cnt);
+
+            root = tree.getRootSegment();
+
+            root = tree.getRootSegment();
+            /** \todo remove this assumption */
+            assert(GetTreeElementChildren(root->second).size() != 0);
+            //SegmentMap::const_iterator root_child = root->second.children[0];
+
+            //This should be coherent with the behaviour of UndirectedTree
+            if( !isBaseLinkFake(tree) )
+            {
+                real_root = root;
+                links.resize(links.size()+1);
+                junctions.resize(junctions.size()+1);
+            } else {
+                real_root = GetTreeElementChildren(root->second)[0];
             }
+
+            for (unsigned int i=0; i < GetTreeElementChildren(real_root->second).size(); i++) {
+                addDFSrecursive_only_fixed(GetTreeElementChildren(real_root->second)[i],fixed_joints_cnt);
+            }
+
 
         }
 
@@ -168,11 +192,28 @@ namespace CoDyCo {
             junctions = dofs;
             junctions.resize(tree.getNrOfSegments()-1);
 
+            SegmentMap::const_iterator root, real_root;
+            SegmentMap::const_iterator child;
+
             int fixed_joints_cnt = 0;
 
-            SegmentMap::const_iterator root = tree.getRootSegment();
-            for (unsigned int i=0; i < GetTreeElementChildren(root->second).size(); i++) {
-                addDFSrecursive_only_fixed(GetTreeElementChildren(root->second)[i],fixed_joints_cnt);
+            root = tree.getRootSegment();
+            /** \todo remove this assumption */
+            assert(GetTreeElementChildren(root->second).size() != 0);
+            //SegmentMap::const_iterator root_child = root->second.children[0];
+
+            //This should be coherent with the behaviour of UndirectedTree
+            if( !isBaseLinkFake(tree) )
+            {
+                real_root = root;
+                links.resize(links.size()+1);
+                junctions.resize(junctions.size()+1);
+            } else {
+                real_root = GetTreeElementChildren(root->second)[0];
+            }
+
+            for (unsigned int i=0; i < GetTreeElementChildren(real_root->second).size(); i++) {
+                addDFSrecursive_only_fixed(GetTreeElementChildren(real_root->second)[i],fixed_joints_cnt);
             }
 
         }
@@ -200,6 +241,7 @@ namespace CoDyCo {
 
         //Add real_root link without including fake joint
         links[link_cnt] = real_root->first;
+
 
         link_cnt++;
 
