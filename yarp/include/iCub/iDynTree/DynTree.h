@@ -84,6 +84,8 @@
 #include <kdl_codyco/momentumjacobian.hpp>
 #include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
 
+#include "kdl_codyco/sensors.hpp"
+
 #include <kdl_codyco/ftsensor.hpp>
 #include "iDyn2KDL.h"
 
@@ -195,8 +197,11 @@ class DynTree  {
         std::vector< iCub::skinDynLib::dynContactList > contacts; /**< a vector of dynContactList, one for each dynamic subgraph */
 
         //Sensors measures
-        std::vector< KDL::Wrench > measured_wrenches;
-        KDL::CoDyCo::FTSensorList ft_list;
+        //std::vector< KDL::Wrench > measured_wrenches;
+        //KDL::CoDyCo::FTSensorList ft_list;
+        KDL::CoDyCo::SensorsTree     sensors_tree;
+        KDL::CoDyCo::SensorsMeasurements sensor_measures;
+
 
         //Index representation of the Kinematic tree and the dynamics subtrees
         KDL::CoDyCo::Traversal kinematic_traversal;
@@ -237,6 +242,9 @@ class DynTree  {
         }
 
         int buildSubGraphStructure(const std::vector<std::string> & ft_names);
+
+        bool generateSensorsTree(const std::vector<std::string> & ft_names,
+                                    const std::vector<bool> & is_measure_direction_child_to_parent);
 
         /**
          * Get the A e b local to a link, querying the contacts list and the FT sensor list
@@ -432,16 +440,17 @@ class DynTree  {
 
 
         /**
-         * Get the global index of a FT sensor, given the FT sensor name
-         *
+         * Get the index of a FT sensor, given the FT junction name.
+         * \note for backward compatibility, this function returns the
+         * the FT index given the name of the junction at which it is attached.
          */
-        int getFTSensorIndex(const std::string & ft_sensor_name);
+        int getFTSensorIndex(const std::string & ft_junction_name);
 
         bool getFTSensorName(const int ft_sensor_index, std::string & ft_sensor_name);
 
 
         /**
-         * Get the global index of a IMU, given the IMU name
+         * Get the global index of a IMU, given the IMU frame name
          *
          */
         int getIMUIndex(const std::string & imu_name);

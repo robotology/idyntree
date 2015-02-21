@@ -42,7 +42,7 @@ set_target_properties(idyntree-yarp PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${iDynTree_YARP_header}")
 
 
-include_directories(include)
+include_directories(include/iCub/iDynTree)
 
 target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"

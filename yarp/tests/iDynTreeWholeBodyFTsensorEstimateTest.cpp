@@ -52,7 +52,7 @@ using namespace iCub::iDyn;
 using namespace iCub::iDynTree;
 
 
-void set_random_vector(yarp::sig::Vector & vec, yarp::os::Random & rng, double coeff=1.0)
+void set_random_vector(yarp::sig::Vector & vec, yarp::os::Random & rng, double coeff=0.0)
 {
     for( int i=0; i < (int)vec.size(); i++ ) {
         vec[i] =  coeff*M_PI*rng.uniform();
@@ -269,12 +269,13 @@ int main()
     //iDyn and iDynTree return the same results
     yarp::os::Random rng;
     rng.seed((int)yarp::os::Time::now());
-    set_random_vector(q_head,rng,1.0);
-    set_random_vector(q_larm,rng,1.0);
-    set_random_vector(q_rarm,rng,1.0);
-    set_random_vector(q_torso,rng,1.0);
-    set_random_vector(q_lleg,rng,1.0);
-    set_random_vector(q_rleg,rng,1.0);
+    double coeff = 0.0;
+    set_random_vector(q_head,rng,0.0);
+    set_random_vector(q_larm,rng,0.0);
+    set_random_vector(q_rarm,rng,0.0);
+    set_random_vector(q_torso,rng,0.0);
+    set_random_vector(q_lleg,rng,0.0);
+    set_random_vector(q_rleg,rng,0.0);
 
     // here we set the inertial sensor (head) measurements
     Vector w0(3); Vector dw0(3); Vector ddp0(3);
@@ -442,10 +443,12 @@ int main()
     {
         // if dealing with the model directly converted from iDyn, do
         // a consistency check on ft sensor frames
+        /*
         printAndCheckIdentity(icub_tree,"l_arm_ft_frame","l_shoulder_3");
         printAndCheckIdentity(icub_tree,"r_arm_ft_frame","r_shoulder_3");
         printAndCheckIdentity(icub_tree,"l_leg_ft_frame","l_hip_2");
         printAndCheckIdentity(icub_tree,"r_leg_ft_frame","r_hip_2");
+        */
     }
 
     // here we set the joints position, velocity and acceleration
