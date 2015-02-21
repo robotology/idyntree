@@ -269,13 +269,13 @@ int main()
     //iDyn and iDynTree return the same results
     yarp::os::Random rng;
     rng.seed((int)yarp::os::Time::now());
-    double coeff = 0.0;
-    set_random_vector(q_head,rng,0.0);
-    set_random_vector(q_larm,rng,0.0);
-    set_random_vector(q_rarm,rng,0.0);
-    set_random_vector(q_torso,rng,0.0);
-    set_random_vector(q_lleg,rng,0.0);
-    set_random_vector(q_rleg,rng,0.0);
+    double coeff = 1.0;
+    set_random_vector(q_head,rng,coeff);
+    set_random_vector(q_larm,rng,coeff);
+    set_random_vector(q_rarm,rng,coeff);
+    set_random_vector(q_torso,rng,coeff);
+    set_random_vector(q_lleg,rng,coeff);
+    set_random_vector(q_rleg,rng,coeff);
 
     // here we set the inertial sensor (head) measurements
     Vector w0(3); Vector dw0(3); Vector ddp0(3);
