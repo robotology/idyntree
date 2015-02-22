@@ -13,6 +13,8 @@
 
 #include <kdl_codyco/regressor_utils.hpp>
 
+#include <kdl_codyco/six_axis_ft_sensor.hpp>
+
 #include "test_models.hpp"
 
 #include <ctime>
@@ -23,7 +25,66 @@ using namespace KDL::CoDyCo::Regressors;
 
 double random_double()
 {
-    return ((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+    return 0.0;// ((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+}
+
+SensorsTree generateSensorsTree(const KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                const std::vector<std::string> & ft_names,
+                                const std::vector<bool> & is_measure_direction_child_to_parent)
+{
+    SensorsTree sensors_tree;
+    for(int i=0; i < ft_names.size(); i++ )
+    {
+        //Creating a new ft sensor to be added in the ft sensors structure
+        KDL::CoDyCo::SixAxisForceTorqueSensor new_sens;
+
+
+        if( undirected_tree.getJunction(ft_names[i]) != undirected_tree.getInvalidJunctionIterator() )
+        {
+            //Set the sensor name (for the time being equal to the junction name)
+            new_sens.setName(ft_names[i]);
+            //Set the junction name
+            new_sens.setParent(ft_names[i]);
+            int junction_index = undirected_tree.getJunction(ft_names[i])->getJunctionIndex();
+            new_sens.setParentIndex(junction_index);
+            KDL::CoDyCo::JunctionMap::const_iterator junct_it = undirected_tree.getJunction(ft_names[i]);
+
+            int parent_index = junct_it->getParentLink()->getLinkIndex();
+            int child_index = junct_it->getChildLink()->getLinkIndex();
+            std::string parent_link_name = junct_it->getParentLink()->getName();
+            std::string child_link_name = junct_it->getChildLink()->getName();
+
+            if( is_measure_direction_child_to_parent[i] )
+            {
+                new_sens.setAppliedWrenchLink(parent_index);
+            }
+            else
+            {
+                new_sens.setAppliedWrenchLink(child_index);
+            }
+
+            // Currently we support only the case where the ft sensor frame is equal
+            // to the child link frame
+            new_sens.setSecondLinkSensorTransform(child_index,KDL::Frame::Identity());
+
+            // Then, the parent_link_H_sensor transform is simply parent_link_H_child_link transform
+            KDL::Frame parent_link_H_sensor = junct_it->pose(0.0,false);
+            new_sens.setFirstLinkSensorTransform(parent_index,parent_link_H_sensor);
+
+        }
+        else
+        {
+            std::cerr << "[ERR] DynTree::generateSensorsTree: problem generating sensor for ft "
+                      << ft_names[i] << std::endl;
+            assert(false);
+        }
+
+        int ret = sensors_tree.addSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,new_sens);
+
+        assert(ret == i);
+    }
+
+    return sensors_tree;
 }
 
 int main()
@@ -102,26 +163,36 @@ int main()
 
     std::vector<bool> is_measure_direction_child_to_parent(ft_names.size(),true);
 
-    FTSensorList ft_list(undirected_tree,ft_names,is_measure_direction_child_to_parent);
+    SensorsTree sensors_tree = generateSensorsTree(undirected_tree,ft_names,is_measure_direction_child_to_parent);
 
     //Generate random offset data
     std::vector<Wrench> measured_wrenches_offset(ft_names.size());
     for( int i=0; i < (int)ft_names.size(); i++ ) {
-        measured_wrenches_offset[i] =  Wrench(Vector(random_double(),random_double(),random_double()),Vector(random_double(),random_double(),random_double()));
+        measured_wrenches_offset[i] = Wrench(Vector(6,5,4),Vector(3,2,1)); //Wrench(Vector(random_double(),random_double(),random_double()),Vector(random_double(),random_double(),random_double()));
     }
 
     //Get measured wrenches from RNEA
     std::vector<Wrench> measured_wrenches(ft_names.size());
     for( int i=0; i < (int)ft_names.size(); i++ ) {
+
+
+        KDL::CoDyCo::SixAxisForceTorqueSensor * sens
+            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,i);
+
+
+        KDL::Wrench simulate_measure;
+
+        sens->simulateMeasurement(dynamic_traversal,f,simulate_measure);
+
         if( consider_ft_offsets ) {
-            measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f) + measured_wrenches_offset[i];
+            measured_wrenches[i] = simulate_measure + measured_wrenches_offset[i];
         } else {
-            measured_wrenches[i] = ft_list.estimateSensorWrenchFromRNEA(i,dynamic_traversal,f);
+            measured_wrenches[i] = simulate_measure;
         }
     }
 
     //Then create the regressor generator
-    DynamicRegressorGenerator regressor(test_tree,kinematic_base,ft_names,consider_ft_offsets,fake_links);
+    DynamicRegressorGenerator regressor(undirected_tree,sensors_tree,kinematic_base,consider_ft_offsets,fake_links);
     regressor.changeDynamicBase(dynamic_base);
 
     //Adding some subtrees
@@ -227,7 +298,7 @@ int main()
 
     Eigen::VectorXd kt_obtained = regr*parameters;
 
-    std::cout << "kt.size(): " << kt.rows() << " ( should be 6*6 + 3*1 )"<< std::endl;
+    std::cout << "kt.size(): " << kt.rows() << " ( should be 6*6 + 5*1 )"<< std::endl;
     std::cout << "kt" << std::endl;
     std::cout << (kt) << std::endl;
 

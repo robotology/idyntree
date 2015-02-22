@@ -2,15 +2,17 @@
  * Copyright (C) 2013 IIT - Istituto Italiano di Tecnologia - http://www.iit.it
  * Author: Silvio Traversaro
  * CopyPolicy: Released under the terms of the GNU LGPL v2.0 (or any later version)
- * 
- * The development of this software was supported by the FP7 EU project 
- * CoDyCo (No. 600716 ICT 2011.2.1 Cognitive Systems and Robotics (b)) 
+ *
+ * The development of this software was supported by the FP7 EU project
+ * CoDyCo (No. 600716 ICT 2011.2.1 Cognitive Systems and Robotics (b))
  * http://www.codyco.eu
  */
-  
+
 #include "dirl_utils.hpp"
 
-#include <kdl_codyco/regressor_utils.hpp>
+#include "kdl_codyco/regressor_utils.hpp"
+
+#include "kdl_codyco/six_axis_ft_sensor.hpp"
 
 #include <iostream>
 
@@ -19,8 +21,8 @@
 
 namespace KDL {
 namespace CoDyCo {
-namespace Regressors {   
-    
+namespace Regressors {
+
 double sparsity_index(const Eigen::MatrixXd & mat, const double tol)
     {
         int zero_elements = 0;
@@ -33,12 +35,12 @@ double sparsity_index(const Eigen::MatrixXd & mat, const double tol)
         }
         return ((double)zero_elements)/(mat.rows()*mat.cols());
     }
-    
+
 Eigen::MatrixXd zeroToZero(const Eigen::MatrixXd & input_mat, double tol)
 {
     Eigen::MatrixXd output_mat;
     output_mat = input_mat;
-    
+
     for(int i=0; i < output_mat.rows(); i++ ) {
         for(int j=0; j < output_mat.cols(); j++ ) {
             if( fabs(output_mat(i,j)) < tol ) {
@@ -60,20 +62,20 @@ int getKernelSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & 
         //Probably can be improved using a different decomposition (QR?)
         //NOT REAL TIME!!
         Eigen::JacobiSVD<Eigen::MatrixXd> svd(input_matrix, Eigen::ComputeThinU | Eigen::ComputeFullV);
-        
 
-        
+
+
         int n = input_matrix.rows();
         int m = input_matrix.cols();
-        
+
         Eigen::VectorXd sigma = svd.singularValues();
-        
+
         if(verbose) {  std::cout << "Singular values " << std::endl; std::cout << sigma << std::endl; }
-        
+
         if( tol <= 0 ) {
             /** \todo find a better and consistend heuristic */
             //To avoid problem on numerically zero matrices
-            if( sigma[0] >= sqrt(DBL_EPSILON) ) { 
+            if( sigma[0] >= sqrt(DBL_EPSILON) ) {
                 tol = 1000*sigma[0]*std::max(n,m)*DBL_EPSILON;
             } else {
                 //Matrix is probably numerically zero
@@ -81,45 +83,45 @@ int getKernelSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & 
                 tol = sqrt(DBL_EPSILON);
             }
         }
-        
+
         int ll;
         for(ll=0; ll < sigma.size(); ll++ ) {
             if( sigma[ll] < tol ) { break;}
         }
-      
+
         int rank = ll;
-         
+
         Eigen::MatrixXd V = svd.matrixV();
         assert(V.cols() == V.rows());
         if( V.cols() != V.rows() ) { std::cout << "V is not square" << std::endl; }
         assert(rank <= m);
-        
+
         kernel_basis_matrix.resize(m,m-rank);
-        std::cout << "Matrix has rank " << rank << std::endl; std::cout << " m " << m << " rank " << rank << " V size " << V.rows() << " " << V.cols() << std::endl; 
+        std::cout << "Matrix has rank " << rank << std::endl; std::cout << " m " << m << " rank " << rank << " V size " << V.rows() << " " << V.cols() << std::endl;
         kernel_basis_matrix = V.block(0,rank,m,m-rank);
-        std::cout << "basis calculated, tol used " << tol << std::endl; 
-        
+        std::cout << "basis calculated, tol used " << tol << std::endl;
+
         return 0;
 }
 
 int getSubSpaceIntersection(const Eigen::MatrixXd & first_subspace, const Eigen::MatrixXd & second_subspace, Eigen::MatrixXd & result, double tol, bool /*verbose*/)
 {
     std::cout << "getSubSpaceIntersection" << std::endl;
-    
+
     std::cout << "first_subspace " << first_subspace.rows() << " " << first_subspace.cols() << std::endl;
     //std::cout << first_subspace << std::endl;
     std::cout << "second_subspace " << second_subspace.rows() << " " << second_subspace.cols() << std::endl;
     //std::cout << second_subspace << std::endl;
-    
+
     if( tol <= 0.0 ) { tol = 1e-7; }
     //The input matrices columns in input should form a basis of a subspace of a common vector space
     if( first_subspace.rows() != second_subspace.rows() ) { return -1; }
     if( first_subspace.cols() > first_subspace.rows() ) { return -1; }
     if( second_subspace.cols() > second_subspace.rows() ) { return -1; }
-    if( first_subspace.cols() == 0 || second_subspace.cols() == 0 ) { result.resize(first_subspace.rows(),0); return 0; }  
-    
+    if( first_subspace.cols() == 0 || second_subspace.cols() == 0 ) { result.resize(first_subspace.rows(),0); return 0; }
+
     Eigen::JacobiSVD<Eigen::MatrixXd> svd(first_subspace.transpose()*second_subspace, Eigen::ComputeFullU | Eigen::ComputeThinV);
-    
+
     Eigen::VectorXd sigma = svd.singularValues();
     //std::cout << "Sigma " << std::endl << sigma << std::endl;
     int intersection_size = 0;
@@ -130,11 +132,11 @@ int getSubSpaceIntersection(const Eigen::MatrixXd & first_subspace, const Eigen:
             break;
         }
     }
-    
+
     std::cout << "intersection_size " << intersection_size << std::endl;
 
-    
-    if( intersection_size == 0 ) { result.resize(first_subspace.rows(),0); return 0; }  
+
+    if( intersection_size == 0 ) { result.resize(first_subspace.rows(),0); return 0; }
 
     //result.resize(first_subspace.rows(),intersection_size);
     //std::cout << "Before compute" << std::endl;
@@ -145,11 +147,11 @@ int getSubSpaceIntersection(const Eigen::MatrixXd & first_subspace, const Eigen:
     //std::cout << "Second subspace size: " << second_subspace.rows() << " " << second_subspace.cols() << std::endl;
     //std::cout << "V size: " << V.rows() << " " << V.cols() << std::endl;
     //std::cout << "intersection_size " << intersection_size << std::endl;
-    
+
     for(int i=0; i < intersection_size; i++ ) {
         //result = (second_subspace*V.transpose()).block(0,0,second_subspace.rows(),intersection_size);
         result = (first_subspace*U.transpose().block(0,0,U.cols(),intersection_size));
-        
+
     }
 
     return 0;
@@ -160,7 +162,7 @@ int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row
     Eigen::VectorXd dummy;
     return getRowSpaceBasis(input_matrix,row_space_basis_matrix,tol,verbose,dummy);
 }
-    
+
 int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol, bool /*verbose*/, Eigen::VectorXd & sigma)
 {
     if( input_matrix.rows() == 0 ) {
@@ -172,19 +174,19 @@ int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row
         //Probably can be improved using a different decomposition (QR?)
         //NOT REAL TIME!!
         Eigen::JacobiSVD<Eigen::MatrixXd> svd(input_matrix, Eigen::ComputeThinU | Eigen::ComputeFullV);
-        
 
-        
+
+
         int n = input_matrix.rows();
         int m = input_matrix.cols();
-        
+
         sigma = svd.singularValues();
-        
-        
+
+
         if( tol <= 0 ) {
             /** \todo find a better and consistend heuristic */
             //To avoid problem on numerically zero matrices
-            if( sigma[0] >= sqrt(DBL_EPSILON) ) { 
+            if( sigma[0] >= sqrt(DBL_EPSILON) ) {
                 tol = 1000*sigma[0]*std::max(n,m)*DBL_EPSILON;
             } else {
                 //Matrix is probably numerically zero
@@ -192,25 +194,86 @@ int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row
                 tol = sqrt(DBL_EPSILON);
             }
         }
-        
+
         int ll;
         for(ll=0; ll < sigma.size(); ll++ ) {
             if( sigma[ll] < tol ) { break;}
         }
-      
+
         int rank = ll;
-         
+
         Eigen::MatrixXd V = svd.matrixV();
         assert(V.cols() == V.rows());
         if( V.cols() != V.rows() ) { std::cout << "V is not square" << std::endl; }
         assert(rank <= m);
-        
+
         row_space_basis_matrix.resize(m,rank);
-        std::cout << "Matrix has rank " << rank << std::endl; std::cout << " m " << m << " rank " << rank << " V size " << V.rows() << " " << V.cols() << std::endl; 
+        std::cout << "Matrix has rank " << rank << std::endl; std::cout << " m " << m << " rank " << rank << " V size " << V.rows() << " " << V.cols() << std::endl;
         row_space_basis_matrix = V.block(0,0,m,rank);
-        std::cout << "basis calculated, tol used " << tol << std::endl; 
-        
+        std::cout << "basis calculated, tol used " << tol << std::endl;
+
         return 0;
+}
+
+int getFirstFTSensorOnLink(const SensorsTree & sensors_tree,
+                           const int link_id)
+{
+    for(int ft=0; ft < sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE); ft++ )
+    {
+        KDL::CoDyCo::SixAxisForceTorqueSensor * sens
+            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft);
+
+        assert(sens != 0);
+
+        if( sens->isLinkAttachedToSensor(link_id) )
+        {
+            return ft;
+        }
+
+    }
+
+    return -1;
+}
+
+int getNrOfFTSensorsOnLink(const SensorsTree & sensors_tree,
+                           const int link_id)
+{
+    int nrOfFTSensorsOnLink = 0;
+    for(int ft=0; ft < sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE); ft++ )
+    {
+        KDL::CoDyCo::SixAxisForceTorqueSensor * sens
+            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft);
+
+        assert(sens != 0);
+
+        if( sens->isLinkAttachedToSensor(link_id) )
+        {
+            nrOfFTSensorsOnLink = nrOfFTSensorsOnLink + 1;
+        }
+
+    }
+
+    return nrOfFTSensorsOnLink;
+}
+
+int getFTIndexFromJunctionIndex(const SensorsTree & sensors_tree,
+                                const int junction_id)
+{
+    for(int ft=0; ft < sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE); ft++ )
+    {
+        KDL::CoDyCo::SixAxisForceTorqueSensor * sens
+            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft);
+
+        assert(sens != 0);
+
+        if( sens->getParentIndex() == junction_id )
+        {
+            return ft;
+        }
+
+    }
+
+    return -1;
 }
 
 }

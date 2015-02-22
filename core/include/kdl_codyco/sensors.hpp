@@ -73,6 +73,12 @@ namespace CoDyCo {
          *
          */
         virtual bool isValid() const = 0;
+
+        /**
+         *  Return a pointer to a copy of this sensor.
+         *
+         */
+        virtual Sensor* clone() const = 0;
     };
 
     /**
@@ -81,6 +87,9 @@ namespace CoDyCo {
     class SensorsTree {
             struct SensorsTreePimpl;
             SensorsTreePimpl * pimpl;
+
+            void constructor(const SensorsTree & other);
+            void destructor();
         public:
 
             /**

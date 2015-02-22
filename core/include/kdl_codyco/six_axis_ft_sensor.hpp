@@ -121,12 +121,24 @@ namespace CoDyCo {
         bool isValid() const;
 
         /**
+         * Documented in Sensor
+         */
+        Sensor * clone() const;
+
+
+        /**
          * The Six Axis Force Torque sensor measure the Force Torque (wrench)
          * applied by a link on another link. This method returns the link
          * on which the measured force is applied.
          * @return the index of the link on which the measure force is applied.
          */
         int getAppliedWrenchLink() const;
+
+        /**
+         * Check if a given link is attached to this FT sensor.
+         * @return true if link_index is attached to the ft sensor, false otherwise
+         */
+        bool isLinkAttachedToSensor(const int link_index) const;
 
 
         /**

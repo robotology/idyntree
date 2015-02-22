@@ -135,6 +135,12 @@ bool SixAxisForceTorqueSensor::isValid() const
     return true;
 }
 
+Sensor* SixAxisForceTorqueSensor::clone() const
+{
+    return (Sensor *)new SixAxisForceTorqueSensor(*this);
+}
+
+
 std::string SixAxisForceTorqueSensor::getName() const
 {
     return this->pimpl->name;
@@ -160,6 +166,13 @@ int SixAxisForceTorqueSensor::getParentIndex() const
 {
     return this->pimpl->parent_junction_index;
 }
+
+bool SixAxisForceTorqueSensor::isLinkAttachedToSensor(const int link_index) const
+{
+    return (this->pimpl->link1 == link_index ||
+            this->pimpl->link2 == link_index );
+}
+
 
 bool SixAxisForceTorqueSensor::getLinkSensorTransform(const int link_index, KDL::Frame& link_H_sensor) const
 {
@@ -197,7 +210,7 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
     }
     else if( link_index == this->pimpl->link2 )
     {
-        wrench_applied_on_link = this->pimpl->link1_H_sensor*measured_wrench;
+        wrench_applied_on_link = this->pimpl->link2_H_sensor*measured_wrench;
 
         if( this->getAppliedWrenchLink() != link_index )
         {

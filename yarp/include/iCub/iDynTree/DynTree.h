@@ -86,7 +86,6 @@
 
 #include "kdl_codyco/sensors.hpp"
 
-#include <kdl_codyco/ftsensor.hpp>
 #include "iDyn2KDL.h"
 
 #include <kdl/jntarray.hpp>

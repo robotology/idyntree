@@ -44,22 +44,38 @@ SensorsTree::SensorsTree():
     this->pimpl->NamesSensors.resize(NR_OF_SENSOR_TYPES);
 }
 
-SensorsTree::SensorsTree(const KDL::CoDyCo::SensorsTree& other):
-    pimpl(new SensorsTreePimpl(*(other.pimpl)))
+void SensorsTree::constructor(const SensorsTree& other)
 {
+    this->pimpl = new SensorsTreePimpl();
+    this->pimpl->VecSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
+    this->pimpl->NamesSensors.resize(NR_OF_SENSOR_TYPES);
+    for(int sens_type = 0; sens_type < NR_OF_SENSOR_TYPES; sens_type++ )
+    {
+        for(int sens = 0; sens < other.getNrOfSensors((SensorType)sens_type); sens++ )
+        {
+            this->pimpl->VecSensors[sens_type].push_back(other.pimpl->VecSensors[sens_type][sens]->clone());
+            std::string sensor_name = other.getSensor((SensorType)sens_type,sens)->getName();
+            this->pimpl->NamesSensors[sens_type].insert(std::pair<std::string,int>(sensor_name,sens));
+        }
+    }
+}
 
+SensorsTree::SensorsTree(const KDL::CoDyCo::SensorsTree& other)
+{
+    constructor(other);
 }
 
 SensorsTree& SensorsTree::operator=(const SensorsTree& other)
 {
     if(this != &other)
     {
-        *pimpl = *(other.pimpl);
+        destructor();
+        constructor(other);
     }
     return *this;
 }
 
-SensorsTree::~SensorsTree()
+void SensorsTree::destructor()
 {
     for( int sensor_type = 0; sensor_type < NR_OF_SENSOR_TYPES; sensor_type++ )
     {
@@ -72,6 +88,13 @@ SensorsTree::~SensorsTree()
     this->pimpl->NamesSensors.resize(0);
 
     delete this->pimpl;
+    this->pimpl = 0;
+}
+
+
+SensorsTree::~SensorsTree()
+{
+    this->destructor();
 }
 
 int SensorsTree::addSensor(const SensorType& sensor_type, const Sensor& sensor)

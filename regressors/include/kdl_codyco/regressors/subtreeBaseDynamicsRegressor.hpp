@@ -18,12 +18,15 @@
 
 namespace KDL {
 namespace CoDyCo {
+
+class SensorsTree;
+
 namespace Regressors {
 
 class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
 {
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
-    const KDL::CoDyCo::FTSensorList * p_ft_list;
+    const KDL::CoDyCo::SensorsTree * p_sensors_tree;
 
     const std::vector<int> linkIndeces2regrCols;
 
@@ -36,7 +39,7 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
         USE_DYNAMIC_BASE_PLUCKER_FRAME,
         USE_FIRST_FT_SENSOR_PLUCKER_FRAME
     } regressor_plucker_frame;
-    KDL::Frame H_sensor_parent_link;
+    KDL::Frame sensor_H_parent_link;
     int first_ft_sensor_parent_link_id;
 
     std::vector< int > subtree_links_indices; /** indeces of the links belonging to the considered subtree */
@@ -59,13 +62,13 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
          * @param _subtree_leaf_links the list of name of the leaf links of the considered subtree
          */
         subtreeBaseDynamicsRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
-                                     const KDL::CoDyCo::FTSensorList & _ft_list,
+                                     const KDL::CoDyCo::SensorsTree & _sensors_tree,
                                      const std::vector<int> & _linkIndeces2regrCols,
                                      std::vector< std::string> _subtree_leaf_links=std::vector< std::string>(0),
                                      const bool _consider_ft_offset=false,
                                      bool _verbose=true):
                                             p_undirected_tree(&_undirected_tree),
-                                            p_ft_list(&_ft_list),
+                                            p_sensors_tree(&_sensors_tree),
                                             linkIndeces2regrCols(_linkIndeces2regrCols),
                                             subtree_leaf_links(_subtree_leaf_links),
                                             consider_ft_offset(_consider_ft_offset),
@@ -93,7 +96,7 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
                               const std::vector<KDL::Frame> & X_dynamic_base,
                               const std::vector<KDL::Twist> &v,
                               const std::vector<KDL::Twist> & a,
-                              const std::vector< KDL::Wrench > & measured_wrenches,
+                              const SensorsMeasurements & measured_wrenches,
                               const KDL::JntArray & measured_torques,
                               Eigen::MatrixXd & regressor_matrix,
                               Eigen::VectorXd & known_terms);
