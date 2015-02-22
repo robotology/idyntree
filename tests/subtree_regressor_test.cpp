@@ -79,7 +79,7 @@ SensorsTree generateSensorsTree(const KDL::CoDyCo::UndirectedTree & undirected_t
             assert(false);
         }
 
-        int ret = sensors_tree.addSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,new_sens);
+        int ret = sensors_tree.addSensor(new_sens);
 
         assert(ret == i);
     }

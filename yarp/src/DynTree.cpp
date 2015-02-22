@@ -257,7 +257,7 @@ bool DynTree::generateSensorsTree(const std::vector<std::string> & ft_names,
             return false;
         }
 
-        int ret = sensors_tree.addSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,new_sens);
+        int ret = sensors_tree.addSensor(new_sens);
 
         assert(ret == i);
     }

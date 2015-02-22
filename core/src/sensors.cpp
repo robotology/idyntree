@@ -97,8 +97,9 @@ SensorsTree::~SensorsTree()
     this->destructor();
 }
 
-int SensorsTree::addSensor(const SensorType& sensor_type, const Sensor& sensor)
+int SensorsTree::addSensor(const Sensor& sensor)
 {
+    SensorType sensor_type = sensor.getSensorType();
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
         const Sensor * p_sensor = &sensor;

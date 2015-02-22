@@ -31,8 +31,12 @@ namespace CoDyCo {
     enum SensorType
     {
         SIX_AXIS_FORCE_TORQUE = 0,
-        NR_OF_SENSOR_TYPES = 1
     };
+
+    // This should be equal to the number of option
+    //  in the SensorType enum
+    const int NR_OF_SENSOR_TYPES = 1;
+
 
      /**
      * Virtual interface to Sensor Class.
@@ -120,11 +124,10 @@ namespace CoDyCo {
              * The passed sensor will be dynamic casted to the specified sensor type,
              * and will be copied in the sensors tree only if the dynamic cast will be successful.
              *
-             * @param[in] sensor_type the SensorType of the added sensor.
              * @param[in] a constant reference to the Sensor to add.
              * @return the sensor index of the newly added sensor, or -1 in case of error.
              */
-            int addSensor(const SensorType & sensor_type, const Sensor & sensor);
+            int addSensor(const Sensor & sensor);
 
             /**
              * Get the number of sensors of type sensor_type in this SensorsTree .
