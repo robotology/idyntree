@@ -98,42 +98,30 @@ SensorsTree::~SensorsTree()
 }
 
 int SensorsTree::addSensor(const Sensor& sensor)
-{
-    SensorType sensor_type = sensor.getSensorType();
-    if( sensor_type == SIX_AXIS_FORCE_TORQUE )
+ {
+    Sensor *newSensor = sensor.clone();
+    if( ! newSensor->isValid() )
     {
-        const Sensor * p_sensor = &sensor;
-        const SixAxisForceTorqueSensor * p_ft_sensor = dynamic_cast<const SixAxisForceTorqueSensor *>(p_sensor);
-
-        if( p_ft_sensor == 0 )
-        {
-            std::cerr << "[ERR] SensorsTree::addSensor error : sensor " << sensor.getName()
-                      << " is not of the correct type" << std::endl;
-            return -1;
-        }
-
-        if( !p_ft_sensor->isValid() )
-        {
-            std::cerr << "[ERR] SensorsTree::addSensor error : sensor  " << sensor.getName()
-                      << "  isValid() method returns false" << std::endl;
-            return -1;
-        }
-
-        //Allocate a copy of the sensor
-        this->pimpl->VecSensors[SIX_AXIS_FORCE_TORQUE].push_back(new SixAxisForceTorqueSensor(*p_ft_sensor));
-        int new_index = this->pimpl->VecSensors[SIX_AXIS_FORCE_TORQUE].size()-1;
-        this->pimpl->NamesSensors[SIX_AXIS_FORCE_TORQUE].insert(std::pair<std::string,int>(sensor.getName(),new_index));
-
-        assert( this->pimpl->NamesSensors[SIX_AXIS_FORCE_TORQUE].size() ==
-                this->pimpl->VecSensors[SIX_AXIS_FORCE_TORQUE].size() );
-
-        return new_index;
+         std::cerr << "[ERR] SensorsTree::addSensor error : sensor  " << sensor.getName()
+                       << "  isValid() method returns false" << std::endl;
+         delete newSensor;
+             return -1;
     }
 
+    if( !(newSensor->getSensorType() >= 0 && newSensor->getSensorType() < NR_OF_SENSOR_TYPES) )
+    {
+         std::cerr << "[ERR] SensorsTree::addSensor error : sensor  " << sensor.getName()
+                       << " has an unknown sensor type " << newSensor->getSensorType() << std::endl;
+         delete newSensor;
+             return -1;
+    }
 
-    return -1;
+    this->pimpl->VecSensors[newSensor->getSensorType()].push_back(newSensor);
+    int new_index = this->pimpl->VecSensors[newSensor->getSensorType()].size()-1;
+    this->pimpl->NamesSensors[newSensor->getSensorType()].insert(std::pair<std::string,int>(newSensor->getName(),new_index));
+
+    return new_index;
 }
-
 
 unsigned int SensorsTree::getNrOfSensors(const SensorType & sensor_type) const
 {
