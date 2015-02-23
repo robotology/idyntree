@@ -8,9 +8,10 @@
 #define KDL_CODYCO_DYNREGRESSORGENERATOR_HPP
 
 #include <kdl/tree.hpp>
-#include <kdl_codyco/utils.hpp>
-#include <kdl_codyco/undirectedtree.hpp>
-#include <kdl_codyco/ftsensor.hpp>
+
+#include "kdl_codyco/utils.hpp"
+#include "kdl_codyco/undirectedtree.hpp"
+#include "kdl_codyco/sensors.hpp"
 
 //Type of regressors
 #include "dynamicRegressorInterface.hpp"
@@ -22,7 +23,10 @@
 
 namespace KDL {
 namespace CoDyCo {
+
 namespace Regressors {
+
+
 
 //typedef FixedParameterIndex int;
 //typedef UnknownParameterIndex int;
@@ -50,21 +54,22 @@ public:
     * \note the dynamics base, used to define forward/backward direction of torque regressor, is
     *       the root of the KDL::Tree
     *
-    * @param tree the KDL::Tree description of the robot structure
+    * @param[in] undirected_tree the KDL::CoDyCo::UndirectedTree description of the robot structure
+    * @param[in] sensors_tree    the KDL::CoDyCo::SensorsTree description of the sensors mounted on the robot
     * @param kinematic_base (optional) the link used as the root for propagation of kinematic information (default: the base of the KDL::Tree )
     * @param ft_sensor_names (optional) the names of the Joints (of type Joint::None) that are Force Torque sensors (default: no sensors)
     * @param ft_sensor_offset (optional) consider the ft offset as parameters while building the regressor and the known terms (default: true)
     * @param fake_link_names (optional) a list of names of links to consider without inertia (i.e. with all zero inertial parameters) (default: no links)
-    * @param serialization (optional) explicit serialization of link and joints of input KDL::Tree (default: KDL::CoDyCo::TreeSerialization(tree))
     */
-    DynamicRegressorGenerator(KDL::Tree & tree, std::string kinematic_base="",
-                              std::vector< std::string > ft_sensor_names=std::vector< std::string >(0),                              bool ft_sensor_offset=true,
+    DynamicRegressorGenerator(const KDL::CoDyCo::UndirectedTree & undirected_tree,
+                              const KDL::CoDyCo::SensorsTree    & sensors_tree,
+                              std::string kinematic_base="",
+                              bool ft_sensor_offset=true,
                               std::vector< std::string > fake_link_names=std::vector< std::string >(0),
-                              KDL::CoDyCo::TreeSerialization serialization=KDL::CoDyCo::TreeSerialization(),
                               const bool _verbose=false
                              );
 
-    ~DynamicRegressorGenerator() { delete p_ft_list; };
+    ~DynamicRegressorGenerator() { };
     //@}
     int changeDynamicBase(std::string new_dynamic_base_name);
 
@@ -367,8 +372,8 @@ private:
 
 
     //measured 6 axis Force/torques
-    std::vector< KDL::Wrench > measured_wrenches;
-    KDL::CoDyCo::FTSensorList * p_ft_list;
+    KDL::CoDyCo::SensorsMeasurements measured_wrenches;
+    KDL::CoDyCo::SensorsTree sensors_tree;
 
     //measured joint torques
     KDL::JntArray measured_torques;
