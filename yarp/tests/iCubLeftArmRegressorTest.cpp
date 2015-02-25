@@ -26,7 +26,54 @@
 
 #include <cstdlib>
 
+double random_double()
+{
+    return ((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+}
 
+
+KDL::Wrench simulateFTSensorFromKinematicState(const KDL::CoDyCo::UndirectedTree & icub_undirected_tree,
+                                        const KDL::JntArray & q,
+                                        const KDL::JntArray & dq,
+                                        const KDL::JntArray & ddq,
+                                        const KDL::Twist    & base_velocity,
+                                        const KDL::Twist    & base_acceleration,
+                                        const std::string ft_sensor_name,
+                                        const KDL::CoDyCo::SensorsTree & sensors_tree
+                                        )
+{
+    // We can try to simulate the same sensor with the usual inverse dynamics
+    KDL::CoDyCo::Traversal traversal;
+
+    icub_undirected_tree.compute_traversal(traversal);
+
+    std::vector<KDL::Twist> v(icub_undirected_tree.getNrOfLinks());
+    std::vector<KDL::Twist> a(icub_undirected_tree.getNrOfLinks());
+    std::vector<KDL::Wrench> f(icub_undirected_tree.getNrOfLinks());
+    std::vector<KDL::Wrench> f_gi(icub_undirected_tree.getNrOfLinks());
+    std::vector<KDL::Wrench> f_ext(icub_undirected_tree.getNrOfLinks(),KDL::Wrench::Zero());
+    KDL::JntArray torques(icub_undirected_tree.getNrOfDOFs());
+    KDL::Wrench base_force;
+
+    KDL::CoDyCo::rneaKinematicLoop(icub_undirected_tree,
+                                   q,dq,ddq,traversal,base_velocity,base_acceleration,
+                                   v,a,f_gi);
+    KDL::CoDyCo::rneaDynamicLoop(icub_undirected_tree,q,traversal,f_gi,f_ext,f,torques,base_force);
+
+    unsigned int sensor_index;
+    sensors_tree.getSensorIndex(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft_sensor_name,sensor_index);
+
+    std::cout << ft_sensor_name << " has ft index " << sensor_index << std::endl;
+
+    KDL::CoDyCo::SixAxisForceTorqueSensor * p_sens
+            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,sensor_index);
+
+    KDL::Wrench simulate_measurement;
+
+    p_sens->simulateMeasurement(traversal,f,simulate_measurement);
+
+    return simulate_measurement;
+}
 
 // This function logic should be moved to some better place for sure
 KDL::CoDyCo::SensorsTree sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
@@ -139,15 +186,24 @@ int main()
     base_velocity = base_acceleration = KDL::Twist::Zero();
 
     KDL::JntArray q(regressor_generator.getNrOfDOFs());
+
     SetToZero(q);
+
+    srand(time(0));
+    for(int i=0; i < q.rows(); i++ )
+    {
+        q(i) = random_double();
+    }
 
     base_acceleration.vel[2] = -9.81;
 
     regressor_generator.setRobotState(q,q,q,base_velocity,base_acceleration);
 
     // Estimate sensor measurements from the model
+    KDL::Wrench simulate_measurement = simulateFTSensorFromKinematicState(icub_undirected_tree,
+        q,q,q,base_velocity,base_acceleration,"l_arm_ft_sensor",sensors_tree);
 
-
+        
     //Create a regressor and check the returned sensor value
     Eigen::MatrixXd regressor(regressor_generator.getNrOfOutputs(),regressor_generator.getNrOfParameters());
     Eigen::VectorXd kt(regressor_generator.getNrOfOutputs());
@@ -165,39 +221,15 @@ int main()
 
     Eigen::Matrix<double,6,1> sens = regressor*parameters;
 
-    // We can try to simulate the same sensor with the usual inverse dynamics
-    KDL::CoDyCo::Traversal traversal;
-    icub_undirected_tree.compute_traversal(traversal);
-
-    std::vector<KDL::Twist> v(icub_undirected_tree.getNrOfLinks());
-    std::vector<KDL::Twist> a(icub_undirected_tree.getNrOfLinks());
-    std::vector<KDL::Wrench> f(icub_undirected_tree.getNrOfLinks());
-    std::vector<KDL::Wrench> f_gi(icub_undirected_tree.getNrOfLinks());
-    std::vector<KDL::Wrench> f_ext(icub_undirected_tree.getNrOfLinks(),KDL::Wrench::Zero());
-    KDL::JntArray torques(icub_undirected_tree.getNrOfDOFs());
-    KDL::Wrench base_force;
-
-    KDL::CoDyCo::rneaKinematicLoop(icub_undirected_tree,
-                                   q,q,q,traversal,base_velocity,base_acceleration,
-                                   v,a,f_gi);
-    KDL::CoDyCo::rneaDynamicLoop(icub_undirected_tree,q,traversal,f_gi,f_ext,f,torques,base_force);
-
-    std::string ft_sensor_name = "l_arm_ft_sensor";
-
-    unsigned int sensor_index;
-    sensors_tree.getSensorIndex(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft_sensor_name,sensor_index);
-
-    std::cout << "l_arm_ft_sensor has ft index " << sensor_index << std::endl;
-
-    KDL::CoDyCo::SixAxisForceTorqueSensor * p_sens
-            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,sensor_index);
-
-    KDL::Wrench simulate_measurement;
-    p_sens->simulateMeasurement(traversal,f,simulate_measurement);
-
     std::cout << "Sensor measurement from regressor*model_parameters: " << sens << std::endl;
     std::cout << "Sensor measurement from RNEA:                       " << KDL::CoDyCo::toEigen(simulate_measurement) << std::endl;
 
+    double tol = 1e-5;
+    if( (KDL::CoDyCo::toEigen(simulate_measurement)+sens).norm() > tol )
+    {
+        std::cerr << "[ERR] iCubLeftArmRegressor error" << std::endl;
+        return EXIT_FAILURE;
+    }
 
     return EXIT_SUCCESS;
 }

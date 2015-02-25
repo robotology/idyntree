@@ -140,7 +140,7 @@ namespace CoDyCo {
              *
              * @return true if the sensor name is found, false otherwise.
              */
-            bool getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index);
+            bool getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const;
 
             /**
              * Get the pointer to the sensor of index sensor_index and of type sensor_type

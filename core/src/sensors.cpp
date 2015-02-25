@@ -128,7 +128,7 @@ unsigned int SensorsTree::getNrOfSensors(const SensorType & sensor_type) const
     return this->pimpl->VecSensors[sensor_type].size();
 }
 
-bool SensorsTree::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index)
+bool SensorsTree::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
 {
     std::map< std::string, unsigned int >::const_iterator it;
     it = this->pimpl->NamesSensors[sensor_type].find(_sensor_name);
