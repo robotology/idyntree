@@ -418,7 +418,7 @@ namespace CoDyCo
          *
          * \todo solve issue related to non-const UndirectedTree
          */
-        UndirectedTree(const Tree & tree,const TreeSerialization & serialization=TreeSerialization());
+        explicit UndirectedTree(const Tree & tree,const TreeSerialization & serialization=TreeSerialization());
 
 
         /**
