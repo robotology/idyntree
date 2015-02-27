@@ -369,7 +369,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     YARP_ASSERT(ret == 0);
     ret = pos_solv.JntToCart(pos,root_link_H_r_foot,"r_foot");
     YARP_ASSERT(ret == 0);
-    r_sole_H_r_foot = root_link_H_l_sole.Inverse()*root_link_H_r_foot;
+    r_sole_H_r_foot = root_link_H_r_sole.Inverse()*root_link_H_r_foot;
     addFrame(icub_kdl,r_sole_H_r_foot.Inverse(),"r_foot","r_foot_dh_frame");
 
 
