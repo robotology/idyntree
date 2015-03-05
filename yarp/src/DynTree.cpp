@@ -33,6 +33,8 @@
 #include <yarp/math/Math.h>
 #include <yarp/math/SVD.h>
 
+#include <yarp/os/LogStream.h>
+
 #include <vector>
 
 using namespace yarp::sig;
@@ -1213,6 +1215,38 @@ yarp::sig::Vector DynTree::getJointForceTorque(int joint_index, int frame_link) 
     KDLtoYarp(ret_kdl.torque,torque);
     ret.setSubvector(0,force);
     ret.setSubvector(3,torque);
+    return ret;
+}
+
+KDL::Wrench DynTree::getExternalForceTorqueKDL(int link_index,
+                                               int origin_frame_index,
+                                               int orientation_frame_index)
+{
+    if(     link_index < 0 || link_index > this->getNrOfLinks()
+        ||  origin_frame_index < 0 || origin_frame_index > this->getNrOfFrames()
+        ||  orientation_frame_index < 0 || orientation_frame_index > this->getNrOfFrames() )
+    {
+       yError() << "getExternalForceTorqueKDL: error in input parameters";
+       return KDL::Wrench::Zero();
+    }
+
+    KDL::Frame origin_frame_H_link = this->getPositionKDL(origin_frame_index,link_index);
+    KDL::Wrench f_ext_translated = KDL::Frame(origin_frame_H_link.p)*f_ext[link_index];
+
+    KDL::Frame orientation_frame_H_link = this->getPositionKDL(orientation_frame_index,link_index);
+    KDL::Wrench f_ext_translated_and_rotated = orientation_frame_H_link.M*f_ext_translated;
+
+    return f_ext_translated_and_rotated;
+}
+
+yarp::sig::Vector DynTree::getExternalForceTorque(int link_index,
+                                                  int origin_frame_index,
+                                                  int orientation_frame_index)
+{
+    yarp::sig::Vector ret(6);
+
+    KDLtoYarp(getExternalForceTorqueKDL(link_index,origin_frame_index,orientation_frame_index),ret);
+
     return ret;
 }
 

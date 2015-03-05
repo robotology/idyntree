@@ -865,6 +865,24 @@ class DynTree  {
          */
         yarp::sig::Vector getJointForceTorque(int joint_index, int frame_link) const;
 
+        /**
+         * Get the external ForceTorque (Wrench) acting on a given link.
+         * @param link_index the index of the link for which we get the external wrench
+         * @param origin_frame_index the returned wrench will be expressed at the origin of origin_frame_index
+         * @param orientation_frame_index the returned wrench will be expressed with the orientation of orientation_frame_index
+         * @return a 6x1 vector with linear force \f$ {}^b f_b \f$(0:2) and angular torque\f$ {}^b\tau_b \f$ (3:5)
+         */
+        KDL::Wrench getExternalForceTorqueKDL(int link_index, int origin_frame_index, int orientation_frame_index);
+
+
+        /**
+         * Get the external ForceTorque (Wrench) acting on a given link.
+         * @param link_index the index of the link for which we get the external wrench
+         * @param origin_frame_index the returned wrench will be expressed at the origin of origin_frame_index
+         * @param orientation_frame_index the returned wrench will be expressed with the orientation of orientation_frame_index
+         * @return a 6x1 vector with linear force \f$ {}^b f_b \f$(0:2) and angular torque\f$ {}^b\tau_b \f$ (3:5)
+         */
+        yarp::sig::Vector getExternalForceTorque(int link_index, int origin_frame_index, int orientation_frame_index);
 
         //@}
         /** @name Methods related to contact forces
@@ -906,7 +924,8 @@ class DynTree  {
 
 
         /**
-        * For a floating base structure, outpus a 6x(nrOfDOFs+6) yarp::sig::Matrix \f$ {}^i J_i \f$ such
+        *
+        * For a floating base structure, outpus a 6x(nrOfDOFs+6) yarp::sig::Matrix \f$ {}^w J_i \f$ such
         * that \f$ {}^w v_i = {}^wJ_i  dq_{fb} \f$
         * where w is the world reference frame and \f$ dq_{fb} \f$ is the floating base velocity vector,
         * where the first 3 elements are \f$ {}^wv_b\f$, the next 3 are \f$ {}^w\omega_b\f$ and the remaining
