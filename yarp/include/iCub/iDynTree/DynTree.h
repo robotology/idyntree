@@ -285,8 +285,9 @@ class DynTree  {
         //Debug
         int verbose;
 
-        //Buffer
+        //Buffers
         yarp::sig::Matrix _H_w_b;
+        yarp::sig::Matrix com_jacobian_buffer;
 
         //Generic 3d buffer
         yarp::sig::Vector com_yarp;

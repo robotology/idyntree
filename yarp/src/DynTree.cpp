@@ -1643,8 +1643,7 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
 
 bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac)
 {
-    yarp::sig::Matrix dummy;
-    return getCOMJacobian(jac,dummy);
+    return getCOMJacobian(jac,com_jacobian_buffer);
 }
 
 bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & momentum_jac)
