@@ -23,6 +23,7 @@ target_link_libraries(inversedynamics_crba_test             idyntree-core idyntr
 target_link_libraries(comjacobian_test                      idyntree-core idyntree-regressors idyntree-model-io  ${orocos_kdl_LIBRARIES} )
 target_link_libraries(inversedynamics_different_loops_test  idyntree-core idyntree-regressors idyntree-model-io  ${orocos_kdl_LIBRARIES} )
 #target_link_libraries(sparse_numerical_subspace_test ${orocos_kdl_LIBRARIES} idyntree-core  )
+target_link_libraries(inversedynamics_different_loops_test  idyntree-core idyntree-regressors idyntree-model-io ${YARP_LIBRARIES} iKin ${orocos_kdl_LIBRARIES} )
 
 
 add_test(NAME test_inverse_inertia    COMMAND inverse_inertia_test)
@@ -33,6 +34,16 @@ add_test(NAME test_inversedynamics_crba COMMAND inversedynamics_crba_test)
 add_test(NAME test_comjacobian COMMAND comjacobian_test)
 #add_test(test_sparse_numerical_subspace sparse_numerical_subspace_test)
 add_test(NAME test_inversedynamics_different_loops COMMAND inversedynamics_different_loops_test)
+
+if(IDYNTREE_USE_ICUB_MAIN)
+  find_package(YARP)
+  find_package(ICUB)
+  add_executable(urdf2dh_test urdf2dh_tests.cpp)
+  target_include_directories(urdf2dh_test PUBLIC ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+  target_link_libraries(urdf2dh_test iKin idyntree-core idyntree-regressors  idyntree-model-io)
+  # \todo reenable this test 
+  #add_test(NAME test_urdf2dh COMMAND urdf2dh_test urdf_icub_test.urdf)
+endif()
 
 #dirl related test
 #add_executable(dirl_dataset_test dirl_dataset_test.cpp)

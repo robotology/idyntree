@@ -34,139 +34,8 @@
 
 /* Author: Silvio Traversaro */
 
-#include <cstdlib>
+#include "urdf2dh_helpers.h"
 
-#include <fstream>
-#include <sstream>
-
-#include <ctime>
-#include "kdl_format_io/iKin_export.hpp"
-
-#include "kdl_format_io/urdf_import.hpp"
-
-#include <kdl/chainfksolverpos_recursive.hpp>
-
-// KDL::Tree
-#include <kdl/tree.hpp>
-#include <kdl/jntarray.hpp>
-#include <kdl/joint.hpp>
-
-
-// KDL::CoDyCo::UndirectedTree
-#include <kdl_codyco/undirectedtree.hpp>
-
-// iCub::iKin::iKinChain
-#include <iCub/iKin/iKinFwd.h>
-
-using namespace KDL;
-using namespace std;
-using namespace kdl_format_io;
-
-double random_double(double range)
-{
-    return range*((double)rand()-(RAND_MAX/2))/((double)RAND_MAX);
-}
-
-bool KDLtoYarp(const KDL::Vector & kdlVector,yarp::sig::Vector & yarpVector)
-{
-    if( yarpVector.size() != 3 ) { yarpVector.resize(3); }
-    memcpy(yarpVector.data(),kdlVector.data,3*sizeof(double));
-    return true;
-}
-
-bool KDLtoYarp(const KDL::Rotation & kdlRotation, yarp::sig::Matrix & yarpMatrix3_3)
-{
-    if( yarpMatrix3_3.rows() != 3 || yarpMatrix3_3.cols() != 3 ) { yarpMatrix3_3.resize(3,3); }
-    //Both kdl and yarp store the rotation matrix in row major order
-    memcpy(yarpMatrix3_3.data(),kdlRotation.data,3*3*sizeof(double));
-    return true;
-}
-
-bool KDLtoYarp_position(const KDL::Frame & kdlFrame, yarp::sig::Matrix & yarpMatrix4_4 )
-{
-    yarp::sig::Matrix R(3,3);
-    yarp::sig::Vector p(3);
-
-    KDLtoYarp(kdlFrame.M,R);
-    KDLtoYarp(kdlFrame.p,p);
-
-    if( yarpMatrix4_4.rows() != 4 || yarpMatrix4_4.cols() != 4 ) { yarpMatrix4_4.resize(4,4); }
-    yarpMatrix4_4.zero();
-
-    yarpMatrix4_4.setSubmatrix(R,0,0);
-    yarpMatrix4_4.setSubcol(p,0,3);
-    yarpMatrix4_4(3,3) = 1;
-
-    return true;
-}
-
-
-yarp::sig::Matrix KDLtoYarp_position(const KDL::Frame & kdlFrame)
-{
-    yarp::sig::Matrix yarpMatrix4_4(4,4);
-    KDLtoYarp_position(kdlFrame,yarpMatrix4_4);
-    return yarpMatrix4_4;
-}
-
-
-bool checkChainsAreEqual(KDL::Chain kdl_random_chain, iCub::iKin::iKinLimb & ikin_random_chain)
-{
-  srand(0);
-
-  for(int i =0; i < 10; i++ )
-  {
-  if( kdl_random_chain.getNrOfJoints() != ikin_random_chain.getDOF() )
-  {
-      std::cerr << "urdf2dh: error in conversion, number of DOFs does not match" << std::endl;
-      return false;
-  }
-
-
-  //Generate random state to validate
-  KDL::JntArray q_kdl(kdl_random_chain.getNrOfJoints());
-  yarp::sig::Vector q_yarp(ikin_random_chain.getDOF());
-
-  for(int i=0; i < q_yarp.size(); i++ ) { q_kdl(i) = q_yarp(i) = 1*random_double(2*M_PI); }
-
-  //Get H_ef_base for iKinChain
-  //for(int i=0; i < ikin_random_chain.getN(); i++ ) { ikin_random_chain.releaseLink(i); }
-  //std::cout << "iKin_export_random_chain: Setting angles value in iKin" << std::endl;
-  //std::cout << q_yarp.toString() << std::endl;
-  ikin_random_chain.setAllConstraints(false);
-  yarp::sig::Vector q_yarp_constrained = ikin_random_chain.setAng(q_yarp);
-  yarp::sig::Matrix H_yarp = ikin_random_chain.getH();
-
-  for(int i=0; i < q_yarp.size(); i++ ) { q_kdl(i) = q_yarp_constrained(i); }
-
-  //Get H_ef_base for KDL::Chain
-  KDL::Frame H_kdl;
-  KDL::ChainFkSolverPos_recursive kdl_pos_solver(kdl_random_chain);
-  kdl_pos_solver.JntToCart(q_kdl,H_kdl);
-
-
-  yarp::sig::Matrix H_yarp_kdl = KDLtoYarp_position(H_kdl);
-
-  //Check that the matrix are equal
-  double tol = 1e-3;
-
-
-
-  for(int i=0; i < 4; i++ ) {
-      for(int j=0; j < 4; j++ ) {
-          if( fabs(H_yarp_kdl(i,j)-H_yarp(i,j)) > tol )
-          {
-              std::cerr << "urdf2dh Element " << i << " " << j << " of the result matrix does not match" << std::endl;
-              std::cerr << "H from iKinChain: " << std::endl << H_yarp.toString() << std::endl
-                        << "H from KDL::Chain " << std::endl << H_yarp_kdl.toString() << std::endl;
-              std::cerr << "Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
-              return false;
-          }
-
-      }
-  }
-  }
-  return true;
-}
 
 void printHelp()
 {
@@ -178,12 +47,6 @@ void printHelp()
     std::cerr << "Usage: urdf2dh robot.urdf base_link_name end_effector_link_name dhParams.ini" << std::endl;
 }
 
-std::string int2string(int arg)
-{
-    std::ostringstream s;
-    s << arg;
-    return s.str();
-}
 
 int main(int argc, char** argv)
 {
@@ -315,7 +178,7 @@ int main(int argc, char** argv)
   {
       cerr << "urdf2dh error: KDL::Chain and iKinChain results does not match" << endl;
       std::cerr << "urdf2dh: Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
-      return false;
+      //return false;
   }
 
   yarp::os::Property prop;
