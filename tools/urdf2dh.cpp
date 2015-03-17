@@ -178,7 +178,7 @@ int main(int argc, char** argv)
   {
       cerr << "urdf2dh error: KDL::Chain and iKinChain results does not match" << endl;
       std::cerr << "urdf2dh: Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
-      //return false;
+      return false;
   }
 
   yarp::os::Property prop;
