@@ -4,6 +4,28 @@ iDynTree [![Build Status](https://travis-ci.org/robotology-playground/idyntree.s
 iDynTree is a C++ library of algorithms related to robots dynamics, specifically designed for free floating robots. 
 
 
+## Installation
+
+It is recommended to install iDynTree via the [codyco-superbuild](https://github.com/robotology/codyco-superbuild)
+
+#### Dependencies
+##### Build dependencies
+- [CMake](http://www.cmake.org)
+- [YCM](https://github.com/robotology/ycm)
+
+##### Core
+- [Kinematics and Dynamics Library](https://github.com/orocos/orocos_kinematics_dynamics)
+- [Eigen](http://eigen.tuxfamily.org)
+- [YCM](https://github.com/robotology/ycm)
+- [urdfdom](https://github.com/ros/urdfdom)
+
+##### Optional 
+- [YARP](https://github.com/robotology/yarp)
+- [ICUB](https://github.com/robotology/icub-main)
+
+
+
+
 ### Reference paper
 A paper describing the algorithms implemented in iDynTree and their use in a real world scenario can be downloaded [here](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) . If you're going to use this library for your work, please quote it within any resulting publication: 
 ~~~
