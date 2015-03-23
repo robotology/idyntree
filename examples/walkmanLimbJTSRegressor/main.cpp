@@ -25,6 +25,8 @@
 /*****************************************************************/
 int main(int argc, char *argv[])
 {
+    // In this example we will use YARP only for parsing command line
+    // parameters 
     yarp::os::ResourceFinder rf;
     rf.setVerbose(true);
     rf.setDefault("name","walkmanLimbJTSRegressor");
