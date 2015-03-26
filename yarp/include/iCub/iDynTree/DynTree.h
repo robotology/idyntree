@@ -334,6 +334,15 @@ class DynTree  {
                          const std::string & imu_link_name,
                          KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization());
 
+        /**
+         * Constructor for DynTree
+         *
+         * @param _tree the KDL::Tree that must be used
+         * @param serialization (optional) an explicit serialization of tree links and DOFs
+         *
+         */
+        DynTree(const KDL::Tree & _tree,
+                KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization());
 
         /**
          * Constructor for DynTree

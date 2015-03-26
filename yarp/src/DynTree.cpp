@@ -55,6 +55,15 @@ DynTree::DynTree()
 }
 
 DynTree::DynTree(const KDL::Tree & _tree,
+                 KDL::CoDyCo::TreeSerialization serialization):
+                 undirected_tree(_tree,serialization)
+{
+    std::string imu_link_name="";
+    std::vector<std::string> joint_sensor_names;
+    constructor(_tree,joint_sensor_names,imu_link_name,serialization);
+}
+
+DynTree::DynTree(const KDL::Tree & _tree,
                    const std::vector<std::string> & joint_sensor_names,
                    const std::string & imu_link_name,
                    KDL::CoDyCo::TreeSerialization serialization
