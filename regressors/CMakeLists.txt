@@ -43,8 +43,8 @@ target_include_directories(idyntree-regressors PUBLIC "$<BUILD_INTERFACE:${CMAKE
 target_link_libraries(idyntree-regressors ${orocos_kdl_LIBRARIES} idyntree-core)
 
 set_target_properties(idyntree-regressors PROPERTIES
-  SOVERSION "${KDL_CODYCO_VERSION_MAJOR}.${KDL_CODYCO_VERSION_MINOR}"
-  VERSION "${KDL_CODYCO_VERSION}"
+  SOVERSION "${${VARS_PREFIX}_VERSION}"
+  VERSION "${${VARS_PREFIX}_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}")
 
 set_property(TARGET idyntree-regressors PROPERTY PUBLIC_HEADER ${IDYNTREE_REGRESSORS_HEADERS})
