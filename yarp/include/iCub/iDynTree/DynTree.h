@@ -290,7 +290,7 @@ class DynTree  {
         yarp::sig::Matrix com_jacobian_buffer;
 
         //Generic 3d buffer
-        yarp::sig::Vector com_yarp;
+        mutable yarp::sig::Vector com_yarp;
 
         mutable yarp::sig::Vector sixteen_double_zero;
         mutable KDL::Frame error_frame;
@@ -306,8 +306,8 @@ class DynTree  {
         KDL::CoDyCo::MomentumJacobian momentum_jacobian;
         KDL::Jacobian com_jac_buffer;
         KDL::CoDyCo::MomentumJacobian momentum_jac_buffer;
-        std::vector<KDL::Vector> subtree_COM;
-        std::vector<double> subtree_mass;
+        mutable std::vector<KDL::Vector> subtree_COM;
+        mutable std::vector<double> subtree_mass;
         KDL::RigidBodyInertia total_inertia;
 
         //MassMatrix
@@ -418,13 +418,13 @@ class DynTree  {
          * @param link_name the name of the link
          * @return an index between 0..getNrOfLinks()-1 if all went well, -1 otherwise
          */
-        int getLinkIndex(const std::string & link_name);
+        int getLinkIndex(const std::string & link_name) const;
 
-        bool getLinkName(const int link_index, std::string & link_name);
+        bool getLinkName(const int link_index, std::string & link_name) const;
 
-        int getFrameIndex(const std::string & frame_name);
+        int getFrameIndex(const std::string & frame_name) const;
 
-        bool getFrameName(const int frame_index, std::string & frame_name);
+        bool getFrameName(const int frame_index, std::string & frame_name) const;
 
         /**
          * Get the global index for a DOF, given a DOF name
@@ -432,9 +432,9 @@ class DynTree  {
          * @return an index between 0..getNrOfDOFs()-1 if all went well, -1 otherwise
          *
          */
-        int getDOFIndex(const std::string & dof_name);
+        int getDOFIndex(const std::string & dof_name) const;
 
-        bool getDOFName(const int dof_index, std::string & dof_name);
+        bool getDOFName(const int dof_index, std::string & dof_name) const;
 
 
 
@@ -443,9 +443,9 @@ class DynTree  {
          * @param junction_name the name of the dof
          *
          */
-        int getJunctionIndex(const std::string & junction_name);
+        int getJunctionIndex(const std::string & junction_name) const;
 
-        bool getJunctionName(const int junction_index, std::string & junction_name);
+        bool getJunctionName(const int junction_index, std::string & junction_name) const;
 
 
         /**
@@ -453,18 +453,18 @@ class DynTree  {
          * \note for backward compatibility, this function returns the
          * the FT index given the name of the junction at which it is attached.
          */
-        int getFTSensorIndex(const std::string & ft_junction_name);
+        int getFTSensorIndex(const std::string & ft_junction_name) const;
 
-        bool getFTSensorName(const int ft_sensor_index, std::string & ft_sensor_name);
+        bool getFTSensorName(const int ft_sensor_index, std::string & ft_sensor_name) const;
 
 
         /**
          * Get the global index of a IMU, given the IMU frame name
          *
          */
-        int getIMUIndex(const std::string & imu_name);
+        int getIMUIndex(const std::string & imu_name) const;
 
-        bool getIMUName(const int imu_sensor_index, std::string & imu_name);
+        bool getIMUName(const int imu_sensor_index, std::string & imu_name) const;
 
 
         /**
@@ -491,7 +491,7 @@ class DynTree  {
          * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method.
          */
         bool getSkinDynLibAlias(const std::string iDynTree_link_name, std::string & iDynTree_frame_name,
-                                int & skinDynLib_body_part, int & skinDynLib_link_index);
+                                int & skinDynLib_body_part, int & skinDynLib_link_index) ;
 
         /**
          * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method.
@@ -545,8 +545,6 @@ class DynTree  {
 
         virtual bool setAngKDL(const KDL::JntArray & _q) ;
 
-
-
         /**
         * Get joint positions
         * @return vector of joint positions
@@ -555,15 +553,15 @@ class DynTree  {
 
         virtual bool getAngKDL(KDL::JntArray & q) const;
 
-
-
-
         /**
         * Set joint speeds
         * @param _q vector of joint speeds
         * @return the effective joint speeds, considering min/max values
         */
-        virtual yarp::sig::Vector setDAng(const yarp::sig::Vector & _q);
+        virtual yarp::sig::Vector setDAng(const yarp::sig::Vector & _dq);
+
+        virtual bool setDAngKDL(const KDL::JntArray & _dq) ;
+
 
         /**
         * Get joint speeds
@@ -573,14 +571,16 @@ class DynTree  {
         */
         virtual yarp::sig::Vector getDAng() const;
 
+        virtual bool getDAngKDL(KDL::JntArray & dq) const;
 
         /**
         * Set joint accelerations
         * @param _q vector of joint speeds
         * @return the effective joint accelerations, considering min/max values
         */
-        virtual yarp::sig::Vector setD2Ang(const yarp::sig::Vector & _q);
+        virtual yarp::sig::Vector setD2Ang(const yarp::sig::Vector & _d2q);
 
+        virtual bool setD2AngKDL(const KDL::JntArray & _d2q) ;
 
         /**
         * Get joint accelerations
@@ -588,7 +588,7 @@ class DynTree  {
         */
         virtual yarp::sig::Vector getD2Ang() const;
 
-
+        virtual bool getD2AngKDL(KDL::JntArray & d2q) const;
 
         /**
         * Set the inertial sensor measurements
@@ -988,7 +988,7 @@ class DynTree  {
         */
         //@{
 
-        KDL::Vector getCOMKDL(const int link_index = -1);
+        KDL::Vector getCOMKDL(const int link_index = -1) const;
 
 
         /**
@@ -998,7 +998,7 @@ class DynTree  {
         *
         * \todo prepare a suitable interface for specifing both an arbitrary part and a arbitrary frame of expression
         */
-        virtual yarp::sig::Vector getCOM(const int link_index = -1);
+        virtual yarp::sig::Vector getCOM(const int link_index = -1) const;
 
         virtual bool getCOMJacobianKDL(KDL::Jacobian & jac);
 

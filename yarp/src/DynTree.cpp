@@ -779,6 +779,23 @@ yarp::sig::Vector DynTree::getDAng() const
 
 }
 
+bool DynTree::getDAngKDL(KDL::JntArray & _dq) const
+{
+    _dq = dq;
+    return true;
+}
+
+bool DynTree::setDAngKDL(const KDL::JntArray & _dq)
+{
+    if( _dq.rows() != dq.rows() )
+    {
+        return false;
+    }
+
+    dq = _dq;
+
+    return true;
+}
 
 
 yarp::sig::Vector DynTree::getDQ_fb() const
@@ -814,6 +831,24 @@ yarp::sig::Vector DynTree::getD2Ang() const
 
     return ret;
 }
+
+bool DynTree::getD2AngKDL(KDL::JntArray & _d2q) const
+{
+    _d2q = ddq;
+    return true;
+}
+
+bool DynTree::setD2AngKDL(const KDL::JntArray & _d2q)
+{
+    if( _d2q.rows() != ddq.rows() )
+    {
+        return false;
+    }
+
+    ddq = _d2q;
+    return true;
+}
+
 
 bool DynTree::setInertialMeasureAndLinearVelocity(const yarp::sig::Vector &dp0, const yarp::sig::Vector &w0, const yarp::sig::Vector &ddp0, const yarp::sig::Vector &dw0)
 {
@@ -1530,7 +1565,7 @@ bool DynTree::dynamicRNEA()
 ////////////////////////////////////////////////////////////////////////
 
 
-KDL::Vector DynTree::getCOMKDL(int link_index)
+KDL::Vector DynTree::getCOMKDL(int link_index) const
 {
     if( (link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks()) && link_index != -1 )
     {
@@ -1565,7 +1600,7 @@ KDL::Vector DynTree::getCOMKDL(int link_index)
     return com_return;
 }
 
-yarp::sig::Vector DynTree::getCOM(int link_index)
+yarp::sig::Vector DynTree::getCOM(int link_index) const
 {
     KDL::Vector com_return = getCOMKDL(link_index);
     size_t com_return_size = sizeof(com_return)/sizeof(double);
@@ -2149,7 +2184,7 @@ int DynTree::getNrOfIMUs() const
     return 1;
 }
 
-int DynTree::getLinkIndex(const std::string & link_name)
+int DynTree::getLinkIndex(const std::string & link_name) const
 {
     KDL::CoDyCo::LinkMap::const_iterator link_it = undirected_tree.getLink(link_name);
     if( link_it == undirected_tree.getInvalidLinkIterator() ) { std::cerr << "DynTree::getLinkIndex : link " << link_name << " not found" << std::endl; return -1; }
@@ -2157,7 +2192,7 @@ int DynTree::getLinkIndex(const std::string & link_name)
 }
 
 
-bool DynTree::getLinkName(const int link_index, std::string & link_name)
+bool DynTree::getLinkName(const int link_index, std::string & link_name) const
 {
     if( link_index < 0 || link_index >= this->getNrOfLinks() )
     {
@@ -2167,25 +2202,25 @@ bool DynTree::getLinkName(const int link_index, std::string & link_name)
     return true;
 }
 
-int DynTree::getFrameIndex(const std::string & frame_name)
+int DynTree::getFrameIndex(const std::string & frame_name) const
 {
     return getLinkIndex(frame_name);
 }
 
-bool DynTree::getFrameName(const int frame_index, std::string & frame_name)
+bool DynTree::getFrameName(const int frame_index, std::string & frame_name) const
 {
     return getLinkName(frame_index, frame_name);
 }
 
 
-int DynTree::getDOFIndex(const std::string & dof_name)
+int DynTree::getDOFIndex(const std::string & dof_name) const
 {
     KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(dof_name);
     if( junction_it == undirected_tree.getInvalidJunctionIterator() || junction_it->getNrOfDOFs() != 1 ) { std::cerr << "DynTree::getDOFIndex : DOF " << dof_name << " not found" << std::endl; return -1; }
     return junction_it->getDOFIndex();
 }
 
-bool DynTree::getDOFName(const int dof_index, std::string & dof_name)
+bool DynTree::getDOFName(const int dof_index, std::string & dof_name) const
 {
     KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(dof_index);
     if( junction_it == undirected_tree.getInvalidJunctionIterator()
@@ -2198,14 +2233,14 @@ bool DynTree::getDOFName(const int dof_index, std::string & dof_name)
     return true;
 }
 
-int DynTree::getJunctionIndex(const std::string & junction_name)
+int DynTree::getJunctionIndex(const std::string & junction_name) const
 {
     KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(junction_name);
     if( junction_it == undirected_tree.getInvalidJunctionIterator() ) { std::cerr << "DynTree::getJunctionIndex : Junction " << junction_name << " not found" << std::endl; return -1; }
     return junction_it->getJunctionIndex();
 }
 
-bool DynTree::getJunctionName(const int junction_index, std::string & junction_name)
+bool DynTree::getJunctionName(const int junction_index, std::string & junction_name) const
 {
     KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(junction_index);
     if( junction_it == undirected_tree.getInvalidJunctionIterator() )
@@ -2218,13 +2253,13 @@ bool DynTree::getJunctionName(const int junction_index, std::string & junction_n
 }
 
 // \todo TODO FIXME implement this method
-bool DynTree::getFTSensorName(const int /*junction_index*/, std::string & /*junction_name*/)
+bool DynTree::getFTSensorName(const int /*junction_index*/, std::string & /*junction_name*/) const
 {
     return false;
 }
 
 
-int DynTree::getFTSensorIndex(const std::string & ft_name)
+int DynTree::getFTSensorIndex(const std::string & ft_name) const
 {
     KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(ft_name);
 
@@ -2259,7 +2294,7 @@ int DynTree::getFTSensorIndex(const std::string & ft_name)
     //return ft_list.getFTSensorID(junction_it->getJunctionIndex());
 }
 
-int DynTree::getIMUIndex(const std::string & imu_name)
+int DynTree::getIMUIndex(const std::string & imu_name) const
 {
     if( imu_name == kinematic_traversal.getBaseLink()->getName() ) {
         return 0;
@@ -2270,7 +2305,7 @@ int DynTree::getIMUIndex(const std::string & imu_name)
 }
 
 // \todo TODO FIXME implement this method
-bool DynTree::getIMUName(const int /*junction_index*/, std::string & /*junction_name*/)
+bool DynTree::getIMUName(const int /*junction_index*/, std::string & /*junction_name*/) const
 {
     return false;
 }
