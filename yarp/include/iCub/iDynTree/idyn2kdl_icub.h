@@ -47,10 +47,12 @@ enum iCubTree_serialization_tag
  * @return false in case of error, true otherwise
  */
 bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
+                      const iCub::iDyn::version_tag   & version_idyn,
+
                                   KDL::Tree & icub_kdl,
                                  KDL::JntArray & q_min,
                                  KDL::JntArray & q_max,
-                                 iCub::iDynTree::iCubTree_serialization_tag serial=iCub::iDynTree::SKINDYNLIB_SERIALIZATION, bool ft_foot=false, bool add_root_weight=false, bool debug=false);
+                                 iCub::iDynTree::iCubTree_serialization_tag serial=iCub::iDynTree::SKINDYNLIB_SERIALIZATION, bool ft_foot=false, bool add_root_weight=false, bool debug=false, bool ft_foot_iCubParis02=false);
 
 //bool toKDL_iDynDebug(const iCub::iDyn::iCubWholeBody & icub_idyn, KDL::Tree & icub_kdl, bool debug=false);
 

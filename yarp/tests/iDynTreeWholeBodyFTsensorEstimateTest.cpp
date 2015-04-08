@@ -380,7 +380,7 @@ int main()
 
     if( consistency_test == 0 )
     {
-        toKDL(icub,icub_kdl,q_min,q_max,iCub::iDynTree::IDYN_SERIALIZATION);
+        toKDL(icub,ver,icub_kdl,q_min,q_max,iCub::iDynTree::IDYN_SERIALIZATION);
 
         //Export to urdf for subsequent test
         boost::shared_ptr<urdf::ModelInterface> icub_ptr(new urdf::ModelInterface);

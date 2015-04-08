@@ -64,13 +64,15 @@ void addFrame(KDL::Tree & icub_kdl, KDL::Frame link_H_frame, std::string link_na
 }
 
 bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
+           const iCub::iDyn::version_tag   & version_idyn,
            KDL::Tree & icub_kdl,
            KDL::JntArray & q_min,
            KDL::JntArray & q_max,
            iCub::iDynTree::iCubTree_serialization_tag serial,
            bool ft_foot,
            bool add_root_weight,
-           bool /*debug*/)
+           bool /*debug*/,
+           bool ft_foot_iCubParis02)
 {
     //sstd::cout << "toKDL(..) function called" << std::endl;
 
@@ -204,6 +206,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     KDL::Frame ft_rf_H_sensor_child;
     if( ft_foot )
     {
+        // We need this option for two
         //If ft foot are present in legs
         //then the feet is v2
         iCub::iDyn::version_tag tag_feetV2;
@@ -232,8 +235,62 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
 
         //std::cerr << "toKDL: adding feet FT sensors" << std::endl;
         KDL::Chain no_ft_rl, no_ft_ll, no_ft_rlV2, no_ft_llV2;
-        KDL::Frame T_ss_ee(KDL::Rotation(0,0,1,0,1,0,-1,0,0),KDL::Vector(0,0,0.075)); //transformation between the end effector and the sensor
-        KDL::Frame T_ee_ss = T_ss_ee.Inverse();
+
+        // We have three possible cases for the translation between the DH end effector frame
+        // and the ft sensor frame:
+        KDL::Frame ss_T_old_ee;
+        KDL::Frame new_ee_T_old_ee;
+        if( version_idyn.legs_version == 2 )
+        {
+            // If we have a iCub v2.5 leg kinematics, the iDyn ee frame origin is the projection of the
+            // ft sensor origin, so there is just a slight offset of 0.004 meters
+            ss_T_old_ee = KDL::Frame(KDL::Rotation(0,0,1,
+                                               0,1,0,
+                                               -1,0,0),
+                                     KDL::Vector(0,0,0.004)); //transformation between the end effector and the sensor
+
+            new_ee_T_old_ee = KDL::Frame(KDL::Rotation(1,0,0,
+                                                       0,1,0,
+                                                       0,0,1),
+                                           KDL::Vector(0,0,0));
+        } else
+        {
+            assert( version_idyn.legs_version == 1 );
+            if( ft_foot_iCubParis02 )
+            {
+                // if we have the iCubParis02, i.e. a iCub with v2 legs and
+                // a ft sensor moved towards the front of the foot, we will use the
+                // v1 legs kinematics and a specific rototranslation between the
+                // dh end effector using the v1 frame and the new ft sensor frame
+                ss_T_old_ee = KDL::Frame(KDL::Rotation(0,0,1,
+                                                       0,1,0,
+                                                       -1,0,0),
+                                             KDL::Vector(-0.008,0,-0.0143));
+
+                new_ee_T_old_ee = KDL::Frame(KDL::Rotation(1,0,0,
+                                                           0,1,0,
+                                                           0,0,1),
+                                                       KDL::Vector(0,0,0.0183));
+            }
+            else
+            {
+                // if we have a iCub with v1 legs but with ft sensors in the ankle
+                // we have a specific rototranslation between the
+                // dh end effector using the v1 frame and the new ft sensor frame
+                ss_T_old_ee = KDL::Frame(KDL::Rotation(0,0,1,
+                                                       0,1,0,
+                                                       -1,0,0),
+                                         KDL::Vector(-0.017,0,-0.001));
+
+                new_ee_T_old_ee = KDL::Frame(KDL::Rotation(1,0,0,
+                                                           0,1,0,
+                                                           0,0,1),
+                                                       KDL::Vector(0,0,0.0183));
+            }
+        }
+
+        KDL::Frame old_ee_T_ss = ss_T_old_ee.Inverse();
+        KDL::Frame old_ee_T_new_ee = new_ee_T_old_ee.Inverse();
 
         no_ft_rlV2 = rlV2;
         no_ft_llV2 = llV2;
@@ -247,25 +304,27 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
         KDL::Segment l_foot_no_ft = no_ft_llV2.getSegment(6);
 
         //Build new segments
-        KDL::RigidBodyInertia r_upper_foot_I = KDL::RigidBodyInertia(0.1);
-        KDL::RigidBodyInertia l_upper_foot_I = KDL::RigidBodyInertia(0.1);
-        KDL::Segment r_ankle_2("r_ankle_2",r_foot_no_ft.getJoint(),r_foot_no_ft.getFrameToTip()*T_ee_ss,r_upper_foot_I);
-        KDL::Segment l_ankle_2("l_ankle_2",l_foot_no_ft.getJoint(),l_foot_no_ft.getFrameToTip()*T_ee_ss,l_upper_foot_I);
+        // extracted from the (hopefully correct) iCubHeidelberg01 )
+        double ankle_2_weight = 0.2675;
+        KDL::RigidBodyInertia r_upper_foot_I = KDL::RigidBodyInertia(ankle_2_weight);
+        KDL::RigidBodyInertia l_upper_foot_I = KDL::RigidBodyInertia(ankle_2_weight);
+        KDL::Segment r_ankle_2("r_ankle_2",r_foot_no_ft.getJoint(),r_foot_no_ft.getFrameToTip()*old_ee_T_ss,r_upper_foot_I);
+        KDL::Segment l_ankle_2("l_ankle_2",l_foot_no_ft.getJoint(),l_foot_no_ft.getFrameToTip()*old_ee_T_ss,l_upper_foot_I);
 
-        KDL::RigidBodyInertia r_foot_new_I = T_ss_ee*r_foot_no_ft.getInertia()-r_upper_foot_I;
-        KDL::RigidBodyInertia l_foot_new_I = T_ss_ee*l_foot_no_ft.getInertia()-l_upper_foot_I;
+        KDL::RigidBodyInertia r_foot_new_I = ss_T_old_ee*r_foot_no_ft.getInertia()-r_upper_foot_I;
+        KDL::RigidBodyInertia l_foot_new_I = ss_T_old_ee*l_foot_no_ft.getInertia()-l_upper_foot_I;
         KDL::Segment r_foot_new("r_foot",KDL::Joint("r_foot_ft_sensor"),KDL::Frame::Identity(),r_foot_new_I);
         KDL::Segment l_foot_new("l_foot",KDL::Joint("l_foot_ft_sensor"),KDL::Frame::Identity(),l_foot_new_I);
 
         ft_lf_H_sensor_child = KDL::Frame::Identity();
         ft_rf_H_sensor_child = KDL::Frame::Identity();
 
-        KDL::Segment l_sole("l_sole",KDL::Joint("l_sole_fixed_joint"),T_ss_ee);
-        KDL::Segment r_sole("r_sole",KDL::Joint("r_sole_fixed_joint"),T_ss_ee);
+        KDL::Segment l_foot_dh_frame("l_foot_dh_frame",KDL::Joint("l_foot_dh_frame_fixed_joint"),ss_T_old_ee*old_ee_T_new_ee);
+        KDL::Segment r_foot_dh_frame("r_foot_dh_frame",KDL::Joint("r_foot_dh_frame_fixed_joint"),ss_T_old_ee*old_ee_T_new_ee);
 
-        rl.addSegment(r_ankle_2); rl.addSegment(r_foot_new); rl.addSegment(r_sole);
+        rl.addSegment(r_ankle_2); rl.addSegment(r_foot_new); rl.addSegment(r_foot_dh_frame);
 
-        ll.addSegment(l_ankle_2); ll.addSegment(l_foot_new); ll.addSegment(l_sole);
+        ll.addSegment(l_ankle_2); ll.addSegment(l_foot_new); ll.addSegment(l_foot_dh_frame);
     }
 
     //Get joint limits
@@ -330,18 +389,11 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
 
     // Export FT Sensor frames
 
-    /*
-    addFrame(icub_kdl,KDL::Frame::Identity(),"l_upper_arm","l_arm_ft_frame");
-    addFrame(icub_kdl,KDL::Frame::Identity(),"r_upper_arm","r_arm_ft_frame");
-    addFrame(icub_kdl,KDL::Frame::Identity(),"l_hip_3","l_leg_ft_frame");
-    addFrame(icub_kdl,KDL::Frame::Identity(),"r_hip_3","r_leg_ft_frame");
-
-    if( ft_foot )
+    if( !ft_foot )
     {
-        addFrame(icub_kdl,KDL::Frame::Identity(),"l_foot_ft_frame","l_foot");
-        addFrame(icub_kdl,KDL::Frame::Identity(),"r_foot_ft_frame","r_foot");
-    }*/
-
+        addFrame(icub_kdl,KDL::Frame::Identity(),"r_foot","r_foot_dh_frame");
+        addFrame(icub_kdl,KDL::Frame::Identity(),"l_foot","l_foot_dh_frame");
+    }
 
     KDL::CoDyCo::TreeFkSolverPos_iterative pos_solv(icub_kdl);
     KDL::CoDyCo::GeneralizedJntPositions pos(icub_kdl.getNrOfJoints());
@@ -356,33 +408,50 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     addFrame(icub_kdl,ft_la_H_sensor_dh_child,"l_upper_arm","l_upper_arm_dh_frame");
     addFrame(icub_kdl,ft_ra_H_sensor_dh_child,"r_upper_arm","r_upper_arm_dh_frame");
 
-    KDL::Frame root_link_H_l_sole, root_link_H_l_foot,l_sole_H_l_foot;
-    int ret = pos_solv.JntToCart(pos,root_link_H_l_sole,"l_sole");
+
+    KDL::Frame root_link_H_l_foot_dh_frame, root_link_H_l_foot,l_foot_dh_frame_H_l_foot;
+    int ret = pos_solv.JntToCart(pos,root_link_H_l_foot_dh_frame,"l_foot_dh_frame");
     YARP_ASSERT(ret == 0);
     ret = pos_solv.JntToCart(pos,root_link_H_l_foot,"l_foot");
     YARP_ASSERT(ret == 0);
-    l_sole_H_l_foot = root_link_H_l_sole.Inverse()*root_link_H_l_foot;
-    addFrame(icub_kdl,l_sole_H_l_foot.Inverse(),"l_foot","l_foot_dh_frame");
+    l_foot_dh_frame_H_l_foot = root_link_H_l_foot_dh_frame.Inverse()*root_link_H_l_foot;
 
-    KDL::Frame root_link_H_r_sole, root_link_H_r_foot,r_sole_H_r_foot;
-    ret = pos_solv.JntToCart(pos,root_link_H_r_sole,"r_sole");
+    KDL::Frame root_link_H_r_foot_dh_frame, root_link_H_r_foot,r_foot_dh_frame_H_r_foot;
+    ret = pos_solv.JntToCart(pos,root_link_H_r_foot_dh_frame,"r_foot_dh_frame");
     YARP_ASSERT(ret == 0);
     ret = pos_solv.JntToCart(pos,root_link_H_r_foot,"r_foot");
     YARP_ASSERT(ret == 0);
-    r_sole_H_r_foot = root_link_H_r_sole.Inverse()*root_link_H_r_foot;
-    addFrame(icub_kdl,r_sole_H_r_foot.Inverse(),"r_foot","r_foot_dh_frame");
+    r_foot_dh_frame_H_r_foot = root_link_H_r_foot_dh_frame.Inverse()*root_link_H_r_foot;
 
 
     //Export the world frame used by codyco balancing demo
-    KDL::Frame H_l_sole_world;
-    H_l_sole_world.M = KDL::Rotation (0, 0, 1, 0, -1, 0, 1, 0, 0);
+    //Export l_sole, using the usual origin of the leg end effector and the orientation definde in REP-120
+    KDL::Frame l_foot_dh_frame_H_l_sole;
+    l_foot_dh_frame_H_l_sole.M = KDL::Rotation (0, 0, 1,
+                                               0, -1, 0,
+                                                1, 0, 0);
 
-    KDL::Frame H_world_l_sole = H_l_sole_world.Inverse();
+    KDL::Frame l_sole_H_l_foot_dh_frame = l_foot_dh_frame_H_l_sole.Inverse();
 
 
-    KDL::Frame H_world_l_foot = H_world_l_sole*l_sole_H_l_foot;
+    KDL::Frame l_sole_H_l_foot = l_sole_H_l_foot_dh_frame*l_foot_dh_frame_H_l_foot;
 
-    addFrame(icub_kdl,H_world_l_foot.Inverse(),"l_foot","codyco_balancing_world");
+    // codyco_balancing_world is X-front, Y-left, Z-up like l_sole and r_sole are defined in REP-120
+    addFrame(icub_kdl,l_sole_H_l_foot.Inverse(),"l_foot","codyco_balancing_world");
+    addFrame(icub_kdl,l_sole_H_l_foot.Inverse(),"l_foot","l_sole");
+
+    //Export r_sole, using the usual origin of the leg end effector and the orientation definde in REP-120
+    KDL::Frame r_foot_dh_frame_H_r_sole;
+    r_foot_dh_frame_H_r_sole.M = KDL::Rotation (0, 0, 1,
+                                               0, -1, 0,
+                                                1, 0, 0);
+
+    KDL::Frame r_sole_H_r_foot_dh_frame = r_foot_dh_frame_H_r_sole.Inverse();
+
+
+    KDL::Frame r_sole_H_r_foot = r_sole_H_r_foot_dh_frame*r_foot_dh_frame_H_r_foot;
+
+    addFrame(icub_kdl,r_sole_H_r_foot.Inverse(),"r_foot","r_sole");
 
 
     //std::cout << "Returning from KDL: " << KDL::CoDyCo::UndirectedTree(icub_kdl).toString() << std::endl;

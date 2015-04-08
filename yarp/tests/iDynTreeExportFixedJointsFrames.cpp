@@ -40,7 +40,7 @@
 
 #include <iCub/iDynTree/TorqueEstimationTree.h>
 
-#include <iCub/iDynTree/idyn2kdl_icub.h>
+#include "idyn2kdl_icub.h"
 
 #include <kdl_codyco/treefksolverpos_iterative.hpp>
 
@@ -250,7 +250,7 @@ int main()
      KDL::Tree icub_kdl;
      KDL::Tree icub_kdl_urdf;
 
-        toKDL(icub,icub_kdl,q_min,q_max,iCub::iDynTree::IDYN_SERIALIZATION);
+        toKDL(icub,ver,icub_kdl,q_min,q_max,iCub::iDynTree::IDYN_SERIALIZATION);
 
         //Export to urdf for subsequent test
         boost::shared_ptr<urdf::ModelInterface> icub_ptr(new urdf::ModelInterface);
