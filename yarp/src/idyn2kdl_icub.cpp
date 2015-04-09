@@ -11,6 +11,8 @@
 
 #include <kdl_codyco/treefksolverpos_iterative.hpp>
 
+#include <kdl/frames_io.hpp>
+
 using yarp::math::cat;
 
 template<typename T, size_t N>
@@ -72,9 +74,12 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
            bool ft_foot,
            bool add_root_weight,
            bool /*debug*/,
-           bool ft_foot_iCubParis02)
+           bool ft_foot_iCubParis02,
+           bool ft_foot_icubGazeboSim
+          )
 {
-    //sstd::cout << "toKDL(..) function called" << std::endl;
+    std::cerr << "toKDL(..) function called with ft_foot_iCubParis02 " << ft_foot_iCubParis02
+              << " and ft_foot_icubGazeboSim " << ft_foot_icubGazeboSim << std::endl;
 
     bool status_ok = true;
     //Joint names extracted from http://eris.liralab.it/wiki/ICub_joints
@@ -272,6 +277,15 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
                                                            0,0,1),
                                                        KDL::Vector(0,0,0.0183));
             }
+            else if (ft_foot_icubGazeboSim )
+            {
+                // if we have a 'fake' ft sensor with a v1 feet we have specific parmaters
+                ss_T_old_ee = KDL::Frame(KDL::Rotation(0,0,1,
+                                                       0,1,0,
+                                                       -1,0,0),
+                                             KDL::Vector(0.0,0,0.004));
+                new_ee_T_old_ee = KDL::Frame::Identity();
+            }
             else
             {
                 // if we have a iCub with v1 legs but with ft sensors in the ankle
@@ -300,19 +314,24 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
         ll = KDL::Chain();
         //add for each leg til ankle_1
         for(int iii=0; iii <= 5; iii++ ) { rl.addSegment(no_ft_rl.getSegment(iii)); ll.addSegment(no_ft_ll.getSegment(iii)); }
-        KDL::Segment r_foot_no_ft = no_ft_rlV2.getSegment(6);
-        KDL::Segment l_foot_no_ft = no_ft_llV2.getSegment(6);
+        KDL::Segment r_foot_legsV25_no_ft = no_ft_rlV2.getSegment(6);
+        KDL::Segment l_foot_legsV25_no_ft = no_ft_llV2.getSegment(6);
+        KDL::Segment r_foot_original_no_ft = no_ft_rl.getSegment(6);
+        KDL::Segment l_foot_original_no_ft = no_ft_ll.getSegment(6);
 
         //Build new segments
-        // extracted from the (hopefully correct) iCubHeidelberg01 )
+        // mass extracted from the (hopefully correct) iCubHeidelberg01 )
         double ankle_2_weight = 0.2675;
         KDL::RigidBodyInertia r_upper_foot_I = KDL::RigidBodyInertia(ankle_2_weight);
         KDL::RigidBodyInertia l_upper_foot_I = KDL::RigidBodyInertia(ankle_2_weight);
-        KDL::Segment r_ankle_2("r_ankle_2",r_foot_no_ft.getJoint(),r_foot_no_ft.getFrameToTip()*old_ee_T_ss,r_upper_foot_I);
-        KDL::Segment l_ankle_2("l_ankle_2",l_foot_no_ft.getJoint(),l_foot_no_ft.getFrameToTip()*old_ee_T_ss,l_upper_foot_I);
 
-        KDL::RigidBodyInertia r_foot_new_I = ss_T_old_ee*r_foot_no_ft.getInertia()-r_upper_foot_I;
-        KDL::RigidBodyInertia l_foot_new_I = ss_T_old_ee*l_foot_no_ft.getInertia()-l_upper_foot_I;
+        // use always feetV2 dynamics, but depending on the type of leg use feetV1 or feetV2 kinematics
+        // see https://github.com/robotology-playground/icub-model-generator/issues/9 for more info
+        KDL::Segment r_ankle_2("r_ankle_2",r_foot_original_no_ft.getJoint(),r_foot_original_no_ft.getFrameToTip()*old_ee_T_ss,r_upper_foot_I);
+        KDL::Segment l_ankle_2("l_ankle_2",l_foot_original_no_ft.getJoint(),l_foot_original_no_ft.getFrameToTip()*old_ee_T_ss,l_upper_foot_I);
+
+        KDL::RigidBodyInertia r_foot_new_I = ss_T_old_ee*r_foot_legsV25_no_ft.getInertia()-r_upper_foot_I;
+        KDL::RigidBodyInertia l_foot_new_I = ss_T_old_ee*l_foot_legsV25_no_ft.getInertia()-l_upper_foot_I;
         KDL::Segment r_foot_new("r_foot",KDL::Joint("r_foot_ft_sensor"),KDL::Frame::Identity(),r_foot_new_I);
         KDL::Segment l_foot_new("l_foot",KDL::Joint("l_foot_ft_sensor"),KDL::Frame::Identity(),l_foot_new_I);
 
@@ -325,6 +344,17 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
         rl.addSegment(r_ankle_2); rl.addSegment(r_foot_new); rl.addSegment(r_foot_dh_frame);
 
         ll.addSegment(l_ankle_2); ll.addSegment(l_foot_new); ll.addSegment(l_foot_dh_frame);
+
+        if( ft_foot_icubGazeboSim )
+        {
+            std::cerr << "[DEBUG] Original  r_foot_original_no_ft.getFrameToTip(): " << r_foot_original_no_ft.getFrameToTip()  << std::endl;
+            std::cerr << "[DEBUG] r_foot_original_no_ft.getFrameToTip()*old_ee_T_ss  " << r_foot_original_no_ft.getFrameToTip()*old_ee_T_ss << std::endl;
+            std::cerr << "[DEBUG] r_ankle_2.getFrameToTip() " << r_ankle_2.getFrameToTip() << std::endl;
+            std::cerr << "[DEBUG] r_foot_new.getFrameToTip() " << r_foot_new.getFrameToTip() << std::endl;
+            std::cerr << "[DEBUG] ss_T_old_ee*old_ee_T_new_ee " << ss_T_old_ee*old_ee_T_new_ee << std::endl;
+            std::cerr << "[DEBUG] r_foot_dh_frame.getFrameToTip() " << r_foot_dh_frame.getFrameToTip() << std::endl;
+
+        }
     }
 
     //Get joint limits

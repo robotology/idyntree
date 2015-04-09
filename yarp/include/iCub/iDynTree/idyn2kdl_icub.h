@@ -52,7 +52,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
                                   KDL::Tree & icub_kdl,
                                  KDL::JntArray & q_min,
                                  KDL::JntArray & q_max,
-                                 iCub::iDynTree::iCubTree_serialization_tag serial=iCub::iDynTree::SKINDYNLIB_SERIALIZATION, bool ft_foot=false, bool add_root_weight=false, bool debug=false, bool ft_foot_iCubParis02=false);
+                                 iCub::iDynTree::iCubTree_serialization_tag serial=iCub::iDynTree::SKINDYNLIB_SERIALIZATION, bool ft_foot=false, bool add_root_weight=false, bool debug=false, bool ft_foot_iCubParis02=false, bool ft_foot_icubGazeboSim=false);
 
 //bool toKDL_iDynDebug(const iCub::iDyn::iCubWholeBody & icub_idyn, KDL::Tree & icub_kdl, bool debug=false);
 
