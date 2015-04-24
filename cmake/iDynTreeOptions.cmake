@@ -19,6 +19,11 @@ if(IDYNTREE_COMPILE_TESTS)
 endif()
 
 #########################################################################
+# Turn on bindings compilation.
+option(IDYNTREE_COMPILE_BINDINGS "Compile iDynTree bindings" FALSE)
+
+
+#########################################################################
 # Deal with RPATH
 option(IDYNTREE_ENABLE_RPATH "Enable RPATH for the library" TRUE)
 mark_as_advanced(IDYNTREE_ENABLE_RPATH)
