@@ -8,7 +8,7 @@
 #include "Position.h"
 #include "Utils.h"
 #include <cassert>
-#include <cstdio>
+#include <iostream>
 #include <sstream>
 
 namespace iDynTree
@@ -121,14 +121,14 @@ namespace iDynTree
         // check semantics
         if( !checkEqualOrUnknown(newPosition.coordinateFrame,this->coordinateFrame) )
         {
-            fprintf(stderr,"[ERROR] Position::changePoint error: changePoint with newPosition expressed in a different coordinateFrames\n");
+            std::cerr << "[ERROR] Position::changePoint error: changePoint with newPosition expressed in a different coordinateFrames\n";
             assert(false);
             return false;
         }
 
         if( !checkEqualOrUnknown(newPosition.referencePoint,this->point) )
         {
-            fprintf(stderr,"[ERROR] Position::changePoint error: newPosition has a refernce point different from the original point\n");
+            std::cerr << "[ERROR] Position::changePoint error: newPosition has a refernce point different from the original point\n";
             assert(false);
             return false;
         }
@@ -162,14 +162,14 @@ namespace iDynTree
         // check semantics
         if( !checkEqualOrUnknown(newPosition.coordinateFrame,this->coordinateFrame) )
         {
-            fprintf(stderr,"[ERROR] Position::changeRefPoint error: changePoint with newPosition expressed in a different coordinateFrames\n");
+            std::cerr << "[ERROR] Position::changeRefPoint error: changePoint with newPosition expressed in a different coordinateFrames\n";
             assert(false);
             return false;
         }
 
         if( !checkEqualOrUnknown(newPosition.point,this->referencePoint) )
         {
-            fprintf(stderr,"[ERROR] Position::changeRefPoint error: newPosition has a refernce point different from the original point\n");
+            std::cerr << "[ERROR] Position::changeRefPoint error: newPosition has a refernce point different from the original point\n";
             assert(false);
             return false;
         }
@@ -201,17 +201,17 @@ namespace iDynTree
         // check semantics
         if( !checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame) )
         {
-            fprintf(stderr,"[ERROR] Position::compose error: composing two position expressed in different coordinateFrames\n");
+            std::cerr << "[ERROR] Position::compose error: composing two position expressed in different coordinateFrames\n";
             assert(false);
             return false;
         }
 
         if( !checkEqualOrUnknown(op1.referencePoint,op2.point) )
         {
-            fprintf(stderr,"[ERROR] Position::compose error: composing two position where the reference point of the first one is different from the point of the second\n");
+            std::cerr << "[ERROR] Position::compose error: composing two position where the reference point of the first one is different from the point of the second\n";
             if( op1.point == op2.referencePoint )
             {
-                fprintf(stderr,"[ERROR] Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))\n");
+                std::cerr << "[ERROR] Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))\n";
                 assert(false);
                 return false;
             }
