@@ -41,7 +41,7 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           DEPENDS IDYNTREE_ENABLE_RPATH
                           USE_LINK_PATH)
 
-add_subdirectory(base)
+add_subdirectory(core-experimental)
 add_subdirectory(core)
 add_subdirectory(regressors)
 add_subdirectory(model_io)
