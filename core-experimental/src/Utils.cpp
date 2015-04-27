@@ -9,6 +9,7 @@
 
 namespace iDynTree
 {
+    int UNKNOWN = -1;
 
     bool checkEqualOrUnknown(const int op1, const int op2)
     {

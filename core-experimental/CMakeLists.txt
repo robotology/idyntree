@@ -11,15 +11,17 @@ endif(MSVC)
 #local headers
 include_directories(include/iDynTree/Core)
 
-file(GLOB IDYNTREE_CORE_EXP_HEADERS
-     "include/iDynTree/Core/*.h"
- )
+set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Position.h
+                              include/iDynTree/Core/PositionRaw.h
+                              include/iDynTree/Core/PositionSemantics.h
+                              include/iDynTree/Core/Utils.h)
 
 #file (GLOB IDYNTREE_BASE_PRIVATE_INCLUDES)
 
-file(GLOB IDYNTREE_CORE_EXP_SOURCES
-    "src/*.cpp"
-)
+set(IDYNTREE_CORE_EXP_HEADERS src/Position.cpp
+                              src/PositionRaw.cpp
+                              src/PositionSemantics.cpp
+                              src/Utils.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})

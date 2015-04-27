@@ -7,6 +7,9 @@
 
 namespace iDynTree
 {
+
+    extern int UNKNOWN;
+
     /**
      * Helper class for semantic checking.
      *

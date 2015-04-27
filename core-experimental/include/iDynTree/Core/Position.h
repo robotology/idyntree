@@ -5,6 +5,12 @@
  *
  */
 
+#ifndef IDYNTREE_POSITION_H
+#define IDYNTREE_POSITION_H
+
+#include "PositionRaw.h"
+#include "PositionSemantics.h"
+
 #include <string>
 
 namespace iDynTree
@@ -20,40 +26,14 @@ namespace iDynTree
      * IEEE Robotics & Automation Magazine, Vol. 20, No. 1, pp. 84-93.
      * URL : http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf
      *
+     * One operation is not included for a logic paradox:
+     *   Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))
+     *
      */
-    class Position
+    class Position: public PositionRaw
     {
     private:
-        /**
-         * Storage for the Position Coordinate:
-         * contains the x, y and z coordinates
-         * of the position.
-         */
-        double privateData[3];
-
-        /**
-         * Position semantics
-         */
-        int point;
-        int referencePoint;
-        int coordinateFrame;
-
-        /**
-         * Helper methods for actually performing operation on coordinates
-         */
-        const Position & changePointCoordinates(const Position & newPoint);
-        const Position & changeRefPointCoordinates(const Position & newRefPoint);
-        static void composeCoordinates(const Position & op1, const Position & op2, Position & result);
-        static void inverseCoordinates(const iDynTree::Position& op, Position & result);
-
-        /**
-         * Helper methods for semantics of Position operation
-         */
-        bool changePointSemantics(const Position & newPoint);
-        bool changeRefPointSemantics(const Position & newPoint);
-        static bool composeSemantics(const Position & op1, const Position & op2, Position & result);
-        static bool inverseSemantics(const Position & op, Position & result);
-
+        PositionSemantics semantics;
 
     public:
         /**
@@ -72,55 +52,19 @@ namespace iDynTree
         Position(const Position & other);
 
         /**
+         * Copy constructor: create a Position from a PositionRaw
+         */
+        Position(const PositionRaw & other);
+
+        /**
          * Denstructor
          */
         ~Position();
 
-
         /**
-         * Return a coordinate by value, the index is checked
-         * if it is inside 0..2 if NDEBUG is not set.
-         *
+         * Semantic getter
          */
-        const double & operator()(int index) const;
-
-        /**
-         * Return a reference to a coordinate, the index is checked
-         * if it is inside 0..2 if NDEBUG is not set.
-         */
-        double& operator()(int index);
-
-        /**
-         * Return a coordinate by value, the index is checked
-         * if it is inside 0..2 if NDEBUG is set.
-         *
-         */
-        const double & operator[](int index) const;
-
-        /**
-         * Return a reference to a coordinate, the index is checked
-         * if it is inside 0..2 if NDEBUG is set.
-         */
-        double& operator[](int index);
-
-        /**
-         * Raw data accessor: return a pointer to a vector of 3 doubles,
-         * representing the x,y and z coordinates of the Position
-         */
-        const double * data() const;
-
-        /** @name Semantics setters and getters.
-         *  Semantics setters and getters.
-         */
-        ///@{
-        int getPoint() const;
-        int getReferencePoint() const;
-        int getCoordinateFrame() const;
-
-        void setPoint(int _point);
-        void setReferencePoint(int _referencePoint);
-        void setCoordinateFrame(int _coordinateFrame);
-        ///@}
+        PositionSemantics& getSemantics();
 
         const Position & changePoint(const Position & newPoint);
         const Position & changeRefPoint(const Position & newRefPoint);
@@ -140,3 +84,5 @@ namespace iDynTree
 
     };
 }
+
+#endif
