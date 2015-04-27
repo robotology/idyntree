@@ -15,6 +15,8 @@
 
 namespace iDynTree
 {
+    class Rotation;
+
     /**
      * Class representation the coordinates of the Position of
      * a point with respect to another point.
@@ -65,6 +67,11 @@ namespace iDynTree
          * Semantic getter
          */
         PositionSemantics& getSemantics();
+
+        /**
+         * Const Semantic getter
+         */
+        const PositionSemantics& getSemantics() const;
 
         const Position & changePoint(const Position & newPoint);
         const Position & changeRefPoint(const Position & newRefPoint);

@@ -24,6 +24,7 @@ namespace iDynTree
 
     Position::Position(const Position & other): PositionRaw(other)
     {
+        this->semantics = other.getSemantics();
     }
 
     Position::Position(const PositionRaw& other): PositionRaw(other)
@@ -40,6 +41,12 @@ namespace iDynTree
     {
         return this->semantics;
     }
+
+    const PositionSemantics& Position::getSemantics() const
+    {
+        return this->semantics;
+    }
+
 
     const Position& Position::changePoint(const Position& newPoint)
     {

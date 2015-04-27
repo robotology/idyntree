@@ -10,7 +10,8 @@ set(CREATE_MATLAB FALSE CACHE BOOL "Do you want to create the MATLAB Interface")
 set(GENERATE_MATLAB FALSE CACHE BOOL "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper")
 
 find_package(SWIG REQUIRED)
-include(${SWIG_USE_FILE})
+#include(${SWIG_USE_FILE})
+include(../cmake/UseSWIG.cmake)
 message(STATUS "SWIG_USE_FILE :" ${SWIG_USE_FILE})
 
 set_source_files_properties(iDynTree.i PROPERTIES CPLUSPLUS ON)
@@ -25,6 +26,6 @@ if(CREATE_LUA)
     add_subdirectory(lua)
 endif(CREATE_LUA)
 
-if(CREATE_MATLAB)
+if(CREATE_MATLAB OR GENERATE_MATLAB)
     add_subdirectory(matlab)
-endif(CREATE_MATLAB)
+endif(CREATE_MATLAB OR GENERATE_MATLAB)
