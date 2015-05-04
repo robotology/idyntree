@@ -21,8 +21,8 @@ classdef TransformRaw < SwigRef
     function varargout = inverse(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(86,'TransformRaw_inverse',self,varargin{:});
     end
-    function varargout = mult(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(87,'TransformRaw_mult',self,varargin{:});
+    function varargout = mtimes(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(87,'TransformRaw_mtimes',self,varargin{:});
     end
     function varargout = toString(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(88,'TransformRaw_toString',self,varargin{:});

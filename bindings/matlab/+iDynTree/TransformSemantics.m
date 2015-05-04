@@ -57,8 +57,8 @@ classdef TransformSemantics < SwigRef
     function varargout = inverse(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(109,'TransformSemantics_inverse',self,varargin{:});
     end
-    function varargout = mult(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(110,'TransformSemantics_mult',self,varargin{:});
+    function varargout = mtimes(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(110,'TransformSemantics_mtimes',self,varargin{:});
     end
     function varargout = toString(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(111,'TransformSemantics_toString',self,varargin{:});

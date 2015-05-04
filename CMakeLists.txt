@@ -63,6 +63,4 @@ if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)
 endif(IDYNTREE_COMPILE_TESTS)
 
-if(IDYNTREE_COMPILE_BINDINGS)
 add_subdirectory(bindings)
-endif(IDYNTREE_COMPILE_BINDINGS)

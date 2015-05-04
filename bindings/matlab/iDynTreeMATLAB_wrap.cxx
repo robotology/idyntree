@@ -3590,7 +3590,7 @@ fail:
 }
 
 
-void _wrap_RotationRaw_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_RotationRaw_mtimes__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
   iDynTree::RotationRaw *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -3600,20 +3600,20 @@ void _wrap_RotationRaw_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArra
   mxArray * _out;
   iDynTree::RotationRaw result;
   
-  if (!SWIG_check_num_args("RotationRaw_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("RotationRaw_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mult" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mtimes" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__RotationRaw,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mult" "', argument " "2"" of type '" "iDynTree::RotationRaw const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::RotationRaw const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mult" "', argument " "2"" of type '" "iDynTree::RotationRaw const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::RotationRaw const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::RotationRaw * >(argp2);
   result = ((iDynTree::RotationRaw const *)arg1)->operator *((iDynTree::RotationRaw const &)*arg2);
@@ -3621,7 +3621,7 @@ void _wrap_RotationRaw_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArra
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function RotationRaw_mult.");
+  mexErrMsgTxt("Failure in function RotationRaw_mtimes.");
 }
 
 
@@ -3649,7 +3649,7 @@ fail:
 }
 
 
-void _wrap_RotationRaw_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_RotationRaw_mtimes__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
   iDynTree::PositionRaw *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -3659,20 +3659,20 @@ void _wrap_RotationRaw_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArra
   mxArray * _out;
   iDynTree::PositionRaw result;
   
-  if (!SWIG_check_num_args("RotationRaw_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("RotationRaw_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mult" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mtimes" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionRaw,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mult" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mult" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::PositionRaw * >(argp2);
   result = ((iDynTree::RotationRaw const *)arg1)->operator *((iDynTree::PositionRaw const &)*arg2);
@@ -3680,11 +3680,11 @@ void _wrap_RotationRaw_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArra
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function RotationRaw_mult.");
+  mexErrMsgTxt("Failure in function RotationRaw_mtimes.");
 }
 
 
-void _wrap_RotationRaw_mult (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_RotationRaw_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
@@ -3695,7 +3695,7 @@ void _wrap_RotationRaw_mult (int resc, mxArray *resv[], int argc, mxArray *argv[
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_RotationRaw_mult__SWIG_0(resc,resv,argc,argv);
+        return _wrap_RotationRaw_mtimes__SWIG_0(resc,resv,argc,argv);
       }
     }
   }
@@ -3709,7 +3709,7 @@ void _wrap_RotationRaw_mult (int resc, mxArray *resv[], int argc, mxArray *argv[
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionRaw, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_RotationRaw_mult__SWIG_1(resc,resv,argc,argv);
+        return _wrap_RotationRaw_mtimes__SWIG_1(resc,resv,argc,argv);
       }
     }
   }
@@ -5112,7 +5112,7 @@ fail:
 }
 
 
-void _wrap_Rotation_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_Rotation_mtimes__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Rotation *arg1 = (iDynTree::Rotation *) 0 ;
   iDynTree::Rotation *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -5122,20 +5122,20 @@ void _wrap_Rotation_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *
   mxArray * _out;
   iDynTree::Rotation result;
   
-  if (!SWIG_check_num_args("Rotation_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("Rotation_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Rotation, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_mult" "', argument " "1"" of type '" "iDynTree::Rotation const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_mtimes" "', argument " "1"" of type '" "iDynTree::Rotation const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::Rotation * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Rotation,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_mult" "', argument " "2"" of type '" "iDynTree::Rotation const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_mtimes" "', argument " "2"" of type '" "iDynTree::Rotation const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_mult" "', argument " "2"" of type '" "iDynTree::Rotation const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_mtimes" "', argument " "2"" of type '" "iDynTree::Rotation const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::Rotation * >(argp2);
   result = ((iDynTree::Rotation const *)arg1)->operator *((iDynTree::Rotation const &)*arg2);
@@ -5143,7 +5143,7 @@ void _wrap_Rotation_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function Rotation_mult.");
+  mexErrMsgTxt("Failure in function Rotation_mtimes.");
 }
 
 
@@ -5171,7 +5171,7 @@ fail:
 }
 
 
-void _wrap_Rotation_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_Rotation_mtimes__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Rotation *arg1 = (iDynTree::Rotation *) 0 ;
   iDynTree::Position *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -5181,20 +5181,20 @@ void _wrap_Rotation_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *
   mxArray * _out;
   iDynTree::Position result;
   
-  if (!SWIG_check_num_args("Rotation_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("Rotation_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Rotation, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_mult" "', argument " "1"" of type '" "iDynTree::Rotation const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_mtimes" "', argument " "1"" of type '" "iDynTree::Rotation const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::Rotation * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Position,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_mult" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_mtimes" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_mult" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_mtimes" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::Position * >(argp2);
   result = ((iDynTree::Rotation const *)arg1)->operator *((iDynTree::Position const &)*arg2);
@@ -5202,11 +5202,11 @@ void _wrap_Rotation_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function Rotation_mult.");
+  mexErrMsgTxt("Failure in function Rotation_mtimes.");
 }
 
 
-void _wrap_Rotation_mult (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_Rotation_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
@@ -5217,7 +5217,7 @@ void _wrap_Rotation_mult (int resc, mxArray *resv[], int argc, mxArray *argv[]) 
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Rotation, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_Rotation_mult__SWIG_0(resc,resv,argc,argv);
+        return _wrap_Rotation_mtimes__SWIG_0(resc,resv,argc,argv);
       }
     }
   }
@@ -5231,7 +5231,7 @@ void _wrap_Rotation_mult (int resc, mxArray *resv[], int argc, mxArray *argv[]) 
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Position, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_Rotation_mult__SWIG_1(resc,resv,argc,argv);
+        return _wrap_Rotation_mtimes__SWIG_1(resc,resv,argc,argv);
       }
     }
   }
@@ -5505,7 +5505,7 @@ fail:
 }
 
 
-void _wrap_TransformRaw_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_TransformRaw_mtimes__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::TransformRaw *arg1 = (iDynTree::TransformRaw *) 0 ;
   iDynTree::TransformRaw *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -5515,20 +5515,20 @@ void _wrap_TransformRaw_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArr
   mxArray * _out;
   iDynTree::TransformRaw result;
   
-  if (!SWIG_check_num_args("TransformRaw_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("TransformRaw_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__TransformRaw, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransformRaw_mult" "', argument " "1"" of type '" "iDynTree::TransformRaw const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransformRaw_mtimes" "', argument " "1"" of type '" "iDynTree::TransformRaw const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::TransformRaw * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__TransformRaw,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TransformRaw_mult" "', argument " "2"" of type '" "iDynTree::TransformRaw const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TransformRaw_mtimes" "', argument " "2"" of type '" "iDynTree::TransformRaw const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TransformRaw_mult" "', argument " "2"" of type '" "iDynTree::TransformRaw const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TransformRaw_mtimes" "', argument " "2"" of type '" "iDynTree::TransformRaw const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::TransformRaw * >(argp2);
   result = ((iDynTree::TransformRaw const *)arg1)->operator *((iDynTree::TransformRaw const &)*arg2);
@@ -5536,7 +5536,7 @@ void _wrap_TransformRaw_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArr
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function TransformRaw_mult.");
+  mexErrMsgTxt("Failure in function TransformRaw_mtimes.");
 }
 
 
@@ -5564,7 +5564,7 @@ fail:
 }
 
 
-void _wrap_TransformRaw_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_TransformRaw_mtimes__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::TransformRaw *arg1 = (iDynTree::TransformRaw *) 0 ;
   iDynTree::PositionRaw *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -5574,20 +5574,20 @@ void _wrap_TransformRaw_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArr
   mxArray * _out;
   iDynTree::PositionRaw result;
   
-  if (!SWIG_check_num_args("TransformRaw_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("TransformRaw_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__TransformRaw, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransformRaw_mult" "', argument " "1"" of type '" "iDynTree::TransformRaw const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransformRaw_mtimes" "', argument " "1"" of type '" "iDynTree::TransformRaw const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::TransformRaw * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionRaw,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TransformRaw_mult" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TransformRaw_mtimes" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TransformRaw_mult" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TransformRaw_mtimes" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::PositionRaw * >(argp2);
   result = ((iDynTree::TransformRaw const *)arg1)->operator *((iDynTree::PositionRaw const &)*arg2);
@@ -5595,11 +5595,11 @@ void _wrap_TransformRaw_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArr
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function TransformRaw_mult.");
+  mexErrMsgTxt("Failure in function TransformRaw_mtimes.");
 }
 
 
-void _wrap_TransformRaw_mult (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_TransformRaw_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
@@ -5610,7 +5610,7 @@ void _wrap_TransformRaw_mult (int resc, mxArray *resv[], int argc, mxArray *argv
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__TransformRaw, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_TransformRaw_mult__SWIG_0(resc,resv,argc,argv);
+        return _wrap_TransformRaw_mtimes__SWIG_0(resc,resv,argc,argv);
       }
     }
   }
@@ -5624,7 +5624,7 @@ void _wrap_TransformRaw_mult (int resc, mxArray *resv[], int argc, mxArray *argv
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionRaw, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_TransformRaw_mult__SWIG_1(resc,resv,argc,argv);
+        return _wrap_TransformRaw_mtimes__SWIG_1(resc,resv,argc,argv);
       }
     }
   }
@@ -6530,7 +6530,7 @@ void _wrap_TransformSemantics_apply (int resc, mxArray *resv[], int argc, mxArra
 }
 
 
-void _wrap_TransformSemantics_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_TransformSemantics_mtimes__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::TransformSemantics *arg1 = (iDynTree::TransformSemantics *) 0 ;
   iDynTree::TransformSemantics *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -6540,20 +6540,20 @@ void _wrap_TransformSemantics_mult__SWIG_0 (int resc, mxArray *resv[], int argc,
   mxArray * _out;
   iDynTree::TransformSemantics result;
   
-  if (!SWIG_check_num_args("TransformSemantics_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("TransformSemantics_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__TransformSemantics, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransformSemantics_mult" "', argument " "1"" of type '" "iDynTree::TransformSemantics const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransformSemantics_mtimes" "', argument " "1"" of type '" "iDynTree::TransformSemantics const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::TransformSemantics * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__TransformSemantics,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TransformSemantics_mult" "', argument " "2"" of type '" "iDynTree::TransformSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TransformSemantics_mtimes" "', argument " "2"" of type '" "iDynTree::TransformSemantics const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TransformSemantics_mult" "', argument " "2"" of type '" "iDynTree::TransformSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TransformSemantics_mtimes" "', argument " "2"" of type '" "iDynTree::TransformSemantics const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::TransformSemantics * >(argp2);
   result = ((iDynTree::TransformSemantics const *)arg1)->operator *((iDynTree::TransformSemantics const &)*arg2);
@@ -6561,7 +6561,7 @@ void _wrap_TransformSemantics_mult__SWIG_0 (int resc, mxArray *resv[], int argc,
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function TransformSemantics_mult.");
+  mexErrMsgTxt("Failure in function TransformSemantics_mtimes.");
 }
 
 
@@ -6589,7 +6589,7 @@ fail:
 }
 
 
-void _wrap_TransformSemantics_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_TransformSemantics_mtimes__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::TransformSemantics *arg1 = (iDynTree::TransformSemantics *) 0 ;
   iDynTree::PositionSemantics *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -6599,20 +6599,20 @@ void _wrap_TransformSemantics_mult__SWIG_1 (int resc, mxArray *resv[], int argc,
   mxArray * _out;
   iDynTree::PositionSemantics result;
   
-  if (!SWIG_check_num_args("TransformSemantics_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("TransformSemantics_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__TransformSemantics, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransformSemantics_mult" "', argument " "1"" of type '" "iDynTree::TransformSemantics const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransformSemantics_mtimes" "', argument " "1"" of type '" "iDynTree::TransformSemantics const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::TransformSemantics * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TransformSemantics_mult" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TransformSemantics_mtimes" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TransformSemantics_mult" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TransformSemantics_mtimes" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
   result = ((iDynTree::TransformSemantics const *)arg1)->operator *((iDynTree::PositionSemantics const &)*arg2);
@@ -6620,11 +6620,11 @@ void _wrap_TransformSemantics_mult__SWIG_1 (int resc, mxArray *resv[], int argc,
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function TransformSemantics_mult.");
+  mexErrMsgTxt("Failure in function TransformSemantics_mtimes.");
 }
 
 
-void _wrap_TransformSemantics_mult (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_TransformSemantics_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
@@ -6635,7 +6635,7 @@ void _wrap_TransformSemantics_mult (int resc, mxArray *resv[], int argc, mxArray
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__TransformSemantics, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_TransformSemantics_mult__SWIG_0(resc,resv,argc,argv);
+        return _wrap_TransformSemantics_mtimes__SWIG_0(resc,resv,argc,argv);
       }
     }
   }
@@ -6649,7 +6649,7 @@ void _wrap_TransformSemantics_mult (int resc, mxArray *resv[], int argc, mxArray
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_TransformSemantics_mult__SWIG_1(resc,resv,argc,argv);
+        return _wrap_TransformSemantics_mtimes__SWIG_1(resc,resv,argc,argv);
       }
     }
   }
@@ -7150,7 +7150,7 @@ fail:
 }
 
 
-void _wrap_Transform_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_Transform_mtimes__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Transform *arg1 = (iDynTree::Transform *) 0 ;
   iDynTree::Transform *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -7160,20 +7160,20 @@ void _wrap_Transform_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray 
   mxArray * _out;
   iDynTree::Transform result;
   
-  if (!SWIG_check_num_args("Transform_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("Transform_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Transform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_mult" "', argument " "1"" of type '" "iDynTree::Transform const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_mtimes" "', argument " "1"" of type '" "iDynTree::Transform const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::Transform * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Transform,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_mult" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_mtimes" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_mult" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_mtimes" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::Transform * >(argp2);
   result = ((iDynTree::Transform const *)arg1)->operator *((iDynTree::Transform const &)*arg2);
@@ -7181,7 +7181,7 @@ void _wrap_Transform_mult__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray 
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function Transform_mult.");
+  mexErrMsgTxt("Failure in function Transform_mtimes.");
 }
 
 
@@ -7209,7 +7209,7 @@ fail:
 }
 
 
-void _wrap_Transform_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_Transform_mtimes__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Transform *arg1 = (iDynTree::Transform *) 0 ;
   iDynTree::Position *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -7219,20 +7219,20 @@ void _wrap_Transform_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray 
   mxArray * _out;
   iDynTree::Position result;
   
-  if (!SWIG_check_num_args("Transform_mult",argc,2,2,0)) {
+  if (!SWIG_check_num_args("Transform_mtimes",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Transform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_mult" "', argument " "1"" of type '" "iDynTree::Transform const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_mtimes" "', argument " "1"" of type '" "iDynTree::Transform const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::Transform * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Position,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_mult" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_mtimes" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_mult" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_mtimes" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::Position * >(argp2);
   result = ((iDynTree::Transform const *)arg1)->operator *((iDynTree::Position const &)*arg2);
@@ -7240,11 +7240,11 @@ void _wrap_Transform_mult__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray 
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function Transform_mult.");
+  mexErrMsgTxt("Failure in function Transform_mtimes.");
 }
 
 
-void _wrap_Transform_mult (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_Transform_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
@@ -7255,7 +7255,7 @@ void _wrap_Transform_mult (int resc, mxArray *resv[], int argc, mxArray *argv[])
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_Transform_mult__SWIG_0(resc,resv,argc,argv);
+        return _wrap_Transform_mtimes__SWIG_0(resc,resv,argc,argv);
       }
     }
   }
@@ -7269,7 +7269,7 @@ void _wrap_Transform_mult (int resc, mxArray *resv[], int argc, mxArray *argv[])
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Position, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_Transform_mult__SWIG_1(resc,resv,argc,argv);
+        return _wrap_Transform_mtimes__SWIG_1(resc,resv,argc,argv);
       }
     }
   }
@@ -7697,7 +7697,7 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 48: if ((name_ok=!strcmp("RotationRaw_inverse2",cmd))) _wrap_RotationRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
   case 49: if ((name_ok=!strcmp("RotationRaw_apply",cmd))) _wrap_RotationRaw_apply(resc,resv,argc,(mxArray**)(argv)); break;
   case 50: if ((name_ok=!strcmp("RotationRaw_inverse",cmd))) _wrap_RotationRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 51: if ((name_ok=!strcmp("RotationRaw_mult",cmd))) _wrap_RotationRaw_mult(resc,resv,argc,(mxArray**)(argv)); break;
+  case 51: if ((name_ok=!strcmp("RotationRaw_mtimes",cmd))) _wrap_RotationRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
   case 52: if ((name_ok=!strcmp("RotationRaw_toString",cmd))) _wrap_RotationRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
   case 53: if ((name_ok=!strcmp("new_RotationSemantics",cmd))) _wrap_new_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
   case 54: if ((name_ok=!strcmp("delete_RotationSemantics",cmd))) _wrap_delete_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
@@ -7725,7 +7725,7 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 76: if ((name_ok=!strcmp("Rotation_inverse2",cmd))) _wrap_Rotation_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
   case 77: if ((name_ok=!strcmp("Rotation_apply",cmd))) _wrap_Rotation_apply(resc,resv,argc,(mxArray**)(argv)); break;
   case 78: if ((name_ok=!strcmp("Rotation_inverse",cmd))) _wrap_Rotation_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 79: if ((name_ok=!strcmp("Rotation_mult",cmd))) _wrap_Rotation_mult(resc,resv,argc,(mxArray**)(argv)); break;
+  case 79: if ((name_ok=!strcmp("Rotation_mtimes",cmd))) _wrap_Rotation_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
   case 80: if ((name_ok=!strcmp("Rotation_toString",cmd))) _wrap_Rotation_toString(resc,resv,argc,(mxArray**)(argv)); break;
   case 81: if ((name_ok=!strcmp("new_TransformRaw",cmd))) _wrap_new_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
   case 82: if ((name_ok=!strcmp("delete_TransformRaw",cmd))) _wrap_delete_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
@@ -7733,7 +7733,7 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 84: if ((name_ok=!strcmp("TransformRaw_inverse2",cmd))) _wrap_TransformRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
   case 85: if ((name_ok=!strcmp("TransformRaw_apply",cmd))) _wrap_TransformRaw_apply(resc,resv,argc,(mxArray**)(argv)); break;
   case 86: if ((name_ok=!strcmp("TransformRaw_inverse",cmd))) _wrap_TransformRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 87: if ((name_ok=!strcmp("TransformRaw_mult",cmd))) _wrap_TransformRaw_mult(resc,resv,argc,(mxArray**)(argv)); break;
+  case 87: if ((name_ok=!strcmp("TransformRaw_mtimes",cmd))) _wrap_TransformRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
   case 88: if ((name_ok=!strcmp("TransformRaw_toString",cmd))) _wrap_TransformRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
   case 89: if ((name_ok=!strcmp("new_TransformSemantics",cmd))) _wrap_new_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
   case 90: if ((name_ok=!strcmp("delete_TransformSemantics",cmd))) _wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
@@ -7756,7 +7756,7 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 107: if ((name_ok=!strcmp("TransformSemantics_inverse2",cmd))) _wrap_TransformSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
   case 108: if ((name_ok=!strcmp("TransformSemantics_apply",cmd))) _wrap_TransformSemantics_apply(resc,resv,argc,(mxArray**)(argv)); break;
   case 109: if ((name_ok=!strcmp("TransformSemantics_inverse",cmd))) _wrap_TransformSemantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 110: if ((name_ok=!strcmp("TransformSemantics_mult",cmd))) _wrap_TransformSemantics_mult(resc,resv,argc,(mxArray**)(argv)); break;
+  case 110: if ((name_ok=!strcmp("TransformSemantics_mtimes",cmd))) _wrap_TransformSemantics_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
   case 111: if ((name_ok=!strcmp("TransformSemantics_toString",cmd))) _wrap_TransformSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
   case 112: if ((name_ok=!strcmp("new_Transform",cmd))) _wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
   case 113: if ((name_ok=!strcmp("delete_Transform",cmd))) _wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
@@ -7769,7 +7769,7 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 120: if ((name_ok=!strcmp("Transform_inverse2",cmd))) _wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
   case 121: if ((name_ok=!strcmp("Transform_apply",cmd))) _wrap_Transform_apply(resc,resv,argc,(mxArray**)(argv)); break;
   case 122: if ((name_ok=!strcmp("Transform_inverse",cmd))) _wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 123: if ((name_ok=!strcmp("Transform_mult",cmd))) _wrap_Transform_mult(resc,resv,argc,(mxArray**)(argv)); break;
+  case 123: if ((name_ok=!strcmp("Transform_mtimes",cmd))) _wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
   case 124: if ((name_ok=!strcmp("Transform_toString",cmd))) _wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
   default: mexErrMsgIdAndTxt("SWIG:RuntimeError","No function id %d.",fcn_id);
   }

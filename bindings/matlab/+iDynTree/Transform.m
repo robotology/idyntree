@@ -37,8 +37,8 @@ classdef Transform < iDynTree.TransformRaw
     function varargout = inverse(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(122,'Transform_inverse',self,varargin{:});
     end
-    function varargout = mult(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(123,'Transform_mult',self,varargin{:});
+    function varargout = mtimes(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(123,'Transform_mtimes',self,varargin{:});
     end
     function varargout = mtimes(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(123,'Transform_mult',self,varargin{:});

@@ -33,8 +33,8 @@ classdef RotationRaw < SwigRef
     function varargout = inverse(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(50,'RotationRaw_inverse',self,varargin{:});
     end
-    function varargout = mult(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(51,'RotationRaw_mult',self,varargin{:});
+    function varargout = mtimes(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(51,'RotationRaw_mtimes',self,varargin{:});
     end
     function varargout = toString(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(52,'RotationRaw_toString',self,varargin{:});
