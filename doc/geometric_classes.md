@@ -189,3 +189,47 @@ transform_B_A = transform_A_B.inverse()
 O_A_wrong = transform_B_A*O_B; 
 ~~~
 
+## Compose two transforms, with semantics checking
+~~~python 
+import iDynTree
+
+A = 1
+B = 2
+C = 3
+# Let's define a transform between two frames, A and B
+# (i.e. the transform vectors expressed in B in vector expressed in B)
+H_A_B = iDynTree.Transform(iDynTree.Rotation(0,-1,0,  \
+                                             1,0,0,  \
+                                             0,0,1),  \
+                           iDynTree.Position(1,2,3)) 
+H_A_B.getSemantics().setPoint(B)
+H_A_B.getSemantics().setOrientationFrame(B)
+H_A_B.getSemantics().setReferencePoint(A)
+H_A_B.getSemantics().setReferenceOrientationFrame(A)
+
+# print the transform
+H_A_B.getSemantics().toString()
+                           
+# Let's then define H_B_C, for the transformation between B and C
+H_B_C = iDynTree.Transform(iDynTree.Rotation(0,0,1,  \
+                                             1,0,0,  \
+                                             0,1,0),  \
+                           iDynTree.Position(2,3,4)) 
+H_B_C.getSemantics().setPoint(C)
+H_B_C.getSemantics().setOrientationFrame(C)
+H_B_C.getSemantics().setReferencePoint(B)
+H_B_C.getSemantics().setReferenceOrientationFrame(B)
+print(H_B_C.toString())
+
+# We can easily compose transformation by multiplication:
+H_A_C = H_A_B*H_B_C;
+
+# And also get inverse transformation by the inversion
+H_C_A = H_A_C.inverse()
+
+print(H_C_A.toString())
+
+# Semantics check will prevent us from doing stupid things
+# (this will result in an error)
+H_A_C_wrong = H_A_B*(H_B_C.inverse())
+~~~
