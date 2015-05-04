@@ -34,9 +34,6 @@ classdef Rotation < iDynTree.RotationRaw
     function varargout = mtimes(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(79,'Rotation_mtimes',self,varargin{:});
     end
-    function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(79,'Rotation_mult',self,varargin{:});
-    end
     function varargout = toString(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(80,'Rotation_toString',self,varargin{:});
     end
