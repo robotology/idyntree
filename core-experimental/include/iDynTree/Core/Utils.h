@@ -17,4 +17,10 @@ namespace iDynTree
      * All negative values are used for represent an unknown value.
      */
     bool checkEqualOrUnknown(const int op1, const int op2);
+
+    /**
+     * Helper function for reporting error if the semantic check fails.
+     *
+     */
+    void reportError(const char * className, const char* methodName, const char * errorMessage);
 }

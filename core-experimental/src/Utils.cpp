@@ -6,6 +6,8 @@
  */
 
 #include "Utils.h"
+#include <iostream>
+#include <cassert>
 
 namespace iDynTree
 {
@@ -23,6 +25,12 @@ namespace iDynTree
         return (op1 == op2) &&
                (op1 >=   0) &&
                (op2 >=   0);
+    }
+
+    void reportError(const char* className, const char* methodName, const char* errorMessage)
+    {
+        std::cerr << "[ERROR] " << className << " :: " << methodName << " : " << errorMessage <<  "\n";
+        assert(false);
     }
 
 }

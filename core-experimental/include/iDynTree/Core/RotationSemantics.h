@@ -70,7 +70,7 @@ namespace iDynTree
         ///@}
 
         /**
-         * @name Semantics operation
+         * @name Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
          */
         ///@{

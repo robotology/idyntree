@@ -58,7 +58,7 @@ namespace iDynTree
 
     int PositionSemantics::getReferencePoint() const
     {
-        this->refPoint;
+        return this->refPoint;
     }
 
     void PositionSemantics::setCoordinateFrame(int _coordinateFrame)

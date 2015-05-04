@@ -61,7 +61,7 @@ namespace iDynTree
         /**
          * Denstructor
          */
-        ~Position();
+        virtual ~Position();
 
         /**
          * Semantic getter

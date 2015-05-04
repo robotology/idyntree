@@ -10,6 +10,9 @@
 #include "iDynTree/Core/RotationRaw.h"
 #include "iDynTree/Core/RotationSemantics.h"
 #include "iDynTree/Core/Rotation.h"
+#include "iDynTree/Core/TransformRaw.h"
+#include "iDynTree/Core/TransformSemantics.h"
+#include "iDynTree/Core/Transform.h"
 %}
 
 /* Let's just grab the original header file here */
@@ -19,3 +22,6 @@
 %include "iDynTree/Core/RotationRaw.h"
 %include "iDynTree/Core/RotationSemantics.h"
 %include "iDynTree/Core/Rotation.h"
+%include "iDynTree/Core/TransformRaw.h"
+%include "iDynTree/Core/TransformSemantics.h"
+%include "iDynTree/Core/Transform.h"

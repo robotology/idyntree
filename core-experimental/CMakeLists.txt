@@ -17,6 +17,9 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Position.h
                               include/iDynTree/Core/Rotation.h
                               include/iDynTree/Core/RotationRaw.h
                               include/iDynTree/Core/RotationSemantics.h
+                              include/iDynTree/Core/Transform.h
+                              include/iDynTree/Core/TransformRaw.h
+                              include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Utils.h)
 
 #file (GLOB IDYNTREE_BASE_PRIVATE_INCLUDES)
@@ -27,6 +30,9 @@ set(IDYNTREE_CORE_EXP_HEADERS src/Position.cpp
                               src/Rotation.cpp
                               src/RotationRaw.cpp
                               src/RotationSemantics.cpp
+                              src/Transform.cpp
+                              src/TransformRaw.cpp
+                              src/TransformSemantics.cpp
                               src/Utils.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})

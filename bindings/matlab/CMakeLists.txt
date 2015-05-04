@@ -11,7 +11,6 @@ macro(SWIG_GENERATE_MODULE name language)
     if(${it} MATCHES ".*\\.i$")
       set(swig_dot_i_sources ${swig_dot_i_sources} "${it}")
     else()
-
       set(swig_other_sources ${swig_other_sources} "${it}")
     endif()
   endforeach()
@@ -24,7 +23,8 @@ macro(SWIG_GENERATE_MODULE name language)
 endmacro()
 
 macro(SWIG_COMPILE_MODULE name language)
-  message(STATUS ${swig_generated_sources})
+  SWIG_MODULE_INITIALIZE(${name} ${language})
+  message(STATUS "Swig compile moudle " ${swig_generated_sources})
   add_library(${SWIG_MODULE_${name}_REAL_NAME}
     MODULE
     ${swig_generated_sources}
@@ -44,12 +44,16 @@ if(GENERATE_MATLAB)
   set(swig_generated_sources)
   message("swig_generated_sources " ${swig_generated_sources})
   set_source_files_properties(../iDynTree.i PROPERTIES CPLUSPLUS ON)
+  # generate files in the source directory, so we can commit it
+  set(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_SOURCE_DIR})
   swig_generate_module(${modulename} matlab ../iDynTree.i)
-  message("swig_generated_sources " ${swig_generated_sources})
-  # copy generate files in source directory
-  configure_file(${CMAKE_CURRENT_BINARY_DIR}/../${modulename}.cxx ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx)
-  configure_file(${CMAKE_CURRENT_BINARY_DIR}/../SwigRef.m ${CMAKE_CURRENT_SOURCE_DIR}/SwigRef.m)
-  file(COPY ${CMAKE_CURRENT_BINARY_DIR}/../+iDynTree DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/)
+  add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
+    COMMAND ${CMAKE_COMMAND}
+    ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/../${modulename}.cxx ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
+    MAIN_DEPENDENCY "${swig_generated_sources}"
+    COMMENT "Copy swig generated files to source dir")
+  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx PROPERTIES GENERATED 1)
 endif()
 
 # use previously generated files
