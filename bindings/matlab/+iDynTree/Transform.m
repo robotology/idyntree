@@ -40,6 +40,9 @@ classdef Transform < iDynTree.TransformRaw
     function varargout = mult(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(123,'Transform_mult',self,varargin{:});
     end
+    function varargout = mtimes(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(123,'Transform_mult',self,varargin{:});
+    end
     function varargout = toString(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(124,'Transform_toString',self,varargin{:});
     end
