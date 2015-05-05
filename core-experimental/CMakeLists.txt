@@ -24,7 +24,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Position.h
 
 #file (GLOB IDYNTREE_BASE_PRIVATE_INCLUDES)
 
-set(IDYNTREE_CORE_EXP_HEADERS src/Position.cpp
+set(IDYNTREE_CORE_EXP_SOURCES src/Position.cpp
                               src/PositionRaw.cpp
                               src/PositionSemantics.cpp
                               src/Rotation.cpp
