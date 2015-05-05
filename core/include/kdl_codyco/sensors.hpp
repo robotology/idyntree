@@ -46,6 +46,12 @@ namespace CoDyCo {
     class Sensor {
 
     public:
+
+        /**
+         * Virtual destructor
+         */
+        virtual ~Sensor() = 0;
+
         /**
          * Get the id (name) of sensor.
          */

@@ -80,6 +80,8 @@ namespace iDynTree
         Eigen::Map<Matrix3dRowMajor> newOrientFrameData(this->privateData);
 
         thisData = thisData*newOrientFrameData;
+
+        return *this;
     }
 
     const RotationRaw& RotationRaw::changeRefOrientFrame(const RotationRaw& newRefOrientFrame)
@@ -88,6 +90,8 @@ namespace iDynTree
         Eigen::Map<Matrix3dRowMajor> newRefOrientFrameData(this->privateData);
 
         thisData = newRefOrientFrameData*thisData;
+
+        return *this;
     }
 
     RotationRaw RotationRaw::compose(const RotationRaw& op1, const RotationRaw& op2)
@@ -124,6 +128,8 @@ namespace iDynTree
         Eigen::Map<Eigen::Vector3d> resultData(result.data());
 
         resultData = op1Data*op2Data;
+
+        return result;
     }
 
     RotationRaw RotationRaw::inverse() const

@@ -29,6 +29,11 @@
 namespace KDL {
 namespace CoDyCo {
 
+Sensor::~Sensor()
+{
+
+}
+
 
 struct SensorsTree::SensorsTreePimpl
 {
