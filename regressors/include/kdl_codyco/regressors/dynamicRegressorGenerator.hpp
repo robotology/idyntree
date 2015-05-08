@@ -11,7 +11,7 @@
 
 #include "kdl_codyco/utils.hpp"
 #include "kdl_codyco/undirectedtree.hpp"
-#include "kdl_codyco/sensors.hpp"
+#include "iDynTree/Sensors/Sensors.hpp"
 
 //Type of regressors
 #include "dynamicRegressorInterface.hpp"

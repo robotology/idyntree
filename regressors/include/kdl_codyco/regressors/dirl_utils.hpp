@@ -13,7 +13,7 @@
 
 #include <Eigen/Dense>
 
-#include "kdl_codyco/sensors.hpp"
+#include "iDynTree/Sensors/Sensors.hpp"
 
 namespace KDL {
 namespace CoDyCo {

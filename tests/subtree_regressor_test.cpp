@@ -13,7 +13,7 @@
 
 #include <kdl_codyco/regressor_utils.hpp>
 
-#include <kdl_codyco/six_axis_ft_sensor.hpp>
+#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
 
 #include "test_models.hpp"
 

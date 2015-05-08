@@ -19,7 +19,7 @@
 #include <kdl_codyco/regressor_utils.hpp>
 #include <kdl_codyco/generalizedjntpositions.hpp>
 
-#include "kdl_codyco/six_axis_ft_sensor.hpp"
+#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 
 #include <kdl_format_io/urdf_import.hpp>
 

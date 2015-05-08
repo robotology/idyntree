@@ -15,9 +15,9 @@
  * Public License for more details
  */
 
-#include "sensors.hpp"
+#include "Sensors.hpp"
 
-#include "six_axis_ft_sensor.hpp"
+#include "SixAxisFTSensor.hpp"
 
 #include <vector>
 #include <map>

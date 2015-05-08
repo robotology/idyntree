@@ -12,8 +12,8 @@
 
 #include "kdl_codyco/regressor_utils.hpp"
 
-#include "kdl_codyco/sensors.hpp"
-#include "kdl_codyco/six_axis_ft_sensor.hpp"
+#include "iDynTree/Sensors/Sensors.hpp"
+#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 
 #include "dirl_utils.hpp"
 

@@ -110,7 +110,7 @@ include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
 
 add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${IDYNTREE_MODEL_IO_HEADERS} ${IKIN_SRCS})
 
-target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES} iKin)
+target_link_libraries(idyntree-model-io idyntree-sensors idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES} iKin)
 
 if(ENABLE_SYMORO_PAR)
     target_link_libraries(idyntree-model-io expression-parser)
@@ -120,7 +120,7 @@ if(IDYNTREE_USE_ICUB_MAIN)
     find_package(YARP REQUIRED)
     find_package(ICUB REQUIRED)
     include_directories(SYSTEM ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
-    target_link_libraries(idyntree-model-io idyntree-core ${YARP_LIBRARIES} iKin ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(idyntree-model-io idyntree-core idyntree-sensors ${YARP_LIBRARIES} iKin ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
 endif()
 
 #add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
