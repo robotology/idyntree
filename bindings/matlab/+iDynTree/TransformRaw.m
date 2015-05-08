@@ -3,9 +3,9 @@ classdef TransformRaw < SwigRef
     function self = TransformRaw(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(81,'new_TransformRaw',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(108,'new_TransformRaw',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(81,'new_TransformRaw',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(108,'new_TransformRaw',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -14,18 +14,18 @@ classdef TransformRaw < SwigRef
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(82,'delete_TransformRaw',self);
+        iDynTreeMATLAB_wrap(109,'delete_TransformRaw',self);
         self.swigOwn=false;
       end
     end
     function varargout = inverse(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(86,'TransformRaw_inverse',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(113,'TransformRaw_inverse',self,varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(87,'TransformRaw_mtimes',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(114,'TransformRaw_mtimes',self,varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(88,'TransformRaw_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(115,'TransformRaw_toString',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -40,13 +40,13 @@ classdef TransformRaw < SwigRef
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(83,'TransformRaw_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(110,'TransformRaw_compose',varargin{:});
     end
     function varargout = inverse2(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(84,'TransformRaw_inverse2',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(111,'TransformRaw_inverse2',varargin{:});
     end
     function varargout = apply(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(85,'TransformRaw_apply',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(112,'TransformRaw_apply',varargin{:});
     end
   end
 end

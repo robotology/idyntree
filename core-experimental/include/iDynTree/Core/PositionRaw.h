@@ -8,6 +8,7 @@
 #ifndef IDYNTREE_POSITION_RAW_H
 #define IDYNTREE_POSITION_RAW_H
 
+#include "IVector.h"
 #include <string>
 
 namespace iDynTree
@@ -15,7 +16,7 @@ namespace iDynTree
     /**
      * Class providing the raw coordinates for iDynTree::Position class.
      */
-    class PositionRaw
+    class PositionRaw: public IVector
     {
     protected:
         /**
@@ -47,17 +48,23 @@ namespace iDynTree
         virtual ~PositionRaw();
 
         /**
-         * Return a coordinate by value, the index is checked
-         * if it is inside 0..2 if NDEBUG is not set.
-         *
+         * @name Vector interface methods.
+         * Methods exposing a vector-like interface to PositionRaw.
          */
-        const double & operator()(int index) const;
+        ///@{
+        double operator()(const unsigned int index) const;
 
-        /**
-         * Return a reference to a coordinate, the index is checked
-         * if it is inside 0..2 if NDEBUG is not set.
-         */
-        double& operator()(int index);
+        double& operator()(const unsigned int index);
+
+        double getVal(const unsigned int index) const;
+
+        bool setVal(const unsigned int index, const double new_el);
+
+        unsigned int size() const;
+
+        ///@}
+
+
 
         /**
          * Raw data accessor: return a pointer to a vector of 3 doubles,
@@ -70,6 +77,12 @@ namespace iDynTree
          * representing the x,y and z coordinates of the Position
          */
         double * data();
+
+        /**
+         * Assign all element of the vector to 0.
+         */
+        void zero();
+
 
         const PositionRaw & changePoint(const PositionRaw & newPoint);
         const PositionRaw & changeRefPoint(const PositionRaw & newRefPoint);

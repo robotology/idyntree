@@ -11,7 +11,10 @@ endif(MSVC)
 #local headers
 include_directories(include/iDynTree/Core)
 
-set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Position.h
+set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
+                              include/iDynTree/Core/IVector.h
+                              include/iDynTree/Core/MatrixDynSize.h
+                              include/iDynTree/Core/Position.h
                               include/iDynTree/Core/PositionRaw.h
                               include/iDynTree/Core/PositionSemantics.h
                               include/iDynTree/Core/Rotation.h
@@ -20,11 +23,14 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Position.h
                               include/iDynTree/Core/Transform.h
                               include/iDynTree/Core/TransformRaw.h
                               include/iDynTree/Core/TransformSemantics.h
-                              include/iDynTree/Core/Utils.h)
+                              include/iDynTree/Core/Utils.h
+                              include/iDynTree/Core/VectorDynSize.h)
 
 #file (GLOB IDYNTREE_BASE_PRIVATE_INCLUDES)
 
-set(IDYNTREE_CORE_EXP_SOURCES src/Position.cpp
+set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
+                              src/MatrixDynSize.cpp
+                              src/Position.cpp
                               src/PositionRaw.cpp
                               src/PositionSemantics.cpp
                               src/Rotation.cpp
@@ -33,7 +39,8 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Position.cpp
                               src/Transform.cpp
                               src/TransformRaw.cpp
                               src/TransformSemantics.cpp
-                              src/Utils.cpp)
+                              src/Utils.cpp
+                              src/VectorDynSize.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})

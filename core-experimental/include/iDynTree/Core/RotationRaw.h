@@ -8,6 +8,7 @@
 #ifndef IDYNTREE_ROTATION_RAW_H
 #define IDYNTREE_ROTATION_RAW_H
 
+#include "IMatrix.h"
 #include <string>
 
 namespace iDynTree
@@ -17,7 +18,7 @@ namespace iDynTree
     /**
      * Class providing the raw coordinates for iDynTree::Rotation class.
      */
-    class RotationRaw
+    class RotationRaw: public IMatrix
     {
     protected:
         /**
@@ -53,17 +54,21 @@ namespace iDynTree
         virtual ~RotationRaw();
 
         /**
-         * Return a element of the rotation matrix by value,
-         * row and col are check if they are inside 0..2 if NDEBUG is not set.
+         * @name Matrix interface methods.
+         * Methods exposing a vector-like interface to RotationRaw.
          *
+         * \warning Notice that using this methods you can damage the underlyng rotation matrix.
+         *          In doubt, don't use them and rely on more high level functions.
          */
-        const double & operator()(int row, int col) const;
+        ///@{
+        double operator()(const unsigned int row, const unsigned int col) const;
+        double& operator()(const unsigned int row, const unsigned int col);
+        double getVal(const unsigned int row, const unsigned int col) const;
+        bool setVal(const unsigned int row, const unsigned int col, const double new_el);
+        unsigned int rows() const;
+        unsigned int cols() const;
+        ///@}
 
-        /**
-         * Return a reference to an element of the rotation matrix,
-         * row and col are check if they are inside 0..2 if NDEBUG is not set.
-         */
-        double& operator()(int row, int col);
 
         /**
          * Raw data accessor: return a const pointer to a 9 element buffer,
