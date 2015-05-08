@@ -15,9 +15,9 @@
  * Public License for more details
  */
 
-#include "six_axis_ft_sensor.hpp"
+#include "SixAxisFTSensor.hpp"
 
-#include "undirectedtree.hpp"
+#include "kdl_codyco/undirectedtree.hpp"
 
 #include <kdl/frames.hpp>
 

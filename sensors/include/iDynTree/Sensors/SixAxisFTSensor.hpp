@@ -24,7 +24,7 @@ namespace KDL
     class Frame;
 }
 
-#include "sensors.hpp"
+#include "Sensors.hpp"
 
 #include <vector>
 

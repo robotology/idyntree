@@ -8,8 +8,8 @@
 
 #include <kdl/tree.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
-#include <kdl_codyco/sensors.hpp>
-#include <kdl_codyco/six_axis_ft_sensor.hpp>
+#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
 
 #include <kdl_format_io/urdf_import.hpp>
 #include <kdl_format_io/urdf_sensor_import.hpp>

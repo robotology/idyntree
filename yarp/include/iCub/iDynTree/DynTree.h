@@ -84,7 +84,7 @@
 #include <kdl_codyco/momentumjacobian.hpp>
 #include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
 
-#include "kdl_codyco/sensors.hpp"
+#include "iDynTree/Sensors/Sensors.hpp"
 
 #include "iDyn2KDL.h"
 
