@@ -164,7 +164,7 @@ bool TransformSemantics::check_inverse2(const TransformSemantics& orient)
     return true;
 }
 
-bool TransformSemantics::check_apply(const TransformSemantics& op1, const PositionSemantics& op2)
+bool TransformSemantics::check_transform(const TransformSemantics& op1, const PositionSemantics& op2)
 {
     if( !checkEqualOrUnknown(op1.getOrientationFrame(),op2.getCoordinateFrame()) )
     {
@@ -217,7 +217,7 @@ TransformSemantics TransformSemantics::inverse2(const TransformSemantics& trans)
     return result;
 }
 
-void TransformSemantics::apply(const TransformSemantics& op1, const PositionSemantics& op2, PositionSemantics& result)
+void TransformSemantics::transform(const TransformSemantics& op1, const PositionSemantics& op2, PositionSemantics& result)
 {
     result.setPoint(op2.getPoint());
     result.setReferencePoint(op1.getReferencePoint());
@@ -226,10 +226,10 @@ void TransformSemantics::apply(const TransformSemantics& op1, const PositionSema
     return;
 }
 
-PositionSemantics TransformSemantics::apply(const TransformSemantics& op1, const PositionSemantics& op2)
+PositionSemantics TransformSemantics::transform(const TransformSemantics& op1, const PositionSemantics& op2)
 {
     PositionSemantics result;
-    apply(op1,op2,result);
+    transform(op1,op2,result);
     return result;
 }
 
@@ -245,7 +245,7 @@ TransformSemantics TransformSemantics::inverse() const
 
 PositionSemantics TransformSemantics::operator*(const PositionSemantics& op2) const
 {
-    return apply(*this,op2);
+    return transform(*this,op2);
 }
 
 std::string TransformSemantics::toString() const
@@ -260,6 +260,12 @@ std::string TransformSemantics::toString() const
 
     return ss.str();
 }
+
+std::string TransformSemantics::reservedToString() const
+{
+    return this->toString();
+}
+
 
 
 }

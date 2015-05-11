@@ -177,7 +177,10 @@ std::string MatrixDynSize::toString() const
     return ss.str();
 }
 
-
+std::string MatrixDynSize::reservedToString() const
+{
+    return this->toString();
+}
 
 
 }

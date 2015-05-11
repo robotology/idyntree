@@ -12,8 +12,9 @@
 namespace iDynTree
 {
     /**
-     * Interface (i.e. pure abstract class) exposed by
-     * Vector-like classes.
+     * Interface (i.e. pure abstract class) exposed by Vector-like classes.
+     *
+     * \ingroup iDynTreeCore
      */
     class IVector
     {

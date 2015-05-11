@@ -46,6 +46,9 @@ classdef MatrixDynSize < iDynTree.IMatrix
     function varargout = toString(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(22,'MatrixDynSize_toString',self,varargin{:});
     end
+    function varargout = display(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(23,'MatrixDynSize_display',self,varargin{:});
+    end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
       ok = false;

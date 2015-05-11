@@ -8,6 +8,8 @@
 #include "Transform.h"
 #include "Position.h"
 #include "Rotation.h"
+#include "Twist.h"
+#include "Wrench.h"
 
 #include "Utils.h"
 #include <cassert>
@@ -72,6 +74,17 @@ const bool Transform::setRotation(const Rotation& rotation)
     return this->semantics.setRotationSemantics(rotation.getSemantics());
 }
 
+const bool Transform::setPosition(const PositionRaw& position)
+{
+    setPosition(iDynTree::Position(position));
+}
+
+const bool Transform::setRotation(const RotationRaw& rotation)
+{
+    setRotation(iDynTree::Rotation(rotation));
+}
+
+
 TransformSemantics& Transform::getSemantics()
 {
     return this->semantics;
@@ -108,18 +121,40 @@ Transform Transform::inverse2(const Transform& trans)
     return result;
 }
 
-Position Transform::apply(const Transform& op1, const Position& op2)
+Position Transform::transform(const Transform& op1, const Position& op2)
 {
     Position result;
 
-    if( TransformSemantics::check_apply(op1.getSemantics(),op2.getSemantics()) )
+    if( TransformSemantics::check_transform(op1.getSemantics(),op2.getSemantics()) )
     {
-        result = TransformRaw::apply(op1,op2);
-        TransformSemantics::apply(op1.getSemantics(),op2.getSemantics(),result.getSemantics());
+        result = TransformRaw::transform(op1,op2);
+        TransformSemantics::transform(op1.getSemantics(),op2.getSemantics(),result.getSemantics());
     }
 
     return result;
 }
+
+Twist Transform::transform(const Transform& op1, const Twist& op2)
+{
+    Twist result;
+
+    // \todo TODO add semantics to Twist
+    result = TransformRaw::transform(op1,op2);
+
+    return result;
+}
+
+Wrench Transform::transform(const Transform& op1, const Wrench& op2)
+{
+    Wrench result;
+
+    // \todo TODO add semantics to Twist
+    result = TransformRaw::transform(op1,op2);
+
+    return result;
+}
+
+
 
 Transform Transform::operator*(const Transform& other) const
 {
@@ -134,7 +169,17 @@ Transform Transform::inverse() const
 
 Position Transform::operator*(const Position& op2) const
 {
-    return Transform::apply(*this,op2);
+    return Transform::transform(*this,op2);
+}
+
+Twist Transform::operator*(const Twist& op2) const
+{
+    return Transform::transform(*this,op2);
+}
+
+Wrench Transform::operator*(const Wrench& op2) const
+{
+    return Transform::transform(*this,op2);
 }
 
 std::string Transform::toString() const
@@ -145,6 +190,12 @@ std::string Transform::toString() const
 
     return ss.str();
 }
+
+std::string Transform::reservedToString() const
+{
+    return this->toString();
+}
+
 
 
 }

@@ -158,6 +158,11 @@ std::string PositionRaw::toString() const
     return ss.str();
 }
 
+std::string PositionRaw::reservedToString() const
+{
+    return this->toString();
+}
+
 
 
 

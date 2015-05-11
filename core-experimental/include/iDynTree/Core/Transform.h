@@ -16,9 +16,13 @@ namespace iDynTree
 {
     class Position;
     class Rotation;
+    class Wrench;
+    class Twist;
 
     /**
      * Class representation the relative displacement between two different frames.
+     *
+     * \ingroup iDynTreeCore
      *
      * The semantics for this class are lousely on the one of PoseCoord in:
      *
@@ -99,21 +103,37 @@ namespace iDynTree
          */
         const bool setPosition(const Position & position);
 
+        /**
+         * Set the rotation part of the transform, from a RotationRaw
+         */
+        const bool setRotation(const RotationRaw & rotation);
+
+        /**
+         * Set the translation part of the transform, from a PositionRaw
+         */
+        const bool setPosition(const PositionRaw & position);
+
         // semantics operation
         static Transform compose(const Transform & op1, const Transform & op2);
         static Transform inverse2(const Transform & orient);
-        static Position apply(const Transform & op1, const Position & op2);
+        static Position transform(const Transform & op1, const Position & op2);
+        static Wrench   transform(const Transform & op1, const Wrench   & op2);
+        static Twist    transform(const Transform & op1, const Twist    & op2);
 
         /** overloaded operators **/
         Transform operator*(const Transform & other) const;
         Transform inverse() const;
         Position operator*(const Position & op2) const;
+        Wrench   operator*(const Wrench & op2) const;
+        Twist    operator*(const Twist  & op2) const;
 
         /** @name Output helpers.
          *  Output helpers.
          */
         ///@{
         std::string toString() const;
+
+        std::string reservedToString() const;
         ///@}
     };
 }

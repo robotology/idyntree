@@ -403,7 +403,8 @@ int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Ei
         /**
          * Little workaround to avoid dynamic allocation of memory
          *
-         * \todo this use of fixed buffers avoid this by using something similar to Eigen::Ref (unfortunately available only on Eigen 3.2.0)
+         * \todo this use of fixed buffers avoid this by using something similar
+         *       to Eigen::Ref (unfortunately available only on Eigen 3.2.0)
          */
 
         switch( regr_ptr->getNrOfOutputs() )

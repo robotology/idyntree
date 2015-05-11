@@ -17,6 +17,8 @@ namespace iDynTree
 {
     /**
      * Class providing a simple form of matrix with dynamic size.
+     *
+     * \ingroup iDynTreeCore
      */
     class MatrixDynSize: public IMatrix
     {
@@ -102,7 +104,7 @@ namespace iDynTree
          * @return a pointer to a vector of size() doubles
          */
         double * data();
-        
+
         /**
          * Assign all element of the vector to 0.
          */
@@ -124,6 +126,8 @@ namespace iDynTree
          */
         ///@{
         std::string toString() const;
+
+        std::string reservedToString() const;
         ///@}
 
     };

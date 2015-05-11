@@ -16,6 +16,8 @@ namespace iDynTree
      * Class representing a twist, i.e. a 6D combination of linear an angular velocity.
      *
      * Currently this class does not support semantics.
+     *
+     * \ingroup iDynTreeCore
      */
     class Twist: public SpatialMotionVectorRaw
     {

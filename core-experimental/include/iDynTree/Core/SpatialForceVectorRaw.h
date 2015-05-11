@@ -18,6 +18,9 @@ namespace iDynTree
 
     /**
      * Class providing the raw coordinates for any spatial force vector.
+     *
+     * \ingroup iDynTreeCore
+     *
      * A force spatial vector can be used to to described spatial momentum, wrench,
      * or their derivatives.
      *

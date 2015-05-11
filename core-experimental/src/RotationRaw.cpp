@@ -11,6 +11,7 @@
 #include <sstream>
 
 #include <Eigen/Dense>
+#include <Eigen/Geometry>
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 
@@ -152,7 +153,7 @@ RotationRaw RotationRaw::inverse2(const RotationRaw& orient)
     return result;
 }
 
-PositionRaw RotationRaw::apply(const RotationRaw& op1, const PositionRaw& op2)
+PositionRaw RotationRaw::transform(const RotationRaw& op1, const PositionRaw& op2)
 {
     PositionRaw result;
 
@@ -177,9 +178,40 @@ RotationRaw RotationRaw::operator*(const RotationRaw& other) const
 
 PositionRaw RotationRaw::operator*(const PositionRaw& other) const
 {
-    return apply(*this,other);
+    return transform(*this,other);
 }
 
+RotationRaw RotationRaw::RotX(const double angle)
+{
+    RotationRaw result;
+    Eigen::Map<Matrix3dRowMajor> thisData(result.data());
+    thisData = Eigen::AngleAxisd(angle, Eigen::Vector3d::UnitX()).matrix();
+
+    return result;
+}
+
+RotationRaw RotationRaw::RotY(const double angle)
+{
+    RotationRaw result;
+    Eigen::Map<Matrix3dRowMajor> thisData(result.data());
+    thisData = Eigen::AngleAxisd(angle, Eigen::Vector3d::UnitY()).matrix();
+
+    return result;
+}
+
+RotationRaw RotationRaw::RotZ(const double angle)
+{
+    RotationRaw result;
+    Eigen::Map<Matrix3dRowMajor> thisData(result.data());
+    thisData = Eigen::AngleAxisd(angle, Eigen::Vector3d::UnitZ()).matrix();
+
+    return result;
+}
+
+RotationRaw RotationRaw::RPY(const double roll, const double pitch, const double yaw)
+{
+    return RotX(roll)*RotY(pitch)*RotZ(yaw);
+}
 
 std::string RotationRaw::toString() const
 {
@@ -196,6 +228,11 @@ std::string RotationRaw::toString() const
        << " " << this->privateData[8] << std::endl;
 
     return ss.str();
+}
+
+std::string RotationRaw::reservedToString() const
+{
+    return this->toString();
 }
 
 

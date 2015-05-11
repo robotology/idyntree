@@ -18,6 +18,9 @@ namespace iDynTree
 
     /**
      * Class providing the raw coordinates for any motion spatial vector.
+     *
+     * \ingroup iDynTreeCore
+     *
      * A motion spatial vector can be used to to described twist, twist acceleration,
      * and their derivatives.
      *

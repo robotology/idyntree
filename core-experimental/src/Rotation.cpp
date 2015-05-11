@@ -99,14 +99,14 @@ namespace iDynTree
         return result;
     }
 
-    Position Rotation::apply(const Rotation& op1, const Position& op2)
+    Position Rotation::transform(const Rotation& op1, const Position& op2)
     {
         Position result;
 
-        if( RotationSemantics::check_apply(op1.getSemantics(),op2.getSemantics()) )
+        if( RotationSemantics::check_transform(op1.getSemantics(),op2.getSemantics()) )
         {
-            result = RotationRaw::apply(op1,op2);
-            RotationSemantics::apply(op1.getSemantics(),op2.getSemantics(),result.getSemantics());
+            result = RotationRaw::transform(op1,op2);
+            RotationSemantics::transform(op1.getSemantics(),op2.getSemantics(),result.getSemantics());
         }
 
         return result;
@@ -125,7 +125,7 @@ namespace iDynTree
 
     Position Rotation::operator*(const Position& op) const
     {
-        return apply(*this,op);
+        return transform(*this,op);
     }
 
     std::string Rotation::toString() const
@@ -135,6 +135,11 @@ namespace iDynTree
         ss << RotationRaw::toString() << " " << semantics.toString();
 
         return ss.str();
+    }
+
+    std::string Rotation::reservedToString() const
+    {
+        return this->toString();
     }
 
 

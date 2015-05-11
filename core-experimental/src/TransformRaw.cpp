@@ -74,7 +74,7 @@ TransformRaw TransformRaw::inverse2(const TransformRaw& trans)
     return result;
 }
 
-PositionRaw TransformRaw::apply(const TransformRaw& op1, const PositionRaw& op2)
+PositionRaw TransformRaw::transform(const TransformRaw& op1, const PositionRaw& op2)
 {
     PositionRaw result;
 
@@ -89,7 +89,7 @@ PositionRaw TransformRaw::apply(const TransformRaw& op1, const PositionRaw& op2)
     return result;
 }
 
-SpatialMotionVectorRaw TransformRaw::apply(const TransformRaw& op1, const SpatialMotionVectorRaw& op2)
+SpatialMotionVectorRaw TransformRaw::transform(const TransformRaw& op1, const SpatialMotionVectorRaw& op2)
 {
     SpatialMotionVectorRaw result;
 
@@ -100,12 +100,12 @@ SpatialMotionVectorRaw TransformRaw::apply(const TransformRaw& op1, const Spatia
     Eigen::Map<Vector6d> resTwist(result.data());
 
     resTwist.segment<3>(3) =  op1Rot*(op2Twist.segment<3>(3));
-    resTwist.segment<3>(0) =  op1Rot*(op2Twist.segment<3>(0))+op1Pos.cross(op2Twist.segment<3>(3));
+    resTwist.segment<3>(0) =  op1Rot*(op2Twist.segment<3>(0))+op1Pos.cross(resTwist.segment<3>(3));
 
     return result;
 }
 
-SpatialForceVectorRaw TransformRaw::apply(const TransformRaw& op1, const SpatialForceVectorRaw& op2)
+SpatialForceVectorRaw TransformRaw::transform(const TransformRaw& op1, const SpatialForceVectorRaw& op2)
 {
     SpatialForceVectorRaw result;
 
@@ -116,7 +116,7 @@ SpatialForceVectorRaw TransformRaw::apply(const TransformRaw& op1, const Spatial
     Eigen::Map<Vector6d> resWrench(result.data());
 
     resWrench.segment<3>(0) =  M*(f.segment<3>(0));
-    resWrench.segment<3>(3) =  M*(f.segment<3>(3))+p.cross(f.segment<3>(0));
+    resWrench.segment<3>(3) =  M*(f.segment<3>(3))+p.cross(resWrench.segment<3>(0));
 
     return result;
 }
@@ -133,17 +133,17 @@ TransformRaw TransformRaw::inverse() const
 
 PositionRaw TransformRaw::operator*(const PositionRaw& op2) const
 {
-    return TransformRaw::apply(*this,op2);
+    return TransformRaw::transform(*this,op2);
 }
 
 SpatialMotionVectorRaw TransformRaw::operator*(const SpatialMotionVectorRaw& op2) const
 {
-    return TransformRaw::apply(*this,op2);
+    return TransformRaw::transform(*this,op2);
 }
 
 SpatialForceVectorRaw TransformRaw::operator*(const SpatialForceVectorRaw& op2) const
 {
-    return TransformRaw::apply(*this,op2);
+    return TransformRaw::transform(*this,op2);
 }
 
 
@@ -155,6 +155,11 @@ std::string TransformRaw::toString() const
        << pos.toString() << std::endl;
 
     return ss.str();
+}
+
+std::string TransformRaw::reservedToString() const
+{
+    return this->toString();
 }
 
 }

@@ -201,6 +201,10 @@ namespace iDynTree
         return ss.str();
     }
 
+    std::string PositionSemantics::reservedToString() const
+    {
+        return this->toString();
+    }
 
 
 

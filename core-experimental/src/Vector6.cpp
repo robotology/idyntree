@@ -109,5 +109,10 @@ std::string Vector6::toString() const
     return ss.str();
 }
 
+std::string Vector6::reservedToString() const
+{
+    return this->toString();
+}
+
 
 }

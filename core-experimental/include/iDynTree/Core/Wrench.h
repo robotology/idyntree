@@ -15,6 +15,8 @@ namespace iDynTree
     /**
      * Class representing a wrench, i.e. a 6D combination of linear force an angular torque.
      *
+     * \ingroup iDynTreeCore
+     *
      * Currently this class does not support semantics.
      */
     class Wrench: public SpatialForceVectorRaw

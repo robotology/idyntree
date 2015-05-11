@@ -20,6 +20,8 @@ namespace iDynTree
      * Class representation the rotation of an orientation frame
      * with respect to a reference orientation frame, expressed as a Rotation matrix.
      *
+     * \ingroup iDynTreeCore
+     *
      * The semantics for this class is based on the OrientationCoord in:
      *
      * De Laet T, Bellens S, Smits R, Aertbeliën E, Bruyninckx H, and De Schutter J
@@ -81,7 +83,7 @@ namespace iDynTree
         const Rotation & changeRefOrientFrame(const Rotation & newRefOrientFrame);
         static Rotation compose(const Rotation & op1, const Rotation & op2);
         static Rotation inverse2(const Rotation & orient);
-        static Position apply(const Rotation & op1, const Position & op2);
+        static Position transform(const Rotation & op1, const Position & op2);
 
         /** overloaded operators **/
         Rotation operator*(const Rotation & other) const;
@@ -93,6 +95,8 @@ namespace iDynTree
          */
         ///@{
         std::string toString() const;
+
+        std::string reservedToString() const;
         ///@}
     };
 }

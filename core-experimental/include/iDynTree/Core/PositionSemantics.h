@@ -14,6 +14,8 @@ namespace iDynTree
 {
     /**
      * Class providing the semantics for iDynTree::Position class.
+     *
+     * \ingroup iDynTreeCore
      */
     class PositionSemantics
     {
@@ -82,6 +84,8 @@ namespace iDynTree
          */
         ///@{
         std::string toString() const;
+
+        std::string reservedToString() const;
         ///@}
 
     };

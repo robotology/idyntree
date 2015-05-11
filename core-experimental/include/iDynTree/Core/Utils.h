@@ -7,6 +7,15 @@
 
 namespace iDynTree
 {
+    /**
+     * \defgroup iDynTreeCore iDynTree core data structures
+     *
+     * iDynTree provides basic data structures to implement kinemanics and dynamics
+     * algorithms.
+     *
+     * 
+     */
+
 
     extern int UNKNOWN;
 

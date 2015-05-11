@@ -15,6 +15,8 @@ namespace iDynTree
 {
     /**
      * Class providing a simple vector of 6 elements.
+     *
+     * \ingroup iDynTreeCore
      */
     class Vector6: public IVector
     {
@@ -87,6 +89,8 @@ namespace iDynTree
          */
         ///@{
         std::string toString() const;
+
+        std::string reservedToString() const;
         ///@}
 
     };

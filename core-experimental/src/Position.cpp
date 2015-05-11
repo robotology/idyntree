@@ -123,5 +123,11 @@ namespace iDynTree
         return ss.str();
     }
 
+    std::string Position::reservedToString() const
+    {
+        return this->toString();
+    }
+
+
 
 }

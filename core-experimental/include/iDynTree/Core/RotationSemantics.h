@@ -16,6 +16,8 @@ namespace iDynTree
 
     /**
      * Class providing the semantics for iDynTree::Rotation class.
+     *
+     * \ingroup iDynTreeCore
      */
     class RotationSemantics
     {
@@ -66,7 +68,7 @@ namespace iDynTree
         bool check_changeRefOrientFrame(const RotationSemantics & newRefOrientFrame);
         static bool check_compose(const RotationSemantics & op1, const RotationSemantics & op2);
         static bool check_inverse2(const RotationSemantics & op);
-        static bool check_apply(const RotationSemantics & op1, const PositionSemantics & op2);
+        static bool check_transform(const RotationSemantics & op1, const PositionSemantics & op2);
         ///@}
 
         /**
@@ -81,8 +83,8 @@ namespace iDynTree
         static void compose(const RotationSemantics & op1, const RotationSemantics & op2, RotationSemantics & result);
         static RotationSemantics inverse2(const RotationSemantics & op);
         static void inverse2(const RotationSemantics & op, RotationSemantics & result);
-        static PositionSemantics apply(const RotationSemantics & op1, const PositionSemantics & op2);
-        static void apply(const RotationSemantics & op, const PositionSemantics & op2, PositionSemantics & result);
+        static PositionSemantics transform(const RotationSemantics & op1, const PositionSemantics & op2);
+        static void transform(const RotationSemantics & op, const PositionSemantics & op2, PositionSemantics & result);
         ///@}
 
 
@@ -92,6 +94,8 @@ namespace iDynTree
          */
         ///@{
         std::string toString() const;
+
+        std::string reservedToString() const;
         ///@}
 
     };

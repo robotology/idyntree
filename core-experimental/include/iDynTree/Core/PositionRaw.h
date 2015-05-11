@@ -15,6 +15,8 @@ namespace iDynTree
 {
 /**
  * Class providing the raw coordinates for iDynTree::Position class.
+ *
+ * \ingroup iDynTreeCore
  */
 class PositionRaw: public IVector
 {
@@ -99,6 +101,8 @@ public:
      */
     ///@{
     std::string toString() const;
+
+    std::string reservedToString() const;
     ///@}
 
 };

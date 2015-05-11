@@ -154,6 +154,12 @@ std::string VectorDynSize::toString() const
     return ss.str();
 }
 
+std::string VectorDynSize::reservedToString() const
+{
+    return this->toString();
+}
+
+
 
 
 

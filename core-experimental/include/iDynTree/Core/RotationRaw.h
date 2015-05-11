@@ -17,6 +17,8 @@ namespace iDynTree
 
     /**
      * Class providing the raw coordinates for iDynTree::Rotation class.
+     *
+     * \ingroup iDynTreeCore
      */
     class RotationRaw: public IMatrix
     {
@@ -86,7 +88,7 @@ namespace iDynTree
         const RotationRaw & changeRefOrientFrame(const RotationRaw & newRefOrientFrame);
         static RotationRaw compose(const RotationRaw & op1, const RotationRaw & op2);
         static RotationRaw inverse2(const RotationRaw & orient);
-        static PositionRaw apply(const RotationRaw & op1, const PositionRaw & op2);
+        static PositionRaw transform(const RotationRaw & op1, const PositionRaw & op2);
 
 
         /** overloaded operators **/
@@ -99,8 +101,45 @@ namespace iDynTree
          */
         ///@{
         std::string toString() const;
+
+        std::string reservedToString() const;
         ///@}
 
+        /**
+         * @name Initialization helpers.
+         *
+         */
+        ///@{
+
+        /**
+         * Return a Rotation around axis X of given angle
+         *
+         * @param angle the angle (in Radians) of the rotation arount the X axis
+         */
+        static RotationRaw RotX(const double angle);
+
+        /**
+         * Return a Rotation around axis Y of given angle
+         *
+         * @param angle the angle (in Radians) of the rotation arount the Y axis
+         */
+        static RotationRaw RotY(const double angle);
+
+        /**
+         * Return a Rotation around axis Z of given angle
+         *
+         * @param angle the angle (in Radians) of the rotation arount the Z axis
+         */
+        static RotationRaw RotZ(const double angle);
+
+        /**
+         * Return a rotation object given Roll, Pitch and Yaw values.
+         *
+         * @note This method is compatible with the KDL::Rotation::RPY method.
+         */
+        static RotationRaw RPY(const double roll, const double pitch, const double yaw);
+
+        ///@}
     };
 }
 

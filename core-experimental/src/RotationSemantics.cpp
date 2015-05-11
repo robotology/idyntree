@@ -102,7 +102,7 @@ namespace iDynTree
         return true;
     }
 
-    bool RotationSemantics::check_apply(const RotationSemantics& op1, const PositionSemantics& op2)
+    bool RotationSemantics::check_transform(const RotationSemantics& op1, const PositionSemantics& op2)
     {
         // check semantics
         if( !checkEqualOrUnknown(op1.getOrientationFrame(),op2.getCoordinateFrame() ) )
@@ -160,18 +160,18 @@ namespace iDynTree
         return result;
     }
 
-    void RotationSemantics::apply(const RotationSemantics& op1, const PositionSemantics& op2, PositionSemantics& result)
+    void RotationSemantics::transform(const RotationSemantics& op1, const PositionSemantics& op2, PositionSemantics& result)
     {
         result.setCoordinateFrame(op1.getReferenceOrientationFrame());
         result.setPoint(op2.getPoint());
         result.setReferencePoint(op2.getReferencePoint());
     }
 
-    PositionSemantics RotationSemantics::apply(const RotationSemantics& op1, const PositionSemantics& op2)
+    PositionSemantics RotationSemantics::transform(const RotationSemantics& op1, const PositionSemantics& op2)
     {
         PositionSemantics result;
 
-        RotationSemantics::apply(op1,op2,result);
+        RotationSemantics::transform(op1,op2,result);
 
         return result;
     }
@@ -187,5 +187,9 @@ namespace iDynTree
         return ss.str();
     }
 
+    std::string RotationSemantics::reservedToString() const
+    {
+        return this->toString();
+    }
 
 }

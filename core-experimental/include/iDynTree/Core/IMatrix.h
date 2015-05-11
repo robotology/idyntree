@@ -11,8 +11,9 @@
 namespace iDynTree
 {
     /**
-     * Interface (i.e. pure abstract class) exposed by
-     * Matrix-like classes.
+     * Interface (i.e. pure abstract class) exposed by  Matrix-like classes.
+     *
+     * \ingroup iDynTreeCore
      */
     class IMatrix
     {

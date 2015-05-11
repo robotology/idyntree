@@ -16,6 +16,8 @@ namespace iDynTree
     /**
      * Class providing a simple form of vector with dynamic size.
      * It is designed to provide seamless integration with SWIG.
+     *
+     * \ingroup iDynTreeCore
      */
     class VectorDynSize: public IVector
     {
@@ -109,6 +111,8 @@ namespace iDynTree
          */
         ///@{
         std::string toString() const;
+
+        std::string reservedToString() const;
         ///@}
 
     };
