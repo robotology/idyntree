@@ -1,0 +1,22 @@
+
+/*
+ * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Ali Paikan
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *
+ */
+
+/**
+\mainpage iDynTree
+\defgroup iDynTree iDynTree 
+@ingroup codyco_libraries
+<br>
+\section Tutorials 
+Coming soon...
+<br>
+\section install Installation
+Coming soon...
+<br>
+\author Silvio Traversaro
+ *
+ */
