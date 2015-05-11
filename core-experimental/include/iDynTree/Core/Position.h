@@ -5,7 +5,7 @@
  *
  */
 
-#ifndef IDYNTREE_POSITION_H
+#ifndef IDYNTREE_WRENCH_H
 #define IDYNTREE_POSITION_H
 
 #include "PositionRaw.h"
@@ -15,21 +15,9 @@
 
 namespace iDynTree
 {
-    class Rotation;
-
     /**
-     * Class representation the coordinates of the Position of
-     * a point with respect to another point.
-     *
-     * The exact semantics for this class are the one defined as PositionCoord in:
-     *
-     * De Laet T, Bellens S, Smits R, Aertbeliën E, Bruyninckx H, and De Schutter J
-     * (2013), Geometric Relations between Rigid Bodies: Semantics for Standardization,
-     * IEEE Robotics & Automation Magazine, Vol. 20, No. 1, pp. 84-93.
-     * URL : http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf
-     *
-     * One operation is not included for a logic paradox:
-     *   Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))
+     * Class representing wrench coordinates.
+     * Currenly missing the semantics. 
      *
      */
     class Position: public PositionRaw

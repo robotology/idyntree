@@ -6,6 +6,8 @@
  */
 
 #include "TransformRaw.h"
+#include "SpatialMotionVectorRaw.h"
+#include "SpatialForceVectorRaw.h"
 #include "Utils.h"
 #include <cstdio>
 #include <sstream>
@@ -13,6 +15,8 @@
 #include <Eigen/Dense>
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+typedef Eigen::Matrix<double,6,1> Vector6d;
+
 
 namespace iDynTree
 {
@@ -85,6 +89,38 @@ PositionRaw TransformRaw::apply(const TransformRaw& op1, const PositionRaw& op2)
     return result;
 }
 
+SpatialMotionVectorRaw TransformRaw::apply(const TransformRaw& op1, const SpatialMotionVectorRaw& op2)
+{
+    SpatialMotionVectorRaw result;
+
+    Eigen::Map<const Matrix3dRowMajor> op1Rot(op1.rot.data());
+    Eigen::Map<const Eigen::Vector3d> op1Pos(op1.pos.data());
+    Eigen::Map<const Vector6d> op2Twist(op2.data());
+
+    Eigen::Map<Vector6d> resTwist(result.data());
+
+    resTwist.segment<3>(3) =  op1Rot*(op2Twist.segment<3>(3));
+    resTwist.segment<3>(0) =  op1Rot*(op2Twist.segment<3>(0))+op1Pos.cross(op2Twist.segment<3>(3));
+
+    return result;
+}
+
+SpatialForceVectorRaw TransformRaw::apply(const TransformRaw& op1, const SpatialForceVectorRaw& op2)
+{
+    SpatialForceVectorRaw result;
+
+    Eigen::Map<const Matrix3dRowMajor> M(op1.rot.data());
+    Eigen::Map<const Eigen::Vector3d> p(op1.pos.data());
+    Eigen::Map<const Vector6d> f(op2.data());
+
+    Eigen::Map<Vector6d> resWrench(result.data());
+
+    resWrench.segment<3>(0) =  M*(f.segment<3>(0));
+    resWrench.segment<3>(3) =  M*(f.segment<3>(3))+p.cross(f.segment<3>(0));
+
+    return result;
+}
+
 TransformRaw TransformRaw::operator*(const TransformRaw& other) const
 {
     return compose(*this,other);
@@ -99,6 +135,17 @@ PositionRaw TransformRaw::operator*(const PositionRaw& op2) const
 {
     return TransformRaw::apply(*this,op2);
 }
+
+SpatialMotionVectorRaw TransformRaw::operator*(const SpatialMotionVectorRaw& op2) const
+{
+    return TransformRaw::apply(*this,op2);
+}
+
+SpatialForceVectorRaw TransformRaw::operator*(const SpatialForceVectorRaw& op2) const
+{
+    return TransformRaw::apply(*this,op2);
+}
+
 
 std::string TransformRaw::toString() const
 {

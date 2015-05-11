@@ -14,6 +14,9 @@
 
 namespace iDynTree
 {
+    class SpatialMotionVectorRaw;
+    class SpatialForceVectorRaw;
+
     /**
      * Class providing the raw coordinates for iDynTree::Transform class.
      *
@@ -49,11 +52,15 @@ namespace iDynTree
         static TransformRaw compose(const TransformRaw & op1, const TransformRaw & op2);
         static TransformRaw inverse2(const TransformRaw & trans);
         static PositionRaw apply(const TransformRaw & op1, const PositionRaw & op2);
+        static SpatialMotionVectorRaw apply(const TransformRaw & op1, const SpatialMotionVectorRaw & op2);
+        static SpatialForceVectorRaw apply(const TransformRaw & op1, const SpatialForceVectorRaw & op2);
 
         /** overloaded operators **/
         TransformRaw operator*(const TransformRaw & other) const;
         TransformRaw inverse() const;
         PositionRaw operator*(const PositionRaw & op2) const;
+        SpatialMotionVectorRaw operator*(const SpatialMotionVectorRaw & op2) const;
+        SpatialForceVectorRaw operator*(const SpatialForceVectorRaw & op2) const;
 
         /** @name Output helpers.
          *  Output helpers.

@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef IDYNTREE_DYNAMIC_SIZE_VECTOR_H
-#define IDYNTREE_DYNAMIC_SIZE_VECTOR_H
+#ifndef IDYNTREE_VECTOR_6_H
+#define IDYNTREE_VECTOR_6_H
 
 #include "IVector.h"
 #include <string>
@@ -14,54 +14,40 @@
 namespace iDynTree
 {
     /**
-     * Class providing a simple form of vector with dynamic size.
-     * It is designed to provide seamless integration with SWIG.
+     * Class providing a simple vector of 6 elements.
      */
-    class VectorDynSize: public IVector
+    class Vector6: public IVector
     {
     protected:
         /**
          * Storage for the VectorDynSize
          *
-         * Pointer to an area of size() doubles, managed by this class.
+         * Array of 6 doubles.
          */
-        double * m_data;
-        unsigned int m_size;
+        double m_data[6];
 
     public:
         /**
-         * Default constructor: initialize the size of the array to zero.
+         * Default constructor: initialize the elements of the array to zero.
          */
-        VectorDynSize();
-
-        /**
-         * Constructor from the size, all the element assigned to 0
-         *
-         * @param _size the desired size of the array.
-         *
-         * \warning performs dynamic memory allocation operations
-         */
-        VectorDynSize(unsigned int _size);
+        Vector6();
 
         /**
          * Constructor from a C-style array.
          *
-         * Build
-         *
-         * \warning performs dynamic memory allocation operations
+         * Print an error an build a vector full of zeros if in_size is not 6.
          */
-        VectorDynSize(const double * in_data, const unsigned int in_size);
+        Vector6(const double * in_data, const unsigned int in_size);
 
         /**
          * Denstructor
          *
-         * \warning performs dynamic memory allocation operations
          */
-        virtual ~VectorDynSize();
+        virtual ~Vector6();
 
         /**
          * @name Vector interface methods.
-         * Methods exposing a vector-like interface to PositionRaw.
+         * Methods exposing a vector-like interface to Vector6.
          */
         ///@{
         double operator()(const unsigned int index) const;
@@ -96,15 +82,7 @@ namespace iDynTree
         void zero();
 
         /**
-         * Change the size of the vector, without preserving old content.
-         *
-         * @param newSize the new size of the vector
-         * \warning performs dynamic memory allocation operations
-         */
-        void resize(const unsigned int newSize);
-
-
-        /** @name Output helpers.
+         *  @name Output helpers.
          *  Output helpers.
          */
         ///@{

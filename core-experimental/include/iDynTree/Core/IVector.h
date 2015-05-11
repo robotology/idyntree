@@ -30,14 +30,14 @@ namespace iDynTree
          * No input checking.
          *
          */
-        virtual double operator()(const unsigned int index) const;
+        virtual double operator()(const unsigned int index) const = 0;
 
         /**
          * Return a reference to an element value.
          *
          * No input checking.
          */
-        virtual double& operator()(const unsigned int index);
+        virtual double& operator()(const unsigned int index) = 0;
 
          /**
          * Return an element of the vector by value.

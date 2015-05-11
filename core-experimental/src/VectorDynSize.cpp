@@ -7,8 +7,6 @@
 
 #include "VectorDynSize.h"
 #include "Utils.h"
-#include <cassert>
-#include <cstdio>
 #include <sstream>
 #include <cstring>
 
