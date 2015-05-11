@@ -8,12 +8,9 @@
 #include "RotationRaw.h"
 #include "PositionRaw.h"
 #include "Utils.h"
-#include <cassert>
-#include <cstdio>
 #include <sstream>
 
 #include <Eigen/Dense>
-#include <boost/concept_check.hpp>
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 

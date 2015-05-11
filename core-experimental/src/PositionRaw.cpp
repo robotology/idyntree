@@ -21,17 +21,17 @@ PositionRaw::PositionRaw()
 
 PositionRaw::PositionRaw(double x, double y, double z)
 {
-    this->privateData[0] = x;
-    this->privateData[1] = y;
-    this->privateData[2] = z;
+    this->m_data[0] = x;
+    this->m_data[1] = y;
+    this->m_data[2] = z;
 }
 
 
 PositionRaw::PositionRaw(const PositionRaw& other)
 {
-    this->privateData[0] = other.privateData[0];
-    this->privateData[1] = other.privateData[1];
-    this->privateData[2] = other.privateData[2];
+    this->m_data[0] = other.m_data[0];
+    this->m_data[1] = other.m_data[1];
+    this->m_data[2] = other.m_data[2];
 
 }
 
@@ -42,12 +42,12 @@ PositionRaw::~PositionRaw()
 
 double & PositionRaw::operator()(const unsigned int index)
 {
-    return this->privateData[index];
+    return this->m_data[index];
 }
 
 double PositionRaw::operator()(const unsigned int index) const
 {
-    return this->privateData[index];
+    return this->m_data[index];
 }
 
 double PositionRaw::getVal(const unsigned int index) const
@@ -58,7 +58,7 @@ double PositionRaw::getVal(const unsigned int index) const
         return 0.0;
     }
 
-    return this->privateData[index];
+    return this->m_data[index];
 }
 
 bool PositionRaw::setVal(const unsigned int index, const double new_el)
@@ -69,14 +69,14 @@ bool PositionRaw::setVal(const unsigned int index, const double new_el)
         return false;
     }
 
-    this->privateData[index] = new_el;
+    this->m_data[index] = new_el;
 
     return true;
 }
 
 void PositionRaw::zero()
 {
-    this->privateData[0] = this->privateData[1] = this->privateData[2] = 0.0;
+    this->m_data[0] = this->m_data[1] = this->m_data[2] = 0.0;
 }
 
 unsigned int PositionRaw::size() const
@@ -86,28 +86,28 @@ unsigned int PositionRaw::size() const
 
 const double * PositionRaw::data() const
 {
-    return this->privateData;
+    return this->m_data;
 }
 
 double * PositionRaw::data()
 {
-    return this->privateData;
+    return this->m_data;
 }
 
 const PositionRaw& PositionRaw::changePoint(const PositionRaw& newPoint)
 {
-    this->privateData[0] += newPoint(0);
-    this->privateData[1] += newPoint(1);
-    this->privateData[2] += newPoint(2);
+    this->m_data[0] += newPoint(0);
+    this->m_data[1] += newPoint(1);
+    this->m_data[2] += newPoint(2);
 
     return *this;
 }
 
 const PositionRaw& PositionRaw::changeRefPoint(const PositionRaw& newPosition)
 {
-    this->privateData[0] += newPosition(0);
-    this->privateData[1] += newPosition(1);
-    this->privateData[2] += newPosition(2);
+    this->m_data[0] += newPosition(0);
+    this->m_data[1] += newPosition(1);
+    this->m_data[2] += newPosition(2);
 
     return *this;
 }
@@ -124,9 +124,9 @@ PositionRaw PositionRaw::compose(const PositionRaw& op1, const PositionRaw& op2)
 PositionRaw PositionRaw::inverse(const PositionRaw& op)
 {
     PositionRaw result;
-    result(0) = -op.privateData[0];
-    result(1) = -op.privateData[1];
-    result(2) = -op.privateData[2];
+    result(0) = -op.m_data[0];
+    result(1) = -op.m_data[1];
+    result(2) = -op.m_data[2];
     return result;
 }
 
@@ -151,9 +151,9 @@ std::string PositionRaw::toString() const
 {
     std::stringstream ss;
 
-    ss << " x " << this->privateData[0]
-       << " y " << this->privateData[1]
-       << " z " << this->privateData[2];
+    ss << " x " << this->m_data[0]
+       << " y " << this->m_data[1]
+       << " z " << this->m_data[2];
 
     return ss.str();
 }

@@ -20,11 +20,16 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/Rotation.h
                               include/iDynTree/Core/RotationRaw.h
                               include/iDynTree/Core/RotationSemantics.h
+                              include/iDynTree/Core/SpatialForceVectorRaw.h
+                              include/iDynTree/Core/SpatialMotionVectorRaw.h
                               include/iDynTree/Core/Transform.h
                               include/iDynTree/Core/TransformRaw.h
                               include/iDynTree/Core/TransformSemantics.h
+                              include/iDynTree/Core/Twist.h
                               include/iDynTree/Core/Utils.h
-                              include/iDynTree/Core/VectorDynSize.h)
+                              include/iDynTree/Core/Vector6.h
+                              include/iDynTree/Core/VectorDynSize.h
+                              include/iDynTree/Core/Wrench.h)
 
 #file (GLOB IDYNTREE_BASE_PRIVATE_INCLUDES)
 
@@ -36,11 +41,16 @@ set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/Rotation.cpp
                               src/RotationRaw.cpp
                               src/RotationSemantics.cpp
+                              src/SpatialForceVectorRaw.cpp
+                              src/SpatialMotionVectorRaw.cpp
                               src/Transform.cpp
                               src/TransformRaw.cpp
                               src/TransformSemantics.cpp
+                              src/Twist.cpp
                               src/Utils.cpp
-                              src/VectorDynSize.cpp)
+                              src/Vector6.cpp
+                              src/VectorDynSize.cpp
+                              src/Wrench.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})
