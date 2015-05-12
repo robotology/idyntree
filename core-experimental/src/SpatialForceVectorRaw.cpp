@@ -81,6 +81,8 @@ SpatialForceVectorRaw SpatialForceVectorRaw::inverse(const SpatialForceVectorRaw
     Eigen::Map<Vector6d> resultData(result.data());
 
     resultData = -opData;
+
+    return result;
 }
 
 double SpatialForceVectorRaw::dot(const SpatialMotionVectorRaw& other) const
