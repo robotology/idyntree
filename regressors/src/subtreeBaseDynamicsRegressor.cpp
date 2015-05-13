@@ -15,7 +15,6 @@
 #include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 #include "iDynTree/Core/Wrench.h"
 #include "kdl_codyco/KDLConversions.h"
-
 #include "dirl_utils.hpp"
 
 #include <iostream>

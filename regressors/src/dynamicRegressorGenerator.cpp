@@ -20,7 +20,6 @@
 #include "iDynTree/Sensors/Sensors.hpp"
 #include "kdl_codyco/KDLConversions.h"
 #include "iDynTree/Core/Wrench.h"
-
 #include <iostream>
 
 #include <algorithm>
