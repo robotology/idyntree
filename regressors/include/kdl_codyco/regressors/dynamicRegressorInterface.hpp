@@ -13,14 +13,18 @@
 
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl/jntarray.hpp>
-
+#include <iDynTree/Sensors/Sensors.hpp>
 #include <Eigen/Core>
 #include <Eigen/Dense>
+
+namespace iDynTree {
+ class SensorsMeasurements;  
+}
+
 
 namespace KDL {
 namespace CoDyCo {
 
-class SensorsMeasurements;
 
 namespace Regressors {
 
@@ -52,7 +56,7 @@ public:
                                  const std::vector<KDL::Frame> & X_dynamic_base,        //result of forward kinematic
                                  const std::vector<KDL::Twist> &v,
                                  const std::vector<KDL::Twist> &a,
-                                 const KDL::CoDyCo::SensorsMeasurements & sensors_measurements,  // measurments
+                                 const iDynTree::SensorsMeasurements & sensors_measurements,  // measurments
                                  const KDL::JntArray & measured_torques,
                                  Eigen::MatrixXd & regressor_matrix,                    //output
                                  Eigen::VectorXd & known_terms) = 0;

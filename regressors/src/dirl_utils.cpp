@@ -13,7 +13,8 @@
 #include "kdl_codyco/regressor_utils.hpp"
 
 #include "iDynTree/Sensors/SixAxisFTSensor.hpp"
-
+#include "iDynTree/Core/Transform.h"
+#include "kdl_codyco/KDLConversions.h"
 #include <iostream>
 
 #include <cfloat>
@@ -215,13 +216,13 @@ int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row
         return 0;
 }
 
-int getFirstFTSensorOnLink(const SensorsTree & sensors_tree,
+int getFirstFTSensorOnLink(const iDynTree::SensorsTree & sensors_tree,
                            const int link_id)
 {
-    for(int ft=0; ft < sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE); ft++ )
+    for(int ft=0; ft < sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); ft++ )
     {
-        KDL::CoDyCo::SixAxisForceTorqueSensor * sens
-            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft);
+        iDynTree::SixAxisForceTorqueSensor * sens
+            = (iDynTree::SixAxisForceTorqueSensor *) sensors_tree.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,ft);
 
         assert(sens != 0);
 
@@ -235,14 +236,14 @@ int getFirstFTSensorOnLink(const SensorsTree & sensors_tree,
     return -1;
 }
 
-int getNrOfFTSensorsOnLink(const SensorsTree & sensors_tree,
+int getNrOfFTSensorsOnLink(const iDynTree::SensorsTree & sensors_tree,
                            const int link_id)
 {
     int nrOfFTSensorsOnLink = 0;
-    for(int ft=0; ft < sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE); ft++ )
+    for(int ft=0; ft < sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); ft++ )
     {
-        KDL::CoDyCo::SixAxisForceTorqueSensor * sens
-            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft);
+        iDynTree::SixAxisForceTorqueSensor * sens
+            = (iDynTree::SixAxisForceTorqueSensor *) sensors_tree.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,ft);
 
         assert(sens != 0);
 
@@ -256,13 +257,13 @@ int getNrOfFTSensorsOnLink(const SensorsTree & sensors_tree,
     return nrOfFTSensorsOnLink;
 }
 
-int getFTIndexFromJunctionIndex(const SensorsTree & sensors_tree,
+int getFTIndexFromJunctionIndex(const iDynTree::SensorsTree & sensors_tree,
                                 const int junction_id)
 {
-    for(int ft=0; ft < sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE); ft++ )
+    for(int ft=0; ft < sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); ft++ )
     {
-        KDL::CoDyCo::SixAxisForceTorqueSensor * sens
-            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft);
+        iDynTree::SixAxisForceTorqueSensor * sens
+            = (iDynTree::SixAxisForceTorqueSensor *) sensors_tree.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,ft);
 
         assert(sens != 0);
 
@@ -274,7 +275,66 @@ int getFTIndexFromJunctionIndex(const SensorsTree & sensors_tree,
     }
 
     return -1;
+    
+}    
+  
+bool simulateMeasurement_sixAxisFTSensor(KDL::CoDyCo::Traversal & dynamic_traversal,
+                                                   std::vector< KDL::Wrench > f,
+                                                   iDynTree::SixAxisForceTorqueSensor *sixAxisForceTorqueSensor,
+                                                   iDynTree::Wrench& simulated_measurement)
+{
+    //Check that the input size is consistent
+    assert(f.size() == dynamic_traversal.getNrOfVisitedLinks());
+    assert(sixAxisForceTorqueSensor->isValid());
+    assert(sixAxisForceTorqueSensor->getFirstLinkID() > 0 && sixAxisForceTorqueSensor->getFirstLinkID() < dynamic_traversal.getNrOfVisitedLinks());
+    assert(sixAxisForceTorqueSensor->getSecondLinkID() > 0 && sixAxisForceTorqueSensor->getSecondLinkID() < dynamic_traversal.getNrOfVisitedLinks());
+   
+
+    // The f vector is assume to be the output of the rneaDynamicLoop function,
+    // ie f[i] is the force applied by link i on the link dynamic_traversal.getParent(i),
+    // expressed in the refernce frame of link i
+    // From this information, we can "simulate" the output that we could expect on this sensor
+
+    // First we get the two links attached to this ft sensor, and we check which one is the
+    // parent and which one is the child in the dynamic_traversal Traversal
+    int child_link = -1;
+    int parent_link = -1;
+    if( dynamic_traversal.getParentLink(sixAxisForceTorqueSensor->getFirstLinkID())->getLinkIndex() == sixAxisForceTorqueSensor->getSecondLinkID() )
+    {
+        child_link = sixAxisForceTorqueSensor->getFirstLinkID();
+        parent_link = sixAxisForceTorqueSensor->getSecondLinkID();
+    }
+    else
+    {
+        assert(dynamic_traversal.getParentLink(sixAxisForceTorqueSensor->getSecondLinkID())->getLinkIndex() == sixAxisForceTorqueSensor->getFirstLinkID() );
+        child_link = sixAxisForceTorqueSensor->getSecondLinkID();
+        parent_link = sixAxisForceTorqueSensor->getFirstLinkID();
+    }
+
+    // if the child_link is the link to which the measured wrench is applied, the sign between the
+    // measured_wrench and f[child_link] is consistent, otherwise we have to change the sign
+
+   
+
+    // To simulate the sensor, we have to translate f[child] in the sensor frame
+    // with the appriopriate sign
+    iDynTree::Transform child_link_H_sensor;
+    sixAxisForceTorqueSensor->getLinkSensorTransform(child_link,child_link_H_sensor);
+    if( sixAxisForceTorqueSensor->getAppliedWrenchLink() == parent_link  )
+    {
+        simulated_measurement = -(child_link_H_sensor.inverse()*iDynTree::ToiDynTree(f [child_link]));
+    }
+    else
+    {
+        simulated_measurement = (child_link_H_sensor.inverse()*iDynTree::ToiDynTree(f[child_link]));
+        assert( sixAxisForceTorqueSensor->getAppliedWrenchLink() == child_link );
+ 
+    }
+
+    return true;
 }
+
+
 
 }
 

@@ -12,6 +12,7 @@
 #include "kdl_codyco/utils.hpp"
 #include "kdl_codyco/undirectedtree.hpp"
 #include "iDynTree/Sensors/Sensors.hpp"
+#include "iDynTree/Core/Wrench.h"
 
 //Type of regressors
 #include "dynamicRegressorInterface.hpp"
@@ -62,7 +63,7 @@ public:
     * @param fake_link_names (optional) a list of names of links to consider without inertia (i.e. with all zero inertial parameters) (default: no links)
     */
     DynamicRegressorGenerator(const KDL::CoDyCo::UndirectedTree & undirected_tree,
-                              const KDL::CoDyCo::SensorsTree    & sensors_tree,
+                              const iDynTree::SensorsTree    & sensors_tree,
                               std::string kinematic_base="",
                               bool ft_sensor_offset=true,
                               std::vector< std::string > fake_link_names=std::vector< std::string >(0),
@@ -235,7 +236,7 @@ public:
      *
      * @param ft_sensor_index the index of the FT sensor, an integer from 0 to NrOfFTSensors-1
      */
-    int setFTSensorMeasurement(const int ft_sensor_index, const KDL::Wrench ftm);
+    int setFTSensorMeasurement(const int ft_sensor_index, const iDynTree::Wrench ftm);
 
     /**
      * Set the measurement for a given torque sensor
@@ -372,8 +373,8 @@ private:
 
 
     //measured 6 axis Force/torques
-    KDL::CoDyCo::SensorsMeasurements measured_wrenches;
-    KDL::CoDyCo::SensorsTree sensors_tree;
+    iDynTree::SensorsMeasurements measured_wrenches;
+    iDynTree::SensorsTree sensors_tree;
 
     //measured joint torques
     KDL::JntArray measured_torques;

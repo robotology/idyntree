@@ -41,7 +41,7 @@ int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
                                       const std::vector<KDL::Frame> & X_dynamic_base,
                                       const std::vector<KDL::Twist> & v,
                                       const std::vector<KDL::Twist> & a,
-                                      const SensorsMeasurements & measured_wrenches,
+                                      const iDynTree::SensorsMeasurements & measured_wrenches,
                                       const KDL::JntArray & measured_torques,
                                       Eigen::MatrixXd & regressor_matrix,
                                       Eigen::VectorXd & known_terms)
