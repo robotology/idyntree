@@ -347,13 +347,15 @@ private:
     KDL::CoDyCo::Traversal dynamic_traversal;
     KDL::CoDyCo::Traversal kinematic_traversal; /**< Traversal object: defining the kinematic base of the tree */
 
+    // Vector containing the desciption of the parameters used in this regressor
+    iDynTree::Regressors::DynamicsRegressorParametersList parameters_desc;
+
     //Violating DRY principle, but for code clarity
     int NrOfFakeLinks;
     int NrOfDOFs;
     int NrOfRealLinks_gen;
     int NrOfFTSensors;
     int NrOfAllPossibleParameters; /**< Define the maximum number of parameters */
-    int NrOfParameters; /**< Define the number of parameters actually used by the generated regressor */
     int NrOfOutputs;
 
     //Take in account the real and fake links

@@ -12,6 +12,7 @@
 #define _DIRL_DYNAMIC_REGRESSOR_INTERFACE_
 
 #include <kdl_codyco/undirectedtree.hpp>
+#include "../../iDynTree/Regressors/DynamicsRegressorParameters.h"
 #include <kdl/jntarray.hpp>
 
 #include <Eigen/Core>
@@ -32,6 +33,8 @@ public:
     virtual int getNrOfOutputs() = 0;
 
     virtual std::vector<int> getRelativeJunctions() = 0;
+
+    virtual std::vector<iDynTree::Regressors::DynamicsRegressorParameterType> getUsedParameters();
 
     /**
      * Configure the regressor given a UndirectedTree (for example allocating

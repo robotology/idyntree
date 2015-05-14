@@ -11,6 +11,8 @@
 #include <cmath>
 #include <cfloat>
 
+#include "iDynTree/Regressors
+
 #include "dynamicRegressorGenerator.hpp"
 #include "dirl_utils.hpp"
 
@@ -34,6 +36,9 @@ double random_double()
 {
     return ((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
 }
+
+// DynamicsRegressorParametersList helpers
+get
 
 DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
                                                      const KDL::CoDyCo::SensorsTree & _sensors_tree,
@@ -169,7 +174,7 @@ int DynamicRegressorGenerator::changeKinematicBase(std::string new_kinematic_bas
 
 int DynamicRegressorGenerator::getNrOfParameters() const
 {
-    return NrOfParameters;
+    return parameters_desc.getNrOfParameters();
 }
 
 int DynamicRegressorGenerator::getNrOfOutputs() const
@@ -196,97 +201,7 @@ std::string DynamicRegressorGenerator::getDescriptionOfParameter(int parameter_i
 #endif
     std::stringstream ss;
 
-    if( parameter_index >= NrOfParameters ) {
-        ss << "DynamicRegressorGenerator::getDescriptionOfParameter error: parameter_index " << parameter_index << " is greater the number of parameters " << NrOfParameters;
-        if( verbose ) { std::cerr << ss.str() << std::endl; }
-        return ss.str();
-    }
-
-    //The first 10*NrOfLinks parameters are always the inertial ones
-    if( parameter_index < 10*NrOfRealLinks_gen ) {
-        std::string inertial_parameter_type;
-        switch( parameter_index % 10 ) {
-            case 0:
-            inertial_parameter_type = "mass";
-            break;
-            case 1:
-            inertial_parameter_type = "x component of first moment of mass";
-            break;
-            case 2:
-            inertial_parameter_type = "y component of first moment of mass";
-            break;
-            case 3:
-            inertial_parameter_type = "z component of first moment of mass";
-            break;
-            case 4:
-            inertial_parameter_type = "xx component of inertia matrix";
-            break;
-            case 5:
-            inertial_parameter_type = "xy component of inertia matrix";
-            break;
-            case 6:
-            inertial_parameter_type = "xz component of inertia matrix";
-            break;
-            case 7:
-            inertial_parameter_type = "yy component of inertia matrix";
-            break;
-            case 8:
-            inertial_parameter_type = "yz component of inertia matrix";
-            break;
-            case 9:
-            inertial_parameter_type = "zz component of inertia matrix";
-            break;
-
-        }
-        int link_index = parameter_index/10;
-        ss << "Parameter " << parameter_index << ": " << inertial_parameter_type << " of link " << undirected_tree.getLink(regrColumns2linkIndeces[link_index])->getName() << " (" << regrColumns2linkIndeces[link_index] << ")";
-
-    } else {
-    //else
-    //if the offset are present, they are the parameters right after the inertial parameters
-    int parameter_index_offset = parameter_index - 10*NrOfRealLinks_gen;
-
-    if( consider_ft_offset ) {
-        std::string ft_offset_type;
-         switch( parameter_index_offset % 6 ) {
-            case 0:
-            ft_offset_type = "x component of force offset";
-            break;
-            case 1:
-            ft_offset_type = "y component of force offset";
-            break;
-            case 2:
-            ft_offset_type = "z component of force offset";
-            break;
-            case 3:
-            ft_offset_type = "x component of torque offset";
-            break;
-            case 4:
-            ft_offset_type = "y component of torque offset";
-            break;
-            case 5:
-            ft_offset_type = "z component of torque offset";
-            break;
-        }
-        int ft_sensor_index = parameter_index_offset/6;
-
-        assert(ft_sensor_index < NrOfFTSensors);
-
-        std::string ft_sensor_name;
-
-        Sensor * p_sens = sensors_tree.getSensor(SIX_AXIS_FORCE_TORQUE,ft_sensor_index);
-
-        assert(p_sens != 0);
-
-        ft_sensor_name = p_sens->getName();
-
-        ss << "Parameter "
-           << parameter_index
-           << ": " << ft_offset_type << " of link "
-           << ft_sensor_name <<
-           " (" << ft_sensor_index << ")";
-    }
-    }
+    ss << parameters_desc.getDescriptionOfParameter(parameter_index);
 
     if( with_value ) {
         ss << "\t\t" << value << std::endl;
@@ -299,7 +214,7 @@ std::string DynamicRegressorGenerator::getDescriptionOfParameters()
 {
     std::stringstream ss;
 
-    for(int parameter_index=0; parameter_index<NrOfParameters; parameter_index++) {
+    for(int parameter_index=0; parameter_index<parameters_desc.getNrOfParameters(); parameter_index++) {
         ss << getDescriptionOfParameter(parameter_index) << std::endl;
     }
 
@@ -310,7 +225,7 @@ std::string DynamicRegressorGenerator::getDescriptionOfParameters(const Eigen::V
 {
     std::stringstream ss;
 
-    for(int parameter_index=0; parameter_index<NrOfParameters; parameter_index++) {
+    for(int parameter_index=0; parameter_index<parameters_desc.getNrOfParameters(); parameter_index++) {
         ss << getDescriptionOfParameter(parameter_index,true,values[parameter_index]) << std::endl;
     }
 
@@ -2105,8 +2020,8 @@ int DynamicRegressorGenerator::addBaseRegressorRows()
 
 int DynamicRegressorGenerator::updateBuffers()
 {
-    one_rows_buffer = Eigen::MatrixXd(1,NrOfParameters);
-    six_rows_buffer = Eigen::MatrixXd(6,NrOfParameters);
+    one_rows_buffer = Eigen::MatrixXd(1,parameters_desc.getNrOfParameters());
+    six_rows_buffer = Eigen::MatrixXd(6,parameters_desc.getNrOfParameters());
 
     one_rows_vector = Eigen::VectorXd(1);
     six_rows_vector = Eigen::VectorXd(6);
@@ -2117,7 +2032,7 @@ int DynamicRegressorGenerator::updateBuffers()
 int DynamicRegressorGenerator::getUpdatedModel(const Eigen::VectorXd & values,
                                                KDL::CoDyCo::UndirectedTree & updated_model)
 {
-    if( values.rows() != NrOfParameters )
+    if( values.rows() != parameters_desc.getNrOfParameters() )
     {
         return -1;
     }
@@ -2136,9 +2051,9 @@ int DynamicRegressorGenerator::getUpdatedModel(const Eigen::VectorXd & values,
 
 int DynamicRegressorGenerator::getModelParameters(Eigen::VectorXd & values)
 {
-    if( values.rows() != NrOfParameters )
+    if( values.rows() != parameters_desc.getNrOfParameters() )
     {
-        values.resize(NrOfParameters);
+        values.resize(parameters_desc.getNrOfParameters());
     }
 
     /** \todo TODO remove dynamic memory allocation */
