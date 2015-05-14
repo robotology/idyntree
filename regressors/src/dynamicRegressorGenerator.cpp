@@ -17,8 +17,9 @@
 #include "kdl_codyco/regressor_loops.hpp"
 #include "kdl_codyco/rnea_loops.hpp"
 #include "kdl_codyco/position_loops.hpp"
-#include "kdl_codyco/sensors.hpp"
-
+#include "iDynTree/Sensors/Sensors.hpp"
+#include "kdl_codyco/KDLConversions.h"
+#include "iDynTree/Core/Wrench.h"
 #include <iostream>
 
 #include <algorithm>
@@ -36,7 +37,7 @@ double random_double()
 }
 
 DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
-                                                     const KDL::CoDyCo::SensorsTree & _sensors_tree,
+                                                     const iDynTree::SensorsTree & _sensors_tree,
                                                      std::string kinematic_base,
                                                      bool ft_sensor_offset,
                                                       std::vector< std::string > _fake_links_names,
@@ -52,7 +53,7 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::Undirect
     NrOfFakeLinks = fake_links_names.size();
     NrOfDOFs = undirected_tree.getNrOfDOFs();
     NrOfRealLinks_gen = undirected_tree.getNrOfLinks()-NrOfFakeLinks;
-    NrOfFTSensors = sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE);
+    NrOfFTSensors = sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
 
     //The initial number of parameters is given by the inertial parameters
     NrOfParameters = 10*NrOfRealLinks_gen;
@@ -84,7 +85,7 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::Undirect
     kinematic_traversal = KDL::CoDyCo::Traversal();
     dynamic_traversal = KDL::CoDyCo::Traversal();
 
-    measured_wrenches.setNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,NrOfFTSensors);
+    measured_wrenches.setNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE,NrOfFTSensors);
 
     X_dynamic_base = std::vector<KDL::Frame>(undirected_tree.getNrOfLinks());
     v = std::vector<KDL::Twist>(undirected_tree.getNrOfLinks());
@@ -274,7 +275,7 @@ std::string DynamicRegressorGenerator::getDescriptionOfParameter(int parameter_i
 
         std::string ft_sensor_name;
 
-        Sensor * p_sens = sensors_tree.getSensor(SIX_AXIS_FORCE_TORQUE,ft_sensor_index);
+        iDynTree::Sensor * p_sens = sensors_tree.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_sensor_index);
 
         assert(p_sens != 0);
 
@@ -370,7 +371,7 @@ int DynamicRegressorGenerator::setRobotStateAndSensors(const DynamicSample & sam
     kinematic_base_acceleration = sample.getBaseSpatialAcceleration();
 
     for(int i=0; i < getNrOfWrenchSensors(); i++ ) {
-        measured_wrenches.setMeasurement(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,i,sample.getWrenchMeasure(i));
+        measured_wrenches.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,i,iDynTree::ToiDynTree(sample.getWrenchMeasure(i)));
     }
 
     /** \todo implement reading torque from sample, adding proper support for torque sensors */
@@ -1942,7 +1943,7 @@ std::string DynamicRegressorGenerator::analyseSparseBaseSubspace(const Eigen::Ma
 
 
 
-int DynamicRegressorGenerator::setFTSensorMeasurement(const int ft_sensor_index, const KDL::Wrench ftm)
+int DynamicRegressorGenerator::setFTSensorMeasurement(const int ft_sensor_index, const iDynTree::Wrench ftm)
 {
     if( ft_sensor_index < 0 || ft_sensor_index >= NrOfFTSensors )
     {
@@ -1955,7 +1956,7 @@ int DynamicRegressorGenerator::setFTSensorMeasurement(const int ft_sensor_index,
         return -1;
     }
 
-    measured_wrenches.setMeasurement(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft_sensor_index,ftm);
+    measured_wrenches.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_sensor_index,ftm);
 
     return 0;
 }
@@ -2037,7 +2038,7 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
 
 int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<std::string> &_activated_ft_sensors)
 {
-    unsigned int NrOfFTSensors = sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE);
+    unsigned int NrOfFTSensors = sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
     std::vector<bool> flag_activated_ft_sensors(NrOfFTSensors,false);
     for(int i=0; i < (int)_activated_ft_sensors.size(); i++ ) {
        KDL::CoDyCo::LinkMap::const_iterator link_it =  undirected_tree.getLink(_activated_ft_sensors[i]);

@@ -13,7 +13,11 @@
 
 #include <Eigen/Dense>
 
-#include "kdl_codyco/sensors.hpp"
+#include "kdl_codyco/undirectedtree.hpp"
+
+#include "iDynTree/Sensors/Sensors.hpp"
+#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+#include "iDynTree/Core/Wrench.h"
 
 namespace KDL {
 namespace CoDyCo {
@@ -57,14 +61,14 @@ namespace Regressors
      * @return the index of the first FT sensor attached to the link,
      *         or -1 in case no ft sensor is attached to the link
      */
-    int getFirstFTSensorOnLink(const KDL::CoDyCo::SensorsTree & sensors_tree,
+    int getFirstFTSensorOnLink(const iDynTree::SensorsTree & sensors_tree,
                                const int link_id);
 
     /**
      * Return the number of six axis FT sensors attached to a given link.
      *
      */
-    int getNrOfFTSensorsOnLink(const SensorsTree & sensors_tree,
+    int getNrOfFTSensorsOnLink(const iDynTree::SensorsTree & sensors_tree,
                                const int link_id);
 
     /**
@@ -74,8 +78,22 @@ namespace Regressors
      *         if not FT sensor is associated to the junction.
      *
      */
-     int getFTIndexFromJunctionIndex(const  KDL::CoDyCo::SensorsTree & sensors_tree,
+     int getFTIndexFromJunctionIndex(const  iDynTree::SensorsTree & sensors_tree,
                                      const int junction_id);
+            // For the time being, simulate the sensor measurement from the robot
+       // state using the low-level datastructure representing internal forces
+       // In the long term, we should have a KDL::CoDyCo::RobotDynamicState class
+       // representing the redundant state (position,velocities,acceleration,internal & external forces)
+       // this will permit to have for all sensor a similar signature:
+//        bool simulateMeasurement(const KDL::CoDyCo::RobotDynamicState & state,
+//                                     MeasurementType & simulated_measurement);
+      
+     bool simulateMeasurement_sixAxisFTSensor(KDL::CoDyCo::Traversal & dynamic_traversal,
+                              std::vector<KDL::Wrench> f,
+                              iDynTree::SixAxisForceTorqueSensor *sixAxisForceTorqueSensor,
+                              iDynTree::Wrench & simulated_measurement);
+
+
 
 }
 

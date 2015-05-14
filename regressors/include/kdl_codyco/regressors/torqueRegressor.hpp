@@ -13,17 +13,22 @@
 
 #include "dynamicRegressorInterface.hpp"
 
+namespace iDynTree{
+    class SensorsTree;
+    class SensorsMeasurements;
+}
+
 namespace KDL {
 namespace CoDyCo {
 
-class SensorsTree;
+//class SensorsTree;
 
 namespace Regressors {
 /** \todo fix the case where the dynamic base has changed */
 class torqueRegressor : public DynamicRegressorInterface
 {
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
-    const KDL::CoDyCo::SensorsTree * p_sensors_tree;
+    const iDynTree::SensorsTree * p_sensors_tree;
 
     std::vector< int > subtree_leaf_links_indeces; /** indices of the leafs (excluding the root) */
 
@@ -57,7 +62,7 @@ public:
          * @param _reverse_direction if true, reverse the direction of the regressor (root to joint instead of leaf to joint) default:false
          */
         torqueRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
-                        const KDL::CoDyCo::SensorsTree & _sensors_tree,
+                        const iDynTree::SensorsTree & _sensors_tree,
                         const std::vector<int> & _linkIndeces2regrCols,
                         const std::string & dof_name,
                         const bool _reverse_direction = false,
@@ -100,7 +105,7 @@ public:
                               const std::vector<KDL::Frame> & X_dynamic_base,
                               const std::vector<KDL::Twist> & v,
                               const std::vector<KDL::Twist> & a,
-                              const SensorsMeasurements & measured_wrenches,
+                              const iDynTree::SensorsMeasurements & measured_wrenches,
                               const KDL::JntArray & measured_torques,
                               Eigen::MatrixXd & regressor_matrix,
                               Eigen::VectorXd & known_terms);

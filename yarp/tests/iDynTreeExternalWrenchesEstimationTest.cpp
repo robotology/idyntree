@@ -14,7 +14,7 @@
 
 #include <iCub/ctrl/math.h>
 #include <iCub/skinDynLib/dynContactList.h>
-
+#include <kdl_codyco/regressors/dirl_utils.hpp>
 
 using namespace iCub::iDyn;
 using namespace iCub::ctrl;

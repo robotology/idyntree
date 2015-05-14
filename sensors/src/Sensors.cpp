@@ -15,19 +15,23 @@
  * Public License for more details
  */
 
-#include "sensors.hpp"
+#include "Sensors.hpp"
 
-#include "six_axis_ft_sensor.hpp"
+#include "SixAxisFTSensor.hpp"
 
 #include <vector>
 #include <map>
 
-#include <kdl/frames.hpp>
+
+//#include <kdl/frames.hpp>
+#include "kdl_codyco/KDLConversions.h"
+#include <iDynTree/Core/Wrench.h>
+
 
 #include <iostream>
 
-namespace KDL {
-namespace CoDyCo {
+namespace iDynTree {
+//namespace CoDyCo {
 
 Sensor::~Sensor()
 {
@@ -65,7 +69,7 @@ void SensorsTree::constructor(const SensorsTree& other)
     }
 }
 
-SensorsTree::SensorsTree(const KDL::CoDyCo::SensorsTree& other)
+SensorsTree::SensorsTree(const iDynTree::SensorsTree& other)
 {
     constructor(other);
 }
@@ -166,7 +170,7 @@ Sensor* SensorsTree::getSensor(const SensorType& sensor_type, int sensor_index) 
 
 struct SensorsMeasurements::SensorsMeasurementsPrivateAttributes
 {
-    std::vector< KDL::Wrench > SixAxisFTSensorsMeasurements;
+    std::vector< iDynTree::Wrench > SixAxisFTSensorsMeasurements;
 };
 
 
@@ -199,7 +203,7 @@ bool SensorsMeasurements::setNrOfSensors(const SensorType& sensor_type, unsigned
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
-        this->pimpl->SixAxisFTSensorsMeasurements.resize(nrOfSensors,KDL::Wrench::Zero());
+        this->pimpl->SixAxisFTSensorsMeasurements.resize(nrOfSensors);
         return true;
     }
 
@@ -242,5 +246,5 @@ unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) 
 
 
 
-}
+//}
 }

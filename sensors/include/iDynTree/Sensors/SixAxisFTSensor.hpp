@@ -19,19 +19,18 @@
 #ifndef IDYNTREE_CORE_SENSOR_SIX_AXIS_FT_HPP
 #define IDYNTREE_CORE_SENSOR_SIX_AXIS_FT_HPP
 
-namespace KDL
+namespace iDynTree
 {
-    class Frame;
+    class Transform;
 }
 
-#include "sensors.hpp"
+#include "Sensors.hpp"
 
 #include <vector>
 
-namespace KDL {
-namespace CoDyCo {
+namespace iDynTree {
 
-    class Traversal;
+    //class Traversal;
 
     class SixAxisForceTorqueSensor: public Sensor {
     private:
@@ -67,13 +66,32 @@ namespace CoDyCo {
 
 
         /**
-         * Set the transform from the sensor to a specified link.
+         * Set the transform from the sensor to a first link attached to the sensor.
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        bool setFirstLinkSensorTransform(const int link_index, const KDL::Frame & link_H_sensor) const;
-        bool setSecondLinkSensorTransform(const int link_index, const KDL::Frame & link_H_sensor) const;
+        bool setFirstLinkSensorTransform(const int link_index, const iDynTree::Transform & link_H_sensor) const;
 
+        /**
+         * Set the transform from the sensor to a the second link attached to the sensor.
+         *
+         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
+         */
+        bool setSecondLinkSensorTransform(const int link_index, const iDynTree::Transform & link_H_sensor) const;
+
+        /**
+         * Get the index of the first link attached to the sensor.
+         *
+         * @return the index of the first link attached to the sensor.
+         */
+        int getFirstLinkIndex() const;
+
+        /**
+         * Get the index of the first link attached to the sensor.
+         *
+         * @return the index of the first link attached to the sensor.
+         */
+        int getSecondLinkIndex() const;
 
         /**
          * Documented in Sensor
@@ -146,7 +164,7 @@ namespace CoDyCo {
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        bool getLinkSensorTransform(const int link_index, KDL::Frame & link_H_sensor) const;
+        bool getLinkSensorTransform(const int link_index, iDynTree::Transform & link_H_sensor) const;
 
 
         /**
@@ -155,20 +173,9 @@ namespace CoDyCo {
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
         bool getWrenchAppliedOnLink(const int link_index,
-                                    const KDL::Wrench & measured_wrench,
-                                    KDL::Wrench & wrench_applied_on_link ) const;
+                                    const iDynTree::Wrench & measured_wrench,
+                                    iDynTree::Wrench & wrench_applied_on_link ) const;
 
-
-       // For the time being, simulate the sensor measurement from the robot
-       // state using the low-level datastructure representing internal forces
-       // In the long term, we should have a KDL::CoDyCo::RobotDynamicState class
-       // representing the redundant state (position,velocities,acceleration,internal & external forces)
-       // this will permit to have for all sensor a similar signature:
-       //bool simulateMeasurement(const KDL::CoDyCo::RobotDynamicState & state,
-       //                              MeasurementType & simulated_measurement);
-       bool simulateMeasurement(KDL::CoDyCo::Traversal & dynamic_traversal,
-                                std::vector<KDL::Wrench> f,
-                                KDL::Wrench & simulated_measurement);
 
 
 
@@ -179,7 +186,6 @@ namespace CoDyCo {
 
 
 
-}
 }
 
 

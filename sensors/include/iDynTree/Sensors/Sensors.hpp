@@ -18,15 +18,17 @@
 #ifndef IDYNTREE_CORE_SENSORS_HPP
 #define IDYNTREE_CORE_SENSORS_HPP
 
-namespace KDL {
+/*namespace KDL {
+    class Wrench;
+}*/
+
+namespace iDynTree {
     class Wrench;
 }
-
-
 #include <string>
 
-namespace KDL {
-namespace CoDyCo {
+namespace iDynTree {
+//namespace CoDyCo {
 
     enum SensorType
     {
@@ -202,7 +204,7 @@ namespace CoDyCo {
              */
             bool setMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
-                                const KDL::Wrench & wrench);
+                                const iDynTree::Wrench & wrench);
             /**
              * Set the wrench measurement for measurement
              *
@@ -211,7 +213,7 @@ namespace CoDyCo {
              */
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
-                                KDL::Wrench & wrench) const;
+                                iDynTree::Wrench & wrench) const;
 
 
     };
@@ -223,7 +225,7 @@ namespace CoDyCo {
 
 
 
-}
+
 }
 
 

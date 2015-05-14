@@ -16,17 +16,22 @@
 #include "kdl_codyco/undirectedtree.hpp"
 #include "dynamicRegressorInterface.hpp"
 
+#include <iDynTree/Sensors/Sensors.hpp>
+namespace iDynTree{
+    class SensorsTree;
+}
+
 namespace KDL {
 namespace CoDyCo {
 
-class SensorsTree;
+
 
 namespace Regressors {
 
 class baseDynamicsRegressor : public DynamicRegressorInterface
 {
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
-    const KDL::CoDyCo::SensorsTree * p_sensors_tree;
+    const iDynTree::SensorsTree * p_sensors_tree;
 
     const std::vector<int> linkIndeces2regrCols;
 
@@ -68,7 +73,7 @@ class baseDynamicsRegressor : public DynamicRegressorInterface
                               const std::vector<KDL::Frame> & X_dynamic_base,
                               const std::vector<KDL::Twist> &v,
                               const std::vector<KDL::Twist> & a,
-                              const SensorsMeasurements & measured_wrenches,
+                              const iDynTree::SensorsMeasurements & measured_wrenches,
                               const KDL::JntArray & measured_torques,
                               Eigen::MatrixXd & regressor_matrix,
                               Eigen::VectorXd & known_terms);

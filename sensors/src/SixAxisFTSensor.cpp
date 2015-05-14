@@ -15,16 +15,18 @@
  * Public License for more details
  */
 
-#include "six_axis_ft_sensor.hpp"
+#include "SixAxisFTSensor.hpp"
 
-#include "undirectedtree.hpp"
+#include "kdl_codyco/undirectedtree.hpp"
 
-#include <kdl/frames.hpp>
+//#include <kdl/frames.hpp>
+#include "kdl_codyco/KDLConversions.h"
+//#include <iDynTree/Core/KDLConversions.h>
+#include "iDynTree/Core/Transform.h"
+#include "iDynTree/Core/Wrench.h"
 
 
-
-namespace KDL {
-namespace CoDyCo {
+namespace iDynTree {
 
 struct SixAxisForceTorqueSensor::SixAxisForceTorqueSensorPrivateAttributes
 {
@@ -33,7 +35,7 @@ struct SixAxisForceTorqueSensor::SixAxisForceTorqueSensorPrivateAttributes
     // Index of the two links at which the SixAxisForceTorqueSensor is connected
     int link1, link2, appliedWrenchLink;
     // Transform from the sensor
-    KDL::Frame link1_H_sensor, link2_H_sensor;
+    Transform link1_H_sensor, link2_H_sensor;
     // Name of the parent junction
     std::string parent_junction_name;
     // Index of the parent junction
@@ -49,7 +51,7 @@ SixAxisForceTorqueSensor::SixAxisForceTorqueSensor()
     this->pimpl->link1 = this->pimpl->link2 = this->pimpl->appliedWrenchLink = -1;
 }
 
-SixAxisForceTorqueSensor::SixAxisForceTorqueSensor(const KDL::CoDyCo::SixAxisForceTorqueSensor& other):
+SixAxisForceTorqueSensor::SixAxisForceTorqueSensor(const SixAxisForceTorqueSensor& other):
     pimpl(new SixAxisForceTorqueSensorPrivateAttributes(*(other.pimpl)))
 {
 
@@ -84,14 +86,14 @@ bool SixAxisForceTorqueSensor::setAppliedWrenchLink(const int applied_wrench_ind
 }
 
 
-bool SixAxisForceTorqueSensor::setFirstLinkSensorTransform(const int link_index, const KDL::Frame& link_H_sensor) const
+bool SixAxisForceTorqueSensor::setFirstLinkSensorTransform(const int link_index, const iDynTree::Transform& link_H_sensor) const
 {
     this->pimpl->link1 = link_index;
     this->pimpl->link1_H_sensor = link_H_sensor;
     return true;
 }
 
-bool SixAxisForceTorqueSensor::setSecondLinkSensorTransform(const int link_index, const KDL::Frame& link_H_sensor) const
+bool SixAxisForceTorqueSensor::setSecondLinkSensorTransform(const int link_index, const iDynTree::Transform& link_H_sensor) const
 {
     this->pimpl->link2 = link_index;
     this->pimpl->link2_H_sensor = link_H_sensor;
@@ -174,7 +176,7 @@ bool SixAxisForceTorqueSensor::isLinkAttachedToSensor(const int link_index) cons
 }
 
 
-bool SixAxisForceTorqueSensor::getLinkSensorTransform(const int link_index, KDL::Frame& link_H_sensor) const
+bool SixAxisForceTorqueSensor::getLinkSensorTransform(const int link_index, iDynTree::Transform& link_H_sensor) const
 {
     if( this->pimpl->link1 == link_index )
     {
@@ -193,7 +195,7 @@ bool SixAxisForceTorqueSensor::getLinkSensorTransform(const int link_index, KDL:
 
 bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
                                                       const Wrench& measured_wrench,
-                                                      Wrench& wrench_applied_on_link) const
+                                                      iDynTree::Wrench& wrench_applied_on_link) const
 {
     assert(this->isValid());
 
@@ -203,7 +205,7 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
         // If the measure wrench is the one applied on the other link, change sign
         if( this->getAppliedWrenchLink() != link_index )
         {
-            wrench_applied_on_link.ReverseSign();
+            wrench_applied_on_link = -wrench_applied_on_link;
         }
 
         return true;
@@ -214,78 +216,28 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
 
         if( this->getAppliedWrenchLink() != link_index )
         {
-            wrench_applied_on_link.ReverseSign();
+            wrench_applied_on_link = -wrench_applied_on_link;
         }
 
         return true;
     }
     else
     {
-        wrench_applied_on_link = KDL::Wrench::Zero();
+        wrench_applied_on_link = iDynTree::Wrench();
         return false;
     }
 }
 
-bool SixAxisForceTorqueSensor::simulateMeasurement(Traversal& dynamic_traversal,
-                                                   std::vector< Wrench > f,
-                                                   Wrench& simulated_measurement)
+int SixAxisForceTorqueSensor::getFirstLinkIndex() const
 {
-    //Check that the input size is consistent
-    assert(f.size() == dynamic_traversal.getNrOfVisitedLinks());
-    assert(this->isValid());
-    assert(this->pimpl->link1 > 0 && this->pimpl->link1 < dynamic_traversal.getNrOfVisitedLinks());
-    assert(this->pimpl->link2 > 0 && this->pimpl->link2 < dynamic_traversal.getNrOfVisitedLinks());
+    return this->pimpl->link1;
+}
 
-
-    // The f vector is assume to be the output of the rneaDynamicLoop function,
-    // ie f[i] is the force applied by link i on the link dynamic_traversal.getParent(i),
-    // expressed in the refernce frame of link i
-    // From this information, we can "simulate" the output that we could expect on this sensor
-
-    // First we get the two links attached to this ft sensor, and we check which one is the
-    // parent and which one is the child in the dynamic_traversal Traversal
-    int child_link = -1;
-    int parent_link = -1;
-    if( dynamic_traversal.getParentLink(this->pimpl->link1)->getLinkIndex() == this->pimpl->link2 )
-    {
-        child_link = this->pimpl->link1;
-        parent_link = this->pimpl->link2;
-    }
-    else
-    {
-        assert(dynamic_traversal.getParentLink(this->pimpl->link2)->getLinkIndex() == this->pimpl->link1 );
-        child_link = this->pimpl->link2;
-        parent_link = this->pimpl->link1;
-    }
-
-    // if the child_link is the link to which the measured wrench is applied, the sign between the
-    // measured_wrench and f[child_link] is consistent, otherwise we have to change the sign
-
-    double sign = 0.0;
-    if( this->getAppliedWrenchLink() == parent_link )
-    {
-        sign = -1.0;
-    }
-    else
-    {
-        assert( this->getAppliedWrenchLink() == child_link );
-        sign = 1.0;
-    }
-
-    // To simulate the sensor, we have to translate f[child] in the sensor frame
-    // with the appriopriate sign
-    KDL::Frame child_link_H_sensor;
-    this->getLinkSensorTransform(child_link,child_link_H_sensor);
-    simulated_measurement = sign*(child_link_H_sensor.Inverse()*f[child_link]);
-
-    return true;
+int SixAxisForceTorqueSensor::getSecondLinkIndex() const
+{
+    return this->pimpl->link2;
 }
 
 
 
-
-
-
-
-}
 }

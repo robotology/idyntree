@@ -12,8 +12,11 @@
 
 #include "kdl_codyco/regressor_utils.hpp"
 
-#include "kdl_codyco/sensors.hpp"
-#include "kdl_codyco/six_axis_ft_sensor.hpp"
+#include "iDynTree/Sensors/Sensors.hpp"
+#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+#include "kdl_codyco/KDLConversions.h"
+#include "iDynTree/Core/Transform.h"
+#include "iDynTree/Core/Wrench.h"
 
 #include "dirl_utils.hpp"
 
@@ -27,7 +30,7 @@ namespace Regressors {
 
 bool torqueRegressor::isActiveFTSensor(const int ft_sensor_id) const
 {
-    unsigned int NrOfFTSensors = p_sensors_tree->getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE);
+    unsigned int NrOfFTSensors = p_sensors_tree->getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
     if( activated_ft_sensors.size() !=  NrOfFTSensors)
     {
         return false;
@@ -45,7 +48,7 @@ bool torqueRegressor::isActiveFTSensor(const int ft_sensor_id) const
 int torqueRegressor::configure()
 {
     const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_undirected_tree;
-    const KDL::CoDyCo::SensorsTree  & sensors_tree = *p_sensors_tree;
+    const iDynTree::SensorsTree  & sensors_tree = *p_sensors_tree;
 
 
     //Now store all the links that belong to the subtree
@@ -160,7 +163,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
                                       const std::vector<KDL::Frame> & X_dynamic_base,
                                       const std::vector<KDL::Twist> & v,
                                       const std::vector<KDL::Twist> & a,
-                                      const KDL::CoDyCo::SensorsMeasurements & measured_wrenches,
+                                      const iDynTree::SensorsMeasurements & measured_wrenches,
                                       const KDL::JntArray & measured_torques,
                                       Eigen::MatrixXd & regressor_matrix,
                                       Eigen::VectorXd & known_terms)
@@ -231,8 +234,8 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
             int ft_id = getFirstFTSensorOnLink(*p_sensors_tree,leaf_link_id);
             assert( ft_id >= 0 );
 
-            KDL::CoDyCo::SixAxisForceTorqueSensor * sens
-                = (KDL::CoDyCo::SixAxisForceTorqueSensor *) p_sensors_tree->getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft_id);
+            iDynTree::SixAxisForceTorqueSensor * sens
+                = (iDynTree::SixAxisForceTorqueSensor *) p_sensors_tree->getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_id);
 
             assert( sens->isLinkAttachedToSensor(leaf_link_id) );
 
@@ -253,14 +256,14 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
                 sign = -1.0;
             }
 
-            KDL::Frame leaf_link_H_sensor;
+            iDynTree::Transform leaf_link_H_sensor;
 
             bool ok = sens->getLinkSensorTransform(leaf_link_id,leaf_link_H_sensor);
 
             assert(ok);
 
             regressor_matrix.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6)
-                = sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*leaf_link_H_sensor);
+                = sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*iDynTree::ToKDL(leaf_link_H_sensor));
 
         }
     }
@@ -278,21 +281,21 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         int ft_id = getFirstFTSensorOnLink(*p_sensors_tree,leaf_link_id);
         assert( ft_id >= 0 );
 
-        KDL::CoDyCo::SixAxisForceTorqueSensor * sens
-            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) p_sensors_tree->getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft_id);
+        iDynTree::SixAxisForceTorqueSensor * sens
+            = (iDynTree::SixAxisForceTorqueSensor *) p_sensors_tree->getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_id);
 
 #ifndef NDEBUG
         //std::cerr << "For leaf " << leaf_link_id << " found ft sensor " << ft_id << " that connects " << fts_link[0].getParent() << " and " << fts_link[0].getChild() << std::endl;
 #endif
-        KDL::Wrench sensor_measured_wrench, link_measured_branch;
+        iDynTree::Wrench sensor_measured_wrench, link_measured_branch;
 
-        bool ok = measured_wrenches.getMeasurement(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft_id,sensor_measured_wrench);
+        bool ok = measured_wrenches.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_id,sensor_measured_wrench);
 
         ok = ok && sens->getWrenchAppliedOnLink(leaf_link_id,sensor_measured_wrench,link_measured_branch);
 
         assert(ok);
 
-        known_terms(0) +=  dot(S,X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*link_measured_branch);
+        known_terms(0) +=  dot(S,X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*iDynTree::ToKDL(link_measured_branch));
     }
 
 #ifndef NDEBUG
