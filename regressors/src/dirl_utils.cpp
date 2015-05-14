@@ -286,8 +286,8 @@ bool simulateMeasurement_sixAxisFTSensor(KDL::CoDyCo::Traversal & dynamic_traver
     //Check that the input size is consistent
     assert(f.size() == dynamic_traversal.getNrOfVisitedLinks());
     assert(sixAxisForceTorqueSensor->isValid());
-    assert(sixAxisForceTorqueSensor->getFirstLinkID() > 0 && sixAxisForceTorqueSensor->getFirstLinkID() < dynamic_traversal.getNrOfVisitedLinks());
-    assert(sixAxisForceTorqueSensor->getSecondLinkID() > 0 && sixAxisForceTorqueSensor->getSecondLinkID() < dynamic_traversal.getNrOfVisitedLinks());
+    assert(sixAxisForceTorqueSensor->getFirstLinkIndex() > 0 && sixAxisForceTorqueSensor->getFirstLinkIndex() < dynamic_traversal.getNrOfVisitedLinks());
+    assert(sixAxisForceTorqueSensor->getSecondLinkIndex() > 0 && sixAxisForceTorqueSensor->getSecondLinkIndex() < dynamic_traversal.getNrOfVisitedLinks());
    
 
     // The f vector is assume to be the output of the rneaDynamicLoop function,
@@ -299,16 +299,16 @@ bool simulateMeasurement_sixAxisFTSensor(KDL::CoDyCo::Traversal & dynamic_traver
     // parent and which one is the child in the dynamic_traversal Traversal
     int child_link = -1;
     int parent_link = -1;
-    if( dynamic_traversal.getParentLink(sixAxisForceTorqueSensor->getFirstLinkID())->getLinkIndex() == sixAxisForceTorqueSensor->getSecondLinkID() )
+    if( dynamic_traversal.getParentLink(sixAxisForceTorqueSensor->getFirstLinkIndex())->getLinkIndex() == sixAxisForceTorqueSensor->getSecondLinkIndex() )
     {
-        child_link = sixAxisForceTorqueSensor->getFirstLinkID();
-        parent_link = sixAxisForceTorqueSensor->getSecondLinkID();
+        child_link = sixAxisForceTorqueSensor->getFirstLinkIndex();
+        parent_link = sixAxisForceTorqueSensor->getSecondLinkIndex();
     }
     else
     {
-        assert(dynamic_traversal.getParentLink(sixAxisForceTorqueSensor->getSecondLinkID())->getLinkIndex() == sixAxisForceTorqueSensor->getFirstLinkID() );
-        child_link = sixAxisForceTorqueSensor->getSecondLinkID();
-        parent_link = sixAxisForceTorqueSensor->getFirstLinkID();
+        assert(dynamic_traversal.getParentLink(sixAxisForceTorqueSensor->getSecondLinkIndex())->getLinkIndex() == sixAxisForceTorqueSensor->getFirstLinkIndex() );
+        child_link = sixAxisForceTorqueSensor->getSecondLinkIndex();
+        parent_link = sixAxisForceTorqueSensor->getFirstLinkIndex();
     }
 
     // if the child_link is the link to which the measured wrench is applied, the sign between the

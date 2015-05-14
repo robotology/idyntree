@@ -228,12 +228,12 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
     }
 }
 
-int SixAxisForceTorqueSensor::getFirstLinkID() const
+int SixAxisForceTorqueSensor::getFirstLinkIndex() const
 {
     return this->pimpl->link1;
 }
 
-int SixAxisForceTorqueSensor::getSecondLinkID() const
+int SixAxisForceTorqueSensor::getSecondLinkIndex() const
 {
     return this->pimpl->link2;
 }
