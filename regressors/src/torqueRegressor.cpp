@@ -48,7 +48,7 @@ bool torqueRegressor::isActiveFTSensor(const int ft_sensor_id) const
 int torqueRegressor::configure()
 {
     const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_undirected_tree;
-    const iDynTree::SensorsTree  & sensors_tree = *p_sensors_tree;
+    const iDynTree::SensorsList  & sensors_tree = *p_sensors_tree;
 
 
     //Now store all the links that belong to the subtree

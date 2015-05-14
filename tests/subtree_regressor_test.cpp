@@ -33,11 +33,11 @@ double random_double()
     return 0.0;// ((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
 }
 
-iDynTree::SensorsTree generateSensorsTree(const KDL::CoDyCo::UndirectedTree & undirected_tree,
+iDynTree::SensorsList generateSensorsTree(const KDL::CoDyCo::UndirectedTree & undirected_tree,
                                 const std::vector<std::string> & ft_names,
                                 const std::vector<bool> & is_measure_direction_child_to_parent)
 {
-    iDynTree::SensorsTree sensors_tree;
+    iDynTree::SensorsList sensors_tree;
     for(int i=0; i < ft_names.size(); i++ )
     {
         //Creating a new ft sensor to be added in the ft sensors structure
@@ -168,7 +168,7 @@ int main()
 
     std::vector<bool> is_measure_direction_child_to_parent(ft_names.size(),true);
 
-    iDynTree::SensorsTree sensors_tree = generateSensorsTree(undirected_tree,ft_names,is_measure_direction_child_to_parent);
+    iDynTree::SensorsList sensors_tree = generateSensorsTree(undirected_tree,ft_names,is_measure_direction_child_to_parent);
 
     //Generate random offset data
     std::vector<iDynTree::Wrench> measured_wrenches_offset(ft_names.size());

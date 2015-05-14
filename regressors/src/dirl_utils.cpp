@@ -216,7 +216,7 @@ int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row
         return 0;
 }
 
-int getFirstFTSensorOnLink(const iDynTree::SensorsTree & sensors_tree,
+int getFirstFTSensorOnLink(const iDynTree::SensorsList & sensors_tree,
                            const int link_id)
 {
     for(int ft=0; ft < sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); ft++ )
@@ -236,7 +236,7 @@ int getFirstFTSensorOnLink(const iDynTree::SensorsTree & sensors_tree,
     return -1;
 }
 
-int getNrOfFTSensorsOnLink(const iDynTree::SensorsTree & sensors_tree,
+int getNrOfFTSensorsOnLink(const iDynTree::SensorsList & sensors_tree,
                            const int link_id)
 {
     int nrOfFTSensorsOnLink = 0;
@@ -257,7 +257,7 @@ int getNrOfFTSensorsOnLink(const iDynTree::SensorsTree & sensors_tree,
     return nrOfFTSensorsOnLink;
 }
 
-int getFTIndexFromJunctionIndex(const iDynTree::SensorsTree & sensors_tree,
+int getFTIndexFromJunctionIndex(const iDynTree::SensorsList & sensors_tree,
                                 const int junction_id)
 {
     for(int ft=0; ft < sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); ft++ )

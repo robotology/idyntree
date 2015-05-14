@@ -14,7 +14,7 @@
 #include "dynamicRegressorInterface.hpp"
 
 namespace iDynTree{
-    class SensorsTree;
+    class SensorsList;
     class SensorsMeasurements;
 }
 
@@ -28,7 +28,7 @@ namespace Regressors {
 class torqueRegressor : public DynamicRegressorInterface
 {
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
-    const iDynTree::SensorsTree * p_sensors_tree;
+    const iDynTree::SensorsList * p_sensors_tree;
 
     std::vector< int > subtree_leaf_links_indeces; /** indices of the leafs (excluding the root) */
 
@@ -62,7 +62,7 @@ public:
          * @param _reverse_direction if true, reverse the direction of the regressor (root to joint instead of leaf to joint) default:false
          */
         torqueRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
-                        const iDynTree::SensorsTree & _sensors_tree,
+                        const iDynTree::SensorsList & _sensors_tree,
                         const std::vector<int> & _linkIndeces2regrCols,
                         const std::string & dof_name,
                         const bool _reverse_direction = false,

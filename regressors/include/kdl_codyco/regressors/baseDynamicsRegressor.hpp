@@ -18,7 +18,7 @@
 
 #include <iDynTree/Sensors/Sensors.hpp>
 namespace iDynTree{
-    class SensorsTree;
+    class SensorsList;
 }
 
 namespace KDL {
@@ -31,7 +31,7 @@ namespace Regressors {
 class baseDynamicsRegressor : public DynamicRegressorInterface
 {
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
-    const iDynTree::SensorsTree * p_sensors_tree;
+    const iDynTree::SensorsList * p_sensors_tree;
 
     const std::vector<int> linkIndeces2regrCols;
 
