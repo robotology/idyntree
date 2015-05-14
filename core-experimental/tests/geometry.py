@@ -77,6 +77,8 @@ class TestCase:
             T_id = T*T.inverse();
             power5 = (T_id*f).dot(T_id*v);
             power6 = (T_id*v).dot(T_id*f);
+            power7 = (T.inverse()*f).dot(T.inverse()*v);
+            power8 = (T.inverse()*v).dot(T.inverse()*f)
             '''
             RTF.testReport("power1 = " + str(power1));
             RTF.testReport("power2 = " + str(power2));
@@ -84,12 +86,17 @@ class TestCase:
             RTF.testReport("power4 = " + str(power4));
             RTF.testReport("power5 = " + str(power5));
             RTF.testReport("power6 = " + str(power6));
+            RTF.testReport("power7 = " + str(power7));
+            RTF.testReport("power8 = " + str(power8));
             '''
             self.testApproxEqual(power1,power2,"testInnerProductInvariance failed");
             self.testApproxEqual(power1,power3,"testInnerProductInvariance failed");
             self.testApproxEqual(power1,power4,"testInnerProductInvariance failed");
             self.testApproxEqual(power1,power5,"testInnerProductInvariance failed");
             self.testApproxEqual(power1,power6,"testInnerProductInvariance failed");
+            self.testApproxEqual(power1,power7,"testInnerProductInvariance failed");
+            self.testApproxEqual(power1,power8,"testInnerProductInvariance failed");
+
 
     def testTransformInverse(self,nrOfTests):
         RTF.testReport("Running test testTransformInverse");
