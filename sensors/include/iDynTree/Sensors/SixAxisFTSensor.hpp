@@ -66,21 +66,32 @@ namespace iDynTree {
 
 
         /**
-         * Set the transform from the sensor to a specified link.
+         * Set the transform from the sensor to a first link attached to the sensor.
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
         bool setFirstLinkSensorTransform(const int link_index, const iDynTree::Transform & link_H_sensor) const;
-        bool setSecondLinkSensorTransform(const int link_index, const iDynTree::Transform & link_H_sensor) const;
-        
+
         /**
-         * Get the linkID from the sensor to a specified link.
+         * Set the transform from the sensor to a the second link attached to the sensor.
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        
-        int getFirstLinkID() const;
-        int getSecondLinkID() const;
+        bool setSecondLinkSensorTransform(const int link_index, const iDynTree::Transform & link_H_sensor) const;
+
+        /**
+         * Get the index of the first link attached to the sensor.
+         *
+         * @return the index of the first link attached to the sensor.
+         */
+        int getFirstLinkIndex() const;
+
+        /**
+         * Get the index of the first link attached to the sensor.
+         *
+         * @return the index of the first link attached to the sensor.
+         */
+        int getSecondLinkIndex() const;
 
         /**
          * Documented in Sensor
