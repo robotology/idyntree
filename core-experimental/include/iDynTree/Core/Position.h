@@ -5,7 +5,7 @@
  *
  */
 
-#ifndef IDYNTREE_WRENCH_H
+#ifndef IDYNTREE_POSITION_H
 #define IDYNTREE_POSITION_H
 
 #include "PositionRaw.h"
