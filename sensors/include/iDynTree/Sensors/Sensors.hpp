@@ -96,33 +96,33 @@ namespace iDynTree {
     /**
      * Structure representing a group of sensors associated with an UndirectedTree.
      */
-    class SensorsTree {
-            struct SensorsTreePimpl;
-            SensorsTreePimpl * pimpl;
+    class SensorsList {
+            struct SensorsListPimpl;
+            SensorsListPimpl * pimpl;
 
-            void constructor(const SensorsTree & other);
+            void constructor(const SensorsList & other);
             void destructor();
         public:
 
             /**
              * Constructor.
              */
-            SensorsTree();
+            SensorsList();
 
             /**
              * Copy constructor
              */
-            SensorsTree(const SensorsTree& other);
+            SensorsList(const SensorsList& other);
 
             /**
              * Copy operator
              */
-            SensorsTree& operator=(const SensorsTree &other);
+            SensorsList& operator=(const SensorsList &other);
 
             /**
              * Destructor.
              */
-            virtual ~SensorsTree();
+            virtual ~SensorsList();
 
             /**
              * Add a sensor to the SensorsTree.

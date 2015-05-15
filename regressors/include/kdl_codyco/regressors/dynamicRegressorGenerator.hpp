@@ -63,7 +63,7 @@ public:
     * @param fake_link_names (optional) a list of names of links to consider without inertia (i.e. with all zero inertial parameters) (default: no links)
     */
     DynamicRegressorGenerator(const KDL::CoDyCo::UndirectedTree & undirected_tree,
-                              const iDynTree::SensorsTree    & sensors_tree,
+                              const iDynTree::SensorsList    & sensors_tree,
                               std::string kinematic_base="",
                               bool ft_sensor_offset=true,
                               std::vector< std::string > fake_link_names=std::vector< std::string >(0),
@@ -374,7 +374,7 @@ private:
 
     //measured 6 axis Force/torques
     iDynTree::SensorsMeasurements measured_wrenches;
-    iDynTree::SensorsTree sensors_tree;
+    iDynTree::SensorsList sensors_tree;
 
     //measured joint torques
     KDL::JntArray measured_torques;

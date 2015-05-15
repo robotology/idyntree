@@ -29,7 +29,7 @@ namespace Regressors {
 class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
 {
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
-    const iDynTree::SensorsTree * p_sensors_tree;
+    const iDynTree::SensorsList * p_sensors_tree;
 
     const std::vector<int> linkIndeces2regrCols;
 
@@ -65,7 +65,7 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
          * @param _subtree_leaf_links the list of name of the leaf links of the considered subtree
          */
         subtreeBaseDynamicsRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
-                                     const iDynTree::SensorsTree & _sensors_tree,
+                                     const iDynTree::SensorsList & _sensors_tree,
                                      const std::vector<int> & _linkIndeces2regrCols,
                                      std::vector< std::string> _subtree_leaf_links=std::vector< std::string>(0),
                                      const bool _consider_ft_offset=false,

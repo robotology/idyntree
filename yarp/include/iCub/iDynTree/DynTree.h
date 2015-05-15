@@ -198,7 +198,7 @@ class DynTree  {
         //Sensors measures
         //std::vector< KDL::Wrench > measured_wrenches;
         //KDL::CoDyCo::FTSensorList ft_list;
-        ::iDynTree::SensorsTree     sensors_tree;
+        ::iDynTree::SensorsList     sensors_tree;
         ::iDynTree::SensorsMeasurements sensor_measures;
 
 
