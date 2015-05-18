@@ -61,14 +61,14 @@ namespace Regressors
      * @return the index of the first FT sensor attached to the link,
      *         or -1 in case no ft sensor is attached to the link
      */
-    int getFirstFTSensorOnLink(const iDynTree::SensorsTree & sensors_tree,
+    int getFirstFTSensorOnLink(const iDynTree::SensorsList & sensors_tree,
                                const int link_id);
 
     /**
      * Return the number of six axis FT sensors attached to a given link.
      *
      */
-    int getNrOfFTSensorsOnLink(const iDynTree::SensorsTree & sensors_tree,
+    int getNrOfFTSensorsOnLink(const iDynTree::SensorsList & sensors_tree,
                                const int link_id);
 
     /**
@@ -78,7 +78,7 @@ namespace Regressors
      *         if not FT sensor is associated to the junction.
      *
      */
-     int getFTIndexFromJunctionIndex(const  iDynTree::SensorsTree & sensors_tree,
+     int getFTIndexFromJunctionIndex(const  iDynTree::SensorsList & sensors_tree,
                                      const int junction_id);
             // For the time being, simulate the sensor measurement from the robot
        // state using the low-level datastructure representing internal forces

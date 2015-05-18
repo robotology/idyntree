@@ -39,23 +39,23 @@ Sensor::~Sensor()
 }
 
 
-struct SensorsTree::SensorsTreePimpl
+struct SensorsList::SensorsListPimpl
 {
     std::vector< std::vector<Sensor *> > VecSensors;
     std::vector< std::map< std::string, unsigned int > > NamesSensors;
 };
 
-SensorsTree::SensorsTree():
-    pimpl(new SensorsTreePimpl())
+SensorsList::SensorsList():
+    pimpl(new SensorsListPimpl())
 {
     //resize datastructures;
     this->pimpl->VecSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
     this->pimpl->NamesSensors.resize(NR_OF_SENSOR_TYPES);
 }
 
-void SensorsTree::constructor(const SensorsTree& other)
+void SensorsList::constructor(const SensorsList& other)
 {
-    this->pimpl = new SensorsTreePimpl();
+    this->pimpl = new SensorsListPimpl();
     this->pimpl->VecSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
     this->pimpl->NamesSensors.resize(NR_OF_SENSOR_TYPES);
     for(int sens_type = 0; sens_type < NR_OF_SENSOR_TYPES; sens_type++ )
@@ -69,12 +69,12 @@ void SensorsTree::constructor(const SensorsTree& other)
     }
 }
 
-SensorsTree::SensorsTree(const iDynTree::SensorsTree& other)
+SensorsList::SensorsList(const iDynTree::SensorsList& other)
 {
     constructor(other);
 }
 
-SensorsTree& SensorsTree::operator=(const SensorsTree& other)
+SensorsList& SensorsList::operator=(const SensorsList& other)
 {
     if(this != &other)
     {
@@ -84,7 +84,7 @@ SensorsTree& SensorsTree::operator=(const SensorsTree& other)
     return *this;
 }
 
-void SensorsTree::destructor()
+void SensorsList::destructor()
 {
     for( int sensor_type = 0; sensor_type < NR_OF_SENSOR_TYPES; sensor_type++ )
     {
@@ -101,12 +101,12 @@ void SensorsTree::destructor()
 }
 
 
-SensorsTree::~SensorsTree()
+SensorsList::~SensorsList()
 {
     this->destructor();
 }
 
-int SensorsTree::addSensor(const Sensor& sensor)
+int SensorsList::addSensor(const Sensor& sensor)
  {
     Sensor *newSensor = sensor.clone();
     if( ! newSensor->isValid() )
@@ -132,12 +132,12 @@ int SensorsTree::addSensor(const Sensor& sensor)
     return new_index;
 }
 
-unsigned int SensorsTree::getNrOfSensors(const SensorType & sensor_type) const
+unsigned int SensorsList::getNrOfSensors(const SensorType & sensor_type) const
 {
     return this->pimpl->VecSensors[sensor_type].size();
 }
 
-bool SensorsTree::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
+bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
 {
     std::map< std::string, unsigned int >::const_iterator it;
     it = this->pimpl->NamesSensors[sensor_type].find(_sensor_name);
@@ -152,7 +152,7 @@ bool SensorsTree::getSensorIndex(const SensorType & sensor_type, const std::stri
     }
 }
 
-Sensor* SensorsTree::getSensor(const SensorType& sensor_type, int sensor_index) const
+Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) const
 {
     if( sensor_index < getNrOfSensors(sensor_type) )
     {

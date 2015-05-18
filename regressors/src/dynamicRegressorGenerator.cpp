@@ -37,7 +37,7 @@ double random_double()
 }
 
 DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
-                                                     const iDynTree::SensorsTree & _sensors_tree,
+                                                     const iDynTree::SensorsList & _sensors_tree,
                                                      std::string kinematic_base,
                                                      bool ft_sensor_offset,
                                                       std::vector< std::string > _fake_links_names,

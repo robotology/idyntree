@@ -8,14 +8,14 @@ set(${VARS_PREFIX}_MINOR_VERSION 3)
 set(${VARS_PREFIX}_PATCH_VERSION 5)
 set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
 
-find_package(YCM REQUIRED)
-include(YCMDefaultDirs)
-ycm_default_dirs(${VARS_PREFIX})
-
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
 set(IDYNTREE_MODULE_DIR ${PROJECT_SOURCE_DIR}/cmake)
 set(IDYNTREE_MODULE_PATH ${IDYNTREE_MODULE_DIR})
 list(APPEND CMAKE_MODULE_PATH ${IDYNTREE_MODULE_PATH})
+
+#find_package(YCM REQUIRED)
+include(YCMDefaultDirs)
+ycm_default_dirs(${VARS_PREFIX})
 
 #Use options specified in iDynTreeOptions.cmake file
 include(iDynTreeOptions)

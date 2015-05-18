@@ -37,7 +37,7 @@ int subtreeBaseDynamicsRegressor::isSubtreeLeaf(const int link_id) const
 int subtreeBaseDynamicsRegressor::configure()
 {
     const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_undirected_tree;
-    const iDynTree::SensorsTree & sensors_tree = *p_sensors_tree;
+    const iDynTree::SensorsList & sensors_tree = *p_sensors_tree;
 
     //Checking if the provided subtree leafs define a proper subtree
     subtree_leaf_links_indeces.resize(subtree_leaf_links.size());

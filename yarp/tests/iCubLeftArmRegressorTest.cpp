@@ -44,7 +44,7 @@ iDynTree::Wrench simulateFTSensorFromKinematicState(const KDL::CoDyCo::Undirecte
                                         const KDL::Twist    & base_velocity,
                                         const KDL::Twist    & base_acceleration,
                                         const std::string ft_sensor_name,
-                                        const iDynTree::SensorsTree & sensors_tree
+                                        const iDynTree::SensorsList & sensors_tree
                                         )
 {
     // We can try to simulate the same sensor with the usual inverse dynamics
@@ -82,10 +82,10 @@ iDynTree::Wrench simulateFTSensorFromKinematicState(const KDL::CoDyCo::Undirecte
 }
 
 // This function logic should be moved to some better place for sure
-iDynTree::SensorsTree sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
+iDynTree::SensorsList sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
                                              std::string urdf_filename)
 {
-    iDynTree::SensorsTree sensors_tree;
+    iDynTree::SensorsList sensors_tree;
 
     std::vector<kdl_format_io::FTSensorData> ft_sensors;
     bool ok = kdl_format_io::ftSensorsFromUrdfFile(urdf_filename,ft_sensors);
@@ -175,7 +175,7 @@ int main()
 
     // Load a sensors tree (for ft sensors) from the information extracted from urdf file
     //  and using the serialization provided in the undirected tree
-    iDynTree::SensorsTree sensors_tree = sensorsTreeFromURDF(icub_undirected_tree,icub_urdf_filename);
+    iDynTree::SensorsList sensors_tree = sensorsTreeFromURDF(icub_undirected_tree,icub_urdf_filename);
 
     //Create a regressor generator
     KDL::CoDyCo::Regressors::DynamicRegressorGenerator regressor_generator(icub_undirected_tree,sensors_tree);
