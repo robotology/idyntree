@@ -30,14 +30,11 @@ export PYTHONPATH=$PYTHONPATH:~/src/codyco-superbuild/build/install/lib/python2.
 ##### Core
 - [Kinematics and Dynamics Library](https://github.com/orocos/orocos_kinematics_dynamics)
 - [Eigen](http://eigen.tuxfamily.org)
-- [YCM](https://github.com/robotology/ycm)
 - [urdfdom](https://github.com/ros/urdfdom)
 
 ##### Optional
 - [YARP](https://github.com/robotology/yarp)
 - [ICUB](https://github.com/robotology/icub-main)
-
-
 
 
 ### Reference paper
