@@ -5,8 +5,10 @@ iDynTree is a C++ library of algorithms related to robots dynamics, specifically
 
 
 ## Installation
+iDynTree is developed in the context of the [CoDyCo](www.codyco.eu) European Project. For this reason it is usually installed throught the [codyco-superbuild](https://github.com/robotology/codyco-superbuild), an easy way to download, compile and install the CoDyCo software on multiple operating systems, using the [CMake](www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). For more informations on the superbuild concept, please check [YCM documentation](http://robotology.github.io/ycm/gh-pages/master/index.html#superbuild).  
 
-It is recommended to install iDynTree via the [codyco-superbuild](https://github.com/robotology/codyco-superbuild).
+If you are not interested in installing all the CoDyCo software it is still possible to install iDynTree without installing the rest of the CoDyCo software. For this reason a superbuild to install iDynTree and all its dependencies is available at:
+https://github.com/robotology-playground/iDynTree-superbuild . Please check the README of that repo for information on how to install iDynTree and all its dependencies. 
 
 ### Bindings
 To compile bindings to iDynTree in several scriping languages, you should enable them using the `IDYNTREE_USES_PYTHON`, `IDYNTREE_USES_LUA`, `IDYNTREE_USES_MATLAB` CMake options.
