@@ -14,7 +14,7 @@ include_directories(include/iDynTree/Sensors)
 #include system headers
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
                             ${EIGEN3_INCLUDE_DIR})
-                            
+
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
 
@@ -40,6 +40,8 @@ add_library(${libraryname} ${IDYNTREE_SENSORS_SOURCES} ${IDYNTREE_SENSORS_HEADER
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
                                          PRIVATE ${EIGEN3_INCLUDE_DIR})
+
+target_link_libraries(${libraryname} idyntree-core-exp)
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_SENSORS_HEADERS})
 
