@@ -1,0 +1,146 @@
+# Copyright: (C) 2015 Fondazione Istituto Italiano di Tecnologia
+# Authors: Silvio Traversaro
+# CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+
+project(iDynTree_ModelIO CXX)
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+#define the support for specific file formats
+#by default they are all on, they are disabled if the necessary dependencies were not found
+
+## URDF file format support
+option(ENABLE_URDF "Enable support for URDF input/output" TRUE)
+
+## SYMORO par file format support
+option(ENABLE_SYMORO_PAR "Enable support for SYMORO par input" TRUE)
+
+IF( ENABLE_URDF )
+    find_package(TinyXML)
+    IF( NOT TinyXML_FOUND )
+        message("Disabling URDF support as no TinyXML was found")
+        set(ENABLE_URDF FALSE)
+    ENDIF()
+ENDIF()
+
+IF( ENABLE_URDF )
+    find_package(urdfdom_headers)
+    IF( NOT urdfdom_headers_CONFIG_INCLUDED )
+        message("Disabling URDF support as no urdfdom_headers was found")
+        set(ENABLE_URDF FALSE)
+    ENDIF()
+ENDIF()
+
+IF( ENABLE_URDF )
+    find_package(urdfdom)
+    IF( NOT urdfdom_CONFIG_INCLUDED )
+        message("Disabling URDF support as no urdfdom was found")
+        set(ENABLE_URDF FALSE)
+    ENDIF()
+ENDIF()
+
+include_directories(include/kdl_format_io)
+
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
+# link_directories(${kdl_codyco_LIBRARY_DIRS})
+
+if(ENABLE_URDF)
+    include_directories(SYSTEM ${TinyXML_INCLUDE_DIRS})
+    include_directories(SYSTEM ${urdfdom_INCLUDE_DIRS})
+    include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS})
+    include_directories(SYSTEM ${console_bridge_INCLUDE_DIRS})
+
+    set(URDF_SRCS src/converters/urdf_export.cpp
+                  src/converters/urdf_import.cpp
+                  src/converters/urdf_sensor_import.cpp)
+
+    set(URDF_HPPS include/kdl_format_io/urdf_import.hpp
+                  include/kdl_format_io/urdf_export.hpp
+                  include/kdl_format_io/urdf_sensor_import.hpp)
+
+    set(URDF_LIBS ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${TinyXML_LIBRARIES})
+
+    SOURCE_GROUP("URDF\\Source Files" FILES ${URDF_SRCS})
+    SOURCE_GROUP("URDF\\Header Files" FILES ${URDF_HPPS})
+
+endIF()
+
+if(ENABLE_SYMORO_PAR)
+
+
+    set(SYMORO_PAR_SRCS src/converters/symoro_par_import.cpp src/converters/symoro_par_import_serialization.cpp)
+    set(SYMORO_PAR_HPPS include/kdl_format_io/symoro_par_import.hpp include/kdl_format_io/symoro_par_model.hpp include/kdl_format_io/symoro_par_import_serialization.hpp)
+    if(ENABLE_SERIALIZATION_IO)
+        set(SYMORO_PAR_HPPS ${SYMORO_PAR_HPPS} include/kdl_format_io/symoro_par_import_serialization.hpp)
+        set(SYMORO_PAR_SRCS ${SYMORO_PAR_SRCS} src/converters/symoro_par_import_serialization.cpp)
+    endif()
+
+    SOURCE_GROUP("Symoro\\Source Files" FILES ${SYMORO_PAR_SRCS})
+    SOURCE_GROUP("Symoro\\Header Files" FILES ${SYMORO_PAR_HPPS})
+endif()
+
+if(IDYNTREE_USE_ICUB_MAIN)
+  set(IKIN_HPPS include/kdl_format_io/iKin_export.hpp)
+  set(IKIN_SRCS src/converters/iKin_export.cpp)
+
+  SOURCE_GROUP("iKin\\Source Files" FILES ${IKIN_SRCS})
+  SOURCE_GROUP("iKin\\Header Files" FILES ${IKIN_HPPS})
+
+endif()
+
+set(IDYNTREE_MODEL_IO_HEADERS ${SYMORO_PAR_HPPS} ${URDF_HPPS} ${IKIN_HPPS})
+
+if(MSVC)
+    set(CMAKE_DEBUG_POSTFIX "d")
+    set(LIB_TYPE STATIC)
+elseif(BUILD_SHARED_LIBS)
+    set(LIB_TYPE SHARED)
+else()
+    set(LIB_TYPE STATIC)
+endif()
+
+# share headers with all iDynTree targes
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
+
+include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS})
+include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
+
+add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${IDYNTREE_MODEL_IO_HEADERS} ${IKIN_SRCS})
+
+target_link_libraries(idyntree-model-io idyntree-sensors idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES} iKin)
+
+if(ENABLE_SYMORO_PAR)
+    target_link_libraries(idyntree-model-io expression-parser)
+endif()
+
+if(IDYNTREE_USE_ICUB_MAIN)
+    find_package(YARP REQUIRED)
+    find_package(ICUB REQUIRED)
+    include_directories(SYSTEM ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+    target_link_libraries(idyntree-model-io idyntree-core idyntree-sensors ${YARP_LIBRARIES} iKin ${URDF_LIBS} ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES})
+endif()
+
+#add_executable(check_kdl_export src/check_kdl_export.cpp src/kdl_import.cpp src/kdl_export.cpp)
+#target_link_libraries(check_kdl_export ${kdl_format_io_LIBRARIES} ${urdfdom_headers_LIBRARIES}  ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${Boost_LIBRARIES} ${Orocos-KDL_LIBRARIES})
+
+set_target_properties( idyntree-model-io PROPERTIES
+VERSION "${KDL_FORMAT_IO_VERSION}"
+  COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}"
+  PUBLIC_HEADER "${IDYNTREE_MODEL_IO_HEADERS}"
+  )
+
+install(TARGETS idyntree-model-io
+        EXPORT iDynTree
+        RUNTIME DESTINATION "${${VARS_PREFIX}_INSTALL_BINDIR}" COMPONENT bin
+        LIBRARY DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT shlib
+        ARCHIVE DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT lib
+        PUBLIC_HEADER DESTINATION "${${VARS_PREFIX}_INSTALL_INCLUDEDIR}/kdl_format_io" COMPONENT dev)
+
+set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-model-io)
+
+
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif(IDYNTREE_COMPILE_TESTS)
+

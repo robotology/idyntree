@@ -38,12 +38,10 @@
 #include "urdf_export.hpp"
 #include "config.h"
 
-#include <urdf_model/model.h>
+#include "urdf_compatibility.h"
 #include <iostream>
-#include <urdf_parser/urdf_parser.h>
 #include <tinyxml.h>
 #include <kdl/tree.hpp>
-#include <urdf_model/model.h>
 #include <kdl/joint.hpp>
 
 
@@ -231,7 +229,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
         }
         else
         {
-            boost::shared_ptr<urdf::Link> link;
+            urdf::LinkPtr link;
             link.reset(new urdf::Link);
 
             //add name
@@ -255,8 +253,8 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
             }
             else
             {
-                boost::shared_ptr<urdf::Joint> joint;
-                boost::shared_ptr<urdf::Link> link = robot_model.links_[seg->first];
+                urdf::JointPtr joint;
+                urdf::LinkPtr link = robot_model.links_[seg->first];
                 //This variable will be set by toUrdf
                 KDL::Frame H_new_old_successor;
                 KDL::Frame H_new_old_predecessor = getH_new_old(GetTreeElementSegment(GetTreeElementParent(seg->second)->second));
@@ -331,7 +329,7 @@ bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_mode
     for( seg = segs.begin(); seg != segs.end(); seg++ ) {
         if (robot_model.getLink(seg->first))
         {
-            boost::shared_ptr<urdf::Link> link = robot_model.links_[seg->first];
+            urdf::LinkPtr link = robot_model.links_[seg->first];
             //update inertial
             link->inertial.reset(new urdf::Inertial());
             *(link->inertial) = toUrdf(seg->second.segment.getInertia());
@@ -352,7 +350,7 @@ bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_mode
         jnt = seg->second.segment.getJoint();
         if (robot_model.getJoint(jnt.getName()))
         {
-            boost::shared_ptr<urdf::Joint> joint;
+            urdf::JointPtr joint;
             joint = robot_model.joints_[jnt.getName()];
 
             //convert joint

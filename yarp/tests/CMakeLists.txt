@@ -40,5 +40,5 @@ add_test(NAME test_iDynTreeExportFixedJointsFrames     COMMAND iDynTreeExportFix
 add_test(NAME test_iDynTreeExternalWrenchesEstimationTest COMMAND iDynTreeExternalWrenchesEstimationTest)
 
 add_executable(iCubLeftArmRegressorTest iCubLeftArmRegressorTest.cpp)
-target_link_libraries(iCubLeftArmRegressorTest idyntree-regressors idyntree-model-io)
+target_link_libraries(iCubLeftArmRegressorTest idyntree-regressors idyntree-sensors idyntree-modelio-urdf)
 add_test(NAME test_iCubLeftArmRegressorTest COMMAND iCubLeftArmRegressorTest )

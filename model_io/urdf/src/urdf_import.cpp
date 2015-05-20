@@ -35,8 +35,7 @@
 /* Author: Wim Meeussen */
 
 #include "urdf_import.hpp"
-#include <urdf_model/model.h>
-#include <urdf_parser/urdf_parser.h>
+#include "urdf_compatibility.h"
 #include <fstream>
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
@@ -48,11 +47,11 @@ using namespace KDL;
 namespace kdl_format_io{
 
 
-void printTree(boost::shared_ptr<const urdf::Link> link,int level = 0)
+void printTree(urdf::ConstLinkPtr link,int level = 0)
 {
   level+=2;
   int count = 0;
-  for (std::vector<boost::shared_ptr<urdf::Link> >::const_iterator child = link->child_links.begin(); child != link->child_links.end(); child++)
+  for (urdf::LinkVector::const_iterator child = link->child_links.begin(); child != link->child_links.end(); child++)
   {
     if (*child)
     {
@@ -89,7 +88,7 @@ Frame toKdl(urdf::Pose p)
 }
 
 // construct joint
-Joint toKdl(boost::shared_ptr<urdf::Joint> jnt)
+Joint toKdl(urdf::JointPtr jnt)
 {
   Frame F_parent_jnt = toKdl(jnt->parent_to_joint_origin_transform);
 
@@ -118,7 +117,7 @@ Joint toKdl(boost::shared_ptr<urdf::Joint> jnt)
 }
 
 // construct inertia
-RigidBodyInertia toKdl(boost::shared_ptr<urdf::Inertial> i)
+RigidBodyInertia toKdl(urdf::InertialPtr i)
 {
   Frame origin = toKdl(i->origin);
 
@@ -149,9 +148,9 @@ RigidBodyInertia toKdl(boost::shared_ptr<urdf::Inertial> i)
 
 
 // recursive function to walk through tree
-bool addChildrenToTree(boost::shared_ptr<const urdf::Link> root, Tree& tree)
+bool addChildrenToTree(urdf::LinkPtr root, Tree& tree)
 {
-  std::vector<boost::shared_ptr<urdf::Link> > children = root->child_links;
+  urdf::LinkVector children = root->child_links;
   //std::cerr << "[INFO] Link " << root->name << " had " << children.size() << " children" << std::endl;
 
   // constructs the optional inertia
@@ -199,13 +198,13 @@ bool treeFromParam(const string& param, Tree& tree)
 */
 
 
-int print_tree(const boost::shared_ptr<urdf::ModelInterface> & robot) {
+int print_tree(urdf::ModelInterfacePtr & robot) {
 std::cout << "robot name is: " << robot->getName() << std::endl;
 
   // get info from parser
   std::cout << "---------- Successfully Parsed XML ---------------" << std::endl;
   // get root link
-  boost::shared_ptr<const urdf::Link> root_link=robot->getRoot();
+  urdf::ConstLinkPtr root_link=robot->getRoot();
   if (!root_link) return -1;
 
   std::cout << "root Link: " << root_link->name << " has " << root_link->child_links.size() << " child(ren)" << std::endl;
@@ -220,7 +219,7 @@ std::cout << "robot name is: " << robot->getName() << std::endl;
 
 bool treeFromUrdfString(const string& xml, Tree& tree, const bool consider_root_link_inertia)
 {
-  boost::shared_ptr<urdf::ModelInterface> urdf_model;
+  urdf::ModelInterfacePtr urdf_model;
   urdf_model = urdf::parseURDF(xml);
   if( urdf_model.use_count() == 0 || !urdf_model )
   {
@@ -233,7 +232,7 @@ bool treeFromUrdfString(const string& xml, Tree& tree, const bool consider_root_
 /*
 bool treeFromUrdfXml(TiXmlDocument *xml_doc, Tree& tree)
 {
-  boost::shared_ptr<urdf::ModelInterface> robot_model;
+  urdf::ModelInterfacePtr robot_model;
   robot_model = urdf::parseURDF(
   if (!robot_model.parse(xml_doc)){
     logError("Could not generate robot model");
@@ -253,7 +252,7 @@ bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, Tree& tree, cons
 
     tree = Tree(fake_root_name);
 
-    boost::shared_ptr<const urdf::Link> root = robot_model.getRoot();
+   const urdf::ConstLinkPtr root = robot_model.getRoot();
 
     // constructs the optional inertia
     RigidBodyInertia inert(0);
@@ -305,7 +304,7 @@ bool jointPosLimitsFromUrdfString(const std::string& urdf_xml,
                                KDL::JntArray & min,
                                KDL::JntArray & max)
 {
-  boost::shared_ptr<urdf::ModelInterface> urdf_model;
+  urdf::ModelInterfacePtr urdf_model;
   urdf_model = urdf::parseURDF(urdf_xml);
   if( urdf_model.use_count() == 0 || !urdf_model )
   {
@@ -321,7 +320,7 @@ bool jointPosLimitsFromUrdfModel(const urdf::ModelInterface& robot_model,
                               KDL::JntArray & max)
 {
     int nrOfJointsWithLimits=0;
-    for (std::map<std::string, boost::shared_ptr<urdf::Joint> >::const_iterator it=robot_model.joints_.begin(); it!=robot_model.joints_.end(); ++it)
+    for (urdf::JointPtrMap::const_iterator it=robot_model.joints_.begin(); it!=robot_model.joints_.end(); ++it)
     {
         if( it->second->type == urdf::Joint::REVOLUTE ||
             it->second->type == urdf::Joint::PRISMATIC )
@@ -335,7 +334,7 @@ bool jointPosLimitsFromUrdfModel(const urdf::ModelInterface& robot_model,
     max.resize(nrOfJointsWithLimits);
 
     int index =0;
-    for (std::map<std::string, boost::shared_ptr<urdf::Joint> >::const_iterator it=robot_model.joints_.begin(); it!=robot_model.joints_.end(); ++it)
+    for (urdf::JointPtrMap::const_iterator it=robot_model.joints_.begin(); it!=robot_model.joints_.end(); ++it)
     {
         if( it->second->type == urdf::Joint::REVOLUTE ||
             it->second->type == urdf::Joint::PRISMATIC )

@@ -31,4 +31,5 @@ mark_as_advanced(IDYNTREE_ENABLE_RPATH)
 #########################################################################
 # Enable/disable dependencies
 
-option(IDYNTREE_USE_ICUB_MAIN  "Compiled iDynTree with icub-main dependencies" TRUE)
+option(IDYNTREE_ENABLE_SYMORO_PAR "Enable support for SyMoRo par format" TRUE)
+option(IDYNTREE_USES_ICUB_MAIN  "Compiled iDynTree with icub-main dependencies (for iKin and skinDynLib helper functions and tools)" TRUE)

@@ -30,7 +30,7 @@ include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 # share headers with all iDynTree targes
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
-include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS} 
+include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
                            ${EIGEN3_INCLUDE_DIR})
 
 include(YCMDefaultDirs)
@@ -40,7 +40,7 @@ add_library(idyntree-regressors ${IDYNTREE_REGRESSORS_SOURCES} ${IDYNTREE_REGRES
 target_include_directories(idyntree-regressors PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(idyntree-regressors ${orocos_kdl_LIBRARIES} idyntree-core)
+target_link_libraries(idyntree-regressors ${orocos_kdl_LIBRARIES} idyntree-core idyntree-sensors)
 
 set_target_properties(idyntree-regressors PROPERTIES
   SOVERSION "${${VARS_PREFIX}_VERSION}"

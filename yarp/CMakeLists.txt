@@ -61,7 +61,8 @@ target_link_libraries(idyntree-yarp LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}
                                             idyntree-core
-                                            idyntree-model-io
+                                            idyntree-sensors
+                                            idyntree-modelio-urdf
                                             idyntree-regressors
                                             ${Boost_LIBRARIES}
                                             ${TinyXML_LIBRARIES})
