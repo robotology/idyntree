@@ -258,7 +258,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
                 //This variable will be set by toUrdf
                 KDL::Frame H_new_old_successor;
                 KDL::Frame H_new_old_predecessor = getH_new_old(GetTreeElementSegment(GetTreeElementParent(seg->second)->second));
-                resetPtr(joint, new urdf::Joint());
+                urdf::resetPtr(joint, new urdf::Joint());
 
                 //convert joint
                 *joint = toUrdf(jnt, GetTreeElementSegment(seg->second).getFrameToTip(),H_new_old_predecessor,H_new_old_successor);

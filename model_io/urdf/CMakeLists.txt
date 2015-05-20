@@ -11,10 +11,12 @@ if( IDYNTREE_USES_INTERNAL_URDFDOM )
     add_definitions(-DURDF_USE_PLAIN_POINTERS)
     add_subdirectory(external/urdfdom)
     set(urdfdom_LIBRARIES iDynTree_priv_urdfdom_model)
-elseif()
-    find_package(urdfdom_headers)
-    find_package(urdfdom)
+else()
+    find_package(urdfdom_headers REQUIRED)
+    find_package(urdfdom REQUIRED)
 endif()
+
+include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS} ${urdfdom_INCLUDE_DIRS})
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
@@ -48,6 +50,7 @@ set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE
 set(libraryname idyntree-modelio-urdf)
 
 add_library(${libraryname} ${IDYNTREE_MODELIO_URDF_SOURCES} ${IDYNTREE_MODELIO_URDF_HEADERS})
+
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"

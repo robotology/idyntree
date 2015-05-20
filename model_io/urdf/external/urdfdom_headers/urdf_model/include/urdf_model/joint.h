@@ -94,8 +94,8 @@ typedef boost::shared_ptr<JointLimits>    JointLimitsPtr;
 typedef boost::shared_ptr<JointSafety>    JointSafetyPtr;
 typedef boost::shared_ptr<JointCalibration> JointCalibrationPtr;
 typedef boost::shared_ptr<JointMimic>     JointMimicPtr;
-template<class PtrType> inline void resetPtr<class PtrType>(PtrType & ptr) { ptr.reset(); }
-template<class PtrType, class PlainType> inline void resetPtr<class PtrType, class PlainType>(PtrType & ptr, PlainType * plain_ptr) { ptr.reset(plain_ptr); }
+template<class PtrType> inline void resetPtr(PtrType & ptr) { ptr.reset(); }
+template<class PtrType, class PlainType> inline void resetPtr(PtrType & ptr, PlainType * plain_ptr) { ptr.reset(plain_ptr); }
 
 
 #endif
@@ -278,7 +278,7 @@ public:
     resetPtr(this->safety);
     resetPtr(this->calibration);
     resetPtr(this->mimic);
-    
+
     this->type = UNKNOWN;
   };
 };

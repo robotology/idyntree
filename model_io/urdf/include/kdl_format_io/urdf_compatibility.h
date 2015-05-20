@@ -39,6 +39,9 @@ typedef boost::shared_ptr<Inertial> InertialPtr;
 typedef std::vector<boost::shared_ptr<urdf::Link> > LinkVector;
 typedef boost::shared_ptr<urdf::ModelInterface> ModelInterfacePtr;
 typedef std::map<std::string, boost::shared_ptr<urdf::Joint> > JointPtrMap;
+template<class PtrType> inline void resetPtr(PtrType & ptr) { ptr.reset(); }
+template<class PtrType, class PlainType> inline void resetPtr(PtrType & ptr, PlainType * plain_ptr) { ptr.reset(plain_ptr); }
+
 
 }
 

@@ -253,14 +253,14 @@ int main()
         toKDL(icub,ver,icub_kdl,q_min,q_max,iCub::iDynTree::IDYN_SERIALIZATION);
 
         //Export to urdf for subsequent test
-        urdf::ModelInterfacePtr icub_ptr(new urdf::ModelInterface);
+        urdf::ModelInterface icub_urdf_modelInteface;
 
-        if( ! kdl_format_io::treeToUrdfModel(icub_kdl,"test_icub",*icub_ptr) ) {
+        if( ! kdl_format_io::treeToUrdfModel(icub_kdl,"test_icub",icub_urdf_modelInteface) ) {
             std::cerr << "Fatal error in KDL - URDF conversion" << std::endl;
             return EXIT_FAILURE;
         }
 
-        TiXmlDocument* xml_doc = urdf::exportURDF(icub_ptr);
+        TiXmlDocument* xml_doc = urdf::exportURDF(icub_urdf_modelInteface);
         if( ! xml_doc->SaveFile(urdf_filename) ) {
             std::cerr << "Fatal error in URDF xml saving" << std::endl;
         }
