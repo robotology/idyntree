@@ -13,10 +13,21 @@
 #ifndef IDYNTREE_MODELIO_URDFCOMPATIBILITY_H
 #define IDYNTREE_MODELIO_URDFCOMPATIBILITY_H
 
-#ifndef IDYNTREE_USE_INTERNAL_URDFDOM
-
 #include <urdf_model/model.h>
 #include <urdf_parser/urdf_parser.h>
+
+#ifdef IDYNTREE_USE_INTERNAL_URDFDOM
+
+namespace urdf
+{
+
+
+typedef std::vector< LinkPtr > LinkVector;
+typedef std::map<std::string, JointPtr > JointPtrMap;
+
+}
+
+#else
 
 namespace urdf
 {
@@ -30,8 +41,6 @@ typedef boost::shared_ptr<urdf::ModelInterface> ModelInterfacePtr;
 typedef std::map<std::string, boost::shared_ptr<urdf::Joint> > JointPtrMap;
 
 }
-
-#else
 
 #endif
 

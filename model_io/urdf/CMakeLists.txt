@@ -5,8 +5,16 @@
 project(iDynTree_ModelIO_URDF CXX)
 
 find_package(TinyXML)
-find_package(urdfdom_headers)
-find_package(urdfdom)
+
+if( IDYNTREE_USES_INTERNAL_URDFDOM )
+    # urdfdom not available in the system, using the internal version
+    add_definitions(-DURDF_USE_PLAIN_POINTERS)
+    add_subdirectory(external/urdfdom)
+    set(urdfdom_LIBRARIES iDynTree_priv_urdfdom_model)
+elseif()
+    find_package(urdfdom_headers)
+    find_package(urdfdom)
+endif()
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
@@ -30,6 +38,8 @@ SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_URDF_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})
 
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+
+message(STATUS "IDYNTREE_TREE_INCLUDE_DIRS : ${IDYNTREE_TREE_INCLUDE_DIRS}")
 include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 # share headers with all iDynTree targes

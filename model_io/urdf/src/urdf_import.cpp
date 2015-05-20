@@ -221,7 +221,7 @@ bool treeFromUrdfString(const string& xml, Tree& tree, const bool consider_root_
 {
   urdf::ModelInterfacePtr urdf_model;
   urdf_model = urdf::parseURDF(xml);
-  if( urdf_model.use_count() == 0 || !urdf_model )
+  if( !urdf_model )
   {
       std::cerr << "[ERR] Could not parse string to urdf::ModelInterface" << std::endl;
       return false;
@@ -306,7 +306,7 @@ bool jointPosLimitsFromUrdfString(const std::string& urdf_xml,
 {
   urdf::ModelInterfacePtr urdf_model;
   urdf_model = urdf::parseURDF(urdf_xml);
-  if( urdf_model.use_count() == 0 || !urdf_model )
+  if( !urdf_model )
   {
       std::cerr << "[ERR] Could not parse string to urdf::ModelInterface" << std::endl;
       return false;

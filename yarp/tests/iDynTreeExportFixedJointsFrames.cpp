@@ -253,7 +253,7 @@ int main()
         toKDL(icub,ver,icub_kdl,q_min,q_max,iCub::iDynTree::IDYN_SERIALIZATION);
 
         //Export to urdf for subsequent test
-        boost::shared_ptr<urdf::ModelInterface> icub_ptr(new urdf::ModelInterface);
+        urdf::ModelInterfacePtr icub_ptr(new urdf::ModelInterface);
 
         if( ! kdl_format_io::treeToUrdfModel(icub_kdl,"test_icub",*icub_ptr) ) {
             std::cerr << "Fatal error in KDL - URDF conversion" << std::endl;

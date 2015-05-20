@@ -230,7 +230,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
         else
         {
             urdf::LinkPtr link;
-            link.reset(new urdf::Link);
+            resetPtr(link, new urdf::Link);
 
             //add name
             link->name = seg->first;
@@ -258,7 +258,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
                 //This variable will be set by toUrdf
                 KDL::Frame H_new_old_successor;
                 KDL::Frame H_new_old_predecessor = getH_new_old(GetTreeElementSegment(GetTreeElementParent(seg->second)->second));
-                joint.reset(new urdf::Joint());
+                resetPtr(joint, new urdf::Joint());
 
                 //convert joint
                 *joint = toUrdf(jnt, GetTreeElementSegment(seg->second).getFrameToTip(),H_new_old_predecessor,H_new_old_successor);
@@ -274,7 +274,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
                 std::cerr << "[DEBUG] successfully added a new joint" << jnt.getName() << std::endl;
 
                 //add inertial, taking in account an eventual change in the link frame
-                link->inertial.reset(new urdf::Inertial());
+                resetPtr(link->inertial, new urdf::Inertial());
                 *(link->inertial) = toUrdf(H_new_old_successor * GetTreeElementSegment(seg->second).getInertia());
             }
         }
