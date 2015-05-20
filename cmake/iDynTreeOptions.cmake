@@ -33,7 +33,12 @@ mark_as_advanced(IDYNTREE_ENABLE_RPATH)
 
 option(IDYNTREE_ENABLE_SYMORO_PAR "Enable support for SyMoRo par format" TRUE)
 option(IDYNTREE_USES_ICUB_MAIN  "Compiled iDynTree with icub-main dependencies (for iKin and skinDynLib helper functions and tools)" TRUE)
+if( MSVC )
+option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" TRUE)
+else()
 option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" FALSE)
+endif()
+
 if(IDYNTREE_USES_INTERNAL_URDFDOM)
     add_definitions(-DURDF_USE_PLAIN_POINTERS)
     add_definitions(-DIDYNTREE_USE_INTERNAL_URDFDOM)
