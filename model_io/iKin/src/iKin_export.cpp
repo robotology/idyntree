@@ -408,7 +408,7 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
     //Getting Denavit Hartenberg parameters using the algorithm
     //in section 3.2.3 of http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf
     //First version, not using fixed joints
-    for(int i=0; i < kdl_chain.getNrOfSegments(); i++ ) {
+    for(unsigned int i=0; i < kdl_chain.getNrOfSegments(); i++ ) {
         KDL::Joint::JointType type = kdl_chain.getSegment(i).getJoint().getType();
         if( type == KDL::Joint::TransX ||
             type == KDL::Joint::TransY ||
@@ -449,7 +449,7 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
 
     int jnt = 0;
     KDL::Frame H = KDL::Frame::Identity();
-    for(int i=0; i < kdl_chain.getNrOfSegments(); i++ )
+    for(unsigned int i=0; i < kdl_chain.getNrOfSegments(); i++ )
     {
         // At each for interation, H contains the transform between
         //  the link frame and the base frame

@@ -19,18 +19,6 @@ set(CMAKE_INSTALL_LIBDIR lib)
 # on Boost we use plain pointers
 add_definitions(-DURDF_USE_PLAIN_POINTERS)
 
-# set the default build type
-if (NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
-endif()
-
-# If compiler support symbol visibility, enable it.
-include(CheckCCompilerFlag)
-check_c_compiler_flag(-fvisibility=hidden HAS_VISIBILITY)
-if (HAS_VISIBILITY)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
-endif()
-
 # This shouldn't be necessary, but there has been trouble
 # with MSVC being set off, but MSVCXX ON.
 if(MSVC OR MSVC90 OR MSVC10)
@@ -90,36 +78,6 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/${cmake_conf_file}.in" "${CMAKE_BINA
 install(FILES ${CMAKE_BINARY_DIR}/${cmake_conf_file}
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake/ COMPONENT cmake)
 
-if(NOT CMAKE_VERSION VERSION_LESS 2.8.6)
-  # If CMake is version 2.8.6 or later, properly produce a version configuration files
-  set(cmake_conf_version_file "cmake/urdfdom-config-version.cmake")
-  # Use write_basic_package_version_file to generate a ConfigVersion file that
-  # allow users of urdfdom to specify the API or version to depend on
-  # TODO: keep this instruction until deprecate Ubuntu/Precise and update with
-  # https://github.com/Kitware/CMake/blob/v2.8.8/Modules/CMakePackageConfigHelpers.cmake
-  include(WriteBasicConfigVersionFile)
-  write_basic_config_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/${cmake_conf_version_file}
-    VERSION "${URDF_VERSION}"
-    COMPATIBILITY SameMajorVersion)
-
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${cmake_conf_version_file}
-          DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake/
-          COMPONENT cmake)
-
-endif()
-
-# Make the package config file
-if (NOT MSVC)
-  set(PKG_DESC "Unified Robot Description Format")
-  set(PKG_DEPENDS "urdfdom_headers console_bridge") # make the list separated by spaces instead of ;
-  set(PKG_URDF_LIBS "-lurdfdom_model -lurdfdom_world")
-  set(pkg_conf_file "cmake/pkgconfig/urdfdom.pc")
-  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/${pkg_conf_file}.in" "${CMAKE_BINARY_DIR}/${pkg_conf_file}" @ONLY)
-  install(FILES ${CMAKE_BINARY_DIR}/${pkg_conf_file}
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig/ COMPONENT pkgconfig)
-endif()
-
 # If the proper option is selected by the user
 # avoid trying to install urdf_parser_py via CMake
 if (NOT URDFDOM_DO_NOT_INSTALL_URDFPARSERPY)
@@ -127,7 +85,3 @@ if (NOT URDFDOM_DO_NOT_INSTALL_URDFPARSERPY)
 endif()
 
 message(STATUS "Configuration successful. Type make to compile urdfdom")
-
-SET_DIRECTORY_PROPERTIES(PROPERTIES
-  ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_BINARY_DIR}/cmake/urdfdom-config.cmake
-  ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_BINARY_DIR}/cmake/pkgconfig/urdfdom.pc)

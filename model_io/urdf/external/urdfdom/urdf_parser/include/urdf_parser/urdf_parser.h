@@ -37,6 +37,10 @@
 #ifndef URDF_PARSER_URDF_PARSER_H
 #define URDF_PARSER_URDF_PARSER_H
 
+#ifndef _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
+#endif
+
 #include <string>
 #include <map>
 #include <tinyxml.h>

@@ -9,17 +9,19 @@ set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/../urdfdom_headers/urdf_exception/include")
 
 
-add_library(iDynTree_priv_urdfdom_world SHARED src/pose.cpp src/model.cpp src/link.cpp src/joint.cpp src/world.cpp)
-target_link_libraries(iDynTree_priv_urdfdom_world ${TinyXML_LIBRARIES})
-set_target_properties(iDynTree_priv_urdfdom_world PROPERTIES SOVERSION 0.3)
+#add_library(iDynTree_priv_urdfdom_world SHARED src/pose.cpp src/model.cpp src/link.cpp src/joint.cpp src/world.cpp)
+#target_link_libraries(iDynTree_priv_urdfdom_world ${TinyXML_LIBRARIES})
+#set_target_properties(iDynTree_priv_urdfdom_world PROPERTIES SOVERSION 0.3)
 
-add_library(iDynTree_priv_urdfdom_model SHARED src/pose.cpp
+add_library(iDynTree_priv_urdfdom_model src/pose.cpp
                                                src/model.cpp
                                                src/link.cpp
                                                src/joint.cpp
-                                               src/urdf_sensor.cpp
-                                               src/urdf_model_state.cpp
-                                               src/twist.cpp)
+											   # comment out unused files
+                                               #src/urdf_sensor.cpp
+                                               #src/urdf_model_state.cpp
+                                               #src/twist.cpp
+											   )
 target_link_libraries(iDynTree_priv_urdfdom_model ${TinyXML_LIBRARIES})
 set_target_properties(iDynTree_priv_urdfdom_model PROPERTIES SOVERSION 0.3)
 
@@ -35,18 +37,18 @@ set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${URDFDOM_MODEL_PUBLIC
 
 # --------------------------------
 
-add_executable(check_urdf src/check_urdf.cpp)
-target_link_libraries(check_urdf iDynTree_priv_urdfdom_model iDynTree_priv_urdfdom_world)
+#add_executable(check_urdf src/check_urdf.cpp)
+#target_link_libraries(check_urdf iDynTree_priv_urdfdom_model)
 
-add_executable(urdf_to_graphiz src/urdf_to_graphiz.cpp)
-target_link_libraries(urdf_to_graphiz iDynTree_priv_urdfdom_model)
+#add_executable(urdf_to_graphiz src/urdf_to_graphiz.cpp)
+#target_link_libraries(urdf_to_graphiz iDynTree_priv_urdfdom_model)
 
-add_executable(urdf_mem_test test/memtest.cpp)
-target_link_libraries(urdf_mem_test iDynTree_priv_urdfdom_model)
+#add_executable(urdf_mem_test test/memtest.cpp)
+#target_link_libraries(urdf_mem_test iDynTree_priv_urdfdom_model)
 
 
 INSTALL(TARGETS iDynTree_priv_urdfdom_model DESTINATION ${CMAKE_INSTALL_LIBDIR})
-INSTALL(TARGETS iDynTree_priv_urdfdom_world DESTINATION ${CMAKE_INSTALL_LIBDIR})
+#INSTALL(TARGETS iDynTree_priv_urdfdom_world DESTINATION ${CMAKE_INSTALL_LIBDIR})
 INSTALL(TARGETS check_urdf urdf_to_graphiz urdf_mem_test
   DESTINATION ${CMAKE_INSTALL_BINDIR})
 INSTALL(DIRECTORY include/urdf_parser DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

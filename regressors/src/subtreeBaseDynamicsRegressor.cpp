@@ -18,7 +18,6 @@
 #include "dirl_utils.hpp"
 
 #include <iostream>
-#include <boost/iterator/iterator_concepts.hpp>
 
 using namespace KDL::CoDyCo;
 

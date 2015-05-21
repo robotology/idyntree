@@ -3,7 +3,11 @@
 
 #########################################################################
 # Control whether libraries are shared or static.
+if( MSVC )
+option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" FALSE)
+else()
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
+endif()
 set(BUILD_SHARED_LIBS ${IDYNTREE_SHARED_LIBRARY})
 
 
@@ -43,3 +47,7 @@ if(IDYNTREE_USES_INTERNAL_URDFDOM)
     add_definitions(-DURDF_USE_PLAIN_POINTERS)
     add_definitions(-DIDYNTREE_USE_INTERNAL_URDFDOM)
 endif()
+
+if(MSVC)
+    set(CMAKE_DEBUG_POSTFIX "d")
+endif(MSVC)

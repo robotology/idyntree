@@ -37,6 +37,12 @@
 #ifndef URDF_INTERFACE_MODEL_H
 #define URDF_INTERFACE_MODEL_H
 
+//For using the M_PI macro in visual studio it
+//is necessary to define _USE_MATH_DEFINES
+#ifndef _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
+#endif
+
 #include <string>
 #include <map>
 #include <urdf_model/link.h>

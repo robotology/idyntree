@@ -39,10 +39,8 @@
 
 //For using the M_PI macro in visual studio it
 //is necessary to define _USE_MATH_DEFINES
-#ifdef _MSC_VER
-#ifndef _USE_MATH_DEFINE
+#ifndef _USE_MATH_DEFINES
 #define _USE_MATH_DEFINES
-#endif
 #endif
 
 #include <cmath>
@@ -51,6 +49,12 @@
 #include <vector>
 #include "boost_replacements.h"
 #include <urdf_exception/exception.h>
+
+#ifdef M_PI
+#define M_PI_URDF M_PI
+#else
+#define M_PI_URDF 3.14159265358979323846
+#endif
 
 namespace urdf{
 
@@ -126,7 +130,7 @@ public:
 
     roll  = atan2(2 * (this->y*this->z + this->w*this->x), sqw - sqx - sqy + sqz);
     double sarg = -2 * (this->x*this->z - this->w*this->y);
-    pitch = sarg <= -1.0 ? -0.5*M_PI : (sarg >= 1.0 ? 0.5*M_PI : asin(sarg));
+    pitch = sarg <= -1.0 ? -0.5*M_PI_URDF : (sarg >= 1.0 ? 0.5*M_PI_URDF : asin(sarg));
     yaw   = atan2(2 * (this->x*this->y + this->w*this->z), sqw + sqx - sqy - sqz);
 
   };

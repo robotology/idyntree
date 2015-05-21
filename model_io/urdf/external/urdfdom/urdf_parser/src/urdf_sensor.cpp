@@ -38,7 +38,6 @@
 #include <urdf_sensor/sensor.h>
 #include <fstream>
 #include <sstream>
-#include <boost/lexical_cast.hpp>
 #include <algorithm>
 #include <tinyxml.h>
 #include "urdf_parser/outputdecl.h"
@@ -58,13 +57,9 @@ bool parseCamera(Camera &camera, TiXmlElement* config)
     const char* width_char = image->Attribute("width");
     if (width_char)
     {
-      try
+      if( !stringToUnsignedInt(width_char,camera.width) )
       {
-        camera.width = boost::lexical_cast<unsigned int>(width_char);
-      }
-      catch (boost::bad_lexical_cast &e)
-      {
-        logError("Camera image width [%s] is not a valid int: %s", width_char, e.what());
+        logError("Camera image width [%s] is not a valid int", width_char);
         return false;
       }
     }
@@ -77,13 +72,9 @@ bool parseCamera(Camera &camera, TiXmlElement* config)
     const char* height_char = image->Attribute("height");
     if (height_char)
     {
-      try
+      if( !stringToInt(height_char,camera.height) )
       {
-        camera.height = boost::lexical_cast<unsigned int>(height_char);
-      }
-      catch (boost::bad_lexical_cast &e)
-      {
-        logError("Camera image height [%s] is not a valid int: %s", height_char, e.what());
+        logError("Camera image height [%s] is not a valid int", height_char);
         return false;
       }
     }
@@ -105,13 +96,9 @@ bool parseCamera(Camera &camera, TiXmlElement* config)
     const char* hfov_char = image->Attribute("hfov");
     if (hfov_char)
     {
-      try
+      if( !stringToDouble(hfov_char,camera.hvof) )
       {
-        camera.hfov = boost::lexical_cast<double>(hfov_char);
-      }
-      catch (boost::bad_lexical_cast &e)
-      {
-        logError("Camera image hfov [%s] is not a valid float: %s", hfov_char, e.what());
+        logError("Camera image hfov [%s] is not a valid float", hfov_char);
         return false;
       }
     }
@@ -124,13 +111,9 @@ bool parseCamera(Camera &camera, TiXmlElement* config)
     const char* near_char = image->Attribute("near");
     if (near_char)
     {
-      try
+      if( !stringToDouble(near_char,camera.near) )
       {
-        camera.near = boost::lexical_cast<double>(near_char);
-      }
-      catch (boost::bad_lexical_cast &e)
-      {
-        logError("Camera image near [%s] is not a valid float: %s", near_char, e.what());
+        logError("Camera image near [%s] is not a valid float", near_char);
         return false;
       }
     }
@@ -143,13 +126,9 @@ bool parseCamera(Camera &camera, TiXmlElement* config)
     const char* far_char = image->Attribute("far");
     if (far_char)
     {
-      try
+      if( !stringToDouble(far_char,camera.far) )
       {
-        camera.far = boost::lexical_cast<double>(far_char);
-      }
-      catch (boost::bad_lexical_cast &e)
-      {
-        logError("Camera image far [%s] is not a valid float: %s", far_char, e.what());
+        logError("Camera image far [%s] is not a valid float", far_char);
         return false;
       }
     }
@@ -179,13 +158,9 @@ bool parseRay(Ray &ray, TiXmlElement* config)
     const char* samples_char = horizontal->Attribute("samples");
     if (samples_char)
     {
-      try
+      if( !stringToInt(samples_char,camera.horizontal_samples) )
       {
-        ray.horizontal_samples = boost::lexical_cast<unsigned int>(samples_char);
-      }
-      catch (boost::bad_lexical_cast &e)
-      {
-        logError("Ray horizontal samples [%s] is not a valid float: %s", samples_char, e.what());
+        logError("Ray horizontal samples [%s] is not a valid float", samples_char);
         return false;
       }
     }
@@ -193,11 +168,7 @@ bool parseRay(Ray &ray, TiXmlElement* config)
     const char* resolution_char = horizontal->Attribute("resolution");
     if (resolution_char)
     {
-      try
-      {
-        ray.horizontal_resolution = boost::lexical_cast<double>(resolution_char);
-      }
-      catch (boost::bad_lexical_cast &e)
+      if( !stringToDouble(resoulution_char,camera.horizontal_resolution) )
       {
         logError("Ray horizontal resolution [%s] is not a valid float: %s", resolution_char, e.what());
         return false;
@@ -207,13 +178,9 @@ bool parseRay(Ray &ray, TiXmlElement* config)
     const char* min_angle_char = horizontal->Attribute("min_angle");
     if (min_angle_char)
     {
-      try
+      if( !stringToDouble(min_angle_char,ray.horizontal_min_angle) )
       {
-        ray.horizontal_min_angle = boost::lexical_cast<double>(min_angle_char);
-      }
-      catch (boost::bad_lexical_cast &e)
-      {
-        logError("Ray horizontal min_angle [%s] is not a valid float: %s", min_angle_char, e.what());
+        logError("Ray horizontal min_angle [%s] is not a valid float", min_angle_char);
         return false;
       }
     }
@@ -221,13 +188,9 @@ bool parseRay(Ray &ray, TiXmlElement* config)
     const char* max_angle_char = horizontal->Attribute("max_angle");
     if (max_angle_char)
     {
-      try
+      if( !stringToDouble(max_angle_char,ray.horizontal_max_angle) )
       {
-        ray.horizontal_max_angle = boost::lexical_cast<double>(max_angle_char);
-      }
-      catch (boost::bad_lexical_cast &e)
-      {
-        logError("Ray horizontal max_angle [%s] is not a valid float: %s", max_angle_char, e.what());
+        logError("Ray horizontal max_angle [%s] is not a valid float", max_angle_char);
         return false;
       }
     }

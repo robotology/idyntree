@@ -37,6 +37,13 @@
 #ifndef URDF_INTERFACE_COLOR_H
 #define URDF_INTERFACE_COLOR_H
 
+//For using the M_PI macro in visual studio it
+//is necessary to define _USE_MATH_DEFINES
+#ifndef _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
+#endif
+
+
 #include <string>
 #include <vector>
 #include <math.h>
@@ -63,7 +70,7 @@ public:
   {
     this->clear();
     std::vector<std::string> pieces;
-    std::vector<float> rgba;
+    std::vector<double> rgba;
     splitString(vector_str, pieces);
     for (unsigned int i = 0; i < pieces.size(); ++i)
     {
@@ -86,10 +93,10 @@ public:
       return false;
     }
 
-    this->r = rgba[0];
-    this->g = rgba[1];
-    this->b = rgba[2];
-    this->a = rgba[3];
+    this->r = (float)rgba[0];
+    this->g = (float)rgba[1];
+    this->b = (float)rgba[2];
+    this->a = (float)rgba[3];
 
     return true;
   };

@@ -61,16 +61,38 @@
 #ifndef URDF_SENSOR_H
 #define URDF_SENSOR_H
 
+#ifndef URDF_USE_PLAIN_POINTERS
+
+#include <boost/shared_ptr.hpp>
+
+#endif
+
 #include <string>
 #include <vector>
 #include <map>
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
 #include "urdf_model/pose.h"
 #include "urdf_model/joint.h"
 #include "urdf_model/link.h"
 
 namespace urdf{
+
+	
+#ifdef URDF_USE_PLAIN_POINTERS
+class VisualSensor;
+
+typedef VisualSensor * VisualSensorPtr;
+
+inline void resetPtr(VisualSensorPtr & ptr) { if(ptr) { ptr=NULL; }  }
+inline void resetPtr(VisualSensorPtr & ptr, VisualSensor* plain_ptr) { ptr = plain_ptr; }
+
+
+#else
+
+class VisualSensor;
+
+typedef boost::shared_ptr<VisualSensor> VisualSensorPtr;
+
+#endif
 
 class VisualSensor
 {
@@ -148,28 +170,28 @@ public:
   Pose origin;
 
   /// sensor
-  boost::shared_ptr<VisualSensor> sensor;
+  VisualSensorPtr sensor;
 
 
   /// Parent link element name.  A pointer is stored in parent_link_.
   std::string parent_link_name;
 
-  boost::shared_ptr<Link> getParent() const
-  {return parent_link_.lock();};
+  LinkPtr getParent() const
+  {return LinkWeakPtrToLinkPtr(parent_link_);};
 
-  void setParent(boost::shared_ptr<Link> parent)
+  void setParent(LinkPtr parent)
   {  this->parent_link_ = parent; }
   
   void clear()
   {
     this->name.clear();
-    this->sensor.reset();
+    resetPtr(this->sensor);
     this->parent_link_name.clear();
-    this->parent_link_.reset();
+    resetPtr(this->parent_link_);
   };
 
 private:
-  boost::weak_ptr<Link> parent_link_;
+  LinkWeakPtr parent_link_;
 
 };
 }

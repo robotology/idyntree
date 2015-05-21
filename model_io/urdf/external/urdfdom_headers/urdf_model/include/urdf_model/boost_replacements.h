@@ -54,6 +54,18 @@ bool inline stringToDouble(const std::string & inStr, double & outDouble)
     return true;
 }
 
+bool inline stringToInt(const std::string & inStr, int & outInt)
+{
+    outInt = std::atoi(inStr.c_str());
+    return true;
+}
+
+bool inline stringToUnsignedInt(const std::string & inStr, unsigned int & outInt)
+{
+    outInt = (unsigned int)std::atoi(inStr.c_str());
+    return true;
+}
+
 std::string inline intToString(const int inInt)
 {
     std::stringstream ss;

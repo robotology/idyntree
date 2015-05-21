@@ -54,7 +54,7 @@ private:
     static std::string vector2string(const std::vector<int> & vec) 
     {
         std::stringstream ss;
-        for(int l=0; l < vec.size(); l++ ) { ss << " " << vec[l]; }
+        for(unsigned int l=0; l < vec.size(); l++ ) { ss << " " << vec[l]; }
         return ss.str();
     }
     

@@ -48,6 +48,7 @@ namespace CoDyCo
     {
         base_pos = arg.base_pos;
         jnt_pos = arg.jnt_pos;
+		return *this;
     }
 
 

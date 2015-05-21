@@ -58,7 +58,7 @@ VectorDynSize::~VectorDynSize()
 
 void VectorDynSize::zero()
 {
-    for(int i=0; i < this->size(); i++ )
+    for(unsigned int i=0; i < this->size(); i++ )
     {
         this->m_data[i] = 0.0;
     }
@@ -146,7 +146,7 @@ std::string VectorDynSize::toString() const
 {
     std::stringstream ss;
 
-    for(int i=0; i < this->size(); i++ )
+    for(unsigned int i=0; i < this->size(); i++ )
     {
         ss << this->m_data[i] << " ";
     }

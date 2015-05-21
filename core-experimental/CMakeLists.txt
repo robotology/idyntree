@@ -4,10 +4,6 @@
 
 project(iDynTree_Base CXX)
 
-if(MSVC)
-    set(CMAKE_DEBUG_POSTFIX "d")
-endif(MSVC)
-
 #local headers
 include_directories(include/iDynTree/Core)
 

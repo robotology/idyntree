@@ -220,7 +220,7 @@ bool extract_vector(const std::string & vector_string, std::string vector_name, 
     Parser prs(true);
     
     //Add the user defined variable (E/e and Pi/pi/PI are already defined in the Parser)
-    for(int i=0; i < variables.size(); i++ ) {
+    for(unsigned int i=0; i < variables.size(); i++ ) {
         bool check = prs.user_var.add(variables[i].c_str(),(double)var_values[i]);
         if( !check ) return false;
     }  
@@ -228,7 +228,7 @@ bool extract_vector(const std::string & vector_string, std::string vector_name, 
     //Then we parse the expression in the vector
     vec.resize(vector_elems_strs.size());
     
-    for(int i=0; i < vector_elems_strs.size(); i++ ) {
+    for(unsigned int i=0; i < vector_elems_strs.size(); i++ ) {
         char * res;
         //std::cout << "Called parser with " << vector_elems_strs[i] << std::endl;
         res = prs.parse(vector_elems_strs[i].c_str());

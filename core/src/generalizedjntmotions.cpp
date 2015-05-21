@@ -48,6 +48,7 @@ namespace CoDyCo
     {
         base_twist = arg.base_twist;
         jnt = arg.jnt;
+		return *this;
     }
 
 
