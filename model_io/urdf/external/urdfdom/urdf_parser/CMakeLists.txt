@@ -49,8 +49,8 @@ set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${URDFDOM_MODEL_PUBLIC
 
 INSTALL(TARGETS iDynTree_priv_urdfdom_model DESTINATION ${CMAKE_INSTALL_LIBDIR})
 #INSTALL(TARGETS iDynTree_priv_urdfdom_world DESTINATION ${CMAKE_INSTALL_LIBDIR})
-INSTALL(TARGETS check_urdf urdf_to_graphiz urdf_mem_test
-  DESTINATION ${CMAKE_INSTALL_BINDIR})
+#INSTALL(TARGETS check_urdf urdf_to_graphiz urdf_mem_test
+#  DESTINATION ${CMAKE_INSTALL_BINDIR})
 INSTALL(DIRECTORY include/urdf_parser DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 #INSTALL(DIRECTORY ../urdfdom_headers/urdf_model/include/urdf_model DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 #INSTALL(DIRECTORY ../urdfdom_headers/urdf_exception/include/urdf_exception  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
