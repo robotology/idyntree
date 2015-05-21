@@ -14,6 +14,10 @@ include(GNUInstallDirs)
 # hack: by default this would be 'lib/x86_64-linux-gnu'
 set(CMAKE_INSTALL_LIBDIR lib)
 
+if(NOT BUILD_SHARED_LIB)
+#add_definitions(-DURDFDOM_STATIC)
+endif()
+
 # we are building this internal copy only on windows
 # if we are not finding urdfdom, so to avoid to depend
 # on Boost we use plain pointers

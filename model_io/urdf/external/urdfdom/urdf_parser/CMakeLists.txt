@@ -13,7 +13,7 @@ set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE
 #target_link_libraries(iDynTree_priv_urdfdom_world ${TinyXML_LIBRARIES})
 #set_target_properties(iDynTree_priv_urdfdom_world PROPERTIES SOVERSION 0.3)
 
-add_library(iDynTree_priv_urdfdom_model src/pose.cpp
+add_library(iDynTree_priv_urdfdom_model SHARED src/pose.cpp
                                                src/model.cpp
                                                src/link.cpp
                                                src/joint.cpp
