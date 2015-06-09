@@ -58,12 +58,13 @@ namespace iCub {
 namespace iDynTree {
 
 
-DynTree::DynTree()
+DynTree::DynTree(): configured(false)
 {
 }
 
 DynTree::DynTree(const KDL::Tree & _tree,
                  KDL::CoDyCo::TreeSerialization serialization):
+                 configured(false),
                  undirected_tree(_tree,serialization)
 {
     std::string imu_link_name="";
@@ -75,7 +76,7 @@ DynTree::DynTree(const KDL::Tree & _tree,
                    const std::vector<std::string> & joint_sensor_names,
                    const std::string & imu_link_name,
                    KDL::CoDyCo::TreeSerialization serialization
-                   ):  undirected_tree(_tree,serialization)
+                   ):  configured(false), undirected_tree(_tree,serialization)
 {
     constructor(_tree,joint_sensor_names,imu_link_name,serialization);
 }
@@ -83,7 +84,7 @@ DynTree::DynTree(const KDL::Tree & _tree,
 DynTree::DynTree(const std::string urdf_file,
                  const std::vector<std::string> & joint_sensor_names,
                  const std::string & imu_link_name,
-                 KDL::CoDyCo::TreeSerialization  serialization)
+                 KDL::CoDyCo::TreeSerialization  serialization): configured(false)
 {
     KDL::Tree my_tree;
     if (!kdl_format_io::treeFromUrdfFile(urdf_file,my_tree))
@@ -99,6 +100,38 @@ DynTree::DynTree(const std::string urdf_file,
 
     this->setJointBoundMin(yarpJointMinLimit);
     this->setJointBoundMax(yarpJointMaxLimit);
+}
+
+bool DynTree::loadURDFModel(const std::string & urdf_file)
+{
+    KDL::Tree my_tree;
+    if (!kdl_format_io::treeFromUrdfFile(urdf_file,my_tree))
+    {
+        std::cerr << "DynTree loadURDFModel: Could not generate robot model from file " << urdf_file << "  and extract kdl tree" << std::endl;
+        return false;
+    }
+
+    std::vector<std::string> no_ft_sensors_names;
+    std::string no_imu = "";
+    constructor(my_tree,no_ft_sensors_names,no_imu);
+
+    bool ok = this->configured;
+
+    //Loading joint limits from URDF
+    yarp::sig::Vector yarpJointMinLimit(NrOfDOFs), yarpJointMaxLimit(NrOfDOFs);
+    ok = ok && DynTree::loadJointLimitsFromURDFFile(urdf_file, undirected_tree, yarpJointMinLimit, yarpJointMaxLimit);
+
+    ok = ok && this->setJointBoundMin(yarpJointMinLimit);
+    ok = ok && this->setJointBoundMax(yarpJointMaxLimit);
+
+    if( !ok )
+    {
+        std::cerr << "DynTree loadURDFModel: Could not generate robot model from file " << urdf_file << std::endl;
+        std::cerr << "If you believe iDynTree is failing to parse a valid URDF file, please open a bug at " << std::endl;
+        std::cerr << "https://github.com/robotology-playground/idyntree/issues/new" << std::endl;
+    }
+
+    return ok;
 }
 
 void DynTree::constructor(const KDL::Tree & _tree,
@@ -128,11 +161,13 @@ void DynTree::constructor(const KDL::Tree & _tree,
     world_base_frame = KDL::Frame::Identity();
 
     q = KDL::JntArray(NrOfDOFs);
-
+    SetToZero(q);
     is_X_dynamic_base_updated = false;
 
     dq = KDL::JntArray(NrOfDOFs);
+    SetToZero(dq);
     ddq = KDL::JntArray(NrOfDOFs);
+    SetToZero(ddq);
 
     torques = KDL::JntArray(NrOfDOFs);
 
@@ -189,10 +224,14 @@ void DynTree::constructor(const KDL::Tree & _tree,
 
     //end iDynTreeContact
 
+    three_zeros.resize(3);
+    three_zeros.zero();
 
     assert(ret == 0);
-    correctly_configure = true;
+    configured = true;
 }
+
+
 
 DynTree::~DynTree() { }
 
@@ -857,6 +896,10 @@ bool DynTree::setD2AngKDL(const KDL::JntArray & _d2q)
     return true;
 }
 
+bool DynTree::setGravity(const yarp::sig::Vector &gravity)
+{
+    return setInertialMeasureAndLinearVelocity(three_zeros,three_zeros,gravity,three_zeros);
+}
 
 bool DynTree::setInertialMeasureAndLinearVelocity(const yarp::sig::Vector &dp0, const yarp::sig::Vector &w0, const yarp::sig::Vector &ddp0, const yarp::sig::Vector &dw0)
 {
@@ -876,9 +919,7 @@ bool DynTree::setInertialMeasureAndLinearVelocity(const yarp::sig::Vector &dp0, 
 
 bool DynTree::setInertialMeasure(const yarp::sig::Vector &w0, const yarp::sig::Vector &dw0, const yarp::sig::Vector &ddp0)
 {
-    if( com_yarp.size() != 3 ) { com_yarp.resize(3); }
-    com_yarp.zero();
-    return setInertialMeasureAndLinearVelocity(com_yarp,w0,ddp0,dw0);
+    return setInertialMeasureAndLinearVelocity(three_zeros,w0,ddp0,dw0);
 }
 
 bool DynTree::setKinematicBaseVelAcc(const yarp::sig::Vector &base_vel, const yarp::sig::Vector &base_classical_acc)
@@ -968,7 +1009,7 @@ bool DynTree::getSensorMeasurement(const int sensor_index, yarp::sig::Vector &ft
     iDynTreetoYarp(measured_wrench,yarpWrench);
     //ftm.setSubvector(0,force_yarp);
     //ftm.setSubvector(3,torque_yarp);
-    ftm.setSubvector(0,yarpWrench); 
+    ftm.setSubvector(0,yarpWrench);
     return true;
 }
 
@@ -1559,7 +1600,7 @@ bool DynTree::dynamicRNEA()
         {
             //Todo add case that the force/wrench is the one of the parent ?
             ::iDynTree::Wrench measure_wrench;
-            
+
             ::iDynTree::SixAxisForceTorqueSensor * p_ft_sensor =
                 reinterpret_cast< ::iDynTree::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,i));
 
