@@ -23,6 +23,9 @@ For a typical installation of the `codyco-superbuild`, this will require adding 
 export PYTHONPATH=$PYTHONPATH:~/src/codyco-superbuild/build/install/lib/python2.7/dist-packages/
 ~~~
 
+#### Matlab
+You should add to Matlab path the `{CMAKE_INSTALL_PREFIX}/mex` directory. By default this directory should be `/usr/local/mex`, or if you used a [YCM](https://github.com/robotology/ycm/) superbuild something like `SUPERBUILD_BUILD_DIRECTORY/install/mex`. 
+
 #### Dependencies
 ##### Build dependencies
 - [CMake](http://www.cmake.org)
