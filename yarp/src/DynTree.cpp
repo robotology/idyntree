@@ -708,7 +708,7 @@ void DynTree::store_contacts_results()
 
             KDL::Frame H_link_contactFrame = H_link_skinFrame*H_skinFrame_contactFrame;
 
-            f_ext[iDynTree_link_index] = H_link_contactFrame*f_ext_contactFrame;
+            f_ext[iDynTree_link_index] = f_ext[iDynTree_link_index] + H_link_contactFrame*f_ext_contactFrame;
         }
     }
 }
@@ -1470,6 +1470,9 @@ bool DynTree::estimateContactForcesFromSkin()
 
         std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
         std::cout << x_contacts[i].toString() << std::endl;
+
+        std::cout << "A_contacts*x_contacts : " << std::endl;
+        std::cout << (A_contacts[i]*x_contacts[i]).toString() << std::endl;
         */
         #endif
     }
@@ -1585,10 +1588,12 @@ bool DynTree::dynamicRNEA()
         if(  base_residual_f.force.Norm() > 1e-5 )
         {
             std::cout << "iDynTree WARNING: base_residual_f.force.Norm() is " << base_residual_f.force.Norm() << " instead of zero." << std::endl;
+            ret = -1;
         }
         if(  base_residual_f.torque.Norm() > 1e-5 )
         {
             std::cout << "iDynTree WARNING: base_residual_f.torque.Norm() is " << base_residual_f.torque.Norm() << " instead of zero." << std::endl;
+            ret = -1;
         }
         //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
     }
