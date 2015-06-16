@@ -7,6 +7,7 @@
 
 #include "DynTree.h"
 #include "yarp_kdl.h"
+#include "yarp_iDynTree.h"
 
 //Loops from KDL_CoDyCo
 #include <kdl_codyco/position_loops.hpp>
@@ -19,7 +20,14 @@
 #include <kdl_codyco/regressor_utils.hpp>
 #include <kdl_codyco/generalizedjntpositions.hpp>
 
-#include "kdl_codyco/six_axis_ft_sensor.hpp"
+#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+#include "kdl_codyco/KDLConversions.h"
+#include "iDynTree/Core/Transform.h"
+#include "iDynTree/Core/Wrench.h"
+#include "iDynTree/Core/SpatialForceVectorRaw.h"
+
+#include <kdl_codyco/regressor_utils.hpp>
+#include <kdl_codyco/regressors/dirl_utils.hpp>
 
 #include <kdl_format_io/urdf_import.hpp>
 
@@ -50,12 +58,13 @@ namespace iCub {
 namespace iDynTree {
 
 
-DynTree::DynTree()
+DynTree::DynTree(): configured(false)
 {
 }
 
 DynTree::DynTree(const KDL::Tree & _tree,
                  KDL::CoDyCo::TreeSerialization serialization):
+                 configured(false),
                  undirected_tree(_tree,serialization)
 {
     std::string imu_link_name="";
@@ -67,7 +76,7 @@ DynTree::DynTree(const KDL::Tree & _tree,
                    const std::vector<std::string> & joint_sensor_names,
                    const std::string & imu_link_name,
                    KDL::CoDyCo::TreeSerialization serialization
-                   ):  undirected_tree(_tree,serialization)
+                   ):  configured(false), undirected_tree(_tree,serialization)
 {
     constructor(_tree,joint_sensor_names,imu_link_name,serialization);
 }
@@ -75,7 +84,7 @@ DynTree::DynTree(const KDL::Tree & _tree,
 DynTree::DynTree(const std::string urdf_file,
                  const std::vector<std::string> & joint_sensor_names,
                  const std::string & imu_link_name,
-                 KDL::CoDyCo::TreeSerialization  serialization)
+                 KDL::CoDyCo::TreeSerialization  serialization): configured(false)
 {
     KDL::Tree my_tree;
     if (!kdl_format_io::treeFromUrdfFile(urdf_file,my_tree))
@@ -91,6 +100,38 @@ DynTree::DynTree(const std::string urdf_file,
 
     this->setJointBoundMin(yarpJointMinLimit);
     this->setJointBoundMax(yarpJointMaxLimit);
+}
+
+bool DynTree::loadURDFModel(const std::string & urdf_file)
+{
+    KDL::Tree my_tree;
+    if (!kdl_format_io::treeFromUrdfFile(urdf_file,my_tree))
+    {
+        std::cerr << "DynTree loadURDFModel: Could not generate robot model from file " << urdf_file << "  and extract kdl tree" << std::endl;
+        return false;
+    }
+
+    std::vector<std::string> no_ft_sensors_names;
+    std::string no_imu = "";
+    constructor(my_tree,no_ft_sensors_names,no_imu);
+
+    bool ok = this->configured;
+
+    //Loading joint limits from URDF
+    yarp::sig::Vector yarpJointMinLimit(NrOfDOFs), yarpJointMaxLimit(NrOfDOFs);
+    ok = ok && DynTree::loadJointLimitsFromURDFFile(urdf_file, undirected_tree, yarpJointMinLimit, yarpJointMaxLimit);
+
+    ok = ok && this->setJointBoundMin(yarpJointMinLimit);
+    ok = ok && this->setJointBoundMax(yarpJointMaxLimit);
+
+    if( !ok )
+    {
+        std::cerr << "DynTree loadURDFModel: Could not generate robot model from file " << urdf_file << std::endl;
+        std::cerr << "If you believe iDynTree is failing to parse a valid URDF file, please open a bug at " << std::endl;
+        std::cerr << "https://github.com/robotology-playground/idyntree/issues/new" << std::endl;
+    }
+
+    return ok;
 }
 
 void DynTree::constructor(const KDL::Tree & _tree,
@@ -120,11 +161,13 @@ void DynTree::constructor(const KDL::Tree & _tree,
     world_base_frame = KDL::Frame::Identity();
 
     q = KDL::JntArray(NrOfDOFs);
-
+    SetToZero(q);
     is_X_dynamic_base_updated = false;
 
     dq = KDL::JntArray(NrOfDOFs);
+    SetToZero(dq);
     ddq = KDL::JntArray(NrOfDOFs);
+    SetToZero(ddq);
 
     torques = KDL::JntArray(NrOfDOFs);
 
@@ -139,7 +182,7 @@ void DynTree::constructor(const KDL::Tree & _tree,
     dynamic_traversal = KDL::CoDyCo::Traversal();
 
     //measured_wrenches =  std::vector< KDL::Wrench >(NrOfFTSensors);
-    sensor_measures.setNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,NrOfFTSensors);
+    sensor_measures.setNrOfSensors(::iDynTree::SIX_AXIS_FORCE_TORQUE,NrOfFTSensors);
 
     v = std::vector<KDL::Twist>(NrOfLinks);
     a = std::vector<KDL::Twist>(NrOfLinks);
@@ -181,10 +224,14 @@ void DynTree::constructor(const KDL::Tree & _tree,
 
     //end iDynTreeContact
 
+    three_zeros.resize(3);
+    three_zeros.zero();
 
     assert(ret == 0);
-    correctly_configure = true;
+    configured = true;
 }
+
+
 
 DynTree::~DynTree() { }
 
@@ -225,7 +272,7 @@ bool DynTree::generateSensorsTree(const std::vector<std::string> & ft_names,
     for(int i=0; i < ft_names.size(); i++ )
     {
         //Creating a new ft sensor to be added in the ft sensors structure
-        KDL::CoDyCo::SixAxisForceTorqueSensor new_sens;
+        ::iDynTree::SixAxisForceTorqueSensor new_sens;
 
 
         if( this->undirected_tree.getJunction(ft_names[i]) != this->undirected_tree.getInvalidJunctionIterator() )
@@ -254,11 +301,11 @@ bool DynTree::generateSensorsTree(const std::vector<std::string> & ft_names,
 
             // Currently we support only the case where the ft sensor frame is equal
             // to the child link frame
-            new_sens.setSecondLinkSensorTransform(child_index,KDL::Frame::Identity());
+            new_sens.setSecondLinkSensorTransform(child_index,::iDynTree::Transform());
 
             // Then, the parent_link_H_sensor transform is simply parent_link_H_child_link transform
             KDL::Frame parent_link_H_sensor = junct_it->pose(0.0,false);
-            new_sens.setFirstLinkSensorTransform(parent_index,parent_link_H_sensor);
+            new_sens.setFirstLinkSensorTransform(parent_index,::iDynTree::ToiDynTree(parent_link_H_sensor));
 
         }
         else
@@ -344,18 +391,18 @@ int DynTree::buildSubGraphStructure(const std::vector<std::string> & ft_names)
 KDL::Wrench DynTree::getMeasuredWrench(int link_id)
 {
 
-    KDL::Wrench total_measured_applied_wrench = KDL::Wrench::Zero();
+    ::iDynTree::Wrench total_measured_applied_wrench = ::iDynTree::Wrench();
     for(int ft=0; ft < NrOfFTSensors; ft++ )
     {
-        KDL::CoDyCo::SixAxisForceTorqueSensor * sens
-            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft);
+        ::iDynTree::SixAxisForceTorqueSensor * sens
+            = (::iDynTree::SixAxisForceTorqueSensor *) sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft);
 
         assert(sens != 0);
 
-        KDL::Wrench measured_wrench_on_link = KDL::Wrench::Zero();
-        KDL::Wrench measured_wrench_by_sensor;
+        ::iDynTree::Wrench measured_wrench_on_link = ::iDynTree::Wrench();//::iDynTree::ToiDynTree(KDL::Wrench::Zero());
+        ::iDynTree::Wrench measured_wrench_by_sensor;
 
-        bool ok = sensor_measures.getMeasurement(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft,measured_wrench_by_sensor);
+        bool ok = sensor_measures.getMeasurement(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft,measured_wrench_by_sensor);
 
         assert(ok);
 
@@ -364,10 +411,10 @@ KDL::Wrench DynTree::getMeasuredWrench(int link_id)
         sens->getWrenchAppliedOnLink(link_id,measured_wrench_by_sensor,measured_wrench_on_link);
 
         //Sum the given wrench to the return value
-        total_measured_applied_wrench += measured_wrench_on_link;
+        total_measured_applied_wrench = total_measured_applied_wrench+measured_wrench_on_link;
     }
 
-    return total_measured_applied_wrench;
+    return ::iDynTree::ToKDL(total_measured_applied_wrench);
 }
 
 /*
@@ -661,7 +708,7 @@ void DynTree::store_contacts_results()
 
             KDL::Frame H_link_contactFrame = H_link_skinFrame*H_skinFrame_contactFrame;
 
-            f_ext[iDynTree_link_index] = H_link_contactFrame*f_ext_contactFrame;
+            f_ext[iDynTree_link_index] = f_ext[iDynTree_link_index] + H_link_contactFrame*f_ext_contactFrame;
         }
     }
 }
@@ -849,6 +896,10 @@ bool DynTree::setD2AngKDL(const KDL::JntArray & _d2q)
     return true;
 }
 
+bool DynTree::setGravity(const yarp::sig::Vector &gravity)
+{
+    return setInertialMeasureAndLinearVelocity(three_zeros,three_zeros,gravity,three_zeros);
+}
 
 bool DynTree::setInertialMeasureAndLinearVelocity(const yarp::sig::Vector &dp0, const yarp::sig::Vector &w0, const yarp::sig::Vector &ddp0, const yarp::sig::Vector &dw0)
 {
@@ -868,9 +919,7 @@ bool DynTree::setInertialMeasureAndLinearVelocity(const yarp::sig::Vector &dp0, 
 
 bool DynTree::setInertialMeasure(const yarp::sig::Vector &w0, const yarp::sig::Vector &dw0, const yarp::sig::Vector &ddp0)
 {
-    if( com_yarp.size() != 3 ) { com_yarp.resize(3); }
-    com_yarp.zero();
-    return setInertialMeasureAndLinearVelocity(com_yarp,w0,ddp0,dw0);
+    return setInertialMeasureAndLinearVelocity(three_zeros,w0,ddp0,dw0);
 }
 
 bool DynTree::setKinematicBaseVelAcc(const yarp::sig::Vector &base_vel, const yarp::sig::Vector &base_classical_acc)
@@ -916,11 +965,15 @@ bool DynTree::setSensorMeasurement(const int sensor_index, const yarp::sig::Vect
         return false;
     }
 
-    KDL::Wrench measured_wrench;
-    YarptoKDL(ftm.subVector(0,2),measured_wrench.force);
-    YarptoKDL(ftm.subVector(3,5),measured_wrench.torque);
+    //::iDynTree::Wrench measured_wrench;
+    //YarptoKDL(ftm.subVector(0,2),measured_wrench.force);
+    //YarptoKDL(ftm.subVector(3,5),measured_wrench.torque);
 
-    bool ret = sensor_measures.setMeasurement(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,sensor_index,measured_wrench);
+    ::iDynTree::Wrench measured_wrench;
+    YarptoiDynTree(ftm,measured_wrench);
+    //YarptoiDynTree(ftm.subVector(3,5),measured_wrench.torque);
+
+    bool ret = sensor_measures.setMeasurement(::iDynTree::SIX_AXIS_FORCE_TORQUE,sensor_index,measured_wrench);
 
     are_contact_estimated = false;
 
@@ -930,8 +983,9 @@ bool DynTree::setSensorMeasurement(const int sensor_index, const yarp::sig::Vect
 bool DynTree::getSensorMeasurement(const int sensor_index, yarp::sig::Vector &ftm) const
 {
     //\todo avoid unnecessary memory allocation
-    yarp::sig::Vector force_yarp(3);
-    yarp::sig::Vector torque_yarp(3);
+    //yarp::sig::Vector force_yarp(3);
+    //yarp::sig::Vector torque_yarp(3);
+    yarp::sig::Vector yarpWrench(6);
     if( sensor_index < 0 ||
         sensor_index > (int)NrOfFTSensors )
     {
@@ -943,17 +997,19 @@ bool DynTree::getSensorMeasurement(const int sensor_index, yarp::sig::Vector &ft
         ftm.resize(6);
     }
 
-    KDL::Wrench measured_wrench;
+    ::iDynTree::Wrench measured_wrench;
 
-    bool ok = sensor_measures.getMeasurement(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,sensor_index,measured_wrench);
+    bool ok = sensor_measures.getMeasurement(::iDynTree::SIX_AXIS_FORCE_TORQUE,sensor_index,measured_wrench);
 
     assert(ok);
 
-    KDLtoYarp(measured_wrench.force,force_yarp);
-    KDLtoYarp(measured_wrench.torque,torque_yarp);
+    //KDLtoYarp(measured_wrench.force,force_yarp);
+    //KDLtoYarp(measured_wrench.torque,torque_yarp);
 
-    ftm.setSubvector(0,force_yarp);
-    ftm.setSubvector(3,torque_yarp);
+    iDynTreetoYarp(measured_wrench,yarpWrench);
+    //ftm.setSubvector(0,force_yarp);
+    //ftm.setSubvector(3,torque_yarp);
+    ftm.setSubvector(0,yarpWrench);
     return true;
 }
 
@@ -1414,6 +1470,9 @@ bool DynTree::estimateContactForcesFromSkin()
 
         std::cout << "x_contacts " << i << " has size " << x_contacts[i].size() << std::endl;
         std::cout << x_contacts[i].toString() << std::endl;
+
+        std::cout << "A_contacts*x_contacts : " << std::endl;
+        std::cout << (A_contacts[i]*x_contacts[i]).toString() << std::endl;
         */
         #endif
     }
@@ -1529,10 +1588,12 @@ bool DynTree::dynamicRNEA()
         if(  base_residual_f.force.Norm() > 1e-5 )
         {
             std::cout << "iDynTree WARNING: base_residual_f.force.Norm() is " << base_residual_f.force.Norm() << " instead of zero." << std::endl;
+            ret = -1;
         }
         if(  base_residual_f.torque.Norm() > 1e-5 )
         {
             std::cout << "iDynTree WARNING: base_residual_f.torque.Norm() is " << base_residual_f.torque.Norm() << " instead of zero." << std::endl;
+            ret = -1;
         }
         //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
     }
@@ -1543,16 +1604,16 @@ bool DynTree::dynamicRNEA()
         for(int i=0; i < NrOfFTSensors; i++ )
         {
             //Todo add case that the force/wrench is the one of the parent ?
-            KDL::Wrench measure_wrench;
+            ::iDynTree::Wrench measure_wrench;
 
-            KDL::CoDyCo::SixAxisForceTorqueSensor * p_ft_sensor =
-                reinterpret_cast<KDL::CoDyCo::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,i));
+            ::iDynTree::SixAxisForceTorqueSensor * p_ft_sensor =
+                reinterpret_cast< ::iDynTree::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,i));
 
-            bool ok = p_ft_sensor->simulateMeasurement(dynamic_traversal,f,measure_wrench);
+            bool ok = KDL::CoDyCo::Regressors::simulateMeasurement_sixAxisFTSensor(dynamic_traversal,f,p_ft_sensor,measure_wrench);
 
             assert(ok);
 
-            ok = sensor_measures.setMeasurement(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,i,measure_wrench);
+            ok = sensor_measures.setMeasurement(::iDynTree::SIX_AXIS_FORCE_TORQUE,i,measure_wrench);
 
             assert(ok);
         }
@@ -2276,11 +2337,11 @@ int DynTree::getFTSensorIndex(const std::string & ft_name) const
 
     unsigned int junction_index = junction_it->getJunctionIndex();
     // Search the ft index given the associated junction index
-    assert( sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE) == NrOfFTSensors );
+    assert( sensors_tree.getNrOfSensors(::iDynTree::SIX_AXIS_FORCE_TORQUE) == NrOfFTSensors );
     for( int ft = 0; ft < NrOfFTSensors; ft++ )
     {
-        KDL::CoDyCo::SixAxisForceTorqueSensor * p_ft_sensor =
-                dynamic_cast<KDL::CoDyCo::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft));
+        ::iDynTree::SixAxisForceTorqueSensor * p_ft_sensor =
+                dynamic_cast< ::iDynTree::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft));
         assert(p_ft_sensor != 0);
         int ft_junction_index = p_ft_sensor->getParentIndex();
         if( ft_junction_index == junction_index )

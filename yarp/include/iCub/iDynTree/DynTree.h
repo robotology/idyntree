@@ -84,7 +84,7 @@
 #include <kdl_codyco/momentumjacobian.hpp>
 #include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
 
-#include "kdl_codyco/sensors.hpp"
+#include "iDynTree/Sensors/Sensors.hpp"
 
 #include "iDyn2KDL.h"
 
@@ -157,6 +157,10 @@ class iDynTreeLinkAndFrame {
  */
 class DynTree  {
     private:
+        /** configured flag: if true the model was correctly loaded
+         *  if false not an all the methods will return false */
+        bool configured;
+
         KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization and the TreePartition */
 
         //Violating DRY principle, but for code clarity
@@ -198,8 +202,8 @@ class DynTree  {
         //Sensors measures
         //std::vector< KDL::Wrench > measured_wrenches;
         //KDL::CoDyCo::FTSensorList ft_list;
-        KDL::CoDyCo::SensorsTree     sensors_tree;
-        KDL::CoDyCo::SensorsMeasurements sensor_measures;
+        ::iDynTree::SensorsList     sensors_tree;
+        ::iDynTree::SensorsMeasurements sensor_measures;
 
 
         //Index representation of the Kinematic tree and the dynamics subtrees
@@ -291,6 +295,7 @@ class DynTree  {
 
         //Generic 3d buffer
         mutable yarp::sig::Vector com_yarp;
+        mutable yarp::sig::Vector three_zeros;
 
         mutable yarp::sig::Vector sixteen_double_zero;
         mutable KDL::Frame error_frame;
@@ -313,9 +318,6 @@ class DynTree  {
         //MassMatrix
         KDL::CoDyCo::FloatingJntSpaceInertiaMatrix fb_jnt_mass_matrix;
         std::vector<KDL::RigidBodyInertia> subtree_crbi;
-
-        //Flag set to true if the object was correctly configured
-        bool correctly_configure;
 
 
         //Map for correctly deal with skinDynLib IDs
@@ -375,6 +377,15 @@ class DynTree  {
                 KDL::CoDyCo::TreeSerialization  serialization=KDL::CoDyCo::TreeSerialization());
 
         virtual ~DynTree();
+
+        /**
+         * Load a URDF model of the robot in the DynTree class.
+         *
+         * @param urdf_file_name the path to the urdf file loaded.
+         * @return true if all went well (the file was opened and the model correctly loaded)
+         *         false otherwise
+         */
+        bool loadURDFModel(const std::string & urdf_file_name);
 
         /**
          * Get the number of (internal) degrees of freedom of the tree
@@ -591,13 +602,22 @@ class DynTree  {
         virtual bool getD2AngKDL(KDL::JntArray & d2q) const;
 
         /**
+         * Set the gravity vector.
+         * As the setInertialMeasure method, but setting angular velocity and angular acceleration to zero.
+         *
+         * @param ddp0 a 3x1 vector with the 3d vector of gravity, expressed in the kinematic base frame.
+         * @return true if succeeds (correct vectors size), false otherwise
+         */
+        virtual bool setGravity(const yarp::sig::Vector &gravity);
+
+        /**
         * Set the inertial sensor measurements
         * @param w0 a 3x1 vector with the initial/measured angular velocity
         * @param dw0 a 3x1 vector with the initial/measured angular acceleration
         * @param ddp0 a 3x1 vector with the initial/measured 3D proper (with gravity) linear acceleration
         * @return true if succeeds (correct vectors size), false otherwise
         *
-        * \note this variables are considered to be in **base** reference frame
+        * \note this variables are considered to be in **kinematic base** reference frame
         */
         virtual bool setInertialMeasure(const yarp::sig::Vector &w0, const yarp::sig::Vector &dw0, const yarp::sig::Vector &ddp0);
 

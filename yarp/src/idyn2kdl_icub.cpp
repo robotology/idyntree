@@ -6,12 +6,14 @@
 
 
 #include <iCub/iDynTree/idyn2kdl_icub.h>
+#include <iCub/iKin/iKinFwd.h>
 #include <yarp/math/Math.h>
 #include <yarp/os/Log.h>
 
 #include <kdl_codyco/treefksolverpos_iterative.hpp>
 
 #include <kdl/frames_io.hpp>
+#include <iCub/iDynTree/yarp_kdl.h>
 
 using yarp::math::cat;
 
@@ -482,6 +484,22 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     KDL::Frame r_sole_H_r_foot = r_sole_H_r_foot_dh_frame*r_foot_dh_frame_H_r_foot;
 
     addFrame(icub_kdl,r_sole_H_r_foot.Inverse(),"r_foot","r_sole");
+
+    // Export chest_skin_frame, see https://github.com/robotology/icub-main/issues/124 for more info
+    KDL::Frame root_link_H_chest;
+    int retChest = pos_solv.JntToCart(pos,root_link_H_chest,"chest");
+    YARP_ASSERT(retChest == 0);
+    KDL::Frame root_link_H_chest_skin_frame;
+    iCub::iKin::iCubTorso chest_skin_frame_chest;
+    yarp::sig::Vector qTorso(chest_skin_frame_chest.getN());
+    qTorso.zero();
+    chest_skin_frame_chest.setAng(qTorso);
+    YARP_ASSERT(YarptoKDL(chest_skin_frame_chest.getH(),root_link_H_chest_skin_frame));
+
+    std::cout << "root_link_H_chest_skin_frame is " << root_link_H_chest_skin_frame << std::endl;
+
+    KDL::Frame chest_H_chest_skin_frame = root_link_H_chest.Inverse()*root_link_H_chest_skin_frame;
+    addFrame(icub_kdl,chest_H_chest_skin_frame,"chest","chest_skin_frame");
 
 
     //std::cout << "Returning from KDL: " << KDL::CoDyCo::UndirectedTree(icub_kdl).toString() << std::endl;

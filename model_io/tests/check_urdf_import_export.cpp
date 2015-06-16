@@ -1,13 +1,13 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
-* 
+*
 *  Copyright (c) 2008, Willow Garage, Inc.
 *  All rights reserved.
-* 
+*
 *  Redistribution and use in source and binary forms, with or without
 *  modification, are permitted provided that the following conditions
 *  are met:
-* 
+*
 *   * Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   * Redistributions in binary form must reproduce the above
@@ -17,7 +17,7 @@
 *   * Neither the name of the Willow Garage nor the names of its
 *     contributors may be used to endorse or promote products derived
 *     from this software without specific prior written permission.
-* 
+*
 *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -67,9 +67,9 @@ double random_double()
 int main(int argc, char** argv)
 {
     srand(time(NULL));
-    
+
     Tree my_tree, my_tree_converted;
-    if (!kdl_format_io::treeFromUrdfFile(argv[1],my_tree)) 
+    if (!kdl_format_io::treeFromUrdfFile(argv[1],my_tree))
     {cerr << "Could not generate robot model and extract kdl tree" << endl; return EXIT_FAILURE;}
 
     // walk through tree
@@ -78,41 +78,45 @@ int main(int argc, char** argv)
     cout << " ======================================" << endl;
     SegmentMap::const_iterator root = my_tree.getRootSegment();
     printLink(root, "");
-  
+
+
+
     //Export current tree
+    cout << "Writing KDL::Tree to a urdf file" << endl;
     std::string output_name = "test_kdl_format_io.urdf";
     if( !kdl_format_io::treeToUrdfFile(output_name,my_tree) )
     {cerr <<"Could not generate urdf from kdl tree" << endl; return EXIT_FAILURE;}
-  
+
     //Re-importing it
+    cout << "Reimporting  written urdf file" << endl;
     if( !kdl_format_io::treeFromUrdfFile(output_name,my_tree_converted) )
     {cerr <<"Could not re-import back generated urdf file" << endl; return EXIT_FAILURE;}
-  
+
     //Preliminary test
-    if( my_tree.getNrOfJoints() != my_tree_converted.getNrOfJoints() ) { 
+    if( my_tree.getNrOfJoints() != my_tree_converted.getNrOfJoints() ) {
         cerr << "Error in conversion " << std::endl;
         return EXIT_FAILURE;
     }
-  
+
     //Running inverse dynamics for being sure all went well
     TreeIdSolver_RNE original_slv(my_tree), converted_slv(my_tree_converted);
-  
-      
+
+
     JntArray q,dq,ddq,torques,torques_converted;
     std::vector<Wrench> f,f_ext;
     Wrench base_force, base_force_converted;
-    Twist base_vel, base_acc;       
-    
+    Twist base_vel, base_acc;
+
     q = dq = ddq = torques = torques_converted = JntArray(my_tree.getNrOfJoints());
     f = f_ext = std::vector<Wrench>(my_tree.getNrOfSegments(),KDL::Wrench::Zero());
-    
+
     for(int i=0; i < my_tree.getNrOfJoints(); i++ )
     {
         q(i) = random_double();
         dq(i) = random_double();
         ddq(i) = random_double();
     }
-    
+
     base_vel = Twist(Vector(random_double(),random_double(),random_double()),Vector(random_double(),random_double(),random_double()));
     base_acc = Twist(Vector(random_double(),random_double(),random_double()),Vector(random_double(),random_double(),random_double()));
 
@@ -128,15 +132,15 @@ int main(int argc, char** argv)
         std::cout << fabs(torques(i)-torques_converted(i)) << std::endl;
         if( fabs(torques(i)-torques_converted(i)) > tol ) return -1;
     }
-    
+
     for( int i=0; i < 6; i++ ) {
         std::cout << fabs(base_force(i)-base_force_converted(i)) << std::endl;
         if( fabs(base_force(i)-base_force_converted(i)) > tol ) return -1;
     }
-    
-    
+
+
     return EXIT_SUCCESS;
-  
+
 }
 
 

@@ -48,6 +48,7 @@ namespace CoDyCo
     {
         base_wrench = arg.base_wrench;
         jnt = arg.jnt;
+		return *this;
     }
 
 

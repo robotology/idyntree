@@ -8,10 +8,12 @@ SET(iDynTree_YARP_source src/DynTree.cpp
                          src/yarp_kdl.cpp
                          src/TorqueEstimationTree.cpp
                          src/iDyn2KDL.cpp
+                         src/yarp_iDynTree.cpp
                          src/idyn2kdl_icub.cpp)
 
 SET(iDynTree_YARP_header include/iCub/iDynTree/DynTree.h
                   include/iCub/iDynTree/yarp_kdl.h
+                  include/iCub/iDynTree/yarp_iDynTree.h
                   include/iCub/iDynTree/iDyn2KDL.h
                   include/iCub/iDynTree/TorqueEstimationTree.h
                   include/iCub/iDynTree/idyn2kdl_icub.h)
@@ -59,7 +61,9 @@ target_link_libraries(idyntree-yarp LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}
                                             idyntree-core
-                                            idyntree-model-io
+                                            idyntree-sensors
+                                            idyntree-modelio-urdf
+                                            idyntree-regressors
                                             ${Boost_LIBRARIES}
                                             ${TinyXML_LIBRARIES})
 

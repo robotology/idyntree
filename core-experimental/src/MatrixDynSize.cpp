@@ -64,9 +64,9 @@ MatrixDynSize::~MatrixDynSize()
 
 void MatrixDynSize::zero()
 {
-    for(int row=0; row < this->rows(); row++ )
+    for(unsigned int row=0; row < this->rows(); row++ )
     {
-        for(int col=0; col < this->cols(); col++ )
+        for(unsigned int col=0; col < this->cols(); col++ )
         {
             this->m_data[rawIndex(row,col)] = 0.0;
         }
@@ -165,9 +165,9 @@ std::string MatrixDynSize::toString() const
 {
     std::stringstream ss;
 
-    for(int row=0; row < this->rows(); row++ )
+    for(unsigned int row=0; row < this->rows(); row++ )
     {
-        for(int col=0; col < this->cols(); col++ )
+        for(unsigned int col=0; col < this->cols(); col++ )
         {
             ss << this->m_data[this->rawIndex(row,col)] << " ";
         }

@@ -1,4 +1,6 @@
+#define _USE_MATH_DEFINES
 
+#include <cmath>
 #include <iCub/iDynTree/TorqueEstimationTree.h>
 
 #include <iCub/iDyn/iDyn.h>
@@ -14,6 +16,7 @@
 
 #include <iCub/ctrl/math.h>
 #include <iCub/skinDynLib/dynContactList.h>
+#include <kdl_codyco/regressors/dirl_utils.hpp>
 
 
 using namespace iCub::iDyn;

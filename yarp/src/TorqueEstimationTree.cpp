@@ -142,11 +142,9 @@ void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
             std::string ft_sens_name = ft_sensors[ft_sens].reference_joint;
             std::size_t ft_sens_id;
 
-            std::cout << "ft_sens" << ft_sens << std::endl;
 
             if( ft_serialization[serialization_id] == ft_sens_name)
             {
-                std::cout << "Found ft sensor " << ft_sens_name << " in urdf " << std::endl;
                 ft_sens_id = serialization_id;
 
                 ft_names[ft_sens_id] = ft_sens_name;

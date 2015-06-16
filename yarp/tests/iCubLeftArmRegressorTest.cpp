@@ -8,8 +8,12 @@
 
 #include <kdl/tree.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
-#include <kdl_codyco/sensors.hpp>
-#include <kdl_codyco/six_axis_ft_sensor.hpp>
+#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
+
+#include <kdl_codyco/KDLConversions.h>
+
+#include <iDynTree/Core/Transform.h>
 
 #include <kdl_format_io/urdf_import.hpp>
 #include <kdl_format_io/urdf_sensor_import.hpp>
@@ -19,6 +23,7 @@
 #include <kdl_codyco/rnea_loops.hpp>
 
 #include <kdl_codyco/regressor_utils.hpp>
+#include <kdl_codyco/regressors/dirl_utils.hpp>
 
 #include <iostream>
 #include <string>
@@ -32,14 +37,14 @@ double random_double()
 }
 
 
-KDL::Wrench simulateFTSensorFromKinematicState(const KDL::CoDyCo::UndirectedTree & icub_undirected_tree,
+iDynTree::Wrench simulateFTSensorFromKinematicState(const KDL::CoDyCo::UndirectedTree & icub_undirected_tree,
                                         const KDL::JntArray & q,
                                         const KDL::JntArray & dq,
                                         const KDL::JntArray & ddq,
                                         const KDL::Twist    & base_velocity,
                                         const KDL::Twist    & base_acceleration,
                                         const std::string ft_sensor_name,
-                                        const KDL::CoDyCo::SensorsTree & sensors_tree
+                                        const iDynTree::SensorsList & sensors_tree
                                         )
 {
     // We can try to simulate the same sensor with the usual inverse dynamics
@@ -61,25 +66,26 @@ KDL::Wrench simulateFTSensorFromKinematicState(const KDL::CoDyCo::UndirectedTree
     KDL::CoDyCo::rneaDynamicLoop(icub_undirected_tree,q,traversal,f_gi,f_ext,f,torques,base_force);
 
     unsigned int sensor_index;
-    sensors_tree.getSensorIndex(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,ft_sensor_name,sensor_index);
+    sensors_tree.getSensorIndex(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_sensor_name,sensor_index);
 
     std::cout << ft_sensor_name << " has ft index " << sensor_index << std::endl;
 
-    KDL::CoDyCo::SixAxisForceTorqueSensor * p_sens
-            = (KDL::CoDyCo::SixAxisForceTorqueSensor *) sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,sensor_index);
+    iDynTree::SixAxisForceTorqueSensor * p_sens
+            = (iDynTree::SixAxisForceTorqueSensor *) sensors_tree.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,sensor_index);
 
-    KDL::Wrench simulate_measurement;
+    iDynTree::Wrench simulate_measurement;
 
-    p_sens->simulateMeasurement(traversal,f,simulate_measurement);
-
+    KDL::CoDyCo::Regressors::simulateMeasurement_sixAxisFTSensor(traversal,f,p_sens,simulate_measurement);
+    
+    
     return simulate_measurement;
 }
 
 // This function logic should be moved to some better place for sure
-KDL::CoDyCo::SensorsTree sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
+iDynTree::SensorsList sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
                                              std::string urdf_filename)
 {
-    KDL::CoDyCo::SensorsTree sensors_tree;
+    iDynTree::SensorsList sensors_tree;
 
     std::vector<kdl_format_io::FTSensorData> ft_sensors;
     bool ok = kdl_format_io::ftSensorsFromUrdfFile(urdf_filename,ft_sensors);
@@ -91,7 +97,7 @@ KDL::CoDyCo::SensorsTree sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undir
 
     for(int ft_sens = 0; ft_sens < ft_sensors.size(); ft_sens++ )
     {
-        KDL::CoDyCo::SixAxisForceTorqueSensor new_sens;
+        iDynTree::SixAxisForceTorqueSensor new_sens;
 
         // Convert the information in the FTSensorData format in
         // a series of SixAxisForceTorqueSensor objects, using the
@@ -116,19 +122,19 @@ KDL::CoDyCo::SensorsTree sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undir
         // are fixed are given by the frame option
         if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::PARENT_LINK_FRAME )
         {
-            new_sens.setFirstLinkSensorTransform(parent_link,KDL::Frame::Identity());
-            new_sens.setSecondLinkSensorTransform(child_link,parent_link_H_child_link.Inverse());
+            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::Transform());
+            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(parent_link_H_child_link.Inverse()));
         }
         else if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::CHILD_LINK_FRAME )
         {
-            new_sens.setFirstLinkSensorTransform(parent_link,parent_link_H_child_link);
-            new_sens.setSecondLinkSensorTransform(child_link,KDL::Frame::Identity());
+            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link));
+            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::Transform());
         }
         else
         {
             assert( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::SENSOR_FRAME );
-            new_sens.setFirstLinkSensorTransform(parent_link,parent_link_H_child_link*child_link_H_sensor);
-            new_sens.setSecondLinkSensorTransform(child_link,child_link_H_sensor);
+            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link*child_link_H_sensor));
+            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(child_link_H_sensor));
         }
 
         if( ft_sensors[ft_sens].measure_direction == kdl_format_io::FTSensorData::CHILD_TO_PARENT )
@@ -169,7 +175,7 @@ int main()
 
     // Load a sensors tree (for ft sensors) from the information extracted from urdf file
     //  and using the serialization provided in the undirected tree
-    KDL::CoDyCo::SensorsTree sensors_tree = sensorsTreeFromURDF(icub_undirected_tree,icub_urdf_filename);
+    iDynTree::SensorsList sensors_tree = sensorsTreeFromURDF(icub_undirected_tree,icub_urdf_filename);
 
     //Create a regressor generator
     KDL::CoDyCo::Regressors::DynamicRegressorGenerator regressor_generator(icub_undirected_tree,sensors_tree);
@@ -200,7 +206,7 @@ int main()
     regressor_generator.setRobotState(q,q,q,base_velocity,base_acceleration);
 
     // Estimate sensor measurements from the model
-    KDL::Wrench simulate_measurement = simulateFTSensorFromKinematicState(icub_undirected_tree,
+    iDynTree::Wrench simulate_measurement = simulateFTSensorFromKinematicState(icub_undirected_tree,
         q,q,q,base_velocity,base_acceleration,"l_arm_ft_sensor",sensors_tree);
 
         
@@ -222,10 +228,10 @@ int main()
     Eigen::Matrix<double,6,1> sens = regressor*parameters;
 
     std::cout << "Sensor measurement from regressor*model_parameters: " << sens << std::endl;
-    std::cout << "Sensor measurement from RNEA:                       " << KDL::CoDyCo::toEigen(simulate_measurement) << std::endl;
+    std::cout << "Sensor measurement from RNEA:                       " << KDL::CoDyCo::toEigen( iDynTree::ToKDL(simulate_measurement)) << std::endl;
 
     double tol = 1e-5;
-    if( (KDL::CoDyCo::toEigen(simulate_measurement)+sens).norm() > tol )
+    if( (KDL::CoDyCo::toEigen(iDynTree::ToKDL(simulate_measurement))+sens).norm() > tol )
     {
         std::cerr << "[ERR] iCubLeftArmRegressor error" << std::endl;
         return EXIT_FAILURE;

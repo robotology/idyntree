@@ -27,5 +27,5 @@ if(NOT TARGET iDynTree::idyntree-core)
 endif()
 
 # Compatibility
-set(iDynTree_LIBRARIES iDynTree::idyntree-core;iDynTree::idyntree-regressors;iDynTree::idyntree-model-io;iDynTree::idyntree-yarp)
+set(iDynTree_LIBRARIES "@iDynTree_TARGETS@")
 set(iDynTree_INCLUDE_DIRS ${iDynTree_INCLUDEDIR} "@EIGEN3_INCLUDE_DIR@" "@Boost_INCLUDE_DIRS@")

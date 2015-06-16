@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="name1" version="1.0" xmlns="http://www.ros.org">
+  <joint name="name1" type="type1">
+    <mimic joint="joint1" multiplier="1" offset="0" />
+    <safety_controller soft_lower_limit="0" soft_upper_limit="0" k_position="0" k_velocity="1" />
+    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <dynamics damping="0" friction="0" />
+    <calibration reference_position="1" rising="1" falling="1" />
+    <axis xyz="1 0 0" />
+    <child link="link1" />
+    <parent link="link1" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="name2" type="type2">
+    <mimic joint="joint2" multiplier="1" offset="1" />
+    <safety_controller soft_lower_limit="1" soft_upper_limit="1" k_position="1" k_velocity="-1.7976931348623157E+308" />
+    <limit lower="1" upper="1" effort="1" velocity="1" />
+    <dynamics damping="1" friction="1" />
+    <calibration reference_position="-1.7976931348623157E+308" rising="-1.7976931348623157E+308" falling="-1.7976931348623157E+308" />
+    <axis xyz="xyz1" />
+    <child link="link2" />
+    <parent link="link2" />
+    <origin xyz="xyz1" rpy="rpy1" />
+  </joint>
+  <joint name="name3" type="type3">
+    <mimic joint="joint3" multiplier="-1.7976931348623157E+308" offset="-1.7976931348623157E+308" />
+    <safety_controller soft_lower_limit="-1.7976931348623157E+308" soft_upper_limit="-1.7976931348623157E+308" k_position="-1.7976931348623157E+308" k_velocity="1.7976931348623157E+308" />
+    <limit lower="-1.7976931348623157E+308" upper="-1.7976931348623157E+308" effort="-1.7976931348623157E+308" velocity="-1.7976931348623157E+308" />
+    <dynamics damping="-1.7976931348623157E+308" friction="-1.7976931348623157E+308" />
+    <calibration reference_position="1.7976931348623157E+308" rising="1.7976931348623157E+308" falling="1.7976931348623157E+308" />
+    <axis xyz="xyz2" />
+    <child link="link3" />
+    <parent link="link3" />
+    <origin xyz="xyz2" rpy="rpy2" />
+  </joint>
+  <link name="name1" type="type1">
+    <collision name="name1">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0 0 0" />
+      </geometry>
+      <verbose value="value1" />
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="size1" />
+      </geometry>
+      <material name="name1">
+        <color rgba="0 0 0 0" />
+        <texture filename="http://uri1" />
+      </material>
+    </visual>
+    <inertial>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+      <mass value="0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </inertial>
+  </link>
+  <link name="name2" type="type2">
+    <collision name="name2">
+      <origin xyz="xyz1" rpy="rpy1" />
+      <geometry>
+        <box size="size2" />
+      </geometry>
+      <verbose value="value2" />
+    </collision>
+    <visual>
+      <origin xyz="xyz1" rpy="rpy1" />
+      <geometry>
+        <box size="size3" />
+      </geometry>
+      <material name="name2">
+        <color rgba="rgba1" />
+        <texture filename="http://uri2" />
+      </material>
+    </visual>
+    <inertial>
+      <inertia ixx="1" ixy="1" ixz="1" iyy="1" iyz="1" izz="1" />
+      <mass value="1" />
+      <origin xyz="xyz1" rpy="rpy1" />
+    </inertial>
+  </link>
+  <link name="name3" type="type3">
+    <collision name="name3">
+      <origin xyz="xyz2" rpy="rpy2" />
+      <geometry>
+        <box size="size4" />
+      </geometry>
+      <verbose value="value3" />
+    </collision>
+    <visual>
+      <origin xyz="xyz2" rpy="rpy2" />
+      <geometry>
+        <box size="size5" />
+      </geometry>
+      <material name="name3">
+        <color rgba="rgba2" />
+        <texture filename="http://uri3" />
+      </material>
+    </visual>
+    <inertial>
+      <inertia ixx="-1.7976931348623157E+308" ixy="-1.7976931348623157E+308" ixz="-1.7976931348623157E+308" iyy="-1.7976931348623157E+308" iyz="-1.7976931348623157E+308" izz="-1.7976931348623157E+308" />
+      <mass value="-1.7976931348623157E+308" />
+      <origin xyz="xyz2" rpy="rpy2" />
+    </inertial>
+  </link>
+  <material name="name1">
+    <color rgba="0 0 0 0" />
+    <texture filename="http://uri1" />
+  </material>
+  <material name="name2">
+    <color rgba="rgba1" />
+    <texture filename="http://uri2" />
+  </material>
+  <material name="name3">
+    <color rgba="rgba2" />
+    <texture filename="http://uri3" />
+  </material>
+  <transmission name="name1" type="type1">
+    <leftActuator mechanicalReduction="1" name="name1" />
+    <rightActuator mechanicalReduction="1" name="name1" />
+    <flexJoint mechanicalReduction="1" name="name1" />
+    <rollJoint mechanicalReduction="1" name="name1" />
+    <gap_joint L0="1" a="1" b="1" gear_ratio="1" h="1" mechanical_reduction="1" name="name1" phi0="1" r="1" screw_reduction="1" t0="1" theta0="1" />
+    <passive_joint name="name1" />
+    <passive_joint name="name2" />
+    <passive_joint name="name3" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>1</mechanicalReduction>
+    <actuator name="name1" />
+    <joint name="name1" />
+    <leftActuator mechanicalReduction="-1.7976931348623157E+308" name="name2" />
+    <rightActuator mechanicalReduction="-1.7976931348623157E+308" name="name2" />
+    <flexJoint mechanicalReduction="-1.7976931348623157E+308" name="name2" />
+    <rollJoint mechanicalReduction="-1.7976931348623157E+308" name="name2" />
+    <gap_joint L0="-1.7976931348623157E+308" a="-1.7976931348623157E+308" b="-1.7976931348623157E+308" gear_ratio="-1.7976931348623157E+308" h="-1.7976931348623157E+308" mechanical_reduction="-1.7976931348623157E+308" name="name2" phi0="-1.7976931348623157E+308" r="-1.7976931348623157E+308" screw_reduction="-1.7976931348623157E+308" t0="-1.7976931348623157E+308" theta0="-1.7976931348623157E+308" />
+    <passive_joint name="name4" />
+    <passive_joint name="name5" />
+    <passive_joint name="name6" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name2" />
+    <joint name="name2" />
+    <leftActuator mechanicalReduction="1.7976931348623157E+308" name="name3" />
+    <rightActuator mechanicalReduction="1.7976931348623157E+308" name="name3" />
+    <flexJoint mechanicalReduction="1.7976931348623157E+308" name="name3" />
+    <rollJoint mechanicalReduction="1.7976931348623157E+308" name="name3" />
+    <gap_joint L0="1.7976931348623157E+308" a="1.7976931348623157E+308" b="1.7976931348623157E+308" gear_ratio="1.7976931348623157E+308" h="1.7976931348623157E+308" mechanical_reduction="1.7976931348623157E+308" name="name3" phi0="1.7976931348623157E+308" r="1.7976931348623157E+308" screw_reduction="1.7976931348623157E+308" t0="1.7976931348623157E+308" theta0="1.7976931348623157E+308" />
+    <passive_joint name="name7" />
+    <passive_joint name="name8" />
+    <passive_joint name="name9" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name3" />
+    <joint name="name3" />
+  </transmission>
+  <transmission name="name2" type="type2">
+    <leftActuator mechanicalReduction="-0.10000002384185791" name="name4" />
+    <rightActuator mechanicalReduction="-0.10000002384185791" name="name4" />
+    <flexJoint mechanicalReduction="-0.10000002384185791" name="name4" />
+    <rollJoint mechanicalReduction="-0.10000002384185791" name="name4" />
+    <gap_joint L0="-0.10000002384185791" a="-0.10000002384185791" b="-0.10000002384185791" gear_ratio="-0.10000002384185791" h="-0.10000002384185791" mechanical_reduction="-0.10000002384185791" name="name4" phi0="-0.10000002384185791" r="-0.10000002384185791" screw_reduction="-0.10000002384185791" t0="-0.10000002384185791" theta0="-0.10000002384185791" />
+    <passive_joint name="name10" />
+    <passive_joint name="name11" />
+    <passive_joint name="name12" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-0.10000002384185791</mechanicalReduction>
+    <actuator name="name4" />
+    <joint name="name4" />
+    <leftActuator mechanicalReduction="2.1000000238418579" name="name5" />
+    <rightActuator mechanicalReduction="2.1000000238418579" name="name5" />
+    <flexJoint mechanicalReduction="2.1000000238418579" name="name5" />
+    <rollJoint mechanicalReduction="2.1000000238418579" name="name5" />
+    <gap_joint L0="2.1000000238418579" a="2.1000000238418579" b="2.1000000238418579" gear_ratio="2.1000000238418579" h="2.1000000238418579" mechanical_reduction="2.1000000238418579" name="name5" phi0="2.1000000238418579" r="2.1000000238418579" screw_reduction="2.1000000238418579" t0="2.1000000238418579" theta0="2.1000000238418579" />
+    <passive_joint name="name13" />
+    <passive_joint name="name14" />
+    <passive_joint name="name15" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>2.1000000238418579</mechanicalReduction>
+    <actuator name="name5" />
+    <joint name="name5" />
+    <leftActuator mechanicalReduction="-1.7976931348623157E+308" name="name6" />
+    <rightActuator mechanicalReduction="-1.7976931348623157E+308" name="name6" />
+    <flexJoint mechanicalReduction="-1.7976931348623157E+308" name="name6" />
+    <rollJoint mechanicalReduction="-1.7976931348623157E+308" name="name6" />
+    <gap_joint L0="-1.7976931348623157E+308" a="-1.7976931348623157E+308" b="-1.7976931348623157E+308" gear_ratio="-1.7976931348623157E+308" h="-1.7976931348623157E+308" mechanical_reduction="-1.7976931348623157E+308" name="name6" phi0="-1.7976931348623157E+308" r="-1.7976931348623157E+308" screw_reduction="-1.7976931348623157E+308" t0="-1.7976931348623157E+308" theta0="-1.7976931348623157E+308" />
+    <passive_joint name="name16" />
+    <passive_joint name="name17" />
+    <passive_joint name="name18" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name6" />
+    <joint name="name6" />
+  </transmission>
+  <transmission name="name3" type="type3">
+    <leftActuator mechanicalReduction="1.7976931348623157E+308" name="name7" />
+    <rightActuator mechanicalReduction="1.7976931348623157E+308" name="name7" />
+    <flexJoint mechanicalReduction="1.7976931348623157E+308" name="name7" />
+    <rollJoint mechanicalReduction="1.7976931348623157E+308" name="name7" />
+    <gap_joint L0="1.7976931348623157E+308" a="1.7976931348623157E+308" b="1.7976931348623157E+308" gear_ratio="1.7976931348623157E+308" h="1.7976931348623157E+308" mechanical_reduction="1.7976931348623157E+308" name="name7" phi0="1.7976931348623157E+308" r="1.7976931348623157E+308" screw_reduction="1.7976931348623157E+308" t0="1.7976931348623157E+308" theta0="1.7976931348623157E+308" />
+    <passive_joint name="name19" />
+    <passive_joint name="name20" />
+    <passive_joint name="name21" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name7" />
+    <joint name="name7" />
+    <leftActuator mechanicalReduction="-1.2000000476837158" name="name8" />
+    <rightActuator mechanicalReduction="-1.2000000476837158" name="name8" />
+    <flexJoint mechanicalReduction="-1.2000000476837158" name="name8" />
+    <rollJoint mechanicalReduction="-1.2000000476837158" name="name8" />
+    <gap_joint L0="-1.2000000476837158" a="-1.2000000476837158" b="-1.2000000476837158" gear_ratio="-1.2000000476837158" h="-1.2000000476837158" mechanical_reduction="-1.2000000476837158" name="name8" phi0="-1.2000000476837158" r="-1.2000000476837158" screw_reduction="-1.2000000476837158" t0="-1.2000000476837158" theta0="-1.2000000476837158" />
+    <passive_joint name="name22" />
+    <passive_joint name="name23" />
+    <passive_joint name="name24" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-1.2000000476837158</mechanicalReduction>
+    <actuator name="name8" />
+    <joint name="name8" />
+    <leftActuator mechanicalReduction="3.2000000476837158" name="name9" />
+    <rightActuator mechanicalReduction="3.2000000476837158" name="name9" />
+    <flexJoint mechanicalReduction="3.2000000476837158" name="name9" />
+    <rollJoint mechanicalReduction="3.2000000476837158" name="name9" />
+    <gap_joint L0="3.2000000476837158" a="3.2000000476837158" b="3.2000000476837158" gear_ratio="3.2000000476837158" h="3.2000000476837158" mechanical_reduction="3.2000000476837158" name="name9" phi0="3.2000000476837158" r="3.2000000476837158" screw_reduction="3.2000000476837158" t0="3.2000000476837158" theta0="3.2000000476837158" />
+    <passive_joint name="name25" />
+    <passive_joint name="name26" />
+    <passive_joint name="name27" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>3.2000000476837158</mechanicalReduction>
+    <actuator name="name9" />
+    <joint name="name9" />
+  </transmission>
+  <joint name="name4" type="type4">
+    <mimic joint="joint4" multiplier="1.7976931348623157E+308" offset="1.7976931348623157E+308" />
+    <safety_controller soft_lower_limit="1.7976931348623157E+308" soft_upper_limit="1.7976931348623157E+308" k_position="1.7976931348623157E+308" k_velocity="-0.10000002384185791" />
+    <limit lower="1.7976931348623157E+308" upper="1.7976931348623157E+308" effort="1.7976931348623157E+308" velocity="1.7976931348623157E+308" />
+    <dynamics damping="1.7976931348623157E+308" friction="1.7976931348623157E+308" />
+    <calibration reference_position="-0.10000002384185791" rising="-0.10000002384185791" falling="-0.10000002384185791" />
+    <axis xyz="xyz3" />
+    <child link="link4" />
+    <parent link="link4" />
+    <origin xyz="xyz3" rpy="rpy3" />
+  </joint>
+  <joint name="name5" type="type5">
+    <mimic joint="joint5" multiplier="-0.10000002384185791" offset="-0.10000002384185791" />
+    <safety_controller soft_lower_limit="-0.10000002384185791" soft_upper_limit="-0.10000002384185791" k_position="-0.10000002384185791" k_velocity="2.1000000238418579" />
+    <limit lower="-0.10000002384185791" upper="-0.10000002384185791" effort="-0.10000002384185791" velocity="-0.10000002384185791" />
+    <dynamics damping="-0.10000002384185791" friction="-0.10000002384185791" />
+    <calibration reference_position="2.1000000238418579" rising="2.1000000238418579" falling="2.1000000238418579" />
+    <axis xyz="xyz4" />
+    <child link="link5" />
+    <parent link="link5" />
+    <origin xyz="xyz4" rpy="rpy4" />
+  </joint>
+  <joint name="name6" type="type6">
+    <mimic joint="joint6" multiplier="2.1000000238418579" offset="2.1000000238418579" />
+    <safety_controller soft_lower_limit="2.1000000238418579" soft_upper_limit="2.1000000238418579" k_position="2.1000000238418579" k_velocity="-1.7976931348623157E+308" />
+    <limit lower="2.1000000238418579" upper="2.1000000238418579" effort="2.1000000238418579" velocity="2.1000000238418579" />
+    <dynamics damping="2.1000000238418579" friction="2.1000000238418579" />
+    <calibration reference_position="-1.7976931348623157E+308" rising="-1.7976931348623157E+308" falling="-1.7976931348623157E+308" />
+    <axis xyz="xyz5" />
+    <child link="link6" />
+    <parent link="link6" />
+    <origin xyz="xyz5" rpy="rpy5" />
+  </joint>
+  <link name="name4" type="type4">
+    <collision name="name4">
+      <origin xyz="xyz3" rpy="rpy3" />
+      <geometry>
+        <box size="size6" />
+      </geometry>
+      <verbose value="value4" />
+    </collision>
+    <visual>
+      <origin xyz="xyz3" rpy="rpy3" />
+      <geometry>
+        <box size="size7" />
+      </geometry>
+      <material name="name4">
+        <color rgba="rgba3" />
+        <texture filename="http://uri4" />
+      </material>
+    </visual>
+    <inertial>
+      <inertia ixx="1.7976931348623157E+308" ixy="1.7976931348623157E+308" ixz="1.7976931348623157E+308" iyy="1.7976931348623157E+308" iyz="1.7976931348623157E+308" izz="1.7976931348623157E+308" />
+      <mass value="1.7976931348623157E+308" />
+      <origin xyz="xyz3" rpy="rpy3" />
+    </inertial>
+  </link>
+  <link name="name5" type="type5">
+    <collision name="name5">
+      <origin xyz="xyz4" rpy="rpy4" />
+      <geometry>
+        <box size="size8" />
+      </geometry>
+      <verbose value="value5" />
+    </collision>
+    <visual>
+      <origin xyz="xyz4" rpy="rpy4" />
+      <geometry>
+        <box size="size9" />
+      </geometry>
+      <material name="name5">
+        <color rgba="rgba4" />
+        <texture filename="http://uri5" />
+      </material>
+    </visual>
+    <inertial>
+      <inertia ixx="-0.10000002384185791" ixy="-0.10000002384185791" ixz="-0.10000002384185791" iyy="-0.10000002384185791" iyz="-0.10000002384185791" izz="-0.10000002384185791" />
+      <mass value="-0.10000002384185791" />
+      <origin xyz="xyz4" rpy="rpy4" />
+    </inertial>
+  </link>
+  <link name="name6" type="type6">
+    <collision name="name6">
+      <origin xyz="xyz5" rpy="rpy5" />
+      <geometry>
+        <box size="size10" />
+      </geometry>
+      <verbose value="value6" />
+    </collision>
+    <visual>
+      <origin xyz="xyz5" rpy="rpy5" />
+      <geometry>
+        <box size="size11" />
+      </geometry>
+      <material name="name6">
+        <color rgba="rgba5" />
+        <texture filename="http://uri6" />
+      </material>
+    </visual>
+    <inertial>
+      <inertia ixx="2.1000000238418579" ixy="2.1000000238418579" ixz="2.1000000238418579" iyy="2.1000000238418579" iyz="2.1000000238418579" izz="2.1000000238418579" />
+      <mass value="2.1000000238418579" />
+      <origin xyz="xyz5" rpy="rpy5" />
+    </inertial>
+  </link>
+  <material name="name4">
+    <color rgba="rgba3" />
+    <texture filename="http://uri4" />
+  </material>
+  <material name="name5">
+    <color rgba="rgba4" />
+    <texture filename="http://uri5" />
+  </material>
+  <material name="name6">
+    <color rgba="rgba5" />
+    <texture filename="http://uri6" />
+  </material>
+  <transmission name="name4" type="type4">
+    <leftActuator mechanicalReduction="-1.7976931348623157E+308" name="name10" />
+    <rightActuator mechanicalReduction="-1.7976931348623157E+308" name="name10" />
+    <flexJoint mechanicalReduction="-1.7976931348623157E+308" name="name10" />
+    <rollJoint mechanicalReduction="-1.7976931348623157E+308" name="name10" />
+    <gap_joint L0="-1.7976931348623157E+308" a="-1.7976931348623157E+308" b="-1.7976931348623157E+308" gear_ratio="-1.7976931348623157E+308" h="-1.7976931348623157E+308" mechanical_reduction="-1.7976931348623157E+308" name="name10" phi0="-1.7976931348623157E+308" r="-1.7976931348623157E+308" screw_reduction="-1.7976931348623157E+308" t0="-1.7976931348623157E+308" theta0="-1.7976931348623157E+308" />
+    <passive_joint name="name28" />
+    <passive_joint name="name29" />
+    <passive_joint name="name30" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name10" />
+    <joint name="name10" />
+    <leftActuator mechanicalReduction="1.7976931348623157E+308" name="name11" />
+    <rightActuator mechanicalReduction="1.7976931348623157E+308" name="name11" />
+    <flexJoint mechanicalReduction="1.7976931348623157E+308" name="name11" />
+    <rollJoint mechanicalReduction="1.7976931348623157E+308" name="name11" />
+    <gap_joint L0="1.7976931348623157E+308" a="1.7976931348623157E+308" b="1.7976931348623157E+308" gear_ratio="1.7976931348623157E+308" h="1.7976931348623157E+308" mechanical_reduction="1.7976931348623157E+308" name="name11" phi0="1.7976931348623157E+308" r="1.7976931348623157E+308" screw_reduction="1.7976931348623157E+308" t0="1.7976931348623157E+308" theta0="1.7976931348623157E+308" />
+    <passive_joint name="name31" />
+    <passive_joint name="name32" />
+    <passive_joint name="name33" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name11" />
+    <joint name="name11" />
+    <leftActuator mechanicalReduction="-2.3000000715255737" name="name12" />
+    <rightActuator mechanicalReduction="-2.3000000715255737" name="name12" />
+    <flexJoint mechanicalReduction="-2.3000000715255737" name="name12" />
+    <rollJoint mechanicalReduction="-2.3000000715255737" name="name12" />
+    <gap_joint L0="-2.3000000715255737" a="-2.3000000715255737" b="-2.3000000715255737" gear_ratio="-2.3000000715255737" h="-2.3000000715255737" mechanical_reduction="-2.3000000715255737" name="name12" phi0="-2.3000000715255737" r="-2.3000000715255737" screw_reduction="-2.3000000715255737" t0="-2.3000000715255737" theta0="-2.3000000715255737" />
+    <passive_joint name="name34" />
+    <passive_joint name="name35" />
+    <passive_joint name="name36" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-2.3000000715255737</mechanicalReduction>
+    <actuator name="name12" />
+    <joint name="name12" />
+  </transmission>
+  <transmission name="name5" type="type5">
+    <leftActuator mechanicalReduction="4.3000000715255737" name="name13" />
+    <rightActuator mechanicalReduction="4.3000000715255737" name="name13" />
+    <flexJoint mechanicalReduction="4.3000000715255737" name="name13" />
+    <rollJoint mechanicalReduction="4.3000000715255737" name="name13" />
+    <gap_joint L0="4.3000000715255737" a="4.3000000715255737" b="4.3000000715255737" gear_ratio="4.3000000715255737" h="4.3000000715255737" mechanical_reduction="4.3000000715255737" name="name13" phi0="4.3000000715255737" r="4.3000000715255737" screw_reduction="4.3000000715255737" t0="4.3000000715255737" theta0="4.3000000715255737" />
+    <passive_joint name="name37" />
+    <passive_joint name="name38" />
+    <passive_joint name="name39" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>4.3000000715255737</mechanicalReduction>
+    <actuator name="name13" />
+    <joint name="name13" />
+    <leftActuator mechanicalReduction="-1.7976931348623157E+308" name="name14" />
+    <rightActuator mechanicalReduction="-1.7976931348623157E+308" name="name14" />
+    <flexJoint mechanicalReduction="-1.7976931348623157E+308" name="name14" />
+    <rollJoint mechanicalReduction="-1.7976931348623157E+308" name="name14" />
+    <gap_joint L0="-1.7976931348623157E+308" a="-1.7976931348623157E+308" b="-1.7976931348623157E+308" gear_ratio="-1.7976931348623157E+308" h="-1.7976931348623157E+308" mechanical_reduction="-1.7976931348623157E+308" name="name14" phi0="-1.7976931348623157E+308" r="-1.7976931348623157E+308" screw_reduction="-1.7976931348623157E+308" t0="-1.7976931348623157E+308" theta0="-1.7976931348623157E+308" />
+    <passive_joint name="name40" />
+    <passive_joint name="name41" />
+    <passive_joint name="name42" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name14" />
+    <joint name="name14" />
+    <leftActuator mechanicalReduction="1.7976931348623157E+308" name="name15" />
+    <rightActuator mechanicalReduction="1.7976931348623157E+308" name="name15" />
+    <flexJoint mechanicalReduction="1.7976931348623157E+308" name="name15" />
+    <rollJoint mechanicalReduction="1.7976931348623157E+308" name="name15" />
+    <gap_joint L0="1.7976931348623157E+308" a="1.7976931348623157E+308" b="1.7976931348623157E+308" gear_ratio="1.7976931348623157E+308" h="1.7976931348623157E+308" mechanical_reduction="1.7976931348623157E+308" name="name15" phi0="1.7976931348623157E+308" r="1.7976931348623157E+308" screw_reduction="1.7976931348623157E+308" t0="1.7976931348623157E+308" theta0="1.7976931348623157E+308" />
+    <passive_joint name="name43" />
+    <passive_joint name="name44" />
+    <passive_joint name="name45" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name15" />
+    <joint name="name15" />
+  </transmission>
+  <transmission name="name6" type="type6">
+    <leftActuator mechanicalReduction="-3.4000000953674316" name="name16" />
+    <rightActuator mechanicalReduction="-3.4000000953674316" name="name16" />
+    <flexJoint mechanicalReduction="-3.4000000953674316" name="name16" />
+    <rollJoint mechanicalReduction="-3.4000000953674316" name="name16" />
+    <gap_joint L0="-3.4000000953674316" a="-3.4000000953674316" b="-3.4000000953674316" gear_ratio="-3.4000000953674316" h="-3.4000000953674316" mechanical_reduction="-3.4000000953674316" name="name16" phi0="-3.4000000953674316" r="-3.4000000953674316" screw_reduction="-3.4000000953674316" t0="-3.4000000953674316" theta0="-3.4000000953674316" />
+    <passive_joint name="name46" />
+    <passive_joint name="name47" />
+    <passive_joint name="name48" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-3.4000000953674316</mechanicalReduction>
+    <actuator name="name16" />
+    <joint name="name16" />
+    <leftActuator mechanicalReduction="5.4000000953674316" name="name17" />
+    <rightActuator mechanicalReduction="5.4000000953674316" name="name17" />
+    <flexJoint mechanicalReduction="5.4000000953674316" name="name17" />
+    <rollJoint mechanicalReduction="5.4000000953674316" name="name17" />
+    <gap_joint L0="5.4000000953674316" a="5.4000000953674316" b="5.4000000953674316" gear_ratio="5.4000000953674316" h="5.4000000953674316" mechanical_reduction="5.4000000953674316" name="name17" phi0="5.4000000953674316" r="5.4000000953674316" screw_reduction="5.4000000953674316" t0="5.4000000953674316" theta0="5.4000000953674316" />
+    <passive_joint name="name49" />
+    <passive_joint name="name50" />
+    <passive_joint name="name51" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>5.4000000953674316</mechanicalReduction>
+    <actuator name="name17" />
+    <joint name="name17" />
+    <leftActuator mechanicalReduction="-1.7976931348623157E+308" name="name18" />
+    <rightActuator mechanicalReduction="-1.7976931348623157E+308" name="name18" />
+    <flexJoint mechanicalReduction="-1.7976931348623157E+308" name="name18" />
+    <rollJoint mechanicalReduction="-1.7976931348623157E+308" name="name18" />
+    <gap_joint L0="-1.7976931348623157E+308" a="-1.7976931348623157E+308" b="-1.7976931348623157E+308" gear_ratio="-1.7976931348623157E+308" h="-1.7976931348623157E+308" mechanical_reduction="-1.7976931348623157E+308" name="name18" phi0="-1.7976931348623157E+308" r="-1.7976931348623157E+308" screw_reduction="-1.7976931348623157E+308" t0="-1.7976931348623157E+308" theta0="-1.7976931348623157E+308" />
+    <passive_joint name="name52" />
+    <passive_joint name="name53" />
+    <passive_joint name="name54" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name18" />
+    <joint name="name18" />
+  </transmission>
+  <joint name="name7" type="type7">
+    <mimic joint="joint7" multiplier="-1.7976931348623157E+308" offset="-1.7976931348623157E+308" />
+    <safety_controller soft_lower_limit="-1.7976931348623157E+308" soft_upper_limit="-1.7976931348623157E+308" k_position="-1.7976931348623157E+308" k_velocity="1.7976931348623157E+308" />
+    <limit lower="-1.7976931348623157E+308" upper="-1.7976931348623157E+308" effort="-1.7976931348623157E+308" velocity="-1.7976931348623157E+308" />
+    <dynamics damping="-1.7976931348623157E+308" friction="-1.7976931348623157E+308" />
+    <calibration reference_position="1.7976931348623157E+308" rising="1.7976931348623157E+308" falling="1.7976931348623157E+308" />
+    <axis xyz="xyz6" />
+    <child link="link7" />
+    <parent link="link7" />
+    <origin xyz="xyz6" rpy="rpy6" />
+  </joint>
+  <joint name="name8" type="type8">
+    <mimic joint="joint8" multiplier="1.7976931348623157E+308" offset="1.7976931348623157E+308" />
+    <safety_controller soft_lower_limit="1.7976931348623157E+308" soft_upper_limit="1.7976931348623157E+308" k_position="1.7976931348623157E+308" k_velocity="-1.2000000476837158" />
+    <limit lower="1.7976931348623157E+308" upper="1.7976931348623157E+308" effort="1.7976931348623157E+308" velocity="1.7976931348623157E+308" />
+    <dynamics damping="1.7976931348623157E+308" friction="1.7976931348623157E+308" />
+    <calibration reference_position="-1.2000000476837158" rising="-1.2000000476837158" falling="-1.2000000476837158" />
+    <axis xyz="xyz7" />
+    <child link="link8" />
+    <parent link="link8" />
+    <origin xyz="xyz7" rpy="rpy7" />
+  </joint>
+  <joint name="name9" type="type9">
+    <mimic joint="joint9" multiplier="-1.2000000476837158" offset="-1.2000000476837158" />
+    <safety_controller soft_lower_limit="-1.2000000476837158" soft_upper_limit="-1.2000000476837158" k_position="-1.2000000476837158" k_velocity="3.2000000476837158" />
+    <limit lower="-1.2000000476837158" upper="-1.2000000476837158" effort="-1.2000000476837158" velocity="-1.2000000476837158" />
+    <dynamics damping="-1.2000000476837158" friction="-1.2000000476837158" />
+    <calibration reference_position="3.2000000476837158" rising="3.2000000476837158" falling="3.2000000476837158" />
+    <axis xyz="xyz8" />
+    <child link="link9" />
+    <parent link="link9" />
+    <origin xyz="xyz8" rpy="rpy8" />
+  </joint>
+  <link name="name7" type="type7">
+    <collision name="name7">
+      <origin xyz="xyz6" rpy="rpy6" />
+      <geometry>
+        <box size="size12" />
+      </geometry>
+      <verbose value="value7" />
+    </collision>
+    <visual>
+      <origin xyz="xyz6" rpy="rpy6" />
+      <geometry>
+        <box size="size13" />
+      </geometry>
+      <material name="name7">
+        <color rgba="rgba6" />
+        <texture filename="http://uri7" />
+      </material>
+    </visual>
+    <inertial>
+      <inertia ixx="-1.7976931348623157E+308" ixy="-1.7976931348623157E+308" ixz="-1.7976931348623157E+308" iyy="-1.7976931348623157E+308" iyz="-1.7976931348623157E+308" izz="-1.7976931348623157E+308" />
+      <mass value="-1.7976931348623157E+308" />
+      <origin xyz="xyz6" rpy="rpy6" />
+    </inertial>
+  </link>
+  <link name="name8" type="type8">
+    <collision name="name8">
+      <origin xyz="xyz7" rpy="rpy7" />
+      <geometry>
+        <box size="size14" />
+      </geometry>
+      <verbose value="value8" />
+    </collision>
+    <visual>
+      <origin xyz="xyz7" rpy="rpy7" />
+      <geometry>
+        <box size="size15" />
+      </geometry>
+      <material name="name8">
+        <color rgba="rgba7" />
+        <texture filename="http://uri8" />
+      </material>
+    </visual>
+    <inertial>
+      <inertia ixx="1.7976931348623157E+308" ixy="1.7976931348623157E+308" ixz="1.7976931348623157E+308" iyy="1.7976931348623157E+308" iyz="1.7976931348623157E+308" izz="1.7976931348623157E+308" />
+      <mass value="1.7976931348623157E+308" />
+      <origin xyz="xyz7" rpy="rpy7" />
+    </inertial>
+  </link>
+  <link name="name9" type="type9">
+    <collision name="name9">
+      <origin xyz="xyz8" rpy="rpy8" />
+      <geometry>
+        <box size="size16" />
+      </geometry>
+      <verbose value="value9" />
+    </collision>
+    <visual>
+      <origin xyz="xyz8" rpy="rpy8" />
+      <geometry>
+        <box size="size17" />
+      </geometry>
+      <material name="name9">
+        <color rgba="rgba8" />
+        <texture filename="http://uri9" />
+      </material>
+    </visual>
+    <inertial>
+      <inertia ixx="-1.2000000476837158" ixy="-1.2000000476837158" ixz="-1.2000000476837158" iyy="-1.2000000476837158" iyz="-1.2000000476837158" izz="-1.2000000476837158" />
+      <mass value="-1.2000000476837158" />
+      <origin xyz="xyz8" rpy="rpy8" />
+    </inertial>
+  </link>
+  <material name="name7">
+    <color rgba="rgba6" />
+    <texture filename="http://uri7" />
+  </material>
+  <material name="name8">
+    <color rgba="rgba7" />
+    <texture filename="http://uri8" />
+  </material>
+  <material name="name9">
+    <color rgba="rgba8" />
+    <texture filename="http://uri9" />
+  </material>
+  <transmission name="name7" type="type7">
+    <leftActuator mechanicalReduction="1.7976931348623157E+308" name="name19" />
+    <rightActuator mechanicalReduction="1.7976931348623157E+308" name="name19" />
+    <flexJoint mechanicalReduction="1.7976931348623157E+308" name="name19" />
+    <rollJoint mechanicalReduction="1.7976931348623157E+308" name="name19" />
+    <gap_joint L0="1.7976931348623157E+308" a="1.7976931348623157E+308" b="1.7976931348623157E+308" gear_ratio="1.7976931348623157E+308" h="1.7976931348623157E+308" mechanical_reduction="1.7976931348623157E+308" name="name19" phi0="1.7976931348623157E+308" r="1.7976931348623157E+308" screw_reduction="1.7976931348623157E+308" t0="1.7976931348623157E+308" theta0="1.7976931348623157E+308" />
+    <passive_joint name="name55" />
+    <passive_joint name="name56" />
+    <passive_joint name="name57" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name19" />
+    <joint name="name19" />
+    <leftActuator mechanicalReduction="-4.5000001192092896" name="name20" />
+    <rightActuator mechanicalReduction="-4.5000001192092896" name="name20" />
+    <flexJoint mechanicalReduction="-4.5000001192092896" name="name20" />
+    <rollJoint mechanicalReduction="-4.5000001192092896" name="name20" />
+    <gap_joint L0="-4.5000001192092896" a="-4.5000001192092896" b="-4.5000001192092896" gear_ratio="-4.5000001192092896" h="-4.5000001192092896" mechanical_reduction="-4.5000001192092896" name="name20" phi0="-4.5000001192092896" r="-4.5000001192092896" screw_reduction="-4.5000001192092896" t0="-4.5000001192092896" theta0="-4.5000001192092896" />
+    <passive_joint name="name58" />
+    <passive_joint name="name59" />
+    <passive_joint name="name60" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-4.5000001192092896</mechanicalReduction>
+    <actuator name="name20" />
+    <joint name="name20" />
+    <leftActuator mechanicalReduction="6.5000001192092896" name="name21" />
+    <rightActuator mechanicalReduction="6.5000001192092896" name="name21" />
+    <flexJoint mechanicalReduction="6.5000001192092896" name="name21" />
+    <rollJoint mechanicalReduction="6.5000001192092896" name="name21" />
+    <gap_joint L0="6.5000001192092896" a="6.5000001192092896" b="6.5000001192092896" gear_ratio="6.5000001192092896" h="6.5000001192092896" mechanical_reduction="6.5000001192092896" name="name21" phi0="6.5000001192092896" r="6.5000001192092896" screw_reduction="6.5000001192092896" t0="6.5000001192092896" theta0="6.5000001192092896" />
+    <passive_joint name="name61" />
+    <passive_joint name="name62" />
+    <passive_joint name="name63" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>6.5000001192092896</mechanicalReduction>
+    <actuator name="name21" />
+    <joint name="name21" />
+  </transmission>
+  <transmission name="name8" type="type8">
+    <leftActuator mechanicalReduction="-1.7976931348623157E+308" name="name22" />
+    <rightActuator mechanicalReduction="-1.7976931348623157E+308" name="name22" />
+    <flexJoint mechanicalReduction="-1.7976931348623157E+308" name="name22" />
+    <rollJoint mechanicalReduction="-1.7976931348623157E+308" name="name22" />
+    <gap_joint L0="-1.7976931348623157E+308" a="-1.7976931348623157E+308" b="-1.7976931348623157E+308" gear_ratio="-1.7976931348623157E+308" h="-1.7976931348623157E+308" mechanical_reduction="-1.7976931348623157E+308" name="name22" phi0="-1.7976931348623157E+308" r="-1.7976931348623157E+308" screw_reduction="-1.7976931348623157E+308" t0="-1.7976931348623157E+308" theta0="-1.7976931348623157E+308" />
+    <passive_joint name="name64" />
+    <passive_joint name="name65" />
+    <passive_joint name="name66" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name22" />
+    <joint name="name22" />
+    <leftActuator mechanicalReduction="1.7976931348623157E+308" name="name23" />
+    <rightActuator mechanicalReduction="1.7976931348623157E+308" name="name23" />
+    <flexJoint mechanicalReduction="1.7976931348623157E+308" name="name23" />
+    <rollJoint mechanicalReduction="1.7976931348623157E+308" name="name23" />
+    <gap_joint L0="1.7976931348623157E+308" a="1.7976931348623157E+308" b="1.7976931348623157E+308" gear_ratio="1.7976931348623157E+308" h="1.7976931348623157E+308" mechanical_reduction="1.7976931348623157E+308" name="name23" phi0="1.7976931348623157E+308" r="1.7976931348623157E+308" screw_reduction="1.7976931348623157E+308" t0="1.7976931348623157E+308" theta0="1.7976931348623157E+308" />
+    <passive_joint name="name67" />
+    <passive_joint name="name68" />
+    <passive_joint name="name69" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name23" />
+    <joint name="name23" />
+    <leftActuator mechanicalReduction="-5.6000001430511475" name="name24" />
+    <rightActuator mechanicalReduction="-5.6000001430511475" name="name24" />
+    <flexJoint mechanicalReduction="-5.6000001430511475" name="name24" />
+    <rollJoint mechanicalReduction="-5.6000001430511475" name="name24" />
+    <gap_joint L0="-5.6000001430511475" a="-5.6000001430511475" b="-5.6000001430511475" gear_ratio="-5.6000001430511475" h="-5.6000001430511475" mechanical_reduction="-5.6000001430511475" name="name24" phi0="-5.6000001430511475" r="-5.6000001430511475" screw_reduction="-5.6000001430511475" t0="-5.6000001430511475" theta0="-5.6000001430511475" />
+    <passive_joint name="name70" />
+    <passive_joint name="name71" />
+    <passive_joint name="name72" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-5.6000001430511475</mechanicalReduction>
+    <actuator name="name24" />
+    <joint name="name24" />
+  </transmission>
+  <transmission name="name9" type="type9">
+    <leftActuator mechanicalReduction="7.6000001430511475" name="name25" />
+    <rightActuator mechanicalReduction="7.6000001430511475" name="name25" />
+    <flexJoint mechanicalReduction="7.6000001430511475" name="name25" />
+    <rollJoint mechanicalReduction="7.6000001430511475" name="name25" />
+    <gap_joint L0="7.6000001430511475" a="7.6000001430511475" b="7.6000001430511475" gear_ratio="7.6000001430511475" h="7.6000001430511475" mechanical_reduction="7.6000001430511475" name="name25" phi0="7.6000001430511475" r="7.6000001430511475" screw_reduction="7.6000001430511475" t0="7.6000001430511475" theta0="7.6000001430511475" />
+    <passive_joint name="name73" />
+    <passive_joint name="name74" />
+    <passive_joint name="name75" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>7.6000001430511475</mechanicalReduction>
+    <actuator name="name25" />
+    <joint name="name25" />
+    <leftActuator mechanicalReduction="-1.7976931348623157E+308" name="name26" />
+    <rightActuator mechanicalReduction="-1.7976931348623157E+308" name="name26" />
+    <flexJoint mechanicalReduction="-1.7976931348623157E+308" name="name26" />
+    <rollJoint mechanicalReduction="-1.7976931348623157E+308" name="name26" />
+    <gap_joint L0="-1.7976931348623157E+308" a="-1.7976931348623157E+308" b="-1.7976931348623157E+308" gear_ratio="-1.7976931348623157E+308" h="-1.7976931348623157E+308" mechanical_reduction="-1.7976931348623157E+308" name="name26" phi0="-1.7976931348623157E+308" r="-1.7976931348623157E+308" screw_reduction="-1.7976931348623157E+308" t0="-1.7976931348623157E+308" theta0="-1.7976931348623157E+308" />
+    <passive_joint name="name76" />
+    <passive_joint name="name77" />
+    <passive_joint name="name78" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>-1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name26" />
+    <joint name="name26" />
+    <leftActuator mechanicalReduction="1.7976931348623157E+308" name="name27" />
+    <rightActuator mechanicalReduction="1.7976931348623157E+308" name="name27" />
+    <flexJoint mechanicalReduction="1.7976931348623157E+308" name="name27" />
+    <rollJoint mechanicalReduction="1.7976931348623157E+308" name="name27" />
+    <gap_joint L0="1.7976931348623157E+308" a="1.7976931348623157E+308" b="1.7976931348623157E+308" gear_ratio="1.7976931348623157E+308" h="1.7976931348623157E+308" mechanical_reduction="1.7976931348623157E+308" name="name27" phi0="1.7976931348623157E+308" r="1.7976931348623157E+308" screw_reduction="1.7976931348623157E+308" t0="1.7976931348623157E+308" theta0="1.7976931348623157E+308" />
+    <passive_joint name="name79" />
+    <passive_joint name="name80" />
+    <passive_joint name="name81" />
+    <use_simulated_gripper_joint />
+    <mechanicalReduction>1.7976931348623157E+308</mechanicalReduction>
+    <actuator name="name27" />
+    <joint name="name27" />
+  </transmission>
+</robot>

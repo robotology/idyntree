@@ -76,12 +76,12 @@ const bool Transform::setRotation(const Rotation& rotation)
 
 const bool Transform::setPosition(const PositionRaw& position)
 {
-    setPosition(iDynTree::Position(position));
+    return setPosition(iDynTree::Position(position));
 }
 
 const bool Transform::setRotation(const RotationRaw& rotation)
 {
-    setRotation(iDynTree::Rotation(rotation));
+    return setRotation(iDynTree::Rotation(rotation));
 }
 
 
