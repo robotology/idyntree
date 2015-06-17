@@ -235,7 +235,7 @@ bool DynamicDatasetFile::loadFromFile(const std::string filename, const bool app
         
         //Get 3 axis force/torque measurements
         for(int i=0; i < nrOfMeasured3AxisFT; i++ ) {
-            Eigen::Vector3d three_ft;
+            KDL::Vector three_ft;
             three_ft(0) = get_next_double(ss,data_buffer);
             three_ft(1) = get_next_double(ss,data_buffer);
             three_ft(2) = get_next_double(ss,data_buffer);

@@ -128,7 +128,7 @@ private:
 public:
     KDL::JntArray torque_sensors_measures;
     std::vector<KDL::Wrench> wrench_sensors_measures;
-    std::vector<Eigen::Vector3d> three_axis_ft_sensors_measures;
+    std::vector<KDL::Vector> three_axis_ft_sensors_measures;
 
     /**
      * DynamicStateSample constructor
@@ -163,9 +163,9 @@ public:
 
     KDL::Wrench getWrenchMeasure(const int wrench_measured_id) const;
 
-    bool setThreeAxisForceTorqueMeasure(const Eigen::Vector3d measured_three_axis_ft, const int three_axis_ft_measured_id);
+    bool setThreeAxisForceTorqueMeasure(const KDL::Vector measured_three_axis_ft, const int three_axis_ft_measured_id);
 
-    Eigen::Vector3d getThreeAxisForceTorqueMeasure(const int three_axis_ft_measured_id) const;
+    KDL::Vector getThreeAxisForceTorqueMeasure(const int three_axis_ft_measured_id) const;
 
 };
 

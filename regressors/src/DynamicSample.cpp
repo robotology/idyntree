@@ -259,16 +259,16 @@ KDL::Wrench DynamicSensorSample::getWrenchMeasure(const int wrench_measured_id) 
     return wrench_sensors_measures[wrench_measured_id];
 }
 
-bool DynamicSensorSample::setThreeAxisForceTorqueMeasure(const Eigen::Vector3d measured_three_axis_ft, const int three_axis_ft_measured_id)
+bool DynamicSensorSample::setThreeAxisForceTorqueMeasure(const KDL::Vector measured_three_axis_ft, const int three_axis_ft_measured_id)
 {
     if( three_axis_ft_measured_id < 0 || three_axis_ft_measured_id >= nrOfThreeAxisFTSensors ) { return false; }
     three_axis_ft_sensors_measures[three_axis_ft_measured_id] = measured_three_axis_ft;
     return true;
 }
 
-Eigen::Vector3d DynamicSensorSample::getThreeAxisForceTorqueMeasure(const int three_axis_ft_measured_id) const
+KDL::Vector DynamicSensorSample::getThreeAxisForceTorqueMeasure(const int three_axis_ft_measured_id) const
 {
-    if( three_axis_ft_measured_id < 0 || three_axis_ft_measured_id >= nrOfThreeAxisFTSensors ) { return Eigen::Vector3d::Zero(); }
+    if( three_axis_ft_measured_id < 0 || three_axis_ft_measured_id >= nrOfThreeAxisFTSensors ) { return KDL::Vector(); }
     return three_axis_ft_sensors_measures[three_axis_ft_measured_id];
 }
 
