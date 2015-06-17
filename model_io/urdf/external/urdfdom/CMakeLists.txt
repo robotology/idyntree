@@ -39,13 +39,6 @@ if(URDFDOM_DO_NOT_USE_CONSOLEBRIDGE)
     add_definitions(-DURDFDOM_DO_NOT_USE_CONSOLEBRIDGE)
 endif()
 
-# Try to find a TinyXMLConfig.cmake file
-find_package(TinyXML CONFIG QUIET)
-# if a TinyXML cmake config file is not found, fallback
-# to use the FindTinyXML.cmake file
-if(NOT TinyXML_FOUND)
-   find_package(TinyXML REQUIRED)
-endif()
 include_directories(SYSTEM ${TinyXML_INCLUDE_DIRS})
 
 #find_package(urdfdom_headers)
@@ -78,9 +71,9 @@ else()
    set(PKG_DEPENDS urdfdom_headers)
 endif()
 set(cmake_conf_file "cmake/urdfdom-config.cmake")
-configure_file("${CMAKE_CURRENT_SOURCE_DIR}/${cmake_conf_file}.in" "${CMAKE_BINARY_DIR}/${cmake_conf_file}" @ONLY)
-install(FILES ${CMAKE_BINARY_DIR}/${cmake_conf_file}
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake/ COMPONENT cmake)
+#configure_file("${CMAKE_CURRENT_SOURCE_DIR}/${cmake_conf_file}.in" "${CMAKE_BINARY_DIR}/${cmake_conf_file}" @ONLY)
+#install(FILES ${CMAKE_BINARY_DIR}/${cmake_conf_file}
+#  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake/ COMPONENT cmake)
 
 # If the proper option is selected by the user
 # avoid trying to install urdf_parser_py via CMake
