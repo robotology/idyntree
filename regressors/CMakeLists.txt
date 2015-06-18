@@ -9,10 +9,13 @@ if(MSVC)
 endif(MSVC)
 
 include_directories(include/kdl_codyco/regressors)
+include_directories(include)
 
 file(GLOB IDYNTREE_REGRESSORS_HEADERS
      "include/kdl_codyco/regressors/*.hpp"
  )
+
+set(IDYNTREE_REGRESSOR_HEADERS_EXP include/iDynTree/Regressors/DynamicsRegressorParameters.h)
 
 # TODO \todo : avoid globbing and explicitly state everithing
 
@@ -20,8 +23,10 @@ file(GLOB IDYNTREE_REGRESSORS_SOURCES
     "src/*.cpp"
 )
 
-SOURCE_GROUP("Source Files" FILES ${IDYNTREE_REGRESSORS_SOURCES})
-SOURCE_GROUP("Header Files" FILES ${IDYNTREE_REGRESSORS_HEADERS})
+set(IDYNTREE_REGRESSOR_SOURCES_EXP DynamicsRegressorParameters.cpp)
+
+SOURCE_GROUP("Source Files" FILES ${IDYNTREE_REGRESSORS_SOURCES} ${IDYNTREE_REGRESSORS_SOURCES_EXP})
+SOURCE_GROUP("Header Files" FILES ${IDYNTREE_REGRESSORS_HEADERS} ${IDYNTREE_REGRESSORS_HEADERS_EXP})
 
 #include other iDynTree headers as system
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
@@ -35,10 +40,11 @@ include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
 
 include(YCMDefaultDirs)
 
-add_library(idyntree-regressors ${IDYNTREE_REGRESSORS_SOURCES} ${IDYNTREE_REGRESSORS_HEADERS})
+add_library(idyntree-regressors ${IDYNTREE_REGRESSORS_SOURCES}     ${IDYNTREE_REGRESSORS_HEADERS}
+                                ${IDYNTREE_REGRESSORS_SOURCES_EXP} ${IDYNTREE_REGRESSORS_HEADERS_EXP})
 
 target_include_directories(idyntree-regressors PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
+                                                      "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
 
 target_link_libraries(idyntree-regressors ${orocos_kdl_LIBRARIES} idyntree-core idyntree-sensors)
 

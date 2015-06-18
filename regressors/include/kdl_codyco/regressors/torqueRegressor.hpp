@@ -97,9 +97,11 @@ public:
 
         int getNrOfOutputs();
 
-        std::vector<int> getRelativeJunctions();
+        virtual std::vector<int> getRelativeJunctions();
 
-        int computeRegressor(const KDL::JntArray &q,
+        virtual iDynTree::Regressors::DynamicsRegressorParametersList getUsedParameters();
+
+        virtual int computeRegressor(const KDL::JntArray &q,
                               const KDL::JntArray &q_dot,
                               const KDL::JntArray &q_dotdot,
                               const std::vector<KDL::Frame> & X_dynamic_base,

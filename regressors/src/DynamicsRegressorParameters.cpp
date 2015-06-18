@@ -8,7 +8,11 @@
  * http://www.codyco.eu
  */
 
-#include "../../iDynTree/Regressors/DynamicsRegressorParameters.h"
+#include "iDynTree/Regressors/DynamicsRegressorParameters.h"
+
+#include <string>
+#include <cassert>
+#include <sstream>
 
 namespace iDynTree
 {
@@ -16,12 +20,101 @@ namespace iDynTree
 namespace Regressors
 {
 
+typedef std::vector<DynamicsRegressorParameter> ParamSet;
+
 unsigned int DynamicsRegressorParametersList::getNrOfParameters() const
 {
     return this->parameters.size();
 }
 
-DynamicsRegressorParameterCategory getCategory(DynamicsRegressorParameterType & paramType)
+bool DynamicsRegressorParametersList::addParam(const DynamicsRegressorParameter& param)
+{
+    // We store the parameters in the DynamicsRegressorParametersList as a ordered list
+    // of parameters.. hence we will keep the vector ordered by performing insertion only
+    // in an ordered way
+    for(ParamSet::iterator it  = this->parameters.begin();
+        it != this->parameters.end(); it++)
+    {
+        // if param is equal to an element of the vector, we can avoid adding it
+        if( param == *it )
+        {
+            return true;
+        }
+
+        // if param is lower then the current element, we insert it in the vector and we exit
+        if( param < *it )
+        {
+            this->parameters.insert(it,param);
+            return true;
+        }
+    }
+
+    // if no element in the vector is bigger than param, add it at the end of the vector
+    this->parameters.insert(this->parameters.end(),param);
+    return true;
+}
+
+
+bool DynamicsRegressorParametersList::addList(const DynamicsRegressorParametersList& new_params)
+{
+    for(ParamSet::const_iterator it  = new_params.parameters.begin();
+        it != new_params.parameters.end(); it++)
+    {
+        this->addParam(*it);
+    }
+
+    return true;
+}
+
+bool DynamicsRegressorParameter::operator<(const DynamicsRegressorParameter& other) const
+{
+    if( this->category < other.category )
+    {
+        return true;
+    }
+    else if( this->category > other.category )
+    {
+        return false;
+    }
+
+    // If they are in the same category
+    //the index will decide the order
+
+    if( this->index < other.index )
+    {
+        return true;
+    }
+    else if( this->index > other.index )
+    {
+        return false;
+    }
+
+    // If they are in the same category & index
+    // the type will decide the order
+
+    if( this->type < other.type )
+    {
+        return true;
+    }
+    else if( this->type > other.type )
+    {
+        return false;
+    }
+
+    //if they are equal then < is false
+    assert(*this == other);
+    return false;
+}
+
+bool DynamicsRegressorParameter::operator==(const DynamicsRegressorParameter& other) const
+{
+    return (this->category == other.category) &&
+           (this->index    == other.index)    &&
+           (this->type     == other.type);
+}
+
+
+DynamicsRegressorParameterCategory getCategory(const DynamicsRegressorParameterType paramType)
 {
     switch(paramType)
     {
@@ -51,9 +144,10 @@ DynamicsRegressorParameterCategory getCategory(DynamicsRegressorParameterType & 
 
 // \todo add a function that accepts an UndirectedTree and a SensorsTree to resolve link and sensors
 // indices to names
-std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned int parameter_index)
+std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned int parameter_index) const
 {
     std::stringstream ss;
+    std::string inertial_parameter_type;
 
     if( parameter_index >= this->getNrOfParameters() ) {
         ss << "DynamicRegressorGenerator::getDescriptionOfParameter error: parameter_index "
@@ -61,7 +155,7 @@ std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned 
         return ss.str();
     }
 
-    if( getCategory(parameters[parameter_index].type) == LINK_PARAM )
+    if( parameters[parameter_index].category == LINK_PARAM )
     {
         switch( parameters[parameter_index].type )
         {
@@ -100,7 +194,7 @@ std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned 
         << inertial_parameter_type << " of link " << parameters[parameter_index].index;
     }
 
-    if( getCategory(parameters[parameter_index].type) == SENSOR_FT_PARAM )
+    if( parameters[parameter_index].category == SENSOR_FT_PARAM )
     {
         std::string ft_offset_type;
         switch( parameters[parameter_index].type )
@@ -108,10 +202,10 @@ std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned 
             case SENSOR_FT_OFFSET_FORCE_X:
                 ft_offset_type = "x component of force offset";
                 break;
-            case SENSOR_FT_OFFSET_FORCE_X:
+            case SENSOR_FT_OFFSET_FORCE_Y:
                 ft_offset_type = "y component of force offset";
                 break;
-            case SENSOR_FT_OFFSET_FORCE_Y:
+            case SENSOR_FT_OFFSET_FORCE_Z:
                 ft_offset_type = "z component of force offset";
                 break;
             case SENSOR_FT_OFFSET_TORQUE_X:

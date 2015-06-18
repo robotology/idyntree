@@ -63,9 +63,11 @@ class baseDynamicsRegressor : public DynamicRegressorInterface
 
         virtual ~baseDynamicsRegressor() {};
 
-        int getNrOfOutputs();
+        virtual int getNrOfOutputs();
 
-        std::vector<int> getRelativeJunctions();
+        virtual std::vector<int> getRelativeJunctions();
+
+        virtual iDynTree::Regressors::DynamicsRegressorParametersList getUsedParameters();
 
         int computeRegressor(const KDL::JntArray &q,
                               const KDL::JntArray &q_dot,

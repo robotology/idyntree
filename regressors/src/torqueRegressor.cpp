@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
 
-#include "torqueRegressor.hpp"
+#include "kdl_codyco/regressors/torqueRegressor.hpp"
 
 #include "kdl_codyco/regressor_utils.hpp"
 
@@ -156,6 +156,14 @@ std::vector<int> torqueRegressor::getRelativeJunctions()
     return relative_junction;
 }
 
+iDynTree::Regressors::DynamicsRegressorParametersList torqueRegressor::getUsedParameters()
+{
+    assert(p_undirected_tree->getNrOfLinks() == linkIndeces2regrCols.size());
+
+    return getLegacyUsedParameters(linkIndeces2regrCols,
+                                   activated_ft_sensors.size(),
+                                   this->consider_ft_offset);
+}
 
 int torqueRegressor::computeRegressor(const KDL::JntArray &q,
                                       const KDL::JntArray &/*q_dot*/,

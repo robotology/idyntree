@@ -27,12 +27,6 @@ namespace CoDyCo {
 
 namespace Regressors {
 
-
-
-//typedef FixedParameterIndex int;
-//typedef UnknownParameterIndex int;
-//typedef ParameterIndex int;
-
 /**
  * The dynamics regressor generator is a class for calculating arbitrary regressor
  * related to robot dynamics, for identification of dynamics parameters, such
@@ -355,7 +349,6 @@ private:
     int NrOfFakeLinks;
     int NrOfDOFs;
     int NrOfRealLinks_gen;
-    int NrOfFTSensors;
     int NrOfAllPossibleParameters; /**< Define the maximum number of parameters */
     int NrOfOutputs;
 

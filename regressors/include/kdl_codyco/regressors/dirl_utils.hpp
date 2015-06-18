@@ -18,6 +18,7 @@
 #include "iDynTree/Sensors/Sensors.hpp"
 #include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 #include "iDynTree/Core/Wrench.h"
+#include "iDynTree/Regressors/DynamicsRegressorParameters.h"
 
 namespace KDL {
 namespace CoDyCo {
@@ -87,12 +88,26 @@ namespace Regressors
        // this will permit to have for all sensor a similar signature:
 //        bool simulateMeasurement(const KDL::CoDyCo::RobotDynamicState & state,
 //                                     MeasurementType & simulated_measurement);
-      
+
      bool simulateMeasurement_sixAxisFTSensor(KDL::CoDyCo::Traversal & dynamic_traversal,
                               std::vector<KDL::Wrench> f,
                               iDynTree::SixAxisForceTorqueSensor *sixAxisForceTorqueSensor,
                               iDynTree::Wrench & simulated_measurement);
 
+     /**
+      * For each number from 0 to 9, get a distint link related DynamicsRegressorParameterType.
+      *
+      */
+     iDynTree::Regressors::DynamicsRegressorParameterType getLinkParameter(unsigned int nr);
+
+    /**
+     * Get the legacy list of parameters that is currently hardcoded in all the subregressors.
+     *
+     */
+    iDynTree::Regressors::DynamicsRegressorParametersList
+        getLegacyUsedParameters(const std::vector<int> & linkIndeces2regrCols,
+                                const int nrOfFTSensors = -1,
+                                const bool withFToffsetParameters=false);
 
 
 }

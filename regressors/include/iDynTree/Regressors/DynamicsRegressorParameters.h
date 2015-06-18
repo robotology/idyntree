@@ -6,6 +6,10 @@
  */
 
 #ifndef IDYNTREE_DYNREGRESSORPARAMETERS_H
+#define IDYNTREE_DYNREGRESSORPARAMETERS_H
+
+#include <vector>
+#include <string>
 
 namespace iDynTree {
 namespace Regressors {
@@ -137,8 +141,12 @@ enum DynamicsRegressorParameterType
 
 struct DynamicsRegressorParameter
 {
-    DynamicsRegressorParameterType type;
+    DynamicsRegressorParameterCategory category;
     int index;
+    DynamicsRegressorParameterType type;
+
+    bool operator<(const DynamicsRegressorParameter& other) const;
+    bool operator==(const DynamicsRegressorParameter& other) const;
 };
 
 class DynamicsRegressorParametersList
@@ -148,6 +156,26 @@ public:
     std::vector<DynamicsRegressorParameter> parameters;
 
     std::string getDescriptionOfParameter(unsigned int param_index) const;
+
+    /**
+     * Add a new parameter to the list.
+     *
+     */
+    bool addParam(const DynamicsRegressorParameter & param);
+
+    /**
+     * Add a list of parameters to this list.
+     *
+     * @param list the list of parameters to add.
+     * @return true if all went well, false otherwise.
+     */
+    bool addList(const DynamicsRegressorParametersList & new_params);
+
+    /**
+     * Get the number of parameters in this list.
+     *
+     * @return the number of parameters contained in this list in this list.
+     */
     unsigned int getNrOfParameters() const;
 };
 

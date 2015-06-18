@@ -114,6 +114,11 @@ public:
      */
     loadRegressorStructureFromFile(const std::string & filename);
 
+    /**
+     * Load the regressor structure from a configuration string, following the
+     * XML structure documented in loadRegressorStructureFromFile .
+     *
+     */
     loadRegressorStructureFromString(const std::string & regressorStructureString);
 
     /**
@@ -135,14 +140,18 @@ public:
     //@{
     /**
     *
-    * Get the number of parameters used by the regressor currently generated (i.e. the number of rows of the regressor)
-    * (default: 10*tree.getNrOfSegments(), then depending on the type of regressor more can be added)
+    * Get the number of parameters used by the regressor currently generated.
+    * This depends on the structure of the regressors added to the regressor generator.
+    * The number of the parameters will be the number of columns of the generated
+    * regressor.
     *
+    * @return the number of parameters used by the regressor currently generated
     */
     int getNrOfParameters() const;
 
     /**
-     * Get the number of outputs by the regressor currently generated (i.e. the number of columns of the regressor)
+     * Get the number of outputs by the regressor currently generated.
+     * The number of outputs is the number of columns of the generated regressor.
      *
      */
     int getNrOfOutputs() const;
@@ -162,30 +171,63 @@ public:
 
 
     /**
-    * Get a human readable description of all the parameters
+    * Get a human readable description of all the parameters.
     *
     * @return a std::string containg the description of the parameters
     */
     std::string getDescriptionOfParameters(const iDynTree::VectorDynSize & values);
 
     /**
-     * Get a human readable description of a given output
+     * Get a human readable description of a given output.
      *
      */
     std::string getDescriptionOfOutput(int output_index);
 
     /**
-     * Get a human readable description of all the outputs
+     * Get a human readable description of all the outputs.
      *
      */
     std::string getDescriptionOfOutputs();
+
+    /**
+     * Get a human readable description of a given inertal degree of freedom of the robot.
+     *
+     */
+    std::string getDescriptionOfDegreeOfFreedom(int dof_index);
+
+    /**
+     * Get a human readable description of all the internal degrees of freedom of the robot.
+     *
+     * @return a std::string containing the description of the internal degrees of freedom.
+     */
+    std::string getDescriptionOfDegreesOfFreedom();
+
+    /**
+     * Get a human readable description of a given link considered in the regressor.
+     *
+     */
+    std::string getDescriptionOfLink(int link_index);
+
+    /**
+     * Get a human readable description of all links considered in the regressor.
+     *
+     * @return a std::string containing the description of the .
+     */
+    std::string getDescriptionOfLinks();
+
+    /**
+     * Get name of the base link.
+     *
+     */
+    std::string getBaseLinkName();
+
 
     //@}
 
 
     /**
      * @name Methods to access the underlyng model for the robot and the sensors
-     *
+     * (todo)
      */
     //@{
 
@@ -203,7 +245,7 @@ public:
 
     /**
      * Set the state for the robot (floating base)
-     *
+     * \todo TODO define a RobotState class.
      */
     bool setRobotState(const iDynTree::VectorDynSize& q,
                        const iDynTree::VectorDynSize& q_dot,
@@ -219,6 +261,8 @@ public:
      *  world_T_base      = iDynTree::Transform::Identity()
      *  base_velocity     = iDynTree::Twist::Zero();
      *  base_acceleration = iDynTree::Twist::Zero();
+     *
+     * \todo TODO define a RobotState class.
      */
     bool setRobotState(const iDynTree::VectorDynSize &q,
                        const iDynTree::VectorDynSize &q_dot,
@@ -249,7 +293,7 @@ public:
     /**
      * Return the dynamics parameters related to this regressor contained in the model.
      *
-     * @param[out] a getNrOfUnknownParameters() Vector,
+     * @param[out] values a Vector of size getNrOfParameters() ,
      * @return true if all went well, false if there was an error
      */
     bool getModelParameters(iDynTree::VectorDynSize & values);

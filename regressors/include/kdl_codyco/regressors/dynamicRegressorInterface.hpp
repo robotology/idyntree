@@ -19,7 +19,7 @@
 #include <Eigen/Dense>
 
 namespace iDynTree {
- class SensorsMeasurements;  
+ class SensorsMeasurements;
 }
 
 
@@ -38,7 +38,7 @@ public:
 
     virtual std::vector<int> getRelativeJunctions() = 0;
 
-    virtual std::vector<iDynTree::Regressors::DynamicsRegressorParameterType> getUsedParameters();
+    virtual iDynTree::Regressors::DynamicsRegressorParametersList getUsedParameters() = 0;
 
     /**
      * Configure the regressor given a UndirectedTree (for example allocating

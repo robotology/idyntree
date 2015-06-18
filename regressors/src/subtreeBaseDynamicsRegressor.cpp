@@ -188,6 +188,16 @@ std::vector<int> subtreeBaseDynamicsRegressor::getRelativeJunctions()
     return relative_junctions;
 }
 
+iDynTree::Regressors::DynamicsRegressorParametersList subtreeBaseDynamicsRegressor::getUsedParameters()
+{
+    assert(p_undirected_tree->getNrOfLinks() == linkIndeces2regrCols.size());
+
+    return getLegacyUsedParameters(linkIndeces2regrCols,
+                                   p_sensors_tree->getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),
+                                   this->consider_ft_offset);
+}
+
+
 
 int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &/*q*/,
                                                     const KDL::JntArray &/*q_dot*/,
