@@ -35,6 +35,16 @@
 /* Author: Silvio Traversaro */
 
 #include "urdf_sensor_import.hpp"
+
+#include <iDynTree/Core/Transform.h>
+#include <kdl_codyco/undirectedtree.hpp>
+
+#include <kdl_codyco/KDLConversions.h>
+
+#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
+
+
 #include <fstream>
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
@@ -168,6 +178,87 @@ bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorDa
     }
 
     return true;
+}
+
+iDynTree::SensorsList sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                          std::string urdf_filename)
+{
+    ifstream ifs(urdf_filename.c_str());
+    std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
+                       (std::istreambuf_iterator<char>()    ) );
+
+    return sensorsTreeFromURDFString(undirected_tree,xml_string);
+}
+
+iDynTree::SensorsList sensorsTreeFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                                std::string urdf_string)
+{
+    iDynTree::SensorsList sensors_tree;
+
+    std::vector<kdl_format_io::FTSensorData> ft_sensors;
+    bool ok = kdl_format_io::ftSensorsFromUrdfString(urdf_string,ft_sensors);
+
+    if( !ok )
+    {
+        std::cerr << "Error in loading ft sensors information from URDF file" << std::endl;
+    }
+
+    for(int ft_sens = 0; ft_sens < ft_sensors.size(); ft_sens++ )
+    {
+        iDynTree::SixAxisForceTorqueSensor new_sens;
+
+        // Convert the information in the FTSensorData format in
+        // a series of SixAxisForceTorqueSensor objects, using the
+        // serialization provided in the undirected_tree object
+        new_sens.setName(ft_sensors[ft_sens].reference_joint);
+
+        new_sens.setParent(ft_sensors[ft_sens].reference_joint);
+
+        KDL::CoDyCo::JunctionMap::const_iterator junct_it
+            = undirected_tree.getJunction(ft_sensors[ft_sens].reference_joint);
+
+        new_sens.setParentIndex(junct_it->getJunctionIndex());
+
+        int parent_link = junct_it->getParentLink()->getLinkIndex();
+        int child_link = junct_it->getChildLink()->getLinkIndex();
+
+        KDL::Frame parent_link_H_child_link = junct_it->pose(0.0,false);
+        KDL::Frame child_link_H_sensor = ft_sensors[ft_sens].sensor_pose;
+
+        // For now we assume that the six axis ft sensor is attached to a
+        // fixed junction. Hence the first/second link to sensor transforms
+        // are fixed are given by the frame option
+        if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::PARENT_LINK_FRAME )
+        {
+            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::Transform());
+            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(parent_link_H_child_link.Inverse()));
+        }
+        else if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::CHILD_LINK_FRAME )
+        {
+            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link));
+            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::Transform());
+        }
+        else
+        {
+            assert( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::SENSOR_FRAME );
+            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link*child_link_H_sensor));
+            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(child_link_H_sensor));
+        }
+
+        if( ft_sensors[ft_sens].measure_direction == kdl_format_io::FTSensorData::CHILD_TO_PARENT )
+        {
+            new_sens.setAppliedWrenchLink(parent_link);
+        }
+        else
+        {
+            assert( ft_sensors[ft_sens].measure_direction == kdl_format_io::FTSensorData::CHILD_TO_PARENT );
+            new_sens.setAppliedWrenchLink(child_link);
+        }
+
+        sensors_tree.addSensor(new_sens);
+    }
+
+    return sensors_tree;
 }
 
 }

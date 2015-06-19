@@ -49,6 +49,9 @@ namespace iDynTree
         SpatialMotionVectorRaw operator+(const SpatialMotionVectorRaw &other) const;
         SpatialMotionVectorRaw operator-(const SpatialMotionVectorRaw &other) const;
         SpatialMotionVectorRaw operator-() const;
+
+        /** constructor helpers */
+        static SpatialMotionVectorRaw Zero();
     };
 }
 

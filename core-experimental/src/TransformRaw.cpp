@@ -146,6 +146,11 @@ SpatialForceVectorRaw TransformRaw::operator*(const SpatialForceVectorRaw& op2) 
     return TransformRaw::transform(*this,op2);
 }
 
+TransformRaw TransformRaw::Identity()
+{
+    return TransformRaw();
+}
+
 
 std::string TransformRaw::toString() const
 {

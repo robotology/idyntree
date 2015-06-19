@@ -44,8 +44,8 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 add_subdirectory(core-experimental)
 add_subdirectory(core)
 add_subdirectory(sensors)
-add_subdirectory(regressors)
 add_subdirectory(model_io)
+add_subdirectory(regressors)
 add_subdirectory(yarp)
 
 # compile simple command line tools

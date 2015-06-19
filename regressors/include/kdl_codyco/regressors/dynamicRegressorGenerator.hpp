@@ -70,6 +70,9 @@ public:
 
     int changeKinematicBase(std::string new_kinematic_base_name);
 
+    int getDynamicBaseIndex();
+    int getKinematicBaseIndex();
+
 
      /** @name Methods to add rows to the regressor
        *  This methods are used to build the structure of your regressor, adding rows to it.

@@ -46,14 +46,14 @@ add_library(idyntree-regressors ${IDYNTREE_REGRESSORS_SOURCES}     ${IDYNTREE_RE
 target_include_directories(idyntree-regressors PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
                                                       "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(idyntree-regressors ${orocos_kdl_LIBRARIES} idyntree-core idyntree-sensors)
+target_link_libraries(idyntree-regressors ${orocos_kdl_LIBRARIES} idyntree-core idyntree-sensors idyntree-modelio-urdf ${TinyXML_LIBRARIES} )
 
 set_target_properties(idyntree-regressors PROPERTIES
   SOVERSION "${${VARS_PREFIX}_VERSION}"
   VERSION "${${VARS_PREFIX}_VERSION}"
   COMPILE_FLAGS "${CMAKE_CXX_FLAGS_ADD}")
 
-set_property(TARGET idyntree-regressors PROPERTY PUBLIC_HEADER ${IDYNTREE_REGRESSORS_HEADERS})
+set_property(TARGET idyntree-regressors idyntree-modelio-urdf PROPERTY PUBLIC_HEADER ${IDYNTREE_REGRESSORS_HEADERS})
 
 install(TARGETS idyntree-regressors
         EXPORT iDynTree

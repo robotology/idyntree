@@ -14,6 +14,11 @@
 #include <kdl_codyco/KDLConversions.h>
 
 #include <iDynTree/Core/Transform.h>
+#include <iDynTree/Regressors/DynamicsRegressorGenerator.h>
+
+#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/Core/Twist.h>
 
 #include <kdl_format_io/urdf_import.hpp>
 #include <kdl_format_io/urdf_sensor_import.hpp>
@@ -30,6 +35,7 @@
 #include <vector>
 
 #include <cstdlib>
+#include <cassert>
 
 double random_double()
 {
@@ -76,82 +82,13 @@ iDynTree::Wrench simulateFTSensorFromKinematicState(const KDL::CoDyCo::Undirecte
     iDynTree::Wrench simulate_measurement;
 
     KDL::CoDyCo::Regressors::simulateMeasurement_sixAxisFTSensor(traversal,f,p_sens,simulate_measurement);
-    
-    
+
+
     return simulate_measurement;
 }
 
 // This function logic should be moved to some better place for sure
-iDynTree::SensorsList sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
-                                             std::string urdf_filename)
-{
-    iDynTree::SensorsList sensors_tree;
 
-    std::vector<kdl_format_io::FTSensorData> ft_sensors;
-    bool ok = kdl_format_io::ftSensorsFromUrdfFile(urdf_filename,ft_sensors);
-
-    if( !ok )
-    {
-        std::cerr << "Error in loading ft sensors information from URDF file" << std::endl;
-    }
-
-    for(int ft_sens = 0; ft_sens < ft_sensors.size(); ft_sens++ )
-    {
-        iDynTree::SixAxisForceTorqueSensor new_sens;
-
-        // Convert the information in the FTSensorData format in
-        // a series of SixAxisForceTorqueSensor objects, using the
-        // serialization provided in the undirected_tree object
-        new_sens.setName(ft_sensors[ft_sens].reference_joint);
-
-        new_sens.setParent(ft_sensors[ft_sens].reference_joint);
-
-        KDL::CoDyCo::JunctionMap::const_iterator junct_it
-            = undirected_tree.getJunction(ft_sensors[ft_sens].reference_joint);
-
-        new_sens.setParentIndex(junct_it->getJunctionIndex());
-
-        int parent_link = junct_it->getParentLink()->getLinkIndex();
-        int child_link = junct_it->getChildLink()->getLinkIndex();
-
-        KDL::Frame parent_link_H_child_link = junct_it->pose(0.0,false);
-        KDL::Frame child_link_H_sensor = ft_sensors[ft_sens].sensor_pose;
-
-        // For now we assume that the six axis ft sensor is attached to a
-        // fixed junction. Hence the first/second link to sensor transforms
-        // are fixed are given by the frame option
-        if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::PARENT_LINK_FRAME )
-        {
-            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::Transform());
-            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(parent_link_H_child_link.Inverse()));
-        }
-        else if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::CHILD_LINK_FRAME )
-        {
-            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link));
-            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::Transform());
-        }
-        else
-        {
-            assert( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::SENSOR_FRAME );
-            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link*child_link_H_sensor));
-            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(child_link_H_sensor));
-        }
-
-        if( ft_sensors[ft_sens].measure_direction == kdl_format_io::FTSensorData::CHILD_TO_PARENT )
-        {
-            new_sens.setAppliedWrenchLink(parent_link);
-        }
-        else
-        {
-            assert( ft_sensors[ft_sens].measure_direction == kdl_format_io::FTSensorData::CHILD_TO_PARENT );
-            new_sens.setAppliedWrenchLink(child_link);
-        }
-
-        sensors_tree.addSensor(new_sens);
-    }
-
-    return sensors_tree;
-}
 
 int main()
 {
@@ -173,9 +110,11 @@ int main()
     // to the undirected tree, pass it as a second argument to the constructor
     KDL::CoDyCo::UndirectedTree icub_undirected_tree(icub_tree);
 
+    std::cout << "icub_tree serialization 1 : " << icub_undirected_tree.getSerialization().toString();
+
     // Load a sensors tree (for ft sensors) from the information extracted from urdf file
     //  and using the serialization provided in the undirected tree
-    iDynTree::SensorsList sensors_tree = sensorsTreeFromURDF(icub_undirected_tree,icub_urdf_filename);
+    iDynTree::SensorsList sensors_tree = kdl_format_io::sensorsTreeFromURDF(icub_undirected_tree,icub_urdf_filename);
 
     //Create a regressor generator
     KDL::CoDyCo::Regressors::DynamicRegressorGenerator regressor_generator(icub_undirected_tree,sensors_tree);
@@ -201,7 +140,8 @@ int main()
         q(i) = random_double();
     }
 
-    base_acceleration.vel[2] = -9.81;
+    double gravity_norm = 9.8;
+    base_acceleration.vel[2] = -gravity_norm;
 
     regressor_generator.setRobotState(q,q,q,base_velocity,base_acceleration);
 
@@ -209,13 +149,13 @@ int main()
     iDynTree::Wrench simulate_measurement = simulateFTSensorFromKinematicState(icub_undirected_tree,
         q,q,q,base_velocity,base_acceleration,"l_arm_ft_sensor",sensors_tree);
 
-        
+
     //Create a regressor and check the returned sensor value
     Eigen::MatrixXd regressor(regressor_generator.getNrOfOutputs(),regressor_generator.getNrOfParameters());
     Eigen::VectorXd kt(regressor_generator.getNrOfOutputs());
     regressor_generator.computeRegressor(regressor,kt);
 
-    std::cout << "regressors : " << regressor << std::endl;
+    //std::cout << "regressors : " << regressor << std::endl;
 
     Eigen::VectorXd parameters(regressor_generator.getNrOfParameters());
     parameters.setZero();
@@ -227,8 +167,58 @@ int main()
 
     Eigen::Matrix<double,6,1> sens = regressor*parameters;
 
+    ////////////////////////////////////////////////////////////
+    ///// Test also the new iDynTree regressor infrastructure
+    ////////////////////////////////////////////////////////////
+    iDynTree::Regressors::DynamicsRegressorGenerator new_generator;
+
+    // load robot and sensor model
+    ok = ok && new_generator.loadRobotAndSensorsModelFromFile(icub_urdf_filename);
+
+    assert(ok);
+
+    // load regressor structure (this should be actually loaded from file)
+    std::string regressor_structure
+        = "<regressor> "
+          "  <subtreeBaseDynamics> "
+          "    <FTSensorLink>l_upper_arm</FTSensorLink> "
+          "  </subtreeBaseDynamics> "
+          "</regressor>";
+
+    ok = ok && new_generator.loadRegressorStructureFromString(regressor_structure);
+
+    assert(ok);
+
+    iDynTree::VectorDynSize q_idyntree(q.rows());
+
+    ok = ok && iDynTree::ToiDynTree(q,q_idyntree);
+
+    assert(ok);
+
+    iDynTree::Twist gravity;
+    gravity(2) = gravity_norm;
+
+    ok = ok && new_generator.setRobotState(q_idyntree,q_idyntree,q_idyntree,gravity);
+
+    assert(ok);
+
+    iDynTree::MatrixDynSize regr_idyntree(new_generator.getNrOfOutputs(),new_generator.getNrOfParameters());
+    iDynTree::VectorDynSize kt_idyntree(new_generator.getNrOfOutputs());
+    iDynTree::VectorDynSize param_idyntree(new_generator.getNrOfParameters());
+
+    ok = ok && new_generator.getModelParameters(param_idyntree);
+
+    ok = ok && new_generator.computeRegressor(regr_idyntree,kt_idyntree);
+
+    Eigen::Matrix<double,6,1> sens_idyntree = Eigen::Map<Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(regr_idyntree.data(),regr_idyntree.rows(),regr_idyntree.cols())*
+                                      Eigen::Map<Eigen::VectorXd>(param_idyntree.data(),param_idyntree.size());
+
+    std::cout << "Parameters norm old " << parameters.norm() << std::endl;
+    std::cout << "Parameters norm new " << Eigen::Map<Eigen::VectorXd>(param_idyntree.data(),param_idyntree.size()).norm() << std::endl;
     std::cout << "Sensor measurement from regressor*model_parameters: " << sens << std::endl;
+    std::cout << "Sensor measurement from regressor*model_parameters (new): " << sens_idyntree << std::endl;
     std::cout << "Sensor measurement from RNEA:                       " << KDL::CoDyCo::toEigen( iDynTree::ToKDL(simulate_measurement)) << std::endl;
+
 
     double tol = 1e-5;
     if( (KDL::CoDyCo::toEigen(iDynTree::ToKDL(simulate_measurement))+sens).norm() > tol )
@@ -236,6 +226,13 @@ int main()
         std::cerr << "[ERR] iCubLeftArmRegressor error" << std::endl;
         return EXIT_FAILURE;
     }
+
+    if( (KDL::CoDyCo::toEigen(iDynTree::ToKDL(simulate_measurement))+sens_idyntree).norm() > tol )
+    {
+        std::cerr << "[ERR] iCubLeftArmRegressor error: failure in new iDynTree regressor generator" << std::endl;
+        return EXIT_FAILURE;
+    }
+
 
     return EXIT_SUCCESS;
 }

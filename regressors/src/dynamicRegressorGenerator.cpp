@@ -157,6 +157,17 @@ int DynamicRegressorGenerator::changeKinematicBase(std::string new_kinematic_bas
     return 0;
 }
 
+int DynamicRegressorGenerator::getDynamicBaseIndex()
+{
+    return dynamic_traversal.getBaseLink()->getLinkIndex();
+}
+
+int DynamicRegressorGenerator::getKinematicBaseIndex()
+{
+    return kinematic_traversal.getBaseLink()->getLinkIndex();
+}
+
+
 int DynamicRegressorGenerator::getNrOfParameters() const
 {
     return parameters_desc.getNrOfParameters();

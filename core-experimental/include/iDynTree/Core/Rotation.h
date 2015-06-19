@@ -15,6 +15,8 @@
 namespace iDynTree
 {
     class Position;
+    class Twist;
+    class Wrench;
 
     /**
      * Class representation the rotation of an orientation frame
@@ -84,11 +86,17 @@ namespace iDynTree
         static Rotation compose(const Rotation & op1, const Rotation & op2);
         static Rotation inverse2(const Rotation & orient);
         static Position transform(const Rotation & op1, const Position & op2);
+        static Twist  transform(const Rotation & op1, const Twist & op2);
+        static Wrench transform(const Rotation & op1, const Wrench & op2);
+
 
         /** overloaded operators **/
         Rotation operator*(const Rotation & other) const;
         Rotation inverse() const;
         Position operator*(const Position & op2) const;
+        Twist    operator*(const Twist    & op2) const;
+        Wrench   operator*(const Wrench    & op2) const;
+
 
         /** @name Output helpers.
          *  Output helpers.

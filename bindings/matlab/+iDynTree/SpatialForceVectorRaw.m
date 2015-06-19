@@ -63,5 +63,8 @@ classdef SpatialForceVectorRaw < iDynTree.Vector6
     function varargout = inverse(varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(97,'SpatialForceVectorRaw_inverse',varargin{:});
     end
+    function varargout = Zero(varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(102,'SpatialForceVectorRaw_Zero',varargin{:});
+    end
   end
 end

@@ -7,6 +7,8 @@
 
 #include "RotationRaw.h"
 #include "PositionRaw.h"
+#include "SpatialMotionVectorRaw.h"
+#include "SpatialForceVectorRaw.h"
 #include "Utils.h"
 #include <sstream>
 
@@ -14,6 +16,8 @@
 #include <Eigen/Geometry>
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+typedef Eigen::Matrix<double,6,1> Vector6d;
+
 
 namespace iDynTree
 {
@@ -166,6 +170,37 @@ PositionRaw RotationRaw::transform(const RotationRaw& op1, const PositionRaw& op
     return result;
 }
 
+SpatialMotionVectorRaw RotationRaw::transform(const RotationRaw& op1, const SpatialMotionVectorRaw& op2)
+{
+    SpatialMotionVectorRaw result;
+
+    Eigen::Map<const Matrix3dRowMajor> op1Rot(op1.data());
+    Eigen::Map<const Vector6d> op2Twist(op2.data());
+
+    Eigen::Map<Vector6d> resTwist(result.data());
+
+    resTwist.segment<3>(3) =  op1Rot*(op2Twist.segment<3>(3));
+    resTwist.segment<3>(0) =  op1Rot*(op2Twist.segment<3>(0));
+
+    return result;
+}
+
+SpatialForceVectorRaw RotationRaw::transform(const RotationRaw& op1, const SpatialForceVectorRaw& op2)
+{
+    SpatialForceVectorRaw result;
+
+    Eigen::Map<const Matrix3dRowMajor> op1Rot(op1.data());
+    Eigen::Map<const Vector6d> op2Wrench(op2.data());
+
+    Eigen::Map<Vector6d> resWrench(result.data());
+
+    resWrench.segment<3>(3) =  op1Rot*(op2Wrench.segment<3>(3));
+    resWrench.segment<3>(0) =  op1Rot*(op2Wrench.segment<3>(0));
+
+    return result;
+}
+
+
 RotationRaw RotationRaw::inverse() const
 {
     return RotationRaw::inverse2(*this);
@@ -177,6 +212,16 @@ RotationRaw RotationRaw::operator*(const RotationRaw& other) const
 }
 
 PositionRaw RotationRaw::operator*(const PositionRaw& other) const
+{
+    return transform(*this,other);
+}
+
+SpatialMotionVectorRaw RotationRaw::operator*(const SpatialMotionVectorRaw& other) const
+{
+    return transform(*this,other);
+}
+
+SpatialForceVectorRaw RotationRaw::operator*(const SpatialForceVectorRaw& other) const
 {
     return transform(*this,other);
 }
@@ -212,6 +257,12 @@ RotationRaw RotationRaw::RPY(const double roll, const double pitch, const double
 {
     return RotX(roll)*RotY(pitch)*RotZ(yaw);
 }
+
+RotationRaw RotationRaw::Identity()
+{
+    return RotationRaw();
+}
+
 
 std::string RotationRaw::toString() const
 {

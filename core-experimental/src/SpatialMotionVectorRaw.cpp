@@ -113,4 +113,10 @@ SpatialMotionVectorRaw SpatialMotionVectorRaw::operator-(const SpatialMotionVect
     return compose(*this,inverse(other));
 }
 
+SpatialMotionVectorRaw SpatialMotionVectorRaw::Zero()
+{
+    return SpatialMotionVectorRaw();
+}
+
+
 }

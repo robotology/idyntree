@@ -7,7 +7,12 @@
 
 #include "Rotation.h"
 #include "Position.h"
+#include "Wrench.h"
+#include "Twist.h"
 #include "Utils.h"
+
+
+
 #include <cassert>
 #include <iostream>
 #include <sstream>
@@ -112,6 +117,25 @@ namespace iDynTree
         return result;
     }
 
+    Twist Rotation::transform(const Rotation& op1, const Twist& op2)
+    {
+        Twist result;
+
+        // \todo TODO add semantics to Twist
+        result = RotationRaw::transform(op1,op2);
+
+        return result;
+    }
+
+    Wrench Rotation::transform(const Rotation& op1, const Wrench& op2)
+    {
+        Wrench result;
+
+        // \todo TODO add semantics to Wrench
+        result = RotationRaw::transform(op1,op2);
+
+        return result;
+    }
 
     Rotation Rotation::inverse() const
     {
@@ -124,6 +148,16 @@ namespace iDynTree
     }
 
     Position Rotation::operator*(const Position& op) const
+    {
+        return transform(*this,op);
+    }
+
+    Twist Rotation::operator*(const Twist& op) const
+    {
+        return transform(*this,op);
+    }
+
+    Wrench Rotation::operator*(const Wrench& op) const
     {
         return transform(*this,op);
     }

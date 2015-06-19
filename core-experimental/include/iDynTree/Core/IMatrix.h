@@ -58,7 +58,6 @@ namespace iDynTree
          */
         virtual bool setVal(const unsigned int row, const unsigned int col, const double new_el) = 0;
 
-
         /**
          * Return the rows of the matrix.
          *
@@ -72,7 +71,6 @@ namespace iDynTree
          * @return the number of columns of the matrix.
          */
         virtual unsigned int cols() const = 0;
-
     };
 }
 

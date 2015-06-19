@@ -43,6 +43,14 @@
 #include "iDynTree/Core/TransformSemantics.h"
 #include "iDynTree/Core/Transform.h"
 
+// Sensors related data structures
+#include "iDynTree/Sensors/Sensors.hpp"
+#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+
+// Regressors related data structures
+#include "iDynTree/Regressors/DynamicsRegressorParameters.h"
+#include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
+
 %}
 
 /* Note : always include headers following the inheritance order */
@@ -69,3 +77,11 @@
 %include "iDynTree/Core/TransformRaw.h"
 %include "iDynTree/Core/TransformSemantics.h"
 %include "iDynTree/Core/Transform.h"
+
+// Sensors related data structures
+%include "iDynTree/Sensors/Sensors.hpp"
+%include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+
+// Regressors related data structures
+%include "iDynTree/Regressors/DynamicsRegressorParameters.h"
+%include "iDynTree/Regressors/DynamicsRegressorGenerator.h"

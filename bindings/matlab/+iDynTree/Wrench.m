@@ -4,9 +4,9 @@ classdef Wrench < iDynTree.SpatialForceVectorRaw
       self@iDynTree.SpatialForceVectorRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(114,'new_Wrench',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(116,'new_Wrench',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(114,'new_Wrench',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(116,'new_Wrench',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,7 +15,7 @@ classdef Wrench < iDynTree.SpatialForceVectorRaw
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(115,'delete_Wrench',self);
+        iDynTreeMATLAB_wrap(117,'delete_Wrench',self);
         self.swigOwn=false;
       end
     end

@@ -63,6 +63,9 @@ namespace iDynTree
         SpatialMotionVectorRaw operator*(const SpatialMotionVectorRaw & op2) const;
         SpatialForceVectorRaw operator*(const SpatialForceVectorRaw & op2) const;
 
+        /** constructor helpers */
+        static TransformRaw Identity();
+
         /** @name Output helpers.
          *  Output helpers.
          */

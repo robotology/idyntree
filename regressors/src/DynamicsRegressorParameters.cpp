@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2013 IIT - Istituto Italiano di Tecnologia - http://www.iit.it
+ * Copyright (C) 2015 IIT - Istituto Italiano di Tecnologia - http://www.iit.it
  * Author: Silvio Traversaro
  * CopyPolicy: Released under the terms of the GNU LGPL v2.0 (or any later version)
  *

@@ -12,8 +12,14 @@
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Twist.h"
 #include "iDynTree/Core/Wrench.h"
+#include <iDynTree/Core/VectorDynSize.h>
 
 #include <kdl/frames.hpp>
+#include <kdl/jntarray.hpp>
+
+#include <Eigen/Dense>
+
+#include <iostream>
 
 #include <cstring>
 
@@ -69,6 +75,21 @@ KDL::Wrench ToKDL(const Wrench& idyntree_wrench)
     return kdl_wrench;
 }
 
+bool ToKDL(const VectorDynSize& idyntree_jntarray, KDL::JntArray& kdl_jntarray)
+{
+    if( kdl_jntarray.rows() != idyntree_jntarray.size() )
+    {
+        std::cerr << "[ERROR] ToKDL failed" << std::endl;
+        return false;
+    }
+
+    kdl_jntarray.data =
+        Eigen::Map<const Eigen::VectorXd>(idyntree_jntarray.data(), idyntree_jntarray.size());
+
+    return true;
+}
+
+
 Position ToiDynTree(const KDL::Vector& kdl_vector)
 {
     Position idyntree_position;
@@ -120,6 +141,19 @@ Wrench ToiDynTree(const KDL::Wrench& kdl_wrench)
 
     return idyntree_wrench;
 }
+
+bool ToiDynTree(const KDL::JntArray& kdl_jntarray, VectorDynSize& idyntree_jntarray)
+{
+    if( kdl_jntarray.rows() != idyntree_jntarray.size() )
+    {
+        std::cerr << "[ERROR] ToiDynTree failed" << std::endl;
+        return false;
+    }
+
+    Eigen::Map<Eigen::VectorXd>(idyntree_jntarray.data(),idyntree_jntarray.size())
+        =  kdl_jntarray.data;
+}
+
 
 
 }
