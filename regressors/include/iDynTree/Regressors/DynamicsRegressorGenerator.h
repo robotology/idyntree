@@ -92,7 +92,7 @@ public:
      * ~~~
      * <regressor>
      *     <subtreeBaseDynamics>
-     *         <FTSensorLink>r_arm</FTSensorLink>
+     *         <FTSensorLink>r_upper_arm</FTSensorLink>
      *     </subtreeBaseDynamics>
      * </regressor>
      * ~~~

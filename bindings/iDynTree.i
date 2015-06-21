@@ -7,12 +7,12 @@
 
 // Python
 #ifdef SWIGPYTHON
-%rename(__str__) reservedToString;
+%include "./python/python.i"
 #endif
 
 // Matlab
 #ifdef SWIGMATLAB
-%rename(display) reservedToString;
+%include "./matlab/matlab.i"
 #endif
 
 
