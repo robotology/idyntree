@@ -61,8 +61,24 @@ regressor  = iDynTree.MatrixDynSize(outs,params);
 knownTerms = iDynTree.VectorDynSize(outs);
 cadParams  = iDynTree.VectorDynSize(params);
 
+% We can get the current model parameters (probably extracted from CAD)
+regrGen.getModelParameters(cadParams)
+
+% We want to set the measure for the `l_arm_ft_sensor` 
+sensorMeasure = iDynTree.Wrench();
+sensorMeasure.setVal(0,0.0);
+sensorMeasure.setVal(1,0.0);
+sensorMeasure.setVal(2,10.0);
+sensorMeasure.setVal(3,0.4);
+sensorMeasure.setVal(4,0.6);
+sensorMeasure.setVal(5,0.5);
+
+sensorIndex = ...
+    regrGen.getSensorsModel().getSensorIndex(iDynTree.SIX_AXIS_FORCE_TORQUE,'r_arm_ft_sensor');
+regrGen.getSensorsMeasurements().setMeasurement(iDynTree.SIX_AXIS_FORCE_TORQUE,sensorIndex,sensorMeasure);
+
 regrGen.computeRegressor(regressor,knownTerms);
 
 % We can then print the computed regressor
 display(regressor)
-
+display(knownTerms)

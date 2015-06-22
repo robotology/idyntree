@@ -46,7 +46,7 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::Undirect
                                                       const bool _verbose
                                                     ):
                                                       undirected_tree(_undirected_tree),
-                                                      sensors_tree(_sensors_tree),
+                                                      sensorsList(_sensors_tree),
                                                       regressors_ptrs(0),
                                                       consider_ft_offset(ft_sensor_offset),
                                                       fake_links_names(_fake_links_names),
@@ -74,7 +74,7 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::Undirect
     kinematic_traversal = KDL::CoDyCo::Traversal();
     dynamic_traversal = KDL::CoDyCo::Traversal();
 
-    measured_wrenches.setNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE,sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE));
+    sensorMeasures.setNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE,sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE));
 
     X_dynamic_base = std::vector<KDL::Frame>(undirected_tree.getNrOfLinks());
     v = std::vector<KDL::Twist>(undirected_tree.getNrOfLinks());
@@ -186,7 +186,7 @@ int DynamicRegressorGenerator::getNrOfDOFs() const
 
 int DynamicRegressorGenerator::getNrOfWrenchSensors() const
 {
-    return sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+    return sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
 }
 
 
@@ -281,7 +281,7 @@ int DynamicRegressorGenerator::setRobotStateAndSensors(const DynamicSample & sam
     kinematic_base_acceleration = sample.getBaseSpatialAcceleration();
 
     for(int i=0; i < getNrOfWrenchSensors(); i++ ) {
-        measured_wrenches.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,i,iDynTree::ToiDynTree(sample.getWrenchMeasure(i)));
+        sensorMeasures.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,i,iDynTree::ToiDynTree(sample.getWrenchMeasure(i)));
     }
 
     /** \todo implement reading torque from sample, adding proper support for torque sensors */
@@ -330,12 +330,12 @@ int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Ei
                 } else {
                     assert(six_rows_buffer.cols() == 10*NrOfRealLinks_gen);
                 }
-                regr_ptr->computeRegressor(q,dq,ddq,X_dynamic_base,v,a,measured_wrenches,measured_torques,six_rows_buffer,six_rows_vector);
+                regr_ptr->computeRegressor(q,dq,ddq,X_dynamic_base,v,a,sensorMeasures,measured_torques,six_rows_buffer,six_rows_vector);
                 regressor.block(start_row,0,regr_ptr->getNrOfOutputs(),getNrOfParameters()) = six_rows_buffer;
                 known_terms.segment(start_row,regr_ptr->getNrOfOutputs()) = six_rows_vector;
             break;
             case 1:
-                regr_ptr->computeRegressor(q,dq,ddq,X_dynamic_base,v,a,measured_wrenches,measured_torques,one_rows_buffer,one_rows_vector);
+                regr_ptr->computeRegressor(q,dq,ddq,X_dynamic_base,v,a,sensorMeasures,measured_torques,one_rows_buffer,one_rows_vector);
                 regressor.block(start_row,0,regr_ptr->getNrOfOutputs(),getNrOfParameters()) = one_rows_buffer;
                 known_terms.segment(start_row,regr_ptr->getNrOfOutputs()) = one_rows_vector;
             break;
@@ -344,7 +344,7 @@ int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Ei
                 //as a fallback in case another type of regressor is added without modifyng this code
                 Eigen::MatrixXd regr_buffer(regr_ptr->getNrOfOutputs(),getNrOfParameters());
                 Eigen::VectorXd kt_buffer(regr_ptr->getNrOfOutputs());
-                regr_ptr->computeRegressor(q,dq,ddq,X_dynamic_base,v,a,measured_wrenches,measured_torques,regr_buffer,kt_buffer);
+                regr_ptr->computeRegressor(q,dq,ddq,X_dynamic_base,v,a,sensorMeasures,measured_torques,regr_buffer,kt_buffer);
                 regressor.block(start_row,0,regr_ptr->getNrOfOutputs(),getNrOfParameters()) = regr_buffer;
                 known_terms.segment(start_row,regr_ptr->getNrOfOutputs()) = kt_buffer;
             break;
@@ -1859,7 +1859,7 @@ std::string DynamicRegressorGenerator::analyseSparseBaseSubspace(const Eigen::Ma
 
 int DynamicRegressorGenerator::setFTSensorMeasurement(const int ft_sensor_index, const iDynTree::Wrench ftm)
 {
-    if( ft_sensor_index < 0 || ft_sensor_index >= sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE) )
+    if( ft_sensor_index < 0 || ft_sensor_index >= sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE) )
     {
         if( verbose )
         {
@@ -1870,7 +1870,7 @@ int DynamicRegressorGenerator::setFTSensorMeasurement(const int ft_sensor_index,
         return -1;
     }
 
-    measured_wrenches.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_sensor_index,ftm);
+    sensorMeasures.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_sensor_index,ftm);
 
     return 0;
 }
@@ -1905,7 +1905,7 @@ int DynamicRegressorGenerator::addSubtreeRegressorRows(const std::vector< std::s
     DynamicRegressorInterface * new_regr;
     subtreeBaseDynamicsRegressor * new_st_regr;
 
-    new_st_regr = new subtreeBaseDynamicsRegressor(undirected_tree,sensors_tree,linkIndeces2regrColumns,_subtree_leaf_links,consider_ft_offset,verbose);
+    new_st_regr = new subtreeBaseDynamicsRegressor(undirected_tree,sensorsList,linkIndeces2regrColumns,_subtree_leaf_links,consider_ft_offset,verbose);
 
     new_regr = (DynamicRegressorInterface *) new_st_regr;
 
@@ -1933,7 +1933,7 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
     DynamicRegressorInterface * new_regr;
     torqueRegressor * new_st_regr;
 
-    new_st_regr = new torqueRegressor(undirected_tree,sensors_tree,linkIndeces2regrColumns,dof_name,reverse_direction,_activated_ft_sensors,consider_ft_offset,verbose);
+    new_st_regr = new torqueRegressor(undirected_tree,sensorsList,linkIndeces2regrColumns,dof_name,reverse_direction,_activated_ft_sensors,consider_ft_offset,verbose);
 
     new_regr = (DynamicRegressorInterface *) new_st_regr;
 
@@ -1958,7 +1958,7 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
 
 int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<std::string> &_activated_ft_sensors)
 {
-    unsigned int NrOfFTSensors = sensors_tree.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+    unsigned int NrOfFTSensors = sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
     std::vector<bool> flag_activated_ft_sensors(NrOfFTSensors,false);
     for(int i=0; i < (int)_activated_ft_sensors.size(); i++ ) {
        KDL::CoDyCo::LinkMap::const_iterator link_it =  undirected_tree.getLink(_activated_ft_sensors[i]);
@@ -1972,7 +1972,7 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
             return -1;
        }
 
-       int ft_id = getFirstFTSensorOnLink(sensors_tree,link_it->getLinkIndex());
+       int ft_id = getFirstFTSensorOnLink(sensorsList,link_it->getLinkIndex());
        {
            if( ft_id >= (int)flag_activated_ft_sensors.size() || ft_id < 0 )
            {

@@ -238,6 +238,12 @@ bool DynamicsRegressorGenerator::isValid()
     return (this->pimpl->m_isModelValid) && (this->pimpl->m_isRegressorValid);
 }
 
+const SensorsList& DynamicsRegressorGenerator::getSensorsModel() const
+{
+    return this->pimpl->m_pLegacyGenerator->sensorsList;
+}
+
+
 
 bool DynamicsRegressorGenerator::computeRegressor(MatrixDynSize& regressor, VectorDynSize& known_terms)
 {
@@ -434,13 +440,10 @@ bool DynamicsRegressorGenerator::setRobotState(const VectorDynSize& q,
 
 }
 
-
-
-
-
-
-
-
+SensorsMeasurements& DynamicsRegressorGenerator::getSensorsMeasurements()
+{
+    return this->pimpl->m_pLegacyGenerator->sensorMeasures;
+}
 
 
 }

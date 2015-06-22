@@ -12668,7 +12668,7 @@ fail:
 }
 
 
-void _wrap_SensorsList_getSensorIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_SensorsList_getSensorIndex__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::SensorsList *arg1 = (iDynTree::SensorsList *) 0 ;
   iDynTree::SensorType *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -12726,6 +12726,106 @@ void _wrap_SensorsList_getSensorIndex (int resc, mxArray *resv[], int argc, mxAr
 fail:
   mexErrMsgTxt("Failure in function SensorsList_getSensorIndex.");
   if (SWIG_IsNewObj(res3)) delete arg3;
+}
+
+
+void _wrap_SensorsList_getSensorIndex__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsList *arg1 = (iDynTree::SensorsList *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  int res3 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("SensorsList_getSensorIndex",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsList_getSensorIndex" "', argument " "1"" of type '" "iDynTree::SensorsList const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsList * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsList_getSensorIndex" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(argv[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SensorsList_getSensorIndex" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsList_getSensorIndex" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  result = (int)((iDynTree::SensorsList const *)arg1)->getSensorIndex((iDynTree::SensorType const &)*arg2,(std::string const &)*arg3);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsList_getSensorIndex.");
+  if (SWIG_IsNewObj(res3)) delete arg3;
+}
+
+
+void _wrap_SensorsList_getSensorIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SensorsList, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_SensorsList_getSensorIndex__SWIG_1(resc,resv,argc,argv);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SensorsList, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_unsigned_int, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_SensorsList_getSensorIndex__SWIG_0(resc,resv,argc,argv);
+          }
+        }
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
 }
 
 
@@ -15087,6 +15187,30 @@ fail:
 }
 
 
+void _wrap_DynamicsRegressorGenerator_getSensorsModel (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::SensorsList *result = 0 ;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getSensorsModel",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getSensorsModel" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (iDynTree::SensorsList *) &((iDynTree::Regressors::DynamicsRegressorGenerator const *)arg1)->getSensorsModel();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SensorsList, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getSensorsModel.");
+}
+
+
 void _wrap_DynamicsRegressorGenerator_setRobotState__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
   iDynTree::VectorDynSize *arg2 = 0 ;
@@ -15333,6 +15457,30 @@ void _wrap_DynamicsRegressorGenerator_setRobotState (int resc, mxArray *resv[], 
   
   mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
   return;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getSensorsMeasurements (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::SensorsMeasurements *result = 0 ;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getSensorsMeasurements",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getSensorsMeasurements" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (iDynTree::SensorsMeasurements *) &(arg1)->getSensorsMeasurements();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SensorsMeasurements, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getSensorsMeasurements.");
 }
 
 
@@ -16198,9 +16346,11 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 290: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom",cmd))) _wrap_DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
   case 291: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom",cmd))) _wrap_DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
   case 292: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getBaseLinkName",cmd))) _wrap_DynamicsRegressorGenerator_getBaseLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 293: if ((name_ok=!strcmp("DynamicsRegressorGenerator_setRobotState",cmd))) _wrap_DynamicsRegressorGenerator_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 294: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeRegressor",cmd))) _wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 295: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getModelParameters",cmd))) _wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 293: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getSensorsModel",cmd))) _wrap_DynamicsRegressorGenerator_getSensorsModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 294: if ((name_ok=!strcmp("DynamicsRegressorGenerator_setRobotState",cmd))) _wrap_DynamicsRegressorGenerator_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 295: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getSensorsMeasurements",cmd))) _wrap_DynamicsRegressorGenerator_getSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 296: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeRegressor",cmd))) _wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 297: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getModelParameters",cmd))) _wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
   default: mexErrMsgIdAndTxt("SWIG:RuntimeError","No function id %d.",fcn_id);
   }
   if (!name_ok) {

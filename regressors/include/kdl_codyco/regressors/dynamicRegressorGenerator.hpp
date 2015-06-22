@@ -339,6 +339,11 @@ public:
 
     int getModelParameters(Eigen::VectorXd & values);
 
+    iDynTree::SensorsList sensorsList;
+
+    //measured 6 axis Force/torques
+    iDynTree::SensorsMeasurements sensorMeasures;
+
 private:
     KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization */
 
@@ -370,9 +375,7 @@ private:
     KDL::Twist kinematic_base_acceleration; /**< KDL acceleration: spatial proper acceleration */
 
 
-    //measured 6 axis Force/torques
-    iDynTree::SensorsMeasurements measured_wrenches;
-    iDynTree::SensorsList sensors_tree;
+
 
     //measured joint torques
     KDL::JntArray measured_torques;

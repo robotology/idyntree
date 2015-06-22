@@ -63,14 +63,20 @@ classdef DynamicsRegressorGenerator < SwigRef
     function varargout = getBaseLinkName(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(292,'DynamicsRegressorGenerator_getBaseLinkName',self,varargin{:});
     end
+    function varargout = getSensorsModel(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(293,'DynamicsRegressorGenerator_getSensorsModel',self,varargin{:});
+    end
     function varargout = setRobotState(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(293,'DynamicsRegressorGenerator_setRobotState',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(294,'DynamicsRegressorGenerator_setRobotState',self,varargin{:});
+    end
+    function varargout = getSensorsMeasurements(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(295,'DynamicsRegressorGenerator_getSensorsMeasurements',self,varargin{:});
     end
     function varargout = computeRegressor(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(294,'DynamicsRegressorGenerator_computeRegressor',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(296,'DynamicsRegressorGenerator_computeRegressor',self,varargin{:});
     end
     function varargout = getModelParameters(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(295,'DynamicsRegressorGenerator_getModelParameters',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(297,'DynamicsRegressorGenerator_getModelParameters',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];

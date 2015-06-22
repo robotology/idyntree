@@ -138,17 +138,28 @@ namespace iDynTree {
             int addSensor(const Sensor & sensor);
 
             /**
-             * Get the number of sensors of type sensor_type in this SensorsTree .
+             * Get the number of sensors of type sensor_type in this SensorsList .
              * @return the number of sensors of type sensor_type
              */
             unsigned int getNrOfSensors(const SensorType & sensor_type) const;
 
             /**
-             * Get the index of the sensor
+             * Get the index of a sensor of type sensor_type in this SensorList
              *
              * @return true if the sensor name is found, false otherwise.
              */
             bool getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const;
+
+            /**
+             * Get the index of a sensor of type sensor_type and with name sensor_name
+             *
+             * @return the sensor index if the sensor_name is found, -1 otherwise.
+             *
+             * \note Some languages do not support well in-output parameters, so we provided this
+             *       method as an alternative to the three-arguments getSensorIndex
+             */
+            int getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name) const;
+
 
             /**
              * Get the pointer to the sensor of index sensor_index and of type sensor_type

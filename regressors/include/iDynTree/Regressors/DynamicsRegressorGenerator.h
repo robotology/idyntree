@@ -15,6 +15,8 @@ class VectorDynSize;
 class MatrixDynSize;
 class Transform;
 class Twist;
+class SensorsList;
+class SensorsMeasurements;
 
 namespace Regressors {
 
@@ -264,7 +266,7 @@ public:
     //@{
 
     //const UndirectedTree & getRobotModel();
-    //const SensorsTree    & getSensorsModel();
+    const SensorsList & getSensorsModel() const;
 
     //@}
 
@@ -322,7 +324,7 @@ public:
      * Get a reference to the SensorsMeasurements structure, where
      * sensors readings can be set for use of the dynamics regressor generator.
      */
-    //SensorsMeasurements & getSensorsMeasurements();
+    SensorsMeasurements & getSensorsMeasurements();
 
     //@}
 

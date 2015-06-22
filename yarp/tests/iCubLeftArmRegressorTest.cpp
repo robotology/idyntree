@@ -208,17 +208,22 @@ int main()
 
     ok = ok && new_generator.getModelParameters(param_idyntree);
 
+    int sensorIndex = new_generator.getSensorsModel().getSensorIndex(iDynTree::SIX_AXIS_FORCE_TORQUE,"l_arm_ft_sensor");
+    ok = ok && new_generator.getSensorsMeasurements().setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,sensorIndex,simulate_measurement);
+
     ok = ok && new_generator.computeRegressor(regr_idyntree,kt_idyntree);
 
     Eigen::Matrix<double,6,1> sens_idyntree = Eigen::Map<Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(regr_idyntree.data(),regr_idyntree.rows(),regr_idyntree.cols())*
                                       Eigen::Map<Eigen::VectorXd>(param_idyntree.data(),param_idyntree.size());
+
+    Eigen::Matrix<double,6,1> kt_eigen = Eigen::Map< Eigen::Matrix<double,6,1>  >(kt_idyntree.data(),kt_idyntree.size());
 
     std::cout << "Parameters norm old " << parameters.norm() << std::endl;
     std::cout << "Parameters norm new " << Eigen::Map<Eigen::VectorXd>(param_idyntree.data(),param_idyntree.size()).norm() << std::endl;
     std::cout << "Sensor measurement from regressor*model_parameters: " << sens << std::endl;
     std::cout << "Sensor measurement from regressor*model_parameters (new): " << sens_idyntree << std::endl;
     std::cout << "Sensor measurement from RNEA:                       " << KDL::CoDyCo::toEigen( iDynTree::ToKDL(simulate_measurement)) << std::endl;
-
+    std::cout << "Sensor measurement from known terms (new) " << kt_eigen << std::endl;
 
     double tol = 1e-5;
     if( (KDL::CoDyCo::toEigen(iDynTree::ToKDL(simulate_measurement))+sens).norm() > tol )
@@ -228,6 +233,12 @@ int main()
     }
 
     if( (KDL::CoDyCo::toEigen(iDynTree::ToKDL(simulate_measurement))+sens_idyntree).norm() > tol )
+    {
+        std::cerr << "[ERR] iCubLeftArmRegressor error: failure in new iDynTree regressor generator" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    if( (KDL::CoDyCo::toEigen(iDynTree::ToKDL(simulate_measurement))+kt_eigen).norm() > tol )
     {
         std::cerr << "[ERR] iCubLeftArmRegressor error: failure in new iDynTree regressor generator" << std::endl;
         return EXIT_FAILURE;
