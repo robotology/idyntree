@@ -351,6 +351,52 @@ public:
 
     //@}
 
+   /**
+    * @name Methods to compute the identifiable subspace of the base parameters
+    *
+    * \note this methods are implemented here for conveniene, but they are hiding
+    *       too many parameters related to the identifiable subspace computations.
+    *       They will be probably changed/replaced by something else in the future.
+    */
+    //@{
+
+     /**
+      * Get a matrix whose columns are a basis for the identifiable subspace of
+      * the regressor computed by this regressor generator.
+      *
+      * The algorithm used is the one presented in:
+      * Gautier, M. "Numerical calculation of the base inertial parameters of robots."
+      *
+      * To obtain the so-called "base parameters" (i.e. a projection of the
+      *  parameters considered by the regressor on a basis of the identifiable
+      *  subspace) you have to multiply the transpose of the returned basisMatrix
+      * for the complete vector of the parameters:
+      *  baseParameters = basisMatrix.transpose() * completeParameters
+      *
+      * To obtain the so-called "base regressor" (i.e. the regressor expressed
+      *  with respect to the base parameter instead of the complete parameters)
+      *  you have to multiply the complete regressor for the returned basisMatrix :
+      *  baseRegressor = completeRegressor*basisMatrix
+      *
+      * \note the basisMatrix will be resize to match the size of the identifiable subspace. 
+      *
+      * @param[out] basisMatrix a Matrix of size getNrOfParameters() X size of identifiable subspace .
+      * @return true if all went well, false if there was an error
+      */
+    bool computeFloatingBaseIdentifiableSubspace(iDynTree::MatrixDynSize & basisMatrix);
+
+    /**
+     * Like computeFloatingBaseIdentifiableSubspace, but assuming that the
+     * base of the robot is fixed.
+     *
+     * @param[out] basisMatrix a Matrix of size getNrOfParameters() X size of identifiable subspace .
+     * @return true if all went well, false if there was an error
+     */
+    bool computeFixedBaseIdentifiableSubspace(iDynTree::MatrixDynSize & basisMatrix);
+
+
+    //@}
+
 private:
 
 };

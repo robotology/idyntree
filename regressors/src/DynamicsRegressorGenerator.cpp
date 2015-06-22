@@ -46,6 +46,7 @@ struct DynamicsRegressorGenerator::DynamicsRegressorGeneratorPrivateAttributes
     Eigen::MatrixXd m_regressor;
     Eigen::VectorXd m_knownTerms;
     Eigen::VectorXd m_parameters;
+    Eigen::MatrixXd m_basisMatrix;
     KDL::JntArray m_qKDL;
     KDL::JntArray m_dqKDL;
     KDL::JntArray m_ddqKDL;
@@ -243,30 +244,6 @@ const SensorsList& DynamicsRegressorGenerator::getSensorsModel() const
     return this->pimpl->m_pLegacyGenerator->sensorsList;
 }
 
-
-
-bool DynamicsRegressorGenerator::computeRegressor(MatrixDynSize& regressor, VectorDynSize& known_terms)
-{
-    if( !this->isValid() )
-    {
-        return false;
-    }
-
-    int ret_value =
-        this->pimpl->m_pLegacyGenerator->computeRegressor(this->pimpl->m_regressor,
-                                                          this->pimpl->m_knownTerms);
-
-    // \todo TODO write proper header for conversion from/to Eigen
-    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(regressor.data(),
-                                regressor.rows(),
-                                regressor.cols()) = this->pimpl->m_regressor;
-
-    Eigen::Map<Eigen::VectorXd>(known_terms.data(),
-                                known_terms.size()) = this->pimpl->m_knownTerms;
-
-    return (ret_value == 0);
-}
-
 std::string DynamicsRegressorGenerator::getBaseLinkName()
 {
     int base_link = this->pimpl->m_pLegacyGenerator->getDynamicBaseIndex();
@@ -444,6 +421,78 @@ SensorsMeasurements& DynamicsRegressorGenerator::getSensorsMeasurements()
 {
     return this->pimpl->m_pLegacyGenerator->sensorMeasures;
 }
+
+
+bool DynamicsRegressorGenerator::computeRegressor(MatrixDynSize& regressor, VectorDynSize& known_terms)
+{
+    if( !this->isValid() )
+    {
+        return false;
+    }
+
+    int ret_value =
+        this->pimpl->m_pLegacyGenerator->computeRegressor(this->pimpl->m_regressor,
+                                                          this->pimpl->m_knownTerms);
+
+    // \todo TODO write proper header for conversion from/to Eigen
+    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(regressor.data(),
+                                regressor.rows(),
+                                regressor.cols()) = this->pimpl->m_regressor;
+
+    Eigen::Map<Eigen::VectorXd>(known_terms.data(),
+                                known_terms.size()) = this->pimpl->m_knownTerms;
+
+    return (ret_value == 0);
+}
+
+bool DynamicsRegressorGenerator::computeFloatingBaseIdentifiableSubspace(MatrixDynSize& basisMatrix)
+{
+    if( !this->isValid() )
+    {
+        return false;
+    }
+
+    bool static_regressor = false;
+    bool fixed_base = false;
+    int ret_value =
+        this->pimpl->m_pLegacyGenerator->computeNumericalIdentifiableSubspace(this->pimpl->m_basisMatrix,
+                                                                              static_regressor,
+                                                                              fixed_base);
+
+    basisMatrix.resize(this->pimpl->m_basisMatrix.rows(),this->pimpl->m_basisMatrix.cols());
+
+    // \todo TODO write proper header for conversion from/to Eigen
+    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(basisMatrix.data(),
+                                basisMatrix.rows(),
+                                basisMatrix.cols()) = this->pimpl->m_basisMatrix;
+
+    return (ret_value == 0);
+}
+
+bool DynamicsRegressorGenerator::computeFixedBaseIdentifiableSubspace(MatrixDynSize& basisMatrix)
+{
+    if( !this->isValid() )
+    {
+        return false;
+    }
+
+    bool static_regressor = false;
+    bool fixed_base = true;
+    int ret_value =
+        this->pimpl->m_pLegacyGenerator->computeNumericalIdentifiableSubspace(this->pimpl->m_basisMatrix,
+                                                                              static_regressor,
+                                                                              fixed_base);
+
+    basisMatrix.resize(this->pimpl->m_basisMatrix.rows(),this->pimpl->m_basisMatrix.cols());
+
+    // \todo TODO write proper header for conversion from/to Eigen
+    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(basisMatrix.data(),
+                                basisMatrix.rows(),
+                                basisMatrix.cols()) = this->pimpl->m_basisMatrix;
+
+    return (ret_value == 0);
+}
+
 
 
 }
