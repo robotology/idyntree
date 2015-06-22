@@ -24,6 +24,7 @@ namespace KDL {
 namespace CoDyCo {
 namespace Regressors {
 
+
 double sparsity_index(const Eigen::MatrixXd & mat, const double tol)
     {
         int zero_elements = 0;
@@ -275,9 +276,9 @@ int getFTIndexFromJunctionIndex(const iDynTree::SensorsList & sensors_tree,
     }
 
     return -1;
-    
-}    
-  
+
+}
+
 bool simulateMeasurement_sixAxisFTSensor(KDL::CoDyCo::Traversal & dynamic_traversal,
                                                    std::vector< KDL::Wrench > f,
                                                    iDynTree::SixAxisForceTorqueSensor *sixAxisForceTorqueSensor,
@@ -288,7 +289,7 @@ bool simulateMeasurement_sixAxisFTSensor(KDL::CoDyCo::Traversal & dynamic_traver
     assert(sixAxisForceTorqueSensor->isValid());
     assert(sixAxisForceTorqueSensor->getFirstLinkIndex() > 0 && sixAxisForceTorqueSensor->getFirstLinkIndex() < dynamic_traversal.getNrOfVisitedLinks());
     assert(sixAxisForceTorqueSensor->getSecondLinkIndex() > 0 && sixAxisForceTorqueSensor->getSecondLinkIndex() < dynamic_traversal.getNrOfVisitedLinks());
-   
+
 
     // The f vector is assume to be the output of the rneaDynamicLoop function,
     // ie f[i] is the force applied by link i on the link dynamic_traversal.getParent(i),
@@ -314,7 +315,7 @@ bool simulateMeasurement_sixAxisFTSensor(KDL::CoDyCo::Traversal & dynamic_traver
     // if the child_link is the link to which the measured wrench is applied, the sign between the
     // measured_wrench and f[child_link] is consistent, otherwise we have to change the sign
 
-   
+
 
     // To simulate the sensor, we have to translate f[child] in the sensor frame
     // with the appriopriate sign
@@ -328,11 +329,106 @@ bool simulateMeasurement_sixAxisFTSensor(KDL::CoDyCo::Traversal & dynamic_traver
     {
         simulated_measurement = (child_link_H_sensor.inverse()*iDynTree::ToiDynTree(f[child_link]));
         assert( sixAxisForceTorqueSensor->getAppliedWrenchLink() == child_link );
- 
+
     }
 
     return true;
 }
+
+iDynTree::Regressors::DynamicsRegressorParameterType getLinkParameterType(unsigned int nr)
+{
+    assert(nr >= 0 && nr < 10);
+    switch(nr)
+    {
+        case 0:
+            return iDynTree::Regressors::LINK_MASS;
+        case 1:
+            return iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_X;
+        case 2:
+            return iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Y;
+        case 3:
+            return iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Z;
+        case 4:
+            return iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XX;
+        case 5:
+            return iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XY;
+        case 6:
+            return iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XZ;
+        case 7:
+            return iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YY;
+        case 8:
+            return iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YZ;
+        case 9:
+            return iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_ZZ;
+    }
+}
+
+iDynTree::Regressors::DynamicsRegressorParameterType getFTParameterType(unsigned int nr)
+{
+    assert(nr >= 0 && nr < 6);
+    switch(nr)
+    {
+        case 0:
+            return iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_X;
+        case 1:
+            return iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Y;
+        case 2:
+            return iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Z;
+        case 3:
+            return iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_X;
+        case 4:
+            return iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Y;
+        case 5:
+            return iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Z;
+    }
+}
+
+
+iDynTree::Regressors::DynamicsRegressorParametersList
+    getLegacyUsedParameters(const std::vector<int> & linkIndeces2regrCols,
+                            const int nrOfFTSensors,
+                            const bool withFToffset )
+{
+    iDynTree::Regressors::DynamicsRegressorParametersList ret_values;
+
+    // add considered links
+    for(unsigned int link=0; link < linkIndeces2regrCols.size(); link++ )
+    {
+        // if a link is valid and not a fake link, push
+        // in the vector of used parameters all the 10 link inertial parameters
+        if( linkIndeces2regrCols[link] != -1 )
+        {
+            for(unsigned int link_param_type = 0 ; link_param_type < 10; link_param_type++ )
+            {
+                iDynTree::Regressors::DynamicsRegressorParameter param;
+                param.category = iDynTree::Regressors::LINK_PARAM;
+                param.index = link;
+                param.type = getLinkParameterType(link_param_type);
+                ret_values.addParam(param);
+            }
+        }
+    }
+
+    if( withFToffset )
+    {
+        assert(nrOfFTSensors >= 0);
+        for(unsigned int ft = 0; ft < (unsigned int)nrOfFTSensors; ft++ )
+        {
+            for(unsigned int ft_param_type = 0 ; ft_param_type < 6; ft_param_type++ )
+            {
+                iDynTree::Regressors::DynamicsRegressorParameter param;
+                param.category = iDynTree::Regressors::SENSOR_FT_PARAM;
+                param.index = ft;
+                param.type = getFTParameterType(ft_param_type);
+                ret_values.addParam(param);
+            }
+        }
+    }
+
+    return ret_values;
+}
+
+
 
 
 

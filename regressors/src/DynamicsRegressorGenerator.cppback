@@ -1,0 +1,219 @@
+/**
+ * Copyright (C) 2013 IIT - Istituto Italiano di Tecnologia - http://www.iit.it
+ * Author: Silvio Traversaro
+ * CopyPolicy: Released under the terms of the GNU LGPL v2.0 (or any later version)
+ *
+ * The development of this software was supported by the FP7 EU project
+ * CoDyCo (No. 600716 ICT 2011.2.1 Cognitive Systems and Robotics (b))
+ * http://www.codyco.eu
+ */
+
+#include "iDynTree/Regressors/DynamicsRegressorGenerator.hpp"
+
+#include "dirl_utils.hpp"
+
+#include "kdl_codyco/utils.hpp"
+#include "kdl_codyco/undirectedtree.hpp"
+#include "kdl_codyco/sensors.hpp"
+
+//Type of regressors
+#include "dynamicRegressorInterface.hpp"
+#include "subtreeBaseDynamicsRegressor.hpp"
+
+#include "DynamicSample.hpp"
+
+#include "kdl_codyco/regressor_loops.hpp"
+#include "kdl_codyco/rnea_loops.hpp"
+#include "kdl_codyco/position_loops.hpp"
+#include "kdl_codyco/sensors.hpp"
+
+namespace iDynTree
+{
+
+namespace Regressors
+{
+
+struct DynamicsRegressorGenerator::DynamicsRegressorGeneratorPimpl
+{
+    KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization */
+    KDL::CoDyCo::Traversal dynamic_traversal;
+
+    //Violating DRY principle, but for code clarity
+    int NrOfFakeLinks;
+    int NrOfDOFs;
+    int NrOfRealLinks_gen;
+    int NrOfFTSensors;
+    int NrOfAllPossibleParameters; /**< Define the maximum number of parameters */
+    int NrOfParameters; /**< Define the number of parameters actually used by the generated regressor */
+    int NrOfOutputs;
+
+    //Take in account the real and fake links
+    std::vector< bool > is_link_real;
+    std::vector< int > regrColumns2linkIndeces;
+    std::vector< int > linkIndeces2regrColumns;
+    std::vector< std::string > fake_links_names;
+
+    //Robot state
+    iDynTree::VectorDynSize q;
+    iDynTree::VectorDynSize dq;
+    iDynTree::VectorDynSize ddq;
+
+    iDynTree::Transform world_H_base;
+    iDynTree::Twist base_velocity;
+    iDynTree::Twist _base_acceleration; /**< KDL acceleration: spatial proper acceleration */
+
+
+    //measured 6 axis Force/torques
+    KDL::CoDyCo::SensorsMeasurements measured_wrenches;
+    KDL::CoDyCo::SensorsTree sensors_tree;
+
+    //Link kinematic quantities
+    std::vector<KDL::Frame> X_dynamic_base; /**< for each link store the frame X_kinematic_base_link of the position of a link with respect to the dynamic base */
+    std::vector<KDL::Twist> v;
+    std::vector<KDL::Twist> a;
+
+    //Vector of subregressors
+    //The actual objects are mantained in two different vectors
+    //but this vector of pointers is necessary to mantain the serializations
+    std::vector<KDL::CoDyCo::Regressors::DynamicRegressorInterface *> regressors_ptrs;
+    std::vector<KDL::CoDyCo::Regressors::subtreeBaseDynamicsRegressor *> subtree_regressors;
+
+    //Options for regressors
+    bool consider_ft_offset; //if true, consider the offset of the FT sensors as parameters
+
+    bool verbose;
+
+    /** \todo Buffers to avoid dynamic memory allocation, remove them using proper stuff */
+    int updateBuffers();
+    Eigen::MatrixXd& block(int start_row, int arg2, int getNrOfOutputs, int getNrOfParameters);
+    Eigen::MatrixXd one_rows_buffer;
+    Eigen::MatrixXd six_rows_buffer;
+    Eigen::VectorXd one_rows_vector;
+    Eigen::VectorXd six_rows_vector;
+
+    //utility function for generating a random regressor for numerical base parameter calculation
+    //Given n_samples, the Y (n_samples*getNrOfOutputs() X getNrOfParameters() ) regressor is obtained by stacking the n_samples generated regressors
+    //This function returns Y^T Y (getNrOfParameters() X getNrOfParameters() ) (that share the row space with Y)
+    int generate_random_regressors(Eigen::MatrixXd & output_matrix,
+                                   const bool static_regressor = false,
+                                   const bool fixed_base = false,
+                                   const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8),
+                                   int n_samples = 1000, const bool verbose = false);
+
+    int generate_random_regressors(Eigen::MatrixXd & output_matrix,
+                                   const bool static_regressor,
+                                   const bool fixed_base,
+                                   const KDL::Vector grav_direction,
+                                   std::vector<int> fixed_dofs,
+                                   std::vector<double> fixed_dofs_values,
+                                   int n_samples, const bool verbose);
+};
+
+DynamicsRegressorGenerator::DynamicsRegressorGenerator():
+                            pimpl(new DynamicsRegressorGeneratorPimpl())
+
+{
+
+}
+
+
+DynamicsRegressorGenerator::~DynamicsRegressorGenerator()
+{
+    delete this->pimpl;
+    this->pimpl = 0;
+}
+
+bool iDynTree::Regressors::DynamicsRegressorGenerator::configure()
+{
+    pimpl->NrOfFakeLinks = pimpl->fake_links_names.size();
+    pimpl->NrOfDOFs = pimpl->undirected_tree.getNrOfDOFs();
+    pimpl->NrOfRealLinks_gen = pimpl->undirected_tree.getNrOfLinks()-pimpl->NrOfFakeLinks;
+    pimpl->NrOfFTSensors = sensors_tree.getNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE);
+
+    //The initial number of parameters is given by the inertial parameters
+    pimpl->NrOfParameters = 10*pimpl->NrOfRealLinks_gen;
+
+    //If the ft sensor offset is activated, we have to add 6 parameters (the offsets) for each ft sensor
+    if( consider_ft_offset ) {
+        pimpl->NrOfParameters += 6*pimpl->NrOfFTSensors;
+    }
+
+    //Given the NrOfParameters, allocate buffers
+    pimpl->updateBuffers();
+
+    //Initially no regressor is installed, so the number of outputs is zero
+    pimpl->NrOfOutputs = 0;
+
+    assert((int)pimpl->undirected_tree.getNrOfDOFs() == pimpl->NrOfDOFs);
+    assert((int)pimpl->undirected_tree.getNrOfLinks() == pimpl->NrOfFakeLinks+pimpl->NrOfRealLinks_gen);
+
+    q = KDL::JntArray(NrOfDOFs);
+    dq = KDL::JntArray(NrOfDOFs);
+    ddq = KDL::JntArray(NrOfDOFs);
+
+    measured_wrenches.setNrOfSensors(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,NrOfFTSensors);
+
+    X_dynamic_base = std::vector<KDL::Frame>(undirected_tree.getNrOfLinks());
+    v = std::vector<KDL::Twist>(undirected_tree.getNrOfLinks());
+    a = std::vector<KDL::Twist>(undirected_tree.getNrOfLinks());
+
+    //Computing the traversal for kinematic information
+    int ret;
+    if( kinematic_base.length() == 0 ) {
+        //default case, using the base of the tree as the kinematic base
+        ret = undirected_tree.compute_traversal(kinematic_traversal);
+    } else {
+        ret = undirected_tree.compute_traversal(kinematic_traversal,kinematic_base);
+    }
+    assert( ret >= 0);
+    if( ret < 0 ) { return; }
+
+    //Computing the default (dynamic) traversal
+    ret = undirected_tree.compute_traversal(dynamic_traversal);
+    assert( ret >= 0 );
+    if( ret < 0 ) { return; }
+
+
+    //Take into account the real or fake links
+    is_link_real.resize(undirected_tree.getNrOfLinks(),true);
+    linkIndeces2regrColumns.resize(undirected_tree.getNrOfLinks(),-1);
+    regrColumns2linkIndeces.resize(NrOfRealLinks_gen,-1);
+    for(int ll=0; ll < (int)fake_links_names.size(); ll++ ) {
+        KDL::CoDyCo::LinkMap::const_iterator link_it = undirected_tree.getLink(fake_links_names[ll]);
+        if( link_it == undirected_tree.getInvalidLinkIterator() )
+        {
+            NrOfDOFs = NrOfRealLinks_gen = NrOfOutputs = NrOfParameters = 0; return;
+
+        }
+        is_link_real[link_it->getLinkIndex()]=false;
+    }
+
+    int regressor_link_index = 0;
+    for(int link_index=0; link_index < (int)undirected_tree.getNrOfLinks(); link_index++ ) {
+        if( is_link_real[link_index] ) {
+            assert( regressor_link_index < NrOfRealLinks_gen );
+            linkIndeces2regrColumns[link_index] = regressor_link_index;
+            regrColumns2linkIndeces[regressor_link_index] = link_index;
+            regressor_link_index++;
+        } else {
+           linkIndeces2regrColumns[link_index] = -1;
+        }
+    }
+    assert(regressor_link_index == NrOfRealLinks_gen);
+}
+
+void DynamicsRegressorGenerator::DynamicsRegressorGeneratorPimpl::updateBuffers(int _NrOfParameters)
+{
+    one_rows_buffer = Eigen::MatrixXd(1,_NrOfParameters);
+    six_rows_buffer = Eigen::MatrixXd(6,_NrOfParameters);
+
+    one_rows_vector = Eigen::VectorXd(1);
+    six_rows_vector = Eigen::VectorXd(6);
+
+    return;
+}
+
+
+}
+
+}

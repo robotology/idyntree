@@ -8,6 +8,7 @@
  * http://www.codyco.eu
  */
 
+#include "kdl_codyco/regressors/dirl_utils.hpp"
 #include "baseDynamicsRegressor.hpp"
 
 #include <kdl_codyco/regressor_utils.hpp>
@@ -34,6 +35,15 @@ std::vector<int> baseDynamicsRegressor::getRelativeJunctions()
 {
     return std::vector<int>(0);
 }
+
+
+iDynTree::Regressors::DynamicsRegressorParametersList baseDynamicsRegressor::getUsedParameters()
+{
+    assert(p_undirected_tree->getNrOfLinks() == linkIndeces2regrCols.size());
+
+    return getLegacyUsedParameters(linkIndeces2regrCols);
+}
+
 
 int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
                                       const KDL::JntArray &q_dot,

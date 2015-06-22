@@ -56,7 +56,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOUR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
                                                  ${orocos_kdl_INCLUDE_DIRS})
 
-target_link_libraries(${libraryname} idyntree-core ${orocos_kdl_LIBRARIES} ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${TinyXML_LIBRARIES})
+target_link_libraries(${libraryname} idyntree-core idyntree-sensors ${orocos_kdl_LIBRARIES} ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} ${TinyXML_LIBRARIES})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
 

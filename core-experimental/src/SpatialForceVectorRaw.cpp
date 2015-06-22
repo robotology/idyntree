@@ -108,4 +108,10 @@ SpatialForceVectorRaw SpatialForceVectorRaw::operator-(const SpatialForceVectorR
     return compose(*this,inverse(other));
 }
 
+SpatialForceVectorRaw SpatialForceVectorRaw::Zero()
+{
+    return SpatialForceVectorRaw();
+}
+
+
 }

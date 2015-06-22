@@ -977,20 +977,29 @@ SWIGRUNTIME void SWIG_Matlab_SetModule(void *clientdata, swig_module_info *point
 #define SWIGTYPE_p_iDynTree__Position swig_types[5]
 #define SWIGTYPE_p_iDynTree__PositionRaw swig_types[6]
 #define SWIGTYPE_p_iDynTree__PositionSemantics swig_types[7]
-#define SWIGTYPE_p_iDynTree__Rotation swig_types[8]
-#define SWIGTYPE_p_iDynTree__RotationRaw swig_types[9]
-#define SWIGTYPE_p_iDynTree__RotationSemantics swig_types[10]
-#define SWIGTYPE_p_iDynTree__SpatialForceVectorRaw swig_types[11]
-#define SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw swig_types[12]
-#define SWIGTYPE_p_iDynTree__Transform swig_types[13]
-#define SWIGTYPE_p_iDynTree__TransformRaw swig_types[14]
-#define SWIGTYPE_p_iDynTree__TransformSemantics swig_types[15]
-#define SWIGTYPE_p_iDynTree__Twist swig_types[16]
-#define SWIGTYPE_p_iDynTree__Vector6 swig_types[17]
-#define SWIGTYPE_p_iDynTree__VectorDynSize swig_types[18]
-#define SWIGTYPE_p_iDynTree__Wrench swig_types[19]
-static swig_type_info *swig_types[21];
-static swig_module_info swig_module = {swig_types, 20, 0, 0, 0, 0};
+#define SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator swig_types[8]
+#define SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter swig_types[9]
+#define SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList swig_types[10]
+#define SWIGTYPE_p_iDynTree__Rotation swig_types[11]
+#define SWIGTYPE_p_iDynTree__RotationRaw swig_types[12]
+#define SWIGTYPE_p_iDynTree__RotationSemantics swig_types[13]
+#define SWIGTYPE_p_iDynTree__Sensor swig_types[14]
+#define SWIGTYPE_p_iDynTree__SensorsList swig_types[15]
+#define SWIGTYPE_p_iDynTree__SensorsMeasurements swig_types[16]
+#define SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor swig_types[17]
+#define SWIGTYPE_p_iDynTree__SpatialForceVectorRaw swig_types[18]
+#define SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw swig_types[19]
+#define SWIGTYPE_p_iDynTree__Transform swig_types[20]
+#define SWIGTYPE_p_iDynTree__TransformRaw swig_types[21]
+#define SWIGTYPE_p_iDynTree__TransformSemantics swig_types[22]
+#define SWIGTYPE_p_iDynTree__Twist swig_types[23]
+#define SWIGTYPE_p_iDynTree__Vector6 swig_types[24]
+#define SWIGTYPE_p_iDynTree__VectorDynSize swig_types[25]
+#define SWIGTYPE_p_iDynTree__Wrench swig_types[26]
+#define SWIGTYPE_p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t swig_types[27]
+#define SWIGTYPE_p_unsigned_int swig_types[28]
+static swig_type_info *swig_types[30];
+static swig_module_info swig_module = {swig_types, 29, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1036,6 +1045,14 @@ static swig_module_info swig_module = {swig_types, 20, 0, 0, 0, 0};
 #include "iDynTree/Core/TransformRaw.h"
 #include "iDynTree/Core/TransformSemantics.h"
 #include "iDynTree/Core/Transform.h"
+
+// Sensors related data structures
+#include "iDynTree/Sensors/Sensors.hpp"
+#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+
+// Regressors related data structures
+#include "iDynTree/Regressors/DynamicsRegressorParameters.h"
+#include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
 
 
 
@@ -1228,6 +1245,66 @@ SWIGINTERNINLINE mxArray*
 SWIG_From_int  (int value)
 {    
   return SWIG_From_long  (value);
+}
+
+
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(mxArray* pm, char** cptr, size_t* psize, int *alloc)
+{
+  if(!mxIsChar(pm) || mxGetM(pm)!=1) return SWIG_TypeError;
+  size_t len=mxGetN(pm);
+  static char buf[256];
+  int flag = mxGetString(pm,buf,(mwSize)sizeof(buf));
+  if(flag) return SWIG_TypeError;
+
+  if (alloc) {
+    *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), buf, sizeof(char)*(len + 1)));
+    *alloc = SWIG_NEWOBJ;
+  } else if (cptr)
+    *cptr = buf;
+  if (psize)
+    *psize = len + 1;
+  return SWIG_OK;
+}
+
+
+SWIGINTERN int
+SWIG_AsPtr_std_string (mxArray* obj, std::string **val) 
+{
+  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
+  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
+    if (buf) {
+      if (val) *val = new std::string(buf, size - 1);
+      if (alloc == SWIG_NEWOBJ) delete[] buf;
+      return SWIG_NEWOBJ;
+    } else {
+      if (val) *val = 0;
+      return SWIG_OLDOBJ;
+    }
+  } else {
+    static int init = 0;
+    static swig_type_info* descriptor = 0;
+    if (!init) {
+      descriptor = SWIG_TypeQuery("std::string" " *");
+      init = 1;
+    }
+    if (descriptor) {
+      std::string *vptr;
+      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
+      if (SWIG_IsOK(res) && val) *val = vptr;
+      return res;
+    }
+  }
+  return SWIG_ERROR;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_bool (mxArray* pm, bool *val)
+{
+   if(!mxIsLogicalScalar(pm)) return SWIG_TypeError;
+   if (val) *val = mxIsLogicalScalarTrue(pm);
+   return SWIG_OK;
 }
 
 void _wrap_delete_IMatrix (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
@@ -5714,6 +5791,22 @@ fail:
 }
 
 
+void _wrap_SpatialForceVectorRaw_Zero (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::SpatialForceVectorRaw result;
+  
+  if (!SWIG_check_num_args("SpatialForceVectorRaw_Zero",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = iDynTree::SpatialForceVectorRaw::Zero();
+  _out = SWIG_NewPointerObj((new iDynTree::SpatialForceVectorRaw(static_cast< const iDynTree::SpatialForceVectorRaw& >(result))), SWIGTYPE_p_iDynTree__SpatialForceVectorRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SpatialForceVectorRaw_Zero.");
+}
+
+
 void _wrap_new_SpatialMotionVectorRaw__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
   iDynTree::SpatialMotionVectorRaw *result = 0 ;
@@ -6107,6 +6200,22 @@ void _wrap_SpatialMotionVectorRaw_uminus (int resc, mxArray *resv[], int argc, m
   return;
 fail:
   mexErrMsgTxt("Failure in function SpatialMotionVectorRaw_uminus.");
+}
+
+
+void _wrap_SpatialMotionVectorRaw_Zero (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::SpatialMotionVectorRaw result;
+  
+  if (!SWIG_check_num_args("SpatialMotionVectorRaw_Zero",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = iDynTree::SpatialMotionVectorRaw::Zero();
+  _out = SWIG_NewPointerObj((new iDynTree::SpatialMotionVectorRaw(static_cast< const iDynTree::SpatialMotionVectorRaw& >(result))), SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SpatialMotionVectorRaw_Zero.");
 }
 
 
@@ -7150,7 +7259,7 @@ fail:
 }
 
 
-void _wrap_RotationRaw_transform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_RotationRaw_transform__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationRaw *arg1 = 0 ;
   iDynTree::PositionRaw *arg2 = 0 ;
   void *argp1 ;
@@ -7185,6 +7294,131 @@ void _wrap_RotationRaw_transform (int resc, mxArray *resv[], int argc, mxArray *
   return;
 fail:
   mexErrMsgTxt("Failure in function RotationRaw_transform.");
+}
+
+
+void _wrap_RotationRaw_transform__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::RotationRaw *arg1 = 0 ;
+  iDynTree::SpatialMotionVectorRaw *arg2 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::SpatialMotionVectorRaw result;
+  
+  if (!SWIG_check_num_args("RotationRaw_transform",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationRaw,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_transform" "', argument " "1"" of type '" "iDynTree::RotationRaw const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_transform" "', argument " "1"" of type '" "iDynTree::RotationRaw const &""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_transform" "', argument " "2"" of type '" "iDynTree::SpatialMotionVectorRaw const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_transform" "', argument " "2"" of type '" "iDynTree::SpatialMotionVectorRaw const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::SpatialMotionVectorRaw * >(argp2);
+  result = iDynTree::RotationRaw::transform((iDynTree::RotationRaw const &)*arg1,(iDynTree::SpatialMotionVectorRaw const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::SpatialMotionVectorRaw(static_cast< const iDynTree::SpatialMotionVectorRaw& >(result))), SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function RotationRaw_transform.");
+}
+
+
+void _wrap_RotationRaw_transform__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::RotationRaw *arg1 = 0 ;
+  iDynTree::SpatialForceVectorRaw *arg2 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::SpatialForceVectorRaw result;
+  
+  if (!SWIG_check_num_args("RotationRaw_transform",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationRaw,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_transform" "', argument " "1"" of type '" "iDynTree::RotationRaw const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_transform" "', argument " "1"" of type '" "iDynTree::RotationRaw const &""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialForceVectorRaw,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_transform" "', argument " "2"" of type '" "iDynTree::SpatialForceVectorRaw const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_transform" "', argument " "2"" of type '" "iDynTree::SpatialForceVectorRaw const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::SpatialForceVectorRaw * >(argp2);
+  result = iDynTree::RotationRaw::transform((iDynTree::RotationRaw const &)*arg1,(iDynTree::SpatialForceVectorRaw const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::SpatialForceVectorRaw(static_cast< const iDynTree::SpatialForceVectorRaw& >(result))), SWIGTYPE_p_iDynTree__SpatialForceVectorRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function RotationRaw_transform.");
+}
+
+
+void _wrap_RotationRaw_transform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionRaw, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_RotationRaw_transform__SWIG_0(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_RotationRaw_transform__SWIG_1(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialForceVectorRaw, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_RotationRaw_transform__SWIG_2(resc,resv,argc,argv);
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
 }
 
 
@@ -7282,6 +7516,76 @@ fail:
 }
 
 
+void _wrap_RotationRaw_mtimes__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
+  iDynTree::SpatialMotionVectorRaw *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::SpatialMotionVectorRaw result;
+  
+  if (!SWIG_check_num_args("RotationRaw_mtimes",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mtimes" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialMotionVectorRaw const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialMotionVectorRaw const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::SpatialMotionVectorRaw * >(argp2);
+  result = ((iDynTree::RotationRaw const *)arg1)->operator *((iDynTree::SpatialMotionVectorRaw const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::SpatialMotionVectorRaw(static_cast< const iDynTree::SpatialMotionVectorRaw& >(result))), SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function RotationRaw_mtimes.");
+}
+
+
+void _wrap_RotationRaw_mtimes__SWIG_3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
+  iDynTree::SpatialForceVectorRaw *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::SpatialForceVectorRaw result;
+  
+  if (!SWIG_check_num_args("RotationRaw_mtimes",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mtimes" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialForceVectorRaw,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialForceVectorRaw const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialForceVectorRaw const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::SpatialForceVectorRaw * >(argp2);
+  result = ((iDynTree::RotationRaw const *)arg1)->operator *((iDynTree::SpatialForceVectorRaw const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::SpatialForceVectorRaw(static_cast< const iDynTree::SpatialForceVectorRaw& >(result))), SWIGTYPE_p_iDynTree__SpatialForceVectorRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function RotationRaw_mtimes.");
+}
+
+
 void _wrap_RotationRaw_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 2) {
     int _v;
@@ -7308,6 +7612,34 @@ void _wrap_RotationRaw_mtimes (int resc, mxArray *resv[], int argc, mxArray *arg
       _v = SWIG_CheckState(res);
       if (_v) {
         return _wrap_RotationRaw_mtimes__SWIG_1(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_RotationRaw_mtimes__SWIG_2(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialForceVectorRaw, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_RotationRaw_mtimes__SWIG_3(resc,resv,argc,argv);
       }
     }
   }
@@ -7474,6 +7806,22 @@ void _wrap_RotationRaw_RPY (int resc, mxArray *resv[], int argc, mxArray *argv[]
   return;
 fail:
   mexErrMsgTxt("Failure in function RotationRaw_RPY.");
+}
+
+
+void _wrap_RotationRaw_Identity (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::RotationRaw result;
+  
+  if (!SWIG_check_num_args("RotationRaw_Identity",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = iDynTree::RotationRaw::Identity();
+  _out = SWIG_NewPointerObj((new iDynTree::RotationRaw(static_cast< const iDynTree::RotationRaw& >(result))), SWIGTYPE_p_iDynTree__RotationRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function RotationRaw_Identity.");
 }
 
 
@@ -8832,7 +9180,7 @@ fail:
 }
 
 
-void _wrap_Rotation_transform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_Rotation_transform__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Rotation *arg1 = 0 ;
   iDynTree::Position *arg2 = 0 ;
   void *argp1 ;
@@ -8867,6 +9215,131 @@ void _wrap_Rotation_transform (int resc, mxArray *resv[], int argc, mxArray *arg
   return;
 fail:
   mexErrMsgTxt("Failure in function Rotation_transform.");
+}
+
+
+void _wrap_Rotation_transform__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Rotation *arg1 = 0 ;
+  iDynTree::Twist *arg2 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::Twist result;
+  
+  if (!SWIG_check_num_args("Rotation_transform",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Rotation,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_transform" "', argument " "1"" of type '" "iDynTree::Rotation const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_transform" "', argument " "1"" of type '" "iDynTree::Rotation const &""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Rotation * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Twist,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_transform" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_transform" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Twist * >(argp2);
+  result = iDynTree::Rotation::transform((iDynTree::Rotation const &)*arg1,(iDynTree::Twist const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::Twist(static_cast< const iDynTree::Twist& >(result))), SWIGTYPE_p_iDynTree__Twist, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Rotation_transform.");
+}
+
+
+void _wrap_Rotation_transform__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Rotation *arg1 = 0 ;
+  iDynTree::Wrench *arg2 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::Wrench result;
+  
+  if (!SWIG_check_num_args("Rotation_transform",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Rotation,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_transform" "', argument " "1"" of type '" "iDynTree::Rotation const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_transform" "', argument " "1"" of type '" "iDynTree::Rotation const &""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Rotation * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Wrench,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_transform" "', argument " "2"" of type '" "iDynTree::Wrench const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_transform" "', argument " "2"" of type '" "iDynTree::Wrench const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Wrench * >(argp2);
+  result = iDynTree::Rotation::transform((iDynTree::Rotation const &)*arg1,(iDynTree::Wrench const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::Wrench(static_cast< const iDynTree::Wrench& >(result))), SWIGTYPE_p_iDynTree__Wrench, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Rotation_transform.");
+}
+
+
+void _wrap_Rotation_transform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Rotation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Position, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Rotation_transform__SWIG_0(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Rotation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Twist, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Rotation_transform__SWIG_1(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Rotation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Wrench, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Rotation_transform__SWIG_2(resc,resv,argc,argv);
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
 }
 
 
@@ -8964,6 +9437,76 @@ fail:
 }
 
 
+void _wrap_Rotation_mtimes__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Rotation *arg1 = (iDynTree::Rotation *) 0 ;
+  iDynTree::Twist *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::Twist result;
+  
+  if (!SWIG_check_num_args("Rotation_mtimes",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Rotation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_mtimes" "', argument " "1"" of type '" "iDynTree::Rotation const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Rotation * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Twist,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_mtimes" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_mtimes" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Twist * >(argp2);
+  result = ((iDynTree::Rotation const *)arg1)->operator *((iDynTree::Twist const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::Twist(static_cast< const iDynTree::Twist& >(result))), SWIGTYPE_p_iDynTree__Twist, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Rotation_mtimes.");
+}
+
+
+void _wrap_Rotation_mtimes__SWIG_3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Rotation *arg1 = (iDynTree::Rotation *) 0 ;
+  iDynTree::Wrench *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::Wrench result;
+  
+  if (!SWIG_check_num_args("Rotation_mtimes",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Rotation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_mtimes" "', argument " "1"" of type '" "iDynTree::Rotation const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Rotation * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Wrench,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_mtimes" "', argument " "2"" of type '" "iDynTree::Wrench const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_mtimes" "', argument " "2"" of type '" "iDynTree::Wrench const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Wrench * >(argp2);
+  result = ((iDynTree::Rotation const *)arg1)->operator *((iDynTree::Wrench const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::Wrench(static_cast< const iDynTree::Wrench& >(result))), SWIGTYPE_p_iDynTree__Wrench, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Rotation_mtimes.");
+}
+
+
 void _wrap_Rotation_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 2) {
     int _v;
@@ -8990,6 +9533,34 @@ void _wrap_Rotation_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[]
       _v = SWIG_CheckState(res);
       if (_v) {
         return _wrap_Rotation_mtimes__SWIG_1(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Rotation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Twist, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Rotation_mtimes__SWIG_2(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Rotation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Wrench, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Rotation_mtimes__SWIG_3(resc,resv,argc,argv);
       }
     }
   }
@@ -9636,6 +10207,22 @@ void _wrap_TransformRaw_mtimes (int resc, mxArray *resv[], int argc, mxArray *ar
   
   mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
   return;
+}
+
+
+void _wrap_TransformRaw_Identity (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::TransformRaw result;
+  
+  if (!SWIG_check_num_args("TransformRaw_Identity",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = iDynTree::TransformRaw::Identity();
+  _out = SWIG_NewPointerObj((new iDynTree::TransformRaw(static_cast< const iDynTree::TransformRaw& >(result))), SWIGTYPE_p_iDynTree__TransformRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function TransformRaw_Identity.");
 }
 
 
@@ -11743,6 +12330,3241 @@ fail:
 }
 
 
+void _wrap_NR_OF_SENSOR_TYPES_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("NR_OF_SENSOR_TYPES_get",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = (int)(int)iDynTree::NR_OF_SENSOR_TYPES;
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function NR_OF_SENSOR_TYPES_get.");
+}
+
+
+void _wrap_delete_Sensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("delete_Sensor",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Sensor, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Sensor" "', argument " "1"" of type '" "iDynTree::Sensor *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Sensor * >(argp1);
+  delete arg1;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function delete_Sensor.");
+}
+
+
+void _wrap_Sensor_getName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("Sensor_getName",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Sensor_getName" "', argument " "1"" of type '" "iDynTree::Sensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Sensor * >(argp1);
+  result = ((iDynTree::Sensor const *)arg1)->getName();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Sensor_getName.");
+}
+
+
+void _wrap_Sensor_getSensorType (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::SensorType result;
+  
+  if (!SWIG_check_num_args("Sensor_getSensorType",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Sensor_getSensorType" "', argument " "1"" of type '" "iDynTree::Sensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Sensor * >(argp1);
+  result = (iDynTree::SensorType)((iDynTree::Sensor const *)arg1)->getSensorType();
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Sensor_getSensorType.");
+}
+
+
+void _wrap_Sensor_getParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("Sensor_getParent",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Sensor_getParent" "', argument " "1"" of type '" "iDynTree::Sensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Sensor * >(argp1);
+  result = ((iDynTree::Sensor const *)arg1)->getParent();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Sensor_getParent.");
+}
+
+
+void _wrap_Sensor_getParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("Sensor_getParentIndex",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Sensor_getParentIndex" "', argument " "1"" of type '" "iDynTree::Sensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Sensor * >(argp1);
+  result = (int)((iDynTree::Sensor const *)arg1)->getParentIndex();
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Sensor_getParentIndex.");
+}
+
+
+void _wrap_Sensor_isValid (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("Sensor_isValid",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Sensor_isValid" "', argument " "1"" of type '" "iDynTree::Sensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Sensor * >(argp1);
+  result = (bool)((iDynTree::Sensor const *)arg1)->isValid();
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Sensor_isValid.");
+}
+
+
+void _wrap_Sensor_clone (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::Sensor *result = 0 ;
+  
+  if (!SWIG_check_num_args("Sensor_clone",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Sensor_clone" "', argument " "1"" of type '" "iDynTree::Sensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Sensor * >(argp1);
+  result = (iDynTree::Sensor *)((iDynTree::Sensor const *)arg1)->clone();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Sensor_clone.");
+}
+
+
+void _wrap_new_SensorsList__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::SensorsList *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_SensorsList",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = (iDynTree::SensorsList *)new iDynTree::SensorsList();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SensorsList, 1 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function new_SensorsList.");
+}
+
+
+void _wrap_new_SensorsList__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsList *arg1 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::SensorsList *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_SensorsList",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__SensorsList,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SensorsList" "', argument " "1"" of type '" "iDynTree::SensorsList const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensorsList" "', argument " "1"" of type '" "iDynTree::SensorsList const &""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsList * >(argp1);
+  result = (iDynTree::SensorsList *)new iDynTree::SensorsList((iDynTree::SensorsList const &)*arg1);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SensorsList, 1 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function new_SensorsList.");
+}
+
+
+void _wrap_new_SensorsList (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 0) {
+    return _wrap_new_SensorsList__SWIG_0(resc,resv,argc,argv);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SensorsList, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_SensorsList__SWIG_1(resc,resv,argc,argv);
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
+}
+
+
+void _wrap_delete_SensorsList (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsList *arg1 = (iDynTree::SensorsList *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("delete_SensorsList",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsList, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SensorsList" "', argument " "1"" of type '" "iDynTree::SensorsList *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsList * >(argp1);
+  delete arg1;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function delete_SensorsList.");
+}
+
+
+void _wrap_SensorsList_addSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsList *arg1 = (iDynTree::SensorsList *) 0 ;
+  iDynTree::Sensor *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("SensorsList_addSensor",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsList_addSensor" "', argument " "1"" of type '" "iDynTree::SensorsList *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsList * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Sensor,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SensorsList_addSensor" "', argument " "2"" of type '" "iDynTree::Sensor const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsList_addSensor" "', argument " "2"" of type '" "iDynTree::Sensor const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Sensor * >(argp2);
+  result = (int)(arg1)->addSensor((iDynTree::Sensor const &)*arg2);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsList_addSensor.");
+}
+
+
+void _wrap_SensorsList_getNrOfSensors (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsList *arg1 = (iDynTree::SensorsList *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  mxArray * _out;
+  unsigned int result;
+  
+  if (!SWIG_check_num_args("SensorsList_getNrOfSensors",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsList_getNrOfSensors" "', argument " "1"" of type '" "iDynTree::SensorsList const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsList * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsList_getNrOfSensors" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  result = (unsigned int)((iDynTree::SensorsList const *)arg1)->getNrOfSensors((iDynTree::SensorType const &)*arg2);
+  _out = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsList_getNrOfSensors.");
+}
+
+
+void _wrap_SensorsList_getSensorIndex__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsList *arg1 = (iDynTree::SensorsList *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  unsigned int *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  int res3 = SWIG_OLDOBJ ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SensorsList_getSensorIndex",argc,4,4,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsList_getSensorIndex" "', argument " "1"" of type '" "iDynTree::SensorsList const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsList * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsList_getSensorIndex" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(argv[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SensorsList_getSensorIndex" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsList_getSensorIndex" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_unsigned_int,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "SensorsList_getSensorIndex" "', argument " "4"" of type '" "unsigned int &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsList_getSensorIndex" "', argument " "4"" of type '" "unsigned int &""'"); 
+  }
+  arg4 = reinterpret_cast< unsigned int * >(argp4);
+  result = (bool)((iDynTree::SensorsList const *)arg1)->getSensorIndex((iDynTree::SensorType const &)*arg2,(std::string const &)*arg3,*arg4);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsList_getSensorIndex.");
+  if (SWIG_IsNewObj(res3)) delete arg3;
+}
+
+
+void _wrap_SensorsList_getSensorIndex__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsList *arg1 = (iDynTree::SensorsList *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  int res3 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("SensorsList_getSensorIndex",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsList_getSensorIndex" "', argument " "1"" of type '" "iDynTree::SensorsList const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsList * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsList_getSensorIndex" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(argv[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SensorsList_getSensorIndex" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsList_getSensorIndex" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  result = (int)((iDynTree::SensorsList const *)arg1)->getSensorIndex((iDynTree::SensorType const &)*arg2,(std::string const &)*arg3);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsList_getSensorIndex.");
+  if (SWIG_IsNewObj(res3)) delete arg3;
+}
+
+
+void _wrap_SensorsList_getSensorIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SensorsList, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_SensorsList_getSensorIndex__SWIG_1(resc,resv,argc,argv);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SensorsList, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_unsigned_int, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_SensorsList_getSensorIndex__SWIG_0(resc,resv,argc,argv);
+          }
+        }
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
+}
+
+
+void _wrap_SensorsList_getSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsList *arg1 = (iDynTree::SensorsList *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::Sensor *result = 0 ;
+  
+  if (!SWIG_check_num_args("SensorsList_getSensor",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsList_getSensor" "', argument " "1"" of type '" "iDynTree::SensorsList const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsList * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsList_getSensor" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  ecode3 = SWIG_AsVal_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "SensorsList_getSensor" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (iDynTree::Sensor *)((iDynTree::SensorsList const *)arg1)->getSensor((iDynTree::SensorType const &)*arg2,arg3);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsList_getSensor.");
+}
+
+
+void _wrap_new_SensorsMeasurements__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::SensorsMeasurements *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_SensorsMeasurements",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = (iDynTree::SensorsMeasurements *)new iDynTree::SensorsMeasurements();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SensorsMeasurements, 1 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function new_SensorsMeasurements.");
+}
+
+
+void _wrap_new_SensorsMeasurements__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsMeasurements *arg1 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::SensorsMeasurements *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_SensorsMeasurements",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__SensorsMeasurements,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SensorsMeasurements" "', argument " "1"" of type '" "iDynTree::SensorsMeasurements const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensorsMeasurements" "', argument " "1"" of type '" "iDynTree::SensorsMeasurements const &""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsMeasurements * >(argp1);
+  result = (iDynTree::SensorsMeasurements *)new iDynTree::SensorsMeasurements((iDynTree::SensorsMeasurements const &)*arg1);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SensorsMeasurements, 1 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function new_SensorsMeasurements.");
+}
+
+
+void _wrap_new_SensorsMeasurements (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 0) {
+    return _wrap_new_SensorsMeasurements__SWIG_0(resc,resv,argc,argv);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SensorsMeasurements, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_SensorsMeasurements__SWIG_1(resc,resv,argc,argv);
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
+}
+
+
+void _wrap_delete_SensorsMeasurements (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsMeasurements *arg1 = (iDynTree::SensorsMeasurements *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("delete_SensorsMeasurements",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsMeasurements, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SensorsMeasurements" "', argument " "1"" of type '" "iDynTree::SensorsMeasurements *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsMeasurements * >(argp1);
+  delete arg1;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function delete_SensorsMeasurements.");
+}
+
+
+void _wrap_SensorsMeasurements_setNrOfSensors (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsMeasurements *arg1 = (iDynTree::SensorsMeasurements *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  unsigned int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SensorsMeasurements_setNrOfSensors",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsMeasurements, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsMeasurements_setNrOfSensors" "', argument " "1"" of type '" "iDynTree::SensorsMeasurements *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsMeasurements * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsMeasurements_setNrOfSensors" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  ecode3 = SWIG_AsVal_unsigned_SS_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "SensorsMeasurements_setNrOfSensors" "', argument " "3"" of type '" "unsigned int""'");
+  } 
+  arg3 = static_cast< unsigned int >(val3);
+  result = (bool)(arg1)->setNrOfSensors((iDynTree::SensorType const &)*arg2,arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsMeasurements_setNrOfSensors.");
+}
+
+
+void _wrap_SensorsMeasurements_getNrOfSensors (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsMeasurements *arg1 = (iDynTree::SensorsMeasurements *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  mxArray * _out;
+  unsigned int result;
+  
+  if (!SWIG_check_num_args("SensorsMeasurements_getNrOfSensors",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsMeasurements, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsMeasurements_getNrOfSensors" "', argument " "1"" of type '" "iDynTree::SensorsMeasurements const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsMeasurements * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsMeasurements_getNrOfSensors" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  result = (unsigned int)((iDynTree::SensorsMeasurements const *)arg1)->getNrOfSensors((iDynTree::SensorType const &)*arg2);
+  _out = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsMeasurements_getNrOfSensors.");
+}
+
+
+void _wrap_SensorsMeasurements_setMeasurement (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsMeasurements *arg1 = (iDynTree::SensorsMeasurements *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  unsigned int *arg3 = 0 ;
+  iDynTree::Wrench *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  unsigned int temp3 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SensorsMeasurements_setMeasurement",argc,4,4,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsMeasurements, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsMeasurements_setMeasurement" "', argument " "1"" of type '" "iDynTree::SensorsMeasurements *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsMeasurements * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsMeasurements_setMeasurement" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  ecode3 = SWIG_AsVal_unsigned_SS_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "SensorsMeasurements_setMeasurement" "', argument " "3"" of type '" "unsigned int""'");
+  } 
+  temp3 = static_cast< unsigned int >(val3);
+  arg3 = &temp3;
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__Wrench,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "SensorsMeasurements_setMeasurement" "', argument " "4"" of type '" "iDynTree::Wrench const &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsMeasurements_setMeasurement" "', argument " "4"" of type '" "iDynTree::Wrench const &""'"); 
+  }
+  arg4 = reinterpret_cast< iDynTree::Wrench * >(argp4);
+  result = (bool)(arg1)->setMeasurement((iDynTree::SensorType const &)*arg2,(unsigned int const &)*arg3,(iDynTree::Wrench const &)*arg4);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsMeasurements_setMeasurement.");
+}
+
+
+void _wrap_SensorsMeasurements_getMeasurement (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsMeasurements *arg1 = (iDynTree::SensorsMeasurements *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  unsigned int *arg3 = 0 ;
+  iDynTree::Wrench *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  unsigned int temp3 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SensorsMeasurements_getMeasurement",argc,4,4,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsMeasurements, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsMeasurements_getMeasurement" "', argument " "1"" of type '" "iDynTree::SensorsMeasurements const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsMeasurements * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsMeasurements_getMeasurement" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  ecode3 = SWIG_AsVal_unsigned_SS_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "SensorsMeasurements_getMeasurement" "', argument " "3"" of type '" "unsigned int""'");
+  } 
+  temp3 = static_cast< unsigned int >(val3);
+  arg3 = &temp3;
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__Wrench,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "SensorsMeasurements_getMeasurement" "', argument " "4"" of type '" "iDynTree::Wrench &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsMeasurements_getMeasurement" "', argument " "4"" of type '" "iDynTree::Wrench &""'"); 
+  }
+  arg4 = reinterpret_cast< iDynTree::Wrench * >(argp4);
+  result = (bool)((iDynTree::SensorsMeasurements const *)arg1)->getMeasurement((iDynTree::SensorType const &)*arg2,(unsigned int const &)*arg3,*arg4);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SensorsMeasurements_getMeasurement.");
+}
+
+
+void _wrap_new_SixAxisForceTorqueSensor__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::SixAxisForceTorqueSensor *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_SixAxisForceTorqueSensor",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = (iDynTree::SixAxisForceTorqueSensor *)new iDynTree::SixAxisForceTorqueSensor();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 1 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function new_SixAxisForceTorqueSensor.");
+}
+
+
+void _wrap_new_SixAxisForceTorqueSensor__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::SixAxisForceTorqueSensor *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_SixAxisForceTorqueSensor",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SixAxisForceTorqueSensor" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SixAxisForceTorqueSensor" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const &""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = (iDynTree::SixAxisForceTorqueSensor *)new iDynTree::SixAxisForceTorqueSensor((iDynTree::SixAxisForceTorqueSensor const &)*arg1);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 1 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function new_SixAxisForceTorqueSensor.");
+}
+
+
+void _wrap_new_SixAxisForceTorqueSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 0) {
+    return _wrap_new_SixAxisForceTorqueSensor__SWIG_0(resc,resv,argc,argv);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_SixAxisForceTorqueSensor__SWIG_1(resc,resv,argc,argv);
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
+}
+
+
+void _wrap_delete_SixAxisForceTorqueSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("delete_SixAxisForceTorqueSensor",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SixAxisForceTorqueSensor" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  delete arg1;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function delete_SixAxisForceTorqueSensor.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_setName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_setName",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_setName" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SixAxisForceTorqueSensor_setName" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SixAxisForceTorqueSensor_setName" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  result = (bool)(arg1)->setName((std::string const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_setName.");
+  if (SWIG_IsNewObj(res2)) delete arg2;
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_setFirstLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  int arg2 ;
+  iDynTree::Transform *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_setFirstLinkSensorTransform",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_setFirstLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SixAxisForceTorqueSensor_setFirstLinkSensorTransform" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__Transform,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SixAxisForceTorqueSensor_setFirstLinkSensorTransform" "', argument " "3"" of type '" "iDynTree::Transform const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SixAxisForceTorqueSensor_setFirstLinkSensorTransform" "', argument " "3"" of type '" "iDynTree::Transform const &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::Transform * >(argp3);
+  result = (bool)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->setFirstLinkSensorTransform(arg2,(iDynTree::Transform const &)*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_setFirstLinkSensorTransform.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_setSecondLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  int arg2 ;
+  iDynTree::Transform *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_setSecondLinkSensorTransform",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_setSecondLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SixAxisForceTorqueSensor_setSecondLinkSensorTransform" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__Transform,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SixAxisForceTorqueSensor_setSecondLinkSensorTransform" "', argument " "3"" of type '" "iDynTree::Transform const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SixAxisForceTorqueSensor_setSecondLinkSensorTransform" "', argument " "3"" of type '" "iDynTree::Transform const &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::Transform * >(argp3);
+  result = (bool)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->setSecondLinkSensorTransform(arg2,(iDynTree::Transform const &)*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_setSecondLinkSensorTransform.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_getFirstLinkIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_getFirstLinkIndex",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_getFirstLinkIndex" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = (int)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->getFirstLinkIndex();
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_getFirstLinkIndex.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_getSecondLinkIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_getSecondLinkIndex",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_getSecondLinkIndex" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = (int)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->getSecondLinkIndex();
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_getSecondLinkIndex.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_setParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_setParent",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_setParent" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SixAxisForceTorqueSensor_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SixAxisForceTorqueSensor_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  result = (bool)(arg1)->setParent((std::string const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_setParent.");
+  if (SWIG_IsNewObj(res2)) delete arg2;
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_setParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_setParentIndex",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_setParentIndex" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SixAxisForceTorqueSensor_setParentIndex" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (bool)(arg1)->setParentIndex(arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_setParentIndex.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_setAppliedWrenchLink (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_setAppliedWrenchLink",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_setAppliedWrenchLink" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SixAxisForceTorqueSensor_setAppliedWrenchLink" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (bool)(arg1)->setAppliedWrenchLink(arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_setAppliedWrenchLink.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_getName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_getName",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_getName" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = ((iDynTree::SixAxisForceTorqueSensor const *)arg1)->getName();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_getName.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_getSensorType (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::SensorType result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_getSensorType",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_getSensorType" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = (iDynTree::SensorType)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->getSensorType();
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_getSensorType.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_getParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_getParent",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_getParent" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = ((iDynTree::SixAxisForceTorqueSensor const *)arg1)->getParent();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_getParent.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_getParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_getParentIndex",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_getParentIndex" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = (int)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->getParentIndex();
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_getParentIndex.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_isValid (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_isValid",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_isValid" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = (bool)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->isValid();
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_isValid.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_clone (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::Sensor *result = 0 ;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_clone",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_clone" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = (iDynTree::Sensor *)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->clone();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_clone.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_getAppliedWrenchLink (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_getAppliedWrenchLink",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_getAppliedWrenchLink" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  result = (int)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->getAppliedWrenchLink();
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_getAppliedWrenchLink.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_isLinkAttachedToSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_isLinkAttachedToSensor",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_isLinkAttachedToSensor" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SixAxisForceTorqueSensor_isLinkAttachedToSensor" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (bool)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->isLinkAttachedToSensor(arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_isLinkAttachedToSensor.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_getLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  int arg2 ;
+  iDynTree::Transform *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_getLinkSensorTransform",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_getLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SixAxisForceTorqueSensor_getLinkSensorTransform" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__Transform,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SixAxisForceTorqueSensor_getLinkSensorTransform" "', argument " "3"" of type '" "iDynTree::Transform &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SixAxisForceTorqueSensor_getLinkSensorTransform" "', argument " "3"" of type '" "iDynTree::Transform &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::Transform * >(argp3);
+  result = (bool)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->getLinkSensorTransform(arg2,*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_getLinkSensorTransform.");
+}
+
+
+void _wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SixAxisForceTorqueSensor *arg1 = (iDynTree::SixAxisForceTorqueSensor *) 0 ;
+  int arg2 ;
+  iDynTree::Wrench *arg3 = 0 ;
+  iDynTree::Wrench *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SixAxisForceTorqueSensor_getWrenchAppliedOnLink",argc,4,4,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SixAxisForceTorqueSensor_getWrenchAppliedOnLink" "', argument " "1"" of type '" "iDynTree::SixAxisForceTorqueSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SixAxisForceTorqueSensor * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SixAxisForceTorqueSensor_getWrenchAppliedOnLink" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__Wrench,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SixAxisForceTorqueSensor_getWrenchAppliedOnLink" "', argument " "3"" of type '" "iDynTree::Wrench const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SixAxisForceTorqueSensor_getWrenchAppliedOnLink" "', argument " "3"" of type '" "iDynTree::Wrench const &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::Wrench * >(argp3);
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__Wrench,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "SixAxisForceTorqueSensor_getWrenchAppliedOnLink" "', argument " "4"" of type '" "iDynTree::Wrench &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SixAxisForceTorqueSensor_getWrenchAppliedOnLink" "', argument " "4"" of type '" "iDynTree::Wrench &""'"); 
+  }
+  arg4 = reinterpret_cast< iDynTree::Wrench * >(argp4);
+  result = (bool)((iDynTree::SixAxisForceTorqueSensor const *)arg1)->getWrenchAppliedOnLink(arg2,(iDynTree::Wrench const &)*arg3,*arg4);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function SixAxisForceTorqueSensor_getWrenchAppliedOnLink.");
+}
+
+
+void _wrap_DynamicsRegressorParameter_category_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
+  iDynTree::Regressors::DynamicsRegressorParameterCategory arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_category_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_category_set" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorParameter_category_set" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParameterCategory""'");
+  } 
+  arg2 = static_cast< iDynTree::Regressors::DynamicsRegressorParameterCategory >(val2);
+  if (arg1) (arg1)->category = arg2;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_category_set.");
+}
+
+
+void _wrap_DynamicsRegressorParameter_category_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::Regressors::DynamicsRegressorParameterCategory result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_category_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_category_get" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
+  result = (iDynTree::Regressors::DynamicsRegressorParameterCategory) ((arg1)->category);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_category_get.");
+}
+
+
+void _wrap_DynamicsRegressorParameter_index_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_index_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_index_set" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorParameter_index_set" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  if (arg1) (arg1)->index = arg2;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_index_set.");
+}
+
+
+void _wrap_DynamicsRegressorParameter_index_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_index_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_index_get" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
+  result = (int) ((arg1)->index);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_index_get.");
+}
+
+
+void _wrap_DynamicsRegressorParameter_type_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
+  iDynTree::Regressors::DynamicsRegressorParameterType arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_type_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_type_set" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorParameter_type_set" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParameterType""'");
+  } 
+  arg2 = static_cast< iDynTree::Regressors::DynamicsRegressorParameterType >(val2);
+  if (arg1) (arg1)->type = arg2;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_type_set.");
+}
+
+
+void _wrap_DynamicsRegressorParameter_type_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::Regressors::DynamicsRegressorParameterType result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_type_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_type_get" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
+  result = (iDynTree::Regressors::DynamicsRegressorParameterType) ((arg1)->type);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_type_get.");
+}
+
+
+void _wrap_DynamicsRegressorParameter_lt (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
+  iDynTree::Regressors::DynamicsRegressorParameter *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_lt",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_lt" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorParameter_lt" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorParameter_lt" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp2);
+  result = (bool)((iDynTree::Regressors::DynamicsRegressorParameter const *)arg1)->operator <((iDynTree::Regressors::DynamicsRegressorParameter const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_lt.");
+}
+
+
+void _wrap_DynamicsRegressorParameter_isequal (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
+  iDynTree::Regressors::DynamicsRegressorParameter *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_isequal",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_isequal" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorParameter_isequal" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorParameter_isequal" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp2);
+  result = (bool)((iDynTree::Regressors::DynamicsRegressorParameter const *)arg1)->operator ==((iDynTree::Regressors::DynamicsRegressorParameter const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_isequal.");
+}
+
+
+void _wrap_new_DynamicsRegressorParameter (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::Regressors::DynamicsRegressorParameter *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_DynamicsRegressorParameter",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = (iDynTree::Regressors::DynamicsRegressorParameter *)new iDynTree::Regressors::DynamicsRegressorParameter();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 1 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function new_DynamicsRegressorParameter.");
+}
+
+
+void _wrap_delete_DynamicsRegressorParameter (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("delete_DynamicsRegressorParameter",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DynamicsRegressorParameter" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
+  delete arg1;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function delete_DynamicsRegressorParameter.");
+}
+
+
+void _wrap_DynamicsRegressorParametersList_parameters_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParametersList *arg1 = (iDynTree::Regressors::DynamicsRegressorParametersList *) 0 ;
+  std::vector< iDynTree::Regressors::DynamicsRegressorParameter > *arg2 = (std::vector< iDynTree::Regressors::DynamicsRegressorParameter > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParametersList_parameters_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParametersList_parameters_set" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParametersList * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorParametersList_parameters_set" "', argument " "2"" of type '" "std::vector< iDynTree::Regressors::DynamicsRegressorParameter > *""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< iDynTree::Regressors::DynamicsRegressorParameter > * >(argp2);
+  if (arg1) (arg1)->parameters = *arg2;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParametersList_parameters_set.");
+}
+
+
+void _wrap_DynamicsRegressorParametersList_parameters_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParametersList *arg1 = (iDynTree::Regressors::DynamicsRegressorParametersList *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::vector< iDynTree::Regressors::DynamicsRegressorParameter > *result = 0 ;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParametersList_parameters_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParametersList_parameters_get" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParametersList * >(argp1);
+  result = (std::vector< iDynTree::Regressors::DynamicsRegressorParameter > *)& ((arg1)->parameters);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParametersList_parameters_get.");
+}
+
+
+void _wrap_DynamicsRegressorParametersList_getDescriptionOfParameter (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParametersList *arg1 = (iDynTree::Regressors::DynamicsRegressorParametersList *) 0 ;
+  unsigned int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParametersList_getDescriptionOfParameter",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParametersList_getDescriptionOfParameter" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParametersList * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorParametersList_getDescriptionOfParameter" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  result = ((iDynTree::Regressors::DynamicsRegressorParametersList const *)arg1)->getDescriptionOfParameter(arg2);
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParametersList_getDescriptionOfParameter.");
+}
+
+
+void _wrap_DynamicsRegressorParametersList_addParam (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParametersList *arg1 = (iDynTree::Regressors::DynamicsRegressorParametersList *) 0 ;
+  iDynTree::Regressors::DynamicsRegressorParameter *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParametersList_addParam",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParametersList_addParam" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParametersList * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorParametersList_addParam" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorParametersList_addParam" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp2);
+  result = (bool)(arg1)->addParam((iDynTree::Regressors::DynamicsRegressorParameter const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParametersList_addParam.");
+}
+
+
+void _wrap_DynamicsRegressorParametersList_addList (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParametersList *arg1 = (iDynTree::Regressors::DynamicsRegressorParametersList *) 0 ;
+  iDynTree::Regressors::DynamicsRegressorParametersList *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParametersList_addList",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParametersList_addList" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParametersList * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorParametersList_addList" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorParametersList_addList" "', argument " "2"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParametersList * >(argp2);
+  result = (bool)(arg1)->addList((iDynTree::Regressors::DynamicsRegressorParametersList const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParametersList_addList.");
+}
+
+
+void _wrap_DynamicsRegressorParametersList_getNrOfParameters (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParametersList *arg1 = (iDynTree::Regressors::DynamicsRegressorParametersList *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  unsigned int result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParametersList_getNrOfParameters",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParametersList_getNrOfParameters" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParametersList * >(argp1);
+  result = (unsigned int)((iDynTree::Regressors::DynamicsRegressorParametersList const *)arg1)->getNrOfParameters();
+  _out = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParametersList_getNrOfParameters.");
+}
+
+
+void _wrap_new_DynamicsRegressorParametersList (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::Regressors::DynamicsRegressorParametersList *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_DynamicsRegressorParametersList",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = (iDynTree::Regressors::DynamicsRegressorParametersList *)new iDynTree::Regressors::DynamicsRegressorParametersList();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 1 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function new_DynamicsRegressorParametersList.");
+}
+
+
+void _wrap_delete_DynamicsRegressorParametersList (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParametersList *arg1 = (iDynTree::Regressors::DynamicsRegressorParametersList *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("delete_DynamicsRegressorParametersList",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DynamicsRegressorParametersList" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParametersList * >(argp1);
+  delete arg1;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function delete_DynamicsRegressorParametersList.");
+}
+
+
+void _wrap_new_DynamicsRegressorGenerator (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::Regressors::DynamicsRegressorGenerator *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_DynamicsRegressorGenerator",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = (iDynTree::Regressors::DynamicsRegressorGenerator *)new iDynTree::Regressors::DynamicsRegressorGenerator();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 1 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function new_DynamicsRegressorGenerator.");
+}
+
+
+void _wrap_delete_DynamicsRegressorGenerator (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("delete_DynamicsRegressorGenerator",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DynamicsRegressorGenerator" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  delete arg1;
+  _out = (mxArray*)0;
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function delete_DynamicsRegressorGenerator.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(argv[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  result = (bool)(arg1)->loadRobotAndSensorsModelFromFile((std::string const &)*arg2,(std::string const &)*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile.");
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  result = (bool)(arg1)->loadRobotAndSensorsModelFromFile((std::string const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile.");
+  if (SWIG_IsNewObj(res2)) delete arg2;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile__SWIG_1(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile__SWIG_0(resc,resv,argc,argv);
+        }
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(argv[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  result = (bool)(arg1)->loadRobotAndSensorsModelFromString((std::string const &)*arg2,(std::string const &)*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString.");
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  result = (bool)(arg1)->loadRobotAndSensorsModelFromString((std::string const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString.");
+  if (SWIG_IsNewObj(res2)) delete arg2;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString__SWIG_1(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString__SWIG_0(resc,resv,argc,argv);
+        }
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_loadRegressorStructureFromFile (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_loadRegressorStructureFromFile",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_loadRegressorStructureFromFile" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_loadRegressorStructureFromFile" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_loadRegressorStructureFromFile" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  result = (bool)(arg1)->loadRegressorStructureFromFile((std::string const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_loadRegressorStructureFromFile.");
+  if (SWIG_IsNewObj(res2)) delete arg2;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_loadRegressorStructureFromString (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_loadRegressorStructureFromString",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_loadRegressorStructureFromString" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_loadRegressorStructureFromString" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_loadRegressorStructureFromString" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  result = (bool)(arg1)->loadRegressorStructureFromString((std::string const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_loadRegressorStructureFromString.");
+  if (SWIG_IsNewObj(res2)) delete arg2;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_isValid (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_isValid",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_isValid" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (bool)(arg1)->isValid();
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_isValid.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getNrOfParameters (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  unsigned int result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getNrOfParameters",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getNrOfParameters" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (unsigned int)((iDynTree::Regressors::DynamicsRegressorGenerator const *)arg1)->getNrOfParameters();
+  _out = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getNrOfParameters.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getNrOfOutputs (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  unsigned int result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getNrOfOutputs",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getNrOfOutputs" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (unsigned int)((iDynTree::Regressors::DynamicsRegressorGenerator const *)arg1)->getNrOfOutputs();
+  _out = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getNrOfOutputs.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getNrOfDegreesOfFreedom (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  unsigned int result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getNrOfDegreesOfFreedom",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getNrOfDegreesOfFreedom" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (unsigned int)((iDynTree::Regressors::DynamicsRegressorGenerator const *)arg1)->getNrOfDegreesOfFreedom();
+  _out = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getNrOfDegreesOfFreedom.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfParameter__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  int arg2 ;
+  bool arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getDescriptionOfParameter",argc,4,4,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameter" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameter" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_bool(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameter" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  ecode4 = SWIG_AsVal_double(argv[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameter" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  result = (arg1)->getDescriptionOfParameter(arg2,arg3,arg4);
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getDescriptionOfParameter.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfParameter__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  int arg2 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getDescriptionOfParameter",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameter" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameter" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_bool(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameter" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  result = (arg1)->getDescriptionOfParameter(arg2,arg3);
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getDescriptionOfParameter.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfParameter__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getDescriptionOfParameter",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameter" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameter" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (arg1)->getDescriptionOfParameter(arg2);
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getDescriptionOfParameter.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfParameter (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_DynamicsRegressorGenerator_getDescriptionOfParameter__SWIG_2(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_bool(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_DynamicsRegressorGenerator_getDescriptionOfParameter__SWIG_1(resc,resv,argc,argv);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_bool(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          {
+            int res = SWIG_AsVal_double(argv[3], NULL);
+            _v = SWIG_CheckState(res);
+          }
+          if (_v) {
+            return _wrap_DynamicsRegressorGenerator_getDescriptionOfParameter__SWIG_0(resc,resv,argc,argv);
+          }
+        }
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfParameters__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getDescriptionOfParameters",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameters" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (arg1)->getDescriptionOfParameters();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getDescriptionOfParameters.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfParameters__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  iDynTree::VectorDynSize *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getDescriptionOfParameters",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameters" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameters" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_getDescriptionOfParameters" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::VectorDynSize * >(argp2);
+  result = (arg1)->getDescriptionOfParameters((iDynTree::VectorDynSize const &)*arg2);
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getDescriptionOfParameters.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfParameters (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_DynamicsRegressorGenerator_getDescriptionOfParameters__SWIG_0(resc,resv,argc,argv);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__VectorDynSize, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_DynamicsRegressorGenerator_getDescriptionOfParameters__SWIG_1(resc,resv,argc,argv);
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfOutput (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getDescriptionOfOutput",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getDescriptionOfOutput" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorGenerator_getDescriptionOfOutput" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (arg1)->getDescriptionOfOutput(arg2);
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getDescriptionOfOutput.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfOutputs (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getDescriptionOfOutputs",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getDescriptionOfOutputs" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (arg1)->getDescriptionOfOutputs();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getDescriptionOfOutputs.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (arg1)->getDescriptionOfDegreeOfFreedom(arg2);
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (arg1)->getDescriptionOfDegreesOfFreedom();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getBaseLinkName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getBaseLinkName",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getBaseLinkName" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (arg1)->getBaseLinkName();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getBaseLinkName.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getSensorsModel (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::SensorsList *result = 0 ;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getSensorsModel",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getSensorsModel" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (iDynTree::SensorsList *) &((iDynTree::Regressors::DynamicsRegressorGenerator const *)arg1)->getSensorsModel();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SensorsList, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getSensorsModel.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_setRobotState__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  iDynTree::VectorDynSize *arg2 = 0 ;
+  iDynTree::VectorDynSize *arg3 = 0 ;
+  iDynTree::VectorDynSize *arg4 = 0 ;
+  iDynTree::Transform *arg5 = 0 ;
+  iDynTree::Twist *arg6 = 0 ;
+  iDynTree::Twist *arg7 = 0 ;
+  iDynTree::Twist *arg8 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  void *argp6 ;
+  int res6 = 0 ;
+  void *argp7 ;
+  int res7 = 0 ;
+  void *argp8 ;
+  int res8 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_setRobotState",argc,8,8,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::VectorDynSize * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "3"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "3"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::VectorDynSize * >(argp3);
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "4"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "4"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg4 = reinterpret_cast< iDynTree::VectorDynSize * >(argp4);
+  res5 = SWIG_ConvertPtr(argv[4], &argp5, SWIGTYPE_p_iDynTree__Transform,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "5"" of type '" "iDynTree::Transform const &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "5"" of type '" "iDynTree::Transform const &""'"); 
+  }
+  arg5 = reinterpret_cast< iDynTree::Transform * >(argp5);
+  res6 = SWIG_ConvertPtr(argv[5], &argp6, SWIGTYPE_p_iDynTree__Twist,  0 );
+  if (!SWIG_IsOK(res6)) {
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "6"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  if (!argp6) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "6"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  arg6 = reinterpret_cast< iDynTree::Twist * >(argp6);
+  res7 = SWIG_ConvertPtr(argv[6], &argp7, SWIGTYPE_p_iDynTree__Twist,  0 );
+  if (!SWIG_IsOK(res7)) {
+    SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "7"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  if (!argp7) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "7"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  arg7 = reinterpret_cast< iDynTree::Twist * >(argp7);
+  res8 = SWIG_ConvertPtr(argv[7], &argp8, SWIGTYPE_p_iDynTree__Twist,  0 );
+  if (!SWIG_IsOK(res8)) {
+    SWIG_exception_fail(SWIG_ArgError(res8), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "8"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  if (!argp8) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "8"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  arg8 = reinterpret_cast< iDynTree::Twist * >(argp8);
+  result = (bool)(arg1)->setRobotState((iDynTree::VectorDynSize const &)*arg2,(iDynTree::VectorDynSize const &)*arg3,(iDynTree::VectorDynSize const &)*arg4,(iDynTree::Transform const &)*arg5,(iDynTree::Twist const &)*arg6,(iDynTree::Twist const &)*arg7,(iDynTree::Twist const &)*arg8);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_setRobotState.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_setRobotState__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  iDynTree::VectorDynSize *arg2 = 0 ;
+  iDynTree::VectorDynSize *arg3 = 0 ;
+  iDynTree::VectorDynSize *arg4 = 0 ;
+  iDynTree::Twist *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_setRobotState",argc,5,5,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::VectorDynSize * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "3"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "3"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::VectorDynSize * >(argp3);
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "4"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "4"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg4 = reinterpret_cast< iDynTree::VectorDynSize * >(argp4);
+  res5 = SWIG_ConvertPtr(argv[4], &argp5, SWIGTYPE_p_iDynTree__Twist,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "5"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_setRobotState" "', argument " "5"" of type '" "iDynTree::Twist const &""'"); 
+  }
+  arg5 = reinterpret_cast< iDynTree::Twist * >(argp5);
+  result = (bool)(arg1)->setRobotState((iDynTree::VectorDynSize const &)*arg2,(iDynTree::VectorDynSize const &)*arg3,(iDynTree::VectorDynSize const &)*arg4,(iDynTree::Twist const &)*arg5);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_setRobotState.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_setRobotState (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 5) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__VectorDynSize, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_iDynTree__VectorDynSize, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_iDynTree__VectorDynSize, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            void *vptr = 0;
+            int res = SWIG_ConvertPtr(argv[4], &vptr, SWIGTYPE_p_iDynTree__Twist, 0);
+            _v = SWIG_CheckState(res);
+            if (_v) {
+              return _wrap_DynamicsRegressorGenerator_setRobotState__SWIG_1(resc,resv,argc,argv);
+            }
+          }
+        }
+      }
+    }
+  }
+  if (argc == 8) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__VectorDynSize, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_iDynTree__VectorDynSize, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_iDynTree__VectorDynSize, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            void *vptr = 0;
+            int res = SWIG_ConvertPtr(argv[4], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
+            _v = SWIG_CheckState(res);
+            if (_v) {
+              void *vptr = 0;
+              int res = SWIG_ConvertPtr(argv[5], &vptr, SWIGTYPE_p_iDynTree__Twist, 0);
+              _v = SWIG_CheckState(res);
+              if (_v) {
+                void *vptr = 0;
+                int res = SWIG_ConvertPtr(argv[6], &vptr, SWIGTYPE_p_iDynTree__Twist, 0);
+                _v = SWIG_CheckState(res);
+                if (_v) {
+                  void *vptr = 0;
+                  int res = SWIG_ConvertPtr(argv[7], &vptr, SWIGTYPE_p_iDynTree__Twist, 0);
+                  _v = SWIG_CheckState(res);
+                  if (_v) {
+                    return _wrap_DynamicsRegressorGenerator_setRobotState__SWIG_0(resc,resv,argc,argv);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getSensorsMeasurements (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::SensorsMeasurements *result = 0 ;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getSensorsMeasurements",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getSensorsMeasurements" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  result = (iDynTree::SensorsMeasurements *) &(arg1)->getSensorsMeasurements();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SensorsMeasurements, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getSensorsMeasurements.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_computeRegressor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  iDynTree::MatrixDynSize *arg2 = 0 ;
+  iDynTree::VectorDynSize *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_computeRegressor",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_computeRegressor" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__MatrixDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_computeRegressor" "', argument " "2"" of type '" "iDynTree::MatrixDynSize &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_computeRegressor" "', argument " "2"" of type '" "iDynTree::MatrixDynSize &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::MatrixDynSize * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "DynamicsRegressorGenerator_computeRegressor" "', argument " "3"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_computeRegressor" "', argument " "3"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::VectorDynSize * >(argp3);
+  result = (bool)(arg1)->computeRegressor(*arg2,*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_computeRegressor.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_getModelParameters (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  iDynTree::VectorDynSize *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_getModelParameters",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_getModelParameters" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_getModelParameters" "', argument " "2"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_getModelParameters" "', argument " "2"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::VectorDynSize * >(argp2);
+  result = (bool)(arg1)->getModelParameters(*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_getModelParameters.");
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -11806,6 +15628,9 @@ static void *_p_iDynTree__SpatialMotionVectorRawTo_p_iDynTree__Vector6(void *x, 
 static void *_p_iDynTree__TwistTo_p_iDynTree__Vector6(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((iDynTree::Vector6 *) (iDynTree::SpatialMotionVectorRaw *) ((iDynTree::Twist *) x));
 }
+static void *_p_iDynTree__SixAxisForceTorqueSensorTo_p_iDynTree__Sensor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::Sensor *)  ((iDynTree::SixAxisForceTorqueSensor *) x));
+}
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iDynTree__IMatrix = {"_p_iDynTree__IMatrix", "iDynTree::IMatrix *", 0, 0, (void*)"iDynTree.IMatrix", 0};
@@ -11814,9 +15639,16 @@ static swig_type_info _swigt__p_iDynTree__MatrixDynSize = {"_p_iDynTree__MatrixD
 static swig_type_info _swigt__p_iDynTree__Position = {"_p_iDynTree__Position", "iDynTree::Position *", 0, 0, (void*)"iDynTree.Position", 0};
 static swig_type_info _swigt__p_iDynTree__PositionRaw = {"_p_iDynTree__PositionRaw", "iDynTree::PositionRaw *", 0, 0, (void*)"iDynTree.PositionRaw", 0};
 static swig_type_info _swigt__p_iDynTree__PositionSemantics = {"_p_iDynTree__PositionSemantics", "iDynTree::PositionSemantics *", 0, 0, (void*)"iDynTree.PositionSemantics", 0};
+static swig_type_info _swigt__p_iDynTree__Regressors__DynamicsRegressorGenerator = {"_p_iDynTree__Regressors__DynamicsRegressorGenerator", "iDynTree::Regressors::DynamicsRegressorGenerator *", 0, 0, (void*)"iDynTree.DynamicsRegressorGenerator", 0};
+static swig_type_info _swigt__p_iDynTree__Regressors__DynamicsRegressorParameter = {"_p_iDynTree__Regressors__DynamicsRegressorParameter", "iDynTree::Regressors::DynamicsRegressorParameter *", 0, 0, (void*)"iDynTree.DynamicsRegressorParameter", 0};
+static swig_type_info _swigt__p_iDynTree__Regressors__DynamicsRegressorParametersList = {"_p_iDynTree__Regressors__DynamicsRegressorParametersList", "iDynTree::Regressors::DynamicsRegressorParametersList *", 0, 0, (void*)"iDynTree.DynamicsRegressorParametersList", 0};
 static swig_type_info _swigt__p_iDynTree__Rotation = {"_p_iDynTree__Rotation", "iDynTree::Rotation *", 0, 0, (void*)"iDynTree.Rotation", 0};
 static swig_type_info _swigt__p_iDynTree__RotationRaw = {"_p_iDynTree__RotationRaw", "iDynTree::RotationRaw *", 0, 0, (void*)"iDynTree.RotationRaw", 0};
 static swig_type_info _swigt__p_iDynTree__RotationSemantics = {"_p_iDynTree__RotationSemantics", "iDynTree::RotationSemantics *", 0, 0, (void*)"iDynTree.RotationSemantics", 0};
+static swig_type_info _swigt__p_iDynTree__Sensor = {"_p_iDynTree__Sensor", "iDynTree::Sensor *", 0, 0, (void*)"iDynTree.Sensor", 0};
+static swig_type_info _swigt__p_iDynTree__SensorsList = {"_p_iDynTree__SensorsList", "iDynTree::SensorsList *", 0, 0, (void*)"iDynTree.SensorsList", 0};
+static swig_type_info _swigt__p_iDynTree__SensorsMeasurements = {"_p_iDynTree__SensorsMeasurements", "iDynTree::SensorsMeasurements *", 0, 0, (void*)"iDynTree.SensorsMeasurements", 0};
+static swig_type_info _swigt__p_iDynTree__SixAxisForceTorqueSensor = {"_p_iDynTree__SixAxisForceTorqueSensor", "iDynTree::SixAxisForceTorqueSensor *", 0, 0, (void*)"iDynTree.SixAxisForceTorqueSensor", 0};
 static swig_type_info _swigt__p_iDynTree__SpatialForceVectorRaw = {"_p_iDynTree__SpatialForceVectorRaw", "iDynTree::SpatialForceVectorRaw *", 0, 0, (void*)"iDynTree.SpatialForceVectorRaw", 0};
 static swig_type_info _swigt__p_iDynTree__SpatialMotionVectorRaw = {"_p_iDynTree__SpatialMotionVectorRaw", "iDynTree::SpatialMotionVectorRaw *", 0, 0, (void*)"iDynTree.SpatialMotionVectorRaw", 0};
 static swig_type_info _swigt__p_iDynTree__Transform = {"_p_iDynTree__Transform", "iDynTree::Transform *", 0, 0, (void*)"iDynTree.Transform", 0};
@@ -11826,6 +15658,8 @@ static swig_type_info _swigt__p_iDynTree__Twist = {"_p_iDynTree__Twist", "iDynTr
 static swig_type_info _swigt__p_iDynTree__Vector6 = {"_p_iDynTree__Vector6", "iDynTree::Vector6 *", 0, 0, (void*)"iDynTree.Vector6", 0};
 static swig_type_info _swigt__p_iDynTree__VectorDynSize = {"_p_iDynTree__VectorDynSize", "iDynTree::VectorDynSize *", 0, 0, (void*)"iDynTree.VectorDynSize", 0};
 static swig_type_info _swigt__p_iDynTree__Wrench = {"_p_iDynTree__Wrench", "iDynTree::Wrench *", 0, 0, (void*)"iDynTree.Wrench", 0};
+static swig_type_info _swigt__p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t = {"_p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t", "std::vector< iDynTree::Regressors::DynamicsRegressorParameter > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_unsigned_int = {"_p_unsigned_int", "unsigned int *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
@@ -11836,9 +15670,16 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iDynTree__Position,
   &_swigt__p_iDynTree__PositionRaw,
   &_swigt__p_iDynTree__PositionSemantics,
+  &_swigt__p_iDynTree__Regressors__DynamicsRegressorGenerator,
+  &_swigt__p_iDynTree__Regressors__DynamicsRegressorParameter,
+  &_swigt__p_iDynTree__Regressors__DynamicsRegressorParametersList,
   &_swigt__p_iDynTree__Rotation,
   &_swigt__p_iDynTree__RotationRaw,
   &_swigt__p_iDynTree__RotationSemantics,
+  &_swigt__p_iDynTree__Sensor,
+  &_swigt__p_iDynTree__SensorsList,
+  &_swigt__p_iDynTree__SensorsMeasurements,
+  &_swigt__p_iDynTree__SixAxisForceTorqueSensor,
   &_swigt__p_iDynTree__SpatialForceVectorRaw,
   &_swigt__p_iDynTree__SpatialMotionVectorRaw,
   &_swigt__p_iDynTree__Transform,
@@ -11848,6 +15689,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iDynTree__Vector6,
   &_swigt__p_iDynTree__VectorDynSize,
   &_swigt__p_iDynTree__Wrench,
+  &_swigt__p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t,
+  &_swigt__p_unsigned_int,
 };
 
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
@@ -11858,9 +15701,16 @@ static swig_cast_info _swigc__p_iDynTree__MatrixDynSize[] = {  {&_swigt__p_iDynT
 static swig_cast_info _swigc__p_iDynTree__Position[] = {  {&_swigt__p_iDynTree__Position, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__PositionRaw[] = {  {&_swigt__p_iDynTree__Position, _p_iDynTree__PositionTo_p_iDynTree__PositionRaw, 0, 0},  {&_swigt__p_iDynTree__PositionRaw, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__PositionSemantics[] = {  {&_swigt__p_iDynTree__PositionSemantics, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__Regressors__DynamicsRegressorGenerator[] = {  {&_swigt__p_iDynTree__Regressors__DynamicsRegressorGenerator, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__Regressors__DynamicsRegressorParameter[] = {  {&_swigt__p_iDynTree__Regressors__DynamicsRegressorParameter, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__Regressors__DynamicsRegressorParametersList[] = {  {&_swigt__p_iDynTree__Regressors__DynamicsRegressorParametersList, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__Rotation[] = {  {&_swigt__p_iDynTree__Rotation, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__RotationRaw[] = {  {&_swigt__p_iDynTree__RotationRaw, 0, 0, 0},  {&_swigt__p_iDynTree__Rotation, _p_iDynTree__RotationTo_p_iDynTree__RotationRaw, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__RotationSemantics[] = {  {&_swigt__p_iDynTree__RotationSemantics, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__Sensor[] = {  {&_swigt__p_iDynTree__Sensor, 0, 0, 0},  {&_swigt__p_iDynTree__SixAxisForceTorqueSensor, _p_iDynTree__SixAxisForceTorqueSensorTo_p_iDynTree__Sensor, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__SensorsList[] = {  {&_swigt__p_iDynTree__SensorsList, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__SensorsMeasurements[] = {  {&_swigt__p_iDynTree__SensorsMeasurements, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__SixAxisForceTorqueSensor[] = {  {&_swigt__p_iDynTree__SixAxisForceTorqueSensor, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SpatialForceVectorRaw[] = {  {&_swigt__p_iDynTree__Wrench, _p_iDynTree__WrenchTo_p_iDynTree__SpatialForceVectorRaw, 0, 0},  {&_swigt__p_iDynTree__SpatialForceVectorRaw, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SpatialMotionVectorRaw[] = {  {&_swigt__p_iDynTree__Twist, _p_iDynTree__TwistTo_p_iDynTree__SpatialMotionVectorRaw, 0, 0},  {&_swigt__p_iDynTree__SpatialMotionVectorRaw, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__Transform[] = {  {&_swigt__p_iDynTree__Transform, 0, 0, 0},{0, 0, 0, 0}};
@@ -11870,6 +15720,8 @@ static swig_cast_info _swigc__p_iDynTree__Twist[] = {  {&_swigt__p_iDynTree__Twi
 static swig_cast_info _swigc__p_iDynTree__Vector6[] = {  {&_swigt__p_iDynTree__Twist, _p_iDynTree__TwistTo_p_iDynTree__Vector6, 0, 0},  {&_swigt__p_iDynTree__Wrench, _p_iDynTree__WrenchTo_p_iDynTree__Vector6, 0, 0},  {&_swigt__p_iDynTree__Vector6, 0, 0, 0},  {&_swigt__p_iDynTree__SpatialForceVectorRaw, _p_iDynTree__SpatialForceVectorRawTo_p_iDynTree__Vector6, 0, 0},  {&_swigt__p_iDynTree__SpatialMotionVectorRaw, _p_iDynTree__SpatialMotionVectorRawTo_p_iDynTree__Vector6, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__VectorDynSize[] = {  {&_swigt__p_iDynTree__VectorDynSize, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__Wrench[] = {  {&_swigt__p_iDynTree__Wrench, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t[] = {  {&_swigt__p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_unsigned_int[] = {  {&_swigt__p_unsigned_int, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
@@ -11880,9 +15732,16 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iDynTree__Position,
   _swigc__p_iDynTree__PositionRaw,
   _swigc__p_iDynTree__PositionSemantics,
+  _swigc__p_iDynTree__Regressors__DynamicsRegressorGenerator,
+  _swigc__p_iDynTree__Regressors__DynamicsRegressorParameter,
+  _swigc__p_iDynTree__Regressors__DynamicsRegressorParametersList,
   _swigc__p_iDynTree__Rotation,
   _swigc__p_iDynTree__RotationRaw,
   _swigc__p_iDynTree__RotationSemantics,
+  _swigc__p_iDynTree__Sensor,
+  _swigc__p_iDynTree__SensorsList,
+  _swigc__p_iDynTree__SensorsMeasurements,
+  _swigc__p_iDynTree__SixAxisForceTorqueSensor,
   _swigc__p_iDynTree__SpatialForceVectorRaw,
   _swigc__p_iDynTree__SpatialMotionVectorRaw,
   _swigc__p_iDynTree__Transform,
@@ -11892,6 +15751,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iDynTree__Vector6,
   _swigc__p_iDynTree__VectorDynSize,
   _swigc__p_iDynTree__Wrench,
+  _swigc__p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t,
+  _swigc__p_unsigned_int,
 };
 
 
@@ -12153,6 +16014,25 @@ void swigConstant(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
     mexErrMsgTxt("Second input should be a command string less than 256 characters long.");
   int name_ok = 0;
   switch(con_id) {
+  case 0: if ((name_ok=!strcmp("SIX_AXIS_FORCE_TORQUE",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"SIX_AXIS_FORCE_TORQUE",SWIG_From_int(static_cast< int >(iDynTree::SIX_AXIS_FORCE_TORQUE)));; break;
+  case 1: if ((name_ok=!strcmp("LINK_PARAM",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_PARAM)));; break;
+  case 2: if ((name_ok=!strcmp("SENSOR_FT_PARAM",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_PARAM)));; break;
+  case 3: if ((name_ok=!strcmp("LINK_MASS",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MASS",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MASS)));; break;
+  case 4: if ((name_ok=!strcmp("LINK_FIRST_MOMENT_OF_MASS_X",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_X)));; break;
+  case 5: if ((name_ok=!strcmp("LINK_FIRST_MOMENT_OF_MASS_Y",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Y)));; break;
+  case 6: if ((name_ok=!strcmp("LINK_FIRST_MOMENT_OF_MASS_Z",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Z)));; break;
+  case 7: if ((name_ok=!strcmp("LINK_MOMENT_OF_INERTIA_XX",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XX",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XX)));; break;
+  case 8: if ((name_ok=!strcmp("LINK_MOMENT_OF_INERTIA_XY",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XY)));; break;
+  case 9: if ((name_ok=!strcmp("LINK_MOMENT_OF_INERTIA_XZ",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XZ)));; break;
+  case 10: if ((name_ok=!strcmp("LINK_MOMENT_OF_INERTIA_YY",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YY)));; break;
+  case 11: if ((name_ok=!strcmp("LINK_MOMENT_OF_INERTIA_YZ",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YZ)));; break;
+  case 12: if ((name_ok=!strcmp("LINK_MOMENT_OF_INERTIA_ZZ",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_ZZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_ZZ)));; break;
+  case 13: if ((name_ok=!strcmp("SENSOR_FT_OFFSET_FORCE_X",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_X)));; break;
+  case 14: if ((name_ok=!strcmp("SENSOR_FT_OFFSET_FORCE_Y",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Y)));; break;
+  case 15: if ((name_ok=!strcmp("SENSOR_FT_OFFSET_FORCE_Z",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Z)));; break;
+  case 16: if ((name_ok=!strcmp("SENSOR_FT_OFFSET_TORQUE_X",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_X)));; break;
+  case 17: if ((name_ok=!strcmp("SENSOR_FT_OFFSET_TORQUE_Y",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Y)));; break;
+  case 18: if ((name_ok=!strcmp("SENSOR_FT_OFFSET_TORQUE_Z",cmd))) *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Z)));; break;
   default: mexErrMsgIdAndTxt("SWIG:RuntimeError","No constant %s.",cmd);
   }
   if (!name_ok) {
@@ -12275,118 +16155,202 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 99: if ((name_ok=!strcmp("SpatialForceVectorRaw_plus",cmd))) _wrap_SpatialForceVectorRaw_plus(resc,resv,argc,(mxArray**)(argv)); break;
   case 100: if ((name_ok=!strcmp("SpatialForceVectorRaw_minus",cmd))) _wrap_SpatialForceVectorRaw_minus(resc,resv,argc,(mxArray**)(argv)); break;
   case 101: if ((name_ok=!strcmp("SpatialForceVectorRaw_uminus",cmd))) _wrap_SpatialForceVectorRaw_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 102: if ((name_ok=!strcmp("new_SpatialMotionVectorRaw",cmd))) _wrap_new_SpatialMotionVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 103: if ((name_ok=!strcmp("delete_SpatialMotionVectorRaw",cmd))) _wrap_delete_SpatialMotionVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 104: if ((name_ok=!strcmp("SpatialMotionVectorRaw_changePoint",cmd))) _wrap_SpatialMotionVectorRaw_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 105: if ((name_ok=!strcmp("SpatialMotionVectorRaw_changeCoordFrame",cmd))) _wrap_SpatialMotionVectorRaw_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 106: if ((name_ok=!strcmp("SpatialMotionVectorRaw_compose",cmd))) _wrap_SpatialMotionVectorRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 107: if ((name_ok=!strcmp("SpatialMotionVectorRaw_inverse",cmd))) _wrap_SpatialMotionVectorRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 108: if ((name_ok=!strcmp("SpatialMotionVectorRaw_dot",cmd))) _wrap_SpatialMotionVectorRaw_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 109: if ((name_ok=!strcmp("SpatialMotionVectorRaw_plus",cmd))) _wrap_SpatialMotionVectorRaw_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 110: if ((name_ok=!strcmp("SpatialMotionVectorRaw_minus",cmd))) _wrap_SpatialMotionVectorRaw_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 111: if ((name_ok=!strcmp("SpatialMotionVectorRaw_uminus",cmd))) _wrap_SpatialMotionVectorRaw_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 112: if ((name_ok=!strcmp("new_Twist",cmd))) _wrap_new_Twist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 113: if ((name_ok=!strcmp("delete_Twist",cmd))) _wrap_delete_Twist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 114: if ((name_ok=!strcmp("new_Wrench",cmd))) _wrap_new_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 115: if ((name_ok=!strcmp("delete_Wrench",cmd))) _wrap_delete_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 116: if ((name_ok=!strcmp("new_RotationRaw",cmd))) _wrap_new_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 117: if ((name_ok=!strcmp("delete_RotationRaw",cmd))) _wrap_delete_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 118: if ((name_ok=!strcmp("RotationRaw_TODOparen",cmd))) _wrap_RotationRaw_TODOparen(resc,resv,argc,(mxArray**)(argv)); break;
-  case 119: if ((name_ok=!strcmp("RotationRaw_getVal",cmd))) _wrap_RotationRaw_getVal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 120: if ((name_ok=!strcmp("RotationRaw_setVal",cmd))) _wrap_RotationRaw_setVal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 121: if ((name_ok=!strcmp("RotationRaw_rows",cmd))) _wrap_RotationRaw_rows(resc,resv,argc,(mxArray**)(argv)); break;
-  case 122: if ((name_ok=!strcmp("RotationRaw_cols",cmd))) _wrap_RotationRaw_cols(resc,resv,argc,(mxArray**)(argv)); break;
-  case 123: if ((name_ok=!strcmp("RotationRaw_data",cmd))) _wrap_RotationRaw_data(resc,resv,argc,(mxArray**)(argv)); break;
-  case 124: if ((name_ok=!strcmp("RotationRaw_changeOrientFrame",cmd))) _wrap_RotationRaw_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 125: if ((name_ok=!strcmp("RotationRaw_changeRefOrientFrame",cmd))) _wrap_RotationRaw_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 126: if ((name_ok=!strcmp("RotationRaw_compose",cmd))) _wrap_RotationRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 127: if ((name_ok=!strcmp("RotationRaw_inverse2",cmd))) _wrap_RotationRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 128: if ((name_ok=!strcmp("RotationRaw_transform",cmd))) _wrap_RotationRaw_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 129: if ((name_ok=!strcmp("RotationRaw_inverse",cmd))) _wrap_RotationRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 130: if ((name_ok=!strcmp("RotationRaw_mtimes",cmd))) _wrap_RotationRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 131: if ((name_ok=!strcmp("RotationRaw_toString",cmd))) _wrap_RotationRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 132: if ((name_ok=!strcmp("RotationRaw_display",cmd))) _wrap_RotationRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 133: if ((name_ok=!strcmp("RotationRaw_RotX",cmd))) _wrap_RotationRaw_RotX(resc,resv,argc,(mxArray**)(argv)); break;
-  case 134: if ((name_ok=!strcmp("RotationRaw_RotY",cmd))) _wrap_RotationRaw_RotY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 135: if ((name_ok=!strcmp("RotationRaw_RotZ",cmd))) _wrap_RotationRaw_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
-  case 136: if ((name_ok=!strcmp("RotationRaw_RPY",cmd))) _wrap_RotationRaw_RPY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 137: if ((name_ok=!strcmp("new_RotationSemantics",cmd))) _wrap_new_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 138: if ((name_ok=!strcmp("delete_RotationSemantics",cmd))) _wrap_delete_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 139: if ((name_ok=!strcmp("RotationSemantics_getOrientationFrame",cmd))) _wrap_RotationSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 140: if ((name_ok=!strcmp("RotationSemantics_getReferenceOrientationFrame",cmd))) _wrap_RotationSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 141: if ((name_ok=!strcmp("RotationSemantics_setOrientationFrame",cmd))) _wrap_RotationSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 142: if ((name_ok=!strcmp("RotationSemantics_setReferenceOrientationFrame",cmd))) _wrap_RotationSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 143: if ((name_ok=!strcmp("RotationSemantics_check_changeOrientFrame",cmd))) _wrap_RotationSemantics_check_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 144: if ((name_ok=!strcmp("RotationSemantics_check_changeRefOrientFrame",cmd))) _wrap_RotationSemantics_check_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 145: if ((name_ok=!strcmp("RotationSemantics_check_compose",cmd))) _wrap_RotationSemantics_check_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 146: if ((name_ok=!strcmp("RotationSemantics_check_inverse2",cmd))) _wrap_RotationSemantics_check_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 147: if ((name_ok=!strcmp("RotationSemantics_check_transform",cmd))) _wrap_RotationSemantics_check_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 148: if ((name_ok=!strcmp("RotationSemantics_changeOrientFrame",cmd))) _wrap_RotationSemantics_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 149: if ((name_ok=!strcmp("RotationSemantics_changeRefOrientFrame",cmd))) _wrap_RotationSemantics_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 150: if ((name_ok=!strcmp("RotationSemantics_compose",cmd))) _wrap_RotationSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 151: if ((name_ok=!strcmp("RotationSemantics_inverse2",cmd))) _wrap_RotationSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 152: if ((name_ok=!strcmp("RotationSemantics_transform",cmd))) _wrap_RotationSemantics_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 153: if ((name_ok=!strcmp("RotationSemantics_toString",cmd))) _wrap_RotationSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 154: if ((name_ok=!strcmp("RotationSemantics_display",cmd))) _wrap_RotationSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 155: if ((name_ok=!strcmp("new_Rotation",cmd))) _wrap_new_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 156: if ((name_ok=!strcmp("delete_Rotation",cmd))) _wrap_delete_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 157: if ((name_ok=!strcmp("Rotation_getSemantics",cmd))) _wrap_Rotation_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 158: if ((name_ok=!strcmp("Rotation_changeOrientFrame",cmd))) _wrap_Rotation_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 159: if ((name_ok=!strcmp("Rotation_changeRefOrientFrame",cmd))) _wrap_Rotation_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 160: if ((name_ok=!strcmp("Rotation_compose",cmd))) _wrap_Rotation_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 161: if ((name_ok=!strcmp("Rotation_inverse2",cmd))) _wrap_Rotation_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 162: if ((name_ok=!strcmp("Rotation_transform",cmd))) _wrap_Rotation_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 163: if ((name_ok=!strcmp("Rotation_inverse",cmd))) _wrap_Rotation_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 164: if ((name_ok=!strcmp("Rotation_mtimes",cmd))) _wrap_Rotation_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 165: if ((name_ok=!strcmp("Rotation_toString",cmd))) _wrap_Rotation_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 166: if ((name_ok=!strcmp("Rotation_display",cmd))) _wrap_Rotation_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 167: if ((name_ok=!strcmp("new_TransformRaw",cmd))) _wrap_new_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 168: if ((name_ok=!strcmp("delete_TransformRaw",cmd))) _wrap_delete_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 169: if ((name_ok=!strcmp("TransformRaw_compose",cmd))) _wrap_TransformRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 170: if ((name_ok=!strcmp("TransformRaw_inverse2",cmd))) _wrap_TransformRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 171: if ((name_ok=!strcmp("TransformRaw_transform",cmd))) _wrap_TransformRaw_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 172: if ((name_ok=!strcmp("TransformRaw_inverse",cmd))) _wrap_TransformRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 173: if ((name_ok=!strcmp("TransformRaw_mtimes",cmd))) _wrap_TransformRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 174: if ((name_ok=!strcmp("TransformRaw_toString",cmd))) _wrap_TransformRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 175: if ((name_ok=!strcmp("TransformRaw_display",cmd))) _wrap_TransformRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 176: if ((name_ok=!strcmp("new_TransformSemantics",cmd))) _wrap_new_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 177: if ((name_ok=!strcmp("delete_TransformSemantics",cmd))) _wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 178: if ((name_ok=!strcmp("TransformSemantics_getRotationSemantics",cmd))) _wrap_TransformSemantics_getRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 179: if ((name_ok=!strcmp("TransformSemantics_getPositionSemantics",cmd))) _wrap_TransformSemantics_getPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 180: if ((name_ok=!strcmp("TransformSemantics_setRotationSemantics",cmd))) _wrap_TransformSemantics_setRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 181: if ((name_ok=!strcmp("TransformSemantics_setPositionSemantics",cmd))) _wrap_TransformSemantics_setPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 182: if ((name_ok=!strcmp("TransformSemantics_getPoint",cmd))) _wrap_TransformSemantics_getPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 183: if ((name_ok=!strcmp("TransformSemantics_getOrientationFrame",cmd))) _wrap_TransformSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 184: if ((name_ok=!strcmp("TransformSemantics_getReferencePoint",cmd))) _wrap_TransformSemantics_getReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 185: if ((name_ok=!strcmp("TransformSemantics_getReferenceOrientationFrame",cmd))) _wrap_TransformSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 186: if ((name_ok=!strcmp("TransformSemantics_setPoint",cmd))) _wrap_TransformSemantics_setPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 187: if ((name_ok=!strcmp("TransformSemantics_setOrientationFrame",cmd))) _wrap_TransformSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 188: if ((name_ok=!strcmp("TransformSemantics_setReferencePoint",cmd))) _wrap_TransformSemantics_setReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 189: if ((name_ok=!strcmp("TransformSemantics_setReferenceOrientationFrame",cmd))) _wrap_TransformSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 190: if ((name_ok=!strcmp("TransformSemantics_check_compose",cmd))) _wrap_TransformSemantics_check_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 191: if ((name_ok=!strcmp("TransformSemantics_check_inverse2",cmd))) _wrap_TransformSemantics_check_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 192: if ((name_ok=!strcmp("TransformSemantics_check_transform",cmd))) _wrap_TransformSemantics_check_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 193: if ((name_ok=!strcmp("TransformSemantics_compose",cmd))) _wrap_TransformSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 194: if ((name_ok=!strcmp("TransformSemantics_inverse2",cmd))) _wrap_TransformSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 195: if ((name_ok=!strcmp("TransformSemantics_transform",cmd))) _wrap_TransformSemantics_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 196: if ((name_ok=!strcmp("TransformSemantics_inverse",cmd))) _wrap_TransformSemantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 197: if ((name_ok=!strcmp("TransformSemantics_mtimes",cmd))) _wrap_TransformSemantics_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 198: if ((name_ok=!strcmp("TransformSemantics_toString",cmd))) _wrap_TransformSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 199: if ((name_ok=!strcmp("TransformSemantics_display",cmd))) _wrap_TransformSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 200: if ((name_ok=!strcmp("new_Transform",cmd))) _wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 201: if ((name_ok=!strcmp("delete_Transform",cmd))) _wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 202: if ((name_ok=!strcmp("Transform_getSemantics",cmd))) _wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 203: if ((name_ok=!strcmp("Transform_getRotation",cmd))) _wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 204: if ((name_ok=!strcmp("Transform_getPosition",cmd))) _wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 205: if ((name_ok=!strcmp("Transform_setRotation",cmd))) _wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 206: if ((name_ok=!strcmp("Transform_setPosition",cmd))) _wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 207: if ((name_ok=!strcmp("Transform_compose",cmd))) _wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 208: if ((name_ok=!strcmp("Transform_inverse2",cmd))) _wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 209: if ((name_ok=!strcmp("Transform_transform",cmd))) _wrap_Transform_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 210: if ((name_ok=!strcmp("Transform_inverse",cmd))) _wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 211: if ((name_ok=!strcmp("Transform_mtimes",cmd))) _wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 212: if ((name_ok=!strcmp("Transform_toString",cmd))) _wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 213: if ((name_ok=!strcmp("Transform_display",cmd))) _wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 102: if ((name_ok=!strcmp("SpatialForceVectorRaw_Zero",cmd))) _wrap_SpatialForceVectorRaw_Zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 103: if ((name_ok=!strcmp("new_SpatialMotionVectorRaw",cmd))) _wrap_new_SpatialMotionVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 104: if ((name_ok=!strcmp("delete_SpatialMotionVectorRaw",cmd))) _wrap_delete_SpatialMotionVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 105: if ((name_ok=!strcmp("SpatialMotionVectorRaw_changePoint",cmd))) _wrap_SpatialMotionVectorRaw_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 106: if ((name_ok=!strcmp("SpatialMotionVectorRaw_changeCoordFrame",cmd))) _wrap_SpatialMotionVectorRaw_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 107: if ((name_ok=!strcmp("SpatialMotionVectorRaw_compose",cmd))) _wrap_SpatialMotionVectorRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 108: if ((name_ok=!strcmp("SpatialMotionVectorRaw_inverse",cmd))) _wrap_SpatialMotionVectorRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 109: if ((name_ok=!strcmp("SpatialMotionVectorRaw_dot",cmd))) _wrap_SpatialMotionVectorRaw_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 110: if ((name_ok=!strcmp("SpatialMotionVectorRaw_plus",cmd))) _wrap_SpatialMotionVectorRaw_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 111: if ((name_ok=!strcmp("SpatialMotionVectorRaw_minus",cmd))) _wrap_SpatialMotionVectorRaw_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 112: if ((name_ok=!strcmp("SpatialMotionVectorRaw_uminus",cmd))) _wrap_SpatialMotionVectorRaw_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 113: if ((name_ok=!strcmp("SpatialMotionVectorRaw_Zero",cmd))) _wrap_SpatialMotionVectorRaw_Zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 114: if ((name_ok=!strcmp("new_Twist",cmd))) _wrap_new_Twist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 115: if ((name_ok=!strcmp("delete_Twist",cmd))) _wrap_delete_Twist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 116: if ((name_ok=!strcmp("new_Wrench",cmd))) _wrap_new_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 117: if ((name_ok=!strcmp("delete_Wrench",cmd))) _wrap_delete_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 118: if ((name_ok=!strcmp("new_RotationRaw",cmd))) _wrap_new_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 119: if ((name_ok=!strcmp("delete_RotationRaw",cmd))) _wrap_delete_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 120: if ((name_ok=!strcmp("RotationRaw_TODOparen",cmd))) _wrap_RotationRaw_TODOparen(resc,resv,argc,(mxArray**)(argv)); break;
+  case 121: if ((name_ok=!strcmp("RotationRaw_getVal",cmd))) _wrap_RotationRaw_getVal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 122: if ((name_ok=!strcmp("RotationRaw_setVal",cmd))) _wrap_RotationRaw_setVal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 123: if ((name_ok=!strcmp("RotationRaw_rows",cmd))) _wrap_RotationRaw_rows(resc,resv,argc,(mxArray**)(argv)); break;
+  case 124: if ((name_ok=!strcmp("RotationRaw_cols",cmd))) _wrap_RotationRaw_cols(resc,resv,argc,(mxArray**)(argv)); break;
+  case 125: if ((name_ok=!strcmp("RotationRaw_data",cmd))) _wrap_RotationRaw_data(resc,resv,argc,(mxArray**)(argv)); break;
+  case 126: if ((name_ok=!strcmp("RotationRaw_changeOrientFrame",cmd))) _wrap_RotationRaw_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 127: if ((name_ok=!strcmp("RotationRaw_changeRefOrientFrame",cmd))) _wrap_RotationRaw_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 128: if ((name_ok=!strcmp("RotationRaw_compose",cmd))) _wrap_RotationRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 129: if ((name_ok=!strcmp("RotationRaw_inverse2",cmd))) _wrap_RotationRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 130: if ((name_ok=!strcmp("RotationRaw_transform",cmd))) _wrap_RotationRaw_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 131: if ((name_ok=!strcmp("RotationRaw_inverse",cmd))) _wrap_RotationRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 132: if ((name_ok=!strcmp("RotationRaw_mtimes",cmd))) _wrap_RotationRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 133: if ((name_ok=!strcmp("RotationRaw_toString",cmd))) _wrap_RotationRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 134: if ((name_ok=!strcmp("RotationRaw_display",cmd))) _wrap_RotationRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 135: if ((name_ok=!strcmp("RotationRaw_RotX",cmd))) _wrap_RotationRaw_RotX(resc,resv,argc,(mxArray**)(argv)); break;
+  case 136: if ((name_ok=!strcmp("RotationRaw_RotY",cmd))) _wrap_RotationRaw_RotY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 137: if ((name_ok=!strcmp("RotationRaw_RotZ",cmd))) _wrap_RotationRaw_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
+  case 138: if ((name_ok=!strcmp("RotationRaw_RPY",cmd))) _wrap_RotationRaw_RPY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 139: if ((name_ok=!strcmp("RotationRaw_Identity",cmd))) _wrap_RotationRaw_Identity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 140: if ((name_ok=!strcmp("new_RotationSemantics",cmd))) _wrap_new_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 141: if ((name_ok=!strcmp("delete_RotationSemantics",cmd))) _wrap_delete_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 142: if ((name_ok=!strcmp("RotationSemantics_getOrientationFrame",cmd))) _wrap_RotationSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 143: if ((name_ok=!strcmp("RotationSemantics_getReferenceOrientationFrame",cmd))) _wrap_RotationSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 144: if ((name_ok=!strcmp("RotationSemantics_setOrientationFrame",cmd))) _wrap_RotationSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 145: if ((name_ok=!strcmp("RotationSemantics_setReferenceOrientationFrame",cmd))) _wrap_RotationSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 146: if ((name_ok=!strcmp("RotationSemantics_check_changeOrientFrame",cmd))) _wrap_RotationSemantics_check_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 147: if ((name_ok=!strcmp("RotationSemantics_check_changeRefOrientFrame",cmd))) _wrap_RotationSemantics_check_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 148: if ((name_ok=!strcmp("RotationSemantics_check_compose",cmd))) _wrap_RotationSemantics_check_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 149: if ((name_ok=!strcmp("RotationSemantics_check_inverse2",cmd))) _wrap_RotationSemantics_check_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 150: if ((name_ok=!strcmp("RotationSemantics_check_transform",cmd))) _wrap_RotationSemantics_check_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 151: if ((name_ok=!strcmp("RotationSemantics_changeOrientFrame",cmd))) _wrap_RotationSemantics_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 152: if ((name_ok=!strcmp("RotationSemantics_changeRefOrientFrame",cmd))) _wrap_RotationSemantics_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 153: if ((name_ok=!strcmp("RotationSemantics_compose",cmd))) _wrap_RotationSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 154: if ((name_ok=!strcmp("RotationSemantics_inverse2",cmd))) _wrap_RotationSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 155: if ((name_ok=!strcmp("RotationSemantics_transform",cmd))) _wrap_RotationSemantics_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 156: if ((name_ok=!strcmp("RotationSemantics_toString",cmd))) _wrap_RotationSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 157: if ((name_ok=!strcmp("RotationSemantics_display",cmd))) _wrap_RotationSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 158: if ((name_ok=!strcmp("new_Rotation",cmd))) _wrap_new_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 159: if ((name_ok=!strcmp("delete_Rotation",cmd))) _wrap_delete_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 160: if ((name_ok=!strcmp("Rotation_getSemantics",cmd))) _wrap_Rotation_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 161: if ((name_ok=!strcmp("Rotation_changeOrientFrame",cmd))) _wrap_Rotation_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 162: if ((name_ok=!strcmp("Rotation_changeRefOrientFrame",cmd))) _wrap_Rotation_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 163: if ((name_ok=!strcmp("Rotation_compose",cmd))) _wrap_Rotation_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 164: if ((name_ok=!strcmp("Rotation_inverse2",cmd))) _wrap_Rotation_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 165: if ((name_ok=!strcmp("Rotation_transform",cmd))) _wrap_Rotation_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 166: if ((name_ok=!strcmp("Rotation_inverse",cmd))) _wrap_Rotation_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 167: if ((name_ok=!strcmp("Rotation_mtimes",cmd))) _wrap_Rotation_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 168: if ((name_ok=!strcmp("Rotation_toString",cmd))) _wrap_Rotation_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 169: if ((name_ok=!strcmp("Rotation_display",cmd))) _wrap_Rotation_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 170: if ((name_ok=!strcmp("new_TransformRaw",cmd))) _wrap_new_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 171: if ((name_ok=!strcmp("delete_TransformRaw",cmd))) _wrap_delete_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 172: if ((name_ok=!strcmp("TransformRaw_compose",cmd))) _wrap_TransformRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 173: if ((name_ok=!strcmp("TransformRaw_inverse2",cmd))) _wrap_TransformRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 174: if ((name_ok=!strcmp("TransformRaw_transform",cmd))) _wrap_TransformRaw_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 175: if ((name_ok=!strcmp("TransformRaw_inverse",cmd))) _wrap_TransformRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 176: if ((name_ok=!strcmp("TransformRaw_mtimes",cmd))) _wrap_TransformRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 177: if ((name_ok=!strcmp("TransformRaw_Identity",cmd))) _wrap_TransformRaw_Identity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 178: if ((name_ok=!strcmp("TransformRaw_toString",cmd))) _wrap_TransformRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 179: if ((name_ok=!strcmp("TransformRaw_display",cmd))) _wrap_TransformRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 180: if ((name_ok=!strcmp("new_TransformSemantics",cmd))) _wrap_new_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 181: if ((name_ok=!strcmp("delete_TransformSemantics",cmd))) _wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 182: if ((name_ok=!strcmp("TransformSemantics_getRotationSemantics",cmd))) _wrap_TransformSemantics_getRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 183: if ((name_ok=!strcmp("TransformSemantics_getPositionSemantics",cmd))) _wrap_TransformSemantics_getPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 184: if ((name_ok=!strcmp("TransformSemantics_setRotationSemantics",cmd))) _wrap_TransformSemantics_setRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 185: if ((name_ok=!strcmp("TransformSemantics_setPositionSemantics",cmd))) _wrap_TransformSemantics_setPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 186: if ((name_ok=!strcmp("TransformSemantics_getPoint",cmd))) _wrap_TransformSemantics_getPoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 187: if ((name_ok=!strcmp("TransformSemantics_getOrientationFrame",cmd))) _wrap_TransformSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 188: if ((name_ok=!strcmp("TransformSemantics_getReferencePoint",cmd))) _wrap_TransformSemantics_getReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 189: if ((name_ok=!strcmp("TransformSemantics_getReferenceOrientationFrame",cmd))) _wrap_TransformSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 190: if ((name_ok=!strcmp("TransformSemantics_setPoint",cmd))) _wrap_TransformSemantics_setPoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 191: if ((name_ok=!strcmp("TransformSemantics_setOrientationFrame",cmd))) _wrap_TransformSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 192: if ((name_ok=!strcmp("TransformSemantics_setReferencePoint",cmd))) _wrap_TransformSemantics_setReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 193: if ((name_ok=!strcmp("TransformSemantics_setReferenceOrientationFrame",cmd))) _wrap_TransformSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 194: if ((name_ok=!strcmp("TransformSemantics_check_compose",cmd))) _wrap_TransformSemantics_check_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 195: if ((name_ok=!strcmp("TransformSemantics_check_inverse2",cmd))) _wrap_TransformSemantics_check_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 196: if ((name_ok=!strcmp("TransformSemantics_check_transform",cmd))) _wrap_TransformSemantics_check_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 197: if ((name_ok=!strcmp("TransformSemantics_compose",cmd))) _wrap_TransformSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 198: if ((name_ok=!strcmp("TransformSemantics_inverse2",cmd))) _wrap_TransformSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 199: if ((name_ok=!strcmp("TransformSemantics_transform",cmd))) _wrap_TransformSemantics_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 200: if ((name_ok=!strcmp("TransformSemantics_inverse",cmd))) _wrap_TransformSemantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 201: if ((name_ok=!strcmp("TransformSemantics_mtimes",cmd))) _wrap_TransformSemantics_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 202: if ((name_ok=!strcmp("TransformSemantics_toString",cmd))) _wrap_TransformSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 203: if ((name_ok=!strcmp("TransformSemantics_display",cmd))) _wrap_TransformSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 204: if ((name_ok=!strcmp("new_Transform",cmd))) _wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 205: if ((name_ok=!strcmp("delete_Transform",cmd))) _wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 206: if ((name_ok=!strcmp("Transform_getSemantics",cmd))) _wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 207: if ((name_ok=!strcmp("Transform_getRotation",cmd))) _wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 208: if ((name_ok=!strcmp("Transform_getPosition",cmd))) _wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 209: if ((name_ok=!strcmp("Transform_setRotation",cmd))) _wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 210: if ((name_ok=!strcmp("Transform_setPosition",cmd))) _wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 211: if ((name_ok=!strcmp("Transform_compose",cmd))) _wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 212: if ((name_ok=!strcmp("Transform_inverse2",cmd))) _wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 213: if ((name_ok=!strcmp("Transform_transform",cmd))) _wrap_Transform_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 214: if ((name_ok=!strcmp("Transform_inverse",cmd))) _wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 215: if ((name_ok=!strcmp("Transform_mtimes",cmd))) _wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 216: if ((name_ok=!strcmp("Transform_toString",cmd))) _wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 217: if ((name_ok=!strcmp("Transform_display",cmd))) _wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 218: if ((name_ok=!strcmp("NR_OF_SENSOR_TYPES_get",cmd))) _wrap_NR_OF_SENSOR_TYPES_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 219: if ((name_ok=!strcmp("delete_Sensor",cmd))) _wrap_delete_Sensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 220: if ((name_ok=!strcmp("Sensor_getName",cmd))) _wrap_Sensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 221: if ((name_ok=!strcmp("Sensor_getSensorType",cmd))) _wrap_Sensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 222: if ((name_ok=!strcmp("Sensor_getParent",cmd))) _wrap_Sensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 223: if ((name_ok=!strcmp("Sensor_getParentIndex",cmd))) _wrap_Sensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 224: if ((name_ok=!strcmp("Sensor_isValid",cmd))) _wrap_Sensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 225: if ((name_ok=!strcmp("Sensor_clone",cmd))) _wrap_Sensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 226: if ((name_ok=!strcmp("new_SensorsList",cmd))) _wrap_new_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 227: if ((name_ok=!strcmp("delete_SensorsList",cmd))) _wrap_delete_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 228: if ((name_ok=!strcmp("SensorsList_addSensor",cmd))) _wrap_SensorsList_addSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 229: if ((name_ok=!strcmp("SensorsList_getNrOfSensors",cmd))) _wrap_SensorsList_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 230: if ((name_ok=!strcmp("SensorsList_getSensorIndex",cmd))) _wrap_SensorsList_getSensorIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 231: if ((name_ok=!strcmp("SensorsList_getSensor",cmd))) _wrap_SensorsList_getSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 232: if ((name_ok=!strcmp("new_SensorsMeasurements",cmd))) _wrap_new_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 233: if ((name_ok=!strcmp("delete_SensorsMeasurements",cmd))) _wrap_delete_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 234: if ((name_ok=!strcmp("SensorsMeasurements_setNrOfSensors",cmd))) _wrap_SensorsMeasurements_setNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 235: if ((name_ok=!strcmp("SensorsMeasurements_getNrOfSensors",cmd))) _wrap_SensorsMeasurements_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 236: if ((name_ok=!strcmp("SensorsMeasurements_setMeasurement",cmd))) _wrap_SensorsMeasurements_setMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 237: if ((name_ok=!strcmp("SensorsMeasurements_getMeasurement",cmd))) _wrap_SensorsMeasurements_getMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 238: if ((name_ok=!strcmp("new_SixAxisForceTorqueSensor",cmd))) _wrap_new_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 239: if ((name_ok=!strcmp("delete_SixAxisForceTorqueSensor",cmd))) _wrap_delete_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 240: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setName",cmd))) _wrap_SixAxisForceTorqueSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 241: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setFirstLinkSensorTransform",cmd))) _wrap_SixAxisForceTorqueSensor_setFirstLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 242: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setSecondLinkSensorTransform",cmd))) _wrap_SixAxisForceTorqueSensor_setSecondLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 243: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getFirstLinkIndex",cmd))) _wrap_SixAxisForceTorqueSensor_getFirstLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 244: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getSecondLinkIndex",cmd))) _wrap_SixAxisForceTorqueSensor_getSecondLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 245: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setParent",cmd))) _wrap_SixAxisForceTorqueSensor_setParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 246: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setParentIndex",cmd))) _wrap_SixAxisForceTorqueSensor_setParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 247: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setAppliedWrenchLink",cmd))) _wrap_SixAxisForceTorqueSensor_setAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 248: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getName",cmd))) _wrap_SixAxisForceTorqueSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 249: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getSensorType",cmd))) _wrap_SixAxisForceTorqueSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 250: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getParent",cmd))) _wrap_SixAxisForceTorqueSensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 251: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getParentIndex",cmd))) _wrap_SixAxisForceTorqueSensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 252: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_isValid",cmd))) _wrap_SixAxisForceTorqueSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 253: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_clone",cmd))) _wrap_SixAxisForceTorqueSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 254: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getAppliedWrenchLink",cmd))) _wrap_SixAxisForceTorqueSensor_getAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 255: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_isLinkAttachedToSensor",cmd))) _wrap_SixAxisForceTorqueSensor_isLinkAttachedToSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 256: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getLinkSensorTransform",cmd))) _wrap_SixAxisForceTorqueSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 257: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getWrenchAppliedOnLink",cmd))) _wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 258: if ((name_ok=!strcmp("DynamicsRegressorParameter_category_get",cmd))) _wrap_DynamicsRegressorParameter_category_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 259: if ((name_ok=!strcmp("DynamicsRegressorParameter_category_set",cmd))) _wrap_DynamicsRegressorParameter_category_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 260: if ((name_ok=!strcmp("DynamicsRegressorParameter_index_get",cmd))) _wrap_DynamicsRegressorParameter_index_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 261: if ((name_ok=!strcmp("DynamicsRegressorParameter_index_set",cmd))) _wrap_DynamicsRegressorParameter_index_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 262: if ((name_ok=!strcmp("DynamicsRegressorParameter_type_get",cmd))) _wrap_DynamicsRegressorParameter_type_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 263: if ((name_ok=!strcmp("DynamicsRegressorParameter_type_set",cmd))) _wrap_DynamicsRegressorParameter_type_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 264: if ((name_ok=!strcmp("DynamicsRegressorParameter_lt",cmd))) _wrap_DynamicsRegressorParameter_lt(resc,resv,argc,(mxArray**)(argv)); break;
+  case 265: if ((name_ok=!strcmp("DynamicsRegressorParameter_isequal",cmd))) _wrap_DynamicsRegressorParameter_isequal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 266: if ((name_ok=!strcmp("new_DynamicsRegressorParameter",cmd))) _wrap_new_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 267: if ((name_ok=!strcmp("delete_DynamicsRegressorParameter",cmd))) _wrap_delete_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 268: if ((name_ok=!strcmp("DynamicsRegressorParametersList_parameters_get",cmd))) _wrap_DynamicsRegressorParametersList_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 269: if ((name_ok=!strcmp("DynamicsRegressorParametersList_parameters_set",cmd))) _wrap_DynamicsRegressorParametersList_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 270: if ((name_ok=!strcmp("DynamicsRegressorParametersList_getDescriptionOfParameter",cmd))) _wrap_DynamicsRegressorParametersList_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 271: if ((name_ok=!strcmp("DynamicsRegressorParametersList_addParam",cmd))) _wrap_DynamicsRegressorParametersList_addParam(resc,resv,argc,(mxArray**)(argv)); break;
+  case 272: if ((name_ok=!strcmp("DynamicsRegressorParametersList_addList",cmd))) _wrap_DynamicsRegressorParametersList_addList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 273: if ((name_ok=!strcmp("DynamicsRegressorParametersList_getNrOfParameters",cmd))) _wrap_DynamicsRegressorParametersList_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 274: if ((name_ok=!strcmp("new_DynamicsRegressorParametersList",cmd))) _wrap_new_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 275: if ((name_ok=!strcmp("delete_DynamicsRegressorParametersList",cmd))) _wrap_delete_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 276: if ((name_ok=!strcmp("new_DynamicsRegressorGenerator",cmd))) _wrap_new_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 277: if ((name_ok=!strcmp("delete_DynamicsRegressorGenerator",cmd))) _wrap_delete_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 278: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile",cmd))) _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 279: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString",cmd))) _wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 280: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRegressorStructureFromFile",cmd))) _wrap_DynamicsRegressorGenerator_loadRegressorStructureFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 281: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRegressorStructureFromString",cmd))) _wrap_DynamicsRegressorGenerator_loadRegressorStructureFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 282: if ((name_ok=!strcmp("DynamicsRegressorGenerator_isValid",cmd))) _wrap_DynamicsRegressorGenerator_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 283: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getNrOfParameters",cmd))) _wrap_DynamicsRegressorGenerator_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 284: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getNrOfOutputs",cmd))) _wrap_DynamicsRegressorGenerator_getNrOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 285: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getNrOfDegreesOfFreedom",cmd))) _wrap_DynamicsRegressorGenerator_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 286: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfParameter",cmd))) _wrap_DynamicsRegressorGenerator_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 287: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfParameters",cmd))) _wrap_DynamicsRegressorGenerator_getDescriptionOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 288: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfOutput",cmd))) _wrap_DynamicsRegressorGenerator_getDescriptionOfOutput(resc,resv,argc,(mxArray**)(argv)); break;
+  case 289: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfOutputs",cmd))) _wrap_DynamicsRegressorGenerator_getDescriptionOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 290: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom",cmd))) _wrap_DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 291: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom",cmd))) _wrap_DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 292: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getBaseLinkName",cmd))) _wrap_DynamicsRegressorGenerator_getBaseLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 293: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getSensorsModel",cmd))) _wrap_DynamicsRegressorGenerator_getSensorsModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 294: if ((name_ok=!strcmp("DynamicsRegressorGenerator_setRobotState",cmd))) _wrap_DynamicsRegressorGenerator_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 295: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getSensorsMeasurements",cmd))) _wrap_DynamicsRegressorGenerator_getSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 296: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeRegressor",cmd))) _wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 297: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getModelParameters",cmd))) _wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
   default: mexErrMsgIdAndTxt("SWIG:RuntimeError","No function id %d.",fcn_id);
   }
   if (!name_ok) {

@@ -143,6 +143,7 @@ bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::stri
     it = this->pimpl->NamesSensors[sensor_type].find(_sensor_name);
     if( it == this->pimpl->NamesSensors[sensor_type].end() )
     {
+        std::cerr << "[ERROR] getSensorIndex did not find sensor " << _sensor_name << std::endl;
         return false;
     }
     else
@@ -151,6 +152,26 @@ bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::stri
         return true;
     }
 }
+
+int SensorsList::getSensorIndex(const SensorType& sensor_type, const std::string& _sensor_name) const
+{
+    unsigned int retUnsignedVal;
+    int retVal;
+    bool ok = getSensorIndex(sensor_type,_sensor_name,retUnsignedVal);
+
+    if( !ok )
+    {
+        retVal = -1;
+    }
+    else
+    {
+        // \todo TODO check overflow
+        retVal = (int) retUnsignedVal;
+    }
+
+    return retVal;
+}
+
 
 Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) const
 {

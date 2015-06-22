@@ -61,6 +61,11 @@ int subtreeBaseDynamicsRegressor::configure()
             {
                 std::cerr << "subtreeBaseDynamicsRegressor::configure error: link "
                           << subtree_leaf_links[i] << " not found " << std::endl;
+                std::cerr << "Link available in the model : " << std::endl;
+                for(int i=0; i < undirected_tree.getNrOfLinks(); i++ )
+                {
+                    std::cerr << undirected_tree.getLink(i)->getName() << std::endl;
+                }
             }
             return -1;
         }
@@ -187,6 +192,16 @@ std::vector<int> subtreeBaseDynamicsRegressor::getRelativeJunctions()
 {
     return relative_junctions;
 }
+
+iDynTree::Regressors::DynamicsRegressorParametersList subtreeBaseDynamicsRegressor::getUsedParameters()
+{
+    assert(p_undirected_tree->getNrOfLinks() == linkIndeces2regrCols.size());
+
+    return getLegacyUsedParameters(linkIndeces2regrCols,
+                                   p_sensors_tree->getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),
+                                   this->consider_ft_offset);
+}
+
 
 
 int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &/*q*/,

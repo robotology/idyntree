@@ -15,6 +15,7 @@ namespace KDL
     class Frame;
     class Twist;
     class Wrench;
+    class JntArray;
 }
 
 namespace iDynTree
@@ -24,6 +25,7 @@ namespace iDynTree
     class Transform;
     class Twist;
     class Wrench;
+    class VectorDynSize;
 
     /**
      * iDynTree --> KDL conversions
@@ -33,6 +35,8 @@ namespace iDynTree
     KDL::Frame    ToKDL(const iDynTree::Transform & idyntree_transform);
     KDL::Twist    ToKDL(const iDynTree::Twist     & idyntree_twist);
     KDL::Wrench   ToKDL(const iDynTree::Wrench    & idyntree_wrench);
+    bool          ToKDL(const iDynTree::VectorDynSize & idyntree_jntarray,
+                        KDL::JntArray             & kdl_jntarray);
 
     /**
      * KDL --> iDynTree conversions
@@ -42,6 +46,8 @@ namespace iDynTree
     iDynTree::Transform  ToiDynTree(const KDL::Frame & kdl_transform);
     iDynTree::Twist      ToiDynTree(const KDL::Twist & kdl_twist);
     iDynTree::Wrench     ToiDynTree(const KDL::Wrench & kdl_wrench);
+    bool                 ToiDynTree(const KDL::JntArray  & kdl_jntarray,
+                                    iDynTree::VectorDynSize & idyntree_jntarray);
 
 }
 

@@ -42,9 +42,11 @@
 
 #include <kdl/frames.hpp>
 
+#include <kdl_codyco/undirectedtree.hpp>
+#include <iDynTree/Sensors/Sensors.hpp>
+
+
 class TiXmlDocument;
-
-
 
 namespace kdl_format_io{
 
@@ -65,6 +67,10 @@ struct FTSensorData
 bool ftSensorsFromUrdfFile(const std::string& file, std::vector<FTSensorData> & ft_sensors);
 bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorData> & ft_sensors);
 
+iDynTree::SensorsList sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                          std::string urdf_filename);
+iDynTree::SensorsList sensorsTreeFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                                std::string urdf_string);
 }
 
 #endif

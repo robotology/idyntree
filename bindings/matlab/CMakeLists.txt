@@ -39,7 +39,7 @@ include_directories(${Matlab_INCLUDE_DIRS})
 set(modulename iDynTreeMATLAB_wrap)
 
 # Generate SWIG wrapper
-if(GENERATE_MATLAB)
+if(IDYNTREE_GENERATE_MATLAB)
   # generate the wrapper
   set(swig_generated_sources)
   message("swig_generated_sources " ${swig_generated_sources})

@@ -50,6 +50,9 @@ namespace iDynTree
         SpatialForceVectorRaw operator+(const SpatialForceVectorRaw &other) const;
         SpatialForceVectorRaw operator-(const SpatialForceVectorRaw &other) const;
         SpatialForceVectorRaw operator-() const;
+
+        /** constructor helpers */
+        static SpatialForceVectorRaw Zero();
     };
 }
 

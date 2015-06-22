@@ -7,7 +7,7 @@
 set(IDYNTREE_USES_PYTHON FALSE CACHE BOOL "Do you want to create the Python interface")
 set(IDYNTREE_USES_LUA FALSE CACHE BOOL "Do you want to create the Lua interface")
 set(IDYNTREE_USES_MATLAB FALSE CACHE BOOL "Do you want to create the MATLAB Interface")
-set(GENERATE_MATLAB FALSE CACHE BOOL "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper")
+set(IDYNTREE_GENERATE_MATLAB FALSE CACHE BOOL "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper")
 
 
 find_package(SWIG)
@@ -31,8 +31,8 @@ if(SWIG_FOUND)
         add_subdirectory(python)
     endif(IDYNTREE_USES_PYTHON)
 
-    if(IDYNTREE_USES_MATLAB OR GENERATE_MATLAB)
+    if(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB)
        add_subdirectory(matlab)
-    endif(IDYNTREE_USES_MATLAB OR GENERATE_MATLAB)
+    endif(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB)
 endif(SWIG_FOUND)
 

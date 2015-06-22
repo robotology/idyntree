@@ -88,9 +88,11 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
 
         virtual ~subtreeBaseDynamicsRegressor() {};
 
-        int getNrOfOutputs();
+        virtual int getNrOfOutputs();
 
-        std::vector<int> getRelativeJunctions();
+        virtual std::vector<int> getRelativeJunctions();
+
+        virtual iDynTree::Regressors::DynamicsRegressorParametersList getUsedParameters();
 
 
         int computeRegressor(const KDL::JntArray &q,

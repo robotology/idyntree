@@ -27,12 +27,6 @@ namespace CoDyCo {
 
 namespace Regressors {
 
-
-
-//typedef FixedParameterIndex int;
-//typedef UnknownParameterIndex int;
-//typedef ParameterIndex int;
-
 /**
  * The dynamics regressor generator is a class for calculating arbitrary regressor
  * related to robot dynamics, for identification of dynamics parameters, such
@@ -75,6 +69,9 @@ public:
     int changeDynamicBase(std::string new_dynamic_base_name);
 
     int changeKinematicBase(std::string new_kinematic_base_name);
+
+    int getDynamicBaseIndex();
+    int getKinematicBaseIndex();
 
 
      /** @name Methods to add rows to the regressor
@@ -342,19 +339,25 @@ public:
 
     int getModelParameters(Eigen::VectorXd & values);
 
+    iDynTree::SensorsList sensorsList;
+
+    //measured 6 axis Force/torques
+    iDynTree::SensorsMeasurements sensorMeasures;
+
 private:
     KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization */
 
     KDL::CoDyCo::Traversal dynamic_traversal;
     KDL::CoDyCo::Traversal kinematic_traversal; /**< Traversal object: defining the kinematic base of the tree */
 
+    // Vector containing the desciption of the parameters used in this regressor
+    iDynTree::Regressors::DynamicsRegressorParametersList parameters_desc;
+
     //Violating DRY principle, but for code clarity
     int NrOfFakeLinks;
     int NrOfDOFs;
     int NrOfRealLinks_gen;
-    int NrOfFTSensors;
     int NrOfAllPossibleParameters; /**< Define the maximum number of parameters */
-    int NrOfParameters; /**< Define the number of parameters actually used by the generated regressor */
     int NrOfOutputs;
 
     //Take in account the real and fake links
@@ -372,9 +375,7 @@ private:
     KDL::Twist kinematic_base_acceleration; /**< KDL acceleration: spatial proper acceleration */
 
 
-    //measured 6 axis Force/torques
-    iDynTree::SensorsMeasurements measured_wrenches;
-    iDynTree::SensorsList sensors_tree;
+
 
     //measured joint torques
     KDL::JntArray measured_torques;
