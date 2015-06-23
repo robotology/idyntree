@@ -43,11 +43,20 @@ classdef MatrixDynSize < iDynTree.IMatrix
     function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMATLAB_wrap(21,'MatrixDynSize_resize',self,varargin{:});
     end
+    function varargout = fillRowMajorBuffer(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(22,'MatrixDynSize_fillRowMajorBuffer',self,varargin{:});
+    end
+    function varargout = fillColMajorBuffer(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(23,'MatrixDynSize_fillColMajorBuffer',self,varargin{:});
+    end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(22,'MatrixDynSize_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(24,'MatrixDynSize_toString',self,varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(23,'MatrixDynSize_display',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(25,'MatrixDynSize_display',self,varargin{:});
+    end
+    function varargout = toMatlab(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(26,'MatrixDynSize_toMatlab',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];

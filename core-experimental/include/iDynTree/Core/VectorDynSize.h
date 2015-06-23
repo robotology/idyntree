@@ -105,6 +105,20 @@ namespace iDynTree
          */
         void resize(const unsigned int newSize);
 
+        /**
+         * Assume that buf is pointing to
+         * a buffer of size() doubles, and fill
+         * it with the content of this vector.
+         *
+         * @param buf pointer to the buffer to fill
+         *
+         * @todo provide this for all matrix types
+         *
+         * \warning use this function only if you are
+         *          an expert C user
+         */
+        void fillBuffer(double * buf) const;
+
 
         /** @name Output helpers.
          *  Output helpers.

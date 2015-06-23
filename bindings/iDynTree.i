@@ -85,3 +85,8 @@
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"
 %include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
+
+// Matlab
+#ifdef SWIGMATLAB
+%include "./matlab/matlab_post.i"
+#endif

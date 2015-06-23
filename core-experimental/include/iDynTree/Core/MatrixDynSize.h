@@ -25,9 +25,21 @@ namespace iDynTree
     private:
         /**
          * Return the raw index in the data vector of the
-         * element corresponding to row and col.
+         * element corresponding to row and col, using row
+         * major ordering.
          */
-        const unsigned int rawIndex(int row, int col) const;
+        const unsigned int rawIndexRowMajor(int row, int col) const;
+
+        /**
+         * Return the raw index in the data vector of the
+         * element corresponding to row and col, using col
+         * major ordering.
+         *
+         * \warning The class stores data in row major order,
+         *          this function is used just in the fillColMajorBuffer
+         *          method.
+         */
+        const unsigned int rawIndexColMajor(int row, int col) const;
 
     protected:
         /**
@@ -119,6 +131,36 @@ namespace iDynTree
          * \warning performs dynamic memory allocation operations
          */
         void resize(const unsigned int _newRows, const unsigned int _newCols);
+
+        /**
+         * Assume that rowMajorBuf is pointing to
+         * a buffer of rows()*cols() doubles, and fill
+         * it with the content of this matrix, using
+         * row major order.
+         *
+         * @param rowMajorBuf pointer to the buffer to fill
+         *
+         * @todo provide this for all matrix types
+         *
+         * \warning use this function only if you are
+         *          an expert C user
+         */
+        void fillRowMajorBuffer(double * rowMajorBuf) const;
+
+        /**
+         * Assume that colMajorBuf is pointing to
+         * a buffer of rows()*cols() doubles, and fill
+         * it with the content of this matrix, using
+         * column major order.
+         *
+         * @param colMajorBuf pointer to the buffer to fill
+         *
+         * @todo provide this for all matrix types
+         *
+         * \warning use this function only if you are
+         *          an expert C user
+         */
+        void fillColMajorBuffer(double * colMajorBuf) const;
 
 
         /** @name Output helpers.

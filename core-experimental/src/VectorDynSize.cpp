@@ -140,6 +140,13 @@ void VectorDynSize::resize(const unsigned int _newSize)
     }
 }
 
+void VectorDynSize::fillBuffer(double* buf) const
+{
+    for(unsigned int i=0; i < this->size(); i++ )
+    {
+        buf[i] = this->m_data[i];
+    }
+}
 
 
 std::string VectorDynSize::toString() const

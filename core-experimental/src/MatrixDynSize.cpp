@@ -68,7 +68,7 @@ void MatrixDynSize::zero()
     {
         for(unsigned int col=0; col < this->cols(); col++ )
         {
-            this->m_data[rawIndex(row,col)] = 0.0;
+            this->m_data[rawIndexRowMajor(row,col)] = 0.0;
         }
     }
 }
@@ -95,12 +95,12 @@ const double* MatrixDynSize::data() const
 
 double& MatrixDynSize::operator()(const unsigned int row, const unsigned int col)
 {
-    return this->m_data[rawIndex(row,col)];
+    return this->m_data[rawIndexRowMajor(row,col)];
 }
 
 double MatrixDynSize::operator()(const unsigned int row, const unsigned int col) const
 {
-    return this->m_data[rawIndex(row,col)];
+    return this->m_data[rawIndexRowMajor(row,col)];
 }
 
 double MatrixDynSize::getVal(const unsigned int row, const unsigned int col) const
@@ -112,7 +112,7 @@ double MatrixDynSize::getVal(const unsigned int row, const unsigned int col) con
         return 0.0;
     }
 
-    return this->m_data[rawIndex(row,col)];
+    return this->m_data[rawIndexRowMajor(row,col)];
 }
 
 bool MatrixDynSize::setVal(const unsigned int row, const unsigned int col, const double new_el)
@@ -124,7 +124,7 @@ bool MatrixDynSize::setVal(const unsigned int row, const unsigned int col, const
         return false;
     }
 
-    this->m_data[rawIndex(row,col)] = new_el;
+    this->m_data[rawIndexRowMajor(row,col)] = new_el;
     return true;
 }
 
@@ -155,9 +155,34 @@ void MatrixDynSize::resize(const unsigned int _newRows, const unsigned int _newC
     }
 }
 
-const unsigned int MatrixDynSize::rawIndex(int row, int col) const
+void MatrixDynSize::fillRowMajorBuffer(double* rowMajorBuf) const
+{
+    // MatrixDynSize stores data in row major, a simply
+    // memcpy will be sufficient
+    memcpy(rowMajorBuf,this->m_data,this->rows()*this->cols()*sizeof(double));
+}
+
+void MatrixDynSize::fillColMajorBuffer(double* colMajorBuf) const
+{
+    for(unsigned int row = 0; row < this->rows(); row++ )
+    {
+        for(unsigned int col = 0; col < this->cols(); col++ )
+        {
+            colMajorBuf[this->rawIndexColMajor(row,col)] =
+                this->m_data[this->rawIndexRowMajor(row,col)];
+        }
+    }
+}
+
+
+const unsigned int MatrixDynSize::rawIndexRowMajor(int row, int col) const
 {
     return (this->m_cols*row + col);
+}
+
+const unsigned int MatrixDynSize::rawIndexColMajor(int row, int col) const
+{
+    return (row + this->m_rows*col);
 }
 
 
@@ -169,7 +194,7 @@ std::string MatrixDynSize::toString() const
     {
         for(unsigned int col=0; col < this->cols(); col++ )
         {
-            ss << this->m_data[this->rawIndex(row,col)] << " ";
+            ss << this->m_data[this->rawIndexRowMajor(row,col)] << " ";
         }
         ss << std::endl;
     }

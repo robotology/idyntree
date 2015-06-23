@@ -1,14 +1,14 @@
 
-% First we create the regressor generator, 
+% First we create the regressor generator,
 % the class to compute the dynamics regressors
 regrGen = iDynTree.DynamicsRegressorGenerator();
 
-% Secondly we load the structure of the robot 
-% (kinematic and inertial parameters) and the 
-% structure of the sensors from an URDF file 
+% Secondly we load the structure of the robot
+% (kinematic and inertial parameters) and the
+% structure of the sensors from an URDF file
 regrGen.loadRobotAndSensorsModelFromFile('icub.urdf');
 
-% Then we load the structure of the regressor 
+% Then we load the structure of the regressor
 regrXml = ['<regressor>' ...
            '  <subtreeBaseDynamics>' ...
            '   <FTSensorLink>r_upper_arm</FTSensorLink>' ...
@@ -16,9 +16,9 @@ regrXml = ['<regressor>' ...
            '</regressor>'];
 regrGen.loadRegressorStructureFromString(regrXml);
 
-% once we loaded the robot parameters and the regressor structure, 
-% we can use the regressor generator to get information about the 
-% generated regressor 
+% once we loaded the robot parameters and the regressor structure,
+% we can use the regressor generator to get information about the
+% generated regressor
 
 % Get the number of internal degrees of freedom of the considered robot
 dof = regrGen.getNrOfDegreesOfFreedom()
@@ -28,13 +28,13 @@ dof = regrGen.getNrOfDegreesOfFreedom()
 params = regrGen.getNrOfParameters()
 
 % Get the number of outputs of the regressor
-% Given that we are considering only the base dynamics 
+% Given that we are considering only the base dynamics
 % of a subtree, we will have just 6 outputs (3 force, 3 torques)
 outs = regrGen.getNrOfOutputs()
 
-% We can now create the input for the regressor: 
-% joint position, velocities and acceleration 
-% and gravity acceleration at the base frame 
+% We can now create the input for the regressor:
+% joint position, velocities and acceleration
+% and gravity acceleration at the base frame
 % (you can get the base link with the regrGen.getBaseLink() method)
 
 % If you are unsure of the assumed serialization of the DOFs, you can use
@@ -46,15 +46,15 @@ gravity = iDynTree.Twist();
 
 % Currently the smooth conversion between Matlab and iDynTree vector and
 % matrices is still a TODO, so for now we have to rely on the setVal/getVal
-% methods 
+% methods
 gravity.setVal(2,9.81);
 
-% Here we should fill the q/dqj/ddqj with measured values 
+% Here we should fill the q/dqj/ddqj with measured values
 
 % Note that we are using the "fixed base" version of setRobotState
 regrGen.setRobotState(qj,dqj,ddqj,gravity);
 
-% TODO: set sensor values 
+% TODO: set sensor values
 
 % Now we can compute the regressor
 regressor  = iDynTree.MatrixDynSize(outs,params);
@@ -65,7 +65,7 @@ identifiableSubspacesBasis = iDynTree.MatrixDynSize();
 % We can get the current model parameters (probably extracted from CAD)
 regrGen.getModelParameters(cadParams)
 
-% We want to set the measure for the `l_arm_ft_sensor` 
+% We want to set the measure for the `l_arm_ft_sensor`
 sensorMeasure = iDynTree.Wrench();
 sensorMeasure.setVal(0,0.0);
 sensorMeasure.setVal(1,0.0);
@@ -86,12 +86,15 @@ display(knownTerms)
 
 % We can compute the base matrix, and then we can compute the base
 % regressor
+display('Computing identifiable subspace...')
 regrGen.computeFixedBaseIdentifiableSubspace(identifiableSubspacesBasis);
+display('Identifiable subspace computed.')
+
 
 % For matrix operation it is better to convert iDynTree matrices in matlab
 % ones
-identifiableSubspacesBasis_m = iDynTree2MatlabMat(identifiableSubspacesBasis);
-regressor_m = iDynTree2MatlabMat(regressor);
+identifiableSubspacesBasis_m = toMatlab(identifiableSubspacesBasis);
+regressor_m = toMatlab(regressor);
 baseParametersRegressor = regressor_m*identifiableSubspacesBasis_m;
 
 baseParametersRegressor
