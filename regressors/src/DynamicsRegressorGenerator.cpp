@@ -398,7 +398,7 @@ bool DynamicsRegressorGenerator::setRobotState(const VectorDynSize& q,
     // Convert from the new DynamicRegressorGenerator convention to the old one
     Rotation base_R_world = world_T_base.getRotation().inverse();
     Twist base_velocity_wrt_base = base_R_world*base_velocity;
-    Twist base_classical_acceleration_wrt_base = base_R_world*base_classical_acceleration_wrt_base;
+    Twist base_classical_acceleration_wrt_base = base_R_world*base_acceleration;
     Twist gravity_acceleration_wrt_base        = base_R_world*world_gravity;
 
     KDL::Twist kdl_base_velocity_wrt_base = ToKDL(base_velocity_wrt_base);

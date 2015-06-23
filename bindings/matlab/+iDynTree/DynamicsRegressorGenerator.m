@@ -78,6 +78,12 @@ classdef DynamicsRegressorGenerator < SwigRef
     function varargout = getModelParameters(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(297,'DynamicsRegressorGenerator_getModelParameters',self,varargin{:});
     end
+    function varargout = computeFloatingBaseIdentifiableSubspace(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(298,'DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace',self,varargin{:});
+    end
+    function varargout = computeFixedBaseIdentifiableSubspace(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(299,'DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace',self,varargin{:});
+    end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
       ok = false;

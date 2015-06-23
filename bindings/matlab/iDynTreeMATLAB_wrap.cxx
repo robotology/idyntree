@@ -15565,6 +15565,76 @@ fail:
 }
 
 
+void _wrap_DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  iDynTree::MatrixDynSize *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__MatrixDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace" "', argument " "2"" of type '" "iDynTree::MatrixDynSize &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace" "', argument " "2"" of type '" "iDynTree::MatrixDynSize &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::MatrixDynSize * >(argp2);
+  result = (bool)(arg1)->computeFloatingBaseIdentifiableSubspace(*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace.");
+}
+
+
+void _wrap_DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorGenerator *arg1 = (iDynTree::Regressors::DynamicsRegressorGenerator *) 0 ;
+  iDynTree::MatrixDynSize *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorGenerator * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__MatrixDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace" "', argument " "2"" of type '" "iDynTree::MatrixDynSize &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace" "', argument " "2"" of type '" "iDynTree::MatrixDynSize &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::MatrixDynSize * >(argp2);
+  result = (bool)(arg1)->computeFixedBaseIdentifiableSubspace(*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace.");
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -16351,6 +16421,8 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 295: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getSensorsMeasurements",cmd))) _wrap_DynamicsRegressorGenerator_getSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
   case 296: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeRegressor",cmd))) _wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
   case 297: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getModelParameters",cmd))) _wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 298: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace",cmd))) _wrap_DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 299: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace",cmd))) _wrap_DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
   default: mexErrMsgIdAndTxt("SWIG:RuntimeError","No function id %d.",fcn_id);
   }
   if (!name_ok) {
