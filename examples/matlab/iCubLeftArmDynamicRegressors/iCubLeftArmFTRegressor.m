@@ -60,6 +60,7 @@ regrGen.setRobotState(qj,dqj,ddqj,gravity);
 regressor  = iDynTree.MatrixDynSize(outs,params);
 knownTerms = iDynTree.VectorDynSize(outs);
 cadParams  = iDynTree.VectorDynSize(params);
+identifiableSubspacesBasis = iDynTree.MatrixDynSize();
 
 % We can get the current model parameters (probably extracted from CAD)
 regrGen.getModelParameters(cadParams)
@@ -82,3 +83,15 @@ regrGen.computeRegressor(regressor,knownTerms);
 % We can then print the computed regressor
 display(regressor)
 display(knownTerms)
+
+% We can compute the base matrix, and then we can compute the base
+% regressor
+regrGen.computeFixedBaseIdentifiableSubspace(identifiableSubspacesBasis);
+
+% For matrix operation it is better to convert iDynTree matrices in matlab
+% ones
+identifiableSubspacesBasis_m = iDynTree2MatlabMat(identifiableSubspacesBasis);
+regressor_m = iDynTree2MatlabMat(regressor);
+baseParametersRegressor = regressor_m*identifiableSubspacesBasis_m;
+
+baseParametersRegressor

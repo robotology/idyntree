@@ -111,16 +111,16 @@ namespace CoDyCo {
         #ifndef NDEBUG
         assert( local_serialization.is_consistent(tree) == serialization.is_consistent(tree) );
         if( local_serialization.is_consistent(tree)  ) {
-            std::cerr << "UndirectedTree constructor: using provided serialization " << std::endl;
+            //std::cerr << "UndirectedTree constructor: using provided serialization " << std::endl;
         } else {
-            std::cerr << "UndirectedTree constructor: using default serialization " << std::endl;
+            //std::cerr << "UndirectedTree constructor: using default serialization " << std::endl;
         }
         #endif
         if( !local_serialization.is_consistent(tree) ) {
             local_serialization = TreeSerialization(tree);
             assert(local_serialization.is_consistent(tree));
             #ifndef NDEBUG
-            std::cerr << "UndirectedTree constructor: found consistent serialization" << std::endl;
+            //std::cerr << "UndirectedTree constructor: found consistent serialization" << std::endl;
             #endif
         }
 

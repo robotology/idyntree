@@ -326,8 +326,6 @@ int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Ei
         {
             case 6:
                 if( consider_ft_offset ) {
-                    std::cout << "this->getNrOfParameters() : " << this->getNrOfParameters() << std::endl;
-                    std::cout << "10*NrOfRealLinks_gen+6*this->getNrOfWrenchSensors() : " << 10*NrOfRealLinks_gen+6*this->getNrOfWrenchSensors() << std::endl;
                     assert(this->getNrOfParameters() == 10*NrOfRealLinks_gen+6*this->getNrOfWrenchSensors());
                     assert(six_rows_buffer.cols() == this->getNrOfParameters());
                     assert(six_rows_buffer.cols() == 10*NrOfRealLinks_gen+6*this->getNrOfWrenchSensors());
