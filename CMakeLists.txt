@@ -17,6 +17,12 @@ list(APPEND CMAKE_MODULE_PATH ${IDYNTREE_MODULE_PATH})
 include(YCMDefaultDirs)
 ycm_default_dirs(${VARS_PREFIX})
 
+include(GNUInstallDirs)
+if (CMAKE_VERSION LESS 3.0)
+    # workaround for http://public.kitware.com/pipermail/cmake-developers/2014-January/009435.html
+    set(CMAKE_INSTALL_LIBDIR lib)
+endif()
+
 #Use options specified in iDynTreeOptions.cmake file
 include(iDynTreeOptions)
 
