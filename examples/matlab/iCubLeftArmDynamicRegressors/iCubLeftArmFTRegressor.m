@@ -47,7 +47,7 @@ gravity = iDynTree.Twist();
 % Currently the smooth conversion between Matlab and iDynTree vector and
 % matrices is still a TODO, so for now we have to rely on the setVal/getVal
 % methods
-gravity.setVal(2,9.81);
+gravity.setVal(2,-9.81);
 
 % Here we should fill the q/dqj/ddqj with measured values
 
