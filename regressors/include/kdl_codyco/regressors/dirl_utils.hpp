@@ -98,7 +98,24 @@ namespace Regressors
       * For each number from 0 to 9, get a distint link related DynamicsRegressorParameterType.
       *
       */
-     iDynTree::Regressors::DynamicsRegressorParameterType getLinkParameter(unsigned int nr);
+     iDynTree::Regressors::DynamicsRegressorParameterType getLinkParameterType(unsigned int nr);
+
+     /**
+      * For each number from 0 to 5, get a distint ft related DynamicsRegressorParameterType.
+      *
+      */
+     iDynTree::Regressors::DynamicsRegressorParameterType getFTParameterType(unsigned int nr);
+
+     /**
+      * Encoded serialization of inertial parameters used
+      * Return a number from 0 to 9 given an inertial parameter type.
+      * The serialization used is:
+      *   m mx my mz ixx ixy ixz iyy iyz izz
+      *
+      */
+     int getInertialParameterLocalIndex(const iDynTree::Regressors::DynamicsRegressorParameterType & type);
+
+
 
     /**
      * Get the legacy list of parameters that is currently hardcoded in all the subregressors.
@@ -108,6 +125,26 @@ namespace Regressors
         getLegacyUsedParameters(const std::vector<int> & linkIndeces2regrCols,
                                 const int nrOfFTSensors = -1,
                                 const bool withFToffsetParameters=false);
+
+    /**
+     *
+     * Copy a local regressor (with columns following the localSerialization list)
+     * in a global one (with the columns following the globalSerialiation list).
+     *
+     */
+     void convertLocalRegressorToGlobalRegressor(const Eigen::MatrixXd & localRegressor,
+                                            Eigen::MatrixXd & globalRegressor,
+                                            std::vector<int> localColIndecesToGlobalColIndeces);
+
+     void convertLocalParametersToGlobalParameters(const Eigen::VectorXd & localRegressor,
+                                              Eigen::VectorXd & globalRegressor,
+                                              std::vector<int> localColIndecesToGlobalColIndeces);
+
+
+    void buildParametersMapping(const iDynTree::Regressors::DynamicsRegressorParametersList & localSerialiaziation,
+                                const iDynTree::Regressors::DynamicsRegressorParametersList & globalSerialiaziation,
+                                std::vector<int> & localParametersIndexToOutputParametersIndex);
+
 
 
 }

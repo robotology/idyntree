@@ -383,6 +383,51 @@ iDynTree::Regressors::DynamicsRegressorParameterType getFTParameterType(unsigned
     }
 }
 
+int getInertialParameterLocalIndex(const iDynTree::Regressors::DynamicsRegressorParameterType & type)
+{
+    int ret_val;
+
+    switch(type)
+    {
+        case iDynTree::Regressors::LINK_MASS:
+            ret_val = 0;
+            break;
+        case iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_X:
+            ret_val = 1;
+            break;
+        case iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Y:
+            ret_val = 2;
+            break;
+        case iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Z:
+            ret_val = 3;
+            break;
+        case iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XX:
+            ret_val = 4;
+            break;
+        case iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XY:
+            ret_val = 5;
+            break;
+        case iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XZ:
+            ret_val = 6;
+            break;
+        case iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YY:
+            ret_val = 7;
+            break;
+        case iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YZ:
+            ret_val = 8;
+            break;
+        case iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_ZZ:
+            ret_val = 9;
+            break;
+        default:
+            ret_val = -1;
+            break;
+    }
+    return ret_val;
+}
+
+
+
 
 iDynTree::Regressors::DynamicsRegressorParametersList
     getLegacyUsedParameters(const std::vector<int> & linkIndeces2regrCols,
@@ -426,6 +471,76 @@ iDynTree::Regressors::DynamicsRegressorParametersList
     }
 
     return ret_values;
+}
+
+
+void convertLocalRegressorToGlobalRegressor(const Eigen::MatrixXd & localRegressor,
+                                            Eigen::MatrixXd & globalRegressor,
+                                            std::vector<int> localColIndecesToGlobalColIndeces)
+{
+    assert(localRegressor.rows() == globalRegressor.rows());
+    assert(localRegressor.cols() == localColIndecesToGlobalColIndeces.size());
+
+    for(int localParam = 0; localParam <  (int)localColIndecesToGlobalColIndeces.size(); localParam++)
+    {
+        int globalParam = localColIndecesToGlobalColIndeces[localParam];
+
+        if( globalParam >= 0 )
+        {
+            globalRegressor.col(globalParam) = localRegressor.col(localParam);
+        }
+    }
+
+    return;
+}
+
+void convertLocalParametersToGlobalParameters(const Eigen::VectorXd & localRegressor,
+                                              Eigen::VectorXd & globalRegressor,
+                                              std::vector<int> localColIndecesToGlobalColIndeces)
+{
+    assert(localRegressor.rows() == globalRegressor.rows());
+    assert(localRegressor.cols() == localColIndecesToGlobalColIndeces.size());
+
+    for(int localParam = 0; localParam <  (int)localColIndecesToGlobalColIndeces.size(); localParam++)
+    {
+        int globalParam = localColIndecesToGlobalColIndeces[localParam];
+
+        if( globalParam >= 0 )
+        {
+            globalRegressor(globalParam) = localRegressor(localParam);
+        }
+    }
+
+    return;
+}
+
+
+void buildParametersMapping(const iDynTree::Regressors::DynamicsRegressorParametersList & localSerialiaziation,
+                                const iDynTree::Regressors::DynamicsRegressorParametersList & globalSerialiaziation,
+                                std::vector<int> & localParametersIndexToOutputParametersIndex)
+{
+
+    localParametersIndexToOutputParametersIndex.resize(localSerialiaziation.parameters.size());
+    for(unsigned int localIndex = 0; localIndex < localParametersIndexToOutputParametersIndex.size(); localIndex++ )
+    {
+        iDynTree::Regressors::DynamicsRegressorParameter localParam;
+
+        localParam = localSerialiaziation.parameters[localIndex];
+
+        unsigned int globalIndex;
+        bool localIsInGlobal = globalSerialiaziation.findParam(localParam,globalIndex);
+
+        if( localIsInGlobal )
+        {
+            localParametersIndexToOutputParametersIndex[localIndex] = globalIndex;
+        }
+        else
+        {
+            localParametersIndexToOutputParametersIndex[localIndex] = -1;
+        }
+    }
+
+    return;
 }
 
 

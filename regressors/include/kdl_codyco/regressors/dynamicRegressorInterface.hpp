@@ -40,6 +40,8 @@ public:
 
     virtual iDynTree::Regressors::DynamicsRegressorParametersList getUsedParameters() = 0;
 
+    virtual bool setGlobalParameters(const iDynTree::Regressors::DynamicsRegressorParametersList & globalParameters) = 0;
+
     /**
      * Configure the regressor given a UndirectedTree (for example allocating
      * the necessary datastructures)

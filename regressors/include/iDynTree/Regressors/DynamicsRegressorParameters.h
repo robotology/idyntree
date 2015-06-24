@@ -155,12 +155,15 @@ struct DynamicsRegressorParameter
 
     bool operator<(const DynamicsRegressorParameter& other) const;
     bool operator==(const DynamicsRegressorParameter& other) const;
+    bool operator!=(const DynamicsRegressorParameter& other) const;
 };
 
 class DynamicsRegressorParametersList
 {
 public:
     // \todo TODO pimpl and hide
+    // this vector is kept orderd by the addList and addParam
+    // methods, do not insert element manually
     std::vector<DynamicsRegressorParameter> parameters;
 
     std::string getDescriptionOfParameter(unsigned int param_index) const;
@@ -186,6 +189,12 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool addList(const DynamicsRegressorParametersList & new_params);
+
+    /**
+     * Search for a param in the list.
+     * If found, store the index in the output parameter findIndex.
+     */
+    bool findParam(const DynamicsRegressorParameter & param, unsigned int & index) const;
 
     /**
      * Get the number of parameters in this list.

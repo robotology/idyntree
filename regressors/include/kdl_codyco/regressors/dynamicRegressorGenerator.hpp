@@ -114,6 +114,15 @@ public:
      */
     int addBaseRegressorRows();
 
+
+    /**
+     * Call configure after adding all the rows that you want to add to the regressor,
+     * to finalize the regressor structure.
+     *
+     * @return true if the configuration was successful, false otherwise.
+     */
+    bool configure();
+
     //@}
 
      /** @name Methods to get informations the regressor

@@ -55,6 +55,17 @@ class torqueRegressor : public DynamicRegressorInterface
 
     int NrOfRealLinks_subtree;
 
+    Eigen::MatrixXd regressor_local_parametrization;
+
+    // This regressor computes the regressor assuming that the
+    // a full 10*N_Links + (if ft offset is enabled) 6*N_ft
+    // parameters, in the order specified by the link and ft
+    // sensors serialization. The output regressor can have
+    // an arbitrary serialization, and so we keep in this
+    // vector the mapping between localParametersIndices
+    // (from [0 to 10*N_Links + (6*N_FT) - 1)] to [0 to getNrOfParameters]
+    std::vector<int> localParametersIndexToOutputParametersIndex;
+
 
 public:
         /**
@@ -100,6 +111,9 @@ public:
         virtual std::vector<int> getRelativeJunctions();
 
         virtual iDynTree::Regressors::DynamicsRegressorParametersList getUsedParameters();
+
+        virtual bool setGlobalParameters(const iDynTree::Regressors::DynamicsRegressorParametersList& globalParameters);
+
 
         virtual int computeRegressor(const KDL::JntArray &q,
                               const KDL::JntArray &q_dot,

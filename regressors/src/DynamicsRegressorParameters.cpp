@@ -13,6 +13,7 @@
 #include <string>
 #include <cassert>
 #include <sstream>
+#include <boost/concept_check.hpp>
 
 namespace iDynTree
 {
@@ -66,6 +67,22 @@ bool DynamicsRegressorParametersList::addList(const DynamicsRegressorParametersL
     return true;
 }
 
+bool DynamicsRegressorParametersList::findParam(const DynamicsRegressorParameter& param, unsigned int& index) const
+{
+    ParamSet::const_iterator it = std::lower_bound (parameters.begin(), parameters.end(), param);
+
+    if( it == parameters.end() ||
+        *it != param )
+    {
+        return false;
+    }
+
+    index = it - parameters.begin();
+
+    return true;
+}
+
+
 bool DynamicsRegressorParameter::operator<(const DynamicsRegressorParameter& other) const
 {
     if( this->category < other.category )
@@ -112,6 +129,12 @@ bool DynamicsRegressorParameter::operator==(const DynamicsRegressorParameter& ot
            (this->elemIndex    == other.elemIndex)    &&
            (this->type     == other.type);
 }
+
+bool DynamicsRegressorParameter::operator!=(const DynamicsRegressorParameter& other) const
+{
+    return !(*this == other);
+}
+
 
 
 DynamicsRegressorParameterCategory getCategory(const DynamicsRegressorParameterType paramType)

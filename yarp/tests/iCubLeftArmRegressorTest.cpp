@@ -160,8 +160,7 @@ int main()
     Eigen::VectorXd parameters(regressor_generator.getNrOfParameters());
     parameters.setZero();
 
-    std::vector<std::string> fake_links;
-    KDL::CoDyCo::inertialParametersVectorLoopFakeLinks(icub_undirected_tree,parameters,fake_links);
+    regressor_generator.getModelParameters(parameters);
 
     assert(parameters.rows() == regressor_generator.getNrOfParameters());
 

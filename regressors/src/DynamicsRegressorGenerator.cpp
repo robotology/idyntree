@@ -219,6 +219,16 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
         }
     }
 
+    bool ok = this->pimpl->m_pLegacyGenerator->configure();
+
+    if( !ok )
+    {
+         std::cerr << "[ERROR] error in configure of the regressor" << std::endl;
+         delete this->pimpl->m_pLegacyGenerator;
+         this->pimpl->m_pLegacyGenerator = 0;
+         return false;
+    }
+
     // update buffers
     this->pimpl->m_regressor.resize(this->getNrOfOutputs(),this->getNrOfParameters());
     this->pimpl->m_knownTerms.resize(this->getNrOfOutputs());

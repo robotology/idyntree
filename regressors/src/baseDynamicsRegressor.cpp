@@ -23,6 +23,10 @@ namespace Regressors {
 
 int baseDynamicsRegressor::configure()
 {
+    iDynTree::Regressors::DynamicsRegressorParametersList localSerialization = getLegacyUsedParameters(linkIndeces2regrCols);
+
+    regressor_local_parametrization.resize(6,localSerialization.parameters.size());
+
     return 0;
 }
 
@@ -53,7 +57,7 @@ int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
                                       const std::vector<KDL::Twist> & a,
                                       const iDynTree::SensorsMeasurements & measured_wrenches,
                                       const KDL::JntArray & measured_torques,
-                                      Eigen::MatrixXd & regressor_matrix,
+                                      Eigen::MatrixXd & regressor_matrix_global_column_serialization,
                                       Eigen::VectorXd & known_terms)
 {
 #ifndef NDEBUG
@@ -63,23 +67,34 @@ int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
     const KDL::CoDyCo::UndirectedTree & undirected_tree = *p_undirected_tree;
 
 
-    if( regressor_matrix.rows() != getNrOfOutputs() ) {
+    if( regressor_local_parametrization.rows() != getNrOfOutputs() ) {
         return -1;
     }
 
     //all other columns, beside the one relative to the inertial parameters of the links of the subtree, are zero
-    regressor_matrix.setZero();
+    regressor_local_parametrization.setZero();
 
     for(int link_id =0; link_id < (int)undirected_tree.getNrOfLinks(); link_id++ ) {
 
         if( linkIndeces2regrCols[link_id] != -1 ) {
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);
-            regressor_matrix.block(0,(int)(10*linkIndeces2regrCols[link_id]),getNrOfOutputs(),10) = WrenchTransformationMatrix(X_dynamic_base[link_id])*netWrenchRegressor_i;
+            regressor_local_parametrization.block(0,(int)(10*linkIndeces2regrCols[link_id]),getNrOfOutputs(),10) = WrenchTransformationMatrix(X_dynamic_base[link_id])*netWrenchRegressor_i;
         }
     }
 
+    convertLocalRegressorToGlobalRegressor(regressor_local_parametrization,regressor_matrix_global_column_serialization,this->localParametersIndexToOutputParametersIndex);
 
     return 0;
+}
+
+bool baseDynamicsRegressor::setGlobalParameters(const iDynTree::Regressors::DynamicsRegressorParametersList& globalParameters)
+{
+    iDynTree::Regressors::DynamicsRegressorParametersList localSerialiaziation =
+        getLegacyUsedParameters(linkIndeces2regrCols);
+
+    buildParametersMapping(localSerialiaziation,globalParameters,this->localParametersIndexToOutputParametersIndex);
+
+    return true;
 }
 
 }

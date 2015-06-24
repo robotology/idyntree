@@ -14,6 +14,7 @@
 #include "dynamicRegressorGenerator.hpp"
 #include "dirl_utils.hpp"
 
+#include "kdl_codyco/regressor_utils.hpp"
 #include "kdl_codyco/regressor_loops.hpp"
 #include "kdl_codyco/rnea_loops.hpp"
 #include "kdl_codyco/position_loops.hpp"
@@ -342,11 +343,7 @@ int DynamicRegressorGenerator::computeRegressor( Eigen::MatrixXd & regressor, Ei
         {
             case 6:
                 if( consider_ft_offset ) {
-                    assert(this->getNrOfParameters() == 10*NrOfRealLinks_gen+6*this->getNrOfWrenchSensors());
                     assert(six_rows_buffer.cols() == this->getNrOfParameters());
-                    assert(six_rows_buffer.cols() == 10*NrOfRealLinks_gen+6*this->getNrOfWrenchSensors());
-                } else {
-                    assert(six_rows_buffer.cols() == 10*NrOfRealLinks_gen);
                 }
                 regr_ptr->computeRegressor(q,dq,ddq,X_dynamic_base,v,a,sensorMeasures,measured_torques,six_rows_buffer,six_rows_vector);
                 regressor.block(start_row,0,regr_ptr->getNrOfOutputs(),getNrOfParameters()) = six_rows_buffer;
@@ -1941,6 +1938,7 @@ int DynamicRegressorGenerator::addSubtreeRegressorRows(const std::vector< std::s
 
     parameters_desc.addList(new_regr->getUsedParameters());
     updateBuffers();
+    configure();
 
     return 0;
 }
@@ -1969,6 +1967,7 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
 
     parameters_desc.addList(new_regr->getUsedParameters());
     updateBuffers();
+    configure();
 
     return 0;
 }
@@ -2041,8 +2040,20 @@ int DynamicRegressorGenerator::addBaseRegressorRows()
 
     parameters_desc.addList(new_regr->getUsedParameters());
     updateBuffers();
+    configure();
 
     return 0;
+}
+
+bool DynamicRegressorGenerator::configure()
+{
+    bool ok = true;
+    for(int subRegr=0; subRegr < regressors_ptrs.size(); subRegr++ )
+    {
+        ok = ok && regressors_ptrs[subRegr]->setGlobalParameters(this->parameters_desc);
+    }
+
+    return ok;
 }
 
 int DynamicRegressorGenerator::updateBuffers()
@@ -2085,13 +2096,17 @@ int DynamicRegressorGenerator::getModelParameters(Eigen::VectorXd & values)
 
     /** \todo TODO remove dynamic memory allocation */
     values.setZero();
-    Eigen::VectorXd inertial_parameters = values.segment(0,10*NrOfRealLinks_gen);
 
-    assert(fake_links_names.size()+(inertial_parameters.rows()/10)==undirected_tree.getNrOfLinks());
-
-    inertialParametersVectorLoopFakeLinks(undirected_tree,inertial_parameters,fake_links_names);
-
-    values.segment(0,10*NrOfRealLinks_gen) = inertial_parameters;
+    // Fill only inertial parameters, no offset information is provided in the model
+    for(unsigned int paramIndex=0; paramIndex < parameters_desc.parameters.size(); paramIndex++ )
+    {
+        iDynTree::Regressors::DynamicsRegressorParameter param = parameters_desc.parameters[paramIndex];
+        if( param.category == iDynTree::Regressors::LINK_PARAM )
+        {
+            Eigen::Matrix<double,10,1> linkInertialParameters = KDL::CoDyCo::Vectorize(undirected_tree.getLink(param.elemIndex)->getInertia());
+            values[paramIndex] = linkInertialParameters(getInertialParameterLocalIndex(param.type));
+        }
+    }
 
     return 0;
 }
