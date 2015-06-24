@@ -402,7 +402,7 @@ iDynTree::Regressors::DynamicsRegressorParametersList
             {
                 iDynTree::Regressors::DynamicsRegressorParameter param;
                 param.category = iDynTree::Regressors::LINK_PARAM;
-                param.index = link;
+                param.elemIndex = link;
                 param.type = getLinkParameterType(link_param_type);
                 ret_values.addParam(param);
             }
@@ -418,7 +418,7 @@ iDynTree::Regressors::DynamicsRegressorParametersList
             {
                 iDynTree::Regressors::DynamicsRegressorParameter param;
                 param.category = iDynTree::Regressors::SENSOR_FT_PARAM;
-                param.index = ft;
+                param.elemIndex = ft;
                 param.type = getFTParameterType(ft_param_type);
                 ret_values.addParam(param);
             }

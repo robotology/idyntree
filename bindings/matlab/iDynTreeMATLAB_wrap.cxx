@@ -14013,7 +14013,7 @@ fail:
 }
 
 
-void _wrap_DynamicsRegressorParameter_index_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_DynamicsRegressorParameter_elemIndex_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
   int arg2 ;
   void *argp1 = 0 ;
@@ -14022,49 +14022,49 @@ void _wrap_DynamicsRegressorParameter_index_set (int resc, mxArray *resv[], int 
   int ecode2 = 0 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("DynamicsRegressorParameter_index_set",argc,2,2,0)) {
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_elemIndex_set",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_index_set" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_elemIndex_set" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
   ecode2 = SWIG_AsVal_int(argv[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorParameter_index_set" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorParameter_elemIndex_set" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->index = arg2;
+  if (arg1) (arg1)->elemIndex = arg2;
   _out = (mxArray*)0;
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_index_set.");
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_elemIndex_set.");
 }
 
 
-void _wrap_DynamicsRegressorParameter_index_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_DynamicsRegressorParameter_elemIndex_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Regressors::DynamicsRegressorParameter *arg1 = (iDynTree::Regressors::DynamicsRegressorParameter *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   int result;
   
-  if (!SWIG_check_num_args("DynamicsRegressorParameter_index_get",argc,1,1,0)) {
+  if (!SWIG_check_num_args("DynamicsRegressorParameter_elemIndex_get",argc,1,1,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_index_get" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParameter_elemIndex_get" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParameter *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParameter * >(argp1);
-  result = (int) ((arg1)->index);
+  result = (int) ((arg1)->elemIndex);
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_index_get.");
+  mexErrMsgTxt("Failure in function DynamicsRegressorParameter_elemIndex_get.");
 }
 
 
@@ -14287,7 +14287,7 @@ fail:
 }
 
 
-void _wrap_DynamicsRegressorParametersList_getDescriptionOfParameter (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_DynamicsRegressorParametersList_getDescriptionOfParameter__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Regressors::DynamicsRegressorParametersList *arg1 = (iDynTree::Regressors::DynamicsRegressorParametersList *) 0 ;
   unsigned int arg2 ;
   void *argp1 = 0 ;
@@ -14316,6 +14316,89 @@ void _wrap_DynamicsRegressorParametersList_getDescriptionOfParameter (int resc, 
   return;
 fail:
   mexErrMsgTxt("Failure in function DynamicsRegressorParametersList_getDescriptionOfParameter.");
+}
+
+
+void _wrap_DynamicsRegressorParametersList_getDescriptionOfParameter__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Regressors::DynamicsRegressorParametersList *arg1 = (iDynTree::Regressors::DynamicsRegressorParametersList *) 0 ;
+  unsigned int arg2 ;
+  std::string arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("DynamicsRegressorParametersList_getDescriptionOfParameter",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsRegressorParametersList_getDescriptionOfParameter" "', argument " "1"" of type '" "iDynTree::Regressors::DynamicsRegressorParametersList const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Regressors::DynamicsRegressorParametersList * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsRegressorParametersList_getDescriptionOfParameter" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(argv[2], &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "DynamicsRegressorParametersList_getDescriptionOfParameter" "', argument " "3"" of type '" "std::string const""'"); 
+    }
+    arg3 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = ((iDynTree::Regressors::DynamicsRegressorParametersList const *)arg1)->getDescriptionOfParameter(arg2,arg3);
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function DynamicsRegressorParametersList_getDescriptionOfParameter.");
+}
+
+
+void _wrap_DynamicsRegressorParametersList_getDescriptionOfParameter (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_DynamicsRegressorParametersList_getDescriptionOfParameter__SWIG_0(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_DynamicsRegressorParametersList_getDescriptionOfParameter__SWIG_1(resc,resv,argc,argv);
+        }
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
+  return;
 }
 
 
@@ -16541,8 +16624,8 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 262: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getWrenchAppliedOnLink",cmd))) _wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink(resc,resv,argc,(mxArray**)(argv)); break;
   case 263: if ((name_ok=!strcmp("DynamicsRegressorParameter_category_get",cmd))) _wrap_DynamicsRegressorParameter_category_get(resc,resv,argc,(mxArray**)(argv)); break;
   case 264: if ((name_ok=!strcmp("DynamicsRegressorParameter_category_set",cmd))) _wrap_DynamicsRegressorParameter_category_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 265: if ((name_ok=!strcmp("DynamicsRegressorParameter_index_get",cmd))) _wrap_DynamicsRegressorParameter_index_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 266: if ((name_ok=!strcmp("DynamicsRegressorParameter_index_set",cmd))) _wrap_DynamicsRegressorParameter_index_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 265: if ((name_ok=!strcmp("DynamicsRegressorParameter_elemIndex_get",cmd))) _wrap_DynamicsRegressorParameter_elemIndex_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 266: if ((name_ok=!strcmp("DynamicsRegressorParameter_elemIndex_set",cmd))) _wrap_DynamicsRegressorParameter_elemIndex_set(resc,resv,argc,(mxArray**)(argv)); break;
   case 267: if ((name_ok=!strcmp("DynamicsRegressorParameter_type_get",cmd))) _wrap_DynamicsRegressorParameter_type_get(resc,resv,argc,(mxArray**)(argv)); break;
   case 268: if ((name_ok=!strcmp("DynamicsRegressorParameter_type_set",cmd))) _wrap_DynamicsRegressorParameter_type_set(resc,resv,argc,(mxArray**)(argv)); break;
   case 269: if ((name_ok=!strcmp("DynamicsRegressorParameter_lt",cmd))) _wrap_DynamicsRegressorParameter_lt(resc,resv,argc,(mxArray**)(argv)); break;

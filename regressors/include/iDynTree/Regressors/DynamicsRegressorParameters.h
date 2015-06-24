@@ -142,7 +142,15 @@ enum DynamicsRegressorParameterType
 struct DynamicsRegressorParameter
 {
     DynamicsRegressorParameterCategory category;
-    int index;
+
+    /**
+     * Depending on the category, the parameter will referent
+     * to an element (such as a link or a sensor) throught an
+     * integer. This integer should be interpreted with respect
+     * to the serialization provided by the SensorList class
+     * or the UndirectedTree class.
+     */
+    int elemIndex;
     DynamicsRegressorParameterType type;
 
     bool operator<(const DynamicsRegressorParameter& other) const;
@@ -156,6 +164,14 @@ public:
     std::vector<DynamicsRegressorParameter> parameters;
 
     std::string getDescriptionOfParameter(unsigned int param_index) const;
+
+    /**
+     * Temporary function, until we add a SensorList/Tree aware
+     * DynamicsRegressorParametersList . We provide a string to
+     * substitute the print of the elemIndex element of the DynamicsRegressorParameter
+     */
+    std::string getDescriptionOfParameter(unsigned int param_index, const std::string elemName) const;
+
 
     /**
      * Add a new parameter to the list.

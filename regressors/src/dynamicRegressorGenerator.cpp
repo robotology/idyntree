@@ -199,9 +199,24 @@ std::string DynamicRegressorGenerator::getDescriptionOfParameter(int parameter_i
 #ifndef NDEBUG
     //std::cout << "GetdescriptionOfParameter with argument " << parameter_index << std::endl;
 #endif
+
+    std::string elemName;
+
+    if( parameters_desc.parameters[parameter_index].category ==
+        iDynTree::Regressors::LINK_PARAM )
+    {
+        elemName = undirected_tree.getLink(parameters_desc.parameters[parameter_index].elemIndex)->getName();
+    }
+
+    if( parameters_desc.parameters[parameter_index].category ==
+        iDynTree::Regressors::SENSOR_FT_PARAM )
+    {
+        elemName = sensorsList.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,parameters_desc.parameters[parameter_index].elemIndex)->getName();
+    }
+
     std::stringstream ss;
 
-    ss << parameters_desc.getDescriptionOfParameter(parameter_index);
+    ss << parameters_desc.getDescriptionOfParameter(parameter_index,elemName);
 
     if( with_value ) {
         ss << "\t\t" << value << std::endl;
@@ -225,8 +240,9 @@ std::string DynamicRegressorGenerator::getDescriptionOfParameters(const Eigen::V
 {
     std::stringstream ss;
 
+    bool with_value = true;
     for(int parameter_index=0; parameter_index<parameters_desc.getNrOfParameters(); parameter_index++) {
-        ss << getDescriptionOfParameter(parameter_index,true,values[parameter_index]) << std::endl;
+        ss << getDescriptionOfParameter(parameter_index,with_value,values[parameter_index]) << std::endl;
     }
 
     return ss.str();

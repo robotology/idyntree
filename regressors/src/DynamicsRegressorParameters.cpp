@@ -80,11 +80,11 @@ bool DynamicsRegressorParameter::operator<(const DynamicsRegressorParameter& oth
     // If they are in the same category
     //the index will decide the order
 
-    if( this->index < other.index )
+    if( this->elemIndex < other.elemIndex )
     {
         return true;
     }
-    else if( this->index > other.index )
+    else if( this->elemIndex > other.elemIndex )
     {
         return false;
     }
@@ -109,7 +109,7 @@ bool DynamicsRegressorParameter::operator<(const DynamicsRegressorParameter& oth
 bool DynamicsRegressorParameter::operator==(const DynamicsRegressorParameter& other) const
 {
     return (this->category == other.category) &&
-           (this->index    == other.index)    &&
+           (this->elemIndex    == other.elemIndex)    &&
            (this->type     == other.type);
 }
 
@@ -142,9 +142,19 @@ DynamicsRegressorParameterCategory getCategory(const DynamicsRegressorParameterT
     return LINK_PARAM;
 }
 
+const std::string dummyElemName = "__IDT_DUMMY_EL_NAME__";
+
+std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned int param_index) const
+{
+    return getDescriptionOfParameter(param_index,dummyElemName);
+}
+
+
+
 // \todo add a function that accepts an UndirectedTree and a SensorsTree to resolve link and sensors
 // indices to names
-std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned int parameter_index) const
+std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned int parameter_index,
+                                                                       const std::string elemName) const
 {
     std::stringstream ss;
     std::string inertial_parameter_type;
@@ -191,7 +201,15 @@ std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned 
                 break;
         }
         ss << "Parameter " << parameter_index << ": "
-        << inertial_parameter_type << " of link " << parameters[parameter_index].index;
+        << inertial_parameter_type << " of link ";
+        if( elemName == dummyElemName )
+        {
+            ss << parameters[parameter_index].elemIndex;
+        }
+        else
+        {
+            ss << elemName;
+        }
     }
 
     if( parameters[parameter_index].category == SENSOR_FT_PARAM )
@@ -221,7 +239,16 @@ std::string DynamicsRegressorParametersList::getDescriptionOfParameter(unsigned 
 
         ss << "Parameter "
            << parameter_index
-           << ": " << ft_offset_type << " of ft sensor " << parameters[parameter_index].index;
+           << ": " << ft_offset_type << " of ft sensor ";
+
+        if( elemName == dummyElemName )
+        {
+            ss << parameters[parameter_index].elemIndex;
+        }
+        else
+        {
+            ss << elemName;
+        }
     }
 
     return ss.str();

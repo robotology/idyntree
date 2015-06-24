@@ -32,8 +32,8 @@ classdef DynamicsRegressorParameter < SwigRef
           v = iDynTreeMATLAB_wrap(263,'DynamicsRegressorParameter_category_get',self);
           ok = true;
           return
-        case 'index'
-          v = iDynTreeMATLAB_wrap(265,'DynamicsRegressorParameter_index_get',self);
+        case 'elemIndex'
+          v = iDynTreeMATLAB_wrap(265,'DynamicsRegressorParameter_elemIndex_get',self);
           ok = true;
           return
         case 'type'
@@ -48,8 +48,8 @@ classdef DynamicsRegressorParameter < SwigRef
           iDynTreeMATLAB_wrap(264,'DynamicsRegressorParameter_category_set',self,v);
           ok = true;
           return
-        case 'index'
-          iDynTreeMATLAB_wrap(266,'DynamicsRegressorParameter_index_set',self,v);
+        case 'elemIndex'
+          iDynTreeMATLAB_wrap(266,'DynamicsRegressorParameter_elemIndex_set',self,v);
           ok = true;
           return
         case 'type'
