@@ -13,7 +13,6 @@
 #include <string>
 #include <cassert>
 #include <sstream>
-#include <boost/concept_check.hpp>
 
 namespace iDynTree
 {
