@@ -13,6 +13,7 @@
 #include <string>
 #include <cassert>
 #include <sstream>
+#include <algorithm>
 
 namespace iDynTree
 {
