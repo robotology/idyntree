@@ -355,6 +355,34 @@ bool jointPosLimitsFromUrdfModel(const urdf::ModelInterface& robot_model,
     return true;
 }
 
+bool framesFromKDLTree(const KDL::Tree& tree,
+                       std::vector<std::string>& framesNames,
+                       std::vector<std::string>& parentLinkNames)
+{
+    framesNames.clear();
+    parentLinkNames.clear();
+
+    KDL::SegmentMap::iterator seg;
+    KDL::SegmentMap segs;
+    KDL::SegmentMap::const_iterator root_seg;
+    root_seg = tree.getRootSegment();
+    segs = tree.getSegments();
+    for( seg = segs.begin(); seg != segs.end(); seg++ )
+    {
+        if( seg->second.children.size() == 0 &&
+            seg->second.segment.getJoint().getType() == KDL::Joint::None &&
+            seg->second.segment.getInertia().getMass() == 0.0 )
+        {
+            std::string frameName = seg->second.segment.getName();
+            std::string parentLinkName = seg->second.parent->second.segment.getName();
+            framesNames.push_back(frameName);
+            parentLinkNames.push_back(parentLinkName);
+        }
+    }
+
+    return true;
+}
+
 
 }
 

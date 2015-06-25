@@ -1,13 +1,13 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
-* 
+*
 *  Copyright (c) 2008, Willow Garage, Inc.
 *  All rights reserved.
-* 
+*
 *  Redistribution and use in source and binary forms, with or without
 *  modification, are permitted provided that the following conditions
 *  are met:
-* 
+*
 *   * Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   * Redistributions in binary form must reproduce the above
@@ -17,7 +17,7 @@
 *   * Neither the name of the Willow Garage nor the names of its
 *     contributors may be used to endorse or promote products derived
 *     from this software without specific prior written permission.
-* 
+*
 *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -85,7 +85,7 @@ bool treeFromUrdfString(const std::string& xml, KDL::Tree& tree, const bool cons
 /** Constructs a KDL tree from a URDF robot model
  * \param robot_model The URDF robot model
  * \param tree The resulting KDL Tree
- * \param consider_root_link_inertia optional (default false) if true parse the first link 
+ * \param consider_root_link_inertia optional (default false) if true parse the first link
  *                  of the robot model as a real link, and introduces a dummy link connected to it
  *                 with a fixed joint to overcome the the fact that KDL does not support inertia in the first link
  * returns true on success, false on failure
@@ -93,12 +93,35 @@ bool treeFromUrdfString(const std::string& xml, KDL::Tree& tree, const bool cons
 bool treeFromUrdfModel(const urdf::ModelInterface& robot_model, KDL::Tree& tree, const bool consider_root_link_inertia=false);
 
 /**
- * \todo TODO FIXME write proper JointLimit/JointPosLimits to replace use of joint_names,min,max 
+ * \todo TODO FIXME write proper JointLimit/JointPosLimits to replace use of joint_names,min,max
  *
  */
 bool jointPosLimitsFromUrdfFile(const std::string& file, std::vector<std::string> & joint_names, KDL::JntArray & min, KDL::JntArray & max);
 bool jointPosLimitsFromUrdfString(const std::string& urdf_xml,std::vector<std::string> & joint_names, KDL::JntArray & min, KDL::JntArray & max);
 bool jointPosLimitsFromUrdfModel(const urdf::ModelInterface& robot_model, std::vector<std::string> & joint_names, KDL::JntArray & min, KDL::JntArray & max);
+
+/**
+ * The URDF format does not support the concept of frames. For this reason
+ * people usually attach with fixed joints "fake" leaf links with a zero
+ * mass to their models, to represent frames attached to a given link.
+ *
+ * This function encodes an heuristics for extracting this kind of information:
+ * it returns as frame "fake links" all the URDF leaf links that have zero mass
+ * and are attach to their parents through a fixed joint.
+ *
+ * \warning This is just a workaround for a problem in URDF expressiveness,
+ *           but it can fail if the model is not following the assumptions of
+ *           the function.
+ *
+ * \param[in] tree the KDL::Tree
+ * \param[out] framesNames the names of the link that are actually "fake links" used to represent frames
+ * \param[out] parentLinkNames for each frame, the name of the parent link to which the frame is attached
+ *
+ */
+bool framesFromKDLTree(const KDL::Tree& tree,
+                       std::vector<std::string>& framesNames,
+                       std::vector<std::string>& parentLinkNames);
+
 
 }
 

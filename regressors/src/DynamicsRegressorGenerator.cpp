@@ -187,14 +187,21 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
     // Allocate the legacy class
     std::string kinematic_base = "";
     bool consider_ft_offset = true;
-    std::vector< std::string > fake_link_names;
+    std::vector< std::string > frameNames;
+    std::vector< std::string > dummy;
+
+    // We remove the fake links that in the urdf
+    // we use as surrogate for frames
+    kdl_format_io::framesFromKDLTree(this->pimpl->robot_model.getTree(),
+                                     frameNames,dummy);
+
     bool verbose = true;
     this->pimpl->m_pLegacyGenerator =
         new KDL::CoDyCo::Regressors::DynamicRegressorGenerator(this->pimpl->robot_model,
                                                            this->pimpl->sensors_model,
                                                            kinematic_base,
                                                            consider_ft_offset,
-                                                           fake_link_names,verbose);
+                                                           frameNames,verbose);
 
     // Get all subregressors of type subtreeBaseDynamics
     // For each subtreeBaseDynamics subregressor, add it to the legacy class
