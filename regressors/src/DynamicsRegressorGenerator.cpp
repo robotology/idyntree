@@ -187,13 +187,23 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
     // Allocate the legacy class
     std::string kinematic_base = "";
     bool consider_ft_offset = true;
-    std::vector< std::string > frameNames;
+    std::vector< std::string > ignoredLinks;
     std::vector< std::string > dummy;
 
     // We remove the fake links that in the urdf
     // we use as surrogate for frames
     kdl_format_io::framesFromKDLTree(this->pimpl->robot_model.getTree(),
-                                     frameNames,dummy);
+                                     ignoredLinks,dummy);
+
+    // Add ignored links to the list of links consired "fake"
+    for (TiXmlElement* ignoredLinkXml = regressorXml->FirstChildElement("ignoredLink");
+         ignoredLinkXml; ignoredLinkXml = ignoredLinkXml->NextSiblingElement("ignoredLink"))
+    {
+        std::string ignoredLinkName = ignoredLinkXml->GetText();
+        ignoredLinks.push_back(ignoredLinkName);
+    }
+
+
 
     bool verbose = true;
     this->pimpl->m_pLegacyGenerator =
@@ -201,7 +211,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
                                                            this->pimpl->sensors_model,
                                                            kinematic_base,
                                                            consider_ft_offset,
-                                                           frameNames,verbose);
+                                                           ignoredLinks,verbose);
 
     // Get all subregressors of type subtreeBaseDynamics
     // For each subtreeBaseDynamics subregressor, add it to the legacy class

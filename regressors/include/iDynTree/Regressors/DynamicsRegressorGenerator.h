@@ -114,6 +114,20 @@ public:
      * </regressor>
      * ~~~
      *
+     * If you want to exclude some links from the regressor (for example because you know
+     *  a-priori that their influence on the dynamics is negligible) you can
+     * use the ignoredLink tag:
+     *
+     * ~~~
+     * <regressor>
+     *     <subtreeBaseDynamics>
+     *         <FTSensorLink>r_upper_arm</FTSensorLink>
+     *     </subtreeBaseDynamics>
+     *     <ignoredLink>r_elbow_1</ignoredLink>
+     *     <ignoredLink>r_wrist_1</ignoredLink>
+     * </regressor>
+     * ~~~
+     *
      * For subtreeBaseDynamics subregressor, you specify the frame of expressions (i.e
      * with respect to which point and to which orientation the regressor equation will be
      * written) using the `<frame>` or `<sensorFrame>` tag.
@@ -378,7 +392,7 @@ public:
       *  you have to multiply the complete regressor for the returned basisMatrix :
       *  baseRegressor = completeRegressor*basisMatrix
       *
-      * \note the basisMatrix will be resize to match the size of the identifiable subspace. 
+      * \note the basisMatrix will be resize to match the size of the identifiable subspace.
       *
       * @param[out] basisMatrix a Matrix of size getNrOfParameters() X size of identifiable subspace .
       * @return true if all went well, false if there was an error
