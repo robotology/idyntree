@@ -67,4 +67,5 @@ set_target_properties(${modulename} PROPERTIES PREFIX "" SUFFIX .${Matlab_MEX_EX
 # Install the generated front-end to ${CMAKE_INSTALL_PREFIX}/matlab_tb
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/+iDynTree DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigRef.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iDynTreesetup.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(TARGETS ${modulename} DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)

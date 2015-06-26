@@ -152,6 +152,8 @@ bool ToiDynTree(const KDL::JntArray& kdl_jntarray, VectorDynSize& idyntree_jntar
 
     Eigen::Map<Eigen::VectorXd>(idyntree_jntarray.data(),idyntree_jntarray.size())
         =  kdl_jntarray.data;
+
+    return true;
 }
 
 

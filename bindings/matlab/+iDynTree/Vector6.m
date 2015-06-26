@@ -4,20 +4,23 @@ classdef Vector6 < iDynTree.IVector
       self@iDynTree.IVector('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(40,'new_Vector6',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(40,'new_Vector6',varargin{:});
+        %self.swigOwn = true;
         tmp = iDynTreeMATLAB_wrap(40,'new_Vector6',varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+        self.swigCPtr = tmp.swigCPtr;
+        self.swigOwn = tmp.swigOwn;
+        self.swigType = tmp.swigType;
+        tmp.swigOwn = false;
       end
     end
     function delete(self)
-      if self.swigInd
+      if self.swigOwn
         iDynTreeMATLAB_wrap(41,'delete_Vector6',self);
-        self.swigInd=uint64(0);
+        self.swigOwn=false;
       end
     end
-    function varargout = paren(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(42,'Vector6_paren',self,varargin{:});
+    function varargout = TODOparen(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(42,'Vector6_TODOparen',self,varargin{:});
     end
     function varargout = getVal(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(43,'Vector6_getVal',self,varargin{:});
@@ -39,6 +42,24 @@ classdef Vector6 < iDynTree.IVector
     end
     function varargout = display(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(49,'Vector6_display',self,varargin{:});
+    end
+    function [v,ok] = swig_fieldsref(self,i)
+      v = [];
+      ok = false;
+      switch i
+      end
+      [v,ok] = swig_fieldsref@iDynTree.IVector(self,i);
+      if ok
+        return
+      end
+    end
+    function [self,ok] = swig_fieldasgn(self,i,v)
+      switch i
+      end
+      [self,ok] = swig_fieldasgn@iDynTree.IVector(self,i,v);
+      if ok
+        return
+      end
     end
   end
   methods(Static)

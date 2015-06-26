@@ -235,8 +235,18 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type, const un
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
-        this->pimpl->SixAxisFTSensorsMeasurements[sensor_index] = wrench;
-        return true;
+        if( sensor_index >= 0 && sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
+        {
+            this->pimpl->SixAxisFTSensorsMeasurements[sensor_index] = wrench;
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] setMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->SixAxisFTSensorsMeasurements.size() << std::endl;
+            return false;
+        }
     }
 
     return false;
@@ -246,8 +256,18 @@ bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type, const un
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
-        wrench = this->pimpl->SixAxisFTSensorsMeasurements[sensor_index];
-        return true;
+        if( sensor_index >= 0 && sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
+        {
+            wrench = this->pimpl->SixAxisFTSensorsMeasurements[sensor_index];
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->SixAxisFTSensorsMeasurements.size() << std::endl;
+            return false;
+        }
     }
 
     return false;
@@ -255,8 +275,7 @@ bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type, const un
 
 unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) const
 {
-    if( sensor_type < 0 ||
-        sensor_type >= NR_OF_SENSOR_TYPES )
+    if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
         return this->pimpl->SixAxisFTSensorsMeasurements.size();
     }

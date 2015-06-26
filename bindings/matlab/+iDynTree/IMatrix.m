@@ -1,13 +1,13 @@
 classdef IMatrix < SwigRef
   methods
     function delete(self)
-      if self.swigInd
+      if self.swigOwn
         iDynTreeMATLAB_wrap(1,'delete_IMatrix',self);
-        self.swigInd=uint64(0);
+        self.swigOwn=false;
       end
     end
-    function varargout = paren(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(2,'IMatrix_paren',self,varargin{:});
+    function varargout = TODOparen(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(2,'IMatrix_TODOparen',self,varargin{:});
     end
     function varargout = getVal(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(3,'IMatrix_getVal',self,varargin{:});
@@ -24,6 +24,16 @@ classdef IMatrix < SwigRef
     function self = IMatrix(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         error('No matching constructor');
+      end
+    end
+    function [v,ok] = swig_fieldsref(self,i)
+      v = [];
+      ok = false;
+      switch i
+      end
+    end
+    function [self,ok] = swig_fieldasgn(self,i,v)
+      switch i
       end
     end
   end

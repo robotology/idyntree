@@ -4,16 +4,19 @@ classdef SixAxisForceTorqueSensor < iDynTree.Sensor
       self@iDynTree.Sensor('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(243,'new_SixAxisForceTorqueSensor',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(243,'new_SixAxisForceTorqueSensor',varargin{:});
+        %self.swigOwn = true;
         tmp = iDynTreeMATLAB_wrap(243,'new_SixAxisForceTorqueSensor',varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+        self.swigCPtr = tmp.swigCPtr;
+        self.swigOwn = tmp.swigOwn;
+        self.swigType = tmp.swigType;
+        tmp.swigOwn = false;
       end
     end
     function delete(self)
-      if self.swigInd
+      if self.swigOwn
         iDynTreeMATLAB_wrap(244,'delete_SixAxisForceTorqueSensor',self);
-        self.swigInd=uint64(0);
+        self.swigOwn=false;
       end
     end
     function varargout = setName(self,varargin)
@@ -69,6 +72,24 @@ classdef SixAxisForceTorqueSensor < iDynTree.Sensor
     end
     function varargout = getWrenchAppliedOnLink(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(262,'SixAxisForceTorqueSensor_getWrenchAppliedOnLink',self,varargin{:});
+    end
+    function [v,ok] = swig_fieldsref(self,i)
+      v = [];
+      ok = false;
+      switch i
+      end
+      [v,ok] = swig_fieldsref@iDynTree.Sensor(self,i);
+      if ok
+        return
+      end
+    end
+    function [self,ok] = swig_fieldasgn(self,i,v)
+      switch i
+      end
+      [self,ok] = swig_fieldasgn@iDynTree.Sensor(self,i,v);
+      if ok
+        return
+      end
     end
   end
   methods(Static)

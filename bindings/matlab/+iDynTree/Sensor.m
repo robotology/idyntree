@@ -1,9 +1,9 @@
 classdef Sensor < SwigRef
   methods
     function delete(self)
-      if self.swigInd
+      if self.swigOwn
         iDynTreeMATLAB_wrap(224,'delete_Sensor',self);
-        self.swigInd=uint64(0);
+        self.swigOwn=false;
       end
     end
     function varargout = getName(self,varargin)
@@ -27,6 +27,16 @@ classdef Sensor < SwigRef
     function self = Sensor(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         error('No matching constructor');
+      end
+    end
+    function [v,ok] = swig_fieldsref(self,i)
+      v = [];
+      ok = false;
+      switch i
+      end
+    end
+    function [self,ok] = swig_fieldasgn(self,i,v)
+      switch i
       end
     end
   end

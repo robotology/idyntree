@@ -141,7 +141,14 @@ int subtreeBaseDynamicsRegressor::configure()
 
            int ft_sensor_index = getFirstFTSensorOnLink(sensors_tree,leaf_link_id);
 
-            assert(ft_sensor_index >= 0);
+            if( ft_sensor_index < 0 )
+            {
+                std::cerr << "[ERROR] subtreeBaseDynamicsRegressor: "
+                          << " link "  << undirected_tree.getLink(leaf_link_id)->getName()
+                          << " was indicated as leaf link of the subtree, but no FT sensor"
+                          << " was found attached to this link" << std::endl;
+                return false;
+            }
 
             relative_junctions.push_back(ft_sensor_index);
 
