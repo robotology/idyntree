@@ -369,12 +369,12 @@ bool framesFromKDLTree(const KDL::Tree& tree,
     segs = tree.getSegments();
     for( seg = segs.begin(); seg != segs.end(); seg++ )
     {
-        if( seg->second.children.size() == 0 &&
-            seg->second.segment.getJoint().getType() == KDL::Joint::None &&
-            seg->second.segment.getInertia().getMass() == 0.0 )
+        if( GetTreeElementChildren(seg->second).size() == 0 &&
+            GetTreeElementSegment(seg->second).getJoint().getType() == KDL::Joint::None &&
+            GetTreeElementSegment(seg->second).getInertia().getMass() == 0.0 )
         {
-            std::string frameName = seg->second.segment.getName();
-            std::string parentLinkName = seg->second.parent->second.segment.getName();
+            std::string frameName = GetTreeElementSegment(seg->second).getName();
+            std::string parentLinkName = GetTreeElementSegment(GetTreeElementParent(seg->second)->second).getName();
             framesNames.push_back(frameName);
             parentLinkNames.push_back(parentLinkName);
         }
