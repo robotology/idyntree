@@ -15,7 +15,6 @@
 %include "./matlab/matlab.i"
 #endif
 
-
 %{
 /* Note : always include headers following the inheritance order */
 

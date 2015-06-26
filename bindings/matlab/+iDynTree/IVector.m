@@ -1,13 +1,13 @@
 classdef IVector < SwigRef
   methods
     function delete(self)
-      if self.swigOwn
+      if self.swigInd
         iDynTreeMATLAB_wrap(7,'delete_IVector',self);
-        self.swigOwn=false;
+        self.swigInd=uint64(0);
       end
     end
-    function varargout = TODOparen(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(8,'IVector_TODOparen',self,varargin{:});
+    function varargout = paren(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(8,'IVector_paren',self,varargin{:});
     end
     function varargout = getVal(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(9,'IVector_getVal',self,varargin{:});
@@ -21,16 +21,6 @@ classdef IVector < SwigRef
     function self = IVector(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         error('No matching constructor');
-      end
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
       end
     end
   end

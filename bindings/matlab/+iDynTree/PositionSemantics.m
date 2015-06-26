@@ -3,19 +3,16 @@ classdef PositionSemantics < SwigRef
     function self = PositionSemantics(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(67,'new_PositionSemantics',varargin{:});
-        %self.swigOwn = true;
+        %self.swigInd = iDynTreeMATLAB_wrap(67,'new_PositionSemantics',varargin{:});
         tmp = iDynTreeMATLAB_wrap(67,'new_PositionSemantics',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
+      if self.swigInd
         iDynTreeMATLAB_wrap(68,'delete_PositionSemantics',self);
-        self.swigOwn=false;
+        self.swigInd=uint64(0);
       end
     end
     function varargout = getPoint(self,varargin)
@@ -53,16 +50,6 @@ classdef PositionSemantics < SwigRef
     end
     function varargout = display(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(84,'PositionSemantics_display',self,varargin{:});
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
     end
   end
   methods(Static)

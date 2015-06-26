@@ -4,37 +4,16 @@ classdef Wrench < iDynTree.SpatialForceVectorRaw
       self@iDynTree.SpatialForceVectorRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(121,'new_Wrench',varargin{:});
-        %self.swigOwn = true;
+        %self.swigInd = iDynTreeMATLAB_wrap(121,'new_Wrench',varargin{:});
         tmp = iDynTreeMATLAB_wrap(121,'new_Wrench',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
+      if self.swigInd
         iDynTreeMATLAB_wrap(122,'delete_Wrench',self);
-        self.swigOwn=false;
-      end
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-      [v,ok] = swig_fieldsref@iDynTree.SpatialForceVectorRaw(self,i);
-      if ok
-        return
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
-      [self,ok] = swig_fieldasgn@iDynTree.SpatialForceVectorRaw(self,i,v);
-      if ok
-        return
+        self.swigInd=uint64(0);
       end
     end
   end

@@ -3,19 +3,16 @@ classdef TransformRaw < SwigRef
     function self = TransformRaw(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(175,'new_TransformRaw',varargin{:});
-        %self.swigOwn = true;
+        %self.swigInd = iDynTreeMATLAB_wrap(175,'new_TransformRaw',varargin{:});
         tmp = iDynTreeMATLAB_wrap(175,'new_TransformRaw',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
+      if self.swigInd
         iDynTreeMATLAB_wrap(176,'delete_TransformRaw',self);
-        self.swigOwn=false;
+        self.swigInd=uint64(0);
       end
     end
     function varargout = inverse(self,varargin)
@@ -29,16 +26,6 @@ classdef TransformRaw < SwigRef
     end
     function varargout = display(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(184,'TransformRaw_display',self,varargin{:});
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
     end
   end
   methods(Static)

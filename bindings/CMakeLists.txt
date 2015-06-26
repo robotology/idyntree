@@ -12,7 +12,7 @@ set(IDYNTREE_GENERATE_MATLAB FALSE CACHE BOOL "Enable if you have the experiment
 
 find_package(SWIG)
 if(SWIG_FOUND)
-    include(${SWIG_USE_FILE})
+    include(UseSWIG)
 
     set_source_files_properties(iDynTree.i PROPERTIES CPLUSPLUS ON)
 

@@ -3,19 +3,16 @@ classdef SensorsList < SwigRef
     function self = SensorsList(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(231,'new_SensorsList',varargin{:});
-        %self.swigOwn = true;
+        %self.swigInd = iDynTreeMATLAB_wrap(231,'new_SensorsList',varargin{:});
         tmp = iDynTreeMATLAB_wrap(231,'new_SensorsList',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
+      if self.swigInd
         iDynTreeMATLAB_wrap(232,'delete_SensorsList',self);
-        self.swigOwn=false;
+        self.swigInd=uint64(0);
       end
     end
     function varargout = addSensor(self,varargin)
@@ -29,16 +26,6 @@ classdef SensorsList < SwigRef
     end
     function varargout = getSensor(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(236,'SensorsList_getSensor',self,varargin{:});
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
     end
   end
   methods(Static)

@@ -203,8 +203,6 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
         ignoredLinks.push_back(ignoredLinkName);
     }
 
-
-
     bool verbose = true;
     this->pimpl->m_pLegacyGenerator =
         new KDL::CoDyCo::Regressors::DynamicRegressorGenerator(this->pimpl->robot_model,
