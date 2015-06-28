@@ -291,7 +291,10 @@ int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &/*q*/,
         int link_id = subtree_links_indices[i];
 
         if( linkIndeces2regrCols[link_id] != -1 ) {
+
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);
+
+
             regressor_local_parametrization.block(0,(int)(10*linkIndeces2regrCols[link_id]),6,10) = WrenchTransformationMatrix(X_measure_dynamic_base*X_dynamic_base[link_id])*netWrenchRegressor_i;
         }
     }

@@ -339,7 +339,7 @@ std::string DynamicsRegressorGenerator::getDescriptionOfDegreesOfFreedom()
 {
     std::stringstream ss;
 
-    for(int dof; dof < this->getNrOfDegreesOfFreedom(); dof++ )
+    for(int dof = 0; dof < this->getNrOfDegreesOfFreedom(); dof++ )
     {
         ss << "DOF Index: " << dof << " Name: " <<  this->getDescriptionOfDegreeOfFreedom(dof) << std::endl;
     }
@@ -411,8 +411,8 @@ bool DynamicsRegressorGenerator::setRobotState(const VectorDynSize& q,
 {
     bool ok = true;
     ok = ok && ToKDL(q,this->pimpl->m_qKDL);
-    ok = ok && ToKDL(q,this->pimpl->m_dqKDL);
-    ok = ok && ToKDL(q,this->pimpl->m_ddqKDL);
+    ok = ok && ToKDL(q_dot,this->pimpl->m_dqKDL);
+    ok = ok && ToKDL(q_dotdot,this->pimpl->m_ddqKDL);
 
     if( !ok )
     {
