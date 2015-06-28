@@ -32,7 +32,9 @@ macro(SWIG_COMPILE_MODULE name language)
 endmacro()
 
 # Find MATLAB
-find_package(Matlab REQUIRED)
+find_package(Matlab 
+             REQUIRED 
+             MX_LIBRARY)
 
 include_directories(${Matlab_INCLUDE_DIRS})
 
