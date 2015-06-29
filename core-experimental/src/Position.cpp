@@ -57,14 +57,14 @@ namespace iDynTree
 
     const Position& Position::changePoint(const Position& newPoint)
     {
-        assert( this->semantics.changePoint(newPoint.semantics) );
+        iDynTreeAssert( this->semantics.changePoint(newPoint.semantics) );
         this->PositionRaw::changePoint(newPoint);
         return *this;
     }
 
     const Position& Position::changeRefPoint(const Position& newRefPoint)
     {
-        assert( this->semantics.changeRefPoint(newRefPoint.semantics) );
+        iDynTreeAssert( this->semantics.changeRefPoint(newRefPoint.semantics) );
         this->PositionRaw::changeRefPoint(newRefPoint);
         return *this;
     }
@@ -78,7 +78,7 @@ namespace iDynTree
     Position Position::compose(const Position& op1, const Position& op2)
     {
         PositionSemantics resultSemantics;
-        assert( PositionSemantics::compose(op1.semantics,op2.semantics,resultSemantics) );
+        iDynTreeAssert( PositionSemantics::compose(op1.semantics,op2.semantics,resultSemantics) );
         return Position(PositionRaw::compose(op1,op2),resultSemantics);
     }
 
@@ -86,7 +86,7 @@ namespace iDynTree
     Position Position::inverse(const Position& op)
     {
         PositionSemantics resultSemantics;
-        assert( PositionSemantics::inverse(op.semantics,resultSemantics) );
+        iDynTreeAssert( PositionSemantics::inverse(op.semantics,resultSemantics) );
         return Position(PositionRaw::inverse(op),resultSemantics);
     }
 

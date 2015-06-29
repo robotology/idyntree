@@ -73,12 +73,10 @@ namespace iDynTree
     bool PositionSemantics::check_changePoint(const PositionSemantics& newPoint)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(newPoint.coordinateFrame,this->coordinateFrame),
-                                 "PositionSemantics",
-                                 "check_changePoint",
+                                 __PRETTY_FUNCTION__,
                                  "newPosition expressed in a different coordinateFrames\n")
                 && reportErrorIf(!checkEqualOrUnknown(newPoint.refPoint,this->point),
-                                 "PositionSemantics",
-                                 "check_changePoint",
+                                 __PRETTY_FUNCTION__,
                                  "newPosition has a reference point different from the original point\n"));
     }
     
@@ -97,12 +95,10 @@ namespace iDynTree
     bool PositionSemantics::check_changeRefPoint(const PositionSemantics& newPosition)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(newPosition.coordinateFrame,this->coordinateFrame),
-                                 "PositionSemantics",
-                                 "check_changeRefPoint",
+                                 __PRETTY_FUNCTION__,
                                  "newPosition expressed in a different coordinateFrames\n")
                 && reportErrorIf(!checkEqualOrUnknown(newPosition.point,this->refPoint),
-                                 "PositionSemantics",
-                                 "check_changeRefPoint",
+                                 __PRETTY_FUNCTION__,
                                  "newPosition point is different from the original reference point\n"));
     }
     
@@ -120,8 +116,7 @@ namespace iDynTree
     bool PositionSemantics::check_changeCoordinateFrame(const RotationSemantics & newCoordinateFrame)
     {
         return reportErrorIf(!checkEqualOrUnknown(newCoordinateFrame.getOrientationFrame(),this->coordinateFrame),
-                             "PositionSemantics",
-                             "check_changeCoordinateFrame",
+                             __PRETTY_FUNCTION__,
                              "transformation's orientationFrame is different from current coordinateFrame\n");
     }
 
@@ -139,16 +134,13 @@ namespace iDynTree
     bool PositionSemantics::check_compose(const PositionSemantics& op1, const PositionSemantics& op2)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame),
-                                 "PositionSemantics",
-                                 "check_compose",
+                                 __PRETTY_FUNCTION__,
                                  "composing two position expressed in different coordinateFrames\n")
                 && reportErrorIf(!checkEqualOrUnknown(op1.refPoint,op2.point) && (op1.point == op2.refPoint),
-                                 "PositionSemantics",
-                                 "check_compose",
+                                 __PRETTY_FUNCTION__,
                                  "Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))\n")
                 && reportErrorIf(!checkEqualOrUnknown(op1.refPoint,op2.point),
-                                 "PositionSemantics",
-                                 "check_compose",
+                                 __PRETTY_FUNCTION__,
                                  "composing two position expressed in different coordinateFrames\n"));
     }
 

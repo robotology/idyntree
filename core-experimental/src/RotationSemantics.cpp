@@ -68,32 +68,28 @@ namespace iDynTree
     bool RotationSemantics::check_changeOrientFrame(const RotationSemantics& newOrientFrame)
     {
         return reportErrorIf(!checkEqualOrUnknown(this->orientationFrame,newOrientFrame.getReferenceOrientationFrame()),
-                             "RotationSemantics",
-                             "check_changeOrientFrame",
+                             __PRETTY_FUNCTION__,
                              "the orientationFrame of this object does not match the referenceOrientationFrame of the newOrientFrame\n");
     }
 
     bool RotationSemantics::check_changeRefOrientFrame(const RotationSemantics& newRefOrientFrame)
     {
         return reportErrorIf(!checkEqualOrUnknown(newRefOrientFrame.getOrientationFrame(),this->refOrientationFrame),
-                             "RotationSemantics",
-                             "check_changeOrientFrame",
+                             __PRETTY_FUNCTION__,
                              "the refOrientationFrame of this object does not match the orientationFrame of the newRefOrientFrame\n");
     }
 
     bool RotationSemantics::check_convertToNewCoordFrame(const PositionSemantics & op) const
     {
         return reportErrorIf(!checkEqualOrUnknown(this->orientationFrame,op.getCoordinateFrame()),
-                             "RotationSemantics",
-                             "check_convertToNewCoordFrame",
+                             __PRETTY_FUNCTION__,
                              "transformation's orientationFrame is different from current Position's coordinateFrame\n");
     }
 
     bool RotationSemantics::check_compose(const RotationSemantics& op1, const RotationSemantics& op2)
     {
         return reportErrorIf(!checkEqualOrUnknown(op1.getOrientationFrame(),op2.getReferenceOrientationFrame()),
-                             "RotationSemantics",
-                             "check_compose",
+                             __PRETTY_FUNCTION__,
                              "the orientationFrame of the first operand does not match the referenceOrientationFrame of the second operand\n");
     }
 

@@ -20,6 +20,11 @@ namespace iDynTree
                (op2  <   0);
     }
 
+    void assertWoAbort(const char* semCheck, const char* file, const char* func, int line)
+    {
+        std::cerr << file << ": " << func << ": " << line << ": Failed assertion '" << semCheck << "'.\n";
+    }
+
     bool checkEqualAndNotUnknown(const int op1, const int op2)
     {
         return (op1 == op2) &&
@@ -32,11 +37,11 @@ namespace iDynTree
         std::cerr << "[ERROR] " << className << " :: " << methodName << " : " << errorMessage <<  "\n";
     }
 
-    bool reportErrorIf(bool condition, const char* className, const char* methodName, const char* errorMessage)
+    bool reportErrorIf(bool condition, const char* className_methodName, const char* errorMessage)
     {
         if(condition)
         {
-            std::cerr << "[ERROR] " << className << " :: " << methodName << " : " << errorMessage <<  "\n";
+            std::cerr << "[ERROR] " << className_methodName << " : " << errorMessage <<  "\n";
         }
         return !condition;
     }
