@@ -21,7 +21,7 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      *
-     * A motion spatial vector can be used to to described twist, twist acceleration,
+     * A motion spatial vector can be used to to describe a  twist, twist acceleration,
      * and their derivatives.
      *
      * This is just a basic vector, used to implement the adjoint transformations in

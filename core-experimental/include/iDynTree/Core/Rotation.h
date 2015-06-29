@@ -42,7 +42,12 @@ namespace iDynTree
     {
     private:
         RotationSemantics semantics;
-
+        
+        /**
+         * Copy constructor: create a Rotation from another RotationRaw and another RotationSemantics.
+         */
+        Rotation(const RotationRaw & other, RotationSemantics & semantics);
+        
     public:
         /**
          * Default constructor: initialize all the rotation to the identity
@@ -62,7 +67,7 @@ namespace iDynTree
         Rotation(const RotationRaw & other);
 
         /**
-         * Copy constructor: create a Rotation from another RotationRaw.
+         * Copy constructor: create a Rotation from another Rotation.
          */
         Rotation(const Rotation & other);
 
@@ -81,21 +86,27 @@ namespace iDynTree
          */
         const RotationSemantics& getSemantics() const;
 
+        /**
+         * Geometric operation.
+         * For the inverse2() operation, both the forward and the inverse geometric relations have to
+         * be expressed in the reference orientation frame!!
+         * 
+         */
         const Rotation & changeOrientFrame(const Rotation & newOrientFrame);
         const Rotation & changeRefOrientFrame(const Rotation & newRefOrientFrame);
         static Rotation compose(const Rotation & op1, const Rotation & op2);
         static Rotation inverse2(const Rotation & orient);
-        static Position transform(const Rotation & op1, const Position & op2);
-        static Twist  transform(const Rotation & op1, const Twist & op2);
-        static Wrench transform(const Rotation & op1, const Wrench & op2);
+        Position convertToNewCoordFrame(const Position & other) const;
+        Twist  convertToNewCoordFrame(const Twist & other) const;
+        Wrench convertToNewCoordFrame(const Wrench & other) const;
 
 
         /** overloaded operators **/
         Rotation operator*(const Rotation & other) const;
         Rotation inverse() const;
-        Position operator*(const Position & op2) const;
-        Twist    operator*(const Twist    & op2) const;
-        Wrench   operator*(const Wrench    & op2) const;
+        Position operator*(const Position & other) const;
+        Twist    operator*(const Twist    & other) const;
+        Wrench   operator*(const Wrench   & other) const;
 
 
         /** @name Output helpers.

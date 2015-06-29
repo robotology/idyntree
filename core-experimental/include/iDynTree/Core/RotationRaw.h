@@ -90,9 +90,9 @@ namespace iDynTree
         const RotationRaw & changeRefOrientFrame(const RotationRaw & newRefOrientFrame);
         static RotationRaw compose(const RotationRaw & op1, const RotationRaw & op2);
         static RotationRaw inverse2(const RotationRaw & orient);
-        static PositionRaw transform(const RotationRaw & op1, const PositionRaw & op2);
-        static SpatialMotionVectorRaw transform(const RotationRaw & op1, const SpatialMotionVectorRaw & op2);
-        static SpatialForceVectorRaw transform(const RotationRaw & op1,  const SpatialForceVectorRaw & op2);
+        PositionRaw convertToNewCoordFrame(const PositionRaw & other) const;
+        SpatialMotionVectorRaw convertToNewCoordFrame(const SpatialMotionVectorRaw & other) const;
+        SpatialForceVectorRaw convertToNewCoordFrame(const SpatialForceVectorRaw & other) const;
 
 
         /** overloaded operators **/
