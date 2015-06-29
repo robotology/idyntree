@@ -17,7 +17,6 @@ namespace iDynTree
                                             refPoint(UNKNOWN),
                                             coordinateFrame(UNKNOWN)
     {
-
     }
 
 
@@ -73,22 +72,16 @@ namespace iDynTree
 
     bool PositionSemantics::check_changePoint(const PositionSemantics& newPoint)
     {
-        // check semantics
-        if( !checkEqualOrUnknown(newPoint.coordinateFrame,this->coordinateFrame) )
-        {
-            fprintf(stderr,"[ERROR] Position::changePoint error: changePoint with newPosition expressed in a different coordinateFrames\n");
-            return false;
-        }
-
-        if( !checkEqualOrUnknown(newPoint.refPoint,this->point) )
-        {
-            fprintf(stderr,"[ERROR] Position::changePoint error: newPosition has a reference point different from the original point\n");
-            return false;
-        }
-
-        return true;
+        return (   reportErrorIf(!checkEqualOrUnknown(newPoint.coordinateFrame,this->coordinateFrame),
+                                 "PositionSemantics",
+                                 "check_changePoint",
+                                 "newPosition expressed in a different coordinateFrames\n")
+                && reportErrorIf(!checkEqualOrUnknown(newPoint.refPoint,this->point),
+                                 "PositionSemantics",
+                                 "check_changePoint",
+                                 "newPosition has a reference point different from the original point\n"));
     }
-
+    
     bool PositionSemantics::changePoint(const PositionSemantics& newPoint)
     {
         // check semantics
@@ -99,26 +92,20 @@ namespace iDynTree
         
         return status;
     }
-
-
+    
+    
     bool PositionSemantics::check_changeRefPoint(const PositionSemantics& newPosition)
     {
-        // check semantics
-        if( !checkEqualOrUnknown(newPosition.coordinateFrame,this->coordinateFrame) )
-        {
-            fprintf(stderr,"[ERROR] Position::changeRefPoint error: changePoint with newPosition expressed in a different coordinateFrames\n");
-            return false;
-        }
-
-        if( !checkEqualOrUnknown(newPosition.point,this->refPoint) )
-        {
-            fprintf(stderr,"[ERROR] Position::changeRefPoint error: newPosition point is different from the original reference point\n");
-            return false;
-        }
-
-        return true;
+        return (   reportErrorIf(!checkEqualOrUnknown(newPosition.coordinateFrame,this->coordinateFrame),
+                                 "PositionSemantics",
+                                 "check_changeRefPoint",
+                                 "newPosition expressed in a different coordinateFrames\n")
+                && reportErrorIf(!checkEqualOrUnknown(newPosition.point,this->refPoint),
+                                 "PositionSemantics",
+                                 "check_changeRefPoint",
+                                 "newPosition point is different from the original reference point\n"));
     }
-
+    
     bool PositionSemantics::changeRefPoint(const PositionSemantics& newPosition)
     {
         // check semantics
@@ -132,13 +119,10 @@ namespace iDynTree
 
     bool PositionSemantics::check_changeCoordinateFrame(const RotationSemantics & newCoordinateFrame)
     {
-        if( !checkEqualOrUnknown(newCoordinateFrame.getOrientationFrame(),this->coordinateFrame) )
-        {
-            fprintf(stderr,"[ERROR] Position::changeCoordinateFrame error: transformation's orientationFrame is different from current coordinateFrame\n");
-            return false;
-        }
-        
-        return true;
+        return reportErrorIf(!checkEqualOrUnknown(newCoordinateFrame.getOrientationFrame(),this->coordinateFrame),
+                             "PositionSemantics",
+                             "check_changeCoordinateFrame",
+                             "transformation's orientationFrame is different from current coordinateFrame\n");
     }
 
     bool PositionSemantics::changeCoordinateFrame(const RotationSemantics & newCoordinateFrame)
@@ -154,24 +138,18 @@ namespace iDynTree
     
     bool PositionSemantics::check_compose(const PositionSemantics& op1, const PositionSemantics& op2)
     {
-        // check semantics
-        if( !checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame) )
-        {
-            fprintf(stderr,"[ERROR] Position::compose error: composing two position expressed in different coordinateFrames\n");
-            return false;
-        }
-
-        if( !checkEqualOrUnknown(op1.refPoint,op2.point) )
-        {
-            fprintf(stderr,"[ERROR] Position::compose error: composing two position where the reference point of the first one is different from the point of the second\n");
-            if( op1.point == op2.refPoint )
-            {
-                fprintf(stderr,"[ERROR] Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))\n");
-            }
-            return false;
-        }
-
-        return true;
+        return (   reportErrorIf(!checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame),
+                                 "PositionSemantics",
+                                 "check_compose",
+                                 "composing two position expressed in different coordinateFrames\n")
+                && reportErrorIf(!checkEqualOrUnknown(op1.refPoint,op2.point) && (op1.point == op2.refPoint),
+                                 "PositionSemantics",
+                                 "check_compose",
+                                 "Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))\n")
+                && reportErrorIf(!checkEqualOrUnknown(op1.refPoint,op2.point),
+                                 "PositionSemantics",
+                                 "check_compose",
+                                 "composing two position expressed in different coordinateFrames\n"));
     }
 
     bool PositionSemantics::compose(const PositionSemantics& op1, const PositionSemantics& op2, PositionSemantics& result)

@@ -30,7 +30,15 @@ namespace iDynTree
     void reportError(const char* className, const char* methodName, const char* errorMessage)
     {
         std::cerr << "[ERROR] " << className << " :: " << methodName << " : " << errorMessage <<  "\n";
-        assert(false);
     }
 
+    bool reportErrorIf(bool condition, const char* className, const char* methodName, const char* errorMessage)
+    {
+        if(condition)
+        {
+            std::cerr << "[ERROR] " << className << " :: " << methodName << " : " << errorMessage <<  "\n";
+        }
+        return !condition;
+    }
+    
 }

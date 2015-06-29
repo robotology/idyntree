@@ -67,47 +67,34 @@ namespace iDynTree
     
     bool RotationSemantics::check_changeOrientFrame(const RotationSemantics& newOrientFrame)
     {
-        if( !checkEqualOrUnknown(this->orientationFrame,newOrientFrame.getReferenceOrientationFrame()) )
-        {
-            std::cerr << "[ERROR] RotationSemantics::changeOrientFrame : the orientationFrame of this object does not match the referenceOrientationFrame of the newOrientFrame\n";
-            return false;
-        }
-
-        return true;
+        return reportErrorIf(!checkEqualOrUnknown(this->orientationFrame,newOrientFrame.getReferenceOrientationFrame()),
+                             "RotationSemantics",
+                             "check_changeOrientFrame",
+                             "the orientationFrame of this object does not match the referenceOrientationFrame of the newOrientFrame\n");
     }
 
     bool RotationSemantics::check_changeRefOrientFrame(const RotationSemantics& newRefOrientFrame)
     {
-        if( !checkEqualOrUnknown(newRefOrientFrame.getOrientationFrame(),this->refOrientationFrame) )
-        {
-            std::cerr << "[ERROR] RotationSemantics::changeRefOrientFrame : the refOrientationFrame of this object does not match the orientationFrame of the newRefOrientFrame\n";
-            return false;
-        }
-
-        return true;
+        return reportErrorIf(!checkEqualOrUnknown(newRefOrientFrame.getOrientationFrame(),this->refOrientationFrame),
+                             "RotationSemantics",
+                             "check_changeOrientFrame",
+                             "the refOrientationFrame of this object does not match the orientationFrame of the newRefOrientFrame\n");
     }
 
     bool RotationSemantics::check_convertToNewCoordFrame(const PositionSemantics & op) const
     {
-        if( !checkEqualOrUnknown(this->orientationFrame,op.getCoordinateFrame()) )
-        {
-            fprintf(stderr,"[ERROR] Position::convertToNewCoordFrame error: transformation's orientationFrame is different from current Position's coordinateFrame\n");
-            return false;
-        }
-        
-        return true;
+        return reportErrorIf(!checkEqualOrUnknown(this->orientationFrame,op.getCoordinateFrame()),
+                             "RotationSemantics",
+                             "check_convertToNewCoordFrame",
+                             "transformation's orientationFrame is different from current Position's coordinateFrame\n");
     }
 
     bool RotationSemantics::check_compose(const RotationSemantics& op1, const RotationSemantics& op2)
     {
-        // check semantics
-        if( !checkEqualOrUnknown(op1.getOrientationFrame(),op2.getReferenceOrientationFrame()) )
-        {
-            std::cerr << "[ERROR] RotationSemantics::compose : the orientationFrame of the first operand does not match the referenceOrientationFrame of the second operand\n";
-            return false;
-        }
-
-        return true;
+        return reportErrorIf(!checkEqualOrUnknown(op1.getOrientationFrame(),op2.getReferenceOrientationFrame()),
+                             "RotationSemantics",
+                             "check_compose",
+                             "the orientationFrame of the first operand does not match the referenceOrientationFrame of the second operand\n");
     }
 
     bool RotationSemantics::check_inverse2(const RotationSemantics& op)
@@ -162,8 +149,13 @@ namespace iDynTree
 
     bool RotationSemantics::inverse2(const RotationSemantics& op, RotationSemantics& result)
     {
+        // check semantics
+        bool status = RotationSemantics::check_inverse2(op);
+        
         result.refOrientationFrame = op.getOrientationFrame();
         result.orientationFrame    = op.getReferenceOrientationFrame();
+        
+        return status;
     }
 
     std::string RotationSemantics::toString() const

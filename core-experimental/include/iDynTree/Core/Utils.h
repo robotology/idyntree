@@ -32,4 +32,5 @@ namespace iDynTree
      *
      */
     void reportError(const char * className, const char* methodName, const char * errorMessage);
+    bool reportErrorIf(bool condition, const char * className, const char* methodName, const char * errorMessage);
 }
