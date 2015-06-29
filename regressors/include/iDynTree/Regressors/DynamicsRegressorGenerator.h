@@ -32,7 +32,7 @@ private:
     struct DynamicsRegressorGeneratorPrivateAttributes;
     DynamicsRegressorGeneratorPrivateAttributes * pimpl;
 
-    // copy is disable for the moment
+    // copy is disabled for the moment
     DynamicsRegressorGenerator(const DynamicsRegressorGenerator & other);
     DynamicsRegressorGenerator& operator=(const DynamicsRegressorGenerator& other);
 

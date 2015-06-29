@@ -2048,7 +2048,7 @@ int DynamicRegressorGenerator::addBaseRegressorRows()
 bool DynamicRegressorGenerator::configure()
 {
     bool ok = true;
-    for(int subRegr=0; subRegr < regressors_ptrs.size(); subRegr++ )
+    for(unsigned int subRegr=0; subRegr < regressors_ptrs.size(); subRegr++ )
     {
         ok = ok && regressors_ptrs[subRegr]->setGlobalParameters(this->parameters_desc);
     }

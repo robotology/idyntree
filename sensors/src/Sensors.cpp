@@ -60,7 +60,7 @@ void SensorsList::constructor(const SensorsList& other)
     this->pimpl->NamesSensors.resize(NR_OF_SENSOR_TYPES);
     for(int sens_type = 0; sens_type < NR_OF_SENSOR_TYPES; sens_type++ )
     {
-        for(int sens = 0; sens < other.getNrOfSensors((SensorType)sens_type); sens++ )
+        for(unsigned int sens = 0; sens < other.getNrOfSensors((SensorType)sens_type); sens++ )
         {
             this->pimpl->VecSensors[sens_type].push_back(other.pimpl->VecSensors[sens_type][sens]->clone());
             std::string sensor_name = other.getSensor((SensorType)sens_type,sens)->getName();
@@ -88,7 +88,8 @@ void SensorsList::destructor()
 {
     for( int sensor_type = 0; sensor_type < NR_OF_SENSOR_TYPES; sensor_type++ )
     {
-        for( int sensor_index = 0; sensor_index < this->pimpl->VecSensors[sensor_type].size(); sensor_index++ )
+        for(unsigned int sensor_index = 0;
+            sensor_index < this->pimpl->VecSensors[sensor_type].size(); sensor_index++ )
         {
             delete this->pimpl->VecSensors[sensor_type][sensor_index];
         }
@@ -175,7 +176,7 @@ int SensorsList::getSensorIndex(const SensorType& sensor_type, const std::string
 
 Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) const
 {
-    if( sensor_index < getNrOfSensors(sensor_type) )
+    if( sensor_index < (int)getNrOfSensors(sensor_type) )
     {
         return this->pimpl->VecSensors[sensor_type][sensor_index];
     }

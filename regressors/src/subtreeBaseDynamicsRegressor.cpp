@@ -62,7 +62,7 @@ int subtreeBaseDynamicsRegressor::configure()
                 std::cerr << "subtreeBaseDynamicsRegressor::configure error: link "
                           << subtree_leaf_links[i] << " not found " << std::endl;
                 std::cerr << "Link available in the model : " << std::endl;
-                for(int i=0; i < undirected_tree.getNrOfLinks(); i++ )
+                for(unsigned int i=0; i < undirected_tree.getNrOfLinks(); i++ )
                 {
                     std::cerr << undirected_tree.getLink(i)->getName() << std::endl;
                 }

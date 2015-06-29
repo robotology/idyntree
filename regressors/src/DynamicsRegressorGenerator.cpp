@@ -82,6 +82,8 @@ DynamicsRegressorGenerator& DynamicsRegressorGenerator::operator=(const Dynamics
     */
     // copyng the class is disable until we get rid of the legacy implementation
     assert(false);
+
+    return *this;
 }
 
 DynamicsRegressorGenerator::~DynamicsRegressorGenerator()
@@ -339,7 +341,7 @@ std::string DynamicsRegressorGenerator::getDescriptionOfDegreesOfFreedom()
 {
     std::stringstream ss;
 
-    for(int dof = 0; dof < this->getNrOfDegreesOfFreedom(); dof++ )
+    for(unsigned int dof = 0; dof < this->getNrOfDegreesOfFreedom(); dof++ )
     {
         ss << "DOF Index: " << dof << " Name: " <<  this->getDescriptionOfDegreeOfFreedom(dof) << std::endl;
     }
