@@ -6,8 +6,8 @@ compiler:
 
 env:
 # set the CMAKE_PREFIX_PATH enviroment variable to get software installed by the superbuild
-  - TRAVIS_BUILD_TYPE=Debug, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", CMAKE_PREFIX_PATH="/home/travis/build/robotology-playground/codyco-superbuild/build/install"
-  - TRAVIS_BUILD_TYPE=Release, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", CMAKE_PREFIX_PATH="/home/travis/build/robotology-playground/codyco-superbuild/build/install"
+  - TRAVIS_BUILD_TYPE=Debug, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", CMAKE_PREFIX_PATH="/home/travis/build/robotology/codyco-superbuild/build/install"
+  - TRAVIS_BUILD_TYPE=Release, TRAVIS_CMAKE_GENERATOR="Unix Makefiles", CMAKE_PREFIX_PATH="/home/travis/build/robotology/codyco-superbuild/build/install"
 
 matrix:
   allow_failures:
@@ -42,8 +42,8 @@ before_script:
   - pwd
   - cd ../..
   # deal with TinyXML linking problems
-  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/travis/build/robotology-playground/codyco-superbuild/build/install/lib
-  - ls /home/travis/build/robotology-playground/codyco-superbuild/build/install/lib
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/travis/build/robotology/codyco-superbuild/build/install/lib
+  - ls /home/travis/build/robotology/codyco-superbuild/build/install/lib
   - echo $LD_LIBRARY_PATH
   - sudo ldconfig
   # Prepare iDynTree build
