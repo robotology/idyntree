@@ -74,6 +74,10 @@ namespace iDynTree
          void setCoordinateFrame(int _coordinateFrame);
         ///@}
 
+        /**
+         * Semantics operations
+         * Compute the semantics of the result given the semantics of the operands.
+         */
         bool changePoint(const PositionSemantics & newPoint);
         bool changeRefPoint(const PositionSemantics & newRefPoint);
         bool changeCoordinateFrame(const RotationSemantics & newCoordinateFrame);

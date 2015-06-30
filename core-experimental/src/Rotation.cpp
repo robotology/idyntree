@@ -92,7 +92,7 @@ namespace iDynTree
     Position Rotation::convertToNewCoordFrame(const Position & other) const
     {
         PositionSemantics resultSemantics;
-        assert( this->semantics.convertToNewCoordFrame(other.getSemantics(), resultSemantics) );
+        iDynTreeAssert( this->semantics.convertToNewCoordFrame(other.getSemantics(), resultSemantics) );
         return Position(this->RotationRaw::convertToNewCoordFrame(other), resultSemantics);
     }
     

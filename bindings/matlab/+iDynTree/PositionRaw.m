@@ -43,20 +43,14 @@ classdef PositionRaw < iDynTree.IVector
     function varargout = changeRefPoint(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(59,'PositionRaw_changeRefPoint',self,varargin{:});
     end
-    function varargout = plus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(62,'PositionRaw_plus',self,varargin{:});
-    end
-    function varargout = minus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(63,'PositionRaw_minus',self,varargin{:});
-    end
-    function varargout = uminus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(64,'PositionRaw_uminus',self,varargin{:});
+    function varargout = changeCoordinateFrame(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(60,'PositionRaw_changeCoordinateFrame',self,varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(65,'PositionRaw_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(63,'PositionRaw_toString',self,varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(66,'PositionRaw_display',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(64,'PositionRaw_display',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -79,10 +73,10 @@ classdef PositionRaw < iDynTree.IVector
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(60,'PositionRaw_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(61,'PositionRaw_compose',varargin{:});
     end
     function varargout = inverse(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(61,'PositionRaw_inverse',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(62,'PositionRaw_inverse',varargin{:});
     end
   end
 end

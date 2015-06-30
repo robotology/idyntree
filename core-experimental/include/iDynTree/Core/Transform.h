@@ -120,12 +120,14 @@ namespace iDynTree
         static Wrench   transform(const Transform & op1, const Wrench   & op2);
         static Twist    transform(const Transform & op1, const Twist    & op2);
 
-        /** overloaded operators **/
+        /**
+         * overloaded operators
+         */
         Transform operator*(const Transform & other) const;
         Transform inverse() const;
-        Position operator*(const Position & op2) const;
-        Wrench   operator*(const Wrench & op2) const;
-        Twist    operator*(const Twist  & op2) const;
+        Position operator*(const Position & other) const;
+        Wrench   operator*(const Wrench & other) const;
+        Twist    operator*(const Twist  & other) const;
 
         /** @name Output helpers.
          *  Output helpers.

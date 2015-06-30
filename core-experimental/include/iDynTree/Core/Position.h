@@ -90,6 +90,9 @@ namespace iDynTree
         static Position compose(const Position & op1, const Position & op2);
         static Position inverse(const Position & op);
         
+        /**
+         * overloaded operators
+         */
         Position operator+(const Position &other) const;
         Position operator-(const Position &other) const;
         Position operator-() const;

@@ -35,17 +35,23 @@ namespace iDynTree
     class SpatialMotionVectorRaw: public Vector6
     {
     public:
+        /** 
+         * constructors
+         */
         SpatialMotionVectorRaw();
         SpatialMotionVectorRaw(const double* in_data, const unsigned int in_size);
         SpatialMotionVectorRaw(const SpatialMotionVectorRaw & other);
         virtual ~SpatialMotionVectorRaw();
 
+        /* Geometric operations */
         const SpatialMotionVectorRaw & changePoint(const PositionRaw & newPoint);
         const SpatialMotionVectorRaw & changeCoordFrame(const RotationRaw & newCoordFrame);
         static SpatialMotionVectorRaw compose(const SpatialMotionVectorRaw & op1, const SpatialMotionVectorRaw & op2);
         static SpatialMotionVectorRaw inverse(const SpatialMotionVectorRaw & op);
 
         double dot(const SpatialForceVectorRaw& other) const;
+        
+        /** overloaded operators **/
         SpatialMotionVectorRaw operator+(const SpatialMotionVectorRaw &other) const;
         SpatialMotionVectorRaw operator-(const SpatialMotionVectorRaw &other) const;
         SpatialMotionVectorRaw operator-() const;

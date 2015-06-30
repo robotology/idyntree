@@ -45,7 +45,7 @@ namespace iDynTree
         RotationSemantics();
 
         /**
-         * Constructor for initializing semantics
+         * Constructor: initialize semantics from individual parameters
          *
          */
         RotationSemantics(int _orientationFrame, int _refOrientationFrame);
@@ -70,7 +70,8 @@ namespace iDynTree
         int getCoordinateFrame() const;
         void setOrientationFrame(int _orientationFrame);
         void setReferenceOrientationFrame(int _refOrientationFrame);
-        ///@}
+        void setCoordinateFrame(int _coordinateFrame);
+    ///@}
         
         /**
          * @name Semantics operations

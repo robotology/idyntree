@@ -29,9 +29,9 @@ namespace iDynTree
 
     RotationSemantics::RotationSemantics(const RotationSemantics& other)
     {
-        this->orientationFrame = other.orientationFrame;
-        this->refOrientationFrame = other.refOrientationFrame;
-        this->coordinateFrame = other.coordinateFrame;
+        this->setOrientationFrame(other.getOrientationFrame());
+        this->setReferenceOrientationFrame(other.getReferenceOrientationFrame());
+        this->setCoordinateFrame(other.getCoordinateFrame());
     }
 
     RotationSemantics::~RotationSemantics()
@@ -61,8 +61,12 @@ namespace iDynTree
 
     void RotationSemantics::setReferenceOrientationFrame(int _refOrientationFrame)
     {
-        this->refOrientationFrame = _refOrientationFrame;
-        this->coordinateFrame = _refOrientationFrame;
+        this->refOrientationFrame = this->coordinateFrame = _refOrientationFrame;
+    }
+    
+    void RotationSemantics::setCoordinateFrame(int _coordinateFrame)
+    {
+        this->refOrientationFrame = this->coordinateFrame = _coordinateFrame;
     }
     
     bool RotationSemantics::check_changeOrientFrame(const RotationSemantics& newOrientFrame)
@@ -104,7 +108,7 @@ namespace iDynTree
         bool status = this->check_changeOrientFrame(newOrientFrame);
         
         // set new semantics
-        this->orientationFrame = newOrientFrame.orientationFrame;
+        this->setOrientationFrame(newOrientFrame.getOrientationFrame());
 
         return status;
     }
@@ -115,7 +119,7 @@ namespace iDynTree
         bool status = this->check_changeRefOrientFrame(newRefOrientFrame);
         
         // set new semantics
-        this->refOrientationFrame = newRefOrientFrame.refOrientationFrame;
+        this->setReferenceOrientationFrame(newRefOrientFrame.getReferenceOrientationFrame());
         
         return status;
     }
@@ -126,6 +130,7 @@ namespace iDynTree
         bool status = this->check_convertToNewCoordFrame(other);
         
         // set new semantics
+        result = other;
         result.setCoordinateFrame(this->getCoordinateFrame());
         
         return status;
@@ -137,8 +142,8 @@ namespace iDynTree
         bool status = RotationSemantics::check_compose(op1, op2);
         
         // set new semantics
-        result.refOrientationFrame = op1.getReferenceOrientationFrame();
-        result.orientationFrame    = op2.getOrientationFrame();
+        result.setReferenceOrientationFrame(op1.getReferenceOrientationFrame());
+        result.setOrientationFrame(op2.getOrientationFrame());
         
         return status;
     }
@@ -148,8 +153,8 @@ namespace iDynTree
         // check semantics
         bool status = RotationSemantics::check_inverse2(op);
         
-        result.refOrientationFrame = op.getOrientationFrame();
-        result.orientationFrame    = op.getReferenceOrientationFrame();
+        result.setReferenceOrientationFrame(op.getOrientationFrame());
+        result.setOrientationFrame(op.getReferenceOrientationFrame());
         
         return status;
     }

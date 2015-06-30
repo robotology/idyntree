@@ -86,6 +86,9 @@ namespace iDynTree
          */
         double * data();
 
+        /**
+         * Geometric operations.
+         */
         const RotationRaw & changeOrientFrame(const RotationRaw & newOrientFrame);
         const RotationRaw & changeRefOrientFrame(const RotationRaw & newRefOrientFrame);
         static RotationRaw compose(const RotationRaw & op1, const RotationRaw & op2);
@@ -95,7 +98,9 @@ namespace iDynTree
         SpatialForceVectorRaw convertToNewCoordFrame(const SpatialForceVectorRaw & other) const;
 
 
-        /** overloaded operators **/
+        /**
+         * overloaded operators
+         */
         RotationRaw operator*(const RotationRaw & other) const;
         RotationRaw inverse() const;
         PositionRaw operator*(const PositionRaw & other) const;

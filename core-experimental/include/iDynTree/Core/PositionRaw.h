@@ -47,7 +47,7 @@ namespace iDynTree
         PositionRaw(const PositionRaw & other);
         
         /**
-         * Denstructor
+         * Destructor
          */
         virtual ~PositionRaw();
         
@@ -88,6 +88,9 @@ namespace iDynTree
         void zero();
         
         
+        /**
+         * Geometric operations
+         */
         const PositionRaw & changePoint(const PositionRaw & newPoint);
         const PositionRaw & changeRefPoint(const PositionRaw & newRefPoint);
         const PositionRaw & changeCoordinateFrame(const RotationRaw & newCoordinateFrame);

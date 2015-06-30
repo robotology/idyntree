@@ -87,7 +87,7 @@ namespace iDynTree
         const RotationSemantics& getSemantics() const;
 
         /**
-         * Geometric operation.
+         * Geometric operations.
          * For the inverse2() operation, both the forward and the inverse geometric relations have to
          * be expressed in the reference orientation frame!!
          * 
@@ -101,7 +101,9 @@ namespace iDynTree
         Wrench convertToNewCoordFrame(const Wrench & other) const;
 
 
-        /** overloaded operators **/
+        /**
+          * overloaded operators
+          */
         Rotation operator*(const Rotation & other) const;
         Rotation inverse() const;
         Position operator*(const Position & other) const;
