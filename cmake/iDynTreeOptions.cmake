@@ -26,6 +26,9 @@ endif()
 # Turn on bindings compilation.
 option(IDYNTREE_COMPILE_BINDINGS "Compile iDynTree bindings" FALSE)
 
+#########################################################################
+# Turn on compilation of geometrical relations semantics check.
+option(IDYNTREE_USES_SEMANTICS "Compile iDynTree semantics check" FALSE)
 
 #########################################################################
 # Deal with RPATH
@@ -51,3 +54,12 @@ endif()
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC)
+
+# Compile flags definitions for Semantic checks
+if(IDYNTREE_COMPILE_BINDINGS)
+    add_definitions(-DIDYNTREE_COMPILE_BINDINGS)
+endif(IDYNTREE_COMPILE_BINDINGS)
+
+if(IDYNTREE_USES_SEMANTICS)
+    add_definitions(-DIDYNTREE_USES_SEMANTICS)
+endif(IDYNTREE_USES_SEMANTICS)

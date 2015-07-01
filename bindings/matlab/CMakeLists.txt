@@ -32,8 +32,8 @@ macro(SWIG_COMPILE_MODULE name language)
 endmacro()
 
 # Find MATLAB
-find_package(Matlab 
-             REQUIRED 
+find_package(Matlab
+             REQUIRED
              MX_LIBRARY)
 
 include_directories(${Matlab_INCLUDE_DIRS})
@@ -48,6 +48,7 @@ if(IDYNTREE_GENERATE_MATLAB)
   set_source_files_properties(../iDynTree.i PROPERTIES CPLUSPLUS ON)
   # generate files in the source directory, so we can commit it
   set(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_SOURCE_DIR})
+  #set(CMAKE_SWIG_FLAGS "-redirectoutput")
   swig_generate_module(${modulename} matlab ../iDynTree.i)
   add_custom_command(
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
