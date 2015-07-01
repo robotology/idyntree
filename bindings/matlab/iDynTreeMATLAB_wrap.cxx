@@ -961,7 +961,7 @@ SWIGRUNTIME void SWIG_Matlab_SetModule(void *clientdata, swig_module_info *point
 
 #ifdef __cplusplus
 #include <streambuf>
-#include <ostream>
+#include <iostream>
 namespace swig {
   // Stream buffer to allow redirecting output to MATLAB
   class SWIG_Matlab_streambuf : public std::streambuf {
@@ -15942,6 +15942,8 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   char cmd[256];
   if (--argc < 0 || mxGetString(*argv++, cmd, sizeof(cmd)))
     mexErrMsgTxt("Second input should be a command string less than 256 characters long.");
+  std::streambuf *cout_backup = std::cout.rdbuf(&swig::SWIG_Matlab_buf);
+  std::streambuf *cerr_backup = std::cerr.rdbuf(&swig::SWIG_Matlab_buf);
   int name_ok=0, id_exists=1, flag;
   switch(fcn_id) {
   case 0: if ((name_ok=!strcmp("swigConstant",cmd))) flag=swigConstant(resc,resv,argc,(mxArray**)(argv)); break;
@@ -16247,6 +16249,8 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 300: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace",cmd))) flag=_wrap_DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
   default: id_exists=0;
   }
+  std::cout.rdbuf(cout_backup);
+  std::cerr.rdbuf(cerr_backup);
   if (!id_exists) {
     mexErrMsgIdAndTxt("SWIG:RuntimeError","No function id %d.",fcn_id);
   }
