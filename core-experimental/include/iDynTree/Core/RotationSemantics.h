@@ -24,7 +24,20 @@ namespace iDynTree
     protected:
         int orientationFrame;
         int refOrientationFrame;
+        int coordinateFrame;
 
+        /**
+         * @name Semantics checkers
+         * Check if a given operation is possible or not, given the semantics of the operators.
+         */
+        ///@{
+        bool check_changeOrientFrame(const RotationSemantics & newOrientFrame);
+        bool check_changeRefOrientFrame(const RotationSemantics & newRefOrientFrame);
+        bool check_convertToNewCoordFrame(const PositionSemantics & op) const;
+        static bool check_compose(const RotationSemantics & op1, const RotationSemantics & op2);
+        static bool check_inverse2(const RotationSemantics & op);
+        ///@}
+        
     public:
         /**
          * Default constructor: initialize all semantics to unknown;
@@ -32,7 +45,7 @@ namespace iDynTree
         RotationSemantics();
 
         /**
-         * Constructor for initializing semantics
+         * Constructor: initialize semantics from individual parameters
          *
          */
         RotationSemantics(int _orientationFrame, int _refOrientationFrame);
@@ -46,45 +59,30 @@ namespace iDynTree
          * Denstructor
          */
         ~RotationSemantics();
-
-         /**
-          * @name Semantics setters and getters.
-          *  Semantics setters and getters.
-          */
-         ///@{
-         int getOrientationFrame() const;
-         int getReferenceOrientationFrame() const;
-
-         void setOrientationFrame(int _orientationFrame);
-         void setReferenceOrientationFrame(int _refOrientationFrame);
-        ///@}
-
+        
         /**
-         * @name Semantics checkers
-         * Check if a given operation is possible or not, given the semantics of the operators.
+         * @name Semantics setters and getters.
+         *  Semantics setters and getters.
          */
         ///@{
-        bool check_changeOrientFrame(const RotationSemantics & newOrientFrame);
-        bool check_changeRefOrientFrame(const RotationSemantics & newRefOrientFrame);
-        static bool check_compose(const RotationSemantics & op1, const RotationSemantics & op2);
-        static bool check_inverse2(const RotationSemantics & op);
-        static bool check_transform(const RotationSemantics & op1, const PositionSemantics & op2);
-        ///@}
-
+        int getOrientationFrame() const;
+        int getReferenceOrientationFrame() const;
+        int getCoordinateFrame() const;
+        void setOrientationFrame(int _orientationFrame);
+        void setReferenceOrientationFrame(int _refOrientationFrame);
+        void setCoordinateFrame(int _coordinateFrame);
+    ///@}
+        
         /**
          * @name Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
          */
         ///@{
-        const RotationSemantics & changeOrientFrame(const RotationSemantics & newOrientFrame);
-        const RotationSemantics & changeRefOrientFrame(const RotationSemantics & newRefOrientFrame);
-
-        static RotationSemantics compose(const RotationSemantics & op1, const RotationSemantics & op2);
-        static void compose(const RotationSemantics & op1, const RotationSemantics & op2, RotationSemantics & result);
-        static RotationSemantics inverse2(const RotationSemantics & op);
-        static void inverse2(const RotationSemantics & op, RotationSemantics & result);
-        static PositionSemantics transform(const RotationSemantics & op1, const PositionSemantics & op2);
-        static void transform(const RotationSemantics & op, const PositionSemantics & op2, PositionSemantics & result);
+        bool changeOrientFrame(const RotationSemantics & newOrientFrame);
+        bool changeRefOrientFrame(const RotationSemantics & newRefOrientFrame);
+        bool convertToNewCoordFrame(const PositionSemantics & other, PositionSemantics & result) const;
+        static bool compose(const RotationSemantics & op1, const RotationSemantics & op2, RotationSemantics & result);
+        static bool inverse2(const RotationSemantics & op, RotationSemantics & result);
         ///@}
 
 
