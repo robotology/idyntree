@@ -27,6 +27,11 @@ namespace iDynTree
         Wrench(const SpatialForceVectorRaw & other);
         Wrench(const Wrench & other);
         virtual ~Wrench();
+
+        // overloaded operators
+        Wrench operator+(const Wrench &other) const;
+        Wrench operator-(const Wrench &other) const;
+        Wrench operator-() const;
     };
 }
 

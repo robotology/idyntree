@@ -12,7 +12,7 @@
 
 namespace iDynTree
 {
-    class PositionRaw;
+    class Position;
 
     /**
      * Class providing the raw coordinates for a spatial inertia, i.e.
@@ -45,6 +45,27 @@ namespace iDynTree
         SpatialInertiaRaw(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
         SpatialInertiaRaw(const SpatialInertiaRaw & other);
         virtual ~SpatialInertiaRaw();
+
+        /** multiplication operator
+         *
+         * overloading happens on proper classes
+         *
+         */
+
+
+        /**
+         * Getter functions
+         *
+         * \note for preserving consistency, no setters are implemented..
+         *       if you want to modify a spatial inertia create a new one,
+         *       and assign it to the spatial inertia that you want modify.
+         *       Given that no memory allocation happens it should be still
+         *       efficient.
+         */
+        double getMass() const;
+        PositionRaw getCenterOfMass() const;
+        RotationalInertiaRaw getRotationalInertiaWrtFrameOrigin() const;
+        RotationalInertiaRaw getRotationalInertiaWrtCenterOfMass() const;
 
         /** reset to zero (i.e. the inertia of body with zero pass) the SpatialInertia */
         void zero();

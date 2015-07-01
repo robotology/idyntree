@@ -27,6 +27,11 @@ namespace iDynTree
         Twist(const SpatialMotionVectorRaw& other);
         Twist(const Twist& other);
         virtual ~Twist();
+
+        /** overloaded operators **/
+        Twist operator+(const Twist &other) const;
+        Twist operator-(const Twist &other) const;
+        Twist operator-() const;
     };
 }
 

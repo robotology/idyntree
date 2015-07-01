@@ -110,6 +110,16 @@ void RotationalInertiaRaw::zero()
     return;
 }
 
+const double * RotationalInertiaRaw::data() const
+{
+    return this->m_data;
+}
+
+double * RotationalInertiaRaw::data()
+{
+    return this->m_data;
+}
+
 
 
 }

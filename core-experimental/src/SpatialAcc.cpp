@@ -5,53 +5,53 @@
  *
  */
 
-#include "Twist.h"
+#include "SpatialAcc.h"
 
 namespace iDynTree
 {
 
-Twist::Twist()
+SpatialAcc::SpatialAcc()
 {
 
 }
 
-Twist::Twist(const double* in_data,
+SpatialAcc::SpatialAcc(const double* in_data,
              const unsigned int in_size):
              SpatialMotionVectorRaw(in_data, in_size)
 {
 
 }
 
-Twist::Twist(const SpatialMotionVectorRaw& other):
+SpatialAcc::SpatialAcc(const SpatialMotionVectorRaw& other):
              SpatialMotionVectorRaw(other)
 {
 
 }
 
 
-Twist::Twist(const Twist& other):
+SpatialAcc::SpatialAcc(const SpatialAcc& other):
             SpatialMotionVectorRaw(other.data(),6)
 {
 
 }
 
 
-Twist::~Twist()
+SpatialAcc::~SpatialAcc()
 {
 
 }
 
-Twist Twist::operator+(const Twist& other) const
+SpatialAcc SpatialAcc::operator+(const SpatialAcc& other) const
 {
     return compose(*this,other);
 }
 
-Twist Twist::operator-() const
+SpatialAcc SpatialAcc::operator-() const
 {
     return inverse(*this);
 }
 
-Twist Twist::operator-(const Twist& other) const
+SpatialAcc SpatialAcc::operator-(const SpatialAcc& other) const
 {
     return compose(*this,inverse(other));
 }

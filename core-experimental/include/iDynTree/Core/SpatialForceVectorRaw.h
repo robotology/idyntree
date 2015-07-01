@@ -47,10 +47,6 @@ namespace iDynTree
 
         double dot(const SpatialMotionVectorRaw & other) const;
 
-        SpatialForceVectorRaw operator+(const SpatialForceVectorRaw &other) const;
-        SpatialForceVectorRaw operator-(const SpatialForceVectorRaw &other) const;
-        SpatialForceVectorRaw operator-() const;
-
         /** constructor helpers */
         static SpatialForceVectorRaw Zero();
     };

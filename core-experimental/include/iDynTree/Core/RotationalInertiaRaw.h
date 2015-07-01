@@ -55,6 +55,9 @@ namespace iDynTree
         unsigned int rows() const;
         unsigned int cols() const;
         ///@}
+
+        double * data();
+        const double * data() const;
     };
 }
 
