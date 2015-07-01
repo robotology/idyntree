@@ -27,18 +27,24 @@ namespace iDynTree
         int orientationFrame;
         int refPoint;
         int refOrientationFrame;
+        int coordinateFrame;
 
     public:
         /**
-         * Default constructor: initialy all semantics to unknown
+         * Default constructor: initialize all semantics to unknown
          */
         TransformSemantics();
+
+        /**
+         * constructor: initialize all semantics from individual parameters.
+         */
+        TransformSemantics(int _orientationFrame, int _refOrientationFrame);
 
         /**
          * Copy constructor: create a TransformSemantics from a TransformSemantics.
          */
         TransformSemantics(const TransformSemantics & other);
-
+        
 
         /**
          * Denstructor
@@ -75,6 +81,7 @@ namespace iDynTree
         int getOrientationFrame() const;
         int getReferencePoint() const;
         int getReferenceOrientationFrame() const;
+        int getCoordinateFrame() const;
 
         void setPoint(int _point);
         void setOrientationFrame(int _orientationFrame);
@@ -82,7 +89,9 @@ namespace iDynTree
         void setReferenceOrientationFrame(int _refOrientationFrame);
         ///@}
 
-        // semantics operation
+        /**
+         * semantics operation
+         */
         static bool check_compose(const TransformSemantics & op1, const TransformSemantics & op2);
         static bool check_inverse2(const TransformSemantics & orient);
         static bool check_transform(const TransformSemantics & op1, const PositionSemantics & op2);
@@ -94,7 +103,9 @@ namespace iDynTree
         static PositionSemantics transform(const TransformSemantics & op1, const PositionSemantics & op2);
         static void transform(const TransformSemantics & op1, const PositionSemantics & op2, PositionSemantics & result);
 
-        /** overloaded operators **/
+        /**
+         * overloaded operators
+         */
         TransformSemantics operator*(const TransformSemantics & other) const;
         TransformSemantics inverse() const;
         PositionSemantics operator*(const PositionSemantics & op2) const;

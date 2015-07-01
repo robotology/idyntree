@@ -19,6 +19,8 @@ namespace iDynTree
 
     /**
      * Class providing the raw coordinates for iDynTree::Transform class.
+     * This class matches the specific representation of a pose as an 
+     * homogeneous transformatin matrix.
      *
      * \ingroup iDynTreeCore
      */
@@ -45,25 +47,31 @@ namespace iDynTree
         TransformRaw(const TransformRaw & other);
 
         /**
-         * Denstructor
+         * Destructor
          */
         virtual ~TransformRaw();
 
-        // semantics operation
+        /**
+         * Geometric operations.
+         */
         static TransformRaw compose(const TransformRaw & op1, const TransformRaw & op2);
         static TransformRaw inverse2(const TransformRaw & trans);
         static PositionRaw transform(const TransformRaw & op1, const PositionRaw & op2);
         static SpatialMotionVectorRaw transform(const TransformRaw & op1, const SpatialMotionVectorRaw & op2);
         static SpatialForceVectorRaw transform(const TransformRaw & op1, const SpatialForceVectorRaw & op2);
 
-        /** overloaded operators **/
+        /**
+         * overloaded operators
+         */
         TransformRaw operator*(const TransformRaw & other) const;
         TransformRaw inverse() const;
         PositionRaw operator*(const PositionRaw & op2) const;
         SpatialMotionVectorRaw operator*(const SpatialMotionVectorRaw & op2) const;
         SpatialForceVectorRaw operator*(const SpatialForceVectorRaw & op2) const;
 
-        /** constructor helpers */
+        /**
+         * constructor helpers
+         */
         static TransformRaw Identity();
 
         /** @name Output helpers.
