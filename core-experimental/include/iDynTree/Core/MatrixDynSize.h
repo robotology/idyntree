@@ -87,7 +87,7 @@ namespace iDynTree
 
         /**
          * @name Matrix interface methods.
-         * Methods exposing a vector-like interface to RotationRaw.
+         * Methods exposing a matrix-like interface to MatrixDynSize.
          *
          * \warning Notice that using this methods you can damage the underlyng rotation matrix.
          *          In doubt, don't use them and rely on more high level functions.

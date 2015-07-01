@@ -16,7 +16,9 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/Rotation.h
                               include/iDynTree/Core/RotationRaw.h
                               include/iDynTree/Core/RotationSemantics.h
+                              include/iDynTree/Core/RotationalInertiaRaw.h
                               include/iDynTree/Core/SpatialForceVectorRaw.h
+                              include/iDynTree/Core/SpatialInertiaRaw.h
                               include/iDynTree/Core/SpatialMotionVectorRaw.h
                               include/iDynTree/Core/Transform.h
                               include/iDynTree/Core/TransformRaw.h
@@ -37,8 +39,10 @@ set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/Rotation.cpp
                               src/RotationRaw.cpp
                               src/RotationSemantics.cpp
+                              src/RotationalInertiaRaw.cpp
                               src/SpatialForceVectorRaw.cpp
                               src/SpatialMotionVectorRaw.cpp
+                              src/SpatialInertiaRaw.cpp
                               src/Transform.cpp
                               src/TransformRaw.cpp
                               src/TransformSemantics.cpp

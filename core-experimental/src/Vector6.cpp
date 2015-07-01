@@ -75,7 +75,7 @@ double Vector6::operator()(unsigned int index) const
 
 double Vector6::getVal(const unsigned int index) const
 {
-    if( index > this->size() )
+    if( index >= this->size() )
     {
         reportError("Vector6","getVal","index out of bounds");
         return 0.0;
@@ -86,7 +86,7 @@ double Vector6::getVal(const unsigned int index) const
 
 bool Vector6::setVal(const unsigned int index, const double new_el)
 {
-    if( index > this->size() )
+    if( index >= this->size() )
     {
         reportError("Vector6","getVal","index out of bounds");
         return false;
