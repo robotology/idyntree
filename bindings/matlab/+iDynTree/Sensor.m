@@ -2,27 +2,27 @@ classdef Sensor < SwigRef
   methods
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(229,'delete_Sensor',self);
+        iDynTreeMATLAB_wrap(248,'delete_Sensor',self);
         self.swigOwn=false;
       end
     end
     function varargout = getName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(230,'Sensor_getName',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(249,'Sensor_getName',self,varargin{:});
     end
     function varargout = getSensorType(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(231,'Sensor_getSensorType',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(250,'Sensor_getSensorType',self,varargin{:});
     end
     function varargout = getParent(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(232,'Sensor_getParent',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(251,'Sensor_getParent',self,varargin{:});
     end
     function varargout = getParentIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(233,'Sensor_getParentIndex',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(252,'Sensor_getParentIndex',self,varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(234,'Sensor_isValid',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(253,'Sensor_isValid',self,varargin{:});
     end
     function varargout = clone(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(235,'Sensor_clone',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(254,'Sensor_clone',self,varargin{:});
     end
     function self = Sensor(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
