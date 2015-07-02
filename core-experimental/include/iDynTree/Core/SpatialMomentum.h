@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef IDYNTREE_WRENCH_H
-#define IDYNTREE_WRENCH_H
+#ifndef IDYNTREE_SPATIALMOMENTUM_H
+#define IDYNTREE_SPATIALMOMENTUM_H
 
 #include "SpatialForceVectorRaw.h"
 

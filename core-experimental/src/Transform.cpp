@@ -10,8 +10,12 @@
 #include "Rotation.h"
 #include "Twist.h"
 #include "Wrench.h"
+#include "SpatialMomentum.h"
+#include "SpatialAcc.h"
+#include "SpatialInertia.h"
 
 #include "Utils.h"
+
 #include <cassert>
 #include <iostream>
 #include <sstream>
@@ -148,7 +152,37 @@ Wrench Transform::transform(const Transform& op1, const Wrench& op2)
 {
     Wrench result;
 
+    // \todo TODO add semantics to Wrench
+    result = TransformRaw::transform(op1,op2);
+
+    return result;
+}
+
+SpatialMomentum Transform::transform(const Transform& op1, const SpatialMomentum& op2)
+{
+    SpatialMomentum result;
+
     // \todo TODO add semantics to Twist
+    result = TransformRaw::transform(op1,op2);
+
+    return result;
+}
+
+SpatialAcc Transform::transform(const Transform& op1, const SpatialAcc& op2)
+{
+    SpatialAcc result;
+
+    // \todo TODO add semantics to Wrench
+    result = TransformRaw::transform(op1,op2);
+
+    return result;
+}
+
+SpatialInertia Transform::transform(const Transform& op1, const SpatialInertia& op2)
+{
+    SpatialInertia result;
+
+    // \todo TODO add semantics to Wrench
     result = TransformRaw::transform(op1,op2);
 
     return result;
@@ -178,6 +212,21 @@ Twist Transform::operator*(const Twist& op2) const
 }
 
 Wrench Transform::operator*(const Wrench& op2) const
+{
+    return Transform::transform(*this,op2);
+}
+
+SpatialMomentum Transform::operator*(const SpatialMomentum& op2) const
+{
+    return Transform::transform(*this,op2);
+}
+
+SpatialAcc Transform::operator*(const SpatialAcc& op2) const
+{
+    return Transform::transform(*this,op2);
+}
+
+SpatialInertia Transform::operator*(const SpatialInertia& op2) const
 {
     return Transform::transform(*this,op2);
 }

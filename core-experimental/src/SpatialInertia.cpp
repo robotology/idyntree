@@ -6,6 +6,10 @@
  */
 
 #include "SpatialInertia.h"
+#include "SpatialMomentum.h"
+#include "Twist.h"
+#include "SpatialAcc.h"
+#include "Wrench.h"
 
 #include <cassert>
 #include <iostream>
@@ -16,7 +20,7 @@ namespace iDynTree
 
 SpatialInertia::SpatialInertia()
 {
-    SpatialInertiaRaw()::zero();
+    SpatialInertiaRaw::zero();
 }
 
 SpatialInertia::SpatialInertia(const double mass,
@@ -37,7 +41,7 @@ SpatialInertia::SpatialInertia(const SpatialInertia& other)
 
 }
 
-SpatialInertia::~SpatialAcc()
+SpatialInertia::~SpatialInertia()
 {
 
 }

@@ -32,7 +32,8 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/VectorDynSize.h
                               include/iDynTree/Core/Wrench.h)
 
-#file (GLOB IDYNTREE_BASE_PRIVATE_INCLUDES)
+set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h)
+
 
 set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/MatrixDynSize.cpp
@@ -48,6 +49,7 @@ set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/SpatialMomentum.cpp
                               src/SpatialMotionVectorRaw.cpp
                               src/SpatialInertiaRaw.cpp
+                              src/SpatialInertia.cpp
                               src/Transform.cpp
                               src/TransformRaw.cpp
                               src/TransformSemantics.cpp
@@ -55,7 +57,8 @@ set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/Utils.cpp
                               src/Vector6.cpp
                               src/VectorDynSize.cpp
-                              src/Wrench.cpp)
+                              src/Wrench.cpp
+                              src/PrivateUtils.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})

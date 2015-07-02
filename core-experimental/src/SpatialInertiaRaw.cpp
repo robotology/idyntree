@@ -6,8 +6,11 @@
  */
 
 #include "SpatialInertiaRaw.h"
+#include "SpatialForceVectorRaw.h"
+#include "SpatialMotionVectorRaw.h"
 #include "PositionRaw.h"
 #include "Utils.h"
+#include "PrivateUtils.h"
 
 #include <Eigen/Dense>
 
@@ -18,28 +21,6 @@
 
 namespace iDynTree
 {
-
-/**
- * Maps a 3d vector to the square of the cross product matrix:
- * v --> (v\times)^2
- * or, if you prefer another notation:
- * v --> S^2(v)
- */
-Eigen::Matrix3d squareCrossProductMatrix(const Eigen::Vector3d & v)
-{
-    Eigen::Matrix3d ret;
-
-    double vSqr[3];
-    vSqr[0] = v[0]*v[0];
-    vSqr[1] = v[1]*v[1];
-    vSqr[2] = v[2]*v[2];
-
-    ret <<  -(vSqr[1]+vSqr[2]),         v[0]*v[1],          v[0]*v[2],
-                    v[0]*v[1], -(vSqr[0]+vSqr[2]),          v[1]*v[2],
-                    v[0]*v[2],          v[1]*v[2], -(vSqr[0]+vSqr[1]);
-
-    return ret;
-}
 
 SpatialInertiaRaw::SpatialInertiaRaw()
 {
@@ -105,6 +86,28 @@ RotationalInertiaRaw SpatialInertiaRaw::getRotationalInertiaWrtCenterOfMass() co
 
     return retComInertia;
 }
+
+SpatialForceVectorRaw SpatialInertiaRaw::multiply(const SpatialMotionVectorRaw& op) const
+{
+    SpatialForceVectorRaw ret;
+
+    // we call this linearForce and angularForce
+    // but please remember that they can also be
+    // linear and angular momentum
+    Eigen::Map<Eigen::Vector3d> linearForce(ret.data());
+    Eigen::Map<Eigen::Vector3d> angularForce(ret.data()+3);
+    Eigen::Map<const Eigen::Vector3d> linearMotion(ret.data());
+    Eigen::Map<const Eigen::Vector3d> angularMotion(ret.data()+3);
+    Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
+    Eigen::Map<const Eigen::Matrix3d> inertia3d(this->m_rotInertia.data());
+
+    // Implementing the 2.63 formula in Featherstone 2008
+    linearForce  = this->m_mass*linearMotion - mcom.cross(angularMotion);
+    angularForce = mcom.cross(linearMotion) + inertia3d*(angularMotion);
+
+    return ret;
+}
+
 
 void SpatialInertiaRaw::zero()
 {

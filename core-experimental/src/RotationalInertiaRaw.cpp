@@ -102,7 +102,7 @@ void RotationalInertiaRaw::zero()
 {
     for(unsigned int r=0; r < RotationalInertiaRawRows; r++ )
     {
-        for(unsigned int c=0; c < RotationalInertiaRawCols; r++ )
+        for(unsigned int c=0; c < RotationalInertiaRawCols; c++ )
         {
             this->operator()(r,c) = 0.0;
         }

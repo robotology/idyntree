@@ -33,10 +33,13 @@
 #include "iDynTree/Core/SpatialMotionVectorRaw.h"
 #include "iDynTree/Core/Twist.h"
 #include "iDynTree/Core/Wrench.h"
+#include "iDynTree/Core/SpatialMomentum.h"
+#include "iDynTree/Core/SpatialAcc.h"
 
 // Inertias
 #include "iDynTree/Core/RotationalInertiaRaw.h"
 #include "iDynTree/Core/SpatialInertiaRaw.h"
+#include "iDynTree/Core/SpatialInertia.h"
 
 // Transformations: Rotation and Transform
 #include "iDynTree/Core/RotationRaw.h"
@@ -72,10 +75,15 @@
 %include "iDynTree/Core/SpatialMotionVectorRaw.h"
 %include "iDynTree/Core/Twist.h"
 %include "iDynTree/Core/Wrench.h"
+%include "iDynTree/Core/SpatialMomentum.h"
+%include "iDynTree/Core/SpatialAcc.h"
+
 
 // Inertias
 %include "iDynTree/Core/RotationalInertiaRaw.h"
 %include "iDynTree/Core/SpatialInertiaRaw.h"
+%include "iDynTree/Core/SpatialInertia.h"
+
 
 // Transformations: Rotation and Transform
 %include "iDynTree/Core/RotationRaw.h"

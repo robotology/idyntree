@@ -32,7 +32,7 @@ namespace iDynTree
         SpatialInertia(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
         SpatialInertia(const SpatialInertiaRaw& other);
         SpatialInertia(const SpatialInertia& other);
-        virtual ~SpatialAcc();
+        virtual ~SpatialInertia();
 
         // overloaded operators
         SpatialMomentum operator*(const Twist &other) const;

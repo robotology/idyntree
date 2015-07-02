@@ -8,11 +8,15 @@
 #include "TransformRaw.h"
 #include "SpatialMotionVectorRaw.h"
 #include "SpatialForceVectorRaw.h"
+#include "SpatialInertiaRaw.h"
 #include "Utils.h"
+#include "PrivateUtils.h"
+
+#include <Eigen/Dense>
+
 #include <cstdio>
 #include <sstream>
 
-#include <Eigen/Dense>
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 typedef Eigen::Matrix<double,6,1> Vector6d;
@@ -121,30 +125,29 @@ SpatialForceVectorRaw TransformRaw::transform(const TransformRaw& op1, const Spa
     return result;
 }
 
-TransformRaw TransformRaw::operator*(const TransformRaw& other) const
+SpatialInertiaRaw TransformRaw::transform(const TransformRaw& op1, const SpatialInertiaRaw& op2)
 {
-    return compose(*this,other);
+    // mass clearly remains the same
+    double newMass = op2.getMass();
+
+    // the com is transformed as any position
+    PositionRaw newCom = TransformRaw::transform(op1,op2.getCenterOfMass());
+
+    // the rotational inertial is rotated and then
+    // the parallel axis theorem applies
+    RotationalInertiaRaw newRotInertia;
+    Eigen::Map<Eigen::Matrix3d> newI(newRotInertia.data());
+    RotationalInertiaRaw oldRotI = op2.getRotationalInertiaWrtFrameOrigin();
+    Eigen::Map<const Eigen::Matrix3d> oldI(oldRotI.data());
+
+    Eigen::Map<const Matrix3dRowMajor> R(op1.rot.data());
+    Eigen::Map<const Eigen::Vector3d> p(op1.pos.data());
+
+    newI =  R*oldI*R.transpose() - newMass*squareCrossProductMatrix(p);
+
+    return SpatialInertiaRaw(newMass,newCom,newRotInertia);
 }
 
-TransformRaw TransformRaw::inverse() const
-{
-    return TransformRaw::inverse2(*this);
-}
-
-PositionRaw TransformRaw::operator*(const PositionRaw& op2) const
-{
-    return TransformRaw::transform(*this,op2);
-}
-
-SpatialMotionVectorRaw TransformRaw::operator*(const SpatialMotionVectorRaw& op2) const
-{
-    return TransformRaw::transform(*this,op2);
-}
-
-SpatialForceVectorRaw TransformRaw::operator*(const SpatialForceVectorRaw& op2) const
-{
-    return TransformRaw::transform(*this,op2);
-}
 
 TransformRaw TransformRaw::Identity()
 {
