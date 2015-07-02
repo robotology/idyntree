@@ -10,7 +10,7 @@ include_directories(${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${orocos
 
 idyntree_add_tool(par2urdf par2urdf.cpp)
 
-if(IDYNTREE_USE_ICUB_MAIN)
+if(IDYNTREE_USES_ICUB_MAIN)
   find_package(YARP)
   find_package(ICUB)
   add_executable(urdf2dh urdf2dh)
