@@ -97,20 +97,36 @@ double SpatialMotionVectorRaw::dot(const SpatialForceVectorRaw& other) const
     return thisData.dot(otherData);
 }
 
-
-SpatialMotionVectorRaw SpatialMotionVectorRaw::operator+(const SpatialMotionVectorRaw& other) const
+SpatialMotionVectorRaw SpatialMotionVectorRaw::cross(const SpatialMotionVectorRaw& other) const
 {
-    return compose(*this,other);
+    SpatialMotionVectorRaw res;
+    Eigen::Map<const Eigen::Vector3d> op1Linear(this->data());
+    Eigen::Map<const Eigen::Vector3d> op1Angular(this->data()+3);
+    Eigen::Map<const Eigen::Vector3d> op2Linear(other.data());
+    Eigen::Map<const Eigen::Vector3d> op2Angular(other.data()+3);
+    Eigen::Map<Eigen::Vector3d> resLinear(res.data());
+    Eigen::Map<Eigen::Vector3d> resAngular(res.data()+3);
+
+    resLinear   =  op1Angular.cross(op2Linear) +  op1Linear.cross(op2Angular);
+    resAngular =                                  op1Angular.cross(op2Angular);
+
+    return res;
 }
 
-SpatialMotionVectorRaw SpatialMotionVectorRaw::operator-() const
+SpatialForceVectorRaw SpatialMotionVectorRaw::cross(const SpatialForceVectorRaw& other) const
 {
-    return inverse(*this);
-}
+    SpatialForceVectorRaw resForce;
+    Eigen::Map<const Eigen::Vector3d> op1VelLinear(this->data());
+    Eigen::Map<const Eigen::Vector3d> op1VelAngular(this->data()+3);
+    Eigen::Map<const Eigen::Vector3d> op2ForceLinear(other.data());
+    Eigen::Map<const Eigen::Vector3d> op2ForceAngular(other.data()+3);
+    Eigen::Map<Eigen::Vector3d> resForceLinear(resForce.data());
+    Eigen::Map<Eigen::Vector3d> resForceAngular(resForce.data()+3);
 
-SpatialMotionVectorRaw SpatialMotionVectorRaw::operator-(const SpatialMotionVectorRaw& other) const
-{
-    return compose(*this,inverse(other));
+    resForceLinear  = op1VelAngular.cross(op2ForceLinear);
+    resForceAngular = op1VelLinear.cross(op2ForceLinear) + op1VelAngular.cross(op2ForceAngular);
+
+    return resForce;
 }
 
 SpatialMotionVectorRaw SpatialMotionVectorRaw::Zero()

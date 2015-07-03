@@ -15,7 +15,7 @@ Wrench::Wrench()
 
 }
 
-Wrench::Wrench(const double* in_data, const unsigned int in_size): 
+Wrench::Wrench(const double* in_data, const unsigned int in_size):
                SpatialForceVectorRaw(in_data, in_size)
 {
 
@@ -38,6 +38,21 @@ Wrench::Wrench(const Wrench& other):
 Wrench::~Wrench()
 {
 
+}
+
+Wrench Wrench::operator+(const Wrench& other) const
+{
+    return compose(*this,other);
+}
+
+Wrench Wrench::operator-() const
+{
+    return inverse(*this);
+}
+
+Wrench Wrench::operator-(const Wrench& other) const
+{
+    return compose(*this,inverse(other));
 }
 
 }

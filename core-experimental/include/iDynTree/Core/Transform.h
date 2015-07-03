@@ -18,6 +18,9 @@ namespace iDynTree
     class Rotation;
     class Wrench;
     class Twist;
+    class SpatialMomentum;
+    class SpatialAcc;
+    class SpatialInertia;
 
     /**
      * Class representation the relative displacement between two different frames.
@@ -119,6 +122,9 @@ namespace iDynTree
         static Position transform(const Transform & op1, const Position & op2);
         static Wrench   transform(const Transform & op1, const Wrench   & op2);
         static Twist    transform(const Transform & op1, const Twist    & op2);
+        static SpatialMomentum transform(const Transform & op1, const SpatialMomentum & op2);
+        static SpatialAcc      transform(const Transform & op1, const SpatialAcc & op2);
+        static SpatialInertia  transform(const Transform & op1, const SpatialInertia & op2);
 
         /**
          * overloaded operators
@@ -128,6 +134,9 @@ namespace iDynTree
         Position operator*(const Position & other) const;
         Wrench   operator*(const Wrench & other) const;
         Twist    operator*(const Twist  & other) const;
+        SpatialMomentum operator*(const SpatialMomentum & other) const;
+        SpatialAcc   operator*(const SpatialAcc & other) const;
+        SpatialInertia operator*(const SpatialInertia  & other) const;
 
         /** @name Output helpers.
          *  Output helpers.
