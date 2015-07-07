@@ -4,9 +4,9 @@ classdef Twist < iDynTree.SpatialMotionVectorRaw
       self@iDynTree.SpatialMotionVectorRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(115,'new_Twist',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(116,'new_Twist',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(115,'new_Twist',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(116,'new_Twist',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,7 +15,7 @@ classdef Twist < iDynTree.SpatialMotionVectorRaw
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(116,'delete_Twist',self);
+        iDynTreeMATLAB_wrap(117,'delete_Twist',self);
         self.swigOwn=false;
       end
     end

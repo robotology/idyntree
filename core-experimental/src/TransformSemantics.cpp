@@ -75,7 +75,7 @@ namespace iDynTree
         return status;
     }
     
-    TransformSemantics & TransformSemantics::operator= (const TransformSemantics & semantics)
+    TransformSemantics & TransformSemantics::operator= (const TransformSemantics & other)
     {
         return *this;
     }

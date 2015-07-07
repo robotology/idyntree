@@ -14,7 +14,8 @@ namespace iDynTree
 {
     class PositionSemantics;
     class RotationSemantics;
-
+    class Transform;
+    
     /**
      * Class providing the semantics for iDynTree::Transform class.
      *
@@ -22,6 +23,12 @@ namespace iDynTree
      */
     class TransformSemantics
     {
+    private:
+        /**
+         * copy assignment operator
+         */
+        TransformSemantics & operator= (const TransformSemantics & other);
+        
     protected:
         PositionSemantics & positionSemantics;
         RotationSemantics & rotationSemantics;
@@ -69,11 +76,6 @@ namespace iDynTree
          * overloaded operators: done through Position and Rotation classes
          */
 
-        /**
-         * copy assignment operator
-         */
-        TransformSemantics & operator= (const TransformSemantics & semantics);
-        
         /** @name Output helpers.
          *  Output helpers.
          */
@@ -82,6 +84,8 @@ namespace iDynTree
 
         std::string reservedToString() const;
         ///@}
+        
+        friend class Transform;
     };
 }
 

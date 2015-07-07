@@ -133,8 +133,6 @@ namespace iDynTree
 
         std::string reservedToString() const;
         ///@}
-        
-        friend TransformSemantics::TransformSemantics(PositionSemantics & position, RotationSemantics & rotation);
     };
 }
 
