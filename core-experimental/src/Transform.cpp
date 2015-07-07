@@ -19,71 +19,28 @@
 namespace iDynTree
 {
 
-Transform::Transform(): TransformRaw()
+Transform::Transform(): pos(),
+                        rot(),
+                        semantics(pos.getSemantics(), rot.getSemantics())
 {
 }
 
-Transform::Transform(const Transform& other): TransformRaw(other),
-                                              semantics(other.getSemantics())
+Transform::Transform(const Rotation& _rot, const Position& origin): pos(origin),
+                                                                    rot(_rot),
+                                                                    semantics(pos.getSemantics(), rot.getSemantics())
 {
 }
 
-Transform::Transform(const TransformRaw& other): TransformRaw(other)
+Transform::Transform(const Transform& other): pos(other.getPosition()),
+                                              rot(other.getRotation()),
+                                              semantics(pos.getSemantics(), rot.getSemantics())
 {
-
 }
-
-Transform::Transform(const Rotation& rot, const Position& origin)
-{
-    // warning: this could cause errors
-    this->setRotation(rot);
-    this->setPosition(origin);
-}
-
+    
 Transform::~Transform()
 {
 
 }
-
-const Position Transform::getPosition() const
-{
-    Position result = this->pos;
-    result.getSemantics().setCoordinateFrame(this->semantics.getReferenceOrientationFrame());
-    result.getSemantics().setPoint(this->semantics.getPoint());
-    result.getSemantics().setReferencePoint(this->semantics.getReferencePoint());
-    return result;
-}
-
-const Rotation Transform::getRotation() const
-{
-    Rotation result = this->rot;
-    result.getSemantics().setOrientationFrame(this->semantics.getOrientationFrame());
-    result.getSemantics().setReferenceOrientationFrame(this->semantics.getReferenceOrientationFrame());
-    return result;
-}
-
-const bool Transform::setPosition(const Position& position)
-{
-    this->pos = position;
-    return this->semantics.setPositionSemantics(position.getSemantics());
-}
-
-const bool Transform::setRotation(const Rotation& rotation)
-{
-    this->rot = rotation;
-    return this->semantics.setRotationSemantics(rotation.getSemantics());
-}
-
-const bool Transform::setPosition(const PositionRaw& position)
-{
-    return setPosition(iDynTree::Position(position));
-}
-
-const bool Transform::setRotation(const RotationRaw& rotation)
-{
-    return setRotation(iDynTree::Rotation(rotation));
-}
-
 
 TransformSemantics& Transform::getSemantics()
 {
@@ -94,64 +51,102 @@ const TransformSemantics& Transform::getSemantics() const
 {
     return this->semantics;
 }
+    
+const Position& Transform::getPosition() const
+{
+    return this->pos;
+}
+
+const Rotation& Transform::getRotation() const
+{
+    return this->rot;
+}
+
+void Transform::setPosition(const Position& position)
+{
+    // check consistency of setted position with existing rotation
+    // and set the semantics.
+    iDynTreeAssert(this->semantics.setPositionSemantics(position.getSemantics()));
+    
+    // set position
+    this->pos = position;
+}
+
+void Transform::setRotation(const Rotation& rotation)
+{
+    // check consistency of setted rotation with existing position
+    // and set the semantics.
+    iDynTreeAssert(this->semantics.setRotationSemantics(rotation.getSemantics()));
+    
+    // set rotation
+    this->rot = rotation;
+}
+
 
 Transform Transform::compose(const Transform& op1, const Transform& op2)
 {
     Transform result;
-
-    if( TransformSemantics::check_compose(op1.getSemantics(),op2.getSemantics()) )
-    {
-        result = TransformRaw::compose(op1,op2);
-        TransformSemantics::compose(op1.getSemantics(),op2.getSemantics(),result.getSemantics());
-    }
-
+    
+    result.setRotation(op1.getRotation()*op2.getRotation());
+    result.setPosition(op1.getRotation()*op2.getPosition()+op1.getPosition());
+    
     return result;
 }
 
 Transform Transform::inverse2(const Transform& trans)
 {
     Transform result;
-
-    if( TransformSemantics::check_inverse2(trans.getSemantics()) )
-    {
-        result = TransformRaw::inverse2(trans);
-        TransformSemantics::inverse2(trans.getSemantics(),result.getSemantics());
-    }
-
+    
+    result.setRotation(trans.getRotation().inverse());
+    result.setPosition(-(result.getRotation()*trans.getPosition()));
+    
     return result;
 }
 
 Position Transform::transform(const Transform& op1, const Position& op2)
 {
-    Position result;
-
-    if( TransformSemantics::check_transform(op1.getSemantics(),op2.getSemantics()) )
-    {
-        result = TransformRaw::transform(op1,op2);
-        TransformSemantics::transform(op1.getSemantics(),op2.getSemantics(),result.getSemantics());
-    }
-
-    return result;
+    // op2 is a vector of dimention 3. We expand here the dot product
+    // between the homogeneous transform and the homogeneous position
+    // (vector of dim 4), as being : [T].[x y z 1]'
+    return (op1.getRotation()*op2+op1.getPosition());
 }
 
 Twist Transform::transform(const Transform& op1, const Twist& op2)
 {
-    Twist result;
-
-    // \todo TODO add semantics to Twist
-    result = TransformRaw::transform(op1,op2);
-
-    return result;
+    // We decompose the spatial transform as the product of the translation
+    // and the rotation:
+    // B^X_A = |E   0|.|1   0|
+    //         |0   E| |r˜' 1|
+    //
+    // A^X_B = |1   0|.|E'  0 | = xlt(r) * rot(E')
+    //         |r˜  1| |0   E'|
+    // where E is the rotation transforming coordinates from [A] to [B],
+    // E' is the rotation transforming coordinates from [B] to [A] (op1.rot),
+    // r the position of B with respect to A => op1.pos
+    // xlt(r) the spatial translation component of A^X_B = xlt(op1.pos)
+    // rot(E') the spatial rotation component of A^X_B = rot(op1.rot)
+    //
+    // so, considering a given "twist":
+    // A^X_B * twist = xlt(op1.pos) * rot(op1.rot) * twist
+    //
+    // If we associate (xlt(op1.pos)*) to the operator Position::operator * (Twist&),
+    // and (rot(op1.rot)*) to the operator Rotation::operator * (Twist&), we then get:
+    //
+    // op1 * twist = op1.pos * (op1.rot * op2)
+    
+    return op1.getPosition()*(op1.getRotation()*op2);
 }
 
 Wrench Transform::transform(const Transform& op1, const Wrench& op2)
 {
-    Wrench result;
-
-    // \todo TODO add semantics to Twist
-    result = TransformRaw::transform(op1,op2);
-
-    return result;
+    // Same thing as for Twist, but with translation and rotation for a force:
+    //
+    // A^X_B = xlt(r)' * rot(E')
+    //
+    // Position::operator * (Twist&) |-> (xlt(r)' *)
+    // Rotation::operator * (Twist&) |-> (rot(E') *)
+    
+    return op1.getPosition()*(op1.getRotation()*op2);
 }
 
 
@@ -182,11 +177,18 @@ Wrench Transform::operator*(const Wrench& op2) const
     return Transform::transform(*this,op2);
 }
 
+Transform Transform::Identity()
+{
+    return Transform();
+}
+
 std::string Transform::toString() const
 {
     std::stringstream ss;
-
-    ss << TransformRaw::toString() << " " << semantics.toString();
+    
+    ss << rot.toString() << " "
+       << pos.toString() << " "
+       << semantics.toString() << std::endl;
 
     return ss.str();
 }

@@ -22,32 +22,20 @@ namespace iDynTree
      */
     class TransformSemantics
     {
-    private:
-        int point;
-        int orientationFrame;
-        int refPoint;
-        int refOrientationFrame;
-        int coordinateFrame;
+    protected:
+        PositionSemantics & positionSemantics;
+        RotationSemantics & rotationSemantics;
 
+        bool check_position2rotationConsistency(const PositionSemantics& position, const RotationSemantics& rotation);
+        
     public:
         /**
-         * Default constructor: initialize all semantics to unknown
+         * Default constructor: initialize all semantics from a Transform object (create links)
          */
-        TransformSemantics();
+        TransformSemantics(PositionSemantics & position, RotationSemantics & rotation);
 
         /**
-         * constructor: initialize all semantics from individual parameters.
-         */
-        TransformSemantics(int _orientationFrame, int _refOrientationFrame);
-
-        /**
-         * Copy constructor: create a TransformSemantics from a TransformSemantics.
-         */
-        TransformSemantics(const TransformSemantics & other);
-        
-
-        /**
-         * Denstructor
+         * Destructor
          */
         virtual ~TransformSemantics();
 
@@ -55,12 +43,12 @@ namespace iDynTree
         /**
          * Get the rotation part of the transform
          */
-        const RotationSemantics getRotationSemantics() const;
+        const RotationSemantics & getRotationSemantics() const;
 
         /**
          * Get the translation part of the transform
          */
-        const PositionSemantics getPositionSemantics() const;
+        const PositionSemantics & getPositionSemantics() const;
 
         /**
          * Set the rotation part of the transform
@@ -73,43 +61,19 @@ namespace iDynTree
         bool setPositionSemantics(const PositionSemantics & position);
 
         /**
-          * @name Semantics setters and getters.
-          *  Semantics setters and getters.
-          */
-        ///@{
-        int getPoint() const;
-        int getOrientationFrame() const;
-        int getReferencePoint() const;
-        int getReferenceOrientationFrame() const;
-        int getCoordinateFrame() const;
-
-        void setPoint(int _point);
-        void setOrientationFrame(int _orientationFrame);
-        void setReferencePoint(int _refPoint);
-        void setReferenceOrientationFrame(int _refOrientationFrame);
-        ///@}
+         * Semantics operations: all of them are done through the Semantics methods from
+         * Position and Rotation classes, which compose the Transform class.
+         */
 
         /**
-         * semantics operation
+         * overloaded operators: done through Position and Rotation classes
          */
-        static bool check_compose(const TransformSemantics & op1, const TransformSemantics & op2);
-        static bool check_inverse2(const TransformSemantics & orient);
-        static bool check_transform(const TransformSemantics & op1, const PositionSemantics & op2);
-
-        static TransformSemantics compose(const TransformSemantics & op1, const TransformSemantics & op2);
-        static void compose(const TransformSemantics & op1, const TransformSemantics & op2, TransformSemantics & result);
-        static TransformSemantics inverse2(const TransformSemantics & trans);
-        static void inverse2(const TransformSemantics & trans, TransformSemantics & result);
-        static PositionSemantics transform(const TransformSemantics & op1, const PositionSemantics & op2);
-        static void transform(const TransformSemantics & op1, const PositionSemantics & op2, PositionSemantics & result);
 
         /**
-         * overloaded operators
+         * copy assignment operator
          */
-        TransformSemantics operator*(const TransformSemantics & other) const;
-        TransformSemantics inverse() const;
-        PositionSemantics operator*(const PositionSemantics & op2) const;
-
+        TransformSemantics & operator= (const TransformSemantics & semantics);
+        
         /** @name Output helpers.
          *  Output helpers.
          */

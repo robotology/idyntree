@@ -157,7 +157,7 @@ namespace iDynTree
         return result;
     }
     
-    PositionRaw RotationRaw::convertToNewCoordFrame(const PositionRaw & other) const
+    PositionRaw RotationRaw::changeCoordFrameOf(const PositionRaw & other) const
     {
         PositionRaw result;
         
@@ -170,7 +170,7 @@ namespace iDynTree
         return result;
     }
     
-    SpatialMotionVectorRaw RotationRaw::convertToNewCoordFrame(const SpatialMotionVectorRaw& other) const
+    SpatialMotionVectorRaw RotationRaw::changeCoordFrameOf(const SpatialMotionVectorRaw& other) const
     {
         SpatialMotionVectorRaw result;
         
@@ -185,7 +185,7 @@ namespace iDynTree
         return result;
     }
     
-    SpatialForceVectorRaw RotationRaw::convertToNewCoordFrame(const SpatialForceVectorRaw& other) const
+    SpatialForceVectorRaw RotationRaw::changeCoordFrameOf(const SpatialForceVectorRaw& other) const
     {
         SpatialForceVectorRaw result;
         
@@ -213,17 +213,17 @@ namespace iDynTree
     
     PositionRaw RotationRaw::operator*(const PositionRaw& other) const
     {
-        return convertToNewCoordFrame(other);
+        return changeCoordFrameOf(other);
     }
     
     SpatialMotionVectorRaw RotationRaw::operator*(const SpatialMotionVectorRaw& other) const
     {
-        return convertToNewCoordFrame(other);
+        return changeCoordFrameOf(other);
     }
     
     SpatialForceVectorRaw RotationRaw::operator*(const SpatialForceVectorRaw& other) const
     {
-        return convertToNewCoordFrame(other);
+        return changeCoordFrameOf(other);
     }
     
     RotationRaw RotationRaw::RotX(const double angle)

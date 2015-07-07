@@ -113,24 +113,6 @@ namespace iDynTree
         return status;
     }
 
-    bool PositionSemantics::check_changeCoordinateFrame(const RotationSemantics & newCoordinateFrame)
-    {
-        return reportErrorIf(!checkEqualOrUnknown(newCoordinateFrame.getOrientationFrame(),this->coordinateFrame),
-                             __PRETTY_FUNCTION__,
-                             "transformation's orientationFrame is different from current coordinateFrame\n");
-    }
-
-    bool PositionSemantics::changeCoordinateFrame(const RotationSemantics & newCoordinateFrame)
-    {
-        // check semantics
-        bool status = this->check_changeCoordinateFrame(newCoordinateFrame);
-        
-        // set new semantics
-        this->coordinateFrame = newCoordinateFrame.getCoordinateFrame();
-        
-        return status;
-    }
-    
     bool PositionSemantics::check_compose(const PositionSemantics& op1, const PositionSemantics& op2)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame),

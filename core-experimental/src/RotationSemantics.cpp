@@ -83,7 +83,7 @@ namespace iDynTree
                              "the refOrientationFrame of this object does not match the orientationFrame of the newRefOrientFrame\n");
     }
 
-    bool RotationSemantics::check_convertToNewCoordFrame(const PositionSemantics & op) const
+    bool RotationSemantics::check_changeCoordFrameOf(const PositionSemantics & op) const
     {
         return reportErrorIf(!checkEqualOrUnknown(this->orientationFrame,op.getCoordinateFrame()),
                              __PRETTY_FUNCTION__,
@@ -124,10 +124,10 @@ namespace iDynTree
         return status;
     }
 
-    bool RotationSemantics::convertToNewCoordFrame(const PositionSemantics & other, PositionSemantics & result) const
+    bool RotationSemantics::changeCoordFrameOf(const PositionSemantics & other, PositionSemantics & result) const
     {
         // check semantics
-        bool status = this->check_convertToNewCoordFrame(other);
+        bool status = this->check_changeCoordFrameOf(other);
         
         // set new semantics
         result = other;

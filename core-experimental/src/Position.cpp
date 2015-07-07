@@ -7,6 +7,8 @@
 
 #include "Position.h"
 #include "Rotation.h"
+#include "Twist.h"
+#include "Wrench.h"
 #include "Utils.h"
 #include <cassert>
 #include <iostream>
@@ -71,7 +73,7 @@ namespace iDynTree
 
     const Position& Position::changeCoordinateFrame(const Rotation & newCoordinateFrame)
     {
-        *this = newCoordinateFrame.convertToNewCoordFrame(*this);
+        *this = newCoordinateFrame.changeCoordFrameOf(*this);
         return *this;
     }
 
@@ -90,6 +92,16 @@ namespace iDynTree
         return Position(PositionRaw::inverse(op),resultSemantics);
     }
 
+    Twist Position::changePointOf(const Twist & other) const
+    {
+        return PositionRaw::changePointOf(other);
+    }
+    
+    Wrench Position::changePointOf(const Wrench & other) const
+    {
+        return PositionRaw::changePointOf(other);
+    }
+
     // overloaded operators
     Position Position::operator+(const Position& other) const
     {
@@ -104,6 +116,16 @@ namespace iDynTree
     Position Position::operator-() const
     {
         return inverse(*this);
+    }
+    
+    Twist Position::operator*(const Twist& other) const
+    {
+        return changePointOf(other);
+    }
+    
+    Wrench Position::operator*(const Wrench& other) const
+    {
+        return changePointOf(other);
     }
     
     std::string Position::toString() const

@@ -89,29 +89,29 @@ namespace iDynTree
         return Rotation(RotationRaw::inverse2(orient),resultSemantics);
     }
 
-    Position Rotation::convertToNewCoordFrame(const Position & other) const
+    Position Rotation::changeCoordFrameOf(const Position & other) const
     {
         PositionSemantics resultSemantics;
-        iDynTreeAssert( this->semantics.convertToNewCoordFrame(other.getSemantics(), resultSemantics) );
-        return Position(this->RotationRaw::convertToNewCoordFrame(other), resultSemantics);
+        iDynTreeAssert( this->semantics.changeCoordFrameOf(other.getSemantics(), resultSemantics) );
+        return Position(this->RotationRaw::changeCoordFrameOf(other), resultSemantics);
     }
     
-    Twist Rotation::convertToNewCoordFrame(const Twist& other) const
+    Twist Rotation::changeCoordFrameOf(const Twist& other) const
     {
         Twist result;
 
         // \todo TODO add semantics to Twist
-        result = RotationRaw::convertToNewCoordFrame(other);
+        result = RotationRaw::changeCoordFrameOf(other);
 
         return result;
     }
 
-    Wrench Rotation::convertToNewCoordFrame(const Wrench& other) const
+    Wrench Rotation::changeCoordFrameOf(const Wrench &other) const
     {
         Wrench result;
 
         // \todo TODO add semantics to Wrench
-        result = RotationRaw::convertToNewCoordFrame(other);
+        result = RotationRaw::changeCoordFrameOf(other);
 
         return result;
     }
@@ -128,17 +128,17 @@ namespace iDynTree
 
     Position Rotation::operator*(const Position& other) const
     {
-        return convertToNewCoordFrame(other);
+        return changeCoordFrameOf(other);
     }
 
     Twist Rotation::operator*(const Twist& other) const
     {
-        return convertToNewCoordFrame(other);
+        return changeCoordFrameOf(other);
     }
 
     Wrench Rotation::operator*(const Wrench& other) const
     {
-        return convertToNewCoordFrame(other);
+        return changeCoordFrameOf(other);
     }
 
     std::string Rotation::toString() const

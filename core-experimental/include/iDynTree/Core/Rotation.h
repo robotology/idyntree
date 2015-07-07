@@ -96,9 +96,9 @@ namespace iDynTree
         const Rotation & changeRefOrientFrame(const Rotation & newRefOrientFrame);
         static Rotation compose(const Rotation & op1, const Rotation & op2);
         static Rotation inverse2(const Rotation & orient);
-        Position convertToNewCoordFrame(const Position & other) const;
-        Twist  convertToNewCoordFrame(const Twist & other) const;
-        Wrench convertToNewCoordFrame(const Wrench & other) const;
+        Position changeCoordFrameOf(const Position & other) const;
+        Twist  changeCoordFrameOf(const Twist & other) const;
+        Wrench changeCoordFrameOf(const Wrench & other) const;
 
 
         /**

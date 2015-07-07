@@ -7,6 +7,8 @@
 
 #include "PositionRaw.h"
 #include "RotationRaw.h"
+#include "SpatialMotionVectorRaw.h"
+#include "SpatialForceVectorRaw.h"
 #include "Utils.h"
 #include <cstdio>
 #include <sstream>
@@ -15,6 +17,8 @@
 #include <Eigen/Geometry>
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+typedef Eigen::Matrix<double,6,1> Vector6d;
+
 
 namespace iDynTree
 {
@@ -117,16 +121,6 @@ namespace iDynTree
         return *this;
     }
     
-    const PositionRaw& PositionRaw::changeCoordinateFrame(const RotationRaw & newCoordinateFrame)
-    {
-        Eigen::Map<const Matrix3dRowMajor> newCoordFrame(newCoordinateFrame.data());
-        Eigen::Map<Eigen::Vector3d> positionCoord(this->data());
-        
-        positionCoord = newCoordFrame*positionCoord;
-        
-        return *this;
-    }
-    
     PositionRaw PositionRaw::compose(const PositionRaw& op1, const PositionRaw& op2)
     {
         PositionRaw result;
@@ -145,8 +139,34 @@ namespace iDynTree
         return result;
     }
     
+    SpatialMotionVectorRaw PositionRaw::changePointOf(const SpatialMotionVectorRaw & other) const
+    {
+        SpatialMotionVectorRaw result;
+        
+        Eigen::Map<const Eigen::Vector3d> thisPos(this->data());
+        Eigen::Map<const Vector6d> otherTwist(other.data());
+        Eigen::Map<Vector6d> resTwist(result.data());
+        
+        resTwist.segment<3>(0) =  otherTwist.segment<3>(0)+thisPos.cross(otherTwist.segment<3>(3));
+        resTwist.segment<3>(3) =  otherTwist.segment<3>(3);
+        
+        return result;
+    }
     
-    
+    SpatialForceVectorRaw PositionRaw::changePointOf(const SpatialForceVectorRaw & other) const
+    {
+        SpatialForceVectorRaw result;
+        
+        Eigen::Map<const Eigen::Vector3d> thisPos(this->data());
+        Eigen::Map<const Vector6d> otherWrench(other.data());
+        Eigen::Map<Vector6d> resWrench(result.data());
+        
+        resWrench.segment<3>(0) = otherWrench.segment<3>(0);
+        resWrench.segment<3>(3) = thisPos.cross(otherWrench.segment<3>(0))+otherWrench.segment<3>(3);
+        
+        return result;
+    }
+
     std::string PositionRaw::toString() const
     {
         std::stringstream ss;

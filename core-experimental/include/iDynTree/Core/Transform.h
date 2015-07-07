@@ -9,7 +9,8 @@
 #define IDYNTREE_TRANSFORM_H
 
 #include <string>
-#include "TransformRaw.h"
+#include "Position.h"
+#include "Rotation.h"
 #include "TransformSemantics.h"
 
 namespace iDynTree
@@ -18,6 +19,9 @@ namespace iDynTree
     class Rotation;
     class Wrench;
     class Twist;
+
+    class PositionSemantics;
+    class RotationSemantics;
 
     /**
      * Class representation the relative displacement between two different frames.
@@ -42,11 +46,13 @@ namespace iDynTree
      * matrix, no raw access to the underline storage ( data() method ) is provided, because it does not
      * have a canonical representation.
      */
-    class Transform: public TransformRaw
+    class Transform
     {
-    private:
+    protected:
+        Position pos;
+        Rotation rot;
         TransformSemantics semantics;
-
+        
     public:
         /**
          * Default constructor: initialize the rotation to the identity and the translation to 0
@@ -56,12 +62,7 @@ namespace iDynTree
         /**
          * Constructor from a rotation and a point (can raise error on semantics of the passed elements)
          */
-        Transform(const Rotation & rot, const Position & origin);
-
-        /**
-         * Copy constructor: create a Transform from a TransformRaw.
-         */
-        Transform(const TransformRaw & other);
+        Transform(const Rotation & _rot, const Position & origin);
 
         /**
          * Copy constructor: create a Transform from another Transform.
@@ -69,53 +70,43 @@ namespace iDynTree
         Transform(const Transform & other);
 
         /**
-         * Denstructor
+         * Destructor
          */
         virtual ~Transform();
 
         /**
          * Semantic accessor
          */
-        TransformSemantics& getSemantics();
+        TransformSemantics & getSemantics();
 
         /**
          * Const semantic getter
          */
-        const TransformSemantics& getSemantics() const;
+        const TransformSemantics & getSemantics() const;
 
         /**
          * Get the rotation part of the transform
          */
-        const Rotation getRotation() const;
+        const Rotation & getRotation() const;
 
         /**
          * Get the translation part of the transform
          */
-        const Position getPosition() const;
+        const Position & getPosition() const;
 
         /**
          * Set the rotation part of the transform
          */
-        const bool setRotation(const Rotation & rotation);
+        void setRotation(const Rotation & rotation);
 
         /**
          * Set the translation part of the transform
          */
-        const bool setPosition(const Position & position);
-
-        /**
-         * Set the rotation part of the transform, from a RotationRaw
-         */
-        const bool setRotation(const RotationRaw & rotation);
-
-        /**
-         * Set the translation part of the transform, from a PositionRaw
-         */
-        const bool setPosition(const PositionRaw & position);
+        void setPosition(const Position & position);
 
         // semantics operation
         static Transform compose(const Transform & op1, const Transform & op2);
-        static Transform inverse2(const Transform & orient);
+        static Transform inverse2(const Transform & trans);
         static Position transform(const Transform & op1, const Position & op2);
         static Wrench   transform(const Transform & op1, const Wrench   & op2);
         static Twist    transform(const Transform & op1, const Twist    & op2);
@@ -129,6 +120,11 @@ namespace iDynTree
         Wrench   operator*(const Wrench & other) const;
         Twist    operator*(const Twist  & other) const;
 
+        /**
+         * constructor helpers
+         */
+        static Transform Identity();
+        
         /** @name Output helpers.
          *  Output helpers.
          */
@@ -137,6 +133,8 @@ namespace iDynTree
 
         std::string reservedToString() const;
         ///@}
+        
+        friend TransformSemantics::TransformSemantics(PositionSemantics & position, RotationSemantics & rotation);
     };
 }
 
