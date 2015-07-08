@@ -28,15 +28,6 @@ classdef SpatialForceVectorRaw < iDynTree.Vector6
     function varargout = dot(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(100,'SpatialForceVectorRaw_dot',self,varargin{:});
     end
-    function varargout = plus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(101,'SpatialForceVectorRaw_plus',self,varargin{:});
-    end
-    function varargout = minus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(102,'SpatialForceVectorRaw_minus',self,varargin{:});
-    end
-    function varargout = uminus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(103,'SpatialForceVectorRaw_uminus',self,varargin{:});
-    end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
       ok = false;
@@ -64,7 +55,7 @@ classdef SpatialForceVectorRaw < iDynTree.Vector6
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(99,'SpatialForceVectorRaw_inverse',varargin{:});
     end
     function varargout = Zero(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(104,'SpatialForceVectorRaw_Zero',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(101,'SpatialForceVectorRaw_Zero',varargin{:});
     end
   end
 end

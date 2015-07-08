@@ -93,6 +93,7 @@ double SpatialForceVectorRaw::dot(const SpatialMotionVectorRaw& other) const
     return thisData.dot(otherData);
 }
 
+/*
 SpatialForceVectorRaw SpatialForceVectorRaw::operator+(const SpatialForceVectorRaw& other) const
 {
     return compose(*this,other);
@@ -106,7 +107,8 @@ SpatialForceVectorRaw SpatialForceVectorRaw::operator-() const
 SpatialForceVectorRaw SpatialForceVectorRaw::operator-(const SpatialForceVectorRaw& other) const
 {
     return compose(*this,inverse(other));
-}
+}*/
+
 
 SpatialForceVectorRaw SpatialForceVectorRaw::Zero()
 {

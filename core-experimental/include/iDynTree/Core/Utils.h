@@ -5,10 +5,13 @@
  *
  */
 
+#ifndef IDYNTREE_UTILS_H
+#define IDYNTREE_UTILS_H
+
 /**
  * macro for activating the semantic checking.
- * 
- * This macro defines the assert function embedding the semantic checks for 
+ *
+ * This macro defines the assert function embedding the semantic checks for
  * geometrical relations.
  *
  */
@@ -31,7 +34,7 @@ namespace iDynTree
      * iDynTree provides basic data structures to implement kinemanics and dynamics
      * algorithms.
      *
-     * 
+     *
      */
 
 
@@ -39,11 +42,11 @@ namespace iDynTree
 
     /**
      * Function embedding the semantic checks
-     * 
+     *
      * This function can throw an exception if the semantic check detects an error (returns False).
      */
     void assertWoAbort(const char * semCheck, const char * file, const char* func, int line);
-    
+
     /**
      * Helper class for semantic checking.
      *
@@ -59,3 +62,5 @@ namespace iDynTree
     void reportError(const char * className, const char* methodName, const char * errorMessage);
     bool reportErrorIf(bool condition, const char * className_methodName, const char * errorMessage);
 }
+
+#endif

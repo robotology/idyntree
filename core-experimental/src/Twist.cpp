@@ -6,6 +6,9 @@
  */
 
 #include "Twist.h"
+#include "Wrench.h"
+#include "SpatialAcc.h"
+#include "SpatialMomentum.h"
 
 namespace iDynTree
 {
@@ -35,10 +38,36 @@ Twist::Twist(const Twist& other):
 
 }
 
-
 Twist::~Twist()
 {
 
 }
+
+Twist Twist::operator+(const Twist& other) const
+{
+    return compose(*this,other);
+}
+
+Twist Twist::operator-() const
+{
+    return inverse(*this);
+}
+
+Twist Twist::operator-(const Twist& other) const
+{
+    return compose(*this,inverse(other));
+}
+
+Wrench Twist::operator*(const SpatialMomentum& other) const
+{
+    return SpatialMotionVectorRaw::cross(other);
+
+}
+
+SpatialAcc Twist::operator*(const Twist& other) const
+{
+    return SpatialMotionVectorRaw::cross(other);
+}
+
 
 }

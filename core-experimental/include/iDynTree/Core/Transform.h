@@ -11,6 +11,7 @@
 #include <string>
 #include "Position.h"
 #include "Rotation.h"
+#include "TransformRaw.h"
 #include "TransformSemantics.h"
 
 namespace iDynTree
@@ -19,6 +20,9 @@ namespace iDynTree
     class Rotation;
     class Wrench;
     class Twist;
+    class SpatialMomentum;
+    class SpatialAcc;
+    class SpatialInertia;
 
     class PositionSemantics;
     class RotationSemantics;
@@ -46,7 +50,7 @@ namespace iDynTree
      * matrix, no raw access to the underline storage ( data() method ) is provided, because it does not
      * have a canonical representation.
      */
-    class Transform
+    class Transform: public TransformRaw
     {
     protected:
         Position pos;
@@ -110,6 +114,9 @@ namespace iDynTree
         static Position transform(const Transform & op1, const Position & op2);
         static Wrench   transform(const Transform & op1, const Wrench   & op2);
         static Twist    transform(const Transform & op1, const Twist    & op2);
+        static SpatialMomentum transform(const Transform & op1, const SpatialMomentum & op2);
+        static SpatialAcc      transform(const Transform & op1, const SpatialAcc & op2);
+        static SpatialInertia  transform(const Transform & op1, const SpatialInertia & op2);
 
         /**
          * overloaded operators
@@ -119,6 +126,9 @@ namespace iDynTree
         Position operator*(const Position & other) const;
         Wrench   operator*(const Wrench & other) const;
         Twist    operator*(const Twist  & other) const;
+        SpatialMomentum operator*(const SpatialMomentum & other) const;
+        SpatialAcc   operator*(const SpatialAcc & other) const;
+        SpatialInertia operator*(const SpatialInertia  & other) const;
 
         /**
          * constructor helpers

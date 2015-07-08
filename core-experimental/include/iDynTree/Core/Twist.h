@@ -12,6 +12,10 @@
 
 namespace iDynTree
 {
+    class SpatialAcc;
+    class SpatialMomentum;
+    class Wrench;
+
     /**
      * Class representing a twist, i.e. a 6D combination of linear an angular velocity.
      *
@@ -27,6 +31,16 @@ namespace iDynTree
         Twist(const SpatialMotionVectorRaw& other);
         Twist(const Twist& other);
         virtual ~Twist();
+
+        /** overloaded operators **/
+        Twist operator+(const Twist &other) const;
+        Twist operator-(const Twist &other) const;
+        Twist operator-() const;
+
+        /** overloaded cross products */
+        SpatialAcc operator*(const Twist &other) const;
+        Wrench operator*(const SpatialMomentum &other) const;
+
     };
 }
 

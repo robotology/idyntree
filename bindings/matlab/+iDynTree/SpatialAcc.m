@@ -1,12 +1,12 @@
-classdef Twist < iDynTree.SpatialMotionVectorRaw
+classdef SpatialAcc < iDynTree.SpatialMotionVectorRaw
   methods
-    function self = Twist(varargin)
+    function self = SpatialAcc(varargin)
       self@iDynTree.SpatialMotionVectorRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(111,'new_Twist',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(127,'new_SpatialAcc',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(111,'new_Twist',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(127,'new_SpatialAcc',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,21 +15,18 @@ classdef Twist < iDynTree.SpatialMotionVectorRaw
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(112,'delete_Twist',self);
+        iDynTreeMATLAB_wrap(128,'delete_SpatialAcc',self);
         self.swigOwn=false;
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(113,'Twist_plus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(129,'SpatialAcc_plus',self,varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(114,'Twist_minus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(130,'SpatialAcc_minus',self,varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(115,'Twist_uminus',self,varargin{:});
-    end
-    function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(116,'Twist_mtimes',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(131,'SpatialAcc_uminus',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
