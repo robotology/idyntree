@@ -24,7 +24,7 @@ namespace iDynTree
     class Transform;
 }
 
-#include "Sensors.hpp"
+#include <iDynTree/Sensors/Sensors.hpp>
 
 #include <vector>
 

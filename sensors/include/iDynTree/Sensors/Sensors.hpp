@@ -18,9 +18,6 @@
 #ifndef IDYNTREE_CORE_SENSORS_HPP
 #define IDYNTREE_CORE_SENSORS_HPP
 
-/*namespace KDL {
-    class Wrench;
-}*/
 
 namespace iDynTree {
     class Wrench;
@@ -28,7 +25,6 @@ namespace iDynTree {
 #include <string>
 
 namespace iDynTree {
-//namespace CoDyCo {
 
     enum SensorType
     {
@@ -228,13 +224,6 @@ namespace iDynTree {
 
 
     };
-
-
-
-
-
-
-
 
 
 }

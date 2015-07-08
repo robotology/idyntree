@@ -6338,7 +6338,7 @@ int _wrap_Twist_mtimes__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *ar
   iDynTree::Twist *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
+  void *argp2 ;
   int res2 = 0 ;
   mxArray * _out;
   iDynTree::SpatialAcc result;
@@ -6353,13 +6353,13 @@ int _wrap_Twist_mtimes__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *ar
   arg1 = reinterpret_cast< iDynTree::Twist * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Twist,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Twist_mtimes" "', argument " "2"" of type '" "iDynTree::Twist &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Twist_mtimes" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Twist_mtimes" "', argument " "2"" of type '" "iDynTree::Twist &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Twist_mtimes" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::Twist * >(argp2);
-  result = ((iDynTree::Twist const *)arg1)->operator *(*arg2);
+  result = ((iDynTree::Twist const *)arg1)->operator *((iDynTree::Twist const &)*arg2);
   _out = SWIG_NewPointerObj((new iDynTree::SpatialAcc(static_cast< const iDynTree::SpatialAcc& >(result))), SWIGTYPE_p_iDynTree__SpatialAcc, SWIG_POINTER_OWN |  0 );
   if (_out && --resc>=0) *resv++ = _out;
   return 0;
@@ -6373,7 +6373,7 @@ int _wrap_Twist_mtimes__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *ar
   iDynTree::SpatialMomentum *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
+  void *argp2 ;
   int res2 = 0 ;
   mxArray * _out;
   iDynTree::Wrench result;
@@ -6388,13 +6388,13 @@ int _wrap_Twist_mtimes__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *ar
   arg1 = reinterpret_cast< iDynTree::Twist * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialMomentum,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Twist_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialMomentum &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Twist_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialMomentum const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Twist_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialMomentum &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Twist_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialMomentum const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::SpatialMomentum * >(argp2);
-  result = ((iDynTree::Twist const *)arg1)->operator *(*arg2);
+  result = ((iDynTree::Twist const *)arg1)->operator *((iDynTree::SpatialMomentum const &)*arg2);
   _out = SWIG_NewPointerObj((new iDynTree::Wrench(static_cast< const iDynTree::Wrench& >(result))), SWIGTYPE_p_iDynTree__Wrench, SWIG_POINTER_OWN |  0 );
   if (_out && --resc>=0) *resv++ = _out;
   return 0;

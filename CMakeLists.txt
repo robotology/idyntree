@@ -13,10 +13,6 @@ set(IDYNTREE_MODULE_DIR ${PROJECT_SOURCE_DIR}/cmake)
 set(IDYNTREE_MODULE_PATH ${IDYNTREE_MODULE_DIR})
 list(APPEND CMAKE_MODULE_PATH ${IDYNTREE_MODULE_PATH})
 
-#find_package(YCM REQUIRED)
-include(YCMDefaultDirs)
-ycm_default_dirs(${VARS_PREFIX})
-
 include(GNUInstallDirs)
 if (CMAKE_VERSION LESS 3.0)
     # workaround for http://public.kitware.com/pipermail/cmake-developers/2014-January/009435.html

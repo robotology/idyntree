@@ -11,13 +11,13 @@ set(EXPR_PARSER_SOURCES  src/error.cpp
                          src/functions.cpp
                          src/parser.cpp
                          src/variablelist.cpp)
-                     
+
 set(EXPR_PARSER_HEADERS include/expression_parser/constants.h
                         include/expression_parser/error.h
                         include/expression_parser/functions.h
                         include/expression_parser/parser.h
                         include/expression_parser/variablelist.h)
-    
+
 SOURCE_GROUP("ExpressionParser\\Source Files" FILES ${SYMORO_PAR_SRCS})
 SOURCE_GROUP("ExpressionParser\\Header Files" FILES ${SYMORO_PAR_HPPS})
 
@@ -40,9 +40,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT iDynTree
-        RUNTIME DESTINATION "${${VARS_PREFIX}_INSTALL_BINDIR}" COMPONENT bin
-        LIBRARY DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT shlib
-        ARCHIVE DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION "${${VARS_PREFIX}_INSTALL_INCLUDEDIR}/${PROJECT_NAME}" COMPONENT dev)
+        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
+        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${PROJECT_NAME})

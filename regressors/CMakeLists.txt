@@ -38,13 +38,11 @@ set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
                            ${EIGEN3_INCLUDE_DIR})
 
-include(YCMDefaultDirs)
-
 add_library(idyntree-regressors ${IDYNTREE_REGRESSORS_SOURCES}     ${IDYNTREE_REGRESSORS_HEADERS}
                                 ${IDYNTREE_REGRESSORS_SOURCES_EXP} ${IDYNTREE_REGRESSORS_HEADERS_EXP})
 
 target_include_directories(idyntree-regressors PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                      "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
+                                                      "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 target_link_libraries(idyntree-regressors ${orocos_kdl_LIBRARIES} idyntree-core idyntree-sensors idyntree-modelio-urdf ${TinyXML_LIBRARIES} )
 

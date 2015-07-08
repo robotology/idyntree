@@ -15,9 +15,9 @@
  * Public License for more details
  */
 
-#include "Sensors.hpp"
+#include <iDynTree/Sensors/Sensors.hpp>
 
-#include "SixAxisFTSensor.hpp"
+#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
 
 #include <vector>
 #include <map>
