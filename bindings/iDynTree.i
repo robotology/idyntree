@@ -65,13 +65,19 @@
 %include "iDynTree/Core/IMatrix.h"
 %include "iDynTree/Core/IVector.h"
 %include "iDynTree/Core/MatrixDynSize.h"
+%include "iDynTree/Core/MatrixFixSize.h"
+
+%template(Matrix3x3) iDynTree::MatrixFixSize<3,3>;
+%template(Matrix4x4) iDynTree::MatrixFixSize<4,4>;
+%template(Matrix6x6) iDynTree::MatrixFixSize<6,6>;
+%template(Matrix6x10) iDynTree::MatrixFixSize<6,10>;
+
 %include "iDynTree/Core/VectorDynSize.h"
 %include "iDynTree/Core/VectorFixSize.h"
 
 %template(Vector3) iDynTree::VectorFixSize<3>;
 %template(Vector6) iDynTree::VectorFixSize<6>;
 %template(Vector10) iDynTree::VectorFixSize<10>;
-
 
 // Basic Vectors: Point Vectors and Spatial Vectors
 %include "iDynTree/Core/PositionRaw.h"
@@ -111,3 +117,5 @@
 #ifdef SWIGMATLAB
 %include "./matlab/matlab_post.i"
 #endif
+
+

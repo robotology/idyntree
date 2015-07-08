@@ -225,7 +225,8 @@ namespace iDynTree
     // Explicit instantiations
     // The explicit instantiations are the only ones that can be used in the API
     //  and the only ones that users are supposed to manipulate manipulate
-    // Add all the explicit instantiation that can be useful
+    // Add all the explicit instantiation that can be useful, but remember to add
+    // them also in the iDynTree.i SWIG file
     typedef VectorFixSize<3> Vector3;
     typedef VectorFixSize<6> Vector6;
     typedef VectorFixSize<10> Vector10;

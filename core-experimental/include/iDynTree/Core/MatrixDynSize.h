@@ -9,7 +9,7 @@
 #define IDYNTREE_MATRIX_DYN_SIZE_H
 
 
-#include "IMatrix.h"
+#include <iDynTree/Core/IMatrix.h>
 
 #include <string>
 
