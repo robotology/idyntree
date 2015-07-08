@@ -22,8 +22,9 @@
 #include "iDynTree/Core/IMatrix.h"
 #include "iDynTree/Core/IVector.h"
 #include "iDynTree/Core/MatrixDynSize.h"
-#include "iDynTree/Core/Vector6.h"
 #include "iDynTree/Core/VectorDynSize.h"
+#include "iDynTree/Core/VectorFixSize.h"
+
 
 // Basic Vectors: Point Vectors and Spatial Vectors
 #include "iDynTree/Core/PositionRaw.h"
@@ -65,7 +66,12 @@
 %include "iDynTree/Core/IVector.h"
 %include "iDynTree/Core/MatrixDynSize.h"
 %include "iDynTree/Core/VectorDynSize.h"
-%include "iDynTree/Core/Vector6.h"
+%include "iDynTree/Core/VectorFixSize.h"
+
+%template(Vector3) iDynTree::VectorFixSize<3>;
+%template(Vector6) iDynTree::VectorFixSize<6>;
+%template(Vector10) iDynTree::VectorFixSize<10>;
+
 
 // Basic Vectors: Point Vectors and Spatial Vectors
 %include "iDynTree/Core/PositionRaw.h"

@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_SPATIAL_FORCE_RAW_H
 #define IDYNTREE_SPATIAL_FORCE_RAW_H
 
-#include "Vector6.h"
+#include <iDynTree/Core/VectorFixSize.h>
 
 namespace iDynTree
 {
