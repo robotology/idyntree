@@ -1,20 +1,20 @@
 classdef DynamicsRegressorParameter < SwigRef
   methods
     function varargout = lt(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(307,'DynamicsRegressorParameter_lt',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(359,'DynamicsRegressorParameter_lt',self,varargin{:});
     end
     function varargout = isequal(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(308,'DynamicsRegressorParameter_isequal',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(360,'DynamicsRegressorParameter_isequal',self,varargin{:});
     end
     function varargout = ne(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(309,'DynamicsRegressorParameter_ne',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(361,'DynamicsRegressorParameter_ne',self,varargin{:});
     end
     function self = DynamicsRegressorParameter(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(310,'new_DynamicsRegressorParameter',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(362,'new_DynamicsRegressorParameter',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(310,'new_DynamicsRegressorParameter',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(362,'new_DynamicsRegressorParameter',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -23,7 +23,7 @@ classdef DynamicsRegressorParameter < SwigRef
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(311,'delete_DynamicsRegressorParameter',self);
+        iDynTreeMATLAB_wrap(363,'delete_DynamicsRegressorParameter',self);
         self.swigOwn=false;
       end
     end
@@ -32,15 +32,15 @@ classdef DynamicsRegressorParameter < SwigRef
       ok = false;
       switch i
         case 'category'
-          v = iDynTreeMATLAB_wrap(301,'DynamicsRegressorParameter_category_get',self);
+          v = iDynTreeMATLAB_wrap(353,'DynamicsRegressorParameter_category_get',self);
           ok = true;
           return
         case 'elemIndex'
-          v = iDynTreeMATLAB_wrap(303,'DynamicsRegressorParameter_elemIndex_get',self);
+          v = iDynTreeMATLAB_wrap(355,'DynamicsRegressorParameter_elemIndex_get',self);
           ok = true;
           return
         case 'type'
-          v = iDynTreeMATLAB_wrap(305,'DynamicsRegressorParameter_type_get',self);
+          v = iDynTreeMATLAB_wrap(357,'DynamicsRegressorParameter_type_get',self);
           ok = true;
           return
       end
@@ -48,15 +48,15 @@ classdef DynamicsRegressorParameter < SwigRef
     function [self,ok] = swig_fieldasgn(self,i,v)
       switch i
         case 'category'
-          iDynTreeMATLAB_wrap(302,'DynamicsRegressorParameter_category_set',self,v);
+          iDynTreeMATLAB_wrap(354,'DynamicsRegressorParameter_category_set',self,v);
           ok = true;
           return
         case 'elemIndex'
-          iDynTreeMATLAB_wrap(304,'DynamicsRegressorParameter_elemIndex_set',self,v);
+          iDynTreeMATLAB_wrap(356,'DynamicsRegressorParameter_elemIndex_set',self,v);
           ok = true;
           return
         case 'type'
-          iDynTreeMATLAB_wrap(306,'DynamicsRegressorParameter_type_set',self,v);
+          iDynTreeMATLAB_wrap(358,'DynamicsRegressorParameter_type_set',self,v);
           ok = true;
           return
       end

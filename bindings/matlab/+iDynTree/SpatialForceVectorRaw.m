@@ -4,9 +4,9 @@ classdef SpatialForceVectorRaw < iDynTree.Vector6
       self@iDynTree.Vector6('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(107,'new_SpatialForceVectorRaw',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(159,'new_SpatialForceVectorRaw',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(107,'new_SpatialForceVectorRaw',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(159,'new_SpatialForceVectorRaw',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,18 +15,18 @@ classdef SpatialForceVectorRaw < iDynTree.Vector6
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(108,'delete_SpatialForceVectorRaw',self);
+        iDynTreeMATLAB_wrap(160,'delete_SpatialForceVectorRaw',self);
         self.swigOwn=false;
       end
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(109,'SpatialForceVectorRaw_changePoint',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(161,'SpatialForceVectorRaw_changePoint',self,varargin{:});
     end
     function varargout = changeCoordFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(110,'SpatialForceVectorRaw_changeCoordFrame',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(162,'SpatialForceVectorRaw_changeCoordFrame',self,varargin{:});
     end
     function varargout = dot(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(113,'SpatialForceVectorRaw_dot',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(165,'SpatialForceVectorRaw_dot',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -49,13 +49,13 @@ classdef SpatialForceVectorRaw < iDynTree.Vector6
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(111,'SpatialForceVectorRaw_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(163,'SpatialForceVectorRaw_compose',varargin{:});
     end
     function varargout = inverse(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(112,'SpatialForceVectorRaw_inverse',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(164,'SpatialForceVectorRaw_inverse',varargin{:});
     end
     function varargout = Zero(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(114,'SpatialForceVectorRaw_Zero',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(166,'SpatialForceVectorRaw_Zero',varargin{:});
     end
   end
 end
