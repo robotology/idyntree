@@ -14,11 +14,15 @@
 #include "SpatialAcc.h"
 #include "SpatialInertia.h"
 
+#include "PrivateUtils.h"
 #include "Utils.h"
 
+#include <Eigen/Dense>
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
+typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 
 namespace iDynTree
 {
@@ -117,12 +121,13 @@ Position Transform::transform(const Transform& op1, const Position& op2)
 
 Twist Transform::transform(const Transform& op1, const Twist& op2)
 {
+    // The Twist is a Spatial Motion vector.
     // We decompose the spatial transform as the product of the translation
     // and the rotation:
     // B^X_A = |E   0|.|1   0|
     //         |0   E| |r˜' 1|
     //
-    // A^X_B = |1   0|.|E'  0 | = xlt(r) * rot(E')
+    // A^X_B = |1   0|.|E'  0 | = xlt(-r) * rot(E')
     //         |r˜  1| |0   E'|
     // where E is the rotation transforming coordinates from [A] to [B],
     // E' is the rotation transforming coordinates from [B] to [A] (op1.rot),
@@ -143,9 +148,9 @@ Twist Transform::transform(const Transform& op1, const Twist& op2)
 
 Wrench Transform::transform(const Transform& op1, const Wrench& op2)
 {
-    // Same thing as for Twist, but with translation and rotation for a force:
+    // Same thing as for Twist, but with translation and rotation for a Spatial Force vector:
     //
-    // A^X_B = xlt(r)' * rot(E')
+    // A^X_B^* = xlt(r)' * rot(E')
     //
     // Position::operator * (Twist&) |-> (xlt(r)' *)
     // Rotation::operator * (Twist&) |-> (rot(E') *)
@@ -155,32 +160,40 @@ Wrench Transform::transform(const Transform& op1, const Wrench& op2)
 
 SpatialMomentum Transform::transform(const Transform& op1, const SpatialMomentum& op2)
 {
-    SpatialMomentum result;
-
-    // \todo TODO add semantics to Twist
-    result = TransformRaw::transform(op1,op2);
-
-    return result;
+    // The Spatial Momentum is a Spatial Force vector
+    return op1.getPosition()*(op1.getRotation()*op2);
 }
 
 SpatialAcc Transform::transform(const Transform& op1, const SpatialAcc& op2)
 {
-    SpatialAcc result;
-
-    // \todo TODO add semantics to Wrench
-    result = TransformRaw::transform(op1,op2);
-
-    return result;
+    // The Spatial Acceleration is a Spatial Motion vector
+    return op1.getPosition()*(op1.getRotation()*op2);
 }
 
 SpatialInertia Transform::transform(const Transform& op1, const SpatialInertia& op2)
 {
-    SpatialInertia result;
-
-    // \todo TODO add semantics to Wrench
-    result = TransformRaw::transform(op1,op2);
-
-    return result;
+    // The transform of a Spatial Inertia is defined as follows:
+    // A^I = A^X_B^* * B^I * B^X_A
+    
+    // mass clearly remains the same
+    double newMass = op2.getMass();
+    
+    // the com is transformed as any position
+    Position newCenterOfMass = transform(op1,op2.getCenterOfMass());
+    
+    // the rotational inertial is rotated and then
+    // the parallel axis theorem applies
+    RotationalInertiaRaw newRotInertia;
+    Eigen::Map<Eigen::Matrix3d> newI(newRotInertia.data());
+    RotationalInertiaRaw oldRotInertia = op2.getRotationalInertiaWrtFrameOrigin();
+    Eigen::Map<const Eigen::Matrix3d> oldI(oldRotInertia.data());
+    
+    Eigen::Map<const Matrix3dRowMajor> R(op1.rot.data());
+    Eigen::Map<const Eigen::Vector3d> p(op1.pos.data());
+    
+    newI =  R*oldI*R.transpose() - newMass*squareCrossProductMatrix(p);
+    
+    return SpatialInertia(newMass,newCenterOfMass,newRotInertia);
 }
 
 

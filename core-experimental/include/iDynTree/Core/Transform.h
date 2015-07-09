@@ -11,7 +11,6 @@
 #include <string>
 #include "Position.h"
 #include "Rotation.h"
-#include "TransformRaw.h"
 #include "TransformSemantics.h"
 
 namespace iDynTree
@@ -50,7 +49,7 @@ namespace iDynTree
      * matrix, no raw access to the underline storage ( data() method ) is provided, because it does not
      * have a canonical representation.
      */
-    class Transform: public TransformRaw
+    class Transform
     {
     protected:
         Position pos;
