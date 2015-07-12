@@ -141,6 +141,31 @@ namespace iDynTree
         return changeCoordFrameOf(other);
     }
 
+    Rotation Rotation::RotX(const double angle)
+    {
+        return Rotation(RotationRaw::RotX(angle));
+    }
+    
+    Rotation Rotation::RotY(const double angle)
+    {
+        return Rotation(RotationRaw::RotY(angle));
+    }
+    
+    Rotation Rotation::RotZ(const double angle)
+    {
+        return Rotation(RotationRaw::RotZ(angle));
+    }
+    
+    Rotation Rotation::RPY(const double roll, const double pitch, const double yaw)
+    {
+        return Rotation(RotationRaw::RPY(roll, pitch, yaw));
+    }
+    
+    Rotation Rotation::Identity()
+    {
+        return Rotation();
+    }
+    
     std::string Rotation::toString() const
     {
         std::stringstream ss;

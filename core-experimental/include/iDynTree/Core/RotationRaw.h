@@ -101,21 +101,6 @@ namespace iDynTree
         /**
          * overloaded operators
          */
-        RotationRaw operator*(const RotationRaw & other) const;
-        RotationRaw inverse() const;
-        PositionRaw operator*(const PositionRaw & other) const;
-        SpatialMotionVectorRaw operator*(const SpatialMotionVectorRaw & other) const;
-        SpatialForceVectorRaw operator*(const SpatialForceVectorRaw & other) const;
-
-
-        /** @name Output helpers.
-         *  Output helpers.
-         */
-        ///@{
-        std::string toString() const;
-
-        std::string reservedToString() const;
-        ///@}
 
         /**
          * @name Initialization helpers.
@@ -158,6 +143,16 @@ namespace iDynTree
          */
         static RotationRaw Identity();
 
+        ///@}
+
+        
+        /** @name Output helpers.
+         *  Output helpers.
+         */
+        ///@{
+        std::string toString() const;
+        
+        std::string reservedToString() const;
         ///@}
     };
 }

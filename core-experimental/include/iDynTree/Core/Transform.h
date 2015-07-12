@@ -107,18 +107,16 @@ namespace iDynTree
          */
         void setPosition(const Position & position);
 
-        // semantics operation
+        // geometric operations on 3x1 vectors (positions and rotations and homogemeous tranform)
         static Transform compose(const Transform & op1, const Transform & op2);
         static Transform inverse2(const Transform & trans);
-        static Position transform(const Transform & op1, const Position & op2);
-        static Wrench   transform(const Transform & op1, const Wrench   & op2);
-        static Twist    transform(const Transform & op1, const Twist    & op2);
-        static SpatialMomentum transform(const Transform & op1, const SpatialMomentum & op2);
-        static SpatialAcc      transform(const Transform & op1, const SpatialAcc & op2);
-        static SpatialInertia  transform(const Transform & op1, const SpatialInertia & op2);
 
         /**
          * overloaded operators
+         * 
+         * They overload geometric operations which are local functions in Transform.cpp. These functions are
+         * not exported because they are templated, and exporting templates on Windows might cause compatibility 
+         * issues.
          */
         Transform operator*(const Transform & other) const;
         Transform inverse() const;

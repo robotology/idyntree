@@ -9429,281 +9429,6 @@ int _wrap_RotationRaw_changeCoordFrameOf (int resc, mxArray *resv[], int argc, m
 }
 
 
-int _wrap_RotationRaw_mtimes__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
-  iDynTree::RotationRaw *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::RotationRaw result;
-  
-  if (!SWIG_check_num_args("RotationRaw_mtimes",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mtimes" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__RotationRaw,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::RotationRaw const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::RotationRaw const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::RotationRaw * >(argp2);
-  result = ((iDynTree::RotationRaw const *)arg1)->operator *((iDynTree::RotationRaw const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::RotationRaw(static_cast< const iDynTree::RotationRaw& >(result))), SWIGTYPE_p_iDynTree__RotationRaw, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RotationRaw_inverse (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  iDynTree::RotationRaw result;
-  
-  if (!SWIG_check_num_args("RotationRaw_inverse",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_inverse" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  result = ((iDynTree::RotationRaw const *)arg1)->inverse();
-  _out = SWIG_NewPointerObj((new iDynTree::RotationRaw(static_cast< const iDynTree::RotationRaw& >(result))), SWIGTYPE_p_iDynTree__RotationRaw, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RotationRaw_mtimes__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
-  iDynTree::PositionRaw *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::PositionRaw result;
-  
-  if (!SWIG_check_num_args("RotationRaw_mtimes",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mtimes" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionRaw,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionRaw * >(argp2);
-  result = ((iDynTree::RotationRaw const *)arg1)->operator *((iDynTree::PositionRaw const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::PositionRaw(static_cast< const iDynTree::PositionRaw& >(result))), SWIGTYPE_p_iDynTree__PositionRaw, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RotationRaw_mtimes__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
-  iDynTree::SpatialMotionVectorRaw *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialMotionVectorRaw result;
-  
-  if (!SWIG_check_num_args("RotationRaw_mtimes",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mtimes" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialMotionVectorRaw const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialMotionVectorRaw const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::SpatialMotionVectorRaw * >(argp2);
-  result = ((iDynTree::RotationRaw const *)arg1)->operator *((iDynTree::SpatialMotionVectorRaw const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::SpatialMotionVectorRaw(static_cast< const iDynTree::SpatialMotionVectorRaw& >(result))), SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RotationRaw_mtimes__SWIG_3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
-  iDynTree::SpatialForceVectorRaw *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialForceVectorRaw result;
-  
-  if (!SWIG_check_num_args("RotationRaw_mtimes",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_mtimes" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialForceVectorRaw,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialForceVectorRaw const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_mtimes" "', argument " "2"" of type '" "iDynTree::SpatialForceVectorRaw const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::SpatialForceVectorRaw * >(argp2);
-  result = ((iDynTree::RotationRaw const *)arg1)->operator *((iDynTree::SpatialForceVectorRaw const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::SpatialForceVectorRaw(static_cast< const iDynTree::SpatialForceVectorRaw& >(result))), SWIGTYPE_p_iDynTree__SpatialForceVectorRaw, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RotationRaw_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_RotationRaw_mtimes__SWIG_0(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionRaw, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_RotationRaw_mtimes__SWIG_1(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialMotionVectorRaw, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_RotationRaw_mtimes__SWIG_2(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialForceVectorRaw, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_RotationRaw_mtimes__SWIG_3(resc,resv,argc,argv);
-      }
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
-  return 1;
-}
-
-
-int _wrap_RotationRaw_toString (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  std::string result;
-  
-  if (!SWIG_check_num_args("RotationRaw_toString",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_toString" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  result = ((iDynTree::RotationRaw const *)arg1)->toString();
-  _out = SWIG_From_std_string(static_cast< std::string >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RotationRaw_display (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  std::string result;
-  
-  if (!SWIG_check_num_args("RotationRaw_display",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_display" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  result = ((iDynTree::RotationRaw const *)arg1)->reservedToString();
-  _out = SWIG_From_std_string(static_cast< std::string >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
 int _wrap_RotationRaw_RotX (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   double arg1 ;
   double val1 ;
@@ -9825,6 +9550,54 @@ int _wrap_RotationRaw_Identity (int resc, mxArray *resv[], int argc, mxArray *ar
   }
   result = iDynTree::RotationRaw::Identity();
   _out = SWIG_NewPointerObj((new iDynTree::RotationRaw(static_cast< const iDynTree::RotationRaw& >(result))), SWIGTYPE_p_iDynTree__RotationRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_RotationRaw_toString (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("RotationRaw_toString",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_toString" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
+  result = ((iDynTree::RotationRaw const *)arg1)->toString();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_RotationRaw_display (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  std::string result;
+  
+  if (!SWIG_check_num_args("RotationRaw_display",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_display" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
+  result = ((iDynTree::RotationRaw const *)arg1)->reservedToString();
+  _out = SWIG_From_std_string(static_cast< std::string >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return 0;
 fail:
@@ -11237,6 +11010,134 @@ int _wrap_Rotation_mtimes (int resc, mxArray *resv[], int argc, mxArray *argv[])
 }
 
 
+int _wrap_Rotation_RotX (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  double arg1 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  mxArray * _out;
+  iDynTree::Rotation result;
+  
+  if (!SWIG_check_num_args("Rotation_RotX",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  ecode1 = SWIG_AsVal_double(argv[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Rotation_RotX" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  result = iDynTree::Rotation::RotX(arg1);
+  _out = SWIG_NewPointerObj((new iDynTree::Rotation(static_cast< const iDynTree::Rotation& >(result))), SWIGTYPE_p_iDynTree__Rotation, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_Rotation_RotY (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  double arg1 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  mxArray * _out;
+  iDynTree::Rotation result;
+  
+  if (!SWIG_check_num_args("Rotation_RotY",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  ecode1 = SWIG_AsVal_double(argv[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Rotation_RotY" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  result = iDynTree::Rotation::RotY(arg1);
+  _out = SWIG_NewPointerObj((new iDynTree::Rotation(static_cast< const iDynTree::Rotation& >(result))), SWIGTYPE_p_iDynTree__Rotation, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_Rotation_RotZ (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  double arg1 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  mxArray * _out;
+  iDynTree::Rotation result;
+  
+  if (!SWIG_check_num_args("Rotation_RotZ",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  ecode1 = SWIG_AsVal_double(argv[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Rotation_RotZ" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  result = iDynTree::Rotation::RotZ(arg1);
+  _out = SWIG_NewPointerObj((new iDynTree::Rotation(static_cast< const iDynTree::Rotation& >(result))), SWIGTYPE_p_iDynTree__Rotation, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_Rotation_RPY (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::Rotation result;
+  
+  if (!SWIG_check_num_args("Rotation_RPY",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  ecode1 = SWIG_AsVal_double(argv[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Rotation_RPY" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  ecode2 = SWIG_AsVal_double(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Rotation_RPY" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rotation_RPY" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  result = iDynTree::Rotation::RPY(arg1,arg2,arg3);
+  _out = SWIG_NewPointerObj((new iDynTree::Rotation(static_cast< const iDynTree::Rotation& >(result))), SWIGTYPE_p_iDynTree__Rotation, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_Rotation_Identity (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  iDynTree::Rotation result;
+  
+  if (!SWIG_check_num_args("Rotation_Identity",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  result = iDynTree::Rotation::Identity();
+  _out = SWIG_NewPointerObj((new iDynTree::Rotation(static_cast< const iDynTree::Rotation& >(result))), SWIGTYPE_p_iDynTree__Rotation, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_Rotation_toString (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Rotation *arg1 = (iDynTree::Rotation *) 0 ;
   void *argp1 = 0 ;
@@ -11899,325 +11800,6 @@ int _wrap_Transform_inverse2 (int resc, mxArray *resv[], int argc, mxArray *argv
   if (_out && --resc>=0) *resv++ = _out;
   return 0;
 fail:
-  return 1;
-}
-
-
-int _wrap_Transform_transform__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Transform *arg1 = 0 ;
-  iDynTree::Position *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::Position result;
-  
-  if (!SWIG_check_num_args("Transform_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Transform,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::Transform * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Position,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::Position * >(argp2);
-  result = iDynTree::Transform::transform((iDynTree::Transform const &)*arg1,(iDynTree::Position const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::Position(static_cast< const iDynTree::Position& >(result))), SWIGTYPE_p_iDynTree__Position, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Transform_transform__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Transform *arg1 = 0 ;
-  iDynTree::Wrench *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::Wrench result;
-  
-  if (!SWIG_check_num_args("Transform_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Transform,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::Transform * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Wrench,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::Wrench const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::Wrench const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::Wrench * >(argp2);
-  result = iDynTree::Transform::transform((iDynTree::Transform const &)*arg1,(iDynTree::Wrench const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::Wrench(static_cast< const iDynTree::Wrench& >(result))), SWIGTYPE_p_iDynTree__Wrench, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Transform_transform__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Transform *arg1 = 0 ;
-  iDynTree::Twist *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::Twist result;
-  
-  if (!SWIG_check_num_args("Transform_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Transform,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::Transform * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Twist,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::Twist * >(argp2);
-  result = iDynTree::Transform::transform((iDynTree::Transform const &)*arg1,(iDynTree::Twist const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::Twist(static_cast< const iDynTree::Twist& >(result))), SWIGTYPE_p_iDynTree__Twist, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Transform_transform__SWIG_3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Transform *arg1 = 0 ;
-  iDynTree::SpatialMomentum *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialMomentum result;
-  
-  if (!SWIG_check_num_args("Transform_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Transform,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::Transform * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialMomentum,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::SpatialMomentum const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::SpatialMomentum const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::SpatialMomentum * >(argp2);
-  result = iDynTree::Transform::transform((iDynTree::Transform const &)*arg1,(iDynTree::SpatialMomentum const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::SpatialMomentum(static_cast< const iDynTree::SpatialMomentum& >(result))), SWIGTYPE_p_iDynTree__SpatialMomentum, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Transform_transform__SWIG_4 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Transform *arg1 = 0 ;
-  iDynTree::SpatialAcc *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialAcc result;
-  
-  if (!SWIG_check_num_args("Transform_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Transform,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::Transform * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialAcc,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::SpatialAcc const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::SpatialAcc const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::SpatialAcc * >(argp2);
-  result = iDynTree::Transform::transform((iDynTree::Transform const &)*arg1,(iDynTree::SpatialAcc const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::SpatialAcc(static_cast< const iDynTree::SpatialAcc& >(result))), SWIGTYPE_p_iDynTree__SpatialAcc, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Transform_transform__SWIG_5 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Transform *arg1 = 0 ;
-  iDynTree::SpatialInertia *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialInertia result;
-  
-  if (!SWIG_check_num_args("Transform_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Transform,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "1"" of type '" "iDynTree::Transform const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::Transform * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialInertia,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::SpatialInertia const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_transform" "', argument " "2"" of type '" "iDynTree::SpatialInertia const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::SpatialInertia * >(argp2);
-  result = iDynTree::Transform::transform((iDynTree::Transform const &)*arg1,(iDynTree::SpatialInertia const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::SpatialInertia(static_cast< const iDynTree::SpatialInertia& >(result))), SWIGTYPE_p_iDynTree__SpatialInertia, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Transform_transform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Position, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Transform_transform__SWIG_0(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Wrench, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Transform_transform__SWIG_1(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Twist, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Transform_transform__SWIG_2(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialMomentum, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Transform_transform__SWIG_3(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialAcc, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Transform_transform__SWIG_4(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialInertia, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Transform_transform__SWIG_5(resc,resv,argc,argv);
-      }
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
   return 1;
 }
 
@@ -16830,149 +16412,151 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 162: if ((name_ok=!strcmp("RotationRaw_compose",cmd))) flag=_wrap_RotationRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
   case 163: if ((name_ok=!strcmp("RotationRaw_inverse2",cmd))) flag=_wrap_RotationRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
   case 164: if ((name_ok=!strcmp("RotationRaw_changeCoordFrameOf",cmd))) flag=_wrap_RotationRaw_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
-  case 165: if ((name_ok=!strcmp("RotationRaw_inverse",cmd))) flag=_wrap_RotationRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 166: if ((name_ok=!strcmp("RotationRaw_mtimes",cmd))) flag=_wrap_RotationRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 167: if ((name_ok=!strcmp("RotationRaw_toString",cmd))) flag=_wrap_RotationRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 168: if ((name_ok=!strcmp("RotationRaw_display",cmd))) flag=_wrap_RotationRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 169: if ((name_ok=!strcmp("RotationRaw_RotX",cmd))) flag=_wrap_RotationRaw_RotX(resc,resv,argc,(mxArray**)(argv)); break;
-  case 170: if ((name_ok=!strcmp("RotationRaw_RotY",cmd))) flag=_wrap_RotationRaw_RotY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 171: if ((name_ok=!strcmp("RotationRaw_RotZ",cmd))) flag=_wrap_RotationRaw_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
-  case 172: if ((name_ok=!strcmp("RotationRaw_RPY",cmd))) flag=_wrap_RotationRaw_RPY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 173: if ((name_ok=!strcmp("RotationRaw_Identity",cmd))) flag=_wrap_RotationRaw_Identity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 174: if ((name_ok=!strcmp("new_RotationSemantics",cmd))) flag=_wrap_new_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 175: if ((name_ok=!strcmp("delete_RotationSemantics",cmd))) flag=_wrap_delete_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 176: if ((name_ok=!strcmp("RotationSemantics_getOrientationFrame",cmd))) flag=_wrap_RotationSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 177: if ((name_ok=!strcmp("RotationSemantics_getReferenceOrientationFrame",cmd))) flag=_wrap_RotationSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 178: if ((name_ok=!strcmp("RotationSemantics_getCoordinateFrame",cmd))) flag=_wrap_RotationSemantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 179: if ((name_ok=!strcmp("RotationSemantics_setOrientationFrame",cmd))) flag=_wrap_RotationSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 180: if ((name_ok=!strcmp("RotationSemantics_setReferenceOrientationFrame",cmd))) flag=_wrap_RotationSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 181: if ((name_ok=!strcmp("RotationSemantics_setCoordinateFrame",cmd))) flag=_wrap_RotationSemantics_setCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 182: if ((name_ok=!strcmp("RotationSemantics_changeOrientFrame",cmd))) flag=_wrap_RotationSemantics_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 183: if ((name_ok=!strcmp("RotationSemantics_changeRefOrientFrame",cmd))) flag=_wrap_RotationSemantics_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 184: if ((name_ok=!strcmp("RotationSemantics_changeCoordFrameOf",cmd))) flag=_wrap_RotationSemantics_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
-  case 185: if ((name_ok=!strcmp("RotationSemantics_compose",cmd))) flag=_wrap_RotationSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 186: if ((name_ok=!strcmp("RotationSemantics_inverse2",cmd))) flag=_wrap_RotationSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 187: if ((name_ok=!strcmp("RotationSemantics_toString",cmd))) flag=_wrap_RotationSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 188: if ((name_ok=!strcmp("RotationSemantics_display",cmd))) flag=_wrap_RotationSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 189: if ((name_ok=!strcmp("new_Rotation",cmd))) flag=_wrap_new_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 190: if ((name_ok=!strcmp("delete_Rotation",cmd))) flag=_wrap_delete_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 191: if ((name_ok=!strcmp("Rotation_getSemantics",cmd))) flag=_wrap_Rotation_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 192: if ((name_ok=!strcmp("Rotation_changeOrientFrame",cmd))) flag=_wrap_Rotation_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 193: if ((name_ok=!strcmp("Rotation_changeRefOrientFrame",cmd))) flag=_wrap_Rotation_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 194: if ((name_ok=!strcmp("Rotation_compose",cmd))) flag=_wrap_Rotation_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 195: if ((name_ok=!strcmp("Rotation_inverse2",cmd))) flag=_wrap_Rotation_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 196: if ((name_ok=!strcmp("Rotation_changeCoordFrameOf",cmd))) flag=_wrap_Rotation_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
-  case 197: if ((name_ok=!strcmp("Rotation_inverse",cmd))) flag=_wrap_Rotation_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 198: if ((name_ok=!strcmp("Rotation_mtimes",cmd))) flag=_wrap_Rotation_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 199: if ((name_ok=!strcmp("Rotation_toString",cmd))) flag=_wrap_Rotation_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 200: if ((name_ok=!strcmp("Rotation_display",cmd))) flag=_wrap_Rotation_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 201: if ((name_ok=!strcmp("new_TransformSemantics",cmd))) flag=_wrap_new_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 202: if ((name_ok=!strcmp("delete_TransformSemantics",cmd))) flag=_wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 203: if ((name_ok=!strcmp("TransformSemantics_getRotationSemantics",cmd))) flag=_wrap_TransformSemantics_getRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 204: if ((name_ok=!strcmp("TransformSemantics_getPositionSemantics",cmd))) flag=_wrap_TransformSemantics_getPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 205: if ((name_ok=!strcmp("TransformSemantics_setRotationSemantics",cmd))) flag=_wrap_TransformSemantics_setRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 206: if ((name_ok=!strcmp("TransformSemantics_setPositionSemantics",cmd))) flag=_wrap_TransformSemantics_setPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 207: if ((name_ok=!strcmp("TransformSemantics_toString",cmd))) flag=_wrap_TransformSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 208: if ((name_ok=!strcmp("TransformSemantics_display",cmd))) flag=_wrap_TransformSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 209: if ((name_ok=!strcmp("new_Transform",cmd))) flag=_wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 210: if ((name_ok=!strcmp("delete_Transform",cmd))) flag=_wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 211: if ((name_ok=!strcmp("Transform_getSemantics",cmd))) flag=_wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 212: if ((name_ok=!strcmp("Transform_getRotation",cmd))) flag=_wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 213: if ((name_ok=!strcmp("Transform_getPosition",cmd))) flag=_wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 214: if ((name_ok=!strcmp("Transform_setRotation",cmd))) flag=_wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 215: if ((name_ok=!strcmp("Transform_setPosition",cmd))) flag=_wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 216: if ((name_ok=!strcmp("Transform_compose",cmd))) flag=_wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 217: if ((name_ok=!strcmp("Transform_inverse2",cmd))) flag=_wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 218: if ((name_ok=!strcmp("Transform_transform",cmd))) flag=_wrap_Transform_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 219: if ((name_ok=!strcmp("Transform_inverse",cmd))) flag=_wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 220: if ((name_ok=!strcmp("Transform_mtimes",cmd))) flag=_wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 221: if ((name_ok=!strcmp("Transform_Identity",cmd))) flag=_wrap_Transform_Identity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 222: if ((name_ok=!strcmp("Transform_toString",cmd))) flag=_wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 223: if ((name_ok=!strcmp("Transform_display",cmd))) flag=_wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 224: if ((name_ok=!strcmp("NR_OF_SENSOR_TYPES_get",cmd))) flag=_wrap_NR_OF_SENSOR_TYPES_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 225: if ((name_ok=!strcmp("delete_Sensor",cmd))) flag=_wrap_delete_Sensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 226: if ((name_ok=!strcmp("Sensor_getName",cmd))) flag=_wrap_Sensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 227: if ((name_ok=!strcmp("Sensor_getSensorType",cmd))) flag=_wrap_Sensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 228: if ((name_ok=!strcmp("Sensor_getParent",cmd))) flag=_wrap_Sensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 229: if ((name_ok=!strcmp("Sensor_getParentIndex",cmd))) flag=_wrap_Sensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 230: if ((name_ok=!strcmp("Sensor_isValid",cmd))) flag=_wrap_Sensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 231: if ((name_ok=!strcmp("Sensor_clone",cmd))) flag=_wrap_Sensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 232: if ((name_ok=!strcmp("new_SensorsList",cmd))) flag=_wrap_new_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 233: if ((name_ok=!strcmp("delete_SensorsList",cmd))) flag=_wrap_delete_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 234: if ((name_ok=!strcmp("SensorsList_addSensor",cmd))) flag=_wrap_SensorsList_addSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 235: if ((name_ok=!strcmp("SensorsList_getNrOfSensors",cmd))) flag=_wrap_SensorsList_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 236: if ((name_ok=!strcmp("SensorsList_getSensorIndex",cmd))) flag=_wrap_SensorsList_getSensorIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 237: if ((name_ok=!strcmp("SensorsList_getSensor",cmd))) flag=_wrap_SensorsList_getSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 238: if ((name_ok=!strcmp("new_SensorsMeasurements",cmd))) flag=_wrap_new_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 239: if ((name_ok=!strcmp("delete_SensorsMeasurements",cmd))) flag=_wrap_delete_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 240: if ((name_ok=!strcmp("SensorsMeasurements_setNrOfSensors",cmd))) flag=_wrap_SensorsMeasurements_setNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 241: if ((name_ok=!strcmp("SensorsMeasurements_getNrOfSensors",cmd))) flag=_wrap_SensorsMeasurements_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 242: if ((name_ok=!strcmp("SensorsMeasurements_setMeasurement",cmd))) flag=_wrap_SensorsMeasurements_setMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 243: if ((name_ok=!strcmp("SensorsMeasurements_getMeasurement",cmd))) flag=_wrap_SensorsMeasurements_getMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 244: if ((name_ok=!strcmp("new_SixAxisForceTorqueSensor",cmd))) flag=_wrap_new_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 245: if ((name_ok=!strcmp("delete_SixAxisForceTorqueSensor",cmd))) flag=_wrap_delete_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 246: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setName",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 247: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setFirstLinkSensorTransform",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 248: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setSecondLinkSensorTransform",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 249: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getFirstLinkIndex",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 250: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getSecondLinkIndex",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 251: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setParent",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 252: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setParentIndex",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 253: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setAppliedWrenchLink",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 254: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getName",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 255: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getSensorType",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 256: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getParent",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 257: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getParentIndex",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 258: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_isValid",cmd))) flag=_wrap_SixAxisForceTorqueSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 259: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_clone",cmd))) flag=_wrap_SixAxisForceTorqueSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 260: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getAppliedWrenchLink",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 261: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_isLinkAttachedToSensor",cmd))) flag=_wrap_SixAxisForceTorqueSensor_isLinkAttachedToSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 262: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getLinkSensorTransform",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 263: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getWrenchAppliedOnLink",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 264: if ((name_ok=!strcmp("DynamicsRegressorParameter_category_get",cmd))) flag=_wrap_DynamicsRegressorParameter_category_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 265: if ((name_ok=!strcmp("DynamicsRegressorParameter_category_set",cmd))) flag=_wrap_DynamicsRegressorParameter_category_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 266: if ((name_ok=!strcmp("DynamicsRegressorParameter_elemIndex_get",cmd))) flag=_wrap_DynamicsRegressorParameter_elemIndex_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 267: if ((name_ok=!strcmp("DynamicsRegressorParameter_elemIndex_set",cmd))) flag=_wrap_DynamicsRegressorParameter_elemIndex_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 268: if ((name_ok=!strcmp("DynamicsRegressorParameter_type_get",cmd))) flag=_wrap_DynamicsRegressorParameter_type_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 269: if ((name_ok=!strcmp("DynamicsRegressorParameter_type_set",cmd))) flag=_wrap_DynamicsRegressorParameter_type_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 270: if ((name_ok=!strcmp("DynamicsRegressorParameter_lt",cmd))) flag=_wrap_DynamicsRegressorParameter_lt(resc,resv,argc,(mxArray**)(argv)); break;
-  case 271: if ((name_ok=!strcmp("DynamicsRegressorParameter_isequal",cmd))) flag=_wrap_DynamicsRegressorParameter_isequal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 272: if ((name_ok=!strcmp("DynamicsRegressorParameter_ne",cmd))) flag=_wrap_DynamicsRegressorParameter_ne(resc,resv,argc,(mxArray**)(argv)); break;
-  case 273: if ((name_ok=!strcmp("new_DynamicsRegressorParameter",cmd))) flag=_wrap_new_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 274: if ((name_ok=!strcmp("delete_DynamicsRegressorParameter",cmd))) flag=_wrap_delete_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 275: if ((name_ok=!strcmp("DynamicsRegressorParametersList_parameters_get",cmd))) flag=_wrap_DynamicsRegressorParametersList_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 276: if ((name_ok=!strcmp("DynamicsRegressorParametersList_parameters_set",cmd))) flag=_wrap_DynamicsRegressorParametersList_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 277: if ((name_ok=!strcmp("DynamicsRegressorParametersList_getDescriptionOfParameter",cmd))) flag=_wrap_DynamicsRegressorParametersList_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 278: if ((name_ok=!strcmp("DynamicsRegressorParametersList_addParam",cmd))) flag=_wrap_DynamicsRegressorParametersList_addParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 279: if ((name_ok=!strcmp("DynamicsRegressorParametersList_addList",cmd))) flag=_wrap_DynamicsRegressorParametersList_addList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 280: if ((name_ok=!strcmp("DynamicsRegressorParametersList_findParam",cmd))) flag=_wrap_DynamicsRegressorParametersList_findParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 281: if ((name_ok=!strcmp("DynamicsRegressorParametersList_getNrOfParameters",cmd))) flag=_wrap_DynamicsRegressorParametersList_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 282: if ((name_ok=!strcmp("new_DynamicsRegressorParametersList",cmd))) flag=_wrap_new_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 283: if ((name_ok=!strcmp("delete_DynamicsRegressorParametersList",cmd))) flag=_wrap_delete_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 284: if ((name_ok=!strcmp("new_DynamicsRegressorGenerator",cmd))) flag=_wrap_new_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 285: if ((name_ok=!strcmp("delete_DynamicsRegressorGenerator",cmd))) flag=_wrap_delete_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 286: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile",cmd))) flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 287: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString",cmd))) flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 288: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRegressorStructureFromFile",cmd))) flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 289: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRegressorStructureFromString",cmd))) flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 290: if ((name_ok=!strcmp("DynamicsRegressorGenerator_isValid",cmd))) flag=_wrap_DynamicsRegressorGenerator_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 291: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getNrOfParameters",cmd))) flag=_wrap_DynamicsRegressorGenerator_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 292: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getNrOfOutputs",cmd))) flag=_wrap_DynamicsRegressorGenerator_getNrOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 293: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getNrOfDegreesOfFreedom",cmd))) flag=_wrap_DynamicsRegressorGenerator_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 294: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfParameter",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 295: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfParameters",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 296: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfOutput",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutput(resc,resv,argc,(mxArray**)(argv)); break;
-  case 297: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfOutputs",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 298: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 299: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 300: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getBaseLinkName",cmd))) flag=_wrap_DynamicsRegressorGenerator_getBaseLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 301: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getSensorsModel",cmd))) flag=_wrap_DynamicsRegressorGenerator_getSensorsModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 302: if ((name_ok=!strcmp("DynamicsRegressorGenerator_setRobotState",cmd))) flag=_wrap_DynamicsRegressorGenerator_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 303: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getSensorsMeasurements",cmd))) flag=_wrap_DynamicsRegressorGenerator_getSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 304: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeRegressor",cmd))) flag=_wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 305: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getModelParameters",cmd))) flag=_wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 306: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace",cmd))) flag=_wrap_DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 307: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace",cmd))) flag=_wrap_DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 165: if ((name_ok=!strcmp("RotationRaw_RotX",cmd))) flag=_wrap_RotationRaw_RotX(resc,resv,argc,(mxArray**)(argv)); break;
+  case 166: if ((name_ok=!strcmp("RotationRaw_RotY",cmd))) flag=_wrap_RotationRaw_RotY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 167: if ((name_ok=!strcmp("RotationRaw_RotZ",cmd))) flag=_wrap_RotationRaw_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
+  case 168: if ((name_ok=!strcmp("RotationRaw_RPY",cmd))) flag=_wrap_RotationRaw_RPY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 169: if ((name_ok=!strcmp("RotationRaw_Identity",cmd))) flag=_wrap_RotationRaw_Identity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 170: if ((name_ok=!strcmp("RotationRaw_toString",cmd))) flag=_wrap_RotationRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 171: if ((name_ok=!strcmp("RotationRaw_display",cmd))) flag=_wrap_RotationRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 172: if ((name_ok=!strcmp("new_RotationSemantics",cmd))) flag=_wrap_new_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 173: if ((name_ok=!strcmp("delete_RotationSemantics",cmd))) flag=_wrap_delete_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 174: if ((name_ok=!strcmp("RotationSemantics_getOrientationFrame",cmd))) flag=_wrap_RotationSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 175: if ((name_ok=!strcmp("RotationSemantics_getReferenceOrientationFrame",cmd))) flag=_wrap_RotationSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 176: if ((name_ok=!strcmp("RotationSemantics_getCoordinateFrame",cmd))) flag=_wrap_RotationSemantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 177: if ((name_ok=!strcmp("RotationSemantics_setOrientationFrame",cmd))) flag=_wrap_RotationSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 178: if ((name_ok=!strcmp("RotationSemantics_setReferenceOrientationFrame",cmd))) flag=_wrap_RotationSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 179: if ((name_ok=!strcmp("RotationSemantics_setCoordinateFrame",cmd))) flag=_wrap_RotationSemantics_setCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 180: if ((name_ok=!strcmp("RotationSemantics_changeOrientFrame",cmd))) flag=_wrap_RotationSemantics_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 181: if ((name_ok=!strcmp("RotationSemantics_changeRefOrientFrame",cmd))) flag=_wrap_RotationSemantics_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 182: if ((name_ok=!strcmp("RotationSemantics_changeCoordFrameOf",cmd))) flag=_wrap_RotationSemantics_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
+  case 183: if ((name_ok=!strcmp("RotationSemantics_compose",cmd))) flag=_wrap_RotationSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 184: if ((name_ok=!strcmp("RotationSemantics_inverse2",cmd))) flag=_wrap_RotationSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 185: if ((name_ok=!strcmp("RotationSemantics_toString",cmd))) flag=_wrap_RotationSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 186: if ((name_ok=!strcmp("RotationSemantics_display",cmd))) flag=_wrap_RotationSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 187: if ((name_ok=!strcmp("new_Rotation",cmd))) flag=_wrap_new_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 188: if ((name_ok=!strcmp("delete_Rotation",cmd))) flag=_wrap_delete_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 189: if ((name_ok=!strcmp("Rotation_getSemantics",cmd))) flag=_wrap_Rotation_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 190: if ((name_ok=!strcmp("Rotation_changeOrientFrame",cmd))) flag=_wrap_Rotation_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 191: if ((name_ok=!strcmp("Rotation_changeRefOrientFrame",cmd))) flag=_wrap_Rotation_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 192: if ((name_ok=!strcmp("Rotation_compose",cmd))) flag=_wrap_Rotation_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 193: if ((name_ok=!strcmp("Rotation_inverse2",cmd))) flag=_wrap_Rotation_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 194: if ((name_ok=!strcmp("Rotation_changeCoordFrameOf",cmd))) flag=_wrap_Rotation_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
+  case 195: if ((name_ok=!strcmp("Rotation_inverse",cmd))) flag=_wrap_Rotation_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 196: if ((name_ok=!strcmp("Rotation_mtimes",cmd))) flag=_wrap_Rotation_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 197: if ((name_ok=!strcmp("Rotation_RotX",cmd))) flag=_wrap_Rotation_RotX(resc,resv,argc,(mxArray**)(argv)); break;
+  case 198: if ((name_ok=!strcmp("Rotation_RotY",cmd))) flag=_wrap_Rotation_RotY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 199: if ((name_ok=!strcmp("Rotation_RotZ",cmd))) flag=_wrap_Rotation_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
+  case 200: if ((name_ok=!strcmp("Rotation_RPY",cmd))) flag=_wrap_Rotation_RPY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 201: if ((name_ok=!strcmp("Rotation_Identity",cmd))) flag=_wrap_Rotation_Identity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 202: if ((name_ok=!strcmp("Rotation_toString",cmd))) flag=_wrap_Rotation_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 203: if ((name_ok=!strcmp("Rotation_display",cmd))) flag=_wrap_Rotation_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 204: if ((name_ok=!strcmp("new_TransformSemantics",cmd))) flag=_wrap_new_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 205: if ((name_ok=!strcmp("delete_TransformSemantics",cmd))) flag=_wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 206: if ((name_ok=!strcmp("TransformSemantics_getRotationSemantics",cmd))) flag=_wrap_TransformSemantics_getRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 207: if ((name_ok=!strcmp("TransformSemantics_getPositionSemantics",cmd))) flag=_wrap_TransformSemantics_getPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 208: if ((name_ok=!strcmp("TransformSemantics_setRotationSemantics",cmd))) flag=_wrap_TransformSemantics_setRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 209: if ((name_ok=!strcmp("TransformSemantics_setPositionSemantics",cmd))) flag=_wrap_TransformSemantics_setPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 210: if ((name_ok=!strcmp("TransformSemantics_toString",cmd))) flag=_wrap_TransformSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 211: if ((name_ok=!strcmp("TransformSemantics_display",cmd))) flag=_wrap_TransformSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 212: if ((name_ok=!strcmp("new_Transform",cmd))) flag=_wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 213: if ((name_ok=!strcmp("delete_Transform",cmd))) flag=_wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 214: if ((name_ok=!strcmp("Transform_getSemantics",cmd))) flag=_wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 215: if ((name_ok=!strcmp("Transform_getRotation",cmd))) flag=_wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 216: if ((name_ok=!strcmp("Transform_getPosition",cmd))) flag=_wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 217: if ((name_ok=!strcmp("Transform_setRotation",cmd))) flag=_wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 218: if ((name_ok=!strcmp("Transform_setPosition",cmd))) flag=_wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 219: if ((name_ok=!strcmp("Transform_compose",cmd))) flag=_wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 220: if ((name_ok=!strcmp("Transform_inverse2",cmd))) flag=_wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 221: if ((name_ok=!strcmp("Transform_inverse",cmd))) flag=_wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 222: if ((name_ok=!strcmp("Transform_mtimes",cmd))) flag=_wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 223: if ((name_ok=!strcmp("Transform_Identity",cmd))) flag=_wrap_Transform_Identity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 224: if ((name_ok=!strcmp("Transform_toString",cmd))) flag=_wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 225: if ((name_ok=!strcmp("Transform_display",cmd))) flag=_wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 226: if ((name_ok=!strcmp("NR_OF_SENSOR_TYPES_get",cmd))) flag=_wrap_NR_OF_SENSOR_TYPES_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 227: if ((name_ok=!strcmp("delete_Sensor",cmd))) flag=_wrap_delete_Sensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 228: if ((name_ok=!strcmp("Sensor_getName",cmd))) flag=_wrap_Sensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 229: if ((name_ok=!strcmp("Sensor_getSensorType",cmd))) flag=_wrap_Sensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 230: if ((name_ok=!strcmp("Sensor_getParent",cmd))) flag=_wrap_Sensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 231: if ((name_ok=!strcmp("Sensor_getParentIndex",cmd))) flag=_wrap_Sensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 232: if ((name_ok=!strcmp("Sensor_isValid",cmd))) flag=_wrap_Sensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 233: if ((name_ok=!strcmp("Sensor_clone",cmd))) flag=_wrap_Sensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 234: if ((name_ok=!strcmp("new_SensorsList",cmd))) flag=_wrap_new_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 235: if ((name_ok=!strcmp("delete_SensorsList",cmd))) flag=_wrap_delete_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 236: if ((name_ok=!strcmp("SensorsList_addSensor",cmd))) flag=_wrap_SensorsList_addSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 237: if ((name_ok=!strcmp("SensorsList_getNrOfSensors",cmd))) flag=_wrap_SensorsList_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 238: if ((name_ok=!strcmp("SensorsList_getSensorIndex",cmd))) flag=_wrap_SensorsList_getSensorIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 239: if ((name_ok=!strcmp("SensorsList_getSensor",cmd))) flag=_wrap_SensorsList_getSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 240: if ((name_ok=!strcmp("new_SensorsMeasurements",cmd))) flag=_wrap_new_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 241: if ((name_ok=!strcmp("delete_SensorsMeasurements",cmd))) flag=_wrap_delete_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 242: if ((name_ok=!strcmp("SensorsMeasurements_setNrOfSensors",cmd))) flag=_wrap_SensorsMeasurements_setNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 243: if ((name_ok=!strcmp("SensorsMeasurements_getNrOfSensors",cmd))) flag=_wrap_SensorsMeasurements_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 244: if ((name_ok=!strcmp("SensorsMeasurements_setMeasurement",cmd))) flag=_wrap_SensorsMeasurements_setMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 245: if ((name_ok=!strcmp("SensorsMeasurements_getMeasurement",cmd))) flag=_wrap_SensorsMeasurements_getMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 246: if ((name_ok=!strcmp("new_SixAxisForceTorqueSensor",cmd))) flag=_wrap_new_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 247: if ((name_ok=!strcmp("delete_SixAxisForceTorqueSensor",cmd))) flag=_wrap_delete_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 248: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setName",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 249: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setFirstLinkSensorTransform",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 250: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setSecondLinkSensorTransform",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 251: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getFirstLinkIndex",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 252: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getSecondLinkIndex",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 253: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setParent",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 254: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setParentIndex",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 255: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_setAppliedWrenchLink",cmd))) flag=_wrap_SixAxisForceTorqueSensor_setAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 256: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getName",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 257: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getSensorType",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 258: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getParent",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 259: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getParentIndex",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 260: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_isValid",cmd))) flag=_wrap_SixAxisForceTorqueSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 261: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_clone",cmd))) flag=_wrap_SixAxisForceTorqueSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 262: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getAppliedWrenchLink",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 263: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_isLinkAttachedToSensor",cmd))) flag=_wrap_SixAxisForceTorqueSensor_isLinkAttachedToSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 264: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getLinkSensorTransform",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 265: if ((name_ok=!strcmp("SixAxisForceTorqueSensor_getWrenchAppliedOnLink",cmd))) flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 266: if ((name_ok=!strcmp("DynamicsRegressorParameter_category_get",cmd))) flag=_wrap_DynamicsRegressorParameter_category_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 267: if ((name_ok=!strcmp("DynamicsRegressorParameter_category_set",cmd))) flag=_wrap_DynamicsRegressorParameter_category_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 268: if ((name_ok=!strcmp("DynamicsRegressorParameter_elemIndex_get",cmd))) flag=_wrap_DynamicsRegressorParameter_elemIndex_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 269: if ((name_ok=!strcmp("DynamicsRegressorParameter_elemIndex_set",cmd))) flag=_wrap_DynamicsRegressorParameter_elemIndex_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 270: if ((name_ok=!strcmp("DynamicsRegressorParameter_type_get",cmd))) flag=_wrap_DynamicsRegressorParameter_type_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 271: if ((name_ok=!strcmp("DynamicsRegressorParameter_type_set",cmd))) flag=_wrap_DynamicsRegressorParameter_type_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 272: if ((name_ok=!strcmp("DynamicsRegressorParameter_lt",cmd))) flag=_wrap_DynamicsRegressorParameter_lt(resc,resv,argc,(mxArray**)(argv)); break;
+  case 273: if ((name_ok=!strcmp("DynamicsRegressorParameter_isequal",cmd))) flag=_wrap_DynamicsRegressorParameter_isequal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 274: if ((name_ok=!strcmp("DynamicsRegressorParameter_ne",cmd))) flag=_wrap_DynamicsRegressorParameter_ne(resc,resv,argc,(mxArray**)(argv)); break;
+  case 275: if ((name_ok=!strcmp("new_DynamicsRegressorParameter",cmd))) flag=_wrap_new_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 276: if ((name_ok=!strcmp("delete_DynamicsRegressorParameter",cmd))) flag=_wrap_delete_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 277: if ((name_ok=!strcmp("DynamicsRegressorParametersList_parameters_get",cmd))) flag=_wrap_DynamicsRegressorParametersList_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 278: if ((name_ok=!strcmp("DynamicsRegressorParametersList_parameters_set",cmd))) flag=_wrap_DynamicsRegressorParametersList_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 279: if ((name_ok=!strcmp("DynamicsRegressorParametersList_getDescriptionOfParameter",cmd))) flag=_wrap_DynamicsRegressorParametersList_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 280: if ((name_ok=!strcmp("DynamicsRegressorParametersList_addParam",cmd))) flag=_wrap_DynamicsRegressorParametersList_addParam(resc,resv,argc,(mxArray**)(argv)); break;
+  case 281: if ((name_ok=!strcmp("DynamicsRegressorParametersList_addList",cmd))) flag=_wrap_DynamicsRegressorParametersList_addList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 282: if ((name_ok=!strcmp("DynamicsRegressorParametersList_findParam",cmd))) flag=_wrap_DynamicsRegressorParametersList_findParam(resc,resv,argc,(mxArray**)(argv)); break;
+  case 283: if ((name_ok=!strcmp("DynamicsRegressorParametersList_getNrOfParameters",cmd))) flag=_wrap_DynamicsRegressorParametersList_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 284: if ((name_ok=!strcmp("new_DynamicsRegressorParametersList",cmd))) flag=_wrap_new_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 285: if ((name_ok=!strcmp("delete_DynamicsRegressorParametersList",cmd))) flag=_wrap_delete_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 286: if ((name_ok=!strcmp("new_DynamicsRegressorGenerator",cmd))) flag=_wrap_new_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 287: if ((name_ok=!strcmp("delete_DynamicsRegressorGenerator",cmd))) flag=_wrap_delete_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 288: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile",cmd))) flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 289: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString",cmd))) flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 290: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRegressorStructureFromFile",cmd))) flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 291: if ((name_ok=!strcmp("DynamicsRegressorGenerator_loadRegressorStructureFromString",cmd))) flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 292: if ((name_ok=!strcmp("DynamicsRegressorGenerator_isValid",cmd))) flag=_wrap_DynamicsRegressorGenerator_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 293: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getNrOfParameters",cmd))) flag=_wrap_DynamicsRegressorGenerator_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 294: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getNrOfOutputs",cmd))) flag=_wrap_DynamicsRegressorGenerator_getNrOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 295: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getNrOfDegreesOfFreedom",cmd))) flag=_wrap_DynamicsRegressorGenerator_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 296: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfParameter",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 297: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfParameters",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 298: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfOutput",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutput(resc,resv,argc,(mxArray**)(argv)); break;
+  case 299: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfOutputs",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 300: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 301: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom",cmd))) flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 302: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getBaseLinkName",cmd))) flag=_wrap_DynamicsRegressorGenerator_getBaseLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 303: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getSensorsModel",cmd))) flag=_wrap_DynamicsRegressorGenerator_getSensorsModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 304: if ((name_ok=!strcmp("DynamicsRegressorGenerator_setRobotState",cmd))) flag=_wrap_DynamicsRegressorGenerator_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 305: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getSensorsMeasurements",cmd))) flag=_wrap_DynamicsRegressorGenerator_getSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 306: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeRegressor",cmd))) flag=_wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 307: if ((name_ok=!strcmp("DynamicsRegressorGenerator_getModelParameters",cmd))) flag=_wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 308: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace",cmd))) flag=_wrap_DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 309: if ((name_ok=!strcmp("DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace",cmd))) flag=_wrap_DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
   default: id_exists=0;
   }
   if (!id_exists) {

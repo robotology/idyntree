@@ -201,31 +201,6 @@ namespace iDynTree
     }
     
     
-    RotationRaw RotationRaw::inverse() const
-    {
-        return RotationRaw::inverse2(*this);
-    }
-    
-    RotationRaw RotationRaw::operator*(const RotationRaw& other) const
-    {
-        return compose(*this,other);
-    }
-    
-    PositionRaw RotationRaw::operator*(const PositionRaw& other) const
-    {
-        return changeCoordFrameOf(other);
-    }
-    
-    SpatialMotionVectorRaw RotationRaw::operator*(const SpatialMotionVectorRaw& other) const
-    {
-        return changeCoordFrameOf(other);
-    }
-    
-    SpatialForceVectorRaw RotationRaw::operator*(const SpatialForceVectorRaw& other) const
-    {
-        return changeCoordFrameOf(other);
-    }
-    
     RotationRaw RotationRaw::RotX(const double angle)
     {
         RotationRaw result;
@@ -255,14 +230,14 @@ namespace iDynTree
     
     RotationRaw RotationRaw::RPY(const double roll, const double pitch, const double yaw)
     {
-        return RotX(roll)*RotY(pitch)*RotZ(yaw);
+        return compose(RotX(roll), compose(RotY(pitch), RotZ(yaw)));
     }
-
-RotationRaw RotationRaw::Identity()
-{
-    return RotationRaw();
-}
-
+    
+    RotationRaw RotationRaw::Identity()
+    {
+        return RotationRaw();
+    }
+    
     
     std::string RotationRaw::toString() const
     {
