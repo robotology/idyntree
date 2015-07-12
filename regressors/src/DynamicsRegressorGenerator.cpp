@@ -394,7 +394,7 @@ bool DynamicsRegressorGenerator::setRobotState(const VectorDynSize& q,
                                                const VectorDynSize& q_dotdot,
                                                const Twist& world_gravity)
 {
-    Transform world_T_base = TransformRaw::Identity();
+    Transform world_T_base = Transform::Identity();
     Twist base_velocity = SpatialMotionVectorRaw::Zero();
     Twist base_acceleration = SpatialMotionVectorRaw::Zero();
 

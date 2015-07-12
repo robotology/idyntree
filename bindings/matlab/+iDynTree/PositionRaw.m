@@ -43,8 +43,8 @@ classdef PositionRaw < iDynTree.IVector
     function varargout = changeRefPoint(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(59,'PositionRaw_changeRefPoint',self,varargin{:});
     end
-    function varargout = changeCoordinateFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(60,'PositionRaw_changeCoordinateFrame',self,varargin{:});
+    function varargout = changePointOf(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(62,'PositionRaw_changePointOf',self,varargin{:});
     end
     function varargout = toString(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(63,'PositionRaw_toString',self,varargin{:});
@@ -73,10 +73,10 @@ classdef PositionRaw < iDynTree.IVector
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(61,'PositionRaw_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(60,'PositionRaw_compose',varargin{:});
     end
     function varargout = inverse(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(62,'PositionRaw_inverse',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(61,'PositionRaw_inverse',varargin{:});
     end
   end
 end

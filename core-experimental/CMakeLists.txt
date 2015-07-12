@@ -24,7 +24,6 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/SpatialMomentum.h
                               include/iDynTree/Core/SpatialMotionVectorRaw.h
                               include/iDynTree/Core/Transform.h
-                              include/iDynTree/Core/TransformRaw.h
                               include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Twist.h
                               include/iDynTree/Core/Utils.h
@@ -51,7 +50,6 @@ set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/SpatialInertiaRaw.cpp
                               src/SpatialInertia.cpp
                               src/Transform.cpp
-                              src/TransformRaw.cpp
                               src/TransformSemantics.cpp
                               src/Twist.cpp
                               src/Utils.cpp

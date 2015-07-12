@@ -96,9 +96,9 @@ namespace iDynTree
         const Rotation & changeRefOrientFrame(const Rotation & newRefOrientFrame);
         static Rotation compose(const Rotation & op1, const Rotation & op2);
         static Rotation inverse2(const Rotation & orient);
-        Position convertToNewCoordFrame(const Position & other) const;
-        Twist  convertToNewCoordFrame(const Twist & other) const;
-        Wrench convertToNewCoordFrame(const Wrench & other) const;
+        Position changeCoordFrameOf(const Position & other) const;
+        Twist  changeCoordFrameOf(const Twist & other) const;
+        Wrench changeCoordFrameOf(const Wrench & other) const;
 
 
         /**
@@ -110,13 +110,56 @@ namespace iDynTree
         Twist    operator*(const Twist    & other) const;
         Wrench   operator*(const Wrench   & other) const;
 
-
+        
+        /**
+         * @name Initialization helpers.
+         *
+         */
+        ///@{
+        
+        /**
+         * Return a Rotation around axis X of given angle
+         *
+         * @param angle the angle (in Radians) of the rotation arount the X axis
+         */
+        static Rotation RotX(const double angle);
+        
+        /**
+         * Return a Rotation around axis Y of given angle
+         *
+         * @param angle the angle (in Radians) of the rotation arount the Y axis
+         */
+        static Rotation RotY(const double angle);
+        
+        /**
+         * Return a Rotation around axis Z of given angle
+         *
+         * @param angle the angle (in Radians) of the rotation arount the Z axis
+         */
+        static Rotation RotZ(const double angle);
+        
+        /**
+         * Return a rotation object given Roll, Pitch and Yaw values.
+         *
+         * @note This method is compatible with the KDL::Rotation::RPY method.
+         */
+        static Rotation RPY(const double roll, const double pitch, const double yaw);
+        
+        /**
+         * Return an identity rotation.
+         *
+         *
+         */
+        static Rotation Identity();
+        
+        ///@}
+        
         /** @name Output helpers.
          *  Output helpers.
          */
         ///@{
         std::string toString() const;
-
+        
         std::string reservedToString() const;
         ///@}
     };

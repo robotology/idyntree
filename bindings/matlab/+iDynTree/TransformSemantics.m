@@ -3,9 +3,9 @@ classdef TransformSemantics < SwigRef
     function self = TransformSemantics(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(208,'new_TransformSemantics',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(204,'new_TransformSemantics',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(208,'new_TransformSemantics',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(204,'new_TransformSemantics',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -14,60 +14,27 @@ classdef TransformSemantics < SwigRef
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(209,'delete_TransformSemantics',self);
+        iDynTreeMATLAB_wrap(205,'delete_TransformSemantics',self);
         self.swigOwn=false;
       end
     end
     function varargout = getRotationSemantics(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(210,'TransformSemantics_getRotationSemantics',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(206,'TransformSemantics_getRotationSemantics',self,varargin{:});
     end
     function varargout = getPositionSemantics(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(211,'TransformSemantics_getPositionSemantics',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(207,'TransformSemantics_getPositionSemantics',self,varargin{:});
     end
     function varargout = setRotationSemantics(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(212,'TransformSemantics_setRotationSemantics',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(208,'TransformSemantics_setRotationSemantics',self,varargin{:});
     end
     function varargout = setPositionSemantics(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(213,'TransformSemantics_setPositionSemantics',self,varargin{:});
-    end
-    function varargout = getPoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(214,'TransformSemantics_getPoint',self,varargin{:});
-    end
-    function varargout = getOrientationFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(215,'TransformSemantics_getOrientationFrame',self,varargin{:});
-    end
-    function varargout = getReferencePoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(216,'TransformSemantics_getReferencePoint',self,varargin{:});
-    end
-    function varargout = getReferenceOrientationFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(217,'TransformSemantics_getReferenceOrientationFrame',self,varargin{:});
-    end
-    function varargout = getCoordinateFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(218,'TransformSemantics_getCoordinateFrame',self,varargin{:});
-    end
-    function varargout = setPoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(219,'TransformSemantics_setPoint',self,varargin{:});
-    end
-    function varargout = setOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(220,'TransformSemantics_setOrientationFrame',self,varargin{:});
-    end
-    function varargout = setReferencePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(221,'TransformSemantics_setReferencePoint',self,varargin{:});
-    end
-    function varargout = setReferenceOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(222,'TransformSemantics_setReferenceOrientationFrame',self,varargin{:});
-    end
-    function varargout = inverse(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(229,'TransformSemantics_inverse',self,varargin{:});
-    end
-    function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(230,'TransformSemantics_mtimes',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(209,'TransformSemantics_setPositionSemantics',self,varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(231,'TransformSemantics_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(210,'TransformSemantics_toString',self,varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(232,'TransformSemantics_display',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(211,'TransformSemantics_display',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -81,23 +48,5 @@ classdef TransformSemantics < SwigRef
     end
   end
   methods(Static)
-    function varargout = check_compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(223,'TransformSemantics_check_compose',varargin{:});
-    end
-    function varargout = check_inverse2(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(224,'TransformSemantics_check_inverse2',varargin{:});
-    end
-    function varargout = check_transform(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(225,'TransformSemantics_check_transform',varargin{:});
-    end
-    function varargout = compose(varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(226,'TransformSemantics_compose',varargin{:});
-    end
-    function varargout = inverse2(varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(227,'TransformSemantics_inverse2',varargin{:});
-    end
-    function varargout = transform(varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(228,'TransformSemantics_transform',varargin{:});
-    end
   end
 end

@@ -17,6 +17,8 @@
 namespace iDynTree
 {
     class Rotation;
+    class Twist;
+    class Wrench;
     
     /**
      * Class representation the coordinates of the Position of
@@ -89,6 +91,8 @@ namespace iDynTree
         const Position & changeCoordinateFrame(const Rotation & newCoordinateFrame);
         static Position compose(const Position & op1, const Position & op2);
         static Position inverse(const Position & op);
+        Twist  changePointOf(const Twist & other) const;
+        Wrench changePointOf(const Wrench & other) const;
         
         /**
          * overloaded operators
@@ -96,6 +100,8 @@ namespace iDynTree
         Position operator+(const Position &other) const;
         Position operator-(const Position &other) const;
         Position operator-() const;
+        Twist    operator*(const Twist    & other) const;
+        Wrench   operator*(const Wrench   & other) const;
         
         /** @name Output helpers.
          *  Output helpers.
@@ -106,7 +112,7 @@ namespace iDynTree
         std::string reservedToString() const;
         ///@}
         
-        friend Position Rotation::convertToNewCoordFrame(const Position & op) const;
+        friend Position Rotation::changeCoordFrameOf(const Position & op) const;
     };
 }
 

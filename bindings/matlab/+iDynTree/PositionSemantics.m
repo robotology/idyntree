@@ -42,14 +42,11 @@ classdef PositionSemantics < SwigRef
     function varargout = changeRefPoint(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(74,'PositionSemantics_changeRefPoint',self,varargin{:});
     end
-    function varargout = changeCoordinateFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(75,'PositionSemantics_changeCoordinateFrame',self,varargin{:});
-    end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(78,'PositionSemantics_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(77,'PositionSemantics_toString',self,varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(79,'PositionSemantics_display',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(78,'PositionSemantics_display',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -64,10 +61,10 @@ classdef PositionSemantics < SwigRef
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(76,'PositionSemantics_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(75,'PositionSemantics_compose',varargin{:});
     end
     function varargout = inverse(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(77,'PositionSemantics_inverse',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(76,'PositionSemantics_inverse',varargin{:});
     end
   end
 end
