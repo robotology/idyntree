@@ -7,6 +7,8 @@
 
 #include "PositionRaw.h"
 #include "RotationRaw.h"
+#include "SpatialMotionVectorRaw.h"
+#include "SpatialForceVectorRaw.h"
 #include "Utils.h"
 #include <cstdio>
 #include <sstream>
@@ -15,6 +17,8 @@
 #include <Eigen/Geometry>
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+typedef Eigen::Matrix<double,6,1> Vector6d;
+
 
 namespace iDynTree
 {
@@ -23,6 +27,7 @@ namespace iDynTree
         this->zero();
     }
 
+
     PositionRaw::PositionRaw(double x, double y, double z)
     {
         this->m_data[0] = x;
@@ -30,10 +35,6 @@ namespace iDynTree
         this->m_data[2] = z;
     }
 
-    PositionRaw::PositionRaw(const double* in_data, const unsigned int in_size): Vector3(in_data, in_size)
-    {
-
-    }
 
     PositionRaw::PositionRaw(const PositionRaw& other)
     {
@@ -47,7 +48,7 @@ namespace iDynTree
     {
 
     }
-
+    
     const PositionRaw& PositionRaw::changePoint(const PositionRaw& newPoint)
     {
         this->m_data[0] += newPoint(0);
@@ -62,16 +63,6 @@ namespace iDynTree
         this->m_data[0] += newRefPoint(0);
         this->m_data[1] += newRefPoint(1);
         this->m_data[2] += newRefPoint(2);
-
-        return *this;
-    }
-
-    const PositionRaw& PositionRaw::changeCoordinateFrame(const RotationRaw & newCoordinateFrame)
-    {
-        Eigen::Map<const Matrix3dRowMajor> newCoordFrame(newCoordinateFrame.data());
-        Eigen::Map<Eigen::Vector3d> positionCoord(this->data());
-
-        positionCoord = newCoordFrame*positionCoord;
 
         return *this;
     }
@@ -91,6 +82,34 @@ namespace iDynTree
         result(0) = -op.m_data[0];
         result(1) = -op.m_data[1];
         result(2) = -op.m_data[2];
+        return result;
+    }
+
+    SpatialMotionVectorRaw PositionRaw::changePointOf(const SpatialMotionVectorRaw & other) const
+    {
+        SpatialMotionVectorRaw result;
+
+        Eigen::Map<const Eigen::Vector3d> thisPos(this->data());
+        Eigen::Map<const Vector6d> otherTwist(other.data());
+        Eigen::Map<Vector6d> resTwist(result.data());
+
+        resTwist.segment<3>(0) =  otherTwist.segment<3>(0)+thisPos.cross(otherTwist.segment<3>(3));
+        resTwist.segment<3>(3) =  otherTwist.segment<3>(3);
+
+        return result;
+    }
+
+    SpatialForceVectorRaw PositionRaw::changePointOf(const SpatialForceVectorRaw & other) const
+    {
+        SpatialForceVectorRaw result;
+
+        Eigen::Map<const Eigen::Vector3d> thisPos(this->data());
+        Eigen::Map<const Vector6d> otherWrench(other.data());
+        Eigen::Map<Vector6d> resWrench(result.data());
+
+        resWrench.segment<3>(0) = otherWrench.segment<3>(0);
+        resWrench.segment<3>(3) = thisPos.cross(otherWrench.segment<3>(0))+otherWrench.segment<3>(3);
+
         return result;
     }
 

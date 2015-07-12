@@ -43,12 +43,6 @@ namespace iDynTree
         this->m_data[8] = zz;
     }
 
-    RotationRaw::RotationRaw(const double* in_data,
-                             const unsigned int in_rows,
-                             const unsigned int in_cols): Matrix3x3(in_data, in_rows, in_cols)
-    {
-
-    }
 
     RotationRaw::RotationRaw(const RotationRaw& other)
     {
@@ -108,7 +102,7 @@ namespace iDynTree
         return result;
     }
 
-    PositionRaw RotationRaw::convertToNewCoordFrame(const PositionRaw & other) const
+    PositionRaw RotationRaw::changeCoordFrameOf(const PositionRaw & other) const
     {
         PositionRaw result;
 
@@ -121,7 +115,7 @@ namespace iDynTree
         return result;
     }
 
-    SpatialMotionVectorRaw RotationRaw::convertToNewCoordFrame(const SpatialMotionVectorRaw& other) const
+    SpatialMotionVectorRaw RotationRaw::changeCoordFrameOf(const SpatialMotionVectorRaw& other) const
     {
         SpatialMotionVectorRaw result;
 
@@ -136,7 +130,7 @@ namespace iDynTree
         return result;
     }
 
-    SpatialForceVectorRaw RotationRaw::convertToNewCoordFrame(const SpatialForceVectorRaw& other) const
+    SpatialForceVectorRaw RotationRaw::changeCoordFrameOf(const SpatialForceVectorRaw& other) const
     {
         SpatialForceVectorRaw result;
 
@@ -151,31 +145,6 @@ namespace iDynTree
         return result;
     }
 
-
-    RotationRaw RotationRaw::inverse() const
-    {
-        return RotationRaw::inverse2(*this);
-    }
-
-    RotationRaw RotationRaw::operator*(const RotationRaw& other) const
-    {
-        return compose(*this,other);
-    }
-
-    PositionRaw RotationRaw::operator*(const PositionRaw& other) const
-    {
-        return convertToNewCoordFrame(other);
-    }
-
-    SpatialMotionVectorRaw RotationRaw::operator*(const SpatialMotionVectorRaw& other) const
-    {
-        return convertToNewCoordFrame(other);
-    }
-
-    SpatialForceVectorRaw RotationRaw::operator*(const SpatialForceVectorRaw& other) const
-    {
-        return convertToNewCoordFrame(other);
-    }
 
     RotationRaw RotationRaw::RotX(const double angle)
     {
@@ -206,13 +175,13 @@ namespace iDynTree
 
     RotationRaw RotationRaw::RPY(const double roll, const double pitch, const double yaw)
     {
-        return RotX(roll)*RotY(pitch)*RotZ(yaw);
+        return compose(RotX(roll), compose(RotY(pitch), RotZ(yaw)));
     }
 
-RotationRaw RotationRaw::Identity()
-{
-    return RotationRaw();
-}
+    RotationRaw RotationRaw::Identity()
+    {
+        return RotationRaw();
+    }
 
 
     std::string RotationRaw::toString() const

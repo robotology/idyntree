@@ -1,11 +1,12 @@
-classdef RotationalInertiaRaw < SwigRef
+classdef RotationalInertiaRaw < iDynTree.Matrix3x3
   methods
     function self = RotationalInertiaRaw(varargin)
+      self@iDynTree.Matrix3x3('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(197,'new_RotationalInertiaRaw',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(198,'new_RotationalInertiaRaw',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(197,'new_RotationalInertiaRaw',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(198,'new_RotationalInertiaRaw',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -14,39 +15,26 @@ classdef RotationalInertiaRaw < SwigRef
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(198,'delete_RotationalInertiaRaw',self);
+        iDynTreeMATLAB_wrap(199,'delete_RotationalInertiaRaw',self);
         self.swigOwn=false;
       end
-    end
-    function varargout = zero(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(199,'RotationalInertiaRaw_zero',self,varargin{:});
-    end
-    function varargout = TODOparen(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(200,'RotationalInertiaRaw_TODOparen',self,varargin{:});
-    end
-    function varargout = getVal(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(201,'RotationalInertiaRaw_getVal',self,varargin{:});
-    end
-    function varargout = setVal(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(202,'RotationalInertiaRaw_setVal',self,varargin{:});
-    end
-    function varargout = rows(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(203,'RotationalInertiaRaw_rows',self,varargin{:});
-    end
-    function varargout = cols(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(204,'RotationalInertiaRaw_cols',self,varargin{:});
-    end
-    function varargout = data(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(205,'RotationalInertiaRaw_data',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
       ok = false;
       switch i
       end
+      [v,ok] = swig_fieldsref@iDynTree.Matrix3x3(self,i);
+      if ok
+        return
+      end
     end
     function [self,ok] = swig_fieldasgn(self,i,v)
       switch i
+      end
+      [self,ok] = swig_fieldasgn@iDynTree.Matrix3x3(self,i,v);
+      if ok
+        return
       end
     end
   end

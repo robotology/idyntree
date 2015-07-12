@@ -3,9 +3,9 @@ classdef SensorsList < SwigRef
     function self = SensorsList(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(321,'new_SensorsList',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(287,'new_SensorsList',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(321,'new_SensorsList',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(287,'new_SensorsList',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -14,21 +14,21 @@ classdef SensorsList < SwigRef
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(322,'delete_SensorsList',self);
+        iDynTreeMATLAB_wrap(288,'delete_SensorsList',self);
         self.swigOwn=false;
       end
     end
     function varargout = addSensor(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(323,'SensorsList_addSensor',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(289,'SensorsList_addSensor',self,varargin{:});
     end
     function varargout = getNrOfSensors(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(324,'SensorsList_getNrOfSensors',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(290,'SensorsList_getNrOfSensors',self,varargin{:});
     end
     function varargout = getSensorIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(325,'SensorsList_getSensorIndex',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(291,'SensorsList_getSensorIndex',self,varargin{:});
     end
     function varargout = getSensor(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(326,'SensorsList_getSensor',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(292,'SensorsList_getSensor',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
