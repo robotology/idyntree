@@ -10,6 +10,7 @@ include_directories(include/iDynTree/Core)
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
                               include/iDynTree/Core/MatrixDynSize.h
+                              include/iDynTree/Core/MatrixFixSize.h
                               include/iDynTree/Core/Position.h
                               include/iDynTree/Core/PositionRaw.h
                               include/iDynTree/Core/PositionSemantics.h
@@ -27,7 +28,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Twist.h
                               include/iDynTree/Core/Utils.h
-                              include/iDynTree/Core/Vector6.h
+                              include/iDynTree/Core/VectorFixSize.h
                               include/iDynTree/Core/VectorDynSize.h
                               include/iDynTree/Core/Wrench.h)
 
@@ -53,7 +54,6 @@ set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/TransformSemantics.cpp
                               src/Twist.cpp
                               src/Utils.cpp
-                              src/Vector6.cpp
                               src/VectorDynSize.cpp
                               src/Wrench.cpp
                               src/PrivateUtils.cpp)
@@ -64,6 +64,9 @@ SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})
 
 # share headers with all iDynTree targes
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+
+include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 set(libraryname idyntree-core-exp)
 

@@ -8,7 +8,8 @@
 #ifndef IDYNTREE_POSITION_RAW_H
 #define IDYNTREE_POSITION_RAW_H
 
-#include "IVector.h"
+#include <iDynTree/Core/IVector.h>
+#include <iDynTree/Core/VectorFixSize.h>
 #include <string>
 
 namespace iDynTree
@@ -22,74 +23,34 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    class PositionRaw: public IVector
+    class PositionRaw: public Vector3
     {
-    protected:
-        /**
-         * Storage for the Position Coordinate:
-         * contains the x, y and z coordinates
-         * of the position.
-         */
-        double m_data[3];
-        
     public:
         /**
          * Default constructor: initialize all the coordinates to 0
          */
         PositionRaw();
-        
+
         /**
          * Constructor from 3 doubles: initialize the coordinates with the passed values.
          */
         PositionRaw(double x, double y, double z);
-        
+
+        /**
+         * Constructor from a raw buffer of 3 doubles.
+         */
+        PositionRaw(const double* in_data, const unsigned int in_size);
+
         /**
          * Copy constructor: create a PositionRaw from another PositionRaw
          */
         PositionRaw(const PositionRaw & other);
-        
+
         /**
          * Destructor
          */
         virtual ~PositionRaw();
-        
-        /**
-         * @name Vector interface methods.
-         * Methods exposing a vector-like interface to PositionRaw.
-         */
-        ///@{
-        double operator()(const unsigned int index) const;
-        
-        double& operator()(const unsigned int index);
-        
-        double getVal(const unsigned int index) const;
-        
-        bool setVal(const unsigned int index, const double new_el);
-        
-        unsigned int size() const;
-        
-        ///@}
-        
-        
-        
-        /**
-         * Raw data accessor: return a pointer to a vector of 3 doubles,
-         * representing the x,y and z coordinates of the Position
-         */
-        const double * data() const;
-        
-        /**
-         * Raw data accessor: return a pointer to a vector of 3 doubles,
-         * representing the x,y and z coordinates of the Position
-         */
-        double * data();
-        
-        /**
-         * Assign all element of the vector to 0.
-         */
-        void zero();
-        
-        
+
         /**
          * Geometric operations
          */
@@ -106,12 +67,12 @@ namespace iDynTree
          */
         ///@{
         std::string toString() const;
-        
+
         std::string reservedToString() const;
         ///@}
-        
+
     };
-    
+
 }
 
 #endif /* IDYNTREE_POSITION_RAW_H */

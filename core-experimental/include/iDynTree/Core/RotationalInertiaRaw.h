@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_ROTATIONAL_INERTIA_RAW_H
 #define IDYNTREE_ROTATIONAL_INERTIA_RAW_H
 
-#include "IMatrix.h"
+#include <iDynTree/Core/MatrixFixSize.h>
 
 namespace iDynTree
 {
@@ -21,13 +21,14 @@ namespace iDynTree
      *
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.
+     *
+     *  We use a parent Matrix3x3 for storage of the rotational inertia matrix:
+     *  given that the inertia matrix is a 3x3 symmetric matrix,
+     *                             the ordering (row order or column order) is not influencing
+     *                             the storage of the matrix.
      */
-    class RotationalInertiaRaw: IMatrix
+    class RotationalInertiaRaw: public Matrix3x3
     {
-        double m_data[9]; /** storage for the rotational inertia matrix:
-                                   given that the inertia matrix is a 3x3 symmetric matrix,
-                                   the ordering (row order or column order) is not influencing
-                                   the storage of the matrix. */
 
     public:
         RotationalInertiaRaw();
@@ -35,29 +36,6 @@ namespace iDynTree
         RotationalInertiaRaw(const RotationalInertiaRaw & other);
         virtual ~RotationalInertiaRaw();
 
-        /**
-         * Reset to the zero the elements of this matrix.
-         */
-        void zero();
-
-        /**
-         * @name Matrix interface methods.
-         * Methods exposing a matrix-like interface to MatrixDynSize.
-         *
-         * \warning Notice that using this methods you can damage the underlyng rotation matrix.
-         *          In doubt, don't use them and rely on more high level functions.
-         */
-        ///@{
-        double operator()(const unsigned int row, const unsigned int col) const;
-        double& operator()(const unsigned int row, const unsigned int col);
-        double getVal(const unsigned int row, const unsigned int col) const;
-        bool setVal(const unsigned int row, const unsigned int col, const double new_el);
-        unsigned int rows() const;
-        unsigned int cols() const;
-        ///@}
-
-        double * data();
-        const double * data() const;
     };
 }
 

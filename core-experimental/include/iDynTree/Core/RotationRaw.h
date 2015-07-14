@@ -8,7 +8,8 @@
 #ifndef IDYNTREE_ROTATION_RAW_H
 #define IDYNTREE_ROTATION_RAW_H
 
-#include "IMatrix.h"
+#include <iDynTree/Core/IMatrix.h>
+#include <iDynTree/Core/MatrixFixSize.h>
 #include <string>
 
 namespace iDynTree
@@ -20,21 +21,21 @@ namespace iDynTree
     /**
      * Class providing the raw coordinates for iDynTree::Rotation class.
      *
+     * Storage for the Orientation:
+     * The rotation matrix representation of the orientation, stored in row major order,
+     * inside a Matrix3x3 parent object.
+     *
+     * \note This implementation is compatible with KDL::Rotation data.
+     *
+     * \warning This class is exposing for convenience the IVector interface.
+     *          Notice that using this methods you can damage the underlyng rotation matrix.
+     *          In doubt, don't use them and rely on more high level functions.
+     *
      * \ingroup iDynTreeCore
      */
-    class RotationRaw: public IMatrix
+    class RotationRaw: public Matrix3x3
     {
-    protected:
-        /**
-         * Storage for the Orientation:
-         * The rotation matrix representation of the orientation, stored in row major order.
-         *
-         * \note This implementation is compatible with KDL::Rotation data.
-         */
-        double privateData[9];
-
-
-    public:
+        public:
         /**
          * Default constructor: initialize all the rotation to the identity
          */
@@ -48,6 +49,15 @@ namespace iDynTree
                     double zx, double zy, double zz);
 
         /**
+         * Constructor from a buffer of 9 doubles,
+         * stored as a C-style array (i.e. row major).
+         *
+         */
+        RotationRaw(const double* in_data,
+                    const unsigned int in_rows,
+                    const unsigned int in_cols);
+
+        /**
          * Copy constructor: create a RotationRaw from another RotationRaw.
          */
         RotationRaw(const RotationRaw & other);
@@ -56,35 +66,6 @@ namespace iDynTree
          * Denstructor
          */
         virtual ~RotationRaw();
-
-        /**
-         * @name Matrix interface methods.
-         * Methods exposing a vector-like interface to RotationRaw.
-         *
-         * \warning Notice that using this methods you can damage the underlyng rotation matrix.
-         *          In doubt, don't use them and rely on more high level functions.
-         */
-        ///@{
-        double operator()(const unsigned int row, const unsigned int col) const;
-        double& operator()(const unsigned int row, const unsigned int col);
-        double getVal(const unsigned int row, const unsigned int col) const;
-        bool setVal(const unsigned int row, const unsigned int col, const double new_el);
-        unsigned int rows() const;
-        unsigned int cols() const;
-        ///@}
-
-
-        /**
-         * Raw data accessor: return a const pointer to a 9 element buffer,
-         * where the rotation matrix is stored following the row major order.
-         */
-        const double * data() const;
-
-        /**
-         * Raw data accessor: return a pointer to a 9 element buffer,
-         * where the rotation matrix is stored following the row major order.
-         */
-        double * data();
 
         /**
          * Geometric operations.
