@@ -111,7 +111,9 @@ const Rotation& Transform::getRotation() const
 void Transform::setPosition(const Position& position)
 {
     // check consistency of setted position with existing rotation
-    // and set the semantics.
+    // and set the semantics. Here we could just have done the check,
+    // without setting the semantics, because they are set in the
+    // processing that follows.
     iDynTreeAssert(this->semantics.setPositionSemantics(position.getSemantics()));
     
     // set position

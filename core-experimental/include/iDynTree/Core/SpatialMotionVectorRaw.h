@@ -9,6 +9,8 @@
 #define IDYNTREE_SPATIAL_MOTION_RAW_H
 
 #include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Core/LinearMotionVector3.h>
+#include <iDynTree/Core/AngularMotionVector3.h>
 
 namespace iDynTree
 {
@@ -32,7 +34,7 @@ namespace iDynTree
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.
      */
-    class SpatialMotionVectorRaw: public Vector6
+    class SpatialMotionVectorRaw: public Vector6, public ISpatialVector
     {
     public:
         /**

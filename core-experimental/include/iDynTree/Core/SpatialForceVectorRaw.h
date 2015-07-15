@@ -32,7 +32,7 @@ namespace iDynTree
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.
      */
-    class SpatialForceVectorRaw: public Vector6
+    class SpatialForceVectorRaw: public Vector6, public ISpatialVector
     {
     public:
         SpatialForceVectorRaw();
