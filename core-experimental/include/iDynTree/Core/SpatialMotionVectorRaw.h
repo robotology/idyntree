@@ -9,6 +9,8 @@
 #define IDYNTREE_SPATIAL_MOTION_RAW_H
 
 #include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Core/LinearMotionVector3.h>
+#include <iDynTree/Core/AngularMotionVector3.h>
 #include <iDynTree/Core/ISpatialVector.h>
 
 namespace iDynTree

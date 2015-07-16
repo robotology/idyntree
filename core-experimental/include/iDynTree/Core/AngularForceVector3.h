@@ -16,7 +16,7 @@ namespace iDynTree
     class LinearForceVector3;
     
     /**
-     * Helper class only used along wit class AngularForceVector3 but defined outside this
+     * Helper class only used along with class AngularForceVector3 but defined outside this
      * same class because we are using the CRTP technique (Curiously Recurring Template Pattern).
      * CRTP here results in the Base class ForceVector3 being instanciated before AngularForceVector3,
      * with this same class as template parameter. The goal is too define methods whose bodies

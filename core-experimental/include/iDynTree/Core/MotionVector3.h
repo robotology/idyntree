@@ -8,8 +8,7 @@
 #ifndef IDYNTREE_MOTION_VECTOR_3_H
 #define IDYNTREE_MOTION_VECTOR_3_H
 
-#include <iDynTree/Core/LinearMotionVector3.h>
-#include <iDynTree/Core/AngularMotionVector3.h>
+#include <iDynTree/Core/GeomVector3.h>
 
 namespace iDynTree
 {
@@ -29,8 +28,8 @@ namespace iDynTree
      * to every motion vectors.
      *
      */
-    template <class MotionT>
-    class MotionVector3: public GeomVector3<MotionT>
+    template <class MotionT, template <class MotionForceT> class MotionConversionsT>
+    class MotionVector3: public GeomVector3<MotionT, MotionConversionsT>
     {
     public:
         /**
@@ -42,11 +41,53 @@ namespace iDynTree
         virtual ~MotionVector3();
         
         /* Cross products */
-        typename MotionT::template derivative<LinearMotionVector3>::Type cross(const LinearMotionVector3& other) const;
-        typename MotionT::template derivative<AngularMotionVector3>.type cross(const AngularMotionVector3& other) const;
-        typename MotionT::derivative<LinearForceVector3>.type cross(const LinearForceVector3& other) const;
-        typename MotionT::derivative<AngularForceVector3>.type cross(const AngularForceVector3& other) const;
+        MotionT cross(const LinearMotionVector3& other) const;
+        MotionT cross(const AngularMotionVector3& other) const;
+        MotionT cross(const LinearForceVector3& other) const;
+        MotionT cross(const AngularForceVector3& other) const;
+        
+        //typename MotionT::template derivative<AngularMotionVector3>.type cross(const AngularMotionVector3& other) const;
+        //typename MotionT::derivative<LinearForceVector3>.type cross(const LinearForceVector3& other) const;
+        //typename MotionT::derivative<AngularForceVector3>.type cross(const AngularForceVector3& other) const;
     };
+    
+    /**
+     * Method definitions
+     */
+    
+    // constructors
+    template <class MotionT, template <class MotionForceT> class MotionConversionsT>
+    MotionVector3<MotionT, MotionConversionsT>::MotionVector3(): GeomVector3<MotionT, MotionConversionsT>()
+    {}
+    
+    template <class MotionT, template <class MotionForceT> class MotionConversionsT>
+    MotionVector3<MotionT, MotionConversionsT>::MotionVector3(const double* in_data, const unsigned int in_size): GeomVector3<MotionT, MotionConversionsT>(in_data, in_size)
+    {}
+    
+    template <class MotionT, template <class MotionForceT> class MotionConversionsT>
+    MotionVector3<MotionT, MotionConversionsT>::MotionVector3(const MotionVector3 & other): GeomVector3<MotionT, MotionConversionsT>(other)
+    {}
+    
+    template <class MotionT, template <class MotionForceT> class MotionConversionsT>
+    MotionVector3<MotionT, MotionConversionsT>::~MotionVector3()
+    {}
+
+    /* Cross products */
+    template <class MotionT, template <class MotionForceT> class MotionConversionsT>
+    MotionT MotionVector3<MotionT, MotionConversionsT>::cross(const LinearMotionVector3& other) const
+    {}
+    
+    template <class MotionT, template <class MotionForceT> class MotionConversionsT>
+    MotionT MotionVector3<MotionT, MotionConversionsT>::cross(const AngularMotionVector3& other) const
+    {}
+    
+    template <class MotionT, template <class MotionForceT> class MotionConversionsT>
+    MotionT MotionVector3<MotionT, MotionConversionsT>::cross(const LinearForceVector3& other) const
+    {}
+    
+    template <class MotionT, template <class MotionForceT> class MotionConversionsT>
+    MotionT MotionVector3<MotionT, MotionConversionsT>::cross(const AngularForceVector3& other) const
+    {}
 }
 
 #endif /* IDYNTREE_MOTION_VECTOR_3_H */

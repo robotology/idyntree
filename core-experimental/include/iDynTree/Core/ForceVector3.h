@@ -12,9 +12,6 @@
 
 namespace iDynTree
 {
-    //class LinearForceVector3;
-    //class AngularForceVector3;
-    
     /**
      * Class providing the raw coordinates and semantics for any force vector
      *
@@ -59,12 +56,6 @@ namespace iDynTree
     template <class ForceT, template <class MotionForceT> class ForceConversionsT>
     ForceVector3<ForceT, ForceConversionsT>::~ForceVector3()
     {}
-
-    /**
-     * Possible instanciations
-     */
-    //typedef ForceVector3<LinearForceVector3> ForceVector3LF;
-    //typedef ForceVector3<AngularForceVector3> ForceVector3AF;
 }
 
 #endif /* IDYNTREE_FORCE_VECTOR_3_H */

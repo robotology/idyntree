@@ -16,6 +16,34 @@ namespace iDynTree
     class AngularMotionVector3;
     
     /**
+     * Helper class only used along with class LinearMotionVector3 but defined outside it.
+     * Check comments about CTRP technique.
+     */
+    template <class MotionForceT> class LinearMotionConvertionsT
+    {
+    public:
+        /**
+         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
+         */
+        typedef LinearForceVector3 DualSpace;
+        
+        /**
+         * Helper type providing the class associated to the alternate type of movement in the same space
+         */
+        typedef AngularMotionVector3 InvertLinAng;
+
+        /**
+         * Helper class providing the result class of the cross product for the operator (v\times).
+         */
+        template <class MotionOrForceT=MotionForceT>
+        struct Derivative
+        {
+            typedef class MotionOrForceT::invertLinAng Type;
+        };
+        
+    };
+    
+    /**
      * Class providing the raw coordinates and semantics for any linear motion vector
      *
      * \ingroup iDynTreeCore
@@ -24,28 +52,9 @@ namespace iDynTree
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class LinearMotionVector3: public MotionVector3<LinearMotionVector3>
+    class LinearMotionVector3: public MotionVector3<LinearMotionVector3, LinearMotionConvertionsT>
     {
     public:
-        /**
-         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
-         */
-        typedef LinearForceVector3 dualSpace;
-
-        /**
-         * Helper type providing the class associated to the alternate type of movement in the same space
-         */
-        typedef AngularMotionVector3 invertLinAng;
-
-        /**
-         * Helper class providing the result class of the cross product
-         */
-        template <class MotionOrForceT>
-        struct derivative
-        {
-            typedef class MotionOrForceT::invertLinAng Type;
-        };
-
         /**
          * constructors
          */

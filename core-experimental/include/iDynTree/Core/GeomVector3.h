@@ -37,9 +37,9 @@ namespace iDynTree
         static GeomVector3<MotionForceT, MotionForceConversionsT> classSingleton;
         
         static MotionForceT& AliasMotionForceT() {
-            return *static_cast<MotionForceT*>(classSingleton);
+            return static_cast<MotionForceT&>(classSingleton);
         }
-        
+
     public:
         /**
          * constructors

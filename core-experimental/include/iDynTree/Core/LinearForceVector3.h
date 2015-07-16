@@ -16,7 +16,7 @@ namespace iDynTree
     class AngularForceVector3;
     
     /**
-     * Helper class only used along wit class AngularForceVector3 but defined outside it.
+     * Helper class only used along with class LinearForceVector3 but defined outside it.
      * Check comments about CTRP technique.
      */
     template <class MotionForceT> class LinearForceConvertionsT
