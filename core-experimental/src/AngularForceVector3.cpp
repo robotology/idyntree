@@ -9,17 +9,18 @@
 
 namespace iDynTree
 {
+    // constructors
     AngularForceVector3::AngularForceVector3()
     {
-        // ForceVector3<AngularForceVector3>() will be implicitly called
+        // ForceVector3<AngularForceVector3, AngularForceConvertionsT>() will be implicitly called
     }
     
     
-    AngularForceVector3::AngularForceVector3(const double* in_data, const unsigned int in_size): ForceVector3<AngularForceVector3>(in_data, in_size)
+    AngularForceVector3::AngularForceVector3(const double* in_data, const unsigned int in_size): ForceVector3<AngularForceVector3, AngularForceConvertionsT>(in_data, in_size)
     {
     }
     
-    AngularForceVector3::AngularForceVector3(const AngularForceVector3& other): ForceVector3<AngularForceVector3>(other)
+    AngularForceVector3::AngularForceVector3(const AngularForceVector3& other): ForceVector3<AngularForceVector3, AngularForceConvertionsT>(other)
     {
     }
     

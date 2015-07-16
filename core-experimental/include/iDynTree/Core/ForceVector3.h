@@ -12,6 +12,9 @@
 
 namespace iDynTree
 {
+    //class LinearForceVector3;
+    //class AngularForceVector3;
+    
     /**
      * Class providing the raw coordinates and semantics for any force vector
      *
@@ -23,8 +26,8 @@ namespace iDynTree
      * to every force vectors.
      *
      */
-    template <class ForceT>
-    class ForceVector3: public GeomVector3<ForceT>
+    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
+    class ForceVector3: public GeomVector3<ForceT, ForceConversionsT>
     {
     public:
         /**
@@ -35,6 +38,33 @@ namespace iDynTree
         ForceVector3(const ForceVector3 & other);
         virtual ~ForceVector3();
     };
+
+    /**
+     * Method definitions
+     */
+    
+    // constructors
+    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
+    ForceVector3<ForceT, ForceConversionsT>::ForceVector3(): GeomVector3<ForceT, ForceConversionsT>()
+    {}
+    
+    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
+    ForceVector3<ForceT, ForceConversionsT>::ForceVector3(const double* in_data, const unsigned int in_size): GeomVector3<ForceT, ForceConversionsT>(in_data, in_size)
+    {}
+    
+    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
+    ForceVector3<ForceT, ForceConversionsT>::ForceVector3(const ForceVector3 & other): GeomVector3<ForceT, ForceConversionsT>(other)
+    {}
+    
+    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
+    ForceVector3<ForceT, ForceConversionsT>::~ForceVector3()
+    {}
+
+    /**
+     * Possible instanciations
+     */
+    //typedef ForceVector3<LinearForceVector3> ForceVector3LF;
+    //typedef ForceVector3<AngularForceVector3> ForceVector3AF;
 }
 
 #endif /* IDYNTREE_FORCE_VECTOR_3_H */

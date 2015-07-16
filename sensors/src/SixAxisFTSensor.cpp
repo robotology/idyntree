@@ -15,7 +15,7 @@
  * Public License for more details
  */
 
-#include "SixAxisFTSensor.hpp"
+#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 
 #include "kdl_codyco/undirectedtree.hpp"
 

@@ -9,6 +9,7 @@ include_directories(include/iDynTree/Core)
 
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
+                              include/iDynTree/Core/ISpatialVector.h
                               include/iDynTree/Core/MatrixDynSize.h
                               include/iDynTree/Core/MatrixFixSize.h
                               include/iDynTree/Core/Position.h
@@ -30,6 +31,8 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/Utils.h
                               include/iDynTree/Core/VectorFixSize.h
                               include/iDynTree/Core/VectorDynSize.h
+                              include/iDynTree/Core/LinearForceVector3.h
+                              include/iDynTree/Core/AngularForceVector3.h
                               include/iDynTree/Core/Wrench.h)
 
 set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h)
@@ -37,6 +40,8 @@ set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h)
 
 set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/MatrixDynSize.cpp
+                              src/LinearForceVector3.cpp
+                              src/AngularForceVector3.cpp
                               src/Position.cpp
                               src/PositionRaw.cpp
                               src/PositionSemantics.cpp

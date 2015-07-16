@@ -34,7 +34,7 @@ namespace iDynTree
     class ISpatialVector
     {
     public:
-        virtual ~ISpatialVector() = 0;
+        virtual ~ISpatialVector() {}
     };
 }
 

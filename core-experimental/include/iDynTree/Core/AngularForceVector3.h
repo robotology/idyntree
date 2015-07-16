@@ -14,9 +14,29 @@ namespace iDynTree
 {
     class AngularMotionVector3;
     class LinearForceVector3;
-    class AngularForceVector3;
     
-    typedef ForceVector3<AngularForceVector3> ForceVector3ForAngular;
+    /**
+     * Helper class only used along wit class AngularForceVector3 but defined outside this
+     * same class because we are using the CRTP technique (Curiously Recurring Template Pattern).
+     * CRTP here results in the Base class ForceVector3 being instanciated before AngularForceVector3,
+     * with this same class as template parameter. The goal is too define methods whose bodies
+     * are specific to class ForceVector3 (so common to AngularForceVector3 and LinearForceVector3), 
+     * but the returned type is specific to AngularForceVector3.
+     */
+    template <class MotionForceT> class AngularForceConvertionsT
+    {
+    public:
+        /**
+         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
+         */
+        typedef AngularMotionVector3 DualSpace;
+        
+        /**
+         * Helper type providing the class associated to the alternate type of movement in the same space
+         */
+        typedef LinearForceVector3 InvertLinAng;
+    };
+    
     /**
      * Class providing the raw coordinates and semantics for any torque vector
      *
@@ -26,19 +46,9 @@ namespace iDynTree
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class AngularForceVector3: public ForceVector3<AngularForceVector3>
+    class AngularForceVector3: public ForceVector3<AngularForceVector3, AngularForceConvertionsT>
     {
     public:
-        /**
-         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
-         */
-        typedef AngularMotionVector3 dualSpace;
-        
-        /**
-         * Helper type providing the class associated to the alternate type of movement in the same space
-         */
-        typedef LinearForceVector3 invertLinAng;
-
         /**
          * constructors
          */

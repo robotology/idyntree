@@ -9,6 +9,9 @@
 #define IDYNTREE_SPATIAL_FORCE_RAW_H
 
 #include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Core/LinearForceVector3.h>
+#include <iDynTree/Core/AngularForceVector3.h>
+#include <iDynTree/Core/ISpatialVector.h>
 
 namespace iDynTree
 {
