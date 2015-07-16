@@ -34,7 +34,12 @@ namespace iDynTree
         SpatialInertia(const SpatialInertia& other);
         virtual ~SpatialInertia();
 
+        // Operations on SpatialInertia
+        static SpatialInertia combine(const SpatialInertia & op1,
+                                      const SpatialInertia & op2);
+
         // overloaded operators
+        SpatialInertia  operator+(const SpatialInertia& other) const;
         SpatialMomentum operator*(const Twist &other) const;
         Wrench operator*(const SpatialAcc &other) const;
     };

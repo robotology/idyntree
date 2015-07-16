@@ -70,12 +70,18 @@ namespace iDynTree
         RotationalInertiaRaw getRotationalInertiaWrtCenterOfMass() const;
 
         /**
+         * Function to combine the rigid body inertia of two different rigid bodies,
+         * giving the rigid body inertia of of the rigid body obtanined by welding the two bodies.
+         */
+        static SpatialInertiaRaw combine(const SpatialInertiaRaw& op1, const SpatialInertiaRaw& op2);
+
+        /**
          * Multiplication function
          *
          */
         SpatialForceVectorRaw multiply(const SpatialMotionVectorRaw & op) const;
 
-        /** reset to zero (i.e. the inertia of body with zero pass) the SpatialInertia */
+        /** reset to zero (i.e. the inertia of body with zero mass) the SpatialInertia */
         void zero();
     };
 }
