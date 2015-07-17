@@ -9,30 +9,10 @@
 #define IDYNTREE_LINEAR_FORCE_VECTOR_3_H
 
 #include <iDynTree/Core/ForceVector3.h>
+#include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
 namespace iDynTree
 {
-    class LinearMotionVector3;
-    class AngularForceVector3;
-    
-    /**
-     * Helper class only used along with class LinearForceVector3 but defined outside it.
-     * Check comments about CTRP technique.
-     */
-    template <class MotionForceT> class LinearForceConvertionsT
-    {
-    public:
-        /**
-         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
-         */
-        typedef LinearMotionVector3 DualSpace;
-        
-        /**
-         * Helper type providing the class associated to the alternate type of movement in the same space
-         */
-        typedef AngularForceVector3 InvertLinAng;
-    };
-    
     /**
      * Class providing the raw coordinates and semantics for any linear force vector
      *
@@ -42,7 +22,7 @@ namespace iDynTree
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class LinearForceVector3: public ForceVector3<LinearForceVector3, LinearForceConvertionsT>
+    class LinearForceVector3: public ForceVector3<LinearForceVector3, LinearForceAssociationsT>
     {
     public:
         /**

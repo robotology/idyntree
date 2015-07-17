@@ -9,6 +9,7 @@
 #define IDYNTREE_FORCE_VECTOR_3_H
 
 #include <iDynTree/Core/GeomVector3.h>
+#include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
 namespace iDynTree
 {
@@ -23,8 +24,8 @@ namespace iDynTree
      * to every force vectors.
      *
      */
-    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
-    class ForceVector3: public GeomVector3<ForceT, ForceConversionsT>
+    template <class ForceT, class ForceAssociationsT>
+    class ForceVector3: public GeomVector3<ForceT, ForceAssociationsT>
     {
     public:
         /**
@@ -41,20 +42,20 @@ namespace iDynTree
      */
     
     // constructors
-    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
-    ForceVector3<ForceT, ForceConversionsT>::ForceVector3(): GeomVector3<ForceT, ForceConversionsT>()
+    template <class ForceT, class ForceAssociationsT>
+    ForceVector3<ForceT, ForceAssociationsT>::ForceVector3(): GeomVector3<ForceT, ForceAssociationsT>()
     {}
     
-    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
-    ForceVector3<ForceT, ForceConversionsT>::ForceVector3(const double* in_data, const unsigned int in_size): GeomVector3<ForceT, ForceConversionsT>(in_data, in_size)
+    template <class ForceT, class ForceAssociationsT>
+    ForceVector3<ForceT, ForceAssociationsT>::ForceVector3(const double* in_data, const unsigned int in_size): GeomVector3<ForceT, ForceAssociationsT>(in_data, in_size)
     {}
     
-    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
-    ForceVector3<ForceT, ForceConversionsT>::ForceVector3(const ForceVector3 & other): GeomVector3<ForceT, ForceConversionsT>(other)
+    template <class ForceT, class ForceAssociationsT>
+    ForceVector3<ForceT, ForceAssociationsT>::ForceVector3(const ForceVector3 & other): GeomVector3<ForceT, ForceAssociationsT>(other)
     {}
     
-    template <class ForceT, template <class MotionForceT> class ForceConversionsT>
-    ForceVector3<ForceT, ForceConversionsT>::~ForceVector3()
+    template <class ForceT, class ForceAssociationsT>
+    ForceVector3<ForceT, ForceAssociationsT>::~ForceVector3()
     {}
 }
 

@@ -9,41 +9,10 @@
 #define IDYNTREE_ANGULAR_MOTION_VECTOR_3_H
 
 #include <iDynTree/Core/MotionVector3.h>
+#include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
 namespace iDynTree
 {
-    class AngularForceVector3;
-    class LinearMotionVector3;
-    class MotionVector3;
-
-    /**
-     * Helper class only used along with class AngularMotionVector3 but defined outside it.
-     * Check comments about CTRP technique.
-     */
-    template <class MotionForceT> class AngularMotionConvertionsT
-    {
-    public:
-        /**
-         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
-         */
-        typedef AngularForceVector3 DualSpace;
-        
-        /**
-         * Helper type providing the class associated to the alternate type of movement in the same space
-         */
-        typedef LinearMotionVector3 InvertLinAng;
-        
-        /**
-         * Helper class providing the result class of the cross product for the operator (w\times).
-         */
-        template <class MotionOrForceT=MotionForceT>
-        struct Derivative
-        {
-            typedef class MotionOrForceT Type;
-        };
-        
-    };
-
     /**
      * Class providing the raw coordinates and semantics for any angular motion vector
      *
@@ -53,7 +22,7 @@ namespace iDynTree
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class AngularMotionVector3: public MotionVector3<AngularMotionVector3, AngularMotionConvertionsT>
+    class AngularMotionVector3: public MotionVector3<AngularMotionVector3, AngularMotionAssociationsT>
     {
     public:
         /**

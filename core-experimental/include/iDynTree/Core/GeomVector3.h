@@ -9,15 +9,11 @@
 #define IDYNTREE_GEOM_VECTOR_3_H
 
 #include <iDynTree/Core/VectorFixSize.h>
-#include <typeinfo>
+#include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
 namespace iDynTree
 {
     class Rotation;
-    //class LinearMotionVector3;
-    //class AngularMotionVector3;
-    //class LinearForceVector3;
-    //class AngularForceVector3;
 
     /**
      * Template class providing the raw coordinates and semantics for any geometric relation vector.
@@ -30,11 +26,11 @@ namespace iDynTree
      * to motion and force vectors or to just provide an interface.
      *
      */
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
+    template <class MotionForceT, class MotionForceAssociationsT>
     class GeomVector3: public Vector3
     {
     private:
-        static GeomVector3<MotionForceT, MotionForceConversionsT> classSingleton;
+        static GeomVector3<MotionForceT, MotionForceAssociationsT> classSingleton;
         
         static MotionForceT& AliasMotionForceT() {
             return static_cast<MotionForceT&>(classSingleton);
@@ -59,7 +55,7 @@ namespace iDynTree
         /**
          * dot product
          */
-        double dot(const typename MotionForceConversionsT<Vector3>::DualSpace & other) const;
+        double dot(const typename MotionForceAssociationsT::DualSpace & other) const;
         
         /**
          * overloaded operators
@@ -74,58 +70,52 @@ namespace iDynTree
      */
     
     // constructors
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    GeomVector3<MotionForceT, MotionForceConversionsT>::GeomVector3(): Vector3()
+    template <class MotionForceT, class MotionForceAssociationsT>
+    GeomVector3<MotionForceT, MotionForceAssociationsT>::GeomVector3(): Vector3()
     {}
     
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    GeomVector3<MotionForceT, MotionForceConversionsT>::GeomVector3(const double* in_data, const unsigned int in_size): Vector3(in_data, in_size)
+    template <class MotionForceT, class MotionForceAssociationsT>
+    GeomVector3<MotionForceT, MotionForceAssociationsT>::GeomVector3(const double* in_data, const unsigned int in_size): Vector3(in_data, in_size)
     {}
     
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    GeomVector3<MotionForceT, MotionForceConversionsT>::GeomVector3(const GeomVector3 & other): Vector3(other)
+    template <class MotionForceT, class MotionForceAssociationsT>
+    GeomVector3<MotionForceT, MotionForceAssociationsT>::GeomVector3(const GeomVector3 & other): Vector3(other)
     {}
     
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    GeomVector3<MotionForceT, MotionForceConversionsT>::~GeomVector3()
+    template <class MotionForceT, class MotionForceAssociationsT>
+    GeomVector3<MotionForceT, MotionForceAssociationsT>::~GeomVector3()
     {}
     
     // Geometric operations
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    const MotionForceT & GeomVector3<MotionForceT, MotionForceConversionsT>::changeCoordFrame(const Rotation & newCoordFrame)
+    template <class MotionForceT, class MotionForceAssociationsT>
+    const MotionForceT & GeomVector3<MotionForceT, MotionForceAssociationsT>::changeCoordFrame(const Rotation & newCoordFrame)
     {}
     
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    MotionForceT GeomVector3<MotionForceT, MotionForceConversionsT>::compose(const MotionForceT & op1, const MotionForceT & op2)
+    template <class MotionForceT, class MotionForceAssociationsT>
+    MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::compose(const MotionForceT & op1, const MotionForceT & op2)
     {}
     
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    MotionForceT GeomVector3<MotionForceT, MotionForceConversionsT>::inverse(const MotionForceT & op)
+    template <class MotionForceT, class MotionForceAssociationsT>
+    MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::inverse(const MotionForceT & op)
     {}
     
     // dot product
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    double GeomVector3<MotionForceT, MotionForceConversionsT>::dot(const typename MotionForceConversionsT<Vector3>::DualSpace & other) const
+    template <class MotionForceT, class MotionForceAssociationsT>
+    double GeomVector3<MotionForceT, MotionForceAssociationsT>::dot(const typename MotionForceAssociationsT::DualSpace & other) const
     {}
 
     // overloaded operators
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    MotionForceT GeomVector3<MotionForceT, MotionForceConversionsT>::operator+(const MotionForceT &other) const
+    template <class MotionForceT, class MotionForceAssociationsT>
+    MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::operator+(const MotionForceT &other) const
     {}
     
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    MotionForceT GeomVector3<MotionForceT, MotionForceConversionsT>::operator-(const MotionForceT &other) const
+    template <class MotionForceT, class MotionForceAssociationsT>
+    MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::operator-(const MotionForceT &other) const
     {}
     
-    template <class MotionForceT, template <class AnyMotionForceT> class MotionForceConversionsT>
-    MotionForceT GeomVector3<MotionForceT, MotionForceConversionsT>::operator-() const
+    template <class MotionForceT, class MotionForceAssociationsT>
+    MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::operator-() const
     {}
-    
-    /**
-     * Possible instanciations
-     */
-    //typedef GeomVector3<LinearForceVector3> GeomVector3LF;
-    //typedef GeomVector3<AngularForceVector3> GeomVector3AF;
 }
 
 #endif /* IDYNTREE_GEOM_VECTOR_3_H */

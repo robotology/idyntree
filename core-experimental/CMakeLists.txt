@@ -37,7 +37,11 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/AngularMotionVector3.h
                               include/iDynTree/Core/Wrench.h)
 
-set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h)
+set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h
+                                       include/iDynTree/Core/PrivateMotionForceVertorAssociations.h
+                                       include/iDynTree/Core/GeomVector3.h
+                                       include/iDynTree/Core/MotionVector3.h
+                                       include/iDynTree/Core/ForceVector3.h)
 
 
 set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
