@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_SPATIALMOMENTUM_H
 #define IDYNTREE_SPATIALMOMENTUM_H
 
-#include "SpatialForceVectorRaw.h"
+#include "SpatialForceVector.h"
 
 namespace iDynTree
 {
@@ -20,12 +20,12 @@ namespace iDynTree
      *
      * Currently this class does not support semantics.
      */
-    class SpatialMomentum: public SpatialForceVectorRaw
+    class SpatialMomentum: public SpatialForceVector
     {
     public:
         SpatialMomentum();
         SpatialMomentum(const double* in_data, const unsigned int in_size);
-        SpatialMomentum(const SpatialForceVectorRaw & other);
+        SpatialMomentum(const SpatialForceVector & other);
         SpatialMomentum(const SpatialMomentum & other);
         virtual ~SpatialMomentum();
 

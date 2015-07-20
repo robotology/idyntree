@@ -5,8 +5,8 @@
  *
  */
 
-#include "SpatialForceVectorRaw.h"
-#include "SpatialMotionVectorRaw.h"
+#include "SpatialForceVector.h"
+#include "SpatialMotionVector.h"
 #include "PositionRaw.h"
 #include "RotationRaw.h"
 #include "Utils.h"
@@ -19,27 +19,27 @@ namespace iDynTree
 typedef Eigen::Matrix<double,6,1> Vector6d;
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 
-SpatialForceVectorRaw::SpatialForceVectorRaw()
+SpatialForceVector::SpatialForceVector()
 {
     // Vector6() will be implicitly called
 }
 
 
-SpatialForceVectorRaw::SpatialForceVectorRaw(const double* in_data, const unsigned int in_size): Vector6(in_data, in_size)
+SpatialForceVector::SpatialForceVector(const double* in_data, const unsigned int in_size): Vector6(in_data, in_size)
 {
 }
 
-SpatialForceVectorRaw::SpatialForceVectorRaw(const SpatialForceVectorRaw& other): Vector6(other.data(),6)
-{
-
-}
-
-SpatialForceVectorRaw::~SpatialForceVectorRaw()
+SpatialForceVector::SpatialForceVector(const SpatialForceVector& other): Vector6(other.data(),6)
 {
 
 }
 
-const SpatialForceVectorRaw& SpatialForceVectorRaw::changePoint(const PositionRaw& newPoint)
+SpatialForceVector::~SpatialForceVector()
+{
+
+}
+
+const SpatialForceVector& SpatialForceVector::changePoint(const PositionRaw& newPoint)
 {
     Eigen::Map<Vector6d> thisData(this->data());
     Eigen::Map<const Eigen::Vector3d> pointData(newPoint.data());
@@ -49,7 +49,7 @@ const SpatialForceVectorRaw& SpatialForceVectorRaw::changePoint(const PositionRa
     return *this;
 }
 
-const SpatialForceVectorRaw& SpatialForceVectorRaw::changeCoordFrame(const RotationRaw& newCoordFrame)
+const SpatialForceVector& SpatialForceVector::changeCoordFrame(const RotationRaw& newCoordFrame)
 {
     Eigen::Map<Vector6d> thisData(this->data());
     Eigen::Map<const Matrix3dRowMajor> rotData(newCoordFrame.data());
@@ -60,9 +60,9 @@ const SpatialForceVectorRaw& SpatialForceVectorRaw::changeCoordFrame(const Rotat
     return *this;
 }
 
-SpatialForceVectorRaw SpatialForceVectorRaw::compose(const SpatialForceVectorRaw& op1, const SpatialForceVectorRaw& op2)
+SpatialForceVector SpatialForceVector::compose(const SpatialForceVector& op1, const SpatialForceVector& op2)
 {
-    SpatialForceVectorRaw result;
+    SpatialForceVector result;
 
     Eigen::Map<const Vector6d> op1Data(op1.data());
     Eigen::Map<const Vector6d> op2Data(op2.data());
@@ -73,9 +73,9 @@ SpatialForceVectorRaw SpatialForceVectorRaw::compose(const SpatialForceVectorRaw
     return result;
 }
 
-SpatialForceVectorRaw SpatialForceVectorRaw::inverse(const SpatialForceVectorRaw& op)
+SpatialForceVector SpatialForceVector::inverse(const SpatialForceVector& op)
 {
-    SpatialForceVectorRaw result;
+    SpatialForceVector result;
 
     Eigen::Map<const Vector6d> opData(op.data());
     Eigen::Map<Vector6d> resultData(result.data());
@@ -85,7 +85,7 @@ SpatialForceVectorRaw SpatialForceVectorRaw::inverse(const SpatialForceVectorRaw
     return result;
 }
 
-double SpatialForceVectorRaw::dot(const SpatialMotionVectorRaw& other) const
+double SpatialForceVector::dot(const SpatialMotionVector& other) const
 {
     Eigen::Map<const Vector6d> otherData(other.data());
     Eigen::Map<const Vector6d> thisData(this->data());
@@ -94,25 +94,25 @@ double SpatialForceVectorRaw::dot(const SpatialMotionVectorRaw& other) const
 }
 
 /*
-SpatialForceVectorRaw SpatialForceVectorRaw::operator+(const SpatialForceVectorRaw& other) const
+SpatialForceVector SpatialForceVector::operator+(const SpatialForceVector& other) const
 {
     return compose(*this,other);
 }
 
-SpatialForceVectorRaw SpatialForceVectorRaw::operator-() const
+SpatialForceVector SpatialForceVector::operator-() const
 {
     return inverse(*this);
 }
 
-SpatialForceVectorRaw SpatialForceVectorRaw::operator-(const SpatialForceVectorRaw& other) const
+SpatialForceVector SpatialForceVector::operator-(const SpatialForceVector& other) const
 {
     return compose(*this,inverse(other));
 }*/
 
 
-SpatialForceVectorRaw SpatialForceVectorRaw::Zero()
+SpatialForceVector SpatialForceVector::Zero()
 {
-    return SpatialForceVectorRaw();
+    return SpatialForceVector();
 }
 
 

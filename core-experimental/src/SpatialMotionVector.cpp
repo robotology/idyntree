@@ -5,8 +5,8 @@
  *
  */
 
-#include "SpatialMotionVectorRaw.h"
-#include "SpatialForceVectorRaw.h"
+#include "SpatialMotionVector.h"
+#include "SpatialForceVector.h"
 #include "PositionRaw.h"
 #include "RotationRaw.h"
 #include "Utils.h"
@@ -19,31 +19,31 @@ namespace iDynTree
 typedef Eigen::Matrix<double,6,1> Vector6d;
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 
-SpatialMotionVectorRaw::SpatialMotionVectorRaw()
+SpatialMotionVector::SpatialMotionVector()
 {
     // Vector6() will be implicitly called
 }
 
 
-SpatialMotionVectorRaw::SpatialMotionVectorRaw(const double* in_data,
-                                               const unsigned int in_size):
-                                               Vector6(in_data, in_size)
+SpatialMotionVector::SpatialMotionVector(const double* in_data,
+                                           const unsigned int in_size):
+                                           Vector6(in_data, in_size)
 {
 }
 
-SpatialMotionVectorRaw::SpatialMotionVectorRaw(const SpatialMotionVectorRaw& other):
+SpatialMotionVector::SpatialMotionVector(const SpatialMotionVector& other):
                                                Vector6(other.data(),6)
 {
 
 }
 
 
-SpatialMotionVectorRaw::~SpatialMotionVectorRaw()
+SpatialMotionVector::~SpatialMotionVector()
 {
 
 }
 
-const SpatialMotionVectorRaw& SpatialMotionVectorRaw::changePoint(const PositionRaw& newPoint)
+const SpatialMotionVector& SpatialMotionVector::changePoint(const PositionRaw& newPoint)
 {
     Eigen::Map<Vector6d> thisData(this->data());
     Eigen::Map<const Eigen::Vector3d> pointData(newPoint.data());
@@ -53,7 +53,7 @@ const SpatialMotionVectorRaw& SpatialMotionVectorRaw::changePoint(const Position
     return *this;
 }
 
-const SpatialMotionVectorRaw& SpatialMotionVectorRaw::changeCoordFrame(const RotationRaw& newCoordFrame)
+const SpatialMotionVector& SpatialMotionVector::changeCoordFrame(const RotationRaw& newCoordFrame)
 {
     Eigen::Map<Vector6d> thisData(this->data());
     Eigen::Map<const Matrix3dRowMajor> rotData(newCoordFrame.data());
@@ -64,9 +64,9 @@ const SpatialMotionVectorRaw& SpatialMotionVectorRaw::changeCoordFrame(const Rot
     return *this;
 }
 
-SpatialMotionVectorRaw SpatialMotionVectorRaw::compose(const SpatialMotionVectorRaw& op1, const SpatialMotionVectorRaw& op2)
+SpatialMotionVector SpatialMotionVector::compose(const SpatialMotionVector& op1, const SpatialMotionVector& op2)
 {
-    SpatialMotionVectorRaw result;
+    SpatialMotionVector result;
 
     Eigen::Map<const Vector6d> op1Data(op1.data());
     Eigen::Map<const Vector6d> op2Data(op2.data());
@@ -77,9 +77,9 @@ SpatialMotionVectorRaw SpatialMotionVectorRaw::compose(const SpatialMotionVector
     return result;
 }
 
-SpatialMotionVectorRaw SpatialMotionVectorRaw::inverse(const SpatialMotionVectorRaw& op)
+SpatialMotionVector SpatialMotionVector::inverse(const SpatialMotionVector& op)
 {
-    SpatialMotionVectorRaw result;
+    SpatialMotionVector result;
 
     Eigen::Map<const Vector6d> opData(op.data());
     Eigen::Map<Vector6d> resultData(result.data());
@@ -89,7 +89,7 @@ SpatialMotionVectorRaw SpatialMotionVectorRaw::inverse(const SpatialMotionVector
     return result;
 }
 
-double SpatialMotionVectorRaw::dot(const SpatialForceVectorRaw& other) const
+double SpatialMotionVector::dot(const SpatialForceVector& other) const
 {
     Eigen::Map<const Vector6d> otherData(other.data());
     Eigen::Map<const Vector6d> thisData(this->data());
@@ -97,9 +97,9 @@ double SpatialMotionVectorRaw::dot(const SpatialForceVectorRaw& other) const
     return thisData.dot(otherData);
 }
 
-SpatialMotionVectorRaw SpatialMotionVectorRaw::cross(const SpatialMotionVectorRaw& other) const
+SpatialMotionVector SpatialMotionVector::cross(const SpatialMotionVector& other) const
 {
-    SpatialMotionVectorRaw res;
+    SpatialMotionVector res;
     Eigen::Map<const Eigen::Vector3d> op1Linear(this->data());
     Eigen::Map<const Eigen::Vector3d> op1Angular(this->data()+3);
     Eigen::Map<const Eigen::Vector3d> op2Linear(other.data());
@@ -113,9 +113,9 @@ SpatialMotionVectorRaw SpatialMotionVectorRaw::cross(const SpatialMotionVectorRa
     return res;
 }
 
-SpatialForceVectorRaw SpatialMotionVectorRaw::cross(const SpatialForceVectorRaw& other) const
+SpatialForceVector SpatialMotionVector::cross(const SpatialForceVector& other) const
 {
-    SpatialForceVectorRaw resForce;
+    SpatialForceVector resForce;
     Eigen::Map<const Eigen::Vector3d> op1VelLinear(this->data());
     Eigen::Map<const Eigen::Vector3d> op1VelAngular(this->data()+3);
     Eigen::Map<const Eigen::Vector3d> op2ForceLinear(other.data());
@@ -129,9 +129,9 @@ SpatialForceVectorRaw SpatialMotionVectorRaw::cross(const SpatialForceVectorRaw&
     return resForce;
 }
 
-SpatialMotionVectorRaw SpatialMotionVectorRaw::Zero()
+SpatialMotionVector SpatialMotionVector::Zero()
 {
-    return SpatialMotionVectorRaw();
+    return SpatialMotionVector();
 }
 
 

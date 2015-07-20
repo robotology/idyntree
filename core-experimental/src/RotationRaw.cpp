@@ -7,8 +7,8 @@
 
 #include "RotationRaw.h"
 #include "PositionRaw.h"
-#include "SpatialMotionVectorRaw.h"
-#include "SpatialForceVectorRaw.h"
+#include "SpatialMotionVector.h"
+#include "SpatialForceVector.h"
 #include "Utils.h"
 #include <sstream>
 
@@ -115,9 +115,9 @@ namespace iDynTree
         return result;
     }
 
-    SpatialMotionVectorRaw RotationRaw::changeCoordFrameOf(const SpatialMotionVectorRaw& other) const
+    SpatialMotionVector RotationRaw::changeCoordFrameOf(const SpatialMotionVector& other) const
     {
-        SpatialMotionVectorRaw result;
+        SpatialMotionVector result;
 
         Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
         Eigen::Map<const Vector6d> op2Twist(other.data());
@@ -130,9 +130,9 @@ namespace iDynTree
         return result;
     }
 
-    SpatialForceVectorRaw RotationRaw::changeCoordFrameOf(const SpatialForceVectorRaw& other) const
+    SpatialForceVector RotationRaw::changeCoordFrameOf(const SpatialForceVector& other) const
     {
-        SpatialForceVectorRaw result;
+        SpatialForceVector result;
 
         Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
         Eigen::Map<const Vector6d> op2Wrench(other.data());

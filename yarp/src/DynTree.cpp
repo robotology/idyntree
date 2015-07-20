@@ -24,7 +24,7 @@
 #include "kdl_codyco/KDLConversions.h"
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Wrench.h"
-#include "iDynTree/Core/SpatialForceVectorRaw.h"
+#include "iDynTree/Core/SpatialForceVector.h"
 
 #include <kdl_codyco/regressor_utils.hpp>
 #include <kdl_codyco/regressors/dirl_utils.hpp>

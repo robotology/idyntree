@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_SPATIAL_ACC_H
 #define IDYNTREE_SPATIAL_ACC_H
 
-#include "SpatialMotionVectorRaw.h"
+#include "SpatialMotionVector.h"
 
 namespace iDynTree
 {
@@ -23,12 +23,12 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    class SpatialAcc: public SpatialMotionVectorRaw
+    class SpatialAcc: public SpatialMotionVector
     {
     public:
         SpatialAcc();
         SpatialAcc(const double* in_data, const unsigned int in_size);
-        SpatialAcc(const SpatialMotionVectorRaw& other);
+        SpatialAcc(const SpatialMotionVector& other);
         SpatialAcc(const SpatialAcc& other);
         virtual ~SpatialAcc();
 

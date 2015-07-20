@@ -9,7 +9,7 @@ include_directories(include/iDynTree/Core)
 
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
-                              include/iDynTree/Core/ISpatialVector.h
+#                              include/iDynTree/Core/ISpatialVector.h
                               include/iDynTree/Core/MatrixDynSize.h
                               include/iDynTree/Core/MatrixFixSize.h
                               include/iDynTree/Core/Position.h
@@ -20,11 +20,11 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/RotationSemantics.h
                               include/iDynTree/Core/RotationalInertiaRaw.h
                               include/iDynTree/Core/SpatialAcc.h
-                              include/iDynTree/Core/SpatialForceVectorRaw.h
+                              include/iDynTree/Core/SpatialForceVector.h
                               include/iDynTree/Core/SpatialInertiaRaw.h
                               include/iDynTree/Core/SpatialInertia.h
                               include/iDynTree/Core/SpatialMomentum.h
-                              include/iDynTree/Core/SpatialMotionVectorRaw.h
+                              include/iDynTree/Core/SpatialMotionVector.h
                               include/iDynTree/Core/Transform.h
                               include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Twist.h
@@ -58,9 +58,9 @@ set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/RotationSemantics.cpp
                               src/RotationalInertiaRaw.cpp
                               src/SpatialAcc.cpp
-                              src/SpatialForceVectorRaw.cpp
+                              src/SpatialForceVector.cpp
                               src/SpatialMomentum.cpp
-                              src/SpatialMotionVectorRaw.cpp
+                              src/SpatialMotionVector.cpp
                               src/SpatialInertiaRaw.cpp
                               src/SpatialInertia.cpp
                               src/Transform.cpp

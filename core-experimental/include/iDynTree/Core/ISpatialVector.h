@@ -34,7 +34,47 @@ namespace iDynTree
     class ISpatialVector
     {
     public:
-        virtual ~ISpatialVector() {}
+        /**
+         * constructors
+         */
+        virtual ~SpatialMotionVector() = 0;
+        
+        /**
+         * Geometric operations
+         */
+        virtual const ISpatialVector & changePoint(const PositionRaw & newPoint) = 0;
+        virtual const ISpatialVector & changeCoordFrame(const RotationRaw & newCoordFrame) = 0;
+        virtual static ISpatialVector compose(const ISpatialVector & op1, const ISpatialVector & op2) = 0;
+        virtual static ISpatialVector inverse(const ISpatialVector & op) = 0;
+        
+        virtual double dot(const ISpatialVector& other) const = 0;
+        
+        /**
+         * Cross products
+         */
+        virtual ISpatialVector cross(const ISpatialVector& other) const = 0;
+        virtual ISpatialVector cross(const ISpatialVector& other) const = 0;
+        
+        /**
+         * overloaded operators
+         */
+        Twist operator+(const Twist &other) const = 0;
+        Twist operator-(const Twist &other) const = 0;
+        Twist operator-() const = 0;
+        
+        /**
+         * constructor helpers
+         */
+        static ISpatialVector Zero() = 0;
+        
+        /** @name Output helpers.
+         *  Output helpers.
+         */
+        ///@{
+        std::string toString() const;
+        
+        std::string reservedToString() const;
+        ///@}
     };
 }
 

@@ -20,20 +20,20 @@ Twist::Twist()
 
 Twist::Twist(const double* in_data,
              const unsigned int in_size):
-             SpatialMotionVectorRaw(in_data, in_size)
+             SpatialMotionVector(in_data, in_size)
 {
 
 }
 
-Twist::Twist(const SpatialMotionVectorRaw& other):
-             SpatialMotionVectorRaw(other)
+Twist::Twist(const SpatialMotionVector& other):
+             SpatialMotionVector(other)
 {
 
 }
 
 
 Twist::Twist(const Twist& other):
-            SpatialMotionVectorRaw(other.data(),6)
+            SpatialMotionVector(other.data(),6)
 {
 
 }
@@ -60,13 +60,13 @@ Twist Twist::operator-(const Twist& other) const
 
 Wrench Twist::operator*(const SpatialMomentum& other) const
 {
-    return SpatialMotionVectorRaw::cross(other);
+    return SpatialMotionVector::cross(other);
 
 }
 
 SpatialAcc Twist::operator*(const Twist& other) const
 {
-    return SpatialMotionVectorRaw::cross(other);
+    return SpatialMotionVector::cross(other);
 }
 
 

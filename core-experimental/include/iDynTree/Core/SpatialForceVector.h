@@ -11,13 +11,13 @@
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/LinearForceVector3.h>
 #include <iDynTree/Core/AngularForceVector3.h>
-#include <iDynTree/Core/ISpatialVector.h>
+//#include <iDynTree/Core/ISpatialVector.h>
 
 namespace iDynTree
 {
     class PositionRaw;
     class RotationRaw;
-    class SpatialMotionVectorRaw;
+    class SpatialMotionVector;
 
     /**
      * Class providing the raw coordinates for any spatial force vector.
@@ -35,23 +35,23 @@ namespace iDynTree
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.
      */
-    class SpatialForceVectorRaw: public Vector6, public ISpatialVector
+    class SpatialForceVector: public Vector6
     {
     public:
-        SpatialForceVectorRaw();
-        SpatialForceVectorRaw(const double* in_data, const unsigned int in_size);
-        SpatialForceVectorRaw(const SpatialForceVectorRaw & other);
-        virtual ~SpatialForceVectorRaw();
+        SpatialForceVector();
+        SpatialForceVector(const double* in_data, const unsigned int in_size);
+        SpatialForceVector(const SpatialForceVector & other);
+        virtual ~SpatialForceVector();
 
-        const SpatialForceVectorRaw & changePoint(const PositionRaw & newPoint);
-        const SpatialForceVectorRaw & changeCoordFrame(const RotationRaw & newCoordFrame);
-        static SpatialForceVectorRaw compose(const SpatialForceVectorRaw & op1, const SpatialForceVectorRaw & op2);
-        static SpatialForceVectorRaw inverse(const SpatialForceVectorRaw & op);
+        const SpatialForceVector & changePoint(const PositionRaw & newPoint);
+        const SpatialForceVector & changeCoordFrame(const RotationRaw & newCoordFrame);
+        static SpatialForceVector compose(const SpatialForceVector & op1, const SpatialForceVector & op2);
+        static SpatialForceVector inverse(const SpatialForceVector & op);
 
-        double dot(const SpatialMotionVectorRaw & other) const;
+        double dot(const SpatialMotionVector & other) const;
 
         /** constructor helpers */
-        static SpatialForceVectorRaw Zero();
+        static SpatialForceVector Zero();
     };
 }
 

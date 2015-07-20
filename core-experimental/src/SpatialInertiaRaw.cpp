@@ -6,8 +6,8 @@
  */
 
 #include "SpatialInertiaRaw.h"
-#include "SpatialForceVectorRaw.h"
-#include "SpatialMotionVectorRaw.h"
+#include "SpatialForceVector.h"
+#include "SpatialMotionVector.h"
 #include "PositionRaw.h"
 #include "Utils.h"
 #include "PrivateUtils.h"
@@ -87,9 +87,9 @@ RotationalInertiaRaw SpatialInertiaRaw::getRotationalInertiaWrtCenterOfMass() co
     return retComInertia;
 }
 
-SpatialForceVectorRaw SpatialInertiaRaw::multiply(const SpatialMotionVectorRaw& op) const
+SpatialForceVector SpatialInertiaRaw::multiply(const SpatialMotionVector& op) const
 {
-    SpatialForceVectorRaw ret;
+    SpatialForceVector ret;
 
     // we call this linearForce and angularForce
     // but please remember that they can also be

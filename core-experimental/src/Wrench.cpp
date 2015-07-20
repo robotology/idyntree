@@ -16,20 +16,20 @@ Wrench::Wrench()
 }
 
 Wrench::Wrench(const double* in_data, const unsigned int in_size):
-               SpatialForceVectorRaw(in_data, in_size)
+               SpatialForceVector(in_data, in_size)
 {
 
 }
 
-Wrench::Wrench(const SpatialForceVectorRaw& other):
-               SpatialForceVectorRaw(other)
+Wrench::Wrench(const SpatialForceVector& other):
+               SpatialForceVector(other)
 {
 
 }
 
 
 Wrench::Wrench(const Wrench& other):
-               SpatialForceVectorRaw(other.data(),6)
+               SpatialForceVector(other.data(),6)
 {
 
 }
