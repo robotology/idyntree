@@ -229,17 +229,19 @@ std::string Transform::reservedToString() const
          * The Twist is a Spatial Motion vector.
          * We decompose the spatial transform as the product of the translation
          * and the rotation:
-         * B^X_A = |E   0|.|1   0|
-         *         |0   E| |r˜' 1|
+         * B^X_A = |R   0|*|1   0|
+         *         |0   R| |p˜' 1|
          *
-         * A^X_B = |1   0|.|E'  0 | = xlt(-r) * rot(E')
-         *         |r˜  1| |0   E'|
-         * where E is the rotation transforming coordinates from [A] to [B],
-         * E' is the rotation transforming coordinates from [B] to [A] (op1.rot),
-         * r the position of B with respect to A => op1.pos
-         * xlt(r) the spatial translation component of A^X_B = xlt(op1.pos)
-         * rot(E') the spatial rotation component of A^X_B = rot(op1.rot)
-         *
+         * A^X_B = |1   0|*|R'  0 | = xlt(-p) * rot(R')
+         *         |p˜  1| |0   R'|
+         * where R is the rotation transforming coordinates from [A] to [B],
+         * R' is the rotation transforming coordinates from [B] to [A] (op1.rot),
+         * p the position of B with respect to A (\vec{AB} expressed in Frame A coordinates, op1.pos)
+         * xlt(-p) the spatial translation component of A^X_B = xlt(op1.pos)
+         * rot(R') the spatial rotation component of A^X_B = rot(op1.rot)
+         * 
+         * (For more details, refer to Featherstone's Rigid Body Dynamics Algorithms, 2.8 Coordinate Transforms)
+         * 
          * so, considering a given "twist":
          * A^X_B * twist = xlt(op1.pos) * rot(op1.rot) * twist
          *
@@ -252,10 +254,10 @@ std::string Transform::reservedToString() const
          *
          * Same thing as for Twist, but with translation and rotation for a Spatial Force vector:
          *
-         * A^X_B^* = xlt(r)' * rot(E')
+         * A^X_B^* = xlt(p)' * rot(R')
          *
-         * Position::operator * (Twist&) |-> (xlt(r)' *)
-         * Rotation::operator * (Twist&) |-> (rot(E') *)
+         * Position::operator * (Twist&) |-> (xlt(p)' *)
+         * Rotation::operator * (Twist&) |-> (rot(R') *)
          *
          *### SpatialMomentum Transform::transform(const Transform& op1, const SpatialMomentum& op2)
          *

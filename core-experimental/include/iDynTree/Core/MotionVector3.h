@@ -27,6 +27,26 @@ namespace iDynTree
     template <class MotionT, class MotionAssociationsT>
     class MotionVector3: public GeomVector3<MotionT, MotionAssociationsT>
     {
+    private:
+        /**
+         * Helper template function for computing the cross product
+         */
+        template <class DerivedT, class OperandT>
+        struct rawOperator
+        {
+            DerivedT cross(const OperandT& other) const
+            {
+                DerivedT result;
+                Eigen::Map<const Eigen::Vector3d> thisData(this->data());
+                Eigen::Map<const Eigen::Vector3d> otherData(other.data());
+                Eigen::Map<Eigen::Vector3d> resultData(result.data());
+                
+                resultData = thisData.cross(otherData);
+                
+                return result;
+            }
+        };
+        
     public:
         /**
          * constructors
@@ -36,11 +56,19 @@ namespace iDynTree
         MotionVector3(const MotionVector3 & other);
         virtual ~MotionVector3();
         
+        /**
+         * Types of Derivative by Linear or Angular motion vectors
+         */
+        typedef typename MotionAssociationsT::template DerivativeOf<LinearMotionAssociationsT>::Type MotionCrossLinM;
+        typedef typename MotionAssociationsT::template DerivativeOf<AngularMotionAssociationsT>::Type MotionCrossAngM;
+        typedef typename MotionAssociationsT::template DerivativeOf<LinearForceAssociationsT>::Type MotionCrossLinF;
+        typedef typename MotionAssociationsT::template DerivativeOf<AngularForceAssociationsT>::Type MotionCrossAngF;
+        
         /* Cross products */
-        typename MotionAssociationsT::template Derivative<LinearMotionAssociationsT>::Type cross(const LinearMotionVector3& other) const;
-        typename MotionAssociationsT::template Derivative<AngularMotionAssociationsT>::Type cross(const AngularMotionVector3& other) const;
-        typename MotionAssociationsT::template Derivative<LinearForceAssociationsT>::Type cross(const LinearForceVector3& other) const;
-        typename MotionAssociationsT::template Derivative<AngularForceAssociationsT>::Type cross(const AngularForceVector3& other) const;
+        MotionCrossLinM cross(const LinearMotionVector3& other) const;
+        MotionCrossAngM cross(const AngularMotionVector3& other) const;
+        MotionCrossLinF cross(const LinearForceVector3& other) const;
+        MotionCrossAngF cross(const AngularForceVector3& other) const;
     };
     
     /**
@@ -66,20 +94,28 @@ namespace iDynTree
 
     /* Cross products */
     template <class MotionT, class MotionAssociationsT>
-    typename MotionAssociationsT::template Derivative<LinearMotionAssociationsT>::Type MotionVector3<MotionT, MotionAssociationsT>::cross(const LinearMotionVector3& other) const
-    {}
+    typename MotionVector3<MotionT, MotionAssociationsT>::MotionCrossLinM MotionVector3<MotionT, MotionAssociationsT>::cross(const LinearMotionVector3& other) const
+    {
+        return this->rawOperator<MotionCrossLinM, LinearMotionVector3>.cross(other);
+    }
     
     template <class MotionT, class MotionAssociationsT>
-    typename MotionAssociationsT::template Derivative<AngularMotionAssociationsT>::Type MotionVector3<MotionT, MotionAssociationsT>::cross(const AngularMotionVector3& other) const
-    {}
+    typename MotionVector3<MotionT, MotionAssociationsT>::MotionCrossAngM MotionVector3<MotionT, MotionAssociationsT>::cross(const AngularMotionVector3& other) const
+    {
+        return this->rawOperator<MotionCrossAngM, AngularMotionVector3>.cross(other);
+    }
     
     template <class MotionT, class MotionAssociationsT>
-    typename MotionAssociationsT::template Derivative<LinearForceAssociationsT>::Type MotionVector3<MotionT, MotionAssociationsT>::cross(const LinearForceVector3& other) const
-    {}
+    typename MotionVector3<MotionT, MotionAssociationsT>::MotionCrossLinF MotionVector3<MotionT, MotionAssociationsT>::cross(const LinearForceVector3& other) const
+    {
+        return this->rawOperator<MotionCrossLinF, LinearForceVector3>.cross(other);
+    }
     
     template <class MotionT, class MotionAssociationsT>
-    typename MotionAssociationsT::template Derivative<AngularForceAssociationsT>::Type MotionVector3<MotionT, MotionAssociationsT>::cross(const AngularForceVector3& other) const
-    {}
+    typename MotionVector3<MotionT, MotionAssociationsT>::MotionCrossAngF MotionVector3<MotionT, MotionAssociationsT>::cross(const AngularForceVector3& other) const
+    {
+        return this->rawOperator<MotionCrossAngF, AngularForceVector3>.cross(other);
+    }
 }
 
 #endif /* IDYNTREE_MOTION_VECTOR_3_H */

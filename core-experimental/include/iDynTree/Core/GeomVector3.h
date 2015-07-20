@@ -9,10 +9,15 @@
 #define IDYNTREE_GEOM_VECTOR_3_H
 
 #include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
+#include <Eigen/Dense>
 
 namespace iDynTree
 {
+    typedef Eigen::Matrix<double,3,1> Vector3d;
+    typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+
     class Rotation;
 
     /**
@@ -89,33 +94,70 @@ namespace iDynTree
     // Geometric operations
     template <class MotionForceT, class MotionForceAssociationsT>
     const MotionForceT & GeomVector3<MotionForceT, MotionForceAssociationsT>::changeCoordFrame(const Rotation & newCoordFrame)
-    {}
+    {
+        Eigen::Map<Vector3d> thisData(this->data());
+        Eigen::Map<const Matrix3dRowMajor> rotData(newCoordFrame.data());
+        
+        thisData = rotData*thisData;
+        
+        return *this;
+    }
     
     template <class MotionForceT, class MotionForceAssociationsT>
     MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::compose(const MotionForceT & op1, const MotionForceT & op2)
-    {}
+    {
+        MotionForceT result;
+        
+        Eigen::Map<const Vector3d> op1Data(op1.data());
+        Eigen::Map<const Vector3d> op2Data(op2.data());
+        Eigen::Map<Vector3d> resultData(result.data());
+        
+        resultData = op1Data + op2Data;
+        
+        return result;
+    }
     
     template <class MotionForceT, class MotionForceAssociationsT>
     MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::inverse(const MotionForceT & op)
-    {}
+    {
+        MotionForceT result;
+        
+        Eigen::Map<const Vector3d> opData(op.data());
+        Eigen::Map<Vector3d> resultData(result.data());
+        
+        resultData = -opData;
+        
+        return result;
+    }
     
     // dot product
     template <class MotionForceT, class MotionForceAssociationsT>
     double GeomVector3<MotionForceT, MotionForceAssociationsT>::dot(const typename MotionForceAssociationsT::DualSpace & other) const
-    {}
+    {
+        Eigen::Map<const Vector3d> otherData(other.data());
+        Eigen::Map<const Vector3d> thisData(this->data());
+        
+        return thisData.dot(otherData);
+    }
 
     // overloaded operators
     template <class MotionForceT, class MotionForceAssociationsT>
     MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::operator+(const MotionForceT &other) const
-    {}
+    {
+        return compose(*this, other);
+    }
     
     template <class MotionForceT, class MotionForceAssociationsT>
     MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::operator-(const MotionForceT &other) const
-    {}
+    {
+        return compose(*this, inverse(other));
+    }
     
     template <class MotionForceT, class MotionForceAssociationsT>
     MotionForceT GeomVector3<MotionForceT, MotionForceAssociationsT>::operator-() const
-    {}
+    {
+        return inverse(*this);
+    }
 }
 
 #endif /* IDYNTREE_GEOM_VECTOR_3_H */
