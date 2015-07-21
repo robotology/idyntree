@@ -35,6 +35,11 @@ namespace iDynTree
         this->m_data[2] = z;
     }
 
+    PositionRaw::PositionRaw(const double* in_data, const unsigned int in_size):
+                 VectorFixSize< 3 >(in_data,in_size)
+    {
+
+    }
 
     PositionRaw::PositionRaw(const PositionRaw& other)
     {
@@ -48,7 +53,7 @@ namespace iDynTree
     {
 
     }
-    
+
     const PositionRaw& PositionRaw::changePoint(const PositionRaw& newPoint)
     {
         this->m_data[0] += newPoint(0);

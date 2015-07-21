@@ -25,7 +25,6 @@
 #include "iDynTree/Core/VectorDynSize.h"
 #include "iDynTree/Core/VectorFixSize.h"
 
-
 // Basic Vectors: Point Vectors and Spatial Vectors
 #include "iDynTree/Core/PositionRaw.h"
 #include "iDynTree/Core/PositionSemantics.h"
