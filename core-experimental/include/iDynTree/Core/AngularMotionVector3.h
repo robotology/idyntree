@@ -33,6 +33,9 @@ namespace iDynTree
         AngularMotionVector3(const AngularMotionVector3 & other);
         virtual ~AngularMotionVector3();
     };
+    
+    typedef AngularMotionVector3 AngVelocity;
+    typedef AngularMotionVector3 AngAcceleration;
 }
 
 #endif /* IDYNTREE_ANGULAR_MOTION_VECTOR_3_H */

@@ -9,7 +9,6 @@ include_directories(include/iDynTree/Core)
 
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
-#                              include/iDynTree/Core/ISpatialVector.h
                               include/iDynTree/Core/MatrixDynSize.h
                               include/iDynTree/Core/MatrixFixSize.h
                               include/iDynTree/Core/Position.h
@@ -41,7 +40,8 @@ set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h
                                        include/iDynTree/Core/PrivateMotionForceVertorAssociations.h
                                        include/iDynTree/Core/GeomVector3.h
                                        include/iDynTree/Core/MotionVector3.h
-                                       include/iDynTree/Core/ForceVector3.h)
+                                       include/iDynTree/Core/ForceVector3.h
+                                       include/iDynTree/Core/SpatialVector.h)
 
 
 set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp

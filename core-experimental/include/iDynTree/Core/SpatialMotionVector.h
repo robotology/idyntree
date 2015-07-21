@@ -11,7 +11,7 @@
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/LinearMotionVector3.h>
 #include <iDynTree/Core/AngularMotionVector3.h>
-//#include <iDynTree/Core/ISpatialVector.h>
+#include <iDynTree/Core/SpatialVector.h>
 
 namespace iDynTree
 {
@@ -35,13 +35,15 @@ namespace iDynTree
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.
      */
-    class SpatialMotionVector: public Vector6
+#define CLASS_TEMPLATE_HDR \
+template <typename DerivedSpatialVecT, typename LinearVector3T, typename AngularVector3T>
+    
+#define CLASS_FUNC_HDR \
+SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
+
+
+    class SpatialMotionVector: public SpatialVector<SpatialMotionVector, LinVelocity, AngVelocity>
     {
-    protected:
-        //LinearMotionVector3 linearVec3;
-        //AngularMotionVector3 angularVec3;
-        //SpatialMotionVectorSemantics semantics;
-        
     public:
         /**
          * constructors
@@ -52,35 +54,15 @@ namespace iDynTree
         virtual ~SpatialMotionVector();
 
         /**
-         * Geometric operations
-         */
-        const SpatialMotionVector & changePoint(const PositionRaw & newPoint);
-        const SpatialMotionVector & changeCoordFrame(const RotationRaw & newCoordFrame);
-        static SpatialMotionVector compose(const SpatialMotionVector & op1, const SpatialMotionVector & op2);
-        static SpatialMotionVector inverse(const SpatialMotionVector & op);
-
-        double dot(const SpatialForceVector& other) const;
-
-        /**
          * Cross products
          */
         SpatialMotionVector cross(const SpatialMotionVector& other) const;
         SpatialForceVector cross(const SpatialForceVector& other) const;
-
-        /** overloaded operators **/;
-
-        /** constructor helpers */
-        static SpatialMotionVector Zero();
-
-        /** @name Output helpers.
-         *  Output helpers.
-         */
-        ///@{
-        //std::string toString() const;
-        
-        //std::string reservedToString() const;
-        ///@}
     };
+
+
+#undef CLASS_TEMPLATE_HDR
+#undef CLASS_FUNC_HDR
 }
 
 #endif /* IDYNTREE_SPATIAL_MOTION_RAW_H */

@@ -33,6 +33,9 @@ namespace iDynTree
         AngularForceVector3(const AngularForceVector3 & other);
         virtual ~AngularForceVector3();
     };
+    
+    typedef AngularForceVector3 AngMomentum;
+    typedef AngularForceVector3 Torque;
 }
 
 #endif /* IDYNTREE_ANGULAR_FORCE_VECTOR_3_H */

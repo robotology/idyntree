@@ -33,6 +33,9 @@ namespace iDynTree
         LinearMotionVector3(const LinearMotionVector3 & other);
         virtual ~LinearMotionVector3();
     };
+    
+    typedef LinearMotionVector3 LinVelocity;
+    typedef LinearMotionVector3 LinAcceleration;
 }
 
 #endif /* IDYNTREE_LINEAR_MOTION_VECTOR_3_H */

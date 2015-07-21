@@ -33,6 +33,9 @@ namespace iDynTree
         LinearForceVector3(const LinearForceVector3 & other);
         virtual ~LinearForceVector3();
     };
+    
+    typedef LinearForceVector3 LinMomentum;
+    typedef LinearForceVector3 Force;
 }
 
 #endif /* IDYNTREE_LINEAR_FORCE_VECTOR_3_H */
