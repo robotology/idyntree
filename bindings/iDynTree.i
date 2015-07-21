@@ -57,6 +57,9 @@
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
 #include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
 
+// High level interfaces
+#include "iDynTree/HighLevel/DynamicsComputations.h"
+
 %}
 
 /* Note : always include headers following the inheritance order */
@@ -95,7 +98,6 @@
 %include "iDynTree/Core/SpatialInertiaRaw.h"
 %include "iDynTree/Core/SpatialInertia.h"
 
-
 // Transformations: Rotation and Transform
 %include "iDynTree/Core/RotationRaw.h"
 %include "iDynTree/Core/RotationSemantics.h"
@@ -110,6 +112,9 @@
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"
 %include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
+
+// High level interfaces
+%include "iDynTree/HighLevel/DynamicsComputations.h"
 
 // Matlab
 #ifdef SWIGMATLAB

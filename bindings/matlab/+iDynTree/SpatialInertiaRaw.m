@@ -31,10 +31,10 @@ classdef SpatialInertiaRaw < SwigRef
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(205,'SpatialInertiaRaw_getRotationalInertiaWrtCenterOfMass',self,varargin{:});
     end
     function varargout = multiply(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(206,'SpatialInertiaRaw_multiply',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(207,'SpatialInertiaRaw_multiply',self,varargin{:});
     end
     function varargout = zero(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(207,'SpatialInertiaRaw_zero',self,varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(208,'SpatialInertiaRaw_zero',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -48,5 +48,8 @@ classdef SpatialInertiaRaw < SwigRef
     end
   end
   methods(Static)
+    function varargout = combine(varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(206,'SpatialInertiaRaw_combine',varargin{:});
+    end
   end
 end
