@@ -7,15 +7,19 @@
 
 #include "KDLConversions.h"
 
-#include "iDynTree/Core/Position.h"
-#include "iDynTree/Core/Rotation.h"
-#include "iDynTree/Core/Transform.h"
-#include "iDynTree/Core/Twist.h"
-#include "iDynTree/Core/Wrench.h"
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/VectorDynSize.h>
+
 
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
+
+#include <kdl/rigidbodyinertia.hpp>
 
 #include <Eigen/Dense>
 
@@ -140,6 +144,34 @@ Wrench ToiDynTree(const KDL::Wrench& kdl_wrench)
     memcpy(idyntree_wrench.data()+3,kdl_wrench.torque.data,3*sizeof(double));
 
     return idyntree_wrench;
+}
+
+iDynTree::RotationalInertiaRaw  ToiDynTree(const KDL::RotationalInertia & kdl_rotInertia)
+{
+    iDynTree::RotationalInertiaRaw ret;
+    // \todo TODO migrate this method to RotationalInertia class when available
+    // the rotational inertia matrix is symmetric, so the column/row major ordering
+    // does not matter (but in general in iDynTree we assume the RowMajor ordering
+    Eigen::Map<Eigen::Matrix3d> idynTreeInertia(ret.data());
+    Eigen::Map<const Eigen::Matrix3d> kdlInertia(kdl_rotInertia.data);
+
+    idynTreeInertia = kdlInertia;
+
+    return ret;
+}
+
+
+SpatialInertia ToiDynTree(const KDL::RigidBodyInertia& kdl_inertia)
+{
+    double mass_idyntree = kdl_inertia.getMass();
+    iDynTree::Position com_idyntree = ToiDynTree(kdl_inertia.getCOG());
+    // This works because both kdl_inertia.getRotationalInertia() and the iDynTree::SpatialInertia
+    // constructor consider the RotationalInertia expressed wrt the origin of the link
+    // differently from the KDL::RigidBodyInertia construtor that takes the inertia expressed
+    // with respect to the center of mass
+    iDynTree::RotationalInertiaRaw rotInertia_idyntree = ToiDynTree(kdl_inertia.getRotationalInertia());
+
+    return iDynTree::SpatialInertia(mass_idyntree,com_idyntree,rotInertia_idyntree);
 }
 
 bool ToiDynTree(const KDL::JntArray& kdl_jntarray, VectorDynSize& idyntree_jntarray)

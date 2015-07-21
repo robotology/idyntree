@@ -71,7 +71,8 @@ namespace CoDyCo {
 
    /**
     * Loop for calculating, given a UndirectedTree and a Traversal,
-    * the reference frames of every link with respect to the base link
+    * the reference frames of every link with respect to the world frame
+    * (or the base frame if world2base is left to the default value of Identity)
     * \warning Basic function designed for use inside the solver, some the
     *          error checking on input/output parameters is not guaranteed
     *
@@ -80,7 +81,8 @@ namespace CoDyCo {
     int getFramesLoop(const UndirectedTree & undirected_tree,
                       const KDL::JntArray &q,
                       const Traversal & traversal,
-                      std::vector<Frame> & X_base);
+                      std::vector<Frame> & X_base,
+                      KDL::Frame world2base = KDL::Frame::Identity());
 
    /**
     * Loop for calculating, given a UndirectedTree and a Traversal,

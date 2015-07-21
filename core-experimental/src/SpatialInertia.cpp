@@ -5,11 +5,11 @@
  *
  */
 
-#include "SpatialInertia.h"
-#include "SpatialMomentum.h"
-#include "Twist.h"
-#include "SpatialAcc.h"
-#include "Wrench.h"
+#include <iDynTree/Core/SpatialInertia.h>
+#include <iDynTree/Core/SpatialMomentum.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/Wrench.h>
 
 #include <cassert>
 #include <iostream>
@@ -44,6 +44,16 @@ SpatialInertia::SpatialInertia(const SpatialInertia& other)
 SpatialInertia::~SpatialInertia()
 {
 
+}
+
+SpatialInertia SpatialInertia::combine(const SpatialInertia& op1, const SpatialInertia& op2)
+{
+    return SpatialInertiaRaw::combine(op1,op2);
+}
+
+SpatialInertia SpatialInertia::operator+(const SpatialInertia& other) const
+{
+    return SpatialInertia::combine(*this,other);
 }
 
 Wrench SpatialInertia::operator*(const SpatialAcc& other) const

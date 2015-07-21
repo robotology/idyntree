@@ -87,6 +87,32 @@ RotationalInertiaRaw SpatialInertiaRaw::getRotationalInertiaWrtCenterOfMass() co
     return retComInertia;
 }
 
+SpatialInertiaRaw SpatialInertiaRaw::SpatialInertiaRaw::combine(const SpatialInertiaRaw& op1,
+                                                                const SpatialInertiaRaw& op2)
+{
+    SpatialInertiaRaw ret;
+    // If the two inertia are expressed with the same orientation
+    // and with respect to the same point (and this will be checked by
+    // the semantic check) we just need to sum
+    // the mass, the first moment of mass and the rotational inertia
+    ret.m_mass = op1.m_mass + op2.m_mass;
+
+    Eigen::Map<Eigen::Vector3d> retMcom(ret.m_mcom);
+    Eigen::Map<const Eigen::Vector3d> op1Mcom(op1.m_mcom);
+    Eigen::Map<const Eigen::Vector3d> op2Mcom(op2.m_mcom);
+
+    retMcom = op1Mcom + op2Mcom;
+
+    Eigen::Map<Eigen::Matrix3d> retRotInertia(ret.m_rotInertia.data());
+    Eigen::Map<const Eigen::Matrix3d> op1RotInertia(op1.m_rotInertia.data());
+    Eigen::Map<const Eigen::Matrix3d> op2RotInertia(op2.m_rotInertia.data());
+
+    retRotInertia = op1RotInertia + op2RotInertia;
+
+    return ret;
+}
+
+
 SpatialForceVectorRaw SpatialInertiaRaw::multiply(const SpatialMotionVectorRaw& op) const
 {
     SpatialForceVectorRaw ret;

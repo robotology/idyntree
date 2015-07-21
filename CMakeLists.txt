@@ -47,6 +47,7 @@ add_subdirectory(core-experimental)
 add_subdirectory(core)
 add_subdirectory(sensors)
 add_subdirectory(model_io)
+add_subdirectory(high-level)
 add_subdirectory(regressors)
 add_subdirectory(yarp)
 
