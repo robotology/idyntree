@@ -50,6 +50,9 @@ add_subdirectory(model_io)
 add_subdirectory(high-level)
 add_subdirectory(regressors)
 add_subdirectory(yarp)
+if(IDYNTREE_USES_ICUB_MAIN)
+    add_subdirectory(icub)
+endif()
 
 # compile simple command line tools
 add_subdirectory(tools)
