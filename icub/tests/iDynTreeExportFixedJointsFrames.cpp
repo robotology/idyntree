@@ -40,7 +40,7 @@
 
 #include <iCub/iDynTree/TorqueEstimationTree.h>
 
-#include "idyn2kdl_icub.h"
+#include <iCub/iDynTree/idyn2kdl_icub.h>
 
 #include <kdl_codyco/treefksolverpos_iterative.hpp>
 
