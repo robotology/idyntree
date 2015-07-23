@@ -4,8 +4,8 @@
  * website: http://www.codyco.eu
  */
 
-#include "jacobian_loops.hpp"
-#include "regressor_utils.hpp"
+#include <kdl_codyco/jacobian_loops.hpp>
+#include <kdl_codyco/regressor_utils.hpp>
 
 #ifndef NDEBUG
 #include <iostream>

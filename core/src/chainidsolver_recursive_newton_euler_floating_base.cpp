@@ -19,11 +19,11 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#include "chainidsolver_recursive_newton_euler_floating_base.hpp"
+#include <kdl_codyco/chainidsolver_recursive_newton_euler_floating_base.hpp>
 #include <kdl/frames_io.hpp>
 
 namespace KDL{
-    
+
     ChainIdSolver_RNE_FB::ChainIdSolver_RNE_FB(const Chain& chain_,Vector grav):
         chain(chain_),nj(chain.getNrOfJoints()),ns(chain.getNrOfSegments()),
         X(ns),S(ns),v(ns),a(ns),f(ns)
@@ -32,7 +32,7 @@ namespace KDL{
         assert(v.size() == ns);
 
     }
-    
+
     int ChainIdSolver_RNE_FB::CartToJnt(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const Wrenches& f_ext, KDL::JntArray &torques)
     {
         Wrench dummy;
@@ -60,10 +60,10 @@ namespace KDL{
                 j++;
             }else
                 q_=qdot_=qdotdot_=0.0;
-            
+
             //Calculate segment properties: X,S,vj,cj
             X[i]=segm.pose(q_);//Remark this is the inverse of the
-                                                //frame for transformations from 
+                                                //frame for transformations from
                                                 //the parent to the current coord frame
             //Transform velocity and unit velocity to segment frame
             Twist vj=X[i].M.Inverse(segm.twist(q_,qdot_));
@@ -101,7 +101,7 @@ namespace KDL{
         	segm = chain.getSegment(i);
             //std::cout << "bLink " << segm.getName() << " a= " << a[i] << " f= " << f[i] << std::endl;
         }
-        
+
 	return 0;
     }
 }//namespace

@@ -8,8 +8,6 @@ if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC)
 
-#local headers
-include_directories(include/kdl_codyco)
 
 file(GLOB IDYNTREE_CORE_HEADERS
      "include/kdl_codyco/*.hpp"
@@ -27,11 +25,10 @@ SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_HEADERS})
 SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_CORE_PRIVATE_INCLUDES})
 
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
-
 # share headers with all iDynTree targes
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 #include system headers
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}

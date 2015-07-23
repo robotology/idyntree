@@ -4,7 +4,7 @@
  * website: http://www.codyco.eu
  */
 
-#include "position_loops.hpp"
+#include <kdl_codyco/position_loops.hpp>
 
 namespace KDL {
 namespace CoDyCo {

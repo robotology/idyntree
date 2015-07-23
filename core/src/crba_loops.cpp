@@ -4,9 +4,9 @@
  * website: http://www.codyco.eu
  */
 
-#include "crba_loops.hpp"
-#include "regressor_utils.hpp"
-#include "undirectedtree.hpp"
+#include <kdl_codyco/crba_loops.hpp>
+#include <kdl_codyco/regressor_utils.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
 
 
 #include <kdl/kinfam.hpp>

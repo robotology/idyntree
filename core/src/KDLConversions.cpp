@@ -5,7 +5,7 @@
  *
  */
 
-#include "KDLConversions.h"
+#include <kdl_codyco/KDLConversions.h>
 
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Rotation.h>

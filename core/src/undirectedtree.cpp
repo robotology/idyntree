@@ -15,9 +15,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#include "undirectedtree.hpp"
-#include "utils.hpp"
-#include "config.h"
+#include <kdl_codyco/undirectedtree.hpp>
+#include <kdl_codyco/utils.hpp>
+#include <kdl_codyco/config.h>
 
 #include <kdl/tree.hpp>
 #include <sstream>

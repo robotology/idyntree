@@ -18,9 +18,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#include "floatingjntspaceinertiamatrix.hpp"
+#include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
 
-#include "regressor_utils.hpp"
+#include <kdl_codyco/regressor_utils.hpp>
 
 namespace KDL
 {
