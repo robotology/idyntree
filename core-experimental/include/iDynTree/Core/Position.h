@@ -8,9 +8,9 @@
 #ifndef IDYNTREE_POSITION_H
 #define IDYNTREE_POSITION_H
 
-#include "PositionRaw.h"
-#include "PositionSemantics.h"
-#include "Rotation.h"
+#include <iDynTree/Core/PositionRaw.h>
+#include <iDynTree/Core/PositionSemantics.h>
+#include <iDynTree/Core/Rotation.h>
 
 #include <string>
 
@@ -19,7 +19,7 @@ namespace iDynTree
     class Rotation;
     class Twist;
     class Wrench;
-    
+
     /**
      * Class representation the coordinates of the Position of
      * a point with respect to another point.
@@ -41,48 +41,48 @@ namespace iDynTree
     {
     private:
         PositionSemantics semantics;
-        
+
         /**
          * Copy constructor: create a Position from a PositionRaw and a PositionSemantics object.
          */
         Position(const PositionRaw & otherPos, const PositionSemantics & otherSem);
-        
+
     public:
         /**
          * Default constructor: initialize all the coordinates to 0
          */
         Position();
-        
+
         /**
          * Constructor from 3 doubles: initialize the coordinates with the passed values.
          */
         Position(double x, double y, double z);
-        
+
         /**
          * Copy constructor: create a Position from another Position
          */
         Position(const Position & other);
-        
+
         /**
          * Copy constructor: create a Position from a PositionRaw
          */
         Position(const PositionRaw & other);
-        
+
         /**
          * Denstructor
          */
         virtual ~Position();
-        
+
         /**
          * Semantic getter
          */
         PositionSemantics& getSemantics();
-        
+
         /**
          * Const Semantic getter
          */
         const PositionSemantics& getSemantics() const;
-        
+
         /**
          * Geometric operations
          */
@@ -93,7 +93,7 @@ namespace iDynTree
         static Position inverse(const Position & op);
         Twist  changePointOf(const Twist & other) const;
         Wrench changePointOf(const Wrench & other) const;
-        
+
         /**
          * overloaded operators
          */
@@ -102,16 +102,16 @@ namespace iDynTree
         Position operator-() const;
         Twist    operator*(const Twist    & other) const;
         Wrench   operator*(const Wrench   & other) const;
-        
+
         /** @name Output helpers.
          *  Output helpers.
          */
         ///@{
         std::string toString() const;
-        
+
         std::string reservedToString() const;
         ///@}
-        
+
         friend Position Rotation::changeCoordFrameOf(const Position & op) const;
     };
 }

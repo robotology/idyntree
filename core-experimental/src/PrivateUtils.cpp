@@ -5,7 +5,7 @@
  *
  */
 
-#include "PrivateUtils.h"
+#include <iDynTree/Core/PrivateUtils.h>
 
 namespace iDynTree
 {

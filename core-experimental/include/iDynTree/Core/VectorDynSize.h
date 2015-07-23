@@ -8,7 +8,8 @@
 #ifndef IDYNTREE_DYNAMIC_SIZE_VECTOR_H
 #define IDYNTREE_DYNAMIC_SIZE_VECTOR_H
 
-#include "IVector.h"
+#include <iDynTree/Core/IVector.h>
+
 #include <string>
 
 namespace iDynTree

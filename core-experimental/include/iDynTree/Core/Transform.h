@@ -8,10 +8,11 @@
 #ifndef IDYNTREE_TRANSFORM_H
 #define IDYNTREE_TRANSFORM_H
 
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/TransformSemantics.h>
+
 #include <string>
-#include "Position.h"
-#include "Rotation.h"
-#include "TransformSemantics.h"
 
 namespace iDynTree
 {
@@ -55,7 +56,7 @@ namespace iDynTree
         Position pos;
         Rotation rot;
         TransformSemantics semantics;
-        
+
     public:
         /**
          * Default constructor: initialize the rotation to the identity and the translation to 0
@@ -113,9 +114,9 @@ namespace iDynTree
 
         /**
          * overloaded operators
-         * 
+         *
          * They overload geometric operations which are local functions in Transform.cpp. These functions are
-         * not exported because they are templated, and exporting templates on Windows might cause compatibility 
+         * not exported because they are templated, and exporting templates on Windows might cause compatibility
          * issues.
          */
         Transform operator*(const Transform & other) const;
@@ -131,7 +132,7 @@ namespace iDynTree
          * constructor helpers
          */
         static Transform Identity();
-        
+
         /** @name Output helpers.
          *  Output helpers.
          */

@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_SPATIAL_ACC_H
 #define IDYNTREE_SPATIAL_ACC_H
 
-#include "SpatialMotionVectorRaw.h"
+#include <iDynTree/Core/SpatialMotionVectorRaw.h>
 
 namespace iDynTree
 {

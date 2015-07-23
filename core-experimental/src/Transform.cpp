@@ -5,22 +5,24 @@
  *
  */
 
-#include "Transform.h"
-#include "Position.h"
-#include "Rotation.h"
-#include "Twist.h"
-#include "Wrench.h"
-#include "SpatialMomentum.h"
-#include "SpatialAcc.h"
-#include "SpatialInertia.h"
+#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/SpatialMomentum.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/SpatialInertia.h>
 
-#include "PrivateUtils.h"
-#include "Utils.h"
+#include <iDynTree/Core/PrivateUtils.h>
+#include <iDynTree/Core/Utils.h>
 
 #include <Eigen/Dense>
-#include <cassert>
+
 #include <iostream>
 #include <sstream>
+
+#include <cassert>
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 
@@ -29,10 +31,10 @@ namespace iDynTree
 
 /**
  * Static functions
- * 
+ *
  * We define here templated functions implementing geometrical operations, listed below
  * (with the respective instanciation result):
- * 
+ *
  * - geometric operations on 3x1 vectors (positions and rotations and homogemeous tranform)
  *
  *   static Position transform(const Transform & op1, const Position & op2)
@@ -45,7 +47,7 @@ namespace iDynTree
  *   static Twist    transform(const Transform & op1, const Twist    & op2)
  *   static SpatialMomentum transform(const Transform & op1, const SpatialMomentum & op2)
  *   static SpatialAcc      transform(const Transform & op1, const SpatialAcc & op2)
- *   
+ *
  * - geometric operations on spatial 6x6 matrices (SpatialInertia).
  *
  *   static SpatialInertia  transform(const Transform & op1, const SpatialInertia & op2)
@@ -60,7 +62,7 @@ Position transform(const Transform& op1, const Position& op2);
 template<>
 SpatialInertia transform(const Transform& op1, const SpatialInertia& op2);
 
-    
+
 /**
  * Class functions
  */
@@ -82,7 +84,7 @@ Transform::Transform(const Transform& other): pos(other.getPosition()),
                                               semantics(pos.getSemantics(), rot.getSemantics())
 {
 }
-    
+
 Transform::~Transform()
 {
 
@@ -97,7 +99,7 @@ const TransformSemantics& Transform::getSemantics() const
 {
     return this->semantics;
 }
-    
+
 const Position& Transform::getPosition() const
 {
     return this->pos;
@@ -113,7 +115,7 @@ void Transform::setPosition(const Position& position)
     // check consistency of setted position with existing rotation
     // and set the semantics.
     iDynTreeAssert(this->semantics.setPositionSemantics(position.getSemantics()));
-    
+
     // set position
     this->pos = position;
 }
@@ -123,7 +125,7 @@ void Transform::setRotation(const Rotation& rotation)
     // check consistency of setted rotation with existing position
     // and set the semantics.
     iDynTreeAssert(this->semantics.setRotationSemantics(rotation.getSemantics()));
-    
+
     // set rotation
     this->rot = rotation;
 }
@@ -132,20 +134,20 @@ void Transform::setRotation(const Rotation& rotation)
 Transform Transform::compose(const Transform& op1, const Transform& op2)
 {
     Transform result;
-    
+
     result.setRotation(op1.getRotation()*op2.getRotation());
     result.setPosition(op1.getRotation()*op2.getPosition()+op1.getPosition());
-    
+
     return result;
 }
 
 Transform Transform::inverse2(const Transform& trans)
 {
     Transform result;
-    
+
     result.setRotation(trans.getRotation().inverse());
     result.setPosition(-(result.getRotation()*trans.getPosition()));
-    
+
     return result;
 }
 
@@ -199,7 +201,7 @@ Transform Transform::Identity()
 std::string Transform::toString() const
 {
     std::stringstream ss;
-    
+
     ss << rot.toString() << " "
        << pos.toString() << " "
        << semantics.toString() << std::endl;
@@ -215,7 +217,7 @@ std::string Transform::reservedToString() const
 
 /**
  * Static functions
- * 
+ *
  *
  */
     template<class T>
@@ -264,10 +266,10 @@ std::string Transform::reservedToString() const
          * The Spatial Acceleration is a Spatial Motion vector
          *
          */
-        
+
         return op1.getPosition()*(op1.getRotation()*op2);
     }
-    
+
     template<>
     Position transform(const Transform& op1, const Position& op2)
     {
@@ -284,25 +286,25 @@ std::string Transform::reservedToString() const
         /* The transform of a Spatial Inertia is defined as follows:
          * A^I = A^X_B^* * B^I * B^X_A
          */
-        
+
         // mass clearly remains the same
         double newMass = op2.getMass();
-        
+
         // the com is transformed as any position
         Position newCenterOfMass = transform<Position>(op1,Position(op2.getCenterOfMass()));
-        
+
         // the rotational inertial is rotated and then
         // the parallel axis theorem applies
         RotationalInertiaRaw newRotInertia;
         Eigen::Map<Eigen::Matrix3d> newI(newRotInertia.data());
         RotationalInertiaRaw oldRotInertia = op2.getRotationalInertiaWrtFrameOrigin();
         Eigen::Map<const Eigen::Matrix3d> oldI(oldRotInertia.data());
-        
+
         Eigen::Map<const Matrix3dRowMajor> R(op1.getRotation().data());
         Eigen::Map<const Eigen::Vector3d> p(op1.getPosition().data());
-        
+
         newI =  R*oldI*R.transpose() - newMass*squareCrossProductMatrix(p);
-        
+
         return SpatialInertia(newMass,newCenterOfMass,newRotInertia);
     }
 

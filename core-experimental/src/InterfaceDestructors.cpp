@@ -15,8 +15,8 @@
  *
  */
 
-#include "IVector.h"
-#include "IMatrix.h"
+#include <iDynTree/Core/IVector.h>
+#include <iDynTree/Core/IMatrix.h>
 
 namespace iDynTree
 {

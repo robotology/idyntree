@@ -4,9 +4,6 @@
 
 project(iDynTree_Base CXX)
 
-#local headers
-include_directories(include/iDynTree/Core)
-
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
                               include/iDynTree/Core/MatrixDynSize.h

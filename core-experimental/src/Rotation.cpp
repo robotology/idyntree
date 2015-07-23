@@ -5,11 +5,11 @@
  *
  */
 
-#include "Rotation.h"
-#include "Position.h"
-#include "Wrench.h"
-#include "Twist.h"
-#include "Utils.h"
+#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/Utils.h>
 
 
 
@@ -95,7 +95,7 @@ namespace iDynTree
         iDynTreeAssert( this->semantics.changeCoordFrameOf(other.getSemantics(), resultSemantics) );
         return Position(this->RotationRaw::changeCoordFrameOf(other), resultSemantics);
     }
-    
+
     Twist Rotation::changeCoordFrameOf(const Twist& other) const
     {
         Twist result;
@@ -145,27 +145,27 @@ namespace iDynTree
     {
         return Rotation(RotationRaw::RotX(angle));
     }
-    
+
     Rotation Rotation::RotY(const double angle)
     {
         return Rotation(RotationRaw::RotY(angle));
     }
-    
+
     Rotation Rotation::RotZ(const double angle)
     {
         return Rotation(RotationRaw::RotZ(angle));
     }
-    
+
     Rotation Rotation::RPY(const double roll, const double pitch, const double yaw)
     {
         return Rotation(RotationRaw::RPY(roll, pitch, yaw));
     }
-    
+
     Rotation Rotation::Identity()
     {
         return Rotation();
     }
-    
+
     std::string Rotation::toString() const
     {
         std::stringstream ss;

@@ -9,8 +9,8 @@
 #define IDYNTREE_ROTATION_H
 
 #include <string>
-#include "RotationRaw.h"
-#include "RotationSemantics.h"
+#include <iDynTree/Core/RotationRaw.h>
+#include <iDynTree/Core/RotationSemantics.h>
 
 namespace iDynTree
 {
@@ -42,12 +42,12 @@ namespace iDynTree
     {
     private:
         RotationSemantics semantics;
-        
+
         /**
          * Copy constructor: create a Rotation from another RotationRaw and another RotationSemantics.
          */
         Rotation(const RotationRaw & other, RotationSemantics & semantics);
-        
+
     public:
         /**
          * Default constructor: initialize all the rotation to the identity
@@ -90,7 +90,7 @@ namespace iDynTree
          * Geometric operations.
          * For the inverse2() operation, both the forward and the inverse geometric relations have to
          * be expressed in the reference orientation frame!!
-         * 
+         *
          */
         const Rotation & changeOrientFrame(const Rotation & newOrientFrame);
         const Rotation & changeRefOrientFrame(const Rotation & newRefOrientFrame);
@@ -110,56 +110,56 @@ namespace iDynTree
         Twist    operator*(const Twist    & other) const;
         Wrench   operator*(const Wrench   & other) const;
 
-        
+
         /**
          * @name Initialization helpers.
          *
          */
         ///@{
-        
+
         /**
          * Return a Rotation around axis X of given angle
          *
          * @param angle the angle (in Radians) of the rotation arount the X axis
          */
         static Rotation RotX(const double angle);
-        
+
         /**
          * Return a Rotation around axis Y of given angle
          *
          * @param angle the angle (in Radians) of the rotation arount the Y axis
          */
         static Rotation RotY(const double angle);
-        
+
         /**
          * Return a Rotation around axis Z of given angle
          *
          * @param angle the angle (in Radians) of the rotation arount the Z axis
          */
         static Rotation RotZ(const double angle);
-        
+
         /**
          * Return a rotation object given Roll, Pitch and Yaw values.
          *
          * @note This method is compatible with the KDL::Rotation::RPY method.
          */
         static Rotation RPY(const double roll, const double pitch, const double yaw);
-        
+
         /**
          * Return an identity rotation.
          *
          *
          */
         static Rotation Identity();
-        
+
         ///@}
-        
+
         /** @name Output helpers.
          *  Output helpers.
          */
         ///@{
         std::string toString() const;
-        
+
         std::string reservedToString() const;
         ///@}
     };

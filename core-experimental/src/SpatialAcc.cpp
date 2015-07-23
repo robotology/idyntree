@@ -5,7 +5,7 @@
  *
  */
 
-#include "SpatialAcc.h"
+#include <iDynTree/Core/SpatialAcc.h>
 
 namespace iDynTree
 {

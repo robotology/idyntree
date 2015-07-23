@@ -5,9 +5,9 @@
  *
  */
 
-#include "PositionSemantics.h"
-#include "RotationSemantics.h"
-#include "Utils.h"
+#include <iDynTree/Core/PositionSemantics.h>
+#include <iDynTree/Core/RotationSemantics.h>
+#include <iDynTree/Core/Utils.h>
 #include <cstdio>
 #include <sstream>
 
@@ -79,19 +79,19 @@ namespace iDynTree
                                  __PRETTY_FUNCTION__,
                                  "newPosition has a reference point different from the original point\n"));
     }
-    
+
     bool PositionSemantics::changePoint(const PositionSemantics& newPoint)
     {
         // check semantics
         bool status = this->check_changePoint(newPoint);
-        
+
         // set new semantics
         this->point = newPoint.getPoint();
-        
+
         return status;
     }
-    
-    
+
+
     bool PositionSemantics::check_changeRefPoint(const PositionSemantics& newPosition)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(newPosition.coordinateFrame,this->coordinateFrame),
@@ -101,15 +101,15 @@ namespace iDynTree
                                  __PRETTY_FUNCTION__,
                                  "newPosition point is different from the original reference point\n"));
     }
-    
+
     bool PositionSemantics::changeRefPoint(const PositionSemantics& newPosition)
     {
         // check semantics
         bool status = this->check_changeRefPoint(newPosition);
-        
+
         // set new semantics
         this->refPoint = newPosition.refPoint;
-        
+
         return status;
     }
 
@@ -130,12 +130,12 @@ namespace iDynTree
     {
         // check semantics
         bool status = PositionSemantics::check_compose(op1,op2);
-        
+
         // set new semantics
         result.refPoint = op2.refPoint;
         result.point = op1.point;
         result.coordinateFrame = op1.coordinateFrame;
-        
+
         return status;
     }
 
@@ -148,12 +148,12 @@ namespace iDynTree
     {
         // check semantics
         bool status = PositionSemantics::check_inverse(op);
-        
+
         // set new semantics
         result.coordinateFrame = op.coordinateFrame;
         result.point = op.refPoint;
         result.refPoint = op.point;
-        
+
         return status;
     }
 

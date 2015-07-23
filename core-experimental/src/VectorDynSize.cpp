@@ -5,9 +5,11 @@
  *
  */
 
-#include "VectorDynSize.h"
-#include "Utils.h"
+#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/Utils.h>
+
 #include <sstream>
+
 #include <cstring>
 
 namespace iDynTree

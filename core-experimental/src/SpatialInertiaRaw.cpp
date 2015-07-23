@@ -5,18 +5,19 @@
  *
  */
 
-#include "SpatialInertiaRaw.h"
-#include "SpatialForceVectorRaw.h"
-#include "SpatialMotionVectorRaw.h"
-#include "PositionRaw.h"
-#include "Utils.h"
-#include "PrivateUtils.h"
+#include <iDynTree/Core/SpatialInertiaRaw.h>
+#include <iDynTree/Core/SpatialForceVectorRaw.h>
+#include <iDynTree/Core/SpatialMotionVectorRaw.h>
+#include <iDynTree/Core/PositionRaw.h>
+#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivateUtils.h>
 
 #include <Eigen/Dense>
 
-#include <cassert>
 #include <iostream>
 #include <sstream>
+
+#include <cassert>
 
 
 namespace iDynTree

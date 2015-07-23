@@ -5,11 +5,11 @@
  *
  */
 
-#include "Position.h"
-#include "Rotation.h"
-#include "Twist.h"
-#include "Wrench.h"
-#include "Utils.h"
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/Utils.h>
 #include <cassert>
 #include <iostream>
 #include <sstream>
@@ -36,7 +36,7 @@ namespace iDynTree
     {
 
     }
-    
+
     Position::Position(const PositionRaw & otherPos, const PositionSemantics & otherSem): PositionRaw(otherPos)
     {
         this->semantics = otherSem;
@@ -96,7 +96,7 @@ namespace iDynTree
     {
         return PositionRaw::changePointOf(other);
     }
-    
+
     Wrench Position::changePointOf(const Wrench & other) const
     {
         return PositionRaw::changePointOf(other);
@@ -117,17 +117,17 @@ namespace iDynTree
     {
         return inverse(*this);
     }
-    
+
     Twist Position::operator*(const Twist& other) const
     {
         return changePointOf(other);
     }
-    
+
     Wrench Position::operator*(const Wrench& other) const
     {
         return changePointOf(other);
     }
-    
+
     std::string Position::toString() const
     {
         std::stringstream ss;

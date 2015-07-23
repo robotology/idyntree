@@ -5,8 +5,10 @@
  *
  */
 
-#include "Utils.h"
+#include <iDynTree/Core/Utils.h>
+
 #include <iostream>
+
 #include <cassert>
 
 namespace iDynTree
@@ -45,5 +47,5 @@ namespace iDynTree
         }
         return !condition;
     }
-    
+
 }

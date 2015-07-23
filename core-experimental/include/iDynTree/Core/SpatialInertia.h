@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_SPATIAL_INERTIA_H
 #define IDYNTREE_SPATIAL_INERTIA_H
 
-#include "SpatialInertiaRaw.h"
+#include <iDynTree/Core/SpatialInertiaRaw.h>
 
 namespace iDynTree
 {
