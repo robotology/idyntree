@@ -24,7 +24,11 @@ include(iDynTreeOptions)
 
 # Find dependecies
 find_package(YARP REQUIRED)
-find_package(ICUB REQUIRED)
+
+if(IDYNTREE_USES_ICUB_MAIN)
+    find_package(ICUB REQUIRED)
+endif()
+
 include(OrocosKDLFindLogic)
 find_package(orocos_kdl REQUIRED)
 find_package(Eigen3 REQUIRED)

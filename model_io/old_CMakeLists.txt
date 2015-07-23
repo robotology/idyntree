@@ -80,7 +80,7 @@ if(ENABLE_SYMORO_PAR)
     SOURCE_GROUP("Symoro\\Header Files" FILES ${SYMORO_PAR_HPPS})
 endif()
 
-if(IDYNTREE_USE_ICUB_MAIN)
+if(IDYNTREE_USES_ICUB_MAIN)
   set(IKIN_HPPS include/kdl_format_io/iKin_export.hpp)
   set(IKIN_SRCS src/converters/iKin_export.cpp)
 

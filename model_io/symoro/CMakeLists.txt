@@ -5,7 +5,6 @@
 project(iDynTree_ModelIO_iKin CXX)
 
 find_package(YARP REQUIRED)
-find_package(ICUB REQUIRED)
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")

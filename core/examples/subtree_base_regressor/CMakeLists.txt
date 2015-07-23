@@ -6,11 +6,6 @@ project(subtree_base_regressor)
 #find orocos_kdl, with some glue code to support also the use of the old version
 find_package(orocos_kdl 1.2.3 REQUIRED QUIET)
 
-# Find kdl_format_io and kdl_codyco
-find_package(kdl_codyco 0.1.2 REQUIRED)
-find_package(kdl_format_io REQUIRED)
-
-
 find_package(YCM REQUIRED)
 
 list(APPEND CMAKE_MODULE_PATH ${YCM_MODULE_PATH})
