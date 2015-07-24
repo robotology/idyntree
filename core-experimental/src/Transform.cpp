@@ -308,4 +308,60 @@ std::string Transform::reservedToString() const
         return SpatialInertia(newMass,newCenterOfMass,newRotInertia);
     }
 
+    Matrix4x4 Transform::asHomogeneousTransform()
+    {
+        Matrix4x4 ret;
+
+        Eigen::Map< Eigen::Matrix<double,4,4,Eigen::RowMajor> > retEigen(ret.data());
+
+        Eigen::Map<const Eigen::Vector3d> p(this->getPosition().data());
+        Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > R(this->getRotation().data());
+
+        retEigen.block<3,3>(0,0) = R;
+        retEigen.block<3,1>(0,3) = p;
+
+
+        return ret;
+    }
+
+    // \todo TODO have a unique mySkew
+    template<class Derived>
+    inline Eigen::Matrix<typename Derived::Scalar, 3, 3> mySkew(const Eigen::MatrixBase<Derived> & vec)
+    {
+        EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived, 3);
+        return (Eigen::Matrix<typename Derived::Scalar, 3, 3>() << 0.0, -vec[2], vec[1], vec[2], 0.0, -vec[0], -vec[1], vec[0], 0.0).finished();
+    }
+
+    Matrix6x6 Transform::asAdjointTransform()
+    {
+        Matrix6x6 ret;
+
+        Eigen::Map< Eigen::Matrix<double,6,6,Eigen::RowMajor> > retEigen(ret.data());
+
+        Eigen::Map<const Eigen::Vector3d> p(this->getPosition().data());
+        Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > R(this->getRotation().data());
+
+        retEigen.block<3,3>(0,0) = R;
+        retEigen.block<3,3>(0,3) = mySkew(p)*R;
+        retEigen.block<3,3>(3,3) = R;
+
+        return ret;
+    }
+
+    Matrix6x6 Transform::asAdjointTransformWrench()
+    {
+        Matrix6x6 ret;
+
+        Eigen::Map< Eigen::Matrix<double,6,6,Eigen::RowMajor> > retEigen(ret.data());
+
+        Eigen::Map<const Eigen::Vector3d> p(this->getPosition().data());
+        Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > R(this->getRotation().data());
+
+        retEigen.block<3,3>(0,0) = R;
+        retEigen.block<3,3>(3,0) = mySkew(p)*R;
+        retEigen.block<3,3>(3,3) = R;
+
+        return ret;
+    }
+
 }
