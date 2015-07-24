@@ -4,9 +4,9 @@ classdef SpatialAcc < iDynTree.SpatialMotionVectorRaw
       self@iDynTree.SpatialMotionVectorRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(193,'new_SpatialAcc',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(200,'new_SpatialAcc',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(193,'new_SpatialAcc',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(200,'new_SpatialAcc',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,18 +15,18 @@ classdef SpatialAcc < iDynTree.SpatialMotionVectorRaw
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(194,'delete_SpatialAcc',self);
+        iDynTreeMATLAB_wrap(201,'delete_SpatialAcc',self);
         self.swigOwn=false;
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(195,'SpatialAcc_plus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(202,'SpatialAcc_plus',self,varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(196,'SpatialAcc_minus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(203,'SpatialAcc_minus',self,varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(197,'SpatialAcc_uminus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(204,'SpatialAcc_uminus',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];

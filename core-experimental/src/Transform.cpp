@@ -319,6 +319,7 @@ std::string Transform::reservedToString() const
 
         retEigen.block<3,3>(0,0) = R;
         retEigen.block<3,1>(0,3) = p;
+        retEigen(3,3) = 1;
 
 
         return ret;

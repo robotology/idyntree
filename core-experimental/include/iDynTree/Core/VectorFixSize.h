@@ -29,7 +29,7 @@ namespace iDynTree
         /**
          * Storage for the VectorDynSize
          *
-         * Array of 6 doubles.
+         * Array of VecSize doubles.
          */
         double m_data[VecSize];
 
@@ -87,6 +87,20 @@ namespace iDynTree
          * Assign all element of the vector to 0.
          */
         void zero();
+
+        /**
+         * Assume that buf is pointing to
+         * a buffer of size() doubles, and fill
+         * it with the content of this vector.
+         *
+         * @param buf pointer to the buffer to fill
+         *
+         * @todo provide this for all matrix types
+         *
+         * \warning use this function only if you are
+         *          an expert C user
+         */
+        void fillBuffer(double * buf) const;
 
         /**
          *  @name Output helpers.
@@ -194,6 +208,15 @@ namespace iDynTree
         this->m_data[index] = new_el;
 
         return true;
+    }
+
+    template<unsigned int VecSize>
+    void VectorFixSize<VecSize>::fillBuffer(double* buf) const
+    {
+        for(unsigned int i=0; i < this->size(); i++ )
+        {
+            buf[i] = this->m_data[i];
+        }
     }
 
     template<unsigned int VecSize>

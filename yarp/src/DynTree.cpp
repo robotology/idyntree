@@ -31,12 +31,7 @@
 
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
-
 #include <kdl/frames_io.hpp>
-
-#ifndef NDEBUG
-#include <kdl/frames_io.hpp>
-#endif
 
 #include <yarp/math/Math.h>
 #include <yarp/math/SVD.h>

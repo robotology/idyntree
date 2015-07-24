@@ -72,3 +72,8 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/+iDynTree DESTINATION ${CMAKE_INST
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigRef.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iDynTreesetup.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(TARGETS ${modulename} DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
+
+# if compile tests compile also matlab tests
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif()

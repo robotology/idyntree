@@ -20,3 +20,5 @@ pos3_m = pos1_m+pos2_m;
 iDynTreeAssertEqual(pos3.getVal(0),pos3_m(1),tol,'Error in summing points, x coord')
 iDynTreeAssertEqual(pos3.getVal(1),pos3_m(2),tol,'Error in summing points, y coord')
 iDynTreeAssertEqual(pos3.getVal(2),pos3_m(3),tol,'Error in summing points, z coord')
+
+disp('Test sum pos completed successfully.')

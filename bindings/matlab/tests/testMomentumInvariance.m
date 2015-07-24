@@ -33,3 +33,5 @@ iDynTreeAssertEqual(momentumInFrame2.getVal(2),momentumInFrame2check.getVal(2),t
 iDynTreeAssertEqual(momentumInFrame2.getVal(3),momentumInFrame2check.getVal(3),tol,'Error in momentumInvariance, rx')
 iDynTreeAssertEqual(momentumInFrame2.getVal(4),momentumInFrame2check.getVal(4),tol,'Error in momentumInvariance, ry')
 iDynTreeAssertEqual(momentumInFrame2.getVal(5),momentumInFrame2check.getVal(5),tol,'Error in momentumInvariance, rz')
+
+disp('Test momentumInvariance completed successfully.')
