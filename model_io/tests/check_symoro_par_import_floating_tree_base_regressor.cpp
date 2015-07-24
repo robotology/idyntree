@@ -49,7 +49,7 @@
 
 using namespace KDL;
 using namespace std;
-using namespace kdl_format_io;
+using namespace iDynTree;
 using namespace KDL::CoDyCo;
 
 void printLink(const SegmentMap::const_iterator& link, const std::string& prefix)
