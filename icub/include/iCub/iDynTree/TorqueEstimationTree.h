@@ -37,7 +37,6 @@ class TorqueEstimationTree : public DynTree
      std::vector<int> link2subgraph_index; /**< for each link, return the correspondent dynamics subgraph index */
      std::vector<bool> link_is_subgraph_root; /**< for each link, return if it is a subgraph root */
      std::vector<int> subgraph_index2root_link; /**< for each subgraph, return the index of the root */
-     bool are_contact_estimated;
 
      int getSubGraphIndex(int link_index) {
          assert(link_index >= 0);
@@ -78,6 +77,16 @@ class TorqueEstimationTree : public DynTree
 
      /** store contacts results */
      void store_contacts_results();
+
+
+    /**
+     * For a given link, returns the sum of the measured wrenches acting on the link (i.e. the sum of the wrenches acting
+     * on the link measured by the FT sensors acting on the link) expressed in the link reference frame
+     *
+     */
+    KDL::Wrench getMeasuredWrench(int link_id);
+
+     //end DynTreeContact data structures
 
 
     public:
@@ -197,6 +206,14 @@ class TorqueEstimationTree : public DynTree
       * of each subtree, expressed in the world reference frame, with respect to the world origin
       */
     std::vector<yarp::sig::Vector> getSubTreeInternalDynamics();
+
+    /**
+    * Execute the dynamical phase (recursive calculation of internal wrenches
+    * and of torques) of the RNEA algorithm for all the tree.
+    * @return true if succeeds, false otherwise
+    */
+    virtual bool dynamicRNEA();
+
 
     //@}
 

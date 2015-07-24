@@ -8,6 +8,8 @@
  * http://www.codyco.eu
  */
 
+#include <iDynTree/Core/Wrench.h>
+
 #include "iCub/iDynTree/TorqueEstimationTree.h"
 #include "iCub/iDynTree/idyn2kdl_icub.h"
 
@@ -19,6 +21,8 @@
 #include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 #include <iDynTree/Core/Transform.h>
 
+#include <kdl_codyco/rnea_loops.hpp>
+
 #include "kdl_codyco/KDLConversions.h"
 #include <kdl_codyco/position_loops.hpp>
 
@@ -27,6 +31,9 @@
 
 #include <vector>
 #include <iCub/iDynTree/yarp_kdl.h>
+
+#include <kdl_codyco/regressor_utils.hpp>
+#include <kdl_codyco/regressors/dirl_utils.hpp>
 
 using namespace yarp::sig;
 using namespace yarp::math;
@@ -907,6 +914,93 @@ bool TorqueEstimationTree::estimateContactForcesFromSkin()
     are_contact_estimated = true;
     return true;
 }
+
+
+KDL::Wrench TorqueEstimationTree::getMeasuredWrench(int link_id)
+{
+
+    ::iDynTree::Wrench total_measured_applied_wrench = ::iDynTree::Wrench();
+    for(int ft=0; ft < NrOfFTSensors; ft++ )
+    {
+        ::iDynTree::SixAxisForceTorqueSensor * sens
+            = (::iDynTree::SixAxisForceTorqueSensor *) sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft);
+
+        assert(sens != 0);
+
+        ::iDynTree::Wrench measured_wrench_on_link = ::iDynTree::Wrench();//::iDynTree::ToiDynTree(KDL::Wrench::Zero());
+        ::iDynTree::Wrench measured_wrench_by_sensor;
+
+        bool ok = sensor_measures.getMeasurement(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft,measured_wrench_by_sensor);
+
+        assert(ok);
+
+        // If the sensor with index ft is not attached to the link
+        // this function return a zero wrench
+        sens->getWrenchAppliedOnLink(link_id,measured_wrench_by_sensor,measured_wrench_on_link);
+
+        //Sum the given wrench to the return value
+        total_measured_applied_wrench = total_measured_applied_wrench+measured_wrench_on_link;
+    }
+
+    return ::iDynTree::ToKDL(total_measured_applied_wrench);
+}
+
+bool TorqueEstimationTree::dynamicRNEA()
+{
+    int ret;
+    //ret = rneaDynamicLoop(undirected_tree,q,dynamic_traversal,v,a,f_ext,f,torques,base_residual_f);
+    ret = KDL::CoDyCo::rneaDynamicLoop(undirected_tree,q,dynamic_traversal,f_gi,f_ext,f,torques,base_residual_f);
+    //Check base force: if estimate contact was called, it should be zero
+    if( are_contact_estimated == true )
+    {
+        //If the force were estimated wright
+        #ifndef NDEBUG
+        /*
+        std::cout << "q:   " << q.data << std::endl;
+        std::cout << "dq:  " << dq.data << std::endl;
+        std::cout << "ddq: " << ddq.data << std::endl;
+        for(int i=0; i < f_ext.size(); i++ ) { std::cout << "f_ext[" << i << "]: " << f_ext[i] << std::endl; }
+        */
+        //std::cerr << "base_residual_f.force.Norm " << base_residual_f.force.Norm() << std::endl;
+        //std::cerr << "base_residual_f.force.Norm " << base_residual_f.torque.Norm() << std::endl;
+
+        #endif
+        if(  base_residual_f.force.Norm() > 1e-5 )
+        {
+            std::cout << "iDynTree WARNING: base_residual_f.force.Norm() is " << base_residual_f.force.Norm() << " instead of zero." << std::endl;
+            ret = -1;
+        }
+        if(  base_residual_f.torque.Norm() > 1e-5 )
+        {
+            std::cout << "iDynTree WARNING: base_residual_f.torque.Norm() is " << base_residual_f.torque.Norm() << " instead of zero." << std::endl;
+            ret = -1;
+        }
+        //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
+    }
+    else
+    {
+        //In case contacts forces where not estimated, the sensor values have
+        //to be calculated from the RNEA
+        for(int i=0; i < NrOfFTSensors; i++ )
+        {
+            //Todo add case that the force/wrench is the one of the parent ?
+            ::iDynTree::Wrench measure_wrench;
+
+            ::iDynTree::SixAxisForceTorqueSensor * p_ft_sensor =
+                reinterpret_cast< ::iDynTree::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,i));
+
+            bool ok = KDL::CoDyCo::Regressors::simulateMeasurement_sixAxisFTSensor(dynamic_traversal,f,p_ft_sensor,measure_wrench);
+
+            assert(ok);
+
+            ok = sensor_measures.setMeasurement(::iDynTree::SIX_AXIS_FORCE_TORQUE,i,measure_wrench);
+
+            assert(ok);
+        }
+    }
+    return ret >= 0;
+}
+
 
 }
 }

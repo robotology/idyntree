@@ -235,36 +235,6 @@ double DynTree::setAng(const double q_in, const int i)
 
 
 
-
-KDL::Wrench DynTree::getMeasuredWrench(int link_id)
-{
-
-    ::iDynTree::Wrench total_measured_applied_wrench = ::iDynTree::Wrench();
-    for(int ft=0; ft < NrOfFTSensors; ft++ )
-    {
-        ::iDynTree::SixAxisForceTorqueSensor * sens
-            = (::iDynTree::SixAxisForceTorqueSensor *) sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft);
-
-        assert(sens != 0);
-
-        ::iDynTree::Wrench measured_wrench_on_link = ::iDynTree::Wrench();//::iDynTree::ToiDynTree(KDL::Wrench::Zero());
-        ::iDynTree::Wrench measured_wrench_by_sensor;
-
-        bool ok = sensor_measures.getMeasurement(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft,measured_wrench_by_sensor);
-
-        assert(ok);
-
-        // If the sensor with index ft is not attached to the link
-        // this function return a zero wrench
-        sens->getWrenchAppliedOnLink(link_id,measured_wrench_by_sensor,measured_wrench_on_link);
-
-        //Sum the given wrench to the return value
-        total_measured_applied_wrench = total_measured_applied_wrench+measured_wrench_on_link;
-    }
-
-    return ::iDynTree::ToKDL(total_measured_applied_wrench);
-}
-
 /*
 iDynTreeLinkAndFrame DynTree::getiDynTreeLinkFrameFromSkinDynLibID(int body_part, int link)
 {
@@ -1084,27 +1054,6 @@ bool DynTree::dynamicRNEA()
             ret = -1;
         }
         //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
-    }
-    else
-    {
-        //In case contacts forces where not estimated, the sensor values have
-        //to be calculated from the RNEA
-        for(int i=0; i < NrOfFTSensors; i++ )
-        {
-            //Todo add case that the force/wrench is the one of the parent ?
-            ::iDynTree::Wrench measure_wrench;
-
-            ::iDynTree::SixAxisForceTorqueSensor * p_ft_sensor =
-                reinterpret_cast< ::iDynTree::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,i));
-
-            bool ok = KDL::CoDyCo::Regressors::simulateMeasurement_sixAxisFTSensor(dynamic_traversal,f,p_ft_sensor,measure_wrench);
-
-            assert(ok);
-
-            ok = sensor_measures.setMeasurement(::iDynTree::SIX_AXIS_FORCE_TORQUE,i,measure_wrench);
-
-            assert(ok);
-        }
     }
     return ret >= 0;
 }

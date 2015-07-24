@@ -133,6 +133,42 @@ namespace iDynTree
          */
         static Transform Identity();
 
+        /**
+         * Raw data accessors.
+         *
+         * For several applications it may be useful to access the fransform
+         * contents in the raw form of homogeneous matrix or an adjoint matrix.
+         */
+        ///@{
+
+        /**
+         * Return the 4x4 homogeneous matrix representing the transform.
+         * 
+         * The returned matrix is the one with this structure:
+         *
+         * |           |
+         * |  R     p  |
+         * |           |
+         * | 0 0 0  1  |
+         *
+         * Where R \in \mathbb{R}^{3 \times 3} is the rotation matrix that takes
+         * a 3d vector expressed in the orientationFrame and transform it
+         * in a 3d vector expressed in the reference orientation frame.
+         *
+         * p \in \mathbb{R}^3 is the vector between
+         *
+         *
+         *
+         */
+        Matrix4x4 asHomogeneousTransform();
+
+        Matrix6x6 asAdjointTransform();
+        Matrix6x6 asAdjointTransformWrench();
+
+
+
+        ///@}
+
         /** @name Output helpers.
          *  Output helpers.
          */

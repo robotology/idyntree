@@ -221,60 +221,7 @@ class DynTree  {
         std::vector<KDL::Wrench> f; /**< For a link the wrench transmitted from the link to its parent in the dynamical traversal \warning it is traversal dependent */
         std::vector<KDL::Wrench> f_gi; /**< Gravitational and inertial wrench acting on a link */
 
-        //DynTreeContact data structures
-        std::vector<int> link2subgraph_index; /**< for each link, return the correspondent dynamics subgraph index */
-        std::vector<bool> link_is_subgraph_root; /**< for each link, return if it is a subgraph root */
-        std::vector<int> subgraph_index2root_link; /**< for each subgraph, return the index of the root */
-        bool are_contact_estimated;
 
-        int getSubGraphIndex(int link_index) {
-            assert(link_index >= 0);
-            assert(link_index < (int)link2subgraph_index.size());
-            assert((int)link2subgraph_index.size() == this->getNrOfLinks());
-            return link2subgraph_index[link_index];
-        }
-
-        bool isSubGraphRoot(int link_index) {
-            assert((int)link_is_subgraph_root.size() == this->getNrOfLinks());
-            return link_is_subgraph_root[link_index];
-        }
-
-        int buildSubGraphStructure(const std::vector<std::string> & ft_names);
-
-        bool generateSensorsTree(const std::vector<std::string> & ft_names,
-                                    const std::vector<bool> & is_measure_direction_child_to_parent);
-
-        /**
-         * Get the A e b local to a link, querying the contacts list and the FT sensor list
-         *
-         */
-        yarp::sig::Vector getLinkLocalAb_contacts(int global_index, yarp::sig::Matrix & A, yarp::sig::Vector & b);
-
-        bool isFTsensor(const std::string & joint_name, const std::vector<std::string> & ft_sensors) const;
-        std::vector<yarp::sig::Matrix> A_contacts; /**< for each subgraph, the A regressor matrix of unknowns \todo use Eigen */
-        std::vector<yarp::sig::Vector> b_contacts; /**< for each subgraph, the b vector of known terms \todo use Eigen */
-        std::vector<yarp::sig::Vector> x_contacts; /**< for each subgraph, the x vector of unknowns */
-
-        std::vector<KDL::Wrench> b_contacts_subtree; /**< for each link, the b vector of known terms of the subtree starting at that link expressed in the link frame*/
-
-        /**
-         * Preliminary version. If there are performance issues, this function
-         * has several space for improvement.
-         *
-         */
-        void buildAb_contacts();
-
-        /** store contacts results */
-        void store_contacts_results();
-
-        /**
-         * For a given link, returns the sum of the measured wrenches acting on the link (i.e. the sum of the wrenches acting
-         * on the link measured by the FT sensors acting on the link) expressed in the link reference frame
-         *
-         */
-        KDL::Wrench getMeasuredWrench(int link_id);
-
-        //end DynTreeContact data structures
 
         //Position related quantites
         mutable bool is_X_dynamic_base_updated;
@@ -318,6 +265,9 @@ class DynTree  {
         //Map for correctly deal with skinDynLib IDs
 
         std::map<skinDynLibLinkID,iDynTreeLinkAndFrame> skinDynLibLinkMap;
+
+                bool are_contact_estimated;
+
 
 
     static bool loadJointLimitsFromURDFFile(std::string urdfFile, KDL::CoDyCo::UndirectedTree undirectedTree, yarp::sig::Vector &yarpJointMinLimit, yarp::sig::Vector &yarpJointMaxLimit);
