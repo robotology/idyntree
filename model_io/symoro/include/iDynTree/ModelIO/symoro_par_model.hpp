@@ -1,13 +1,13 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
-* 
+*
 *  Copyright (c) 2013, Istituto Italiano di Tecnologia
 *  All rights reserved.
-* 
+*
 *  Redistribution and use in source and binary forms, with or without
 *  modification, are permitted provided that the following conditions
 *  are met:
-* 
+*
 *   * Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   * Redistributions in binary form must reproduce the above
@@ -17,7 +17,7 @@
 *   * Neither the name of the Willow Garage nor the names of its
 *     contributors may be used to endorse or promote products derived
 *     from this software without specific prior written permission.
-* 
+*
 *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -42,29 +42,30 @@
 #include <iostream>
 #include <vector>
 
-namespace kdl_format_io {
+namespace iDynTree
+{
 
 /**
  * Class for representing the content of a SyMoRo PAR file (only geometric parameters for now)
  */
 class symoro_par_model {
-    
-    
+
+
 private:
-    static std::string vector2string(const std::vector<int> & vec) 
+    static std::string vector2string(const std::vector<int> & vec)
     {
         std::stringstream ss;
         for(unsigned int l=0; l < vec.size(); l++ ) { ss << " " << vec[l]; }
         return ss.str();
     }
-    
-    static std::string vector2string(const std::vector<double> & vec) 
+
+    static std::string vector2string(const std::vector<double> & vec)
     {
         std::stringstream ss;
         for(int l=0; l < vec.size(); l++ ) { ss << " " << vec[l]; }
         return ss.str();
     }
-    
+
 public:
     std::string name;
 
@@ -72,7 +73,7 @@ public:
     int NL;
     int NJ;
     int Type;
-        
+
     std::vector<int> Ant;
     std::vector<int> Sigma;
     std::vector<double> B;
@@ -82,7 +83,7 @@ public:
     std::vector<double> Alpha;
     std::vector<int> Mu;
     std::vector<double> Theta;
-    
+
     std::string toString() const {
         std::stringstream ss;
         ss << "Robot name:\t" << name << std::endl;
@@ -101,10 +102,10 @@ public:
         ss << "Theta\t" << vector2string(Theta) << std::endl;
         return ss.str();
     }
-    
+
     bool isConsistent() const {
         if( Type < 0 || Type >= 3 ) return false;
-        
+
         //Type specific checks
         if( Type == 0 ) {
             if( NL != NJ || NL != NF ) return false;
@@ -117,7 +118,7 @@ public:
                 NL != d.size()   || NL != R.size()     || NL != gamma.size() || NL != Alpha.size() || NL != Theta.size() ) return false;
         } else if ( Type == 2 ) {
         }
-        
+
         return true;
     }
 };

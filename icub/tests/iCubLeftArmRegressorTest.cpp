@@ -20,8 +20,8 @@
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/Twist.h>
 
-#include <kdl_format_io/urdf_import.hpp>
-#include <kdl_format_io/urdf_sensor_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
 
 #include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
 #include <kdl_codyco/regressor_loops.hpp>
@@ -96,7 +96,7 @@ int main()
 
     // Create the iCub model
     KDL::Tree icub_tree;
-    bool ok = kdl_format_io::treeFromUrdfFile(icub_urdf_filename,icub_tree);
+    bool ok = iDynTree::treeFromUrdfFile(icub_urdf_filename,icub_tree);
 
     if( !ok )
     {
@@ -114,7 +114,7 @@ int main()
 
     // Load a sensors tree (for ft sensors) from the information extracted from urdf file
     //  and using the serialization provided in the undirected tree
-    iDynTree::SensorsList sensors_tree = kdl_format_io::sensorsTreeFromURDF(icub_undirected_tree,icub_urdf_filename);
+    iDynTree::SensorsList sensors_tree = iDynTree::sensorsListFromURDF(icub_undirected_tree,icub_urdf_filename);
 
     //Create a regressor generator
     KDL::CoDyCo::Regressors::DynamicRegressorGenerator regressor_generator(icub_undirected_tree,sensors_tree);

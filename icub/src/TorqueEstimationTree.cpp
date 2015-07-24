@@ -12,8 +12,8 @@
 #include "iCub/iDynTree/idyn2kdl_icub.h"
 
 //Urdf import from kdl_format_io
-#include <kdl_format_io/urdf_import.hpp>
-#include <kdl_format_io/urdf_sensor_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
 
 #include "iDynTree/Sensors/Sensors.hpp"
 #include "iDynTree/Sensors/SixAxisFTSensor.hpp"
@@ -46,7 +46,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
     //Parse a KDL::Tree from URDF
     KDL::Tree icub_kdl;
 
-    bool ret = kdl_format_io::treeFromUrdfFile(urdf_filename,icub_kdl);
+    bool ret = ::iDynTree::treeFromUrdfFile(urdf_filename,icub_kdl);
 
     assert(ret);
     if( !ret ) {
@@ -55,8 +55,8 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
     }
 
     //Construct F/T sensor name list from URDF gazebo extensions
-    std::vector<kdl_format_io::FTSensorData> ft_sensors;
-    ret = kdl_format_io::ftSensorsFromUrdfFile(urdf_filename, ft_sensors);
+    std::vector< ::iDynTree::FTSensorData> ft_sensors;
+    ret = ::iDynTree::ftSensorsFromUrdfFile(urdf_filename, ft_sensors);
 
     if( !ret )
     {
@@ -71,7 +71,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
     int nrOfDofs = dof_serialization.size();
     KDL::JntArray q_min_kdl(nrOfDofs), q_max_kdl(nrOfDofs);
     std::vector<std::string> joint_limits_names;
-    kdl_format_io::jointPosLimitsFromUrdfFile(urdf_filename,joint_limits_names,q_min_kdl,q_max_kdl);
+    ::iDynTree::jointPosLimitsFromUrdfFile(urdf_filename,joint_limits_names,q_min_kdl,q_max_kdl);
 
 
     //Set joint limits
@@ -101,7 +101,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
 }
 
 TorqueEstimationTree::TorqueEstimationTree(KDL::Tree& icub_kdl,
-                                          std::vector< kdl_format_io::FTSensorData > ft_sensors,
+                                          std::vector< ::iDynTree::FTSensorData > ft_sensors,
                                           std::vector< std::string > dof_serialization,
                                           std::vector< std::string > ft_serialization,
                                           yarp::sig::Vector& q_min, yarp::sig::Vector& q_max,
@@ -111,7 +111,7 @@ TorqueEstimationTree::TorqueEstimationTree(KDL::Tree& icub_kdl,
 }
 
 TorqueEstimationTree::TorqueEstimationTree(KDL::Tree& icub_kdl,
-                                          std::vector< kdl_format_io::FTSensorData > ft_sensors,
+                                          std::vector< ::iDynTree::FTSensorData > ft_sensors,
                                           std::vector< std::string > ft_serialization,
                                           std::string fixed_link, unsigned int verbose)
 {
@@ -133,7 +133,7 @@ TorqueEstimationTree::TorqueEstimationTree(KDL::Tree& icub_kdl,
 
 
 void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
-                                                  std::vector<kdl_format_io::FTSensorData> ft_sensors,
+                                                  std::vector< ::iDynTree::FTSensorData> ft_sensors,
                                                   std::vector<std::string> dof_serialization,
                                                   std::vector<std::string> ft_serialization,
                                                   yarp::sig::Vector & q_min_yarp, yarp::sig::Vector & q_max_yarp,
@@ -164,7 +164,7 @@ void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
                 ft_names[ft_sens_id] = ft_sens_name;
                 // \todo TODO FIXME properly address also parent and child cases
                 //                  and measure_direction
-                if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::SENSOR_FRAME )
+                if( ft_sensors[ft_sens].frame == ::iDynTree::FTSensorData::SENSOR_FRAME )
                 {
                     child_sensor_transforms[ft_sens_id] = KDL::Frame(ft_sensors[ft_sens].sensor_pose.M);
                 }

@@ -1,13 +1,13 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
-* 
+*
 *  Copyright (c) 2013 Istituto Italiano di Tecnologia
 *  All rights reserved.
-* 
+*
 *  Redistribution and use in source and binary forms, with or without
 *  modification, are permitted provided that the following conditions
 *  are met:
-* 
+*
 *   * Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   * Redistributions in binary form must reproduce the above
@@ -17,7 +17,7 @@
 *   * Neither the name of the Willow Garage nor the names of its
 *     contributors may be used to endorse or promote products derived
 *     from this software without specific prior written permission.
-* 
+*
 *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -39,12 +39,12 @@
 #include "kdl_format_io/symoro_par_model.hpp"
 #include "kdl_format_io/symoro_par_import.hpp"
 
-#include "kdl_format_io/urdf_export.hpp"
+#include <iDynTree/ModelIO/impl/urdf_export.hpp>
 #include <kdl/tree.hpp>
 
 using namespace KDL;
 using namespace std;
-using namespace kdl_format_io;
+using namespace iDynTree;
 
 int main(int argc, char** argv)
 {
@@ -52,17 +52,17 @@ int main(int argc, char** argv)
     std::cerr << "Usage: par2urdf robot.par robot.urdf" << std::endl;
     return -1;
   }
-  
+
   symoro_par_model mdl;
-  
+
   if( !parModelFromFile(argv[1],mdl) ) {cerr << "Could not parse SYMORO par robot model" << endl; return EXIT_FAILURE;}
-  
+
   std::cout << "Extracted par file" << std::endl;
   std::cout << mdl.toString() << std::endl;
 
-  
+
   Tree my_tree;
-  if (!treeFromSymoroParFile(argv[1],my_tree,true)) 
+  if (!treeFromSymoroParFile(argv[1],my_tree,true))
   {cerr << "Could not generate robot model and extract kdl tree" << endl; return EXIT_FAILURE;}
 
   if( !treeToUrdfFile(argv[2],my_tree,"par_file_robot") )

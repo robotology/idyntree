@@ -8,7 +8,7 @@
 #ifndef TORQUE_ESTIMATION_TREE_H
 #define TORQUE_ESTIMATION_TREE_H
 
-#include <kdl_format_io/urdf_sensor_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
 
 #include <iCub/iDynTree/DynTree.h>
 
@@ -95,19 +95,19 @@ class TorqueEstimationTree : public DynTree
                          std::string fixed_link="", unsigned int verbose=0);
 
     TorqueEstimationTree(KDL::Tree & icub_kdl,
-                         std::vector<kdl_format_io::FTSensorData> ft_sensors,
+                         std::vector< ::iDynTree::FTSensorData> ft_sensors,
                          std::vector<std::string> dof_serialization,
                          std::vector<std::string> ft_serialization,
                          yarp::sig::Vector & q_min, yarp::sig::Vector & q_max,
                          std::string fixed_link, unsigned int verbose);
 
     TorqueEstimationTree(KDL::Tree& icub_kdl,
-                                          std::vector< kdl_format_io::FTSensorData > ft_sensors,
+                                          std::vector< ::iDynTree::FTSensorData > ft_sensors,
                                           std::vector< std::string > ft_serialization,
                                           std::string fixed_link, unsigned int verbose=0);
 
     void TorqueEstimationConstructor(KDL::Tree & icub_kdl,
-                                std::vector<kdl_format_io::FTSensorData> ft_sensors,
+                                std::vector< ::iDynTree::FTSensorData> ft_sensors,
                                 std::vector<std::string> dof_serialization,
                                 std::vector<std::string> ft_serialization,
                                 yarp::sig::Vector & q_min, yarp::sig::Vector & q_max,

@@ -25,9 +25,9 @@
 
 #include <yarp/math/api.h>
 
-#include <kdl_format_io/urdf_export.hpp>
-#include <kdl_format_io/urdf_import.hpp>
-#include <kdl_format_io/urdf_sensor_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_export.hpp>
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
 
 
 #include <urdf_model/model.h>
@@ -90,16 +90,16 @@ std::vector<std::string> get_iDyn_ft_frames()
     return ret;
 }
 
-std::vector<kdl_format_io::FTSensorData> get_default_ft_sensors(std::vector<std::string> ft_serialization)
+std::vector< ::iDynTree::FTSensorData> get_default_ft_sensors(std::vector<std::string> ft_serialization)
 {
-    std::vector<kdl_format_io::FTSensorData> ret;
+    std::vector< ::iDynTree::FTSensorData> ret;
     for(int i =0; i < ft_serialization.size(); i++ )
     {
-        kdl_format_io::FTSensorData dat;
+        ::iDynTree::FTSensorData dat;
         dat.reference_joint = ft_serialization[i];
         dat.sensor_name = dat.reference_joint+"_sensor";
-        dat.measure_direction = kdl_format_io::FTSensorData::CHILD_TO_PARENT;
-        dat.frame = kdl_format_io::FTSensorData::CHILD_LINK_FRAME;
+        dat.measure_direction = ::iDynTree::FTSensorData::CHILD_TO_PARENT;
+        dat.frame = ::iDynTree::FTSensorData::CHILD_LINK_FRAME;
         dat.sensor_pose = KDL::Frame::Identity();
 
         ret.push_back(dat);
@@ -385,7 +385,7 @@ int main()
         //Export to urdf for subsequent test
         urdf::ModelInterface icub_urdf_ModelInterface;
 
-        if( ! kdl_format_io::treeToUrdfModel(icub_kdl,"test_icub",icub_urdf_ModelInterface) ) {
+        if( ! ::iDynTree::treeToUrdfModel(icub_kdl,"test_icub",icub_urdf_ModelInterface) ) {
             std::cerr << "Fatal error in KDL - URDF conversion" << std::endl;
             return EXIT_FAILURE;
         }
@@ -404,7 +404,7 @@ int main()
 
     } else
     {
-        if( ! kdl_format_io::treeFromUrdfFile(urdf_filename,icub_kdl) ) {
+        if( ! ::iDynTree::treeFromUrdfFile(urdf_filename,icub_kdl) ) {
             std::cerr << "Fatal error in URDF ---> conversion" << std::endl;
             return EXIT_FAILURE;
         }
@@ -421,7 +421,7 @@ int main()
     //std::vector<std::string> ft_frames        = get_iDyn_ft_frames();
 
     std::map<std::string, VectorSlice> icub_parts = get_iDyn_icub_parts();
-    std::vector<kdl_format_io::FTSensorData> ft_sensors_data;
+    std::vector< ::iDynTree::FTSensorData> ft_sensors_data;
 
     ft_sensors_data = get_default_ft_sensors(ft_serialization);
 

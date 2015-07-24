@@ -26,15 +26,10 @@ foreach(header_file ${folder_header})
   include_directories(${p})
 endforeach(header_file ${folder_header})
 
-# Include any directories needed
-include_directories(${kdl_format_io_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
-
 # Set up our main executable.
 if (folder_source)
   add_executable(subtree_base_regressor ${folder_source} ${folder_header})
   target_link_libraries(subtree_base_regressor ${orocos_kdl_LIBRARIES}
-                                               ${kdl_codyco_LIBRARIES}
-                                                ${kdl_format_io_LIBRARIES}
                                                  ${YARP_LIBRARIES} ${ICUB_LIBRARIES}
                                                 ${iDynTree_LIBRARIES})
 else (folder_source)

@@ -29,7 +29,6 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           USE_LINK_PATH)
 
 
-message("Add library idyntree " ${LIB_TIPE}  ${iDynTree_YARP_source} ${iDynTree_YARP_header})
 add_library(idyntree-yarp ${iDynTree_YARP_source} ${iDynTree_YARP_header})
 
 set_target_properties(idyntree-yarp PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}

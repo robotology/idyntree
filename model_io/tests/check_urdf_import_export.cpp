@@ -34,8 +34,9 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_format_io/urdf_import.hpp"
-#include "kdl_format_io/urdf_export.hpp"
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_export.hpp>
+
 #include <kdl/tree.hpp>
 #include <kdl_codyco/treeidsolver_recursive_newton_euler.hpp>
 #include <urdf_model/model.h>
@@ -69,7 +70,7 @@ int main(int argc, char** argv)
     srand(time(NULL));
 
     Tree my_tree, my_tree_converted;
-    if (!kdl_format_io::treeFromUrdfFile(argv[1],my_tree))
+    if (!iDynTree::treeFromUrdfFile(argv[1],my_tree))
     {cerr << "Could not generate robot model and extract kdl tree" << endl; return EXIT_FAILURE;}
 
     // walk through tree
@@ -84,12 +85,12 @@ int main(int argc, char** argv)
     //Export current tree
     cout << "Writing KDL::Tree to a urdf file" << endl;
     std::string output_name = "test_kdl_format_io.urdf";
-    if( !kdl_format_io::treeToUrdfFile(output_name,my_tree) )
+    if( !iDynTree::treeToUrdfFile(output_name,my_tree) )
     {cerr <<"Could not generate urdf from kdl tree" << endl; return EXIT_FAILURE;}
 
     //Re-importing it
     cout << "Reimporting  written urdf file" << endl;
-    if( !kdl_format_io::treeFromUrdfFile(output_name,my_tree_converted) )
+    if( !iDynTree::treeFromUrdfFile(output_name,my_tree_converted) )
     {cerr <<"Could not re-import back generated urdf file" << endl; return EXIT_FAILURE;}
 
     //Preliminary test

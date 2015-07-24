@@ -50,7 +50,7 @@ namespace urdf {
     class ModelInterface;
 }
 
-namespace kdl_format_io{
+namespace iDynTree{
 
 /** Constructs a URDF file, given a KDL::Tree
  * \param file The filename from where to read the xml

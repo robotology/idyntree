@@ -43,9 +43,7 @@ target_include_directories(idyntree-icub PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURC
                                             ${iDyn_INCLUDE_DIRS}
                                             ${GSL_INCLUDE_DIRS}
                                             ${YARP_INCLUDE_DIRS}
-                                            ${kdl_codyco_INCLUDE_DIRS}
-                                            ${EIGEN3_INCLUDE_DIR}
-                                            ${kdl_format_io_INCLUDE_DIRS})
+                                            ${EIGEN3_INCLUDE_DIR})
 
 
 target_link_libraries(idyntree-icub LINK_PUBLIC  skinDynLib iKin iDyn

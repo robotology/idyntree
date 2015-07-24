@@ -34,15 +34,14 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_format_io/iKin_export.hpp"
-
+#include <iDynTree/ModelIO/iKin_export.hpp>
 #include <kdl/chainfksolverpos_recursive.hpp>
 
 #include <kdl/frames_io.hpp>
 
 using namespace KDL;
 using namespace std;
-using namespace kdl_format_io;
+using namespace iDynTree;
 
 bool KDLtoYarp(const KDL::Vector & kdlVector,yarp::sig::Vector & yarpVector)
 {
@@ -216,7 +215,7 @@ int checkRandomKDLtoDH(int nr_of_joints,
   KDL::JntArray max(kdl_random_chain.getNrOfJoints());
   KDL::JntArray min(kdl_random_chain.getNrOfJoints());
 
-  bool result = kdl_format_io::iKinLimbFromKDLChain(kdl_random_chain,ikin_random_limb,min,max);
+  bool result = iDynTree::iKinLimbFromKDLChain(kdl_random_chain,ikin_random_limb,min,max);
 
 
   iCub::iKin::iKinChain * p_ikin_random_chain = ikin_random_limb.asChain();

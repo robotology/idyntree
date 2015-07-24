@@ -34,7 +34,7 @@
 
 /* Author: Silvio Traversaro */
 
-#include "urdf_sensor_import.hpp"
+#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
 
 #include <iDynTree/Core/Transform.h>
 #include <kdl_codyco/undirectedtree.hpp>
@@ -53,7 +53,7 @@
 using namespace std;
 using namespace KDL;
 
-namespace kdl_format_io{
+namespace iDynTree{
 
 
 bool ftSensorsFromUrdfFile(const std::string& file, std::vector<FTSensorData> & ft_sensors)
@@ -104,8 +104,8 @@ bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorDa
                       new_ft.reference_joint = refStr;
                       new_ft.sensor_name = sensorXml->Attribute("name");
                       // Default value, check sdf documentation
-                      new_ft.frame = kdl_format_io::FTSensorData::CHILD_LINK_FRAME;
-                      new_ft.measure_direction = kdl_format_io::FTSensorData::CHILD_TO_PARENT;
+                      new_ft.frame = iDynTree::FTSensorData::CHILD_LINK_FRAME;
+                      new_ft.measure_direction = iDynTree::FTSensorData::CHILD_TO_PARENT;
                       new_ft.sensor_pose = KDL::Frame::Identity();
                       TiXmlElement* force_torque_tags = sensorXml->FirstChildElement("force_torque");
                       if( force_torque_tags )
@@ -116,15 +116,15 @@ bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorDa
                               std::string frame_text = frame_tag->GetText();
                               if( frame_text == "child" )
                               {
-                                  new_ft.frame = kdl_format_io::FTSensorData::CHILD_LINK_FRAME;
+                                  new_ft.frame = iDynTree::FTSensorData::CHILD_LINK_FRAME;
                               }
                               else if ( frame_text == "parent" )
                               {
-                                  new_ft.frame = kdl_format_io::FTSensorData::PARENT_LINK_FRAME;
+                                  new_ft.frame = iDynTree::FTSensorData::PARENT_LINK_FRAME;
                               }
                               else if ( frame_text == "sensor" )
                               {
-                                  new_ft.frame = kdl_format_io::FTSensorData::SENSOR_FRAME;
+                                  new_ft.frame = iDynTree::FTSensorData::SENSOR_FRAME;
                               }
                               else
                               {
@@ -138,11 +138,11 @@ bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorDa
                               std::string measure_direction_text = measure_direction_tag->GetText();
                               if (measure_direction_text == "child_to_parent")
                               {
-                                  new_ft.measure_direction = kdl_format_io::FTSensorData::CHILD_TO_PARENT;
+                                  new_ft.measure_direction = iDynTree::FTSensorData::CHILD_TO_PARENT;
                               }
                               else if (measure_direction_text == "parent_to_child" )
                               {
-                                  new_ft.measure_direction = kdl_format_io::FTSensorData::PARENT_TO_CHILD;
+                                  new_ft.measure_direction = iDynTree::FTSensorData::PARENT_TO_CHILD;
                               }
                               else
                               {
@@ -180,23 +180,23 @@ bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorDa
     return true;
 }
 
-iDynTree::SensorsList sensorsTreeFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
+iDynTree::SensorsList sensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
                                           std::string urdf_filename)
 {
     ifstream ifs(urdf_filename.c_str());
     std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
-    return sensorsTreeFromURDFString(undirected_tree,xml_string);
+    return sensorsListFromURDFString(undirected_tree,xml_string);
 }
 
-iDynTree::SensorsList sensorsTreeFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
+iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
                                                 std::string urdf_string)
 {
     iDynTree::SensorsList sensors_tree;
 
-    std::vector<kdl_format_io::FTSensorData> ft_sensors;
-    bool ok = kdl_format_io::ftSensorsFromUrdfString(urdf_string,ft_sensors);
+    std::vector<iDynTree::FTSensorData> ft_sensors;
+    bool ok = iDynTree::ftSensorsFromUrdfString(urdf_string,ft_sensors);
 
     if( !ok )
     {
@@ -228,30 +228,30 @@ iDynTree::SensorsList sensorsTreeFromURDFString(KDL::CoDyCo::UndirectedTree & un
         // For now we assume that the six axis ft sensor is attached to a
         // fixed junction. Hence the first/second link to sensor transforms
         // are fixed are given by the frame option
-        if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::PARENT_LINK_FRAME )
+        if( ft_sensors[ft_sens].frame == iDynTree::FTSensorData::PARENT_LINK_FRAME )
         {
             new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::Transform());
             new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(parent_link_H_child_link.Inverse()));
         }
-        else if( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::CHILD_LINK_FRAME )
+        else if( ft_sensors[ft_sens].frame == iDynTree::FTSensorData::CHILD_LINK_FRAME )
         {
             new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link));
             new_sens.setSecondLinkSensorTransform(child_link,iDynTree::Transform());
         }
         else
         {
-            assert( ft_sensors[ft_sens].frame == kdl_format_io::FTSensorData::SENSOR_FRAME );
+            assert( ft_sensors[ft_sens].frame == iDynTree::FTSensorData::SENSOR_FRAME );
             new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link*child_link_H_sensor));
             new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(child_link_H_sensor));
         }
 
-        if( ft_sensors[ft_sens].measure_direction == kdl_format_io::FTSensorData::CHILD_TO_PARENT )
+        if( ft_sensors[ft_sens].measure_direction == iDynTree::FTSensorData::CHILD_TO_PARENT )
         {
             new_sens.setAppliedWrenchLink(parent_link);
         }
         else
         {
-            assert( ft_sensors[ft_sens].measure_direction == kdl_format_io::FTSensorData::CHILD_TO_PARENT );
+            assert( ft_sensors[ft_sens].measure_direction == iDynTree::FTSensorData::CHILD_TO_PARENT );
             new_sens.setAppliedWrenchLink(child_link);
         }
 

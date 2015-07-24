@@ -24,7 +24,7 @@
 
 #include <kdl_codyco/position_loops.hpp>
 
-#include "kdl_format_io/urdf_import.hpp"
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
 #include <kdl/frames.hpp>
 
@@ -216,7 +216,7 @@ bool DynamicsComputations::loadRobotModelFromString(const std::string& modelStri
 
     bool consider_root_link_inertia = false;
     KDL::Tree local_model;
-    bool ok = kdl_format_io::treeFromUrdfString(modelString,local_model,consider_root_link_inertia);
+    bool ok = iDynTree::treeFromUrdfString(modelString,local_model,consider_root_link_inertia);
 
 
     this->pimpl->m_robot_model = KDL::CoDyCo::UndirectedTree(local_model);

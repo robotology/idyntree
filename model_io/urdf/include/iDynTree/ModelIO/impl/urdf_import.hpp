@@ -51,7 +51,7 @@ namespace KDL {
     class JntArray;
 }
 
-namespace kdl_format_io{
+namespace iDynTree{
 
 /** Constructs a KDL tree from a file, given the file name
  * \param file The filename from where to read the xml

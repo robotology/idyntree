@@ -2,7 +2,7 @@
 #include <cstdio>
 
 #include <kdl_codyco/treeidsolver_recursive_newton_euler.hpp>
-#include <kdl_format_io/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
 
 double fRand(double fMin, double fMax)
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
     //you use ROS you can  use the kdl_parser from the robot_model package (but please note that
     //there are some open issues  with the robot_model kdl_parser : https://github.com/ros/robot_model/pull/66 )
     KDL::Tree my_tree;
-    bool urdf_loaded_correctly = kdl_format_io::treeFromUrdfFile(urdf_file_name.c_str(),my_tree);
+    bool urdf_loaded_correctly = iDynTree::treeFromUrdfFile(urdf_file_name.c_str(),my_tree);
 
     if( !urdf_loaded_correctly )
     {

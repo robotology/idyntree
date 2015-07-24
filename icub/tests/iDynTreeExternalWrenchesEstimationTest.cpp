@@ -179,16 +179,16 @@ KDL::Tree getSnake()
     return snake;
 }
 
-std::vector<kdl_format_io::FTSensorData> get_default_ft_sensors(std::vector<std::string> ft_serialization)
+std::vector<iDynTree::FTSensorData> get_default_ft_sensors(std::vector<std::string> ft_serialization)
 {
-    std::vector<kdl_format_io::FTSensorData> ret;
+    std::vector<iDynTree::FTSensorData> ret;
     for(int i =0; i < ft_serialization.size(); i++ )
     {
-        kdl_format_io::FTSensorData dat;
+        iDynTree::FTSensorData dat;
         dat.reference_joint = ft_serialization[i];
         dat.sensor_name = dat.reference_joint+"_sensor";
-        dat.measure_direction = kdl_format_io::FTSensorData::CHILD_TO_PARENT;
-        dat.frame = kdl_format_io::FTSensorData::CHILD_LINK_FRAME;
+        dat.measure_direction = iDynTree::FTSensorData::CHILD_TO_PARENT;
+        dat.frame = iDynTree::FTSensorData::CHILD_LINK_FRAME;
         dat.sensor_pose = KDL::Frame::Identity();
 
         ret.push_back(dat);
@@ -212,7 +212,7 @@ int main()
     std::string imu_link = "snake_seg2";
 
 
-    std::vector<kdl_format_io::FTSensorData> ft_sensors = get_default_ft_sensors(ft_serialization);
+    std::vector<iDynTree::FTSensorData> ft_sensors = get_default_ft_sensors(ft_serialization);
 
     iCub::iDynTree::TorqueEstimationTree snake_dyntree(snake,ft_sensors,ft_serialization,imu_link);
 

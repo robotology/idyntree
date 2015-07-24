@@ -29,7 +29,7 @@
 #include <kdl_codyco/regressor_utils.hpp>
 #include <kdl_codyco/regressors/dirl_utils.hpp>
 
-#include <kdl_format_io/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
 
 #include <kdl/frames_io.hpp>
@@ -87,7 +87,7 @@ DynTree::DynTree(const std::string urdf_file,
                  KDL::CoDyCo::TreeSerialization  serialization): configured(false)
 {
     KDL::Tree my_tree;
-    if (!kdl_format_io::treeFromUrdfFile(urdf_file,my_tree))
+    if (!::iDynTree::treeFromUrdfFile(urdf_file,my_tree))
     {
         std::cerr << "DynTree constructor: Could not generate robot model from file " << urdf_file << "  and extract kdl tree" << std::endl; assert(false);
     }
@@ -105,7 +105,7 @@ DynTree::DynTree(const std::string urdf_file,
 bool DynTree::loadURDFModel(const std::string & urdf_file)
 {
     KDL::Tree my_tree;
-    if (!kdl_format_io::treeFromUrdfFile(urdf_file,my_tree))
+    if (!::iDynTree::treeFromUrdfFile(urdf_file,my_tree))
     {
         std::cerr << "DynTree loadURDFModel: Could not generate robot model from file " << urdf_file << "  and extract kdl tree" << std::endl;
         return false;
@@ -1864,7 +1864,7 @@ bool DynTree::loadJointLimitsFromURDFFile(std::string urdfFile, KDL::CoDyCo::Und
         unsigned int NrOfDOFs = undirectedTree.getNrOfDOFs();
         KDL::JntArray kdlJointMinLimit(NrOfDOFs), kdlJointMaxLimit(NrOfDOFs);
         std::vector<std::string> jointLimitsNames;
-        kdl_format_io::jointPosLimitsFromUrdfFile(urdfFile, jointLimitsNames, kdlJointMinLimit, kdlJointMaxLimit);
+        ::iDynTree::jointPosLimitsFromUrdfFile(urdfFile, jointLimitsNames, kdlJointMinLimit, kdlJointMaxLimit);
 
         if (yarpJointMinLimit.size() != NrOfDOFs)
             yarpJointMinLimit.resize(NrOfDOFs);

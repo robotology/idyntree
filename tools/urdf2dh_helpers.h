@@ -42,7 +42,7 @@
 #include <ctime>
 #include "kdl_format_io/iKin_export.hpp"
 
-#include "kdl_format_io/urdf_import.hpp"
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
 #include <kdl/chainfksolverpos_recursive.hpp>
 
@@ -60,7 +60,7 @@
 
 using namespace KDL;
 using namespace std;
-using namespace kdl_format_io;
+using namespace iDynTree;
 
 double random_double(double range)
 {

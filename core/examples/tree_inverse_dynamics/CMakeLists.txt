@@ -27,9 +27,6 @@ if(NOT orocos_kdl_FOUND)
    endif(NOT Orocos-KDL_FOUND)
 endif(NOT orocos_kdl_FOUND)
 
-# Find kdl_format_io and kdl_codyco
-find_package(kdl_codyco 0.1.2 REQUIRED)
-find_package(kdl_format_io REQUIRED)
 
 # Search for source code.
 file(GLOB folder_source *.cpp *.cc *.c)
@@ -43,13 +40,11 @@ foreach(header_file ${folder_header})
   include_directories(${p})
 endforeach(header_file ${folder_header})
 
-# Inclue any directories needed for YARP
-include_directories(${kdl_format_io_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
 
 # Set up our main executable.
 if (folder_source)
   add_executable(tree_inverse_dynamics ${folder_source} ${folder_header})
-  target_link_libraries(tree_inverse_dynamics ${orocos_kdl_LIBRARIES} ${kdl_codyco_LIBRARIES} ${kdl_format_io_LIBRARIES})
+  target_link_libraries(tree_inverse_dynamics ${orocos_kdl_LIBRARIES})
 else (folder_source)
   message(FATAL_ERROR "No source code files found. Please add something")
 endif (folder_source)
