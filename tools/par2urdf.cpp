@@ -36,8 +36,8 @@
 
 #include <cstdlib>
 
-#include "kdl_format_io/symoro_par_model.hpp"
-#include "kdl_format_io/symoro_par_import.hpp"
+#include <iDynTree/ModelIO/symoro_par_model.hpp>
+#include <iDynTree/ModelIO/symoro_par_import.hpp>
 
 #include <iDynTree/ModelIO/impl/urdf_export.hpp>
 #include <kdl/tree.hpp>

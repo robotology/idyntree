@@ -40,7 +40,7 @@
 #include <sstream>
 
 #include <ctime>
-#include "kdl_format_io/iKin_export.hpp"
+#include <iDynTree/ModelIO/iKin_export.hpp>
 
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
