@@ -4,9 +4,9 @@ classdef RotationalInertiaRaw < iDynTree.Matrix3x3
       self@iDynTree.Matrix3x3('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(205,'new_RotationalInertiaRaw',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(208,'new_RotationalInertiaRaw',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(205,'new_RotationalInertiaRaw',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(208,'new_RotationalInertiaRaw',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,7 +15,7 @@ classdef RotationalInertiaRaw < iDynTree.Matrix3x3
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(206,'delete_RotationalInertiaRaw',self);
+        iDynTreeMATLAB_wrap(209,'delete_RotationalInertiaRaw',self);
         self.swigOwn=false;
       end
     end

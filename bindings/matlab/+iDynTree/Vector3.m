@@ -37,14 +37,17 @@ classdef Vector3 < iDynTree.IVector
     function varargout = zero(self,varargin)
       [varargout{1:nargout}] = iDynTreeMATLAB_wrap(103,'Vector3_zero',self,varargin{:});
     end
+    function varargout = fillBuffer(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(104,'Vector3_fillBuffer',self,varargin{:});
+    end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(104,'Vector3_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(105,'Vector3_toString',self,varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(105,'Vector3_display',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(106,'Vector3_display',self,varargin{:});
     end
     function varargout = toMatlab(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(106,'Vector3_toMatlab',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(107,'Vector3_toMatlab',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];

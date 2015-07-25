@@ -6,6 +6,7 @@
  */
 
 #ifndef IDYNTREE_DYNREGRESSORGENERATOR_H
+#define IDYNTREE_DYNREGRESSORGENERATOR_H
 
 #include <string>
 

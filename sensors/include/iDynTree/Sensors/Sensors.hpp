@@ -62,7 +62,7 @@ namespace iDynTree {
         virtual SensorType getSensorType() const = 0;
 
         /**
-         * Get the id (name) of the parent entity (Junction or Link).
+         * Get the id (name) of the parent entity (Joint or Link).
          */
         virtual std::string getParent() const = 0;
 
@@ -159,6 +159,8 @@ namespace iDynTree {
 
             /**
              * Get the pointer to the sensor of index sensor_index and of type sensor_type
+             *
+             * \return the pointer of sensor, of 0 if sensor_index is out of bounds
              */
             Sensor * getSensor(const SensorType & sensor_type, int sensor_index) const;
 

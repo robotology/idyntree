@@ -52,6 +52,9 @@
 #include "iDynTree/Sensors/Sensors.hpp"
 #include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 
+// Sensors loading from external formats
+#include "iDynTree/ModelIO/URDFSensorsImport.h"
+
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
 #include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
@@ -96,7 +99,6 @@
 %include "iDynTree/Core/SpatialMomentum.h"
 %include "iDynTree/Core/SpatialAcc.h"
 
-
 // Inertias
 %include "iDynTree/Core/RotationalInertiaRaw.h"
 %include "iDynTree/Core/SpatialInertiaRaw.h"
@@ -112,6 +114,11 @@
 // Sensors related data structures
 %include "iDynTree/Sensors/Sensors.hpp"
 %include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+
+%include "sensors.i"
+
+// Sensors loading from external formats
+%include "iDynTree/ModelIO/URDFSensorsImport.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"

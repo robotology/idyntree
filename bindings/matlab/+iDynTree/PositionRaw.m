@@ -4,9 +4,9 @@ classdef PositionRaw < iDynTree.Vector3
       self@iDynTree.Vector3('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(129,'new_PositionRaw',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(132,'new_PositionRaw',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(129,'new_PositionRaw',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(132,'new_PositionRaw',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,24 +15,24 @@ classdef PositionRaw < iDynTree.Vector3
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(130,'delete_PositionRaw',self);
+        iDynTreeMATLAB_wrap(133,'delete_PositionRaw',self);
         self.swigOwn=false;
       end
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(131,'PositionRaw_changePoint',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(134,'PositionRaw_changePoint',self,varargin{:});
     end
     function varargout = changeRefPoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(132,'PositionRaw_changeRefPoint',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(135,'PositionRaw_changeRefPoint',self,varargin{:});
     end
     function varargout = changePointOf(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(135,'PositionRaw_changePointOf',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(138,'PositionRaw_changePointOf',self,varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(136,'PositionRaw_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(139,'PositionRaw_toString',self,varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(137,'PositionRaw_display',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(140,'PositionRaw_display',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -55,10 +55,10 @@ classdef PositionRaw < iDynTree.Vector3
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(133,'PositionRaw_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(136,'PositionRaw_compose',varargin{:});
     end
     function varargout = inverse(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(134,'PositionRaw_inverse',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(137,'PositionRaw_inverse',varargin{:});
     end
   end
 end

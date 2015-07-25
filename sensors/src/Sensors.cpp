@@ -176,12 +176,15 @@ int SensorsList::getSensorIndex(const SensorType& sensor_type, const std::string
 
 Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) const
 {
-    if( sensor_index < (int)getNrOfSensors(sensor_type) )
+    if( sensor_index < (int)getNrOfSensors(sensor_type) && sensor_index >= 0 )
     {
         return this->pimpl->VecSensors[sensor_type][sensor_index];
     }
     else
     {
+        std::cerr << "[ERROR] getSensor did not find sensor "
+                  << sensor_index << " of type " << sensor_type
+                  << std::endl;
         return 0;
     }
 }

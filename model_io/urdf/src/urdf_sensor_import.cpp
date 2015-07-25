@@ -221,6 +221,8 @@ iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & un
 
         int parent_link = junct_it->getParentLink()->getLinkIndex();
         int child_link = junct_it->getChildLink()->getLinkIndex();
+        std::string parent_link_name = junct_it->getParentLink()->getName();
+        std::string child_link_name = junct_it->getChildLink()->getName();
 
         KDL::Frame parent_link_H_child_link = junct_it->pose(0.0,false);
         KDL::Frame child_link_H_sensor = ft_sensors[ft_sens].sensor_pose;
@@ -244,6 +246,10 @@ iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & un
             new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link*child_link_H_sensor));
             new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(child_link_H_sensor));
         }
+
+        //set names
+        new_sens.setFirstLinkName(parent_link_name);
+        new_sens.setSecondLinkName(child_link_name);
 
         if( ft_sensors[ft_sens].measure_direction == iDynTree::FTSensorData::CHILD_TO_PARENT )
         {

@@ -21,6 +21,8 @@ if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC)
 
+set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS include/iDynTree/ModelIO/URDFSensorsImport.h)
+
 set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS
                                   include/iDynTree/ModelIO/impl/urdf_compatibility.h
                                   include/iDynTree/ModelIO/impl/urdf_export.hpp
@@ -30,7 +32,8 @@ set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS
 
 set(IDYNTREE_MODELIO_URDF_SOURCES src/urdf_export.cpp
                                   src/urdf_import.cpp
-                                  src/urdf_sensor_import.cpp)
+                                  src/urdf_sensor_import.cpp
+                                  src/URDFSensorsImport.cpp)
 
 source_group("Source Files" FILES ${IDYNTREE_MODELIO_URDF_SOURCES})
 source_group("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})
@@ -39,10 +42,10 @@ source_group("Private Header Files" FILES ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADER
 # share headers with all iDynTree targes
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
-include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS} ${urdfdom_INCLUDE_DIRS})
+include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS}
+                           ${urdfdom_INCLUDE_DIRS})
 
 
 set(libraryname idyntree-modelio-urdf)

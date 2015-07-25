@@ -4,9 +4,9 @@ classdef SpatialInertia < iDynTree.SpatialInertiaRaw
       self@iDynTree.SpatialInertiaRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(216,'new_SpatialInertia',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(219,'new_SpatialInertia',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(216,'new_SpatialInertia',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(219,'new_SpatialInertia',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,15 +15,15 @@ classdef SpatialInertia < iDynTree.SpatialInertiaRaw
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(217,'delete_SpatialInertia',self);
+        iDynTreeMATLAB_wrap(220,'delete_SpatialInertia',self);
         self.swigOwn=false;
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(219,'SpatialInertia_plus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(222,'SpatialInertia_plus',self,varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(220,'SpatialInertia_mtimes',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(223,'SpatialInertia_mtimes',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -46,7 +46,7 @@ classdef SpatialInertia < iDynTree.SpatialInertiaRaw
   end
   methods(Static)
     function varargout = combine(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(218,'SpatialInertia_combine',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(221,'SpatialInertia_combine',varargin{:});
     end
   end
 end

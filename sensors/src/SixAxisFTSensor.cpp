@@ -36,10 +36,13 @@ struct SixAxisForceTorqueSensor::SixAxisForceTorqueSensorPrivateAttributes
     int link1, link2, appliedWrenchLink;
     // Transform from the sensor
     Transform link1_H_sensor, link2_H_sensor;
-    // Name of the parent junction
-    std::string parent_junction_name;
     // Index of the parent junction
     int parent_junction_index;
+    // Name of the parent junction
+    std::string parent_junction_name;
+    // Name of the two links at which the SixAxisForceTorqueSensor is connected
+    std::string link1Name, link2Name;
+
 };
 
 
@@ -238,6 +241,26 @@ int SixAxisForceTorqueSensor::getSecondLinkIndex() const
     return this->pimpl->link2;
 }
 
+bool SixAxisForceTorqueSensor::setFirstLinkName(const std::string& name)
+{
+    this->pimpl->link1Name = name;
+    return true;
+}
 
+bool SixAxisForceTorqueSensor::setSecondLinkName(const std::string& name)
+{
+    this->pimpl->link2Name = name;
+    return true;
+}
+
+std::string SixAxisForceTorqueSensor::getFirstLinkName() const
+{
+    return this->pimpl->link1Name;
+}
+
+std::string SixAxisForceTorqueSensor::getSecondLinkName() const
+{
+    return this->pimpl->link2Name;
+}
 
 }

@@ -4,9 +4,9 @@ classdef Wrench < iDynTree.SpatialForceVectorRaw
       self@iDynTree.SpatialForceVectorRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(190,'new_Wrench',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(193,'new_Wrench',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(190,'new_Wrench',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(193,'new_Wrench',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,18 +15,18 @@ classdef Wrench < iDynTree.SpatialForceVectorRaw
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(191,'delete_Wrench',self);
+        iDynTreeMATLAB_wrap(194,'delete_Wrench',self);
         self.swigOwn=false;
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(192,'Wrench_plus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(195,'Wrench_plus',self,varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(193,'Wrench_minus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(196,'Wrench_minus',self,varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(194,'Wrench_uminus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(197,'Wrench_uminus',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
