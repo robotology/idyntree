@@ -63,3 +63,13 @@ endif(IDYNTREE_COMPILE_BINDINGS)
 if(IDYNTREE_USES_SEMANTICS)
     add_definitions(-DIDYNTREE_USES_SEMANTICS)
 endif(IDYNTREE_USES_SEMANTICS)
+
+#set default build type to "Release" in single-config generators
+if(NOT CMAKE_CONFIGURATION_TYPES)
+    if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING
+        "Choose the type of build, recommanded options are: Debug or Release" FORCE)
+    endif()
+    set(IDYNTREE_BUILD_TYPES "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${IDYNTREE_BUILD_TYPES})
+endif()
