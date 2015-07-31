@@ -9,6 +9,7 @@ try
     testSumPos
     testMomentumInvariance
     testTransforms
+    testDynComp
 catch ME
     warning('iDynTree matlab tests failed. Exiting matlab.');
     warning(ME.identifier,ME.message);

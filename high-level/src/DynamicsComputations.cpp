@@ -229,6 +229,8 @@ bool DynamicsComputations::loadRobotModelFromString(const std::string& modelStri
     else
     {
         this->pimpl->m_isModelValid = true;
+        this->pimpl->m_robot_model.compute_traversal(this->pimpl->m_traversal);
+        this->resizeInternalDataStructures();
         return true;
     }
 }
@@ -296,9 +298,9 @@ std::string DynamicsRegressorGenerator::getDescriptionOfLinks()
 
 
 bool DynamicsComputations::setRobotState(const VectorDynSize& q,
-                                               const VectorDynSize& q_dot,
-                                               const VectorDynSize& q_dotdot,
-                                               const Twist& world_gravity)
+                                         const VectorDynSize& q_dot,
+                                         const VectorDynSize& q_dotdot,
+                                         const Twist& world_gravity)
 {
     Transform world_T_base = Transform::Identity();
     Twist base_velocity = SpatialMotionVectorRaw::Zero();

@@ -217,7 +217,8 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
 
         if( linkIndeces2regrCols[link_id] != -1 ) {
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);
-            regressor_local_parametrization.block(0,(int)(10*linkIndeces2regrCols[link_id]),getNrOfOutputs(),10) = toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[link_id])*netWrenchRegressor_i;
+            regressor_local_parametrization.block(0,(int)(10*linkIndeces2regrCols[link_id]),getNrOfOutputs(),10)
+                = toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[link_id])*netWrenchRegressor_i;
         }
     }
 
@@ -280,7 +281,8 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         }
     }
 
-    //The known terms are simply all the measured wrenches acting on the subtree projected on the axis and plus the measured torque
+    //The known terms are simply all the measured wrenches acting on the subtree
+    // projected on the axis plus the measured torque
     known_terms(0) = measured_torques(torque_dof_index);
 
     #ifndef NDEBUG

@@ -27,7 +27,6 @@ if(SWIG_FOUND)
     endif(IDYNTREE_USES_LUA)
 
     if(IDYNTREE_USES_PYTHON)
-        message(STATUS "using python!!")
         add_subdirectory(python)
     endif(IDYNTREE_USES_PYTHON)
 
