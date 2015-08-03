@@ -203,11 +203,13 @@ bool addDoubleContact(iCub::iDynTree::TorqueEstimationTree & estimation_model,
     estimation_model.addSkinDynLibAlias(contactLink,contactFrame,0,contactLinkIndex);
 
     yarp::sig::Vector oneContactPoint(3);
+    oneContactPoint.zero();
     oneContactPoint[0] = 1.0;
     dynContact contactOne((iCub::skinDynLib::BodyPart) 0, contactLinkIndex,oneContactPoint);
     input_contact_list.push_back(contactOne);
 
     yarp::sig::Vector twoContactPoint(3);
+    twoContactPoint.zero();
     twoContactPoint[1] = 1.0;
     dynContact contactTwo((iCub::skinDynLib::BodyPart) 0, contactLinkIndex,twoContactPoint);
     input_contact_list.push_back(contactTwo);
@@ -223,6 +225,7 @@ bool addSingleContact(iCub::iDynTree::TorqueEstimationTree & estimation_model,
     estimation_model.addSkinDynLibAlias(contactLink,contactFrame,0,contactLinkIndex);
 
     yarp::sig::Vector oneContactPoint(3);
+    oneContactPoint.zero();
     oneContactPoint[0] = 1.0;
     dynContact contactOne((iCub::skinDynLib::BodyPart) 0, contactLinkIndex,oneContactPoint);
     input_contact_list.push_back(contactOne);
@@ -283,7 +286,7 @@ int main(int argc, char ** argv)
                      "l_lower_leg","l_lower_leg");
     addSingleContact(*icub_model_estimation,input_contact_list,
                      "r_lower_leg","r_lower_leg");
-    
+
 
     addDoubleContact(*icub_model_estimation,input_contact_list,
                      "chest","chest_skin_frame");
