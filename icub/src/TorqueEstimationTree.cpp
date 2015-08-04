@@ -723,6 +723,7 @@ void TorqueEstimationTree::buildAb_contacts()
     for(int sg=0; sg < NrOfDynamicSubGraphs; sg++ ) {
         //Resize the A matrices
         A_contacts[sg] = yarp::sig::Matrix(6,unknowns[sg]);
+        A_contacts[sg].zero();
 
         //Calculate A and b related to contacts
         int colInd = 0;
@@ -910,6 +911,7 @@ bool TorqueEstimationTree::estimateContactForcesFromSkin()
         std::cout << "A_contacts*x_contacts : " << std::endl;
         std::cout << (A_contacts[i]*x_contacts[i]).toString() << std::endl;
         */
+
         #endif
     }
     store_contacts_results();
