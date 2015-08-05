@@ -4,7 +4,8 @@
 
 project(iDynTree_Base CXX)
 
-set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
+set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IJoint.h
+                              include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
                               include/iDynTree/Core/MatrixDynSize.h
                               include/iDynTree/Core/MatrixFixSize.h
