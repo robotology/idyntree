@@ -86,6 +86,8 @@ class TorqueEstimationTree : public DynTree
      */
     KDL::Wrench getMeasuredWrench(int link_id);
 
+    ::iDynTree::SensorsList     sensors_tree;
+
      //end DynTreeContact data structures
 
 
@@ -213,6 +215,8 @@ class TorqueEstimationTree : public DynTree
     * @return true if succeeds, false otherwise
     */
     virtual bool dynamicRNEA();
+
+   virtual int getFTSensorIndex(const std::string & ft_junction_name) const;
 
 
     //@}
