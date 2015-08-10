@@ -1,6 +1,6 @@
 macro(IDYNTREE_ADD_TOOL tool_name tool_code)
     add_executable(${tool_name} ${tool_code})
-    target_link_libraries(${tool_name} iKin idyntree-core idyntree-regressors idyntree-modelio-urdf idyntree-modelio-symoro)
+    target_link_libraries(${tool_name} idyntree-core idyntree-regressors idyntree-modelio-urdf idyntree-modelio-symoro)
     install(TARGETS ${tool_name} DESTINATION bin)
 endmacro(IDYNTREE_ADD_TOOL tool_name tool_code)
 
