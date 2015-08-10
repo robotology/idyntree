@@ -20,7 +20,7 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    class VectorDynSize: public IVector
+    class VectorDynSize: public IRawVector
     {
     protected:
         /**

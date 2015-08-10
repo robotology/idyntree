@@ -127,6 +127,8 @@ namespace iDynTree
         SpatialMomentum operator*(const SpatialMomentum & other) const;
         SpatialAcc   operator*(const SpatialAcc & other) const;
         SpatialInertia operator*(const SpatialInertia  & other) const;
+        Direction      operator*(const Direction & other) const;
+        Axis           operator*(const Axis & other) const;
 
         /**
          * constructor helpers

@@ -17,6 +17,8 @@ namespace iDynTree
     class Position;
     class Twist;
     class Wrench;
+    class Direction;
+    class Axis;
 
     /**
      * Class representation the rotation of an orientation frame
@@ -99,6 +101,8 @@ namespace iDynTree
         Position changeCoordFrameOf(const Position & other) const;
         Twist  changeCoordFrameOf(const Twist & other) const;
         Wrench changeCoordFrameOf(const Wrench & other) const;
+        Direction changeCoordFrameOf(const Direction & other) const;
+        Axis      changeCoordFrameOf(const Axis & other) const;
 
 
         /**
@@ -109,6 +113,8 @@ namespace iDynTree
         Position operator*(const Position & other) const;
         Twist    operator*(const Twist    & other) const;
         Wrench   operator*(const Wrench   & other) const;
+        Direction operator*(const Direction & other) const;
+        Axis      operator*(const Axis    & other) const;
 
 
         /**

@@ -5,13 +5,16 @@
  *
  */
 
+
 #include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/Axis.h>
+#include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/Utils.h>
 
-
+#include <Eigen/Dense>
 
 #include <cassert>
 #include <iostream>
@@ -19,6 +22,9 @@
 
 namespace iDynTree
 {
+
+    typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+
 
     Rotation::Rotation(): RotationRaw()
     {
@@ -116,6 +122,26 @@ namespace iDynTree
         return result;
     }
 
+    Direction Rotation::changeCoordFrameOf(const Direction& other) const
+    {
+        Direction result;
+
+        // \todo TODO add semantics to Direction
+        Eigen::Map<const Matrix3dRowMajor> newCoordFrame(m_data);
+        Eigen::Map<const Eigen::Vector3d> directionCoord(other.data());
+        Eigen::Map<Eigen::Vector3d> resultData(result.data());
+
+        resultData = newCoordFrame*directionCoord;
+
+        return result;
+    }
+
+    Axis Rotation::changeCoordFrameOf(const Axis& other) const
+    {
+        return Axis(this->changeCoordFrameOf(other.getDirection()),this->changeCoordFrameOf(other.getOrigin()));
+    }
+
+
     Rotation Rotation::inverse() const
     {
         return inverse2(*this);
@@ -137,6 +163,16 @@ namespace iDynTree
     }
 
     Wrench Rotation::operator*(const Wrench& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    Direction Rotation::operator*(const Direction& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    Axis Rotation::operator*(const Axis& other) const
     {
         return changeCoordFrameOf(other);
     }

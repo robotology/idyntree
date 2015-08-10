@@ -4,7 +4,8 @@
 
 project(iDynTree_Base CXX)
 
-set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IJoint.h
+set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
+                              include/iDynTree/Core/Direction.h
                               include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
                               include/iDynTree/Core/MatrixDynSize.h
@@ -33,7 +34,9 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IJoint.h
 set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h)
 
 
-set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
+set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
+                              src/Direction.cpp
+                              src/InterfaceDestructors.cpp
                               src/MatrixDynSize.cpp
                               src/Position.cpp
                               src/PositionRaw.cpp

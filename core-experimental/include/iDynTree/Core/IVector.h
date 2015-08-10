@@ -64,9 +64,36 @@ namespace iDynTree
          * Return the size of the vector.
          */
         virtual unsigned int size() const = 0;
-
-
     };
+
+    /**
+     * Interface (i.e. pure virtual class) for Vector-like classes that
+     * expose a pointer to their internal buffer.
+     */
+    class IRawVector : public IVector
+    {
+    public:
+        /**
+         * Denstructor
+         *
+         */
+        virtual ~IRawVector() = 0;
+
+        /**
+         * Raw data accessor
+         *
+         * @return a const pointer to a vector of size() doubles
+         */
+        virtual const double * data() const = 0;
+
+        /**
+         * Raw data accessor
+         *
+         * @return a pointer to a vector of size() doubles
+         */
+        virtual double * data() = 0;
+    };
+
 }
 
 #endif /* IDYNTREE_VECTOR_DYN_SIZE_H */

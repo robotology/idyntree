@@ -13,6 +13,8 @@
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialInertia.h>
+#include <iDynTree/Core/Direction.h>
+#include <iDynTree/Core/Axis.h>
 
 #include <iDynTree/Core/PrivateUtils.h>
 #include <iDynTree/Core/Utils.h>
@@ -192,6 +194,17 @@ SpatialInertia Transform::operator*(const SpatialInertia& op2) const
 {
     return transform<SpatialInertia>(*this,op2);
 }
+
+Direction Transform::operator*(const Direction& op2) const
+{
+    return this->getRotation()*op2;
+}
+
+Axis Transform::operator*(const Axis& op2) const
+{
+    return Axis(this->getRotation()*op2.getDirection(),(*this)*op2.getOrigin());
+}
+
 
 Transform Transform::Identity()
 {
