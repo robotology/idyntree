@@ -1006,5 +1006,40 @@ bool TorqueEstimationTree::dynamicRNEA()
 }
 
 
+int TorqueEstimationTree::getFTSensorIndex(const std::string & ft_name) const
+{
+    KDL::CoDyCo::JunctionMap::const_iterator junction_it = undirected_tree.getJunction(ft_name);
+
+    if( junction_it == undirected_tree.getInvalidJunctionIterator() )
+    {
+        std::cerr << "DynTree::getFTSensorIndex : junction " << ft_name << " not found" << std::endl;
+        return -1;
+    }
+
+    if( junction_it->getNrOfDOFs() > 0 )
+    {
+        std::cerr << "DynTree::getFTSensorIndex warning: " << ft_name << " is not a fixed junction " << std::endl;
+    }
+
+    unsigned int junction_index = junction_it->getJunctionIndex();
+    // Search the ft index given the associated junction index
+    assert( sensors_tree.getNrOfSensors(::iDynTree::SIX_AXIS_FORCE_TORQUE) == NrOfFTSensors );
+    for( int ft = 0; ft < NrOfFTSensors; ft++ )
+    {
+        ::iDynTree::SixAxisForceTorqueSensor * p_ft_sensor =
+                dynamic_cast< ::iDynTree::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft));
+        assert(p_ft_sensor != 0);
+        int ft_junction_index = p_ft_sensor->getParentIndex();
+        if( ft_junction_index == junction_index )
+        {
+            return ft;
+        }
+    }
+
+    return -1;
+
+    //return ft_list.getFTSensorID(junction_it->getJunctionIndex());
+}
+
 }
 }
