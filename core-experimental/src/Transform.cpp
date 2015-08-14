@@ -237,15 +237,15 @@ std::string Transform::reservedToString() const
          * where R is the rotation transforming coordinates from [A] to [B],
          * R' is the rotation transforming coordinates from [B] to [A] (op1.rot),
          * p the position of B with respect to A (\vec{AB} expressed in Frame A coordinates, op1.pos)
-         * xlt(-p) the spatial translation component of A^X_B = xlt(op1.pos)
+         * xlt(-p) the spatial translation component of A^X_B = xlt(-op1.pos)
          * rot(R') the spatial rotation component of A^X_B = rot(op1.rot)
          * 
          * (For more details, refer to Featherstone's Rigid Body Dynamics Algorithms, 2.8 Coordinate Transforms)
          * 
          * so, considering a given "twist":
-         * A^X_B * twist = xlt(op1.pos) * rot(op1.rot) * twist
+         * A^X_B * twist = xlt(-op1.pos) * rot(op1.rot) * twist
          *
-         * If we associate (xlt(op1.pos)*) to the operator Position::operator * (Twist&),
+         * If we associate (xlt(-op1.pos)*) to the operator Position::operator * (Twist&),
          * and (rot(op1.rot)*) to the operator Rotation::operator * (Twist&), we then get:
          *
          * op1 * twist = op1.pos * (op1.rot * op2)

@@ -18,9 +18,9 @@ Twist::Twist()
 
 }
 
-Twist::Twist(const double* in_data,
-             const unsigned int in_size):
-             SpatialMotionVector(in_data, in_size)
+Twist::Twist(const LinVelocity & _linearVec3,
+             const AngVelocity & _angularVec3):
+             SpatialMotionVector(_linearVec3, _angularVec3)
 {
 
 }
@@ -33,7 +33,7 @@ Twist::Twist(const SpatialMotionVector& other):
 
 
 Twist::Twist(const Twist& other):
-            SpatialMotionVector(other.data(),6)
+             SpatialMotionVector(other)
 {
 
 }

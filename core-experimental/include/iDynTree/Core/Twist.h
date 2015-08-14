@@ -27,7 +27,7 @@ namespace iDynTree
     {
     public:
         Twist();
-        Twist(const double* in_data, const unsigned int in_size);
+        Twist(const LinVelocity & _linearVec3, const AngVelocity & _angularVec3);
         Twist(const SpatialMotionVector& other);
         Twist(const Twist& other);
         virtual ~Twist();

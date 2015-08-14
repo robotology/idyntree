@@ -15,7 +15,8 @@ Wrench::Wrench()
 
 }
 
-Wrench::Wrench(const double* in_data, const unsigned int in_size):
+Wrench::Wrench(const Force & _linearVec3,
+               const Torque & _angularVec3):
                SpatialForceVector(in_data, in_size)
 {
 

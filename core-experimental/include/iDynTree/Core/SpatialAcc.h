@@ -27,7 +27,7 @@ namespace iDynTree
     {
     public:
         SpatialAcc();
-        SpatialAcc(const double* in_data, const unsigned int in_size);
+        SpatialAcc(const LinAcceleration & _linearVec3, const AngAcceleration & _angularVec3);
         SpatialAcc(const SpatialMotionVector& other);
         SpatialAcc(const SpatialAcc& other);
         virtual ~SpatialAcc();

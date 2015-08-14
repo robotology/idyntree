@@ -24,7 +24,7 @@ namespace iDynTree
     {
     public:
         SpatialMomentum();
-        SpatialMomentum(const double* in_data, const unsigned int in_size);
+        SpatialMomentum(const LinMomentum & _linearVec3, const AngMomentum & _angularVec3);
         SpatialMomentum(const SpatialForceVector & other);
         SpatialMomentum(const SpatialMomentum & other);
         virtual ~SpatialMomentum();

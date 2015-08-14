@@ -15,8 +15,6 @@
 
 namespace iDynTree
 {
-    class PositionRaw;
-    class RotationRaw;
     class SpatialForceVector;
 
     /**
@@ -35,21 +33,15 @@ namespace iDynTree
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.
      */
-#define CLASS_TEMPLATE_HDR \
-template <typename DerivedSpatialVecT, typename LinearVector3T, typename AngularVector3T>
-    
-#define CLASS_FUNC_HDR \
-SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
 
-
-    class SpatialMotionVector: public SpatialVector<SpatialMotionVector, LinVelocity, AngVelocity>
+    class SpatialMotionVector: public SpatialVector<SpatialMotionVector, LinearMotionVector3, AngularMotionVector3>
     {
     public:
         /**
          * constructors
          */
         SpatialMotionVector();
-        SpatialMotionVector(const double* in_data, const unsigned int in_size);
+        SpatialMotionVector(const LinearMotionVector3 & _linearVec3, const AngularMotionVector3 & _angularVec3);
         SpatialMotionVector(const SpatialMotionVector & other);
         virtual ~SpatialMotionVector();
 
@@ -60,9 +52,6 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
         SpatialForceVector cross(const SpatialForceVector& other) const;
     };
 
-
-#undef CLASS_TEMPLATE_HDR
-#undef CLASS_FUNC_HDR
 }
 
 #endif /* IDYNTREE_SPATIAL_MOTION_RAW_H */

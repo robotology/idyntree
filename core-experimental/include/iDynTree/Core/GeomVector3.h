@@ -65,7 +65,7 @@ namespace iDynTree
         /**
          * overloaded operators
          */
-        MotionForceT operator+(const MotionForceT &other) const;
+        virtual MotionForceT operator+(const MotionForceT &other) const;
         MotionForceT operator-(const MotionForceT &other) const;
         MotionForceT operator-() const;
     };

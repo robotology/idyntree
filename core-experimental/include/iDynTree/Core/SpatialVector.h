@@ -19,11 +19,11 @@ namespace iDynTree
     /**
      * Helper structure for dual space definition
      */
-    template <class SpatialVectorT> struct DualSpace {};
+    template <class SpatialVectorT> struct DualSpace {typedef SpatialForceVector Type;};
     
-    template <> struct DualSpace<SpacialMotionVector> {typedef SpatialForceVector Type;};
+//    template <> struct DualSpace<SpacialMotionVector> {typedef SpatialForceVector Type;};
     
-    template <> struct DualSpace<SpatialForceVector> {typedef SpacialMotionVector Type;};
+//    template <> struct DualSpace<SpatialForceVector> {typedef SpacialMotionVector Type;};
 
     /**
      * Class providing an interface to any spatial motion or force vector, which provides
@@ -161,13 +161,13 @@ namespace iDynTree
     CLASS_TEMPLATE_HDR
     const DerivedSpatialVecT & CLASS_FUNC_HDR::changePoint(const Position & newPoint)
     {
-        return newPoint.changePointOf(*this);
+        //return newPoint.changePointOf(*this);
     }
 
     CLASS_TEMPLATE_HDR
     const DerivedSpatialVecT & CLASS_FUNC_HDR::changeCoordFrame(const Rotation & newCoordFrame)
     {
-        return newCoordFrame.changeCoordFrameOf(*this);
+        //return newCoordFrame.changeCoordFrameOf(*this);
     }
     
     CLASS_TEMPLATE_HDR
