@@ -23,6 +23,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/SpatialInertia.h
                               include/iDynTree/Core/SpatialMomentum.h
                               include/iDynTree/Core/SpatialMotionVectorRaw.h
+                              include/iDynTree/Core/TestUtils.h
                               include/iDynTree/Core/Transform.h
                               include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Twist.h
@@ -51,6 +52,7 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/SpatialMotionVectorRaw.cpp
                               src/SpatialInertiaRaw.cpp
                               src/SpatialInertia.cpp
+                              src/TestUtils.cpp
                               src/Transform.cpp
                               src/TransformSemantics.cpp
                               src/Twist.cpp
@@ -88,6 +90,7 @@ install(TARGETS ${libraryname}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Core
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Core/impl)
 
+message("vars prefix: ${VARS_PREFIX}")
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
 if(IDYNTREE_COMPILE_TESTS)

@@ -145,6 +145,14 @@ namespace iDynTree
         static Rotation RotZ(const double angle);
 
         /**
+         * Return a Rotation around axis given by direction of given angle
+         *
+         * @param direction the Direction around with to rotate
+         * @param angle the angle (in Radians) of the rotation arount the Z axis
+         */
+        static Rotation RotAxis(const Direction & direction, const double angle);
+
+        /**
          * Return a rotation object given Roll, Pitch and Yaw values.
          *
          * @note This method is compatible with the KDL::Rotation::RPY method.

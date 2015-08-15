@@ -19,7 +19,16 @@ set (CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 # Turn on testing.
 option(IDYNTREE_COMPILE_TESTS "Compile iDynTree tests" FALSE)
 if(IDYNTREE_COMPILE_TESTS)
+   include( CTest )
    enable_testing()
+
+   # adding support for checking the tests with valgrind
+    find_package(Valgrind QUIET)
+    if(VALGRIND_FOUND)
+        set(CTEST_MEMORYCHECK_COMMAND ${VALGRIND_PROGRAM})
+        set(MEMORYCHECK_COMMAND_OPTIONS "--leak-check=full --error-exitcode=1"  CACHE STRING "Options to pass to the memory checker")
+        mark_as_advanced(MEMORYCHECK_COMMAND_OPTIONS)
+    endif()
 endif()
 
 #########################################################################

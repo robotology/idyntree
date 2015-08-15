@@ -192,6 +192,17 @@ namespace iDynTree
         return Rotation(RotationRaw::RotZ(angle));
     }
 
+    Rotation Rotation::RotAxis(const Direction & direction, const double angle)
+    {
+        Rotation result;
+        Eigen::Map<Matrix3dRowMajor> thisData(result.data());
+        Eigen::Map<const Eigen::Vector3d>   directionData(direction.data());
+        thisData = Eigen::AngleAxisd(angle, directionData).matrix();
+
+        return result;
+    }
+
+
     Rotation Rotation::RPY(const double roll, const double pitch, const double yaw)
     {
         return Rotation(RotationRaw::RPY(roll, pitch, yaw));

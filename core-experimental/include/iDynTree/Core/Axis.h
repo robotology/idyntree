@@ -17,6 +17,7 @@
 
 namespace iDynTree
 {
+    class Transform;
     /**
      * Class representing an axis (a directed line) in space.
      *
@@ -78,6 +79,16 @@ namespace iDynTree
          * Set the origin of the axis
          */
         void setOrigin(const Position & _position);
+
+        /**
+         * Get the transform induced by a rotation of an angle theta
+         * around this axis. The returned transform is the nonRotated_T_rotated,
+         * such that if we have a quantity expressed in the frame obtained
+         * by the rotation v_rotated, we can transform it back in the
+         * non-rotated frame using the returned transform:
+         * v_nonRotated = nonRotated_T_rotated*v_rotated
+         */
+        Transform getRotationTransform(const double theta);
 
         /**
          * @name Output helpers.

@@ -347,7 +347,7 @@ int main(int argc, char** argv)
     std::cout << "Comparison between com accelerations" << std::endl
               << "Real one     " << a_com.toString() << std::endl
               << "Jacobian one " << a_com_jacobian.toString() << std::endl
-              << "First part " << std::endl << (com_jacobian).submatrix(0,5,0,5).toString() << std::endl
+              << "First part " << std::endl << (com_jacobian).submatrix(0,2,0,5).toString() << std::endl
               << "First part vec " << icub_idyntree.getD2Q_fb().toString() << std::endl
               << "Second part " << waist_imu_icub.getAccCOM().toString() << std::endl;
 
