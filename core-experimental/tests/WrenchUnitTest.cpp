@@ -1,0 +1,60 @@
+/*
+ * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Silvio Traversaro
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *
+ */
+
+#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Core/IMatrix.h>
+#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/TestUtils.h>
+
+#include <Eigen/Dense>
+
+#include <cstdio>
+#include <cstdlib>
+
+using namespace iDynTree;
+
+void checkWrenchTransformation(const Transform & trans, const Wrench & w)
+{
+    Wrench wTransformed = trans*w;
+    Matrix6x6 adjWrench = trans.asAdjointTransformWrench();
+    Vector6 wTranslatedCheck;
+
+    toEigen(wTranslatedCheck) = toEigen(adjWrench)*toEigen(w);
+
+    ASSERT_EQUAL_VECTOR(wTranslatedCheck,wTransformed);
+}
+
+void checkDotProductInvariance(const Transform & trans, const Wrench & w, const Twist & twist)
+{
+    double power = w.dot(twist);
+    double powerCheck = twist.dot(w);
+    double powerCheck2 = (trans*w).dot(trans*twist);
+    double powerCheck3 = (trans*twist).dot(trans*w);
+
+    ASSERT_EQUAL_DOUBLE(power,powerCheck);
+    ASSERT_EQUAL_DOUBLE(power,powerCheck2);
+    ASSERT_EQUAL_DOUBLE(power,powerCheck3);
+
+}
+
+int main()
+{
+    Transform trans(Rotation::RPY(0.0,0.0,0.0),Position(10,0,0));
+
+    double wData[6] = {1.0,4.0,-50.0,1.0,2.0,3.0};
+    Wrench wrench(wData,6);
+
+    double twistData[6] = {14.0,-4.0,-5.0,6.0,7.0,1.0};
+    Twist twist(twistData,6);
+
+    checkWrenchTransformation(trans,wrench);
+    checkDotProductInvariance(trans,wrench,twist);
+
+    return EXIT_SUCCESS;
+}

@@ -310,18 +310,18 @@ std::string Transform::reservedToString() const
         // the parallel axis theorem applies
         RotationalInertiaRaw newRotInertia;
         Eigen::Map<Eigen::Matrix3d> newI(newRotInertia.data());
-        RotationalInertiaRaw oldRotInertia = op2.getRotationalInertiaWrtFrameOrigin();
-        Eigen::Map<const Eigen::Matrix3d> oldI(oldRotInertia.data());
+        RotationalInertiaRaw oldRotInertiaWrtCom = op2.getRotationalInertiaWrtCenterOfMass();
+        Eigen::Map<const Eigen::Matrix3d> oldIWrtCom(oldRotInertiaWrtCom.data());
 
         Eigen::Map<const Matrix3dRowMajor> R(op1.getRotation().data());
-        Eigen::Map<const Eigen::Vector3d> p(op1.getPosition().data());
+        Eigen::Map<const Eigen::Vector3d> newCOM(newCenterOfMass.data());
 
-        newI =  R*oldI*R.transpose() - newMass*squareCrossProductMatrix(p);
+        newI =  R*oldIWrtCom*R.transpose() - newMass*squareCrossProductMatrix(newCOM);
 
         return SpatialInertia(newMass,newCenterOfMass,newRotInertia);
     }
 
-    Matrix4x4 Transform::asHomogeneousTransform()
+    Matrix4x4 Transform::asHomogeneousTransform() const
     {
         Matrix4x4 ret;
 
@@ -346,7 +346,7 @@ std::string Transform::reservedToString() const
         return (Eigen::Matrix<typename Derived::Scalar, 3, 3>() << 0.0, -vec[2], vec[1], vec[2], 0.0, -vec[0], -vec[1], vec[0], 0.0).finished();
     }
 
-    Matrix6x6 Transform::asAdjointTransform()
+    Matrix6x6 Transform::asAdjointTransform() const
     {
         Matrix6x6 ret;
 
@@ -362,7 +362,7 @@ std::string Transform::reservedToString() const
         return ret;
     }
 
-    Matrix6x6 Transform::asAdjointTransformWrench()
+    Matrix6x6 Transform::asAdjointTransformWrench() const
     {
         Matrix6x6 ret;
 

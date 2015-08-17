@@ -26,4 +26,14 @@ Eigen::Matrix3d squareCrossProductMatrix(const Eigen::Vector3d & v)
     return ret;
 }
 
+Eigen::Matrix3d skew(const Eigen::Vector3d & vec)
+{
+    Eigen::Matrix3d ret;
+    ret << 0.0, -vec[2], vec[1],
+          vec[2], 0.0, -vec[0],
+          -vec[1], vec[0], 0.0;
+    return ret;
+}
+
+
 }

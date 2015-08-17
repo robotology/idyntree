@@ -34,5 +34,9 @@ IMatrix::~IMatrix()
 {
 }
 
+IRawMatrix::~IRawMatrix()
+{
+}
+
 
 }

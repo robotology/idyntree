@@ -25,7 +25,7 @@ namespace iDynTree
      * \ingroup iDynTreeCore
      */
     template<unsigned int nRows, unsigned int nCols>
-    class MatrixFixSize: public IMatrix
+    class MatrixFixSize: public IRawMatrix
     {
     private:
         /**

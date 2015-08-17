@@ -27,7 +27,7 @@ namespace iDynTree
      */
     class SpatialInertiaRaw
     {
-    private:
+    protected:
         double m_mass; /** mass */
         double m_mcom[3]; /** first moment of mass (i.e. mass * center of mass */
         RotationalInertiaRaw m_rotInertia; /** rotational inertia */

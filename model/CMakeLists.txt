@@ -8,12 +8,14 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
                            include/iDynTree/Model/IJoint.h
                            include/iDynTree/Model/IJointStateInterfaces.h
                            include/iDynTree/Model/Indeces.h
+                           include/iDynTree/Model/Link.h
                            include/iDynTree/Model/LinkState.h
                            include/iDynTree/Model/MovableJointImpl.h)
 
 set(IDYNTREE_MODEL_PRIVATE_INCLUDES)
 
 set(IDYNTREE_MODEL_SOURCES src/FixedJoint.cpp
+                           src/Link.cpp
                            src/ModelInterfaceDestructors.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODEL_SOURCES})
