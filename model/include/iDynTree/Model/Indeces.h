@@ -8,11 +8,17 @@
 #ifndef IDYNTREE_INDECES_H
 #define IDYNTREE_INDECES_H
 
+#include <string>
+
 namespace iDynTree
 {
     typedef int LinkIndex;
-    typedef int DOFIndex;
+    extern LinkIndex LINK_INVALID_INDEX;
+    extern std::string LINK_INVALID_NAME;
+
     typedef int JointIndex;
+    extern int JOINT_INVALID_INDEX;
+    extern std::string JOINT_INVALID_NAME;
 }
 
 #endif /* IDYNTREE_INDECES_H */

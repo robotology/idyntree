@@ -35,9 +35,17 @@ namespace iDynTree
                    const Transform& link1_X_link2);
 
         /**
+         * Copy constructor
+         */
+        FixedJoint(const FixedJoint & other);
+
+        /**
          * Destructor
          */
         virtual ~FixedJoint();
+
+        // Documentation inherited
+        virtual IJoint * clone() const;
 
         // Documentation inherited
         virtual unsigned int getNrOfPosCoords() const;
@@ -52,19 +60,20 @@ namespace iDynTree
         virtual void setRestTransform(const Transform& link1_X_link2);
 
         // Documentation inherited
-        virtual Transform getTransform(const IJointPos & state, const LinkIndex p_linkA, const LinkIndex p_linkB);
+        virtual Transform getTransform(const IJointPos & state, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
 
          // Documentation inherited
-        virtual LinkPosVelAcc computePosVelAcc(const IJointPosVelAcc & state, const LinkPosVelAcc & linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB);
+        virtual LinkPosVelAcc computeLinkPosVelAcc(const IJointPosVelAcc & state, const LinkPosVelAcc & linkBstate,
+                                               const LinkIndex linkA, const LinkIndex linkB) const;
 
         // Documentation inherited
-        virtual LinkVelAcc computeVelAcc(const IJointPosVelAcc & state, const LinkVelAcc & linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB);
+        virtual LinkVelAcc computeLinkVelAcc(const IJointPosVelAcc & state, const LinkVelAcc & linkBstate,
+                                               const LinkIndex linkA, const LinkIndex linkB) const;
 
         // Documentation inherited
-        virtual void computeJointTorque(const Wrench & internalWrench, IJointTorque & outputTorque,
-                                        LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied);
+        virtual void computeJointTorque(const IJointPos & state, const Wrench & internalWrench,
+                                        LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied,
+                                         IJointTorque & outputTorque) const;
     };
 }
 

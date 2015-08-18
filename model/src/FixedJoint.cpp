@@ -23,9 +23,21 @@ FixedJoint::FixedJoint(const LinkIndex _link1, const LinkIndex _link2,
 {
 }
 
+FixedJoint::FixedJoint(const FixedJoint& other):
+                       link1(other.link1), link2(other.link2),
+                       link1_X_link2(other.link1_X_link2)
+{
+}
+
+
 FixedJoint::~FixedJoint()
 {
 
+}
+
+IJoint * FixedJoint::clone() const
+{
+    return (IJoint *) new FixedJoint(*this);
 }
 
 void FixedJoint::setAttachedLinks(LinkIndex _link1, LinkIndex _link2)
@@ -50,7 +62,7 @@ unsigned int FixedJoint::getNrOfDOFs() const
     return 0;
 }
 
-Transform FixedJoint::getTransform(const IJointPos& state, const int p_linkA, const int p_linkB)
+Transform FixedJoint::getTransform(const IJointPos& state, const int p_linkA, const int p_linkB) const
 {
     if( p_linkA == this->link1 )
     {
@@ -65,15 +77,17 @@ Transform FixedJoint::getTransform(const IJointPos& state, const int p_linkA, co
     }
 }
 
-void FixedJoint::computeJointTorque(const Wrench& internalWrench, IJointTorque& outputTorque,
-                                    LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied)
+void FixedJoint::computeJointTorque(const IJointPos & state, const Wrench& internalWrench,
+                                    LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied,
+                                    IJointTorque& outputTorque) const
 {
     // A fixed joint would have a torque of size 0
+    return;
 }
 
-LinkPosVelAcc FixedJoint::computePosVelAcc(const IJointPosVelAcc& state,
+LinkPosVelAcc FixedJoint::computeLinkPosVelAcc(const IJointPosVelAcc& state,
                                            const LinkPosVelAcc& linkBstate,
-                                           const LinkIndex linkA, const LinkIndex linkB)
+                                           const LinkIndex linkA, const LinkIndex linkB) const
 {
     LinkPosVelAcc linkAstate;
     Transform a_X_b = this->getTransform(state,linkA,linkB);
@@ -92,8 +106,8 @@ LinkPosVelAcc FixedJoint::computePosVelAcc(const IJointPosVelAcc& state,
     return linkAstate;
 }
 
-LinkVelAcc FixedJoint::computeVelAcc(const IJointPosVelAcc& state, const LinkVelAcc& linkBstate,
-                                     const LinkIndex linkA, const LinkIndex linkB)
+LinkVelAcc FixedJoint::computeLinkVelAcc(const IJointPosVelAcc& state, const LinkVelAcc& linkBstate,
+                                     const LinkIndex linkA, const LinkIndex linkB) const
 {
     LinkVelAcc linkAstate;
     Transform a_X_b = this->getTransform(state,linkA,linkB);

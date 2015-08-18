@@ -54,6 +54,11 @@ namespace iDynTree
         virtual ~IJoint() = 0;
 
         /**
+         * Clone the joint object.
+         */
+        virtual IJoint * clone() const = 0;
+
+        /**
          * Get the number of coordinates used to represent
          * the position of the joint.
          *
@@ -108,7 +113,7 @@ namespace iDynTree
          * and   p_linkB is a quantity expressed in the linkB frame.
          */
         virtual Transform getTransform(const IJointPos & state,
-                                       const int p_linkA, const int p_linkB) = 0;
+                                       const LinkIndex p_linkA, const LinkIndex p_linkB) const = 0;
 
         /**
          * Compute the position, velocity and acceleration of linkA,
@@ -119,7 +124,7 @@ namespace iDynTree
          */
         virtual LinkPosVelAcc computeLinkPosVelAcc(const IJointPosVelAcc & state,
                                                const LinkPosVelAcc & linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB) = 0;
+                                               const LinkIndex linkA, const LinkIndex linkB) const = 0;
 
         /**
          * Compute the velocity and acceleration of linkA,
@@ -128,9 +133,8 @@ namespace iDynTree
          *
          * @return the linkA position, twist and spatial acceleration.
          */
-        virtual LinkVelAcc computeLinkVelAcc(const IJointPosVelAcc & state,
-                                               const LinkVelAcc & linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB) = 0;
+        virtual LinkVelAcc computeLinkVelAcc(const IJointPosVelAcc & state, const LinkVelAcc & linkBstate,
+                                             const LinkIndex linkA, const LinkIndex linkB) const = 0;
 
 
 
@@ -139,8 +143,8 @@ namespace iDynTree
          * on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied.
          */
         virtual void computeJointTorque(const IJointPos & state, const Wrench & internalWrench,
-                                        const int linkThatAppliesWrench, const int linkOnWhichWrenchIsApplied,
-                                        IJointTorque & outputTorque) = 0;
+                                        const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
+                                        IJointTorque & outputTorque) const = 0;
     };
 
 

@@ -42,6 +42,9 @@ namespace iDynTree
         virtual ~RevoluteJoint();
 
         // Documentation inherited
+        virtual IJoint * clone() const = 0;
+
+        // Documentation inherited
         virtual void setAttachedLinks(const LinkIndex link1, const LinkIndex link2);
 
         // Documentation inherited
