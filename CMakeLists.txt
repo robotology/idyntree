@@ -48,6 +48,7 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           USE_LINK_PATH)
 
 add_subdirectory(core-experimental)
+add_subdirectory(model)
 add_subdirectory(core)
 add_subdirectory(sensors)
 add_subdirectory(model_io)

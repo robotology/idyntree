@@ -17,6 +17,8 @@ namespace iDynTree
     class Position;
     class Twist;
     class Wrench;
+    class Direction;
+    class Axis;
     class SpatialAcc;
     class SpatialMomentum;
     class ClassicalAcc;
@@ -102,6 +104,8 @@ namespace iDynTree
         Position changeCoordFrameOf(const Position & other) const;
         Twist  changeCoordFrameOf(const Twist & other) const;
         Wrench changeCoordFrameOf(const Wrench & other) const;
+        Direction changeCoordFrameOf(const Direction & other) const;
+        Axis      changeCoordFrameOf(const Axis & other) const;
         SpatialAcc  changeCoordFrameOf(const SpatialAcc & other) const;
         SpatialMomentum changeCoordFrameOf(const SpatialMomentum & other) const;
         ClassicalAcc changeCoordFrameOf(const ClassicalAcc & other) const;
@@ -115,6 +119,8 @@ namespace iDynTree
         Position operator*(const Position & other) const;
         Twist    operator*(const Twist    & other) const;
         Wrench   operator*(const Wrench   & other) const;
+        Direction operator*(const Direction & other) const;
+        Axis      operator*(const Axis    & other) const;
         SpatialAcc      operator*(const SpatialAcc    & other) const;
         SpatialMomentum operator*(const SpatialMomentum   & other) const;
         ClassicalAcc    operator*(const ClassicalAcc    & other) const;
@@ -145,6 +151,14 @@ namespace iDynTree
          * @param angle the angle (in Radians) of the rotation arount the Z axis
          */
         static Rotation RotZ(const double angle);
+
+        /**
+         * Return a Rotation around axis given by direction of given angle
+         *
+         * @param direction the Direction around with to rotate
+         * @param angle the angle (in Radians) of the rotation arount the Z axis
+         */
+        static Rotation RotAxis(const Direction & direction, const double angle);
 
         /**
          * Return a rotation object given Roll, Pitch and Yaw values.

@@ -40,6 +40,9 @@ namespace iDynTree
 
     extern int UNKNOWN;
 
+    /// Default tolerance for methods with a tolerance, setted to 1e-10
+    extern double DEFAULT_TOL;
+
     /**
      * Function embedding the semantic checks
      *

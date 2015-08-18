@@ -25,7 +25,7 @@ namespace iDynTree
      * \ingroup iDynTreeCore
      */
     template<unsigned int nRows, unsigned int nCols>
-    class MatrixFixSize: public IMatrix
+    class MatrixFixSize: public IRawMatrix
     {
     private:
         /**
@@ -327,6 +327,7 @@ namespace iDynTree
     // them also in the iDynTree.i SWIG file
     typedef MatrixFixSize<3,3> Matrix3x3;
     typedef MatrixFixSize<4,4> Matrix4x4;
+    typedef MatrixFixSize<6,1> Matrix6x1;
     typedef MatrixFixSize<6,6> Matrix6x6 ;
     typedef MatrixFixSize<6,10> Matrix6x10;
 

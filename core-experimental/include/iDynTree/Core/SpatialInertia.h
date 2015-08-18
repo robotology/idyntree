@@ -29,7 +29,9 @@ namespace iDynTree
     {
     public:
         SpatialInertia();
-        SpatialInertia(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
+        SpatialInertia(const double mass,
+                       const PositionRaw & com,
+                       const RotationalInertiaRaw & rotInertia);
         SpatialInertia(const SpatialInertiaRaw& other);
         SpatialInertia(const SpatialInertia& other);
         virtual ~SpatialInertia();
@@ -37,6 +39,9 @@ namespace iDynTree
         // Operations on SpatialInertia
         static SpatialInertia combine(const SpatialInertia & op1,
                                       const SpatialInertia & op2);
+
+        // Get the SpatialInertia as a 6x6 matrix
+        Matrix6x6 asMatrix() const;
 
         // overloaded operators
         SpatialInertia  operator+(const SpatialInertia& other) const;

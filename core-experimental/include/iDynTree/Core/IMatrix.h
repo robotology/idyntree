@@ -72,6 +72,38 @@ namespace iDynTree
          */
         virtual unsigned int cols() const = 0;
     };
+
+    /**
+     * Interface (i.e. pure virtual class) for Matrix-like classes that
+     * expose a pointer to their internal buffer.
+     *
+     * It is assume that the buffer exposed with the data() method is
+     * stored using a row major ordering.
+     */
+    class IRawMatrix : public IMatrix
+    {
+    public:
+        /**
+         * Denstructor
+         *
+         */
+        virtual ~IRawMatrix() = 0;
+
+        /**
+         * Raw data accessor
+         *
+         * @return a const pointer to a vector of size() doubles
+         */
+        virtual const double * data() const = 0;
+
+        /**
+         * Raw data accessor
+         *
+         * @return a pointer to a vector of size() doubles
+         */
+        virtual double * data() = 0;
+    };
+
 }
 
 #endif /* IDYNTREE_MATRIX_DYN_SIZE_H */

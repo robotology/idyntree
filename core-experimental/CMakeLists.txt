@@ -4,7 +4,9 @@
 
 project(iDynTree_Base CXX)
 
-set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/ClassicalAcc.h
+set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
+                              include/iDynTree/Core/ClassicalAcc.h
+                              include/iDynTree/Core/Direction.h
                               include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
                               include/iDynTree/Core/MatrixDynSize.h
@@ -22,6 +24,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/ClassicalAcc.h
                               include/iDynTree/Core/SpatialInertia.h
                               include/iDynTree/Core/SpatialMomentum.h
                               include/iDynTree/Core/SpatialMotionVectorRaw.h
+                              include/iDynTree/Core/TestUtils.h
                               include/iDynTree/Core/Transform.h
                               include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Twist.h
@@ -33,7 +36,9 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/ClassicalAcc.h
 set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h)
 
 
-set(IDYNTREE_CORE_EXP_SOURCES src/ClassicalAcc.cpp
+set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
+                              src/ClassicalAcc.cpp
+                              src/Direction.cpp
                               src/InterfaceDestructors.cpp
                               src/MatrixDynSize.cpp
                               src/Position.cpp
@@ -49,6 +54,7 @@ set(IDYNTREE_CORE_EXP_SOURCES src/ClassicalAcc.cpp
                               src/SpatialMotionVectorRaw.cpp
                               src/SpatialInertiaRaw.cpp
                               src/SpatialInertia.cpp
+                              src/TestUtils.cpp
                               src/Transform.cpp
                               src/TransformSemantics.cpp
                               src/Twist.cpp
@@ -86,6 +92,7 @@ install(TARGETS ${libraryname}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Core
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Core/impl)
 
+message("vars prefix: ${VARS_PREFIX}")
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
 if(IDYNTREE_COMPILE_TESTS)

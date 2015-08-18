@@ -25,8 +25,16 @@ IVector::~IVector()
 {
 }
 
+IRawVector::~IRawVector()
+{
+}
+
 
 IMatrix::~IMatrix()
+{
+}
+
+IRawMatrix::~IRawMatrix()
 {
 }
 

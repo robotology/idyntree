@@ -18,5 +18,7 @@ namespace iDynTree
  */
 Eigen::Matrix3d squareCrossProductMatrix(const Eigen::Vector3d & v);
 
+Eigen::Matrix3d skew(const Eigen::Vector3d & vec);
+
 
 }

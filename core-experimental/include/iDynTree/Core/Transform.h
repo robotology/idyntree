@@ -127,6 +127,8 @@ namespace iDynTree
         SpatialMomentum operator*(const SpatialMomentum & other) const;
         SpatialAcc   operator*(const SpatialAcc & other) const;
         SpatialInertia operator*(const SpatialInertia  & other) const;
+        Direction      operator*(const Direction & other) const;
+        Axis           operator*(const Axis & other) const;
 
         /**
          * constructor helpers
@@ -160,7 +162,7 @@ namespace iDynTree
          * in the reference orientation frame.
          *
          */
-        Matrix4x4 asHomogeneousTransform();
+        Matrix4x4 asHomogeneousTransform() const;
 
         /**
          * Return the 6x6 adjoint matrix representing this transform.
@@ -188,7 +190,7 @@ namespace iDynTree
          *          serialized in linear/angular order.
          *
          */
-        Matrix6x6 asAdjointTransform();
+        Matrix6x6 asAdjointTransform() const;
 
         /**
          * Return the 6x6 adjoint matrix (for wrench) representing this transform.
@@ -216,7 +218,7 @@ namespace iDynTree
          *           serialized in linear/angular order.
          *
          */
-        Matrix6x6 asAdjointTransformWrench();
+        Matrix6x6 asAdjointTransformWrench() const;
 
 
 

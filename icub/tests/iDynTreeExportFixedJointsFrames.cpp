@@ -214,8 +214,6 @@ int main()
     ////////////////////////////////////////////////////////////////////
     //// iDyn
     ////////////////////////////////////////////////////////////////////
-    double tol = 1e-2;
-
 
     // declare an icub = head + left arm + right arm + torso + left leg + right leg
     // the kinematic and dynamic parameters of each link are automatically set using the

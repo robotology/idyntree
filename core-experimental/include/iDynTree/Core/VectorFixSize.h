@@ -23,7 +23,7 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    template<unsigned int VecSize> class VectorFixSize: public IVector
+    template<unsigned int VecSize> class VectorFixSize: public IRawVector
     {
     protected:
         /**

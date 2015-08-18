@@ -4,6 +4,6 @@ dynComp = iDynTree.DynamicsComputations();
 
 dynComp.loadRobotModelFromFile('./model.urdf');
 
-dynComp.getBaseLinkName();
+dynComp.getFloatingBase();
 
 disp('Test of DynamicsComputations completed successfully.');
