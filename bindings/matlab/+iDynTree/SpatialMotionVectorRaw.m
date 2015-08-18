@@ -4,9 +4,9 @@ classdef SpatialMotionVectorRaw < iDynTree.Vector6
       self@iDynTree.Vector6('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(178,'new_SpatialMotionVectorRaw',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(182,'new_SpatialMotionVectorRaw',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(178,'new_SpatialMotionVectorRaw',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(182,'new_SpatialMotionVectorRaw',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -15,21 +15,21 @@ classdef SpatialMotionVectorRaw < iDynTree.Vector6
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(179,'delete_SpatialMotionVectorRaw',self);
+        iDynTreeMATLAB_wrap(183,'delete_SpatialMotionVectorRaw',self);
         self.swigOwn=false;
       end
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(180,'SpatialMotionVectorRaw_changePoint',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(184,'SpatialMotionVectorRaw_changePoint',self,varargin{:});
     end
     function varargout = changeCoordFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(181,'SpatialMotionVectorRaw_changeCoordFrame',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(185,'SpatialMotionVectorRaw_changeCoordFrame',self,varargin{:});
     end
     function varargout = dot(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(184,'SpatialMotionVectorRaw_dot',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(188,'SpatialMotionVectorRaw_dot',self,varargin{:});
     end
     function varargout = cross(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(185,'SpatialMotionVectorRaw_cross',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(189,'SpatialMotionVectorRaw_cross',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -52,13 +52,13 @@ classdef SpatialMotionVectorRaw < iDynTree.Vector6
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(182,'SpatialMotionVectorRaw_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(186,'SpatialMotionVectorRaw_compose',varargin{:});
     end
     function varargout = inverse(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(183,'SpatialMotionVectorRaw_inverse',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(187,'SpatialMotionVectorRaw_inverse',varargin{:});
     end
     function varargout = Zero(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(186,'SpatialMotionVectorRaw_Zero',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(190,'SpatialMotionVectorRaw_Zero',varargin{:});
     end
   end
 end
