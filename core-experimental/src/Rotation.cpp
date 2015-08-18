@@ -5,13 +5,14 @@
  *
  */
 
+#include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/Utils.h>
-
-
 
 #include <cassert>
 #include <iostream>
@@ -116,6 +117,36 @@ namespace iDynTree
         return result;
     }
 
+    ClassicalAcc Rotation::changeCoordFrameOf(const ClassicalAcc &other) const
+    {
+        ClassicalAcc result;
+
+        // \todo TODO add semantics to ClassicalAcc
+        result = RotationRaw::changeCoordFrameOf(other);
+
+        return result;
+    }
+
+    SpatialAcc Rotation::changeCoordFrameOf(const SpatialAcc &other) const
+    {
+        SpatialAcc result;
+
+        // \todo TODO add semantics to SpatialAcc
+        result = RotationRaw::changeCoordFrameOf(other);
+
+        return result;
+    }
+
+    SpatialMomentum Rotation::changeCoordFrameOf(const SpatialMomentum &other) const
+    {
+        SpatialMomentum result;
+
+        // \todo TODO add semantics to SpatialMomentum
+        result = RotationRaw::changeCoordFrameOf(other);
+
+        return result;
+    }
+
     Rotation Rotation::inverse() const
     {
         return inverse2(*this);
@@ -137,6 +168,21 @@ namespace iDynTree
     }
 
     Wrench Rotation::operator*(const Wrench& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    ClassicalAcc Rotation::operator*(const ClassicalAcc& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    SpatialAcc Rotation::operator*(const SpatialAcc& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    SpatialMomentum Rotation::operator*(const SpatialMomentum& other) const
     {
         return changeCoordFrameOf(other);
     }

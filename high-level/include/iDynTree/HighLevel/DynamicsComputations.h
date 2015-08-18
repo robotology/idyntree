@@ -11,11 +11,14 @@
 
 namespace iDynTree {
 
+
 class VectorDynSize;
 class MatrixDynSize;
 class Transform;
 class Twist;
 class SpatialInertia;
+class ClassicalAcc;
+class SpatialAcc;
 
 namespace HighLevel {
 
@@ -171,11 +174,19 @@ public:
 
 
     /**
-     * Get name of the base link.
+     * Get the name of the link considered as the floating base.
      *
      * @return the name of the base link.
      */
-    std::string getBaseLinkName();
+    std::string getFloatingBase() const;
+
+    /**
+     * Set the link that is used as the floating base link.
+     *
+     *
+     * @return true if all went well, false otherwise (for example if the link name was not found).
+     */
+    bool setFloatingBase(const std::string & floatingBaseName);
 
 
     //@}
@@ -222,8 +233,8 @@ public:
                        const iDynTree::VectorDynSize& q_dotdot,
                        const iDynTree::Transform &world_T_base,
                        const iDynTree::Twist& base_velocity,
-                       const iDynTree::Twist& base_acceleration,
-                       const iDynTree::Twist& world_gravity);
+                       const iDynTree::ClassicalAcc& base_acceleration,
+                       const iDynTree::SpatialAcc& world_gravity);
 
     /**
      * Set the state for the robot (fixed base)
@@ -237,7 +248,7 @@ public:
     bool setRobotState(const iDynTree::VectorDynSize &q,
                        const iDynTree::VectorDynSize &q_dot,
                        const iDynTree::VectorDynSize &q_dotdot,
-                       const iDynTree::Twist& world_gravity);
+                       const iDynTree::SpatialAcc& world_gravity);
 
     //@}
 
@@ -288,6 +299,83 @@ public:
     iDynTree::Transform getRelativeTransform(const std::string & refFrameName,
                                              const std::string & frameName);
 
+
+    //@}
+
+     /**
+      * @name Methods to get velocity and acceleration information of the frames in the model,
+      *       given the current state.
+      */
+    //@{
+
+    /**
+     * Given the current state, return the twist of frame of name frameName,
+     * expressed with respect to the origin of pointFrameName and using
+     * the orientation of orientationFrameName .
+     *
+     */
+    /*
+    iDynTree::Twist getFrameTwist(const std::string & frameName,
+                                  const std::string & pointFrameName,
+                                  const std::string & orientationFrameName);
+    */
+
+    /**
+     * Given the current state, return the twist of frame of index frameIndex,
+     * expressed with respect to the origin of pointFrameIndex and using
+     * the orientation of orientationFrameIndex .
+     *
+     */
+    /*
+    iDynTree::Twist getFrameTwist(const int & frameIndex,
+                                  const int & pointFrameIndex,
+                                  const int & orientationFrameIndex);
+    */
+
+    /**
+     * Get the proper classical acceleration (i.e. the actual acceleration of the link minus
+     * the gravitational acceleration) of frame of name frameName,
+     * expressed with respect to the origin of pointFrameName and using
+     * the orientation of orientationFrameName .
+     */
+    /* iDynTree::ClassicalAcc getFrameProperClassicalAcceleration(const std::string & frameName,
+                                                                 const std::string & pointFrameName,
+                                                                 const std::string & orientationFrameName);
+                                                                 */
+
+    /**
+     * Get the proper classical acceleration (i.e. the actual acceleration of the link minus
+     * the gravitational acceleration) of frame of index frameIndex,
+     * expressed with respect to the origin of pointFrameIndex and using
+     * the orientation of orientationFrameIndex .
+     */
+    /*iDynTree::ClassicalAcc getFrameProperClassicalAcceleration(const int & frameIndex,
+                                  const int & pointFrameIndex,
+                                  const int & orientationFrameIndex);
+    */
+
+    /**
+     * Get the proper spatial acceleration (i.e. the actual acceleration of the link minus
+     * the gravitational acceleration) of frame of name frameName,
+     * expressed with respect to the origin of pointFrameName and using
+     * the orientation of orientationFrameName .
+     */
+    /*iDynTree::SpatialAcc getFrameProperSpatialAcceleration(const std::string & frameName,
+                                                             const std::string & pointFrameName,
+                                                             const std::string & orientationFrameName);
+                                                                 */
+
+    /**
+     * Get the proper classical acceleration (i.e. the actual acceleration of the link minus
+     * the gravitational acceleration) of frame of index frameIndex,
+     * expressed with respect to the origin of pointFrameIndex and using
+     * the orientation of orientationFrameIndex .
+     */
+    /*
+    iDynTree::SpatialAcc getFrameProperSpatialAcceleration(const int & frameIndex,
+                                  const int & pointFrameIndex,
+                                  const int & orientationFrameIndex);
+    */
 
     //@}
 

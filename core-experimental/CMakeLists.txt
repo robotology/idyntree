@@ -4,7 +4,8 @@
 
 project(iDynTree_Base CXX)
 
-set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
+set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/ClassicalAcc.h
+                              include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
                               include/iDynTree/Core/MatrixDynSize.h
                               include/iDynTree/Core/MatrixFixSize.h
@@ -32,7 +33,8 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
 set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h)
 
 
-set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
+set(IDYNTREE_CORE_EXP_SOURCES src/ClassicalAcc.cpp
+                              src/InterfaceDestructors.cpp
                               src/MatrixDynSize.cpp
                               src/Position.cpp
                               src/PositionRaw.cpp
