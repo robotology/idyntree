@@ -19,6 +19,9 @@ namespace iDynTree
     class Wrench;
     class Direction;
     class Axis;
+    class SpatialAcc;
+    class SpatialMomentum;
+    class ClassicalAcc;
 
     /**
      * Class representation the rotation of an orientation frame
@@ -103,6 +106,9 @@ namespace iDynTree
         Wrench changeCoordFrameOf(const Wrench & other) const;
         Direction changeCoordFrameOf(const Direction & other) const;
         Axis      changeCoordFrameOf(const Axis & other) const;
+        SpatialAcc  changeCoordFrameOf(const SpatialAcc & other) const;
+        SpatialMomentum changeCoordFrameOf(const SpatialMomentum & other) const;
+        ClassicalAcc changeCoordFrameOf(const ClassicalAcc & other) const;
 
 
         /**
@@ -115,7 +121,9 @@ namespace iDynTree
         Wrench   operator*(const Wrench   & other) const;
         Direction operator*(const Direction & other) const;
         Axis      operator*(const Axis    & other) const;
-
+        SpatialAcc      operator*(const SpatialAcc    & other) const;
+        SpatialMomentum operator*(const SpatialMomentum   & other) const;
+        ClassicalAcc    operator*(const ClassicalAcc    & other) const;
 
         /**
          * @name Initialization helpers.

@@ -6,12 +6,15 @@
  */
 
 
+#include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/Utils.h>
 
 #include <Eigen/Dense>
@@ -136,11 +139,40 @@ namespace iDynTree
         return result;
     }
 
+    ClassicalAcc Rotation::changeCoordFrameOf(const ClassicalAcc &other) const
+    {
+        ClassicalAcc result;
+
+        // \todo TODO add semantics to ClassicalAcc
+        result = RotationRaw::changeCoordFrameOf(other);
+
+        return result;
+    }
+
     Axis Rotation::changeCoordFrameOf(const Axis& other) const
     {
         return Axis(this->changeCoordFrameOf(other.getDirection()),this->changeCoordFrameOf(other.getOrigin()));
     }
 
+    SpatialAcc Rotation::changeCoordFrameOf(const SpatialAcc &other) const
+    {
+        SpatialAcc result;
+
+        // \todo TODO add semantics to SpatialAcc
+        result = RotationRaw::changeCoordFrameOf(other);
+
+        return result;
+    }
+
+    SpatialMomentum Rotation::changeCoordFrameOf(const SpatialMomentum &other) const
+    {
+        SpatialMomentum result;
+
+        // \todo TODO add semantics to SpatialMomentum
+        result = RotationRaw::changeCoordFrameOf(other);
+
+        return result;
+    }
 
     Rotation Rotation::inverse() const
     {
@@ -172,7 +204,22 @@ namespace iDynTree
         return changeCoordFrameOf(other);
     }
 
+    ClassicalAcc Rotation::operator*(const ClassicalAcc& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
     Axis Rotation::operator*(const Axis& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    SpatialAcc Rotation::operator*(const SpatialAcc& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    SpatialMomentum Rotation::operator*(const SpatialMomentum& other) const
     {
         return changeCoordFrameOf(other);
     }

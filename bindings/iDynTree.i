@@ -35,6 +35,7 @@
 #include "iDynTree/Core/Wrench.h"
 #include "iDynTree/Core/SpatialMomentum.h"
 #include "iDynTree/Core/SpatialAcc.h"
+#include "iDynTree/Core/ClassicalAcc.h"
 
 // Inertias
 #include "iDynTree/Core/RotationalInertiaRaw.h"
@@ -98,6 +99,8 @@
 %include "iDynTree/Core/Wrench.h"
 %include "iDynTree/Core/SpatialMomentum.h"
 %include "iDynTree/Core/SpatialAcc.h"
+%include "iDynTree/Core/ClassicalAcc.h"
+
 
 // Inertias
 %include "iDynTree/Core/RotationalInertiaRaw.h"

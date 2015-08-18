@@ -47,7 +47,7 @@ target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURC
                                             ${kdl_format_io_INCLUDE_DIRS})
 
 
-target_link_libraries(idyntree-yarp LINK_PUBLIC  skinDynLib iKin iDyn
+target_link_libraries(idyntree-yarp LINK_PUBLIC  
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}
                                             idyntree-core

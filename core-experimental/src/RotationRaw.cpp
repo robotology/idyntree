@@ -5,6 +5,7 @@
  *
  */
 
+#include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/RotationRaw.h>
 #include <iDynTree/Core/PositionRaw.h>
 #include <iDynTree/Core/SpatialMotionVectorRaw.h>
@@ -150,6 +151,22 @@ namespace iDynTree
 
         return result;
     }
+
+    ClassicalAcc RotationRaw::changeCoordFrameOf(const ClassicalAcc& other) const
+    {
+        ClassicalAcc result;
+
+        Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
+        Eigen::Map<const Vector6d> op2Wrench(other.data());
+
+        Eigen::Map<Vector6d> res(result.data());
+
+        res.segment<3>(3) =  op1Rot*(op2Wrench.segment<3>(3));
+        res.segment<3>(0) =  op1Rot*(op2Wrench.segment<3>(0));
+
+        return result;
+    }
+
 
 
     RotationRaw RotationRaw::RotX(const double angle)

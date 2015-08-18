@@ -7,12 +7,15 @@
 
 #include <kdl_codyco/KDLConversions.h>
 
+#include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialInertia.h>
+#include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/VectorDynSize.h>
 
 
@@ -69,12 +72,44 @@ KDL::Twist ToKDL(const Twist& idyntree_twist)
     return kdl_twist;
 }
 
+KDL::Twist ToKDL(const SpatialAcc& idyntree_spatial_acc)
+{
+    KDL::Twist kdl_twist;
+
+    memcpy(kdl_twist.vel.data,idyntree_spatial_acc.data(),3*sizeof(double));
+    memcpy(kdl_twist.rot.data,idyntree_spatial_acc.data()+3,3*sizeof(double));
+
+    return kdl_twist;
+}
+
+
+KDL::Twist ToKDL(const ClassicalAcc& idyntree_classical_acc)
+{
+    KDL::Twist kdl_twist;
+
+    memcpy(kdl_twist.vel.data,idyntree_classical_acc.data(),3*sizeof(double));
+    memcpy(kdl_twist.rot.data,idyntree_classical_acc.data()+3,3*sizeof(double));
+
+    return kdl_twist;
+}
+
+
 KDL::Wrench ToKDL(const Wrench& idyntree_wrench)
 {
     KDL::Wrench kdl_wrench;
 
     memcpy(kdl_wrench.force.data,idyntree_wrench.data(),3*sizeof(double));
     memcpy(kdl_wrench.torque.data,idyntree_wrench.data()+3,3*sizeof(double));
+
+    return kdl_wrench;
+}
+
+KDL::Wrench ToKDL(const SpatialMomentum& idyntree_spatial_momentum)
+{
+    KDL::Wrench kdl_wrench;
+
+    memcpy(kdl_wrench.force.data,idyntree_spatial_momentum.data(),3*sizeof(double));
+    memcpy(kdl_wrench.torque.data,idyntree_spatial_momentum.data()+3,3*sizeof(double));
 
     return kdl_wrench;
 }

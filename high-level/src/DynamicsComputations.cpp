@@ -10,12 +10,14 @@
 
 #include <iDynTree/HighLevel/DynamicsComputations.h>
 
+#include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialInertia.h>
 
 
@@ -23,6 +25,7 @@
 #include <kdl_codyco/utils.hpp>
 
 #include <kdl_codyco/position_loops.hpp>
+#include <kdl_codyco/rnea_loops.hpp>
 
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
@@ -84,8 +87,14 @@ struct DynamicsComputations::DynamicsComputationsPrivateAttributes
     // since the last call to setRobotState
     bool m_isFwdKinematicsUpdated;
 
-    // storage of forward kinematics results
-    std::vector<KDL::Frame> m_fwdKinematicsResults;
+    // storage of forward position kinematics results
+    std::vector<KDL::Frame> m_fwdPosKinematicsResults;
+
+    // storage of forward velocity kinematics results
+    std::vector<KDL::Twist> m_fwdVelKinematicsResults;
+
+    // storage of forward acceleration kinematics results
+    std::vector<KDL::Twist> m_fwdAccKinematicsResults;
 
     DynamicsComputationsPrivateAttributes()
     {
@@ -140,7 +149,9 @@ void DynamicsComputations::resizeInternalDataStructures()
     assert(this->pimpl->m_isModelValid);
 
     int nrOfFrames = this->pimpl->m_robot_model.getNrOfLinks();
-    this->pimpl->m_fwdKinematicsResults.resize(nrOfFrames);
+    this->pimpl->m_fwdPosKinematicsResults.resize(nrOfFrames);
+    this->pimpl->m_fwdVelKinematicsResults.resize(nrOfFrames);
+    this->pimpl->m_fwdAccKinematicsResults.resize(nrOfFrames);
     int nrOfDOFs = this->pimpl->m_robot_model.getNrOfDOFs();
     this->pimpl->m_qKDL.resize(nrOfDOFs);
     this->pimpl->m_dqKDL.resize(nrOfDOFs);
@@ -168,12 +179,25 @@ void DynamicsComputations::computeFwdKinematics()
         return;
     }
 
+    // Compute position kinematics
     bool ok =
      (0 == KDL::CoDyCo::getFramesLoop(this->pimpl->m_robot_model,
-                               this->pimpl->m_qKDL,
-                               this->pimpl->m_traversal,
-                               this->pimpl->m_fwdKinematicsResults,
-                               this->pimpl->m_world2base));
+                                      this->pimpl->m_qKDL,
+                                      this->pimpl->m_traversal,
+                                      this->pimpl->m_fwdPosKinematicsResults,
+                                      this->pimpl->m_world2base));
+
+     // Compute velocity and acceleration kinematics
+     ok = ok &&
+        (0 == KDL::CoDyCo::rneaKinematicLoop(this->pimpl->m_robot_model,
+                                             this->pimpl->m_qKDL,
+                                             this->pimpl->m_dqKDL,
+                                             this->pimpl->m_ddqKDL,
+                                             this->pimpl->m_traversal,
+                                             this->pimpl->m_baseSpatialTwist,
+                                             this->pimpl->m_baseSpatialAcc,
+                                             this->pimpl->m_fwdVelKinematicsResults,
+                                             this->pimpl->m_fwdAccKinematicsResults));
 
     this->pimpl->m_isFwdKinematicsUpdated = ok;
 
@@ -242,10 +266,24 @@ bool DynamicsComputations::isValid()
     return (this->pimpl->m_isModelValid);
 }
 
-std::string DynamicsComputations::getBaseLinkName()
+std::string DynamicsComputations::getFloatingBase() const
 {
     int base_link = this->pimpl->m_traversal.getBaseLink()->getLinkIndex();
     return this->pimpl->m_robot_model.getLink(base_link)->getName();
+}
+
+bool DynamicsComputations::setFloatingBase(const std::string& floatingBaseName)
+{
+    int retVal = this->pimpl->m_robot_model.compute_traversal(this->pimpl->m_traversal,floatingBaseName);
+
+    if( retVal == 0 )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -300,11 +338,11 @@ std::string DynamicsRegressorGenerator::getDescriptionOfLinks()
 bool DynamicsComputations::setRobotState(const VectorDynSize& q,
                                          const VectorDynSize& q_dot,
                                          const VectorDynSize& q_dotdot,
-                                         const Twist& world_gravity)
+                                         const SpatialAcc& world_gravity)
 {
     Transform world_T_base = Transform::Identity();
     Twist base_velocity = SpatialMotionVectorRaw::Zero();
-    Twist base_acceleration = SpatialMotionVectorRaw::Zero();
+    ClassicalAcc base_acceleration = ClassicalAcc::Zero();
 
     return setRobotState(q,q_dot,q_dotdot,
                          world_T_base,base_velocity,base_acceleration,
@@ -312,12 +350,12 @@ bool DynamicsComputations::setRobotState(const VectorDynSize& q,
 }
 
 bool DynamicsComputations::setRobotState(const VectorDynSize& q,
-                                               const VectorDynSize& q_dot,
-                                               const VectorDynSize& q_dotdot,
-                                               const Transform& world_T_base,
-                                               const Twist& base_velocity,
-                                               const Twist& base_acceleration,
-                                               const Twist& world_gravity)
+                                         const VectorDynSize& q_dot,
+                                         const VectorDynSize& q_dotdot,
+                                         const Transform& world_T_base,
+                                         const Twist& base_velocity,
+                                         const ClassicalAcc& base_acceleration,
+                                         const SpatialAcc& world_gravity)
 {
     bool ok = true;
     ok = ok && ToKDL(q,this->pimpl->m_qKDL);
@@ -338,8 +376,8 @@ bool DynamicsComputations::setRobotState(const VectorDynSize& q,
     // we just need to rotate them in base orientation
     Rotation base_R_world = world_T_base.getRotation().inverse();
     Twist base_velocity_wrt_base = base_R_world*base_velocity;
-    Twist base_classical_acceleration_wrt_base = base_R_world*base_acceleration;
-    Twist gravity_acceleration_wrt_base        = base_R_world*world_gravity;
+    ClassicalAcc base_classical_acceleration_wrt_base = base_R_world*base_acceleration;
+    SpatialAcc gravity_acceleration_wrt_base        = base_R_world*world_gravity;
 
     this->pimpl->m_baseSpatialTwist = ToKDL(base_velocity_wrt_base);
     KDL::Twist kdl_classical_base_acceleration = ToKDL(base_classical_acceleration_wrt_base);
@@ -380,8 +418,8 @@ Transform DynamicsComputations::getRelativeTransform(unsigned int refFrameIndex,
         return iDynTree::Transform();
     }
 
-    KDL::Frame world_H_frame = this->pimpl->m_fwdKinematicsResults[frameIndex];
-    KDL::Frame world_H_refFrame = this->pimpl->m_fwdKinematicsResults[refFrameIndex];
+    KDL::Frame world_H_frame = this->pimpl->m_fwdPosKinematicsResults[frameIndex];
+    KDL::Frame world_H_refFrame = this->pimpl->m_fwdPosKinematicsResults[refFrameIndex];
     KDL::Frame refFrame_H_frame = world_H_refFrame.Inverse()*world_H_frame;
     iDynTree::Transform ret = iDynTree::ToiDynTree(refFrame_H_frame);
 
@@ -429,7 +467,7 @@ Transform DynamicsComputations::getWorldTransform(unsigned int frameIndex)
     // compute fwd kinematics (if necessary)
     this->computeFwdKinematics();
 
-    iDynTree::Transform ret = iDynTree::ToiDynTree(this->pimpl->m_fwdKinematicsResults[frameIndex]);
+    iDynTree::Transform ret = iDynTree::ToiDynTree(this->pimpl->m_fwdPosKinematicsResults[frameIndex]);
 
 
     // Setting position semantics
