@@ -45,6 +45,8 @@ namespace HighLevel
 // \todo TODO find a better way to handle the world index, and
 // in general to handle the key used for semantics
 const int WORLD_INDEX = -100;
+unsigned int DEFAULT_DYNAMICS_COMPUTATION_FRAME_INDEX=10000;
+std::string DEFAULT_DYNAMICS_COMPUTATION_FRAME_NAME="iDynTreeDynCompDefaultFrame";
 
 struct DynamicsComputations::DynamicsComputationsPrivateAttributes
 {
@@ -497,6 +499,64 @@ unsigned int DynamicsComputations::getNrOfFrames() const
     // the difference between frame and link
     return this->pimpl->m_robot_model.getNrOfLinks();
 }
+
+//////////////////////////////////////////////////////////////////////////////
+///// VELOCITY & ACCELERATION METHODS
+//////////////////////////////////////////////////////////////////////////////
+
+Twist DynamicsComputations::getFrameTwist(const std::string& frameName)
+{
+    int frameIndex = getFrameIndex(frameName);
+
+    if( frameIndex < 0 )
+    {
+        return Twist();
+    }
+
+    return getFrameTwist(frameIndex);
+}
+
+Twist DynamicsComputations::getFrameTwist(const int frameIndex)
+{
+    if( frameIndex >= this->getNrOfFrames() )
+    {
+        reportError("DynamicsComputations","getFrameTwist","frame index out of bounds");
+        return iDynTree::Twist();
+    }
+
+    // Actually return the twist
+    this->computeFwdKinematics();
+
+    return iDynTree::ToiDynTree(this->pimpl->m_fwdVelKinematicsResults[frameIndex]);
+}
+
+SpatialAcc DynamicsComputations::getFrameProperSpatialAcceleration(const std::string & frameName)
+{
+    int frameIndex = getFrameIndex(frameName);
+
+    if( frameIndex < 0 )
+    {
+        return SpatialAcc();
+    }
+
+    return getFrameProperSpatialAcceleration(frameIndex);
+}
+
+SpatialAcc DynamicsComputations::getFrameProperSpatialAcceleration(const int frameIndex)
+{
+    if( frameIndex >= this->getNrOfFrames() )
+    {
+        reportError("DynamicsComputations","getFrameProperSpatialAcceleration","frame index out of bounds");
+        return iDynTree::SpatialAcc();
+    }
+
+    // Actually return the twist
+    this->computeFwdKinematics();
+
+    return iDynTree::ToiDynTree(this->pimpl->m_fwdAccKinematicsResults[frameIndex]);
+}
+
+
 
 //////////////////////////////////////////////////////////////////////////////
 ///// LINK METHODS

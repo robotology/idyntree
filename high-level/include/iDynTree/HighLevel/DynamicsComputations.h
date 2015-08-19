@@ -310,37 +310,28 @@ public:
 
     /**
      * Given the current state, return the twist of frame of name frameName,
-     * expressed with respect to the origin of pointFrameName and using
-     * the orientation of orientationFrameName .
+     * expressed with respect to the origin of frame frameName and using
+     * the orientation of frameName.
      *
      */
-    /*
-    iDynTree::Twist getFrameTwist(const std::string & frameName,
-                                  const std::string & pointFrameName,
-                                  const std::string & orientationFrameName);
-    */
+    iDynTree::Twist getFrameTwist(const std::string & frameName);
 
     /**
      * Given the current state, return the twist of frame of index frameIndex,
-     * expressed with respect to the origin of pointFrameIndex and using
-     * the orientation of orientationFrameIndex .
+     * expressed with respect to the origin of frameIndex and using
+     * the orientation of frameIndex .
      *
      */
-    /*
-    iDynTree::Twist getFrameTwist(const int & frameIndex,
-                                  const int & pointFrameIndex,
-                                  const int & orientationFrameIndex);
-    */
+    iDynTree::Twist getFrameTwist(const int frameIndex);
 
     /**
      * Get the proper classical acceleration (i.e. the actual acceleration of the link minus
      * the gravitational acceleration) of frame of name frameName,
-     * expressed with respect to the origin of pointFrameName and using
-     * the orientation of orientationFrameName .
+     * expressed with respect to the origin of frameIndex and using
+     * the orientation of frameIndex .
+     *
      */
-    /* iDynTree::ClassicalAcc getFrameProperClassicalAcceleration(const std::string & frameName,
-                                                                 const std::string & pointFrameName,
-                                                                 const std::string & orientationFrameName);
+    /* iDynTree::ClassicalAcc getFrameProperClassicalAcceleration(const std::string & frameName);
                                                                  */
 
     /**
@@ -348,34 +339,33 @@ public:
      * the gravitational acceleration) of frame of index frameIndex,
      * expressed with respect to the origin of pointFrameIndex and using
      * the orientation of orientationFrameIndex .
+     *
      */
-    /*iDynTree::ClassicalAcc getFrameProperClassicalAcceleration(const int & frameIndex,
-                                  const int & pointFrameIndex,
-                                  const int & orientationFrameIndex);
-    */
+    /*
+    iDynTree::ClassicalAcc getFrameProperClassicalAcceleration(const int frameIndex);*/
+
 
     /**
      * Get the proper spatial acceleration (i.e. the actual acceleration of the link minus
      * the gravitational acceleration) of frame of name frameName,
-     * expressed with respect to the origin of pointFrameName and using
-     * the orientation of orientationFrameName .
+     * expressed with respect to the origin of frameName and using
+     * the orientation of frameName  .
+     *
      */
-    /*iDynTree::SpatialAcc getFrameProperSpatialAcceleration(const std::string & frameName,
-                                                             const std::string & pointFrameName,
-                                                             const std::string & orientationFrameName);
-                                                                 */
+    iDynTree::SpatialAcc getFrameProperSpatialAcceleration(const std::string & frameName);
+
 
     /**
      * Get the proper classical acceleration (i.e. the actual acceleration of the link minus
      * the gravitational acceleration) of frame of index frameIndex,
-     * expressed with respect to the origin of pointFrameIndex and using
-     * the orientation of orientationFrameIndex .
+     * expressed with respect to the origin of frameIndex and using
+     * the orientation of frameIndex .
+     *
+     * By default, return the acceleration expressed in the frame orientation and with
+     * respect to the frame origin.
      */
-    /*
-    iDynTree::SpatialAcc getFrameProperSpatialAcceleration(const int & frameIndex,
-                                  const int & pointFrameIndex,
-                                  const int & orientationFrameIndex);
-    */
+    iDynTree::SpatialAcc getFrameProperSpatialAcceleration(const int frameIndex);
+
 
     //@}
 
