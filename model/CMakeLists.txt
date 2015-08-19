@@ -10,12 +10,16 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
                            include/iDynTree/Model/Indeces.h
                            include/iDynTree/Model/Link.h
                            include/iDynTree/Model/LinkState.h
+                           include/iDynTree/Model/Model.h
                            include/iDynTree/Model/MovableJointImpl.h)
 
 set(IDYNTREE_MODEL_PRIVATE_INCLUDES)
 
 set(IDYNTREE_MODEL_SOURCES src/FixedJoint.cpp
+                           src/Indeces.cpp
                            src/Link.cpp
+                           src/LinkState.cpp
+                           src/Model.cpp
                            src/ModelInterfaceDestructors.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODEL_SOURCES})
@@ -50,3 +54,7 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Model/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
+
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif(IDYNTREE_COMPILE_TESTS)
