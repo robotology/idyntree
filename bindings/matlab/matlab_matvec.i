@@ -13,6 +13,25 @@ namespace iDynTree
         $self->fillBuffer(d); // Column-major
         return p;
     }
+
+    // Convert from a dense matrix
+    void fromMatlab(mxArray * in)
+    {
+        // check size
+        const size_t * dims = mxGetDimensions(in);
+        int fixValSize = $self->size();
+        if( ( dims[0] == fixValSize && dims[1] == 1) ||
+            ( dims[0] == 1 && dims[1] == fixValSize ) )
+        {
+            double* d = static_cast<double*>(mxGetData(in));
+            double* selfData = $self->data();
+            for(int i=0; i < fixValSize; i++ )
+            {
+                selfData[i] = d[i];
+            }
+            return;
+        }
+    }
 }
 
 %extend MatrixFixSize
