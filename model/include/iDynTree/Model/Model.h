@@ -8,13 +8,15 @@
 #ifndef IDYNTREE_MODEL_H
 #define IDYNTREE_MODEL_H
 
-#include <iDynTree/Core/Link.h>
+#include <iDynTree/Model/Link.h>
 
 #include <iDynTree/Model/Indeces.h>
 
+#include <vector>
 
 namespace iDynTree
 {
+    class IJoint;
 
     /**
      * Class that represents a generic multibody model.
@@ -25,17 +27,43 @@ namespace iDynTree
     class Model
     {
     private:
+        /** Vector of links. For each link its index indicates its location in this vector */
         std::vector<Link> links;
+
+        /** Vector of joints. For each joint its index indicates its location in this vector */
         std::vector<IJoint *> joints;
 
+        /** Vector of link names, matches the index of each link to its name. */
         std::vector<std::string> linkNames;
+
+        /** Vector of joint names, matches the index of each joint to its name. */
         std::vector<std::string> jointNames;
+
+        struct neighbor {
+            Link * link;
+            IJoint * joint;
+        };
+
+        /** Adjacency lists: match each link index to a list of its neighbors,
+            and the joint connecting to them. */
+        std::vector<neighbor> neighbors;
+
 
     public:
         /**
          * Costructor
          */
         Model();
+
+        /**
+         * Copy costructor
+         */
+        Model(const Model & other);
+
+        /**
+         * Copy operator
+         */
+        Model& operator=(const Model &other);
 
         /**
          * Destructor
@@ -52,7 +80,7 @@ namespace iDynTree
          * Get the name of a link given its index, or
          * an empty string if linkIndex < 0 or >= getNrOfLinks()
          */
-        const std::string & getLinkName(const LinkIndex linkIndex) const;
+        std::string  getLinkName(const LinkIndex linkIndex) const;
 
         LinkIndex getLinkIndex(const std::string & linkName) const;
 
@@ -70,7 +98,7 @@ namespace iDynTree
          * Get the name of a link given its index, or
          * an empty string if linkIndex < 0 or >= getNrOfLinks()
          */
-        const std::string & getJointName(const JointIndex & index) const;
+        std::string getJointName(const JointIndex index) const;
 
         /**
          * Get the index of a joint, given a jointName.
@@ -80,14 +108,14 @@ namespace iDynTree
          */
         JointIndex getJointIndex(const std::string & jointName) const;
 
-        IJoint * getJoint();
+        IJoint * getJoint(const JointIndex index);
 
-        const IJoint * getJoint() const;
+        const IJoint * getJoint(const JointIndex index) const;
 
         /**
          *
          * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
-         *         there was an error in adding the joint. 
+         *         there was an error in adding the joint.
          */
         JointIndex addJoint(std::string & jointName, const IJoint * joint);
     };
