@@ -52,6 +52,9 @@ classdef VectorDynSize < iDynTree.IRawVector
     function varargout = toMatlab(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(43,'VectorDynSize_toMatlab',self,varargin{:});
     end
+    function varargout = fromMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(44,'VectorDynSize_fromMatlab',self,varargin{:});
+    end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
       ok = false;

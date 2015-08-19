@@ -3,9 +3,9 @@ classdef Transform < SwigRef
     function self = Transform(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(305,'new_Transform',varargin{:});
+        %self.swigCPtr = iDynTreeMATLAB_wrap(306,'new_Transform',varargin{:});
         %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(305,'new_Transform',varargin{:}); % FIXME
+        tmp = iDynTreeMATLAB_wrap(306,'new_Transform',varargin{:}); % FIXME
         self.swigCPtr = tmp.swigCPtr;
         self.swigOwn = tmp.swigOwn;
         self.swigType = tmp.swigType;
@@ -14,45 +14,45 @@ classdef Transform < SwigRef
     end
     function delete(self)
       if self.swigOwn
-        iDynTreeMATLAB_wrap(306,'delete_Transform',self);
+        iDynTreeMATLAB_wrap(307,'delete_Transform',self);
         self.swigOwn=false;
       end
     end
     function varargout = getSemantics(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(307,'Transform_getSemantics',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(308,'Transform_getSemantics',self,varargin{:});
     end
     function varargout = getRotation(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(308,'Transform_getRotation',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(309,'Transform_getRotation',self,varargin{:});
     end
     function varargout = getPosition(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(309,'Transform_getPosition',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(310,'Transform_getPosition',self,varargin{:});
     end
     function varargout = setRotation(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(310,'Transform_setRotation',self,varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(311,'Transform_setRotation',self,varargin{:});
     end
     function varargout = setPosition(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(311,'Transform_setPosition',self,varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(312,'Transform_setPosition',self,varargin{:});
     end
     function varargout = inverse(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(314,'Transform_inverse',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(315,'Transform_inverse',self,varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(315,'Transform_mtimes',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(316,'Transform_mtimes',self,varargin{:});
     end
     function varargout = asHomogeneousTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(317,'Transform_asHomogeneousTransform',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(318,'Transform_asHomogeneousTransform',self,varargin{:});
     end
     function varargout = asAdjointTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(318,'Transform_asAdjointTransform',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(319,'Transform_asAdjointTransform',self,varargin{:});
     end
     function varargout = asAdjointTransformWrench(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(319,'Transform_asAdjointTransformWrench',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(320,'Transform_asAdjointTransformWrench',self,varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(320,'Transform_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(321,'Transform_toString',self,varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(321,'Transform_display',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(322,'Transform_display',self,varargin{:});
     end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
@@ -67,13 +67,13 @@ classdef Transform < SwigRef
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(312,'Transform_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(313,'Transform_compose',varargin{:});
     end
     function varargout = inverse2(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(313,'Transform_inverse2',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(314,'Transform_inverse2',varargin{:});
     end
     function varargout = Identity(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(316,'Transform_Identity',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(317,'Transform_Identity',varargin{:});
     end
   end
 end
