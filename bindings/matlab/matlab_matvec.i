@@ -57,6 +57,43 @@ namespace iDynTree
         $self->fillBuffer(d); // Column-major
         return p;
     }
+
+    // Convert from a dense matrix
+    void fromMatlab(mxArray * in)
+    {
+        // check size
+        const size_t * dims = mxGetDimensions(in);
+        $self->size();
+        if( ( dims[0] == 1 || dims[1] == 1) )
+        {
+            // Get the size of the input vector
+            int inSize;
+            if( dims[0] == 1 )
+            {
+                inSize = dims[1];
+            }
+            else
+            {
+                inSize = dims[0];
+            }
+
+            // If the input vector has a size different
+            // from the one of the iDynTree::VectorDynSize,
+            // we resisze iDynTre::VectorDynSize
+            if( $self->size() != inSize )
+            {
+                $self->resize(inSize);
+            }
+
+            double* d = static_cast<double*>(mxGetData(in));
+            double* selfData = $self->data();
+            for(int i=0; i < inSize; i++ )
+            {
+                selfData[i] = d[i];
+            }
+            return;
+        }
+    }
 }
 
 %extend MatrixDynSize
