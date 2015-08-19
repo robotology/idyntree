@@ -13,16 +13,48 @@
 
 namespace iDynTree
 {
+    class Position;
+    class PositionSemantics;
+    class LinearForceVector3;
+    class LinearForceVector3Semantics;
+
+    /**
+     * Class providing the semantics for any angular force vector (torque or angular momentum).
+     */
+    class AngularForceVector3Semantics: GeomVector3Semantics<AngularForceVector3Semantics>
+    {
+    protected:
+        int point;
+        
+    public:
+        /**
+         * Constructors:
+         */
+        AngularForceVector3Semantics();
+        AngularForceVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame);
+        AngularForceVector3Semantics(const AngularForceVector3Semantics & other);
+        ~AngularForceVector3Semantics();
+        
+        /**
+         * Semantics operations
+         * Compute the semantics of the result given the semantics of the operands.
+         */
+        bool changePoint(const PositionSemantics & newPoint,
+                         const LinearForceVector3Semantics & otherLinear,
+                         AngularForceVector3Semantics & resultAngular);
+    };
+    
+    
     /**
      * Class providing the raw coordinates and semantics for any torque vector
      *
      * \ingroup iDynTreeCore
      *
-     * A motion vector can be used to describe a angular momentum or force,
+     * A motion vector can be used to describe an angular momentum or force,
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class AngularForceVector3: public ForceVector3<AngularForceVector3, AngularForceAssociationsT>
+    class AngularForceVector3: public ForceVector3<AngularForceVector3, AngularForceAssociationsT, AngularForceVector3Semantics>
     {
     public:
         /**
@@ -32,6 +64,12 @@ namespace iDynTree
         AngularForceVector3(const double* in_data, const unsigned int in_size);
         AngularForceVector3(const AngularForceVector3 & other);
         virtual ~AngularForceVector3();
+
+        /**
+         * Geometric operations
+         */
+        const AngularForceVector3 changePoint(const Position & newPoint,
+                                              const LinearForceVector3 & otherLinear);
     };
     
     typedef AngularForceVector3 AngMomentum;

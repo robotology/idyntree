@@ -39,22 +39,20 @@ SpatialMotionVector::~SpatialMotionVector()
 SpatialMotionVector SpatialMotionVector::cross(const SpatialMotionVector& other) const
 {
     SpatialMotionVector res;
-#if 0
-    res.linearVec3  = this->angularVec3.cross(other->linearVec3) + this->linearVec3.cross(other->angularVec3);
-    res.angularVec3 =                                              this->angularVec3.cross(other->angularVec3);
 
-#endif
+    res.getLinearVec3()  = this->angularVec3.cross(other.getLinearVec3()) + this->linearVec3.cross(other.getAngularVec3());
+    res.getAngularVec3() =                                                  this->angularVec3.cross(other.getAngularVec3());
+
     return res;
 }
 
 SpatialForceVector SpatialMotionVector::cross(const SpatialForceVector& other) const
 {
     SpatialForceVector res;
-#if 0
-    res.linearVec3  = this->angularVec3.cross(other->linearVec3);
-    res.angularVec3 = this->linearVec3.cross(other->linearVec3) + this->angularVec3.cross(other->angularVec3);
 
-#endif
+    res.getLinearVec3()  = this->angularVec3.cross(other.getLinearVec3());
+    res.getAngularVec3() = this->linearVec3.cross(other.getLinearVec3()) + this->angularVec3.cross(other.getAngularVec3());
+
     return res;
 }
 

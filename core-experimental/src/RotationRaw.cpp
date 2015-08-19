@@ -43,6 +43,11 @@ namespace iDynTree
         this->m_data[8] = zz;
     }
 
+    RotationRaw::RotationRaw(const double* in_data, const unsigned int in_rows, const unsigned int in_cols):
+                             MatrixFixSize<3, 3>(in_data,in_rows,in_cols)
+    {
+    
+    }
 
     RotationRaw::RotationRaw(const RotationRaw& other)
     {
@@ -120,12 +125,14 @@ namespace iDynTree
         SpatialMotionVector result;
 
         Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
-        Eigen::Map<const Vector6d> op2Twist(other.data());
+        Eigen::Map<const Eigen::Vector3d> op2TwistLinear(other.getLinearVec3().data());
+        Eigen::Map<const Eigen::Vector3d> op2TwistAngular(other.getAngularVec3().data());
 
-        Eigen::Map<Vector6d> resTwist(result.data());
+        Eigen::Map<Vector3d> resTwistLinear(result.getLinearVec3().data());
+        Eigen::Map<Vector3d> resTwistAngular(result.getAngularVec3().data());
 
-        resTwist.segment<3>(3) =  op1Rot*(op2Twist.segment<3>(3));
-        resTwist.segment<3>(0) =  op1Rot*(op2Twist.segment<3>(0));
+        resTwistAngular =  op1Rot*(op2TwistAngular);
+        resTwistLinear  =  op1Rot*(op2TwistLinear);
 
         return result;
     }
@@ -135,12 +142,14 @@ namespace iDynTree
         SpatialForceVector result;
 
         Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
-        Eigen::Map<const Vector6d> op2Wrench(other.data());
-
-        Eigen::Map<Vector6d> resWrench(result.data());
-
-        resWrench.segment<3>(3) =  op1Rot*(op2Wrench.segment<3>(3));
-        resWrench.segment<3>(0) =  op1Rot*(op2Wrench.segment<3>(0));
+        Eigen::Map<const Eigen::Vector3d> op2WrenchLinear(other.getLinearVec3().data());
+        Eigen::Map<const Eigen::Vector3d> op2WrenchAngular(other.getAngularVec3().data());
+        
+        Eigen::Map<Vector3d> resWrenchLinear(result.getLinearVec3().data());
+        Eigen::Map<Vector3d> resWrenchAngular(result.getAngularVec3().data());
+        
+        resWrenchAngular =  op1Rot*(op2WrenchAngular);
+        resWrenchLinear  =  op1Rot*(op2WrenchLinear);
 
         return result;
     }

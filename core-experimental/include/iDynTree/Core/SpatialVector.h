@@ -8,6 +8,8 @@
 #ifndef IDYNTREE_SPATIAL_VECTOR_H
 #define IDYNTREE_SPATIAL_VECTOR_H
 
+#include "Position.h"
+#include "Rotation.h"
 
 namespace iDynTree
 {
@@ -19,11 +21,11 @@ namespace iDynTree
     /**
      * Helper structure for dual space definition
      */
-    template <class SpatialVectorT> struct DualSpace {typedef SpatialForceVector Type;};
+    template <typename SpatialVectorT> struct DualSpace {};
     
-//    template <> struct DualSpace<SpacialMotionVector> {typedef SpatialForceVector Type;};
+    template <> struct DualSpace<SpatialMotionVector> {typedef SpatialForceVector Type;};
     
-//    template <> struct DualSpace<SpatialForceVector> {typedef SpacialMotionVector Type;};
+    template <> struct DualSpace<SpatialForceVector> {typedef SpatialMotionVector Type;};
 
     /**
      * Class providing an interface to any spatial motion or force vector, which provides
@@ -52,6 +54,7 @@ namespace iDynTree
     protected:
         LinearVector3T linearVec3;
         AngularVector3T angularVec3;
+//        SpatialVectorSemantics semantics;
 
     public:
         /**
@@ -63,8 +66,10 @@ namespace iDynTree
         virtual ~SpatialVector();
         
         /**
-         * Getters, setters
+         * Accessors, Getters, setters
          */
+        LinearVector3T & getLinearVec3();
+        AngularVector3T & getAngularVec3();
         const LinearVector3T & getLinearVec3() const;
         const AngularVector3T & getAngularVec3() const;
         void setLinearVec3(const LinearVector3T & _linearVec3);
@@ -99,9 +104,9 @@ namespace iDynTree
          *  Output helpers.
          */
         ///@{
-        //std::string toString() const;
+        std::string toString() const;
         
-        //std::string reservedToString() const;
+        std::string reservedToString() const;
         ///@}
     };
 
@@ -132,7 +137,19 @@ namespace iDynTree
     CLASS_FUNC_HDR::~SpatialVector()
     {}
     
-    // Getters, setters
+    // Accessors, Getters, setters
+    CLASS_TEMPLATE_HDR
+    LinearVector3T & CLASS_FUNC_HDR::getLinearVec3()
+    {
+        return this->linearVec3;
+    }
+    
+    CLASS_TEMPLATE_HDR
+    AngularVector3T & CLASS_FUNC_HDR::getAngularVec3()
+    {
+        return this->angularVec3;
+    }
+    
     CLASS_TEMPLATE_HDR
     const LinearVector3T & CLASS_FUNC_HDR::getLinearVec3() const
     {
@@ -161,13 +178,13 @@ namespace iDynTree
     CLASS_TEMPLATE_HDR
     const DerivedSpatialVecT & CLASS_FUNC_HDR::changePoint(const Position & newPoint)
     {
-        //return newPoint.changePointOf(*this);
+        return newPoint.changePointOf(*this);
     }
 
     CLASS_TEMPLATE_HDR
     const DerivedSpatialVecT & CLASS_FUNC_HDR::changeCoordFrame(const Rotation & newCoordFrame)
     {
-        //return newCoordFrame.changeCoordFrameOf(*this);
+        return newCoordFrame.changeCoordFrameOf(*this);
     }
     
     CLASS_TEMPLATE_HDR
@@ -216,6 +233,24 @@ namespace iDynTree
     DerivedSpatialVecT CLASS_FUNC_HDR::Zero()
     {
         return DerivedSpatialVecT();
+    }
+
+    CLASS_TEMPLATE_HDR
+    std::string CLASS_FUNC_HDR::toString() const
+    {
+        std::stringstream ss;
+        
+        ss << linearVec3.toString() << " "
+        << angularVec3.toString() << " "
+        << /*semantics.toString() <<*/ std::endl;
+        
+        return ss.str();
+    }
+
+    CLASS_TEMPLATE_HDR
+    std::string CLASS_FUNC_HDR::reservedToString() const
+    {
+        return this->toString();
     }
 
 #undef CLASS_TEMPLATE_HDR

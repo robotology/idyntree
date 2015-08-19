@@ -14,6 +14,22 @@
 namespace iDynTree
 {
     /**
+     * Class providing the semantics for any angular motion vector (angular velocity or acceleration).
+     */
+    class AngularMotionVector3Semantics: GeomVector3Semantics<AngularMotionVector3Semantics>
+    {
+    public:
+        /**
+         * Constructors:
+         */
+        AngularMotionVector3Semantics();
+        AngularMotionVector3Semantics(int _body, int _refBody, int _coordinateFrame);
+        AngularMotionVector3Semantics(const AngularMotionVector3Semantics & other);
+        ~AngularMotionVector3Semantics();
+    };
+
+
+    /**
      * Class providing the raw coordinates and semantics for any angular motion vector
      *
      * \ingroup iDynTreeCore
@@ -22,7 +38,7 @@ namespace iDynTree
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class AngularMotionVector3: public MotionVector3<AngularMotionVector3, AngularMotionAssociationsT>
+    class AngularMotionVector3: public MotionVector3<AngularMotionVector3, AngularMotionAssociationsT, AngularMotionVector3Semantics>
     {
     public:
         /**

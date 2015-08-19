@@ -9,17 +9,46 @@
 
 namespace iDynTree
 {
+    /**
+     * LinearForceVector3Semantics
+     */
+    
+    // constructors
+    LinearForceVector3Semantics::LinearForceVector3Semantics()
+    {
+    }
+
+    LinearForceVector3Semantics::LinearForceVector3Semantics(int _body, int _refBody, int _coordinateFrame):
+    GeomVector3Semantics<LinearForceVector3Semantics>(_body, _refBody, _coordinateFrame)
+    {
+    }
+
+    LinearForceVector3Semantics::LinearForceVector3Semantics(const LinearForceVector3Semantics & other):
+    GeomVector3Semantics<LinearForceVector3Semantics>(other)
+    {
+    }
+
+    LinearForceVector3Semantics::~LinearForceVector3Semantics()
+    {
+    }
+
+
+    /**
+     * LinearForceVector3
+     */
+    
     // constructors
     LinearForceVector3::LinearForceVector3()
     {
-        // ForceVector3<LinearForceVector3, LinearForceAssociationsT>() will be implicitly called
     }
     
-    LinearForceVector3::LinearForceVector3(const double* in_data, const unsigned int in_size): ForceVector3<LinearForceVector3, LinearForceAssociationsT>(in_data, in_size)
+    LinearForceVector3::LinearForceVector3(const double* in_data, const unsigned int in_size):
+    ForceVector3<LinearForceVector3, LinearForceAssociationsT, LinearForceVector3Semantics>(in_data, in_size)
     {
     }
     
-    LinearForceVector3::LinearForceVector3(const LinearForceVector3 & other): ForceVector3<LinearForceVector3, LinearForceAssociationsT>(other)
+    LinearForceVector3::LinearForceVector3(const LinearForceVector3 & other):
+    ForceVector3<LinearForceVector3, LinearForceAssociationsT, LinearForceVector3Semantics>(other)
     {
     }
     

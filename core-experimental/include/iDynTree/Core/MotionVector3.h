@@ -11,6 +11,11 @@
 #include <iDynTree/Core/GeomVector3.h>
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
+#define MOTIONVECTOR3_TEMPLATE_HDR \
+template <class MotionT, class MotionAssociationsT, class MotionTSemantics>
+#define MOTIONVECTOR3_INSTANCE_HDR \
+MotionVector3<MotionT, MotionAssociationsT, MotionTSemantics>
+
 namespace iDynTree
 {
     /**
@@ -24,8 +29,8 @@ namespace iDynTree
      * to every motion vectors.
      *
      */
-    template <class MotionT, class MotionAssociationsT>
-    class MotionVector3: public GeomVector3<MotionT, MotionAssociationsT>
+    MOTIONVECTOR3_TEMPLATE_HDR
+    class MotionVector3: public GeomVector3<MotionT, MotionAssociationsT, MotionTSemantics>
     {
     private:
         /**
@@ -34,10 +39,10 @@ namespace iDynTree
         template <class DerivedT, class OperandT>
         struct rawOperator
         {
-            DerivedT cross(const OperandT& other) const
+            static DerivedT cross(const MotionVector3<MotionT, MotionAssociationsT, MotionTSemantics>& _this, const OperandT& other)
             {
                 DerivedT result;
-                Eigen::Map<const Eigen::Vector3d> thisData(this->data());
+                Eigen::Map<const Eigen::Vector3d> thisData(_this.data());
                 Eigen::Map<const Eigen::Vector3d> otherData(other.data());
                 Eigen::Map<Eigen::Vector3d> resultData(result.data());
                 
@@ -76,45 +81,48 @@ namespace iDynTree
      */
     
     // constructors
-    template <class MotionT, class MotionAssociationsT>
-    MotionVector3<MotionT, MotionAssociationsT>::MotionVector3(): GeomVector3<MotionT, MotionAssociationsT>()
+    MOTIONVECTOR3_TEMPLATE_HDR
+    MOTIONVECTOR3_INSTANCE_HDR::MotionVector3():
+    GeomVector3<MotionT, MotionAssociationsT, MotionTSemantics>()
     {}
     
-    template <class MotionT, class MotionAssociationsT>
-    MotionVector3<MotionT, MotionAssociationsT>::MotionVector3(const double* in_data, const unsigned int in_size): GeomVector3<MotionT, MotionAssociationsT>(in_data, in_size)
+    MOTIONVECTOR3_TEMPLATE_HDR
+    MOTIONVECTOR3_INSTANCE_HDR::MotionVector3(const double* in_data, const unsigned int in_size):
+    GeomVector3<MotionT, MotionAssociationsT, MotionTSemantics>(in_data, in_size)
     {}
     
-    template <class MotionT, class MotionAssociationsT>
-    MotionVector3<MotionT, MotionAssociationsT>::MotionVector3(const MotionVector3 & other): GeomVector3<MotionT, MotionAssociationsT>(other)
+    MOTIONVECTOR3_TEMPLATE_HDR
+    MOTIONVECTOR3_INSTANCE_HDR::MotionVector3(const MotionVector3 & other):
+    GeomVector3<MotionT, MotionAssociationsT, MotionTSemantics>(other)
     {}
     
-    template <class MotionT, class MotionAssociationsT>
-    MotionVector3<MotionT, MotionAssociationsT>::~MotionVector3()
+    MOTIONVECTOR3_TEMPLATE_HDR
+    MOTIONVECTOR3_INSTANCE_HDR::~MotionVector3()
     {}
 
     /* Cross products */
-    template <class MotionT, class MotionAssociationsT>
-    typename MotionVector3<MotionT, MotionAssociationsT>::MotionCrossLinM MotionVector3<MotionT, MotionAssociationsT>::cross(const LinearMotionVector3& other) const
+    MOTIONVECTOR3_TEMPLATE_HDR
+    typename MOTIONVECTOR3_INSTANCE_HDR::MotionCrossLinM MOTIONVECTOR3_INSTANCE_HDR::cross(const LinearMotionVector3& other) const
     {
-        return this->rawOperator<MotionCrossLinM, LinearMotionVector3>.cross(other);
+        return rawOperator<MotionCrossLinM, LinearMotionVector3>::cross(*this, other);
     }
     
-    template <class MotionT, class MotionAssociationsT>
-    typename MotionVector3<MotionT, MotionAssociationsT>::MotionCrossAngM MotionVector3<MotionT, MotionAssociationsT>::cross(const AngularMotionVector3& other) const
+    MOTIONVECTOR3_TEMPLATE_HDR
+    typename MOTIONVECTOR3_INSTANCE_HDR::MotionCrossAngM MOTIONVECTOR3_INSTANCE_HDR::cross(const AngularMotionVector3& other) const
     {
-        return this->rawOperator<MotionCrossAngM, AngularMotionVector3>.cross(other);
+        return rawOperator<MotionCrossAngM, AngularMotionVector3>::cross(*this, other);
     }
     
-    template <class MotionT, class MotionAssociationsT>
-    typename MotionVector3<MotionT, MotionAssociationsT>::MotionCrossLinF MotionVector3<MotionT, MotionAssociationsT>::cross(const LinearForceVector3& other) const
+    MOTIONVECTOR3_TEMPLATE_HDR
+    typename MOTIONVECTOR3_INSTANCE_HDR::MotionCrossLinF MOTIONVECTOR3_INSTANCE_HDR::cross(const LinearForceVector3& other) const
     {
-        return this->rawOperator<MotionCrossLinF, LinearForceVector3>.cross(other);
+        return rawOperator<MotionCrossLinF, LinearForceVector3>::cross(*this, other);
     }
     
-    template <class MotionT, class MotionAssociationsT>
-    typename MotionVector3<MotionT, MotionAssociationsT>::MotionCrossAngF MotionVector3<MotionT, MotionAssociationsT>::cross(const AngularForceVector3& other) const
+    MOTIONVECTOR3_TEMPLATE_HDR
+    typename MOTIONVECTOR3_INSTANCE_HDR::MotionCrossAngF MOTIONVECTOR3_INSTANCE_HDR::cross(const AngularForceVector3& other) const
     {
-        return this->rawOperator<MotionCrossAngF, AngularForceVector3>.cross(other);
+        return rawOperator<MotionCrossAngF, AngularForceVector3>::cross(*this, other);
     }
 }
 

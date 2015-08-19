@@ -9,18 +9,47 @@
 
 namespace iDynTree
 {
+    /**
+     * AngularMotionVector3Semantics
+     */
+    
+    // constructors
+    AngularMotionVector3Semantics::AngularMotionVector3Semantics()
+    {
+    }
+
+    AngularMotionVector3Semantics::AngularMotionVector3Semantics(int _body, int _refBody, int _coordinateFrame):
+    GeomVector3Semantics<AngularMotionVector3Semantics>(_body, _refBody, _coordinateFrame)
+    {
+    }
+
+    AngularMotionVector3Semantics::AngularMotionVector3Semantics(const AngularMotionVector3Semantics & other):
+    GeomVector3Semantics<AngularMotionVector3Semantics>(other)
+    {
+    }
+
+    AngularMotionVector3Semantics::~AngularMotionVector3Semantics()
+    {
+    }
+
+
+    /**
+     * AngularMotionVector3
+     */
+    
     // constructors
     AngularMotionVector3::AngularMotionVector3()
     {
-        // MotionVector3<AngularMotionVector3, AngularMotionAssociationsT>() will be implicitly called
     }
     
     
-    AngularMotionVector3::AngularMotionVector3(const double* in_data, const unsigned int in_size): MotionVector3<AngularMotionVector3, AngularMotionAssociationsT>(in_data, in_size)
+    AngularMotionVector3::AngularMotionVector3(const double* in_data, const unsigned int in_size):
+    MotionVector3<AngularMotionVector3, AngularMotionAssociationsT, AngularMotionVector3Semantics>(in_data, in_size)
     {
     }
     
-    AngularMotionVector3::AngularMotionVector3(const AngularMotionVector3& other): MotionVector3<AngularMotionVector3, AngularMotionAssociationsT>(other)
+    AngularMotionVector3::AngularMotionVector3(const AngularMotionVector3& other):
+    MotionVector3<AngularMotionVector3, AngularMotionAssociationsT, AngularMotionVector3Semantics>(other)
     {
     }
     

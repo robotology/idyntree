@@ -36,7 +36,8 @@ namespace iDynTree
         /**
          * Helper type providing the class associated to the alternate type of movement in the same space
          */
-        typedef LinearForceVector3 DerivByLinearMotion;
+        typedef LinearForceVector3  DerivByLinearMotion;
+        typedef AngularForceVector3 DerivByAngularMotion;
     };
     
     /**
@@ -54,7 +55,8 @@ namespace iDynTree
         /**
          * Helper type providing the class associated to the alternate type of movement in the same space
          */
-        typedef LinearMotionVector3 DerivByLinearMotion;
+        typedef LinearMotionVector3  DerivByLinearMotion;
+        typedef AngularMotionVector3 DerivByAngularMotion;
         
         /**
          * Helper class providing the result class of the cross product for the operator (w\times).
@@ -62,7 +64,7 @@ namespace iDynTree
         template <class MotionForceT>
         struct DerivativeOf
         {
-            typedef MotionForceT Type;
+            typedef typename MotionForceT::DerivByAngularMotion Type;
         };
         
     };
@@ -82,7 +84,8 @@ namespace iDynTree
         /**
          * Helper type providing the class associated to the alternate type of movement in the same space
          */
-        typedef LinearForceVector3 DerivByLinearMotion;
+        typedef AngularForceVector3 DerivByLinearMotion;
+        typedef LinearForceVector3 DerivByAngularMotion;
     };
     
     /**
@@ -100,7 +103,8 @@ namespace iDynTree
         /**
          * Helper type providing the class associated to the alternate type of movement in the same space
          */
-        typedef LinearMotionVector3 DerivByLinearMotion;
+        typedef AngularMotionVector3 DerivByLinearMotion;
+        typedef LinearMotionVector3 DerivByAngularMotion;
         
         /**
          * Helper class providing the result class of the cross product for the operator (v\times).

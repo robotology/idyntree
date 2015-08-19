@@ -36,6 +36,12 @@ namespace iDynTree
     }
 
 
+    PositionRaw::PositionRaw(const double* in_data, const unsigned int in_size):
+                             VectorFixSize<3>(in_data,in_size)
+    {
+    
+    }
+    
     PositionRaw::PositionRaw(const PositionRaw& other)
     {
         this->m_data[0] = other.m_data[0];

@@ -9,6 +9,8 @@
 #include "Position.h"
 #include "Wrench.h"
 #include "Twist.h"
+#include "SpatialAcc.h"
+#include "SpatialMomentum.h"
 #include "Utils.h"
 
 
@@ -106,6 +108,26 @@ namespace iDynTree
         return result;
     }
 
+    SpatialAcc Rotation::changeCoordFrameOf(const SpatialAcc & other) const
+    {
+        SpatialAcc result;
+        
+        // \todo TODO add semantics to SpatialAcc
+        result = RotationRaw::changeCoordFrameOf(other);
+        
+        return result;
+    }
+
+    SpatialMomentum Rotation::changeCoordFrameOf(const SpatialMomentum & other) const
+    {
+        SpatialMomentum result;
+        
+        // \todo TODO add semantics to SpatialMomentum
+        result = RotationRaw::changeCoordFrameOf(other);
+        
+        return result;
+    }
+
     Wrench Rotation::changeCoordFrameOf(const Wrench &other) const
     {
         Wrench result;
@@ -132,6 +154,16 @@ namespace iDynTree
     }
 
     Twist Rotation::operator*(const Twist& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    SpatialAcc Rotation::operator*(const SpatialAcc & other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    SpatialMomentum Rotation::operator*(const SpatialMomentum & other) const
     {
         return changeCoordFrameOf(other);
     }

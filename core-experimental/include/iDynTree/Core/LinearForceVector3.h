@@ -14,6 +14,22 @@
 namespace iDynTree
 {
     /**
+     * Class providing the semantics for any angular motion vector (angular velocity or acceleration).
+     */
+    class LinearForceVector3Semantics: GeomVector3Semantics<LinearForceVector3Semantics>
+    {
+    public:
+        /**
+         * Constructors:
+         */
+        LinearForceVector3Semantics();
+        LinearForceVector3Semantics(int _body, int _refBody, int _coordinateFrame);
+        LinearForceVector3Semantics(const LinearForceVector3Semantics & other);
+        ~LinearForceVector3Semantics();
+    };
+    
+    
+    /**
      * Class providing the raw coordinates and semantics for any linear force vector
      *
      * \ingroup iDynTreeCore
@@ -22,7 +38,7 @@ namespace iDynTree
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class LinearForceVector3: public ForceVector3<LinearForceVector3, LinearForceAssociationsT>
+    class LinearForceVector3: public ForceVector3<LinearForceVector3, LinearForceAssociationsT, LinearForceVector3Semantics>
     {
     public:
         /**

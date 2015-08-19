@@ -11,6 +11,11 @@
 #include <iDynTree/Core/GeomVector3.h>
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
+#define FORCEVECTOR3_TEMPLATE_HDR \
+template <class ForceT, class ForceAssociationsT, class ForceTSemantics>
+#define FORCEVECTOR3_INSTANCE_HDR \
+ForceVector3<ForceT, ForceAssociationsT, ForceTSemantics>
+
 namespace iDynTree
 {
     /**
@@ -24,8 +29,8 @@ namespace iDynTree
      * to every force vectors.
      *
      */
-    template <class ForceT, class ForceAssociationsT>
-    class ForceVector3: public GeomVector3<ForceT, ForceAssociationsT>
+    FORCEVECTOR3_TEMPLATE_HDR
+    class ForceVector3: public GeomVector3<ForceT, ForceAssociationsT, ForceTSemantics>
     {
     public:
         /**
@@ -42,20 +47,20 @@ namespace iDynTree
      */
     
     // constructors
-    template <class ForceT, class ForceAssociationsT>
-    ForceVector3<ForceT, ForceAssociationsT>::ForceVector3(): GeomVector3<ForceT, ForceAssociationsT>()
+    FORCEVECTOR3_TEMPLATE_HDR
+    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(): GeomVector3<ForceT, ForceAssociationsT, ForceTSemantics>()
     {}
     
-    template <class ForceT, class ForceAssociationsT>
-    ForceVector3<ForceT, ForceAssociationsT>::ForceVector3(const double* in_data, const unsigned int in_size): GeomVector3<ForceT, ForceAssociationsT>(in_data, in_size)
+    FORCEVECTOR3_TEMPLATE_HDR
+    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const double* in_data, const unsigned int in_size): GeomVector3<ForceT, ForceAssociationsT, ForceTSemantics>(in_data, in_size)
     {}
     
-    template <class ForceT, class ForceAssociationsT>
-    ForceVector3<ForceT, ForceAssociationsT>::ForceVector3(const ForceVector3 & other): GeomVector3<ForceT, ForceAssociationsT>(other)
+    FORCEVECTOR3_TEMPLATE_HDR
+    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const ForceVector3 & other): GeomVector3<ForceT, ForceAssociationsT, ForceTSemantics>(other)
     {}
     
-    template <class ForceT, class ForceAssociationsT>
-    ForceVector3<ForceT, ForceAssociationsT>::~ForceVector3()
+    FORCEVECTOR3_TEMPLATE_HDR
+    FORCEVECTOR3_INSTANCE_HDR::~ForceVector3()
     {}
 }
 
