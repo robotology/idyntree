@@ -49,6 +49,9 @@ classdef Vector3 < iDynTree.IRawVector
     function varargout = toMatlab(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(111,'Vector3_toMatlab',self,varargin{:});
     end
+    function varargout = fromMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(112,'Vector3_fromMatlab',self,varargin{:});
+    end
     function [v,ok] = swig_fieldsref(self,i)
       v = [];
       ok = false;
