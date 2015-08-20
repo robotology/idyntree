@@ -120,41 +120,6 @@ namespace iDynTree
         return result;
     }
 
-    SpatialMotionVector RotationRaw::changeCoordFrameOf(const SpatialMotionVector& other) const
-    {
-        SpatialMotionVector result;
-
-        Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
-        Eigen::Map<const Eigen::Vector3d> op2TwistLinear(other.getLinearVec3().data());
-        Eigen::Map<const Eigen::Vector3d> op2TwistAngular(other.getAngularVec3().data());
-
-        Eigen::Map<Vector3d> resTwistLinear(result.getLinearVec3().data());
-        Eigen::Map<Vector3d> resTwistAngular(result.getAngularVec3().data());
-
-        resTwistAngular =  op1Rot*(op2TwistAngular);
-        resTwistLinear  =  op1Rot*(op2TwistLinear);
-
-        return result;
-    }
-
-    SpatialForceVector RotationRaw::changeCoordFrameOf(const SpatialForceVector& other) const
-    {
-        SpatialForceVector result;
-
-        Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
-        Eigen::Map<const Eigen::Vector3d> op2WrenchLinear(other.getLinearVec3().data());
-        Eigen::Map<const Eigen::Vector3d> op2WrenchAngular(other.getAngularVec3().data());
-        
-        Eigen::Map<Vector3d> resWrenchLinear(result.getLinearVec3().data());
-        Eigen::Map<Vector3d> resWrenchAngular(result.getAngularVec3().data());
-        
-        resWrenchAngular =  op1Rot*(op2WrenchAngular);
-        resWrenchLinear  =  op1Rot*(op2WrenchLinear);
-
-        return result;
-    }
-
-
     RotationRaw RotationRaw::RotX(const double angle)
     {
         RotationRaw result;

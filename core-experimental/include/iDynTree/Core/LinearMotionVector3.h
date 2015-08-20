@@ -21,7 +21,7 @@ namespace iDynTree
     /**
      * Class providing the semantics for any linear motion vector.
      */
-    class LinearMotionVector3Semantics: GeomVector3Semantics<LinearMotionVector3Semantics>
+    class LinearMotionVector3Semantics: public GeomVector3Semantics<LinearMotionVector3Semantics>
     {
     protected:
         int point;
@@ -41,7 +41,7 @@ namespace iDynTree
          */
         bool changePoint(const PositionSemantics & newPoint,
                          const AngularMotionVector3Semantics & otherAngular,
-                         LinearMotionVector3Semantics & resultLinear);
+                         LinearMotionVector3Semantics & resultLinear) const;
     };
     
     
@@ -57,6 +57,8 @@ namespace iDynTree
     class LinearMotionVector3: public MotionVector3<LinearMotionVector3, LinearMotionAssociationsT, LinearMotionVector3Semantics>
     {
     public:
+        typedef LinearMotionVector3Semantics SemanticsType;
+
         /**
          * constructors
          */
@@ -69,7 +71,7 @@ namespace iDynTree
          * Geometric operations
          */
         const LinearMotionVector3 changePoint(const Position & newPoint,
-                                              const AngularMotionVector3 & otherAngular);
+                                              const AngularMotionVector3 & otherAngular) const;
     };
     
     typedef LinearMotionVector3 LinVelocity;

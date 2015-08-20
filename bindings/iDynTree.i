@@ -15,6 +15,7 @@
 %include "./matlab/matlab.i"
 #endif
 
+
 %{
 /* Note : always include headers following the inheritance order */
 
@@ -30,8 +31,12 @@
 #include "iDynTree/Core/PositionRaw.h"
 #include "iDynTree/Core/PositionSemantics.h"
 #include "iDynTree/Core/Position.h"
-#include "iDynTree/Core/SpatialForceVectorRaw.h"
-#include "iDynTree/Core/SpatialMotionVectorRaw.h"
+#include "iDynTree/Core/LinearMotionVector3.h"
+#include "iDynTree/Core/LinearForceVector3.h"
+#include "iDynTree/Core/AngularMotionVector3.h"
+#include "iDynTree/Core/AngularForceVector3.h"
+#include "iDynTree/Core/SpatialForceVector.h"
+#include "iDynTree/Core/SpatialMotionVector.h"
 #include "iDynTree/Core/Twist.h"
 #include "iDynTree/Core/Wrench.h"
 #include "iDynTree/Core/SpatialMomentum.h"
@@ -82,8 +87,12 @@
 %include "iDynTree/Core/PositionRaw.h"
 %include "iDynTree/Core/PositionSemantics.h"
 %include "iDynTree/Core/Position.h"
-%include "iDynTree/Core/SpatialForceVectorRaw.h"
-%include "iDynTree/Core/SpatialMotionVectorRaw.h"
+%include "iDynTree/Core/LinearMotionVector3.h"
+%include "iDynTree/Core/LinearForceVector3.h"
+%include "iDynTree/Core/AngularMotionVector3.h"
+%include "iDynTree/Core/AngularForceVector3.h"
+%include "iDynTree/Core/SpatialForceVector.h"
+%include "iDynTree/Core/SpatialMotionVector.h"
 %include "iDynTree/Core/Twist.h"
 %include "iDynTree/Core/Wrench.h"
 %include "iDynTree/Core/SpatialMomentum.h"

@@ -38,7 +38,7 @@ namespace iDynTree
     // Semantics operations
     bool AngularForceVector3Semantics::changePoint(const PositionSemantics & newPoint,
                                                    const LinearForceVector3Semantics & otherLinear,
-                                                   AngularForceVector3Semantics & resultAngular)
+                                                   AngularForceVector3Semantics & resultAngular) const
     {
         return true;
     }
@@ -69,8 +69,8 @@ namespace iDynTree
     }
 
     // Geometric operations
-    const AngularForceVector3 AngularForceVector3::changePoint(const Position & newPoint,
-                                                               const LinearForceVector3 & otherLinear)
+    AngularForceVector3 AngularForceVector3::changePoint(const Position & newPoint,
+                                                         const LinearForceVector3 & otherLinear) const
     {
         AngularForceVector3 resultAngular;
 

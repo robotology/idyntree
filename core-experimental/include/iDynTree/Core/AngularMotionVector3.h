@@ -16,7 +16,7 @@ namespace iDynTree
     /**
      * Class providing the semantics for any angular motion vector (angular velocity or acceleration).
      */
-    class AngularMotionVector3Semantics: GeomVector3Semantics<AngularMotionVector3Semantics>
+    class AngularMotionVector3Semantics: public GeomVector3Semantics<AngularMotionVector3Semantics>
     {
     public:
         /**
@@ -41,6 +41,8 @@ namespace iDynTree
     class AngularMotionVector3: public MotionVector3<AngularMotionVector3, AngularMotionAssociationsT, AngularMotionVector3Semantics>
     {
     public:
+        typedef AngularMotionVector3Semantics SemanticsType;
+        
         /**
          * constructors
          */

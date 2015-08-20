@@ -75,6 +75,7 @@ Transform::Transform(const Rotation& _rot, const Position& origin): pos(origin),
                                                                     rot(_rot),
                                                                     semantics(pos.getSemantics(), rot.getSemantics())
 {
+    this->semantics.check_position2rotationConsistency(pos.getSemantics(), rot.getSemantics());
 }
 
 Transform::Transform(const Transform& other): pos(other.getPosition()),

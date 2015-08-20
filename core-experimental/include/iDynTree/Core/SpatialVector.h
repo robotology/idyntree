@@ -10,6 +10,9 @@
 
 #include "Position.h"
 #include "Rotation.h"
+#include "Utils.h"
+#include <iostream>
+#include <sstream>
 
 namespace iDynTree
 {
@@ -18,6 +21,37 @@ namespace iDynTree
     class Position;
     class Rotation;
 
+#define SPATIALVECTORSEMANTICS_TEMPLATE_HDR \
+template <typename LinearVec3SemanticsT, typename AngularVec3SemanticsT>
+#define SPATIALVECTORSEMANTICS_INSTANCE_HDR \
+SpatialVectorSemantics<LinearVec3SemanticsT, AngularVec3SemanticsT>
+
+    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
+    class SpatialVectorSemantics
+    {
+    protected:
+        int test;
+        LinearVec3SemanticsT & linearVec3Semantics;
+        AngularVec3SemanticsT & angularVec3Semantics;
+        
+    public:
+        /**
+         * constructors
+         */
+        SpatialVectorSemantics(LinearVec3SemanticsT & linearVec3, AngularVec3SemanticsT & angularVec3);
+        
+        virtual ~SpatialVectorSemantics();
+
+        bool check_linear2angularConsistency(const LinearVec3SemanticsT & linearVec3, const AngularVec3SemanticsT & angularVec3);
+
+        /**
+         * copy assignment operator
+         * We redefine this operator because the compiler is unable to generate a default
+         * one, since TransformSemantics is only composed by references.
+         */
+        SpatialVectorSemantics & operator=(const SpatialVectorSemantics & other);
+    };
+    
     /**
      * Helper structure for dual space definition
      */
@@ -42,19 +76,19 @@ namespace iDynTree
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.
      */
-#define CLASS_TEMPLATE_HDR \
-    template <typename DerivedSpatialVecT, typename LinearVector3T, typename AngularVector3T>
-
-#define CLASS_FUNC_HDR \
-    SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
+#define SPATIALVECTOR_TEMPLATE_HDR \
+template <typename DerivedSpatialVecT, typename LinearVector3T, typename AngularVector3T>
     
-    CLASS_TEMPLATE_HDR
+#define SPATIALVECTOR_INSTANCE_HDR \
+SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
+    
+    SPATIALVECTOR_TEMPLATE_HDR
     class SpatialVector
     {
     protected:
         LinearVector3T linearVec3;
         AngularVector3T angularVec3;
-//        SpatialVectorSemantics semantics;
+        SpatialVectorSemantics<typename LinearVector3T::SemanticsType, typename AngularVector3T::SemanticsType> semantics;
 
     public:
         /**
@@ -78,8 +112,8 @@ namespace iDynTree
         /**
          * Geometric operations
          */
-        const DerivedSpatialVecT & changePoint(const Position & newPoint);
-        const DerivedSpatialVecT & changeCoordFrame(const Rotation & newCoordFrame);
+        const DerivedSpatialVecT changePoint(const Position & newPoint);
+        const DerivedSpatialVecT changeCoordFrame(const Rotation & newCoordFrame);
         static DerivedSpatialVecT compose(const DerivedSpatialVecT & op1, const DerivedSpatialVecT & op2);
         static DerivedSpatialVecT inverse(const DerivedSpatialVecT & op);
         
@@ -113,148 +147,203 @@ namespace iDynTree
 
     /**
      *====================================================================================
-     * Method definitions
+     * SpatialVectorSemantics Method definitions
      */
-    
+
+    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
+    SPATIALVECTORSEMANTICS_INSTANCE_HDR::SpatialVectorSemantics(LinearVec3SemanticsT & linearVec3,
+                                                                AngularVec3SemanticsT & angularVec3):
+    linearVec3Semantics(linearVec3),
+    angularVec3Semantics(angularVec3)
+    {
+    }
+
+    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
+    SPATIALVECTORSEMANTICS_INSTANCE_HDR::~SpatialVectorSemantics()
+    {
+    }
+
+    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
+    SPATIALVECTORSEMANTICS_INSTANCE_HDR & SPATIALVECTORSEMANTICS_INSTANCE_HDR::operator=(const SpatialVectorSemantics & other)
+    {
+        return *this;
+    }
+
+    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
+    bool SPATIALVECTORSEMANTICS_INSTANCE_HDR::check_linear2angularConsistency(const LinearVec3SemanticsT & linearVec3,
+                                                                              const AngularVec3SemanticsT & angularVec3)
+    {
+        return (   reportErrorIf(!checkEqualOrUnknown(linearVec3.getBody(), angularVec3.getBody()),
+                                 __PRETTY_FUNCTION__,
+                                 "linear and angular vectors are defined for different bodies\n")
+                && reportErrorIf(!checkEqualOrUnknown(linearVec3.getRefBody(), angularVec3.getRefBody()),
+                                 __PRETTY_FUNCTION__,
+                                 "linear and angular vectors have different reference bodies\n")
+                && reportErrorIf(!checkEqualOrUnknown(linearVec3.getCoordinateFrame(), angularVec3.getCoordinateFrame()),
+                                 __PRETTY_FUNCTION__,
+                                 "linear and angular vectors are expressed in different coordinateFrames\n"));
+    }
+
+    /**
+     *====================================================================================
+     * SpatialVector Method definitions
+     */
+
     // constructors
-    CLASS_TEMPLATE_HDR
-    CLASS_FUNC_HDR::SpatialVector(): linearVec3(),
-                                     angularVec3()
-    {}
+    SPATIALVECTOR_TEMPLATE_HDR
+    SPATIALVECTOR_INSTANCE_HDR::SpatialVector():
+    linearVec3(),
+    angularVec3(),
+    semantics(linearVec3.semantics, angularVec3.semantics)
+    {
+    }
     
-    CLASS_TEMPLATE_HDR
-    CLASS_FUNC_HDR::SpatialVector(const LinearVector3T & _linearVec3,
-                                  const AngularVector3T & _angularVec3): linearVec3(_linearVec3),
-                                                                         angularVec3(_angularVec3)
-    {}
+    SPATIALVECTOR_TEMPLATE_HDR
+    SPATIALVECTOR_INSTANCE_HDR::SpatialVector(const LinearVector3T & _linearVec3,
+                                              const AngularVector3T & _angularVec3):
+    linearVec3(_linearVec3),
+    angularVec3(_angularVec3),
+    semantics(linearVec3.semantics, angularVec3.semantics)
+    {
+    }
     
-    CLASS_TEMPLATE_HDR
-    CLASS_FUNC_HDR::SpatialVector(const SpatialVector & other): linearVec3(this->getLinearVec3()),
-                                                                angularVec3(this->getAngularVec3())
-    {}
+    SPATIALVECTOR_TEMPLATE_HDR
+    SPATIALVECTOR_INSTANCE_HDR::SpatialVector(const SpatialVector & other):
+    linearVec3(other.getLinearVec3()),
+    angularVec3(other.getAngularVec3()),
+    semantics(linearVec3.semantics, angularVec3.semantics)
+    {
+    }
     
-    CLASS_TEMPLATE_HDR
-    CLASS_FUNC_HDR::~SpatialVector()
-    {}
+    SPATIALVECTOR_TEMPLATE_HDR
+    SPATIALVECTOR_INSTANCE_HDR::~SpatialVector()
+    {
+    }
     
     // Accessors, Getters, setters
-    CLASS_TEMPLATE_HDR
-    LinearVector3T & CLASS_FUNC_HDR::getLinearVec3()
+    SPATIALVECTOR_TEMPLATE_HDR
+    LinearVector3T & SPATIALVECTOR_INSTANCE_HDR::getLinearVec3()
     {
         return this->linearVec3;
     }
     
-    CLASS_TEMPLATE_HDR
-    AngularVector3T & CLASS_FUNC_HDR::getAngularVec3()
+    SPATIALVECTOR_TEMPLATE_HDR
+    AngularVector3T & SPATIALVECTOR_INSTANCE_HDR::getAngularVec3()
     {
         return this->angularVec3;
     }
     
-    CLASS_TEMPLATE_HDR
-    const LinearVector3T & CLASS_FUNC_HDR::getLinearVec3() const
+    SPATIALVECTOR_TEMPLATE_HDR
+    const LinearVector3T & SPATIALVECTOR_INSTANCE_HDR::getLinearVec3() const
     {
         return this->linearVec3;
     }
     
-    CLASS_TEMPLATE_HDR
-    const AngularVector3T & CLASS_FUNC_HDR::getAngularVec3() const
+    SPATIALVECTOR_TEMPLATE_HDR
+    const AngularVector3T & SPATIALVECTOR_INSTANCE_HDR::getAngularVec3() const
     {
         return this->angularVec3;
     }
     
-    CLASS_TEMPLATE_HDR
-    void CLASS_FUNC_HDR::setLinearVec3(const LinearVector3T & _linearVec3)
+    SPATIALVECTOR_TEMPLATE_HDR
+    void SPATIALVECTOR_INSTANCE_HDR::setLinearVec3(const LinearVector3T & _linearVec3)
     {
-        this->linearVec3 = _linearVec3;
+        // check semantics
+        iDynTreeAssert(semantics.check_linear2angularConsistency(_linearVec3, angularVec3));
+        // set linear component
+        linearVec3 = _linearVec3;
     }
     
-    CLASS_TEMPLATE_HDR
-    void CLASS_FUNC_HDR::setAngularVec3(const AngularVector3T & _angularVec3)
+    SPATIALVECTOR_TEMPLATE_HDR
+    void SPATIALVECTOR_INSTANCE_HDR::setAngularVec3(const AngularVector3T & _angularVec3)
     {
-        this->angularVec3 = _angularVec3;
+        // check semantics
+        iDynTreeAssert(semantics.check_linear2angularConsistency(linearVec3, _angularVec3));
+        // set angular component
+        angularVec3 = _angularVec3;
     }
 
     // Geometric operations
-    CLASS_TEMPLATE_HDR
-    const DerivedSpatialVecT & CLASS_FUNC_HDR::changePoint(const Position & newPoint)
+    SPATIALVECTOR_TEMPLATE_HDR
+    const DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::changePoint(const Position & newPoint)
     {
         return newPoint.changePointOf(*this);
     }
 
-    CLASS_TEMPLATE_HDR
-    const DerivedSpatialVecT & CLASS_FUNC_HDR::changeCoordFrame(const Rotation & newCoordFrame)
+    SPATIALVECTOR_TEMPLATE_HDR
+    const DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::changeCoordFrame(const Rotation & newCoordFrame)
     {
         return newCoordFrame.changeCoordFrameOf(*this);
     }
     
-    CLASS_TEMPLATE_HDR
-    DerivedSpatialVecT CLASS_FUNC_HDR::compose(const DerivedSpatialVecT & op1, const DerivedSpatialVecT & op2)
+    SPATIALVECTOR_TEMPLATE_HDR
+    DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::compose(const DerivedSpatialVecT & op1, const DerivedSpatialVecT & op2)
     {
         return DerivedSpatialVecT(op1.getLinearVec3()+op2.getLinearVec3(),
                                   op1.getAngularVec3()+op2.getAngularVec3());
     }
     
-    CLASS_TEMPLATE_HDR
-    DerivedSpatialVecT CLASS_FUNC_HDR::inverse(const DerivedSpatialVecT & op)
+    SPATIALVECTOR_TEMPLATE_HDR
+    DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::inverse(const DerivedSpatialVecT & op)
     {
         return DerivedSpatialVecT(-op.getLinearVec3(),
                                   -op.getAngularVec3());
     }
     
     // dot product
-    CLASS_TEMPLATE_HDR
-    double CLASS_FUNC_HDR::dot(const typename DualSpace<DerivedSpatialVecT>::Type & other) const
+    SPATIALVECTOR_TEMPLATE_HDR
+    double SPATIALVECTOR_INSTANCE_HDR::dot(const typename DualSpace<DerivedSpatialVecT>::Type & other) const
     {
         return (this->getLinearVec3().dot(other.getLinearVec3())
              + this->getAngularVec3().dot(other.getAngularVec3()));
     }
     
     // overloaded operators
-    CLASS_TEMPLATE_HDR
-    DerivedSpatialVecT CLASS_FUNC_HDR::operator+(const DerivedSpatialVecT &other) const
+    SPATIALVECTOR_TEMPLATE_HDR
+    DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::operator+(const DerivedSpatialVecT &other) const
     {
         return compose(*this, other);
     }
     
-    CLASS_TEMPLATE_HDR
-    DerivedSpatialVecT CLASS_FUNC_HDR::operator-(const DerivedSpatialVecT &other) const
+    SPATIALVECTOR_TEMPLATE_HDR
+    DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::operator-(const DerivedSpatialVecT &other) const
     {
         return compose(*this, inverse(other));
     }
     
-    CLASS_TEMPLATE_HDR
-    DerivedSpatialVecT CLASS_FUNC_HDR::operator-() const
+    SPATIALVECTOR_TEMPLATE_HDR
+    DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::operator-() const
     {
         return inverse(*this);
     }
 
     // constructor helpers
-    CLASS_TEMPLATE_HDR
-    DerivedSpatialVecT CLASS_FUNC_HDR::Zero()
+    SPATIALVECTOR_TEMPLATE_HDR
+    DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::Zero()
     {
         return DerivedSpatialVecT();
     }
 
-    CLASS_TEMPLATE_HDR
-    std::string CLASS_FUNC_HDR::toString() const
+    SPATIALVECTOR_TEMPLATE_HDR
+    std::string SPATIALVECTOR_INSTANCE_HDR::toString() const
     {
         std::stringstream ss;
         
         ss << linearVec3.toString() << " "
         << angularVec3.toString() << " "
-        << /*semantics.toString() <<*/ std::endl;
+        << semantics.toString() << std::endl;
         
         return ss.str();
     }
 
-    CLASS_TEMPLATE_HDR
-    std::string CLASS_FUNC_HDR::reservedToString() const
+    SPATIALVECTOR_TEMPLATE_HDR
+    std::string SPATIALVECTOR_INSTANCE_HDR::reservedToString() const
     {
         return this->toString();
     }
 
-#undef CLASS_TEMPLATE_HDR
-#undef CLASS_FUNC_HDR
+#undef SPATIALVECTOR_TEMPLATE_HDR
+#undef SPATIALVECTOR_INSTANCE_HDR
 }
 
 #endif /* IDYNTREE_SPATIAL_VECTOR_H */

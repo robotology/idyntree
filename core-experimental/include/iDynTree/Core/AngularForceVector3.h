@@ -21,7 +21,7 @@ namespace iDynTree
     /**
      * Class providing the semantics for any angular force vector (torque or angular momentum).
      */
-    class AngularForceVector3Semantics: GeomVector3Semantics<AngularForceVector3Semantics>
+    class AngularForceVector3Semantics: public GeomVector3Semantics<AngularForceVector3Semantics>
     {
     protected:
         int point;
@@ -41,7 +41,7 @@ namespace iDynTree
          */
         bool changePoint(const PositionSemantics & newPoint,
                          const LinearForceVector3Semantics & otherLinear,
-                         AngularForceVector3Semantics & resultAngular);
+                         AngularForceVector3Semantics & resultAngular) const;
     };
     
     
@@ -57,6 +57,8 @@ namespace iDynTree
     class AngularForceVector3: public ForceVector3<AngularForceVector3, AngularForceAssociationsT, AngularForceVector3Semantics>
     {
     public:
+        typedef AngularForceVector3Semantics SemanticsType;
+        
         /**
          * constructors
          */
@@ -68,8 +70,8 @@ namespace iDynTree
         /**
          * Geometric operations
          */
-        const AngularForceVector3 changePoint(const Position & newPoint,
-                                              const LinearForceVector3 & otherLinear);
+        AngularForceVector3 changePoint(const Position & newPoint,
+                                        const LinearForceVector3 & otherLinear) const;
     };
     
     typedef AngularForceVector3 AngMomentum;

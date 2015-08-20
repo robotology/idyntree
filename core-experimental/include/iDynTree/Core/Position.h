@@ -18,6 +18,8 @@ namespace iDynTree
 {
     class Rotation;
     class Twist;
+    class SpatialAcc;
+    class SpatialMomentum;
     class Wrench;
     
     /**
@@ -92,8 +94,10 @@ namespace iDynTree
         static Position compose(const Position & op1, const Position & op2);
         static Position inverse(const Position & op);
         Twist  changePointOf(const Twist & other) const;
+        SpatialAcc      changePointOf(const SpatialAcc & other) const;
+        SpatialMomentum changePointOf(const SpatialMomentum & other) const;
         Wrench changePointOf(const Wrench & other) const;
-        
+
         /**
          * overloaded operators
          */
@@ -101,8 +105,10 @@ namespace iDynTree
         Position operator-(const Position &other) const;
         Position operator-() const;
         Twist    operator*(const Twist    & other) const;
+        SpatialAcc      operator*(const SpatialAcc & other) const;
+        SpatialMomentum operator*(const SpatialMomentum & other) const;
         Wrench   operator*(const Wrench   & other) const;
-        
+
         /** @name Output helpers.
          *  Output helpers.
          */

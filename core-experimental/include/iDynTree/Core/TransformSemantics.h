@@ -26,8 +26,10 @@ namespace iDynTree
     private:
         /**
          * copy assignment operator
+         * We redefine this operator because the compiler is unable to generate a default
+         * one, since TransformSemantics is only composed by references.
          */
-        TransformSemantics & operator= (const TransformSemantics & other);
+        TransformSemantics & operator=(const TransformSemantics & other);
         
     protected:
         PositionSemantics & positionSemantics;
@@ -37,7 +39,7 @@ namespace iDynTree
         
     public:
         /**
-         * Default constructor: initialize all semantics from a Transform object (create links)
+         * Constructor: initialize all semantics from a Transform object (create links)
          */
         TransformSemantics(PositionSemantics & position, RotationSemantics & rotation);
 
