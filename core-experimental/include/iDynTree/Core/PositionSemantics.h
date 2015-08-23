@@ -22,7 +22,9 @@ namespace iDynTree
     {
     protected:
         int point;
+        int body;
         int refPoint;
+        int refBody;
         int coordinateFrame;
 
         /**
@@ -48,7 +50,7 @@ namespace iDynTree
          * Constructor for initializing semantics
          *
          */
-        PositionSemantics(int _point, int _refPoint, int _coordinateFrame);
+        PositionSemantics(int _point, int _body, int _refPoint, int _refBody, int _coordinateFrame);
 
         /**
          * Copy constructor: create a PositionSemantics from another PositionSemantics
@@ -60,18 +62,22 @@ namespace iDynTree
          */
         ~PositionSemantics();
 
-         /**
-          * @name Semantics setters and getters.
-          *  Semantics setters and getters.
-          */
-         ///@{
-         int getPoint() const;
-         int getReferencePoint() const;
-         int getCoordinateFrame() const;
-
-         void setPoint(int _point);
-         void setReferencePoint(int _referencePoint);
-         void setCoordinateFrame(int _coordinateFrame);
+        /**
+         * @name Semantics setters and getters.
+         *  Semantics setters and getters.
+         */
+        ///@{
+        int getPoint() const;
+        int getBody() const;
+        int getReferencePoint() const;
+        int getRefBody() const;
+        int getCoordinateFrame() const;
+        
+        void setPoint(int _point);
+        void setBody(int _body);
+        void setReferencePoint(int _referencePoint);
+        void setRefBody(int _refBody);
+        void setCoordinateFrame(int _coordinateFrame);
         ///@}
 
         /**

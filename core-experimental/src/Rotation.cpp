@@ -92,6 +92,11 @@ namespace iDynTree
         return *this;
     }
 
+    const Rotation& Rotation::changeCoordinateFrame(const Rotation& newCoordinateFrame)
+    {
+        return this->changeRefOrientFrame(newCoordinateFrame);
+    }
+    
     Rotation Rotation::compose(const Rotation& op1, const Rotation& op2)
     {
         RotationSemantics resultSemantics;

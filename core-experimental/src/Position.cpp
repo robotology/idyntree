@@ -23,16 +23,16 @@ namespace iDynTree
      */
     
     template <class SpatialMotionForceVectorT>
-    static SpatialMotionForceVectorT changeCoordFrameOfMotionT(const Position & pos,
-                                                               const SpatialMotionForceVectorT & other)
+    static SpatialMotionForceVectorT changePointOfMotionT(const Position & pos,
+                                                          const SpatialMotionForceVectorT & other)
     {
         return SpatialMotionForceVectorT(other.getLinearVec3().changePoint(pos, other.getAngularVec3()),
                                          other.getAngularVec3());
     }
     
     template <class SpatialMotionForceVectorT>
-    static SpatialMotionForceVectorT changeCoordFrameOfForceT(const Position & pos,
-                                                              const SpatialMotionForceVectorT & other)
+    static SpatialMotionForceVectorT changePointOfForceT(const Position & pos,
+                                                         const SpatialMotionForceVectorT & other)
     {
         return SpatialMotionForceVectorT(other.getLinearVec3(),
                                          other.getAngularVec3().changePoint(pos, other.getLinearVec3()));
@@ -120,22 +120,22 @@ namespace iDynTree
 
     Twist Position::changePointOf(const Twist & other) const
     {
-        return changeCoordFrameOfMotionT<Twist>(*this, other);
+        return changePointOfMotionT<Twist>(*this, other);
     }
     
     SpatialAcc Position::changePointOf(const SpatialAcc & other) const
     {
-        return changeCoordFrameOfMotionT<SpatialAcc>(*this, other);
+        return changePointOfMotionT<SpatialAcc>(*this, other);
     }
 
     SpatialMomentum Position::changePointOf(const SpatialMomentum & other) const
     {
-        return changeCoordFrameOfForceT<SpatialMomentum>(*this, other);
+        return changePointOfForceT<SpatialMomentum>(*this, other);
     }
     
     Wrench Position::changePointOf(const Wrench & other) const
     {
-        return changeCoordFrameOfForceT<Wrench>(*this, other);
+        return changePointOfForceT<Wrench>(*this, other);
     }
     
     // overloaded operators
@@ -156,22 +156,22 @@ namespace iDynTree
     
     Twist Position::operator*(const Twist& other) const
     {
-        return changeCoordFrameOfMotionT<Twist>(*this, other);
+        return changePointOfMotionT<Twist>(*this, other);
     }
     
     SpatialAcc Position::operator*(const SpatialAcc& other) const
     {
-        return changeCoordFrameOfMotionT<SpatialAcc>(*this, other);
+        return changePointOfMotionT<SpatialAcc>(*this, other);
     }
     
     SpatialMomentum Position::operator*(const SpatialMomentum& other) const
     {
-        return changeCoordFrameOfForceT<SpatialMomentum>(*this, other);
+        return changePointOfForceT<SpatialMomentum>(*this, other);
     }
     
     Wrench Position::operator*(const Wrench& other) const
     {
-        return changeCoordFrameOfForceT<Wrench>(*this, other);
+        return changePointOfForceT<Wrench>(*this, other);
     }
     
     std::string Position::toString() const
