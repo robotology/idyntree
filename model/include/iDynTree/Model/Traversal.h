@@ -8,6 +8,8 @@
 #ifndef IDYNTREE_TRAVERSAL_H
 #define IDYNTREE_TRAVERSAL_H
 
+#include <vector>
+
 namespace iDynTree
 {
     class IJoint;
@@ -38,6 +40,16 @@ namespace iDynTree
         std::vector<Link   *> links;
         std::vector<Link   *> parents;
         std::vector<IJoint *> toParentJoints;
+
+        /**
+         * Copy constructor is forbidden
+         */
+        Traversal(const Traversal & other);
+
+        /**
+         * Copy operator is forbidden
+         */
+        Traversal& operator=(const Traversal &other);
 
     public:
         Traversal();
@@ -78,7 +90,7 @@ namespace iDynTree
          *
          * After a call to reset, all the pointers in the Traversal are set
          * to 0, and the Traversal should be approprialy populated with the
-         * setters before use. 
+         * setters before use.
          *
          * @return true if all went well, false otherwise
          */
@@ -88,20 +100,9 @@ namespace iDynTree
          *
          * @return true if all went well, false otherwise
          */
-        bool setLink(unsigned int traversalIndex, Link * link);
+        bool setTraversalElement(unsigned int traversalIndex, Link * link, IJoint * jointToParent, Link * parentLink);
 
-        /**
-         *
-         * @return true if all went well, false otherwise
-         */
-        bool setParentLink(unsigned int traversalIndex, Link * link) const;
-
-        /**
-         *
-         * @return true if all went well, false otherwise
-         */
-        bool setParentJoint(unsigned int traversalIndex, IJoint * joint) const;
-    }
+    };
 
 
 }

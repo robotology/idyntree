@@ -53,6 +53,28 @@ SpatialInertiaRaw::~SpatialInertiaRaw()
 
 }
 
+void SpatialInertiaRaw::fromRotationalInertiaWrtCenterOfMass(const double mass,
+                                                        const PositionRaw& com,
+                                                        const RotationalInertiaRaw& rotInertiaWrtCom)
+{
+    this->m_mass = mass;
+
+    for(int i = 0; i < 3; i++ )
+    {
+        this->m_mcom[i] = this->m_mass*com(i);
+    }
+
+    // Here we need to compute the rotational inertia at the com
+    // given the one expressed at the frame origin
+    // we apply formula 2.63 in Featherstone 2008
+    Eigen::Map<Eigen::Matrix3d> linkInertia(this->m_rotInertia.data());
+    Eigen::Map<const Eigen::Matrix3d> comInertia(rotInertiaWrtCom.data());
+    Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
+
+    linkInertia = comInertia - squareCrossProductMatrix(mcom)/this->m_mass;
+}
+
+
 double SpatialInertiaRaw::getMass() const
 {
     return this->m_mass;

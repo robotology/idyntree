@@ -18,6 +18,8 @@
 namespace iDynTree
 {
     class Transform;
+    class Twist;
+    class SpatialAcc;
     /**
      * Class representing an axis (a directed line) in space.
      *
@@ -88,7 +90,11 @@ namespace iDynTree
          * non-rotated frame using the returned transform:
          * v_nonRotated = nonRotated_T_rotated*v_rotated
          */
-        Transform getRotationTransform(const double theta);
+        Transform getRotationTransform(const double theta) const;
+
+        Twist getRotationTwist(const double dtheta) const;
+
+        SpatialAcc getRotationSpatialAcc(const double d2theta) const;
 
         /**
          * @name Output helpers.

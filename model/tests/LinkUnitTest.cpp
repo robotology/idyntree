@@ -30,5 +30,15 @@ int main()
 
     ASSERT_EQUAL_MATRIX(settedInertia.asMatrix(),gettedInertia.asMatrix());
 
+    Link copyConstructedLink(link);
+
+    ASSERT_EQUAL_MATRIX(link.getInertia().asMatrix(),copyConstructedLink.getInertia().asMatrix());
+
+    Link copiedLink;
+
+    copiedLink = link;
+
+    ASSERT_EQUAL_MATRIX(link.getInertia().asMatrix(),copiedLink.getInertia().asMatrix());
+
     return EXIT_SUCCESS;
 }

@@ -9,6 +9,7 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Core/Twist.h>
 
 #include <cstdio>
 #include <cstdlib>
@@ -37,6 +38,19 @@ void validateRotationAroundZAxis(Axis & ax, double theta)
     assertTransformsAreEqual(notRotated_H_rotated,notRotated_H_rotated_validation);
 }
 
+void validateInvarianceOfTwist(const Axis & ax, const Transform & trans, double dtheta)
+{
+    Twist t = ax.getRotationTwist(dtheta);
+
+    Twist t_trans = trans*t;
+
+    Twist t_trans_check = (trans*ax).getRotationTwist(dtheta);
+
+    ASSERT_EQUAL_VECTOR(t_trans,t_trans_check);
+}
+
+
+
 
 int main()
 {
@@ -62,7 +76,7 @@ int main()
     Axis axRot;
 
     Direction dirRot(0,0,1);
-    Position  originRot(3,2,1);
+    Position  originRot(1,0,0);
 
     axRot.setDirection(dirRot);
     axRot.setOrigin(originRot);
@@ -71,6 +85,10 @@ int main()
     validateRotationAroundArbitraryAxis(ax,2.0);
     printf("Validate rotation around Z axis\n");
     validateRotationAroundZAxis(axRot,4.0);
+    printf("Validate invariance of twist of rotation around this axis");
+    validateInvarianceOfTwist(ax,trans,1.0);
+    validateInvarianceOfTwist(axRot,trans,1.0);
+
 
     return EXIT_SUCCESS;
 }

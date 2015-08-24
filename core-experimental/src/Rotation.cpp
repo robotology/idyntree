@@ -12,6 +12,7 @@
 #include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/RotationalInertiaRaw.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialMomentum.h>
@@ -174,6 +175,16 @@ namespace iDynTree
         return result;
     }
 
+    RotationalInertiaRaw Rotation::changeCoordFrameOf(const RotationalInertiaRaw &other) const
+    {
+        RotationalInertiaRaw result;
+
+        // \todo TODO add semantics to SpatialMomentum
+        result = RotationRaw::changeCoordFrameOf(other);
+
+        return result;
+    }
+
     Rotation Rotation::inverse() const
     {
         return inverse2(*this);
@@ -220,6 +231,11 @@ namespace iDynTree
     }
 
     SpatialMomentum Rotation::operator*(const SpatialMomentum& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    RotationalInertiaRaw Rotation::operator*(const RotationalInertiaRaw& other) const
     {
         return changeCoordFrameOf(other);
     }

@@ -54,10 +54,16 @@ namespace iDynTree
         virtual unsigned int getNrOfDOFs() const;
 
         // Documentation inherited
-        virtual void setAttachedLinks(LinkIndex link1, LinkIndex link2);
+        virtual void setAttachedLinks(const LinkIndex link1, const LinkIndex link2);
 
         // Documentation inherited
         virtual void setRestTransform(const Transform& link1_X_link2);
+
+        // Documentation inherited
+        virtual LinkIndex getFirstAttachedLink() const;
+
+        // Documentation inherited
+        virtual LinkIndex getSecondAttachedLink() const;
 
         // Documentation inherited
         virtual Transform getTransform(const IJointPos & state, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
@@ -72,8 +78,8 @@ namespace iDynTree
 
         // Documentation inherited
         virtual void computeJointTorque(const IJointPos & state, const Wrench & internalWrench,
-                                        LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied,
-                                         IJointTorque & outputTorque) const;
+                                        const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
+                                        IJointTorque & outputTorque) const;
     };
 }
 

@@ -48,6 +48,14 @@ namespace iDynTree
         SpatialInertiaRaw(const SpatialInertiaRaw & other);
         virtual ~SpatialInertiaRaw();
 
+        /**
+         * Helper constructor-like function that takes mass, center of mass
+         * and the rotational inertia expressed in the center of mass.
+         *
+         */
+        void fromRotationalInertiaWrtCenterOfMass(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
+
+
         /** multiplication operator
          *
          * overloading happens on proper classes

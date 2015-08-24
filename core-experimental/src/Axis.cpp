@@ -7,11 +7,14 @@
 
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/SpatialAcc.h>
+
+#include <Eigen/Dense>
 
 #include <cmath>
 #include <cstdio>
 #include <sstream>
-#include <boost/iterator/iterator_concepts.hpp>
 
 namespace iDynTree
 {
@@ -64,7 +67,7 @@ namespace iDynTree
         origin    = Position();
     }
 
-    Transform Axis::getRotationTransform(const double theta)
+    Transform Axis::getRotationTransform(const double theta) const
     {
         // Formula for rotation around and arbitrary axis given by
         // http://inside.mines.edu/fs_home/gmurray/ArbitraryAxisRotation/
@@ -99,6 +102,37 @@ namespace iDynTree
         return nonRotated_T_rotated;
     }
 
+    Twist Axis::getRotationTwist(const double dtheta) const
+    {
+        Twist ret;
+
+        Eigen::Map<Eigen::Vector3d> linVel(ret.data());
+        Eigen::Map<Eigen::Vector3d> angVel(ret.data()+3);
+
+        Eigen::Map<const Eigen::Vector3d> dir(direction.data());
+        Eigen::Map<const Eigen::Vector3d> orig(origin.data());
+
+        linVel = dtheta*(orig.cross(dir));
+        angVel = dir*dtheta;
+
+        return ret;
+    }
+
+    SpatialAcc Axis::getRotationSpatialAcc(const double d2theta) const
+    {
+        SpatialAcc ret;
+
+        Eigen::Map<Eigen::Vector3d> lin(ret.data());
+        Eigen::Map<Eigen::Vector3d> ang(ret.data()+3);
+
+        Eigen::Map<const Eigen::Vector3d> dir(direction.data());
+        Eigen::Map<const Eigen::Vector3d> orig(origin.data());
+
+        lin = d2theta*(orig.cross(dir));
+        ang = dir*d2theta;
+
+        return ret;
+    }
 
     std::string Axis::toString() const
     {

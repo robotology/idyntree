@@ -25,6 +25,7 @@ namespace iDynTree
     class Link
     {
     private:
+        LinkIndex m_index;
         SpatialInertia m_inertia;
 
     public:
@@ -60,9 +61,20 @@ namespace iDynTree
          * @return a reference to the inertia of the link.
          */
         virtual const SpatialInertia & getInertia() const;
+
+        /**
+         * Set the index of the link.
+         */
+        virtual void setIndex(LinkIndex & _index);
+
+        /**
+         * Get the index of the link.
+         */
+        virtual LinkIndex getIndex() const;
     };
 
-
+    typedef Link * LinkPtr;
+    typedef const Link * LinkConstPtr;
 }
 
 #endif /* IDYNTREE_LINK_H */

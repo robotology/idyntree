@@ -8,6 +8,7 @@
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/RotationRaw.h>
 #include <iDynTree/Core/PositionRaw.h>
+#include <iDynTree/Core/RotationalInertiaRaw.h>
 #include <iDynTree/Core/SpatialMotionVectorRaw.h>
 #include <iDynTree/Core/SpatialForceVectorRaw.h>
 #include <iDynTree/Core/Utils.h>
@@ -163,6 +164,21 @@ namespace iDynTree
 
         res.segment<3>(3) =  op1Rot*(op2Wrench.segment<3>(3));
         res.segment<3>(0) =  op1Rot*(op2Wrench.segment<3>(0));
+
+        return result;
+    }
+
+    RotationalInertiaRaw RotationRaw::changeCoordFrameOf(const RotationalInertiaRaw& other) const
+    {
+        RotationalInertiaRaw result;
+
+        Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
+        Eigen::Map<const Matrix3dRowMajor> op2Inertia3d(other.data());
+
+
+        Eigen::Map<Matrix3dRowMajor> resInertia3d(result.data());
+
+        resInertia3d = op1Rot*op2Inertia3d*op1Rot.transpose();
 
         return result;
     }

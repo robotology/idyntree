@@ -9,3 +9,4 @@ macro(add_unit_test classname)
 endmacro()
 
 add_unit_test(Link)
+add_unit_test(Model)

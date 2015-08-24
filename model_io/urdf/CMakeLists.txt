@@ -21,7 +21,8 @@ if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC)
 
-set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS include/iDynTree/ModelIO/URDFSensorsImport.h)
+set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS include/iDynTree/ModelIO/URDFSensorsImport.h
+                                          include/iDyntree/ModelIO/URDFModelImport.h)
 
 set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS
                                   include/iDynTree/ModelIO/impl/urdf_compatibility.h
@@ -33,7 +34,8 @@ set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS
 set(IDYNTREE_MODELIO_URDF_SOURCES src/urdf_export.cpp
                                   src/urdf_import.cpp
                                   src/urdf_sensor_import.cpp
-                                  src/URDFSensorsImport.cpp)
+                                  src/URDFSensorsImport.cpp
+                                  src/URDFModelImport.cpp)
 
 source_group("Source Files" FILES ${IDYNTREE_MODELIO_URDF_SOURCES})
 source_group("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})
@@ -60,6 +62,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOUR
                                                  ${orocos_kdl_INCLUDE_DIRS})
 
 target_link_libraries(${libraryname} idyntree-core
+                                     idyntree-model
                                      idyntree-sensors
                                      ${orocos_kdl_LIBRARIES}
                                      ${urdfdom_LIBRARIES}

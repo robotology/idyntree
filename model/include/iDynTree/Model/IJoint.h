@@ -82,7 +82,7 @@ namespace iDynTree
 
         /**
          * @name Methods to set joint
-         *  Activate, set and get constraints on joint values
+         * Methods to set joint informations (used when building a model)
          */
         //@{
 
@@ -91,7 +91,7 @@ namespace iDynTree
          * @param link1 is the first link
          * @param link2 is the second link
          */
-        virtual void setAttachedLinks(LinkIndex link1, LinkIndex link2) = 0;
+        virtual void setAttachedLinks(const LinkIndex link1, const LinkIndex link2) = 0;
 
         /**
          * Set the transform between the link2 frame and link1 frame at joint position 0
@@ -105,6 +105,16 @@ namespace iDynTree
         virtual void setRestTransform(const Transform& link1_X_link2) = 0;
 
         //@}
+
+        /**
+         * Get the first link attached to the joint.
+         */
+        virtual LinkIndex getFirstAttachedLink() const = 0;
+
+        /**
+         * Get the second link attached to the joint.
+         */
+        virtual LinkIndex getSecondAttachedLink() const = 0;
 
         /**
          * Get the transform between the linkB and the linkA, such that:
@@ -146,6 +156,9 @@ namespace iDynTree
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
                                         IJointTorque & outputTorque) const = 0;
     };
+
+    typedef IJoint * IJointPtr;
+    typedef const IJoint * IJointConstPtr;
 
 
 }

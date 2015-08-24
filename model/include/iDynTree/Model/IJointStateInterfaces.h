@@ -33,6 +33,11 @@ namespace iDynTree
         virtual IRawVector& pos() = 0;
 
         /**
+         * Const accessor to the joint positions.
+         */
+        virtual const IRawVector& pos() const = 0;
+
+        /**
          * Get the number of coordinates used to represent
          * the position of the joint.
          *
@@ -66,6 +71,11 @@ namespace iDynTree
         virtual IRawVector& vel() = 0;
 
         /**
+         * Const accessor to the joint velocities.
+         */
+        virtual const IRawVector& vel() const = 0;
+
+        /**
          * Get the number of degrees of freedom of the joint.
          *
          * This should be a number between 0 (fixed joint) and 6 (free joint).
@@ -95,6 +105,11 @@ namespace iDynTree
          * Accessor to the joint accelerations.
          */
         virtual IRawVector& acc() = 0;
+
+        /**
+         * Accessor to the joint accelerations.
+         */
+        virtual const IRawVector& acc() const = 0;
     };
 
     /**

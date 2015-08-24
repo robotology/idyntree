@@ -26,6 +26,14 @@ void assertDoubleAreEqual(const double& val1, const double& val2, double tol, st
     }
 }
 
+void printVector(std::string name, const IVector& vec)
+{
+    std::cerr << name << " : \n";
+    for(int i=0; i < vec.size(); i++ )
+    {
+        std::cerr << vec(i) << "\n";
+    }
+}
 
 void assertVectorAreEqual(const IVector& vec1, const IVector& vec2, double tol, std::string file, int line)
 {
@@ -42,6 +50,8 @@ void assertVectorAreEqual(const IVector& vec1, const IVector& vec2, double tol, 
         {
             std::cerr << file << ":" << line << " : assertVectorAreEqual failure: element " << i << " of vec1 is " << vec1(i)
                   << " while of vec2 is " << vec2(i) << std::endl;
+            printVector("vec1",vec1);
+            printVector("vec2",vec2);
             exit(EXIT_FAILURE);
         }
     }

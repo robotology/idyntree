@@ -1,9 +1,11 @@
 
 /* File : iDynTree.i */
 %module iDynTree
+
 %include "std_string.i"
 
-// Support print to terminal
+// Ignore some methods to avoid warnings
+%include "./ignore.i"
 
 // Python
 #ifdef SWIGPYTHON
@@ -50,6 +52,21 @@
 #include "iDynTree/Core/Rotation.h"
 #include "iDynTree/Core/TransformSemantics.h"
 #include "iDynTree/Core/Transform.h"
+
+// Model related data structures
+#include "iDynTree/Model/Indeces.h"
+#include "iDynTree/Model/LinkState.h"
+#include "iDynTree/Model/IJointStateInterfaces.h"
+#include "iDynTree/Model/Link.h"
+#include "iDynTree/Model/IJoint.h"
+#include "iDynTree/Model/FixedJoint.h"
+#include "iDynTree/Model/MovableJointImpl.h"
+#include "iDynTree/Model/RevoluteJoint.h"
+#include "iDynTree/Model/Traversal.h"
+#include "iDynTree/Model/Model.h"
+
+// Model loading from external formats
+#include "iDynTree/ModelIO/URDFModelImport.h"
 
 // Sensors related data structures
 #include "iDynTree/Sensors/Sensors.hpp"
@@ -116,6 +133,29 @@
 %include "iDynTree/Core/Rotation.h"
 %include "iDynTree/Core/TransformSemantics.h"
 %include "iDynTree/Core/Transform.h"
+
+// Model related data structures
+%include "iDynTree/Model/Indeces.h"
+%include "iDynTree/Model/LinkState.h"
+%include "iDynTree/Model/IJointStateInterfaces.h"
+%include "iDynTree/Model/Link.h"
+%include "iDynTree/Model/IJoint.h"
+%include "iDynTree/Model/FixedJoint.h"
+%include "iDynTree/Model/MovableJointImpl.h"
+
+%template(MovableJointImpl1) iDynTree::MovableJointImpl<1,1>;
+%template(MovableJointImpl2) iDynTree::MovableJointImpl<2,2>;
+%template(MovableJointImpl3) iDynTree::MovableJointImpl<3,3>;
+%template(MovableJointImpl4) iDynTree::MovableJointImpl<4,4>;
+%template(MovableJointImpl5) iDynTree::MovableJointImpl<5,5>;
+%template(MovableJointImpl6) iDynTree::MovableJointImpl<6,6>;
+
+%include "iDynTree/Model/RevoluteJoint.h"
+%include "iDynTree/Model/Traversal.h"
+%include "iDynTree/Model/Model.h"
+
+// Model loading from external formats
+%include "iDynTree/ModelIO/URDFModelImport.h"
 
 // Sensors related data structures
 %include "iDynTree/Sensors/Sensors.hpp"

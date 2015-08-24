@@ -40,7 +40,7 @@ IJoint * FixedJoint::clone() const
     return (IJoint *) new FixedJoint(*this);
 }
 
-void FixedJoint::setAttachedLinks(LinkIndex _link1, LinkIndex _link2)
+void FixedJoint::setAttachedLinks(const LinkIndex _link1, const LinkIndex _link2)
 {
     link1 = _link1;
     link2 = _link2;
@@ -62,7 +62,19 @@ unsigned int FixedJoint::getNrOfDOFs() const
     return 0;
 }
 
-Transform FixedJoint::getTransform(const IJointPos& state, const int p_linkA, const int p_linkB) const
+LinkIndex FixedJoint::getFirstAttachedLink() const
+{
+    return link1;
+}
+
+LinkIndex FixedJoint::getSecondAttachedLink() const
+{
+    return link2;
+}
+
+
+
+Transform FixedJoint::getTransform(const IJointPos& state, const LinkIndex p_linkA, const LinkIndex p_linkB) const
 {
     if( p_linkA == this->link1 )
     {

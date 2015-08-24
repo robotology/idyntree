@@ -22,6 +22,7 @@ namespace iDynTree
     class SpatialAcc;
     class SpatialMomentum;
     class ClassicalAcc;
+    class RotationalInertiaRaw;
 
     /**
      * Class representation the rotation of an orientation frame
@@ -109,6 +110,7 @@ namespace iDynTree
         SpatialAcc  changeCoordFrameOf(const SpatialAcc & other) const;
         SpatialMomentum changeCoordFrameOf(const SpatialMomentum & other) const;
         ClassicalAcc changeCoordFrameOf(const ClassicalAcc & other) const;
+        RotationalInertiaRaw changeCoordFrameOf(const RotationalInertiaRaw & other) const;
 
 
         /**
@@ -124,6 +126,7 @@ namespace iDynTree
         SpatialAcc      operator*(const SpatialAcc    & other) const;
         SpatialMomentum operator*(const SpatialMomentum   & other) const;
         ClassicalAcc    operator*(const ClassicalAcc    & other) const;
+        RotationalInertiaRaw    operator*(const RotationalInertiaRaw    & other) const;
 
         /**
          * @name Initialization helpers.

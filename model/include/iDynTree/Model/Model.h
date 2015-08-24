@@ -8,6 +8,7 @@
 #ifndef IDYNTREE_MODEL_H
 #define IDYNTREE_MODEL_H
 
+#include <iDynTree/Model/IJoint.h>
 #include <iDynTree/Model/Link.h>
 
 #include <iDynTree/Model/Indeces.h>
@@ -16,7 +17,13 @@
 
 namespace iDynTree
 {
-    class IJoint;
+    class Traversal;
+
+    struct Neighbor
+    {
+        LinkPtr neighborLink;
+        IJointPtr neighborJoint;
+    };
 
     /**
      * Class that represents a generic multibody model.
@@ -31,7 +38,7 @@ namespace iDynTree
         std::vector<Link> links;
 
         /** Vector of joints. For each joint its index indicates its location in this vector */
-        std::vector<IJoint *> joints;
+        std::vector<IJointPtr> joints;
 
         /** Vector of link names, matches the index of each link to its name. */
         std::vector<std::string> linkNames;
@@ -39,17 +46,42 @@ namespace iDynTree
         /** Vector of joint names, matches the index of each joint to its name. */
         std::vector<std::string> jointNames;
 
-        struct neighbor {
-            Link * link;
-            IJoint * joint;
-        };
-
         /** Adjacency lists: match each link index to a list of its neighbors,
             and the joint connecting to them. */
-        std::vector<neighbor> neighbors;
+        std::vector< std::vector<Neighbor> > neighbors;
 
+        /**
+         * Most data structures are not undirected, so we store the original
+         * root of the tree, to provide a default root for Traversal generation.
+         */
+        LinkIndex defaultBaseLink;
+
+        /**
+         * Check if a name is already used for a link in the model.
+         *
+         * @return true if a name is used by a link in a model, false otherwise.
+         */
+        bool isLinkNameUsed(const std::string linkName);
+
+        /**
+         * Check if a name is already used for a joint in the model.
+         *
+         * @return true if a name is used by a joint in a model, false otherwise.
+         */
+        bool isJointNameUsed(const std::string jointName);
+
+        /**
+         * Copy the structure of the model from another instance of a model.
+         */
+        void copy(const Model & model);
+
+        /**
+         * Destroy the object, properly deallocating memory.
+         */
+        void destroy();
 
     public:
+
         /**
          * Costructor
          */
@@ -78,14 +110,14 @@ namespace iDynTree
 
         /**
          * Get the name of a link given its index, or
-         * an empty string if linkIndex < 0 or >= getNrOfLinks()
+         * an LINK_INVALID_NAME string if linkIndex < 0 or >= getNrOfLinks()
          */
         std::string  getLinkName(const LinkIndex linkIndex) const;
 
         LinkIndex getLinkIndex(const std::string & linkName) const;
 
-        Link * getLink(const LinkIndex linkIndex);
-        const Link * getLink(const LinkIndex linkIndex) const;
+        LinkPtr getLink(const LinkIndex linkIndex);
+        LinkConstPtr getLink(const LinkIndex linkIndex) const;
 
         LinkIndex addLink(const std::string & name, const Link & link);
 
@@ -96,7 +128,7 @@ namespace iDynTree
 
         /**
          * Get the name of a link given its index, or
-         * an empty string if linkIndex < 0 or >= getNrOfLinks()
+         * an JOINT_INVALID_NAME if linkIndex < 0 or >= getNrOfLinks()
          */
         std::string getJointName(const JointIndex index) const;
 
@@ -108,16 +140,54 @@ namespace iDynTree
          */
         JointIndex getJointIndex(const std::string & jointName) const;
 
-        IJoint * getJoint(const JointIndex index);
+        IJointPtr getJoint(const JointIndex index);
 
-        const IJoint * getJoint(const JointIndex index) const;
+        IJointConstPtr getJoint(const JointIndex index) const;
 
         /**
          *
          * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
          *         there was an error in adding the joint.
          */
-        JointIndex addJoint(std::string & jointName, const IJoint * joint);
+        JointIndex addJoint(const std::string & jointName, IJointConstPtr joint);
+
+        /**
+         * Get the nr of neighbors of a given link.
+         */
+        unsigned int getNrOfNeighbors(const LinkIndex link);
+
+        /**
+         * Get the neighbor of a link. neighborIndex should be
+         * >= 0 and <= getNrOfNeighbors(link)
+         */
+        Neighbor getNeighbor(const LinkIndex link, unsigned int neighborIndex);
+
+        /**
+         * Set the default base link, used for generation of the default traversal.
+         */
+        bool setDefaultBaseLink(const LinkIndex linkIndex);
+
+        /**
+         * Get the default base link, used for generation of the default traversal.
+         */
+        LinkIndex getDefaultBaseLink() const;
+
+        /**
+         * Compute a Traversal of all the links in the Model, doing a Depth First Search starting
+         * at the default base.
+         *
+         * \warning this function works only on Models without cycles
+         */
+        bool computeFullTreeTraversal(Traversal & traversal);
+
+       /**
+         * Compute a Traversal of all the links in the Model, doing a Depth First Search starting
+         * at the given traversalBase.
+         *
+         * \warning this function works only on Models without cycles
+         */
+        bool computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase);
+
     };
 
 

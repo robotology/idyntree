@@ -1,4 +1,4 @@
-set(CMAKE_SWIG_FLAGS "-Wall;-module;iDynTree")
+set(CMAKE_SWIG_FLAGS "-Wextra;-module;iDynTree")
 find_package(Lua51 REQUIRED)
 set(target_name iDynTree_lua)
 include_directories(${LUA_INCLUDE_DIR})
