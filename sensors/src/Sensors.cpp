@@ -239,7 +239,7 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type, const un
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
-        if( sensor_index >= 0 && sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
+        if( sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
         {
             this->pimpl->SixAxisFTSensorsMeasurements[sensor_index] = wrench;
             return true;
@@ -260,7 +260,7 @@ bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type, const un
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
-        if( sensor_index >= 0 && sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
+        if( sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
         {
             wrench = this->pimpl->SixAxisFTSensorsMeasurements[sensor_index];
             return true;

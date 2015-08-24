@@ -140,6 +140,8 @@ namespace iDynTree
 
         ss << "Direction: " << direction.toString()
            << " Origin: "   << origin.toString() << std::endl;
+
+        return ss.str();
     }
 
     std::string Axis::reservedToString() const
