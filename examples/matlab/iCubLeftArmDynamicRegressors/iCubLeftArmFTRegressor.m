@@ -43,7 +43,7 @@ outs = regrGen.getNrOfOutputs()
 qj = iDynTree.VectorDynSize(dof);
 dqj = iDynTree.VectorDynSize(dof);
 ddqj = iDynTree.VectorDynSize(dof);
-gravity = iDynTree.Twist();
+gravity = iDynTree.SpatialAcc();
 
 % Currently the smooth conversion between Matlab and iDynTree vector and
 % matrices is still a TODO, so for now we have to rely on the setVal/getVal
@@ -68,12 +68,8 @@ regrGen.getModelParameters(cadParams)
 
 % We want to set the measure for the `l_arm_ft_sensor`
 sensorMeasure = iDynTree.Wrench();
-sensorMeasure.setVal(0,0.0);
-sensorMeasure.setVal(1,0.0);
-sensorMeasure.setVal(2,10.0);
-sensorMeasure.setVal(3,0.4);
-sensorMeasure.setVal(4,0.6);
-sensorMeasure.setVal(5,0.5);
+sensMatlab = (0.0,0.0,10.0,0.4,0.6,0.5);
+sensorMeasure.fromMatlab(sensMatlab);
 
 sensorIndex = ...
     regrGen.getSensorsModel().getSensorIndex(iDynTree.SIX_AXIS_FORCE_TORQUE,'r_arm_ft_sensor');
@@ -94,8 +90,8 @@ display('Identifiable subspace computed.')
 
 % For matrix operation it is better to convert iDynTree matrices in matlab
 % ones
-identifiableSubspacesBasis_m = toMatlab(identifiableSubspacesBasis);
-regressor_m = toMatlab(regressor);
+identifiableSubspacesBasis_m = identifiableSubspacesBasis.toMatlab();
+regressor_m = regressor.toMatlab();
 baseParametersRegressor = regressor_m*identifiableSubspacesBasis_m;
 
 baseParametersRegressor
