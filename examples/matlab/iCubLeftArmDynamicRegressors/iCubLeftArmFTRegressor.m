@@ -68,7 +68,7 @@ regrGen.getModelParameters(cadParams)
 
 % We want to set the measure for the `l_arm_ft_sensor`
 sensorMeasure = iDynTree.Wrench();
-sensMatlab = (0.0,0.0,10.0,0.4,0.6,0.5);
+sensMatlab = [0.0,0.0,10.0,0.4,0.6,0.5];
 sensorMeasure.fromMatlab(sensMatlab);
 
 sensorIndex = ...
