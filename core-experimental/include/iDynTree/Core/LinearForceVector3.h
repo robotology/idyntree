@@ -16,7 +16,7 @@ namespace iDynTree
     /**
      * Class providing the semantics for any angular motion vector (angular velocity or acceleration).
      */
-    class LinearForceVector3Semantics: public GeomVector3Semantics<LinearForceVector3Semantics>
+    class LinearForceVector3Semantics: public ForceVector3Semantics<LinearForceVector3Semantics>
     {
     public:
         /**

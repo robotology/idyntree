@@ -19,12 +19,12 @@ namespace iDynTree
     }
 
     LinearForceVector3Semantics::LinearForceVector3Semantics(int _body, int _refBody, int _coordinateFrame):
-    GeomVector3Semantics<LinearForceVector3Semantics>(_body, _refBody, _coordinateFrame)
+    ForceVector3Semantics<LinearForceVector3Semantics>(_body, _refBody, _coordinateFrame)
     {
     }
 
     LinearForceVector3Semantics::LinearForceVector3Semantics(const LinearForceVector3Semantics & other):
-    GeomVector3Semantics<LinearForceVector3Semantics>(other)
+    ForceVector3Semantics<LinearForceVector3Semantics>(other)
     {
     }
 

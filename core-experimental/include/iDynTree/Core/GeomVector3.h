@@ -53,16 +53,16 @@ namespace iDynTree
         /**
          * Getters, setters & helpers
          */
-        int getBody();
-        int getRefBody();
-        int getCoordinateFrame();
-        bool isUnknown();
+        int getBody() const;
+        int getRefBody() const;
+        int getCoordinateFrame() const;
+        bool isUnknown() const;
         
         /**
          * Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
          */
-        bool changeCoordFrame(const RotationSemantics & newCoordFrame) const;
+        bool changeCoordFrame(const RotationSemantics & newCoordFrame, MotionForceTSemantics & result) const;
         static bool compose(const MotionForceTSemantics & op1, const MotionForceTSemantics & op2, MotionForceTSemantics & result);
         static bool inverse(const MotionForceTSemantics & op, MotionForceTSemantics & result);
 
@@ -162,52 +162,110 @@ namespace iDynTree
 
     // Getters, setters & helpers
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    int GEOMVECTOR3SEMANTICS_INSTANCE_HDR::getBody()
+    int GEOMVECTOR3SEMANTICS_INSTANCE_HDR::getBody() const
     {
         return this->body;
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    int GEOMVECTOR3SEMANTICS_INSTANCE_HDR::getRefBody()
+    int GEOMVECTOR3SEMANTICS_INSTANCE_HDR::getRefBody() const
     {
         return this->refBody;
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    int GEOMVECTOR3SEMANTICS_INSTANCE_HDR::getCoordinateFrame()
+    int GEOMVECTOR3SEMANTICS_INSTANCE_HDR::getCoordinateFrame() const
     {
         return this->coordinateFrame;
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::isUnknown()
+    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::isUnknown() const
     {
         return (this->body == UNKNOWN && this->refBody == UNKNOWN && this->coordinateFrame == UNKNOWN);
     }
     
     // Semantics operations
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::changeCoordFrame(const RotationSemantics & newCoordFrame) const
+    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::changeCoordFrame(const RotationSemantics & newCoordFrame,
+                                                             MotionForceTSemantics & result) const
     {
-        return true;
+        // check semantics
+        bool semantics_status =
+        (   reportErrorIf(!checkEqualOrUnknown(newCoordFrame.getOrientationFrame(),this->coordinateFrame),
+                          __PRETTY_FUNCTION__,
+                          "newCoordFrame orientationFrame is different from current Motion/Force vector's coordinateFrame\n")/*
+         && reportErrorIf(!checkEqualOrUnknown(newCoordFrame.getBody(),this->refBody),
+                          __PRETTY_FUNCTION__,
+                          "newCoordFrame body is different from current Motion/Force vector's reference body\n")
+         && reportErrorIf(!checkEqualOrUnknown(newCoordFrame.getBody(),newCoordFrame.getRefBody()),
+                          __PRETTY_FUNCTION__,
+                          "newCoordFrame body and reference body should be the same\n")*/);
+        
+        // compute semantics
+        //result = *this; won't compile because "this" is compiled as a "GeomVector3Semantics" object.
+        result.body = this->body;
+        result.refBody = this->refBody;
+        result.coordinateFrame = this->coordinateFrame;
+
+        result.refBody = newCoordFrame.getRefBody();
+        result.coordinateFrame = newCoordFrame.getCoordinateFrame();
+        
+        return semantics_status;
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
     bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::compose(const MotionForceTSemantics & op1, const MotionForceTSemantics & op2, MotionForceTSemantics & result)
     {
-        return true;
+        // check semantics
+        bool semantics_status =
+        (   reportErrorIf(!checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame),
+                          __PRETTY_FUNCTION__,
+                          "composing two geometric relations expressed in different coordinateFrames\n")
+         && reportErrorIf(!checkEqualOrUnknown(op1.refBody,op2.body) && (op1.body == op2.refBody),
+                          __PRETTY_FUNCTION__,
+                          "angVelocity(A,C) = compose(angVelocity(B,C),angVelocity(A,B)) is forbidded in iDynTree to avoid ambiguity on compose(angVelocity(B,A),angVelocity(A,B)). Same for other motion or force 3D vectors.\n")
+         && reportErrorIf(!checkEqualOrUnknown(op1.refBody,op2.body),
+                          __PRETTY_FUNCTION__,
+                          "op1 reference body and op2 body don't match\n"));
+
+        // compute semantics;
+        result = op1;
+        result.refBody = op2.refBody;
+        
+        return semantics_status;
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
     bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::inverse(const MotionForceTSemantics & op, MotionForceTSemantics & result)
     {
+        // compute semantics
+        result = op;
+        result.body = op.refBody;
+        result.refBody = op.body;
+        
         return true;
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
     bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::dot(const MotionForceTSemantics & other) const
     {
-        return true;
+        // check semantics
+        bool semantics_status =
+        (   reportErrorIf(!checkEqualOrUnknown(this->coordinateFrame,other.coordinateFrame),
+                          __PRETTY_FUNCTION__,
+                          "multiplying two geometric relations expressed in different coordinateFrames\n")
+         && reportErrorIf(!checkEqualOrUnknown(this->body,other.body),
+                          __PRETTY_FUNCTION__,
+                          "The bodies defined for both operands of the dot product don't match\n")
+         && reportErrorIf(!checkEqualOrUnknown(this->refBody,other.refBody),
+                          __PRETTY_FUNCTION__,
+                          "The reference bodies defined for both operands of the dot product don't match\n"));
+        
+        // compute semantics: the result of dot product is a scalar and we're not sure if this result's
+        // semantics make sense. For now it's not defined.
+        
+        return semantics_status;
     }
 
 
@@ -252,7 +310,7 @@ namespace iDynTree
     {
         MotionForceT result;
         
-        iDynTreeAssert(semantics.changeCoordFrame(newCoordFrame.getSemantics()));
+        iDynTreeAssert(semantics.changeCoordFrame(newCoordFrame.getSemantics(), result.semantics));
         
         Eigen::Map<const Vector3d> thisMap(this->data());
         Eigen::Map<const Matrix3dRowMajor> rotMap(newCoordFrame.data());
@@ -268,7 +326,7 @@ namespace iDynTree
     {
         MotionForceT result;
         
-        iDynTreeAssert(GeomVector3Semantics<MotionForceTSemantics>::compose(op1.semantics, op2.semantics, result.semantics));
+        iDynTreeAssert(MotionForceTSemantics::compose(op1.semantics, op2.semantics, result.semantics));
         
         Eigen::Map<const Vector3d> op1Data(op1.data());
         Eigen::Map<const Vector3d> op2Data(op2.data());

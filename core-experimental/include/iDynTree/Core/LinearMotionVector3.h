@@ -42,6 +42,10 @@ namespace iDynTree
         bool changePoint(const PositionSemantics & newPoint,
                          const AngularMotionVector3Semantics & otherAngular,
                          LinearMotionVector3Semantics & resultLinear) const;
+
+        static bool compose(const LinearMotionVector3Semantics & op1,
+                            const LinearMotionVector3Semantics & op2,
+                            LinearMotionVector3Semantics & result);
     };
     
     

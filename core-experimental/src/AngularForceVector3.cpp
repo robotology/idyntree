@@ -21,13 +21,14 @@ namespace iDynTree
     }
 
     AngularForceVector3Semantics::AngularForceVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame):
-    GeomVector3Semantics<AngularForceVector3Semantics>(_body, _refBody, _coordinateFrame),
+    ForceVector3Semantics<AngularForceVector3Semantics>(_body, _refBody, _coordinateFrame),
     point(_point)
     {
     }
 
     AngularForceVector3Semantics::AngularForceVector3Semantics(const AngularForceVector3Semantics & other):
-    GeomVector3Semantics<AngularForceVector3Semantics>(other)
+    ForceVector3Semantics<AngularForceVector3Semantics>(other),
+    point(other.point)
     {
     }
 
@@ -40,7 +41,52 @@ namespace iDynTree
                                                    const LinearForceVector3Semantics & otherLinear,
                                                    AngularForceVector3Semantics & resultAngular) const
     {
-        return true;
+        // check semantics
+        bool semantics_status =
+        (   reportErrorIf(!checkEqualOrUnknown(newPoint.getCoordinateFrame(),this->coordinateFrame),
+                          __PRETTY_FUNCTION__,
+                          "newPoint expressed in a different coordinateFrame\n")
+         && reportErrorIf(!checkEqualOrUnknown(newPoint.getReferencePoint(),this->point),
+                          __PRETTY_FUNCTION__,
+                          "newPoint has a reference point different from the original Force vector point\n")/*
+         && reportErrorIf(!checkEqualOrUnknown(newPoint.getBody(),newPoint.getRefBody()),
+                          __PRETTY_FUNCTION__,
+                          "newPoint point and reference point are not fixed to the same body\n")
+         && reportErrorIf(!checkEqualOrUnknown(newPoint.getRefBody(),this->body),
+                          __PRETTY_FUNCTION__,
+                          "newPoint reference point and original Force vector point are not fixed to the same body\n")*/
+         && reportErrorIf(!checkEqualOrUnknown(otherLinear.getCoordinateFrame(),this->coordinateFrame),
+                          __PRETTY_FUNCTION__,
+                          "otherLinear expressed in a different coordinateFrame\n")
+         && reportErrorIf(!checkEqualOrUnknown(otherLinear.getBody(),this->body),
+                          __PRETTY_FUNCTION__,
+                          "The bodies defined for both linear and angular force vectors don't match\n")
+         && reportErrorIf(!checkEqualOrUnknown(otherLinear.getRefBody(),this->refBody),
+                          __PRETTY_FUNCTION__,
+                          "The reference bodies defined for both linear and angular force vectors don't match\n"));
+        
+        // compute semantics
+        resultAngular = *this;
+        resultAngular.point = newPoint.getPoint();
+        
+        return semantics_status;
+    }
+
+    bool AngularForceVector3Semantics::compose(const AngularForceVector3Semantics & op1,
+                                               const AngularForceVector3Semantics & op2,
+                                               AngularForceVector3Semantics & result)
+    {
+        // check semantics
+        bool semantics_status =
+        (   reportErrorIf(!checkEqualOrUnknown(op1.point,op2.point),
+                          __PRETTY_FUNCTION__,
+                          "op1 point and op2 point don't match\n")
+         && ForceVector3Semantics<AngularForceVector3Semantics>::compose(op1, op2, result));
+        
+        // compute semantics;
+        result.point = op1.point;
+        
+        return semantics_status;
     }
 
 

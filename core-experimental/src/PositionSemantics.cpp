@@ -101,7 +101,7 @@ namespace iDynTree
     {
         return (   reportErrorIf(!checkEqualOrUnknown(newPoint.coordinateFrame,this->coordinateFrame),
                                  __PRETTY_FUNCTION__,
-                                 "newPoint expressed in a different coordinateFrames\n")
+                                 "newPoint expressed in a different coordinateFrame\n")
                 && reportErrorIf(!checkEqualOrUnknown(newPoint.refPoint,this->point),
                                  __PRETTY_FUNCTION__,
                                  "newPoint has a reference point different from the original Position point\n")
