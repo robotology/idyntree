@@ -13,7 +13,6 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <boost/concept_check.hpp>
 
 using namespace iDynTree;
 
