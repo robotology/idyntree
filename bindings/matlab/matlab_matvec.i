@@ -44,6 +44,28 @@ namespace iDynTree
         $self->fillColMajorBuffer(d); // Column-major
         return p;
     }
+
+    // Convert from a dense matrix
+    void fromMatlab(mxArray * in)
+    {
+        // check size
+        const size_t * dims = mxGetDimensions(in);
+        int fixValRows = $self->rows();
+        int fixValCols = $self->cols();
+        if( dims[0] == fixValRows && dims[1] == fixValCols )
+        {
+            double* d = static_cast<double*>(mxGetData(in));
+            double* selfData = $self->data();
+            for(int row=0; row < fixValRows; row++ )
+            {
+                for(int col=0; col < fixValCols; col++ )
+                {
+                    $self->operator()(row,col) = d[col*fixValRows + row];
+                }
+            }
+            return;
+        }
+    }
 }
 
 
