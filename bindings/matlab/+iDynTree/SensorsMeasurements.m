@@ -3,42 +3,29 @@ classdef SensorsMeasurements < SwigRef
     function self = SensorsMeasurements(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(338,'new_SensorsMeasurements',varargin{:});
-        %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(338,'new_SensorsMeasurements',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        %self.swigInd = iDynTreeMATLAB_wrap(470, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(470, varargin{:}); % FIXME
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
-        iDynTreeMATLAB_wrap(339,'delete_SensorsMeasurements',self);
-        self.swigOwn=false;
+      if self.swigInd
+        iDynTreeMATLAB_wrap(471, self);
+        self.swigInd=uint64(0);
       end
     end
     function varargout = setNrOfSensors(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(340,'SensorsMeasurements_setNrOfSensors',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(472, self, varargin{:});
     end
     function varargout = getNrOfSensors(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(341,'SensorsMeasurements_getNrOfSensors',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(473, self, varargin{:});
     end
     function varargout = setMeasurement(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(342,'SensorsMeasurements_setMeasurement',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(474, self, varargin{:});
     end
     function varargout = getMeasurement(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(343,'SensorsMeasurements_getMeasurement',self,varargin{:});
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(475, self, varargin{:});
     end
   end
   methods(Static)

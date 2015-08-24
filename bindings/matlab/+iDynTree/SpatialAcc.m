@@ -4,47 +4,26 @@ classdef SpatialAcc < iDynTree.SpatialMotionVectorRaw
       self@iDynTree.SpatialMotionVectorRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(211,'new_SpatialAcc',varargin{:});
-        %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(211,'new_SpatialAcc',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        %self.swigInd = iDynTreeMATLAB_wrap(217, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(217, varargin{:}); % FIXME
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
-        iDynTreeMATLAB_wrap(212,'delete_SpatialAcc',self);
-        self.swigOwn=false;
+      if self.swigInd
+        iDynTreeMATLAB_wrap(218, self);
+        self.swigInd=uint64(0);
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(213,'SpatialAcc_plus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(219, self, varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(214,'SpatialAcc_minus',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(220, self, varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(215,'SpatialAcc_uminus',self,varargin{:});
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-      [v,ok] = swig_fieldsref@iDynTree.SpatialMotionVectorRaw(self,i);
-      if ok
-        return
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
-      [self,ok] = swig_fieldasgn@iDynTree.SpatialMotionVectorRaw(self,i,v);
-      if ok
-        return
-      end
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(221, self, varargin{:});
     end
   end
   methods(Static)
