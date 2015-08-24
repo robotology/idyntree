@@ -11,7 +11,6 @@
 #include <cmath>
 #include <cstdio>
 #include <sstream>
-#include <boost/iterator/iterator_concepts.hpp>
 
 namespace iDynTree
 {
@@ -106,6 +105,8 @@ namespace iDynTree
 
         ss << "Direction: " << direction.toString()
            << " Origin: "   << origin.toString() << std::endl;
+
+        return ss.str();
     }
 
     std::string Axis::reservedToString() const
