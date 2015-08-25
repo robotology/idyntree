@@ -146,8 +146,8 @@ SpatialForceVector SpatialInertiaRaw::multiply(const SpatialMotionVector& op) co
     // linear and angular momentum
     Eigen::Map<Eigen::Vector3d> linearForce(ret.getLinearVec3().data());
     Eigen::Map<Eigen::Vector3d> angularForce(ret.getAngularVec3().data());
-    Eigen::Map<const Eigen::Vector3d> linearMotion(ret.getLinearVec3().data());
-    Eigen::Map<const Eigen::Vector3d> angularMotion(ret.getAngularVec3().data());
+    Eigen::Map<const Eigen::Vector3d> linearMotion(op.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angularMotion(op.getAngularVec3().data());
 
     Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
     Eigen::Map<const Eigen::Matrix3d> inertia3d(this->m_rotInertia.data());
