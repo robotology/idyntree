@@ -2,15 +2,15 @@ classdef IJointPosVel < iDynTree.IJointPos
   methods
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(355, self);
+        iDynTreeMATLAB_wrap(374, self);
         self.swigInd=uint64(0);
       end
     end
     function varargout = vel(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(356, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(375, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(357, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(376, self, varargin{:});
     end
     function self = IJointPosVel(varargin)
       self@iDynTree.IJointPos('_swigCreate');

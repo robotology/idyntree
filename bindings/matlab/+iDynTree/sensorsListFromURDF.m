@@ -1,3 +1,3 @@
 function varargout = sensorsListFromURDF(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(500,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(519,varargin{:});
 end
