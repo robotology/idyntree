@@ -14010,76 +14010,6 @@ fail:
 
 int _wrap_RotationRaw_changeCoordFrameOf__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
-  iDynTree::SpatialMotionVector *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialMotionVector result;
-  
-  if (!SWIG_check_num_args("RotationRaw_changeCoordFrameOf",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_changeCoordFrameOf" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialMotionVector,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_changeCoordFrameOf" "', argument " "2"" of type '" "iDynTree::SpatialMotionVector const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_changeCoordFrameOf" "', argument " "2"" of type '" "iDynTree::SpatialMotionVector const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::SpatialMotionVector * >(argp2);
-  result = ((iDynTree::RotationRaw const *)arg1)->changeCoordFrameOf((iDynTree::SpatialMotionVector const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::SpatialMotionVector(static_cast< const iDynTree::SpatialMotionVector& >(result))), SWIGTYPE_p_iDynTree__SpatialMotionVector, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RotationRaw_changeCoordFrameOf__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
-  iDynTree::SpatialForceVector *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialForceVector result;
-  
-  if (!SWIG_check_num_args("RotationRaw_changeCoordFrameOf",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_changeCoordFrameOf" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialForceVector,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_changeCoordFrameOf" "', argument " "2"" of type '" "iDynTree::SpatialForceVector const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_changeCoordFrameOf" "', argument " "2"" of type '" "iDynTree::SpatialForceVector const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::SpatialForceVector * >(argp2);
-  result = ((iDynTree::RotationRaw const *)arg1)->changeCoordFrameOf((iDynTree::SpatialForceVector const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::SpatialForceVector(static_cast< const iDynTree::SpatialForceVector& >(result))), SWIGTYPE_p_iDynTree__SpatialForceVector, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RotationRaw_changeCoordFrameOf__SWIG_3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
   iDynTree::ClassicalAcc *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -14113,7 +14043,7 @@ fail:
 }
 
 
-int _wrap_RotationRaw_changeCoordFrameOf__SWIG_4 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_RotationRaw_changeCoordFrameOf__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
   iDynTree::RotationalInertiaRaw *arg2 = 0 ;
   void *argp1 = 0 ;
@@ -14170,7 +14100,7 @@ int _wrap_RotationRaw_changeCoordFrameOf (int resc, mxArray *resv[], int argc, m
     _v = SWIG_CheckState(res);
     if (_v) {
       void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialMotionVector, 0);
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__ClassicalAcc, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
         return _wrap_RotationRaw_changeCoordFrameOf__SWIG_1(resc,resv,argc,argv);
@@ -14184,38 +14114,10 @@ int _wrap_RotationRaw_changeCoordFrameOf (int resc, mxArray *resv[], int argc, m
     _v = SWIG_CheckState(res);
     if (_v) {
       void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SpatialForceVector, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_RotationRaw_changeCoordFrameOf__SWIG_2(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__ClassicalAcc, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_RotationRaw_changeCoordFrameOf__SWIG_3(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationRaw, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
       int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__RotationalInertiaRaw, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_RotationRaw_changeCoordFrameOf__SWIG_4(resc,resv,argc,argv);
+        return _wrap_RotationRaw_changeCoordFrameOf__SWIG_2(resc,resv,argc,argv);
       }
     }
   }
@@ -14223,8 +14125,6 @@ int _wrap_RotationRaw_changeCoordFrameOf (int resc, mxArray *resv[], int argc, m
   mexWarnMsgIdAndTxt("SWIG:OverloadError","No matching function for overload function 'RotationRaw_changeCoordFrameOf'."
     "  Possible C/C++ prototypes are:\n"
     "    iDynTree::RotationRaw::changeCoordFrameOf(iDynTree::PositionRaw const &) const\n"
-    "    iDynTree::RotationRaw::changeCoordFrameOf(iDynTree::SpatialMotionVector const &) const\n"
-    "    iDynTree::RotationRaw::changeCoordFrameOf(iDynTree::SpatialForceVector const &) const\n"
     "    iDynTree::RotationRaw::changeCoordFrameOf(iDynTree::ClassicalAcc const &) const\n"
     "    iDynTree::RotationRaw::changeCoordFrameOf(iDynTree::RotationalInertiaRaw const &) const\n");
   return 1;
