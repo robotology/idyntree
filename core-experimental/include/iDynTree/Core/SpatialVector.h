@@ -50,6 +50,16 @@ SpatialVectorSemantics<LinearVec3SemanticsT, AngularVec3SemanticsT>
          * one, since TransformSemantics is only composed by references.
          */
         SpatialVectorSemantics & operator=(const SpatialVectorSemantics & other);
+
+        /** @name Output helpers.
+         *  Output helpers.
+         */
+        ///@{
+        std::string toString() const;
+
+        std::string reservedToString() const;
+        ///@}
+
     };
 
     /**
@@ -176,6 +186,8 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
         return *this;
     }
 
+
+
     SPATIALVECTORSEMANTICS_TEMPLATE_HDR
     bool SPATIALVECTORSEMANTICS_INSTANCE_HDR::check_linear2angularConsistency(const LinearVec3SemanticsT & linearVec3,
                                                                               const AngularVec3SemanticsT & angularVec3)
@@ -190,6 +202,20 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
                                  __PRETTY_FUNCTION__,
                                  "linear and angular vectors are expressed in different coordinateFrames\n"));
     }
+
+    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
+    std::string SPATIALVECTORSEMANTICS_INSTANCE_HDR::toString() const
+    {
+        // \todo
+        return std::string();
+    }
+
+    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
+    std::string SPATIALVECTORSEMANTICS_INSTANCE_HDR::reservedToString() const
+    {
+        return this->toString();
+    }
+
 
     /**
      *====================================================================================
