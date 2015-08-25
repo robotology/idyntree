@@ -5,13 +5,17 @@
  *
  */
 
-#include "Utils.h"
+#include <iDynTree/Core/Utils.h>
+
 #include <iostream>
+
 #include <cassert>
 
 namespace iDynTree
 {
     int UNKNOWN = -1;
+
+    double DEFAULT_TOL = 1e-10;
 
     bool checkEqualOrUnknown(const int op1, const int op2)
     {
@@ -45,5 +49,5 @@ namespace iDynTree
         }
         return !condition;
     }
-    
+
 }

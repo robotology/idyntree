@@ -14,11 +14,9 @@ get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DI
 
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
-
 #include system headers
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
                             ${EIGEN3_INCLUDE_DIR})
-
 
 set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/Sensors.hpp
                              include/iDynTree/Sensors/SixAxisFTSensor.hpp)

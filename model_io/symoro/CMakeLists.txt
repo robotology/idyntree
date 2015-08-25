@@ -5,14 +5,11 @@
 project(iDynTree_ModelIO_iKin CXX)
 
 find_package(YARP REQUIRED)
-find_package(ICUB REQUIRED)
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC)
 
-#local headers
-include_directories(include/kdl_format_io)
 
 # add external parser
 add_subdirectory(external/expression_parser)
@@ -20,21 +17,20 @@ add_subdirectory(external/expression_parser)
 include_directories(SYSTEM "${expression-parser_SOURCE_DIR}/include")
 
 
-set(IDYNTREE_MODELIO_SYMORO_HEADERS include/kdl_format_io/symoro_par_import.hpp
-                                    include/kdl_format_io/symoro_par_import_serialization.hpp
-                                    include/kdl_format_io/symoro_par_model.hpp)
+set(IDYNTREE_MODELIO_SYMORO_HEADERS include/iDynTree/ModelIO/symoro_par_import.hpp
+                                    include/iDynTree/ModelIO/symoro_par_import_serialization.hpp
+                                    include/iDynTree/ModelIO/symoro_par_model.hpp)
 
 set(IDYNTREE_MODELIO_SYMORO_SOURCES src/symoro_par_import.cpp
                                     src/symoro_par_import_serialization.cpp)
 
-SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_SYMORO_SOURCES})
-SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODELIO_SYMORO_HEADERS})
+source_group("Source Files" FILES ${IDYNTREE_MODELIO_SYMORO_SOURCES})
+source_group("Header Files" FILES ${IDYNTREE_MODELIO_SYMORO_HEADERS})
 
+# share headers with all iDynTree targets
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
-
-# share headers with all iDynTree targes
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
 
 set(libraryname idyntree-modelio-symoro)
 
@@ -54,6 +50,6 @@ install(TARGETS ${libraryname}
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/kdl_format_io)
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})

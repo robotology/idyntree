@@ -2060,9 +2060,13 @@ int DynamicRegressorGenerator::updateBuffers()
 {
     one_rows_buffer = Eigen::MatrixXd(1,parameters_desc.getNrOfParameters());
     six_rows_buffer = Eigen::MatrixXd(6,parameters_desc.getNrOfParameters());
+    one_rows_buffer.setZero();
+    six_rows_buffer.setZero();
 
     one_rows_vector = Eigen::VectorXd(1);
     six_rows_vector = Eigen::VectorXd(6);
+    one_rows_vector.setZero();
+    six_rows_buffer.setZero();
 
     return -1;
 }

@@ -1,5 +1,4 @@
-set(CMAKE_SWIG_FLAGS "-Wall;-module;iDynTree;-threads")
-
+set(CMAKE_SWIG_FLAGS "-Wextra;-module;iDynTree;-threads")
 set(IDYNTREE_USES_PYTHON_VERSION "" CACHE STRING "Specify python version to use" )
 
 find_package(PythonInterp ${IDYNTREE_USES_PYTHON_VERSION} REQUIRED)

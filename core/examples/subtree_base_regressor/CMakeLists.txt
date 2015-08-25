@@ -6,11 +6,6 @@ project(subtree_base_regressor)
 #find orocos_kdl, with some glue code to support also the use of the old version
 find_package(orocos_kdl 1.2.3 REQUIRED QUIET)
 
-# Find kdl_format_io and kdl_codyco
-find_package(kdl_codyco 0.1.2 REQUIRED)
-find_package(kdl_format_io REQUIRED)
-
-
 find_package(YCM REQUIRED)
 
 list(APPEND CMAKE_MODULE_PATH ${YCM_MODULE_PATH})
@@ -31,15 +26,10 @@ foreach(header_file ${folder_header})
   include_directories(${p})
 endforeach(header_file ${folder_header})
 
-# Include any directories needed
-include_directories(${kdl_format_io_INCLUDE_DIRS} ${kdl_codyco_INCLUDE_DIRS})
-
 # Set up our main executable.
 if (folder_source)
   add_executable(subtree_base_regressor ${folder_source} ${folder_header})
   target_link_libraries(subtree_base_regressor ${orocos_kdl_LIBRARIES}
-                                               ${kdl_codyco_LIBRARIES}
-                                                ${kdl_format_io_LIBRARIES}
                                                  ${YARP_LIBRARIES} ${ICUB_LIBRARIES}
                                                 ${iDynTree_LIBRARIES})
 else (folder_source)

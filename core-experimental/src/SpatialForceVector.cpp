@@ -5,8 +5,8 @@
  *
  */
 
-#include "SpatialForceVector.h"
-#include "Utils.h"
+#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/Utils.h>
 #include <sstream>
 
 namespace iDynTree

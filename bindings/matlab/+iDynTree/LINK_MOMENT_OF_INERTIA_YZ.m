@@ -1,7 +1,7 @@
 function v = LINK_MOMENT_OF_INERTIA_YZ()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = iDynTreeMATLAB_wrap(0,'swigConstant',11,'LINK_MOMENT_OF_INERTIA_YZ');
+    vInitialized = iDynTreeMATLAB_wrap(0, 11);
   end
   v = vInitialized;
 end

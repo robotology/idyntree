@@ -17,7 +17,7 @@
 // iDynTree headers
 #include <kdl_codyco/sensors.hpp>
 #include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
-#include <kdl_format_io/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
 #include <string>
 #include <iostream>

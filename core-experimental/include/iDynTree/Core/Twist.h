@@ -8,7 +8,8 @@
 #ifndef IDYNTREE_TWIST_H
 #define IDYNTREE_TWIST_H
 
-#include "SpatialMotionVector.h"
+
+#include  <iDynTree/Core/SpatialMotionVector.h>
 
 namespace iDynTree
 {

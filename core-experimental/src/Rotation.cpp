@@ -5,15 +5,20 @@
  *
  */
 
-#include "Rotation.h"
-#include "Position.h"
-#include "Wrench.h"
-#include "Twist.h"
-#include "SpatialAcc.h"
-#include "SpatialMomentum.h"
-#include "Utils.h"
 
+#include <iDynTree/Core/ClassicalAcc.h>
+#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/Axis.h>
+#include <iDynTree/Core/Direction.h>
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/RotationalInertiaRaw.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/SpatialMomentum.h>
+#include <iDynTree/Core/Utils.h>
 
+#include <Eigen/Dense>
 
 #include <cassert>
 #include <iostream>
@@ -24,7 +29,7 @@ namespace iDynTree
     /**
      * Local static functions
      */
-    
+
     template <class SpatialMotionForceVectorT>
     static SpatialMotionForceVectorT changeCoordFrameOfT(const Rotation & rot,
                                                          const SpatialMotionForceVectorT & other)
@@ -36,7 +41,11 @@ namespace iDynTree
     /**
      * class Method definitions
      */
-    
+
+
+    typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+
+
     Rotation::Rotation(): RotationRaw()
     {
     }
@@ -96,7 +105,7 @@ namespace iDynTree
     {
         return this->changeRefOrientFrame(newCoordinateFrame);
     }
-    
+
     Rotation Rotation::compose(const Rotation& op1, const Rotation& op2)
     {
         RotationSemantics resultSemantics;
@@ -117,7 +126,7 @@ namespace iDynTree
         iDynTreeAssert( this->semantics.changeCoordFrameOf(other.getSemantics(), resultSemantics) );
         return Position(this->RotationRaw::changeCoordFrameOf(other), resultSemantics);
     }
-    
+
     Twist Rotation::changeCoordFrameOf(const Twist& other) const
     {
         return changeCoordFrameOfT<Twist>(*this, other);
@@ -136,6 +145,45 @@ namespace iDynTree
     Wrench Rotation::changeCoordFrameOf(const Wrench &other) const
     {
         return changeCoordFrameOfT<Wrench>(*this, other);
+    }
+
+    Direction Rotation::changeCoordFrameOf(const Direction& other) const
+    {
+        Direction result;
+
+        // \todo TODO add semantics to Direction
+        Eigen::Map<const Matrix3dRowMajor> newCoordFrame(m_data);
+        Eigen::Map<const Eigen::Vector3d> directionCoord(other.data());
+        Eigen::Map<Eigen::Vector3d> resultData(result.data());
+
+        resultData = newCoordFrame*directionCoord;
+
+        return result;
+    }
+
+    ClassicalAcc Rotation::changeCoordFrameOf(const ClassicalAcc &other) const
+    {
+        ClassicalAcc result;
+
+        // \todo TODO add semantics to ClassicalAcc
+        result = RotationRaw::changeCoordFrameOf(other);
+
+        return result;
+    }
+
+    RotationalInertiaRaw Rotation::changeCoordFrameOf(const RotationalInertiaRaw &other) const
+    {
+        RotationalInertiaRaw result;
+
+        // \todo TODO add semantics to ClassicalAcc
+        result = RotationRaw::changeCoordFrameOf(other);
+
+        return result;
+    }
+
+    Axis Rotation::changeCoordFrameOf(const Axis& other) const
+    {
+        return Axis(this->changeCoordFrameOf(other.getDirection()),this->changeCoordFrameOf(other.getOrigin()));
     }
 
     Rotation Rotation::inverse() const
@@ -173,31 +221,62 @@ namespace iDynTree
         return changeCoordFrameOfT<Wrench>(*this, other);
     }
 
+    Direction Rotation::operator*(const Direction& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    ClassicalAcc Rotation::operator*(const ClassicalAcc& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    Axis Rotation::operator*(const Axis& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
+    RotationalInertiaRaw Rotation::operator*(const RotationalInertiaRaw& other) const
+    {
+        return changeCoordFrameOf(other);
+    }
+
     Rotation Rotation::RotX(const double angle)
     {
         return Rotation(RotationRaw::RotX(angle));
     }
-    
+
     Rotation Rotation::RotY(const double angle)
     {
         return Rotation(RotationRaw::RotY(angle));
     }
-    
+
     Rotation Rotation::RotZ(const double angle)
     {
         return Rotation(RotationRaw::RotZ(angle));
     }
-    
+
+    Rotation Rotation::RotAxis(const Direction & direction, const double angle)
+    {
+        Rotation result;
+        Eigen::Map<Matrix3dRowMajor> thisData(result.data());
+        Eigen::Map<const Eigen::Vector3d>   directionData(direction.data());
+        thisData = Eigen::AngleAxisd(angle, directionData).matrix();
+
+        return result;
+    }
+
+
     Rotation Rotation::RPY(const double roll, const double pitch, const double yaw)
     {
         return Rotation(RotationRaw::RPY(roll, pitch, yaw));
     }
-    
+
     Rotation Rotation::Identity()
     {
         return Rotation();
     }
-    
+
     std::string Rotation::toString() const
     {
         std::stringstream ss;

@@ -5,9 +5,9 @@
  *
  */
 
-#include "RotationSemantics.h"
-#include "PositionSemantics.h"
-#include "Utils.h"
+#include <iDynTree/Core/RotationSemantics.h>
+#include <iDynTree/Core/PositionSemantics.h>
+#include <iDynTree/Core/Utils.h>
 #include <iostream>
 #include <sstream>
 
@@ -71,7 +71,7 @@ namespace iDynTree
     {
         return this->coordinateFrame;
     }
-    
+
     void RotationSemantics::setOrientationFrame(int _orientationFrame)
     {
         this->orientationFrame = _orientationFrame;
@@ -96,7 +96,7 @@ namespace iDynTree
     {
         this->refOrientationFrame = this->coordinateFrame = _coordinateFrame;
     }
-    
+
     bool RotationSemantics::check_changeOrientFrame(const RotationSemantics& newOrientFrame)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(this->orientationFrame,newOrientFrame.refOrientationFrame),
@@ -155,7 +155,7 @@ namespace iDynTree
     {
         // check semantics
         bool status = this->check_changeOrientFrame(newOrientFrame);
-        
+
         // set new semantics
         this->setOrientationFrame(newOrientFrame.getOrientationFrame());
 
@@ -166,10 +166,10 @@ namespace iDynTree
     {
         // check semantics
         bool status = this->check_changeRefOrientFrame(newRefOrientFrame);
-        
+
         // set new semantics
         this->setReferenceOrientationFrame(newRefOrientFrame.getReferenceOrientationFrame());
-        
+
         return status;
     }
 
@@ -177,19 +177,19 @@ namespace iDynTree
     {
         // check semantics
         bool status = this->check_changeCoordFrameOf(other);
-        
+
         // set new semantics
         result = other;
         result.setCoordinateFrame(this->getCoordinateFrame());
-        
+
         return status;
     }
-    
+
     bool RotationSemantics::compose(const RotationSemantics& op1, const RotationSemantics& op2, RotationSemantics& result)
     {
         // check semantics
         bool status = RotationSemantics::check_compose(op1, op2);
-        
+
         // set new semantics
         result.setOrientationFrame(op2.getOrientationFrame());
         result.setBody(op2.getBody());
@@ -208,7 +208,7 @@ namespace iDynTree
         result.setBody(op.getRefBody());
         result.setReferenceOrientationFrame(op.getOrientationFrame());
         result.setRefBody(op.getBody());
-        
+
         return status;
     }
 

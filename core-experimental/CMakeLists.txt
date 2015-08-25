@@ -4,10 +4,10 @@
 
 project(iDynTree_Base CXX)
 
-#local headers
-include_directories(include/iDynTree/Core)
-
-set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
+set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
+                              include/iDynTree/Core/ClassicalAcc.h
+                              include/iDynTree/Core/Direction.h
+                              include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/IVector.h
                               include/iDynTree/Core/MatrixDynSize.h
                               include/iDynTree/Core/MatrixFixSize.h
@@ -24,6 +24,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/IMatrix.h
                               include/iDynTree/Core/SpatialInertia.h
                               include/iDynTree/Core/SpatialMomentum.h
                               include/iDynTree/Core/SpatialMotionVector.h
+                              include/iDynTree/Core/TestUtils.h
                               include/iDynTree/Core/Transform.h
                               include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Twist.h
@@ -44,7 +45,10 @@ set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h
                                        include/iDynTree/Core/SpatialVector.h)
 
 
-set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
+set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
+                              src/ClassicalAcc.cpp
+                              src/Direction.cpp
+                              src/InterfaceDestructors.cpp
                               src/MatrixDynSize.cpp
                               src/LinearForceVector3.cpp
                               src/AngularForceVector3.cpp
@@ -63,6 +67,7 @@ set(IDYNTREE_CORE_EXP_SOURCES src/InterfaceDestructors.cpp
                               src/SpatialMotionVector.cpp
                               src/SpatialInertiaRaw.cpp
                               src/SpatialInertia.cpp
+                              src/TestUtils.cpp
                               src/Transform.cpp
                               src/TransformSemantics.cpp
                               src/Twist.cpp

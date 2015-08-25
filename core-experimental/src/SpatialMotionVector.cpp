@@ -5,11 +5,14 @@
  *
  */
 
-#include "SpatialMotionVector.h"
-#include "SpatialForceVector.h"
-#include "Utils.h"
-#include <sstream>
+#include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/Utils.h>
+
 #include <Eigen/Dense>
+
+#include <sstream>
+
 
 namespace iDynTree
 {

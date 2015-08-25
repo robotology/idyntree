@@ -4,43 +4,31 @@ classdef SpatialInertia < iDynTree.SpatialInertiaRaw
       self@iDynTree.SpatialInertiaRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(208,'new_SpatialInertia',varargin{:});
-        %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(208,'new_SpatialInertia',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        %self.swigInd = iDynTreeMATLAB_wrap(254, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(254, varargin{:}); % FIXME
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
-        iDynTreeMATLAB_wrap(209,'delete_SpatialInertia',self);
-        self.swigOwn=false;
+      if self.swigInd
+        iDynTreeMATLAB_wrap(255, self);
+        self.swigInd=uint64(0);
       end
+    end
+    function varargout = asMatrix(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(257, self, varargin{:});
+    end
+    function varargout = plus(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(258, self, varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(210,'SpatialInertia_mtimes',self,varargin{:});
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-      [v,ok] = swig_fieldsref@iDynTree.SpatialInertiaRaw(self,i);
-      if ok
-        return
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
-      [self,ok] = swig_fieldasgn@iDynTree.SpatialInertiaRaw(self,i,v);
-      if ok
-        return
-      end
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(259, self, varargin{:});
     end
   end
   methods(Static)
+    function varargout = combine(varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(256, varargin{:});
+    end
   end
 end

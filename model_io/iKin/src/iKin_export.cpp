@@ -35,7 +35,7 @@
 
 /* Author: Silvio Traversaro */
 
-#include "iKin_export.hpp"
+#include <iDynTree/ModelIO/iKin_export.hpp>
 
 #include <kdl/joint.hpp>
 #include <iCub/iKin/iKinFwd.h>
@@ -45,7 +45,7 @@
 
 using namespace std;
 
-namespace kdl_format_io{
+namespace iDynTree{
 
 //Conversion functions
 bool YarptoKDL(const yarp::sig::Vector & yarpVector, KDL::Vector & kdlVector)

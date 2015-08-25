@@ -5,14 +5,14 @@
  *
  */
 
-#include "LinearForceVector3.h"
+#include <iDynTree/Core/LinearForceVector3.h>
 
 namespace iDynTree
 {
     /**
      * LinearForceVector3Semantics
      */
-    
+
     // constructors
     LinearForceVector3Semantics::LinearForceVector3Semantics()
     {
@@ -36,22 +36,22 @@ namespace iDynTree
     /**
      * LinearForceVector3
      */
-    
+
     // constructors
     LinearForceVector3::LinearForceVector3()
     {
     }
-    
+
     LinearForceVector3::LinearForceVector3(const double* in_data, const unsigned int in_size):
     ForceVector3<LinearForceVector3, LinearForceAssociationsT, LinearForceVector3Semantics>(in_data, in_size)
     {
     }
-    
+
     LinearForceVector3::LinearForceVector3(const LinearForceVector3 & other):
     ForceVector3<LinearForceVector3, LinearForceAssociationsT, LinearForceVector3Semantics>(other)
     {
     }
-    
+
     LinearForceVector3::~LinearForceVector3()
     {
     }

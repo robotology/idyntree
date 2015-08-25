@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_WRENCH_H
 #define IDYNTREE_WRENCH_H
 
-#include "SpatialForceVector.h"
+#include <iDynTree/Core/SpatialForceVector.h>
 
 namespace iDynTree
 {

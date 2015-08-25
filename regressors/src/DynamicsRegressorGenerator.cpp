@@ -20,8 +20,8 @@
 #include "kdl_codyco/regressors/dynamicRegressorGenerator.hpp"
 #include <kdl_codyco/KDLConversions.h>
 
-#include "kdl_format_io/urdf_import.hpp"
-#include <kdl_format_io/urdf_sensor_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
 
 #include <kdl/frames.hpp>
 
@@ -127,11 +127,11 @@ bool DynamicsRegressorGenerator::loadRobotAndSensorsModelFromString(const std::s
 
     bool consider_root_link_inertia = false;
     KDL::Tree local_model;
-    bool ok = kdl_format_io::treeFromUrdfString(modelString,local_model,consider_root_link_inertia);
+    bool ok = iDynTree::treeFromUrdfString(modelString,local_model,consider_root_link_inertia);
 
 
     this->pimpl->robot_model = KDL::CoDyCo::UndirectedTree(local_model);
-    this->pimpl->sensors_model = kdl_format_io::sensorsTreeFromURDFString(this->pimpl->robot_model,
+    this->pimpl->sensors_model = iDynTree::sensorsListFromURDFString(this->pimpl->robot_model,
                                                                           modelString);
 
     if( !ok )
@@ -194,7 +194,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
 
     // We remove the fake links that in the urdf
     // we use as surrogate for frames
-    kdl_format_io::framesFromKDLTree(this->pimpl->robot_model.getTree(),
+    iDynTree::framesFromKDLTree(this->pimpl->robot_model.getTree(),
                                      ignoredLinks,dummy);
 
     // Add ignored links to the list of links consired "fake"

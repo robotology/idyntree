@@ -16,8 +16,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#include "treefksolverpos_iterative.hpp"
-#include "position_loops.hpp"
+#include <kdl_codyco/treefksolverpos_iterative.hpp>
+#include <kdl_codyco/position_loops.hpp>
 
 #include <iostream>
 #include <kdl/frames_io.hpp>
@@ -63,7 +63,7 @@ namespace CoDyCo {
             return -2;
 
         getWorldFrameLoop(undirected_tree,q_in,traversal,segmentIndex,p_out);
-        
+
 
         return 0;
     }

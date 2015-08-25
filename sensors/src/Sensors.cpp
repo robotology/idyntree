@@ -176,12 +176,15 @@ int SensorsList::getSensorIndex(const SensorType& sensor_type, const std::string
 
 Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) const
 {
-    if( sensor_index < (int)getNrOfSensors(sensor_type) )
+    if( sensor_index < (int)getNrOfSensors(sensor_type) && sensor_index >= 0 )
     {
         return this->pimpl->VecSensors[sensor_type][sensor_index];
     }
     else
     {
+        std::cerr << "[ERROR] getSensor did not find sensor "
+                  << sensor_index << " of type " << sensor_type
+                  << std::endl;
         return 0;
     }
 }
@@ -236,7 +239,7 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type, const un
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
-        if( sensor_index >= 0 && sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
+        if( sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
         {
             this->pimpl->SixAxisFTSensorsMeasurements[sensor_index] = wrench;
             return true;
@@ -257,7 +260,7 @@ bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type, const un
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
-        if( sensor_index >= 0 && sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
+        if( sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
         {
             wrench = this->pimpl->SixAxisFTSensorsMeasurements[sensor_index];
             return true;

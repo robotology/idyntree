@@ -34,8 +34,9 @@
 
 /* Author: Silvio Traversaro */
 
-#include "kdl_format_io/urdf_import.hpp"
-#include "kdl_format_io/urdf_export.hpp"
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_export.hpp>
+
 #include <kdl/tree.hpp>
 #include "kdl_codyco/treefksolverpos_iterative.hpp"
 #include <urdf_model/model.h>
@@ -68,7 +69,7 @@ int main(int argc, char** argv)
 {
     Tree my_tree, my_tree_converted;
 
-    if (!kdl_format_io::treeFromUrdfFile(argv[1],my_tree))
+    if (!iDynTree::treeFromUrdfFile(argv[1],my_tree))
     {
         cerr << "Could not generate robot model and extract kdl tree" << endl;
         return EXIT_FAILURE;

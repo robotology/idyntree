@@ -5,7 +5,7 @@
  *
  */
 
-#include "SpatialMomentum.h"
+#include <iDynTree/Core/SpatialMomentum.h>
 
 namespace iDynTree
 {

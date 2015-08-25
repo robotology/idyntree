@@ -5,7 +5,7 @@ set(VARS_PREFIX "iDynTree")
 
 set(${VARS_PREFIX}_MAJOR_VERSION 0)
 set(${VARS_PREFIX}_MINOR_VERSION 3)
-set(${VARS_PREFIX}_PATCH_VERSION 5)
+set(${VARS_PREFIX}_PATCH_VERSION 6)
 set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
@@ -24,7 +24,11 @@ include(iDynTreeOptions)
 
 # Find dependecies
 find_package(YARP REQUIRED)
-find_package(ICUB REQUIRED)
+
+if(IDYNTREE_USES_ICUB_MAIN)
+    find_package(ICUB REQUIRED)
+endif()
+
 include(OrocosKDLFindLogic)
 find_package(orocos_kdl REQUIRED)
 find_package(Eigen3 REQUIRED)
@@ -44,11 +48,16 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           USE_LINK_PATH)
 
 add_subdirectory(core-experimental)
+add_subdirectory(model)
 add_subdirectory(core)
 add_subdirectory(sensors)
 add_subdirectory(model_io)
+add_subdirectory(high-level)
 add_subdirectory(regressors)
 add_subdirectory(yarp)
+if(IDYNTREE_USES_ICUB_MAIN)
+    add_subdirectory(icub)
+endif()
 
 # compile simple command line tools
 add_subdirectory(tools)

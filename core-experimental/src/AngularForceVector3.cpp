@@ -5,16 +5,16 @@
  *
  */
 
-#include "AngularForceVector3.h"
-#include "LinearForceVector3.h"
-#include "Position.h"
+#include <iDynTree/Core/AngularForceVector3.h>
+#include <iDynTree/Core/LinearForceVector3.h>
+#include <iDynTree/Core/Position.h>
 
 namespace iDynTree
 {
     /**
      * AngularForceVector3Semantics
      */
-    
+
     // constructors
     AngularForceVector3Semantics::AngularForceVector3Semantics()
     {
@@ -64,11 +64,11 @@ namespace iDynTree
          && reportErrorIf(!checkEqualOrUnknown(otherLinear.getRefBody(),this->refBody),
                           __PRETTY_FUNCTION__,
                           "The reference bodies defined for both linear and angular force vectors don't match\n"));
-        
+
         // compute semantics
         resultAngular = *this;
         resultAngular.point = newPoint.getPoint();
-        
+
         return semantics_status;
     }
 
@@ -82,10 +82,10 @@ namespace iDynTree
                           __PRETTY_FUNCTION__,
                           "op1 point and op2 point don't match\n")
          && ForceVector3Semantics<AngularForceVector3Semantics>::compose(op1, op2, result));
-        
+
         // compute semantics;
         result.point = op1.point;
-        
+
         return semantics_status;
     }
 
@@ -98,18 +98,18 @@ namespace iDynTree
     AngularForceVector3::AngularForceVector3()
     {
     }
-    
-    
+
+
     AngularForceVector3::AngularForceVector3(const double* in_data, const unsigned int in_size):
     ForceVector3<AngularForceVector3, AngularForceAssociationsT, AngularForceVector3Semantics>(in_data, in_size)
     {
     }
-    
+
     AngularForceVector3::AngularForceVector3(const AngularForceVector3& other):
     ForceVector3<AngularForceVector3, AngularForceAssociationsT, AngularForceVector3Semantics>(other)
     {
     }
-    
+
     AngularForceVector3::~AngularForceVector3()
     {
     }
@@ -121,14 +121,14 @@ namespace iDynTree
         AngularForceVector3 resultAngular;
 
         iDynTreeAssert(semantics.changePoint(newPoint.getSemantics(), otherLinear.getSemantics(), resultAngular.semantics));
-        
+
         Eigen::Map<const Vector3d> newPointMap(newPoint.data());
         Eigen::Map<const Vector3d> otherLinearMap(otherLinear.data());
         Eigen::Map<const Vector3d> thisMap(this->data());
         Eigen::Map<Vector3d> resultAngularMap(resultAngular.data());
-        
+
         resultAngularMap = thisMap + newPointMap.cross(otherLinearMap);
-        
+
         return resultAngular;
     }
 

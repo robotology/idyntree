@@ -19,12 +19,12 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#include "treedynparam.hpp"
+#include <kdl_codyco/treedynparam.hpp>
 //#include "frames_io.hpp"
 //#include <iostream>
 
-#include "regressor_utils.hpp"
-#include "crba_loops.hpp"
+#include <kdl_codyco/regressor_utils.hpp>
+#include <kdl_codyco/crba_loops.hpp>
 
 #include <Eigen/Dense>
 
@@ -35,7 +35,7 @@
 
 namespace KDL {
 namespace CoDyCo {
-    
+
     TreeDynParam::TreeDynParam(const Tree& _tree, Vector _grav, const TreeSerialization & _serialization):
         UndirectedTreeSolver(_tree,_serialization),
         nj(undirected_tree.getNrOfDOFs()),
@@ -48,7 +48,7 @@ namespace CoDyCo {
         Ic(ns)
     {
         ag=-Twist(grav,Vector::Zero());
-        
+
         #ifndef NDEBUG
         std::cout << "Allocate TreeDynParam, used undirected_tree: " << std::endl;
         std::cout << undirected_tree.toString() << std::endl;
@@ -63,9 +63,9 @@ namespace CoDyCo {
         //Check sizes when in debug mode
         if(q.rows()!=nj || H.rows()!=nj || H.columns()!=nj )
             return -1;
-        
+
         SetToZero(H);
-        
+
         return crba_fixed_base_loop(undirected_tree,traversal,q,Ic,H);
     }
 
@@ -77,7 +77,7 @@ namespace CoDyCo {
 
         //the calculation of coriolis matrix C
         return treeidsolver_coriolis.CartToJnt(q, q_dot, jntarraynull, wrenchnull, coriolis);
-        
+
     }
 
     //calculate gravity torques G
@@ -88,8 +88,8 @@ namespace CoDyCo {
         //the calculation of coriolis matrix C
         return treeidsolver_gravity.CartToJnt(q, jntarraynull, jntarraynull, wrenchnull, gravity);
     }
-    
-    //calculate coriolis torques 
+
+    //calculate coriolis torques
     int TreeDynParam::JntToCoriolis(const JntArray &q, const JntArray &q_dot, const Twist & base_vel,  JntArray &coriolis_torques, Wrench & coriolis_base_wrench)
     {
         //make a null matrix with the size of q_dotdot and a null wrench
@@ -97,19 +97,19 @@ namespace CoDyCo {
 
         //the calculation of coriolis matrix C
         return treeidsolver_coriolis.CartToJnt(q, q_dot, jntarraynull, base_vel, Twist::Zero(), wrenchnull, coriolis_torques, coriolis_base_wrench);
-        
+
     }
-    
+
        int TreeDynParam::JntToMass(const JntArray &q, FloatingJntSpaceInertiaMatrix& H)
     {
         //Check sizes when in debug mode
         if(q.rows()!=nj || H.rows()!=nj+6 || H.columns()!=nj+6 )
             return -1;
-        
+
         return crba_floating_base_loop(undirected_tree,traversal,q,Ic,H);
-        
+
     }
-    
+
     TreeDynParam::~TreeDynParam()
     {
     }

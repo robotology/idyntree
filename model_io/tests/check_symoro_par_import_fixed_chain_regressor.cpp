@@ -34,7 +34,7 @@
 
 /* Author: Silvio Traversaro */
 
-#include <kdl_format_io/symoro_par_import.hpp>
+#include <iDynTree/ModelIO/symoro_par_import.hpp>
 
 #include <kdl_codyco/treeinertialparameters.hpp>
 #include <kdl_codyco/treeidsolver_recursive_newton_euler.hpp>
@@ -48,7 +48,7 @@
 
 using namespace KDL;
 using namespace std;
-using namespace kdl_format_io;
+using namespace iDynTree;
 using namespace KDL::CoDyCo;
 
 void printLink(const SegmentMap::const_iterator& link, const std::string& prefix)

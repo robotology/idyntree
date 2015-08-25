@@ -5,15 +5,20 @@
  *
  */
 
-#include "RotationRaw.h"
-#include "PositionRaw.h"
-#include "SpatialMotionVector.h"
-#include "SpatialForceVector.h"
-#include "Utils.h"
-#include <sstream>
+
+#include <iDynTree/Core/ClassicalAcc.h>
+#include <iDynTree/Core/RotationRaw.h>
+#include <iDynTree/Core/PositionRaw.h>
+#include <iDynTree/Core/RotationalInertiaRaw.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/Utils.h>
 
 #include <Eigen/Dense>
 #include <Eigen/Geometry>
+
+#include <sstream>
+
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 typedef Eigen::Matrix<double,6,1> Vector6d;
@@ -46,8 +51,9 @@ namespace iDynTree
     RotationRaw::RotationRaw(const double* in_data, const unsigned int in_rows, const unsigned int in_cols):
                              MatrixFixSize<3, 3>(in_data,in_rows,in_cols)
     {
-    
+
     }
+
 
     RotationRaw::RotationRaw(const RotationRaw& other)
     {
@@ -119,6 +125,37 @@ namespace iDynTree
 
         return result;
     }
+
+    ClassicalAcc RotationRaw::changeCoordFrameOf(const ClassicalAcc& other) const
+    {
+        ClassicalAcc result;
+
+        Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
+        Eigen::Map<const Vector6d> op2Wrench(other.data());
+
+        Eigen::Map<Vector6d> res(result.data());
+
+        res.segment<3>(3) =  op1Rot*(op2Wrench.segment<3>(3));
+        res.segment<3>(0) =  op1Rot*(op2Wrench.segment<3>(0));
+
+        return result;
+    }
+
+    RotationalInertiaRaw RotationRaw::changeCoordFrameOf(const RotationalInertiaRaw& other) const
+    {
+        RotationalInertiaRaw result;
+
+        Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
+        Eigen::Map<const Matrix3dRowMajor> op2Inertia3d(other.data());
+
+
+        Eigen::Map<Matrix3dRowMajor> resInertia3d(result.data());
+
+        resInertia3d = op1Rot*op2Inertia3d*op1Rot.transpose();
+
+        return result;
+    }
+
 
     RotationRaw RotationRaw::RotX(const double angle)
     {

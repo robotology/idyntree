@@ -4,85 +4,67 @@ classdef Rotation < iDynTree.RotationRaw
       self@iDynTree.RotationRaw('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(240,'new_Rotation',varargin{:});
-        %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(240,'new_Rotation',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        %self.swigInd = iDynTreeMATLAB_wrap(289, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(289, varargin{:}); % FIXME
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
-        iDynTreeMATLAB_wrap(241,'delete_Rotation',self);
-        self.swigOwn=false;
+      if self.swigInd
+        iDynTreeMATLAB_wrap(290, self);
+        self.swigInd=uint64(0);
       end
     end
     function varargout = getSemantics(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(242,'Rotation_getSemantics',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(291, self, varargin{:});
     end
     function varargout = changeOrientFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(243,'Rotation_changeOrientFrame',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(292, self, varargin{:});
     end
     function varargout = changeRefOrientFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(244,'Rotation_changeRefOrientFrame',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(293, self, varargin{:});
     end
     function varargout = changeCoordFrameOf(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(247,'Rotation_changeCoordFrameOf',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(296, self, varargin{:});
     end
     function varargout = inverse(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(248,'Rotation_inverse',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(297, self, varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(249,'Rotation_mtimes',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(298, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(255,'Rotation_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(305, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(256,'Rotation_display',self,varargin{:});
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-      [v,ok] = swig_fieldsref@iDynTree.RotationRaw(self,i);
-      if ok
-        return
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
-      [self,ok] = swig_fieldasgn@iDynTree.RotationRaw(self,i,v);
-      if ok
-        return
-      end
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(306, self, varargin{:});
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(245,'Rotation_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(294, varargin{:});
     end
     function varargout = inverse2(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(246,'Rotation_inverse2',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(295, varargin{:});
     end
     function varargout = RotX(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(250,'Rotation_RotX',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(299, varargin{:});
     end
     function varargout = RotY(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(251,'Rotation_RotY',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(300, varargin{:});
     end
     function varargout = RotZ(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(252,'Rotation_RotZ',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(301, varargin{:});
+    end
+    function varargout = RotAxis(varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(302, varargin{:});
     end
     function varargout = RPY(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(253,'Rotation_RPY',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(303, varargin{:});
     end
     function varargout = Identity(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(254,'Rotation_Identity',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(304, varargin{:});
     end
   end
 end

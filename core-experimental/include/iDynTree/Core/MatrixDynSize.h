@@ -20,7 +20,7 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    class MatrixDynSize: public IMatrix
+    class MatrixDynSize: public IRawMatrix
     {
     private:
         /**

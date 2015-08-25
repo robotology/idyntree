@@ -35,10 +35,10 @@
 
 /* Author: Silvio Traversaro */
 
-#include "urdf_export.hpp"
-#include "config.h"
+#include <iDynTree/ModelIO/impl/urdf_export.hpp>
+#include <iDynTree/ModelIO/impl/config.h>
 
-#include "urdf_compatibility.h"
+#include <iDynTree/ModelIO/impl/urdf_compatibility.h>
 #include <iostream>
 #include <tinyxml.h>
 #include <kdl/tree.hpp>
@@ -47,7 +47,7 @@
 
 using namespace std;
 
-namespace kdl_format_io {
+namespace iDynTree {
 
 // construct vector
 urdf::Vector3 toUrdf(const KDL::Vector & v)

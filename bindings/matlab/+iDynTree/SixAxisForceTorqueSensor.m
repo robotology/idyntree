@@ -4,92 +4,83 @@ classdef SixAxisForceTorqueSensor < iDynTree.Sensor
       self@iDynTree.Sensor('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(299,'new_SixAxisForceTorqueSensor',varargin{:});
-        %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(299,'new_SixAxisForceTorqueSensor',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        %self.swigInd = iDynTreeMATLAB_wrap(476, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(476, varargin{:}); % FIXME
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
-        iDynTreeMATLAB_wrap(300,'delete_SixAxisForceTorqueSensor',self);
-        self.swigOwn=false;
+      if self.swigInd
+        iDynTreeMATLAB_wrap(477, self);
+        self.swigInd=uint64(0);
       end
     end
     function varargout = setName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(301,'SixAxisForceTorqueSensor_setName',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(478, self, varargin{:});
     end
     function varargout = setFirstLinkSensorTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(302,'SixAxisForceTorqueSensor_setFirstLinkSensorTransform',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(479, self, varargin{:});
     end
     function varargout = setSecondLinkSensorTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(303,'SixAxisForceTorqueSensor_setSecondLinkSensorTransform',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(480, self, varargin{:});
     end
     function varargout = getFirstLinkIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(304,'SixAxisForceTorqueSensor_getFirstLinkIndex',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(481, self, varargin{:});
     end
     function varargout = getSecondLinkIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(305,'SixAxisForceTorqueSensor_getSecondLinkIndex',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(482, self, varargin{:});
+    end
+    function varargout = setFirstLinkName(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(483, self, varargin{:});
+    end
+    function varargout = setSecondLinkName(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(484, self, varargin{:});
+    end
+    function varargout = getFirstLinkName(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(485, self, varargin{:});
+    end
+    function varargout = getSecondLinkName(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(486, self, varargin{:});
     end
     function varargout = setParent(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(306,'SixAxisForceTorqueSensor_setParent',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(487, self, varargin{:});
     end
     function varargout = setParentIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(307,'SixAxisForceTorqueSensor_setParentIndex',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(488, self, varargin{:});
     end
     function varargout = setAppliedWrenchLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(308,'SixAxisForceTorqueSensor_setAppliedWrenchLink',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(489, self, varargin{:});
     end
     function varargout = getName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(309,'SixAxisForceTorqueSensor_getName',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(490, self, varargin{:});
     end
     function varargout = getSensorType(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(310,'SixAxisForceTorqueSensor_getSensorType',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(491, self, varargin{:});
     end
     function varargout = getParent(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(311,'SixAxisForceTorqueSensor_getParent',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(492, self, varargin{:});
     end
     function varargout = getParentIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(312,'SixAxisForceTorqueSensor_getParentIndex',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(493, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(313,'SixAxisForceTorqueSensor_isValid',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(494, self, varargin{:});
     end
     function varargout = clone(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(314,'SixAxisForceTorqueSensor_clone',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(495, self, varargin{:});
     end
     function varargout = getAppliedWrenchLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(315,'SixAxisForceTorqueSensor_getAppliedWrenchLink',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(496, self, varargin{:});
     end
     function varargout = isLinkAttachedToSensor(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(316,'SixAxisForceTorqueSensor_isLinkAttachedToSensor',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(497, self, varargin{:});
     end
     function varargout = getLinkSensorTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(317,'SixAxisForceTorqueSensor_getLinkSensorTransform',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(498, self, varargin{:});
     end
     function varargout = getWrenchAppliedOnLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(318,'SixAxisForceTorqueSensor_getWrenchAppliedOnLink',self,varargin{:});
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-      [v,ok] = swig_fieldsref@iDynTree.Sensor(self,i);
-      if ok
-        return
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
-      [self,ok] = swig_fieldasgn@iDynTree.Sensor(self,i,v);
-      if ok
-        return
-      end
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(499, self, varargin{:});
     end
   end
   methods(Static)

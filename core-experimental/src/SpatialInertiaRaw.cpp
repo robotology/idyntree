@@ -5,18 +5,20 @@
  *
  */
 
-#include "SpatialInertiaRaw.h"
-#include "SpatialForceVector.h"
-#include "SpatialMotionVector.h"
-#include "PositionRaw.h"
-#include "Utils.h"
-#include "PrivateUtils.h"
+
+#include <iDynTree/Core/SpatialInertiaRaw.h>
+#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/Core/PositionRaw.h>
+#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivateUtils.h>
 
 #include <Eigen/Dense>
 
-#include <cassert>
 #include <iostream>
 #include <sstream>
+
+#include <cassert>
 
 
 namespace iDynTree
@@ -51,6 +53,28 @@ SpatialInertiaRaw::~SpatialInertiaRaw()
 {
 
 }
+
+void SpatialInertiaRaw::fromRotationalInertiaWrtCenterOfMass(const double mass,
+                                                        const PositionRaw& com,
+                                                        const RotationalInertiaRaw& rotInertiaWrtCom)
+{
+    this->m_mass = mass;
+
+    for(int i = 0; i < 3; i++ )
+    {
+        this->m_mcom[i] = this->m_mass*com(i);
+    }
+
+    // Here we need to compute the rotational inertia at the com
+    // given the one expressed at the frame origin
+    // we apply formula 2.63 in Featherstone 2008
+    Eigen::Map<Eigen::Matrix3d> linkInertia(this->m_rotInertia.data());
+    Eigen::Map<const Eigen::Matrix3d> comInertia(rotInertiaWrtCom.data());
+    Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
+
+    linkInertia = comInertia - squareCrossProductMatrix(mcom)/this->m_mass;
+}
+
 
 double SpatialInertiaRaw::getMass() const
 {
@@ -87,6 +111,32 @@ RotationalInertiaRaw SpatialInertiaRaw::getRotationalInertiaWrtCenterOfMass() co
     return retComInertia;
 }
 
+SpatialInertiaRaw SpatialInertiaRaw::SpatialInertiaRaw::combine(const SpatialInertiaRaw& op1,
+                                                                const SpatialInertiaRaw& op2)
+{
+    SpatialInertiaRaw ret;
+    // If the two inertia are expressed with the same orientation
+    // and with respect to the same point (and this will be checked by
+    // the semantic check) we just need to sum
+    // the mass, the first moment of mass and the rotational inertia
+    ret.m_mass = op1.m_mass + op2.m_mass;
+
+    Eigen::Map<Eigen::Vector3d> retMcom(ret.m_mcom);
+    Eigen::Map<const Eigen::Vector3d> op1Mcom(op1.m_mcom);
+    Eigen::Map<const Eigen::Vector3d> op2Mcom(op2.m_mcom);
+
+    retMcom = op1Mcom + op2Mcom;
+
+    Eigen::Map<Eigen::Matrix3d> retRotInertia(ret.m_rotInertia.data());
+    Eigen::Map<const Eigen::Matrix3d> op1RotInertia(op1.m_rotInertia.data());
+    Eigen::Map<const Eigen::Matrix3d> op2RotInertia(op2.m_rotInertia.data());
+
+    retRotInertia = op1RotInertia + op2RotInertia;
+
+    return ret;
+}
+
+
 SpatialForceVector SpatialInertiaRaw::multiply(const SpatialMotionVector& op) const
 {
     SpatialForceVector ret;
@@ -98,6 +148,7 @@ SpatialForceVector SpatialInertiaRaw::multiply(const SpatialMotionVector& op) co
     Eigen::Map<Eigen::Vector3d> angularForce(ret.getAngularVec3().data());
     Eigen::Map<const Eigen::Vector3d> linearMotion(ret.getLinearVec3().data());
     Eigen::Map<const Eigen::Vector3d> angularMotion(ret.getAngularVec3().data());
+
     Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
     Eigen::Map<const Eigen::Matrix3d> inertia3d(this->m_rotInertia.data());
 

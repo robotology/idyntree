@@ -5,17 +5,24 @@
  *
  */
 
-#include "KDLConversions.h"
+#include <kdl_codyco/KDLConversions.h>
 
-#include "iDynTree/Core/Position.h"
-#include "iDynTree/Core/Rotation.h"
-#include "iDynTree/Core/Transform.h"
-#include "iDynTree/Core/Twist.h"
-#include "iDynTree/Core/Wrench.h"
+#include <iDynTree/Core/ClassicalAcc.h>
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/SpatialInertia.h>
+#include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/VectorDynSize.h>
+
 
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
+
+#include <kdl/rigidbodyinertia.hpp>
 
 #include <Eigen/Dense>
 
@@ -65,12 +72,44 @@ KDL::Twist ToKDL(const Twist& idyntree_twist)
     return kdl_twist;
 }
 
+KDL::Twist ToKDL(const SpatialAcc& idyntree_spatial_acc)
+{
+    KDL::Twist kdl_twist;
+
+    memcpy(kdl_twist.vel.data,idyntree_spatial_acc.getLinearVec3().data(),3*sizeof(double));
+    memcpy(kdl_twist.rot.data,idyntree_spatial_acc.getAngularVec3().data(),3*sizeof(double));
+
+    return kdl_twist;
+}
+
+
+KDL::Twist ToKDL(const ClassicalAcc& idyntree_classical_acc)
+{
+    KDL::Twist kdl_twist;
+
+    memcpy(kdl_twist.vel.data,idyntree_classical_acc.data(),3*sizeof(double));
+    memcpy(kdl_twist.rot.data,idyntree_classical_acc.data()+3,3*sizeof(double));
+
+    return kdl_twist;
+}
+
+
 KDL::Wrench ToKDL(const Wrench& idyntree_wrench)
 {
     KDL::Wrench kdl_wrench;
 
     memcpy(kdl_wrench.force.data,idyntree_wrench.getLinearVec3().data(),3*sizeof(double));
     memcpy(kdl_wrench.torque.data,idyntree_wrench.getAngularVec3().data(),3*sizeof(double));
+
+    return kdl_wrench;
+}
+
+KDL::Wrench ToKDL(const SpatialMomentum& idyntree_spatial_momentum)
+{
+    KDL::Wrench kdl_wrench;
+
+    memcpy(kdl_wrench.force.data,idyntree_spatial_momentum.getLinearVec3().data(),3*sizeof(double));
+    memcpy(kdl_wrench.torque.data,idyntree_spatial_momentum.getAngularVec3().data(),3*sizeof(double));
 
     return kdl_wrench;
 }
@@ -140,6 +179,34 @@ Wrench ToiDynTree(const KDL::Wrench& kdl_wrench)
     memcpy(idyntree_wrench.getAngularVec3().data(),kdl_wrench.torque.data,3*sizeof(double));
 
     return idyntree_wrench;
+}
+
+iDynTree::RotationalInertiaRaw  ToiDynTree(const KDL::RotationalInertia & kdl_rotInertia)
+{
+    iDynTree::RotationalInertiaRaw ret;
+    // \todo TODO migrate this method to RotationalInertia class when available
+    // the rotational inertia matrix is symmetric, so the column/row major ordering
+    // does not matter (but in general in iDynTree we assume the RowMajor ordering
+    Eigen::Map<Eigen::Matrix3d> idynTreeInertia(ret.data());
+    Eigen::Map<const Eigen::Matrix3d> kdlInertia(kdl_rotInertia.data);
+
+    idynTreeInertia = kdlInertia;
+
+    return ret;
+}
+
+
+SpatialInertia ToiDynTree(const KDL::RigidBodyInertia& kdl_inertia)
+{
+    double mass_idyntree = kdl_inertia.getMass();
+    iDynTree::Position com_idyntree = ToiDynTree(kdl_inertia.getCOG());
+    // This works because both kdl_inertia.getRotationalInertia() and the iDynTree::SpatialInertia
+    // constructor consider the RotationalInertia expressed wrt the origin of the link
+    // differently from the KDL::RigidBodyInertia construtor that takes the inertia expressed
+    // with respect to the center of mass
+    iDynTree::RotationalInertiaRaw rotInertia_idyntree = ToiDynTree(kdl_inertia.getRotationalInertia());
+
+    return iDynTree::SpatialInertia(mass_idyntree,com_idyntree,rotInertia_idyntree);
 }
 
 bool ToiDynTree(const KDL::JntArray& kdl_jntarray, VectorDynSize& idyntree_jntarray)

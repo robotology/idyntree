@@ -11,6 +11,7 @@
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
+
 #include <Eigen/Dense>
 
 #define GEOMVECTOR3SEMANTICS_TEMPLATE_HDR \
@@ -40,7 +41,7 @@ namespace iDynTree
         int body;
         int refBody;
         int coordinateFrame;
-    
+
     public:
         /**
          * Constructors:
@@ -49,7 +50,7 @@ namespace iDynTree
         GeomVector3Semantics(int _body, int _refBody, int _coordinateFrame);
         GeomVector3Semantics(const GeomVector3Semantics & other);
         ~GeomVector3Semantics();
-        
+
         /**
          * Getters, setters & helpers
          */
@@ -57,7 +58,7 @@ namespace iDynTree
         int getRefBody() const;
         int getCoordinateFrame() const;
         bool isUnknown() const;
-        
+
         /**
          * Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
@@ -83,12 +84,11 @@ namespace iDynTree
     GEOMVECTOR3_TEMPLATE_HDR
     class GeomVector3: public Vector3
     {
-    protected:
+    public:
         MotionForceTSemantics semantics;
 
-    public:
         typedef GeomVector3<MotionForceT, MotionForceAssociationsT, MotionForceTSemantics> MotionForceTbase;
-        
+
         /**
          * constructors
          */
@@ -96,40 +96,40 @@ namespace iDynTree
         GeomVector3(const double* in_data, const unsigned int in_size);
         GeomVector3(const GeomVector3 & other);
         virtual ~GeomVector3();
-        
+
         /**
          * Getters & setters
          */
         const MotionForceTSemantics& getSemantics() const;
         void setSemantics(MotionForceTSemantics& _semantics);
-        
+
         /**
          * Geometric operations
          */
         MotionForceT changeCoordFrame(const Rotation & newCoordFrame) const;
         static MotionForceT compose(const MotionForceTbase & op1, const MotionForceT & op2);
         static MotionForceT inverse(const MotionForceTbase & op);
-        
+
         /**
          * dot product
          */
         double dot(const typename MotionForceAssociationsT::DualSpace & other) const;
-        
+
         /**
          * overloaded operators
          */
         MotionForceT operator+(const MotionForceT &other) const;
         MotionForceT operator-(const MotionForceT &other) const;
         MotionForceT operator-() const;
-        
-        template <typename DerivedSpatialVecT, typename LinearVector3T, typename AngularVector3T>
-        friend class SpatialVector;
+
+        template <class DerivedSpatialVecT, class LinearVector3T, class AngularVector3T>
+        class SpatialVector;
     };
 
     /**
      * GeomVector3Semantics Method definitions ===================================
      */
-    
+
     // constructors
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
     GEOMVECTOR3SEMANTICS_INSTANCE_HDR::GeomVector3Semantics():
@@ -184,7 +184,7 @@ namespace iDynTree
     {
         return (this->body == UNKNOWN && this->refBody == UNKNOWN && this->coordinateFrame == UNKNOWN);
     }
-    
+
     // Semantics operations
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
     bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::changeCoordFrame(const RotationSemantics & newCoordFrame,
@@ -201,7 +201,7 @@ namespace iDynTree
          && reportErrorIf(!checkEqualOrUnknown(newCoordFrame.getBody(),newCoordFrame.getRefBody()),
                           __PRETTY_FUNCTION__,
                           "newCoordFrame body and reference body should be the same\n")*/);
-        
+
         // compute semantics
         //result = *this; won't compile because "this" is compiled as a "GeomVector3Semantics" object.
         result.body = this->body;
@@ -210,7 +210,7 @@ namespace iDynTree
 
         result.refBody = newCoordFrame.getRefBody();
         result.coordinateFrame = newCoordFrame.getCoordinateFrame();
-        
+
         return semantics_status;
     }
 
@@ -232,7 +232,7 @@ namespace iDynTree
         // compute semantics;
         result = op1;
         result.refBody = op2.refBody;
-        
+
         return semantics_status;
     }
 
@@ -243,7 +243,7 @@ namespace iDynTree
         result = op;
         result.body = op.refBody;
         result.refBody = op.body;
-        
+
         return true;
     }
 
@@ -261,10 +261,10 @@ namespace iDynTree
          && reportErrorIf(!checkEqualOrUnknown(this->refBody,other.refBody),
                           __PRETTY_FUNCTION__,
                           "The reference bodies defined for both operands of the dot product don't match\n"));
-        
+
         // compute semantics: the result of dot product is a scalar and we're not sure if this result's
         // semantics make sense. For now it's not defined.
-        
+
         return semantics_status;
     }
 
@@ -272,24 +272,24 @@ namespace iDynTree
     /**
      * GeomVector3 Method definitions ============================================
      */
-    
+
     // constructors
     GEOMVECTOR3_TEMPLATE_HDR
     GEOMVECTOR3_INSTANCE_HDR::GeomVector3(): Vector3()
     {}
-    
+
     GEOMVECTOR3_TEMPLATE_HDR
     GEOMVECTOR3_INSTANCE_HDR::GeomVector3(const double* in_data, const unsigned int in_size): Vector3(in_data, in_size)
     {}
-    
+
     GEOMVECTOR3_TEMPLATE_HDR
     GEOMVECTOR3_INSTANCE_HDR::GeomVector3(const GeomVector3 & other): Vector3(other), semantics(other.semantics)
     {}
-    
+
     GEOMVECTOR3_TEMPLATE_HDR
     GEOMVECTOR3_INSTANCE_HDR::~GeomVector3()
     {}
-    
+
     // Getters & setters
     GEOMVECTOR3_TEMPLATE_HDR
     const MotionForceTSemantics& GEOMVECTOR3_INSTANCE_HDR::getSemantics() const
@@ -303,55 +303,55 @@ namespace iDynTree
         iDynTreeAssert(this->semantics.isUnknown());
         this->semantics = _semantics;
     }
-    
+
     // Geometric operations
     GEOMVECTOR3_TEMPLATE_HDR
     MotionForceT GEOMVECTOR3_INSTANCE_HDR::changeCoordFrame(const Rotation & newCoordFrame) const
     {
         MotionForceT result;
-        
+
         iDynTreeAssert(semantics.changeCoordFrame(newCoordFrame.getSemantics(), result.semantics));
-        
+
         Eigen::Map<const Vector3d> thisMap(this->data());
         Eigen::Map<const Matrix3dRowMajor> rotMap(newCoordFrame.data());
         Eigen::Map<Vector3d> resultMap(result.data());
-        
+
         resultMap = rotMap*thisMap;
-        
+
         return result;
     }
-    
+
     GEOMVECTOR3_TEMPLATE_HDR
     MotionForceT GEOMVECTOR3_INSTANCE_HDR::compose(const MotionForceTbase & op1, const MotionForceT & op2)
     {
         MotionForceT result;
-        
+
         iDynTreeAssert(MotionForceTSemantics::compose(op1.semantics, op2.semantics, result.semantics));
-        
+
         Eigen::Map<const Vector3d> op1Data(op1.data());
         Eigen::Map<const Vector3d> op2Data(op2.data());
         Eigen::Map<Vector3d> resultData(result.data());
-        
+
         resultData = op1Data + op2Data;
-        
+
         return result;
     }
-    
+
     GEOMVECTOR3_TEMPLATE_HDR
     MotionForceT GEOMVECTOR3_INSTANCE_HDR::inverse(const MotionForceTbase & op)
     {
         MotionForceT result;
-        
+
         iDynTreeAssert(GeomVector3Semantics<MotionForceTSemantics>::inverse(op.semantics, result.semantics));
-        
+
         Eigen::Map<const Vector3d> opData(op.data());
         Eigen::Map<Vector3d> resultData(result.data());
-        
+
         resultData = -opData;
-        
+
         return result;
     }
-    
+
     // dot product
     GEOMVECTOR3_TEMPLATE_HDR
     double GEOMVECTOR3_INSTANCE_HDR::dot(const typename MotionForceAssociationsT::DualSpace & other) const
@@ -360,7 +360,7 @@ namespace iDynTree
 
         Eigen::Map<const Vector3d> otherData(other.data());
         Eigen::Map<const Vector3d> thisData(this->data());
-        
+
         return thisData.dot(otherData);
     }
 
@@ -370,13 +370,13 @@ namespace iDynTree
     {
         return compose(*this, other);
     }
-    
+
     GEOMVECTOR3_TEMPLATE_HDR
     MotionForceT GEOMVECTOR3_INSTANCE_HDR::operator-(const MotionForceT &other) const
     {
         return compose(*this, inverse(other));
     }
-    
+
     GEOMVECTOR3_TEMPLATE_HDR
     MotionForceT GEOMVECTOR3_INSTANCE_HDR::operator-() const
     {

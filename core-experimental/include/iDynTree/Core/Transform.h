@@ -8,10 +8,11 @@
 #ifndef IDYNTREE_TRANSFORM_H
 #define IDYNTREE_TRANSFORM_H
 
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/TransformSemantics.h>
+
 #include <string>
-#include "Position.h"
-#include "Rotation.h"
-#include "TransformSemantics.h"
 
 namespace iDynTree
 {
@@ -55,7 +56,7 @@ namespace iDynTree
         Position pos;
         Rotation rot;
         TransformSemantics semantics;
-        
+
     public:
         /**
          * Default constructor: initialize the rotation to the identity and the translation to 0
@@ -113,9 +114,9 @@ namespace iDynTree
 
         /**
          * overloaded operators
-         * 
+         *
          * They overload geometric operations which are local functions in Transform.cpp. These functions are
-         * not exported because they are templated, and exporting templates on Windows might cause compatibility 
+         * not exported because they are templated, and exporting templates on Windows might cause compatibility
          * issues.
          */
         Transform operator*(const Transform & other) const;
@@ -126,12 +127,103 @@ namespace iDynTree
         SpatialMomentum operator*(const SpatialMomentum & other) const;
         SpatialAcc   operator*(const SpatialAcc & other) const;
         SpatialInertia operator*(const SpatialInertia  & other) const;
+        Direction      operator*(const Direction & other) const;
+        Axis           operator*(const Axis & other) const;
 
         /**
          * constructor helpers
          */
         static Transform Identity();
-        
+
+        /**
+         * Raw data accessors.
+         *
+         * For several applications it may be useful to access the fransform
+         * contents in the raw form of homogeneous matrix or an adjoint matrix.
+         */
+        ///@{
+
+        /**
+         * Return the 4x4 homogeneous matrix representing the transform.
+         *
+         * The returned matrix is the one with this structure:
+         *
+         * |           |
+         * |  R     p  |
+         * |           |
+         * | 0 0 0  1  |
+         *
+         * Where R \in \mathbb{R}^{3 \times 3} is the rotation matrix that takes
+         * a 3d vector expressed in the orientationFrame and transform it
+         * in a 3d vector expressed in the reference orientation frame.
+         *
+         * p \in \mathbb{R}^3 is the vector between the point and the
+         * reference point, pointing toward the point and expressed
+         * in the reference orientation frame.
+         *
+         */
+        Matrix4x4 asHomogeneousTransform() const;
+
+        /**
+         * Return the 6x6 adjoint matrix representing this transform.
+         *
+         * The returned matrix is the one with this structure:
+         *
+         * |                 |
+         * |  R     S(p) R   |
+         * |                 |
+         * | 0 0 0           |
+         * | 0 0 0     R     |
+         * | 0 0 0           |
+         *
+         * Where R \in \mathbb{R}^{3 \times 3} is the rotation matrix that takes
+         * a 3d vector expressed in the orientationFrame and transform it
+         * in a 3d vector expressed in the reference orientation frame.
+         *
+         * p \in \mathbb{R}^3 is the vector between the point and the
+         * reference point, pointing toward the point and expressed
+         * in the reference orientation frame. S(p) is the skew simmetric
+         * matrix such that S(p)v = p \times v .
+         *
+         * \warning Note that in iDynTree the matrix are stored
+         *          in row major order, and the 6d quantites are
+         *          serialized in linear/angular order.
+         *
+         */
+        Matrix6x6 asAdjointTransform() const;
+
+        /**
+         * Return the 6x6 adjoint matrix (for wrench) representing this transform.
+         *
+         * The returned matrix is the one with this structure:
+         *
+         * |         0 0 0  |
+         * |  R      0 0 0  |
+         * |         0 0 0  |
+         * |                |
+         * | S(p)R     R    |
+         * |                |
+         *
+         * Where R \in \mathbb{R}^{3 \times 3} is the rotation matrix that takes
+         * a 3d vector expressed in the orientationFrame and transform it
+         * in a 3d vector expressed in the reference orientation frame.
+         *
+         * p \in \mathbb{R}^3 is the vector between the point and the
+         * reference point, pointing toward the point and expressed
+         * in the reference orientation frame. S(p) is the skew simmetric
+         * matrix such that S(p)v = p \times v .
+         *
+         *  \warning Note that in iDynTree the matrix are stored
+         *           in row major order, and the 6d quantites are
+         *           serialized in linear/angular order.
+         *
+         */
+        Matrix6x6 asAdjointTransformWrench() const;
+
+
+
+        ///@}
+
         /** @name Output helpers.
          *  Output helpers.
          */

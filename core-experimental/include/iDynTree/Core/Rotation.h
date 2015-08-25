@@ -9,8 +9,8 @@
 #define IDYNTREE_ROTATION_H
 
 #include <string>
-#include "RotationRaw.h"
-#include "RotationSemantics.h"
+#include <iDynTree/Core/RotationRaw.h>
+#include <iDynTree/Core/RotationSemantics.h>
 
 namespace iDynTree
 {
@@ -18,7 +18,12 @@ namespace iDynTree
     class Twist;
     class SpatialAcc;
     class Wrench;
+    class Direction;
+    class Axis;
+    class SpatialAcc;
     class SpatialMomentum;
+    class ClassicalAcc;
+    class RotationalInertiaRaw;
 
     /**
      * Class representation the rotation of an orientation frame
@@ -44,12 +49,12 @@ namespace iDynTree
     {
     private:
         RotationSemantics semantics;
-        
+
         /**
          * Copy constructor: create a Rotation from another RotationRaw and another RotationSemantics.
          */
         Rotation(const RotationRaw & other, RotationSemantics & semantics);
-        
+
     public:
         /**
          * Default constructor: initialize all the rotation to the identity
@@ -92,7 +97,7 @@ namespace iDynTree
          * Geometric operations.
          * For the inverse2() operation, both the forward and the inverse geometric relations have to
          * be expressed in the reference orientation frame!!
-         * 
+         *
          */
         const Rotation & changeOrientFrame(const Rotation & newOrientFrame);
         const Rotation & changeRefOrientFrame(const Rotation & newRefOrientFrame);
@@ -104,6 +109,10 @@ namespace iDynTree
         SpatialAcc changeCoordFrameOf(const SpatialAcc & other) const;
         SpatialMomentum changeCoordFrameOf(const SpatialMomentum & other) const;
         Wrench changeCoordFrameOf(const Wrench & other) const;
+        Direction changeCoordFrameOf(const Direction & other) const;
+        Axis      changeCoordFrameOf(const Axis & other) const;
+        ClassicalAcc changeCoordFrameOf(const ClassicalAcc & other) const;
+        RotationalInertiaRaw changeCoordFrameOf(const RotationalInertiaRaw & other) const;
 
 
         /**
@@ -112,61 +121,72 @@ namespace iDynTree
         Rotation operator*(const Rotation & other) const;
         Rotation inverse() const;
         Position operator*(const Position & other) const;
-        Twist operator*(const Twist & other) const;
-        SpatialAcc operator*(const SpatialAcc & other) const;
-        SpatialMomentum operator*(const SpatialMomentum & other) const;
-        Wrench operator*(const Wrench & other) const;
-
+        Twist    operator*(const Twist    & other) const;
+        Wrench   operator*(const Wrench   & other) const;
+        Direction operator*(const Direction & other) const;
+        Axis      operator*(const Axis    & other) const;
+        SpatialAcc      operator*(const SpatialAcc    & other) const;
+        SpatialMomentum operator*(const SpatialMomentum   & other) const;
+        ClassicalAcc    operator*(const ClassicalAcc    & other) const;
+        RotationalInertiaRaw    operator*(const RotationalInertiaRaw    & other) const;
 
         /**
          * @name Initialization helpers.
          *
          */
         ///@{
-        
+
         /**
          * Return a Rotation around axis X of given angle
          *
          * @param angle the angle (in Radians) of the rotation arount the X axis
          */
         static Rotation RotX(const double angle);
-        
+
         /**
          * Return a Rotation around axis Y of given angle
          *
          * @param angle the angle (in Radians) of the rotation arount the Y axis
          */
         static Rotation RotY(const double angle);
-        
+
         /**
          * Return a Rotation around axis Z of given angle
          *
          * @param angle the angle (in Radians) of the rotation arount the Z axis
          */
         static Rotation RotZ(const double angle);
-        
+
+        /**
+         * Return a Rotation around axis given by direction of given angle
+         *
+         * @param direction the Direction around with to rotate
+         * @param angle the angle (in Radians) of the rotation arount the Z axis
+         */
+        static Rotation RotAxis(const Direction & direction, const double angle);
+
         /**
          * Return a rotation object given Roll, Pitch and Yaw values.
          *
          * @note This method is compatible with the KDL::Rotation::RPY method.
          */
         static Rotation RPY(const double roll, const double pitch, const double yaw);
-        
+
         /**
          * Return an identity rotation.
          *
          *
          */
         static Rotation Identity();
-        
+
         ///@}
-        
+
         /** @name Output helpers.
          *  Output helpers.
          */
         ///@{
         std::string toString() const;
-        
+
         std::string reservedToString() const;
         ///@}
     };

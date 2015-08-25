@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_SPATIAL_INERTIA_RAW_H
 #define IDYNTREE_SPATIAL_INERTIA_RAW_H
 
-#include "RotationalInertiaRaw.h"
+#include <iDynTree/Core/RotationalInertiaRaw.h>
 
 namespace iDynTree
 {
@@ -27,7 +27,7 @@ namespace iDynTree
      */
     class SpatialInertiaRaw
     {
-    private:
+    protected:
         double m_mass; /** mass */
         double m_mcom[3]; /** first moment of mass (i.e. mass * center of mass */
         RotationalInertiaRaw m_rotInertia; /** rotational inertia */
@@ -47,6 +47,14 @@ namespace iDynTree
         SpatialInertiaRaw(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
         SpatialInertiaRaw(const SpatialInertiaRaw & other);
         virtual ~SpatialInertiaRaw();
+
+        /**
+         * Helper constructor-like function that takes mass, center of mass
+         * and the rotational inertia expressed in the center of mass.
+         *
+         */
+        void fromRotationalInertiaWrtCenterOfMass(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
+
 
         /** multiplication operator
          *
@@ -70,12 +78,18 @@ namespace iDynTree
         RotationalInertiaRaw getRotationalInertiaWrtCenterOfMass() const;
 
         /**
+         * Function to combine the rigid body inertia of two different rigid bodies,
+         * giving the rigid body inertia of of the rigid body obtanined by welding the two bodies.
+         */
+        static SpatialInertiaRaw combine(const SpatialInertiaRaw& op1, const SpatialInertiaRaw& op2);
+
+        /**
          * Multiplication function
          *
          */
         SpatialForceVector multiply(const SpatialMotionVector & op) const;
 
-        /** reset to zero (i.e. the inertia of body with zero pass) the SpatialInertia */
+        /** reset to zero (i.e. the inertia of body with zero mass) the SpatialInertia */
         void zero();
     };
 }

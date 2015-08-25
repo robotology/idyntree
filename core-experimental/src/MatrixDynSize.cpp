@@ -5,8 +5,8 @@
  *
  */
 
-#include "MatrixDynSize.h"
-#include "Utils.h"
+#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/Core/Utils.h>
 #include <cassert>
 #include <cstdio>
 #include <sstream>

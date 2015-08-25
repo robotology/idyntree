@@ -4,7 +4,7 @@
  * website: http://www.codyco.eu
  */
 
-#include "position_loops.hpp"
+#include <kdl_codyco/position_loops.hpp>
 
 namespace KDL {
 namespace CoDyCo {
@@ -93,7 +93,8 @@ namespace CoDyCo {
     int getFramesLoop(const UndirectedTree & undirected_tree,
                       const KDL::JntArray &q,
                       const Traversal & traversal,
-                      std::vector<Frame> & X_base)
+                      std::vector<Frame> & X_base,
+                      KDL::Frame world2base)
     {
           for(int i=0; i < (int)traversal.getNrOfVisitedLinks(); i++) {
             double joint_pos;
@@ -101,7 +102,7 @@ namespace CoDyCo {
             int link_nmbr = link_it->getLinkIndex();
             if( i == 0 ) {
                 assert( traversal.getParentLink(link_nmbr) == undirected_tree.getInvalidLinkIterator() );
-                X_base[link_nmbr] = KDL::Frame::Identity();
+                X_base[link_nmbr] = world2base;
             } else {
                 LinkMap::const_iterator parent_it = traversal.getParentLink(link_it);
                 int parent_nmbr = parent_it->getLinkIndex();

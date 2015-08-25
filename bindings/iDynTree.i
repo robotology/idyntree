@@ -1,9 +1,11 @@
 
 /* File : iDynTree.i */
 %module iDynTree
+
 %include "std_string.i"
 
-// Support print to terminal
+// Ignore some methods to avoid warnings
+%include "./ignore.i"
 
 // Python
 #ifdef SWIGPYTHON
@@ -25,7 +27,6 @@
 #include "iDynTree/Core/VectorDynSize.h"
 #include "iDynTree/Core/VectorFixSize.h"
 
-
 // Basic Vectors: Point Vectors and Spatial Vectors
 #include "iDynTree/Core/PositionRaw.h"
 #include "iDynTree/Core/PositionSemantics.h"
@@ -40,6 +41,9 @@
 #include "iDynTree/Core/Wrench.h"
 #include "iDynTree/Core/SpatialMomentum.h"
 #include "iDynTree/Core/SpatialAcc.h"
+#include "iDynTree/Core/ClassicalAcc.h"
+#include "iDynTree/Core/Direction.h"
+#include "iDynTree/Core/Axis.h"
 
 // Inertias
 #include "iDynTree/Core/RotationalInertiaRaw.h"
@@ -53,13 +57,34 @@
 #include "iDynTree/Core/TransformSemantics.h"
 #include "iDynTree/Core/Transform.h"
 
+// Model related data structures
+#include "iDynTree/Model/Indeces.h"
+#include "iDynTree/Model/LinkState.h"
+#include "iDynTree/Model/IJointStateInterfaces.h"
+#include "iDynTree/Model/Link.h"
+#include "iDynTree/Model/IJoint.h"
+#include "iDynTree/Model/FixedJoint.h"
+#include "iDynTree/Model/MovableJointImpl.h"
+#include "iDynTree/Model/RevoluteJoint.h"
+#include "iDynTree/Model/Traversal.h"
+#include "iDynTree/Model/Model.h"
+
+// Model loading from external formats
+#include "iDynTree/ModelIO/URDFModelImport.h"
+
 // Sensors related data structures
 #include "iDynTree/Sensors/Sensors.hpp"
 #include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 
+// Sensors loading from external formats
+#include "iDynTree/ModelIO/URDFSensorsImport.h"
+
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
 #include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
+
+// High level interfaces
+#include "iDynTree/HighLevel/DynamicsComputations.h"
 
 %}
 
@@ -70,13 +95,18 @@
 %include "iDynTree/Core/MatrixDynSize.h"
 %include "iDynTree/Core/MatrixFixSize.h"
 
+
+%include "iDynTree/Core/VectorDynSize.h"
+%include "iDynTree/Core/VectorFixSize.h"
+
+#ifdef SWIGMATLAB
+%include "./matlab/matlab_matvec.i"
+#endif
+
 %template(Matrix3x3) iDynTree::MatrixFixSize<3,3>;
 %template(Matrix4x4) iDynTree::MatrixFixSize<4,4>;
 %template(Matrix6x6) iDynTree::MatrixFixSize<6,6>;
 %template(Matrix6x10) iDynTree::MatrixFixSize<6,10>;
-
-%include "iDynTree/Core/VectorDynSize.h"
-%include "iDynTree/Core/VectorFixSize.h"
 
 %template(Vector3) iDynTree::VectorFixSize<3>;
 %template(Vector6) iDynTree::VectorFixSize<6>;
@@ -86,6 +116,7 @@
 %include "iDynTree/Core/PositionRaw.h"
 %include "iDynTree/Core/PositionSemantics.h"
 %include "iDynTree/Core/Position.h"
+%include "iDynTree/Core/GeomVector3.h"
 %include "iDynTree/Core/LinearMotionVector3.h"
 %include "iDynTree/Core/LinearForceVector3.h"
 %include "iDynTree/Core/AngularMotionVector3.h"
@@ -96,13 +127,14 @@
 %include "iDynTree/Core/Wrench.h"
 %include "iDynTree/Core/SpatialMomentum.h"
 %include "iDynTree/Core/SpatialAcc.h"
-
+%include "iDynTree/Core/ClassicalAcc.h"
+%include "iDynTree/Core/Direction.h"
+%include "iDynTree/Core/Axis.h"
 
 // Inertias
 %include "iDynTree/Core/RotationalInertiaRaw.h"
 %include "iDynTree/Core/SpatialInertiaRaw.h"
 %include "iDynTree/Core/SpatialInertia.h"
-
 
 // Transformations: Rotation and Transform
 %include "iDynTree/Core/RotationRaw.h"
@@ -111,17 +143,42 @@
 %include "iDynTree/Core/TransformSemantics.h"
 %include "iDynTree/Core/Transform.h"
 
+// Model related data structures
+%include "iDynTree/Model/Indeces.h"
+%include "iDynTree/Model/LinkState.h"
+%include "iDynTree/Model/IJointStateInterfaces.h"
+%include "iDynTree/Model/Link.h"
+%include "iDynTree/Model/IJoint.h"
+%include "iDynTree/Model/FixedJoint.h"
+%include "iDynTree/Model/MovableJointImpl.h"
+
+%template(MovableJointImpl1) iDynTree::MovableJointImpl<1,1>;
+%template(MovableJointImpl2) iDynTree::MovableJointImpl<2,2>;
+%template(MovableJointImpl3) iDynTree::MovableJointImpl<3,3>;
+%template(MovableJointImpl4) iDynTree::MovableJointImpl<4,4>;
+%template(MovableJointImpl5) iDynTree::MovableJointImpl<5,5>;
+%template(MovableJointImpl6) iDynTree::MovableJointImpl<6,6>;
+
+%include "iDynTree/Model/RevoluteJoint.h"
+%include "iDynTree/Model/Traversal.h"
+%include "iDynTree/Model/Model.h"
+
+// Model loading from external formats
+%include "iDynTree/ModelIO/URDFModelImport.h"
+
 // Sensors related data structures
 %include "iDynTree/Sensors/Sensors.hpp"
 %include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+
+%include "sensors.i"
+
+// Sensors loading from external formats
+%include "iDynTree/ModelIO/URDFSensorsImport.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"
 %include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
 
-// Matlab
-#ifdef SWIGMATLAB
-%include "./matlab/matlab_post.i"
-#endif
-
+// High level interfaces
+%include "iDynTree/HighLevel/DynamicsComputations.h"
 

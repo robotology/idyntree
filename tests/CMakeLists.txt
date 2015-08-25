@@ -1,4 +1,7 @@
 
+
+
+
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
@@ -35,7 +38,7 @@ add_test(NAME test_comjacobian COMMAND comjacobian_test)
 #add_test(test_sparse_numerical_subspace sparse_numerical_subspace_test)
 add_test(NAME test_inversedynamics_different_loops COMMAND inversedynamics_different_loops_test)
 
-if(IDYNTREE_USE_ICUB_MAIN)
+if(IDYNTREE_USES_ICUB_MAIN)
   find_package(YARP)
   find_package(ICUB)
   add_executable(urdf2dh_test urdf2dh_tests.cpp)

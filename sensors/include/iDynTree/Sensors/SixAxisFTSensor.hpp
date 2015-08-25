@@ -64,7 +64,6 @@ namespace iDynTree {
          */
         bool setName(const std::string &_name);
 
-
         /**
          * Set the transform from the sensor to a first link attached to the sensor.
          *
@@ -92,6 +91,26 @@ namespace iDynTree {
          * @return the index of the first link attached to the sensor.
          */
         int getSecondLinkIndex() const;
+
+        /**
+         * Set the name of the first link at which the FT sensor is attached.
+         */
+        bool setFirstLinkName(const std::string & name);
+
+        /**
+         * Set the name of the first link at which the FT sensor is attached.
+         */
+        bool setSecondLinkName(const std::string & name);
+
+        /**
+         * Get the name of the first link at which the FT sensor is attached.
+         */
+        std::string getFirstLinkName() const;
+
+        /**
+         * Get the name of the second link at which the FT sensor is attached.
+         */
+        std::string getSecondLinkName() const;
 
         /**
          * Documented in Sensor
@@ -143,7 +162,6 @@ namespace iDynTree {
          */
         Sensor * clone() const;
 
-
         /**
          * The Six Axis Force Torque sensor measure the Force Torque (wrench)
          * applied by a link on another link. This method returns the link
@@ -175,10 +193,6 @@ namespace iDynTree {
         bool getWrenchAppliedOnLink(const int link_index,
                                     const iDynTree::Wrench & measured_wrench,
                                     iDynTree::Wrench & wrench_applied_on_link ) const;
-
-
-
-
 
     };
 

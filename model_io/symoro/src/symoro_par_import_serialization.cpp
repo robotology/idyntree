@@ -34,7 +34,7 @@
 
 /* Author: Silvio Traversaro */
 
-#include "symoro_par_import_serialization.hpp"
+#include <iDynTree/ModelIO/symoro_par_import_serialization.hpp>
 
 #include <expression_parser/parser.h>
 #include <string>
@@ -48,7 +48,7 @@
 using namespace KDL;
 using namespace std;
 
-namespace kdl_format_io {
+namespace iDynTree {
 
 bool treeSerializationFromSymoroParFile(const string& parfile_name, KDL::CoDyCo::TreeSerialization& serialization, const bool consider_first_link_inertia)
 {

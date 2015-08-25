@@ -34,8 +34,8 @@
 
 /* Author: Wim Meeussen */
 
-#include "urdf_import.hpp"
-#include "urdf_compatibility.h"
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_compatibility.h>
 #include <fstream>
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
@@ -44,7 +44,7 @@
 using namespace std;
 using namespace KDL;
 
-namespace kdl_format_io{
+namespace iDynTree{
 
 
 void printTree(urdf::ConstLinkPtr link,int level = 0)

@@ -9,7 +9,6 @@ set(IDYNTREE_USES_LUA FALSE CACHE BOOL "Do you want to create the Lua interface"
 set(IDYNTREE_USES_MATLAB FALSE CACHE BOOL "Do you want to create the MATLAB Interface")
 set(IDYNTREE_GENERATE_MATLAB FALSE CACHE BOOL "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper")
 
-
 find_package(SWIG)
 if(SWIG_FOUND)
     include(UseSWIG)
@@ -27,7 +26,6 @@ if(SWIG_FOUND)
     endif(IDYNTREE_USES_LUA)
 
     if(IDYNTREE_USES_PYTHON)
-        message(STATUS "using python!!")
         add_subdirectory(python)
     endif(IDYNTREE_USES_PYTHON)
 
@@ -35,4 +33,13 @@ if(SWIG_FOUND)
        add_subdirectory(matlab)
     endif(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB)
 endif(SWIG_FOUND)
+
+if(IDYNTREE_USES_PYTHON OR 
+   IDYNTREE_USES_LUA    OR
+   IDYNTREE_USES_MATLAB OR
+   IDYNTREE_GENERATED_MATLAB)
+   if(NOT SWIG_FOUND)
+       error("Swig not found, impossible to compile iDynTree bindings.")
+   endif()
+endif()
 

@@ -33,13 +33,13 @@ SpatialVectorSemantics<LinearVec3SemanticsT, AngularVec3SemanticsT>
         int test;
         LinearVec3SemanticsT & linearVec3Semantics;
         AngularVec3SemanticsT & angularVec3Semantics;
-        
+
     public:
         /**
          * constructors
          */
         SpatialVectorSemantics(LinearVec3SemanticsT & linearVec3, AngularVec3SemanticsT & angularVec3);
-        
+
         virtual ~SpatialVectorSemantics();
 
         bool check_linear2angularConsistency(const LinearVec3SemanticsT & linearVec3, const AngularVec3SemanticsT & angularVec3);
@@ -51,14 +51,14 @@ SpatialVectorSemantics<LinearVec3SemanticsT, AngularVec3SemanticsT>
          */
         SpatialVectorSemantics & operator=(const SpatialVectorSemantics & other);
     };
-    
+
     /**
      * Helper structure for dual space definition
      */
     template <typename SpatialVectorT> struct DualSpace {};
-    
+
     template <> struct DualSpace<SpatialMotionVector> {typedef SpatialForceVector Type;};
-    
+
     template <> struct DualSpace<SpatialForceVector> {typedef SpatialMotionVector Type;};
 
     /**
@@ -78,10 +78,10 @@ SpatialVectorSemantics<LinearVec3SemanticsT, AngularVec3SemanticsT>
      */
 #define SPATIALVECTOR_TEMPLATE_HDR \
 template <typename DerivedSpatialVecT, typename LinearVector3T, typename AngularVector3T>
-    
+
 #define SPATIALVECTOR_INSTANCE_HDR \
 SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     class SpatialVector
     {
@@ -98,7 +98,7 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
         SpatialVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
         SpatialVector(const SpatialVector & other);
         virtual ~SpatialVector();
-        
+
         /**
          * Accessors, Getters, setters
          */
@@ -116,32 +116,39 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
         const DerivedSpatialVecT changeCoordFrame(const Rotation & newCoordFrame);
         static DerivedSpatialVecT compose(const DerivedSpatialVecT & op1, const DerivedSpatialVecT & op2);
         static DerivedSpatialVecT inverse(const DerivedSpatialVecT & op);
-        
+
         /**
          * dot product
          */
         double dot(const typename DualSpace<DerivedSpatialVecT>::Type & other) const;
-        
+
         /**
          * overloaded operators
          */
         DerivedSpatialVecT operator+(const DerivedSpatialVecT &other) const;
         DerivedSpatialVecT operator-(const DerivedSpatialVecT &other) const;
         DerivedSpatialVecT operator-() const;
-        
+
         /**
          * constructor helpers
          */
         static DerivedSpatialVecT Zero();
-        
+
+        /**
+         * Conversion to basic vector.
+         */
+        Vector6 asVector() const;
+
         /** @name Output helpers.
          *  Output helpers.
          */
         ///@{
         std::string toString() const;
-        
+
         std::string reservedToString() const;
         ///@}
+
+
     };
 
 
@@ -197,7 +204,7 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
     semantics(linearVec3.semantics, angularVec3.semantics)
     {
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     SPATIALVECTOR_INSTANCE_HDR::SpatialVector(const LinearVector3T & _linearVec3,
                                               const AngularVector3T & _angularVec3):
@@ -206,7 +213,7 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
     semantics(linearVec3.semantics, angularVec3.semantics)
     {
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     SPATIALVECTOR_INSTANCE_HDR::SpatialVector(const SpatialVector & other):
     linearVec3(other.getLinearVec3()),
@@ -214,37 +221,37 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
     semantics(linearVec3.semantics, angularVec3.semantics)
     {
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     SPATIALVECTOR_INSTANCE_HDR::~SpatialVector()
     {
     }
-    
+
     // Accessors, Getters, setters
     SPATIALVECTOR_TEMPLATE_HDR
     LinearVector3T & SPATIALVECTOR_INSTANCE_HDR::getLinearVec3()
     {
         return this->linearVec3;
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     AngularVector3T & SPATIALVECTOR_INSTANCE_HDR::getAngularVec3()
     {
         return this->angularVec3;
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     const LinearVector3T & SPATIALVECTOR_INSTANCE_HDR::getLinearVec3() const
     {
         return this->linearVec3;
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     const AngularVector3T & SPATIALVECTOR_INSTANCE_HDR::getAngularVec3() const
     {
         return this->angularVec3;
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     void SPATIALVECTOR_INSTANCE_HDR::setLinearVec3(const LinearVector3T & _linearVec3)
     {
@@ -253,7 +260,7 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
         // set linear component
         linearVec3 = _linearVec3;
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     void SPATIALVECTOR_INSTANCE_HDR::setAngularVec3(const AngularVector3T & _angularVec3)
     {
@@ -275,21 +282,21 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
     {
         return newCoordFrame.changeCoordFrameOf(*this);
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::compose(const DerivedSpatialVecT & op1, const DerivedSpatialVecT & op2)
     {
         return DerivedSpatialVecT(op1.getLinearVec3()+op2.getLinearVec3(),
                                   op1.getAngularVec3()+op2.getAngularVec3());
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::inverse(const DerivedSpatialVecT & op)
     {
         return DerivedSpatialVecT(-op.getLinearVec3(),
                                   -op.getAngularVec3());
     }
-    
+
     // dot product
     SPATIALVECTOR_TEMPLATE_HDR
     double SPATIALVECTOR_INSTANCE_HDR::dot(const typename DualSpace<DerivedSpatialVecT>::Type & other) const
@@ -297,20 +304,20 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
         return (this->getLinearVec3().dot(other.getLinearVec3())
              + this->getAngularVec3().dot(other.getAngularVec3()));
     }
-    
+
     // overloaded operators
     SPATIALVECTOR_TEMPLATE_HDR
     DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::operator+(const DerivedSpatialVecT &other) const
     {
         return compose(*this, other);
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::operator-(const DerivedSpatialVecT &other) const
     {
         return compose(*this, inverse(other));
     }
-    
+
     SPATIALVECTOR_TEMPLATE_HDR
     DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::operator-() const
     {
@@ -325,14 +332,28 @@ SpatialVector<DerivedSpatialVecT, LinearVector3T, AngularVector3T>
     }
 
     SPATIALVECTOR_TEMPLATE_HDR
+    Vector6 SPATIALVECTOR_INSTANCE_HDR::asVector() const
+    {
+        Vector6 ret;
+        ret.data()[0] = linearVec3.data()[0];
+        ret.data()[1] = linearVec3.data()[1];
+        ret.data()[2] = linearVec3.data()[2];
+        ret.data()[3] = angularVec3.data()[0];
+        ret.data()[4] = angularVec3.data()[1];
+        ret.data()[5] = angularVec3.data()[2];
+        return ret;
+    }
+
+
+    SPATIALVECTOR_TEMPLATE_HDR
     std::string SPATIALVECTOR_INSTANCE_HDR::toString() const
     {
         std::stringstream ss;
-        
+
         ss << linearVec3.toString() << " "
         << angularVec3.toString() << " "
         << semantics.toString() << std::endl;
-        
+
         return ss.str();
     }
 

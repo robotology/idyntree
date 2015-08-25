@@ -25,8 +25,8 @@
 
 #include <kdl/kinfam_io.hpp>
 #include <kdl/frames_io.hpp>
-#include "undirectedtree.hpp"
-#include "utils.hpp"
+#include <kdl_codyco/undirectedtree.hpp>
+#include <kdl_codyco/utils.hpp>
 
 namespace KDL {
 namespace CoDyCo {
@@ -35,28 +35,28 @@ namespace CoDyCo {
     {
         return order.size();
     }
-        
+
     LinkMap::const_iterator Traversal::getOrderedLink(int order_number) const
     {
         return order[order_number];
     }
-    
+
     LinkMap::const_iterator Traversal::getBaseLink() const
     {
         return order[0];
     }
-    
-        
+
+
     LinkMap::const_iterator Traversal::getParentLink(int link_index) const
     {
         return parent[link_index];
     }
-        
+
     LinkMap::const_iterator Traversal::getParentLink(LinkMap::const_iterator link_iterator) const
     {
         return parent[link_iterator->getLinkIndex()];
     }
-    
-    
+
+
 }
 }//end of namespace

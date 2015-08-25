@@ -4,10 +4,10 @@
  * website: http://www.codyco.eu
  */
 
-#include "treeserialization.hpp"
+#include <kdl_codyco/treeserialization.hpp>
 
-#include "utils.hpp"
-#include "config.h"
+#include <kdl_codyco/utils.hpp>
+#include <kdl_codyco/config.h>
 
 #include <kdl/joint.hpp>
 #include <algorithm>

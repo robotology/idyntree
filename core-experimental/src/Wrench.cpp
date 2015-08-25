@@ -5,7 +5,7 @@
  *
  */
 
-#include "Wrench.h"
+#include <iDynTree/Core/Wrench.h>
 
 namespace iDynTree
 {

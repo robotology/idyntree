@@ -4,37 +4,16 @@ classdef RotationalInertiaRaw < iDynTree.Matrix3x3
       self@iDynTree.Matrix3x3('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(198,'new_RotationalInertiaRaw',varargin{:});
-        %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(198,'new_RotationalInertiaRaw',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        %self.swigInd = iDynTreeMATLAB_wrap(242, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(242, varargin{:}); % FIXME
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
-        iDynTreeMATLAB_wrap(199,'delete_RotationalInertiaRaw',self);
-        self.swigOwn=false;
-      end
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-      [v,ok] = swig_fieldsref@iDynTree.Matrix3x3(self,i);
-      if ok
-        return
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
-      [self,ok] = swig_fieldasgn@iDynTree.Matrix3x3(self,i,v);
-      if ok
-        return
+      if self.swigInd
+        iDynTreeMATLAB_wrap(243, self);
+        self.swigInd=uint64(0);
       end
     end
   end

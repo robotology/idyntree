@@ -40,6 +40,9 @@ namespace iDynTree
 
     extern int UNKNOWN;
 
+    /// Default tolerance for methods with a tolerance, setted to 1e-10
+    extern double DEFAULT_TOL;
+
     /**
      * Function embedding the semantic checks
      *
@@ -60,6 +63,10 @@ namespace iDynTree
      *
      */
     void reportError(const char * className, const char* methodName, const char * errorMessage);
+
+    /**
+     * Call report error if condition is true
+     */
     bool reportErrorIf(bool condition, const char * className_methodName, const char * errorMessage);
 }
 

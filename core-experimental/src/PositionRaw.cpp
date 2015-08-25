@@ -5,11 +5,12 @@
  *
  */
 
-#include "PositionRaw.h"
-#include "RotationRaw.h"
-#include "SpatialMotionVector.h"
-#include "SpatialForceVector.h"
-#include "Utils.h"
+
+#include <iDynTree/Core/PositionRaw.h>
+#include <iDynTree/Core/RotationRaw.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/Utils.h>
 #include <cstdio>
 #include <sstream>
 
@@ -35,13 +36,12 @@ namespace iDynTree
         this->m_data[2] = z;
     }
 
-
     PositionRaw::PositionRaw(const double* in_data, const unsigned int in_size):
-                             VectorFixSize<3>(in_data,in_size)
+                 VectorFixSize< 3 >(in_data,in_size)
     {
-    
+
     }
-    
+
     PositionRaw::PositionRaw(const PositionRaw& other)
     {
         this->m_data[0] = other.m_data[0];
@@ -54,7 +54,7 @@ namespace iDynTree
     {
 
     }
-    
+
     const PositionRaw& PositionRaw::changePoint(const PositionRaw& newPoint)
     {
         this->m_data[0] += newPoint(0);
@@ -116,7 +116,7 @@ namespace iDynTree
         Eigen::Map<const Eigen::Vector3d> otherAngular(other.getAngularVec3().data());
         Eigen::Map<Eigen::Vector3d> resLinear(result.getLinearVec3().data());
         Eigen::Map<Eigen::Vector3d> resAngular(result.getAngularVec3().data());
-        
+
         resLinear  = otherLinear;
         resAngular = thisPos.cross(otherLinear) + otherAngular;
 

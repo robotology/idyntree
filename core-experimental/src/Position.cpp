@@ -5,13 +5,13 @@
  *
  */
 
-#include "Position.h"
-#include "Rotation.h"
-#include "Twist.h"
-#include "Wrench.h"
-#include "SpatialAcc.h"
-#include "SpatialMomentum.h"
-#include "Utils.h"
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/SpatialMomentum.h>
+#include <iDynTree/Core/Utils.h>
 #include <cassert>
 #include <iostream>
 #include <sstream>
@@ -21,7 +21,7 @@ namespace iDynTree
     /**
      * Local static functions
      */
-    
+
     template <class SpatialMotionForceVectorT>
     static SpatialMotionForceVectorT changePointOfMotionT(const Position & pos,
                                                           const SpatialMotionForceVectorT & other)
@@ -29,7 +29,7 @@ namespace iDynTree
         return SpatialMotionForceVectorT(other.getLinearVec3().changePoint(pos, other.getAngularVec3()),
                                          other.getAngularVec3());
     }
-    
+
     template <class SpatialMotionForceVectorT>
     static SpatialMotionForceVectorT changePointOfForceT(const Position & pos,
                                                          const SpatialMotionForceVectorT & other)
@@ -37,11 +37,11 @@ namespace iDynTree
         return SpatialMotionForceVectorT(other.getLinearVec3(),
                                          other.getAngularVec3().changePoint(pos, other.getLinearVec3()));
     }
-    
+
     /**
      * class Method definitions
      */
-    
+
     // For all the constructors and functions below, checking the semantics while debugging
     // should always be done before the actual composition.
 
@@ -62,7 +62,7 @@ namespace iDynTree
     {
 
     }
-    
+
     Position::Position(const PositionRaw & otherPos, const PositionSemantics & otherSem): PositionRaw(otherPos)
     {
         this->semantics = otherSem;
@@ -122,22 +122,22 @@ namespace iDynTree
     {
         return changePointOfMotionT<Twist>(*this, other);
     }
-    
+
     SpatialAcc Position::changePointOf(const SpatialAcc & other) const
     {
         return changePointOfMotionT<SpatialAcc>(*this, other);
+    }
+
+    Wrench Position::changePointOf(const Wrench & other) const
+    {
+        return changePointOfForceT<Wrench>(*this, other);
     }
 
     SpatialMomentum Position::changePointOf(const SpatialMomentum & other) const
     {
         return changePointOfForceT<SpatialMomentum>(*this, other);
     }
-    
-    Wrench Position::changePointOf(const Wrench & other) const
-    {
-        return changePointOfForceT<Wrench>(*this, other);
-    }
-    
+
     // overloaded operators
     Position Position::operator+(const Position& other) const
     {
@@ -153,27 +153,27 @@ namespace iDynTree
     {
         return inverse(*this);
     }
-    
+
     Twist Position::operator*(const Twist& other) const
     {
         return changePointOfMotionT<Twist>(*this, other);
     }
-    
+
     SpatialAcc Position::operator*(const SpatialAcc& other) const
     {
         return changePointOfMotionT<SpatialAcc>(*this, other);
     }
-    
+
     SpatialMomentum Position::operator*(const SpatialMomentum& other) const
     {
         return changePointOfForceT<SpatialMomentum>(*this, other);
     }
-    
+
     Wrench Position::operator*(const Wrench& other) const
     {
         return changePointOfForceT<Wrench>(*this, other);
     }
-    
+
     std::string Position::toString() const
     {
         std::stringstream ss;

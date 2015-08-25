@@ -11,21 +11,17 @@ if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC)
 
-#local headers
-include_directories(include/kdl_format_io)
-
-set(IDYNTREE_MODELIO_IKIN_HEADERS include/kdl_format_io/iKin_export.hpp)
+set(IDYNTREE_MODELIO_IKIN_HEADERS include/iDynTree/ModelIO/iKin_export.hpp)
 
 set(IDYNTREE_MODELIO_IKIN_SOURCES src/iKin_export.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_IKIN_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODELIO_IKIN_HEADERS})
 
+# share headers with all iDynTree targets
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
-
-# share headers with all iDynTree targes
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
 
 set(libraryname idyntree-modelio-ikin)
 
@@ -48,6 +44,6 @@ install(TARGETS ${libraryname}
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/kdl_format_io)
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})

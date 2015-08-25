@@ -14,7 +14,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/format_examples/symoro_par/fake_puma.
 target_link_libraries(check_symoro_par_import_fixed_chain_regressor idyntree-core idyntree-modelio-symoro ${orocos_kdl_LIBRARIES})
 add_test(NAME test_par_import_fixed_chain_regressor COMMAND check_symoro_par_import_fixed_chain_regressor fake_puma.par)
 
-if(IDYNTREE_USE_ICUB_MAIN)
+if(IDYNTREE_USES_ICUB_MAIN)
     find_package(YARP REQUIRED)
     find_package(ICUB REQUIRED)
     include_directories(SYSTEM ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})

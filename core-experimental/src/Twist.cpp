@@ -5,10 +5,10 @@
  *
  */
 
-#include "Twist.h"
-#include "Wrench.h"
-#include "SpatialAcc.h"
-#include "SpatialMomentum.h"
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/SpatialMomentum.h>
 
 namespace iDynTree
 {

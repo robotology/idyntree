@@ -5,9 +5,9 @@
  *
  */
 
-#include "PositionSemantics.h"
-#include "RotationSemantics.h"
-#include "Utils.h"
+#include <iDynTree/Core/PositionSemantics.h>
+#include <iDynTree/Core/RotationSemantics.h>
+#include <iDynTree/Core/Utils.h>
 #include <cstdio>
 #include <sstream>
 
@@ -112,15 +112,15 @@ namespace iDynTree
                                  __PRETTY_FUNCTION__,
                                  "newPoint reference point and original Position point are not fixed to the same body\n"));
     }
-    
+
     bool PositionSemantics::changePoint(const PositionSemantics& newPoint)
     {
         // check semantics
         bool status = this->check_changePoint(newPoint);
-        
+
         // set new semantics
         this->point = newPoint.getPoint();
-        
+
         return status;
     }
     
@@ -172,14 +172,14 @@ namespace iDynTree
     {
         // check semantics
         bool status = PositionSemantics::check_compose(op1,op2);
-        
+
         // set new semantics
         result.point = op1.point;
         result.body = op1.body;
         result.refPoint = op2.refPoint;
         result.refBody = op2.refBody;
         result.coordinateFrame = op1.coordinateFrame;
-        
+
         return status;
     }
 
@@ -192,7 +192,7 @@ namespace iDynTree
     {
         // check semantics
         bool status = PositionSemantics::check_inverse(op);
-        
+
         // set new semantics
         result.point = op.refPoint;
         result.body = op.refBody;

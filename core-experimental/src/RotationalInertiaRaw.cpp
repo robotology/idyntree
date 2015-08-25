@@ -5,11 +5,13 @@
  *
  */
 
-#include "RotationalInertiaRaw.h"
-#include "Utils.h"
-#include <cassert>
+#include <iDynTree/Core/RotationalInertiaRaw.h>
+#include <iDynTree/Core/Utils.h>
+
 #include <iostream>
 #include <sstream>
+
+#include <cassert>
 #include <cstring>
 
 

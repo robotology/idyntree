@@ -5,14 +5,14 @@
  *
  */
 
-#include "AngularMotionVector3.h"
+#include <iDynTree/Core/AngularMotionVector3.h>
 
 namespace iDynTree
 {
     /**
      * AngularMotionVector3Semantics
      */
-    
+
     // constructors
     AngularMotionVector3Semantics::AngularMotionVector3Semantics()
     {
@@ -36,23 +36,23 @@ namespace iDynTree
     /**
      * AngularMotionVector3
      */
-    
+
     // constructors
     AngularMotionVector3::AngularMotionVector3()
     {
     }
-    
-    
+
+
     AngularMotionVector3::AngularMotionVector3(const double* in_data, const unsigned int in_size):
     MotionVector3<AngularMotionVector3, AngularMotionAssociationsT, AngularMotionVector3Semantics>(in_data, in_size)
     {
     }
-    
+
     AngularMotionVector3::AngularMotionVector3(const AngularMotionVector3& other):
     MotionVector3<AngularMotionVector3, AngularMotionAssociationsT, AngularMotionVector3Semantics>(other)
     {
     }
-    
+
     AngularMotionVector3::~AngularMotionVector3()
     {
     }

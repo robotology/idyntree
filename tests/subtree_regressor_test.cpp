@@ -71,10 +71,12 @@ iDynTree::SensorsList generateSensorsTree(const KDL::CoDyCo::UndirectedTree & un
             // Currently we support only the case where the ft sensor frame is equal
             // to the child link frame
             new_sens.setSecondLinkSensorTransform(child_index,iDynTree::Transform());
+            new_sens.setSecondLinkName(child_link_name);
 
             // Then, the parent_link_H_sensor transform is simply parent_link_H_child_link transform
             KDL::Frame parent_link_H_sensor = junct_it->pose(0.0,false);
             new_sens.setFirstLinkSensorTransform(parent_index,iDynTree::ToiDynTree(parent_link_H_sensor));
+            new_sens.setFirstLinkName(parent_link_name);
 
         }
         else
@@ -295,7 +297,7 @@ int main()
 
         for( int ft_id =0; ft_id < (int)ft_names.size(); ft_id++ ) {
             for( int www=0; www < 6; www++ ) {
-                parameters[NrOfRealLinksParameters+6*ft_id+www] = measured_wrenches_offset[ft_id](www);
+                parameters[NrOfRealLinksParameters+6*ft_id+www] = measured_wrenches_offset[ft_id].asVector()(www);
             }
         }
     }

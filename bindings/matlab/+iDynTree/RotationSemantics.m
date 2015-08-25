@@ -3,71 +3,58 @@ classdef RotationSemantics < SwigRef
     function self = RotationSemantics(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigCPtr = iDynTreeMATLAB_wrap(225,'new_RotationSemantics',varargin{:});
-        %self.swigOwn = true;
-        tmp = iDynTreeMATLAB_wrap(225,'new_RotationSemantics',varargin{:}); % FIXME
-        self.swigCPtr = tmp.swigCPtr;
-        self.swigOwn = tmp.swigOwn;
-        self.swigType = tmp.swigType;
-        tmp.swigOwn = false;
+        %self.swigInd = iDynTreeMATLAB_wrap(274, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(274, varargin{:}); % FIXME
+        self.swigInd = tmp.swigInd;
+        tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
-      if self.swigOwn
-        iDynTreeMATLAB_wrap(226,'delete_RotationSemantics',self);
-        self.swigOwn=false;
+      if self.swigInd
+        iDynTreeMATLAB_wrap(275, self);
+        self.swigInd=uint64(0);
       end
     end
     function varargout = getOrientationFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(227,'RotationSemantics_getOrientationFrame',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(276, self, varargin{:});
     end
     function varargout = getReferenceOrientationFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(228,'RotationSemantics_getReferenceOrientationFrame',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(277, self, varargin{:});
     end
     function varargout = getCoordinateFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(229,'RotationSemantics_getCoordinateFrame',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(278, self, varargin{:});
     end
     function varargout = setOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(230,'RotationSemantics_setOrientationFrame',self,varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(279, self, varargin{:});
     end
     function varargout = setReferenceOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(231,'RotationSemantics_setReferenceOrientationFrame',self,varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(280, self, varargin{:});
     end
     function varargout = setCoordinateFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(232,'RotationSemantics_setCoordinateFrame',self,varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(281, self, varargin{:});
     end
     function varargout = changeOrientFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(233,'RotationSemantics_changeOrientFrame',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(282, self, varargin{:});
     end
     function varargout = changeRefOrientFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(234,'RotationSemantics_changeRefOrientFrame',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(283, self, varargin{:});
     end
     function varargout = changeCoordFrameOf(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(235,'RotationSemantics_changeCoordFrameOf',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(284, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(238,'RotationSemantics_toString',self,varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(287, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(239,'RotationSemantics_display',self,varargin{:});
-    end
-    function [v,ok] = swig_fieldsref(self,i)
-      v = [];
-      ok = false;
-      switch i
-      end
-    end
-    function [self,ok] = swig_fieldasgn(self,i,v)
-      switch i
-      end
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(288, self, varargin{:});
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(236,'RotationSemantics_compose',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(285, varargin{:});
     end
     function varargout = inverse2(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(237,'RotationSemantics_inverse2',varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(286, varargin{:});
     end
   end
 end
