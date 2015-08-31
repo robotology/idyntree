@@ -3,83 +3,83 @@ classdef DynamicsRegressorGenerator < SwigRef
     function self = DynamicsRegressorGenerator(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(541, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(541, varargin{:}); % FIXME
+        %self.swigInd = iDynTreeMATLAB_wrap(747, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(747, varargin{:}); % FIXME
         self.swigInd = tmp.swigInd;
         tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(542, self);
+        iDynTreeMATLAB_wrap(748, self);
         self.swigInd=uint64(0);
       end
     end
     function varargout = loadRobotAndSensorsModelFromFile(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(543, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(749, self, varargin{:});
     end
     function varargout = loadRobotAndSensorsModelFromString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(544, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(750, self, varargin{:});
     end
     function varargout = loadRegressorStructureFromFile(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(545, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(751, self, varargin{:});
     end
     function varargout = loadRegressorStructureFromString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(546, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(752, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(547, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(753, self, varargin{:});
     end
     function varargout = getNrOfParameters(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(548, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(754, self, varargin{:});
     end
     function varargout = getNrOfOutputs(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(549, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(755, self, varargin{:});
     end
     function varargout = getNrOfDegreesOfFreedom(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(550, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(756, self, varargin{:});
     end
     function varargout = getDescriptionOfParameter(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(551, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(757, self, varargin{:});
     end
     function varargout = getDescriptionOfParameters(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(552, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(758, self, varargin{:});
     end
     function varargout = getDescriptionOfOutput(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(553, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(759, self, varargin{:});
     end
     function varargout = getDescriptionOfOutputs(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(554, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(760, self, varargin{:});
     end
     function varargout = getDescriptionOfDegreeOfFreedom(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(555, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(761, self, varargin{:});
     end
     function varargout = getDescriptionOfDegreesOfFreedom(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(556, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(762, self, varargin{:});
     end
     function varargout = getBaseLinkName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(557, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(763, self, varargin{:});
     end
     function varargout = getSensorsModel(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(558, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(764, self, varargin{:});
     end
     function varargout = setRobotState(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(559, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(765, self, varargin{:});
     end
     function varargout = getSensorsMeasurements(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(560, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(766, self, varargin{:});
     end
     function varargout = computeRegressor(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(561, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(767, self, varargin{:});
     end
     function varargout = getModelParameters(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(562, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(768, self, varargin{:});
     end
     function varargout = computeFloatingBaseIdentifiableSubspace(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(563, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(769, self, varargin{:});
     end
     function varargout = computeFixedBaseIdentifiableSubspace(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(564, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(770, self, varargin{:});
     end
   end
   methods(Static)
