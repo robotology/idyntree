@@ -93,7 +93,7 @@ template <typename DerivedSpatialVecT>
 SpatialVector<DerivedSpatialVecT>
 
     SPATIALVECTOR_TEMPLATE_HDR
-    class SpatialVector
+    class SpatialVector: public IVector
     {
     public:
         typedef typename SpatialMotionForceVectorT_traits<DerivedSpatialVecT>::LinearVector3Type LinearVector3T;
@@ -103,6 +103,9 @@ SpatialVector<DerivedSpatialVecT>
         LinearVector3T linearVec3;
         AngularVector3T angularVec3;
         SpatialVectorSemantics<typename LinearVector3T::SemanticsType, typename AngularVector3T::SemanticsType> semantics;
+        static const unsigned int linearOffset = 0;
+        static const unsigned int angularOffset = 3;
+        static const unsigned int totalSize = 6;
 
     public:
         /**
@@ -114,7 +117,7 @@ SpatialVector<DerivedSpatialVecT>
         virtual ~SpatialVector();
 
         /**
-         * Accessors, Getters, setters
+         * Vector accessors, getters, setters
          */
         LinearVector3T & getLinearVec3();
         AngularVector3T & getAngularVec3();
@@ -122,6 +125,15 @@ SpatialVector<DerivedSpatialVecT>
         const AngularVector3T & getAngularVec3() const;
         void setLinearVec3(const LinearVector3T & _linearVec3);
         void setAngularVec3(const AngularVector3T & _angularVec3);
+
+        /**
+         * Vector element accessors, getters, setters
+         */
+        virtual double operator()(const unsigned int index) const; // No input checking.
+        virtual double& operator()(const unsigned int index); // No input checking.
+        virtual double getVal(const unsigned int index) const; // Perform boundary checking
+        virtual bool setVal(const unsigned int index, const double new_el);  // Perform boundary checking
+        virtual unsigned int size() const;
 
         /**
          * Geometric operations
@@ -257,7 +269,7 @@ SpatialVector<DerivedSpatialVecT>
     {
     }
 
-    // Accessors, Getters, setters
+    // Vector accessors, Getters, setters
     SPATIALVECTOR_TEMPLATE_HDR
     typename SPATIALVECTOR_INSTANCE_HDR::LinearVector3T & SPATIALVECTOR_INSTANCE_HDR::getLinearVec3()
     {
@@ -301,6 +313,50 @@ SpatialVector<DerivedSpatialVecT>
         // set angular component
         this->angularVec3 = _angularVec3;
     }
+
+    // Vector element accessors, getters, setters
+    SPATIALVECTOR_TEMPLATE_HDR
+    double SPATIALVECTOR_INSTANCE_HDR::operator()(const unsigned int index) const
+    {
+        return (index<SpatialVector::angularOffset? this->linearVec3(index) : this->angularVec3(index-3));
+    }
+
+    SPATIALVECTOR_TEMPLATE_HDR
+    double& SPATIALVECTOR_INSTANCE_HDR::operator()(const unsigned int index)
+    {
+        return (index<SpatialVector::angularOffset? this->linearVec3(index) : this->angularVec3(index-3));
+    }
+
+    SPATIALVECTOR_TEMPLATE_HDR
+    double SPATIALVECTOR_INSTANCE_HDR::getVal(const unsigned int index) const
+    {
+        if( index >= SpatialVector::totalSize )
+        {
+            reportError("VectorFixSize","getVal","index out of bounds");
+            return 0.0;
+        }
+        return (*this)(index);
+    }
+
+    SPATIALVECTOR_TEMPLATE_HDR
+    bool SPATIALVECTOR_INSTANCE_HDR::setVal(const unsigned int index, const double new_el)
+    {
+        if( index >= SpatialVector::totalSize )
+        {
+            reportError("VectorFixSize","getVal","index out of bounds");
+            return false;
+        }
+        (*this)(index) = new_el;
+        
+        return true;
+    }
+
+    SPATIALVECTOR_TEMPLATE_HDR
+    unsigned int SPATIALVECTOR_INSTANCE_HDR::size() const
+    {
+        return SpatialVector::totalSize;
+    }
+
 
     // Geometric operations
     SPATIALVECTOR_TEMPLATE_HDR
