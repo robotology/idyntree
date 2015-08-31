@@ -58,11 +58,11 @@ namespace iDynTree
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class AngularForceVector3: public ForceVector3<AngularForceVector3, AngularForceAssociationsT, AngularForceVector3Semantics>
+    class AngularForceVector3: public ForceVector3<AngularForceVector3>
     {
     public:
-        typedef AngularForceVector3Semantics SemanticsType;
-        
+        typedef typename MotionForce_traits<AngularForceVector3>::SemanticsType SemanticsType;
+
         /**
          * constructors
          */

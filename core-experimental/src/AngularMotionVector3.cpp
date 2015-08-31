@@ -44,12 +44,12 @@ namespace iDynTree
 
 
     AngularMotionVector3::AngularMotionVector3(const double* in_data, const unsigned int in_size):
-    MotionVector3<AngularMotionVector3, AngularMotionAssociationsT, AngularMotionVector3Semantics>(in_data, in_size)
+    MotionVector3<AngularMotionVector3>(in_data, in_size)
     {
     }
 
     AngularMotionVector3::AngularMotionVector3(const AngularMotionVector3& other):
-    MotionVector3<AngularMotionVector3, AngularMotionAssociationsT, AngularMotionVector3Semantics>(other)
+    MotionVector3<AngularMotionVector3>(other)
     {
     }
 

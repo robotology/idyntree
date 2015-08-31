@@ -15,14 +15,14 @@
 #include <Eigen/Dense>
 
 #define GEOMVECTOR3SEMANTICS_TEMPLATE_HDR \
-template <class MotionForceTSemantics>
+template <class MotionForceSemanticsT>
 #define GEOMVECTOR3SEMANTICS_INSTANCE_HDR \
-GeomVector3Semantics<MotionForceTSemantics>
+GeomVector3Semantics<MotionForceSemanticsT>
 
 #define GEOMVECTOR3_TEMPLATE_HDR \
-template <class MotionForceT, class MotionForceAssociationsT, class MotionForceTSemantics>
+template <class MotionForceT>
 #define GEOMVECTOR3_INSTANCE_HDR \
-GeomVector3<MotionForceT, MotionForceAssociationsT, MotionForceTSemantics>
+GeomVector3<MotionForceT>
 
 namespace iDynTree
 {
@@ -63,11 +63,11 @@ namespace iDynTree
          * Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
          */
-        bool changeCoordFrame(const RotationSemantics & newCoordFrame, MotionForceTSemantics & result) const;
-        static bool compose(const MotionForceTSemantics & op1, const MotionForceTSemantics & op2, MotionForceTSemantics & result);
-        static bool inverse(const MotionForceTSemantics & op, MotionForceTSemantics & result);
+        bool changeCoordFrame(const RotationSemantics & newCoordFrame, MotionForceSemanticsT & result) const;
+        static bool compose(const MotionForceSemanticsT & op1, const MotionForceSemanticsT & op2, MotionForceSemanticsT & result);
+        static bool inverse(const MotionForceSemanticsT & op, MotionForceSemanticsT & result);
 
-        bool dot(const MotionForceTSemantics & other) const;
+        bool dot(const typename DualMotionForceSemanticsT<MotionForceSemanticsT>::Type & other) const;
     };
 
     /**
@@ -85,9 +85,11 @@ namespace iDynTree
     class GeomVector3: public Vector3
     {
     public:
-        MotionForceTSemantics semantics;
+        typedef typename MotionForce_traits<MotionForceT>::SemanticsType MotionForceSemanticsT;
+        
+        MotionForceSemanticsT semantics;
 
-        typedef GeomVector3<MotionForceT, MotionForceAssociationsT, MotionForceTSemantics> MotionForceTbase;
+        typedef GeomVector3<MotionForceT> MotionForceTbase;
 
         /**
          * constructors
@@ -100,8 +102,8 @@ namespace iDynTree
         /**
          * Getters & setters
          */
-        const MotionForceTSemantics& getSemantics() const;
-        void setSemantics(MotionForceTSemantics& _semantics);
+        const MotionForceSemanticsT& getSemantics() const;
+        void setSemantics(MotionForceSemanticsT& _semantics);
 
         /**
          * Geometric operations
@@ -113,7 +115,7 @@ namespace iDynTree
         /**
          * dot product
          */
-        double dot(const typename MotionForceAssociationsT::DualSpace & other) const;
+        double dot(const typename MotionForce_traits<MotionForceT>::DualSpace & other) const;
 
         /**
          * overloaded operators
@@ -188,7 +190,7 @@ namespace iDynTree
     // Semantics operations
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
     bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::changeCoordFrame(const RotationSemantics & newCoordFrame,
-                                                             MotionForceTSemantics & result) const
+                                                             MotionForceSemanticsT & result) const
     {
         // check semantics
         bool semantics_status =
@@ -215,7 +217,7 @@ namespace iDynTree
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::compose(const MotionForceTSemantics & op1, const MotionForceTSemantics & op2, MotionForceTSemantics & result)
+    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::compose(const MotionForceSemanticsT & op1, const MotionForceSemanticsT & op2, MotionForceSemanticsT & result)
     {
         // check semantics
         bool semantics_status =
@@ -237,7 +239,7 @@ namespace iDynTree
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::inverse(const MotionForceTSemantics & op, MotionForceTSemantics & result)
+    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::inverse(const MotionForceSemanticsT & op, MotionForceSemanticsT & result)
     {
         // compute semantics
         result = op;
@@ -248,17 +250,17 @@ namespace iDynTree
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::dot(const MotionForceTSemantics & other) const
+    bool GEOMVECTOR3SEMANTICS_INSTANCE_HDR::dot(const typename DualMotionForceSemanticsT<MotionForceSemanticsT>::Type & other) const
     {
         // check semantics
         bool semantics_status =
-        (   reportErrorIf(!checkEqualOrUnknown(this->coordinateFrame,other.coordinateFrame),
+        (   reportErrorIf(!checkEqualOrUnknown(this->coordinateFrame,other.getCoordinateFrame()),
                           __PRETTY_FUNCTION__,
                           "multiplying two geometric relations expressed in different coordinateFrames\n")
-         && reportErrorIf(!checkEqualOrUnknown(this->body,other.body),
+         && reportErrorIf(!checkEqualOrUnknown(this->body,other.getBody()),
                           __PRETTY_FUNCTION__,
                           "The bodies defined for both operands of the dot product don't match\n")
-         && reportErrorIf(!checkEqualOrUnknown(this->refBody,other.refBody),
+         && reportErrorIf(!checkEqualOrUnknown(this->refBody,other.getRefBody()),
                           __PRETTY_FUNCTION__,
                           "The reference bodies defined for both operands of the dot product don't match\n"));
 
@@ -292,13 +294,13 @@ namespace iDynTree
 
     // Getters & setters
     GEOMVECTOR3_TEMPLATE_HDR
-    const MotionForceTSemantics& GEOMVECTOR3_INSTANCE_HDR::getSemantics() const
+    const typename GEOMVECTOR3_INSTANCE_HDR::MotionForceSemanticsT& GEOMVECTOR3_INSTANCE_HDR::getSemantics() const
     {
         return semantics;
     }
 
     GEOMVECTOR3_TEMPLATE_HDR
-    void GEOMVECTOR3_INSTANCE_HDR::setSemantics(MotionForceTSemantics& _semantics)
+    void GEOMVECTOR3_INSTANCE_HDR::setSemantics(MotionForceSemanticsT& _semantics)
     {
         iDynTreeAssert(this->semantics.isUnknown());
         this->semantics = _semantics;
@@ -326,7 +328,7 @@ namespace iDynTree
     {
         MotionForceT result;
 
-        iDynTreeAssert(MotionForceTSemantics::compose(op1.semantics, op2.semantics, result.semantics));
+        iDynTreeAssert(MotionForceSemanticsT::compose(op1.semantics, op2.semantics, result.semantics));
 
         Eigen::Map<const Vector3d> op1Data(op1.data());
         Eigen::Map<const Vector3d> op2Data(op2.data());
@@ -342,7 +344,7 @@ namespace iDynTree
     {
         MotionForceT result;
 
-        iDynTreeAssert(GeomVector3Semantics<MotionForceTSemantics>::inverse(op.semantics, result.semantics));
+        iDynTreeAssert(GeomVector3Semantics<MotionForceSemanticsT>::inverse(op.semantics, result.semantics));
 
         Eigen::Map<const Vector3d> opData(op.data());
         Eigen::Map<Vector3d> resultData(result.data());
@@ -354,9 +356,9 @@ namespace iDynTree
 
     // dot product
     GEOMVECTOR3_TEMPLATE_HDR
-    double GEOMVECTOR3_INSTANCE_HDR::dot(const typename MotionForceAssociationsT::DualSpace & other) const
+    double GEOMVECTOR3_INSTANCE_HDR::dot(const typename MotionForce_traits<MotionForceT>::DualSpace & other) const
     {
-        iDynTreeAssert(semantics.dot(other.semantics()));
+        iDynTreeAssert(semantics.dot(other.semantics));
 
         Eigen::Map<const Vector3d> otherData(other.data());
         Eigen::Map<const Vector3d> thisData(this->data());

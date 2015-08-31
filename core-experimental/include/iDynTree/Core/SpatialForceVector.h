@@ -12,6 +12,7 @@
 #include <iDynTree/Core/LinearForceVector3.h>
 #include <iDynTree/Core/AngularForceVector3.h>
 #include <iDynTree/Core/SpatialVector.h>
+#include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
 namespace iDynTree
 {
@@ -31,12 +32,20 @@ namespace iDynTree
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.
      */
-    class SpatialForceVector: public SpatialVector<SpatialForceVector, LinearForceVector3, AngularForceVector3>
+    class SpatialForceVector: public SpatialVector<SpatialForceVector>
     {
     public:
+        /**
+         * We use traits here to have the associations SpatialVector <=> Linear/Angular 3D vectors types
+         * defined in a single place.
+         */
+        typedef SpatialMotionForceVectorT_traits<SpatialForceVector>::LinearVector3Type LinearVector3T;
+        typedef SpatialMotionForceVectorT_traits<SpatialForceVector>::AngularVector3Type AngularVector3T;
+        
         SpatialForceVector();
-        SpatialForceVector(const LinearForceVector3 & _linearVec3, const AngularForceVector3 & _angularVec3);
+        SpatialForceVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
         SpatialForceVector(const SpatialForceVector & other);
+        SpatialForceVector(const SpatialVector<SpatialForceVector> & other);
         virtual ~SpatialForceVector();
     };
 }

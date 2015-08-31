@@ -25,16 +25,20 @@ SpatialMotionVector::SpatialMotionVector()
 
 SpatialMotionVector::SpatialMotionVector(const LinearMotionVector3 & _linearVec3,
                                          const AngularMotionVector3 & _angularVec3):
-                                         SpatialVector<SpatialMotionVector, LinearMotionVector3, AngularMotionVector3>(_linearVec3, _angularVec3)
+                                         SpatialVector<SpatialMotionVector>(_linearVec3, _angularVec3)
 {
 }
 
 SpatialMotionVector::SpatialMotionVector(const SpatialMotionVector& other):
-                                         SpatialVector<SpatialMotionVector, LinearMotionVector3, AngularMotionVector3>(other)
+                                         SpatialVector<SpatialMotionVector>(other)
 {
 }
 
-
+SpatialMotionVector::SpatialMotionVector(const SpatialVector<SpatialMotionVector>& other):
+                                         SpatialVector<SpatialMotionVector>(other)
+{
+}
+    
 SpatialMotionVector::~SpatialMotionVector()
 {
 }

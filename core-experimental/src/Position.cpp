@@ -118,6 +118,16 @@ namespace iDynTree
         return Position(PositionRaw::inverse(op),resultSemantics);
     }
 
+    SpatialMotionVector Position::changePointOf(const SpatialMotionVector & other) const
+    {
+        return changePointOfMotionT<SpatialMotionVector>(*this, other);
+    }
+    
+    SpatialForceVector Position::changePointOf(const SpatialForceVector & other) const
+    {
+        return changePointOfForceT<SpatialForceVector>(*this, other);
+    }
+    
     Twist Position::changePointOf(const Twist & other) const
     {
         return changePointOfMotionT<Twist>(*this, other);

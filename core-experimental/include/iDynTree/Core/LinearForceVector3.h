@@ -38,11 +38,11 @@ namespace iDynTree
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class LinearForceVector3: public ForceVector3<LinearForceVector3, LinearForceAssociationsT, LinearForceVector3Semantics>
+    class LinearForceVector3: public ForceVector3<LinearForceVector3>
     {
     public:
-        typedef LinearForceVector3Semantics SemanticsType;
-
+        typedef typename MotionForce_traits<LinearForceVector3>::SemanticsType SemanticsType;
+        
         /**
          * constructors
          */

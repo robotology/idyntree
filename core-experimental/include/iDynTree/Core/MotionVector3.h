@@ -12,9 +12,9 @@
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
 #define MOTIONVECTOR3_TEMPLATE_HDR \
-template <class MotionT, class MotionAssociationsT, class MotionTSemantics>
+template <class MotionT>
 #define MOTIONVECTOR3_INSTANCE_HDR \
-MotionVector3<MotionT, MotionAssociationsT, MotionTSemantics>
+MotionVector3<MotionT>
 
 namespace iDynTree
 {
@@ -30,16 +30,16 @@ namespace iDynTree
      *
      */
     MOTIONVECTOR3_TEMPLATE_HDR
-    class MotionVector3: public GeomVector3<MotionT, MotionAssociationsT, MotionTSemantics>
+    class MotionVector3: public GeomVector3<MotionT>
     {
     private:
         /**
-         * Helper template function for computing the cross product
+         * Helper template struct with embedded function for computing the cross product
          */
         template <class DerivedT, class OperandT>
         struct rawOperator
         {
-            static DerivedT cross(const MotionVector3<MotionT, MotionAssociationsT, MotionTSemantics>& _this, const OperandT& other)
+            static DerivedT cross(const MotionVector3<MotionT>& _this, const OperandT& other)
             {
                 DerivedT result;
                 Eigen::Map<const Eigen::Vector3d> thisData(_this.data());
@@ -64,10 +64,10 @@ namespace iDynTree
         /**
          * Types of Derivative by Linear or Angular motion vectors
          */
-        typedef typename MotionAssociationsT::template DerivativeOf<LinearMotionAssociationsT>::Type MotionCrossLinM;
-        typedef typename MotionAssociationsT::template DerivativeOf<AngularMotionAssociationsT>::Type MotionCrossAngM;
-        typedef typename MotionAssociationsT::template DerivativeOf<LinearForceAssociationsT>::Type MotionCrossLinF;
-        typedef typename MotionAssociationsT::template DerivativeOf<AngularForceAssociationsT>::Type MotionCrossAngF;
+        typedef typename MotionDerivativeOf<MotionT, LinearMotionVector3>::Type MotionCrossLinM;
+        typedef typename MotionDerivativeOf<MotionT, AngularMotionVector3>::Type MotionCrossAngM;
+        typedef typename MotionDerivativeOf<MotionT, LinearForceVector3>::Type MotionCrossLinF;
+        typedef typename MotionDerivativeOf<MotionT, AngularForceVector3>::Type MotionCrossAngF;
         
         /* Cross products */
         MotionCrossLinM cross(const LinearMotionVector3& other) const;
@@ -83,17 +83,17 @@ namespace iDynTree
     // constructors
     MOTIONVECTOR3_TEMPLATE_HDR
     MOTIONVECTOR3_INSTANCE_HDR::MotionVector3():
-    GeomVector3<MotionT, MotionAssociationsT, MotionTSemantics>()
+    GeomVector3<MotionT>()
     {}
     
     MOTIONVECTOR3_TEMPLATE_HDR
     MOTIONVECTOR3_INSTANCE_HDR::MotionVector3(const double* in_data, const unsigned int in_size):
-    GeomVector3<MotionT, MotionAssociationsT, MotionTSemantics>(in_data, in_size)
+    GeomVector3<MotionT>(in_data, in_size)
     {}
     
     MOTIONVECTOR3_TEMPLATE_HDR
     MOTIONVECTOR3_INSTANCE_HDR::MotionVector3(const MotionVector3 & other):
-    GeomVector3<MotionT, MotionAssociationsT, MotionTSemantics>(other)
+    GeomVector3<MotionT>(other)
     {}
     
     MOTIONVECTOR3_TEMPLATE_HDR

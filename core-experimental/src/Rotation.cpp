@@ -127,6 +127,16 @@ namespace iDynTree
         return Position(this->RotationRaw::changeCoordFrameOf(other), resultSemantics);
     }
 
+    SpatialMotionVector Rotation::changeCoordFrameOf(const SpatialMotionVector& other) const
+    {
+        return changeCoordFrameOfT<SpatialMotionVector>(*this, other);
+    }
+    
+    SpatialForceVector Rotation::changeCoordFrameOf(const SpatialForceVector& other) const
+    {
+        return changeCoordFrameOfT<SpatialForceVector>(*this, other);
+    }
+    
     Twist Rotation::changeCoordFrameOf(const Twist& other) const
     {
         return changeCoordFrameOfT<Twist>(*this, other);

@@ -24,6 +24,8 @@ namespace iDynTree
     class SpatialMomentum;
     class ClassicalAcc;
     class RotationalInertiaRaw;
+    class SpatialMotionVector;
+    class SpatialForceVector;
 
     /**
      * Class representation the rotation of an orientation frame
@@ -105,6 +107,8 @@ namespace iDynTree
         static Rotation compose(const Rotation & op1, const Rotation & op2);
         static Rotation inverse2(const Rotation & orient);
         Position changeCoordFrameOf(const Position & other) const;
+        SpatialMotionVector changeCoordFrameOf(const SpatialMotionVector & other) const;
+        SpatialForceVector  changeCoordFrameOf(const SpatialForceVector  & other) const;
         Twist changeCoordFrameOf(const Twist & other) const;
         SpatialAcc changeCoordFrameOf(const SpatialAcc & other) const;
         SpatialMomentum changeCoordFrameOf(const SpatialMomentum & other) const;

@@ -20,18 +20,23 @@ SpatialForceVector::SpatialForceVector()
 
 SpatialForceVector::SpatialForceVector(const LinearForceVector3 & _linearVec3,
                                        const AngularForceVector3 & _angularVec3):
-                                       SpatialVector<SpatialForceVector, LinearForceVector3, AngularForceVector3>(_linearVec3, _angularVec3)
+                                       SpatialVector<SpatialForceVector>(_linearVec3, _angularVec3)
 {
 }
 
 SpatialForceVector::SpatialForceVector(const SpatialForceVector& other):
-                                       SpatialVector<SpatialForceVector, LinearForceVector3, AngularForceVector3>(other)
+                                       SpatialVector<SpatialForceVector>(other)
 {
 }
 
-
+SpatialForceVector::SpatialForceVector(const SpatialVector<SpatialForceVector>& other):
+                                       SpatialVector<SpatialForceVector>(other)
+{
+}
+    
 SpatialForceVector::~SpatialForceVector()
 {
 }
 
+    
 }

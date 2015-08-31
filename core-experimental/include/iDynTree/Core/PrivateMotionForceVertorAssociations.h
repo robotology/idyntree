@@ -15,24 +15,42 @@ namespace iDynTree
     class AngularMotionVector3;
     class LinearForceVector3;
     class AngularForceVector3;
-    
+    class AngularForceVector3Semantics;
+    class AngularMotionVector3Semantics;
+    class LinearForceVector3Semantics;
+    class LinearMotionVector3Semantics;
+
+
+    /**
+     * This is a custom traits class. A traits class class_traits<class T> is a template class
+     * defining some attributes (i.e. properties, traits) of the class parameter T.
+     * We are using CRTP (Curiously Recurring Template Pattern) from which arises some compile issues.
+     * For instance, AngularForceVector3 is derived in CRTP way from ForceVector3<AngularForceVector3>.
+     * So, at compile time, the base class is being instanciated before the derived class, but having
+     * to access the derived class which is not yet fuly defined. For solving this issue we define 
+     * the below traits-like class gathering all these early accessed fields.
+     */
+    template <class MotionForceT>
+    class MotionForce_traits {};
     
     /**
-     * Helper class only used along with class AngularForceVector3 but defined outside this
-     * same class because we are using the CRTP technique (Curiously Recurring Template Pattern).
-     * CRTP here results in the Base class ForceVector3 being instanciated before AngularForceVector3,
-     * with this same class as template parameter. The goal is too define methods whose bodies
-     * are specific to class ForceVector3 (so common to AngularForceVector3 and LinearForceVector3),
-     * but the returned type is specific to AngularForceVector3.
+     * Traits class instance only used along with class AngularForceVector3
      */
-    class AngularForceAssociationsT
+    template <>
+    class MotionForce_traits<AngularForceVector3>
     {
     public:
         /**
-         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
+         * Helper types providing the class and the associated dual space class (might be a vocabulary abuse)
          */
+        typedef AngularForceVector3  Type;
         typedef AngularMotionVector3 DualSpace;
         
+        /**
+         * Helper type providing the associated semantics class
+         */
+        typedef AngularForceVector3Semantics SemanticsType;
+
         /**
          * Helper type providing the class associated to the alternate type of movement in the same space
          */
@@ -41,45 +59,47 @@ namespace iDynTree
     };
     
     /**
-     * Helper class only used along with class AngularMotionVector3 but defined outside it.
-     * Check comments about CTRP technique.
+     * Traits class instance only used along with class AngularMotionVector3
      */
-    class AngularMotionAssociationsT
+    template <>
+    class MotionForce_traits<AngularMotionVector3>
     {
     public:
         /**
-         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
+         * Helper types providing the class and the associated dual space class (might be a vocabulary abuse)
          */
-        typedef AngularForceVector3 DualSpace;
+        typedef AngularMotionVector3 Type;
+        typedef AngularForceVector3  DualSpace;
+        
+        /**
+         * Helper type providing the associated semantics class
+         */
+        typedef AngularMotionVector3Semantics SemanticsType;
         
         /**
          * Helper type providing the class associated to the alternate type of movement in the same space
          */
         typedef LinearMotionVector3  DerivByLinearMotion;
         typedef AngularMotionVector3 DerivByAngularMotion;
-        
-        /**
-         * Helper class providing the result class of the cross product for the operator (w\times).
-         */
-        template <class MotionForceT>
-        struct DerivativeOf
-        {
-            typedef typename MotionForceT::DerivByAngularMotion Type;
-        };
-        
     };
     
     /**
-     * Helper class only used along with class LinearForceVector3 but defined outside it.
-     * Check comments about CTRP technique.
+     * Traits class instance only used along with class LinearForceVector3
      */
-    class LinearForceAssociationsT
+    template <>
+    class MotionForce_traits<LinearForceVector3>
     {
     public:
         /**
-         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
+         * Helper types providing the class and the associated dual space class (might be a vocabulary abuse)
          */
+        typedef LinearForceVector3  Type;
         typedef LinearMotionVector3 DualSpace;
+        
+        /**
+         * Helper type providing the associated semantics class
+         */
+        typedef LinearForceVector3Semantics SemanticsType;
         
         /**
          * Helper type providing the class associated to the alternate type of movement in the same space
@@ -89,32 +109,108 @@ namespace iDynTree
     };
     
     /**
-     * Helper class only used along with class LinearMotionVector3 but defined outside it.
-     * Check comments about CTRP technique.
+     * Traits class instance only used along with class LinearMotionVector3
      */
-    class LinearMotionAssociationsT
+    template <>
+    class MotionForce_traits<LinearMotionVector3>
     {
     public:
         /**
-         * Helper type providing the associated class in the dual space (might be a vocabulary abuse)
+         * Helper types providing the class and the associated dual space class (might be a vocabulary abuse)
          */
-        typedef LinearForceVector3 DualSpace;
+        typedef LinearMotionVector3 Type;
+        typedef LinearForceVector3  DualSpace;
+        
+        /**
+         * Helper type providing the associated semantics class
+         */
+        typedef LinearMotionVector3Semantics SemanticsType;
         
         /**
          * Helper type providing the class associated to the alternate type of movement in the same space
          */
         typedef AngularMotionVector3 DerivByLinearMotion;
         typedef LinearMotionVector3 DerivByAngularMotion;
-        
-        /**
-         * Helper class providing the result class of the cross product for the operator (v\times).
-         */
-        template <class MotionForceT>
-        struct DerivativeOf
-        {
-            typedef typename MotionForceT::DerivByLinearMotion Type;
-        };
-        
+    };
+
+    
+    
+    /**
+     * Helper class providing the result class of the cross product for the operator (w\times or v\times).
+     * (AngularMotionVector3 x MotionForce or LinearMotionVector3 x MotionForce)
+     */
+    template <class MotionT, class MotionForce2deriveT>
+    struct MotionDerivativeOf {};
+
+    template <class MotionForce2deriveT>
+    struct MotionDerivativeOf<AngularMotionVector3, MotionForce2deriveT>
+    {
+        typedef typename MotionForce_traits<MotionForce2deriveT>::DerivByAngularMotion Type;
+    };
+
+    template <class MotionForce2deriveT>
+    struct MotionDerivativeOf<LinearMotionVector3, MotionForce2deriveT>
+    {
+        typedef typename MotionForce_traits<MotionForce2deriveT>::DerivByLinearMotion Type;
+    };
+
+
+    /**
+     * convertion from semantics classes to Motion/Force traits specializations
+     */
+    template <class MotionForceSemanticsT>
+    struct ConvertSem2motionForceTraits {};
+
+    template <>
+    struct ConvertSem2motionForceTraits<AngularForceVector3Semantics>
+    {
+        typedef MotionForce_traits<AngularForceVector3> Traits;
+    };
+
+    template <>
+    struct ConvertSem2motionForceTraits<AngularMotionVector3Semantics>
+    {
+        typedef MotionForce_traits<AngularMotionVector3> Traits;
+    };
+    
+    template <>
+    struct ConvertSem2motionForceTraits<LinearForceVector3Semantics>
+    {
+        typedef MotionForce_traits<LinearForceVector3> Traits;
+    };
+    
+    template <>
+    struct ConvertSem2motionForceTraits<LinearMotionVector3Semantics>
+    {
+        typedef MotionForce_traits<LinearMotionVector3> Traits;
+    };
+    
+    template <class MotionForceSemanticsT>
+    struct DualMotionForceSemanticsT
+    {
+        typedef typename MotionForce_traits<typename ConvertSem2motionForceTraits<MotionForceSemanticsT>::Traits::DualSpace>::SemanticsType Type;
+    };
+    
+    /**
+     * Traits class for SpatialMotionVector and SpatialForceVector classes
+     */
+    template <class SpatialMotionForceVectorT>
+    class SpatialMotionForceVectorT_traits {};
+
+    template <>
+    class SpatialMotionForceVectorT_traits<SpatialMotionVector>
+    {
+    public:
+        typedef LinearMotionVector3 LinearVector3Type;
+        typedef AngularMotionVector3 AngularVector3Type;
+    };
+
+    template <>
+    class SpatialMotionForceVectorT_traits<SpatialForceVector>
+    {
+    public:
+        typedef LinearForceVector3 LinearVector3Type;
+        typedef AngularForceVector3 AngularVector3Type;
     };
 }
 

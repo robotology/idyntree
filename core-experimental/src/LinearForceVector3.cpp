@@ -43,12 +43,12 @@ namespace iDynTree
     }
 
     LinearForceVector3::LinearForceVector3(const double* in_data, const unsigned int in_size):
-    ForceVector3<LinearForceVector3, LinearForceAssociationsT, LinearForceVector3Semantics>(in_data, in_size)
+    ForceVector3<LinearForceVector3>(in_data, in_size)
     {
     }
 
     LinearForceVector3::LinearForceVector3(const LinearForceVector3 & other):
-    ForceVector3<LinearForceVector3, LinearForceAssociationsT, LinearForceVector3Semantics>(other)
+    ForceVector3<LinearForceVector3>(other)
     {
     }
 

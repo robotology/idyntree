@@ -17,9 +17,9 @@ template <class ForceTSemantics>
 ForceVector3Semantics<ForceTSemantics>
 
 #define FORCEVECTOR3_TEMPLATE_HDR \
-template <class ForceT, class ForceAssociationsT, class ForceTSemantics>
+template <class ForceT>
 #define FORCEVECTOR3_INSTANCE_HDR \
-ForceVector3<ForceT, ForceAssociationsT, ForceTSemantics>
+ForceVector3<ForceT>
 
 namespace iDynTree
 {
@@ -63,7 +63,7 @@ namespace iDynTree
      *
      */
     FORCEVECTOR3_TEMPLATE_HDR
-    class ForceVector3: public GeomVector3<ForceT, ForceAssociationsT, ForceTSemantics>
+    class ForceVector3: public GeomVector3<ForceT>
     {
     public:
         /**
@@ -146,15 +146,18 @@ namespace iDynTree
 
     // constructors
     FORCEVECTOR3_TEMPLATE_HDR
-    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(): GeomVector3<ForceT, ForceAssociationsT, ForceTSemantics>()
+    FORCEVECTOR3_INSTANCE_HDR::ForceVector3():
+    GeomVector3<ForceT>()
     {}
     
     FORCEVECTOR3_TEMPLATE_HDR
-    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const double* in_data, const unsigned int in_size): GeomVector3<ForceT, ForceAssociationsT, ForceTSemantics>(in_data, in_size)
+    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const double* in_data, const unsigned int in_size):
+    GeomVector3<ForceT>(in_data, in_size)
     {}
     
     FORCEVECTOR3_TEMPLATE_HDR
-    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const ForceVector3 & other): GeomVector3<ForceT, ForceAssociationsT, ForceTSemantics>(other)
+    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const ForceVector3 & other):
+    GeomVector3<ForceT>(other)
     {}
     
     FORCEVECTOR3_TEMPLATE_HDR

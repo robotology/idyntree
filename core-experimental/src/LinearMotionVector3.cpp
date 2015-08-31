@@ -99,12 +99,12 @@ namespace iDynTree
     }
 
     LinearMotionVector3::LinearMotionVector3(const double* in_data, const unsigned int in_size):
-    MotionVector3<LinearMotionVector3, LinearMotionAssociationsT, LinearMotionVector3Semantics>(in_data, in_size)
+    MotionVector3<LinearMotionVector3>(in_data, in_size)
     {
     }
 
     LinearMotionVector3::LinearMotionVector3(const LinearMotionVector3 & other):
-    MotionVector3<LinearMotionVector3, LinearMotionAssociationsT, LinearMotionVector3Semantics>(other)
+    MotionVector3<LinearMotionVector3>(other)
     {
     }
 

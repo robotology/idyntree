@@ -38,10 +38,10 @@ namespace iDynTree
      * and implement the adjoint transformations common to these geometric relations.
      *
      */
-    class AngularMotionVector3: public MotionVector3<AngularMotionVector3, AngularMotionAssociationsT, AngularMotionVector3Semantics>
+    class AngularMotionVector3: public MotionVector3<AngularMotionVector3>
     {
     public:
-        typedef AngularMotionVector3Semantics SemanticsType;
+        typedef typename MotionForce_traits<AngularMotionVector3>::SemanticsType SemanticsType;
         
         /**
          * constructors

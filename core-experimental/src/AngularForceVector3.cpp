@@ -101,12 +101,12 @@ namespace iDynTree
 
 
     AngularForceVector3::AngularForceVector3(const double* in_data, const unsigned int in_size):
-    ForceVector3<AngularForceVector3, AngularForceAssociationsT, AngularForceVector3Semantics>(in_data, in_size)
+    ForceVector3<AngularForceVector3>(in_data, in_size)
     {
     }
 
     AngularForceVector3::AngularForceVector3(const AngularForceVector3& other):
-    ForceVector3<AngularForceVector3, AngularForceAssociationsT, AngularForceVector3Semantics>(other)
+    ForceVector3<AngularForceVector3>(other)
     {
     }
 
