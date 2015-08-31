@@ -420,6 +420,9 @@ Transform DynamicsComputations::getRelativeTransform(unsigned int refFrameIndex,
         return iDynTree::Transform();
     }
 
+    // compute fwd kinematics (if necessary)
+    this->computeFwdKinematics();
+
     KDL::Frame world_H_frame = this->pimpl->m_fwdPosKinematicsResults[frameIndex];
     KDL::Frame world_H_refFrame = this->pimpl->m_fwdPosKinematicsResults[refFrameIndex];
     KDL::Frame refFrame_H_frame = world_H_refFrame.Inverse()*world_H_frame;
