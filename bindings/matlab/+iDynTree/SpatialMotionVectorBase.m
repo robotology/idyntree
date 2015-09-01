@@ -40,49 +40,52 @@ classdef SpatialMotionVectorBase < iDynTree.IVector
     function varargout = size(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(379, self, varargin{:});
     end
-    function varargout = changePoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(380, self, varargin{:});
+    function varargout = zero(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(380, self, varargin{:});
     end
-    function varargout = changeCoordFrame(self,varargin)
+    function varargout = changePoint(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(381, self, varargin{:});
     end
-    function varargout = dot(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(384, self, varargin{:});
+    function varargout = changeCoordFrame(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(382, self, varargin{:});
     end
-    function varargout = plus(self,varargin)
+    function varargout = dot(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(385, self, varargin{:});
     end
-    function varargout = minus(self,varargin)
+    function varargout = plus(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(386, self, varargin{:});
     end
-    function varargout = uminus(self,varargin)
+    function varargout = minus(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(387, self, varargin{:});
     end
-    function varargout = asVector(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(389, self, varargin{:});
+    function varargout = uminus(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(388, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = asVector(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(390, self, varargin{:});
     end
-    function varargout = display(self,varargin)
+    function varargout = toString(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(391, self, varargin{:});
     end
-    function varargout = toMatlab(self,varargin)
+    function varargout = display(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(392, self, varargin{:});
     end
+    function varargout = toMatlab(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(393, self, varargin{:});
+    end
     function varargout = fromMatlab(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(393, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(394, self, varargin{:});
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(382, varargin{:});
-    end
-    function varargout = inverse(varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(383, varargin{:});
     end
+    function varargout = inverse(varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(384, varargin{:});
+    end
     function varargout = Zero(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(388, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(389, varargin{:});
     end
   end
 end

@@ -2,12 +2,12 @@ classdef IJointPosVelAcc < iDynTree.IJointPosVel
   methods
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(587, self);
+        iDynTreeMATLAB_wrap(589, self);
         self.swigInd=uint64(0);
       end
     end
     function varargout = acc(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(588, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(590, self, varargin{:});
     end
     function self = IJointPosVelAcc(varargin)
       self@iDynTree.IJointPosVel('_swigCreate');
