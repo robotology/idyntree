@@ -41,7 +41,7 @@ namespace iDynTree
     class AngularMotionVector3: public MotionVector3<AngularMotionVector3>
     {
     public:
-        typedef typename MotionForce_traits<AngularMotionVector3>::SemanticsType SemanticsType;
+        typedef MotionForce_traits<AngularMotionVector3>::SemanticsType SemanticsType;
         
         /**
          * constructors

@@ -41,7 +41,7 @@ namespace iDynTree
     class LinearForceVector3: public ForceVector3<LinearForceVector3>
     {
     public:
-        typedef typename MotionForce_traits<LinearForceVector3>::SemanticsType SemanticsType;
+        typedef MotionForce_traits<LinearForceVector3>::SemanticsType SemanticsType;
         
         /**
          * constructors
