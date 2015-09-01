@@ -159,6 +159,14 @@ void DynamicsComputations::resizeInternalDataStructures()
     this->pimpl->m_dqKDL.resize(nrOfDOFs);
     this->pimpl->m_ddqKDL.resize(nrOfDOFs);
 
+    // set to zero
+    KDL::SetToZero(this->pimpl->m_qKDL);
+    KDL::SetToZero(this->pimpl->m_dqKDL);
+    KDL::SetToZero(this->pimpl->m_ddqKDL);
+    KDL::SetToZero(this->pimpl->m_baseSpatialTwist);
+    KDL::SetToZero(this->pimpl->m_baseSpatialAcc);
+    this->pimpl->m_world2base = KDL::Frame::Identity();
+
 }
 
 int DynamicsComputations::getFrameIndex(const std::string& frameName) const
