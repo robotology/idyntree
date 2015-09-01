@@ -1,3 +1,3 @@
 function v = NR_OF_SENSOR_TYPES()
-  v = iDynTreeMATLAB_wrap(680);
+  v = iDynTreeMATLAB_wrap(684);
 end
