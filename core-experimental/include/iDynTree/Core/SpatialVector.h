@@ -134,6 +134,7 @@ SpatialVector<DerivedSpatialVecT>
         virtual double getVal(const unsigned int index) const; // Perform boundary checking
         virtual bool setVal(const unsigned int index, const double new_el);  // Perform boundary checking
         virtual unsigned int size() const;
+        virtual void zero();
 
         /**
          * Geometric operations
@@ -356,6 +357,16 @@ SpatialVector<DerivedSpatialVecT>
     {
         return SpatialVector::totalSize;
     }
+
+    SPATIALVECTOR_TEMPLATE_HDR
+    void SPATIALVECTOR_INSTANCE_HDR::zero()
+    {
+        for(unsigned int i=0; i < SpatialVector::totalSize; i++ )
+        {
+            (*this)(i) = 0.0;
+        }
+    }
+
 
 
     // Geometric operations
