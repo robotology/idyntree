@@ -13,8 +13,6 @@
 
 #define MOTIONVECTOR3_TEMPLATE_HDR \
 template <class MotionT>
-#define MOTIONVECTOR3_INSTANCE_HDR \
-MotionVector3<MotionT>
 
 namespace iDynTree
 {
@@ -39,17 +37,7 @@ namespace iDynTree
         template <class DerivedT, class OperandT>
         struct rawOperator
         {
-            static DerivedT cross(const MotionVector3<MotionT>& _this, const OperandT& other)
-            {
-                DerivedT result;
-                Eigen::Map<const Eigen::Vector3d> thisData(_this.data());
-                Eigen::Map<const Eigen::Vector3d> otherData(other.data());
-                Eigen::Map<Eigen::Vector3d> resultData(result.data());
-                
-                resultData = thisData.cross(otherData);
-                
-                return result;
-            }
+            static DerivedT cross(const MotionVector3<MotionT>& _this, const OperandT& other);
         };
         
     public:
@@ -75,55 +63,7 @@ namespace iDynTree
         MotionCrossLinF cross(const LinearForceVector3& other) const;
         MotionCrossAngF cross(const AngularForceVector3& other) const;
     };
-    
-    /**
-     * Method definitions
-     */
-    
-    // constructors
-    MOTIONVECTOR3_TEMPLATE_HDR
-    MOTIONVECTOR3_INSTANCE_HDR::MotionVector3():
-    GeomVector3<MotionT>()
-    {}
-    
-    MOTIONVECTOR3_TEMPLATE_HDR
-    MOTIONVECTOR3_INSTANCE_HDR::MotionVector3(const double* in_data, const unsigned int in_size):
-    GeomVector3<MotionT>(in_data, in_size)
-    {}
-    
-    MOTIONVECTOR3_TEMPLATE_HDR
-    MOTIONVECTOR3_INSTANCE_HDR::MotionVector3(const MotionVector3 & other):
-    GeomVector3<MotionT>(other)
-    {}
-    
-    MOTIONVECTOR3_TEMPLATE_HDR
-    MOTIONVECTOR3_INSTANCE_HDR::~MotionVector3()
-    {}
 
-    /* Cross products */
-    MOTIONVECTOR3_TEMPLATE_HDR
-    typename MOTIONVECTOR3_INSTANCE_HDR::MotionCrossLinM MOTIONVECTOR3_INSTANCE_HDR::cross(const LinearMotionVector3& other) const
-    {
-        return rawOperator<MotionCrossLinM, LinearMotionVector3>::cross(*this, other);
-    }
-    
-    MOTIONVECTOR3_TEMPLATE_HDR
-    typename MOTIONVECTOR3_INSTANCE_HDR::MotionCrossAngM MOTIONVECTOR3_INSTANCE_HDR::cross(const AngularMotionVector3& other) const
-    {
-        return rawOperator<MotionCrossAngM, AngularMotionVector3>::cross(*this, other);
-    }
-    
-    MOTIONVECTOR3_TEMPLATE_HDR
-    typename MOTIONVECTOR3_INSTANCE_HDR::MotionCrossLinF MOTIONVECTOR3_INSTANCE_HDR::cross(const LinearForceVector3& other) const
-    {
-        return rawOperator<MotionCrossLinF, LinearForceVector3>::cross(*this, other);
-    }
-    
-    MOTIONVECTOR3_TEMPLATE_HDR
-    typename MOTIONVECTOR3_INSTANCE_HDR::MotionCrossAngF MOTIONVECTOR3_INSTANCE_HDR::cross(const AngularForceVector3& other) const
-    {
-        return rawOperator<MotionCrossAngF, AngularForceVector3>::cross(*this, other);
-    }
 }
 
 #endif /* IDYNTREE_MOTION_VECTOR_3_H */

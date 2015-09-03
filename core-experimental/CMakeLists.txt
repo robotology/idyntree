@@ -54,6 +54,9 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/AngularForceVector3.cpp
                               src/LinearMotionVector3.cpp
                               src/AngularMotionVector3.cpp
+                              src/ForceVector3.cpp
+                              src/MotionVector3.cpp
+                              src/GeomVector3.cpp
                               src/Position.cpp
                               src/PositionRaw.cpp
                               src/PositionSemantics.cpp

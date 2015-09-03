@@ -9,8 +9,12 @@
 #include <iDynTree/Core/LinearForceVector3.h>
 #include <iDynTree/Core/Position.h>
 
+#include <Eigen/Dense>
+
 namespace iDynTree
 {
+    typedef Eigen::Matrix<double,3,1> Vector3d;
+
     /**
      * AngularForceVector3Semantics
      */
