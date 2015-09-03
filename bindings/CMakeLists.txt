@@ -9,6 +9,15 @@ set(IDYNTREE_USES_LUA FALSE CACHE BOOL "Do you want to create the Lua interface"
 set(IDYNTREE_USES_MATLAB FALSE CACHE BOOL "Do you want to create the MATLAB Interface")
 set(IDYNTREE_GENERATE_MATLAB FALSE CACHE BOOL "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper")
 
+if(IDYNTREE_USES_PYTHON OR
+   IDYNTREE_USES_LUA OR
+   IDYNTREE_USES_MATLAB OR
+   IDYNTREE_GENERATE_MATLAB)
+    if(NOT IDYNTREE_USES_KDL)
+        message(FATAL_ERROR "Impossible generated bindings if KDL is not enabled")
+    endif()
+endif()
+
 find_package(SWIG)
 if(SWIG_FOUND)
     include(UseSWIG)
@@ -34,7 +43,7 @@ if(SWIG_FOUND)
     endif(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB)
 endif(SWIG_FOUND)
 
-if(IDYNTREE_USES_PYTHON OR 
+if(IDYNTREE_USES_PYTHON OR
    IDYNTREE_USES_LUA    OR
    IDYNTREE_USES_MATLAB OR
    IDYNTREE_GENERATED_MATLAB)

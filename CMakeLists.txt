@@ -22,24 +22,42 @@ endif()
 #Use options specified in iDynTreeOptions.cmake file
 include(iDynTreeOptions)
 
+# Given an error if yarp or ICUB_MAIN dependencies are selected without KDL
+if(IDYNTREE_USES_ICUB_MAIN)
+    if(NOT IDYNTREE_USES_YARP OR NOT IDYNTREE_USES_KDL)
+        message(FATAL_ERROR "Impossible to build ICUB_MAIN support if KDL and YARP are not installed")
+    endif()
+endif()
+
+if(IDYNTREE_USES_YARP)
+    if(NOT IDYNTREE_USES_KDL)
+        message(FATAL_ERROR "Impossible to build YARP support if IDYNTREE_USES_KDL is not enabled")
+    endif()
+endif()
+
 # Find dependecies
-find_package(YARP REQUIRED)
+if(IDYNTREE_USES_YARP)
+    find_package(YARP REQUIRED)
+    if (YARP_HAS_MATH_LIB)
+        message(STATUS "found libYARP_math")
+    else(YARP_HAS_MATH_LIB)
+        message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
+    endif(YARP_HAS_MATH_LIB)
+endif()
 
 if(IDYNTREE_USES_ICUB_MAIN)
     find_package(ICUB REQUIRED)
 endif()
 
-include(OrocosKDLFindLogic)
-find_package(orocos_kdl REQUIRED)
+if(IDYNTREE_USES_KDL)
+    include(OrocosKDLFindLogic)
+    find_package(orocos_kdl REQUIRED)
+endif()
+
 find_package(Eigen3 REQUIRED)
-
-if (YARP_HAS_MATH_LIB)
-    message(STATUS "found libYARP_math")
-else(YARP_HAS_MATH_LIB)
-    message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
-endif(YARP_HAS_MATH_LIB)
-
 find_package(TinyXML REQUIRED)
+
+
 
 include(AddInstallRPATHSupport)
 add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
@@ -49,14 +67,19 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 
 add_subdirectory(core-experimental)
 add_subdirectory(model)
-add_subdirectory(core)
-add_subdirectory(sensors)
-add_subdirectory(model_io)
-add_subdirectory(high-level)
-add_subdirectory(regressors)
-add_subdirectory(yarp)
-if(IDYNTREE_USES_ICUB_MAIN)
-    add_subdirectory(icub)
+
+if(IDYNTREE_USES_KDL)
+    add_subdirectory(core)
+    add_subdirectory(sensors)
+    add_subdirectory(model_io)
+    add_subdirectory(high-level)
+    add_subdirectory(regressors)
+    if(IDYNTREE_USES_YARP)
+        add_subdirectory(yarp)
+        if(IDYNTREE_USES_ICUB_MAIN)
+            add_subdirectory(icub)
+        endif()
+    endif()
 endif()
 
 # compile simple command line tools
@@ -71,8 +94,8 @@ install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
 
 include(AddUninstallTarget)
 
-if(IDYNTREE_COMPILE_TESTS)
+if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_KDL)
     add_subdirectory(tests)
-endif(IDYNTREE_COMPILE_TESTS)
+endif()
 
 add_subdirectory(bindings)
