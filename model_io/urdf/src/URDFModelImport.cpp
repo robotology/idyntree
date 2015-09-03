@@ -263,6 +263,8 @@ bool linkFromURDFXML(TiXmlElement* linkXml,
         }
     }
     link.setInertia(inertia);
+
+    return true;
 }
 
 bool axisFromURDFXML(TiXmlElement* axisXml,
@@ -285,6 +287,8 @@ bool axisFromURDFXML(TiXmlElement* axisXml,
             return false;
         }
     }
+
+    return true;
 }
 
 /**

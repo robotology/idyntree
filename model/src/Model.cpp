@@ -229,6 +229,8 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
     secondLinkNeighbor.neighborLink = getLink(firstLink);
     secondLinkNeighbor.neighborJoint = getJoint(thisJointIndex);
     this->neighbors[secondLink].push_back(secondLinkNeighbor);
+
+    return thisJointIndex;
 }
 
 unsigned int Model::getNrOfNeighbors(const LinkIndex link)
