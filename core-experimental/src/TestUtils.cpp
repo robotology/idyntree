@@ -5,6 +5,8 @@
  *
  */
 
+#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/Transform.h>
 
@@ -85,6 +87,20 @@ void assertTransformsAreEqual(const Transform& trans1, const Transform& trans2, 
 {
     assertVectorAreEqual(trans1.getPosition(),trans2.getPosition(),tol,file,line);
     assertMatrixAreEqual(trans1.getRotation(),trans2.getRotation(),tol,file,line);
+}
+
+void assertSpatialForceAreEqual(const SpatialForceVector& f1, const SpatialForceVector& f2, double tol, std::string file, int line)
+{
+    Vector6 f1plain = f1.asVector();
+    Vector6 f2plain = f2.asVector();
+    assertVectorAreEqual(f1plain,f2plain,tol,file,line);
+}
+
+void assertSpatialMotionAreEqual(const SpatialMotionVector& f1, const SpatialMotionVector& f2, double tol, std::string file, int line)
+{
+    Vector6 f1plain = f1.asVector();
+    Vector6 f2plain = f2.asVector();
+    assertVectorAreEqual(f1plain,f2plain,tol,file,line);
 }
 
 

@@ -26,6 +26,22 @@
 
 namespace iDynTree
 {
+    /**
+     * Local static functions
+     */
+
+    template <class SpatialMotionForceVectorT>
+    static SpatialMotionForceVectorT changeCoordFrameOfT(const Rotation & rot,
+                                                         const SpatialMotionForceVectorT & other)
+    {
+        return SpatialMotionForceVectorT(other.getLinearVec3().changeCoordFrame(rot),
+                                         other.getAngularVec3().changeCoordFrame(rot));
+    }
+
+    /**
+     * class Method definitions
+     */
+
 
     typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 
@@ -85,6 +101,11 @@ namespace iDynTree
         return *this;
     }
 
+    const Rotation& Rotation::changeCoordinateFrame(const Rotation& newCoordinateFrame)
+    {
+        return this->changeRefOrientFrame(newCoordinateFrame);
+    }
+
     Rotation Rotation::compose(const Rotation& op1, const Rotation& op2)
     {
         RotationSemantics resultSemantics;
@@ -106,24 +127,34 @@ namespace iDynTree
         return Position(this->RotationRaw::changeCoordFrameOf(other), resultSemantics);
     }
 
+    SpatialMotionVector Rotation::changeCoordFrameOf(const SpatialMotionVector& other) const
+    {
+        return changeCoordFrameOfT<SpatialMotionVector>(*this, other);
+    }
+    
+    SpatialForceVector Rotation::changeCoordFrameOf(const SpatialForceVector& other) const
+    {
+        return changeCoordFrameOfT<SpatialForceVector>(*this, other);
+    }
+    
     Twist Rotation::changeCoordFrameOf(const Twist& other) const
     {
-        Twist result;
+        return changeCoordFrameOfT<Twist>(*this, other);
+    }
 
-        // \todo TODO add semantics to Twist
-        result = RotationRaw::changeCoordFrameOf(other);
+    SpatialAcc Rotation::changeCoordFrameOf(const SpatialAcc & other) const
+    {
+        return changeCoordFrameOfT<SpatialAcc>(*this, other);
+    }
 
-        return result;
+    SpatialMomentum Rotation::changeCoordFrameOf(const SpatialMomentum & other) const
+    {
+        return changeCoordFrameOfT<SpatialMomentum>(*this, other);
     }
 
     Wrench Rotation::changeCoordFrameOf(const Wrench &other) const
     {
-        Wrench result;
-
-        // \todo TODO add semantics to Wrench
-        result = RotationRaw::changeCoordFrameOf(other);
-
-        return result;
+        return changeCoordFrameOfT<Wrench>(*this, other);
     }
 
     Direction Rotation::changeCoordFrameOf(const Direction& other) const
@@ -150,39 +181,19 @@ namespace iDynTree
         return result;
     }
 
-    Axis Rotation::changeCoordFrameOf(const Axis& other) const
-    {
-        return Axis(this->changeCoordFrameOf(other.getDirection()),this->changeCoordFrameOf(other.getOrigin()));
-    }
-
-    SpatialAcc Rotation::changeCoordFrameOf(const SpatialAcc &other) const
-    {
-        SpatialAcc result;
-
-        // \todo TODO add semantics to SpatialAcc
-        result = RotationRaw::changeCoordFrameOf(other);
-
-        return result;
-    }
-
-    SpatialMomentum Rotation::changeCoordFrameOf(const SpatialMomentum &other) const
-    {
-        SpatialMomentum result;
-
-        // \todo TODO add semantics to SpatialMomentum
-        result = RotationRaw::changeCoordFrameOf(other);
-
-        return result;
-    }
-
     RotationalInertiaRaw Rotation::changeCoordFrameOf(const RotationalInertiaRaw &other) const
     {
         RotationalInertiaRaw result;
 
-        // \todo TODO add semantics to SpatialMomentum
+        // \todo TODO add semantics to ClassicalAcc
         result = RotationRaw::changeCoordFrameOf(other);
 
         return result;
+    }
+
+    Axis Rotation::changeCoordFrameOf(const Axis& other) const
+    {
+        return Axis(this->changeCoordFrameOf(other.getDirection()),this->changeCoordFrameOf(other.getOrigin()));
     }
 
     Rotation Rotation::inverse() const
@@ -202,12 +213,22 @@ namespace iDynTree
 
     Twist Rotation::operator*(const Twist& other) const
     {
-        return changeCoordFrameOf(other);
+        return changeCoordFrameOfT<Twist>(*this, other);
+    }
+
+    SpatialAcc Rotation::operator*(const SpatialAcc & other) const
+    {
+        return changeCoordFrameOfT<SpatialAcc>(*this, other);
+    }
+
+    SpatialMomentum Rotation::operator*(const SpatialMomentum & other) const
+    {
+        return changeCoordFrameOfT<SpatialMomentum>(*this, other);
     }
 
     Wrench Rotation::operator*(const Wrench& other) const
     {
-        return changeCoordFrameOf(other);
+        return changeCoordFrameOfT<Wrench>(*this, other);
     }
 
     Direction Rotation::operator*(const Direction& other) const
@@ -221,16 +242,6 @@ namespace iDynTree
     }
 
     Axis Rotation::operator*(const Axis& other) const
-    {
-        return changeCoordFrameOf(other);
-    }
-
-    SpatialAcc Rotation::operator*(const SpatialAcc& other) const
-    {
-        return changeCoordFrameOf(other);
-    }
-
-    SpatialMomentum Rotation::operator*(const SpatialMomentum& other) const
     {
         return changeCoordFrameOf(other);
     }

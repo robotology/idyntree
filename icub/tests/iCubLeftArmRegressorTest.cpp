@@ -195,7 +195,7 @@ int main()
     assert(ok);
 
     iDynTree::Twist gravity;
-    gravity(2) = gravity_norm;
+    gravity.getLinearVec3()(2) = gravity_norm;
 
     ok = ok && new_generator.setRobotState(q_idyntree,q_idyntree,q_idyntree,gravity);
 

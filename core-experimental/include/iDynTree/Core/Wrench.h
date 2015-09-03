@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_WRENCH_H
 #define IDYNTREE_WRENCH_H
 
-#include <iDynTree/Core/SpatialForceVectorRaw.h>
+#include <iDynTree/Core/SpatialForceVector.h>
 
 namespace iDynTree
 {
@@ -19,12 +19,12 @@ namespace iDynTree
      *
      * Currently this class does not support semantics.
      */
-    class Wrench: public SpatialForceVectorRaw
+    class Wrench: public SpatialForceVector
     {
     public:
         Wrench();
-        Wrench(const double* in_data, const unsigned int in_size);
-        Wrench(const SpatialForceVectorRaw & other);
+        Wrench(const Force & _linearVec3, const Torque & _angularVec3);
+        Wrench(const SpatialForceVector & other);
         Wrench(const Wrench & other);
         virtual ~Wrench();
 

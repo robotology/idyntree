@@ -23,7 +23,9 @@ namespace iDynTree
     {
     protected:
         int orientationFrame;
+        int body;
         int refOrientationFrame;
+        int refBody;
         int coordinateFrame;
 
         /**
@@ -48,7 +50,7 @@ namespace iDynTree
          * Constructor: initialize semantics from individual parameters
          *
          */
-        RotationSemantics(int _orientationFrame, int _refOrientationFrame);
+        RotationSemantics(int _orientationFrame, int _body, int _refOrientationFrame, int _refBody);
 
         /**
          * Copy constructor: create a RotationSemantics from another RotationSemantics
@@ -66,10 +68,15 @@ namespace iDynTree
          */
         ///@{
         int getOrientationFrame() const;
+        int getBody() const;
         int getReferenceOrientationFrame() const;
+        int getRefBody() const;
         int getCoordinateFrame() const;
+
         void setOrientationFrame(int _orientationFrame);
+        void setBody(int _body);
         void setReferenceOrientationFrame(int _refOrientationFrame);
+        void setRefBody(int _refBody);
         void setCoordinateFrame(int _coordinateFrame);
     ///@}
         

@@ -13,8 +13,8 @@
 namespace iDynTree
 {
     class PositionRaw;
-    class SpatialForceVectorRaw;
-    class SpatialMotionVectorRaw;
+    class SpatialForceVector;
+    class SpatialMotionVector;
 
     /**
      * Class providing the raw coordinates for a spatial inertia, i.e.
@@ -87,7 +87,7 @@ namespace iDynTree
          * Multiplication function
          *
          */
-        SpatialForceVectorRaw multiply(const SpatialMotionVectorRaw & op) const;
+        SpatialForceVector multiply(const SpatialMotionVector & op) const;
 
         /** reset to zero (i.e. the inertia of body with zero mass) the SpatialInertia */
         void zero();

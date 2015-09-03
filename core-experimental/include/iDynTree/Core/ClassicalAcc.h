@@ -8,10 +8,11 @@
 #ifndef IDYNTREE_CLASSICAL_ACC_H
 #define IDYNTREE_CLASSICAL_ACC_H
 
-#include <iDynTree/Core/SpatialMotionVectorRaw.h>
+#include <iDynTree/Core/VectorFixSize.h>
 
 namespace iDynTree
 {
+    class RotationRaw;
     /**
      * Class representing a classical 6D acceleration, i.e. the concatenation
      * of the 3d vector of the acceleration of a point and of the 3d vector

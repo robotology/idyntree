@@ -46,7 +46,7 @@ void validateInvarianceOfTwist(const Axis & ax, const Transform & trans, double 
 
     Twist t_trans_check = (trans*ax).getRotationTwist(dtheta);
 
-    ASSERT_EQUAL_VECTOR(t_trans,t_trans_check);
+    ASSERT_EQUAL_SPATIAL_MOTION(t_trans,t_trans_check);
 }
 
 

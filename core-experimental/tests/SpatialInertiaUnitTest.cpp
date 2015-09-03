@@ -45,9 +45,10 @@ void checkInertiaTwistProduct(const SpatialInertia & inertia, const Twist & twis
 
     Matrix6x6 I = inertia.asMatrix();
 
-    toEigen(momentumCheck) = toEigen(I)*toEigen(twist);
+    Vector6 twistPlain = twist.asVector();
+    toEigen(momentumCheck) = toEigen(I)*toEigen(twistPlain);
 
-    ASSERT_EQUAL_VECTOR(momentum,momentumCheck);
+    ASSERT_EQUAL_VECTOR(momentum.asVector(),momentumCheck);
 }
 
 void checkInvariance(const Transform & trans, const SpatialInertia & inertia, const Twist & twist)
@@ -66,34 +67,35 @@ void checkInvariance(const Transform & trans, const SpatialInertia & inertia, co
     Matrix6x6 transInvAdj    = trans.inverse().asAdjointTransform();
     Matrix6x6 transAdj       = trans.asAdjointTransform();
     Matrix6x6 inertiaTranslatedCheck;
+    Vector6 twistPlain = twist.asVector();
 
     toEigen(momentumTranslatedCheck2) = toEigen(transAdjWrench)*
                                         toEigen(inertiaRaw)*
-                                        toEigen(twist);
+                                        toEigen(twistPlain);
 
     toEigen(momentumTranslatedCheck3) = toEigen(transAdjWrench)*
                                         toEigen(inertiaRaw)*
                                         toEigen(transInvAdj)*
                                         toEigen(transAdj)*
-                                        toEigen(twist);
+                                        toEigen(twistPlain);
 
     toEigen(twistTranslatedCheck)     = toEigen(transAdj)*
-                                        toEigen(twist);
+                                        toEigen(twistPlain);
 
     toEigen(inertiaTranslatedCheck)   = toEigen(transAdjWrench)*
                                         toEigen(inertiaRaw)*
                                         toEigen(transInvAdj);
 
     ASSERT_EQUAL_MATRIX(inertiaTranslatedCheck,inertiaTranslated.asMatrix());
-    ASSERT_EQUAL_VECTOR(twistTranslated,twistTranslatedCheck);
-    ASSERT_EQUAL_VECTOR(momentumTranslated,momentumTranslatedCheck3);
-    ASSERT_EQUAL_VECTOR(momentumTranslated,momentumTranslatedCheck2);
-    ASSERT_EQUAL_VECTOR(momentumTranslated,momentumTranslatedCheck);
+    ASSERT_EQUAL_VECTOR(twistTranslated.asVector(),twistTranslatedCheck);
+    ASSERT_EQUAL_VECTOR(momentumTranslated.asVector(),momentumTranslatedCheck3);
+    ASSERT_EQUAL_VECTOR(momentumTranslated.asVector(),momentumTranslatedCheck2);
+    ASSERT_EQUAL_VECTOR(momentumTranslated.asVector(),momentumTranslatedCheck.asVector());
 
     SpatialMomentum momentum = invTrans*momentumTranslated;
     SpatialMomentum momentumCheck = (invTrans*(trans*inertia))*(invTrans*(trans*twist));
 
-    ASSERT_EQUAL_VECTOR(momentum,momentumCheck);
+    ASSERT_EQUAL_VECTOR(momentum.asVector(),momentumCheck.asVector());
 }
 
 int main()
@@ -101,9 +103,9 @@ int main()
     Transform trans(Rotation::RPY(0.0,0.0,0.0),Position(10,0,0));
 
     double twistData[6] = {0.0,0.0,0.0,1.0,2.0,3.0};
-    Twist twist(twistData,6);
+    Twist twist(LinVelocity(twistData,3),AngVelocity(twistData+3,3));
 
-    ASSERT_EQUAL_DOUBLE(twist(0),twistData[0]);
+    ASSERT_EQUAL_DOUBLE(twist.asVector()(0),twistData[0]);
 
     double rotInertiaData[3*3] = {10.0,0.0,0.0,
                                   0.0,20.0,0.0,

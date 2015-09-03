@@ -5,10 +5,11 @@
  *
  */
 
+
 #include <iDynTree/Core/PositionRaw.h>
 #include <iDynTree/Core/RotationRaw.h>
-#include <iDynTree/Core/SpatialMotionVectorRaw.h>
-#include <iDynTree/Core/SpatialForceVectorRaw.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/Core/SpatialForceVector.h>
 #include <iDynTree/Core/Utils.h>
 #include <cstdio>
 #include <sstream>
@@ -90,30 +91,34 @@ namespace iDynTree
         return result;
     }
 
-    SpatialMotionVectorRaw PositionRaw::changePointOf(const SpatialMotionVectorRaw & other) const
+    SpatialMotionVector PositionRaw::changePointOf(const SpatialMotionVector & other) const
     {
-        SpatialMotionVectorRaw result;
+        SpatialMotionVector result;
 
         Eigen::Map<const Eigen::Vector3d> thisPos(this->data());
-        Eigen::Map<const Vector6d> otherTwist(other.data());
-        Eigen::Map<Vector6d> resTwist(result.data());
+        Eigen::Map<const Eigen::Vector3d> otherLinear(other.getLinearVec3().data());
+        Eigen::Map<const Eigen::Vector3d> otherAngular(other.getAngularVec3().data());
+        Eigen::Map<Eigen::Vector3d> resLinear(result.getLinearVec3().data());
+        Eigen::Map<Eigen::Vector3d> resAngular(result.getAngularVec3().data());
 
-        resTwist.segment<3>(0) =  otherTwist.segment<3>(0)+thisPos.cross(otherTwist.segment<3>(3));
-        resTwist.segment<3>(3) =  otherTwist.segment<3>(3);
+        resLinear  = otherLinear + thisPos.cross(otherAngular);
+        resAngular = otherAngular;
 
         return result;
     }
 
-    SpatialForceVectorRaw PositionRaw::changePointOf(const SpatialForceVectorRaw & other) const
+    SpatialForceVector PositionRaw::changePointOf(const SpatialForceVector & other) const
     {
-        SpatialForceVectorRaw result;
+        SpatialForceVector result;
 
         Eigen::Map<const Eigen::Vector3d> thisPos(this->data());
-        Eigen::Map<const Vector6d> otherWrench(other.data());
-        Eigen::Map<Vector6d> resWrench(result.data());
+        Eigen::Map<const Eigen::Vector3d> otherLinear(other.getLinearVec3().data());
+        Eigen::Map<const Eigen::Vector3d> otherAngular(other.getAngularVec3().data());
+        Eigen::Map<Eigen::Vector3d> resLinear(result.getLinearVec3().data());
+        Eigen::Map<Eigen::Vector3d> resAngular(result.getAngularVec3().data());
 
-        resWrench.segment<3>(0) = otherWrench.segment<3>(0);
-        resWrench.segment<3>(3) = thisPos.cross(otherWrench.segment<3>(0))+otherWrench.segment<3>(3);
+        resLinear  = otherLinear;
+        resAngular = thisPos.cross(otherLinear) + otherAngular;
 
         return result;
     }

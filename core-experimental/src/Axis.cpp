@@ -106,8 +106,8 @@ namespace iDynTree
     {
         Twist ret;
 
-        Eigen::Map<Eigen::Vector3d> linVel(ret.data());
-        Eigen::Map<Eigen::Vector3d> angVel(ret.data()+3);
+        Eigen::Map<Eigen::Vector3d> linVel(ret.getLinearVec3().data());
+        Eigen::Map<Eigen::Vector3d> angVel(ret.getAngularVec3().data());
 
         Eigen::Map<const Eigen::Vector3d> dir(direction.data());
         Eigen::Map<const Eigen::Vector3d> orig(origin.data());
@@ -122,8 +122,8 @@ namespace iDynTree
     {
         SpatialAcc ret;
 
-        Eigen::Map<Eigen::Vector3d> lin(ret.data());
-        Eigen::Map<Eigen::Vector3d> ang(ret.data()+3);
+        Eigen::Map<Eigen::Vector3d> lin(ret.getLinearVec3().data());
+        Eigen::Map<Eigen::Vector3d> ang(ret.getAngularVec3().data());
 
         Eigen::Map<const Eigen::Vector3d> dir(direction.data());
         Eigen::Map<const Eigen::Vector3d> orig(origin.data());

@@ -41,18 +41,18 @@ posInFrame2_matlab = (Frame_2_1Hom.toMatlab)*(posInFrame1_m);
 iDynTreeAssertEqual(posInFrame2_m,posInFrame2_matlab,tol,'Error in testing Transform::asHomogeneousTransform mathod');
 
 twistInFrame2 = (Frame_2_1*twistInFrame1);
-twistInFrame2_m = twistInFrame2.toMatlab();
+twistInFrame2_m = twistInFrame2.asVector().toMatlab();
 
 Frame_2_1Adj = Frame_2_1.asAdjointTransform()
-twistInFrame2_matlab = (Frame_2_1Adj.toMatlab())*(twistInFrame1.toMatlab());
+twistInFrame2_matlab = (Frame_2_1Adj.toMatlab())*(twistInFrame1.asVector().toMatlab());
 
 iDynTreeAssertEqual(twistInFrame2_m,twistInFrame2_matlab,tol,'Error in testing Transform::asAdjointTransform mathod');
 
 wrenchInFrame2 = (Frame_2_1*wrenchInFrame1);
-wrenchInFrame2_m = wrenchInFrame2.toMatlab();
+wrenchInFrame2_m = wrenchInFrame2.asVector().toMatlab();
 
 Frame21AdjWrench = Frame_2_1.asAdjointTransformWrench();
-wrenchInFrame2_matlab = (Frame21AdjWrench.toMatlab)*(wrenchInFrame1.toMatlab());
+wrenchInFrame2_matlab = (Frame21AdjWrench.toMatlab)*(wrenchInFrame1.asVector().toMatlab());
 
 iDynTreeAssertEqual(wrenchInFrame2_m,wrenchInFrame2_matlab,tol,'Error in testing Transform::asAdjointTransformWrench mathod');
 

@@ -15,21 +15,22 @@ SpatialMomentum::SpatialMomentum()
 
 }
 
-SpatialMomentum::SpatialMomentum(const double* in_data, const unsigned int in_size):
-               SpatialForceVectorRaw(in_data, in_size)
+SpatialMomentum::SpatialMomentum(const LinMomentum & _linearVec3,
+                                 const AngMomentum & _angularVec3):
+                                 SpatialForceVector(_linearVec3, _angularVec3)
 {
 
 }
 
-SpatialMomentum::SpatialMomentum(const SpatialForceVectorRaw& other):
-               SpatialForceVectorRaw(other)
+SpatialMomentum::SpatialMomentum(const SpatialForceVector& other):
+                                 SpatialForceVector(other)
 {
 
 }
 
 
 SpatialMomentum::SpatialMomentum(const SpatialMomentum& other):
-               SpatialForceVectorRaw(other.data(),6)
+                                 SpatialForceVector(other)
 {
 
 }

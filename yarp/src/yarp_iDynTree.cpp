@@ -17,7 +17,8 @@ using namespace yarp::math;
 bool YarptoiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Wrench & iDynTreeWrench)
 {
     if( yarpVector.size() != 6 ) return false;
-    memcpy(iDynTreeWrench.data(),yarpVector.data(),6*sizeof(double));
+    memcpy(iDynTreeWrench.getLinearVec3().data(),yarpVector.data(),3*sizeof(double));
+    memcpy(iDynTreeWrench.getAngularVec3().data(),yarpVector.data()+3,3*sizeof(double));
     return true;
 }
 
@@ -25,7 +26,8 @@ bool YarptoiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Wrench & iDy
 bool iDynTreetoYarp(const iDynTree::Wrench & iDynTreeWrench,yarp::sig::Vector & yarpVector)
 {
     if( yarpVector.size() != 6 ) { yarpVector.resize(6); }
-    memcpy(yarpVector.data(),iDynTreeWrench.data(),6*sizeof(double));
+    memcpy(yarpVector.data(),iDynTreeWrench.getLinearVec3().data(),3*sizeof(double));
+    memcpy(yarpVector.data()+3,iDynTreeWrench.getAngularVec3().data(),3*sizeof(double));
     return true;
 }
 

@@ -24,9 +24,10 @@ void checkTwistTransformation(const Transform & trans, const Twist & twist)
     Matrix6x6 adj = trans.asAdjointTransform();
     Vector6 twistTranslatedCheck;
 
-    toEigen(twistTranslatedCheck) = toEigen(adj)*toEigen(twist);
+    Vector6 twistp = twist.asVector();
+    toEigen(twistTranslatedCheck) = toEigen(adj)*toEigen(twistp);
 
-    ASSERT_EQUAL_VECTOR(twistTranslatedCheck,twistTransformed);
+    ASSERT_EQUAL_VECTOR(twistTranslatedCheck,twistTransformed.asVector());
 }
 
 int main()
@@ -34,7 +35,7 @@ int main()
     Transform trans(Rotation::RPY(0.0,0.0,0.0),Position(10,0,0));
 
     double twistData[6] = {1.0,4.0,-50.0,1.0,2.0,3.0};
-    Twist twist(twistData,6);
+    Twist twist(LinVelocity(twistData,3),AngVelocity(twistData+3,3));
 
     checkTwistTransformation(trans,twist);
 

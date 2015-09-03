@@ -297,7 +297,7 @@ int main()
 
         for( int ft_id =0; ft_id < (int)ft_names.size(); ft_id++ ) {
             for( int www=0; www < 6; www++ ) {
-                parameters[NrOfRealLinksParameters+6*ft_id+www] = measured_wrenches_offset[ft_id](www);
+                parameters[NrOfRealLinksParameters+6*ft_id+www] = measured_wrenches_offset[ft_id].asVector()(www);
             }
         }
     }

@@ -9,13 +9,13 @@
 #define IDYNTREE_SPATIAL_FORCE_RAW_H
 
 #include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Core/LinearForceVector3.h>
+#include <iDynTree/Core/AngularForceVector3.h>
+#include <iDynTree/Core/SpatialVector.h>
+#include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
 namespace iDynTree
 {
-    class PositionRaw;
-    class RotationRaw;
-    class SpatialMotionVectorRaw;
-
     /**
      * Class providing the raw coordinates for any spatial force vector.
      *
@@ -32,23 +32,21 @@ namespace iDynTree
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.
      */
-    class SpatialForceVectorRaw: public Vector6
+    class SpatialForceVector: public SpatialVector<SpatialForceVector>
     {
     public:
-        SpatialForceVectorRaw();
-        SpatialForceVectorRaw(const double* in_data, const unsigned int in_size);
-        SpatialForceVectorRaw(const SpatialForceVectorRaw & other);
-        virtual ~SpatialForceVectorRaw();
-
-        const SpatialForceVectorRaw & changePoint(const PositionRaw & newPoint);
-        const SpatialForceVectorRaw & changeCoordFrame(const RotationRaw & newCoordFrame);
-        static SpatialForceVectorRaw compose(const SpatialForceVectorRaw & op1, const SpatialForceVectorRaw & op2);
-        static SpatialForceVectorRaw inverse(const SpatialForceVectorRaw & op);
-
-        double dot(const SpatialMotionVectorRaw & other) const;
-
-        /** constructor helpers */
-        static SpatialForceVectorRaw Zero();
+        /**
+         * We use traits here to have the associations SpatialVector <=> Linear/Angular 3D vectors types
+         * defined in a single place.
+         */
+        typedef SpatialMotionForceVectorT_traits<SpatialForceVector>::LinearVector3Type LinearVector3T;
+        typedef SpatialMotionForceVectorT_traits<SpatialForceVector>::AngularVector3Type AngularVector3T;
+        
+        SpatialForceVector();
+        SpatialForceVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
+        SpatialForceVector(const SpatialForceVector & other);
+        SpatialForceVector(const SpatialVector<SpatialForceVector> & other);
+        virtual ~SpatialForceVector();
     };
 }
 

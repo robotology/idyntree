@@ -16,6 +16,7 @@ namespace iDynTree
 {
     class Position;
     class Twist;
+    class SpatialAcc;
     class Wrench;
     class Direction;
     class Axis;
@@ -23,6 +24,8 @@ namespace iDynTree
     class SpatialMomentum;
     class ClassicalAcc;
     class RotationalInertiaRaw;
+    class SpatialMotionVector;
+    class SpatialForceVector;
 
     /**
      * Class representation the rotation of an orientation frame
@@ -100,15 +103,18 @@ namespace iDynTree
          */
         const Rotation & changeOrientFrame(const Rotation & newOrientFrame);
         const Rotation & changeRefOrientFrame(const Rotation & newRefOrientFrame);
+        const Rotation & changeCoordinateFrame(const Rotation& newCoordinateFrame);
         static Rotation compose(const Rotation & op1, const Rotation & op2);
         static Rotation inverse2(const Rotation & orient);
         Position changeCoordFrameOf(const Position & other) const;
-        Twist  changeCoordFrameOf(const Twist & other) const;
+        SpatialMotionVector changeCoordFrameOf(const SpatialMotionVector & other) const;
+        SpatialForceVector  changeCoordFrameOf(const SpatialForceVector  & other) const;
+        Twist changeCoordFrameOf(const Twist & other) const;
+        SpatialAcc changeCoordFrameOf(const SpatialAcc & other) const;
+        SpatialMomentum changeCoordFrameOf(const SpatialMomentum & other) const;
         Wrench changeCoordFrameOf(const Wrench & other) const;
         Direction changeCoordFrameOf(const Direction & other) const;
         Axis      changeCoordFrameOf(const Axis & other) const;
-        SpatialAcc  changeCoordFrameOf(const SpatialAcc & other) const;
-        SpatialMomentum changeCoordFrameOf(const SpatialMomentum & other) const;
         ClassicalAcc changeCoordFrameOf(const ClassicalAcc & other) const;
         RotationalInertiaRaw changeCoordFrameOf(const RotationalInertiaRaw & other) const;
 

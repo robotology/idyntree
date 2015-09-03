@@ -8,7 +8,8 @@
 #ifndef IDYNTREE_TWIST_H
 #define IDYNTREE_TWIST_H
 
-#include  <iDynTree/Core/SpatialMotionVectorRaw.h>
+
+#include  <iDynTree/Core/SpatialMotionVector.h>
 
 namespace iDynTree
 {
@@ -23,12 +24,12 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    class Twist: public SpatialMotionVectorRaw
+    class Twist: public SpatialMotionVector
     {
     public:
         Twist();
-        Twist(const double* in_data, const unsigned int in_size);
-        Twist(const SpatialMotionVectorRaw& other);
+        Twist(const LinVelocity & _linearVec3, const AngVelocity & _angularVec3);
+        Twist(const SpatialMotionVector& other);
         Twist(const Twist& other);
         virtual ~Twist();
 

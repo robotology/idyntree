@@ -25,9 +25,10 @@ void checkWrenchTransformation(const Transform & trans, const Wrench & w)
     Matrix6x6 adjWrench = trans.asAdjointTransformWrench();
     Vector6 wTranslatedCheck;
 
-    toEigen(wTranslatedCheck) = toEigen(adjWrench)*toEigen(w);
+    Vector6 wp = w.asVector();
+    toEigen(wTranslatedCheck) = toEigen(adjWrench)*toEigen(wp);
 
-    ASSERT_EQUAL_VECTOR(wTranslatedCheck,wTransformed);
+    ASSERT_EQUAL_VECTOR(wTranslatedCheck,wTransformed.asVector());
 }
 
 void checkDotProductInvariance(const Transform & trans, const Wrench & w, const Twist & twist)
@@ -48,10 +49,10 @@ int main()
     Transform trans(Rotation::RPY(0.0,0.0,0.0),Position(10,0,0));
 
     double wData[6] = {1.0,4.0,-50.0,1.0,2.0,3.0};
-    Wrench wrench(wData,6);
+    Wrench wrench(LinearForceVector3(wData,3),AngularForceVector3(wData+3,3));
 
     double twistData[6] = {14.0,-4.0,-5.0,6.0,7.0,1.0};
-    Twist twist(twistData,6);
+    Twist twist(LinVelocity(twistData,3),AngVelocity(twistData+3,3));
 
     checkWrenchTransformation(trans,wrench);
     checkDotProductInvariance(trans,wrench,twist);

@@ -4,50 +4,50 @@ classdef FixedJoint < iDynTree.IJoint
       self@iDynTree.IJoint('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(380, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(380, varargin{:}); % FIXME
+        %self.swigInd = iDynTreeMATLAB_wrap(567, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(567, varargin{:}); % FIXME
         self.swigInd = tmp.swigInd;
         tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(381, self);
+        iDynTreeMATLAB_wrap(568, self);
         self.swigInd=uint64(0);
       end
     end
     function varargout = clone(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(382, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(569, self, varargin{:});
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(383, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(570, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(384, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(571, self, varargin{:});
     end
     function varargout = setAttachedLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(385, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(572, self, varargin{:});
     end
     function varargout = setRestTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(386, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(573, self, varargin{:});
     end
     function varargout = getFirstAttachedLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(387, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(574, self, varargin{:});
     end
     function varargout = getSecondAttachedLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(388, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(575, self, varargin{:});
     end
     function varargout = getTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(389, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(576, self, varargin{:});
     end
     function varargout = computeLinkPosVelAcc(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(390, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(577, self, varargin{:});
     end
     function varargout = computeLinkVelAcc(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(391, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(578, self, varargin{:});
     end
     function varargout = computeJointTorque(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(392, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(579, self, varargin{:});
     end
   end
   methods(Static)

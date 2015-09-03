@@ -66,8 +66,8 @@ KDL::Twist ToKDL(const Twist& idyntree_twist)
 {
     KDL::Twist kdl_twist;
 
-    memcpy(kdl_twist.vel.data,idyntree_twist.data(),3*sizeof(double));
-    memcpy(kdl_twist.rot.data,idyntree_twist.data()+3,3*sizeof(double));
+    memcpy(kdl_twist.vel.data,idyntree_twist.getLinearVec3().data(),3*sizeof(double));
+    memcpy(kdl_twist.rot.data,idyntree_twist.getAngularVec3().data(),3*sizeof(double));
 
     return kdl_twist;
 }
@@ -76,8 +76,8 @@ KDL::Twist ToKDL(const SpatialAcc& idyntree_spatial_acc)
 {
     KDL::Twist kdl_twist;
 
-    memcpy(kdl_twist.vel.data,idyntree_spatial_acc.data(),3*sizeof(double));
-    memcpy(kdl_twist.rot.data,idyntree_spatial_acc.data()+3,3*sizeof(double));
+    memcpy(kdl_twist.vel.data,idyntree_spatial_acc.getLinearVec3().data(),3*sizeof(double));
+    memcpy(kdl_twist.rot.data,idyntree_spatial_acc.getAngularVec3().data(),3*sizeof(double));
 
     return kdl_twist;
 }
@@ -98,8 +98,8 @@ KDL::Wrench ToKDL(const Wrench& idyntree_wrench)
 {
     KDL::Wrench kdl_wrench;
 
-    memcpy(kdl_wrench.force.data,idyntree_wrench.data(),3*sizeof(double));
-    memcpy(kdl_wrench.torque.data,idyntree_wrench.data()+3,3*sizeof(double));
+    memcpy(kdl_wrench.force.data,idyntree_wrench.getLinearVec3().data(),3*sizeof(double));
+    memcpy(kdl_wrench.torque.data,idyntree_wrench.getAngularVec3().data(),3*sizeof(double));
 
     return kdl_wrench;
 }
@@ -108,8 +108,8 @@ KDL::Wrench ToKDL(const SpatialMomentum& idyntree_spatial_momentum)
 {
     KDL::Wrench kdl_wrench;
 
-    memcpy(kdl_wrench.force.data,idyntree_spatial_momentum.data(),3*sizeof(double));
-    memcpy(kdl_wrench.torque.data,idyntree_spatial_momentum.data()+3,3*sizeof(double));
+    memcpy(kdl_wrench.force.data,idyntree_spatial_momentum.getLinearVec3().data(),3*sizeof(double));
+    memcpy(kdl_wrench.torque.data,idyntree_spatial_momentum.getAngularVec3().data(),3*sizeof(double));
 
     return kdl_wrench;
 }
@@ -164,8 +164,8 @@ Twist ToiDynTree(const KDL::Twist& kdl_twist)
 {
     Twist idyntree_twist;
 
-    memcpy(idyntree_twist.data(),kdl_twist.vel.data,3*sizeof(double));
-    memcpy(idyntree_twist.data()+3,kdl_twist.rot.data,3*sizeof(double));
+    memcpy(idyntree_twist.getLinearVec3().data(),kdl_twist.vel.data,3*sizeof(double));
+    memcpy(idyntree_twist.getAngularVec3().data(),kdl_twist.rot.data,3*sizeof(double));
 
     return idyntree_twist;
 }
@@ -175,8 +175,8 @@ Wrench ToiDynTree(const KDL::Wrench& kdl_wrench)
 {
     Wrench idyntree_wrench;
 
-    memcpy(idyntree_wrench.data(),kdl_wrench.force.data,3*sizeof(double));
-    memcpy(idyntree_wrench.data()+3,kdl_wrench.torque.data,3*sizeof(double));
+    memcpy(idyntree_wrench.getLinearVec3().data(),kdl_wrench.force.data,3*sizeof(double));
+    memcpy(idyntree_wrench.getAngularVec3().data(),kdl_wrench.torque.data,3*sizeof(double));
 
     return idyntree_wrench;
 }

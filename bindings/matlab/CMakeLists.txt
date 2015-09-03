@@ -55,7 +55,7 @@ if(IDYNTREE_GENERATE_MATLAB)
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
     COMMAND ${CMAKE_COMMAND}
     ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/../${modulename}.cxx ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
-    MAIN_DEPENDENCY "${swig_generated_sources}"
+    #MAIN_DEPENDENCY "${swig_generated_sources}"
     COMMENT "Copy swig generated files to source dir")
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx PROPERTIES GENERATED 1)
 endif()

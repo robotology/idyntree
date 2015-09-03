@@ -15,22 +15,22 @@ SpatialAcc::SpatialAcc()
 
 }
 
-SpatialAcc::SpatialAcc(const double* in_data,
-             const unsigned int in_size):
-             SpatialMotionVectorRaw(in_data, in_size)
+SpatialAcc::SpatialAcc(const LinAcceleration & _linearVec3,
+                       const AngAcceleration & _angularVec3):
+                       SpatialMotionVector(_linearVec3, _angularVec3)
 {
 
 }
 
-SpatialAcc::SpatialAcc(const SpatialMotionVectorRaw& other):
-             SpatialMotionVectorRaw(other)
+SpatialAcc::SpatialAcc(const SpatialMotionVector& other):
+                       SpatialMotionVector(other)
 {
 
 }
 
 
 SpatialAcc::SpatialAcc(const SpatialAcc& other):
-            SpatialMotionVectorRaw(other.data(),6)
+                       SpatialMotionVector(other)
 {
 
 }

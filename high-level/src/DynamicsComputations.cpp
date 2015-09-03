@@ -351,7 +351,7 @@ bool DynamicsComputations::setRobotState(const VectorDynSize& q,
                                          const SpatialAcc& world_gravity)
 {
     Transform world_T_base = Transform::Identity();
-    Twist base_velocity = SpatialMotionVectorRaw::Zero();
+    Twist base_velocity = Twist::Zero();
     ClassicalAcc base_acceleration = ClassicalAcc::Zero();
 
     return setRobotState(q,q_dot,q_dotdot,

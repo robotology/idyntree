@@ -15,8 +15,8 @@
 namespace iDynTree
 {
     class RotationRaw;
-    class SpatialMotionVectorRaw;
-    class SpatialForceVectorRaw;
+    class SpatialMotionVector;
+    class SpatialForceVector;
     
     /**
      * Class providing the raw coordinates for iDynTree::Position class.
@@ -58,8 +58,8 @@ namespace iDynTree
         const PositionRaw & changeRefPoint(const PositionRaw & newRefPoint);
         static PositionRaw compose(const PositionRaw & op1, const PositionRaw & op2);
         static PositionRaw inverse(const PositionRaw & op);
-        SpatialMotionVectorRaw changePointOf(const SpatialMotionVectorRaw & other) const;
-        SpatialForceVectorRaw changePointOf(const SpatialForceVectorRaw & other) const;
+        SpatialMotionVector changePointOf(const SpatialMotionVector & other) const;
+        SpatialForceVector changePointOf(const SpatialForceVector & other) const;
         
         
         /** @name Output helpers.

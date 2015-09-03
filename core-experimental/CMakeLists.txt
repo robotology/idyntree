@@ -19,11 +19,11 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/RotationSemantics.h
                               include/iDynTree/Core/RotationalInertiaRaw.h
                               include/iDynTree/Core/SpatialAcc.h
-                              include/iDynTree/Core/SpatialForceVectorRaw.h
+                              include/iDynTree/Core/SpatialForceVector.h
                               include/iDynTree/Core/SpatialInertiaRaw.h
                               include/iDynTree/Core/SpatialInertia.h
                               include/iDynTree/Core/SpatialMomentum.h
-                              include/iDynTree/Core/SpatialMotionVectorRaw.h
+                              include/iDynTree/Core/SpatialMotionVector.h
                               include/iDynTree/Core/TestUtils.h
                               include/iDynTree/Core/Transform.h
                               include/iDynTree/Core/TransformSemantics.h
@@ -31,9 +31,18 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/Utils.h
                               include/iDynTree/Core/VectorFixSize.h
                               include/iDynTree/Core/VectorDynSize.h
+                              include/iDynTree/Core/LinearForceVector3.h
+                              include/iDynTree/Core/AngularForceVector3.h
+                              include/iDynTree/Core/LinearMotionVector3.h
+                              include/iDynTree/Core/AngularMotionVector3.h
                               include/iDynTree/Core/Wrench.h)
 
-set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h)
+set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h
+                                       include/iDynTree/Core/PrivateMotionForceVertorAssociations.h
+                                       include/iDynTree/Core/GeomVector3.h
+                                       include/iDynTree/Core/MotionVector3.h
+                                       include/iDynTree/Core/ForceVector3.h
+                                       include/iDynTree/Core/SpatialVector.h)
 
 
 set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
@@ -41,6 +50,10 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/Direction.cpp
                               src/InterfaceDestructors.cpp
                               src/MatrixDynSize.cpp
+                              src/LinearForceVector3.cpp
+                              src/AngularForceVector3.cpp
+                              src/LinearMotionVector3.cpp
+                              src/AngularMotionVector3.cpp
                               src/Position.cpp
                               src/PositionRaw.cpp
                               src/PositionSemantics.cpp
@@ -49,9 +62,9 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/RotationSemantics.cpp
                               src/RotationalInertiaRaw.cpp
                               src/SpatialAcc.cpp
-                              src/SpatialForceVectorRaw.cpp
+                              src/SpatialForceVector.cpp
                               src/SpatialMomentum.cpp
-                              src/SpatialMotionVectorRaw.cpp
+                              src/SpatialMotionVector.cpp
                               src/SpatialInertiaRaw.cpp
                               src/SpatialInertia.cpp
                               src/TestUtils.cpp

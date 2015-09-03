@@ -5,9 +5,10 @@
  *
  */
 
+
 #include <iDynTree/Core/SpatialInertiaRaw.h>
-#include <iDynTree/Core/SpatialForceVectorRaw.h>
-#include <iDynTree/Core/SpatialMotionVectorRaw.h>
+#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/PositionRaw.h>
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/PrivateUtils.h>
@@ -136,17 +137,18 @@ SpatialInertiaRaw SpatialInertiaRaw::SpatialInertiaRaw::combine(const SpatialIne
 }
 
 
-SpatialForceVectorRaw SpatialInertiaRaw::multiply(const SpatialMotionVectorRaw& op) const
+SpatialForceVector SpatialInertiaRaw::multiply(const SpatialMotionVector& op) const
 {
-    SpatialForceVectorRaw ret;
+    SpatialForceVector ret;
 
     // we call this linearForce and angularForce
     // but please remember that they can also be
     // linear and angular momentum
-    Eigen::Map<Eigen::Vector3d> linearForce(ret.data());
-    Eigen::Map<Eigen::Vector3d> angularForce(ret.data()+3);
-    Eigen::Map<const Eigen::Vector3d> linearMotion(op.data());
-    Eigen::Map<const Eigen::Vector3d> angularMotion(op.data()+3);
+    Eigen::Map<Eigen::Vector3d> linearForce(ret.getLinearVec3().data());
+    Eigen::Map<Eigen::Vector3d> angularForce(ret.getAngularVec3().data());
+    Eigen::Map<const Eigen::Vector3d> linearMotion(op.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angularMotion(op.getAngularVec3().data());
+
     Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
     Eigen::Map<const Eigen::Matrix3d> inertia3d(this->m_rotInertia.data());
 
