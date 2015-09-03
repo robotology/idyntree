@@ -25,6 +25,8 @@ Traversal::Traversal(const Traversal& other)
 Traversal& Traversal::operator=(const Traversal& other)
 {
     assert(false);
+
+	return *this;
 }
 
 Traversal::~Traversal()
@@ -37,6 +39,8 @@ bool Traversal::reset(unsigned int nrOfVisitedLinks)
     this->links.resize(nrOfVisitedLinks);
     this->parents.resize(nrOfVisitedLinks);
     this->toParentJoints.resize(nrOfVisitedLinks);
+
+	return true;
 }
 
 

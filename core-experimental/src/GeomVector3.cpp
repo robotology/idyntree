@@ -10,6 +10,8 @@
 #include <iDynTree/Core/AngularMotionVector3.h>
 #include <iDynTree/Core/LinearForceVector3.h>
 #include <iDynTree/Core/AngularForceVector3.h>
+#include <iDynTree/Core/PrivatePreProcessorUtils.h>
+
 
 #include <Eigen/Dense>
 
@@ -91,13 +93,13 @@ namespace iDynTree
         // check semantics
         bool semantics_status =
         (   reportErrorIf(!checkEqualOrUnknown(newCoordFrame.getOrientationFrame(),this->coordinateFrame),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "newCoordFrame orientationFrame is different from current Motion/Force vector's coordinateFrame\n")/*
                                                                                                                               && reportErrorIf(!checkEqualOrUnknown(newCoordFrame.getBody(),this->refBody),
-                                                                                                                              __PRETTY_FUNCTION__,
+                                                                                                                              IDYNTREE_PRETTY_FUNCTION,
                                                                                                                               "newCoordFrame body is different from current Motion/Force vector's reference body\n")
                                                                                                                               && reportErrorIf(!checkEqualOrUnknown(newCoordFrame.getBody(),newCoordFrame.getRefBody()),
-                                                                                                                              __PRETTY_FUNCTION__,
+                                                                                                                              IDYNTREE_PRETTY_FUNCTION,
                                                                                                                               "newCoordFrame body and reference body should be the same\n")*/);
         
         // compute semantics
@@ -118,13 +120,13 @@ namespace iDynTree
         // check semantics
         bool semantics_status =
         (   reportErrorIf(!checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "composing two geometric relations expressed in different coordinateFrames\n")
          && reportErrorIf(!checkEqualOrUnknown(op1.refBody,op2.body) && (op1.body == op2.refBody),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "angVelocity(A,C) = compose(angVelocity(B,C),angVelocity(A,B)) is forbidded in iDynTree to avoid ambiguity on compose(angVelocity(B,A),angVelocity(A,B)). Same for other motion or force 3D vectors.\n")
          && reportErrorIf(!checkEqualOrUnknown(op1.refBody,op2.body),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "op1 reference body and op2 body don't match\n"));
         
         // compute semantics;
@@ -151,13 +153,13 @@ namespace iDynTree
         // check semantics
         bool semantics_status =
         (   reportErrorIf(!checkEqualOrUnknown(this->coordinateFrame,other.getCoordinateFrame()),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "multiplying two geometric relations expressed in different coordinateFrames\n")
          && reportErrorIf(!checkEqualOrUnknown(this->body,other.getBody()),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "The bodies defined for both operands of the dot product don't match\n")
          && reportErrorIf(!checkEqualOrUnknown(this->refBody,other.getRefBody()),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "The reference bodies defined for both operands of the dot product don't match\n"));
         
         // compute semantics: the result of dot product is a scalar and we're not sure if this result's

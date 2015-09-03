@@ -8,6 +8,7 @@
 #include <iDynTree/Core/ForceVector3.h>
 #include <iDynTree/Core/LinearForceVector3.h>
 #include <iDynTree/Core/AngularForceVector3.h>
+#include <iDynTree/Core/PrivatePreProcessorUtils.h>
 
 #define FORCEVECTOR3SEMANTICS_INSTANCE_HDR \
 ForceVector3Semantics<ForceTSemantics>
@@ -55,13 +56,13 @@ namespace iDynTree
         // check semantics
         bool semantics_status =
         (   reportErrorIf(!checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "multiplying two geometric relations expressed in different coordinateFrames\n")
          && reportErrorIf(!checkEqualOrUnknown(op1.body,op2.body),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "The bodies defined for both operands of the dot product don't match\n")
          && reportErrorIf(!checkEqualOrUnknown(op1.refBody,op2.refBody),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "The reference bodies defined for both operands of the dot product don't match\n"));
         
         // compute semantics

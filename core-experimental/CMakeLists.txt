@@ -39,6 +39,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
 
 set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h
                                        include/iDynTree/Core/PrivateMotionForceVertorAssociations.h
+									   include/iDynTree/Core/PrivatePreProcessorUtils.h
                                        include/iDynTree/Core/GeomVector3.h
                                        include/iDynTree/Core/MotionVector3.h
                                        include/iDynTree/Core/ForceVector3.h
