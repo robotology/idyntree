@@ -1174,118 +1174,96 @@ namespace swig {
 #define SWIGTYPE_p_iDynTree__AngularMotionVector3Semantics swig_types[23]
 #define SWIGTYPE_p_iDynTree__Axis swig_types[24]
 #define SWIGTYPE_p_iDynTree__ClassicalAcc swig_types[25]
-#define SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularForceVector3Semantics_t swig_types[26]
-#define SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularMotionVector3Semantics_t swig_types[27]
-#define SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearForceVector3Semantics_t swig_types[28]
-#define SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearMotionVector3Semantics_t swig_types[29]
-#define SWIGTYPE_p_iDynTree__Direction swig_types[30]
-#define SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularForceVector3Semantics_t swig_types[31]
-#define SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularMotionVector3Semantics_t swig_types[32]
-#define SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearForceVector3Semantics_t swig_types[33]
-#define SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearMotionVector3Semantics_t swig_types[34]
-#define SWIGTYPE_p_iDynTree__DualSpaceT_iDynTree__SpatialForceVector_t__Type swig_types[35]
-#define SWIGTYPE_p_iDynTree__DualSpaceT_iDynTree__SpatialMotionVector_t__Type swig_types[36]
-#define SWIGTYPE_p_iDynTree__Dummy swig_types[37]
-#define SWIGTYPE_p_iDynTree__FixedJoint swig_types[38]
-#define SWIGTYPE_p_iDynTree__ForceVector3SemanticsT_iDynTree__AngularForceVector3Semantics_t swig_types[39]
-#define SWIGTYPE_p_iDynTree__ForceVector3SemanticsT_iDynTree__LinearForceVector3Semantics_t swig_types[40]
-#define SWIGTYPE_p_iDynTree__ForceVector3T_iDynTree__AngularForceVector3_t swig_types[41]
-#define SWIGTYPE_p_iDynTree__ForceVector3T_iDynTree__LinearForceVector3_t swig_types[42]
-#define SWIGTYPE_p_iDynTree__GeomVector3SemanticsT_iDynTree__AngularForceVector3Semantics_t swig_types[43]
-#define SWIGTYPE_p_iDynTree__GeomVector3SemanticsT_iDynTree__AngularMotionVector3Semantics_t swig_types[44]
-#define SWIGTYPE_p_iDynTree__GeomVector3SemanticsT_iDynTree__LinearForceVector3Semantics_t swig_types[45]
-#define SWIGTYPE_p_iDynTree__GeomVector3SemanticsT_iDynTree__LinearMotionVector3Semantics_t swig_types[46]
-#define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__AngularForceVector3_t swig_types[47]
-#define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t swig_types[48]
-#define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t swig_types[49]
-#define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t swig_types[50]
-#define SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations swig_types[51]
-#define SWIGTYPE_p_iDynTree__IJoint swig_types[52]
-#define SWIGTYPE_p_iDynTree__IJointPos swig_types[53]
-#define SWIGTYPE_p_iDynTree__IJointPosVel swig_types[54]
-#define SWIGTYPE_p_iDynTree__IJointPosVelAcc swig_types[55]
-#define SWIGTYPE_p_iDynTree__IJointTorque swig_types[56]
-#define SWIGTYPE_p_iDynTree__IMatrix swig_types[57]
-#define SWIGTYPE_p_iDynTree__IRawMatrix swig_types[58]
-#define SWIGTYPE_p_iDynTree__IRawVector swig_types[59]
-#define SWIGTYPE_p_iDynTree__IVector swig_types[60]
-#define SWIGTYPE_p_iDynTree__LinearForceVector3 swig_types[61]
-#define SWIGTYPE_p_iDynTree__LinearForceVector3Semantics swig_types[62]
-#define SWIGTYPE_p_iDynTree__LinearMotionVector3 swig_types[63]
-#define SWIGTYPE_p_iDynTree__LinearMotionVector3Semantics swig_types[64]
-#define SWIGTYPE_p_iDynTree__Link swig_types[65]
-#define SWIGTYPE_p_iDynTree__LinkPos swig_types[66]
-#define SWIGTYPE_p_iDynTree__LinkPosVelAcc swig_types[67]
-#define SWIGTYPE_p_iDynTree__LinkVelAcc swig_types[68]
-#define SWIGTYPE_p_iDynTree__MatrixDynSize swig_types[69]
-#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_3_3_t swig_types[70]
-#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_4_4_t swig_types[71]
-#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_6_10_t swig_types[72]
-#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_6_1_t swig_types[73]
-#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_6_6_t swig_types[74]
-#define SWIGTYPE_p_iDynTree__Model swig_types[75]
-#define SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularForceVector3_t swig_types[76]
-#define SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularMotionVector3_t swig_types[77]
-#define SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearForceVector3_t swig_types[78]
-#define SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearMotionVector3_t swig_types[79]
-#define SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularForceVector3_t swig_types[80]
-#define SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularMotionVector3_t swig_types[81]
-#define SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearForceVector3_t swig_types[82]
-#define SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearMotionVector3_t swig_types[83]
-#define SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__AngularForceVector3_t swig_types[84]
-#define SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__AngularMotionVector3_t swig_types[85]
-#define SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__LinearForceVector3_t swig_types[86]
-#define SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__LinearMotionVector3_t swig_types[87]
-#define SWIGTYPE_p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t swig_types[88]
-#define SWIGTYPE_p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t swig_types[89]
-#define SWIGTYPE_p_iDynTree__MovableJointImplT_1_1_t swig_types[90]
-#define SWIGTYPE_p_iDynTree__MovableJointImplT_2_2_t swig_types[91]
-#define SWIGTYPE_p_iDynTree__MovableJointImplT_3_3_t swig_types[92]
-#define SWIGTYPE_p_iDynTree__MovableJointImplT_4_4_t swig_types[93]
-#define SWIGTYPE_p_iDynTree__MovableJointImplT_5_5_t swig_types[94]
-#define SWIGTYPE_p_iDynTree__MovableJointImplT_6_6_t swig_types[95]
-#define SWIGTYPE_p_iDynTree__Neighbor swig_types[96]
-#define SWIGTYPE_p_iDynTree__Position swig_types[97]
-#define SWIGTYPE_p_iDynTree__PositionRaw swig_types[98]
-#define SWIGTYPE_p_iDynTree__PositionSemantics swig_types[99]
-#define SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator swig_types[100]
-#define SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter swig_types[101]
-#define SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList swig_types[102]
-#define SWIGTYPE_p_iDynTree__RevoluteJoint swig_types[103]
-#define SWIGTYPE_p_iDynTree__Rotation swig_types[104]
-#define SWIGTYPE_p_iDynTree__RotationRaw swig_types[105]
-#define SWIGTYPE_p_iDynTree__RotationSemantics swig_types[106]
-#define SWIGTYPE_p_iDynTree__RotationalInertiaRaw swig_types[107]
-#define SWIGTYPE_p_iDynTree__Sensor swig_types[108]
-#define SWIGTYPE_p_iDynTree__SensorsList swig_types[109]
-#define SWIGTYPE_p_iDynTree__SensorsMeasurements swig_types[110]
-#define SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor swig_types[111]
-#define SWIGTYPE_p_iDynTree__SpatialAcc swig_types[112]
-#define SWIGTYPE_p_iDynTree__SpatialForceVector swig_types[113]
-#define SWIGTYPE_p_iDynTree__SpatialInertia swig_types[114]
-#define SWIGTYPE_p_iDynTree__SpatialInertiaRaw swig_types[115]
-#define SWIGTYPE_p_iDynTree__SpatialMomentum swig_types[116]
-#define SWIGTYPE_p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialForceVector_t swig_types[117]
-#define SWIGTYPE_p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialMotionVector_t swig_types[118]
-#define SWIGTYPE_p_iDynTree__SpatialMotionVector swig_types[119]
-#define SWIGTYPE_p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearForceVector3Semantics_iDynTree__AngularForceVector3Semantics_t swig_types[120]
-#define SWIGTYPE_p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearMotionVector3Semantics_iDynTree__AngularMotionVector3Semantics_t swig_types[121]
-#define SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialForceVector_t swig_types[122]
-#define SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialMotionVector_t swig_types[123]
-#define SWIGTYPE_p_iDynTree__Transform swig_types[124]
-#define SWIGTYPE_p_iDynTree__TransformSemantics swig_types[125]
-#define SWIGTYPE_p_iDynTree__Traversal swig_types[126]
-#define SWIGTYPE_p_iDynTree__Twist swig_types[127]
-#define SWIGTYPE_p_iDynTree__VectorDynSize swig_types[128]
-#define SWIGTYPE_p_iDynTree__VectorFixSizeT_10_t swig_types[129]
-#define SWIGTYPE_p_iDynTree__VectorFixSizeT_3_t swig_types[130]
-#define SWIGTYPE_p_iDynTree__VectorFixSizeT_6_t swig_types[131]
-#define SWIGTYPE_p_iDynTree__Wrench swig_types[132]
-#define SWIGTYPE_p_int swig_types[133]
-#define SWIGTYPE_p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t swig_types[134]
-#define SWIGTYPE_p_unsigned_int swig_types[135]
-static swig_type_info *swig_types[137];
-static swig_module_info swig_module = {swig_types, 136, 0, 0, 0, 0};
+#define SWIGTYPE_p_iDynTree__Direction swig_types[26]
+#define SWIGTYPE_p_iDynTree__DualSpaceT_iDynTree__SpatialForceVector_t__Type swig_types[27]
+#define SWIGTYPE_p_iDynTree__DualSpaceT_iDynTree__SpatialMotionVector_t__Type swig_types[28]
+#define SWIGTYPE_p_iDynTree__Dummy swig_types[29]
+#define SWIGTYPE_p_iDynTree__FixedJoint swig_types[30]
+#define SWIGTYPE_p_iDynTree__ForceVector3SemanticsT_iDynTree__AngularForceVector3Semantics_t swig_types[31]
+#define SWIGTYPE_p_iDynTree__ForceVector3SemanticsT_iDynTree__LinearForceVector3Semantics_t swig_types[32]
+#define SWIGTYPE_p_iDynTree__ForceVector3T_iDynTree__AngularForceVector3_t swig_types[33]
+#define SWIGTYPE_p_iDynTree__ForceVector3T_iDynTree__LinearForceVector3_t swig_types[34]
+#define SWIGTYPE_p_iDynTree__GeomVector3SemanticsT_iDynTree__AngularForceVector3Semantics_t swig_types[35]
+#define SWIGTYPE_p_iDynTree__GeomVector3SemanticsT_iDynTree__AngularMotionVector3Semantics_t swig_types[36]
+#define SWIGTYPE_p_iDynTree__GeomVector3SemanticsT_iDynTree__LinearForceVector3Semantics_t swig_types[37]
+#define SWIGTYPE_p_iDynTree__GeomVector3SemanticsT_iDynTree__LinearMotionVector3Semantics_t swig_types[38]
+#define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__AngularForceVector3_t swig_types[39]
+#define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t swig_types[40]
+#define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t swig_types[41]
+#define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t swig_types[42]
+#define SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations swig_types[43]
+#define SWIGTYPE_p_iDynTree__IJoint swig_types[44]
+#define SWIGTYPE_p_iDynTree__IJointPos swig_types[45]
+#define SWIGTYPE_p_iDynTree__IJointPosVel swig_types[46]
+#define SWIGTYPE_p_iDynTree__IJointPosVelAcc swig_types[47]
+#define SWIGTYPE_p_iDynTree__IJointTorque swig_types[48]
+#define SWIGTYPE_p_iDynTree__IMatrix swig_types[49]
+#define SWIGTYPE_p_iDynTree__IRawMatrix swig_types[50]
+#define SWIGTYPE_p_iDynTree__IRawVector swig_types[51]
+#define SWIGTYPE_p_iDynTree__IVector swig_types[52]
+#define SWIGTYPE_p_iDynTree__LinearForceVector3 swig_types[53]
+#define SWIGTYPE_p_iDynTree__LinearForceVector3Semantics swig_types[54]
+#define SWIGTYPE_p_iDynTree__LinearMotionVector3 swig_types[55]
+#define SWIGTYPE_p_iDynTree__LinearMotionVector3Semantics swig_types[56]
+#define SWIGTYPE_p_iDynTree__Link swig_types[57]
+#define SWIGTYPE_p_iDynTree__LinkPos swig_types[58]
+#define SWIGTYPE_p_iDynTree__LinkPosVelAcc swig_types[59]
+#define SWIGTYPE_p_iDynTree__LinkVelAcc swig_types[60]
+#define SWIGTYPE_p_iDynTree__MatrixDynSize swig_types[61]
+#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_3_3_t swig_types[62]
+#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_4_4_t swig_types[63]
+#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_6_10_t swig_types[64]
+#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_6_1_t swig_types[65]
+#define SWIGTYPE_p_iDynTree__MatrixFixSizeT_6_6_t swig_types[66]
+#define SWIGTYPE_p_iDynTree__Model swig_types[67]
+#define SWIGTYPE_p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t swig_types[68]
+#define SWIGTYPE_p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t swig_types[69]
+#define SWIGTYPE_p_iDynTree__MovableJointImplT_1_1_t swig_types[70]
+#define SWIGTYPE_p_iDynTree__MovableJointImplT_2_2_t swig_types[71]
+#define SWIGTYPE_p_iDynTree__MovableJointImplT_3_3_t swig_types[72]
+#define SWIGTYPE_p_iDynTree__MovableJointImplT_4_4_t swig_types[73]
+#define SWIGTYPE_p_iDynTree__MovableJointImplT_5_5_t swig_types[74]
+#define SWIGTYPE_p_iDynTree__MovableJointImplT_6_6_t swig_types[75]
+#define SWIGTYPE_p_iDynTree__Neighbor swig_types[76]
+#define SWIGTYPE_p_iDynTree__Position swig_types[77]
+#define SWIGTYPE_p_iDynTree__PositionRaw swig_types[78]
+#define SWIGTYPE_p_iDynTree__PositionSemantics swig_types[79]
+#define SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorGenerator swig_types[80]
+#define SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParameter swig_types[81]
+#define SWIGTYPE_p_iDynTree__Regressors__DynamicsRegressorParametersList swig_types[82]
+#define SWIGTYPE_p_iDynTree__RevoluteJoint swig_types[83]
+#define SWIGTYPE_p_iDynTree__Rotation swig_types[84]
+#define SWIGTYPE_p_iDynTree__RotationRaw swig_types[85]
+#define SWIGTYPE_p_iDynTree__RotationSemantics swig_types[86]
+#define SWIGTYPE_p_iDynTree__RotationalInertiaRaw swig_types[87]
+#define SWIGTYPE_p_iDynTree__Sensor swig_types[88]
+#define SWIGTYPE_p_iDynTree__SensorsList swig_types[89]
+#define SWIGTYPE_p_iDynTree__SensorsMeasurements swig_types[90]
+#define SWIGTYPE_p_iDynTree__SixAxisForceTorqueSensor swig_types[91]
+#define SWIGTYPE_p_iDynTree__SpatialAcc swig_types[92]
+#define SWIGTYPE_p_iDynTree__SpatialForceVector swig_types[93]
+#define SWIGTYPE_p_iDynTree__SpatialInertia swig_types[94]
+#define SWIGTYPE_p_iDynTree__SpatialInertiaRaw swig_types[95]
+#define SWIGTYPE_p_iDynTree__SpatialMomentum swig_types[96]
+#define SWIGTYPE_p_iDynTree__SpatialMotionVector swig_types[97]
+#define SWIGTYPE_p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearForceVector3Semantics_iDynTree__AngularForceVector3Semantics_t swig_types[98]
+#define SWIGTYPE_p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearMotionVector3Semantics_iDynTree__AngularMotionVector3Semantics_t swig_types[99]
+#define SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialForceVector_t swig_types[100]
+#define SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialMotionVector_t swig_types[101]
+#define SWIGTYPE_p_iDynTree__Transform swig_types[102]
+#define SWIGTYPE_p_iDynTree__TransformSemantics swig_types[103]
+#define SWIGTYPE_p_iDynTree__Traversal swig_types[104]
+#define SWIGTYPE_p_iDynTree__Twist swig_types[105]
+#define SWIGTYPE_p_iDynTree__VectorDynSize swig_types[106]
+#define SWIGTYPE_p_iDynTree__VectorFixSizeT_10_t swig_types[107]
+#define SWIGTYPE_p_iDynTree__VectorFixSizeT_3_t swig_types[108]
+#define SWIGTYPE_p_iDynTree__VectorFixSizeT_6_t swig_types[109]
+#define SWIGTYPE_p_iDynTree__Wrench swig_types[110]
+#define SWIGTYPE_p_int swig_types[111]
+#define SWIGTYPE_p_std__vectorT_iDynTree__Regressors__DynamicsRegressorParameter_t swig_types[112]
+#define SWIGTYPE_p_unsigned_int swig_types[113]
+static swig_type_info *swig_types[115];
+static swig_module_info swig_module = {swig_types, 114, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -8764,908 +8742,6 @@ int _wrap_Position_display (int resc, mxArray *resv[], int argc, mxArray *argv[]
   arg1 = reinterpret_cast< iDynTree::Position * >(argp1);
   result = ((iDynTree::Position const *)arg1)->reservedToString();
   _out = SWIG_From_std_string(static_cast< std::string >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionForce_traits__LinearMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionForce_traits< iDynTree::LinearMotionVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionForce_traits__LinearMotionVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionForce_traits< iDynTree::LinearMotionVector3 > *)new iDynTree::MotionForce_traits< iDynTree::LinearMotionVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__LinearMotionVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionForce_traits__LinearMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionForce_traits< iDynTree::LinearMotionVector3 > *arg1 = (iDynTree::MotionForce_traits< iDynTree::LinearMotionVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionForce_traits__LinearMotionVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__LinearMotionVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionForce_traits__LinearMotionVector3" "', argument " "1"" of type '" "iDynTree::MotionForce_traits< iDynTree::LinearMotionVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionForce_traits< iDynTree::LinearMotionVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionForce_traits__AngularMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionForce_traits< iDynTree::AngularMotionVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionForce_traits__AngularMotionVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionForce_traits< iDynTree::AngularMotionVector3 > *)new iDynTree::MotionForce_traits< iDynTree::AngularMotionVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__AngularMotionVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionForce_traits__AngularMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionForce_traits< iDynTree::AngularMotionVector3 > *arg1 = (iDynTree::MotionForce_traits< iDynTree::AngularMotionVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionForce_traits__AngularMotionVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__AngularMotionVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionForce_traits__AngularMotionVector3" "', argument " "1"" of type '" "iDynTree::MotionForce_traits< iDynTree::AngularMotionVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionForce_traits< iDynTree::AngularMotionVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionForce_traits__LinearForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionForce_traits< iDynTree::LinearForceVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionForce_traits__LinearForceVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionForce_traits< iDynTree::LinearForceVector3 > *)new iDynTree::MotionForce_traits< iDynTree::LinearForceVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__LinearForceVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionForce_traits__LinearForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionForce_traits< iDynTree::LinearForceVector3 > *arg1 = (iDynTree::MotionForce_traits< iDynTree::LinearForceVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionForce_traits__LinearForceVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__LinearForceVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionForce_traits__LinearForceVector3" "', argument " "1"" of type '" "iDynTree::MotionForce_traits< iDynTree::LinearForceVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionForce_traits< iDynTree::LinearForceVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionForce_traits__AngularForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionForce_traits< iDynTree::AngularForceVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionForce_traits__AngularForceVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionForce_traits< iDynTree::AngularForceVector3 > *)new iDynTree::MotionForce_traits< iDynTree::AngularForceVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__AngularForceVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionForce_traits__AngularForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionForce_traits< iDynTree::AngularForceVector3 > *arg1 = (iDynTree::MotionForce_traits< iDynTree::AngularForceVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionForce_traits__AngularForceVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionForce_traitsT_iDynTree__AngularForceVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionForce_traits__AngularForceVector3" "', argument " "1"" of type '" "iDynTree::MotionForce_traits< iDynTree::AngularForceVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionForce_traits< iDynTree::AngularForceVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearMotionVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearMotionVector3 > *)new iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearMotionVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearMotionVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearMotionVector3 > *arg1 = (iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearMotionVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearMotionVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3" "', argument " "1"" of type '" "iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearMotionVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearMotionVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularMotionVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularMotionVector3 > *)new iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularMotionVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularMotionVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularMotionVector3 > *arg1 = (iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularMotionVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularMotionVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3" "', argument " "1"" of type '" "iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularMotionVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularMotionVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionDerivativeOf_AngularMotionVector3_LinearForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearForceVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionDerivativeOf_AngularMotionVector3_LinearForceVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearForceVector3 > *)new iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearForceVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearForceVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionDerivativeOf_AngularMotionVector3_LinearForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearForceVector3 > *arg1 = (iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearForceVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionDerivativeOf_AngularMotionVector3_LinearForceVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearForceVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionDerivativeOf_AngularMotionVector3_LinearForceVector3" "', argument " "1"" of type '" "iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearForceVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearForceVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionDerivativeOf_AngularMotionVector3_AngularForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularForceVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionDerivativeOf_AngularMotionVector3_AngularForceVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularForceVector3 > *)new iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularForceVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularForceVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionDerivativeOf_AngularMotionVector3_AngularForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularForceVector3 > *arg1 = (iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularForceVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionDerivativeOf_AngularMotionVector3_AngularForceVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularForceVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionDerivativeOf_AngularMotionVector3_AngularForceVector3" "', argument " "1"" of type '" "iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularForceVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularForceVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearMotionVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearMotionVector3 > *)new iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearMotionVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearMotionVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearMotionVector3 > *arg1 = (iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearMotionVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearMotionVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3" "', argument " "1"" of type '" "iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearMotionVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearMotionVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularMotionVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularMotionVector3 > *)new iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularMotionVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularMotionVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularMotionVector3 > *arg1 = (iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularMotionVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularMotionVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3" "', argument " "1"" of type '" "iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularMotionVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularMotionVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionDerivativeOf_LinearMotionVector3_LinearForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearForceVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionDerivativeOf_LinearMotionVector3_LinearForceVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearForceVector3 > *)new iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearForceVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearForceVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionDerivativeOf_LinearMotionVector3_LinearForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearForceVector3 > *arg1 = (iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearForceVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionDerivativeOf_LinearMotionVector3_LinearForceVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearForceVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionDerivativeOf_LinearMotionVector3_LinearForceVector3" "', argument " "1"" of type '" "iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearForceVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearForceVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_MotionDerivativeOf_LinearMotionVector3_AngularForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularForceVector3 > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_MotionDerivativeOf_LinearMotionVector3_AngularForceVector3",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularForceVector3 > *)new iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularForceVector3 >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularForceVector3_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_MotionDerivativeOf_LinearMotionVector3_AngularForceVector3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularForceVector3 > *arg1 = (iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularForceVector3 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_MotionDerivativeOf_LinearMotionVector3_AngularForceVector3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularForceVector3_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MotionDerivativeOf_LinearMotionVector3_AngularForceVector3" "', argument " "1"" of type '" "iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularForceVector3 > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularForceVector3 > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_ConvertSem2motionForceTraits__LinearMotionVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearMotionVector3Semantics > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_ConvertSem2motionForceTraits__LinearMotionVector3Semantics",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearMotionVector3Semantics > *)new iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearMotionVector3Semantics >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearMotionVector3Semantics_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_ConvertSem2motionForceTraits__LinearMotionVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearMotionVector3Semantics > *arg1 = (iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearMotionVector3Semantics > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_ConvertSem2motionForceTraits__LinearMotionVector3Semantics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearMotionVector3Semantics_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ConvertSem2motionForceTraits__LinearMotionVector3Semantics" "', argument " "1"" of type '" "iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearMotionVector3Semantics > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearMotionVector3Semantics > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_ConvertSem2motionForceTraits__AngularMotionVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularMotionVector3Semantics > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_ConvertSem2motionForceTraits__AngularMotionVector3Semantics",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularMotionVector3Semantics > *)new iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularMotionVector3Semantics >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularMotionVector3Semantics_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_ConvertSem2motionForceTraits__AngularMotionVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularMotionVector3Semantics > *arg1 = (iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularMotionVector3Semantics > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_ConvertSem2motionForceTraits__AngularMotionVector3Semantics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularMotionVector3Semantics_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ConvertSem2motionForceTraits__AngularMotionVector3Semantics" "', argument " "1"" of type '" "iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularMotionVector3Semantics > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularMotionVector3Semantics > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_ConvertSem2motionForceTraits__LinearForceVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearForceVector3Semantics > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_ConvertSem2motionForceTraits__LinearForceVector3Semantics",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearForceVector3Semantics > *)new iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearForceVector3Semantics >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearForceVector3Semantics_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_ConvertSem2motionForceTraits__LinearForceVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearForceVector3Semantics > *arg1 = (iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearForceVector3Semantics > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_ConvertSem2motionForceTraits__LinearForceVector3Semantics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearForceVector3Semantics_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ConvertSem2motionForceTraits__LinearForceVector3Semantics" "', argument " "1"" of type '" "iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearForceVector3Semantics > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearForceVector3Semantics > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_ConvertSem2motionForceTraits__AngularForceVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularForceVector3Semantics > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_ConvertSem2motionForceTraits__AngularForceVector3Semantics",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularForceVector3Semantics > *)new iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularForceVector3Semantics >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularForceVector3Semantics_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_ConvertSem2motionForceTraits__AngularForceVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularForceVector3Semantics > *arg1 = (iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularForceVector3Semantics > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_ConvertSem2motionForceTraits__AngularForceVector3Semantics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularForceVector3Semantics_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ConvertSem2motionForceTraits__AngularForceVector3Semantics" "', argument " "1"" of type '" "iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularForceVector3Semantics > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularForceVector3Semantics > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_DualMotionForceSemanticsT__LinearMotionVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::DualMotionForceSemanticsT< iDynTree::LinearMotionVector3Semantics > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_DualMotionForceSemanticsT__LinearMotionVector3Semantics",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::DualMotionForceSemanticsT< iDynTree::LinearMotionVector3Semantics > *)new iDynTree::DualMotionForceSemanticsT< iDynTree::LinearMotionVector3Semantics >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearMotionVector3Semantics_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_DualMotionForceSemanticsT__LinearMotionVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::DualMotionForceSemanticsT< iDynTree::LinearMotionVector3Semantics > *arg1 = (iDynTree::DualMotionForceSemanticsT< iDynTree::LinearMotionVector3Semantics > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_DualMotionForceSemanticsT__LinearMotionVector3Semantics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearMotionVector3Semantics_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DualMotionForceSemanticsT__LinearMotionVector3Semantics" "', argument " "1"" of type '" "iDynTree::DualMotionForceSemanticsT< iDynTree::LinearMotionVector3Semantics > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::DualMotionForceSemanticsT< iDynTree::LinearMotionVector3Semantics > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_DualMotionForceSemanticsT__AngularMotionVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::DualMotionForceSemanticsT< iDynTree::AngularMotionVector3Semantics > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_DualMotionForceSemanticsT__AngularMotionVector3Semantics",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::DualMotionForceSemanticsT< iDynTree::AngularMotionVector3Semantics > *)new iDynTree::DualMotionForceSemanticsT< iDynTree::AngularMotionVector3Semantics >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularMotionVector3Semantics_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_DualMotionForceSemanticsT__AngularMotionVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::DualMotionForceSemanticsT< iDynTree::AngularMotionVector3Semantics > *arg1 = (iDynTree::DualMotionForceSemanticsT< iDynTree::AngularMotionVector3Semantics > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_DualMotionForceSemanticsT__AngularMotionVector3Semantics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularMotionVector3Semantics_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DualMotionForceSemanticsT__AngularMotionVector3Semantics" "', argument " "1"" of type '" "iDynTree::DualMotionForceSemanticsT< iDynTree::AngularMotionVector3Semantics > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::DualMotionForceSemanticsT< iDynTree::AngularMotionVector3Semantics > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_DualMotionForceSemanticsT__LinearForceVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::DualMotionForceSemanticsT< iDynTree::LinearForceVector3Semantics > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_DualMotionForceSemanticsT__LinearForceVector3Semantics",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::DualMotionForceSemanticsT< iDynTree::LinearForceVector3Semantics > *)new iDynTree::DualMotionForceSemanticsT< iDynTree::LinearForceVector3Semantics >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearForceVector3Semantics_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_DualMotionForceSemanticsT__LinearForceVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::DualMotionForceSemanticsT< iDynTree::LinearForceVector3Semantics > *arg1 = (iDynTree::DualMotionForceSemanticsT< iDynTree::LinearForceVector3Semantics > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_DualMotionForceSemanticsT__LinearForceVector3Semantics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearForceVector3Semantics_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DualMotionForceSemanticsT__LinearForceVector3Semantics" "', argument " "1"" of type '" "iDynTree::DualMotionForceSemanticsT< iDynTree::LinearForceVector3Semantics > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::DualMotionForceSemanticsT< iDynTree::LinearForceVector3Semantics > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_DualMotionForceSemanticsT__AngularForceVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::DualMotionForceSemanticsT< iDynTree::AngularForceVector3Semantics > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_DualMotionForceSemanticsT__AngularForceVector3Semantics",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::DualMotionForceSemanticsT< iDynTree::AngularForceVector3Semantics > *)new iDynTree::DualMotionForceSemanticsT< iDynTree::AngularForceVector3Semantics >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularForceVector3Semantics_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_DualMotionForceSemanticsT__AngularForceVector3Semantics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::DualMotionForceSemanticsT< iDynTree::AngularForceVector3Semantics > *arg1 = (iDynTree::DualMotionForceSemanticsT< iDynTree::AngularForceVector3Semantics > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_DualMotionForceSemanticsT__AngularForceVector3Semantics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularForceVector3Semantics_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DualMotionForceSemanticsT__AngularForceVector3Semantics" "', argument " "1"" of type '" "iDynTree::DualMotionForceSemanticsT< iDynTree::AngularForceVector3Semantics > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::DualMotionForceSemanticsT< iDynTree::AngularForceVector3Semantics > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_SpatialMotionForceVectorT_traits__SpatialMotionVector (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialMotionVector > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_SpatialMotionForceVectorT_traits__SpatialMotionVector",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialMotionVector > *)new iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialMotionVector >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialMotionVector_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_SpatialMotionForceVectorT_traits__SpatialMotionVector (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialMotionVector > *arg1 = (iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialMotionVector > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_SpatialMotionForceVectorT_traits__SpatialMotionVector",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialMotionVector_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SpatialMotionForceVectorT_traits__SpatialMotionVector" "', argument " "1"" of type '" "iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialMotionVector > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialMotionVector > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_SpatialMotionForceVectorT_traits__SpatialForceVector (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialForceVector > *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_SpatialMotionForceVectorT_traits__SpatialForceVector",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  result = (iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialForceVector > *)new iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialForceVector >();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialForceVector_t, 1 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_SpatialMotionForceVectorT_traits__SpatialForceVector (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialForceVector > *arg1 = (iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialForceVector > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("delete_SpatialMotionForceVectorT_traits__SpatialForceVector",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialForceVector_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SpatialMotionForceVectorT_traits__SpatialForceVector" "', argument " "1"" of type '" "iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialForceVector > *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialForceVector > * >(argp1);
-  if (SWIG_Matlab_isOwned(argv[0])) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
   if (_out && --resc>=0) *resv++ = _out;
   return 0;
 fail:
@@ -35607,6 +34683,66 @@ static void *_p_iDynTree__TwistTo_p_iDynTree__SpatialMotionVector(void *x, int *
 static void *_p_iDynTree__SpatialAccTo_p_iDynTree__SpatialMotionVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((iDynTree::SpatialMotionVector *)  ((iDynTree::SpatialAcc *) x));
 }
+static void *_p_iDynTree__VectorFixSizeT_10_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *)  ((iDynTree::VectorFixSize< 10 > *) x));
+}
+static void *_p_iDynTree__DirectionTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::Direction *) x));
+}
+static void *_p_iDynTree__ForceVector3T_iDynTree__LinearForceVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::LinearForceVector3 > *) ((iDynTree::ForceVector3< iDynTree::LinearForceVector3 > *) x));
+}
+static void *_p_iDynTree__GeomVector3T_iDynTree__AngularForceVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::GeomVector3< iDynTree::AngularForceVector3 > *) x));
+}
+static void *_p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::GeomVector3< iDynTree::LinearMotionVector3 > *) x));
+}
+static void *_p_iDynTree__ClassicalAccTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 6 > *) ((iDynTree::ClassicalAcc *) x));
+}
+static void *_p_iDynTree__PositionRawTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::PositionRaw *) x));
+}
+static void *_p_iDynTree__VectorDynSizeTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *)  ((iDynTree::VectorDynSize *) x));
+}
+static void *_p_iDynTree__VectorFixSizeT_6_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *)  ((iDynTree::VectorFixSize< 6 > *) x));
+}
+static void *_p_iDynTree__PositionTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::PositionRaw *) ((iDynTree::Position *) x));
+}
+static void *_p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::AngularMotionVector3 > *) ((iDynTree::MotionVector3< iDynTree::AngularMotionVector3 > *) x));
+}
+static void *_p_iDynTree__ForceVector3T_iDynTree__AngularForceVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::AngularForceVector3 > *) ((iDynTree::ForceVector3< iDynTree::AngularForceVector3 > *) x));
+}
+static void *_p_iDynTree__LinearMotionVector3To_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::LinearMotionVector3 > *)(iDynTree::MotionVector3< iDynTree::LinearMotionVector3 > *) ((iDynTree::LinearMotionVector3 *) x));
+}
+static void *_p_iDynTree__AngularMotionVector3To_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::AngularMotionVector3 > *)(iDynTree::MotionVector3< iDynTree::AngularMotionVector3 > *) ((iDynTree::AngularMotionVector3 *) x));
+}
+static void *_p_iDynTree__LinearForceVector3To_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::LinearForceVector3 > *)(iDynTree::ForceVector3< iDynTree::LinearForceVector3 > *) ((iDynTree::LinearForceVector3 *) x));
+}
+static void *_p_iDynTree__AngularForceVector3To_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::AngularForceVector3 > *)(iDynTree::ForceVector3< iDynTree::AngularForceVector3 > *) ((iDynTree::AngularForceVector3 *) x));
+}
+static void *_p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::LinearMotionVector3 > *) ((iDynTree::MotionVector3< iDynTree::LinearMotionVector3 > *) x));
+}
+static void *_p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::GeomVector3< iDynTree::AngularMotionVector3 > *) x));
+}
+static void *_p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::GeomVector3< iDynTree::LinearForceVector3 > *) x));
+}
+static void *_p_iDynTree__VectorFixSizeT_3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::IRawVector *)  ((iDynTree::VectorFixSize< 3 > *) x));
+}
 static void *_p_iDynTree__WrenchTo_p_iDynTree__SpatialForceVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((iDynTree::SpatialForceVector *)  ((iDynTree::Wrench *) x));
 }
@@ -35699,66 +34835,6 @@ static void *_p_iDynTree__TwistTo_p_iDynTree__IVector(void *x, int *SWIGUNUSEDPA
 }
 static void *_p_iDynTree__SpatialVectorT_iDynTree__SpatialForceVector_tTo_p_iDynTree__IVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((iDynTree::IVector *)  ((iDynTree::SpatialVector< iDynTree::SpatialForceVector > *) x));
-}
-static void *_p_iDynTree__VectorFixSizeT_10_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *)  ((iDynTree::VectorFixSize< 10 > *) x));
-}
-static void *_p_iDynTree__DirectionTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::Direction *) x));
-}
-static void *_p_iDynTree__ForceVector3T_iDynTree__LinearForceVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::LinearForceVector3 > *) ((iDynTree::ForceVector3< iDynTree::LinearForceVector3 > *) x));
-}
-static void *_p_iDynTree__GeomVector3T_iDynTree__AngularForceVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::GeomVector3< iDynTree::AngularForceVector3 > *) x));
-}
-static void *_p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::GeomVector3< iDynTree::LinearMotionVector3 > *) x));
-}
-static void *_p_iDynTree__ClassicalAccTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 6 > *) ((iDynTree::ClassicalAcc *) x));
-}
-static void *_p_iDynTree__PositionRawTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::PositionRaw *) x));
-}
-static void *_p_iDynTree__VectorDynSizeTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *)  ((iDynTree::VectorDynSize *) x));
-}
-static void *_p_iDynTree__VectorFixSizeT_6_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *)  ((iDynTree::VectorFixSize< 6 > *) x));
-}
-static void *_p_iDynTree__PositionTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::PositionRaw *) ((iDynTree::Position *) x));
-}
-static void *_p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::AngularMotionVector3 > *) ((iDynTree::MotionVector3< iDynTree::AngularMotionVector3 > *) x));
-}
-static void *_p_iDynTree__ForceVector3T_iDynTree__AngularForceVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::AngularForceVector3 > *) ((iDynTree::ForceVector3< iDynTree::AngularForceVector3 > *) x));
-}
-static void *_p_iDynTree__LinearMotionVector3To_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::LinearMotionVector3 > *)(iDynTree::MotionVector3< iDynTree::LinearMotionVector3 > *) ((iDynTree::LinearMotionVector3 *) x));
-}
-static void *_p_iDynTree__AngularMotionVector3To_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::AngularMotionVector3 > *)(iDynTree::MotionVector3< iDynTree::AngularMotionVector3 > *) ((iDynTree::AngularMotionVector3 *) x));
-}
-static void *_p_iDynTree__LinearForceVector3To_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::LinearForceVector3 > *)(iDynTree::ForceVector3< iDynTree::LinearForceVector3 > *) ((iDynTree::LinearForceVector3 *) x));
-}
-static void *_p_iDynTree__AngularForceVector3To_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::AngularForceVector3 > *)(iDynTree::ForceVector3< iDynTree::AngularForceVector3 > *) ((iDynTree::AngularForceVector3 *) x));
-}
-static void *_p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *)(iDynTree::GeomVector3< iDynTree::LinearMotionVector3 > *) ((iDynTree::MotionVector3< iDynTree::LinearMotionVector3 > *) x));
-}
-static void *_p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::GeomVector3< iDynTree::AngularMotionVector3 > *) x));
-}
-static void *_p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *) (iDynTree::VectorFixSize< 3 > *) ((iDynTree::GeomVector3< iDynTree::LinearForceVector3 > *) x));
-}
-static void *_p_iDynTree__VectorFixSizeT_3_tTo_p_iDynTree__IRawVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::IRawVector *)  ((iDynTree::VectorFixSize< 3 > *) x));
 }
 static void *_p_iDynTree__LinearForceVector3SemanticsTo_p_iDynTree__GeomVector3SemanticsT_iDynTree__LinearForceVector3Semantics_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((iDynTree::GeomVector3Semantics< iDynTree::LinearForceVector3Semantics > *) (iDynTree::ForceVector3Semantics< iDynTree::LinearForceVector3Semantics > *) ((iDynTree::LinearForceVector3Semantics *) x));
@@ -35912,15 +34988,7 @@ static swig_type_info _swigt__p_iDynTree__AngularMotionVector3 = {"_p_iDynTree__
 static swig_type_info _swigt__p_iDynTree__AngularMotionVector3Semantics = {"_p_iDynTree__AngularMotionVector3Semantics", "iDynTree::DualMotionForceSemanticsT< iDynTree::AngularForceVector3Semantics >::Type *|iDynTree::AngularMotionVector3Semantics *|iDynTree::GeomVector3< iDynTree::AngularMotionVector3 >::MotionForceSemanticsT *", 0, 0, (void*)"iDynTree.AngularMotionVector3Semantics", 0};
 static swig_type_info _swigt__p_iDynTree__Axis = {"_p_iDynTree__Axis", "iDynTree::Axis *", 0, 0, (void*)"iDynTree.Axis", 0};
 static swig_type_info _swigt__p_iDynTree__ClassicalAcc = {"_p_iDynTree__ClassicalAcc", "iDynTree::ClassicalAcc *", 0, 0, (void*)"iDynTree.ClassicalAcc", 0};
-static swig_type_info _swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularForceVector3Semantics_t = {"_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularForceVector3Semantics_t", "iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularForceVector3Semantics > *", 0, 0, (void*)"iDynTree.ConvertSem2motionForceTraits__AngularForceVector3Semantics", 0};
-static swig_type_info _swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularMotionVector3Semantics_t = {"_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularMotionVector3Semantics_t", "iDynTree::ConvertSem2motionForceTraits< iDynTree::AngularMotionVector3Semantics > *", 0, 0, (void*)"iDynTree.ConvertSem2motionForceTraits__AngularMotionVector3Semantics", 0};
-static swig_type_info _swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearForceVector3Semantics_t = {"_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearForceVector3Semantics_t", "iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearForceVector3Semantics > *", 0, 0, (void*)"iDynTree.ConvertSem2motionForceTraits__LinearForceVector3Semantics", 0};
-static swig_type_info _swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearMotionVector3Semantics_t = {"_p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearMotionVector3Semantics_t", "iDynTree::ConvertSem2motionForceTraits< iDynTree::LinearMotionVector3Semantics > *", 0, 0, (void*)"iDynTree.ConvertSem2motionForceTraits__LinearMotionVector3Semantics", 0};
 static swig_type_info _swigt__p_iDynTree__Direction = {"_p_iDynTree__Direction", "iDynTree::Direction *", 0, 0, (void*)"iDynTree.Direction", 0};
-static swig_type_info _swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularForceVector3Semantics_t = {"_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularForceVector3Semantics_t", "iDynTree::DualMotionForceSemanticsT< iDynTree::AngularForceVector3Semantics > *", 0, 0, (void*)"iDynTree.DualMotionForceSemanticsT__AngularForceVector3Semantics", 0};
-static swig_type_info _swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularMotionVector3Semantics_t = {"_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularMotionVector3Semantics_t", "iDynTree::DualMotionForceSemanticsT< iDynTree::AngularMotionVector3Semantics > *", 0, 0, (void*)"iDynTree.DualMotionForceSemanticsT__AngularMotionVector3Semantics", 0};
-static swig_type_info _swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearForceVector3Semantics_t = {"_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearForceVector3Semantics_t", "iDynTree::DualMotionForceSemanticsT< iDynTree::LinearForceVector3Semantics > *", 0, 0, (void*)"iDynTree.DualMotionForceSemanticsT__LinearForceVector3Semantics", 0};
-static swig_type_info _swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearMotionVector3Semantics_t = {"_p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearMotionVector3Semantics_t", "iDynTree::DualMotionForceSemanticsT< iDynTree::LinearMotionVector3Semantics > *", 0, 0, (void*)"iDynTree.DualMotionForceSemanticsT__LinearMotionVector3Semantics", 0};
 static swig_type_info _swigt__p_iDynTree__DualSpaceT_iDynTree__SpatialForceVector_t__Type = {"_p_iDynTree__DualSpaceT_iDynTree__SpatialForceVector_t__Type", "iDynTree::DualSpace< iDynTree::SpatialForceVector >::Type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iDynTree__DualSpaceT_iDynTree__SpatialMotionVector_t__Type = {"_p_iDynTree__DualSpaceT_iDynTree__SpatialMotionVector_t__Type", "iDynTree::DualSpace< iDynTree::SpatialMotionVector >::Type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iDynTree__Dummy = {"_p_iDynTree__Dummy", "iDynTree::Dummy *", 0, 0, (void*)"iDynTree.Dummy", 0};
@@ -35962,18 +35030,6 @@ static swig_type_info _swigt__p_iDynTree__MatrixFixSizeT_6_10_t = {"_p_iDynTree_
 static swig_type_info _swigt__p_iDynTree__MatrixFixSizeT_6_1_t = {"_p_iDynTree__MatrixFixSizeT_6_1_t", "iDynTree::MatrixFixSize< 6,1 > *|iDynTree::Matrix6x1 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iDynTree__MatrixFixSizeT_6_6_t = {"_p_iDynTree__MatrixFixSizeT_6_6_t", "iDynTree::MatrixFixSize< 6,6 > *|iDynTree::Matrix6x6 *", 0, 0, (void*)"iDynTree.Matrix6x6", 0};
 static swig_type_info _swigt__p_iDynTree__Model = {"_p_iDynTree__Model", "iDynTree::Model *", 0, 0, (void*)"iDynTree.Model", 0};
-static swig_type_info _swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularForceVector3_t = {"_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularForceVector3_t", "iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularForceVector3 > *", 0, 0, (void*)"iDynTree.MotionDerivativeOf_AngularMotionVector3_AngularForceVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularMotionVector3_t = {"_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularMotionVector3_t", "iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::AngularMotionVector3 > *", 0, 0, (void*)"iDynTree.MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearForceVector3_t = {"_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearForceVector3_t", "iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearForceVector3 > *", 0, 0, (void*)"iDynTree.MotionDerivativeOf_AngularMotionVector3_LinearForceVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearMotionVector3_t = {"_p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearMotionVector3_t", "iDynTree::MotionDerivativeOf< iDynTree::AngularMotionVector3,iDynTree::LinearMotionVector3 > *", 0, 0, (void*)"iDynTree.MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularForceVector3_t = {"_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularForceVector3_t", "iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularForceVector3 > *", 0, 0, (void*)"iDynTree.MotionDerivativeOf_LinearMotionVector3_AngularForceVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularMotionVector3_t = {"_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularMotionVector3_t", "iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::AngularMotionVector3 > *", 0, 0, (void*)"iDynTree.MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearForceVector3_t = {"_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearForceVector3_t", "iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearForceVector3 > *", 0, 0, (void*)"iDynTree.MotionDerivativeOf_LinearMotionVector3_LinearForceVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearMotionVector3_t = {"_p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearMotionVector3_t", "iDynTree::MotionDerivativeOf< iDynTree::LinearMotionVector3,iDynTree::LinearMotionVector3 > *", 0, 0, (void*)"iDynTree.MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionForce_traitsT_iDynTree__AngularForceVector3_t = {"_p_iDynTree__MotionForce_traitsT_iDynTree__AngularForceVector3_t", "iDynTree::MotionForce_traits< iDynTree::AngularForceVector3 > *", 0, 0, (void*)"iDynTree.MotionForce_traits__AngularForceVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionForce_traitsT_iDynTree__AngularMotionVector3_t = {"_p_iDynTree__MotionForce_traitsT_iDynTree__AngularMotionVector3_t", "iDynTree::MotionForce_traits< iDynTree::AngularMotionVector3 > *", 0, 0, (void*)"iDynTree.MotionForce_traits__AngularMotionVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionForce_traitsT_iDynTree__LinearForceVector3_t = {"_p_iDynTree__MotionForce_traitsT_iDynTree__LinearForceVector3_t", "iDynTree::MotionForce_traits< iDynTree::LinearForceVector3 > *", 0, 0, (void*)"iDynTree.MotionForce_traits__LinearForceVector3", 0};
-static swig_type_info _swigt__p_iDynTree__MotionForce_traitsT_iDynTree__LinearMotionVector3_t = {"_p_iDynTree__MotionForce_traitsT_iDynTree__LinearMotionVector3_t", "iDynTree::MotionForce_traits< iDynTree::LinearMotionVector3 > *", 0, 0, (void*)"iDynTree.MotionForce_traits__LinearMotionVector3", 0};
 static swig_type_info _swigt__p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t = {"_p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t", "iDynTree::MotionVector3< iDynTree::AngularMotionVector3 > *", 0, 0, (void*)"iDynTree.MotionVector3__AngularMotionVector3", 0};
 static swig_type_info _swigt__p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t = {"_p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t", "iDynTree::MotionVector3< iDynTree::LinearMotionVector3 > *", 0, 0, (void*)"iDynTree.MotionVector3__LinearMotionVector3", 0};
 static swig_type_info _swigt__p_iDynTree__MovableJointImplT_1_1_t = {"_p_iDynTree__MovableJointImplT_1_1_t", "iDynTree::MovableJointImpl< 1,1 > *|iDynTree::MovableJointImpl1 *", 0, 0, (void*)"iDynTree.MovableJointImpl1", 0};
@@ -36003,8 +35059,6 @@ static swig_type_info _swigt__p_iDynTree__SpatialForceVector = {"_p_iDynTree__Sp
 static swig_type_info _swigt__p_iDynTree__SpatialInertia = {"_p_iDynTree__SpatialInertia", "iDynTree::SpatialInertia *", 0, 0, (void*)"iDynTree.SpatialInertia", 0};
 static swig_type_info _swigt__p_iDynTree__SpatialInertiaRaw = {"_p_iDynTree__SpatialInertiaRaw", "iDynTree::SpatialInertiaRaw *", 0, 0, (void*)"iDynTree.SpatialInertiaRaw", 0};
 static swig_type_info _swigt__p_iDynTree__SpatialMomentum = {"_p_iDynTree__SpatialMomentum", "iDynTree::SpatialMomentum *", 0, 0, (void*)"iDynTree.SpatialMomentum", 0};
-static swig_type_info _swigt__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialForceVector_t = {"_p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialForceVector_t", "iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialForceVector > *", 0, 0, (void*)"iDynTree.SpatialMotionForceVectorT_traits__SpatialForceVector", 0};
-static swig_type_info _swigt__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialMotionVector_t = {"_p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialMotionVector_t", "iDynTree::SpatialMotionForceVectorT_traits< iDynTree::SpatialMotionVector > *", 0, 0, (void*)"iDynTree.SpatialMotionForceVectorT_traits__SpatialMotionVector", 0};
 static swig_type_info _swigt__p_iDynTree__SpatialMotionVector = {"_p_iDynTree__SpatialMotionVector", "iDynTree::SpatialMotionVector *", 0, 0, (void*)"iDynTree.SpatialMotionVector", 0};
 static swig_type_info _swigt__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearForceVector3Semantics_iDynTree__AngularForceVector3Semantics_t = {"_p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearForceVector3Semantics_iDynTree__AngularForceVector3Semantics_t", "iDynTree::SpatialVectorSemantics< iDynTree::LinearForceVector3Semantics,iDynTree::AngularForceVector3Semantics > *", 0, 0, (void*)"iDynTree.SpatialForceVectorSemanticsBase", 0};
 static swig_type_info _swigt__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearMotionVector3Semantics_iDynTree__AngularMotionVector3Semantics_t = {"_p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearMotionVector3Semantics_iDynTree__AngularMotionVector3Semantics_t", "iDynTree::SpatialVectorSemantics< iDynTree::LinearMotionVector3Semantics,iDynTree::AngularMotionVector3Semantics > *", 0, 0, (void*)"iDynTree.SpatialMotionVectorSemanticsBase", 0};
@@ -36050,15 +35104,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iDynTree__AngularMotionVector3Semantics,
   &_swigt__p_iDynTree__Axis,
   &_swigt__p_iDynTree__ClassicalAcc,
-  &_swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularForceVector3Semantics_t,
-  &_swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularMotionVector3Semantics_t,
-  &_swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearForceVector3Semantics_t,
-  &_swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearMotionVector3Semantics_t,
   &_swigt__p_iDynTree__Direction,
-  &_swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularForceVector3Semantics_t,
-  &_swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularMotionVector3Semantics_t,
-  &_swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearForceVector3Semantics_t,
-  &_swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearMotionVector3Semantics_t,
   &_swigt__p_iDynTree__DualSpaceT_iDynTree__SpatialForceVector_t__Type,
   &_swigt__p_iDynTree__DualSpaceT_iDynTree__SpatialMotionVector_t__Type,
   &_swigt__p_iDynTree__Dummy,
@@ -36100,18 +35146,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iDynTree__MatrixFixSizeT_6_1_t,
   &_swigt__p_iDynTree__MatrixFixSizeT_6_6_t,
   &_swigt__p_iDynTree__Model,
-  &_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularForceVector3_t,
-  &_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularMotionVector3_t,
-  &_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearForceVector3_t,
-  &_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearMotionVector3_t,
-  &_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularForceVector3_t,
-  &_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularMotionVector3_t,
-  &_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearForceVector3_t,
-  &_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearMotionVector3_t,
-  &_swigt__p_iDynTree__MotionForce_traitsT_iDynTree__AngularForceVector3_t,
-  &_swigt__p_iDynTree__MotionForce_traitsT_iDynTree__AngularMotionVector3_t,
-  &_swigt__p_iDynTree__MotionForce_traitsT_iDynTree__LinearForceVector3_t,
-  &_swigt__p_iDynTree__MotionForce_traitsT_iDynTree__LinearMotionVector3_t,
   &_swigt__p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t,
   &_swigt__p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t,
   &_swigt__p_iDynTree__MovableJointImplT_1_1_t,
@@ -36141,8 +35175,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iDynTree__SpatialInertia,
   &_swigt__p_iDynTree__SpatialInertiaRaw,
   &_swigt__p_iDynTree__SpatialMomentum,
-  &_swigt__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialForceVector_t,
-  &_swigt__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialMotionVector_t,
   &_swigt__p_iDynTree__SpatialMotionVector,
   &_swigt__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearForceVector3Semantics_iDynTree__AngularForceVector3Semantics_t,
   &_swigt__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearMotionVector3Semantics_iDynTree__AngularMotionVector3Semantics_t,
@@ -36188,15 +35220,7 @@ static swig_cast_info _swigc__p_iDynTree__AngularMotionVector3[] = {  {&_swigt__
 static swig_cast_info _swigc__p_iDynTree__AngularMotionVector3Semantics[] = {  {&_swigt__p_iDynTree__AngularMotionVector3Semantics, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__Axis[] = {  {&_swigt__p_iDynTree__Axis, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__ClassicalAcc[] = {  {&_swigt__p_iDynTree__ClassicalAcc, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularForceVector3Semantics_t[] = {  {&_swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularForceVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularMotionVector3Semantics_t[] = {  {&_swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularMotionVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearForceVector3Semantics_t[] = {  {&_swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearForceVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearMotionVector3Semantics_t[] = {  {&_swigt__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearMotionVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__Direction[] = {  {&_swigt__p_iDynTree__Direction, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularForceVector3Semantics_t[] = {  {&_swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularForceVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularMotionVector3Semantics_t[] = {  {&_swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularMotionVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearForceVector3Semantics_t[] = {  {&_swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearForceVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearMotionVector3Semantics_t[] = {  {&_swigt__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearMotionVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__DualSpaceT_iDynTree__SpatialForceVector_t__Type[] = {  {&_swigt__p_iDynTree__DualSpaceT_iDynTree__SpatialForceVector_t__Type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__DualSpaceT_iDynTree__SpatialMotionVector_t__Type[] = {  {&_swigt__p_iDynTree__DualSpaceT_iDynTree__SpatialMotionVector_t__Type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__Dummy[] = {  {&_swigt__p_iDynTree__Dummy, 0, 0, 0},{0, 0, 0, 0}};
@@ -36238,18 +35262,6 @@ static swig_cast_info _swigc__p_iDynTree__MatrixFixSizeT_6_10_t[] = {  {&_swigt_
 static swig_cast_info _swigc__p_iDynTree__MatrixFixSizeT_6_1_t[] = {  {&_swigt__p_iDynTree__MatrixFixSizeT_6_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__MatrixFixSizeT_6_6_t[] = {  {&_swigt__p_iDynTree__MatrixFixSizeT_6_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__Model[] = {  {&_swigt__p_iDynTree__Model, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularForceVector3_t[] = {  {&_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularForceVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularMotionVector3_t[] = {  {&_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularMotionVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearForceVector3_t[] = {  {&_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearForceVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearMotionVector3_t[] = {  {&_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearMotionVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularForceVector3_t[] = {  {&_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularForceVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularMotionVector3_t[] = {  {&_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularMotionVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearForceVector3_t[] = {  {&_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearForceVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearMotionVector3_t[] = {  {&_swigt__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearMotionVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionForce_traitsT_iDynTree__AngularForceVector3_t[] = {  {&_swigt__p_iDynTree__MotionForce_traitsT_iDynTree__AngularForceVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionForce_traitsT_iDynTree__AngularMotionVector3_t[] = {  {&_swigt__p_iDynTree__MotionForce_traitsT_iDynTree__AngularMotionVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionForce_traitsT_iDynTree__LinearForceVector3_t[] = {  {&_swigt__p_iDynTree__MotionForce_traitsT_iDynTree__LinearForceVector3_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__MotionForce_traitsT_iDynTree__LinearMotionVector3_t[] = {  {&_swigt__p_iDynTree__MotionForce_traitsT_iDynTree__LinearMotionVector3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t[] = {  {&_swigt__p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t, 0, 0, 0},  {&_swigt__p_iDynTree__AngularMotionVector3, _p_iDynTree__AngularMotionVector3To_p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t[] = {  {&_swigt__p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t, 0, 0, 0},  {&_swigt__p_iDynTree__LinearMotionVector3, _p_iDynTree__LinearMotionVector3To_p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__MovableJointImplT_1_1_t[] = {  {&_swigt__p_iDynTree__RevoluteJoint, _p_iDynTree__RevoluteJointTo_p_iDynTree__MovableJointImplT_1_1_t, 0, 0},  {&_swigt__p_iDynTree__MovableJointImplT_1_1_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -36279,8 +35291,6 @@ static swig_cast_info _swigc__p_iDynTree__SpatialForceVector[] = {  {&_swigt__p_
 static swig_cast_info _swigc__p_iDynTree__SpatialInertia[] = {  {&_swigt__p_iDynTree__SpatialInertia, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SpatialInertiaRaw[] = {  {&_swigt__p_iDynTree__SpatialInertia, _p_iDynTree__SpatialInertiaTo_p_iDynTree__SpatialInertiaRaw, 0, 0},  {&_swigt__p_iDynTree__SpatialInertiaRaw, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SpatialMomentum[] = {  {&_swigt__p_iDynTree__SpatialMomentum, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialForceVector_t[] = {  {&_swigt__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialForceVector_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialMotionVector_t[] = {  {&_swigt__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialMotionVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SpatialMotionVector[] = {  {&_swigt__p_iDynTree__SpatialMotionVector, 0, 0, 0},  {&_swigt__p_iDynTree__Twist, _p_iDynTree__TwistTo_p_iDynTree__SpatialMotionVector, 0, 0},  {&_swigt__p_iDynTree__SpatialAcc, _p_iDynTree__SpatialAccTo_p_iDynTree__SpatialMotionVector, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearForceVector3Semantics_iDynTree__AngularForceVector3Semantics_t[] = {  {&_swigt__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearForceVector3Semantics_iDynTree__AngularForceVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearMotionVector3Semantics_iDynTree__AngularMotionVector3Semantics_t[] = {  {&_swigt__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearMotionVector3Semantics_iDynTree__AngularMotionVector3Semantics_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -36326,15 +35336,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iDynTree__AngularMotionVector3Semantics,
   _swigc__p_iDynTree__Axis,
   _swigc__p_iDynTree__ClassicalAcc,
-  _swigc__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularForceVector3Semantics_t,
-  _swigc__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__AngularMotionVector3Semantics_t,
-  _swigc__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearForceVector3Semantics_t,
-  _swigc__p_iDynTree__ConvertSem2motionForceTraitsT_iDynTree__LinearMotionVector3Semantics_t,
   _swigc__p_iDynTree__Direction,
-  _swigc__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularForceVector3Semantics_t,
-  _swigc__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__AngularMotionVector3Semantics_t,
-  _swigc__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearForceVector3Semantics_t,
-  _swigc__p_iDynTree__DualMotionForceSemanticsTT_iDynTree__LinearMotionVector3Semantics_t,
   _swigc__p_iDynTree__DualSpaceT_iDynTree__SpatialForceVector_t__Type,
   _swigc__p_iDynTree__DualSpaceT_iDynTree__SpatialMotionVector_t__Type,
   _swigc__p_iDynTree__Dummy,
@@ -36376,18 +35378,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iDynTree__MatrixFixSizeT_6_1_t,
   _swigc__p_iDynTree__MatrixFixSizeT_6_6_t,
   _swigc__p_iDynTree__Model,
-  _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularForceVector3_t,
-  _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__AngularMotionVector3_t,
-  _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearForceVector3_t,
-  _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__AngularMotionVector3_iDynTree__LinearMotionVector3_t,
-  _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularForceVector3_t,
-  _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__AngularMotionVector3_t,
-  _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearForceVector3_t,
-  _swigc__p_iDynTree__MotionDerivativeOfT_iDynTree__LinearMotionVector3_iDynTree__LinearMotionVector3_t,
-  _swigc__p_iDynTree__MotionForce_traitsT_iDynTree__AngularForceVector3_t,
-  _swigc__p_iDynTree__MotionForce_traitsT_iDynTree__AngularMotionVector3_t,
-  _swigc__p_iDynTree__MotionForce_traitsT_iDynTree__LinearForceVector3_t,
-  _swigc__p_iDynTree__MotionForce_traitsT_iDynTree__LinearMotionVector3_t,
   _swigc__p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t,
   _swigc__p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t,
   _swigc__p_iDynTree__MovableJointImplT_1_1_t,
@@ -36417,8 +35407,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iDynTree__SpatialInertia,
   _swigc__p_iDynTree__SpatialInertiaRaw,
   _swigc__p_iDynTree__SpatialMomentum,
-  _swigc__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialForceVector_t,
-  _swigc__p_iDynTree__SpatialMotionForceVectorT_traitsT_iDynTree__SpatialMotionVector_t,
   _swigc__p_iDynTree__SpatialMotionVector,
   _swigc__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearForceVector3Semantics_iDynTree__AngularForceVector3Semantics_t,
   _swigc__p_iDynTree__SpatialVectorSemanticsT_iDynTree__LinearMotionVector3Semantics_iDynTree__AngularMotionVector3Semantics_t,
@@ -36690,27 +35678,25 @@ void SWIG_Matlab_LoadModule(const char* name) {
 
 const char* swigConstantName_(int con_id) {
   switch (con_id) {
-  case 0: return "add";
-  case 1: return "addTemplateType1";
-  case 2: return "SIX_AXIS_FORCE_TORQUE";
-  case 3: return "LINK_PARAM";
-  case 4: return "SENSOR_FT_PARAM";
-  case 5: return "LINK_MASS";
-  case 6: return "LINK_FIRST_MOMENT_OF_MASS_X";
-  case 7: return "LINK_FIRST_MOMENT_OF_MASS_Y";
-  case 8: return "LINK_FIRST_MOMENT_OF_MASS_Z";
-  case 9: return "LINK_MOMENT_OF_INERTIA_XX";
-  case 10: return "LINK_MOMENT_OF_INERTIA_XY";
-  case 11: return "LINK_MOMENT_OF_INERTIA_XZ";
-  case 12: return "LINK_MOMENT_OF_INERTIA_YY";
-  case 13: return "LINK_MOMENT_OF_INERTIA_YZ";
-  case 14: return "LINK_MOMENT_OF_INERTIA_ZZ";
-  case 15: return "SENSOR_FT_OFFSET_FORCE_X";
-  case 16: return "SENSOR_FT_OFFSET_FORCE_Y";
-  case 17: return "SENSOR_FT_OFFSET_FORCE_Z";
-  case 18: return "SENSOR_FT_OFFSET_TORQUE_X";
-  case 19: return "SENSOR_FT_OFFSET_TORQUE_Y";
-  case 20: return "SENSOR_FT_OFFSET_TORQUE_Z";
+  case 0: return "SIX_AXIS_FORCE_TORQUE";
+  case 1: return "LINK_PARAM";
+  case 2: return "SENSOR_FT_PARAM";
+  case 3: return "LINK_MASS";
+  case 4: return "LINK_FIRST_MOMENT_OF_MASS_X";
+  case 5: return "LINK_FIRST_MOMENT_OF_MASS_Y";
+  case 6: return "LINK_FIRST_MOMENT_OF_MASS_Z";
+  case 7: return "LINK_MOMENT_OF_INERTIA_XX";
+  case 8: return "LINK_MOMENT_OF_INERTIA_XY";
+  case 9: return "LINK_MOMENT_OF_INERTIA_XZ";
+  case 10: return "LINK_MOMENT_OF_INERTIA_YY";
+  case 11: return "LINK_MOMENT_OF_INERTIA_YZ";
+  case 12: return "LINK_MOMENT_OF_INERTIA_ZZ";
+  case 13: return "SENSOR_FT_OFFSET_FORCE_X";
+  case 14: return "SENSOR_FT_OFFSET_FORCE_Y";
+  case 15: return "SENSOR_FT_OFFSET_FORCE_Z";
+  case 16: return "SENSOR_FT_OFFSET_TORQUE_X";
+  case 17: return "SENSOR_FT_OFFSET_TORQUE_Y";
+  case 18: return "SENSOR_FT_OFFSET_TORQUE_Z";
   default: return 0;
   }
 }
@@ -36742,27 +35728,25 @@ int swigConstant(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   }
   int con_id = (int)mxGetScalar(*argv++);
   switch (con_id) {
-  case 0: *resv = SWIG_Matlab_SetConstant(module_ns,"add",SWIG_From_int(static_cast< int >(1)));; break;
-  case 1: *resv = SWIG_Matlab_SetConstant(module_ns,"addTemplateType1",SWIG_From_int(static_cast< int >(1)));; break;
-  case 2: *resv = SWIG_Matlab_SetConstant(module_ns,"SIX_AXIS_FORCE_TORQUE",SWIG_From_int(static_cast< int >(iDynTree::SIX_AXIS_FORCE_TORQUE)));; break;
-  case 3: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_PARAM)));; break;
-  case 4: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_PARAM)));; break;
-  case 5: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MASS",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MASS)));; break;
-  case 6: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_X)));; break;
-  case 7: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Y)));; break;
-  case 8: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Z)));; break;
-  case 9: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XX",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XX)));; break;
-  case 10: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XY)));; break;
-  case 11: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XZ)));; break;
-  case 12: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YY)));; break;
-  case 13: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YZ)));; break;
-  case 14: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_ZZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_ZZ)));; break;
-  case 15: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_X)));; break;
-  case 16: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Y)));; break;
-  case 17: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Z)));; break;
-  case 18: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_X)));; break;
-  case 19: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Y)));; break;
-  case 20: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Z)));; break;
+  case 0: *resv = SWIG_Matlab_SetConstant(module_ns,"SIX_AXIS_FORCE_TORQUE",SWIG_From_int(static_cast< int >(iDynTree::SIX_AXIS_FORCE_TORQUE)));; break;
+  case 1: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_PARAM)));; break;
+  case 2: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_PARAM)));; break;
+  case 3: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MASS",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MASS)));; break;
+  case 4: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_X)));; break;
+  case 5: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Y)));; break;
+  case 6: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Z)));; break;
+  case 7: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XX",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XX)));; break;
+  case 8: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XY)));; break;
+  case 9: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XZ)));; break;
+  case 10: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YY)));; break;
+  case 11: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YZ)));; break;
+  case 12: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_ZZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_ZZ)));; break;
+  case 13: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_X)));; break;
+  case 14: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Y)));; break;
+  case 15: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Z)));; break;
+  case 16: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_X)));; break;
+  case 17: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Y)));; break;
+  case 18: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Z)));; break;
   default:
     mexWarnMsgIdAndTxt("SWIG:RuntimeError","No such constant.");
     return 1;
@@ -36960,615 +35944,571 @@ const char* swigFunctionName_(int fcn_id) {
   case 185: return "Position_mtimes";
   case 186: return "Position_toString";
   case 187: return "Position_display";
-  case 188: return "new_MotionForce_traits__LinearMotionVector3";
-  case 189: return "delete_MotionForce_traits__LinearMotionVector3";
-  case 190: return "new_MotionForce_traits__AngularMotionVector3";
-  case 191: return "delete_MotionForce_traits__AngularMotionVector3";
-  case 192: return "new_MotionForce_traits__LinearForceVector3";
-  case 193: return "delete_MotionForce_traits__LinearForceVector3";
-  case 194: return "new_MotionForce_traits__AngularForceVector3";
-  case 195: return "delete_MotionForce_traits__AngularForceVector3";
-  case 196: return "new_MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3";
-  case 197: return "delete_MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3";
-  case 198: return "new_MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3";
-  case 199: return "delete_MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3";
-  case 200: return "new_MotionDerivativeOf_AngularMotionVector3_LinearForceVector3";
-  case 201: return "delete_MotionDerivativeOf_AngularMotionVector3_LinearForceVector3";
-  case 202: return "new_MotionDerivativeOf_AngularMotionVector3_AngularForceVector3";
-  case 203: return "delete_MotionDerivativeOf_AngularMotionVector3_AngularForceVector3";
-  case 204: return "new_MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3";
-  case 205: return "delete_MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3";
-  case 206: return "new_MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3";
-  case 207: return "delete_MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3";
-  case 208: return "new_MotionDerivativeOf_LinearMotionVector3_LinearForceVector3";
-  case 209: return "delete_MotionDerivativeOf_LinearMotionVector3_LinearForceVector3";
-  case 210: return "new_MotionDerivativeOf_LinearMotionVector3_AngularForceVector3";
-  case 211: return "delete_MotionDerivativeOf_LinearMotionVector3_AngularForceVector3";
-  case 212: return "new_ConvertSem2motionForceTraits__LinearMotionVector3Semantics";
-  case 213: return "delete_ConvertSem2motionForceTraits__LinearMotionVector3Semantics";
-  case 214: return "new_ConvertSem2motionForceTraits__AngularMotionVector3Semantics";
-  case 215: return "delete_ConvertSem2motionForceTraits__AngularMotionVector3Semantics";
-  case 216: return "new_ConvertSem2motionForceTraits__LinearForceVector3Semantics";
-  case 217: return "delete_ConvertSem2motionForceTraits__LinearForceVector3Semantics";
-  case 218: return "new_ConvertSem2motionForceTraits__AngularForceVector3Semantics";
-  case 219: return "delete_ConvertSem2motionForceTraits__AngularForceVector3Semantics";
-  case 220: return "new_DualMotionForceSemanticsT__LinearMotionVector3Semantics";
-  case 221: return "delete_DualMotionForceSemanticsT__LinearMotionVector3Semantics";
-  case 222: return "new_DualMotionForceSemanticsT__AngularMotionVector3Semantics";
-  case 223: return "delete_DualMotionForceSemanticsT__AngularMotionVector3Semantics";
-  case 224: return "new_DualMotionForceSemanticsT__LinearForceVector3Semantics";
-  case 225: return "delete_DualMotionForceSemanticsT__LinearForceVector3Semantics";
-  case 226: return "new_DualMotionForceSemanticsT__AngularForceVector3Semantics";
-  case 227: return "delete_DualMotionForceSemanticsT__AngularForceVector3Semantics";
-  case 228: return "new_SpatialMotionForceVectorT_traits__SpatialMotionVector";
-  case 229: return "delete_SpatialMotionForceVectorT_traits__SpatialMotionVector";
-  case 230: return "new_SpatialMotionForceVectorT_traits__SpatialForceVector";
-  case 231: return "delete_SpatialMotionForceVectorT_traits__SpatialForceVector";
-  case 232: return "new_GeomVector3Semantics__LinearMotionVector3Semantics";
-  case 233: return "delete_GeomVector3Semantics__LinearMotionVector3Semantics";
-  case 234: return "GeomVector3Semantics__LinearMotionVector3Semantics_getBody";
-  case 235: return "GeomVector3Semantics__LinearMotionVector3Semantics_getRefBody";
-  case 236: return "GeomVector3Semantics__LinearMotionVector3Semantics_getCoordinateFrame";
-  case 237: return "GeomVector3Semantics__LinearMotionVector3Semantics_isUnknown";
-  case 238: return "GeomVector3Semantics__LinearMotionVector3Semantics_changeCoordFrame";
-  case 239: return "GeomVector3Semantics__LinearMotionVector3Semantics_compose";
-  case 240: return "GeomVector3Semantics__LinearMotionVector3Semantics_inverse";
-  case 241: return "GeomVector3Semantics__LinearMotionVector3Semantics_dot";
-  case 242: return "new_GeomVector3Semantics__AngularMotionVector3Semantics";
-  case 243: return "delete_GeomVector3Semantics__AngularMotionVector3Semantics";
-  case 244: return "GeomVector3Semantics__AngularMotionVector3Semantics_getBody";
-  case 245: return "GeomVector3Semantics__AngularMotionVector3Semantics_getRefBody";
-  case 246: return "GeomVector3Semantics__AngularMotionVector3Semantics_getCoordinateFrame";
-  case 247: return "GeomVector3Semantics__AngularMotionVector3Semantics_isUnknown";
-  case 248: return "GeomVector3Semantics__AngularMotionVector3Semantics_changeCoordFrame";
-  case 249: return "GeomVector3Semantics__AngularMotionVector3Semantics_compose";
-  case 250: return "GeomVector3Semantics__AngularMotionVector3Semantics_inverse";
-  case 251: return "GeomVector3Semantics__AngularMotionVector3Semantics_dot";
-  case 252: return "new_GeomVector3Semantics__LinearForceVector3Semantics";
-  case 253: return "delete_GeomVector3Semantics__LinearForceVector3Semantics";
-  case 254: return "GeomVector3Semantics__LinearForceVector3Semantics_getBody";
-  case 255: return "GeomVector3Semantics__LinearForceVector3Semantics_getRefBody";
-  case 256: return "GeomVector3Semantics__LinearForceVector3Semantics_getCoordinateFrame";
-  case 257: return "GeomVector3Semantics__LinearForceVector3Semantics_isUnknown";
-  case 258: return "GeomVector3Semantics__LinearForceVector3Semantics_changeCoordFrame";
-  case 259: return "GeomVector3Semantics__LinearForceVector3Semantics_compose";
-  case 260: return "GeomVector3Semantics__LinearForceVector3Semantics_inverse";
-  case 261: return "GeomVector3Semantics__LinearForceVector3Semantics_dot";
-  case 262: return "new_GeomVector3Semantics__AngularForceVector3Semantics";
-  case 263: return "delete_GeomVector3Semantics__AngularForceVector3Semantics";
-  case 264: return "GeomVector3Semantics__AngularForceVector3Semantics_getBody";
-  case 265: return "GeomVector3Semantics__AngularForceVector3Semantics_getRefBody";
-  case 266: return "GeomVector3Semantics__AngularForceVector3Semantics_getCoordinateFrame";
-  case 267: return "GeomVector3Semantics__AngularForceVector3Semantics_isUnknown";
-  case 268: return "GeomVector3Semantics__AngularForceVector3Semantics_changeCoordFrame";
-  case 269: return "GeomVector3Semantics__AngularForceVector3Semantics_compose";
-  case 270: return "GeomVector3Semantics__AngularForceVector3Semantics_inverse";
-  case 271: return "GeomVector3Semantics__AngularForceVector3Semantics_dot";
-  case 272: return "GeomVector3__LinearMotionVector3_semantics_get";
-  case 273: return "GeomVector3__LinearMotionVector3_semantics_set";
-  case 274: return "new_GeomVector3__LinearMotionVector3";
-  case 275: return "delete_GeomVector3__LinearMotionVector3";
-  case 276: return "GeomVector3__LinearMotionVector3_setSemantics";
-  case 277: return "GeomVector3__LinearMotionVector3_changeCoordFrame";
-  case 278: return "GeomVector3__LinearMotionVector3_compose";
-  case 279: return "GeomVector3__LinearMotionVector3_inverse";
-  case 280: return "GeomVector3__LinearMotionVector3_dot";
-  case 281: return "GeomVector3__LinearMotionVector3_plus";
-  case 282: return "GeomVector3__LinearMotionVector3_minus";
-  case 283: return "GeomVector3__LinearMotionVector3_uminus";
-  case 284: return "GeomVector3__AngularMotionVector3_semantics_get";
-  case 285: return "GeomVector3__AngularMotionVector3_semantics_set";
-  case 286: return "new_GeomVector3__AngularMotionVector3";
-  case 287: return "delete_GeomVector3__AngularMotionVector3";
-  case 288: return "GeomVector3__AngularMotionVector3_setSemantics";
-  case 289: return "GeomVector3__AngularMotionVector3_changeCoordFrame";
-  case 290: return "GeomVector3__AngularMotionVector3_compose";
-  case 291: return "GeomVector3__AngularMotionVector3_inverse";
-  case 292: return "GeomVector3__AngularMotionVector3_dot";
-  case 293: return "GeomVector3__AngularMotionVector3_plus";
-  case 294: return "GeomVector3__AngularMotionVector3_minus";
-  case 295: return "GeomVector3__AngularMotionVector3_uminus";
-  case 296: return "GeomVector3__LinearForceVector3_semantics_get";
-  case 297: return "GeomVector3__LinearForceVector3_semantics_set";
-  case 298: return "new_GeomVector3__LinearForceVector3";
-  case 299: return "delete_GeomVector3__LinearForceVector3";
-  case 300: return "GeomVector3__LinearForceVector3_setSemantics";
-  case 301: return "GeomVector3__LinearForceVector3_changeCoordFrame";
-  case 302: return "GeomVector3__LinearForceVector3_compose";
-  case 303: return "GeomVector3__LinearForceVector3_inverse";
-  case 304: return "GeomVector3__LinearForceVector3_dot";
-  case 305: return "GeomVector3__LinearForceVector3_plus";
-  case 306: return "GeomVector3__LinearForceVector3_minus";
-  case 307: return "GeomVector3__LinearForceVector3_uminus";
-  case 308: return "GeomVector3__AngularForceVector3_semantics_get";
-  case 309: return "GeomVector3__AngularForceVector3_semantics_set";
-  case 310: return "new_GeomVector3__AngularForceVector3";
-  case 311: return "delete_GeomVector3__AngularForceVector3";
-  case 312: return "GeomVector3__AngularForceVector3_setSemantics";
-  case 313: return "GeomVector3__AngularForceVector3_changeCoordFrame";
-  case 314: return "GeomVector3__AngularForceVector3_compose";
-  case 315: return "GeomVector3__AngularForceVector3_inverse";
-  case 316: return "GeomVector3__AngularForceVector3_dot";
-  case 317: return "GeomVector3__AngularForceVector3_plus";
-  case 318: return "GeomVector3__AngularForceVector3_minus";
-  case 319: return "GeomVector3__AngularForceVector3_uminus";
-  case 320: return "new_ForceVector3Semantics__LinearForceVector3Semantics";
-  case 321: return "delete_ForceVector3Semantics__LinearForceVector3Semantics";
-  case 322: return "ForceVector3Semantics__LinearForceVector3Semantics_compose";
-  case 323: return "ForceVector3Semantics__LinearForceVector3Semantics_inverse";
-  case 324: return "new_ForceVector3Semantics__AngularForceVector3Semantics";
-  case 325: return "delete_ForceVector3Semantics__AngularForceVector3Semantics";
-  case 326: return "ForceVector3Semantics__AngularForceVector3Semantics_compose";
-  case 327: return "ForceVector3Semantics__AngularForceVector3Semantics_inverse";
-  case 328: return "new_MotionVector3__LinearMotionVector3";
-  case 329: return "delete_MotionVector3__LinearMotionVector3";
-  case 330: return "MotionVector3__LinearMotionVector3_cross";
-  case 331: return "new_MotionVector3__AngularMotionVector3";
-  case 332: return "delete_MotionVector3__AngularMotionVector3";
-  case 333: return "MotionVector3__AngularMotionVector3_cross";
-  case 334: return "new_ForceVector3__LinearForceVector3";
-  case 335: return "delete_ForceVector3__LinearForceVector3";
-  case 336: return "new_ForceVector3__AngularForceVector3";
-  case 337: return "delete_ForceVector3__AngularForceVector3";
-  case 338: return "new_LinearMotionVector3Semantics";
-  case 339: return "delete_LinearMotionVector3Semantics";
-  case 340: return "LinearMotionVector3Semantics_changePoint";
-  case 341: return "LinearMotionVector3Semantics_compose";
-  case 342: return "new_LinearMotionVector3";
-  case 343: return "delete_LinearMotionVector3";
-  case 344: return "LinearMotionVector3_changePoint";
-  case 345: return "new_AngularMotionVector3Semantics";
-  case 346: return "delete_AngularMotionVector3Semantics";
-  case 347: return "new_AngularMotionVector3";
-  case 348: return "delete_AngularMotionVector3";
-  case 349: return "new_LinearForceVector3Semantics";
-  case 350: return "delete_LinearForceVector3Semantics";
-  case 351: return "new_LinearForceVector3";
-  case 352: return "delete_LinearForceVector3";
-  case 353: return "new_AngularForceVector3Semantics";
-  case 354: return "delete_AngularForceVector3Semantics";
-  case 355: return "AngularForceVector3Semantics_changePoint";
-  case 356: return "AngularForceVector3Semantics_compose";
-  case 357: return "new_AngularForceVector3";
-  case 358: return "delete_AngularForceVector3";
-  case 359: return "AngularForceVector3_changePoint";
-  case 360: return "new_SpatialMotionVectorSemanticsBase";
-  case 361: return "delete_SpatialMotionVectorSemanticsBase";
-  case 362: return "SpatialMotionVectorSemanticsBase_check_linear2angularConsistency";
-  case 363: return "SpatialMotionVectorSemanticsBase_toString";
-  case 364: return "SpatialMotionVectorSemanticsBase_display";
-  case 365: return "new_SpatialForceVectorSemanticsBase";
-  case 366: return "delete_SpatialForceVectorSemanticsBase";
-  case 367: return "SpatialForceVectorSemanticsBase_check_linear2angularConsistency";
-  case 368: return "SpatialForceVectorSemanticsBase_toString";
-  case 369: return "SpatialForceVectorSemanticsBase_display";
-  case 370: return "new_SpatialMotionVectorBase";
-  case 371: return "delete_SpatialMotionVectorBase";
-  case 372: return "SpatialMotionVectorBase_getLinearVec3";
-  case 373: return "SpatialMotionVectorBase_getAngularVec3";
-  case 374: return "SpatialMotionVectorBase_setLinearVec3";
-  case 375: return "SpatialMotionVectorBase_setAngularVec3";
-  case 376: return "SpatialMotionVectorBase_paren";
-  case 377: return "SpatialMotionVectorBase_getVal";
-  case 378: return "SpatialMotionVectorBase_setVal";
-  case 379: return "SpatialMotionVectorBase_size";
-  case 380: return "SpatialMotionVectorBase_zero";
-  case 381: return "SpatialMotionVectorBase_changePoint";
-  case 382: return "SpatialMotionVectorBase_changeCoordFrame";
-  case 383: return "SpatialMotionVectorBase_compose";
-  case 384: return "SpatialMotionVectorBase_inverse";
-  case 385: return "SpatialMotionVectorBase_dot";
-  case 386: return "SpatialMotionVectorBase_plus";
-  case 387: return "SpatialMotionVectorBase_minus";
-  case 388: return "SpatialMotionVectorBase_uminus";
-  case 389: return "SpatialMotionVectorBase_Zero";
-  case 390: return "SpatialMotionVectorBase_asVector";
-  case 391: return "SpatialMotionVectorBase_toString";
-  case 392: return "SpatialMotionVectorBase_display";
-  case 393: return "SpatialMotionVectorBase_toMatlab";
-  case 394: return "SpatialMotionVectorBase_fromMatlab";
-  case 395: return "new_SpatialForceVectorBase";
-  case 396: return "delete_SpatialForceVectorBase";
-  case 397: return "SpatialForceVectorBase_getLinearVec3";
-  case 398: return "SpatialForceVectorBase_getAngularVec3";
-  case 399: return "SpatialForceVectorBase_setLinearVec3";
-  case 400: return "SpatialForceVectorBase_setAngularVec3";
-  case 401: return "SpatialForceVectorBase_paren";
-  case 402: return "SpatialForceVectorBase_getVal";
-  case 403: return "SpatialForceVectorBase_setVal";
-  case 404: return "SpatialForceVectorBase_size";
-  case 405: return "SpatialForceVectorBase_zero";
-  case 406: return "SpatialForceVectorBase_changePoint";
-  case 407: return "SpatialForceVectorBase_changeCoordFrame";
-  case 408: return "SpatialForceVectorBase_compose";
-  case 409: return "SpatialForceVectorBase_inverse";
-  case 410: return "SpatialForceVectorBase_dot";
-  case 411: return "SpatialForceVectorBase_plus";
-  case 412: return "SpatialForceVectorBase_minus";
-  case 413: return "SpatialForceVectorBase_uminus";
-  case 414: return "SpatialForceVectorBase_Zero";
-  case 415: return "SpatialForceVectorBase_asVector";
-  case 416: return "SpatialForceVectorBase_toString";
-  case 417: return "SpatialForceVectorBase_display";
-  case 418: return "SpatialForceVectorBase_toMatlab";
-  case 419: return "SpatialForceVectorBase_fromMatlab";
-  case 420: return "new_Dummy";
-  case 421: return "delete_Dummy";
-  case 422: return "new_SpatialMotionVector";
-  case 423: return "delete_SpatialMotionVector";
-  case 424: return "SpatialMotionVector_cross";
-  case 425: return "new_SpatialForceVector";
-  case 426: return "delete_SpatialForceVector";
-  case 427: return "new_Twist";
-  case 428: return "delete_Twist";
-  case 429: return "Twist_plus";
-  case 430: return "Twist_minus";
-  case 431: return "Twist_uminus";
-  case 432: return "Twist_mtimes";
-  case 433: return "new_Wrench";
-  case 434: return "delete_Wrench";
-  case 435: return "Wrench_plus";
-  case 436: return "Wrench_minus";
-  case 437: return "Wrench_uminus";
-  case 438: return "new_SpatialMomentum";
-  case 439: return "delete_SpatialMomentum";
-  case 440: return "SpatialMomentum_plus";
-  case 441: return "SpatialMomentum_minus";
-  case 442: return "SpatialMomentum_uminus";
-  case 443: return "new_SpatialAcc";
-  case 444: return "delete_SpatialAcc";
-  case 445: return "SpatialAcc_plus";
-  case 446: return "SpatialAcc_minus";
-  case 447: return "SpatialAcc_uminus";
-  case 448: return "new_ClassicalAcc";
-  case 449: return "delete_ClassicalAcc";
-  case 450: return "ClassicalAcc_changeCoordFrame";
-  case 451: return "ClassicalAcc_Zero";
-  case 452: return "new_Direction";
-  case 453: return "delete_Direction";
-  case 454: return "Direction_Normalize";
-  case 455: return "Direction_toString";
-  case 456: return "Direction_display";
-  case 457: return "new_Axis";
-  case 458: return "delete_Axis";
-  case 459: return "Axis_getDirection";
-  case 460: return "Axis_getOrigin";
-  case 461: return "Axis_setDirection";
-  case 462: return "Axis_setOrigin";
-  case 463: return "Axis_getRotationTransform";
-  case 464: return "Axis_getRotationTwist";
-  case 465: return "Axis_getRotationSpatialAcc";
-  case 466: return "Axis_toString";
-  case 467: return "Axis_display";
-  case 468: return "new_RotationalInertiaRaw";
-  case 469: return "delete_RotationalInertiaRaw";
-  case 470: return "new_SpatialInertiaRaw";
-  case 471: return "delete_SpatialInertiaRaw";
-  case 472: return "SpatialInertiaRaw_fromRotationalInertiaWrtCenterOfMass";
-  case 473: return "SpatialInertiaRaw_getMass";
-  case 474: return "SpatialInertiaRaw_getCenterOfMass";
-  case 475: return "SpatialInertiaRaw_getRotationalInertiaWrtFrameOrigin";
-  case 476: return "SpatialInertiaRaw_getRotationalInertiaWrtCenterOfMass";
-  case 477: return "SpatialInertiaRaw_combine";
-  case 478: return "SpatialInertiaRaw_multiply";
-  case 479: return "SpatialInertiaRaw_zero";
-  case 480: return "new_SpatialInertia";
-  case 481: return "delete_SpatialInertia";
-  case 482: return "SpatialInertia_combine";
-  case 483: return "SpatialInertia_asMatrix";
-  case 484: return "SpatialInertia_plus";
-  case 485: return "SpatialInertia_mtimes";
-  case 486: return "new_RotationRaw";
-  case 487: return "delete_RotationRaw";
-  case 488: return "RotationRaw_changeOrientFrame";
-  case 489: return "RotationRaw_changeRefOrientFrame";
-  case 490: return "RotationRaw_compose";
-  case 491: return "RotationRaw_inverse2";
-  case 492: return "RotationRaw_changeCoordFrameOf";
-  case 493: return "RotationRaw_RotX";
-  case 494: return "RotationRaw_RotY";
-  case 495: return "RotationRaw_RotZ";
-  case 496: return "RotationRaw_RPY";
-  case 497: return "RotationRaw_Identity";
-  case 498: return "RotationRaw_toString";
-  case 499: return "RotationRaw_display";
-  case 500: return "new_RotationSemantics";
-  case 501: return "delete_RotationSemantics";
-  case 502: return "RotationSemantics_getOrientationFrame";
-  case 503: return "RotationSemantics_getBody";
-  case 504: return "RotationSemantics_getReferenceOrientationFrame";
-  case 505: return "RotationSemantics_getRefBody";
-  case 506: return "RotationSemantics_getCoordinateFrame";
-  case 507: return "RotationSemantics_setOrientationFrame";
-  case 508: return "RotationSemantics_setBody";
-  case 509: return "RotationSemantics_setReferenceOrientationFrame";
-  case 510: return "RotationSemantics_setRefBody";
-  case 511: return "RotationSemantics_setCoordinateFrame";
-  case 512: return "RotationSemantics_changeOrientFrame";
-  case 513: return "RotationSemantics_changeRefOrientFrame";
-  case 514: return "RotationSemantics_changeCoordFrameOf";
-  case 515: return "RotationSemantics_compose";
-  case 516: return "RotationSemantics_inverse2";
-  case 517: return "RotationSemantics_toString";
-  case 518: return "RotationSemantics_display";
-  case 519: return "new_Rotation";
-  case 520: return "delete_Rotation";
-  case 521: return "Rotation_getSemantics";
-  case 522: return "Rotation_changeOrientFrame";
-  case 523: return "Rotation_changeRefOrientFrame";
-  case 524: return "Rotation_changeCoordinateFrame";
-  case 525: return "Rotation_compose";
-  case 526: return "Rotation_inverse2";
-  case 527: return "Rotation_changeCoordFrameOf";
-  case 528: return "Rotation_inverse";
-  case 529: return "Rotation_mtimes";
-  case 530: return "Rotation_RotX";
-  case 531: return "Rotation_RotY";
-  case 532: return "Rotation_RotZ";
-  case 533: return "Rotation_RotAxis";
-  case 534: return "Rotation_RPY";
-  case 535: return "Rotation_Identity";
-  case 536: return "Rotation_toString";
-  case 537: return "Rotation_display";
-  case 538: return "new_TransformSemantics";
-  case 539: return "delete_TransformSemantics";
-  case 540: return "TransformSemantics_getRotationSemantics";
-  case 541: return "TransformSemantics_getPositionSemantics";
-  case 542: return "TransformSemantics_setRotationSemantics";
-  case 543: return "TransformSemantics_setPositionSemantics";
-  case 544: return "TransformSemantics_toString";
-  case 545: return "TransformSemantics_display";
-  case 546: return "new_Transform";
-  case 547: return "delete_Transform";
-  case 548: return "Transform_getSemantics";
-  case 549: return "Transform_getRotation";
-  case 550: return "Transform_getPosition";
-  case 551: return "Transform_setRotation";
-  case 552: return "Transform_setPosition";
-  case 553: return "Transform_compose";
-  case 554: return "Transform_inverse2";
-  case 555: return "Transform_inverse";
-  case 556: return "Transform_mtimes";
-  case 557: return "Transform_Identity";
-  case 558: return "Transform_asHomogeneousTransform";
-  case 559: return "Transform_asAdjointTransform";
-  case 560: return "Transform_asAdjointTransformWrench";
-  case 561: return "Transform_toString";
-  case 562: return "Transform_display";
-  case 563: return "LINK_INVALID_INDEX_get";
-  case 564: return "LINK_INVALID_INDEX_set";
-  case 565: return "LINK_INVALID_NAME_get";
-  case 566: return "LINK_INVALID_NAME_set";
-  case 567: return "JOINT_INVALID_INDEX_get";
-  case 568: return "JOINT_INVALID_INDEX_set";
-  case 569: return "JOINT_INVALID_NAME_get";
-  case 570: return "JOINT_INVALID_NAME_set";
-  case 571: return "LinkPos_pos";
-  case 572: return "delete_LinkPos";
-  case 573: return "new_LinkPos";
-  case 574: return "LinkVelAcc_vel";
-  case 575: return "LinkVelAcc_acc";
-  case 576: return "delete_LinkVelAcc";
-  case 577: return "new_LinkVelAcc";
-  case 578: return "LinkPosVelAcc_pos";
-  case 579: return "LinkPosVelAcc_vel";
-  case 580: return "LinkPosVelAcc_acc";
-  case 581: return "delete_LinkPosVelAcc";
-  case 582: return "new_LinkPosVelAcc";
-  case 583: return "delete_IJointPos";
-  case 584: return "IJointPos_pos";
-  case 585: return "IJointPos_getNrOfPosCoords";
-  case 586: return "delete_IJointPosVel";
-  case 587: return "IJointPosVel_vel";
-  case 588: return "IJointPosVel_getNrOfDOFs";
-  case 589: return "delete_IJointPosVelAcc";
-  case 590: return "IJointPosVelAcc_acc";
-  case 591: return "delete_IJointTorque";
-  case 592: return "IJointTorque_torque";
-  case 593: return "new_Link";
-  case 594: return "delete_Link";
-  case 595: return "Link_setInertia";
-  case 596: return "Link_getInertia";
-  case 597: return "Link_setIndex";
-  case 598: return "Link_getIndex";
-  case 599: return "delete_IJoint";
-  case 600: return "IJoint_clone";
-  case 601: return "IJoint_getNrOfPosCoords";
-  case 602: return "IJoint_getNrOfDOFs";
-  case 603: return "IJoint_setAttachedLinks";
-  case 604: return "IJoint_setRestTransform";
-  case 605: return "IJoint_getFirstAttachedLink";
-  case 606: return "IJoint_getSecondAttachedLink";
-  case 607: return "IJoint_getTransform";
-  case 608: return "IJoint_computeLinkPosVelAcc";
-  case 609: return "IJoint_computeLinkVelAcc";
-  case 610: return "IJoint_computeJointTorque";
-  case 611: return "new_FixedJoint";
-  case 612: return "delete_FixedJoint";
-  case 613: return "FixedJoint_clone";
-  case 614: return "FixedJoint_getNrOfPosCoords";
-  case 615: return "FixedJoint_getNrOfDOFs";
-  case 616: return "FixedJoint_setAttachedLinks";
-  case 617: return "FixedJoint_setRestTransform";
-  case 618: return "FixedJoint_getFirstAttachedLink";
-  case 619: return "FixedJoint_getSecondAttachedLink";
-  case 620: return "FixedJoint_getTransform";
-  case 621: return "FixedJoint_computeLinkPosVelAcc";
-  case 622: return "FixedJoint_computeLinkVelAcc";
-  case 623: return "FixedJoint_computeJointTorque";
-  case 624: return "delete_MovableJointImpl1";
-  case 625: return "MovableJointImpl1_getNrOfPosCoords";
-  case 626: return "MovableJointImpl1_getNrOfDOFs";
-  case 627: return "delete_MovableJointImpl2";
-  case 628: return "MovableJointImpl2_getNrOfPosCoords";
-  case 629: return "MovableJointImpl2_getNrOfDOFs";
-  case 630: return "delete_MovableJointImpl3";
-  case 631: return "MovableJointImpl3_getNrOfPosCoords";
-  case 632: return "MovableJointImpl3_getNrOfDOFs";
-  case 633: return "delete_MovableJointImpl4";
-  case 634: return "MovableJointImpl4_getNrOfPosCoords";
-  case 635: return "MovableJointImpl4_getNrOfDOFs";
-  case 636: return "delete_MovableJointImpl5";
-  case 637: return "MovableJointImpl5_getNrOfPosCoords";
-  case 638: return "MovableJointImpl5_getNrOfDOFs";
-  case 639: return "delete_MovableJointImpl6";
-  case 640: return "MovableJointImpl6_getNrOfPosCoords";
-  case 641: return "MovableJointImpl6_getNrOfDOFs";
-  case 642: return "new_RevoluteJoint";
-  case 643: return "delete_RevoluteJoint";
-  case 644: return "RevoluteJoint_clone";
-  case 645: return "RevoluteJoint_setAttachedLinks";
-  case 646: return "RevoluteJoint_setRestTransform";
-  case 647: return "RevoluteJoint_setAxis";
-  case 648: return "RevoluteJoint_getFirstAttachedLink";
-  case 649: return "RevoluteJoint_getSecondAttachedLink";
-  case 650: return "RevoluteJoint_getAxis";
-  case 651: return "RevoluteJoint_getTransform";
-  case 652: return "RevoluteJoint_computeLinkPosVelAcc";
-  case 653: return "RevoluteJoint_computeLinkVelAcc";
-  case 654: return "RevoluteJoint_computeJointTorque";
-  case 655: return "new_Traversal";
-  case 656: return "delete_Traversal";
-  case 657: return "Traversal_getNrOfVisitedLinks";
-  case 658: return "Traversal_getLink";
-  case 659: return "Traversal_getParentLink";
-  case 660: return "Traversal_getParentJoint";
-  case 661: return "Traversal_reset";
-  case 662: return "Traversal_setTraversalElement";
-  case 663: return "Neighbor_neighborLink_get";
-  case 664: return "Neighbor_neighborLink_set";
-  case 665: return "Neighbor_neighborJoint_get";
-  case 666: return "Neighbor_neighborJoint_set";
-  case 667: return "new_Neighbor";
-  case 668: return "delete_Neighbor";
-  case 669: return "new_Model";
-  case 670: return "delete_Model";
-  case 671: return "Model_getNrOfLinks";
-  case 672: return "Model_getLinkName";
-  case 673: return "Model_getLinkIndex";
-  case 674: return "Model_addLink";
-  case 675: return "Model_getNrOfJoints";
-  case 676: return "Model_getJointName";
-  case 677: return "Model_getJointIndex";
-  case 678: return "Model_addJoint";
-  case 679: return "Model_getNrOfNeighbors";
-  case 680: return "Model_getNeighbor";
-  case 681: return "Model_setDefaultBaseLink";
-  case 682: return "Model_getDefaultBaseLink";
-  case 683: return "Model_computeFullTreeTraversal";
-  case 684: return "_wrap_modelFromURDF";
-  case 685: return "_wrap_modelFromURDFString";
-  case 686: return "NR_OF_SENSOR_TYPES_get";
-  case 687: return "delete_Sensor";
-  case 688: return "Sensor_getName";
-  case 689: return "Sensor_getSensorType";
-  case 690: return "Sensor_getParent";
-  case 691: return "Sensor_getParentIndex";
-  case 692: return "Sensor_isValid";
-  case 693: return "Sensor_clone";
-  case 694: return "new_SensorsList";
-  case 695: return "delete_SensorsList";
-  case 696: return "SensorsList_addSensor";
-  case 697: return "SensorsList_getNrOfSensors";
-  case 698: return "SensorsList_getSensorIndex";
-  case 699: return "SensorsList_getSensor";
-  case 700: return "SensorsList_getSixAxisForceTorqueSensor";
-  case 701: return "new_SensorsMeasurements";
-  case 702: return "delete_SensorsMeasurements";
-  case 703: return "SensorsMeasurements_setNrOfSensors";
-  case 704: return "SensorsMeasurements_getNrOfSensors";
-  case 705: return "SensorsMeasurements_setMeasurement";
-  case 706: return "SensorsMeasurements_getMeasurement";
-  case 707: return "new_SixAxisForceTorqueSensor";
-  case 708: return "delete_SixAxisForceTorqueSensor";
-  case 709: return "SixAxisForceTorqueSensor_setName";
-  case 710: return "SixAxisForceTorqueSensor_setFirstLinkSensorTransform";
-  case 711: return "SixAxisForceTorqueSensor_setSecondLinkSensorTransform";
-  case 712: return "SixAxisForceTorqueSensor_getFirstLinkIndex";
-  case 713: return "SixAxisForceTorqueSensor_getSecondLinkIndex";
-  case 714: return "SixAxisForceTorqueSensor_setFirstLinkName";
-  case 715: return "SixAxisForceTorqueSensor_setSecondLinkName";
-  case 716: return "SixAxisForceTorqueSensor_getFirstLinkName";
-  case 717: return "SixAxisForceTorqueSensor_getSecondLinkName";
-  case 718: return "SixAxisForceTorqueSensor_setParent";
-  case 719: return "SixAxisForceTorqueSensor_setParentIndex";
-  case 720: return "SixAxisForceTorqueSensor_setAppliedWrenchLink";
-  case 721: return "SixAxisForceTorqueSensor_getName";
-  case 722: return "SixAxisForceTorqueSensor_getSensorType";
-  case 723: return "SixAxisForceTorqueSensor_getParent";
-  case 724: return "SixAxisForceTorqueSensor_getParentIndex";
-  case 725: return "SixAxisForceTorqueSensor_isValid";
-  case 726: return "SixAxisForceTorqueSensor_clone";
-  case 727: return "SixAxisForceTorqueSensor_getAppliedWrenchLink";
-  case 728: return "SixAxisForceTorqueSensor_isLinkAttachedToSensor";
-  case 729: return "SixAxisForceTorqueSensor_getLinkSensorTransform";
-  case 730: return "SixAxisForceTorqueSensor_getWrenchAppliedOnLink";
-  case 731: return "_wrap_sensorsListFromURDF";
-  case 732: return "_wrap_sensorsListFromURDFString";
-  case 733: return "DynamicsRegressorParameter_category_get";
-  case 734: return "DynamicsRegressorParameter_category_set";
-  case 735: return "DynamicsRegressorParameter_elemIndex_get";
-  case 736: return "DynamicsRegressorParameter_elemIndex_set";
-  case 737: return "DynamicsRegressorParameter_type_get";
-  case 738: return "DynamicsRegressorParameter_type_set";
-  case 739: return "DynamicsRegressorParameter_lt";
-  case 740: return "DynamicsRegressorParameter_isequal";
-  case 741: return "DynamicsRegressorParameter_ne";
-  case 742: return "new_DynamicsRegressorParameter";
-  case 743: return "delete_DynamicsRegressorParameter";
-  case 744: return "DynamicsRegressorParametersList_parameters_get";
-  case 745: return "DynamicsRegressorParametersList_parameters_set";
-  case 746: return "DynamicsRegressorParametersList_getDescriptionOfParameter";
-  case 747: return "DynamicsRegressorParametersList_addParam";
-  case 748: return "DynamicsRegressorParametersList_addList";
-  case 749: return "DynamicsRegressorParametersList_findParam";
-  case 750: return "DynamicsRegressorParametersList_getNrOfParameters";
-  case 751: return "new_DynamicsRegressorParametersList";
-  case 752: return "delete_DynamicsRegressorParametersList";
-  case 753: return "new_DynamicsRegressorGenerator";
-  case 754: return "delete_DynamicsRegressorGenerator";
-  case 755: return "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile";
-  case 756: return "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString";
-  case 757: return "DynamicsRegressorGenerator_loadRegressorStructureFromFile";
-  case 758: return "DynamicsRegressorGenerator_loadRegressorStructureFromString";
-  case 759: return "DynamicsRegressorGenerator_isValid";
-  case 760: return "DynamicsRegressorGenerator_getNrOfParameters";
-  case 761: return "DynamicsRegressorGenerator_getNrOfOutputs";
-  case 762: return "DynamicsRegressorGenerator_getNrOfDegreesOfFreedom";
-  case 763: return "DynamicsRegressorGenerator_getDescriptionOfParameter";
-  case 764: return "DynamicsRegressorGenerator_getDescriptionOfParameters";
-  case 765: return "DynamicsRegressorGenerator_getDescriptionOfOutput";
-  case 766: return "DynamicsRegressorGenerator_getDescriptionOfOutputs";
-  case 767: return "DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom";
-  case 768: return "DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom";
-  case 769: return "DynamicsRegressorGenerator_getBaseLinkName";
-  case 770: return "DynamicsRegressorGenerator_getSensorsModel";
-  case 771: return "DynamicsRegressorGenerator_setRobotState";
-  case 772: return "DynamicsRegressorGenerator_getSensorsMeasurements";
-  case 773: return "DynamicsRegressorGenerator_computeRegressor";
-  case 774: return "DynamicsRegressorGenerator_getModelParameters";
-  case 775: return "DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace";
-  case 776: return "DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace";
-  case 777: return "new_DynamicsComputations";
-  case 778: return "delete_DynamicsComputations";
-  case 779: return "DynamicsComputations_loadRobotModelFromFile";
-  case 780: return "DynamicsComputations_loadRobotModelFromString";
-  case 781: return "DynamicsComputations_isValid";
-  case 782: return "DynamicsComputations_getNrOfDegreesOfFreedom";
-  case 783: return "DynamicsComputations_getDescriptionOfDegreeOfFreedom";
-  case 784: return "DynamicsComputations_getDescriptionOfDegreesOfFreedom";
-  case 785: return "DynamicsComputations_getNrOfLinks";
-  case 786: return "DynamicsComputations_getNrOfFrames";
-  case 787: return "DynamicsComputations_getFloatingBase";
-  case 788: return "DynamicsComputations_setFloatingBase";
-  case 789: return "DynamicsComputations_setRobotState";
-  case 790: return "DynamicsComputations_getFrameIndex";
-  case 791: return "DynamicsComputations_getWorldTransform";
-  case 792: return "DynamicsComputations_getRelativeTransform";
-  case 793: return "DynamicsComputations_getFrameTwist";
-  case 794: return "DynamicsComputations_getFrameProperSpatialAcceleration";
-  case 795: return "DynamicsComputations_getLinkIndex";
-  case 796: return "DynamicsComputations_getLinkInertia";
+  case 188: return "new_GeomVector3Semantics__LinearMotionVector3Semantics";
+  case 189: return "delete_GeomVector3Semantics__LinearMotionVector3Semantics";
+  case 190: return "GeomVector3Semantics__LinearMotionVector3Semantics_getBody";
+  case 191: return "GeomVector3Semantics__LinearMotionVector3Semantics_getRefBody";
+  case 192: return "GeomVector3Semantics__LinearMotionVector3Semantics_getCoordinateFrame";
+  case 193: return "GeomVector3Semantics__LinearMotionVector3Semantics_isUnknown";
+  case 194: return "GeomVector3Semantics__LinearMotionVector3Semantics_changeCoordFrame";
+  case 195: return "GeomVector3Semantics__LinearMotionVector3Semantics_compose";
+  case 196: return "GeomVector3Semantics__LinearMotionVector3Semantics_inverse";
+  case 197: return "GeomVector3Semantics__LinearMotionVector3Semantics_dot";
+  case 198: return "new_GeomVector3Semantics__AngularMotionVector3Semantics";
+  case 199: return "delete_GeomVector3Semantics__AngularMotionVector3Semantics";
+  case 200: return "GeomVector3Semantics__AngularMotionVector3Semantics_getBody";
+  case 201: return "GeomVector3Semantics__AngularMotionVector3Semantics_getRefBody";
+  case 202: return "GeomVector3Semantics__AngularMotionVector3Semantics_getCoordinateFrame";
+  case 203: return "GeomVector3Semantics__AngularMotionVector3Semantics_isUnknown";
+  case 204: return "GeomVector3Semantics__AngularMotionVector3Semantics_changeCoordFrame";
+  case 205: return "GeomVector3Semantics__AngularMotionVector3Semantics_compose";
+  case 206: return "GeomVector3Semantics__AngularMotionVector3Semantics_inverse";
+  case 207: return "GeomVector3Semantics__AngularMotionVector3Semantics_dot";
+  case 208: return "new_GeomVector3Semantics__LinearForceVector3Semantics";
+  case 209: return "delete_GeomVector3Semantics__LinearForceVector3Semantics";
+  case 210: return "GeomVector3Semantics__LinearForceVector3Semantics_getBody";
+  case 211: return "GeomVector3Semantics__LinearForceVector3Semantics_getRefBody";
+  case 212: return "GeomVector3Semantics__LinearForceVector3Semantics_getCoordinateFrame";
+  case 213: return "GeomVector3Semantics__LinearForceVector3Semantics_isUnknown";
+  case 214: return "GeomVector3Semantics__LinearForceVector3Semantics_changeCoordFrame";
+  case 215: return "GeomVector3Semantics__LinearForceVector3Semantics_compose";
+  case 216: return "GeomVector3Semantics__LinearForceVector3Semantics_inverse";
+  case 217: return "GeomVector3Semantics__LinearForceVector3Semantics_dot";
+  case 218: return "new_GeomVector3Semantics__AngularForceVector3Semantics";
+  case 219: return "delete_GeomVector3Semantics__AngularForceVector3Semantics";
+  case 220: return "GeomVector3Semantics__AngularForceVector3Semantics_getBody";
+  case 221: return "GeomVector3Semantics__AngularForceVector3Semantics_getRefBody";
+  case 222: return "GeomVector3Semantics__AngularForceVector3Semantics_getCoordinateFrame";
+  case 223: return "GeomVector3Semantics__AngularForceVector3Semantics_isUnknown";
+  case 224: return "GeomVector3Semantics__AngularForceVector3Semantics_changeCoordFrame";
+  case 225: return "GeomVector3Semantics__AngularForceVector3Semantics_compose";
+  case 226: return "GeomVector3Semantics__AngularForceVector3Semantics_inverse";
+  case 227: return "GeomVector3Semantics__AngularForceVector3Semantics_dot";
+  case 228: return "GeomVector3__LinearMotionVector3_semantics_get";
+  case 229: return "GeomVector3__LinearMotionVector3_semantics_set";
+  case 230: return "new_GeomVector3__LinearMotionVector3";
+  case 231: return "delete_GeomVector3__LinearMotionVector3";
+  case 232: return "GeomVector3__LinearMotionVector3_setSemantics";
+  case 233: return "GeomVector3__LinearMotionVector3_changeCoordFrame";
+  case 234: return "GeomVector3__LinearMotionVector3_compose";
+  case 235: return "GeomVector3__LinearMotionVector3_inverse";
+  case 236: return "GeomVector3__LinearMotionVector3_dot";
+  case 237: return "GeomVector3__LinearMotionVector3_plus";
+  case 238: return "GeomVector3__LinearMotionVector3_minus";
+  case 239: return "GeomVector3__LinearMotionVector3_uminus";
+  case 240: return "GeomVector3__AngularMotionVector3_semantics_get";
+  case 241: return "GeomVector3__AngularMotionVector3_semantics_set";
+  case 242: return "new_GeomVector3__AngularMotionVector3";
+  case 243: return "delete_GeomVector3__AngularMotionVector3";
+  case 244: return "GeomVector3__AngularMotionVector3_setSemantics";
+  case 245: return "GeomVector3__AngularMotionVector3_changeCoordFrame";
+  case 246: return "GeomVector3__AngularMotionVector3_compose";
+  case 247: return "GeomVector3__AngularMotionVector3_inverse";
+  case 248: return "GeomVector3__AngularMotionVector3_dot";
+  case 249: return "GeomVector3__AngularMotionVector3_plus";
+  case 250: return "GeomVector3__AngularMotionVector3_minus";
+  case 251: return "GeomVector3__AngularMotionVector3_uminus";
+  case 252: return "GeomVector3__LinearForceVector3_semantics_get";
+  case 253: return "GeomVector3__LinearForceVector3_semantics_set";
+  case 254: return "new_GeomVector3__LinearForceVector3";
+  case 255: return "delete_GeomVector3__LinearForceVector3";
+  case 256: return "GeomVector3__LinearForceVector3_setSemantics";
+  case 257: return "GeomVector3__LinearForceVector3_changeCoordFrame";
+  case 258: return "GeomVector3__LinearForceVector3_compose";
+  case 259: return "GeomVector3__LinearForceVector3_inverse";
+  case 260: return "GeomVector3__LinearForceVector3_dot";
+  case 261: return "GeomVector3__LinearForceVector3_plus";
+  case 262: return "GeomVector3__LinearForceVector3_minus";
+  case 263: return "GeomVector3__LinearForceVector3_uminus";
+  case 264: return "GeomVector3__AngularForceVector3_semantics_get";
+  case 265: return "GeomVector3__AngularForceVector3_semantics_set";
+  case 266: return "new_GeomVector3__AngularForceVector3";
+  case 267: return "delete_GeomVector3__AngularForceVector3";
+  case 268: return "GeomVector3__AngularForceVector3_setSemantics";
+  case 269: return "GeomVector3__AngularForceVector3_changeCoordFrame";
+  case 270: return "GeomVector3__AngularForceVector3_compose";
+  case 271: return "GeomVector3__AngularForceVector3_inverse";
+  case 272: return "GeomVector3__AngularForceVector3_dot";
+  case 273: return "GeomVector3__AngularForceVector3_plus";
+  case 274: return "GeomVector3__AngularForceVector3_minus";
+  case 275: return "GeomVector3__AngularForceVector3_uminus";
+  case 276: return "new_ForceVector3Semantics__LinearForceVector3Semantics";
+  case 277: return "delete_ForceVector3Semantics__LinearForceVector3Semantics";
+  case 278: return "ForceVector3Semantics__LinearForceVector3Semantics_compose";
+  case 279: return "ForceVector3Semantics__LinearForceVector3Semantics_inverse";
+  case 280: return "new_ForceVector3Semantics__AngularForceVector3Semantics";
+  case 281: return "delete_ForceVector3Semantics__AngularForceVector3Semantics";
+  case 282: return "ForceVector3Semantics__AngularForceVector3Semantics_compose";
+  case 283: return "ForceVector3Semantics__AngularForceVector3Semantics_inverse";
+  case 284: return "new_MotionVector3__LinearMotionVector3";
+  case 285: return "delete_MotionVector3__LinearMotionVector3";
+  case 286: return "MotionVector3__LinearMotionVector3_cross";
+  case 287: return "new_MotionVector3__AngularMotionVector3";
+  case 288: return "delete_MotionVector3__AngularMotionVector3";
+  case 289: return "MotionVector3__AngularMotionVector3_cross";
+  case 290: return "new_ForceVector3__LinearForceVector3";
+  case 291: return "delete_ForceVector3__LinearForceVector3";
+  case 292: return "new_ForceVector3__AngularForceVector3";
+  case 293: return "delete_ForceVector3__AngularForceVector3";
+  case 294: return "new_LinearMotionVector3Semantics";
+  case 295: return "delete_LinearMotionVector3Semantics";
+  case 296: return "LinearMotionVector3Semantics_changePoint";
+  case 297: return "LinearMotionVector3Semantics_compose";
+  case 298: return "new_LinearMotionVector3";
+  case 299: return "delete_LinearMotionVector3";
+  case 300: return "LinearMotionVector3_changePoint";
+  case 301: return "new_AngularMotionVector3Semantics";
+  case 302: return "delete_AngularMotionVector3Semantics";
+  case 303: return "new_AngularMotionVector3";
+  case 304: return "delete_AngularMotionVector3";
+  case 305: return "new_LinearForceVector3Semantics";
+  case 306: return "delete_LinearForceVector3Semantics";
+  case 307: return "new_LinearForceVector3";
+  case 308: return "delete_LinearForceVector3";
+  case 309: return "new_AngularForceVector3Semantics";
+  case 310: return "delete_AngularForceVector3Semantics";
+  case 311: return "AngularForceVector3Semantics_changePoint";
+  case 312: return "AngularForceVector3Semantics_compose";
+  case 313: return "new_AngularForceVector3";
+  case 314: return "delete_AngularForceVector3";
+  case 315: return "AngularForceVector3_changePoint";
+  case 316: return "new_SpatialMotionVectorSemanticsBase";
+  case 317: return "delete_SpatialMotionVectorSemanticsBase";
+  case 318: return "SpatialMotionVectorSemanticsBase_check_linear2angularConsistency";
+  case 319: return "SpatialMotionVectorSemanticsBase_toString";
+  case 320: return "SpatialMotionVectorSemanticsBase_display";
+  case 321: return "new_SpatialForceVectorSemanticsBase";
+  case 322: return "delete_SpatialForceVectorSemanticsBase";
+  case 323: return "SpatialForceVectorSemanticsBase_check_linear2angularConsistency";
+  case 324: return "SpatialForceVectorSemanticsBase_toString";
+  case 325: return "SpatialForceVectorSemanticsBase_display";
+  case 326: return "new_SpatialMotionVectorBase";
+  case 327: return "delete_SpatialMotionVectorBase";
+  case 328: return "SpatialMotionVectorBase_getLinearVec3";
+  case 329: return "SpatialMotionVectorBase_getAngularVec3";
+  case 330: return "SpatialMotionVectorBase_setLinearVec3";
+  case 331: return "SpatialMotionVectorBase_setAngularVec3";
+  case 332: return "SpatialMotionVectorBase_paren";
+  case 333: return "SpatialMotionVectorBase_getVal";
+  case 334: return "SpatialMotionVectorBase_setVal";
+  case 335: return "SpatialMotionVectorBase_size";
+  case 336: return "SpatialMotionVectorBase_zero";
+  case 337: return "SpatialMotionVectorBase_changePoint";
+  case 338: return "SpatialMotionVectorBase_changeCoordFrame";
+  case 339: return "SpatialMotionVectorBase_compose";
+  case 340: return "SpatialMotionVectorBase_inverse";
+  case 341: return "SpatialMotionVectorBase_dot";
+  case 342: return "SpatialMotionVectorBase_plus";
+  case 343: return "SpatialMotionVectorBase_minus";
+  case 344: return "SpatialMotionVectorBase_uminus";
+  case 345: return "SpatialMotionVectorBase_Zero";
+  case 346: return "SpatialMotionVectorBase_asVector";
+  case 347: return "SpatialMotionVectorBase_toString";
+  case 348: return "SpatialMotionVectorBase_display";
+  case 349: return "SpatialMotionVectorBase_toMatlab";
+  case 350: return "SpatialMotionVectorBase_fromMatlab";
+  case 351: return "new_SpatialForceVectorBase";
+  case 352: return "delete_SpatialForceVectorBase";
+  case 353: return "SpatialForceVectorBase_getLinearVec3";
+  case 354: return "SpatialForceVectorBase_getAngularVec3";
+  case 355: return "SpatialForceVectorBase_setLinearVec3";
+  case 356: return "SpatialForceVectorBase_setAngularVec3";
+  case 357: return "SpatialForceVectorBase_paren";
+  case 358: return "SpatialForceVectorBase_getVal";
+  case 359: return "SpatialForceVectorBase_setVal";
+  case 360: return "SpatialForceVectorBase_size";
+  case 361: return "SpatialForceVectorBase_zero";
+  case 362: return "SpatialForceVectorBase_changePoint";
+  case 363: return "SpatialForceVectorBase_changeCoordFrame";
+  case 364: return "SpatialForceVectorBase_compose";
+  case 365: return "SpatialForceVectorBase_inverse";
+  case 366: return "SpatialForceVectorBase_dot";
+  case 367: return "SpatialForceVectorBase_plus";
+  case 368: return "SpatialForceVectorBase_minus";
+  case 369: return "SpatialForceVectorBase_uminus";
+  case 370: return "SpatialForceVectorBase_Zero";
+  case 371: return "SpatialForceVectorBase_asVector";
+  case 372: return "SpatialForceVectorBase_toString";
+  case 373: return "SpatialForceVectorBase_display";
+  case 374: return "SpatialForceVectorBase_toMatlab";
+  case 375: return "SpatialForceVectorBase_fromMatlab";
+  case 376: return "new_Dummy";
+  case 377: return "delete_Dummy";
+  case 378: return "new_SpatialMotionVector";
+  case 379: return "delete_SpatialMotionVector";
+  case 380: return "SpatialMotionVector_cross";
+  case 381: return "new_SpatialForceVector";
+  case 382: return "delete_SpatialForceVector";
+  case 383: return "new_Twist";
+  case 384: return "delete_Twist";
+  case 385: return "Twist_plus";
+  case 386: return "Twist_minus";
+  case 387: return "Twist_uminus";
+  case 388: return "Twist_mtimes";
+  case 389: return "new_Wrench";
+  case 390: return "delete_Wrench";
+  case 391: return "Wrench_plus";
+  case 392: return "Wrench_minus";
+  case 393: return "Wrench_uminus";
+  case 394: return "new_SpatialMomentum";
+  case 395: return "delete_SpatialMomentum";
+  case 396: return "SpatialMomentum_plus";
+  case 397: return "SpatialMomentum_minus";
+  case 398: return "SpatialMomentum_uminus";
+  case 399: return "new_SpatialAcc";
+  case 400: return "delete_SpatialAcc";
+  case 401: return "SpatialAcc_plus";
+  case 402: return "SpatialAcc_minus";
+  case 403: return "SpatialAcc_uminus";
+  case 404: return "new_ClassicalAcc";
+  case 405: return "delete_ClassicalAcc";
+  case 406: return "ClassicalAcc_changeCoordFrame";
+  case 407: return "ClassicalAcc_Zero";
+  case 408: return "new_Direction";
+  case 409: return "delete_Direction";
+  case 410: return "Direction_Normalize";
+  case 411: return "Direction_toString";
+  case 412: return "Direction_display";
+  case 413: return "new_Axis";
+  case 414: return "delete_Axis";
+  case 415: return "Axis_getDirection";
+  case 416: return "Axis_getOrigin";
+  case 417: return "Axis_setDirection";
+  case 418: return "Axis_setOrigin";
+  case 419: return "Axis_getRotationTransform";
+  case 420: return "Axis_getRotationTwist";
+  case 421: return "Axis_getRotationSpatialAcc";
+  case 422: return "Axis_toString";
+  case 423: return "Axis_display";
+  case 424: return "new_RotationalInertiaRaw";
+  case 425: return "delete_RotationalInertiaRaw";
+  case 426: return "new_SpatialInertiaRaw";
+  case 427: return "delete_SpatialInertiaRaw";
+  case 428: return "SpatialInertiaRaw_fromRotationalInertiaWrtCenterOfMass";
+  case 429: return "SpatialInertiaRaw_getMass";
+  case 430: return "SpatialInertiaRaw_getCenterOfMass";
+  case 431: return "SpatialInertiaRaw_getRotationalInertiaWrtFrameOrigin";
+  case 432: return "SpatialInertiaRaw_getRotationalInertiaWrtCenterOfMass";
+  case 433: return "SpatialInertiaRaw_combine";
+  case 434: return "SpatialInertiaRaw_multiply";
+  case 435: return "SpatialInertiaRaw_zero";
+  case 436: return "new_SpatialInertia";
+  case 437: return "delete_SpatialInertia";
+  case 438: return "SpatialInertia_combine";
+  case 439: return "SpatialInertia_asMatrix";
+  case 440: return "SpatialInertia_plus";
+  case 441: return "SpatialInertia_mtimes";
+  case 442: return "new_RotationRaw";
+  case 443: return "delete_RotationRaw";
+  case 444: return "RotationRaw_changeOrientFrame";
+  case 445: return "RotationRaw_changeRefOrientFrame";
+  case 446: return "RotationRaw_compose";
+  case 447: return "RotationRaw_inverse2";
+  case 448: return "RotationRaw_changeCoordFrameOf";
+  case 449: return "RotationRaw_RotX";
+  case 450: return "RotationRaw_RotY";
+  case 451: return "RotationRaw_RotZ";
+  case 452: return "RotationRaw_RPY";
+  case 453: return "RotationRaw_Identity";
+  case 454: return "RotationRaw_toString";
+  case 455: return "RotationRaw_display";
+  case 456: return "new_RotationSemantics";
+  case 457: return "delete_RotationSemantics";
+  case 458: return "RotationSemantics_getOrientationFrame";
+  case 459: return "RotationSemantics_getBody";
+  case 460: return "RotationSemantics_getReferenceOrientationFrame";
+  case 461: return "RotationSemantics_getRefBody";
+  case 462: return "RotationSemantics_getCoordinateFrame";
+  case 463: return "RotationSemantics_setOrientationFrame";
+  case 464: return "RotationSemantics_setBody";
+  case 465: return "RotationSemantics_setReferenceOrientationFrame";
+  case 466: return "RotationSemantics_setRefBody";
+  case 467: return "RotationSemantics_setCoordinateFrame";
+  case 468: return "RotationSemantics_changeOrientFrame";
+  case 469: return "RotationSemantics_changeRefOrientFrame";
+  case 470: return "RotationSemantics_changeCoordFrameOf";
+  case 471: return "RotationSemantics_compose";
+  case 472: return "RotationSemantics_inverse2";
+  case 473: return "RotationSemantics_toString";
+  case 474: return "RotationSemantics_display";
+  case 475: return "new_Rotation";
+  case 476: return "delete_Rotation";
+  case 477: return "Rotation_getSemantics";
+  case 478: return "Rotation_changeOrientFrame";
+  case 479: return "Rotation_changeRefOrientFrame";
+  case 480: return "Rotation_changeCoordinateFrame";
+  case 481: return "Rotation_compose";
+  case 482: return "Rotation_inverse2";
+  case 483: return "Rotation_changeCoordFrameOf";
+  case 484: return "Rotation_inverse";
+  case 485: return "Rotation_mtimes";
+  case 486: return "Rotation_RotX";
+  case 487: return "Rotation_RotY";
+  case 488: return "Rotation_RotZ";
+  case 489: return "Rotation_RotAxis";
+  case 490: return "Rotation_RPY";
+  case 491: return "Rotation_Identity";
+  case 492: return "Rotation_toString";
+  case 493: return "Rotation_display";
+  case 494: return "new_TransformSemantics";
+  case 495: return "delete_TransformSemantics";
+  case 496: return "TransformSemantics_getRotationSemantics";
+  case 497: return "TransformSemantics_getPositionSemantics";
+  case 498: return "TransformSemantics_setRotationSemantics";
+  case 499: return "TransformSemantics_setPositionSemantics";
+  case 500: return "TransformSemantics_toString";
+  case 501: return "TransformSemantics_display";
+  case 502: return "new_Transform";
+  case 503: return "delete_Transform";
+  case 504: return "Transform_getSemantics";
+  case 505: return "Transform_getRotation";
+  case 506: return "Transform_getPosition";
+  case 507: return "Transform_setRotation";
+  case 508: return "Transform_setPosition";
+  case 509: return "Transform_compose";
+  case 510: return "Transform_inverse2";
+  case 511: return "Transform_inverse";
+  case 512: return "Transform_mtimes";
+  case 513: return "Transform_Identity";
+  case 514: return "Transform_asHomogeneousTransform";
+  case 515: return "Transform_asAdjointTransform";
+  case 516: return "Transform_asAdjointTransformWrench";
+  case 517: return "Transform_toString";
+  case 518: return "Transform_display";
+  case 519: return "LINK_INVALID_INDEX_get";
+  case 520: return "LINK_INVALID_INDEX_set";
+  case 521: return "LINK_INVALID_NAME_get";
+  case 522: return "LINK_INVALID_NAME_set";
+  case 523: return "JOINT_INVALID_INDEX_get";
+  case 524: return "JOINT_INVALID_INDEX_set";
+  case 525: return "JOINT_INVALID_NAME_get";
+  case 526: return "JOINT_INVALID_NAME_set";
+  case 527: return "LinkPos_pos";
+  case 528: return "delete_LinkPos";
+  case 529: return "new_LinkPos";
+  case 530: return "LinkVelAcc_vel";
+  case 531: return "LinkVelAcc_acc";
+  case 532: return "delete_LinkVelAcc";
+  case 533: return "new_LinkVelAcc";
+  case 534: return "LinkPosVelAcc_pos";
+  case 535: return "LinkPosVelAcc_vel";
+  case 536: return "LinkPosVelAcc_acc";
+  case 537: return "delete_LinkPosVelAcc";
+  case 538: return "new_LinkPosVelAcc";
+  case 539: return "delete_IJointPos";
+  case 540: return "IJointPos_pos";
+  case 541: return "IJointPos_getNrOfPosCoords";
+  case 542: return "delete_IJointPosVel";
+  case 543: return "IJointPosVel_vel";
+  case 544: return "IJointPosVel_getNrOfDOFs";
+  case 545: return "delete_IJointPosVelAcc";
+  case 546: return "IJointPosVelAcc_acc";
+  case 547: return "delete_IJointTorque";
+  case 548: return "IJointTorque_torque";
+  case 549: return "new_Link";
+  case 550: return "delete_Link";
+  case 551: return "Link_setInertia";
+  case 552: return "Link_getInertia";
+  case 553: return "Link_setIndex";
+  case 554: return "Link_getIndex";
+  case 555: return "delete_IJoint";
+  case 556: return "IJoint_clone";
+  case 557: return "IJoint_getNrOfPosCoords";
+  case 558: return "IJoint_getNrOfDOFs";
+  case 559: return "IJoint_setAttachedLinks";
+  case 560: return "IJoint_setRestTransform";
+  case 561: return "IJoint_getFirstAttachedLink";
+  case 562: return "IJoint_getSecondAttachedLink";
+  case 563: return "IJoint_getTransform";
+  case 564: return "IJoint_computeLinkPosVelAcc";
+  case 565: return "IJoint_computeLinkVelAcc";
+  case 566: return "IJoint_computeJointTorque";
+  case 567: return "new_FixedJoint";
+  case 568: return "delete_FixedJoint";
+  case 569: return "FixedJoint_clone";
+  case 570: return "FixedJoint_getNrOfPosCoords";
+  case 571: return "FixedJoint_getNrOfDOFs";
+  case 572: return "FixedJoint_setAttachedLinks";
+  case 573: return "FixedJoint_setRestTransform";
+  case 574: return "FixedJoint_getFirstAttachedLink";
+  case 575: return "FixedJoint_getSecondAttachedLink";
+  case 576: return "FixedJoint_getTransform";
+  case 577: return "FixedJoint_computeLinkPosVelAcc";
+  case 578: return "FixedJoint_computeLinkVelAcc";
+  case 579: return "FixedJoint_computeJointTorque";
+  case 580: return "delete_MovableJointImpl1";
+  case 581: return "MovableJointImpl1_getNrOfPosCoords";
+  case 582: return "MovableJointImpl1_getNrOfDOFs";
+  case 583: return "delete_MovableJointImpl2";
+  case 584: return "MovableJointImpl2_getNrOfPosCoords";
+  case 585: return "MovableJointImpl2_getNrOfDOFs";
+  case 586: return "delete_MovableJointImpl3";
+  case 587: return "MovableJointImpl3_getNrOfPosCoords";
+  case 588: return "MovableJointImpl3_getNrOfDOFs";
+  case 589: return "delete_MovableJointImpl4";
+  case 590: return "MovableJointImpl4_getNrOfPosCoords";
+  case 591: return "MovableJointImpl4_getNrOfDOFs";
+  case 592: return "delete_MovableJointImpl5";
+  case 593: return "MovableJointImpl5_getNrOfPosCoords";
+  case 594: return "MovableJointImpl5_getNrOfDOFs";
+  case 595: return "delete_MovableJointImpl6";
+  case 596: return "MovableJointImpl6_getNrOfPosCoords";
+  case 597: return "MovableJointImpl6_getNrOfDOFs";
+  case 598: return "new_RevoluteJoint";
+  case 599: return "delete_RevoluteJoint";
+  case 600: return "RevoluteJoint_clone";
+  case 601: return "RevoluteJoint_setAttachedLinks";
+  case 602: return "RevoluteJoint_setRestTransform";
+  case 603: return "RevoluteJoint_setAxis";
+  case 604: return "RevoluteJoint_getFirstAttachedLink";
+  case 605: return "RevoluteJoint_getSecondAttachedLink";
+  case 606: return "RevoluteJoint_getAxis";
+  case 607: return "RevoluteJoint_getTransform";
+  case 608: return "RevoluteJoint_computeLinkPosVelAcc";
+  case 609: return "RevoluteJoint_computeLinkVelAcc";
+  case 610: return "RevoluteJoint_computeJointTorque";
+  case 611: return "new_Traversal";
+  case 612: return "delete_Traversal";
+  case 613: return "Traversal_getNrOfVisitedLinks";
+  case 614: return "Traversal_getLink";
+  case 615: return "Traversal_getParentLink";
+  case 616: return "Traversal_getParentJoint";
+  case 617: return "Traversal_reset";
+  case 618: return "Traversal_setTraversalElement";
+  case 619: return "Neighbor_neighborLink_get";
+  case 620: return "Neighbor_neighborLink_set";
+  case 621: return "Neighbor_neighborJoint_get";
+  case 622: return "Neighbor_neighborJoint_set";
+  case 623: return "new_Neighbor";
+  case 624: return "delete_Neighbor";
+  case 625: return "new_Model";
+  case 626: return "delete_Model";
+  case 627: return "Model_getNrOfLinks";
+  case 628: return "Model_getLinkName";
+  case 629: return "Model_getLinkIndex";
+  case 630: return "Model_addLink";
+  case 631: return "Model_getNrOfJoints";
+  case 632: return "Model_getJointName";
+  case 633: return "Model_getJointIndex";
+  case 634: return "Model_addJoint";
+  case 635: return "Model_getNrOfNeighbors";
+  case 636: return "Model_getNeighbor";
+  case 637: return "Model_setDefaultBaseLink";
+  case 638: return "Model_getDefaultBaseLink";
+  case 639: return "Model_computeFullTreeTraversal";
+  case 640: return "_wrap_modelFromURDF";
+  case 641: return "_wrap_modelFromURDFString";
+  case 642: return "NR_OF_SENSOR_TYPES_get";
+  case 643: return "delete_Sensor";
+  case 644: return "Sensor_getName";
+  case 645: return "Sensor_getSensorType";
+  case 646: return "Sensor_getParent";
+  case 647: return "Sensor_getParentIndex";
+  case 648: return "Sensor_isValid";
+  case 649: return "Sensor_clone";
+  case 650: return "new_SensorsList";
+  case 651: return "delete_SensorsList";
+  case 652: return "SensorsList_addSensor";
+  case 653: return "SensorsList_getNrOfSensors";
+  case 654: return "SensorsList_getSensorIndex";
+  case 655: return "SensorsList_getSensor";
+  case 656: return "SensorsList_getSixAxisForceTorqueSensor";
+  case 657: return "new_SensorsMeasurements";
+  case 658: return "delete_SensorsMeasurements";
+  case 659: return "SensorsMeasurements_setNrOfSensors";
+  case 660: return "SensorsMeasurements_getNrOfSensors";
+  case 661: return "SensorsMeasurements_setMeasurement";
+  case 662: return "SensorsMeasurements_getMeasurement";
+  case 663: return "new_SixAxisForceTorqueSensor";
+  case 664: return "delete_SixAxisForceTorqueSensor";
+  case 665: return "SixAxisForceTorqueSensor_setName";
+  case 666: return "SixAxisForceTorqueSensor_setFirstLinkSensorTransform";
+  case 667: return "SixAxisForceTorqueSensor_setSecondLinkSensorTransform";
+  case 668: return "SixAxisForceTorqueSensor_getFirstLinkIndex";
+  case 669: return "SixAxisForceTorqueSensor_getSecondLinkIndex";
+  case 670: return "SixAxisForceTorqueSensor_setFirstLinkName";
+  case 671: return "SixAxisForceTorqueSensor_setSecondLinkName";
+  case 672: return "SixAxisForceTorqueSensor_getFirstLinkName";
+  case 673: return "SixAxisForceTorqueSensor_getSecondLinkName";
+  case 674: return "SixAxisForceTorqueSensor_setParent";
+  case 675: return "SixAxisForceTorqueSensor_setParentIndex";
+  case 676: return "SixAxisForceTorqueSensor_setAppliedWrenchLink";
+  case 677: return "SixAxisForceTorqueSensor_getName";
+  case 678: return "SixAxisForceTorqueSensor_getSensorType";
+  case 679: return "SixAxisForceTorqueSensor_getParent";
+  case 680: return "SixAxisForceTorqueSensor_getParentIndex";
+  case 681: return "SixAxisForceTorqueSensor_isValid";
+  case 682: return "SixAxisForceTorqueSensor_clone";
+  case 683: return "SixAxisForceTorqueSensor_getAppliedWrenchLink";
+  case 684: return "SixAxisForceTorqueSensor_isLinkAttachedToSensor";
+  case 685: return "SixAxisForceTorqueSensor_getLinkSensorTransform";
+  case 686: return "SixAxisForceTorqueSensor_getWrenchAppliedOnLink";
+  case 687: return "_wrap_sensorsListFromURDF";
+  case 688: return "_wrap_sensorsListFromURDFString";
+  case 689: return "DynamicsRegressorParameter_category_get";
+  case 690: return "DynamicsRegressorParameter_category_set";
+  case 691: return "DynamicsRegressorParameter_elemIndex_get";
+  case 692: return "DynamicsRegressorParameter_elemIndex_set";
+  case 693: return "DynamicsRegressorParameter_type_get";
+  case 694: return "DynamicsRegressorParameter_type_set";
+  case 695: return "DynamicsRegressorParameter_lt";
+  case 696: return "DynamicsRegressorParameter_isequal";
+  case 697: return "DynamicsRegressorParameter_ne";
+  case 698: return "new_DynamicsRegressorParameter";
+  case 699: return "delete_DynamicsRegressorParameter";
+  case 700: return "DynamicsRegressorParametersList_parameters_get";
+  case 701: return "DynamicsRegressorParametersList_parameters_set";
+  case 702: return "DynamicsRegressorParametersList_getDescriptionOfParameter";
+  case 703: return "DynamicsRegressorParametersList_addParam";
+  case 704: return "DynamicsRegressorParametersList_addList";
+  case 705: return "DynamicsRegressorParametersList_findParam";
+  case 706: return "DynamicsRegressorParametersList_getNrOfParameters";
+  case 707: return "new_DynamicsRegressorParametersList";
+  case 708: return "delete_DynamicsRegressorParametersList";
+  case 709: return "new_DynamicsRegressorGenerator";
+  case 710: return "delete_DynamicsRegressorGenerator";
+  case 711: return "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile";
+  case 712: return "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString";
+  case 713: return "DynamicsRegressorGenerator_loadRegressorStructureFromFile";
+  case 714: return "DynamicsRegressorGenerator_loadRegressorStructureFromString";
+  case 715: return "DynamicsRegressorGenerator_isValid";
+  case 716: return "DynamicsRegressorGenerator_getNrOfParameters";
+  case 717: return "DynamicsRegressorGenerator_getNrOfOutputs";
+  case 718: return "DynamicsRegressorGenerator_getNrOfDegreesOfFreedom";
+  case 719: return "DynamicsRegressorGenerator_getDescriptionOfParameter";
+  case 720: return "DynamicsRegressorGenerator_getDescriptionOfParameters";
+  case 721: return "DynamicsRegressorGenerator_getDescriptionOfOutput";
+  case 722: return "DynamicsRegressorGenerator_getDescriptionOfOutputs";
+  case 723: return "DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom";
+  case 724: return "DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom";
+  case 725: return "DynamicsRegressorGenerator_getBaseLinkName";
+  case 726: return "DynamicsRegressorGenerator_getSensorsModel";
+  case 727: return "DynamicsRegressorGenerator_setRobotState";
+  case 728: return "DynamicsRegressorGenerator_getSensorsMeasurements";
+  case 729: return "DynamicsRegressorGenerator_computeRegressor";
+  case 730: return "DynamicsRegressorGenerator_getModelParameters";
+  case 731: return "DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace";
+  case 732: return "DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace";
+  case 733: return "new_DynamicsComputations";
+  case 734: return "delete_DynamicsComputations";
+  case 735: return "DynamicsComputations_loadRobotModelFromFile";
+  case 736: return "DynamicsComputations_loadRobotModelFromString";
+  case 737: return "DynamicsComputations_isValid";
+  case 738: return "DynamicsComputations_getNrOfDegreesOfFreedom";
+  case 739: return "DynamicsComputations_getDescriptionOfDegreeOfFreedom";
+  case 740: return "DynamicsComputations_getDescriptionOfDegreesOfFreedom";
+  case 741: return "DynamicsComputations_getNrOfLinks";
+  case 742: return "DynamicsComputations_getNrOfFrames";
+  case 743: return "DynamicsComputations_getFloatingBase";
+  case 744: return "DynamicsComputations_setFloatingBase";
+  case 745: return "DynamicsComputations_setRobotState";
+  case 746: return "DynamicsComputations_getFrameIndex";
+  case 747: return "DynamicsComputations_getWorldTransform";
+  case 748: return "DynamicsComputations_getRelativeTransform";
+  case 749: return "DynamicsComputations_getFrameTwist";
+  case 750: return "DynamicsComputations_getFrameProperSpatialAcceleration";
+  case 751: return "DynamicsComputations_getLinkIndex";
+  case 752: return "DynamicsComputations_getLinkInertia";
   default: return 0;
   }
 }
@@ -37604,7 +36544,7 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   if (--argc < 0 || !mxIsDouble(*argv) || mxGetNumberOfElements(*argv)!=1)
     mexErrMsgTxt("This mex file should only be called from inside the .m files generated by SWIG. First input should be the function ID .");
   int fcn_id = (int)mxGetScalar(*argv++);
-  int id_exists=1, flag;
+  int id_exists=1, flag=0;
   switch (fcn_id) {
   case 0: flag=swigConstant(resc,resv,argc,(mxArray**)(argv)); break;
   case 1: flag=swigFunctionName(resc,resv,argc,(mxArray**)(argv)); break;
@@ -37794,615 +36734,571 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 185: flag=_wrap_Position_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
   case 186: flag=_wrap_Position_toString(resc,resv,argc,(mxArray**)(argv)); break;
   case 187: flag=_wrap_Position_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 188: flag=_wrap_new_MotionForce_traits__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 189: flag=_wrap_delete_MotionForce_traits__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 190: flag=_wrap_new_MotionForce_traits__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 191: flag=_wrap_delete_MotionForce_traits__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 192: flag=_wrap_new_MotionForce_traits__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 193: flag=_wrap_delete_MotionForce_traits__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 194: flag=_wrap_new_MotionForce_traits__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 195: flag=_wrap_delete_MotionForce_traits__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 196: flag=_wrap_new_MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 197: flag=_wrap_delete_MotionDerivativeOf_AngularMotionVector3_LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 198: flag=_wrap_new_MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 199: flag=_wrap_delete_MotionDerivativeOf_AngularMotionVector3_AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 200: flag=_wrap_new_MotionDerivativeOf_AngularMotionVector3_LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 201: flag=_wrap_delete_MotionDerivativeOf_AngularMotionVector3_LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 202: flag=_wrap_new_MotionDerivativeOf_AngularMotionVector3_AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 203: flag=_wrap_delete_MotionDerivativeOf_AngularMotionVector3_AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 204: flag=_wrap_new_MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 205: flag=_wrap_delete_MotionDerivativeOf_LinearMotionVector3_LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 206: flag=_wrap_new_MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 207: flag=_wrap_delete_MotionDerivativeOf_LinearMotionVector3_AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 208: flag=_wrap_new_MotionDerivativeOf_LinearMotionVector3_LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 209: flag=_wrap_delete_MotionDerivativeOf_LinearMotionVector3_LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 210: flag=_wrap_new_MotionDerivativeOf_LinearMotionVector3_AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 211: flag=_wrap_delete_MotionDerivativeOf_LinearMotionVector3_AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 212: flag=_wrap_new_ConvertSem2motionForceTraits__LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 213: flag=_wrap_delete_ConvertSem2motionForceTraits__LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 214: flag=_wrap_new_ConvertSem2motionForceTraits__AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 215: flag=_wrap_delete_ConvertSem2motionForceTraits__AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 216: flag=_wrap_new_ConvertSem2motionForceTraits__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 217: flag=_wrap_delete_ConvertSem2motionForceTraits__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 218: flag=_wrap_new_ConvertSem2motionForceTraits__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 219: flag=_wrap_delete_ConvertSem2motionForceTraits__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 220: flag=_wrap_new_DualMotionForceSemanticsT__LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 221: flag=_wrap_delete_DualMotionForceSemanticsT__LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 222: flag=_wrap_new_DualMotionForceSemanticsT__AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 223: flag=_wrap_delete_DualMotionForceSemanticsT__AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 224: flag=_wrap_new_DualMotionForceSemanticsT__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 225: flag=_wrap_delete_DualMotionForceSemanticsT__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 226: flag=_wrap_new_DualMotionForceSemanticsT__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 227: flag=_wrap_delete_DualMotionForceSemanticsT__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 228: flag=_wrap_new_SpatialMotionForceVectorT_traits__SpatialMotionVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 229: flag=_wrap_delete_SpatialMotionForceVectorT_traits__SpatialMotionVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 230: flag=_wrap_new_SpatialMotionForceVectorT_traits__SpatialForceVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 231: flag=_wrap_delete_SpatialMotionForceVectorT_traits__SpatialForceVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 232: flag=_wrap_new_GeomVector3Semantics__LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 233: flag=_wrap_delete_GeomVector3Semantics__LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 234: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 235: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 236: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 237: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_isUnknown(resc,resv,argc,(mxArray**)(argv)); break;
-  case 238: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 239: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 240: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 241: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 242: flag=_wrap_new_GeomVector3Semantics__AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 243: flag=_wrap_delete_GeomVector3Semantics__AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 244: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 245: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 246: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 247: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_isUnknown(resc,resv,argc,(mxArray**)(argv)); break;
-  case 248: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 249: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 250: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 251: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 252: flag=_wrap_new_GeomVector3Semantics__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 253: flag=_wrap_delete_GeomVector3Semantics__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 254: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 255: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 256: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 257: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_isUnknown(resc,resv,argc,(mxArray**)(argv)); break;
-  case 258: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 259: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 260: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 261: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 262: flag=_wrap_new_GeomVector3Semantics__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 263: flag=_wrap_delete_GeomVector3Semantics__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 264: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 265: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 266: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 267: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_isUnknown(resc,resv,argc,(mxArray**)(argv)); break;
-  case 268: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 269: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 270: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 271: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 272: flag=_wrap_GeomVector3__LinearMotionVector3_semantics_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 273: flag=_wrap_GeomVector3__LinearMotionVector3_semantics_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 274: flag=_wrap_new_GeomVector3__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 275: flag=_wrap_delete_GeomVector3__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 276: flag=_wrap_GeomVector3__LinearMotionVector3_setSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 277: flag=_wrap_GeomVector3__LinearMotionVector3_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 278: flag=_wrap_GeomVector3__LinearMotionVector3_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 279: flag=_wrap_GeomVector3__LinearMotionVector3_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 280: flag=_wrap_GeomVector3__LinearMotionVector3_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 281: flag=_wrap_GeomVector3__LinearMotionVector3_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 282: flag=_wrap_GeomVector3__LinearMotionVector3_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 283: flag=_wrap_GeomVector3__LinearMotionVector3_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 284: flag=_wrap_GeomVector3__AngularMotionVector3_semantics_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 285: flag=_wrap_GeomVector3__AngularMotionVector3_semantics_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 286: flag=_wrap_new_GeomVector3__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 287: flag=_wrap_delete_GeomVector3__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 288: flag=_wrap_GeomVector3__AngularMotionVector3_setSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 289: flag=_wrap_GeomVector3__AngularMotionVector3_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 290: flag=_wrap_GeomVector3__AngularMotionVector3_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 291: flag=_wrap_GeomVector3__AngularMotionVector3_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 292: flag=_wrap_GeomVector3__AngularMotionVector3_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 293: flag=_wrap_GeomVector3__AngularMotionVector3_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 294: flag=_wrap_GeomVector3__AngularMotionVector3_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 295: flag=_wrap_GeomVector3__AngularMotionVector3_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 296: flag=_wrap_GeomVector3__LinearForceVector3_semantics_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 297: flag=_wrap_GeomVector3__LinearForceVector3_semantics_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 298: flag=_wrap_new_GeomVector3__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 299: flag=_wrap_delete_GeomVector3__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 300: flag=_wrap_GeomVector3__LinearForceVector3_setSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 301: flag=_wrap_GeomVector3__LinearForceVector3_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 302: flag=_wrap_GeomVector3__LinearForceVector3_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 303: flag=_wrap_GeomVector3__LinearForceVector3_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 304: flag=_wrap_GeomVector3__LinearForceVector3_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 305: flag=_wrap_GeomVector3__LinearForceVector3_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 306: flag=_wrap_GeomVector3__LinearForceVector3_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 307: flag=_wrap_GeomVector3__LinearForceVector3_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 308: flag=_wrap_GeomVector3__AngularForceVector3_semantics_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 309: flag=_wrap_GeomVector3__AngularForceVector3_semantics_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 310: flag=_wrap_new_GeomVector3__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 311: flag=_wrap_delete_GeomVector3__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 312: flag=_wrap_GeomVector3__AngularForceVector3_setSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 313: flag=_wrap_GeomVector3__AngularForceVector3_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 314: flag=_wrap_GeomVector3__AngularForceVector3_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 315: flag=_wrap_GeomVector3__AngularForceVector3_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 316: flag=_wrap_GeomVector3__AngularForceVector3_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 317: flag=_wrap_GeomVector3__AngularForceVector3_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 318: flag=_wrap_GeomVector3__AngularForceVector3_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 319: flag=_wrap_GeomVector3__AngularForceVector3_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 320: flag=_wrap_new_ForceVector3Semantics__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 321: flag=_wrap_delete_ForceVector3Semantics__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 322: flag=_wrap_ForceVector3Semantics__LinearForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 323: flag=_wrap_ForceVector3Semantics__LinearForceVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 324: flag=_wrap_new_ForceVector3Semantics__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 325: flag=_wrap_delete_ForceVector3Semantics__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 326: flag=_wrap_ForceVector3Semantics__AngularForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 327: flag=_wrap_ForceVector3Semantics__AngularForceVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 328: flag=_wrap_new_MotionVector3__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 329: flag=_wrap_delete_MotionVector3__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 330: flag=_wrap_MotionVector3__LinearMotionVector3_cross(resc,resv,argc,(mxArray**)(argv)); break;
-  case 331: flag=_wrap_new_MotionVector3__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 332: flag=_wrap_delete_MotionVector3__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 333: flag=_wrap_MotionVector3__AngularMotionVector3_cross(resc,resv,argc,(mxArray**)(argv)); break;
-  case 334: flag=_wrap_new_ForceVector3__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 335: flag=_wrap_delete_ForceVector3__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 336: flag=_wrap_new_ForceVector3__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 337: flag=_wrap_delete_ForceVector3__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 338: flag=_wrap_new_LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 339: flag=_wrap_delete_LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 340: flag=_wrap_LinearMotionVector3Semantics_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 341: flag=_wrap_LinearMotionVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 342: flag=_wrap_new_LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 343: flag=_wrap_delete_LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 344: flag=_wrap_LinearMotionVector3_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 345: flag=_wrap_new_AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 346: flag=_wrap_delete_AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 347: flag=_wrap_new_AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 348: flag=_wrap_delete_AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 349: flag=_wrap_new_LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 350: flag=_wrap_delete_LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 351: flag=_wrap_new_LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 352: flag=_wrap_delete_LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 353: flag=_wrap_new_AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 354: flag=_wrap_delete_AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 355: flag=_wrap_AngularForceVector3Semantics_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 356: flag=_wrap_AngularForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 357: flag=_wrap_new_AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 358: flag=_wrap_delete_AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 359: flag=_wrap_AngularForceVector3_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 360: flag=_wrap_new_SpatialMotionVectorSemanticsBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 361: flag=_wrap_delete_SpatialMotionVectorSemanticsBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 362: flag=_wrap_SpatialMotionVectorSemanticsBase_check_linear2angularConsistency(resc,resv,argc,(mxArray**)(argv)); break;
-  case 363: flag=_wrap_SpatialMotionVectorSemanticsBase_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 364: flag=_wrap_SpatialMotionVectorSemanticsBase_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 365: flag=_wrap_new_SpatialForceVectorSemanticsBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 366: flag=_wrap_delete_SpatialForceVectorSemanticsBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 367: flag=_wrap_SpatialForceVectorSemanticsBase_check_linear2angularConsistency(resc,resv,argc,(mxArray**)(argv)); break;
-  case 368: flag=_wrap_SpatialForceVectorSemanticsBase_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 369: flag=_wrap_SpatialForceVectorSemanticsBase_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 370: flag=_wrap_new_SpatialMotionVectorBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 371: flag=_wrap_delete_SpatialMotionVectorBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 372: flag=_wrap_SpatialMotionVectorBase_getLinearVec3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 373: flag=_wrap_SpatialMotionVectorBase_getAngularVec3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 374: flag=_wrap_SpatialMotionVectorBase_setLinearVec3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 375: flag=_wrap_SpatialMotionVectorBase_setAngularVec3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 376: flag=_wrap_SpatialMotionVectorBase_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 377: flag=_wrap_SpatialMotionVectorBase_getVal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 378: flag=_wrap_SpatialMotionVectorBase_setVal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 379: flag=_wrap_SpatialMotionVectorBase_size(resc,resv,argc,(mxArray**)(argv)); break;
-  case 380: flag=_wrap_SpatialMotionVectorBase_zero(resc,resv,argc,(mxArray**)(argv)); break;
-  case 381: flag=_wrap_SpatialMotionVectorBase_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 382: flag=_wrap_SpatialMotionVectorBase_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 383: flag=_wrap_SpatialMotionVectorBase_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 384: flag=_wrap_SpatialMotionVectorBase_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 385: flag=_wrap_SpatialMotionVectorBase_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 386: flag=_wrap_SpatialMotionVectorBase_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 387: flag=_wrap_SpatialMotionVectorBase_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 388: flag=_wrap_SpatialMotionVectorBase_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 389: flag=_wrap_SpatialMotionVectorBase_Zero(resc,resv,argc,(mxArray**)(argv)); break;
-  case 390: flag=_wrap_SpatialMotionVectorBase_asVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 391: flag=_wrap_SpatialMotionVectorBase_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 392: flag=_wrap_SpatialMotionVectorBase_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 393: flag=_wrap_SpatialMotionVectorBase_toMatlab(resc,resv,argc,(mxArray**)(argv)); break;
-  case 394: flag=_wrap_SpatialMotionVectorBase_fromMatlab(resc,resv,argc,(mxArray**)(argv)); break;
-  case 395: flag=_wrap_new_SpatialForceVectorBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 396: flag=_wrap_delete_SpatialForceVectorBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 397: flag=_wrap_SpatialForceVectorBase_getLinearVec3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 398: flag=_wrap_SpatialForceVectorBase_getAngularVec3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 399: flag=_wrap_SpatialForceVectorBase_setLinearVec3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 400: flag=_wrap_SpatialForceVectorBase_setAngularVec3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 401: flag=_wrap_SpatialForceVectorBase_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 402: flag=_wrap_SpatialForceVectorBase_getVal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 403: flag=_wrap_SpatialForceVectorBase_setVal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 404: flag=_wrap_SpatialForceVectorBase_size(resc,resv,argc,(mxArray**)(argv)); break;
-  case 405: flag=_wrap_SpatialForceVectorBase_zero(resc,resv,argc,(mxArray**)(argv)); break;
-  case 406: flag=_wrap_SpatialForceVectorBase_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 407: flag=_wrap_SpatialForceVectorBase_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 408: flag=_wrap_SpatialForceVectorBase_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 409: flag=_wrap_SpatialForceVectorBase_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 410: flag=_wrap_SpatialForceVectorBase_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 411: flag=_wrap_SpatialForceVectorBase_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 412: flag=_wrap_SpatialForceVectorBase_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 413: flag=_wrap_SpatialForceVectorBase_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 414: flag=_wrap_SpatialForceVectorBase_Zero(resc,resv,argc,(mxArray**)(argv)); break;
-  case 415: flag=_wrap_SpatialForceVectorBase_asVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 416: flag=_wrap_SpatialForceVectorBase_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 417: flag=_wrap_SpatialForceVectorBase_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 418: flag=_wrap_SpatialForceVectorBase_toMatlab(resc,resv,argc,(mxArray**)(argv)); break;
-  case 419: flag=_wrap_SpatialForceVectorBase_fromMatlab(resc,resv,argc,(mxArray**)(argv)); break;
-  case 420: flag=_wrap_new_Dummy(resc,resv,argc,(mxArray**)(argv)); break;
-  case 421: flag=_wrap_delete_Dummy(resc,resv,argc,(mxArray**)(argv)); break;
-  case 422: flag=_wrap_new_SpatialMotionVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 423: flag=_wrap_delete_SpatialMotionVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 424: flag=_wrap_SpatialMotionVector_cross(resc,resv,argc,(mxArray**)(argv)); break;
-  case 425: flag=_wrap_new_SpatialForceVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 426: flag=_wrap_delete_SpatialForceVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 427: flag=_wrap_new_Twist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 428: flag=_wrap_delete_Twist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 429: flag=_wrap_Twist_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 430: flag=_wrap_Twist_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 431: flag=_wrap_Twist_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 432: flag=_wrap_Twist_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 433: flag=_wrap_new_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 434: flag=_wrap_delete_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 435: flag=_wrap_Wrench_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 436: flag=_wrap_Wrench_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 437: flag=_wrap_Wrench_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 438: flag=_wrap_new_SpatialMomentum(resc,resv,argc,(mxArray**)(argv)); break;
-  case 439: flag=_wrap_delete_SpatialMomentum(resc,resv,argc,(mxArray**)(argv)); break;
-  case 440: flag=_wrap_SpatialMomentum_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 441: flag=_wrap_SpatialMomentum_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 442: flag=_wrap_SpatialMomentum_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 443: flag=_wrap_new_SpatialAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 444: flag=_wrap_delete_SpatialAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 445: flag=_wrap_SpatialAcc_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 446: flag=_wrap_SpatialAcc_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 447: flag=_wrap_SpatialAcc_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 448: flag=_wrap_new_ClassicalAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 449: flag=_wrap_delete_ClassicalAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 450: flag=_wrap_ClassicalAcc_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 451: flag=_wrap_ClassicalAcc_Zero(resc,resv,argc,(mxArray**)(argv)); break;
-  case 452: flag=_wrap_new_Direction(resc,resv,argc,(mxArray**)(argv)); break;
-  case 453: flag=_wrap_delete_Direction(resc,resv,argc,(mxArray**)(argv)); break;
-  case 454: flag=_wrap_Direction_Normalize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 455: flag=_wrap_Direction_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 456: flag=_wrap_Direction_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 457: flag=_wrap_new_Axis(resc,resv,argc,(mxArray**)(argv)); break;
-  case 458: flag=_wrap_delete_Axis(resc,resv,argc,(mxArray**)(argv)); break;
-  case 459: flag=_wrap_Axis_getDirection(resc,resv,argc,(mxArray**)(argv)); break;
-  case 460: flag=_wrap_Axis_getOrigin(resc,resv,argc,(mxArray**)(argv)); break;
-  case 461: flag=_wrap_Axis_setDirection(resc,resv,argc,(mxArray**)(argv)); break;
-  case 462: flag=_wrap_Axis_setOrigin(resc,resv,argc,(mxArray**)(argv)); break;
-  case 463: flag=_wrap_Axis_getRotationTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 464: flag=_wrap_Axis_getRotationTwist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 465: flag=_wrap_Axis_getRotationSpatialAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 466: flag=_wrap_Axis_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 467: flag=_wrap_Axis_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 468: flag=_wrap_new_RotationalInertiaRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 469: flag=_wrap_delete_RotationalInertiaRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 470: flag=_wrap_new_SpatialInertiaRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 471: flag=_wrap_delete_SpatialInertiaRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 472: flag=_wrap_SpatialInertiaRaw_fromRotationalInertiaWrtCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 473: flag=_wrap_SpatialInertiaRaw_getMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 474: flag=_wrap_SpatialInertiaRaw_getCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 475: flag=_wrap_SpatialInertiaRaw_getRotationalInertiaWrtFrameOrigin(resc,resv,argc,(mxArray**)(argv)); break;
-  case 476: flag=_wrap_SpatialInertiaRaw_getRotationalInertiaWrtCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 477: flag=_wrap_SpatialInertiaRaw_combine(resc,resv,argc,(mxArray**)(argv)); break;
-  case 478: flag=_wrap_SpatialInertiaRaw_multiply(resc,resv,argc,(mxArray**)(argv)); break;
-  case 479: flag=_wrap_SpatialInertiaRaw_zero(resc,resv,argc,(mxArray**)(argv)); break;
-  case 480: flag=_wrap_new_SpatialInertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 481: flag=_wrap_delete_SpatialInertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 482: flag=_wrap_SpatialInertia_combine(resc,resv,argc,(mxArray**)(argv)); break;
-  case 483: flag=_wrap_SpatialInertia_asMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 484: flag=_wrap_SpatialInertia_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 485: flag=_wrap_SpatialInertia_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 486: flag=_wrap_new_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 487: flag=_wrap_delete_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 488: flag=_wrap_RotationRaw_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 489: flag=_wrap_RotationRaw_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 490: flag=_wrap_RotationRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 491: flag=_wrap_RotationRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 492: flag=_wrap_RotationRaw_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
-  case 493: flag=_wrap_RotationRaw_RotX(resc,resv,argc,(mxArray**)(argv)); break;
-  case 494: flag=_wrap_RotationRaw_RotY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 495: flag=_wrap_RotationRaw_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
-  case 496: flag=_wrap_RotationRaw_RPY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 497: flag=_wrap_RotationRaw_Identity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 498: flag=_wrap_RotationRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 499: flag=_wrap_RotationRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 500: flag=_wrap_new_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 501: flag=_wrap_delete_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 502: flag=_wrap_RotationSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 503: flag=_wrap_RotationSemantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 504: flag=_wrap_RotationSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 505: flag=_wrap_RotationSemantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 506: flag=_wrap_RotationSemantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 507: flag=_wrap_RotationSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 508: flag=_wrap_RotationSemantics_setBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 509: flag=_wrap_RotationSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 510: flag=_wrap_RotationSemantics_setRefBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 511: flag=_wrap_RotationSemantics_setCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 512: flag=_wrap_RotationSemantics_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 513: flag=_wrap_RotationSemantics_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 514: flag=_wrap_RotationSemantics_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
-  case 515: flag=_wrap_RotationSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 516: flag=_wrap_RotationSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 517: flag=_wrap_RotationSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 518: flag=_wrap_RotationSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 519: flag=_wrap_new_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 520: flag=_wrap_delete_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 521: flag=_wrap_Rotation_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 522: flag=_wrap_Rotation_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 523: flag=_wrap_Rotation_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 524: flag=_wrap_Rotation_changeCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 525: flag=_wrap_Rotation_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 526: flag=_wrap_Rotation_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 527: flag=_wrap_Rotation_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
-  case 528: flag=_wrap_Rotation_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 529: flag=_wrap_Rotation_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 530: flag=_wrap_Rotation_RotX(resc,resv,argc,(mxArray**)(argv)); break;
-  case 531: flag=_wrap_Rotation_RotY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 532: flag=_wrap_Rotation_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
-  case 533: flag=_wrap_Rotation_RotAxis(resc,resv,argc,(mxArray**)(argv)); break;
-  case 534: flag=_wrap_Rotation_RPY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 535: flag=_wrap_Rotation_Identity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 536: flag=_wrap_Rotation_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 537: flag=_wrap_Rotation_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 538: flag=_wrap_new_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 539: flag=_wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 540: flag=_wrap_TransformSemantics_getRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 541: flag=_wrap_TransformSemantics_getPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 542: flag=_wrap_TransformSemantics_setRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 543: flag=_wrap_TransformSemantics_setPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 544: flag=_wrap_TransformSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 545: flag=_wrap_TransformSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 546: flag=_wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 547: flag=_wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 548: flag=_wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 549: flag=_wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 550: flag=_wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 551: flag=_wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 552: flag=_wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 553: flag=_wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 554: flag=_wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 555: flag=_wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 556: flag=_wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 557: flag=_wrap_Transform_Identity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 558: flag=_wrap_Transform_asHomogeneousTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 559: flag=_wrap_Transform_asAdjointTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 560: flag=_wrap_Transform_asAdjointTransformWrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 561: flag=_wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 562: flag=_wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 563: flag=_wrap_LINK_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 564: flag=_wrap_LINK_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 565: flag=_wrap_LINK_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 566: flag=_wrap_LINK_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 567: flag=_wrap_JOINT_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 568: flag=_wrap_JOINT_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 569: flag=_wrap_JOINT_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 570: flag=_wrap_JOINT_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 571: flag=_wrap_LinkPos_pos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 572: flag=_wrap_delete_LinkPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 573: flag=_wrap_new_LinkPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 574: flag=_wrap_LinkVelAcc_vel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 575: flag=_wrap_LinkVelAcc_acc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 576: flag=_wrap_delete_LinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 577: flag=_wrap_new_LinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 578: flag=_wrap_LinkPosVelAcc_pos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 579: flag=_wrap_LinkPosVelAcc_vel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 580: flag=_wrap_LinkPosVelAcc_acc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 581: flag=_wrap_delete_LinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 582: flag=_wrap_new_LinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 583: flag=_wrap_delete_IJointPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 584: flag=_wrap_IJointPos_pos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 585: flag=_wrap_IJointPos_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 586: flag=_wrap_delete_IJointPosVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 587: flag=_wrap_IJointPosVel_vel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 588: flag=_wrap_IJointPosVel_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 589: flag=_wrap_delete_IJointPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 590: flag=_wrap_IJointPosVelAcc_acc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 591: flag=_wrap_delete_IJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
-  case 592: flag=_wrap_IJointTorque_torque(resc,resv,argc,(mxArray**)(argv)); break;
-  case 593: flag=_wrap_new_Link(resc,resv,argc,(mxArray**)(argv)); break;
-  case 594: flag=_wrap_delete_Link(resc,resv,argc,(mxArray**)(argv)); break;
-  case 595: flag=_wrap_Link_setInertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 596: flag=_wrap_Link_getInertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 597: flag=_wrap_Link_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 598: flag=_wrap_Link_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 599: flag=_wrap_delete_IJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 600: flag=_wrap_IJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 601: flag=_wrap_IJoint_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 602: flag=_wrap_IJoint_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 603: flag=_wrap_IJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 604: flag=_wrap_IJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 605: flag=_wrap_IJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 606: flag=_wrap_IJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 607: flag=_wrap_IJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 608: flag=_wrap_IJoint_computeLinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 609: flag=_wrap_IJoint_computeLinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 610: flag=_wrap_IJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
-  case 611: flag=_wrap_new_FixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 612: flag=_wrap_delete_FixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 613: flag=_wrap_FixedJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 614: flag=_wrap_FixedJoint_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 615: flag=_wrap_FixedJoint_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 616: flag=_wrap_FixedJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 617: flag=_wrap_FixedJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 618: flag=_wrap_FixedJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 619: flag=_wrap_FixedJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 620: flag=_wrap_FixedJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 621: flag=_wrap_FixedJoint_computeLinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 622: flag=_wrap_FixedJoint_computeLinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 623: flag=_wrap_FixedJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
-  case 624: flag=_wrap_delete_MovableJointImpl1(resc,resv,argc,(mxArray**)(argv)); break;
-  case 625: flag=_wrap_MovableJointImpl1_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 626: flag=_wrap_MovableJointImpl1_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 627: flag=_wrap_delete_MovableJointImpl2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 628: flag=_wrap_MovableJointImpl2_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 629: flag=_wrap_MovableJointImpl2_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 630: flag=_wrap_delete_MovableJointImpl3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 631: flag=_wrap_MovableJointImpl3_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 632: flag=_wrap_MovableJointImpl3_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 633: flag=_wrap_delete_MovableJointImpl4(resc,resv,argc,(mxArray**)(argv)); break;
-  case 634: flag=_wrap_MovableJointImpl4_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 635: flag=_wrap_MovableJointImpl4_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 636: flag=_wrap_delete_MovableJointImpl5(resc,resv,argc,(mxArray**)(argv)); break;
-  case 637: flag=_wrap_MovableJointImpl5_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 638: flag=_wrap_MovableJointImpl5_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 639: flag=_wrap_delete_MovableJointImpl6(resc,resv,argc,(mxArray**)(argv)); break;
-  case 640: flag=_wrap_MovableJointImpl6_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 641: flag=_wrap_MovableJointImpl6_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 642: flag=_wrap_new_RevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 643: flag=_wrap_delete_RevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 644: flag=_wrap_RevoluteJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 645: flag=_wrap_RevoluteJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 646: flag=_wrap_RevoluteJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 647: flag=_wrap_RevoluteJoint_setAxis(resc,resv,argc,(mxArray**)(argv)); break;
-  case 648: flag=_wrap_RevoluteJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 649: flag=_wrap_RevoluteJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 650: flag=_wrap_RevoluteJoint_getAxis(resc,resv,argc,(mxArray**)(argv)); break;
-  case 651: flag=_wrap_RevoluteJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 652: flag=_wrap_RevoluteJoint_computeLinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 653: flag=_wrap_RevoluteJoint_computeLinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 654: flag=_wrap_RevoluteJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
-  case 655: flag=_wrap_new_Traversal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 656: flag=_wrap_delete_Traversal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 657: flag=_wrap_Traversal_getNrOfVisitedLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 658: flag=_wrap_Traversal_getLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 659: flag=_wrap_Traversal_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 660: flag=_wrap_Traversal_getParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 661: flag=_wrap_Traversal_reset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 662: flag=_wrap_Traversal_setTraversalElement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 663: flag=_wrap_Neighbor_neighborLink_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 664: flag=_wrap_Neighbor_neighborLink_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 665: flag=_wrap_Neighbor_neighborJoint_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 666: flag=_wrap_Neighbor_neighborJoint_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 667: flag=_wrap_new_Neighbor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 668: flag=_wrap_delete_Neighbor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 669: flag=_wrap_new_Model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 670: flag=_wrap_delete_Model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 671: flag=_wrap_Model_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 672: flag=_wrap_Model_getLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 673: flag=_wrap_Model_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 674: flag=_wrap_Model_addLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 675: flag=_wrap_Model_getNrOfJoints(resc,resv,argc,(mxArray**)(argv)); break;
-  case 676: flag=_wrap_Model_getJointName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 677: flag=_wrap_Model_getJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 678: flag=_wrap_Model_addJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 679: flag=_wrap_Model_getNrOfNeighbors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 680: flag=_wrap_Model_getNeighbor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 681: flag=_wrap_Model_setDefaultBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 682: flag=_wrap_Model_getDefaultBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 683: flag=_wrap_Model_computeFullTreeTraversal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 684: flag=_wrap_modelFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
-  case 685: flag=_wrap_modelFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 686: flag=_wrap_NR_OF_SENSOR_TYPES_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 687: flag=_wrap_delete_Sensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 688: flag=_wrap_Sensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 689: flag=_wrap_Sensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 690: flag=_wrap_Sensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 691: flag=_wrap_Sensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 692: flag=_wrap_Sensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 693: flag=_wrap_Sensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 694: flag=_wrap_new_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 695: flag=_wrap_delete_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 696: flag=_wrap_SensorsList_addSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 697: flag=_wrap_SensorsList_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 698: flag=_wrap_SensorsList_getSensorIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 699: flag=_wrap_SensorsList_getSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 700: flag=_wrap_SensorsList_getSixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 701: flag=_wrap_new_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 702: flag=_wrap_delete_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 703: flag=_wrap_SensorsMeasurements_setNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 704: flag=_wrap_SensorsMeasurements_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 705: flag=_wrap_SensorsMeasurements_setMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 706: flag=_wrap_SensorsMeasurements_getMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 707: flag=_wrap_new_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 708: flag=_wrap_delete_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 709: flag=_wrap_SixAxisForceTorqueSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 710: flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 711: flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 712: flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 713: flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 714: flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 715: flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 716: flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 717: flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 718: flag=_wrap_SixAxisForceTorqueSensor_setParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 719: flag=_wrap_SixAxisForceTorqueSensor_setParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 720: flag=_wrap_SixAxisForceTorqueSensor_setAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 721: flag=_wrap_SixAxisForceTorqueSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 722: flag=_wrap_SixAxisForceTorqueSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 723: flag=_wrap_SixAxisForceTorqueSensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 724: flag=_wrap_SixAxisForceTorqueSensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 725: flag=_wrap_SixAxisForceTorqueSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 726: flag=_wrap_SixAxisForceTorqueSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 727: flag=_wrap_SixAxisForceTorqueSensor_getAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 728: flag=_wrap_SixAxisForceTorqueSensor_isLinkAttachedToSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 729: flag=_wrap_SixAxisForceTorqueSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 730: flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 731: flag=_wrap_sensorsListFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
-  case 732: flag=_wrap_sensorsListFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 733: flag=_wrap_DynamicsRegressorParameter_category_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 734: flag=_wrap_DynamicsRegressorParameter_category_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 735: flag=_wrap_DynamicsRegressorParameter_elemIndex_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 736: flag=_wrap_DynamicsRegressorParameter_elemIndex_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 737: flag=_wrap_DynamicsRegressorParameter_type_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 738: flag=_wrap_DynamicsRegressorParameter_type_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 739: flag=_wrap_DynamicsRegressorParameter_lt(resc,resv,argc,(mxArray**)(argv)); break;
-  case 740: flag=_wrap_DynamicsRegressorParameter_isequal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 741: flag=_wrap_DynamicsRegressorParameter_ne(resc,resv,argc,(mxArray**)(argv)); break;
-  case 742: flag=_wrap_new_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 743: flag=_wrap_delete_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 744: flag=_wrap_DynamicsRegressorParametersList_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 745: flag=_wrap_DynamicsRegressorParametersList_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 746: flag=_wrap_DynamicsRegressorParametersList_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 747: flag=_wrap_DynamicsRegressorParametersList_addParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 748: flag=_wrap_DynamicsRegressorParametersList_addList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 749: flag=_wrap_DynamicsRegressorParametersList_findParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 750: flag=_wrap_DynamicsRegressorParametersList_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 751: flag=_wrap_new_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 752: flag=_wrap_delete_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 753: flag=_wrap_new_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 754: flag=_wrap_delete_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 755: flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 756: flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 757: flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 758: flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 759: flag=_wrap_DynamicsRegressorGenerator_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 760: flag=_wrap_DynamicsRegressorGenerator_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 761: flag=_wrap_DynamicsRegressorGenerator_getNrOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 762: flag=_wrap_DynamicsRegressorGenerator_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 763: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 764: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 765: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutput(resc,resv,argc,(mxArray**)(argv)); break;
-  case 766: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 767: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 768: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 769: flag=_wrap_DynamicsRegressorGenerator_getBaseLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 770: flag=_wrap_DynamicsRegressorGenerator_getSensorsModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 771: flag=_wrap_DynamicsRegressorGenerator_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 772: flag=_wrap_DynamicsRegressorGenerator_getSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 773: flag=_wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 774: flag=_wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 775: flag=_wrap_DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 776: flag=_wrap_DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 777: flag=_wrap_new_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
-  case 778: flag=_wrap_delete_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
-  case 779: flag=_wrap_DynamicsComputations_loadRobotModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 780: flag=_wrap_DynamicsComputations_loadRobotModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 781: flag=_wrap_DynamicsComputations_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 782: flag=_wrap_DynamicsComputations_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 783: flag=_wrap_DynamicsComputations_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 784: flag=_wrap_DynamicsComputations_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 785: flag=_wrap_DynamicsComputations_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 786: flag=_wrap_DynamicsComputations_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
-  case 787: flag=_wrap_DynamicsComputations_getFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 788: flag=_wrap_DynamicsComputations_setFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 789: flag=_wrap_DynamicsComputations_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 790: flag=_wrap_DynamicsComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 791: flag=_wrap_DynamicsComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 792: flag=_wrap_DynamicsComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 793: flag=_wrap_DynamicsComputations_getFrameTwist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 794: flag=_wrap_DynamicsComputations_getFrameProperSpatialAcceleration(resc,resv,argc,(mxArray**)(argv)); break;
-  case 795: flag=_wrap_DynamicsComputations_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 796: flag=_wrap_DynamicsComputations_getLinkInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 188: flag=_wrap_new_GeomVector3Semantics__LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 189: flag=_wrap_delete_GeomVector3Semantics__LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 190: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 191: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 192: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 193: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_isUnknown(resc,resv,argc,(mxArray**)(argv)); break;
+  case 194: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 195: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 196: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 197: flag=_wrap_GeomVector3Semantics__LinearMotionVector3Semantics_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 198: flag=_wrap_new_GeomVector3Semantics__AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 199: flag=_wrap_delete_GeomVector3Semantics__AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 200: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 201: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 202: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 203: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_isUnknown(resc,resv,argc,(mxArray**)(argv)); break;
+  case 204: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 205: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 206: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 207: flag=_wrap_GeomVector3Semantics__AngularMotionVector3Semantics_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 208: flag=_wrap_new_GeomVector3Semantics__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 209: flag=_wrap_delete_GeomVector3Semantics__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 210: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 211: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 212: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 213: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_isUnknown(resc,resv,argc,(mxArray**)(argv)); break;
+  case 214: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 215: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 216: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 217: flag=_wrap_GeomVector3Semantics__LinearForceVector3Semantics_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 218: flag=_wrap_new_GeomVector3Semantics__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 219: flag=_wrap_delete_GeomVector3Semantics__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 220: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 221: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 222: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 223: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_isUnknown(resc,resv,argc,(mxArray**)(argv)); break;
+  case 224: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 225: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 226: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 227: flag=_wrap_GeomVector3Semantics__AngularForceVector3Semantics_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 228: flag=_wrap_GeomVector3__LinearMotionVector3_semantics_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 229: flag=_wrap_GeomVector3__LinearMotionVector3_semantics_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 230: flag=_wrap_new_GeomVector3__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 231: flag=_wrap_delete_GeomVector3__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 232: flag=_wrap_GeomVector3__LinearMotionVector3_setSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 233: flag=_wrap_GeomVector3__LinearMotionVector3_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 234: flag=_wrap_GeomVector3__LinearMotionVector3_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 235: flag=_wrap_GeomVector3__LinearMotionVector3_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 236: flag=_wrap_GeomVector3__LinearMotionVector3_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 237: flag=_wrap_GeomVector3__LinearMotionVector3_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 238: flag=_wrap_GeomVector3__LinearMotionVector3_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 239: flag=_wrap_GeomVector3__LinearMotionVector3_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 240: flag=_wrap_GeomVector3__AngularMotionVector3_semantics_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 241: flag=_wrap_GeomVector3__AngularMotionVector3_semantics_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 242: flag=_wrap_new_GeomVector3__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 243: flag=_wrap_delete_GeomVector3__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 244: flag=_wrap_GeomVector3__AngularMotionVector3_setSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 245: flag=_wrap_GeomVector3__AngularMotionVector3_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 246: flag=_wrap_GeomVector3__AngularMotionVector3_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 247: flag=_wrap_GeomVector3__AngularMotionVector3_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 248: flag=_wrap_GeomVector3__AngularMotionVector3_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 249: flag=_wrap_GeomVector3__AngularMotionVector3_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 250: flag=_wrap_GeomVector3__AngularMotionVector3_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 251: flag=_wrap_GeomVector3__AngularMotionVector3_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 252: flag=_wrap_GeomVector3__LinearForceVector3_semantics_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 253: flag=_wrap_GeomVector3__LinearForceVector3_semantics_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 254: flag=_wrap_new_GeomVector3__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 255: flag=_wrap_delete_GeomVector3__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 256: flag=_wrap_GeomVector3__LinearForceVector3_setSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 257: flag=_wrap_GeomVector3__LinearForceVector3_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 258: flag=_wrap_GeomVector3__LinearForceVector3_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 259: flag=_wrap_GeomVector3__LinearForceVector3_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 260: flag=_wrap_GeomVector3__LinearForceVector3_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 261: flag=_wrap_GeomVector3__LinearForceVector3_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 262: flag=_wrap_GeomVector3__LinearForceVector3_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 263: flag=_wrap_GeomVector3__LinearForceVector3_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 264: flag=_wrap_GeomVector3__AngularForceVector3_semantics_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 265: flag=_wrap_GeomVector3__AngularForceVector3_semantics_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 266: flag=_wrap_new_GeomVector3__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 267: flag=_wrap_delete_GeomVector3__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 268: flag=_wrap_GeomVector3__AngularForceVector3_setSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 269: flag=_wrap_GeomVector3__AngularForceVector3_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 270: flag=_wrap_GeomVector3__AngularForceVector3_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 271: flag=_wrap_GeomVector3__AngularForceVector3_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 272: flag=_wrap_GeomVector3__AngularForceVector3_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 273: flag=_wrap_GeomVector3__AngularForceVector3_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 274: flag=_wrap_GeomVector3__AngularForceVector3_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 275: flag=_wrap_GeomVector3__AngularForceVector3_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 276: flag=_wrap_new_ForceVector3Semantics__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 277: flag=_wrap_delete_ForceVector3Semantics__LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 278: flag=_wrap_ForceVector3Semantics__LinearForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 279: flag=_wrap_ForceVector3Semantics__LinearForceVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 280: flag=_wrap_new_ForceVector3Semantics__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 281: flag=_wrap_delete_ForceVector3Semantics__AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 282: flag=_wrap_ForceVector3Semantics__AngularForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 283: flag=_wrap_ForceVector3Semantics__AngularForceVector3Semantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 284: flag=_wrap_new_MotionVector3__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 285: flag=_wrap_delete_MotionVector3__LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 286: flag=_wrap_MotionVector3__LinearMotionVector3_cross(resc,resv,argc,(mxArray**)(argv)); break;
+  case 287: flag=_wrap_new_MotionVector3__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 288: flag=_wrap_delete_MotionVector3__AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 289: flag=_wrap_MotionVector3__AngularMotionVector3_cross(resc,resv,argc,(mxArray**)(argv)); break;
+  case 290: flag=_wrap_new_ForceVector3__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 291: flag=_wrap_delete_ForceVector3__LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 292: flag=_wrap_new_ForceVector3__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 293: flag=_wrap_delete_ForceVector3__AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 294: flag=_wrap_new_LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 295: flag=_wrap_delete_LinearMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 296: flag=_wrap_LinearMotionVector3Semantics_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 297: flag=_wrap_LinearMotionVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 298: flag=_wrap_new_LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 299: flag=_wrap_delete_LinearMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 300: flag=_wrap_LinearMotionVector3_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 301: flag=_wrap_new_AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 302: flag=_wrap_delete_AngularMotionVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 303: flag=_wrap_new_AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 304: flag=_wrap_delete_AngularMotionVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 305: flag=_wrap_new_LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 306: flag=_wrap_delete_LinearForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 307: flag=_wrap_new_LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 308: flag=_wrap_delete_LinearForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 309: flag=_wrap_new_AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 310: flag=_wrap_delete_AngularForceVector3Semantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 311: flag=_wrap_AngularForceVector3Semantics_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 312: flag=_wrap_AngularForceVector3Semantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 313: flag=_wrap_new_AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 314: flag=_wrap_delete_AngularForceVector3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 315: flag=_wrap_AngularForceVector3_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 316: flag=_wrap_new_SpatialMotionVectorSemanticsBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 317: flag=_wrap_delete_SpatialMotionVectorSemanticsBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 318: flag=_wrap_SpatialMotionVectorSemanticsBase_check_linear2angularConsistency(resc,resv,argc,(mxArray**)(argv)); break;
+  case 319: flag=_wrap_SpatialMotionVectorSemanticsBase_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 320: flag=_wrap_SpatialMotionVectorSemanticsBase_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 321: flag=_wrap_new_SpatialForceVectorSemanticsBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 322: flag=_wrap_delete_SpatialForceVectorSemanticsBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 323: flag=_wrap_SpatialForceVectorSemanticsBase_check_linear2angularConsistency(resc,resv,argc,(mxArray**)(argv)); break;
+  case 324: flag=_wrap_SpatialForceVectorSemanticsBase_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 325: flag=_wrap_SpatialForceVectorSemanticsBase_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 326: flag=_wrap_new_SpatialMotionVectorBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 327: flag=_wrap_delete_SpatialMotionVectorBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 328: flag=_wrap_SpatialMotionVectorBase_getLinearVec3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 329: flag=_wrap_SpatialMotionVectorBase_getAngularVec3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 330: flag=_wrap_SpatialMotionVectorBase_setLinearVec3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 331: flag=_wrap_SpatialMotionVectorBase_setAngularVec3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 332: flag=_wrap_SpatialMotionVectorBase_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 333: flag=_wrap_SpatialMotionVectorBase_getVal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 334: flag=_wrap_SpatialMotionVectorBase_setVal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 335: flag=_wrap_SpatialMotionVectorBase_size(resc,resv,argc,(mxArray**)(argv)); break;
+  case 336: flag=_wrap_SpatialMotionVectorBase_zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 337: flag=_wrap_SpatialMotionVectorBase_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 338: flag=_wrap_SpatialMotionVectorBase_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 339: flag=_wrap_SpatialMotionVectorBase_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 340: flag=_wrap_SpatialMotionVectorBase_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 341: flag=_wrap_SpatialMotionVectorBase_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 342: flag=_wrap_SpatialMotionVectorBase_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 343: flag=_wrap_SpatialMotionVectorBase_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 344: flag=_wrap_SpatialMotionVectorBase_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 345: flag=_wrap_SpatialMotionVectorBase_Zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 346: flag=_wrap_SpatialMotionVectorBase_asVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 347: flag=_wrap_SpatialMotionVectorBase_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 348: flag=_wrap_SpatialMotionVectorBase_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 349: flag=_wrap_SpatialMotionVectorBase_toMatlab(resc,resv,argc,(mxArray**)(argv)); break;
+  case 350: flag=_wrap_SpatialMotionVectorBase_fromMatlab(resc,resv,argc,(mxArray**)(argv)); break;
+  case 351: flag=_wrap_new_SpatialForceVectorBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 352: flag=_wrap_delete_SpatialForceVectorBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 353: flag=_wrap_SpatialForceVectorBase_getLinearVec3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 354: flag=_wrap_SpatialForceVectorBase_getAngularVec3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 355: flag=_wrap_SpatialForceVectorBase_setLinearVec3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 356: flag=_wrap_SpatialForceVectorBase_setAngularVec3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 357: flag=_wrap_SpatialForceVectorBase_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 358: flag=_wrap_SpatialForceVectorBase_getVal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 359: flag=_wrap_SpatialForceVectorBase_setVal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 360: flag=_wrap_SpatialForceVectorBase_size(resc,resv,argc,(mxArray**)(argv)); break;
+  case 361: flag=_wrap_SpatialForceVectorBase_zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 362: flag=_wrap_SpatialForceVectorBase_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 363: flag=_wrap_SpatialForceVectorBase_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 364: flag=_wrap_SpatialForceVectorBase_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 365: flag=_wrap_SpatialForceVectorBase_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 366: flag=_wrap_SpatialForceVectorBase_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 367: flag=_wrap_SpatialForceVectorBase_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 368: flag=_wrap_SpatialForceVectorBase_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 369: flag=_wrap_SpatialForceVectorBase_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 370: flag=_wrap_SpatialForceVectorBase_Zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 371: flag=_wrap_SpatialForceVectorBase_asVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 372: flag=_wrap_SpatialForceVectorBase_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 373: flag=_wrap_SpatialForceVectorBase_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 374: flag=_wrap_SpatialForceVectorBase_toMatlab(resc,resv,argc,(mxArray**)(argv)); break;
+  case 375: flag=_wrap_SpatialForceVectorBase_fromMatlab(resc,resv,argc,(mxArray**)(argv)); break;
+  case 376: flag=_wrap_new_Dummy(resc,resv,argc,(mxArray**)(argv)); break;
+  case 377: flag=_wrap_delete_Dummy(resc,resv,argc,(mxArray**)(argv)); break;
+  case 378: flag=_wrap_new_SpatialMotionVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 379: flag=_wrap_delete_SpatialMotionVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 380: flag=_wrap_SpatialMotionVector_cross(resc,resv,argc,(mxArray**)(argv)); break;
+  case 381: flag=_wrap_new_SpatialForceVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 382: flag=_wrap_delete_SpatialForceVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 383: flag=_wrap_new_Twist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 384: flag=_wrap_delete_Twist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 385: flag=_wrap_Twist_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 386: flag=_wrap_Twist_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 387: flag=_wrap_Twist_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 388: flag=_wrap_Twist_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 389: flag=_wrap_new_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 390: flag=_wrap_delete_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 391: flag=_wrap_Wrench_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 392: flag=_wrap_Wrench_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 393: flag=_wrap_Wrench_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 394: flag=_wrap_new_SpatialMomentum(resc,resv,argc,(mxArray**)(argv)); break;
+  case 395: flag=_wrap_delete_SpatialMomentum(resc,resv,argc,(mxArray**)(argv)); break;
+  case 396: flag=_wrap_SpatialMomentum_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 397: flag=_wrap_SpatialMomentum_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 398: flag=_wrap_SpatialMomentum_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 399: flag=_wrap_new_SpatialAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 400: flag=_wrap_delete_SpatialAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 401: flag=_wrap_SpatialAcc_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 402: flag=_wrap_SpatialAcc_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 403: flag=_wrap_SpatialAcc_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 404: flag=_wrap_new_ClassicalAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 405: flag=_wrap_delete_ClassicalAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 406: flag=_wrap_ClassicalAcc_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 407: flag=_wrap_ClassicalAcc_Zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 408: flag=_wrap_new_Direction(resc,resv,argc,(mxArray**)(argv)); break;
+  case 409: flag=_wrap_delete_Direction(resc,resv,argc,(mxArray**)(argv)); break;
+  case 410: flag=_wrap_Direction_Normalize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 411: flag=_wrap_Direction_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 412: flag=_wrap_Direction_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 413: flag=_wrap_new_Axis(resc,resv,argc,(mxArray**)(argv)); break;
+  case 414: flag=_wrap_delete_Axis(resc,resv,argc,(mxArray**)(argv)); break;
+  case 415: flag=_wrap_Axis_getDirection(resc,resv,argc,(mxArray**)(argv)); break;
+  case 416: flag=_wrap_Axis_getOrigin(resc,resv,argc,(mxArray**)(argv)); break;
+  case 417: flag=_wrap_Axis_setDirection(resc,resv,argc,(mxArray**)(argv)); break;
+  case 418: flag=_wrap_Axis_setOrigin(resc,resv,argc,(mxArray**)(argv)); break;
+  case 419: flag=_wrap_Axis_getRotationTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 420: flag=_wrap_Axis_getRotationTwist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 421: flag=_wrap_Axis_getRotationSpatialAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 422: flag=_wrap_Axis_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 423: flag=_wrap_Axis_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 424: flag=_wrap_new_RotationalInertiaRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 425: flag=_wrap_delete_RotationalInertiaRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 426: flag=_wrap_new_SpatialInertiaRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 427: flag=_wrap_delete_SpatialInertiaRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 428: flag=_wrap_SpatialInertiaRaw_fromRotationalInertiaWrtCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 429: flag=_wrap_SpatialInertiaRaw_getMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 430: flag=_wrap_SpatialInertiaRaw_getCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 431: flag=_wrap_SpatialInertiaRaw_getRotationalInertiaWrtFrameOrigin(resc,resv,argc,(mxArray**)(argv)); break;
+  case 432: flag=_wrap_SpatialInertiaRaw_getRotationalInertiaWrtCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 433: flag=_wrap_SpatialInertiaRaw_combine(resc,resv,argc,(mxArray**)(argv)); break;
+  case 434: flag=_wrap_SpatialInertiaRaw_multiply(resc,resv,argc,(mxArray**)(argv)); break;
+  case 435: flag=_wrap_SpatialInertiaRaw_zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 436: flag=_wrap_new_SpatialInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 437: flag=_wrap_delete_SpatialInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 438: flag=_wrap_SpatialInertia_combine(resc,resv,argc,(mxArray**)(argv)); break;
+  case 439: flag=_wrap_SpatialInertia_asMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 440: flag=_wrap_SpatialInertia_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 441: flag=_wrap_SpatialInertia_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 442: flag=_wrap_new_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 443: flag=_wrap_delete_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 444: flag=_wrap_RotationRaw_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 445: flag=_wrap_RotationRaw_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 446: flag=_wrap_RotationRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 447: flag=_wrap_RotationRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 448: flag=_wrap_RotationRaw_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
+  case 449: flag=_wrap_RotationRaw_RotX(resc,resv,argc,(mxArray**)(argv)); break;
+  case 450: flag=_wrap_RotationRaw_RotY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 451: flag=_wrap_RotationRaw_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
+  case 452: flag=_wrap_RotationRaw_RPY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 453: flag=_wrap_RotationRaw_Identity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 454: flag=_wrap_RotationRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 455: flag=_wrap_RotationRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 456: flag=_wrap_new_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 457: flag=_wrap_delete_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 458: flag=_wrap_RotationSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 459: flag=_wrap_RotationSemantics_getBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 460: flag=_wrap_RotationSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 461: flag=_wrap_RotationSemantics_getRefBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 462: flag=_wrap_RotationSemantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 463: flag=_wrap_RotationSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 464: flag=_wrap_RotationSemantics_setBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 465: flag=_wrap_RotationSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 466: flag=_wrap_RotationSemantics_setRefBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 467: flag=_wrap_RotationSemantics_setCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 468: flag=_wrap_RotationSemantics_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 469: flag=_wrap_RotationSemantics_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 470: flag=_wrap_RotationSemantics_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
+  case 471: flag=_wrap_RotationSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 472: flag=_wrap_RotationSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 473: flag=_wrap_RotationSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 474: flag=_wrap_RotationSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 475: flag=_wrap_new_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 476: flag=_wrap_delete_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 477: flag=_wrap_Rotation_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 478: flag=_wrap_Rotation_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 479: flag=_wrap_Rotation_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 480: flag=_wrap_Rotation_changeCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 481: flag=_wrap_Rotation_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 482: flag=_wrap_Rotation_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 483: flag=_wrap_Rotation_changeCoordFrameOf(resc,resv,argc,(mxArray**)(argv)); break;
+  case 484: flag=_wrap_Rotation_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 485: flag=_wrap_Rotation_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 486: flag=_wrap_Rotation_RotX(resc,resv,argc,(mxArray**)(argv)); break;
+  case 487: flag=_wrap_Rotation_RotY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 488: flag=_wrap_Rotation_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
+  case 489: flag=_wrap_Rotation_RotAxis(resc,resv,argc,(mxArray**)(argv)); break;
+  case 490: flag=_wrap_Rotation_RPY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 491: flag=_wrap_Rotation_Identity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 492: flag=_wrap_Rotation_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 493: flag=_wrap_Rotation_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 494: flag=_wrap_new_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 495: flag=_wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 496: flag=_wrap_TransformSemantics_getRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 497: flag=_wrap_TransformSemantics_getPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 498: flag=_wrap_TransformSemantics_setRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 499: flag=_wrap_TransformSemantics_setPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 500: flag=_wrap_TransformSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 501: flag=_wrap_TransformSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 502: flag=_wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 503: flag=_wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 504: flag=_wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 505: flag=_wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 506: flag=_wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 507: flag=_wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 508: flag=_wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 509: flag=_wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 510: flag=_wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 511: flag=_wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 512: flag=_wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 513: flag=_wrap_Transform_Identity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 514: flag=_wrap_Transform_asHomogeneousTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 515: flag=_wrap_Transform_asAdjointTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 516: flag=_wrap_Transform_asAdjointTransformWrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 517: flag=_wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 518: flag=_wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 519: flag=_wrap_LINK_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 520: flag=_wrap_LINK_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 521: flag=_wrap_LINK_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 522: flag=_wrap_LINK_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 523: flag=_wrap_JOINT_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 524: flag=_wrap_JOINT_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 525: flag=_wrap_JOINT_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 526: flag=_wrap_JOINT_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 527: flag=_wrap_LinkPos_pos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 528: flag=_wrap_delete_LinkPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 529: flag=_wrap_new_LinkPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 530: flag=_wrap_LinkVelAcc_vel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 531: flag=_wrap_LinkVelAcc_acc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 532: flag=_wrap_delete_LinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 533: flag=_wrap_new_LinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 534: flag=_wrap_LinkPosVelAcc_pos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 535: flag=_wrap_LinkPosVelAcc_vel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 536: flag=_wrap_LinkPosVelAcc_acc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 537: flag=_wrap_delete_LinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 538: flag=_wrap_new_LinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 539: flag=_wrap_delete_IJointPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 540: flag=_wrap_IJointPos_pos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 541: flag=_wrap_IJointPos_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 542: flag=_wrap_delete_IJointPosVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 543: flag=_wrap_IJointPosVel_vel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 544: flag=_wrap_IJointPosVel_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 545: flag=_wrap_delete_IJointPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 546: flag=_wrap_IJointPosVelAcc_acc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 547: flag=_wrap_delete_IJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
+  case 548: flag=_wrap_IJointTorque_torque(resc,resv,argc,(mxArray**)(argv)); break;
+  case 549: flag=_wrap_new_Link(resc,resv,argc,(mxArray**)(argv)); break;
+  case 550: flag=_wrap_delete_Link(resc,resv,argc,(mxArray**)(argv)); break;
+  case 551: flag=_wrap_Link_setInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 552: flag=_wrap_Link_getInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 553: flag=_wrap_Link_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 554: flag=_wrap_Link_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 555: flag=_wrap_delete_IJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 556: flag=_wrap_IJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 557: flag=_wrap_IJoint_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 558: flag=_wrap_IJoint_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 559: flag=_wrap_IJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 560: flag=_wrap_IJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 561: flag=_wrap_IJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 562: flag=_wrap_IJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 563: flag=_wrap_IJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 564: flag=_wrap_IJoint_computeLinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 565: flag=_wrap_IJoint_computeLinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 566: flag=_wrap_IJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
+  case 567: flag=_wrap_new_FixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 568: flag=_wrap_delete_FixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 569: flag=_wrap_FixedJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 570: flag=_wrap_FixedJoint_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 571: flag=_wrap_FixedJoint_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 572: flag=_wrap_FixedJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 573: flag=_wrap_FixedJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 574: flag=_wrap_FixedJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 575: flag=_wrap_FixedJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 576: flag=_wrap_FixedJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 577: flag=_wrap_FixedJoint_computeLinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 578: flag=_wrap_FixedJoint_computeLinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 579: flag=_wrap_FixedJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
+  case 580: flag=_wrap_delete_MovableJointImpl1(resc,resv,argc,(mxArray**)(argv)); break;
+  case 581: flag=_wrap_MovableJointImpl1_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 582: flag=_wrap_MovableJointImpl1_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 583: flag=_wrap_delete_MovableJointImpl2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 584: flag=_wrap_MovableJointImpl2_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 585: flag=_wrap_MovableJointImpl2_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 586: flag=_wrap_delete_MovableJointImpl3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 587: flag=_wrap_MovableJointImpl3_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 588: flag=_wrap_MovableJointImpl3_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 589: flag=_wrap_delete_MovableJointImpl4(resc,resv,argc,(mxArray**)(argv)); break;
+  case 590: flag=_wrap_MovableJointImpl4_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 591: flag=_wrap_MovableJointImpl4_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 592: flag=_wrap_delete_MovableJointImpl5(resc,resv,argc,(mxArray**)(argv)); break;
+  case 593: flag=_wrap_MovableJointImpl5_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 594: flag=_wrap_MovableJointImpl5_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 595: flag=_wrap_delete_MovableJointImpl6(resc,resv,argc,(mxArray**)(argv)); break;
+  case 596: flag=_wrap_MovableJointImpl6_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 597: flag=_wrap_MovableJointImpl6_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 598: flag=_wrap_new_RevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 599: flag=_wrap_delete_RevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 600: flag=_wrap_RevoluteJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 601: flag=_wrap_RevoluteJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 602: flag=_wrap_RevoluteJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 603: flag=_wrap_RevoluteJoint_setAxis(resc,resv,argc,(mxArray**)(argv)); break;
+  case 604: flag=_wrap_RevoluteJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 605: flag=_wrap_RevoluteJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 606: flag=_wrap_RevoluteJoint_getAxis(resc,resv,argc,(mxArray**)(argv)); break;
+  case 607: flag=_wrap_RevoluteJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 608: flag=_wrap_RevoluteJoint_computeLinkPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 609: flag=_wrap_RevoluteJoint_computeLinkVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 610: flag=_wrap_RevoluteJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
+  case 611: flag=_wrap_new_Traversal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 612: flag=_wrap_delete_Traversal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 613: flag=_wrap_Traversal_getNrOfVisitedLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 614: flag=_wrap_Traversal_getLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 615: flag=_wrap_Traversal_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 616: flag=_wrap_Traversal_getParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 617: flag=_wrap_Traversal_reset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 618: flag=_wrap_Traversal_setTraversalElement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 619: flag=_wrap_Neighbor_neighborLink_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 620: flag=_wrap_Neighbor_neighborLink_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 621: flag=_wrap_Neighbor_neighborJoint_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 622: flag=_wrap_Neighbor_neighborJoint_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 623: flag=_wrap_new_Neighbor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 624: flag=_wrap_delete_Neighbor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 625: flag=_wrap_new_Model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 626: flag=_wrap_delete_Model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 627: flag=_wrap_Model_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 628: flag=_wrap_Model_getLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 629: flag=_wrap_Model_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 630: flag=_wrap_Model_addLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 631: flag=_wrap_Model_getNrOfJoints(resc,resv,argc,(mxArray**)(argv)); break;
+  case 632: flag=_wrap_Model_getJointName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 633: flag=_wrap_Model_getJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 634: flag=_wrap_Model_addJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 635: flag=_wrap_Model_getNrOfNeighbors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 636: flag=_wrap_Model_getNeighbor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 637: flag=_wrap_Model_setDefaultBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 638: flag=_wrap_Model_getDefaultBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 639: flag=_wrap_Model_computeFullTreeTraversal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 640: flag=_wrap_modelFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
+  case 641: flag=_wrap_modelFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 642: flag=_wrap_NR_OF_SENSOR_TYPES_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 643: flag=_wrap_delete_Sensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 644: flag=_wrap_Sensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 645: flag=_wrap_Sensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 646: flag=_wrap_Sensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 647: flag=_wrap_Sensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 648: flag=_wrap_Sensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 649: flag=_wrap_Sensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 650: flag=_wrap_new_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 651: flag=_wrap_delete_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 652: flag=_wrap_SensorsList_addSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 653: flag=_wrap_SensorsList_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 654: flag=_wrap_SensorsList_getSensorIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 655: flag=_wrap_SensorsList_getSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 656: flag=_wrap_SensorsList_getSixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 657: flag=_wrap_new_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 658: flag=_wrap_delete_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 659: flag=_wrap_SensorsMeasurements_setNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 660: flag=_wrap_SensorsMeasurements_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 661: flag=_wrap_SensorsMeasurements_setMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 662: flag=_wrap_SensorsMeasurements_getMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 663: flag=_wrap_new_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 664: flag=_wrap_delete_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 665: flag=_wrap_SixAxisForceTorqueSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 666: flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 667: flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 668: flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 669: flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 670: flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 671: flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 672: flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 673: flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 674: flag=_wrap_SixAxisForceTorqueSensor_setParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 675: flag=_wrap_SixAxisForceTorqueSensor_setParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 676: flag=_wrap_SixAxisForceTorqueSensor_setAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 677: flag=_wrap_SixAxisForceTorqueSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 678: flag=_wrap_SixAxisForceTorqueSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 679: flag=_wrap_SixAxisForceTorqueSensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 680: flag=_wrap_SixAxisForceTorqueSensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 681: flag=_wrap_SixAxisForceTorqueSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 682: flag=_wrap_SixAxisForceTorqueSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 683: flag=_wrap_SixAxisForceTorqueSensor_getAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 684: flag=_wrap_SixAxisForceTorqueSensor_isLinkAttachedToSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 685: flag=_wrap_SixAxisForceTorqueSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 686: flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 687: flag=_wrap_sensorsListFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
+  case 688: flag=_wrap_sensorsListFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 689: flag=_wrap_DynamicsRegressorParameter_category_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 690: flag=_wrap_DynamicsRegressorParameter_category_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 691: flag=_wrap_DynamicsRegressorParameter_elemIndex_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 692: flag=_wrap_DynamicsRegressorParameter_elemIndex_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 693: flag=_wrap_DynamicsRegressorParameter_type_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 694: flag=_wrap_DynamicsRegressorParameter_type_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 695: flag=_wrap_DynamicsRegressorParameter_lt(resc,resv,argc,(mxArray**)(argv)); break;
+  case 696: flag=_wrap_DynamicsRegressorParameter_isequal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 697: flag=_wrap_DynamicsRegressorParameter_ne(resc,resv,argc,(mxArray**)(argv)); break;
+  case 698: flag=_wrap_new_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 699: flag=_wrap_delete_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 700: flag=_wrap_DynamicsRegressorParametersList_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 701: flag=_wrap_DynamicsRegressorParametersList_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 702: flag=_wrap_DynamicsRegressorParametersList_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 703: flag=_wrap_DynamicsRegressorParametersList_addParam(resc,resv,argc,(mxArray**)(argv)); break;
+  case 704: flag=_wrap_DynamicsRegressorParametersList_addList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 705: flag=_wrap_DynamicsRegressorParametersList_findParam(resc,resv,argc,(mxArray**)(argv)); break;
+  case 706: flag=_wrap_DynamicsRegressorParametersList_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 707: flag=_wrap_new_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 708: flag=_wrap_delete_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 709: flag=_wrap_new_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 710: flag=_wrap_delete_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 711: flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 712: flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 713: flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 714: flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 715: flag=_wrap_DynamicsRegressorGenerator_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 716: flag=_wrap_DynamicsRegressorGenerator_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 717: flag=_wrap_DynamicsRegressorGenerator_getNrOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 718: flag=_wrap_DynamicsRegressorGenerator_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 719: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 720: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 721: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutput(resc,resv,argc,(mxArray**)(argv)); break;
+  case 722: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 723: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 724: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 725: flag=_wrap_DynamicsRegressorGenerator_getBaseLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 726: flag=_wrap_DynamicsRegressorGenerator_getSensorsModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 727: flag=_wrap_DynamicsRegressorGenerator_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 728: flag=_wrap_DynamicsRegressorGenerator_getSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 729: flag=_wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 730: flag=_wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 731: flag=_wrap_DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 732: flag=_wrap_DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 733: flag=_wrap_new_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
+  case 734: flag=_wrap_delete_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
+  case 735: flag=_wrap_DynamicsComputations_loadRobotModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 736: flag=_wrap_DynamicsComputations_loadRobotModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 737: flag=_wrap_DynamicsComputations_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 738: flag=_wrap_DynamicsComputations_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 739: flag=_wrap_DynamicsComputations_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 740: flag=_wrap_DynamicsComputations_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 741: flag=_wrap_DynamicsComputations_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 742: flag=_wrap_DynamicsComputations_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
+  case 743: flag=_wrap_DynamicsComputations_getFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 744: flag=_wrap_DynamicsComputations_setFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 745: flag=_wrap_DynamicsComputations_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 746: flag=_wrap_DynamicsComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 747: flag=_wrap_DynamicsComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 748: flag=_wrap_DynamicsComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 749: flag=_wrap_DynamicsComputations_getFrameTwist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 750: flag=_wrap_DynamicsComputations_getFrameProperSpatialAcceleration(resc,resv,argc,(mxArray**)(argv)); break;
+  case 751: flag=_wrap_DynamicsComputations_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 752: flag=_wrap_DynamicsComputations_getLinkInertia(resc,resv,argc,(mxArray**)(argv)); break;
   default: id_exists=0;
   }
   if (!id_exists) {

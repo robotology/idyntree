@@ -7,6 +7,9 @@
 // Ignore some methods to avoid warnings
 %include "./ignore.i"
 
+// macros for class templates handling
+%include "./macrosForTemplates.i"
+
 // Python
 #ifdef SWIGPYTHON
 %include "./python/python.i"
@@ -88,44 +91,6 @@
 
 %}
 
-/**
- * macro for 3D, Spatial vectors classes and traits classes instanciations
- */
-
-%define TEMPLATE_WRAP_MOTION_FORCE(class, wrapMotionForce, type1, postfix)
-#define add 1
-#define addTemplateType1 add ## type1
-#if addTemplateType1 != add
-// type1 is not empty, we use it as the first template instanciation parameter
-#define templateType1 iDynTree:: ## type1 ## ,
-#else
-#define templateType1
-#endif
-
-#define wrapMotionForce
-// SWIG does not support "if defined", neather boolean operators within "ifdef"
-#ifdef WRAP_MOTION_FORCE
-#define WRAP_MOTION
-#define WRAP_FORCE
-#endif
-
-#ifdef WRAP_MOTION
-%template(class ## _ ## type1 ## _LinearMotionVector3 ## postfix) iDynTree:: ## class ## <templateType1 iDynTree::LinearMotionVector3 ## postfix>;
-%template(class ## _ ## type1 ## _AngularMotionVector3 ## postfix) iDynTree:: ## class ## <templateType1 iDynTree::AngularMotionVector3 ## postfix>;
-#endif
-#ifdef WRAP_FORCE
-%template(class ## _ ## type1 ## _LinearForceVector3 ## postfix) iDynTree:: ## class ## <templateType1 iDynTree::LinearForceVector3 ## postfix>;
-%template(class ## _ ## type1 ## _AngularForceVector3 ## postfix) iDynTree:: ## class ## <templateType1 iDynTree::AngularForceVector3 ## postfix>;
-#endif
-
-#undef add
-#undef addTemplateType1
-#undef templateType1
-#undef WRAP_MOTION
-#undef WRAP_FORCE
-#undef WRAP_MOTION_FORCE
-%enddef
-
 
 /* Note : always include headers following the inheritance order */
 // Basic math classes
@@ -158,33 +123,33 @@
 
 %include "iDynTree/Core/PrivateMotionForceVertorAssociations.h"
 
-TEMPLATE_WRAP_MOTION_FORCE(MotionForce_traits, WRAP_MOTION_FORCE,,)
+TEMPLATE_WRAP_MOTION_FORCE(MotionForce_traits, WRAP_MOTION_FORCE, NO_NAME_FOR_WRAPPER,,)
 
-TEMPLATE_WRAP_MOTION_FORCE(MotionDerivativeOf, WRAP_MOTION_FORCE, AngularMotionVector3,)
-TEMPLATE_WRAP_MOTION_FORCE(MotionDerivativeOf, WRAP_MOTION_FORCE, LinearMotionVector3,)
+TEMPLATE_WRAP_MOTION_FORCE(MotionDerivativeOf, WRAP_MOTION_FORCE, NO_NAME_FOR_WRAPPER, AngularMotionVector3,)
+TEMPLATE_WRAP_MOTION_FORCE(MotionDerivativeOf, WRAP_MOTION_FORCE, NO_NAME_FOR_WRAPPER, LinearMotionVector3,)
 
-TEMPLATE_WRAP_MOTION_FORCE(ConvertSem2motionForceTraits, WRAP_MOTION_FORCE,,Semantics)
+TEMPLATE_WRAP_MOTION_FORCE(ConvertSem2motionForceTraits, WRAP_MOTION_FORCE, NO_NAME_FOR_WRAPPER,,Semantics)
 
-TEMPLATE_WRAP_MOTION_FORCE(DualMotionForceSemanticsT, WRAP_MOTION_FORCE,,Semantics)
+TEMPLATE_WRAP_MOTION_FORCE(DualMotionForceSemanticsT, WRAP_MOTION_FORCE, NO_NAME_FOR_WRAPPER,,Semantics)
 
-%template(SpatialMotionForceVectorT_traits__SpatialMotionVector) iDynTree::SpatialMotionForceVectorT_traits<iDynTree::SpatialMotionVector>;
-%template(SpatialMotionForceVectorT_traits__SpatialForceVector) iDynTree::SpatialMotionForceVectorT_traits<iDynTree::SpatialForceVector>;
+%template() iDynTree::SpatialMotionForceVectorT_traits<iDynTree::SpatialMotionVector>;
+%template() iDynTree::SpatialMotionForceVectorT_traits<iDynTree::SpatialForceVector>;
 
 
 %include "iDynTree/Core/GeomVector3.h"
 
-TEMPLATE_WRAP_MOTION_FORCE(GeomVector3Semantics, WRAP_MOTION_FORCE,,Semantics)
+TEMPLATE_WRAP_MOTION_FORCE(GeomVector3Semantics, WRAP_MOTION_FORCE, SET_NAME_FOR_WRAPPER,,Semantics)
 
-TEMPLATE_WRAP_MOTION_FORCE(GeomVector3, WRAP_MOTION_FORCE,,)
+TEMPLATE_WRAP_MOTION_FORCE(GeomVector3, WRAP_MOTION_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 %include "iDynTree/Core/MotionVector3.h"
 %include "iDynTree/Core/ForceVector3.h"
 
-TEMPLATE_WRAP_MOTION_FORCE(ForceVector3Semantics, WRAP_FORCE,,Semantics)
+TEMPLATE_WRAP_MOTION_FORCE(ForceVector3Semantics, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,Semantics)
 
-TEMPLATE_WRAP_MOTION_FORCE(MotionVector3, WRAP_MOTION,,)
+TEMPLATE_WRAP_MOTION_FORCE(MotionVector3, WRAP_MOTION, SET_NAME_FOR_WRAPPER,,)
 
-TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE,,)
+TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 %include "iDynTree/Core/LinearMotionVector3.h"
 %include "iDynTree/Core/AngularMotionVector3.h"
