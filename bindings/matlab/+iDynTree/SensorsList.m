@@ -3,32 +3,32 @@ classdef SensorsList < SwigRef
     function self = SensorsList(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(694, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(694, varargin{:}); % FIXME
+        %self.swigInd = iDynTreeMATLAB_wrap(650, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(650, varargin{:}); % FIXME
         self.swigInd = tmp.swigInd;
         tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(695, self);
+        iDynTreeMATLAB_wrap(651, self);
         self.swigInd=uint64(0);
       end
     end
     function varargout = addSensor(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(696, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(652, self, varargin{:});
     end
     function varargout = getNrOfSensors(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(697, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(653, self, varargin{:});
     end
     function varargout = getSensorIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(698, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(654, self, varargin{:});
     end
     function varargout = getSensor(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(699, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(655, self, varargin{:});
     end
     function varargout = getSixAxisForceTorqueSensor(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(700, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(656, self, varargin{:});
     end
   end
   methods(Static)

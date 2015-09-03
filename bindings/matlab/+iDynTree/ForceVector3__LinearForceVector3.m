@@ -4,15 +4,15 @@ classdef ForceVector3__LinearForceVector3 < iDynTree.GeomVector3__LinearForceVec
       self@iDynTree.GeomVector3__LinearForceVector3('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(334, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(334, varargin{:}); % FIXME
+        %self.swigInd = iDynTreeMATLAB_wrap(290, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(290, varargin{:}); % FIXME
         self.swigInd = tmp.swigInd;
         tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(335, self);
+        iDynTreeMATLAB_wrap(291, self);
         self.swigInd=uint64(0);
       end
     end

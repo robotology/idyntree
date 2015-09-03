@@ -4,25 +4,25 @@ classdef ForceVector3Semantics__AngularForceVector3Semantics < iDynTree.GeomVect
       self@iDynTree.GeomVector3Semantics__AngularForceVector3Semantics('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(324, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(324, varargin{:}); % FIXME
+        %self.swigInd = iDynTreeMATLAB_wrap(280, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(280, varargin{:}); % FIXME
         self.swigInd = tmp.swigInd;
         tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(325, self);
+        iDynTreeMATLAB_wrap(281, self);
         self.swigInd=uint64(0);
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(326, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(282, varargin{:});
     end
     function varargout = inverse(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(327, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(283, varargin{:});
     end
   end
 end

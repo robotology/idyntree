@@ -1,7 +1,7 @@
 function v = SENSOR_FT_OFFSET_TORQUE_X()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = iDynTreeMATLAB_wrap(0, 18);
+    vInitialized = iDynTreeMATLAB_wrap(0, 16);
   end
   v = vInitialized;
 end
