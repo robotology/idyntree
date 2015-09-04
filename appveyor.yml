@@ -33,7 +33,7 @@ build_script:
   - cd c:\projects\idyntree
   - md build
   - cd build
-  - cmake -G"Visual Studio 11" .. -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
+  - cmake -G"Visual Studio 11" .. -DEIGEN3_INCLUDE_DIR="C:/Program Files (x86)/Eigen/include/eigen3" -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" iDynTree.sln
   - cmake --build . --config Release
   - cmake --build . --target RUN_TESTS --config Release
