@@ -12,6 +12,8 @@
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivatePreProcessorUtils.h>
+
 
 #include <iostream>
 #include <sstream>
@@ -45,13 +47,13 @@ namespace iDynTree
     bool TransformSemantics::check_position2rotationConsistency(const PositionSemantics& position, const RotationSemantics& rotation)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(position.getCoordinateFrame(), rotation.getCoordinateFrame()),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "position and rotation expressed in a different coordinateFrames\n")
                 && reportErrorIf(!checkEqualOrUnknown(position.getPoint(), rotation.getOrientationFrame()),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "position point is different from the orientation frame origin\n")
                 && reportErrorIf(!checkEqualOrUnknown(position.getReferencePoint(), rotation.getReferenceOrientationFrame()),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "position Ref point is different from the Ref orientation frame origin\n"));
     }
 

@@ -8,6 +8,8 @@
 #include <iDynTree/Core/RotationSemantics.h>
 #include <iDynTree/Core/PositionSemantics.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivatePreProcessorUtils.h>
+
 #include <iostream>
 #include <sstream>
 
@@ -100,49 +102,49 @@ namespace iDynTree
     bool RotationSemantics::check_changeOrientFrame(const RotationSemantics& newOrientFrame)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(this->orientationFrame,newOrientFrame.refOrientationFrame),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "the orientationFrame of this object does not match the referenceOrientationFrame of newOrientFrame\n")
                 && reportErrorIf(!checkEqualOrUnknown(this->body,newOrientFrame.refBody),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "the orientationFrame of this object and the referenceOrientationFrame of newOrientFrame are not fixed to the same body\n")
                 && reportErrorIf(!checkEqualOrUnknown(newOrientFrame.refBody,newOrientFrame.refBody),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "the orientationFrame and the referenceOrientationFrame of newOrientFrame are not fixed to the same body\n"));
     }
 
     bool RotationSemantics::check_changeRefOrientFrame(const RotationSemantics& newRefOrientFrame)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(newRefOrientFrame.orientationFrame,this->refOrientationFrame),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "the refOrientationFrame of this object does not match the orientationFrame of newRefOrientFrame\n")
                 && reportErrorIf(!checkEqualOrUnknown(newRefOrientFrame.body,this->refBody),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "the orientationFrame and the referenceOrientationFrame of newRefOrientFrame are not fixed to the same body\n")
                 && reportErrorIf(!checkEqualOrUnknown(newRefOrientFrame.refBody,newRefOrientFrame.body),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "the orientationFrame and the referenceOrientationFrame of newRefOrientFrame are not fixed to the same body\n"));
     }
 
     bool RotationSemantics::check_changeCoordFrameOf(const PositionSemantics & op) const
     {
         return (   reportErrorIf(!checkEqualOrUnknown(this->orientationFrame,op.getCoordinateFrame()),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "transformation's orientationFrame is different from current Position's coordinateFrame\n")
                 && reportErrorIf(!checkEqualOrUnknown(this->body,op.getRefBody()),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "transformation's orientationFrame and the coordinateFrame of current Position are not fixed to the same body\n")
                 && reportErrorIf(!checkEqualOrUnknown(op.getBody(),op.getRefBody()),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "the transformation's body and reference body should be the same\n"));
     }
 
     bool RotationSemantics::check_compose(const RotationSemantics& op1, const RotationSemantics& op2)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(op1.orientationFrame,op2.refOrientationFrame),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "the orientationFrame of the first operand does not match the referenceOrientationFrame of the second operand\n")
                 && reportErrorIf(!checkEqualOrUnknown(op1.body,op2.refBody),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "the body of the first operand does not match the refBody of the second operand\n"));
     }
 

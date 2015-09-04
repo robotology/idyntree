@@ -8,7 +8,9 @@ get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DI
 
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS})
 
-idyntree_add_tool(par2urdf par2urdf.cpp)
+if(IDYNTREE_USES_ICUB_MAIN)
+    idyntree_add_tool(par2urdf par2urdf.cpp)
+endif()
 
 if(IDYNTREE_USES_ICUB_MAIN)
   find_package(YARP)

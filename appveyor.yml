@@ -1,0 +1,39 @@
+version: 1.0.{build}
+
+clone_folder: c:\projects\idyntree
+
+install:
+
+build:
+
+build_script:
+  # download and build tinyxml 
+  - cd c:\projects
+  - git clone https://github.com/robotology-dependencies/tinyxml
+  - cd tinyxml 
+  - md build
+  - cd build 
+  - cmake -G"Visual Studio 11" ..
+  - msbuild /m /p:Configuration=Release /p:Platform="Win32" tinyxml.sln
+  - cmake --build . --config Release
+  - cmake --build . --config Release --target INSTALL
+  # download and install eigen3 
+  - cd c:\projects 
+  - hg clone https://bitbucket.org/eigen/eigen
+  - cd eigen
+  - md build
+  - cd build 
+  - cmake -G"Visual Studio 11" ..
+  - msbuild /m /p:Configuration=Release /p:Platform="Win32" Eigen.sln
+  - cmake --build . --config Release
+  - cmake --build . --config Release --target INSTALL
+  # compile iDynTree
+  - cd c:\projects\idyntree
+  - md build
+  - cd build
+  - cmake -G"Visual Studio 11" .. -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
+  - msbuild /m /p:Configuration=Release /p:Platform="Win32" iDynTree.sln
+  - cmake --build . --config Release
+  - cmake --build . --target RUN_TESTS --config Release
+  - cmake --build . --config Release --target INSTALL 
+  

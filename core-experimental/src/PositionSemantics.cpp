@@ -8,6 +8,8 @@
 #include <iDynTree/Core/PositionSemantics.h>
 #include <iDynTree/Core/RotationSemantics.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivatePreProcessorUtils.h>
+
 #include <cstdio>
 #include <sstream>
 
@@ -100,16 +102,16 @@ namespace iDynTree
     bool PositionSemantics::check_changePoint(const PositionSemantics& newPoint)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(newPoint.coordinateFrame,this->coordinateFrame),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "newPoint expressed in a different coordinateFrame\n")
                 && reportErrorIf(!checkEqualOrUnknown(newPoint.refPoint,this->point),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "newPoint has a reference point different from the original Position point\n")
                 && reportErrorIf(!checkEqualOrUnknown(newPoint.body,newPoint.refBody),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "newPoint point and reference point are not fixed to the same body\n")
                 && reportErrorIf(!checkEqualOrUnknown(newPoint.refBody,this->body),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "newPoint reference point and original Position point are not fixed to the same body\n"));
     }
 
@@ -128,16 +130,16 @@ namespace iDynTree
     bool PositionSemantics::check_changeRefPoint(const PositionSemantics& newRefPoint)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(newRefPoint.coordinateFrame,this->coordinateFrame),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "newRefPoint expressed in a different coordinateFrames\n")
                 && reportErrorIf(!checkEqualOrUnknown(newRefPoint.point,this->refPoint),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "newRefPoint point is different from the original reference point\n")
                 && reportErrorIf(!checkEqualOrUnknown(newRefPoint.body,newRefPoint.refBody),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "newRefPoint point and reference point are not fixed to the same body\n")
                 && reportErrorIf(!checkEqualOrUnknown(newRefPoint.body,this->refBody),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "newRefPoint point and original Position reference point are not fixed to the same body\n"));
     }
     
@@ -155,16 +157,16 @@ namespace iDynTree
     bool PositionSemantics::check_compose(const PositionSemantics& op1, const PositionSemantics& op2)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "composing two positions expressed in different coordinateFrames\n")
                 && reportErrorIf(!checkEqualOrUnknown(op1.refPoint,op2.point) && (op1.point == op2.refPoint),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))\n")
                 && reportErrorIf(!checkEqualOrUnknown(op1.refPoint,op2.point),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "Position op1 reference point and Position op2 point don't match\n")
                 && reportErrorIf(!checkEqualOrUnknown(op1.refBody,op2.body),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "Position op1 reference body and Position op2 body don't match\n"));
     }
 

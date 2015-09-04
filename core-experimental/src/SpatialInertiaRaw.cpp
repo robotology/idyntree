@@ -111,7 +111,7 @@ RotationalInertiaRaw SpatialInertiaRaw::getRotationalInertiaWrtCenterOfMass() co
     return retComInertia;
 }
 
-SpatialInertiaRaw SpatialInertiaRaw::SpatialInertiaRaw::combine(const SpatialInertiaRaw& op1,
+SpatialInertiaRaw SpatialInertiaRaw::combine(const SpatialInertiaRaw& op1,
                                                                 const SpatialInertiaRaw& op2)
 {
     SpatialInertiaRaw ret;

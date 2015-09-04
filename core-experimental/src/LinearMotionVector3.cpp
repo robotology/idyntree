@@ -8,9 +8,14 @@
 #include <iDynTree/Core/LinearMotionVector3.h>
 #include <iDynTree/Core/AngularMotionVector3.h>
 #include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/PrivatePreProcessorUtils.h>
+
+#include <Eigen/Dense>
 
 namespace iDynTree
 {
+    typedef Eigen::Matrix<double,3,1> Vector3d;
+
     /**
      * LinearMotionVector3Semantics
      */
@@ -43,25 +48,25 @@ namespace iDynTree
         // check semantics
         bool semantics_status =
         (   reportErrorIf(!checkEqualOrUnknown(newPoint.getCoordinateFrame(),this->coordinateFrame),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "newPoint expressed in a different coordinateFrame\n")
          && reportErrorIf(!checkEqualOrUnknown(newPoint.getReferencePoint(),this->point),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "newPoint has a reference point different from the original Motion vector point\n")/*
          && reportErrorIf(!checkEqualOrUnknown(newPoint.getBody(),newPoint.getRefBody()),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "newPoint point and reference point are not fixed to the same body\n")
          && reportErrorIf(!checkEqualOrUnknown(newPoint.getRefBody(),this->body),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "newPoint reference point and original Motion vector point are not fixed to the same body\n")*/
          && reportErrorIf(!checkEqualOrUnknown(otherAngular.getCoordinateFrame(),this->coordinateFrame),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "otherAngular expressed in a different coordinateFrame\n")
          && reportErrorIf(!checkEqualOrUnknown(otherAngular.getBody(),this->body),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "The bodies defined for both linear and angular force vectors don't match\n")
          && reportErrorIf(!checkEqualOrUnknown(otherAngular.getRefBody(),this->refBody),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "The reference bodies defined for both linear and angular force vectors don't match\n"));
 
         // compute semantics
@@ -78,7 +83,7 @@ namespace iDynTree
         // check semantics
         bool semantics_status =
         (   reportErrorIf(!checkEqualOrUnknown(op1.point,op2.point),
-                          __PRETTY_FUNCTION__,
+                          IDYNTREE_PRETTY_FUNCTION,
                           "op1 point and op2 point don't match\n")
          && GeomVector3Semantics<LinearMotionVector3Semantics>::compose(op1, op2, result));
 

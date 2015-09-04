@@ -13,13 +13,9 @@
 
 #define FORCEVECTOR3SEMANTICS_TEMPLATE_HDR \
 template <class ForceTSemantics>
-#define FORCEVECTOR3SEMANTICS_INSTANCE_HDR \
-ForceVector3Semantics<ForceTSemantics>
 
 #define FORCEVECTOR3_TEMPLATE_HDR \
 template <class ForceT>
-#define FORCEVECTOR3_INSTANCE_HDR \
-ForceVector3<ForceT>
 
 namespace iDynTree
 {
@@ -75,94 +71,6 @@ namespace iDynTree
         virtual ~ForceVector3();
     };
 
-
-    /**
-     * ForceVector3Semantics Method definitions
-     */
-    
-    // constructors
-    FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
-    FORCEVECTOR3SEMANTICS_INSTANCE_HDR::ForceVector3Semantics():
-    GeomVector3Semantics<ForceTSemantics>()
-    {
-    }
-    
-    FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
-    FORCEVECTOR3SEMANTICS_INSTANCE_HDR::ForceVector3Semantics(int _body, int _refBody, int _coordinateFrame):
-    GeomVector3Semantics<ForceTSemantics>(_body, _refBody, _coordinateFrame)
-    {
-    }
-    
-    FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
-    FORCEVECTOR3SEMANTICS_INSTANCE_HDR::ForceVector3Semantics(const ForceVector3Semantics & other):
-    GeomVector3Semantics<ForceTSemantics>(other)
-    {
-    }
-    
-    FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
-    FORCEVECTOR3SEMANTICS_INSTANCE_HDR::~ForceVector3Semantics()
-    {
-    }
-
-
-    // semantics operations
-    FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
-    bool FORCEVECTOR3SEMANTICS_INSTANCE_HDR::compose(const ForceVector3Semantics & op1,
-                                                     const ForceVector3Semantics & op2,
-                                                     ForceVector3Semantics & result)
-    {
-        // check semantics
-        bool semantics_status =
-        (   reportErrorIf(!checkEqualOrUnknown(op1.coordinateFrame,op2.coordinateFrame),
-                          __PRETTY_FUNCTION__,
-                          "multiplying two geometric relations expressed in different coordinateFrames\n")
-         && reportErrorIf(!checkEqualOrUnknown(op1.body,op2.body),
-                          __PRETTY_FUNCTION__,
-                          "The bodies defined for both operands of the dot product don't match\n")
-         && reportErrorIf(!checkEqualOrUnknown(op1.refBody,op2.refBody),
-                          __PRETTY_FUNCTION__,
-                          "The reference bodies defined for both operands of the dot product don't match\n"));
-        
-        // compute semantics
-        result = op1;
-        
-        return semantics_status;
-    }
-    
-    FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
-    bool FORCEVECTOR3SEMANTICS_INSTANCE_HDR::inverse(const ForceVector3Semantics & op,
-                                                     ForceVector3Semantics & result)
-    {
-        // compute semantics
-        result = op;
-        
-        return true;
-    }
-
-
-    /**
-     * ForceVector3 Method definitions
-     */
-
-    // constructors
-    FORCEVECTOR3_TEMPLATE_HDR
-    FORCEVECTOR3_INSTANCE_HDR::ForceVector3():
-    GeomVector3<ForceT>()
-    {}
-    
-    FORCEVECTOR3_TEMPLATE_HDR
-    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const double* in_data, const unsigned int in_size):
-    GeomVector3<ForceT>(in_data, in_size)
-    {}
-    
-    FORCEVECTOR3_TEMPLATE_HDR
-    FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const ForceVector3 & other):
-    GeomVector3<ForceT>(other)
-    {}
-    
-    FORCEVECTOR3_TEMPLATE_HDR
-    FORCEVECTOR3_INSTANCE_HDR::~ForceVector3()
-    {}
 }
 
 #endif /* IDYNTREE_FORCE_VECTOR_3_H */
