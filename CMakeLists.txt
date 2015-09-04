@@ -98,4 +98,8 @@ if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_KDL)
     add_subdirectory(tests)
 endif()
 
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests/data)
+endif()
+
 add_subdirectory(bindings)
