@@ -3,7 +3,8 @@ version: 1.0.{build}
 clone_folder: c:\projects\idyntree
 
 environment:
-  Eigen3_DIR:          c:/Program Files (x86)/Eigen
+  Eigen3_DIR:          C:/Program Files (x86)/Eigen/lib/cmake/eigen3/
+
 
 install:
 
