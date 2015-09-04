@@ -2,6 +2,10 @@ version: 1.0.{build}
 
 clone_folder: c:\projects\idyntree
 
+environment:
+  Eigen3_DIR:          C:/Program Files (x86)/Eigen/lib/cmake/eigen3/
+
+
 install:
 
 build:
@@ -24,14 +28,12 @@ build_script:
   - md build
   - cd build 
   - cmake -G"Visual Studio 11" ..
-  - msbuild /m /p:Configuration=Release /p:Platform="Win32" Eigen.sln
-  - cmake --build . --config Release
   - cmake --build . --config Release --target INSTALL
   # compile iDynTree
   - cd c:\projects\idyntree
   - md build
   - cd build
-  - cmake -G"Visual Studio 11" .. -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
+  - cmake -G"Visual Studio 11" .. -DEIGEN3_INCLUDE_DIR="C:/Program Files (x86)/Eigen/include/eigen3" -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" iDynTree.sln
   - cmake --build . --config Release
   - cmake --build . --target RUN_TESTS --config Release
