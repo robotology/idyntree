@@ -30,7 +30,7 @@ using namespace KDL::CoDyCo::Regressors;
 
 double random_double()
 {
-    return 0.0;// ((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+    return((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
 }
 
 iDynTree::SensorsList generateSensorsTree(const KDL::CoDyCo::UndirectedTree & undirected_tree,

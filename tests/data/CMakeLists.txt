@@ -4,10 +4,10 @@
 set(IDYNTREE_TESTS_URDFS icub.urdf
                         icub_model.urdf
                         icub_skin_frames.urdf
-                        bigman.urdf)
+                        bigman.urdf
+                        twoLinks.urdf)
 
 get_property(IDYNTREE_BINARY_TEST_DIRS GLOBAL PROPERTY IDYNTREE_BINARY_TEST_DIRS)
-
 
 foreach(IDYNTREE_TESTS_DIRECTORY ${IDYNTREE_BINARY_TEST_DIRS})
     foreach(URDF_TO_COPY ${IDYNTREE_TESTS_URDFS})

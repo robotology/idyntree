@@ -294,7 +294,7 @@ namespace iDynTree
     template<unsigned int nRows, unsigned int nCols>
     const unsigned int MatrixFixSize<nRows,nCols>::rawIndexColMajor(int row, int col) const
     {
-        return (row + nCols*col);
+        return (row + nRows*col);
     }
 
     template<unsigned int nRows, unsigned int nCols>

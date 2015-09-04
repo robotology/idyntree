@@ -403,8 +403,14 @@ Transform DynamicsComputations::getRelativeTransform(const std::string& refFrame
 {
     int refFrameIndex = getFrameIndex(refFrameName);
     int frameIndex = getFrameIndex(frameName);
-    if( frameIndex < 0 || refFrameIndex < 0)
+    if( frameIndex < 0 )
     {
+        reportError("DynamicsComputations","getRelativeTransform","unknown frameName");
+        return Transform::Identity();
+    }
+    else if( refFrameIndex < 0 )
+    {
+        reportError("DynamicsComputations","getRelativeTransform","unknown refFrameName");
         return Transform::Identity();
     }
     else
