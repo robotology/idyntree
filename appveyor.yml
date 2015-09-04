@@ -24,8 +24,6 @@ build_script:
   - md build
   - cd build 
   - cmake -G"Visual Studio 11" ..
-  - msbuild /m /p:Configuration=Release /p:Platform="Win32" Eigen.sln
-  - cmake --build . --config Release
   - cmake --build . --config Release --target INSTALL
   # compile iDynTree
   - cd c:\projects\idyntree
