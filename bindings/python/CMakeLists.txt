@@ -28,7 +28,8 @@ set_target_properties(_${target_name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAK
 # installation path is determined reliably on most platforms using distutils
 execute_process(COMMAND ${PYTHON_EXECUTABLE}
     -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
-    OUTPUT_VARIABLE PYTHON_INSTDIR )
+    OUTPUT_VARIABLE PYTHON_INSTDIR)
+string(STRIP ${PYTHON_INSTDIR} PYTHON_INSTDIR)
        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iDynTree.py DESTINATION ${PYTHON_INSTDIR} )
        install(TARGETS _${target_name} DESTINATION ${PYTHON_INSTDIR} )
 

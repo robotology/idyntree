@@ -32,7 +32,7 @@ void checkTwistTransformation(const Transform & trans, const Twist & twist)
 
 int main()
 {
-    Transform trans(Rotation::RPY(0.0,0.0,0.0),Position(10,0,0));
+    Transform trans(Rotation::RPY(5.0,7.0,8.0),Position(10,0,-40));
 
     double twistData[6] = {1.0,4.0,-50.0,1.0,2.0,3.0};
     Twist twist(LinVelocity(twistData,3),AngVelocity(twistData+3,3));
