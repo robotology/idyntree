@@ -226,6 +226,8 @@ class DynTree  {
         //Position related quantites
         mutable bool is_X_dynamic_base_updated;
         mutable std::vector<KDL::Frame> X_dynamic_base; /**< for each link store the frame X_dynamic_base_link of the position of a link with respect to the dynamic base */
+        mutable bool is_X_world_updated;
+        mutable std::vector<KDL::Frame> X_world; /**< for each link store the frame world_X_link of the position of a link with respect to the world */
 
 
         //Debug
@@ -676,6 +678,7 @@ class DynTree  {
         * @return true if succeeds, false otherwise
         */
         virtual bool computePositions() const;
+        virtual bool computeXWorld()    const;
 
         /**
         * Execute the kinematic phase (recursive calculation of position, velocity,

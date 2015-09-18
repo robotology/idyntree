@@ -159,6 +159,7 @@ void DynTree::constructor(const KDL::Tree & _tree,
     q = KDL::JntArray(NrOfDOFs);
     SetToZero(q);
     is_X_dynamic_base_updated = false;
+    is_X_world_updated = false;
 
     dq = KDL::JntArray(NrOfDOFs);
     SetToZero(dq);
@@ -220,6 +221,7 @@ DynTree::~DynTree() { }
 double DynTree::setAng(const double q_in, const int i)
 {
     is_X_dynamic_base_updated = false;
+    is_X_world_updated = false;
 
     if (constrained[i]) {
         q(i) = (q_in<q_jnt_min(i)) ? q_jnt_min(i) : ((q_in>q_jnt_max(i)) ? q_jnt_max(i) : q_in);
@@ -310,6 +312,7 @@ bool DynTree::getAngKDL(KDL::JntArray & _q) const
 bool DynTree::setAngKDL(const KDL::JntArray & _q)
 {
     is_X_dynamic_base_updated = false;
+    is_X_world_updated = false;
 
 
         //No part specified
@@ -333,6 +336,8 @@ bool DynTree::setAngKDL(const KDL::JntArray & _q)
 yarp::sig::Vector DynTree::setAng(const yarp::sig::Vector & _q)
 {
     is_X_dynamic_base_updated = false;
+    is_X_world_updated = false;
+
 
     yarp::sig::Vector ret_q = _q;
 
@@ -477,6 +482,8 @@ bool DynTree::setKinematicBaseVelAcc(const yarp::sig::Vector &base_vel, const ya
     imu_velocity = (world_base_frame*X_dynamic_base[kinematic_traversal.getBaseLink()->getLinkIndex()]).M.Inverse(base_vel_kdl);
     //std::cout << "imu_velocity " << imu_velocity << std::endl;
     imu_acceleration = (world_base_frame*X_dynamic_base[kinematic_traversal.getBaseLink()->getLinkIndex()]).M.Inverse(base_spatial_acc_kdl);
+    //std::cout << "imu_velocity " << imu_acceleration << std::endl;
+
 
     return true;
 }
@@ -636,6 +643,7 @@ bool DynTree::setFloatingBaseLink(const int link_index)
     // \todo add a method to invalidate all the buffers
     int old_flt_base_link = getFloatingBaseLink();
     is_X_dynamic_base_updated = false;
+    is_X_world_updated = false;
     if( undirected_tree.compute_traversal(dynamic_traversal,link_index) == 0)
     {
         return true;
@@ -907,6 +915,7 @@ bool DynTree::computePositions() const
         if(X_dynamic_base.size() != undirected_tree.getNrOfLinks()) { X_dynamic_base.resize(undirected_tree.getNrOfLinks()); }
         if( getFramesLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base) == 0 ) {
             is_X_dynamic_base_updated = true;
+            is_X_world_updated = false;
             return true;
         }
         //else
@@ -914,6 +923,24 @@ bool DynTree::computePositions() const
     } else {
         return true;
     }
+}
+
+bool DynTree::computeXWorld() const
+{
+    computePositions();
+    if( !is_X_world_updated )
+    {
+        if(X_world.size() != undirected_tree.getNrOfLinks())
+        {
+            X_world.resize(undirected_tree.getNrOfLinks());
+        }
+
+        for(int i =0; i < X_world.size(); i++ )
+        {
+            X_world[i] = world_base_frame*X_dynamic_base[i];
+        }
+    }
+    return true;
 }
 
 bool DynTree::kinematicRNEA()
@@ -1627,8 +1654,8 @@ bool DynTree::getDynamicsRegressor(yarp::sig::Matrix & mat)
     Eigen::MatrixXd dynamics_regressor;
     dynamics_regressor.resize(6+undirected_tree.getNrOfDOFs(),10*undirected_tree.getNrOfLinks());
 
-    computePositions();
-    dynamicsRegressorLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,v,a,dynamics_regressor);
+    computeXWorld();
+    dynamicsRegressorLoop(undirected_tree,q,dynamic_traversal,X_world,v,a,dynamics_regressor);
 
     mapped_dynamics_regressor = dynamics_regressor;
 
