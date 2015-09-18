@@ -180,6 +180,12 @@ int DynamicsComputations::getFrameIndex(const std::string& frameName) const
     return index;
 }
 
+std::string DynamicsComputations::getFrameName(int frameIndex) const
+{
+    return this->pimpl->m_robot_model.getLink(frameIndex)->getName();
+}
+
+
 
 
 void DynamicsComputations::computeFwdKinematics()
@@ -371,12 +377,15 @@ bool DynamicsComputations::setRobotState(const VectorDynSize& q,
     ok = ok && ToKDL(q,this->pimpl->m_qKDL);
     ok = ok && ToKDL(q_dot,this->pimpl->m_dqKDL);
     ok = ok && ToKDL(q_dotdot,this->pimpl->m_ddqKDL);
+    this->pimpl->m_world2base = ToKDL(world_T_base);
 
     if( !ok )
     {
         std::cerr << "DynamicsRegressorGenerator::setRobotState failed" << std::endl;
         return false;
     }
+
+    this->invalidateCache();
 
     // Save gravity
     this->pimpl->m_gravityAcc = ToKDL(world_gravity);
@@ -485,6 +494,12 @@ Transform DynamicsComputations::getWorldTransform(unsigned int frameIndex)
 
     // compute fwd kinematics (if necessary)
     this->computeFwdKinematics();
+
+    if( !this->pimpl->m_isFwdKinematicsUpdated )
+    {
+        reportError("DynamicsComputations","getWorldTransform","error in computing fwd kinematics");
+        return iDynTree::Transform();
+    }
 
     iDynTree::Transform ret = iDynTree::ToiDynTree(this->pimpl->m_fwdPosKinematicsResults[frameIndex]);
 

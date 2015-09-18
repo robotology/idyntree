@@ -266,6 +266,12 @@ public:
     int getFrameIndex(const std::string & frameName) const;
 
     /**
+     * Get the frame name corresponding to a given frame index.
+     *
+     */
+    std::string getFrameName(int frameIndex) const;
+
+    /**
      * Return the transform where the frame is the frame
      * specified by frameIndex, and the reference frame is the world one.
      *
@@ -380,6 +386,7 @@ public:
       */
     //@{
 
+
      /**
      * Get the index corresponding to a given link name.
      * @return a integer greater or equal then zero if the frame exist,
@@ -405,6 +412,34 @@ public:
 
     //@}
 
+
+    /**
+      * @name Methods to get Jacobians and Dynamics regressor
+      */
+    //@{
+    /**
+     *
+     *
+     */
+    /*
+    bool getFrameJacobian(const std::string & frameName,
+                          iDynTree::MatrixDynSize & outJacobian) const;
+
+    bool getFrameJacobian(const unsigned int & frameIndex,
+                          iDynTree::MatrixDynSize & outJacobian) const;
+
+    bool getDynamicsRegressor(iDynTree::MatrixDynSize & outRegressor) const;
+    */
+    /**
+     * Return the dynamics parameters related to dynamics regressors.
+     *
+     * @param[out] values a Vector of size 10*getNrOfLinks ,
+     * @return true if all went well, false if there was an error
+     */
+    // bool getModelParameters(iDynTree::VectorDynSize & values);
+
+    //@}
+
 };
 
 }
@@ -413,3 +448,4 @@ public:
 
 
 #endif
+
