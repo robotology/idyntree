@@ -421,22 +421,24 @@ public:
      *
      *
      */
-    /*
+
     bool getFrameJacobian(const std::string & frameName,
                           iDynTree::MatrixDynSize & outJacobian) const;
 
     bool getFrameJacobian(const unsigned int & frameIndex,
                           iDynTree::MatrixDynSize & outJacobian) const;
 
-    bool getDynamicsRegressor(iDynTree::MatrixDynSize & outRegressor) const;
-    */
+
+
+    bool getDynamicsRegressor(iDynTree::MatrixDynSize & outRegressor);
+
     /**
      * Return the dynamics parameters related to dynamics regressors.
      *
      * @param[out] values a Vector of size 10*getNrOfLinks ,
      * @return true if all went well, false if there was an error
      */
-    // bool getModelParameters(iDynTree::VectorDynSize & values);
+    bool getModelDynamicsParameters(iDynTree::VectorDynSize & values) const;
 
     //@}
 

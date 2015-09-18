@@ -5,7 +5,8 @@ set(IDYNTREE_TESTS_URDFS icub.urdf
                         icub_model.urdf
                         icub_skin_frames.urdf
                         bigman.urdf
-                        twoLinks.urdf)
+                        twoLinks.urdf
+                        oneLink.urdf)
 
 get_property(IDYNTREE_BINARY_TEST_DIRS GLOBAL PROPERTY IDYNTREE_BINARY_TEST_DIRS)
 

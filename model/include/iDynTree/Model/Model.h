@@ -154,13 +154,13 @@ namespace iDynTree
         /**
          * Get the nr of neighbors of a given link.
          */
-        unsigned int getNrOfNeighbors(const LinkIndex link);
+        unsigned int getNrOfNeighbors(const LinkIndex link) const;
 
         /**
          * Get the neighbor of a link. neighborIndex should be
          * >= 0 and <= getNrOfNeighbors(link)
          */
-        Neighbor getNeighbor(const LinkIndex link, unsigned int neighborIndex);
+        Neighbor getNeighbor(const LinkIndex link, unsigned int neighborIndex) const;
 
         /**
          * Set the default base link, used for generation of the default traversal.

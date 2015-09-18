@@ -155,6 +155,16 @@ namespace iDynTree
         virtual void computeJointTorque(const IJointPos & state, const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
                                         IJointTorque & outputTorque) const = 0;
+
+        /**
+         * Set the index of the joint.
+         */
+        virtual void setIndex(JointIndex & _index) = 0;
+
+        /**
+         * Get the index of the link.
+         */
+        virtual JointIndex getIndex() const = 0;
     };
 
     typedef IJoint * IJointPtr;

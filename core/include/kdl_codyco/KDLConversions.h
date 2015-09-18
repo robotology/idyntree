@@ -15,6 +15,7 @@ namespace KDL
     class Frame;
     class Twist;
     class Wrench;
+    class Jacobian;
     class JntArray;
     class RotationalInertia;
     class RigidBodyInertia;
@@ -27,6 +28,7 @@ namespace iDynTree
     class Transform;
     class Twist;
     class Wrench;
+    class MatrixDynSize;
     class VectorDynSize;
     class RotationalInertiaRaw;
     class SpatialInertia;
@@ -60,6 +62,8 @@ namespace iDynTree
     iDynTree::SpatialInertia ToiDynTree(const KDL::RigidBodyInertia & kdl_inertia);
     bool                 ToiDynTree(const KDL::JntArray  & kdl_jntarray,
                                     iDynTree::VectorDynSize & idyntree_jntarray);
+    bool ToiDynTree(const KDL::Jacobian & kdl_jacobian, iDynTree::MatrixDynSize& idyntree_jacobian);
+
 
 }
 

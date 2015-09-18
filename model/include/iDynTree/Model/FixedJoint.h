@@ -23,6 +23,7 @@ namespace iDynTree
     class FixedJoint : public IJoint
     {
     private:
+        JointIndex m_index;
         LinkIndex link1;
         LinkIndex link2;
         Transform link1_X_link2;
@@ -68,6 +69,12 @@ namespace iDynTree
         // Documentation inherited
         virtual Transform getTransform(const IJointPos & state, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
 
+        /**
+         * For the fixed joint, the transform between a link and other
+         * can be obtained without providing a state.
+         */
+        virtual Transform getTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const;
+
          // Documentation inherited
         virtual LinkPosVelAcc computeLinkPosVelAcc(const IJointPosVelAcc & state, const LinkPosVelAcc & linkBstate,
                                                const LinkIndex linkA, const LinkIndex linkB) const;
@@ -80,6 +87,12 @@ namespace iDynTree
         virtual void computeJointTorque(const IJointPos & state, const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
                                         IJointTorque & outputTorque) const;
+
+        // Documentation inherited
+        virtual void setIndex(JointIndex & _index);
+
+        // Documentation inherited
+        virtual JointIndex getIndex() const;
     };
 }
 

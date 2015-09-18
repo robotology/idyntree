@@ -9,6 +9,7 @@
 
 #ifndef NDEBUG
 #include <iostream>
+#include <kdl/frames_io.hpp>
 #endif
 
 namespace KDL {
@@ -27,6 +28,9 @@ void dynamicsRegressorLoop(const UndirectedTree & ,
 
         Eigen::Matrix<double, 6, 10> netWrenchRegressor_i;
 
+        // Store the base_world translational transform in world orientation
+        KDL::Frame world_base_X_world_world = KDL::Frame(-(X_b[traversal.getBaseLink()->getLinkIndex()].p));
+
         for(int l =(int)traversal.getNrOfVisitedLinks()-1; l >= 0; l-- ) {
             LinkMap::const_iterator link = traversal.getOrderedLink(l);
             int i = link->getLinkIndex();
@@ -35,7 +39,9 @@ void dynamicsRegressorLoop(const UndirectedTree & ,
             netWrenchRegressor_i = netWrenchRegressor(v[i],a[i]);
 
             //Base dynamics
-            dynamics_regressor.block(0,(int)(10*i),6,10) = WrenchTransformationMatrix(X_b[i])*netWrenchRegressor_i;
+            // The base dynamics is expressed with the orientation of the world but
+            // with respect to the base origin
+            dynamics_regressor.block(0,(int)(10*i),6,10) = WrenchTransformationMatrix(world_base_X_world_world*X_b[i])*netWrenchRegressor_i;
 
             //dynamics_regressor.block(0,(int)(10*i),6,10) = WrenchTransformationMatrix(X_b[i])*netWrenchRegressor_i;
 

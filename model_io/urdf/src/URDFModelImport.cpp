@@ -16,12 +16,15 @@
 #include <tinyxml.h>
 
 #include <cstdlib>
+#include <cmath>
 #include <iostream>
 #include <fstream>
 #include <set>
 
 namespace iDynTree
 {
+
+double URDFImportTol = 1e-9;
 
 bool inline stringToDouble(const std::string & inStr, double & outDouble)
 {
@@ -366,6 +369,8 @@ bool jointFromURDFXML(const Model & model,
         }
     }
 
+    assert(parentLinkName != childLinkName);
+
     // Get Joint type
     const char* type_char = jointXml->Attribute("type");
     if (!type_char)
@@ -378,15 +383,15 @@ bool jointFromURDFXML(const Model & model,
     std::string type_str = type_char;
     if (type_str == "planar" ||
         type_str == "floating" ||
-        type_str == "prismatic" ||
-        type_str == "revolute"  ||
-        type_str == "continuous" )
+        type_str == "prismatic" )
     {
         std::string errStr = "Joint " + jointName + " has type " + type_str + " that is not currently supported by iDynTree";
         reportError("","jointFromURDFXML",errStr.c_str());
         return false;
     }
-    else if (type_str == "fixed")
+    else if (type_str == "fixed" ||
+             type_str == "revolute"  ||
+             type_str == "continuous")
     {
         // perfect, type supported by iDynTree, parsing happening later
     }
@@ -415,6 +420,8 @@ bool jointFromURDFXML(const Model & model,
         reportError("","jointFromURDFXML",errStr.c_str());
         return false;
     }
+
+    assert(parentLinkIndex != childLinkIndex);
 
      // Get Joint Axis
     Axis axis_wrt_childLink;
@@ -475,13 +482,167 @@ bool modelFromURDF(const std::string & urdf_filename,
     return modelFromURDFString(xml_string,output);
 }
 
+/**
+ * Check if a given transform is the identity, up to the transform.
+ */
+bool isIdentity(const Transform & trans)
+{
+    Rotation rot = trans.getRotation();
+    Position pos = trans.getPosition();
+
+    for(int row=0; row < 3; row++ )
+    {
+        for(int col=0; col < 3; col++ )
+        {
+            if( row == col )
+            {
+                if( fabs(rot(row,col)-1) > URDFImportTol )
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if( fabs(rot(row,col)) > URDFImportTol )
+                {
+                    return false;
+                }
+            }
+        }
+    }
+
+    for(int row=0; row < 3; row++ )
+    {
+        if( fabs(pos(row)) > URDFImportTol )
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Check the condition for deciding if a model has a fake base link.
+ * The three conditions for a base link to be considered "fake" are:
+ *  * if the base link is massless,
+ *  * if the base link has only one child,
+ *  * if the base link is attached to its only child with a fixed joint,
+ *  * if the transform between the base link and its child is the identity.
+ *
+ */
+bool hasFakeBaseLink(const Model& modelWithFakeLinks)
+{
+    LinkIndex baseLink = modelWithFakeLinks.getDefaultBaseLink();
+
+    // First condition: base link is massless
+    double mass = modelWithFakeLinks.getLink(baseLink)->getInertia().getMass();
+    if( mass > URDFImportTol )
+    {
+        return false;
+    }
+
+    // Second condition: the base link has only one child
+    if( modelWithFakeLinks.getNrOfNeighbors(baseLink) != 1 )
+    {
+        return false;
+    }
+
+    // Third condition: the base link is attached to its child with a fixed joint
+    Neighbor neigh = modelWithFakeLinks.getNeighbor(baseLink,0);
+    if( neigh.neighborJoint->getNrOfDOFs() > 0 )
+    {
+        return false;
+    }
+
+    // Fourth condition: the transform between the base link and its child is the identity
+    FixedJoint * pFixedJoint = (FixedJoint *) neigh.neighborJoint;
+    Transform base_T_child = pFixedJoint->getTransform(baseLink,neigh.neighborLink->getIndex());
+
+    if( !isIdentity(base_T_child) )
+    {
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * In a URDF model several links are added to the URDF file,
+ * but are not proper links:
+ *  * a root massless link (usually called "base_link") is
+ *    added to floating base models as a workaround to an
+ *    old limitation of the KDL library ( https://github.com/ros/robot_model/issues/6).
+ *  * massless leaf links attached with fixed joints to real links
+ *    are used to represent frames, as the URDF does not support
+ *    frames attached to a link.
+ *
+ * This function is used to remove this "fake" links from the model after parsing.
+ * \todo TODO implement additional frames for links, to parse this
+ *            fake links as frames.
+ *
+ */
+bool removeFakeLinks(const Model& modelWithFakeLinks,
+                     Model& modelWithoutFakeLinks)
+{
+    std::set<std::string> linkToRemove;
+    std::set<std::string> jointToRemove;
+    std::string newDefaultBaseLink = modelWithFakeLinks.getLinkName(modelWithFakeLinks.getDefaultBaseLink());
+
+    if( hasFakeBaseLink(modelWithFakeLinks) )
+    {
+        LinkIndex baseLink = modelWithFakeLinks.getDefaultBaseLink();
+        linkToRemove.insert(modelWithFakeLinks.getLinkName(modelWithFakeLinks.getDefaultBaseLink()));
+        JointIndex jntIndex = modelWithFakeLinks.getNeighbor(baseLink,0).neighborJoint->getIndex();
+        jointToRemove.insert(modelWithFakeLinks.getJointName(jntIndex));
+        LinkIndex newBaseIndex =  modelWithFakeLinks.getNeighbor(baseLink,0).neighborLink->getIndex();
+        newDefaultBaseLink = modelWithFakeLinks.getLinkName(newBaseIndex);
+    }
+
+    // Create the new model obtained removing all the fake links (and relative joints)
+    modelWithoutFakeLinks = Model();
+    // Add all links, expect for the one to remove
+    for(unsigned int lnk=0; lnk < modelWithFakeLinks.getNrOfLinks(); lnk++ )
+    {
+        std::string linkToAdd = modelWithFakeLinks.getLinkName(lnk);
+        if( linkToRemove.find(linkToAdd) == linkToRemove.end() )
+        {
+            modelWithoutFakeLinks.addLink(linkToAdd,*modelWithFakeLinks.getLink(lnk));
+        }
+    }
+
+    // Add all joints, preserving the numbering
+    for(unsigned int jnt=0; jnt < modelWithFakeLinks.getNrOfJoints(); jnt++ )
+    {
+        std::string jointToAdd = modelWithFakeLinks.getJointName(jnt);
+        if( jointToRemove.find(jointToAdd) == jointToRemove.end() )
+        {
+            // we need to change the link index in the new joints
+            // to match the new link serialization
+            IJointPtr newJoint = modelWithFakeLinks.getJoint(jnt)->clone();
+            std::string firstLinkName = modelWithFakeLinks.getLinkName(newJoint->getFirstAttachedLink());
+            std::string secondLinkName = modelWithFakeLinks.getLinkName(newJoint->getSecondAttachedLink());
+            JointIndex  firstLinkNewIndex = modelWithoutFakeLinks.getLinkIndex(firstLinkName);
+            JointIndex  secondLinkNewIndex = modelWithoutFakeLinks.getLinkIndex(secondLinkName);
+            newJoint->setAttachedLinks(firstLinkNewIndex,secondLinkNewIndex);
+
+            modelWithoutFakeLinks.addJoint(jointToAdd,newJoint);
+
+            delete newJoint;
+        }
+    }
+
+    // Set the default base link
+    return modelWithoutFakeLinks.setDefaultBaseLink(modelWithoutFakeLinks.getLinkIndex(newDefaultBaseLink));
+}
+
 bool modelFromURDFString(const std::string& urdf_string,
                                iDynTree::Model& model)
 {
-    bool ok;
+    bool ok = true;
 
     // clear the input model
-    model = Model();
+    Model rawModel = Model();
 
     TiXmlDocument urdfXml;
     urdfXml.Parse(urdf_string.c_str());
@@ -501,7 +662,7 @@ bool modelFromURDFString(const std::string& urdf_string,
             return false;
         }
 
-        LinkIndex newLinkIndex = model.addLink(linkName,link);
+        LinkIndex newLinkIndex = rawModel.addLink(linkName,link);
 
         if( newLinkIndex == LINK_INVALID_INDEX )
         {
@@ -521,7 +682,7 @@ bool modelFromURDFString(const std::string& urdf_string,
         std::string parentLinkName;
         std::string childLinkName;
 
-        ok = ok && jointFromURDFXML(model,joint_xml,joint,jointName,parentLinkName,childLinkName);
+        ok = ok && jointFromURDFXML(rawModel,joint_xml,joint,jointName,parentLinkName,childLinkName);
 
         // save parent and child in a set
         parents.insert(parentLinkName);
@@ -534,7 +695,9 @@ bool modelFromURDFString(const std::string& urdf_string,
             return false;
         }
 
-        JointIndex newJointIndex = model.addJoint(jointName,joint);
+        assert(joint->getFirstAttachedLink() != joint->getSecondAttachedLink());
+
+        JointIndex newJointIndex = rawModel.addJoint(jointName,joint);
 
         delete joint;
 
@@ -548,9 +711,9 @@ bool modelFromURDFString(const std::string& urdf_string,
 
     // Get root
     std::vector<std::string> rootCandidates;
-    for(unsigned int lnk=0; lnk < model.getNrOfLinks(); lnk++ )
+    for(unsigned int lnk=0; lnk < rawModel.getNrOfLinks(); lnk++ )
     {
-        std::string linkName = model.getLinkName(lnk);
+        std::string linkName = rawModel.getLinkName(lnk);
 
         if( childs.find(linkName) == childs.end() )
         {
@@ -573,9 +736,12 @@ bool modelFromURDFString(const std::string& urdf_string,
     }
 
     // set the default root in the model
-    model.setDefaultBaseLink(model.getLinkIndex(rootCandidates[0]));
+    rawModel.setDefaultBaseLink(rawModel.getLinkIndex(rootCandidates[0]));
 
-    return true;
+    // Remove fake links
+    ok = ok && removeFakeLinks(rawModel,model);
+
+    return ok;
 }
 
 }

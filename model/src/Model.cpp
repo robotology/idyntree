@@ -80,7 +80,7 @@ int Model::getNrOfLinks() const
 
 LinkIndex Model::getLinkIndex(const std::string& linkName) const
 {
-    for(int i=0; i < 0; i++ )
+    for(int i=0; i < this->getNrOfLinks(); i++ )
     {
         if( linkName == linkNames[i] )
         {
@@ -118,9 +118,9 @@ int Model::getNrOfJoints() const
     return joints.size();
 }
 
-LinkIndex Model::getJointIndex(const std::string& jointName) const
+JointIndex Model::getJointIndex(const std::string& jointName) const
 {
-    for(int i=0; i < 0; i++ )
+    for(int i=0; i < this->getNrOfJoints(); i++ )
     {
         if( jointName == jointNames[i] )
         {
@@ -176,7 +176,11 @@ LinkIndex Model::addLink(const std::string& name, const Link& link)
     // add an empty adjacency list to the neighbors members
     neighbors.push_back(std::vector<Neighbor>());
 
-    return (LinkIndex)(links.size()-1);
+    LinkIndex newLinkIndex = (LinkIndex)(links.size()-1);
+
+    links[newLinkIndex].setIndex(newLinkIndex);
+
+    return newLinkIndex;
 }
 
 bool Model::isJointNameUsed(const std::string jointName)
@@ -187,6 +191,8 @@ bool Model::isJointNameUsed(const std::string jointName)
 
 JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
 {
+    assert(joint->getFirstAttachedLink() != joint->getSecondAttachedLink());
+
     if(isJointNameUsed(jointName))
     {
         std::string error = "a joint of name " + jointName + " is already present in the model";
@@ -208,7 +214,7 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
     // Check that the joint is not connecting a link to itself
     if( firstLink == secondLink )
     {
-        std::string error = "joint " + jointName + " is connecting a link to itself";
+        std::string error = "joint " + jointName + " is connecting link " + this->getLinkName(firstLink) + " to itself";
         reportError("Model","addJoint",error.c_str());
         return JOINT_INVALID_INDEX;
     }
@@ -230,16 +236,17 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
     secondLinkNeighbor.neighborJoint = getJoint(thisJointIndex);
     this->neighbors[secondLink].push_back(secondLinkNeighbor);
 
+    this->joints[thisJointIndex]->setIndex(thisJointIndex);
+
     return thisJointIndex;
 }
 
-unsigned int Model::getNrOfNeighbors(const LinkIndex link)
+unsigned int Model::getNrOfNeighbors(const LinkIndex link) const
 {
     return this->neighbors[link].size();
 }
 
-
-Neighbor Model::getNeighbor(const LinkIndex link, unsigned int neighborIndex)
+Neighbor Model::getNeighbor(const LinkIndex link, unsigned int neighborIndex) const
 {
     return this->neighbors[link][neighborIndex];
 }

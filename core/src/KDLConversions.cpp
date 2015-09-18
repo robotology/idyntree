@@ -17,10 +17,12 @@
 #include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/MatrixDynSize.h>
 
 
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
+#include <kdl/jacobian.hpp>
 
 #include <kdl/rigidbodyinertia.hpp>
 
@@ -219,6 +221,16 @@ bool ToiDynTree(const KDL::JntArray& kdl_jntarray, VectorDynSize& idyntree_jntar
 
     Eigen::Map<Eigen::VectorXd>(idyntree_jntarray.data(),idyntree_jntarray.size())
         =  kdl_jntarray.data;
+
+    return true;
+}
+
+bool ToiDynTree(const KDL::Jacobian & kdl_jacobian, MatrixDynSize& idyntree_jacobian)
+{
+    idyntree_jacobian.resize(kdl_jacobian.rows(),kdl_jacobian.columns());
+
+    Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(idyntree_jacobian.data(),idyntree_jacobian.rows(),idyntree_jacobian.cols())
+        =  kdl_jacobian.data;
 
     return true;
 }

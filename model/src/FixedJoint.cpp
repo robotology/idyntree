@@ -76,6 +76,11 @@ LinkIndex FixedJoint::getSecondAttachedLink() const
 
 Transform FixedJoint::getTransform(const IJointPos& state, const LinkIndex p_linkA, const LinkIndex p_linkB) const
 {
+    return getTransform(p_linkA,p_linkB);
+}
+
+Transform FixedJoint::getTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const
+{
     if( p_linkA == this->link1 )
     {
         iDynTreeAssert(p_linkB == this->link2);
@@ -130,6 +135,17 @@ LinkVelAcc FixedJoint::computeLinkVelAcc(const IJointPosVelAcc& state, const Lin
 
     return linkAstate;
 }
+
+void FixedJoint::setIndex(JointIndex& _index)
+{
+    this->m_index = _index;
+}
+
+JointIndex FixedJoint::getIndex() const
+{
+    return this->m_index;
+}
+
 
 
 }

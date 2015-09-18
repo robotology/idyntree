@@ -26,10 +26,13 @@
 
 #include <kdl_codyco/position_loops.hpp>
 #include <kdl_codyco/rnea_loops.hpp>
+#include <kdl_codyco/jacobian_loops.hpp>
+#include <kdl_codyco/regressor_loops.hpp>
 
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
 #include <kdl/frames.hpp>
+#include <kdl/frames_io.hpp>
 
 #include <tinyxml.h>
 
@@ -62,12 +65,20 @@ struct DynamicsComputations::DynamicsComputationsPrivateAttributes
     //  KDL-based algorithms, and so it is set throught
     //  setRobotState with an appropriate conversion)
     KDL::Twist    m_baseSpatialTwist;
-    // Spatial twist of the base link, expressed in the base link
+
+    // Spatial acceleration of the base link, expressed in the base link
     // frame orientation and with respect to the base link origin
     // (Warning: this members is designed to work with the legacy
     //  KDL-based algorithms, and so it is set throught
     //  setRobotState with an appropriate conversion)
     KDL::Twist    m_baseSpatialAcc;
+
+    // Proper (actual - gravity) spatial acceleration of the base link, expressed in the base link
+    // frame orientation and with respect to the base link origin
+    // (Warning: this members is designed to work with the legacy
+    //  KDL-based algorithms, and so it is set throught
+    //  setRobotState with an appropriate conversion)
+    KDL::Twist    m_baseProperSpatialAcc;
 
     // Spatial gravity acceleration twist, expressed in world orientation
     // (the point is not important because the angular part is always zero)
@@ -96,7 +107,12 @@ struct DynamicsComputations::DynamicsComputationsPrivateAttributes
     std::vector<KDL::Twist> m_fwdVelKinematicsResults;
 
     // storage of forward acceleration kinematics results
-    std::vector<KDL::Twist> m_fwdAccKinematicsResults;
+    // this is a vector of the proper (i.e. actual - gravity) spatial acceleration
+    // expressed in the link frame
+    std::vector<KDL::Twist> m_fwdProperAccKinematicsResults;
+
+    // storage of jacobina results
+    KDL::Jacobian m_jacobianBuf;
 
     DynamicsComputationsPrivateAttributes()
     {
@@ -153,11 +169,12 @@ void DynamicsComputations::resizeInternalDataStructures()
     int nrOfFrames = this->pimpl->m_robot_model.getNrOfLinks();
     this->pimpl->m_fwdPosKinematicsResults.resize(nrOfFrames);
     this->pimpl->m_fwdVelKinematicsResults.resize(nrOfFrames);
-    this->pimpl->m_fwdAccKinematicsResults.resize(nrOfFrames);
+    this->pimpl->m_fwdProperAccKinematicsResults.resize(nrOfFrames);
     int nrOfDOFs = this->pimpl->m_robot_model.getNrOfDOFs();
     this->pimpl->m_qKDL.resize(nrOfDOFs);
     this->pimpl->m_dqKDL.resize(nrOfDOFs);
     this->pimpl->m_ddqKDL.resize(nrOfDOFs);
+    this->pimpl->m_jacobianBuf.resize(nrOfDOFs+6);
 
     // set to zero
     KDL::SetToZero(this->pimpl->m_qKDL);
@@ -165,6 +182,7 @@ void DynamicsComputations::resizeInternalDataStructures()
     KDL::SetToZero(this->pimpl->m_ddqKDL);
     KDL::SetToZero(this->pimpl->m_baseSpatialTwist);
     KDL::SetToZero(this->pimpl->m_baseSpatialAcc);
+    KDL::SetToZero(this->pimpl->m_baseProperSpatialAcc);
     this->pimpl->m_world2base = KDL::Frame::Identity();
 
 }
@@ -211,9 +229,9 @@ void DynamicsComputations::computeFwdKinematics()
                                              this->pimpl->m_ddqKDL,
                                              this->pimpl->m_traversal,
                                              this->pimpl->m_baseSpatialTwist,
-                                             this->pimpl->m_baseSpatialAcc,
+                                             this->pimpl->m_baseProperSpatialAcc,
                                              this->pimpl->m_fwdVelKinematicsResults,
-                                             this->pimpl->m_fwdAccKinematicsResults));
+                                             this->pimpl->m_fwdProperAccKinematicsResults));
 
     this->pimpl->m_isFwdKinematicsUpdated = ok;
 
@@ -404,6 +422,10 @@ bool DynamicsComputations::setRobotState(const VectorDynSize& q,
     KDL::CoDyCo::conventionalToSpatialAcceleration(kdl_classical_base_acceleration,
                                                    this->pimpl->m_baseSpatialTwist,this->pimpl->m_baseSpatialAcc);
 
+    // we save the proper acceleration of the base link
+    this->pimpl->m_baseProperSpatialAcc = this->pimpl->m_baseSpatialAcc + ToKDL(gravity_acceleration_wrt_base);
+    std::cout << this->pimpl->m_baseProperSpatialAcc << std::endl;;
+
     return true;
 }
 
@@ -585,7 +607,7 @@ SpatialAcc DynamicsComputations::getFrameProperSpatialAcceleration(const int fra
     // Actually return the twist
     this->computeFwdKinematics();
 
-    return iDynTree::ToiDynTree(this->pimpl->m_fwdAccKinematicsResults[frameIndex]);
+    return iDynTree::ToiDynTree(this->pimpl->m_fwdProperAccKinematicsResults[frameIndex]);
 }
 
 
@@ -632,6 +654,87 @@ SpatialInertia DynamicsComputations::getLinkInertia(const unsigned int linkIndex
     // \todo TODO add semantics to SpatialInertia
     return iDynTree::ToiDynTree(Ikdl);
 }
+
+bool DynamicsComputations::getFrameJacobian(const std::string& frameName,
+                                            MatrixDynSize& outJacobian) const
+{
+    int frameIndex = getFrameIndex(frameName);
+
+    if( frameIndex < 0 )
+    {
+        reportError("DynamicsComputations","getFrameJacobian","frameName unknown");
+        return false;
+    }
+
+    return getFrameJacobian(frameIndex,outJacobian);
+}
+
+bool DynamicsComputations::getFrameJacobian(const unsigned int& frameIndex,
+                                            MatrixDynSize& outJacobian) const
+{
+    if( frameIndex >= this->getNrOfFrames() )
+    {
+        reportError("DynamicsComputations","getFrameJacobian","frame index out of bounds");
+        return false;
+    }
+
+    KDL::CoDyCo::getFloatingBaseJacobianLoop(this->pimpl->m_robot_model,
+                                             KDL::CoDyCo::GeneralizedJntPositions(this->pimpl->m_world2base,this->pimpl->m_qKDL),
+                                             this->pimpl->m_traversal,
+                                             frameIndex,
+                                             this->pimpl->m_jacobianBuf);
+
+    return ToiDynTree(this->pimpl->m_jacobianBuf,outJacobian);
+}
+
+bool DynamicsComputations::getDynamicsRegressor(MatrixDynSize& outRegressor)
+{
+    //If the incoming matrix have the wrong number of rows/colums, resize it
+    if( outRegressor.rows() != (int)(6+this->getNrOfDegreesOfFreedom()) ||
+        outRegressor.cols() != (int)(10*this->getNrOfLinks()) ) {
+        outRegressor.resize(6+this->getNrOfDegreesOfFreedom(),10*this->getNrOfLinks());
+    }
+
+    //Calculate the result directly in the output matrix
+    Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_dynamics_regressor(outRegressor.data(),outRegressor.rows(),outRegressor.cols());
+
+    Eigen::MatrixXd dynamics_regressor;
+    dynamics_regressor.resize(6+this->getNrOfDegreesOfFreedom(),10*this->getNrOfLinks());
+
+    this->computeFwdKinematics();
+
+    KDL::CoDyCo::dynamicsRegressorLoop(this->pimpl->m_robot_model,
+                                       this->pimpl->m_qKDL,
+                                       this->pimpl->m_traversal,
+                                       this->pimpl->m_fwdPosKinematicsResults,
+                                       this->pimpl->m_fwdVelKinematicsResults,
+                                       this->pimpl->m_fwdProperAccKinematicsResults,
+                                       dynamics_regressor);
+
+
+    mapped_dynamics_regressor = dynamics_regressor;
+
+    return true;
+}
+
+bool DynamicsComputations::getModelDynamicsParameters(VectorDynSize& vec) const
+{
+    if( vec.size() != 10*this->getNrOfLinks() ) {
+        vec.resize(10*this->getNrOfLinks());
+    }
+
+    Eigen::Map< Eigen::VectorXd > mapped_vector(vec.data(),10*this->getNrOfLinks());
+    Eigen::VectorXd inertial_parameters;
+    inertial_parameters.resize(10*this->getNrOfLinks());
+
+    inertialParametersVectorLoop(this->pimpl->m_robot_model,inertial_parameters);
+
+    mapped_vector = inertial_parameters;
+
+    return true;
+}
+
+
 
 
 

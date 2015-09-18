@@ -26,6 +26,9 @@ namespace iDynTree
     template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
     class MovableJointImpl: public IJoint
     {
+    protected:
+        JointIndex m_index;
+
     public:
         /**
          * Denstructor
@@ -80,6 +83,11 @@ namespace iDynTree
          */
         //virtual MatrixFixSize<nrOfPosCoords, nrOfDOFs> getKinematicCouplingMatrix(const JointPos<nrOfPosCoords> & state) = 0;
 
+        // Documentation inherited
+        virtual void setIndex(JointIndex & _index);
+
+        // Documentation inherited
+        virtual JointIndex getIndex() const;
     };
 
     template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
@@ -93,6 +101,21 @@ namespace iDynTree
     {
         return nrOfDOFs;
     }
+
+    template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
+    void MovableJointImpl<nrOfPosCoords,nrOfDOFs>::setIndex(JointIndex & _index)
+    {
+        this->m_index = _index;
+    }
+
+    template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
+    JointIndex MovableJointImpl<nrOfPosCoords,nrOfDOFs>::getIndex() const
+    {
+        return this->m_index;
+    }
+
+
+
 
     template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
     MovableJointImpl<nrOfPosCoords,nrOfDOFs>::~MovableJointImpl()
