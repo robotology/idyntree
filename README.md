@@ -1,8 +1,17 @@
 iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=master)](https://travis-ci.org/robotology/idyntree)
 ===========
 
-iDynTree is a C++ library of algorithms related to robots dynamics, specifically designed for free floating robots.
+iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. 
 
+iDynTree is specifically designed for free-floating robots, but it is possible to use it also  with fixed-base robots.
+
+iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) it is possible to use the iDynTree algorithms in several other languages. Support and documentation is provided in particular for C++, Matlab, Python and Lua. If you are interested in using iDynTree with another programming language, feel free to [create a new issue](https://github.com/robotology/idyntree/issues/new) requesting support for it. 
+
+##  Contents 
+* **[Installation](#installation)**
+* **[Tutorials](#tutorials)**
+* **[Reference Paper](#reference-paper)**
+* **[Acknowledgments](#acknowledgments)**
 
 ## Installation
 iDynTree is developed in the context of the [CoDyCo](www.codyco.eu) European Project. For this reason it is usually installed throught the [codyco-superbuild](https://github.com/robotology/codyco-superbuild), an easy way to download, compile and install the CoDyCo software on multiple operating systems, using the [CMake](www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). For more informations on the superbuild concept, please check [YCM documentation](http://robotology.github.io/ycm/gh-pages/master/index.html#superbuild).  
@@ -50,8 +59,10 @@ the first 4 points in the guide) and then enable Matlab bindings generation with
 - [YARP](https://github.com/robotology/yarp)
 - [ICUB](https://github.com/robotology/icub-main)
 
+## Tutorials
+Coming soon
 
-### Reference paper
+## Reference paper
 A paper describing the algorithms implemented in iDynTree and their use in a real world scenario can be downloaded [here](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) . If you're going to use this library for your work, please quote it within any resulting publication:
 ~~~
 F. Nori, S. Traversaro, J. Eljaik, F. Romano, A. Del Prete, D. Pucci "iCub whole-body control through force regulation on rigid non-coplanar contacts", Frontiers in Robotics and AI, 2015.
@@ -70,3 +81,8 @@ The bibtex code for including this citation is provided:
   DOI={10.3389/frobt.2015.00006},
   ISSN={2296-9144}}
 ~~~
+
+## Acknowledgments
+The development of iDynTree is supported by the FP7 EU projects [CoDyCo (No. 600716 ICT 2011.2.1 Cognitive
+Systems and Robotics)](http://www.codyco.eu/)  and [Koroibot (No. 611909 ICT- 2013.2.1 Cognitive Systems and Robotics)](http://koroibot.eu/). It is also supported by the [Istituto Italiano di Tecnologia](http://www.iit.it).
+
