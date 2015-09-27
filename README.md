@@ -62,6 +62,8 @@ the first 4 points in the guide) and then enable Matlab bindings generation with
 ## Tutorials
 Coming soon
 
+Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
+
 ## Reference paper
 A paper describing the algorithms implemented in iDynTree and their use in a real world scenario can be downloaded [here](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) . If you're going to use this library for your work, please quote it within any resulting publication:
 ~~~
@@ -84,5 +86,6 @@ The bibtex code for including this citation is provided:
 
 ## Acknowledgments
 The development of iDynTree is supported by the FP7 EU projects [CoDyCo (No. 600716 ICT 2011.2.1 Cognitive
-Systems and Robotics)](http://www.codyco.eu/)  and [Koroibot (No. 611909 ICT- 2013.2.1 Cognitive Systems and Robotics)](http://koroibot.eu/). It is also supported by the [Istituto Italiano di Tecnologia](http://www.iit.it).
+Systems and Robotics)](http://www.codyco.eu/)  and [Koroibot (No. 611909 ICT- 2013.2.1 Cognitive Systems and Robotics)](http://koroibot.eu/). 
+The development is also supported by the [Istituto Italiano di Tecnologia](http://www.iit.it).
 
