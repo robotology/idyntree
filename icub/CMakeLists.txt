@@ -38,7 +38,7 @@ set_target_properties(idyntree-icub PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${iDynTree_ICUB_header}")
 
 target_include_directories(idyntree-icub PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
+                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                             ${skinDynLib_INCLUDE_DIRS}
                                             ${iDyn_INCLUDE_DIRS}
                                             ${GSL_INCLUDE_DIRS}

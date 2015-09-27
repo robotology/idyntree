@@ -47,7 +47,7 @@
 #include "iDynTree/Core/ClassicalAcc.h"
 #include "iDynTree/Core/Direction.h"
 #include "iDynTree/Core/Axis.h"
- 
+
 // Inertias
 #include "iDynTree/Core/RotationalInertiaRaw.h"
 #include "iDynTree/Core/SpatialInertiaRaw.h"

@@ -37,17 +37,13 @@ set_target_properties(idyntree-yarp PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
 
 
 target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
-                                            ${skinDynLib_INCLUDE_DIRS}
-                                            ${iDyn_INCLUDE_DIRS}
-                                            ${GSL_INCLUDE_DIRS}
-                                            ${YARP_INCLUDE_DIRS}
-                                            ${kdl_codyco_INCLUDE_DIRS}
-                                            ${EIGEN3_INCLUDE_DIR}
-                                            ${kdl_format_io_INCLUDE_DIRS})
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
+                                                 ${GSL_INCLUDE_DIRS}
+                                                 ${YARP_INCLUDE_DIRS}
+                                                 ${EIGEN3_INCLUDE_DIR})
 
 
-target_link_libraries(idyntree-yarp LINK_PUBLIC  
+target_link_libraries(idyntree-yarp LINK_PUBLIC
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}
                                             idyntree-core
