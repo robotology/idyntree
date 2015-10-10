@@ -6,6 +6,7 @@
  */
 
 
+#include <iDynTree/Core/AngularMotionVector3.h>
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Axis.h>
@@ -131,12 +132,12 @@ namespace iDynTree
     {
         return changeCoordFrameOfT<SpatialMotionVector>(*this, other);
     }
-    
+
     SpatialForceVector Rotation::changeCoordFrameOf(const SpatialForceVector& other) const
     {
         return changeCoordFrameOfT<SpatialForceVector>(*this, other);
     }
-    
+
     Twist Rotation::changeCoordFrameOf(const Twist& other) const
     {
         return changeCoordFrameOfT<Twist>(*this, other);
@@ -249,6 +250,23 @@ namespace iDynTree
     RotationalInertiaRaw Rotation::operator*(const RotationalInertiaRaw& other) const
     {
         return changeCoordFrameOf(other);
+    }
+
+    AngularMotionVector3 Rotation::log() const
+    {
+        AngularMotionVector3 ret;
+
+        Eigen::AngleAxisd aa(Eigen::Map<const Matrix3dRowMajor>(this->data()));
+
+        // Implementation inspired from DART, see
+        // https://github.com/dartsim/dart/pull/407/files
+        // https://github.com/dartsim/dart/pull/334
+        // https://github.com/dartsim/dart/issues/88
+        std::cout << aa.angle() << std::endl;
+        std::cout << aa.axis()  << std::endl;
+        Eigen::Map<Eigen::Vector3d>(ret.data()) = aa.angle()*aa.axis();
+
+        return ret;
     }
 
     Rotation Rotation::RotX(const double angle)

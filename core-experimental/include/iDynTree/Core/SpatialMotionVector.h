@@ -17,15 +17,20 @@
 namespace iDynTree
 {
     class SpatialForceVector;
+    class Transform;
     class Dummy {};
 
     /**
-     * Class providing the raw coordinates for any motion spatial vector.
+     * Class providing the raw coordinates for any motion spatial vector
+     * (i.e. vector form of an element of se(3)).
      *
      * \ingroup iDynTreeCore
      *
-     * A motion spatial vector can be used to to describe a  twist, twist acceleration,
-     * and their derivatives.
+     * A motion spatial vector can be used to to describe a twist, twist acceleration
+     * or their derivatives.
+     *
+     * A generic motion spatial vector can also be used to store the logarithm of
+     * an iDynTree::Transform (i.e. an element of SE(3)).
      *
      * This is just a basic vector, used to implement the adjoint transformations in
      * a general way. The relative adjoint transformation is contained in
@@ -56,10 +61,16 @@ namespace iDynTree
         virtual ~SpatialMotionVector();
 
         /**
-         * Cross products
+         * Cross product
          */
         SpatialMotionVector cross(const SpatialMotionVector& other) const;
         SpatialForceVector cross(const SpatialForceVector& other) const;
+
+        /**
+         * Exp mapping between a  generic element of se(3) (iDynTree::SpatialMotionVector)
+         * to the corresponding element of SE(3) (iDynTree::Transform).
+         */
+        Transform exp() const;
     };
 
 }

@@ -255,9 +255,9 @@ std::string Transform::reservedToString() const
          * p the position of B with respect to A (\vec{AB} expressed in Frame A coordinates, op1.pos)
          * xlt(-p) the spatial translation component of A^X_B = xlt(-op1.pos)
          * rot(R') the spatial rotation component of A^X_B = rot(op1.rot)
-         * 
+         *
          * (For more details, refer to Featherstone's Rigid Body Dynamics Algorithms, 2.8 Coordinate Transforms)
-         * 
+         *
          * so, considering a given "twist":
          * A^X_B * twist = xlt(-op1.pos) * rot(op1.rot) * twist
          *
@@ -381,6 +381,22 @@ std::string Transform::reservedToString() const
         retEigen.block<3,3>(3,3) = R;
 
         return ret;
+    }
+
+    SpatialMotionVector Transform::log() const
+    {
+        SpatialMotionVector logRes;
+
+        // Understand if there is a meaningful
+        // semantics for this operation and if it exists use it
+
+        // the linear part is not changed by the log
+        memcpy(logRes.getLinearVec3().data(),this->getPosition().data(),3*sizeof(double));
+
+        // the angular part instead mapped by SO(3) -> so(3) log
+        logRes.setAngularVec3(this->getRotation().log());
+
+        return logRes;
     }
 
 }

@@ -19,6 +19,7 @@ add_unit_test(SpatialAcc)
 add_unit_test(SpatialInertia)
 add_unit_test(Twist)
 add_unit_test(Wrench)
+add_unit_test(ExpLog)
 
 if(IDYNTREE_USES_PYTHON)
     add_rtf_test(geometry.py)
