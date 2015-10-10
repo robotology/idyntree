@@ -1,0 +1,63 @@
+<robot name="test_icub">
+    <link name="base_link" />
+    <joint name="base_fixed_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 0 0" />
+        <parent link="base_link" />
+        <child link="root_link" />
+    </joint>
+     <link name="root_link">
+     <inertial>
+            <mass value="4.72" />
+            <origin xyz="0 0 0" rpy="0 -0 0" />
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/visual/icub_root_link.dae" scale="1 1 1" />
+            </geometry>
+            <material name="material.metal">
+                <texture />
+                <color rgba="0 0 0 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="meshes/collision/icub_simple_collision_root_link.dae" scale="1 1 1" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="torso_pitch" type="revolute">
+        <origin xyz="0 0 0" rpy="-2.77556e-17 -1.5708 3.14159" />
+        <axis xyz="0 1 6.12323e-17" />
+        <parent link="root_link" />
+        <child link="torso_1" />
+        <dynamics damping="0.1" friction="0" />
+        <limit effort="36" velocity="100" lower="-0.383972" upper="1.46608" />
+    </joint>
+    <link name="torso_1">
+        <inertial>
+            <mass value="0" />
+            <origin xyz="0 0 0" rpy="0 -0 0" />
+            <inertia ixx="0.0004544" ixy="-4.263e-05" ixz="-3.889e-08" iyy="0.001141" iyz="0" izz="0.001236" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="-1.5708 5.10314e-12 1.11022e-16" />
+            <geometry>
+                <mesh filename="meshes/visual/icub_lap_belt_1.dae" scale="1 1 1" />
+            </geometry>
+            <material name="material.metal">
+                <texture />
+                <color rgba="0 0 0 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="-1.5708 5.10314e-12 1.11022e-16" />
+            <geometry>
+                <mesh filename="meshes/collision/icub_simple_collision_lap_belt_1.dae" scale="1 1 1" />
+            </geometry>
+        </collision>
+    </link>
+</robot>

@@ -65,6 +65,13 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           DEPENDS IDYNTREE_ENABLE_RPATH
                           USE_LINK_PATH)
 
+# include test data before everything,
+# to be sure that is available to test
+# of all components
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests/data)
+endif()
+
 add_subdirectory(core-experimental)
 add_subdirectory(model)
 
@@ -96,10 +103,6 @@ include(AddUninstallTarget)
 
 if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_KDL)
     add_subdirectory(tests)
-endif()
-
-if(IDYNTREE_COMPILE_TESTS)
-    add_subdirectory(tests/data)
 endif()
 
 add_subdirectory(bindings)
