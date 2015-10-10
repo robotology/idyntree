@@ -78,11 +78,11 @@ http://wiki.icub.org/codyco/dox/html/dynamics_notation.html .
 ~~~  
 
 You can also get the dynamics regressor. 
-The dynamics regressor is a (6+dofs) * (10*nrOfLinks) Y matrix such that:
+The dynamics regressor is a (6+dofs) \* (10 \* nrOfLinks) Y matrix such that:
 Y pi = M(q) d(v)/dt + C(q,v)v + g(q) 
 with M(q), C(q,v) and g(q) defined in http://wiki.icub.org/codyco/dox/html/dynamics_notation.html .
-The pi vector is a 10*nrOfLinks inertial parameters vector, such that the elements of the vector
-from the ((i-1)*10)-th to the (i*10-1)-th belong to the i-th link. For more details on the inertial
+The pi vector is a 10 \* nrOfLinks inertial parameters vector, such that the elements of the vector
+from the ((i-1) \* 10)-th to the (i \* 10-1)-th belong to the i-th link. For more details on the inertial
 parameters vector, please check https://hal.archives-ouvertes.fr/hal-01137215/document . 
 
 ~~~cpp
