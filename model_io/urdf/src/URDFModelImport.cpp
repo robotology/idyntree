@@ -14,6 +14,7 @@
 #include <iDynTree/Model/Model.h>
 
 #include <tinyxml.h>
+#include <iDynTree/ModelIO/impl/urdf_export.hpp>
 
 #include <cstdlib>
 #include <cmath>
@@ -476,6 +477,14 @@ bool modelFromURDF(const std::string & urdf_filename,
                          iDynTree::Model & output)
 {
     std::ifstream ifs(urdf_filename.c_str());
+
+    if( !ifs.is_open() )
+    {
+        std::cerr << "[ERROR] iDynTree::modelFromURDF : error opening file "
+                  << urdf_filename << std::endl;
+        return false;
+    }
+
     std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
                             (std::istreambuf_iterator<char>()    ) );
 

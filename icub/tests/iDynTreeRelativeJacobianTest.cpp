@@ -1,3 +1,4 @@
+#include "testModels.h"
 
 #include <iCub/iDynTree/TorqueEstimationTree.h>
 
@@ -174,10 +175,8 @@ void set_random_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree)
     return;
 }
 
-int main(int argc, char** argv)
+bool runRelativeJacobianTest(std::string urdfFileName, std::string kinematic_base)
 {
-
-
     double tol = 1e-5;
 
     //Initializing the random number generator
@@ -192,11 +191,9 @@ int main(int argc, char** argv)
     //The iCubTree is istantiated
     //note that the serialization used is the one used in iDyn, while the
     //default one is the one used in skinDynLib
-    std::string urdf_filename(argv[1]);
     int verbose = 1;
     std::vector<std::string> sensors;
-    std::string kinematic_base = argv[2];
-    DynTree icub_idyntree(urdf_filename,sensors,kinematic_base);
+    DynTree icub_idyntree(urdfFileName,sensors,kinematic_base);
 
     //We fill the robot state with random values, for testing
     //in reality this should be filled with value read from the robot
@@ -234,7 +231,7 @@ int main(int argc, char** argv)
         {
             std::cout << "getRelativeJacobian between " << link_1
                       << " and " << link_2 << " failed" << std::endl;
-            return -1;
+            return false;
         }
     }
 
@@ -262,12 +259,25 @@ int main(int argc, char** argv)
             {
                 std::cout << "getRelativeJacobian between " << link_1
                       << " and " << link_2 << " failed" << std::endl;
-                return -1;
+                return false;
             }
         }
     }
 
+    return true;
+}
 
-    return 0;
-
+int main(int argc, char** argv)
+{
+    bool ok = true;
+    ok = ok && runRelativeJacobianTest(IDYNTREE_TEST_MODELS_PATH"/icub.urdf","imu_frame");
+    ok = ok && runRelativeJacobianTest(IDYNTREE_TEST_MODELS_PATH"/bigman.urdf","imu_link");
+    if( !ok )
+    {
+        return -1;
+    }
+    else
+    {
+        return 0;
+    }
 }

@@ -5,6 +5,8 @@
  *
  */
 
+#include "testModels.h"
+
 #include <iDynTree/Core/TestUtils.h>
 
 #include <iDynTree/Model/Model.h>
@@ -34,8 +36,8 @@ void checkURDF(std::string fileName,
 
 int main()
 {
-    checkURDF("oneLink.urdf",1,0,0,"link1");
-    checkURDF("twoLinks.urdf",2,1,1,"link1");
+    checkURDF(IDYNTREE_TEST_MODELS_PATH"/oneLink.urdf",1,0,0,"link1");
+    checkURDF(IDYNTREE_TEST_MODELS_PATH"/twoLinks.urdf",2,1,1,"link1");
 
     return EXIT_SUCCESS;
 }

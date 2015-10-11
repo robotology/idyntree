@@ -5,6 +5,8 @@
  *
  */
 
+#include "testModels.h"
+
 #include <iDynTree/HighLevel/DynamicsComputations.h>
 
 #include <iDynTree/Core/Utils.h>
@@ -250,9 +252,9 @@ void assertConsistency(std::string modelName)
 
 int main()
 {
-    assertConsistency("oneLink.urdf");
-    assertConsistency("twoLinks.urdf");
-    assertConsistency("icub.urdf");
+    assertConsistency(getAbsModelPath("oneLink.urdf"));
+    assertConsistency(getAbsModelPath("twoLinks.urdf"));
+    assertConsistency(getAbsModelPath("icub.urdf"));
 
     return EXIT_SUCCESS;
 }

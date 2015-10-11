@@ -2,6 +2,8 @@
 #ifndef IDYNTREE_TEST_MODELS_H
 #define IDYNTREE_TEST_MODELS_H
 
+#include <string>
+
 /* Path to test model files */
 #define IDYNTREE_TEST_MODELS_PATH "@CMAKE_CURRENT_SOURCE_DIR@"
 
@@ -16,5 +18,10 @@ const char *IDYNTREE_TESTS_URDFS[] = {"oneLink.urdf",
                                       "bigman.urdf"};
 
 const unsigned int IDYNTREE_TESTS_URDFS_NR = 7;
+
+inline std::string getAbsModelPath(std::string modelName)
+{
+    return std::string(IDYNTREE_TEST_MODELS_PATH) + "/" + modelName;
+}
 
 #endif // #ifndef IDYNTREE_TEST_MODELS_H
