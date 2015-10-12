@@ -16,6 +16,9 @@ classdef AngularMotionVector3 < iDynTree.MotionVector3__AngularMotionVector3
         self.swigInd=uint64(0);
       end
     end
+    function varargout = exp(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(305, self, varargin{:});
+    end
   end
   methods(Static)
   end

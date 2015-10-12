@@ -2,15 +2,15 @@ classdef IJointPos < SwigRef
   methods
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(539, self);
+        iDynTreeMATLAB_wrap(543, self);
         self.swigInd=uint64(0);
       end
     end
     function varargout = pos(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(540, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(544, self, varargin{:});
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(541, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(545, self, varargin{:});
     end
     function self = IJointPos(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')

@@ -2,15 +2,21 @@ classdef MovableJointImpl4 < iDynTree.IJoint
   methods
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(589, self);
+        iDynTreeMATLAB_wrap(603, self);
         self.swigInd=uint64(0);
       end
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(590, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(604, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(591, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(605, self, varargin{:});
+    end
+    function varargout = setIndex(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(606, self, varargin{:});
+    end
+    function varargout = getIndex(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(607, self, varargin{:});
     end
     function self = MovableJointImpl4(varargin)
       self@iDynTree.IJoint('_swigCreate');
