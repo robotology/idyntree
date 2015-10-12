@@ -19,6 +19,7 @@ class Twist;
 class SpatialInertia;
 class ClassicalAcc;
 class SpatialAcc;
+class Wrench;
 
 namespace HighLevel {
 
@@ -412,6 +413,13 @@ public:
 
     //@}
 
+
+    /**
+     * @name Methods to compute Inverse Dynamics
+     *
+     */
+    bool inverseDynamics(iDynTree::VectorDynSize & outTorques,
+                         iDynTree::Wrench & baseReactionForce);
 
     /**
       * @name Methods to get Jacobians and Dynamics regressor

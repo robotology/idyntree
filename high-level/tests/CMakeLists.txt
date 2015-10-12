@@ -20,7 +20,7 @@ macro(add_unit_test_hl_yarp classname)
 endmacro()
 
 # todo
-#add_unit_test_hl(DynamicsComputations)
+add_unit_test_hl(DynamicsComputations)
 
 #
 add_unit_test_hl_yarp(DynamicsComputationsDynTreeConsistency)
