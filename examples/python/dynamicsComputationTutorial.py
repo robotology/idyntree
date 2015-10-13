@@ -43,7 +43,7 @@ else:
     print "Jacobian of lf_foot is\n" + jac.toString();
     
 links = dynComp.getNrOfLinks();
-regr = iDynTree.MatrixDynSize(6+dofs,6+10*links);
+regr = iDynTree.MatrixDynSize(6+dofs,10*links);
 ok = dynComp.getDynamicsRegressor(regr);
 if( not ok ):
     print "Error in computing the dynamics regressor";
