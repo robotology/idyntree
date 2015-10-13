@@ -29,11 +29,14 @@ namespace iDynTree {
     enum SensorType
     {
         SIX_AXIS_FORCE_TORQUE = 0,
+        ACCELEROMETER = 1,
+        GYROSCOPE = 2,
+        ORIENTATION = 3
     };
 
     // This should be equal to the number of option
     //  in the SensorType enum
-    const int NR_OF_SENSOR_TYPES = 1;
+    const int NR_OF_SENSOR_TYPES = 4;
 
 
      /**
@@ -214,6 +217,9 @@ namespace iDynTree {
             bool setMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
                                 const iDynTree::Wrench & wrench);
+
+            
+            
             /**
              * Set the wrench measurement for measurement
              *
