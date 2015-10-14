@@ -15,14 +15,13 @@
  * Public License for more details
  */
 
+
+# include "iDynTree/Core/LinearMotionVector3.h"
+// #include "iDynTree/Sensors/IMeasurement.hpp"
+
 #include "iDynTree/Sensors/Accelerometer.hpp"
 
-//#include "kdl_codyco/undirectedtree.hpp"
-
-// #include "kdl_codyco/KDLConversions.h"
 #include "iDynTree/Core/Transform.h"
-#include "iDynTree/Core/Wrench.h"
-
 
 namespace iDynTree {
 
@@ -30,16 +29,15 @@ struct Accelerometer::AccelerometerPrivateAttributes
 {
     // Name/id of the sensor
     std::string name;
-    // Index of the link to which the Accelerometer is connected
-    int link;
-    // Transform from the sensor
+
     Transform link_H_sensor;
     // Index of the parent junction
-//      int parent_junction_index;
+    int parent_junction_index;
     // Name of the parent junction
-//      std::string parent_junction_name;
+     std::string parent_junction_name;
     // Name of the link to which the Accelerometer is connected
     std::string linkName;
+//     MeasurementType measurementType = LINEAR_ACCELERATION;
 
 };
 
@@ -49,7 +47,9 @@ Accelerometer::Accelerometer()
     this->pimpl = new AccelerometerPrivateAttributes;
 
     this->pimpl->name = "";
-    this->pimpl->link = -1;
+    this->pimpl->parent_junction_index = -1;
+    this->pimpl->parent_junction_name = "";
+    
 }
 
 Accelerometer::Accelerometer(const Accelerometer& other):
@@ -79,40 +79,37 @@ bool Accelerometer::setName(const std::string& _name)
     return true;
 }
 
-/*
-bool SixAxisForceTorqueSensor::setAppliedWrenchLink(const int applied_wrench_index)
+
+bool Accelerometer::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor) const
 {
-    this->pimpl->appliedWrenchLink = applied_wrench_index;
-    return true;
-}*/
+      this->pimpl->link_H_sensor = link_H_sensor;
+      return true;
+}
 
 
-bool Accelerometer::setLinkSensorTransform(const int link_index, const iDynTree::Transform& link_H_sensor) const
+bool Accelerometer::setParent(const std::string& parent)
 {
-    this->pimpl->link = link_index;
-    this->pimpl->link_H_sensor = link_H_sensor;
+    this->pimpl->parent_junction_name = parent;
     return true;
 }
 
-// bool SixAxisForceTorqueSensor::setSecondLinkSensorTransform(const int link_index, const iDynTree::Transform& link_H_sensor) const
-// {
-//     this->pimpl->link2 = link_index;
-//     this->pimpl->link2_H_sensor = link_H_sensor;
-//     return true;
-// }
+bool Accelerometer::setParentIndex(const int parent_index)
+{
+    this->pimpl->parent_junction_index = parent_index;
+    return true;
 
-// bool Accelerometer::setParent(const std::string& parent)
-// {
-//     this->pimpl->parent_junction_name = parent;
-//     return true;
-// }
-// 
-// bool SixAxisForceTorqueSensor::setParentIndex(const int parent_index)
-// {
-//     this->pimpl->parent_junction_index = parent_index;
-//     return true;
-// }
-// 
+}
+
+std::string Accelerometer::getParent() const
+{
+    return(this->pimpl->parent_junction_name);
+}
+
+int Accelerometer::getParentIndex() const
+{
+    return(this->pimpl->parent_junction_index);
+}
+
 bool Accelerometer::isValid() const
 {
     if( this->getName() == "" )
@@ -120,18 +117,11 @@ bool Accelerometer::isValid() const
         return false;
     }
 
-    if( this->pimpl->link < 0 )
+    if( this->pimpl->parent_junction_index < 0 )
     {
         // Return false because the links is not appropriately setted
         return false;
     }
-
-//     if( this->pimpl->link1 !=
-//         this->pimpl->appliedWrenchLink &&
-//         this->pimpl->link2 != this->pimpl->appliedWrenchLink)
-//     {
-//         return false;
-//     }
 
     return true;
 }
@@ -153,114 +143,16 @@ SensorType Accelerometer::getSensorType() const
 }
 
 /*
-int Accelerometer::getAppliedWrenchLink() const
+bool Accelerometer::getLinkSensorTransform(iDynTree::Transform& link_H_sensor) const
 {
-    return this->pimpl->appliedWrenchLink;
-}*/
-
-// std::string Accelerometer::getParent() const
-// {
-//     return this->pimpl->parent_junction_name;
-// }
-// 
-// int Accelerometer::getParentIndex() const
-// {
-//     return this->pimpl->parent_junction_index;
-// }
-
-bool Accelerometer::isLinkAttachedToSensor(const int link_index) const
-{
-    return (this->pimpl->link == link_index);
-}
-
-
-bool Accelerometer::getLinkSensorTransform(const int link_index, iDynTree::Transform& link_H_sensor) const
-{
-    if( this->pimpl->link == link_index )
-    {
-        link_H_sensor = this->pimpl->link_H_sensor;
-        return true;
-    }
-
-//     if( this->pimpl->link2 == link_index )
-//     {
-//         link_H_sensor = this->pimpl->link2_H_sensor;
-//         return true;
-//     }
-
+    link_H_sensor = this->pimpl->link_H_sensor;
+    
     return false;
-}
-
-// bool Accelerometer::getWrenchAppliedOnLink(const int link_index,
-//                                                       const Wrench& measured_wrench,
-//                                                       iDynTree::Wrench& wrench_applied_on_link) const
-// {
-//     assert(this->isValid());
-// 
-//     if( link_index == this->pimpl->link1 )
-//     {
-//         wrench_applied_on_link = this->pimpl->link1_H_sensor*measured_wrench;
-//         // If the measure wrench is the one applied on the other link, change sign
-//         if( this->getAppliedWrenchLink() != link_index )
-//         {
-//             wrench_applied_on_link = -wrench_applied_on_link;
-//         }
-// 
-//         return true;
-//     }
-//     else if( link_index == this->pimpl->link2 )
-//     {
-//         wrench_applied_on_link = this->pimpl->link2_H_sensor*measured_wrench;
-// 
-//         if( this->getAppliedWrenchLink() != link_index )
-//         {
-//             wrench_applied_on_link = -wrench_applied_on_link;
-//         }
-// 
-//         return true;
-//     }
-//     else
-//     {
-//         wrench_applied_on_link = iDynTree::Wrench();
-//         return false;
-//     }
-// }
-
-int Accelerometer::getLinkIndex() const
-{
-    return this->pimpl->link;
-}
-
-// int SixAxisForceTorqueSensor::getSecondLinkIndex() const
-// {
-//     return this->pimpl->link2;
-// }
-// 
-bool Accelerometer::setLinkName(const std::string& name)
-{
-    this->pimpl->linkName = name;
-    return true;
-}
-/*
-bool SixAxisForceTorqueSensor::setSecondLinkName(const std::string& name)
-{
-    this->pimpl->link2Name = name;
-    return true;
-}
-
-std::string SixAxisForceTorqueSensor::getFirstLinkName() const
-{
-    return this->pimpl->link1Name;
-}
-
-std::string SixAxisForceTorqueSensor::getSecondLinkName() const
-{
-    return this->pimpl->link2Name;
 }*/
 
 
-bool getAccelerationOfLink(const int link_index,
-                           const iDynTree::LinAcceleration & measured_acceleration,
+
+bool getAccelerationOfLink(const iDynTree::LinAcceleration & measured_acceleration,
                            iDynTree::LinAcceleration & linear_acceleration_of_link )
 {
     return(true);

@@ -22,6 +22,8 @@
 namespace iDynTree
 {
     class Transform;
+    class LinearMotionVector3;
+    typedef LinearMotionVector3 LinAcceleration;
 }
 
 #include <iDynTree/Sensors/Sensors.hpp>
@@ -64,50 +66,40 @@ namespace iDynTree {
          */
         bool setName(const std::string &_name);
 
-//        /**
-//          * Set the transform from the sensor to the parent link attached to the sensor.
-//          *
-//          * @return true if link_index is parent link attached to the accelerometer sensor, false otherwise.
-//          */
-//         bool setParentLinkSensorTransform(const int link_index, const iDynTree::Transform & link_H_sensor) const;
+       /**
+         * Set the transform from the sensor to the parent link attached to the sensor.
+         *
+         * @return true if link_index is parent link attached to the accelerometer sensor, false otherwise.
+         */
+        bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor) const;
 
-//         /**
-//          * Get the index of the parent link attached to the sensor.
-//          *
-//          * @return the index of the parent link attached to the sensor.
-//          */
-//         int getParentLinkIndex() const;
-// 
-//         /**
-//          * Set the name of the parent link to which the accelerometer sensor is attached.
-//          */
-//         bool setParentLinkName(const std::string & name);
-// 
-//         /**
-//          * Get the name of the parent link at which the accelerometer sensor is attached.
-//          */
-//         std::string getParentLinkName() const;
+        /**
+         * Get the index of the parent link attached to the sensor.
+         *
+         * @return the index of the parent link attached to the sensor.
+         */
+        int getParentLinkIndex() const;
+
+        /**
+         * Set the name of the parent link to which the accelerometer sensor is attached.
+         */
+        bool setParentLinkName(const std::string & name);
+
+        /**
+         * Get the name of the parent link at which the accelerometer sensor is attached.
+         */
+        std::string getParentLinkName() const;
 
         /**
          * Documented in Sensor
          */
-//         bool setParent(const std::string &parent);
+        bool setParent(const std::string &parent);
 
         /**
          * Documented in Sensor
          */
-//         bool setParentIndex(const int parent_index);
-
-        /**
-         * The Six Axis Force Torque sensor measure the Force Torque (wrench)
-         * applied by a link on another link. This method sets the link
-         * on which the measured force is applied.
-         * @return the index of the link on which the measure force is applied.
-         */
-//        bool setAppliedWrenchLink(const int applied_wrench_index);
-
-        
-        
+        bool setParentIndex(const int parent_index);
+     
         int getLinkIndex() const;
         
         
@@ -124,39 +116,25 @@ namespace iDynTree {
         SensorType getSensorType() const;
 
 
-//         /**
-//          * Documented in Sensor
-//          */
-//         std::string getParent() const;
-// 
-//         /**
-//          * Documented in Sensor
-//          */
-//         int getParentIndex() const;
-// 
-//         /**
-//          * Documented in Sensor
-//          */
+        /**
+         * Documented in Sensor
+         */
+        std::string getParent() const;
+
+        /**
+         * Documented in Sensor
+         */
+        int getParentIndex() const;
+
+        /**
+         * Documented in Sensor
+         */
         bool isValid() const;
 
         /**
          * Documented in Sensor
          */
         Sensor * clone() const;
-
-        /**
-         * The Six Axis Force Torque sensor measure the Force Torque (wrench)
-         * applied by a link on another link. This method returns the link
-         * on which the measured force is applied.
-         * @return the index of the link on which the measure force is applied.
-         */
-  //      int getAppliedWrenchLink() const;
-
-        /**
-         * Check if a given link is attached to this FT sensor.
-         * @return true if link_index is attached to the ft sensor, false otherwise
-         */
-       bool isLinkAttachedToSensor(const int link_index) const;
 
 
         /**
@@ -172,12 +150,8 @@ namespace iDynTree {
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-       bool getAccelerationOfLink(const int link_index,
-                                   const iDynTree::LinAcceleration & measured_acceleration,
+       bool getAccelerationOfLink(const iDynTree::LinAcceleration & measured_acceleration,
                                      iDynTree::LinAcceleration & linear_acceleration_of_link ) const;
-        
-        bool getAccelerationOfLink(const int link_index);//,
-                                   //const iDynTree::
     };
 
 

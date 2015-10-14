@@ -31,12 +31,12 @@ namespace iDynTree {
         SIX_AXIS_FORCE_TORQUE = 0,
         ACCELEROMETER = 1,
         GYROSCOPE = 2,
-        ORIENTATION = 3
+       // ORIENTATION = 3
     };
 
     // This should be equal to the number of option
     //  in the SensorType enum
-    const int NR_OF_SENSOR_TYPES = 4;
+    const int NR_OF_SENSOR_TYPES = 3;
 
 
      /**

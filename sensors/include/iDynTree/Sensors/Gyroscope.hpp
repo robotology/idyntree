@@ -22,10 +22,11 @@
 namespace iDynTree
 {
     class Transform;
+    class AngularMotionVector3;
+    typedef AngularMotionVector3 AngVelocity;
 }
 
 #include <iDynTree/Sensors/Sensors.hpp>
-
 #include <vector>
 
 namespace iDynTree {
@@ -65,59 +66,22 @@ namespace iDynTree {
         bool setName(const std::string &_name);
 
         /**
-         * Set the transform from the sensor to the link attached to the sensor.
+         * Set the transform from the sensor to the parent link sensor is attached to.
          *
          * @return true if link_index is the link attached to the Gyroscope, false otherwise.
          */
-        bool setLinkSensorTransform(const int link_index, const iDynTree::Transform & link_H_sensor) const;
+        bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor) const;
 
 
         /**
-         * Get the index of the link attached to the sensor.
-         *
-         * @return the index of the link attached to the sensor.
+         * Documented in Sensor
          */
-        int getLinkIndex() const;
-
- 
+        bool setParent(const std::string &parent);
 
         /**
-         * Set the name of the link at which the Gyroscope is attached.
+         * Documented in Sensor
          */
-        bool setLinkName(const std::string & name);
-
-        /**
-         * Set the name of the first link at which the FT sensor is attached.
-         */
-//         bool setSecondLinkName(const std::string & name);
-
-        /**
-         * Get the name of the link at which the FT sensor is attached.
-         */
-        std::string getLinkName() const;
-
-        /**
-         * Get the name of the second link at which the FT sensor is attached.
-         */
-//         std::string getSecondLinkName() const;
-
-//         /**
-//          * Documented in Sensor
-//          */
-//         bool setParent(const std::string &parent);
-// 
-//         /**
-//          * Documented in Sensor
-//          */
-//         bool setParentIndex(const int parent_index);
-// 
-//         /**
-//          * The Six Axis Force Torque sensor measure the Force Torque (wrench)
-//          * applied by a link on another link. This method sets the link
-//          * on which the measured force is applied.
-//          * @return the index of the link on which the measure force is applied.
-//          */
-// //         bool setAppliedWrenchLink(const int applied_wrench_index);
+        bool setParentIndex(const int parent_index);
 
         /**
          * Documented in the sensor
@@ -131,15 +95,15 @@ namespace iDynTree {
         SensorType getSensorType() const;
 
 
-//         /**
-//          * Documented in Sensor
-//          */
-//         std::string getParent() const;
-// 
-//         /**
-//          * Documented in Sensor
-//          */
-//         int getParentIndex() const;
+        /**
+         * Documented in Sensor
+         */
+        std::string getParent() const;
+
+        /**
+         * Documented in Sensor
+         */
+        int getParentIndex() const;
 
         /**
          * Documented in Sensor
@@ -151,36 +115,21 @@ namespace iDynTree {
          */
         Sensor * clone() const;
 
-//         /**
-//          * The Six Axis Force Torque sensor measure the Force Torque (wrench)
-//          * applied by a link on another link. This method returns the link
-//          * on which the measured force is applied.
-//          * @return the index of the link on which the measure force is applied.
-//          */
-// //         int getAppliedWrenchLink() const;
 
         /**
-         * Check if a given link is attached to this Gyroscope sensor.
-         * @return true if link_index is attached to the Gyroscope sensor, false otherwise
-         */
-        bool isLinkAttachedToSensor(const int link_index) const;
-
-
-        /**
-         * Get the transform from the sensor to the specified link.
+         * Get the transform from the sensor to the parent link.
          *
          * @return true if link_index is attached to the FT sensor, false otherwise.
          */
-        bool getLinkSensorTransform(const int link_index, iDynTree::Transform & link_H_sensor) const;
+        bool getLinkSensorTransform(iDynTree::Transform & link_H_sensor) const;
 
 
         /**
-         * Get wrench applied on the specified link expressed in the specified link frame.
+         * Get angular velcity of the link on which the sensor is fixed and the angular velocity is being measured.
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        bool getAngularVelocityOfLink(const int link_index,
-                                    const iDynTree::AngVelocity & measured_angular_velocity,
+        bool getAngularVelocityOfLink(const iDynTree::AngVelocity & measured_angular_velocity,
                                     iDynTree::AngVelocity & angular_velocity_of_link ) const;
 
 

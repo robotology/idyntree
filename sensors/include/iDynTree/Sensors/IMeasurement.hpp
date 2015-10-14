@@ -20,28 +20,50 @@
 
 namespace iDynTree {
     class Wrench;
-    class LinAcceleration;
-    class AngVelocity;
+    class AngularMotionVector3;
+    class LinearMotionVector3;
+    typedef LinearMotionVector3 LinAcceleration;
+    typedef AngularMotionVector3 AngVelocity;
 }
 
 
 namespace iDynTree{
-    class iMeasurement{
+    
+    enum MeasurementType
+    {
+        WRENCH = 0,
+        LINEAR_ACCELERATION = 1,
+        ANGULAR_VELOCITY = 2,
+       // ORIENTATION = 3
+    };
+    
+    
+    class IMeasurement{
         
+    public :
+        IMeasurement();
+        ~IMeasurement();
+       // virtual SensorType getSensorType(void) = 0;
         
     };
     
     
-    class iWrench : public iMeasurement, public iDynTree::Wrench
+    class MeasurementWrench : public IMeasurement, public iDynTree::Wrench
     {
         
-    };
-    
-    class iLinAcceleration : public iMeasurement, public iDynTree::LinAcceleration
-    {
+     //   SensorType getSensorType(void);
         
     };
     
+    class MeasurementLinAcceleration : public IMeasurement, public iDynTree::LinAcceleration
+    {
+      //  SensorType getSensorType(void);
+    };
+    
+    class MeasurementAngVelocity : public IMeasurement, public iDynTree::AngVelocity
+    {
+      //  SensorType getSensorType(void);
+    };
     
 }
 
