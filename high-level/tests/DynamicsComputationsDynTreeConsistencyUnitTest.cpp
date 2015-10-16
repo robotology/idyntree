@@ -143,7 +143,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
     {
         baseVel(i) = random_double();
         baseAcc(i) = random_double();
-        properAcc(i) = baseAcc(i) + gravity(i);
+        properAcc(i) = baseAcc(i) - gravity(i);
     }
 
     for(int dof=0; dof < dofs; dof++)

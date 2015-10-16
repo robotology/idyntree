@@ -10,7 +10,8 @@ set(IDYNTREE_TESTS_URDFS icub.urdf
                          bigman.urdf
                          twoLinks.urdf
                          oneLink.urdf
-                         icubTwoLinks.urdf)
+                         icubTwoLinks.urdf
+                         robotModelTestTwoLinks.urdf)
 
 
 # configure an header containing the path
