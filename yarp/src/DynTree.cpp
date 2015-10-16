@@ -444,7 +444,7 @@ bool DynTree::setD2AngKDL(const KDL::JntArray & _d2q)
 
 bool DynTree::setGravity(const yarp::sig::Vector &gravity)
 {
-    return setInertialMeasureAndLinearVelocity(three_zeros,three_zeros,gravity,three_zeros);
+    return setInertialMeasureAndLinearVelocity(three_zeros,three_zeros,-1*gravity,three_zeros);
 }
 
 bool DynTree::setInertialMeasureAndLinearVelocity(const yarp::sig::Vector &dp0, const yarp::sig::Vector &w0, const yarp::sig::Vector &ddp0, const yarp::sig::Vector &dw0)

@@ -446,7 +446,7 @@ bool DynamicsComputations::setRobotState(const VectorDynSize& q,
                                                    this->pimpl->m_baseSpatialTwist,this->pimpl->m_baseSpatialAcc);
 
     // we save the proper acceleration of the base link
-    this->pimpl->m_baseProperSpatialAcc = this->pimpl->m_baseSpatialAcc + ToKDL(gravity_acceleration_wrt_base);
+    this->pimpl->m_baseProperSpatialAcc = this->pimpl->m_baseSpatialAcc - ToKDL(gravity_acceleration_wrt_base);
 
     return true;
 }
