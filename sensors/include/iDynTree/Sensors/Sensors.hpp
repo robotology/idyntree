@@ -19,9 +19,16 @@
 #define IDYNTREE_CORE_SENSORS_HPP
 
 
+
 namespace iDynTree {
     class Wrench;
+    class AngularMotionVector3;
+    class LinearMotionVector3;
+    typedef LinearMotionVector3 LinAcceleration;
+    typedef AngularMotionVector3 AngVelocity;
+    class IMeasurement;
 }
+
 #include <string>
 
 namespace iDynTree {
@@ -209,27 +216,46 @@ namespace iDynTree {
             unsigned int getNrOfSensors(const SensorType & sensor_type) const;
 
             /**
-             * Set the wrench measurement for measurement
+             * Set the measurement for the specified sensor
              *
              * Return true if all is correct (i.e. sensor_index is not out of bounds)
              * and the specified sensor_type uses Wrench as its measurement type.
              */
             bool setMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
-                                const iDynTree::Wrench & wrench);
+                                const iDynTree::Wrench & measurement);
 
-            
+            bool setMeasurement(const SensorType & sensor_type,
+                                const unsigned int & sensor_index,
+                                const iDynTree::LinAcceleration & measurement);
+
+            bool setMeasurement(const SensorType & sensor_type,
+                                const unsigned int & sensor_index,
+                                const iDynTree::AngVelocity & measurement);
+
+//             bool setMeasurement(const SensorType & sensor_type,
+//                                 const unsigned int & sensor_index,
+//                                 iDynTree::IMeasurement * (const measurement));
             
             /**
-             * Set the wrench measurement for measurement
+             * Get the measurement for a specified sensor
              *
              * Return true if all is correct (i.e. sensor_index is not out of bounds)
              * and the specified sensor_type uses Wrench as its measurement type.
              */
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
-                                iDynTree::Wrench & wrench) const;
-
+                                iDynTree::Wrench & measurement) const; 
+            bool getMeasurement(const SensorType & sensor_type,
+                                const unsigned int & sensor_index,
+                                iDynTree::LinAcceleration &measurement) const;
+            bool getMeasurement(const SensorType & sensor_type,
+                                const unsigned int & sensor_index,
+                                iDynTree::AngVelocity &measurement) const;                    
+                                
+//             bool getMeasurement(const SensorType & sensor_type
+//                                 const unsigned int & sensor_index,
+//                                 iDynTree::IMeasurement * measurement) const;
 
     };
 

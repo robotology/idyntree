@@ -22,6 +22,7 @@
 namespace iDynTree
 {
     class Transform;
+    class Wrench;
 }
 
 #include <iDynTree/Sensors/Sensors.hpp>

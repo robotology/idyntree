@@ -14,7 +14,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
  * Public License for more details
  */
-
+#include "iDynTree/Core/Wrench.h"
 #include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 
 #include "kdl_codyco/undirectedtree.hpp"
@@ -23,7 +23,7 @@
 #include "kdl_codyco/KDLConversions.h"
 //#include <iDynTree/Core/KDLConversions.h>
 #include "iDynTree/Core/Transform.h"
-#include "iDynTree/Core/Wrench.h"
+
 
 
 namespace iDynTree {

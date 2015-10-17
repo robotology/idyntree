@@ -43,25 +43,35 @@ namespace iDynTree{
     public :
         IMeasurement();
         ~IMeasurement();
-       // virtual SensorType getSensorType(void) = 0;
-        
+        virtual void  MeasurementType getMeasurementType(void) = 0;       
     };
     
     
     class MeasurementWrench : public IMeasurement, public iDynTree::Wrench
     {
-        
-     //   SensorType getSensorType(void);
+    public:
+        MeasurementWrench();
+        ~MeasurementWrench();
+        MeasurementType getMeasure();
+         
         
     };
     
     class MeasurementLinAcceleration : public IMeasurement, public iDynTree::LinAcceleration
     {
+    public : 
+        MeasurementLinAcceleration();
+        ~MeasurementLinAcceleration();
+        MeasurementType getMeasurementType();
       //  SensorType getSensorType(void);
     };
     
     class MeasurementAngVelocity : public IMeasurement, public iDynTree::AngVelocity
     {
+    public:
+        MeasurementAngVelocity();
+        ~MeasurementAngVelocity();
+        MeasurementType getMeasure
       //  SensorType getSensorType(void);
     };
     
