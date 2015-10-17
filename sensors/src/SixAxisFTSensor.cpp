@@ -20,6 +20,8 @@
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Wrench.h"
 
+#include <cassert>
+
 
 namespace iDynTree {
 
