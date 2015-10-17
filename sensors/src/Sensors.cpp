@@ -22,9 +22,6 @@
 #include <vector>
 #include <map>
 
-
-//#include <kdl/frames.hpp>
-#include "kdl_codyco/KDLConversions.h"
 #include <iDynTree/Core/Wrench.h>
 
 

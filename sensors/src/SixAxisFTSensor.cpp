@@ -19,9 +19,6 @@
 
 #include "kdl_codyco/undirectedtree.hpp"
 
-//#include <kdl/frames.hpp>
-#include "kdl_codyco/KDLConversions.h"
-//#include <iDynTree/Core/KDLConversions.h>
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Wrench.h"
 
