@@ -19,6 +19,9 @@
 
 #include "kdl/frames_io.hpp"
 
+namespace iDynTree
+{
+
 simpleLeggedOdometry::simpleLeggedOdometry():
 odometry_model(0),
 current_fixed_link_id(-1),
@@ -152,7 +155,7 @@ const iCub::iDynTree::DynTree & simpleLeggedOdometry::getDynTree()
 }
 
 
-
+} // iDynTree namespace
 
 
 

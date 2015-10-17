@@ -45,7 +45,3 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Estimation/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
-if(IDYNTREE_COMPILE_TESTS)
-    add_subdirectory(tests)
-endif(IDYNTREE_COMPILE_TESTS)
