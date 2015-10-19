@@ -4,11 +4,13 @@
 
 project(iDynTree_Estimation CXX)
 
-set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/simpleLeggedOdometry.h)
+set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/simpleLeggedOdometry.h
+                                include/iDynTree/Estimation/robotStatus.h)
 
 set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES )
 
-set(IDYNTREE_ESTIMATION_SOURCES src/simpleLeggedOdometry.cpp)
+set(IDYNTREE_ESTIMATION_SOURCES src/simpleLeggedOdometry.cpp
+                                src/robotStatus.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_HEADERS})
