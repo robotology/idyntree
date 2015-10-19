@@ -20,8 +20,6 @@
 
 #include <iCub/iDynTree/yarp_kdl.h>
 
-#include <wbi/iWholeBodySensors.h>
-
 namespace iDynTree
 {
 
