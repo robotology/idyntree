@@ -74,10 +74,10 @@ endif()
 
 add_subdirectory(core-experimental)
 add_subdirectory(model)
+add_subdirectory(sensors)
 
 if(IDYNTREE_USES_KDL)
     add_subdirectory(core)
-    add_subdirectory(sensors)
     add_subdirectory(model_io)
     add_subdirectory(regressors)
     if(IDYNTREE_USES_YARP)

@@ -22,16 +22,12 @@
 #include <vector>
 #include <map>
 
-
-//#include <kdl/frames.hpp>
-#include "kdl_codyco/KDLConversions.h"
 #include <iDynTree/Core/Wrench.h>
 
 
 #include <iostream>
 
 namespace iDynTree {
-//namespace CoDyCo {
 
 Sensor::~Sensor()
 {
@@ -287,8 +283,4 @@ unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) 
     return 0;
 }
 
-
-
-
-//}
 }
