@@ -47,7 +47,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp)
 
     iDynTree::VectorDynSize qj(dofs), dqj(dofs), ddqj(dofs);
 
-    worldTbase = iDynTree::Transform::Identity();
+    worldTbase = //iDynTree::Transform::Identity();
     iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
             Position(random_double(),random_double(),random_double()));
 
@@ -65,6 +65,8 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp)
         properAcc(i) = baseAcc(i) + gravity(i);
     }
 
+    std::cout << "Setted baseVel" << baseVel.toString() << std::endl;
+
     for(int dof=0; dof < dofs; dof++)
 
     {
@@ -76,6 +78,42 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp)
     bool ok = dynComp.setRobotState(qj,dqj,ddqj,worldTbase,baseVel,baseAcc,gravity);
 
     ASSERT_EQUAL_DOUBLE(ok,true);
+}
+
+void testJacobianVsForwardKinematicsConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp)
+{
+    size_t dofs = dynComp.getNrOfDegreesOfFreedom();
+    size_t frames = dynComp.getNrOfFrames();
+
+    MatrixDynSize jac(6,6+dofs);
+    Eigen::VectorXd robotVel(6+dofs);
+
+    Vector6 velBaseTwist = dynComp.getBaseTwist().asVector();
+    robotVel.segment(0,6) = toEigen(velBaseTwist);
+    VectorDynSize jointVel(dofs);
+    dynComp.getJointVel(jointVel);
+    robotVel.segment(6,dofs) = toEigen(jointVel);
+
+    Twist velFromJac, velFromFwdKin;
+
+    for(size_t frame=0; frame < frames; frame++)
+    {
+        velFromFwdKin = dynComp.getFrameTwistInWorldOrient(frame);
+        std::cout << velFromFwdKin.toString() << std::endl;
+        dynComp.getFrameJacobian(frame,jac);
+
+        Eigen::Matrix<double,6,1> velJac = toEigen(jac)*robotVel;
+
+        std::cout << toEigen(jac) << std::endl;
+
+        toEigen(velFromJac.getLinearVec3()) = velJac.segment<3>(0);
+        toEigen(velFromJac.getAngularVec3()) = velJac.segment<3>(3);
+
+        std::cout << velFromJac.toString() << std::endl;
+
+    }
+
+    ASSERT_EQUAL_VECTOR(velFromFwdKin.asVector(),velFromJac.asVector());
 }
 
 void testRegressorVsInverseDynamicsConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp)
@@ -116,6 +154,7 @@ void testModelConsistency(std::string modelFilePath)
 
     setRandomState(dynComp);
 
+    testJacobianVsForwardKinematicsConsistency(dynComp);
     testRegressorVsInverseDynamicsConsistency(dynComp);
 }
 

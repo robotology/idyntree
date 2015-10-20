@@ -251,6 +251,16 @@ public:
                        const iDynTree::VectorDynSize &q_dotdot,
                        const iDynTree::SpatialAcc& world_gravity);
 
+    /**
+     *
+     *
+     */
+    iDynTree::Transform getWorldBaseTransform();
+    iDynTree::Twist     getBaseTwist();
+
+    bool getJointPos(iDynTree::VectorDynSize &q);
+    bool getJointVel(iDynTree::VectorDynSize &dq);
+
     //@}
 
     /**
@@ -319,7 +329,6 @@ public:
      * Given the current state, return the twist of frame of name frameName,
      * expressed with respect to the origin of frame frameName and using
      * the orientation of frameName.
-     *
      */
     iDynTree::Twist getFrameTwist(const std::string & frameName);
 
@@ -327,9 +336,22 @@ public:
      * Given the current state, return the twist of frame of index frameIndex,
      * expressed with respect to the origin of frameIndex and using
      * the orientation of frameIndex .
-     *
      */
     iDynTree::Twist getFrameTwist(const int frameIndex);
+
+    /**
+     * Given the current state, return the twist of frame of name frameName,
+     * expressed with respect to the origin of frame frameName and using
+     * the world orientation .
+     */
+    iDynTree::Twist getFrameTwistInWorldOrient(const std::string & frameName);
+
+    /**
+     * Given the current state, return the twist of frame of index frameIndex,
+     * expressed with respect to the origin of frameIndex and using
+     * the world orientation .
+     */
+    iDynTree::Twist getFrameTwistInWorldOrient(const int frameIndex);
 
     /**
      * Get the proper classical acceleration (i.e. the actual acceleration of the link minus

@@ -451,6 +451,28 @@ bool DynamicsComputations::setRobotState(const VectorDynSize& q,
     return true;
 }
 
+Transform DynamicsComputations::getWorldBaseTransform()
+{
+    return ToiDynTree(this->pimpl->m_world2base);
+}
+
+Twist DynamicsComputations::getBaseTwist()
+{
+    Rotation world_R_base = ToiDynTree(this->pimpl->m_world2base).getRotation();
+    return world_R_base*ToiDynTree(this->pimpl->m_baseSpatialTwist);
+}
+
+bool DynamicsComputations::getJointPos(VectorDynSize& q)
+{
+    return ToiDynTree(this->pimpl->m_qKDL,q);
+}
+
+bool DynamicsComputations::getJointVel(VectorDynSize& dq)
+{
+    return ToiDynTree(this->pimpl->m_dqKDL,dq);
+}
+
+
 Transform DynamicsComputations::getRelativeTransform(const std::string& refFrameName,
                                                      const std::string& frameName)
 {
@@ -606,6 +628,16 @@ Twist DynamicsComputations::getFrameTwist(const int frameIndex)
     return iDynTree::ToiDynTree(this->pimpl->m_fwdVelKinematicsResults[frameIndex]);
 }
 
+Twist DynamicsComputations::getFrameTwistInWorldOrient(const std::string& frameName)
+{
+    return getWorldTransform(frameName).getRotation()*getFrameTwist(frameName);
+}
+
+Twist DynamicsComputations::getFrameTwistInWorldOrient(const int frameIndex)
+{
+    return getWorldTransform(frameIndex).getRotation()*getFrameTwist(frameIndex);
+}
+
 SpatialAcc DynamicsComputations::getFrameProperSpatialAcceleration(const std::string & frameName)
 {
     int frameIndex = getFrameIndex(frameName);
@@ -656,7 +688,7 @@ bool DynamicsComputations::inverseDynamics(VectorDynSize& outTorques,
                                            this->pimpl->m_baseReactionForce));
 
     // todo \todo add semantics
-    baseReactionForce = iDynTree::ToiDynTree(this->pimpl->m_baseReactionForce);
+    baseReactionForce = this->getWorldTransform(this->pimpl->m_traversal.getBaseLink()->getLinkIndex()).getRotation()*iDynTree::ToiDynTree(this->pimpl->m_baseReactionForce);
 
     ok = ok && iDynTree::ToiDynTree(this->pimpl->m_torques,outTorques);
 
