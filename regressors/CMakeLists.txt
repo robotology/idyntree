@@ -4,10 +4,6 @@
 
 project(iDynTree_Regressors CXX)
 
-if(MSVC)
-    set(CMAKE_DEBUG_POSTFIX "d")
-endif(MSVC)
-
 include_directories(include/kdl_codyco/regressors)
 include_directories(include)
 

@@ -7,10 +7,6 @@ project(iDynTree_ModelIO_iKin CXX)
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
 
-if(MSVC)
-    set(CMAKE_DEBUG_POSTFIX "d")
-endif(MSVC)
-
 set(IDYNTREE_MODELIO_IKIN_HEADERS include/iDynTree/ModelIO/iKin_export.hpp)
 
 set(IDYNTREE_MODELIO_IKIN_SOURCES src/iKin_export.cpp)

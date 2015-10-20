@@ -4,11 +4,6 @@
 
 project(iDynTree_Core CXX)
 
-if(MSVC)
-    set(CMAKE_DEBUG_POSTFIX "d")
-endif(MSVC)
-
-
 file(GLOB IDYNTREE_CORE_HEADERS
      "include/kdl_codyco/*.hpp"
  )

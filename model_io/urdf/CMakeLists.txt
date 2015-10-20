@@ -16,11 +16,6 @@ else()
     find_package(urdfdom REQUIRED)
 endif()
 
-
-if(MSVC)
-    set(CMAKE_DEBUG_POSTFIX "d")
-endif(MSVC)
-
 set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS include/iDynTree/ModelIO/URDFSensorsImport.h
                                           include/iDyntree/ModelIO/URDFModelImport.h)
 
