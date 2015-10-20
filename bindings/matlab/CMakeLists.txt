@@ -49,6 +49,7 @@ if(IDYNTREE_GENERATE_MATLAB)
   # generate files in the source directory, so we can commit it
   set(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_SOURCE_DIR})
   #set(CMAKE_SWIG_FLAGS "-redirectoutput")
+  set(SWIG_MODULE_${modulename}_EXTRA_DEPS ${IDYNTREE_SWIG_DEPENDS_I_FILES})
   swig_generate_module(${modulename} matlab ../iDynTree.i)
   add_custom_command(
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx

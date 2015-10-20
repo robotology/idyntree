@@ -30,6 +30,16 @@ if(SWIG_FOUND)
     include_directories(${IDYNTREE_INCLUDE_DIRS})
     link_libraries(${IDYNTREE_LIBRARIES})
 
+    # list all dependencies of the process of generating
+    # SWIG bindings (for now just .i files included in the main
+    # iDynTree.i file)
+    # This will not be necessary once http://public.kitware.com/Bug/view.php?id=4147
+    # is resolved
+    # (not working at the moment, todo \TODO fix)
+    set(IDYNTREE_SWIG_DEPENDS_I_FILES ${CMAKE_CURRENT_SOURCE_DIR}/ignore.i
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/macrosForTemplates.i
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/sensors.i)
+
     if(IDYNTREE_USES_LUA)
         add_subdirectory(lua)
     endif(IDYNTREE_USES_LUA)
