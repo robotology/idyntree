@@ -48,41 +48,56 @@ classdef DynamicsComputations < SwigRef
     function varargout = setRobotState(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(765, self, varargin{:});
     end
-    function varargout = getFrameIndex(self,varargin)
+    function varargout = getWorldBaseTransform(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(766, self, varargin{:});
     end
-    function varargout = getFrameName(self,varargin)
+    function varargout = getBaseTwist(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(767, self, varargin{:});
     end
-    function varargout = getWorldTransform(self,varargin)
+    function varargout = getJointPos(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(768, self, varargin{:});
     end
-    function varargout = getRelativeTransform(self,varargin)
+    function varargout = getJointVel(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(769, self, varargin{:});
     end
-    function varargout = getFrameTwist(self,varargin)
+    function varargout = getFrameIndex(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(770, self, varargin{:});
     end
-    function varargout = getFrameProperSpatialAcceleration(self,varargin)
+    function varargout = getFrameName(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(771, self, varargin{:});
     end
-    function varargout = getLinkIndex(self,varargin)
+    function varargout = getWorldTransform(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(772, self, varargin{:});
     end
-    function varargout = getLinkInertia(self,varargin)
+    function varargout = getRelativeTransform(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(773, self, varargin{:});
     end
-    function varargout = inverseDynamics(self,varargin)
+    function varargout = getFrameTwist(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(774, self, varargin{:});
     end
-    function varargout = getFrameJacobian(self,varargin)
+    function varargout = getFrameTwistInWorldOrient(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(775, self, varargin{:});
     end
-    function varargout = getDynamicsRegressor(self,varargin)
+    function varargout = getFrameProperSpatialAcceleration(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(776, self, varargin{:});
     end
-    function varargout = getModelDynamicsParameters(self,varargin)
+    function varargout = getLinkIndex(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(777, self, varargin{:});
+    end
+    function varargout = getLinkInertia(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(778, self, varargin{:});
+    end
+    function varargout = inverseDynamics(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(779, self, varargin{:});
+    end
+    function varargout = getFrameJacobian(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(780, self, varargin{:});
+    end
+    function varargout = getDynamicsRegressor(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(781, self, varargin{:});
+    end
+    function varargout = getModelDynamicsParameters(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(782, self, varargin{:});
     end
   end
   methods(Static)

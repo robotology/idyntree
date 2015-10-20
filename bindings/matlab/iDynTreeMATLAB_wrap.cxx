@@ -15664,7 +15664,7 @@ fail:
 }
 
 
-int _wrap_SpatialMotionVectorBase_getLinearVec3__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_SpatialMotionVectorBase_getLinearVec3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::SpatialVector< iDynTree::SpatialMotionVector > *arg1 = (iDynTree::SpatialVector< iDynTree::SpatialMotionVector > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -15688,7 +15688,7 @@ fail:
 }
 
 
-int _wrap_SpatialMotionVectorBase_getAngularVec3__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_SpatialMotionVectorBase_getAngularVec3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::SpatialVector< iDynTree::SpatialMotionVector > *arg1 = (iDynTree::SpatialVector< iDynTree::SpatialMotionVector > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -15708,110 +15708,6 @@ int _wrap_SpatialMotionVectorBase_getAngularVec3__SWIG_0 (int resc, mxArray *res
   if (_out && --resc>=0) *resv++ = _out;
   return 0;
 fail:
-  return 1;
-}
-
-
-int _wrap_SpatialMotionVectorBase_getLinearVec3__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::SpatialVector< iDynTree::SpatialMotionVector > *arg1 = (iDynTree::SpatialVector< iDynTree::SpatialMotionVector > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialVector< iDynTree::SpatialMotionVector >::LinearVector3T *result = 0 ;
-  
-  if (!SWIG_check_num_args("SpatialMotionVectorBase_getLinearVec3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialMotionVector_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpatialMotionVectorBase_getLinearVec3" "', argument " "1"" of type '" "iDynTree::SpatialVector< iDynTree::SpatialMotionVector > const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::SpatialVector< iDynTree::SpatialMotionVector > * >(argp1);
-  result = (iDynTree::SpatialVector< iDynTree::SpatialMotionVector >::LinearVector3T *) &((iDynTree::SpatialVector< iDynTree::SpatialMotionVector > const *)arg1)->getLinearVec3();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__LinearMotionVector3, 0 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_SpatialMotionVectorBase_getLinearVec3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialMotionVector_t, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_SpatialMotionVectorBase_getLinearVec3__SWIG_0(resc,resv,argc,argv);
-    }
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialMotionVector_t, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_SpatialMotionVectorBase_getLinearVec3__SWIG_1(resc,resv,argc,argv);
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:OverloadError","No matching function for overload function 'SpatialMotionVectorBase_getLinearVec3'."
-    "  Possible C/C++ prototypes are:\n"
-    "    iDynTree::SpatialVector< iDynTree::SpatialMotionVector >::getLinearVec3()\n"
-    "    iDynTree::SpatialVector< iDynTree::SpatialMotionVector >::getLinearVec3() const\n");
-  return 1;
-}
-
-
-int _wrap_SpatialMotionVectorBase_getAngularVec3__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::SpatialVector< iDynTree::SpatialMotionVector > *arg1 = (iDynTree::SpatialVector< iDynTree::SpatialMotionVector > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialVector< iDynTree::SpatialMotionVector >::AngularVector3T *result = 0 ;
-  
-  if (!SWIG_check_num_args("SpatialMotionVectorBase_getAngularVec3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialMotionVector_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpatialMotionVectorBase_getAngularVec3" "', argument " "1"" of type '" "iDynTree::SpatialVector< iDynTree::SpatialMotionVector > const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::SpatialVector< iDynTree::SpatialMotionVector > * >(argp1);
-  result = (iDynTree::SpatialVector< iDynTree::SpatialMotionVector >::AngularVector3T *) &((iDynTree::SpatialVector< iDynTree::SpatialMotionVector > const *)arg1)->getAngularVec3();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__AngularMotionVector3, 0 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_SpatialMotionVectorBase_getAngularVec3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialMotionVector_t, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_SpatialMotionVectorBase_getAngularVec3__SWIG_0(resc,resv,argc,argv);
-    }
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialMotionVector_t, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_SpatialMotionVectorBase_getAngularVec3__SWIG_1(resc,resv,argc,argv);
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:OverloadError","No matching function for overload function 'SpatialMotionVectorBase_getAngularVec3'."
-    "  Possible C/C++ prototypes are:\n"
-    "    iDynTree::SpatialVector< iDynTree::SpatialMotionVector >::getAngularVec3()\n"
-    "    iDynTree::SpatialVector< iDynTree::SpatialMotionVector >::getAngularVec3() const\n");
   return 1;
 }
 
@@ -16579,7 +16475,7 @@ fail:
 }
 
 
-int _wrap_SpatialForceVectorBase_getLinearVec3__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_SpatialForceVectorBase_getLinearVec3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::SpatialVector< iDynTree::SpatialForceVector > *arg1 = (iDynTree::SpatialVector< iDynTree::SpatialForceVector > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -16603,7 +16499,7 @@ fail:
 }
 
 
-int _wrap_SpatialForceVectorBase_getAngularVec3__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_SpatialForceVectorBase_getAngularVec3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::SpatialVector< iDynTree::SpatialForceVector > *arg1 = (iDynTree::SpatialVector< iDynTree::SpatialForceVector > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -16623,110 +16519,6 @@ int _wrap_SpatialForceVectorBase_getAngularVec3__SWIG_0 (int resc, mxArray *resv
   if (_out && --resc>=0) *resv++ = _out;
   return 0;
 fail:
-  return 1;
-}
-
-
-int _wrap_SpatialForceVectorBase_getLinearVec3__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::SpatialVector< iDynTree::SpatialForceVector > *arg1 = (iDynTree::SpatialVector< iDynTree::SpatialForceVector > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialVector< iDynTree::SpatialForceVector >::LinearVector3T *result = 0 ;
-  
-  if (!SWIG_check_num_args("SpatialForceVectorBase_getLinearVec3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialForceVector_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpatialForceVectorBase_getLinearVec3" "', argument " "1"" of type '" "iDynTree::SpatialVector< iDynTree::SpatialForceVector > const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::SpatialVector< iDynTree::SpatialForceVector > * >(argp1);
-  result = (iDynTree::SpatialVector< iDynTree::SpatialForceVector >::LinearVector3T *) &((iDynTree::SpatialVector< iDynTree::SpatialForceVector > const *)arg1)->getLinearVec3();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__LinearForceVector3, 0 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_SpatialForceVectorBase_getLinearVec3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialForceVector_t, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_SpatialForceVectorBase_getLinearVec3__SWIG_0(resc,resv,argc,argv);
-    }
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialForceVector_t, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_SpatialForceVectorBase_getLinearVec3__SWIG_1(resc,resv,argc,argv);
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:OverloadError","No matching function for overload function 'SpatialForceVectorBase_getLinearVec3'."
-    "  Possible C/C++ prototypes are:\n"
-    "    iDynTree::SpatialVector< iDynTree::SpatialForceVector >::getLinearVec3()\n"
-    "    iDynTree::SpatialVector< iDynTree::SpatialForceVector >::getLinearVec3() const\n");
-  return 1;
-}
-
-
-int _wrap_SpatialForceVectorBase_getAngularVec3__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::SpatialVector< iDynTree::SpatialForceVector > *arg1 = (iDynTree::SpatialVector< iDynTree::SpatialForceVector > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  iDynTree::SpatialVector< iDynTree::SpatialForceVector >::AngularVector3T *result = 0 ;
-  
-  if (!SWIG_check_num_args("SpatialForceVectorBase_getAngularVec3",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialForceVector_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpatialForceVectorBase_getAngularVec3" "', argument " "1"" of type '" "iDynTree::SpatialVector< iDynTree::SpatialForceVector > const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::SpatialVector< iDynTree::SpatialForceVector > * >(argp1);
-  result = (iDynTree::SpatialVector< iDynTree::SpatialForceVector >::AngularVector3T *) &((iDynTree::SpatialVector< iDynTree::SpatialForceVector > const *)arg1)->getAngularVec3();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__AngularForceVector3, 0 |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_SpatialForceVectorBase_getAngularVec3 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialForceVector_t, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_SpatialForceVectorBase_getAngularVec3__SWIG_0(resc,resv,argc,argv);
-    }
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SpatialVectorT_iDynTree__SpatialForceVector_t, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_SpatialForceVectorBase_getAngularVec3__SWIG_1(resc,resv,argc,argv);
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:OverloadError","No matching function for overload function 'SpatialForceVectorBase_getAngularVec3'."
-    "  Possible C/C++ prototypes are:\n"
-    "    iDynTree::SpatialVector< iDynTree::SpatialForceVector >::getAngularVec3()\n"
-    "    iDynTree::SpatialVector< iDynTree::SpatialForceVector >::getAngularVec3() const\n");
   return 1;
 }
 
@@ -34570,6 +34362,124 @@ int _wrap_DynamicsComputations_setRobotState (int resc, mxArray *resv[], int arg
 }
 
 
+int _wrap_DynamicsComputations_getWorldBaseTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::HighLevel::DynamicsComputations *arg1 = (iDynTree::HighLevel::DynamicsComputations *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::Transform result;
+  
+  if (!SWIG_check_num_args("DynamicsComputations_getWorldBaseTransform",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsComputations_getWorldBaseTransform" "', argument " "1"" of type '" "iDynTree::HighLevel::DynamicsComputations *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::HighLevel::DynamicsComputations * >(argp1);
+  result = (arg1)->getWorldBaseTransform();
+  _out = SWIG_NewPointerObj((new iDynTree::Transform(static_cast< const iDynTree::Transform& >(result))), SWIGTYPE_p_iDynTree__Transform, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_DynamicsComputations_getBaseTwist (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::HighLevel::DynamicsComputations *arg1 = (iDynTree::HighLevel::DynamicsComputations *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::Twist result;
+  
+  if (!SWIG_check_num_args("DynamicsComputations_getBaseTwist",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsComputations_getBaseTwist" "', argument " "1"" of type '" "iDynTree::HighLevel::DynamicsComputations *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::HighLevel::DynamicsComputations * >(argp1);
+  result = (arg1)->getBaseTwist();
+  _out = SWIG_NewPointerObj((new iDynTree::Twist(static_cast< const iDynTree::Twist& >(result))), SWIGTYPE_p_iDynTree__Twist, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_DynamicsComputations_getJointPos (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::HighLevel::DynamicsComputations *arg1 = (iDynTree::HighLevel::DynamicsComputations *) 0 ;
+  iDynTree::VectorDynSize *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsComputations_getJointPos",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsComputations_getJointPos" "', argument " "1"" of type '" "iDynTree::HighLevel::DynamicsComputations *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::HighLevel::DynamicsComputations * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsComputations_getJointPos" "', argument " "2"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsComputations_getJointPos" "', argument " "2"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::VectorDynSize * >(argp2);
+  result = (bool)(arg1)->getJointPos(*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_DynamicsComputations_getJointVel (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::HighLevel::DynamicsComputations *arg1 = (iDynTree::HighLevel::DynamicsComputations *) 0 ;
+  iDynTree::VectorDynSize *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("DynamicsComputations_getJointVel",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsComputations_getJointVel" "', argument " "1"" of type '" "iDynTree::HighLevel::DynamicsComputations *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::HighLevel::DynamicsComputations * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsComputations_getJointVel" "', argument " "2"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsComputations_getJointVel" "', argument " "2"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::VectorDynSize * >(argp2);
+  result = (bool)(arg1)->getJointVel(*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_DynamicsComputations_getFrameIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::HighLevel::DynamicsComputations *arg1 = (iDynTree::HighLevel::DynamicsComputations *) 0 ;
   std::string *arg2 = 0 ;
@@ -34992,6 +34902,115 @@ int _wrap_DynamicsComputations_getFrameTwist (int resc, mxArray *resv[], int arg
     "  Possible C/C++ prototypes are:\n"
     "    iDynTree::HighLevel::DynamicsComputations::getFrameTwist(std::string const &)\n"
     "    iDynTree::HighLevel::DynamicsComputations::getFrameTwist(int const)\n");
+  return 1;
+}
+
+
+int _wrap_DynamicsComputations_getFrameTwistInWorldOrient__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::HighLevel::DynamicsComputations *arg1 = (iDynTree::HighLevel::DynamicsComputations *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  mxArray * _out;
+  iDynTree::Twist result;
+  
+  if (!SWIG_check_num_args("DynamicsComputations_getFrameTwistInWorldOrient",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsComputations_getFrameTwistInWorldOrient" "', argument " "1"" of type '" "iDynTree::HighLevel::DynamicsComputations *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::HighLevel::DynamicsComputations * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DynamicsComputations_getFrameTwistInWorldOrient" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DynamicsComputations_getFrameTwistInWorldOrient" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  result = (arg1)->getFrameTwistInWorldOrient((std::string const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::Twist(static_cast< const iDynTree::Twist& >(result))), SWIGTYPE_p_iDynTree__Twist, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return 0;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return 1;
+}
+
+
+int _wrap_DynamicsComputations_getFrameTwistInWorldOrient__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::HighLevel::DynamicsComputations *arg1 = (iDynTree::HighLevel::DynamicsComputations *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  iDynTree::Twist result;
+  
+  if (!SWIG_check_num_args("DynamicsComputations_getFrameTwistInWorldOrient",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DynamicsComputations_getFrameTwistInWorldOrient" "', argument " "1"" of type '" "iDynTree::HighLevel::DynamicsComputations *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::HighLevel::DynamicsComputations * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DynamicsComputations_getFrameTwistInWorldOrient" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (arg1)->getFrameTwistInWorldOrient(arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::Twist(static_cast< const iDynTree::Twist& >(result))), SWIGTYPE_p_iDynTree__Twist, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_DynamicsComputations_getFrameTwistInWorldOrient (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_DynamicsComputations_getFrameTwistInWorldOrient__SWIG_1(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_DynamicsComputations_getFrameTwistInWorldOrient__SWIG_0(resc,resv,argc,argv);
+      }
+    }
+  }
+  
+  mexWarnMsgIdAndTxt("SWIG:OverloadError","No matching function for overload function 'DynamicsComputations_getFrameTwistInWorldOrient'."
+    "  Possible C/C++ prototypes are:\n"
+    "    iDynTree::HighLevel::DynamicsComputations::getFrameTwistInWorldOrient(std::string const &)\n"
+    "    iDynTree::HighLevel::DynamicsComputations::getFrameTwistInWorldOrient(int const)\n");
   return 1;
 }
 
@@ -37460,18 +37479,23 @@ const char* swigFunctionName_(int fcn_id) {
   case 763: return "DynamicsComputations_getFloatingBase";
   case 764: return "DynamicsComputations_setFloatingBase";
   case 765: return "DynamicsComputations_setRobotState";
-  case 766: return "DynamicsComputations_getFrameIndex";
-  case 767: return "DynamicsComputations_getFrameName";
-  case 768: return "DynamicsComputations_getWorldTransform";
-  case 769: return "DynamicsComputations_getRelativeTransform";
-  case 770: return "DynamicsComputations_getFrameTwist";
-  case 771: return "DynamicsComputations_getFrameProperSpatialAcceleration";
-  case 772: return "DynamicsComputations_getLinkIndex";
-  case 773: return "DynamicsComputations_getLinkInertia";
-  case 774: return "DynamicsComputations_inverseDynamics";
-  case 775: return "DynamicsComputations_getFrameJacobian";
-  case 776: return "DynamicsComputations_getDynamicsRegressor";
-  case 777: return "DynamicsComputations_getModelDynamicsParameters";
+  case 766: return "DynamicsComputations_getWorldBaseTransform";
+  case 767: return "DynamicsComputations_getBaseTwist";
+  case 768: return "DynamicsComputations_getJointPos";
+  case 769: return "DynamicsComputations_getJointVel";
+  case 770: return "DynamicsComputations_getFrameIndex";
+  case 771: return "DynamicsComputations_getFrameName";
+  case 772: return "DynamicsComputations_getWorldTransform";
+  case 773: return "DynamicsComputations_getRelativeTransform";
+  case 774: return "DynamicsComputations_getFrameTwist";
+  case 775: return "DynamicsComputations_getFrameTwistInWorldOrient";
+  case 776: return "DynamicsComputations_getFrameProperSpatialAcceleration";
+  case 777: return "DynamicsComputations_getLinkIndex";
+  case 778: return "DynamicsComputations_getLinkInertia";
+  case 779: return "DynamicsComputations_inverseDynamics";
+  case 780: return "DynamicsComputations_getFrameJacobian";
+  case 781: return "DynamicsComputations_getDynamicsRegressor";
+  case 782: return "DynamicsComputations_getModelDynamicsParameters";
   default: return 0;
   }
 }
@@ -38275,18 +38299,23 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 763: flag=_wrap_DynamicsComputations_getFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
   case 764: flag=_wrap_DynamicsComputations_setFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
   case 765: flag=_wrap_DynamicsComputations_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 766: flag=_wrap_DynamicsComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 767: flag=_wrap_DynamicsComputations_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 768: flag=_wrap_DynamicsComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 769: flag=_wrap_DynamicsComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 770: flag=_wrap_DynamicsComputations_getFrameTwist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 771: flag=_wrap_DynamicsComputations_getFrameProperSpatialAcceleration(resc,resv,argc,(mxArray**)(argv)); break;
-  case 772: flag=_wrap_DynamicsComputations_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 773: flag=_wrap_DynamicsComputations_getLinkInertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 774: flag=_wrap_DynamicsComputations_inverseDynamics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 775: flag=_wrap_DynamicsComputations_getFrameJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 776: flag=_wrap_DynamicsComputations_getDynamicsRegressor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 777: flag=_wrap_DynamicsComputations_getModelDynamicsParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 766: flag=_wrap_DynamicsComputations_getWorldBaseTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 767: flag=_wrap_DynamicsComputations_getBaseTwist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 768: flag=_wrap_DynamicsComputations_getJointPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 769: flag=_wrap_DynamicsComputations_getJointVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 770: flag=_wrap_DynamicsComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 771: flag=_wrap_DynamicsComputations_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 772: flag=_wrap_DynamicsComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 773: flag=_wrap_DynamicsComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 774: flag=_wrap_DynamicsComputations_getFrameTwist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 775: flag=_wrap_DynamicsComputations_getFrameTwistInWorldOrient(resc,resv,argc,(mxArray**)(argv)); break;
+  case 776: flag=_wrap_DynamicsComputations_getFrameProperSpatialAcceleration(resc,resv,argc,(mxArray**)(argv)); break;
+  case 777: flag=_wrap_DynamicsComputations_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 778: flag=_wrap_DynamicsComputations_getLinkInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 779: flag=_wrap_DynamicsComputations_inverseDynamics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 780: flag=_wrap_DynamicsComputations_getFrameJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 781: flag=_wrap_DynamicsComputations_getDynamicsRegressor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 782: flag=_wrap_DynamicsComputations_getModelDynamicsParameters(resc,resv,argc,(mxArray**)(argv)); break;
   default: id_exists=0;
   }
   if (!id_exists) {
