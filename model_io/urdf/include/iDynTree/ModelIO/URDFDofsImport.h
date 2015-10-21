@@ -1,0 +1,36 @@
+/*
+ * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Silvio Traversaro
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ */
+
+#ifndef IDYNTREE_URDF_DOFS_IMPORT_H
+#define IDYNTREE_URDF_DOFS_IMPORT_H
+
+#include <vector>
+#include <string>
+
+namespace iDynTree
+
+{
+
+/**
+ * Load a list of dofs names from a URDF file.
+ *
+ * @return true if all went ok, false otherwise.
+ * 
+ */
+bool dofsListFromURDF(const std::string & urdf_filename,
+                      std::vector<std::string>& dofs);
+
+/**
+ * Load a list of dofs object from a URDF string.
+ *
+ * @return true if all went ok, false otherwise.
+ */
+bool dofsListFromURDFString(const std::string & urdf_string,
+                            std::vector<std::string>& dofs);
+
+}
+
+#endif

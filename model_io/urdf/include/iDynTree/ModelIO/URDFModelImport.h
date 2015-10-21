@@ -21,7 +21,7 @@ class Model;
  * @return true if all went ok, false otherwise.
  */
 bool modelFromURDF(const std::string & urdf_filename,
-                         iDynTree::Model & output);
+                   iDynTree::Model & output);
 
 /**
  * Load a iDynTree::Model object from a URDF string.
@@ -29,7 +29,8 @@ bool modelFromURDF(const std::string & urdf_filename,
  * @return true if all went ok, false otherwise.
  */
 bool modelFromURDFString(const std::string & urdf_string,
-                               iDynTree::Model & output);
+                         iDynTree::Model & output);
+
 
 }
 
