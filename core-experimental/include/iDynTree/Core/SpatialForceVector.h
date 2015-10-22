@@ -17,7 +17,8 @@
 namespace iDynTree
 {
     /**
-     * Class providing the raw coordinates for any spatial force vector.
+     * Class providing the raw coordinates for any spatial force vector,
+     * (i.e. vector form of an element of se*(3)).
      *
      * \ingroup iDynTreeCore
      *
@@ -41,7 +42,7 @@ namespace iDynTree
          */
         typedef SpatialMotionForceVectorT_traits<SpatialForceVector>::LinearVector3Type LinearVector3T;
         typedef SpatialMotionForceVectorT_traits<SpatialForceVector>::AngularVector3Type AngularVector3T;
-        
+
         SpatialForceVector();
         SpatialForceVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
         SpatialForceVector(const SpatialForceVector & other);

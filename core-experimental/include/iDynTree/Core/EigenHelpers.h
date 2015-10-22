@@ -15,9 +15,9 @@
 namespace iDynTree
 {
 
-inline Eigen::Map<Eigen::MatrixXd> toEigen(iDynTree::IRawVector & vec)
+inline Eigen::Map<Eigen::VectorXd> toEigen(iDynTree::IRawVector & vec)
 {
-    return Eigen::Map<Eigen::MatrixXd>(vec.data(),vec.size(),1);
+    return Eigen::Map<Eigen::VectorXd>(vec.data(),vec.size());
 }
 
 inline Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > toEigen(iDynTree::IRawMatrix & mat)
@@ -25,9 +25,9 @@ inline Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::Row
     return Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(mat.data(),mat.rows(),mat.cols());
 }
 
-inline Eigen::Map<const Eigen::MatrixXd> toEigen(const iDynTree::IRawVector & vec)
+inline Eigen::Map<const Eigen::VectorXd> toEigen(const iDynTree::IRawVector & vec)
 {
-    return Eigen::Map<const Eigen::MatrixXd>(vec.data(),vec.size(),1);
+    return Eigen::Map<const Eigen::VectorXd>(vec.data(),vec.size());
 }
 
 inline Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > toEigen(const iDynTree::IRawMatrix & mat)

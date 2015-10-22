@@ -26,6 +26,7 @@ namespace iDynTree
     class RotationalInertiaRaw;
     class SpatialMotionVector;
     class SpatialForceVector;
+    class AngularMotionVector3;
 
     /**
      * Class representation the rotation of an orientation frame
@@ -133,6 +134,12 @@ namespace iDynTree
         SpatialMomentum operator*(const SpatialMomentum   & other) const;
         ClassicalAcc    operator*(const ClassicalAcc    & other) const;
         RotationalInertiaRaw    operator*(const RotationalInertiaRaw    & other) const;
+
+        /**
+         * Log mapping between a  generic element of SO(3) (iDynTree::Rotation)
+         * to the corresponding element of so(3) (iDynTree::AngularMotionVector).
+         */
+        AngularMotionVector3 log() const;
 
         /**
          * @name Initialization helpers.

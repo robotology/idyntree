@@ -1,4 +1,6 @@
 
+#include "testModels.h"
+
 #include <iCub/iDynTree/TorqueEstimationTree.h>
 
 #include <iCub/iDyn/iDyn.h>
@@ -195,7 +197,7 @@ int main(int argc, char** argv)
     //The iCubTree is istantiated
     //note that the serialization used is the one used in iDyn, while the
     //default one is the one used in skinDynLib
-    std::string urdf_filename(argv[1]);
+    std::string urdf_filename(IDYNTREE_TEST_MODELS_PATH"/icub.urdf");
     int verbose = 1;
     std::vector<std::string> sensors;
     DynTree icub_idyntree(urdf_filename,sensors,"imu_frame");

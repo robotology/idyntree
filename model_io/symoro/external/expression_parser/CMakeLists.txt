@@ -22,7 +22,6 @@ SOURCE_GROUP("ExpressionParser\\Source Files" FILES ${SYMORO_PAR_SRCS})
 SOURCE_GROUP("ExpressionParser\\Header Files" FILES ${SYMORO_PAR_HPPS})
 
 if(MSVC)
-    set(CMAKE_DEBUG_POSTFIX "d")
     set(LIB_TYPE STATIC)
 elseif(BUILD_SHARED_LIBS)
     set(LIB_TYPE SHARED)

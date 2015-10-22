@@ -7,6 +7,7 @@
 
 #include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
 
 #include <Eigen/Dense>
@@ -38,7 +39,7 @@ SpatialMotionVector::SpatialMotionVector(const SpatialVector<SpatialMotionVector
                                          SpatialVector<SpatialMotionVector>(other)
 {
 }
-    
+
 SpatialMotionVector::~SpatialMotionVector()
 {
 }
@@ -62,6 +63,25 @@ SpatialForceVector SpatialMotionVector::cross(const SpatialForceVector& other) c
 
     return res;
 }
+
+Transform SpatialMotionVector::exp() const
+{
+    Transform res;
+
+    // Understand if there is a meaningful
+    // semantics for this operation and if it exists use it
+
+    // the linear part is not changed by the exp
+    Position newPos;
+    memcpy(newPos.data(),this->getLinearVec3().data(),3*sizeof(double));
+    res.setPosition(newPos);
+
+    // the angular part instead mapped by so(3) -> SO(3) exp map
+    res.setRotation(this->getAngularVec3().exp());
+
+    return res;
+}
+
 
 
 }

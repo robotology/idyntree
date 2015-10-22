@@ -6,6 +6,8 @@
 #include <kdl/frames_io.hpp>
 #include <yarp/sig/Vector.h>
 
+#include "testModels.h"
+
 #include <cstdlib>
 
 double random_double()
@@ -47,7 +49,7 @@ bool checkFrameConsistency(KDL::Frame & frame_kdl,
 
 int main()
 {
-    std::string urdf_to_test = "twoLinks.urdf";
+    std::string urdf_to_test = getAbsModelPath("twoLinks.urdf");
 
     srand(time(NULL));
 

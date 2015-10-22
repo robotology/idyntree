@@ -34,6 +34,8 @@
 
 /* Author: Silvio Traversaro */
 
+#include "testModels.h"
+
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 #include <iDynTree/ModelIO/impl/urdf_export.hpp>
 
@@ -46,6 +48,8 @@
 #include <kdl/jntarray.hpp>
 #include <ctime>
 #include <cmath>
+
+
 
 using namespace KDL;
 using namespace std;
@@ -65,33 +69,40 @@ double random_double()
     return ((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
 }
 
-int main(int argc, char** argv)
+std::string getDOFName(KDL::Tree & tree, const unsigned int index)
 {
-    srand(time(NULL));
+    std::string retVal = "";
+    for (KDL::SegmentMap::const_iterator it=tree.getSegments().begin(); it!=tree.getSegments().end(); ++it)
+    {
+        if( GetTreeElementQNr(it->second) == index )
+        {
+            retVal = GetTreeElementSegment(it->second).getJoint().getName();
+        }
+    }
+
+    return retVal;
+}
+
+bool checkUrdfImportExport(std::string urdfFileName)
+{
+    cout << "------> Testing file " << urdfFileName << std::endl;
+
 
     Tree my_tree, my_tree_converted;
-    if (!iDynTree::treeFromUrdfFile(argv[1],my_tree))
-    {cerr << "Could not generate robot model and extract kdl tree" << endl; return EXIT_FAILURE;}
-
-    // walk through tree
-    cout << " ======================================" << endl;
-    cout << " Tree has " << my_tree.getNrOfSegments() << " link(s) and a root link" << endl;
-    cout << " ======================================" << endl;
-    SegmentMap::const_iterator root = my_tree.getRootSegment();
-    printLink(root, "");
-
+    if (!iDynTree::treeFromUrdfFile(urdfFileName,my_tree))
+    {cerr << "Could not generate robot model and extract kdl tree" << endl; return false;}
 
 
     //Export current tree
     cout << "Writing KDL::Tree to a urdf file" << endl;
     std::string output_name = "test_kdl_format_io.urdf";
     if( !iDynTree::treeToUrdfFile(output_name,my_tree) )
-    {cerr <<"Could not generate urdf from kdl tree" << endl; return EXIT_FAILURE;}
+    {cerr <<"Could not generate urdf from kdl tree" << endl; return false;}
 
     //Re-importing it
     cout << "Reimporting  written urdf file" << endl;
     if( !iDynTree::treeFromUrdfFile(output_name,my_tree_converted) )
-    {cerr <<"Could not re-import back generated urdf file" << endl; return EXIT_FAILURE;}
+    {cerr <<"Could not re-import back generated urdf file" << endl; return false;}
 
     //Preliminary test
     if( my_tree.getNrOfJoints() != my_tree_converted.getNrOfJoints() ) {
@@ -123,24 +134,54 @@ int main(int argc, char** argv)
 
     //Inserting the random input data in both solvers, while checking all went well
     if( original_slv.CartToJnt(q,dq,ddq,base_vel,base_acc,f_ext,torques,base_force) != 0 )
-    { std::cerr << "Could not load solver for original tree" << std::endl; return EXIT_FAILURE; }
+    { std::cerr << "Could not load solver for original tree" << std::endl; return false; }
     if( converted_slv.CartToJnt(q,dq,ddq,base_vel,base_acc,f_ext,torques_converted,base_force_converted) != 0 )
-    { std::cerr << "Could not load solver for converted tree" << std::endl; return EXIT_FAILURE; }
+    { std::cerr << "Could not load solver for converted tree" << std::endl; return false; }
 
-    double tol = 1e-4;
+    double tol = 1e-1;
+    bool testFailed = false;
     for( int i=0; i < my_tree.getNrOfJoints(); i++ )
     {
-        std::cout << fabs(torques(i)-torques_converted(i)) << std::endl;
-        if( fabs(torques(i)-torques_converted(i)) > tol ) return -1;
+        if( fabs(torques(i)-torques_converted(i)) > tol )
+        {
+            std::cerr << "Error in compute torque of joint " << getDOFName(my_tree,i) << std::endl;
+            std::cerr << "Original " << torques(i) << " converted " << torques_converted(i)
+                      << " error " << fabs(torques(i)-torques_converted(i)) << std::endl;
+            testFailed = true;
+        }
     }
 
-    for( int i=0; i < 6; i++ ) {
-        std::cout << fabs(base_force(i)-base_force_converted(i)) << std::endl;
-        if( fabs(base_force(i)-base_force_converted(i)) > tol ) return -1;
+    for( int i=0; i < 6; i++ )
+    {
+        if( fabs(base_force(i)-base_force_converted(i)) > tol )
+        {
+            std::cerr << "Error in element " << i << "of computed base ft" << std::endl;
+            std::cerr << "Original " << base_force(i) << " converted " << base_force_converted(i)
+                      << " error " << fabs(base_force(i)-base_force_converted(i)) << std::endl;
+            testFailed = true;
+        }
     }
 
+    return !testFailed;
+}
 
-    return EXIT_SUCCESS;
+int main(int argc, char** argv)
+{
+    srand(time(NULL));
+
+    bool testSuccess = true;
+
+
+    for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
+    {
+        std::string urdfFileName = std::string(IDYNTREE_TEST_MODELS_PATH) + "/" +
+                                   std::string(IDYNTREE_TESTS_URDFS[mdl]);
+
+        bool ok = checkUrdfImportExport(urdfFileName);
+        testSuccess = testSuccess && ok;
+    }
+
+    return testSuccess ? EXIT_SUCCESS : EXIT_FAILURE;
 
 }
 

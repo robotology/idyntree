@@ -5,7 +5,7 @@ set(VARS_PREFIX "iDynTree")
 
 set(${VARS_PREFIX}_MAJOR_VERSION 0)
 set(${VARS_PREFIX}_MINOR_VERSION 3)
-set(${VARS_PREFIX}_PATCH_VERSION 6)
+set(${VARS_PREFIX}_PATCH_VERSION 9)
 set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
@@ -65,16 +65,24 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           DEPENDS IDYNTREE_ENABLE_RPATH
                           USE_LINK_PATH)
 
+# include test data before everything,
+# to be sure that is available to test
+# of all components
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests/data)
+endif()
+
 add_subdirectory(core-experimental)
 add_subdirectory(model)
+add_subdirectory(sensors)
 
 if(IDYNTREE_USES_KDL)
     add_subdirectory(core)
-    add_subdirectory(sensors)
     add_subdirectory(model_io)
     add_subdirectory(regressors)
     if(IDYNTREE_USES_YARP)
         add_subdirectory(yarp)
+        add_subdirectory(estimation)
         if(IDYNTREE_USES_ICUB_MAIN)
             add_subdirectory(icub)
         endif()
@@ -96,10 +104,6 @@ include(AddUninstallTarget)
 
 if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_KDL)
     add_subdirectory(tests)
-endif()
-
-if(IDYNTREE_COMPILE_TESTS)
-    add_subdirectory(tests/data)
 endif()
 
 add_subdirectory(bindings)

@@ -20,7 +20,10 @@
 #include <vector>
 #include <map>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 860b59bc54bf806a4c8b00897d32772e905a6f6a
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/AngularMotionVector3.h>
 #include <iDynTree/Core/LinearMotionVector3.h>
@@ -38,7 +41,6 @@
 #include <iostream>
 
 namespace iDynTree {
-//namespace CoDyCo {
 
 Sensor::~Sensor()
 {
@@ -425,8 +427,4 @@ unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) 
     return(returnVal);
 }
 
-
-
-
-//}
 }

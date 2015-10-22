@@ -37,12 +37,15 @@ namespace iDynTree
      * An angular motion vector can be used to describe any angular velocity or acceleration,
      * and implement the adjoint transformations common to these geometric relations.
      *
+     * The angular motion vector is also used to represent a generic element
+     * of the so(3) spaces.
+     *
      */
     class AngularMotionVector3: public MotionVector3<AngularMotionVector3>
     {
     public:
         typedef MotionForce_traits<AngularMotionVector3>::SemanticsType SemanticsType;
-        
+
         /**
          * constructors
          */
@@ -50,8 +53,14 @@ namespace iDynTree
         AngularMotionVector3(const double* in_data, const unsigned int in_size);
         AngularMotionVector3(const AngularMotionVector3 & other);
         virtual ~AngularMotionVector3();
+
+        /**
+         * Exp mapping between a  generic element of so(3) (iDynTree::AngularMotionVector3)
+         * to the corresponding element of SO(3) (iDynTree::Rotation).
+         */
+        Rotation exp() const;
     };
-    
+
     typedef AngularMotionVector3 AngVelocity;
     typedef AngularMotionVector3 AngAcceleration;
 }

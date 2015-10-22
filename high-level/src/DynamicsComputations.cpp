@@ -19,6 +19,7 @@
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialInertia.h>
+#include <iDynTree/Core/Wrench.h>
 
 
 #include <kdl_codyco/KDLConversions.h>
@@ -111,6 +112,18 @@ struct DynamicsComputations::DynamicsComputationsPrivateAttributes
     // expressed in the link frame
     std::vector<KDL::Twist> m_fwdProperAccKinematicsResults;
 
+    // storage for external wrenches (currently just initialied to zero)
+    std::vector<KDL::Wrench> m_extWrenches;
+
+    // storage for internal wrenches computed by inverseDynamics
+    std::vector<KDL::Wrench> m_intWrenches;
+
+    // storage for torque computed by inverseDynamics
+    KDL::JntArray m_torques;
+
+    // storage for base wrench force compute by inverseDynamics
+    KDL::Wrench m_baseReactionForce;
+
     // storage of jacobina results
     KDL::Jacobian m_jacobianBuf;
 
@@ -174,6 +187,7 @@ void DynamicsComputations::resizeInternalDataStructures()
     this->pimpl->m_qKDL.resize(nrOfDOFs);
     this->pimpl->m_dqKDL.resize(nrOfDOFs);
     this->pimpl->m_ddqKDL.resize(nrOfDOFs);
+    this->pimpl->m_torques.resize(nrOfDOFs);
     this->pimpl->m_jacobianBuf.resize(nrOfDOFs+6);
 
     // set to zero
@@ -184,6 +198,15 @@ void DynamicsComputations::resizeInternalDataStructures()
     KDL::SetToZero(this->pimpl->m_baseSpatialAcc);
     KDL::SetToZero(this->pimpl->m_baseProperSpatialAcc);
     this->pimpl->m_world2base = KDL::Frame::Identity();
+
+    this->pimpl->m_extWrenches.resize(nrOfFrames);
+    this->pimpl->m_intWrenches.resize(nrOfFrames);
+
+    for(unsigned int frame=0; frame < nrOfFrames; frame++)
+    {
+        KDL::SetToZero(this->pimpl->m_extWrenches[frame]);
+        KDL::SetToZero(this->pimpl->m_intWrenches[frame]);
+    }
 
 }
 
@@ -423,11 +446,32 @@ bool DynamicsComputations::setRobotState(const VectorDynSize& q,
                                                    this->pimpl->m_baseSpatialTwist,this->pimpl->m_baseSpatialAcc);
 
     // we save the proper acceleration of the base link
-    this->pimpl->m_baseProperSpatialAcc = this->pimpl->m_baseSpatialAcc + ToKDL(gravity_acceleration_wrt_base);
-    std::cout << this->pimpl->m_baseProperSpatialAcc << std::endl;;
+    this->pimpl->m_baseProperSpatialAcc = this->pimpl->m_baseSpatialAcc - ToKDL(gravity_acceleration_wrt_base);
 
     return true;
 }
+
+Transform DynamicsComputations::getWorldBaseTransform()
+{
+    return ToiDynTree(this->pimpl->m_world2base);
+}
+
+Twist DynamicsComputations::getBaseTwist()
+{
+    Rotation world_R_base = ToiDynTree(this->pimpl->m_world2base).getRotation();
+    return world_R_base*ToiDynTree(this->pimpl->m_baseSpatialTwist);
+}
+
+bool DynamicsComputations::getJointPos(VectorDynSize& q)
+{
+    return ToiDynTree(this->pimpl->m_qKDL,q);
+}
+
+bool DynamicsComputations::getJointVel(VectorDynSize& dq)
+{
+    return ToiDynTree(this->pimpl->m_dqKDL,dq);
+}
+
 
 Transform DynamicsComputations::getRelativeTransform(const std::string& refFrameName,
                                                      const std::string& frameName)
@@ -584,6 +628,16 @@ Twist DynamicsComputations::getFrameTwist(const int frameIndex)
     return iDynTree::ToiDynTree(this->pimpl->m_fwdVelKinematicsResults[frameIndex]);
 }
 
+Twist DynamicsComputations::getFrameTwistInWorldOrient(const std::string& frameName)
+{
+    return getWorldTransform(frameName).getRotation()*getFrameTwist(frameName);
+}
+
+Twist DynamicsComputations::getFrameTwistInWorldOrient(const int frameIndex)
+{
+    return getWorldTransform(frameIndex).getRotation()*getFrameTwist(frameIndex);
+}
+
 SpatialAcc DynamicsComputations::getFrameProperSpatialAcceleration(const std::string & frameName)
 {
     int frameIndex = getFrameIndex(frameName);
@@ -608,6 +662,37 @@ SpatialAcc DynamicsComputations::getFrameProperSpatialAcceleration(const int fra
     this->computeFwdKinematics();
 
     return iDynTree::ToiDynTree(this->pimpl->m_fwdProperAccKinematicsResults[frameIndex]);
+}
+
+bool DynamicsComputations::inverseDynamics(VectorDynSize& outTorques,
+                                           Wrench& baseReactionForce)
+{
+    if( outTorques.size() != this->getNrOfDegreesOfFreedom() )
+    {
+        outTorques.resize(this->getNrOfDegreesOfFreedom());
+        outTorques.zero();
+    }
+
+    this->computeFwdKinematics();
+
+     // Compute velocity and acceleration kinematics
+     bool ok =
+        (0 == KDL::CoDyCo::rneaDynamicLoop(this->pimpl->m_robot_model,
+                                           this->pimpl->m_qKDL,
+                                           this->pimpl->m_traversal,
+                                           this->pimpl->m_fwdVelKinematicsResults,
+                                           this->pimpl->m_fwdProperAccKinematicsResults,
+                                           this->pimpl->m_extWrenches,
+                                           this->pimpl->m_intWrenches,
+                                           this->pimpl->m_torques,
+                                           this->pimpl->m_baseReactionForce));
+
+    // todo \todo add semantics
+    baseReactionForce = this->getWorldTransform(this->pimpl->m_traversal.getBaseLink()->getLinkIndex()).getRotation()*iDynTree::ToiDynTree(this->pimpl->m_baseReactionForce);
+
+    ok = ok && iDynTree::ToiDynTree(this->pimpl->m_torques,outTorques);
+
+    return ok;
 }
 
 

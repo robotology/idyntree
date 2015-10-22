@@ -7,6 +7,9 @@
 
 #include <iDynTree/Core/AngularMotionVector3.h>
 
+#include <Eigen/Core>
+#include <Eigen/Geometry>
+
 namespace iDynTree
 {
     /**
@@ -55,6 +58,17 @@ namespace iDynTree
 
     AngularMotionVector3::~AngularMotionVector3()
     {
+    }
+
+    Rotation AngularMotionVector3::exp() const
+    {
+        Rotation ret;
+        Eigen::Map<const Eigen::Vector3d> thisVec(this->data());
+        Eigen::AngleAxisd aa(thisVec.norm(),thisVec.normalized());
+
+        Eigen::Map< Eigen::Matrix<double,3,3,Eigen::RowMajor> >(ret.data()) = aa.toRotationMatrix();
+
+        return ret;
     }
 
 }

@@ -6,6 +6,8 @@
 */
 //
 
+#include "testModels.h"
+
 #include <kdl/tree.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
 #include <iDynTree/Sensors/Sensors.hpp>
@@ -92,7 +94,7 @@ iDynTree::Wrench simulateFTSensorFromKinematicState(const KDL::CoDyCo::Undirecte
 
 int main()
 {
-    std::string icub_urdf_filename = "icub_model.urdf";
+    std::string icub_urdf_filename = getAbsModelPath("icub_model.urdf");
 
     // Create the iCub model
     KDL::Tree icub_tree;

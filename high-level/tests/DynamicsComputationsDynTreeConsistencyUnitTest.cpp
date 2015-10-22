@@ -5,6 +5,8 @@
  *
  */
 
+#include "testModels.h"
+
 #include <iDynTree/HighLevel/DynamicsComputations.h>
 
 #include <iDynTree/Core/Utils.h>
@@ -141,7 +143,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
     {
         baseVel(i) = random_double();
         baseAcc(i) = random_double();
-        properAcc(i) = baseAcc(i) + gravity(i);
+        properAcc(i) = baseAcc(i) - gravity(i);
     }
 
     for(int dof=0; dof < dofs; dof++)
@@ -250,9 +252,9 @@ void assertConsistency(std::string modelName)
 
 int main()
 {
-    assertConsistency("oneLink.urdf");
-    assertConsistency("twoLinks.urdf");
-    assertConsistency("icub.urdf");
+    assertConsistency(getAbsModelPath("oneLink.urdf"));
+    assertConsistency(getAbsModelPath("twoLinks.urdf"));
+    assertConsistency(getAbsModelPath("icub.urdf"));
 
     return EXIT_SUCCESS;
 }

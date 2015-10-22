@@ -1,5 +1,7 @@
 #define _USE_MATH_DEFINES
 
+#include "testModels.h"
+
 #include <cmath>
 #include <iCub/iDynTree/TorqueEstimationTree.h>
 
@@ -252,7 +254,7 @@ int main(int argc, char ** argv)
     std::vector<std::string> dof_serialization = std::vector<std::string>(0);
 
     //Creating the DynTree : kinematic/dynamics structure, force torque sensors, imu sensor
-    std::string urdf_filename = argv[1];
+    std::string urdf_filename = getAbsModelPath("icub_skin_frames.urdf");
     iCub::iDynTree::TorqueEstimationTree * icub_model_estimation =
         new iCub::iDynTree::TorqueEstimationTree(urdf_filename,dof_serialization,ft_serialization);
 

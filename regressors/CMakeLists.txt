@@ -4,10 +4,6 @@
 
 project(iDynTree_Regressors CXX)
 
-if(MSVC)
-    set(CMAKE_DEBUG_POSTFIX "d")
-endif(MSVC)
-
 include_directories(include/kdl_codyco/regressors)
 include_directories(include)
 
@@ -31,7 +27,7 @@ SOURCE_GROUP("Header Files" FILES ${IDYNTREE_REGRESSORS_HEADERS} ${IDYNTREE_REGR
 #include other iDynTree headers as system
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
-include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
+include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 # share headers with all iDynTree targes
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")

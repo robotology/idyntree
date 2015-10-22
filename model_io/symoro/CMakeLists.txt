@@ -6,11 +6,6 @@ project(iDynTree_ModelIO_iKin CXX)
 
 find_package(YARP REQUIRED)
 
-if(MSVC)
-    set(CMAKE_DEBUG_POSTFIX "d")
-endif(MSVC)
-
-
 # add external parser
 add_subdirectory(external/expression_parser)
 

@@ -16,13 +16,9 @@ else()
     find_package(urdfdom REQUIRED)
 endif()
 
-
-if(MSVC)
-    set(CMAKE_DEBUG_POSTFIX "d")
-endif(MSVC)
-
-set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS include/iDynTree/ModelIO/URDFSensorsImport.h
-                                          include/iDyntree/ModelIO/URDFModelImport.h)
+set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFSensorsImport.h
+                                  include/iDynTree/ModelIO/URDFModelImport.h
+                                  include/iDynTree/ModelIO/URDFDofsImport.h)
 
 set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS
                                   include/iDynTree/ModelIO/impl/urdf_compatibility.h
@@ -35,7 +31,8 @@ set(IDYNTREE_MODELIO_URDF_SOURCES src/urdf_export.cpp
                                   src/urdf_import.cpp
                                   src/urdf_sensor_import.cpp
                                   src/URDFSensorsImport.cpp
-                                  src/URDFModelImport.cpp)
+                                  src/URDFModelImport.cpp
+                                  src/URDFDofsImport.cpp)
 
 source_group("Source Files" FILES ${IDYNTREE_MODELIO_URDF_SOURCES})
 source_group("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})

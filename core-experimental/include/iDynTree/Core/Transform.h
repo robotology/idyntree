@@ -220,7 +220,11 @@ namespace iDynTree
          */
         Matrix6x6 asAdjointTransformWrench() const;
 
-
+        /*
+         * Exp mapping between a  generic element of se(3) (iDynTree::SpatialMotionVector)
+         * to the corresponding element of SE(3) (iDynTree::Transform).
+         */
+        SpatialMotionVector log() const;
 
         ///@}
 

@@ -9,10 +9,6 @@ include_directories(${CMAKE_SOURCE_DIR}/include
                           ${kdl_codyco_INCLUDE_DIRS}
                           ${ICUB_INCLUDE_DIRS})
 
-# Copy the tests URDF also in this directory
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_BINARY_TEST_DIRS "${CMAKE_CURRENT_BINARY_DIR}")
-
-
 add_executable(iDynTreeJacobianTest         iDynTreeJacobianTest.cpp)
 add_executable(iDynTreeRelativeJacobianTest iDynTreeRelativeJacobianTest.cpp)
 add_executable(iDynTreeWholeBodyFTsensorEstimateTest iDynTreeWholeBodyFTsensorEstimateTest.cpp)
@@ -32,13 +28,12 @@ target_link_libraries(iDynTreeiCubExternalWrenchesEstimationTest idyntree-icub $
 
 #target_link_libraries(iDynTreeCOM idyntree ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES} )
 
-add_test(NAME test_iDynTreeJacobianTest                COMMAND iDynTreeJacobianTest         icub.urdf)
-add_test(NAME test_iDynTreeRelativeJacobianTest        COMMAND iDynTreeRelativeJacobianTest icub.urdf imu_frame)
-add_test(NAME test_iDynTreeRelativeJacobianTest_bigman COMMAND iDynTreeRelativeJacobianTest bigman.urdf imu_link)
+add_test(NAME test_iDynTreeJacobianTest                COMMAND iDynTreeJacobianTest)
+add_test(NAME test_iDynTreeRelativeJacobianTest        COMMAND iDynTreeRelativeJacobianTest)
 add_test(NAME test_iDynTreeWholeBodyFTsensorEstimateTest COMMAND iDynTreeWholeBodyFTsensorEstimateTest)
 add_test(NAME test_iDynTreeExportFixedJointsFrames     COMMAND iDynTreeExportFixedJointsFrames)
 add_test(NAME test_iDynTreeExternalWrenchesEstimationTest COMMAND iDynTreeExternalWrenchesEstimationTest)
-add_test(NAME test_iDynTreeiCubExternalWrenchesEstimationTest COMMAND iDynTreeiCubExternalWrenchesEstimationTest icub_skin_frames.urdf)
+add_test(NAME test_iDynTreeiCubExternalWrenchesEstimationTest COMMAND iDynTreeiCubExternalWrenchesEstimationTest)
 
 
 add_executable(iCubLeftArmRegressorTest iCubLeftArmRegressorTest.cpp)

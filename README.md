@@ -1,4 +1,4 @@
-iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=master)](https://travis-ci.org/robotology/idyntree)
+iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=master)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/30f7h985innapoqh/branch/master?svg=true)](https://ci.appveyor.com/project/traversaro/idyntree/branch/master)
 ===========
 
 iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. 
