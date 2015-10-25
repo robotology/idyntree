@@ -84,3 +84,8 @@ if(NOT CMAKE_CONFIGURATION_TYPES)
     set(IDYNTREE_BUILD_TYPES "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
     set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${IDYNTREE_BUILD_TYPES})
 endif()
+
+# Include ECM Sanitizers, for enable compilation support of GCC and Clang
+# sanitizers. Imported from http://api.kde.org/ecm/module/ECMEnableSanitizers.html
+include(ECMEnableSanitizers)
+
