@@ -19,6 +19,10 @@ namespace iDynTree
     class Transform;
     class SpatialMotionVector;
     class SpatialForceVector;
+    class Axis;
+    class SpatialInertia;
+    class Position;
+    class Rotation;
 
 #define ASSERT_EQUAL_STRING(val1,val2) assertStringAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_DOUBLE(val1,val2) assertDoubleAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
@@ -68,6 +72,35 @@ namespace iDynTree
      */
     void assertSpatialForceAreEqual(const SpatialForceVector & f1, const SpatialForceVector & f2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
 
+    /**
+     * Get a random double between min and max .
+     */
+    double getRandomDouble(double min=0.0, double max=1.0);
+
+    /**
+     * Get a random position.
+     */
+    Position getRandomPosition();
+
+    /**
+     * Get a random rotation.
+     */
+    Rotation getRandomRotation();
+
+    /**
+     * Get a random transform.
+     */
+    Transform getRandomTransform();
+
+    /**
+     * Get a random axis.
+     */
+    Axis getRandomAxis();
+
+    /**
+     * Get a random (but physically consistent) inertia.
+     */
+    SpatialInertia getRandomInertia();
 
 }
 

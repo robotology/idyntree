@@ -559,14 +559,14 @@ bool hasFakeBaseLink(const Model& modelWithFakeLinks)
 
     // Third condition: the base link is attached to its child with a fixed joint
     Neighbor neigh = modelWithFakeLinks.getNeighbor(baseLink,0);
-    if( neigh.neighborJoint->getNrOfDOFs() > 0 )
+    if( modelWithFakeLinks.getJoint(neigh.neighborJoint)->getNrOfDOFs() > 0 )
     {
         return false;
     }
 
     // Fourth condition: the transform between the base link and its child is the identity
-    FixedJoint * pFixedJoint = (FixedJoint *) neigh.neighborJoint;
-    Transform base_T_child = pFixedJoint->getTransform(baseLink,neigh.neighborLink->getIndex());
+    FixedJoint * pFixedJoint = (FixedJoint *) modelWithFakeLinks.getJoint(neigh.neighborJoint);
+    Transform base_T_child = pFixedJoint->getTransform(baseLink,neigh.neighborLink);
 
     if( !isIdentity(base_T_child) )
     {
@@ -602,9 +602,9 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
     {
         LinkIndex baseLink = modelWithFakeLinks.getDefaultBaseLink();
         linkToRemove.insert(modelWithFakeLinks.getLinkName(modelWithFakeLinks.getDefaultBaseLink()));
-        JointIndex jntIndex = modelWithFakeLinks.getNeighbor(baseLink,0).neighborJoint->getIndex();
+        JointIndex jntIndex = modelWithFakeLinks.getNeighbor(baseLink,0).neighborJoint;
         jointToRemove.insert(modelWithFakeLinks.getJointName(jntIndex));
-        LinkIndex newBaseIndex =  modelWithFakeLinks.getNeighbor(baseLink,0).neighborLink->getIndex();
+        LinkIndex newBaseIndex =  modelWithFakeLinks.getNeighbor(baseLink,0).neighborLink;
         newDefaultBaseLink = modelWithFakeLinks.getLinkName(newBaseIndex);
     }
 

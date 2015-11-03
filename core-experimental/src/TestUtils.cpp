@@ -7,6 +7,8 @@
 
 #include <iDynTree/Core/SpatialForceVector.h>
 #include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/Core/Axis.h>
+#include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/Transform.h>
 
@@ -112,6 +114,51 @@ void assertSpatialMotionAreEqual(const SpatialMotionVector& f1, const SpatialMot
     Vector6 f2plain = f2.asVector();
     assertVectorAreEqual(f1plain,f2plain,tol,file,line);
 }
+
+double getRandomDouble(double min, double max)
+{
+    return min + (max-min)*((double)rand())/((double)RAND_MAX);
+}
+
+Position getRandomPosition()
+{
+    return Position(getRandomDouble(-2,2),getRandomDouble(-2,2),getRandomDouble(-2,2));
+}
+
+Rotation getRandomRotation()
+{
+    return Rotation::RPY(getRandomDouble(),getRandomDouble(-1,1),getRandomDouble());
+}
+
+Transform getRandomTransform()
+{
+    return Transform(getRandomRotation(),getRandomPosition());
+}
+
+
+Axis getRandomAxis()
+{
+    return Axis(getRandomRotation()*Direction(1,0,0),getRandomPosition());
+}
+
+
+SpatialInertia getRandomInertia()
+{
+    double cxx = getRandomDouble(0,3);
+    double cyy = getRandomDouble(0,4);
+    double czz = getRandomDouble(0,6);
+    double rotInertiaData[3*3] = {czz+cyy,0.0,0.0,
+                                  0.0,cxx+czz,0.0,
+                                  0.0,0.0,cxx+cyy};
+
+    Rotation rot = Rotation::RPY(getRandomDouble(),getRandomDouble(-1,1),getRandomDouble());
+
+    SpatialInertia inertiaLink(getRandomDouble(0,4),
+                               Position(getRandomDouble(-2,2),getRandomDouble(-2,2),getRandomDouble(-2,2)),
+                               rot*RotationalInertiaRaw(rotInertiaData,3,3));
+}
+
+
 
 
 }
