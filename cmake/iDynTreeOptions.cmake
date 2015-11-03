@@ -89,3 +89,26 @@ endif()
 # sanitizers. Imported from http://api.kde.org/ecm/module/ECMEnableSanitizers.html
 include(ECMEnableSanitizers)
 
+# Enable warnings on Debug builds
+if(MSVC)
+    ###
+else()
+    ##Other systems
+    if(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
+        SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Weverything -pedantic -Wnon-virtual-dtor -Woverloaded-virtual")
+        #disable padding alignment warnings. Cast align is more subtle. On X86 it should not create any problem but for different architecture we should handle this warning better.
+        SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-padded -Wno-cast-align")
+        if (CODYCO_TRAVIS_CI)
+            #disable documentation warnings and sign comparison. This is for Travis-CI
+            MESSAGE(STATUS "Disabling some warning for Travis-CI")
+            SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-documentation -Wno-documentation-unknown-command -Wno-sign-conversion")
+        endif()
+        MESSAGE(STATUS "Clang compiler - Debug configuration flags: -Weverything -pedantic -Wnon-virtual-dtor -Woverloaded-virtual")
+    elseif(${CMAKE_COMPILER_IS_GNUCC})
+        SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra")
+        if (NOT CODYCO_TRAVIS_CI)
+            MESSAGE(STATUS "Gcc compiler - Debug configuration flags: -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual")
+            SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pedantic -Weffc++ -Woverloaded-virtual")
+        endif()
+    endif()
+endif()
