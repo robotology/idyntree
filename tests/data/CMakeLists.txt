@@ -5,6 +5,7 @@
 # remember to add it also in the
 # testModels.h.in file
 set(IDYNTREE_TESTS_URDFS icub.urdf
+                         icub2BB5Sea.urdf
                          icub_model.urdf
                          icub_skin_frames.urdf
                          bigman.urdf
