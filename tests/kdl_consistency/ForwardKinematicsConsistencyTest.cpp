@@ -16,6 +16,9 @@
 
 // iDynTree includes
 #include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/FixedJoint.h>
+#include <iDynTree/Model/RevoluteJoint.h>
+
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/Traversal.h>
@@ -28,7 +31,6 @@
 #include <iDynTree/Core/EigenHelpers.h>
 
 using namespace iDynTree;
-
 
 void testFwdKinConsistency(std::string modelFilePath)
 {
@@ -56,10 +58,34 @@ void testFwdKinConsistency(std::string modelFilePath)
     // Input : joint positions and base position with respect to world
     iDynTree::FreeFloatingPos baseJntPos(model);
 
+    baseJntPos.worldBasePos() = getRandomTransform();
+
+    for(int jnt=0; jnt < baseJntPos.getNrOfPosCoords(); jnt++)
+    {
+        if(baseJntPos.jointPos(jnt).getNrOfPosCoords() == 1)
+        {
+            baseJntPos.jointPos(jnt).pos()(0) = getRandomDouble();
+        }
+    }
+
+
+    // Build a map between KDL joints and iDynTree joints because we are not sure
+    // that the joint indeces will match
+    std::vector<int> kdl2idyntree_joints;
+    kdl2idyntree_joints.resize(undirected_tree.getNrOfDOFs());
+
+    for(unsigned int dofIndex=0; dofIndex < undirected_tree.getNrOfDOFs(); dofIndex++)
+    {
+        std::string dofName = undirected_tree.getJunction(dofIndex)->getName();
+        int idyntreeJointIndex = model.getJointIndex(dofName);
+        kdl2idyntree_joints[dofIndex] = idyntreeJointIndex;
+    }
+
+
     KDL::JntArray jntKDL(undirected_tree.getNrOfDOFs());
     KDL::Frame  worldBaseKDL;
 
-    ToKDL(baseJntPos,worldBaseKDL,jntKDL);
+    ToKDL(baseJntPos,worldBaseKDL,jntKDL,kdl2idyntree_joints);
 
     // Output : link (for iDynTree) or frame positions with respect to world
 
@@ -70,14 +96,14 @@ void testFwdKinConsistency(std::string modelFilePath)
 
     // Build a map between KDL links and iDynTree links because we are not sure
     // that the link indeces will match
-    std::vector<int> idynTree2KDL;
-    idynTree2KDL.resize(model.getNrOfLinks());
+    std::vector<int> idynTree2KDL_links;
+    idynTree2KDL_links.resize(model.getNrOfLinks());
 
     for(unsigned int linkIndex=0; linkIndex < model.getNrOfLinks(); linkIndex++)
     {
         std::string linkName = model.getLinkName(linkIndex);
         int kdlLinkIndex = undirected_tree.getLink(linkName)->getLinkIndex();
-        idynTree2KDL[linkIndex] = kdlLinkIndex;
+        idynTree2KDL_links[linkIndex] = kdlLinkIndex;
     }
 
     // Compute forward kinematics with old KDL code and with the new iDynTree code
@@ -90,11 +116,10 @@ void testFwdKinConsistency(std::string modelFilePath)
     ForwardKinematics(model,traversal,baseJntPos,linkPositions);
 
     // Check results
-    for(unsigned int linkIndex=0; linkIndex < model.getNrOfLinks(); linkIndex++)
+    for(unsigned int travEl = 0; travEl  < traversal.getNrOfVisitedLinks(); travEl++)
     {
-        //std::cout << "iDynTree link " << linkIndex << " :\n " << linkPositions.linkPos(linkIndex).pos().toString() << std::endl;
-        //std::cout << "KDL::Frame    " << idynTree2KDL[linkIndex] << " :\n " << ToiDynTree(framePositions[idynTree2KDL[linkIndex]]).toString() << std::endl;
-        ASSERT_EQUAL_TRANSFORM_TOL(linkPositions.linkPos(linkIndex).pos(),ToiDynTree(framePositions[idynTree2KDL[linkIndex]]),1e-5);
+        LinkIndex linkIndex = traversal.getLink(travEl)->getIndex();
+        ASSERT_EQUAL_TRANSFORM_TOL(linkPositions.linkPos(linkIndex).pos(),ToiDynTree(framePositions[idynTree2KDL_links[linkIndex]]),1e-1);
     }
 
     return;
@@ -105,7 +130,6 @@ int main()
     for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
     {
         std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
-        std::cout << "ForwardKinematics: Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) <<  std::endl;
         testFwdKinConsistency(urdfFileName);
     }
 

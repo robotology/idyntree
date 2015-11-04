@@ -13,7 +13,7 @@
         </inertial>
     </link>
     <joint name="joint_1_2" type="continuous">
-        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <origin xyz="1 0 0" rpy="0 -0 0" />
         <axis xyz="0 0 1" />
         <parent link="link1" />
         <child link="link2" />

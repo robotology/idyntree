@@ -174,7 +174,7 @@ bool ToKDL(const VectorDynSize& idyntree_jntarray, KDL::JntArray& kdl_jntarray)
 }
 
 bool ToKDL(const iDynTree::FreeFloatingPos & idyntree_freeFloatingPos,
-           KDL::Frame & kdl_world_H_base, KDL::JntArray& kdl_jntarray)
+           KDL::Frame & kdl_world_H_base, KDL::JntArray& kdl_jntarray, std::vector<int> kdlDof2idyntree)
 {
     kdl_world_H_base = ToKDL(idyntree_freeFloatingPos.worldBasePos());
 
@@ -186,10 +186,10 @@ bool ToKDL(const iDynTree::FreeFloatingPos & idyntree_freeFloatingPos,
 
     // We do here the **strong** assumption that the dof index
     // of KDL and the one of iDynTree coincide
-    for(unsigned int dof=0; dof < kdl_jntarray.rows(); dof++ )
+    for(unsigned int kdlDof=0; kdlDof < kdl_jntarray.rows(); kdlDof++ )
     {
-        assert(idyntree_freeFloatingPos.jointPos(dof).getNrOfPosCoords() == 1);
-        kdl_jntarray(dof) = idyntree_freeFloatingPos.jointPos(dof).pos()(0);
+        assert(idyntree_freeFloatingPos.jointPos(kdlDof).getNrOfPosCoords() == 1);
+        kdl_jntarray(kdlDof) = idyntree_freeFloatingPos.jointPos(kdlDof2idyntree[kdlDof]).pos()(0);
     }
 }
 
