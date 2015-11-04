@@ -13,6 +13,7 @@
 
 #include <iDynTree/Model/Indeces.h>
 #include <iDynTree/Model/JointState.h>
+#include <iDynTree/Model/LinkState.h>
 
 #include <vector>
 
@@ -33,25 +34,7 @@ namespace iDynTree
     private:
         Transform m_worldBasePos;
 
-        /**
-         * \todo TODO : check if the double indirection caused by
-         *              this vector of pointers is a performance bottleneck.
-         *              In that case substitute with a continuos array + offsets.
-         *
-         */
-        std::vector<IJointPos *> m_jointPos;
-
-        /**
-         *
-         */
-        unsigned int nrOfPosCoords;
-
-        /**
-         * Clear the joint pos vector.
-         */
-        void clearJointPos();
-
-        void buildJointPos(const Model& model);
+        VectorDynSize m_jointPos;
 
     public:
         // Documentation inherited
@@ -74,9 +57,9 @@ namespace iDynTree
        Transform & worldBasePos();
 
        /**
-        * Get the joint positions.
+        * Get the vector of joint positions.
         */
-       IJointPos & jointPos(const JointIndex jointIndex);
+       IRawVector & jointPos();
 
        /**
         * Get the base position (const version).
@@ -84,12 +67,12 @@ namespace iDynTree
        const Transform & worldBasePos() const;
 
        /**
-        * Get the joint positions (const version).
+        * Get the vector of joint positions (const version).
         */
-       const IJointPos & jointPos(const JointIndex jointIndex) const;
+       const IRawVector & jointPos() const;
 
        /**
-        *
+        * Get the dimension of the joint positions vector.
         */
        unsigned int getNrOfPosCoords() const;
 
@@ -97,6 +80,88 @@ namespace iDynTree
           * Destructor
           */
         virtual ~FreeFloatingPos();
+    };
+
+     /**
+     * Class representing the position, velocity and accelerations
+     * of a Free Floating robot.
+     *
+     * The position of a free floating robot is represented by the
+     * transform of a base frame with respect to an inertial frame,
+     * and a vector of joint positions.
+     *
+     */
+    class FreeFloatingPosVelAcc
+    {
+    private:
+        LinkPosVelAcc m_basePosVelAcc;
+
+        VectorDynSize m_jointPos;
+        VectorDynSize m_jointVel;
+        VectorDynSize m_jointAcc;
+
+    public:
+        // Documentation inherited
+       FreeFloatingPosVelAcc(const iDynTree::Model& model);
+
+       /**
+        * Resize the class to match the dimension of the joints contained in a Model.
+        *
+        * @param model the model from which to get the number and dimension of the joints.
+        *
+        * @warning This method wipes the joint positions if number and dimension of the joints
+        *          of the model passed are different from the one already stored.
+        *
+        */
+       void resize(const iDynTree::Model& model);
+
+       /**
+        * Get the base position, velocity and accelerations.
+        */
+       LinkPosVelAcc & basePosVelAcc();
+
+       /**
+        * Get the joint position vector.
+        */
+       IRawVector & jointPos();
+
+       /**
+        * Get the joint velocities vector.
+        */
+       IRawVector & jointVel();
+
+       /**
+        * Get the joint accelerations vector.
+        */
+       IRawVector & jointAcc();
+
+       /**
+        * Get the base position (const version).
+        */
+       const LinkPosVelAcc & basePosVelAcc() const;
+
+       /**
+        * Get the joint positions vector (const version).
+        */
+       const IRawVector & jointPos() const;
+
+       /**
+        * Get the joint velocities vector (const version).
+        */
+       const IRawVector & jointVel() const;
+
+       /**
+        * Get the joint accelerations vector (const version).
+        */
+       const IRawVector & jointAcc() const;
+
+       unsigned int getNrOfPosCoords() const;
+       unsigned int getNrOfDOFs() const;
+
+        /**
+          * Destructor
+          */
+        virtual ~FreeFloatingPosVelAcc();
     };
 
 }

@@ -9,23 +9,4 @@
 
 namespace iDynTree
 {
-    unsigned int NullJointPos::getNrOfPosCoords() const
-    {
-        return 0;
-    }
-
-    const IRawVector& NullJointPos::pos() const
-    {
-        return this->m_pos;
-    }
-
-    IRawVector& NullJointPos::pos()
-    {
-        return this->m_pos;
-    }
-
-    NullJointPos::~NullJointPos()
-    {
-
-    }
 }

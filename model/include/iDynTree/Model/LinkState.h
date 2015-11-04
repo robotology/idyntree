@@ -37,24 +37,6 @@ namespace iDynTree
         virtual ~LinkPos();
     };
 
-    class LinkPositions
-    {
-    private:
-        std::vector<LinkPos> m_linkPos;
-
-    public:
-        LinkPositions(unsigned int nrOfLinks = 0);
-        LinkPositions(const iDynTree::Model & model);
-
-        void resize(unsigned int nrOfLinks);
-        void resize(const iDynTree::Model & model);
-
-        LinkPos & linkPos(const LinkIndex link);
-        const LinkPos & linkPos(const LinkIndex link) const;
-
-        ~LinkPositions();
-    };
-
     class LinkVelAcc
     {
     private:
@@ -94,6 +76,60 @@ namespace iDynTree
           * Destructor
           */
         virtual ~LinkPosVelAcc();
+    };
+
+    class LinkPositions
+    {
+    private:
+        std::vector<LinkPos> m_linkPos;
+
+    public:
+        LinkPositions(unsigned int nrOfLinks = 0);
+        LinkPositions(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfLinks);
+        void resize(const iDynTree::Model & model);
+
+        LinkPos & linkPos(const LinkIndex link);
+        const LinkPos & linkPos(const LinkIndex link) const;
+
+        ~LinkPositions();
+    };
+
+    class LinkVelAccArray
+    {
+    private:
+        std::vector<LinkVelAcc> m_linkState;
+
+    public:
+        LinkVelAccArray(unsigned int nrOfLinks = 0);
+        LinkVelAccArray(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfLinks);
+        void resize(const iDynTree::Model & model);
+
+        LinkVelAcc & linkVelAcc(const LinkIndex link);
+        const LinkVelAcc & linkVelAcc(const LinkIndex link) const;
+
+        ~LinkVelAccArray();
+    };
+
+    class LinkPosVelAccArray
+    {
+    private:
+        std::vector<LinkPosVelAcc> m_linkState;
+
+    public:
+        LinkPosVelAccArray(unsigned int nrOfLinks = 0);
+        LinkPosVelAccArray(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfLinks);
+        void resize(const iDynTree::Model & model);
+
+        LinkPosVelAcc & linkPosVelAcc(const LinkIndex link);
+        const LinkPosVelAcc & linkPosVelAcc(const LinkIndex link) const;
+
+        ~LinkPosVelAccArray();
     };
 }
 

@@ -62,10 +62,7 @@ void testFwdKinConsistency(std::string modelFilePath)
 
     for(int jnt=0; jnt < baseJntPos.getNrOfPosCoords(); jnt++)
     {
-        if(baseJntPos.jointPos(jnt).getNrOfPosCoords() == 1)
-        {
-            baseJntPos.jointPos(jnt).pos()(0) = getRandomDouble();
-        }
+        baseJntPos.jointPos()(jnt) = getRandomDouble();
     }
 
 
@@ -113,7 +110,7 @@ void testFwdKinConsistency(std::string modelFilePath)
                                framePositions,
                                worldBaseKDL);
 
-    ForwardKinematics(model,traversal,baseJntPos,linkPositions);
+    ForwardPositionKinematics(model,traversal,baseJntPos,linkPositions);
 
     // Check results
     for(unsigned int travEl = 0; travEl  < traversal.getNrOfVisitedLinks(); travEl++)

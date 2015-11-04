@@ -19,93 +19,9 @@ FreeFloatingPos::FreeFloatingPos(const Model& model)
     resize(model);
 }
 
-IJointPos * allocateJointPosOfSize(const unsigned int nrOfPosCoords)
-{
-    IJointPos * retPtr;
-
-    assert(nrOfPosCoords <= 6);
-
-    switch(nrOfPosCoords)
-    {
-        case 0:
-            retPtr = new NullJointPos;
-            break;
-        case 1:
-            retPtr = new JointPos<1>();
-            break;
-        case 2:
-            retPtr = new JointPos<2>();
-            break;
-        case 3:
-            retPtr = new JointPos<3>();
-            break;
-        case 4:
-            retPtr = new JointPos<4>();
-            break;
-        case 5:
-            retPtr = new JointPos<5>();
-            break;
-        case 6:
-            retPtr = new JointPos<6>();
-            break;
-        default:
-            assert(false);
-            break;
-    }
-
-    return retPtr;
-}
-
-void FreeFloatingPos::clearJointPos()
-{
-    for(size_t jnt = 0; jnt < this->m_jointPos.size(); jnt++)
-    {
-        if( this->m_jointPos[jnt] )
-        {
-            delete this->m_jointPos[jnt];
-            this->m_jointPos[jnt] = 0;
-        }
-    }
-
-    this->m_jointPos.resize(0);
-}
-
-
-void FreeFloatingPos::buildJointPos(const Model& model)
-{
-    this->clearJointPos();
-
-    this->m_jointPos.resize(model.getNrOfJoints());
-
-    for(size_t jnt = 0; jnt < this->m_jointPos.size(); jnt++)
-    {
-        unsigned int jointNrOfPosCoords = model.getJoint(jnt)->getNrOfPosCoords();
-        this->m_jointPos[jnt] = allocateJointPosOfSize(jointNrOfPosCoords);
-    }
-
-    return;
-}
-
 void FreeFloatingPos::resize(const Model& model)
 {
-    nrOfPosCoords = model.getNrOfPosCoords();
-
-    if( model.getNrOfJoints() != this->m_jointPos.size() )
-    {
-        this->buildJointPos(model);
-    }
-
-    for(unsigned int jnt=0; jnt < model.getNrOfJoints(); jnt++)
-    {
-        if( model.getJoint(jnt)->getNrOfPosCoords() != this->m_jointPos[jnt]->getNrOfPosCoords() )
-        {
-            if( this->m_jointPos[jnt] )
-            {
-                delete this->m_jointPos[jnt];
-            }
-            this->m_jointPos[jnt] = allocateJointPosOfSize(model.getJoint(jnt)->getNrOfPosCoords());
-        }
-    }
+    this->m_jointPos.resize(model.getNrOfPosCoords());
 }
 
 
@@ -114,10 +30,9 @@ Transform& FreeFloatingPos::worldBasePos()
     return this->m_worldBasePos;
 }
 
-IJointPos& FreeFloatingPos::jointPos(const JointIndex jointIndex)
+IRawVector & FreeFloatingPos::jointPos()
 {
-    assert(jointIndex >= 0 && jointIndex <= this->m_jointPos.size());
-    return *(this->m_jointPos[jointIndex]);
+    return this->m_jointPos;
 }
 
 const Transform& FreeFloatingPos::worldBasePos() const
@@ -125,21 +40,90 @@ const Transform& FreeFloatingPos::worldBasePos() const
     return this->m_worldBasePos;
 }
 
-const IJointPos& FreeFloatingPos::jointPos(const JointIndex jointIndex) const
+const IRawVector & FreeFloatingPos::jointPos() const
 {
-    assert(jointIndex >= 0 && jointIndex <= this->m_jointPos.size());
-    return *(this->m_jointPos[jointIndex]);
+    return this->m_jointPos;
 }
+
 
 unsigned int FreeFloatingPos::getNrOfPosCoords() const
 {
-    return nrOfPosCoords;
+    return this->m_jointPos.size();
 }
 
 
 FreeFloatingPos::~FreeFloatingPos()
 {
-    this->clearJointPos();
 }
+
+FreeFloatingPosVelAcc::FreeFloatingPosVelAcc(const Model& model)
+{
+
+}
+
+LinkPosVelAcc& FreeFloatingPosVelAcc::basePosVelAcc()
+{
+    return this->m_basePosVelAcc;
+}
+
+
+const LinkPosVelAcc& FreeFloatingPosVelAcc::basePosVelAcc() const
+{
+    return this->m_basePosVelAcc;
+}
+
+IRawVector& FreeFloatingPosVelAcc::jointPos()
+{
+    return this->m_jointPos;
+}
+
+const IRawVector& FreeFloatingPosVelAcc::jointPos() const
+{
+    return this->m_jointPos;
+}
+
+IRawVector& FreeFloatingPosVelAcc::jointVel()
+{
+    return this->m_jointVel;
+}
+
+const IRawVector& FreeFloatingPosVelAcc::jointVel() const
+{
+    return this->m_jointVel;
+}
+
+IRawVector& FreeFloatingPosVelAcc::jointAcc()
+{
+    return this->m_jointAcc;
+}
+
+const IRawVector& FreeFloatingPosVelAcc::jointAcc() const
+{
+    return this->m_jointAcc;
+}
+
+
+void FreeFloatingPosVelAcc::resize(const Model& model)
+{
+    this->m_jointPos.resize(model.getNrOfPosCoords());
+    this->m_jointVel.resize(model.getNrOfDOFs());
+    this->m_jointAcc.resize(model.getNrOfDOFs());
+}
+
+unsigned int FreeFloatingPosVelAcc::getNrOfPosCoords() const
+{
+    return this->m_jointPos.size();
+}
+
+unsigned int FreeFloatingPosVelAcc::getNrOfDOFs() const
+{
+    return this->m_jointVel.size();
+}
+
+FreeFloatingPosVelAcc::~FreeFloatingPosVelAcc()
+{
+
+}
+
 
 }

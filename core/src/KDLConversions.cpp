@@ -188,8 +188,7 @@ bool ToKDL(const iDynTree::FreeFloatingPos & idyntree_freeFloatingPos,
     // of KDL and the one of iDynTree coincide
     for(unsigned int kdlDof=0; kdlDof < kdl_jntarray.rows(); kdlDof++ )
     {
-        assert(idyntree_freeFloatingPos.jointPos(kdlDof).getNrOfPosCoords() == 1);
-        kdl_jntarray(kdlDof) = idyntree_freeFloatingPos.jointPos(kdlDof2idyntree[kdlDof]).pos()(0);
+        kdl_jntarray(kdlDof) = idyntree_freeFloatingPos.jointPos()((kdlDof2idyntree[kdlDof]));
     }
 }
 

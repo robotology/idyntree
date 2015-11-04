@@ -28,6 +28,8 @@ namespace iDynTree
     {
     protected:
         JointIndex m_index;
+        size_t     m_posCoordsOffset;
+        size_t     m_DOFsOffset;
 
     public:
         /**
@@ -88,6 +90,18 @@ namespace iDynTree
 
         // Documentation inherited
         virtual JointIndex getIndex() const;
+
+        // Documentation inherited
+        virtual void setPosCoordsOffset(const size_t _offset);
+
+        // Documentation inherited
+        virtual size_t getPosCoordsOffset() const;
+
+        // Documentation inherited
+        virtual void setDOFsOffset(const size_t _offset);
+
+        // Documentation inherited
+        virtual size_t getDOFsOffset() const;
     };
 
     template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
@@ -114,7 +128,29 @@ namespace iDynTree
         return this->m_index;
     }
 
+    template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
+    void MovableJointImpl<nrOfPosCoords,nrOfDOFs>::setPosCoordsOffset(const size_t _offset)
+    {
+        this->m_posCoordsOffset = _offset;
+    }
 
+    template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
+    size_t MovableJointImpl<nrOfPosCoords,nrOfDOFs>::getPosCoordsOffset() const
+    {
+        return this->m_posCoordsOffset;
+    }
+
+    template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
+    void MovableJointImpl<nrOfPosCoords,nrOfDOFs>::setDOFsOffset(const size_t _offset)
+    {
+        this->m_DOFsOffset = _offset;
+    }
+
+    template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
+    size_t MovableJointImpl<nrOfPosCoords,nrOfDOFs>::getDOFsOffset() const
+    {
+        return this->m_DOFsOffset;
+    }
 
 
     template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>

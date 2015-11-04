@@ -23,13 +23,17 @@ RevoluteJoint::RevoluteJoint(const LinkIndex _link1, const LinkIndex _link2,
                              link1(_link1), link2(_link2), link1_X_link2_at_rest(_link1_X_link2),
                              rotation_axis_wrt_link1(_rotation_axis_wrt_link1)
 {
+    this->setPosCoordsOffset(0);
+    this->setDOFsOffset(0);
 }
 
 RevoluteJoint::RevoluteJoint(const RevoluteJoint& other):
-                       link1(other.link1), link2(other.link2),
-                       link1_X_link2_at_rest(other.link1_X_link2_at_rest),
-                       rotation_axis_wrt_link1(other.rotation_axis_wrt_link1)
+                             link1(other.link1), link2(other.link2),
+                             link1_X_link2_at_rest(other.link1_X_link2_at_rest),
+                             rotation_axis_wrt_link1(other.rotation_axis_wrt_link1)
 {
+    this->setPosCoordsOffset(other.getPosCoordsOffset());
+    this->setDOFsOffset(other.getDOFsOffset());
 }
 
 RevoluteJoint::~RevoluteJoint()
@@ -58,11 +62,9 @@ LinkIndex RevoluteJoint::getSecondAttachedLink() const
 }
 
 
-
-Transform RevoluteJoint::getTransform(const IJointPos& state, const LinkIndex p_linkA, const LinkIndex p_linkB) const
+Transform RevoluteJoint::getTransform(const IRawVector& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
 {
-    assert(state.getNrOfPosCoords() == this->getNrOfPosCoords());
-    const double ang = state.pos()(0);
+    const double ang = jntPos(this->getPosCoordsOffset());
     if( p_linkA == link1 )
     {
         assert(p_linkB == link2);
@@ -101,16 +103,16 @@ void RevoluteJoint::setAxis(const Axis& revoluteAxis_wrt_link1)
     this->rotation_axis_wrt_link1 = revoluteAxis_wrt_link1;
 }
 
-LinkVelAcc RevoluteJoint::computeLinkVelAcc(const IJointPosVelAcc& state, const LinkVelAcc& linkBstate,
-                                            const LinkIndex linkA, const LinkIndex linkB) const
+LinkVelAcc RevoluteJoint::computeLinkVelAcc(const IRawVector& jntPos, const IRawVector& jntVel, const IRawVector& jntAcc,
+                                            const LinkVelAcc& linkBstate, const LinkIndex linkA, const LinkIndex linkB) const
 {
     LinkVelAcc linkAstate;
 
-    double ang = state.pos()(0);
-    double dang = state.vel()(0);
-    double d2ang = state.acc()(0);
+    double ang = jntPos(this->getPosCoordsOffset());
+    double dang = jntVel(this->getDOFsOffset());
+    double d2ang = jntAcc(this->getDOFsOffset());
 
-    Transform a_X_b = this->getTransform(state,linkA,linkB);
+    Transform a_X_b = this->getTransform(jntPos,linkA,linkB);
 
     // Propagate twist and spatial acceleration: for a revolute joint (as for any 1 dof joint)
     // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
@@ -133,17 +135,17 @@ LinkVelAcc RevoluteJoint::computeLinkVelAcc(const IJointPosVelAcc& state, const 
     return linkAstate;
 }
 
-LinkPosVelAcc RevoluteJoint::computeLinkPosVelAcc(const IJointPosVelAcc& state, const LinkPosVelAcc& linkBstate,
-                                              const LinkIndex linkA, const LinkIndex linkB) const
+LinkPosVelAcc RevoluteJoint::computeLinkPosVelAcc(const IRawVector& jntPos, const IRawVector& jntVel, const IRawVector& jntAcc,
+                                                  const LinkPosVelAcc& linkBstate, const LinkIndex linkA, const LinkIndex linkB) const
 {
     LinkPosVelAcc linkAstate;
 
-    double ang = state.pos()(0);
-    double dang = state.vel()(0);
-    double d2ang = state.acc()(0);
+    double ang = jntPos(this->getPosCoordsOffset());
+    double dang = jntVel(this->getDOFsOffset());
+    double d2ang = jntAcc(this->getDOFsOffset());
 
-    Transform a_X_b = this->getTransform(state,linkA,linkB);
-    Transform b_X_a = this->getTransform(state,linkB,linkA);
+    Transform a_X_b = this->getTransform(jntPos,linkA,linkB);
+    Transform b_X_a = this->getTransform(jntPos,linkB,linkA);
 
     // Propagate position : position of the frame is expressed as
     // transform between the link frame and a reference frame :
@@ -172,11 +174,11 @@ LinkPosVelAcc RevoluteJoint::computeLinkPosVelAcc(const IJointPosVelAcc& state, 
 }
 
 
-void RevoluteJoint::computeJointTorque(const IJointPos & state, const Wrench& internalWrench,
+void RevoluteJoint::computeJointTorque(const IRawVector& jntPos, const Wrench& internalWrench,
                                        LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied,
-                                       iDynTree::IJointTorque& outputTorque) const
+                                       IRawVector& jntTorques) const
 {
-    double & tau = outputTorque.torque()(0);
+    double & tau = jntTorques(this->getDOFsOffset());
 
     if( linkOnWhichWrenchIsApplied == link2 )
     {

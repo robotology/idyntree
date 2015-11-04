@@ -27,41 +27,6 @@ LinkPos::~LinkPos()
 
 }
 
-LinkPositions::LinkPositions(unsigned int nrOfLinks)
-{
-    resize(nrOfLinks);
-}
-
-LinkPositions::LinkPositions(const Model& model)
-{
-    resize(model);
-}
-
-void LinkPositions::resize(const Model& model)
-{
-    resize(model.getNrOfLinks());
-}
-
-void LinkPositions::resize(unsigned int nrOfLinks)
-{
-    this->m_linkPos.resize(nrOfLinks);
-}
-
-const LinkPos& LinkPositions::linkPos(const LinkIndex link) const
-{
-    return this->m_linkPos[link];
-}
-
-LinkPos& LinkPositions::linkPos(const LinkIndex link)
-{
-    return this->m_linkPos[link];
-}
-
-LinkPositions::~LinkPositions()
-{
-    resize(0);
-}
-
 Twist& LinkVelAcc::vel()
 {
     return this->m_vel;
@@ -120,6 +85,113 @@ const SpatialAcc& LinkPosVelAcc::acc() const
 LinkPosVelAcc::~LinkPosVelAcc()
 {
 
+}
+
+LinkPositions::LinkPositions(unsigned int nrOfLinks)
+{
+    resize(nrOfLinks);
+}
+
+LinkPositions::LinkPositions(const Model& model)
+{
+    resize(model);
+}
+
+void LinkPositions::resize(const Model& model)
+{
+    resize(model.getNrOfLinks());
+}
+
+void LinkPositions::resize(unsigned int nrOfLinks)
+{
+    this->m_linkPos.resize(nrOfLinks);
+}
+
+const LinkPos& LinkPositions::linkPos(const LinkIndex link) const
+{
+    return this->m_linkPos[link];
+}
+
+LinkPos& LinkPositions::linkPos(const LinkIndex link)
+{
+    return this->m_linkPos[link];
+}
+
+LinkPositions::~LinkPositions()
+{
+    resize(0);
+}
+
+
+LinkVelAccArray::LinkVelAccArray(unsigned int nrOfLinks)
+{
+    resize(nrOfLinks);
+}
+
+LinkVelAccArray::LinkVelAccArray(const Model& model)
+{
+    resize(model);
+}
+
+void LinkVelAccArray::resize(const Model& model)
+{
+    resize(model.getNrOfLinks());
+}
+
+void LinkVelAccArray::resize(unsigned int nrOfLinks)
+{
+    this->m_linkState.resize(nrOfLinks);
+}
+
+const LinkVelAcc& LinkVelAccArray::linkVelAcc(const LinkIndex link) const
+{
+    return this->m_linkState[link];
+}
+
+LinkVelAcc& LinkVelAccArray::linkVelAcc(const LinkIndex link)
+{
+    return this->m_linkState[link];
+}
+
+LinkVelAccArray::~LinkVelAccArray()
+{
+    resize(0);
+}
+
+
+LinkPosVelAccArray::LinkPosVelAccArray(unsigned int nrOfLinks)
+{
+    resize(nrOfLinks);
+}
+
+LinkPosVelAccArray::LinkPosVelAccArray(const Model& model)
+{
+    resize(model);
+}
+
+void LinkPosVelAccArray::resize(const Model& model)
+{
+    resize(model.getNrOfLinks());
+}
+
+void LinkPosVelAccArray::resize(unsigned int nrOfLinks)
+{
+    this->m_linkState.resize(nrOfLinks);
+}
+
+const LinkPosVelAcc& LinkPosVelAccArray::linkPosVelAcc(const LinkIndex link) const
+{
+    return this->m_linkState[link];
+}
+
+LinkPosVelAcc& LinkPosVelAccArray::linkPosVelAcc(const LinkIndex link)
+{
+    return this->m_linkState[link];
+}
+
+LinkPosVelAccArray::~LinkPosVelAccArray()
+{
+    resize(0);
 }
 
 

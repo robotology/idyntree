@@ -75,20 +75,20 @@ namespace iDynTree
         virtual Axis getAxis(const LinkIndex linkA) const;
 
         // Documentation inherited
-        virtual Transform getTransform(const IJointPos & state, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
+        virtual Transform getTransform(const IRawVector& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
 
          // Documentation inherited
-        virtual LinkPosVelAcc computeLinkPosVelAcc(const IJointPosVelAcc & state, const LinkPosVelAcc & linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB) const;
+        virtual LinkPosVelAcc computeLinkPosVelAcc(const IRawVector& jntPos, const IRawVector& jntVel, const IRawVector& jntAcc,
+                                                   const LinkPosVelAcc & linkBstate, const LinkIndex linkA, const LinkIndex linkB) const;
 
         // Documentation inherited
-        virtual LinkVelAcc computeLinkVelAcc(const IJointPosVelAcc & state, const LinkVelAcc & linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB) const;
+        virtual LinkVelAcc computeLinkVelAcc(const IRawVector& jntPos, const IRawVector& jntVel, const IRawVector& jntAcc, const LinkVelAcc & linkBstate,
+                                             const LinkIndex linkA, const LinkIndex linkB) const;
 
         // Documentation inherited
-        virtual void computeJointTorque(const IJointPos & state, const Wrench & internalWrench,
+        virtual void computeJointTorque(const IRawVector & jntPos, const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
-                                        IJointTorque & outputTorque) const;
+                                        IRawVector & jntTorques) const;
     };
 }
 
