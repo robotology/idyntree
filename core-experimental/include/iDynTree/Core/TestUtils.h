@@ -20,6 +20,8 @@ namespace iDynTree
     class SpatialMotionVector;
     class SpatialForceVector;
     class Axis;
+    class SpatialForceVector;
+    class SpatialMotionVector;
     class SpatialInertia;
     class Position;
     class Rotation;
@@ -103,6 +105,16 @@ namespace iDynTree
      * Get a random (but physically consistent) inertia.
      */
     SpatialInertia getRandomInertia();
+
+    /**
+     * Get a random twist-like 6D vector.
+     */
+    SpatialMotionVector getRandomTwist();
+
+    /**
+     * Get a random wrench-like 6D object.
+     */
+    SpatialForceVector getRandomWrench();
 
 }
 

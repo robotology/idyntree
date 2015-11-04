@@ -39,6 +39,7 @@ namespace iDynTree
     class SpatialMomentum;
     class ClassicalAcc;
     class FreeFloatingPos;
+    class FreeFloatingPosVelAcc;
 
     /**
      * iDynTree --> KDL conversions
@@ -60,7 +61,19 @@ namespace iDynTree
      * a map for connecting the two is also passed.
      */
     bool ToKDL(const iDynTree::FreeFloatingPos & idyntree_freeFloatingPos,
-               KDL::Frame & world_H_base, KDL::JntArray& kdl_jntarray, std::vector<int> kdlDof2idyntree);
+               KDL::Frame & world_H_base, KDL::JntArray& kdl_jntarray, const std::vector<int> kdlDof2idyntree);
+
+    /**
+     * Convert the position, velocity and configuration of a free floating robot from iDynTree
+     * to KDL.
+     * Considering that the joint serialization between the two can be different,
+     * a map for connecting the two is also passed.
+     */
+    bool ToKDL(const iDynTree::FreeFloatingPosVelAcc & idyntree_freeFloatingPos,
+               KDL::Frame & world_H_base, KDL::JntArray& kdl_jntarray,
+               KDL::Twist & base_vel,     KDL::JntArray& kdl_jntVel,
+               KDL::Twist & base_acc,     KDL::JntArray& kdl_jntAcc,
+               const std::vector<int> kdlDof2idyntree);
 
     /**
      * KDL --> iDynTree conversions

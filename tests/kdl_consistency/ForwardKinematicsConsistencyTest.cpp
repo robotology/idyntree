@@ -9,6 +9,7 @@
 
 // KDL related includes
 #include <kdl_codyco/position_loops.hpp>
+#include <kdl_codyco/rnea_loops.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/KDLConversions.h>
 
@@ -57,12 +58,19 @@ void testFwdKinConsistency(std::string modelFilePath)
 
     // Input : joint positions and base position with respect to world
     iDynTree::FreeFloatingPos baseJntPos(model);
+    iDynTree::FreeFloatingPosVelAcc baseJntPosVelAcc(model);
 
-    baseJntPos.worldBasePos() = getRandomTransform();
+    baseJntPos.worldBasePos() =  getRandomTransform();
+    baseJntPosVelAcc.basePosVelAcc().pos() =  baseJntPos.worldBasePos();
+    baseJntPosVelAcc.basePosVelAcc().vel() =  getRandomTwist();
+    baseJntPosVelAcc.basePosVelAcc().acc() = getRandomTwist();
 
     for(int jnt=0; jnt < baseJntPos.getNrOfPosCoords(); jnt++)
     {
         baseJntPos.jointPos()(jnt) = getRandomDouble();
+        baseJntPosVelAcc.jointPos()(jnt) = baseJntPos.jointPos()(jnt);
+        baseJntPosVelAcc.jointVel()(jnt) = getRandomDouble();
+        baseJntPosVelAcc.jointAcc()(jnt) = getRandomDouble();
     }
 
 
@@ -80,12 +88,18 @@ void testFwdKinConsistency(std::string modelFilePath)
 
 
     KDL::JntArray jntKDL(undirected_tree.getNrOfDOFs());
-    KDL::Frame  worldBaseKDL;
+    KDL::JntArray jntVelKDL(undirected_tree.getNrOfDOFs());
+    KDL::JntArray jntAccKDL(undirected_tree.getNrOfDOFs());
 
-    ToKDL(baseJntPos,worldBaseKDL,jntKDL,kdl2idyntree_joints);
+    KDL::Frame  worldBaseKDL;
+    KDL::Twist  baseVelKDL;
+    KDL::Twist  baseAccKDL;
+
+    ToKDL(baseJntPosVelAcc,worldBaseKDL,jntKDL,
+                           baseVelKDL,jntVelKDL,
+                           baseAccKDL,jntAccKDL,kdl2idyntree_joints);
 
     // Output : link (for iDynTree) or frame positions with respect to world
-
     std::vector<KDL::Frame> framePositions(undirected_tree.getNrOfLinks());
 
     iDynTree::LinkPositions linkPositions(model);
@@ -103,7 +117,7 @@ void testFwdKinConsistency(std::string modelFilePath)
         idynTree2KDL_links[linkIndex] = kdlLinkIndex;
     }
 
-    // Compute forward kinematics with old KDL code and with the new iDynTree code
+    // Compute position forward kinematics with old KDL code and with the new iDynTree code
     KDL::CoDyCo::getFramesLoop(undirected_tree,
                                jntKDL,
                                kdl_traversal,
@@ -117,6 +131,48 @@ void testFwdKinConsistency(std::string modelFilePath)
     {
         LinkIndex linkIndex = traversal.getLink(travEl)->getIndex();
         ASSERT_EQUAL_TRANSFORM_TOL(linkPositions.linkPos(linkIndex).pos(),ToiDynTree(framePositions[idynTree2KDL_links[linkIndex]]),1e-1);
+    }
+
+    // Compution velocity & acceleration kinematics
+    std::vector<KDL::Twist> kdlLinkVel(undirected_tree.getNrOfLinks());
+    std::vector<KDL::Twist> kdlLinkAcc(undirected_tree.getNrOfLinks());
+    KDL::CoDyCo::rneaKinematicLoop(undirected_tree,jntKDL,jntVelKDL,jntAccKDL,kdl_traversal,
+                                                   baseVelKDL,baseAccKDL,kdlLinkVel,kdlLinkAcc);
+
+    LinkVelAccArray linksVelAcc(model);
+
+    ForwardVelAccKinematics(model,traversal,baseJntPosVelAcc,linksVelAcc);
+
+    // Check results
+    for(unsigned int travEl = 0; travEl  < traversal.getNrOfVisitedLinks(); travEl++)
+    {
+        LinkIndex linkIndex = traversal.getLink(travEl)->getIndex();
+
+        std::cout << " link " <<  model.getLinkName(linkIndex) << std::endl;
+        std::cout << linksVelAcc.linkVelAcc(linkIndex).acc().asVector().toString() << std::endl;
+        std::cout << ToiDynTree(kdlLinkAcc[idynTree2KDL_links[linkIndex]]).asVector().toString() << std::endl;
+
+
+        ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).vel().asVector(),
+                            ToiDynTree(kdlLinkVel[idynTree2KDL_links[linkIndex]]).asVector());
+        ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).acc().asVector(),
+                            ToiDynTree(kdlLinkAcc[idynTree2KDL_links[linkIndex]]).asVector());
+    }
+
+    // Compute position, velocity and acceleration
+    LinkPosVelAccArray linksPosVelAcc(model);
+
+    ForwardPosVelAccKinematics(model,traversal,baseJntPosVelAcc,linksPosVelAcc);
+
+    for(unsigned int travEl = 0; travEl  < traversal.getNrOfVisitedLinks(); travEl++)
+    {
+        LinkIndex linkIndex = traversal.getLink(travEl)->getIndex();
+        ASSERT_EQUAL_TRANSFORM(linkPositions.linkPos(linkIndex).pos(),
+                               linksPosVelAcc.linkPosVelAcc(linkIndex).pos());
+        ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).vel().asVector(),
+                            linksPosVelAcc.linkPosVelAcc(linkIndex).vel().asVector());
+        ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).acc().asVector(),
+                            linksPosVelAcc.linkPosVelAcc(linkIndex).acc().asVector());
     }
 
     return;

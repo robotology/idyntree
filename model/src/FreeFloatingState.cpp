@@ -58,7 +58,7 @@ FreeFloatingPos::~FreeFloatingPos()
 
 FreeFloatingPosVelAcc::FreeFloatingPosVelAcc(const Model& model)
 {
-
+    resize(model);
 }
 
 LinkPosVelAcc& FreeFloatingPosVelAcc::basePosVelAcc()

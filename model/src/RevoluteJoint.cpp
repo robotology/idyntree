@@ -117,7 +117,7 @@ LinkVelAcc RevoluteJoint::computeLinkVelAcc(const IRawVector& jntPos, const IRaw
     // Propagate twist and spatial acceleration: for a revolute joint (as for any 1 dof joint)
     // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
     Twist vJ_link1 = rotation_axis_wrt_link1.getRotationTwist(dang);
-    SpatialAcc aJ_link1 = rotation_axis_wrt_link1.getRotationSpatialAcc(dang);
+    SpatialAcc aJ_link1 = rotation_axis_wrt_link1.getRotationSpatialAcc(d2ang);
 
     if( linkB == link1 )
     {
@@ -155,7 +155,7 @@ LinkPosVelAcc RevoluteJoint::computeLinkPosVelAcc(const IRawVector& jntPos, cons
     // Propagate twist and spatial acceleration: for a revolute joint (as for any 1 dof joint)
     // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
     Twist vJ_link1 = rotation_axis_wrt_link1.getRotationTwist(dang);
-    SpatialAcc aJ_link1 = rotation_axis_wrt_link1.getRotationSpatialAcc(dang);
+    SpatialAcc aJ_link1 = rotation_axis_wrt_link1.getRotationSpatialAcc(d2ang);
 
     if( linkB == link1 )
     {

@@ -8,6 +8,8 @@
 #include <iDynTree/Core/SpatialForceVector.h>
 #include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/Axis.h>
+#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/Transform.h>
@@ -157,6 +159,33 @@ SpatialInertia getRandomInertia()
                                Position(getRandomDouble(-2,2),getRandomDouble(-2,2),getRandomDouble(-2,2)),
                                rot*RotationalInertiaRaw(rotInertiaData,3,3));
 }
+
+SpatialMotionVector getRandomTwist()
+{
+    SpatialMotionVector ret;
+
+    for(int i=0; i < 3; i++ )
+    {
+        ret.getLinearVec3()(i) = getRandomDouble();
+        ret.getAngularVec3()(i) = getRandomDouble();
+    }
+
+    return ret;
+}
+
+SpatialForceVector getRandomWrench()
+{
+    SpatialForceVector ret;
+
+    for(int i=0; i < 3; i++ )
+    {
+        ret.getLinearVec3()(i) = getRandomDouble();
+        ret.getAngularVec3()(i) = getRandomDouble();
+    }
+
+    return ret;
+}
+
 
 
 

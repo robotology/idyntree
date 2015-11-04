@@ -52,7 +52,7 @@ namespace iDynTree
     bool ForwardPosVelAccKinematics(const iDynTree::Model & model,
                                     const iDynTree::Traversal & traversal,
                                     const iDynTree::FreeFloatingPosVelAcc & jointPosVelAcc,
-                                    iDynTree::LinkVelAccArray & linkPos);
+                                    iDynTree::LinkPosVelAccArray & linkPos);
 
 }
 
