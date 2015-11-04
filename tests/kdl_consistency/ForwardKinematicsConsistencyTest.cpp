@@ -1,0 +1,113 @@
+/*
+ * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Silvio Traversaro
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *
+ */
+
+#include "testModels.h"
+
+// KDL related includes
+#include <kdl_codyco/position_loops.hpp>
+#include <kdl_codyco/undirectedtree.hpp>
+#include <kdl_codyco/KDLConversions.h>
+
+#include <iDynTree/ModelIO/impl/urdf_import.hpp>
+
+// iDynTree includes
+#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/ForwardKinematics.h>
+#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model/FreeFloatingState.h>
+
+#include <iDynTree/ModelIO/URDFModelImport.h>
+
+#include <iDynTree/Core/TestUtils.h>
+
+#include <iDynTree/Core/EigenHelpers.h>
+
+using namespace iDynTree;
+
+
+void testFwdKinConsistency(std::string modelFilePath)
+{
+    // Load iDynTree model and compute a default traversal
+    iDynTree::Model model;
+    modelFromURDF(modelFilePath,model);
+    iDynTree::Traversal traversal;
+    model.computeFullTreeTraversal(traversal);
+
+    // Load KDL tree
+    KDL::Tree tree;
+    treeFromUrdfFile(modelFilePath,tree);
+    KDL::CoDyCo::UndirectedTree undirected_tree(tree);
+    KDL::CoDyCo::Traversal kdl_traversal;
+    undirected_tree.compute_traversal(kdl_traversal);
+
+    // A KDL::Tree only supports 0 and 1 DOFs joints, and
+    // KDL::Tree::getNrOfJoints does not count the 0 dof joints, so
+    // it is actually equivalent to iDynTree::Model::getNrOfDOFs
+    ASSERT_EQUAL_DOUBLE(tree.getNrOfJoints(),model.getNrOfDOFs());
+
+    std::cout << "KDL Links :" <<  undirected_tree.getNrOfLinks() << std::endl;
+    std::cout << "iDynTree Links :" <<  model.getNrOfLinks() << std::endl;
+
+    // Input : joint positions and base position with respect to world
+    iDynTree::FreeFloatingPos baseJntPos(model);
+
+    KDL::JntArray jntKDL(undirected_tree.getNrOfDOFs());
+    KDL::Frame  worldBaseKDL;
+
+    ToKDL(baseJntPos,worldBaseKDL,jntKDL);
+
+    // Output : link (for iDynTree) or frame positions with respect to world
+
+    std::vector<KDL::Frame> framePositions(undirected_tree.getNrOfLinks());
+
+    iDynTree::LinkPositions linkPositions(model);
+
+
+    // Build a map between KDL links and iDynTree links because we are not sure
+    // that the link indeces will match
+    std::vector<int> idynTree2KDL;
+    idynTree2KDL.resize(model.getNrOfLinks());
+
+    for(unsigned int linkIndex=0; linkIndex < model.getNrOfLinks(); linkIndex++)
+    {
+        std::string linkName = model.getLinkName(linkIndex);
+        int kdlLinkIndex = undirected_tree.getLink(linkName)->getLinkIndex();
+        idynTree2KDL[linkIndex] = kdlLinkIndex;
+    }
+
+    // Compute forward kinematics with old KDL code and with the new iDynTree code
+    KDL::CoDyCo::getFramesLoop(undirected_tree,
+                               jntKDL,
+                               kdl_traversal,
+                               framePositions,
+                               worldBaseKDL);
+
+    ForwardKinematics(model,traversal,baseJntPos,linkPositions);
+
+    // Check results
+    for(unsigned int linkIndex=0; linkIndex < model.getNrOfLinks(); linkIndex++)
+    {
+        //std::cout << "iDynTree link " << linkIndex << " :\n " << linkPositions.linkPos(linkIndex).pos().toString() << std::endl;
+        //std::cout << "KDL::Frame    " << idynTree2KDL[linkIndex] << " :\n " << ToiDynTree(framePositions[idynTree2KDL[linkIndex]]).toString() << std::endl;
+        ASSERT_EQUAL_TRANSFORM_TOL(linkPositions.linkPos(linkIndex).pos(),ToiDynTree(framePositions[idynTree2KDL[linkIndex]]),1e-5);
+    }
+
+    return;
+}
+
+int main()
+{
+    for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
+    {
+        std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
+        std::cout << "ForwardKinematics: Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) <<  std::endl;
+        testFwdKinConsistency(urdfFileName);
+    }
+
+    return EXIT_SUCCESS;
+}

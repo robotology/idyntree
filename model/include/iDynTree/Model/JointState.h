@@ -9,11 +9,34 @@
 #define IDYNTREE_JOINT_STATE_H
 
 #include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Core/VectorDynSize.h>
 
 #include <iDynTree/Model/IJointStateInterfaces.h>
 
 namespace iDynTree
 {
+
+    class NullJointPos : public IJointPos
+    {
+    private:
+        VectorDynSize m_pos;
+
+    public:
+        // Documentation inherited
+        IRawVector & pos();
+
+        // Documentation inherited
+        const IRawVector & pos() const;
+
+        // Documentation inherited
+        unsigned int getNrOfPosCoords() const;
+
+        /**
+          * Denstructor
+          *
+          */
+        virtual ~NullJointPos();
+    };
 
     template <int nrOfPosCoords>
     class JointPos: public IJointPos
@@ -24,6 +47,12 @@ namespace iDynTree
     public:
         // Documentation inherited
         IRawVector & pos();
+
+        // Documentation inherited
+        const IRawVector & pos() const;
+
+        // Documentation inherited
+        unsigned int getNrOfPosCoords() const;
 
         /**
           * Denstructor
@@ -89,38 +118,57 @@ namespace iDynTree
         virtual ~JointPosVelAcc();
     };
 
-    IRawVector& JointPos::pos()
+    template <int nrOfPosCoords>
+    IRawVector& JointPos<nrOfPosCoords>::pos()
     {
         return this->m_pos;
     }
 
+    template <int nrOfPosCoords>
+    const IRawVector& JointPos<nrOfPosCoords>::pos() const
+    {
+        return this->m_pos;
+    }
+
+    template <int nrOfPosCoords>
+    unsigned int JointPos<nrOfPosCoords>::getNrOfPosCoords() const
+    {
+        return nrOfPosCoords;
+    }
+
     // JointPos implementation
-    JointPos::~JointPos()
+    template <int nrOfPosCoords>
+    JointPos<nrOfPosCoords>::~JointPos()
     {
 
     }
 
-    IRawVector& JointPosVel::vel()
+    template <int nrOfPosCoords, int nrOfDOFs>
+    IRawVector& JointPosVel<nrOfPosCoords,nrOfDOFs>::vel()
     {
         return this->m_vel;
     }
 
-    unsigned int JointPosVel::getNrOfDOFs() const
+    template <int nrOfPosCoords, int nrOfDOFs>
+    unsigned int JointPosVel<nrOfPosCoords,nrOfDOFs>::getNrOfDOFs() const
     {
         return nrOfDOFs;
     }
 
-    JointPosVel::~JointPosVel()
+    template <int nrOfPosCoords, int nrOfDOFs>
+    JointPosVel<nrOfPosCoords,nrOfDOFs>::~JointPosVel()
     {
 
     }
 
-    IRawVector& JointPosVelAcc::acc()
+    template <int nrOfPosCoords, int nrOfDOFs>
+    IRawVector& JointPosVelAcc<nrOfPosCoords,nrOfDOFs>::acc()
     {
         return this->m_acc;
     }
 
-    JointPosVelAcc::~JointPosVelAcc()
+    template <int nrOfPosCoords, int nrOfDOFs>
+    JointPosVelAcc<nrOfPosCoords,nrOfDOFs>::~JointPosVelAcc()
     {
 
     }

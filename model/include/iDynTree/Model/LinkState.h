@@ -12,8 +12,13 @@
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/SpatialAcc.h>
 
+#include <iDynTree/Model/Indeces.h>
+
+#include <vector>
+
 namespace iDynTree
 {
+    class Model;
 
     class LinkPos
     {
@@ -30,6 +35,24 @@ namespace iDynTree
           * Destructor
           */
         virtual ~LinkPos();
+    };
+
+    class LinkPositions
+    {
+    private:
+        std::vector<LinkPos> m_linkPos;
+
+    public:
+        LinkPositions(unsigned int nrOfLinks = 0);
+        LinkPositions(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfLinks);
+        void resize(const iDynTree::Model & model);
+
+        LinkPos & linkPos(const LinkIndex link);
+        const LinkPos & linkPos(const LinkIndex link) const;
+
+        ~LinkPositions();
     };
 
     class LinkVelAcc

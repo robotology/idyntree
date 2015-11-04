@@ -62,3 +62,8 @@ target_link_libraries(urdf_forward_kinematics idyntree-core idyntree-modelio-urd
 
 #add_test(NAME test_urdf_forward_kinematics  COMMAND urdf_forward_kinematics black_icub.urdf root_link r_hip_3)
 
+if(IDYNTREE_USES_KDL)
+    # Add a subdirectory of all the consistency tests between the old
+    # "kdl_codyco" implementations and the new native iDynTree implementations
+    add_subdirectory(kdl_consistency)
+endif()

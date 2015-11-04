@@ -6,6 +6,7 @@
  */
 
 #include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/Model.h>
 
 namespace iDynTree
 {
@@ -24,6 +25,41 @@ const Transform& LinkPos::pos() const
 LinkPos::~LinkPos()
 {
 
+}
+
+LinkPositions::LinkPositions(unsigned int nrOfLinks)
+{
+    resize(nrOfLinks);
+}
+
+LinkPositions::LinkPositions(const Model& model)
+{
+    resize(model);
+}
+
+void LinkPositions::resize(const Model& model)
+{
+    resize(model.getNrOfLinks());
+}
+
+void LinkPositions::resize(unsigned int nrOfLinks)
+{
+    this->m_linkPos.resize(nrOfLinks);
+}
+
+const LinkPos& LinkPositions::linkPos(const LinkIndex link) const
+{
+    return this->m_linkPos[link];
+}
+
+LinkPos& LinkPositions::linkPos(const LinkIndex link)
+{
+    return this->m_linkPos[link];
+}
+
+LinkPositions::~LinkPositions()
+{
+    resize(0);
 }
 
 Twist& LinkVelAcc::vel()

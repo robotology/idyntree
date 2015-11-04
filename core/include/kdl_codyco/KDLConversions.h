@@ -35,6 +35,7 @@ namespace iDynTree
     class SpatialAcc;
     class SpatialMomentum;
     class ClassicalAcc;
+    class FreeFloatingPos;
 
     /**
      * iDynTree --> KDL conversions
@@ -49,6 +50,8 @@ namespace iDynTree
     KDL::Wrench   ToKDL(const iDynTree::SpatialMomentum    & idyntree_spatial_momentum);
     bool          ToKDL(const iDynTree::VectorDynSize & idyntree_jntarray,
                         KDL::JntArray             & kdl_jntarray);
+    bool          ToKDL(const iDynTree::FreeFloatingPos & idyntree_freeFloatingPos,
+                        KDL::Frame & world_H_base, KDL::JntArray& kdl_jntarray);
 
     /**
      * KDL --> iDynTree conversions
