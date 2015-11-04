@@ -31,6 +31,8 @@ namespace iDynTree
 #define ASSERT_EQUAL_SPATIAL_FORCE(val1,val2) assertSpatialForceAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_MATRIX(val1,val2) assertMatrixAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_TRANSFORM(val1,val2) assertTransformsAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
+#define ASSERT_EQUAL_TRANSFORM_TOL(val1,val2,tol) assertTransformsAreEqual(val1,val2,tol,__FILE__,__LINE__)
+
 
     void assertStringAreEqual(const std::string & val1, const std::string & val2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
 

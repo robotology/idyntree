@@ -186,9 +186,9 @@ namespace iDynTree
 
     RotationRaw RotationRaw::RPY(const double roll, const double pitch, const double yaw)
     {
-        return compose(RotX(roll), compose(RotY(pitch), RotZ(yaw)));
+        return compose(RotZ(yaw), compose(RotY(pitch), RotX(roll)));
     }
-
+    
     RotationRaw RotationRaw::Identity()
     {
         return RotationRaw();

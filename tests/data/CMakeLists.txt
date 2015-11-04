@@ -10,6 +10,7 @@ set(IDYNTREE_TESTS_URDFS icub.urdf
                          icub_skin_frames.urdf
                          bigman.urdf
                          twoLinks.urdf
+                         twoLinksFixed.urdf
                          oneLink.urdf
                          icubTwoLinks.urdf
                          robotModelTestTwoLinks.urdf)
