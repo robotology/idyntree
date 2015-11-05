@@ -47,6 +47,7 @@ bool sensorsListFromURDF(const std::string & urdf_filename,
 bool sensorsListFromURDFString(const std::string & urdf_string,
                                iDynTree::SensorsList & output);
 
+
 }
 
 #endif

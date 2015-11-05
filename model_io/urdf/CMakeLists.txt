@@ -17,6 +17,7 @@ else()
 endif()
 
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFSensorsImport.h
+                                  include/iDynTree/ModelIO/URDFGenericSensorsImport.h
                                   include/iDynTree/ModelIO/URDFModelImport.h
                                   include/iDynTree/ModelIO/URDFDofsImport.h)
 
@@ -25,12 +26,15 @@ set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS
                                   include/iDynTree/ModelIO/impl/urdf_export.hpp
                                   include/iDynTree/ModelIO/impl/urdf_import.hpp
                                   include/iDynTree/ModelIO/impl/urdf_sensor_import.hpp
+                                  include/iDynTree/ModelIO/impl/urdf_generic_sensor_import.hpp
                                   include/iDynTree/ModelIO/impl/config.h)
 
 set(IDYNTREE_MODELIO_URDF_SOURCES src/urdf_export.cpp
                                   src/urdf_import.cpp
                                   src/urdf_sensor_import.cpp
+                                  src/urdf_generic_sensor_import.cpp
                                   src/URDFSensorsImport.cpp
+                                  src/URDFGenericSensorsImport.cpp
                                   src/URDFModelImport.cpp
                                   src/URDFDofsImport.cpp)
 
