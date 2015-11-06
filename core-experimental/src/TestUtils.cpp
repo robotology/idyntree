@@ -158,6 +158,8 @@ SpatialInertia getRandomInertia()
     SpatialInertia inertiaLink(getRandomDouble(0,4),
                                Position(getRandomDouble(-2,2),getRandomDouble(-2,2),getRandomDouble(-2,2)),
                                rot*RotationalInertiaRaw(rotInertiaData,3,3));
+
+    return inertiaLink;
 }
 
 SpatialMotionVector getRandomTwist()
