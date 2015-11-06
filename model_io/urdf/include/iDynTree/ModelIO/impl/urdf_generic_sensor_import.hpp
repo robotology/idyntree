@@ -34,7 +34,7 @@
 
 /* Author: Naveen Kuppuswamy */
 
-#ifndef URDF_GENERIC SENSOR_IMPORT_H
+#ifndef URDF_GENERIC_SENSOR_IMPORT_H
 #define URDF_GENERIC_SENSOR_IMPORT_H
 
 #include <string>
@@ -53,12 +53,16 @@ namespace iDynTree
 {
 
    class Transform;
+   enum SensorType;
    
    struct GenericSensorData
    {
-       std::string reference_link;
+       enum { LINK, JOINT} parent_object;
+       std::string parent_object_name;
        std::string sensor_name;
+       SensorType sensor_type;
        iDynTree::Transform sensor_pose;
+       unsigned int update_rate;
    };
    
 // struct FTSensorData

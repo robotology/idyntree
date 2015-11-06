@@ -64,6 +64,7 @@ struct FTSensorData
           measure_direction;
 };
 
+std::vector<std::string> &split(const std::string &s, std::vector<std::string> &elems) ;
 
 bool ftSensorsFromUrdfFile(const std::string& file, std::vector<FTSensorData> & ft_sensors);
 bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorData> & ft_sensors);
