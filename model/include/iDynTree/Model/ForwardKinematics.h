@@ -36,7 +36,8 @@ namespace iDynTree
      * Function that compute the links velocities and accelerations
      * given the free floating robot velocities and accelerations.
      *
-     *
+     * This function impelments what is usually known as the
+     * "forward pass" of the Recursive Newton Euler algorithm. 
      */
     bool ForwardVelAccKinematics(const iDynTree::Model & model,
                                  const iDynTree::Traversal & traversal,

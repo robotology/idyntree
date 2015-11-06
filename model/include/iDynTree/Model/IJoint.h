@@ -150,15 +150,22 @@ namespace iDynTree
                                              const LinkVelAcc & linkBstate,
                                              const LinkIndex linkA, const LinkIndex linkB) const = 0;
 
-
-
         /**
          * Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies
          * on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied.
+         *
+         * @param[in] jntPos vector of joint positions.
+         * @param[in] internalWrench internal wrench that the linkThatAppliesWrench applies
+         *                           on the linkOnWhichWrenchIsApplied, expressed in the link
+         *                           frame of the linkOnWhichWrenchIsApplied
+         * @param[in] linkThatAppliesWrench link index of the link that applies the considered internal wrench.
+         * @param[in] linkOnWhichWrenchIsApplied link index of the link on which the considered internal wrench is applied.
+         * @param[out] jntTorques vector of joint torques.
          */
         virtual void computeJointTorque(const IRawVector & jntPos,
                                         const Wrench & internalWrench,
-                                        const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
+                                        const LinkIndex linkThatAppliesWrench,
+                                        const LinkIndex linkOnWhichWrenchIsApplied,
                                         IRawVector & jntTorques) const = 0;
 
         /**

@@ -183,14 +183,14 @@ void RevoluteJoint::computeJointTorque(const IRawVector& jntPos, const Wrench& i
     if( linkOnWhichWrenchIsApplied == link2 )
     {
         // in this case link2 is the child and link1 is the parent
-        iDynTree::Twist S = (link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1).getRotationTwist(1.0);
-        tau = S.dot(internalWrench);
+        iDynTree::Twist S_wrt_link2 = (link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1).getRotationTwist(1.0);
+        tau = S_wrt_link2.dot(internalWrench);
     }
     else
     {
          // in this case link1 is the child and link2 is the parent
-        iDynTree::Twist S = -(rotation_axis_wrt_link1).getRotationTwist(1.0);
-        tau = S.dot(internalWrench);
+        iDynTree::Twist S_wrt_link1 = -(rotation_axis_wrt_link1).getRotationTwist(1.0);
+        tau = S_wrt_link1.dot(internalWrench);
     }
 
 }

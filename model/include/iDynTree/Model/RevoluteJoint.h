@@ -87,7 +87,8 @@ namespace iDynTree
 
         // Documentation inherited
         virtual void computeJointTorque(const IRawVector & jntPos, const Wrench & internalWrench,
-                                        const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
+                                        const LinkIndex linkThatAppliesWrench,
+                                        const LinkIndex linkOnWhichWrenchIsApplied,
                                         IRawVector & jntTorques) const;
     };
 }

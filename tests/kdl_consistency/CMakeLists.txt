@@ -4,7 +4,7 @@ macro(add_kdl_consistency_test testName)
     set(testname   ConsistencyTest${testName})
     add_executable(${testbinary} ${testsrc})
     target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-modelio-urdf idyntree-core idyntree-model)
+    target_link_libraries(${testbinary} idyntree-modelio-urdf idyntree-core idyntree-core-exp idyntree-model)
     add_test(NAME ${testname} COMMAND ${testbinary})
 endmacro()
 

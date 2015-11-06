@@ -21,6 +21,8 @@
 #include <iDynTree/Model/RevoluteJoint.h>
 
 #include <iDynTree/Model/ForwardKinematics.h>
+#include <iDynTree/Model/InverseDynamics.h>
+
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FreeFloatingState.h>
@@ -53,17 +55,14 @@ void testFwdKinConsistency(std::string modelFilePath)
     // it is actually equivalent to iDynTree::Model::getNrOfDOFs
     ASSERT_EQUAL_DOUBLE(tree.getNrOfJoints(),model.getNrOfDOFs());
 
-    std::cout << "KDL Links :" <<  undirected_tree.getNrOfLinks() << std::endl;
-    std::cout << "iDynTree Links :" <<  model.getNrOfLinks() << std::endl;
-
     // Input : joint positions and base position with respect to world
     iDynTree::FreeFloatingPos baseJntPos(model);
     iDynTree::FreeFloatingPosVelAcc baseJntPosVelAcc(model);
 
     baseJntPos.worldBasePos() =  getRandomTransform();
     baseJntPosVelAcc.basePosVelAcc().pos() =  baseJntPos.worldBasePos();
-    baseJntPosVelAcc.basePosVelAcc().vel() =  getRandomTwist();
-    baseJntPosVelAcc.basePosVelAcc().acc() = getRandomTwist();
+    baseJntPosVelAcc.basePosVelAcc().vel() = getRandomTwist();
+    baseJntPosVelAcc.basePosVelAcc().acc() =  getRandomTwist();
 
     for(int jnt=0; jnt < baseJntPos.getNrOfPosCoords(); jnt++)
     {
@@ -148,11 +147,6 @@ void testFwdKinConsistency(std::string modelFilePath)
     {
         LinkIndex linkIndex = traversal.getLink(travEl)->getIndex();
 
-        std::cout << " link " <<  model.getLinkName(linkIndex) << std::endl;
-        std::cout << linksVelAcc.linkVelAcc(linkIndex).acc().asVector().toString() << std::endl;
-        std::cout << ToiDynTree(kdlLinkAcc[idynTree2KDL_links[linkIndex]]).asVector().toString() << std::endl;
-
-
         ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).vel().asVector(),
                             ToiDynTree(kdlLinkVel[idynTree2KDL_links[linkIndex]]).asVector());
         ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).acc().asVector(),
@@ -175,8 +169,55 @@ void testFwdKinConsistency(std::string modelFilePath)
                             linksPosVelAcc.linkPosVelAcc(linkIndex).acc().asVector());
     }
 
+    // Compute torques (i.e. inverse dynamics)
+    LinkExternalWrenches fExt(model);
+    LinkInternalWrenches f(model);
+    FreeFloatingGeneralizedTorques baseWrenchJointTorques(model);
+    KDL::JntArray jntTorques(model.getNrOfDOFs());
+    KDL::Wrench   baseWrench;
+
+    std::vector<KDL::Wrench> fExtKDL(undirected_tree.getNrOfLinks());
+    std::vector<KDL::Wrench> fKDL(undirected_tree.getNrOfLinks());
+
+    for(int link = 0; link < model.getNrOfLinks(); link++ )
+    {
+        fExt(link) = iDynTree::Wrench::Zero(); // getRandomWrench();
+        fExt(link).getLinearVec3()(0) = 0.0;
+        fExtKDL[idynTree2KDL_links[link]] = ToKDL(fExt(link));
+        fKDL[idynTree2KDL_links[link]] = KDL::Wrench::Zero();
+    }
+
+    bool ok = RNEADynamicPhase(model,traversal,baseJntPosVelAcc,linksVelAcc,fExt,f,baseWrenchJointTorques);
+
+    int retVal = KDL::CoDyCo::rneaDynamicLoop(undirected_tree,jntKDL,kdl_traversal,
+                                 kdlLinkVel,kdlLinkAcc,
+                                 fExtKDL,fKDL,jntTorques,baseWrench);
+
+    ASSERT_EQUAL_DOUBLE(ok,true);
+    ASSERT_EQUAL_DOUBLE(retVal,0);
+
+    /***
+     * This check is commented out because KDL::CoDyCo::rneaDynamicLoop returned
+     * a reverse baseWrench.. still need to be investigated.
+     * (The - is necessary for consistency with the mass matrix..)
+     *
+     */
+    //ASSERT_EQUAL_VECTOR(baseWrenchJointTorques.baseWrench().asVector(),
+    //                    ToiDynTree(baseWrench).asVector());
+
+    for(int link = 0; link < model.getNrOfLinks(); link++ )
+    {
+        ASSERT_EQUAL_VECTOR(f(link).asVector(),ToiDynTree(fKDL[idynTree2KDL_links[link]]).asVector());
+    }
+
+    for(int dof = 0; dof < model.getNrOfDOFs(); dof++ )
+    {
+        ASSERT_EQUAL_DOUBLE(jntTorques(dof),baseWrenchJointTorques.jointTorques()(kdl2idyntree_joints[dof]));
+    }
+
     return;
 }
+
 
 int main()
 {

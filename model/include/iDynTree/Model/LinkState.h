@@ -11,6 +11,7 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/Wrench.h>
 
 #include <iDynTree/Model/Indeces.h>
 
@@ -131,6 +132,27 @@ namespace iDynTree
 
         ~LinkPosVelAccArray();
     };
+
+    class LinkWrenches
+    {
+    private:
+        std::vector<iDynTree::Wrench> m_linkWrenches;
+
+    public:
+        LinkWrenches(unsigned int nrOfLinks = 0);
+        LinkWrenches(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfLinks);
+        void resize(const iDynTree::Model & model);
+
+        iDynTree::Wrench & operator()(const LinkIndex link);
+        const iDynTree::Wrench & operator()(const LinkIndex link) const;
+
+        ~LinkWrenches();
+    };
+
+    typedef LinkWrenches LinkExternalWrenches;
+    typedef LinkWrenches LinkInternalWrenches;
 }
 
 #endif /* IDYNTREE_LINK_STATE_H */

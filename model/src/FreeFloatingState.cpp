@@ -125,5 +125,45 @@ FreeFloatingPosVelAcc::~FreeFloatingPosVelAcc()
 
 }
 
+FreeFloatingGeneralizedTorques::FreeFloatingGeneralizedTorques(const Model& model)
+{
+    resize(model);
+}
+
+void FreeFloatingGeneralizedTorques::resize(const Model& model)
+{
+    this->m_jointTorques.resize(model.getNrOfDOFs());
+}
+
+Wrench& FreeFloatingGeneralizedTorques::baseWrench()
+{
+    return this->m_baseWrench;
+}
+
+IRawVector& FreeFloatingGeneralizedTorques::jointTorques()
+{
+    return this->m_jointTorques;
+}
+
+const Wrench& FreeFloatingGeneralizedTorques::baseWrench() const
+{
+    return this->m_baseWrench;
+}
+
+const IRawVector& FreeFloatingGeneralizedTorques::jointTorques() const
+{
+    return this->m_jointTorques;
+}
+
+unsigned int FreeFloatingGeneralizedTorques::getNrOfDOFs() const
+{
+    return this->m_jointTorques.size();
+}
+
+FreeFloatingGeneralizedTorques::~FreeFloatingGeneralizedTorques()
+{
+
+}
+
 
 }

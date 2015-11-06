@@ -194,5 +194,41 @@ LinkPosVelAccArray::~LinkPosVelAccArray()
     resize(0);
 }
 
+LinkWrenches::LinkWrenches(const Model& model)
+{
+    resize(model);
+}
+
+LinkWrenches::LinkWrenches(unsigned int nrOfLinks)
+{
+    resize(nrOfLinks);
+}
+
+void LinkWrenches::resize(const Model& model)
+{
+    this->m_linkWrenches.resize(model.getNrOfLinks());
+}
+
+void LinkWrenches::resize(unsigned int nrOfLinks)
+{
+    this->m_linkWrenches.resize(nrOfLinks);
+}
+
+Wrench& LinkWrenches::operator()(const LinkIndex link)
+{
+    return this->m_linkWrenches[link];
+}
+
+const Wrench& LinkWrenches::operator()(const LinkIndex link) const
+{
+    return this->m_linkWrenches[link];
+}
+
+LinkWrenches::~LinkWrenches()
+{
+    resize(0);
+}
+
+
 
 }
