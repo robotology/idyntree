@@ -6,6 +6,7 @@
  */
 
 #include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/Model.h>
 
 namespace iDynTree
 {
@@ -85,6 +86,149 @@ LinkPosVelAcc::~LinkPosVelAcc()
 {
 
 }
+
+LinkPositions::LinkPositions(unsigned int nrOfLinks)
+{
+    resize(nrOfLinks);
+}
+
+LinkPositions::LinkPositions(const Model& model)
+{
+    resize(model);
+}
+
+void LinkPositions::resize(const Model& model)
+{
+    resize(model.getNrOfLinks());
+}
+
+void LinkPositions::resize(unsigned int nrOfLinks)
+{
+    this->m_linkPos.resize(nrOfLinks);
+}
+
+const LinkPos& LinkPositions::linkPos(const LinkIndex link) const
+{
+    return this->m_linkPos[link];
+}
+
+LinkPos& LinkPositions::linkPos(const LinkIndex link)
+{
+    return this->m_linkPos[link];
+}
+
+LinkPositions::~LinkPositions()
+{
+    resize(0);
+}
+
+
+LinkVelAccArray::LinkVelAccArray(unsigned int nrOfLinks)
+{
+    resize(nrOfLinks);
+}
+
+LinkVelAccArray::LinkVelAccArray(const Model& model)
+{
+    resize(model);
+}
+
+void LinkVelAccArray::resize(const Model& model)
+{
+    resize(model.getNrOfLinks());
+}
+
+void LinkVelAccArray::resize(unsigned int nrOfLinks)
+{
+    this->m_linkState.resize(nrOfLinks);
+}
+
+const LinkVelAcc& LinkVelAccArray::linkVelAcc(const LinkIndex link) const
+{
+    return this->m_linkState[link];
+}
+
+LinkVelAcc& LinkVelAccArray::linkVelAcc(const LinkIndex link)
+{
+    return this->m_linkState[link];
+}
+
+LinkVelAccArray::~LinkVelAccArray()
+{
+    resize(0);
+}
+
+
+LinkPosVelAccArray::LinkPosVelAccArray(unsigned int nrOfLinks)
+{
+    resize(nrOfLinks);
+}
+
+LinkPosVelAccArray::LinkPosVelAccArray(const Model& model)
+{
+    resize(model);
+}
+
+void LinkPosVelAccArray::resize(const Model& model)
+{
+    resize(model.getNrOfLinks());
+}
+
+void LinkPosVelAccArray::resize(unsigned int nrOfLinks)
+{
+    this->m_linkState.resize(nrOfLinks);
+}
+
+const LinkPosVelAcc& LinkPosVelAccArray::linkPosVelAcc(const LinkIndex link) const
+{
+    return this->m_linkState[link];
+}
+
+LinkPosVelAcc& LinkPosVelAccArray::linkPosVelAcc(const LinkIndex link)
+{
+    return this->m_linkState[link];
+}
+
+LinkPosVelAccArray::~LinkPosVelAccArray()
+{
+    resize(0);
+}
+
+LinkWrenches::LinkWrenches(const Model& model)
+{
+    resize(model);
+}
+
+LinkWrenches::LinkWrenches(unsigned int nrOfLinks)
+{
+    resize(nrOfLinks);
+}
+
+void LinkWrenches::resize(const Model& model)
+{
+    this->m_linkWrenches.resize(model.getNrOfLinks());
+}
+
+void LinkWrenches::resize(unsigned int nrOfLinks)
+{
+    this->m_linkWrenches.resize(nrOfLinks);
+}
+
+Wrench& LinkWrenches::operator()(const LinkIndex link)
+{
+    return this->m_linkWrenches[link];
+}
+
+const Wrench& LinkWrenches::operator()(const LinkIndex link) const
+{
+    return this->m_linkWrenches[link];
+}
+
+LinkWrenches::~LinkWrenches()
+{
+    resize(0);
+}
+
 
 
 }

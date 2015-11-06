@@ -40,11 +40,14 @@ classdef Rotation < iDynTree.RotationRaw
     function varargout = log(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(488, self, varargin{:});
     end
+    function varargout = getRPY(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(489, self, varargin{:});
+    end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(495, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(496, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(496, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(497, self, varargin{:});
     end
   end
   methods(Static)
@@ -55,22 +58,22 @@ classdef Rotation < iDynTree.RotationRaw
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(484, varargin{:});
     end
     function varargout = RotX(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(489, varargin{:});
-    end
-    function varargout = RotY(varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(490, varargin{:});
     end
-    function varargout = RotZ(varargin)
+    function varargout = RotY(varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(491, varargin{:});
     end
-    function varargout = RotAxis(varargin)
+    function varargout = RotZ(varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(492, varargin{:});
     end
-    function varargout = RPY(varargin)
+    function varargout = RotAxis(varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(493, varargin{:});
     end
-    function varargout = Identity(varargin)
+    function varargout = RPY(varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(494, varargin{:});
+    end
+    function varargout = Identity(varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(495, varargin{:});
     end
   end
 end

@@ -243,7 +243,10 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
     secondLinkNeighbor.neighborJoint = thisJointIndex;
     this->neighbors[secondLink].push_back(secondLinkNeighbor);
 
+    // Set the joint index and dof offset
     this->joints[thisJointIndex]->setIndex(thisJointIndex);
+    this->joints[thisJointIndex]->setPosCoordsOffset(this->nrOfPosCoords);
+    this->joints[thisJointIndex]->setDOFsOffset(this->nrOfDOFs);
 
     // Update the number of dofs
     this->nrOfPosCoords += this->joints[thisJointIndex]->getNrOfPosCoords();

@@ -25,18 +25,4 @@ IJoint::~IJoint()
 {
 }
 
-IJointPos::~IJointPos()
-{
-}
-
-IJointPosVel::~IJointPosVel()
-{
-}
-
-IJointPosVelAcc::~IJointPosVelAcc()
-{
-}
-
-
-
 }

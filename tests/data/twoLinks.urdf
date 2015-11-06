@@ -13,7 +13,7 @@
         </inertial>
     </link>
     <joint name="joint_1_2" type="continuous">
-        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <origin xyz="1 0 0" rpy="0 -0 0" />
         <axis xyz="0 0 1" />
         <parent link="link1" />
         <child link="link2" />
@@ -22,6 +22,7 @@
         <inertial>
             <mass value="1" />
             <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
+            <origin xyz="1 0 0" rpy="0 -0 0" />
         </inertial>
     </link>
 </robot>
