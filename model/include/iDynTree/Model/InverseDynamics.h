@@ -19,6 +19,7 @@ namespace iDynTree
     class FreeFloatingPos;
     class FreeFloatingPosVelAcc;
     class FreeFloatingGeneralizedTorques;
+    class FreeFloatingMassMatrix;
 
     bool RNEADynamicPhase(const iDynTree::Model & model,
                           const iDynTree::Traversal & traversal,
@@ -27,6 +28,17 @@ namespace iDynTree
                           const iDynTree::LinkExternalWrenches & linkExtForces,
                           iDynTree::LinkInternalWrenches       & linkIntWrenches,
                           iDynTree::FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
+
+    /**
+     * Compute the floating base mass matrix, using the
+     * composite rigid body algorithm.
+     *
+     */
+    bool CompositeRigidBodyAlgorithm(const Model& model,
+                                     const Traversal& traversal,
+                                     const FreeFloatingPos& jointPos,
+                                     LinkCompositeRigidBodyInertias& linkCRBs,
+                                     FreeFloatingMassMatrix& massMatrix);
 
 
 }

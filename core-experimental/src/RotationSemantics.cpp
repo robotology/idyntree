@@ -58,7 +58,7 @@ namespace iDynTree
     {
         return this->body;
     }
-    
+
     int RotationSemantics::getReferenceOrientationFrame() const
     {
         return this->refOrientationFrame;
@@ -68,7 +68,7 @@ namespace iDynTree
     {
         return this->refBody;
     }
-    
+
     int RotationSemantics::getCoordinateFrame() const
     {
         return this->coordinateFrame;
@@ -83,17 +83,17 @@ namespace iDynTree
     {
         this->body = _body;
     }
-    
+
     void RotationSemantics::setReferenceOrientationFrame(int _refOrientationFrame)
     {
         this->refOrientationFrame = this->coordinateFrame = _refOrientationFrame;
     }
-    
+
     void RotationSemantics::setRefBody(int _refBody)
     {
         this->refBody = _refBody;
     }
-    
+
     void RotationSemantics::setCoordinateFrame(int _coordinateFrame)
     {
         this->refOrientationFrame = this->coordinateFrame = _coordinateFrame;
@@ -197,7 +197,7 @@ namespace iDynTree
         result.setBody(op2.getBody());
         result.setReferenceOrientationFrame(op1.getReferenceOrientationFrame());
         result.setRefBody(op1.getRefBody());
-        
+
         return status;
     }
 
@@ -205,7 +205,7 @@ namespace iDynTree
     {
         // check semantics
         bool status = RotationSemantics::check_inverse2(op);
-        
+
         result.setOrientationFrame(op.getReferenceOrientationFrame());
         result.setBody(op.getRefBody());
         result.setReferenceOrientationFrame(op.getOrientationFrame());

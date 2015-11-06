@@ -229,6 +229,43 @@ LinkWrenches::~LinkWrenches()
     resize(0);
 }
 
+LinkInertias::LinkInertias(unsigned int nrOfLinks)
+{
+    this->resize(nrOfLinks);
+}
+
+LinkInertias::LinkInertias(const Model& model)
+{
+    this->resize(model);
+}
+
+void LinkInertias::resize(const Model& model)
+{
+    this->resize(model.getNrOfLinks());
+}
+
+void LinkInertias::resize(unsigned int nrOfLinks)
+{
+    this->m_linkInertials.resize(nrOfLinks);
+}
+
+SpatialInertia& LinkInertias::operator()(const LinkIndex link)
+{
+    return this->m_linkInertials[(size_t)link];
+}
+
+const SpatialInertia& LinkInertias::operator()(const LinkIndex link) const
+{
+    return this->m_linkInertials[(size_t)link];
+}
+
+
+LinkInertias::~LinkInertias()
+{
+
+}
+
+
 
 
 }

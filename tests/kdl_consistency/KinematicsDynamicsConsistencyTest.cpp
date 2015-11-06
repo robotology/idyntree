@@ -10,6 +10,7 @@
 // KDL related includes
 #include <kdl_codyco/position_loops.hpp>
 #include <kdl_codyco/rnea_loops.hpp>
+#include <kdl_codyco/crba_loops.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/KDLConversions.h>
 
@@ -26,6 +27,7 @@
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model/FreeFloatingMassMatrix.h>
 
 #include <iDynTree/ModelIO/URDFModelImport.h>
 
@@ -35,8 +37,23 @@
 
 using namespace iDynTree;
 
+int kdl2idyntreeFloatingDOFMapping(int kdl_floating_dof, const std::vector<int> & kdl2idyntree_joints)
+{
+    if( kdl_floating_dof < 6 )
+    {
+        return kdl_floating_dof;
+    }
+    else
+    {
+        return 6+kdl2idyntree_joints[kdl_floating_dof-6];
+    }
+}
+
 void testFwdKinConsistency(std::string modelFilePath)
 {
+    std::cout << "Testing " << modelFilePath << std::endl;
+
+
     // Load iDynTree model and compute a default traversal
     iDynTree::Model model;
     modelFromURDF(modelFilePath,model);
@@ -213,6 +230,37 @@ void testFwdKinConsistency(std::string modelFilePath)
     for(int dof = 0; dof < model.getNrOfDOFs(); dof++ )
     {
         ASSERT_EQUAL_DOUBLE(jntTorques(dof),baseWrenchJointTorques.jointTorques()(kdl2idyntree_joints[dof]));
+    }
+
+    // Check mass matrix
+    iDynTree::FreeFloatingMassMatrix massMatrix(model);
+    iDynTree::LinkInertias crbis(model);
+    ok = CompositeRigidBodyAlgorithm(model,traversal,baseJntPos,crbis,massMatrix);
+
+    KDL::CoDyCo::FloatingJntSpaceInertiaMatrix massMatrixKDL(undirected_tree.getNrOfDOFs()+6);
+    std::vector<KDL::RigidBodyInertia> Ic(undirected_tree.getNrOfLinks());
+
+    retVal = KDL::CoDyCo::crba_floating_base_loop(undirected_tree,kdl_traversal,jntKDL,Ic,massMatrixKDL);
+
+    ASSERT_EQUAL_DOUBLE(ok,true);
+    ASSERT_EQUAL_DOUBLE(retVal,0);
+
+    // Check composite rigid body inertias
+    for(int link = 0; link < model.getNrOfLinks(); link++ )
+    {
+         ASSERT_EQUAL_MATRIX(crbis(link).asMatrix(),ToiDynTree(Ic[idynTree2KDL_links[link]]).asMatrix());
+    }
+
+    // Check CRBA algorithm
+
+    for(int ii=0; ii < model.getNrOfDOFs()+6; ii++ )
+    {
+        for( int jj=0; jj < model.getNrOfDOFs()+6; jj++ )
+        {
+            int idyntreeII = kdl2idyntreeFloatingDOFMapping(ii,kdl2idyntree_joints);
+            int idyntreeJJ = kdl2idyntreeFloatingDOFMapping(jj,kdl2idyntree_joints);
+            ASSERT_EQUAL_DOUBLE(massMatrix(idyntreeII,idyntreeJJ),massMatrixKDL(ii,jj));
+        }
     }
 
     return;

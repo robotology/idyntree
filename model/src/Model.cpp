@@ -348,7 +348,7 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
 
     // The full tree traversal is a traversal spanning all the links
     // of a model, so it include getNrOfLinks() visited links
-    traversal.reset(this->getNrOfLinks());
+    traversal.reset(this->getNrOfLinks(),this->getNrOfLinks());
 
     // A link is considered visit when all its child (given the traversalBase)
     // have been added to the traversal

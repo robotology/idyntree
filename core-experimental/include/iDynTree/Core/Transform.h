@@ -122,6 +122,7 @@ namespace iDynTree
         Transform operator*(const Transform & other) const;
         Transform inverse() const;
         Position operator*(const Position & other) const;
+        SpatialForceVector operator*(const SpatialForceVector & other) const;
         Wrench   operator*(const Wrench & other) const;
         Twist    operator*(const Twist  & other) const;
         SpatialMomentum operator*(const SpatialMomentum & other) const;

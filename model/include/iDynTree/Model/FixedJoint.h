@@ -71,6 +71,11 @@ namespace iDynTree
         // Documentation inherited
         virtual Transform getTransform(const IRawVector & jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
 
+        // Documentation inherited
+        virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,
+                                                            const LinkIndex p_linkA,
+                                                            const LinkIndex p_linkB) const;
+
         /**
          * For the fixed joint, the transform between a link and other
          * can be obtained without providing a state.

@@ -5,6 +5,7 @@
  *
  */
 
+#include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/Utils.h>
 
 #include <iDynTree/Model/FixedJoint.h>
@@ -94,6 +95,11 @@ Transform FixedJoint::getTransform(const LinkIndex p_linkA, const LinkIndex p_li
     }
 }
 
+SpatialMotionVector FixedJoint::getMotionSubspaceVector(int dof_i, const LinkIndex p_linkA, const LinkIndex p_linkB) const
+{
+    return SpatialMotionVector::Zero();
+}
+
 void FixedJoint::computeJointTorque(const IRawVector & jntPos, const Wrench& internalWrench,
                                     LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied,
                                     IRawVector& jntTorques) const
@@ -170,7 +176,5 @@ size_t FixedJoint::getDOFsOffset() const
 {
     return this->m_DOFsOffset;
 }
-
-
 
 }

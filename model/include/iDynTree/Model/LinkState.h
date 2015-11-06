@@ -153,6 +153,26 @@ namespace iDynTree
 
     typedef LinkWrenches LinkExternalWrenches;
     typedef LinkWrenches LinkInternalWrenches;
+
+    class LinkInertias
+    {
+    private:
+        std::vector<iDynTree::SpatialInertia> m_linkInertials;
+
+    public:
+        LinkInertias(unsigned int nrOfLinks = 0);
+        LinkInertias(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfLinks);
+        void resize(const iDynTree::Model & model);
+
+        iDynTree::SpatialInertia & operator()(const LinkIndex link);
+        const iDynTree::SpatialInertia & operator()(const LinkIndex link) const;
+
+        ~LinkInertias();
+    };
+
+    typedef LinkInertias LinkCompositeRigidBodyInertias;
 }
 
 #endif /* IDYNTREE_LINK_STATE_H */

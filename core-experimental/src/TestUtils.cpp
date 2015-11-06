@@ -26,7 +26,7 @@ void assertStringAreEqual(const std::string& val1, const std::string& val2, doub
 {
     if( val1 != val2 )
     {
-       std::cerr << "assertStringAreEqual failure: val1 is " << val1
+       std::cerr << file << ":" << line << " : assertStringAreEqual failure: val1 is " << val1
                   << " while val2 is " << val2 << std::endl;
             exit(EXIT_FAILURE);
     }
@@ -36,7 +36,7 @@ void assertDoubleAreEqual(const double& val1, const double& val2, double tol, st
 {
     if( fabs(val1-val2) >= tol )
     {
-       std::cerr << "assertDoubleAreEqual failure: val1 is " << val1
+       std::cerr << file << ":" << line << " : assertDoubleAreEqual failure: val1 is " << val1
                   << " while val2 is " << val2 << std::endl;
             exit(EXIT_FAILURE);
     }

@@ -170,6 +170,8 @@ Model getRandomChain(unsigned int nrOfJoints)
 
 void checkSimpleModel()
 {
+    std::cout << "Checking simple model... " << std::endl;
+
     double rotInertiaData[3*3] = {14.0,0.0,0.0,
                                   0.0,12.0,0.0,
                                   0.0,0.0,10.0};
@@ -205,6 +207,9 @@ void checkSimpleModel()
 
 void checkRandomChains()
 {
+    std::cout << "Checking random chains..." << std::endl;
+
+
     for(int i=4; i <= 100; i += 10)
     {
         Model randomModel = getRandomChain(i);
@@ -219,6 +224,8 @@ void checkRandomChains()
 
 void checkRandomModels()
 {
+    std::cout << "Checking random models..." << std::endl;
+
     for(int i=2; i <= 100; i += 10 )
     {
         Model randomModel = getRandomModel(i);

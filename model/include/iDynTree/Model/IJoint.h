@@ -17,6 +17,7 @@ namespace iDynTree
     class Transform;
     class Wrench;
     class IRawVector;
+    class SpatialMotionVector;
 
     /**
      * Interface (i.e. abstract class) exposed by classes that implement a Joint.
@@ -32,7 +33,7 @@ namespace iDynTree
      * Seth, Ajay, et al. "Minimal formulation of joint motion for biomechanisms."
      * Nonlinear dynamics 62.1-2 (2010): 291-303.
      *
-     * Other sources of inspiration are RBDL, Dart and Featherstone book.
+     * Other sources of inspiration are RBDL, DART and Featherstone book.
      *
      * With respect to all this implementation we model the joints as undirected quantities,
      * i.e. as object in which information can be queryied in symmetric way with respect to the
@@ -123,6 +124,30 @@ namespace iDynTree
         virtual Transform getTransform(const IRawVector & jntPos,
                                        const LinkIndex p_linkA,
                                        const LinkIndex p_linkB) const = 0;
+
+        /**
+         * Get the motion subspace vector corresponding to the i-th
+         * dof of the joint, i.e. the i-th column of  the motion subspace matrix.
+         * The motion subspace matrix is the matrix that
+         * maps the joint velocity to the relative twist between the two
+         * links.
+         *
+         * In particular the motion subspace vector of the i-th dof is the S
+         * vector  such that
+         * v_linkA = S_{linkA,linkB}*dq_i + linkA_X_linkB*v_linkB
+         * if the velocities associated to all other DOFs of the joint
+         * are considered zero.
+         *
+         * @return the motion subspace vector.
+         *
+         * If dof_i is not >= 0 and < getNrOfDOFs(), the returned value is undefined.
+         *
+         * \note The motion subspace matrix is also known in literature as hinge matrix,
+         *       hinge  map matrix, joint map matrix  or joint  motion map matrix.
+         */
+        virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,
+                                                            const LinkIndex p_linkA,
+                                                            const LinkIndex p_linkB) const = 0;
 
         /**
          * Compute the position, velocity and acceleration of linkA,

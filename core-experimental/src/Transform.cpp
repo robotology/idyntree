@@ -177,6 +177,11 @@ Twist Transform::operator*(const Twist& op2) const
     return transform<Twist>(*this,op2);
 }
 
+SpatialForceVector Transform::operator*(const SpatialForceVector& op2) const
+{
+    return transform<SpatialForceVector>(*this,op2);
+}
+
 Wrench Transform::operator*(const Wrench& op2) const
 {
     return transform<Wrench>(*this,op2);

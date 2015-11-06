@@ -78,6 +78,24 @@ Transform RevoluteJoint::getTransform(const IRawVector& jntPos, const LinkIndex 
     }
 }
 
+SpatialMotionVector RevoluteJoint::getMotionSubspaceVector(int dof_i,
+                                                           const LinkIndex p_linkA,
+                                                           const LinkIndex p_linkB) const
+{
+    SpatialMotionVector S_a_b;
+
+    if( p_linkA == link2 )
+    {
+        S_a_b = (link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1).getRotationTwist(1.0);
+    }
+    else
+    {
+        S_a_b = -(rotation_axis_wrt_link1).getRotationTwist(1.0);
+    }
+
+    return S_a_b;
+}
+
 
 Axis RevoluteJoint::getAxis(const LinkIndex linkA) const
 {
@@ -183,13 +201,13 @@ void RevoluteJoint::computeJointTorque(const IRawVector& jntPos, const Wrench& i
     if( linkOnWhichWrenchIsApplied == link2 )
     {
         // in this case link2 is the child and link1 is the parent
-        iDynTree::Twist S_wrt_link2 = (link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1).getRotationTwist(1.0);
+        iDynTree::Twist S_wrt_link2 = this->getMotionSubspaceVector(0,link2,link1);
         tau = S_wrt_link2.dot(internalWrench);
     }
     else
     {
          // in this case link1 is the child and link2 is the parent
-        iDynTree::Twist S_wrt_link1 = -(rotation_axis_wrt_link1).getRotationTwist(1.0);
+        iDynTree::Twist S_wrt_link1 = this->getMotionSubspaceVector(0,link1,link2);
         tau = S_wrt_link1.dot(internalWrench);
     }
 
