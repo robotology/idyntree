@@ -9,4 +9,4 @@ macro(add_kdl_consistency_test testName)
 endmacro()
 
 add_kdl_consistency_test(Geometry)
-add_kdl_consistency_test(ForwardKinematics)
+add_kdl_consistency_test(KinematicsDynamics)
