@@ -40,6 +40,20 @@ namespace iDynTree
                                      LinkCompositeRigidBodyInertias& linkCRBs,
                                      FreeFloatingMassMatrix& massMatrix);
 
+    /**
+     *
+     *
+     */
+    /*
+    bool ArticulatedBodyAlgorithm(const Model& model,
+                                  const Traversal& traversal,
+                                  const FreeFloatingPosVel& robotPosVel,
+                                  const iDynTree::LinkExternalWrenches & linkExtWrenches,
+                                  const iDynTree::JointTorques         & jntTorques,
+                                  iDynTree::LinkVelArray & linksVel,
+                                  iDynTree::LinkAccArray & linksBiasAcceleration,
+                                  iDynTree::FreeFloatingAcc & robotAcc);*/
+
 
 }
 
