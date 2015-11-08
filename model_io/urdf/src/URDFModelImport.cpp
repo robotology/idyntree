@@ -600,7 +600,11 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
     std::set<std::string> jointToRemove;
     std::string newDefaultBaseLink = modelWithFakeLinks.getLinkName(modelWithFakeLinks.getDefaultBaseLink());
 
-    if( hasFakeBaseLink(modelWithFakeLinks) )
+    // If the input model has a fake base,
+    // we remove it and add it back as frame
+    bool hasFakeBase = hasFakeBaseLink(modelWithFakeLinks);
+
+    if( hasFakeBase )
     {
         LinkIndex baseLink = modelWithFakeLinks.getDefaultBaseLink();
         linkToRemove.insert(modelWithFakeLinks.getLinkName(modelWithFakeLinks.getDefaultBaseLink()));
@@ -622,7 +626,7 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
         }
     }
 
-    // Add all joints, preserving the numbering
+    // Add all joints, preserving the serialization
     for(unsigned int jnt=0; jnt < modelWithFakeLinks.getNrOfJoints(); jnt++ )
     {
         std::string jointToAdd = modelWithFakeLinks.getJointName(jnt);
@@ -641,6 +645,31 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
 
             delete newJoint;
         }
+    }
+
+    // Add all frames (i.e. fake links that we removed from the model)
+
+    // Add the frame corresponding to the fake base (tipically base_link)
+    if( hasFakeBase )
+    {
+        LinkIndex fakeBaseOldIndex = modelWithFakeLinks.getDefaultBaseLink();
+        std::string fakeBaseName = modelWithFakeLinks.getLinkName(fakeBaseOldIndex);
+
+        // One of the condition for a base to be fake is to
+        // be connected to the real base with a fixed joint, so
+        // their transform (currently the identity, otherwise is not
+        // a fake base) can be obtained without specifying the joint positions
+        assert(modelWithFakeLinks.getNrOfNeighbors(fakeBaseOldIndex) == 1);
+        JointIndex fakeBase_realBase_joint = modelWithFakeLinks.getNeighbor(fakeBaseOldIndex,0).neighborJoint;
+        LinkIndex   realBaseOldIndex = modelWithFakeLinks.getNeighbor(fakeBaseOldIndex,0).neighborLink;
+        std::string realBaseName = modelWithFakeLinks.getLinkName(realBaseOldIndex);
+
+        // Get the transform (this should be identity, but better be ready if hasFakeBaseLink methods is changed)
+        iDynTree::Transform realBase_H_fakeBase =
+            modelWithFakeLinks.getJoint(fakeBase_realBase_joint)->getRestTransform(realBaseOldIndex,fakeBaseOldIndex);
+
+        // Add the fake base as a frame
+        modelWithoutFakeLinks.addAdditionalFrameToLink(realBaseName,fakeBaseName,realBase_H_fakeBase);
     }
 
     // Set the default base link
@@ -764,6 +793,8 @@ bool modelFromURDFString(const std::string& urdf_string,
         delete fixedJoints[i];
         fixedJoints[i] = 0;
 
+        // If we had a problem adding the fixed joint
+        // we cleanup the loading and we exit
         if( newJointIndex == JOINT_INVALID_INDEX )
         {
             cleanupFixedJoints(fixedJoints);
@@ -771,7 +802,6 @@ bool modelFromURDFString(const std::string& urdf_string,
             return false;
         }
     }
-
 
     // Get root
     std::vector<std::string> rootCandidates;
@@ -802,7 +832,7 @@ bool modelFromURDFString(const std::string& urdf_string,
     // set the default root in the model
     rawModel.setDefaultBaseLink(rawModel.getLinkIndex(rootCandidates[0]));
 
-    // Remove fake links
+    // Remove fake links and add them as frames
     ok = ok && removeFakeLinks(rawModel,model);
 
     return ok;

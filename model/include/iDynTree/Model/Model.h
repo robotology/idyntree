@@ -10,6 +10,7 @@
 
 #include <iDynTree/Model/IJoint.h>
 #include <iDynTree/Model/Link.h>
+#include <iDynTree/Core/Transform.h>
 
 #include <iDynTree/Model/Indeces.h>
 
@@ -28,6 +29,37 @@ namespace iDynTree
     /**
      * Class that represents a generic multibody model.
      *
+     * A model is composed by rigid bodies (i.e. links) connected
+     * by joints. Each joint can have from 0 to 6 degrees of freedom.
+     *
+     * Each link has a "link frame" rigidly attached to it.
+     * For each link additional rigidly attached frames can be defined,
+     * in addition to "link frame".
+     *
+     * The model contains also a serialization for the different elements
+     *  in a model, i.e. a function between:
+     *  * joint names and the integers 0..getNrOfJoints()-1
+     *  * dof   names and the integers 0..getNrOfDOFs()-1
+     *  * link  names and the integers 0..getNrOfLinks()-1
+     *  * frame names and the integers 0..getNrOfFrames()-1
+     *
+     * For simplicity, this mappings are build when building the model.
+     *
+     * In particular the joint and link indices are assigned when the links
+     * and joint are added to the model using the `addLink` and `addJoint`
+     * methods.
+     *
+     * The DOF indeces are also assigned when the joint is added to the model
+     * with the addJoint method. For example if a model is composed only of
+     * 0 or 1 DOF joints and the 1 DOFs joints are added before the 0 DOFs then
+     * the joint index and dof index for 1 DOF joints will be coincident (this is
+     * how the URDF parser is actually implemented). For this reason as the moment
+     * there is no concept of DOF explicit identifier, i.e. no getDOFName(DOFIndex dofIndex)
+     * method.
+     *
+     * The frame indices between 0 and getNrOfFrames()-1 are always assigned to the
+     * "main" link frame of the link with the same index.
+     *
      *
      * \ingroup iDynTreeModel
      */
@@ -40,11 +72,29 @@ namespace iDynTree
         /** Vector of joints. For each joint its index indicates its location in this vector */
         std::vector<IJointPtr> joints;
 
+        /** Vector of additional frames.
+         *  The element additionalFrames[frameOffset] will be the link_H_frame transform  of the frame with
+         *  FrameIndex getNrOfLinks() + frameOffset .
+         */
+        std::vector<Transform> additionalFrames;
+
+        /** Vector of link indeces corresponding to an additional frame.
+         *  The element additionalFrameNames[frameOffset] will be the link_H_frame transform  of the frame with
+         *  FrameIndex getNrOfLinks() + frameOffset .
+         */
+        std::vector<LinkIndex> additionalFramesLinks;
+
         /** Vector of link names, matches the index of each link to its name. */
         std::vector<std::string> linkNames;
 
         /** Vector of joint names, matches the index of each joint to its name. */
         std::vector<std::string> jointNames;
+
+        /** Vector of additional frame names.
+         *  The element frameNames[frameOffset] will be the name of the frame with
+         *  FrameIndex getNrOfLinks() + frameOffset .
+         */
+        std::vector<std::string> frameNames;
 
         /** Adjacency lists: match each link index to a list of its neighbors,
             and the joint connecting to them. */
@@ -81,6 +131,14 @@ namespace iDynTree
          * @return true if a name is used by a joint in a model, false otherwise.
          */
         bool isJointNameUsed(const std::string jointName);
+
+        /**
+         * Check if a name is already used for a frame in the model.
+         *
+         * \note this function will check the name of the links and the names of the additional frames.
+         * @return true if a name is used by a frame in a model, false otherwise.
+         */
+        bool isFrameNameUsed(const std::string frameName);
 
         /**
          * Copy the structure of the model from another instance of a model.
@@ -156,7 +214,6 @@ namespace iDynTree
 
         IJointConstPtr getJoint(const JointIndex index) const;
 
-
         /**
          *
          * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
@@ -179,6 +236,77 @@ namespace iDynTree
          * \warning This is *not* including the 6 degrees of freedom of the base.
          */
         unsigned int getNrOfDOFs() const;
+
+        /**
+         * Get the number of frames in the model.
+         *
+         * \note this will return the sum of the number of link
+         *       (as each link has an attached frame) and the total number
+         *       of additional frames.
+         *
+         * @return the number of frames in the model.
+         */
+        size_t getNrOfFrames() const;
+
+        /**
+         * Add an additional frame to a link.
+         *
+         * \note This function has signature different from
+         *       addJoint/addLink because the FrameIndex of the
+         *       additional frame are invalidated at each call to
+         *       the addLink. So we don't return the FrameIndex in this
+         *       function, as the model construction should be completed
+         *       before that FrameIndex are stored.
+         *
+         * @param[in] linkName the link to which attach the additional frame.
+         * @param[in] frameName the name of the frame added to the model.
+         * @param[in] link_H_frame the pose of added frame with respect to the link main frame,
+         *                         expressed with a transform with:
+         *                              refFrame: the main link frame
+         *                              frame: the added frame
+         * @return true if all went well, false if an error occured.
+         *
+         */
+        bool addAdditionalFrameToLink(const std::string & linkName,
+                                      const std::string & frameName,
+                                      iDynTree::Transform link_H_frame);
+
+        /**
+         * Get the name of a frame given its index.
+         *
+         * @param[in] frameIndex the index of the frame whose name is requested.
+         * @return the name of a frame given its index, or
+         *         a FRAME_INVALID_NAME string if frameIndex < 0 or >= getNrOfFrames()
+         */
+        std::string  getFrameName(const FrameIndex frameIndex) const;
+
+        /**
+         * Get the index of a frame given its name.
+         *
+         * @param[in] frameName the name of the frame for which the index is requested.
+         * @return    the index of the frame, of FRAME_INVALID_INDEX if frameName is not
+         *            not a frame name.
+         */
+        FrameIndex getFrameIndex(const std::string & frameName) const;
+
+        /**
+         * Get the tranform of the frame with respect to the main
+         * frame of the link, returned as link_H_frame tranform
+         * with refFrame : the link main frame and frame : the
+         *  frame with index frameIndex .
+         *
+         * @param[in] frameIndex the index of the frame for which
+         * @return the link_H_frame transform, or an identity tranform
+         *         if frameIndex < 0 or frameIndex >= getNrOfFrames .
+         */
+        Transform getFrameTransform(const FrameIndex frameIndex) const;
+
+        /**
+         * Get the link at which the frame with index frameIndex
+         * is attached.
+         *
+         */
+        LinkIndex getFrameLink(const FrameIndex frameIndex) const;
 
         /**
          * Get the nr of neighbors of a given link.

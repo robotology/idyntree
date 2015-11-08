@@ -94,7 +94,7 @@ namespace iDynTree
 
         /**
          * Set the transform between the link2 frame and link1 frame at joint position 0
-         * (or at the identity element for complex joints).
+         * (or at the identity configuration element for complex joints).
          *
          * The link1_T_link2 is transform that transforms a quantity
          * expressed in link2 frame in a quantity expressed in the link1
@@ -114,6 +114,18 @@ namespace iDynTree
          * Get the second link attached to the joint.
          */
         virtual LinkIndex getSecondAttachedLink() const = 0;
+
+
+        /**
+         * Get the transform between the linkB and the linkA at joint position 0
+         * (or at the identity configuration element for complex joints).
+         * Such that:
+         * p_linkA = linkA_H_linkB*p_linkB
+         * where p_linkA is a quantity expressed in the linkA frame,
+         * and   p_linkB is a quantity expressed in the linkB frame.
+         */
+        virtual Transform getRestTransform(const LinkIndex p_linkA,
+                                           const LinkIndex p_linkB) const = 0;
 
         /**
          * Get the transform between the linkB and the linkA, such that:

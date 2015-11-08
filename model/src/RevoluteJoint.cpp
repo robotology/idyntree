@@ -61,6 +61,21 @@ LinkIndex RevoluteJoint::getSecondAttachedLink() const
     return link2;
 }
 
+Transform RevoluteJoint::getRestTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const
+{
+    if( p_linkA == link1 )
+    {
+        assert(p_linkB == link2);
+        return link1_X_link2_at_rest;
+    }
+    else
+    {
+        assert(p_linkA == link2);
+        assert(p_linkB == link1);
+        return link1_X_link2_at_rest.inverse();
+    }
+}
+
 
 Transform RevoluteJoint::getTransform(const IRawVector& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
 {

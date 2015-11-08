@@ -69,6 +69,10 @@ namespace iDynTree
         virtual LinkIndex getSecondAttachedLink() const;
 
         // Documentation inherited
+        virtual Transform getRestTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const;
+
+
+        // Documentation inherited
         virtual Transform getTransform(const IRawVector & jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
 
         // Documentation inherited

@@ -73,7 +73,10 @@ LinkIndex FixedJoint::getSecondAttachedLink() const
     return link2;
 }
 
-
+Transform FixedJoint::getRestTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const
+{
+    return getTransform(p_linkA,p_linkB);
+}
 
 Transform FixedJoint::getTransform(const IRawVector & jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
 {

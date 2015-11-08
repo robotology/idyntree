@@ -75,6 +75,10 @@ namespace iDynTree
         virtual Axis getAxis(const LinkIndex linkA) const;
 
         // Documentation inherited
+        virtual Transform getRestTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const;
+
+
+        // Documentation inherited
         virtual Transform getTransform(const IRawVector& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
 
         // Documentation inherited

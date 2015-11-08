@@ -1,4 +1,4 @@
-<robot name="twoLinks">
+<robot name="oneLink">
     <link name="base_link" />
     <joint name="base_fixed_joint" type="fixed">
         <origin xyz="0 0 0" rpy="0 -0 0" />

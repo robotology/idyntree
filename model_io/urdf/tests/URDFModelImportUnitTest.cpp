@@ -33,6 +33,7 @@ void checkURDF(std::string fileName,
                   unsigned int expectedNrOfLinks,
                   unsigned int expectedNrOfJoints,
                   unsigned int expectedNrOfDOFs,
+                  unsigned int expectedNrOfFrames,
                   std::string expectedDefaultBase)
 {
     Model model;
@@ -41,6 +42,8 @@ void checkURDF(std::string fileName,
 
     ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(),expectedNrOfLinks);
     ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(),expectedNrOfJoints);
+    ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(),expectedNrOfDOFs);
+    ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(),expectedNrOfFrames);
     ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()),expectedDefaultBase);
 
     checkParsingOfDofsFromURDF(fileName,expectedNrOfDOFs);
@@ -48,8 +51,8 @@ void checkURDF(std::string fileName,
 
 int main()
 {
-    checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,"link1");
-    checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,"link1");
+    checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,2,"link1");
+    checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,3,"link1");
 
     return EXIT_SUCCESS;
 }
