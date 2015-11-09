@@ -17,6 +17,10 @@
 namespace iDynTree
 {
 
+/**
+ * TODO \todo add templated toEigen(MatrixFixSize) to exploit compile time optimizations
+ */
+
 inline Eigen::Map<Eigen::VectorXd> toEigen(iDynTree::IRawVector & vec)
 {
     return Eigen::Map<Eigen::VectorXd>(vec.data(),vec.size());

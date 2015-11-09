@@ -15,6 +15,7 @@
 #include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Axis.h>
+#include <iDynTree/Core/ArticulatedBodyInertia.h>
 
 #include <iDynTree/Core/PrivateUtils.h>
 #include <iDynTree/Core/Utils.h>
@@ -63,6 +64,9 @@ Position transform(const Transform& op1, const Position& op2);
 
 template<>
 SpatialInertia transform(const Transform& op1, const SpatialInertia& op2);
+
+template<>
+ArticulatedBodyInertia transform(const Transform& op1, const ArticulatedBodyInertia& op2);
 
 
 /**
@@ -203,6 +207,11 @@ SpatialInertia Transform::operator*(const SpatialInertia& op2) const
     return transform<SpatialInertia>(*this,op2);
 }
 
+ArticulatedBodyInertia Transform::operator*(const ArticulatedBodyInertia& other) const
+{
+    return transform<ArticulatedBodyInertia>(*this,other);
+}
+
 Direction Transform::operator*(const Direction& op2) const
 {
     return this->getRotation()*op2;
@@ -293,6 +302,14 @@ std::string Transform::reservedToString() const
         return op1.getPosition()*(op1.getRotation()*op2);
     }
 
+    // \todo TODO have a unique mySkew
+    template<class Derived>
+    inline Eigen::Matrix<typename Derived::Scalar, 3, 3> mySkew(const Eigen::MatrixBase<Derived> & vec)
+    {
+        EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived, 3);
+        return (Eigen::Matrix<typename Derived::Scalar, 3, 3>() << 0.0, -vec[2], vec[1], vec[2], 0.0, -vec[0], -vec[1], vec[0], 0.0).finished();
+    }
+
     template<>
     Position transform(const Transform& op1, const Position& op2)
     {
@@ -331,6 +348,47 @@ std::string Transform::reservedToString() const
         return SpatialInertia(newMass,newCenterOfMass,newRotInertia);
     }
 
+    template<>
+    ArticulatedBodyInertia transform(const Transform& op1, const ArticulatedBodyInertia& op2)
+    {
+        /*
+         * The transform of a Articulated Body  Inertia is defined as follows:
+         * A^I = A^X_B^* * B^I * B^X_A
+         */
+        Eigen::Map<const Matrix3dRowMajor> R(op1.getRotation().data());
+        Eigen::Map<const Eigen::Vector3d> p(op1.getPosition().data());
+
+        /*
+         *
+         * TODO: document this simplifcation
+         */
+        Eigen::Map<const Matrix3dRowMajor> oldLinearLinear(op2.getLinearLinearSubmatrix().data());
+        Eigen::Map<const Matrix3dRowMajor> oldLinearAngular(op2.getLinearAngularSubmatrix().data());
+        Eigen::Map<const Matrix3dRowMajor> oldAngularAngular(op2.getAngularAngularSubmatrix().data());
+
+        ArticulatedBodyInertia newABI;
+
+        Eigen::Map<Matrix3dRowMajor> newLinearLinear(newABI.getLinearLinearSubmatrix().data());
+        Eigen::Map<Matrix3dRowMajor> newLinearAngular(newABI.getLinearAngularSubmatrix().data());
+        Eigen::Map<Matrix3dRowMajor> newAngularAngular(newABI.getAngularAngularSubmatrix().data());
+
+        newLinearLinear = R*oldLinearLinear*R.transpose();
+
+        Matrix3dRowMajor skewP = mySkew(p);
+        Matrix3dRowMajor rotatedLinearAngular = R*oldLinearAngular*R.transpose();
+
+        newLinearAngular = rotatedLinearAngular - newLinearLinear*skewP;
+
+        Matrix3dRowMajor skewPtimesrotatedLinearAngular = skewP*rotatedLinearAngular;
+
+        newAngularAngular =   R*oldAngularAngular*R.transpose()
+                            + skewPtimesrotatedLinearAngular
+                            + skewPtimesrotatedLinearAngular.transpose()
+                            - skewP*newLinearLinear*skewP;
+
+        return newABI;
+    }
+
     Matrix4x4 Transform::asHomogeneousTransform() const
     {
         Matrix4x4 ret;
@@ -346,14 +404,6 @@ std::string Transform::reservedToString() const
 
 
         return ret;
-    }
-
-    // \todo TODO have a unique mySkew
-    template<class Derived>
-    inline Eigen::Matrix<typename Derived::Scalar, 3, 3> mySkew(const Eigen::MatrixBase<Derived> & vec)
-    {
-        EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived, 3);
-        return (Eigen::Matrix<typename Derived::Scalar, 3, 3>() << 0.0, -vec[2], vec[1], vec[2], 0.0, -vec[0], -vec[1], vec[0], 0.0).finished();
     }
 
     Matrix6x6 Transform::asAdjointTransform() const

@@ -23,6 +23,7 @@ namespace iDynTree
     class SpatialMomentum;
     class SpatialAcc;
     class SpatialInertia;
+    class ArticulatedBodyInertia;
 
     class PositionSemantics;
     class RotationSemantics;
@@ -128,6 +129,7 @@ namespace iDynTree
         SpatialMomentum operator*(const SpatialMomentum & other) const;
         SpatialAcc   operator*(const SpatialAcc & other) const;
         SpatialInertia operator*(const SpatialInertia  & other) const;
+        ArticulatedBodyInertia operator*(const ArticulatedBodyInertia  & other) const;
         Direction      operator*(const Direction & other) const;
         Axis           operator*(const Axis & other) const;
 

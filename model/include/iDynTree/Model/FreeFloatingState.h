@@ -10,9 +10,9 @@
 
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/VectorDynSize.h>
 
 #include <iDynTree/Model/Indeces.h>
-#include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/LinkState.h>
 
 #include <vector>

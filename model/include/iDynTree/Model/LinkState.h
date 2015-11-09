@@ -154,6 +154,9 @@ namespace iDynTree
     typedef LinkWrenches LinkExternalWrenches;
     typedef LinkWrenches LinkInternalWrenches;
 
+    /**
+     * Class for storing a vector of SpatialInertia objects , one for each link in a model.
+     */
     class LinkInertias
     {
     private:
@@ -173,6 +176,49 @@ namespace iDynTree
     };
 
     typedef LinkInertias LinkCompositeRigidBodyInertias;
+
+    /**
+     * Class for storing a vector of twists, one for each link in a model.
+     */
+    class LinkVelArray
+    {
+    private:
+        std::vector<iDynTree::Twist> m_linkTwist;
+
+    public:
+        LinkVelArray(unsigned int nrOfLinks = 0);
+        LinkVelArray(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfLinks);
+        void resize(const iDynTree::Model & model);
+
+        iDynTree::Twist & operator()(const LinkIndex link);
+        const iDynTree::Twist & operator()(const LinkIndex link) const;
+
+        ~LinkVelArray();
+    };
+
+    /**
+     * Class for storing a vector of spatial accelerations,
+     *  one for each link in a model.
+     */
+    class LinkAccArray
+    {
+    private:
+        std::vector<iDynTree::SpatialAcc> m_linkTwist;
+
+    public:
+        LinkAccArray(unsigned int nrOfLinks = 0);
+        LinkAccArray(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfLinks);
+        void resize(const iDynTree::Model & model);
+
+        iDynTree::SpatialAcc & operator()(const LinkIndex link);
+        const iDynTree::SpatialAcc & operator()(const LinkIndex link) const;
+
+        ~LinkAccArray();
+    };
 }
 
 #endif /* IDYNTREE_LINK_STATE_H */

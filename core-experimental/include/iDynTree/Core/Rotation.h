@@ -27,6 +27,7 @@ namespace iDynTree
     class SpatialMotionVector;
     class SpatialForceVector;
     class AngularMotionVector3;
+    class ArticulatedBodyInertia;
 
     /**
      * Class representation the rotation of an orientation frame

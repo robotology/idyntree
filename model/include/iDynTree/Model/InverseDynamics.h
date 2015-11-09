@@ -41,7 +41,10 @@ namespace iDynTree
                                      FreeFloatingMassMatrix& massMatrix);
 
     /**
-     *
+     * Compute the floating base acceleration of an unconstrianed
+     * robot, using as input the external forces and the joint torques.
+     * We follow the algorithm described in Featherstone 2008, modified
+     * for the floating base case and for handling fixed joints.
      *
      */
     /*
@@ -50,6 +53,8 @@ namespace iDynTree
                                   const FreeFloatingPosVel& robotPosVel,
                                   const iDynTree::LinkExternalWrenches & linkExtWrenches,
                                   const iDynTree::JointTorques         & jntTorques,
+                                  iDynTree::DOFWrenchArray & U,
+                                  iDynTree::DOFDoubleArray & D,
                                   iDynTree::LinkVelArray & linksVel,
                                   iDynTree::LinkAccArray & linksBiasAcceleration,
                                   iDynTree::FreeFloatingAcc & robotAcc);*/
