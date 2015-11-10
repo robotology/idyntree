@@ -137,9 +137,9 @@ void checkNeighborSanity(const Model & model, bool verbose)
                       << model.getNrOfNeighbors(link) << " neeighbors" << std::endl;
         }
 
-        for(int neigh_i = 0; neigh_i < model.getNrOfNeighbors(link); neigh_i++ )
+        for(unsigned int neigh_i = 0; neigh_i < model.getNrOfNeighbors(link); neigh_i++ )
         {
-            int neighIndex = model.getNeighbor(link,neigh_i).neighborLink;
+            LinkIndex neighIndex = model.getNeighbor(link,neigh_i).neighborLink;
             std::string neighName = model.getLinkName(neighIndex);
             if( verbose )
             {

@@ -73,7 +73,7 @@ int main()
     iDynTree::SpatialAcc gravity;
     yarp::sig::Vector q_yarp(dofs);
 
-    for(int i=0; i < dofs; i++ )
+    for(unsigned int i=0; i < dofs; i++ )
     {
         q_yarp(i) = q_idyntree(i) = random_double();
     }

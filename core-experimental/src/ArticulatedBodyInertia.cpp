@@ -93,6 +93,27 @@ ArticulatedBodyInertia ArticulatedBodyInertia::combine(const ArticulatedBodyIner
     return retABI;
 }
 
+SpatialAcc ArticulatedBodyInertia::applyInverse(Wrench& wrench) const
+{
+    SpatialAcc acc;
+
+    Eigen::Matrix<double,6,1> wrenchEigen = toEigen(wrench);
+    Eigen::Matrix<double,6,6> abi;
+
+    abi.block<3,3>(0,0) = toEigen(linearLinear);
+    abi.block<3,3>(0,3) = toEigen(linearAngular);
+    abi.block<3,3>(3,0) = toEigen(linearAngular).transpose();
+    abi.block<3,3>(3,3) = toEigen(angularAngular);
+
+    Eigen::Matrix<double,6,1> accEigen = abi.ldlt().solve(wrenchEigen);
+
+    toEigen(acc.getLinearVec3()) = accEigen.block<3,1>(0,0);
+    toEigen(acc.getLinearVec3()) = accEigen.block<3,1>(3,0);
+
+    return acc;
+}
+
+
 Matrix3x3& ArticulatedBodyInertia::getLinearLinearSubmatrix()
 {
     return linearLinear;
@@ -133,6 +154,26 @@ ArticulatedBodyInertia ArticulatedBodyInertia::operator+(const ArticulatedBodyIn
     return combine(*this,other);
 }
 
+ArticulatedBodyInertia ArticulatedBodyInertia::operator-(const ArticulatedBodyInertia& other) const
+{
+    ArticulatedBodyInertia retABI;
+
+    toEigen(retABI.linearLinear)   = toEigen(this->linearLinear)   - toEigen(other.linearLinear);
+    toEigen(retABI.linearAngular)  = toEigen(this->linearAngular)  - toEigen(other.linearAngular);
+    toEigen(retABI.angularAngular) = toEigen(this->angularAngular) - toEigen(other.angularAngular);
+
+    return retABI;
+}
+
+ArticulatedBodyInertia& ArticulatedBodyInertia::operator+=(const ArticulatedBodyInertia& other)
+{
+    toEigen(this->linearLinear)    = toEigen(this->linearLinear)   - toEigen(other.linearLinear);
+    toEigen(this->linearAngular)   = toEigen(this->linearAngular)  - toEigen(other.linearAngular);
+    toEigen(this->angularAngular)  = toEigen(this->angularAngular) - toEigen(other.angularAngular);
+
+    return *this;
+}
+
 Wrench ArticulatedBodyInertia::operator*(const SpatialAcc& other) const
 {
     Wrench ret;
@@ -159,6 +200,23 @@ SpatialForceVector ArticulatedBodyInertia::operator*(const SpatialMotionVector& 
 
     return ret;
 }
+
+ArticulatedBodyInertia ArticulatedBodyInertia::ABADyadHelper(const SpatialForceVector& U, const double d)
+{
+    ArticulatedBodyInertia ret;
+
+    double dInv = 1.0/d;
+
+    Eigen::Map<const Eigen::Vector3d> linVec(U.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angVec(U.getAngularVec3().data());
+
+    toEigen(ret.getLinearLinearSubmatrix()) = dInv*linVec*linVec.transpose();
+    toEigen(ret.getLinearAngularSubmatrix()) = dInv*linVec*angVec.transpose();
+    toEigen(ret.getAngularAngularSubmatrix()) = dInv*angVec*angVec.transpose();
+
+    return ret;
+}
+
 
 
 

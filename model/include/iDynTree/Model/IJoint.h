@@ -16,6 +16,7 @@ namespace iDynTree
     class LinkVelAcc;
     class Transform;
     class Wrench;
+    class Twist;
     class IRawVector;
     class SpatialMotionVector;
 

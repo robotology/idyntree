@@ -48,6 +48,8 @@ namespace iDynTree
         SpatialForceVector(const SpatialForceVector & other);
         SpatialForceVector(const SpatialVector<SpatialForceVector> & other);
         virtual ~SpatialForceVector();
+
+        SpatialForceVector operator*(const double scalar) const;
     };
 }
 

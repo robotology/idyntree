@@ -61,6 +61,12 @@ namespace iDynTree
         virtual ~SpatialMotionVector();
 
         /**
+         * Multiplication for a scalar.
+         * Mainly used if SpatialMotionVector is used to represent a motion subspace.
+         */
+        SpatialMotionVector operator*(const double scalar) const;
+
+        /**
          * Cross product
          */
         SpatialMotionVector cross(const SpatialMotionVector& other) const;

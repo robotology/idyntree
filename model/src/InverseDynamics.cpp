@@ -14,7 +14,9 @@
 #include <iDynTree/Model/FreeFloatingState.h>
 #include <iDynTree/Model/FreeFloatingMassMatrix.h>
 #include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/JointState.h>
 
+#include <iDynTree/Core/ArticulatedBodyInertia.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/EigenHelpers.h>
 
@@ -56,7 +58,7 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
         // \todo TODO this point is definitly Tree-specific
         // \todo TODO this "get child" for is duplicated in the code, we
         //            should try to consolidate it
-        for(int neigh_i=0; neigh_i < model.getNrOfNeighbors(visitedLinkIndex); neigh_i++)
+        for(unsigned int neigh_i=0; neigh_i < model.getNrOfNeighbors(visitedLinkIndex); neigh_i++)
         {
              LinkIndex neighborIndex = model.getNeighbor(visitedLinkIndex,neigh_i).neighborLink;
              if( !parentLink || neighborIndex != parentLink->getIndex() )
@@ -229,5 +231,180 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
     return true;
 }
 
+bool ArticulatedBodyAlgorithm(const Model& model,
+                              const Traversal& traversal,
+                              const FreeFloatingPosVel& robotPosVel,
+                              const LinkExternalWrenches & linkExtWrenches,
+                              const JointDoubleArray & jointTorques,
+                                    DOFSpatialMotionArray & S,
+                                    DOFSpatialForceArray & U,
+                                    JointDoubleArray & D,
+                                    JointDoubleArray & u,
+                                    LinkVelArray & linksVel,
+                                    LinkAccArray & linksBiasAcceleration,
+                                    LinkAccArray & linksAccelerations,
+                                    LinkArticulatedBodyInertias & linkABIs,
+                                    LinkWrenches & linksBiasWrench,
+                                    FreeFloatingAcc & robotAcc)
+{
+    /**
+     * Forward pass: compute the link velocities and the link bias accelerations
+     * and initialize the Articulated Body Inertia and the articulated bias wrench.
+     */
+    for(unsigned int traversalEl=0; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+        LinkIndex visitedLinkIndex = visitedLink->getIndex();
+        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+        LinkIndex    parentLinkIndex = parentLink->getIndex();
+        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+        // Propagate velocities and bias accelerations
+
+        // If the visitedLink is the base one, initialize the velocity with the input velocity
+        if( parentLink == 0 )
+        {
+            linksVel(visitedLinkIndex) = robotPosVel.basePosVel().vel();
+            linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
+        }
+        else
+        {
+            // Otherwise we propagate velocity in the usual way
+            if( toParentJoint->getNrOfDOFs() == 0 )
+            {
+                linksVel(visitedLinkIndex) =
+                    toParentJoint->getTransform(robotPosVel.jointPos(),visitedLinkIndex,parentLink->getIndex())*linksVel(parentLinkIndex);
+                linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
+            }
+            else
+            {
+                size_t dofIndex = toParentJoint->getDOFsOffset();
+                S(dofIndex) = toParentJoint->getMotionSubspaceVector(0,visitedLinkIndex,parentLinkIndex);
+                Twist vj;
+                toEigen(vj.getLinearVec3()) = robotPosVel.jointVel()(dofIndex)*toEigen(S(dofIndex).getLinearVec3());
+                toEigen(vj.getAngularVec3()) = robotPosVel.jointVel()(dofIndex)*toEigen(S(dofIndex).getAngularVec3());
+                linksVel(visitedLinkIndex) =
+                    toParentJoint->getTransform(robotPosVel.jointPos(),visitedLinkIndex,parentLinkIndex)*linksVel(parentLinkIndex)
+                    + vj;
+                linksBiasAcceleration(visitedLinkIndex) = linksVel(visitedLinkIndex)*vj;
+
+            }
+        }
+
+        // Initialize Articulated Body Inertia
+        linkABIs(visitedLinkIndex) = visitedLink->getInertia();
+
+        // Initialize bias force (note that we assume that the external frames are
+        // expressed in a local frame, differently from Featherstone 2008
+        linksBiasWrench(visitedLinkIndex) = linksVel(visitedLinkIndex)*(visitedLink->getInertia()*linksVel(visitedLinkIndex))
+                                            - linkExtWrenches(visitedLinkIndex);
+    }
+
+    /*
+     * Backward pass: recursivly compute
+     * the articulated body inertia and the articulated body bias wrench.
+     *
+     */
+    for(int traversalEl = traversal.getNrOfVisitedLinks()-1; traversalEl >= 0; traversalEl--)
+    {
+        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+        LinkIndex    visitedLinkIndex = visitedLink->getIndex();
+        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+        if( parentLink )
+        {
+            ArticulatedBodyInertia Ia;
+            Wrench pa;
+
+            // For now we support only 0 and 1 dof joints
+
+            // for 1 dof joints, the articulated inertia
+            // need to be propagated to the parent considering
+            // the joints
+            if( toParentJoint->getNrOfDOFs() > 0 )
+            {
+                assert(toParentJoint->getNrOfDOFs()==1);
+                size_t dofIndex = toParentJoint->getDOFsOffset();
+                U(dofIndex) = linkABIs(visitedLinkIndex)*S(dofIndex);
+                D(dofIndex) = S(dofIndex).dot(U(dofIndex));
+                u(dofIndex) = jointTorques(dofIndex) - S(dofIndex).dot(linksBiasWrench(visitedLinkIndex));
+
+                Ia =  linkABIs(visitedLinkIndex) - ArticulatedBodyInertia::ABADyadHelper(U(dofIndex),D(dofIndex));
+                pa                 =   linksBiasWrench(visitedLinkIndex)
+                                     + Ia*linksBiasAcceleration(visitedLinkIndex)
+                                     + U(dofIndex)*(u(dofIndex)/D(dofIndex));
+
+            }
+
+            // For fixed joints, we just need to propate
+            // the articulated quantities without considering the
+            // joint
+            if( toParentJoint->getNrOfDOFs() == 0 )
+            {
+                Ia = linkABIs(visitedLinkIndex);
+                pa                 =   linksBiasWrench(visitedLinkIndex)
+                                     + Ia*linksBiasAcceleration(visitedLinkIndex);
+            }
+
+            // Propagate
+            LinkIndex parentLinkIndex = parentLink->getIndex();
+            Transform parent_X_visited = toParentJoint->getTransform(robotPosVel.jointPos(),parentLinkIndex,visitedLinkIndex);
+            linkABIs(parentLinkIndex)        += parent_X_visited*Ia;
+            linksBiasWrench(parentLinkIndex) = linksBiasWrench(parentLinkIndex) + parent_X_visited*pa;
+        }
+    }
+
+    /**
+     * Second forward pass: find robot accelerations
+     *
+     */
+    // \todo TODO Handle gravity
+    for(unsigned int traversalEl=0; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+       LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+       LinkIndex visitedLinkIndex = visitedLink->getIndex();
+       LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+       LinkIndex    parentLinkIndex = parentLink->getIndex();
+       IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+       if( parentLink == 0 )
+       {
+           // Preliminary step: find base acceleration
+           linksAccelerations(visitedLinkIndex) = linkABIs(visitedLinkIndex).applyInverse(linksBiasWrench(visitedLinkIndex));
+           robotAcc.baseAcc() = linksAccelerations(visitedLinkIndex);
+       }
+       else
+       {
+           if( toParentJoint->getNrOfDOFs() > 0 )
+           {
+               size_t dofIndex = toParentJoint->getDOFsOffset();
+               assert(toParentJoint->getNrOfDOFs()==1);
+               linksAccelerations(visitedLinkIndex) =
+                   toParentJoint->getTransform(robotPosVel.jointPos(),visitedLinkIndex,parentLinkIndex)*linksAccelerations(parentLinkIndex)
+                   + linksBiasAcceleration(visitedLinkIndex);
+               robotAcc.jointAcc()(dofIndex) = (u(dofIndex)-U(dofIndex).dot(linksAccelerations(visitedLinkIndex)))/D(dofIndex);
+               linksAccelerations(visitedLinkIndex) = linksAccelerations(visitedLinkIndex) + S(dofIndex)*robotAcc.jointAcc()(dofIndex);
+           }
+           else
+           {
+               //for fixed joints we just propagate the acceleration
+               linksAccelerations(visitedLinkIndex) =
+                   toParentJoint->getTransform(robotPosVel.jointPos(),visitedLinkIndex,parentLinkIndex)*linksAccelerations(parentLinkIndex)
+                   + linksBiasAcceleration(visitedLinkIndex);
+           }
+       }
+    }
+
+    return true;
+}
+
+
 
 }
+
+
+
+
+
+

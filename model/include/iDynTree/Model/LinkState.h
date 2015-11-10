@@ -79,6 +79,25 @@ namespace iDynTree
         virtual ~LinkPosVelAcc();
     };
 
+    class LinkPosVel
+    {
+    private:
+        Transform  m_pos;
+        Twist      m_vel;
+
+    public:
+        Transform & pos();
+        Twist     & vel();
+
+        const Transform & pos() const;
+        const Twist     & vel() const;
+
+        /**
+          * Destructor
+          */
+        virtual ~LinkPosVel();
+    };
+
     class LinkPositions
     {
     private:
@@ -176,6 +195,27 @@ namespace iDynTree
     };
 
     typedef LinkInertias LinkCompositeRigidBodyInertias;
+
+    /**
+     * Class for storing a vector of ArticulatedBodyInertias objects , one for each link in a model.
+     */
+    class LinkArticulatedBodyInertias
+    {
+    private:
+        std::vector<iDynTree::ArticulatedBodyInertia> m_linkABIs;
+
+    public:
+        LinkArticulatedBodyInertias(unsigned int nrOfLinks = 0);
+        LinkArticulatedBodyInertias(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfLinks);
+        void resize(const iDynTree::Model & model);
+
+        iDynTree::ArticulatedBodyInertia & operator()(const LinkIndex link);
+        const iDynTree::ArticulatedBodyInertia & operator()(const LinkIndex link) const;
+
+        ~LinkArticulatedBodyInertias();
+    };
 
     /**
      * Class for storing a vector of twists, one for each link in a model.

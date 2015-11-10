@@ -45,7 +45,7 @@ void assertDoubleAreEqual(const double& val1, const double& val2, double tol, st
 void printVector(std::string name, const IVector& vec)
 {
     std::cerr << name << " : \n";
-    for(int i=0; i < vec.size(); i++ )
+    for(unsigned int i=0; i < vec.size(); i++ )
     {
         std::cerr << vec(i) << "\n";
     }

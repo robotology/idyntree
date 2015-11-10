@@ -91,7 +91,10 @@ namespace iDynTree
                                                    const LinkPosVelAcc & linkBstate, const LinkIndex linkA, const LinkIndex linkB) const;
 
         // Documentation inherited
-        virtual LinkVelAcc computeLinkVelAcc(const IRawVector& jntPos, const IRawVector& jntVel, const IRawVector& jntAcc, const LinkVelAcc & linkBstate,
+        virtual LinkVelAcc computeLinkVelAcc(const IRawVector & jntPos,
+                                             const IRawVector & jntVel,
+                                             const IRawVector & jntAcc,
+                                             const LinkVelAcc & linkBstate,
                                              const LinkIndex linkA, const LinkIndex linkB) const;
 
         // Documentation inherited

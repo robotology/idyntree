@@ -37,11 +37,6 @@ void checkInertiaTransformation(const Transform & trans, const ArticulatedBodyIn
 
     Matrix6x6 inertiaTranslatedRaw = inertiaTranslated.asMatrix();
 
-    std::cout << " inertiaTranslatedCheck : " << std::endl;
-    std::cout << inertiaTranslatedCheck.toString() << std::endl;
-    std::cout << " inertiaTranslated : " << std::endl;
-    std::cout << inertiaTranslatedRaw.toString() << std::endl;
-
     ASSERT_EQUAL_MATRIX(inertiaTranslatedCheck,inertiaTranslatedRaw);
 
 }

@@ -141,7 +141,6 @@ LinkVelAcc RevoluteJoint::computeLinkVelAcc(const IRawVector& jntPos, const IRaw
 {
     LinkVelAcc linkAstate;
 
-    double ang = jntPos(this->getPosCoordsOffset());
     double dang = jntVel(this->getDOFsOffset());
     double d2ang = jntAcc(this->getDOFsOffset());
 
@@ -173,7 +172,6 @@ LinkPosVelAcc RevoluteJoint::computeLinkPosVelAcc(const IRawVector& jntPos, cons
 {
     LinkPosVelAcc linkAstate;
 
-    double ang = jntPos(this->getPosCoordsOffset());
     double dang = jntVel(this->getDOFsOffset());
     double d2ang = jntAcc(this->getDOFsOffset());
 

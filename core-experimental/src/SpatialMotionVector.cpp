@@ -10,6 +10,8 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
 
+#include <iDynTree/Core/EigenHelpers.h>
+
 #include <Eigen/Dense>
 
 #include <sstream>
@@ -81,6 +83,17 @@ Transform SpatialMotionVector::exp() const
 
     return res;
 }
+
+SpatialMotionVector SpatialMotionVector::operator*(const double scalar) const
+{
+    SpatialMotionVector scaledVec;
+
+    toEigen(scaledVec.linearVec3)  = scalar*toEigen(this->linearVec3);
+    toEigen(scaledVec.angularVec3) = scalar*toEigen(this->angularVec3);
+
+    return scaledVec;
+}
+
 
 
 

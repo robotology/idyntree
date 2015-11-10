@@ -97,14 +97,30 @@ namespace iDynTree
                                               const ArticulatedBodyInertia & op2);
 
         /**
+         * Return the inverse of this ArticulatedBodyInertia
+         * applied to the passed wrench.
+         */
+        SpatialAcc applyInverse(Wrench & wrench) const;
+
+        /**
          * Get the SpatialInertia as a 6x6 matrix
          */
         Matrix6x6 asMatrix() const;
 
         // overloaded operators
         ArticulatedBodyInertia  operator+(const ArticulatedBodyInertia& other) const;
+        ArticulatedBodyInertia  operator-(const ArticulatedBodyInertia& other) const;
+        ArticulatedBodyInertia& operator+=(const ArticulatedBodyInertia& other);
         SpatialForceVector operator*(const SpatialMotionVector &other) const;
         Wrench operator*(const SpatialAcc &other) const;
+
+        // Static helpers
+
+        /**
+         * Build the ArticulatedInertia U d^-1 U^\top .
+         * Used in the articulated body algorithm .
+         */
+        static ArticulatedBodyInertia ABADyadHelper(const SpatialForceVector & U, const double d);
 
     };
 }
