@@ -6,7 +6,6 @@
  */
 
 
-#include <iDynTree/Model/InverseDynamics.h>
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
@@ -19,6 +18,8 @@
 #include <iDynTree/Core/ArticulatedBodyInertia.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/EigenHelpers.h>
+
+#include <iDynTree/Model/InverseDynamics.h>
 
 #include <Eigen/Core>
 
@@ -213,7 +214,6 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
                     F = ancestorParent_X_ancestor*F;
                 }
 
-
                 // Fill the 6 \times nDof right top submatrix of the mass matrix
                 // (i.e. the jacobian of the momentum)
                 Eigen::Matrix<double,6,1> FEigen = toEigen(F);
@@ -256,7 +256,6 @@ bool ArticulatedBodyAlgorithm(const Model& model,
         LinkConstPtr visitedLink = traversal.getLink(traversalEl);
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
         LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
-        LinkIndex    parentLinkIndex = parentLink->getIndex();
         IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
 
         // Propagate velocities and bias accelerations
@@ -264,11 +263,13 @@ bool ArticulatedBodyAlgorithm(const Model& model,
         // If the visitedLink is the base one, initialize the velocity with the input velocity
         if( parentLink == 0 )
         {
+            assert(visitedLinkIndex >= 0 && visitedLinkIndex < model.getNrOfLinks());
             linksVel(visitedLinkIndex) = robotPosVel.basePosVel().vel();
             linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
         }
         else
         {
+            LinkIndex    parentLinkIndex = parentLink->getIndex();
             // Otherwise we propagate velocity in the usual way
             if( toParentJoint->getNrOfDOFs() == 0 )
             {
@@ -330,7 +331,8 @@ bool ArticulatedBodyAlgorithm(const Model& model,
                 D(dofIndex) = S(dofIndex).dot(U(dofIndex));
                 u(dofIndex) = jointTorques(dofIndex) - S(dofIndex).dot(linksBiasWrench(visitedLinkIndex));
 
-                Ia =  linkABIs(visitedLinkIndex) - ArticulatedBodyInertia::ABADyadHelper(U(dofIndex),D(dofIndex));
+                Ia = linkABIs(visitedLinkIndex) - ArticulatedBodyInertia::ABADyadHelper(U(dofIndex),D(dofIndex));
+
                 pa                 =   linksBiasWrench(visitedLinkIndex)
                                      + Ia*linksBiasAcceleration(visitedLinkIndex)
                                      + U(dofIndex)*(u(dofIndex)/D(dofIndex));
@@ -365,17 +367,18 @@ bool ArticulatedBodyAlgorithm(const Model& model,
        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
        LinkIndex visitedLinkIndex = visitedLink->getIndex();
        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
-       LinkIndex    parentLinkIndex = parentLink->getIndex();
        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
 
        if( parentLink == 0 )
        {
            // Preliminary step: find base acceleration
-           linksAccelerations(visitedLinkIndex) = linkABIs(visitedLinkIndex).applyInverse(linksBiasWrench(visitedLinkIndex));
+           linksAccelerations(visitedLinkIndex) = -(linkABIs(visitedLinkIndex).applyInverse(linksBiasWrench(visitedLinkIndex)));
+
            robotAcc.baseAcc() = linksAccelerations(visitedLinkIndex);
        }
        else
        {
+           LinkIndex    parentLinkIndex = parentLink->getIndex();
            if( toParentJoint->getNrOfDOFs() > 0 )
            {
                size_t dofIndex = toParentJoint->getDOFsOffset();

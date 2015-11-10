@@ -338,23 +338,29 @@ LinkAccArray::LinkAccArray(unsigned int nrOfLinks)
 
 const SpatialAcc& LinkAccArray::operator()(const LinkIndex link) const
 {
-    return this->m_linkTwist[link];
+    return this->m_linkAcc[link];
 }
 
 SpatialAcc& LinkAccArray::operator()(const LinkIndex link)
 {
-    return this->m_linkTwist[link];
+    return this->m_linkAcc[link];
 }
 
 void LinkAccArray::resize(const Model& model)
 {
-    resize(model.getNrOfDOFs());
+    resize(model.getNrOfLinks());
 }
 
 void LinkAccArray::resize(unsigned int nrOfLinks)
 {
-    this->m_linkTwist.resize(nrOfLinks);
+    this->m_linkAcc.resize(nrOfLinks);
 }
+
+unsigned int LinkAccArray::getNrOfLinks() const
+{
+    return this->m_linkAcc.size();
+}
+
 
 LinkAccArray::~LinkAccArray()
 {

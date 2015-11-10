@@ -55,16 +55,20 @@ namespace iDynTree
     bool ArticulatedBodyAlgorithm(const Model& model,
                                   const Traversal& traversal,
                                   const FreeFloatingPosVel& robotPosVel,
-                                  const iDynTree::LinkExternalWrenches & linkExtWrenches,
-                                  const iDynTree::JointDoubleArray         & jntTorques,
-                                  iDynTree::DOFSpatialMotionArray & S,
-                                  iDynTree::DOFSpatialForceArray & U,
-                                  iDynTree::JointDoubleArray & D,
-                                  iDynTree::LinkVelArray & linksVel,
-                                  iDynTree::LinkAccArray & linksBiasAcceleration,
-                                  iDynTree::FreeFloatingAcc & robotAcc);
-
+                                  const LinkExternalWrenches & linkExtWrenches,
+                                  const JointDoubleArray & jointTorques,
+                                        DOFSpatialMotionArray & S,
+                                        DOFSpatialForceArray & U,
+                                        JointDoubleArray & D,
+                                        JointDoubleArray & u,
+                                        LinkVelArray & linksVel,
+                                        LinkAccArray & linksBiasAcceleration,
+                                        LinkAccArray & linksAccelerations,
+                                        LinkArticulatedBodyInertias & linkABIs,
+                                        LinkWrenches & linksBiasWrench,
+                                        FreeFloatingAcc & robotAcc);
 
 }
 
-#endif /* IDYNTREE_FORWARD_KINEMATICS_H */
+
+#endif /* IDYNTREE_DYNAMICS_H */

@@ -5,7 +5,6 @@
  *
  */
 
-
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
 #include <iDynTree/Model/Model.h>

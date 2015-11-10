@@ -93,11 +93,11 @@ ArticulatedBodyInertia ArticulatedBodyInertia::combine(const ArticulatedBodyIner
     return retABI;
 }
 
-SpatialAcc ArticulatedBodyInertia::applyInverse(Wrench& wrench) const
+SpatialAcc ArticulatedBodyInertia::applyInverse(const Wrench& wrench) const
 {
     SpatialAcc acc;
 
-    Eigen::Matrix<double,6,1> wrenchEigen = toEigen(wrench);
+    Eigen::Matrix<double,6,1> wrenchEigen = toEigen(wrench.asVector());
     Eigen::Matrix<double,6,6> abi;
 
     abi.block<3,3>(0,0) = toEigen(linearLinear);
@@ -105,10 +105,10 @@ SpatialAcc ArticulatedBodyInertia::applyInverse(Wrench& wrench) const
     abi.block<3,3>(3,0) = toEigen(linearAngular).transpose();
     abi.block<3,3>(3,3) = toEigen(angularAngular);
 
-    Eigen::Matrix<double,6,1> accEigen = abi.ldlt().solve(wrenchEigen);
+    Eigen::Matrix<double,6,1> accEigen = abi.householderQr().solve(wrenchEigen);
 
     toEigen(acc.getLinearVec3()) = accEigen.block<3,1>(0,0);
-    toEigen(acc.getLinearVec3()) = accEigen.block<3,1>(3,0);
+    toEigen(acc.getAngularVec3()) = accEigen.block<3,1>(3,0);
 
     return acc;
 }
@@ -167,9 +167,9 @@ ArticulatedBodyInertia ArticulatedBodyInertia::operator-(const ArticulatedBodyIn
 
 ArticulatedBodyInertia& ArticulatedBodyInertia::operator+=(const ArticulatedBodyInertia& other)
 {
-    toEigen(this->linearLinear)    = toEigen(this->linearLinear)   - toEigen(other.linearLinear);
-    toEigen(this->linearAngular)   = toEigen(this->linearAngular)  - toEigen(other.linearAngular);
-    toEigen(this->angularAngular)  = toEigen(this->angularAngular) - toEigen(other.angularAngular);
+    toEigen(this->linearLinear)    = toEigen(this->linearLinear)   + toEigen(other.linearLinear);
+    toEigen(this->linearAngular)   = toEigen(this->linearAngular)  + toEigen(other.linearAngular);
+    toEigen(this->angularAngular)  = toEigen(this->angularAngular) + toEigen(other.angularAngular);
 
     return *this;
 }

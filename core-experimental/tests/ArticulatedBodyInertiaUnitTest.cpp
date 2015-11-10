@@ -13,7 +13,9 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/MatrixFixSize.h>
 
 #include <Eigen/Dense>
@@ -54,13 +56,13 @@ void checkInertiaAccProduct(const ArticulatedBodyInertia & inertia, const Spatia
     ASSERT_EQUAL_VECTOR(momentum.asVector(),momentumCheck);
 }
 
-void checkInvariance(const Transform & trans, const ArticulatedBodyInertia & inertia, const SpatialMotionVector & twist)
+void checkInvariance(const Transform & trans, const ArticulatedBodyInertia & inertia, const SpatialAcc & twist)
 {
     Transform invTrans = trans.inverse();
-    SpatialForceVector momentumTranslated = trans*(inertia*twist);
-    SpatialForceVector momentumTranslatedCheck = (trans*inertia)*(trans*twist);
+    Wrench momentumTranslated = trans*(inertia*twist);
+    Wrench momentumTranslatedCheck = (trans*inertia)*(trans*twist);
 
-    SpatialMotionVector           twistTranslated         = trans*twist;
+    SpatialAcc           twistTranslated   = trans*twist;
     ArticulatedBodyInertia  inertiaTranslated       = trans*inertia;
     Vector6 momentumTranslatedCheck2;
     Vector6 momentumTranslatedCheck3;
@@ -95,10 +97,25 @@ void checkInvariance(const Transform & trans, const ArticulatedBodyInertia & ine
     ASSERT_EQUAL_VECTOR(momentumTranslated.asVector(),momentumTranslatedCheck2);
     ASSERT_EQUAL_VECTOR(momentumTranslated.asVector(),momentumTranslatedCheck.asVector());
 
-    SpatialForceVector momentum = invTrans*momentumTranslated;
-    SpatialForceVector momentumCheck = (invTrans*(trans*inertia))*(invTrans*(trans*twist));
+    Wrench momentum = invTrans*momentumTranslated;
+    Wrench momentumCheck = (invTrans*(trans*inertia))*(invTrans*(trans*twist));
 
     ASSERT_EQUAL_VECTOR(momentum.asVector(),momentumCheck.asVector());
+}
+
+void checkInversion()
+{
+    SpatialInertia I = getRandomInertia();
+    Transform      trans = getRandomTransform();
+    ArticulatedBodyInertia Ia = I;
+
+    Wrench f(LinearForceVector3(1.0,5.0,6.0), AngularForceVector3(3.0,6.0,-4.0));
+
+    SpatialAcc a = Ia.applyInverse(f);
+    SpatialAcc aTrans = trans*a;
+    SpatialAcc aTransCheck = (trans*Ia).applyInverse(trans*f);
+
+    ASSERT_EQUAL_VECTOR(aTrans.asVector(),aTransCheck.asVector());
 }
 
 int main()
@@ -119,6 +136,7 @@ int main()
     checkInertiaAccProduct(abi,twist);
     checkInertiaTransformation(trans,abi);
     checkInvariance(trans,abi,twist);
+    checkInversion();
 
     return EXIT_SUCCESS;
 }

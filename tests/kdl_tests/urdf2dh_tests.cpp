@@ -34,7 +34,7 @@
 
 /* Author: Silvio Traversaro */
 
-#include "../tools/urdf2dh_helpers.h"
+#include "../../tools/urdf2dh_helpers.h"
 
 int main(int argc, char** argv)
 {

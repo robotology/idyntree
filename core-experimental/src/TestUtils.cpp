@@ -51,6 +51,25 @@ void printVector(std::string name, const IVector& vec)
     }
 }
 
+void printVectorDifference(std::string name, const IVector& vec1, const IVector& vec2)
+{
+    std::cerr << name << " : \n";
+    size_t minSize = vec1.size();
+
+    if( vec2.size() < minSize )
+    {
+        minSize = vec2.size();
+    }
+
+    for(unsigned int i=0; i < minSize; i++ )
+    {
+        std::cerr << vec1(i) - vec2(i) << "\n";
+    }
+}
+
+
+
+
 void assertVectorAreEqual(const IVector& vec1, const IVector& vec2, double tol, std::string file, int line)
 {
     if( vec1.size() != vec2.size() )
@@ -68,6 +87,7 @@ void assertVectorAreEqual(const IVector& vec1, const IVector& vec2, double tol, 
                   << " while of vec2 is " << vec2(i) << std::endl;
             printVector("vec1",vec1);
             printVector("vec2",vec2);
+            printVectorDifference("vec1-vec2",vec1,vec2);
             exit(EXIT_FAILURE);
         }
     }
@@ -120,6 +140,14 @@ void assertSpatialMotionAreEqual(const SpatialMotionVector& f1, const SpatialMot
 double getRandomDouble(double min, double max)
 {
     return min + (max-min)*((double)rand())/((double)RAND_MAX);
+}
+
+void getRandomVector(IVector & vec)
+{
+    for(unsigned int i=0; i<vec.size(); i++)
+    {
+        vec(i) = getRandomDouble();
+    }
 }
 
 Position getRandomPosition()

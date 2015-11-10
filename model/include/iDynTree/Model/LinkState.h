@@ -245,7 +245,7 @@ namespace iDynTree
     class LinkAccArray
     {
     private:
-        std::vector<iDynTree::SpatialAcc> m_linkTwist;
+        std::vector<iDynTree::SpatialAcc> m_linkAcc;
 
     public:
         LinkAccArray(unsigned int nrOfLinks = 0);
@@ -256,6 +256,8 @@ namespace iDynTree
 
         iDynTree::SpatialAcc & operator()(const LinkIndex link);
         const iDynTree::SpatialAcc & operator()(const LinkIndex link) const;
+
+        unsigned int getNrOfLinks() const;
 
         ~LinkAccArray();
     };

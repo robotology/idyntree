@@ -100,7 +100,7 @@ namespace iDynTree
          * Return the inverse of this ArticulatedBodyInertia
          * applied to the passed wrench.
          */
-        SpatialAcc applyInverse(Wrench & wrench) const;
+        SpatialAcc applyInverse(const Wrench & wrench) const;
 
         /**
          * Get the SpatialInertia as a 6x6 matrix
