@@ -14,7 +14,7 @@
 namespace iDynTree
 {
 
-Model::Model(): defaultBaseLink(0)
+Model::Model(): defaultBaseLink(0), nrOfDOFs(0)
 {
 
 }
@@ -28,6 +28,11 @@ void Model::copy(const Model& other)
     }
 
     // Add all joints, preserving the numbering
+
+    // reset the nrOfDOFs (it will be then update in addJoint
+    nrOfPosCoords = 0;
+    nrOfDOFs = 0;
+
     for(unsigned int jnt=0; jnt < other.getNrOfJoints(); jnt++ )
     {
         this->addJoint(other.jointNames[jnt],other.joints[jnt]);
@@ -64,6 +69,8 @@ void Model::destroy()
         this->joints[jnt] = 0;
     }
     joints.resize(0);
+    nrOfPosCoords = 0;
+    nrOfDOFs = 0;
     jointNames.resize(0);
     neighbors.resize(0);
 }
@@ -227,27 +234,46 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
 
     // Update the adjacency list
     Neighbor firstLinkNeighbor;
-    firstLinkNeighbor.neighborLink = getLink(secondLink);
-    firstLinkNeighbor.neighborJoint = getJoint(thisJointIndex);
+    firstLinkNeighbor.neighborLink = secondLink;
+    firstLinkNeighbor.neighborJoint = thisJointIndex;
     this->neighbors[firstLink].push_back(firstLinkNeighbor);
 
     Neighbor secondLinkNeighbor;
-    secondLinkNeighbor.neighborLink = getLink(firstLink);
-    secondLinkNeighbor.neighborJoint = getJoint(thisJointIndex);
+    secondLinkNeighbor.neighborLink = firstLink;
+    secondLinkNeighbor.neighborJoint = thisJointIndex;
     this->neighbors[secondLink].push_back(secondLinkNeighbor);
 
+    // Set the joint index and dof offset
     this->joints[thisJointIndex]->setIndex(thisJointIndex);
+    this->joints[thisJointIndex]->setPosCoordsOffset(this->nrOfPosCoords);
+    this->joints[thisJointIndex]->setDOFsOffset(this->nrOfDOFs);
+
+    // Update the number of dofs
+    this->nrOfPosCoords += this->joints[thisJointIndex]->getNrOfPosCoords();
+    this->nrOfDOFs += this->joints[thisJointIndex]->getNrOfDOFs();
 
     return thisJointIndex;
 }
 
+unsigned int Model::getNrOfPosCoords() const
+{
+    return nrOfDOFs;
+}
+
+unsigned int Model::getNrOfDOFs() const
+{
+    return nrOfDOFs;
+}
 unsigned int Model::getNrOfNeighbors(const LinkIndex link) const
 {
+    assert(link < this->neighbors.size());
     return this->neighbors[link].size();
 }
 
 Neighbor Model::getNeighbor(const LinkIndex link, unsigned int neighborIndex) const
 {
+    assert(link < this->getNrOfLinks());
+    assert(neighborIndex < this->getNrOfNeighbors(link));
     return this->neighbors[link][neighborIndex];
 }
 
@@ -269,29 +295,50 @@ LinkIndex Model::getDefaultBaseLink() const
     return defaultBaseLink;
 }
 
-bool Model::computeFullTreeTraversal(Traversal & traversal)
+bool Model::computeFullTreeTraversal(Traversal & traversal) const
 {
     return computeFullTreeTraversal(traversal,this->getDefaultBaseLink());
 }
 
-struct stackEl { LinkPtr link; LinkPtr parent;};
+struct stackEl { LinkConstPtr link; LinkConstPtr parent;};
 
-void addLinkToTraversal(Traversal & traversal, int & traversalFirstEmptySlot,
-                        LinkPtr linkToAdd, IJointPtr parentJointToAdd, LinkPtr parentLinkToAdd,
-                        std::deque<stackEl> & linkToVisit)
+void  addBaseLinkToTraversal(const Model & model, Traversal & traversal, int & traversalFirstEmptySlot,
+                                    LinkIndex linkToAdd, std::deque<stackEl> & linkToVisit)
 {
-    traversal.setTraversalElement(traversalFirstEmptySlot,linkToAdd,parentJointToAdd,parentLinkToAdd);
+    assert(traversalFirstEmptySlot == 0);
+    traversal.setTraversalElement(traversalFirstEmptySlot,
+                                  model.getLink(linkToAdd),
+                                  0,
+                                  0);
 
     traversalFirstEmptySlot++;
 
     stackEl el;
-    el.link = linkToAdd;
-    el.parent = parentLinkToAdd;
+    el.link = model.getLink(linkToAdd);
+    el.parent = 0;
 
     linkToVisit.push_back(el);
 }
 
-bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase)
+void addLinkToTraversal(const Model & model, Traversal & traversal, int & traversalFirstEmptySlot,
+                        LinkIndex linkToAdd, JointIndex parentJointToAdd, LinkIndex parentLinkToAdd,
+                        std::deque<stackEl> & linkToVisit)
+{
+    traversal.setTraversalElement(traversalFirstEmptySlot,
+                                  model.getLink(linkToAdd),
+                                  model.getJoint(parentJointToAdd),
+                                  model.getLink(parentLinkToAdd));
+
+    traversalFirstEmptySlot++;
+
+    stackEl el;
+    el.link = model.getLink(linkToAdd);
+    el.parent = model.getLink(parentLinkToAdd);
+
+    linkToVisit.push_back(el);
+}
+
+bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase) const
 {
     if( traversalBase < 0 || traversalBase >= this->getNrOfLinks() )
     {
@@ -309,29 +356,31 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
 
     // We add as first link the requested traversalBase
     int traversalFirstEmptySlot = 0;
-    addLinkToTraversal(traversal,traversalFirstEmptySlot,this->getLink(traversalBase),
-                       (IJointPtr)0,(LinkPtr)0,linkToVisit);
+    addBaseLinkToTraversal(*this,traversal,traversalFirstEmptySlot,traversalBase,linkToVisit);
 
     // while there is some link still to visit
     unsigned int visitNumber=0;
     while( linkToVisit.size() > 0 )
     {
+        assert(linkToVisit.size() <= this->getNrOfLinks());
+
         // DPS : we use linkToVisit as a stack
-        LinkPtr visitedLink = linkToVisit.back().link;
-        LinkPtr visitedLinkParent = linkToVisit.back().parent;
+        LinkConstPtr visitedLink = linkToVisit.back().link;
+        LinkConstPtr visitedLinkParent = linkToVisit.back().parent;
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
         linkToVisit.pop_back();
 
-        for(unsigned int neigh_i=0; neigh_i <= this->getNrOfNeighbors(visitedLinkIndex); neigh_i++ )
+        for(unsigned int neigh_i=0; neigh_i < this->getNrOfNeighbors(visitedLinkIndex); neigh_i++ )
         {
-            // add to the stack all the neighbors, except for parent
+            // add to the stack all the neighbors, except for parent link
+            // (if the visited link is the base one, add all the neighbors)
             // the visited link is already in the Traversal, so we can use it
-            // to check the parent
+            // to check for its parent
             Neighbor neighb = this->getNeighbor(visitedLinkIndex,neigh_i);
-            if( neighb.neighborLink != visitedLinkParent )
+            if( visitedLinkParent == 0 || neighb.neighborLink != visitedLinkParent->getIndex() )
             {
-                addLinkToTraversal(traversal,traversalFirstEmptySlot,neighb.neighborLink,
-                    neighb.neighborJoint,visitedLink,linkToVisit);
+                addLinkToTraversal(*this,traversal,traversalFirstEmptySlot,neighb.neighborLink,
+                    neighb.neighborJoint,visitedLink->getIndex(),linkToVisit);
             }
         }
     }

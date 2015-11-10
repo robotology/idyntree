@@ -29,6 +29,7 @@
             </geometry>
         </collision>
     </link>
+    <!--
     <joint name="torso_pitch" type="revolute">
         <origin xyz="0 0 0" rpy="-2.77556e-17 -1.5708 3.14159" />
         <axis xyz="0 1 6.12323e-17" />
@@ -57,6 +58,38 @@
             <origin xyz="0 0 0" rpy="-1.5708 5.10314e-12 1.11022e-16" />
             <geometry>
                 <mesh filename="meshes/collision/icub_simple_collision_lap_belt_1.dae" scale="1 1 1" />
+            </geometry>
+        </collision>
+    </link>
+    -->
+    <joint name="l_hip_pitch" type="revolute">
+        <origin xyz="0 -0.0681 -0.1199" rpy="-3.14159 1.5708 -2.77556e-17" />
+        <axis xyz="0 -1 6.12323e-17" />
+        <parent link="root_link" />
+        <child link="l_hip_1" />
+        <dynamics damping="0.1" friction="0" />
+        <limit effort="84" velocity="100" lower="-0.767945" upper="2.30383" />
+    </joint>
+    <link name="l_hip_1">
+        <inertial>
+            <mass value="0.754" />
+            <origin xyz="0 -0.0782 0" rpy="0 -0 0" />
+            <inertia ixx="0.000471076" ixy="2.059e-06" ixz="1.451e-06" iyy="0.000346478" iyz="1.545e-06" izz="0.000510315" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="2.35619 1.5708 0.785398" />
+            <geometry>
+                <mesh filename="meshes/visual/icub_l_hip_1.dae" scale="1 1 1" />
+            </geometry>
+            <material name="material.metal">
+                <texture />
+                <color rgba="0 0 0 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="2.35619 1.5708 0.785398" />
+            <geometry>
+                <mesh filename="meshes/collision/icub_simple_collision_l_hip_1.dae" scale="1 1 1" />
             </geometry>
         </collision>
     </link>

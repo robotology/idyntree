@@ -5,8 +5,11 @@
 project(iDynTree_Model CXX)
 
 set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
+                           include/iDynTree/Model/ForwardKinematics.h
+                           include/iDynTree/Model/FreeFloatingState.h
                            include/iDynTree/Model/IJoint.h
                            include/iDynTree/Model/IJointStateInterfaces.h
+                           include/iDynTree/Model/InverseDynamics.h
                            include/iDynTree/Model/Indeces.h
                            include/iDynTree/Model/Link.h
                            include/iDynTree/Model/LinkState.h
@@ -18,9 +21,13 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
 set(IDYNTREE_MODEL_PRIVATE_INCLUDES)
 
 set(IDYNTREE_MODEL_SOURCES src/FixedJoint.cpp
+                           src/ForwardKinematics.cpp
+                           src/FreeFloatingState.cpp
                            src/Indeces.cpp
+                           src/InverseDynamics.cpp
                            src/Link.cpp
                            src/LinkState.cpp
+                           src/JointState.cpp
                            src/Model.cpp
                            src/ModelInterfaceDestructors.cpp
                            src/RevoluteJoint.cpp

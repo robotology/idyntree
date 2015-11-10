@@ -12,13 +12,11 @@
 
 namespace iDynTree
 {
-    class IJointPos;
-    class IJointPosVelAcc;
-    class IJointTorque;
     class LinkPosVelAcc;
     class LinkVelAcc;
     class Transform;
     class Wrench;
+    class IRawVector;
 
     /**
      * Interface (i.e. abstract class) exposed by classes that implement a Joint.
@@ -122,8 +120,9 @@ namespace iDynTree
          * where p_linkA is a quantity expressed in the linkA frame,
          * and   p_linkB is a quantity expressed in the linkB frame.
          */
-        virtual Transform getTransform(const IJointPos & state,
-                                       const LinkIndex p_linkA, const LinkIndex p_linkB) const = 0;
+        virtual Transform getTransform(const IRawVector & jntPos,
+                                       const LinkIndex p_linkA,
+                                       const LinkIndex p_linkB) const = 0;
 
         /**
          * Compute the position, velocity and acceleration of linkA,
@@ -132,9 +131,11 @@ namespace iDynTree
          *
          * @return the linkA position, twist and spatial acceleration.
          */
-        virtual LinkPosVelAcc computeLinkPosVelAcc(const IJointPosVelAcc & state,
-                                               const LinkPosVelAcc & linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB) const = 0;
+        virtual LinkPosVelAcc computeLinkPosVelAcc(const IRawVector & jntPos,
+                                                   const IRawVector & jntVel,
+                                                   const IRawVector & jntAcc,
+                                                   const LinkPosVelAcc & linkBstate,
+                                                   const LinkIndex linkA, const LinkIndex linkB) const = 0;
 
         /**
          * Compute the velocity and acceleration of linkA,
@@ -143,28 +144,67 @@ namespace iDynTree
          *
          * @return the linkA position, twist and spatial acceleration.
          */
-        virtual LinkVelAcc computeLinkVelAcc(const IJointPosVelAcc & state, const LinkVelAcc & linkBstate,
+        virtual LinkVelAcc computeLinkVelAcc(const IRawVector & jntPos,
+                                             const IRawVector & jntVel,
+                                             const IRawVector & jntAcc,
+                                             const LinkVelAcc & linkBstate,
                                              const LinkIndex linkA, const LinkIndex linkB) const = 0;
-
-
 
         /**
          * Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies
          * on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied.
+         *
+         * @param[in] jntPos vector of joint positions.
+         * @param[in] internalWrench internal wrench that the linkThatAppliesWrench applies
+         *                           on the linkOnWhichWrenchIsApplied, expressed in the link
+         *                           frame of the linkOnWhichWrenchIsApplied
+         * @param[in] linkThatAppliesWrench link index of the link that applies the considered internal wrench.
+         * @param[in] linkOnWhichWrenchIsApplied link index of the link on which the considered internal wrench is applied.
+         * @param[out] jntTorques vector of joint torques.
          */
-        virtual void computeJointTorque(const IJointPos & state, const Wrench & internalWrench,
-                                        const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
-                                        IJointTorque & outputTorque) const = 0;
+        virtual void computeJointTorque(const IRawVector & jntPos,
+                                        const Wrench & internalWrench,
+                                        const LinkIndex linkThatAppliesWrench,
+                                        const LinkIndex linkOnWhichWrenchIsApplied,
+                                        IRawVector & jntTorques) const = 0;
 
         /**
-         * Set the index of the joint.
+         * Set the index of the joint in the Model Joint serialization.
+         *
          */
         virtual void setIndex(JointIndex & _index) = 0;
 
         /**
-         * Get the index of the link.
+         * Get the index of the joint in the model Joint serialization.
          */
         virtual JointIndex getIndex() const = 0;
+
+
+        /**
+         * Set the offset of the position coordinates of this
+         * joint in the position coordiantes serialization of the model.
+         */
+        virtual void setPosCoordsOffset(const size_t _index) = 0;
+
+        /**
+         * Get the offset of the position coordinates of
+         * this joint in the position coordiantes serialization of the model.
+         */
+        virtual size_t getPosCoordsOffset() const = 0;
+
+        /**
+         * Set the offset of the coordinates of this
+         * joint in the velocity/acceleration coordiantes serialization of the model.
+         */
+        virtual void setDOFsOffset(const size_t _index) = 0;
+
+        /**
+         * Get the offset of the position coordinates of
+         * joint in the velocity/acceleration coordiantes serialization of the model.
+         */
+        virtual size_t getDOFsOffset() const = 0;
+
+
     };
 
     typedef IJoint * IJointPtr;

@@ -35,7 +35,7 @@ target_include_directories(idyntree-core PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURC
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                                 ${EIGEN3_INCLUDE_DIR})
 
-target_link_libraries(idyntree-core idyntree-core-exp ${orocos_kdl_LIBRARIES})
+target_link_libraries(idyntree-core idyntree-core-exp idyntree-model ${orocos_kdl_LIBRARIES})
 
 set_property(TARGET idyntree-core PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_HEADERS})
 

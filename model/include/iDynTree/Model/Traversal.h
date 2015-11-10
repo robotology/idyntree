@@ -37,9 +37,9 @@ namespace iDynTree
     class Traversal
     {
     private:
-        std::vector<Link   *> links;
-        std::vector<Link   *> parents;
-        std::vector<IJoint *> toParentJoints;
+        std::vector<const Link   *> links;
+        std::vector<const Link   *> parents;
+        std::vector<const IJoint *> toParentJoints;
 
         /**
          * Copy constructor is forbidden
@@ -68,14 +68,14 @@ namespace iDynTree
          *
          * @return a pointer to the traversalIndex-th link of the traversal.
          */
-        Link   * getLink(unsigned int traversalIndex) const;
+        const Link   * getLink(unsigned int traversalIndex) const;
 
         /**
          * Get the parent link of the traversalIndex-th link of the traversal.
          *
          * @return a pointer to the parent link of the traversalIndex-th link of the traversal.
          */
-        Link   * getParentLink(unsigned int traversalIndex) const;
+        const Link   * getParentLink(unsigned int traversalIndex) const;
 
         /**
          * Get the joint connecting the traversalIndex-th link of the traversal
@@ -83,7 +83,7 @@ namespace iDynTree
          *
          * @return a pointer to the joint connecting the  link traversalIndex-th link of the traversal.
          */
-        IJoint * getParentJoint(unsigned int traversalIndex) const;
+        const IJoint * getParentJoint(unsigned int traversalIndex) const;
 
         /**
          * Reset the Traversal to contain nrOfVisitedLinks visited links.
@@ -100,7 +100,7 @@ namespace iDynTree
          *
          * @return true if all went well, false otherwise
          */
-        bool setTraversalElement(unsigned int traversalIndex, Link * link, IJoint * jointToParent, Link * parentLink);
+        bool setTraversalElement(unsigned int traversalIndex, const Link * link, const IJoint * jointToParent, const Link * parentLink);
 
     };
 

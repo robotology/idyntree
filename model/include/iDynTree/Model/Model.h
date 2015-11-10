@@ -21,8 +21,8 @@ namespace iDynTree
 
     struct Neighbor
     {
-        LinkPtr neighborLink;
-        IJointPtr neighborJoint;
+        LinkIndex neighborLink;
+        JointIndex neighborJoint;
     };
 
     /**
@@ -55,6 +55,18 @@ namespace iDynTree
          * root of the tree, to provide a default root for Traversal generation.
          */
         LinkIndex defaultBaseLink;
+
+        /**
+         * Cache number of position coordinaties of the model.
+         * If all joints are 0 or 1 dofs, this is equal to nrOfDOFs.
+         */
+        unsigned int nrOfPosCoords;
+
+        /**
+         * Cached number of (internal) DOFs of the model.
+         *  This is just the sum of all the getNrOfDOFs of the joint in the model.
+         */
+        unsigned int nrOfDOFs;
 
         /**
          * Check if a name is already used for a link in the model.
@@ -144,12 +156,29 @@ namespace iDynTree
 
         IJointConstPtr getJoint(const JointIndex index) const;
 
+
         /**
          *
          * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
          *         there was an error in adding the joint.
          */
         JointIndex addJoint(const std::string & jointName, IJointConstPtr joint);
+
+        /**
+         * Get the dimension of the vector used to parametrize the positions of the joints of the robot.
+         * This number can be obtained by summing the getNrOfPosCoords of all the joints of the model.
+         *
+         * \warning This is *not* including the 6 degrees of freedom of the base.
+         */
+        unsigned int getNrOfPosCoords() const;
+
+        /**
+         * Get the number of degrees of freedom of the joint of the robot.
+         * This number can be obtained by summing the getNrOfDOFs of all the joints of the model.
+         *
+         * \warning This is *not* including the 6 degrees of freedom of the base.
+         */
+        unsigned int getNrOfDOFs() const;
 
         /**
          * Get the nr of neighbors of a given link.
@@ -176,17 +205,27 @@ namespace iDynTree
          * Compute a Traversal of all the links in the Model, doing a Depth First Search starting
          * at the default base.
          *
-         * \warning this function works only on Models without cycles
+         * \warning The traversal computed with this function contains pointers to the joints
+         *          and links present in this model. Whener this pointer are invalidated,
+         *          for example because a link or a joint is added or the model is copied,
+         *          the traversal need to be recomputed.
+         *
+         * \warning this function works only on Models without cycles.
          */
-        bool computeFullTreeTraversal(Traversal & traversal);
+        bool computeFullTreeTraversal(Traversal & traversal) const;
 
        /**
          * Compute a Traversal of all the links in the Model, doing a Depth First Search starting
          * at the given traversalBase.
          *
-         * \warning this function works only on Models without cycles
+         * \warning The traversal computed with this function contains pointers to the joints
+         *          and links present in this model. Whener this pointer are invalidated,
+         *          for example because a link or a joint is added or the model is copied,
+         *          the traversal need to be recomputed.
+         *
+         * \warning this function works only on Models without cycles.
          */
-        bool computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase);
+        bool computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase) const;
 
     };
 

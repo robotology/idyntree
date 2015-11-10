@@ -23,7 +23,9 @@ namespace iDynTree
     class FixedJoint : public IJoint
     {
     private:
-        JointIndex m_index;
+        JointIndex  m_index;
+        std::size_t m_posCoordsOffset;
+        std::size_t m_DOFsOffset;
         LinkIndex link1;
         LinkIndex link2;
         Transform link1_X_link2;
@@ -67,7 +69,7 @@ namespace iDynTree
         virtual LinkIndex getSecondAttachedLink() const;
 
         // Documentation inherited
-        virtual Transform getTransform(const IJointPos & state, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
+        virtual Transform getTransform(const IRawVector & jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
 
         /**
          * For the fixed joint, the transform between a link and other
@@ -76,23 +78,37 @@ namespace iDynTree
         virtual Transform getTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const;
 
          // Documentation inherited
-        virtual LinkPosVelAcc computeLinkPosVelAcc(const IJointPosVelAcc & state, const LinkPosVelAcc & linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB) const;
+        virtual LinkPosVelAcc computeLinkPosVelAcc(const IRawVector & jntPos, const IRawVector & jntVel,
+                                                   const IRawVector & jntAcc, const LinkPosVelAcc & linkBstate,
+                                                   const LinkIndex linkA, const LinkIndex linkB) const;
 
         // Documentation inherited
-        virtual LinkVelAcc computeLinkVelAcc(const IJointPosVelAcc & state, const LinkVelAcc & linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB) const;
+        virtual LinkVelAcc computeLinkVelAcc(const IRawVector & jntPos, const IRawVector & jntVel,
+                                             const IRawVector & jntAcc,  const LinkVelAcc & linkBstate,
+                                             const LinkIndex linkA, const LinkIndex linkB) const;
 
         // Documentation inherited
-        virtual void computeJointTorque(const IJointPos & state, const Wrench & internalWrench,
+        virtual void computeJointTorque(const IRawVector & jntPos, const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
-                                        IJointTorque & outputTorque) const;
+                                        IRawVector & jntTorques) const;
 
         // Documentation inherited
         virtual void setIndex(JointIndex & _index);
 
         // Documentation inherited
         virtual JointIndex getIndex() const;
+
+        // Documentation inherited
+        virtual void setPosCoordsOffset(const size_t _index);
+
+        // Documentation inherited
+        virtual size_t getPosCoordsOffset() const;
+
+        // Documentation inherited
+        virtual void setDOFsOffset(const size_t _index);
+
+        // Documentation inherited
+        virtual size_t getDOFsOffset() const;
     };
 }
 

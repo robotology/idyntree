@@ -19,6 +19,9 @@
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 
+#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/FreeFloatingState.h>
+
 
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
@@ -31,9 +34,50 @@
 #include <iostream>
 
 #include <cstring>
+#include <boost/iterator/iterator_concepts.hpp>
 
 namespace iDynTree
 {
+
+/**
+ * Check that a given iDynTree::Model has a joint serialization that is compatible
+ * with a KDL. This means that all joints have 1 DOFs or 0 DOFs, and in the serialization
+ * the 1 DOFs joints came before the 0 DOFs one.
+ */
+bool checkModelJointSerializationIsCompatibleWithKDL(const Model & model)
+{
+    bool fixedJointsSerializationStarted = false;
+
+    for(unsigned int jnt=0; jnt < model.getNrOfJoints(); jnt++)
+    {
+        IJointConstPtr jntPtr = model.getJoint(jnt);
+
+        // Only simple 1 dofs joints (revolute, prismatic) are supported by KDL
+        if( jntPtr->getNrOfDOFs() != jntPtr->getNrOfPosCoords() )
+        {
+            return false;
+        }
+
+        if( jntPtr->getNrOfDOFs() >= 2 )
+        {
+            return false;
+        }
+
+        // Return false if a 1-DOF joint is found after a fixed joint
+        if( jntPtr->getNrOfDOFs() == 1 &&
+            fixedJointsSerializationStarted )
+        {
+            return false;
+        }
+
+        if( jntPtr->getNrOfDOFs() == 0 )
+        {
+            fixedJointsSerializationStarted = true;
+        }
+    }
+
+    return true;
+}
 
 KDL::Vector ToKDL(const Position& idyntree_position)
 {
@@ -129,6 +173,56 @@ bool ToKDL(const VectorDynSize& idyntree_jntarray, KDL::JntArray& kdl_jntarray)
 
     return true;
 }
+
+bool ToKDL(const iDynTree::FreeFloatingPos & idyntree_freeFloatingPos,
+           KDL::Frame & kdl_world_H_base, KDL::JntArray& kdl_jntarray, std::vector<int> kdlDof2idyntree)
+{
+    kdl_world_H_base = ToKDL(idyntree_freeFloatingPos.worldBasePos());
+
+    if( kdl_jntarray.rows() != idyntree_freeFloatingPos.getNrOfPosCoords() )
+    {
+         std::cerr << "[ERROR] ToKDL failed" << std::endl;
+         return false;
+    }
+
+    // We do here the **strong** assumption that the dof index
+    // of KDL and the one of iDynTree coincide
+    for(unsigned int kdlDof=0; kdlDof < kdl_jntarray.rows(); kdlDof++ )
+    {
+        kdl_jntarray(kdlDof) = idyntree_freeFloatingPos.jointPos()((kdlDof2idyntree[kdlDof]));
+    }
+
+    return true;
+}
+
+bool ToKDL(const FreeFloatingPosVelAcc& idyntree_freeFloatingState,
+           KDL::Frame& world_H_base, KDL::JntArray& kdl_jntarray,
+           KDL::Twist& base_vel, KDL::JntArray& kdl_jntVel,
+           KDL::Twist& base_acc, KDL::JntArray& kdl_jntAcc, const std::vector< int > kdlDof2idyntree)
+{
+    world_H_base = ToKDL(idyntree_freeFloatingState.basePosVelAcc().pos());
+    base_vel     = ToKDL(idyntree_freeFloatingState.basePosVelAcc().vel());
+    base_acc     = ToKDL(idyntree_freeFloatingState.basePosVelAcc().acc());
+
+    if( kdl_jntarray.rows() != idyntree_freeFloatingState.getNrOfPosCoords() ||
+        kdl_jntVel.rows()   != idyntree_freeFloatingState.getNrOfDOFs()    ||
+        kdl_jntAcc.rows()   != idyntree_freeFloatingState.getNrOfDOFs() )
+    {
+         std::cerr << "[ERROR] ToKDL failed" << std::endl;
+         return false;
+    }
+
+    // We do here the **strong** assumption that the dof index
+    // of KDL and the one of iDynTree coincide
+    for(unsigned int kdlDof=0; kdlDof < kdl_jntarray.rows(); kdlDof++ )
+    {
+        kdl_jntarray(kdlDof) = idyntree_freeFloatingState.jointPos()((kdlDof2idyntree[kdlDof]));
+        kdl_jntVel(kdlDof) = idyntree_freeFloatingState.jointVel()((kdlDof2idyntree[kdlDof]));
+        kdl_jntAcc(kdlDof) = idyntree_freeFloatingState.jointAcc()((kdlDof2idyntree[kdlDof]));
+    }
+
+}
+
 
 
 Position ToiDynTree(const KDL::Vector& kdl_vector)

@@ -2,21 +2,33 @@ classdef MovableJointImpl5 < iDynTree.IJoint
   methods
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(608, self);
+        iDynTreeMATLAB_wrap(639, self);
         self.swigInd=uint64(0);
       end
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(609, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(640, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(610, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(641, self, varargin{:});
     end
     function varargout = setIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(611, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(642, self, varargin{:});
     end
     function varargout = getIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(612, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(643, self, varargin{:});
+    end
+    function varargout = setPosCoordsOffset(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(644, self, varargin{:});
+    end
+    function varargout = getPosCoordsOffset(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(645, self, varargin{:});
+    end
+    function varargout = setDOFsOffset(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(646, self, varargin{:});
+    end
+    function varargout = getDOFsOffset(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(647, self, varargin{:});
     end
     function self = MovableJointImpl5(varargin)
       self@iDynTree.IJoint('_swigCreate');

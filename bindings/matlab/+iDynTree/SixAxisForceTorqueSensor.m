@@ -4,83 +4,83 @@ classdef SixAxisForceTorqueSensor < iDynTree.Sensor
       self@iDynTree.Sensor('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(683, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(683, varargin{:}); % FIXME
+        %self.swigInd = iDynTreeMATLAB_wrap(724, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(724, varargin{:}); % FIXME
         self.swigInd = tmp.swigInd;
         tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(684, self);
+        iDynTreeMATLAB_wrap(725, self);
         self.swigInd=uint64(0);
       end
     end
     function varargout = setName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(685, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(726, self, varargin{:});
     end
     function varargout = setFirstLinkSensorTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(686, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(727, self, varargin{:});
     end
     function varargout = setSecondLinkSensorTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(687, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(728, self, varargin{:});
     end
     function varargout = getFirstLinkIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(688, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(729, self, varargin{:});
     end
     function varargout = getSecondLinkIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(689, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(730, self, varargin{:});
     end
     function varargout = setFirstLinkName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(690, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(731, self, varargin{:});
     end
     function varargout = setSecondLinkName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(691, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(732, self, varargin{:});
     end
     function varargout = getFirstLinkName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(692, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(733, self, varargin{:});
     end
     function varargout = getSecondLinkName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(693, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(734, self, varargin{:});
     end
     function varargout = setParent(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(694, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(735, self, varargin{:});
     end
     function varargout = setParentIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(695, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(736, self, varargin{:});
     end
     function varargout = setAppliedWrenchLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(696, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(737, self, varargin{:});
     end
     function varargout = getName(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(697, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(738, self, varargin{:});
     end
     function varargout = getSensorType(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(698, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(739, self, varargin{:});
     end
     function varargout = getParent(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(699, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(740, self, varargin{:});
     end
     function varargout = getParentIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(700, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(741, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(701, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(742, self, varargin{:});
     end
     function varargout = clone(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(702, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(743, self, varargin{:});
     end
     function varargout = getAppliedWrenchLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(703, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(744, self, varargin{:});
     end
     function varargout = isLinkAttachedToSensor(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(704, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(745, self, varargin{:});
     end
     function varargout = getLinkSensorTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(705, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(746, self, varargin{:});
     end
     function varargout = getWrenchAppliedOnLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(706, self, varargin{:});
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(747, self, varargin{:});
     end
   end
   methods(Static)
