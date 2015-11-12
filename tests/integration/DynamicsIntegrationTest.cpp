@@ -14,7 +14,7 @@
 #include <iDynTree/ModelIO/URDFModelImport.h>
 
 #include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/InverseDynamics.h>
+#include <iDynTree/Model/Dynamics.h>
 
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/LinkState.h>

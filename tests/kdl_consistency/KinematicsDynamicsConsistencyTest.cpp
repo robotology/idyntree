@@ -22,7 +22,7 @@
 #include <iDynTree/Model/RevoluteJoint.h>
 
 #include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/InverseDynamics.h>
+#include <iDynTree/Model/Dynamics.h>
 
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/Traversal.h>
@@ -81,7 +81,7 @@ void testFwdKinConsistency(std::string modelFilePath)
     baseJntPosVelAcc.basePosVelAcc().vel() = getRandomTwist();
     baseJntPosVelAcc.basePosVelAcc().acc() =  getRandomTwist();
 
-    for(int jnt=0; jnt < baseJntPos.getNrOfPosCoords(); jnt++)
+    for(unsigned int jnt=0; jnt < baseJntPos.getNrOfPosCoords(); jnt++)
     {
         baseJntPos.jointPos()(jnt) = getRandomDouble();
         baseJntPosVelAcc.jointPos()(jnt) = baseJntPos.jointPos()(jnt);

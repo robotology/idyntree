@@ -19,7 +19,7 @@
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/EigenHelpers.h>
 
-#include <iDynTree/Model/InverseDynamics.h>
+#include <iDynTree/Model/Dynamics.h>
 
 #include <Eigen/Core>
 
