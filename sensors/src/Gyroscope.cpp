@@ -21,22 +21,18 @@
 #include "iDynTree/Core/Wrench.h"
 
 
-
-
 namespace iDynTree {
 
 struct Gyroscope::GyroscopePrivateAttributes
 {
     // Name/id of the sensor
     std::string name;
-   // Transform from the sensor
+   // Transform from the link to the sensor
     Transform link_H_sensor;
-    // Index of the parent junction
-     int parent_junction_index;
-    // Name of the parent junction
-     std::string parent_junction_name;
-//      MeasurementType measurementType = ANGULAR_VELOCITY;
- 
+    // Index of the parent link
+     int parent_link_index;
+    // Name of the parent link
+     std::string parent_link_name; 
 };
 
 
@@ -45,8 +41,8 @@ Gyroscope::Gyroscope()
     this->pimpl = new GyroscopePrivateAttributes;
 
     this->pimpl->name = "";
-    this->pimpl->parent_junction_index = -1;
-    this->pimpl->parent_junction_name = "";
+    this->pimpl->parent_link_index = -1;
+    this->pimpl->parent_link_name = "";
 }
 
 Gyroscope::Gyroscope(const Gyroscope& other):
@@ -85,13 +81,13 @@ bool Gyroscope::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor)
 
 bool Gyroscope::setParent(const std::string& parent)
 {
-    this->pimpl->parent_junction_name = parent;
+    this->pimpl->parent_link_name = parent;
     return true;
 }
 
 bool Gyroscope::setParentIndex(const int parent_index)
 {
-    this->pimpl->parent_junction_index = parent_index;
+    this->pimpl->parent_link_index = parent_index;
     return true;
 }
 // 
@@ -102,7 +98,7 @@ bool Gyroscope::isValid() const
         return false;
     }
 
-    if( this->pimpl->parent_junction_index< 0 )
+    if( this->pimpl->parent_link_index< 0 )
     {
         // Return false because the links is not appropriately setted
         return false;
@@ -131,12 +127,12 @@ SensorType Gyroscope::getSensorType() const
 
 std::string Gyroscope::getParent() const
 {
-    return this->pimpl->parent_junction_name;
+    return this->pimpl->parent_link_name;
 }
 
 int Gyroscope::getParentIndex() const
 {
-    return this->pimpl->parent_junction_index;
+    return this->pimpl->parent_link_index;
 }
 
 

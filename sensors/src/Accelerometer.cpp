@@ -29,16 +29,13 @@ struct Accelerometer::AccelerometerPrivateAttributes
 {
     // Name/id of the sensor
     std::string name;
-
+    // Transform from the link to the sensor
     Transform link_H_sensor;
     // Index of the parent junction
-    int parent_junction_index;
+    int parent_link_index;
     // Name of the parent junction
-     std::string parent_junction_name;
+     std::string parent_link_name;
     // Name of the link to which the Accelerometer is connected
-    std::string linkName;
-//     MeasurementType measurementType = LINEAR_ACCELERATION;
-
 };
 
 
@@ -47,8 +44,8 @@ Accelerometer::Accelerometer()
     this->pimpl = new AccelerometerPrivateAttributes;
 
     this->pimpl->name = "";
-    this->pimpl->parent_junction_index = -1;
-    this->pimpl->parent_junction_name = "";
+    this->pimpl->parent_link_index = -1;
+    this->pimpl->parent_link_name = "";
     
 }
 
@@ -89,25 +86,25 @@ bool Accelerometer::setLinkSensorTransform(const iDynTree::Transform& link_H_sen
 
 bool Accelerometer::setParent(const std::string& parent)
 {
-    this->pimpl->parent_junction_name = parent;
+    this->pimpl->parent_link_name = parent;
     return true;
 }
 
 bool Accelerometer::setParentIndex(const int parent_index)
 {
-    this->pimpl->parent_junction_index = parent_index;
+    this->pimpl->parent_link_index = parent_index;
     return true;
 
 }
 
 std::string Accelerometer::getParent() const
 {
-    return(this->pimpl->parent_junction_name);
+    return(this->pimpl->parent_link_name);
 }
 
 int Accelerometer::getParentIndex() const
 {
-    return(this->pimpl->parent_junction_index);
+    return(this->pimpl->parent_link_index);
 }
 
 bool Accelerometer::isValid() const
@@ -117,7 +114,7 @@ bool Accelerometer::isValid() const
         return false;
     }
 
-    if( this->pimpl->parent_junction_index < 0 )
+    if( this->pimpl->parent_link_index < 0 )
     {
         // Return false because the links is not appropriately setted
         return false;
