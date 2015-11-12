@@ -52,6 +52,7 @@
 #include "iDynTree/Core/RotationalInertiaRaw.h"
 #include "iDynTree/Core/SpatialInertiaRaw.h"
 #include "iDynTree/Core/SpatialInertia.h"
+#include "iDynTree/Core/ArticulatedBodyInertia.h"
 
 // Transformations: Rotation and Transform
 #include "iDynTree/Core/RotationRaw.h"
@@ -63,7 +64,6 @@
 // Model related data structures
 #include "iDynTree/Model/Indeces.h"
 #include "iDynTree/Model/LinkState.h"
-#include "iDynTree/Model/IJointStateInterfaces.h"
 #include "iDynTree/Model/Link.h"
 #include "iDynTree/Model/IJoint.h"
 #include "iDynTree/Model/FixedJoint.h"
@@ -182,6 +182,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Core/RotationalInertiaRaw.h"
 %include "iDynTree/Core/SpatialInertiaRaw.h"
 %include "iDynTree/Core/SpatialInertia.h"
+%include "iDynTree/Core/ArticulatedBodyInertia.h"
 
 // Transformations: Rotation and Transform
 %include "iDynTree/Core/RotationRaw.h"
@@ -193,7 +194,6 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 // Model related data structures
 %include "iDynTree/Model/Indeces.h"
 %include "iDynTree/Model/LinkState.h"
-%include "iDynTree/Model/IJointStateInterfaces.h"
 %include "iDynTree/Model/Link.h"
 %include "iDynTree/Model/IJoint.h"
 %include "iDynTree/Model/FixedJoint.h"
