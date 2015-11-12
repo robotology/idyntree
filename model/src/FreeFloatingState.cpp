@@ -55,6 +55,47 @@ FreeFloatingPos::~FreeFloatingPos()
 {
 }
 
+
+FreeFloatingVel::FreeFloatingVel(const Model& model)
+{
+    resize(model);
+}
+
+Twist& FreeFloatingVel::baseVel()
+{
+    return this->m_baseVel;
+}
+
+const Twist& FreeFloatingVel::baseVel() const
+{
+    return this->m_baseVel;
+}
+
+unsigned int FreeFloatingVel::getNrOfDOFs() const
+{
+    return this->m_jointVel.size();
+}
+
+IRawVector& FreeFloatingVel::jointVel()
+{
+    return this->m_jointVel;
+}
+
+const IRawVector& FreeFloatingVel::jointVel() const
+{
+    return this->m_jointVel;
+}
+
+void FreeFloatingVel::resize(const Model& model)
+{
+    this->m_jointVel.resize(model.getNrOfDOFs());
+}
+
+FreeFloatingVel::~FreeFloatingVel()
+{
+
+}
+
 FreeFloatingAcc::FreeFloatingAcc(const Model& model)
 {
     resize(model);
@@ -91,132 +132,6 @@ void FreeFloatingAcc::resize(const Model& model)
 }
 
 FreeFloatingAcc::~FreeFloatingAcc()
-{
-
-}
-
-FreeFloatingPosVel::FreeFloatingPosVel(const Model& model)
-{
-    resize(model);
-}
-
-LinkPosVel& FreeFloatingPosVel::basePosVel()
-{
-    return this->m_basePosVel;
-}
-
-const LinkPosVel& FreeFloatingPosVel::basePosVel() const
-{
-    return this->m_basePosVel;
-}
-
-unsigned int FreeFloatingPosVel::getNrOfDOFs() const
-{
-    return this->m_jointVel.size();
-}
-
-unsigned int FreeFloatingPosVel::getNrOfPosCoords() const
-{
-    return this->m_jointPos.size();
-}
-
-void FreeFloatingPosVel::resize(const Model& model)
-{
-    this->m_jointPos.resize(model.getNrOfPosCoords());
-    this->m_jointVel.resize(model.getNrOfPosCoords());
-}
-
-const IRawVector& FreeFloatingPosVel::jointPos() const
-{
-    return this->m_jointPos;
-}
-
-IRawVector& FreeFloatingPosVel::jointPos()
-{
-    return this->m_jointPos;
-}
-
-const IRawVector& FreeFloatingPosVel::jointVel() const
-{
-    return this->m_jointVel;
-}
-
-IRawVector& FreeFloatingPosVel::jointVel()
-{
-    return this->m_jointVel;
-}
-
-FreeFloatingPosVel::~FreeFloatingPosVel()
-{
-
-}
-
-
-FreeFloatingPosVelAcc::FreeFloatingPosVelAcc(const Model& model)
-{
-    resize(model);
-}
-
-LinkPosVelAcc& FreeFloatingPosVelAcc::basePosVelAcc()
-{
-    return this->m_basePosVelAcc;
-}
-
-
-const LinkPosVelAcc& FreeFloatingPosVelAcc::basePosVelAcc() const
-{
-    return this->m_basePosVelAcc;
-}
-
-IRawVector& FreeFloatingPosVelAcc::jointPos()
-{
-    return this->m_jointPos;
-}
-
-const IRawVector& FreeFloatingPosVelAcc::jointPos() const
-{
-    return this->m_jointPos;
-}
-
-IRawVector& FreeFloatingPosVelAcc::jointVel()
-{
-    return this->m_jointVel;
-}
-
-const IRawVector& FreeFloatingPosVelAcc::jointVel() const
-{
-    return this->m_jointVel;
-}
-
-IRawVector& FreeFloatingPosVelAcc::jointAcc()
-{
-    return this->m_jointAcc;
-}
-
-const IRawVector& FreeFloatingPosVelAcc::jointAcc() const
-{
-    return this->m_jointAcc;
-}
-
-
-void FreeFloatingPosVelAcc::resize(const Model& model)
-{
-    this->m_jointPos.resize(model.getNrOfPosCoords());
-    this->m_jointVel.resize(model.getNrOfDOFs());
-    this->m_jointAcc.resize(model.getNrOfDOFs());
-}
-
-unsigned int FreeFloatingPosVelAcc::getNrOfPosCoords() const
-{
-    return this->m_jointPos.size();
-}
-
-unsigned int FreeFloatingPosVelAcc::getNrOfDOFs() const
-{
-    return this->m_jointVel.size();
-}
-
-FreeFloatingPosVelAcc::~FreeFloatingPosVelAcc()
 {
 
 }

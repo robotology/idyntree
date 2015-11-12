@@ -12,8 +12,9 @@
 
 namespace iDynTree
 {
-    class LinkPosVelAcc;
-    class LinkVelAcc;
+    class LinkPositions;
+    class LinkVelArray;
+    class LinkAccArray;
     class Transform;
     class Wrench;
     class Twist;
@@ -118,25 +119,25 @@ namespace iDynTree
 
 
         /**
-         * Get the transform between the linkB and the linkA at joint position 0
+         * Get the transform between the link parent and the link child at joint position 0
          * (or at the identity configuration element for complex joints).
          * Such that:
-         * p_linkA = linkA_H_linkB*p_linkB
-         * where p_linkA is a quantity expressed in the linkA frame,
-         * and   p_linkB is a quantity expressed in the linkB frame.
+         * p_child = child_H_parent*p_parent
+         * where p_child is a quantity expressed in the child frame,
+         * and   p_parent is a quantity expressed in the child frame.
          */
-        virtual Transform getRestTransform(const LinkIndex p_linkA,
-                                           const LinkIndex p_linkB) const = 0;
+        virtual Transform getRestTransform(const LinkIndex child,
+                                           const LinkIndex parent) const = 0;
 
         /**
-         * Get the transform between the linkB and the linkA, such that:
-         * p_linkA = linkA_H_linkB*p_linkB,
-         * where p_linkA is a quantity expressed in the linkA frame,
-         * and   p_linkB is a quantity expressed in the linkB frame.
+         * Get the transform between the parent and the child, such that:
+         * p_child = child_H_parent*p_parent,
+         * where p_child is a quantity expressed in the child frame,
+         * and   p_parent is a quantity expressed in the parent frame.
          */
         virtual Transform getTransform(const IRawVector & jntPos,
-                                       const LinkIndex p_linkA,
-                                       const LinkIndex p_linkB) const = 0;
+                                       const LinkIndex child,
+                                       const LinkIndex parent) const = 0;
 
         /**
          * Get the motion subspace vector corresponding to the i-th
@@ -147,7 +148,7 @@ namespace iDynTree
          *
          * In particular the motion subspace vector of the i-th dof is the S
          * vector  such that
-         * v_linkA = S_{linkA,linkB}*dq_i + linkA_X_linkB*v_linkB
+         * v_child = S_{child,parent}*dq_i + child_X_parent*v_parent
          * if the velocities associated to all other DOFs of the joint
          * are considered zero.
          *
@@ -159,34 +160,38 @@ namespace iDynTree
          *       hinge  map matrix, joint map matrix  or joint  motion map matrix.
          */
         virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,
-                                                            const LinkIndex p_linkA,
-                                                            const LinkIndex p_linkB) const = 0;
+                                                            const LinkIndex child,
+                                                            const LinkIndex parent) const = 0;
 
         /**
-         * Compute the position, velocity and acceleration of linkA,
-         * given the position, velocty and acceleration of linkB and
+         * Compute the position, velocity and acceleration of link child,
+         * given the position, velocty and acceleration of link parent and
          * the joint position, velocity and acceleration.
          *
-         * @return the linkA position, twist and spatial acceleration.
+         * The position, velocity and acceleration of link child
+         * are directly saved in the linkPositions, linkVels and linkAccs arguments.
+         *
          */
-        virtual LinkPosVelAcc computeLinkPosVelAcc(const IRawVector & jntPos,
-                                                   const IRawVector & jntVel,
-                                                   const IRawVector & jntAcc,
-                                                   const LinkPosVelAcc & linkBstate,
-                                                   const LinkIndex linkA, const LinkIndex linkB) const = 0;
+        virtual void computeChildPosVelAcc(const IRawVector & jntPos,
+                                           const IRawVector & jntVel,
+                                           const IRawVector & jntAcc,
+                                           LinkPositions & linkPositions,
+                                           LinkVelArray & linkVels,
+                                           LinkAccArray & linkAccs,
+                                           const LinkIndex child, const LinkIndex parent) const = 0;
 
         /**
          * Compute the velocity and acceleration of linkA,
          * given the velocty and acceleration of linkB and
          * the joint position, velocity and acceleration.
          *
-         * @return the linkA position, twist and spatial acceleration.
          */
-        virtual LinkVelAcc computeLinkVelAcc(const IRawVector & jntPos,
-                                             const IRawVector & jntVel,
-                                             const IRawVector & jntAcc,
-                                             const LinkVelAcc & linkBstate,
-                                             const LinkIndex linkA, const LinkIndex linkB) const = 0;
+        virtual void computeChildVelAcc(const IRawVector & jntPos,
+                                        const IRawVector & jntVel,
+                                        const IRawVector & jntAcc,
+                                        LinkVelArray & linkVels,
+                                        LinkAccArray & linkAccs,
+                                        const LinkIndex child, const LinkIndex parent) const = 0;
 
         /**
          * Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies

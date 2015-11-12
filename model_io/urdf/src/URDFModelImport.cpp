@@ -567,8 +567,8 @@ bool hasFakeBaseLink(const Model& modelWithFakeLinks)
     }
 
     // Fourth condition: the transform between the base link and its child is the identity
-    FixedJoint * pFixedJoint = (FixedJoint *) modelWithFakeLinks.getJoint(neigh.neighborJoint);
-    Transform base_T_child = pFixedJoint->getTransform(baseLink,neigh.neighborLink);
+    IJointConstPtr pFixedJoint = modelWithFakeLinks.getJoint(neigh.neighborJoint);
+    Transform base_T_child = pFixedJoint->getRestTransform(baseLink,neigh.neighborLink);
 
     if( !isIdentity(base_T_child) )
     {
@@ -683,7 +683,7 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
  */
 void cleanupFixedJoints(std::vector<IJointPtr> & fixedJoints)
 {
-    for(int i=0; i < fixedJoints.size(); i++)
+    for(size_t i=0; i < fixedJoints.size(); i++)
     {
         if( fixedJoints[i] )
         {
@@ -785,7 +785,7 @@ bool modelFromURDFString(const std::string& urdf_string,
     }
 
     // Adding all the fixed joint in the end
-    for(int i=0; i < fixedJoints.size(); i++)
+    for(size_t i=0; i < fixedJoints.size(); i++)
     {
         assert( fixedJoints.size() == fixedJointNames.size() );
         JointIndex newJointIndex = rawModel.addJoint(fixedJointNames[i],fixedJoints[i]);

@@ -137,7 +137,7 @@ int main()
     SetToZero(q);
 
     srand(time(0));
-    for(int i=0; i < q.rows(); i++ )
+    for(unsigned int i=0; i < q.rows(); i++ )
     {
         q(i) = random_double();
     }

@@ -35,14 +35,14 @@ bool ForwardPositionKinematics(const Model& model,
             // If the visited link is the base, the base has no parent.
             // In this case the position of the base with respect to the world is simply
             // the worldBase transform contained in the jointPos input object
-            linkPositions.linkPos(visitedLink->getIndex()).pos() = jointPositions.worldBasePos();
+            linkPositions(visitedLink->getIndex()) = jointPositions.worldBasePos();
         }
         else
         {
             // Otherwise we compute the world_H_link transform as:
             // world_H_link = world_H_parentLink * parentLink_H_link
-            linkPositions.linkPos(visitedLink->getIndex()).pos() =
-                linkPositions.linkPos(parentLink->getIndex()).pos()*
+            linkPositions(visitedLink->getIndex()) =
+                linkPositions(parentLink->getIndex())*
                     toParentJoint->getTransform(jointPositions.jointPos(),parentLink->getIndex(),visitedLink->getIndex());
         }
     }
@@ -51,7 +51,12 @@ bool ForwardPositionKinematics(const Model& model,
 }
 
 bool ForwardPosVelAccKinematics(const Model& model, const Traversal& traversal,
-                                const FreeFloatingPosVelAcc& jointPosVelAcc, LinkPosVelAccArray& linkOuput)
+                                const FreeFloatingPos& robotPos,
+                                const FreeFloatingVel& robotVel,
+                                const FreeFloatingAcc& robotAcc,
+                                LinkPositions& linkPos,
+                                LinkVelArray & linkVel,
+                                LinkAccArray & linkAcc)
 {
     bool retValue = true;
 
@@ -66,18 +71,22 @@ bool ForwardPosVelAccKinematics(const Model& model, const Traversal& traversal,
             // If the visited link is the base, the base has no parent.
             // In this case the position of the base with respect to the world is simply
             // the worldBase transform contained in the jointPos input object
-            linkOuput.linkPosVelAcc(visitedLink->getIndex()) = jointPosVelAcc.basePosVelAcc();
+            linkPos(visitedLink->getIndex()) = robotPos.worldBasePos();
+            linkVel(visitedLink->getIndex()) = robotVel.baseVel();
+            linkAcc(visitedLink->getIndex()) = robotAcc.baseAcc();
         }
         else
         {
             // Otherwise we compute the world_H_link transform as:
             // world_H_link = world_H_parentLink * parentLink_H_link
-            linkOuput.linkPosVelAcc(visitedLink->getIndex()) =
-                toParentJoint->computeLinkPosVelAcc(jointPosVelAcc.jointPos(),
-                                                    jointPosVelAcc.jointVel(),
-                                                    jointPosVelAcc.jointAcc(),
-                                                    linkOuput.linkPosVelAcc(parentLink->getIndex()),
-                                                    visitedLink->getIndex(),parentLink->getIndex());
+            // The link velocity and acceleration are recursivly
+            // compute from the joint position, velocity and acceleration
+            // and from the velocity and acceleration of the parent link
+            toParentJoint->computeChildPosVelAcc(robotPos.jointPos(),
+                                                 robotVel.jointVel(),
+                                                 robotAcc.jointAcc(),
+                                                 linkPos, linkVel, linkAcc,
+                                                 visitedLink->getIndex(),parentLink->getIndex());
         }
     }
 
@@ -86,7 +95,11 @@ bool ForwardPosVelAccKinematics(const Model& model, const Traversal& traversal,
 }
 
 bool ForwardVelAccKinematics(const Model& model, const Traversal& traversal,
-                             const FreeFloatingPosVelAcc& jointPosVelAcc, LinkVelAccArray& linkOuput)
+                                 const iDynTree::FreeFloatingPos & robotPos,
+                                 const iDynTree::FreeFloatingVel & robotVel,
+                                 const iDynTree::FreeFloatingAcc & robotAcc,
+                                       iDynTree::LinkVelArray & linkVel,
+                                       iDynTree::LinkAccArray & linkAcc)
 {
     bool retValue = true;
 
@@ -101,19 +114,17 @@ bool ForwardVelAccKinematics(const Model& model, const Traversal& traversal,
             // If the visited link is the base, the base has no parent.
             // In this case the position of the base with respect to the world is simply
             // the worldBase transform contained in the jointPos input object
-            linkOuput.linkVelAcc(visitedLink->getIndex()).vel() = jointPosVelAcc.basePosVelAcc().vel();
-            linkOuput.linkVelAcc(visitedLink->getIndex()).acc() = jointPosVelAcc.basePosVelAcc().acc();
+            linkVel(visitedLink->getIndex()) = robotVel.baseVel();
+            linkAcc(visitedLink->getIndex()) = robotAcc.baseAcc();
         }
         else
         {
-            // Otherwise we compute the world_H_link transform as:
-            // world_H_link = world_H_parentLink * parentLink_H_link
-            linkOuput.linkVelAcc(visitedLink->getIndex()) =
-                toParentJoint->computeLinkVelAcc(jointPosVelAcc.jointPos(),
-                                                 jointPosVelAcc.jointVel(),
-                                                 jointPosVelAcc.jointAcc(),
-                                                 linkOuput.linkVelAcc(parentLink->getIndex()),
-                                                 visitedLink->getIndex(),parentLink->getIndex());
+            // Otherwise we compute the child velocity and acceleration from parent
+            toParentJoint->computeChildVelAcc(robotPos.jointPos(),
+                                              robotVel.jointVel(),
+                                              robotAcc.jointAcc(),
+                                              linkVel, linkAcc,
+                                              visitedLink->getIndex(),parentLink->getIndex());
         }
 
     }

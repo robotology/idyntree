@@ -27,8 +27,9 @@ namespace iDynTree
 {
 
 bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
-                      const FreeFloatingPosVelAcc& jointPosVelAcc,
-                      const LinkVelAccArray& linksVelAccs,
+                      const FreeFloatingPos& robotPos,
+                      const LinkVelArray& linksVels,
+                      const LinkAccArray& linksAccs,
                       const LinkExternalWrenches& fext,
                       LinkInternalWrenches& f,
                       FreeFloatingGeneralizedTorques& baseWrenchJntTorques)
@@ -49,8 +50,8 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
         // are expressed in the link reference frame (both orientation
         // and point).
         const iDynTree::SpatialInertia & I = visitedLink->getInertia();
-        const iDynTree::SpatialAcc     & a = linksVelAccs.linkVelAcc(visitedLinkIndex).acc();
-        const iDynTree::Twist          & v = linksVelAccs.linkVelAcc(visitedLinkIndex).vel();
+        const iDynTree::SpatialAcc     & a = linksAccs(visitedLinkIndex);
+        const iDynTree::Twist          & v = linksVels(visitedLinkIndex);
         f(visitedLinkIndex) = I*a + v*(I*v) - fext(visitedLinkIndex);
 
         // Iterate on childs of visitedLink
@@ -66,7 +67,7 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
              {
                  LinkIndex childIndex = neighborIndex;
                  IJointConstPtr neighborJoint = model.getJoint(model.getNeighbor(visitedLinkIndex,neigh_i).neighborJoint);
-                 Transform visitedLink_X_child = neighborJoint->getTransform(jointPosVelAcc.jointPos(),visitedLinkIndex,childIndex);
+                 Transform visitedLink_X_child = neighborJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,childIndex);
 
                  // One term of the sum in Equation 5.20 in Featherstone 2008
                  f(visitedLinkIndex) = f(visitedLinkIndex) + visitedLink_X_child*f(childIndex);
@@ -91,7 +92,7 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
             // at this point we can compute the torque of the joint connecting this link and its parent
             // This is Equation 5.13 in Featherstone 2008. It is offloaded to the joint to be
             // able to deal with different kind of joints.
-            toParentJoint->computeJointTorque(jointPosVelAcc.jointPos(),
+            toParentJoint->computeJointTorque(robotPos.jointPos(),
                                               f(visitedLinkIndex),
                                               parentLink->getIndex(),
                                               visitedLinkIndex,
@@ -233,7 +234,8 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
 
 bool ArticulatedBodyAlgorithm(const Model& model,
                               const Traversal& traversal,
-                              const FreeFloatingPosVel& robotPosVel,
+                              const FreeFloatingPos& robotPos,
+                              const FreeFloatingVel& robotVel,
                               const LinkExternalWrenches & linkExtWrenches,
                               const JointDoubleArray & jointTorques,
                                     DOFSpatialMotionArray & S,
@@ -263,8 +265,8 @@ bool ArticulatedBodyAlgorithm(const Model& model,
         // If the visitedLink is the base one, initialize the velocity with the input velocity
         if( parentLink == 0 )
         {
-            assert(visitedLinkIndex >= 0 && visitedLinkIndex < model.getNrOfLinks());
-            linksVel(visitedLinkIndex) = robotPosVel.basePosVel().vel();
+            assert(visitedLinkIndex >= 0 && visitedLinkIndex < (LinkIndex)model.getNrOfLinks());
+            linksVel(visitedLinkIndex) = robotVel.baseVel();
             linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
         }
         else
@@ -274,7 +276,7 @@ bool ArticulatedBodyAlgorithm(const Model& model,
             if( toParentJoint->getNrOfDOFs() == 0 )
             {
                 linksVel(visitedLinkIndex) =
-                    toParentJoint->getTransform(robotPosVel.jointPos(),visitedLinkIndex,parentLink->getIndex())*linksVel(parentLinkIndex);
+                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLink->getIndex())*linksVel(parentLinkIndex);
                 linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
             }
             else
@@ -282,10 +284,10 @@ bool ArticulatedBodyAlgorithm(const Model& model,
                 size_t dofIndex = toParentJoint->getDOFsOffset();
                 S(dofIndex) = toParentJoint->getMotionSubspaceVector(0,visitedLinkIndex,parentLinkIndex);
                 Twist vj;
-                toEigen(vj.getLinearVec3()) = robotPosVel.jointVel()(dofIndex)*toEigen(S(dofIndex).getLinearVec3());
-                toEigen(vj.getAngularVec3()) = robotPosVel.jointVel()(dofIndex)*toEigen(S(dofIndex).getAngularVec3());
+                toEigen(vj.getLinearVec3()) = robotVel.jointVel()(dofIndex)*toEigen(S(dofIndex).getLinearVec3());
+                toEigen(vj.getAngularVec3()) = robotVel.jointVel()(dofIndex)*toEigen(S(dofIndex).getAngularVec3());
                 linksVel(visitedLinkIndex) =
-                    toParentJoint->getTransform(robotPosVel.jointPos(),visitedLinkIndex,parentLinkIndex)*linksVel(parentLinkIndex)
+                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*linksVel(parentLinkIndex)
                     + vj;
                 linksBiasAcceleration(visitedLinkIndex) = linksVel(visitedLinkIndex)*vj;
 
@@ -351,7 +353,7 @@ bool ArticulatedBodyAlgorithm(const Model& model,
 
             // Propagate
             LinkIndex parentLinkIndex = parentLink->getIndex();
-            Transform parent_X_visited = toParentJoint->getTransform(robotPosVel.jointPos(),parentLinkIndex,visitedLinkIndex);
+            Transform parent_X_visited = toParentJoint->getTransform(robotPos.jointPos(),parentLinkIndex,visitedLinkIndex);
             linkABIs(parentLinkIndex)        += parent_X_visited*Ia;
             linksBiasWrench(parentLinkIndex) = linksBiasWrench(parentLinkIndex) + parent_X_visited*pa;
         }
@@ -384,7 +386,7 @@ bool ArticulatedBodyAlgorithm(const Model& model,
                size_t dofIndex = toParentJoint->getDOFsOffset();
                assert(toParentJoint->getNrOfDOFs()==1);
                linksAccelerations(visitedLinkIndex) =
-                   toParentJoint->getTransform(robotPosVel.jointPos(),visitedLinkIndex,parentLinkIndex)*linksAccelerations(parentLinkIndex)
+                   toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*linksAccelerations(parentLinkIndex)
                    + linksBiasAcceleration(visitedLinkIndex);
                robotAcc.jointAcc()(dofIndex) = (u(dofIndex)-U(dofIndex).dot(linksAccelerations(visitedLinkIndex)))/D(dofIndex);
                linksAccelerations(visitedLinkIndex) = linksAccelerations(visitedLinkIndex) + S(dofIndex)*robotAcc.jointAcc()(dofIndex);
@@ -393,7 +395,7 @@ bool ArticulatedBodyAlgorithm(const Model& model,
            {
                //for fixed joints we just propagate the acceleration
                linksAccelerations(visitedLinkIndex) =
-                   toParentJoint->getTransform(robotPosVel.jointPos(),visitedLinkIndex,parentLinkIndex)*linksAccelerations(parentLinkIndex)
+                   toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*linksAccelerations(parentLinkIndex)
                    + linksBiasAcceleration(visitedLinkIndex);
            }
        }

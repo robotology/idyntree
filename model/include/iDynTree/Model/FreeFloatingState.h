@@ -82,151 +82,6 @@ namespace iDynTree
         virtual ~FreeFloatingPos();
     };
 
-     /**
-     * Class representing the position, velocity and accelerations
-     * of a Free Floating robot.
-     *
-     * The position of a free floating robot is represented by the
-     * transform of a base frame with respect to an inertial frame,
-     * and a vector of joint positions.
-     *
-     */
-    class FreeFloatingPosVelAcc
-    {
-    private:
-        LinkPosVelAcc m_basePosVelAcc;
-
-        VectorDynSize m_jointPos;
-        VectorDynSize m_jointVel;
-        VectorDynSize m_jointAcc;
-
-    public:
-        // Documentation inherited
-       FreeFloatingPosVelAcc(const iDynTree::Model& model);
-
-       /**
-        * Resize the class to match the dimension of the joints contained in a Model.
-        *
-        * @param model the model from which to get the number and dimension of the joints.
-        *
-        * @warning This method wipes the joint positions if number and dimension of the joints
-        *          of the model passed are different from the one already stored.
-        *
-        */
-       void resize(const iDynTree::Model& model);
-
-       /**
-        * Get the base position, velocity and accelerations.
-        */
-       LinkPosVelAcc & basePosVelAcc();
-
-       /**
-        * Get the joint position vector.
-        */
-       IRawVector & jointPos();
-
-       /**
-        * Get the joint velocities vector.
-        */
-       IRawVector & jointVel();
-
-       /**
-        * Get the joint accelerations vector.
-        */
-       IRawVector & jointAcc();
-
-       /**
-        * Get the base position (const version).
-        */
-       const LinkPosVelAcc & basePosVelAcc() const;
-
-       /**
-        * Get the joint positions vector (const version).
-        */
-       const IRawVector & jointPos() const;
-
-       /**
-        * Get the joint velocities vector (const version).
-        */
-       const IRawVector & jointVel() const;
-
-       /**
-        * Get the joint accelerations vector (const version).
-        */
-       const IRawVector & jointAcc() const;
-
-       unsigned int getNrOfPosCoords() const;
-       unsigned int getNrOfDOFs() const;
-
-        /**
-          * Destructor
-          */
-        virtual ~FreeFloatingPosVelAcc();
-    };
-
-    class FreeFloatingPosVel
-    {
-    private:
-        LinkPosVel m_basePosVel;
-
-        VectorDynSize m_jointPos;
-        VectorDynSize m_jointVel;
-
-    public:
-        // Documentation inherited
-       FreeFloatingPosVel(const iDynTree::Model& model);
-
-       /**
-        * Resize the class to match the dimension of the joints contained in a Model.
-        *
-        * @param model the model from which to get the number and dimension of the joints.
-        *
-        * @warning This method wipes the joint positions if number and dimension of the joints
-        *          of the model passed are different from the one already stored.
-        *
-        */
-       void resize(const iDynTree::Model& model);
-
-       /**
-        * Get the base position and velocity.
-        */
-       LinkPosVel & basePosVel();
-
-       /**
-        * Get the joint position vector.
-        */
-       IRawVector & jointPos();
-
-       /**
-        * Get the joint velocities vector.
-        */
-       IRawVector & jointVel();
-
-       /**
-        * Get the base position and velocity (const version).
-        */
-       const LinkPosVel & basePosVel() const;
-
-       /**
-        * Get the joint positions vector (const version).
-        */
-       const IRawVector & jointPos() const;
-
-       /**
-        * Get the joint velocities vector (const version).
-        */
-       const IRawVector & jointVel() const;
-
-
-       unsigned int getNrOfPosCoords() const;
-       unsigned int getNrOfDOFs() const;
-
-        /**
-          * Destructor
-          */
-        virtual ~FreeFloatingPosVel();
-    };
-
 
     class FreeFloatingGeneralizedTorques
     {
@@ -275,6 +130,59 @@ namespace iDynTree
           * Destructor
           */
         virtual ~FreeFloatingGeneralizedTorques();
+    };
+
+
+    class FreeFloatingVel
+    {
+    private:
+        Twist m_baseVel;
+        VectorDynSize m_jointVel;
+
+    public:
+        // Documentation inherited
+       FreeFloatingVel(const iDynTree::Model& model);
+
+       /**
+        * Resize the class to match the number of internal DOFs contained in a Model.
+        *
+        * @param model the model from which to get the number and dimension of the joints.
+        *
+        * @warning This method wipes the joint velocities if number and dimension of the joints
+        *          of the model passed are different from the one already stored.
+        *
+        */
+       void resize(const iDynTree::Model& model);
+
+       /**
+        * Get the base acceleration.
+        */
+       Twist & baseVel();
+
+       /**
+        * Get the vector of joint accelerations.
+        */
+       IRawVector & jointVel();
+
+       /**
+        * Get the base acceleration (const version).
+        */
+       const Twist & baseVel() const;
+
+       /**
+        * Get the vector of joint accelerations (const version).
+        */
+       const IRawVector & jointVel() const;
+
+       /**
+        * Get the dimension of the joint accelerations vector.
+        */
+       unsigned int getNrOfDOFs() const;
+
+        /**
+          * Destructor
+          */
+        virtual ~FreeFloatingVel();
     };
 
     /**

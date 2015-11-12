@@ -128,7 +128,7 @@ Model getRandomModel(unsigned int nrOfJoints)
 
 void checkNeighborSanity(const Model & model, bool verbose)
 {
-    for(int link =0; link < model.getNrOfLinks(); link++ )
+    for(size_t link =0; link < model.getNrOfLinks(); link++ )
     {
         if( verbose )
         {

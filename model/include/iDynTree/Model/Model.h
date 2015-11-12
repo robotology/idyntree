@@ -14,6 +14,7 @@
 
 #include <iDynTree/Model/Indeces.h>
 
+#include <cstdlib>
 #include <vector>
 
 namespace iDynTree
@@ -176,7 +177,7 @@ namespace iDynTree
         /**
          * Get the number of links in the model.
          */
-        int getNrOfLinks() const;
+        size_t getNrOfLinks() const;
 
         /**
          * Get the name of a link given its index, or
@@ -194,7 +195,7 @@ namespace iDynTree
         /**
          * Get number of joints in the model.
          */
-        int getNrOfJoints() const;
+        size_t getNrOfJoints() const;
 
         /**
          * Get the name of a link given its index, or
@@ -227,7 +228,7 @@ namespace iDynTree
          *
          * \warning This is *not* including the 6 degrees of freedom of the base.
          */
-        unsigned int getNrOfPosCoords() const;
+        size_t getNrOfPosCoords() const;
 
         /**
          * Get the number of degrees of freedom of the joint of the robot.
@@ -235,7 +236,7 @@ namespace iDynTree
          *
          * \warning This is *not* including the 6 degrees of freedom of the base.
          */
-        unsigned int getNrOfDOFs() const;
+        size_t getNrOfDOFs() const;
 
         /**
          * Get the number of frames in the model.

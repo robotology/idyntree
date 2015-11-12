@@ -17,8 +17,8 @@ namespace iDynTree
     class Model;
     class Traversal;
     class FreeFloatingPos;
-    class FreeFloatingPosVel;
-    class FreeFloatingPosVelAcc;
+    class FreeFloatingVel;
+    class FreeFloatingAcc;
     class FreeFloatingAcc;
     class FreeFloatingGeneralizedTorques;
     class FreeFloatingMassMatrix;
@@ -28,8 +28,9 @@ namespace iDynTree
 
     bool RNEADynamicPhase(const iDynTree::Model & model,
                           const iDynTree::Traversal & traversal,
-                          const iDynTree::FreeFloatingPosVelAcc & jointPosVelAcc,
-                          const iDynTree::LinkVelAccArray & linksVelAccs,
+                          const iDynTree::FreeFloatingPos & robotPos,
+                          const iDynTree::LinkVelArray & linksVel,
+                          const iDynTree::LinkAccArray & linksAcc,
                           const iDynTree::LinkExternalWrenches & linkExtForces,
                           iDynTree::LinkInternalWrenches       & linkIntWrenches,
                           iDynTree::FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
@@ -54,7 +55,8 @@ namespace iDynTree
      */
     bool ArticulatedBodyAlgorithm(const Model& model,
                                   const Traversal& traversal,
-                                  const FreeFloatingPosVel& robotPosVel,
+                                  const FreeFloatingPos& robotPos,
+                                  const FreeFloatingVel& robotVel,
                                   const LinkExternalWrenches & linkExtWrenches,
                                   const JointDoubleArray & jointTorques,
                                         DOFSpatialMotionArray & S,

@@ -9,7 +9,6 @@
 #include <iDynTree/Core/Utils.h>
 
 #include <iDynTree/Model/FixedJoint.h>
-#include <iDynTree/Model/IJointStateInterfaces.h>
 #include <iDynTree/Model/LinkState.h>
 
 #include <cassert>
@@ -73,32 +72,28 @@ LinkIndex FixedJoint::getSecondAttachedLink() const
     return link2;
 }
 
-Transform FixedJoint::getRestTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const
+Transform FixedJoint::getRestTransform(const LinkIndex child, const LinkIndex parent) const
 {
-    return getTransform(p_linkA,p_linkB);
-}
-
-Transform FixedJoint::getTransform(const IRawVector & jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
-{
-    return getTransform(p_linkA,p_linkB);
-}
-
-Transform FixedJoint::getTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const
-{
-    if( p_linkA == this->link1 )
+    if( child == this->link1 )
     {
         iDynTreeAssert(p_linkB == this->link2);
         return this->link1_X_link2;
     }
     else
     {
-        iDynTreeAssert(p_linkA == this->link2);
-        iDynTreeAssert(p_linkB == this->link1);
+        iDynTreeAssert(child == this->link2);
+        iDynTreeAssert(parent == this->link1);
         return this->link1_X_link2.inverse();
     }
 }
 
-SpatialMotionVector FixedJoint::getMotionSubspaceVector(int dof_i, const LinkIndex p_linkA, const LinkIndex p_linkB) const
+Transform FixedJoint::getTransform(const IRawVector & jntPos, const LinkIndex child, const LinkIndex parent) const
+{
+    return getRestTransform(child,parent);
+}
+
+
+SpatialMotionVector FixedJoint::getMotionSubspaceVector(int dof_i, const LinkIndex child, const LinkIndex parent) const
 {
     return SpatialMotionVector::Zero();
 }
@@ -111,43 +106,45 @@ void FixedJoint::computeJointTorque(const IRawVector & jntPos, const Wrench& int
     return;
 }
 
-LinkPosVelAcc FixedJoint::computeLinkPosVelAcc(const IRawVector & jntPos,
-                                               const IRawVector & jntVel,
-                                               const IRawVector & jntAcc,
-                                               const LinkPosVelAcc& linkBstate,
-                                               const LinkIndex linkA, const LinkIndex linkB) const
+void FixedJoint::computeChildPosVelAcc(const IRawVector & jntPos,
+                                       const IRawVector & jntVel,
+                                       const IRawVector & jntAcc,
+                                           LinkPositions & linkPositions,
+                                           LinkVelArray & linkVels,
+                                           LinkAccArray & linkAccs,
+                                           const LinkIndex child,
+                                           const LinkIndex parent) const
 {
-    LinkPosVelAcc linkAstate;
-    Transform a_X_b = this->getTransform(jntPos,linkA,linkB);
-    Transform b_X_a = this->getTransform(jntPos,linkB,linkA);
+    Transform child_X_parent = this->getTransform(jntPos,child,parent);
+    Transform parent_X_child = this->getTransform(jntPos,parent,child);
 
     // Propagate position : position of the frame is expressed as
     // transform between the link frame and a reference frame :
-    // ref_T_a  = ref_T_b*b_
-    linkAstate.pos() = linkBstate.pos()*b_X_a;
+    // ref_H_child  = ref_H_parent*parent_H_child
+    linkPositions(child) = linkPositions(parent)*parent_X_child;
 
     // Propagate twist and spatial acceleration: for a fixed joint the twist of two attached links is the same,
     // expect that they are usually expressed in different frames
-    linkAstate.vel() = a_X_b*linkBstate.vel();
-    linkAstate.acc() = a_X_b*linkBstate.acc();
+    linkVels(child) = child_X_parent*linkVels(parent);
+    linkAccs(child) = child_X_parent*linkAccs(parent);
 
-    return linkAstate;
+    return;
 }
 
-LinkVelAcc FixedJoint::computeLinkVelAcc(const IRawVector & jntPos,
-                                         const IRawVector & jntVel,
-                                         const IRawVector & jntAcc,
-                                         const LinkVelAcc& linkBstate,
-                                         const LinkIndex linkA, const LinkIndex linkB) const
+void FixedJoint::computeChildVelAcc(const IRawVector & jntPos,
+                                       const IRawVector & jntVel,
+                                       const IRawVector & jntAcc,
+                                       LinkVelArray & linkVels,
+                                       LinkAccArray & linkAccs,
+                                       const LinkIndex child, const LinkIndex parent) const
 {
-    LinkVelAcc linkAstate;
-    Transform a_X_b = this->getTransform(jntPos,linkA,linkB);
+    Transform child_X_parent = this->getTransform(jntPos,child,parent);
     // Propagate twist: for a fixed joint the twist of two attached links is the same,
     // expect that they are usually expressed in different frames
-    linkAstate.vel() = a_X_b*linkBstate.vel();
-    linkAstate.acc() = a_X_b*linkBstate.acc();
+    linkVels(child) = child_X_parent*linkVels(parent);
+    linkAccs(child) = child_X_parent*linkAccs(parent);
 
-    return linkAstate;
+    return;
 }
 
 void FixedJoint::setIndex(JointIndex& _index)

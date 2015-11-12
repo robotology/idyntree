@@ -21,87 +21,10 @@ namespace iDynTree
 {
     class Model;
 
-    class LinkPos
-    {
-    private:
-        Transform m_pos;
-
-    public:
-        // Documentation inherited
-        Transform & pos();
-
-        const Transform & pos() const;
-
-        /**
-          * Destructor
-          */
-        virtual ~LinkPos();
-    };
-
-    class LinkVelAcc
-    {
-    private:
-        Twist      m_vel;
-        SpatialAcc m_acc;
-
-    public:
-        Twist      & vel();
-        SpatialAcc & acc();
-
-        const Twist      & vel() const;
-        const SpatialAcc & acc() const;
-
-        /**
-          * Destructor
-          */
-        virtual ~LinkVelAcc();
-    };
-
-    class LinkPosVelAcc
-    {
-    private:
-        Transform  m_pos;
-        Twist      m_vel;
-        SpatialAcc m_acc;
-
-    public:
-        Transform & pos();
-        Twist     & vel();
-        SpatialAcc& acc();
-
-        const Transform & pos() const;
-        const Twist     & vel() const;
-        const SpatialAcc& acc() const;
-
-        /**
-          * Destructor
-          */
-        virtual ~LinkPosVelAcc();
-    };
-
-    class LinkPosVel
-    {
-    private:
-        Transform  m_pos;
-        Twist      m_vel;
-
-    public:
-        Transform & pos();
-        Twist     & vel();
-
-        const Transform & pos() const;
-        const Twist     & vel() const;
-
-        /**
-          * Destructor
-          */
-        virtual ~LinkPosVel();
-    };
-
     class LinkPositions
     {
     private:
-        std::vector<LinkPos> m_linkPos;
+        std::vector<iDynTree::Transform> m_linkPos;
 
     public:
         LinkPositions(unsigned int nrOfLinks = 0);
@@ -110,46 +33,10 @@ namespace iDynTree
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
 
-        LinkPos & linkPos(const LinkIndex link);
-        const LinkPos & linkPos(const LinkIndex link) const;
+        iDynTree::Transform & operator()(const LinkIndex link);
+        const iDynTree::Transform & operator()(const LinkIndex link) const;
 
         ~LinkPositions();
-    };
-
-    class LinkVelAccArray
-    {
-    private:
-        std::vector<LinkVelAcc> m_linkState;
-
-    public:
-        LinkVelAccArray(unsigned int nrOfLinks = 0);
-        LinkVelAccArray(const iDynTree::Model & model);
-
-        void resize(unsigned int nrOfLinks);
-        void resize(const iDynTree::Model & model);
-
-        LinkVelAcc & linkVelAcc(const LinkIndex link);
-        const LinkVelAcc & linkVelAcc(const LinkIndex link) const;
-
-        ~LinkVelAccArray();
-    };
-
-    class LinkPosVelAccArray
-    {
-    private:
-        std::vector<LinkPosVelAcc> m_linkState;
-
-    public:
-        LinkPosVelAccArray(unsigned int nrOfLinks = 0);
-        LinkPosVelAccArray(const iDynTree::Model & model);
-
-        void resize(unsigned int nrOfLinks);
-        void resize(const iDynTree::Model & model);
-
-        LinkPosVelAcc & linkPosVelAcc(const LinkIndex link);
-        const LinkPosVelAcc & linkPosVelAcc(const LinkIndex link) const;
-
-        ~LinkPosVelAccArray();
     };
 
     class LinkWrenches

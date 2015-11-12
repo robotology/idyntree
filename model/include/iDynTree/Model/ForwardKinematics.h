@@ -15,10 +15,11 @@ namespace iDynTree
     class Model;
     class Traversal;
     class FreeFloatingPos;
-    class FreeFloatingPosVelAcc;
+    class FreeFloatingVel;
+    class FreeFloatingAcc;
     class LinkPositions;
-    class LinkVelAccArray;
-    class LinkPosVelAccArray;
+    class LinkVelArray;
+    class LinkAccArray;
 
     /**
      * Function that computes, given a traversal
@@ -41,8 +42,11 @@ namespace iDynTree
      */
     bool ForwardVelAccKinematics(const iDynTree::Model & model,
                                  const iDynTree::Traversal & traversal,
-                                 const iDynTree::FreeFloatingPosVelAcc & jointPosVelAcc,
-                                 iDynTree::LinkVelAccArray & linkVelAcc);
+                                 const iDynTree::FreeFloatingPos & robotPos,
+                                 const iDynTree::FreeFloatingVel & robotVel,
+                                 const iDynTree::FreeFloatingAcc & robotAcc,
+                                       iDynTree::LinkVelArray & linkVel,
+                                       iDynTree::LinkAccArray  & linkAcc);
 
     /**
      * Function that compute the links velocities and accelerations
@@ -52,8 +56,12 @@ namespace iDynTree
      */
     bool ForwardPosVelAccKinematics(const iDynTree::Model & model,
                                     const iDynTree::Traversal & traversal,
-                                    const iDynTree::FreeFloatingPosVelAcc & jointPosVelAcc,
-                                    iDynTree::LinkPosVelAccArray & linkPos);
+                                    const iDynTree::FreeFloatingPos & robotPos,
+                                    const iDynTree::FreeFloatingVel & robotVel,
+                                    const iDynTree::FreeFloatingAcc & robotAcc,
+                                    iDynTree::LinkPositions & linkPos,
+                                    iDynTree::LinkVelArray & linkVel,
+                                    iDynTree::LinkAccArray  & linkAcc);
 
 }
 

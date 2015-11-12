@@ -16,7 +16,6 @@
  */
 
 #include <iDynTree/Model/IJoint.h>
-#include <iDynTree/Model/IJointStateInterfaces.h>
 
 namespace iDynTree
 {

@@ -35,17 +35,18 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
     // Allocate input for both algorithms : robot position, velocity
     // and link external wrenches
     LinkExternalWrenches linkExtWrenches(model);
-    FreeFloatingPosVel   robotPosVel(model);
+    FreeFloatingPos   robotPos(model);
+    FreeFloatingVel   robotVel(model);
 
     // Input for direct dynamics algorithms
     // and output for inverse dynamics : joint torques
     JointDoubleArray ABA_jntTorques(model);
 
     // Fill the input to forward dynamics with random data
-    robotPosVel.basePosVel().pos() = getRandomTransform();
-    robotPosVel.basePosVel().vel() = getRandomTwist();
-    getRandomVector(robotPosVel.jointPos());
-    getRandomVector(robotPosVel.jointVel());
+    robotPos.worldBasePos() = getRandomTransform();
+    robotVel.baseVel() = getRandomTwist();
+    getRandomVector(robotPos.jointPos());
+    getRandomVector(robotVel.jointVel());
     for(unsigned int link=0; link < model.getNrOfLinks(); link++ )
     {
         linkExtWrenches(link) = getRandomWrench();
@@ -72,7 +73,8 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
     // Run ABA
     ArticulatedBodyAlgorithm(model,
                              traversal,
-                             robotPosVel,
+                             robotPos,
+                             robotVel,
                              linkExtWrenches,
                              ABA_jntTorques,
                              ABA_S,
@@ -87,31 +89,25 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
                              ABA_robotAcc);
 
     // Allocate temporary data structure for RNEA
-    LinkVelAccArray RNEA_linksVelAccs(model);
+    LinkVelArray RNEA_linksVel(model);
+    LinkAccArray RNEA_linksAcc(model);
     LinkInternalWrenches RNEA_linkIntWrenches(model);
     FreeFloatingGeneralizedTorques RNEA_baseForceAndJointTorques(model);
-    FreeFloatingPosVelAcc   RNEA_robotPosVelAcc(model);
-
-    // Fill input for RNEA
-    RNEA_robotPosVelAcc.basePosVelAcc().pos() = robotPosVel.basePosVel().pos();
-    RNEA_robotPosVelAcc.basePosVelAcc().vel() = robotPosVel.basePosVel().vel();
-    RNEA_robotPosVelAcc.basePosVelAcc().acc() = ABA_robotAcc.baseAcc();
-    for(unsigned int dof=0; dof < model.getNrOfDOFs(); dof++)
-    {
-        RNEA_robotPosVelAcc.jointPos()(dof) = robotPosVel.jointPos()(dof);
-        RNEA_robotPosVelAcc.jointVel()(dof) = robotPosVel.jointVel()(dof);
-        RNEA_robotPosVelAcc.jointAcc()(dof) = ABA_robotAcc.jointAcc()(dof);
-    }
 
     // Run RNEA
     ForwardVelAccKinematics(model,
                             traversal,
-                            RNEA_robotPosVelAcc,
-                            RNEA_linksVelAccs);
+                            robotPos,
+                            robotVel,
+                            ABA_robotAcc,
+                            RNEA_linksVel,
+                            RNEA_linksAcc);
+
     RNEADynamicPhase(model,
                      traversal,
-                     RNEA_robotPosVelAcc,
-                     RNEA_linksVelAccs,
+                     robotPos,
+                     RNEA_linksVel,
+                     RNEA_linksAcc,
                      linkExtWrenches,
                      RNEA_linkIntWrenches,
                      RNEA_baseForceAndJointTorques);

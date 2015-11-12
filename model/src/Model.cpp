@@ -83,14 +83,14 @@ Model::~Model()
     destroy();
 }
 
-int Model::getNrOfLinks() const
+size_t Model::getNrOfLinks() const
 {
     return links.size();
 }
 
 LinkIndex Model::getLinkIndex(const std::string& linkName) const
 {
-    for(int i=0; i < this->getNrOfLinks(); i++ )
+    for(size_t i=0; i < this->getNrOfLinks(); i++ )
     {
         if( linkName == linkNames[i] )
         {
@@ -103,7 +103,7 @@ LinkIndex Model::getLinkIndex(const std::string& linkName) const
 
 std::string Model::getLinkName(const LinkIndex linkIndex) const
 {
-    if( linkIndex >= 0 && linkIndex < this->getNrOfLinks() )
+    if( linkIndex >= 0 && linkIndex < (LinkIndex) this->getNrOfLinks() )
     {
         return linkNames[linkIndex];
     }
@@ -123,14 +123,14 @@ const Link* Model::getLink(const LinkIndex linkIndex) const
     return &(links[linkIndex]);
 }
 
-int Model::getNrOfJoints() const
+size_t Model::getNrOfJoints() const
 {
     return joints.size();
 }
 
 JointIndex Model::getJointIndex(const std::string& jointName) const
 {
-    for(int i=0; i < this->getNrOfJoints(); i++ )
+    for(size_t i=0; i < this->getNrOfJoints(); i++ )
     {
         if( jointName == jointNames[i] )
         {
@@ -143,7 +143,7 @@ JointIndex Model::getJointIndex(const std::string& jointName) const
 
 std::string Model::getJointName(const JointIndex jointIndex) const
 {
-    if( jointIndex >= 0 && jointIndex < this->getNrOfJoints() )
+    if( jointIndex >= 0 && jointIndex < (JointIndex)this->getNrOfJoints() )
     {
         return jointNames[jointIndex];
     }
@@ -213,8 +213,8 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
     // Check that the joint is referring to links that are in the model
     LinkIndex firstLink = joint->getFirstAttachedLink();
     LinkIndex secondLink = joint->getSecondAttachedLink();
-    if( firstLink < 0 || firstLink >= this->getNrOfLinks() ||
-        secondLink < 0 || secondLink >= this->getNrOfLinks() )
+    if( firstLink < 0 || firstLink >= (LinkIndex)this->getNrOfLinks() ||
+        secondLink < 0 || secondLink >= (LinkIndex)this->getNrOfLinks() )
     {
         std::string error = "joint " + jointName + " is attached to a link that does not exist";
         reportError("Model","addJoint",error.c_str());
@@ -258,12 +258,12 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
     return thisJointIndex;
 }
 
-unsigned int Model::getNrOfPosCoords() const
+size_t Model::getNrOfPosCoords() const
 {
     return nrOfDOFs;
 }
 
-unsigned int Model::getNrOfDOFs() const
+size_t Model::getNrOfDOFs() const
 {
     return nrOfDOFs;
 }
@@ -279,11 +279,11 @@ size_t Model::getNrOfFrames() const
 
 std::string Model::getFrameName(const FrameIndex frameIndex) const
 {
-    if( frameIndex >= 0 && frameIndex < this->getNrOfLinks() )
+    if( frameIndex >= 0 && frameIndex < (FrameIndex)this->getNrOfLinks() )
     {
         return linkNames[frameIndex];
     }
-    else if( frameIndex >= this->getNrOfLinks() && frameIndex < this->getNrOfFrames() )
+    else if( frameIndex >= this->getNrOfLinks() && frameIndex < (FrameIndex)this->getNrOfFrames() )
     {
         return frameNames[frameIndex-getNrOfLinks()];
     }
