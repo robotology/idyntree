@@ -44,8 +44,8 @@ bool Traversal::reset(unsigned int nrOfVisitedLinks)
 }
 
 
-bool Traversal::setTraversalElement(unsigned int traversalIndex, Link * link,
-                                    IJoint * jointToParent, Link * parentLink)
+bool Traversal::setTraversalElement(unsigned int traversalIndex, const Link * link,
+                                    const IJoint * jointToParent, const Link * parentLink)
 {
     if( traversalIndex < 0 ||
         traversalIndex >= getNrOfVisitedLinks() )
@@ -65,17 +65,17 @@ unsigned int Traversal::getNrOfVisitedLinks() const
     return this->links.size();
 }
 
-Link* Traversal::getLink(unsigned int traversalIndex) const
+const Link* Traversal::getLink(unsigned int traversalIndex) const
 {
     return this->links[traversalIndex];
 }
 
-IJoint* Traversal::getParentJoint(unsigned int traversalIndex) const
+const IJoint* Traversal::getParentJoint(unsigned int traversalIndex) const
 {
     return this->toParentJoints[traversalIndex];
 }
 
-Link* Traversal::getParentLink(unsigned int traversalIndex) const
+const Link* Traversal::getParentLink(unsigned int traversalIndex) const
 {
     return this->parents[traversalIndex];
 }

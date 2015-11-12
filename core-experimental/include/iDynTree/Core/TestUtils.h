@@ -19,6 +19,12 @@ namespace iDynTree
     class Transform;
     class SpatialMotionVector;
     class SpatialForceVector;
+    class Axis;
+    class SpatialForceVector;
+    class SpatialMotionVector;
+    class SpatialInertia;
+    class Position;
+    class Rotation;
 
 #define ASSERT_EQUAL_STRING(val1,val2) assertStringAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_DOUBLE(val1,val2) assertDoubleAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
@@ -27,6 +33,8 @@ namespace iDynTree
 #define ASSERT_EQUAL_SPATIAL_FORCE(val1,val2) assertSpatialForceAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_MATRIX(val1,val2) assertMatrixAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_TRANSFORM(val1,val2) assertTransformsAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
+#define ASSERT_EQUAL_TRANSFORM_TOL(val1,val2,tol) assertTransformsAreEqual(val1,val2,tol,__FILE__,__LINE__)
+
 
     void assertStringAreEqual(const std::string & val1, const std::string & val2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
 
@@ -68,6 +76,45 @@ namespace iDynTree
      */
     void assertSpatialForceAreEqual(const SpatialForceVector & f1, const SpatialForceVector & f2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
 
+    /**
+     * Get a random double between min and max .
+     */
+    double getRandomDouble(double min=0.0, double max=1.0);
+
+    /**
+     * Get a random position.
+     */
+    Position getRandomPosition();
+
+    /**
+     * Get a random rotation.
+     */
+    Rotation getRandomRotation();
+
+    /**
+     * Get a random transform.
+     */
+    Transform getRandomTransform();
+
+    /**
+     * Get a random axis.
+     */
+    Axis getRandomAxis();
+
+    /**
+     * Get a random (but physically consistent) inertia.
+     */
+    SpatialInertia getRandomInertia();
+
+    /**
+     * Get a random twist-like 6D vector.
+     */
+    SpatialMotionVector getRandomTwist();
+
+    /**
+     * Get a random wrench-like 6D object.
+     */
+    SpatialForceVector getRandomWrench();
 
 }
 

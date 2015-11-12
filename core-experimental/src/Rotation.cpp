@@ -252,6 +252,18 @@ namespace iDynTree
         return changeCoordFrameOf(other);
     }
 
+    void Rotation::getRPY(double& r, double& p, double& y)
+    {
+        Eigen::Map<const Matrix3dRowMajor> dataEigen(this->data());
+
+        Eigen::Vector3d rpy = dataEigen.eulerAngles(0,1,2);
+
+        r = rpy(0);
+        p = rpy(1);
+        y = rpy(2);
+    }
+
+
     AngularMotionVector3 Rotation::log() const
     {
         AngularMotionVector3 ret;

@@ -141,6 +141,24 @@ namespace iDynTree
          */
         AngularMotionVector3 log() const;
 
+
+        /**
+         * @name Conversion to others represention of matrices.
+         *
+         */
+        ///@{
+
+         /**
+         * Get a roll, pitch and yaw corresponing to this rotation.
+         *
+         * \todo TODO Add detailed docs .
+         *
+         */
+        void getRPY(double & r, double & p, double &y);
+
+
+        ///@}
+
         /**
          * @name Initialization helpers.
          *
@@ -179,6 +197,7 @@ namespace iDynTree
         /**
          * Return a rotation object given Roll, Pitch and Yaw values.
          *
+         * @note This is equivalent to RotZ(y)*RotY(p)*RotX(r) . 
          * @note This method is compatible with the KDL::Rotation::RPY method.
          */
         static Rotation RPY(const double roll, const double pitch, const double yaw);

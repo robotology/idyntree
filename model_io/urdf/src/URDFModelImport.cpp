@@ -306,7 +306,8 @@ bool jointFromURDFXML(const Model & model,
                       IJointPtr & p_joint,
                       std::string & jointName,
                       std::string & parentLinkName,
-                      std::string & childLinkName)
+                      std::string & childLinkName,
+                      std::string & jointType)
 {
     // reset p_joint
     p_joint = 0;
@@ -382,6 +383,7 @@ bool jointFromURDFXML(const Model & model,
     }
 
     std::string type_str = type_char;
+    jointType = type_str;
     if (type_str == "planar" ||
         type_str == "floating" ||
         type_str == "prismatic" )
@@ -559,14 +561,14 @@ bool hasFakeBaseLink(const Model& modelWithFakeLinks)
 
     // Third condition: the base link is attached to its child with a fixed joint
     Neighbor neigh = modelWithFakeLinks.getNeighbor(baseLink,0);
-    if( neigh.neighborJoint->getNrOfDOFs() > 0 )
+    if( modelWithFakeLinks.getJoint(neigh.neighborJoint)->getNrOfDOFs() > 0 )
     {
         return false;
     }
 
     // Fourth condition: the transform between the base link and its child is the identity
-    FixedJoint * pFixedJoint = (FixedJoint *) neigh.neighborJoint;
-    Transform base_T_child = pFixedJoint->getTransform(baseLink,neigh.neighborLink->getIndex());
+    FixedJoint * pFixedJoint = (FixedJoint *) modelWithFakeLinks.getJoint(neigh.neighborJoint);
+    Transform base_T_child = pFixedJoint->getTransform(baseLink,neigh.neighborLink);
 
     if( !isIdentity(base_T_child) )
     {
@@ -602,9 +604,9 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
     {
         LinkIndex baseLink = modelWithFakeLinks.getDefaultBaseLink();
         linkToRemove.insert(modelWithFakeLinks.getLinkName(modelWithFakeLinks.getDefaultBaseLink()));
-        JointIndex jntIndex = modelWithFakeLinks.getNeighbor(baseLink,0).neighborJoint->getIndex();
+        JointIndex jntIndex = modelWithFakeLinks.getNeighbor(baseLink,0).neighborJoint;
         jointToRemove.insert(modelWithFakeLinks.getJointName(jntIndex));
-        LinkIndex newBaseIndex =  modelWithFakeLinks.getNeighbor(baseLink,0).neighborLink->getIndex();
+        LinkIndex newBaseIndex =  modelWithFakeLinks.getNeighbor(baseLink,0).neighborLink;
         newDefaultBaseLink = modelWithFakeLinks.getLinkName(newBaseIndex);
     }
 
@@ -645,6 +647,23 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
     return modelWithoutFakeLinks.setDefaultBaseLink(modelWithoutFakeLinks.getLinkIndex(newDefaultBaseLink));
 }
 
+/**
+ * Helper function of modelFromURDFString , used to cleanup the
+ * fixed joints temporary vector in case of error.
+ *
+ */
+void cleanupFixedJoints(std::vector<IJointPtr> & fixedJoints)
+{
+    for(int i=0; i < fixedJoints.size(); i++)
+    {
+        if( fixedJoints[i] )
+        {
+            delete fixedJoints[i];
+            fixedJoints[i] = 0;
+        }
+    }
+}
+
 bool modelFromURDFString(const std::string& urdf_string,
                                iDynTree::Model& model)
 {
@@ -683,6 +702,11 @@ bool modelFromURDFString(const std::string& urdf_string,
     // parse all joints, saving a set of parents and childs
     std::set<std::string> parents;
     std::set<std::string> childs;
+    // we parse the fixed joints separatly, so we can add them
+    // all after the joints with a non-zero dofs . This is necessary
+    // for backward compatibility with KDL-based software
+    std::vector<IJointPtr> fixedJoints;
+    std::vector<std::string> fixedJointNames;
     for (TiXmlElement* joint_xml = robotXml->FirstChildElement("joint");
          joint_xml; joint_xml = joint_xml->NextSiblingElement("joint"))
     {
@@ -690,8 +714,9 @@ bool modelFromURDFString(const std::string& urdf_string,
         std::string jointName;
         std::string parentLinkName;
         std::string childLinkName;
+        std::string jointType;
 
-        ok = ok && jointFromURDFXML(rawModel,joint_xml,joint,jointName,parentLinkName,childLinkName);
+        ok = ok && jointFromURDFXML(rawModel,joint_xml,joint,jointName,parentLinkName,childLinkName,jointType);
 
         // save parent and child in a set
         parents.insert(parentLinkName);
@@ -699,6 +724,7 @@ bool modelFromURDFString(const std::string& urdf_string,
 
         if( !ok )
         {
+            cleanupFixedJoints(fixedJoints);
             delete joint;
             model = Model();
             return false;
@@ -706,17 +732,46 @@ bool modelFromURDFString(const std::string& urdf_string,
 
         assert(joint->getFirstAttachedLink() != joint->getSecondAttachedLink());
 
-        JointIndex newJointIndex = rawModel.addJoint(jointName,joint);
-
-        delete joint;
-
-        if( newJointIndex == JOINT_INVALID_INDEX )
+        // All joints expect the fixed one are immediatly add to the model
+        if( jointType != "fixed" )
         {
-            model = Model();
-            return false;
+            JointIndex newJointIndex = rawModel.addJoint(jointName,joint);
+
+            delete joint;
+
+            if( newJointIndex == JOINT_INVALID_INDEX )
+            {
+                cleanupFixedJoints(fixedJoints);
+                model = Model();
+                return false;
+            }
+        }
+        else
+        {
+            // fixed joints are stored separatly and added after the non-zero dofs joints
+            fixedJoints.push_back(joint);
+            fixedJointNames.push_back(jointName);
         }
 
     }
+
+    // Adding all the fixed joint in the end
+    for(int i=0; i < fixedJoints.size(); i++)
+    {
+        assert( fixedJoints.size() == fixedJointNames.size() );
+        JointIndex newJointIndex = rawModel.addJoint(fixedJointNames[i],fixedJoints[i]);
+
+        delete fixedJoints[i];
+        fixedJoints[i] = 0;
+
+        if( newJointIndex == JOINT_INVALID_INDEX )
+        {
+            cleanupFixedJoints(fixedJoints);
+            model = Model();
+            return false;
+        }
+    }
+
 
     // Get root
     std::vector<std::string> rootCandidates;

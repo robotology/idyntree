@@ -9,5 +9,4 @@
 
 namespace iDynTree
 {
-    JointPos<>
 }
