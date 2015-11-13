@@ -57,26 +57,26 @@ namespace iDynTree
    
    struct GenericSensorData
    {
-       enum { LINK, JOINT} parent_object;
-       std::string parent_object_name;
-       std::string sensor_name;
-       SensorType sensor_type;
-       iDynTree::Transform sensor_pose;
-       unsigned int update_rate;
+       enum { LINK, JOINT} parentObject;
+       std::string parentObjectName;
+       std::string sensorName;
+       SensorType sensorType;
+       iDynTree::Transform sensorPose;
+       unsigned int updateRate;
    };
    
-// struct FTSensorData
-// {
-//     std::string reference_joint;
-//     std::string sensor_name;
-//     enum { PARENT_LINK_FRAME ,
-//            CHILD_LINK_FRAME  ,
-//            SENSOR_FRAME } frame;
-//     KDL::Frame sensor_pose;
-//     enum { PARENT_TO_CHILD,
-//            CHILD_TO_PARENT }
-//           measure_direction;
-// };
+   typedef GenericSensorData AccelerometerData;
+   typedef GenericSensorData GyroscopeData;
+
+   struct GenericFTSensorData : GenericSensorData
+    {
+        enum { PARENT_LINK_FRAME ,
+            CHILD_LINK_FRAME  ,
+            SENSOR_FRAME } frame;
+        enum { PARENT_TO_CHILD,
+            CHILD_TO_PARENT }
+            measure_direction;
+    };
     
 
 

@@ -67,47 +67,47 @@ bool genericSensorsFromUrdfFile(const std::string& file, std::vector<GenericSens
     return genericSensorsFromUrdfString(xml_string,generic_sensors);
 }
 
-bool genericSensorsFromUrdfString(const std::string& urdf_xml, std::vector<GenericSensorData> & generic_sensors)
+bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<GenericSensorData> & genericSensors)
 {
-    generic_sensors.resize(0);
+    genericSensors.resize(0);
 
     bool returnVal = true;
     
     /* parse sdf force_torque extension to urdf */
-    TiXmlDocument urdfXml;
-    urdfXml.Parse(urdf_xml.c_str());
+    TiXmlDocument tiUrdfXml;
+    tiUrdfXml.Parse(urdfXml.c_str());
 
-    TiXmlElement* robotXml = urdfXml.FirstChildElement("robot");
+    TiXmlElement* robotXml = tiUrdfXml.FirstChildElement("robot");
 
     // Get all SDF extension elements and search for the sensors
     for (TiXmlElement* sensorXml = robotXml->FirstChildElement("sensor");
          sensorXml; sensorXml = sensorXml->NextSiblingElement("sensor"))
     {
-        GenericSensorData new_genericSensor;
-        new_genericSensor.sensor_name = sensorXml->Attribute("name");  
-        std::string sensor_type = sensorXml->Attribute("type");
-        if(sensor_type.compare("accelerometer") == 0)
+        GenericSensorData newGenericSensor;
+        newGenericSensor.sensorName = sensorXml->Attribute("name");  
+        std::string sensorType = sensorXml->Attribute("type");
+        if(sensorType.compare("accelerometer") == 0)
         {
-            new_genericSensor.sensor_type = ACCELEROMETER;
-        }else if(sensor_type.compare("gyroscope") == 0)
+            newGenericSensor.sensorType = ACCELEROMETER;
+        }else if(sensorType.compare("gyroscope") == 0)
         {
-            new_genericSensor.sensor_type = GYROSCOPE;
-        }else if(sensor_type.compare("force_torque") == 0)
+            newGenericSensor.sensorType = GYROSCOPE;
+        }else if(sensorType.compare("force_torque") == 0)
         { 
-            new_genericSensor.sensor_type = SIX_AXIS_FORCE_TORQUE;
+            newGenericSensor.sensorType = SIX_AXIS_FORCE_TORQUE;
         }else
             returnVal = false;
                   
-        TiXmlElement* update_rate = sensorXml->FirstChildElement("update_rate");
-        if(update_rate)
+        TiXmlElement* updateRate = sensorXml->FirstChildElement("update_rate");
+        if(updateRate)
         {
-            std::string updateRate = update_rate->GetText();
-            new_genericSensor.update_rate =atoi(updateRate.c_str());
+            std::string updateRateString = updateRate->GetText();
+            newGenericSensor.updateRate =atoi(updateRateString.c_str());
         }
         else
         {
             // default value
-            new_genericSensor.update_rate =100;
+            newGenericSensor.updateRate =100;
         }  
         TiXmlElement* parent = sensorXml->FirstChildElement("parent");
         TiXmlElement* link = sensorXml->FirstChildElement("link");
@@ -117,95 +117,110 @@ bool genericSensorsFromUrdfString(const std::string& urdf_xml, std::vector<Gener
             std::string objectName;
             if(link)
             {
-                new_genericSensor.parent_object = iDynTree::GenericSensorData::LINK;
+                newGenericSensor.parentObject = iDynTree::GenericSensorData::LINK;
                 objectName = link->GetText();
             }
             else
             {
-               new_genericSensor.parent_object = iDynTree::GenericSensorData::JOINT;
+               newGenericSensor.parentObject = iDynTree::GenericSensorData::JOINT;
                objectName = joint->GetText();
             }
-            new_genericSensor.parent_object_name = objectName;
+            newGenericSensor.parentObjectName = objectName;
                                                     
          }
          else
             returnVal = false;
                   
-         TiXmlElement* pose_tag = sensorXml->FirstChildElement("pose");
-         if( pose_tag )
+         TiXmlElement* poseTag = sensorXml->FirstChildElement("pose");
+         if( poseTag )
          {
-            std::string  pose_text = pose_tag->GetText();
-            std::vector<std::string> pose_elems;
-            split(pose_text,pose_elems);
-            if( pose_elems.size() != 6 )
+            std::string  poseText = poseTag->GetText();
+            std::vector<std::string> poseElems;
+            split(poseText,poseElems);
+            if( poseElems.size() != 6 )
             {
                returnVal = false;
             }
-            double roll  = atof(pose_elems[3].c_str());
-            double pitch = atof(pose_elems[4].c_str());
-            double yaw   = atof(pose_elems[5].c_str());
+            double roll  = atof(poseElems[3].c_str());
+            double pitch = atof(poseElems[4].c_str());
+            double yaw   = atof(poseElems[5].c_str());
             iDynTree::Rotation rot = iDynTree::Rotation::RPY(roll,pitch,yaw);
-            double x  = atof(pose_elems[0].c_str());
-            double y = atof(pose_elems[1].c_str());
-            double z   = atof(pose_elems[2].c_str());
+            double x  = atof(poseElems[0].c_str());
+            double y = atof(poseElems[1].c_str());
+            double z   = atof(poseElems[2].c_str());
             iDynTree::Position pos(x,y,z);
-            new_genericSensor.sensor_pose = iDynTree::Transform(rot,pos); 
+            newGenericSensor.sensorPose = iDynTree::Transform(rot,pos); 
         }
         else
         {
                 // default value
-            new_genericSensor.sensor_pose = iDynTree::Transform();
+            newGenericSensor.sensorPose = iDynTree::Transform();
         }
-        generic_sensors.push_back(new_genericSensor);
+        genericSensors.push_back(newGenericSensor);
     }
 
     return returnVal;
 }
-iDynTree::SensorsList genericSensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
-                                          std::string urdf_filename)
+iDynTree::SensorsList genericSensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirectedTree,
+                                          std::string urdfFilename)
 {
-    ifstream ifs(urdf_filename.c_str());
-    std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
+    ifstream ifs(urdfFilename.c_str());
+    std::string xmlString( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
-    return genericSensorsListFromURDFString(undirected_tree,xml_string);
+    return genericSensorsListFromURDFString(undirectedTree,xmlString);
 }
 
-iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
-                                                std::string urdf_string)
+iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirectedTree,
+                                                std::string urdfString)
 {
-    iDynTree::SensorsList sensors_tree;
-//     std::vector<iDynTree::GenericSensorData> generic_sensors;
-//         
-//     bool ok = iDynTree::genericSensorsFromUrdfString(urdf_string,generic_sensors);
-// 
-//     if( !ok )
-//     {
-//         std::cerr << "Error in loading generic sensors information from URDF file" << std::endl;
-//     }
-// 
-//     for(int gen_sens_itr = 0; gen_sens_itr < generic_sensors.size(); gen_sens_itr++ )
-//     {
-//         switch(generic_sensors[gen_sens_itr].sensor_type)
-//         {
-//             case SIX_AXIS_FORCE_TORQUE : 
-//                 iDynTree::SixAxisForceTorqueSensor new_sens;
-//                 break;
-//             case ACCELEROMETER : 
-//                 iDynTree::Accelerometer new_sens;
-//                 break;
-//             case GYROSCOPE :
-//                 iDynTree::Gyroscope new_sens;
-//                 break;
-//                 
-//         }
-//         
+    iDynTree::SensorsList sensorsTree;
+    std::vector<iDynTree::GenericSensorData> genericSensors;
+        
+    bool ok = iDynTree::genericSensorsFromUrdfString(urdfString,genericSensors);
+
+    if( !ok )
+    {
+        std::cerr << "Error in loading generic sensors information from URDF file" << std::endl;
+    }
+    
+    for(int genSensItr = 0; genSensItr < genericSensors.size(); genSensItr++ )
+    {
+        iDynTree::Sensor *newSensor;
+        switch(genericSensors[genSensItr].sensorType)
+        {
+            case iDynTree::SIX_AXIS_FORCE_TORQUE : 
+                {
+                    iDynTree::SixAxisForceTorqueSensor newSixAxisFTsens;
+                    newSensor = &newSixAxisFTsens;                
+                }
+                break;
+            case iDynTree::ACCELEROMETER : 
+                {
+                    iDynTree::Accelerometer newAccelerometerSens;
+                    newAccelerometerSens.setLinkSensorTransform(genericSensors[genSensItr].sensorPose);
+                    newSensor = &newAccelerometerSens;                
+                }
+                break;
+            case iDynTree::GYROSCOPE :
+                {   
+                    iDynTree::Gyroscope newGyroscopeSens;
+                    newGyroscopeSens.setLinkSensorTransform(genericSensors[genSensItr].sensorPose);
+                    newSensor = &newGyroscopeSens;
+                }
+                break;
+                
+        }
+        
+        newSensor->setName(genericSensors[genSensItr].sensorName);
+        newSensor->setParent(genericSensors[genSensItr].parentObjectName);
+        
 //         
 // 
 //         // Convert the information in the FTSensorData format in
 //         // a series of SixAxisForceTorqueSensor objects, using the
 //         // serialization provided in the undirected_tree object
-//         new_sens.setName(generic_sensors[gen_sens_itr].reference_joint);
+//         new_sens->setName(generic_sensors[gen_sens_itr].sensor_name);
 // 
 //         new_sens.setParent(generic_sensors[gen_sens_itr].reference_joint);
 // 
@@ -256,10 +271,10 @@ iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTr
 //             new_sens.setAppliedWrenchLink(child_link);
 //         }
 // 
-//         sensors_tree.addSensor(new_sens);
-//     }
+        sensorsTree.addSensor(*newSensor);
+    }
 
-    return sensors_tree;
+    return sensorsTree;
 }
 
 }

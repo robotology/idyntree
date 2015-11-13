@@ -121,7 +121,7 @@ namespace iDynTree {
         /**
          * Documented in Sensor
          */
-        bool setParentIndex(const int parent_index);
+        bool setParentIndex(const int &parent_index);
 
         /**
          * The Six Axis Force Torque sensor measure the Force Torque (wrench)

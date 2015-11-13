@@ -96,6 +96,33 @@ namespace iDynTree {
          *  Return a pointer to a copy of this sensor.
          *
          */
+                /**
+         * Set the id (name) of sensor.
+         */
+        virtual bool setName(const std::string &) = 0;
+
+        /**
+         * Set the type of the sensor.
+         */
+//         virtual bool setSensorType(const SensorType &) = 0;
+
+        /**
+         * Set the id (name) of the parent entity (Joint or Link).
+         */
+        virtual bool setParent(const std::string &) = 0;
+
+        /**
+         * Set the numeric index of the parent of the sensor.
+         * Depending on the type of the sensor, the parent could be
+         * a Junction or a Link.
+         */
+        virtual bool setParentIndex(const int &) = 0;
+
+
+        /**
+         *  Return a pointer to a copy of this sensor.
+         *
+         */
         virtual Sensor* clone() const = 0;
     };
 

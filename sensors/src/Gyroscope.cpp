@@ -85,7 +85,7 @@ bool Gyroscope::setParent(const std::string& parent)
     return true;
 }
 
-bool Gyroscope::setParentIndex(const int parent_index)
+bool Gyroscope::setParentIndex(const int &parent_index)
 {
     this->pimpl->parent_link_index = parent_index;
     return true;

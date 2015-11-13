@@ -90,7 +90,7 @@ bool Accelerometer::setParent(const std::string& parent)
     return true;
 }
 
-bool Accelerometer::setParentIndex(const int parent_index)
+bool Accelerometer::setParentIndex(const int &parent_index)
 {
     this->pimpl->parent_link_index = parent_index;
     return true;

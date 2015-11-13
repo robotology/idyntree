@@ -81,7 +81,7 @@ namespace iDynTree {
         /**
          * Documented in Sensor
          */
-        bool setParentIndex(const int parent_index);
+        bool setParentIndex(const int &parent_index);
 
         /**
          * Documented in the sensor
