@@ -191,87 +191,30 @@ iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTr
         {
             case iDynTree::SIX_AXIS_FORCE_TORQUE : 
                 {
-                    iDynTree::SixAxisForceTorqueSensor newSixAxisFTsens;
-                    newSensor = &newSixAxisFTsens;                
+                    iDynTree::SixAxisForceTorqueSensor newFTSensor;
+                    newSensor = newFTSensor.clone();
                 }
                 break;
             case iDynTree::ACCELEROMETER : 
                 {
                     iDynTree::Accelerometer newAccelerometerSens;
                     newAccelerometerSens.setLinkSensorTransform(genericSensors[genSensItr].sensorPose);
-                    newSensor = &newAccelerometerSens;                
+                    newSensor = newAccelerometerSens.clone();               
                 }
                 break;
             case iDynTree::GYROSCOPE :
                 {   
                     iDynTree::Gyroscope newGyroscopeSens;
                     newGyroscopeSens.setLinkSensorTransform(genericSensors[genSensItr].sensorPose);
-                    newSensor = &newGyroscopeSens;
+                    newSensor = newGyroscopeSens.clone();
                 }
                 break;
+        
+            newSensor->setName(genericSensors[genSensItr].sensorName);
+            newSensor->setParent(genericSensors[genSensItr].parentObjectName);
                 
-        }
-        
-        newSensor->setName(genericSensors[genSensItr].sensorName);
-        newSensor->setParent(genericSensors[genSensItr].parentObjectName);
-        
-//         
-// 
-//         // Convert the information in the FTSensorData format in
-//         // a series of SixAxisForceTorqueSensor objects, using the
-//         // serialization provided in the undirected_tree object
-//         new_sens->setName(generic_sensors[gen_sens_itr].sensor_name);
-// 
-//         new_sens.setParent(generic_sensors[gen_sens_itr].reference_joint);
-// 
-//         KDL::CoDyCo::JunctionMap::const_iterator junct_it
-//             = undirected_tree.getJunction(generic_sensors[gen_sens_itr].reference_joint);
-// 
-//         new_sens.setParentIndex(junct_it->getJunctionIndex());
-// 
-//         int parent_link = junct_it->getParentLink()->getLinkIndex();
-//         int child_link = junct_it->getChildLink()->getLinkIndex();
-//         std::string parent_link_name = junct_it->getParentLink()->getName();
-//         std::string child_link_name = junct_it->getChildLink()->getName();
-// 
-//         KDL::Frame parent_link_H_child_link = junct_it->pose(0.0,false);
-//         KDL::Frame child_link_H_sensor = generic_sensors[gen_sens_itr].sensor_pose;
-// 
-//         // For now we assume that the six axis ft sensor is attached to a
-//         // fixed junction. Hence the first/second link to sensor transforms
-//         // are fixed are given by the frame option
-//         if( ft_sensors[ft_sens].frame == iDynTree::FTSensorData::PARENT_LINK_FRAME )
-//         {
-//             new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::Transform());
-//             new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(parent_link_H_child_link.Inverse()));
-//         }
-//         else if( ft_sensors[ft_sens].frame == iDynTree::FTSensorData::CHILD_LINK_FRAME )
-//         {
-//             new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link));
-//             new_sens.setSecondLinkSensorTransform(child_link,iDynTree::Transform());
-//         }
-//         else
-//         {
-//             assert( ft_sensors[ft_sens].frame == iDynTree::FTSensorData::SENSOR_FRAME );
-//             new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link*child_link_H_sensor));
-//             new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(child_link_H_sensor));
-//         }
-// 
-//         //set names
-//         new_sens.setFirstLinkName(parent_link_name);
-//         new_sens.setSecondLinkName(child_link_name);
-// 
-//         if( ft_sensors[ft_sens].measure_direction == iDynTree::FTSensorData::CHILD_TO_PARENT )
-//         {
-//             new_sens.setAppliedWrenchLink(parent_link);
-//         }
-//         else
-//         {
-//             assert( ft_sensors[ft_sens].measure_direction == iDynTree::FTSensorData::CHILD_TO_PARENT );
-//             new_sens.setAppliedWrenchLink(child_link);
-//         }
-// 
-        sensorsTree.addSensor(*newSensor);
+            sensorsTree.addSensor(*newSensor);
+        }   
     }
 
     return sensorsTree;

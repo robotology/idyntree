@@ -142,12 +142,15 @@ bool Gyroscope::getLinkSensorTransform(iDynTree::Transform& link_H_sensor) const
     return true;
 
     
-}
+} 
+/* to be implemented in the future after considering interface and requirements
+ */
+/*
  bool Gyroscope::getAngularVelocityOfLink( const iDynTree::AngVelocity& measured_angular_velocity,
                                                         iDynTree::AngVelocity& angular_velocity_of_link) const
     {
         return true;
-    }
+    }*/
 
 
 }

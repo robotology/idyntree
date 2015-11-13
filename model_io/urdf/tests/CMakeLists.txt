@@ -9,3 +9,4 @@ macro(add_modelio_urdf_unit_test classname)
 endmacro()
 
 add_modelio_urdf_unit_test(URDFModelImport)
+add_modelio_urdf_unit_test(URDFGenericSensorImport)

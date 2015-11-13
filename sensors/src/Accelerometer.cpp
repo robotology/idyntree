@@ -140,19 +140,11 @@ SensorType Accelerometer::getSensorType() const
 }
 
 /*
-bool Accelerometer::getLinkSensorTransform(iDynTree::Transform& link_H_sensor) const
-{
-    link_H_sensor = this->pimpl->link_H_sensor;
-    
-    return false;
-}*/
-
-
-
+ * To be implmented in future based on interface and requirements
 bool getAccelerationOfLink(const iDynTree::LinAcceleration & measured_acceleration,
                            iDynTree::LinAcceleration & linear_acceleration_of_link )
 {
     return(true);
 }
-
+*/
 }

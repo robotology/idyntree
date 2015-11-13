@@ -77,6 +77,7 @@ namespace iDynTree {
          * Documented in Sensor
          */
         bool setParent(const std::string &parent);
+        
 
         /**
          * Documented in Sensor
@@ -125,12 +126,14 @@ namespace iDynTree {
 
 
         /**
+         * The following method is to be implemented in the future after considering the interface
+         * 
          * Get angular velcity of the link on which the sensor is fixed and the angular velocity is being measured.
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        bool getAngularVelocityOfLink(const iDynTree::AngVelocity & measured_angular_velocity,
-                                    iDynTree::AngVelocity & angular_velocity_of_link ) const;
+        //bool getAngularVelocityOfLink(const iDynTree::AngVelocity & measured_angular_velocity,
+        //                            iDynTree::AngVelocity & angular_velocity_of_link ) const;
 
 
     };

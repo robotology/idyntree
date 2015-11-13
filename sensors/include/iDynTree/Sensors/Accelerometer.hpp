@@ -146,12 +146,13 @@ namespace iDynTree {
 
 
         /**
+         * Following method is to be implemented after defining the interface
          * Get wrench applied on the specified link expressed in the specified link frame.
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-       bool getAccelerationOfLink(const iDynTree::LinAcceleration & measured_acceleration,
-                                     iDynTree::LinAcceleration & linear_acceleration_of_link ) const;
+   //    bool getAccelerationOfLink(const iDynTree::LinAcceleration & measured_acceleration,
+   //                                  iDynTree::LinAcceleration & linear_acceleration_of_link ) const;
     };
 
 
