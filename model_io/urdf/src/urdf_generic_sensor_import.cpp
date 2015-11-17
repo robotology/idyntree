@@ -196,7 +196,7 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
         else
         {
             // default value
-            newGenericSensor.sensorPose = iDynTree::Transform();
+            newGenericSensor.sensorPose = iDynTree::Transform::Identity();
         }
         genericSensors.push_back(newGenericSensor);
         
@@ -272,7 +272,8 @@ iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTr
            std::cerr<<"obtaining parent junction index not yet implemented, initial version only for link based sensors like accelerometer and gyroscopes\n";
        }
        sensorsTree.addSensor(*newSensor);
-        
+       //since cloning is completed we can delete to free the sensor memory allocation
+       delete(newSensor );
     }
 
     return sensorsTree;
