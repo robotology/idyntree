@@ -21,7 +21,7 @@ namespace iDynTree
      *
      * For more information on the assumption of the joint model, check the IJoint interface.
      *
-     * \ingroup iDynTreeCore
+     * \ingroup iDynTreeModel
      */
     template<unsigned int nrOfPosCoords, unsigned int nrOfDOFs>
     class MovableJointImpl: public IJoint

@@ -20,7 +20,7 @@ namespace iDynTree
      * Class that represents a link.
      *
      *
-     * \ingroup iDynTreeCore
+     * \ingroup iDynTreeModel
      */
     class Link
     {

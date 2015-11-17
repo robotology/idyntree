@@ -5,64 +5,6 @@
  *
  */
 
-
-/**
- * \defgroup iDynTree iDynTree
- *
- * @ingroup codyco_libraries
- *
- * YARP based Robot dynamics library
- *
- * \note <b>SI units adopted</b>: meters for lengths and radiants
- *       for angles.
- *
- * \section dep_sec Dependencies
- * - KDL
- *
- * \section intro_sec Description
- *
- * iDynTree is designed to be an efficient, generic and easy to use library
- * to calculate joint torques and external wrenches given kinetic information
- * (linear acceleration, angular velocity and  angular acceleration of a link,
- * joint positions, velocities, acceleration) and embedded FT sensor measures,
- * implementing the techniques described in this two papers:
- *
- *     - [1] S. Ivaldi, M. Fumagalli, M. Randazzo, F. Nori, G. Metta, and G. Sandini
- *           Computing robot internal/external wrenches by means of inertial, tactile and f/t sensors: theory and implementation on the icub
- *           in Proc. of the 11th IEEE-RAS International Conference on Humanoid Robots, Bled, Slovenia, 2011.
- *           http://people.liralab.it/iron/Papers/conference/780_Ivaldi_etal2011.pdf
- *           http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6100813
- *
- *     - [2] A. Del Prete, L. Natale, F. Nori, and G. Metta,
- *           Contact Force Estimations Using Tactile Sensors and Force / Torque Sensors
- *           in Human Robot Interaction, 2012, pp. 0–2,
- *           http://pasa.liralab.it/pasapdf/1113_DelPrete_etal2012.pdf
- *
- * Additional details (some not implemented, like multiple IMUs):
- *
- *     - [3] M. Fumagalli, S. Ivaldi, M. Randazzo, L. Natale, G. Metta, G. Sandini, and F. Nori,
- *           Force feedback exploiting tactile and proximal force/torque sensing
- *           in Autonomous Robots, vol. 33, no. 4, pp. 381–398, 2012.
- *           http://dx.doi.org/10.1007/s10514-012-9291-2
- *           http://people.liralab.it/iron/Papers/journal/IvaldiFumagallietAl.pdf
- *
- * \section tested_os_sec Tested OS
- *
- * Linux
- *
- * \section example_sec Example
- *
- * Exe
- *
- *
- * \author Silvio Traversaro
- *
- * Copyright (C) 2013 RobotCub Consortium
- * CopyPolicy: Released under the terms of the GNU LGPL v2.0.
- *
- *
- **/
-
 #ifndef IDYNTREE_H
 #define IDYNTREE_H
 
@@ -139,7 +81,7 @@ class iDynTreeLinkAndFrame {
 
 
 /**
- * \ingroup iDynTree
+ * \ingroup iDynTreeYARP
  *
  * An class for calculating the torques and the external wrenches
  * in a Rigid Body Dynamic tree, using kinetic information (linear acceleration, angular velocity and

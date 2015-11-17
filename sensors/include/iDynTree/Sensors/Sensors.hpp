@@ -38,7 +38,10 @@ namespace iDynTree {
 
      /**
      * Virtual interface to Sensor Class.
+     *
      * All sensor class inherit from this base class.
+     *
+     * \ingroup iDynTreeSensors
      *
      */
     class Sensor {
@@ -91,6 +94,8 @@ namespace iDynTree {
 
     /**
      * Structure representing a group of sensors associated with an UndirectedTree.
+     *
+     * \ingroup iDynTreeSensors
      */
     class SensorsList {
             struct SensorsListPimpl;
@@ -166,6 +171,11 @@ namespace iDynTree {
 
     };
 
+    /**
+     * A list of measurements associated with a SensorsList .
+     *
+     * \ingroup iDynTreeSensors
+     */
     class SensorsMeasurements
     {
         private:

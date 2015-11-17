@@ -30,15 +30,11 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      *
-     * The exact semantics for this class are the one defined as PositionCoord in:
+     * \image html position.svg
      *
-     * De Laet T, Bellens S, Smits R, Aertbeliën E, Bruyninckx H, and De Schutter J
-     * (2013), Geometric Relations between Rigid Bodies: Semantics for Standardization,
-     * IEEE Robotics & Automation Magazine, Vol. 20, No. 1, pp. 84-93.
-     * URL : http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf
-     *
-     * One operation is not included for a logic paradox:
-     *   Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))
+     * The Position object can briefly described as the position
+     * of a *point* with respect to a *refPoint*, expressed with
+     * respect to an orientation given by *orientFrame* .
      *
      */
     class Position: public PositionRaw
@@ -124,6 +120,20 @@ namespace iDynTree
 
         friend Position Rotation::changeCoordFrameOf(const Position & op) const;
     };
+
+       // TODO \todo this information is interesting, but distracting for the average user.
+   //             Move it to a design document describing the semantic model of iDynTree .
+   //  The exact semantics for this class are inspired to the one define as PositionCoord in:
+   //
+   //  De Laet T, Bellens S, Smits R, Aertbeliën E, Bruyninckx H, and De Schutter J
+   //  (2013), Geometric Relations between Rigid Bodies: Semantics for Standardization,
+   //  IEEE Robotics & Automation Magazine, Vol. 20, No. 1, pp. 84-93.
+   //  URL : http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf
+   //
+   //  One operation is not mentione in that paper  included for a logic paradox:
+   //    Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))
+   //
+   //
 }
 
 #endif

@@ -30,8 +30,12 @@ namespace iDynTree
 
 namespace iDynTree {
 
-    //class Traversal;
 
+    /**
+     * A six axis force torque sensors.
+     *
+     * \ingroup iDynTreeSensors 
+     */
     class SixAxisForceTorqueSensor: public Sensor {
     private:
         struct SixAxisForceTorqueSensorPrivateAttributes;

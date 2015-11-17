@@ -16,6 +16,8 @@ namespace iDynTree
 class Model;
 
 /**
+ * \ingroup iDynTreeModelIO
+ *
  * Load a iDynTree::Model object from a URDF file.
  *
  * @return true if all went ok, false otherwise.
@@ -24,6 +26,8 @@ bool modelFromURDF(const std::string & urdf_filename,
                    iDynTree::Model & output);
 
 /**
+ * \ingroup iDynTreeModelIO
+ *
  * Load a iDynTree::Model object from a URDF string.
  *
  * @return true if all went ok, false otherwise.
