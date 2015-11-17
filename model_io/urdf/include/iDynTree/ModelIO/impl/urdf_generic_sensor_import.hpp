@@ -32,10 +32,10 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-/* Author: Silvio Traversaro */
+/* Author: Naveen Kuppuswamy */
 
-#ifndef URDF_SENSOR_IMPORT_H
-#define URDF_SENSOR_IMPORT_H
+#ifndef URDF_GENERIC_SENSOR_IMPORT_H
+#define URDF_GENERIC_SENSOR_IMPORT_H
 
 #include <string>
 #include <vector>
@@ -44,6 +44,7 @@
 
 #include <kdl_codyco/undirectedtree.hpp>
 #include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Core/Transform.h>
 
 
 class TiXmlDocument;
@@ -51,27 +52,40 @@ class TiXmlDocument;
 namespace iDynTree
 {
 
-struct FTSensorData
-{
-    std::string reference_joint;
-    std::string sensor_name;
-    enum { PARENT_LINK_FRAME ,
-           CHILD_LINK_FRAME  ,
-           SENSOR_FRAME } frame;
-    KDL::Frame sensor_pose;
-    enum { PARENT_TO_CHILD,
-           CHILD_TO_PARENT }
-          measure_direction;
-};
+   class Transform;
+   enum SensorType;
+   
+   struct GenericSensorData
+   {
+       enum { LINK, JOINT} parentObject;
+       std::string parentObjectName;
+       std::string sensorName;
+       SensorType sensorType;
+       iDynTree::Transform sensorPose;
+       unsigned int updateRate;
+   };
+   
+   typedef GenericSensorData AccelerometerData;
+   typedef GenericSensorData GyroscopeData;
 
-std::vector<std::string> &split(const std::string &s, std::vector<std::string> &elems) ;
+   struct GenericFTSensorData : GenericSensorData
+    {
+        enum { PARENT_LINK_FRAME ,
+            CHILD_LINK_FRAME  ,
+            SENSOR_FRAME } frame;
+        enum { PARENT_TO_CHILD,
+            CHILD_TO_PARENT }
+            measure_direction;
+    };
+    
 
-bool ftSensorsFromUrdfFile(const std::string& file, std::vector<FTSensorData> & ft_sensors);
-bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorData> & ft_sensors);
 
-iDynTree::SensorsList sensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
+bool genericSensorsFromUrdfFile(const std::string& file, std::vector<GenericSensorData> & generic_sensors);
+bool genericSensorsFromUrdfString(const std::string& urdf_xml, std::vector<GenericSensorData> & generic_sensors);
+
+iDynTree::SensorsList genericSensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
                                           std::string urdf_filename);
-iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
+iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
                                                 std::string urdf_string);
 }
 
