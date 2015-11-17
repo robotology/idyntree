@@ -13,13 +13,13 @@
         </inertial>
     </link>
     <sensor name="dummy_accl" type="accelerometer">
-        <parent type="link">link1</parent>
+        <parent link="link1"/>
     </sensor> 
     <sensor name="dummy_gyro" type="gyroscope">
-        <parent type="link">link1</parent>
-        <pose xyz="0 -0.01 +0.01" rpy="0 -0 0" />
+        <parent link="link1"/>
+        <origin xyz="0 -0.01 +0.01" rpy="0 -0 0" />
     </sensor>
     <sensor name="dummy_accl2" type="accelerometer">
-        <parent type="link">link1</parent>
+        <parent link="link1"/>
     </sensor>
 </robot>

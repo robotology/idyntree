@@ -84,16 +84,16 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
          sensorXml; sensorXml = sensorXml->NextSiblingElement("sensor"))
     {
         GenericSensorData newGenericSensor;
-        std::string  sensorName(sensorXml->Attribute("name"));
-        newGenericSensor.sensorName = sensorName;
-        std::string sensorType(sensorXml->Attribute("type"));
         
-        if(sensorName.empty() || sensorType.empty())
+        if(sensorXml->Attribute("name")==NULL || sensorXml->Attribute("type")==NULL)
         {
             std::cerr<<"Sensor name or type specified incorrectly \n";
             returnVal = false;
             break;
         }
+        std::string  sensorName(sensorXml->Attribute("name"));
+        newGenericSensor.sensorName = sensorName;
+        std::string sensorType(sensorXml->Attribute("type"));
         
         if(sensorType.compare("accelerometer") == 0)
         {
@@ -123,46 +123,52 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
             newGenericSensor.updateRate =100;
         }  
         TiXmlElement* parent = sensorXml->FirstChildElement("parent");
-        std::string  parentType(sensorXml->Attribute("type"));
-       
+        
+        std::string linkOption, jointOption;
+        
         if(!parent)
         { 
             std::cerr<<"parent object not found \n";
             returnVal = false;
             break;
         }
-        if(parentType.empty())
+        if(parent->Attribute("link")!= NULL)
+        {
+            linkOption = std::string(parent->Attribute("link"));
+        }
+        else if(parent->Attribute("joint")!=NULL)
+        {
+            jointOption = std::string(parent->Attribute("joint"));
+        }
+        else
         {
                 std::cerr<<"link or joint attribute for parent object not found \n";
                 returnVal = false;
                 break;
         } 
         
-        std::string objectName;
-        if(parentType.compare("link"))
+        if(!linkOption.empty())
         {
               newGenericSensor.parentObject = iDynTree::GenericSensorData::LINK;
-              objectName = parent->GetText();
+              newGenericSensor.parentObjectName = linkOption;
         }
-        else if (parentType.compare("joint"))
+        else
         {
               newGenericSensor.parentObject = iDynTree::GenericSensorData::JOINT;
-              objectName = parent->GetText();
-        }
-                
-        newGenericSensor.parentObjectName = objectName;
+              newGenericSensor.parentObjectName = jointOption;
+        }                
          
-        TiXmlElement* poseTag = sensorXml->FirstChildElement("pose");
-        if( poseTag )
+        TiXmlElement* originTag = sensorXml->FirstChildElement("origin");
+        if( originTag )
         {             
 #ifdef DEBUG
-            std::cout<<"Pose tag exists \n";
-            std::string  poseText = poseTag->GetText();
-            std::cout<<"posetag : \n"<<poseTag->ToText();
+            std::cout<<"originTag exists \n";
+            std::string  poseText = originTag->GetText();
+            std::cout<<"originTag : \n"<<poseTag->ToText();
             std::cout<<"Pose rpy:"<<rpyText.c_str()<<", xyz"<<xyzText.c_str()<<"\n";
 #endif //DEBUG
-            std::string  rpyText(poseTag->Attribute("rpy"));
-            std::string  xyzText(poseTag->Attribute("xyz"));
+            std::string  rpyText(originTag->Attribute("rpy"));
+            std::string  xyzText(originTag->Attribute("xyz"));
             
             std::vector<std::string> rpyElems;
             std::vector<std::string> xyzElems;

@@ -23,8 +23,8 @@ void checkURDF(std::string fileName,
 {
     iDynTree::SensorsList sensorList;
     iDynTree::genericSensorsListFromURDF(fileName,sensorList);
-    std::cout<<"Sensor list created and parsed from URDF. num accel : "<<sensorList.getNrOfSensors(iDynTree::ACCELEROMETER)
-    <<"num gyro : "<<sensorList.getNrOfSensors(iDynTree::GYROSCOPE)<<std::endl;
+    std::cout<<"Sensor list created from URDF. num accel : "<<sensorList.getNrOfSensors(iDynTree::ACCELEROMETER)
+    <<", num gyro : "<<sensorList.getNrOfSensors(iDynTree::GYROSCOPE)<<std::endl;
     
     ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::ACCELEROMETER),expectedNrOfAccelerometers);
     ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::GYROSCOPE),expectedNrOfGyroscopes);
