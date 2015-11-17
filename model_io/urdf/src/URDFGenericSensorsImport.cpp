@@ -28,10 +28,9 @@ bool genericSensorsListFromURDF(const std::string & urdf_filename,
                   << urdf_filename << std::endl;
         return false;
     }
-
-    KDL::CoDyCo::UndirectedTree undirected_tree = KDL::CoDyCo::UndirectedTree(tree);
-
-    output = genericSensorsListFromURDF(undirected_tree,urdf_filename);
+   
+    KDL::CoDyCo::UndirectedTree undirectedTree(tree);
+    output = genericSensorsListFromURDF(undirectedTree,urdf_filename);
 
     return ok;
 }
@@ -50,10 +49,13 @@ bool genericSensorsListFromURDFString(const std::string& urdf_string,
                   << urdf_string << std::endl;
         return false;
     }
-
-    KDL::CoDyCo::UndirectedTree undirected_tree = KDL::CoDyCo::UndirectedTree(tree);
-
-    output = genericSensorsListFromURDFString(undirected_tree,urdf_string);
+    
+#ifdef DEBUG
+    std::cout<<"URDFGenericSensorsImport: tree loaded, now trying to call the parser function\n";
+#endif //DEBUG
+    
+    KDL::CoDyCo::UndirectedTree undirectedTree = KDL::CoDyCo::UndirectedTree(tree);
+    output = genericSensorsListFromURDFString(undirectedTree,urdf_string);
 
     return ok;
 }
