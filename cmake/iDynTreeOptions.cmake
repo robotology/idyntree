@@ -18,17 +18,24 @@ set (CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 #########################################################################
 # Turn on testing.
 option(IDYNTREE_COMPILE_TESTS "Compile iDynTree tests" FALSE)
+option(IDYNTREE_RUN_VALGRIND_TESTS "Run iDynTree tests with Valgrind" FALSE)
+mark_as_advanced(IDYNTREE_RUN_VALGRIND_TESTS)
 if(IDYNTREE_COMPILE_TESTS)
    include( CTest )
    enable_testing()
 
    # adding support for checking the tests with valgrind
-    find_package(Valgrind QUIET)
-    if(VALGRIND_FOUND)
-        set(CTEST_MEMORYCHECK_COMMAND ${VALGRIND_PROGRAM})
-        set(MEMORYCHECK_COMMAND_OPTIONS "--leak-check=full --error-exitcode=1"  CACHE STRING "Options to pass to the memory checker")
-        mark_as_advanced(MEMORYCHECK_COMMAND_OPTIONS)
-    endif()
+   if(IDYNTREE_RUN_VALGRIND_TESTS)
+        find_package(Valgrind REQUIRED)
+        if(VALGRIND_FOUND)
+            set(CTEST_MEMORYCHECK_COMMAND ${VALGRIND_PROGRAM})
+            set(MEMORYCHECK_COMMAND ${VALGRIND_PROGRAM})
+            set(MEMORYCHECK_COMMAND_OPTIONS "--leak-check=full --error-exitcode=1"  CACHE STRING "Options to pass to the memory checker")
+            mark_as_advanced(MEMORYCHECK_COMMAND_OPTIONS)
+            set(MEMCHECK_COMMAND_COMPLETE "${MEMORYCHECK_COMMAND} ${MEMORYCHECK_COMMAND_OPTIONS}")
+            separate_arguments(MEMCHECK_COMMAND_COMPLETE)
+        endif()
+   endif()
 endif()
 
 #########################################################################
