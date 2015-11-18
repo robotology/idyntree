@@ -52,7 +52,10 @@ namespace iDynTree
 {
 
 
-/** Constructs a iKin limb model from a KDL Chain
+/**
+ * \ingroup iDynTreeModelIO
+ *
+ * Constructs a iKin limb model from a KDL Chain
  *  \note iKinLimb supports only rotational joints
  *        links connected by fixed joints are wielded
  *        if a translational joint is found an error is returned

@@ -23,4 +23,15 @@
             <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
         </inertial>
     </link>
+    <sensor name="dummy_accl1" type="accelerometer">
+        <parent link="link1"/>
+        <origin xyz="0 -0.01 +0.01" rpy="0.01 -0.5 0.5" />
+    </sensor> 
+     <sensor name="dummy_gyro" type="gyroscope">
+        <parent link="link2"/>
+        <origin xyz="0 -0.01 +0.01" rpy="0 -0 0"/>
+    </sensor>
+    <sensor name="dummy_accl2" type="accelerometer">
+        <parent link="link2"/>
+    </sensor>
 </robot>

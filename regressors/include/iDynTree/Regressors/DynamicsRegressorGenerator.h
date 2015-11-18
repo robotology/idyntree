@@ -22,6 +22,8 @@ class SensorsMeasurements;
 namespace Regressors {
 
 /**
+ * \ingroup iDynTreeRegressors
+ *
  * The dynamics regressor generator is a class for calculating arbitrary regressor
  * related to robot dynamics, for identification of dynamics parameters, such
  * as inertial parameters (masses, centers of mass, inertia tensor elements) or

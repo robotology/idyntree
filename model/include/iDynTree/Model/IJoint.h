@@ -43,7 +43,7 @@ namespace iDynTree
      * to two link, and the interface is agnostic with respect to which link the code considers
      * as "parent" or "child".
      *
-     * \ingroup iDynTreeCore
+     * \ingroup iDynTreeModel
      */
     class IJoint
     {

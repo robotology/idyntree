@@ -22,6 +22,7 @@
 namespace iDynTree
 {
     class Transform;
+    class Wrench;
 }
 
 #include <iDynTree/Sensors/Sensors.hpp>
@@ -30,8 +31,12 @@ namespace iDynTree
 
 namespace iDynTree {
 
-    //class Traversal;
 
+    /**
+     * A six axis force torque sensors.
+     *
+     * \ingroup iDynTreeSensors 
+     */
     class SixAxisForceTorqueSensor: public Sensor {
     private:
         struct SixAxisForceTorqueSensorPrivateAttributes;
@@ -120,7 +125,7 @@ namespace iDynTree {
         /**
          * Documented in Sensor
          */
-        bool setParentIndex(const int parent_index);
+        bool setParentIndex(const int &parent_index);
 
         /**
          * The Six Axis Force Torque sensor measure the Force Torque (wrench)

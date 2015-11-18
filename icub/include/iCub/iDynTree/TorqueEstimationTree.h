@@ -22,7 +22,7 @@ namespace iCub
 namespace iDynTree
 {
 /**
- *  \ingroup iDynTree
+ *  \ingroup iDynTreeYARP
  *
  * Class that instantiate a DynTree object configured for
  * Joint Torque estimation

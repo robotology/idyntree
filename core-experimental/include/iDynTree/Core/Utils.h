@@ -28,16 +28,7 @@
 
 namespace iDynTree
 {
-    /**
-     * \defgroup iDynTreeCore iDynTree core data structures
-     *
-     * iDynTree provides basic data structures to implement kinemanics and dynamics
-     * algorithms.
-     *
-     *
-     */
-
-
+   
     extern int UNKNOWN;
 
     /// Default tolerance for methods with a tolerance, setted to 1e-10

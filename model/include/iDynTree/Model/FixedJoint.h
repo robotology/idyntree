@@ -18,7 +18,7 @@ namespace iDynTree
     /**
      * Class representing a fixed joint, i.e. a joint that rigidly attaches two links.
      *
-     * \ingroup iDynTreeCore
+     * \ingroup iDynTreeModel
      */
     class FixedJoint : public IJoint
     {

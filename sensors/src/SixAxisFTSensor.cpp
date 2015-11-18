@@ -14,11 +14,11 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
  * Public License for more details
  */
-
+#include "iDynTree/Core/Wrench.h"
 #include "iDynTree/Sensors/SixAxisFTSensor.hpp"
 
 #include "iDynTree/Core/Transform.h"
-#include "iDynTree/Core/Wrench.h"
+
 
 #include <cassert>
 
@@ -106,7 +106,7 @@ bool SixAxisForceTorqueSensor::setParent(const std::string& parent)
     return true;
 }
 
-bool SixAxisForceTorqueSensor::setParentIndex(const int parent_index)
+bool SixAxisForceTorqueSensor::setParentIndex(const int &parent_index)
 {
     this->pimpl->parent_junction_index = parent_index;
     return true;

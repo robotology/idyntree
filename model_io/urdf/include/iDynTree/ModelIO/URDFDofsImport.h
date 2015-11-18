@@ -15,15 +15,19 @@ namespace iDynTree
 {
 
 /**
+ * \ingroup iDynTreeModelIO
+ *
  * Load a list of dofs names from a URDF file.
  *
  * @return true if all went ok, false otherwise.
- * 
+ *
  */
 bool dofsListFromURDF(const std::string & urdf_filename,
                       std::vector<std::string>& dofs);
 
 /**
+ * \ingroup iDynTreeModelIO
+ *
  * Load a list of dofs object from a URDF string.
  *
  * @return true if all went ok, false otherwise.

@@ -93,6 +93,9 @@ endif()
 # compile simple command line tools
 add_subdirectory(tools)
 
+# add a dox target to generate doxygen documentation
+add_subdirectory(doc)
+
 include(InstallBasicPackageFiles)
 install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
                                      VERSION ${${VARS_PREFIX}_VERSION}

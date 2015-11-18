@@ -13,13 +13,19 @@
 
 namespace iDynTree {
 namespace Regressors {
-
+    
+/**
+ * \ingroup iDynTreeRegressors
+ */
 enum DynamicsRegressorParameterCategory
 {
     LINK_PARAM,
     SENSOR_FT_PARAM
 };
 
+/**
+ * \ingroup iDynTreeRegressors
+ */
 enum DynamicsRegressorParameterType
 {
     /**
@@ -139,6 +145,9 @@ enum DynamicsRegressorParameterType
     SENSOR_FT_OFFSET_TORQUE_Z
 };
 
+/**
+ * \ingroup iDynTreeRegressors
+ */
 struct DynamicsRegressorParameter
 {
     DynamicsRegressorParameterCategory category;
@@ -158,6 +167,9 @@ struct DynamicsRegressorParameter
     bool operator!=(const DynamicsRegressorParameter& other) const;
 };
 
+/**
+ * \ingroup iDynTreeRegressors
+ */
 class DynamicsRegressorParametersList
 {
 public:
