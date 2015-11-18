@@ -65,7 +65,7 @@ set(swig_generated_sources ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx)
 set(swig_other_sources)
 
 swig_compile_module(${modulename} matlab)
-swig_link_libraries(${modulename} ${Matlab_LIBRARIES} ${IDYNTREE_LIBRARIES} idyntree-core-exp)
+swig_link_libraries(${modulename} ${Matlab_LIBRARIES} ${IDYNTREE_LIBRARIES} idyntree-core)
 set_target_properties(${modulename} PROPERTIES PREFIX "" SUFFIX .${Matlab_MEX_EXTENSION})
 
 # Install the generated front-end to ${CMAKE_INSTALL_PREFIX}/matlab_tb
