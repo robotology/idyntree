@@ -65,6 +65,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOUR
 target_link_libraries(${libraryname} idyntree-core
                                      idyntree-model
                                      idyntree-sensors
+                                     idyntree-kdl
                                      ${orocos_kdl_LIBRARIES}
                                      ${urdfdom_LIBRARIES}
                                      ${console_bridge_LIBRARIES}

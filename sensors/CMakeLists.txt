@@ -27,7 +27,7 @@ set(IDYNTREE_SENSORS_SOURCES src/Sensors.cpp
                              src/Accelerometer.cpp
                              src/Gyroscope.cpp)
                      #        src/IMeasurement.cpp)
-                             
+
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_SENSORS_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_SENSORS_HEADERS})
 #SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_SENSORS_PRIVATE_INCLUDES})
@@ -40,7 +40,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOUR
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
                                          PRIVATE ${EIGEN3_INCLUDE_DIR})
 
-target_link_libraries(${libraryname} idyntree-core-exp)
+target_link_libraries(${libraryname} idyntree-core)
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_SENSORS_HEADERS})
 

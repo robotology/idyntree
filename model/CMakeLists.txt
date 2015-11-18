@@ -52,7 +52,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOUR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                           PRIVATE ${EIGEN3_INCLUDE_DIR})
 
-target_link_libraries(${libraryname} idyntree-core-exp)
+target_link_libraries(${libraryname} idyntree-core)
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODEL_HEADERS})
 

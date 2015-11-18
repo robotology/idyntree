@@ -2,49 +2,117 @@
 # Authors: Silvio Traversaro
 # CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
 
-project(iDynTree_Core CXX)
+project(iDynTree_Base CXX)
 
-file(GLOB IDYNTREE_CORE_HEADERS
-     "include/kdl_codyco/*.hpp"
- )
+set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
+                              include/iDynTree/Core/ArticulatedBodyInertia.h
+                              include/iDynTree/Core/ClassicalAcc.h
+                              include/iDynTree/Core/Direction.h
+                              include/iDynTree/Core/IMatrix.h
+                              include/iDynTree/Core/IVector.h
+                              include/iDynTree/Core/MatrixDynSize.h
+                              include/iDynTree/Core/MatrixFixSize.h
+                              include/iDynTree/Core/Position.h
+                              include/iDynTree/Core/PositionRaw.h
+                              include/iDynTree/Core/PositionSemantics.h
+                              include/iDynTree/Core/Rotation.h
+                              include/iDynTree/Core/RotationRaw.h
+                              include/iDynTree/Core/RotationSemantics.h
+                              include/iDynTree/Core/RotationalInertiaRaw.h
+                              include/iDynTree/Core/SpatialAcc.h
+                              include/iDynTree/Core/SpatialForceVector.h
+                              include/iDynTree/Core/SpatialInertiaRaw.h
+                              include/iDynTree/Core/SpatialInertia.h
+                              include/iDynTree/Core/SpatialMomentum.h
+                              include/iDynTree/Core/SpatialMotionVector.h
+                              include/iDynTree/Core/TestUtils.h
+                              include/iDynTree/Core/Transform.h
+                              include/iDynTree/Core/TransformSemantics.h
+                              include/iDynTree/Core/Twist.h
+                              include/iDynTree/Core/Utils.h
+                              include/iDynTree/Core/VectorFixSize.h
+                              include/iDynTree/Core/VectorDynSize.h
+                              include/iDynTree/Core/LinearForceVector3.h
+                              include/iDynTree/Core/AngularForceVector3.h
+                              include/iDynTree/Core/LinearMotionVector3.h
+                              include/iDynTree/Core/AngularMotionVector3.h
+                              include/iDynTree/Core/Wrench.h)
 
-file (GLOB IDYNTREE_CORE_PRIVATE_INCLUDES
-    "include/kdl_codyco/config.h"
-)
+set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h
+                                       include/iDynTree/Core/PrivateMotionForceVertorAssociations.h
+									   include/iDynTree/Core/PrivatePreProcessorUtils.h
+                                       include/iDynTree/Core/GeomVector3.h
+                                       include/iDynTree/Core/MotionVector3.h
+                                       include/iDynTree/Core/ForceVector3.h
+                                       include/iDynTree/Core/SpatialVector.h)
 
-file(GLOB IDYNTREE_CORE_SOURCES
-    "src/*.cpp"
-)
 
-SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_SOURCES})
-SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_HEADERS})
-SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_CORE_PRIVATE_INCLUDES})
+set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
+                              src/ArticulatedBodyInertia.cpp
+                              src/ClassicalAcc.cpp
+                              src/Direction.cpp
+                              src/InterfaceDestructors.cpp
+                              src/MatrixDynSize.cpp
+                              src/LinearForceVector3.cpp
+                              src/AngularForceVector3.cpp
+                              src/LinearMotionVector3.cpp
+                              src/AngularMotionVector3.cpp
+                              src/ForceVector3.cpp
+                              src/MotionVector3.cpp
+                              src/GeomVector3.cpp
+                              src/Position.cpp
+                              src/PositionRaw.cpp
+                              src/PositionSemantics.cpp
+                              src/Rotation.cpp
+                              src/RotationRaw.cpp
+                              src/RotationSemantics.cpp
+                              src/RotationalInertiaRaw.cpp
+                              src/SpatialAcc.cpp
+                              src/SpatialForceVector.cpp
+                              src/SpatialMomentum.cpp
+                              src/SpatialMotionVector.cpp
+                              src/SpatialInertiaRaw.cpp
+                              src/SpatialInertia.cpp
+                              src/TestUtils.cpp
+                              src/Transform.cpp
+                              src/TransformSemantics.cpp
+                              src/Twist.cpp
+                              src/Utils.cpp
+                              src/VectorDynSize.cpp
+                              src/Wrench.cpp
+                              src/PrivateUtils.cpp)
 
-# share headers with all iDynTree targes
+SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})
+SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})
+#SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
+
+# share headers with all iDynTree targets
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
-#include system headers
-include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
-                            ${EIGEN3_INCLUDE_DIR})
+set(libraryname idyntree-core)
 
-add_library(idyntree-core ${IDYNTREE_CORE_SOURCES} ${IDYNTREE_CORE_HEADERS} ${IDYNTREE_CORE_PRIVATE_INCLUDES})
+add_library(${libraryname} ${IDYNTREE_CORE_EXP_SOURCES} ${IDYNTREE_CORE_EXP_HEADERS} ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
 
-target_include_directories(idyntree-core PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                ${EIGEN3_INCLUDE_DIR})
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
+                                          PRIVATE ${EIGEN3_INCLUDE_DIR})
 
-target_link_libraries(idyntree-core idyntree-core-exp idyntree-model ${orocos_kdl_LIBRARIES})
+set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_EXP_HEADERS})
 
-set_property(TARGET idyntree-core PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_HEADERS})
-
-install(TARGETS idyntree-core
+install(TARGETS ${libraryname}
         EXPORT iDynTree
+        COMPONENT runtime
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/kdl_codyco
-        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/kdl_codyco/impl)
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Core
+        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Core/impl)
 
-set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-core)
+set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
+
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif(IDYNTREE_COMPILE_TESTS)

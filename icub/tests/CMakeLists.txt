@@ -21,10 +21,10 @@ add_executable(iDynTreeiCubExternalWrenchesEstimationTest iDynTreeiCubExternalWr
 
 target_link_libraries(iDynTreeJacobianTest idyntree-icub)
 target_link_libraries(iDynTreeRelativeJacobianTest idyntree-icub)
-target_link_libraries(iDynTreeWholeBodyFTsensorEstimateTest  idyntree-icub ${orocos_kdl_LIBRARIES})
-target_link_libraries(iDynTreeExportFixedJointsFrames idyntree-icub ${orocos_kdl_LIBRARIES} )
+target_link_libraries(iDynTreeWholeBodyFTsensorEstimateTest idyntree-icub)
+target_link_libraries(iDynTreeExportFixedJointsFrames idyntree-icub)
 target_link_libraries(iDynTreeExternalWrenchesEstimationTest idyntree-icub )
-target_link_libraries(iDynTreeiCubExternalWrenchesEstimationTest idyntree-icub ${orocos_kdl_LIBRARIES} )
+target_link_libraries(iDynTreeiCubExternalWrenchesEstimationTest idyntree-icub)
 
 #target_link_libraries(iDynTreeCOM idyntree ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES} )
 
