@@ -10,6 +10,10 @@ macro(add_unit_test classname)
     target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
     target_link_libraries(${testbinary} idyntree-core)
     add_test(NAME ${testname} COMMAND ${testbinary})
+
+    if(IDYNTREE_RUN_VALGRIND_TESTS)
+        add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} ./${testbinary})
+    endif()
 endmacro()
 
 add_unit_test(Axis)
