@@ -105,6 +105,7 @@ namespace iDynTree
         Position operator-(const Position &other) const;
         Position operator-() const;
         Twist    operator*(const Twist    & other) const;
+        SpatialForceVector operator*(const SpatialForceVector & other) const;
         SpatialAcc      operator*(const SpatialAcc & other) const;
         SpatialMomentum operator*(const SpatialMomentum & other) const;
         Wrench   operator*(const Wrench   & other) const;

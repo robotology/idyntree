@@ -27,6 +27,7 @@ namespace iDynTree
     class SpatialMotionVector;
     class SpatialForceVector;
     class AngularMotionVector3;
+    class ArticulatedBodyInertia;
 
     /**
      * Class representation the rotation of an orientation frame
@@ -126,6 +127,7 @@ namespace iDynTree
         Rotation operator*(const Rotation & other) const;
         Rotation inverse() const;
         Position operator*(const Position & other) const;
+        SpatialForceVector operator*(const SpatialForceVector & other) const;
         Twist    operator*(const Twist    & other) const;
         Wrench   operator*(const Wrench   & other) const;
         Direction operator*(const Direction & other) const;
@@ -197,7 +199,7 @@ namespace iDynTree
         /**
          * Return a rotation object given Roll, Pitch and Yaw values.
          *
-         * @note This is equivalent to RotZ(y)*RotY(p)*RotX(r) . 
+         * @note This is equivalent to RotZ(y)*RotY(p)*RotX(r) .
          * @note This method is compatible with the KDL::Rotation::RPY method.
          */
         static Rotation RPY(const double roll, const double pitch, const double yaw);

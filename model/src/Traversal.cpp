@@ -6,6 +6,7 @@
  */
 
 #include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model/Model.h>
 
 #include <cassert>
 
@@ -14,7 +15,7 @@ namespace iDynTree
 
 Traversal::Traversal()
 {
-    reset(0);
+    reset(0,0);
 }
 
 Traversal::Traversal(const Traversal& other)
@@ -26,23 +27,29 @@ Traversal& Traversal::operator=(const Traversal& other)
 {
     assert(false);
 
-	return *this;
+    return *this;
 }
 
 Traversal::~Traversal()
 {
-    reset(0);
+    reset(0,0);
 }
 
-bool Traversal::reset(unsigned int nrOfVisitedLinks)
+bool Traversal::reset(unsigned int nrOfVisitedLinks, Model& model)
+{
+    return reset(nrOfVisitedLinks,model.getNrOfLinks());
+}
+
+
+bool Traversal::reset(unsigned int nrOfVisitedLinks, unsigned int nrOfLinksInModel)
 {
     this->links.resize(nrOfVisitedLinks);
     this->parents.resize(nrOfVisitedLinks);
     this->toParentJoints.resize(nrOfVisitedLinks);
+    this->linkIndexToTraversalIndex.resize(nrOfLinksInModel);
 
-	return true;
+    return true;
 }
-
 
 bool Traversal::setTraversalElement(unsigned int traversalIndex, const Link * link,
                                     const IJoint * jointToParent, const Link * parentLink)
@@ -56,6 +63,8 @@ bool Traversal::setTraversalElement(unsigned int traversalIndex, const Link * li
     this->links[traversalIndex] = link;
     this->toParentJoints[traversalIndex] = jointToParent;
     this->parents[traversalIndex] = parentLink;
+
+    this->linkIndexToTraversalIndex[link->getIndex()] = traversalIndex;
 
     return true;
 }
@@ -80,8 +89,15 @@ const Link* Traversal::getParentLink(unsigned int traversalIndex) const
     return this->parents[traversalIndex];
 }
 
+const IJoint* Traversal::getParentJointFromLinkIndex(const LinkIndex linkIndex) const
+{
+    return this->toParentJoints[linkIndexToTraversalIndex[linkIndex]];
+}
 
-
+const Link* Traversal::getParentLinkFromLinkIndex(const LinkIndex linkIndex) const
+{
+    return this->parents[linkIndexToTraversalIndex[linkIndex]];
+}
 
 
 

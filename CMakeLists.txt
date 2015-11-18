@@ -105,7 +105,7 @@ install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
 
 include(AddUninstallTarget)
 
-if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_KDL)
+if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)
 endif()
 

@@ -212,6 +212,11 @@ namespace iDynTree
         return changeCoordFrameOf(other);
     }
 
+    SpatialForceVector Rotation::operator*(const SpatialForceVector& other) const
+    {
+        return changeCoordFrameOfT<SpatialForceVector>(*this, other);
+    }
+
     Twist Rotation::operator*(const Twist& other) const
     {
         return changeCoordFrameOfT<Twist>(*this, other);

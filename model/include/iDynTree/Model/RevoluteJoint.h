@@ -75,21 +75,42 @@ namespace iDynTree
         virtual Axis getAxis(const LinkIndex linkA) const;
 
         // Documentation inherited
-        virtual Transform getTransform(const IRawVector& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const;
+        virtual Transform getRestTransform(const LinkIndex child,
+                                           const LinkIndex parent) const;
 
-         // Documentation inherited
-        virtual LinkPosVelAcc computeLinkPosVelAcc(const IRawVector& jntPos, const IRawVector& jntVel, const IRawVector& jntAcc,
-                                                   const LinkPosVelAcc & linkBstate, const LinkIndex linkA, const LinkIndex linkB) const;
 
         // Documentation inherited
-        virtual LinkVelAcc computeLinkVelAcc(const IRawVector& jntPos, const IRawVector& jntVel, const IRawVector& jntAcc, const LinkVelAcc & linkBstate,
-                                             const LinkIndex linkA, const LinkIndex linkB) const;
+        virtual Transform getTransform(const IRawVector & jntPos,
+                                       const LinkIndex child,
+                                       const LinkIndex parent) const;
+
+        // Documentation inherited
+        virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,
+                                                            const LinkIndex child,
+                                                            const LinkIndex parent) const;
+
+         // Documentation inherited
+        virtual void computeChildPosVelAcc(const IRawVector & jntPos,
+                                           const IRawVector & jntVel,
+                                           const IRawVector & jntAcc,
+                                           LinkPositions & linkPositions,
+                                           LinkVelArray & linkVels,
+                                           LinkAccArray & linkAccs,
+                                           const LinkIndex child, const LinkIndex parent) const;
+
+        // Documentation inherited
+        virtual void computeChildVelAcc(const IRawVector & jntPos,
+                                        const IRawVector & jntVel,
+                                        const IRawVector & jntAcc,
+                                        LinkVelArray & linkVels,
+                                        LinkAccArray & linkAccs,
+                                        const LinkIndex child, const LinkIndex parent) const;
 
         // Documentation inherited
         virtual void computeJointTorque(const IRawVector & jntPos, const Wrench & internalWrench,
-                                        const LinkIndex linkThatAppliesWrench,
-                                        const LinkIndex linkOnWhichWrenchIsApplied,
+                                        const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
                                         IRawVector & jntTorques) const;
+
     };
 }
 

@@ -51,76 +51,87 @@ unsigned int FreeFloatingPos::getNrOfPosCoords() const
     return this->m_jointPos.size();
 }
 
-
 FreeFloatingPos::~FreeFloatingPos()
 {
 }
 
-FreeFloatingPosVelAcc::FreeFloatingPosVelAcc(const Model& model)
+
+FreeFloatingVel::FreeFloatingVel(const Model& model)
 {
     resize(model);
 }
 
-LinkPosVelAcc& FreeFloatingPosVelAcc::basePosVelAcc()
+Twist& FreeFloatingVel::baseVel()
 {
-    return this->m_basePosVelAcc;
+    return this->m_baseVel;
 }
 
-
-const LinkPosVelAcc& FreeFloatingPosVelAcc::basePosVelAcc() const
+const Twist& FreeFloatingVel::baseVel() const
 {
-    return this->m_basePosVelAcc;
+    return this->m_baseVel;
 }
 
-IRawVector& FreeFloatingPosVelAcc::jointPos()
-{
-    return this->m_jointPos;
-}
-
-const IRawVector& FreeFloatingPosVelAcc::jointPos() const
-{
-    return this->m_jointPos;
-}
-
-IRawVector& FreeFloatingPosVelAcc::jointVel()
-{
-    return this->m_jointVel;
-}
-
-const IRawVector& FreeFloatingPosVelAcc::jointVel() const
-{
-    return this->m_jointVel;
-}
-
-IRawVector& FreeFloatingPosVelAcc::jointAcc()
-{
-    return this->m_jointAcc;
-}
-
-const IRawVector& FreeFloatingPosVelAcc::jointAcc() const
-{
-    return this->m_jointAcc;
-}
-
-
-void FreeFloatingPosVelAcc::resize(const Model& model)
-{
-    this->m_jointPos.resize(model.getNrOfPosCoords());
-    this->m_jointVel.resize(model.getNrOfDOFs());
-    this->m_jointAcc.resize(model.getNrOfDOFs());
-}
-
-unsigned int FreeFloatingPosVelAcc::getNrOfPosCoords() const
-{
-    return this->m_jointPos.size();
-}
-
-unsigned int FreeFloatingPosVelAcc::getNrOfDOFs() const
+unsigned int FreeFloatingVel::getNrOfDOFs() const
 {
     return this->m_jointVel.size();
 }
 
-FreeFloatingPosVelAcc::~FreeFloatingPosVelAcc()
+IRawVector& FreeFloatingVel::jointVel()
+{
+    return this->m_jointVel;
+}
+
+const IRawVector& FreeFloatingVel::jointVel() const
+{
+    return this->m_jointVel;
+}
+
+void FreeFloatingVel::resize(const Model& model)
+{
+    this->m_jointVel.resize(model.getNrOfDOFs());
+}
+
+FreeFloatingVel::~FreeFloatingVel()
+{
+
+}
+
+FreeFloatingAcc::FreeFloatingAcc(const Model& model)
+{
+    resize(model);
+}
+
+SpatialAcc& FreeFloatingAcc::baseAcc()
+{
+    return this->m_baseAcc;
+}
+
+const SpatialAcc& FreeFloatingAcc::baseAcc() const
+{
+    return this->m_baseAcc;
+}
+
+unsigned int FreeFloatingAcc::getNrOfDOFs() const
+{
+    return this->m_jointAcc.size();
+}
+
+IRawVector& FreeFloatingAcc::jointAcc()
+{
+    return this->m_jointAcc;
+}
+
+const IRawVector& FreeFloatingAcc::jointAcc() const
+{
+    return this->m_jointAcc;
+}
+
+void FreeFloatingAcc::resize(const Model& model)
+{
+    this->m_jointAcc.resize(model.getNrOfDOFs());
+}
+
+FreeFloatingAcc::~FreeFloatingAcc()
 {
 
 }

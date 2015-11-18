@@ -26,7 +26,7 @@ void assertStringAreEqual(const std::string& val1, const std::string& val2, doub
 {
     if( val1 != val2 )
     {
-       std::cerr << "assertStringAreEqual failure: val1 is " << val1
+       std::cerr << file << ":" << line << " : assertStringAreEqual failure: val1 is " << val1
                   << " while val2 is " << val2 << std::endl;
             exit(EXIT_FAILURE);
     }
@@ -36,7 +36,7 @@ void assertDoubleAreEqual(const double& val1, const double& val2, double tol, st
 {
     if( fabs(val1-val2) >= tol )
     {
-       std::cerr << "assertDoubleAreEqual failure: val1 is " << val1
+       std::cerr << file << ":" << line << " : assertDoubleAreEqual failure: val1 is " << val1
                   << " while val2 is " << val2 << std::endl;
             exit(EXIT_FAILURE);
     }
@@ -45,11 +45,30 @@ void assertDoubleAreEqual(const double& val1, const double& val2, double tol, st
 void printVector(std::string name, const IVector& vec)
 {
     std::cerr << name << " : \n";
-    for(int i=0; i < vec.size(); i++ )
+    for(unsigned int i=0; i < vec.size(); i++ )
     {
         std::cerr << vec(i) << "\n";
     }
 }
+
+void printVectorDifference(std::string name, const IVector& vec1, const IVector& vec2)
+{
+    std::cerr << name << " : \n";
+    size_t minSize = vec1.size();
+
+    if( vec2.size() < minSize )
+    {
+        minSize = vec2.size();
+    }
+
+    for(unsigned int i=0; i < minSize; i++ )
+    {
+        std::cerr << vec1(i) - vec2(i) << "\n";
+    }
+}
+
+
+
 
 void assertVectorAreEqual(const IVector& vec1, const IVector& vec2, double tol, std::string file, int line)
 {
@@ -68,6 +87,7 @@ void assertVectorAreEqual(const IVector& vec1, const IVector& vec2, double tol, 
                   << " while of vec2 is " << vec2(i) << std::endl;
             printVector("vec1",vec1);
             printVector("vec2",vec2);
+            printVectorDifference("vec1-vec2",vec1,vec2);
             exit(EXIT_FAILURE);
         }
     }
@@ -120,6 +140,14 @@ void assertSpatialMotionAreEqual(const SpatialMotionVector& f1, const SpatialMot
 double getRandomDouble(double min, double max)
 {
     return min + (max-min)*((double)rand())/((double)RAND_MAX);
+}
+
+void getRandomVector(IVector & vec)
+{
+    for(unsigned int i=0; i<vec.size(); i++)
+    {
+        vec(i) = getRandomDouble();
+    }
 }
 
 Position getRandomPosition()

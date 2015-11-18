@@ -100,17 +100,17 @@ void checkInvariance(const Transform & trans, const SpatialInertia & inertia, co
 
 int main()
 {
-    Transform trans(Rotation::RPY(0.0,0.0,0.0),Position(10,0,0));
+    Transform trans(Rotation::RPY(5.0,6.0,-4.0),Position(10,6,-4));
 
-    double twistData[6] = {0.0,0.0,0.0,1.0,2.0,3.0};
+    double twistData[6] = {-5.0,-6.0,-5.0,1.0,2.0,3.0};
     Twist twist(LinVelocity(twistData,3),AngVelocity(twistData+3,3));
 
     ASSERT_EQUAL_DOUBLE(twist.asVector()(0),twistData[0]);
 
-    double rotInertiaData[3*3] = {10.0,0.0,0.0,
-                                  0.0,20.0,0.0,
-                                  0.0,0.0,30.0};
-    SpatialInertia inertia(1.0,Position(100,0,0),RotationalInertiaRaw(rotInertiaData,3,3));
+    double rotInertiaData[3*3] = {10.0,0.04,0.04,
+                                  0.04,20.0,0.04,
+                                  0.04,0.04,24.0};
+    SpatialInertia inertia(1.0,Position(100,-5,10),RotationalInertiaRaw(rotInertiaData,3,3));
 
     checkInertiaTwistProduct(inertia,twist);
     checkInertiaTransformation(trans,inertia);

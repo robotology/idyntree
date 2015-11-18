@@ -16,11 +16,14 @@ classdef SpatialMotionVector < iDynTree.SpatialMotionVectorBase
         self.swigInd=uint64(0);
       end
     end
-    function varargout = cross(self,varargin)
+    function varargout = mtimes(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(381, self, varargin{:});
     end
-    function varargout = exp(self,varargin)
+    function varargout = cross(self,varargin)
       [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(382, self, varargin{:});
+    end
+    function varargout = exp(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(383, self, varargin{:});
     end
   end
   methods(Static)

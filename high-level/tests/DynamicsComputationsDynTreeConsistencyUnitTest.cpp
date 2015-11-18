@@ -146,7 +146,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
         properAcc(i) = baseAcc(i) - gravity(i);
     }
 
-    for(int dof=0; dof < dofs; dof++)
+    for(size_t dof=0; dof < dofs; dof++)
 
     {
         qj(dof) = random_double();

@@ -195,34 +195,45 @@ bool ToKDL(const iDynTree::FreeFloatingPos & idyntree_freeFloatingPos,
     return true;
 }
 
-bool ToKDL(const FreeFloatingPosVelAcc& idyntree_freeFloatingState,
-           KDL::Frame& world_H_base, KDL::JntArray& kdl_jntarray,
-           KDL::Twist& base_vel, KDL::JntArray& kdl_jntVel,
-           KDL::Twist& base_acc, KDL::JntArray& kdl_jntAcc, const std::vector< int > kdlDof2idyntree)
-{
-    world_H_base = ToKDL(idyntree_freeFloatingState.basePosVelAcc().pos());
-    base_vel     = ToKDL(idyntree_freeFloatingState.basePosVelAcc().vel());
-    base_acc     = ToKDL(idyntree_freeFloatingState.basePosVelAcc().acc());
 
-    if( kdl_jntarray.rows() != idyntree_freeFloatingState.getNrOfPosCoords() ||
-        kdl_jntVel.rows()   != idyntree_freeFloatingState.getNrOfDOFs()    ||
-        kdl_jntAcc.rows()   != idyntree_freeFloatingState.getNrOfDOFs() )
+
+bool ToKDL(const FreeFloatingVel& idyntree_freeFloatingState,
+           KDL::Twist& base_vel, KDL::JntArray& kdl_jntVel, const std::vector< int > kdlDof2idyntree)
+{
+    base_vel     = ToKDL(idyntree_freeFloatingState.baseVel());
+
+    if( kdl_jntVel.rows()   != idyntree_freeFloatingState.getNrOfDOFs() )
     {
          std::cerr << "[ERROR] ToKDL failed" << std::endl;
          return false;
     }
 
-    // We do here the **strong** assumption that the dof index
-    // of KDL and the one of iDynTree coincide
-    for(unsigned int kdlDof=0; kdlDof < kdl_jntarray.rows(); kdlDof++ )
+    for(unsigned int kdlDof=0; kdlDof < kdl_jntVel.rows(); kdlDof++ )
     {
-        kdl_jntarray(kdlDof) = idyntree_freeFloatingState.jointPos()((kdlDof2idyntree[kdlDof]));
         kdl_jntVel(kdlDof) = idyntree_freeFloatingState.jointVel()((kdlDof2idyntree[kdlDof]));
+    }
+
+    return true;
+}
+
+bool ToKDL(const FreeFloatingAcc& idyntree_freeFloatingState,
+           KDL::Twist& base_acc, KDL::JntArray& kdl_jntAcc, const std::vector< int > kdlDof2idyntree)
+{
+    base_acc     = ToKDL(idyntree_freeFloatingState.baseAcc());
+
+    if( kdl_jntAcc.rows()   != idyntree_freeFloatingState.getNrOfDOFs() )
+    {
+         std::cerr << "[ERROR] ToKDL failed" << std::endl;
+         return false;
+    }
+
+    for(unsigned int kdlDof=0; kdlDof < kdl_jntAcc.rows(); kdlDof++ )
+    {
         kdl_jntAcc(kdlDof) = idyntree_freeFloatingState.jointAcc()((kdlDof2idyntree[kdlDof]));
     }
 
+    return true;
 }
-
 
 
 Position ToiDynTree(const KDL::Vector& kdl_vector)

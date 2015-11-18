@@ -7,6 +7,7 @@
 // Warning 512: using non-const method ... instead)
 
 %ignore *::data() const;
+%ignore *::operator+=;
 %ignore *::operator()(const unsigned int index) const;
 %ignore *::operator()(const unsigned int row, const unsigned int col) const;
 %ignore *::getSemantics() const;

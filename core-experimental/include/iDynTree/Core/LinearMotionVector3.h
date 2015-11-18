@@ -17,7 +17,7 @@ namespace iDynTree
     class PositionSemantics;
     class AngularMotionVector3;
     class AngularMotionVector3Semantics;
-    
+
     /**
      * Class providing the semantics for any linear motion vector.
      */
@@ -25,7 +25,7 @@ namespace iDynTree
     {
     protected:
         int point;
-        
+
     public:
         /**
          * Constructors:
@@ -34,7 +34,7 @@ namespace iDynTree
         LinearMotionVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame);
         LinearMotionVector3Semantics(const LinearMotionVector3Semantics & other);
         ~LinearMotionVector3Semantics();
-        
+
         /**
          * Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
@@ -47,8 +47,8 @@ namespace iDynTree
                             const LinearMotionVector3Semantics & op2,
                             LinearMotionVector3Semantics & result);
     };
-    
-    
+
+
     /**
      * Class providing the raw coordinates and semantics for any linear motion vector
      *
@@ -62,22 +62,23 @@ namespace iDynTree
     {
     public:
         typedef MotionForce_traits<LinearMotionVector3>::SemanticsType SemanticsType;
-        
+
         /**
          * constructors
          */
         LinearMotionVector3();
+        LinearMotionVector3(const double x, const double y, const double z);
         LinearMotionVector3(const double* in_data, const unsigned int in_size);
         LinearMotionVector3(const LinearMotionVector3 & other);
         virtual ~LinearMotionVector3();
-        
+
         /**
          * Geometric operations
          */
         const LinearMotionVector3 changePoint(const Position & newPoint,
                                               const AngularMotionVector3 & otherAngular) const;
     };
-    
+
     typedef LinearMotionVector3 LinVelocity;
     typedef LinearMotionVector3 LinAcceleration;
 }

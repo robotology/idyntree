@@ -25,7 +25,7 @@ namespace iDynTree
     {
     protected:
         int point;
-        
+
     public:
         /**
          * Constructors:
@@ -34,7 +34,7 @@ namespace iDynTree
         AngularForceVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame);
         AngularForceVector3Semantics(const AngularForceVector3Semantics & other);
         ~AngularForceVector3Semantics();
-        
+
         /**
          * Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
@@ -47,8 +47,8 @@ namespace iDynTree
                             const AngularForceVector3Semantics & op2,
                             AngularForceVector3Semantics & result);
     };
-    
-    
+
+
     /**
      * Class providing the raw coordinates and semantics for any torque vector
      *
@@ -67,6 +67,7 @@ namespace iDynTree
          * constructors
          */
         AngularForceVector3();
+        AngularForceVector3(const double x, const double y, const double z);
         AngularForceVector3(const double* in_data, const unsigned int in_size);
         AngularForceVector3(const AngularForceVector3 & other);
         virtual ~AngularForceVector3();
@@ -77,7 +78,7 @@ namespace iDynTree
         AngularForceVector3 changePoint(const Position & newPoint,
                                         const LinearForceVector3 & otherLinear) const;
     };
-    
+
     typedef AngularForceVector3 AngMomentum;
     typedef AngularForceVector3 Torque;
 }

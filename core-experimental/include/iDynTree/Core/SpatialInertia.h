@@ -45,6 +45,7 @@ namespace iDynTree
 
         // overloaded operators
         SpatialInertia  operator+(const SpatialInertia& other) const;
+        SpatialForceVector operator*(const SpatialMotionVector &other) const;
         SpatialMomentum operator*(const Twist &other) const;
         Wrench operator*(const SpatialAcc &other) const;
     };

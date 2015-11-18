@@ -27,8 +27,8 @@ namespace iDynTree
         LinearForceVector3Semantics(const LinearForceVector3Semantics & other);
         ~LinearForceVector3Semantics();
     };
-    
-    
+
+
     /**
      * Class providing the raw coordinates and semantics for any linear force vector
      *
@@ -42,16 +42,17 @@ namespace iDynTree
     {
     public:
         typedef MotionForce_traits<LinearForceVector3>::SemanticsType SemanticsType;
-        
+
         /**
          * constructors
          */
         LinearForceVector3();
+        LinearForceVector3(const double x, const double y, const double z);
         LinearForceVector3(const double* in_data, const unsigned int in_size);
         LinearForceVector3(const LinearForceVector3 & other);
         virtual ~LinearForceVector3();
     };
-    
+
     typedef LinearForceVector3 LinMomentum;
     typedef LinearForceVector3 Force;
 }

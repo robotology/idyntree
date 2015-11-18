@@ -3,21 +3,21 @@ classdef LinkPositions < SwigRef
     function self = LinkPositions(varargin)
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(544, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(544, varargin{:}); % FIXME
+        %self.swigInd = iDynTreeMATLAB_wrap(550, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(550, varargin{:}); % FIXME
         self.swigInd = tmp.swigInd;
         tmp.swigInd = uint64(0);
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(545, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(551, self, varargin{:});
     end
-    function varargout = linkPos(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(546, self, varargin{:});
+    function varargout = paren(self,varargin)
+      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(552, self, varargin{:});
     end
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(547, self);
+        iDynTreeMATLAB_wrap(553, self);
         self.swigInd=uint64(0);
       end
     end

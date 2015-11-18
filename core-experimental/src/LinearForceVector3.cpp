@@ -42,6 +42,14 @@ namespace iDynTree
     {
     }
 
+    LinearForceVector3::LinearForceVector3(const double x, const double y, const double z)
+    {
+        this->m_data[0] = x;
+        this->m_data[1] = y;
+        this->m_data[2] = z;
+    }
+
+
     LinearForceVector3::LinearForceVector3(const double* in_data, const unsigned int in_size):
     ForceVector3<LinearForceVector3>(in_data, in_size)
     {

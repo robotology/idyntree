@@ -10,6 +10,7 @@
 // KDL related includes
 #include <kdl_codyco/position_loops.hpp>
 #include <kdl_codyco/rnea_loops.hpp>
+#include <kdl_codyco/crba_loops.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/KDLConversions.h>
 
@@ -21,11 +22,12 @@
 #include <iDynTree/Model/RevoluteJoint.h>
 
 #include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/InverseDynamics.h>
+#include <iDynTree/Model/Dynamics.h>
 
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model/FreeFloatingMassMatrix.h>
 
 #include <iDynTree/ModelIO/URDFModelImport.h>
 
@@ -35,8 +37,23 @@
 
 using namespace iDynTree;
 
+int kdl2idyntreeFloatingDOFMapping(int kdl_floating_dof, const std::vector<int> & kdl2idyntree_joints)
+{
+    if( kdl_floating_dof < 6 )
+    {
+        return kdl_floating_dof;
+    }
+    else
+    {
+        return 6+kdl2idyntree_joints[kdl_floating_dof-6];
+    }
+}
+
 void testFwdKinConsistency(std::string modelFilePath)
 {
+    std::cout << "Testing " << modelFilePath << std::endl;
+
+
     // Load iDynTree model and compute a default traversal
     iDynTree::Model model;
     modelFromURDF(modelFilePath,model);
@@ -57,19 +74,18 @@ void testFwdKinConsistency(std::string modelFilePath)
 
     // Input : joint positions and base position with respect to world
     iDynTree::FreeFloatingPos baseJntPos(model);
-    iDynTree::FreeFloatingPosVelAcc baseJntPosVelAcc(model);
+    iDynTree::FreeFloatingVel baseJntVel(model);
+    iDynTree::FreeFloatingAcc baseJntAcc(model);
 
     baseJntPos.worldBasePos() =  getRandomTransform();
-    baseJntPosVelAcc.basePosVelAcc().pos() =  baseJntPos.worldBasePos();
-    baseJntPosVelAcc.basePosVelAcc().vel() = getRandomTwist();
-    baseJntPosVelAcc.basePosVelAcc().acc() =  getRandomTwist();
+    baseJntVel.baseVel() = getRandomTwist();
+    baseJntAcc.baseAcc() =  getRandomTwist();
 
-    for(int jnt=0; jnt < baseJntPos.getNrOfPosCoords(); jnt++)
+    for(unsigned int jnt=0; jnt < baseJntPos.getNrOfPosCoords(); jnt++)
     {
         baseJntPos.jointPos()(jnt) = getRandomDouble();
-        baseJntPosVelAcc.jointPos()(jnt) = baseJntPos.jointPos()(jnt);
-        baseJntPosVelAcc.jointVel()(jnt) = getRandomDouble();
-        baseJntPosVelAcc.jointAcc()(jnt) = getRandomDouble();
+        baseJntVel.jointVel()(jnt) = getRandomDouble();
+        baseJntAcc.jointAcc()(jnt) = getRandomDouble();
     }
 
 
@@ -94,9 +110,9 @@ void testFwdKinConsistency(std::string modelFilePath)
     KDL::Twist  baseVelKDL;
     KDL::Twist  baseAccKDL;
 
-    ToKDL(baseJntPosVelAcc,worldBaseKDL,jntKDL,
-                           baseVelKDL,jntVelKDL,
-                           baseAccKDL,jntAccKDL,kdl2idyntree_joints);
+    ToKDL(baseJntPos,worldBaseKDL,jntKDL,kdl2idyntree_joints);
+    ToKDL(baseJntVel,baseVelKDL,jntVelKDL,kdl2idyntree_joints);
+    ToKDL(baseJntAcc,baseAccKDL,jntAccKDL,kdl2idyntree_joints);
 
     // Output : link (for iDynTree) or frame positions with respect to world
     std::vector<KDL::Frame> framePositions(undirected_tree.getNrOfLinks());
@@ -129,7 +145,7 @@ void testFwdKinConsistency(std::string modelFilePath)
     for(unsigned int travEl = 0; travEl  < traversal.getNrOfVisitedLinks(); travEl++)
     {
         LinkIndex linkIndex = traversal.getLink(travEl)->getIndex();
-        ASSERT_EQUAL_TRANSFORM_TOL(linkPositions.linkPos(linkIndex).pos(),ToiDynTree(framePositions[idynTree2KDL_links[linkIndex]]),1e-1);
+        ASSERT_EQUAL_TRANSFORM_TOL(linkPositions(linkIndex),ToiDynTree(framePositions[idynTree2KDL_links[linkIndex]]),1e-1);
     }
 
     // Compution velocity & acceleration kinematics
@@ -138,35 +154,39 @@ void testFwdKinConsistency(std::string modelFilePath)
     KDL::CoDyCo::rneaKinematicLoop(undirected_tree,jntKDL,jntVelKDL,jntAccKDL,kdl_traversal,
                                                    baseVelKDL,baseAccKDL,kdlLinkVel,kdlLinkAcc);
 
-    LinkVelAccArray linksVelAcc(model);
+    iDynTree::LinkVelArray linksVels(model);
+    iDynTree::LinkAccArray linksAcc(model);
 
-    ForwardVelAccKinematics(model,traversal,baseJntPosVelAcc,linksVelAcc);
+    ForwardVelAccKinematics(model,traversal,baseJntPos,baseJntVel,baseJntAcc,linksVels,linksAcc);
 
     // Check results
     for(unsigned int travEl = 0; travEl  < traversal.getNrOfVisitedLinks(); travEl++)
     {
         LinkIndex linkIndex = traversal.getLink(travEl)->getIndex();
 
-        ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).vel().asVector(),
+        ASSERT_EQUAL_VECTOR(linksVels(linkIndex).asVector(),
                             ToiDynTree(kdlLinkVel[idynTree2KDL_links[linkIndex]]).asVector());
-        ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).acc().asVector(),
+        ASSERT_EQUAL_VECTOR(linksAcc(linkIndex).asVector(),
                             ToiDynTree(kdlLinkAcc[idynTree2KDL_links[linkIndex]]).asVector());
     }
 
     // Compute position, velocity and acceleration
-    LinkPosVelAccArray linksPosVelAcc(model);
+    LinkPositions linksPos_check(model);
+    iDynTree::LinkVelArray linksVels_check(model);
+    iDynTree::LinkAccArray linksAcc_check(model);
 
-    ForwardPosVelAccKinematics(model,traversal,baseJntPosVelAcc,linksPosVelAcc);
+    ForwardPosVelAccKinematics(model,traversal,baseJntPos, baseJntVel, baseJntAcc,
+                               linksPos_check,linksVels_check,linksAcc_check);
 
     for(unsigned int travEl = 0; travEl  < traversal.getNrOfVisitedLinks(); travEl++)
     {
         LinkIndex linkIndex = traversal.getLink(travEl)->getIndex();
-        ASSERT_EQUAL_TRANSFORM(linkPositions.linkPos(linkIndex).pos(),
-                               linksPosVelAcc.linkPosVelAcc(linkIndex).pos());
-        ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).vel().asVector(),
-                            linksPosVelAcc.linkPosVelAcc(linkIndex).vel().asVector());
-        ASSERT_EQUAL_VECTOR(linksVelAcc.linkVelAcc(linkIndex).acc().asVector(),
-                            linksPosVelAcc.linkPosVelAcc(linkIndex).acc().asVector());
+        ASSERT_EQUAL_TRANSFORM(linkPositions(linkIndex),
+                               linksPos_check(linkIndex));
+        ASSERT_EQUAL_VECTOR(linksVels(linkIndex).asVector(),
+                            linksVels_check(linkIndex).asVector());
+        ASSERT_EQUAL_VECTOR(linksAcc(linkIndex).asVector(),
+                            linksAcc(linkIndex).asVector());
     }
 
     // Compute torques (i.e. inverse dynamics)
@@ -179,7 +199,7 @@ void testFwdKinConsistency(std::string modelFilePath)
     std::vector<KDL::Wrench> fExtKDL(undirected_tree.getNrOfLinks());
     std::vector<KDL::Wrench> fKDL(undirected_tree.getNrOfLinks());
 
-    for(int link = 0; link < model.getNrOfLinks(); link++ )
+    for(unsigned int link = 0; link < model.getNrOfLinks(); link++ )
     {
         fExt(link) = iDynTree::Wrench::Zero(); // getRandomWrench();
         fExt(link).getLinearVec3()(0) = 0.0;
@@ -187,7 +207,9 @@ void testFwdKinConsistency(std::string modelFilePath)
         fKDL[idynTree2KDL_links[link]] = KDL::Wrench::Zero();
     }
 
-    bool ok = RNEADynamicPhase(model,traversal,baseJntPosVelAcc,linksVelAcc,fExt,f,baseWrenchJointTorques);
+    bool ok = RNEADynamicPhase(model,traversal,
+                               baseJntPos,
+                               linksVels,linksAcc,fExt,f,baseWrenchJointTorques);
 
     int retVal = KDL::CoDyCo::rneaDynamicLoop(undirected_tree,jntKDL,kdl_traversal,
                                  kdlLinkVel,kdlLinkAcc,
@@ -213,6 +235,37 @@ void testFwdKinConsistency(std::string modelFilePath)
     for(int dof = 0; dof < model.getNrOfDOFs(); dof++ )
     {
         ASSERT_EQUAL_DOUBLE(jntTorques(dof),baseWrenchJointTorques.jointTorques()(kdl2idyntree_joints[dof]));
+    }
+
+    // Check mass matrix
+    iDynTree::FreeFloatingMassMatrix massMatrix(model);
+    iDynTree::LinkInertias crbis(model);
+    ok = CompositeRigidBodyAlgorithm(model,traversal,baseJntPos,crbis,massMatrix);
+
+    KDL::CoDyCo::FloatingJntSpaceInertiaMatrix massMatrixKDL(undirected_tree.getNrOfDOFs()+6);
+    std::vector<KDL::RigidBodyInertia> Ic(undirected_tree.getNrOfLinks());
+
+    retVal = KDL::CoDyCo::crba_floating_base_loop(undirected_tree,kdl_traversal,jntKDL,Ic,massMatrixKDL);
+
+    ASSERT_EQUAL_DOUBLE(ok,true);
+    ASSERT_EQUAL_DOUBLE(retVal,0);
+
+    // Check composite rigid body inertias
+    for(int link = 0; link < model.getNrOfLinks(); link++ )
+    {
+         ASSERT_EQUAL_MATRIX(crbis(link).asMatrix(),ToiDynTree(Ic[idynTree2KDL_links[link]]).asMatrix());
+    }
+
+    // Check CRBA algorithm
+
+    for(int ii=0; ii < model.getNrOfDOFs()+6; ii++ )
+    {
+        for( int jj=0; jj < model.getNrOfDOFs()+6; jj++ )
+        {
+            int idyntreeII = kdl2idyntreeFloatingDOFMapping(ii,kdl2idyntree_joints);
+            int idyntreeJJ = kdl2idyntreeFloatingDOFMapping(jj,kdl2idyntree_joints);
+            ASSERT_EQUAL_DOUBLE(massMatrix(idyntreeII,idyntreeJJ),massMatrixKDL(ii,jj));
+        }
     }
 
     return;

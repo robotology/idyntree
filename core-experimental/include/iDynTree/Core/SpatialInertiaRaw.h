@@ -77,6 +77,7 @@ namespace iDynTree
         RotationalInertiaRaw getRotationalInertiaWrtFrameOrigin() const;
         RotationalInertiaRaw getRotationalInertiaWrtCenterOfMass() const;
 
+
         /**
          * Function to combine the rigid body inertia of two different rigid bodies,
          * giving the rigid body inertia of of the rigid body obtanined by welding the two bodies.

@@ -19,6 +19,10 @@ namespace iDynTree
     typedef int JointIndex;
     extern int JOINT_INVALID_INDEX;
     extern std::string JOINT_INVALID_NAME;
+
+    typedef int FrameIndex;
+    extern int FRAME_INVALID_INDEX;
+    extern std::string FRAME_INVALID_NAME;
 }
 
 #endif /* IDYNTREE_INDECES_H */

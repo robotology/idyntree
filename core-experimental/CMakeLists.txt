@@ -5,6 +5,7 @@
 project(iDynTree_Base CXX)
 
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
+                              include/iDynTree/Core/ArticulatedBodyInertia.h
                               include/iDynTree/Core/ClassicalAcc.h
                               include/iDynTree/Core/Direction.h
                               include/iDynTree/Core/IMatrix.h
@@ -47,6 +48,7 @@ set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h
 
 
 set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
+                              src/ArticulatedBodyInertia.cpp
                               src/ClassicalAcc.cpp
                               src/Direction.cpp
                               src/InterfaceDestructors.cpp

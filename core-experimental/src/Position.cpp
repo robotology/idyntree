@@ -122,12 +122,12 @@ namespace iDynTree
     {
         return changePointOfMotionT<SpatialMotionVector>(*this, other);
     }
-    
+
     SpatialForceVector Position::changePointOf(const SpatialForceVector & other) const
     {
         return changePointOfForceT<SpatialForceVector>(*this, other);
     }
-    
+
     Twist Position::changePointOf(const Twist & other) const
     {
         return changePointOfMotionT<Twist>(*this, other);
@@ -172,6 +172,11 @@ namespace iDynTree
     SpatialAcc Position::operator*(const SpatialAcc& other) const
     {
         return changePointOfMotionT<SpatialAcc>(*this, other);
+    }
+
+    SpatialForceVector Position::operator*(const SpatialForceVector& other) const
+    {
+        return changePointOfForceT<SpatialForceVector>(*this, other);
     }
 
     SpatialMomentum Position::operator*(const SpatialMomentum& other) const

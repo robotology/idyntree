@@ -45,6 +45,12 @@ namespace iDynTree
     {
     }
 
+    AngularMotionVector3::AngularMotionVector3(const double x, const double y, const double z)
+    {
+        this->m_data[0] = x;
+        this->m_data[1] = y;
+        this->m_data[2] = z;
+    }
 
     AngularMotionVector3::AngularMotionVector3(const double* in_data, const unsigned int in_size):
     MotionVector3<AngularMotionVector3>(in_data, in_size)

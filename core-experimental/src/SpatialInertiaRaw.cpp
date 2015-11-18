@@ -72,7 +72,14 @@ void SpatialInertiaRaw::fromRotationalInertiaWrtCenterOfMass(const double mass,
     Eigen::Map<const Eigen::Matrix3d> comInertia(rotInertiaWrtCom.data());
     Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
 
-    linkInertia = comInertia - squareCrossProductMatrix(mcom)/this->m_mass;
+    if( this->m_mass > 0)
+    {
+        linkInertia = comInertia - squareCrossProductMatrix(mcom)/this->m_mass;
+    }
+    else
+    {
+        linkInertia = comInertia;
+    }
 }
 
 
@@ -84,9 +91,13 @@ double SpatialInertiaRaw::getMass() const
 PositionRaw SpatialInertiaRaw::getCenterOfMass() const
 {
     PositionRaw ret;
-    ret(0) = this->m_mcom[0]/this->m_mass;
-    ret(1) = this->m_mcom[1]/this->m_mass;
-    ret(2) = this->m_mcom[2]/this->m_mass;
+
+    if( this->m_mass > 0 )
+    {
+        ret(0) = this->m_mcom[0]/this->m_mass;
+        ret(1) = this->m_mcom[1]/this->m_mass;
+        ret(2) = this->m_mcom[2]/this->m_mass;
+    }
 
     return ret;
 }
@@ -106,7 +117,14 @@ RotationalInertiaRaw SpatialInertiaRaw::getRotationalInertiaWrtCenterOfMass() co
     Eigen::Map<Eigen::Matrix3d> comInertia(retComInertia.data());
     Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
 
-    comInertia = linkInertia + squareCrossProductMatrix(mcom)/this->m_mass;
+    if( this->m_mass > 0 )
+    {
+        comInertia = linkInertia + squareCrossProductMatrix(mcom)/this->m_mass;
+    }
+    else
+    {
+        comInertia = linkInertia;
+    }
 
     return retComInertia;
 }

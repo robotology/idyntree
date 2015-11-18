@@ -8,12 +8,15 @@
 #ifndef IDYNTREE_TRAVERSAL_H
 #define IDYNTREE_TRAVERSAL_H
 
+#include <iDynTree/Model/Indeces.h>
+
 #include <vector>
 
 namespace iDynTree
 {
     class IJoint;
     class Link;
+    class Model;
 
     /**
      * Class that represents a traversal of a set of links of a Model.
@@ -40,6 +43,7 @@ namespace iDynTree
         std::vector<const Link   *> links;
         std::vector<const Link   *> parents;
         std::vector<const IJoint *> toParentJoints;
+        std::vector<int>            linkIndexToTraversalIndex;
 
         /**
          * Copy constructor is forbidden
@@ -86,6 +90,21 @@ namespace iDynTree
         const IJoint * getParentJoint(unsigned int traversalIndex) const;
 
         /**
+         * Get the parent link of the link with index linkIndex of the traversal.
+         *
+         * @return a pointer to the parent link of the traversalIndex-th link of the traversal.
+         */
+        const Link   * getParentLinkFromLinkIndex(const LinkIndex linkIndex) const;
+
+        /**
+         * Get the joint connecting the link with index linkIndex
+         * to its parent.
+         *
+         * @return a pointer to the joint connecting the  link traversalIndex-th link of the traversal.
+         */
+        const IJoint * getParentJointFromLinkIndex(const LinkIndex linkIndex) const;
+
+        /**
          * Reset the Traversal to contain nrOfVisitedLinks visited links.
          *
          * After a call to reset, all the pointers in the Traversal are set
@@ -94,13 +113,27 @@ namespace iDynTree
          *
          * @return true if all went well, false otherwise
          */
-        bool reset(unsigned int nrOfVisitedLinks);
+        bool reset(unsigned int nrOfVisitedLinks, unsigned int nrOfLinksInModel);
+
+        /**
+         * Reset the Traversal to contain nrOfVisitedLinks visited links.
+         *
+         * After a call to reset, all the pointers in the Traversal are set
+         * to 0, and the Traversal should be approprialy populated with the
+         * setters before use.
+         *
+         * @return true if all went well, false otherwise
+         */
+        bool reset(unsigned int nrOfVisitedLinks, Model & model);
 
         /**
          *
          * @return true if all went well, false otherwise
          */
-        bool setTraversalElement(unsigned int traversalIndex, const Link * link, const IJoint * jointToParent, const Link * parentLink);
+        bool setTraversalElement(unsigned int traversalIndex,
+                                 const Link * link,
+                                 const IJoint * jointToParent,
+                                 const Link * parentLink);
 
     };
 

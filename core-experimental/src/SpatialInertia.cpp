@@ -87,6 +87,12 @@ SpatialInertia SpatialInertia::operator+(const SpatialInertia& other) const
     return SpatialInertia::combine(*this,other);
 }
 
+SpatialForceVector SpatialInertia::operator*(const SpatialMotionVector& other) const
+{
+    return SpatialInertiaRaw::multiply(other);
+}
+
+
 Wrench SpatialInertia::operator*(const SpatialAcc& other) const
 {
     return SpatialInertiaRaw::multiply(other);

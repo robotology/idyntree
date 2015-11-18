@@ -23,6 +23,7 @@ namespace iDynTree
     class SpatialMomentum;
     class SpatialAcc;
     class SpatialInertia;
+    class ArticulatedBodyInertia;
 
     class PositionSemantics;
     class RotationSemantics;
@@ -232,6 +233,7 @@ namespace iDynTree
          *
          */
         Position operator*(const Position & other) const;
+        SpatialForceVector operator*(const SpatialForceVector & other) const;
 
         /**
          * Change frame in which a Wrench is expressed.
@@ -334,6 +336,13 @@ namespace iDynTree
          *
          */
         SpatialInertia operator*(const SpatialInertia  & other) const;
+        
+        /**
+         * Change the frame in which a ArticulatedBodyInertia is expressed.
+         *
+         */
+        ArticulatedBodyInertia operator*(const ArticulatedBodyInertia  & other) const;
+
 
         /**
          * Change the frame in which a Direction is expressed.

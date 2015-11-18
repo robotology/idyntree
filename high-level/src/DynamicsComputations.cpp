@@ -312,6 +312,7 @@ bool DynamicsComputations::loadRobotModelFromString(const std::string& modelStri
         this->pimpl->m_isModelValid = true;
         this->pimpl->m_robot_model.compute_traversal(this->pimpl->m_traversal);
         this->resizeInternalDataStructures();
+        this->invalidateCache();
         return true;
     }
 }

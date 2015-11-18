@@ -8,7 +8,6 @@
 #include <iDynTree/Model/RevoluteJoint.h>
 
 #include <iDynTree/Core/Axis.h>
-#include <iDynTree/Model/IJointStateInterfaces.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/Twist.h>
@@ -61,6 +60,21 @@ LinkIndex RevoluteJoint::getSecondAttachedLink() const
     return link2;
 }
 
+Transform RevoluteJoint::getRestTransform(const LinkIndex p_linkA, const LinkIndex p_linkB) const
+{
+    if( p_linkA == link1 )
+    {
+        assert(p_linkB == link2);
+        return link1_X_link2_at_rest;
+    }
+    else
+    {
+        assert(p_linkA == link2);
+        assert(p_linkB == link1);
+        return link1_X_link2_at_rest.inverse();
+    }
+}
+
 
 Transform RevoluteJoint::getTransform(const IRawVector& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
 {
@@ -76,6 +90,24 @@ Transform RevoluteJoint::getTransform(const IRawVector& jntPos, const LinkIndex 
         assert(p_linkB == link1);
         return (rotation_axis_wrt_link1.getRotationTransform(ang)*link1_X_link2_at_rest).inverse();
     }
+}
+
+SpatialMotionVector RevoluteJoint::getMotionSubspaceVector(int dof_i,
+                                                           const LinkIndex p_linkA,
+                                                           const LinkIndex p_linkB) const
+{
+    SpatialMotionVector S_a_b;
+
+    if( p_linkA == link2 )
+    {
+        S_a_b = (link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1).getRotationTwist(1.0);
+    }
+    else
+    {
+        S_a_b = -(rotation_axis_wrt_link1).getRotationTwist(1.0);
+    }
+
+    return S_a_b;
 }
 
 
@@ -103,74 +135,74 @@ void RevoluteJoint::setAxis(const Axis& revoluteAxis_wrt_link1)
     this->rotation_axis_wrt_link1 = revoluteAxis_wrt_link1;
 }
 
-LinkVelAcc RevoluteJoint::computeLinkVelAcc(const IRawVector& jntPos, const IRawVector& jntVel, const IRawVector& jntAcc,
-                                            const LinkVelAcc& linkBstate, const LinkIndex linkA, const LinkIndex linkB) const
+void RevoluteJoint::computeChildVelAcc(const IRawVector & jntPos,
+                                       const IRawVector & jntVel,
+                                       const IRawVector & jntAcc,
+                                       LinkVelArray & linkVels,
+                                       LinkAccArray & linkAccs,
+                                       const LinkIndex child, const LinkIndex parent) const
 {
-    LinkVelAcc linkAstate;
-
-    double ang = jntPos(this->getPosCoordsOffset());
     double dang = jntVel(this->getDOFsOffset());
     double d2ang = jntAcc(this->getDOFsOffset());
 
-    Transform a_X_b = this->getTransform(jntPos,linkA,linkB);
+    Transform child_X_parent = this->getTransform(jntPos,child,parent);
 
     // Propagate twist and spatial acceleration: for a revolute joint (as for any 1 dof joint)
     // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
     Twist vJ_link1 = rotation_axis_wrt_link1.getRotationTwist(dang);
     SpatialAcc aJ_link1 = rotation_axis_wrt_link1.getRotationSpatialAcc(d2ang);
 
-    if( linkB == link1 )
+    if( parent == link1 )
     {
-        linkAstate.vel() = a_X_b*(linkBstate.vel() + vJ_link1);
-        Twist & va = linkAstate.vel();
-        linkAstate.acc() = a_X_b*(linkBstate.acc() + aJ_link1) + va*(a_X_b*vJ_link1);
+        linkVels(child) = child_X_parent*(linkVels(parent) + vJ_link1);
+        linkAccs(child) = child_X_parent*(linkAccs(parent) + aJ_link1) + linkVels(child)*(child_X_parent*vJ_link1);
     }
     else
     {
-        linkAstate.vel() = a_X_b*linkBstate.vel() - vJ_link1;
-        Twist & va = linkAstate.vel();
-        linkAstate.acc() = a_X_b*linkBstate.acc() - aJ_link1 - va*vJ_link1;
+        linkVels(child) = child_X_parent*linkVels(parent)  - vJ_link1;
+        linkAccs(child) = child_X_parent*linkAccs(parent) - aJ_link1 - linkVels(child)*vJ_link1;
     }
 
-    return linkAstate;
+    return;
 }
 
-LinkPosVelAcc RevoluteJoint::computeLinkPosVelAcc(const IRawVector& jntPos, const IRawVector& jntVel, const IRawVector& jntAcc,
-                                                  const LinkPosVelAcc& linkBstate, const LinkIndex linkA, const LinkIndex linkB) const
+void RevoluteJoint::computeChildPosVelAcc(const IRawVector & jntPos,
+                                          const IRawVector & jntVel,
+                                          const IRawVector & jntAcc,
+                                          LinkPositions & linkPositions,
+                                          LinkVelArray & linkVels,
+                                          LinkAccArray & linkAccs,
+                                          const LinkIndex child,
+                                          const LinkIndex parent) const
 {
-    LinkPosVelAcc linkAstate;
-
-    double ang = jntPos(this->getPosCoordsOffset());
     double dang = jntVel(this->getDOFsOffset());
     double d2ang = jntAcc(this->getDOFsOffset());
 
-    Transform a_X_b = this->getTransform(jntPos,linkA,linkB);
-    Transform b_X_a = this->getTransform(jntPos,linkB,linkA);
+    Transform child_X_parent = this->getTransform(jntPos,child,parent);
+    Transform parent_X_child = this->getTransform(jntPos,parent,child);
 
     // Propagate position : position of the frame is expressed as
     // transform between the link frame and a reference frame :
-    // ref_T_a  = ref_T_b*b_
-    linkAstate.pos() = linkBstate.pos()*b_X_a;
+    // ref_H_child  = ref_H_parent*parent_H_child
+    linkPositions(child) = linkPositions(parent)*parent_X_child;
 
     // Propagate twist and spatial acceleration: for a revolute joint (as for any 1 dof joint)
     // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
     Twist vJ_link1 = rotation_axis_wrt_link1.getRotationTwist(dang);
     SpatialAcc aJ_link1 = rotation_axis_wrt_link1.getRotationSpatialAcc(d2ang);
 
-    if( linkB == link1 )
+    if( parent == link1 )
     {
-        linkAstate.vel() = a_X_b*(linkBstate.vel() + vJ_link1);
-        Twist & va = linkAstate.vel();
-        linkAstate.acc() = a_X_b*(linkBstate.acc() + aJ_link1) + va*(a_X_b*vJ_link1);
+        linkVels(child) = child_X_parent*(linkVels(parent) + vJ_link1);
+        linkAccs(child) = child_X_parent*(linkAccs(parent) + aJ_link1) + linkVels(child)*(child_X_parent*vJ_link1);
     }
     else
     {
-        linkAstate.vel() = a_X_b*linkBstate.vel() - vJ_link1;
-        Twist & va = linkAstate.vel();
-        linkAstate.acc() = a_X_b*linkBstate.acc() - aJ_link1 - va*vJ_link1;
+        linkVels(child) = child_X_parent*linkVels(parent)  - vJ_link1;
+        linkAccs(child) = child_X_parent*linkAccs(parent) - aJ_link1 - linkVels(child)*vJ_link1;
     }
 
-    return linkAstate;
+    return;
 }
 
 
@@ -183,13 +215,13 @@ void RevoluteJoint::computeJointTorque(const IRawVector& jntPos, const Wrench& i
     if( linkOnWhichWrenchIsApplied == link2 )
     {
         // in this case link2 is the child and link1 is the parent
-        iDynTree::Twist S_wrt_link2 = (link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1).getRotationTwist(1.0);
+        iDynTree::Twist S_wrt_link2 = this->getMotionSubspaceVector(0,link2,link1);
         tau = S_wrt_link2.dot(internalWrench);
     }
     else
     {
          // in this case link1 is the child and link2 is the parent
-        iDynTree::Twist S_wrt_link1 = -(rotation_axis_wrt_link1).getRotationTwist(1.0);
+        iDynTree::Twist S_wrt_link1 = this->getMotionSubspaceVector(0,link1,link2);
         tau = S_wrt_link1.dot(internalWrench);
     }
 
