@@ -21,7 +21,7 @@ target_link_libraries(subtree_regressor_test                idyntree-kdl idyntre
 target_link_libraries(inversedynamics_regressor_test        idyntree-kdl idyntree-regressors  idyntree-modelio-urdf  ${orocos_kdl_LIBRARIES} )
 target_link_libraries(inversedynamics_crba_test             idyntree-kdl idyntree-regressors idyntree-modelio-urdf  ${orocos_kdl_LIBRARIES} )
 target_link_libraries(comjacobian_test                      idyntree-kdl idyntree-regressors idyntree-modelio-urdf  ${orocos_kdl_LIBRARIES} )
-target_link_libraries(inversedynamics_different_loops_test  idyntree-kdl idyntree-regressors idyntree-modelio-urdf  ${orocos_kdl_LIBRARIES} )
+target_link_libraries(inversedynamics_different_loops_test  idyntree-kdl idyntree-regressors idyntree-modelio-urdf )
 #target_link_libraries(sparse_numerical_subspace_test ${orocos_kdl_LIBRARIES} idyntree-core  )
 target_link_libraries(inversedynamics_different_loops_test  idyntree-kdl idyntree-regressors idyntree-modelio-urdf ${YARP_LIBRARIES} iKin ${orocos_kdl_LIBRARIES} )
 target_link_libraries(DynamicsComputationsConsistencyTest   idyntree-kdl idyntree-regressors idyntree-modelio-urdf idyntree-high-level idyntree-yarp ${YARP_LIBRARIES}  ${orocos_kdl_LIBRARIES})
