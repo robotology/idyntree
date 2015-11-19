@@ -37,7 +37,7 @@ target_include_directories(idyntree-kdl PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE
 
 target_link_libraries(idyntree-kdl PUBLIC idyntree-core idyntree-model ${orocos_kdl_LIBRARIES})
 
-set_property(TARGET idyntree-kdl PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_HEADERS})
+set_property(TARGET idyntree-kdl PROPERTY PUBLIC_HEADER ${IDYNTREE_KDL_HEADERS})
 
 install(TARGETS idyntree-kdl
         EXPORT iDynTree
