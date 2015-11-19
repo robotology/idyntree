@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 2.8.11)
 
-# Disable in source build 
+project(iDynTree CXX)
+
+# Disable in source build
 if("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
    message(FATAL_ERROR "In-source builds of iDynTree are not allowed. "
                        "Please remove CMakeCache.txt and the CMakeFiles/ directory, then build out-of-source. "
                        "If you really want to do an in-source build, feel free to comment out this error.")
 endif("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
-
-project(iDynTree CXX)
 
 set(VARS_PREFIX "iDynTree")
 
