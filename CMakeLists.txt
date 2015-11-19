@@ -22,6 +22,8 @@ endif()
 #Use options specified in iDynTreeOptions.cmake file
 include(iDynTreeOptions)
 
+
+if(NOT IDYNTREE_ONLY_DOCS)
 # Given an error if yarp or ICUB_MAIN dependencies are selected without KDL
 if(IDYNTREE_USES_ICUB_MAIN)
     if(NOT IDYNTREE_USES_YARP OR NOT IDYNTREE_USES_KDL)
@@ -58,7 +60,6 @@ find_package(Eigen3 REQUIRED)
 find_package(TinyXML REQUIRED)
 
 
-
 include(AddInstallRPATHSupport)
 add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
@@ -67,9 +68,6 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 
 # add the actual components of the library
 add_subdirectory(src)
-
-# add a dox target to generate doxygen documentation
-add_subdirectory(doc)
 
 include(InstallBasicPackageFiles)
 install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
@@ -81,3 +79,8 @@ install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
 include(AddUninstallTarget)
 
 add_subdirectory(bindings)
+
+endif()
+
+# add a dox target to generate doxygen documentation
+add_subdirectory(doc)

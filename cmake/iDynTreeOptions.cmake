@@ -10,6 +10,9 @@ option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
 endif()
 set(BUILD_SHARED_LIBS ${IDYNTREE_SHARED_LIBRARY})
 
+#########################################################################
+option(IDYNTREE_ONLY_DOCS "Only produce iDynTree documentation, without compiling" FALSE)
+mark_as_advanced(IDYNTREE_ONLY_DOCS)
 
 #########################################################################
 # Use position indipendent code
