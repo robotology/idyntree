@@ -6,6 +6,7 @@
 
 /* Path to test model files */
 #define IDYNTREE_TEST_MODELS_PATH "@CMAKE_CURRENT_SOURCE_DIR@"
+#define IDYNTREE_CMAKE_BUILD_TYPE "@CMAKE_BUILD_TYPE@"
 
 // TODO \todo this list should be generated from the
 // IDYNTREE_TESTS_URDFS CMake list
