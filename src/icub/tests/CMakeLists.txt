@@ -9,33 +9,24 @@ include_directories(${CMAKE_SOURCE_DIR}/include
                           ${kdl_codyco_INCLUDE_DIRS}
                           ${ICUB_INCLUDE_DIRS})
 
-add_executable(iDynTreeJacobianTest         iDynTreeJacobianTest.cpp)
-add_executable(iDynTreeRelativeJacobianTest iDynTreeRelativeJacobianTest.cpp)
-add_executable(iDynTreeWholeBodyFTsensorEstimateTest iDynTreeWholeBodyFTsensorEstimateTest.cpp)
-add_executable(iDynTreeExportFixedJointsFrames iDynTreeExportFixedJointsFrames.cpp)
-add_executable(iDynTreeExternalWrenchesEstimationTest iDynTreeExternalWrenchesEstimationTest.cpp)
-add_executable(iDynTreeiCubExternalWrenchesEstimationTest iDynTreeiCubExternalWrenchesEstimationTest.cpp)
+macro(add_icub_test testName)
+    set(testsrc ${testName}Test.cpp)
+    set(testbinary ${testName}Test)
+    set(testname   test_${testName})
+    add_executable(${testbinary} ${testsrc})
+    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR} ${IDYNTREE_TREE_INCLUDE_DIRS})
+    target_link_libraries(${testbinary} idyntree-core idyntree-high-level idyntree-yarp idyntree-icub idyntree-icub ${YARP_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    add_test(NAME ${testname} COMMAND ${testbinary})
 
-#add_executable(iDynTreeCOM iDynTreeCOM.cpp)
+    if(IDYNTREE_RUN_VALGRIND_TESTS)
+        add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} ./${testbinary})
+    endif()
+endmacro()
 
-
-target_link_libraries(iDynTreeJacobianTest idyntree-icub)
-target_link_libraries(iDynTreeRelativeJacobianTest idyntree-icub)
-target_link_libraries(iDynTreeWholeBodyFTsensorEstimateTest idyntree-icub)
-target_link_libraries(iDynTreeExportFixedJointsFrames idyntree-icub)
-target_link_libraries(iDynTreeExternalWrenchesEstimationTest idyntree-icub )
-target_link_libraries(iDynTreeiCubExternalWrenchesEstimationTest idyntree-icub)
-
-#target_link_libraries(iDynTreeCOM idyntree ${ICUB_LIBRARIES} ${kdl_codyco_LIBRARIES} )
-
-add_test(NAME test_iDynTreeJacobianTest                COMMAND iDynTreeJacobianTest)
-add_test(NAME test_iDynTreeRelativeJacobianTest        COMMAND iDynTreeRelativeJacobianTest)
-add_test(NAME test_iDynTreeWholeBodyFTsensorEstimateTest COMMAND iDynTreeWholeBodyFTsensorEstimateTest)
-add_test(NAME test_iDynTreeExportFixedJointsFrames     COMMAND iDynTreeExportFixedJointsFrames)
-add_test(NAME test_iDynTreeExternalWrenchesEstimationTest COMMAND iDynTreeExternalWrenchesEstimationTest)
-add_test(NAME test_iDynTreeiCubExternalWrenchesEstimationTest COMMAND iDynTreeiCubExternalWrenchesEstimationTest)
-
-
-add_executable(iCubLeftArmRegressorTest iCubLeftArmRegressorTest.cpp)
-target_link_libraries(iCubLeftArmRegressorTest idyntree-regressors idyntree-sensors idyntree-modelio-urdf ${urdfdom_LIBRARIES})
-add_test(NAME test_iCubLeftArmRegressorTest COMMAND iCubLeftArmRegressorTest )
+add_icub_test(iCubLeftArmRegressor)
+add_icub_test(iDynTreeJacobian)
+add_icub_test(iDynTreeRelativeJacobian)
+add_icub_test(iDynTreeWholeBodyFTsensorEstimate)
+add_icub_test(iDynTreeExportFixedJointsFrames)
+add_icub_test(iDynTreeExternalWrenchesEstimation)
+add_icub_test(iDynTreeiCubExternalWrenchesEstimation)
