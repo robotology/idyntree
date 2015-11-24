@@ -32,7 +32,7 @@ struct Gyroscope::GyroscopePrivateAttributes
     // Index of the parent link
      int parent_link_index;
     // Name of the parent link
-     std::string parent_link_name; 
+     std::string parent_link_name;
 };
 
 
@@ -41,6 +41,7 @@ Gyroscope::Gyroscope()
     this->pimpl = new GyroscopePrivateAttributes;
 
     this->pimpl->name = "";
+    this->pimpl->link_H_sensor = Transform::Identity();
     this->pimpl->parent_link_index = -1;
     this->pimpl->parent_link_name = "";
 }
@@ -90,7 +91,7 @@ bool Gyroscope::setParentIndex(const int &parent_index)
     this->pimpl->parent_link_index = parent_index;
     return true;
 }
-// 
+//
 bool Gyroscope::isValid() const
 {
     if( this->getName() == "" )
@@ -141,8 +142,8 @@ bool Gyroscope::getLinkSensorTransform(iDynTree::Transform& link_H_sensor) const
     link_H_sensor = this->pimpl->link_H_sensor;
     return true;
 
-    
-} 
+
+}
 /* to be implemented in the future after considering interface and requirements
  */
 /*

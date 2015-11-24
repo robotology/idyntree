@@ -64,7 +64,7 @@ public:
                               const bool _verbose=false
                              );
 
-    ~DynamicRegressorGenerator() { };
+    ~DynamicRegressorGenerator();
     //@}
     int changeDynamicBase(std::string new_dynamic_base_name);
 

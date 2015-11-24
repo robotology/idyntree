@@ -44,9 +44,10 @@ Accelerometer::Accelerometer()
     this->pimpl = new AccelerometerPrivateAttributes;
 
     this->pimpl->name = "";
+    this->pimpl->link_H_sensor = Transform::Identity();
     this->pimpl->parent_link_index = -1;
     this->pimpl->parent_link_name = "";
-    
+
 }
 
 Accelerometer::Accelerometer(const Accelerometer& other):
