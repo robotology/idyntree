@@ -120,6 +120,8 @@ namespace iDynTree
         ///@}
 
         friend Position Rotation::changeCoordFrameOf(const Position & op) const;
+
+        static Position Zero();
     };
 
        // TODO \todo this information is interesting, but distracting for the average user.

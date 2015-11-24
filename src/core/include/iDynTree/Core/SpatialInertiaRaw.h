@@ -33,6 +33,11 @@ namespace iDynTree
         RotationalInertiaRaw m_rotInertia; /** rotational inertia */
 
     public:
+        /**
+         * Default constructor.
+         * The data is not reset to zero for perfomance reason.
+         * Please initialize the data in the vector before any use.
+         */
         SpatialInertiaRaw();
 
         /**

@@ -17,7 +17,6 @@ namespace iDynTree
 
     Direction::Direction()
     {
-        this->setToDefault();
     }
 
     Direction::Direction(double x, double y, double z)
@@ -87,5 +86,13 @@ namespace iDynTree
     {
         return this->toString();
     }
+
+    Direction Direction::Default()
+    {
+        Direction res;
+        res.setToDefault();
+        return res;
+    }
+
 
 }

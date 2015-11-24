@@ -39,6 +39,13 @@ namespace iDynTree
         ~LinkPositions();
     };
 
+    /**
+     * Vector of wrenches connected to the link.
+     * It is used to model both the total external wrench
+     * acting on a  link, or also the internal wrenches
+     * computed by the dynamics functions.
+     *
+     */
     class LinkWrenches
     {
     private:
@@ -50,6 +57,8 @@ namespace iDynTree
 
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
+
+
 
         iDynTree::Wrench & operator()(const LinkIndex link);
         const iDynTree::Wrench & operator()(const LinkIndex link) const;

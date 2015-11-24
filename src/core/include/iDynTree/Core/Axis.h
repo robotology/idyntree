@@ -43,7 +43,9 @@ namespace iDynTree
 
     public:
         /**
-         * Default constructor: initialize the axis to the default, as in setToDefault
+         * Default constructor.
+         * The data is not reset to the default for perfomance reason.
+         * Please initialize the data in the class before any use.
          */
         Axis();
 

@@ -88,7 +88,9 @@ namespace iDynTree
 
     public:
         /**
-         * Default constructor: initialize the rotation to the identity and the translation to 0
+         * Default constructor.
+         * The data is not reset to the default for perfomance reason.
+         * Please initialize the data in the class before any use.
          */
         Transform();
 
@@ -336,7 +338,7 @@ namespace iDynTree
          *
          */
         SpatialInertia operator*(const SpatialInertia  & other) const;
-        
+
         /**
          * Change the frame in which a ArticulatedBodyInertia is expressed.
          *
