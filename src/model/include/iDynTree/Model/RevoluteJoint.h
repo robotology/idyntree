@@ -100,7 +100,7 @@ namespace iDynTree
         // Documentation inherited
         virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,
                                                             const LinkIndex child,
-                                                            const LinkIndex parent) const;
+                                                            const LinkIndex parent=LINK_INVALID_INDEX) const;
 
          // Documentation inherited
         virtual void computeChildPosVelAcc(const VectorDynSize & jntPos,
