@@ -9,6 +9,7 @@
 #define IDYNTREE_REVOLUTE_JOINT_H
 
 #include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
 
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Model/Indeces.h>
@@ -25,10 +26,22 @@ namespace iDynTree
     class RevoluteJoint : public MovableJointImpl1
     {
     private:
+        // Structure attributes
         LinkIndex link1;
         LinkIndex link2;
         Transform link1_X_link2_at_rest;
         Axis rotation_axis_wrt_link1;
+
+        // Cache attributes
+        mutable double q_previous;
+        mutable Transform link1_X_link2;
+        mutable Transform link2_X_link1;
+        mutable SpatialMotionVector S_link1_link2;
+        mutable SpatialMotionVector S_link2_link1;
+
+        void updateBuffers(const double new_q) const;
+        void resetBuffers(const double new_q) const;
+        void resetAxisBuffers() const;
 
     public:
         /**

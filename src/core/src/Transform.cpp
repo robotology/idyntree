@@ -137,12 +137,7 @@ void Transform::setRotation(const Rotation& rotation)
 
 Transform Transform::compose(const Transform& op1, const Transform& op2)
 {
-    Transform result;
-
-    result.setRotation(op1.getRotation()*op2.getRotation());
-    result.setPosition(op1.getRotation()*op2.getPosition()+op1.getPosition());
-
-    return result;
+    return Transform(op1.getRotation()*op2.getRotation(),op1.getRotation()*op2.getPosition()+op1.getPosition());
 }
 
 Transform Transform::inverse2(const Transform& trans)
