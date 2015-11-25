@@ -51,7 +51,6 @@ namespace iDynTree
          */
         SpatialInertiaRaw(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
         SpatialInertiaRaw(const SpatialInertiaRaw & other);
-        virtual ~SpatialInertiaRaw();
 
         /**
          * Helper constructor-like function that takes mass, center of mass

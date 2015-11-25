@@ -43,10 +43,6 @@ namespace iDynTree
         this->Normalize();
     }
 
-    Direction::~Direction()
-    {
-
-    }
 
     void Direction::setToDefault()
     {

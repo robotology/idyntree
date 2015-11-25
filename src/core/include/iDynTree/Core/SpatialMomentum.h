@@ -33,7 +33,6 @@ namespace iDynTree
         SpatialMomentum(const LinMomentum & _linearVec3, const AngMomentum & _angularVec3);
         SpatialMomentum(const SpatialForceVector & other);
         SpatialMomentum(const SpatialMomentum & other);
-        virtual ~SpatialMomentum();
 
         // overloaded operators
         SpatialMomentum operator+(const SpatialMomentum &other) const;

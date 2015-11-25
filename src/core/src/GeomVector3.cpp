@@ -55,11 +55,6 @@ namespace iDynTree
     {
     }
 
-    GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    GEOMVECTOR3SEMANTICS_INSTANCE_HDR::~GeomVector3Semantics()
-    {
-    }
-
     // Getters, setters & helpers
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
     int GEOMVECTOR3SEMANTICS_INSTANCE_HDR::getBody() const
@@ -184,10 +179,6 @@ namespace iDynTree
 
     GEOMVECTOR3_TEMPLATE_HDR
     GEOMVECTOR3_INSTANCE_HDR::GeomVector3(const GeomVector3 & other): Vector3(other), semantics(other.semantics)
-    {}
-
-    GEOMVECTOR3_TEMPLATE_HDR
-    GEOMVECTOR3_INSTANCE_HDR::~GeomVector3()
     {}
 
     // Getters & setters

@@ -31,11 +31,6 @@ namespace iDynTree
     {
     }
 
-    AngularMotionVector3Semantics::~AngularMotionVector3Semantics()
-    {
-    }
-
-
     /**
      * AngularMotionVector3
      */
@@ -59,10 +54,6 @@ namespace iDynTree
 
     AngularMotionVector3::AngularMotionVector3(const AngularMotionVector3& other):
     MotionVector3<AngularMotionVector3>(other)
-    {
-    }
-
-    AngularMotionVector3::~AngularMotionVector3()
     {
     }
 

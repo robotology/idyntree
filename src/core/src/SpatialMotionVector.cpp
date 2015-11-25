@@ -42,10 +42,6 @@ SpatialMotionVector::SpatialMotionVector(const SpatialVector<SpatialMotionVector
 {
 }
 
-SpatialMotionVector::~SpatialMotionVector()
-{
-}
-
 SpatialMotionVector SpatialMotionVector::cross(const SpatialMotionVector& other) const
 {
     SpatialMotionVector res;

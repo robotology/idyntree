@@ -31,7 +31,6 @@ namespace iDynTree
         Twist(const LinVelocity & _linearVec3, const AngVelocity & _angularVec3);
         Twist(const SpatialMotionVector& other);
         Twist(const Twist& other);
-        virtual ~Twist();
 
         /** overloaded operators **/
         Twist operator+(const Twist &other) const;

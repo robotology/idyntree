@@ -68,9 +68,6 @@ namespace iDynTree
         this->semantics = otherSem;
     }
 
-    Position::~Position()
-    {
-    }
 
     PositionSemantics& Position::getSemantics()
     {

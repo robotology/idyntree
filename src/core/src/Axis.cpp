@@ -35,10 +35,6 @@ namespace iDynTree
 
     }
 
-    Axis::~Axis()
-    {
-
-    }
 
     const Direction& Axis::getDirection() const
     {

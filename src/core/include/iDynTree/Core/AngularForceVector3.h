@@ -33,7 +33,6 @@ namespace iDynTree
         AngularForceVector3Semantics();
         AngularForceVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame);
         AngularForceVector3Semantics(const AngularForceVector3Semantics & other);
-        ~AngularForceVector3Semantics();
 
         /**
          * Semantics operations
@@ -70,7 +69,6 @@ namespace iDynTree
         AngularForceVector3(const double x, const double y, const double z);
         AngularForceVector3(const double* in_data, const unsigned int in_size);
         AngularForceVector3(const AngularForceVector3 & other);
-        virtual ~AngularForceVector3();
 
         /**
          * Geometric operations

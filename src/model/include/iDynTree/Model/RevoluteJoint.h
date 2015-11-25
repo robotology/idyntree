@@ -80,7 +80,7 @@ namespace iDynTree
 
 
         // Documentation inherited
-        virtual Transform getTransform(const IRawVector & jntPos,
+        virtual Transform getTransform(const VectorDynSize & jntPos,
                                        const LinkIndex child,
                                        const LinkIndex parent) const;
 
@@ -90,26 +90,26 @@ namespace iDynTree
                                                             const LinkIndex parent) const;
 
          // Documentation inherited
-        virtual void computeChildPosVelAcc(const IRawVector & jntPos,
-                                           const IRawVector & jntVel,
-                                           const IRawVector & jntAcc,
+        virtual void computeChildPosVelAcc(const VectorDynSize & jntPos,
+                                           const VectorDynSize & jntVel,
+                                           const VectorDynSize & jntAcc,
                                            LinkPositions & linkPositions,
                                            LinkVelArray & linkVels,
                                            LinkAccArray & linkAccs,
                                            const LinkIndex child, const LinkIndex parent) const;
 
         // Documentation inherited
-        virtual void computeChildVelAcc(const IRawVector & jntPos,
-                                        const IRawVector & jntVel,
-                                        const IRawVector & jntAcc,
+        virtual void computeChildVelAcc(const VectorDynSize & jntPos,
+                                        const VectorDynSize & jntVel,
+                                        const VectorDynSize & jntAcc,
                                         LinkVelArray & linkVels,
                                         LinkAccArray & linkAccs,
                                         const LinkIndex child, const LinkIndex parent) const;
 
         // Documentation inherited
-        virtual void computeJointTorque(const IRawVector & jntPos, const Wrench & internalWrench,
+        virtual void computeJointTorque(const VectorDynSize & jntPos, const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
-                                        IRawVector & jntTorques) const;
+                                        VectorDynSize & jntTorques) const;
 
     };
 }

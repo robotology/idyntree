@@ -175,10 +175,10 @@ void dynamicsBenchmark(std::string modelFilePath, unsigned int nrOfTrials)
 int main()
 {
     std::cout << "Dynamics benchmark, iDynTree built in " << IDYNTREE_CMAKE_BUILD_TYPE << " mode " << std::endl;
-    int nrOfTrials = 100;
-    for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
+    int nrOfTrials = 1000;
+    //for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
     {
-        std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
+        std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[IDYNTREE_TESTS_URDFS_NR-1]));
         dynamicsBenchmark(urdfFileName,nrOfTrials);
     }
 

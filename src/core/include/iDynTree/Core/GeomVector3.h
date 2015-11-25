@@ -40,7 +40,6 @@ namespace iDynTree
         GeomVector3Semantics();
         GeomVector3Semantics(int _body, int _refBody, int _coordinateFrame);
         GeomVector3Semantics(const GeomVector3Semantics & other);
-        ~GeomVector3Semantics();
 
         /**
          * Getters, setters & helpers
@@ -77,7 +76,7 @@ namespace iDynTree
     {
     public:
         typedef typename MotionForce_traits<MotionForceT>::SemanticsType MotionForceSemanticsT;
-        
+
         MotionForceSemanticsT semantics;
 
         typedef GeomVector3<MotionForceT> MotionForceTbase;
@@ -88,7 +87,6 @@ namespace iDynTree
         GeomVector3();
         GeomVector3(const double* in_data, const unsigned int in_size);
         GeomVector3(const GeomVector3 & other);
-        virtual ~GeomVector3();
 
         /**
          * Getters & setters

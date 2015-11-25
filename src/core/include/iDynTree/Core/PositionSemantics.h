@@ -38,7 +38,7 @@ namespace iDynTree
         static bool check_compose(const PositionSemantics & op1, const PositionSemantics & op2);
         static bool check_inverse(const PositionSemantics & op);
         ///@}
-        
+
 
     public:
         /**
@@ -58,11 +58,6 @@ namespace iDynTree
         PositionSemantics(const PositionSemantics & other);
 
         /**
-         * Denstructor
-         */
-        ~PositionSemantics();
-
-        /**
          * @name Semantics setters and getters.
          *  Semantics setters and getters.
          */
@@ -72,7 +67,7 @@ namespace iDynTree
         int getReferencePoint() const;
         int getRefBody() const;
         int getCoordinateFrame() const;
-        
+
         void setPoint(int _point);
         void setBody(int _body);
         void setReferencePoint(int _referencePoint);

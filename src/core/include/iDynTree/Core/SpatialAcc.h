@@ -35,7 +35,6 @@ namespace iDynTree
         SpatialAcc(const LinAcceleration & _linearVec3, const AngAcceleration & _angularVec3);
         SpatialAcc(const SpatialMotionVector& other);
         SpatialAcc(const SpatialAcc& other);
-        virtual ~SpatialAcc();
 
         // overloaded operator
         SpatialAcc operator+(const SpatialAcc &other) const;

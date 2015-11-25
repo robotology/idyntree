@@ -26,7 +26,6 @@ namespace iDynTree
         Wrench(const Force & _linearVec3, const Torque & _angularVec3);
         Wrench(const SpatialForceVector & other);
         Wrench(const Wrench & other);
-        virtual ~Wrench();
 
         // overloaded operators
         Wrench operator+(const Wrench &other) const;

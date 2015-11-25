@@ -37,10 +37,6 @@ namespace iDynTree
     {
     }
 
-    AngularForceVector3Semantics::~AngularForceVector3Semantics()
-    {
-    }
-
     // Semantics operations
     bool AngularForceVector3Semantics::changePoint(const PositionSemantics & newPoint,
                                                    const LinearForceVector3Semantics & otherLinear,
@@ -118,10 +114,6 @@ namespace iDynTree
 
     AngularForceVector3::AngularForceVector3(const AngularForceVector3& other):
     ForceVector3<AngularForceVector3>(other)
-    {
-    }
-
-    AngularForceVector3::~AngularForceVector3()
     {
     }
 

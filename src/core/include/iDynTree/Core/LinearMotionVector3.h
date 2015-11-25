@@ -33,7 +33,6 @@ namespace iDynTree
         LinearMotionVector3Semantics();
         LinearMotionVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame);
         LinearMotionVector3Semantics(const LinearMotionVector3Semantics & other);
-        ~LinearMotionVector3Semantics();
 
         /**
          * Semantics operations
@@ -70,7 +69,6 @@ namespace iDynTree
         LinearMotionVector3(const double x, const double y, const double z);
         LinearMotionVector3(const double* in_data, const unsigned int in_size);
         LinearMotionVector3(const LinearMotionVector3 & other);
-        virtual ~LinearMotionVector3();
 
         /**
          * Geometric operations

@@ -59,11 +59,6 @@ namespace iDynTree
          */
         Axis(const Axis & other);
 
-        /**
-         * Destructor
-         */
-        virtual ~Axis();
-
          /**
          * Get the direction of the axis
          */

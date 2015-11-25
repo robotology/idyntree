@@ -49,11 +49,6 @@ namespace iDynTree
 
     }
 
-    PositionRaw::~PositionRaw()
-    {
-
-    }
-
     const PositionRaw& PositionRaw::changePoint(const PositionRaw& newPoint)
     {
         this->m_data[0] += newPoint(0);

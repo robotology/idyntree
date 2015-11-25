@@ -48,11 +48,6 @@ SpatialInertiaRaw::SpatialInertiaRaw(const SpatialInertiaRaw& other): m_mass(oth
     }
 }
 
-SpatialInertiaRaw::~SpatialInertiaRaw()
-{
-
-}
-
 void SpatialInertiaRaw::fromRotationalInertiaWrtCenterOfMass(const double mass,
                                                         const PositionRaw& com,
                                                         const RotationalInertiaRaw& rotInertiaWrtCom)

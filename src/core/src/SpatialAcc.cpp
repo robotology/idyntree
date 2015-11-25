@@ -36,10 +36,6 @@ SpatialAcc::SpatialAcc(const SpatialAcc& other):
 }
 
 
-SpatialAcc::~SpatialAcc()
-{
-
-}
 
 SpatialAcc SpatialAcc::operator+(const SpatialAcc& other) const
 {

@@ -92,11 +92,6 @@ Transform::Transform(const Transform& other): pos(other.getPosition()),
 {
 }
 
-Transform::~Transform()
-{
-
-}
-
 TransformSemantics& Transform::getSemantics()
 {
     return this->semantics;
@@ -334,9 +329,6 @@ std::string Transform::reservedToString() const
         // the com is transformed as any position
         Position newCenterOfMass = transform<Position>(op1,Position(op2.getCenterOfMass()));
 
-        std::cerr << "newCenterOfMass " << newCenterOfMass.toString() << std::endl;
-
-
         // the rotational inertial is rotated and then
         // the parallel axis theorem applies
         RotationalInertiaRaw newRotInertia;
@@ -348,9 +340,6 @@ std::string Transform::reservedToString() const
         Eigen::Map<const Eigen::Vector3d> newCOM(newCenterOfMass.data());
 
         newI =  R*oldIWrtCom*R.transpose() - newMass*squareCrossProductMatrix(newCOM);
-
-        std::cerr << "newRotInertia " << newRotInertia.toString() << std::endl;
-
 
         return SpatialInertia(newMass,newCenterOfMass,newRotInertia);
     }

@@ -43,10 +43,6 @@ SpatialInertia::SpatialInertia(const SpatialInertia& other): SpatialInertiaRaw(o
 
 }
 
-SpatialInertia::~SpatialInertia()
-{
-
-}
 
 SpatialInertia SpatialInertia::combine(const SpatialInertia& op1, const SpatialInertia& op2)
 {

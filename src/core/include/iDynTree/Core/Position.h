@@ -69,11 +69,6 @@ namespace iDynTree
         Position(const PositionRaw & other);
 
         /**
-         * Denstructor
-         */
-        virtual ~Position();
-
-        /**
          * Semantic getter
          */
         PositionSemantics& getSemantics();

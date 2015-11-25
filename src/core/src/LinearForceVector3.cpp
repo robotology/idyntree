@@ -28,10 +28,6 @@ namespace iDynTree
     {
     }
 
-    LinearForceVector3Semantics::~LinearForceVector3Semantics()
-    {
-    }
-
 
     /**
      * LinearForceVector3
@@ -60,7 +56,4 @@ namespace iDynTree
     {
     }
 
-    LinearForceVector3::~LinearForceVector3()
-    {
-    }
 }

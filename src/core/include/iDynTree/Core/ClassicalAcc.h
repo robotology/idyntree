@@ -44,7 +44,6 @@ namespace iDynTree
         ClassicalAcc();
         ClassicalAcc(const double* in_data, const unsigned int in_size);
         ClassicalAcc(const ClassicalAcc& other);
-        virtual ~ClassicalAcc();
 
         /* Geometric operations */
         const ClassicalAcc & changeCoordFrame(const RotationRaw & newCoordFrame);

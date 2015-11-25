@@ -34,10 +34,4 @@ RotationalInertiaRaw::RotationalInertiaRaw(const RotationalInertiaRaw& other): M
 {
 }
 
-RotationalInertiaRaw::~RotationalInertiaRaw()
-{
-
-}
-
-
 }

@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_DYNAMIC_SIZE_VECTOR_H
 #define IDYNTREE_DYNAMIC_SIZE_VECTOR_H
 
-#include <iDynTree/Core/IVector.h>
+
 
 #include <string>
 
@@ -20,7 +20,7 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    class VectorDynSize: public IRawVector
+    class VectorDynSize
     {
     protected:
         /**

@@ -143,11 +143,6 @@ const Matrix3x3& ArticulatedBodyInertia::getLinearAngularSubmatrix() const
     return linearAngular;
 }
 
-ArticulatedBodyInertia::~ArticulatedBodyInertia()
-{
-
-}
-
 ArticulatedBodyInertia ArticulatedBodyInertia::operator+(const ArticulatedBodyInertia& other) const
 {
     return combine(*this,other);

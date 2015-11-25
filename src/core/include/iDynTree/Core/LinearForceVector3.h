@@ -25,7 +25,6 @@ namespace iDynTree
         LinearForceVector3Semantics();
         LinearForceVector3Semantics(int _body, int _refBody, int _coordinateFrame);
         LinearForceVector3Semantics(const LinearForceVector3Semantics & other);
-        ~LinearForceVector3Semantics();
     };
 
 
@@ -50,7 +49,6 @@ namespace iDynTree
         LinearForceVector3(const double x, const double y, const double z);
         LinearForceVector3(const double* in_data, const unsigned int in_size);
         LinearForceVector3(const LinearForceVector3 & other);
-        virtual ~LinearForceVector3();
     };
 
     typedef LinearForceVector3 LinMomentum;

@@ -21,32 +21,27 @@ namespace iDynTree
     /**
      * ForceVector3Semantics Method definitions
      */
-    
+
     // constructors
     FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
     FORCEVECTOR3SEMANTICS_INSTANCE_HDR::ForceVector3Semantics():
     GeomVector3Semantics<ForceTSemantics>()
     {
     }
-    
+
     FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
     FORCEVECTOR3SEMANTICS_INSTANCE_HDR::ForceVector3Semantics(int _body, int _refBody, int _coordinateFrame):
     GeomVector3Semantics<ForceTSemantics>(_body, _refBody, _coordinateFrame)
     {
     }
-    
+
     FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
     FORCEVECTOR3SEMANTICS_INSTANCE_HDR::ForceVector3Semantics(const ForceVector3Semantics & other):
     GeomVector3Semantics<ForceTSemantics>(other)
     {
     }
-    
-    FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
-    FORCEVECTOR3SEMANTICS_INSTANCE_HDR::~ForceVector3Semantics()
-    {
-    }
-    
-    
+
+
     // semantics operations
     FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
     bool FORCEVECTOR3SEMANTICS_INSTANCE_HDR::compose(const ForceVector3Semantics & op1,
@@ -64,46 +59,42 @@ namespace iDynTree
          && reportErrorIf(!checkEqualOrUnknown(op1.refBody,op2.refBody),
                           IDYNTREE_PRETTY_FUNCTION,
                           "The reference bodies defined for both operands of the dot product don't match\n"));
-        
+
         // compute semantics
         result = op1;
-        
+
         return semantics_status;
     }
-    
+
     FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
     bool FORCEVECTOR3SEMANTICS_INSTANCE_HDR::inverse(const ForceVector3Semantics & op,
                                                      ForceVector3Semantics & result)
     {
         // compute semantics
         result = op;
-        
+
         return true;
     }
-    
-    
+
+
     /**
      * ForceVector3 Method definitions
      */
-    
+
     // constructors
     FORCEVECTOR3_TEMPLATE_HDR
     FORCEVECTOR3_INSTANCE_HDR::ForceVector3():
     GeomVector3<ForceT>()
     {}
-    
+
     FORCEVECTOR3_TEMPLATE_HDR
     FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const double* in_data, const unsigned int in_size):
     GeomVector3<ForceT>(in_data, in_size)
     {}
-    
+
     FORCEVECTOR3_TEMPLATE_HDR
     FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const ForceVector3 & other):
     GeomVector3<ForceT>(other)
-    {}
-    
-    FORCEVECTOR3_TEMPLATE_HDR
-    FORCEVECTOR3_INSTANCE_HDR::~ForceVector3()
     {}
 
 

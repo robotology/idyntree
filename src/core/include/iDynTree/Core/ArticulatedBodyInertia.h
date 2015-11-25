@@ -8,7 +8,6 @@
 #ifndef IDYNTREE_ARTICULATED_BODY_INERTIA_H
 #define IDYNTREE_ARTICULATED_BODY_INERTIA_H
 
-#include <iDynTree/Core/IMatrix.h>
 #include <iDynTree/Core/MatrixFixSize.h>
 #include <string>
 
@@ -76,11 +75,6 @@ namespace iDynTree
          * Copy constructor: create a ArticulatedBodyInertia from another ArticulatedBodyInertia.
          */
         ArticulatedBodyInertia(const ArticulatedBodyInertia & other);
-
-        /**
-         * Denstructor
-         */
-        virtual ~ArticulatedBodyInertia();
 
         /**
          * Low level data getters.

@@ -39,7 +39,6 @@ namespace iDynTree
         RotationalInertiaRaw();
         RotationalInertiaRaw(const double * in_data, const unsigned int in_rows, const unsigned int in_cols);
         RotationalInertiaRaw(const RotationalInertiaRaw & other);
-        virtual ~RotationalInertiaRaw();
 
     };
 }

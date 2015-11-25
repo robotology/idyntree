@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_POSITION_RAW_H
 #define IDYNTREE_POSITION_RAW_H
 
-#include <iDynTree/Core/IVector.h>
+
 #include <iDynTree/Core/VectorFixSize.h>
 #include <string>
 
@@ -47,11 +47,6 @@ namespace iDynTree
          * Copy constructor: create a PositionRaw from another PositionRaw
          */
         PositionRaw(const PositionRaw & other);
-
-        /**
-         * Destructor
-         */
-        virtual ~PositionRaw();
 
         /**
          * Geometric operations

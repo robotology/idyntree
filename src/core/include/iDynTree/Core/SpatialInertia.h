@@ -39,7 +39,6 @@ namespace iDynTree
                        const RotationalInertiaRaw & rotInertia);
         SpatialInertia(const SpatialInertiaRaw& other);
         SpatialInertia(const SpatialInertia& other);
-        virtual ~SpatialInertia();
 
         // Operations on SpatialInertia
         static SpatialInertia combine(const SpatialInertia & op1,

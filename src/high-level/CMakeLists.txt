@@ -18,11 +18,10 @@ SOURCE_GROUP("Header Files" FILES ${IDYNTREE_HIGH_LEVEL_HEADERS})
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
+include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
                            ${EIGEN3_INCLUDE_DIR})
-
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 set(libraryname idyntree-high-level)
 

@@ -85,11 +85,6 @@ namespace iDynTree
         Rotation(const Rotation & other);
 
         /**
-         * Denstructor
-         */
-        virtual ~Rotation();
-
-        /**
          * Semantic getter
          */
         RotationSemantics& getSemantics();

@@ -39,7 +39,7 @@ namespace iDynTree
         static bool check_compose(const RotationSemantics & op1, const RotationSemantics & op2);
         static bool check_inverse2(const RotationSemantics & op);
         ///@}
-        
+
     public:
         /**
          * Default constructor: initialize all semantics to unknown;
@@ -58,11 +58,6 @@ namespace iDynTree
         RotationSemantics(const RotationSemantics & other);
 
         /**
-         * Denstructor
-         */
-        ~RotationSemantics();
-        
-        /**
          * @name Semantics setters and getters.
          *  Semantics setters and getters.
          */
@@ -79,7 +74,7 @@ namespace iDynTree
         void setRefBody(int _refBody);
         void setCoordinateFrame(int _coordinateFrame);
     ///@}
-        
+
         /**
          * @name Semantics operations
          * Compute the semantics of the result given the semantics of the operands.

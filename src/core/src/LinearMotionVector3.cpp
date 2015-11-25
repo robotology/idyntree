@@ -36,10 +36,6 @@ namespace iDynTree
     {
     }
 
-    LinearMotionVector3Semantics::~LinearMotionVector3Semantics()
-    {
-    }
-
     // Semantics operations
     bool LinearMotionVector3Semantics::changePoint(const PositionSemantics & newPoint,
                                                    const AngularMotionVector3Semantics & otherAngular,
@@ -118,10 +114,6 @@ namespace iDynTree
 
     LinearMotionVector3::LinearMotionVector3(const LinearMotionVector3 & other):
     MotionVector3<LinearMotionVector3>(other)
-    {
-    }
-
-    LinearMotionVector3::~LinearMotionVector3()
     {
     }
 

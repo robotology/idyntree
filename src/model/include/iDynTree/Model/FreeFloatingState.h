@@ -59,7 +59,7 @@ namespace iDynTree
        /**
         * Get the vector of joint positions.
         */
-       IRawVector & jointPos();
+       VectorDynSize & jointPos();
 
        /**
         * Get the base position (const version).
@@ -69,7 +69,7 @@ namespace iDynTree
        /**
         * Get the vector of joint positions (const version).
         */
-       const IRawVector & jointPos() const;
+       const VectorDynSize & jointPos() const;
 
        /**
         * Get the dimension of the joint positions vector.
@@ -112,7 +112,7 @@ namespace iDynTree
        /**
         * Get the joint torques vector.
         */
-       IRawVector & jointTorques();
+       VectorDynSize & jointTorques();
 
        /**
         * Get the base wrench (const version).
@@ -122,7 +122,7 @@ namespace iDynTree
        /**
         * Get the joint torques vector (const version).
         */
-       const IRawVector & jointTorques() const;
+       const VectorDynSize & jointTorques() const;
 
        unsigned int getNrOfDOFs() const;
 
@@ -162,7 +162,7 @@ namespace iDynTree
        /**
         * Get the vector of joint accelerations.
         */
-       IRawVector & jointVel();
+       VectorDynSize & jointVel();
 
        /**
         * Get the base acceleration (const version).
@@ -172,7 +172,7 @@ namespace iDynTree
        /**
         * Get the vector of joint accelerations (const version).
         */
-       const IRawVector & jointVel() const;
+       const VectorDynSize & jointVel() const;
 
        /**
         * Get the dimension of the joint accelerations vector.
@@ -218,7 +218,7 @@ namespace iDynTree
        /**
         * Get the vector of joint accelerations.
         */
-       IRawVector & jointAcc();
+       VectorDynSize & jointAcc();
 
        /**
         * Get the base acceleration (const version).
@@ -228,7 +228,7 @@ namespace iDynTree
        /**
         * Get the vector of joint accelerations (const version).
         */
-       const IRawVector & jointAcc() const;
+       const VectorDynSize & jointAcc() const;
 
        /**
         * Get the dimension of the joint accelerations vector.

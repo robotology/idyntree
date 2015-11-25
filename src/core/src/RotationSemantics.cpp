@@ -45,10 +45,6 @@ namespace iDynTree
         this->setCoordinateFrame(other.getCoordinateFrame());
     }
 
-    RotationSemantics::~RotationSemantics()
-    {
-    }
-
     int RotationSemantics::getOrientationFrame() const
     {
         return this->orientationFrame;

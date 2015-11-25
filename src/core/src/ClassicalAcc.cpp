@@ -36,11 +36,6 @@ ClassicalAcc::ClassicalAcc(const ClassicalAcc& other):
 }
 
 
-ClassicalAcc::~ClassicalAcc()
-{
-
-}
-
 const ClassicalAcc& ClassicalAcc::changeCoordFrame(const RotationRaw& newCoordFrame)
 {
     Eigen::Map<Vector6d> thisData(this->data());

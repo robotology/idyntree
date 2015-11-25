@@ -38,11 +38,6 @@ Twist::Twist(const Twist& other):
 
 }
 
-Twist::~Twist()
-{
-
-}
-
 Twist Twist::operator+(const Twist& other) const
 {
     return compose(*this,other);

@@ -35,12 +35,6 @@ Wrench::Wrench(const Wrench& other):
 
 }
 
-
-Wrench::~Wrench()
-{
-
-}
-
 Wrench Wrench::operator+(const Wrench& other) const
 {
     return compose(*this,other);

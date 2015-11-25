@@ -63,14 +63,14 @@ int main()
     ax.setDirection(dir);
     ax.setOrigin(origin);
 
-    assertVectorAreEqual(ax.getDirection(),dir);
-    assertVectorAreEqual(ax.getOrigin(),origin);
+    ASSERT_EQUAL_VECTOR(ax.getDirection(),dir);
+    ASSERT_EQUAL_VECTOR(ax.getOrigin(),origin);
 
     // test transforms
     Transform trans(Rotation::RPY(0.5,0.4,-0.3),Position(3,4,5));
 
-    assertVectorAreEqual((trans*ax).getDirection(),trans*dir);
-    assertVectorAreEqual((trans*ax).getOrigin(),trans*origin);
+    ASSERT_EQUAL_VECTOR((trans*ax).getDirection(),trans*dir);
+    ASSERT_EQUAL_VECTOR((trans*ax).getOrigin(),trans*origin);
 
     // Test rotation around the axis
     Axis axRot;

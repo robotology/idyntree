@@ -35,11 +35,6 @@ SpatialMomentum::SpatialMomentum(const SpatialMomentum& other):
 
 }
 
-SpatialMomentum::~SpatialMomentum()
-{
-
-}
-
 SpatialMomentum SpatialMomentum::operator+(const SpatialMomentum& other) const
 {
     return compose(*this,other);

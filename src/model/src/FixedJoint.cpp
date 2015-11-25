@@ -87,7 +87,7 @@ Transform FixedJoint::getRestTransform(const LinkIndex child, const LinkIndex pa
     }
 }
 
-Transform FixedJoint::getTransform(const IRawVector & jntPos, const LinkIndex child, const LinkIndex parent) const
+Transform FixedJoint::getTransform(const VectorDynSize & jntPos, const LinkIndex child, const LinkIndex parent) const
 {
     return getRestTransform(child,parent);
 }
@@ -98,17 +98,17 @@ SpatialMotionVector FixedJoint::getMotionSubspaceVector(int dof_i, const LinkInd
     return SpatialMotionVector::Zero();
 }
 
-void FixedJoint::computeJointTorque(const IRawVector & jntPos, const Wrench& internalWrench,
+void FixedJoint::computeJointTorque(const VectorDynSize & jntPos, const Wrench& internalWrench,
                                     LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied,
-                                    IRawVector& jntTorques) const
+                                    VectorDynSize& jntTorques) const
 {
     // A fixed joint would have a torque of size 0
     return;
 }
 
-void FixedJoint::computeChildPosVelAcc(const IRawVector & jntPos,
-                                       const IRawVector & jntVel,
-                                       const IRawVector & jntAcc,
+void FixedJoint::computeChildPosVelAcc(const VectorDynSize & jntPos,
+                                       const VectorDynSize & jntVel,
+                                       const VectorDynSize & jntAcc,
                                            LinkPositions & linkPositions,
                                            LinkVelArray & linkVels,
                                            LinkAccArray & linkAccs,
@@ -131,9 +131,9 @@ void FixedJoint::computeChildPosVelAcc(const IRawVector & jntPos,
     return;
 }
 
-void FixedJoint::computeChildVelAcc(const IRawVector & jntPos,
-                                       const IRawVector & jntVel,
-                                       const IRawVector & jntAcc,
+void FixedJoint::computeChildVelAcc(const VectorDynSize & jntPos,
+                                       const VectorDynSize & jntVel,
+                                       const VectorDynSize & jntAcc,
                                        LinkVelArray & linkVels,
                                        LinkAccArray & linkAccs,
                                        const LinkIndex child, const LinkIndex parent) const

@@ -58,7 +58,6 @@ namespace iDynTree
         SpatialMotionVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
         SpatialMotionVector(const SpatialMotionVector & other);
         SpatialMotionVector(const SpatialVector<SpatialMotionVector> & other);
-        virtual ~SpatialMotionVector();
 
         /**
          * Multiplication for a scalar.

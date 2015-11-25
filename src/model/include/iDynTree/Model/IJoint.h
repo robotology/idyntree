@@ -18,7 +18,7 @@ namespace iDynTree
     class Transform;
     class Wrench;
     class Twist;
-    class IRawVector;
+    class VectorDynSize;
     class SpatialMotionVector;
 
     /**
@@ -135,7 +135,7 @@ namespace iDynTree
          * where p_child is a quantity expressed in the child frame,
          * and   p_parent is a quantity expressed in the parent frame.
          */
-        virtual Transform getTransform(const IRawVector & jntPos,
+        virtual Transform getTransform(const VectorDynSize & jntPos,
                                        const LinkIndex child,
                                        const LinkIndex parent) const = 0;
 
@@ -172,9 +172,9 @@ namespace iDynTree
          * are directly saved in the linkPositions, linkVels and linkAccs arguments.
          *
          */
-        virtual void computeChildPosVelAcc(const IRawVector & jntPos,
-                                           const IRawVector & jntVel,
-                                           const IRawVector & jntAcc,
+        virtual void computeChildPosVelAcc(const VectorDynSize & jntPos,
+                                           const VectorDynSize & jntVel,
+                                           const VectorDynSize & jntAcc,
                                            LinkPositions & linkPositions,
                                            LinkVelArray & linkVels,
                                            LinkAccArray & linkAccs,
@@ -186,9 +186,9 @@ namespace iDynTree
          * the joint position, velocity and acceleration.
          *
          */
-        virtual void computeChildVelAcc(const IRawVector & jntPos,
-                                        const IRawVector & jntVel,
-                                        const IRawVector & jntAcc,
+        virtual void computeChildVelAcc(const VectorDynSize & jntPos,
+                                        const VectorDynSize & jntVel,
+                                        const VectorDynSize & jntAcc,
                                         LinkVelArray & linkVels,
                                         LinkAccArray & linkAccs,
                                         const LinkIndex child, const LinkIndex parent) const = 0;
@@ -205,11 +205,11 @@ namespace iDynTree
          * @param[in] linkOnWhichWrenchIsApplied link index of the link on which the considered internal wrench is applied.
          * @param[out] jntTorques vector of joint torques.
          */
-        virtual void computeJointTorque(const IRawVector & jntPos,
+        virtual void computeJointTorque(const VectorDynSize & jntPos,
                                         const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench,
                                         const LinkIndex linkOnWhichWrenchIsApplied,
-                                        IRawVector & jntTorques) const = 0;
+                                        VectorDynSize & jntTorques) const = 0;
 
         /**
          * Set the index of the joint in the Model Joint serialization.

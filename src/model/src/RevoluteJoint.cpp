@@ -8,6 +8,7 @@
 #include <iDynTree/Model/RevoluteJoint.h>
 
 #include <iDynTree/Core/Axis.h>
+#include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/Twist.h>
@@ -76,7 +77,7 @@ Transform RevoluteJoint::getRestTransform(const LinkIndex p_linkA, const LinkInd
 }
 
 
-Transform RevoluteJoint::getTransform(const IRawVector& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
+Transform RevoluteJoint::getTransform(const VectorDynSize& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
 {
     const double ang = jntPos(this->getPosCoordsOffset());
     if( p_linkA == link1 )
@@ -135,9 +136,9 @@ void RevoluteJoint::setAxis(const Axis& revoluteAxis_wrt_link1)
     this->rotation_axis_wrt_link1 = revoluteAxis_wrt_link1;
 }
 
-void RevoluteJoint::computeChildVelAcc(const IRawVector & jntPos,
-                                       const IRawVector & jntVel,
-                                       const IRawVector & jntAcc,
+void RevoluteJoint::computeChildVelAcc(const VectorDynSize & jntPos,
+                                       const VectorDynSize & jntVel,
+                                       const VectorDynSize & jntAcc,
                                        LinkVelArray & linkVels,
                                        LinkAccArray & linkAccs,
                                        const LinkIndex child, const LinkIndex parent) const
@@ -166,9 +167,9 @@ void RevoluteJoint::computeChildVelAcc(const IRawVector & jntPos,
     return;
 }
 
-void RevoluteJoint::computeChildPosVelAcc(const IRawVector & jntPos,
-                                          const IRawVector & jntVel,
-                                          const IRawVector & jntAcc,
+void RevoluteJoint::computeChildPosVelAcc(const VectorDynSize & jntPos,
+                                          const VectorDynSize & jntVel,
+                                          const VectorDynSize & jntAcc,
                                           LinkPositions & linkPositions,
                                           LinkVelArray & linkVels,
                                           LinkAccArray & linkAccs,
@@ -206,9 +207,9 @@ void RevoluteJoint::computeChildPosVelAcc(const IRawVector & jntPos,
 }
 
 
-void RevoluteJoint::computeJointTorque(const IRawVector& jntPos, const Wrench& internalWrench,
+void RevoluteJoint::computeJointTorque(const VectorDynSize& jntPos, const Wrench& internalWrench,
                                        LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied,
-                                       IRawVector& jntTorques) const
+                                       VectorDynSize& jntTorques) const
 {
     double & tau = jntTorques(this->getDOFsOffset());
 

@@ -74,10 +74,6 @@ namespace iDynTree
         this->semantics = otherSem;
     }
 
-    Rotation::~Rotation()
-    {
-    }
-
     RotationSemantics& Rotation::getSemantics()
     {
         return this->semantics;

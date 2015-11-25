@@ -44,11 +44,6 @@ namespace iDynTree
         this->coordinateFrame = other.coordinateFrame;
     }
 
-    PositionSemantics::~PositionSemantics()
-    {
-    }
-
-
     void PositionSemantics::setPoint(int _point)
     {
         this->point = _point;
@@ -83,12 +78,12 @@ namespace iDynTree
     {
         this->refBody = _refBody;
     }
-    
+
     int PositionSemantics::getRefBody() const
     {
         return this->refBody;
     }
-    
+
     void PositionSemantics::setCoordinateFrame(int _coordinateFrame)
     {
         this->coordinateFrame = _coordinateFrame;
@@ -125,8 +120,8 @@ namespace iDynTree
 
         return status;
     }
-    
-    
+
+
     bool PositionSemantics::check_changeRefPoint(const PositionSemantics& newRefPoint)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(newRefPoint.coordinateFrame,this->coordinateFrame),
@@ -142,15 +137,15 @@ namespace iDynTree
                                  IDYNTREE_PRETTY_FUNCTION,
                                  "newRefPoint point and original Position reference point are not fixed to the same body\n"));
     }
-    
+
     bool PositionSemantics::changeRefPoint(const PositionSemantics& newRefPoint)
     {
         // check semantics
         bool status = this->check_changeRefPoint(newRefPoint);
-        
+
         // set new semantics
         this->refPoint = newRefPoint.refPoint;
-        
+
         return status;
     }
 
@@ -201,7 +196,7 @@ namespace iDynTree
         result.refPoint = op.point;
         result.refBody = op.body;
         result.coordinateFrame = op.coordinateFrame;
-        
+
         return status;
     }
 

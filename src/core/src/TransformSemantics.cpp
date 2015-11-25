@@ -29,11 +29,6 @@ namespace iDynTree
 
     }
 
-    TransformSemantics::~TransformSemantics()
-    {
-
-    }
-
     const PositionSemantics & TransformSemantics::getPositionSemantics() const
     {
         return this->positionSemantics;

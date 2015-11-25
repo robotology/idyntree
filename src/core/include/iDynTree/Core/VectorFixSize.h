@@ -8,7 +8,6 @@
 #ifndef IDYNTREE_VECTOR_FIX_SIZE_H
 #define IDYNTREE_VECTOR_FIX_SIZE_H
 
-#include <iDynTree/Core/IVector.h>
 #include <iDynTree/Core/Utils.h>
 #include <string>
 #include <sstream>
@@ -23,7 +22,7 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    template<unsigned int VecSize> class VectorFixSize: public IRawVector
+    template<unsigned int VecSize> class VectorFixSize
     {
     protected:
         /**
@@ -47,12 +46,6 @@ namespace iDynTree
          * Print an error an build a vector full of zeros if in_size is not size().
          */
         VectorFixSize(const double * in_data, const unsigned int in_size);
-
-        /**
-         * Denstructor
-         *
-         */
-        virtual ~VectorFixSize();
 
         /**
          * @name Vector interface methods.
@@ -109,9 +102,9 @@ namespace iDynTree
          *  Output helpers.
          */
         ///@{
-        virtual std::string toString() const;
+        std::string toString() const;
 
-        virtual std::string reservedToString() const;
+        std::string reservedToString() const;
         ///@}
 
     };
@@ -136,12 +129,6 @@ namespace iDynTree
         {
             memcpy(this->m_data,in_data,sizeof(double)*VecSize);
         }
-    }
-
-    template<unsigned int VecSize>
-    VectorFixSize<VecSize>::~VectorFixSize()
-    {
-
     }
 
     template<unsigned int VecSize>

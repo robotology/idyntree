@@ -32,8 +32,7 @@ namespace iDynTree
         ForceVector3Semantics();
         ForceVector3Semantics(int _body, int _refBody, int _coordinateFrame);
         ForceVector3Semantics(const ForceVector3Semantics & other);
-        ~ForceVector3Semantics();
-        
+
         /**
          * Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
@@ -41,7 +40,7 @@ namespace iDynTree
         static bool compose(const ForceVector3Semantics & op1,
                             const ForceVector3Semantics & op2,
                             ForceVector3Semantics & result);
-        
+
         static bool inverse(const ForceVector3Semantics & op,
                             ForceVector3Semantics & result);
     };
@@ -68,7 +67,6 @@ namespace iDynTree
         ForceVector3();
         ForceVector3(const double* in_data, const unsigned int in_size);
         ForceVector3(const ForceVector3 & other);
-        virtual ~ForceVector3();
     };
 
 }
