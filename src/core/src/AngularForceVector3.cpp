@@ -9,6 +9,7 @@
 #include <iDynTree/Core/LinearForceVector3.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/PrivatePreProcessorUtils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
 
 #include <Eigen/Dense>
 

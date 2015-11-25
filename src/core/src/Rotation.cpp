@@ -18,6 +18,8 @@
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
+
 
 #include <Eigen/Dense>
 
@@ -61,7 +63,7 @@ namespace iDynTree
 
     Rotation::Rotation(const Rotation & other): RotationRaw(other)
     {
-        this->semantics = other.getSemantics();
+        iDynTreeSemanticsOp(this->semantics = other.getSemantics());
     }
 
     Rotation::Rotation(const RotationRaw& other): RotationRaw(other)
@@ -71,7 +73,7 @@ namespace iDynTree
 
     Rotation::Rotation(const RotationRaw& otherPos, RotationSemantics & otherSem): RotationRaw(otherPos)
     {
-        this->semantics = otherSem;
+        iDynTreeSemanticsOp(this->semantics = otherSem);
     }
 
     RotationSemantics& Rotation::getSemantics()

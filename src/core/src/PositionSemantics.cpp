@@ -8,6 +8,7 @@
 #include <iDynTree/Core/PositionSemantics.h>
 #include <iDynTree/Core/RotationSemantics.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
 #include <iDynTree/Core/PrivatePreProcessorUtils.h>
 
 #include <cstdio>
@@ -15,12 +16,9 @@
 
 namespace iDynTree
 {
-    PositionSemantics::PositionSemantics(): point(UNKNOWN),
-                                            body(UNKNOWN),
-                                            refPoint(UNKNOWN),
-                                            refBody(UNKNOWN),
-                                            coordinateFrame(UNKNOWN)
+    PositionSemantics::PositionSemantics()
     {
+        iDynTreeSemanticsOp(this->setToUnknown());
     }
 
 
@@ -42,6 +40,15 @@ namespace iDynTree
         this->refPoint = other.refPoint;
         this->refBody = other.refBody;
         this->coordinateFrame = other.coordinateFrame;
+    }
+
+    void PositionSemantics::setToUnknown()
+    {
+        this->point = UNKNOWN;
+        this->body = UNKNOWN;
+        this->refPoint = UNKNOWN;
+        this->refBody = UNKNOWN;
+        this->coordinateFrame = UNKNOWN;
     }
 
     void PositionSemantics::setPoint(int _point)

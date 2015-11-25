@@ -12,13 +12,16 @@
 #include "Rotation.h"
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 #include "Utils.h"
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
+
+
 #include <iostream>
 #include <sstream>
 
 namespace iDynTree
 {
-    class SpacialMotionVector;
-    class SpacialForceVector;
+    class SpatialMotionVector;
+    class SpatialForceVector;
     class Position;
     class Rotation;
 

@@ -84,7 +84,7 @@ namespace iDynTree
         /**
          * constructors
          */
-        GeomVector3();
+        GeomVector3() {};
         GeomVector3(const double* in_data, const unsigned int in_size);
         GeomVector3(const GeomVector3 & other);
 

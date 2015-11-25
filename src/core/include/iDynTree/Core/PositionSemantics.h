@@ -42,7 +42,7 @@ namespace iDynTree
 
     public:
         /**
-         * Default constructor: initialize all semantics to unknown;
+         * Default constructor: initialize all semantics to unknown if the semantics is enabled.
          */
         PositionSemantics();
 
@@ -56,6 +56,11 @@ namespace iDynTree
          * Copy constructor: create a PositionSemantics from another PositionSemantics
          */
         PositionSemantics(const PositionSemantics & other);
+
+        /**
+         * Constructor helper: set all the info in this semantics class to UNKNOWN .
+         */
+        void setToUnknown();
 
         /**
          * @name Semantics setters and getters.

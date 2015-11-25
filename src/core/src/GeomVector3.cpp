@@ -11,6 +11,7 @@
 #include <iDynTree/Core/LinearForceVector3.h>
 #include <iDynTree/Core/AngularForceVector3.h>
 #include <iDynTree/Core/PrivatePreProcessorUtils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
 
 
 #include <Eigen/Dense>
@@ -178,8 +179,10 @@ namespace iDynTree
     {}
 
     GEOMVECTOR3_TEMPLATE_HDR
-    GEOMVECTOR3_INSTANCE_HDR::GeomVector3(const GeomVector3 & other): Vector3(other), semantics(other.semantics)
-    {}
+    GEOMVECTOR3_INSTANCE_HDR::GeomVector3(const GeomVector3 & other): Vector3(other)
+    {
+        iDynTreeSemanticsOp(semantics = other.semantics);
+    }
 
     // Getters & setters
     GEOMVECTOR3_TEMPLATE_HDR

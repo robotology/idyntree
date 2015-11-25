@@ -11,9 +11,10 @@
 
 #include <Eigen/Dense>
 
+
 namespace iDynTree
 {
-    
+
     /**
      * Maps a 3d vector to the square of the cross product matrix:
      * v --> (v\times)^2
@@ -21,7 +22,7 @@ namespace iDynTree
      * v --> S^2(v)
      */
     Eigen::Matrix3d squareCrossProductMatrix(const Eigen::Vector3d & v);
-    
+
     Eigen::Matrix3d skew(const Eigen::Vector3d & vec);
 
 }
