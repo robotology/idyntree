@@ -135,7 +135,7 @@ namespace iDynTree
          * where p_child is a quantity expressed in the child frame,
          * and   p_parent is a quantity expressed in the parent frame.
          */
-        virtual Transform getTransform(const VectorDynSize & jntPos,
+        virtual const Transform & getTransform(const VectorDynSize & jntPos,
                                        const LinkIndex child,
                                        const LinkIndex parent) const = 0;
 

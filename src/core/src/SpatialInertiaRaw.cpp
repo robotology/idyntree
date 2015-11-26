@@ -23,11 +23,6 @@
 
 namespace iDynTree
 {
-
-SpatialInertiaRaw::SpatialInertiaRaw()
-{
-}
-
 SpatialInertiaRaw::SpatialInertiaRaw(const double mass,
                                      const PositionRaw& com,
                                      const RotationalInertiaRaw& rotInertia): m_mass(mass),

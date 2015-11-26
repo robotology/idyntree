@@ -41,11 +41,6 @@ namespace iDynTree
 
     // constructors
     MOTIONVECTOR3_TEMPLATE_HDR
-    MOTIONVECTOR3_INSTANCE_HDR::MotionVector3():
-    GeomVector3<MotionT>()
-    {}
-
-    MOTIONVECTOR3_TEMPLATE_HDR
     MOTIONVECTOR3_INSTANCE_HDR::MotionVector3(const double* in_data, const unsigned int in_size):
     GeomVector3<MotionT>(in_data, in_size)
     {}

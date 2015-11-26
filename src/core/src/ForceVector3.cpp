@@ -24,12 +24,6 @@ namespace iDynTree
 
     // constructors
     FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
-    FORCEVECTOR3SEMANTICS_INSTANCE_HDR::ForceVector3Semantics():
-    GeomVector3Semantics<ForceTSemantics>()
-    {
-    }
-
-    FORCEVECTOR3SEMANTICS_TEMPLATE_HDR
     FORCEVECTOR3SEMANTICS_INSTANCE_HDR::ForceVector3Semantics(int _body, int _refBody, int _coordinateFrame):
     GeomVector3Semantics<ForceTSemantics>(_body, _refBody, _coordinateFrame)
     {
@@ -82,10 +76,6 @@ namespace iDynTree
      */
 
     // constructors
-    FORCEVECTOR3_TEMPLATE_HDR
-    FORCEVECTOR3_INSTANCE_HDR::ForceVector3():
-    GeomVector3<ForceT>()
-    {}
 
     FORCEVECTOR3_TEMPLATE_HDR
     FORCEVECTOR3_INSTANCE_HDR::ForceVector3(const double* in_data, const unsigned int in_size):

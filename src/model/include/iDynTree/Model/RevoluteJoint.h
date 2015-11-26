@@ -93,9 +93,9 @@ namespace iDynTree
 
 
         // Documentation inherited
-        virtual Transform getTransform(const VectorDynSize & jntPos,
-                                       const LinkIndex child,
-                                       const LinkIndex parent) const;
+        virtual const Transform & getTransform(const VectorDynSize & jntPos,
+                                               const LinkIndex child,
+                                               const LinkIndex parent) const;
 
         // Documentation inherited
         virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,

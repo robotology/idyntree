@@ -6,14 +6,11 @@
  */
 
 #include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
+#include <iDynTree/Core/PrivateUtils.h>
 
 namespace iDynTree
 {
-
-Wrench::Wrench()
-{
-
-}
 
 Wrench::Wrench(const Force & _linearVec3,
                const Torque & _angularVec3):
@@ -32,12 +29,15 @@ Wrench::Wrench(const SpatialForceVector& other):
 Wrench::Wrench(const Wrench& other):
                SpatialForceVector(other)
 {
-
 }
 
 Wrench Wrench::operator+(const Wrench& other) const
 {
-    return compose(*this,other);
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return efficient6dSum(*this,other);
+#else
+    return compose(*this,(other));
+#endif
 }
 
 Wrench Wrench::operator-() const
@@ -47,7 +47,11 @@ Wrench Wrench::operator-() const
 
 Wrench Wrench::operator-(const Wrench& other) const
 {
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return efficient6ddifference(*this,other);
+#else
     return compose(*this,inverse(other));
+#endif
 }
 
 }

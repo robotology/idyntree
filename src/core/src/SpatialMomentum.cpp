@@ -6,15 +6,10 @@
  */
 
 #include <iDynTree/Core/SpatialMomentum.h>
+#include <iDynTree/Core/PrivateUtils.h>
 
 namespace iDynTree
 {
-
-SpatialMomentum::SpatialMomentum()
-{
-
-}
-
 SpatialMomentum::SpatialMomentum(const LinMomentum & _linearVec3,
                                  const AngMomentum & _angularVec3):
                                  SpatialForceVector(_linearVec3, _angularVec3)
@@ -37,7 +32,11 @@ SpatialMomentum::SpatialMomentum(const SpatialMomentum& other):
 
 SpatialMomentum SpatialMomentum::operator+(const SpatialMomentum& other) const
 {
-    return compose(*this,other);
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return efficient6dSum(*this,other);
+#else
+    return compose(*this,(other));
+#endif
 }
 
 SpatialMomentum SpatialMomentum::operator-() const

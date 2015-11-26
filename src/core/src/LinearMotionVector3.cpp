@@ -23,10 +23,6 @@ namespace iDynTree
      */
 
     // constructors
-    LinearMotionVector3Semantics::LinearMotionVector3Semantics()
-    {
-    }
-
     LinearMotionVector3Semantics::LinearMotionVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame):
     GeomVector3Semantics<LinearMotionVector3Semantics>(_body, _refBody, _coordinateFrame),
     point(_point)

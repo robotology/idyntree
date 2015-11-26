@@ -108,7 +108,7 @@ void RevoluteJoint::resetAxisBuffers() const
     this->S_link2_link1 = (link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1).getRotationTwist(1.0);
 }
 
-Transform RevoluteJoint::getTransform(const VectorDynSize& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
+const Transform & RevoluteJoint::getTransform(const VectorDynSize& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
 {
     const double ang = jntPos(this->getPosCoordsOffset());
     updateBuffers(ang);
@@ -176,7 +176,7 @@ void RevoluteJoint::computeChildVelAcc(const VectorDynSize & jntPos,
     double dang = jntVel(this->getDOFsOffset());
     double d2ang = jntAcc(this->getDOFsOffset());
 
-    Transform child_X_parent = this->getTransform(jntPos,child,parent);
+    const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
 
     // Propagate twist and spatial acceleration: for a revolute joint (as for any 1 dof joint)
     // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
@@ -201,9 +201,9 @@ void RevoluteJoint::computeChildPosVelAcc(const VectorDynSize & jntPos,
     double dang = jntVel(this->getDOFsOffset());
     double d2ang = jntAcc(this->getDOFsOffset());
 
-    Transform child_X_parent = this->getTransform(jntPos,child,parent);
-    Transform parent_X_child = this->getTransform(jntPos,parent,child);
-
+    const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
+    const Transform & parent_X_child = this->getTransform(jntPos,parent,child);
+    
     // Propagate position : position of the frame is expressed as
     // transform between the link frame and a reference frame :
     // ref_H_child  = ref_H_parent*parent_H_child

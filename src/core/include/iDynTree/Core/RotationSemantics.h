@@ -42,7 +42,8 @@ namespace iDynTree
 
     public:
         /**
-         * Default constructor: initialize all semantics to unknown;
+         * Default constructor: initialize all semantics
+         * to unknown if the semantic support is enabled.
          */
         RotationSemantics();
 
@@ -56,6 +57,8 @@ namespace iDynTree
          * Copy constructor: create a RotationSemantics from another RotationSemantics
          */
         RotationSemantics(const RotationSemantics & other);
+
+        void setToUnknown();
 
         /**
          * @name Semantics setters and getters.

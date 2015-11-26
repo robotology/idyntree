@@ -18,11 +18,6 @@
 
 namespace iDynTree
 {
-
-    Axis::Axis()
-    {
-    }
-
     Axis::Axis(const Direction& _direction, const Position& _origin):
                direction(_direction), origin(_origin)
     {

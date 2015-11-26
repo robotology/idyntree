@@ -38,7 +38,7 @@ namespace iDynTree
          * The data is not reset to the default for perfomance reason.
          * Please initialize the data in the class before any use.
          */
-        Direction();
+        inline Direction() {};
 
         /**
          * Constructor from 3 doubles: initialize the direction with the passed values.

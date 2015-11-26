@@ -20,12 +20,6 @@
 namespace iDynTree
 {
 
-SpatialMotionVector::SpatialMotionVector()
-{
-    // Base class SpatialVector<...> will be implicitly called
-}
-
-
 SpatialMotionVector::SpatialMotionVector(const LinearMotionVector3 & _linearVec3,
                                          const AngularMotionVector3 & _angularVec3):
                                          SpatialVector<SpatialMotionVector>(_linearVec3, _angularVec3)

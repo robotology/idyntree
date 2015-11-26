@@ -9,20 +9,16 @@
 #include <iDynTree/Core/PositionSemantics.h>
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/PrivatePreProcessorUtils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
 
 #include <iostream>
 #include <sstream>
 
 namespace iDynTree
 {
-    RotationSemantics::RotationSemantics():
-    orientationFrame(UNKNOWN),
-    body(UNKNOWN),
-    refOrientationFrame(UNKNOWN),
-    refBody(UNKNOWN),
-    coordinateFrame(UNKNOWN)
+    RotationSemantics::RotationSemantics()
     {
-
+        iDynTreeSemanticsOp(this->setToUnknown());
     }
 
     RotationSemantics::RotationSemantics(int _orientationFrame, int _body,
@@ -44,6 +40,16 @@ namespace iDynTree
         this->setRefBody(other.getRefBody());
         this->setCoordinateFrame(other.getCoordinateFrame());
     }
+
+    void RotationSemantics::setToUnknown()
+    {
+        this->orientationFrame = UNKNOWN;
+        this->body = UNKNOWN;
+        this->refOrientationFrame = UNKNOWN;
+        this->refBody = UNKNOWN;
+        this->coordinateFrame = UNKNOWN;
+    }
+
 
     int RotationSemantics::getOrientationFrame() const
     {

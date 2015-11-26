@@ -29,6 +29,7 @@ namespace iDynTree
         LinkIndex link1;
         LinkIndex link2;
         Transform link1_X_link2;
+        Transform link2_X_link1;
 
     public:
         /**
@@ -70,13 +71,13 @@ namespace iDynTree
 
         // Documentation inherited
         virtual Transform getRestTransform(const LinkIndex child,
-                                           const LinkIndex parent) const;
+                                            const LinkIndex parent) const;
 
 
         // Documentation inherited
-        virtual Transform getTransform(const VectorDynSize & jntPos,
-                                       const LinkIndex child,
-                                       const LinkIndex parent) const;
+        virtual const Transform & getTransform(const VectorDynSize & jntPos,
+                                               const LinkIndex child,
+                                               const LinkIndex parent) const;
 
         // Documentation inherited
         virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,

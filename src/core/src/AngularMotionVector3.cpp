@@ -36,10 +36,6 @@ namespace iDynTree
      */
 
     // constructors
-    AngularMotionVector3::AngularMotionVector3()
-    {
-    }
-
     AngularMotionVector3::AngularMotionVector3(const double x, const double y, const double z)
     {
         this->m_data[0] = x;

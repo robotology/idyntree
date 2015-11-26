@@ -15,12 +15,6 @@
 namespace iDynTree
 {
 
-SpatialForceVector::SpatialForceVector()
-{
-    // Base class SpatialVector<...> will be implicitly called
-}
-
-
 SpatialForceVector::SpatialForceVector(const LinearForceVector3 & _linearVec3,
                                        const AngularForceVector3 & _angularVec3):
                                        SpatialVector<SpatialForceVector>(_linearVec3, _angularVec3)

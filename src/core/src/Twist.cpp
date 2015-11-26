@@ -9,6 +9,7 @@
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialMomentum.h>
+#include <iDynTree/Core/PrivateUtils.h>
 
 namespace iDynTree
 {
@@ -40,7 +41,11 @@ Twist::Twist(const Twist& other):
 
 Twist Twist::operator+(const Twist& other) const
 {
-    return compose(*this,other);
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return efficient6dSum(*this,other);
+#else
+    return compose(*this,(other));
+#endif
 }
 
 Twist Twist::operator-() const
@@ -50,18 +55,29 @@ Twist Twist::operator-() const
 
 Twist Twist::operator-(const Twist& other) const
 {
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return efficient6ddifference(*this,other);
+#else
     return compose(*this,inverse(other));
+#endif
 }
 
 Wrench Twist::operator*(const SpatialMomentum& other) const
 {
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return efficientTwistCrossMomentum<Twist,SpatialMomentum,Wrench>(*this,other);
+#else
     return SpatialMotionVector::cross(other);
-
+#endif
 }
 
 SpatialAcc Twist::operator*(const Twist& other) const
 {
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return efficientTwistCrossTwist<Twist,Twist,SpatialAcc>(*this,other);
+#else
     return SpatialMotionVector::cross(other);
+#endif
 }
 
 

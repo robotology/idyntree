@@ -29,7 +29,7 @@ namespace iDynTree
         /**
          * Constructors:
          */
-        ForceVector3Semantics();
+        inline ForceVector3Semantics() {};
         ForceVector3Semantics(int _body, int _refBody, int _coordinateFrame);
         ForceVector3Semantics(const ForceVector3Semantics & other);
 
@@ -64,7 +64,7 @@ namespace iDynTree
         /**
          * constructors
          */
-        ForceVector3();
+        inline ForceVector3() {};
         ForceVector3(const double* in_data, const unsigned int in_size);
         ForceVector3(const ForceVector3 & other);
     };

@@ -21,10 +21,6 @@
 namespace iDynTree
 {
 
-SpatialInertia::SpatialInertia()
-{
-}
-
 SpatialInertia::SpatialInertia(const double mass,
                                const PositionRaw& com,
                                const RotationalInertiaRaw& rotInertia): SpatialInertiaRaw(mass, com, rotInertia)

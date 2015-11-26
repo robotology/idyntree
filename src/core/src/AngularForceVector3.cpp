@@ -22,10 +22,6 @@ namespace iDynTree
      */
 
     // constructors
-    AngularForceVector3Semantics::AngularForceVector3Semantics()
-    {
-    }
-
     AngularForceVector3Semantics::AngularForceVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame):
     ForceVector3Semantics<AngularForceVector3Semantics>(_body, _refBody, _coordinateFrame),
     point(_point)
@@ -97,10 +93,6 @@ namespace iDynTree
      */
 
     // constructors
-    AngularForceVector3::AngularForceVector3()
-    {
-    }
-
     AngularForceVector3::AngularForceVector3(const double x, const double y, const double z)
     {
         this->m_data[0] = x;

@@ -9,12 +9,6 @@
 
 namespace iDynTree
 {
-
-SpatialAcc::SpatialAcc()
-{
-
-}
-
 SpatialAcc::SpatialAcc(const LinAcceleration & _linearVec3,
                        const AngAcceleration & _angularVec3):
                        SpatialMotionVector(_linearVec3, _angularVec3)
@@ -35,11 +29,13 @@ SpatialAcc::SpatialAcc(const SpatialAcc& other):
 
 }
 
-
-
 SpatialAcc SpatialAcc::operator+(const SpatialAcc& other) const
 {
-    return compose(*this,other);
+#ifdef IDYNTREE_DONT_USE_SEMANTICSD
+    return efficient6dSum(*this,other);
+#else
+    return compose(*this,(other));
+#endif
 }
 
 SpatialAcc SpatialAcc::operator-() const
@@ -49,7 +45,11 @@ SpatialAcc SpatialAcc::operator-() const
 
 SpatialAcc SpatialAcc::operator-(const SpatialAcc& other) const
 {
+#ifdef IDYNTREE_DONT_USE_SEMANTICSF
+    return efficient6ddifference(*this,other);
+#else
     return compose(*this,inverse(other));
+#endif
 }
 
 }

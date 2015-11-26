@@ -30,7 +30,7 @@ namespace iDynTree
         /**
          * Constructors:
          */
-        LinearMotionVector3Semantics();
+        inline LinearMotionVector3Semantics() {};
         LinearMotionVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame);
         LinearMotionVector3Semantics(const LinearMotionVector3Semantics & other);
 

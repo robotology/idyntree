@@ -177,7 +177,6 @@ Wrench ArticulatedBodyInertia::operator*(const SpatialAcc& other) const
 
     toEigen(ret.getAngularVec3()) =   toEigen(this->linearAngular).transpose()*toEigen(other.getLinearVec3())
                                    + toEigen(this->angularAngular)*toEigen(other.getAngularVec3());
-
     return ret;
 
 }

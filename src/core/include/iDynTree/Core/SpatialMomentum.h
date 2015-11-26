@@ -29,7 +29,7 @@ namespace iDynTree
          * The data is not reset to the zero for perfomance reason.
          * Please initialize the data in the class before any use.
          */
-        SpatialMomentum();
+        inline SpatialMomentum() {};
         SpatialMomentum(const LinMomentum & _linearVec3, const AngMomentum & _angularVec3);
         SpatialMomentum(const SpatialForceVector & other);
         SpatialMomentum(const SpatialMomentum & other);

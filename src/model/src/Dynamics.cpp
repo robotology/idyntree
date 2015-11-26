@@ -67,7 +67,7 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
              {
                  LinkIndex childIndex = neighborIndex;
                  IJointConstPtr neighborJoint = model.getJoint(model.getNeighbor(visitedLinkIndex,neigh_i).neighborJoint);
-                 Transform visitedLink_X_child = neighborJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,childIndex);
+                 const Transform & visitedLink_X_child = neighborJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,childIndex);
 
                  // One term of the sum in Equation 5.20 in Featherstone 2008
                  f(visitedLinkIndex) = f(visitedLinkIndex) + visitedLink_X_child*f(childIndex);

@@ -33,14 +33,6 @@ namespace iDynTree
 
     // constructors
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    GEOMVECTOR3SEMANTICS_INSTANCE_HDR::GeomVector3Semantics():
-    body(UNKNOWN),
-    refBody(UNKNOWN),
-    coordinateFrame(UNKNOWN)
-    {
-    }
-
-    GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
     GEOMVECTOR3SEMANTICS_INSTANCE_HDR::GeomVector3Semantics(int _body, int _refBody, int _coordinateFrame):
     body(_body),
     refBody(_refBody),
@@ -54,6 +46,14 @@ namespace iDynTree
     refBody(other.refBody),
     coordinateFrame(other.coordinateFrame)
     {
+    }
+
+    GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
+    void GEOMVECTOR3SEMANTICS_INSTANCE_HDR::setToUnknown()
+    {
+        body = UNKNOWN;
+        refBody = UNKNOWN;
+        coordinateFrame = UNKNOWN;
     }
 
     // Getters, setters & helpers
@@ -170,10 +170,6 @@ namespace iDynTree
      */
 
     // constructors
-    GEOMVECTOR3_TEMPLATE_HDR
-    GEOMVECTOR3_INSTANCE_HDR::GeomVector3(): Vector3()
-    {}
-
     GEOMVECTOR3_TEMPLATE_HDR
     GEOMVECTOR3_INSTANCE_HDR::GeomVector3(const double* in_data, const unsigned int in_size): Vector3(in_data, in_size)
     {}

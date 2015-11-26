@@ -69,6 +69,11 @@ SpatialInertia transform(const Transform& op1, const SpatialInertia& op2);
 template<>
 ArticulatedBodyInertia transform(const Transform& op1, const ArticulatedBodyInertia& op2);
 
+template<typename spatialForceType>
+spatialForceType transformWrenchEfficient(const Transform & op1, const spatialForceType & op2);
+
+template<typename spatialVelType>
+spatialVelType transformTwistEfficient(const Transform & op1, const spatialVelType & op2);
 
 /**
  * Class functions
@@ -169,27 +174,47 @@ Position Transform::operator*(const Position& op2) const
 
 Twist Transform::operator*(const Twist& op2) const
 {
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return transformTwistEfficient(*this,op2);
+#else
     return transform<Twist>(*this,op2);
+#endif
 }
 
 SpatialForceVector Transform::operator*(const SpatialForceVector& op2) const
 {
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return transformWrenchEfficient(*this,op2);
+#else
     return transform<SpatialForceVector>(*this,op2);
+#endif
 }
 
 Wrench Transform::operator*(const Wrench& op2) const
 {
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return transformWrenchEfficient(*this,op2);
+#else
     return transform<Wrench>(*this,op2);
+#endif
 }
 
 SpatialMomentum Transform::operator*(const SpatialMomentum& op2) const
 {
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return transformWrenchEfficient(*this,op2);
+#else
     return transform<SpatialMomentum>(*this,op2);
+#endif
 }
 
 SpatialAcc Transform::operator*(const SpatialAcc& op2) const
 {
-    return transform<SpatialAcc>(*this,op2);
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return transformTwistEfficient(*this,op2);
+#else
+    return transform<Twist>(*this,op2);
+#endif
 }
 
 
@@ -379,6 +404,34 @@ std::string Transform::reservedToString() const
                             - skewP*newLinearLinear*skewP;
 
         return newABI;
+    }
+
+    template<typename spatialVelType>
+    spatialVelType transformTwistEfficient(const Transform& op1, const spatialVelType& op2)
+    {
+        spatialVelType ret;
+
+        Eigen::Map<const Eigen::Vector3d> p(op1.getPosition().data());
+        Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > R(op1.getRotation().data());
+
+        toEigen(ret.getAngularVec3()) = R*toEigen(op2.getAngularVec3());
+        toEigen(ret.getLinearVec3())  = R*toEigen(op2.getLinearVec3()) + p.cross(toEigen(ret.getAngularVec3()));
+
+        return ret;
+    }
+
+    template<typename spatialForceType>
+    spatialForceType transformWrenchEfficient(const Transform& op1, const spatialForceType& op2)
+    {
+        spatialForceType ret;
+
+        Eigen::Map<const Eigen::Vector3d> p(op1.getPosition().data());
+        Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > R(op1.getRotation().data());
+
+        toEigen(ret.getLinearVec3()) = R*toEigen(op2.getLinearVec3());
+        toEigen(ret.getAngularVec3())  = R*toEigen(op2.getAngularVec3()) + p.cross(toEigen(ret.getLinearVec3()));
+
+        return ret;
     }
 
     Matrix4x4 Transform::asHomogeneousTransform() const

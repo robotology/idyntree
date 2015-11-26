@@ -48,7 +48,7 @@ namespace iDynTree
          * The data is not reset to zero for perfomance reason.
          * Please initialize the data in the class before any use.
          */
-        SpatialForceVector();
+        inline SpatialForceVector() {}
         SpatialForceVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
         SpatialForceVector(const SpatialForceVector & other);
         SpatialForceVector(const SpatialVector<SpatialForceVector> & other);
