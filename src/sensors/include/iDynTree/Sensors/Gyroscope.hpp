@@ -31,8 +31,14 @@ namespace iDynTree
 
 namespace iDynTree {
 
-    //class Traversal;
-
+    /**
+     * Interface to the Gyroscope class.
+     *
+     * An implementation of the Gyroscope Sensor
+     *
+     * \ingroup iDynTreeSensors
+     *
+     */
     class Gyroscope: public Sensor {
     private:
         struct GyroscopePrivateAttributes;
