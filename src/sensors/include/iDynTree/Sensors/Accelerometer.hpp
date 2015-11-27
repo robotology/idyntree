@@ -32,8 +32,14 @@ namespace iDynTree
 
 namespace iDynTree {
 
-    //class Traversal;
-
+    /**
+     * Interface to the Accelerometer class.
+     *
+     * An implementation of the Accelerometer Sensor
+     *
+     * \ingroup iDynTreeSensors
+     *
+     */
     class Accelerometer: public Sensor {
     private:
         struct AccelerometerPrivateAttributes;
