@@ -51,7 +51,7 @@ void checkURDF(std::string fileName,
 
 int main()
 {
-    checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,2,"link1");
+    checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,4,"link1");
     checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,3,"link1");
 
     return EXIT_SUCCESS;
