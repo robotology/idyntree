@@ -84,10 +84,8 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
     for(unsigned int lnk=0; lnk < modelWithFakeLinks.getNrOfLinks(); lnk++ )
     {
         std::string linkToAdd = modelWithFakeLinks.getLinkName(lnk);
-        std::cout << "Considering link " << linkToAdd << std::endl;
         if( linkToRemove.find(linkToAdd) == linkToRemove.end() )
         {
-            std::cout << "Adding link " << linkToAdd << std::endl;
             modelWithoutFakeLinks.addLink(linkToAdd,*modelWithFakeLinks.getLink(lnk));
         }
     }
