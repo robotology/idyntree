@@ -46,6 +46,10 @@ if(IDYNTREE_USES_YARP)
 endif()
 
 # Find dependecies
+
+# Eigen is compulsory
+find_package(Eigen3 REQUIRED)
+
 if(IDYNTREE_USES_YARP)
     find_package(YARP REQUIRED)
     if (YARP_HAS_MATH_LIB)
@@ -62,10 +66,22 @@ endif()
 if(IDYNTREE_USES_KDL)
     include(OrocosKDLFindLogic)
     find_package(orocos_kdl REQUIRED)
+    find_package(TinyXML    REQUIRED)
 endif()
 
-find_package(Eigen3 REQUIRED)
-find_package(TinyXML REQUIRED)
+# An external TinyXML is compulsory if compiling
+# with KDL support enabled, because KDL uses urdfdom
+# that include TinyXML in its public headers.
+# If KDL is not enabled, we can use also the internal
+# copy of TinyXML, given that we don't include it in
+# our public headers
+if(NOT IDYNTREE_USES_KDL)
+    find_package(TinyXML)
+    # If no TinyXML is found in the system, use the internal one
+    if(NOT ${TinyXML_FOUND})
+        add_subdirectory(extern)
+    endif()
+endif()
 
 
 include(AddInstallRPATHSupport)

@@ -1,6 +1,3 @@
-
-
-find_package(TinyXML       REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/include
                           ${EIGEN3_INCLUDE_DIR}
                           ${orocos_kdl_INCLUDE_DIRS}
