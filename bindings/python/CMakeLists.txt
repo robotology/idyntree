@@ -19,7 +19,6 @@ endif()
 
 set(target_name iDynTree_python)
 
-
 set_source_files_properties(../iDynTree.i PROPERTIES CPLUSPLUS ON)
 swig_add_module(${target_name} python ../iDynTree.i)
 set_target_properties(_${target_name} PROPERTIES OUTPUT_NAME "_iDynTree")
