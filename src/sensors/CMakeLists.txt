@@ -17,16 +17,16 @@ include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
 set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/Sensors.hpp
                              include/iDynTree/Sensors/SixAxisFTSensor.hpp
                              include/iDynTree/Sensors/Gyroscope.hpp
-                             include/iDynTree/Sensors/Accelerometer.hpp)
-                            # include/iDynTree/Sensors/IMeasurement.hpp)
+                             include/iDynTree/Sensors/Accelerometer.hpp
+                             include/iDynTree/Sensors/PredictSensorMeasurement.hpp)
 
 #file (GLOB IDYNTREE_BASE_PRIVATE_INCLUDES)
 
 set(IDYNTREE_SENSORS_SOURCES src/Sensors.cpp
                              src/SixAxisFTSensor.cpp
                              src/Accelerometer.cpp
-                             src/Gyroscope.cpp)
-                     #        src/IMeasurement.cpp)
+                             src/Gyroscope.cpp
+                             src/PredictSensorMeasurement.cpp
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_SENSORS_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_SENSORS_HEADERS})

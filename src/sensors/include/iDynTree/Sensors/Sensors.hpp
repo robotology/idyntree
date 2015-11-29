@@ -47,9 +47,9 @@ namespace iDynTree {
 
 
      /**
-     * Virtual interface to Sensor Class.
+     * Virtual Class defining a Sensor within iDynTree.
      *
-     * All sensor class inherit from this base class.
+     * All sensor classes inherit from this base class.
      *
      * \ingroup iDynTreeSensors
      *
