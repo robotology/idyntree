@@ -4,16 +4,6 @@
 
 project(iDynTree_Sensors CXX)
 
-# share headers with all iDynTree targes
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
-
-#include system headers
-include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
-                            ${EIGEN3_INCLUDE_DIR})
-
 set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/Sensors.hpp
                              include/iDynTree/Sensors/SixAxisFTSensor.hpp
                              include/iDynTree/Sensors/Gyroscope.hpp
@@ -36,11 +26,12 @@ set(libraryname idyntree-sensors)
 
 add_library(${libraryname} ${IDYNTREE_SENSORS_SOURCES} ${IDYNTREE_SENSORS_HEADERS} ${IDYNTREE_SENSORS_PRIVATE_INCLUDES})
 
-target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
-                                         PRIVATE ${EIGEN3_INCLUDE_DIR})
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
+target_include_directories(${libraryname} SYSTEM PRIVATE ${EIGEN3_INCLUDE_DIR}
+                                                         ${orocos_kdl_INCLUDE_DIRS})
 
-target_link_libraries(${libraryname} idyntree-core)
+target_link_libraries(${libraryname} idyntree-core idyntree-kdl)
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_SENSORS_HEADERS})
 

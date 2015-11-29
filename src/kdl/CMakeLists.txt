@@ -20,20 +20,12 @@ SOURCE_GROUP("Source Files" FILES ${IDYNTREE_KDL_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_KDL_HEADERS})
 SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_KDL_PRIVATE_INCLUDES})
 
-# share headers with all iDynTree targes
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
-
-#include system headers
-include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
-                            ${EIGEN3_INCLUDE_DIR})
-
 add_library(idyntree-kdl ${IDYNTREE_KDL_SOURCES} ${IDYNTREE_KDL_HEADERS} ${IDYNTREE_KDL_PRIVATE_INCLUDES})
 
-target_include_directories(idyntree-kdl PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                ${EIGEN3_INCLUDE_DIR})
+target_include_directories(idyntree-kdl PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+target_include_directories(idyntree-kdl SYSTEM PUBLIC ${EIGEN3_INCLUDE_DIR}
+                                                      ${orocos_kdl_INCLUDE_DIRS})
 
 target_link_libraries(idyntree-kdl PUBLIC idyntree-core idyntree-model ${orocos_kdl_LIBRARIES})
 

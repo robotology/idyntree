@@ -24,10 +24,8 @@ if(SWIG_FOUND)
 
     set_source_files_properties(iDynTree.i PROPERTIES CPLUSPLUS ON)
 
-    get_property(IDYNTREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
     get_property(IDYNTREE_LIBRARIES GLOBAL PROPERTY ${VARS_PREFIX}_TARGETS)
 
-    include_directories(${IDYNTREE_INCLUDE_DIRS})
     link_libraries(${IDYNTREE_LIBRARIES})
 
     # list all dependencies of the process of generating

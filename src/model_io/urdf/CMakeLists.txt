@@ -47,11 +47,6 @@ if(IDYNTREE_USES_KDL)
     source_group("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})
     source_group("Private Header Files" FILES ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
-    # share headers with all iDynTree targes
-    set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
-    get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-    include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
-
     include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS}
                             ${urdfdom_INCLUDE_DIRS})
 
@@ -62,16 +57,17 @@ if(IDYNTREE_USES_KDL)
                                ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
 
-    target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                    ${orocos_kdl_INCLUDE_DIRS}
+    target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                                     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
+                                                      ${orocos_kdl_INCLUDE_DIRS}
+                                                      ${IDYNTREE_TREE_INCLUDE_DIRS}
                                               PRIVATE ${TinyXML_INCLUDE_DIRS})
 
     target_link_libraries(${libraryname} idyntree-core
-                                        idyntree-model
-                                        idyntree-sensors
-                                        idyntree-kdl
-                                        ${orocos_kdl_LIBRARIES}
+                                         idyntree-model
+                                         idyntree-sensors
+                                         idyntree-kdl
+                                         ${orocos_kdl_LIBRARIES}
                                         ${urdfdom_LIBRARIES}
                                         ${console_bridge_LIBRARIES}
                                         ${TinyXML_LIBRARIES})
@@ -104,17 +100,12 @@ else()
     SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_URDF_SOURCES})
     SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})
 
-    # share headers with all iDynTree targes
-    set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
-    get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
-    include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
-
+    # share headers with all iDynTree targets
     set(libraryname idyntree-modelio-urdf)
 
     add_library(${libraryname} ${IDYNTREE_MODELIO_URDF_SOURCES} ${IDYNTREE_MODELIO_URDF_HEADERS})
 
-    target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
+    target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                               PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                       ${TinyXML_INCLUDE_DIRS})
