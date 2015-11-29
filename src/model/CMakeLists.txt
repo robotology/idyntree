@@ -17,6 +17,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
                            include/iDynTree/Model/ModelTransformers.h
                            include/iDynTree/Model/MovableJointImpl.h
                            include/iDynTree/Model/RevoluteJoint.h
+                           include/iDynTree/Model/SubModel.h
                            include/iDynTree/Model/Traversal.h)
 
 set(IDYNTREE_MODEL_PRIVATE_INCLUDES)
@@ -34,6 +35,7 @@ set(IDYNTREE_MODEL_SOURCES src/FixedJoint.cpp
                            src/ModelTransformers.cpp
                            src/ModelInterfaceDestructors.cpp
                            src/RevoluteJoint.cpp
+                           src/SubModel.cpp
                            src/Traversal.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODEL_SOURCES})

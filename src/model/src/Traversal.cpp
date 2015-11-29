@@ -15,7 +15,7 @@ namespace iDynTree
 
 Traversal::Traversal()
 {
-    reset(0,0);
+    reset(0);
 }
 
 Traversal::Traversal(const Traversal& other)
@@ -32,41 +32,42 @@ Traversal& Traversal::operator=(const Traversal& other)
 
 Traversal::~Traversal()
 {
-    reset(0,0);
+    reset(0);
 }
 
-bool Traversal::reset(unsigned int nrOfVisitedLinks, Model& model)
+bool Traversal::reset(unsigned int nrOfLinksInModel)
 {
-    return reset(nrOfVisitedLinks,model.getNrOfLinks());
-}
-
-
-bool Traversal::reset(unsigned int nrOfVisitedLinks, unsigned int nrOfLinksInModel)
-{
-    this->links.resize(nrOfVisitedLinks);
-    this->parents.resize(nrOfVisitedLinks);
-    this->toParentJoints.resize(nrOfVisitedLinks);
-    this->linkIndexToTraversalIndex.resize(nrOfLinksInModel);
+    this->links.resize(0);
+    this->parents.resize(0);
+    this->toParentJoints.resize(0);
+    this->linkIndexToTraversalIndex.resize(nrOfLinksInModel,-1);
 
     return true;
 }
 
-bool Traversal::setTraversalElement(unsigned int traversalIndex, const Link * link,
-                                    const IJoint * jointToParent, const Link * parentLink)
+bool Traversal::addTraversalElement(const Link* link, const IJoint* jointToParent, const Link* parentLink)
 {
-    if( traversalIndex < 0 ||
-        traversalIndex >= getNrOfVisitedLinks() )
+    // The traversal index of the link just added will be the current getNrOfVisitedLinks()
+    this->linkIndexToTraversalIndex[link->getIndex()] = this->getNrOfVisitedLinks();
+
+    this->links.push_back(link);
+    this->toParentJoints.push_back(jointToParent);
+    this->parents.push_back(parentLink);
+
+    return true;
+}
+
+
+bool Traversal::addTraversalBase(const Link* link)
+{
+    if( this->getNrOfVisitedLinks() != 0 )
     {
+        std::cerr << "[ERROR]  Traversal::addTraversalBase error :"
+                  << " adding a base to Traversal that already has one." << std::endl;
         return false;
     }
 
-    this->links[traversalIndex] = link;
-    this->toParentJoints[traversalIndex] = jointToParent;
-    this->parents[traversalIndex] = parentLink;
-
-    this->linkIndexToTraversalIndex[link->getIndex()] = traversalIndex;
-
-    return true;
+    return addTraversalElement(link,NULL,NULL);
 }
 
 unsigned int Traversal::getNrOfVisitedLinks() const
@@ -99,7 +100,9 @@ const Link* Traversal::getParentLinkFromLinkIndex(const LinkIndex linkIndex) con
     return this->parents[linkIndexToTraversalIndex[linkIndex]];
 }
 
-
-
+bool Traversal::reset(const Model& model)
+{
+    reset(model.getNrOfLinks());
+}
 
 }
