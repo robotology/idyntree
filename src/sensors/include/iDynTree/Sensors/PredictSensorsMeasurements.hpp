@@ -15,26 +15,34 @@
  * Public License for more details
  */
 
-#ifndef PREDICTSENSORMEASUREMENT_HPP
-#define PREDICTSENSORMEASUREMENT_HPP
+#ifndef PREDICTSENSORSMEASUREMENTS_HPP
+#define PREDICTSENSORSMEASUREMENTS_HPP
 
 
 namespace iDynTree{
-
-    class PredictSensorMeasurement {
     
+    class SensorsList;
+    class Traversal;
+    class Model;
+    class VectorDynSize;
+
+    class PredictSensorsMeasurements {
+    
+        
     public : 
-        PredictSensorMeasurement();
-        bool setSensorList(const SensorList &sensorList);
+        PredictSensorsMeasurements();
+        bool setSensorList(const SensorsList &sensorsList);
         bool setModel(const iDynTree::Model &model);
         bool setTraversal(const iDynTree::Traversal &traversal);
-        bool makePrediction(Eigen::VectorDynSize);
+        bool makePrediction(iDynTree::VectorDynSize &predictedMeasurement);
+        ~PredictSensorsMeasurements();
         
     private :
-        SensorList sensorList;
-        Traversal traversal;
-        Model model;
-        ~PredictSensorMeasurement();
+        
+        struct PredictSensorsMeasurementsPrivateAttributes;
+        PredictSensorsMeasurementsPrivateAttributes * pimpl;
+        
     };
+}
 
 #endif 
