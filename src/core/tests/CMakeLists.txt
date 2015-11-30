@@ -1,7 +1,3 @@
-macro(add_rtf_test testfile)
-    add_test(NAME ${testfile} COMMAND   testrunner --verbose --test ${CMAKE_CURRENT_SOURCE_DIR}/${testfile})
-endmacro()
-
 macro(add_unit_test classname)
     set(testsrc ${classname}UnitTest.cpp)
     set(testbinary ${classname}UnitTest)
@@ -25,7 +21,3 @@ add_unit_test(ArticulatedBodyInertia)
 add_unit_test(Twist)
 add_unit_test(Wrench)
 add_unit_test(ExpLog)
-
-if(IDYNTREE_USES_PYTHON)
-    add_rtf_test(geometry.py)
-endif()
