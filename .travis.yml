@@ -55,7 +55,7 @@ before_script:
 script:
   - make
   - sudo make install
-  - ctest 
+  - ctest -VV -R Python
 
 notifications:
   email:
