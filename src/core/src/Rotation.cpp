@@ -277,8 +277,6 @@ namespace iDynTree
         // https://github.com/dartsim/dart/pull/407/files
         // https://github.com/dartsim/dart/pull/334
         // https://github.com/dartsim/dart/issues/88
-        std::cout << aa.angle() << std::endl;
-        std::cout << aa.axis()  << std::endl;
         Eigen::Map<Eigen::Vector3d>(ret.data()) = aa.angle()*aa.axis();
 
         return ret;
@@ -324,7 +322,8 @@ namespace iDynTree
     {
         std::stringstream ss;
 
-        ss << RotationRaw::toString() << " " << semantics.toString();
+        ss << RotationRaw::toString();
+        iDynTreeSemanticsOp(ss << " " << semantics.toString());
 
         return ss.str();
     }

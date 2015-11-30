@@ -249,8 +249,11 @@ std::string Transform::toString() const
     std::stringstream ss;
 
     ss << rot.toString() << " "
-       << pos.toString() << " "
-       << semantics.toString() << std::endl;
+       << pos.toString();
+
+    iDynTreeSemanticsOp(ss << " " << semantics.toString());
+    
+    ss << std::endl;
 
     return ss.str();
 }

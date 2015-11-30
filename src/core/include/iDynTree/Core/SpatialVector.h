@@ -443,8 +443,9 @@ SpatialVector<DerivedSpatialVecT>
         std::stringstream ss;
 
         ss << linearVec3.toString() << " "
-        << angularVec3.toString() << " "
-        << semantics.toString() << std::endl;
+        << angularVec3.toString();
+        iDynTreeSemanticsOp(ss << " " << semantics.toString());
+        ss << std::endl;
 
         return ss.str();
     }

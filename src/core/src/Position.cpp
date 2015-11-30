@@ -193,7 +193,8 @@ namespace iDynTree
     {
         std::stringstream ss;
 
-        ss << PositionRaw::toString() << " " << semantics.toString();
+        ss << PositionRaw::toString();
+        iDynTreeSemanticsOp(ss << " " << semantics.toString());
 
         return ss.str();
     }
