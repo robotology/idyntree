@@ -24,9 +24,9 @@
 /* Note : always include headers following the inheritance order */
 
 // Basic math classes
-#include "iDynTree/Core/IMatrix.h"
-#include "iDynTree/Core/IVector.h"
 #include "iDynTree/Core/MatrixDynSize.h"
+#include "iDynTree/Core/MatrixFixSize.h"
+
 #include "iDynTree/Core/VectorDynSize.h"
 #include "iDynTree/Core/VectorFixSize.h"
 
@@ -94,8 +94,6 @@
 
 /* Note : always include headers following the inheritance order */
 // Basic math classes
-%include "iDynTree/Core/IMatrix.h"
-%include "iDynTree/Core/IVector.h"
 %include "iDynTree/Core/MatrixDynSize.h"
 %include "iDynTree/Core/MatrixFixSize.h"
 
