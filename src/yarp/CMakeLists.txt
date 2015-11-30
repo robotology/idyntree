@@ -36,7 +36,7 @@ set_target_properties(idyntree-yarp PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${iDynTree_YARP_header}")
 
 
-target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
+target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                                  ${GSL_INCLUDE_DIRS}
                                                  ${YARP_INCLUDE_DIRS}

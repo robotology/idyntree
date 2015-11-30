@@ -33,7 +33,7 @@ namespace iDynTree {
 
 
     /**
-     * A six axis force torque sensors.
+     * A six axis force torque sensor class implementation of the Sensor.
      *
      * \ingroup iDynTreeSensors 
      */

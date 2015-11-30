@@ -1,4 +1,4 @@
-iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=master)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/30f7h985innapoqh/branch/master?svg=true)](https://ci.appveyor.com/project/traversaro/idyntree/branch/master)
+iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=master)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/1uecfmyvxb2dujt9/branch/master?svg=true)](https://ci.appveyor.com/project/robotology/idyntree/branch/master)
 ===========
 
 iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. 
@@ -10,6 +10,7 @@ iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) 
 ##  Contents 
 * **[Installation](#installation)**
 * **[Tutorials](#tutorials)**
+* **[Documentation](#documentation)**
 * **[Reference Paper](#reference-paper)**
 * **[Acknowledgments](#acknowledgments)**
 
@@ -62,9 +63,13 @@ the first 4 points in the guide) and then enable Matlab bindings generation with
 ## Tutorials
 | Topic  | C++ | Matlab | Python |
 |:------:|:---:|:------:|:------:|
-| Use of the [DynamicsComputation class](http://wiki.icub.org/codyco/dox/html/classiDynTree_1_1HighLevel_1_1DynamicsComputations.html) for computing Jacobians and Dynamics Regressor | [doc/dcTutorialCpp.md](doc/dcTutorialCpp.md) | NA | NA |
+| Use of the [DynamicsComputation class](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1HighLevel_1_1DynamicsComputations.html) for computing Jacobians and Dynamics Regressor | [doc/dcTutorialCpp.md](doc/dcTutorialCpp.md) | NA | NA |
 
 Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
+
+## Documentation 
+The documentation for the complete API of iDynTree is automatically extracted from the C++ code using [Doxygen](www.doxygen.org), 
+and is available at the URL : [http://wiki.icub.org/codyco/dox/html/idyntree/html/](http://wiki.icub.org/codyco/dox/html/idyntree/html/).
 
 ## Reference paper
 A paper describing the algorithms implemented in iDynTree and their use in a real world scenario can be downloaded [here](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) . If you're going to use this library for your work, please quote it within any resulting publication:
