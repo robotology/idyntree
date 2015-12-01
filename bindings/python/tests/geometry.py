@@ -6,7 +6,10 @@ import os
 
 # This test is mean to be executed from the build,
 # so we add in PYTHONPATH the location of iDynTree.py and _iDynTree.so
-os.environ["PYTHONPATH"] = os.environ["PYTHONPATH"] + ":../:../../../lib/python/";
+if( "PYTHONPATH" in os.environ ):
+    os.environ["PYTHONPATH"] = os.environ["PYTHONPATH"] + ":../:../../../lib/python/";
+else:
+    os.environ["PYTHONPATH"] = ":../:../../../lib/python/";
 
 import unittest
 import iDynTree
