@@ -2,6 +2,8 @@
  For testing iDynTree python bindings, we rely on the unittest standard python lib
 '''
 
+import os
+
 # This test is mean to be executed from the build,
 # so we add in PYTHONPATH the location of iDynTree.py and _iDynTree.so
 os.environ["PYTHONPATH"] = os.environ["PYTHONPATH"] + ":../:../../../lib/python/";
