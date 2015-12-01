@@ -23,6 +23,7 @@ set_source_files_properties(../iDynTree.i PROPERTIES CPLUSPLUS ON)
 swig_add_module(${target_name} python ../iDynTree.i)
 set_target_properties(_${target_name} PROPERTIES OUTPUT_NAME "_iDynTree")
 set_target_properties(_${target_name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/python)
+swig_link_libraries(${target_name} ${${VARS_PREFIX}_TARGETS})
 
 # installation path is determined reliably on most platforms using distutils
 execute_process(COMMAND ${PYTHON_EXECUTABLE}
