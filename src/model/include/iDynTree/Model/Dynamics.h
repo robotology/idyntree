@@ -11,6 +11,7 @@
 #include <iDynTree/Model/Indeces.h>
 
 #include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/JointState.h>
 
 namespace iDynTree
 {
@@ -47,6 +48,43 @@ namespace iDynTree
                                      LinkCompositeRigidBodyInertias& linkCRBs,
                                      FreeFloatingMassMatrix& massMatrix);
 
+
+    /**
+     * Structure of buffers required by ArticulatedBodyAlgorithm.
+     *
+     * As the ArticulatedBodyAlgorithm function needs some internal buffers
+     * to run, but we don't want to put memory allocation inside the ArticulatedBodyAlgorithm
+     * function, we put all the internal buffers in this structure.
+     *
+     * A convenient resize(Model) function is provided to automatically resize
+     * the buffers given a Model.
+     */
+    struct ArticulatedBodyAlgorithmInternalBuffers
+    {
+        ArticulatedBodyAlgorithmInternalBuffers() {};
+
+        /**
+         * Call resize(model);
+         */
+        ArticulatedBodyAlgorithmInternalBuffers(const Model & model);
+
+        /**
+         * Resize all the buffers to the right size given the model,
+         * and reset all the buffers to 0.
+         */
+        void resize(const Model& model);
+
+        DOFSpatialMotionArray S;
+        DOFSpatialForceArray U;
+        JointDoubleArray D;
+        JointDoubleArray u;
+        LinkVelArray linksVel;
+        LinkAccArray linksBiasAcceleration;
+        LinkAccArray linksAccelerations;
+        LinkArticulatedBodyInertias linkABIs;
+        LinkWrenches linksBiasWrench;
+    };
+
     /**
      * Compute the floating base acceleration of an unconstrianed
      * robot, using as input the external forces and the joint torques.
@@ -60,16 +98,10 @@ namespace iDynTree
                                   const FreeFloatingVel& robotVel,
                                   const LinkExternalWrenches & linkExtWrenches,
                                   const JointDoubleArray & jointTorques,
-                                        DOFSpatialMotionArray & S,
-                                        DOFSpatialForceArray & U,
-                                        JointDoubleArray & D,
-                                        JointDoubleArray & u,
-                                        LinkVelArray & linksVel,
-                                        LinkAccArray & linksBiasAcceleration,
-                                        LinkAccArray & linksAccelerations,
-                                        LinkArticulatedBodyInertias & linkABIs,
-                                        LinkWrenches & linksBiasWrench,
+                                        ArticulatedBodyAlgorithmInternalBuffers & buffers,
                                         FreeFloatingAcc & robotAcc);
+
+
 
 }
 

@@ -32,6 +32,7 @@ void JointDoubleArray::resize(const iDynTree::Model& model)
 void JointDoubleArray::resize(unsigned int nrOfDOFs)
 {
     VectorDynSize::resize(nrOfDOFs);
+    this->zero();
 }
 
 
@@ -57,7 +58,7 @@ void DOFSpatialForceArray::resize(const iDynTree::Model& model)
 
 void DOFSpatialForceArray::resize(const unsigned int nrOfDOFs)
 {
-    this->m_dofSpatialForce.resize(nrOfDOFs);
+    this->m_dofSpatialForce.resize(nrOfDOFs,iDynTree::SpatialForceVector::Zero());
 }
 
 
@@ -94,7 +95,7 @@ void DOFSpatialMotionArray::resize(const iDynTree::Model& model)
 
 void DOFSpatialMotionArray::resize(const unsigned int nrOfDOFs)
 {
-    this->m_dofSpatialMotion.resize(nrOfDOFs);
+    this->m_dofSpatialMotion.resize(nrOfDOFs,iDynTree::SpatialMotionVector::Zero());
 }
 
 
