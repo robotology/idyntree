@@ -23,6 +23,12 @@ namespace iDynTree
      */
     Eigen::Matrix3d squareCrossProductMatrix(const Eigen::Vector3d & v);
 
+    /**
+     * Maps a 3d vector to the cross product matrix:
+     * v --> (v\times)
+     * or, if you prefer another notation:
+     * v --> S(v)
+     */
     Eigen::Matrix3d skew(const Eigen::Vector3d & vec);
 
     /**
@@ -36,7 +42,6 @@ namespace iDynTree
         toEigen(pthis->getAngularVec3()) = toEigen(other.getAngularVec3());
         return;
     }
-
 
     /**
      * Efficient version of the sum of two 6D vectors,

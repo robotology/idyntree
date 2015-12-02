@@ -9,8 +9,10 @@
 #include <iDynTree/Core/SpatialForceVector.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivateUtils.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Core/PrivateUtils.h>
 
 #include <Eigen/Dense>
 
@@ -46,12 +48,41 @@ SpatialMotionVector SpatialMotionVector::cross(const SpatialMotionVector& other)
     return res;
 }
 
+Matrix6x6 SpatialMotionVector::asCrossProductMatrix()
+{
+    Matrix6x6 res;
+
+    Eigen::Map< Eigen::Matrix<double,6,6,Eigen::RowMajor> > retEigen(res.data());
+
+    retEigen.block<3,3>(0,0) = skew(toEigen(this->angularVec3));
+    retEigen.block<3,3>(0,3) = skew(toEigen(this->linearVec3));
+    retEigen.block<3,3>(3,0).setZero();
+    retEigen.block<3,3>(3,3) = skew(toEigen(this->angularVec3));
+
+    return res;
+}
+
+
 SpatialForceVector SpatialMotionVector::cross(const SpatialForceVector& other) const
 {
     SpatialForceVector res;
 
     res.getLinearVec3()  = this->angularVec3.cross(other.getLinearVec3());
     res.getAngularVec3() = this->linearVec3.cross(other.getLinearVec3()) + this->angularVec3.cross(other.getAngularVec3());
+
+    return res;
+}
+
+Matrix6x6 SpatialMotionVector::asCrossProductMatrixWrench()
+{
+    Matrix6x6 res;
+
+    Eigen::Map< Eigen::Matrix<double,6,6,Eigen::RowMajor> > retEigen(res.data());
+
+    retEigen.block<3,3>(0,0) = skew(toEigen(this->angularVec3));
+    retEigen.block<3,3>(0,3).setZero();
+    retEigen.block<3,3>(3,0) = skew(toEigen(this->linearVec3));
+    retEigen.block<3,3>(3,3) = skew(toEigen(this->angularVec3));
 
     return res;
 }

@@ -72,6 +72,29 @@ namespace iDynTree
         SpatialForceVector cross(const SpatialForceVector& other) const;
 
         /**
+         * Cross product matrices
+         */
+
+        /**
+         * If this object is \f$ V \f$, return the 6x6 matrix \f$ V\times \f$
+         * such that, if U is a SpatialMotionVector :
+         * \f[
+         *   (V \times) U = V\texttt{.cross}(U)
+         * \f]
+         */
+        Matrix6x6 asCrossProductMatrix();
+
+        /**
+         * If this object is \f$ V \f$, return the 6x6 matrix \f$ V\times \f$
+         * such that, if F is a SpatialForceVector :
+         * \f[
+         *   (V \times) F = V\texttt{.cross}(F)
+         * \f]
+         */
+        Matrix6x6 asCrossProductMatrixWrench();
+
+
+        /**
          * Exp mapping between a  generic element of se(3) (iDynTree::SpatialMotionVector)
          * to the corresponding element of SE(3) (iDynTree::Transform).
          */
