@@ -94,6 +94,48 @@ SpatialMomentum SpatialInertia::operator*(const Twist& other) const
     return SpatialInertiaRaw::multiply(other);
 }
 
+Wrench SpatialInertia::biasWrench(const Twist& V) const
+{
+    Wrench ret;
+
+    Eigen::Map<Eigen::Vector3d> linearBiasForce(ret.getLinearVec3().data());
+    Eigen::Map<Eigen::Vector3d> angularBiasForce(ret.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> linearVel(V.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angularVel(V.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
+    Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > I(this->m_rotInertia.data());
+
+    linearBiasForce = this->m_mass*(angularVel.cross(linearVel)) - angularVel.cross(mcom.cross(angularVel));
+    angularBiasForce = mcom.cross(angularVel.cross(linearVel)) + angularVel.cross(I*angularVel);
+
+    return ret;
+}
+
+Matrix6x6 SpatialInertia::biasWrenchDerivative(const Twist& V) const
+{
+    Matrix6x6 ret;
+
+    Eigen::Map<const Eigen::Vector3d> linearVel(V.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angularVel(V.getAngularVec3().data());
+
+    Eigen::Map< Eigen::Matrix<double,6,6,Eigen::RowMajor> > retEigen(ret.data());
+
+    Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
+    Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > I(this->m_rotInertia.data());
+
+    Eigen::Matrix<double,3,3,Eigen::RowMajor> mcCrossOmegaCross = mySkewIn(mcom)*mySkewIn(angularVel);
+    retEigen.block<3,3>(0,0) = mySkewIn(this->m_mass*angularVel);
+    retEigen.block<3,3>(0,3) = mySkewIn(mcom.cross(angularVel)) - mcCrossOmegaCross.transpose();
+    retEigen.block<3,3>(3,0) = mcCrossOmegaCross;
+    retEigen.block<3,3>(3,3) = mySkewIn(angularVel)*I - mySkewIn(I*angularVel);
+
+    return ret;
+}
+
+
+
 SpatialInertia SpatialInertia::Zero()
 {
     SpatialInertia ret;

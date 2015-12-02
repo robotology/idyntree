@@ -8,6 +8,7 @@
 #include <iDynTree/Core/EigenHelpers.h>
 #include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/SpatialMomentum.h>
+#include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/TestUtils.h>
@@ -97,6 +98,14 @@ void checkInvariance(const Transform & trans, const SpatialInertia & inertia, co
     ASSERT_EQUAL_VECTOR(momentum.asVector(),momentumCheck.asVector());
 }
 
+void checkBiasWrench(const SpatialInertia & inertia, const Twist & twist)
+{
+    Wrench biasWrench = inertia.biasWrench(twist);
+    Wrench biasWrenchCheck = twist*(inertia*twist);
+
+    ASSERT_EQUAL_VECTOR(biasWrench.asVector(),biasWrenchCheck.asVector());
+}
+
 int main()
 {
     Transform trans(Rotation::RPY(5.0,6.0,-4.0),Position(10,6,-4));
@@ -114,6 +123,7 @@ int main()
     checkInertiaTwistProduct(inertia,twist);
     checkInertiaTransformation(trans,inertia);
     checkInvariance(trans,inertia,twist);
+    checkBiasWrench(inertia,twist);
 
     return EXIT_SUCCESS;
 }

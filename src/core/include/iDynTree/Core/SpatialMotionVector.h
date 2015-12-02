@@ -82,7 +82,7 @@ namespace iDynTree
          *   (V \times) U = V\texttt{.cross}(U)
          * \f]
          */
-        Matrix6x6 asCrossProductMatrix();
+        Matrix6x6 asCrossProductMatrix() const;
 
         /**
          * If this object is \f$ V \f$, return the 6x6 matrix \f$ V\times \f$
@@ -90,8 +90,9 @@ namespace iDynTree
          * \f[
          *   (V \times) F = V\texttt{.cross}(F)
          * \f]
+         * 
          */
-        Matrix6x6 asCrossProductMatrixWrench();
+        Matrix6x6 asCrossProductMatrixWrench() const;
 
 
         /**

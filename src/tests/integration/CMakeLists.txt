@@ -8,6 +8,11 @@ macro(add_integration_test testname)
     target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR} ${IDYNTREE_TREE_INCLUDE_DIRS})
     target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf)
     add_test(NAME ${testtarget} COMMAND ${testbinary})
+
+    if(IDYNTREE_RUN_VALGRIND_TESTS)
+        add_test(NAME memcheck_${testtarget} COMMAND ${MEMCHECK_COMMAND_COMPLETE} ./${testbinary})
+    endif()
 endmacro()
 
 add_integration_test(Dynamics)
+add_integration_test(DynamicsLinearization)

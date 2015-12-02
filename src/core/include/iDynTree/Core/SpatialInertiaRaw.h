@@ -78,7 +78,7 @@ namespace iDynTree
          */
         double getMass() const;
         PositionRaw getCenterOfMass() const;
-        RotationalInertiaRaw getRotationalInertiaWrtFrameOrigin() const;
+        const RotationalInertiaRaw& getRotationalInertiaWrtFrameOrigin() const;
         RotationalInertiaRaw getRotationalInertiaWrtCenterOfMass() const;
 
 

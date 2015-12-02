@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include <cstdlib>
 #include <cmath>
@@ -124,7 +125,6 @@ namespace iDynTree
     template<typename VectorType>
     void printVector(std::string name, const VectorType& vec)
     {
-        std::cerr << name << " : \n";
         for(unsigned int i=0; i < vec.size(); i++ )
         {
             std::cerr << vec(i) << "\n";
@@ -151,6 +151,57 @@ namespace iDynTree
         }
     }
 
+    /**
+     * Helper for printing the patter of wrong elements
+     * in between two vectors
+     */
+    void printVectorWrongElements(std::string name, std::vector<bool> & correctElems)
+    {
+        std::cerr << name << " ( . match, X mismatch): \n";
+
+        for(unsigned int i=0; i < correctElems.size(); i++ )
+        {
+            if( correctElems[i] )
+            {
+                std::cerr << "." << "\n";
+            }
+            else
+            {
+                std::cerr << "X" << "\n";
+            }
+        }
+    }
+
+    /**
+     * Helper for printing the patter of wrong elements
+     * in between two matrix
+     */
+    void printMatrixWrongElements(std::string name, std::vector< std::vector<bool> > & correctElems)
+    {
+        std::cerr << name << "( . match, X mismatch): \n";
+
+        size_t rows = correctElems.size();
+        size_t cols = correctElems[0].size();
+        for(unsigned int row=0; row < rows; row++ )
+        {
+            for( unsigned int col = 0; col < cols; col++ )
+            {
+                if( correctElems[row][col] )
+                {
+                    std::cerr << ".";
+                }
+                else
+                {
+                    std::cerr << "X";
+                }
+
+                std::cerr << " ";
+            }
+
+            std::cerr << "\n";
+        }
+    }
+
 
     /**
      * Assert that two vectors are equal, and
@@ -167,17 +218,26 @@ namespace iDynTree
             exit(EXIT_FAILURE);
         }
 
+        std::vector<bool> correctElements(vec1.size(),true);
+        bool checkCorrect = true;
+
         for( unsigned int i = 0; i < vec1.size(); i++ )
         {
             if( fabs(vec1(i)-vec2(i)) >= tol )
             {
-                std::cerr << file << ":" << line << " : assertVectorAreEqual failure: element " << i << " of vec1 is " << vec1(i)
-                    << " while of vec2 is " << vec2(i) << std::endl;
-                printVector("vec1",vec1);
-                printVector("vec2",vec2);
-                printVectorDifference("vec1-vec2",vec1,vec2);
-                exit(EXIT_FAILURE);
+                checkCorrect = false;
+                correctElements[i] = false;
             }
+        }
+
+        if( !checkCorrect )
+        {
+            std::cerr << file << ":" << line << " : assertVectorAreEqual failure: " << std::endl;
+            printVector("vec1",vec1);
+            printVector("vec2",vec2);
+            printVectorDifference("vec1-vec2",vec1,vec2);
+            printVectorWrongElements("wrong el:",correctElements);
+            exit(EXIT_FAILURE);
         }
     }
 
@@ -197,18 +257,28 @@ namespace iDynTree
             exit(EXIT_FAILURE);
         }
 
+        std::vector< std::vector<bool> > correctElements(mat2.rows(), std::vector<bool>(mat1.cols(),true) );
+        bool checkCorrect = true;
+
         for( unsigned int row = 0; row < mat2.rows(); row++ )
         {
             for( unsigned int col = 0; col < mat2.cols(); col++ )
             {
                 if( fabs(mat1(row,col)-mat2(row,col)) >= tol )
                 {
-                    std::cerr << file << ":" << line << " : assertMatrixAreEqual failure: element " << row << " " << col << " of mat1 is " << mat1(row,col)
-                    << " while of mat2 is " << mat2(row,col) << std::endl;
-                    exit(EXIT_FAILURE);
+                    checkCorrect = false;
+                    correctElements[row][col] = false;
                 }
             }
         }
+
+        if( !checkCorrect )
+        {
+            std::cerr << file << ":" << line << " : assertMatrixAreEqual failure: " << std::endl;
+            printMatrixWrongElements("wrong el:",correctElements);
+            exit(EXIT_FAILURE);
+        }
+
     }
 
 

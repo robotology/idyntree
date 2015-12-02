@@ -12,6 +12,7 @@
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/ArticulatedBodyInertia.h>
 
 #include <iDynTree/Model/Indeces.h>
 
@@ -69,8 +70,6 @@ namespace iDynTree
          */
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
-
-
 
         iDynTree::Wrench & operator()(const LinkIndex link);
         const iDynTree::Wrench & operator()(const LinkIndex link) const;

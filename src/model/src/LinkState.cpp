@@ -31,7 +31,11 @@ void LinkPositions::resize(const Model& model)
 void LinkPositions::resize(unsigned int nrOfLinks)
 {
     Transform identityTransform = Transform::Identity();
-    this->m_linkPos.resize(nrOfLinks,identityTransform);
+    this->m_linkPos.resize(nrOfLinks);
+    for(size_t link=0; link < nrOfLinks; link++)
+    {
+        this->m_linkPos[link] = identityTransform;
+    }
 }
 
 const Transform& LinkPositions::operator()(const LinkIndex link) const

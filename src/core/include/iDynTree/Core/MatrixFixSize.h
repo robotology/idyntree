@@ -312,6 +312,7 @@ namespace iDynTree
     //  and the only ones that users are supposed to manipulate manipulate
     // Add all the explicit instantiation that can be useful, but remember to add
     // them also in the iDynTree.i SWIG file
+    typedef MatrixFixSize<1,6> Matrix1x6;
     typedef MatrixFixSize<3,3> Matrix3x3;
     typedef MatrixFixSize<4,4> Matrix4x4;
     typedef MatrixFixSize<6,1> Matrix6x1;

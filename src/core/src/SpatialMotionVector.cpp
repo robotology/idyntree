@@ -48,7 +48,7 @@ SpatialMotionVector SpatialMotionVector::cross(const SpatialMotionVector& other)
     return res;
 }
 
-Matrix6x6 SpatialMotionVector::asCrossProductMatrix()
+Matrix6x6 SpatialMotionVector::asCrossProductMatrix() const
 {
     Matrix6x6 res;
 
@@ -73,7 +73,7 @@ SpatialForceVector SpatialMotionVector::cross(const SpatialForceVector& other) c
     return res;
 }
 
-Matrix6x6 SpatialMotionVector::asCrossProductMatrixWrench()
+Matrix6x6 SpatialMotionVector::asCrossProductMatrixWrench() const
 {
     Matrix6x6 res;
 

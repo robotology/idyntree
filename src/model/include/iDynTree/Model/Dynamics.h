@@ -20,7 +20,6 @@ namespace iDynTree
     class FreeFloatingPos;
     class FreeFloatingVel;
     class FreeFloatingAcc;
-    class FreeFloatingAcc;
     class FreeFloatingGeneralizedTorques;
     class FreeFloatingMassMatrix;
     class JointDoubleArray;

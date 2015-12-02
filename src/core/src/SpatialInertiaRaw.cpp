@@ -95,7 +95,7 @@ PositionRaw SpatialInertiaRaw::getCenterOfMass() const
     return ret;
 }
 
-RotationalInertiaRaw SpatialInertiaRaw::getRotationalInertiaWrtFrameOrigin() const
+const RotationalInertiaRaw& SpatialInertiaRaw::getRotationalInertiaWrtFrameOrigin() const
 {
     return this->m_rotInertia;
 }

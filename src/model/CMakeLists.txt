@@ -10,6 +10,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
                            include/iDynTree/Model/FreeFloatingMassMatrix.h
                            include/iDynTree/Model/IJoint.h
                            include/iDynTree/Model/Dynamics.h
+                           include/iDynTree/Model/DynamicsLinearization.h
                            include/iDynTree/Model/Indeces.h
                            include/iDynTree/Model/Link.h
                            include/iDynTree/Model/LinkState.h
@@ -26,6 +27,7 @@ set(IDYNTREE_MODEL_SOURCES src/FixedJoint.cpp
                            src/FreeFloatingMassMatrix.cpp
                            src/Indeces.cpp
                            src/Dynamics.cpp
+                           src/DynamicsLinearization.cpp
                            src/Link.cpp
                            src/LinkState.cpp
                            src/JointState.cpp

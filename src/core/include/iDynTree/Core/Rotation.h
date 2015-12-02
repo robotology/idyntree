@@ -167,6 +167,17 @@ namespace iDynTree
         /**
          * Return a Rotation around axis X of given angle
          *
+         * If \f$ \theta \f$ is the input angle, this function
+         * returns the \f$  R_x(\theta) \f$ rotation matrix such that :
+         * \f[
+         *   R_x(\theta) =
+         *  \begin{bmatrix}
+         *      1 & 0             & 0              \\
+         *      0 & \cos(\theta)  & - \sin(\theta) \\
+         *      0 & \sin(\theta)  & \cos(\theta)   \\
+         *  \end{bmatrix}
+         * \f]
+         *
          * @param angle the angle (in Radians) of the rotation arount the X axis
          */
         static Rotation RotX(const double angle);
@@ -174,12 +185,36 @@ namespace iDynTree
         /**
          * Return a Rotation around axis Y of given angle
          *
+         * If \f$ \theta \f$ is the input angle, this function
+         * returns the \f$  R_y(\theta) \f$ rotation matrix such that :
+         * \f[
+         *   R_y(\theta) =
+         *  \begin{bmatrix}
+         *      \cos(\theta)      & 0             & \sin(\theta)   \\
+         *      0                 & 1             & 0              \\
+         *      -\sin(\theta)     & 0             & \cos(\theta)   \\
+         *  \end{bmatrix}
+         * \f]
+         *
+         *
          * @param angle the angle (in Radians) of the rotation arount the Y axis
          */
         static Rotation RotY(const double angle);
 
         /**
          * Return a Rotation around axis Z of given angle
+         *
+         * If \f$ \theta \f$ is the input angle, this function
+         * returns the \f$  R_z(\theta) \f$ rotation matrix such that :
+         * \f[
+         *   R_z(\theta) =
+         *  \begin{bmatrix}
+         *      \cos(\theta)      & -\sin(\theta) & 0              \\
+         *      \sin(\theta)      & \cos(\theta)  & 0              \\
+         *      0                 & 0             & 1              \\
+         *  \end{bmatrix}
+         * \f]
+         *
          *
          * @param angle the angle (in Radians) of the rotation arount the Z axis
          */

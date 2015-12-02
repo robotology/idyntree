@@ -4,15 +4,15 @@ classdef LinearForceVector3Semantics < iDynTree.ForceVector3Semantics__LinearFor
       self@iDynTree.ForceVector3Semantics__LinearForceVector3Semantics('_swigCreate');
       if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
         % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(306, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(306, varargin{:}); % FIXME
+        %self.swigInd = iDynTreeMATLAB_wrap(297, varargin{:});
+        tmp = iDynTreeMATLAB_wrap(297, varargin{:}); % FIXME
         self.swigInd = tmp.swigInd;
         tmp.swigInd = uint64(0);
       end
     end
     function delete(self)
       if self.swigInd
-        iDynTreeMATLAB_wrap(307, self);
+        iDynTreeMATLAB_wrap(298, self);
         self.swigInd=uint64(0);
       end
     end
