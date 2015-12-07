@@ -205,6 +205,7 @@ namespace iDynTree {
              * \return the pointer of sensor, of 0 if sensor_index is out of bounds
              */
             Sensor * getSensor(const SensorType & sensor_type, int sensor_index) const;
+            
 
     };
 
@@ -270,15 +271,12 @@ namespace iDynTree {
                                 const unsigned int & sensor_index,
                                 const iDynTree::AngVelocity & measurement);
 
-//             bool setMeasurement(const SensorType & sensor_type,
-//                                 const unsigned int & sensor_index,
-//                                 iDynTree::IMeasurement * (const measurement));
-            
+
             /**
              * Get the measurement for a specified sensor
              *
              * Return true if all is correct (i.e. sensor_index is not out of bounds)
-             * and the specified sensor_type uses Wrench as its measurement type.
+             * and the specified sensor_type uses its appropriate type as its measurement type.
              */
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
@@ -289,10 +287,7 @@ namespace iDynTree {
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
                                 iDynTree::AngVelocity &measurement) const;                    
-                                
-//             bool getMeasurement(const SensorType & sensor_type
-//                                 const unsigned int & sensor_index,
-//                                 iDynTree::IMeasurement * measurement) const;
+
 
     };
 

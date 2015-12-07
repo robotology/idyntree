@@ -198,6 +198,8 @@ Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) 
     }
 }
 
+
+
 ///////////////////////////////////////////////////////////////////////////////
 ///// SensorMeasurements
 ///////////////////////////////////////////////////////////////////////////////
@@ -423,4 +425,5 @@ unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) 
     return(returnVal);
 }
 
+    
 }

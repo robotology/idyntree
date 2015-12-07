@@ -17,7 +17,6 @@
 
 
 # include "iDynTree/Core/LinearMotionVector3.h"
-// #include "iDynTree/Sensors/IMeasurement.hpp"
 
 #include "iDynTree/Sensors/Accelerometer.hpp"
 
@@ -138,6 +137,20 @@ SensorType Accelerometer::getSensorType() const
 {
     return ACCELEROMETER;
 }
+
+bool Accelerometer::getLinkSensorTransform(Transform& link_H_sensor) const
+{
+    if( this->pimpl->parent_link_index < 0)
+    {
+        // Return false if the parent link is not appropriately setted
+        // Also return false if the requested link index is not the setted parent link 
+        // (Since Accelerometer does not have access to the Model)
+        return false;
+    }
+    link_H_sensor = this->pimpl->link_H_sensor;
+    return true;
+}
+
 
 /*
  * To be implmented in future based on interface and requirements

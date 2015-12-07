@@ -26,7 +26,7 @@ set(IDYNTREE_SENSORS_SOURCES src/Sensors.cpp
                              src/SixAxisFTSensor.cpp
                              src/Accelerometer.cpp
                              src/Gyroscope.cpp
-                             src/PredictSensorsMeasurements.cpp
+                             src/PredictSensorsMeasurements.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_SENSORS_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_SENSORS_HEADERS})
