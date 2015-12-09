@@ -17,8 +17,6 @@
 
 #ifndef PREDICTSENSORSMEASUREMENTS_HPP
 #define PREDICTSENSORSMEASUREMENTS_HPP
-#include "Sensors.hpp"
-
 
 namespace iDynTree{
     
@@ -56,11 +54,11 @@ namespace iDynTree{
        * First version makes only Accelerometer and Gyroscop predictions
        * @return true if the sensors in the list are all valid
        */
-       bool makePrediction(const iDynTree::Model & model,
+       bool operator()(const iDynTree::Model & model,
                            const iDynTree::Traversal & traversal,
                            const iDynTree::FreeFloatingPos & robotPos,
                            const iDynTree::FreeFloatingVel & robotVel,
-                           const iDynTree::FreeFloatingAcc & robotAcc,
+                                 iDynTree::FreeFloatingAcc & robotAcc,
                            const iDynTree::LinAcceleration & gravity,
                            const iDynTree::SensorsList &sensorsList,
                            iDynTree::SensorsMeasurements &predictedMeasurement);
@@ -70,11 +68,11 @@ namespace iDynTree{
        * Ordering of the elements is in the manner mentioned in Nori, Kuppuswamy and Traversaro (2015)
        * @return true if the sensors in the list are all valid
        */
-      bool makePrediction(const iDynTree::Model & model,
+      bool operator()(const iDynTree::Model & model,
                            const iDynTree::Traversal & traversal,
                            const iDynTree::FreeFloatingPos & robotPos,
                            const iDynTree::FreeFloatingVel & robotVel,
-                           const iDynTree::FreeFloatingAcc & robotAcc,
+                                 iDynTree::FreeFloatingAcc & robotAcc,
                            const iDynTree::LinAcceleration & gravity,
                            const iDynTree::SensorsList &sensorsList,
                            iDynTree::VectorDynSize &predictedMeasurement);

@@ -14,11 +14,11 @@ include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
                             ${EIGEN3_INCLUDE_DIR})
 
-set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/Sensors.hpp
-                             include/iDynTree/Sensors/SixAxisFTSensor.hpp
-                             include/iDynTree/Sensors/Gyroscope.hpp
-                             include/iDynTree/Sensors/Accelerometer.hpp
-                             include/iDynTree/Sensors/PredictSensorsMeasurements.hpp)
+set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/Sensors.h
+                             include/iDynTree/Sensors/SixAxisFTSensor.h
+                             include/iDynTree/Sensors/Gyroscope.h
+                             include/iDynTree/Sensors/Accelerometer.h
+                             include/iDynTree/Sensors/PredictSensorsMeasurements.h)
 
 #file (GLOB IDYNTREE_BASE_PRIVATE_INCLUDES)
 
@@ -28,6 +28,7 @@ set(IDYNTREE_SENSORS_SOURCES src/Sensors.cpp
                              src/Gyroscope.cpp
                              src/PredictSensorsMeasurements.cpp)
 
+               
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_SENSORS_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_SENSORS_HEADERS})
 #SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_SENSORS_PRIVATE_INCLUDES})
@@ -54,3 +55,10 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Sensors/Impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
+
+
+# # sensors tests                            
+# if(IDYNTREE_COMPILE_TESTS)
+#     add_subdirectory(tests)
+# endif()                             
+#               

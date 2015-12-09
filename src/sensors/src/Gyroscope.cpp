@@ -17,7 +17,7 @@
 
 #include "iDynTree/Core/AngularMotionVector3.h"
 
-#include "iDynTree/Sensors/Gyroscope.hpp"
+#include "iDynTree/Sensors/Gyroscope.h"
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Wrench.h"
 

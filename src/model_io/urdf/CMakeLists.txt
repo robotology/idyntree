@@ -50,6 +50,9 @@ include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS}
                            ${urdfdom_INCLUDE_DIRS})
 
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif()
 
 set(libraryname idyntree-modelio-urdf)
 
@@ -86,6 +89,4 @@ install(TARGETS ${libraryname}
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
-if(IDYNTREE_COMPILE_TESTS)
-    add_subdirectory(tests)
-endif()
+

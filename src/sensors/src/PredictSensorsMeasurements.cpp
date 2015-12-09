@@ -15,11 +15,11 @@
  * Public License for more details
  */
 
-#include <iDynTree/Sensors/PredictSensorsMeasurements.hpp>
+#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
 #include <iDynTree/Core/SpatialMotionVector.h>
-#include <iDynTree/Sensors/Accelerometer.hpp>
-#include <iDynTree/Sensors/Gyroscope.hpp>
-#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/Accelerometer.h>
+#include <iDynTree/Sensors/Gyroscope.h>
+#include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/ForwardKinematics.h>
@@ -40,18 +40,20 @@ PredictSensorsMeasurements::~PredictSensorsMeasurements()
 // All local variables, so nothing to do really.
 }
  
-bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,const iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
+bool PredictSensorsMeasurements::operator()(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
 {
+    
     bool returnVal = true;
     // incorporating gravity into the base LinAcceleration
-    iDynTree::LinkPositions linkPos;
-    iDynTree::LinkVelArray linkVel;
-    iDynTree::LinkAccArray linkAcc;
+    iDynTree::LinkPositions linkPos(model);
+    iDynTree::LinkVelArray linkVel(model);
+    iDynTree::LinkAccArray linkAcc(model);
     
-    iDynTree::SpatialAcc baseAccl = robotAcc.baseAcc();
+    
     iDynTree::AngAcceleration nullAngAccl;
     iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
-    baseAccl = baseAccl - gravityAccl;
+    
+    robotAcc.baseAcc() = robotAcc.baseAcc() - gravityAccl;
     
     // calling ForwardPosVelAccKinematics with arguments
     ForwardPosVelAccKinematics(model,traversal,robotPos,robotVel,robotAcc,linkPos,linkVel,linkAcc);
@@ -61,7 +63,7 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
     unsigned int numGyro = sensorsList.getNrOfSensors(iDynTree::GYROSCOPE);
     int idx;
     
-    Accelerometer * accelerometer;
+   Accelerometer * accelerometer;
     Gyroscope * gyroscope;
     
     //Iterate through each kind of accelrometer and find its parent. Compute local (classical accelration) 
@@ -91,24 +93,24 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         iDynTree::Transform link_T_sensor;
         returnVal = gyroscope->getLinkSensorTransform(link_T_sensor);
         measuredAngVel = (link_T_sensor*linkVel(parentLinkId)).getAngularVec3();
-        predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,measuredAngVel);       
+        predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,measuredAngVel);   
         
     }
     return(returnVal);
 }
 
-bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,const iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::VectorDynSize &predictedMeasurement)
+bool PredictSensorsMeasurements::operator()(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::VectorDynSize &predictedMeasurement)
 {
     bool returnVal = true;
     // incorporating gravity into the base LinAcceleration
-    iDynTree::LinkPositions linkPos;
-    iDynTree::LinkVelArray linkVel;
-    iDynTree::LinkAccArray linkAcc;
+    iDynTree::LinkPositions linkPos(model);
+    iDynTree::LinkVelArray linkVel(model);
+    iDynTree::LinkAccArray linkAcc(model);
     
-    iDynTree::SpatialAcc baseAccl = robotAcc.baseAcc();
     iDynTree::AngAcceleration nullAngAccl;
     iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
-    baseAccl = baseAccl - gravityAccl;
+    
+    robotAcc.baseAcc() = robotAcc.baseAcc() - gravityAccl;
     
     // calling ForwardPosVelAccKinematics with arguments
     ForwardPosVelAccKinematics(model,traversal,robotPos,robotVel,robotAcc,linkPos,linkVel,linkAcc);
