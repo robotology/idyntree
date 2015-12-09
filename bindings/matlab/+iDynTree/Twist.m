@@ -7,28 +7,28 @@ classdef Twist < iDynTree.SpatialMotionVector
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(389, varargin{:});
+        tmp = iDynTreeMEX(390, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(390, self);
+        iDynTreeMEX(391, self);
         self.swigPtr=[];
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(391, self, varargin{:});
-    end
-    function varargout = minus(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(392, self, varargin{:});
     end
-    function varargout = uminus(self,varargin)
+    function varargout = minus(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(393, self, varargin{:});
     end
-    function varargout = mtimes(self,varargin)
+    function varargout = uminus(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(394, self, varargin{:});
+    end
+    function varargout = mtimes(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(395, self, varargin{:});
     end
   end
   methods(Static)

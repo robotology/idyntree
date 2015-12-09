@@ -9,20 +9,20 @@ classdef LinkVelArray < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(568, varargin{:});
+        tmp = iDynTreeMEX(572, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(569, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(573, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(570, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(574, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(571, self);
+        iDynTreeMEX(575, self);
         self.swigPtr=[];
       end
     end

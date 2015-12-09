@@ -59,5 +59,8 @@ classdef Position < iDynTree.PositionRaw
     function varargout = inverse(varargin)
      [varargout{1:nargout}] = iDynTreeMEX(182, varargin{:});
     end
+    function varargout = Zero(varargin)
+     [varargout{1:nargout}] = iDynTreeMEX(190, varargin{:});
+    end
   end
 end

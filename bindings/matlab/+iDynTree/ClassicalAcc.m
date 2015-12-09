@@ -7,24 +7,24 @@ classdef ClassicalAcc < iDynTree.Vector6
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(410, varargin{:});
+        tmp = iDynTreeMEX(411, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(411, self);
+        iDynTreeMEX(412, self);
         self.swigPtr=[];
       end
     end
     function varargout = changeCoordFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(412, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(413, self, varargin{:});
     end
   end
   methods(Static)
     function varargout = Zero(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(413, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(414, varargin{:});
     end
   end
 end

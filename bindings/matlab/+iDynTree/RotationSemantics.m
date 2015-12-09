@@ -9,69 +9,69 @@ classdef RotationSemantics < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(474, varargin{:});
+        tmp = iDynTreeMEX(478, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(475, self);
+        iDynTreeMEX(479, self);
         self.swigPtr=[];
       end
     end
     function varargout = getOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(476, self, varargin{:});
-    end
-    function varargout = getBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(477, self, varargin{:});
-    end
-    function varargout = getReferenceOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(478, self, varargin{:});
-    end
-    function varargout = getRefBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(479, self, varargin{:});
-    end
-    function varargout = getCoordinateFrame(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(480, self, varargin{:});
     end
-    function varargout = setOrientationFrame(self,varargin)
+    function varargout = getBody(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(481, self, varargin{:});
     end
-    function varargout = setBody(self,varargin)
+    function varargout = getReferenceOrientationFrame(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(482, self, varargin{:});
     end
-    function varargout = setReferenceOrientationFrame(self,varargin)
+    function varargout = getRefBody(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(483, self, varargin{:});
     end
-    function varargout = setRefBody(self,varargin)
+    function varargout = getCoordinateFrame(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(484, self, varargin{:});
     end
-    function varargout = setCoordinateFrame(self,varargin)
+    function varargout = setOrientationFrame(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(485, self, varargin{:});
     end
-    function varargout = changeOrientFrame(self,varargin)
+    function varargout = setBody(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(486, self, varargin{:});
     end
-    function varargout = changeRefOrientFrame(self,varargin)
+    function varargout = setReferenceOrientationFrame(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(487, self, varargin{:});
     end
-    function varargout = changeCoordFrameOf(self,varargin)
+    function varargout = setRefBody(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(488, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = setCoordinateFrame(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(489, self, varargin{:});
+    end
+    function varargout = changeOrientFrame(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(490, self, varargin{:});
+    end
+    function varargout = changeRefOrientFrame(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(491, self, varargin{:});
     end
-    function varargout = display(self,varargin)
+    function varargout = changeCoordFrameOf(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(492, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(495, self, varargin{:});
+    end
+    function varargout = display(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(496, self, varargin{:});
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(489, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(493, varargin{:});
     end
     function varargout = inverse2(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(490, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(494, varargin{:});
     end
   end
 end

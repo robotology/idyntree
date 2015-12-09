@@ -9,23 +9,23 @@ classdef LinkAccArray < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(572, varargin{:});
+        tmp = iDynTreeMEX(576, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(573, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(577, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(574, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(578, self, varargin{:});
     end
     function varargout = getNrOfLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(575, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(579, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(576, self);
+        iDynTreeMEX(580, self);
         self.swigPtr=[];
       end
     end
