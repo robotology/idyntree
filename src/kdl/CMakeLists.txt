@@ -26,8 +26,8 @@ add_library(${libraryname} ${IDYNTREE_KDL_SOURCES} ${IDYNTREE_KDL_HEADERS} ${IDY
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
-target_include_directories(${libraryname} SYSTEM PUBLIC ${EIGEN3_INCLUDE_DIR}
-                                                      ${orocos_kdl_INCLUDE_DIRS})
+target_include_directories(${libraryname} PUBLIC ${EIGEN3_INCLUDE_DIR}
+                                                 ${orocos_kdl_INCLUDE_DIRS})
 
 target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model ${orocos_kdl_LIBRARIES})
 
