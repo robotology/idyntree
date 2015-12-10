@@ -29,7 +29,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 target_include_directories(${libraryname} PUBLIC ${EIGEN3_INCLUDE_DIR}
                                                  ${orocos_kdl_INCLUDE_DIRS})
 
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model ${orocos_kdl_LIBRARIES})
+target_link_libraries(${libraryname} LINK_PUBLIC idyntree-core idyntree-model ${orocos_kdl_LIBRARIES})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_KDL_HEADERS})
 
