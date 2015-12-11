@@ -54,7 +54,7 @@ namespace iDynTree{
        * First version makes only Accelerometer and Gyroscop predictions
        * @return true if the sensors in the list are all valid
        */
-       bool operator()(const iDynTree::Model & model,
+       bool makePrediction(const iDynTree::Model & model,
                            const iDynTree::Traversal & traversal,
                            const iDynTree::FreeFloatingPos & robotPos,
                            const iDynTree::FreeFloatingVel & robotVel,
@@ -68,7 +68,7 @@ namespace iDynTree{
        * Ordering of the elements is in the manner mentioned in Nori, Kuppuswamy and Traversaro (2015)
        * @return true if the sensors in the list are all valid
        */
-      bool operator()(const iDynTree::Model & model,
+      bool makePrediction(const iDynTree::Model & model,
                            const iDynTree::Traversal & traversal,
                            const iDynTree::FreeFloatingPos & robotPos,
                            const iDynTree::FreeFloatingVel & robotVel,

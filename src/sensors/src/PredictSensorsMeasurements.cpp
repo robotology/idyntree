@@ -40,7 +40,7 @@ PredictSensorsMeasurements::~PredictSensorsMeasurements()
 // All local variables, so nothing to do really.
 }
  
-bool PredictSensorsMeasurements::operator()(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
+bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
 {
     
     bool returnVal = true;
@@ -65,15 +65,19 @@ bool PredictSensorsMeasurements::operator()(const Model& model,const Traversal& 
     
    Accelerometer * accelerometer;
     Gyroscope * gyroscope;
+    int parentLinkId;
+    iDynTree::LinAcceleration predictedAcc;
+    iDynTree::AngVelocity predictedAngVel;
     
     //Iterate through each kind of accelrometer and find its parent. Compute local (classical accelration) 
     // It is automatically proper acceleration since gravity is incorporated into the base acceleration
     for(idx = 0; idx<numAccl; idx++)
     {
         accelerometer = (Accelerometer *)sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
-        int parentLinkId = accelerometer->getParentIndex();
+        parentLinkId = accelerometer->getParentIndex();
         
-        iDynTree::LinAcceleration measuredAcc, crossProdTerm;
+        
+        /*, crossProdTerm;
         iDynTree::Transform link_T_sensor;
         iDynTree::SpatialAcc linkAccTerm;
         iDynTree::Twist localVelocity;
@@ -81,25 +85,28 @@ bool PredictSensorsMeasurements::operator()(const Model& model,const Traversal& 
         localVelocity = link_T_sensor*linkVel(parentLinkId);
         linkAccTerm = link_T_sensor*(linkAcc(parentLinkId));
         crossProdTerm = (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3());
-        measuredAcc = (linkAccTerm).getLinearVec3() + crossProdTerm;       
-        predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,measuredAcc);
+        */
+        accelerometer->predictMeasurement(linkAcc(parentLinkId),linkVel(parentLinkId),predictedAcc);
+        //measuredAcc = (linkAccTerm).getLinearVec3() + crossProdTerm;       
+        predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,predictedAcc);
         
     }
     for(idx = 0; idx<numGyro; idx++)
     {
-        iDynTree::AngVelocity measuredAngVel;
+        
         gyroscope = (Gyroscope*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
-        int parentLinkId = accelerometer->getParentIndex();
-        iDynTree::Transform link_T_sensor;
-        returnVal = gyroscope->getLinkSensorTransform(link_T_sensor);
-        measuredAngVel = (link_T_sensor*linkVel(parentLinkId)).getAngularVec3();
-        predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,measuredAngVel);   
+        parentLinkId = accelerometer->getParentIndex();
+//         iDynTree::Transform link_T_sensor;
+//         returnVal = gyroscope->getLinkSensorTransform(link_T_sensor);
+//         measuredAngVel = (link_T_sensor*linkVel(parentLinkId)).getAngularVec3();
+        gyroscope->predictMeasurement(linkVel(parentLinkId),predictedAngVel);
+        predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);   
         
     }
     return(returnVal);
 }
 
-bool PredictSensorsMeasurements::operator()(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::VectorDynSize &predictedMeasurement)
+bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::VectorDynSize &predictedMeasurement)
 {
     bool returnVal = true;
     // incorporating gravity into the base LinAcceleration
@@ -154,11 +161,7 @@ bool PredictSensorsMeasurements::operator()(const Model& model,const Traversal& 
             iDynTree::SpatialAcc linkAccTerm;
             iDynTree::Twist localVelocity;
             Accelerometer *accelerometer = (Accelerometer*)acceleroMap[i];
-            returnVal = accelerometer->getLinkSensorTransform(link_T_sensor);
-            localVelocity = link_T_sensor*linkVel(i);
-            linkAccTerm = link_T_sensor*(linkAcc(i));
-            crossProdTerm = (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3());
-            measuredAcc = (linkAccTerm).getLinearVec3() + crossProdTerm;  
+
             predictedMeasurement.setVal(vecItr++,measuredAcc.getVal(0));
             predictedMeasurement.setVal(vecItr++,measuredAcc.getVal(1));
             predictedMeasurement.setVal(vecItr++,measuredAcc.getVal(2));

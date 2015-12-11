@@ -20,6 +20,7 @@
 #include "iDynTree/Sensors/Gyroscope.h"
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Wrench.h"
+#include "iDynTree/Core/Twist.h"
 
 
 namespace iDynTree {
@@ -147,6 +148,18 @@ bool Gyroscope::getLinkSensorTransform(iDynTree::Transform& link_H_sensor) const
     return true;
     
 } 
+
+bool Gyroscope::predictMeasurement(const Twist& linkVel, AngVelocity& predictedMeasurement)
+{
+    
+    if(this->pimpl->parent_link_index<0)
+    {
+        return false;
+    }
+    predictedMeasurement = (this->pimpl->link_H_sensor * linkVel).getAngularVec3();
+    return true;
+}
+
 /* to be implemented in the future after considering interface and requirements
  */
 /*

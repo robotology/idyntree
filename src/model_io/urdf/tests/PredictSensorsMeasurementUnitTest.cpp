@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
- * Authors: Silvio Traversaro
+ * Author: Naveen Kuppuswamy
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  *
  */
@@ -45,13 +45,10 @@ bool init(std::string fileName, Model &model, Traversal &traversal, SensorsList 
     
     // Load sensorList
     genericSensorsListFromURDF(fileName,sensorsList);
-//     std::cout<<"Sensor list created from URDF. num accel : "<<sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER)
-//     <<", num gyro : "<<sensorsList.getNrOfSensors(GYROSCOPE)<<std::endl;
-    
+
     ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(ACCELEROMETER),2);
     ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(GYROSCOPE),1);
     
-//     std::cout<<"Setting number of sensors in the SensorsMeasurement\n";
     predictedMeasurement.setNrOfSensors(ACCELEROMETER,(sensorsList.getNrOfSensors(ACCELEROMETER)));
     predictedMeasurement.setNrOfSensors(GYROSCOPE,(sensorsList.getNrOfSensors(GYROSCOPE)));
     
@@ -65,7 +62,7 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
     FreeFloatingAcc robotAcc(model);
     LinAcceleration gravity;
     
-    PredictSensorsMeasurements makePrediction;
+    PredictSensorsMeasurements predictedSensors;
     LinAcceleration accl1,accl2;
     AngVelocity gyro1;
     
@@ -88,7 +85,7 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
                 break;
     }
     
-    makePrediction(model,traversal,robotPos,robotVel,robotAcc,gravity,sensorsList,predictedMeasurement);
+    predictedSensors.makePrediction(model,traversal,robotPos,robotVel,robotAcc,gravity,sensorsList,predictedMeasurement);
     
     predictedMeasurement.getMeasurement(ACCELEROMETER,0,accl1);
     predictedMeasurement.getMeasurement(ACCELEROMETER,1,accl2);
@@ -121,7 +118,6 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
                 break;
     }
     Rotation::RPY(1,0,0);
-    // checking results
   
 }
 int main()
@@ -129,10 +125,11 @@ int main()
     std::string fileName = getAbsModelPath("twoLinks.urdf");
     Model model;
     Traversal traversal;
+
     SensorsList sensorsList;
     SensorsMeasurements predictedMeasurement;
     init(fileName, model,traversal,sensorsList,predictedMeasurement);
-    
+    //experiments 1-accelerometer gravity test, 2-angularVelocity test, 3-angularAccelerationTest 
     
     for(int expID=1;expID<4;expID++)
     {

@@ -19,11 +19,14 @@
 #ifndef ACCELEROMETER_HPP
 #define ACCELEROMETER_HPP
 
+
 namespace iDynTree
 {
     class Transform;
     class LinearMotionVector3;
     typedef LinearMotionVector3 LinAcceleration;
+    class SpatialAcc;
+    class Twist;
 }
 
 #include <iDynTree/Sensors/Sensors.hpp>
@@ -151,7 +154,15 @@ namespace iDynTree {
        bool getLinkSensorTransform(iDynTree::Transform & link_H_sensor) const;
 
 
-        /**
+      /**
+        * Following method is to be implemented after defining the interface
+        * Get wrench applied on the specified link expressed in the specified link frame.
+        *
+        * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
+        */
+       bool predictMeasurement(const iDynTree::SpatialAcc &linkAcc, const iDynTree::Twist &linkTwist, iDynTree::LinAcceleration &predictedMeasurement);
+       
+       /**
          * Following method is to be implemented after defining the interface
          * Get wrench applied on the specified link expressed in the specified link frame.
          *
