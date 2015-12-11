@@ -68,20 +68,16 @@ if(IDYNTREE_USES_KDL)
                                          idyntree-sensors
                                          idyntree-kdl
                                          ${orocos_kdl_LIBRARIES}
-                                        ${urdfdom_LIBRARIES}
-                                        ${console_bridge_LIBRARIES}
-                                        ${TinyXML_LIBRARIES})
+                                         ${urdfdom_LIBRARIES}
+                                         ${console_bridge_LIBRARIES}
+                                         ${TinyXML_LIBRARIES})
 
-target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                 ${orocos_kdl_INCLUDE_DIRS})
+    set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
+    set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
-set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
-set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
+    set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
-set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
-install(TARGETS ${libraryname}
+    install(TARGETS ${libraryname}
         EXPORT iDynTree
         COMPONENT runtime
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin

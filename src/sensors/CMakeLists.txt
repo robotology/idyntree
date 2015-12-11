@@ -37,9 +37,9 @@ set(libraryname idyntree-sensors)
 
 add_library(${libraryname} ${IDYNTREE_SENSORS_SOURCES} ${IDYNTREE_SENSORS_HEADERS} ${IDYNTREE_SENSORS_PRIVATE_INCLUDES})
 
-target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
-                                         PRIVATE ${EIGEN3_INCLUDE_DIR})
+                                          PRIVATE ${EIGEN3_INCLUDE_DIR})
 
 target_link_libraries(${libraryname} idyntree-core)
 
