@@ -133,9 +133,9 @@ namespace iDynTree {
         /**
          * Predict sensor measurement when given the parent link spatial velocity
          *
-         * @return true if a valid link_index is attached to the sensor, false otherwise.
+         * @return the predicted Measurement of an iDynTree::AngVelocity
          */
-        bool predictMeasurement(const iDynTree::Twist& linkVel, iDynTree::AngVelocity &predictedMeasurement);
+        iDynTree::AngVelocity predictMeasurement(const iDynTree::Twist& linkVel);
         
         /**
          * The following method is to be implemented in the future after considering the interface

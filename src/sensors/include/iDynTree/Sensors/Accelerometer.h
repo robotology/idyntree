@@ -158,9 +158,9 @@ namespace iDynTree {
         * Following method is to be implemented after defining the interface
         * Get wrench applied on the specified link expressed in the specified link frame.
         *
-        * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
+        * @return the predicted measurement as a LinAcceleration
         */
-       bool predictMeasurement(const iDynTree::SpatialAcc &linkAcc, const iDynTree::Twist &linkTwist, iDynTree::LinAcceleration &predictedMeasurement);
+       iDynTree::LinAcceleration predictMeasurement(const iDynTree::SpatialAcc &linkAcc, const iDynTree::Twist &linkTwist);
        
        /**
          * Following method is to be implemented after defining the interface

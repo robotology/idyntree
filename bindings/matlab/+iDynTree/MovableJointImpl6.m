@@ -1,38 +1,42 @@
 classdef MovableJointImpl6 < iDynTree.IJoint
   methods
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(667, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(669, self);
+        self.swigPtr=[];
       end
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(668, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(670, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(669, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(671, self, varargin{:});
     end
     function varargout = setIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(670, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(672, self, varargin{:});
     end
     function varargout = getIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(671, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(673, self, varargin{:});
     end
     function varargout = setPosCoordsOffset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(672, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(674, self, varargin{:});
     end
     function varargout = getPosCoordsOffset(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(673, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(675, self, varargin{:});
     end
     function varargout = setDOFsOffset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(674, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(676, self, varargin{:});
     end
     function varargout = getDOFsOffset(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(675, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(677, self, varargin{:});
     end
     function self = MovableJointImpl6(varargin)
-      self@iDynTree.IJoint('_swigCreate');
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
+      self@iDynTree.IJoint(SwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
         error('No matching constructor');
       end
     end

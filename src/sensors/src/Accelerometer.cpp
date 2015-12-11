@@ -154,20 +154,20 @@ bool Accelerometer::getLinkSensorTransform(Transform& link_H_sensor) const
     return true;
 }
 
-bool Accelerometer::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& linkTwist, LinAcceleration& predictedMeasurement)
+LinAcceleration Accelerometer::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& linkTwist)
 {
     if( this->pimpl->parent_link_index < 0)
     {
         // Return false if the parent link is not appropriately setted
         // Also return false if the requested link index is not the setted parent link 
         // (Since Accelerometer does not have access to the Model)
-        return false;
+        return(LinAcceleration());
     }
     
 
     iDynTree::Twist localVelocity = this->pimpl->link_H_sensor * linkTwist;
-    predictedMeasurement = (this->pimpl->link_H_sensor* linkAcc).getLinearVec3() + (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3());  
-    return(true);
+    
+    return((LinAcceleration)((this->pimpl->link_H_sensor* linkAcc).getLinearVec3() + (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3())));
 }
 
 

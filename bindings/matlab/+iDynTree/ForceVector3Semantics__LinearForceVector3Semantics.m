@@ -1,28 +1,30 @@
 classdef ForceVector3Semantics__LinearForceVector3Semantics < iDynTree.GeomVector3Semantics__LinearForceVector3Semantics
   methods
     function self = ForceVector3Semantics__LinearForceVector3Semantics(varargin)
-      self@iDynTree.GeomVector3Semantics__LinearForceVector3Semantics('_swigCreate');
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
-        % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(276, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(276, varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+      self@iDynTree.GeomVector3Semantics__LinearForceVector3Semantics(SwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
+        tmp = iDynTreeMEX(278, varargin{:});
+        self.swigPtr = tmp.swigPtr;
+        tmp.swigPtr = [];
       end
     end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(277, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(279, self);
+        self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(278, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(280, varargin{:});
     end
     function varargout = inverse(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(279, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(281, varargin{:});
     end
   end
 end

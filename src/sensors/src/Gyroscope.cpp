@@ -43,6 +43,7 @@ Gyroscope::Gyroscope()
     this->pimpl = new GyroscopePrivateAttributes;
 
     this->pimpl->name = "";
+    this->pimpl->link_H_sensor = Transform::Identity();
     this->pimpl->parent_link_index = -1;
     this->pimpl->parent_link_name = "";
 }
@@ -92,7 +93,7 @@ bool Gyroscope::setParentIndex(const int &parent_index)
     this->pimpl->parent_link_index = parent_index;
     return true;
 }
-// 
+
 bool Gyroscope::isValid() const
 {
     if( this->getName() == "" )
@@ -149,15 +150,14 @@ bool Gyroscope::getLinkSensorTransform(iDynTree::Transform& link_H_sensor) const
     
 } 
 
-bool Gyroscope::predictMeasurement(const Twist& linkVel, AngVelocity& predictedMeasurement)
+AngVelocity Gyroscope::predictMeasurement(const Twist& linkVel)
 {
     
     if(this->pimpl->parent_link_index<0)
     {
-        return false;
+        return (AngVelocity());
     }
-    predictedMeasurement = (this->pimpl->link_H_sensor * linkVel).getAngularVec3();
-    return true;
+    return(AngVelocity((this->pimpl->link_H_sensor * linkVel).getAngularVec3()));
 }
 
 /* to be implemented in the future after considering interface and requirements
