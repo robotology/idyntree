@@ -216,11 +216,6 @@ struct SensorsMeasurements::SensorsMeasurementsPrivateAttributes
 {
 
 }
-/*
-SensorsMeasurements::SensorMeasurements():
-pimpl(new SensorsMeasurementsPrivateAttributes)
-{
-}*/
 
 SensorsMeasurements::SensorsMeasurements(const SensorsMeasurements & other):
 pimpl(new SensorsMeasurementsPrivateAttributes(*(other.pimpl)))

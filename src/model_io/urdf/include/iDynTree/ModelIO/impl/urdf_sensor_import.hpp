@@ -43,7 +43,6 @@
 #include <kdl/frames.hpp>
 
 #include <kdl_codyco/undirectedtree.hpp>
-#include <iDynTree/Sensors/Sensors.hpp>
 
 
 class TiXmlDocument;

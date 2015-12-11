@@ -9,31 +9,31 @@ classdef SensorsList < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(745, varargin{:});
+        tmp = iDynTreeMEX(749, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(746, self);
+        iDynTreeMEX(750, self);
         self.swigPtr=[];
       end
     end
     function varargout = addSensor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(747, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(751, self, varargin{:});
     end
     function varargout = getNrOfSensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(748, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(752, self, varargin{:});
     end
     function varargout = getSensorIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(749, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(753, self, varargin{:});
     end
     function varargout = getSensor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(750, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(754, self, varargin{:});
     end
     function varargout = getSixAxisForceTorqueSensor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(751, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(755, self, varargin{:});
     end
   end
   methods(Static)

@@ -2,33 +2,33 @@ classdef MovableJointImpl5 < iDynTree.IJoint
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(660, self);
+        iDynTreeMEX(664, self);
         self.swigPtr=[];
       end
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(661, self, varargin{:});
-    end
-    function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(662, self, varargin{:});
-    end
-    function varargout = setIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(663, self, varargin{:});
-    end
-    function varargout = getIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(664, self, varargin{:});
-    end
-    function varargout = setPosCoordsOffset(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(665, self, varargin{:});
     end
-    function varargout = getPosCoordsOffset(self,varargin)
+    function varargout = getNrOfDOFs(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(666, self, varargin{:});
     end
-    function varargout = setDOFsOffset(self,varargin)
+    function varargout = setIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(667, self, varargin{:});
     end
-    function varargout = getDOFsOffset(self,varargin)
+    function varargout = getIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(668, self, varargin{:});
+    end
+    function varargout = setPosCoordsOffset(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(669, self, varargin{:});
+    end
+    function varargout = getPosCoordsOffset(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(670, self, varargin{:});
+    end
+    function varargout = setDOFsOffset(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(671, self, varargin{:});
+    end
+    function varargout = getDOFsOffset(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(672, self, varargin{:});
     end
     function self = MovableJointImpl5(varargin)
       self@iDynTree.IJoint(SwigRef.Null);

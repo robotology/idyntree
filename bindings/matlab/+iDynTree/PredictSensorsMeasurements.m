@@ -9,17 +9,17 @@ classdef PredictSensorsMeasurements < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(814, varargin{:});
+        tmp = iDynTreeMEX(818, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = makePrediction(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(815, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(819, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(816, self);
+        iDynTreeMEX(820, self);
         self.swigPtr=[];
       end
     end

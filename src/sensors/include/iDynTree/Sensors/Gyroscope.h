@@ -26,7 +26,7 @@ namespace iDynTree
     typedef AngularMotionVector3 AngVelocity;
 }
 
-#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/Sensors.h>
 #include <vector>
 
 namespace iDynTree {

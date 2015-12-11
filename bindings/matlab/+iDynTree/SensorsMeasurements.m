@@ -9,28 +9,28 @@ classdef SensorsMeasurements < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(752, varargin{:});
+        tmp = iDynTreeMEX(756, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(753, self);
+        iDynTreeMEX(757, self);
         self.swigPtr=[];
       end
     end
     function varargout = setNrOfSensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(754, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(758, self, varargin{:});
     end
     function varargout = getNrOfSensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(755, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(759, self, varargin{:});
     end
     function varargout = setMeasurement(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(756, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(760, self, varargin{:});
     end
     function varargout = getMeasurement(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(757, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(761, self, varargin{:});
     end
   end
   methods(Static)

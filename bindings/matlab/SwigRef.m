@@ -1,10 +1,19 @@
 classdef SwigRef < handle
   properties 
-    swigInd
+    swigPtr
+  end
+  methods(Static = true, Access = protected)
+    function obj = Null()
+      persistent obj_null
+      if isempty(obj_null)
+        obj_null = SwigRef();
+      end
+      obj = obj_null;
+    end
   end
   methods
     function disp(self)
-      disp(sprintf('<Swig object, ind=%d>',self.swigInd))
+      disp(sprintf('<Swig object, ptr=%d>',self.swigPtr))
     end
     function varargout = subsref(self,s)
       if numel(s)==1
@@ -26,7 +35,7 @@ classdef SwigRef < handle
           case '.'
             builtin('subsref',self,substruct('.',s.subs,'()',{v}));
           case '()'
-            builtin('subsref',self,substruct('.','setparen','()',{v, s.subs{:}}));
+            builtin('subsref',self,substruct('.','paren_asgn','()',{v, s.subs{:}}));
           case '{}'
             builtin('subsref',self,substruct('.','setbrace','()',{v, s.subs{:}}));
         end

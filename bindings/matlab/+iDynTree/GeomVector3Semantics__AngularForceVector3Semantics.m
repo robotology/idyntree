@@ -9,42 +9,42 @@ classdef GeomVector3Semantics__AngularForceVector3Semantics < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(220, varargin{:});
+        tmp = iDynTreeMEX(221, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(221, self);
+        iDynTreeMEX(222, self);
         self.swigPtr=[];
       end
     end
     function varargout = getBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(222, self, varargin{:});
-    end
-    function varargout = getRefBody(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(223, self, varargin{:});
     end
-    function varargout = getCoordinateFrame(self,varargin)
+    function varargout = getRefBody(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(224, self, varargin{:});
     end
-    function varargout = isUnknown(self,varargin)
+    function varargout = getCoordinateFrame(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(225, self, varargin{:});
     end
-    function varargout = changeCoordFrame(self,varargin)
+    function varargout = isUnknown(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(226, self, varargin{:});
     end
+    function varargout = changeCoordFrame(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(227, self, varargin{:});
+    end
     function varargout = dot(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(229, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(230, self, varargin{:});
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(227, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(228, varargin{:});
     end
     function varargout = inverse(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(228, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(229, varargin{:});
     end
   end
 end

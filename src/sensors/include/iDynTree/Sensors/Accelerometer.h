@@ -29,7 +29,7 @@ namespace iDynTree
     class Twist;
 }
 
-#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/Sensors.h>
 
 #include <vector>
 

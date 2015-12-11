@@ -132,11 +132,11 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
     
     unsigned int vecSize = (acceleroMap.size()+ gyroMap.size()) * 3;
     unsigned int vecItr = 0;
-    predictedMeasurement.resize(vecSize);
     int parentLinkId;
+    predictedMeasurement.resize(vecSize);
     LinAcceleration predictedAcc;
     AngVelocity predictedAngVel;
-    for(int i =0; i<model.getNrOfDOFs();i++)
+    for(int i =0; i<model.getNrOfLinks();i++)
     {
         // following the convention of BERDY, we iterate through the links from 
         // root to leaves and fill in the sensor info in each (accelero first and 
@@ -144,8 +144,12 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         
         if(acceleroMap[i] != NULL)
         {
-           
+        
             Accelerometer *accelerometer = (Accelerometer*)acceleroMap[i];
+            parentLinkId = accelerometer->getParentIndex();
+            predictedAcc = accelerometer->predictMeasurement(linkAcc(i),linkVel(i));
+
+
             parentLinkId = accelerometer->getParentIndex();
             predictedAcc = accelerometer->predictMeasurement(linkAcc(i),linkVel(i));
         
@@ -155,6 +159,7 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         }
         if(gyroMap[i] != NULL)
         {
+
             Gyroscope *gyroscope = (Gyroscope*)gyroMap[i];
             parentLinkId = gyroscope->getParentIndex();
             predictedAngVel = gyroscope->predictMeasurement(linkVel(i));

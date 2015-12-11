@@ -41,10 +41,10 @@
 
 #include <kdl_codyco/KDLConversions.h>
 
-#include <iDynTree/Sensors/Sensors.hpp>
-#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
-#include <iDynTree/Sensors/Accelerometer.hpp>
-#include <iDynTree/Sensors/Gyroscope.hpp>
+#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/Accelerometer.h>
+#include <iDynTree/Sensors/Gyroscope.h>
 
 
 #include <fstream>

@@ -72,23 +72,23 @@ if(IDYNTREE_USES_KDL)
                                         ${console_bridge_LIBRARIES}
                                         ${TinyXML_LIBRARIES})
 
-    set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
-    set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
+                                                 ${orocos_kdl_INCLUDE_DIRS})
 
+set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
+set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
-    install(TARGETS ${libraryname}
-            EXPORT iDynTree
-            COMPONENT runtime
-            RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
-            LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
-            ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-            PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO
-            PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO/impl)
+set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
-    set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
-    get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-    set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
+install(TARGETS ${libraryname}
+        EXPORT iDynTree
+        COMPONENT runtime
+        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO
+        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO/impl)
 
     if(IDYNTREE_COMPILE_TESTS)
         add_subdirectory(tests)

@@ -6,7 +6,7 @@
  */
 
 # include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
-# include <iDynTree/Sensors/Sensors.hpp>
+# include <iDynTree/Sensors/Sensors.h>
 #include "testModels.h"
 
 #include <iDynTree/Core/TestUtils.h>
