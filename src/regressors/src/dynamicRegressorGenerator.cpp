@@ -130,6 +130,26 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::Undirect
     assert(regressor_link_index == NrOfRealLinks_gen);
 }
 
+DynamicRegressorGenerator::~DynamicRegressorGenerator()
+{
+    for(unsigned int i=0; i < base_regressors.size(); i++)
+    {
+        delete base_regressors[i];
+    }
+
+    for(unsigned int i=0; i < subtree_regressors.size(); i++)
+    {
+        delete subtree_regressors[i];
+    }
+
+    for(unsigned int i=0; i < torque_regressors.size(); i++)
+    {
+        delete torque_regressors[i];
+    }
+
+}
+
+
 int DynamicRegressorGenerator::changeDynamicBase(std::string new_dynamic_base_name)
 {
     KDL::CoDyCo::LinkMap::const_iterator link_it = undirected_tree.getLink(new_dynamic_base_name);

@@ -39,17 +39,38 @@ namespace iDynTree
         ~LinkPositions();
     };
 
+    /**
+     * Vector of wrenches connected in some way to the link of a model.
+     *
+     * It is used to model both the total external wrench
+     * acting on a  link (LinkExternalWrenches), or the internal wrenches
+     * that a link excerts on his parent (given a Traversal)
+     * computed as a by product by the dynamic loop of the RNEA ( RNEADynamicPhase ).
+     */
     class LinkWrenches
     {
     private:
         std::vector<iDynTree::Wrench> m_linkWrenches;
 
     public:
+        /**
+         * Create a LinkWrenches vector, with the size given
+         * by nrOfLinks .
+         *
+         * @param[in] nrOfLinks the size of the vector.
+         */
         LinkWrenches(unsigned int nrOfLinks = 0);
         LinkWrenches(const iDynTree::Model & model);
 
+        /**
+         * Resize the vector to have size nrOfLinks.
+         *
+         * @param[in]
+         */
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
+
+
 
         iDynTree::Wrench & operator()(const LinkIndex link);
         const iDynTree::Wrench & operator()(const LinkIndex link) const;
@@ -57,7 +78,24 @@ namespace iDynTree
         ~LinkWrenches();
     };
 
+    /**
+     * Vector of the total external wrench acting on each link.
+     *
+     * The wrench returned by operator(i) is the sum of all external wrenches
+     * (thus excluding the wrench applied on the link by other links in the model)
+     * that the environment applies on the link $i$, expressed (
+     * both orientation and point) with respect to the reference frame of link i.
+     */
     typedef LinkWrenches LinkExternalWrenches;
+
+    /**
+     * Vector of the wrenches acting that a link excert on his parent,
+     * given a Traversal.
+     *
+     * Given a Traversal with base link b, the wrench returned by operator(i) is the wrench
+     * the parent of link i excerts on link i, expressed (both orientation
+     * and point) with respect to the reference frame of link i.
+     */
     typedef LinkWrenches LinkInternalWrenches;
 
     /**

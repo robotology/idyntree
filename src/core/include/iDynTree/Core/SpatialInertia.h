@@ -28,6 +28,11 @@ namespace iDynTree
     class SpatialInertia: public SpatialInertiaRaw
     {
     public:
+        /**
+         * Default constructor.
+         * The data is not reset to zero for perfomance reason.
+         * Please initialize the data in the vector before any use.
+         */
         SpatialInertia();
         SpatialInertia(const double mass,
                        const PositionRaw & com,
@@ -48,6 +53,8 @@ namespace iDynTree
         SpatialForceVector operator*(const SpatialMotionVector &other) const;
         SpatialMomentum operator*(const Twist &other) const;
         Wrench operator*(const SpatialAcc &other) const;
+
+        static SpatialInertia Zero();
     };
 }
 

@@ -61,7 +61,9 @@ namespace iDynTree
 
     public:
         /**
-         * Default constructor: initialize all the rotation to the identity
+         * Default constructor.
+         * The data is not reset to the identity matrix for perfomance reason.
+         * Please initialize the data in the vector before any use.
          */
         Rotation();
 

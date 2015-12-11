@@ -348,7 +348,7 @@ SpatialVector<DerivedSpatialVecT>
             return false;
         }
         (*this)(index) = new_el;
-        
+
         return true;
     }
 
@@ -427,7 +427,10 @@ SpatialVector<DerivedSpatialVecT>
     SPATIALVECTOR_TEMPLATE_HDR
     DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::Zero()
     {
-        return DerivedSpatialVecT();
+        DerivedSpatialVecT ret;
+        ret.linearVec3.zero();
+        ret.angularVec3.zero();
+        return ret;
     }
 
     SPATIALVECTOR_TEMPLATE_HDR

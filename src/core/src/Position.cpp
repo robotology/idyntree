@@ -203,4 +203,12 @@ namespace iDynTree
         return this->toString();
     }
 
+    Position Position::Zero()
+    {
+        Position ret;
+        ret.zero();
+        return ret;
+    }
+
+
 }

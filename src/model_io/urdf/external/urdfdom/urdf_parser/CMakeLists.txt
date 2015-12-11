@@ -25,7 +25,7 @@ add_library(iDynTree_priv_urdfdom_model STATIC src/pose.cpp
 target_link_libraries(iDynTree_priv_urdfdom_model ${TinyXML_LIBRARIES})
 set_target_properties(iDynTree_priv_urdfdom_model PROPERTIES SOVERSION 0.3)
 
-target_include_directories(iDynTree_priv_urdfdom_model PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
+target_include_directories(iDynTree_priv_urdfdom_model PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                               "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
 
 set(URDFDOM_MODEL_PUBLIC_HEADERS include/urdf_parser/urdf_parser.h

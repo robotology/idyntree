@@ -501,13 +501,13 @@ Transform DynamicsComputations::getRelativeTransform(unsigned int refFrameIndex,
     if( frameIndex >= this->getNrOfFrames() )
     {
         reportError("DynamicsComputations","getRelativeTransform","frameIndex out of bound");
-        return iDynTree::Transform();
+        return iDynTree::Transform::Identity();
     }
 
     if( refFrameIndex >= this->getNrOfFrames() )
     {
         reportError("DynamicsComputations","getRelativeTransform","refFrameIndex out of bound");
-        return iDynTree::Transform();
+        return iDynTree::Transform::Identity();
     }
 
     // compute fwd kinematics (if necessary)
@@ -556,7 +556,7 @@ Transform DynamicsComputations::getWorldTransform(unsigned int frameIndex)
     if( frameIndex >= this->getNrOfFrames() )
     {
         reportError("DynamicsComputations","getWorldTransform","frameIndex out of bound");
-        return iDynTree::Transform();
+        return iDynTree::Transform::Identity();
     }
 
     // compute fwd kinematics (if necessary)
@@ -565,7 +565,7 @@ Transform DynamicsComputations::getWorldTransform(unsigned int frameIndex)
     if( !this->pimpl->m_isFwdKinematicsUpdated )
     {
         reportError("DynamicsComputations","getWorldTransform","error in computing fwd kinematics");
-        return iDynTree::Transform();
+        return iDynTree::Transform::Identity();
     }
 
     iDynTree::Transform ret = iDynTree::ToiDynTree(this->pimpl->m_fwdPosKinematicsResults[frameIndex]);
@@ -719,7 +719,7 @@ SpatialInertia DynamicsComputations::getLinkInertia(const std::string& linkName)
     int linkIndex = getLinkIndex(linkName);
     if( linkIndex < 0 )
     {
-        return SpatialInertia();
+        return SpatialInertia::Zero();
     }
     else
     {
@@ -732,7 +732,7 @@ SpatialInertia DynamicsComputations::getLinkInertia(const unsigned int linkIndex
     if( linkIndex >= this->getNrOfFrames() )
     {
         reportError("DynamicsComputations","getLinkInertia","linkIndex out of bound");
-        return iDynTree::SpatialInertia();
+        return iDynTree::SpatialInertia::Zero();
     }
 
     KDL::RigidBodyInertia Ikdl = this->pimpl->m_robot_model.getLink(linkIndex)->getInertia();

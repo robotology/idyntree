@@ -225,7 +225,7 @@ Axis Transform::operator*(const Axis& op2) const
 
 Transform Transform::Identity()
 {
-    return Transform();
+    return Transform(Rotation::Identity(),Position::Zero());
 }
 
 std::string Transform::toString() const
@@ -330,8 +330,12 @@ std::string Transform::reservedToString() const
         // mass clearly remains the same
         double newMass = op2.getMass();
 
+
         // the com is transformed as any position
         Position newCenterOfMass = transform<Position>(op1,Position(op2.getCenterOfMass()));
+
+        std::cerr << "newCenterOfMass " << newCenterOfMass.toString() << std::endl;
+
 
         // the rotational inertial is rotated and then
         // the parallel axis theorem applies
@@ -344,6 +348,9 @@ std::string Transform::reservedToString() const
         Eigen::Map<const Eigen::Vector3d> newCOM(newCenterOfMass.data());
 
         newI =  R*oldIWrtCom*R.transpose() - newMass*squareCrossProductMatrix(newCOM);
+
+        std::cerr << "newRotInertia " << newRotInertia.toString() << std::endl;
+
 
         return SpatialInertia(newMass,newCenterOfMass,newRotInertia);
     }
@@ -400,6 +407,7 @@ std::string Transform::reservedToString() const
 
         retEigen.block<3,3>(0,0) = R;
         retEigen.block<3,1>(0,3) = p;
+        retEigen.block<1,3>(3,0).setZero();
         retEigen(3,3) = 1;
 
 
@@ -417,6 +425,7 @@ std::string Transform::reservedToString() const
 
         retEigen.block<3,3>(0,0) = R;
         retEigen.block<3,3>(0,3) = mySkew(p)*R;
+        retEigen.block<3,3>(3,0).setZero();
         retEigen.block<3,3>(3,3) = R;
 
         return ret;
@@ -432,6 +441,7 @@ std::string Transform::reservedToString() const
         Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > R(this->getRotation().data());
 
         retEigen.block<3,3>(0,0) = R;
+        retEigen.block<3,3>(0,3).setZero();
         retEigen.block<3,3>(3,0) = mySkew(p)*R;
         retEigen.block<3,3>(3,3) = R;
 

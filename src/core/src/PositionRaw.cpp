@@ -25,7 +25,6 @@ namespace iDynTree
 {
     PositionRaw::PositionRaw()
     {
-        this->zero();
     }
 
 

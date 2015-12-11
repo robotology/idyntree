@@ -35,7 +35,9 @@ namespace iDynTree
 
     public:
         /**
-         * Default constructor: initialize the elements of the array to zero.
+         * Default constructor.
+         * The data is not reset to 0 for perfomance reason.
+         * Please initialize the data in the vector before any use.
          */
         VectorFixSize();
 
@@ -118,7 +120,6 @@ namespace iDynTree
     template<unsigned int VecSize>
     VectorFixSize<VecSize>::VectorFixSize()
     {
-        this->zero();
     }
 
 
@@ -146,7 +147,7 @@ namespace iDynTree
     template<unsigned int VecSize>
     void VectorFixSize<VecSize>::zero()
     {
-        for(unsigned int i=0; i < this->size(); i++ )
+        for(unsigned int i=0; i < VecSize; i++ )
         {
             this->m_data[i] = 0.0;
         }

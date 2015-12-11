@@ -21,7 +21,6 @@ namespace iDynTree
 
     Axis::Axis()
     {
-        this->setToDefault();
     }
 
     Axis::Axis(const Direction& _direction, const Position& _origin):
@@ -63,8 +62,8 @@ namespace iDynTree
 
     void Axis::setToDefault()
     {
-        direction = Direction();
-        origin    = Position();
+        direction = Direction::Default();
+        origin    = Position::Zero();
     }
 
     Transform Axis::getRotationTransform(const double theta) const

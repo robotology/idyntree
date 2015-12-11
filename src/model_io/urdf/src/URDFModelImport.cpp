@@ -256,7 +256,7 @@ bool linkFromURDFXML(TiXmlElement* linkXml,
 
     // Inertial (optional)
     TiXmlElement *i = linkXml->FirstChildElement("inertial");
-    SpatialInertia inertia;
+    SpatialInertia inertia = SpatialInertia::Zero();
     if (i)
     {
         if (!inertiaFromURDFXML(i,inertia))

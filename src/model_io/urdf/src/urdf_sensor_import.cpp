@@ -232,13 +232,13 @@ iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & un
         // are fixed are given by the frame option
         if( ft_sensors[ft_sens].frame == iDynTree::FTSensorData::PARENT_LINK_FRAME )
         {
-            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::Transform());
+            new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::Transform::Identity());
             new_sens.setSecondLinkSensorTransform(child_link,iDynTree::ToiDynTree(parent_link_H_child_link.Inverse()));
         }
         else if( ft_sensors[ft_sens].frame == iDynTree::FTSensorData::CHILD_LINK_FRAME )
         {
             new_sens.setFirstLinkSensorTransform(parent_link,iDynTree::ToiDynTree(parent_link_H_child_link));
-            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::Transform());
+            new_sens.setSecondLinkSensorTransform(child_link,iDynTree::Transform::Identity());
         }
         else
         {

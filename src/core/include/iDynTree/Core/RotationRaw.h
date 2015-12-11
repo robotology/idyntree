@@ -39,7 +39,9 @@ namespace iDynTree
     {
         public:
         /**
-         * Default constructor: initialize all the rotation to the identity
+         * Default constructor.
+         * The data is not reset to identity for perfomance reason.
+         * Please initialize the data in the vector before any use.
          */
         RotationRaw();
 

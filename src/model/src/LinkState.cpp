@@ -30,7 +30,8 @@ void LinkPositions::resize(const Model& model)
 
 void LinkPositions::resize(unsigned int nrOfLinks)
 {
-    this->m_linkPos.resize(nrOfLinks);
+    Transform identityTransform = Transform::Identity();
+    this->m_linkPos.resize(nrOfLinks,identityTransform);
 }
 
 const Transform& LinkPositions::operator()(const LinkIndex link) const
@@ -61,12 +62,13 @@ LinkWrenches::LinkWrenches(unsigned int nrOfLinks)
 
 void LinkWrenches::resize(const Model& model)
 {
-    this->m_linkWrenches.resize(model.getNrOfLinks());
+    this->resize(model.getNrOfLinks());
 }
 
 void LinkWrenches::resize(unsigned int nrOfLinks)
 {
-    this->m_linkWrenches.resize(nrOfLinks);
+    iDynTree::Wrench zeroWrench = iDynTree::Wrench::Zero();
+    this->m_linkWrenches.resize(nrOfLinks,zeroWrench);
 }
 
 Wrench& LinkWrenches::operator()(const LinkIndex link)
@@ -101,7 +103,14 @@ void LinkInertias::resize(const Model& model)
 
 void LinkInertias::resize(unsigned int nrOfLinks)
 {
-    this->m_linkInertials.resize(nrOfLinks);
+    /**
+     * We reset the vector elements to be zero because the resize is
+     * already an expensive operation that should not
+     * be performed in efficient loop.
+     */
+    iDynTree::SpatialInertia zeroInertia;
+    zeroInertia.zero();
+    this->m_linkInertials.resize(nrOfLinks,zeroInertia);
 }
 
 SpatialInertia& LinkInertias::operator()(const LinkIndex link)
@@ -147,7 +156,8 @@ void LinkVelArray::resize(const Model& model)
 
 void LinkVelArray::resize(unsigned int nrOfLinks)
 {
-    this->m_linkTwist.resize(nrOfLinks);
+    iDynTree::Twist zeroTwist = iDynTree::Twist::Zero();
+    this->m_linkTwist.resize(nrOfLinks,zeroTwist);
 }
 
 LinkVelArray::~LinkVelArray()
@@ -182,7 +192,8 @@ void LinkAccArray::resize(const Model& model)
 
 void LinkAccArray::resize(unsigned int nrOfLinks)
 {
-    this->m_linkAcc.resize(nrOfLinks);
+    iDynTree::SpatialAcc zeroAcc = iDynTree::SpatialAcc::Zero();
+    this->m_linkAcc.resize(nrOfLinks,zeroAcc);
 }
 
 unsigned int LinkAccArray::getNrOfLinks() const
@@ -223,7 +234,9 @@ void LinkArticulatedBodyInertias::resize(const Model& model)
 
 void LinkArticulatedBodyInertias::resize(unsigned int nrOfLinks)
 {
-    this->m_linkABIs.resize(nrOfLinks);
+    ArticulatedBodyInertia abi;
+    abi.zero();
+    this->m_linkABIs.resize(nrOfLinks,abi);
 }
 
 LinkArticulatedBodyInertias::~LinkArticulatedBodyInertias()

@@ -308,7 +308,7 @@ bool TorqueEstimationTree::generateSensorsTree(const std::vector<std::string> & 
 
             // Currently we support only the case where the ft sensor frame is equal
             // to the child link frame
-            new_sens.setSecondLinkSensorTransform(child_index,::iDynTree::Transform());
+            new_sens.setSecondLinkSensorTransform(child_index,::iDynTree::Transform::Identity());
             new_sens.setSecondLinkName(child_link_name);
 
             // Then, the parent_link_H_sensor transform is simply parent_link_H_child_link transform
@@ -923,7 +923,7 @@ bool TorqueEstimationTree::estimateContactForcesFromSkin()
 KDL::Wrench TorqueEstimationTree::getMeasuredWrench(int link_id)
 {
 
-    ::iDynTree::Wrench total_measured_applied_wrench = ::iDynTree::Wrench();
+    ::iDynTree::Wrench total_measured_applied_wrench = ::iDynTree::Wrench::Zero();
     for(int ft=0; ft < NrOfFTSensors; ft++ )
     {
         ::iDynTree::SixAxisForceTorqueSensor * sens

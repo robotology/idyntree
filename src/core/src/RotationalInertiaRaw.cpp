@@ -20,7 +20,6 @@ namespace iDynTree
 
 RotationalInertiaRaw::RotationalInertiaRaw()
 {
-    this->zero();
 }
 
 

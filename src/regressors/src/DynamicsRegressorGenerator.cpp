@@ -88,6 +88,7 @@ DynamicsRegressorGenerator& DynamicsRegressorGenerator::operator=(const Dynamics
 
 DynamicsRegressorGenerator::~DynamicsRegressorGenerator()
 {
+    delete this->pimpl->m_pLegacyGenerator;
     delete this->pimpl;
 }
 
@@ -178,6 +179,13 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
         std::cerr << "[ERROR] please load a valid mode in DynamicRegressorGenerator before tryng"
                      " to load a regressor structure" << std::endl;
         return false;
+    }
+
+    // if a regressor was already loaded, properly delete it
+    if( pimpl->m_pLegacyGenerator != 0 )
+    {
+        delete pimpl->m_pLegacyGenerator;
+        pimpl->m_pLegacyGenerator = 0;
     }
 
     TiXmlDocument urdfXml;

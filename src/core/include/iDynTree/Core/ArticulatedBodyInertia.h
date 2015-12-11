@@ -53,8 +53,8 @@ namespace iDynTree
 
     public:
         /**
-         * Default constructor: zero matrix
-         * (i.e. articulated inertia of a massless body).
+         * The data is not reset to zeo for perfomance reason.
+         * Please initialize the data in the class before any use.
          */
         ArticulatedBodyInertia();
 
@@ -113,6 +113,10 @@ namespace iDynTree
         ArticulatedBodyInertia& operator+=(const ArticulatedBodyInertia& other);
         SpatialForceVector operator*(const SpatialMotionVector &other) const;
         Wrench operator*(const SpatialAcc &other) const;
+
+
+        /** reset to zero (i.e. the inertia of body with zero mass) the ArticulatedBodyInertia */
+        void zero();
 
         // Static helpers
 
