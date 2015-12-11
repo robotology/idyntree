@@ -1,61 +1,63 @@
 classdef Position < iDynTree.PositionRaw
   methods
     function self = Position(varargin)
-      self@iDynTree.PositionRaw('_swigCreate');
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
-        % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(173, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(173, varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+      self@iDynTree.PositionRaw(SwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
+        tmp = iDynTreeMEX(175, varargin{:});
+        self.swigPtr = tmp.swigPtr;
+        tmp.swigPtr = [];
       end
     end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(174, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(176, self);
+        self.swigPtr=[];
       end
     end
     function varargout = getSemantics(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(175, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(177, self, varargin{:});
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(176, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(178, self, varargin{:});
     end
     function varargout = changeRefPoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(177, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(179, self, varargin{:});
     end
     function varargout = changeCoordinateFrame(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(178, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(180, self, varargin{:});
     end
     function varargout = changePointOf(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(181, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(183, self, varargin{:});
     end
     function varargout = plus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(182, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(184, self, varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(183, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(185, self, varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(184, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(186, self, varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(185, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(187, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(186, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(188, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(187, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(189, self, varargin{:});
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(179, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(181, varargin{:});
     end
     function varargout = inverse(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(180, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(182, varargin{:});
     end
   end
 end

@@ -75,19 +75,7 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
     {
         accelerometer = (Accelerometer *)sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
         parentLinkId = accelerometer->getParentIndex();
-        
-        
-        /*, crossProdTerm;
-        iDynTree::Transform link_T_sensor;
-        iDynTree::SpatialAcc linkAccTerm;
-        iDynTree::Twist localVelocity;
-        returnVal = accelerometer->getLinkSensorTransform(link_T_sensor);
-        localVelocity = link_T_sensor*linkVel(parentLinkId);
-        linkAccTerm = link_T_sensor*(linkAcc(parentLinkId));
-        crossProdTerm = (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3());
-        */
         accelerometer->predictMeasurement(linkAcc(parentLinkId),linkVel(parentLinkId),predictedAcc);
-        //measuredAcc = (linkAccTerm).getLinearVec3() + crossProdTerm;       
         predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,predictedAcc);
         
     }
@@ -95,10 +83,7 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
     {
         
         gyroscope = (Gyroscope*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
-        parentLinkId = accelerometer->getParentIndex();
-//         iDynTree::Transform link_T_sensor;
-//         returnVal = gyroscope->getLinkSensorTransform(link_T_sensor);
-//         measuredAngVel = (link_T_sensor*linkVel(parentLinkId)).getAngularVec3();
+        parentLinkId = gyroscope->getParentIndex();
         gyroscope->predictMeasurement(linkVel(parentLinkId),predictedAngVel);
         predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);   
         
@@ -147,8 +132,9 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
     
     unsigned int vecSize = (acceleroMap.size()+ gyroMap.size()) * 3;
     unsigned int vecItr = 0;
+    int parentLinkId;
     predictedMeasurement.resize(vecSize);
-    for(int i =0; i<model.getNrOfDOFs();i++)
+    for(int i =0; i<model.getNrOfLinks();i++)
     {
         // following the convention of BERDY, we iterate through the links from 
         // root to leaves and fill in the sensor info in each (accelero first and 
@@ -156,26 +142,28 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         
         if(acceleroMap[i] != NULL)
         {
-            iDynTree::LinAcceleration measuredAcc, crossProdTerm;
+            iDynTree::LinAcceleration predictedAcc, crossProdTerm;
             iDynTree::Transform link_T_sensor;
             iDynTree::SpatialAcc linkAccTerm;
             iDynTree::Twist localVelocity;
             Accelerometer *accelerometer = (Accelerometer*)acceleroMap[i];
 
-            predictedMeasurement.setVal(vecItr++,measuredAcc.getVal(0));
-            predictedMeasurement.setVal(vecItr++,measuredAcc.getVal(1));
-            predictedMeasurement.setVal(vecItr++,measuredAcc.getVal(2));
+            parentLinkId = accelerometer->getParentIndex();
+            accelerometer->predictMeasurement(linkAcc(i),linkVel(i),predictedAcc);
+        
+            predictedMeasurement.setVal(vecItr++,predictedAcc.getVal(0));
+            predictedMeasurement.setVal(vecItr++,predictedAcc.getVal(1));
+            predictedMeasurement.setVal(vecItr++,predictedAcc.getVal(2));
         }
         if(gyroMap[i] != NULL)
         {
-            iDynTree::AngVelocity measuredAngVel;
+            iDynTree::AngVelocity predictedAngVel;
             Gyroscope *gyroscope = (Gyroscope*)gyroMap[i];
-            iDynTree::Transform link_T_sensor;
-            returnVal = gyroscope->getLinkSensorTransform(link_T_sensor);
-            measuredAngVel = (link_T_sensor*linkVel(i)).getAngularVec3();
-            predictedMeasurement.setVal(vecItr++,measuredAngVel.getVal(0));
-            predictedMeasurement.setVal(vecItr++,measuredAngVel.getVal(1));
-            predictedMeasurement.setVal(vecItr++,measuredAngVel.getVal(2));
+            parentLinkId = gyroscope->getParentIndex();
+            gyroscope->predictMeasurement(linkVel(i),predictedAngVel);
+            predictedMeasurement.setVal(vecItr++,predictedAngVel.getVal(0));
+            predictedMeasurement.setVal(vecItr++,predictedAngVel.getVal(1));
+            predictedMeasurement.setVal(vecItr++,predictedAngVel.getVal(2));
         }
     }
     return(returnVal);

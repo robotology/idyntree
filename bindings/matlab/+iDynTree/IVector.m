@@ -1,25 +1,32 @@
 classdef IVector < SwigRef
   methods
+    function this = swig_this(self)
+      this = iDynTreeMEX(3, self);
+    end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(11, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(13, self);
+        self.swigPtr=[];
       end
     end
     function varargout = paren(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(12, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(14, self, varargin{:});
     end
     function varargout = getVal(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(13, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(15, self, varargin{:});
     end
     function varargout = setVal(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(14, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(16, self, varargin{:});
     end
     function varargout = size(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(15, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(17, self, varargin{:});
     end
     function self = IVector(varargin)
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
         error('No matching constructor');
       end
     end
