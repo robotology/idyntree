@@ -223,7 +223,7 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
     }
     else
     {
-        wrench_applied_on_link = iDynTree::Wrench();
+        wrench_applied_on_link = iDynTree::Wrench::Zero();
         return false;
     }
 }

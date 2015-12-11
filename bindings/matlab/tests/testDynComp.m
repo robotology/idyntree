@@ -18,7 +18,12 @@ ddq.fromMatlab(rand(dofs,1));
 
 % set gravity
 grav = iDynTree.SpatialAcc();
+grav.setVal(0,0.0);
+grav.setVal(1,0.0);
 grav.setVal(2,-9.81);
+grav.setVal(3,0.0);
+grav.setVal(4,0.0);
+grav.setVal(5,0.0);
 
 dynComp.setRobotState(q,dq,ddq,grav);
 

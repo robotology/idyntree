@@ -28,9 +28,6 @@ namespace iDynTree
 {
     RotationRaw::RotationRaw()
     {
-        Eigen::Map<Matrix3dRowMajor> thisData(this->m_data);
-
-        thisData.setIdentity();
     }
 
     RotationRaw::RotationRaw(double xx, double xy, double xz,
@@ -188,10 +185,15 @@ namespace iDynTree
     {
         return compose(RotZ(yaw), compose(RotY(pitch), RotX(roll)));
     }
-    
+
     RotationRaw RotationRaw::Identity()
     {
-        return RotationRaw();
+        RotationRaw result;
+        Eigen::Map<Matrix3dRowMajor> thisData(result.data());
+
+        thisData.setIdentity();
+
+        return result;
     }
 
 

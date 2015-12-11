@@ -23,7 +23,6 @@ namespace iDynTree
 
 SpatialInertia::SpatialInertia()
 {
-    SpatialInertiaRaw::zero();
 }
 
 SpatialInertia::SpatialInertia(const double mass,
@@ -102,6 +101,15 @@ SpatialMomentum SpatialInertia::operator*(const Twist& other) const
 {
     return SpatialInertiaRaw::multiply(other);
 }
+
+SpatialInertia SpatialInertia::Zero()
+{
+    SpatialInertia ret;
+    ret.zero();
+
+    return ret;
+}
+
 
 
 }

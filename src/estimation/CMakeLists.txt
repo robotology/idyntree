@@ -15,22 +15,14 @@ set(IDYNTREE_ESTIMATION_SOURCES src/simpleLeggedOdometry.cpp
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_HEADERS})
 
-# share headers with all iDynTree targets
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
-
-include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS}
-                           ${EIGEN3_INCLUDE_DIR})
-
 set(libraryname idyntree-estimation)
 
 add_library(${libraryname} ${IDYNTREE_ESTIMATION_SOURCES} ${IDYNTREE_ESTIMATION_HEADERS} ${IDYNTREE_ESTIMATION_PRIVATE_INCLUDES})
 
-target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                          PRIVATE ${EIGEN3_INCLUDE_DIR})
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+target_include_directories(${libraryname} SYSTEM PRIVATE ${EIGEN3_INCLUDE_DIR}
+                                                         ${orocos_kdl_INCLUDE_DIRS})
 
 target_link_libraries(${libraryname} idyntree-core idyntree-kdl idyntree-sensors idyntree-modelio-urdf idyntree-yarp ${orocos_kdl_LIBRARIES} ${TinyXML_LIBRARIES})
 
@@ -47,3 +39,6 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Estimation/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
+
+get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})

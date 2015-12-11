@@ -43,6 +43,7 @@ Gyroscope::Gyroscope()
     this->pimpl = new GyroscopePrivateAttributes;
 
     this->pimpl->name = "";
+    this->pimpl->link_H_sensor = Transform::Identity();
     this->pimpl->parent_link_index = -1;
     this->pimpl->parent_link_name = "";
 }
@@ -92,7 +93,7 @@ bool Gyroscope::setParentIndex(const int &parent_index)
     this->pimpl->parent_link_index = parent_index;
     return true;
 }
-// 
+
 bool Gyroscope::isValid() const
 {
     if( this->getName() == "" )

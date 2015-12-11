@@ -26,7 +26,6 @@ namespace iDynTree
 
 SpatialInertiaRaw::SpatialInertiaRaw()
 {
-    this->zero();
 }
 
 SpatialInertiaRaw::SpatialInertiaRaw(const double mass,
@@ -97,6 +96,10 @@ PositionRaw SpatialInertiaRaw::getCenterOfMass() const
         ret(0) = this->m_mcom[0]/this->m_mass;
         ret(1) = this->m_mcom[1]/this->m_mass;
         ret(2) = this->m_mcom[2]/this->m_mass;
+    }
+    else
+    {
+        ret.zero();
     }
 
     return ret;

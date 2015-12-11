@@ -17,7 +17,7 @@ namespace iDynTree
     class RotationRaw;
     class SpatialMotionVector;
     class SpatialForceVector;
-    
+
     /**
      * Class providing the raw coordinates for iDynTree::Position class.
      *
@@ -27,7 +27,9 @@ namespace iDynTree
     {
     public:
         /**
-         * Default constructor: initialize all the coordinates to 0
+         * Default constructor.
+         * The data is not reset to 0 for perfomance reason.
+         * Please initialize the data in the vector before any use.
          */
         PositionRaw();
 
@@ -60,8 +62,8 @@ namespace iDynTree
         static PositionRaw inverse(const PositionRaw & op);
         SpatialMotionVector changePointOf(const SpatialMotionVector & other) const;
         SpatialForceVector changePointOf(const SpatialForceVector & other) const;
-        
-        
+
+
         /** @name Output helpers.
          *  Output helpers.
          */

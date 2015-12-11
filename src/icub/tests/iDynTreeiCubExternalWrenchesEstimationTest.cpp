@@ -316,6 +316,8 @@ int main(int argc, char ** argv)
     if( output_contact_list.size() != input_contact_list.size() )
     { std::cout << "Error: Estimated a wrong number of contacts."; return EXIT_FAILURE; }
 
+    delete icub_model_estimation;
+
     if( !ok )
     {
         std::cerr << "Error in estimation of joint torques" << std::endl;

@@ -31,6 +31,11 @@ namespace iDynTree
     {
 
     public:
+        /**
+         * Default constructor.
+         * The data is not reset to zero for perfomance reason.
+         * Please initialize the data in the vector before any use.
+         */
         RotationalInertiaRaw();
         RotationalInertiaRaw(const double * in_data, const unsigned int in_rows, const unsigned int in_cols);
         RotationalInertiaRaw(const RotationalInertiaRaw & other);

@@ -177,9 +177,12 @@ urdf::Inertial toUrdf(KDL::RigidBodyInertia i)
 
 bool treeToUrdfFile(const string& file, const KDL::Tree& tree, const std::string & robot_name)
 {
+  bool ok = false;
   TiXmlDocument * urdf_xml;
-  if( !treeToUrdfXml(urdf_xml, tree, robot_name) ) return false;
-    return urdf_xml->SaveFile(file);
+  if( !treeToUrdfXml(urdf_xml, tree, robot_name) ) return ok;
+  ok = urdf_xml->SaveFile(file);
+  delete urdf_xml;
+  return ok;
 }
 
 /*

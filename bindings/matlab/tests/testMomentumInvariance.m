@@ -13,12 +13,18 @@ angularInertia = iDynTree.RotationalInertiaRaw();
 angularInertia.setVal(0,0,1.0);
 angularInertia.setVal(1,1,2.0);
 angularInertia.setVal(2,2,3.0);
+angularInertia.setVal(0,1,0.0);
+angularInertia.setVal(0,2,0.0);
+angularInertia.setVal(1,0,0.0);
+angularInertia.setVal(1,2,0.0);
+angularInertia.setVal(2,0,0.0);
+angularInertia.setVal(2,1,0.0);
 
 inertiaInFrame1 = iDynTree.SpatialInertia(10,iDynTree.Position(),angularInertia);
 
 momentumInFrame1 = inertiaInFrame1*twistInFrame1;
 
-Frame_2_1 = iDynTree.Transform();
+Frame_2_1 = iDynTree.Transform.Identity();
 Frame_2_1.setRotation(iDynTree.Rotation.RPY(0.6,-0.5,0.2));
 Frame_2_1.setPosition(iDynTree.Position(2,4,5));
 

@@ -34,7 +34,9 @@ namespace iDynTree
 
     public:
         /**
-         * Default constructor: initialize the direction to 1,0,0
+         * Default constructor.
+         * The data is not reset to the default for perfomance reason.
+         * Please initialize the data in the class before any use.
          */
         Direction();
 
@@ -78,6 +80,8 @@ namespace iDynTree
 
         std::string reservedToString() const;
         ///@}
+
+        static Direction Default();
     };
 }
 

@@ -43,11 +43,15 @@ namespace iDynTree
         typedef SpatialMotionForceVectorT_traits<SpatialForceVector>::LinearVector3Type LinearVector3T;
         typedef SpatialMotionForceVectorT_traits<SpatialForceVector>::AngularVector3Type AngularVector3T;
 
+        /**
+         * Default constructor.
+         * The data is not reset to zero for perfomance reason.
+         * Please initialize the data in the class before any use.
+         */
         SpatialForceVector();
         SpatialForceVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
         SpatialForceVector(const SpatialForceVector & other);
         SpatialForceVector(const SpatialVector<SpatialForceVector> & other);
-        virtual ~SpatialForceVector();
 
         SpatialForceVector operator*(const double scalar) const;
     };

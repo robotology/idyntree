@@ -56,9 +56,5 @@ install(TARGETS ${libraryname}
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
-
-# # sensors tests                            
-# if(IDYNTREE_COMPILE_TESTS)
-#     add_subdirectory(tests)
-# endif()                             
-#               
+get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})

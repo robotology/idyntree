@@ -319,7 +319,7 @@ namespace iDynTree
 
     Rotation Rotation::Identity()
     {
-        return Rotation();
+        return RotationRaw::Identity();
     }
 
     std::string Rotation::toString() const

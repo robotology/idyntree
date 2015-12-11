@@ -262,6 +262,7 @@ int main()
         if( ! xml_doc->SaveFile(urdf_filename) ) {
             std::cerr << "Fatal error in URDF xml saving" << std::endl;
         }
+        delete xml_doc;
 
             dof_serialization = get_iDyn_dof_serialization(icub_kdl);
 

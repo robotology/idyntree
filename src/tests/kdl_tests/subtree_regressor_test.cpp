@@ -70,7 +70,7 @@ iDynTree::SensorsList generateSensorsTree(const KDL::CoDyCo::UndirectedTree & un
 
             // Currently we support only the case where the ft sensor frame is equal
             // to the child link frame
-            new_sens.setSecondLinkSensorTransform(child_index,iDynTree::Transform());
+            new_sens.setSecondLinkSensorTransform(child_index,iDynTree::Transform::Identity());
             new_sens.setSecondLinkName(child_link_name);
 
             // Then, the parent_link_H_sensor transform is simply parent_link_H_child_link transform

@@ -26,6 +26,7 @@ namespace iDynTree
     class DOFSpatialForceArray;
     class DOFSpatialMotionArray;
 
+
     bool RNEADynamicPhase(const iDynTree::Model & model,
                           const iDynTree::Traversal & traversal,
                           const iDynTree::FreeFloatingPos & robotPos,

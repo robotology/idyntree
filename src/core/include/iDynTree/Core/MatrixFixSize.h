@@ -59,7 +59,9 @@ namespace iDynTree
 
     public:
         /**
-         * Default constructor: create a matrix full fo zero.
+         * Default constructor.
+         * The data is not reset to 0 for perfomance reason.
+         * Please initialize the data in the vector before any use.
          */
         MatrixFixSize();
 
@@ -164,7 +166,6 @@ namespace iDynTree
     template<unsigned int nRows, unsigned int nCols>
     MatrixFixSize<nRows,nCols>::MatrixFixSize()
     {
-        this->zero();
     }
 
     template<unsigned int nRows, unsigned int nCols>

@@ -37,7 +37,6 @@ namespace iDynTree
 
 ArticulatedBodyInertia::ArticulatedBodyInertia()
 {
-
 }
 
 ArticulatedBodyInertia::ArticulatedBodyInertia(const ArticulatedBodyInertia& other):
@@ -200,6 +199,14 @@ SpatialForceVector ArticulatedBodyInertia::operator*(const SpatialMotionVector& 
 
     return ret;
 }
+
+void ArticulatedBodyInertia::zero()
+{
+    this->linearLinear.zero();
+    this->linearAngular.zero();
+    this->angularAngular.zero();
+}
+
 
 ArticulatedBodyInertia ArticulatedBodyInertia::ABADyadHelper(const SpatialForceVector& U, const double d)
 {
