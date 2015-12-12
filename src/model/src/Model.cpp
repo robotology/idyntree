@@ -14,7 +14,7 @@
 namespace iDynTree
 {
 
-Model::Model(): defaultBaseLink(0), nrOfPosCoords(0), nrOfDOFs(0)
+Model::Model(): defaultBaseLink(LINK_INVALID_INDEX), nrOfPosCoords(0), nrOfDOFs(0)
 {
 
 }
@@ -189,6 +189,14 @@ LinkIndex Model::addLink(const std::string& name, const Link& link)
     LinkIndex newLinkIndex = (LinkIndex)(links.size()-1);
 
     links[newLinkIndex].setIndex(newLinkIndex);
+
+    // if this is the first link added to the model
+    // and the defaultBaseLink has not been setted,
+    // set the defaultBaseLink to be this link
+    if( newLinkIndex == 0 && getDefaultBaseLink() == LINK_INVALID_INDEX )
+    {
+        setDefaultBaseLink(newLinkIndex);
+    }
 
     return newLinkIndex;
 }
