@@ -23,7 +23,7 @@ if(DOXYGEN_FOUND)
 
     # search mscgen program
     # for setting the MSCGEN_PATH variable in the Doxyfile
-    find_program(MSCGEN_EXECUTABLE mscgens)
+    find_program(MSCGEN_EXECUTABLE mscgen)
 
     if( MSCGEN_EXECUTABLE STREQUAL "MSCGEN_EXECUTABLE-NOTFOUND" )
         message(STATUS "mscgen program not found")
