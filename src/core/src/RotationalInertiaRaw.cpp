@@ -34,4 +34,12 @@ RotationalInertiaRaw::RotationalInertiaRaw(const RotationalInertiaRaw& other): M
 {
 }
 
+RotationalInertiaRaw RotationalInertiaRaw::Zero()
+{
+    RotationalInertiaRaw ret;
+    ret.zero();
+    return ret;
+}
+
+
 }
