@@ -12,7 +12,8 @@
 #define _DIRL_DYNAMIC_REGRESSOR_INTERFACE_
 
 #include <kdl_codyco/undirectedtree.hpp>
-#include "../../iDynTree/Regressors/DynamicsRegressorParameters.h"
+
+#include <iDynTree/Regressors/DynamicsRegressorParameters.h>
 #include <kdl/jntarray.hpp>
 #include <iDynTree/Sensors/Sensors.h>
 #include <Eigen/Core>
