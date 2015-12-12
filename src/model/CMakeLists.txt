@@ -11,6 +11,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
                            include/iDynTree/Model/IJoint.h
                            include/iDynTree/Model/Dynamics.h
                            include/iDynTree/Model/DynamicsLinearization.h
+                           include/iDynTree/Model/DynamicsLinearizationHelpers.h
                            include/iDynTree/Model/Indeces.h
                            include/iDynTree/Model/Link.h
                            include/iDynTree/Model/LinkState.h
@@ -19,7 +20,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
                            include/iDynTree/Model/RevoluteJoint.h
                            include/iDynTree/Model/Traversal.h)
 
-set(IDYNTREE_MODEL_PRIVATE_INCLUDES)
+set(IDYNTREE_MODEL_PRIVATE_INCLUDES include/iDynTree/Model/ModelTestUtils.h)
 
 set(IDYNTREE_MODEL_SOURCES src/FixedJoint.cpp
                            src/ForwardKinematics.cpp
@@ -28,6 +29,7 @@ set(IDYNTREE_MODEL_SOURCES src/FixedJoint.cpp
                            src/Indeces.cpp
                            src/Dynamics.cpp
                            src/DynamicsLinearization.cpp
+                           src/DynamicsLinearizationHelpers.cpp
                            src/Link.cpp
                            src/LinkState.cpp
                            src/JointState.cpp
@@ -38,7 +40,7 @@ set(IDYNTREE_MODEL_SOURCES src/FixedJoint.cpp
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODEL_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODEL_HEADERS})
-#SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
+SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_MODEL_PRIVATE_INCLUDES})
 
 set(libraryname idyntree-model)
 
