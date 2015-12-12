@@ -127,9 +127,9 @@ Matrix6x6 SpatialInertia::biasWrenchDerivative(const Twist& V) const
 
     Eigen::Matrix<double,3,3,Eigen::RowMajor> mcCrossOmegaCross = mySkewIn(mcom)*mySkewIn(angularVel);
     retEigen.block<3,3>(0,0) = mySkewIn(this->m_mass*angularVel);
-    retEigen.block<3,3>(0,3) = mySkewIn(mcom.cross(angularVel)) - mcCrossOmegaCross.transpose();
+    retEigen.block<3,3>(0,3) = -mySkewIn(this->m_mass*linearVel) + mySkewIn(mcom.cross(angularVel)) - mcCrossOmegaCross.transpose();
     retEigen.block<3,3>(3,0) = mcCrossOmegaCross;
-    retEigen.block<3,3>(3,3) = mySkewIn(angularVel)*I - mySkewIn(I*angularVel);
+    retEigen.block<3,3>(3,3) = -mySkewIn(mcom)*mySkewIn(linearVel) + mySkewIn(angularVel)*I - mySkewIn(I*angularVel);
 
     return ret;
 }

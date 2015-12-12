@@ -96,8 +96,8 @@ namespace iDynTree
          * \f[
          *  \partial_V ( V \bar\times^* M V ) = \\
          *  \begin{bmatrix}
-         *   m \omega \times             &   ( m c \times \omega) \times - (\omega \times) (mc \times) \\
-         *   (m c \times) ( \omega \times)  & \omega \times I - (I \omega) \times
+         *   m \omega \times             &  - m v \times + ( m c \times \omega) \times - (\omega \times) (mc \times)   \\
+         *   (m c \times) ( \omega \times)  & - (m c \times )(v \times) + \omega \times I - (I \omega) \times
          *  \end{bmatrix}
          * \f]
          */
