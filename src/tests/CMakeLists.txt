@@ -2,9 +2,10 @@
 # test interaction between components
 add_subdirectory(integration)
 
-# add regression tests, added to 
-# verify that spotted bug are not reintroduced 
-# as code is modified 
+
+# add regression tests, to
+# verify that solved bug are not
+# reintroduced
 add_subdirectory(regression)
 
 if(IDYNTREE_USES_KDL)
