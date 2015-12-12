@@ -2,12 +2,6 @@
 # test interaction between components
 add_subdirectory(integration)
 
-
-# add regression tests, to
-# verify that solved bug are not
-# reintroduced
-add_subdirectory(regression)
-
 if(IDYNTREE_USES_KDL)
     # Integration tests of old kdl_codyco project
     add_subdirectory(kdl_tests)
