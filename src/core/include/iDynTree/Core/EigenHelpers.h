@@ -66,7 +66,7 @@ inline Eigen::Map< const Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> > toE
 }
 
 // Spatia vectors
-inline Eigen::Matrix<double,6,1> toEigen(SpatialMotionVector & vec)
+inline Eigen::Matrix<double,6,1> toEigen(const SpatialMotionVector & vec)
 {
     Eigen::Matrix<double,6,1> ret;
 
@@ -76,7 +76,7 @@ inline Eigen::Matrix<double,6,1> toEigen(SpatialMotionVector & vec)
     return ret;
 }
 
-inline Eigen::Matrix<double,6,1> toEigen(SpatialForceVector & vec)
+inline Eigen::Matrix<double,6,1> toEigen(const SpatialForceVector & vec)
 {
     Eigen::Matrix<double,6,1> ret;
 
@@ -86,7 +86,14 @@ inline Eigen::Matrix<double,6,1> toEigen(SpatialForceVector & vec)
     return ret;
 }
 
-
+template<class Derived>
+inline Eigen::Matrix<typename Derived::Scalar, 3, 3, Eigen::RowMajor> skew(const Eigen::MatrixBase<Derived> & vec)
+{
+    EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived, 3);
+    return (Eigen::Matrix<typename Derived::Scalar, 3, 3, Eigen::RowMajor>() << 0.0, -vec[2], vec[1],
+                                                                              vec[2], 0.0, -vec[0],
+                                                                             -vec[1], vec[0], 0.0).finished();
+}
 
 }
 
