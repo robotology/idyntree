@@ -42,7 +42,3 @@ For the time being AppVeyor is just building the iDynTree parts that don't depen
 [KDL](https://github.com/orocos/orocos_kinematics_dynamics), [YARP](https://github.com/robotology/yarp) or [icub-main](https://github.com/robotology/icub-main).
 
 You can find the specific iDynTree configuration used in the AppVeyor build in the [`appveyor.yml`](https://github.com/robotology/idyntree/blob/master/appveyor.yml) file. 
-
-## Pull Request checklist 
-This is a checklist of conditions that a Pull Request should respect before being merged.
-* Compilation and testing should be successful on both our [https://en.wikipedia.org/wiki/Continuous_integration](Continuous Integration) systems : 
