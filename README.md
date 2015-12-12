@@ -52,13 +52,14 @@ the first 4 points in the guide) and then enable Matlab bindings generation with
 - [CMake](http://www.cmake.org)
 
 ##### Core
-- [Kinematics and Dynamics Library](https://github.com/orocos/orocos_kinematics_dynamics)
 - [Eigen](http://eigen.tuxfamily.org)
-- [urdfdom](https://github.com/ros/urdfdom)
 
 ##### Optional
 - [YARP](https://github.com/robotology/yarp)
 - [ICUB](https://github.com/robotology/icub-main)
+- [Kinematics and Dynamics Library](https://github.com/orocos/orocos_kinematics_dynamics)
+- [urdfdom](https://github.com/ros/urdfdom)
+
 
 ## Tutorials
 | Topic  | C++ | Matlab | Python |
