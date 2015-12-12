@@ -20,6 +20,20 @@ if(DOXYGEN_FOUND)
     set(DOX_EXTRA_DIR src conf doc/spec)
     set(DOX_PATTERNS "*.h *.dox *.cpp *.hpp")
     set(DOX_GENERATE_MAN NO)
+
+    # search mscgen program
+    # for setting the MSCGEN_PATH variable in the Doxyfile
+    find_program(MSCGEN_EXECUTABLE mscgens)
+
+    if( MSCGEN_EXECUTABLE STREQUAL "MSCGEN_EXECUTABLE-NOTFOUND" )
+        message(STATUS "mscgen program not found")
+        set(MSCGEN_PATH "")
+    else()
+        # set the MSCGEN_PATH variable by stripping the name (mscgen)
+        # from the MSCGEN_EXECUTABLE
+        string(REGEX REPLACE "mscgen$" "" MSCGEN_PATH ${MSCGEN_EXECUTABLE})
+    endif()
+
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
                    ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
     add_custom_target(dox COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
