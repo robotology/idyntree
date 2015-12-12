@@ -25,6 +25,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/SpatialMotionVector.h
                               include/iDynTree/Core/TestUtils.h
                               include/iDynTree/Core/Transform.h
+                              include/iDynTree/Core/TransformDerivative.h
                               include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Twist.h
                               include/iDynTree/Core/Utils.h
@@ -73,6 +74,7 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/SpatialInertia.cpp
                               src/TestUtils.cpp
                               src/Transform.cpp
+                              src/TransformDerivative.cpp
                               src/TransformSemantics.cpp
                               src/Twist.cpp
                               src/Utils.cpp
