@@ -18,6 +18,7 @@
 namespace iDynTree
 {
     class Transform;
+    class TransformDerivative;
     class Twist;
     class SpatialAcc;
     /**
@@ -88,6 +89,12 @@ namespace iDynTree
          * v_nonRotated = nonRotated_T_rotated*v_rotated
          */
         Transform getRotationTransform(const double theta) const;
+
+        /**
+         * Get the derivative of the getRotationTransform function with respect
+         * to the theta argument.
+         */
+        TransformDerivative getRotationTransformDerivative(const double theta) const;
 
         Twist getRotationTwist(const double dtheta) const;
 

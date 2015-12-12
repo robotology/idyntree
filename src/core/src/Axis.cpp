@@ -7,6 +7,7 @@
 
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/TransformDerivative.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/SpatialAcc.h>
 
@@ -91,6 +92,43 @@ namespace iDynTree
 
         return nonRotated_T_rotated;
     }
+
+    TransformDerivative Axis::getRotationTransformDerivative(const double theta) const
+    {
+        // Formula for rotation around and arbitrary axis given by
+        // http://inside.mines.edu/fs_home/gmurray/ArbitraryAxisRotation/
+        // In this function we
+        TransformDerivative derivative_nonRotated_T_rotated;
+
+        // rotation
+        derivative_nonRotated_T_rotated.setRotationDerivative(Rotation::RotAxisDerivative(this->getDirection(),theta));
+
+        // translation
+        double cost = cos(theta);
+        double sint = sin(theta);
+        double u   = this->getDirection()(0);
+        double u2  = u*u;
+        double v   = this->getDirection()(1);
+        double v2  = v*v;
+        double w   = this->getDirection()(2);
+        double w2  = w*w;
+        double a    = this->getOrigin()(0);
+        double b    = this->getOrigin()(1);
+        double c    = this->getOrigin()(2);
+
+        Vector3 translationPositionDerivative;
+        translationPositionDerivative(0) =
+            (a*(v2+w2) - u*(b*v+c*w))*(sint) + (b*w-c*v)*cost;
+        translationPositionDerivative(1) =
+            (b*(u2+w2) - v*(a*u+c*w))*(sint) + (c*u-a*w)*cost;
+        translationPositionDerivative(2) =
+            (c*(u2+v2) - w*(a*u+b*v))*(sint) + (a*v-b*u)*cost;
+
+        derivative_nonRotated_T_rotated.setPositionDerivative(translationPositionDerivative);
+
+        return derivative_nonRotated_T_rotated;
+    }
+
 
     Twist Axis::getRotationTwist(const double dtheta) const
     {

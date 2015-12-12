@@ -7,16 +7,19 @@
 
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/TransformDerivative.h>
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/Twist.h>
+
+#include <iDynTree/Core/EigenHelpers.h>
 
 #include <cstdio>
 #include <cstdlib>
 
 using namespace iDynTree;
 
-void validateRotationAroundArbitraryAxis(Axis & ax, double theta)
+void validateRotationAroundArbitraryAxis(const Axis & ax, const double theta)
 {
     Transform notRotated_H_rotated = ax.getRotationTransform(theta);
     Transform notRotated_H_rotated_validation =
@@ -27,7 +30,7 @@ void validateRotationAroundArbitraryAxis(Axis & ax, double theta)
     assertTransformsAreEqual(notRotated_H_rotated,notRotated_H_rotated_validation);
 }
 
-void validateRotationAroundZAxis(Axis & ax, double theta)
+void validateRotationAroundZAxis(const Axis & ax, const double theta)
 {
     Transform notRotated_H_rotated = ax.getRotationTransform(theta);
     Transform notRotated_H_rotated_validation =
@@ -49,8 +52,73 @@ void validateInvarianceOfTwist(const Axis & ax, const Transform & trans, double 
     ASSERT_EQUAL_SPATIAL_MOTION(t_trans,t_trans_check);
 }
 
+Matrix4x4 RotHomTransformNumericalDerivative(const Axis & ax, double theta, double step)
+{
+    Matrix4x4 ret;
+
+    Matrix4x4 perturbatedUpper = ax.getRotationTransform(theta+step/2).asHomogeneousTransform();
+    Matrix4x4 perturbatedLower = ax.getRotationTransform(theta-step/2).asHomogeneousTransform();
+
+    toEigen(ret) = (toEigen(perturbatedUpper)-toEigen(perturbatedLower))/step;
+
+    return ret;
+}
+
+Matrix6x6 RotAdjTransformNumericalDerivative(const Axis & ax, double theta, double step)
+{
+    Matrix6x6 ret;
+
+    Matrix6x6 perturbatedUpper = ax.getRotationTransform(theta+step/2).asAdjointTransform();
+    Matrix6x6 perturbatedLower = ax.getRotationTransform(theta-step/2).asAdjointTransform();
+
+    toEigen(ret) = (toEigen(perturbatedUpper)-toEigen(perturbatedLower))/step;
+
+    return ret;
+}
+
+Matrix6x6 RotAdjWrenchTransformNumericalDerivative(const Axis & ax, double theta, double step)
+{
+    Matrix6x6 ret;
+
+    Matrix6x6 perturbatedUpper = ax.getRotationTransform(theta+step/2).asAdjointTransformWrench();
+    Matrix6x6 perturbatedLower = ax.getRotationTransform(theta-step/2).asAdjointTransformWrench();
+
+    toEigen(ret) = (toEigen(perturbatedUpper)-toEigen(perturbatedLower))/step;
+
+    return ret;
+}
+
+void validateRotationTransformDerivative(const Axis & ax, double theta)
+{
+    double numericalDerivStep = 1e-8;
+    double tol = numericalDerivStep*1e2;
+
+    Transform           trans    = ax.getRotationTransform(theta);
+    TransformDerivative analytic = ax.getRotationTransformDerivative(theta);
+
+    Matrix4x4 homTransformDerivAn = analytic.asHomogeneousTransformDerivative();
+    Matrix4x4 homTransformDerivNum = RotHomTransformNumericalDerivative(ax,theta,numericalDerivStep);
+
+    Matrix6x6 adjTransformDerivAn = analytic.asAdjointTransformDerivative(trans);
+    Matrix6x6 adjTransformDerivNum = RotAdjTransformNumericalDerivative(ax,theta,numericalDerivStep);
+
+    Matrix6x6 adjWrenchTransformDerivAn = analytic.asAdjointTransformWrenchDerivative(trans);
+    Matrix6x6 adjWrenchTransformDerivNum = RotAdjWrenchTransformNumericalDerivative(ax,theta,numericalDerivStep);
+
+    std::cout << adjWrenchTransformDerivAn.toString() << std::endl;
+    std::cout << adjWrenchTransformDerivNum.toString() << std::endl;
 
 
+    ASSERT_EQUAL_MATRIX_TOL(homTransformDerivAn,homTransformDerivNum,tol);
+    ASSERT_EQUAL_MATRIX_TOL(adjTransformDerivAn,adjTransformDerivNum,tol);
+    ASSERT_EQUAL_MATRIX_TOL(adjWrenchTransformDerivAn,adjWrenchTransformDerivNum,tol);
+}
+
+void validateAllTests(const Axis ax, const double angle)
+{
+    validateRotationAroundArbitraryAxis(ax,angle);
+    validateRotationTransformDerivative(ax,angle);
+}
 
 int main()
 {
@@ -90,6 +158,11 @@ int main()
     validateInvarianceOfTwist(ax,trans,1.0);
     validateInvarianceOfTwist(axRot,trans,1.0);*/
 
+    // Stress test
+    for(size_t test=0; test < 20; test++ )
+    {
+        validateAllTests(getRandomAxis(),getRandomDouble());
+    }
 
     return EXIT_SUCCESS;
 }
