@@ -223,10 +223,36 @@ namespace iDynTree
         /**
          * Return a Rotation around axis given by direction of given angle
          *
+         * If we indicate with \f$ d \in \mathbb{R}^3 \f$ the unit norm
+         * of the direction, and with \f$ \theta \f$ the input angle, the return rotation
+         * matrix \f$ R \f$ can be computed using the Rodrigues' rotation formula [1] :
+         * \f[
+         *  R = I_{3\times3} + d^{\vee} \sin(\theta) + {d^{\vee}}^2 (1-\cos(\theta))
+         * \f]
+         *
+         * [1] : http://mathworld.wolfram.com/RodriguesRotationFormula.html
          * @param direction the Direction around with to rotate
-         * @param angle the angle (in Radians) of the rotation arount the Z axis
+         * @param angle the angle (in Radians) of the rotation arount the given axis
          */
         static Rotation RotAxis(const Direction & direction, const double angle);
+
+        /**
+         * Return the derivative of the RotAxis function with respect to the angle argument.
+         *
+         * If we indicate with \f$ d \in \mathbb{R}^3 \f$ the unit norm
+         * of the direction, and with \f$ \theta \f$ the input angle, the derivative of the rotation
+         * matrix \f$ \frac{\partial R}{\partial \theta} \f$ can be computed using the
+         * derivative of the Rodrigues' rotation formula [1] :
+         * \f[
+         *  \frac{\partial R}{\partial \theta} = d^{\vee} \cos(\theta) + {d^{\vee}}^2 \sin(\theta)
+         * \f]
+         *
+         * [1] : http://mathworld.wolfram.com/RodriguesRotationFormula.html
+         *
+         * @param direction the Direction around with to rotate
+         * @param angle the angle (in Radians) of the rotation arount the given  axis
+         */
+        static Matrix3x3 RotAxisDerivative(const Direction & direction, const double angle);
 
         /**
          * Return a rotation object given Roll, Pitch and Yaw values.

@@ -19,6 +19,7 @@
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/PrivateSemanticsMacros.h>
+#include <iDynTree/Core/EigenHelpers.h>
 
 
 #include <Eigen/Dense>
@@ -307,6 +308,18 @@ namespace iDynTree
         return result;
     }
 
+    Matrix3x3 Rotation::RotAxisDerivative(const Direction& direction, const double angle)
+    {
+        Matrix3x3 result;
+
+        Eigen::Map<Matrix3dRowMajor> res(result.data());
+        Eigen::Map<const Eigen::Vector3d> d(direction.data());
+        Matrix3dRowMajor skewd = skew(d);
+
+        res = skewd*cos(angle)+skewd*skewd*sin(angle);
+
+        return result;
+    }
 
     Rotation Rotation::RPY(const double roll, const double pitch, const double yaw)
     {

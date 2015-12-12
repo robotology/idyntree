@@ -56,11 +56,28 @@ namespace iDynTree
         VectorDynSize(const double * in_data, const unsigned int in_size);
 
         /**
+         * Copy constructor
+         * \warning performs dynamic memory allocation operations
+         */
+        VectorDynSize(const VectorDynSize& vec);
+
+        /**
          * Denstructor
          *
          * \warning performs dynamic memory allocation operations
          */
         virtual ~VectorDynSize();
+
+        /**
+         * Copy assignment operator.
+         *
+         * The vector will be resize to match the
+         * size of the argument, and the data will
+         * then be copied.
+         *
+         * \warning performs dynamic memory allocation operations
+         */
+        VectorDynSize & operator=(const VectorDynSize& vec);
 
         /**
          * @name Vector interface methods.
