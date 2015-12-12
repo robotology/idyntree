@@ -42,7 +42,7 @@ PredictSensorsMeasurements::~PredictSensorsMeasurements()
  
 bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
 {
-    
+//     std::cout<<"RobotBaseAcc : "<<(robotAcc.baseAcc()).toString()<<", Setted gravity : "<<gravity.toString()<<"\n";
     bool returnVal = true;
     // incorporating gravity into the base LinAcceleration
     iDynTree::LinkPositions linkPos(model);
@@ -77,7 +77,6 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         parentLinkId = accelerometer->getParentIndex();
         predictedAcc = accelerometer->predictMeasurement(linkAcc(parentLinkId),linkVel(parentLinkId));
         predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,predictedAcc);
-        
     }
     for(idx = 0; idx<numGyro; idx++)
     {
@@ -86,7 +85,6 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         parentLinkId = accelerometer->getParentIndex();
         predictedAngVel = gyroscope->predictMeasurement(linkVel(parentLinkId));
         predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);   
-        
     }
     return(returnVal);
 }

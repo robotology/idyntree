@@ -74,14 +74,16 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
     switch(expID)
     {
         case 1 :gravity= LinearMotionVector3(0,0,9.8);
+                robotAcc.baseAcc() = SpatialAcc::Zero();
                 break;
             
         case 2 :gravity= LinearMotionVector3(0,0,0);
+                robotAcc.baseAcc() = SpatialAcc::Zero();
                 robotVel.jointVel()(0) = gyroTestVal;
                 break;
         case 3 :gravity= LinearMotionVector3(0,0,0);
-                robotVel.jointVel()(0) = 0;
-                gravity= LinearMotionVector3(0,0,0);
+                robotAcc.baseAcc() = SpatialAcc::Zero();
+                robotVel.jointVel()(0) = 0;          
                 robotAcc.jointAcc()(0) = acclTestVal;
                 break;
     }
