@@ -25,7 +25,7 @@
 #include <kdl_codyco/momentumjacobian.hpp>
 #include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
 
-#include "iDynTree/Sensors/Sensors.hpp"
+#include "iDynTree/Sensors/Sensors.h"
 
 #include <kdl/jntarray.hpp>
 #include <kdl/tree.hpp>

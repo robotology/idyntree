@@ -37444,19 +37444,16 @@ int _wrap_Accelerometer_predictMeasurement (int resc, mxArray *resv[], int argc,
   iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
   iDynTree::SpatialAcc *arg2 = 0 ;
   iDynTree::Twist *arg3 = 0 ;
-  iDynTree::LinAcceleration *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
   void *argp3 ;
   int res3 = 0 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
   mxArray * _out;
-  bool result;
+  iDynTree::LinAcceleration result;
   
-  if (!SWIG_check_num_args("Accelerometer_predictMeasurement",argc,4,4,0)) {
+  if (!SWIG_check_num_args("Accelerometer_predictMeasurement",argc,3,3,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
@@ -37480,16 +37477,8 @@ int _wrap_Accelerometer_predictMeasurement (int resc, mxArray *resv[], int argc,
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Accelerometer_predictMeasurement" "', argument " "3"" of type '" "iDynTree::Twist const &""'"); 
   }
   arg3 = reinterpret_cast< iDynTree::Twist * >(argp3);
-  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__LinearMotionVector3,  0 );
-  if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Accelerometer_predictMeasurement" "', argument " "4"" of type '" "iDynTree::LinAcceleration &""'"); 
-  }
-  if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Accelerometer_predictMeasurement" "', argument " "4"" of type '" "iDynTree::LinAcceleration &""'"); 
-  }
-  arg4 = reinterpret_cast< iDynTree::LinAcceleration * >(argp4);
-  result = (bool)(arg1)->predictMeasurement((iDynTree::SpatialAcc const &)*arg2,(iDynTree::Twist const &)*arg3,*arg4);
-  _out = SWIG_From_bool(static_cast< bool >(result));
+  result = (arg1)->predictMeasurement((iDynTree::SpatialAcc const &)*arg2,(iDynTree::Twist const &)*arg3);
+  _out = SWIG_NewPointerObj((new iDynTree::LinAcceleration(static_cast< const iDynTree::LinAcceleration& >(result))), SWIGTYPE_p_iDynTree__LinearMotionVector3, SWIG_POINTER_OWN |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -37918,17 +37907,14 @@ fail:
 int _wrap_Gyroscope_predictMeasurement (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
   iDynTree::Twist *arg2 = 0 ;
-  iDynTree::AngVelocity *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
   mxArray * _out;
-  bool result;
+  iDynTree::AngVelocity result;
   
-  if (!SWIG_check_num_args("Gyroscope_predictMeasurement",argc,3,3,0)) {
+  if (!SWIG_check_num_args("Gyroscope_predictMeasurement",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
@@ -37944,16 +37930,8 @@ int _wrap_Gyroscope_predictMeasurement (int resc, mxArray *resv[], int argc, mxA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Gyroscope_predictMeasurement" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::Twist * >(argp2);
-  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__AngularMotionVector3,  0 );
-  if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Gyroscope_predictMeasurement" "', argument " "3"" of type '" "iDynTree::AngVelocity &""'"); 
-  }
-  if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Gyroscope_predictMeasurement" "', argument " "3"" of type '" "iDynTree::AngVelocity &""'"); 
-  }
-  arg3 = reinterpret_cast< iDynTree::AngVelocity * >(argp3);
-  result = (bool)(arg1)->predictMeasurement((iDynTree::Twist const &)*arg2,*arg3);
-  _out = SWIG_From_bool(static_cast< bool >(result));
+  result = (arg1)->predictMeasurement((iDynTree::Twist const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::AngVelocity(static_cast< const iDynTree::AngVelocity& >(result))), SWIGTYPE_p_iDynTree__AngularMotionVector3, SWIG_POINTER_OWN |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:

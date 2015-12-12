@@ -81,6 +81,7 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
                 break;
         case 3 :gravity= LinearMotionVector3(0,0,0);
                 robotVel.jointVel()(0) = 0;
+                gravity= LinearMotionVector3(0,0,0);
                 robotAcc.jointAcc()(0) = acclTestVal;
                 break;
     }

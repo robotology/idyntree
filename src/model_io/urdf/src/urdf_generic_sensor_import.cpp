@@ -34,9 +34,9 @@
 
 /* Author: Naveen Kuppuswamy */
 
-#include <iDynTree/ModelIO/impl/urdf_generic_sensor_import.hpp>
-#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
+
 #include <iDynTree/Core/Transform.h>
+
 #include <kdl_codyco/undirectedtree.hpp>
 
 #include <kdl_codyco/KDLConversions.h>
@@ -51,7 +51,8 @@
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
 #include <tinyxml.h>
-
+#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_generic_sensor_import.hpp>
 using namespace std;
 using namespace KDL;
 

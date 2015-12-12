@@ -49,7 +49,8 @@ class TiXmlDocument;
 
 namespace iDynTree
 {
-
+class SensorsList;
+    
 struct FTSensorData
 {
     std::string reference_joint;
