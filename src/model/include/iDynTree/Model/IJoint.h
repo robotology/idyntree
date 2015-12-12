@@ -16,6 +16,7 @@ namespace iDynTree
     class LinkVelArray;
     class LinkAccArray;
     class Transform;
+    class TransformDerivative;
     class Wrench;
     class Twist;
     class VectorDynSize;
@@ -136,8 +137,25 @@ namespace iDynTree
          * and   p_parent is a quantity expressed in the parent frame.
          */
         virtual const Transform & getTransform(const VectorDynSize & jntPos,
-                                       const LinkIndex child,
-                                       const LinkIndex parent) const = 0;
+                                               const LinkIndex child,
+                                               const LinkIndex parent) const = 0;
+
+        /**
+         * Get the derivative of the transform with
+         * respect to a position coordinate.
+         *
+         * In particular, if the selected position coordinate is \f$q\f$, return the derivative:
+         * \f[
+         * \frac{partial \texttt{child}_H_\texttt{parent} }{\partial q}
+         * \f]
+         *
+         * If posCoord_i is not >= 0 and < getNrOfPosCoords(), the returned value is undefined.
+         *
+         */
+        virtual TransformDerivative getTransformDerivative(const VectorDynSize & jntPos,
+                                                           const LinkIndex child,
+                                                           const LinkIndex parent,
+                                                           const int posCoord_i) const = 0;
 
         /**
          * Get the motion subspace vector corresponding to the i-th
@@ -246,8 +264,6 @@ namespace iDynTree
          * joint in the velocity/acceleration coordiantes serialization of the model.
          */
         virtual size_t getDOFsOffset() const = 0;
-
-
     };
 
     typedef IJoint * IJointPtr;

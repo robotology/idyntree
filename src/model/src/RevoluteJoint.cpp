@@ -9,6 +9,7 @@
 
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/TransformDerivative.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/Twist.h>
@@ -108,7 +109,9 @@ void RevoluteJoint::resetAxisBuffers() const
     this->S_link2_link1 = (link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1).getRotationTwist(1.0);
 }
 
-const Transform & RevoluteJoint::getTransform(const VectorDynSize& jntPos, const LinkIndex p_linkA, const LinkIndex p_linkB) const
+const Transform & RevoluteJoint::getTransform(const VectorDynSize& jntPos,
+                                              const LinkIndex p_linkA,
+                                              const LinkIndex p_linkB) const
 {
     const double ang = jntPos(this->getPosCoordsOffset());
     updateBuffers(ang);
@@ -124,6 +127,19 @@ const Transform & RevoluteJoint::getTransform(const VectorDynSize& jntPos, const
         return this->link2_X_link1;
     }
 }
+
+TransformDerivative RevoluteJoint::getTransformDerivative(const VectorDynSize& jntPos,
+                                                          const LinkIndex linkA,
+                                                          const LinkIndex linkB,
+                                                          const int posCoord_i) const
+{
+    const double ang = jntPos(this->getPosCoordsOffset());
+
+    assert(false);
+
+    return TransformDerivative::Zero();
+}
+
 
 SpatialMotionVector RevoluteJoint::getMotionSubspaceVector(int dof_i,
                                                            const LinkIndex p_linkA,
@@ -203,7 +219,7 @@ void RevoluteJoint::computeChildPosVelAcc(const VectorDynSize & jntPos,
 
     const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
     const Transform & parent_X_child = this->getTransform(jntPos,parent,child);
-    
+
     // Propagate position : position of the frame is expressed as
     // transform between the link frame and a reference frame :
     // ref_H_child  = ref_H_parent*parent_H_child

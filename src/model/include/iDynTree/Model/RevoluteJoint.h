@@ -98,6 +98,12 @@ namespace iDynTree
                                                const LinkIndex parent) const;
 
         // Documentation inherited
+        TransformDerivative getTransformDerivative(const VectorDynSize & jntPos,
+                                                   const LinkIndex child,
+                                                   const LinkIndex parent,
+                                                   const int posCoord_i) const;
+
+        // Documentation inherited
         virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,
                                                             const LinkIndex child,
                                                             const LinkIndex parent=LINK_INVALID_INDEX) const;

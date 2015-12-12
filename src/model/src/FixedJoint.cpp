@@ -6,6 +6,7 @@
  */
 
 #include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/Core/TransformDerivative.h>
 #include <iDynTree/Core/Utils.h>
 
 #include <iDynTree/Model/FixedJoint.h>
@@ -104,6 +105,12 @@ const Transform & FixedJoint::getTransform(const VectorDynSize & jntPos, const L
         return this->link2_X_link1;
     }
 }
+
+TransformDerivative FixedJoint::getTransformDerivative(const VectorDynSize& jntPos, const LinkIndex child, const LinkIndex parent, const int posCoord_i) const
+{
+    return TransformDerivative::Zero();
+}
+
 
 SpatialMotionVector FixedJoint::getMotionSubspaceVector(int dof_i, const LinkIndex child, const LinkIndex parent) const
 {
