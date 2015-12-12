@@ -12,6 +12,7 @@
 #include <iDynTree/Core/MatrixDynSize.h>
 
 #include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/Model/DynamicsLinearizationHelpers.h>
 
 namespace iDynTree
 {
@@ -49,11 +50,10 @@ namespace iDynTree
          * Buffers used to compute the derivative with respect to the base velocity.
          */
         LinkPositions linkPos;
-        std::vector<Matrix6x6> dVb_c;
-        std::vector<Matrix6x6> dVb_linkBiasWrench;
+        std::vector<SpatialForceWrtMotionDerivative> dVb_linkBiasWrench;
         std::vector<Matrix1x6> dVb_u;
-        std::vector<Matrix6x6> dVb_linkBiasAcceleration;
-        std::vector<Matrix6x6> dVb_linksAcceleration;
+        std::vector<SpatialMotionWrtMotionDerivative> dVb_linkBiasAcceleration;
+        std::vector<SpatialMotionWrtMotionDerivative> dVb_linksAccelerations;
 
         /**
          * Buffer to store the derivative of
@@ -64,7 +64,7 @@ namespace iDynTree
          *
          * with respect to V_l
          */
-        std::vector<Matrix6x6> dVl_linkLocalBiasWrench;
+        std::vector<SpatialForceWrtMotionDerivative> dVl_linkLocalBiasWrench;
 
 
         /**
@@ -95,7 +95,7 @@ namespace iDynTree
                                       const FreeFloatingVel& robotVel,
                                       const LinkExternalWrenches & linkExtWrenches,
                                       const JointDoubleArray & jointTorques,
-                                            ForwardDynamicsLinearizationInternalBuffers bufs,
+                                            ForwardDynamicsLinearizationInternalBuffers & bufs,
                                             FreeFloatingAcc & robotAcc,
                                             FreeFloatingStateLinearization & A);
 
