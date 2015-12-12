@@ -139,14 +139,9 @@ int Gyroscope::getParentIndex() const
 }
 
 
-bool Gyroscope::getLinkSensorTransform(iDynTree::Transform& link_H_sensor) const
+Transform Gyroscope::getLinkSensorTransform(void)
 {
-    if(this->pimpl->parent_link_index<0)
-    {
-        return false;
-    }
-    link_H_sensor = this->pimpl->link_H_sensor;
-    return true;
+    return(this->pimpl->link_H_sensor);
     
 } 
 

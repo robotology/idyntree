@@ -126,9 +126,9 @@ namespace iDynTree {
         /**
          * Get the transform from the sensor to the parent link.
          *
-         * @return true if a valid link_index is attached to the sensor, false otherwise.
+         * @return Transform associated with the link frame and the sensor
          */
-        bool getLinkSensorTransform(iDynTree::Transform & link_H_sensor) const;
+        Transform getLinkSensorTransform(void);
 
         /**
          * Predict sensor measurement when given the parent link spatial velocity

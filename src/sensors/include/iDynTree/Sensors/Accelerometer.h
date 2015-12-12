@@ -149,9 +149,9 @@ namespace iDynTree {
         /**
          * Get the transform from the sensor to the specified link.
          *
-         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
+         * @return Transform associated with the link Frame and the sensor
          */
-       bool getLinkSensorTransform(iDynTree::Transform & link_H_sensor) const;
+       Transform getLinkSensorTransform(void);
 
 
       /**

@@ -142,17 +142,9 @@ SensorType Accelerometer::getSensorType() const
     return ACCELEROMETER;
 }
 
-bool Accelerometer::getLinkSensorTransform(Transform& link_H_sensor) const
+Transform Accelerometer::getLinkSensorTransform(void)
 {
-    if( this->pimpl->parent_link_index < 0)
-    {
-        // Return false if the parent link is not appropriately setted
-        // Also return false if the requested link index is not the setted parent link 
-        // (Since Accelerometer does not have access to the Model)
-        return false;
-    }
-    link_H_sensor = this->pimpl->link_H_sensor;
-    return true;
+    return(this->pimpl->link_H_sensor);
 }
 
 LinAcceleration Accelerometer::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& linkTwist)
