@@ -248,7 +248,26 @@ void ArticulatedBodyAlgorithmInternalBuffers::resize(const Model& model)
     linksAccelerations.resize(model);
     linkABIs.resize(model);
     linksBiasWrench.resize(model);
+    // debug
+    //pa.resize(model);
 }
+
+bool ArticulatedBodyAlgorithmInternalBuffers::isConsistent(const Model& model)
+{
+    bool ok = true;
+
+    ok = ok && S.isConsistent(model);
+    ok = ok && U.isConsistent(model);
+    ok = ok && D.isConsistent(model);
+    ok = ok && u.isConsistent(model);
+    ok = ok && linksVel.isConsistent(model);
+    ok = ok && linksBiasAcceleration.isConsistent(model);
+    ok = ok && linkABIs.isConsistent(model);
+    ok = ok && linksBiasWrench.isConsistent(model);
+
+    return ok;
+}
+
 
 
 bool ArticulatedBodyAlgorithm(const Model& model,
@@ -361,6 +380,8 @@ bool ArticulatedBodyAlgorithm(const Model& model,
                 pa                 =   bufs.linksBiasWrench(visitedLinkIndex)
                                      + Ia*bufs.linksBiasAcceleration(visitedLinkIndex);
             }
+
+            //bufs.pa(visitedLinkIndex) = pa;
 
             // Propagate
             LinkIndex parentLinkIndex = parentLink->getIndex();

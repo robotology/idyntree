@@ -73,6 +73,12 @@ namespace iDynTree
          */
         void resize(const Model& model);
 
+        /**
+         * Check if the dimension of the buffer is consistent
+         * with a model (it should be after a call to resize(model) ).
+         */
+        bool isConsistent(const Model& model);
+
         DOFSpatialMotionArray S;
         DOFSpatialForceArray U;
         JointDoubleArray D;
@@ -82,6 +88,9 @@ namespace iDynTree
         LinkAccArray linksAccelerations;
         LinkArticulatedBodyInertias linkABIs;
         LinkWrenches linksBiasWrench;
+
+        // Debug quantity
+        //LinkWrenches pa;
     };
 
     /**
