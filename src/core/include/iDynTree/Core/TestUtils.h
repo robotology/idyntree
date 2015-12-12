@@ -10,6 +10,8 @@
 
 #include <iDynTree/Core/Utils.h>
 
+#include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -37,6 +39,7 @@ namespace iDynTree
 #define ASSERT_EQUAL_SPATIAL_MOTION(val1,val2) assertSpatialMotionAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_SPATIAL_FORCE(val1,val2) assertSpatialForceAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_MATRIX(val1,val2) assertMatrixAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
+#define ASSERT_EQUAL_MATRIX_TOL(val1,val2,tol) assertMatrixAreEqual(val1,val2,tol,__FILE__,__LINE__)
 #define ASSERT_EQUAL_TRANSFORM(val1,val2) assertTransformsAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_TRANSFORM_TOL(val1,val2,tol) assertTransformsAreEqual(val1,val2,tol,__FILE__,__LINE__)
 
@@ -202,6 +205,29 @@ namespace iDynTree
         }
     }
 
+    /**
+     * Helper for printing the patter of wrong elements
+     * in between two matrix
+     */
+    template<typename MatrixType1, typename MatrixType2>
+    void printMatrixPercentageError(const MatrixType1& mat1, const MatrixType2& mat2)
+    {
+        size_t rows = mat1.rows();
+        size_t cols = mat2.cols();
+        for(unsigned int row=0; row < rows; row++ )
+        {
+            for( unsigned int col = 0; col < cols; col++ )
+            {
+                double mat1el = mat1(row,col);
+                double mat2el = mat2(row,col);
+                double percentageError = std::abs(mat1el-mat2el)/std::max(mat1el,mat2el);
+                std::cerr << std::fixed << std::setprecision(3) << percentageError << " ";
+            }
+
+            std::cerr << "\n";
+        }
+    }
+
 
     /**
      * Assert that two vectors are equal, and
@@ -274,8 +300,10 @@ namespace iDynTree
 
         if( !checkCorrect )
         {
-            std::cerr << file << ":" << line << " : assertMatrixAreEqual failure: " << std::endl;
+            std::cerr << file << ":" << line << " : assertMatrixAreEqual failure with tol " << tol << " : " << std::endl;
             printMatrixWrongElements("wrong el:",correctElements);
+            //std::cerr << "percentage error : " << std::endl;
+            //printMatrixPercentageError(mat1,mat2);
             exit(EXIT_FAILURE);
         }
 
