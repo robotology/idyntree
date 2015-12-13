@@ -142,6 +142,12 @@ double getRandomDouble(double min, double max)
     return min + (max-min)*((double)rand())/((double)RAND_MAX);
 }
 
+int getRandomInteger(int min, int max)
+{
+    return (rand() % (max-min+1)) + min;
+}
+
+
 void getRandomVector(IVector & vec)
 {
     for(unsigned int i=0; i<vec.size(); i++)

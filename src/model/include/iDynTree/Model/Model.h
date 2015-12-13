@@ -79,7 +79,8 @@ namespace iDynTree
          */
         std::vector<Transform> additionalFrames;
 
-        /** Vector of link indeces corresponding to an additional frame.
+        /**
+         *  Vector of link indeces corresponding to an additional frame.
          *  The element additionalFrameNames[frameOffset] will be the link_H_frame transform  of the frame with
          *  FrameIndex getNrOfLinks() + frameOffset .
          */
@@ -91,7 +92,8 @@ namespace iDynTree
         /** Vector of joint names, matches the index of each joint to its name. */
         std::vector<std::string> jointNames;
 
-        /** Vector of additional frame names.
+        /**
+         *  Vector of additional frame names.
          *  The element frameNames[frameOffset] will be the name of the frame with
          *  FrameIndex getNrOfLinks() + frameOffset .
          */

@@ -68,6 +68,24 @@ const Traversal& SubModelDecomposition::getTraversal(const size_t subModelIndex)
     return *subModelTraversals[subModelIndex];
 }
 
+size_t SubModelDecomposition::getSubModelOfLink(const LinkIndex& link)
+{
+    size_t ret = 0;
+
+    if( link >= 0 &&  link < this->link2subModelIndex.size() )
+    {
+        ret = link2subModelIndex[link];
+    }
+    else
+    {
+        std::cerr << "SubModelDecomposition error: requested link index " << link
+                  << "outside bounds " << std::endl;
+    }
+
+    return ret;
+}
+
+
 bool SubModelDecomposition::splitModelAlongJoints(const Model& model,
                                                   const Traversal& fullModelTraversal,
                                                   const std::vector< std::string >& splitJoints)
@@ -158,6 +176,7 @@ bool SubModelDecomposition::splitModelAlongJoints(const Model& model,
         }
     }
 
+    return true;
 }
 
 

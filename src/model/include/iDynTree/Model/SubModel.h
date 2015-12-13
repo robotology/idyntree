@@ -8,6 +8,8 @@
 #ifndef IDYNTREE_SUB_MODEL_H
 #define IDYNTREE_SUB_MODEL_H
 
+#include <iDynTree/Model/Indeces.h>
+
 #include <vector>
 #include <string>
 #include <cstddef>
@@ -96,6 +98,11 @@ namespace iDynTree
          * Get the traversal of a given submodel (const version)
          */
         const Traversal & getTraversal(const size_t subModelIndex) const;
+
+        /**
+         * Get the subModel to which a given links belongs.
+         */
+        size_t getSubModelOfLink(const LinkIndex & link);
     };
 
 
