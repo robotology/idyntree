@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
  * Author: Naveen Kuppuswamy
- * email:  naveen.kuppuswamyt@iit.it
+ * email:  naveen.kuppuswamy@iit.it
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
  * later version published by the Free Software Foundation.
@@ -42,15 +42,13 @@ PredictSensorsMeasurements::~PredictSensorsMeasurements()
  
 bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
 {
-//     std::cout<<"RobotBaseAcc : "<<(robotAcc.baseAcc()).toString()<<", Setted gravity : "<<gravity.toString()<<"\n";
-    bool returnVal = true;
-    // incorporating gravity into the base LinAcceleration
-    iDynTree::LinkPositions linkPos(model);
-    iDynTree::LinkVelArray linkVel(model);
-    iDynTree::LinkAccArray linkAcc(model);
+   bool returnVal = true;
+
+    iDynTree::LinkPositions linkPos;linkPos.resize(model);
+    iDynTree::LinkVelArray linkVel;linkVel.resize(model);
+    iDynTree::LinkAccArray linkAcc;linkAcc.resize(model);
     
-    
-    iDynTree::AngAcceleration nullAngAccl;
+    iDynTree::AngAcceleration nullAngAccl;// = iDynTree::AngAcceleration::;
     iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
     
     robotAcc.baseAcc() = robotAcc.baseAcc() - gravityAccl;
