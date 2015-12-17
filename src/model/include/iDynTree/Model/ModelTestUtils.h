@@ -128,4 +128,4 @@ Model getRandomChain(unsigned int nrOfJoints)
 
 }
 
-#endif /* IDYNTREE_LINK_H */
+#endif /* IDYNTREE_MODEL_TEST_UTILS_H */

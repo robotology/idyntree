@@ -20,7 +20,11 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      *
-     *
+     * \note Even if most methods documentation are written
+     *       assuming that this class represents the derivative
+     *       of a Transform with respect to time, it can be used
+     *       to represent a derivative with respect to an arbitrary
+     *       variable.
      *
      */
     class TransformDerivative
@@ -191,6 +195,38 @@ namespace iDynTree
          *
          */
         Matrix6x6 asAdjointTransformWrenchDerivative(const Transform & transform) const;
+
+        /**
+         * Multiply a transform derivative for a transform.
+         *
+         * This operation is useful to compose the derivative of a transform
+         * for a constant transform.
+         *
+         * If this transform derivative represent the derivative of a transform
+         * with respect to time \f$ ~^a \dot{H}_b \f$, and we have a constant
+         * transform \f$ ~^b H_c \f$, then this operation returns the derivative
+         * of the transform \f$ ~^a H_c \f$ :
+         * \f[
+         * ~^a \dot{H}_c = ~^a \dot{H}_b ~^b H_c
+         * \f]
+         *
+         * \warning the otherTransform must be a quantity that does not depend
+         *          on the derivation variable.
+         */
+        TransformDerivative operator*(const Transform & otherTransform) const;
+
+        /**
+         * Get the derivative of the inverse of the transform.
+         *
+         * If this TransformDerivative is \f$ ~^a \dot{H}_b \f$ and the
+         * transform argument is \f$ ~^a H_b  \f$, returns the derivative of
+         * the inverse transform \f$ ~^b {H}_a  \f$ computed as:
+         * \f[
+         * ~^b \dot{H}_a = - ~^b {H}_a ~^a \dot{H}_b ~^b H_a
+         * \f]
+         *
+         */
+        TransformDerivative derivativeOfInverse(const Transform & transform) const;
     };
 }
 

@@ -135,9 +135,18 @@ TransformDerivative RevoluteJoint::getTransformDerivative(const VectorDynSize& j
 {
     const double ang = jntPos(this->getPosCoordsOffset());
 
-    assert(false);
+    TransformDerivative link1_dX_link2 = rotation_axis_wrt_link1.getRotationTransformDerivative(ang)*link1_X_link2_at_rest;
 
-    return TransformDerivative::Zero();
+    if( linkA == this->link1 )
+    {
+        return link1_dX_link2;
+    }
+    else
+    {
+        updateBuffers(ang);
+        TransformDerivative linkA_dX_linkB = link1_dX_link2.derivativeOfInverse(this->link1_X_link2);
+        return linkA_dX_linkB;
+    }
 }
 
 
