@@ -31,6 +31,9 @@ namespace iDynTree{
     class FreeFloatingPos;
     class FreeFloatingVel;
     class SensorsMeasurement;
+    class LinkPositions;
+    class LinkVelArray;
+    class LinkAccArray;
 
     /**
      * PredictSensorsMeasurements class.
@@ -56,9 +59,12 @@ namespace iDynTree{
        */
        bool makePrediction(const iDynTree::Model & model,
                            const iDynTree::Traversal & traversal,
-                           const iDynTree::FreeFloatingPos & robotPos,
-                           const iDynTree::FreeFloatingVel & robotVel,
-                                 iDynTree::FreeFloatingAcc & robotAcc,
+                           const iDynTree::FreeFloatingPos& robotPos,
+                           const iDynTree::FreeFloatingVel& robotVel,
+                                 iDynTree::FreeFloatingAcc& robotAcc,
+                                 iDynTree::LinkPositions& linkPos,
+                                 iDynTree::LinkVelArray& linkVel,
+                                 iDynTree::LinkAccArray& linkAcc,
                            const iDynTree::LinAcceleration & gravity,
                            const iDynTree::SensorsList &sensorsList,
                            iDynTree::SensorsMeasurements &predictedMeasurement);
@@ -73,6 +79,9 @@ namespace iDynTree{
                            const iDynTree::FreeFloatingPos & robotPos,
                            const iDynTree::FreeFloatingVel & robotVel,
                                  iDynTree::FreeFloatingAcc & robotAcc,
+                                 iDynTree::LinkPositions& linkPos,
+                                 iDynTree::LinkVelArray& linkVel,
+                                 iDynTree::LinkAccArray& linkAcc,
                            const iDynTree::LinAcceleration & gravity,
                            const iDynTree::SensorsList &sensorsList,
                            iDynTree::VectorDynSize &predictedMeasurement);

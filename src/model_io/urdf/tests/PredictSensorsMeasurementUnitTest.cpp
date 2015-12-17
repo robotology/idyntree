@@ -62,6 +62,10 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
     FreeFloatingAcc robotAcc(model);
     LinAcceleration gravity;
     
+    iDynTree::LinkPositions linkPos(model);
+    iDynTree::LinkVelArray linkVel(model);
+    iDynTree::LinkAccArray linkAcc(model);
+    
     PredictSensorsMeasurements predictedSensors;
     LinAcceleration accl1,accl2;
     AngVelocity gyro1;
@@ -88,7 +92,7 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
                 break;
     }
     
-    predictedSensors.makePrediction(model,traversal,robotPos,robotVel,robotAcc,gravity,sensorsList,predictedMeasurement);
+    predictedSensors.makePrediction(model,traversal,robotPos,robotVel,robotAcc,linkPos,linkVel,linkAcc,gravity,sensorsList,predictedMeasurement);
     
     predictedMeasurement.getMeasurement(ACCELEROMETER,0,accl1);
     predictedMeasurement.getMeasurement(ACCELEROMETER,1,accl2);

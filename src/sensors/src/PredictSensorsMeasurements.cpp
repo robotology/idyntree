@@ -40,14 +40,16 @@ PredictSensorsMeasurements::~PredictSensorsMeasurements()
 // All local variables, so nothing to do really.
 }
  
-bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
+bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,iDynTree::LinkPositions& linkPos,iDynTree::LinkVelArray& linkVel,iDynTree::LinkAccArray& linkAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
 {
+    
    bool returnVal = true;
 
-    iDynTree::LinkPositions linkPos;linkPos.resize(model);
-    iDynTree::LinkVelArray linkVel;linkVel.resize(model);
-    iDynTree::LinkAccArray linkAcc;linkAcc.resize(model);
-    
+//     iDynTree::LinkPositions linkPos;linkPos.resize(model);
+//     iDynTree::LinkVelArray linkVel;linkVel.resize(model);
+//     iDynTree::LinkAccArray linkAcc;linkAcc.resize(model);
+//     
+//    std::cout<<"so far so good";
     iDynTree::AngAcceleration nullAngAccl;// = iDynTree::AngAcceleration::;
     iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
     
@@ -61,7 +63,7 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
     unsigned int numGyro = sensorsList.getNrOfSensors(iDynTree::GYROSCOPE);
     int idx;
     
-   Accelerometer * accelerometer;
+    Accelerometer * accelerometer;
     Gyroscope * gyroscope;
     int parentLinkId;
     iDynTree::LinAcceleration predictedAcc;
@@ -74,6 +76,7 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         accelerometer = (Accelerometer *)sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
         parentLinkId = accelerometer->getParentIndex();
         predictedAcc = accelerometer->predictMeasurement(linkAcc(parentLinkId),linkVel(parentLinkId));
+//         predictedAcc = accelerometer->predictMeasurement(robotAcc.jointAcc(parentLinkId),robotVel.jointVel(parentLinkId));
         predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,predictedAcc);
     }
     for(idx = 0; idx<numGyro; idx++)
@@ -82,18 +85,19 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         gyroscope = (Gyroscope*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
         parentLinkId = accelerometer->getParentIndex();
         predictedAngVel = gyroscope->predictMeasurement(linkVel(parentLinkId));
+//         predictedAngVel = gyroscope->predictMeasurement(robotVel.jointVel(parentLinkId));
         predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);   
     }
     return(returnVal);
 }
 
-bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::VectorDynSize &predictedMeasurement)
+bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,iDynTree::LinkPositions& linkPos,iDynTree::LinkVelArray& linkVel,iDynTree::LinkAccArray& linkAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::VectorDynSize &predictedMeasurement)
 {
     bool returnVal = true;
     // incorporating gravity into the base LinAcceleration
-    iDynTree::LinkPositions linkPos(model);
-    iDynTree::LinkVelArray linkVel(model);
-    iDynTree::LinkAccArray linkAcc(model);
+//     iDynTree::LinkPositions linkPos(model);
+//     iDynTree::LinkVelArray linkVel(model);
+//     iDynTree::LinkAccArray linkAcc(model);
     
     iDynTree::AngAcceleration nullAngAccl;
     iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
