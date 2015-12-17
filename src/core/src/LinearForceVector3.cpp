@@ -14,8 +14,6 @@ namespace iDynTree
      */
 
     // constructors
-    LinearForceVector3Semantics::LinearForceVector3Semantics();
-
     LinearForceVector3Semantics::LinearForceVector3Semantics(int _body, int _refBody, int _coordinateFrame):
     ForceVector3Semantics<LinearForceVector3Semantics>(_body, _refBody, _coordinateFrame)
     {
