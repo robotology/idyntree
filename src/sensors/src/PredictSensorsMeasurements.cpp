@@ -43,13 +43,8 @@ PredictSensorsMeasurements::~PredictSensorsMeasurements()
 bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,iDynTree::LinkPositions& linkPos,iDynTree::LinkVelArray& linkVel,iDynTree::LinkAccArray& linkAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
 {
     
-   bool returnVal = true;
-
-//     iDynTree::LinkPositions linkPos;linkPos.resize(model);
-//     iDynTree::LinkVelArray linkVel;linkVel.resize(model);
-//     iDynTree::LinkAccArray linkAcc;linkAcc.resize(model);
-//     
-//    std::cout<<"so far so good";
+    bool returnVal = true;
+    
     iDynTree::AngAcceleration nullAngAccl;// = iDynTree::AngAcceleration::;
     iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
     
@@ -76,7 +71,6 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         accelerometer = (Accelerometer *)sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
         parentLinkId = accelerometer->getParentIndex();
         predictedAcc = accelerometer->predictMeasurement(linkAcc(parentLinkId),linkVel(parentLinkId));
-//         predictedAcc = accelerometer->predictMeasurement(robotAcc.jointAcc(parentLinkId),robotVel.jointVel(parentLinkId));
         predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,predictedAcc);
     }
     for(idx = 0; idx<numGyro; idx++)
@@ -85,7 +79,6 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
         gyroscope = (Gyroscope*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
         parentLinkId = accelerometer->getParentIndex();
         predictedAngVel = gyroscope->predictMeasurement(linkVel(parentLinkId));
-//         predictedAngVel = gyroscope->predictMeasurement(robotVel.jointVel(parentLinkId));
         predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);   
     }
     return(returnVal);
