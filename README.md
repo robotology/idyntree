@@ -46,6 +46,7 @@ option simply enables *compilation* of the bindings. If you want to regenerate t
 for example because you modified some iDynTree classes, you can install the experimental
 version of Swig with Matlab support at https://github.com/casadi/casadi/wiki/matlab (just follow
 the first 4 points in the guide) and then enable Matlab bindings generation with the `IDYNTREE_GENERATE_MATLAB` options. 
+Currently we are commiting to the repo the matlab bindings generated with this commit of `matlab-swig`: https://github.com/jaeandersson/swig/commit/de0c52d69e5d3525f5dd56e3554a06a19fd75a13 .
 
 #### Dependencies
 ##### Build dependencies
