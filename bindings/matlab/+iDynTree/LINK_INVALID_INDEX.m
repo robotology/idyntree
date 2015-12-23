@@ -2,9 +2,9 @@ function varargout = LINK_INVALID_INDEX(varargin)
   narginchk(0,1)
   if nargin==0
     nargoutchk(0,1)
-    varargout{1} = iDynTreeMATLAB_wrap(538);
+    varargout{1} = iDynTreeMEX(544);
   else
     nargoutchk(0,0)
-    iDynTreeMATLAB_wrap(539,varargin{1});
+    iDynTreeMEX(545,varargin{1});
   end
 end

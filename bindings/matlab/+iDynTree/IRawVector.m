@@ -1,17 +1,21 @@
 classdef IRawVector < iDynTree.IVector
   methods
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(16, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(18, self);
+        self.swigPtr=[];
       end
     end
     function varargout = data(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(17, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(19, self, varargin{:});
     end
     function self = IRawVector(varargin)
-      self@iDynTree.IVector('_swigCreate');
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
+      self@iDynTree.IVector(SwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
         error('No matching constructor');
       end
     end

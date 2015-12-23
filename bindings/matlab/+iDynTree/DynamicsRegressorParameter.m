@@ -1,57 +1,62 @@
 classdef DynamicsRegressorParameter < SwigRef
   methods
+    function this = swig_this(self)
+      this = iDynTreeMEX(3, self);
+    end
     function varargout = category(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMATLAB_wrap(782, self);
+        varargout{1} = iDynTreeMEX(788, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMATLAB_wrap(783, self, varargin{1});
+        iDynTreeMEX(789, self, varargin{1});
       end
     end
     function varargout = elemIndex(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMATLAB_wrap(784, self);
+        varargout{1} = iDynTreeMEX(790, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMATLAB_wrap(785, self, varargin{1});
+        iDynTreeMEX(791, self, varargin{1});
       end
     end
     function varargout = type(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMATLAB_wrap(786, self);
+        varargout{1} = iDynTreeMEX(792, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMATLAB_wrap(787, self, varargin{1});
+        iDynTreeMEX(793, self, varargin{1});
       end
     end
     function varargout = lt(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(788, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(794, self, varargin{:});
     end
-    function varargout = isequal(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(789, self, varargin{:});
+    function varargout = eq(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(795, self, varargin{:});
     end
     function varargout = ne(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(790, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(796, self, varargin{:});
     end
     function self = DynamicsRegressorParameter(varargin)
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
-        % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(791, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(791, varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
+        tmp = iDynTreeMEX(797, varargin{:});
+        self.swigPtr = tmp.swigPtr;
+        tmp.swigPtr = [];
       end
     end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(792, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(798, self);
+        self.swigPtr=[];
       end
     end
   end
