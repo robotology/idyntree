@@ -59,18 +59,21 @@ if(IDYNTREE_USES_KDL)
 
     target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                      "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                      ${orocos_kdl_INCLUDE_DIRS}
-                                                      ${IDYNTREE_TREE_INCLUDE_DIRS}
-                                              PRIVATE ${TinyXML_INCLUDE_DIRS})
+                                                      ${IDYNTREE_TREE_INCLUDE_DIRS})
 
     target_link_libraries(${libraryname} idyntree-core
                                          idyntree-model
                                          idyntree-sensors
                                          idyntree-kdl
                                          ${orocos_kdl_LIBRARIES}
-                                        ${urdfdom_LIBRARIES}
-                                        ${console_bridge_LIBRARIES}
-                                        ${TinyXML_LIBRARIES})
+                                         ${urdfdom_LIBRARIES}
+                                         ${console_bridge_LIBRARIES}
+                                         ${TinyXML_LIBRARIES})
+
+    # make sure that the installed include directories are added after the include
+    # directories added with the other targets
+    target_include_directories(${libraryname} SYSTEM PUBLIC  ${orocos_kdl_INCLUDE_DIRS}
+                                                     PRIVATE ${TinyXML_INCLUDE_DIRS})
 
     set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
     set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
@@ -109,12 +112,18 @@ else()
     add_library(${libraryname} ${IDYNTREE_MODELIO_URDF_SOURCES} ${IDYNTREE_MODELIO_URDF_HEADERS})
 
     target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
+                                                     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
+                                                      ${IDYNTREE_TREE_INCLUDE_DIRS}
+                                                      ${orocos_kdl_INCLUDE_DIRS}
                                               PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                       ${TinyXML_INCLUDE_DIRS})
 
     target_link_libraries(${libraryname} PUBLIC idyntree-model
                                          PRIVATE ${TinyXML_LIBRARIES})
+
+    target_include_directories(${libraryname} SYSTEM PUBLIC  ${orocos_kdl_INCLUDE_DIRS}
+                                                     PRIVATE ${EIGEN3_INCLUDE_DIR}
+                                                             ${TinyXML_INCLUDE_DIRS})
 
     set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
 
