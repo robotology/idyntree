@@ -17,7 +17,7 @@ macro(SWIG_GENERATE_MODULE name language)
 
   set(swig_generated_sources)
   foreach(it ${swig_dot_i_sources})
-    SWIG_ADD_SOURCE_TO_MODULE_MATLAB(${name} swig_generated_source ${it})
+    SWIG_ADD_SOURCE_TO_MODULE(${name} swig_generated_source ${it})
     set(swig_generated_sources ${swig_generated_sources} "${swig_generated_source}")
     message(STATUS ${swig_generated_sources})
   endforeach()
