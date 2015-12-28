@@ -147,12 +147,12 @@ Transform Gyroscope::getLinkSensorTransform(void)
 
 AngVelocity Gyroscope::predictMeasurement(const Twist& linkVel)
 {
-    
-    if(this->pimpl->parent_link_index<0)
+    AngVelocity angVel(0,0,0);
+    if(this->pimpl->parent_link_index>=0)
     {
-        return (AngVelocity());
+        angVel = ((this->pimpl->link_H_sensor * linkVel).getAngularVec3());
     }
-    return(AngVelocity((this->pimpl->link_H_sensor * linkVel).getAngularVec3()));
+    return(angVel);
 }
 
 /* to be implemented in the future after considering interface and requirements

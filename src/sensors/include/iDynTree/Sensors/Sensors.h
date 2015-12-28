@@ -225,7 +225,12 @@ namespace iDynTree {
              * Constructor.
              */
             SensorsMeasurements();
-
+            
+            /**
+             * Constructor from SensorList
+             */
+            SensorsMeasurements(const SensorsList &sensorList);
+            
             /**
              * Copy constructor
              */
@@ -252,7 +257,14 @@ namespace iDynTree {
              * @return the number of sensors of type sensor_type
              */
             unsigned int getNrOfSensors(const SensorType & sensor_type) const;
+            
+            /**
+             * Resize and reset the measurement vectors
+             * @return true if all went right, false otherwise
+             */
+            bool resize(const SensorsList & sensorsList);
 
+            
             /**
              * Set the measurement for the specified sensor
              *

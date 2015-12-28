@@ -49,9 +49,7 @@ bool init(std::string fileName, Model &model, Traversal &traversal, SensorsList 
     ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(ACCELEROMETER),2);
     ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(GYROSCOPE),1);
     
-    predictedMeasurement.setNrOfSensors(ACCELEROMETER,(sensorsList.getNrOfSensors(ACCELEROMETER)));
-    predictedMeasurement.setNrOfSensors(GYROSCOPE,(sensorsList.getNrOfSensors(GYROSCOPE)));
-    
+    predictedMeasurement.resize(sensorsList);
 }
 
 bool runTest(const int& expID,const Model& model,const Traversal& traversal, const SensorsList& sensorsList, SensorsMeasurements& predictedMeasurement)
@@ -60,15 +58,15 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
     FreeFloatingPos robotPos(model);
     FreeFloatingVel robotVel(model);
     FreeFloatingAcc robotAcc(model);
-    LinAcceleration gravity;
+    LinAcceleration gravity(0,0,0);
     
     iDynTree::LinkPositions linkPos(model);
     iDynTree::LinkVelArray linkVel(model);
     iDynTree::LinkAccArray linkAcc(model);
     
     PredictSensorsMeasurements predictedSensors;
-    LinAcceleration accl1,accl2;
-    AngVelocity gyro1;
+    LinAcceleration accl1(0,0,0),accl2(0,0,0);
+    AngVelocity gyro1(0,0,0);
     
     
     //experiments 1-accelerometer gravity test, 2-angularVelocity test, 3-angularAccelerationTest 
@@ -93,7 +91,6 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
     }
     
     predictedSensors.makePrediction(model,traversal,robotPos,robotVel,robotAcc,linkPos,linkVel,linkAcc,gravity,sensorsList,predictedMeasurement);
-    
     predictedMeasurement.getMeasurement(ACCELEROMETER,0,accl1);
     predictedMeasurement.getMeasurement(ACCELEROMETER,1,accl2);
     predictedMeasurement.getMeasurement(GYROSCOPE,0,gyro1);
@@ -124,8 +121,7 @@ bool runTest(const int& expID,const Model& model,const Traversal& traversal, con
                 ASSERT_EQUAL_DOUBLE(accl2(2),0);
                 break;
     }
-    Rotation::RPY(1,0,0);
-  
+   
 }
 int main()
 {

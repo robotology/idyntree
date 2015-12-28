@@ -61,8 +61,8 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
     Accelerometer * accelerometer;
     Gyroscope * gyroscope;
     int parentLinkId;
-    iDynTree::LinAcceleration predictedAcc;
-    iDynTree::AngVelocity predictedAngVel;
+    iDynTree::LinAcceleration predictedAcc(0,0,0);
+    iDynTree::AngVelocity predictedAngVel(0,0,0);
     
     //Iterate through each kind of accelrometer and find its parent. Compute local (classical accelration) 
     // It is automatically proper acceleration since gravity is incorporated into the base acceleration
@@ -88,10 +88,7 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
 {
     bool returnVal = true;
     // incorporating gravity into the base LinAcceleration
-//     iDynTree::LinkPositions linkPos(model);
-//     iDynTree::LinkVelArray linkVel(model);
-//     iDynTree::LinkAccArray linkAcc(model);
-    
+ 
     iDynTree::AngAcceleration nullAngAccl;
     iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
     
@@ -127,8 +124,8 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
     unsigned int vecItr = 0;
     int parentLinkId;
     predictedMeasurement.resize(vecSize);
-    LinAcceleration predictedAcc;
-    AngVelocity predictedAngVel;
+    LinAcceleration predictedAcc(0,0,0);
+    AngVelocity predictedAngVel(0,0,0);
     for(int i =0; i<model.getNrOfLinks();i++)
     {
         // following the convention of BERDY, we iterate through the links from 
@@ -145,7 +142,7 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
 
             parentLinkId = accelerometer->getParentIndex();
             predictedAcc = accelerometer->predictMeasurement(linkAcc(i),linkVel(i));
-        
+//         
             predictedMeasurement.setVal(vecItr++,predictedAcc.getVal(0));
             predictedMeasurement.setVal(vecItr++,predictedAcc.getVal(1));
             predictedMeasurement.setVal(vecItr++,predictedAcc.getVal(2));
