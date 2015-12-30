@@ -30,6 +30,7 @@ SubModelDecomposition::SubModelDecomposition(const SubModelDecomposition& other)
 SubModelDecomposition& SubModelDecomposition::operator=(const SubModelDecomposition& other)
 {
     assert(false);
+    return *this;
 }
 
 SubModelDecomposition::~SubModelDecomposition()

@@ -35,7 +35,7 @@ Traversal::~Traversal()
     reset(0);
 }
 
-bool Traversal::reset(unsigned int nrOfLinksInModel)
+bool Traversal::reset(const unsigned int nrOfLinksInModel)
 {
     this->links.resize(0);
     this->parents.resize(0);
@@ -102,7 +102,7 @@ const Link* Traversal::getParentLinkFromLinkIndex(const LinkIndex linkIndex) con
 
 bool Traversal::reset(const Model& model)
 {
-    reset(model.getNrOfLinks());
+    return reset(model.getNrOfLinks());
 }
 
 }
