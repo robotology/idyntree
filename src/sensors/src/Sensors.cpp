@@ -281,6 +281,8 @@ bool SensorsMeasurements::resize(const SensorsList &sensorsList)
     this->pimpl->SixAxisFTSensorsMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),zeroWrench);
     this->pimpl->AccelerometerMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER),zeroLinAcc);
     this->pimpl->GyroscopeMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::GYROSCOPE),zeroAngVel);
+    
+    return true;
 }
 
 bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type, 
