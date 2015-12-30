@@ -45,7 +45,8 @@ bool PredictSensorsMeasurements::makePrediction(const Model& model,const Travers
     
     bool returnVal = true;
     
-    iDynTree::AngAcceleration nullAngAccl;// = iDynTree::AngAcceleration::;
+    iDynTree::AngAcceleration nullAngAccl;
+    nullAngAccl.zero();
     iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
     
     robotAcc.baseAcc() = robotAcc.baseAcc() - gravityAccl;
