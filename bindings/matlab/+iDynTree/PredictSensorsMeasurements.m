@@ -1,23 +1,25 @@
-classdef SpatialForceVector < iDynTree.SpatialForceVectorBase
+classdef PredictSensorsMeasurements < SwigRef
   methods
-    function self = SpatialForceVector(varargin)
-      self@iDynTree.SpatialForceVectorBase(SwigRef.Null);
+    function this = swig_this(self)
+      this = iDynTreeMEX(3, self);
+    end
+    function self = PredictSensorsMeasurements(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if varargin{1}~=SwigRef.Null
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(387, varargin{:});
+        tmp = iDynTreeMEX(818, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
-    function varargout = mtimes(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(388, self, varargin{:});
+    function varargout = makePrediction(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(819, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(389, self);
+        iDynTreeMEX(820, self);
         self.swigPtr=[];
       end
     end

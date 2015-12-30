@@ -6,7 +6,7 @@
  */
 
 # include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
-# include <iDynTree/Sensors/Sensors.hpp>
+# include <iDynTree/Sensors/Sensors.h>
 #include "testModels.h"
 
 #include <iDynTree/Core/TestUtils.h>
@@ -38,7 +38,7 @@ int main()
     checkURDF(getAbsModelPath("/oneLink.urdf"),2,1);
     
     std::cout<<"Generic Sensor test running (two Link):\n";
-    checkURDF(getAbsModelPath("/twoLinksFixed.urdf"),2,1);
+    checkURDF(getAbsModelPath("/twoLinks.urdf"),2,1);
     
     std::cout <<"Generic Sensor test just ran\n";
     return 0;

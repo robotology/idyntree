@@ -69,29 +69,31 @@ if(IDYNTREE_USES_KDL)
                                          ${urdfdom_LIBRARIES}
                                          ${console_bridge_LIBRARIES}
                                          ${TinyXML_LIBRARIES})
+<<<<<<< HEAD
 
     # make sure that the installed include directories are added after the include
     # directories added with the other targets
     target_include_directories(${libraryname} SYSTEM PUBLIC  ${orocos_kdl_INCLUDE_DIRS}
                                                      PRIVATE ${TinyXML_INCLUDE_DIRS})
+=======
+>>>>>>> ec66c41fef24ee03078d78df628afc003c352abf
 
     set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
     set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
-
-    install(TARGETS ${libraryname}
-            EXPORT iDynTree
-            COMPONENT runtime
-            RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
-            LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
-            ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-            PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO
-            PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO/impl)
-
     set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
-    get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-    set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
+get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
+
+install(TARGETS ${libraryname}
+        EXPORT iDynTree
+        COMPONENT runtime
+        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO
+        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO/impl)
 
     if(IDYNTREE_COMPILE_TESTS)
         add_subdirectory(tests)

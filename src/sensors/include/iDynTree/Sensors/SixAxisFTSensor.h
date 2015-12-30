@@ -25,7 +25,7 @@ namespace iDynTree
     class Wrench;
 }
 
-#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/Sensors.h>
 
 #include <vector>
 

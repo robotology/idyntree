@@ -9,82 +9,82 @@ classdef DynamicsRegressorGenerator < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(808, varargin{:});
+        tmp = iDynTreeMEX(843, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(809, self);
+        iDynTreeMEX(844, self);
         self.swigPtr=[];
       end
     end
     function varargout = loadRobotAndSensorsModelFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(810, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(845, self, varargin{:});
     end
     function varargout = loadRobotAndSensorsModelFromString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(811, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(846, self, varargin{:});
     end
     function varargout = loadRegressorStructureFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(812, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(847, self, varargin{:});
     end
     function varargout = loadRegressorStructureFromString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(813, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(848, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(814, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(849, self, varargin{:});
     end
     function varargout = getNrOfParameters(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(815, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(850, self, varargin{:});
     end
     function varargout = getNrOfOutputs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(816, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(851, self, varargin{:});
     end
     function varargout = getNrOfDegreesOfFreedom(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(817, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(852, self, varargin{:});
     end
     function varargout = getDescriptionOfParameter(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(818, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(853, self, varargin{:});
     end
     function varargout = getDescriptionOfParameters(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(819, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(854, self, varargin{:});
     end
     function varargout = getDescriptionOfOutput(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(820, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(855, self, varargin{:});
     end
     function varargout = getDescriptionOfOutputs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(821, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(856, self, varargin{:});
     end
     function varargout = getDescriptionOfDegreeOfFreedom(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(822, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(857, self, varargin{:});
     end
     function varargout = getDescriptionOfDegreesOfFreedom(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(823, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(858, self, varargin{:});
     end
     function varargout = getBaseLinkName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(824, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(859, self, varargin{:});
     end
     function varargout = getSensorsModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(825, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(860, self, varargin{:});
     end
     function varargout = setRobotState(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(826, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(861, self, varargin{:});
     end
     function varargout = getSensorsMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(827, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(862, self, varargin{:});
     end
     function varargout = computeRegressor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(828, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(863, self, varargin{:});
     end
     function varargout = getModelParameters(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(829, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(864, self, varargin{:});
     end
     function varargout = computeFloatingBaseIdentifiableSubspace(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(830, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(865, self, varargin{:});
     end
     function varargout = computeFixedBaseIdentifiableSubspace(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(831, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(866, self, varargin{:});
     end
   end
   methods(Static)

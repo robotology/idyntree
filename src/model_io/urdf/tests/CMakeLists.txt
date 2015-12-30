@@ -16,3 +16,5 @@ endmacro()
 
 add_modelio_urdf_unit_test(URDFModelImport)
 add_modelio_urdf_unit_test(URDFGenericSensorImport)
+add_modelio_urdf_unit_test(PredictSensorsMeasurement)
+add_modelio_urdf_unit_test(icubSensorURDF)
