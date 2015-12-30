@@ -161,12 +161,6 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
         TiXmlElement* originTag = sensorXml->FirstChildElement("origin");
         if( originTag )
         {
-#ifdef DEBUG
-            std::cout<<"originTag exists \n";
-            std::string  poseText = originTag->GetText();
-            std::cout<<"originTag : \n"<<poseTag->ToText();
-            std::cout<<"Pose rpy:"<<rpyText.c_str()<<", xyz"<<xyzText.c_str()<<"\n";
-#endif //DEBUG
             std::string  rpyText(originTag->Attribute("rpy"));
             std::string  xyzText(originTag->Attribute("xyz"));
 
@@ -174,10 +168,7 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
             std::vector<std::string> xyzElems;
             split(rpyText,rpyElems);
             split(xyzText,xyzElems);
-#ifdef DEBUG
-            std::cout<<"Pose rpy:"<<rpyElems[0].c_str()<<","<<rpyElems[1].c_str()<<","<<rpyElems[2].c_str()<<", xyz";
-            std::cout<<xyzElems[0].c_str()<<","<<xyzElems[1].c_str()<<","<<xyzElems[2].c_str()<<","<<"\n";
-#endif //DEBUG
+
             if( rpyElems.size() != 3 && xyzElems.size() !=3 )
             {
                 std::cerr<<"Pose attribute for sensor specified incorrectly";

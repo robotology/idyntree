@@ -34,7 +34,6 @@
 #include <iostream>
 
 #include <cstring>
-#include <boost/iterator/iterator_concepts.hpp>
 
 namespace iDynTree
 {
