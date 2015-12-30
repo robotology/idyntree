@@ -69,15 +69,12 @@ if(IDYNTREE_USES_KDL)
                                          ${urdfdom_LIBRARIES}
                                          ${console_bridge_LIBRARIES}
                                          ${TinyXML_LIBRARIES})
-<<<<<<< HEAD
 
     # make sure that the installed include directories are added after the include
     # directories added with the other targets
     target_include_directories(${libraryname} SYSTEM PUBLIC  ${orocos_kdl_INCLUDE_DIRS}
                                                      PRIVATE ${TinyXML_INCLUDE_DIRS})
-=======
->>>>>>> ec66c41fef24ee03078d78df628afc003c352abf
-
+                                                     
     set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
     set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
