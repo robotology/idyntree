@@ -14,6 +14,8 @@
 namespace iDynTree
 {
     class Transform;
+    class ArticulatedBodyInertia;
+    class SpatialForceVector;
 
     /**
      * Class representing the derivative of Transform object
@@ -227,6 +229,33 @@ namespace iDynTree
          *
          */
         TransformDerivative derivativeOfInverse(const Transform & transform) const;
+
+        /**
+         * Given a articulated inertia \f$I\f$ (other argument), this TransformDerivative \f$ ~^a\dot{X}_b \f$
+         * and a transform \f$ ~^a{X}_b  \f$ return the articulated body inertia:
+         * \f[
+         *   ~_a \dot{X}^b Ia ~^a X_b +  ~_a {X}^b Ia ~^a \dot{X}_b
+         * \f]
+         */
+        ArticulatedBodyInertia transform(const Transform & transform, ArticulatedBodyInertia& other);
+
+        /**
+         * Given a SpatialForceVector \f$F\f$ (other argument), this TransformDerivative \f$ ~^a\dot{X}_b  \f$
+         * and a transform \f$ ~^a{X}_b \f$ return the spatial force vector:
+         * \f[
+         *   ~_a \dot{X}^b F
+         * \f]
+         */
+        SpatialForceVector transform(const Transform & transform, SpatialForceVector& other);
+
+        /**
+         * Given a SpatialMotionVector \f$V\f$ (other argument), this TransformDerivative \f$ ~^a\dot{X}_b  \f$
+         * and a transform \f$ ~^a{X}_b \f$ return the spatial force vector:
+         * \f[
+         *   ~^a \dot{X}_b F
+         * \f]
+         */
+        SpatialMotionVector transform(const Transform & transform, SpatialMotionVector& other);
     };
 }
 

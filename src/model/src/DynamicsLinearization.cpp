@@ -6,6 +6,7 @@
  */
 
 
+
 #include <iDynTree/Model/DynamicsLinearization.h>
 
 #include <iDynTree/Model/Model.h>
@@ -14,6 +15,7 @@
 #include <iDynTree/Model/FreeFloatingState.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Core/TransformDerivative.h>
 
 #include <Eigen/Core>
 
@@ -74,9 +76,262 @@ void ForwardDynamicsLinearizationWrtJointPos(const Model& model,
                                              const FreeFloatingVel& robotVel,
                                              const LinkExternalWrenches& linkExtWrenches,
                                              const JointDoubleArray& jointTorques,
+                                             const size_t dofDeriv,
                                              ForwardDynamicsLinearizationInternalBuffers & bufs,
                                              FreeFloatingAcc& robotAcc,
-                                             FreeFloatingStateLinearization& A);
+                                             FreeFloatingStateLinearization& A)
+{
+    /**
+     * For linearization with respect to the degrees of freedom dofDeriv,
+     * the only transform between two neighbor links that depends of the
+     * value of the degree of freedom dofDeriv is the one between the two links
+     * connected by the joint of the dof dofDeriv.
+     * Given that it is used extensivly in the loop, we store it.
+     */
+    TransformDerivative visited_dX_parent;
+
+    /**
+     * Forward pass: compute the derivative of link velocities and the link bias accelerations
+     * and initialize the derivatives of Articulated Body Inertia and the articulated bias wrench.
+     */
+    for(unsigned int traversalEl=0; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+        LinkIndex visitedLinkIndex = visitedLink->getIndex();
+        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+        // Propagate velocities and bias accelerations
+
+        // If the visitedLink is the base one, initialize the derivative wrt to joint position with zero vector
+        if( parentLink == 0 )
+        {
+            assert(visitedLinkIndex >= 0 && visitedLinkIndex < (LinkIndex)model.getNrOfLinks());
+            bufs.dPos[dofDeriv].linksVel(visitedLinkIndex) = Twist::Zero();
+            bufs.dPos[dofDeriv].linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
+        }
+        else
+        {
+            LinkIndex    parentLinkIndex = parentLink->getIndex();
+            // If it is a fixed joint we propagate the derivative
+            if( toParentJoint->getNrOfDOFs() == 0 )
+            {
+                bufs.dPos[dofDeriv].linksVel(visitedLinkIndex) =
+                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLink->getIndex())*bufs.dPos[dofDeriv].linksVel(parentLinkIndex);
+                bufs.dPos[dofDeriv].linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
+            }
+            else
+            {
+                size_t dofIndex = toParentJoint->getDOFsOffset();
+
+                Transform visited_X_parent = toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex);
+
+                if( dofDeriv == dofIndex )
+                {
+                    // if the considered link is connected to its parent with the joint wrt
+                    // to which we are doing the derivation, we need to handle the special case
+                    visited_dX_parent =
+                        toParentJoint->getTransformDerivative(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex,0);
+
+                    Eigen::Matrix<double,6,1> tmp
+                        = toEigen(visited_dX_parent.asAdjointTransformDerivative(visited_X_parent))*
+                          toEigen(bufs.aba.linksVel(visitedLinkIndex));
+
+                    toEigen(bufs.dPos[dofDeriv].linksVel(visitedLinkIndex).getLinearVec3()) = tmp.segment<3>(0);
+                    toEigen(bufs.dPos[dofDeriv].linksVel(visitedLinkIndex).getAngularVec3()) = tmp.segment<3>(3);
+                }
+                else
+                {
+                    bufs.dPos[dofDeriv].linksVel(visitedLinkIndex) =
+                        visited_X_parent*bufs.dPos[dofDeriv].linksVel(parentLinkIndex);
+                }
+
+                Twist vj = bufs.aba.S(dofIndex)*robotVel.jointVel()(dofIndex);
+                bufs.dPos[dofDeriv].linksBiasAcceleration(visitedLinkIndex) = bufs.dPos[dofDeriv].linksVel(visitedLinkIndex)*vj;
+            }
+        }
+
+        // Initialize Articulated Body Inertia
+        bufs.dPos[dofDeriv].linkABIs(visitedLinkIndex).zero();
+
+        // We fill the buffer of the derivative of biasWrench with respect to link velocity
+        // that will be used by everyone
+        const iDynTree::SpatialInertia & M = visitedLink->getInertia();
+        toEigen(bufs.dVl_linkLocalBiasWrench[visitedLinkIndex]) = toEigen(M.biasWrenchDerivative(bufs.aba.linksVel(visitedLinkIndex)));
+
+        // Initialize bias force (note that we assume that the external frames are
+        // expressed in a local frame, differently from Featherstone 2008
+        Eigen::Matrix<double,6,1> tmp = toEigen(bufs.dVl_linkLocalBiasWrench[visitedLinkIndex])*toEigen(bufs.dPos[dofDeriv].linksVel(visitedLinkIndex));
+
+        toEigen(bufs.dPos[dofDeriv].linksBiasWrench(visitedLinkIndex).getLinearVec3()) = tmp.segment<3>(0);
+        toEigen(bufs.dPos[dofDeriv].linksBiasWrench(visitedLinkIndex).getAngularVec3()) = tmp.segment<3>(3);
+    }
+
+    /*
+     * Backward pass: recursivly compute
+     * the derivative wrt joint position of
+     * the articulated body inertia and the articulated body bias wrench.
+     */
+    for(int traversalEl = traversal.getNrOfVisitedLinks()-1; traversalEl >= 0; traversalEl--)
+    {
+        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+        LinkIndex    visitedLinkIndex = visitedLink->getIndex();
+        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+        if( parentLink )
+        {
+            ArticulatedBodyInertia dPos_Ia;
+            ArticulatedBodyInertia Ia;
+            Wrench dPos_pa;
+
+            // For now we support only 0 and 1 dof joints
+
+            // for 1 dof joints, the articulated inertia
+            // need to be propagated to the parent considering
+            // the joints
+            if( toParentJoint->getNrOfDOFs() > 0 )
+            {
+                assert(toParentJoint->getNrOfDOFs()==1);
+                size_t dofIndex = toParentJoint->getDOFsOffset();
+                bufs.dPos[dofDeriv].U(dofIndex) = bufs.dPos[dofDeriv].linkABIs(visitedLinkIndex)*bufs.aba.S(dofIndex);
+                bufs.dPos[dofDeriv].D(dofIndex) = bufs.aba.S(dofIndex).dot(bufs.dPos[dofDeriv].U(dofIndex));
+                bufs.dPos[dofDeriv].u(dofIndex) =  - bufs.aba.S(dofIndex).dot(bufs.dPos[dofDeriv].linksBiasWrench(visitedLinkIndex));
+
+                double invD = 1/(bufs.aba.D(dofIndex));
+                double d_invD = - invD * bufs.dPos[dofDeriv].D(dofIndex) * invD;
+
+                dPos_Ia = bufs.dPos[dofDeriv].linkABIs(visitedLinkIndex) -
+                        ArticulatedBodyInertia::ABADyadHelperLin(bufs.aba.U(dofIndex),invD,
+                                                                 bufs.dPos[dofDeriv].U(dofIndex),d_invD);
+                Ia = bufs.aba.linkABIs(visitedLinkIndex)
+                    - ArticulatedBodyInertia::ABADyadHelper(bufs.aba.U(dofIndex),bufs.aba.D(dofIndex));
+                dPos_pa    =  bufs.dPos[dofDeriv].linksBiasWrench(visitedLinkIndex)
+                                     + dPos_Ia*bufs.aba.linksBiasAcceleration(visitedLinkIndex)
+                                     + Ia*bufs.dPos[dofDeriv].linksBiasAcceleration(visitedLinkIndex)
+                                     + bufs.dPos[dofDeriv].U(dofIndex)*(bufs.aba.u(dofIndex)*invD)
+                                     + bufs.aba.U(dofIndex)*(bufs.dPos[dofDeriv].u(dofIndex)*invD + bufs.aba.u(dofIndex)*d_invD);
+
+            }
+
+            // For fixed joints, we just need to propagate
+            // the articulated quantities without considering the
+            // joint
+            if( toParentJoint->getNrOfDOFs() == 0 )
+            {
+                dPos_Ia = bufs.dPos[dofDeriv].linkABIs(visitedLinkIndex);
+                Ia = bufs.aba.linkABIs(visitedLinkIndex);
+                dPos_pa   =   bufs.dPos[dofDeriv].linksBiasWrench(visitedLinkIndex)
+                               + (Ia*bufs.dPos[dofDeriv].linksBiasAcceleration(visitedLinkIndex))
+                               + (dPos_Ia*bufs.aba.linksBiasAcceleration(visitedLinkIndex));
+            }
+
+            //bufs.pa(visitedLinkIndex) = pa;
+
+            // Propagate
+            LinkIndex parentLinkIndex = parentLink->getIndex();
+            Transform parent_X_visited = toParentJoint->getTransform(robotPos.jointPos(),parentLinkIndex,visitedLinkIndex);
+            bufs.dPos[dofDeriv].linkABIs(parentLinkIndex)        += parent_X_visited*dPos_Ia;
+            bufs.dPos[dofDeriv].linksBiasWrench(parentLinkIndex) = bufs.dPos[dofDeriv].linksBiasWrench(parentLinkIndex) + parent_X_visited*dPos_pa;
+
+            // if the visited link is connected to the parent with the joint wrt we are computing the
+            // derivative we have to add some additional terms relative to the derivative of the transforms
+            size_t dofIndex = toParentJoint->getDOFsOffset();
+            if( dofIndex == dofDeriv )
+            {
+                const Transform & visited_X_parent = toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex);
+                TransformDerivative  parent_dX_visited = visited_dX_parent.derivativeOfInverse(visited_X_parent);
+
+                bufs.dPos[dofDeriv].linkABIs(parentLinkIndex) += parent_dX_visited.transform(parent_X_visited,Ia);
+
+                SpatialForceVector pa =   bufs.aba.linksBiasWrench(visitedLinkIndex)
+                                     + Ia*bufs.aba.linksBiasAcceleration(visitedLinkIndex)
+                                     + bufs.aba.U(dofIndex)*(bufs.aba.u(dofIndex)/bufs.aba.D(dofIndex));
+
+                bufs.dPos[dofDeriv].linksBiasWrench(parentLinkIndex) = bufs.dPos[dofDeriv].linksBiasWrench(parentLinkIndex)
+                                                                      + parent_dX_visited.transform(parent_X_visited,pa);
+            }
+
+        }
+    }
+
+    /**
+     * Second forward pass: find robot accelerations
+     *
+     */
+    // \todo TODO Handle gravity
+    for(unsigned int traversalEl=0; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+       LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+       LinkIndex visitedLinkIndex = visitedLink->getIndex();
+       LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+       IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+       if( parentLink == 0 )
+       {
+           // Preliminary step: find base acceleration
+           Eigen::IOFormat OctaveFmt(Eigen::StreamPrecision, 0, ", ", ";\n", "", "", "[", "]");;
+           Matrix6x6 inverseInertia = bufs.aba.linkABIs(visitedLinkIndex).getInverse();
+           std::cout << "Inertia: " << toEigen(bufs.aba.linkABIs(visitedLinkIndex).asMatrix()).format(OctaveFmt) << std::endl;
+           std::cout << "Inverse Inertia: " << inverseInertia.toString() << std::endl;
+           Matrix6x6 dPos_inertia = bufs.dPos[dofDeriv].linkABIs(visitedLinkIndex).asMatrix();
+           Matrix6x6 dPos_inverseInertia;
+           toEigen(dPos_inverseInertia) = -toEigen(inverseInertia)*toEigen(dPos_inertia)*toEigen(dPos_inverseInertia);
+
+           Eigen::Matrix<double,6,1> tmp = -(toEigen(dPos_inverseInertia)*toEigen(bufs.aba.linksBiasWrench(visitedLinkIndex))
+                                                                        +toEigen(inverseInertia)*toEigen(bufs.dPos[dofDeriv].linksBiasWrench(visitedLinkIndex)));
+
+           toEigen(bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex).getLinearVec3()) = tmp.segment<3>(0);
+           toEigen(bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex).getAngularVec3()) = tmp.segment<3>(3);
+
+           toEigen(A).block<6,1>(6+model.getNrOfDOFs(),6+dofDeriv) = toEigen(bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex));
+       }
+       else
+       {
+           LinkIndex    parentLinkIndex = parentLink->getIndex();
+           if( toParentJoint->getNrOfDOFs() > 0 )
+           {
+               const Transform & visited_X_parent = toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex);
+               size_t dofIndex = toParentJoint->getDOFsOffset();
+               assert(toParentJoint->getNrOfDOFs()==1);
+               bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex) =
+                   visited_X_parent*bufs.dPos[dofDeriv].linksAccelerations(parentLinkIndex)
+                   + bufs.dPos[dofDeriv].linksBiasAcceleration(visitedLinkIndex);
+
+               if( dofIndex == dofDeriv )
+               {
+                   // account for derivative with respect to position
+                   bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex) =
+                    bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex) +
+                    visited_dX_parent.transform(visited_X_parent,bufs.aba.linksBiasAcceleration(visitedLinkIndex));
+               }
+
+               double invD = 1/(bufs.aba.D(dofIndex));
+               double d_invD = - invD * bufs.dPos[dofDeriv].D(dofIndex) * invD;
+               double dPos_ddq =
+                    (bufs.aba.u(dofIndex)-bufs.aba.U(dofIndex).dot(bufs.aba.linksAccelerations(visitedLinkIndex)))*d_invD;
+                    (bufs.dPos[dofDeriv].u(dofIndex)
+                        -bufs.dPos[dofDeriv].U(dofIndex).dot(bufs.aba.linksAccelerations(visitedLinkIndex))
+                        -bufs.aba.U(dofIndex).dot(bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex)))*invD;
+
+               A(6+model.getNrOfDOFs()+6+dofIndex,6+dofDeriv) = dPos_ddq;
+
+               bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex) =
+                bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex) +
+                bufs.aba.S(dofIndex)*dPos_ddq;
+           }
+           else
+           {
+               //for fixed joints we just propagate the acceleration
+               const Transform & visited_X_parent = toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex);
+               bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex) =
+                   visited_X_parent*bufs.dPos[dofDeriv].linksAccelerations(parentLinkIndex)
+                   + bufs.dPos[dofDeriv].linksBiasAcceleration(visitedLinkIndex);
+           }
+       }
+    }
+
+}
 
 void ForwardDynamicsLinearizationWrtBaseTwist(const Model& model,
                                               const Traversal& traversal,
@@ -134,12 +389,10 @@ void ForwardDynamicsLinearizationWrtBaseTwist(const Model& model,
             }
         }
 
-        // We fill the buffer of the derivative of biasWrench with respect to link velocity
-        // that will be used by everyone
-       const iDynTree::SpatialInertia & M = visitedLink->getInertia();
-       toEigen(bufs.dVl_linkLocalBiasWrench[visitedLinkIndex]) = toEigen(M.biasWrenchDerivative(bufs.aba.linksVel(visitedLinkIndex)));
        //std::cout << " dVl_linkLocalBiasWrench : " << bufs.dVl_linkLocalBiasWrench[visitedLinkIndex].toString() << std::endl;
        toEigen(bufs.dVb_linkBiasWrench[visitedLinkIndex]) = toEigen(bufs.dVl_linkLocalBiasWrench[visitedLinkIndex])*toEigen( bufs.linkPos(visitedLinkIndex).asAdjointTransform());
+
+
     }
 
     /*
@@ -310,9 +563,10 @@ void ForwardDynamicsLinearizationWrtJointVel(const Model& model,
             }
         }
 
-        // Initialize bias force derivative
-        const iDynTree::SpatialInertia & M = visitedLink->getInertia();
-        toEigen(bufs.dVl_linkLocalBiasWrench[visitedLinkIndex]) = toEigen(M.biasWrenchDerivative(bufs.aba.linksVel(visitedLinkIndex)));
+        // The dVl_linkLocalBiasWrench buffer should have been filled by the wrt joint pos
+        // loop
+        //const iDynTree::SpatialInertia & M = visitedLink->getInertia();
+        //toEigen(bufs.dVl_linkLocalBiasWrench[visitedLinkIndex]) = toEigen(M.biasWrenchDerivative(bufs.aba.linksVel(visitedLinkIndex)));
         Eigen::Matrix<double,6,1> tmp = toEigen(bufs.dVl_linkLocalBiasWrench[visitedLinkIndex])*toEigen(bufs.dVel[dofDeriv].linksVel(visitedLinkIndex));
 
         toEigen(bufs.dVel[dofDeriv].linksBiasWrench(visitedLinkIndex).getLinearVec3()) = tmp.segment<3>(0);
@@ -485,9 +739,10 @@ bool ForwardDynamicsLinearization(const Model& model,
 
     // \partial_{q_J} FD_b
     // \partial_{q_J} FD_J
-    for(size_t h = 0; h < nDof; h++)
+    for(size_t dofDeriv=0; dofDeriv < model.getNrOfDOFs(); dofDeriv++)
     {
-
+        ForwardDynamicsLinearizationWrtJointPos(model,traversal,robotPos,robotVel,
+                                                linkExtWrenches,jointTorques,dofDeriv,bufs,robotAcc,A);
     }
 
     // Third block-column: the derivative with respect

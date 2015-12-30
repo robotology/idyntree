@@ -268,8 +268,6 @@ bool ArticulatedBodyAlgorithmInternalBuffers::isConsistent(const Model& model)
     return ok;
 }
 
-
-
 bool ArticulatedBodyAlgorithm(const Model& model,
                               const Traversal& traversal,
                               const FreeFloatingPos& robotPos,

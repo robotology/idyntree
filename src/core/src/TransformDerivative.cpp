@@ -5,6 +5,7 @@
  *
  */
 
+#include <iDynTree/Core/ArticulatedBodyInertia.h>
 #include <iDynTree/Core/TransformDerivative.h>
 #include <iDynTree/Core/Transform.h>
 
@@ -168,6 +169,63 @@ TransformDerivative TransformDerivative::derivativeOfInverse(const Transform& a_
 
     return ret;
 }
+
+ArticulatedBodyInertia TransformDerivative::transform(const Transform& transform,
+                                                      ArticulatedBodyInertia& other)
+{
+    // Inefficient implementation for the time being, this should not be a bottleneck
+    Matrix6x6 oldABI = other.asMatrix();
+    Matrix6x6 a_X_b_wrench  = transform.asAdjointTransformWrench();
+    Matrix6x6 a_dX_b_wrench = this->asAdjointTransformWrenchDerivative(transform);
+    Eigen::Matrix<double,6,6,Eigen::RowMajor> b_X_a = toEigen(a_X_b_wrench).transpose();
+    Eigen::Matrix<double,6,6,Eigen::RowMajor> b_dX_a = toEigen(a_dX_b_wrench).transpose();
+
+    Matrix6x6 newABI;
+
+    toEigen(newABI) =  toEigen(a_dX_b_wrench)*toEigen(oldABI)*(b_X_a)
+                      +toEigen(a_X_b_wrench)*toEigen(oldABI)*(b_dX_a);
+
+    return ArticulatedBodyInertia(newABI.data(),6,6);
+}
+
+SpatialForceVector TransformDerivative::transform(const Transform& transform,
+                                                  SpatialForceVector& other)
+{
+    SpatialForceVector ret;
+
+    Eigen::Map<const Eigen::Vector3d> p(transform.getPosition().data());
+    Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > R(transform.getRotation().data());
+    Eigen::Map<const Eigen::Vector3d> dp(this->posDerivative.data());
+    Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > dR(this->rotDerivative.data());
+
+    toEigen(ret.getLinearVec3()) = dR*toEigen(other.getLinearVec3());
+    toEigen(ret.getAngularVec3())  =  dR*toEigen(other.getAngularVec3())
+                                    + p.cross(toEigen(ret.getLinearVec3()))
+                                    + dp.cross(R*toEigen(other.getLinearVec3()));
+
+    return ret;
+}
+
+SpatialMotionVector TransformDerivative::transform(const Transform& transform,
+                                                   SpatialMotionVector& other)
+{
+    SpatialMotionVector ret;
+
+    Eigen::Map<const Eigen::Vector3d> p(transform.getPosition().data());
+    Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > R(transform.getRotation().data());
+    Eigen::Map<const Eigen::Vector3d> dp(this->posDerivative.data());
+    Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor> > dR(this->rotDerivative.data());
+
+    toEigen(ret.getAngularVec3()) = dR*toEigen(other.getAngularVec3());
+    toEigen(ret.getLinearVec3())  = dR*toEigen(other.getLinearVec3())
+                                   + p.cross(toEigen(ret.getAngularVec3()))
+                                   + dp.cross(R*toEigen(other.getAngularVec3()));
+
+
+    return ret;
+}
+
+
 
 
 

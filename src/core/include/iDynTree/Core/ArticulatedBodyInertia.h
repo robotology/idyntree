@@ -97,9 +97,14 @@ namespace iDynTree
         SpatialAcc applyInverse(const Wrench & wrench) const;
 
         /**
-         * Get the SpatialInertia as a 6x6 matrix
+         * Get the ArticulatedBodyInertia as a 6x6 matrix
          */
         Matrix6x6 asMatrix() const;
+
+        /**
+         * Get the inverse of the ArticulatedBodyInertia matrix.
+         */
+        Matrix6x6 getInverse() const;
 
         // overloaded operators
         ArticulatedBodyInertia  operator+(const ArticulatedBodyInertia& other) const;
@@ -119,6 +124,13 @@ namespace iDynTree
          * Used in the articulated body algorithm .
          */
         static ArticulatedBodyInertia ABADyadHelper(const SpatialForceVector & U, const double d);
+
+        /**
+         * Build the ArticulatedInertia dU inv_d U^\top + U d_inv_d U^\top + U inv_d dU^\top
+         * Used in the linearization of the articulated body algorithm.
+         */
+        static ArticulatedBodyInertia ABADyadHelperLin(const SpatialForceVector &  U, const double   inv_d,
+                                                       const SpatialForceVector & dU, const double d_inv_d);
 
     };
 }

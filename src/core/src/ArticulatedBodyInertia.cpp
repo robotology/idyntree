@@ -112,6 +112,23 @@ SpatialAcc ArticulatedBodyInertia::applyInverse(const Wrench& wrench) const
     return acc;
 }
 
+Matrix6x6 ArticulatedBodyInertia::getInverse() const
+{
+    Matrix6x6 ret;
+
+    Eigen::Matrix<double,6,6> abi;
+
+    abi.block<3,3>(0,0) = toEigen(linearLinear);
+    abi.block<3,3>(0,3) = toEigen(linearAngular);
+    abi.block<3,3>(3,0) = toEigen(linearAngular).transpose();
+    abi.block<3,3>(3,3) = toEigen(angularAngular);
+
+    toEigen(ret) = abi.inverse();
+
+    return ret;
+}
+
+
 
 Matrix3x3& ArticulatedBodyInertia::getLinearLinearSubmatrix()
 {
@@ -206,17 +223,42 @@ ArticulatedBodyInertia ArticulatedBodyInertia::ABADyadHelper(const SpatialForceV
 {
     ArticulatedBodyInertia ret;
 
-    double dInv = 1.0/d;
+    double inv_d = 1.0/d;
 
-    Eigen::Map<const Eigen::Vector3d> linVec(U.getLinearVec3().data());
-    Eigen::Map<const Eigen::Vector3d> angVec(U.getAngularVec3().data());
+    Eigen::Map<const Eigen::Vector3d> Ulin(U.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> Uang(U.getAngularVec3().data());
 
-    toEigen(ret.getLinearLinearSubmatrix()) = dInv*linVec*linVec.transpose();
-    toEigen(ret.getLinearAngularSubmatrix()) = dInv*linVec*angVec.transpose();
-    toEigen(ret.getAngularAngularSubmatrix()) = dInv*angVec*angVec.transpose();
+    toEigen(ret.getLinearLinearSubmatrix()) = (inv_d*Ulin)*Ulin.transpose();
+    toEigen(ret.getLinearAngularSubmatrix()) = (inv_d*Ulin)*Uang.transpose();
+    toEigen(ret.getAngularAngularSubmatrix()) = (inv_d*Uang)*Uang.transpose();
 
     return ret;
 }
+
+ArticulatedBodyInertia ArticulatedBodyInertia::ABADyadHelperLin(const SpatialForceVector& U, const double inv_d,
+                                                                const SpatialForceVector& dU, const double d_inv_d)
+{
+    ArticulatedBodyInertia ret;
+
+    Eigen::Map<const Eigen::Vector3d> Ulin(U.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> Uang(U.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> dUlin(U.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> dUang(U.getAngularVec3().data());
+
+    toEigen(ret.getLinearLinearSubmatrix()) =   (d_inv_d*Ulin)*Ulin.transpose()
+                                              + (inv_d*dUlin)*Ulin.transpose()
+                                              + (inv_d*Ulin)*dUlin.transpose();
+    toEigen(ret.getLinearAngularSubmatrix()) =  (d_inv_d*Ulin)*Uang.transpose()
+                                              + (inv_d*dUlin)*Uang.transpose()
+                                              + (inv_d*Ulin)*dUang.transpose();
+    toEigen(ret.getAngularAngularSubmatrix()) = (d_inv_d*Uang)*Uang.transpose()
+                                              + (inv_d*dUang)*Uang.transpose()
+                                              + (inv_d*Uang)*dUang.transpose();
+
+    return ret;
+}
+
 
 
 

@@ -47,7 +47,7 @@ void diffArticulatedBodyAlgorithmInternalBuffers(ArticulatedBodyAlgorithmInterna
 
 void checkDifferenceInBuffers(const ForwardDynamicsLinearizationInternalBuffers & bufs,
                               const ForwardDynamicsLinearizationInternalBuffers & numBufs,
-                              bool verbose = false)
+                              bool verbose = true)
 {
     // check the bufs related to derivative wrt to base velocity
     size_t nrOfLinks = bufs.dVb_linkBiasAcceleration.size();
@@ -110,6 +110,47 @@ void checkDifferenceInBuffers(const ForwardDynamicsLinearizationInternalBuffers 
                  std::cerr << "Check difference in buffers for dof " << dof << std::endl;
                  std::cerr << "Norm of diff in u : "
                            << fabs(bufs.dVel[dofDeriv].u(dof)-numBufs.dVel[dofDeriv].u(dof)) << std::endl;
+            }
+        }
+    }
+
+    // check the bufs related to the derivative wrt to joint positions
+    for(size_t dofDeriv = 0; dofDeriv < nrOfDofs; dofDeriv++)
+    {
+        if(true) std::cerr << "~~~~~~~~~ Checking buffers for dofDeriv " << dofDeriv << std::endl;
+        // Check link buffers
+        for(size_t l = 0; l < nrOfLinks; l++ )
+        {
+            if( true  )
+            {
+                std::cerr << "Check difference in buffers for link " << l << std::endl;
+                std::cerr << "Norm of diff in linksVel : "
+                      << (toEigen(bufs.dPos[dofDeriv].linksVel(l))-toEigen(numBufs.dPos[dofDeriv].linksVel(l))).norm() << std::endl;
+                std::cerr << "Norm of diff in linksBiasAcceleration : "
+                      << (toEigen(bufs.dPos[dofDeriv].linksBiasAcceleration(l))-toEigen(numBufs.dPos[dofDeriv].linksBiasAcceleration(l))).norm() << std::endl;
+                std::cerr << "Norm of diff in linksAccelerations : "
+                      << (toEigen(bufs.dPos[dofDeriv].linksAccelerations(l))-toEigen(numBufs.dPos[dofDeriv].linksAccelerations(l))).norm() << std::endl;
+                std::cerr << "Norm of diff in linkBiasWrench : "
+                      << (toEigen(bufs.dPos[dofDeriv].linksBiasWrench(l))-toEigen(numBufs.dPos[dofDeriv].linksBiasWrench(l))).norm() << std::endl;
+                //std::cerr << "Norm of diff in pa : "
+                //      << (toEigen(bufs.dVel[dofDeriv].pa(l))-toEigen(numBufs.dVel[dofDeriv].pa(l))).norm() << std::endl;
+
+            }
+        }
+
+        // Check dof buffers
+        for(size_t dof = 0; dof < nrOfDofs; dof++ )
+        {
+            if( true )
+            {
+                 std::cerr << "Check difference in buffers for dof " << dof << std::endl;
+                 std::cerr << "Norm of diff in u : "
+                           << fabs(bufs.dPos[dofDeriv].u(dof)-numBufs.dPos[dofDeriv].u(dof)) << std::endl;
+                 std::cerr << "Norm of diff in D : "
+                           << fabs(bufs.dPos[dofDeriv].D(dof)-numBufs.dPos[dofDeriv].D(dof)) << std::endl;
+                 std::cerr << " D "
+                            << bufs.aba.D(dof) << std::endl;
+
             }
         }
     }
@@ -261,7 +302,6 @@ bool ForwardDynamicsLinearizationNumerical(const Model& model,
     // Don't doing derivative with respect to the base position for now
 
     // Joint position derivative
-    /*
     for(size_t h = 0; h < model.getNrOfDOFs(); h++)
     {
         // Add perturbation to the h element of joint position
@@ -281,7 +321,7 @@ bool ForwardDynamicsLinearizationNumerical(const Model& model,
         // Restored the old value
         perturbedRobotPos.jointPos()(h) = robotPos.jointPos()(h);
         perturbedRobotPosLower.jointPos()(h) = robotPos.jointPos()(h);
-    }*/
+    }
 
     // Base vel derivative
     for(size_t h = 0; h < 6; h++)
@@ -357,20 +397,20 @@ void checkABAandABALinearizationAreConsistent(const Model & model,
     JointDoubleArray jntTorques(model);
 
     // Fill the input to forward dynamics with random data
-    //robotPos.worldBasePos() = iDynTree::Transform::Identity();
-    robotPos.worldBasePos() = getRandomTransform();
+    robotPos.worldBasePos() = iDynTree::Transform::Identity();
+    //robotPos.worldBasePos() = getRandomTransform();
 
-    robotVel.baseVel() = getRandomTwist();
-    //robotVel.baseVel().zero();
+    //robotVel.baseVel() = getRandomTwist();
+    robotVel.baseVel().zero();
     //robotVel.baseVel()(1) = 4.0;
     //robotVel.baseVel()(4) = 1.0;
 
-    getRandomVector(robotPos.jointPos());
-    //robotPos.jointPos().zero();
+    //getRandomVector(robotPos.jointPos());
+    robotPos.jointPos().zero();
     //robotPos.jointPos()(0) = 3.14;
 
-    getRandomVector(robotVel.jointVel());
-    //robotVel.jointVel().zero();
+    //getRandomVector(robotVel.jointVel());
+    robotVel.jointVel().zero();
 
 
     for(unsigned int link=0; link < model.getNrOfLinks(); link++ )
@@ -401,7 +441,7 @@ void checkABAandABALinearizationAreConsistent(const Model & model,
     Eigen::IOFormat HeavyFmt(4, 0, ", ", ";\n", "[", "]", "[", "]");
 
 
-    /*
+
     std::cerr << " A : " << std::endl;
     std::cerr  << toEigen(A).format(HeavyFmt) << std::endl;
 
@@ -410,7 +450,6 @@ void checkABAandABALinearizationAreConsistent(const Model & model,
 
     std::cerr << "Diff " << std::endl;
     std::cerr << (toEigen(A)-toEigen(Anumerical)).format(HeavyFmt) << std::endl;
-    */
 
     // Check also buffers
     checkDifferenceInBuffers(bufs,bufsNumerical,false);
@@ -441,11 +480,12 @@ int main()
     rotInertia(0,0) = rotInertia(1,1) = rotInertia(2,2) = 1.0;
 
     Position com = Position::Zero();
-    com(0) = 1.0;
+    com(0) = 0.0;
     com(1) = 0.0;
     com(2) = 0.0;
 
-    SpatialInertia singleBodyInertia(1.0,com,rotInertia);
+    SpatialInertia singleBodyInertia;
+    singleBodyInertia.fromRotationalInertiaWrtCenterOfMass(1.0,com,rotInertia);
     Link pointMassLink;
     pointMassLink.setInertia(singleBodyInertia);
     doubleBodyModel.addLink("link1",pointMassLink);
@@ -455,6 +495,9 @@ int main()
 
     IJoint* p_joint = new RevoluteJoint(0,1,
                                 iDynTree::Transform(Rotation::RPY(0,0,0),Position(0.0,0.0,0.0)),axis);
+    //IJoint* p_joint = new FixedJoint(0,1,
+    //                            iDynTree::Transform(Rotation::RPY(0,0,0),Position(0.0,0.0,0.0)));
+
     p_joint->setAttachedLinks(0,1);
 
     doubleBodyModel.addJoint("joint1",p_joint);
@@ -463,6 +506,8 @@ int main()
 
     std::cerr << "Checking DynamicsLinearization test on a point mass model" << std::endl;
     checkABAandABALinearizationAreConsistent(doubleBodyModel);
+
+    return 0;
 
     // Then test random generated chains
     for(unsigned int joints =0; joints < 20; joints++)
