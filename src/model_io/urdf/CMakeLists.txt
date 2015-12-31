@@ -47,9 +47,6 @@ if(IDYNTREE_USES_KDL)
     source_group("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})
     source_group("Private Header Files" FILES ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
-    include_directories(SYSTEM ${urdfdom_headers_INCLUDE_DIRS}
-                            ${urdfdom_INCLUDE_DIRS})
-
     set(libraryname idyntree-modelio-urdf)
 
     add_library(${libraryname} ${IDYNTREE_MODELIO_URDF_SOURCES}
@@ -72,8 +69,10 @@ if(IDYNTREE_USES_KDL)
 
     # make sure that the installed include directories are added after the include
     # directories added with the other targets
-    target_include_directories(${libraryname} SYSTEM PUBLIC  ${orocos_kdl_INCLUDE_DIRS}
-                                                     PRIVATE ${TinyXML_INCLUDE_DIRS})
+    target_include_directories(${libraryname} PUBLIC  ${orocos_kdl_INCLUDE_DIRS}
+                                              PRIVATE ${TinyXML_INCLUDE_DIRS}
+                                                      ${urdfdom_headers_INCLUDE_DIRS}
+                                                      ${urdfdom_INCLUDE_DIRS})
 
     set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
     set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
