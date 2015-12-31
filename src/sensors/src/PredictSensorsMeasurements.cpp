@@ -25,145 +25,66 @@
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 #include <iDynTree/Core/SpatialAcc.h>
-#include <map>
-#include <iDynTree/Core/VectorDynSize.h>
-
-
+#include <iDynTree/Core/EigenHelpers.h>
 
 namespace iDynTree {
-PredictSensorsMeasurements::PredictSensorsMeasurements()
+
+
+bool predictSensorsMeasurements(const Model & model,
+                                const SensorsList &sensorsList,
+                                const Traversal & traversal,
+                                const FreeFloatingPos& robotPos,
+                                const FreeFloatingVel& robotVel,
+                                const FreeFloatingAcc& robotAcc,
+                                const LinAcceleration & gravity,
+                                      FreeFloatingAcc& buf_properRobotAcc,
+                                      LinkPositions& buf_linkPos,
+                                      LinkVelArray& buf_linkVel,
+                                      LinkAccArray& buf_linkProperAcc,
+                                      SensorsMeasurements &predictedMeasurement)
 {
-// All local variables, so nothing to do really.
-}
-PredictSensorsMeasurements::~PredictSensorsMeasurements()
-{
-// All local variables, so nothing to do really.
-}
- 
-bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,iDynTree::LinkPositions& linkPos,iDynTree::LinkVelArray& linkVel,iDynTree::LinkAccArray& linkAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::SensorsMeasurements &predictedMeasurement)
-{
-    
+
     bool returnVal = true;
-    
-    iDynTree::AngAcceleration nullAngAccl;
+
+    AngAcceleration nullAngAccl;
     nullAngAccl.zero();
-    iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
-    
-    robotAcc.baseAcc() = robotAcc.baseAcc() - gravityAccl;
-    
+    SpatialAcc gravityAccl(gravity,nullAngAccl);
+
+    buf_properRobotAcc.baseAcc() = robotAcc.baseAcc() - gravityAccl;
+
+    toEigen(buf_properRobotAcc.jointAcc()) = toEigen(robotAcc.jointAcc());
+
     // calling ForwardPosVelAccKinematics with arguments
-    ForwardPosVelAccKinematics(model,traversal,robotPos,robotVel,robotAcc,linkPos,linkVel,linkAcc);
-    
-    // looping though SensorList    
-    unsigned int numAccl = sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER);
-    unsigned int numGyro = sensorsList.getNrOfSensors(iDynTree::GYROSCOPE);
-    int idx;
-    
-    Accelerometer * accelerometer;
-    Gyroscope * gyroscope;
-    int parentLinkId;
-    iDynTree::LinAcceleration predictedAcc(0,0,0);
-    iDynTree::AngVelocity predictedAngVel(0,0,0);
-    
-    //Iterate through each kind of accelrometer and find its parent. Compute local (classical accelration) 
+    ForwardPosVelAccKinematics(model,traversal,robotPos,robotVel,
+                               buf_properRobotAcc,buf_linkPos,buf_linkVel,buf_linkProperAcc);
+
+    // looping though SensorList
+
+    //Iterate through each accelrometer and find its parent. Compute local (classical accelration)
     // It is automatically proper acceleration since gravity is incorporated into the base acceleration
-    for(idx = 0; idx<numAccl; idx++)
+    unsigned int numAccl = sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER);
+    for(size_t idx = 0; idx<numAccl; idx++)
     {
-        accelerometer = (Accelerometer *)sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
-        parentLinkId = accelerometer->getParentIndex();
-        predictedAcc = accelerometer->predictMeasurement(linkAcc(parentLinkId),linkVel(parentLinkId));
+        Accelerometer * accelerometer = (Accelerometer *)sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
+        LinkIndex parentLinkId = accelerometer->getParentIndex();
+        LinAcceleration predictedAcc = accelerometer->predictMeasurement(buf_linkProperAcc(parentLinkId),
+                                                                         buf_linkVel(parentLinkId));
         predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,predictedAcc);
     }
-    for(idx = 0; idx<numGyro; idx++)
-    {
-        
-        gyroscope = (Gyroscope*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
-        parentLinkId = accelerometer->getParentIndex();
-        predictedAngVel = gyroscope->predictMeasurement(linkVel(parentLinkId));
-        predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);   
-    }
-    return(returnVal);
-}
 
-bool PredictSensorsMeasurements::makePrediction(const Model& model,const Traversal& traversal,const iDynTree::FreeFloatingPos& robotPos,const iDynTree::FreeFloatingVel& robotVel,iDynTree::FreeFloatingAcc& robotAcc,iDynTree::LinkPositions& linkPos,iDynTree::LinkVelArray& linkVel,iDynTree::LinkAccArray& linkAcc,const LinAcceleration& gravity,const iDynTree::SensorsList &sensorsList,iDynTree::VectorDynSize &predictedMeasurement)
-{
-    bool returnVal = true;
-    // incorporating gravity into the base LinAcceleration
- 
-    iDynTree::AngAcceleration nullAngAccl;
-    iDynTree::SpatialAcc gravityAccl(gravity,nullAngAccl);
-    
-    robotAcc.baseAcc() = robotAcc.baseAcc() - gravityAccl;
-    
-    // calling ForwardPosVelAccKinematics with arguments
-    ForwardPosVelAccKinematics(model,traversal,robotPos,robotVel,robotAcc,linkPos,linkVel,linkAcc);
-    
-    // looping though SensorList    
-    unsigned int numAccl = sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER);
     unsigned int numGyro = sensorsList.getNrOfSensors(iDynTree::GYROSCOPE);
-    int idx;
-    
-    //Iterate through each kind of accelrometer and find its parent. Compute local (classical accelration) 
-    // It is automatically proper acceleration since gravity is incorporated into the base acceleration
-
-    
-    std::map<unsigned int,Sensor*> acceleroMap;
-    std::map<unsigned int,Sensor*> gyroMap;
-    Sensor * sensor;
-    for(idx = 0; idx<numAccl; idx++)
+    for(size_t idx = 0; idx<numGyro; idx++)
     {
-        sensor = sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
-        acceleroMap[sensor->getParentIndex()] = sensor;
+        Gyroscope * gyroscope = (Gyroscope*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
+        LinkIndex parentLinkId = gyroscope->getParentIndex();
+        AngVelocity predictedAngVel = gyroscope->predictMeasurement(buf_linkVel(parentLinkId));
+        predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);
     }
-    for(idx = 0; idx<numGyro; idx++)
-    {
-        sensor = sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
-        gyroMap[sensor->getParentIndex()] = sensor;
-    }
-    
-    unsigned int vecSize = (acceleroMap.size()+ gyroMap.size()) * 3;
-    unsigned int vecItr = 0;
-    int parentLinkId;
-    predictedMeasurement.resize(vecSize);
-    LinAcceleration predictedAcc(0,0,0);
-    AngVelocity predictedAngVel(0,0,0);
-    for(int i =0; i<model.getNrOfLinks();i++)
-    {
-        // following the convention of BERDY, we iterate through the links from 
-        // root to leaves and fill in the sensor info in each (accelero first and 
-        // gyro second.
-        
-        if(acceleroMap[i] != NULL)
-        {
-        
-            Accelerometer *accelerometer = (Accelerometer*)acceleroMap[i];
-            parentLinkId = accelerometer->getParentIndex();
-            predictedAcc = accelerometer->predictMeasurement(linkAcc(i),linkVel(i));
 
-
-            parentLinkId = accelerometer->getParentIndex();
-            predictedAcc = accelerometer->predictMeasurement(linkAcc(i),linkVel(i));
-//         
-            predictedMeasurement.setVal(vecItr++,predictedAcc.getVal(0));
-            predictedMeasurement.setVal(vecItr++,predictedAcc.getVal(1));
-            predictedMeasurement.setVal(vecItr++,predictedAcc.getVal(2));
-        }
-        if(gyroMap[i] != NULL)
-        {
-
-            Gyroscope *gyroscope = (Gyroscope*)gyroMap[i];
-            parentLinkId = gyroscope->getParentIndex();
-            predictedAngVel = gyroscope->predictMeasurement(linkVel(i));
-            predictedMeasurement.setVal(vecItr++,predictedAngVel.getVal(0));
-            predictedMeasurement.setVal(vecItr++,predictedAngVel.getVal(1));
-            predictedMeasurement.setVal(vecItr++,predictedAngVel.getVal(2));
-        }
-    }
-    return(returnVal);
-
+    return returnVal;
 }
 
-    
-    
+
+
 
 }

@@ -18,8 +18,9 @@
 #ifndef PREDICTSENSORSMEASUREMENTS_HPP
 #define PREDICTSENSORSMEASUREMENTS_HPP
 
-namespace iDynTree{
-    
+namespace iDynTree
+{
+
     class SensorsList;
     class Traversal;
     class Model;
@@ -35,62 +36,51 @@ namespace iDynTree{
     class LinkVelArray;
     class LinkAccArray;
 
+
     /**
-     * PredictSensorsMeasurements class.
+     * \brief Predict the measurement of a set of sensors.
      *
-     * A computation of predicted measurements given some state
+     * Given a SensorList object describing a list of sensor of a
+     * model fill the output argument predictedMeasurement
+     * with the predicted measurement of the sensors consistent with the state
+     * and the acceleration/torques and forces of the Model.
+     *
+     * At the moment, only Accelerometers and Gyroscopes sensors are
+     * handled by this function.
+     *
+     * This function takes in input the internal buffers used for the
+     * computation to avoid dynamic memory allocation.
      *
      * \ingroup iDynTreeSensors
      *
+     * @param[in] model the model used to predict the sensor measurements.
+     * @param[in] sensorList the sensors list used to predict the sensors measurements.
+     * @param[in] traversal the Traversal used for predict the sensor measurements.
+     * @param[in] robotpos the position of the model used for prediction.
+     * @param[in] robotvel the velocity of the model used for prediction.
+     * @param[in] robotacc the acceleration of the model used for prediction.
+     * @param[in] gravity the gravity acceleration (in world frame) used for prediction.
+     * @param[out] buf_properRobotAcc internal buffer, storing the proper acceleration of the model.
+     * @param[out] buf_linkPos internal buffer, storing the position of every link in the model.
+     * @param[out] buf_linkVel internal buffer, storing the velocity of every link in the model.
+     * @param[out] buf_linkProperAcc internal buffer, storing the proper acceleration of every link in the model.
+     * @param[out] predictedMeasurement the predicted measurements for the sensors.
+     *
+     * @return true if the sensors in the list are all valid
      */
-    class PredictSensorsMeasurements {
-    
-        
-    public : 
-      /**
-       * Constructor.
-      */
-      PredictSensorsMeasurements();
+     bool predictSensorsMeasurements(const iDynTree::Model & model,
+                                     const iDynTree::SensorsList &sensorsList,
+                                     const iDynTree::Traversal & traversal,
+                                     const iDynTree::FreeFloatingPos& robotPos,
+                                     const iDynTree::FreeFloatingVel& robotVel,
+                                     const iDynTree::FreeFloatingAcc& robotAcc,
+                                     const iDynTree::LinAcceleration & gravity,
+                                           iDynTree::FreeFloatingAcc& buf_properRobotAcc,
+                                           iDynTree::LinkPositions& buf_linkPos,
+                                           iDynTree::LinkVelArray& buf_linkVel,
+                                           iDynTree::LinkAccArray& buf_linkProperAcc,
+                                           iDynTree::SensorsMeasurements &predictedMeasurement);
 
-      /**
-       * Set predicted measurements into a reference to a SensorsMeasurements object
-       * First version makes only Accelerometer and Gyroscop predictions
-       * @return true if the sensors in the list are all valid
-       */
-       bool makePrediction(const iDynTree::Model & model,
-                           const iDynTree::Traversal & traversal,
-                           const iDynTree::FreeFloatingPos& robotPos,
-                           const iDynTree::FreeFloatingVel& robotVel,
-                                 iDynTree::FreeFloatingAcc& robotAcc,
-                                 iDynTree::LinkPositions& linkPos,
-                                 iDynTree::LinkVelArray& linkVel,
-                                 iDynTree::LinkAccArray& linkAcc,
-                           const iDynTree::LinAcceleration & gravity,
-                           const iDynTree::SensorsList &sensorsList,
-                           iDynTree::SensorsMeasurements &predictedMeasurement);
-      /**
-       * Set predicted measurements into a reference to a VectorDynSize object reference
-       * First version makes only Accelerometer and Gyroscope predictions
-       * Ordering of the elements is in the manner mentioned in Nori, Kuppuswamy and Traversaro (2015)
-       * @return true if the sensors in the list are all valid
-       */
-      bool makePrediction(const iDynTree::Model & model,
-                           const iDynTree::Traversal & traversal,
-                           const iDynTree::FreeFloatingPos & robotPos,
-                           const iDynTree::FreeFloatingVel & robotVel,
-                                 iDynTree::FreeFloatingAcc & robotAcc,
-                                 iDynTree::LinkPositions& linkPos,
-                                 iDynTree::LinkVelArray& linkVel,
-                                 iDynTree::LinkAccArray& linkAcc,
-                           const iDynTree::LinAcceleration & gravity,
-                           const iDynTree::SensorsList &sensorsList,
-                           iDynTree::VectorDynSize &predictedMeasurement);
-        ~PredictSensorsMeasurements();
-        
-    private :
-        
-
-    };
 }
 
-#endif 
+#endif
