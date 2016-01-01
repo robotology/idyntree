@@ -35,6 +35,7 @@
 
 
 #include <iostream>
+#include <boost/concept_check.hpp>
 
 namespace iDynTree {
 
@@ -284,6 +285,39 @@ bool SensorsMeasurements::resize(const SensorsList &sensorsList)
     
     return true;
 }
+
+bool SensorsMeasurements::toVector(std::vector<double> & measurementVector) const
+{
+    measurementVector.resize(0);
+    unsigned int itr;
+    LinAcceleration thisLinAcc;
+    AngVelocity thisAngVel;
+    Wrench thisWrench;
+    for(itr = 0; itr<this->pimpl->AccelerometerMeasurements.size(); itr++)
+    {
+        thisLinAcc =  this->pimpl->AccelerometerMeasurements.at(itr);
+        measurementVector.push_back(thisLinAcc.getVal(0));
+        measurementVector.push_back(thisLinAcc.getVal(1));
+        measurementVector.push_back(thisLinAcc.getVal(2));
+    }
+    for(itr = 0; itr<this->pimpl->GyroscopeMeasurements.size(); itr++)
+    {
+        thisAngVel = this->pimpl->GyroscopeMeasurements.at(itr);
+        measurementVector.push_back(thisAngVel.getVal(0));
+        measurementVector.push_back(thisAngVel.getVal(1));
+        measurementVector.push_back(thisAngVel.getVal(2));
+    }
+    for(itr = 0; itr<this->pimpl->SixAxisFTSensorsMeasurements.size(); itr++)
+    {
+        thisWrench = this->pimpl->SixAxisFTSensorsMeasurements.at(itr);
+        measurementVector.push_back(thisWrench.getVal(0));
+        measurementVector.push_back(thisWrench.getVal(1));
+        measurementVector.push_back(thisWrench.getVal(2));
+    }
+    
+    return(true);
+}
+
 
 bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type, 
                                          const unsigned int& sensor_index, 

@@ -91,6 +91,7 @@ void runTest(const int& expID,const Model& model,const Traversal& traversal,
                 robotAcc.jointAcc()(0) = acclTestVal;
                 break;
     }
+    
     predictSensorsMeasurements(model,sensorsList,
                                traversal,robotPos,robotVel,robotAcc,gravity,
                                buf_properRobotAcc,buf_linkPos,buf_linkVel,buf_linkAcc,
