@@ -35,7 +35,6 @@
 
 
 #include <iostream>
-#include <boost/concept_check.hpp>
 
 namespace iDynTree {
 
