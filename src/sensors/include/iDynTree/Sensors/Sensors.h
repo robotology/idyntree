@@ -30,7 +30,7 @@ namespace iDynTree {
 }
 
 #include <string>
-#include <vector>
+#include <iDynTree/Core/VectorDynSize.h>
 
 namespace iDynTree {
 
@@ -269,7 +269,7 @@ namespace iDynTree {
              * Returns a double vector of all the sensors measurements
              * @return true if all went right, false otherwise
              */
-            bool toVector(std::vector<double> & measurementVector) const;
+            bool toVector(VectorDynSize & measurementVector) const;
             
             /**
              * Set the measurement for the specified sensor

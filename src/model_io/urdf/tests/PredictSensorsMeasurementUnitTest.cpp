@@ -100,10 +100,14 @@ void runTest(const int& expID,const Model& model,const Traversal& traversal,
     predictedMeasurement.getMeasurement(ACCELEROMETER,0,accl1);
     predictedMeasurement.getMeasurement(ACCELEROMETER,1,accl2);
     predictedMeasurement.getMeasurement(GYROSCOPE,0,gyro1);
+    
+    VectorDynSize measurementVect;
+    bool ok = predictedMeasurement.toVector(measurementVect);
     std::cout<<"Predicted Measurement (accl1): " <<accl1.toString()<<"\n";
     std::cout<<"Predicted Measurement (accl2): " <<accl2.toString()<<"\n";
     std::cout<<"Predicted Measurement (gyro1): " <<gyro1.toString()<<"\n";
-
+    std::cout<<"Predicted Measurement vectorised : "<<measurementVect.toString()<<"\n";
+    ASSERT_EQUAL_DOUBLE(ok,true);
     //checking obtained results
     switch(expID)
     {

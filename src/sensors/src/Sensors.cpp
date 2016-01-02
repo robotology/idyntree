@@ -31,6 +31,8 @@
 #include <iDynTree/Sensors/Accelerometer.h>
 #include <iDynTree/Sensors/Gyroscope.h>
 
+#include <iDynTree/Core/VectorDynSize.h>
+
 
 
 
@@ -285,36 +287,47 @@ bool SensorsMeasurements::resize(const SensorsList &sensorsList)
     return true;
 }
 
-bool SensorsMeasurements::toVector(std::vector<double> & measurementVector) const
+bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
 {
-    measurementVector.resize(0);
     unsigned int itr;
     LinAcceleration thisLinAcc;
     AngVelocity thisAngVel;
     Wrench thisWrench;
-    for(itr = 0; itr<this->pimpl->AccelerometerMeasurements.size(); itr++)
-    {
-        thisLinAcc =  this->pimpl->AccelerometerMeasurements.at(itr);
-        measurementVector.push_back(thisLinAcc.getVal(0));
-        measurementVector.push_back(thisLinAcc.getVal(1));
-        measurementVector.push_back(thisLinAcc.getVal(2));
-    }
-    for(itr = 0; itr<this->pimpl->GyroscopeMeasurements.size(); itr++)
-    {
-        thisAngVel = this->pimpl->GyroscopeMeasurements.at(itr);
-        measurementVector.push_back(thisAngVel.getVal(0));
-        measurementVector.push_back(thisAngVel.getVal(1));
-        measurementVector.push_back(thisAngVel.getVal(2));
-    }
-    for(itr = 0; itr<this->pimpl->SixAxisFTSensorsMeasurements.size(); itr++)
+    unsigned int numFT = this->pimpl->SixAxisFTSensorsMeasurements.size();
+    unsigned int numAcc = this->pimpl->AccelerometerMeasurements.size();
+    unsigned int numGyro = this->pimpl->GyroscopeMeasurements.size();
+    bool ok = true;
+    
+    measurementVector.resize(6*numFT + 3*numAcc + 3*numGyro);
+    
+    for(itr = 0; itr<numFT; itr++)
     {
         thisWrench = this->pimpl->SixAxisFTSensorsMeasurements.at(itr);
-        measurementVector.push_back(thisWrench.getVal(0));
-        measurementVector.push_back(thisWrench.getVal(1));
-        measurementVector.push_back(thisWrench.getVal(2));
+        
+        ok && measurementVector.setVal(6*itr, thisWrench.getVal(0));
+        ok && measurementVector.setVal(6*itr+1,thisWrench.getVal(1));
+        ok && measurementVector.setVal(6*itr+2,thisWrench.getVal(2));
+        ok && measurementVector.setVal(6*itr+3,thisWrench.getVal(3));
+        ok && measurementVector.setVal(6*itr+4,thisWrench.getVal(4));
+        ok && measurementVector.setVal(6*itr+5,thisWrench.getVal(5));
     }
+    for(itr = 0; itr<numAcc; itr++)
+    {
+        thisLinAcc =  this->pimpl->AccelerometerMeasurements.at(itr);
+        ok && measurementVector.setVal(6*numFT + 3*itr,thisLinAcc.getVal(0));
+        ok && measurementVector.setVal(6*numFT + 3*itr+1,thisLinAcc.getVal(1));
+        ok && measurementVector.setVal(6*numFT + 3*itr+2,thisLinAcc.getVal(2));
+    }
+    for(itr = 0; itr<numGyro; itr++)
+    {
+        thisAngVel = this->pimpl->GyroscopeMeasurements.at(itr);
+        ok && measurementVector.setVal(6*numFT + 3*numAcc + 3*itr,thisAngVel.getVal(0));
+        ok && measurementVector.setVal(6*numFT + 3*numAcc + 3*itr+1,thisAngVel.getVal(1));
+        ok && measurementVector.setVal(6*numFT + 3*numAcc + 3*itr+2,thisAngVel.getVal(2));
+    }
+
     
-    return(true);
+    return(ok);
 }
 
 
