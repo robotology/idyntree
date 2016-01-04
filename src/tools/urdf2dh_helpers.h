@@ -126,14 +126,14 @@ bool checkChainsAreEqual(KDL::Chain kdl_random_chain, iCub::iKin::iKinLimb & iki
   KDL::JntArray q_kdl(kdl_random_chain.getNrOfJoints());
   yarp::sig::Vector q_yarp(ikin_random_chain.getDOF());
 
-  for(int i=0; i < q_yarp.size(); i++ ) { q_kdl(i) = q_yarp(i) =  M_PI; /*0.0*random_double(2*M_PI);*/ }
+  for(size_t i=0; i < q_yarp.size(); i++ ) { q_kdl(i) = q_yarp(i) =  M_PI; /*0.0*random_double(2*M_PI);*/ }
 
   //Get H_ef_base for iKinChain
   ikin_random_chain.setAllConstraints(false);
   yarp::sig::Vector q_yarp_constrained = ikin_random_chain.setAng(q_yarp);
   yarp::sig::Matrix H_yarp = ikin_random_chain.getH();
 
-  for(int i=0; i < q_yarp.size(); i++ ) { q_kdl(i) = q_yarp_constrained(i); }
+  for(size_t i=0; i < q_yarp.size(); i++ ) { q_kdl(i) = q_yarp_constrained(i); }
 
   //Get H_ef_base for KDL::Chain
   KDL::Frame H_kdl;

@@ -283,7 +283,7 @@ std::string Model::getFrameName(const FrameIndex frameIndex) const
     {
         return linkNames[frameIndex];
     }
-    else if( frameIndex >= this->getNrOfLinks() && frameIndex < (FrameIndex)this->getNrOfFrames() )
+    else if( frameIndex >= (FrameIndex)this->getNrOfLinks() && frameIndex < (FrameIndex)this->getNrOfFrames() )
     {
         return frameNames[frameIndex-getNrOfLinks()];
     }
@@ -295,7 +295,7 @@ std::string Model::getFrameName(const FrameIndex frameIndex) const
 
 FrameIndex Model::getFrameIndex(const std::string& frameName) const
 {
-    for(int i=0; i < this->getNrOfLinks(); i++ )
+    for(size_t i=0; i < this->getNrOfLinks(); i++ )
     {
         if( frameName == linkNames[i] )
         {
@@ -303,7 +303,7 @@ FrameIndex Model::getFrameIndex(const std::string& frameName) const
         }
     }
 
-    for(int i=this->getNrOfLinks(); i < this->getNrOfFrames(); i++ )
+    for(size_t i=this->getNrOfLinks(); i < this->getNrOfFrames(); i++ )
     {
         if( frameName == this->frameNames[i-getNrOfLinks()] )
         {
@@ -354,8 +354,8 @@ Transform Model::getFrameTransform(const FrameIndex frameIndex) const
 {
     // The link_H_frame transform for the link
     // main frame is the identity
-    if( frameIndex < this->getNrOfLinks() ||
-        frameIndex >= this->getNrOfFrames() )
+    if( frameIndex < (FrameIndex) this->getNrOfLinks() ||
+        frameIndex >= (FrameIndex) this->getNrOfFrames() )
     {
         return Transform::Identity();
     }
@@ -371,13 +371,13 @@ LinkIndex Model::getFrameLink(const FrameIndex frameIndex) const
     // The link_H_frame transform for the link
     // main frame is the link it self
     if( frameIndex >= 0 &&
-        frameIndex < this->getNrOfLinks() )
+        frameIndex < (FrameIndex) this->getNrOfLinks() )
     {
         return (LinkIndex)frameIndex;
     }
 
-    if( frameIndex >= this->getNrOfLinks() &&
-        frameIndex < this->getNrOfFrames() )
+    if( frameIndex >= (FrameIndex) this->getNrOfLinks() &&
+        frameIndex < (FrameIndex) this->getNrOfFrames() )
     {
         // For an additonal frame the link index is instead stored
         // in the additionalFramesLinks vector
@@ -408,7 +408,7 @@ Neighbor Model::getNeighbor(const LinkIndex link, unsigned int neighborIndex) co
 
 bool Model::setDefaultBaseLink(const LinkIndex linkIndex)
 {
-    if( linkIndex < 0 || linkIndex >= this->getNrOfLinks() )
+    if( linkIndex < 0 || linkIndex >= (LinkIndex) this->getNrOfLinks() )
     {
         return false;
     }
@@ -469,7 +469,7 @@ void addLinkToTraversal(const Model & model, Traversal & traversal, int & traver
 
 bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase) const
 {
-    if( traversalBase < 0 || traversalBase >= this->getNrOfLinks() )
+    if( traversalBase < 0 || traversalBase >= (LinkIndex)this->getNrOfLinks() )
     {
         reportError("Model","computeFullTreeTraversal","requested traversalBase is out of bounds");
         return false;
@@ -488,7 +488,6 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
     addBaseLinkToTraversal(*this,traversal,traversalFirstEmptySlot,traversalBase,linkToVisit);
 
     // while there is some link still to visit
-    unsigned int visitNumber=0;
     while( linkToVisit.size() > 0 )
     {
         assert(linkToVisit.size() <= this->getNrOfLinks());

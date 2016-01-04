@@ -26,11 +26,17 @@ classdef SensorsMeasurements < SwigRef
     function varargout = getNrOfSensors(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(759, self, varargin{:});
     end
-    function varargout = setMeasurement(self,varargin)
+    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(760, self, varargin{:});
     end
-    function varargout = getMeasurement(self,varargin)
+    function varargout = toVector(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(761, self, varargin{:});
+    end
+    function varargout = setMeasurement(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(762, self, varargin{:});
+    end
+    function varargout = getMeasurement(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(763, self, varargin{:});
     end
   end
   methods(Static)

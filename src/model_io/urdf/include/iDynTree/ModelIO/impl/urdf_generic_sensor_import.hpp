@@ -39,12 +39,12 @@
 
 #include <string>
 #include <vector>
-
+#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Core/Transform.h>
 #include <kdl/frames.hpp>
 
 #include <kdl_codyco/undirectedtree.hpp>
-#include <iDynTree/Sensors/Sensors.hpp>
-#include <iDynTree/Core/Transform.h>
+
 
 
 class TiXmlDocument;
@@ -53,7 +53,7 @@ namespace iDynTree
 {
 
    class Transform;
-   enum SensorType;
+
    
    struct GenericSensorData
    {

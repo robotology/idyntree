@@ -21,7 +21,9 @@ FreeFloatingPos::FreeFloatingPos(const Model& model)
 
 void FreeFloatingPos::resize(const Model& model)
 {
+    this->m_worldBasePos = Transform::Identity();
     this->m_jointPos.resize(model.getNrOfPosCoords());
+    this->m_jointPos.zero();
 }
 
 
@@ -88,7 +90,9 @@ const IRawVector& FreeFloatingVel::jointVel() const
 
 void FreeFloatingVel::resize(const Model& model)
 {
+    this->m_baseVel.zero();
     this->m_jointVel.resize(model.getNrOfDOFs());
+    this->m_jointVel.zero();
 }
 
 FreeFloatingVel::~FreeFloatingVel()
@@ -128,7 +132,9 @@ const IRawVector& FreeFloatingAcc::jointAcc() const
 
 void FreeFloatingAcc::resize(const Model& model)
 {
+    this->m_baseAcc.zero();
     this->m_jointAcc.resize(model.getNrOfDOFs());
+    this->m_jointAcc.zero();
 }
 
 FreeFloatingAcc::~FreeFloatingAcc()

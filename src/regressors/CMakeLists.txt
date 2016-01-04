@@ -31,8 +31,7 @@ add_library(${libraryname} ${IDYNTREE_REGRESSORS_SOURCES}     ${IDYNTREE_REGRESS
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                       "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
-target_include_directories(${libraryname} PUBLIC ${orocos_kdl_INCLUDE_DIRS}
-                                                 ${EIGEN3_INCLUDE_DIR})
+include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
 
 target_link_libraries(${libraryname} idyntree-core idyntree-sensors idyntree-modelio-urdf ${orocos_kdl_LIBRARIES} ${TinyXML_LIBRARIES} )
 

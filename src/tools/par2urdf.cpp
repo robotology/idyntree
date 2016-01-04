@@ -34,13 +34,17 @@
 
 /* Author: Silvio Traversaro */
 
-#include <cstdlib>
 
 #include <iDynTree/ModelIO/symoro_par_model.hpp>
 #include <iDynTree/ModelIO/symoro_par_import.hpp>
 
 #include <iDynTree/ModelIO/impl/urdf_export.hpp>
 #include <kdl/tree.hpp>
+
+#include <iostream>
+
+#include <cstdlib>
+
 
 using namespace KDL;
 using namespace std;

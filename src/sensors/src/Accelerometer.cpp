@@ -17,11 +17,13 @@
 
 
 # include "iDynTree/Core/LinearMotionVector3.h"
-// #include "iDynTree/Sensors/IMeasurement.hpp"
 
-#include "iDynTree/Sensors/Accelerometer.hpp"
+#include "iDynTree/Sensors/Accelerometer.h"
 
 #include "iDynTree/Core/Transform.h"
+
+#include "iDynTree/Core/SpatialAcc.h"
+#include "iDynTree/Core/Twist.h"
 
 namespace iDynTree {
 
@@ -139,6 +141,24 @@ SensorType Accelerometer::getSensorType() const
 {
     return ACCELEROMETER;
 }
+
+Transform Accelerometer::getLinkSensorTransform(void)
+{
+    return(this->pimpl->link_H_sensor);
+}
+
+LinAcceleration Accelerometer::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& linkTwist)
+{
+    LinAcceleration returnAcc(0,0,0);
+    if( this->pimpl->parent_link_index >= 0)
+    {
+        iDynTree::Twist localVelocity = this->pimpl->link_H_sensor * linkTwist;
+        returnAcc = ((this->pimpl->link_H_sensor* linkAcc).getLinearVec3() + (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3()));
+    }
+    
+    return(returnAcc);
+}
+
 
 /*
  * To be implmented in future based on interface and requirements

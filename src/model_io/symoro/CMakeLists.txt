@@ -27,10 +27,11 @@ set(libraryname idyntree-modelio-symoro)
 add_library(${libraryname} ${IDYNTREE_MODELIO_SYMORO_SOURCES} ${IDYNTREE_MODELIO_SYMORO_HEADERS})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                 ${orocos_kdl_INCLUDE_DIRS})
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 target_link_libraries(${libraryname} idyntree-kdl expression-parser ${orocos_kdl_LIBRARIES})
+
+include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_SYMORO_HEADERS})
 

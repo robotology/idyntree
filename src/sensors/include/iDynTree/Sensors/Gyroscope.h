@@ -26,7 +26,7 @@ namespace iDynTree
     typedef AngularMotionVector3 AngVelocity;
 }
 
-#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/Sensors.h>
 #include <vector>
 
 namespace iDynTree {
@@ -126,11 +126,17 @@ namespace iDynTree {
         /**
          * Get the transform from the sensor to the parent link.
          *
-         * @return true if link_index is attached to the FT sensor, false otherwise.
+         * @return Transform associated with the link frame and the sensor
          */
-        bool getLinkSensorTransform(iDynTree::Transform & link_H_sensor) const;
+        Transform getLinkSensorTransform(void);
 
-
+        /**
+         * Predict sensor measurement when given the parent link spatial velocity
+         *
+         * @return the predicted Measurement of an iDynTree::AngVelocity
+         */
+        iDynTree::AngVelocity predictMeasurement(const iDynTree::Twist& linkVel);
+        
         /**
          * The following method is to be implemented in the future after considering the interface
          * 

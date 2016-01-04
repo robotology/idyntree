@@ -62,16 +62,16 @@ private:
     static std::string vector2string(const std::vector<double> & vec)
     {
         std::stringstream ss;
-        for(int l=0; l < vec.size(); l++ ) { ss << " " << vec[l]; }
+        for(size_t l=0; l < vec.size(); l++ ) { ss << " " << vec[l]; }
         return ss.str();
     }
 
 public:
     std::string name;
 
-    int NF;
-    int NL;
-    int NJ;
+    size_t NF;
+    size_t NL;
+    size_t NJ;
     int Type;
 
     std::vector<int> Ant;
@@ -111,7 +111,7 @@ public:
             if( NL != NJ || NL != NF ) return false;
             if( NL != Ant.size() || NL != Sigma.size() || NL != Mu.size() || NL != B.size() ||
                 NL != d.size()   || NL != R.size()     || NL != gamma.size() || NL != Alpha.size() || NL != Theta.size() ) return false;
-            for(int j=0; j < NL; j++ ) { if( B[j] != 0 || gamma[j] != 0 ) { return false; } }
+            for(size_t j=0; j < NL; j++ ) { if( B[j] != 0 || gamma[j] != 0 ) { return false; } }
         } else if ( Type == 1 ) {
             if( NL != NJ || NL != NF ) return false;
             if( NL != Ant.size() || NL != Sigma.size() || NL != Mu.size() || NL != B.size() ||

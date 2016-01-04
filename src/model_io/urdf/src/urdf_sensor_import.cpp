@@ -41,8 +41,8 @@
 
 #include <kdl_codyco/KDLConversions.h>
 
-#include <iDynTree/Sensors/Sensors.hpp>
-#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
+#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors/SixAxisFTSensor.h>
 
 
 #include <fstream>
@@ -203,7 +203,7 @@ iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & un
         std::cerr << "Error in loading ft sensors information from URDF file" << std::endl;
     }
 
-    for(int ft_sens = 0; ft_sens < ft_sensors.size(); ft_sens++ )
+    for(size_t ft_sens = 0; ft_sens < ft_sensors.size(); ft_sens++ )
     {
         iDynTree::SixAxisForceTorqueSensor new_sens;
 

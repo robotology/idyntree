@@ -43,14 +43,14 @@
 #include <kdl/frames.hpp>
 
 #include <kdl_codyco/undirectedtree.hpp>
-#include <iDynTree/Sensors/Sensors.hpp>
 
 
 class TiXmlDocument;
 
 namespace iDynTree
 {
-
+class SensorsList;
+    
 struct FTSensorData
 {
     std::string reference_joint;
