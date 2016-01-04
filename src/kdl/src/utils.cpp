@@ -139,7 +139,7 @@ namespace CoDyCo {
         std::string data_buffer;
 
         if( nr_of_string_to_read > 0 ) {
-            if( strings.size() != nr_of_string_to_read ) { strings.resize(nr_of_string_to_read); }
+            if( (int)strings.size() != nr_of_string_to_read ) { strings.resize(nr_of_string_to_read); }
 
             for(int i=0; i < nr_of_string_to_read; i++ ) {
                 getline(links_file,data_buffer);

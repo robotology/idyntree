@@ -701,7 +701,7 @@ class DynTree  {
         *
         * \note This function returns the classical/conventional linear acceleration, not the spatial one
         */
-        IDYN_DEPRECATED virtual yarp::sig::Vector getAcc(const int link_index, const bool local=false) const;
+        virtual yarp::sig::Vector getAcc(const int link_index, const bool local=false) const;
 
         /**
          * Get the base link force torque, calculated with the dynamic recursive newton euler loop

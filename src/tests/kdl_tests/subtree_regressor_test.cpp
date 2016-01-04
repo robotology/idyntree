@@ -38,7 +38,7 @@ iDynTree::SensorsList generateSensorsTree(const KDL::CoDyCo::UndirectedTree & un
                                 const std::vector<bool> & is_measure_direction_child_to_parent)
 {
     iDynTree::SensorsList sensors_tree;
-    for(int i=0; i < ft_names.size(); i++ )
+    for(size_t i=0; i < ft_names.size(); i++ )
     {
         //Creating a new ft sensor to be added in the ft sensors structure
         iDynTree::SixAxisForceTorqueSensor new_sens;

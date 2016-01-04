@@ -76,11 +76,11 @@ int main(int argc, char** argv)
   std::vector<int> success_as_base_frame(undirected_tree.getNrOfLinks(),0);
   std::vector<int> success_as_ee_frame(undirected_tree.getNrOfLinks(),0);
 
-  for(int base_frame_index = 0;
+  for(size_t base_frame_index = 0;
       base_frame_index < undirected_tree.getNrOfLinks();
       base_frame_index++ )
   {
-      for(int end_effector_frame_index = 0;
+      for(size_t end_effector_frame_index = 0;
           end_effector_frame_index < undirected_tree.getNrOfLinks();
           end_effector_frame_index++ )
       {
@@ -119,7 +119,7 @@ int main(int argc, char** argv)
         //
         KDL::JntArray qmin(kdl_chain.getNrOfJoints()),qmax(kdl_chain.getNrOfJoints());
 
-        for(int i=0; i < qmin.rows(); i++ ) { qmin(i) = -10.0; qmax(i) = 10.0; }
+        for(size_t i=0; i < qmin.rows(); i++ ) { qmin(i) = -10.0; qmax(i) = 10.0; }
 
         result = iKinLimbFromKDLChain(kdl_chain,ikin_limb,qmin,qmax);
         if( !result )
@@ -128,7 +128,6 @@ int main(int argc, char** argv)
             return EXIT_FAILURE;
         }
 
-        bool result_corrupted = false;
         if( !checkChainsAreEqual(kdl_chain,ikin_limb) )
         {
             cerr << "urdf2dh_test error: KDL::Chain and iKinChain between "
@@ -149,7 +148,7 @@ int main(int argc, char** argv)
   }
 
   cerr << "urdf2dh report: " << endl;
-  for(int i=0; i < undirected_tree.getNrOfLinks(); i++ )
+  for(size_t i=0; i < undirected_tree.getNrOfLinks(); i++ )
   {
       std::string frame= undirected_tree.getLink(i)->getName();
       cerr << frame  << " as base frame   : " << endl;

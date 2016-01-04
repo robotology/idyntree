@@ -107,7 +107,7 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
             newGenericSensor.sensorType = SIX_AXIS_FORCE_TORQUE;
         }else
         {
-            std:cerr<<"Specified sensor type "<<sensorType<<" is not recognised\n";
+            std::cerr<<"Specified sensor type "<<sensorType<<" is not recognised\n";
             returnVal = false;
             break;
         }
@@ -221,9 +221,9 @@ iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTr
         // Return and empty sensors Tree object
         return sensorsTree;
     }
-    for(int genSensItr = 0; genSensItr < genericSensors.size(); genSensItr++ )
+    for(size_t genSensItr = 0; genSensItr < genericSensors.size(); genSensItr++ )
     {
-        iDynTree::Sensor *newSensor;
+        iDynTree::Sensor *newSensor = 0;
         switch(genericSensors[genSensItr].sensorType)
         {
             case iDynTree::SIX_AXIS_FORCE_TORQUE :

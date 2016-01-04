@@ -67,7 +67,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp)
 
     std::cout << "Setted baseVel" << baseVel.toString() << std::endl;
 
-    for(int dof=0; dof < dofs; dof++)
+    for(size_t dof=0; dof < dofs; dof++)
 
     {
         qj(dof) = random_double();

@@ -316,7 +316,7 @@ bool DynTree::setAngKDL(const KDL::JntArray & _q)
 
 
         //No part specified
-        if( (int)_q.rows() != NrOfDOFs )
+        if( _q.rows() != NrOfDOFs )
         {
             std::cerr << "setAng: Input vector has a wrong number of elements" << std::endl;
             return false;
@@ -325,7 +325,7 @@ bool DynTree::setAngKDL(const KDL::JntArray & _q)
             //if all are not constrained, use a quicker way to copy
             q = _q;
         } else {
-            for(int i =0; i < NrOfDOFs; i++ ){
+            for(size_t i =0; i < NrOfDOFs; i++ ){
                 setAng(_q(i),i);
             }
         }
@@ -341,12 +341,12 @@ yarp::sig::Vector DynTree::setAng(const yarp::sig::Vector & _q)
 
     yarp::sig::Vector ret_q = _q;
 
-        if( (int)_q.size() != NrOfDOFs ) { std::cerr << "setAng: Input vector has a wrong number of elements" << std::endl; return yarp::sig::Vector(0); }
+        if( _q.size() != NrOfDOFs ) { std::cerr << "setAng: Input vector has a wrong number of elements" << std::endl; return yarp::sig::Vector(0); }
         if( constrained_count == 0 ) {
             //if all are not constrained, use a quicker way to copy
             YarptoKDL(_q,q);
         } else {
-            for(int i =0; i < NrOfDOFs; i++ ){
+            for(size_t i =0; i < NrOfDOFs; i++ ){
                 ret_q[i] = setAng(_q[i],i);
             }
         }
@@ -358,7 +358,7 @@ yarp::sig::Vector DynTree::setAng(const yarp::sig::Vector & _q)
 yarp::sig::Vector DynTree::setDAng(const yarp::sig::Vector & _q)
 {
 
-        if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setDAng: Input vector has a wrong number of elements" << std::endl; return yarp::sig::Vector(0); }
+        if( _q.size() != NrOfDOFs  ) { std::cerr << "setDAng: Input vector has a wrong number of elements" << std::endl; return yarp::sig::Vector(0); }
         YarptoKDL(_q,dq);
 
     return _q;
@@ -411,7 +411,7 @@ yarp::sig::Vector DynTree::getD2Q_fb() const
 
 yarp::sig::Vector DynTree::setD2Ang(const yarp::sig::Vector & _q)
 {
-    if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setD2Ang: Input vector has a wrong number of elements" << std::endl; return yarp::sig::Vector(0); }
+    if( _q.size() != NrOfDOFs  ) { std::cerr << "setD2Ang: Input vector has a wrong number of elements" << std::endl; return yarp::sig::Vector(0); }
         YarptoKDL(_q,ddq);
     return _q;
 }
@@ -591,7 +591,7 @@ yarp::sig::Vector DynTree::getJointBoundMax()
 
 bool DynTree::setJointBoundMin(const yarp::sig::Vector & _q)
 {
-    if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMin error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
+    if( _q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMin error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
     YarptoKDL(_q,q_jnt_min);
 
     return true;
@@ -599,7 +599,7 @@ bool DynTree::setJointBoundMin(const yarp::sig::Vector & _q)
 
 bool DynTree::setJointBoundMax(const yarp::sig::Vector & _q)
 {
-        if( (int)_q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMax error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
+        if( _q.size() != NrOfDOFs  ) { std::cerr << "setJointBoundMax error: input vector has size " << _q.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
         YarptoKDL(_q,q_jnt_max);
 
     return true;
@@ -607,7 +607,7 @@ bool DynTree::setJointBoundMax(const yarp::sig::Vector & _q)
 
 bool DynTree::setJointTorqueBoundMax(const yarp::sig::Vector & _tau)
 {
-        if( (int)_tau.size() != NrOfDOFs  ) { std::cerr << "setTorqueJointBoundMax error: input vector has size " << _tau.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
+        if( _tau.size() != NrOfDOFs  ) { std::cerr << "setTorqueJointBoundMax error: input vector has size " << _tau.size() <<  " while should have size " << NrOfDOFs << std::endl; return false; }
         YarptoKDL(_tau,tau_max);
 
     return true;
@@ -798,7 +798,7 @@ yarp::sig::Vector DynTree::getTorques() const
 
 yarp::sig::Vector DynTree::getJointForceTorque(int joint_index, int frame_link) const
 {
-    if( joint_index < 0 || joint_index >= f.size() )
+    if( joint_index < 0 || joint_index >= (int)f.size() )
     {
         std::cerr << "getJointForceTorque: joint_index " << joint_index << " out of bounds " << std::endl;
         return yarp::sig::Vector(0);

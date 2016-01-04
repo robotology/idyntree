@@ -360,11 +360,10 @@ bool calculateDH(const KDL::Vector direction_axis_z_n_minus_1,
         std::cout << "dh_direction_axis_x_n      " << dh_direction_axis_x_n << std::endl;
     }
 
-    bool is_not_parallel = closestPoints(direction_axis_z_n_minus_1,origin_n_minus_1,
-                                         dh_direction_axis_x_n,dh_origin_n,
-                                         x_i_z_i_minus_1_intersection_A,x_i_z_i_minus_1_intersection_B,tol);
+    closestPoints(direction_axis_z_n_minus_1,origin_n_minus_1,
+                  dh_direction_axis_x_n,dh_origin_n,
+                  x_i_z_i_minus_1_intersection_A,x_i_z_i_minus_1_intersection_B,tol);
 
-    //assert(is_not_parallel);
 
     //x_i and z_{i-1} should intersecate
     assert((x_i_z_i_minus_1_intersection_A-x_i_z_i_minus_1_intersection_B).Norm() < tol);
@@ -418,7 +417,7 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
         }
     }
 
-    int nj = kdl_chain.getNrOfJoints();
+    size_t nj = kdl_chain.getNrOfJoints();
 
     bool add_joint_limits = true;
     if( min.rows() != nj || max.rows() != nj )
@@ -466,9 +465,11 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
             origin_O_i[jnt] = H*kdl_chain.getSegment(i).getJoint().JointOrigin();
             axis_x_i_old[jnt] = H.M.UnitX();
 
+            /*
             KDL::Vector axis_z_i_print = axis_z_i[jnt];
             KDL::Vector origin_O_i_print = origin_O_i[jnt];
             KDL::Vector axis_x_i_old_print = axis_x_i_old[jnt];
+            */
             jnt++;
 
         }
@@ -559,7 +560,7 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
 
 
 
-    for(int i=0; i < nj; i++ ) {
+    for(size_t i=0; i < nj; i++ ) {
         //std::cout << "i: " << i << std::endl;
         assert(fabs(axis_z_i[i].Norm()-1) < tol);
         assert(fabs(axis_z_i[i+1].Norm()-1) < tol);
@@ -606,7 +607,7 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
         std::cout << "iKinLink H0 " << H0_kdl << endl;
 
 
-    for(int i=0; i < nj; i++ )
+    for(size_t i=0; i < nj; i++ )
     {
         iCub::iKin::iKinLink * p_new_link;
         if( !add_joint_limits )
@@ -627,8 +628,8 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
     //Calculate the base pose with iKinChain (with HN = Identity) and the KDL::Chain . The difference is the desired HN
     KDL::Frame H_ef_iKinChain;
 
-    for(int i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); }
-    for(int i=0; i < nj; i++ ) { iKin_chain.setAng(i,0.0); }
+    for(size_t i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); }
+    for(size_t i=0; i < nj; i++ ) { iKin_chain.setAng(i,0.0); }
     yarp::sig::Matrix H_ef_iKinChain_yarp = iKin_chain.getH();
     YarptoKDL(H_ef_iKinChain_yarp,H_ef_iKinChain);
 
@@ -650,7 +651,7 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
 
     //iKin_chain = converted_iKin_chain;
 
-    for(int i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); }
+    for(size_t i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); }
 
     if(verbose >2)
         std::cout << "iKinChainFromKDLChain: closing routine" << std::endl;

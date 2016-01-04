@@ -313,21 +313,21 @@ namespace CoDyCo {
 
     bool TreeSerialization::setDOFNameID(const std::string dof_name, const int new_ID)
     {
-        if( new_ID < 0 || new_ID >= getNrOfDOFs() ) { return false; }
+        if( new_ID < 0 || new_ID >= (int)getNrOfDOFs() ) { return false; }
         dofs[new_ID] = dof_name;
         return true;
     }
 
     bool TreeSerialization::setJunctionNameID(const std::string junction_name, const int new_ID)
     {
-        if( new_ID < 0 || new_ID >= getNrOfJunctions() ) { return false; }
+        if( new_ID < 0 || new_ID >= (int)getNrOfJunctions() ) { return false; }
         junctions[new_ID] = junction_name;
         return true;
     }
 
     bool TreeSerialization::setLinkNameID(const std::string link_name, const int new_ID)
     {
-        if( new_ID < 0 || new_ID >= getNrOfLinks() ) { return false; }
+        if( new_ID < 0 || new_ID >= (int)getNrOfLinks() ) { return false; }
         links[new_ID] = link_name;
         return true;
     }
@@ -399,7 +399,7 @@ namespace CoDyCo {
                     //          << "the " << joint_name << "  fixed junction has a dofID" << std::endl;
                     return false;
                 }
-                if (junction_id < this->getNrOfDOFs()) {
+                if (junction_id < (int)this->getNrOfDOFs()) {
                     //std::cerr << "TreeSerialization::is_consistent returning false: "
                     //          << "the " << joint_name << "  fixed junction has a ID lower than the number of DOFs" << std::endl;
                     return false;
@@ -424,35 +424,35 @@ namespace CoDyCo {
 
     }
 
-    int TreeSerialization::setNrOfLinks(const int new_size)
+    size_t TreeSerialization::setNrOfLinks(const size_t new_size)
     {
         links.resize(new_size);
         return links.size();
     }
 
-    int TreeSerialization::getNrOfLinks() const
+    size_t TreeSerialization::getNrOfLinks() const
     {
         return links.size();
     }
 
-    int TreeSerialization::setNrOfJunctions(const int new_size)
+    size_t TreeSerialization::setNrOfJunctions(const size_t new_size)
     {
         junctions.resize(new_size);
         return junctions.size();
     }
 
-    int TreeSerialization::getNrOfJunctions() const
+    size_t TreeSerialization::getNrOfJunctions() const
     {
         return junctions.size();
     }
 
-    int TreeSerialization::setNrOfDOFs(const int new_size)
+    size_t TreeSerialization::setNrOfDOFs(const size_t new_size)
     {
         dofs.resize(new_size);
         return dofs.size();
     }
 
-    int TreeSerialization::getNrOfDOFs() const
+    size_t TreeSerialization::getNrOfDOFs() const
     {
         return dofs.size();
     }
@@ -481,7 +481,7 @@ namespace CoDyCo {
             return false;
         }
 
-        for(int i=0; i < getNrOfLinks(); i++ ) {
+        for(size_t i=0; i < getNrOfLinks(); i++ ) {
             setLinkNameID(links_serialization[i],i);
         }
 
@@ -504,7 +504,7 @@ namespace CoDyCo {
             return false;
         }
 
-        for(int i=0; i < getNrOfJunctions(); i++ ) {
+        for(size_t i=0; i < getNrOfJunctions(); i++ ) {
             if( i < getNrOfDOFs() ) {
                 setDOFNameID(junctions_serialization[i],i);
             }
