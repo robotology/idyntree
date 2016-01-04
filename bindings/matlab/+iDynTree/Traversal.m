@@ -41,8 +41,11 @@ classdef Traversal < SwigRef
     function varargout = reset(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(705, self, varargin{:});
     end
-    function varargout = setTraversalElement(self,varargin)
+    function varargout = addTraversalBase(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(706, self, varargin{:});
+    end
+    function varargout = addTraversalElement(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(707, self, varargin{:});
     end
   end
   methods(Static)

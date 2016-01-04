@@ -73,7 +73,7 @@ size_t SubModelDecomposition::getSubModelOfLink(const LinkIndex& link)
 {
     size_t ret = 0;
 
-    if( link >= 0 &&  link < this->link2subModelIndex.size() )
+    if( link >= 0 &&  link < (LinkIndex) this->link2subModelIndex.size() )
     {
         ret = link2subModelIndex[link];
     }
