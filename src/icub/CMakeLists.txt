@@ -33,13 +33,14 @@ set_target_properties(idyntree-icub PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${iDynTree_ICUB_header}")
 
 target_include_directories(idyntree-icub PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                ${skinDynLib_INCLUDE_DIRS}
-                                                ${iDyn_INCLUDE_DIRS}
-                                                ${GSL_INCLUDE_DIRS}
-                                                ${YARP_INCLUDE_DIRS}
-                                                ${EIGEN3_INCLUDE_DIR}
-                                                ${orocos_kdl_INCLUDE_DIRS})
+                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+
+include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS}
+                           ${iDyn_INCLUDE_DIRS}
+                           ${GSL_INCLUDE_DIRS}
+                           ${YARP_INCLUDE_DIRS}
+                           ${EIGEN3_INCLUDE_DIR}
+                           ${orocos_kdl_INCLUDE_DIRS})
 
 
 target_link_libraries(idyntree-icub LINK_PUBLIC  skinDynLib iKin iDyn

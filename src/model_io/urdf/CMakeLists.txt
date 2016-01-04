@@ -54,9 +54,8 @@ if(IDYNTREE_USES_KDL)
                                ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
     get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-    include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
+    include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
-							   
     target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                      "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
@@ -71,20 +70,20 @@ if(IDYNTREE_USES_KDL)
 
     # make sure that the installed include directories are added after the include
     # directories added with the other targets
-    target_include_directories(${libraryname} PUBLIC  ${orocos_kdl_INCLUDE_DIRS}
-                                              PRIVATE ${TinyXML_INCLUDE_DIRS}
-                                                      ${urdfdom_headers_INCLUDE_DIRS}
-                                                      ${urdfdom_INCLUDE_DIRS})
+    include_directories(SYSTEM  ${orocos_kdl_INCLUDE_DIRS}
+                                ${TinyXML_INCLUDE_DIRS}
+                                ${urdfdom_headers_INCLUDE_DIRS}
+                                ${urdfdom_INCLUDE_DIRS})
 
     set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
     set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
     set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
-get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
+    get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+    set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
 
-install(TARGETS ${libraryname}
+    install(TARGETS ${libraryname}
         EXPORT iDynTree
         COMPONENT runtime
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
@@ -114,7 +113,6 @@ else()
     target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                      "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                                       ${IDYNTREE_TREE_INCLUDE_DIRS}
-                                                      ${orocos_kdl_INCLUDE_DIRS}
                                               PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                       ${TinyXML_INCLUDE_DIRS})
 
