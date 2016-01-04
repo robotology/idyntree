@@ -83,23 +83,6 @@ namespace iDynTree {
         bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor) const;
 
         /**
-         * Get the index of the parent link attached to the sensor.
-         *
-         * @return the index of the parent link attached to the sensor.
-         */
-        int getParentLinkIndex() const;
-
-        /**
-         * Set the name of the parent link to which the accelerometer sensor is attached.
-         */
-        bool setParentLinkName(const std::string & name);
-
-        /**
-         * Get the name of the parent link at which the accelerometer sensor is attached.
-         */
-        std::string getParentLinkName() const;
-
-        /**
          * Documented in Sensor
          */
         bool setParent(const std::string &parent);
@@ -108,11 +91,7 @@ namespace iDynTree {
          * Documented in Sensor
          */
         bool setParentIndex(const int &parent_index);
-     
-        int getLinkIndex() const;
-        
-        
-        
+
         /**
          * Documented in the sensor
          *
@@ -161,7 +140,7 @@ namespace iDynTree {
         * @return the predicted measurement as a LinAcceleration
         */
        iDynTree::LinAcceleration predictMeasurement(const iDynTree::SpatialAcc &linkAcc, const iDynTree::Twist &linkTwist);
-       
+
        /**
          * Following method is to be implemented after defining the interface
          * Get wrench applied on the specified link expressed in the specified link frame.
