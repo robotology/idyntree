@@ -20,6 +20,12 @@ class Model;
  *
  * Load a iDynTree::Model object from a URDF file.
  *
+ * Loading the URDF with this function, the  "fake links"
+ * present in the URDF file are   removed from the models
+ * and added back as frames. See the removeFakeLinks
+ * function, that is called inside this function before
+ * returning the model.
+ *
  * @return true if all went ok, false otherwise.
  */
 bool modelFromURDF(const std::string & urdf_filename,
@@ -28,7 +34,11 @@ bool modelFromURDF(const std::string & urdf_filename,
 /**
  * \ingroup iDynTreeModelIO
  *
- * Load a iDynTree::Model object from a URDF string.
+ * Loading the URDF with this function, the  "fake links"
+ * present in the URDF file are   removed from the models
+ * and added back as frames. See the removeFakeLinks
+ * function, that is called inside this function before
+ * returning the model. .
  *
  * @return true if all went ok, false otherwise.
  */

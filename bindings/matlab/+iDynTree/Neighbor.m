@@ -7,20 +7,20 @@ classdef Neighbor < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(707, self);
+        varargout{1} = iDynTreeMEX(708, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(708, self, varargin{1});
+        iDynTreeMEX(709, self, varargin{1});
       end
     end
     function varargout = neighborJoint(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(709, self);
+        varargout{1} = iDynTreeMEX(710, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(710, self, varargin{1});
+        iDynTreeMEX(711, self, varargin{1});
       end
     end
     function self = Neighbor(varargin)
@@ -29,14 +29,14 @@ classdef Neighbor < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(711, varargin{:});
+        tmp = iDynTreeMEX(712, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(712, self);
+        iDynTreeMEX(713, self);
         self.swigPtr=[];
       end
     end

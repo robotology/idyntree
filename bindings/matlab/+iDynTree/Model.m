@@ -9,79 +9,79 @@ classdef Model < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(713, varargin{:});
+        tmp = iDynTreeMEX(714, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(714, self);
+        iDynTreeMEX(715, self);
         self.swigPtr=[];
       end
     end
     function varargout = getNrOfLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(715, self, varargin{:});
-    end
-    function varargout = getLinkName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(716, self, varargin{:});
     end
-    function varargout = getLinkIndex(self,varargin)
+    function varargout = getLinkName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(717, self, varargin{:});
     end
-    function varargout = addLink(self,varargin)
+    function varargout = getLinkIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(718, self, varargin{:});
     end
-    function varargout = getNrOfJoints(self,varargin)
+    function varargout = addLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(719, self, varargin{:});
     end
-    function varargout = getJointName(self,varargin)
+    function varargout = getNrOfJoints(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(720, self, varargin{:});
     end
-    function varargout = getJointIndex(self,varargin)
+    function varargout = getJointName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(721, self, varargin{:});
     end
-    function varargout = addJoint(self,varargin)
+    function varargout = getJointIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(722, self, varargin{:});
     end
-    function varargout = getNrOfPosCoords(self,varargin)
+    function varargout = addJoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(723, self, varargin{:});
     end
-    function varargout = getNrOfDOFs(self,varargin)
+    function varargout = getNrOfPosCoords(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(724, self, varargin{:});
     end
-    function varargout = getNrOfFrames(self,varargin)
+    function varargout = getNrOfDOFs(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(725, self, varargin{:});
     end
-    function varargout = addAdditionalFrameToLink(self,varargin)
+    function varargout = getNrOfFrames(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(726, self, varargin{:});
     end
-    function varargout = getFrameName(self,varargin)
+    function varargout = addAdditionalFrameToLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(727, self, varargin{:});
     end
-    function varargout = getFrameIndex(self,varargin)
+    function varargout = getFrameName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(728, self, varargin{:});
     end
-    function varargout = getFrameTransform(self,varargin)
+    function varargout = getFrameIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(729, self, varargin{:});
     end
-    function varargout = getFrameLink(self,varargin)
+    function varargout = getFrameTransform(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(730, self, varargin{:});
     end
-    function varargout = getNrOfNeighbors(self,varargin)
+    function varargout = getFrameLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(731, self, varargin{:});
     end
-    function varargout = getNeighbor(self,varargin)
+    function varargout = getNrOfNeighbors(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(732, self, varargin{:});
     end
-    function varargout = setDefaultBaseLink(self,varargin)
+    function varargout = getNeighbor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(733, self, varargin{:});
     end
-    function varargout = getDefaultBaseLink(self,varargin)
+    function varargout = setDefaultBaseLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(734, self, varargin{:});
     end
-    function varargout = computeFullTreeTraversal(self,varargin)
+    function varargout = getDefaultBaseLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(735, self, varargin{:});
+    end
+    function varargout = computeFullTreeTraversal(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(736, self, varargin{:});
     end
   end
   methods(Static)

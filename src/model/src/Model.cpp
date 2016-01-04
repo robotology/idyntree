@@ -431,16 +431,10 @@ bool Model::computeFullTreeTraversal(Traversal & traversal) const
 
 struct stackEl { LinkConstPtr link; LinkConstPtr parent;};
 
-void  addBaseLinkToTraversal(const Model & model, Traversal & traversal, int & traversalFirstEmptySlot,
+void  addBaseLinkToTraversal(const Model & model, Traversal & traversal,
                                     LinkIndex linkToAdd, std::deque<stackEl> & linkToVisit)
 {
-    assert(traversalFirstEmptySlot == 0);
-    traversal.setTraversalElement(traversalFirstEmptySlot,
-                                  model.getLink(linkToAdd),
-                                  0,
-                                  0);
-
-    traversalFirstEmptySlot++;
+    traversal.addTraversalBase(model.getLink(linkToAdd));
 
     stackEl el;
     el.link = model.getLink(linkToAdd);
@@ -449,16 +443,13 @@ void  addBaseLinkToTraversal(const Model & model, Traversal & traversal, int & t
     linkToVisit.push_back(el);
 }
 
-void addLinkToTraversal(const Model & model, Traversal & traversal, int & traversalFirstEmptySlot,
+void addLinkToTraversal(const Model & model, Traversal & traversal,
                         LinkIndex linkToAdd, JointIndex parentJointToAdd, LinkIndex parentLinkToAdd,
                         std::deque<stackEl> & linkToVisit)
 {
-    traversal.setTraversalElement(traversalFirstEmptySlot,
-                                  model.getLink(linkToAdd),
+    traversal.addTraversalElement(model.getLink(linkToAdd),
                                   model.getJoint(parentJointToAdd),
                                   model.getLink(parentLinkToAdd));
-
-    traversalFirstEmptySlot++;
 
     stackEl el;
     el.link = model.getLink(linkToAdd);
@@ -475,17 +466,15 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
         return false;
     }
 
-    // The full tree traversal is a traversal spanning all the links
-    // of a model, so it include getNrOfLinks() visited links
-    traversal.reset(this->getNrOfLinks(),this->getNrOfLinks());
+    // Resetting the traversal for populating it
+    traversal.reset(*this);
 
     // A link is considered visit when all its child (given the traversalBase)
     // have been added to the traversal
     std::deque<stackEl> linkToVisit;
 
     // We add as first link the requested traversalBase
-    int traversalFirstEmptySlot = 0;
-    addBaseLinkToTraversal(*this,traversal,traversalFirstEmptySlot,traversalBase,linkToVisit);
+    addBaseLinkToTraversal(*this,traversal,traversalBase,linkToVisit);
 
     // while there is some link still to visit
     while( linkToVisit.size() > 0 )
@@ -507,11 +496,15 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
             Neighbor neighb = this->getNeighbor(visitedLinkIndex,neigh_i);
             if( visitedLinkParent == 0 || neighb.neighborLink != visitedLinkParent->getIndex() )
             {
-                addLinkToTraversal(*this,traversal,traversalFirstEmptySlot,neighb.neighborLink,
+                addLinkToTraversal(*this,traversal,neighb.neighborLink,
                     neighb.neighborJoint,visitedLink->getIndex(),linkToVisit);
             }
         }
     }
+
+    // At this point the traversal should contain all the links
+    // of the model
+    assert(traversal.getNrOfVisitedLinks() == this->getNrOfLinks());
 
     return true;
 }

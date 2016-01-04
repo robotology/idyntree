@@ -199,10 +199,18 @@ void testFwdKinConsistency(std::string modelFilePath)
     std::vector<KDL::Wrench> fExtKDL(undirected_tree.getNrOfLinks());
     std::vector<KDL::Wrench> fKDL(undirected_tree.getNrOfLinks());
 
+    // First set to zero all the fExtKDL, fKDL wrenches : then
+    // the following loop will set the one that correspond to "real"
+    // iDynTree links to the same value we used in iDynTree
+    for(unsigned int linkKDL = 0; linkKDL < undirected_tree.getNrOfLinks(); linkKDL++)
+    {
+        fKDL[linkKDL]    = KDL::Wrench::Zero();
+        fExtKDL[linkKDL] = KDL::Wrench::Zero();
+    }
+
     for(unsigned int link = 0; link < model.getNrOfLinks(); link++ )
     {
-        fExt(link) = iDynTree::Wrench::Zero(); // getRandomWrench();
-        fExt(link).getLinearVec3()(0) = 0.0;
+        fExt(link) = getRandomWrench();
         fExtKDL[idynTree2KDL_links[link]] = ToKDL(fExt(link));
         fKDL[idynTree2KDL_links[link]] = KDL::Wrench::Zero();
     }
@@ -257,7 +265,6 @@ void testFwdKinConsistency(std::string modelFilePath)
     }
 
     // Check CRBA algorithm
-
     for(int ii=0; ii < model.getNrOfDOFs()+6; ii++ )
     {
         for( int jj=0; jj < model.getNrOfDOFs()+6; jj++ )

@@ -105,35 +105,61 @@ namespace iDynTree
         const IJoint * getParentJointFromLinkIndex(const LinkIndex linkIndex) const;
 
         /**
-         * Reset the Traversal to contain nrOfVisitedLinks visited links.
+         * Reset the Traversal.
+         *
+         * After a call to reset, the Traversal will contain
+         * no visited links, so it needs to be approprately populated
+         * with the addTraversalBase and addTraversalElement methods.
+         *
+         * @param[in] nrOfLinksInModel total number of links in the model,
+         *                             not the number of visited links in the Traversal.
+         * @return true if all went well, false otherwise
+         */
+        bool reset(const unsigned int nrOfLinksInModel);
+
+        /**
+         * Reset the Traversal.
          *
          * After a call to reset, all the pointers in the Traversal are set
          * to 0, and the Traversal should be approprialy populated with the
          * setters before use.
          *
+         * @param[in] model Model on which this traversal will be used,
+         *                  used to initialize the internal data structure
+         *                  using the getNrOfLinks() method.
+         *
          * @return true if all went well, false otherwise
          */
-        bool reset(unsigned int nrOfVisitedLinks, unsigned int nrOfLinksInModel);
+        bool reset(const Model & model);
 
         /**
-         * Reset the Traversal to contain nrOfVisitedLinks visited links.
+         * Add a base to traversal.
          *
-         * After a call to reset, all the pointers in the Traversal are set
-         * to 0, and the Traversal should be approprialy populated with the
-         * setters before use.
+         * Equivalent to addTraversalElement(link,NULL,NULL), but
+         * will print an error and return false if it is called with a
+         * traversal that already has a base, i.e. getNrOfVisitedLinks() > 0
          *
+         * @param[in] link a pointer to the base link
          * @return true if all went well, false otherwise
          */
-        bool reset(unsigned int nrOfVisitedLinks, Model & model);
+        bool addTraversalBase(const Link * link);
 
         /**
+         * Add an element to the traversal.
          *
-         * @return true if all went well, false otherwise
+         * After a call to this method, the getNrOfVisitedLinks()
+         * will be increased of 1 unit.
+         *
+         * @param[in] link a pointer to the link to add to the traversal
+         * @param[in] jointToParent a pointer to the joint that connects
+         *                          the added link to its parent in this traversal
+         * @param[in] parentLink a pointer to the parent on this link in this traversal.
+         *                       It should be a link already contained in this traversal.
+         * @return true if all went well, false otherwise.
          */
-        bool setTraversalElement(unsigned int traversalIndex,
-                                 const Link * link,
+        bool addTraversalElement(const Link   * link,
                                  const IJoint * jointToParent,
-                                 const Link * parentLink);
+                                 const Link   * parentLink);
 
     };
 
