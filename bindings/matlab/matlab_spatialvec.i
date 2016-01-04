@@ -23,12 +23,12 @@ namespace iDynTree
     {
         // check size
         const size_t * dims = mxGetDimensions(in);
-        int fixValSize = $self->size();
+        size_t fixValSize = $self->size();
         if( ( dims[0] == fixValSize && dims[1] == 1) ||
             ( dims[0] == 1 && dims[1] == fixValSize ) )
         {
             double* d = static_cast<double*>(mxGetData(in));
-            for(int i=0; i < fixValSize; i++ )
+            for(size_t i=0; i < fixValSize; i++ )
             {
                 $self->operator()(i) = d[i];
             }
