@@ -1,4 +1,4 @@
-iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=master)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/30f7h985innapoqh/branch/master?svg=true)](https://ci.appveyor.com/project/traversaro/idyntree/branch/master)
+iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=master)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/1uecfmyvxb2dujt9/branch/master?svg=true)](https://ci.appveyor.com/project/robotology/idyntree/branch/master)
 ===========
 
 iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. 
@@ -46,19 +46,21 @@ option simply enables *compilation* of the bindings. If you want to regenerate t
 for example because you modified some iDynTree classes, you can install the experimental
 version of Swig with Matlab support at https://github.com/casadi/casadi/wiki/matlab (just follow
 the first 4 points in the guide) and then enable Matlab bindings generation with the `IDYNTREE_GENERATE_MATLAB` options. 
+Currently we are commiting to the repo the matlab bindings generated with this commit of `matlab-swig`: https://github.com/jaeandersson/swig/commit/de0c52d69e5d3525f5dd56e3554a06a19fd75a13 .
 
 #### Dependencies
 ##### Build dependencies
 - [CMake](http://www.cmake.org)
 
 ##### Core
-- [Kinematics and Dynamics Library](https://github.com/orocos/orocos_kinematics_dynamics)
 - [Eigen](http://eigen.tuxfamily.org)
-- [urdfdom](https://github.com/ros/urdfdom)
 
 ##### Optional
 - [YARP](https://github.com/robotology/yarp)
 - [ICUB](https://github.com/robotology/icub-main)
+- [Kinematics and Dynamics Library](https://github.com/orocos/orocos_kinematics_dynamics)
+- [urdfdom](https://github.com/ros/urdfdom)
+
 
 ## Tutorials
 | Topic  | C++ | Matlab | Python |

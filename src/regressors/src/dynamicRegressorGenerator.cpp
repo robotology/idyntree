@@ -18,7 +18,7 @@
 #include "kdl_codyco/regressor_loops.hpp"
 #include "kdl_codyco/rnea_loops.hpp"
 #include "kdl_codyco/position_loops.hpp"
-#include "iDynTree/Sensors/Sensors.hpp"
+#include "iDynTree/Sensors/Sensors.h"
 #include "kdl_codyco/KDLConversions.h"
 #include "iDynTree/Core/Wrench.h"
 #include <iostream>

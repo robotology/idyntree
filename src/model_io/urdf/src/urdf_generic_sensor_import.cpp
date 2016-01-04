@@ -34,24 +34,25 @@
 
 /* Author: Naveen Kuppuswamy */
 
-#include <iDynTree/ModelIO/impl/urdf_generic_sensor_import.hpp>
-#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
+
 #include <iDynTree/Core/Transform.h>
+
 #include <kdl_codyco/undirectedtree.hpp>
 
 #include <kdl_codyco/KDLConversions.h>
 
-#include <iDynTree/Sensors/Sensors.hpp>
-#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
-#include <iDynTree/Sensors/Accelerometer.hpp>
-#include <iDynTree/Sensors/Gyroscope.hpp>
+#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/Accelerometer.h>
+#include <iDynTree/Sensors/Gyroscope.h>
 
 
 #include <fstream>
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
 #include <tinyxml.h>
-
+#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
+#include <iDynTree/ModelIO/impl/urdf_generic_sensor_import.hpp>
 using namespace std;
 using namespace KDL;
 
@@ -106,7 +107,7 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
             newGenericSensor.sensorType = SIX_AXIS_FORCE_TORQUE;
         }else
         {
-            std:cerr<<"Specified sensor type "<<sensorType<<" is not recognised\n";
+            std::cerr<<"Specified sensor type "<<sensorType<<" is not recognised\n";
             returnVal = false;
             break;
         }
@@ -161,12 +162,6 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
         TiXmlElement* originTag = sensorXml->FirstChildElement("origin");
         if( originTag )
         {
-#ifdef DEBUG
-            std::cout<<"originTag exists \n";
-            std::string  poseText = originTag->GetText();
-            std::cout<<"originTag : \n"<<poseTag->ToText();
-            std::cout<<"Pose rpy:"<<rpyText.c_str()<<", xyz"<<xyzText.c_str()<<"\n";
-#endif //DEBUG
             std::string  rpyText(originTag->Attribute("rpy"));
             std::string  xyzText(originTag->Attribute("xyz"));
 
@@ -174,10 +169,7 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
             std::vector<std::string> xyzElems;
             split(rpyText,rpyElems);
             split(xyzText,xyzElems);
-#ifdef DEBUG
-            std::cout<<"Pose rpy:"<<rpyElems[0].c_str()<<","<<rpyElems[1].c_str()<<","<<rpyElems[2].c_str()<<", xyz";
-            std::cout<<xyzElems[0].c_str()<<","<<xyzElems[1].c_str()<<","<<xyzElems[2].c_str()<<","<<"\n";
-#endif //DEBUG
+
             if( rpyElems.size() != 3 && xyzElems.size() !=3 )
             {
                 std::cerr<<"Pose attribute for sensor specified incorrectly";
@@ -229,9 +221,9 @@ iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTr
         // Return and empty sensors Tree object
         return sensorsTree;
     }
-    for(int genSensItr = 0; genSensItr < genericSensors.size(); genSensItr++ )
+    for(size_t genSensItr = 0; genSensItr < genericSensors.size(); genSensItr++ )
     {
-        iDynTree::Sensor *newSensor;
+        iDynTree::Sensor *newSensor = 0;
         switch(genericSensors[genSensItr].sensorType)
         {
             case iDynTree::SIX_AXIS_FORCE_TORQUE :

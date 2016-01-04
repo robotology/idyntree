@@ -63,7 +63,7 @@ std::vector<std::string> get_iDyn_dof_serialization(KDL::Tree & icub_kdl)
 {
     std::vector<std::string> ret;
     KDL::CoDyCo::TreeSerialization serialization(icub_kdl);
-    for( int i =0; i < serialization.getNrOfDOFs(); i++ )
+    for( size_t i =0; i < serialization.getNrOfDOFs(); i++ )
     {
         ret.push_back(serialization.getDOFName(i));
     }
@@ -93,7 +93,7 @@ std::vector<std::string> get_iDyn_ft_frames()
 std::vector< ::iDynTree::FTSensorData> get_default_ft_sensors(std::vector<std::string> ft_serialization)
 {
     std::vector< ::iDynTree::FTSensorData> ret;
-    for(int i =0; i < ft_serialization.size(); i++ )
+    for(size_t i =0; i < ft_serialization.size(); i++ )
     {
         ::iDynTree::FTSensorData dat;
         dat.reference_joint = ft_serialization[i];
@@ -122,7 +122,7 @@ yarp::sig::Vector getSubVector(std::string part_name,
     yarp::sig::Vector ret;
     VectorSlice part = parts[part_name];
     ret.resize(part.length);
-    for(int i=0; i < part.length; i++)
+    for(size_t i=0; i < part.length; i++)
     {
         ret[i] = vec[part.firstIndex+i];
     }
@@ -136,7 +136,7 @@ void setSubVector(std::string part_name,
 {
     VectorSlice part = parts[part_name];
     YARP_ASSERT(small_vector.size() == part.length);
-    for(int i=0; i < part.length; i++)
+    for(size_t i=0; i < part.length; i++)
     {
         big_vector[part.firstIndex+i] = small_vector[i];
     }
@@ -426,7 +426,7 @@ int main()
 
     ft_sensors_data = get_default_ft_sensors(ft_serialization);
 
-    for(int i =0; i < q_min_yarp.size(); i++ )
+    for(size_t i =0; i < q_min_yarp.size(); i++ )
     {
        q_min_yarp[i] = q_min(i);
        q_max_yarp[i] = q_max(i);

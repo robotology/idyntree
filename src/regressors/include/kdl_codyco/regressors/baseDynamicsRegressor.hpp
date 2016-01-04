@@ -16,7 +16,7 @@
 #include "kdl_codyco/undirectedtree.hpp"
 #include "dynamicRegressorInterface.hpp"
 
-#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/Sensors.h>
 namespace iDynTree{
     class SensorsList;
 }

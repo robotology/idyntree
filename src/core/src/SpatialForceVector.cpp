@@ -37,6 +37,10 @@ SpatialForceVector::SpatialForceVector(const SpatialVector<SpatialForceVector>& 
 {
 }
 
+SpatialForceVector::~SpatialForceVector()
+{
+}
+
 SpatialForceVector SpatialForceVector::operator*(const double scalar) const
 {
     SpatialForceVector scaledVec;

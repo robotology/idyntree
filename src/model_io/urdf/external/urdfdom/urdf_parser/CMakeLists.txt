@@ -25,8 +25,8 @@ add_library(iDynTree_priv_urdfdom_model STATIC src/pose.cpp
 target_link_libraries(iDynTree_priv_urdfdom_model ${TinyXML_LIBRARIES})
 set_target_properties(iDynTree_priv_urdfdom_model PROPERTIES SOVERSION 0.3)
 
-target_include_directories(iDynTree_priv_urdfdom_model PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
-                                                              "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>")
+target_include_directories(iDynTree_priv_urdfdom_model PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                                              "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 set(URDFDOM_MODEL_PUBLIC_HEADERS include/urdf_parser/urdf_parser.h
                                  include/urdf_parser/outputdecl.h
@@ -60,10 +60,10 @@ INSTALL(DIRECTORY include/urdf_parser DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 install(TARGETS iDynTree_priv_urdfdom_model
         EXPORT iDynTree
-        RUNTIME DESTINATION "${${VARS_PREFIX}_INSTALL_BINDIR}" COMPONENT bin
-        LIBRARY DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT shlib
-        ARCHIVE DESTINATION "${${VARS_PREFIX}_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION "${${VARS_PREFIX}_INSTALL_INCLUDEDIR}/urdf_parser" COMPONENT dev)
+        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
+        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/urdf_parser" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS iDynTree_priv_urdfdom_model)
 

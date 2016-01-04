@@ -1,3 +1,3 @@
 function varargout = modelFromURDFString(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(731,varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(737, varargin{:});
 end

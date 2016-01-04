@@ -15,7 +15,7 @@
  * Public License for more details
  */
 #include "iDynTree/Core/Wrench.h"
-#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+#include "iDynTree/Sensors/SixAxisFTSensor.h"
 
 #include "iDynTree/Core/Transform.h"
 

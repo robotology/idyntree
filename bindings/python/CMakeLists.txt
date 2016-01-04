@@ -19,7 +19,6 @@ endif()
 
 set(target_name iDynTree_python)
 
-
 set_source_files_properties(../iDynTree.i PROPERTIES CPLUSPLUS ON)
 swig_add_module(${target_name} python ../iDynTree.i)
 set_target_properties(_${target_name} PROPERTIES OUTPUT_NAME "_iDynTree")
@@ -36,3 +35,8 @@ string(STRIP ${PYTHON_INSTDIR} PYTHON_INSTDIR)
 if(WIN32)
     set_target_properties(_${target_name} PROPERTIES SUFFIX ".pyd")
 endif(WIN32)
+
+# if compile tests execute also python tests
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif()

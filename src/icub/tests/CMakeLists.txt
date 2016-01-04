@@ -1,14 +1,11 @@
-
-
-find_package(TinyXML       REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/include
                           ${EIGEN3_INCLUDE_DIR}
                           ${orocos_kdl_INCLUDE_DIRS}
                           ${iDynTree_INCLUDE_DIRS}
                           ${YARP_INCLUDE_DIRS}
-                          ${kdl_codyco_INCLUDE_DIRS}
                           ${ICUB_INCLUDE_DIRS})
 
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 macro(add_icub_test testName)
     set(testsrc ${testName}Test.cpp)
     set(testbinary ${testName}Test)

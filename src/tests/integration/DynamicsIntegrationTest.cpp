@@ -119,9 +119,9 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
     Vector6 zeroVec; zeroVec.zero();
     std::cout << "Check base wrench" << std::endl;
     ASSERT_EQUAL_VECTOR_TOL(RNEA_baseForceAndJointTorques.baseWrench().asVector(),
-                        zeroVec,1e-7);
+                        zeroVec,1e-6);
     std::cout << "Check joint torques" << std::endl;
-    ASSERT_EQUAL_VECTOR_TOL(RNEA_baseForceAndJointTorques.jointTorques(),ABA_jntTorques,1e-9);
+    ASSERT_EQUAL_VECTOR_TOL(RNEA_baseForceAndJointTorques.jointTorques(),ABA_jntTorques,1e-07);
 }
 
 int main()

@@ -14,11 +14,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
  * Public License for more details
  */
+
 #include "iDynTree/Core/AngularMotionVector3.h"
 
-#include "iDynTree/Sensors/Gyroscope.hpp"
+#include "iDynTree/Sensors/Gyroscope.h"
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Wrench.h"
+#include "iDynTree/Core/Twist.h"
 
 
 namespace iDynTree {
@@ -32,7 +34,7 @@ struct Gyroscope::GyroscopePrivateAttributes
     // Index of the parent link
      int parent_link_index;
     // Name of the parent link
-     std::string parent_link_name;
+     std::string parent_link_name; 
 };
 
 
@@ -91,7 +93,7 @@ bool Gyroscope::setParentIndex(const int &parent_index)
     this->pimpl->parent_link_index = parent_index;
     return true;
 }
-//
+
 bool Gyroscope::isValid() const
 {
     if( this->getName() == "" )
@@ -137,13 +139,22 @@ int Gyroscope::getParentIndex() const
 }
 
 
-bool Gyroscope::getLinkSensorTransform(iDynTree::Transform& link_H_sensor) const
+Transform Gyroscope::getLinkSensorTransform(void)
 {
-    link_H_sensor = this->pimpl->link_H_sensor;
-    return true;
+    return(this->pimpl->link_H_sensor);
+    
+} 
 
-
+AngVelocity Gyroscope::predictMeasurement(const Twist& linkVel)
+{
+    AngVelocity angVel(0,0,0);
+    if(this->pimpl->parent_link_index>=0)
+    {
+        angVel = ((this->pimpl->link_H_sensor * linkVel).getAngularVec3());
+    }
+    return(angVel);
 }
+
 /* to be implemented in the future after considering interface and requirements
  */
 /*
