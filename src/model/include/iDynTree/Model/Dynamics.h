@@ -32,7 +32,7 @@ namespace iDynTree
                           const iDynTree::FreeFloatingPos & robotPos,
                           const iDynTree::LinkVelArray & linksVel,
                           const iDynTree::LinkAccArray & linksAcc,
-                          const iDynTree::LinkExternalWrenches & linkExtForces,
+                          const iDynTree::LinkNetExternalWrenches & linkExtForces,
                           iDynTree::LinkInternalWrenches       & linkIntWrenches,
                           iDynTree::FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
 
@@ -58,7 +58,7 @@ namespace iDynTree
                                   const Traversal& traversal,
                                   const FreeFloatingPos& robotPos,
                                   const FreeFloatingVel& robotVel,
-                                  const LinkExternalWrenches & linkExtWrenches,
+                                  const LinkNetExternalWrenches & linkExtWrenches,
                                   const JointDoubleArray & jointTorques,
                                         DOFSpatialMotionArray & S,
                                         DOFSpatialForceArray & U,

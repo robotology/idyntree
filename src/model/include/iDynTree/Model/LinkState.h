@@ -46,6 +46,10 @@ namespace iDynTree
      * acting on a  link (LinkExternalWrenches), or the internal wrenches
      * that a link excerts on his parent (given a Traversal)
      * computed as a by product by the dynamic loop of the RNEA ( RNEADynamicPhase ).
+     *
+     * In both cases the Wrench corresponding to the link with LinkIndex i
+     * is always expressed with the orientation of the link frame and with
+     * respect to the link frame origin.
      */
     class LinkWrenches
     {
@@ -70,8 +74,6 @@ namespace iDynTree
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
 
-
-
         iDynTree::Wrench & operator()(const LinkIndex link);
         const iDynTree::Wrench & operator()(const LinkIndex link) const;
 
@@ -79,14 +81,14 @@ namespace iDynTree
     };
 
     /**
-     * Vector of the total external wrench acting on each link.
+     * Vector of the sum of all the  external wrenches excerted on each link.
      *
      * The wrench returned by operator(i) is the sum of all external wrenches
      * (thus excluding the wrench applied on the link by other links in the model)
      * that the environment applies on the link $i$, expressed (
      * both orientation and point) with respect to the reference frame of link i.
      */
-    typedef LinkWrenches LinkExternalWrenches;
+    typedef LinkWrenches LinkNetExternalWrenches;
 
     /**
      * Vector of the wrenches acting that a link excert on his parent,
