@@ -16,54 +16,56 @@
  */
 
 
-#ifndef GYROSCOPE_HPP
-#define GYROSCOPE_HPP
+#ifndef ACCELEROMETER_HPP
+#define ACCELEROMETER_HPP
+
 
 namespace iDynTree
 {
     class Transform;
-    class AngularMotionVector3;
-    typedef AngularMotionVector3 AngVelocity;
+    class LinearMotionVector3;
+    typedef LinearMotionVector3 LinAcceleration;
+    class SpatialAcc;
+    class Twist;
 }
 
 #include <iDynTree/Sensors/Sensors.h>
-#include <vector>
 
 namespace iDynTree {
 
     /**
-     * Interface to the Gyroscope class.
+     * Interface to the Accelerometer class.
      *
-     * An implementation of the Gyroscope Sensor
+     * An implementation of the Accelerometer Sensor
      *
      * \ingroup iDynTreeSensors
      *
      */
-    class Gyroscope: public Sensor {
+    class AccelerometerSensor: public Sensor {
     private:
-        struct GyroscopePrivateAttributes;
-        GyroscopePrivateAttributes * pimpl;
+        struct AccelerometerPrivateAttributes;
+        AccelerometerPrivateAttributes * pimpl;
 
     public:
         /**
          * Constructor.
          */
-        Gyroscope();
+        AccelerometerSensor();
 
         /**
          * Copy constructor
          */
-        Gyroscope(const Gyroscope& other);
+        AccelerometerSensor(const AccelerometerSensor& other);
 
         /**
          * Copy operator
          */
-        Gyroscope& operator=(const Gyroscope &other);
+        AccelerometerSensor& operator=(const AccelerometerSensor &other);
 
         /**
          * Destructor.
          */
-        virtual ~Gyroscope();
+        virtual ~AccelerometerSensor();
 
         /**
          * Set the name (id) of the sensor
@@ -71,19 +73,17 @@ namespace iDynTree {
          */
         bool setName(const std::string &_name);
 
-        /**
-         * Set the transform from the sensor to the parent link sensor is attached to.
+       /**
+         * Set the transform from the sensor to the parent link attached to the sensor.
          *
-         * @return true if link_index is the link attached to the Gyroscope, false otherwise.
+         * @return true if link_index is parent link attached to the accelerometer sensor, false otherwise.
          */
         bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor) const;
-
 
         /**
          * Documented in Sensor
          */
         bool setParent(const std::string &parent);
-        
 
         /**
          * Documented in Sensor
@@ -124,30 +124,29 @@ namespace iDynTree {
 
 
         /**
-         * Get the transform from the sensor to the parent link.
+         * Get the transform from the sensor to the specified link.
          *
-         * @return Transform associated with the link frame and the sensor
+         * @return Transform associated with the link Frame and the sensor
          */
-        Transform getLinkSensorTransform(void);
+       Transform getLinkSensorTransform(void);
 
-        /**
-         * Predict sensor measurement when given the parent link spatial velocity
-         *
-         * @return the predicted Measurement of an iDynTree::AngVelocity
-         */
-        iDynTree::AngVelocity predictMeasurement(const iDynTree::Twist& linkVel);
-        
-        /**
-         * The following method is to be implemented in the future after considering the interface
-         * 
-         * Get angular velcity of the link on which the sensor is fixed and the angular velocity is being measured.
+
+      /**
+        * Following method is to be implemented after defining the interface
+        * Get wrench applied on the specified link expressed in the specified link frame.
+        *
+        * @return the predicted measurement as a LinAcceleration
+        */
+       iDynTree::LinAcceleration predictMeasurement(const iDynTree::SpatialAcc &linkAcc, const iDynTree::Twist &linkTwist);
+
+       /**
+         * Following method is to be implemented after defining the interface
+         * Get wrench applied on the specified link expressed in the specified link frame.
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        //bool getAngularVelocityOfLink(const iDynTree::AngVelocity & measured_angular_velocity,
-        //                            iDynTree::AngVelocity & angular_velocity_of_link ) const;
-
-
+   //    bool getAccelerationOfLink(const iDynTree::LinAcceleration & measured_acceleration,
+   //                                  iDynTree::LinAcceleration & linear_acceleration_of_link ) const;
     };
 
 

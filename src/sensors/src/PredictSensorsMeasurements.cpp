@@ -17,8 +17,8 @@
 
 #include <iDynTree/Sensors/PredictSensorsMeasurements.h>
 #include <iDynTree/Core/SpatialMotionVector.h>
-#include <iDynTree/Sensors/Accelerometer.h>
-#include <iDynTree/Sensors/Gyroscope.h>
+#include <iDynTree/Sensors/AccelerometerSensor.h>
+#include <iDynTree/Sensors/GyroscopeSensor.h>
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
@@ -65,7 +65,7 @@ bool predictSensorsMeasurements(const Model & model,
     unsigned int numAccl = sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER);
     for(size_t idx = 0; idx<numAccl; idx++)
     {
-        Accelerometer * accelerometer = (Accelerometer *)sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
+        AccelerometerSensor * accelerometer = (AccelerometerSensor *)sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
         LinkIndex parentLinkId = accelerometer->getParentIndex();
         LinAcceleration predictedAcc = accelerometer->predictMeasurement(buf_linkProperAcc(parentLinkId),
                                                                          buf_linkVel(parentLinkId));
@@ -75,7 +75,7 @@ bool predictSensorsMeasurements(const Model & model,
     unsigned int numGyro = sensorsList.getNrOfSensors(iDynTree::GYROSCOPE);
     for(size_t idx = 0; idx<numGyro; idx++)
     {
-        Gyroscope * gyroscope = (Gyroscope*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
+        GyroscopeSensor * gyroscope = (GyroscopeSensor*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
         LinkIndex parentLinkId = gyroscope->getParentIndex();
         AngVelocity predictedAngVel = gyroscope->predictMeasurement(buf_linkVel(parentLinkId));
         predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);

@@ -43,8 +43,8 @@
 
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/SixAxisFTSensor.h>
-#include <iDynTree/Sensors/Accelerometer.h>
-#include <iDynTree/Sensors/Gyroscope.h>
+#include <iDynTree/Sensors/AccelerometerSensor.h>
+#include <iDynTree/Sensors/GyroscopeSensor.h>
 
 
 #include <fstream>
@@ -234,14 +234,14 @@ iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTr
                 break;
             case iDynTree::ACCELEROMETER :
                 {
-                    iDynTree::Accelerometer *newAccelerometerSens = new(iDynTree::Accelerometer);
+                    iDynTree::AccelerometerSensor *newAccelerometerSens = new(iDynTree::AccelerometerSensor);
                     newAccelerometerSens->setLinkSensorTransform(genericSensors[genSensItr].sensorPose);
                     newSensor = (Sensor *)newAccelerometerSens;
                 }
                 break;
             case iDynTree::GYROSCOPE :
                 {
-                    iDynTree::Gyroscope *newGyroscopeSens = new(iDynTree::Gyroscope);
+                    iDynTree::GyroscopeSensor *newGyroscopeSens = new(iDynTree::GyroscopeSensor);
                     newGyroscopeSens->setLinkSensorTransform(genericSensors[genSensItr].sensorPose);
                     newSensor = (Sensor*)newGyroscopeSens;
                 }
