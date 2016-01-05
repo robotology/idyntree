@@ -1153,7 +1153,7 @@ namespace swig {
 #define SWIGTYPE_p_Type swig_types[15]
 #define SWIGTYPE_p_char swig_types[16]
 #define SWIGTYPE_p_double swig_types[17]
-#define SWIGTYPE_p_iDynTree__Accelerometer swig_types[18]
+#define SWIGTYPE_p_iDynTree__AccelerometerSensor swig_types[18]
 #define SWIGTYPE_p_iDynTree__AngularForceVector3 swig_types[19]
 #define SWIGTYPE_p_iDynTree__AngularForceVector3Semantics swig_types[20]
 #define SWIGTYPE_p_iDynTree__AngularMotionVector3 swig_types[21]
@@ -1181,7 +1181,7 @@ namespace swig {
 #define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t swig_types[43]
 #define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t swig_types[44]
 #define SWIGTYPE_p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t swig_types[45]
-#define SWIGTYPE_p_iDynTree__Gyroscope swig_types[46]
+#define SWIGTYPE_p_iDynTree__GyroscopeSensor swig_types[46]
 #define SWIGTYPE_p_iDynTree__HighLevel__DynamicsComputations swig_types[47]
 #define SWIGTYPE_p_iDynTree__IJoint swig_types[48]
 #define SWIGTYPE_p_iDynTree__IMatrix swig_types[49]
@@ -1331,8 +1331,8 @@ static swig_module_info swig_module = {swig_types, 117, 0, 0, 0, 0};
 // Sensors related data structures
 #include "iDynTree/Sensors/Sensors.h"
 #include "iDynTree/Sensors/SixAxisFTSensor.h"
-#include "iDynTree/Sensors/Accelerometer.h"
-#include "iDynTree/Sensors/Gyroscope.h"
+#include "iDynTree/Sensors/AccelerometerSensor.h"
+#include "iDynTree/Sensors/GyroscopeSensor.h"
 #include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
 // Sensors loading from external formats
@@ -37009,15 +37009,15 @@ fail:
 }
 
 
-int _wrap_new_Accelerometer__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_new_AccelerometerSensor__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
-  iDynTree::Accelerometer *result = 0 ;
+  iDynTree::AccelerometerSensor *result = 0 ;
   
-  if (!SWIG_check_num_args("new_Accelerometer",argc,0,0,0)) {
+  if (!SWIG_check_num_args("new_AccelerometerSensor",argc,0,0,0)) {
     SWIG_fail;
   }
-  result = (iDynTree::Accelerometer *)new iDynTree::Accelerometer();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Accelerometer, 1 |  0 );
+  result = (iDynTree::AccelerometerSensor *)new iDynTree::AccelerometerSensor();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__AccelerometerSensor, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -37025,26 +37025,26 @@ fail:
 }
 
 
-int _wrap_new_Accelerometer__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = 0 ;
+int _wrap_new_AccelerometerSensor__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   mxArray * _out;
-  iDynTree::Accelerometer *result = 0 ;
+  iDynTree::AccelerometerSensor *result = 0 ;
   
-  if (!SWIG_check_num_args("new_Accelerometer",argc,1,1,0)) {
+  if (!SWIG_check_num_args("new_AccelerometerSensor",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Accelerometer,  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__AccelerometerSensor,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Accelerometer" "', argument " "1"" of type '" "iDynTree::Accelerometer const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AccelerometerSensor" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor const &""'"); 
   }
   if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Accelerometer" "', argument " "1"" of type '" "iDynTree::Accelerometer const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AccelerometerSensor" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor const &""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
-  result = (iDynTree::Accelerometer *)new iDynTree::Accelerometer((iDynTree::Accelerometer const &)*arg1);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Accelerometer, 1 |  0 );
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
+  result = (iDynTree::AccelerometerSensor *)new iDynTree::AccelerometerSensor((iDynTree::AccelerometerSensor const &)*arg1);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__AccelerometerSensor, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -37052,44 +37052,44 @@ fail:
 }
 
 
-int _wrap_new_Accelerometer (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_new_AccelerometerSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 0) {
-    return _wrap_new_Accelerometer__SWIG_0(resc,resv,argc,argv);
+    return _wrap_new_AccelerometerSensor__SWIG_0(resc,resv,argc,argv);
   }
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Accelerometer, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__AccelerometerSensor, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      return _wrap_new_Accelerometer__SWIG_1(resc,resv,argc,argv);
+      return _wrap_new_AccelerometerSensor__SWIG_1(resc,resv,argc,argv);
     }
   }
   
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'new_Accelerometer'."
+  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'new_AccelerometerSensor'."
     "  Possible C/C++ prototypes are:\n"
-    "    iDynTree::Accelerometer::Accelerometer()\n"
-    "    iDynTree::Accelerometer::Accelerometer(iDynTree::Accelerometer const &)\n");
+    "    iDynTree::AccelerometerSensor::AccelerometerSensor()\n"
+    "    iDynTree::AccelerometerSensor::AccelerometerSensor(iDynTree::AccelerometerSensor const &)\n");
   return 1;
 }
 
 
-int _wrap_delete_Accelerometer (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_delete_AccelerometerSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   
   int is_owned;
-  if (!SWIG_check_num_args("delete_Accelerometer",argc,1,1,0)) {
+  if (!SWIG_check_num_args("delete_AccelerometerSensor",argc,1,1,0)) {
     SWIG_fail;
   }
   is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Accelerometer" "', argument " "1"" of type '" "iDynTree::Accelerometer *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_AccelerometerSensor" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
   if (is_owned) {
     delete arg1;
   }
@@ -37101,8 +37101,8 @@ fail:
 }
 
 
-int _wrap_Accelerometer_setName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_setName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -37110,22 +37110,22 @@ int _wrap_Accelerometer_setName (int resc, mxArray *resv[], int argc, mxArray *a
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Accelerometer_setName",argc,2,2,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_setName",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_setName" "', argument " "1"" of type '" "iDynTree::Accelerometer *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_setName" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Accelerometer_setName" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AccelerometerSensor_setName" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Accelerometer_setName" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AccelerometerSensor_setName" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
@@ -37140,8 +37140,8 @@ fail:
 }
 
 
-int _wrap_Accelerometer_setLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_setLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   iDynTree::Transform *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -37150,23 +37150,23 @@ int _wrap_Accelerometer_setLinkSensorTransform (int resc, mxArray *resv[], int a
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Accelerometer_setLinkSensorTransform",argc,2,2,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_setLinkSensorTransform",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_setLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::Accelerometer const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_setLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Transform,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Accelerometer_setLinkSensorTransform" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AccelerometerSensor_setLinkSensorTransform" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Accelerometer_setLinkSensorTransform" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AccelerometerSensor_setLinkSensorTransform" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::Transform * >(argp2);
-  result = (bool)((iDynTree::Accelerometer const *)arg1)->setLinkSensorTransform((iDynTree::Transform const &)*arg2);
+  result = (bool)((iDynTree::AccelerometerSensor const *)arg1)->setLinkSensorTransform((iDynTree::Transform const &)*arg2);
   _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37175,8 +37175,8 @@ fail:
 }
 
 
-int _wrap_Accelerometer_setParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_setParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -37184,22 +37184,22 @@ int _wrap_Accelerometer_setParent (int resc, mxArray *resv[], int argc, mxArray 
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Accelerometer_setParent",argc,2,2,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_setParent",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_setParent" "', argument " "1"" of type '" "iDynTree::Accelerometer *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_setParent" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Accelerometer_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AccelerometerSensor_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Accelerometer_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AccelerometerSensor_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
@@ -37214,8 +37214,8 @@ fail:
 }
 
 
-int _wrap_Accelerometer_setParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_setParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   int *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -37225,17 +37225,17 @@ int _wrap_Accelerometer_setParentIndex (int resc, mxArray *resv[], int argc, mxA
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Accelerometer_setParentIndex",argc,2,2,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_setParentIndex",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_setParentIndex" "', argument " "1"" of type '" "iDynTree::Accelerometer *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_setParentIndex" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
   ecode2 = SWIG_AsVal_int(argv[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Accelerometer_setParentIndex" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AccelerometerSensor_setParentIndex" "', argument " "2"" of type '" "int""'");
   } 
   temp2 = static_cast< int >(val2);
   arg2 = &temp2;
@@ -37248,22 +37248,22 @@ fail:
 }
 
 
-int _wrap_Accelerometer_getName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_getName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   std::string result;
   
-  if (!SWIG_check_num_args("Accelerometer_getName",argc,1,1,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_getName",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_getName" "', argument " "1"" of type '" "iDynTree::Accelerometer const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_getName" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
-  result = ((iDynTree::Accelerometer const *)arg1)->getName();
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
+  result = ((iDynTree::AccelerometerSensor const *)arg1)->getName();
   _out = SWIG_From_std_string(static_cast< std::string >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37272,22 +37272,22 @@ fail:
 }
 
 
-int _wrap_Accelerometer_getSensorType (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_getSensorType (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   iDynTree::SensorType result;
   
-  if (!SWIG_check_num_args("Accelerometer_getSensorType",argc,1,1,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_getSensorType",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_getSensorType" "', argument " "1"" of type '" "iDynTree::Accelerometer const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_getSensorType" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
-  result = (iDynTree::SensorType)((iDynTree::Accelerometer const *)arg1)->getSensorType();
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
+  result = (iDynTree::SensorType)((iDynTree::AccelerometerSensor const *)arg1)->getSensorType();
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37296,22 +37296,22 @@ fail:
 }
 
 
-int _wrap_Accelerometer_getParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_getParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   std::string result;
   
-  if (!SWIG_check_num_args("Accelerometer_getParent",argc,1,1,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_getParent",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_getParent" "', argument " "1"" of type '" "iDynTree::Accelerometer const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_getParent" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
-  result = ((iDynTree::Accelerometer const *)arg1)->getParent();
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
+  result = ((iDynTree::AccelerometerSensor const *)arg1)->getParent();
   _out = SWIG_From_std_string(static_cast< std::string >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37320,22 +37320,22 @@ fail:
 }
 
 
-int _wrap_Accelerometer_getParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_getParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   int result;
   
-  if (!SWIG_check_num_args("Accelerometer_getParentIndex",argc,1,1,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_getParentIndex",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_getParentIndex" "', argument " "1"" of type '" "iDynTree::Accelerometer const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_getParentIndex" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
-  result = (int)((iDynTree::Accelerometer const *)arg1)->getParentIndex();
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
+  result = (int)((iDynTree::AccelerometerSensor const *)arg1)->getParentIndex();
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37344,22 +37344,22 @@ fail:
 }
 
 
-int _wrap_Accelerometer_isValid (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_isValid (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Accelerometer_isValid",argc,1,1,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_isValid",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_isValid" "', argument " "1"" of type '" "iDynTree::Accelerometer const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_isValid" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
-  result = (bool)((iDynTree::Accelerometer const *)arg1)->isValid();
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
+  result = (bool)((iDynTree::AccelerometerSensor const *)arg1)->isValid();
   _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37368,22 +37368,22 @@ fail:
 }
 
 
-int _wrap_Accelerometer_clone (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_clone (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   iDynTree::Sensor *result = 0 ;
   
-  if (!SWIG_check_num_args("Accelerometer_clone",argc,1,1,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_clone",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_clone" "', argument " "1"" of type '" "iDynTree::Accelerometer const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_clone" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
-  result = (iDynTree::Sensor *)((iDynTree::Accelerometer const *)arg1)->clone();
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
+  result = (iDynTree::Sensor *)((iDynTree::AccelerometerSensor const *)arg1)->clone();
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37392,21 +37392,21 @@ fail:
 }
 
 
-int _wrap_Accelerometer_getLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_getLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   iDynTree::Transform result;
   
-  if (!SWIG_check_num_args("Accelerometer_getLinkSensorTransform",argc,1,1,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_getLinkSensorTransform",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_getLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::Accelerometer *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_getLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
   result = (arg1)->getLinkSensorTransform();
   _out = SWIG_NewPointerObj((new iDynTree::Transform(static_cast< const iDynTree::Transform& >(result))), SWIGTYPE_p_iDynTree__Transform, SWIG_POINTER_OWN |  0 );
   if (_out) --resc, *resv++ = _out;
@@ -37416,8 +37416,8 @@ fail:
 }
 
 
-int _wrap_Accelerometer_predictMeasurement (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Accelerometer *arg1 = (iDynTree::Accelerometer *) 0 ;
+int _wrap_AccelerometerSensor_predictMeasurement (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::AccelerometerSensor *arg1 = (iDynTree::AccelerometerSensor *) 0 ;
   iDynTree::SpatialAcc *arg2 = 0 ;
   iDynTree::Twist *arg3 = 0 ;
   void *argp1 = 0 ;
@@ -37429,28 +37429,28 @@ int _wrap_Accelerometer_predictMeasurement (int resc, mxArray *resv[], int argc,
   mxArray * _out;
   iDynTree::LinAcceleration result;
   
-  if (!SWIG_check_num_args("Accelerometer_predictMeasurement",argc,3,3,0)) {
+  if (!SWIG_check_num_args("AccelerometerSensor_predictMeasurement",argc,3,3,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Accelerometer, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__AccelerometerSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Accelerometer_predictMeasurement" "', argument " "1"" of type '" "iDynTree::Accelerometer *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AccelerometerSensor_predictMeasurement" "', argument " "1"" of type '" "iDynTree::AccelerometerSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Accelerometer * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::AccelerometerSensor * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SpatialAcc,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Accelerometer_predictMeasurement" "', argument " "2"" of type '" "iDynTree::SpatialAcc const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AccelerometerSensor_predictMeasurement" "', argument " "2"" of type '" "iDynTree::SpatialAcc const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Accelerometer_predictMeasurement" "', argument " "2"" of type '" "iDynTree::SpatialAcc const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AccelerometerSensor_predictMeasurement" "', argument " "2"" of type '" "iDynTree::SpatialAcc const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::SpatialAcc * >(argp2);
   res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__Twist,  0 );
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Accelerometer_predictMeasurement" "', argument " "3"" of type '" "iDynTree::Twist const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "AccelerometerSensor_predictMeasurement" "', argument " "3"" of type '" "iDynTree::Twist const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Accelerometer_predictMeasurement" "', argument " "3"" of type '" "iDynTree::Twist const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AccelerometerSensor_predictMeasurement" "', argument " "3"" of type '" "iDynTree::Twist const &""'"); 
   }
   arg3 = reinterpret_cast< iDynTree::Twist * >(argp3);
   result = (arg1)->predictMeasurement((iDynTree::SpatialAcc const &)*arg2,(iDynTree::Twist const &)*arg3);
@@ -37462,15 +37462,15 @@ fail:
 }
 
 
-int _wrap_new_Gyroscope__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_new_GyroscopeSensor__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
-  iDynTree::Gyroscope *result = 0 ;
+  iDynTree::GyroscopeSensor *result = 0 ;
   
-  if (!SWIG_check_num_args("new_Gyroscope",argc,0,0,0)) {
+  if (!SWIG_check_num_args("new_GyroscopeSensor",argc,0,0,0)) {
     SWIG_fail;
   }
-  result = (iDynTree::Gyroscope *)new iDynTree::Gyroscope();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Gyroscope, 1 |  0 );
+  result = (iDynTree::GyroscopeSensor *)new iDynTree::GyroscopeSensor();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__GyroscopeSensor, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -37478,26 +37478,26 @@ fail:
 }
 
 
-int _wrap_new_Gyroscope__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = 0 ;
+int _wrap_new_GyroscopeSensor__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   mxArray * _out;
-  iDynTree::Gyroscope *result = 0 ;
+  iDynTree::GyroscopeSensor *result = 0 ;
   
-  if (!SWIG_check_num_args("new_Gyroscope",argc,1,1,0)) {
+  if (!SWIG_check_num_args("new_GyroscopeSensor",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Gyroscope,  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__GyroscopeSensor,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Gyroscope" "', argument " "1"" of type '" "iDynTree::Gyroscope const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GyroscopeSensor" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor const &""'"); 
   }
   if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Gyroscope" "', argument " "1"" of type '" "iDynTree::Gyroscope const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GyroscopeSensor" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor const &""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
-  result = (iDynTree::Gyroscope *)new iDynTree::Gyroscope((iDynTree::Gyroscope const &)*arg1);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Gyroscope, 1 |  0 );
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
+  result = (iDynTree::GyroscopeSensor *)new iDynTree::GyroscopeSensor((iDynTree::GyroscopeSensor const &)*arg1);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__GyroscopeSensor, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -37505,44 +37505,44 @@ fail:
 }
 
 
-int _wrap_new_Gyroscope (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_new_GyroscopeSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 0) {
-    return _wrap_new_Gyroscope__SWIG_0(resc,resv,argc,argv);
+    return _wrap_new_GyroscopeSensor__SWIG_0(resc,resv,argc,argv);
   }
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Gyroscope, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__GyroscopeSensor, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      return _wrap_new_Gyroscope__SWIG_1(resc,resv,argc,argv);
+      return _wrap_new_GyroscopeSensor__SWIG_1(resc,resv,argc,argv);
     }
   }
   
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'new_Gyroscope'."
+  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'new_GyroscopeSensor'."
     "  Possible C/C++ prototypes are:\n"
-    "    iDynTree::Gyroscope::Gyroscope()\n"
-    "    iDynTree::Gyroscope::Gyroscope(iDynTree::Gyroscope const &)\n");
+    "    iDynTree::GyroscopeSensor::GyroscopeSensor()\n"
+    "    iDynTree::GyroscopeSensor::GyroscopeSensor(iDynTree::GyroscopeSensor const &)\n");
   return 1;
 }
 
 
-int _wrap_delete_Gyroscope (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_delete_GyroscopeSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   
   int is_owned;
-  if (!SWIG_check_num_args("delete_Gyroscope",argc,1,1,0)) {
+  if (!SWIG_check_num_args("delete_GyroscopeSensor",argc,1,1,0)) {
     SWIG_fail;
   }
   is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Gyroscope" "', argument " "1"" of type '" "iDynTree::Gyroscope *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_GyroscopeSensor" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
   if (is_owned) {
     delete arg1;
   }
@@ -37554,8 +37554,8 @@ fail:
 }
 
 
-int _wrap_Gyroscope_setName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_setName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -37563,22 +37563,22 @@ int _wrap_Gyroscope_setName (int resc, mxArray *resv[], int argc, mxArray *argv[
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Gyroscope_setName",argc,2,2,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_setName",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_setName" "', argument " "1"" of type '" "iDynTree::Gyroscope *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_setName" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Gyroscope_setName" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GyroscopeSensor_setName" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Gyroscope_setName" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GyroscopeSensor_setName" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
@@ -37593,8 +37593,8 @@ fail:
 }
 
 
-int _wrap_Gyroscope_setLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_setLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   iDynTree::Transform *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -37603,23 +37603,23 @@ int _wrap_Gyroscope_setLinkSensorTransform (int resc, mxArray *resv[], int argc,
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Gyroscope_setLinkSensorTransform",argc,2,2,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_setLinkSensorTransform",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_setLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::Gyroscope const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_setLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Transform,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Gyroscope_setLinkSensorTransform" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GyroscopeSensor_setLinkSensorTransform" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Gyroscope_setLinkSensorTransform" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GyroscopeSensor_setLinkSensorTransform" "', argument " "2"" of type '" "iDynTree::Transform const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::Transform * >(argp2);
-  result = (bool)((iDynTree::Gyroscope const *)arg1)->setLinkSensorTransform((iDynTree::Transform const &)*arg2);
+  result = (bool)((iDynTree::GyroscopeSensor const *)arg1)->setLinkSensorTransform((iDynTree::Transform const &)*arg2);
   _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37628,8 +37628,8 @@ fail:
 }
 
 
-int _wrap_Gyroscope_setParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_setParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -37637,22 +37637,22 @@ int _wrap_Gyroscope_setParent (int resc, mxArray *resv[], int argc, mxArray *arg
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Gyroscope_setParent",argc,2,2,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_setParent",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_setParent" "', argument " "1"" of type '" "iDynTree::Gyroscope *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_setParent" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(argv[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Gyroscope_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GyroscopeSensor_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Gyroscope_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GyroscopeSensor_setParent" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
@@ -37667,8 +37667,8 @@ fail:
 }
 
 
-int _wrap_Gyroscope_setParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_setParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   int *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -37678,17 +37678,17 @@ int _wrap_Gyroscope_setParentIndex (int resc, mxArray *resv[], int argc, mxArray
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Gyroscope_setParentIndex",argc,2,2,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_setParentIndex",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_setParentIndex" "', argument " "1"" of type '" "iDynTree::Gyroscope *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_setParentIndex" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
   ecode2 = SWIG_AsVal_int(argv[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Gyroscope_setParentIndex" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "GyroscopeSensor_setParentIndex" "', argument " "2"" of type '" "int""'");
   } 
   temp2 = static_cast< int >(val2);
   arg2 = &temp2;
@@ -37701,22 +37701,22 @@ fail:
 }
 
 
-int _wrap_Gyroscope_getName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_getName (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   std::string result;
   
-  if (!SWIG_check_num_args("Gyroscope_getName",argc,1,1,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_getName",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_getName" "', argument " "1"" of type '" "iDynTree::Gyroscope const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_getName" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
-  result = ((iDynTree::Gyroscope const *)arg1)->getName();
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
+  result = ((iDynTree::GyroscopeSensor const *)arg1)->getName();
   _out = SWIG_From_std_string(static_cast< std::string >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37725,22 +37725,22 @@ fail:
 }
 
 
-int _wrap_Gyroscope_getSensorType (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_getSensorType (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   iDynTree::SensorType result;
   
-  if (!SWIG_check_num_args("Gyroscope_getSensorType",argc,1,1,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_getSensorType",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_getSensorType" "', argument " "1"" of type '" "iDynTree::Gyroscope const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_getSensorType" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
-  result = (iDynTree::SensorType)((iDynTree::Gyroscope const *)arg1)->getSensorType();
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
+  result = (iDynTree::SensorType)((iDynTree::GyroscopeSensor const *)arg1)->getSensorType();
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37749,22 +37749,22 @@ fail:
 }
 
 
-int _wrap_Gyroscope_getParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_getParent (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   std::string result;
   
-  if (!SWIG_check_num_args("Gyroscope_getParent",argc,1,1,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_getParent",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_getParent" "', argument " "1"" of type '" "iDynTree::Gyroscope const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_getParent" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
-  result = ((iDynTree::Gyroscope const *)arg1)->getParent();
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
+  result = ((iDynTree::GyroscopeSensor const *)arg1)->getParent();
   _out = SWIG_From_std_string(static_cast< std::string >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37773,22 +37773,22 @@ fail:
 }
 
 
-int _wrap_Gyroscope_getParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_getParentIndex (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   int result;
   
-  if (!SWIG_check_num_args("Gyroscope_getParentIndex",argc,1,1,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_getParentIndex",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_getParentIndex" "', argument " "1"" of type '" "iDynTree::Gyroscope const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_getParentIndex" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
-  result = (int)((iDynTree::Gyroscope const *)arg1)->getParentIndex();
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
+  result = (int)((iDynTree::GyroscopeSensor const *)arg1)->getParentIndex();
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37797,22 +37797,22 @@ fail:
 }
 
 
-int _wrap_Gyroscope_isValid (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_isValid (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("Gyroscope_isValid",argc,1,1,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_isValid",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_isValid" "', argument " "1"" of type '" "iDynTree::Gyroscope const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_isValid" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
-  result = (bool)((iDynTree::Gyroscope const *)arg1)->isValid();
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
+  result = (bool)((iDynTree::GyroscopeSensor const *)arg1)->isValid();
   _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37821,22 +37821,22 @@ fail:
 }
 
 
-int _wrap_Gyroscope_clone (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_clone (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   iDynTree::Sensor *result = 0 ;
   
-  if (!SWIG_check_num_args("Gyroscope_clone",argc,1,1,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_clone",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_clone" "', argument " "1"" of type '" "iDynTree::Gyroscope const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_clone" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor const *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
-  result = (iDynTree::Sensor *)((iDynTree::Gyroscope const *)arg1)->clone();
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
+  result = (iDynTree::Sensor *)((iDynTree::GyroscopeSensor const *)arg1)->clone();
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -37845,21 +37845,21 @@ fail:
 }
 
 
-int _wrap_Gyroscope_getLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_getLinkSensorTransform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   iDynTree::Transform result;
   
-  if (!SWIG_check_num_args("Gyroscope_getLinkSensorTransform",argc,1,1,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_getLinkSensorTransform",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_getLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::Gyroscope *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_getLinkSensorTransform" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
   result = (arg1)->getLinkSensorTransform();
   _out = SWIG_NewPointerObj((new iDynTree::Transform(static_cast< const iDynTree::Transform& >(result))), SWIGTYPE_p_iDynTree__Transform, SWIG_POINTER_OWN |  0 );
   if (_out) --resc, *resv++ = _out;
@@ -37869,8 +37869,8 @@ fail:
 }
 
 
-int _wrap_Gyroscope_predictMeasurement (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Gyroscope *arg1 = (iDynTree::Gyroscope *) 0 ;
+int _wrap_GyroscopeSensor_predictMeasurement (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::GyroscopeSensor *arg1 = (iDynTree::GyroscopeSensor *) 0 ;
   iDynTree::Twist *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -37879,20 +37879,20 @@ int _wrap_Gyroscope_predictMeasurement (int resc, mxArray *resv[], int argc, mxA
   mxArray * _out;
   iDynTree::AngVelocity result;
   
-  if (!SWIG_check_num_args("Gyroscope_predictMeasurement",argc,2,2,0)) {
+  if (!SWIG_check_num_args("GyroscopeSensor_predictMeasurement",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Gyroscope, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__GyroscopeSensor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Gyroscope_predictMeasurement" "', argument " "1"" of type '" "iDynTree::Gyroscope *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GyroscopeSensor_predictMeasurement" "', argument " "1"" of type '" "iDynTree::GyroscopeSensor *""'"); 
   }
-  arg1 = reinterpret_cast< iDynTree::Gyroscope * >(argp1);
+  arg1 = reinterpret_cast< iDynTree::GyroscopeSensor * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Twist,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Gyroscope_predictMeasurement" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GyroscopeSensor_predictMeasurement" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Gyroscope_predictMeasurement" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GyroscopeSensor_predictMeasurement" "', argument " "2"" of type '" "iDynTree::Twist const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::Twist * >(argp2);
   result = (arg1)->predictMeasurement((iDynTree::Twist const &)*arg2);
@@ -42187,14 +42187,14 @@ static void *_p_iDynTree__AngularMotionVector3To_p_iDynTree__GeomVector3T_iDynTr
 static void *_p_iDynTree__AngularForceVector3To_p_iDynTree__ForceVector3T_iDynTree__AngularForceVector3_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((iDynTree::ForceVector3< iDynTree::AngularForceVector3 > *)  ((iDynTree::AngularForceVector3 *) x));
 }
-static void *_p_iDynTree__AccelerometerTo_p_iDynTree__Sensor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::Sensor *)  ((iDynTree::Accelerometer *) x));
-}
-static void *_p_iDynTree__GyroscopeTo_p_iDynTree__Sensor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((iDynTree::Sensor *)  ((iDynTree::Gyroscope *) x));
+static void *_p_iDynTree__AccelerometerSensorTo_p_iDynTree__Sensor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::Sensor *)  ((iDynTree::AccelerometerSensor *) x));
 }
 static void *_p_iDynTree__SixAxisForceTorqueSensorTo_p_iDynTree__Sensor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((iDynTree::Sensor *)  ((iDynTree::SixAxisForceTorqueSensor *) x));
+}
+static void *_p_iDynTree__GyroscopeSensorTo_p_iDynTree__Sensor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((iDynTree::Sensor *)  ((iDynTree::GyroscopeSensor *) x));
 }
 static void *_p_iDynTree__SpatialInertiaTo_p_iDynTree__SpatialInertiaRaw(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((iDynTree::SpatialInertiaRaw *)  ((iDynTree::SpatialInertia *) x));
@@ -42517,7 +42517,7 @@ static swig_type_info _swigt__p_Traits = {"_p_Traits", "Traits *", 0, 0, (void*)
 static swig_type_info _swigt__p_Type = {"_p_Type", "Type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_iDynTree__Accelerometer = {"_p_iDynTree__Accelerometer", "iDynTree::Accelerometer *", 0, 0, (void*)"iDynTree.Accelerometer", 0};
+static swig_type_info _swigt__p_iDynTree__AccelerometerSensor = {"_p_iDynTree__AccelerometerSensor", "iDynTree::AccelerometerSensor *", 0, 0, (void*)"iDynTree.AccelerometerSensor", 0};
 static swig_type_info _swigt__p_iDynTree__AngularForceVector3 = {"_p_iDynTree__AngularForceVector3", "iDynTree::SpatialForceVector::AngularVector3T *|iDynTree::MotionForce_traits< iDynTree::AngularMotionVector3 >::DualSpace *|iDynTree::AngularForceVector3 *|iDynTree::MotionVector3< iDynTree::LinearMotionVector3 >::MotionCrossLinF *|iDynTree::AngMomentum *|iDynTree::SpatialVector< iDynTree::SpatialForceVector >::AngularVector3T *|iDynTree::MotionVector3< iDynTree::AngularMotionVector3 >::MotionCrossAngF *|iDynTree::Torque *", 0, 0, (void*)"iDynTree.AngularForceVector3", 0};
 static swig_type_info _swigt__p_iDynTree__AngularForceVector3Semantics = {"_p_iDynTree__AngularForceVector3Semantics", "iDynTree::DualMotionForceSemanticsT< iDynTree::AngularMotionVector3Semantics >::Type *|iDynTree::AngularForceVector3Semantics *|iDynTree::GeomVector3< iDynTree::AngularForceVector3 >::MotionForceSemanticsT *", 0, 0, (void*)"iDynTree.AngularForceVector3Semantics", 0};
 static swig_type_info _swigt__p_iDynTree__AngularMotionVector3 = {"_p_iDynTree__AngularMotionVector3", "iDynTree::SpatialMotionVector::AngularVector3T *|iDynTree::AngularMotionVector3 *|iDynTree::AngVelocity *|iDynTree::MotionVector3< iDynTree::LinearMotionVector3 >::MotionCrossLinM *|iDynTree::AngAcceleration *|iDynTree::SpatialVector< iDynTree::SpatialMotionVector >::AngularVector3T *|iDynTree::MotionVector3< iDynTree::AngularMotionVector3 >::MotionCrossAngM *|iDynTree::MotionForce_traits< iDynTree::AngularForceVector3 >::DualSpace *", 0, 0, (void*)"iDynTree.AngularMotionVector3", 0};
@@ -42545,7 +42545,7 @@ static swig_type_info _swigt__p_iDynTree__GeomVector3T_iDynTree__AngularForceVec
 static swig_type_info _swigt__p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t = {"_p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t", "iDynTree::GeomVector3< iDynTree::AngularMotionVector3 > *|iDynTree::GeomVector3< iDynTree::AngularMotionVector3 >::MotionForceTbase *", 0, 0, (void*)"iDynTree.GeomVector3__AngularMotionVector3", 0};
 static swig_type_info _swigt__p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t = {"_p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t", "iDynTree::GeomVector3< iDynTree::LinearForceVector3 > *|iDynTree::GeomVector3< iDynTree::LinearForceVector3 >::MotionForceTbase *", 0, 0, (void*)"iDynTree.GeomVector3__LinearForceVector3", 0};
 static swig_type_info _swigt__p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t = {"_p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t", "iDynTree::GeomVector3< iDynTree::LinearMotionVector3 > *|iDynTree::GeomVector3< iDynTree::LinearMotionVector3 >::MotionForceTbase *", 0, 0, (void*)"iDynTree.GeomVector3__LinearMotionVector3", 0};
-static swig_type_info _swigt__p_iDynTree__Gyroscope = {"_p_iDynTree__Gyroscope", "iDynTree::Gyroscope *", 0, 0, (void*)"iDynTree.Gyroscope", 0};
+static swig_type_info _swigt__p_iDynTree__GyroscopeSensor = {"_p_iDynTree__GyroscopeSensor", "iDynTree::GyroscopeSensor *", 0, 0, (void*)"iDynTree.GyroscopeSensor", 0};
 static swig_type_info _swigt__p_iDynTree__HighLevel__DynamicsComputations = {"_p_iDynTree__HighLevel__DynamicsComputations", "iDynTree::HighLevel::DynamicsComputations *", 0, 0, (void*)"iDynTree.DynamicsComputations", 0};
 static swig_type_info _swigt__p_iDynTree__IJoint = {"_p_iDynTree__IJoint", "iDynTree::IJoint *|iDynTree::IJointConstPtr", 0, 0, (void*)"iDynTree.IJoint", 0};
 static swig_type_info _swigt__p_iDynTree__IMatrix = {"_p_iDynTree__IMatrix", "iDynTree::IMatrix *", 0, 0, (void*)"iDynTree.IMatrix", 0};
@@ -42636,7 +42636,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Type,
   &_swigt__p_char,
   &_swigt__p_double,
-  &_swigt__p_iDynTree__Accelerometer,
+  &_swigt__p_iDynTree__AccelerometerSensor,
   &_swigt__p_iDynTree__AngularForceVector3,
   &_swigt__p_iDynTree__AngularForceVector3Semantics,
   &_swigt__p_iDynTree__AngularMotionVector3,
@@ -42664,7 +42664,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t,
   &_swigt__p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t,
   &_swigt__p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t,
-  &_swigt__p_iDynTree__Gyroscope,
+  &_swigt__p_iDynTree__GyroscopeSensor,
   &_swigt__p_iDynTree__HighLevel__DynamicsComputations,
   &_swigt__p_iDynTree__IJoint,
   &_swigt__p_iDynTree__IMatrix,
@@ -42755,7 +42755,7 @@ static swig_cast_info _swigc__p_Traits[] = {  {&_swigt__p_Traits, 0, 0, 0},{0, 0
 static swig_cast_info _swigc__p_Type[] = {  {&_swigt__p_Type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__Accelerometer[] = {  {&_swigt__p_iDynTree__Accelerometer, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__AccelerometerSensor[] = {  {&_swigt__p_iDynTree__AccelerometerSensor, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__AngularForceVector3[] = {  {&_swigt__p_iDynTree__AngularForceVector3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__AngularForceVector3Semantics[] = {  {&_swigt__p_iDynTree__AngularForceVector3Semantics, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__AngularMotionVector3[] = {  {&_swigt__p_iDynTree__AngularMotionVector3, 0, 0, 0},{0, 0, 0, 0}};
@@ -42783,7 +42783,7 @@ static swig_cast_info _swigc__p_iDynTree__GeomVector3T_iDynTree__AngularForceVec
 static swig_cast_info _swigc__p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t[] = {  {&_swigt__p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_t, _p_iDynTree__MotionVector3T_iDynTree__AngularMotionVector3_tTo_p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t, 0, 0},  {&_swigt__p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t, 0, 0, 0},  {&_swigt__p_iDynTree__AngularMotionVector3, _p_iDynTree__AngularMotionVector3To_p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t[] = {  {&_swigt__p_iDynTree__ForceVector3T_iDynTree__LinearForceVector3_t, _p_iDynTree__ForceVector3T_iDynTree__LinearForceVector3_tTo_p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t, 0, 0},  {&_swigt__p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t, 0, 0, 0},  {&_swigt__p_iDynTree__LinearForceVector3, _p_iDynTree__LinearForceVector3To_p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t[] = {  {&_swigt__p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t, 0, 0, 0},  {&_swigt__p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_t, _p_iDynTree__MotionVector3T_iDynTree__LinearMotionVector3_tTo_p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t, 0, 0},  {&_swigt__p_iDynTree__LinearMotionVector3, _p_iDynTree__LinearMotionVector3To_p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__Gyroscope[] = {  {&_swigt__p_iDynTree__Gyroscope, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__GyroscopeSensor[] = {  {&_swigt__p_iDynTree__GyroscopeSensor, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__HighLevel__DynamicsComputations[] = {  {&_swigt__p_iDynTree__HighLevel__DynamicsComputations, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__IJoint[] = {  {&_swigt__p_iDynTree__MovableJointImplT_3_3_t, _p_iDynTree__MovableJointImplT_3_3_tTo_p_iDynTree__IJoint, 0, 0},  {&_swigt__p_iDynTree__RevoluteJoint, _p_iDynTree__RevoluteJointTo_p_iDynTree__IJoint, 0, 0},  {&_swigt__p_iDynTree__MovableJointImplT_2_2_t, _p_iDynTree__MovableJointImplT_2_2_tTo_p_iDynTree__IJoint, 0, 0},  {&_swigt__p_iDynTree__IJoint, 0, 0, 0},  {&_swigt__p_iDynTree__MovableJointImplT_1_1_t, _p_iDynTree__MovableJointImplT_1_1_tTo_p_iDynTree__IJoint, 0, 0},  {&_swigt__p_iDynTree__MovableJointImplT_6_6_t, _p_iDynTree__MovableJointImplT_6_6_tTo_p_iDynTree__IJoint, 0, 0},  {&_swigt__p_iDynTree__MovableJointImplT_5_5_t, _p_iDynTree__MovableJointImplT_5_5_tTo_p_iDynTree__IJoint, 0, 0},  {&_swigt__p_iDynTree__FixedJoint, _p_iDynTree__FixedJointTo_p_iDynTree__IJoint, 0, 0},  {&_swigt__p_iDynTree__MovableJointImplT_4_4_t, _p_iDynTree__MovableJointImplT_4_4_tTo_p_iDynTree__IJoint, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__IMatrix[] = {  {&_swigt__p_iDynTree__MatrixFixSizeT_3_3_t, _p_iDynTree__MatrixFixSizeT_3_3_tTo_p_iDynTree__IMatrix, 0, 0},  {&_swigt__p_iDynTree__MatrixDynSize, _p_iDynTree__MatrixDynSizeTo_p_iDynTree__IMatrix, 0, 0},  {&_swigt__p_iDynTree__MatrixFixSizeT_6_10_t, _p_iDynTree__MatrixFixSizeT_6_10_tTo_p_iDynTree__IMatrix, 0, 0},  {&_swigt__p_iDynTree__IMatrix, 0, 0, 0},  {&_swigt__p_iDynTree__RotationalInertiaRaw, _p_iDynTree__RotationalInertiaRawTo_p_iDynTree__IMatrix, 0, 0},  {&_swigt__p_iDynTree__MatrixFixSizeT_6_6_t, _p_iDynTree__MatrixFixSizeT_6_6_tTo_p_iDynTree__IMatrix, 0, 0},  {&_swigt__p_iDynTree__IRawMatrix, _p_iDynTree__IRawMatrixTo_p_iDynTree__IMatrix, 0, 0},  {&_swigt__p_iDynTree__RotationRaw, _p_iDynTree__RotationRawTo_p_iDynTree__IMatrix, 0, 0},  {&_swigt__p_iDynTree__Rotation, _p_iDynTree__RotationTo_p_iDynTree__IMatrix, 0, 0},  {&_swigt__p_iDynTree__MatrixFixSizeT_4_4_t, _p_iDynTree__MatrixFixSizeT_4_4_tTo_p_iDynTree__IMatrix, 0, 0},{0, 0, 0, 0}};
@@ -42828,7 +42828,7 @@ static swig_cast_info _swigc__p_iDynTree__Rotation[] = {  {&_swigt__p_iDynTree__
 static swig_cast_info _swigc__p_iDynTree__RotationRaw[] = {  {&_swigt__p_iDynTree__RotationRaw, 0, 0, 0},  {&_swigt__p_iDynTree__Rotation, _p_iDynTree__RotationTo_p_iDynTree__RotationRaw, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__RotationSemantics[] = {  {&_swigt__p_iDynTree__RotationSemantics, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__RotationalInertiaRaw[] = {  {&_swigt__p_iDynTree__RotationalInertiaRaw, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_iDynTree__Sensor[] = {  {&_swigt__p_iDynTree__Accelerometer, _p_iDynTree__AccelerometerTo_p_iDynTree__Sensor, 0, 0},  {&_swigt__p_iDynTree__Gyroscope, _p_iDynTree__GyroscopeTo_p_iDynTree__Sensor, 0, 0},  {&_swigt__p_iDynTree__Sensor, 0, 0, 0},  {&_swigt__p_iDynTree__SixAxisForceTorqueSensor, _p_iDynTree__SixAxisForceTorqueSensorTo_p_iDynTree__Sensor, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_iDynTree__Sensor[] = {  {&_swigt__p_iDynTree__AccelerometerSensor, _p_iDynTree__AccelerometerSensorTo_p_iDynTree__Sensor, 0, 0},  {&_swigt__p_iDynTree__Sensor, 0, 0, 0},  {&_swigt__p_iDynTree__SixAxisForceTorqueSensor, _p_iDynTree__SixAxisForceTorqueSensorTo_p_iDynTree__Sensor, 0, 0},  {&_swigt__p_iDynTree__GyroscopeSensor, _p_iDynTree__GyroscopeSensorTo_p_iDynTree__Sensor, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SensorsList[] = {  {&_swigt__p_iDynTree__SensorsList, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SensorsMeasurements[] = {  {&_swigt__p_iDynTree__SensorsMeasurements, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iDynTree__SixAxisForceTorqueSensor[] = {  {&_swigt__p_iDynTree__SixAxisForceTorqueSensor, 0, 0, 0},{0, 0, 0, 0}};
@@ -42874,7 +42874,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Type,
   _swigc__p_char,
   _swigc__p_double,
-  _swigc__p_iDynTree__Accelerometer,
+  _swigc__p_iDynTree__AccelerometerSensor,
   _swigc__p_iDynTree__AngularForceVector3,
   _swigc__p_iDynTree__AngularForceVector3Semantics,
   _swigc__p_iDynTree__AngularMotionVector3,
@@ -42902,7 +42902,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iDynTree__GeomVector3T_iDynTree__AngularMotionVector3_t,
   _swigc__p_iDynTree__GeomVector3T_iDynTree__LinearForceVector3_t,
   _swigc__p_iDynTree__GeomVector3T_iDynTree__LinearMotionVector3_t,
-  _swigc__p_iDynTree__Gyroscope,
+  _swigc__p_iDynTree__GyroscopeSensor,
   _swigc__p_iDynTree__HighLevel__DynamicsComputations,
   _swigc__p_iDynTree__IJoint,
   _swigc__p_iDynTree__IMatrix,
@@ -44106,34 +44106,34 @@ const char* swigFunctionName_(int fcn_id) {
   case 786: return "SixAxisForceTorqueSensor_isLinkAttachedToSensor";
   case 787: return "SixAxisForceTorqueSensor_getLinkSensorTransform";
   case 788: return "SixAxisForceTorqueSensor_getWrenchAppliedOnLink";
-  case 789: return "new_Accelerometer";
-  case 790: return "delete_Accelerometer";
-  case 791: return "Accelerometer_setName";
-  case 792: return "Accelerometer_setLinkSensorTransform";
-  case 793: return "Accelerometer_setParent";
-  case 794: return "Accelerometer_setParentIndex";
-  case 795: return "Accelerometer_getName";
-  case 796: return "Accelerometer_getSensorType";
-  case 797: return "Accelerometer_getParent";
-  case 798: return "Accelerometer_getParentIndex";
-  case 799: return "Accelerometer_isValid";
-  case 800: return "Accelerometer_clone";
-  case 801: return "Accelerometer_getLinkSensorTransform";
-  case 802: return "Accelerometer_predictMeasurement";
-  case 803: return "new_Gyroscope";
-  case 804: return "delete_Gyroscope";
-  case 805: return "Gyroscope_setName";
-  case 806: return "Gyroscope_setLinkSensorTransform";
-  case 807: return "Gyroscope_setParent";
-  case 808: return "Gyroscope_setParentIndex";
-  case 809: return "Gyroscope_getName";
-  case 810: return "Gyroscope_getSensorType";
-  case 811: return "Gyroscope_getParent";
-  case 812: return "Gyroscope_getParentIndex";
-  case 813: return "Gyroscope_isValid";
-  case 814: return "Gyroscope_clone";
-  case 815: return "Gyroscope_getLinkSensorTransform";
-  case 816: return "Gyroscope_predictMeasurement";
+  case 789: return "new_AccelerometerSensor";
+  case 790: return "delete_AccelerometerSensor";
+  case 791: return "AccelerometerSensor_setName";
+  case 792: return "AccelerometerSensor_setLinkSensorTransform";
+  case 793: return "AccelerometerSensor_setParent";
+  case 794: return "AccelerometerSensor_setParentIndex";
+  case 795: return "AccelerometerSensor_getName";
+  case 796: return "AccelerometerSensor_getSensorType";
+  case 797: return "AccelerometerSensor_getParent";
+  case 798: return "AccelerometerSensor_getParentIndex";
+  case 799: return "AccelerometerSensor_isValid";
+  case 800: return "AccelerometerSensor_clone";
+  case 801: return "AccelerometerSensor_getLinkSensorTransform";
+  case 802: return "AccelerometerSensor_predictMeasurement";
+  case 803: return "new_GyroscopeSensor";
+  case 804: return "delete_GyroscopeSensor";
+  case 805: return "GyroscopeSensor_setName";
+  case 806: return "GyroscopeSensor_setLinkSensorTransform";
+  case 807: return "GyroscopeSensor_setParent";
+  case 808: return "GyroscopeSensor_setParentIndex";
+  case 809: return "GyroscopeSensor_getName";
+  case 810: return "GyroscopeSensor_getSensorType";
+  case 811: return "GyroscopeSensor_getParent";
+  case 812: return "GyroscopeSensor_getParentIndex";
+  case 813: return "GyroscopeSensor_isValid";
+  case 814: return "GyroscopeSensor_clone";
+  case 815: return "GyroscopeSensor_getLinkSensorTransform";
+  case 816: return "GyroscopeSensor_predictMeasurement";
   case 817: return "_wrap_predictSensorsMeasurements";
   case 818: return "_wrap_sensorsListFromURDF";
   case 819: return "_wrap_sensorsListFromURDFString";
@@ -45056,34 +45056,34 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 786: flag=_wrap_SixAxisForceTorqueSensor_isLinkAttachedToSensor(resc,resv,argc,(mxArray**)(argv)); break;
   case 787: flag=_wrap_SixAxisForceTorqueSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
   case 788: flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 789: flag=_wrap_new_Accelerometer(resc,resv,argc,(mxArray**)(argv)); break;
-  case 790: flag=_wrap_delete_Accelerometer(resc,resv,argc,(mxArray**)(argv)); break;
-  case 791: flag=_wrap_Accelerometer_setName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 792: flag=_wrap_Accelerometer_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 793: flag=_wrap_Accelerometer_setParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 794: flag=_wrap_Accelerometer_setParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 795: flag=_wrap_Accelerometer_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 796: flag=_wrap_Accelerometer_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 797: flag=_wrap_Accelerometer_getParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 798: flag=_wrap_Accelerometer_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 799: flag=_wrap_Accelerometer_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 800: flag=_wrap_Accelerometer_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 801: flag=_wrap_Accelerometer_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 802: flag=_wrap_Accelerometer_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 803: flag=_wrap_new_Gyroscope(resc,resv,argc,(mxArray**)(argv)); break;
-  case 804: flag=_wrap_delete_Gyroscope(resc,resv,argc,(mxArray**)(argv)); break;
-  case 805: flag=_wrap_Gyroscope_setName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 806: flag=_wrap_Gyroscope_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 807: flag=_wrap_Gyroscope_setParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 808: flag=_wrap_Gyroscope_setParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 809: flag=_wrap_Gyroscope_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 810: flag=_wrap_Gyroscope_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 811: flag=_wrap_Gyroscope_getParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 812: flag=_wrap_Gyroscope_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 813: flag=_wrap_Gyroscope_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 814: flag=_wrap_Gyroscope_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 815: flag=_wrap_Gyroscope_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 816: flag=_wrap_Gyroscope_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 789: flag=_wrap_new_AccelerometerSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 790: flag=_wrap_delete_AccelerometerSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 791: flag=_wrap_AccelerometerSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 792: flag=_wrap_AccelerometerSensor_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 793: flag=_wrap_AccelerometerSensor_setParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 794: flag=_wrap_AccelerometerSensor_setParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 795: flag=_wrap_AccelerometerSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 796: flag=_wrap_AccelerometerSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 797: flag=_wrap_AccelerometerSensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 798: flag=_wrap_AccelerometerSensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 799: flag=_wrap_AccelerometerSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 800: flag=_wrap_AccelerometerSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 801: flag=_wrap_AccelerometerSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 802: flag=_wrap_AccelerometerSensor_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 803: flag=_wrap_new_GyroscopeSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 804: flag=_wrap_delete_GyroscopeSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 805: flag=_wrap_GyroscopeSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 806: flag=_wrap_GyroscopeSensor_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 807: flag=_wrap_GyroscopeSensor_setParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 808: flag=_wrap_GyroscopeSensor_setParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 809: flag=_wrap_GyroscopeSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 810: flag=_wrap_GyroscopeSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 811: flag=_wrap_GyroscopeSensor_getParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 812: flag=_wrap_GyroscopeSensor_getParentIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 813: flag=_wrap_GyroscopeSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 814: flag=_wrap_GyroscopeSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 815: flag=_wrap_GyroscopeSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 816: flag=_wrap_GyroscopeSensor_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
   case 817: flag=_wrap_predictSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
   case 818: flag=_wrap_sensorsListFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
   case 819: flag=_wrap_sensorsListFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;

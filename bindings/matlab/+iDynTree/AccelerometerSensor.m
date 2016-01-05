@@ -1,6 +1,6 @@
-classdef Accelerometer < iDynTree.Sensor
+classdef AccelerometerSensor < iDynTree.Sensor
   methods
-    function self = Accelerometer(varargin)
+    function self = AccelerometerSensor(varargin)
       self@iDynTree.Sensor(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if varargin{1}~=SwigRef.Null
