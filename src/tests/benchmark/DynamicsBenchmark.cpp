@@ -96,7 +96,7 @@ void dynamicsBenchmark(std::string modelFilePath, unsigned int nrOfTrials)
     std::vector<KDL::Twist> kdlLinkVel(undirected_tree.getNrOfLinks());
     std::vector<KDL::Twist> kdlLinkAcc(undirected_tree.getNrOfLinks());
 
-    LinkExternalWrenches fExt(model);
+    LinkNetExternalWrenches fExt(model);
     LinkInternalWrenches f(model);
     FreeFloatingGeneralizedTorques baseWrenchJointTorques(model);
     KDL::JntArray jntTorques(model.getNrOfDOFs());

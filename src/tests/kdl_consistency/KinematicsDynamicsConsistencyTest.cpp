@@ -190,7 +190,7 @@ void testFwdKinConsistency(std::string modelFilePath)
     }
 
     // Compute torques (i.e. inverse dynamics)
-    LinkExternalWrenches fExt(model);
+    LinkNetExternalWrenches fExt(model);
     LinkInternalWrenches f(model);
     FreeFloatingGeneralizedTorques baseWrenchJointTorques(model);
     KDL::JntArray jntTorques(model.getNrOfDOFs());

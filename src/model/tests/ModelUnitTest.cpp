@@ -203,7 +203,7 @@ private:
     Model model;
     LinkVelArray linkVels;
     LinkAccArray linkAccs;
-    LinkExternalWrenches linkExtF;
+    LinkNetExternalWrenches linkExtF;
     LinkInternalWrenches linkIntF;
     Traversal traversal;
 

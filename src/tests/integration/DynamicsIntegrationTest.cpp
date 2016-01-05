@@ -34,7 +34,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
 {
     // Allocate input for both algorithms : robot position, velocity
     // and link external wrenches
-    LinkExternalWrenches linkExtWrenches(model);
+    LinkNetExternalWrenches linkExtWrenches(model);
     FreeFloatingPos   robotPos(model);
     FreeFloatingVel   robotVel(model);
 
