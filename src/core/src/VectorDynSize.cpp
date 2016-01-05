@@ -10,17 +10,18 @@
 
 #include <sstream>
 
+#include <cassert>
 #include <cstring>
 
 namespace iDynTree
 {
 
-VectorDynSize::VectorDynSize(): m_data(0), m_size(0)
+VectorDynSize::VectorDynSize(): m_data(0), m_size(0), m_capacity(0)
 {
 
 }
 
-VectorDynSize::VectorDynSize(unsigned int _size): m_size(_size)
+VectorDynSize::VectorDynSize(unsigned int _size): m_size(_size), m_capacity(_size)
 {
     if( this->m_size == 0 )
     {
@@ -36,7 +37,7 @@ VectorDynSize::VectorDynSize(unsigned int _size): m_size(_size)
 
 
 VectorDynSize::VectorDynSize(const double* in_data,
-                             const unsigned int in_size): m_size(in_size)
+                             const unsigned int in_size): m_size(in_size), m_capacity(in_size)
 {
     if( this->m_size == 0 )
     {
@@ -51,7 +52,7 @@ VectorDynSize::VectorDynSize(const double* in_data,
 
 VectorDynSize::~VectorDynSize()
 {
-    if( this->m_size > 0 )
+    if( this->m_capacity > 0 )
     {
         delete[] this->m_data;
         this->m_data = 0;
@@ -117,11 +118,15 @@ bool VectorDynSize::setVal(const unsigned int index, const double new_el)
     return true;
 }
 
-void VectorDynSize::resize(const unsigned int _newSize)
+void VectorDynSize::setCapacity(const unsigned int _newCapacity)
 {
-    if( _newSize == this->size() )
+    // If we change the data buffer, we need to
+    // copy the old content to a local buffer
+    double * localBuf = 0;
+    if( this->m_size > 0 )
     {
-        return;
+       localBuf = new double[this->m_size];
+       memcpy(localBuf,this->m_data,this->m_size*sizeof(double));
     }
 
     if( this->m_data )
@@ -129,18 +134,60 @@ void VectorDynSize::resize(const unsigned int _newSize)
         delete[] this->m_data;
     }
 
-    this->m_size = _newSize;
+    this->m_capacity = _newCapacity;
 
-    if( this->m_size == 0 )
+    if( this->m_capacity == 0 )
     {
         this->m_data = 0;
     }
     else
     {
-        this->m_data = new double[this->m_size];
+        this->m_data = new double[this->m_capacity];
         zero();
+
+        if( this->m_size > 0 )
+        {
+            memcpy(this->m_data,localBuf,this->m_size*sizeof(double));
+            delete localBuf;
+            localBuf = 0;
+        }
     }
 }
+
+void VectorDynSize::reserve(const unsigned int _newCapacity)
+{
+    assert(this->m_size <= this->m_capacity);
+
+    if( _newCapacity <= this->m_capacity )
+    {
+        return;
+    }
+
+    this->setCapacity(_newCapacity);
+}
+
+void VectorDynSize::resize(const unsigned int _newSize)
+{
+    reserve(_newSize);
+    this->m_size = _newSize;
+}
+
+size_t VectorDynSize::capacity()
+{
+    return this->m_capacity;
+}
+
+void VectorDynSize::shrink_to_fit()
+{
+    if( this->m_size == this->m_capacity )
+    {
+        return;
+    }
+
+    this->setCapacity(this->m_size);
+}
+
+
 
 void VectorDynSize::fillBuffer(double* buf) const
 {

@@ -29,7 +29,21 @@ namespace iDynTree
          * Pointer to an area of size() doubles, managed by this class.
          */
         double * m_data;
+
+        /**
+         * Size of the vector.
+         */
         unsigned int m_size;
+
+        /**
+         * The buffer to which m_data is pointing is m_capacity*sizeof(double).
+         */
+        unsigned int m_capacity;
+
+        /**
+         * Set the capacity of the vector, resizing the buffer pointed by m_data. 
+         */
+        void setCapacity(const unsigned int _newCapacity);
 
     public:
         /**
@@ -99,12 +113,33 @@ namespace iDynTree
         void zero();
 
         /**
-         * Change the size of the vector, without preserving old content.
+         * Increase the capacity of the vector preserving content.
+         *
+         * @param newCapacity the new capacity of the vector
+         * \warning performs dynamic memory allocation operations if newCapacity > capacity()
+         * \note if newCapacity <= capacity(), this method does nothing and the capacity will remain unchanged.
+         */
+        void reserve(const unsigned int newCapacity);
+
+        /**
+         * Change the size of the vector preserving old content.
          *
          * @param newSize the new size of the vector
-         * \warning performs dynamic memory allocation operations
+         * \warning performs dynamic memory allocation operations if newSize > capacity()
          */
         void resize(const unsigned int newSize);
+
+        /**
+         * Change the capacity of the vector to match the size.
+         *
+         * \warning performs dynamic memory allocation operations if size() != capacity()
+         */
+        void shrink_to_fit();
+
+        /**
+         * The buffer pointed by data() has size capacity()*sizeof(double)
+         */
+        size_t capacity();
 
         /**
          * Assume that buf is pointing to
