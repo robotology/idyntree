@@ -13,6 +13,8 @@
 #include <iDynTree/ModelIO/URDFDofsImport.h>
 
 #include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Sensors/AccelerometerSensor.h>
+#include <iDynTree/Sensors/GyroscopeSensor.h>
 
 #include <cassert>
 #include <cstdio>
@@ -35,7 +37,21 @@ void checkURDF(std::string fileName,
     ok = iDynTree::genericSensorsListFromURDF(fileName,sensorList);
     ASSERT_EQUAL_DOUBLE(ok,true);
     std::cout<<"Sensor list created from URDF. num accel : "<<sensorList.getNrOfSensors(ACCELEROMETER)<<", num gyro : "<<sensorList.getNrOfSensors(iDynTree::GYROSCOPE)<<std::endl;
-    
+   
+    std::cout<<"Accelerometer Sensors in URDF :\n";
+    for (int i  = 0; i<sensorList.getNrOfSensors(ACCELEROMETER);i++)
+    {
+        AccelerometerSensor *acc = (AccelerometerSensor*)sensorList.getSensor(ACCELEROMETER,i);
+        std::cout<<acc->getName()<<"\n";
+    }
+
+    std::cout<<"--------------\n";
+    std::cout<<"Gyroscope Sensors in URDF :\n";
+    for (int i  = 0; i<sensorList.getNrOfSensors(GYROSCOPE);i++)
+    {
+        GyroscopeSensor *gyr = (GyroscopeSensor*)sensorList.getSensor(GYROSCOPE,i);
+        std::cout<<gyr->getName()<<"\n";
+    }
      ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::ACCELEROMETER),expectedNrOfAccelerometers);
      ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::GYROSCOPE),expectedNrOfGyroscopes);
 }
