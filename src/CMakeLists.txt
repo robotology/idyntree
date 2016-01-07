@@ -9,6 +9,7 @@ add_subdirectory(core)
 add_subdirectory(model)
 add_subdirectory(sensors)
 add_subdirectory(model_io)
+add_subdirectory(estimation)
 
 if(IDYNTREE_USES_KDL)
     add_subdirectory(kdl)
