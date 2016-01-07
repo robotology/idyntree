@@ -41,17 +41,27 @@ namespace iDynTree
          */
         const unsigned int rawIndexColMajor(int row, int col) const;
 
+        /**
+         * Set the capacity of the vector, resizing the buffer pointed by m_data.
+         */
+        void changeCapacityAndCopyData(const unsigned int _newCapacity);
+
     protected:
         /**
          * Storage for the MatrixDynSize
          *
-         * Pointer to an area of size() doubles, managed by this class.
+         * Pointer to an area of capacity() doubles, managed by this class.
          *
          * \warning this class stores data using the row major order
          */
         double * m_data;
         unsigned int m_rows;
         unsigned int m_cols;
+
+        /**
+         * The buffer to which m_data is pointing is m_capacity*sizeof(double).
+         */
+        unsigned int m_capacity;
 
     public:
         /**
@@ -118,19 +128,38 @@ namespace iDynTree
         double * data();
 
         /**
-         * Assign all element of the vector to 0.
+         * Assign all element of the matrix to 0.
          */
         void zero();
 
         /**
-         * Change the size of the vector, without preserving old content.
+         * Change the size of the matrix, without preserving old content.
          *
          * @param newRows the new rows of the matrix
          * @param newCols the new cols of the matrix
          *
-         * \warning performs dynamic memory allocation operations
+         * \warning performs dynamic memory allocation operations if newRows*newCols > capacity()
          */
         void resize(const unsigned int _newRows, const unsigned int _newCols);
+
+        /**
+         * Increase the capacity of the matrix, preserving old content.
+         *
+         * \warning performs dynamic memory allocation operations if _newCapacity > capacity()
+         */
+        void reserve(const size_t _newCapacity);
+
+        /**
+         * Get the dimension (in doubles) of the buffer to which m_data is pointing.
+         */
+        size_t capacity() const;
+
+        /**
+         * Change the capacity of the matrix such that capacity() == rows()*cols(), preserving old content.
+         *
+         * \warning performs dynamic memory allocation operations if newRows*newCols != capacity()
+         */
+        void shrink_to_fit();
 
         /**
          * Assume that rowMajorBuf is pointing to

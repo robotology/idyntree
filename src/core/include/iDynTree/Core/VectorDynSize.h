@@ -26,7 +26,7 @@ namespace iDynTree
         /**
          * Storage for the VectorDynSize
          *
-         * Pointer to an area of size() doubles, managed by this class.
+         * Pointer to an area of capacity() doubles, managed by this class.
          */
         double * m_data;
 
@@ -41,9 +41,9 @@ namespace iDynTree
         unsigned int m_capacity;
 
         /**
-         * Set the capacity of the vector, resizing the buffer pointed by m_data. 
+         * Set the capacity of the vector, resizing the buffer pointed by m_data.
          */
-        void setCapacity(const unsigned int _newCapacity);
+        void changeCapacityAndCopyData(const unsigned int _newCapacity);
 
     public:
         /**

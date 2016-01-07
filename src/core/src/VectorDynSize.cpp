@@ -118,7 +118,7 @@ bool VectorDynSize::setVal(const unsigned int index, const double new_el)
     return true;
 }
 
-void VectorDynSize::setCapacity(const unsigned int _newCapacity)
+void VectorDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
 {
     // If we change the data buffer, we need to
     // copy the old content to a local buffer
@@ -163,7 +163,7 @@ void VectorDynSize::reserve(const unsigned int _newCapacity)
         return;
     }
 
-    this->setCapacity(_newCapacity);
+    this->changeCapacityAndCopyData(_newCapacity);
 }
 
 void VectorDynSize::resize(const unsigned int _newSize)
@@ -184,7 +184,7 @@ void VectorDynSize::shrink_to_fit()
         return;
     }
 
-    this->setCapacity(this->m_size);
+    this->changeCapacityAndCopyData(this->m_size);
 }
 
 
