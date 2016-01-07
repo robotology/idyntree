@@ -663,8 +663,8 @@ void TorqueEstimationTree::buildAb_contacts()
        {
            //std::cout << " setting b_contact [ " << getSubGraphIndex(link_nmbr) << " ] ";
            //std::cout << "to " << b_contacts_subtree[link_nmbr] << std::endl;
-           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(0,KDLtoYarp(b_contacts_subtree[link_nmbr].torque));
-           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(3,KDLtoYarp(b_contacts_subtree[link_nmbr].force));
+           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(0,KDLtoYarp(b_contacts_subtree[link_nmbr].force));
+           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(3,KDLtoYarp(b_contacts_subtree[link_nmbr].torque));
            //std::cout << " b_contacts [ " << getSubGraphIndex(link_nmbr) << " ] is " << b_contacts[getSubGraphIndex(link_nmbr)].toString() << std::endl;
        }
 
@@ -848,10 +848,10 @@ void TorqueEstimationTree::store_contacts_results()
                 } else {
                     //6 UNKNOWN
                     assert( unknownInd+2 < x_contacts[sg].size() );
-                    it->setMoment(x_contacts[sg].subVector(unknownInd, unknownInd+2));
+                    it->setForce(x_contacts[sg].subVector(unknownInd, unknownInd+2));
                     unknownInd += 3;
                     assert( unknownInd+2 < x_contacts[sg].size() );
-                    it->setForce(x_contacts[sg].subVector(unknownInd, unknownInd+2));
+                    it->setMoment(x_contacts[sg].subVector(unknownInd, unknownInd+2));
                     unknownInd += 3;
 
                 }

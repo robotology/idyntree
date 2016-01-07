@@ -51,6 +51,7 @@ target_link_libraries(idyntree-icub LINK_PUBLIC  skinDynLib iKin iDyn
 target_include_directories(idyntree-icub INTERFACE ${skinDynLib_INCLUDE_DIRS})
 
 include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS}
+                           ${iDyn_INCLUDE_DIRS}
                            ${GSL_INCLUDE_DIRS}
                            ${YARP_INCLUDE_DIRS}
                            ${EIGEN3_INCLUDE_DIR}
