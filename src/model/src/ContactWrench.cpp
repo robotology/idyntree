@@ -62,6 +62,27 @@ void LinkContactWrenches::resize(unsigned int nrOfLinks)
     }
 }
 
+const ContactWrench& LinkContactWrenches::contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const
+{
+    return m_linkContactWrenches[linkIndex][contactIndex];
+}
+
+ContactWrench& LinkContactWrenches::contactWrench(const LinkIndex linkIndex, const size_t contactIndex)
+{
+    return m_linkContactWrenches[linkIndex][contactIndex];
+}
+
+size_t LinkContactWrenches::getNrOfContactsForLink(const LinkIndex linkIndex) const
+{
+    return m_linkContactWrenches[linkIndex].size();
+}
+
+void LinkContactWrenches::setNrOfContactsForLink(const LinkIndex linkIndex, const size_t nrOfContacts)
+{
+    m_linkContactWrenches[linkIndex].resize(nrOfContacts);
+    return;
+}
+
 
 
 

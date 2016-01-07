@@ -87,7 +87,7 @@ namespace iDynTree
         /**
          * Get the number of submodels in the decompistion.
          */
-        size_t getNrOfSubModels();
+        size_t getNrOfSubModels() const;
 
         /**
          * Get the traversal of a given submodel
@@ -102,7 +102,7 @@ namespace iDynTree
         /**
          * Get the subModel to which a given links belongs.
          */
-        size_t getSubModelOfLink(const LinkIndex & link);
+        size_t getSubModelOfLink(const LinkIndex & link) const;
     };
 
 

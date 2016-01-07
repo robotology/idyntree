@@ -38,7 +38,7 @@ SubModelDecomposition::~SubModelDecomposition()
     this->setNrOfSubModels(0);
 }
 
-size_t SubModelDecomposition::getNrOfSubModels()
+size_t SubModelDecomposition::getNrOfSubModels() const
 {
     return subModelTraversals.size();
 }
@@ -69,7 +69,7 @@ const Traversal& SubModelDecomposition::getTraversal(const size_t subModelIndex)
     return *subModelTraversals[subModelIndex];
 }
 
-size_t SubModelDecomposition::getSubModelOfLink(const LinkIndex& link)
+size_t SubModelDecomposition::getSubModelOfLink(const LinkIndex& link) const
 {
     size_t ret = 0;
 

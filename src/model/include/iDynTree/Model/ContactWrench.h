@@ -63,16 +63,9 @@ namespace iDynTree
     };
 
     /**
-     * Vector of wrenches connected in some way to the link of a model.
+     * A set of ContactWrench for each link, representing all the contacts
+     * between the model and the external environment.
      *
-     * It is used to model both the total external wrench
-     * acting on a  link (LinkExternalWrenches), or the internal wrenches
-     * that a link excerts on his parent (given a Traversal)
-     * computed as a by product by the dynamic loop of the RNEA ( RNEADynamicPhase ).
-     *
-     * In both cases the Wrench corresponding to the link with LinkIndex i
-     * is always expressed with the orientation of the link frame and with
-     * respect to the link frame origin.
      */
     class LinkContactWrenches
     {
@@ -115,9 +108,7 @@ namespace iDynTree
          */
         ContactWrench& contactWrench(const LinkIndex linkIndex, const size_t contactIndex);
 
-        ContactWrench& contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const;
-
-        ~LinkContactWrenches();
+        const ContactWrench& contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const;
     };
 
 
