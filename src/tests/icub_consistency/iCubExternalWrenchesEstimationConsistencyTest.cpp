@@ -142,43 +142,6 @@ void set_random_IMU_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree,
     return;
 }
 
-KDL::Tree getSnake()
-{
-    KDL::Tree snake("fake_base_link");
-    KDL::Chain snake_chain;
-    snake_chain.addSegment(KDL::Segment("snake_seg0",KDL::Joint("snake_jnt0",KDL::Joint::None),
-                                   KDL::Frame::DH(2.5,M_PI_2,3,0.3),
-                                   KDL::RigidBodyInertia(10,KDL::Vector(1,2,3),KDL::RotationalInertia(1,3,4))));
-    snake_chain.addSegment(KDL::Segment("snake_seg1",KDL::Joint("snake_jnt1",KDL::Joint::RotZ),
-                                   KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
-                                   KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake_chain.addSegment(KDL::Segment("snake_seg2",KDL::Joint("snake_jnt2",KDL::Joint::RotZ),
-                                   KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
-                                   KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake_chain.addSegment(KDL::Segment("snake_seg3",KDL::Joint("snake_jnt3",KDL::Joint::RotZ),
-                                   KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
-                                   KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake_chain.addSegment(KDL::Segment("snake_seg4",KDL::Joint("snake_ft0",KDL::Joint::None),
-                                   KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
-                                   KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake_chain.addSegment(KDL::Segment("snake_seg5",KDL::Joint("snake_jnt5",KDL::Joint::RotZ),
-                                   KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
-                                   KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake_chain.addSegment(KDL::Segment("snake_seg6",KDL::Joint("snake_jnt6",KDL::Joint::RotZ),
-                                   KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
-                                   KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake_chain.addSegment(KDL::Segment("snake_seg7",KDL::Joint("snake_jnt7",KDL::Joint::RotZ),
-                                   KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
-                                   KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-    snake_chain.addSegment(KDL::Segment("snake_seg8",KDL::Joint("snake_jnt8",KDL::Joint::RotZ),
-                                   KDL::Frame::DH(0.5,M_PI_2/4,-3,2.3),
-                                   KDL::RigidBodyInertia(2,KDL::Vector(1,-2,3),KDL::RotationalInertia(8,3,4))));
-
-    snake.addChain(snake_chain,"fake_base_link");
-
-    return snake;
-}
-
 std::vector<iDynTree::FTSensorData> get_default_ft_sensors(std::vector<std::string> ft_serialization)
 {
     std::vector<iDynTree::FTSensorData> ret;

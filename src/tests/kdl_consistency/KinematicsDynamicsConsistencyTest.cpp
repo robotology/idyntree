@@ -186,7 +186,7 @@ void testFwdKinConsistency(std::string modelFilePath)
         ASSERT_EQUAL_VECTOR(linksVels(linkIndex).asVector(),
                             linksVels_check(linkIndex).asVector());
         ASSERT_EQUAL_VECTOR(linksAcc(linkIndex).asVector(),
-                            linksAcc(linkIndex).asVector());
+                             linksAcc(linkIndex).asVector());
     }
 
     // Compute torques (i.e. inverse dynamics)
