@@ -105,7 +105,7 @@ bool estimateExternalWrenches(const Model& model,
                                     estimateExternalWrenchesBuffers& bufs,
                                     LinkContactWrenches& outputContactWrenches)
 {
-
+    return true;
 }
 
 
