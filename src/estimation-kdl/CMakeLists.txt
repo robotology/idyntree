@@ -2,22 +2,22 @@
 # Authors: Silvio Traversaro
 # CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
 
-project(iDynTree_Estimation CXX)
+project(iDynTree_Estimation_KDL CXX)
 
-set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/simpleLeggedOdometry.h
+set(IDYNTREE_ESTIMATION_KDL_HEADERS include/iDynTree/Estimation/simpleLeggedOdometry.h
                                 include/iDynTree/Estimation/robotStatus.h)
 
-set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES )
+set(IDYNTREE_ESTIMATION_KDL_PRIVATE_INCLUDES )
 
-set(IDYNTREE_ESTIMATION_SOURCES src/simpleLeggedOdometry.cpp
+set(IDYNTREE_ESTIMATION_KDL_SOURCES src/simpleLeggedOdometry.cpp
                                 src/robotStatus.cpp)
 
-SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_SOURCES})
-SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_HEADERS})
+SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_KDL_SOURCES})
+SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_KDL_HEADERS})
 
 set(libraryname idyntree-estimation)
 
-add_library(${libraryname} ${IDYNTREE_ESTIMATION_SOURCES} ${IDYNTREE_ESTIMATION_HEADERS} ${IDYNTREE_ESTIMATION_PRIVATE_INCLUDES})
+add_library(${libraryname} ${IDYNTREE_ESTIMATION_KDL_SOURCES} ${IDYNTREE_ESTIMATION_KDL_HEADERS} ${IDYNTREE_ESTIMATION_KDL_PRIVATE_INCLUDES})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
@@ -39,5 +39,4 @@ install(TARGETS ${libraryname}
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
-get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
