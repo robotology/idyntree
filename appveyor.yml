@@ -6,7 +6,6 @@ environment:
   Eigen3_DIR:          C:/Program Files (x86)/Eigen/lib/cmake/eigen3/
 
 os:
- - Windows Server 2012 R2 
  - Visual Studio 2013
  - Visual Studio 2015
 
