@@ -10,6 +10,7 @@
 
 #include <iDynTree/Core/IVector.h>
 #include <iDynTree/Core/IMatrix.h>
+#include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/Utils.h>
 
 #include <string>
@@ -78,6 +79,11 @@ namespace iDynTree
     void assertSpatialForceAreEqual(const SpatialForceVector & f1, const SpatialForceVector & f2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
 
     /**
+     * Get random bool
+     */
+    bool getRandomBool();
+
+    /**
      * Get a random double between min and max .
      */
     double getRandomDouble(double min=0.0, double max=1.0);
@@ -92,6 +98,11 @@ namespace iDynTree
      * Fill a vector with random double.
      */
     void getRandomVector(IVector & vec);
+
+    /**
+     * Fill a matrix of random doubles.
+     */
+    void getRandomMatrix(MatrixDynSize & mat);
 
     /**
      * Get a random position.

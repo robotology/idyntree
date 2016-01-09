@@ -137,6 +137,13 @@ void assertSpatialMotionAreEqual(const SpatialMotionVector& f1, const SpatialMot
     assertVectorAreEqual(f1plain,f2plain,tol,file,line);
 }
 
+bool getRandomBool()
+{
+    double coin = getRandomDouble(0,1.0);
+    return (coin >= 0.5);
+}
+
+
 double getRandomDouble(double min, double max)
 {
     return min + (max-min)*((double)rand())/((double)RAND_MAX);
@@ -153,6 +160,17 @@ void getRandomVector(IVector & vec)
     for(unsigned int i=0; i<vec.size(); i++)
     {
         vec(i) = getRandomDouble();
+    }
+}
+
+void getRandomMatrix(MatrixDynSize & mat)
+{
+    for(unsigned int row=0; row<mat.rows(); row++)
+    {
+        for(size_t col=0; col < mat.cols(); col++ )
+        {
+            mat(row,col) = getRandomDouble();
+        }
     }
 }
 
