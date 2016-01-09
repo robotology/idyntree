@@ -74,6 +74,10 @@ namespace iDynTree
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
 
+        bool isConsistent(const Model& model) const;
+
+        size_t getNrOfLinks() const;
+
         iDynTree::Wrench & operator()(const LinkIndex link);
         const iDynTree::Wrench & operator()(const LinkIndex link) const;
 

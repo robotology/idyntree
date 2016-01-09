@@ -71,6 +71,18 @@ void LinkWrenches::resize(unsigned int nrOfLinks)
     this->m_linkWrenches.resize(nrOfLinks,zeroWrench);
 }
 
+bool LinkWrenches::isConsistent(const Model& model) const
+{
+    return (model.getNrOfLinks() == m_linkWrenches.size());
+}
+
+size_t LinkWrenches::getNrOfLinks() const
+{
+    return m_linkWrenches.size();
+}
+
+
+
 Wrench& LinkWrenches::operator()(const LinkIndex link)
 {
     return this->m_linkWrenches[link];
