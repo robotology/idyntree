@@ -145,7 +145,7 @@ void set_random_IMU_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree,
 std::vector<iDynTree::FTSensorData> get_default_ft_sensors(std::vector<std::string> ft_serialization)
 {
     std::vector<iDynTree::FTSensorData> ret;
-    for(int i =0; i < ft_serialization.size(); i++ )
+    for(size_t i =0; i < ft_serialization.size(); i++ )
     {
         iDynTree::FTSensorData dat;
         dat.reference_joint = ft_serialization[i];

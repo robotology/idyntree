@@ -31,19 +31,6 @@ endif()
 include(iDynTreeOptions)
 
 if(NOT IDYNTREE_ONLY_DOCS)
-# Given an error if yarp or ICUB_MAIN dependencies are selected without KDL
-if(IDYNTREE_USES_ICUB_MAIN)
-    if(NOT IDYNTREE_USES_YARP OR NOT IDYNTREE_USES_KDL)
-        message(FATAL_ERROR "Impossible to build ICUB_MAIN support if KDL and YARP are not installed")
-    endif()
-endif()
-
-if(IDYNTREE_USES_YARP)
-    if(NOT IDYNTREE_USES_KDL)
-        message(FATAL_ERROR "Impossible to build YARP support if IDYNTREE_USES_KDL is not enabled")
-    endif()
-endif()
-
 # Find dependecies
 
 # Eigen is compulsory

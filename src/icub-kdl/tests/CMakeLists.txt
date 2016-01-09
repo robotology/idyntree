@@ -12,7 +12,7 @@ macro(add_icub_test testName)
     set(testname   test_${testName})
     add_executable(${testbinary} ${testsrc})
     target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR} ${IDYNTREE_TREE_INCLUDE_DIRS})
-    target_link_libraries(${testbinary} idyntree-core idyntree-high-level idyntree-yarp idyntree-icub idyntree-icub ${YARP_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    target_link_libraries(${testbinary} idyntree-core idyntree-high-level idyntree-yarp idyntree-icub-kdl ${YARP_LIBRARIES} ${orocos_kdl_LIBRARIES})
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
