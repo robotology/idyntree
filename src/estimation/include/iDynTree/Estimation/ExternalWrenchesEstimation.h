@@ -26,6 +26,7 @@
 #include <iDynTree/Core/VectorFixSize.h>
 
 #include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/LinkState.h>
 
 #include <vector>
 
@@ -144,7 +145,7 @@ struct estimateExternalWrenchesBuffers
      * Resize the struct for the number of submodel
      */
     void resize(const SubModelDecomposition& subModels);
-    void resize(const size_t nrOfSubModels);
+    void resize(const size_t nrOfSubModels, const size_t nrOfLinks);
 
     /**
      * Check if the buffer size are consistent with the submodel
@@ -159,6 +160,21 @@ struct estimateExternalWrenchesBuffers
     std::vector<MatrixDynSize> A;
     std::vector<VectorDynSize> x;
     std::vector<Vector6> b;
+    std::vector<MatrixDynSize> pinvA;
+
+    /**
+     * We compute the b term for each subtree
+     * in a iterative way, so we need a buffer
+     * to store it for each link
+     */
+    LinkWrenches b_contacts_subtree;
+
+    /**
+     * We compute the transform between each link
+     * and the submodel base, for computing the
+     * A matrices
+     */
+    LinkPositions subModelBase_H_link;
 };
 
 /**
