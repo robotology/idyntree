@@ -291,10 +291,9 @@ bool estimateExternalWrenches(const Model& model,
         }
 
         // Now we compute the pseudo inverse
-        /*
         pseudoInverse(toEigen(bufs.A[sm]),
                       toEigen(bufs.pinvA[sm]),
-                      tol);*/
+                      tol);
 
         // Now we compute the unknowns
         toEigen(bufs.x[sm]) = toEigen(bufs.pinvA[sm])*toEigen(bufs.b[sm]);
