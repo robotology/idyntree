@@ -8,6 +8,7 @@
 #ifndef IDYNTREE_SKINDYNLIB_CONVERSIONS_H
 #define IDYNTREE_SKINDYNLIB_CONVERSIONS_H
 
+#include <map>
 #include <string>
 
 #include <iDynTree/Model/Indeces.h>
@@ -15,10 +16,68 @@
 
 namespace iDynTree
 {
+class Model;
 
+/**
+ * Identifier for a link and a body frame in skinDynLib.
+ */
+class skinDynLibLinkID
+{
+public:
+    int body_part;
+    int local_link_index;
+
+    bool operator<(const skinDynLibLinkID& k) const
+    {
+        if(this->body_part < k.body_part)
+        {
+           return true;
+        }
+        else if(this->body_part > k.body_part)
+        {
+           return false;
+        }
+        else
+        {
+            return this->local_link_index < k.local_link_index;
+        }
+    }
+
+    bool operator==(const skinDynLibLinkID& k) const
+    {
+        return (this->body_part == k.body_part &&
+                this->local_link_index == k.local_link_index);
+    }
+};
+
+/**
+ * Identifier for a link and frame couple in an iDynTree model.
+ */
+class iDynTreeLinkAndFrame
+{
+     public:
+          LinkIndex  link_index;
+          FrameIndex frame_index;
+};
+
+
+/**
+ * \brief Helper for conversion between iDynTree data structures and skinDynLib data structures.
+ *
+ * There are several differences to handle:
+ *  * In iDynTree, link and frames and identified by name
+ *    and (in the context of an instantiated model) by their index, while in
+ *    skinDynLib link are identified by the bodyPart, a numeric id representing a part of the robot
+ *    the linkIndex, a progressive numeric id uniquely identifyng  the link in the part.
+ *  * The link frame of a link in iDynTree does not match the link frame assumed in skinDynLib.
+ *    For this reason we need to specify an additional frame to specify the frame of the link
+ *    used by skinDynLib, to properly convert the contact data back and forth.
+ */
 class skinDynLibConversionsHelper
 {
 private:
+    std::map<skinDynLibLinkID,iDynTreeLinkAndFrame> skinDynLibLinkMap;
+
 public:
     /**
      * This function enables interoperability between the iDynTree library
@@ -38,13 +97,15 @@ public:
      *          must be rigidly attached to the considered link.
      *
      */
-    bool addSkinDynLibAlias(const std::string iDynTree_link_name, const std::string iDynTree_frame_name,
+    bool addSkinDynLibAlias(const Model& model,
+                            const std::string iDynTree_link_name, const std::string iDynTree_frame_name,
                             const int skinDynLib_body_part, const int skinDynLib_link_index);
 
     /**
      * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method.
      */
-    bool getSkinDynLibAlias(const std::string iDynTree_link_name,
+    bool getSkinDynLibAlias(const Model & model,
+                            const std::string iDynTree_link_name,
                                   std::string & iDynTree_frame_name,
                                   int & skinDynLib_body_part,
                                   int & skinDynLib_link_index) ;
@@ -52,7 +113,8 @@ public:
     /**
      * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method.
      */
-    bool getSkinDynLibAlias(const LinkIndex iDynTree_link_index,
+    bool getSkinDynLibAlias(const Model & model,
+                            const LinkIndex iDynTree_link_index,
                                   LinkIndex & iDynTree_frame_index,
                              int & skinDynLib_body_part,
                              int & skinDynLib_link_index);
@@ -67,7 +129,9 @@ public:
     /**
      * Remove a alias in the form (body_part, link_index) for a link
      */
-    bool removeSkinDynLibAlias(const std::string linkName);
+    bool removeSkinDynLibAlias(const Model & model, const std::string linkName);
+};
+
 }
 
 #endif

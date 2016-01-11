@@ -12,6 +12,8 @@
 #include <iDynTree/Core/Wrench.h>
 
 #include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/LinkState.h>
+
 
 #include <vector>
 
@@ -109,6 +111,17 @@ namespace iDynTree
         ContactWrench& contactWrench(const LinkIndex linkIndex, const size_t contactIndex);
 
         const ContactWrench& contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const;
+
+        /**
+         *
+         * \brief Compute the net wrenches vector from the contacts wrenches vector.
+         *
+         * This is just a loop that sums all the contact wrenches for every link
+         * and store the results (expressed in the link frame) in the netWrenches vector.
+         *
+         * @return true if all went well, false otherwise.
+         */
+        bool computeNetWrenches(LinkNetExternalWrenches & netWrenches);
     };
 
 

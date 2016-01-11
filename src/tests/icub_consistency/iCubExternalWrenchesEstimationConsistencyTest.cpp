@@ -20,6 +20,21 @@
 #include <iCub/skinDynLib/dynContactList.h>
 #include <kdl_codyco/regressors/dirl_utils.hpp>
 
+#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/SubModel.h>
+#include <iDynTree/Model/ModelTransformers.h>
+#include <iDynTree/Model/ForwardKinematics.h>
+#include <iDynTree/Model/ContactWrench.h>
+#include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/JointState.h>
+#include <iDynTree/Model/FreeFloatingState.h>
+
+#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
+#include <iDynTree/iCub/skinDynLibConversions.h>
 
 using namespace iCub::iDyn;
 using namespace iCub::ctrl;
@@ -161,11 +176,14 @@ std::vector<iDynTree::FTSensorData> get_default_ft_sensors(std::vector<std::stri
 }
 
 bool addDoubleContact(iCub::iDynTree::TorqueEstimationTree & estimation_model,
+                      const iDynTree::Model & model,
+                      iDynTree::skinDynLibConversionsHelper & icub_skin_helper,
                       dynContactList & input_contact_list,
                       const std::string contactLink, const std::string contactFrame)
 {
     int contactLinkIndex =  estimation_model.getLinkIndex(contactLink);
     estimation_model.addSkinDynLibAlias(contactLink,contactFrame,0,contactLinkIndex);
+    icub_skin_helper.addSkinDynLibAlias(model,contactLink,contactFrame,0,contactLinkIndex);
 
     yarp::sig::Vector oneContactPoint(3);
     oneContactPoint.zero();
@@ -183,12 +201,14 @@ bool addDoubleContact(iCub::iDynTree::TorqueEstimationTree & estimation_model,
 }
 
 bool addSingleContact(iCub::iDynTree::TorqueEstimationTree & estimation_model,
+                      const iDynTree::Model & model,
+                      iDynTree::skinDynLibConversionsHelper & icub_skin_helper,
                       dynContactList & input_contact_list,
                       const std::string contactLink, const std::string contactFrame)
 {
     int contactLinkIndex =  estimation_model.getLinkIndex(contactLink);
     estimation_model.addSkinDynLibAlias(contactLink,contactFrame,0,contactLinkIndex);
-
+    icub_skin_helper.addSkinDynLibAlias(model,contactLink,contactFrame,0,contactLinkIndex);
     yarp::sig::Vector oneContactPoint(3);
     oneContactPoint.zero();
     oneContactPoint[0] = 1.0;
@@ -201,7 +221,6 @@ bool addSingleContact(iCub::iDynTree::TorqueEstimationTree & estimation_model,
 
 int main(int argc, char ** argv)
 {
-
     //Initializing the random number generator
     yarp::os::Random rng;
     rng.seed(0.0);
@@ -221,12 +240,44 @@ int main(int argc, char ** argv)
     iCub::iDynTree::TorqueEstimationTree * icub_model_estimation =
         new iCub::iDynTree::TorqueEstimationTree(urdf_filename,dof_serialization,ft_serialization);
 
+    // Creating the new iDynTree based data structures
+    iDynTree::Model model;
+    iDynTree::modelFromURDF(urdf_filename,model);
+    iDynTree::Traversal traversal;
+    model.computeFullTreeTraversal(traversal);
+    // Create sensors list with FT sensors (TODO)
+    iDynTree::SensorsList sensors;
+    //iDynTree::sensorsFromURDF(urdf_filename,model,sensors);
+
+    // Create submodel decomposition
+    iDynTree::SubModelDecomposition subModels;
+    subModels.splitModelAlongJoints(model,traversal,ft_serialization);
+
+    iDynTree::skinDynLibConversionsHelper iCubSkinHelper;
+
+
+    // position/velocity/acceleration
+    iDynTree::FreeFloatingPos robotPos(model);
+    iDynTree::FreeFloatingVel robotVel(model);
+    iDynTree::FreeFloatingAcc robotAcc(model);
+
+    // Data structures to encode the external forces
+    iDynTree::LinkNetExternalWrenches netExternalWrenches(model);
+    iDynTree::LinkContactWrenches     externalWrenches(model);
+
+    // Data structure to encode the joint torques
+    iDynTree::FreeFloatingGeneralizedTorques trqs(model);
+
+    // Extend the freefloating state classes to easily set
+    // the velocity/acceleration/force of the base using the different conventions
+
     //Assign random kinematic state
     set_random_IMU_q_dq_ddq(rng,*icub_model_estimation);
 
     //Assign random sensor_readings
     Vector ft_sensor(6);
 
+    iDynTree::SensorsMeasurements sensMeas(sensors);
 
     for(int i = 0; i < icub_model_estimation->getNrOfFTSensors(); i++ )
     {
@@ -236,37 +287,42 @@ int main(int argc, char ** argv)
 
     dynContactList input_contact_list, output_contact_list;
 
-
-    addSingleContact(*icub_model_estimation,input_contact_list,
+    // Populate input list and mapping between skinDynLib links and
+    // iDynTree links
+    addSingleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "chest","chest_skin_frame");
-    addSingleContact(*icub_model_estimation,input_contact_list,
+    addSingleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "l_hand","l_hand_dh_frame");
-    addSingleContact(*icub_model_estimation,input_contact_list,
+    addSingleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "r_hand","r_hand_dh_frame");
-    addSingleContact(*icub_model_estimation,input_contact_list,
+    addSingleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "r_foot","r_foot_dh_frame");
-    addSingleContact(*icub_model_estimation,input_contact_list,
+    addSingleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "l_foot","l_foot_dh_frame");
-    addSingleContact(*icub_model_estimation,input_contact_list,
+    addSingleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "l_lower_leg","l_lower_leg");
-    addSingleContact(*icub_model_estimation,input_contact_list,
+    addSingleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "r_lower_leg","r_lower_leg");
 
-
-    addDoubleContact(*icub_model_estimation,input_contact_list,
+    addDoubleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "chest","chest_skin_frame");
-    addDoubleContact(*icub_model_estimation,input_contact_list,
+    addDoubleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "l_hand","l_hand_dh_frame");
-    addDoubleContact(*icub_model_estimation,input_contact_list,
+    addDoubleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "r_hand","r_hand_dh_frame");
-    addDoubleContact(*icub_model_estimation,input_contact_list,
+    addDoubleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "r_foot","r_foot_dh_frame");
-    addDoubleContact(*icub_model_estimation,input_contact_list,
+    addDoubleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "l_foot","l_foot_dh_frame");
-    addDoubleContact(*icub_model_estimation,input_contact_list,
+    addDoubleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "l_lower_leg","l_lower_leg");
-    addDoubleContact(*icub_model_estimation,input_contact_list,
+    addDoubleContact(*icub_model_estimation,model,iCubSkinHelper,input_contact_list,
                      "r_lower_leg","r_lower_leg");
+
+    // Create iDynTree-compatible input list
+    iDynTree::LinkUnknownWrenchContacts unknownContacts(model);
+
+    iCubSkinHelper.convertFromSkinDynLibToiDynTree(input_contact_list,unknownContacts);
 
     icub_model_estimation->setContacts(input_contact_list);
 
@@ -278,6 +334,31 @@ int main(int argc, char ** argv)
 
     if( output_contact_list.size() != input_contact_list.size() )
     { std::cout << "Error: Estimated a wrong number of contacts."; return EXIT_FAILURE; }
+
+    // Compute the estimated torque with iDynTree
+    // Allocate some buffers
+    iDynTree::LinkVelArray linkVels(model);
+    iDynTree::LinkAccArray linkProperAccs(model);
+    iDynTree::estimateExternalWrenchesBuffers extWrenchBufs(subModels);
+    iDynTree::LinkInternalWrenches internalWrenches(model);
+
+    // Run the kinematics loop
+    iDynTree::ForwardVelAccKinematics(model,traversal,
+                                      robotPos,robotVel,robotAcc,
+                                      linkVels,linkProperAccs);
+
+    // Estimate the external forces
+    iDynTree::estimateExternalWrenches(model,subModels,sensors,linkVels,linkProperAccs,
+                                       sensMeas,extWrenchBufs,externalWrenches);
+
+    // Convert the external wrenches in a format suitable for RNEA
+    externalWrenches.computeNetLinkWrenches(netExternalWrenches);
+
+    // Compute the joint torques
+    iDynTree::RNEADynamicPhase(model,traversal,robotPos,linkVels,linkProperAccs,
+                                netExternalWrenches,internalWrenches,trqs);
+
+    // Compare the results
 
     delete icub_model_estimation;
 
