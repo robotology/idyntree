@@ -777,7 +777,7 @@ void TorqueEstimationTree::buildAb_contacts()
                 // 1 UNKNOWN: FORCE MODULE
                 yarp::sig::Matrix un(6,1);
                 un.zero();
-                un.setSubcol(it->getForceDirection(),3,0); // force direction unit vector
+                un.setSubcol(it->getForceDirection(),0,0); // force direction unit vector
                 yarp::sig::Matrix H_adj_root_contact = KDLtoYarp_wrench(H_root_contactFrame);
                 yarp::sig::Matrix col = H_adj_root_contact*un;
                 A_contacts[sg].setSubmatrix(col,0,colInd);
@@ -788,7 +788,7 @@ void TorqueEstimationTree::buildAb_contacts()
             {
                 if( it->isMomentKnown() ) {
                     // 3 UNKNOWNS: FORCE
-                    A_contacts[sg].setSubmatrix(KDLtoYarp_wrench(H_root_contactFrame).submatrix(0,5,3,5),0,colInd);
+                    A_contacts[sg].setSubmatrix(KDLtoYarp_wrench(H_root_contactFrame).submatrix(0,5,0,2),0,colInd);
                     colInd += 3;
 
                 } else {
