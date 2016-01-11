@@ -158,7 +158,7 @@ bool KDLtoYarp_twist(const KDL::Frame & kdlFrame, yarp::sig::Matrix & yarpMatrix
 
     yarpMatrix6_6.setSubmatrix(R,0,0);
     yarpMatrix6_6.setSubmatrix(R,3,3);
-    yarpMatrix6_6.setSubmatrix(yarp::math::crossProductMatrix(p)*R,3,0);
+    yarpMatrix6_6.setSubmatrix(yarp::math::crossProductMatrix(p)*R,0,3);
 
     return true;
 }
@@ -184,7 +184,7 @@ bool KDLtoYarp_wrench(const KDL::Frame &kdlFrame, yarp::sig::Matrix & yarpMatrix
 
     yarpMatrix6_6.setSubmatrix(R,0,0);
     yarpMatrix6_6.setSubmatrix(R,3,3);
-    yarpMatrix6_6.setSubmatrix(yarp::math::crossProductMatrix(p)*R,0,3);
+    yarpMatrix6_6.setSubmatrix(yarp::math::crossProductMatrix(p)*R,3,0);
 
     return true;
 }
