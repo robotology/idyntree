@@ -11,6 +11,10 @@ add_subdirectory(sensors)
 add_subdirectory(model_io)
 add_subdirectory(estimation)
 
+if(IDYNTREE_USES_YARP)
+    add_subdirectory(yarp)
+endif()
+
 if(IDYNTREE_USES_ICUB_MAIN)
     add_subdirectory(icub)
 endif()
