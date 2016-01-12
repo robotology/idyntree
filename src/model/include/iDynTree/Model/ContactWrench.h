@@ -103,6 +103,11 @@ namespace iDynTree
         void setNrOfContactsForLink(const LinkIndex linkIndex, const size_t nrOfContacts);
 
         /**
+         * Get the number of links.
+         */
+        size_t getNrOfLinks() const;
+
+        /**
          * Get a specific ContactWrench
          *
          * @param[in] linkIndex the index of the link for which the contact is retrieved
@@ -121,7 +126,7 @@ namespace iDynTree
          *
          * @return true if all went well, false otherwise.
          */
-        bool computeNetWrenches(LinkNetExternalWrenches & netWrenches);
+        bool computeNetWrenches(LinkNetExternalWrenches & netWrenches) const;
     };
 
 

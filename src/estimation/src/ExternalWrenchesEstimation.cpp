@@ -85,6 +85,50 @@ void LinkUnknownWrenchContacts::setNrOfContactsForLink(const LinkIndex linkIndex
     return;
 }
 
+void LinkUnknownWrenchContacts::addNewContactForLink(const LinkIndex linkIndex, const UnknownWrenchContact& newContact)
+{
+    m_linkUnknownWrenchContacts[linkIndex].push_back(newContact);
+}
+
+
+std::string LinkUnknownWrenchContacts::toString(const Model& model) const
+{
+    std::stringstream ss;
+
+    size_t nrOfLinks = m_linkUnknownWrenchContacts.size();
+    for(size_t l=0; l < nrOfLinks; l++)
+    {
+        size_t nrOfContacts = this->getNrOfContactsForLink(l);
+
+        if( nrOfContacts > 0 )
+        {
+            ss << "Unknown contacts on link " << model.getLinkName(l) << ":" << std::endl;
+            for(size_t c=0; c < nrOfContacts; c++ )
+            {
+                switch(this->contactWrench(l,c).unknownType)
+                {
+                    case FULL_WRENCH:
+                        ss << "One full wrench contact with pos: " << this->contactWrench(l,c).contactPoint.toString() << ":" << std::endl;
+                        break;
+                    case PURE_FORCE:
+                        ss << "One pure force contact with pos: " << this->contactWrench(l,c).contactPoint.toString() << ":" << std::endl;
+                        break;
+                    case PURE_FORCE_WITH_KNOWN_DIRECTION:
+                        ss << "One pure force contact with known direction with pos: " << this->contactWrench(l,c).contactPoint.toString() << ":" << std::endl;
+                        break;
+                }
+            }
+        }
+    }
+    return ss.str();
+}
+
+
+estimateExternalWrenchesBuffers::estimateExternalWrenchesBuffers(const SubModelDecomposition& subModels)
+{
+    resize(subModels);
+}
+
 void estimateExternalWrenchesBuffers::resize(const SubModelDecomposition& subModels)
 {
     this->resize(subModels.getNrOfSubModels(),subModels.getNrOfLinks());
@@ -144,7 +188,7 @@ bool estimateExternalWrenches(const Model& model,
                               const SubModelDecomposition& subModels,
                               const SensorsList& sensors,
                               const LinkUnknownWrenchContacts& unknownWrenches,
-                              const JointDoubleArray & jointPos,
+                              const IRawVector & jointPos,
                               const LinkVelArray& linkVel,
                               const LinkAccArray& linkProperAcc,
                               const SensorsMeasurements& ftSensorsMeasurements,
@@ -163,6 +207,10 @@ bool estimateExternalWrenches(const Model& model,
         // Number of unknowns for this submodel
         int unknowns = 0;
         const Traversal & subModelTraversal = subModels.getTraversal(sm);
+
+        std::cerr << "estimateExternalWrenches " << std::endl;
+        std::cerr << "Computing unknowns for submodel with base " << model.getLinkName(subModelTraversal.getLink(0)->getIndex());
+
         // First compute the known term of the estimation for each link:
         // this loop is similar to the dynamic phase of the RNEA
         // \todo pimp up performance as done in RNEADynamicPhase
@@ -201,7 +249,7 @@ bool estimateExternalWrenches(const Model& model,
             if( parentLink == 0 )
             {
                 // If the visited link is the base of the submodel, the
-                // compute known terms is the known term of the submodel itself
+                // computed known terms is the known term of the submodel itself
                 toEigen(bufs.b[sm]).segment<3>(0) = toEigen(bufs.b_contacts_subtree(visitedLinkIndex).getLinearVec3());
                 toEigen(bufs.b[sm]).segment<3>(3) = toEigen(bufs.b_contacts_subtree(visitedLinkIndex).getAngularVec3());
             }
@@ -232,6 +280,7 @@ bool estimateExternalWrenches(const Model& model,
         }
 
         // Now we compute the A matrix
+        assert(unknowns > 0);
         bufs.A[sm].resize(6,unknowns);
         bufs.x[sm].resize(unknowns);
         bufs.pinvA[sm].resize(unknowns,6);
@@ -352,6 +401,68 @@ bool estimateExternalWrenches(const Model& model,
     }
 
     return true;
+}
+
+bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
+                                               const iDynTree::Traversal & traversal,
+                                               const Vector3 & base_classicalProperAcc,
+                                               const Vector3 & base_angularVel,
+                                               const Vector3 & base_angularAcc,
+                                               const iDynTree::JointDoubleArray & jointPos,
+                                               const iDynTree::JointDoubleArray & jointVel,
+                                               const iDynTree::JointDoubleArray & jointAcc,
+                                                     iDynTree::LinkVelArray & linkVel,
+                                                     iDynTree::LinkAccArray  & linkProperAcc)
+{
+    bool retValue = true;
+
+    for(unsigned int traversalEl=0; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+        if( parentLink == 0 )
+        {
+            // If the visited link is the base, we can set the base velocity and proper acceleration
+            // from the input base information
+
+            // the dynamics is invariant to a linear velocity offset, so we can put an arbitrary
+            // value for the linear part of the twist: we choose to set it to zero for convenience,
+            // but please note that this **does not** mean that we are assuming that the body
+            // has a zero velocity with respect to a earth-fixed frame
+            LinearMotionVector3 linVel;
+            linVel.zero();
+            linkVel(visitedLink->getIndex()).setLinearVec3(linVel);
+
+            // We have the input angular velocity
+            AngularMotionVector3 angVel(base_angularVel.data(),3);
+            linkVel(visitedLink->getIndex()).setAngularVec3(angVel);
+
+            // We don't need to convert the proper classical acceleration
+            // in spatial classical acceleration because the difference between
+            // the two depends linearly on the linear part of the link velocity,
+            // that we choose to be zero
+            LinearMotionVector3 linProAcc(base_classicalProperAcc.data(),3);
+            linkProperAcc(visitedLink->getIndex()).setLinearVec3(linProAcc);
+            AngularMotionVector3 angAcc(base_angularAcc.data(),3);
+            linkProperAcc(visitedLink->getIndex()).setAngularVec3(angAcc);
+        }
+        else
+        {
+            // Otherwise we compute the child velocity and acceleration from parent
+            toParentJoint->computeChildVelAcc(jointPos,
+                                              jointVel,
+                                              jointAcc,
+                                              linkVel,
+                                              linkProperAcc,
+                                              visitedLink->getIndex(),parentLink->getIndex());
+        }
+
+    }
+
+    return retValue;
+
 }
 
 

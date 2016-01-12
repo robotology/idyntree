@@ -72,6 +72,11 @@ ContactWrench& LinkContactWrenches::contactWrench(const LinkIndex linkIndex, con
     return m_linkContactWrenches[linkIndex][contactIndex];
 }
 
+size_t LinkContactWrenches::getNrOfLinks() const
+{
+    return m_linkContactWrenches.size();
+}
+
 size_t LinkContactWrenches::getNrOfContactsForLink(const LinkIndex linkIndex) const
 {
     return m_linkContactWrenches[linkIndex].size();
@@ -83,11 +88,38 @@ void LinkContactWrenches::setNrOfContactsForLink(const LinkIndex linkIndex, cons
     return;
 }
 
+bool LinkContactWrenches::computeNetWrenches(LinkNetExternalWrenches& netWrenches) const
+{
+    // Resize the output if necessary
+    size_t nrOfLinks =  netWrenches.getNrOfLinks();
+    if( netWrenches.getNrOfLinks() != m_linkContactWrenches.size() )
+    {
+        netWrenches.resize(m_linkContactWrenches.size());
+    }
 
+    for(LinkIndex l=0; l < nrOfLinks; l++)
+    {
+        netWrenches(l).zero();
 
+        // sum all the contact wrenches
+        size_t nrOfContacts = this->getNrOfContactsForLink(l);
+        for(size_t c=0; c < nrOfContacts; c++)
+        {
+            // Each contact wrench is expressed with respect to the contact point
+            // and with the orientation of the link frame, so we need to translate it
+            // to the link frame
+            const ContactWrench & contact = this->contactWrench(l,c);
 
+            Transform link_H_contact(Rotation::Identity(),contact.contactPoint());
 
+            Wrench link_wrench_due_to_contact = link_H_contact*contact.contactWrench();
 
+            netWrenches(l) = netWrenches(l) + link_wrench_due_to_contact;
+        }
+    }
+
+    return true;
+}
 
 }
 

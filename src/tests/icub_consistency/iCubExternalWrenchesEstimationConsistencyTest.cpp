@@ -31,9 +31,12 @@
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
+#include <iDynTree/Core/EigenHelpers.h>
+
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/ModelIO/URDFModelImport.h>
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
+#include <iDynTree/yarp/YARPConversions.h>
 #include <iDynTree/iCub/skinDynLibConversions.h>
 
 using namespace iCub::iDyn;
@@ -131,26 +134,36 @@ void iDynTree_print_velocity_acceleration(DynTree & icub_idyntree, const std::st
 }
 
 void set_random_IMU_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree,
-                             double pos_c = 0.0, double vel_c = 0.0, double acc_c = 0.0
+                             iDynTree::Vector3 & base_classicalProperAcc, iDynTree::Vector3 & base_angularVel, iDynTree::Vector3 & base_angularAcc,
+                             iDynTree::JointDoubleArray& jointPos, iDynTree::JointDoubleArray& jointVel, iDynTree::JointDoubleArray& jointAcc,
+                             double pos_c = 1.0, double vel_c = 1.0, double acc_c = 1.0
 )
 {
     Vector q(icub_tree.getNrOfDOFs());
     set_random_vector(q,rng,pos_c);
-    icub_tree.setAng(q);
+    q = icub_tree.setAng(q);
+    iDynTree::toiDynTree(q,jointPos);
 
     Vector dq(icub_tree.getNrOfDOFs());
     set_random_vector(dq,rng,vel_c);
     dq[1] = 1000.0;
-    icub_tree.setDAng(dq);
+    dq = icub_tree.setDAng(dq);
+    iDynTree::toiDynTree(dq,jointVel);
+
 
     Vector ddq(icub_tree.getNrOfDOFs());
     set_random_vector(ddq,rng,acc_c);
-    icub_tree.setD2Ang(ddq);
+    ddq = icub_tree.setD2Ang(ddq);
+    iDynTree::toiDynTree(ddq,jointAcc);
+
 
     Vector imu_ang_vel(3), imu_ang_acc(3), imu_lin_acc(3);
     set_random_vector(imu_ang_vel,rng,vel_c);
     set_random_vector(imu_ang_acc,rng,acc_c);
     set_random_vector(imu_lin_acc,rng,acc_c);
+    iDynTree::toiDynTree(imu_ang_vel,base_angularVel);
+    iDynTree::toiDynTree(imu_ang_acc,base_angularAcc);
+    iDynTree::toiDynTree(imu_lin_acc,base_classicalProperAcc);
 
     icub_tree.setInertialMeasure(imu_ang_vel,imu_ang_acc,imu_lin_acc);
 
@@ -218,6 +231,19 @@ bool addSingleContact(iCub::iDynTree::TorqueEstimationTree & estimation_model,
     return true;
 }
 
+void getJointSerializationFromDynTree(DynTree & dynTree,
+                                      std::vector<std::string> joints)
+{
+    joints.resize(0);
+    size_t nrOfJoints = dynTree.getNrOfLinks()-1;
+    for(size_t j=0; j < nrOfJoints; j++ )
+    {
+        std::string jointName;
+        bool ok = dynTree.getJunctionName(j,jointName);
+        assert(ok);
+        joints.push_back(jointName);
+    }
+}
 
 int main(int argc, char ** argv)
 {
@@ -241,8 +267,14 @@ int main(int argc, char ** argv)
         new iCub::iDynTree::TorqueEstimationTree(urdf_filename,dof_serialization,ft_serialization);
 
     // Creating the new iDynTree based data structures
-    iDynTree::Model model;
-    iDynTree::modelFromURDF(urdf_filename,model);
+    iDynTree::Model fullModel, model;
+    iDynTree::modelFromURDF(urdf_filename,fullModel);
+    // Get the same serialization of joints used in iDynTree
+    std::vector<std::string> usedJoints;
+    getJointSerializationFromDynTree(*icub_model_estimation,usedJoints);
+    iDynTree::createReducedModel(fullModel,usedJoints,model);
+    assert(model.getNrOfDOFs() == icub_model_estimation->getNrOfDOFs());
+
     iDynTree::Traversal traversal;
     model.computeFullTreeTraversal(traversal);
     // Create sensors list with FT sensors (TODO)
@@ -255,11 +287,13 @@ int main(int argc, char ** argv)
 
     iDynTree::skinDynLibConversionsHelper iCubSkinHelper;
 
+    // Base quantities
+    iDynTree::Vector3 base_classicalProperAcc,base_angularVel,base_angularAcc;
 
     // position/velocity/acceleration
-    iDynTree::FreeFloatingPos robotPos(model);
-    iDynTree::FreeFloatingVel robotVel(model);
-    iDynTree::FreeFloatingAcc robotAcc(model);
+    iDynTree::JointDoubleArray jointPos(model);
+    iDynTree::JointDoubleArray jointVel(model);
+    iDynTree::JointDoubleArray jointAcc(model);
 
     // Data structures to encode the external forces
     iDynTree::LinkNetExternalWrenches netExternalWrenches(model);
@@ -272,7 +306,9 @@ int main(int argc, char ** argv)
     // the velocity/acceleration/force of the base using the different conventions
 
     //Assign random kinematic state
-    set_random_IMU_q_dq_ddq(rng,*icub_model_estimation);
+    set_random_IMU_q_dq_ddq(rng,*icub_model_estimation,
+                            base_classicalProperAcc, base_angularVel,base_angularAcc,
+                            jointPos,jointVel,jointAcc);
 
     //Assign random sensor_readings
     Vector ft_sensor(6);
@@ -283,6 +319,10 @@ int main(int argc, char ** argv)
     {
         set_random_vector(ft_sensor,rng,10);
         icub_model_estimation->setSensorMeasurement(i,ft_sensor);
+        iDynTree::Wrench ft_sensor_idyntree;
+        iDynTree::toiDynTree(ft_sensor,ft_sensor_idyntree);
+        assert(sensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE) > i);
+
     }
 
     dynContactList input_contact_list, output_contact_list;
@@ -322,7 +362,13 @@ int main(int argc, char ** argv)
     // Create iDynTree-compatible input list
     iDynTree::LinkUnknownWrenchContacts unknownContacts(model);
 
-    iCubSkinHelper.convertFromSkinDynLibToiDynTree(input_contact_list,unknownContacts);
+    iCubSkinHelper.fromSkinDynLibToiDynTree(model,input_contact_list,unknownContacts);
+    std::cerr << "skinDynLib unknownContacts : " << std::endl;
+    std::cerr << input_contact_list.toString() << std::endl;
+
+    std::cerr << "iDynTree unknownContacts : " << std::endl;
+    std::cerr << unknownContacts.toString(model) << std::endl;
+
 
     icub_model_estimation->setContacts(input_contact_list);
 
@@ -343,22 +389,40 @@ int main(int argc, char ** argv)
     iDynTree::LinkInternalWrenches internalWrenches(model);
 
     // Run the kinematics loop
-    iDynTree::ForwardVelAccKinematics(model,traversal,
-                                      robotPos,robotVel,robotAcc,
-                                      linkVels,linkProperAccs);
+
+
+    iDynTree::dynamicsEstimationForwardVelAccKinematics(model,traversal,
+                                              base_classicalProperAcc,base_angularVel,base_angularAcc,
+                                              jointPos,jointVel,jointAcc,linkVels,linkProperAccs);
 
     // Estimate the external forces
-    iDynTree::estimateExternalWrenches(model,subModels,sensors,linkVels,linkProperAccs,
+    iDynTree::estimateExternalWrenches(model,subModels,sensors,unknownContacts,
+                                       jointPos,linkVels,linkProperAccs,
                                        sensMeas,extWrenchBufs,externalWrenches);
 
     // Convert the external wrenches in a format suitable for RNEA
-    externalWrenches.computeNetLinkWrenches(netExternalWrenches);
+    externalWrenches.computeNetWrenches(netExternalWrenches);
 
     // Compute the joint torques
-    iDynTree::RNEADynamicPhase(model,traversal,robotPos,linkVels,linkProperAccs,
+    iDynTree::RNEADynamicPhase(model,traversal,jointPos,linkVels,linkProperAccs,
                                 netExternalWrenches,internalWrenches,trqs);
 
+    // Compute the
+    dynContactList output_contact_list_with_idyntree;
+    iCubSkinHelper.fromiDynTreeToSkinDynLib(model,externalWrenches,output_contact_list_with_idyntree);
+
+    if( output_contact_list_with_idyntree.size() != input_contact_list.size() )
+    {
+        std::cout << "Error: Estimated a wrong number of contacts in iDynTree.";
+        return EXIT_FAILURE;
+    }
+
+
     // Compare the results
+    std::cerr << "Joint torques with KDL/YARP : " << std::endl;
+    std::cerr << icub_model_estimation->getTorques().toString() << std::endl;
+    std::cerr << "Joint torques with iDynTree: " << std::endl;
+    std::cerr << toEigen(trqs.jointTorques()) << std::endl;
 
     delete icub_model_estimation;
 

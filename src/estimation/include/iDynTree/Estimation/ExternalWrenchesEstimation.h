@@ -33,12 +33,14 @@
 namespace iDynTree
 {
 class Model;
+class Traversal;
 class SubModelDecomposition;
 class LinkContactWrenches;
 class SensorsMeasurements;
 class SensorsList;
 class LinkVelArray;
 class LinkAccArray;
+class JointDoubleArray;
 
 /**
  * Type of a UnknownWrenchContact.
@@ -128,6 +130,11 @@ public:
     void setNrOfContactsForLink(const LinkIndex linkIndex, const size_t nrOfContacts);
 
     /**
+     * Add a new contact for a link.
+     */
+    void addNewContactForLink(const LinkIndex linkIndex, const UnknownWrenchContact& newContact);
+
+    /**
      * Get a specific ContactWrench
      *
      * @param[in] linkIndex the index of the link for which the contact is retrieved
@@ -136,11 +143,19 @@ public:
     UnknownWrenchContact& contactWrench(const LinkIndex linkIndex, const size_t contactIndex);
 
     const UnknownWrenchContact& contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const;
+
+
+    /**
+     * Get a human readable description of the LinkUnknownWrenchContacts (for debug)
+     */
+    std::string toString(const Model & model) const;
 };
 
 
 struct estimateExternalWrenchesBuffers
 {
+    estimateExternalWrenchesBuffers(const SubModelDecomposition& subModels);
+
     /**
      * Resize the struct for the number of submodel
      */
@@ -196,11 +211,63 @@ bool estimateExternalWrenches(const Model& model,
                               const SubModelDecomposition& subModels,
                               const SensorsList& sensors,
                               const LinkUnknownWrenchContacts & unknownWrenches,
+                              const IRawVector & jointPos,
                               const LinkVelArray & linkVel,
                               const LinkAccArray & linkProperAcc,
                               const SensorsMeasurements & ftSensorsMeasurements,
                                     estimateExternalWrenchesBuffers & bufs,
                                     LinkContactWrenches & outputContactWrenches);
+
+/**
+ * \brief Modified forward kinematics for torque/force estimation.
+ *
+ * This is a version of forward dynamics modified to fit the needs
+ * of joint torques/external wrenches estimation.
+ *
+ * There are several difference with respect to the classical
+ * forward kinematics.
+ * The first one is that the only inputs necessary related to the base link are
+ * the base link classical proper acceleration, the base link angular velocity
+ * and the base link angular acceleration. This is because the dynamics
+ * of a articulated system does not depend on its linear velocity, and hence
+ * the estimation of joint torques/external wrenches is not affected by an offset
+ * in linear velocity. This will mean that the link velocitity computed by this
+ * algorithm are not the velocity of the links with respect to an inertial frame.
+ * Nevertherless they can still be used for estimation.
+ *
+ * There are two main ways in which the base information is computed: one is
+ * exploiting the knoledge that a link is not moving with respect to an inertial frame:
+ * in this case the classical proper acceleration boils down to the inverted gravitational
+ * acceleration, while the angular velocity and angular accelerations are equal to zero.
+ * The other way is to exploit the measure of an accelerometer and of a gyroscope
+ * mounted on the base link of the traversal: the accelerometer will then measure
+ * directly the classical proper acceleration, while the gyroscope will measure the angular velocity.
+ * The angular acceleration can be computed by numerical derivation, or simply neglected if its
+ * effect on the estimation is minimal.
+ *
+ *
+ * \param[in] model the input model
+ * \param[in] traversal the traversal used to propagate the velocity and the proper acceleration
+ * \param[in] base_classicalProperAcc classical proper acceleration of the base origin
+ * \param[in] base_angularVel angular velocity of the base link frame
+ * \param[in] base_angularAcc angular acceleration of the base link frame
+ * \param[in] jointPos joint positions
+ * \param[in] jointVel joint velocities
+ * \param[in] jointAcc joint accelerations
+ * \param[out] linkVel vector of link twists, expressed in the link frame for both orientation and origin
+ * \param[out] linkAcc vector of link proper spatial acceleration, expressed in the link frame for both orientation and origin
+ *
+ */
+bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
+                                               const iDynTree::Traversal & traversal,
+                                               const Vector3 & base_classicalProperAcc,
+                                               const Vector3 & base_angularVel,
+                                               const Vector3 & base_angularAcc,
+                                               const iDynTree::JointDoubleArray & jointPos,
+                                               const iDynTree::JointDoubleArray & jointVel,
+                                               const iDynTree::JointDoubleArray & jointAcc,
+                                                     iDynTree::LinkVelArray & linkVel,
+                                                     iDynTree::LinkAccArray  & linkProperAcc);
 
 
 }

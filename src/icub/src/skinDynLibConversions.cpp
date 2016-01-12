@@ -10,8 +10,14 @@
 
 #include <iDynTree/iCub/skinDynLibConversions.h>
 
+#include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/Wrench.h>
+
 #include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/ContactWrench.h>
+
+#include <iDynTree/yarp/YARPConversions.h>
 
 #include <cassert>
 
@@ -153,6 +159,12 @@ bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
 {
     unknowns.resize(model);
 
+    // Reset the contact vectors
+    for(size_t l=0; l < model.getNrOfLinks(); l++)
+    {
+        unknowns.setNrOfContactsForLink(l,0);
+    }
+
     iCub::skinDynLib::dynContactList::const_iterator it;
     for(it = dynList.begin(); it!=dynList.end(); it++)
     {
@@ -163,8 +175,8 @@ bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
         int skinDynLib_body_part = it->getBodyPart();
         int skinDynLib_link_index = it->getLinkNumber();
 
-        int iDynTree_link_index = -1;
-        int iDynTree_skinFrame_index = -1;
+        LinkIndex iDynTree_link_index = LINK_INVALID_INDEX;
+        FrameIndex iDynTree_skinFrame_index = FRAME_INVALID_INDEX;
 
         bool skinDynLib_ID_found = skinDynLib2iDynTree(skinDynLib_body_part,skinDynLib_link_index,
                                                        iDynTree_link_index,iDynTree_skinFrame_index);
@@ -176,21 +188,23 @@ bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
         }
 
         // Get the transform between the skinDynLib frame and the iDynTree link frame
-        iDynTree::Transform link_H_skinFrame = model.getFrameTransform(iDynTree_skinFrame_index);
+        iDynTree::Transform link_H_skinDynLibFrame = model.getFrameTransform(iDynTree_skinFrame_index);
 
         Position skinFrame_contactPoint;
         // Copy the contact point in the unknown
-        assert(false);
-        //iDyn(it->getCoP(),skinFrame_contactPoint);
-        unknownWrench.contactPoint = link_H_skinFrame*skinFrame_contactPoint;
-
+        toiDynTree(it->getCoP(),skinFrame_contactPoint);
+        unknownWrench.contactPoint = link_H_skinDynLibFrame*skinFrame_contactPoint;
 
         if(it->isForceDirectionKnown())
         {
             //1 UNKNOWN
             unknownWrench.unknownType = PURE_FORCE_WITH_KNOWN_DIRECTION;
-            assert(false);
-            //fromYarp(it->(),unknownWrench.forceDirection);
+            Direction skinDynLibDirection;
+            toiDynTree(it->getForceDirection(),skinDynLibDirection);
+
+            // The direction of the force will be expressed in the skinDynLib orientation
+            // we need to convert it in the link frame orientation
+            unknownWrench.forceDirection = link_H_skinDynLibFrame*skinDynLibDirection;
         }
         else
         {
@@ -204,6 +218,8 @@ bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
                 unknownWrench.unknownType = FULL_WRENCH;
             }
         }
+
+        unknowns.addNewContactForLink(iDynTree_link_index,unknownWrench);
     }
 
 }
@@ -213,6 +229,56 @@ bool skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib(const Model & model,
                                                            const LinkContactWrenches& contactWrenches,
                                                                  iCub::skinDynLib::dynContactList& dynList)
 {
+    dynList.resize(0);
+    yarp::sig::Vector forceCache(3), momentCache(3), positionCache(3);
+
+    size_t nrOfLinks = model.getNrOfLinks();
+    for(LinkIndex l=0; l < nrOfLinks; l++)
+    {
+        size_t nrOfContacts = contactWrenches.getNrOfContactsForLink(l);
+
+        if( nrOfContacts > 0 )
+        {
+            //get link index
+            int skinDynLib_body_part = -1;
+            int skinDynLib_link_index = -1;
+
+            FrameIndex iDynTree_skinFrame_index = FRAME_INVALID_INDEX;
+
+            bool skinDynLib_ID_found = getSkinDynLibAlias(model,l,iDynTree_skinFrame_index,skinDynLib_body_part,skinDynLib_link_index);
+
+            if( !skinDynLib_ID_found )
+            {
+                std::cerr << "[ERR] skinDynLibConversionsHelper::fromSkinDynLibToiDynTree skinDynLib_ID_found not found, skipping contact" << std::endl;
+                continue;
+            }
+
+            // Get the transform between the skinDynLib frame and the iDynTree link frame
+            iDynTree::Transform skinDynLibFrame_H_link = model.getFrameTransform(iDynTree_skinFrame_index).inverse();
+
+            for(size_t c=0; c < nrOfContacts; c++)
+            {
+                // We need to convert the position of the contact from the iDynTree frame to the skinDynLib frame
+                Position skinDynLib_contactPoint = skinDynLibFrame_H_link*(contactWrenches.contactWrench(l,c).contactPoint());
+
+                // The wrench is always expressed wrt to the contact point, so we need just to change the orientation
+                Wrench skinDynLib_wrench = skinDynLibFrame_H_link.getRotation()*(contactWrenches.contactWrench(l,c).contactWrench());
+
+                toYarp(skinDynLib_wrench.getLinearVec3(),forceCache);
+                toYarp(skinDynLib_wrench.getAngularVec3(),momentCache);
+                toYarp(skinDynLib_contactPoint,positionCache);
+
+                iCub::skinDynLib::dynContact skinLibContact;
+                skinLibContact.setCoP(positionCache);
+                skinLibContact.setForceMoment(forceCache,momentCache);
+                skinLibContact.setBodyPart((iCub::skinDynLib::BodyPart)skinDynLib_body_part);
+                skinLibContact.setLinkNumber(skinDynLib_link_index);
+
+                dynList.push_back(skinLibContact);
+            }
+        }
+    }
+
     return true;
 }
 

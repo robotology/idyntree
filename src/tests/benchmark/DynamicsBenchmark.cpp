@@ -139,7 +139,7 @@ void dynamicsBenchmark(std::string modelFilePath, unsigned int nrOfTrials)
         tic = clockInSec();
         ForwardVelAccKinematics(model,traversal,baseJntPos,baseJntVel,baseJntAcc,linksVels,linksAcc);
         RNEADynamicPhase(model,traversal,
-                               baseJntPos,
+                               baseJntPos.jointPos(),
                                linksVels,linksAcc,fExt,f,baseWrenchJointTorques);
         toc = clockInSec();
         iDynTreeTimes.totalTimeRNEA += (toc-tic);

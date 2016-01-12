@@ -190,18 +190,10 @@ iDynTree::SensorsList sensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirect
     return sensorsListFromURDFString(undirected_tree,xml_string);
 }
 
-iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
-                                                std::string urdf_string)
+iDynTree::SensorsList sensorsListFromFtSensors(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                               std::vector<iDynTree::FTSensorData>& ft_sensors)
 {
-    iDynTree::SensorsList sensors_tree;
-
-    std::vector<iDynTree::FTSensorData> ft_sensors;
-    bool ok = iDynTree::ftSensorsFromUrdfString(urdf_string,ft_sensors);
-
-    if( !ok )
-    {
-        std::cerr << "Error in loading ft sensors information from URDF file" << std::endl;
-    }
+    SensorsList sensors_tree;
 
     for(size_t ft_sens = 0; ft_sens < ft_sensors.size(); ft_sens++ )
     {
@@ -265,6 +257,22 @@ iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & un
     }
 
     return sensors_tree;
+}
+
+iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                                std::string urdf_string)
+{
+    iDynTree::SensorsList sensors_tree;
+
+    std::vector<iDynTree::FTSensorData> ft_sensors;
+    bool ok = iDynTree::ftSensorsFromUrdfString(urdf_string,ft_sensors);
+
+    if( !ok )
+    {
+        std::cerr << "Error in loading ft sensors information from URDF file" << std::endl;
+    }
+
+    return sensorsListFromFtSensors(undirected_tree,ft_sensors);
 }
 
 }

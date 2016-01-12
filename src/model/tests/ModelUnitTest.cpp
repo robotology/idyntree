@@ -225,7 +225,7 @@ public:
                                            pos,vel,acc,
                                            linkVels,linkAccs);
         ok = ok && RNEADynamicPhase(model,traversal,
-                                    pos,linkVels,linkAccs,
+                                    pos.jointPos(),linkVels,linkAccs,
                                     linkExtF,linkIntF,trqs);
 
         return ok;

@@ -105,7 +105,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
 
     RNEADynamicPhase(model,
                      traversal,
-                     robotPos,
+                     robotPos.jointPos(),
                      RNEA_linksVel,
                      RNEA_linksAcc,
                      linkExtWrenches,

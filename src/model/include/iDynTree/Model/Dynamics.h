@@ -29,7 +29,7 @@ namespace iDynTree
 
     bool RNEADynamicPhase(const iDynTree::Model & model,
                           const iDynTree::Traversal & traversal,
-                          const iDynTree::FreeFloatingPos & robotPos,
+                          const iDynTree::IRawVector & jointPos,
                           const iDynTree::LinkVelArray & linksVel,
                           const iDynTree::LinkAccArray & linksAcc,
                           const iDynTree::LinkNetExternalWrenches & linkExtForces,

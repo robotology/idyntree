@@ -50,7 +50,7 @@ class TiXmlDocument;
 namespace iDynTree
 {
 class SensorsList;
-    
+
 struct FTSensorData
 {
     std::string reference_joint;
@@ -73,6 +73,8 @@ iDynTree::SensorsList sensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirect
                                           std::string urdf_filename);
 iDynTree::SensorsList sensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
                                                 std::string urdf_string);
+iDynTree::SensorsList sensorsListFromFtSensors(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                               std::vector<FTSensorData>& ft_sensors);
 }
 
 #endif

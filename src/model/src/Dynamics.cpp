@@ -27,7 +27,7 @@ namespace iDynTree
 {
 
 bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
-                      const FreeFloatingPos& robotPos,
+                      const IRawVector& jointPos,
                       const LinkVelArray& linksVels,
                       const LinkAccArray& linksAccs,
                       const LinkNetExternalWrenches& fext,
@@ -67,7 +67,7 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
              {
                  LinkIndex childIndex = neighborIndex;
                  IJointConstPtr neighborJoint = model.getJoint(model.getNeighbor(visitedLinkIndex,neigh_i).neighborJoint);
-                 Transform visitedLink_X_child = neighborJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,childIndex);
+                 Transform visitedLink_X_child = neighborJoint->getTransform(jointPos,visitedLinkIndex,childIndex);
 
                  // One term of the sum in Equation 5.20 in Featherstone 2008
                  f(visitedLinkIndex) = f(visitedLinkIndex) + visitedLink_X_child*f(childIndex);
@@ -92,7 +92,7 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
             // at this point we can compute the torque of the joint connecting this link and its parent
             // This is Equation 5.13 in Featherstone 2008. It is offloaded to the joint to be
             // able to deal with different kind of joints.
-            toParentJoint->computeJointTorque(robotPos.jointPos(),
+            toParentJoint->computeJointTorque(jointPos,
                                               f(visitedLinkIndex),
                                               parentLink->getIndex(),
                                               visitedLinkIndex,

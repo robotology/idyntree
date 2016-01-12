@@ -198,7 +198,7 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
     return returnVal;
 }
 iDynTree::SensorsList genericSensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirectedTree,
-                                          std::string urdfFilename)
+                                                 std::string urdfFilename)
 {
     ifstream ifs(urdfFilename.c_str());
     std::string xmlString( (std::istreambuf_iterator<char>(ifs) ),
@@ -208,7 +208,7 @@ iDynTree::SensorsList genericSensorsListFromURDF(KDL::CoDyCo::UndirectedTree & u
 }
 
 iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirectedTree,
-                                                std::string urdfString)
+                                                       std::string urdfString)
 {
     iDynTree::SensorsList sensorsTree;
     std::vector<iDynTree::GenericSensorData> genericSensors;
@@ -247,6 +247,7 @@ iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTr
                 }
                 break;
         }
+
         // setting the parent object (junction / link) names
         newSensor->setName(genericSensors[genSensItr].sensorName);
         newSensor->setParent(genericSensors[genSensItr].parentObjectName);
