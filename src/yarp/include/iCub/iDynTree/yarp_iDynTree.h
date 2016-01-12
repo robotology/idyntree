@@ -12,15 +12,9 @@
 #include <yarp/sig/Vector.h>
 
 #include <iDynTree/Core/Wrench.h>
-/*
-#include <kdl/rotationalinertia.hpp>
-#include <kdl/frames.hpp>
-#include <kdl/jntarray.hpp>
-*/
-
 
 /**
- * Convert a yarp::sig::Vector to a KDL::Wrench
+ * Convert a yarp::sig::Vector to a iDynTree::Wrench
  * @param yarpVector yarp::sig::Vector input
  * @param iDynTreeWrench iDynTree::Wrench output
  * @return true if conversion was successful, false otherwise
@@ -33,6 +27,23 @@ bool YarptoiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Wrench & iDy
  * @param yarpVector yarp::sig::Vector output
  * @return true if conversion was successful, false otherwise
  */
-bool iDynTreetoYarp(const iDynTree::Wrench & iDynTreeWrench,yarp::sig::Vector & yarpVector);
+bool iDynTreetoYarp(const iDynTree::Wrench & iDynTreeWrench, yarp::sig::Vector & yarpVector);
+
+/**
+ * Convert a yarp::sig::Vector to a iDynTree::Position
+ * @param yarpVector yarp::sig::Vector input
+ * @param iDynTreePosition iDynTree::Position output
+ * @return true if conversion was successful, false otherwise (if the input yarpVector has size different from 3)
+ */
+bool YarptoiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Position & iDynTreePosition);
+
+
+/**
+ * Convert a iDynTree::Position to a yarp::sig::Vector of 3 elements.
+ * @param iDynTreePosition iDynTree::Position input
+ * @param yarpVector yarp::sig::Vector output
+ * @return true if conversion was sucessful, false otherwise
+ */
+bool iDynTreetoYarp(const iDynTree::Position & iDynTreeWrench, yarp::sig::Vector & yarpVector);
 
 #endif

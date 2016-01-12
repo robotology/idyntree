@@ -14,9 +14,12 @@
 #include <iDynTree/Model/Indeces.h>
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
+#include <iCub/skinDynLib/dynContactList.h>
+
 namespace iDynTree
 {
 class Model;
+class LinkContactWrenches;
 
 /**
  * Identifier for a link and a body frame in skinDynLib.
@@ -130,6 +133,18 @@ public:
      * Remove a alias in the form (body_part, link_index) for a link
      */
     bool removeSkinDynLibAlias(const Model & model, const std::string linkName);
+
+    /**
+     * Convert a dynContactList to a LinkUnknownWrenchContacts
+     */
+    bool fromSkinDynLibToiDynTree(const Model& model, const iCub::skinDynLib::dynContactList & dynList,
+                                               LinkUnknownWrenchContacts & unknowns);
+
+    /**
+     * Convert a LinkContactWrenches to a iCub::skinDynLib::dynContactList
+     */
+    bool fromiDynTreeToSkinDynLib(const Model& model, const LinkContactWrenches & contactWrenches,
+                                        iCub::skinDynLib::dynContactList & dynList);
 };
 
 }

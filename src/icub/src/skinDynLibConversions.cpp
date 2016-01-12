@@ -11,6 +11,9 @@
 #include <iDynTree/iCub/skinDynLibConversions.h>
 
 #include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/ContactWrench.h>
+
+#include <cassert>
 
 namespace iDynTree
 {
@@ -143,5 +146,75 @@ bool skinDynLibConversionsHelper::skinDynLib2iDynTree(const int skinDynLib_body_
 
     return true;
 }
+
+bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
+                                                           const iCub::skinDynLib::dynContactList& dynList,
+                                                           LinkUnknownWrenchContacts& unknowns)
+{
+    unknowns.resize(model);
+
+    iCub::skinDynLib::dynContactList::const_iterator it;
+    for(it = dynList.begin(); it!=dynList.end(); it++)
+    {
+        // Unknown
+        UnknownWrenchContact unknownWrench;
+
+        //get link index
+        int skinDynLib_body_part = it->getBodyPart();
+        int skinDynLib_link_index = it->getLinkNumber();
+
+        int iDynTree_link_index = -1;
+        int iDynTree_skinFrame_index = -1;
+
+        bool skinDynLib_ID_found = skinDynLib2iDynTree(skinDynLib_body_part,skinDynLib_link_index,
+                                                       iDynTree_link_index,iDynTree_skinFrame_index);
+
+        if( !skinDynLib_ID_found )
+        {
+            std::cerr << "[ERR] skinDynLibConversionsHelper::fromSkinDynLibToiDynTree skinDynLib_ID_found not found, skipping contact" << std::endl;
+            continue;
+        }
+
+        // Get the transform between the skinDynLib frame and the iDynTree link frame
+        iDynTree::Transform link_H_skinFrame = model.getFrameTransform(iDynTree_skinFrame_index);
+
+        Position skinFrame_contactPoint;
+        // Copy the contact point in the unknown
+        assert(false);
+        //iDyn(it->getCoP(),skinFrame_contactPoint);
+        unknownWrench.contactPoint = link_H_skinFrame*skinFrame_contactPoint;
+
+
+        if(it->isForceDirectionKnown())
+        {
+            //1 UNKNOWN
+            unknownWrench.unknownType = PURE_FORCE_WITH_KNOWN_DIRECTION;
+            assert(false);
+            //fromYarp(it->(),unknownWrench.forceDirection);
+        }
+        else
+        {
+            if(it->isMomentKnown())
+            {
+                unknownWrench.unknownType = PURE_FORCE;
+            }
+            else
+            {
+                //6 UNKNOWN
+                unknownWrench.unknownType = FULL_WRENCH;
+            }
+        }
+    }
+
+}
+
+
+bool skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib(const Model & model,
+                                                           const LinkContactWrenches& contactWrenches,
+                                                                 iCub::skinDynLib::dynContactList& dynList)
+{
+    return true;
+}
+
 
 }
