@@ -1,43 +1,51 @@
 classdef Traversal < SwigRef
   methods
+    function this = swig_this(self)
+      this = iDynTreeMEX(3, self);
+    end
     function self = Traversal(varargin)
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
-        % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(690, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(690, varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
+        tmp = iDynTreeMEX(720, varargin{:});
+        self.swigPtr = tmp.swigPtr;
+        tmp.swigPtr = [];
       end
     end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(691, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(721, self);
+        self.swigPtr=[];
       end
     end
     function varargout = getNrOfVisitedLinks(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(692, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(722, self, varargin{:});
     end
     function varargout = getLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(693, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(723, self, varargin{:});
     end
     function varargout = getParentLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(694, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(724, self, varargin{:});
     end
     function varargout = getParentJoint(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(695, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(725, self, varargin{:});
     end
     function varargout = getParentLinkFromLinkIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(696, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(726, self, varargin{:});
     end
     function varargout = getParentJointFromLinkIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(697, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(727, self, varargin{:});
     end
     function varargout = reset(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(698, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(728, self, varargin{:});
     end
-    function varargout = setTraversalElement(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(699, self, varargin{:});
+    function varargout = addTraversalBase(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(729, self, varargin{:});
+    end
+    function varargout = addTraversalElement(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(730, self, varargin{:});
     end
   end
   methods(Static)

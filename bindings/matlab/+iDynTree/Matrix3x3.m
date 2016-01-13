@@ -1,57 +1,62 @@
 classdef Matrix3x3 < SwigRef
   methods
+    function this = swig_this(self)
+      this = iDynTreeMEX(3, self);
+    end
     function self = Matrix3x3(varargin)
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
-        % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(32, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(32, varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
+        tmp = iDynTreeMEX(34, varargin{:});
+        self.swigPtr = tmp.swigPtr;
+        tmp.swigPtr = [];
       end
     end
     function varargout = paren(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(33, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(35, self, varargin{:});
     end
     function varargout = getVal(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(34, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(36, self, varargin{:});
     end
     function varargout = setVal(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(35, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(37, self, varargin{:});
     end
     function varargout = rows(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(36, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(38, self, varargin{:});
     end
     function varargout = cols(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(37, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(39, self, varargin{:});
     end
     function varargout = data(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(38, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(40, self, varargin{:});
     end
     function varargout = zero(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(39, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(41, self, varargin{:});
     end
     function varargout = fillRowMajorBuffer(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(40, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(42, self, varargin{:});
     end
     function varargout = fillColMajorBuffer(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(41, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(43, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(42, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(44, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(43, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(45, self, varargin{:});
     end
     function varargout = toMatlab(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(44, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(46, self, varargin{:});
     end
     function varargout = fromMatlab(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(45, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(47, self, varargin{:});
     end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(46, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(48, self);
+        self.swigPtr=[];
       end
     end
   end

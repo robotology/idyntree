@@ -1,69 +1,74 @@
 classdef Transform < SwigRef
   methods
+    function this = swig_this(self)
+      this = iDynTreeMEX(3, self);
+    end
     function self = Transform(varargin)
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
-        % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(519, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(519, varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
+        tmp = iDynTreeMEX(526, varargin{:});
+        self.swigPtr = tmp.swigPtr;
+        tmp.swigPtr = [];
       end
     end
     function varargout = getSemantics(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(520, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(527, self, varargin{:});
     end
     function varargout = getRotation(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(521, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(528, self, varargin{:});
     end
     function varargout = getPosition(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(522, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(529, self, varargin{:});
     end
     function varargout = setRotation(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(523, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(530, self, varargin{:});
     end
     function varargout = setPosition(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(524, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(531, self, varargin{:});
     end
     function varargout = inverse(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(527, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(534, self, varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(528, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(535, self, varargin{:});
     end
     function varargout = asHomogeneousTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(530, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(537, self, varargin{:});
     end
     function varargout = asAdjointTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(531, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(538, self, varargin{:});
     end
     function varargout = asAdjointTransformWrench(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(532, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(539, self, varargin{:});
     end
     function varargout = log(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(533, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(540, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(534, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(541, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(535, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(542, self, varargin{:});
     end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(536, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(543, self);
+        self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(525, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(532, varargin{:});
     end
     function varargout = inverse2(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(526, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(533, varargin{:});
     end
     function varargout = Identity(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(529, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(536, varargin{:});
     end
   end
 end

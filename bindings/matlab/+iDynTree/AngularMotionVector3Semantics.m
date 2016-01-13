@@ -1,19 +1,21 @@
 classdef AngularMotionVector3Semantics < iDynTree.GeomVector3Semantics__AngularMotionVector3Semantics
   methods
     function self = AngularMotionVector3Semantics(varargin)
-      self@iDynTree.GeomVector3Semantics__AngularMotionVector3Semantics('_swigCreate');
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
-        % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(292, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(292, varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+      self@iDynTree.GeomVector3Semantics__AngularMotionVector3Semantics(SwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
+        tmp = iDynTreeMEX(294, varargin{:});
+        self.swigPtr = tmp.swigPtr;
+        tmp.swigPtr = [];
       end
     end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(293, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(295, self);
+        self.swigPtr=[];
       end
     end
   end

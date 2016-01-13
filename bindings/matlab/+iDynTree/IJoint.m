@@ -1,70 +1,80 @@
 classdef IJoint < SwigRef
   methods
+    function this = swig_this(self)
+      this = iDynTreeMEX(3, self);
+    end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(580, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(607, self);
+        self.swigPtr=[];
       end
     end
     function varargout = clone(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(581, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(608, self, varargin{:});
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(582, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(609, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(583, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(610, self, varargin{:});
     end
     function varargout = setAttachedLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(584, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(611, self, varargin{:});
     end
     function varargout = setRestTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(585, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(612, self, varargin{:});
     end
     function varargout = getFirstAttachedLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(586, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(613, self, varargin{:});
     end
     function varargout = getSecondAttachedLink(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(587, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(614, self, varargin{:});
     end
     function varargout = getRestTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(588, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(615, self, varargin{:});
     end
     function varargout = getTransform(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(589, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(616, self, varargin{:});
+    end
+    function varargout = getTransformDerivative(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(617, self, varargin{:});
     end
     function varargout = getMotionSubspaceVector(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(590, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(618, self, varargin{:});
     end
     function varargout = computeChildPosVelAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(591, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(619, self, varargin{:});
     end
     function varargout = computeChildVelAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(592, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(620, self, varargin{:});
     end
     function varargout = computeJointTorque(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(593, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(621, self, varargin{:});
     end
     function varargout = setIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(594, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(622, self, varargin{:});
     end
     function varargout = getIndex(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(595, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(623, self, varargin{:});
     end
     function varargout = setPosCoordsOffset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(596, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(624, self, varargin{:});
     end
     function varargout = getPosCoordsOffset(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(597, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(625, self, varargin{:});
     end
     function varargout = setDOFsOffset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(598, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(626, self, varargin{:});
     end
     function varargout = getDOFsOffset(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(599, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(627, self, varargin{:});
     end
     function self = IJoint(varargin)
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
         error('No matching constructor');
       end
     end

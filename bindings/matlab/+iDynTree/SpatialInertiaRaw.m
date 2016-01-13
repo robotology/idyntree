@@ -1,45 +1,50 @@
 classdef SpatialInertiaRaw < SwigRef
   methods
+    function this = swig_this(self)
+      this = iDynTreeMEX(3, self);
+    end
     function self = SpatialInertiaRaw(varargin)
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
-        % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(424, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(424, varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
+        tmp = iDynTreeMEX(428, varargin{:});
+        self.swigPtr = tmp.swigPtr;
+        tmp.swigPtr = [];
       end
     end
     function varargout = fromRotationalInertiaWrtCenterOfMass(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(425, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(429, self, varargin{:});
     end
     function varargout = getMass(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(426, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(430, self, varargin{:});
     end
     function varargout = getCenterOfMass(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(427, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(431, self, varargin{:});
     end
     function varargout = getRotationalInertiaWrtFrameOrigin(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(428, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(432, self, varargin{:});
     end
     function varargout = getRotationalInertiaWrtCenterOfMass(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(429, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(433, self, varargin{:});
     end
     function varargout = multiply(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(431, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(435, self, varargin{:});
     end
     function varargout = zero(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMATLAB_wrap(432, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(436, self, varargin{:});
     end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(433, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(437, self);
+        self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = combine(varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(430, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(434, varargin{:});
     end
   end
 end

@@ -1,28 +1,30 @@
 classdef Wrench < iDynTree.SpatialForceVector
   methods
     function self = Wrench(varargin)
-      self@iDynTree.SpatialForceVector('_swigCreate');
-      if nargin~=1 || ~ischar(varargin{1}) || ~strcmp(varargin{1},'_swigCreate')
-        % How to get working on C side? Commented out, replaed by hack below
-        %self.swigInd = iDynTreeMATLAB_wrap(386, varargin{:});
-        tmp = iDynTreeMATLAB_wrap(386, varargin{:}); % FIXME
-        self.swigInd = tmp.swigInd;
-        tmp.swigInd = uint64(0);
+      self@iDynTree.SpatialForceVector(SwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+        if varargin{1}~=SwigRef.Null
+          self.swigPtr = varargin{1}.swigPtr;
+        end
+      else
+        tmp = iDynTreeMEX(388, varargin{:});
+        self.swigPtr = tmp.swigPtr;
+        tmp.swigPtr = [];
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(387, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(389, self, varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(388, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(390, self, varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:max(1,nargout)}] = iDynTreeMATLAB_wrap(389, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(391, self, varargin{:});
     end
     function delete(self)
-      if self.swigInd
-        iDynTreeMATLAB_wrap(390, self);
-        self.swigInd=uint64(0);
+      if self.swigPtr
+        iDynTreeMEX(392, self);
+        self.swigPtr=[];
       end
     end
   end
