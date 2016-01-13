@@ -14,7 +14,6 @@
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Utils.h>
 
-
 namespace iDynTree
 {
     class Transform;

@@ -103,6 +103,8 @@ VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
     {
         std::memcpy(this->m_data,vec.data(),this->m_size*sizeof(double));
     }
+
+    return *this;
 }
 
 

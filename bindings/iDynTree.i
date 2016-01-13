@@ -60,6 +60,7 @@
 #include "iDynTree/Core/Rotation.h"
 #include "iDynTree/Core/TransformSemantics.h"
 #include "iDynTree/Core/Transform.h"
+#include "iDynTree/Core/TransformDerivative.h"
 
 // Model related data structures
 #include "iDynTree/Model/Indeces.h"
@@ -191,6 +192,8 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Core/Rotation.h"
 %include "iDynTree/Core/TransformSemantics.h"
 %include "iDynTree/Core/Transform.h"
+%include "iDynTree/Core/TransformDerivative.h"
+
 
 // Model related data structures
 %include "iDynTree/Model/Indeces.h"
