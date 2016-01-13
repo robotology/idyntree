@@ -20,7 +20,7 @@
 namespace iDynTree
 {
 
-Link getRandomLink()
+inline Link getRandomLink()
 {
     double cxx = getRandomDouble(0,3);
     double cyy = getRandomDouble(0,4);
@@ -45,7 +45,7 @@ Link getRandomLink()
 /**
  * Add a random link with random model.
  */
-void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName)
+inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName)
 {
     // Add Link
     LinkIndex newLinkIndex = model.addLink(newLinkName,getRandomLink());
@@ -75,7 +75,7 @@ void addRandomLinkToModel(Model & model, std::string parentLink, std::string new
     }
 }
 
-std::string getRandomLinkOfModel(const Model & model)
+inline std::string getRandomLinkOfModel(const Model & model)
 {
     int nrOfLinks = model.getNrOfLinks();
 
@@ -84,7 +84,7 @@ std::string getRandomLinkOfModel(const Model & model)
     return model.getLinkName(randomLink);
 }
 
-std::string int2string(int i)
+inline std::string int2string(int i)
 {
     std::stringstream ss;
 
@@ -93,7 +93,7 @@ std::string int2string(int i)
     return ss.str();
 }
 
-Model getRandomModel(unsigned int nrOfJoints)
+inline Model getRandomModel(unsigned int nrOfJoints)
 {
     Model model;
 
@@ -109,7 +109,7 @@ Model getRandomModel(unsigned int nrOfJoints)
     return model;
 }
 
-Model getRandomChain(unsigned int nrOfJoints)
+inline Model getRandomChain(unsigned int nrOfJoints)
 {
     Model model;
 

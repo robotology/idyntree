@@ -164,7 +164,7 @@ namespace iDynTree
      * Helper for printing the patter of wrong elements
      * in between two vectors
      */
-    void printVectorWrongElements(std::string name, std::vector<bool> & correctElems)
+    inline void printVectorWrongElements(std::string name, std::vector<bool> & correctElems)
     {
         std::cerr << name << " ( . match, X mismatch): \n";
 
@@ -185,7 +185,7 @@ namespace iDynTree
      * Helper for printing the patter of wrong elements
      * in between two matrix
      */
-    void printMatrixWrongElements(std::string name, std::vector< std::vector<bool> > & correctElems)
+    inline void printMatrixWrongElements(std::string name, std::vector< std::vector<bool> > & correctElems)
     {
         std::cerr << name << "( . match, X mismatch): \n";
 
