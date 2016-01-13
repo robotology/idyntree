@@ -88,6 +88,7 @@ namespace iDynTree
      * Compute the left-trivialized linearization,
      * as described in [fill with left-trivialized repot when available].
      *
+     * HIGHLY EXPERIMENTAL FUNCTION, DO NOT USE
      */
     bool ForwardDynamicsLinearization(const Model& model,
                                       const Traversal& traversal,
@@ -102,4 +103,4 @@ namespace iDynTree
 }
 
 
-#endif /* IDYNTREE_DYNAMICS_H */
+#endif
