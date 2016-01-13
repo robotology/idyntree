@@ -104,7 +104,7 @@ bool treeSerializationFromParModelTree(const symoro_par_model& par_model, KDL::C
     serialization.setLinkNameID(base_name,link_cnt);
     link_cnt++;
 
-    for(int l=0; l < par_model.NL; l++ ) {
+    for(size_t l=0; l < par_model.NL; l++ ) {
         std::string link_name = link_common_name + int2string_serialization(l+1);
         std::string joint_name = joint_common_name + int2string_serialization(l+1);
         //serialization.links[link_cnt] = link_name;

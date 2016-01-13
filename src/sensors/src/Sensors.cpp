@@ -25,11 +25,13 @@
 #include <iDynTree/Core/LinearMotionVector3.h>
 
 // #include "iDynTree/Sensors/IMeasurement.hpp"
-#include <iDynTree/Sensors/Sensors.hpp>
+#include <iDynTree/Sensors/Sensors.h>
 
-#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
-#include <iDynTree/Sensors/Accelerometer.hpp>
-#include <iDynTree/Sensors/Gyroscope.hpp>
+#include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/AccelerometerSensor.h>
+#include <iDynTree/Sensors/GyroscopeSensor.h>
+
+#include <iDynTree/Core/VectorDynSize.h>
 
 
 
@@ -198,6 +200,8 @@ Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) 
     }
 }
 
+
+
 ///////////////////////////////////////////////////////////////////////////////
 ///// SensorMeasurements
 ///////////////////////////////////////////////////////////////////////////////
@@ -214,12 +218,14 @@ struct SensorsMeasurements::SensorsMeasurementsPrivateAttributes
 {
 
 }
-/*
-SensorsMeasurements::SensorMeasurements():
-pimpl(new SensorsMeasurementsPrivateAttributes)
-{
-}*/
 
+SensorsMeasurements::SensorsMeasurements(const SensorsList &sensorsList)
+{
+    this->pimpl = new SensorsMeasurementsPrivateAttributes;
+    this->pimpl->SixAxisFTSensorsMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE));
+    this->pimpl->AccelerometerMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER));
+    this->pimpl->GyroscopeMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::GYROSCOPE));
+}
 SensorsMeasurements::SensorsMeasurements(const SensorsMeasurements & other):
 pimpl(new SensorsMeasurementsPrivateAttributes(*(other.pimpl)))
 {
@@ -242,23 +248,23 @@ SensorsMeasurements::~SensorsMeasurements()
 
 bool SensorsMeasurements::setNrOfSensors(const SensorType& sensor_type, unsigned int nrOfSensors)
 {
-//     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
-//     {
-//         this->pimpl->SixAxisFTSensorsMeasurements.resize(nrOfSensors);
-//         return true;
-//     }
-    
-        unsigned int returnVal = 0;
+    Wrench zeroWrench;
+    LinAcceleration zeroLinAcc;
+    AngVelocity zeroAngVel;
+    unsigned int returnVal = 0;
     switch (sensor_type)
     {
         case SIX_AXIS_FORCE_TORQUE :
-            this->pimpl->SixAxisFTSensorsMeasurements.resize(nrOfSensors);
+            zeroWrench.zero();
+            this->pimpl->SixAxisFTSensorsMeasurements.resize(nrOfSensors,zeroWrench);
             break;
-        case ACCELEROMETER : 
-            this->pimpl->AccelerometerMeasurements.resize(nrOfSensors);
+        case ACCELEROMETER :
+            zeroLinAcc.zero();
+            this->pimpl->AccelerometerMeasurements.resize(nrOfSensors,zeroLinAcc);
             break;
-        case GYROSCOPE : 
-            this->pimpl->GyroscopeMeasurements.resize(nrOfSensors);
+        case GYROSCOPE :
+            zeroAngVel.zero();
+            this->pimpl->GyroscopeMeasurements.resize(nrOfSensors,zeroAngVel);
         default :
             returnVal = 0;
     }
@@ -268,8 +274,65 @@ bool SensorsMeasurements::setNrOfSensors(const SensorType& sensor_type, unsigned
     return true;
 }
 
-bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type, 
-                                         const unsigned int& sensor_index, 
+bool SensorsMeasurements::resize(const SensorsList &sensorsList)
+{
+    Wrench zeroWrench;zeroWrench.zero();
+    LinAcceleration zeroLinAcc;zeroLinAcc.zero();
+    AngVelocity zeroAngVel;zeroAngVel.zero();
+
+    this->pimpl->SixAxisFTSensorsMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),zeroWrench);
+    this->pimpl->AccelerometerMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER),zeroLinAcc);
+    this->pimpl->GyroscopeMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::GYROSCOPE),zeroAngVel);
+
+    return true;
+}
+
+bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
+{
+    unsigned int itr;
+    LinAcceleration thisLinAcc;
+    AngVelocity thisAngVel;
+    Wrench thisWrench;
+    unsigned int numFT = this->pimpl->SixAxisFTSensorsMeasurements.size();
+    unsigned int numAcc = this->pimpl->AccelerometerMeasurements.size();
+    unsigned int numGyro = this->pimpl->GyroscopeMeasurements.size();
+    bool ok = true;
+
+    measurementVector.resize(6*numFT + 3*numAcc + 3*numGyro);
+
+    for(itr = 0; itr<numFT; itr++)
+    {
+        thisWrench = this->pimpl->SixAxisFTSensorsMeasurements.at(itr);
+
+        ok && measurementVector.setVal(6*itr, thisWrench.getVal(0));
+        ok && measurementVector.setVal(6*itr+1,thisWrench.getVal(1));
+        ok && measurementVector.setVal(6*itr+2,thisWrench.getVal(2));
+        ok && measurementVector.setVal(6*itr+3,thisWrench.getVal(3));
+        ok && measurementVector.setVal(6*itr+4,thisWrench.getVal(4));
+        ok && measurementVector.setVal(6*itr+5,thisWrench.getVal(5));
+    }
+    for(itr = 0; itr<numAcc; itr++)
+    {
+        thisLinAcc =  this->pimpl->AccelerometerMeasurements.at(itr);
+        ok && measurementVector.setVal(6*numFT + 3*itr,thisLinAcc.getVal(0));
+        ok && measurementVector.setVal(6*numFT + 3*itr+1,thisLinAcc.getVal(1));
+        ok && measurementVector.setVal(6*numFT + 3*itr+2,thisLinAcc.getVal(2));
+    }
+    for(itr = 0; itr<numGyro; itr++)
+    {
+        thisAngVel = this->pimpl->GyroscopeMeasurements.at(itr);
+        ok && measurementVector.setVal(6*numFT + 3*numAcc + 3*itr,thisAngVel.getVal(0));
+        ok && measurementVector.setVal(6*numFT + 3*numAcc + 3*itr+1,thisAngVel.getVal(1));
+        ok && measurementVector.setVal(6*numFT + 3*numAcc + 3*itr+2,thisAngVel.getVal(2));
+    }
+
+
+    return(ok);
+}
+
+
+bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
+                                         const unsigned int& sensor_index,
                                          const iDynTree::Wrench &measurement )
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
@@ -291,8 +354,8 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
     return false;
 }
 
-bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type, 
-                                         const unsigned int& sensor_index, 
+bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
+                                         const unsigned int& sensor_index,
                                          const iDynTree::LinAcceleration & measurement)
 {
     if( sensor_type == ACCELEROMETER )
@@ -314,8 +377,8 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
     return false;
 }
 
-bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type, 
-                                         const unsigned int& sensor_index, 
+bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
+                                         const unsigned int& sensor_index,
                                          const iDynTree::AngVelocity & measurement)
 {
     if( sensor_type == GYROSCOPE )
@@ -336,8 +399,8 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
 
     return false;
 }
-bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type, 
-                                         const unsigned int& sensor_index, 
+bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
+                                         const unsigned int& sensor_index,
                                          Wrench& measurement) const
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
@@ -359,8 +422,8 @@ bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
     return false;
 }
 
-bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type, 
-                                         const unsigned int& sensor_index, 
+bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
+                                         const unsigned int& sensor_index,
                                          iDynTree::LinAcceleration & measurement) const
 {
     if( sensor_type == ACCELEROMETER )
@@ -381,8 +444,8 @@ bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
 
     return false;
 }
-bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type, 
-                                         const unsigned int& sensor_index, 
+bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
+                                         const unsigned int& sensor_index,
                                          iDynTree::AngVelocity& measurement) const
 {
     if( sensor_type == GYROSCOPE )
@@ -412,15 +475,16 @@ unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) 
         case SIX_AXIS_FORCE_TORQUE :
             returnVal =  this->pimpl->SixAxisFTSensorsMeasurements.size();
             break;
-        case ACCELEROMETER : 
+        case ACCELEROMETER :
             returnVal =  this->pimpl->AccelerometerMeasurements.size();
             break;
-        case GYROSCOPE : 
+        case GYROSCOPE :
             returnVal =  this->pimpl->GyroscopeMeasurements.size();
         default :
             returnVal = 0;
     }
     return(returnVal);
 }
+
 
 }

@@ -76,8 +76,11 @@
 #include "iDynTree/ModelIO/URDFModelImport.h"
 
 // Sensors related data structures
-#include "iDynTree/Sensors/Sensors.hpp"
-#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+#include "iDynTree/Sensors/Sensors.h"
+#include "iDynTree/Sensors/SixAxisFTSensor.h"
+#include "iDynTree/Sensors/AccelerometerSensor.h"
+#include "iDynTree/Sensors/GyroscopeSensor.h"
+#include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
 // Sensors loading from external formats
 #include "iDynTree/ModelIO/URDFSensorsImport.h"
@@ -212,8 +215,11 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/ModelIO/URDFModelImport.h"
 
 // Sensors related data structures
-%include "iDynTree/Sensors/Sensors.hpp"
-%include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+%include "iDynTree/Sensors/Sensors.h"
+%include "iDynTree/Sensors/SixAxisFTSensor.h"
+%include "iDynTree/Sensors/AccelerometerSensor.h"
+%include "iDynTree/Sensors/GyroscopeSensor.h"
+%include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
 %include "sensors.i"
 

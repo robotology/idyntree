@@ -30,15 +30,10 @@ add_library(idyntree-icub ${iDynTree_ICUB_source} ${iDynTree_ICUB_header})
 
 set_target_properties(idyntree-icub PROPERTIES PUBLIC_HEADER "${iDynTree_ICUB_header}")
 
-target_include_directories(idyntree-icub PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                ${skinDynLib_INCLUDE_DIRS}
-                                                ${iDyn_INCLUDE_DIRS}
-                                                ${GSL_INCLUDE_DIRS}
-                                                ${YARP_INCLUDE_DIRS}
-                                                ${EIGEN3_INCLUDE_DIR}
-                                                ${orocos_kdl_INCLUDE_DIRS})
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
+target_include_directories(idyntree-icub PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
+                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 target_link_libraries(idyntree-icub LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${GSL_LIBRARIES}
@@ -51,6 +46,14 @@ target_link_libraries(idyntree-icub LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${Boost_LIBRARIES}
                                             ${TinyXML_LIBRARIES})
 
+target_include_directories(idyntree-icub INTERFACE ${skinDynLib_INCLUDE_DIRS})
+
+include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS}
+                           ${iDyn_INCLUDE_DIRS}
+                           ${GSL_INCLUDE_DIRS}
+                           ${YARP_INCLUDE_DIRS}
+                           ${EIGEN3_INCLUDE_DIR}
+                           ${orocos_kdl_INCLUDE_DIRS})
 
 install(TARGETS idyntree-icub
         EXPORT iDynTree

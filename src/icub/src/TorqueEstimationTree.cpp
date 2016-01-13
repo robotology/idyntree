@@ -17,8 +17,8 @@
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 #include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
 
-#include "iDynTree/Sensors/Sensors.hpp"
-#include "iDynTree/Sensors/SixAxisFTSensor.hpp"
+#include "iDynTree/Sensors/Sensors.h"
+#include "iDynTree/Sensors/SixAxisFTSensor.h"
 #include <iDynTree/Core/Transform.h>
 
 #include <kdl_codyco/rnea_loops.hpp>
@@ -88,7 +88,7 @@ TorqueEstimationTree::TorqueEstimationTree(std::string urdf_filename,
     for(int dof = 0; dof < nrOfDofs; dof++ )
     {
         std::string dof_name = dof_serialization[dof];
-        for(int lim = 0; lim < joint_limits_names.size(); lim++ )
+        for(size_t lim = 0; lim < joint_limits_names.size(); lim++ )
         {
             if( joint_limits_names[lim] == dof_name )
             {
@@ -129,7 +129,7 @@ TorqueEstimationTree::TorqueEstimationTree(KDL::Tree& icub_kdl,
 
     std::vector<std::string> dof_serialization;
 
-    for(int i = 0; i < serial.getNrOfDOFs(); i++ )
+    for(size_t i = 0; i < serial.getNrOfDOFs(); i++ )
     {
         dof_serialization.push_back(serial.getDOFName(i));
     }
@@ -276,7 +276,7 @@ bool TorqueEstimationTree::isFTsensor(const std::string & joint_name, const std:
 bool TorqueEstimationTree::generateSensorsTree(const std::vector<std::string> & ft_names,
                                     const std::vector<bool> & is_measure_direction_child_to_parent)
 {
-    for(int i=0; i < ft_names.size(); i++ )
+    for(size_t i=0; i < ft_names.size(); i++ )
     {
         //Creating a new ft sensor to be added in the ft sensors structure
         ::iDynTree::SixAxisForceTorqueSensor new_sens;
@@ -389,7 +389,7 @@ int TorqueEstimationTree::buildSubGraphStructure(const std::vector<std::string> 
     this->generateSensorsTree(ft_names,is_measure_direction_child_to_parent);
 
     //The numbers of ids must be equal to the number of subgraphs
-    if(next_id == NrOfDynamicSubGraphs) {
+    if(next_id == (int)NrOfDynamicSubGraphs) {
         return 0;
     } else {
         assert(false);
@@ -410,8 +410,8 @@ std::vector<yarp::sig::Vector> TorqueEstimationTree::getSubTreeInternalDynamics(
         return_value_kdl[link2subgraph_index[link_it->getLinkIndex()]] += X_dynamic_base[link_it->getLinkIndex()]*f_gi[link_it->getLinkIndex()];
     }
 
-    for(int i=0; i < NrOfDynamicSubGraphs; i++ ) {
-        for(int j=0; j < 6; j++ ) {
+    for(size_t i=0; i < NrOfDynamicSubGraphs; i++ ) {
+        for(size_t j=0; j < 6; j++ ) {
             return_value[i][j] = return_value_kdl[i](j);
         }
     }
@@ -459,10 +459,6 @@ bool TorqueEstimationTree::getSkinDynLibAlias(const std::string iDynTree_link_na
        std::cerr << "[ERR] getSkinDynLibAlias : link " << iDynTree_link_name << " not found " << std::endl;
        return false;
    }
-
-   skinDynLibLinkID sdl_id;
-   sdl_id.body_part = skinDynLib_body_part;
-   sdl_id.local_link_index = skinDynLib_link_index;
 
      // TODO \todo What is this crazyness??? Linear search of a map??
    for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.begin();
@@ -555,7 +551,7 @@ bool TorqueEstimationTree::skinDynLib2iDynTree(const int skinDynLib_body_part,
 bool TorqueEstimationTree::setContacts(const iCub::skinDynLib::dynContactList & contacts_list)
 {
     assert((int)contacts.size() == NrOfDynamicSubGraphs);
-    for(int sg = 0; sg < NrOfDynamicSubGraphs; sg++ ) {
+    for(size_t sg = 0; sg < NrOfDynamicSubGraphs; sg++ ) {
         contacts[sg].resize(0);
     }
 
@@ -595,7 +591,7 @@ const iCub::skinDynLib::dynContactList TorqueEstimationTree::getContacts() const
     iCub::skinDynLib::dynContactList all_contacts(0);
 
 
-    for(int sg = 0; sg < NrOfDynamicSubGraphs; sg++ )
+    for(size_t sg = 0; sg < NrOfDynamicSubGraphs; sg++ )
     {
         all_contacts.insert(all_contacts.end(),contacts[sg].begin(),contacts[sg].end());
     }
@@ -667,8 +663,8 @@ void TorqueEstimationTree::buildAb_contacts()
        {
            //std::cout << " setting b_contact [ " << getSubGraphIndex(link_nmbr) << " ] ";
            //std::cout << "to " << b_contacts_subtree[link_nmbr] << std::endl;
-           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(0,KDLtoYarp(b_contacts_subtree[link_nmbr].torque));
-           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(3,KDLtoYarp(b_contacts_subtree[link_nmbr].force));
+           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(0,KDLtoYarp(b_contacts_subtree[link_nmbr].force));
+           b_contacts[getSubGraphIndex(link_nmbr)].setSubvector(3,KDLtoYarp(b_contacts_subtree[link_nmbr].torque));
            //std::cout << " b_contacts [ " << getSubGraphIndex(link_nmbr) << " ] is " << b_contacts[getSubGraphIndex(link_nmbr)].toString() << std::endl;
        }
 
@@ -682,7 +678,7 @@ void TorqueEstimationTree::buildAb_contacts()
     std::vector<int> unknowns(NrOfDynamicSubGraphs,0);
 
     //Calculate the number of unknowns for each subgraph
-    for(int sg=0; sg < NrOfDynamicSubGraphs; sg++ ) {
+    for(size_t sg=0; sg < NrOfDynamicSubGraphs; sg++ ) {
         for(it = contacts[sg].begin(); it!=contacts[sg].end(); it++)
         {
             //get link index
@@ -720,7 +716,7 @@ void TorqueEstimationTree::buildAb_contacts()
     }
 
 
-    for(int sg=0; sg < NrOfDynamicSubGraphs; sg++ ) {
+    for(size_t sg=0; sg < NrOfDynamicSubGraphs; sg++ ) {
         //Resize the A matrices
         A_contacts[sg] = yarp::sig::Matrix(6,unknowns[sg]);
         A_contacts[sg].zero();
@@ -781,7 +777,7 @@ void TorqueEstimationTree::buildAb_contacts()
                 // 1 UNKNOWN: FORCE MODULE
                 yarp::sig::Matrix un(6,1);
                 un.zero();
-                un.setSubcol(it->getForceDirection(),3,0); // force direction unit vector
+                un.setSubcol(it->getForceDirection(),0,0); // force direction unit vector
                 yarp::sig::Matrix H_adj_root_contact = KDLtoYarp_wrench(H_root_contactFrame);
                 yarp::sig::Matrix col = H_adj_root_contact*un;
                 A_contacts[sg].setSubmatrix(col,0,colInd);
@@ -792,7 +788,7 @@ void TorqueEstimationTree::buildAb_contacts()
             {
                 if( it->isMomentKnown() ) {
                     // 3 UNKNOWNS: FORCE
-                    A_contacts[sg].setSubmatrix(KDLtoYarp_wrench(H_root_contactFrame).submatrix(0,5,3,5),0,colInd);
+                    A_contacts[sg].setSubmatrix(KDLtoYarp_wrench(H_root_contactFrame).submatrix(0,5,0,2),0,colInd);
                     colInd += 3;
 
                 } else {
@@ -815,7 +811,7 @@ void TorqueEstimationTree::store_contacts_results()
         f_ext[dynamic_traversal.getOrderedLink(l)->getLinkIndex()] = KDL::Wrench::Zero();
     }
 
-    for(int sg=0; sg < NrOfDynamicSubGraphs; sg++ ) {
+    for(size_t sg=0; sg < NrOfDynamicSubGraphs; sg++ ) {
         unsigned int unknownInd = 0;
         iCub::skinDynLib::dynContactList::iterator it;
         for(it = contacts[sg].begin(); it!=contacts[sg].end(); it++)
@@ -852,10 +848,10 @@ void TorqueEstimationTree::store_contacts_results()
                 } else {
                     //6 UNKNOWN
                     assert( unknownInd+2 < x_contacts[sg].size() );
-                    it->setMoment(x_contacts[sg].subVector(unknownInd, unknownInd+2));
+                    it->setForce(x_contacts[sg].subVector(unknownInd, unknownInd+2));
                     unknownInd += 3;
                     assert( unknownInd+2 < x_contacts[sg].size() );
-                    it->setForce(x_contacts[sg].subVector(unknownInd, unknownInd+2));
+                    it->setMoment(x_contacts[sg].subVector(unknownInd, unknownInd+2));
                     unknownInd += 3;
 
                 }
@@ -890,7 +886,7 @@ bool TorqueEstimationTree::estimateContactForcesFromSkin()
 
     double tol = 1e-7; /**< value extracted from old iDynContact */
     buildAb_contacts();
-    for(int i=0; i < NrOfDynamicSubGraphs; i++ ) {
+    for(size_t i=0; i < NrOfDynamicSubGraphs; i++ ) {
         #ifndef NDEBUG
         /*
         std::cout << "A_contacts " << i << " has size " << A_contacts[i].rows() << " " << A_contacts[i].cols() << std::endl;
@@ -924,7 +920,7 @@ KDL::Wrench TorqueEstimationTree::getMeasuredWrench(int link_id)
 {
 
     ::iDynTree::Wrench total_measured_applied_wrench = ::iDynTree::Wrench::Zero();
-    for(int ft=0; ft < NrOfFTSensors; ft++ )
+    for(size_t ft=0; ft < NrOfFTSensors; ft++ )
     {
         ::iDynTree::SixAxisForceTorqueSensor * sens
             = (::iDynTree::SixAxisForceTorqueSensor *) sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft);
@@ -985,7 +981,7 @@ bool TorqueEstimationTree::dynamicRNEA()
     {
         //In case contacts forces where not estimated, the sensor values have
         //to be calculated from the RNEA
-        for(int i=0; i < NrOfFTSensors; i++ )
+        for(size_t i=0; i < NrOfFTSensors; i++ )
         {
             //Todo add case that the force/wrench is the one of the parent ?
             ::iDynTree::Wrench measure_wrench;
@@ -1024,7 +1020,7 @@ int TorqueEstimationTree::getFTSensorIndex(const std::string & ft_name) const
     unsigned int junction_index = junction_it->getJunctionIndex();
     // Search the ft index given the associated junction index
     assert( sensors_tree.getNrOfSensors(::iDynTree::SIX_AXIS_FORCE_TORQUE) == NrOfFTSensors );
-    for( int ft = 0; ft < NrOfFTSensors; ft++ )
+    for( size_t ft = 0; ft < NrOfFTSensors; ft++ )
     {
         ::iDynTree::SixAxisForceTorqueSensor * p_ft_sensor =
                 dynamic_cast< ::iDynTree::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft));

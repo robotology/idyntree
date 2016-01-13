@@ -34,7 +34,7 @@ namespace iDynTree
      * by joints. Each joint can have from 0 to 6 degrees of freedom.
      *
      * Each link has a "link frame" rigidly attached to it.
-     * For each link additional rigidly attached frames can be defined,
+     * For each link more rigidly attached frames can be defined,
      * in addition to "link frame".
      *
      * The model contains also a serialization for the different elements
@@ -45,7 +45,6 @@ namespace iDynTree
      *  * frame names and the integers 0..getNrOfFrames()-1
      *
      * For simplicity, this mappings are build when building the model.
-     *
      * In particular the joint and link indices are assigned when the links
      * and joint are added to the model using the `addLink` and `addJoint`
      * methods.
@@ -58,8 +57,13 @@ namespace iDynTree
      * there is no concept of DOF explicit identifier, i.e. no getDOFName(DOFIndex dofIndex)
      * method.
      *
-     * The frame indices between 0 and getNrOfFrames()-1 are always assigned to the
-     * "main" link frame of the link with the same index.
+     * The frame indices between 0 and getNrOfLinks()-1 are always assigned to the
+     * "main" link frame of the link with the same index. The frame indices 
+     * between getNrOfLinks() and getNrOfFrames()-1 are assigned when the additional
+     * frame is added to the model with the addAdditionalFrameToLink call. All the additional
+     * frame indeces are increased of 1 whenever a new link is added, to ensure that 
+     * its "link frame" has a frame index in the 0...getNrOfLinks()-1 range. 
+     * 
      *
      *
      * \ingroup iDynTreeModel
@@ -79,7 +83,8 @@ namespace iDynTree
          */
         std::vector<Transform> additionalFrames;
 
-        /** Vector of link indeces corresponding to an additional frame.
+        /**
+         *  Vector of link indeces corresponding to an additional frame.
          *  The element additionalFrameNames[frameOffset] will be the link_H_frame transform  of the frame with
          *  FrameIndex getNrOfLinks() + frameOffset .
          */
@@ -91,7 +96,8 @@ namespace iDynTree
         /** Vector of joint names, matches the index of each joint to its name. */
         std::vector<std::string> jointNames;
 
-        /** Vector of additional frame names.
+        /**
+         *  Vector of additional frame names.
          *  The element frameNames[frameOffset] will be the name of the frame with
          *  FrameIndex getNrOfLinks() + frameOffset .
          */

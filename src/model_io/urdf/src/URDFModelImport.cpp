@@ -12,9 +12,9 @@
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
 #include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/ModelTransformers.h>
 
 #include <tinyxml.h>
-#include <iDynTree/ModelIO/impl/urdf_export.hpp>
 
 #include <cstdlib>
 #include <cmath>
@@ -531,149 +531,6 @@ bool isIdentity(const Transform & trans)
     }
 
     return true;
-}
-
-/**
- * Check the condition for deciding if a model has a fake base link.
- * The three conditions for a base link to be considered "fake" are:
- *  * if the base link is massless,
- *  * if the base link has only one child,
- *  * if the base link is attached to its only child with a fixed joint,
- *  * if the transform between the base link and its child is the identity.
- *
- */
-bool hasFakeBaseLink(const Model& modelWithFakeLinks)
-{
-    LinkIndex baseLink = modelWithFakeLinks.getDefaultBaseLink();
-
-    // First condition: base link is massless
-    double mass = modelWithFakeLinks.getLink(baseLink)->getInertia().getMass();
-    if( mass > URDFImportTol )
-    {
-        return false;
-    }
-
-    // Second condition: the base link has only one child
-    if( modelWithFakeLinks.getNrOfNeighbors(baseLink) != 1 )
-    {
-        return false;
-    }
-
-    // Third condition: the base link is attached to its child with a fixed joint
-    Neighbor neigh = modelWithFakeLinks.getNeighbor(baseLink,0);
-    if( modelWithFakeLinks.getJoint(neigh.neighborJoint)->getNrOfDOFs() > 0 )
-    {
-        return false;
-    }
-
-    // Fourth condition: the transform between the base link and its child is the identity
-    IJointConstPtr pFixedJoint = modelWithFakeLinks.getJoint(neigh.neighborJoint);
-    Transform base_T_child = pFixedJoint->getRestTransform(baseLink,neigh.neighborLink);
-
-    if( !isIdentity(base_T_child) )
-    {
-        return false;
-    }
-
-    return true;
-}
-
-/**
- * In a URDF model several links are added to the URDF file,
- * but are not proper links:
- *  * a root massless link (usually called "base_link") is
- *    added to floating base models as a workaround to an
- *    old limitation of the KDL library ( https://github.com/ros/robot_model/issues/6).
- *  * massless leaf links attached with fixed joints to real links
- *    are used to represent frames, as the URDF does not support
- *    frames attached to a link.
- *
- * This function is used to remove this "fake" links from the model after parsing.
- * \todo TODO implement additional frames for links, to parse this
- *            fake links as frames.
- *
- */
-bool removeFakeLinks(const Model& modelWithFakeLinks,
-                     Model& modelWithoutFakeLinks)
-{
-    std::set<std::string> linkToRemove;
-    std::set<std::string> jointToRemove;
-    std::string newDefaultBaseLink = modelWithFakeLinks.getLinkName(modelWithFakeLinks.getDefaultBaseLink());
-
-    // If the input model has a fake base,
-    // we remove it and add it back as frame
-    bool hasFakeBase = hasFakeBaseLink(modelWithFakeLinks);
-
-    if( hasFakeBase )
-    {
-        LinkIndex baseLink = modelWithFakeLinks.getDefaultBaseLink();
-        linkToRemove.insert(modelWithFakeLinks.getLinkName(modelWithFakeLinks.getDefaultBaseLink()));
-        JointIndex jntIndex = modelWithFakeLinks.getNeighbor(baseLink,0).neighborJoint;
-        jointToRemove.insert(modelWithFakeLinks.getJointName(jntIndex));
-        LinkIndex newBaseIndex =  modelWithFakeLinks.getNeighbor(baseLink,0).neighborLink;
-        newDefaultBaseLink = modelWithFakeLinks.getLinkName(newBaseIndex);
-    }
-
-    // Create the new model obtained removing all the fake links (and relative joints)
-    modelWithoutFakeLinks = Model();
-    // Add all links, expect for the one to remove
-    for(unsigned int lnk=0; lnk < modelWithFakeLinks.getNrOfLinks(); lnk++ )
-    {
-        std::string linkToAdd = modelWithFakeLinks.getLinkName(lnk);
-        if( linkToRemove.find(linkToAdd) == linkToRemove.end() )
-        {
-            modelWithoutFakeLinks.addLink(linkToAdd,*modelWithFakeLinks.getLink(lnk));
-        }
-    }
-
-    // Add all joints, preserving the serialization
-    for(unsigned int jnt=0; jnt < modelWithFakeLinks.getNrOfJoints(); jnt++ )
-    {
-        std::string jointToAdd = modelWithFakeLinks.getJointName(jnt);
-        if( jointToRemove.find(jointToAdd) == jointToRemove.end() )
-        {
-            // we need to change the link index in the new joints
-            // to match the new link serialization
-            IJointPtr newJoint = modelWithFakeLinks.getJoint(jnt)->clone();
-            std::string firstLinkName = modelWithFakeLinks.getLinkName(newJoint->getFirstAttachedLink());
-            std::string secondLinkName = modelWithFakeLinks.getLinkName(newJoint->getSecondAttachedLink());
-            JointIndex  firstLinkNewIndex = modelWithoutFakeLinks.getLinkIndex(firstLinkName);
-            JointIndex  secondLinkNewIndex = modelWithoutFakeLinks.getLinkIndex(secondLinkName);
-            newJoint->setAttachedLinks(firstLinkNewIndex,secondLinkNewIndex);
-
-            modelWithoutFakeLinks.addJoint(jointToAdd,newJoint);
-
-            delete newJoint;
-        }
-    }
-
-    // Add all frames (i.e. fake links that we removed from the model)
-
-    // Add the frame corresponding to the fake base (tipically base_link)
-    if( hasFakeBase )
-    {
-        LinkIndex fakeBaseOldIndex = modelWithFakeLinks.getDefaultBaseLink();
-        std::string fakeBaseName = modelWithFakeLinks.getLinkName(fakeBaseOldIndex);
-
-        // One of the condition for a base to be fake is to
-        // be connected to the real base with a fixed joint, so
-        // their transform (currently the identity, otherwise is not
-        // a fake base) can be obtained without specifying the joint positions
-        assert(modelWithFakeLinks.getNrOfNeighbors(fakeBaseOldIndex) == 1);
-        JointIndex fakeBase_realBase_joint = modelWithFakeLinks.getNeighbor(fakeBaseOldIndex,0).neighborJoint;
-        LinkIndex   realBaseOldIndex = modelWithFakeLinks.getNeighbor(fakeBaseOldIndex,0).neighborLink;
-        std::string realBaseName = modelWithFakeLinks.getLinkName(realBaseOldIndex);
-
-        // Get the transform (this should be identity, but better be ready if hasFakeBaseLink methods is changed)
-        iDynTree::Transform realBase_H_fakeBase =
-            modelWithFakeLinks.getJoint(fakeBase_realBase_joint)->getRestTransform(realBaseOldIndex,fakeBaseOldIndex);
-
-        // Add the fake base as a frame
-        modelWithoutFakeLinks.addAdditionalFrameToLink(realBaseName,fakeBaseName,realBase_H_fakeBase);
-    }
-
-    // Set the default base link
-    return modelWithoutFakeLinks.setDefaultBaseLink(modelWithoutFakeLinks.getLinkIndex(newDefaultBaseLink));
 }
 
 /**

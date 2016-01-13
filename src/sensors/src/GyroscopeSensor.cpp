@@ -14,16 +14,18 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
  * Public License for more details
  */
+
 #include "iDynTree/Core/AngularMotionVector3.h"
 
-#include "iDynTree/Sensors/Gyroscope.hpp"
+#include "iDynTree/Sensors/GyroscopeSensor.h"
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Wrench.h"
+#include "iDynTree/Core/Twist.h"
 
 
 namespace iDynTree {
 
-struct Gyroscope::GyroscopePrivateAttributes
+struct GyroscopeSensor::GyroscopePrivateAttributes
 {
     // Name/id of the sensor
     std::string name;
@@ -36,7 +38,7 @@ struct Gyroscope::GyroscopePrivateAttributes
 };
 
 
-Gyroscope::Gyroscope()
+GyroscopeSensor::GyroscopeSensor()
 {
     this->pimpl = new GyroscopePrivateAttributes;
 
@@ -46,13 +48,13 @@ Gyroscope::Gyroscope()
     this->pimpl->parent_link_name = "";
 }
 
-Gyroscope::Gyroscope(const Gyroscope& other):
+GyroscopeSensor::GyroscopeSensor(const GyroscopeSensor& other):
     pimpl(new GyroscopePrivateAttributes(*(other.pimpl)))
 {
 
 }
 
-Gyroscope& Gyroscope::operator=(const Gyroscope& other)
+GyroscopeSensor& GyroscopeSensor::operator=(const GyroscopeSensor& other)
 {
     if(this != &other)
     {
@@ -62,37 +64,37 @@ Gyroscope& Gyroscope::operator=(const Gyroscope& other)
 }
 
 
-Gyroscope::~Gyroscope()
+GyroscopeSensor::~GyroscopeSensor()
 {
     delete this->pimpl;
 }
 
-bool Gyroscope::setName(const std::string& _name)
+bool GyroscopeSensor::setName(const std::string& _name)
 {
     this->pimpl->name = _name;
     return true;
 }
 
 
-bool Gyroscope::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor) const
+bool GyroscopeSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor) const
 {
     this->pimpl->link_H_sensor = link_H_sensor;
     return true;
 }
 
-bool Gyroscope::setParent(const std::string& parent)
+bool GyroscopeSensor::setParent(const std::string& parent)
 {
     this->pimpl->parent_link_name = parent;
     return true;
 }
 
-bool Gyroscope::setParentIndex(const int &parent_index)
+bool GyroscopeSensor::setParentIndex(const int &parent_index)
 {
     this->pimpl->parent_link_index = parent_index;
     return true;
 }
-//
-bool Gyroscope::isValid() const
+
+bool GyroscopeSensor::isValid() const
 {
     if( this->getName() == "" )
     {
@@ -109,41 +111,50 @@ bool Gyroscope::isValid() const
     return true;
 }
 
-Sensor* Gyroscope::clone() const
+Sensor* GyroscopeSensor::clone() const
 {
-    return (Sensor *)new Gyroscope(*this);
+    return (Sensor *)new GyroscopeSensor(*this);
 }
 
 
-std::string Gyroscope::getName() const
+std::string GyroscopeSensor::getName() const
 {
     return this->pimpl->name;
 }
 
-SensorType Gyroscope::getSensorType() const
+SensorType GyroscopeSensor::getSensorType() const
 {
     return GYROSCOPE;
 }
 
 
-std::string Gyroscope::getParent() const
+std::string GyroscopeSensor::getParent() const
 {
     return this->pimpl->parent_link_name;
 }
 
-int Gyroscope::getParentIndex() const
+int GyroscopeSensor::getParentIndex() const
 {
     return this->pimpl->parent_link_index;
 }
 
 
-bool Gyroscope::getLinkSensorTransform(iDynTree::Transform& link_H_sensor) const
+Transform GyroscopeSensor::getLinkSensorTransform(void)
 {
-    link_H_sensor = this->pimpl->link_H_sensor;
-    return true;
-
+    return(this->pimpl->link_H_sensor);
 
 }
+
+AngVelocity GyroscopeSensor::predictMeasurement(const Twist& linkVel)
+{
+    AngVelocity angVel(0,0,0);
+    if(this->pimpl->parent_link_index>=0)
+    {
+        angVel = ((this->pimpl->link_H_sensor * linkVel).getAngularVec3());
+    }
+    return(angVel);
+}
+
 /* to be implemented in the future after considering interface and requirements
  */
 /*

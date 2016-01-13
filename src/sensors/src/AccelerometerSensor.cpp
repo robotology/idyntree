@@ -17,15 +17,17 @@
 
 
 # include "iDynTree/Core/LinearMotionVector3.h"
-// #include "iDynTree/Sensors/IMeasurement.hpp"
 
-#include "iDynTree/Sensors/Accelerometer.hpp"
+#include "iDynTree/Sensors/AccelerometerSensor.h"
 
 #include "iDynTree/Core/Transform.h"
 
+#include "iDynTree/Core/SpatialAcc.h"
+#include "iDynTree/Core/Twist.h"
+
 namespace iDynTree {
 
-struct Accelerometer::AccelerometerPrivateAttributes
+struct AccelerometerSensor::AccelerometerPrivateAttributes
 {
     // Name/id of the sensor
     std::string name;
@@ -39,7 +41,7 @@ struct Accelerometer::AccelerometerPrivateAttributes
 };
 
 
-Accelerometer::Accelerometer()
+AccelerometerSensor::AccelerometerSensor()
 {
     this->pimpl = new AccelerometerPrivateAttributes;
 
@@ -50,13 +52,13 @@ Accelerometer::Accelerometer()
 
 }
 
-Accelerometer::Accelerometer(const Accelerometer& other):
+AccelerometerSensor::AccelerometerSensor(const AccelerometerSensor& other):
     pimpl(new AccelerometerPrivateAttributes(*(other.pimpl)))
 {
 
 }
 
-Accelerometer& Accelerometer::operator=(const Accelerometer& other)
+AccelerometerSensor& AccelerometerSensor::operator=(const AccelerometerSensor& other)
 {
     if(this != &other)
     {
@@ -66,49 +68,49 @@ Accelerometer& Accelerometer::operator=(const Accelerometer& other)
 }
 
 
-Accelerometer::~Accelerometer()
+AccelerometerSensor::~AccelerometerSensor()
 {
     delete this->pimpl;
 }
 
-bool Accelerometer::setName(const std::string& _name)
+bool AccelerometerSensor::setName(const std::string& _name)
 {
     this->pimpl->name = _name;
     return true;
 }
 
 
-bool Accelerometer::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor) const
+bool AccelerometerSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor) const
 {
       this->pimpl->link_H_sensor = link_H_sensor;
       return true;
 }
 
 
-bool Accelerometer::setParent(const std::string& parent)
+bool AccelerometerSensor::setParent(const std::string& parent)
 {
     this->pimpl->parent_link_name = parent;
     return true;
 }
 
-bool Accelerometer::setParentIndex(const int &parent_index)
+bool AccelerometerSensor::setParentIndex(const int &parent_index)
 {
     this->pimpl->parent_link_index = parent_index;
     return true;
 
 }
 
-std::string Accelerometer::getParent() const
+std::string AccelerometerSensor::getParent() const
 {
     return(this->pimpl->parent_link_name);
 }
 
-int Accelerometer::getParentIndex() const
+int AccelerometerSensor::getParentIndex() const
 {
     return(this->pimpl->parent_link_index);
 }
 
-bool Accelerometer::isValid() const
+bool AccelerometerSensor::isValid() const
 {
     if( this->getName() == "" )
     {
@@ -124,21 +126,39 @@ bool Accelerometer::isValid() const
     return true;
 }
 
-Sensor* Accelerometer::clone() const
+Sensor* AccelerometerSensor::clone() const
 {
-    return (Sensor *)new Accelerometer(*this);
+    return (Sensor *)new AccelerometerSensor(*this);
 }
 
 
-std::string Accelerometer::getName() const
+std::string AccelerometerSensor::getName() const
 {
     return this->pimpl->name;
 }
 
-SensorType Accelerometer::getSensorType() const
+SensorType AccelerometerSensor::getSensorType() const
 {
     return ACCELEROMETER;
 }
+
+Transform AccelerometerSensor::getLinkSensorTransform(void)
+{
+    return(this->pimpl->link_H_sensor);
+}
+
+LinAcceleration AccelerometerSensor::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& linkTwist)
+{
+    LinAcceleration returnAcc(0,0,0);
+    if( this->pimpl->parent_link_index >= 0)
+    {
+        iDynTree::Twist localVelocity = this->pimpl->link_H_sensor * linkTwist;
+        returnAcc = ((this->pimpl->link_H_sensor* linkAcc).getLinearVec3() + (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3()));
+    }
+
+    return(returnAcc);
+}
+
 
 /*
  * To be implmented in future based on interface and requirements

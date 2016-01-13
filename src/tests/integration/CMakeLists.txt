@@ -5,7 +5,7 @@ macro(add_integration_test testname)
     set(testbinary ${testname}IntegrationTest)
     set(testtarget   IntegrationTest${testname})
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR} ${IDYNTREE_TREE_INCLUDE_DIRS})
+    target_include_directories(${testbinary} PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
     target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf)
     add_test(NAME ${testtarget} COMMAND ${testbinary})
 

@@ -87,7 +87,7 @@ parameters vector, please check https://hal.archives-ouvertes.fr/hal-01137215/do
 
 ~~~cpp
     unsigned int links = dynComp.getNrOfLinks();
-    MatrixDynSize regr(6+dofs,6+10*links);
+    MatrixDynSize regr(6+dofs,10*links);
     ok = dynComp.getDynamicsRegressor(regr);
     
     if( !ok )

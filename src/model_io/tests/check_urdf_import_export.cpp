@@ -122,7 +122,7 @@ bool checkUrdfImportExport(std::string urdfFileName)
     q = dq = ddq = torques = torques_converted = JntArray(my_tree.getNrOfJoints());
     f = f_ext = std::vector<Wrench>(my_tree.getNrOfSegments(),KDL::Wrench::Zero());
 
-    for(int i=0; i < my_tree.getNrOfJoints(); i++ )
+    for(size_t i=0; i < my_tree.getNrOfJoints(); i++ )
     {
         q(i) = random_double();
         dq(i) = random_double();
@@ -140,7 +140,7 @@ bool checkUrdfImportExport(std::string urdfFileName)
 
     double tol = 1e-1;
     bool testFailed = false;
-    for( int i=0; i < my_tree.getNrOfJoints(); i++ )
+    for( size_t i=0; i < my_tree.getNrOfJoints(); i++ )
     {
         if( fabs(torques(i)-torques_converted(i)) > tol )
         {

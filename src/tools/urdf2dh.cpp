@@ -129,7 +129,7 @@ int main(int argc, char** argv)
   int nj = kdl_chain.getNrOfJoints();
   KDL::JntArray chain_min(nj), chain_max(nj);
 
-  int seg_i, jnt_i;
+  size_t seg_i, jnt_i;
   for(seg_i=0,jnt_i=0; seg_i < kdl_chain.getNrOfSegments(); seg_i++)
   {
       const Segment & seg = kdl_chain.getSegment(seg_i);

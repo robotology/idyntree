@@ -16,11 +16,8 @@ SOURCE_GROUP("Source Files" FILES ${iDynTree_YARP_source})
 SOURCE_GROUP("Header Files" FILES ${iDynTree_YARP_header})
 
 # share headers with all iDynTree targes
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
-include_directories(${orocos_kdl_INCLUDE_DIRS})
 
 include(AddInstallRPATHSupport)
 add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
@@ -33,12 +30,15 @@ add_library(idyntree-yarp ${iDynTree_YARP_source} ${iDynTree_YARP_header})
 
 set_target_properties(idyntree-yarp PROPERTIES PUBLIC_HEADER "${iDynTree_YARP_header}")
 
-target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                 ${GSL_INCLUDE_DIRS}
-                                                 ${YARP_INCLUDE_DIRS}
-                                                 ${EIGEN3_INCLUDE_DIR})
+target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
+                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
+include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
+
+target_include_directories(idyntree-yarp INTERFACE ${EIGEN3_INCLUDE_DIR}
+                                                   ${YARP_INCLUDE_DIRS})
+include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR}
+                           ${YARP_INCLUDE_DIRS})
 
 target_link_libraries(idyntree-yarp LINK_PUBLIC
                                             ${GSL_LIBRARIES}

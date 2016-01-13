@@ -13,9 +13,16 @@
 
 #include <iDynTree/Core/TestUtils.h>
 
+#include <algorithm>
 #include <cassert>
 #include <cstdio>
 #include <cstdlib>
+
+// For modelTransformsers testing
+#include <iDynTree/Model/ModelTransformers.h>
+#include <iDynTree/Model/ForwardKinematics.h>
+#include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/Model/FreeFloatingState.h>
 
 using namespace iDynTree;
 
@@ -60,6 +67,195 @@ void checkNeighborSanity(const Model & model, bool verbose)
             }
         }
     }
+}
+
+bool isStringInVector(const std::string & str,
+                      const std::vector<std::string> & vec)
+{
+    return std::find(vec.begin(), vec.end(), str) != vec.end();
+}
+
+void getRandomSubsetOfJoints(const Model & model,
+                             size_t nrOfJointsInSubset,
+                             std::vector<std::string>& subsetOfJoints)
+{
+    while( subsetOfJoints.size() < nrOfJointsInSubset )
+    {
+        JointIndex randomJoint = (JointIndex) getRandomInteger(0,model.getNrOfJoints()-1);
+        std::string randomJointName = model.getJointName(randomJoint);
+
+        // If the random added joint is not in the vector, add it
+        if( !isStringInVector(randomJointName,subsetOfJoints) )
+        {
+            subsetOfJoints.push_back(randomJointName);
+        }
+    }
+}
+
+class RNEAHelperClass
+{
+private:
+    Model model;
+    LinkVelArray linkVels;
+    LinkAccArray linkAccs;
+    LinkExternalWrenches linkExtF;
+    LinkInternalWrenches linkIntF;
+    Traversal traversal;
+
+public:
+    RNEAHelperClass(const Model& _model): model(_model),
+                                          linkVels(_model),
+                                          linkAccs(_model),
+                                          linkExtF(_model),
+                                          linkIntF(_model)
+    {
+        model.computeFullTreeTraversal(traversal);
+    }
+
+    bool runRNEA(const FreeFloatingPos & pos, const FreeFloatingVel & vel,
+                 const FreeFloatingAcc & acc, FreeFloatingGeneralizedTorques & trqs)
+    {
+        bool ok = true;
+        ok = ok && ForwardVelAccKinematics(model,traversal,
+                                           pos,vel,acc,
+                                           linkVels,linkAccs);
+        ok = ok && RNEADynamicPhase(model,traversal,
+                                    pos,linkVels,linkAccs,
+                                    linkExtF,linkIntF,trqs);
+
+        return ok;
+    }
+};
+
+/**
+ * Copy a vector of the dofs from the reduced model to a full model.
+ *
+ */
+template<typename vectorType>
+void copyFromReducedToFull(const vectorType & reducedVector,
+                            vectorType & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            assert(jntInFullModel->getNrOfDOFs() > 0);
+            assert(fullVector.size() == fullModel.getNrOfPosCoords());
+            assert(reducedVector.size() == reducedModel.getNrOfPosCoords());
+            assert(jntInFullModel->getPosCoordsOffset() < fullVector.size());
+            assert(jnt->getPosCoordsOffset() < reducedVector.size());
+
+            fullVector(jntInFullModel->getPosCoordsOffset()) = reducedVector(jnt->getPosCoordsOffset());
+        }
+    }
+}
+
+
+/**
+ * Copy a vector of the dofs from the reduced model to a full model.
+ *
+ */
+template<typename vectorType>
+void copyFromFullToReduced(      vectorType & reducedVector,
+                      const vectorType & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            reducedVector(jnt->getPosCoordsOffset()) = fullVector(jntInFullModel->getPosCoordsOffset());
+        }
+    }
+}
+
+/**
+ * \todo Move outsite in proper ModelTransformersUnitTest file.
+ */
+void checkReducedModel(const Model & model)
+{
+    // Create a random reduced version of the model
+    // and check that the RNEA for the full model
+    // and for the reduced model (with the removed
+    // joint positions, velocity and accelerations set to 0)
+    // is giving the same results
+    for(size_t jnts=0; jnts < model.getNrOfJoints(); jnts += 5)
+    {
+        std::vector<std::string> jointInReducedModel;
+        getRandomSubsetOfJoints(model,jnts,jointInReducedModel);
+
+        Model reducedModel;
+        bool ok = createReducedModel(model,jointInReducedModel,reducedModel);
+
+        ASSERT_EQUAL_DOUBLE(ok,1.0);
+
+        // Check that the two models have the same number of frames
+        ASSERT_EQUAL_DOUBLE(reducedModel.getNrOfJoints(),jnts);
+        ASSERT_EQUAL_DOUBLE(reducedModel.getNrOfJoints(),jointInReducedModel.size());
+        ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(),reducedModel.getNrOfFrames());
+
+        // Run RNEA
+        RNEAHelperClass fullRNEA(model);
+        RNEAHelperClass reducedRNEA(reducedModel);
+
+        FreeFloatingPos reducedPos(reducedModel);
+        FreeFloatingVel reducedVel(reducedModel);
+        FreeFloatingAcc reducedAcc(reducedModel);
+        FreeFloatingGeneralizedTorques reducedTrqs(reducedModel);
+        FreeFloatingGeneralizedTorques reducedTrqsCheck(reducedModel);
+
+        reducedPos.worldBasePos() = getRandomTransform();
+        getRandomVector(reducedPos.jointPos());
+
+        reducedVel.baseVel() = getRandomTwist();
+        getRandomVector(reducedVel.jointVel());
+
+        reducedAcc.baseAcc() = getRandomTwist();
+        getRandomVector(reducedAcc.jointAcc());
+
+        FreeFloatingPos fullPos(model);
+        FreeFloatingVel fullVel(model);
+        FreeFloatingAcc fullAcc(model);
+        FreeFloatingGeneralizedTorques fullTrqs(model);
+
+        fullPos.worldBasePos() = reducedPos.worldBasePos();
+        fullVel.baseVel()      = reducedVel.baseVel();
+        fullAcc.baseAcc()      = reducedAcc.baseAcc();
+
+        copyFromReducedToFull(reducedPos.jointPos(),fullPos.jointPos(),reducedModel,model);
+        copyFromReducedToFull(reducedVel.jointVel(),fullVel.jointVel(),reducedModel,model);
+        copyFromReducedToFull(reducedAcc.jointAcc(),fullAcc.jointAcc(),reducedModel,model);
+
+        fullRNEA.runRNEA(fullPos,fullVel,fullAcc,fullTrqs);
+        reducedRNEA.runRNEA(reducedPos,reducedVel,reducedAcc,reducedTrqs);
+
+        reducedTrqsCheck.baseWrench() = fullTrqs.baseWrench();
+        copyFromFullToReduced(reducedTrqsCheck.jointTorques(),fullTrqs.jointTorques(),reducedModel,model);
+
+        ASSERT_EQUAL_VECTOR_TOL(reducedTrqs.baseWrench().asVector(),reducedTrqsCheck.baseWrench().asVector(),1e-8);
+        ASSERT_EQUAL_VECTOR_TOL(reducedTrqs.jointTorques(),reducedTrqsCheck.jointTorques(),1e-8);
+    }
+
+}
+
+void checkAll(const Model & model)
+{
+    createCopyAndDestroy(model);
+    checkNeighborSanity(model,false);
+    checkComputeTraversal(model);
 }
 
 void checkSimpleModel()
@@ -109,10 +305,17 @@ void checkRandomChains()
         Model randomModel = getRandomChain(i);
 
         std::cout << "Checking random chain of size: " << i << std::endl;
-        createCopyAndDestroy(randomModel);
-        checkNeighborSanity(randomModel,false);
-        checkComputeTraversal(randomModel);
+        checkAll(randomModel);
     }
+
+    for(int i=2; i <= 100; i += 30 )
+    {
+        Model randomModel = getRandomChain(i);
+
+        std::cout << "Checking reduced model for random chain of size: " << i << std::endl;
+        checkAll(randomModel);
+    }
+
 
 }
 
@@ -125,9 +328,15 @@ void checkRandomModels()
         Model randomModel = getRandomModel(i);
 
         std::cout << "Checking random model of size: " << i << std::endl;
-        createCopyAndDestroy(randomModel);
-        checkNeighborSanity(randomModel,false);
-        checkComputeTraversal(randomModel);
+        checkAll(randomModel);
+    }
+
+    for(int i=2; i <= 100; i += 30 )
+    {
+        Model randomModel = getRandomModel(i);
+
+        std::cout << "Checking reduced model for random model of size: " << i << std::endl;
+        checkAll(randomModel);
     }
 
 }

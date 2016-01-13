@@ -349,7 +349,6 @@ std::string Transform::reservedToString() const
         // mass clearly remains the same
         double newMass = op2.getMass();
 
-
         // the com is transformed as any position
         Position newCenterOfMass = transform<Position>(op1,Position(op2.getCenterOfMass()));
 

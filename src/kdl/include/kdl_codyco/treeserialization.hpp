@@ -129,35 +129,35 @@ namespace CoDyCo{
         /**
          * Set the number of Links
          */
-        int setNrOfLinks(const int new_size);
+        size_t setNrOfLinks(const size_t new_size);
 
         /**
          * Get the number of Links
          *
          */
-        int getNrOfLinks() const;
+        size_t getNrOfLinks() const;
 
         /**
          * Get the number of internal degrees of freedom
          */
-        int setNrOfDOFs(const int new_size);
+        size_t setNrOfDOFs(const size_t new_size);
 
         /**
          * Get the number of internal degrees of freedom
          */
-        int getNrOfDOFs() const;
+        size_t getNrOfDOFs() const;
 
         /**
          * Set the number of junctions
          */
-        int setNrOfJunctions(const int new_size);
+        size_t setNrOfJunctions(const size_t new_size);
 
 
         /**
          * Get the number of joints of any DOF (not called getNrOfJoints to
          *   avoid confusion with the function of KDL::Tree/KDL::Chain)
          */
-        int getNrOfJunctions() const;
+        size_t getNrOfJunctions() const;
 
         /**
          * Check if the TreeSerialization is a valid serialization for the

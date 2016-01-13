@@ -195,7 +195,11 @@ std::string int2string(const int in)
 template <class T>
 bool extract_vector(const std::string & vector_string, std::string vector_name, std::vector<T> & vec, const std::vector<string> variables=std::vector<string>(0), const std::vector<T> var_values=std::vector<T>(0))
 {
-    if( variables.size() != var_values.size() ) return false;
+    if( variables.size() != var_values.size() )
+    {
+        return false;
+    }
+    
     if( !contains(vector_string,"={") || !contains(vector_string,"}") ) return false;
 
 
@@ -369,14 +373,20 @@ bool parModelFromString(const string& _parfile_content, symoro_par_model & model
             //to obtain only the offset
             std::vector<std::string> Theta_var(model.NJ);
             std::vector<double> Theta_var_values(model.NJ);
-            for(int j=1; j <= model.NJ; j++ ) {
+            for(size_t j=1; j <= model.NJ; j++ ) {
                 std::string j_str = int2string(j);
                 Theta_var[j-1] = "t" + j_str;
                 Theta_var_values[j-1] = 0.0;
             }
 
-            if( begins_with(all_vector,"Theta") ) {
-                if( !extract_vector<double>(all_vector,dummy_name,double_vec,Theta_var,Theta_var_values) ) return false;
+            if( begins_with(all_vector,"Theta") )
+            {
+                bool extractVectorSucces = extract_vector<double>(all_vector,dummy_name,double_vec,Theta_var,Theta_var_values);
+                if( !extractVectorSucces )
+                {
+                    return false;
+                }
+
                 model.Theta = double_vec;
                 continue;
             }
@@ -401,7 +411,7 @@ bool treeFromParModelTree(const symoro_par_model& par_model, Tree& tree, const b
     link_names[0] = base_name;
     joint_names[0] = "joint_not_existing";
 
-    for(int l=0; l < par_model.NL; l++ ) {
+    for(size_t l=0; l < par_model.NL; l++ ) {
         std::string link_name = link_common_name + int2string(l+1);
         std::string joint_name = joint_common_name + int2string(l+1);
         link_names[l+1] = link_name;
@@ -486,13 +496,13 @@ bool treeFromParModelChain(const symoro_par_model& par_model, Tree& tree, const 
     link_names[0] = base_name;
     joint_names[0] = "joint_not_existing";
 
-    for(int l=0; l < par_model.NL; l++ ) {
+    for(size_t l=0; l < par_model.NL; l++ ) {
         std::string link_name = link_common_name + int2string(l+1);
         std::string joint_name = joint_common_name + int2string(l);
         link_names[l+1] = link_name;
         joint_names[l+1] = joint_name;
         std::string precessor_link_name = link_names[par_model.Ant[l]];
-        if( par_model.Ant[l] != l ) { std::cerr << "Error in the structure of par chain" << std::endl; return false; }
+        if( par_model.Ant[l] != (int)l ) { std::cerr << "Error in the structure of par chain" << std::endl; return false; }
         Frame f_parent_child = DH_Khalil1986_Tree(par_model.d[l],
                                                   par_model.Alpha[l],
                                                   par_model.R[l],

@@ -10,8 +10,8 @@
 
 #include <kdl/tree.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
-#include <iDynTree/Sensors/Sensors.hpp>
-#include <iDynTree/Sensors/SixAxisFTSensor.hpp>
+#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors/SixAxisFTSensor.h>
 
 #include <kdl_codyco/KDLConversions.h>
 

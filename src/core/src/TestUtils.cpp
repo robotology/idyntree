@@ -67,6 +67,11 @@ double getRandomDouble(double min, double max)
     return min + (max-min)*((double)rand())/((double)RAND_MAX);
 }
 
+int getRandomInteger(int min, int max)
+{
+    return (rand() % (max-min+1)) + min;
+}
+
 Position getRandomPosition()
 {
     return Position(getRandomDouble(-2,2),getRandomDouble(-2,2),getRandomDouble(-2,2));

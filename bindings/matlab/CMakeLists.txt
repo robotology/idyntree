@@ -31,6 +31,7 @@ macro(SWIG_COMPILE_MODULE name language)
     ${swig_other_sources})
 endmacro()
 
+
 # Find MATLAB
 find_package(Matlab
              REQUIRED
@@ -39,7 +40,8 @@ find_package(Matlab
 
 include_directories(${Matlab_INCLUDE_DIRS})
 
-set(modulename iDynTreeMATLAB_wrap)
+set(sourcename iDynTreeMATLAB_wrap)
+set(modulename iDynTreeMEX)
 
 # Generate SWIG wrapper
 if(IDYNTREE_GENERATE_MATLAB)
@@ -54,8 +56,8 @@ if(IDYNTREE_GENERATE_MATLAB)
   add_custom_command(
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
     COMMAND ${CMAKE_COMMAND}
-    ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/../${modulename}.cxx ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
-    MAIN_DEPENDENCY "${swig_generated_sources}"
+    ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/../${sourcename}.cxx ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
+    MAIN_DEPENDENCY ${CMAKE_CURRENT_BINARY_DIR}/../${sourcename}.cxx
     COMMENT "Copy swig generated files to source dir")
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx PROPERTIES GENERATED 1)
 endif()
@@ -71,6 +73,7 @@ set_target_properties(${modulename} PROPERTIES PREFIX "" SUFFIX .${Matlab_MEX_EX
 # Install the generated front-end to ${CMAKE_INSTALL_PREFIX}/matlab_tb
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/+iDynTree DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigRef.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigMem.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iDynTreesetup.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(TARGETS ${modulename} DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 

@@ -110,7 +110,7 @@ int main(int argc, char** argv)
   double dq_range = 1;
   double ddq_range = 1;
 
-  for(int i=0; i < my_tree.getNrOfJoints(); i++ )
+  for(size_t i=0; i < my_tree.getNrOfJoints(); i++ )
   {
         q(i) = q_range*random_double();
         dq(i) = dq_range*1*random_double();

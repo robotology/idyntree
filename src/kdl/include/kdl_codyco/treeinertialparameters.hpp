@@ -35,8 +35,6 @@ namespace CoDyCo {
             void updateParams();
             bool changeInertialParametersRecursive(const Eigen::VectorXd & new_chain_param, Tree & new_tree, SegmentMap::const_iterator root, const std::string& hook_name) ;
 
-            Tree tree;
-
             int nrOfLinks;
 
             std::string root_name;
@@ -47,6 +45,8 @@ namespace CoDyCo {
 
             std::vector<Twist> v;
             std::vector<Twist> a;
+
+            Tree tree;
 
             Twist ag;
 

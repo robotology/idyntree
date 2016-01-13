@@ -8,12 +8,11 @@
 #define IDYNTREE_URDF_SENSORS_IMPORT_H
 
 #include <string>
+#include <iDynTree/Sensors/Sensors.h>
 
 namespace iDynTree
 
 {
-
-class SensorsList;
 
 /**
  * Load a iDynTree::SensorsList object from a URDF file.

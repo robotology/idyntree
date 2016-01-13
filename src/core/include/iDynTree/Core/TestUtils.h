@@ -76,6 +76,12 @@ namespace iDynTree
     double getRandomDouble(double min=0.0, double max=1.0);
 
     /**
+     * Get a random integer between min and max (included).
+     * For example a dice could be simulated with getRandomInteger(1,6);
+     */
+    int getRandomInteger(int min, int max);
+
+    /**
      * Fill a vector with random double.
      */
     template<typename VectorType>
