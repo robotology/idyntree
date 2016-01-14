@@ -34,27 +34,20 @@
 
 /* Author: Naveen Kuppuswamy */
 
-#ifndef URDF_GENERIC_SENSOR_IMPORT_H
-#define URDF_GENERIC_SENSOR_IMPORT_H
+#ifndef URDF_GENERIC_SENSOR_IMPORT_HPP
+#define URDF_GENERIC_SENSOR_IMPORT_HPP
 
 #include <string>
 #include <vector>
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Core/Transform.h>
-#include <kdl/frames.hpp>
-
-#include <kdl_codyco/undirectedtree.hpp>
-
-
-
-class TiXmlDocument;
 
 namespace iDynTree
 {
+    class Model;
+    class Transform;
 
-   class Transform;
 
-   
    struct GenericSensorData
    {
        enum { LINK, JOINT} parentObject;
@@ -64,7 +57,7 @@ namespace iDynTree
        iDynTree::Transform sensorPose;
        unsigned int updateRate;
    };
-   
+
    typedef GenericSensorData AccelerometerData;
    typedef GenericSensorData GyroscopeData;
 
@@ -77,16 +70,19 @@ namespace iDynTree
             CHILD_TO_PARENT }
             measure_direction;
     };
-    
+
 
 
 bool genericSensorsFromUrdfFile(const std::string& file, std::vector<GenericSensorData> & generic_sensors);
 bool genericSensorsFromUrdfString(const std::string& urdf_xml, std::vector<GenericSensorData> & generic_sensors);
 
-iDynTree::SensorsList genericSensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirected_tree,
-                                          std::string urdf_filename);
-iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirected_tree,
-                                                std::string urdf_string);
+bool  genericSensorsListFromURDF(iDynTree::Model & undirected_tree,
+                                                std::string urdf_filename,
+                                                 iDynTree::SensorsList & sensors);
+
+bool genericSensorsListFromURDFString(iDynTree::Model & undirected_tree,
+                                                       std::string urdf_string,
+                                                       iDynTree::SensorsList & sensors);
 }
 
 #endif

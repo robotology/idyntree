@@ -1,7 +1,8 @@
+add_subdirectory(urdf)
+
 if(IDYNTREE_USES_KDL)
     add_subdirectory(urdf-kdl)
 endif()
-
 
 if(IDYNTREE_ENABLE_SYMORO_PAR AND IDYNTREE_USES_KDL)
     add_subdirectory(symoro)

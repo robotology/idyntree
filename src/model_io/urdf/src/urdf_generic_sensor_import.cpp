@@ -37,27 +37,30 @@
 
 #include <iDynTree/Core/Transform.h>
 
-#include <kdl_codyco/undirectedtree.hpp>
-
-#include <kdl_codyco/KDLConversions.h>
-
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/SixAxisFTSensor.h>
 #include <iDynTree/Sensors/AccelerometerSensor.h>
 #include <iDynTree/Sensors/GyroscopeSensor.h>
 
+#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/Indeces.h>
 
 #include <fstream>
-#include <kdl/frames.hpp>
-#include <kdl/jntarray.hpp>
 #include <tinyxml.h>
-#include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
-#include <iDynTree/ModelIO/impl/urdf_generic_sensor_import.hpp>
+#include <iDynTree/ModelIO/urdf_generic_sensor_import.hpp>
 using namespace std;
-using namespace KDL;
 
 namespace iDynTree{
 
+
+std::vector<std::string> &splitString(const std::string &s, std::vector<std::string> &elems) {
+    std::stringstream ss(s);
+    std::string item;
+    while (ss >> item) {
+        elems.push_back(item);
+    }
+    return elems;
+}
 
 bool genericSensorsFromUrdfFile(const std::string& file, std::vector<GenericSensorData> & generic_sensors)
 {
@@ -84,6 +87,8 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
     for (TiXmlElement* sensorXml = robotXml->FirstChildElement("sensor");
          sensorXml; sensorXml = sensorXml->NextSiblingElement("sensor"))
     {
+        std::cerr << sensorXml->ToText() << std::endl;
+
         GenericSensorData newGenericSensor;
 
         if(sensorXml->Attribute("name")==NULL || sensorXml->Attribute("type")==NULL)
@@ -167,8 +172,8 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
 
             std::vector<std::string> rpyElems;
             std::vector<std::string> xyzElems;
-            split(rpyText,rpyElems);
-            split(xyzText,xyzElems);
+            splitString(rpyText,rpyElems);
+            splitString(xyzText,xyzElems);
 
             if( rpyElems.size() != 3 && xyzElems.size() !=3 )
             {
@@ -192,23 +197,24 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
         }
         genericSensors.push_back(newGenericSensor);
 
-
     }
 
     return returnVal;
 }
-iDynTree::SensorsList genericSensorsListFromURDF(KDL::CoDyCo::UndirectedTree & undirectedTree,
-                                                 std::string urdfFilename)
+bool genericSensorsListFromURDF(iDynTree::Model & undirectedTree,
+                                std::string urdfFilename,
+                                SensorsList & sensors)
 {
     ifstream ifs(urdfFilename.c_str());
     std::string xmlString( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
-    return genericSensorsListFromURDFString(undirectedTree,xmlString);
+    return genericSensorsListFromURDFString(undirectedTree,xmlString,sensors);
 }
 
-iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTree & undirectedTree,
-                                                       std::string urdfString)
+bool genericSensorsListFromURDFString(iDynTree::Model & undirectedTree,
+                                      std::string urdfString,
+                                      SensorsList& sensors)
 {
     iDynTree::SensorsList sensorsTree;
     std::vector<iDynTree::GenericSensorData> genericSensors;
@@ -217,10 +223,10 @@ iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTr
 
     if( !ok )
     {
-        std::cerr << "Error in loading generic sensors information from URDF file" << std::endl;
-        // Return and empty sensors Tree object
-        return sensorsTree;
+        std::cerr << "[ERROR] loading generic sensors information from URDF file" << std::endl;
+        return ok;
     }
+
     for(size_t genSensItr = 0; genSensItr < genericSensors.size(); genSensItr++ )
     {
         iDynTree::Sensor *newSensor = 0;
@@ -257,19 +263,29 @@ iDynTree::SensorsList genericSensorsListFromURDFString(KDL::CoDyCo::UndirectedTr
 
        if(genericSensors[genSensItr].parentObject == iDynTree::GenericSensorData::LINK)
        {
-           KDL::CoDyCo::LinkMap::const_iterator link_it= undirectedTree.getLink(newSensor->getParent());
-           newSensor->setParentIndex(link_it->getLinkIndex());
+           // TODO \todo Actually report and error to the user
+           iDynTree::LinkIndex parentLinkIndex = undirectedTree.getLinkIndex(newSensor->getParent());
+
+           if( parentLinkIndex == LINK_INVALID_INDEX )
+           {
+               std::cerr << "[ERROR] impossible to find link " << newSensor->getParent() << " in the model" << std::endl;
+               return false;
+           }
+
+           newSensor->setParentIndex(parentLinkIndex);
        }
        else
        {
-           std::cerr<<"obtaining parent junction index not yet implemented, initial version only for link based sensors like accelerometer and gyroscopes\n";
+           std::cerr<<"[ERROR] obtaining parent junction index not yet implemented, initial version only for link based sensors like accelerometer and gyroscopes\n";
+           return false;
        }
+
        sensorsTree.addSensor(*newSensor);
        //since cloning is completed we can delete to free the sensor memory allocation
        delete(newSensor );
     }
 
-    return sensorsTree;
+    return ok;
 }
 
 }
