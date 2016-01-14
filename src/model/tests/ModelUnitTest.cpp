@@ -8,6 +8,7 @@
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
 #include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/ModelTestUtils.h>
 #include <iDynTree/Model/Traversal.h>
 
 #include <iDynTree/Core/TestUtils.h>
@@ -46,93 +47,6 @@ void checkComputeTraversal(const Model & model)
     ASSERT_EQUAL_DOUBLE(traversal.getNrOfVisitedLinks(),model.getNrOfLinks());
 }
 
-Link getRandomLink()
-{
-    double cxx = getRandomDouble(0,3);
-    double cyy = getRandomDouble(0,4);
-    double czz = getRandomDouble(0,6);
-    double rotInertiaData[3*3] = {czz+cyy,0.0,0.0,
-                                  0.0,cxx+czz,0.0,
-                                  0.0,0.0,cxx+cyy};
-
-    Rotation rot = Rotation::RPY(getRandomDouble(),getRandomDouble(-1,1),getRandomDouble());
-
-    SpatialInertia inertiaLink(getRandomDouble(0,4),
-                               Position(getRandomDouble(-2,2),getRandomDouble(-2,2),getRandomDouble(-2,2)),
-                               rot*RotationalInertiaRaw(rotInertiaData,3,3));
-
-    Link link;
-
-    link.setInertia(inertiaLink);
-
-    return link;
-}
-
-/**
- * Add a random link with random model.
- */
-void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName)
-{
-    // Add Link
-    LinkIndex newLinkIndex = model.addLink(newLinkName,getRandomLink());
-
-    // Now add joint
-    LinkIndex parentLinkIndex = model.getLinkIndex(parentLink);
-
-    int nrOfJointTypes = 2;
-
-    int jointType = rand() % nrOfJointTypes;
-
-    if( jointType == 0 )
-    {
-        FixedJoint fixJoint(parentLinkIndex,newLinkIndex,getRandomTransform());
-        model.addJoint(newLinkName+"joint",&fixJoint);
-    }
-    else if( jointType == 1 )
-    {
-        RevoluteJoint revJoint(parentLinkIndex,newLinkIndex,getRandomTransform(),getRandomAxis());
-        model.addJoint(newLinkName+"joint",&revJoint);
-    }
-    else
-    {
-        assert(false);
-    }
-}
-
-std::string getRandomLinkOfModel(const Model & model)
-{
-    int nrOfLinks = model.getNrOfLinks();
-
-    LinkIndex randomLink = rand() % nrOfLinks;
-
-    return model.getLinkName(randomLink);
-}
-
-std::string int2string(int i)
-{
-    std::stringstream ss;
-
-    ss << i;
-
-    return ss.str();
-}
-
-Model getRandomModel(unsigned int nrOfJoints)
-{
-    Model model;
-
-    model.addLink("baseLink",getRandomLink());
-
-    for(unsigned int i=0; i < nrOfJoints; i++)
-    {
-        std::string parentLink = getRandomLinkOfModel(model);
-        std::string linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName);
-    }
-
-    return model;
-}
-
 void checkNeighborSanity(const Model & model, bool verbose)
 {
     for(size_t link =0; link < model.getNrOfLinks(); link++ )
@@ -153,25 +67,6 @@ void checkNeighborSanity(const Model & model, bool verbose)
             }
         }
     }
-}
-
-Model getRandomChain(unsigned int nrOfJoints)
-{
-    Model model;
-
-    model.addLink("baseLink",getRandomLink());
-
-    std::string linkName = "baseLink";
-    for(unsigned int i=0; i < nrOfJoints; i++)
-    {
-        std::string parentLink = linkName;
-        linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName);
-
-        checkNeighborSanity(model,false);
-    }
-
-    return model;
 }
 
 bool isStringInVector(const std::string & str,
@@ -433,7 +328,7 @@ void checkRandomModels()
         Model randomModel = getRandomModel(i);
 
         std::cout << "Checking random model of size: " << i << std::endl;
-        checkReducedModel(randomModel);
+        checkAll(randomModel);
     }
 
     for(int i=2; i <= 100; i += 30 )
@@ -441,7 +336,7 @@ void checkRandomModels()
         Model randomModel = getRandomModel(i);
 
         std::cout << "Checking reduced model for random model of size: " << i << std::endl;
-        checkReducedModel(randomModel);
+        checkAll(randomModel);
     }
 
 }

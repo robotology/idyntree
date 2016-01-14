@@ -27,10 +27,10 @@ namespace iDynTree
      *
      * \ingroup iDynTreeModel
      */
-    bool ForwardPositionKinematics(const iDynTree::Model & model,
-                                   const iDynTree::Traversal & traversal,
-                                   const iDynTree::FreeFloatingPos & jointPos,
-                                   iDynTree::LinkPositions   & linkPos);
+    bool ForwardPositionKinematics(const Model & model,
+                                   const Traversal & traversal,
+                                   const FreeFloatingPos & jointPos,
+                                         LinkPositions   & linkPos);
 
 
     /**

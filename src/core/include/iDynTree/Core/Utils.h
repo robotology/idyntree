@@ -8,27 +8,9 @@
 #ifndef IDYNTREE_UTILS_H
 #define IDYNTREE_UTILS_H
 
-/**
- * macro for activating the semantic checking.
- *
- * This macro defines the assert function embedding the semantic checks for
- * geometrical relations.
- *
- */
-#if defined NDEBUG || !defined IDYNTREE_USES_SEMANTICS
-  #define iDynTreeAssert(semCheckBoolOut) ((void)0)
-#else
-  #ifdef IDYNTREE_COMPILE_BINDINGS
-    #define iDynTreeAssert(semCheckBoolOut) ((void) ((semCheckBoolOut) ? (void)0 : assertWoAbort(#semCheckBoolOut, __FILE__, __PRETTY_FUNCTION__, __LINE__)))
-  #else
-    #define iDynTreeAssert(semCheckBoolOut) assert(semCheckBoolOut)
-  #endif
-#endif
-
-
 namespace iDynTree
 {
-   
+
     extern int UNKNOWN;
 
     /// Default tolerance for methods with a tolerance, setted to 1e-10

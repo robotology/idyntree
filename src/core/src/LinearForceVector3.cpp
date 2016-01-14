@@ -14,10 +14,6 @@ namespace iDynTree
      */
 
     // constructors
-    LinearForceVector3Semantics::LinearForceVector3Semantics()
-    {
-    }
-
     LinearForceVector3Semantics::LinearForceVector3Semantics(int _body, int _refBody, int _coordinateFrame):
     ForceVector3Semantics<LinearForceVector3Semantics>(_body, _refBody, _coordinateFrame)
     {
@@ -28,20 +24,12 @@ namespace iDynTree
     {
     }
 
-    LinearForceVector3Semantics::~LinearForceVector3Semantics()
-    {
-    }
-
 
     /**
      * LinearForceVector3
      */
 
     // constructors
-    LinearForceVector3::LinearForceVector3()
-    {
-    }
-
     LinearForceVector3::LinearForceVector3(const double x, const double y, const double z)
     {
         this->m_data[0] = x;
@@ -60,7 +48,4 @@ namespace iDynTree
     {
     }
 
-    LinearForceVector3::~LinearForceVector3()
-    {
-    }
 }

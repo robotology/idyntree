@@ -18,9 +18,9 @@ namespace iDynTree
 {
 
 bool ForwardPositionKinematics(const Model& model,
-                       const Traversal& traversal,
-                       const FreeFloatingPos& jointPositions,
-                       LinkPositions& linkPositions)
+                               const Traversal& traversal,
+                               const FreeFloatingPos& jointPositions,
+                                     LinkPositions& linkPositions)
 {
     bool retValue = true;
 

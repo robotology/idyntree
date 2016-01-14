@@ -60,11 +60,6 @@ namespace iDynTree
         thisData = otherData;
     }
 
-    RotationRaw::~RotationRaw()
-    {
-
-    }
-
     const RotationRaw& RotationRaw::changeOrientFrame(const RotationRaw& newOrientFrame)
     {
         Eigen::Map<Matrix3dRowMajor> thisData(this->m_data);

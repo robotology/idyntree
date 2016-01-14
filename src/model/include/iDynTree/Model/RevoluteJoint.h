@@ -9,6 +9,7 @@
 #define IDYNTREE_REVOLUTE_JOINT_H
 
 #include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
 
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Model/Indeces.h>
@@ -25,10 +26,22 @@ namespace iDynTree
     class RevoluteJoint : public MovableJointImpl1
     {
     private:
+        // Structure attributes
         LinkIndex link1;
         LinkIndex link2;
         Transform link1_X_link2_at_rest;
         Axis rotation_axis_wrt_link1;
+
+        // Cache attributes
+        mutable double q_previous;
+        mutable Transform link1_X_link2;
+        mutable Transform link2_X_link1;
+        mutable SpatialMotionVector S_link1_link2;
+        mutable SpatialMotionVector S_link2_link1;
+
+        void updateBuffers(const double new_q) const;
+        void resetBuffers(const double new_q) const;
+        void resetAxisBuffers() const;
 
     public:
         /**
@@ -80,36 +93,42 @@ namespace iDynTree
 
 
         // Documentation inherited
-        virtual Transform getTransform(const IRawVector & jntPos,
-                                       const LinkIndex child,
-                                       const LinkIndex parent) const;
+        virtual const Transform & getTransform(const VectorDynSize & jntPos,
+                                               const LinkIndex child,
+                                               const LinkIndex parent) const;
+
+        // Documentation inherited
+        TransformDerivative getTransformDerivative(const VectorDynSize & jntPos,
+                                                   const LinkIndex child,
+                                                   const LinkIndex parent,
+                                                   const int posCoord_i) const;
 
         // Documentation inherited
         virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,
                                                             const LinkIndex child,
-                                                            const LinkIndex parent) const;
+                                                            const LinkIndex parent=LINK_INVALID_INDEX) const;
 
          // Documentation inherited
-        virtual void computeChildPosVelAcc(const IRawVector & jntPos,
-                                           const IRawVector & jntVel,
-                                           const IRawVector & jntAcc,
+        virtual void computeChildPosVelAcc(const VectorDynSize & jntPos,
+                                           const VectorDynSize & jntVel,
+                                           const VectorDynSize & jntAcc,
                                            LinkPositions & linkPositions,
                                            LinkVelArray & linkVels,
                                            LinkAccArray & linkAccs,
                                            const LinkIndex child, const LinkIndex parent) const;
 
         // Documentation inherited
-        virtual void computeChildVelAcc(const IRawVector & jntPos,
-                                        const IRawVector & jntVel,
-                                        const IRawVector & jntAcc,
+        virtual void computeChildVelAcc(const VectorDynSize & jntPos,
+                                        const VectorDynSize & jntVel,
+                                        const VectorDynSize & jntAcc,
                                         LinkVelArray & linkVels,
                                         LinkAccArray & linkAccs,
                                         const LinkIndex child, const LinkIndex parent) const;
 
         // Documentation inherited
-        virtual void computeJointTorque(const IRawVector & jntPos, const Wrench & internalWrench,
+        virtual void computeJointTorque(const VectorDynSize & jntPos, const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
-                                        IRawVector & jntTorques) const;
+                                        VectorDynSize & jntTorques) const;
 
     };
 }

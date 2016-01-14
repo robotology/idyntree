@@ -67,7 +67,7 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
              {
                  LinkIndex childIndex = neighborIndex;
                  IJointConstPtr neighborJoint = model.getJoint(model.getNeighbor(visitedLinkIndex,neigh_i).neighborJoint);
-                 Transform visitedLink_X_child = neighborJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,childIndex);
+                 const Transform & visitedLink_X_child = neighborJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,childIndex);
 
                  // One term of the sum in Equation 5.20 in Featherstone 2008
                  f(visitedLinkIndex) = f(visitedLinkIndex) + visitedLink_X_child*f(childIndex);
@@ -232,21 +232,49 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
     return true;
 }
 
+ArticulatedBodyAlgorithmInternalBuffers::ArticulatedBodyAlgorithmInternalBuffers(const Model& model)
+{
+    resize(model);
+}
+
+void ArticulatedBodyAlgorithmInternalBuffers::resize(const Model& model)
+{
+    S.resize(model);
+    U.resize(model);
+    D.resize(model);
+    u.resize(model);
+    linksVel.resize(model);
+    linksBiasAcceleration.resize(model);
+    linksAccelerations.resize(model);
+    linkABIs.resize(model);
+    linksBiasWrench.resize(model);
+    // debug
+    //pa.resize(model);
+}
+
+bool ArticulatedBodyAlgorithmInternalBuffers::isConsistent(const Model& model)
+{
+    bool ok = true;
+
+    ok = ok && S.isConsistent(model);
+    ok = ok && U.isConsistent(model);
+    ok = ok && D.isConsistent(model);
+    ok = ok && u.isConsistent(model);
+    ok = ok && linksVel.isConsistent(model);
+    ok = ok && linksBiasAcceleration.isConsistent(model);
+    ok = ok && linkABIs.isConsistent(model);
+    ok = ok && linksBiasWrench.isConsistent(model);
+
+    return ok;
+}
+
 bool ArticulatedBodyAlgorithm(const Model& model,
                               const Traversal& traversal,
                               const FreeFloatingPos& robotPos,
                               const FreeFloatingVel& robotVel,
                               const LinkExternalWrenches & linkExtWrenches,
                               const JointDoubleArray & jointTorques,
-                                    DOFSpatialMotionArray & S,
-                                    DOFSpatialForceArray & U,
-                                    JointDoubleArray & D,
-                                    JointDoubleArray & u,
-                                    LinkVelArray & linksVel,
-                                    LinkAccArray & linksBiasAcceleration,
-                                    LinkAccArray & linksAccelerations,
-                                    LinkArticulatedBodyInertias & linkABIs,
-                                    LinkWrenches & linksBiasWrench,
+                                    ArticulatedBodyAlgorithmInternalBuffers & bufs,
                                     FreeFloatingAcc & robotAcc)
 {
     /**
@@ -266,8 +294,8 @@ bool ArticulatedBodyAlgorithm(const Model& model,
         if( parentLink == 0 )
         {
             assert(visitedLinkIndex >= 0 && visitedLinkIndex < (LinkIndex)model.getNrOfLinks());
-            linksVel(visitedLinkIndex) = robotVel.baseVel();
-            linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
+            bufs.linksVel(visitedLinkIndex) = robotVel.baseVel();
+            bufs.linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
         }
         else
         {
@@ -275,31 +303,31 @@ bool ArticulatedBodyAlgorithm(const Model& model,
             // Otherwise we propagate velocity in the usual way
             if( toParentJoint->getNrOfDOFs() == 0 )
             {
-                linksVel(visitedLinkIndex) =
-                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLink->getIndex())*linksVel(parentLinkIndex);
-                linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
+                bufs.linksVel(visitedLinkIndex) =
+                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLink->getIndex())*bufs.linksVel(parentLinkIndex);
+                bufs.linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
             }
             else
             {
                 size_t dofIndex = toParentJoint->getDOFsOffset();
-                S(dofIndex) = toParentJoint->getMotionSubspaceVector(0,visitedLinkIndex,parentLinkIndex);
+                bufs.S(dofIndex) = toParentJoint->getMotionSubspaceVector(0,visitedLinkIndex,parentLinkIndex);
                 Twist vj;
-                toEigen(vj.getLinearVec3()) = robotVel.jointVel()(dofIndex)*toEigen(S(dofIndex).getLinearVec3());
-                toEigen(vj.getAngularVec3()) = robotVel.jointVel()(dofIndex)*toEigen(S(dofIndex).getAngularVec3());
-                linksVel(visitedLinkIndex) =
-                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*linksVel(parentLinkIndex)
+                toEigen(vj.getLinearVec3()) = robotVel.jointVel()(dofIndex)*toEigen(bufs.S(dofIndex).getLinearVec3());
+                toEigen(vj.getAngularVec3()) = robotVel.jointVel()(dofIndex)*toEigen(bufs.S(dofIndex).getAngularVec3());
+                bufs.linksVel(visitedLinkIndex) =
+                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*bufs.linksVel(parentLinkIndex)
                     + vj;
-                linksBiasAcceleration(visitedLinkIndex) = linksVel(visitedLinkIndex)*vj;
+                bufs.linksBiasAcceleration(visitedLinkIndex) = bufs.linksVel(visitedLinkIndex)*vj;
 
             }
         }
 
         // Initialize Articulated Body Inertia
-        linkABIs(visitedLinkIndex) = visitedLink->getInertia();
+        bufs.linkABIs(visitedLinkIndex) = visitedLink->getInertia();
 
         // Initialize bias force (note that we assume that the external frames are
         // expressed in a local frame, differently from Featherstone 2008
-        linksBiasWrench(visitedLinkIndex) = linksVel(visitedLinkIndex)*(visitedLink->getInertia()*linksVel(visitedLinkIndex))
+        bufs.linksBiasWrench(visitedLinkIndex) = bufs.linksVel(visitedLinkIndex)*(visitedLink->getInertia()*bufs.linksVel(visitedLinkIndex))
                                             - linkExtWrenches(visitedLinkIndex);
     }
 
@@ -329,15 +357,15 @@ bool ArticulatedBodyAlgorithm(const Model& model,
             {
                 assert(toParentJoint->getNrOfDOFs()==1);
                 size_t dofIndex = toParentJoint->getDOFsOffset();
-                U(dofIndex) = linkABIs(visitedLinkIndex)*S(dofIndex);
-                D(dofIndex) = S(dofIndex).dot(U(dofIndex));
-                u(dofIndex) = jointTorques(dofIndex) - S(dofIndex).dot(linksBiasWrench(visitedLinkIndex));
+                bufs.U(dofIndex) = bufs.linkABIs(visitedLinkIndex)*bufs.S(dofIndex);
+                bufs.D(dofIndex) = bufs.S(dofIndex).dot(bufs.U(dofIndex));
+                bufs.u(dofIndex) = jointTorques(dofIndex) - bufs.S(dofIndex).dot(bufs.linksBiasWrench(visitedLinkIndex));
 
-                Ia = linkABIs(visitedLinkIndex) - ArticulatedBodyInertia::ABADyadHelper(U(dofIndex),D(dofIndex));
+                Ia = bufs.linkABIs(visitedLinkIndex) - ArticulatedBodyInertia::ABADyadHelper(bufs.U(dofIndex),bufs.D(dofIndex));
 
-                pa                 =   linksBiasWrench(visitedLinkIndex)
-                                     + Ia*linksBiasAcceleration(visitedLinkIndex)
-                                     + U(dofIndex)*(u(dofIndex)/D(dofIndex));
+                pa                 =   bufs.linksBiasWrench(visitedLinkIndex)
+                                     + Ia*bufs.linksBiasAcceleration(visitedLinkIndex)
+                                     + bufs.U(dofIndex)*(bufs.u(dofIndex)/bufs.D(dofIndex));
 
             }
 
@@ -346,16 +374,18 @@ bool ArticulatedBodyAlgorithm(const Model& model,
             // joint
             if( toParentJoint->getNrOfDOFs() == 0 )
             {
-                Ia = linkABIs(visitedLinkIndex);
-                pa                 =   linksBiasWrench(visitedLinkIndex)
-                                     + Ia*linksBiasAcceleration(visitedLinkIndex);
+                Ia = bufs.linkABIs(visitedLinkIndex);
+                pa                 =   bufs.linksBiasWrench(visitedLinkIndex)
+                                     + Ia*bufs.linksBiasAcceleration(visitedLinkIndex);
             }
+
+            //bufs.pa(visitedLinkIndex) = pa;
 
             // Propagate
             LinkIndex parentLinkIndex = parentLink->getIndex();
             Transform parent_X_visited = toParentJoint->getTransform(robotPos.jointPos(),parentLinkIndex,visitedLinkIndex);
-            linkABIs(parentLinkIndex)        += parent_X_visited*Ia;
-            linksBiasWrench(parentLinkIndex) = linksBiasWrench(parentLinkIndex) + parent_X_visited*pa;
+            bufs.linkABIs(parentLinkIndex)        += parent_X_visited*Ia;
+            bufs.linksBiasWrench(parentLinkIndex) = bufs.linksBiasWrench(parentLinkIndex) + parent_X_visited*pa;
         }
     }
 
@@ -374,9 +404,9 @@ bool ArticulatedBodyAlgorithm(const Model& model,
        if( parentLink == 0 )
        {
            // Preliminary step: find base acceleration
-           linksAccelerations(visitedLinkIndex) = -(linkABIs(visitedLinkIndex).applyInverse(linksBiasWrench(visitedLinkIndex)));
+           bufs.linksAccelerations(visitedLinkIndex) = -(bufs.linkABIs(visitedLinkIndex).applyInverse(bufs.linksBiasWrench(visitedLinkIndex)));
 
-           robotAcc.baseAcc() = linksAccelerations(visitedLinkIndex);
+           robotAcc.baseAcc() = bufs.linksAccelerations(visitedLinkIndex);
        }
        else
        {
@@ -385,18 +415,18 @@ bool ArticulatedBodyAlgorithm(const Model& model,
            {
                size_t dofIndex = toParentJoint->getDOFsOffset();
                assert(toParentJoint->getNrOfDOFs()==1);
-               linksAccelerations(visitedLinkIndex) =
-                   toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*linksAccelerations(parentLinkIndex)
-                   + linksBiasAcceleration(visitedLinkIndex);
-               robotAcc.jointAcc()(dofIndex) = (u(dofIndex)-U(dofIndex).dot(linksAccelerations(visitedLinkIndex)))/D(dofIndex);
-               linksAccelerations(visitedLinkIndex) = linksAccelerations(visitedLinkIndex) + S(dofIndex)*robotAcc.jointAcc()(dofIndex);
+               bufs.linksAccelerations(visitedLinkIndex) =
+                   toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*bufs.linksAccelerations(parentLinkIndex)
+                   + bufs.linksBiasAcceleration(visitedLinkIndex);
+               robotAcc.jointAcc()(dofIndex) = (bufs.u(dofIndex)-bufs.U(dofIndex).dot(bufs.linksAccelerations(visitedLinkIndex)))/bufs.D(dofIndex);
+               bufs.linksAccelerations(visitedLinkIndex) = bufs.linksAccelerations(visitedLinkIndex) + bufs.S(dofIndex)*robotAcc.jointAcc()(dofIndex);
            }
            else
            {
                //for fixed joints we just propagate the acceleration
-               linksAccelerations(visitedLinkIndex) =
-                   toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*linksAccelerations(parentLinkIndex)
-                   + linksBiasAcceleration(visitedLinkIndex);
+               bufs.linksAccelerations(visitedLinkIndex) =
+                   toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*bufs.linksAccelerations(parentLinkIndex)
+                   + bufs.linksBiasAcceleration(visitedLinkIndex);
            }
        }
     }

@@ -9,10 +9,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/format_examples/urdf/black_icub.urdf 
 target_link_libraries(check_urdf_import_export idyntree-kdl idyntree-modelio-urdf ${orocos_kdl_LIBRARIES} ${urdfdom_LIBRARIES})
 add_test(NAME test_urdf_import_export COMMAND check_urdf_import_export black_icub.urdf)
 
+
 add_executable(check_symoro_par_import_fixed_chain_regressor check_symoro_par_import_fixed_chain_regressor.cpp)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/format_examples/symoro_par/fake_puma.par ${CMAKE_CURRENT_BINARY_DIR}/fake_puma.par)
 target_link_libraries(check_symoro_par_import_fixed_chain_regressor idyntree-kdl idyntree-modelio-symoro ${orocos_kdl_LIBRARIES})
-add_test(NAME test_par_import_fixed_chain_regressor COMMAND check_symoro_par_import_fixed_chain_regressor fake_puma.par)
+# Test commented out
+# add_test(NAME test_par_import_fixed_chain_regressor COMMAND check_symoro_par_import_fixed_chain_regressor fake_puma.par)
 
 if(IDYNTREE_USES_ICUB_MAIN)
     find_package(YARP REQUIRED)

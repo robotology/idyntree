@@ -31,11 +31,10 @@ namespace iDynTree
          * The data is not reset to zero for perfomance reason.
          * Please initialize the data in the class before any use.
          */
-        SpatialAcc();
+        inline SpatialAcc() {};
         SpatialAcc(const LinAcceleration & _linearVec3, const AngAcceleration & _angularVec3);
         SpatialAcc(const SpatialMotionVector& other);
         SpatialAcc(const SpatialAcc& other);
-        virtual ~SpatialAcc();
 
         // overloaded operator
         SpatialAcc operator+(const SpatialAcc &other) const;

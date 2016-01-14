@@ -41,10 +41,9 @@ namespace iDynTree
          * The data is not reset to the default for perfomance reason.
          * Please initialize the data in the class before any use.
          */
-        ClassicalAcc();
+        inline ClassicalAcc() {};
         ClassicalAcc(const double* in_data, const unsigned int in_size);
         ClassicalAcc(const ClassicalAcc& other);
-        virtual ~ClassicalAcc();
 
         /* Geometric operations */
         const ClassicalAcc & changeCoordFrame(const RotationRaw & newCoordFrame);

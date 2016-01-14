@@ -28,9 +28,7 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 
 add_library(idyntree-icub ${iDynTree_ICUB_source} ${iDynTree_ICUB_header})
 
-set_target_properties(idyntree-icub PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
-                                           SOVERSION ${${VARS_PREFIX}_VERSION}
-                                           PUBLIC_HEADER "${iDynTree_ICUB_header}")
+set_target_properties(idyntree-icub PROPERTIES PUBLIC_HEADER "${iDynTree_ICUB_header}")
 
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 

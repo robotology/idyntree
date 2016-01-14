@@ -10,6 +10,7 @@
 
 #include <sstream>
 
+#include <cassert>
 #include <cstring>
 
 namespace iDynTree
@@ -49,6 +50,19 @@ VectorDynSize::VectorDynSize(const double* in_data,
     }
 }
 
+VectorDynSize::VectorDynSize(const VectorDynSize& vec): m_size(vec.size())
+{
+    if( this->m_size == 0 )
+    {
+        this->m_data = 0;
+    }
+    else
+    {
+        this->m_data = new double[this->m_size];
+        std::memcpy(this->m_data,vec.data(),this->m_size*sizeof(double));
+    }
+}
+
 VectorDynSize::~VectorDynSize()
 {
     if( this->m_size > 0 )
@@ -57,6 +71,42 @@ VectorDynSize::~VectorDynSize()
         this->m_data = 0;
     }
 }
+
+VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
+{
+    // if the size don't match, reallocate the data
+    if( this->m_size != vec.size() )
+    {
+        // Get the new size
+        this->m_size = vec.size();
+
+        // Destroy the data only if there is anything
+        if( this->m_data != 0 )
+        {
+             delete[] this->m_data;
+             this->m_data = 0;
+        }
+
+        // Actually allocate the data only if the size is not 0
+        if( this->m_size > 0 )
+        {
+            this->m_data = new double[this->m_size];
+        }
+
+    }
+
+    // After reallocation, the size should match
+    assert(this->m_size == vec.size());
+
+    // Copy data if the size is not 0
+    if( this->m_size > 0 )
+    {
+        std::memcpy(this->m_data,vec.data(),this->m_size*sizeof(double));
+    }
+
+    return *this;
+}
+
 
 void VectorDynSize::zero()
 {

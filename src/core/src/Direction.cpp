@@ -14,11 +14,6 @@
 
 namespace iDynTree
 {
-
-    Direction::Direction()
-    {
-    }
-
     Direction::Direction(double x, double y, double z)
     {
         this->m_data[0] = x;
@@ -43,10 +38,6 @@ namespace iDynTree
         this->Normalize();
     }
 
-    Direction::~Direction()
-    {
-
-    }
 
     void Direction::setToDefault()
     {

@@ -2,9 +2,9 @@ function varargout = LINK_INVALID_INDEX(varargin)
   narginchk(0,1)
   if nargin==0
     nargoutchk(0,1)
-    varargout{1} = iDynTreeMEX(544);
+    varargout{1} = iDynTreeMEX(557);
   else
     nargoutchk(0,0)
-    iDynTreeMEX(545,varargin{1});
+    iDynTreeMEX(558,varargin{1});
   end
 end

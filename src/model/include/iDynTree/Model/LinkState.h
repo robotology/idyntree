@@ -12,6 +12,7 @@
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Core/ArticulatedBodyInertia.h>
 
 #include <iDynTree/Model/Indeces.h>
 
@@ -32,6 +33,8 @@ namespace iDynTree
 
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
+
+        bool isConsistent(const Model& model) const;
 
         iDynTree::Transform & operator()(const LinkIndex link);
         const iDynTree::Transform & operator()(const LinkIndex link) const;
@@ -70,7 +73,7 @@ namespace iDynTree
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
 
-
+        bool isConsistent(const Model& model) const;
 
         iDynTree::Wrench & operator()(const LinkIndex link);
         const iDynTree::Wrench & operator()(const LinkIndex link) const;
@@ -113,6 +116,8 @@ namespace iDynTree
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
 
+        bool isConsistent(const Model& model) const;
+
         iDynTree::SpatialInertia & operator()(const LinkIndex link);
         const iDynTree::SpatialInertia & operator()(const LinkIndex link) const;
 
@@ -136,6 +141,8 @@ namespace iDynTree
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
 
+        bool isConsistent(const Model& model) const;
+
         iDynTree::ArticulatedBodyInertia & operator()(const LinkIndex link);
         const iDynTree::ArticulatedBodyInertia & operator()(const LinkIndex link) const;
 
@@ -156,6 +163,10 @@ namespace iDynTree
 
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
+
+        bool isConsistent(const Model& model) const;
+        
+        size_t getNrOfLinks();
 
         iDynTree::Twist & operator()(const LinkIndex link);
         const iDynTree::Twist & operator()(const LinkIndex link) const;
@@ -178,6 +189,8 @@ namespace iDynTree
 
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
+
+        bool isConsistent(const Model& model) const;
 
         iDynTree::SpatialAcc & operator()(const LinkIndex link);
         const iDynTree::SpatialAcc & operator()(const LinkIndex link) const;

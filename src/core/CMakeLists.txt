@@ -8,8 +8,6 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/ArticulatedBodyInertia.h
                               include/iDynTree/Core/ClassicalAcc.h
                               include/iDynTree/Core/Direction.h
-                              include/iDynTree/Core/IMatrix.h
-                              include/iDynTree/Core/IVector.h
                               include/iDynTree/Core/MatrixDynSize.h
                               include/iDynTree/Core/MatrixFixSize.h
                               include/iDynTree/Core/Position.h
@@ -27,6 +25,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/SpatialMotionVector.h
                               include/iDynTree/Core/TestUtils.h
                               include/iDynTree/Core/Transform.h
+                              include/iDynTree/Core/TransformDerivative.h
                               include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Twist.h
                               include/iDynTree/Core/Utils.h
@@ -40,7 +39,8 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
 
 set(IDYNTREE_CORE_EXP_PRIVATE_INCLUDES include/iDynTree/Core/PrivateUtils.h
                                        include/iDynTree/Core/PrivateMotionForceVertorAssociations.h
-									   include/iDynTree/Core/PrivatePreProcessorUtils.h
+                                       include/iDynTree/Core/PrivatePreProcessorUtils.h
+                                       include/iDynTree/Core/PrivateSemanticsMacros.h
                                        include/iDynTree/Core/GeomVector3.h
                                        include/iDynTree/Core/MotionVector3.h
                                        include/iDynTree/Core/ForceVector3.h
@@ -51,7 +51,6 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/ArticulatedBodyInertia.cpp
                               src/ClassicalAcc.cpp
                               src/Direction.cpp
-                              src/InterfaceDestructors.cpp
                               src/MatrixDynSize.cpp
                               src/LinearForceVector3.cpp
                               src/AngularForceVector3.cpp
@@ -75,6 +74,7 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/SpatialInertia.cpp
                               src/TestUtils.cpp
                               src/Transform.cpp
+                              src/TransformDerivative.cpp
                               src/TransformSemantics.cpp
                               src/Twist.cpp
                               src/Utils.cpp

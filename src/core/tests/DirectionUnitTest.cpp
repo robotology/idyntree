@@ -29,12 +29,12 @@ int main()
 
     dirToNormalize.Normalize();
 
-    assertVectorAreEqual(dirToNormalize,dirNormalized);
+    ASSERT_EQUAL_VECTOR(dirToNormalize,dirNormalized);
 
     //test the fact that the construct is normalizing
     Direction dirToNormalize2(1.0,2.0,2.0), dirNormalized2(1.0/3.0,2.0/3.0,2.0/3.0);
 
-    assertVectorAreEqual(dirToNormalize2,dirNormalized2);
+    ASSERT_EQUAL_VECTOR(dirToNormalize2,dirNormalized2);
 
 
 

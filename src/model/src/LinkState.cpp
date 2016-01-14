@@ -31,7 +31,17 @@ void LinkPositions::resize(const Model& model)
 void LinkPositions::resize(unsigned int nrOfLinks)
 {
     Transform identityTransform = Transform::Identity();
-    this->m_linkPos.resize(nrOfLinks,identityTransform);
+    this->m_linkPos.resize(nrOfLinks);
+
+    for(size_t link=0; link < nrOfLinks; link++)
+    {
+        this->m_linkPos[link] = identityTransform;
+    }
+}
+
+bool LinkPositions::isConsistent(const Model& model) const
+{
+    return (this->m_linkPos.size() == model.getNrOfLinks());
 }
 
 const Transform& LinkPositions::operator()(const LinkIndex link) const
@@ -69,6 +79,11 @@ void LinkWrenches::resize(unsigned int nrOfLinks)
 {
     iDynTree::Wrench zeroWrench = iDynTree::Wrench::Zero();
     this->m_linkWrenches.resize(nrOfLinks,zeroWrench);
+}
+
+bool LinkWrenches::isConsistent(const Model& model) const
+{
+    return (this->m_linkWrenches.size() == model.getNrOfLinks());
 }
 
 Wrench& LinkWrenches::operator()(const LinkIndex link)
@@ -111,6 +126,11 @@ void LinkInertias::resize(unsigned int nrOfLinks)
     iDynTree::SpatialInertia zeroInertia;
     zeroInertia.zero();
     this->m_linkInertials.resize(nrOfLinks,zeroInertia);
+}
+
+bool LinkInertias::isConsistent(const Model& model) const
+{
+    return (this->m_linkInertials.size() == model.getNrOfLinks());
 }
 
 SpatialInertia& LinkInertias::operator()(const LinkIndex link)
@@ -160,6 +180,17 @@ void LinkVelArray::resize(unsigned int nrOfLinks)
     this->m_linkTwist.resize(nrOfLinks,zeroTwist);
 }
 
+bool LinkVelArray::isConsistent(const Model& model) const
+{
+    return (this->m_linkTwist.size() == model.getNrOfLinks());
+}
+
+size_t LinkVelArray::getNrOfLinks()
+{
+    return this->m_linkTwist.size();
+}
+
+
 LinkVelArray::~LinkVelArray()
 {
 
@@ -196,11 +227,15 @@ void LinkAccArray::resize(unsigned int nrOfLinks)
     this->m_linkAcc.resize(nrOfLinks,zeroAcc);
 }
 
+bool LinkAccArray::isConsistent(const Model& model) const
+{
+    return (this->m_linkAcc.size() == model.getNrOfLinks());
+}
+
 unsigned int LinkAccArray::getNrOfLinks() const
 {
     return this->m_linkAcc.size();
 }
-
 
 LinkAccArray::~LinkAccArray()
 {
@@ -238,6 +273,12 @@ void LinkArticulatedBodyInertias::resize(unsigned int nrOfLinks)
     abi.zero();
     this->m_linkABIs.resize(nrOfLinks,abi);
 }
+
+bool LinkArticulatedBodyInertias::isConsistent(const Model& model) const
+{
+    return (this->m_linkABIs.size() == model.getNrOfLinks());
+}
+
 
 LinkArticulatedBodyInertias::~LinkArticulatedBodyInertias()
 {

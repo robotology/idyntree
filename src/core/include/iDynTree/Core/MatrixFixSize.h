@@ -9,7 +9,6 @@
 #define IDYNTREE_MATRIX_FIX_SIZE_H
 
 
-#include <iDynTree/Core/IMatrix.h>
 #include <iDynTree/Core/Utils.h>
 
 #include <cstring>
@@ -25,7 +24,7 @@ namespace iDynTree
      * \ingroup iDynTreeCore
      */
     template<unsigned int nRows, unsigned int nCols>
-    class MatrixFixSize: public IRawMatrix
+    class MatrixFixSize
     {
     private:
         /**
@@ -71,16 +70,8 @@ namespace iDynTree
          *
          *
          * \warning this class stores data using the row major order
-         * \warning performs dynamic memory allocation operations
          */
         MatrixFixSize(const double * in_data, const unsigned int in_rows, const unsigned int in_cols);
-
-        /**
-         * Denstructor
-         *
-         * \warning performs dynamic memory allocation operations
-         */
-        virtual ~MatrixFixSize();
 
         /**
          * @name Matrix interface methods.
@@ -183,11 +174,6 @@ namespace iDynTree
         {
             std::memcpy(this->m_data,in_data,nRows*nCols*sizeof(double));
         }
-    }
-
-    template<unsigned int nRows, unsigned int nCols>
-    MatrixFixSize<nRows,nCols>::~MatrixFixSize()
-    {
     }
 
     template<unsigned int nRows, unsigned int nCols>
@@ -326,6 +312,7 @@ namespace iDynTree
     //  and the only ones that users are supposed to manipulate manipulate
     // Add all the explicit instantiation that can be useful, but remember to add
     // them also in the iDynTree.i SWIG file
+    typedef MatrixFixSize<1,6> Matrix1x6;
     typedef MatrixFixSize<3,3> Matrix3x3;
     typedef MatrixFixSize<4,4> Matrix4x4;
     typedef MatrixFixSize<6,1> Matrix6x1;

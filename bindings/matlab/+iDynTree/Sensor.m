@@ -5,36 +5,36 @@ classdef Sensor < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(740, self);
+        iDynTreeMEX(763, self);
         self.swigPtr=[];
       end
     end
     function varargout = getName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(741, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(764, self, varargin{:});
     end
     function varargout = getSensorType(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(742, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(765, self, varargin{:});
     end
     function varargout = getParent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(743, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(766, self, varargin{:});
     end
     function varargout = getParentIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(744, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(767, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(745, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(768, self, varargin{:});
     end
     function varargout = setName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(746, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(769, self, varargin{:});
     end
     function varargout = setParent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(747, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(770, self, varargin{:});
     end
     function varargout = setParentIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(748, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(771, self, varargin{:});
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(749, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(772, self, varargin{:});
     end
     function self = Sensor(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')

@@ -9,42 +9,45 @@ classdef GeomVector3Semantics__LinearMotionVector3Semantics < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(191, varargin{:});
+        tmp = iDynTreeMEX(177, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
-    function delete(self)
-      if self.swigPtr
-        iDynTreeMEX(192, self);
-        self.swigPtr=[];
-      end
+    function varargout = setToUnknown(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(178, self, varargin{:});
     end
     function varargout = getBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(193, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(179, self, varargin{:});
     end
     function varargout = getRefBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(194, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(180, self, varargin{:});
     end
     function varargout = getCoordinateFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(195, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(181, self, varargin{:});
     end
     function varargout = isUnknown(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(196, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(182, self, varargin{:});
     end
     function varargout = changeCoordFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(197, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(183, self, varargin{:});
     end
     function varargout = dot(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(200, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(186, self, varargin{:});
+    end
+    function delete(self)
+      if self.swigPtr
+        iDynTreeMEX(187, self);
+        self.swigPtr=[];
+      end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(198, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(184, varargin{:});
     end
     function varargout = inverse(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(199, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(185, varargin{:});
     end
   end
 end

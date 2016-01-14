@@ -23,11 +23,6 @@
 
 namespace iDynTree
 {
-
-SpatialInertiaRaw::SpatialInertiaRaw()
-{
-}
-
 SpatialInertiaRaw::SpatialInertiaRaw(const double mass,
                                      const PositionRaw& com,
                                      const RotationalInertiaRaw& rotInertia): m_mass(mass),
@@ -46,11 +41,6 @@ SpatialInertiaRaw::SpatialInertiaRaw(const SpatialInertiaRaw& other): m_mass(oth
     {
         m_mcom[i] = other.m_mcom[i];
     }
-}
-
-SpatialInertiaRaw::~SpatialInertiaRaw()
-{
-
 }
 
 void SpatialInertiaRaw::fromRotationalInertiaWrtCenterOfMass(const double mass,
@@ -105,7 +95,7 @@ PositionRaw SpatialInertiaRaw::getCenterOfMass() const
     return ret;
 }
 
-RotationalInertiaRaw SpatialInertiaRaw::getRotationalInertiaWrtFrameOrigin() const
+const RotationalInertiaRaw& SpatialInertiaRaw::getRotationalInertiaWrtFrameOrigin() const
 {
     return this->m_rotInertia;
 }

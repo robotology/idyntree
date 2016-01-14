@@ -9,8 +9,6 @@
 #define IDYNTREE_MATRIX_DYN_SIZE_H
 
 
-#include <iDynTree/Core/IMatrix.h>
-
 #include <string>
 
 namespace iDynTree
@@ -20,7 +18,7 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    class MatrixDynSize: public IRawMatrix
+    class MatrixDynSize
     {
     private:
         /**

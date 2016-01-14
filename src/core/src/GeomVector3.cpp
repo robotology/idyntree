@@ -11,6 +11,7 @@
 #include <iDynTree/Core/LinearForceVector3.h>
 #include <iDynTree/Core/AngularForceVector3.h>
 #include <iDynTree/Core/PrivatePreProcessorUtils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
 
 
 #include <Eigen/Dense>
@@ -32,14 +33,6 @@ namespace iDynTree
 
     // constructors
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    GEOMVECTOR3SEMANTICS_INSTANCE_HDR::GeomVector3Semantics():
-    body(UNKNOWN),
-    refBody(UNKNOWN),
-    coordinateFrame(UNKNOWN)
-    {
-    }
-
-    GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
     GEOMVECTOR3SEMANTICS_INSTANCE_HDR::GeomVector3Semantics(int _body, int _refBody, int _coordinateFrame):
     body(_body),
     refBody(_refBody),
@@ -56,8 +49,11 @@ namespace iDynTree
     }
 
     GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    GEOMVECTOR3SEMANTICS_INSTANCE_HDR::~GeomVector3Semantics()
+    void GEOMVECTOR3SEMANTICS_INSTANCE_HDR::setToUnknown()
     {
+        body = UNKNOWN;
+        refBody = UNKNOWN;
+        coordinateFrame = UNKNOWN;
     }
 
     // Getters, setters & helpers
@@ -175,20 +171,14 @@ namespace iDynTree
 
     // constructors
     GEOMVECTOR3_TEMPLATE_HDR
-    GEOMVECTOR3_INSTANCE_HDR::GeomVector3(): Vector3()
-    {}
-
-    GEOMVECTOR3_TEMPLATE_HDR
     GEOMVECTOR3_INSTANCE_HDR::GeomVector3(const double* in_data, const unsigned int in_size): Vector3(in_data, in_size)
     {}
 
     GEOMVECTOR3_TEMPLATE_HDR
-    GEOMVECTOR3_INSTANCE_HDR::GeomVector3(const GeomVector3 & other): Vector3(other), semantics(other.semantics)
-    {}
-
-    GEOMVECTOR3_TEMPLATE_HDR
-    GEOMVECTOR3_INSTANCE_HDR::~GeomVector3()
-    {}
+    GEOMVECTOR3_INSTANCE_HDR::GeomVector3(const GeomVector3 & other): Vector3(other)
+    {
+        iDynTreeSemanticsOp(semantics = other.semantics);
+    }
 
     // Getters & setters
     GEOMVECTOR3_TEMPLATE_HDR

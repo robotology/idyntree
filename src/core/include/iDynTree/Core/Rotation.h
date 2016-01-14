@@ -85,11 +85,6 @@ namespace iDynTree
         Rotation(const Rotation & other);
 
         /**
-         * Denstructor
-         */
-        virtual ~Rotation();
-
-        /**
          * Semantic getter
          */
         RotationSemantics& getSemantics();
@@ -172,12 +167,35 @@ namespace iDynTree
         /**
          * Return a Rotation around axis X of given angle
          *
+         * If \f$ \theta \f$ is the input angle, this function
+         * returns the \f$  R_x(\theta) \f$ rotation matrix such that :
+         * \f[
+         *   R_x(\theta) =
+         *  \begin{bmatrix}
+         *      1 & 0             & 0              \\
+         *      0 & \cos(\theta)  & - \sin(\theta) \\
+         *      0 & \sin(\theta)  & \cos(\theta)   \\
+         *  \end{bmatrix}
+         * \f]
+         *
          * @param angle the angle (in Radians) of the rotation arount the X axis
          */
         static Rotation RotX(const double angle);
 
         /**
          * Return a Rotation around axis Y of given angle
+         *
+         * If \f$ \theta \f$ is the input angle, this function
+         * returns the \f$  R_y(\theta) \f$ rotation matrix such that :
+         * \f[
+         *   R_y(\theta) =
+         *  \begin{bmatrix}
+         *      \cos(\theta)      & 0             & \sin(\theta)   \\
+         *      0                 & 1             & 0              \\
+         *      -\sin(\theta)     & 0             & \cos(\theta)   \\
+         *  \end{bmatrix}
+         * \f]
+         *
          *
          * @param angle the angle (in Radians) of the rotation arount the Y axis
          */
@@ -186,6 +204,18 @@ namespace iDynTree
         /**
          * Return a Rotation around axis Z of given angle
          *
+         * If \f$ \theta \f$ is the input angle, this function
+         * returns the \f$  R_z(\theta) \f$ rotation matrix such that :
+         * \f[
+         *   R_z(\theta) =
+         *  \begin{bmatrix}
+         *      \cos(\theta)      & -\sin(\theta) & 0              \\
+         *      \sin(\theta)      & \cos(\theta)  & 0              \\
+         *      0                 & 0             & 1              \\
+         *  \end{bmatrix}
+         * \f]
+         *
+         *
          * @param angle the angle (in Radians) of the rotation arount the Z axis
          */
         static Rotation RotZ(const double angle);
@@ -193,10 +223,36 @@ namespace iDynTree
         /**
          * Return a Rotation around axis given by direction of given angle
          *
+         * If we indicate with \f$ d \in \mathbb{R}^3 \f$ the unit norm
+         * of the direction, and with \f$ \theta \f$ the input angle, the return rotation
+         * matrix \f$ R \f$ can be computed using the Rodrigues' rotation formula [1] :
+         * \f[
+         *  R = I_{3\times3} + d^{\vee} \sin(\theta) + {d^{\vee}}^2 (1-\cos(\theta))
+         * \f]
+         *
+         * [1] : http://mathworld.wolfram.com/RodriguesRotationFormula.html
          * @param direction the Direction around with to rotate
-         * @param angle the angle (in Radians) of the rotation arount the Z axis
+         * @param angle the angle (in Radians) of the rotation arount the given axis
          */
         static Rotation RotAxis(const Direction & direction, const double angle);
+
+        /**
+         * Return the derivative of the RotAxis function with respect to the angle argument.
+         *
+         * If we indicate with \f$ d \in \mathbb{R}^3 \f$ the unit norm
+         * of the direction, and with \f$ \theta \f$ the input angle, the derivative of the rotation
+         * matrix \f$ \frac{\partial R}{\partial \theta} \f$ can be computed using the
+         * derivative of the Rodrigues' rotation formula [1] :
+         * \f[
+         *  \frac{\partial R}{\partial \theta} = d^{\vee} \cos(\theta) + {d^{\vee}}^2 \sin(\theta)
+         * \f]
+         *
+         * [1] : http://mathworld.wolfram.com/RodriguesRotationFormula.html
+         *
+         * @param direction the Direction around with to rotate
+         * @param angle the angle (in Radians) of the rotation arount the given  axis
+         */
+        static Matrix3x3 RotAxisDerivative(const Direction & direction, const double angle);
 
         /**
          * Return a rotation object given Roll, Pitch and Yaw values.

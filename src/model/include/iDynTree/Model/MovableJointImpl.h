@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_MOVABLE_JOINT_IMPL_H
 #define IDYNTREE_MOVABLE_JOINT_IMPL_H
 
-#include <iDynTree/Core/IVector.h>
+
 
 #include <iDynTree/Model/IJoint.h>
 

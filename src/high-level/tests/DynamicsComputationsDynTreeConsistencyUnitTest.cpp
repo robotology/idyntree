@@ -62,7 +62,8 @@ void yarp2idyntree(const yarp::sig::Vector & yarpVector,
     return;
 }
 
-void idyntree2yarp(const iDynTree::IMatrix & idyntreeMatrix,
+template<typename iDynTreeMatrixType>
+void idyntree2yarp(const iDynTreeMatrixType & idyntreeMatrix,
                    yarp::sig::Matrix & yarpMatrix)
 {
     yarpMatrix.resize(idyntreeMatrix.rows(),idyntreeMatrix.cols());
@@ -75,15 +76,16 @@ void idyntree2yarp(const iDynTree::IMatrix & idyntreeMatrix,
     }
 }
 
-yarp::sig::Matrix idyntree2yarp(const iDynTree::IMatrix & idyntreeMatrix)
+template<typename iDynTreeMatrixType>
+yarp::sig::Matrix idyntreeMat2yarp(const iDynTreeMatrixType & idyntreeMatrix)
 {
     yarp::sig::Matrix yarpMatrix;
     idyntree2yarp(idyntreeMatrix,yarpMatrix);
     return yarpMatrix;
 }
 
-
-void idyntree2yarp(const iDynTree::IVector & idyntreeVector,
+template<typename iDynTreeVectorType>
+void idyntreeMat2yarp(const iDynTreeVectorType & idyntreeVector,
                    yarp::sig::Vector & yarpVector)
 {
     yarpVector.resize(idyntreeVector.size());
@@ -93,7 +95,8 @@ void idyntree2yarp(const iDynTree::IVector & idyntreeVector,
     }
 }
 
-yarp::sig::Vector idyntree2yarp(const iDynTree::IVector & idyntreeVector)
+template<typename iDynTreeVectorType>
+yarp::sig::Vector idyntree2yarp(const iDynTreeVectorType & idyntreeVector)
 {
     yarp::sig::Vector yarpVector;
     yarpVector.resize(idyntreeVector.size());
@@ -159,7 +162,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
     dynTree.setAng(idyntree2yarp(qj));
     dynTree.setDAng(idyntree2yarp(dqj));
     dynTree.setD2Ang(idyntree2yarp(ddqj));
-    dynTree.setWorldBasePose(idyntree2yarp(worldTbase.asHomogeneousTransform()));
+    dynTree.setWorldBasePose(idyntreeMat2yarp(worldTbase.asHomogeneousTransform()));
     dynTree.setKinematicBaseVelAcc(idyntree2yarp(baseVel),idyntree2yarp(properAcc));
 
     ASSERT_EQUAL_DOUBLE(ok,true);

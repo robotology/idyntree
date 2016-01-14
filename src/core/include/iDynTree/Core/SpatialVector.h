@@ -12,13 +12,16 @@
 #include "Rotation.h"
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 #include "Utils.h"
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
+
+
 #include <iostream>
 #include <sstream>
 
 namespace iDynTree
 {
-    class SpacialMotionVector;
-    class SpacialForceVector;
+    class SpatialMotionVector;
+    class SpatialForceVector;
     class Position;
     class Rotation;
 
@@ -39,8 +42,6 @@ SpatialVectorSemantics<LinearVec3SemanticsT, AngularVec3SemanticsT>
          * constructors
          */
         SpatialVectorSemantics(LinearVec3SemanticsT & linearVec3, AngularVec3SemanticsT & angularVec3);
-
-        virtual ~SpatialVectorSemantics();
 
         bool check_linear2angularConsistency(const LinearVec3SemanticsT & linearVec3, const AngularVec3SemanticsT & angularVec3);
 
@@ -93,7 +94,7 @@ template <typename DerivedSpatialVecT>
 SpatialVector<DerivedSpatialVecT>
 
     SPATIALVECTOR_TEMPLATE_HDR
-    class SpatialVector: public IVector
+    class SpatialVector
     {
     public:
         typedef typename SpatialMotionForceVectorT_traits<DerivedSpatialVecT>::LinearVector3Type LinearVector3T;
@@ -114,7 +115,6 @@ SpatialVector<DerivedSpatialVecT>
         SpatialVector();
         SpatialVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
         SpatialVector(const SpatialVector & other);
-        virtual ~SpatialVector();
 
         /**
          * Vector accessors, getters, setters
@@ -129,12 +129,12 @@ SpatialVector<DerivedSpatialVecT>
         /**
          * Vector element accessors, getters, setters
          */
-        virtual double operator()(const unsigned int index) const; // No input checking.
-        virtual double& operator()(const unsigned int index); // No input checking.
-        virtual double getVal(const unsigned int index) const; // Perform boundary checking
-        virtual bool setVal(const unsigned int index, const double new_el);  // Perform boundary checking
-        virtual unsigned int size() const;
-        virtual void zero();
+        double operator()(const unsigned int index) const; // No input checking.
+        double& operator()(const unsigned int index); // No input checking.
+        double getVal(const unsigned int index) const; // Perform boundary checking
+        bool setVal(const unsigned int index, const double new_el);  // Perform boundary checking
+        unsigned int size() const;
+        void zero();
 
         /**
          * Geometric operations
@@ -189,11 +189,6 @@ SpatialVector<DerivedSpatialVecT>
                                                                 AngularVec3SemanticsT & angularVec3):
     linearVec3Semantics(linearVec3),
     angularVec3Semantics(angularVec3)
-    {
-    }
-
-    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
-    SPATIALVECTORSEMANTICS_INSTANCE_HDR::~SpatialVectorSemantics()
     {
     }
 
@@ -262,11 +257,6 @@ SpatialVector<DerivedSpatialVecT>
     linearVec3(other.getLinearVec3()),
     angularVec3(other.getAngularVec3()),
     semantics(linearVec3.semantics, angularVec3.semantics)
-    {
-    }
-
-    SPATIALVECTOR_TEMPLATE_HDR
-    SPATIALVECTOR_INSTANCE_HDR::~SpatialVector()
     {
     }
 
@@ -453,8 +443,9 @@ SpatialVector<DerivedSpatialVecT>
         std::stringstream ss;
 
         ss << linearVec3.toString() << " "
-        << angularVec3.toString() << " "
-        << semantics.toString() << std::endl;
+        << angularVec3.toString();
+        iDynTreeSemanticsOp(ss << " " << semantics.toString());
+        ss << std::endl;
 
         return ss.str();
     }

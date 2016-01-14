@@ -105,11 +105,6 @@ namespace iDynTree
         Transform(const Transform & other);
 
         /**
-         * Destructor
-         */
-        virtual ~Transform();
-
-        /**
          * Semantic accessor
          */
         TransformSemantics & getSemantics();

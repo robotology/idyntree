@@ -9,43 +9,43 @@ classdef Traversal < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(697, varargin{:});
+        tmp = iDynTreeMEX(720, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(698, self);
+        iDynTreeMEX(721, self);
         self.swigPtr=[];
       end
     end
     function varargout = getNrOfVisitedLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(699, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(722, self, varargin{:});
     end
     function varargout = getLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(700, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(723, self, varargin{:});
     end
     function varargout = getParentLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(701, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(724, self, varargin{:});
     end
     function varargout = getParentJoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(702, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(725, self, varargin{:});
     end
     function varargout = getParentLinkFromLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(703, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(726, self, varargin{:});
     end
     function varargout = getParentJointFromLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(704, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(727, self, varargin{:});
     end
     function varargout = reset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(705, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(728, self, varargin{:});
     end
     function varargout = addTraversalBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(706, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(729, self, varargin{:});
     end
     function varargout = addTraversalElement(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(707, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(730, self, varargin{:});
     end
   end
   methods(Static)

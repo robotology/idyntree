@@ -9,6 +9,8 @@
 #include <iDynTree/Core/AngularMotionVector3.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/PrivatePreProcessorUtils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
+
 
 #include <Eigen/Dense>
 
@@ -21,10 +23,6 @@ namespace iDynTree
      */
 
     // constructors
-    LinearMotionVector3Semantics::LinearMotionVector3Semantics()
-    {
-    }
-
     LinearMotionVector3Semantics::LinearMotionVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame):
     GeomVector3Semantics<LinearMotionVector3Semantics>(_body, _refBody, _coordinateFrame),
     point(_point)
@@ -33,10 +31,6 @@ namespace iDynTree
 
     LinearMotionVector3Semantics::LinearMotionVector3Semantics(const LinearMotionVector3Semantics & other):
     GeomVector3Semantics<LinearMotionVector3Semantics>(other)
-    {
-    }
-
-    LinearMotionVector3Semantics::~LinearMotionVector3Semantics()
     {
     }
 
@@ -118,10 +112,6 @@ namespace iDynTree
 
     LinearMotionVector3::LinearMotionVector3(const LinearMotionVector3 & other):
     MotionVector3<LinearMotionVector3>(other)
-    {
-    }
-
-    LinearMotionVector3::~LinearMotionVector3()
     {
     }
 

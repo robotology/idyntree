@@ -40,4 +40,15 @@ iDynTreeAssertEqual(momentumInFrame2.getVal(3),momentumInFrame2check.getVal(3),t
 iDynTreeAssertEqual(momentumInFrame2.getVal(4),momentumInFrame2check.getVal(4),tol,'Error in momentumInvariance, ry')
 iDynTreeAssertEqual(momentumInFrame2.getVal(5),momentumInFrame2check.getVal(5),tol,'Error in momentumInvariance, rz')
 
+% check also dot product invariance
+% enable this when https://github.com/robotology/idyntree/issues/105 is solved
+%energyFrame1      = twistInFrame1.dot(momentumInFrame1);
+%energyFrame1check = momentumInFrame1.dot(twistInFrame1);
+%energyFrame2      = twistInFrame2.dot(momentumInFrame2);
+%energyFrame2check = momentumInFrame2.dot(twistInFrame2);
+
+%iDynTreeAssertEqual(energyFrame1,energyFrame1check,tol,'Error in momentumInvariance test, dot product not invariant')
+%iDynTreeAssertEqual(energyFrame2,energyFrame2check,tol,'Error in momentumInvariance test, dot product not invariant')
+%iDynTreeAssertEqual(energyFrame1,energyFrame2,tol,'Error in momentumInvariance test, dot product not invariant')
+
 disp('Test momentumInvariance completed successfully.')

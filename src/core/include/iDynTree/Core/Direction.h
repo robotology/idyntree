@@ -38,7 +38,7 @@ namespace iDynTree
          * The data is not reset to the default for perfomance reason.
          * Please initialize the data in the class before any use.
          */
-        Direction();
+        inline Direction() {};
 
         /**
          * Constructor from 3 doubles: initialize the direction with the passed values.
@@ -55,11 +55,6 @@ namespace iDynTree
          * Copy constructor: create a Direction from a 3 double buffer
          */
         Direction(const double* in_data, const unsigned int in_size);
-
-        /**
-         * Destructor
-         */
-        virtual ~Direction();
 
         /**
          * Normalize the representation of the direction, useful if

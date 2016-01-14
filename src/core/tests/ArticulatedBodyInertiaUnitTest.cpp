@@ -6,7 +6,6 @@
  */
 
 #include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/IMatrix.h>
 #include <iDynTree/Core/ArticulatedBodyInertia.h>
 #include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/SpatialMomentum.h>

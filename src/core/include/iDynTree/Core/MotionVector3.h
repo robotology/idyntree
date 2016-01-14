@@ -39,16 +39,15 @@ namespace iDynTree
         {
             static DerivedT cross(const MotionVector3<MotionT>& _this, const OperandT& other);
         };
-        
+
     public:
         /**
          * constructors
          */
-        MotionVector3();
+        inline MotionVector3() {};
         MotionVector3(const double* in_data, const unsigned int in_size);
         MotionVector3(const MotionVector3 & other);
-        virtual ~MotionVector3();
-        
+
         /**
          * Types of Derivative by Linear or Angular motion vectors
          */
@@ -56,7 +55,7 @@ namespace iDynTree
         typedef typename MotionDerivativeOf<MotionT, AngularMotionVector3>::Type MotionCrossAngM;
         typedef typename MotionDerivativeOf<MotionT, LinearForceVector3>::Type MotionCrossLinF;
         typedef typename MotionDerivativeOf<MotionT, AngularForceVector3>::Type MotionCrossAngF;
-        
+
         /* Cross products */
         MotionCrossLinM cross(const LinearMotionVector3& other) const;
         MotionCrossAngM cross(const AngularMotionVector3& other) const;
