@@ -36,7 +36,7 @@ void checkURDF(std::string fileName,
 int main()
 {
     std::cout<<"Generic Sensor test running (one Link):\n";
-    checkURDF(getAbsModelPath("/oneLink.urdf"),2,1);
+    checkURDF(getAbsModelPath("oneLink.urdf"),2,1);
 
     std::cout<<"Generic Sensor test running (two Link):\n";
     checkURDF(getAbsModelPath("/twoLinks.urdf"),2,1);

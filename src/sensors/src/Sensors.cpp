@@ -126,7 +126,7 @@ int SensorsList::addSensor(const Sensor& sensor)
          std::cerr << "[ERR] SensorsTree::addSensor error : sensor  " << sensor.getName()
                        << "  isValid() method returns false" << std::endl;
          delete newSensor;
-             return -1;
+         return -1;
     }
 
     if( !(newSensor->getSensorType() >= 0 && newSensor->getSensorType() < NR_OF_SENSOR_TYPES) )

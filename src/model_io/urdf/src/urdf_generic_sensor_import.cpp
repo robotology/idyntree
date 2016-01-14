@@ -77,6 +77,8 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
 
     bool returnVal = true;
 
+    std::cerr << urdfXml << std::endl;
+
     /* parse sdf force_torque extension to urdf */
     TiXmlDocument tiUrdfXml;
     tiUrdfXml.Parse(urdfXml.c_str());
@@ -87,8 +89,6 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
     for (TiXmlElement* sensorXml = robotXml->FirstChildElement("sensor");
          sensorXml; sensorXml = sensorXml->NextSiblingElement("sensor"))
     {
-        std::cerr << sensorXml->ToText() << std::endl;
-
         GenericSensorData newGenericSensor;
 
         if(sensorXml->Attribute("name")==NULL || sensorXml->Attribute("type")==NULL)
@@ -98,6 +98,7 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
             break;
         }
         std::string  sensorName(sensorXml->Attribute("name"));
+
         newGenericSensor.sensorName = sensorName;
         std::string sensorType(sensorXml->Attribute("type"));
 
@@ -195,9 +196,11 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
             // default value
             newGenericSensor.sensorPose = iDynTree::Transform::Identity();
         }
+
         genericSensors.push_back(newGenericSensor);
 
     }
+
 
     return returnVal;
 }
@@ -216,7 +219,7 @@ bool genericSensorsListFromURDFString(iDynTree::Model & undirectedTree,
                                       std::string urdfString,
                                       SensorsList& sensors)
 {
-    iDynTree::SensorsList sensorsTree;
+    SensorsList sensorsTree;
     std::vector<iDynTree::GenericSensorData> genericSensors;
 
     bool ok = iDynTree::genericSensorsFromUrdfString(urdfString,genericSensors);
@@ -254,6 +257,7 @@ bool genericSensorsListFromURDFString(iDynTree::Model & undirectedTree,
                 break;
         }
 
+
         // setting the parent object (junction / link) names
         newSensor->setName(genericSensors[genSensItr].sensorName);
         newSensor->setParent(genericSensors[genSensItr].parentObjectName);
@@ -280,11 +284,12 @@ bool genericSensorsListFromURDFString(iDynTree::Model & undirectedTree,
            return false;
        }
 
-       sensorsTree.addSensor(*newSensor);
+       int sensorIndex = sensorsTree.addSensor(*newSensor);
        //since cloning is completed we can delete to free the sensor memory allocation
        delete(newSensor );
     }
 
+    sensors = sensorsTree;
     return ok;
 }
 
