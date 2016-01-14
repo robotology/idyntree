@@ -40,6 +40,8 @@ void checkURDF(std::string fileName,
     bool ok = modelFromURDF(fileName,model);
     assert(ok);
 
+    std::cerr << model.toString() << std::endl;
+
     ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(),expectedNrOfLinks);
     ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(),expectedNrOfJoints);
     ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(),expectedNrOfDOFs);
@@ -53,6 +55,8 @@ int main()
 {
     checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,4,"link1");
     checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,3,"link1");
+    checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,56,"root_link");
+
 
     return EXIT_SUCCESS;
 }

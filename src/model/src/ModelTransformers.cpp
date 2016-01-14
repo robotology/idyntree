@@ -289,6 +289,9 @@ bool createReducedModel(const Model& fullModel,
 
     if( !ok )
     {
+         std::cerr << "[ERROR] createReducedModel error : "
+                      << " error in splitting models across joints. "
+                      << std::endl;
         return false;
     }
 

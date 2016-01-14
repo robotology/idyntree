@@ -58,12 +58,12 @@ namespace iDynTree
      * method.
      *
      * The frame indices between 0 and getNrOfLinks()-1 are always assigned to the
-     * "main" link frame of the link with the same index. The frame indices 
+     * "main" link frame of the link with the same index. The frame indices
      * between getNrOfLinks() and getNrOfFrames()-1 are assigned when the additional
      * frame is added to the model with the addAdditionalFrameToLink call. All the additional
-     * frame indeces are increased of 1 whenever a new link is added, to ensure that 
-     * its "link frame" has a frame index in the 0...getNrOfLinks()-1 range. 
-     * 
+     * frame indeces are increased of 1 whenever a new link is added, to ensure that
+     * its "link frame" has a frame index in the 0...getNrOfLinks()-1 range.
+     *
      *
      *
      * \ingroup iDynTreeModel
@@ -365,6 +365,14 @@ namespace iDynTree
          * \warning this function works only on Models without cycles.
          */
         bool computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase) const;
+
+
+        /**
+         * \brief Get a printable representation of the Model.
+         *
+         * Useful for debugging. 
+         */
+        std::string toString() const;
 
     };
 

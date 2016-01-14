@@ -519,6 +519,37 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
     return true;
 }
 
+std::string Model::toString() const
+{
+    std::stringstream ss;
+
+    ss << "Model: " << std::endl;
+    ss << "  Links: " << std::endl;
+    for(size_t i=0; i < this->getNrOfLinks(); i++ )
+    {
+        ss << "    [" << i << "] " << this->getLinkName(i) << std::endl;
+    }
+
+    ss << "  Frames: " << std::endl;
+    for(size_t i=this->getNrOfLinks(); i < this->getNrOfFrames(); i++ )
+    {
+        ss << "    [" << i << "] "
+           << this->getFrameName(i)
+           << " --> " << this->getLinkName(this->getFrameLink(i)) << std::endl;
+    }
+
+    ss << "  Joints: " << std::endl;
+    for(size_t i=0; i < this->getNrOfJoints(); i++ )
+    {
+        ss << "    [" << i << "] "
+           << this->getJointName(i) << " (dofs: " << this->getJoint(i)->getNrOfDOFs() << ") : "
+           << this->getLinkName(this->getJoint(i)->getFirstAttachedLink()) << "<-->" << this->getLinkName(this->getJoint(i)->getSecondAttachedLink()) << std::endl;
+    }
+
+    return ss.str();
+}
+
+
 
 
 

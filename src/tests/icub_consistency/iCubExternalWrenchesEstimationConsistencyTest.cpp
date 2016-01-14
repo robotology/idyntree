@@ -232,7 +232,8 @@ bool addSingleContact(iCub::iDynTree::TorqueEstimationTree & estimation_model,
 }
 
 void getJointSerializationFromDynTree(DynTree & dynTree,
-                                      std::vector<std::string> joints)
+                                      iDynTree::Model & model,
+                                      std::vector<std::string>& joints)
 {
     joints.resize(0);
     size_t nrOfJoints = dynTree.getNrOfLinks()-1;
@@ -241,7 +242,12 @@ void getJointSerializationFromDynTree(DynTree & dynTree,
         std::string jointName;
         bool ok = dynTree.getJunctionName(j,jointName);
         assert(ok);
-        joints.push_back(jointName);
+
+        // if the joints is also in the model, add it
+        if( model.getJointIndex(jointName) != iDynTree::JOINT_INVALID_INDEX )
+        {
+            joints.push_back(jointName);
+        }
     }
 }
 
@@ -271,8 +277,17 @@ int main(int argc, char ** argv)
     iDynTree::modelFromURDF(urdf_filename,fullModel);
     // Get the same serialization of joints used in iDynTree
     std::vector<std::string> usedJoints;
-    getJointSerializationFromDynTree(*icub_model_estimation,usedJoints);
-    iDynTree::createReducedModel(fullModel,usedJoints,model);
+    getJointSerializationFromDynTree(*icub_model_estimation,fullModel,usedJoints);
+    bool ok = iDynTree::createReducedModel(fullModel,usedJoints,model);
+    if( !ok )
+    {
+        std::cerr << "Error in creating reduced model" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    std::cerr << " old model number of dofs : " << icub_model_estimation->getNrOfDOFs() << std::endl;
+    std::cerr << model.toString() << std::endl;
+
     assert(model.getNrOfDOFs() == icub_model_estimation->getNrOfDOFs());
 
     iDynTree::Traversal traversal;
@@ -282,8 +297,15 @@ int main(int argc, char ** argv)
     //iDynTree::sensorsFromURDF(urdf_filename,model,sensors);
 
     // Create submodel decomposition
+    std::cerr << model.toString() << std::endl;
+
     iDynTree::SubModelDecomposition subModels;
-    subModels.splitModelAlongJoints(model,traversal,ft_serialization);
+    ok = subModels.splitModelAlongJoints(model,traversal,ft_serialization);
+    if( !ok )
+    {
+        std::cerr << "Error in splitting the model in submodels" << std::endl;
+        return EXIT_FAILURE;
+    }
 
     iDynTree::skinDynLibConversionsHelper iCubSkinHelper;
 
@@ -374,7 +396,7 @@ int main(int argc, char ** argv)
 
     icub_model_estimation->kinematicRNEA();
     icub_model_estimation->estimateContactForcesFromSkin();
-    bool ok = icub_model_estimation->dynamicRNEA();
+    ok = icub_model_estimation->dynamicRNEA();
 
     output_contact_list = icub_model_estimation->getContacts();
 
