@@ -5,7 +5,7 @@ macro(add_modelio_urdf_unit_test classname)
     set(testname   UnitTest${classname})
     add_executable(${testbinary} ${testsrc})
     target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR} ${IDYNTREE_TREE_INCLUDE_DIRS})
-    target_link_libraries(${testbinary} idyntree-modelio-urdf)
+    target_link_libraries(${testbinary} idyntree-modelio-urdf-kdl)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)

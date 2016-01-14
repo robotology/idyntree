@@ -41,7 +41,7 @@ target_link_libraries(idyntree-icub-kdl LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${YARP_LIBRARIES}
                                             idyntree-core
                                             idyntree-sensors
-                                            idyntree-modelio-urdf
+                                            idyntree-modelio-urdf-kdl
                                             idyntree-regressors
                                             idyntree-yarp-kdl
                                             ${Boost_LIBRARIES}

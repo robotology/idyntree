@@ -2,7 +2,7 @@
 # Authors: Silvio Traversaro
 # CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
 
-project(iDynTree_ModelIO_URDF CXX)
+project(iDynTree_ModelIO_URDF_KDL CXX)
 
 # for now the iDynTree_ModelIO_URDF support
 # is compiled in two different way depending
@@ -47,7 +47,7 @@ if(IDYNTREE_USES_KDL)
     source_group("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})
     source_group("Private Header Files" FILES ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
 
-    set(libraryname idyntree-modelio-urdf)
+    set(libraryname idyntree-modelio-urdf-kdl)
 
     add_library(${libraryname} ${IDYNTREE_MODELIO_URDF_SOURCES}
                                ${IDYNTREE_MODELIO_URDF_HEADERS}
@@ -106,7 +106,7 @@ else()
     SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})
 
     # share headers with all iDynTree targets
-    set(libraryname idyntree-modelio-urdf)
+    set(libraryname idyntree-modelio-urdf-kdl)
 
     add_library(${libraryname} ${IDYNTREE_MODELIO_URDF_SOURCES} ${IDYNTREE_MODELIO_URDF_HEADERS})
 

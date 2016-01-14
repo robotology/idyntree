@@ -48,7 +48,7 @@ target_link_libraries(idyntree-yarp-kdl LINK_PUBLIC
                                             ${YARP_LIBRARIES}
                                             idyntree-core
                                             idyntree-sensors
-                                            idyntree-modelio-urdf
+                                            idyntree-modelio-urdf-kdl
                                             idyntree-regressors
                                             ${Boost_LIBRARIES}
                                             ${TinyXML_LIBRARIES})
