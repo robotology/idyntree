@@ -190,7 +190,7 @@ bool SubModelDecomposition::splitModelAlongJoints(const Model& model,
 
 void computeTransformToTraversalBase(const Model& fullModel,
                                      const Traversal& subModelTraversal,
-                                     const IRawVector& jointPos,
+                                     const JointPosDoubleArray& jointPos,
                                            LinkPositions& traversalBase_H_link)
 {
     for(unsigned int traversalEl=0; traversalEl < subModelTraversal.getNrOfVisitedLinks(); traversalEl++)
@@ -222,7 +222,7 @@ void computeTransformToTraversalBase(const Model& fullModel,
 
 void computeTransformToSubModelBase(const Model& fullModel,
                                     const SubModelDecomposition& subModelDecomposition,
-                                    const IRawVector& jointPos,
+                                    const JointPosDoubleArray& jointPos,
                                           LinkPositions& subModelBase_H_link)
 {
     for(size_t subModel = 0;

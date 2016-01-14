@@ -6,7 +6,6 @@
  */
 
 #include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/IMatrix.h>
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/Transform.h>

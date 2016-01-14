@@ -18,6 +18,9 @@
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
+#include <iDynTree/Core/EigenHelpers.h>
+
 
 #include <Eigen/Dense>
 
@@ -61,7 +64,7 @@ namespace iDynTree
 
     Rotation::Rotation(const Rotation & other): RotationRaw(other)
     {
-        this->semantics = other.getSemantics();
+        iDynTreeSemanticsOp(this->semantics = other.getSemantics());
     }
 
     Rotation::Rotation(const RotationRaw& other): RotationRaw(other)
@@ -71,11 +74,7 @@ namespace iDynTree
 
     Rotation::Rotation(const RotationRaw& otherPos, RotationSemantics & otherSem): RotationRaw(otherPos)
     {
-        this->semantics = otherSem;
-    }
-
-    Rotation::~Rotation()
-    {
+        iDynTreeSemanticsOp(this->semantics = otherSem);
     }
 
     RotationSemantics& Rotation::getSemantics()
@@ -279,8 +278,6 @@ namespace iDynTree
         // https://github.com/dartsim/dart/pull/407/files
         // https://github.com/dartsim/dart/pull/334
         // https://github.com/dartsim/dart/issues/88
-        std::cout << aa.angle() << std::endl;
-        std::cout << aa.axis()  << std::endl;
         Eigen::Map<Eigen::Vector3d>(ret.data()) = aa.angle()*aa.axis();
 
         return ret;
@@ -311,6 +308,18 @@ namespace iDynTree
         return result;
     }
 
+    Matrix3x3 Rotation::RotAxisDerivative(const Direction& direction, const double angle)
+    {
+        Matrix3x3 result;
+
+        Eigen::Map<Matrix3dRowMajor> res(result.data());
+        Eigen::Map<const Eigen::Vector3d> d(direction.data());
+        Matrix3dRowMajor skewd = skew(d);
+
+        res = skewd*cos(angle)+skewd*skewd*sin(angle);
+
+        return result;
+    }
 
     Rotation Rotation::RPY(const double roll, const double pitch, const double yaw)
     {
@@ -326,7 +335,8 @@ namespace iDynTree
     {
         std::stringstream ss;
 
-        ss << RotationRaw::toString() << " " << semantics.toString();
+        ss << RotationRaw::toString();
+        iDynTreeSemanticsOp(ss << " " << semantics.toString());
 
         return ss.str();
     }

@@ -12,6 +12,9 @@
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
+
+
 #include <cassert>
 #include <iostream>
 #include <sstream>
@@ -55,7 +58,7 @@ namespace iDynTree
 
     Position::Position(const Position & other): PositionRaw(other)
     {
-        this->semantics = other.getSemantics();
+        iDynTreeSemanticsOp(this->semantics = other.getSemantics());
     }
 
     Position::Position(const PositionRaw& other): PositionRaw(other)
@@ -65,12 +68,9 @@ namespace iDynTree
 
     Position::Position(const PositionRaw & otherPos, const PositionSemantics & otherSem): PositionRaw(otherPos)
     {
-        this->semantics = otherSem;
+        iDynTreeSemanticsOp(this->semantics = otherSem);
     }
 
-    Position::~Position()
-    {
-    }
 
     PositionSemantics& Position::getSemantics()
     {
@@ -193,7 +193,8 @@ namespace iDynTree
     {
         std::stringstream ss;
 
-        ss << PositionRaw::toString() << " " << semantics.toString();
+        ss << PositionRaw::toString();
+        iDynTreeSemanticsOp(ss << " " << semantics.toString());
 
         return ss.str();
     }

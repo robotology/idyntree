@@ -14,28 +14,65 @@
 namespace iDynTree
 {
 
-JointDoubleArray::JointDoubleArray(unsigned int nrOfDOFs): VectorDynSize(nrOfDOFs)
+JointPosDoubleArray::JointPosDoubleArray(unsigned int nrOfPosCoords): VectorDynSize(nrOfPosCoords)
 {
 
 }
 
-JointDoubleArray::JointDoubleArray(const iDynTree::Model& model): VectorDynSize(model.getNrOfDOFs())
+JointPosDoubleArray::JointPosDoubleArray(const iDynTree::Model& model): VectorDynSize(model.getNrOfPosCoords())
 {
 
 }
 
-void JointDoubleArray::resize(const iDynTree::Model& model)
+void JointPosDoubleArray::resize(const iDynTree::Model& model)
+{
+    resize(model.getNrOfPosCoords());
+}
+
+void JointPosDoubleArray::resize(unsigned int nrOfPosCoords)
+{
+    VectorDynSize::resize(nrOfPosCoords);
+    this->zero();
+}
+
+bool JointPosDoubleArray::isConsistent(const Model& model)
+{
+    return (this->size() != model.getNrOfPosCoords());
+}
+
+JointPosDoubleArray::~JointPosDoubleArray()
+{
+
+}
+
+
+JointDOFsDoubleArray::JointDOFsDoubleArray(unsigned int nrOfDOFs): VectorDynSize(nrOfDOFs)
+{
+
+}
+
+JointDOFsDoubleArray::JointDOFsDoubleArray(const iDynTree::Model& model): VectorDynSize(model.getNrOfDOFs())
+{
+
+}
+
+void JointDOFsDoubleArray::resize(const iDynTree::Model& model)
 {
     resize(model.getNrOfDOFs());
 }
 
-void JointDoubleArray::resize(unsigned int nrOfDOFs)
+void JointDOFsDoubleArray::resize(unsigned int nrOfDOFs)
 {
     VectorDynSize::resize(nrOfDOFs);
+    this->zero();
 }
 
+bool JointDOFsDoubleArray::isConsistent(const Model& model)
+{
+    return (this->size() != model.getNrOfDOFs());
+}
 
-JointDoubleArray::~JointDoubleArray()
+JointDOFsDoubleArray::~JointDOFsDoubleArray()
 {
 
 }
@@ -57,7 +94,12 @@ void DOFSpatialForceArray::resize(const iDynTree::Model& model)
 
 void DOFSpatialForceArray::resize(const unsigned int nrOfDOFs)
 {
-    this->m_dofSpatialForce.resize(nrOfDOFs);
+    this->m_dofSpatialForce.resize(nrOfDOFs,iDynTree::SpatialForceVector::Zero());
+}
+
+bool DOFSpatialForceArray::isConsistent(const Model& model)
+{
+    return (this->m_dofSpatialForce.size() == model.getNrOfDOFs());
 }
 
 
@@ -92,9 +134,14 @@ void DOFSpatialMotionArray::resize(const iDynTree::Model& model)
     resize(model.getNrOfDOFs());
 }
 
+bool DOFSpatialMotionArray::isConsistent(const Model& model)
+{
+    return (this->m_dofSpatialMotion.size() == model.getNrOfDOFs());
+}
+
 void DOFSpatialMotionArray::resize(const unsigned int nrOfDOFs)
 {
-    this->m_dofSpatialMotion.resize(nrOfDOFs);
+    this->m_dofSpatialMotion.resize(nrOfDOFs,iDynTree::SpatialMotionVector::Zero());
 }
 
 

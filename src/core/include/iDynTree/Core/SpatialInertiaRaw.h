@@ -38,7 +38,7 @@ namespace iDynTree
          * The data is not reset to zero for perfomance reason.
          * Please initialize the data in the vector before any use.
          */
-        SpatialInertiaRaw();
+        inline SpatialInertiaRaw() {};
 
         /**
          * @param mass mass of the rigid body
@@ -51,7 +51,6 @@ namespace iDynTree
          */
         SpatialInertiaRaw(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
         SpatialInertiaRaw(const SpatialInertiaRaw & other);
-        virtual ~SpatialInertiaRaw();
 
         /**
          * Helper constructor-like function that takes mass, center of mass
@@ -79,7 +78,7 @@ namespace iDynTree
          */
         double getMass() const;
         PositionRaw getCenterOfMass() const;
-        RotationalInertiaRaw getRotationalInertiaWrtFrameOrigin() const;
+        const RotationalInertiaRaw& getRotationalInertiaWrtFrameOrigin() const;
         RotationalInertiaRaw getRotationalInertiaWrtCenterOfMass() const;
 
 

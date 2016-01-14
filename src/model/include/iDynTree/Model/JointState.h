@@ -21,18 +21,38 @@ namespace iDynTree
 
     /**
      * Class for storing a vector of scalar values,
-     *  one for each dof in a model.
+     *  one for each internal position coordinate in a model.
      */
-    class JointDoubleArray: public VectorDynSize
+    class JointPosDoubleArray: public VectorDynSize
     {
     public:
-        JointDoubleArray(unsigned int nrOfDOFs = 0);
-        JointDoubleArray(const iDynTree::Model & model);
+        JointPosDoubleArray(unsigned int nrOfDOFs = 0);
+        JointPosDoubleArray(const iDynTree::Model & model);
 
         void resize(unsigned int nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
-        ~JointDoubleArray();
+        bool isConsistent(const iDynTree::Model & model);
+
+        ~JointPosDoubleArray();
+    };
+
+    /**
+     * Class for storing a vector of scalar values,
+     *  one for each internal coordinate in a model.
+     */
+    class JointDOFsDoubleArray: public VectorDynSize
+    {
+    public:
+        JointDOFsDoubleArray(unsigned int nrOfDOFs = 0);
+        JointDOFsDoubleArray(const iDynTree::Model & model);
+
+        void resize(unsigned int nrOfDOFs);
+        void resize(const iDynTree::Model & model);
+
+        bool isConsistent(const iDynTree::Model & model);
+
+        ~JointDOFsDoubleArray();
     };
 
     /**
@@ -56,6 +76,8 @@ namespace iDynTree
         void resize(const unsigned int nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
+        bool isConsistent(const iDynTree::Model & model);
+
         iDynTree::SpatialForceVector & operator()(const size_t dof);
         const iDynTree::SpatialForceVector & operator()(const size_t dof) const;
 
@@ -77,6 +99,8 @@ namespace iDynTree
 
         void resize(const unsigned int nrOfDOFs);
         void resize(const iDynTree::Model & model);
+
+        bool isConsistent(const iDynTree::Model & model);
 
         iDynTree::SpatialMotionVector & operator()(const size_t dof);
         const iDynTree::SpatialMotionVector & operator()(const size_t dof) const;

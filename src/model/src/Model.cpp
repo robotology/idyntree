@@ -14,13 +14,16 @@
 namespace iDynTree
 {
 
-Model::Model(): defaultBaseLink(0), nrOfPosCoords(0), nrOfDOFs(0)
+Model::Model(): defaultBaseLink(LINK_INVALID_INDEX), nrOfPosCoords(0), nrOfDOFs(0)
 {
 
 }
 
 void Model::copy(const Model& other)
 {
+    // reset the base link, the real one will be copied later
+    this->defaultBaseLink = LINK_INVALID_INDEX;
+
     // Add all the links, preserving the numbering
     for(unsigned int lnk=0; lnk < other.getNrOfLinks(); lnk++ )
     {
@@ -28,8 +31,7 @@ void Model::copy(const Model& other)
     }
 
     // Add all joints, preserving the numbering
-
-    // reset the nrOfDOFs (it will be then update in addJoint
+    // reset the nrOfDOFs (it will be then update in addJoint)
     nrOfPosCoords = 0;
     nrOfDOFs = 0;
 
@@ -189,6 +191,14 @@ LinkIndex Model::addLink(const std::string& name, const Link& link)
     LinkIndex newLinkIndex = (LinkIndex)(links.size()-1);
 
     links[newLinkIndex].setIndex(newLinkIndex);
+
+    // if this is the first link added to the model
+    // and the defaultBaseLink has not been setted,
+    // set the defaultBaseLink to be this link
+    if( newLinkIndex == 0 && getDefaultBaseLink() == LINK_INVALID_INDEX )
+    {
+        setDefaultBaseLink(newLinkIndex);
+    }
 
     return newLinkIndex;
 }

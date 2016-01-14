@@ -8,7 +8,6 @@
 #ifndef IDYNTREE_ROTATION_RAW_H
 #define IDYNTREE_ROTATION_RAW_H
 
-#include <iDynTree/Core/IMatrix.h>
 #include <iDynTree/Core/MatrixFixSize.h>
 #include <string>
 
@@ -29,7 +28,7 @@ namespace iDynTree
      *
      * \note This implementation is compatible with KDL::Rotation data.
      *
-     * \warning This class is exposing for convenience the IVector interface.
+     * \warning This class uses for convenience the Matrix3x3 as a public parent.
      *          Notice that using this methods you can damage the underlyng rotation matrix.
      *          In doubt, don't use them and rely on more high level functions.
      *
@@ -65,11 +64,6 @@ namespace iDynTree
          * Copy constructor: create a RotationRaw from another RotationRaw.
          */
         RotationRaw(const RotationRaw & other);
-
-        /**
-         * Denstructor
-         */
-        virtual ~RotationRaw();
 
         /**
          * Geometric operations.

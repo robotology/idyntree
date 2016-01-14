@@ -145,7 +145,7 @@ void dynamicsBenchmark(std::string modelFilePath, unsigned int nrOfTrials)
         iDynTreeTimes.totalTimeRNEA += (toc-tic);
 
         tic = clockInSec();
-        CompositeRigidBodyAlgorithm(model,traversal,baseJntPos,crbis,massMatrix);
+        CompositeRigidBodyAlgorithm(model,traversal,baseJntPos.jointPos(),crbis,massMatrix);
         toc = clockInSec();
         iDynTreeTimes.totalTimeCRBA += (toc-tic);
 
@@ -175,7 +175,7 @@ void dynamicsBenchmark(std::string modelFilePath, unsigned int nrOfTrials)
 int main()
 {
     std::cout << "Dynamics benchmark, iDynTree built in " << IDYNTREE_CMAKE_BUILD_TYPE << " mode " << std::endl;
-    int nrOfTrials = 100;
+    int nrOfTrials = 1000;
     for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
     {
         std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));

@@ -14,6 +14,7 @@
 
 #include <iDynTree/Model/Indeces.h>
 #include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/JointState.h>
 
 #include <vector>
 
@@ -34,7 +35,7 @@ namespace iDynTree
     private:
         Transform m_worldBasePos;
 
-        VectorDynSize m_jointPos;
+        JointPosDoubleArray m_jointPos;
 
     public:
         // Documentation inherited
@@ -59,7 +60,7 @@ namespace iDynTree
        /**
         * Get the vector of joint positions.
         */
-       IRawVector & jointPos();
+       JointPosDoubleArray & jointPos();
 
        /**
         * Get the base position (const version).
@@ -69,7 +70,7 @@ namespace iDynTree
        /**
         * Get the vector of joint positions (const version).
         */
-       const IRawVector & jointPos() const;
+       const JointPosDoubleArray & jointPos() const;
 
        /**
         * Get the dimension of the joint positions vector.
@@ -87,7 +88,7 @@ namespace iDynTree
     {
     private:
         Wrench m_baseWrench;
-        VectorDynSize m_jointTorques;
+        JointDOFsDoubleArray m_jointTorques;
 
     public:
         // Documentation inherited
@@ -112,7 +113,7 @@ namespace iDynTree
        /**
         * Get the joint torques vector.
         */
-       IRawVector & jointTorques();
+       JointDOFsDoubleArray & jointTorques();
 
        /**
         * Get the base wrench (const version).
@@ -122,7 +123,7 @@ namespace iDynTree
        /**
         * Get the joint torques vector (const version).
         */
-       const IRawVector & jointTorques() const;
+       const JointDOFsDoubleArray & jointTorques() const;
 
        unsigned int getNrOfDOFs() const;
 
@@ -137,7 +138,7 @@ namespace iDynTree
     {
     private:
         Twist m_baseVel;
-        VectorDynSize m_jointVel;
+        JointDOFsDoubleArray m_jointVel;
 
     public:
         // Documentation inherited
@@ -162,7 +163,7 @@ namespace iDynTree
        /**
         * Get the vector of joint accelerations.
         */
-       IRawVector & jointVel();
+       JointDOFsDoubleArray & jointVel();
 
        /**
         * Get the base acceleration (const version).
@@ -172,7 +173,7 @@ namespace iDynTree
        /**
         * Get the vector of joint accelerations (const version).
         */
-       const IRawVector & jointVel() const;
+       const JointDOFsDoubleArray & jointVel() const;
 
        /**
         * Get the dimension of the joint accelerations vector.
@@ -193,7 +194,7 @@ namespace iDynTree
     {
     private:
         SpatialAcc m_baseAcc;
-        VectorDynSize m_jointAcc;
+        JointDOFsDoubleArray m_jointAcc;
 
     public:
         // Documentation inherited
@@ -218,7 +219,7 @@ namespace iDynTree
        /**
         * Get the vector of joint accelerations.
         */
-       IRawVector & jointAcc();
+       JointDOFsDoubleArray & jointAcc();
 
        /**
         * Get the base acceleration (const version).
@@ -228,7 +229,7 @@ namespace iDynTree
        /**
         * Get the vector of joint accelerations (const version).
         */
-       const IRawVector & jointAcc() const;
+       const JointDOFsDoubleArray & jointAcc() const;
 
        /**
         * Get the dimension of the joint accelerations vector.

@@ -32,7 +32,7 @@ Transform& FreeFloatingPos::worldBasePos()
     return this->m_worldBasePos;
 }
 
-IRawVector & FreeFloatingPos::jointPos()
+JointPosDoubleArray & FreeFloatingPos::jointPos()
 {
     return this->m_jointPos;
 }
@@ -42,7 +42,7 @@ const Transform& FreeFloatingPos::worldBasePos() const
     return this->m_worldBasePos;
 }
 
-const IRawVector & FreeFloatingPos::jointPos() const
+const JointPosDoubleArray & FreeFloatingPos::jointPos() const
 {
     return this->m_jointPos;
 }
@@ -78,12 +78,12 @@ unsigned int FreeFloatingVel::getNrOfDOFs() const
     return this->m_jointVel.size();
 }
 
-IRawVector& FreeFloatingVel::jointVel()
+JointDOFsDoubleArray& FreeFloatingVel::jointVel()
 {
     return this->m_jointVel;
 }
 
-const IRawVector& FreeFloatingVel::jointVel() const
+const JointDOFsDoubleArray& FreeFloatingVel::jointVel() const
 {
     return this->m_jointVel;
 }
@@ -120,12 +120,12 @@ unsigned int FreeFloatingAcc::getNrOfDOFs() const
     return this->m_jointAcc.size();
 }
 
-IRawVector& FreeFloatingAcc::jointAcc()
+JointDOFsDoubleArray& FreeFloatingAcc::jointAcc()
 {
     return this->m_jointAcc;
 }
 
-const IRawVector& FreeFloatingAcc::jointAcc() const
+const JointDOFsDoubleArray& FreeFloatingAcc::jointAcc() const
 {
     return this->m_jointAcc;
 }
@@ -157,7 +157,7 @@ Wrench& FreeFloatingGeneralizedTorques::baseWrench()
     return this->m_baseWrench;
 }
 
-IRawVector& FreeFloatingGeneralizedTorques::jointTorques()
+JointDOFsDoubleArray& FreeFloatingGeneralizedTorques::jointTorques()
 {
     return this->m_jointTorques;
 }
@@ -167,7 +167,7 @@ const Wrench& FreeFloatingGeneralizedTorques::baseWrench() const
     return this->m_baseWrench;
 }
 
-const IRawVector& FreeFloatingGeneralizedTorques::jointTorques() const
+const JointDOFsDoubleArray& FreeFloatingGeneralizedTorques::jointTorques() const
 {
     return this->m_jointTorques;
 }

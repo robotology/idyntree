@@ -17,11 +17,6 @@ namespace iDynTree
 typedef Eigen::Matrix<double,6,1> Vector6d;
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 
-ClassicalAcc::ClassicalAcc()
-{
-
-}
-
 ClassicalAcc::ClassicalAcc(const double* in_data,
              const unsigned int in_size):
              Vector6(in_data, in_size)
@@ -35,11 +30,6 @@ ClassicalAcc::ClassicalAcc(const ClassicalAcc& other):
 
 }
 
-
-ClassicalAcc::~ClassicalAcc()
-{
-
-}
 
 const ClassicalAcc& ClassicalAcc::changeCoordFrame(const RotationRaw& newCoordFrame)
 {

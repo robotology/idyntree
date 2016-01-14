@@ -8,12 +8,19 @@
 #ifndef IDYNTREE_TEST_UTILS_H
 #define IDYNTREE_TEST_UTILS_H
 
-#include <iDynTree/Core/IVector.h>
-#include <iDynTree/Core/IMatrix.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+
 #include <iDynTree/Core/Utils.h>
 
+#include <algorithm>
+#include <iomanip>
+#include <iostream>
 #include <string>
+#include <vector>
+
+#include <cstdlib>
+#include <cmath>
+
 
 namespace iDynTree
 {
@@ -34,6 +41,7 @@ namespace iDynTree
 #define ASSERT_EQUAL_SPATIAL_MOTION(val1,val2) assertSpatialMotionAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_SPATIAL_FORCE(val1,val2) assertSpatialForceAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_MATRIX(val1,val2) assertMatrixAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
+#define ASSERT_EQUAL_MATRIX_TOL(val1,val2,tol) assertMatrixAreEqual(val1,val2,tol,__FILE__,__LINE__)
 #define ASSERT_EQUAL_TRANSFORM(val1,val2) assertTransformsAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_TRANSFORM_TOL(val1,val2,tol) assertTransformsAreEqual(val1,val2,tol,__FILE__,__LINE__)
 
@@ -43,21 +51,7 @@ namespace iDynTree
 
     void assertDoubleAreEqual(const double & val1, const double & val2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
 
-    /**
-     * Assert that two vectors are equal, and
-     * exit with EXIT_FAILURE if they are not.
-     *
-     */
-    void assertVectorAreEqual(const IVector & vec1, const IVector & vec2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
-
-    /**
-     * Assert that two matrices are equal, and
-     * exit with EXIT_FAILURE if they are not.
-     *
-     */
-    void assertMatrixAreEqual(const IMatrix & mat1, const IMatrix & mat2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
-
-    /**
+     /**
      * Assert that two transforms are equal, and
      * exit with EXIT_FAILURE if they are not.
      *
@@ -97,12 +91,29 @@ namespace iDynTree
     /**
      * Fill a vector with random double.
      */
-    void getRandomVector(IVector & vec);
+    template<typename VectorType>
+    void getRandomVector(VectorType & vec)
+    {
+        for(unsigned int i=0; i<vec.size(); i++)
+        {
+            vec(i) = getRandomDouble();
+        }
+    }
 
     /**
      * Fill a matrix of random doubles.
      */
-    void getRandomMatrix(MatrixDynSize & mat);
+    template<typename MatrixType>
+    void getRandomMatrix(MatrixType & mat)
+    {
+        for(unsigned int i=0; i<mat.rows(); i++)
+        {
+            for(unsigned int j=0; j<mat.cols(); j++)
+            {
+                mat(i,j) = getRandomDouble();
+            }
+        }
+    }
 
     /**
      * Get a random position.
@@ -138,6 +149,194 @@ namespace iDynTree
      * Get a random wrench-like 6D object.
      */
     SpatialForceVector getRandomWrench();
+
+     /**
+     * Helper for printing vectors
+     */
+    template<typename VectorType>
+    void printVector(std::string name, const VectorType& vec)
+    {
+        for(unsigned int i=0; i < vec.size(); i++ )
+        {
+            std::cerr << vec(i) << "\n";
+        }
+    }
+
+    /**
+     * Helper for printing difference of two vectors
+     */
+    template<typename VectorType1, typename VectorType2>
+    void printVectorDifference(std::string name, const VectorType1& vec1, const VectorType2& vec2)
+    {
+        std::cerr << name << " : \n";
+        size_t minSize = vec1.size();
+
+        if( vec2.size() < minSize )
+        {
+            minSize = vec2.size();
+        }
+
+        for(unsigned int i=0; i < minSize; i++ )
+        {
+            std::cerr << vec1(i) - vec2(i) << "\n";
+        }
+    }
+
+    /**
+     * Helper for printing the patter of wrong elements
+     * in between two vectors
+     */
+    inline void printVectorWrongElements(std::string name, std::vector<bool> & correctElems)
+    {
+        std::cerr << name << " ( . match, X mismatch): \n";
+
+        for(unsigned int i=0; i < correctElems.size(); i++ )
+        {
+            if( correctElems[i] )
+            {
+                std::cerr << "." << "\n";
+            }
+            else
+            {
+                std::cerr << "X" << "\n";
+            }
+        }
+    }
+
+    /**
+     * Helper for printing the patter of wrong elements
+     * in between two matrix
+     */
+    inline void printMatrixWrongElements(std::string name, std::vector< std::vector<bool> > & correctElems)
+    {
+        std::cerr << name << "( . match, X mismatch): \n";
+
+        size_t rows = correctElems.size();
+        size_t cols = correctElems[0].size();
+        for(unsigned int row=0; row < rows; row++ )
+        {
+            for( unsigned int col = 0; col < cols; col++ )
+            {
+                if( correctElems[row][col] )
+                {
+                    std::cerr << ".";
+                }
+                else
+                {
+                    std::cerr << "X";
+                }
+
+                std::cerr << " ";
+            }
+
+            std::cerr << "\n";
+        }
+    }
+
+    /**
+     * Helper for printing the patter of wrong elements
+     * in between two matrix
+     */
+    template<typename MatrixType1, typename MatrixType2>
+    void printMatrixPercentageError(const MatrixType1& mat1, const MatrixType2& mat2)
+    {
+        size_t rows = mat1.rows();
+        size_t cols = mat2.cols();
+        for(unsigned int row=0; row < rows; row++ )
+        {
+            for( unsigned int col = 0; col < cols; col++ )
+            {
+                double mat1el = mat1(row,col);
+                double mat2el = mat2(row,col);
+                double percentageError = std::abs(mat1el-mat2el)/std::max(mat1el,mat2el);
+                std::cerr << std::fixed << std::setprecision(3) << percentageError << " ";
+            }
+
+            std::cerr << "\n";
+        }
+    }
+
+
+    /**
+     * Assert that two vectors are equal, and
+     * exit with EXIT_FAILURE if they are not.
+     *
+     */
+    template<typename VectorType1, typename VectorType2>
+    void assertVectorAreEqual(const VectorType1& vec1, const VectorType2& vec2, double tol, std::string file, int line)
+    {
+        if( vec1.size() != vec2.size() )
+        {
+            std::cerr << file << ":" << line << " : assertVectorAreEqual failure: vec1 has size " << vec1.size()
+                    << " while vec2 has size " << vec2.size() << std::endl;
+            exit(EXIT_FAILURE);
+        }
+
+        std::vector<bool> correctElements(vec1.size(),true);
+        bool checkCorrect = true;
+
+        for( unsigned int i = 0; i < vec1.size(); i++ )
+        {
+            if( fabs(vec1(i)-vec2(i)) >= tol )
+            {
+                checkCorrect = false;
+                correctElements[i] = false;
+            }
+        }
+
+        if( !checkCorrect )
+        {
+            std::cerr << file << ":" << line << " : assertVectorAreEqual failure: " << std::endl;
+            printVector("vec1",vec1);
+            printVector("vec2",vec2);
+            printVectorDifference("vec1-vec2",vec1,vec2);
+            printVectorWrongElements("wrong el:",correctElements);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+   /**
+    * Assert that two matrices are equal, and
+    * exit with EXIT_FAILURE if they are not.
+    *
+    */
+    template<typename MatrixType1, typename MatrixType2>
+    void assertMatrixAreEqual(const MatrixType1& mat1, const MatrixType2& mat2, double tol, std::string file, int line)
+    {
+        if( mat1.rows() != mat2.rows() ||
+            mat2.cols() != mat1.cols() )
+        {
+            std::cerr << file << ":" << line << " : assertMatrixAreEqual failure: mat1 has size " << mat1.rows() << " " << mat1.cols()
+                    << " while mat2 has size " << mat2.rows() << " " << mat2.cols() << std::endl;
+            exit(EXIT_FAILURE);
+        }
+
+        std::vector< std::vector<bool> > correctElements(mat2.rows(), std::vector<bool>(mat1.cols(),true) );
+        bool checkCorrect = true;
+
+        for( unsigned int row = 0; row < mat2.rows(); row++ )
+        {
+            for( unsigned int col = 0; col < mat2.cols(); col++ )
+            {
+                if( fabs(mat1(row,col)-mat2(row,col)) >= tol )
+                {
+                    checkCorrect = false;
+                    correctElements[row][col] = false;
+                }
+            }
+        }
+
+        if( !checkCorrect )
+        {
+            std::cerr << file << ":" << line << " : assertMatrixAreEqual failure with tol " << tol << " : " << std::endl;
+            printMatrixWrongElements("wrong el:",correctElements);
+            //std::cerr << "percentage error : " << std::endl;
+            //printMatrixPercentageError(mat1,mat2);
+            exit(EXIT_FAILURE);
+        }
+
+    }
+
 
 }
 

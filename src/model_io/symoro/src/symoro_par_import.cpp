@@ -195,7 +195,11 @@ std::string int2string(const int in)
 template <class T>
 bool extract_vector(const std::string & vector_string, std::string vector_name, std::vector<T> & vec, const std::vector<string> variables=std::vector<string>(0), const std::vector<T> var_values=std::vector<T>(0))
 {
-    if( variables.size() != var_values.size() ) return false;
+    if( variables.size() != var_values.size() )
+    {
+        return false;
+    }
+    
     if( !contains(vector_string,"={") || !contains(vector_string,"}") ) return false;
 
 
@@ -375,8 +379,14 @@ bool parModelFromString(const string& _parfile_content, symoro_par_model & model
                 Theta_var_values[j-1] = 0.0;
             }
 
-            if( begins_with(all_vector,"Theta") ) {
-                if( !extract_vector<double>(all_vector,dummy_name,double_vec,Theta_var,Theta_var_values) ) return false;
+            if( begins_with(all_vector,"Theta") )
+            {
+                bool extractVectorSucces = extract_vector<double>(all_vector,dummy_name,double_vec,Theta_var,Theta_var_values);
+                if( !extractVectorSucces )
+                {
+                    return false;
+                }
+
                 model.Theta = double_vec;
                 continue;
             }

@@ -7,33 +7,39 @@ classdef SpatialInertia < iDynTree.SpatialInertiaRaw
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(444, varargin{:});
+        tmp = iDynTreeMEX(438, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
-    function delete(self)
-      if self.swigPtr
-        iDynTreeMEX(445, self);
-        self.swigPtr=[];
-      end
-    end
     function varargout = asMatrix(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(447, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(440, self, varargin{:});
     end
     function varargout = plus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(448, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(441, self, varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(449, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(442, self, varargin{:});
+    end
+    function varargout = biasWrench(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(443, self, varargin{:});
+    end
+    function varargout = biasWrenchDerivative(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(444, self, varargin{:});
+    end
+    function delete(self)
+      if self.swigPtr
+        iDynTreeMEX(446, self);
+        self.swigPtr=[];
+      end
     end
   end
   methods(Static)
     function varargout = combine(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(446, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(439, varargin{:});
     end
     function varargout = Zero(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(450, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(445, varargin{:});
     end
   end
 end

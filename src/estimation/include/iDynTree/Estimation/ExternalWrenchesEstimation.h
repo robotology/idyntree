@@ -40,7 +40,9 @@ class SensorsMeasurements;
 class SensorsList;
 class LinkVelArray;
 class LinkAccArray;
-class JointDoubleArray;
+class JointPosDoubleArray;
+class JointDOFsDoubleArray;
+
 
 /**
  * Type of a UnknownWrenchContact.
@@ -211,7 +213,7 @@ bool estimateExternalWrenches(const Model& model,
                               const SubModelDecomposition& subModels,
                               const SensorsList& sensors,
                               const LinkUnknownWrenchContacts & unknownWrenches,
-                              const IRawVector & jointPos,
+                              const JointPosDoubleArray & jointPos,
                               const LinkVelArray & linkVel,
                               const LinkAccArray & linkProperAcc,
                               const SensorsMeasurements & ftSensorsMeasurements,
@@ -263,9 +265,9 @@ bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
                                                const Vector3 & base_classicalProperAcc,
                                                const Vector3 & base_angularVel,
                                                const Vector3 & base_angularAcc,
-                                               const iDynTree::JointDoubleArray & jointPos,
-                                               const iDynTree::JointDoubleArray & jointVel,
-                                               const iDynTree::JointDoubleArray & jointAcc,
+                                               const iDynTree::JointPosDoubleArray & jointPos,
+                                               const iDynTree::JointDOFsDoubleArray & jointVel,
+                                               const iDynTree::JointDOFsDoubleArray & jointAcc,
                                                      iDynTree::LinkVelArray & linkVel,
                                                      iDynTree::LinkAccArray  & linkProperAcc);
 

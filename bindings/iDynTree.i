@@ -24,9 +24,9 @@
 /* Note : always include headers following the inheritance order */
 
 // Basic math classes
-#include "iDynTree/Core/IMatrix.h"
-#include "iDynTree/Core/IVector.h"
 #include "iDynTree/Core/MatrixDynSize.h"
+#include "iDynTree/Core/MatrixFixSize.h"
+
 #include "iDynTree/Core/VectorDynSize.h"
 #include "iDynTree/Core/VectorFixSize.h"
 
@@ -60,6 +60,7 @@
 #include "iDynTree/Core/Rotation.h"
 #include "iDynTree/Core/TransformSemantics.h"
 #include "iDynTree/Core/Transform.h"
+#include "iDynTree/Core/TransformDerivative.h"
 
 // Model related data structures
 #include "iDynTree/Model/Indeces.h"
@@ -97,8 +98,6 @@
 
 /* Note : always include headers following the inheritance order */
 // Basic math classes
-%include "iDynTree/Core/IMatrix.h"
-%include "iDynTree/Core/IVector.h"
 %include "iDynTree/Core/MatrixDynSize.h"
 %include "iDynTree/Core/MatrixFixSize.h"
 
@@ -193,6 +192,8 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Core/Rotation.h"
 %include "iDynTree/Core/TransformSemantics.h"
 %include "iDynTree/Core/Transform.h"
+%include "iDynTree/Core/TransformDerivative.h"
+
 
 // Model related data structures
 %include "iDynTree/Model/Indeces.h"

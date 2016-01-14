@@ -11,6 +11,7 @@
 #include <iDynTree/Model/Indeces.h>
 
 #include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/JointState.h>
 
 namespace iDynTree
 {
@@ -19,17 +20,16 @@ namespace iDynTree
     class FreeFloatingPos;
     class FreeFloatingVel;
     class FreeFloatingAcc;
-    class FreeFloatingAcc;
     class FreeFloatingGeneralizedTorques;
     class FreeFloatingMassMatrix;
-    class JointDoubleArray;
+    class JointDOFsDoubleArray;
     class DOFSpatialForceArray;
     class DOFSpatialMotionArray;
 
 
     bool RNEADynamicPhase(const iDynTree::Model & model,
                           const iDynTree::Traversal & traversal,
-                          const iDynTree::IRawVector & jointPos,
+                          const iDynTree::JointPosDoubleArray & jointPos,
                           const iDynTree::LinkVelArray & linksVel,
                           const iDynTree::LinkAccArray & linksAcc,
                           const iDynTree::LinkNetExternalWrenches & linkExtForces,
@@ -43,9 +43,55 @@ namespace iDynTree
      */
     bool CompositeRigidBodyAlgorithm(const Model& model,
                                      const Traversal& traversal,
-                                     const FreeFloatingPos& jointPos,
+                                     const JointPosDoubleArray& jointPos,
                                      LinkCompositeRigidBodyInertias& linkCRBs,
                                      FreeFloatingMassMatrix& massMatrix);
+
+
+    /**
+     * Structure of buffers required by ArticulatedBodyAlgorithm.
+     *
+     * As the ArticulatedBodyAlgorithm function needs some internal buffers
+     * to run, but we don't want to put memory allocation inside the ArticulatedBodyAlgorithm
+     * function, we put all the internal buffers in this structure.
+     *
+     * A convenient resize(Model) function is provided to automatically resize
+     * the buffers given a Model.
+     */
+    struct ArticulatedBodyAlgorithmInternalBuffers
+    {
+        ArticulatedBodyAlgorithmInternalBuffers() {};
+
+        /**
+         * Call resize(model);
+         */
+        ArticulatedBodyAlgorithmInternalBuffers(const Model & model);
+
+        /**
+         * Resize all the buffers to the right size given the model,
+         * and reset all the buffers to 0.
+         */
+        void resize(const Model& model);
+
+        /**
+         * Check if the dimension of the buffer is consistent
+         * with a model (it should be after a call to resize(model) ).
+         */
+        bool isConsistent(const Model& model);
+
+        DOFSpatialMotionArray S;
+        DOFSpatialForceArray U;
+        JointDOFsDoubleArray D;
+        JointDOFsDoubleArray u;
+        LinkVelArray linksVel;
+        LinkAccArray linksBiasAcceleration;
+        LinkAccArray linksAccelerations;
+        LinkArticulatedBodyInertias linkABIs;
+        LinkWrenches linksBiasWrench;
+
+        // Debug quantity
+        //LinkWrenches pa;
+    };
 
     /**
      * Compute the floating base acceleration of an unconstrianed
@@ -59,17 +105,11 @@ namespace iDynTree
                                   const FreeFloatingPos& robotPos,
                                   const FreeFloatingVel& robotVel,
                                   const LinkNetExternalWrenches & linkExtWrenches,
-                                  const JointDoubleArray & jointTorques,
-                                        DOFSpatialMotionArray & S,
-                                        DOFSpatialForceArray & U,
-                                        JointDoubleArray & D,
-                                        JointDoubleArray & u,
-                                        LinkVelArray & linksVel,
-                                        LinkAccArray & linksBiasAcceleration,
-                                        LinkAccArray & linksAccelerations,
-                                        LinkArticulatedBodyInertias & linkABIs,
-                                        LinkWrenches & linksBiasWrench,
+                                  const JointDOFsDoubleArray & jointTorques,
+                                        ArticulatedBodyAlgorithmInternalBuffers & buffers,
                                         FreeFloatingAcc & robotAcc);
+
+
 
 }
 

@@ -40,7 +40,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
 
     // Input for direct dynamics algorithms
     // and output for inverse dynamics : joint torques
-    JointDoubleArray ABA_jntTorques(model);
+    JointDOFsDoubleArray ABA_jntTorques(model);
 
     // Fill the input to forward dynamics with random data
     robotPos.worldBasePos() = getRandomTransform();
@@ -58,17 +58,9 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
     FreeFloatingAcc ABA_robotAcc(model);
 
     // Allocate temporary data structures for ABA
-    iDynTree::DOFSpatialMotionArray ABA_S(model);
-    iDynTree::DOFSpatialForceArray ABA_U(model);
-    iDynTree::JointDoubleArray ABA_D(model);
-    JointDoubleArray ABA_u(model);
-    iDynTree::LinkVelArray ABA_linksVel(model);
-    iDynTree::LinkAccArray ABA_linksBiasAcceleration(model);
-    ASSERT_EQUAL_DOUBLE(ABA_linksBiasAcceleration.getNrOfLinks(),model.getNrOfLinks());
-    LinkAccArray ABA_linksAcceleration(model);
-    ASSERT_EQUAL_DOUBLE(ABA_linksBiasAcceleration.getNrOfLinks(),model.getNrOfLinks());
-    LinkArticulatedBodyInertias linkABIs(model);
-    LinkWrenches linksBiasWrench(model);
+    iDynTree::ArticulatedBodyAlgorithmInternalBuffers ABAbufs(model);
+    ASSERT_EQUAL_DOUBLE(ABAbufs.linksBiasAcceleration.getNrOfLinks(),model.getNrOfLinks());
+
 
     // Run ABA
     ArticulatedBodyAlgorithm(model,
@@ -77,15 +69,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
                              robotVel,
                              linkExtWrenches,
                              ABA_jntTorques,
-                             ABA_S,
-                             ABA_U,
-                             ABA_D,
-                             ABA_u,
-                             ABA_linksVel,
-                             ABA_linksBiasAcceleration,
-                             ABA_linksAcceleration,
-                             linkABIs,
-                             linksBiasWrench,
+                             ABAbufs,
                              ABA_robotAcc);
 
     // Allocate temporary data structure for RNEA

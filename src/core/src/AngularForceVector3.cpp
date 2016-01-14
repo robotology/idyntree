@@ -9,6 +9,7 @@
 #include <iDynTree/Core/LinearForceVector3.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/PrivatePreProcessorUtils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
 
 #include <Eigen/Dense>
 
@@ -21,10 +22,6 @@ namespace iDynTree
      */
 
     // constructors
-    AngularForceVector3Semantics::AngularForceVector3Semantics()
-    {
-    }
-
     AngularForceVector3Semantics::AngularForceVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame):
     ForceVector3Semantics<AngularForceVector3Semantics>(_body, _refBody, _coordinateFrame),
     point(_point)
@@ -34,10 +31,6 @@ namespace iDynTree
     AngularForceVector3Semantics::AngularForceVector3Semantics(const AngularForceVector3Semantics & other):
     ForceVector3Semantics<AngularForceVector3Semantics>(other),
     point(other.point)
-    {
-    }
-
-    AngularForceVector3Semantics::~AngularForceVector3Semantics()
     {
     }
 
@@ -100,10 +93,6 @@ namespace iDynTree
      */
 
     // constructors
-    AngularForceVector3::AngularForceVector3()
-    {
-    }
-
     AngularForceVector3::AngularForceVector3(const double x, const double y, const double z)
     {
         this->m_data[0] = x;
@@ -118,10 +107,6 @@ namespace iDynTree
 
     AngularForceVector3::AngularForceVector3(const AngularForceVector3& other):
     ForceVector3<AngularForceVector3>(other)
-    {
-    }
-
-    AngularForceVector3::~AngularForceVector3()
     {
     }
 

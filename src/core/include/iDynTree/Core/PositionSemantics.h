@@ -38,11 +38,11 @@ namespace iDynTree
         static bool check_compose(const PositionSemantics & op1, const PositionSemantics & op2);
         static bool check_inverse(const PositionSemantics & op);
         ///@}
-        
+
 
     public:
         /**
-         * Default constructor: initialize all semantics to unknown;
+         * Default constructor: initialize all semantics to unknown if the semantics is enabled.
          */
         PositionSemantics();
 
@@ -58,9 +58,9 @@ namespace iDynTree
         PositionSemantics(const PositionSemantics & other);
 
         /**
-         * Denstructor
+         * Constructor helper: set all the info in this semantics class to UNKNOWN .
          */
-        ~PositionSemantics();
+        void setToUnknown();
 
         /**
          * @name Semantics setters and getters.
@@ -72,7 +72,7 @@ namespace iDynTree
         int getReferencePoint() const;
         int getRefBody() const;
         int getCoordinateFrame() const;
-        
+
         void setPoint(int _point);
         void setBody(int _body);
         void setReferencePoint(int _referencePoint);

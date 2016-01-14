@@ -333,6 +333,10 @@ namespace iDynTree
 
         /**
          * Get the default base link, used for generation of the default traversal.
+         *
+         * If no link are present in model, returns LINK_INVALID_INDEX.
+         * If setDefaultBaseLink was never called but at least a link has been added
+         * to the model, returns 0 (i.e. the index of the first link added to the model.
          */
         LinkIndex getDefaultBaseLink() const;
 

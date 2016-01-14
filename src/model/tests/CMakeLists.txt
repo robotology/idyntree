@@ -12,5 +12,6 @@ macro(add_unit_test classname)
     endif()
 endmacro()
 
+add_unit_test(Joint)
 add_unit_test(Link)
 add_unit_test(Model)

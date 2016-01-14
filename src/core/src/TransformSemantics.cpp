@@ -13,6 +13,7 @@
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/PrivatePreProcessorUtils.h>
+#include <iDynTree/Core/PrivateSemanticsMacros.h>
 
 
 #include <iostream>
@@ -25,11 +26,6 @@ namespace iDynTree
 
     TransformSemantics::TransformSemantics(PositionSemantics & position, RotationSemantics & rotation): positionSemantics(position),
                                                                                                         rotationSemantics(rotation)
-    {
-
-    }
-
-    TransformSemantics::~TransformSemantics()
     {
 
     }
@@ -59,22 +55,26 @@ namespace iDynTree
 
     bool TransformSemantics::setPositionSemantics(const PositionSemantics& position)
     {
+        bool status = true;
+
         // check consistency of setted position with existing rotation
-        bool status = this->check_position2rotationConsistency(position, this->getRotationSemantics());
+        iDynTreeSemanticsOp(status = this->check_position2rotationConsistency(position, this->getRotationSemantics()));
 
         // set semantics
-        this->positionSemantics = position;
+        iDynTreeSemanticsOp(this->positionSemantics = position);
 
         return status;
     }
 
     bool TransformSemantics::setRotationSemantics(const RotationSemantics& rotation)
     {
+        bool status = true;
+
         // check consistency of setted position with existing rotation
-        bool status = this->check_position2rotationConsistency(this->getPositionSemantics(), rotation);
+        iDynTreeSemanticsOp(status = this->check_position2rotationConsistency(this->getPositionSemantics(), rotation));
 
         // set semantics
-        this->rotationSemantics = rotation;
+        iDynTreeSemanticsOp(this->rotationSemantics = rotation);
 
         return status;
     }

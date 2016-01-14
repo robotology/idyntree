@@ -135,7 +135,7 @@ void iDynTree_print_velocity_acceleration(DynTree & icub_idyntree, const std::st
 
 void set_random_IMU_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree,
                              iDynTree::Vector3 & base_classicalProperAcc, iDynTree::Vector3 & base_angularVel, iDynTree::Vector3 & base_angularAcc,
-                             iDynTree::JointDoubleArray& jointPos, iDynTree::JointDoubleArray& jointVel, iDynTree::JointDoubleArray& jointAcc,
+                             iDynTree::JointPosDoubleArray& jointPos, iDynTree::JointDOFsDoubleArray& jointVel, iDynTree::JointDOFsDoubleArray& jointAcc,
                              double pos_c = 1.0, double vel_c = 1.0, double acc_c = 1.0
 )
 {
@@ -291,9 +291,9 @@ int main(int argc, char ** argv)
     iDynTree::Vector3 base_classicalProperAcc,base_angularVel,base_angularAcc;
 
     // position/velocity/acceleration
-    iDynTree::JointDoubleArray jointPos(model);
-    iDynTree::JointDoubleArray jointVel(model);
-    iDynTree::JointDoubleArray jointAcc(model);
+    iDynTree::JointPosDoubleArray jointPos(model);
+    iDynTree::JointDOFsDoubleArray jointVel(model);
+    iDynTree::JointDOFsDoubleArray jointAcc(model);
 
     // Data structures to encode the external forces
     iDynTree::LinkNetExternalWrenches netExternalWrenches(model);

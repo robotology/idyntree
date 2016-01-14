@@ -15,7 +15,7 @@ namespace iDynTree
     class PositionSemantics;
     class RotationSemantics;
     class Transform;
-    
+
     /**
      * Class providing the semantics for iDynTree::Transform class.
      *
@@ -30,23 +30,18 @@ namespace iDynTree
          * one, since TransformSemantics is only composed by references.
          */
         TransformSemantics & operator=(const TransformSemantics & other);
-        
+
     protected:
         PositionSemantics & positionSemantics;
         RotationSemantics & rotationSemantics;
 
         bool check_position2rotationConsistency(const PositionSemantics& position, const RotationSemantics& rotation);
-        
+
     public:
         /**
          * Constructor: initialize all semantics from a Transform object (create links)
          */
         TransformSemantics(PositionSemantics & position, RotationSemantics & rotation);
-
-        /**
-         * Destructor
-         */
-        virtual ~TransformSemantics();
 
 
         /**
@@ -86,7 +81,7 @@ namespace iDynTree
 
         std::string reservedToString() const;
         ///@}
-        
+
         friend class Transform;
     };
 }

@@ -29,11 +29,10 @@ namespace iDynTree
      *
      *
      */
-    bool ForwardPositionKinematics(const iDynTree::Model & model,
-                                   const iDynTree::Traversal & traversal,
-                                   const iDynTree::FreeFloatingPos & jointPos,
-                                         iDynTree::LinkPositions   & linkPos);
-
+    bool ForwardPositionKinematics(const Model & model,
+                                   const Traversal & traversal,
+                                   const FreeFloatingPos & jointPos,
+                                         LinkPositions   & linkPos);
 
     /**
      * Function that compute the links velocities and accelerations

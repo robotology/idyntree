@@ -14,10 +14,10 @@
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Utils.h>
 
-
 namespace iDynTree
 {
     class Transform;
+    class TransformDerivative;
     class Twist;
     class SpatialAcc;
     /**
@@ -47,7 +47,7 @@ namespace iDynTree
          * The data is not reset to the default for perfomance reason.
          * Please initialize the data in the class before any use.
          */
-        Axis();
+        inline Axis() {};
 
         /**
          * Constructor from a Direction and an origin, represented by a Position object.
@@ -58,11 +58,6 @@ namespace iDynTree
          * Copy constructor: create a Axis from another Axis
          */
         Axis(const Axis & other);
-
-        /**
-         * Destructor
-         */
-        virtual ~Axis();
 
          /**
          * Get the direction of the axis
@@ -93,6 +88,12 @@ namespace iDynTree
          * v_nonRotated = nonRotated_T_rotated*v_rotated
          */
         Transform getRotationTransform(const double theta) const;
+
+        /**
+         * Get the derivative of the getRotationTransform function with respect
+         * to the theta argument.
+         */
+        TransformDerivative getRotationTransformDerivative(const double theta) const;
 
         Twist getRotationTwist(const double dtheta) const;
 
