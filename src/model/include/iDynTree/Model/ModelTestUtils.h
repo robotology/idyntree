@@ -75,11 +75,16 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
     }
 }
 
-inline std::string getRandomLinkOfModel(const Model & model)
+inline LinkIndex getRandomLinkIndexOfModel(const Model & model)
 {
     int nrOfLinks = model.getNrOfLinks();
 
-    LinkIndex randomLink = rand() % nrOfLinks;
+    return rand() % nrOfLinks;
+}
+
+inline std::string getRandomLinkOfModel(const Model & model)
+{
+    LinkIndex randomLink = getRandomLinkIndexOfModel(model);
 
     return model.getLinkName(randomLink);
 }
