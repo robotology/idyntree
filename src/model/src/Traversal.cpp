@@ -105,4 +105,31 @@ bool Traversal::reset(const Model& model)
     return reset(model.getNrOfLinks());
 }
 
+bool Traversal::isParentOf(const LinkIndex parentCandidate,
+                           const LinkIndex childCandidate) const
+{
+    assert(childCandidate  < this->linkIndexToTraversalIndex.size());
+    assert(parentCandidate < this->linkIndexToTraversalIndex.size());
+    assert(childCandidate  >= 0);
+    assert(parentCandidate >= 0);
+
+    // If the childCandidate is not in the traversal, then clearly
+    // the parentCandidate is not its parent for this traversal
+    if( linkIndexToTraversalIndex[childCandidate] == -1 )
+    {
+        return false;
+    }
+
+    LinkConstPtr parentPtr = this->getParentLinkFromLinkIndex(childCandidate);
+    if( parentPtr == 0 )
+    {
+        return false;
+    }
+    else
+    {
+        return (this->getParentLinkFromLinkIndex(childCandidate)->getIndex() == parentCandidate);
+    }
+}
+
+
 }

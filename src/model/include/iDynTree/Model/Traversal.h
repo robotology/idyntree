@@ -161,6 +161,16 @@ namespace iDynTree
                                  const IJoint * jointToParent,
                                  const Link   * parentLink);
 
+        /**
+         * \brief Check if a link is the parent of another link for this traversal.
+         *
+         *
+         * @param[in] parentCandidate the link candidate to be the parent of childCandidate.
+         * @param[in] childCandidate  the link candidate to be a child of parentCandidate.
+         * @return true if parentCandidate is actually the parent of childCandidate, false otherwise.
+         */
+        bool isParentOf(const LinkIndex parentCandidate, const LinkIndex childCandidate) const;
+
     };
 
 
