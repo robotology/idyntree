@@ -50,7 +50,7 @@ VectorDynSize::VectorDynSize(const double* in_data,
     }
 }
 
-VectorDynSize::VectorDynSize(const VectorDynSize& vec): m_size(vec.size())
+VectorDynSize::VectorDynSize(const VectorDynSize& vec): m_size(vec.size()), m_capacity(vec.capacity())
 {
     if( this->m_size == 0 )
     {
@@ -58,8 +58,8 @@ VectorDynSize::VectorDynSize(const VectorDynSize& vec): m_size(vec.size())
     }
     else
     {
-        this->m_data = new double[this->m_size];
-        std::memcpy(this->m_data,vec.data(),this->m_size*sizeof(double));
+        this->m_data = new double[this->m_capacity];
+        std::memcpy(this->m_data,vec.data(),this->m_capacity*sizeof(double));
     }
 }
 
@@ -77,22 +77,7 @@ VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
     // if the size don't match, reallocate the data
     if( this->m_size != vec.size() )
     {
-        // Get the new size
-        this->m_size = vec.size();
-
-        // Destroy the data only if there is anything
-        if( this->m_data != 0 )
-        {
-             delete[] this->m_data;
-             this->m_data = 0;
-        }
-
-        // Actually allocate the data only if the size is not 0
-        if( this->m_size > 0 )
-        {
-            this->m_data = new double[this->m_size];
-        }
-
+        resize(vec.size());
     }
 
     // After reallocation, the size should match
@@ -221,7 +206,7 @@ void VectorDynSize::resize(const unsigned int _newSize)
     this->m_size = _newSize;
 }
 
-size_t VectorDynSize::capacity()
+size_t VectorDynSize::capacity() const
 {
     return this->m_capacity;
 }

@@ -156,7 +156,7 @@ namespace iDynTree
         /**
          * The buffer pointed by data() has size capacity()*sizeof(double)
          */
-        size_t capacity();
+        size_t capacity() const;
 
         /**
          * Assume that buf is pointing to
