@@ -376,8 +376,6 @@ int main(int argc, char ** argv)
         assert(sensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE) > i);
         ASSERT_EQUAL_STRING(ft_serialization[i],sensors.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,i)->getName());
         sensMeas.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,i,ft_sensor_idyntree);
-
-        std::cerr << ((iDynTree::SixAxisForceTorqueSensor*)sensors.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,i))->toString(model);
     }
 
     dynContactList input_contact_list, output_contact_list;

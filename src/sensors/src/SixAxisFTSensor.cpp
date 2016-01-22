@@ -279,8 +279,6 @@ Wrench SixAxisForceTorqueSensor::predictMeasurement(const Traversal& traversal, 
 
     //Check that the input size is consistent
     assert(this->isValid());
-    std::cerr << this->getFirstLinkIndex() << std::endl;
-    std::cerr << this->getSecondLinkIndex() << std::endl;
     assert(this->getFirstLinkIndex() >= 0 && this->getFirstLinkIndex() < traversal.getNrOfVisitedLinks());
     assert(this->getSecondLinkIndex() >= 0 && this->getSecondLinkIndex() < traversal.getNrOfVisitedLinks());
 

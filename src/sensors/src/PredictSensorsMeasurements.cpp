@@ -107,7 +107,6 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
     {
         SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)sensorsList.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
         Wrench predictedWrench = ftSens->predictMeasurement(traversal,buf_internalWrenches);
-        std::cerr << "Setting " << predictedWrench.toString() << std::endl;
         predictedMeasurement.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,idx,predictedWrench);
     }
 

@@ -157,12 +157,16 @@ public:
 struct estimateExternalWrenchesBuffers
 {
     estimateExternalWrenchesBuffers(const SubModelDecomposition& subModels);
+    estimateExternalWrenchesBuffers(const size_t nrOfSubModels, const size_t nrOfLinks);
 
     /**
      * Resize the struct for the number of submodel
      */
     void resize(const SubModelDecomposition& subModels);
     void resize(const size_t nrOfSubModels, const size_t nrOfLinks);
+
+    size_t getNrOfSubModels() const;
+    size_t getNrOfLinks() const;
 
     /**
      * Check if the buffer size are consistent with the submodel
@@ -195,8 +199,28 @@ struct estimateExternalWrenchesBuffers
 };
 
 /**
- * Estimate the external wrenches trasmitted by the contacts between the model and the external environment.
+ * \brief Estimate the external contact wrenches using the MultiBody Newton-Euler equations.
  *
+ * This function is used to estimate the external contacts forces **without** using any measurement
+ * of the internal FT sensors. It is tipically used to get data for calibrating the offset of
+ * the internal FT sensors.
+ */
+bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
+                                               const Traversal& traversal,
+                                               const LinkUnknownWrenchContacts & unknownWrenches,
+                                               const JointPosDoubleArray & jointPos,
+                                               const LinkVelArray & linkVel,
+                                               const LinkAccArray & linkProperAcc,
+                                                     estimateExternalWrenchesBuffers & bufs,
+                                                     LinkContactWrenches & outputContactWrenches);
+
+/**
+ * \brief Estimate the external wrenches trasmitted by the contacts between the model and the external environment.
+ *
+ * This function exploits the measurements of internal FT sensors (whose structure is contained
+ * in the sensors parameters and which measurements are contained in the ftSensorsMeasurements
+ * parameters) to compute an estimation of the values of the unknown wrenches specified in the
+ * unknownWrenches parameter.
  *
  * @param[in] model the considered model.
  * @param[in] subModels a decomposition of the model along the joint of the six axis F/T sensors.

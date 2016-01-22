@@ -120,7 +120,6 @@ bool findJointParentsAndChild(TiXmlElement* robotXml,
                 }
                 else
                 {
-                    std::cerr << "pname is " << pname << std::endl;
                     childLinkName = std::string(pname);
                 }
             }
