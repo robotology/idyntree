@@ -287,9 +287,9 @@ bool TorqueEstimationTree::generateSensorsTree(const std::vector<std::string> & 
             //Set the sensor name (for the time being equal to the junction name)
             new_sens.setName(ft_names[i]);
             //Set the junction name
-            new_sens.setParent(ft_names[i]);
+            new_sens.setParentJoint(ft_names[i]);
             int junction_index = this->undirected_tree.getJunction(ft_names[i])->getJunctionIndex();
-            new_sens.setParentIndex(junction_index);
+            new_sens.setParentJointIndex(junction_index);
             KDL::CoDyCo::JunctionMap::const_iterator junct_it = this->undirected_tree.getJunction(ft_names[i]);
 
             int parent_index = junct_it->getParentLink()->getLinkIndex();
@@ -1025,7 +1025,7 @@ int TorqueEstimationTree::getFTSensorIndex(const std::string & ft_name) const
         ::iDynTree::SixAxisForceTorqueSensor * p_ft_sensor =
                 dynamic_cast< ::iDynTree::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft));
         assert(p_ft_sensor != 0);
-        int ft_junction_index = p_ft_sensor->getParentIndex();
+        int ft_junction_index = p_ft_sensor->getParentJointIndex();
         if( ft_junction_index == junction_index )
         {
             return ft;

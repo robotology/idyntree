@@ -14,6 +14,7 @@ namespace iDynTree
 {
 
 class SensorsList;
+class Model;
 
 /**
  * Load a iDynTree::SensorsList object from a URDF file.
@@ -27,8 +28,12 @@ class SensorsList;
  *
  * @return true if all went ok, false otherwise.
  */
-bool genericSensorsListFromURDF(const std::string & urdf_filename,
-                                iDynTree::SensorsList & output);
+bool sensorsFromURDF(const std::string & urdf_filename,
+                     iDynTree::SensorsList & output);
+
+bool sensorsFromURDF(const std::string & urdf_filename,
+                     const Model & model,
+                     iDynTree::SensorsList & output);
 
 /**
  * Load a iDynTree::SensorsList object from a URDF string.
@@ -38,8 +43,8 @@ bool genericSensorsListFromURDF(const std::string & urdf_filename,
  *
  * @return true if all went ok, false otherwise.
  */
-bool genericSensorsListFromURDFString(const std::string & urdf_string,
-                               iDynTree::SensorsList & output);
+bool sensorsFromURDFString(const std::string & urdf_string,
+                       iDynTree::SensorsList & output);
 
 }
 

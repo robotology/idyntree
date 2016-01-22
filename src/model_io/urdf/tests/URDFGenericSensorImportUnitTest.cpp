@@ -22,7 +22,7 @@ void checkURDF(std::string fileName,
                unsigned int expectedNrOfGyroscopes)
 {
     iDynTree::SensorsList sensorList;
-    iDynTree::genericSensorsListFromURDF(fileName,sensorList);
+    iDynTree::sensorsFromURDF(fileName,sensorList);
 
     std::cout<<"Sensor list created from URDF. num accel : "<<sensorList.getNrOfSensors(iDynTree::ACCELEROMETER)
     <<", num gyro : "<<sensorList.getNrOfSensors(iDynTree::GYROSCOPE)<<std::endl;

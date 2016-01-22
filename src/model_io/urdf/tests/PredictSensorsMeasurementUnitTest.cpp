@@ -45,7 +45,7 @@ void init(std::string fileName, Model &model, Traversal &traversal,
     ASSERT_EQUAL_DOUBLE(ok,true);
 
     // Load sensorList
-    genericSensorsListFromURDF(fileName,sensorsList);
+    sensorsFromURDF(fileName,sensorsList);
 
     ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(ACCELEROMETER),2);
     ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(GYROSCOPE),1);
@@ -61,11 +61,15 @@ void runTest(const int& expID,const Model& model,const Traversal& traversal,
     FreeFloatingVel robotVel(model);
     FreeFloatingAcc robotAcc(model);
     LinAcceleration gravity(0,0,0);
+    LinkNetExternalWrenches externalWrenches(model);
+
 
     iDynTree::FreeFloatingAcc buf_properRobotAcc(model);
     iDynTree::LinkPositions buf_linkPos(model);
     iDynTree::LinkVelArray buf_linkVel(model);
     iDynTree::LinkAccArray buf_linkAcc(model);
+    LinkInternalWrenches   buf_internalWrenches(model);
+    FreeFloatingGeneralizedTorques buf_generalizedTorques(model);
 
     LinAcceleration accl1(0,0,0),accl2(0,0,0);
     AngVelocity gyro1(0,0,0);
@@ -91,16 +95,16 @@ void runTest(const int& expID,const Model& model,const Traversal& traversal,
                 robotAcc.jointAcc()(0) = acclTestVal;
                 break;
     }
-    
+
     predictSensorsMeasurements(model,sensorsList,
-                               traversal,robotPos,robotVel,robotAcc,gravity,
-                               buf_properRobotAcc,buf_linkPos,buf_linkVel,buf_linkAcc,
-                               predictedMeasurement);
+                               traversal,robotPos,robotVel,robotAcc,gravity,externalWrenches,
+                               buf_properRobotAcc,buf_linkPos,buf_linkVel,buf_linkAcc,buf_internalWrenches,
+                               buf_generalizedTorques,predictedMeasurement);
 
     predictedMeasurement.getMeasurement(ACCELEROMETER,0,accl1);
     predictedMeasurement.getMeasurement(ACCELEROMETER,1,accl2);
     predictedMeasurement.getMeasurement(GYROSCOPE,0,gyro1);
-    
+
     VectorDynSize measurementVect;
     bool ok = predictedMeasurement.toVector(measurementVect);
     std::cout<<"Predicted Measurement (accl1): " <<accl1.toString()<<"\n";
@@ -142,7 +146,7 @@ int main()
     SensorsList sensorsList;
     SensorsMeasurements predictedMeasurement;
     init(fileName, model,traversal,sensorsList,predictedMeasurement);
-    
+
     //experiments 1-accelerometer gravity test, 2-angularVelocity test, 3-angularAccelerationTest
 
     for(int expID=1;expID<4;expID++)

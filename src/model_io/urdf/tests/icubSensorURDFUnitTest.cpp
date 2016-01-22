@@ -24,7 +24,9 @@ using namespace iDynTree;
 
 void checkURDF(std::string fileName,
                unsigned int expectedNrOfAccelerometers,
-               unsigned int expectedNrOfGyroscopes)
+               unsigned int expectedNrOfGyroscopes,
+               unsigned int expectedNrOfFTSensors
+              )
 {
     std::cout<<"Tying to load model from URDF"<<std::endl;
     Model model;
@@ -34,10 +36,10 @@ void checkURDF(std::string fileName,
     std::cout<<"Model "<<fileName.c_str()<<" created with :"<<model.getNrOfDOFs()<<" DoFs"<<std::endl;
 
     iDynTree::SensorsList sensorList;
-    ok = iDynTree::genericSensorsListFromURDF(fileName,sensorList);
+    ok = iDynTree::sensorsFromURDF(fileName,sensorList);
     ASSERT_EQUAL_DOUBLE(ok,true);
     std::cout<<"Sensor list created from URDF. num accel : "<<sensorList.getNrOfSensors(ACCELEROMETER)<<", num gyro : "<<sensorList.getNrOfSensors(iDynTree::GYROSCOPE)<<std::endl;
-   
+
     std::cout<<"Accelerometer Sensors in URDF :\n";
     for (int i  = 0; i<sensorList.getNrOfSensors(ACCELEROMETER);i++)
     {
@@ -54,15 +56,16 @@ void checkURDF(std::string fileName,
     }
      ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::ACCELEROMETER),expectedNrOfAccelerometers);
      ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::GYROSCOPE),expectedNrOfGyroscopes);
+     ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),expectedNrOfFTSensors);
 }
 
 
 
 int main()
 {
-    std::cout<<"iCub Sensor test running:\n";    
-    checkURDF(getAbsModelPath("/icub_sensorised.urdf"),53,11);
-    
+    std::cout<<"iCub Sensor test running:\n";
+    checkURDF(getAbsModelPath("/icub_sensorised.urdf"),53,11,6);
+
     std::cout <<"iCub Sensor test just ran\n";
     return 0;
 }

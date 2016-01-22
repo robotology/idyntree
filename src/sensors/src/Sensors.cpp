@@ -45,6 +45,15 @@ Sensor::~Sensor()
 
 }
 
+JointSensor::~JointSensor()
+{
+
+}
+
+LinkSensor::~LinkSensor()
+{
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 ///// SensorList
@@ -142,6 +151,44 @@ int SensorsList::addSensor(const Sensor& sensor)
     this->pimpl->NamesSensors[newSensor->getSensorType()].insert(std::pair<std::string,int>(newSensor->getName(),new_index));
 
     return new_index;
+}
+
+bool SensorsList::getSerialization(const SensorType& sensor_type, std::vector< std::string >& serializaton)
+{
+    serializaton.resize(0);
+    for(unsigned int sensor_index = 0;
+        sensor_index < this->pimpl->VecSensors[sensor_type].size(); sensor_index++ )
+    {
+        std::string sensorName = this->pimpl->VecSensors[sensor_type][sensor_index]->getName();
+        serializaton.push_back(sensorName);
+    }
+
+    return true;
+}
+
+bool SensorsList::setSerialization(const SensorType& sensor_type,
+                                   const std::vector< std::string >& serializaton)
+{
+    if( serializaton.size() != this->getNrOfSensors(sensor_type) )
+    {
+         std::cerr << "[ERROR] SensorsTree::setSerialization error : wrong size of serializaton vector" << std::endl;
+         return false;
+    }
+
+    std::vector<Sensor *> newVecSensors(serializaton.size());
+
+    for(size_t i=0; i < serializaton.size(); i++ )
+    {
+        int oldSensIndex = getSensorIndex(sensor_type,serializaton[i]);
+        if( oldSensIndex == -1 )
+        {
+            std::cerr << "[ERROR] SensorsTree::setSerialization error : sensor " << serializaton[i] << " not found in sensor list." << std::endl;
+            return false;
+        }
+        newVecSensors[i] = this->getSensor(sensor_type,oldSensIndex);
+    }
+
+    this->pimpl->VecSensors[sensor_type] = newVecSensors;
 }
 
 unsigned int SensorsList::getNrOfSensors(const SensorType & sensor_type) const

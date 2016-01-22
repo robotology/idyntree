@@ -23,9 +23,14 @@ namespace iDynTree
 {
     class Transform;
     class Wrench;
+    class Traversal;
+    class Model;
 }
 
+
 #include <iDynTree/Sensors/Sensors.h>
+
+#include <iDynTree/Model/LinkState.h>
 
 #include <vector>
 
@@ -35,9 +40,9 @@ namespace iDynTree {
     /**
      * A six axis force torque sensor class implementation of the Sensor.
      *
-     * \ingroup iDynTreeSensors 
+     * \ingroup iDynTreeSensors
      */
-    class SixAxisForceTorqueSensor: public Sensor {
+    class SixAxisForceTorqueSensor: public JointSensor {
     private:
         struct SixAxisForceTorqueSensorPrivateAttributes;
         SixAxisForceTorqueSensorPrivateAttributes * pimpl;
@@ -117,15 +122,11 @@ namespace iDynTree {
          */
         std::string getSecondLinkName() const;
 
-        /**
-         * Documented in Sensor
-         */
-        bool setParent(const std::string &parent);
+        // Documented in JointSensor
+        bool setParentJoint(const std::string &parent);
 
-        /**
-         * Documented in Sensor
-         */
-        bool setParentIndex(const int &parent_index);
+        // Documented in JointSensor
+        bool setParentJointIndex(const int &parent_index);
 
         /**
          * The Six Axis Force Torque sensor measure the Force Torque (wrench)
@@ -146,16 +147,11 @@ namespace iDynTree {
          */
         SensorType getSensorType() const;
 
+        // Documented in JontSensor
+        std::string getParentJoint() const;
 
-        /**
-         * Documented in Sensor
-         */
-        std::string getParent() const;
-
-        /**
-         * Documented in Sensor
-         */
-        int getParentIndex() const;
+        // Documented in JointSensor
+        JointIndex getParentJointIndex() const;
 
         /**
          * Documented in Sensor
@@ -193,11 +189,27 @@ namespace iDynTree {
         /**
          * Get wrench applied on the specified link expressed in the specified link frame.
          *
+         * If the F/T sensors is not connected to link_index, the function will return false
+         * and the wrench_applied_on_link will be zeroed.
+         *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
         bool getWrenchAppliedOnLink(const int link_index,
                                     const iDynTree::Wrench & measured_wrench,
                                     iDynTree::Wrench & wrench_applied_on_link ) const;
+
+        /**
+         * Predict sensor measurement when given a vector of internal wrenches
+         * computed with a given traversal.
+         *
+         * @return the predicted Measurement
+         */
+        iDynTree::Wrench predictMeasurement(const Traversal& traversal, const LinkInternalWrenches & intWrenches);
+
+        /**
+         *
+         */
+        std::string toString(const Model & model) const;
 
     };
 

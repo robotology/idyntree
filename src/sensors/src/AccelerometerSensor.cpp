@@ -87,25 +87,25 @@ bool AccelerometerSensor::setLinkSensorTransform(const iDynTree::Transform& link
 }
 
 
-bool AccelerometerSensor::setParent(const std::string& parent)
+bool AccelerometerSensor::setParentLink(const std::string& parent)
 {
     this->pimpl->parent_link_name = parent;
     return true;
 }
 
-bool AccelerometerSensor::setParentIndex(const int &parent_index)
+bool AccelerometerSensor::setParentLinkIndex(const LinkIndex &parent_index)
 {
     this->pimpl->parent_link_index = parent_index;
     return true;
 
 }
 
-std::string AccelerometerSensor::getParent() const
+std::string AccelerometerSensor::getParentLink() const
 {
     return(this->pimpl->parent_link_name);
 }
 
-int AccelerometerSensor::getParentIndex() const
+int AccelerometerSensor::getParentLinkIndex() const
 {
     return(this->pimpl->parent_link_index);
 }

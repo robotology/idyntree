@@ -268,7 +268,7 @@ int getFTIndexFromJunctionIndex(const iDynTree::SensorsList & sensors_tree,
 
         assert(sens != 0);
 
-        if( sens->getParentIndex() == junction_id )
+        if( sens->getParentJointIndex() == junction_id )
         {
             return ft;
         }

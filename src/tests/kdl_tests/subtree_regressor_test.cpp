@@ -49,9 +49,9 @@ iDynTree::SensorsList generateSensorsTree(const KDL::CoDyCo::UndirectedTree & un
             //Set the sensor name (for the time being equal to the junction name)
             new_sens.setName(ft_names[i]);
             //Set the junction name
-            new_sens.setParent(ft_names[i]);
+            new_sens.setParentJoint(ft_names[i]);
             int junction_index = undirected_tree.getJunction(ft_names[i])->getJunctionIndex();
-            new_sens.setParentIndex(junction_index);
+            new_sens.setParentJointIndex(junction_index);
             KDL::CoDyCo::JunctionMap::const_iterator junct_it = undirected_tree.getJunction(ft_names[i]);
 
             int parent_index = junct_it->getParentLink()->getLinkIndex();

@@ -25,6 +25,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <boost/concept_check.hpp>
 
 namespace iDynTree
 {
@@ -63,101 +64,138 @@ std::vector<std::string> &splitString(const std::string &s, std::vector<std::str
     return elems;
 }
 
-bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<GenericSensorData> & genericSensors)
+bool findJointParentsAndChild(TiXmlElement* robotXml,
+                              const std::string queriedJointName,
+                              std::string & parentLinkName,
+                              std::string & childLinkName)
 {
-    genericSensors.resize(0);
+    for (TiXmlElement* joint_xml = robotXml->FirstChildElement("joint");
+         joint_xml; joint_xml = joint_xml->NextSiblingElement("joint"))
+    {
+        IJointPtr joint=0;
+        std::string jointName;
 
-    bool returnVal = true;
+        const char *name = joint_xml->Attribute("name");
+        if (!name)
+        {
+            reportError("","findJointParentsAndChild","unnamed joint found");
+            return false;
+        }
+        jointName = name;
 
-    std::cerr << urdfXml << std::endl;
+        if( jointName == queriedJointName )
+        {
+            TiXmlElement *parent_xml = joint_xml->FirstChildElement("parent");
+            if (parent_xml)
+            {
+                const char *pname = parent_xml->Attribute("link");
+                if (!pname)
+                {
+                    std::string errStr = "No parent specified for joint " + jointName;
+                    reportError("","findJointParentsAndChild",errStr.c_str());
+                    return false;
+                }
+                else
+                {
+                    parentLinkName = std::string(pname);
+                }
+            }
+            else
+            {
+                std::string errStr = "No parent specified for joint " + jointName;
+                reportError("","findJointParentsAndChild",errStr.c_str());
+                return false;
+            }
 
-    /* parse sdf force_torque extension to urdf */
+            // Get Child Link
+            TiXmlElement *child_xml = joint_xml->FirstChildElement("child");
+            if (child_xml)
+            {
+                const char *pname = child_xml->Attribute("link");
+                if (!pname)
+                {
+                    std::string errStr = "No child specified for joint " + jointName;
+                    reportError("","findJointParentsAndChild",errStr.c_str());
+                    return false;
+                }
+                else
+                {
+                    std::cerr << "pname is " << pname << std::endl;
+                    childLinkName = std::string(pname);
+                }
+            }
+            else
+            {
+                std::string errStr = "No child specified for joint " + jointName;
+                reportError("","findJointParentsAndChild",errStr.c_str());
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    std::string errStr = "Joint " + queriedJointName + " not found in the model.";
+    reportError("","findJointParentsAndChild",errStr.c_str());
+    return false;
+}
+
+bool sensorsFromURDFString(const std::string& urdfXml,
+                           const Model & model,
+                           SensorsList & outputSensors)
+{
+    SensorsList newSensors;
+
+    bool parsingSuccessful = true;
+
+    /* parse custon  urdf */
     TiXmlDocument tiUrdfXml;
     tiUrdfXml.Parse(urdfXml.c_str());
 
     TiXmlElement* robotXml = tiUrdfXml.FirstChildElement("robot");
 
-    // Get all SDF extension elements and search for the sensors
+    // Get all the sensors elements of robot element
     for (TiXmlElement* sensorXml = robotXml->FirstChildElement("sensor");
          sensorXml; sensorXml = sensorXml->NextSiblingElement("sensor"))
     {
-        GenericSensorData newGenericSensor;
-
-        if(sensorXml->Attribute("name")==NULL || sensorXml->Attribute("type")==NULL)
+        if( sensorXml->Attribute("name")==NULL ||
+            sensorXml->Attribute("type")==NULL )
         {
-            std::cerr<<"Sensor name or type specified incorrectly \n";
-            returnVal = false;
-            break;
+            std::cerr << "[ERROR] Sensor name or type specified incorrectly." << std::endl;
+            parsingSuccessful = false;
+            return false;
         }
+
+        // Parse sensors name
         std::string  sensorName(sensorXml->Attribute("name"));
 
-        newGenericSensor.sensorName = sensorName;
+        // Parse sensor type
         std::string sensorType(sensorXml->Attribute("type"));
+
+        iDynTree::SensorType type;
 
         if(sensorType.compare("accelerometer") == 0)
         {
-            newGenericSensor.sensorType = ACCELEROMETER;
+            type = ACCELEROMETER;
         }
         else if(sensorType.compare("gyroscope") == 0)
         {
-            newGenericSensor.sensorType = GYROSCOPE;
-        }else if(sensorType.compare("force_torque") == 0)
-        {
-            newGenericSensor.sensorType = SIX_AXIS_FORCE_TORQUE;
-        }else
-        {
-            std::cerr<<"Specified sensor type "<<sensorType<<" is not recognised\n";
-            returnVal = false;
-            break;
+            type = GYROSCOPE;
         }
-
-        TiXmlElement* updateRate = sensorXml->FirstChildElement("update_rate");
-        if(updateRate)
+        else if(sensorType.compare("force_torque") == 0)
         {
-            std::string updateRateString = updateRate->GetText();
-            newGenericSensor.updateRate =atoi(updateRateString.c_str());
+            type = SIX_AXIS_FORCE_TORQUE;
         }
         else
         {
-            // default value
-            newGenericSensor.updateRate =100;
-        }
-        TiXmlElement* parent = sensorXml->FirstChildElement("parent");
-
-        std::string linkOption, jointOption;
-
-        if(!parent)
-        {
-            std::cerr<<"parent object not found \n";
-            returnVal = false;
-            break;
-        }
-        if(parent->Attribute("link")!= NULL)
-        {
-            linkOption = std::string(parent->Attribute("link"));
-        }
-        else if(parent->Attribute("joint")!=NULL)
-        {
-            jointOption = std::string(parent->Attribute("joint"));
-        }
-        else
-        {
-                std::cerr<<"link or joint attribute for parent object not found \n";
-                returnVal = false;
-                break;
+            std::cerr<<"[ERROR] Specified sensor type "<<sensorType<<" of " << sensorName <<
+                       " is not recognised, parsing failed.";
+            parsingSuccessful = false;
+            return false;
         }
 
-        if(!linkOption.empty())
-        {
-              newGenericSensor.parentObject = iDynTree::GenericSensorData::LINK;
-              newGenericSensor.parentObjectName = linkOption;
-        }
-        else
-        {
-              newGenericSensor.parentObject = iDynTree::GenericSensorData::JOINT;
-              newGenericSensor.parentObjectName = jointOption;
-        }
-
+        // Parse origin element
+        Transform link_H_pose;
         TiXmlElement* originTag = sensorXml->FirstChildElement("origin");
         if( originTag )
         {
@@ -171,8 +209,9 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
 
             if( rpyElems.size() != 3 && xyzElems.size() !=3 )
             {
-                std::cerr<<"Pose attribute for sensor specified incorrectly";
-               returnVal = false;
+               std::cerr<<"[ERROR] Pose attribute for sensor " << sensorName << " specified incorrectly, parsing failed.";
+               parsingSuccessful = false;
+               return false;
             }
             double roll  = atof(rpyElems[0].c_str());
             double pitch = atof(rpyElems[1].c_str());
@@ -182,123 +221,289 @@ bool genericSensorsFromUrdfString(const std::string& urdfXml, std::vector<Generi
             double y = atof(xyzElems[1].c_str());
             double z   = atof(xyzElems[2].c_str());
             iDynTree::Position pos(x,y,z);
-            newGenericSensor.sensorPose = iDynTree::Transform(rot,pos);
+            link_H_pose = iDynTree::Transform(rot,pos);
         }
         else
         {
             // default value
-            newGenericSensor.sensorPose = iDynTree::Transform::Identity();
+            link_H_pose = iDynTree::Transform::Identity();
         }
 
-        genericSensors.push_back(newGenericSensor);
+        // Parse parent element
+        TiXmlElement* parent = sensorXml->FirstChildElement("parent");
 
-    }
+        std::string parentLink, parentJoint;
+        JointIndex parentJointIndex = JOINT_INVALID_INDEX;
+        LinkIndex  parentLinkIndex  = LINK_INVALID_INDEX;
 
-    return returnVal;
-}
-
-
-bool genericSensorsFromUrdfFile(const std::string& file, std::vector<GenericSensorData> & generic_sensors)
-{
-    std::ifstream ifs(file.c_str());
-    std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
-                       (std::istreambuf_iterator<char>()    ) );
-
-    return genericSensorsFromUrdfString(xml_string,generic_sensors);
-}
-
-bool genericSensorsListFromURDFString(iDynTree::Model & undirectedTree,
-                                      std::string urdfString,
-                                      SensorsList& sensors)
-{
-    SensorsList sensorsTree;
-    std::vector<iDynTree::GenericSensorData> genericSensors;
-
-    bool ok = iDynTree::genericSensorsFromUrdfString(urdfString,genericSensors);
-
-    if( !ok )
-    {
-        std::cerr << "[ERROR] loading generic sensors information from URDF file" << std::endl;
-        return ok;
-    }
-
-    for(size_t genSensItr = 0; genSensItr < genericSensors.size(); genSensItr++ )
-    {
-        iDynTree::Sensor *newSensor = 0;
-        switch(genericSensors[genSensItr].sensorType)
+        if(!parent)
         {
-            case iDynTree::SIX_AXIS_FORCE_TORQUE :
-                {
-                    iDynTree::SixAxisForceTorqueSensor *newFTSensor = new(iDynTree::SixAxisForceTorqueSensor);
-                    newSensor = (Sensor *)newFTSensor;
-                }
-                break;
-            case iDynTree::ACCELEROMETER :
-                {
-                    iDynTree::AccelerometerSensor *newAccelerometerSens = new(iDynTree::AccelerometerSensor);
-                    newAccelerometerSens->setLinkSensorTransform(genericSensors[genSensItr].sensorPose);
-                    newSensor = (Sensor *)newAccelerometerSens;
-                }
-                break;
-            case iDynTree::GYROSCOPE :
-                {
-                    iDynTree::GyroscopeSensor *newGyroscopeSens = new(iDynTree::GyroscopeSensor);
-                    newGyroscopeSens->setLinkSensorTransform(genericSensors[genSensItr].sensorPose);
-                    newSensor = (Sensor*)newGyroscopeSens;
-                }
-                break;
+            std::cerr<< "[ERROR] parent element not found in sensor " << sensorName <<
+                        ", parsing failed." << std::endl;
+            parsingSuccessful = false;
+            return false;
         }
 
+        if(parent->Attribute("link")!= NULL)
+        {
+            parentLink = std::string(parent->Attribute("link"));
+            parentLinkIndex = model.getLinkIndex(parentLink);
 
-        // setting the parent object (junction / link) names
-        newSensor->setName(genericSensors[genSensItr].sensorName);
-        newSensor->setParent(genericSensors[genSensItr].parentObjectName);
+            if( parentLinkIndex == LINK_INVALID_INDEX )
+            {
+               std::cerr<< "[ERROR] sensor " << sensorName
+                         << " has parent link " << parentLink
+                         << " but the link is not found on the model, parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
 
-       //setting the parent index by obtaining from the undirected tree
-       // first version only for links not junctions
+            if( type == SIX_AXIS_FORCE_TORQUE )
+            {
+                std::cerr<< "[ERROR] sensor " << sensorName
+                         << " of type force_torque cannot be child of a link "
+                         << ", parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
+        }
+        else if(parent->Attribute("joint")!=NULL)
+        {
+            parentJoint = std::string(parent->Attribute("joint"));
 
-       if(genericSensors[genSensItr].parentObject == iDynTree::GenericSensorData::LINK)
-       {
-           // TODO \todo Actually report and error to the user
-           iDynTree::LinkIndex parentLinkIndex = undirectedTree.getLinkIndex(newSensor->getParent());
+            parentJointIndex = model.getJointIndex(parentJoint);
 
-           if( parentLinkIndex == LINK_INVALID_INDEX )
-           {
-               std::cerr << "[ERROR] impossible to find link " << newSensor->getParent() << " in the model" << std::endl;
-               return false;
-           }
+            if( parentJointIndex == JOINT_INVALID_INDEX )
+            {
+               std::cerr<< "[ERROR] sensor " << sensorName
+                         << " has parent joint " << parentJoint
+                         << " but the joint is not found on the model, parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
 
-           newSensor->setParentIndex(parentLinkIndex);
-       }
-       else
-       {
-           std::cerr<<"[ERROR] obtaining parent junction index not yet implemented, initial version only for link based sensors like accelerometer and gyroscopes\n";
+            if( type == GYROSCOPE )
+            {
+                std::cerr<< "[ERROR] sensor " << sensorName
+                         << " of type gyroscope cannot be child of a joint "
+                         << ", parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
+
+            if( type == ACCELEROMETER )
+            {
+                std::cerr<< "[ERROR] sensor " << sensorName
+                         << " of type accelerometer cannot be child of a joint "
+                         << ", parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
+        }
+        else
+        {
+            std::cerr << "[ERROR] Link or Joint attribute for parent element not found in sensor "
+                      << sensorName << ", parsing failed." << std::endl;
+            parsingSuccessful = false;
+            return false;
+        }
+
+        // Actually allocate the sensors
+        if( type == SIX_AXIS_FORCE_TORQUE )
+        {
+            // parse frame
+            enum { PARENT_LINK_FRAME ,
+                   CHILD_LINK_FRAME  ,
+                    SENSOR_FRAME } frame_type;
+
+            enum { PARENT_TO_CHILD,
+                   CHILD_TO_PARENT } measure_direction_type;
+
+            TiXmlElement* force_torque = sensorXml->FirstChildElement("force_torque");
+
+            if( !force_torque )
+            {
+                std::cerr<< "[ERROR] sensor " << sensorName
+                         << " of type force_torque is missing force_torque element "
+                         << ", parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
+
+            TiXmlElement* frame_el = force_torque->FirstChildElement("frame");
+            TiXmlElement* measure_direction_el = force_torque->FirstChildElement("measure_direction");
+
+            // parse frame
+            if( !frame_el || !measure_direction_el )
+            {
+                std::cerr<< "[ERROR] sensor " << sensorName
+                         << " of type force_torque is missing frame or measure_direction element "
+                         << ", parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
+
+            std::string frame = frame_el->GetText();
+            if( frame == "child" )
+            {
+                frame_type = CHILD_LINK_FRAME;
+            }
+            else if( frame == "parent" )
+            {
+                frame_type = PARENT_LINK_FRAME;
+            }
+            else if( frame == "sensor" )
+            {
+                frame_type = SENSOR_FRAME;
+            }
+            else
+            {
+                std::cerr<< "[ERROR] sensor " << sensorName
+                         << " of type force_torque has unexpected frame content " << frame
+                         << ", parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
+
+            std::string measure_direction = measure_direction_el->GetText();
+            if( measure_direction == "parent_to_child" )
+            {
+                measure_direction_type = PARENT_TO_CHILD;
+            }
+            else if( measure_direction == "child_to_parent" )
+            {
+                measure_direction_type = CHILD_TO_PARENT;
+            }
+            else
+            {
+                std::cerr<< "[ERROR] sensor " << sensorName
+                         << " of type force_torque has unexpected measure_direction content " << measure_direction
+                         << ", parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
+
+            // Get parent and child links of the joint to which the FT sensor is attached
+            std::string parentLinkName, childLinkName;
+            bool ok = findJointParentsAndChild(robotXml,parentJoint,parentLinkName,childLinkName);
+
+            if( !ok )
+            {
+                parsingSuccessful = false;
+                return false;
+            }
+
+            LinkIndex parentLinkIndex = model.getLinkIndex(parentLinkName);
+            LinkIndex childLinkIndex  = model.getLinkIndex(childLinkName);
+
+            if( parentLinkIndex == LINK_INVALID_INDEX ||
+                childLinkIndex  == LINK_INVALID_INDEX )
+            {
+                std::cerr<< "[ERROR] link " << parentLinkName << " or " << childLinkName
+                         << " not found when parsing sensor " << sensorName
+                         << ", parsing failed." << std::endl;
+                parsingSuccessful = false;
+                return false;
+            }
+
+            SixAxisForceTorqueSensor * sensor = new SixAxisForceTorqueSensor();
+            sensor->setName(sensorName);
+            sensor->setParentJoint(parentJoint);
+            sensor->setParentJointIndex(parentLinkIndex);
+            if( measure_direction_type == PARENT_TO_CHILD )
+            {
+                sensor->setAppliedWrenchLink(childLinkIndex);
+            }
+            else
+            {
+                sensor->setAppliedWrenchLink(parentLinkIndex);
+            }
+
+            // The transform tag is parsed using the Gazebo convention
+            // For now we assume that the six axis ft sensor is attached to a
+            // fixed junction. Hence the first/second link to sensor transforms
+            // are fixed are given by the frame option
+            iDynTree::Transform parent_link_H_child_link = model.getJoint(parentJointIndex)->getRestTransform(parentLinkIndex,childLinkIndex);
+            iDynTree::Transform child_link_H_sensor = link_H_pose;
+
+            if( frame_type == PARENT_LINK_FRAME )
+            {
+                sensor->setFirstLinkSensorTransform(parentLinkIndex,iDynTree::Transform::Identity());
+                sensor->setSecondLinkSensorTransform(childLinkIndex,parent_link_H_child_link.inverse());
+            }
+            else if( frame_type == CHILD_LINK_FRAME )
+            {
+                sensor->setFirstLinkSensorTransform(parentLinkIndex,parent_link_H_child_link);
+                sensor->setSecondLinkSensorTransform(childLinkIndex,iDynTree::Transform::Identity());
+            }
+            else
+            {
+                assert( frame_type == SENSOR_FRAME );
+                sensor->setFirstLinkSensorTransform(parentLinkIndex,parent_link_H_child_link*child_link_H_sensor);
+                sensor->setSecondLinkSensorTransform(childLinkIndex,child_link_H_sensor);
+            }
+
+            sensor->setFirstLinkName(parentLinkName);
+            sensor->setSecondLinkName(childLinkName);
+
+            newSensors.addSensor(*sensor);
+            delete sensor;
+        }
+        else if( type == GYROSCOPE )
+        {
+            GyroscopeSensor * sensor = new GyroscopeSensor();
+            sensor->setLinkSensorTransform(link_H_pose);
+            sensor->setName(sensorName);
+            sensor->setParentLink(parentLink);
+            sensor->setParentLinkIndex(parentLinkIndex);
+            newSensors.addSensor(*sensor);
+            delete sensor;
+        }
+        else if( type == ACCELEROMETER )
+        {
+            AccelerometerSensor * sensor = new AccelerometerSensor();
+            sensor->setLinkSensorTransform(link_H_pose);
+            sensor->setName(sensorName);
+            sensor->setParentLink(parentLink);
+            sensor->setParentLinkIndex(parentLinkIndex);
+            newSensors.addSensor(*sensor);
+            delete sensor;
+        }
+        else
+        {
+           std::cerr<< "[ERROR] sensor " << sensorName
+                         << " of unknown type "
+                         << ", parsing failed." << std::endl;
+           parsingSuccessful = false;
            return false;
-       }
+        }
 
-       int sensorIndex = sensorsTree.addSensor(*newSensor);
-       //since cloning is completed we can delete to free the sensor memory allocation
-       delete(newSensor );
     }
 
-    sensors = sensorsTree;
-    return ok;
+    // If the parsing was successful,
+    // copy the obtained sensors to the output structure
+    if( parsingSuccessful )
+    {
+        outputSensors = newSensors;
+    }
+
+    return parsingSuccessful;
 }
 
 
-bool genericSensorsListFromURDF(iDynTree::Model & undirectedTree,
-                                std::string urdfFilename,
-                                SensorsList & sensors)
+bool sensorsFromURDF(const std::string & urdfFilename,
+                     const iDynTree::Model & undirectedTree,
+                     SensorsList & sensors)
 {
     std::ifstream ifs(urdfFilename.c_str());
     std::string xmlString( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
-    return genericSensorsListFromURDFString(undirectedTree,xmlString,sensors);
+    return sensorsFromURDFString(xmlString,undirectedTree,sensors);
 }
 
-bool genericSensorsListFromURDF(const std::string & urdf_filename,
-                                iDynTree::SensorsList & output)
+bool sensorsFromURDF(const std::string & urdf_filename,
+                     iDynTree::SensorsList & output)
 {
     iDynTree::Model model;
     bool ok = modelFromURDF(urdf_filename,model);
@@ -310,12 +515,12 @@ bool genericSensorsListFromURDF(const std::string & urdf_filename,
         return false;
     }
 
-    ok = genericSensorsListFromURDF(model,urdf_filename,output);
+    ok = sensorsFromURDF(urdf_filename,model,output);
 
     return ok;
 }
 
-bool genericSensorsListFromURDFString(const std::string& urdf_string,
+bool sensorsFromURDFString(const std::string& urdf_string,
                                      iDynTree::SensorsList& output)
 {
     iDynTree::Model model;
@@ -329,7 +534,7 @@ bool genericSensorsListFromURDFString(const std::string& urdf_string,
     }
 
 
-    ok = genericSensorsListFromURDFString(model,urdf_string,output);
+    ok = sensorsFromURDFString(urdf_string,model,output);
 
     return ok;
 }

@@ -204,12 +204,12 @@ iDynTree::SensorsList sensorsListFromFtSensors(KDL::CoDyCo::UndirectedTree & und
         // serialization provided in the undirected_tree object
         new_sens.setName(ft_sensors[ft_sens].reference_joint);
 
-        new_sens.setParent(ft_sensors[ft_sens].reference_joint);
+        new_sens.setParentJoint(ft_sensors[ft_sens].reference_joint);
 
         KDL::CoDyCo::JunctionMap::const_iterator junct_it
             = undirected_tree.getJunction(ft_sensors[ft_sens].reference_joint);
 
-        new_sens.setParentIndex(junct_it->getJunctionIndex());
+        new_sens.setParentJointIndex(junct_it->getJunctionIndex());
 
         int parent_link = junct_it->getParentLink()->getLinkIndex();
         int child_link = junct_it->getChildLink()->getLinkIndex();
@@ -249,7 +249,7 @@ iDynTree::SensorsList sensorsListFromFtSensors(KDL::CoDyCo::UndirectedTree & und
         }
         else
         {
-            assert( ft_sensors[ft_sens].measure_direction == iDynTree::FTSensorData::CHILD_TO_PARENT );
+            assert( ft_sensors[ft_sens].measure_direction == iDynTree::FTSensorData::PARENT_TO_CHILD );
             new_sens.setAppliedWrenchLink(child_link);
         }
 
