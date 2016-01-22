@@ -1934,7 +1934,6 @@ int DynamicRegressorGenerator::setTorqueSensorMeasurement(const KDL::JntArray & 
     return 0;
 }
 
-
 int DynamicRegressorGenerator::addSubtreeRegressorRows(const std::vector< std::string>& _subtree_leaf_links)
 {
     DynamicRegressorInterface * new_regr;
@@ -1963,7 +1962,6 @@ int DynamicRegressorGenerator::addSubtreeRegressorRows(const std::vector< std::s
     return 0;
 }
 
-
 int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<bool> &_activated_ft_sensors)
 {
     DynamicRegressorInterface * new_regr;
@@ -1975,7 +1973,7 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
 
     int ret_val = new_st_regr->configure();
     if( ret_val != 0 ) {
-        if( verbose ) { std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error: could not load regressor with error " << ret_val << std::endl; }
+        std::cerr << "DynamicRegressorGenerator::addTorqueRegressorRows error: could not load regressor with error " << ret_val << std::endl;
         delete new_st_regr;
         return -1;
     }
@@ -1992,7 +1990,7 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
     return 0;
 }
 
-
+//search for FT sensors before creating regressor
 int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_name, const bool reverse_direction, const std::vector<std::string> &_activated_ft_sensors)
 {
     unsigned int NrOfFTSensors = sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);

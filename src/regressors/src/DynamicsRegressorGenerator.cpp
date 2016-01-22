@@ -40,7 +40,7 @@ struct DynamicsRegressorGenerator::DynamicsRegressorGeneratorPrivateAttributes
 {
     bool m_isRegressorValid;
     bool m_isModelValid;
-    KDL::CoDyCo::UndirectedTree robot_model;
+    KDL::CoDyCo::UndirectedTree *robot_model;
     iDynTree::SensorsList sensors_model;
     KDL::CoDyCo::Regressors::DynamicRegressorGenerator * m_pLegacyGenerator;
     Eigen::MatrixXd m_regressor;
@@ -131,8 +131,8 @@ bool DynamicsRegressorGenerator::loadRobotAndSensorsModelFromString(const std::s
     bool ok = iDynTree::treeFromUrdfString(modelString,local_model,consider_root_link_inertia);
 
 
-    this->pimpl->robot_model = KDL::CoDyCo::UndirectedTree(local_model);
-    this->pimpl->sensors_model = iDynTree::sensorsListFromURDFString(this->pimpl->robot_model,
+    this->pimpl->robot_model = new KDL::CoDyCo::UndirectedTree(local_model);
+    this->pimpl->sensors_model = iDynTree::sensorsListFromURDFString(*(this->pimpl->robot_model),
                                                                           modelString);
 
     if( !ok )
@@ -176,7 +176,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
 {
     if( !(pimpl->m_isModelValid) )
     {
-        std::cerr << "[ERROR] please load a valid mode in DynamicRegressorGenerator before tryng"
+        std::cerr << "[ERROR] please load a valid model in DynamicRegressorGenerator before trying"
                      " to load a regressor structure" << std::endl;
         return false;
     }
@@ -202,7 +202,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
 
     // We remove the fake links that in the urdf
     // we use as surrogate for frames
-    iDynTree::framesFromKDLTree(this->pimpl->robot_model.getTree(),
+    iDynTree::framesFromKDLTree(this->pimpl->robot_model->getTree(),
                                      ignoredLinks,dummy);
 
     // Add ignored links to the list of links consired "fake"
@@ -215,7 +215,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
 
     bool verbose = true;
     this->pimpl->m_pLegacyGenerator =
-        new KDL::CoDyCo::Regressors::DynamicRegressorGenerator(this->pimpl->robot_model,
+        new KDL::CoDyCo::Regressors::DynamicRegressorGenerator(*(this->pimpl->robot_model),
                                                            this->pimpl->sensors_model,
                                                            kinematic_base,
                                                            consider_ft_offset,
@@ -241,6 +241,38 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
             delete this->pimpl->m_pLegacyGenerator;
             this->pimpl->m_pLegacyGenerator = 0;
             return false;
+        }
+    }
+
+    //Get all joint torque regressors
+    for (TiXmlElement* torqueDynamicsXml = regressorXml->FirstChildElement("jointTorqueDynamics");
+         torqueDynamicsXml; torqueDynamicsXml = torqueDynamicsXml->NextSiblingElement("jointTorqueDynamics"))
+    {
+        //TODO: allow adding subtrees, create addTorqueRegressorRowsSubtree()
+
+        if (TiXmlElement* jointsXml = torqueDynamicsXml->FirstChildElement("allJoints"))
+        {
+            if( this->pimpl->m_pLegacyGenerator->addAllTorqueRegressorRows() != 0 )
+            {
+                std::cerr << "[ERROR] error in loading jointTorqueDynamics regressor" << std::endl;
+                delete this->pimpl->m_pLegacyGenerator;
+                this->pimpl->m_pLegacyGenerator = 0;
+                return false;
+            }
+        }        
+        else if (TiXmlElement* jointsXml = torqueDynamicsXml->FirstChildElement("joints"))
+        {
+            for (TiXmlElement* jointXml = jointsXml->FirstChildElement("joint");
+                 jointXml; jointXml = jointXml->NextSiblingElement("joint"))
+            {
+                if( this->pimpl->m_pLegacyGenerator->addTorqueRegressorRows(jointXml->GetText()) != 0 )
+                {
+                    std::cerr << "[ERROR] error in loading jointTorqueDynamics regressor (joint with no name?)" << std::endl;
+                    delete this->pimpl->m_pLegacyGenerator;
+                    this->pimpl->m_pLegacyGenerator = 0;
+                    return false;
+                }
+            }
         }
     }
 
@@ -281,8 +313,14 @@ const SensorsList& DynamicsRegressorGenerator::getSensorsModel() const
 
 std::string DynamicsRegressorGenerator::getBaseLinkName()
 {
-    int base_link = this->pimpl->m_pLegacyGenerator->getDynamicBaseIndex();
-    return this->pimpl->robot_model.getLink(base_link)->getName();
+    if(this->pimpl->m_pLegacyGenerator) {
+        int base_link = this->pimpl->m_pLegacyGenerator->getDynamicBaseIndex();
+        return this->pimpl->robot_model->getLink(base_link)->getName();
+    } else
+    {
+       std::cerr << "[WARNING] No regressor structure set" << std::endl;
+       return "";
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -342,7 +380,7 @@ unsigned int DynamicsRegressorGenerator::getNrOfDegreesOfFreedom() const
 
 std::string DynamicsRegressorGenerator::getDescriptionOfDegreeOfFreedom(int dof_index)
 {
-    return this->pimpl->robot_model.getJunction(dof_index)->getName();
+    return this->pimpl->robot_model->getJunction(dof_index)->getName();
 }
 
 std::string DynamicsRegressorGenerator::getDescriptionOfDegreesOfFreedom()
@@ -457,6 +495,20 @@ SensorsMeasurements& DynamicsRegressorGenerator::getSensorsMeasurements()
     return this->pimpl->m_pLegacyGenerator->sensorMeasures;
 }
 
+int DynamicsRegressorGenerator::setTorqueSensorMeasurement(const int dof_index, const double measure)
+{
+    return this->pimpl->m_pLegacyGenerator->setTorqueSensorMeasurement(dof_index, measure);
+}
+
+
+int DynamicsRegressorGenerator::setTorqueSensorMeasurement(iDynTree::VectorDynSize &torques)
+{
+    KDL::JntArray torques_legacy(torques.size());
+    for(int i=0; i<torques.size(); i++){
+        torques_legacy(i)=torques(i);
+    }
+    return this->pimpl->m_pLegacyGenerator->setTorqueSensorMeasurement(torques_legacy);
+}
 
 bool DynamicsRegressorGenerator::computeRegressor(MatrixDynSize& regressor, VectorDynSize& known_terms)
 {

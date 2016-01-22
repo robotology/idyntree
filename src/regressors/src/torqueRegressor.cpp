@@ -145,7 +145,7 @@ int torqueRegressor::configure()
                                 p_sensors_tree->getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),
                                 this->consider_ft_offset);
 
-    regressor_local_parametrization.resize(6,localSerialization.parameters.size());
+    regressor_local_parametrization.resize(getNrOfOutputs(),localSerialization.parameters.size());
 
     return 0;
 }
@@ -187,23 +187,21 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
     //const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
 
 
-    if( regressor_local_parametrization.rows() != getNrOfOutputs() ) {
-        return -1;
-    }
+    assert( regressor_local_parametrization.rows() == getNrOfOutputs() );
 
-         /**
-         * \todo move this stuff in UndirectedTree
-         *
-         */
-        JunctionMap::const_iterator torque_dof_it = p_undirected_tree->getJunction(torque_dof_index);
-        LinkMap::const_iterator parent_root_it;
-        if( torque_dof_it->getChildLink() == p_undirected_tree->getLink(subtree_root_link_id) ) {
-            parent_root_it = torque_dof_it->getParentLink();
-        } else {
-            parent_root_it = torque_dof_it->getChildLink();
-        }
-        assert(torque_dof_it->getJunctionIndex() < (int)p_undirected_tree->getNrOfDOFs());
-        KDL::Twist S = parent_root_it->S(p_undirected_tree->getLink(subtree_root_link_id),q(torque_dof_it->getJunctionIndex()));
+     /**
+     * \todo move this stuff in UndirectedTree
+     *
+     */
+    JunctionMap::const_iterator torque_dof_it = p_undirected_tree->getJunction(torque_dof_index);
+    LinkMap::const_iterator parent_root_it;
+    if( torque_dof_it->getChildLink() == p_undirected_tree->getLink(subtree_root_link_id) ) {
+        parent_root_it = torque_dof_it->getParentLink();
+    } else {
+        parent_root_it = torque_dof_it->getChildLink();
+    }
+    assert(torque_dof_it->getJunctionIndex() < (int)p_undirected_tree->getNrOfDOFs());
+    KDL::Twist S = parent_root_it->S(p_undirected_tree->getLink(subtree_root_link_id),q(torque_dof_it->getJunctionIndex()));
 
     //all other columns, beside the one relative to the inertial parameters of the links of the subtree, are zero
     regressor_local_parametrization.setZero();

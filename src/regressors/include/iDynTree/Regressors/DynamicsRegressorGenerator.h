@@ -343,6 +343,9 @@ public:
      */
     SensorsMeasurements & getSensorsMeasurements();
 
+    int setTorqueSensorMeasurement(const int dof_index, const double measure);
+    int setTorqueSensorMeasurement(iDynTree::VectorDynSize &torques);
+
     //@}
 
     /** @name Methods to calculate the regressor
