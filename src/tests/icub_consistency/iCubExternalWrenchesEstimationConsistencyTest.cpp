@@ -32,9 +32,14 @@
 #include <iDynTree/Model/FreeFloatingState.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Core/ClassicalAcc.h>
 
 #include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
+
 #include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 #include <iDynTree/yarp/YARPConversions.h>
 #include <iDynTree/iCub/skinDynLibConversions.h>
@@ -127,10 +132,26 @@ void iDyn_compose_velocity_acceleration(const yarp::sig::Vector & lin_vel, const
 
 void iDynTree_print_velocity_acceleration(DynTree & icub_idyntree, const std::string link_name)
 {
-    std::cout <<"Velocity of the " << link_name << endl;
-    cout << icub_idyntree.getVel(icub_idyntree.getLinkIndex((link_name))).toString() << endl;
-    cout <<"Acceleration of " << link_name << endl;
-    cout << icub_idyntree.getAcc(icub_idyntree.getLinkIndex(link_name)).toString() << endl;
+    std::cerr <<"Velocity of the " << link_name << endl;
+    cerr << icub_idyntree.getVel(icub_idyntree.getLinkIndex((link_name)),true).toString() << endl;
+    cerr <<"iDynTree Acceleration of " << link_name << endl;
+    cerr << icub_idyntree.getAcc(icub_idyntree.getLinkIndex(link_name),true).toString() << endl;
+}
+
+void iDynTree_check_velocity(DynTree & icub_idyntree, const std::string link_name,
+                             iDynTree::Model & model, iDynTree::LinkVelArray & new_vels, iDynTree::LinkAccArray & properAccs)
+{
+    Vector v = icub_idyntree.getVel(icub_idyntree.getLinkIndex((link_name)),true);
+    iDynTree::Vector3 omegaYarp;
+    iDynTree::toiDynTree(v.subVector(3,5),omegaYarp);
+
+    ASSERT_EQUAL_VECTOR(omegaYarp,new_vels(model.getLinkIndex(link_name)).getAngularVec3());
+
+    Vector a = icub_idyntree.getAcc(icub_idyntree.getLinkIndex((link_name)),true);
+    iDynTree::Vector3 dotOmegaYarp;
+    iDynTree::toiDynTree(a.subVector(3,5),dotOmegaYarp);
+
+    ASSERT_EQUAL_VECTOR(dotOmegaYarp,properAccs(model.getLinkIndex(link_name)).getAngularVec3());
 }
 
 void set_random_IMU_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree,
@@ -141,12 +162,12 @@ void set_random_IMU_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree,
 {
     Vector q(icub_tree.getNrOfDOFs());
     set_random_vector(q,rng,pos_c);
+
     q = icub_tree.setAng(q);
     iDynTree::toiDynTree(q,jointPos);
 
     Vector dq(icub_tree.getNrOfDOFs());
     set_random_vector(dq,rng,vel_c);
-    dq[1] = 1000.0;
     dq = icub_tree.setDAng(dq);
     iDynTree::toiDynTree(dq,jointVel);
 
@@ -270,7 +291,7 @@ int main(int argc, char ** argv)
     //Creating the DynTree : kinematic/dynamics structure, force torque sensors, imu sensor
     std::string urdf_filename = getAbsModelPath("icub_skin_frames.urdf");
     iCub::iDynTree::TorqueEstimationTree * icub_model_estimation =
-        new iCub::iDynTree::TorqueEstimationTree(urdf_filename,dof_serialization,ft_serialization);
+        new iCub::iDynTree::TorqueEstimationTree(urdf_filename,dof_serialization,ft_serialization,"imu_frame");
 
     // Creating the new iDynTree based data structures
     iDynTree::Model fullModel, model;
@@ -285,19 +306,26 @@ int main(int argc, char ** argv)
         return EXIT_FAILURE;
     }
 
-    std::cerr << " old model number of dofs : " << icub_model_estimation->getNrOfDOFs() << std::endl;
-    std::cerr << model.toString() << std::endl;
 
     assert(model.getNrOfDOFs() == icub_model_estimation->getNrOfDOFs());
 
-    iDynTree::Traversal traversal;
+    iDynTree::Traversal traversal, head_traversal;
+    // Get the IMU Frame
+    iDynTree::FrameIndex imu_index = model.getFrameIndex("imu_frame");
+    iDynTree::LinkIndex head_index = model.getFrameLink(imu_index);
+    iDynTree::Transform head_T_imu = model.getFrameTransform(imu_index);
+
     model.computeFullTreeTraversal(traversal);
+    ok = model.computeFullTreeTraversal(head_traversal,head_index);
+
+    ASSERT_EQUAL_DOUBLE(ok,true);
+
     // Create sensors list with FT sensors (TODO)
     iDynTree::SensorsList sensors;
-    //iDynTree::sensorsFromURDF(urdf_filename,model,sensors);
+    iDynTree::sensorsFromURDF(urdf_filename,model,sensors);
+    sensors.setSerialization(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_serialization);
 
     // Create submodel decomposition
-    std::cerr << model.toString() << std::endl;
 
     iDynTree::SubModelDecomposition subModels;
     ok = subModels.splitModelAlongJoints(model,traversal,ft_serialization);
@@ -337,14 +365,19 @@ int main(int argc, char ** argv)
 
     iDynTree::SensorsMeasurements sensMeas(sensors);
 
+    ASSERT_EQUAL_DOUBLE(icub_model_estimation->getNrOfFTSensors(),6);
+
     for(int i = 0; i < icub_model_estimation->getNrOfFTSensors(); i++ )
     {
-        set_random_vector(ft_sensor,rng,10);
+        set_random_vector(ft_sensor,rng,1.0);
         icub_model_estimation->setSensorMeasurement(i,ft_sensor);
         iDynTree::Wrench ft_sensor_idyntree;
         iDynTree::toiDynTree(ft_sensor,ft_sensor_idyntree);
         assert(sensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE) > i);
+        ASSERT_EQUAL_STRING(ft_serialization[i],sensors.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,i)->getName());
+        sensMeas.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,i,ft_sensor_idyntree);
 
+        std::cerr << ((iDynTree::SixAxisForceTorqueSensor*)sensors.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,i))->toString(model);
     }
 
     dynContactList input_contact_list, output_contact_list;
@@ -385,11 +418,6 @@ int main(int argc, char ** argv)
     iDynTree::LinkUnknownWrenchContacts unknownContacts(model);
 
     iCubSkinHelper.fromSkinDynLibToiDynTree(model,input_contact_list,unknownContacts);
-    std::cerr << "skinDynLib unknownContacts : " << std::endl;
-    std::cerr << input_contact_list.toString() << std::endl;
-
-    std::cerr << "iDynTree unknownContacts : " << std::endl;
-    std::cerr << unknownContacts.toString(model) << std::endl;
 
 
     icub_model_estimation->setContacts(input_contact_list);
@@ -401,7 +429,10 @@ int main(int argc, char ** argv)
     output_contact_list = icub_model_estimation->getContacts();
 
     if( output_contact_list.size() != input_contact_list.size() )
-    { std::cout << "Error: Estimated a wrong number of contacts."; return EXIT_FAILURE; }
+    {
+        std::cout << "Error: Estimated a wrong number of contacts.";
+        return EXIT_FAILURE;
+    }
 
     // Compute the estimated torque with iDynTree
     // Allocate some buffers
@@ -411,23 +442,84 @@ int main(int argc, char ** argv)
     iDynTree::LinkInternalWrenches internalWrenches(model);
 
     // Run the kinematics loop
+    // The old yarp interface takes the measurement in imu_frame orientation, while the one in head,
+    // so we need to comptue the different acceleration/velocity to input in the system
+    /*
+    std::cerr << " base classical proper acc " << base_classicalProperAcc.toString() << std::endl;
+    std::cerr << "joint pos : " << jointPos.toString() << std::endl;
+    std::cerr << "joint vel : " << jointVel.toString() << std::endl;*/
+    iDynTree::Vector3 base_angularVel_head;
+    iDynTree::Rotation head_R_imu = head_T_imu.getRotation();
+
+    iDynTree::SpatialAcc base_acc_imu;
+    iDynTree::SpatialAcc base_acc_head;
+
+    iDynTree::Twist base_vel_imu, base_vel_head;
+    iDynTree::Vector3 zero3;
+    zero3.zero();
+    base_vel_imu.setLinearVec3(zero3);
+    base_vel_imu.setAngularVec3(base_angularVel);
+
+    base_vel_head = head_T_imu*base_vel_imu;
+
+    base_acc_imu.setLinearVec3(base_classicalProperAcc);
+    base_acc_imu.setAngularVec3(base_angularAcc);
+
+    ASSERT_EQUAL_VECTOR(base_acc_imu.getLinearVec3(),base_classicalProperAcc);
+    ASSERT_EQUAL_VECTOR(base_acc_imu.getAngularVec3(),base_angularAcc);
 
 
-    iDynTree::dynamicsEstimationForwardVelAccKinematics(model,traversal,
-                                              base_classicalProperAcc,base_angularVel,base_angularAcc,
+    base_acc_head = head_T_imu*base_acc_imu;
+
+    iDynTree::ClassicalAcc base_acc_head_classical;
+    base_acc_head_classical.fromSpatial(base_acc_head,base_vel_head);
+
+    /*
+    iDynTree::dynamicsEstimationForwardVelAccKinematics(model,head_traversal,
+                                              base_acc_head.getLinearVec3(),base_vel_head.getAngularVec3(),base_acc_head.getAngularVec3(),
+                                              jointPos,jointVel,jointAcc,linkVels,linkProperAccs);*/
+    iDynTree::dynamicsEstimationForwardVelAccKinematics(model,head_traversal,
+                                              base_acc_head_classical.getLinearVec3(),base_vel_head.getAngularVec3(),base_acc_head_classical.getAngularVec3(),
                                               jointPos,jointVel,jointAcc,linkVels,linkProperAccs);
+
+    for(int ii=0; ii < model.getNrOfLinks(); ii++)
+    {
+        iDynTree_check_velocity(*icub_model_estimation,model.getLinkName(ii),model,linkVels,linkProperAccs);
+    }
 
     // Estimate the external forces
     iDynTree::estimateExternalWrenches(model,subModels,sensors,unknownContacts,
                                        jointPos,linkVels,linkProperAccs,
                                        sensMeas,extWrenchBufs,externalWrenches);
 
+    // Result
     // Convert the external wrenches in a format suitable for RNEA
     externalWrenches.computeNetWrenches(netExternalWrenches);
 
     // Compute the joint torques
     iDynTree::RNEADynamicPhase(model,traversal,jointPos,linkVels,linkProperAccs,
-                                netExternalWrenches,internalWrenches,trqs);
+                               netExternalWrenches,internalWrenches,trqs);
+
+    // Simulate the sensors and make sure that they are consistent
+    iDynTree::SensorsMeasurements simulatedSensors(sensors);
+    iDynTree::predictSensorsMeasurementsFromRawBuffers(model,sensors,traversal,
+                                                       linkVels,linkProperAccs,internalWrenches,trqs,
+                                                       simulatedSensors);
+
+    for(size_t simFT=0; simFT < simulatedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); simFT++)
+    {
+        iDynTree::Wrench simWrench;
+        simulatedSensors.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,simFT,simWrench);
+        iDynTree::Wrench actualWrench;
+        sensMeas.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,simFT,actualWrench);
+
+        ASSERT_EQUAL_SPATIAL_FORCE(actualWrench,simWrench);
+    }
+
+    // The base "generalized torque" should be zero if the netExternalWrenches
+    // were consistent with the accelerations
+    iDynTree::SpatialForceVector zero = iDynTree::SpatialForceVector::Zero();
+    ASSERT_EQUAL_SPATIAL_FORCE(trqs.baseWrench(),zero);
 
     // Compute the
     dynContactList output_contact_list_with_idyntree;
@@ -439,12 +531,19 @@ int main(int argc, char ** argv)
         return EXIT_FAILURE;
     }
 
-
     // Compare the results
+    /*
     std::cerr << "Joint torques with KDL/YARP : " << std::endl;
     std::cerr << icub_model_estimation->getTorques().toString() << std::endl;
     std::cerr << "Joint torques with iDynTree: " << std::endl;
     std::cerr << toEigen(trqs.jointTorques()) << std::endl;
+    */
+
+    iDynTree::VectorDynSize jointTorquesYARP(icub_model_estimation->getTorques().size());
+
+    iDynTree::toiDynTree(icub_model_estimation->getTorques(),jointTorquesYARP);
+
+    ASSERT_EQUAL_VECTOR_TOL(trqs.jointTorques(),jointTorquesYARP,1e-4);
 
     delete icub_model_estimation;
 
