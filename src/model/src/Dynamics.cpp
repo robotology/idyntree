@@ -89,8 +89,8 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
         }
         else
         {
-            // If the visited link is not the base and  connected to a parent link
-            // at this point we can compute the torque of the joint connecting this link and its parent
+            // If the visited link is not the base and it is connected to a parent link
+            // at this point we can compute the torque of the joint connecting the visited link and its parent
             // This is Equation 5.13 in Featherstone 2008. It is offloaded to the joint to be
             // able to deal with different kind of joints.
             toParentJoint->computeJointTorque(jointPos,
