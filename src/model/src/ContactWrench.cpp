@@ -121,6 +121,28 @@ bool LinkContactWrenches::computeNetWrenches(LinkNetExternalWrenches& netWrenche
     return true;
 }
 
+std::string LinkContactWrenches::toString(const Model& model) const
+{
+    std::stringstream ss;
+
+    size_t nrOfLinks = m_linkContactWrenches.size();
+    for(size_t l=0; l < nrOfLinks; l++)
+    {
+        size_t nrOfContacts = this->getNrOfContactsForLink(l);
+
+        if( nrOfContacts > 0 )
+        {
+            ss << "Contact wrenches on link " << model.getLinkName(l) << ":" << std::endl;
+            for(size_t c=0; c < nrOfContacts; c++ )
+            {
+                ss << "Wrench contact with pos: " << this->contactWrench(l,c).contactPoint().toString() << ","
+                                          "wrench: " << this->contactWrench(l,c).contactWrench().toString() << std::endl;
+            }
+        }
+    }
+    return ss.str();
+}
+
 }
 
 

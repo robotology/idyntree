@@ -127,6 +127,12 @@ namespace iDynTree
          * @return true if all went well, false otherwise.
          */
         bool computeNetWrenches(LinkNetExternalWrenches & netWrenches) const;
+
+
+        /**
+         * Get a human readable description of the LinkUnknownWrenchContacts (for debug)
+         */
+        std::string toString(const Model& model) const;
     };
 
 
