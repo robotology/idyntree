@@ -101,6 +101,19 @@ const Wrench& LinkWrenches::operator()(const LinkIndex link) const
     return this->m_linkWrenches[link];
 }
 
+std::string LinkWrenches::toString(const Model& model) const
+{
+   std::stringstream ss;
+
+    size_t nrOfLinks = this->getNrOfLinks();
+    for(size_t l=0; l < nrOfLinks; l++)
+    {
+        ss << "Wrench for link " << model.getLinkName(l) << ":" << this->operator()(l).toString() << std::endl;
+    }
+    return ss.str();
+}
+
+
 LinkWrenches::~LinkWrenches()
 {
     resize(0);
@@ -190,9 +203,21 @@ bool LinkVelArray::isConsistent(const Model& model) const
     return (this->m_linkTwist.size() == model.getNrOfLinks());
 }
 
-size_t LinkVelArray::getNrOfLinks()
+size_t LinkVelArray::getNrOfLinks() const
 {
     return this->m_linkTwist.size();
+}
+
+std::string LinkVelArray::toString(const Model& model) const
+{
+    std::stringstream ss;
+
+    size_t nrOfLinks = this->getNrOfLinks();
+    for(size_t l=0; l < nrOfLinks; l++)
+    {
+        ss << "Twist for link " << model.getLinkName(l) << ":" << this->operator()(l).toString() << std::endl;
+    }
+    return ss.str();
 }
 
 
@@ -240,6 +265,18 @@ bool LinkAccArray::isConsistent(const Model& model) const
 unsigned int LinkAccArray::getNrOfLinks() const
 {
     return this->m_linkAcc.size();
+}
+
+std::string LinkAccArray::toString(const Model& model) const
+{
+    std::stringstream ss;
+
+    size_t nrOfLinks = this->getNrOfLinks();
+    for(size_t l=0; l < nrOfLinks; l++)
+    {
+        ss << "Acceleration for link " << model.getLinkName(l) << ":" << this->operator()(l).toString() << std::endl;
+    }
+    return ss.str();
 }
 
 LinkAccArray::~LinkAccArray()

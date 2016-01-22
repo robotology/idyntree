@@ -84,6 +84,8 @@ namespace iDynTree
         iDynTree::Wrench & operator()(const LinkIndex link);
         const iDynTree::Wrench & operator()(const LinkIndex link) const;
 
+        std::string toString(const Model & model) const;
+
         ~LinkWrenches();
     };
 
@@ -172,10 +174,12 @@ namespace iDynTree
 
         bool isConsistent(const Model& model) const;
 
-        size_t getNrOfLinks();
+        size_t getNrOfLinks() const;
 
         iDynTree::Twist & operator()(const LinkIndex link);
         const iDynTree::Twist & operator()(const LinkIndex link) const;
+
+        std::string toString(const Model & model) const;
 
         ~LinkVelArray();
     };
@@ -202,6 +206,8 @@ namespace iDynTree
         const iDynTree::SpatialAcc & operator()(const LinkIndex link) const;
 
         unsigned int getNrOfLinks() const;
+
+        std::string toString(const Model & model) const;
 
         ~LinkAccArray();
     };
