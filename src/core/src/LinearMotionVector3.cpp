@@ -115,6 +115,11 @@ namespace iDynTree
     {
     }
 
+    LinearMotionVector3::LinearMotionVector3(const Vector3& other):
+    MotionVector3< iDynTree::LinearMotionVector3 >(other.data(), other.size())
+    {
+    }
+
     /**
      * Geometric operations
      */
