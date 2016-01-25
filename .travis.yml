@@ -55,6 +55,18 @@ before_script:
 script:
   - make
   - sudo make install
+  # test if for some reason the iDynTree build is using installed headers instead of source ones
+  # see https://github.com/robotology/idyntree/issues/52
+  - cd /usr/local/include/iDynTree
+  - find . -type f -exec /bin/sh -c "> '{}'" ';'
+  - cd /usr/local/include/kdl_codyco
+  - find . -type f -exec /bin/sh -c "> '{}'" ';'
+  - cd /usr/local/include/iCub/iDynTree/
+  - find . -type f -exec /bin/sh -c "> '{}'" ';'
+  - cd /home/travis/build/robotology/idyntree/build
+  - make 
+  - sudo make install
+  # actuall run tests 
   - ctest 
 
 notifications:
