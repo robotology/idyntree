@@ -399,13 +399,13 @@ std::string DynamicsRegressorGenerator::getDescriptionOfDegreesOfFreedom()
 //// Links related methods
 //////////////////////////////////////////////////////////////////////////////
 
-/*
+
 unsigned int DynamicsRegressorGenerator::getNrOfLinks() const
 {
-    assert(false);
-    return (unsigned int)this->pimpl->m_pLegacyGenerator->getNrOfDOFs();
+   return (unsigned int)this->pimpl->robot_model->getNrOfLinks();
 }
 
+/*
 std::string DynamicsRegressorGenerator::getDescriptionOfLink(int link_index)
 {
 

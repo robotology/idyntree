@@ -252,6 +252,12 @@ public:
     std::string getDescriptionOfDegreesOfFreedom();
 
     /**
+     * Get the number of links contained in the model.
+     *
+     */
+    unsigned int getNrOfLinks() const;
+
+    /**
      * Get a human readable description of a given link considered in the regressor.
      *
      * @return a human readable description of a given link considered in the regressor.
