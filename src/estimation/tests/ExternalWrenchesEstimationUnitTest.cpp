@@ -215,6 +215,7 @@ void checkSimpleModelExternalWrenchEstimationWithFTSensors()
     Axis axis;
     Direction dir(1.0,0.0,0.0);
     axis.setDirection(dir);
+    axis.setOrigin(Position::Zero());
     RevoluteJoint joint23(2,3,iDynTree::Transform::Identity(),axis);
 
     model.addJoint("joint01",&joint01);
