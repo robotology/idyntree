@@ -501,7 +501,7 @@ int main(int argc, char ** argv)
     // Simulate the sensors and make sure that they are consistent
     iDynTree::SensorsMeasurements simulatedSensors(sensors);
     iDynTree::predictSensorsMeasurementsFromRawBuffers(model,sensors,traversal,
-                                                       linkVels,linkProperAccs,internalWrenches,trqs,
+                                                       linkVels,linkProperAccs,internalWrenches,
                                                        simulatedSensors);
 
     for(size_t simFT=0; simFT < simulatedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); simFT++)

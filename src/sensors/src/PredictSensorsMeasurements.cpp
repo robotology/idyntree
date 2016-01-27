@@ -68,7 +68,7 @@ bool predictSensorsMeasurements(const Model & model,
 
     return predictSensorsMeasurementsFromRawBuffers(model,sensorsList,traversal,
                                                     buf_linkVel,buf_linkProperAcc,
-                                                    buf_internalWrenches,buf_outputTorques,predictedMeasurement);
+                                                    buf_internalWrenches,predictedMeasurement);
 }
 
 bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
@@ -77,7 +77,6 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
                                               const LinkVelArray& buf_linkVel,
                                               const LinkAccArray& buf_linkProperAcc,
                                               const LinkInternalWrenches& buf_internalWrenches,
-                                              const FreeFloatingGeneralizedTorques& buf_outputTorques,
                                               SensorsMeasurements& predictedMeasurement)
 {
     bool retVal = true;
@@ -106,6 +105,7 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
     for(size_t idx = 0; idx<numOfFTs; idx++)
     {
         SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)sensorsList.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
+        
         Wrench predictedWrench = ftSens->predictMeasurement(traversal,buf_internalWrenches);
         predictedMeasurement.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,idx,predictedWrench);
     }
