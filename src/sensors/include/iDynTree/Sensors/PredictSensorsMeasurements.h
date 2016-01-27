@@ -113,7 +113,6 @@ namespace iDynTree
                                                    const iDynTree::LinkVelArray& buf_linkVel,
                                                    const iDynTree::LinkAccArray& buf_linkProperAcc,
                                                    const LinkInternalWrenches& buf_internalWrenches,
-                                                   const FreeFloatingGeneralizedTorques& buf_outputTorques,
                                                          iDynTree::SensorsMeasurements &predictedMeasurement);
 
 }

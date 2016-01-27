@@ -46,6 +46,20 @@ LinkUnknownWrenchContacts::LinkUnknownWrenchContacts(const iDynTree::Model& mode
     this->resize(model);
 }
 
+void LinkUnknownWrenchContacts::clear()
+{
+    // To avoid dynamic memory allocation at runtime
+    // we make sure that the vector have at least spaces for 3 contacts
+    const size_t reservedSlots = 3;
+
+    for(size_t l=0; l < m_linkUnknownWrenchContacts.size(); l++)
+    {
+        m_linkUnknownWrenchContacts[l].resize(0);
+        m_linkUnknownWrenchContacts[l].reserve(reservedSlots);
+    }
+}
+
+
 void LinkUnknownWrenchContacts::resize(const iDynTree::Model& model)
 {
     resize(model.getNrOfLinks());
@@ -53,15 +67,8 @@ void LinkUnknownWrenchContacts::resize(const iDynTree::Model& model)
 
 void LinkUnknownWrenchContacts::resize(unsigned int nrOfLinks)
 {
-    // To avoid dynamic memory allocation at runtime
-    // we make sure that the vector have at least spaces for 3 contacts
-    const size_t reservedSlots = 3;
     m_linkUnknownWrenchContacts.resize(nrOfLinks);
-    for(size_t l=0; l < nrOfLinks; l++)
-    {
-        m_linkUnknownWrenchContacts[l].resize(0);
-        m_linkUnknownWrenchContacts[l].reserve(reservedSlots);
-    }
+    clear();
 }
 
 const UnknownWrenchContact& LinkUnknownWrenchContacts::contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const
@@ -89,6 +96,40 @@ void LinkUnknownWrenchContacts::addNewContactForLink(const LinkIndex linkIndex, 
 {
     m_linkUnknownWrenchContacts[linkIndex].push_back(newContact);
 }
+
+bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
+                                                     const FrameIndex frameIndex,
+                                                     const UnknownWrenchContact& unknownContactInFrame)
+{
+    if( !model.isValidFrameIndex(frameIndex) )
+    {
+        std::stringstream err;
+        err << "Unknown frame index " << frameIndex << " in model that has " << model.getNrOfFrames() << " frames.";
+        reportError("LinkUnknownWrenchContacts","addNewContactInFrame",err.str().c_str());
+        return false;
+    }
+
+    // Get link_H_frame transform
+    iDynTree::Transform link_H_frame = model.getFrameTransform(frameIndex);
+
+    // Get the link of the frame
+    LinkIndex linkIndex = model.getFrameLink(frameIndex);
+
+    UnknownWrenchContact unknownContactInLink;
+
+    unknownContactInLink.unknownType = unknownContactInFrame.unknownType;
+    unknownContactInLink.contactPoint = link_H_frame*unknownContactInFrame.contactPoint;
+
+    if( unknownContactInFrame.unknownType == PURE_FORCE_WITH_KNOWN_DIRECTION )
+    {
+        unknownContactInLink.forceDirection =  link_H_frame*unknownContactInFrame.forceDirection;
+    }
+
+    addNewContactForLink(linkIndex,unknownContactInLink);
+
+    return true;
+}
+
 
 
 std::string LinkUnknownWrenchContacts::toString(const Model& model) const

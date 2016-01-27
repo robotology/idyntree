@@ -114,7 +114,12 @@ public:
     LinkUnknownWrenchContacts(const Model & model);
 
     /**
+     * Preserving the number of links, remove all the previously added unknowns.
      *
+     */
+    void clear();
+
+    /**
      *
      * @param[in]
      */
@@ -135,6 +140,20 @@ public:
      * Add a new contact for a link.
      */
     void addNewContactForLink(const LinkIndex linkIndex, const UnknownWrenchContact& newContact);
+
+    /**
+     * Add a new contact for a frame.
+     * If the specified frame is not the a link frame, the method automatically convert the unknown
+     * wrench to the relative link frame.
+     *
+     * @param[in] model the model class for getting frame information.
+     * @param[in] frameIndex the index of the frame in which you are expressing the new unknown wrench.
+     * @param[in] newContact the new unknown wrench to add.
+     * @return true if all went well, false otherwise
+     */
+    bool addNewContactInFrame(const Model & model,
+                              const FrameIndex frameIndex,
+                              const UnknownWrenchContact& newContact);
 
     /**
      * Get a specific ContactWrench
