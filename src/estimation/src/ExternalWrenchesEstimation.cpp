@@ -123,6 +123,11 @@ std::string LinkUnknownWrenchContacts::toString(const Model& model) const
     return ss.str();
 }
 
+estimateExternalWrenchesBuffers::estimateExternalWrenchesBuffers()
+{
+    resize(0,0);
+}
+
 
 estimateExternalWrenchesBuffers::estimateExternalWrenchesBuffers(const SubModelDecomposition& subModels)
 {

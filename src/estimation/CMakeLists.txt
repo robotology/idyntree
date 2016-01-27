@@ -4,11 +4,13 @@
 
 project(iDynTree_Estimation CXX)
 
-set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/ExternalWrenchesEstimation.h)
+set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/ExternalWrenchesEstimation.h
+                                include/iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h)
 
 set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES )
 
-set(IDYNTREE_ESTIMATION_SOURCES src/ExternalWrenchesEstimation.cpp)
+set(IDYNTREE_ESTIMATION_SOURCES src/ExternalWrenchesEstimation.cpp
+                                src/ExtWrenchesAndJointTorquesEstimator.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_HEADERS})
@@ -21,7 +23,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
 
-target_link_libraries(${libraryname} idyntree-core idyntree-model idyntree-sensors)
+target_link_libraries(${libraryname} idyntree-core idyntree-model idyntree-sensors idyntree-modelio-urdf)
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_ESTIMATION_HEADERS})
 

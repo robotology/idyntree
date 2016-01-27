@@ -61,6 +61,12 @@ ExtWrenchesAndJointTorquesEstimator::ExtWrenchesAndJointTorquesEstimator():
 
 }
 
+ExtWrenchesAndJointTorquesEstimator::~ExtWrenchesAndJointTorquesEstimator()
+{
+    freeKinematicTraversals();
+}
+
+
 void getFTJointNames(const SensorsList & _sensors,
                      std::vector<std::string> ftJointNames)
 {
@@ -75,6 +81,25 @@ void getFTJointNames(const SensorsList & _sensors,
     return;
 }
 
+void ExtWrenchesAndJointTorquesEstimator::allocKinematicTraversals(const size_t nrOfLinks)
+{
+    m_kinematicTraversals.resize(nrOfLinks);
+    for(size_t link=0; link < m_kinematicTraversals.size(); link++)
+    {
+        m_kinematicTraversals[link] = new Traversal();
+    }
+}
+
+void ExtWrenchesAndJointTorquesEstimator::freeKinematicTraversals()
+{
+    for(size_t link=0; link < m_kinematicTraversals.size(); link++)
+    {
+        delete m_kinematicTraversals[link];
+    }
+    m_kinematicTraversals.resize(0);
+}
+
+
 bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model,
                                                              const SensorsList& _sensors)
 {
@@ -84,7 +109,10 @@ bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model
 
     // resize the data structures
     m_model.computeFullTreeTraversal(m_dynamicTraversal);
-    m_kinematicTraversals.resize(m_model.getNrOfLinks());
+    freeKinematicTraversals();
+    allocKinematicTraversals(m_model.getNrOfLinks());
+
+
     m_linkVels.resize(m_model);
     m_linkProperAccs.resize(m_model);
     m_linkNetExternalWrenches.resize(m_model);
@@ -197,9 +225,9 @@ bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const
     LinkIndex floatingLinkIndex = m_model.getFrameLink(floatingFrame);
 
     // Build the traversal if it is not present
-    if( m_kinematicTraversals[floatingLinkIndex].getNrOfVisitedLinks() == 0 )
+    if( m_kinematicTraversals[floatingLinkIndex]->getNrOfVisitedLinks() == 0 )
     {
-        m_model.computeFullTreeTraversal(m_kinematicTraversals[floatingLinkIndex],floatingLinkIndex);
+        m_model.computeFullTreeTraversal(*m_kinematicTraversals[floatingLinkIndex],floatingLinkIndex);
     }
 
     // To initialize the kinematic propagation, we should first convert the kinematics
@@ -226,7 +254,7 @@ bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const
     base_classical_acc_link.fromSpatial(base_acc_link,base_vel_link);
 
     // Propagate the kinematics information
-    bool ok = dynamicsEstimationForwardVelAccKinematics(model,m_kinematicTraversals[floatingLinkIndex],
+    bool ok = dynamicsEstimationForwardVelAccKinematics(m_model,*(m_kinematicTraversals[floatingLinkIndex]),
                                                      base_classical_acc_link.getLinearVec3(),
                                                      base_vel_link.getAngularVec3(),
                                                      base_classical_acc_link.getAngularVec3(),
@@ -306,7 +334,7 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
      * Compute joint torques
      */
     ok = ok && RNEADynamicPhase(m_model,m_dynamicTraversal,m_jointPos,m_linkVels,m_linkProperAccs,
-                                m_linkNetExternalWrenches,m_generalizedTorques);
+                                m_linkNetExternalWrenches,m_linkIntWrenches,m_generalizedTorques);
 
     if( !ok )
     {

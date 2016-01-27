@@ -69,7 +69,13 @@ class ExtWrenchesAndJointTorquesEstimator
      * Vector of Traversal used for the kinematic computations.
      * m_kinematicTraversals[l] contains the traversal with base link l .
      */
-    std::vector<Traversal> m_kinematicTraversals;
+    std::vector<Traversal *> m_kinematicTraversals;
+
+    /**
+     * Helper functions for dealing with the kinematic traversal dynamic allocation
+     */
+    void allocKinematicTraversals(const size_t nrOfLinks);
+    void freeKinematicTraversals();
 
     JointPosDoubleArray m_jointPos;
     LinkVelArray m_linkVels;
@@ -81,12 +87,26 @@ class ExtWrenchesAndJointTorquesEstimator
     estimateExternalWrenchesBuffers m_calibBufs;
     estimateExternalWrenchesBuffers m_bufs;
 
+    /**
+     * Disable copy constructor and copy operator
+     */
+   ExtWrenchesAndJointTorquesEstimator(const ExtWrenchesAndJointTorquesEstimator & other) {};
+
+   /**
+    * Copy operator is forbidden
+    */
+   ExtWrenchesAndJointTorquesEstimator& operator=(const ExtWrenchesAndJointTorquesEstimator &other) {};
+
 public:
     /**
      * \brief Constructor.
      */
     ExtWrenchesAndJointTorquesEstimator();
 
+    /**
+     * \brief Destructor.
+     */
+    ~ExtWrenchesAndJointTorquesEstimator();
 
     /**
      * \brief Set model and sensors used for the estimation.

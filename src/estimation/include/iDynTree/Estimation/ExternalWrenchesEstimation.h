@@ -156,6 +156,7 @@ public:
 
 struct estimateExternalWrenchesBuffers
 {
+    estimateExternalWrenchesBuffers();
     estimateExternalWrenchesBuffers(const SubModelDecomposition& subModels);
     estimateExternalWrenchesBuffers(const size_t nrOfSubModels, const size_t nrOfLinks);
 

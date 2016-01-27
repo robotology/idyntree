@@ -39,6 +39,7 @@ namespace iDynTree
 
     public:
         // Documentation inherited
+       FreeFloatingPos();
        FreeFloatingPos(const iDynTree::Model& model);
 
        /**
@@ -92,6 +93,7 @@ namespace iDynTree
 
     public:
         // Documentation inherited
+       FreeFloatingGeneralizedTorques();
        FreeFloatingGeneralizedTorques(const iDynTree::Model& model);
 
        /**

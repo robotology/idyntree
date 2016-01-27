@@ -13,6 +13,12 @@
 
 namespace iDynTree
 {
+FreeFloatingPos::FreeFloatingPos()
+{
+    this->m_worldBasePos = Transform::Identity();
+    this->m_jointPos.resize(0);
+    this->m_jointPos.zero();
+}
 
 FreeFloatingPos::FreeFloatingPos(const Model& model)
 {
@@ -141,6 +147,12 @@ FreeFloatingAcc::~FreeFloatingAcc()
 {
 
 }
+
+FreeFloatingGeneralizedTorques::FreeFloatingGeneralizedTorques()
+{
+    this->m_jointTorques.resize(0);
+}
+
 
 FreeFloatingGeneralizedTorques::FreeFloatingGeneralizedTorques(const Model& model)
 {
