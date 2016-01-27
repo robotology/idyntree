@@ -13,3 +13,4 @@ macro(add_estimation_test classname)
 endmacro()
 
 add_estimation_test(ExternalWrenchesEstimation)
+add_estimation_test(ExtWrenchesAndJointTorquesEstimator)

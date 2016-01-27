@@ -35,6 +35,7 @@
 
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
 
 #include <iDynTree/ModelIO/URDFModelImport.h>
 #include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
@@ -53,6 +54,7 @@ ExtWrenchesAndJointTorquesEstimator::ExtWrenchesAndJointTorquesEstimator():
     m_jointPos(),
     m_linkVels(),
     m_linkProperAccs(),
+    m_linkIntWrenches(),
     m_linkNetExternalWrenches(),
     m_generalizedTorques(),
     m_calibBufs(),
@@ -104,6 +106,8 @@ bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model
                                                              const SensorsList& _sensors)
 {
     // \todo TODO add isConsistent methods to Model and SensorList class
+
+
     m_model = _model;
     m_sensors = _sensors;
 
@@ -115,6 +119,7 @@ bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model
 
     m_linkVels.resize(m_model);
     m_linkProperAccs.resize(m_model);
+    m_linkIntWrenches.resize(m_model);
     m_linkNetExternalWrenches.resize(m_model);
     m_generalizedTorques.resize(m_model);
 
@@ -276,9 +281,9 @@ bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const
 }
 
 bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(const LinkUnknownWrenchContacts& unknowns,
-                                                                               SensorsMeasurements& predictedMeasures,
-                                                                               LinkContactWrenches& estimatedContactWrenches,
-                                                                               JointDOFsDoubleArray& estimatedJointTorques)
+                                                                                     SensorsMeasurements& predictedMeasures,
+                                                                                     LinkContactWrenches& estimatedContactWrenches,
+                                                                                     JointDOFsDoubleArray& estimatedJointTorques)
 {
     if( !m_isModelValid )
     {
@@ -294,9 +299,43 @@ bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(c
         return false;
     }
 
-    return estimateExternalWrenchesWithoutInternalFT(m_model,m_dynamicTraversal,unknowns,
-                                                     m_jointPos,m_linkVels,m_linkProperAccs,
-                                                     m_calibBufs,estimatedContactWrenches);
+    /**
+     * Compute external wrenches
+     */
+    bool ok = estimateExternalWrenchesWithoutInternalFT(m_model,m_dynamicTraversal,unknowns,
+                                                        m_jointPos,m_linkVels,m_linkProperAccs,
+                                                        m_calibBufs,estimatedContactWrenches);
+
+    /**
+     * Compute net external wrenches
+     */
+    ok = ok && estimatedContactWrenches.computeNetWrenches(m_linkNetExternalWrenches);
+
+    /**
+     * Compute joint torques
+     */
+    ok = ok && RNEADynamicPhase(m_model,m_dynamicTraversal,m_jointPos,m_linkVels,m_linkProperAccs,
+                                m_linkNetExternalWrenches,m_linkIntWrenches,m_generalizedTorques);
+
+    /**
+     * Simulate FT sensor measurements
+     */
+    predictSensorsMeasurementsFromRawBuffers(m_model,m_sensors,m_dynamicTraversal,
+                                             m_linkVels,m_linkProperAccs,m_linkIntWrenches,predictedMeasures);
+
+    /**
+     * Copy the joint torques computed by the RNEA to the output
+     */
+    estimatedJointTorques = m_generalizedTorques.jointTorques();
+
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
+                    "Error in estimating external wrenches and joint torques.");
+        return false;
+    }
+
+    return ok;
 }
 
 bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(const LinkUnknownWrenchContacts& unknowns,
@@ -306,14 +345,14 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
 {
     if( !m_isModelValid )
     {
-        reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
                     "Model and sensors information not setted.");
         return false;
     }
 
     if( !m_isKinematicsUpdated )
     {
-        reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
                     "Kinematic information not setted.");
         return false;
     }
@@ -336,9 +375,14 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
     ok = ok && RNEADynamicPhase(m_model,m_dynamicTraversal,m_jointPos,m_linkVels,m_linkProperAccs,
                                 m_linkNetExternalWrenches,m_linkIntWrenches,m_generalizedTorques);
 
+    /**
+     * Copy the joint torques computed by the RNEA to the output
+     */
+    jointTorques = m_generalizedTorques.jointTorques();
+
     if( !ok )
     {
-        reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
                     "Error in estimating external wrenches and joint torques.");
         return false;
     }

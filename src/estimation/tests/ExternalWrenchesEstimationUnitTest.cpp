@@ -231,15 +231,19 @@ void checkSimpleModelExternalWrenchEstimationWithFTSensors()
     ft01.setName("ft01");
     ft01.setParentJoint("joint01");
     ft01.setParentJointIndex(0);
+    ft01.setFirstLinkName(model.getLinkName(0));
     ft01.setFirstLinkSensorTransform(0,Transform::Identity());
+    ft01.setSecondLinkName(model.getLinkName(1));
     ft01.setSecondLinkSensorTransform(1,Transform::Identity());
     ft01.setAppliedWrenchLink(0);
 
     SixAxisForceTorqueSensor ft12;
     ft12.setName("ft12");
-    ft01.setParentJoint("joint12");
-    ft01.setParentJointIndex(1);
+    ft12.setParentJoint("joint12");
+    ft12.setParentJointIndex(1);
+    ft12.setFirstLinkName(model.getLinkName(1));
     ft12.setFirstLinkSensorTransform(1,Transform::Identity());
+    ft12.setSecondLinkName(model.getLinkName(2));
     ft12.setSecondLinkSensorTransform(2,Transform::Identity());
     ft12.setAppliedWrenchLink(1);
 
@@ -340,7 +344,7 @@ void checkSimpleModelExternalWrenchEstimationWithFTSensors()
     // Let's simulate measurements
     iDynTree::SensorsMeasurements simulatedSensors(sensors);
     iDynTree::predictSensorsMeasurementsFromRawBuffers(model,sensors,traversal,
-                                                       vels,properAccs,internalWrenches,trqs,
+                                                       vels,properAccs,internalWrenches,
                                                        simulatedSensors);
 
     for(size_t simFT=0; simFT < simulatedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); simFT++)
@@ -365,7 +369,7 @@ void checkSimpleModelExternalWrenchEstimationWithFTSensors()
 
 int main()
 {
-    /*
+
     std::cerr << "Checking the simplest model: " << std::endl;
     checkSimpleModelExternalWrenchEstimation(0);
 
@@ -375,7 +379,7 @@ int main()
     checkRandomModelExternalWrenchEstimation(2);
     checkRandomModelExternalWrenchEstimation(3);
     checkRandomModelExternalWrenchEstimation(10);
-    checkRandomModelExternalWrenchEstimation(20);*/
+    checkRandomModelExternalWrenchEstimation(20);
 
     checkSimpleModelExternalWrenchEstimationWithFTSensors();
 
