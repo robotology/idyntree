@@ -93,14 +93,14 @@ namespace iDynTree {
          *
          * @return the index of the first link attached to the sensor.
          */
-        int getFirstLinkIndex() const;
+        LinkIndex getFirstLinkIndex() const;
 
         /**
          * Get the index of the first link attached to the sensor.
          *
          * @return the index of the first link attached to the sensor.
          */
-        int getSecondLinkIndex() const;
+        LinkIndex getSecondLinkIndex() const;
 
         /**
          * Set the name of the first link at which the FT sensor is attached.

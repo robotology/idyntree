@@ -33,11 +33,11 @@ struct SixAxisForceTorqueSensor::SixAxisForceTorqueSensorPrivateAttributes
     // Name/id of the sensor
     std::string name;
     // Index of the two links at which the SixAxisForceTorqueSensor is connected
-    int link1, link2, appliedWrenchLink;
+    LinkIndex link1, link2, appliedWrenchLink;
     // Transform from the sensor
     Transform link1_H_sensor, link2_H_sensor;
     // Index of the parent junction
-    int parent_junction_index;
+    JointIndex parent_junction_index;
     // Name of the parent junction
     std::string parent_junction_name;
     // Name of the two links at which the SixAxisForceTorqueSensor is connected
@@ -241,12 +241,12 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
     }
 }
 
-int SixAxisForceTorqueSensor::getFirstLinkIndex() const
+LinkIndex SixAxisForceTorqueSensor::getFirstLinkIndex() const
 {
     return this->pimpl->link1;
 }
 
-int SixAxisForceTorqueSensor::getSecondLinkIndex() const
+LinkIndex SixAxisForceTorqueSensor::getSecondLinkIndex() const
 {
     return this->pimpl->link2;
 }
@@ -293,15 +293,15 @@ Wrench SixAxisForceTorqueSensor::predictMeasurement(const Traversal& traversal, 
     // parent and which one is the child in the dynamic_traversal Traversal
     LinkIndex child_link = LINK_INVALID_INDEX;
     LinkIndex parent_link = LINK_INVALID_INDEX;
-    if( traversal.getParentLink(this->getFirstLinkIndex()) != 0 &&
-        traversal.getParentLink(this->getFirstLinkIndex())->getIndex() == this->getSecondLinkIndex() )
+    if( traversal.getParentLinkFromLinkIndex(this->getFirstLinkIndex()) != 0 &&
+        traversal.getParentLinkFromLinkIndex(this->getFirstLinkIndex())->getIndex() == this->getSecondLinkIndex() )
     {
         child_link = this->getFirstLinkIndex();
         parent_link = this->getSecondLinkIndex();
     }
     else
     {
-        assert(traversal.getParentLink(this->getSecondLinkIndex())->getIndex() == this->getFirstLinkIndex() );
+        assert( traversal.getParentLinkFromLinkIndex(this->getSecondLinkIndex())->getIndex() == this->getFirstLinkIndex());
         child_link = this->getSecondLinkIndex();
         parent_link = this->getFirstLinkIndex();
     }
