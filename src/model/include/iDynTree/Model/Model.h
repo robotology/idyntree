@@ -193,6 +193,16 @@ namespace iDynTree
 
         LinkIndex getLinkIndex(const std::string & linkName) const;
 
+        /**
+         * \brief Check if a given LinkIndex is valid.
+         *
+         * A link index is valid if is different from
+         * LINK_INVALID_INDEX and 0 =< index < getNrOfLinks()-1
+         *
+         * @return true if the index is valid, false otherwise.
+         */
+        bool isValidLinkIndex(const LinkIndex index) const;
+
         LinkPtr getLink(const LinkIndex linkIndex);
         LinkConstPtr getLink(const LinkIndex linkIndex) const;
 
@@ -220,6 +230,16 @@ namespace iDynTree
         IJointPtr getJoint(const JointIndex index);
 
         IJointConstPtr getJoint(const JointIndex index) const;
+
+        /**
+         * \brief Check if a given JointIndex is valid.
+         *
+         * A joint index is valid if is different from
+         * JOINT_INVALID_INDEX and 0 =< index < getNrOfJoints()-1
+         *
+         * @return true if the index is valid, false otherwise.
+         */
+        bool isValidJointIndex(const JointIndex index) const;
 
         /**
          *
@@ -297,6 +317,16 @@ namespace iDynTree
         FrameIndex getFrameIndex(const std::string & frameName) const;
 
         /**
+         * \brief Check if a given FrameIndex is valid.
+         *
+         * A frame index is valid if is different from
+         * FRAME_INVALID_INDEX and 0 =< index < getNrOfFrames()-1
+         *
+         * @return true if the index is valid, false otherwise.
+         */
+        bool isValidFrameIndex(const FrameIndex index) const;
+
+        /**
          * Get the tranform of the frame with respect to the main
          * frame of the link, returned as link_H_frame tranform
          * with refFrame : the link main frame and frame : the
@@ -370,7 +400,7 @@ namespace iDynTree
         /**
          * \brief Get a printable representation of the Model.
          *
-         * Useful for debugging. 
+         * Useful for debugging.
          */
         std::string toString() const;
 

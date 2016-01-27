@@ -32,9 +32,11 @@ void createCopyAndDestroy(const Model & model)
     Model * p_model = new Model(model);
     ASSERT_EQUAL_DOUBLE(p_model->getNrOfLinks(),model.getNrOfLinks());
     ASSERT_EQUAL_DOUBLE(p_model->getNrOfJoints(),model.getNrOfJoints());
+    ASSERT_EQUAL_DOUBLE(p_model->getNrOfFrames(),model.getNrOfFrames());
     *p_model = model;
     ASSERT_EQUAL_DOUBLE(p_model->getNrOfLinks(),model.getNrOfLinks());
     ASSERT_EQUAL_DOUBLE(p_model->getNrOfJoints(),model.getNrOfJoints());
+    ASSERT_EQUAL_DOUBLE(p_model->getNrOfFrames(),model.getNrOfFrames());
     delete p_model;
 }
 
@@ -299,16 +301,7 @@ void checkRandomChains()
 {
     std::cout << "Checking random chains..." << std::endl;
 
-
-    for(int i=4; i <= 100; i += 10)
-    {
-        Model randomModel = getRandomChain(i);
-
-        std::cout << "Checking random chain of size: " << i << std::endl;
-        checkAll(randomModel);
-    }
-
-    for(int i=2; i <= 100; i += 30 )
+    for(int i=2; i <= 50; i += 15 )
     {
         Model randomModel = getRandomChain(i);
 
@@ -322,14 +315,6 @@ void checkRandomChains()
 void checkRandomModels()
 {
     std::cout << "Checking random models..." << std::endl;
-
-    for(int i=2; i <= 100; i += 10 )
-    {
-        Model randomModel = getRandomModel(i);
-
-        std::cout << "Checking random model of size: " << i << std::endl;
-        checkAll(randomModel);
-    }
 
     for(int i=2; i <= 100; i += 30 )
     {
