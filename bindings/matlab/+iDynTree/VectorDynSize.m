@@ -9,52 +9,61 @@ classdef VectorDynSize < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(20, varargin{:});
+        tmp = iDynTreeMEX(23, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(21, self);
+        iDynTreeMEX(24, self);
         self.swigPtr=[];
       end
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(22, self, varargin{:});
-    end
-    function varargout = getVal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(23, self, varargin{:});
-    end
-    function varargout = setVal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(24, self, varargin{:});
-    end
-    function varargout = size(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(25, self, varargin{:});
     end
-    function varargout = data(self,varargin)
+    function varargout = getVal(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(26, self, varargin{:});
     end
-    function varargout = zero(self,varargin)
+    function varargout = setVal(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(27, self, varargin{:});
     end
-    function varargout = resize(self,varargin)
+    function varargout = size(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(28, self, varargin{:});
     end
-    function varargout = fillBuffer(self,varargin)
+    function varargout = data(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(29, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = zero(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(30, self, varargin{:});
     end
-    function varargout = display(self,varargin)
+    function varargout = reserve(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(31, self, varargin{:});
     end
-    function varargout = toMatlab(self,varargin)
+    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(32, self, varargin{:});
     end
-    function varargout = fromMatlab(self,varargin)
+    function varargout = shrink_to_fit(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(33, self, varargin{:});
+    end
+    function varargout = capacity(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(34, self, varargin{:});
+    end
+    function varargout = fillBuffer(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(35, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(36, self, varargin{:});
+    end
+    function varargout = display(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(37, self, varargin{:});
+    end
+    function varargout = toMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(38, self, varargin{:});
+    end
+    function varargout = fromMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(39, self, varargin{:});
     end
   end
   methods(Static)

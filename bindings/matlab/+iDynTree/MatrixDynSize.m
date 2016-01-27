@@ -44,20 +44,29 @@ classdef MatrixDynSize < SwigRef
     function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(14, self, varargin{:});
     end
-    function varargout = fillRowMajorBuffer(self,varargin)
+    function varargout = reserve(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(15, self, varargin{:});
     end
-    function varargout = fillColMajorBuffer(self,varargin)
+    function varargout = capacity(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(16, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = shrink_to_fit(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(17, self, varargin{:});
     end
-    function varargout = display(self,varargin)
+    function varargout = fillRowMajorBuffer(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(18, self, varargin{:});
     end
-    function varargout = toMatlab(self,varargin)
+    function varargout = fillColMajorBuffer(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(19, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(20, self, varargin{:});
+    end
+    function varargout = display(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(21, self, varargin{:});
+    end
+    function varargout = toMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(22, self, varargin{:});
     end
   end
   methods(Static)
