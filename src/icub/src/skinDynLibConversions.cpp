@@ -221,7 +221,8 @@ bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
 
         unknowns.addNewContactForLink(iDynTree_link_index,unknownWrench);
     }
-
+    
+    return true;
 }
 
 
