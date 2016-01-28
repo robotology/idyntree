@@ -219,7 +219,7 @@ bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
             }
         }
 
-        unknowns.addNewContactForLink(iDynTree_link_index,unknownWrench);
+        unknowns.addNewContactForLink((LinkIndex)iDynTree_link_index,unknownWrench);
     }
     
     return true;
