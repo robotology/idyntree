@@ -5,36 +5,24 @@ classdef Sensor < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(763, self);
+        iDynTreeMEX(835, self);
         self.swigPtr=[];
       end
     end
     function varargout = getName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(764, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(836, self, varargin{:});
     end
     function varargout = getSensorType(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(765, self, varargin{:});
-    end
-    function varargout = getParent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(766, self, varargin{:});
-    end
-    function varargout = getParentIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(767, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(837, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(768, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(838, self, varargin{:});
     end
     function varargout = setName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(769, self, varargin{:});
-    end
-    function varargout = setParent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(770, self, varargin{:});
-    end
-    function varargout = setParentIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(771, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(839, self, varargin{:});
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(772, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(840, self, varargin{:});
     end
     function self = Sensor(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')

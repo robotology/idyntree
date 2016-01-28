@@ -40,6 +40,15 @@ void Model::copy(const Model& other)
         this->addJoint(other.jointNames[jnt],other.joints[jnt]);
     }
 
+    // Add all additional frames, preserving the numbering
+    for(unsigned int addFrm=other.getNrOfLinks(); addFrm < other.getNrOfFrames(); addFrm++ )
+    {
+        std::string linkName = other.getLinkName(other.getFrameLink(addFrm));
+        std::string frameName = other.getFrameName(addFrm);
+        Transform link_H_frame = other.getFrameTransform(addFrm);
+        this->addAdditionalFrameToLink(linkName,frameName,link_H_frame);
+    }
+
     // Copy the default base link
     this->setDefaultBaseLink(other.getDefaultBaseLink());
 }
@@ -103,6 +112,12 @@ LinkIndex Model::getLinkIndex(const std::string& linkName) const
     return LINK_INVALID_INDEX;
 }
 
+bool Model::isValidLinkIndex(const LinkIndex index) const
+{
+    return (index != LINK_INVALID_INDEX) &&
+           (index >= 0) && (index < this->getNrOfFrames());
+}
+
 std::string Model::getLinkName(const LinkIndex linkIndex) const
 {
     if( linkIndex >= 0 && linkIndex < (LinkIndex) this->getNrOfLinks() )
@@ -142,6 +157,13 @@ JointIndex Model::getJointIndex(const std::string& jointName) const
 
     return JOINT_INVALID_INDEX;
 }
+
+bool Model::isValidJointIndex(const JointIndex index) const
+{
+    return (index != JOINT_INVALID_INDEX) &&
+           (index >= 0) && (index < this->getNrOfJoints());
+}
+
 
 std::string Model::getJointName(const JointIndex jointIndex) const
 {
@@ -322,6 +344,12 @@ FrameIndex Model::getFrameIndex(const std::string& frameName) const
     }
 
     return FRAME_INVALID_INDEX;
+}
+
+bool Model::isValidFrameIndex(const FrameIndex index) const
+{
+    return (index != FRAME_INVALID_INDEX) &&
+           (index >= 0) && (index < this->getNrOfFrames());
 }
 
 bool Model::isFrameNameUsed(const std::string frameName)
@@ -518,6 +546,37 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
 
     return true;
 }
+
+std::string Model::toString() const
+{
+    std::stringstream ss;
+
+    ss << "Model: " << std::endl;
+    ss << "  Links: " << std::endl;
+    for(size_t i=0; i < this->getNrOfLinks(); i++ )
+    {
+        ss << "    [" << i << "] " << this->getLinkName(i) << std::endl;
+    }
+
+    ss << "  Frames: " << std::endl;
+    for(size_t i=this->getNrOfLinks(); i < this->getNrOfFrames(); i++ )
+    {
+        ss << "    [" << i << "] "
+           << this->getFrameName(i)
+           << " --> " << this->getLinkName(this->getFrameLink(i)) << std::endl;
+    }
+
+    ss << "  Joints: " << std::endl;
+    for(size_t i=0; i < this->getNrOfJoints(); i++ )
+    {
+        ss << "    [" << i << "] "
+           << this->getJointName(i) << " (dofs: " << this->getJoint(i)->getNrOfDOFs() << ") : "
+           << this->getLinkName(this->getJoint(i)->getFirstAttachedLink()) << "<-->" << this->getLinkName(this->getJoint(i)->getSecondAttachedLink()) << std::endl;
+    }
+
+    return ss.str();
+}
+
 
 
 

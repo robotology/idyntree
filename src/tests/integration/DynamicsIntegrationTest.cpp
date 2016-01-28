@@ -34,13 +34,13 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
 {
     // Allocate input for both algorithms : robot position, velocity
     // and link external wrenches
-    LinkExternalWrenches linkExtWrenches(model);
+    LinkNetExternalWrenches linkExtWrenches(model);
     FreeFloatingPos   robotPos(model);
     FreeFloatingVel   robotVel(model);
 
     // Input for direct dynamics algorithms
     // and output for inverse dynamics : joint torques
-    JointDoubleArray ABA_jntTorques(model);
+    JointDOFsDoubleArray ABA_jntTorques(model);
 
     // Fill the input to forward dynamics with random data
     robotPos.worldBasePos() = getRandomTransform();
@@ -89,7 +89,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
 
     RNEADynamicPhase(model,
                      traversal,
-                     robotPos,
+                     robotPos.jointPos(),
                      RNEA_linksVel,
                      RNEA_linksAcc,
                      linkExtWrenches,

@@ -69,6 +69,7 @@ namespace iDynTree
         AngularForceVector3(const double x, const double y, const double z);
         AngularForceVector3(const double* in_data, const unsigned int in_size);
         AngularForceVector3(const AngularForceVector3 & other);
+        AngularForceVector3(const Vector3& other);
 
         /**
          * Geometric operations

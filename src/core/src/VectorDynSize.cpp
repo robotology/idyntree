@@ -16,12 +16,12 @@
 namespace iDynTree
 {
 
-VectorDynSize::VectorDynSize(): m_data(0), m_size(0)
+VectorDynSize::VectorDynSize(): m_data(0), m_size(0), m_capacity(0)
 {
 
 }
 
-VectorDynSize::VectorDynSize(unsigned int _size): m_size(_size)
+VectorDynSize::VectorDynSize(unsigned int _size): m_size(_size), m_capacity(_size)
 {
     if( this->m_size == 0 )
     {
@@ -37,7 +37,7 @@ VectorDynSize::VectorDynSize(unsigned int _size): m_size(_size)
 
 
 VectorDynSize::VectorDynSize(const double* in_data,
-                             const unsigned int in_size): m_size(in_size)
+                             const unsigned int in_size): m_size(in_size), m_capacity(in_size)
 {
     if( this->m_size == 0 )
     {
@@ -50,7 +50,7 @@ VectorDynSize::VectorDynSize(const double* in_data,
     }
 }
 
-VectorDynSize::VectorDynSize(const VectorDynSize& vec): m_size(vec.size())
+VectorDynSize::VectorDynSize(const VectorDynSize& vec): m_size(vec.size()), m_capacity(vec.capacity())
 {
     if( this->m_size == 0 )
     {
@@ -58,14 +58,14 @@ VectorDynSize::VectorDynSize(const VectorDynSize& vec): m_size(vec.size())
     }
     else
     {
-        this->m_data = new double[this->m_size];
-        std::memcpy(this->m_data,vec.data(),this->m_size*sizeof(double));
+        this->m_data = new double[this->m_capacity];
+        std::memcpy(this->m_data,vec.data(),this->m_capacity*sizeof(double));
     }
 }
 
 VectorDynSize::~VectorDynSize()
 {
-    if( this->m_size > 0 )
+    if( this->m_capacity > 0 )
     {
         delete[] this->m_data;
         this->m_data = 0;
@@ -77,22 +77,7 @@ VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
     // if the size don't match, reallocate the data
     if( this->m_size != vec.size() )
     {
-        // Get the new size
-        this->m_size = vec.size();
-
-        // Destroy the data only if there is anything
-        if( this->m_data != 0 )
-        {
-             delete[] this->m_data;
-             this->m_data = 0;
-        }
-
-        // Actually allocate the data only if the size is not 0
-        if( this->m_size > 0 )
-        {
-            this->m_data = new double[this->m_size];
-        }
-
+        resize(vec.size());
     }
 
     // After reallocation, the size should match
@@ -167,11 +152,15 @@ bool VectorDynSize::setVal(const unsigned int index, const double new_el)
     return true;
 }
 
-void VectorDynSize::resize(const unsigned int _newSize)
+void VectorDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
 {
-    if( _newSize == this->size() )
+    // If we change the data buffer, we need to
+    // copy the old content to a local buffer
+    double * localBuf = 0;
+    if( this->m_size > 0 )
     {
-        return;
+       localBuf = new double[this->m_size];
+       memcpy(localBuf,this->m_data,this->m_size*sizeof(double));
     }
 
     if( this->m_data )
@@ -179,18 +168,60 @@ void VectorDynSize::resize(const unsigned int _newSize)
         delete[] this->m_data;
     }
 
-    this->m_size = _newSize;
+    this->m_capacity = _newCapacity;
 
-    if( this->m_size == 0 )
+    if( this->m_capacity == 0 )
     {
         this->m_data = 0;
     }
     else
     {
-        this->m_data = new double[this->m_size];
+        this->m_data = new double[this->m_capacity];
         zero();
+
+        if( this->m_size > 0 )
+        {
+            memcpy(this->m_data,localBuf,this->m_size*sizeof(double));
+            delete[] localBuf;
+            localBuf = 0;
+        }
     }
 }
+
+void VectorDynSize::reserve(const unsigned int _newCapacity)
+{
+    assert(this->m_size <= this->m_capacity);
+
+    if( _newCapacity <= this->m_capacity )
+    {
+        return;
+    }
+
+    this->changeCapacityAndCopyData(_newCapacity);
+}
+
+void VectorDynSize::resize(const unsigned int _newSize)
+{
+    reserve(_newSize);
+    this->m_size = _newSize;
+}
+
+size_t VectorDynSize::capacity() const
+{
+    return this->m_capacity;
+}
+
+void VectorDynSize::shrink_to_fit()
+{
+    if( this->m_size == this->m_capacity )
+    {
+        return;
+    }
+
+    this->changeCapacityAndCopyData(this->m_size);
+}
+
+
 
 void VectorDynSize::fillBuffer(double* buf) const
 {

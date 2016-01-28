@@ -186,11 +186,11 @@ void testFwdKinConsistency(std::string modelFilePath)
         ASSERT_EQUAL_VECTOR(linksVels(linkIndex).asVector(),
                             linksVels_check(linkIndex).asVector());
         ASSERT_EQUAL_VECTOR(linksAcc(linkIndex).asVector(),
-                            linksAcc(linkIndex).asVector());
+                             linksAcc(linkIndex).asVector());
     }
 
     // Compute torques (i.e. inverse dynamics)
-    LinkExternalWrenches fExt(model);
+    LinkNetExternalWrenches fExt(model);
     LinkInternalWrenches f(model);
     FreeFloatingGeneralizedTorques baseWrenchJointTorques(model);
     KDL::JntArray jntTorques(model.getNrOfDOFs());

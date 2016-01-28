@@ -13,6 +13,9 @@
 namespace iDynTree
 {
     class RotationRaw;
+    class SpatialAcc;
+    class Twist;
+
     /**
      * Class representing a classical 6D acceleration, i.e. the concatenation
      * of the 3d vector of the acceleration of a point and of the 3d vector
@@ -50,6 +53,20 @@ namespace iDynTree
 
         /** constructor helpers */
         static ClassicalAcc Zero();
+
+        Vector3 getLinearVec3() const;
+        Vector3 getAngularVec3() const;
+
+        /**
+         * Build a classical acceleration from a spatial acceleation and spatial twist
+         * of a body.
+         */
+        void fromSpatial(const SpatialAcc& spatialAcc, const Twist& vel);
+
+        /**
+         * Convert a classical acceleation to a spatial one.
+         */
+        void toSpatial(SpatialAcc & spatialAcc, const Twist & vel) const;
 
     };
 }

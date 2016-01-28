@@ -23,6 +23,8 @@ namespace iDynTree
     typedef int FrameIndex;
     extern int FRAME_INVALID_INDEX;
     extern std::string FRAME_INVALID_NAME;
+
+    typedef int TraversalIndex;
 }
 
 #endif /* IDYNTREE_INDECES_H */

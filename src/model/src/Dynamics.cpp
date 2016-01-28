@@ -27,10 +27,10 @@ namespace iDynTree
 {
 
 bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
-                      const FreeFloatingPos& robotPos,
+                      const JointPosDoubleArray& jointPos,
                       const LinkVelArray& linksVels,
                       const LinkAccArray& linksAccs,
-                      const LinkExternalWrenches& fext,
+                      const LinkNetExternalWrenches& fext,
                       LinkInternalWrenches& f,
                       FreeFloatingGeneralizedTorques& baseWrenchJntTorques)
 {
@@ -67,7 +67,8 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
              {
                  LinkIndex childIndex = neighborIndex;
                  IJointConstPtr neighborJoint = model.getJoint(model.getNeighbor(visitedLinkIndex,neigh_i).neighborJoint);
-                 const Transform & visitedLink_X_child = neighborJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,childIndex);
+
+                 const Transform & visitedLink_X_child = neighborJoint->getTransform(jointPos,visitedLinkIndex,childIndex);
 
                  // One term of the sum in Equation 5.20 in Featherstone 2008
                  f(visitedLinkIndex) = f(visitedLinkIndex) + visitedLink_X_child*f(childIndex);
@@ -88,11 +89,11 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
         }
         else
         {
-            // If the visited link is not the base and  connected to a parent link
-            // at this point we can compute the torque of the joint connecting this link and its parent
+            // If the visited link is not the base and it is connected to a parent link
+            // at this point we can compute the torque of the joint connecting the visited link and its parent
             // This is Equation 5.13 in Featherstone 2008. It is offloaded to the joint to be
             // able to deal with different kind of joints.
-            toParentJoint->computeJointTorque(robotPos.jointPos(),
+            toParentJoint->computeJointTorque(jointPos,
                                               f(visitedLinkIndex),
                                               parentLink->getIndex(),
                                               visitedLinkIndex,
@@ -105,7 +106,7 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
 
 bool CompositeRigidBodyAlgorithm(const Model& model,
                                  const Traversal& traversal,
-                                 const FreeFloatingPos& jointPos,
+                                 const JointPosDoubleArray& jointPos,
                                  LinkCompositeRigidBodyInertias& linkCRBs,
                                  FreeFloatingMassMatrix& massMatrix)
 {
@@ -144,7 +145,7 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
             LinkIndex parentLinkIndex = parentLink->getIndex();
 
             linkCRBs(parentLinkIndex) = linkCRBs(parentLinkIndex) +
-                (toParentJoint->getTransform(jointPos.jointPos(),parentLinkIndex,visitedLinkIndex))*linkCRBs(visitedLinkIndex);
+                (toParentJoint->getTransform(jointPos,parentLinkIndex,visitedLinkIndex))*linkCRBs(visitedLinkIndex);
 
             // For now we just implement the CRBA for 0 or 1 dofs joints.
             assert( toParentJoint->getNrOfDOFs() <= 1 );
@@ -180,7 +181,7 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
                     {
                         IJointConstPtr ancestorToParentJoint = traversal.getParentJointFromLinkIndex(ancestor->getIndex());
                         LinkIndex      ancestorParent =        traversal.getParentLinkFromLinkIndex(ancestor->getIndex())->getIndex();
-                        Transform ancestorParent_X_ancestor = ancestorToParentJoint->getTransform(jointPos.jointPos(),ancestorParent,ancestor->getIndex());
+                        Transform ancestorParent_X_ancestor = ancestorToParentJoint->getTransform(jointPos,ancestorParent,ancestor->getIndex());
                         F = ancestorParent_X_ancestor*F;
                     }
 
@@ -211,7 +212,7 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
                 {
                     IJointConstPtr ancestorToParentJoint = traversal.getParentJointFromLinkIndex(ancestor->getIndex());
                     LinkIndex      ancestorParent =        traversal.getParentLinkFromLinkIndex(ancestor->getIndex())->getIndex();
-                    Transform ancestorParent_X_ancestor = ancestorToParentJoint->getTransform(jointPos.jointPos(),ancestorParent,ancestor->getIndex());
+                    Transform ancestorParent_X_ancestor = ancestorToParentJoint->getTransform(jointPos,ancestorParent,ancestor->getIndex());
                     F = ancestorParent_X_ancestor*F;
                 }
 
@@ -272,8 +273,8 @@ bool ArticulatedBodyAlgorithm(const Model& model,
                               const Traversal& traversal,
                               const FreeFloatingPos& robotPos,
                               const FreeFloatingVel& robotVel,
-                              const LinkExternalWrenches & linkExtWrenches,
-                              const JointDoubleArray & jointTorques,
+                              const LinkNetExternalWrenches & linkExtWrenches,
+                              const JointDOFsDoubleArray & jointTorques,
                                     ArticulatedBodyAlgorithmInternalBuffers & bufs,
                                     FreeFloatingAcc & robotAcc)
 {

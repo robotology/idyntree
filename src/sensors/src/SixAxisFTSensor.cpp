@@ -19,6 +19,9 @@
 
 #include "iDynTree/Core/Transform.h"
 
+#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model/Link.h>
+
 
 #include <cassert>
 
@@ -30,11 +33,11 @@ struct SixAxisForceTorqueSensor::SixAxisForceTorqueSensorPrivateAttributes
     // Name/id of the sensor
     std::string name;
     // Index of the two links at which the SixAxisForceTorqueSensor is connected
-    int link1, link2, appliedWrenchLink;
+    LinkIndex link1, link2, appliedWrenchLink;
     // Transform from the sensor
     Transform link1_H_sensor, link2_H_sensor;
     // Index of the parent junction
-    int parent_junction_index;
+    JointIndex parent_junction_index;
     // Name of the parent junction
     std::string parent_junction_name;
     // Name of the two links at which the SixAxisForceTorqueSensor is connected
@@ -100,13 +103,13 @@ bool SixAxisForceTorqueSensor::setSecondLinkSensorTransform(const int link_index
     return true;
 }
 
-bool SixAxisForceTorqueSensor::setParent(const std::string& parent)
+bool SixAxisForceTorqueSensor::setParentJoint(const std::string& parent)
 {
     this->pimpl->parent_junction_name = parent;
     return true;
 }
 
-bool SixAxisForceTorqueSensor::setParentIndex(const int &parent_index)
+bool SixAxisForceTorqueSensor::setParentJointIndex(const int &parent_index)
 {
     this->pimpl->parent_junction_index = parent_index;
     return true;
@@ -159,12 +162,12 @@ int SixAxisForceTorqueSensor::getAppliedWrenchLink() const
     return this->pimpl->appliedWrenchLink;
 }
 
-std::string SixAxisForceTorqueSensor::getParent() const
+std::string SixAxisForceTorqueSensor::getParentJoint() const
 {
     return this->pimpl->parent_junction_name;
 }
 
-int SixAxisForceTorqueSensor::getParentIndex() const
+JointIndex SixAxisForceTorqueSensor::getParentJointIndex() const
 {
     return this->pimpl->parent_junction_index;
 }
@@ -199,24 +202,34 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
 {
     assert(this->isValid());
 
+    Wrench buffered_wrench;
+
     if( link_index == this->pimpl->link1 )
     {
-        wrench_applied_on_link = this->pimpl->link1_H_sensor*measured_wrench;
+        buffered_wrench = this->pimpl->link1_H_sensor*measured_wrench;
         // If the measure wrench is the one applied on the other link, change sign
         if( this->getAppliedWrenchLink() != link_index )
         {
-            wrench_applied_on_link = -wrench_applied_on_link;
+            wrench_applied_on_link = -buffered_wrench;
+        }
+        else
+        {
+            wrench_applied_on_link = buffered_wrench;
         }
 
         return true;
     }
     else if( link_index == this->pimpl->link2 )
     {
-        wrench_applied_on_link = this->pimpl->link2_H_sensor*measured_wrench;
+        buffered_wrench = this->pimpl->link2_H_sensor*measured_wrench;
 
         if( this->getAppliedWrenchLink() != link_index )
         {
-            wrench_applied_on_link = -wrench_applied_on_link;
+            wrench_applied_on_link = -buffered_wrench;
+        }
+        else
+        {
+            wrench_applied_on_link = buffered_wrench;
         }
 
         return true;
@@ -228,12 +241,12 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
     }
 }
 
-int SixAxisForceTorqueSensor::getFirstLinkIndex() const
+LinkIndex SixAxisForceTorqueSensor::getFirstLinkIndex() const
 {
     return this->pimpl->link1;
 }
 
-int SixAxisForceTorqueSensor::getSecondLinkIndex() const
+LinkIndex SixAxisForceTorqueSensor::getSecondLinkIndex() const
 {
     return this->pimpl->link2;
 }
@@ -259,5 +272,72 @@ std::string SixAxisForceTorqueSensor::getSecondLinkName() const
 {
     return this->pimpl->link2Name;
 }
+
+Wrench SixAxisForceTorqueSensor::predictMeasurement(const Traversal& traversal, const LinkInternalWrenches& intWrenches)
+{
+    Wrench simulated_measurement;
+
+    //Check that the input size is consistent
+    assert(this->isValid());
+    assert(this->getFirstLinkIndex() >= 0 && this->getFirstLinkIndex() < traversal.getNrOfVisitedLinks());
+    assert(this->getSecondLinkIndex() >= 0 && this->getSecondLinkIndex() < traversal.getNrOfVisitedLinks());
+
+
+    // The intWrenches vector is assumed to be the output of the RNEADynamicPhase function called
+    // with the passed traversal.
+    // ie intWrench[i] is the force applied by link i on the link traversal.getParent(i),
+    // expressed in the refernce frame of link i
+    // From this information, we can "simulate" the output that we could expect on this sensor
+
+    // First we get the two links attached to this ft sensor, and we check which one is the
+    // parent and which one is the child in the dynamic_traversal Traversal
+    LinkIndex child_link = LINK_INVALID_INDEX;
+    LinkIndex parent_link = LINK_INVALID_INDEX;
+    if( traversal.getParentLinkFromLinkIndex(this->getFirstLinkIndex()) != 0 &&
+        traversal.getParentLinkFromLinkIndex(this->getFirstLinkIndex())->getIndex() == this->getSecondLinkIndex() )
+    {
+        child_link = this->getFirstLinkIndex();
+        parent_link = this->getSecondLinkIndex();
+    }
+    else
+    {
+        assert( traversal.getParentLinkFromLinkIndex(this->getSecondLinkIndex())->getIndex() == this->getFirstLinkIndex());
+        child_link = this->getSecondLinkIndex();
+        parent_link = this->getFirstLinkIndex();
+    }
+
+    // if the child_link is the link to which the measured wrench is applied, the sign between the
+    // measured_wrench and f[child_link] is consistent, otherwise we have to change the sign
+
+
+    // To simulate the sensor, we have to translate f[child] in the sensor frame
+    // with the appriopriate sign
+    iDynTree::Transform child_link_H_sensor;
+    this->getLinkSensorTransform(child_link,child_link_H_sensor);
+    if( this->getAppliedWrenchLink() == parent_link  )
+    {
+        simulated_measurement = -(child_link_H_sensor.inverse()*intWrenches(child_link));
+    }
+    else
+    {
+        simulated_measurement = (child_link_H_sensor.inverse()*intWrenches(child_link));
+        assert( this->getAppliedWrenchLink() == child_link );
+    }
+
+    return simulated_measurement;
+}
+
+std::string SixAxisForceTorqueSensor::toString(const Model& model) const
+{
+    std::stringstream ss;
+
+    ss << "Sensor " << this->getName() << std::endl;
+    ss << " is attached to joint " << this->getParentJoint() << " ( " << this->getParentJointIndex() << " ) " << std::endl;
+    ss << " that connects  " << this->getFirstLinkName() << " ( " << this->getFirstLinkIndex() << " ) and "
+                             << this->getSecondLinkName() << " ( " << this->getSecondLinkIndex() << std::endl;
+
+    return ss.str();
+}
+
 
 }

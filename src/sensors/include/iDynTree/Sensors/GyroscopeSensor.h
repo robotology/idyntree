@@ -39,7 +39,7 @@ namespace iDynTree {
      * \ingroup iDynTreeSensors
      *
      */
-    class GyroscopeSensor: public Sensor {
+    class GyroscopeSensor: public LinkSensor {
     private:
         struct GyroscopePrivateAttributes;
         GyroscopePrivateAttributes * pimpl;
@@ -82,13 +82,13 @@ namespace iDynTree {
         /**
          * Documented in Sensor
          */
-        bool setParent(const std::string &parent);
+        bool setParentLink(const std::string &parent);
 
 
         /**
          * Documented in Sensor
          */
-        bool setParentIndex(const int &parent_index);
+        bool setParentLinkIndex(const LinkIndex &parent_index);
 
         /**
          * Documented in the sensor
@@ -105,12 +105,12 @@ namespace iDynTree {
         /**
          * Documented in Sensor
          */
-        std::string getParent() const;
+        std::string getParentLink() const;
 
         /**
          * Documented in Sensor
          */
-        int getParentIndex() const;
+        LinkIndex getParentLinkIndex() const;
 
         /**
          * Documented in Sensor
@@ -131,23 +131,12 @@ namespace iDynTree {
         Transform getLinkSensorTransform(void);
 
         /**
-         * Predict sensor measurement when given the parent link spatial velocity
+         * Predict sensor measurement when given the parent link spatial velocity, expressed
+         * in the link orientation and wrt the link origin.
          *
          * @return the predicted Measurement of an iDynTree::AngVelocity
          */
         iDynTree::AngVelocity predictMeasurement(const iDynTree::Twist& linkVel);
-
-        /**
-         * The following method is to be implemented in the future after considering the interface
-         *
-         * Get angular velcity of the link on which the sensor is fixed and the angular velocity is being measured.
-         *
-         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
-         */
-        //bool getAngularVelocityOfLink(const iDynTree::AngVelocity & measured_angular_velocity,
-        //                            iDynTree::AngVelocity & angular_velocity_of_link ) const;
-
-
     };
 
 

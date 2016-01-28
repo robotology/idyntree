@@ -53,6 +53,11 @@ namespace iDynTree
     {
     }
 
+    AngularMotionVector3::AngularMotionVector3(const Vector3& other):
+    MotionVector3<AngularMotionVector3>(other.data(),other.size())
+    {
+    }
+
     Rotation AngularMotionVector3::exp() const
     {
         Rotation ret;

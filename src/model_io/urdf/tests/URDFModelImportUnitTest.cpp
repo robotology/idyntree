@@ -40,6 +40,9 @@ void checkURDF(std::string fileName,
     bool ok = modelFromURDF(fileName,model);
     assert(ok);
 
+    std::cerr << "Model loaded from " << fileName << std::endl;
+    std::cerr << model.toString() << std::endl;
+
     ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(),expectedNrOfLinks);
     ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(),expectedNrOfJoints);
     ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(),expectedNrOfDOFs);
@@ -47,12 +50,43 @@ void checkURDF(std::string fileName,
     ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()),expectedDefaultBase);
 
     checkParsingOfDofsFromURDF(fileName,expectedNrOfDOFs);
+
+    // Check that the copy constructor works fine
+    Model modelCopyConstruced = model;
+
+    std::cerr << "Model copy constructed from " << fileName << std::endl;
+    std::cerr << modelCopyConstruced.toString() << std::endl;
+
+    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfLinks(),expectedNrOfLinks);
+    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfJoints(),expectedNrOfJoints);
+    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfDOFs(),expectedNrOfDOFs);
+    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfFrames(),expectedNrOfFrames);
+    ASSERT_EQUAL_STRING(modelCopyConstruced.getLinkName(modelCopyConstruced.getDefaultBaseLink()),expectedDefaultBase);
+
+    // Check that the copy assignent works fine
+    Model modelCopyAssigned;
+
+    modelCopyAssigned = model;
+
+    std::cerr << "Model copy assigned from " << fileName << std::endl;
+    std::cerr << modelCopyAssigned.toString() << std::endl;
+
+
+    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfLinks(),expectedNrOfLinks);
+    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfJoints(),expectedNrOfJoints);
+    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfDOFs(),expectedNrOfDOFs);
+    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfFrames(),expectedNrOfFrames);
+    ASSERT_EQUAL_STRING(modelCopyAssigned.getLinkName(modelCopyAssigned.getDefaultBaseLink()),expectedDefaultBase);
+
 }
 
 int main()
 {
     checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,4,"link1");
     checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,3,"link1");
+    checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,56,"root_link");
+    checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,105,"root_link");
+
 
     return EXIT_SUCCESS;
 }

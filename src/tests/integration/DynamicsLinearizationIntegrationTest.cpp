@@ -235,8 +235,8 @@ bool ForwardDynamicsLinearizationNumerical(const Model& model,
                                            const Traversal& traversal,
                                            const FreeFloatingPos& robotPos,
                                            const FreeFloatingVel& robotVel,
-                                           const LinkExternalWrenches & linkExtWrenches,
-                                           const JointDoubleArray & jointTorques,
+                                           const LinkNetExternalWrenches & linkExtWrenches,
+                                           const JointDOFsDoubleArray & jointTorques,
                                                  ArticulatedBodyAlgorithmInternalBuffers bufs,
                                                  ForwardDynamicsLinearizationInternalBuffers & bufsNum,
                                                  FreeFloatingAcc & robotAcc,
@@ -387,14 +387,14 @@ void checkABAandABALinearizationAreConsistent(const Model & model,
     // Input data
      // Allocate input for both algorithms : robot position, velocity
     // and link external wrenches
-    LinkExternalWrenches linkExtWrenches(model);
+    LinkNetExternalWrenches linkExtWrenches(model);
     FreeFloatingPos   robotPos(model);
     FreeFloatingVel   robotVel(model);
     FreeFloatingAcc   robotAcc(model);
 
     // Input for direct dynamics algorithms
     // and output for inverse dynamics : joint torques
-    JointDoubleArray jntTorques(model);
+    JointDOFsDoubleArray jntTorques(model);
 
     // Fill the input to forward dynamics with random data
     robotPos.worldBasePos() = iDynTree::Transform::Identity();

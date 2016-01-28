@@ -7,14 +7,14 @@ classdef ForceVector3__AngularForceVector3 < iDynTree.GeomVector3__AngularForceV
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(285, varargin{:});
+        tmp = iDynTreeMEX(291, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(286, self);
+        iDynTreeMEX(292, self);
         self.swigPtr=[];
       end
     end

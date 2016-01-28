@@ -4,7 +4,8 @@
 
 project(iDynTree_Model CXX)
 
-set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
+set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
+                           include/iDynTree/Model/FixedJoint.h
                            include/iDynTree/Model/ForwardKinematics.h
                            include/iDynTree/Model/FreeFloatingState.h
                            include/iDynTree/Model/FreeFloatingMassMatrix.h
@@ -24,7 +25,8 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/FixedJoint.h
 
 set(IDYNTREE_MODEL_PRIVATE_INCLUDES include/iDynTree/Model/ModelTestUtils.h)
 
-set(IDYNTREE_MODEL_SOURCES src/FixedJoint.cpp
+set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
+                           src/FixedJoint.cpp
                            src/ForwardKinematics.cpp
                            src/FreeFloatingState.cpp
                            src/FreeFloatingMassMatrix.cpp

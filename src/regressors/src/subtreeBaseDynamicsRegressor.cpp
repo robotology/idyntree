@@ -175,7 +175,7 @@ int subtreeBaseDynamicsRegressor::configure()
                 = (iDynTree::SixAxisForceTorqueSensor *) p_sensors_tree->getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_id);
 
         first_ft_sensor_parent_link_id =
-            undirected_tree.getJunction(sens->getParentIndex())->getParentLink()->getLinkIndex();
+            undirected_tree.getJunction(sens->getParentJointIndex())->getParentLink()->getLinkIndex();
 
         assert( sens->isLinkAttachedToSensor(first_ft_sensor_parent_link_id) );
 

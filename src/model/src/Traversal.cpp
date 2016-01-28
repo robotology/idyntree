@@ -5,10 +5,12 @@
  *
  */
 
+
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/Model.h>
 
 #include <cassert>
+#include <sstream>
 
 namespace iDynTree
 {
@@ -75,17 +77,17 @@ unsigned int Traversal::getNrOfVisitedLinks() const
     return this->links.size();
 }
 
-const Link* Traversal::getLink(unsigned int traversalIndex) const
+const Link* Traversal::getLink(const TraversalIndex traversalIndex) const
 {
     return this->links[traversalIndex];
 }
 
-const IJoint* Traversal::getParentJoint(unsigned int traversalIndex) const
+const IJoint* Traversal::getParentJoint(const TraversalIndex traversalIndex) const
 {
     return this->toParentJoints[traversalIndex];
 }
 
-const Link* Traversal::getParentLink(unsigned int traversalIndex) const
+const Link* Traversal::getParentLink(const TraversalIndex traversalIndex) const
 {
     return this->parents[traversalIndex];
 }
@@ -104,5 +106,50 @@ bool Traversal::reset(const Model& model)
 {
     return reset(model.getNrOfLinks());
 }
+
+bool Traversal::isParentOf(const LinkIndex parentCandidate,
+                           const LinkIndex childCandidate) const
+{
+    assert(childCandidate  < this->linkIndexToTraversalIndex.size());
+    assert(parentCandidate < this->linkIndexToTraversalIndex.size());
+    assert(childCandidate  >= 0);
+    assert(parentCandidate >= 0);
+
+    // If the childCandidate is not in the traversal, then clearly
+    // the parentCandidate is not its parent for this traversal
+    if( linkIndexToTraversalIndex[childCandidate] == -1 )
+    {
+        return false;
+    }
+
+    LinkConstPtr parentPtr = this->getParentLinkFromLinkIndex(childCandidate);
+    if( parentPtr == 0 )
+    {
+        return false;
+    }
+    else
+    {
+        return (this->getParentLinkFromLinkIndex(childCandidate)->getIndex() == parentCandidate);
+    }
+}
+
+std::string Traversal::toString(const Model & model) const
+{
+    std::stringstream ss;
+
+    ss << "Traversal: " << std::endl;
+    for(size_t i=0; i < this->getNrOfVisitedLinks(); i++ )
+    {
+        ss << "[" << i << "]\tLink: " << model.getLinkName(this->getLink(i)->getIndex()) << "[" << this->getLink(i)->getIndex() << "]" << std::endl;
+        if( i > 0 )
+        {
+           ss << "\tJoint to parent : " << model.getJointName(this->getParentJoint(i)->getIndex()) << "[" << this->getParentJoint(i)->getIndex() << "]" << std::endl;
+           ss << "\tParent link     : " << model.getLinkName(this->getParentLink(i)->getIndex()) << "[" << this->getParentLink(i)->getIndex() << "]" << std::endl;
+        }
+    }
+
+    return ss.str();
+}
+
 
 }

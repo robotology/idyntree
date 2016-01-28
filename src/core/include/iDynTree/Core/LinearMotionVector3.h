@@ -69,6 +69,7 @@ namespace iDynTree
         LinearMotionVector3(const double x, const double y, const double z);
         LinearMotionVector3(const double* in_data, const unsigned int in_size);
         LinearMotionVector3(const LinearMotionVector3 & other);
+        LinearMotionVector3(const Vector3& other);
 
         /**
          * Geometric operations

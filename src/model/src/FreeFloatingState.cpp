@@ -13,6 +13,12 @@
 
 namespace iDynTree
 {
+FreeFloatingPos::FreeFloatingPos()
+{
+    this->m_worldBasePos = Transform::Identity();
+    this->m_jointPos.resize(0);
+    this->m_jointPos.zero();
+}
 
 FreeFloatingPos::FreeFloatingPos(const Model& model)
 {
@@ -32,7 +38,7 @@ Transform& FreeFloatingPos::worldBasePos()
     return this->m_worldBasePos;
 }
 
-VectorDynSize & FreeFloatingPos::jointPos()
+JointPosDoubleArray & FreeFloatingPos::jointPos()
 {
     return this->m_jointPos;
 }
@@ -42,7 +48,7 @@ const Transform& FreeFloatingPos::worldBasePos() const
     return this->m_worldBasePos;
 }
 
-const VectorDynSize & FreeFloatingPos::jointPos() const
+const JointPosDoubleArray & FreeFloatingPos::jointPos() const
 {
     return this->m_jointPos;
 }
@@ -78,12 +84,12 @@ unsigned int FreeFloatingVel::getNrOfDOFs() const
     return this->m_jointVel.size();
 }
 
-VectorDynSize& FreeFloatingVel::jointVel()
+JointDOFsDoubleArray& FreeFloatingVel::jointVel()
 {
     return this->m_jointVel;
 }
 
-const VectorDynSize& FreeFloatingVel::jointVel() const
+const JointDOFsDoubleArray& FreeFloatingVel::jointVel() const
 {
     return this->m_jointVel;
 }
@@ -120,12 +126,12 @@ unsigned int FreeFloatingAcc::getNrOfDOFs() const
     return this->m_jointAcc.size();
 }
 
-VectorDynSize& FreeFloatingAcc::jointAcc()
+JointDOFsDoubleArray& FreeFloatingAcc::jointAcc()
 {
     return this->m_jointAcc;
 }
 
-const VectorDynSize& FreeFloatingAcc::jointAcc() const
+const JointDOFsDoubleArray& FreeFloatingAcc::jointAcc() const
 {
     return this->m_jointAcc;
 }
@@ -142,6 +148,12 @@ FreeFloatingAcc::~FreeFloatingAcc()
 
 }
 
+FreeFloatingGeneralizedTorques::FreeFloatingGeneralizedTorques()
+{
+    this->m_jointTorques.resize(0);
+}
+
+
 FreeFloatingGeneralizedTorques::FreeFloatingGeneralizedTorques(const Model& model)
 {
     resize(model);
@@ -157,7 +169,7 @@ Wrench& FreeFloatingGeneralizedTorques::baseWrench()
     return this->m_baseWrench;
 }
 
-VectorDynSize& FreeFloatingGeneralizedTorques::jointTorques()
+JointDOFsDoubleArray& FreeFloatingGeneralizedTorques::jointTorques()
 {
     return this->m_jointTorques;
 }
@@ -167,7 +179,7 @@ const Wrench& FreeFloatingGeneralizedTorques::baseWrench() const
     return this->m_baseWrench;
 }
 
-const VectorDynSize& FreeFloatingGeneralizedTorques::jointTorques() const
+const JointDOFsDoubleArray& FreeFloatingGeneralizedTorques::jointTorques() const
 {
     return this->m_jointTorques;
 }
