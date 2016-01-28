@@ -64,7 +64,7 @@ endif()
 if(NOT IDYNTREE_USES_KDL)
     find_package(TinyXML)
     # If no TinyXML is found in the system, use the internal one
-    if(NOT ${TinyXML_FOUND})
+    if(NOT TinyXML_FOUND)
         add_subdirectory(extern)
     endif()
 endif()
