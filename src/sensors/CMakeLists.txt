@@ -38,7 +38,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 include_directories(SYSTEM AFTER ${orocos_kdl_INCLUDE_DIRS}
                                  ${EIGEN3_INCLUDE_DIR})
 
-target_link_libraries(${libraryname} idyntree-core)
+target_link_libraries(${libraryname} idyntree-core idyntree-model)
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_SENSORS_HEADERS})
 
