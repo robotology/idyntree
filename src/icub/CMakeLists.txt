@@ -27,7 +27,7 @@ get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DI
 target_include_directories(idyntree-icub PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(idyntree-icub LINK_PUBLIC skinDynLib idyntree-core idyntree-model idyntree-yarp)
+target_link_libraries(idyntree-icub LINK_PUBLIC skinDynLib idyntree-core idyntree-model idyntree-yarp idyntree-estimation)
 
 target_include_directories(idyntree-icub INTERFACE ${skinDynLib_INCLUDE_DIRS})
 
