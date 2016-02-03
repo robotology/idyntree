@@ -7,14 +7,27 @@ find_package(Doxygen)
 if(DOXYGEN_FOUND)
     set(DOX_GENERATE_HTML YES)
     set(DOX_GENERATE_XML NO)
+
+    # Options related to doxygen
     option(IDYNTREE_DOXYGEN_XML "Generate doxygen XML output, for use by SWIG" NO)
     mark_as_advanced(IDYNTREE_DOXYGEN_XML)
+
+    option(IDYNTREE_DOXYGEN_VERBOSE "Generate a verbose HTML output for Doxygen, including call and caller graphs." YES)
+    mark_as_advanced(IDYNTREE_DOXYGEN_VERBOSE)
+    set(DOX_VERBOSE NO)
+    if(IDYNTREE_DOXYGEN_VERBOSE)
+        set(DOX_VERBOSE YES)
+    endif()
+
+
     if(IDYNTREE_DOXYGEN_XML)
         set(DOX_GENERATE_XML YES)
     endif()
     set(IDYNTREE_DOXYGEN_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR} CACHE PATH
         "Install directory for iDynTree doxygen documentation")
     mark_as_advanced(IDYNTREE_DOXYGEN_INSTALL_DIR)
+
+
     # iDynTree documentation is always verbose now.  It used to be
     # partially stripped of stuff less interesting to end-users.
     set(DOX_EXTRA_DIR src conf doc/spec)
