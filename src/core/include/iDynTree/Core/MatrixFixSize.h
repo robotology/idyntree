@@ -197,7 +197,7 @@ namespace iDynTree
     template<unsigned int nRows, unsigned int nCols>
     unsigned int MatrixFixSize<nRows,nCols>::cols() const
     {
-        return nRows;
+        return nCols;
     }
 
     template<unsigned int nRows, unsigned int nCols>
