@@ -13,6 +13,7 @@
 #include <iDynTree/Core/Wrench.h>
 
 #include <Eigen/Dense>
+#include <iDynTree/Core/EigenHelpers.h>
 
 #include <cassert>
 #include <iostream>
@@ -134,8 +135,6 @@ Matrix6x6 SpatialInertia::biasWrenchDerivative(const Twist& V) const
     return ret;
 }
 
-
-
 SpatialInertia SpatialInertia::Zero()
 {
     SpatialInertia ret;
@@ -143,6 +142,88 @@ SpatialInertia SpatialInertia::Zero()
 
     return ret;
 }
+
+Vector10 SpatialInertia::asVector() const
+{
+    Vector10 ret;
+
+    Eigen::Map< Eigen::Matrix<double,10,1> > res = toEigen(ret);
+
+    // Mass
+    res(0) = m_mass;
+
+    // First moment of mass
+    res(1) = m_mcom[0];
+    res(2) = m_mcom[1];
+    res(3) = m_mcom[2];
+
+    // Inertia matrix
+    res(4) = m_rotInertia(0,0);
+    res(5) = m_rotInertia(0,1);
+    res(6) = m_rotInertia(0,2);
+    res(7) = m_rotInertia(1,1);
+    res(8) = m_rotInertia(1,2);
+    res(9) = m_rotInertia(2,2);
+
+    return ret;
+}
+
+Eigen::Matrix<double, 3, 6> rotationalMomentumRegressor(const Vector3 & w)
+{
+    Eigen::Matrix<double, 3, 6> ret;
+
+    ret << w(0), w(1), w(2),    0,    0,    0,
+              0, w(0),    0, w(1), w(2),    0,
+              0,    0, w(0),    0, w(1), w(2);
+
+    return ret;
+}
+
+Matrix6x10 SpatialInertia::momentumRegressor(const Twist& v)
+{
+    using namespace Eigen;
+
+    Matrix6x10 ret;
+
+    Map< Matrix<double,6,10, RowMajor> > res = toEigen(ret);
+
+    res <<  toEigen(v.getLinearVec3()),  mySkewIn(toEigen(v.getAngularVec3())), Matrix<double, 3, 6>::Zero(),
+                    Vector3d::Zero(), -mySkewIn(toEigen(v.getLinearVec3())), rotationalMomentumRegressor(v.getAngularVec3());
+
+    return ret;
+}
+
+Matrix6x10 SpatialInertia::momentumDerivativeRegressor(const Twist& v,
+                                                       const SpatialAcc& a)
+{
+    Matrix6x10 ret;
+
+    Eigen::Map< Eigen::Matrix<double,6,10,Eigen::RowMajor> > res = toEigen(ret);
+
+    res = toEigen(momentumRegressor(a)) +
+          toEigen(v.asCrossProductMatrixWrench())*toEigen(momentumRegressor(v));
+
+    return ret;
+}
+
+Matrix6x10 SpatialInertia::momentumDerivativeSlotineLiRegressor(const Twist& v,
+                                                                const Twist& vRef,
+                                                                const SpatialAcc& aRef)
+{
+    Matrix6x10 ret;
+
+    Eigen::Map< Eigen::Matrix<double,6,10,Eigen::RowMajor> > res = toEigen(ret);
+
+    // The momentum derivative according to the Slotine-Li regressor is given by:
+    // \dot{h} = I*a + v.crossWrench(I*vRef) - I*(v.cross(vRef))
+
+    res = toEigen(momentumRegressor(aRef)) +
+          toEigen(v.asCrossProductMatrixWrench())*toEigen(momentumRegressor(vRef)) -
+          toEigen(momentumRegressor(v.cross(vRef)));
+
+    return ret;
+}
+
 
 
 

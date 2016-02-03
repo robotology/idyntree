@@ -14,6 +14,7 @@
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/MatrixFixSize.h>
+#include <iDynTree/Core/SpatialAcc.h>
 
 #include <Eigen/Dense>
 
@@ -106,6 +107,70 @@ void checkBiasWrench(const SpatialInertia & inertia, const Twist & twist)
     ASSERT_EQUAL_VECTOR(biasWrench.asVector(),biasWrenchCheck.asVector());
 }
 
+void checkRegressors(const SpatialInertia & I,
+                     const Twist & v,
+                     const SpatialAcc & a,
+                     const Twist & vRef)
+{
+    //////////
+    /// Check the momentum regressor
+    /////////
+    // Compute momentum with classical operation
+    SpatialMomentum h = I*v;
+
+    // Compute the inertial parameters for the given spatial inertia
+    Vector10 inertialParams = I.asVector();
+
+    // Compute momentum with regressors
+    Vector6 hRegr;
+
+    toEigen(hRegr) = toEigen(SpatialInertia::momentumRegressor(v))*toEigen(inertialParams);
+
+    // Check that they are equal
+    ASSERT_EQUAL_VECTOR(h.asVector(),hRegr);
+
+    //////////
+    /// Check the momentum derivative (net wrench) regressor
+    /////////
+
+    // Compute momentum derivative with classical operation
+    Wrench dotH = I*a+v*(I*v);
+
+    // Compute momentum derivative with regressors
+    Vector6 dotHregr;
+
+    toEigen(dotHregr) = toEigen(SpatialInertia::momentumDerivativeRegressor(v,a))*toEigen(inertialParams);
+
+    // Check that they are equal
+    ASSERT_EQUAL_VECTOR(dotH.asVector(),dotHregr);
+
+    //////////
+    /// Check the momentum derivative (net wrench) regressor, Slotine Li version
+    /// Check also that the operator is simmetric with respect to v, vDes
+    /////////
+
+    Wrench dotH_SL = I*a+v*(I*vRef)-I*(v*vRef);
+
+    Vector6 dotH_SL_regr;
+
+    toEigen(dotH_SL_regr) =
+        toEigen(SpatialInertia::momentumDerivativeSlotineLiRegressor(v,vRef,a))*toEigen(inertialParams);
+
+    ASSERT_EQUAL_VECTOR(dotH_SL.asVector(),dotH_SL_regr);
+
+    // Check that the regressor matches the momentumDerivativeRegressor one if v = vRef
+    Wrench dotH_SL_check = I*a+v*(I*v)-I*(v*v);
+
+    Vector6 dotH_SL_regr_check;
+
+    toEigen(dotH_SL_regr_check) =
+        toEigen(SpatialInertia::momentumDerivativeSlotineLiRegressor(v,v,a))*toEigen(inertialParams);
+
+    ASSERT_EQUAL_VECTOR(dotH_SL_check.asVector(),dotH_SL_regr_check);
+    ASSERT_EQUAL_VECTOR(dotH.asVector(),dotH_SL_check.asVector());
+
+}
+
 int main()
 {
     Transform trans(Rotation::RPY(5.0,6.0,-4.0),Position(10,6,-4));
@@ -124,6 +189,17 @@ int main()
     checkInertiaTransformation(trans,inertia);
     checkInvariance(trans,inertia,twist);
     checkBiasWrench(inertia,twist);
+
+    int nrOfChecks = 30;
+    for(int i=0; i < nrOfChecks; i++ )
+    {
+        inertia = getRandomInertia();
+        twist   = getRandomTwist();
+        Twist twist2  = getRandomTwist();
+        SpatialAcc a  = getRandomTwist();
+
+        checkRegressors(inertia,twist,a,twist2);
+    }
 
     return EXIT_SUCCESS;
 }

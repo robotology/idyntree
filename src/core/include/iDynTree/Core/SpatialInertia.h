@@ -9,6 +9,7 @@
 #define IDYNTREE_SPATIAL_INERTIA_H
 
 #include <iDynTree/Core/SpatialInertiaRaw.h>
+#include <iDynTree/Core/VectorFixSize.h>
 
 namespace iDynTree
 {
@@ -104,6 +105,95 @@ namespace iDynTree
         Matrix6x6 biasWrenchDerivative(const Twist & V) const;
 
         static SpatialInertia Zero();
+
+
+        /**
+         * \brief Get the Rigid Body Inertia as a vector of 10 inertial parameters.
+         *
+         * Return the rigid body inertia inertial parameters, defined as:
+         *
+         * | Elements | Symbol |  Description |
+         * |:--------:|:-------:|:--------:|
+         * |     0    | \f$ m \f$ | The mass of the rigid body |
+         * |  2-4     |  \f$ m c \f$      | The first moment of mass of the rigid body |
+         * |  5-9     | \f$ \operatorname{vech}(I_o) \f$ | The 6 indipendent elements of the 3d inertia matrix (\f$ I_{xx} I_{xy} I_{xz} I_{yy} I_{yz} I_{zz} \f$). |
+         *
+         * The first moment of mass is the center of mass (\f$ c \in \mathbb{R}^3 \f$ ) w.r.t. to the frame where this
+         *  rigid body inertia is expressed multiplied by the rigid body mass \f$ m \f$.
+         *
+         * The 3d rigid body inertia \f$ I_o \in \mathbb{R}^{3 \times 3} \f$ is expressed with the orientation of the frame
+         * in which this rigid body inertia is expressed, and with respect to the frame origin.
+         *
+         */
+        Vector10 asVector() const;
+
+        /**
+         * \brief Get the momentum inertial parameters regressor.
+         *
+         * Get the matrix
+         * \f[
+         *   Y(v) \in \mathbb{R}^{6 \times 10}
+         * \f]
+         * such that:
+         * \f[
+         *   I v = Y(v)\alpha
+         * \f]
+         *
+         * If \f$ \alpha \in \mathbb{R}^10 \f$ is the inertial parameters representation of \f$ I \f$ .
+         */
+        static Matrix6x10 momentumRegressor(const iDynTree::Twist & v);
+
+        /**
+         * \brief Get the momentum derivative inertial parameters regressor.
+         *
+         * Get the matrix
+         * \f[
+         *   Y(v,a) \in \mathbb{R}^{6 \times 10}
+         * \f]
+         * such that:
+         * \f[
+         *   I a + v \overline{\times}^{*} I v   = Y(v,a)\alpha
+         * \f]
+         *
+         * If \f$ \alpha \in \mathbb{R}^10 \f$ is the inertial parameters representation of \f$ I \f$
+         *
+         * This is also the regressor of the net wrench acting on a rigid body.
+         * As such, it is the building block of all other algorithms to compute dynamics
+         * regressors.
+         */
+        static Matrix6x10 momentumDerivativeRegressor(const iDynTree::Twist & v,
+                                                      const iDynTree::SpatialAcc & a);
+
+        /**
+         * \brief Get the momentum derivative inertial parameters regressor.
+         *
+         * Get the matrix
+         * \f[
+         *   Y(v,v_r,a_r) \in \mathbb{R}^{6\times6}
+         * \f]
+         * such that:
+         * \f[
+         *   I a_r + (v \overline{\times}^{*} I - I v \times)  v_r   = Y(v,v_r,a_r)\alpha
+         * \f]
+         *
+         * If \f$ \alpha \in \mathbb{R}^10 \f$ is the inertial parameters representation of \f$ I \f$
+         *
+         * Notice that if \f$ v = v_r \f$, this regressor reduces to the one computed by momentumDerivativeRegressor.
+         * The main difference is that (assuming constant \f$ I \f$) this regressor respect the passivity condition and
+         * thus is the basic building block for building Slotine Li style regressors.
+         *
+         * For more on this, please check:
+         *
+         * Garofalo, G.; Ott, C.; Albu-Schaffer, A.,
+         * "On the closed form computation of the dynamic matrices and their differentiations," in
+         *  Intelligent Robots and Systems (IROS), 2013 IEEE/RSJ International Conference on
+         * doi: 10.1109/IROS.2013.6696688
+         * URL: http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6696688&isnumber=6696319
+         *
+         */
+        static Matrix6x10 momentumDerivativeSlotineLiRegressor(const iDynTree::Twist & v,
+                                                               const iDynTree::Twist & vRef,
+                                                               const iDynTree::SpatialAcc & aRef);
     };
 }
 
