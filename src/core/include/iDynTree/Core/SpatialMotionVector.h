@@ -65,10 +65,36 @@ namespace iDynTree
          */
         SpatialMotionVector operator*(const double scalar) const;
 
-        /**
-         * Cross product
+/**
+         * Cross product between two 6D motion vectors
+         * \f$ V_1 = \begin{bmatrix} v_1 \\ \omega_1 \end{bmatrix} \f$
+         * and
+         * \f$ V_2 = \begin{bmatrix} v_2 \\ \omega_2 \end{bmatrix} \f$
+         *
+         * Returns:
+         * \f[
+         *   V_1 \times V_2 =
+         *  \begin{bmatrix}
+         *   v_1 \times \omega_2 + \omega_1 \times v_2 \\
+         *   \omega_1 \times \omega_2
+         *  \end{bmatrix}
+         * \f]
          */
         SpatialMotionVector cross(const SpatialMotionVector& other) const;
+
+        /**
+         * Cross product between a 6D motion vector \f$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} \f$ and
+         * a 6D force vector \f$ F = \begin{bmatrix} f \\ \mu \end{bmatrix} \f$.
+         *
+         * Returns:
+         * \f[
+         *   V \bar{\times}^* F =
+         *  \begin{bmatrix}
+         *   \omega \times f \\
+         *   v \times f + \omega \times \mu
+         *  \end{bmatrix}
+         * \f]
+         */
         SpatialForceVector cross(const SpatialForceVector& other) const;
 
         /**
@@ -76,21 +102,39 @@ namespace iDynTree
          */
 
         /**
-         * If this object is \f$ V \f$, return the 6x6 matrix \f$ V\times \f$
+         * If this object is \f$ V = \begin{bmatrix} v \\ \omega \end{bmatrix}  \f$,
+         * return the 6x6 matrix \f$ V\times \f$
          * such that, if U is a SpatialMotionVector :
          * \f[
          *   (V \times) U = V\texttt{.cross}(U)
+         * \f]
+         *
+         * The returned matrix is then the following one:
+         * \f[
+         *   V \times =
+         *  \begin{bmatrix}
+         *   \omega \times & v \times \\
+         *    0_{3\times3}   & \omega \times
+         *  \end{bmatrix}
          * \f]
          */
         Matrix6x6 asCrossProductMatrix() const;
 
         /**
-         * If this object is \f$ V \f$, return the 6x6 matrix \f$ V\times \f$
+         * If this object is \f$ V =  \begin{bmatrix} v \\ \omega \end{bmatrix} \f$, return the 6x6 matrix \f$ V\times \f$
          * such that, if F is a SpatialForceVector :
          * \f[
-         *   (V \times) F = V\texttt{.cross}(F)
+         *   (V \bar{\times}^*) F = V\texttt{.cross}(F)
          * \f]
-         * 
+         *
+          The returned matrix is then the following one:
+         * \f[
+         *   V \bar{\times}^* =
+         *  \begin{bmatrix}
+         *   \omega \times &  0_{3\times3} \\
+         *    v \times   & \omega \times
+         *  \end{bmatrix}
+         * \f]
          */
         Matrix6x6 asCrossProductMatrixWrench() const;
 
