@@ -50,6 +50,9 @@ classdef Traversal < SwigRef
     function varargout = isParentOf(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(743, self, varargin{:});
     end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(744, self, varargin{:});
+    end
   end
   methods(Static)
   end

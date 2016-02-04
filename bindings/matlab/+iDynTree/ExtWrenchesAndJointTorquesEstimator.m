@@ -9,40 +9,40 @@ classdef ExtWrenchesAndJointTorquesEstimator < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(965, varargin{:});
+        tmp = iDynTreeMEX(966, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(966, self);
+        iDynTreeMEX(967, self);
         self.swigPtr=[];
       end
     end
     function varargout = setModelAndSensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(967, self, varargin{:});
-    end
-    function varargout = loadModelAndSensorsFromFile(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(968, self, varargin{:});
     end
-    function varargout = model(self,varargin)
+    function varargout = loadModelAndSensorsFromFile(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(969, self, varargin{:});
     end
-    function varargout = sensors(self,varargin)
+    function varargout = model(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(970, self, varargin{:});
     end
-    function varargout = updateKinematicsFromFloatingBase(self,varargin)
+    function varargout = sensors(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(971, self, varargin{:});
     end
-    function varargout = updateKinematicsFromFixedBase(self,varargin)
+    function varargout = updateKinematicsFromFloatingBase(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(972, self, varargin{:});
     end
-    function varargout = computeExpectedFTSensorsMeasurements(self,varargin)
+    function varargout = updateKinematicsFromFixedBase(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(973, self, varargin{:});
     end
-    function varargout = estimateExtWrenchesAndJointTorques(self,varargin)
+    function varargout = computeExpectedFTSensorsMeasurements(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(974, self, varargin{:});
+    end
+    function varargout = estimateExtWrenchesAndJointTorques(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(975, self, varargin{:});
     end
   end
   methods(Static)
