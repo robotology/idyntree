@@ -47,9 +47,10 @@ target_link_libraries(idyntree-icub-kdl LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${Boost_LIBRARIES}
                                             ${TinyXML_LIBRARIES})
 
-target_include_directories(idyntree-icub-kdl INTERFACE ${skinDynLib_INCLUDE_DIRS})
+target_include_directories(idyntree-icub-kdl INTERFACE ${skinDynLib_INCLUDE_DIRS} ${iDyn_INCLUDE_DIRS})
 
 include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS}
+                           ${iDyn_INCLUDE_DIRS}
                            ${GSL_INCLUDE_DIRS}
                            ${YARP_INCLUDE_DIRS}
                            ${EIGEN3_INCLUDE_DIR}
