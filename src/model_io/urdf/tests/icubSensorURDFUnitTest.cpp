@@ -64,7 +64,7 @@ void checkURDF(std::string fileName,
 int main()
 {
     std::cout<<"iCub Sensor test running:\n";
-    checkURDF(getAbsModelPath("/icub_sensorised.urdf"),53,11,6);
+    checkURDF(getAbsModelPath("/icub_sensorised.urdf"),55,11,6);
 
     std::cout <<"iCub Sensor test just ran\n";
     return 0;
