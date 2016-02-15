@@ -203,7 +203,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
     // We remove the fake links that in the urdf
     // we use as surrogate for frames
     iDynTree::framesFromKDLTree(this->pimpl->robot_model->getTree(),
-                                     ignoredLinks,dummy);
+                                     ignoredLinks, dummy);
 
     // Add ignored links to the list of links consired "fake"
     for (TiXmlElement* ignoredLinkXml = regressorXml->FirstChildElement("ignoredLink");
@@ -212,6 +212,9 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
         std::string ignoredLinkName = ignoredLinkXml->GetText();
         ignoredLinks.push_back(ignoredLinkName);
     }
+    //remove duplicates
+    sort( ignoredLinks.begin(), ignoredLinks.end() );
+    ignoredLinks.erase( unique( ignoredLinks.begin(), ignoredLinks.end() ), ignoredLinks.end() );
 
     bool verbose = true;
     this->pimpl->m_pLegacyGenerator =
@@ -219,7 +222,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
                                                            this->pimpl->sensors_model,
                                                            kinematic_base,
                                                            consider_ft_offset,
-                                                           ignoredLinks,verbose);
+                                                           ignoredLinks, verbose);
 
     // Get all subregressors of type subtreeBaseDynamics
     // For each subtreeBaseDynamics subregressor, add it to the legacy class
@@ -405,17 +408,19 @@ unsigned int DynamicsRegressorGenerator::getNrOfLinks() const
    return (unsigned int)this->pimpl->robot_model->getNrOfLinks();
 }
 
+unsigned int DynamicsRegressorGenerator::getNrOfFakeLinks() const
+{
+   return (unsigned int)this->pimpl->m_pLegacyGenerator->getNrOfFakeLinks();
+}
+
 /*
 std::string DynamicsRegressorGenerator::getDescriptionOfLink(int link_index)
 {
-
 }
 
 std::string DynamicsRegressorGenerator::getDescriptionOfLinks()
 {
-
 }*/
-
 
 
 bool DynamicsRegressorGenerator::getModelParameters(VectorDynSize& values)

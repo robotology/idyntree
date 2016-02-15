@@ -209,6 +209,11 @@ int DynamicRegressorGenerator::getNrOfDOFs() const
 }
 
 
+int DynamicRegressorGenerator::getNrOfFakeLinks() const
+{
+    return fake_links_names.size();
+}
+
 int DynamicRegressorGenerator::getNrOfWrenchSensors() const
 {
     return sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);

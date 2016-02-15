@@ -148,6 +148,12 @@ public:
      */
     int getNrOfDOFs() const;
 
+
+    /**
+     * Get the number of fake links
+     */
+    int getNrOfFakeLinks() const;
+
     /**
      * Get the number of wrench (force/torque) sensor of the regressor
      *

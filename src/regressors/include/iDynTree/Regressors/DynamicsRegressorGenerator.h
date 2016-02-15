@@ -258,6 +258,12 @@ public:
     unsigned int getNrOfLinks() const;
 
     /**
+     * Get the number of fake links contained in the model (detected and specified)
+     *
+     */
+    unsigned int getNrOfFakeLinks() const;
+
+    /**
      * Get a human readable description of a given link considered in the regressor.
      *
      * @return a human readable description of a given link considered in the regressor.
