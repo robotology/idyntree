@@ -94,8 +94,8 @@ namespace iDynTree
                                       const Traversal& traversal,
                                       const FreeFloatingPos& robotPos,
                                       const FreeFloatingVel& robotVel,
-                                      const LinkExternalWrenches & linkExtWrenches,
-                                      const JointDoubleArray & jointTorques,
+                                      const LinkNetExternalWrenches & linkExtWrenches,
+                                      const JointDOFsDoubleArray & jointTorques,
                                             ForwardDynamicsLinearizationInternalBuffers & bufs,
                                             FreeFloatingAcc & robotAcc,
                                             FreeFloatingStateLinearization & A);

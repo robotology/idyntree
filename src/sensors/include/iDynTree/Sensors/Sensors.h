@@ -26,11 +26,14 @@ namespace iDynTree {
     class LinearMotionVector3;
     typedef LinearMotionVector3 LinAcceleration;
     typedef AngularMotionVector3 AngVelocity;
-    class IMeasurement;
 }
 
 #include <string>
+#include <vector>
+
 #include <iDynTree/Core/VectorDynSize.h>
+
+#include <iDynTree/Model/Indeces.h>
 
 namespace iDynTree {
 
@@ -39,7 +42,6 @@ namespace iDynTree {
         SIX_AXIS_FORCE_TORQUE = 0,
         ACCELEROMETER = 1,
         GYROSCOPE = 2,
-       // ORIENTATION = 3
     };
 
     // This should be equal to the number of option
@@ -47,18 +49,17 @@ namespace iDynTree {
     const int NR_OF_SENSOR_TYPES = 3;
 
 
-     /**
-     * Virtual Class defining a Sensor within iDynTree.
+    /**
+     * Interface for Sensor classes in iDynTree .
      *
      * All sensor classes inherit from this base class.
      *
      * \ingroup iDynTreeSensors
      *
      */
-    class Sensor {
-
+    class Sensor
+    {
     public:
-
         /**
          * Virtual destructor
          */
@@ -74,20 +75,6 @@ namespace iDynTree {
          * @return the type of the sensor.
          */
         virtual SensorType getSensorType() const = 0;
-
-        /**
-         * Get the id (name) of the parent entity (Joint or Link).
-         */
-        virtual std::string getParent() const = 0;
-
-        /**
-         * Get the numeric index of the parent of the sensor.
-         * Depending on the type of the sensor, the parent could be
-         * a Junction or a Link.
-         *
-         * @return the index of the parent (Junction or Link) of the sensor.
-         */
-        virtual int getParentIndex() const = 0;
 
         /**
          * Return true if the sensor has been appropriately configured (all
@@ -106,28 +93,90 @@ namespace iDynTree {
         virtual bool setName(const std::string &) = 0;
 
         /**
-         * Set the type of the sensor.
-         */
-//         virtual bool setSensorType(const SensorType &) = 0;
-
-        /**
-         * Set the id (name) of the parent entity (Joint or Link).
-         */
-        virtual bool setParent(const std::string &) = 0;
-
-        /**
-         * Set the numeric index of the parent of the sensor.
-         * Depending on the type of the sensor, the parent could be
-         * a Junction or a Link.
-         */
-        virtual bool setParentIndex(const int &) = 0;
-
-
-        /**
          *  Return a pointer to a copy of this sensor.
          *
          */
         virtual Sensor* clone() const = 0;
+    };
+
+    /**
+     * Interface for Sensor that are associated to a Joint.
+     *
+     * All joint sensor classes inherit from this base class.
+     *
+     * \ingroup iDynTreeSensors
+     *
+     */
+    class JointSensor: public Sensor
+    {
+    public:
+        /**
+         * Virtual destructor
+         */
+        virtual ~JointSensor() = 0;
+
+        /**
+         * Get the name of the parent Joint.
+         */
+        virtual std::string getParentJoint() const = 0;
+
+        /**
+         * Get the numeric index of the parent of the sensor.
+         * Depending on the type of the sensor, the parent could be
+         * a Junction or a Link.
+         *
+         * @return the index of the parent (Junction or Link) of the sensor.
+         */
+        virtual int getParentJointIndex() const = 0;
+
+        /**
+         * Set the name of the parent Joint.
+         */
+        virtual bool setParentJoint(const std::string & parentJointName) = 0;
+
+        /**
+         * Set the numeric index of the parent joint of the sensor.
+         */
+        virtual bool setParentJointIndex(const int &) = 0;
+    };
+
+    /**
+     * Interface for Sensor that are associated to a Link.
+     *
+     * All link sensor classes inherit from this base class.
+     *
+     * \ingroup iDynTreeSensors
+     *
+     */
+    class LinkSensor: public Sensor
+    {
+    public:
+        /**
+         * Virtual destructor
+         */
+        virtual ~LinkSensor() = 0;
+
+        /**
+         * Get the name of the parent Link.
+         */
+        virtual std::string getParentLink() const = 0;
+
+        /**
+         * Get the numeric index of the parent Link.
+         *
+         * @return the index of the parent Link of the sensor.
+         */
+        virtual LinkIndex getParentLinkIndex() const = 0;
+
+        /**
+         * Set the name of the parent Link.
+         */
+        virtual bool setParentLink(const std::string & parentLinkName) = 0;
+
+        /**
+         * Set the numeric index of the parent joint of the sensor.
+         */
+        virtual bool setParentLinkIndex(const LinkIndex &) = 0;
     };
 
     /**
@@ -164,9 +213,11 @@ namespace iDynTree {
             virtual ~SensorsList();
 
             /**
-             * Add a sensor to the SensorsTree.
-             * The sensor index will depend on the order in which the
+             * \brief Add a sensor to the SensorsTree.
+             *
+             * The initial sensor index will depend on the order in which the
              * sensor are added to the sensorsTree.
+             * The sensor index can then be changed with a call to the setSerialization method.
              *
              * The passed sensor will be dynamic casted to the specified sensor type,
              * and will be copied in the sensors tree only if the dynamic cast will be successful.
@@ -175,6 +226,16 @@ namespace iDynTree {
              * @return the sensor index of the newly added sensor, or -1 in case of error.
              */
             int addSensor(const Sensor & sensor);
+
+            /**
+             * Change the serialization of a specific sensor type.
+             */
+            bool setSerialization(const SensorType & sensor_type, const std::vector<std::string> & serializaton);
+
+            /**
+             * Get the serialization of a specific sensor type.
+             */
+            bool getSerialization(const SensorType & sensor_type, std::vector<std::string> & serializaton);
 
             /**
              * Get the number of sensors of type sensor_type in this SensorsList .
@@ -206,7 +267,7 @@ namespace iDynTree {
              * \return the pointer of sensor, of 0 if sensor_index is out of bounds
              */
             Sensor * getSensor(const SensorType & sensor_type, int sensor_index) const;
-            
+
 
     };
 
@@ -226,12 +287,12 @@ namespace iDynTree {
              * Constructor.
              */
             SensorsMeasurements();
-            
+
             /**
              * Constructor from SensorList
              */
             SensorsMeasurements(const SensorsList &sensorList);
-            
+
             /**
              * Copy constructor
              */
@@ -258,7 +319,7 @@ namespace iDynTree {
              * @return the number of sensors of type sensor_type
              */
             unsigned int getNrOfSensors(const SensorType & sensor_type) const;
-            
+
             /**
              * Resize and reset the measurement vectors
              * @return true if all went right, false otherwise
@@ -270,7 +331,7 @@ namespace iDynTree {
              * @return true if all went right, false otherwise
              */
             bool toVector(VectorDynSize & measurementVector) const;
-            
+
             /**
              * Set the measurement for the specified sensor
              *
@@ -298,13 +359,13 @@ namespace iDynTree {
              */
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
-                                iDynTree::Wrench & measurement) const; 
+                                iDynTree::Wrench & measurement) const;
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
                                 iDynTree::LinAcceleration &measurement) const;
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
-                                iDynTree::AngVelocity &measurement) const;                    
+                                iDynTree::AngVelocity &measurement) const;
 
 
     };

@@ -22,17 +22,17 @@ namespace iDynTree
     class FreeFloatingAcc;
     class FreeFloatingGeneralizedTorques;
     class FreeFloatingMassMatrix;
-    class JointDoubleArray;
+    class JointDOFsDoubleArray;
     class DOFSpatialForceArray;
     class DOFSpatialMotionArray;
 
 
     bool RNEADynamicPhase(const iDynTree::Model & model,
                           const iDynTree::Traversal & traversal,
-                          const iDynTree::FreeFloatingPos & robotPos,
+                          const iDynTree::JointPosDoubleArray & jointPos,
                           const iDynTree::LinkVelArray & linksVel,
                           const iDynTree::LinkAccArray & linksAcc,
-                          const iDynTree::LinkExternalWrenches & linkExtForces,
+                          const iDynTree::LinkNetExternalWrenches & linkExtForces,
                           iDynTree::LinkInternalWrenches       & linkIntWrenches,
                           iDynTree::FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
 
@@ -43,7 +43,7 @@ namespace iDynTree
      */
     bool CompositeRigidBodyAlgorithm(const Model& model,
                                      const Traversal& traversal,
-                                     const FreeFloatingPos& jointPos,
+                                     const JointPosDoubleArray& jointPos,
                                      LinkCompositeRigidBodyInertias& linkCRBs,
                                      FreeFloatingMassMatrix& massMatrix);
 
@@ -81,8 +81,8 @@ namespace iDynTree
 
         DOFSpatialMotionArray S;
         DOFSpatialForceArray U;
-        JointDoubleArray D;
-        JointDoubleArray u;
+        JointDOFsDoubleArray D;
+        JointDOFsDoubleArray u;
         LinkVelArray linksVel;
         LinkAccArray linksBiasAcceleration;
         LinkAccArray linksAccelerations;
@@ -104,8 +104,8 @@ namespace iDynTree
                                   const Traversal& traversal,
                                   const FreeFloatingPos& robotPos,
                                   const FreeFloatingVel& robotVel,
-                                  const LinkExternalWrenches & linkExtWrenches,
-                                  const JointDoubleArray & jointTorques,
+                                  const LinkNetExternalWrenches & linkExtWrenches,
+                                  const JointDOFsDoubleArray & jointTorques,
                                         ArticulatedBodyAlgorithmInternalBuffers & buffers,
                                         FreeFloatingAcc & robotAcc);
 

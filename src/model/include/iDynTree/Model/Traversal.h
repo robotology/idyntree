@@ -72,14 +72,14 @@ namespace iDynTree
          *
          * @return a pointer to the traversalIndex-th link of the traversal.
          */
-        const Link   * getLink(unsigned int traversalIndex) const;
+        const Link   * getLink(const TraversalIndex traversalIndex) const;
 
         /**
          * Get the parent link of the traversalIndex-th link of the traversal.
          *
          * @return a pointer to the parent link of the traversalIndex-th link of the traversal.
          */
-        const Link   * getParentLink(unsigned int traversalIndex) const;
+        const Link   * getParentLink(const TraversalIndex traversalIndex) const;
 
         /**
          * Get the joint connecting the traversalIndex-th link of the traversal
@@ -87,7 +87,7 @@ namespace iDynTree
          *
          * @return a pointer to the joint connecting the  link traversalIndex-th link of the traversal.
          */
-        const IJoint * getParentJoint(unsigned int traversalIndex) const;
+        const IJoint * getParentJoint(const TraversalIndex traversalIndex) const;
 
         /**
          * Get the parent link of the link with index linkIndex of the traversal.
@@ -160,6 +160,21 @@ namespace iDynTree
         bool addTraversalElement(const Link   * link,
                                  const IJoint * jointToParent,
                                  const Link   * parentLink);
+
+        /**
+         * \brief Check if a link is the parent of another link for this traversal.
+         *
+         *
+         * @param[in] parentCandidate the link candidate to be the parent of childCandidate.
+         * @param[in] childCandidate  the link candidate to be a child of parentCandidate.
+         * @return true if parentCandidate is actually the parent of childCandidate, false otherwise.
+         */
+        bool isParentOf(const LinkIndex parentCandidate, const LinkIndex childCandidate) const;
+
+        /**
+         * Return a human-readable representation of the traversal.
+         */
+        std::string toString(const Model & model) const;
 
     };
 

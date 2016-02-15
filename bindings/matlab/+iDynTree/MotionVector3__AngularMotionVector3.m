@@ -7,17 +7,17 @@ classdef MotionVector3__AngularMotionVector3 < iDynTree.GeomVector3__AngularMoti
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(280, varargin{:});
+        tmp = iDynTreeMEX(286, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = cross(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(281, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(287, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(282, self);
+        iDynTreeMEX(288, self);
         self.swigPtr=[];
       end
     end

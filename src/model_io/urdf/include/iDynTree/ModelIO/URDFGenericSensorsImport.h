@@ -14,28 +14,37 @@ namespace iDynTree
 {
 
 class SensorsList;
+class Model;
 
 /**
  * Load a iDynTree::SensorsList object from a URDF file.
  *
- * \note Experimental version for a more generic set of sensors 
+ * Supported sensors:
+ *
+ * * Gyroscope :
+ *
+ * \note Experimental version for a more generic set of sensors
  *  other than gazebo extension F/T.
  *
  * @return true if all went ok, false otherwise.
  */
-bool genericSensorsListFromURDF(const std::string & urdf_filename,
-                         iDynTree::SensorsList & output);
+bool sensorsFromURDF(const std::string & urdf_filename,
+                     iDynTree::SensorsList & output);
+
+bool sensorsFromURDF(const std::string & urdf_filename,
+                     const Model & model,
+                     iDynTree::SensorsList & output);
 
 /**
  * Load a iDynTree::SensorsList object from a URDF string.
  *
- * \note Experimental version for a more generic set of sensors 
+ * \note Experimental version for a more generic set of sensors
  *  other than gazebo extension F/T.
  *
  * @return true if all went ok, false otherwise.
  */
-bool genericSensorsListFromURDFString(const std::string & urdf_string,
-                               iDynTree::SensorsList & output);
+bool sensorsFromURDFString(const std::string & urdf_string,
+                       iDynTree::SensorsList & output);
 
 }
 

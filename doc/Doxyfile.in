@@ -655,7 +655,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-INPUT                  = ${DOX_EXTRA_DIR} \
+INPUT                  = ${EXTRA_DIR} \
                          ${CMAKE_SOURCE_DIR}/doc/ \
                          ${CMAKE_SOURCE_DIR}
 
@@ -705,9 +705,9 @@ EXCLUDE_SYMLINKS       = NO
 
 EXCLUDE_PATTERNS       = */bindings/* \
                          */tests/*    \
-                         */examples/* \ 
-                         */extern/* \ 
-                         */external/* 
+                         */examples/* \
+                         */extern/* \
+                         */external/*
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
 # (namespaces, classes, functions, etc.) that should be excluded from the
@@ -1694,7 +1694,7 @@ INCLUDED_BY_GRAPH      = YES
 # the time of a run. So in most cases it will be better to enable call graphs
 # for selected functions only using the \callgraph command.
 
-CALL_GRAPH             = YES
+CALL_GRAPH             = ${DOX_VERBOSE}
 
 # If the CALLER_GRAPH and HAVE_DOT tags are set to YES then
 # doxygen will generate a caller dependency graph for every global function
@@ -1702,7 +1702,7 @@ CALL_GRAPH             = YES
 # the time of a run. So in most cases it will be better to enable caller
 # graphs for selected functions only using the \callergraph command.
 
-CALLER_GRAPH           = YES
+CALLER_GRAPH           = ${DOX_VERBOSE}
 
 # If the GRAPHICAL_HIERARCHY and HAVE_DOT tags are set to YES then doxygen
 # will generate a graphical hierarchy of all classes instead of a textual one.

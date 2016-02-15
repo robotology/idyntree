@@ -7,19 +7,19 @@ classdef SpatialForceVector < iDynTree.SpatialForceVectorBase
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(379, varargin{:});
+        tmp = iDynTreeMEX(385, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(380, self);
+        iDynTreeMEX(386, self);
         self.swigPtr=[];
       end
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(381, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(387, self, varargin{:});
     end
   end
   methods(Static)

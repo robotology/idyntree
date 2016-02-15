@@ -52,6 +52,7 @@ namespace iDynTree
         AngularMotionVector3(double x, double y, double z);
         AngularMotionVector3(const double* in_data, const unsigned int in_size);
         AngularMotionVector3(const AngularMotionVector3 & other);
+        AngularMotionVector3(const Vector3 & other);
 
         /**
          * Exp mapping between a  generic element of so(3) (iDynTree::AngularMotionVector3)

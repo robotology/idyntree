@@ -15,7 +15,7 @@
 namespace iDynTree
 {
 
-MatrixDynSize::MatrixDynSize(): m_data(0), m_rows(0), m_cols(0)
+MatrixDynSize::MatrixDynSize(): m_data(0), m_rows(0), m_cols(0), m_capacity(0)
 {
 
 }
@@ -27,10 +27,12 @@ MatrixDynSize::MatrixDynSize(unsigned int _rows,
     if( this->m_rows*this->m_cols == 0 )
     {
         this->m_data = 0;
+        this->m_capacity = 0;
     }
     else
     {
         this->m_data = new double[this->m_rows*this->m_cols];
+        this->m_capacity = this->m_rows*this->m_cols;
     }
 
     zero();
@@ -45,17 +47,19 @@ MatrixDynSize::MatrixDynSize(const double* in_data,
     if( this->m_rows*this->m_cols == 0 )
     {
         this->m_data = 0;
+        this->m_capacity = 0;
     }
     else
     {
         this->m_data = new double[this->m_rows*this->m_cols];
         std::memcpy(this->m_data,in_data,in_rows*in_cols*sizeof(double));
+        this->m_capacity = this->m_rows*this->m_cols;
     }
 }
 
 MatrixDynSize::~MatrixDynSize()
 {
-    if( this->m_rows*this->m_cols > 0 )
+    if( this->m_capacity > 0 )
     {
         delete[] this->m_data;
         this->m_data = 0;
@@ -128,6 +132,70 @@ bool MatrixDynSize::setVal(const unsigned int row, const unsigned int col, const
     return true;
 }
 
+size_t MatrixDynSize::capacity() const
+{
+    return this->m_capacity;
+}
+
+void MatrixDynSize::reserve(const size_t _newCapacity)
+{
+    assert(this->m_rows*this->m_cols <= this->m_capacity);
+
+    // If the capacity is already bigger then the requested
+    // capacity, just return
+    if( _newCapacity <= this->capacity() )
+    {
+        return;
+    }
+
+    // to match user expectation, we need to preserve
+    // old data at least on a call to reserve
+    changeCapacityAndCopyData(_newCapacity);
+}
+
+void MatrixDynSize::shrink_to_fit()
+{
+    assert(this->m_rows*this->m_cols <= this->m_capacity);
+
+    changeCapacityAndCopyData(this->m_rows*this->m_cols);
+}
+
+void MatrixDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
+{
+    // If we change the data buffer, we need to
+    // copy the old content to a local buffer
+    double * localBuf = 0;
+    if( this->m_rows*this->m_cols > 0 )
+    {
+       localBuf = new double[this->m_rows*this->m_cols];
+       memcpy(localBuf,this->m_data,this->m_rows*this->m_cols*sizeof(double));
+    }
+
+    if( this->m_data )
+    {
+        delete[] this->m_data;
+    }
+
+    this->m_capacity = _newCapacity;
+
+    if( this->m_capacity == 0 )
+    {
+        this->m_data = 0;
+    }
+    else
+    {
+        this->m_data = new double[this->m_capacity];
+        zero();
+
+        if( this->m_rows*this->m_cols > 0 )
+        {
+            memcpy(this->m_data,localBuf,this->m_rows*this->m_cols*sizeof(double));
+            delete[] localBuf;
+            localBuf = 0;
+        }
+    }
+}
+
 void MatrixDynSize::resize(const unsigned int _newRows, const unsigned int _newCols)
 {
     if( (_newRows == this->rows()) &&
@@ -136,23 +204,10 @@ void MatrixDynSize::resize(const unsigned int _newRows, const unsigned int _newC
         return;
     }
 
-    if( this->m_data )
-    {
-        delete[] this->m_data;
-    }
+    reserve(_newRows*_newCols);
 
     this->m_rows = _newRows;
     this->m_cols = _newCols;
-
-    if( this->m_rows*this->m_cols == 0 )
-    {
-        this->m_data = 0;
-    }
-    else
-    {
-        this->m_data = new double[this->m_cols*this->m_rows];
-        zero();
-    }
 }
 
 void MatrixDynSize::fillRowMajorBuffer(double* rowMajorBuf) const

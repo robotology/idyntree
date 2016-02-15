@@ -48,4 +48,10 @@ namespace iDynTree
     {
     }
 
+    LinearForceVector3::LinearForceVector3(const Vector3& other):
+    ForceVector3<LinearForceVector3>(other.data(), other.size())
+    {
+    }
+
+
 }

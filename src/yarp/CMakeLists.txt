@@ -1,21 +1,17 @@
-# Copyright: (C) 2015 Fondazione Istituto Italiano di Tecnologia
+# Copyright: (C) 2016 Fondazione Istituto Italiano di Tecnologia
 # Authors: Silvio Traversaro
 # CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
 
 project(iDynTree_YARP CXX)
 
-SET(iDynTree_YARP_source src/DynTree.cpp
-                         src/yarp_kdl.cpp
-                         src/yarp_iDynTree.cpp)
+SET(iDynTree_YARP_source src/YARPConversions.cpp)
 
-SET(iDynTree_YARP_header include/iCub/iDynTree/DynTree.h
-                  include/iCub/iDynTree/yarp_kdl.h
-                  include/iCub/iDynTree/yarp_iDynTree.h)
+SET(iDynTree_YARP_header include/iDynTree/yarp/YARPConversions.h)
 
 SOURCE_GROUP("Source Files" FILES ${iDynTree_YARP_source})
 SOURCE_GROUP("Header Files" FILES ${iDynTree_YARP_header})
 
-# share headers with all iDynTree targes
+# share headers with all iDynTree targets
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
@@ -35,27 +31,19 @@ target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRE
 
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
-target_include_directories(idyntree-yarp INTERFACE ${EIGEN3_INCLUDE_DIR}
-                                                   ${YARP_INCLUDE_DIRS})
-include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR}
-                           ${YARP_INCLUDE_DIRS})
+target_include_directories(idyntree-yarp INTERFACE ${YARP_INCLUDE_DIRS})
 
-target_link_libraries(idyntree-yarp LINK_PUBLIC
-                                            ${GSL_LIBRARIES}
-                                            ${YARP_LIBRARIES}
-                                            idyntree-core
-                                            idyntree-sensors
-                                            idyntree-modelio-urdf
-                                            idyntree-regressors
-                                            ${Boost_LIBRARIES}
-                                            ${TinyXML_LIBRARIES})
+include_directories(SYSTEM ${YARP_INCLUDE_DIRS})
 
+target_link_libraries(idyntree-yarp idyntree-core
+                                    idyntree-model
+                                    ${YARP_LIBRARIES})
 
 install(TARGETS idyntree-yarp
         EXPORT iDynTree
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iCub/iDynTree" COMPONENT dev)
+        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/yarp" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-yarp)

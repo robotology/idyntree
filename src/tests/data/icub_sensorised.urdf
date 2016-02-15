@@ -1107,6 +1107,14 @@
     <origin xyz="-0.0179355 -0.092958 0.0184593" rpy="-1.3089971472018722 -2.543178857158298e-05 1.5707895123459004"/>
     <parent link="l_lower_leg"/>
   </sensor>
+  <sensor name="l_foot_mtb_acc_10b12" type = "accelerometer">
+    <origin xyz="0.1055224 0.0008072 -0.001215" rpy="0 0 1.57079632679"/>
+    <parent link="l_foot"/>
+  </sensor>
+  <sensor name="l_foot_mtb_acc_10b13" type = "accelerometer">
+    <origin xyz="0.0805224 0.0118072 -0.001215" rpy="0 0 1.57079632679"/>
+    <parent link="l_foot"/>
+  </sensor>
   <sensor name="chest_ems_acc_eb1" type="accelerometer">
 	<origin xyz="0.0647855001907 0.064043 -0.064709" rpy="3.1415169122972952 -0.2617993091222473 0.0002926418802545251"/>
 	<parent link="chest"/>
@@ -1215,7 +1223,7 @@
  	<parent link="r_upper_leg"/>
         <origin xyz="0.0404072 -0.040027 -0.0125751" rpy="1.5707963267948961 0 -1.5707963267948961"/>
   </sensor>
-  <sensor name="r_upper_leg_ems_acc_eb11" type="accelerometer"> 
+  <sensor name="r_upper_leg_ems_acc_eb11" type="accelerometer">
 	<origin xyz="-0.040407 -0.083207 -0.0125771" rpy="1.5707963267948961 0 -1.5707963267948961"/>
 	<parent link="r_upper_leg"/>
   </sensor>
@@ -1287,4 +1295,106 @@
 	<origin xyz="0.0784744 -0.0118072 -0.001215" rpy="0 0 -1.5707963267948966"/>
 	<parent link="r_foot"/>
   </sensor>
+  <gazebo reference="l_arm_ft_sensor">
+        <sensor name="left_arm_ft" type="force_torque">
+            <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+            </force_torque>
+            <update_rate>100</update_rate>
+            <always_on>1</always_on>
+        </sensor>
+    </gazebo>
+    <sensor name="l_arm_ft_sensor" type="force_torque">
+        <parent joint="l_arm_ft_sensor"/>
+        <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+    </sensor>
+    <gazebo reference="r_arm_ft_sensor">
+        <sensor name="right_arm_ft" type="force_torque">
+            <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+            </force_torque>
+            <update_rate>100</update_rate>
+            <always_on>1</always_on>
+        </sensor>
+    </gazebo>
+    <sensor name="r_arm_ft_sensor" type="force_torque">
+        <parent joint="r_arm_ft_sensor"/>
+        <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+    </sensor>
+    <gazebo reference="l_leg_ft_sensor">
+        <sensor name="left_leg_ft" type="force_torque">
+            <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+            </force_torque>
+            <update_rate>100</update_rate>
+            <always_on>1</always_on>
+        </sensor>
+    </gazebo>
+    <sensor name="l_leg_ft_sensor" type="force_torque">
+        <parent joint="l_leg_ft_sensor"/>
+        <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+    </sensor>
+    <gazebo reference="r_leg_ft_sensor">
+        <sensor name="right_leg_ft" type="force_torque">
+            <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+            </force_torque>
+            <update_rate>100</update_rate>
+            <always_on>1</always_on>
+        </sensor>
+    </gazebo>
+    <sensor name="r_leg_ft_sensor" type="force_torque">
+        <parent joint="r_leg_ft_sensor"/>
+        <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+    </sensor>
+    <gazebo reference="l_foot_ft_sensor">
+        <sensor name="left_foot_ft" type="force_torque">
+            <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+            </force_torque>
+            <update_rate>100</update_rate>
+            <always_on>1</always_on>
+        </sensor>
+    </gazebo>
+    <sensor name="l_foot_ft_sensor" type="force_torque">
+        <parent joint="l_foot_ft_sensor"/>
+        <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+    </sensor>
+    <gazebo reference="r_foot_ft_sensor">
+        <sensor name="right_foot_ft" type="force_torque">
+            <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+            </force_torque>
+            <update_rate>100</update_rate>
+            <always_on>1</always_on>
+        </sensor>
+    </gazebo>
+    <sensor name="r_foot_ft_sensor" type="force_torque">
+        <parent joint="r_foot_ft_sensor"/>
+        <force_torque>
+                <frame>child</frame>
+                <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+    </sensor>
 </robot>

@@ -10,6 +10,8 @@
 #include <iDynTree/Model/IJoint.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/JointState.h>
 
 #include <cassert>
 #include <algorithm>
@@ -38,10 +40,16 @@ SubModelDecomposition::~SubModelDecomposition()
     this->setNrOfSubModels(0);
 }
 
-size_t SubModelDecomposition::getNrOfSubModels()
+size_t SubModelDecomposition::getNrOfSubModels() const
 {
     return subModelTraversals.size();
 }
+
+size_t SubModelDecomposition::getNrOfLinks() const
+{
+    return link2subModelIndex.size();
+}
+
 
 void SubModelDecomposition::setNrOfSubModels(const size_t nrOfSubModels)
 {
@@ -69,7 +77,7 @@ const Traversal& SubModelDecomposition::getTraversal(const size_t subModelIndex)
     return *subModelTraversals[subModelIndex];
 }
 
-size_t SubModelDecomposition::getSubModelOfLink(const LinkIndex& link)
+size_t SubModelDecomposition::getSubModelOfLink(const LinkIndex& link) const
 {
     size_t ret = 0;
 
@@ -178,6 +186,54 @@ bool SubModelDecomposition::splitModelAlongJoints(const Model& model,
     }
 
     return true;
+}
+
+void computeTransformToTraversalBase(const Model& fullModel,
+                                     const Traversal& subModelTraversal,
+                                     const JointPosDoubleArray& jointPos,
+                                           LinkPositions& traversalBase_H_link)
+{
+    for(unsigned int traversalEl=0; traversalEl < subModelTraversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = subModelTraversal.getLink(traversalEl);
+        LinkConstPtr parentLink  = subModelTraversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = subModelTraversal.getParentJoint(traversalEl);
+
+        // If this is the traversal base
+        if( parentLink == 0 )
+        {
+            // If the visited link is the base, the base has no parent.
+            // In this case the position of the base with respect to the base is simply
+            // an identity transform
+            traversalBase_H_link(visitedLink->getIndex()) = iDynTree::Transform::Identity();
+        }
+        else
+        {
+            // Otherwise we compute the world_H_link transform as:
+            // world_H_link = world_H_parentLink * parentLink_H_link
+            traversalBase_H_link(visitedLink->getIndex()) =
+                traversalBase_H_link(parentLink->getIndex())*
+                    toParentJoint->getTransform(jointPos,parentLink->getIndex(),visitedLink->getIndex());
+        }
+    }
+
+    return;
+}
+
+void computeTransformToSubModelBase(const Model& fullModel,
+                                    const SubModelDecomposition& subModelDecomposition,
+                                    const JointPosDoubleArray& jointPos,
+                                          LinkPositions& subModelBase_H_link)
+{
+    for(size_t subModel = 0;
+               subModel < subModelDecomposition.getNrOfSubModels();
+               subModel++ )
+    {
+        computeTransformToTraversalBase(fullModel,
+                                        subModelDecomposition.getTraversal(subModel),
+                                        jointPos,
+                                        subModelBase_H_link);
+    }
 }
 
 

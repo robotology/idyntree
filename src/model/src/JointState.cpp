@@ -14,33 +14,65 @@
 namespace iDynTree
 {
 
-JointDoubleArray::JointDoubleArray(unsigned int nrOfDOFs): VectorDynSize(nrOfDOFs)
+JointPosDoubleArray::JointPosDoubleArray(unsigned int nrOfPosCoords): VectorDynSize(nrOfPosCoords)
 {
 
 }
 
-JointDoubleArray::JointDoubleArray(const iDynTree::Model& model): VectorDynSize(model.getNrOfDOFs())
+JointPosDoubleArray::JointPosDoubleArray(const iDynTree::Model& model): VectorDynSize(model.getNrOfPosCoords())
 {
 
 }
 
-void JointDoubleArray::resize(const iDynTree::Model& model)
+void JointPosDoubleArray::resize(const iDynTree::Model& model)
+{
+    resize(model.getNrOfPosCoords());
+}
+
+void JointPosDoubleArray::resize(unsigned int nrOfPosCoords)
+{
+    VectorDynSize::resize(nrOfPosCoords);
+    this->zero();
+}
+
+bool JointPosDoubleArray::isConsistent(const Model& model)
+{
+    return (this->size() != model.getNrOfPosCoords());
+}
+
+JointPosDoubleArray::~JointPosDoubleArray()
+{
+
+}
+
+
+JointDOFsDoubleArray::JointDOFsDoubleArray(unsigned int nrOfDOFs): VectorDynSize(nrOfDOFs)
+{
+
+}
+
+JointDOFsDoubleArray::JointDOFsDoubleArray(const iDynTree::Model& model): VectorDynSize(model.getNrOfDOFs())
+{
+
+}
+
+void JointDOFsDoubleArray::resize(const iDynTree::Model& model)
 {
     resize(model.getNrOfDOFs());
 }
 
-void JointDoubleArray::resize(unsigned int nrOfDOFs)
+void JointDOFsDoubleArray::resize(unsigned int nrOfDOFs)
 {
     VectorDynSize::resize(nrOfDOFs);
     this->zero();
 }
 
-bool JointDoubleArray::isConsistent(const Model& model)
+bool JointDOFsDoubleArray::isConsistent(const Model& model)
 {
     return (this->size() != model.getNrOfDOFs());
 }
 
-JointDoubleArray::~JointDoubleArray()
+JointDOFsDoubleArray::~JointDOFsDoubleArray()
 {
 
 }

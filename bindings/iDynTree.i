@@ -72,6 +72,9 @@
 #include "iDynTree/Model/RevoluteJoint.h"
 #include "iDynTree/Model/Traversal.h"
 #include "iDynTree/Model/Model.h"
+#include "iDynTree/Model/JointState.h"
+#include "iDynTree/Model/FreeFloatingState.h"
+#include "iDynTree/Model/ContactWrench.h"
 
 // Model loading from external formats
 #include "iDynTree/ModelIO/URDFModelImport.h"
@@ -85,6 +88,10 @@
 
 // Sensors loading from external formats
 #include "iDynTree/ModelIO/URDFSensorsImport.h"
+
+// Estimation related classes
+#include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
+#include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
 
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
@@ -213,6 +220,10 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Model/RevoluteJoint.h"
 %include "iDynTree/Model/Traversal.h"
 %include "iDynTree/Model/Model.h"
+%include "iDynTree/Model/JointState.h"
+%include "iDynTree/Model/FreeFloatingState.h"
+%include "iDynTree/Model/ContactWrench.h"
+
 
 // Model loading from external formats
 %include "iDynTree/ModelIO/URDFModelImport.h"
@@ -228,6 +239,10 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // Sensors loading from external formats
 %include "iDynTree/ModelIO/URDFSensorsImport.h"
+
+// Estimation related classes
+%include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
+%include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"

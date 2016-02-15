@@ -26,12 +26,13 @@ namespace iDynTree
      * the position forward kinematics of a FreeFloating robot.
      *
      * \ingroup iDynTreeModel
+     *
+     *
      */
     bool ForwardPositionKinematics(const Model & model,
                                    const Traversal & traversal,
                                    const FreeFloatingPos & jointPos,
                                          LinkPositions   & linkPos);
-
 
     /**
      * Function that compute the links velocities and accelerations
@@ -59,10 +60,10 @@ namespace iDynTree
                                     const iDynTree::FreeFloatingPos & robotPos,
                                     const iDynTree::FreeFloatingVel & robotVel,
                                     const iDynTree::FreeFloatingAcc & robotAcc,
-                                    iDynTree::LinkPositions & linkPos,
-                                    iDynTree::LinkVelArray & linkVel,
-                                    iDynTree::LinkAccArray  & linkAcc);
+                                          iDynTree::LinkPositions & linkPos,
+                                          iDynTree::LinkVelArray & linkVel,
+                                          iDynTree::LinkAccArray  & linkAcc);
 
 }
 
-#endif /* IDYNTREE_FORWARD_KINEMATICS_H */
+#endif

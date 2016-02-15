@@ -14,11 +14,13 @@ set(IDYNTREE_MODELIO_IKIN_SOURCES src/iKin_export.cpp)
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_IKIN_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODELIO_IKIN_HEADERS})
 
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+
 set(libraryname idyntree-modelio-ikin)
 
 add_library(${libraryname} ${IDYNTREE_MODELIO_IKIN_SOURCES} ${IDYNTREE_MODELIO_IKIN_HEADERS})
 
-target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                                  ${orocos_kdl_INCLUDE_DIRS}
                                                  ${iKin_INCLUDE_DIRS}
@@ -38,3 +40,5 @@ install(TARGETS ${libraryname}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
+set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
+

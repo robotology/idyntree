@@ -58,7 +58,7 @@ if(IDYNTREE_USES_PYTHON OR
    IDYNTREE_USES_MATLAB OR
    IDYNTREE_GENERATED_MATLAB)
    if(NOT SWIG_FOUND)
-       error("Swig not found, impossible to compile iDynTree bindings.")
+       MESSAGE(FATAL_ERROR "Swig not found, impossible to compile iDynTree bindings.")
    endif()
 endif()
 

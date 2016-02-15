@@ -6,6 +6,8 @@
  */
 
 #include <iDynTree/Core/ClassicalAcc.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/RotationRaw.h>
 
 #include <Eigen/Dense>
@@ -46,6 +48,69 @@ ClassicalAcc ClassicalAcc::Zero()
 {
     return ClassicalAcc();
 }
+
+Vector3 ClassicalAcc::getLinearVec3() const
+{
+    Vector3 ret;
+
+    ret(0) = this->operator()(0);
+    ret(1) = this->operator()(1);
+    ret(2) = this->operator()(2);
+
+    return ret;
+}
+
+Vector3 ClassicalAcc::getAngularVec3() const
+{
+    Vector3 ret;
+
+    ret(0) = this->operator()(3);
+    ret(1) = this->operator()(4);
+    ret(2) = this->operator()(5);
+
+    return ret;
+}
+
+
+void ClassicalAcc::fromSpatial(const SpatialAcc& spatialAcc,
+                               const Twist& vel)
+{
+    // See equation 2.48 in Featherstone 2008 RNEA
+    Eigen::Map<const Eigen::Vector3d> linSpatialAcc(spatialAcc.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angSpatialAcc(spatialAcc.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> linTwist(vel.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angTwist(vel.getAngularVec3().data());
+
+    Eigen::Map<Eigen::Vector3d> linClassicalAcc(this->data());
+    Eigen::Map<Eigen::Vector3d> angClassicalAcc(this->data()+3);
+
+    // Linear part need to be converted
+    linClassicalAcc = linSpatialAcc + angTwist.cross(linTwist);
+
+    // Angular acceleration can be copied
+    angClassicalAcc = angSpatialAcc;
+}
+
+void ClassicalAcc::toSpatial(SpatialAcc& spatialAcc, const Twist& vel) const
+{
+    // See equation 2.48 in Featherstone 2008 RNEA
+    Eigen::Map<Eigen::Vector3d> linSpatialAcc(spatialAcc.getLinearVec3().data());
+    Eigen::Map<Eigen::Vector3d> angSpatialAcc(spatialAcc.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> linTwist(vel.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angTwist(vel.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> linClassicalAcc(this->data());
+    Eigen::Map<const Eigen::Vector3d> angClassicalAcc(this->data()+3);
+
+    // Linear part need to be converted
+    linSpatialAcc = linClassicalAcc - angTwist.cross(linTwist);
+
+    // Angular acceleration can be copied
+    angSpatialAcc = angClassicalAcc;
+}
+
 
 
 }

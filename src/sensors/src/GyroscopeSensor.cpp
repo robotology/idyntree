@@ -82,13 +82,13 @@ bool GyroscopeSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_s
     return true;
 }
 
-bool GyroscopeSensor::setParent(const std::string& parent)
+bool GyroscopeSensor::setParentLink(const std::string& parent)
 {
     this->pimpl->parent_link_name = parent;
     return true;
 }
 
-bool GyroscopeSensor::setParentIndex(const int &parent_index)
+bool GyroscopeSensor::setParentLinkIndex(const int &parent_index)
 {
     this->pimpl->parent_link_index = parent_index;
     return true;
@@ -128,12 +128,12 @@ SensorType GyroscopeSensor::getSensorType() const
 }
 
 
-std::string GyroscopeSensor::getParent() const
+std::string GyroscopeSensor::getParentLink() const
 {
     return this->pimpl->parent_link_name;
 }
 
-int GyroscopeSensor::getParentIndex() const
+LinkIndex GyroscopeSensor::getParentLinkIndex() const
 {
     return this->pimpl->parent_link_index;
 }

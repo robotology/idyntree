@@ -75,11 +75,24 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
     }
 }
 
-inline std::string getRandomLinkOfModel(const Model & model)
+/**
+ * Add a random additional frame to a model model.
+ */
+inline void addRandomAdditionalFrameToModel(Model & model, std::string parentLink, std::string newFrameName)
+{
+    model.addAdditionalFrameToLink(parentLink,newFrameName,getRandomTransform());
+}
+
+inline LinkIndex getRandomLinkIndexOfModel(const Model & model)
 {
     int nrOfLinks = model.getNrOfLinks();
 
-    LinkIndex randomLink = rand() % nrOfLinks;
+    return rand() % nrOfLinks;
+}
+
+inline std::string getRandomLinkOfModel(const Model & model)
+{
+    LinkIndex randomLink = getRandomLinkIndexOfModel(model);
 
     return model.getLinkName(randomLink);
 }
@@ -93,7 +106,7 @@ inline std::string int2string(int i)
     return ss.str();
 }
 
-inline Model getRandomModel(unsigned int nrOfJoints)
+inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10)
 {
     Model model;
 
@@ -106,10 +119,17 @@ inline Model getRandomModel(unsigned int nrOfJoints)
         addRandomLinkToModel(model,parentLink,linkName);
     }
 
+    for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
+    {
+        std::string parentLink = getRandomLinkOfModel(model);
+        std::string frameName = "additionalFrame" + int2string(i);
+        addRandomAdditionalFrameToModel(model,parentLink,frameName);
+    }
+
     return model;
 }
 
-inline Model getRandomChain(unsigned int nrOfJoints)
+inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10)
 {
     Model model;
 
@@ -121,6 +141,13 @@ inline Model getRandomChain(unsigned int nrOfJoints)
         std::string parentLink = linkName;
         linkName = "link" + int2string(i);
         addRandomLinkToModel(model,parentLink,linkName);
+    }
+
+    for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
+    {
+        std::string parentLink = getRandomLinkOfModel(model);
+        std::string frameName = "additionalFrame" + int2string(i);
+        addRandomAdditionalFrameToModel(model,parentLink,frameName);
     }
 
     return model;

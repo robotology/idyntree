@@ -8,6 +8,8 @@
 #ifndef IDYNTREE_TEST_UTILS_H
 #define IDYNTREE_TEST_UTILS_H
 
+#include <iDynTree/Core/MatrixDynSize.h>
+
 #include <iDynTree/Core/Utils.h>
 
 #include <algorithm>
@@ -32,8 +34,8 @@ namespace iDynTree
     class Position;
     class Rotation;
 
-#define ASSERT_EQUAL_STRING(val1,val2) assertStringAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
-#define ASSERT_EQUAL_DOUBLE(val1,val2) assertDoubleAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
+#define ASSERT_EQUAL_STRING(val1,val2) iDynTree::assertStringAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
+#define ASSERT_EQUAL_DOUBLE(val1,val2) iDynTree::assertDoubleAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_VECTOR(val1,val2) assertVectorAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_VECTOR_TOL(val1,val2,tol) assertVectorAreEqual(val1,val2,tol,__FILE__,__LINE__)
 #define ASSERT_EQUAL_SPATIAL_MOTION(val1,val2) assertSpatialMotionAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
@@ -71,6 +73,11 @@ namespace iDynTree
     void assertSpatialForceAreEqual(const SpatialForceVector & f1, const SpatialForceVector & f2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
 
     /**
+     * Get random bool
+     */
+    bool getRandomBool();
+
+    /**
      * Get a random double between min and max .
      */
     double getRandomDouble(double min=0.0, double max=1.0);
@@ -90,6 +97,21 @@ namespace iDynTree
         for(unsigned int i=0; i<vec.size(); i++)
         {
             vec(i) = getRandomDouble();
+        }
+    }
+
+    /**
+     * Fill a matrix of random doubles.
+     */
+    template<typename MatrixType>
+    void getRandomMatrix(MatrixType & mat)
+    {
+        for(unsigned int i=0; i<mat.rows(); i++)
+        {
+            for(unsigned int j=0; j<mat.cols(); j++)
+            {
+                mat(i,j) = getRandomDouble();
+            }
         }
     }
 

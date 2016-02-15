@@ -64,7 +64,7 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
     // We iterate on all the links in the model
     // and check which one are "fake links", according
     // to our definition
-    for(LinkIndex lnkIdx = 0; lnkIdx < modelWithFakeLinks.getNrOfLinks(); lnkIdx++ )
+    for(LinkIndex lnkIdx = 0; lnkIdx < (LinkIndex)modelWithFakeLinks.getNrOfLinks(); lnkIdx++ )
     {
         if( isFakeLink(modelWithFakeLinks,lnkIdx) )
         {
@@ -191,37 +191,7 @@ void computeCompositeRigidBodyInertiaSubModel(const Model& fullModel,
     }
 }
 
-void computeTransformToSubModelBase(const Model& fullModel,
-                                    const Traversal& subModelTraversal,
-                                    const FreeFloatingPos& pos,
-                                    LinkPositions& linksPos)
-{
-    for(unsigned int traversalEl=0; traversalEl < subModelTraversal.getNrOfVisitedLinks(); traversalEl++)
-    {
-        LinkConstPtr visitedLink = subModelTraversal.getLink(traversalEl);
-        LinkConstPtr parentLink  = subModelTraversal.getParentLink(traversalEl);
-        IJointConstPtr toParentJoint = subModelTraversal.getParentJoint(traversalEl);
 
-        // If this is the traversal base
-        if( parentLink == 0 )
-        {
-            // If the visited link is the base, the base has no parent.
-            // In this case the position of the base with respect to the base is simply
-            // an identity transform
-            linksPos(visitedLink->getIndex()) = iDynTree::Transform::Identity();
-        }
-        else
-        {
-            // Otherwise we compute the world_H_link transform as:
-            // world_H_link = world_H_parentLink * parentLink_H_link
-            linksPos(visitedLink->getIndex()) =
-                linksPos(parentLink->getIndex())*
-                    toParentJoint->getTransform(pos.jointPos(),parentLink->getIndex(),visitedLink->getIndex());
-        }
-    }
-
-    return;
-}
 
 /**
  * Given a model, build for each link a list of
@@ -236,7 +206,7 @@ void buildLinkToAdditionalFramesList(const Model& fullModel,
 
     // Iterate on all the frames and add them to the right link list
     for(FrameIndex additionalFrame = fullModel.getNrOfLinks();
-        additionalFrame < fullModel.getNrOfFrames();
+        additionalFrame < (FrameIndex)fullModel.getNrOfFrames();
         additionalFrame++)
     {
         LinkIndex linkOfAdditionalFrame = fullModel.getFrameLink(additionalFrame);
@@ -245,14 +215,14 @@ void buildLinkToAdditionalFramesList(const Model& fullModel,
 }
 
 void reducedModelAddAdditionalFrames(const Model& fullModel,
-                                Model& reducedModel,
-                                const std::string linkInReducedModel,
-                                const Traversal& linkSubModel,
-                                const FreeFloatingPos& pos,
-                                LinkPositions& subModelBase_X_link)
+                                           Model& reducedModel,
+                                     const std::string linkInReducedModel,
+                                     const Traversal& linkSubModel,
+                                     const FreeFloatingPos& pos,
+                                           LinkPositions& subModelBase_X_link)
 {
     // First compute the transform between each link in the submodel and the submodel base
-    computeTransformToSubModelBase(fullModel,linkSubModel,pos,subModelBase_X_link);
+    computeTransformToTraversalBase(fullModel,linkSubModel,pos.jointPos(),subModelBase_X_link);
 
     // We then need to compute the list of additional frames for each link
     // This is a rather inefficient operation (given how frame information is stored in the Model
@@ -268,7 +238,6 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
     {
         LinkConstPtr visitedLink = linkSubModel.getLink(traversalEl);
         LinkConstPtr parentLink  = linkSubModel.getParentLink(traversalEl);
-        IJointConstPtr toParentJoint = linkSubModel.getParentJoint(traversalEl);
 
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
 
@@ -320,6 +289,9 @@ bool createReducedModel(const Model& fullModel,
 
     if( !ok )
     {
+         std::cerr << "[ERROR] createReducedModel error : "
+                      << " error in splitting models across joints. "
+                      << std::endl;
         return false;
     }
 

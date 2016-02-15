@@ -49,6 +49,7 @@ namespace iDynTree
         LinearForceVector3(const double x, const double y, const double z);
         LinearForceVector3(const double* in_data, const unsigned int in_size);
         LinearForceVector3(const LinearForceVector3 & other);
+        LinearForceVector3(const Vector3 & other);
     };
 
     typedef LinearForceVector3 LinMomentum;

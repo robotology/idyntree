@@ -18,6 +18,9 @@ namespace iDynTree
 {
     class Model;
     class Traversal;
+    class JointPosDoubleArray;
+    class LinkPositions;
+    class IRawVector;
 
     /**
      * Class representing the decomposition in one model in several submodels.
@@ -85,9 +88,14 @@ namespace iDynTree
         void setNrOfSubModels(const size_t nrOfSubModels);
 
         /**
-         * Get the number of submodels in the decompistion.
+         * Get the number of submodels in the decomposition.
          */
-        size_t getNrOfSubModels();
+        size_t getNrOfSubModels() const;
+
+        /**
+         * Get the total numer of links in the submodel decomposition.
+         */
+        size_t getNrOfLinks() const;
 
         /**
          * Get the traversal of a given submodel
@@ -102,9 +110,37 @@ namespace iDynTree
         /**
          * Get the subModel to which a given links belongs.
          */
-        size_t getSubModelOfLink(const LinkIndex & link);
+        size_t getSubModelOfLink(const LinkIndex & link) const;
     };
 
+    /**
+     * Helper loop to compute the position of each link
+     * wrt to the frame of the subModel base.
+     *
+     * @param[in] fullModel full model
+     * @param[in] traversal traversal on which to run the loop
+     * @param[in] jointPos  joint positions for the full model
+     * @param[out] traversalBase_H_link  traversalBase_H_link[i] will store the traversalBase_H_i transform
+     */
+    void computeTransformToTraversalBase(const Model& fullModel,
+                                         const Traversal& traversal,
+                                         const JointPosDoubleArray& jointPos,
+                                               LinkPositions& traversalBase_H_link);
+
+    /**
+     * Run the computeTransformToTraversalBase for all the
+     * traversal in the subModelDecomposition, and store the
+     * results in the linkPos array.
+     *
+     * @param[in] fullModel full model
+     * @param[in] subModelDecomposition model decomposition on which the loop will run
+     * @param[in] jointPos  joint positions for the full model
+     * @param[out] subModelBase_H_link  subModelBase_H_link[i] will store the subModelBase_H_i transform
+     */
+    void computeTransformToSubModelBase(const Model& fullModel,
+                                        const SubModelDecomposition& subModelDecomposition,
+                                        const JointPosDoubleArray& jointPos,
+                                              LinkPositions& subModelBase_H_link);
 
 }
 

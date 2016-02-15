@@ -110,6 +110,12 @@ namespace iDynTree
     {
     }
 
+    AngularForceVector3::AngularForceVector3(const Vector3& other):
+    ForceVector3<AngularForceVector3>(other.data(), other.size())
+    {
+    }
+
+
     // Geometric operations
     AngularForceVector3 AngularForceVector3::changePoint(const Position & newPoint,
                                                          const LinearForceVector3 & otherLinear) const
