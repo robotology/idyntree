@@ -1,3 +1,3 @@
 function varargout = estimateExternalWrenches(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(963, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(964, varargin{:});
 end
