@@ -147,26 +147,101 @@ Vector10 SpatialInertia::asVector() const
 {
     Vector10 ret;
 
-    Eigen::Map< Eigen::Matrix<double,10,1> > res = toEigen(ret);
+    Eigen::Map< Eigen::Matrix<double,10,1> > inertialParams = toEigen(ret);
 
     // Mass
-    res(0) = m_mass;
+    inertialParams(0) = m_mass;
 
     // First moment of mass
-    res(1) = m_mcom[0];
-    res(2) = m_mcom[1];
-    res(3) = m_mcom[2];
+    inertialParams(1) = m_mcom[0];
+    inertialParams(2) = m_mcom[1];
+    inertialParams(3) = m_mcom[2];
 
     // Inertia matrix
-    res(4) = m_rotInertia(0,0);
-    res(5) = m_rotInertia(0,1);
-    res(6) = m_rotInertia(0,2);
-    res(7) = m_rotInertia(1,1);
-    res(8) = m_rotInertia(1,2);
-    res(9) = m_rotInertia(2,2);
+    inertialParams(4) = m_rotInertia(0,0);
+    inertialParams(5) = m_rotInertia(0,1);
+    inertialParams(6) = m_rotInertia(0,2);
+    inertialParams(7) = m_rotInertia(1,1);
+    inertialParams(8) = m_rotInertia(1,2);
+    inertialParams(9) = m_rotInertia(2,2);
 
     return ret;
 }
+
+void SpatialInertia::fromVector(const Vector10& inertialParams)
+{
+    // mass
+    this->m_mass = inertialParams(0);
+
+    // First moment of mass
+    this->m_mcom[0] = inertialParams(1);
+    this->m_mcom[1] = inertialParams(2);
+    this->m_mcom[2] = inertialParams(3);
+
+    // Inertia matrix
+    this->m_rotInertia(0,0) = inertialParams(4);
+    this->m_rotInertia(0,1) = this->m_rotInertia(1,0) = inertialParams(5);
+    this->m_rotInertia(0,2) = this->m_rotInertia(2,0) = inertialParams(6);
+    this->m_rotInertia(1,1) = inertialParams(7);
+    this->m_rotInertia(1,2) = this->m_rotInertia(2,1) = inertialParams(8);
+    this->m_rotInertia(2,2) = inertialParams(9);
+}
+
+bool SpatialInertia::isPhysicallyConsistent() const
+{
+    using namespace Eigen;
+
+    bool isConsistent = true;
+
+    // check that the mass is positive
+    if( this->m_mass <= 0 )
+    {
+        isConsistent = false;
+        return isConsistent;
+    }
+
+    // We get the inertia at the COM
+    RotationalInertiaRaw inertiaAtCOM = this->getRotationalInertiaWrtCenterOfMass();
+
+    // We get the inertia at the principal axis using eigen
+    SelfAdjointEigenSolver<Matrix<double,3,3,RowMajor> > eigenValuesSolver;
+
+    // We check both the positive definitiveness of the matrix and the triangle
+    // inequality by directly checking the central second moment of mass of the rigid body
+    // In a nutshell, we have that:
+    // Ixx = Cyy + Czz
+    // Iyy = Cxx + Czz
+    // Izz = Cxx + Cyy
+    // so
+    // Cxx = (Iyy + Izz - Ixx)/2
+    // Cyy = (Ixx + Izz - Iyy)/2
+    // Czz = (Ixx + Iyy - Izz)/2
+    // Then all the condition boils down to:
+    // Cxx >= 0 , Cyy >= 0 , Czz >= 0
+    eigenValuesSolver.compute( toEigen(inertiaAtCOM) );
+
+    double Ixx = eigenValuesSolver.eigenvalues()(0);
+    double Iyy = eigenValuesSolver.eigenvalues()(1);
+    double Izz = eigenValuesSolver.eigenvalues()(2);
+
+    double Cxx = (Iyy + Izz - Ixx)/2;
+    double Cyy = (Ixx + Izz - Iyy)/2;
+    double Czz = (Ixx + Iyy - Izz)/2;
+
+    // We are accepting the configuration where C** is zero
+    // so that we don't mark a point mass as physically inconsistent
+    if( Cxx < 0 ||
+        Cyy < 0 ||
+        Czz < 0 )
+    {
+        isConsistent = false;
+    }
+
+    return isConsistent;
+}
+
+
+
 
 Eigen::Matrix<double, 3, 6> rotationalMomentumRegressor(const Vector3 & w)
 {

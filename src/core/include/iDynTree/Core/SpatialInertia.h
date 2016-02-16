@@ -10,14 +10,13 @@
 
 #include <iDynTree/Core/SpatialInertiaRaw.h>
 #include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/SpatialMomentum.h>
+#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/Wrench.h>
 
 namespace iDynTree
 {
-    class Twist;
-    class SpatialAcc;
-    class SpatialMomentum;
-    class Wrench;
-
     /**
      * Class representing a spatial inertia
      *
@@ -126,6 +125,27 @@ namespace iDynTree
          *
          */
         Vector10 asVector() const;
+
+        /**
+         * \brief Set the Rigid Body Inertia from the inertial parameters in the vector.
+         *
+         * The serialization assumed in the inertialParams is the same used in the asVector method.
+         */
+        void fromVector(const Vector10 & inertialParams);
+
+        /**
+         * \brief Check if the Rigid Body Inertia is physically consistent.
+         *
+         * This method will check:
+         *   * if the mass is positive,
+         *   * if the 3d inertia at the COM is positive semidefinite,
+         *     (semidefinite to cover also the case of the inertia of a point mass),
+         *   * if the moment of inertia along the principal axes at the COM respect the triangle inequality.
+         *
+         * It will return true if all this check will pass, or false otherwise.
+         *
+         */
+        bool isPhysicallyConsistent() const;
 
         /**
          * \brief Get the momentum inertial parameters regressor.
