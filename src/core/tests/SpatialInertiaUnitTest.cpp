@@ -15,6 +15,7 @@
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/MatrixFixSize.h>
 #include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/InertiaNonLinearParametrization.h>
 
 #include <Eigen/Dense>
 
@@ -22,6 +23,34 @@
 #include <cstdlib>
 
 using namespace iDynTree;
+
+SpatialInertia getNonPhysicalConsistentInertia()
+{
+    Vector16 paramsVec;
+    paramsVec.zero();
+    paramsVec(0) = -1.0;
+
+    paramsVec(1) = 1.0;
+    paramsVec(2) = 1.0;
+    paramsVec(3) = 0.0;
+    /*
+    paramsVec(4) = 0.66474;
+    paramsVec(5) = 0.534487;
+    paramsVec(6) = -0.521962;
+    paramsVec(7) = 0.124066;
+    paramsVec(8) = 0.609993;
+    paramsVec(9) = 0.782634;
+    paramsVec(10) = 0.736701;
+    paramsVec(11) = -0.585006;
+    paramsVec(12) = 0.339175;
+    paramsVec(13) = 0.434594;
+    paramsVec(14) = -0.716795;
+    paramsVec(15) = 0.213938;*/
+    RigidBodyInertiaNonLinearParametrization params;
+    params.fromVectorWithRotationAsVec(paramsVec);
+    SpatialInertia I = params.toRigidBodyInertia();
+    return I;
+}
 
 void checkInertiaTransformation(const Transform & trans, const SpatialInertia & inertia)
 {
@@ -34,6 +63,10 @@ void checkInertiaTransformation(const Transform & trans, const SpatialInertia & 
     toEigen(inertiaTranslatedCheck) = toEigen(adjWre)*
                                       toEigen(I)*
                                       toEigen(adj);
+
+
+    std::cerr << "inertiaTranslated :\n" << inertiaTranslated.asMatrix().toString() << std::endl;
+    std::cerr << "inertiaTranslatedCheck :\n" << inertiaTranslatedCheck.toString() << std::endl;
 
     Matrix6x6 inertiaTranslatedRaw = inertiaTranslated.asMatrix();
     ASSERT_EQUAL_MATRIX(inertiaTranslatedCheck,inertiaTranslatedRaw);
@@ -171,6 +204,238 @@ void checkRegressors(const SpatialInertia & I,
 
 }
 
+// Check the nonlinear parametrization of inertia
+void checkInertiaNonLinearParametrization()
+{
+    RigidBodyInertiaNonLinearParametrization inertiaParams, inertiaParamsNotConsistent, inertiaParamsCheck;
+    // populate the inertia parametrization with random (but physical consistent data)
+    inertiaParams.mass = getRandomDouble(0.3,10.0);
+    inertiaParams.com = getRandomPosition();
+    inertiaParams.link_R_centroidal = getRandomRotation();
+    inertiaParams.centralSecondMomentOfMass(2) = getRandomDouble(0.0,10.0);
+    inertiaParams.centralSecondMomentOfMass(1) = getRandomDouble(0.0,inertiaParams.centralSecondMomentOfMass(2));
+    inertiaParams.centralSecondMomentOfMass(0) = getRandomDouble(0.0,inertiaParams.centralSecondMomentOfMass(1));
+
+    ASSERT_IS_TRUE(inertiaParams.isPhysicallyConsistent());
+
+    inertiaParamsNotConsistent.mass = getRandomDouble(-10.0,-0.3);
+    inertiaParamsNotConsistent.com.zero();
+    inertiaParamsNotConsistent.link_R_centroidal =  getRandomRotation(); //iDynTree::Rotation::Identity();
+    inertiaParamsNotConsistent.centralSecondMomentOfMass(0) = 1.0; //getRandomDouble(0.0,10.0);
+    inertiaParamsNotConsistent.centralSecondMomentOfMass(1) = 2.0; //getRandomDouble(0.0,inertiaParams.centralSecondMomentOfMass(0));
+    inertiaParamsNotConsistent.centralSecondMomentOfMass(2) = 3.0; //getRandomDouble(0.0,inertiaParams.centralSecondMomentOfMass(1));
+
+    ASSERT_IS_FALSE(inertiaParamsNotConsistent.isPhysicallyConsistent());
+
+    // Check if the two nonlinear-->inertia--> nonlinear works fine
+    inertiaParamsCheck.fromRigidBodyInertia(inertiaParams.toRigidBodyInertia());
+
+    ASSERT_EQUAL_DOUBLE(inertiaParams.mass,inertiaParamsCheck.mass);
+    ASSERT_EQUAL_VECTOR(inertiaParams.com,inertiaParamsCheck.com);
+
+    //ASSERT_EQUAL_MATRIX(inertiaParams.link_R_centroidal,inertiaParamsCheck.link_R_centroidal);
+
+    ASSERT_EQUAL_VECTOR(inertiaParams.centralSecondMomentOfMass,inertiaParamsCheck.centralSecondMomentOfMass);
+    ASSERT_EQUAL_MATRIX(inertiaParams.toRigidBodyInertia().asMatrix(),inertiaParamsCheck.toRigidBodyInertia().asMatrix());
+
+    // Check mapping to and from usual inertial parameters
+    RigidBodyInertiaNonLinearParametrization inertiaParamsCheck2;
+
+    inertiaParamsCheck2.fromInertialParameters(inertiaParams.toRigidBodyInertia().asVector());
+
+    ASSERT_EQUAL_MATRIX(inertiaParams.toRigidBodyInertia().asMatrix(),inertiaParamsCheck2.toRigidBodyInertia().asMatrix());
+}
+
+void checkInertiaNonLinearParametrizationGradient()
+{
+    RigidBodyInertiaNonLinearParametrization inertiaParams;
+
+    inertiaParams.mass = getRandomDouble(0.3,10.0);
+    inertiaParams.com = getRandomPosition();
+    inertiaParams.link_R_centroidal =  getRandomRotation();
+    inertiaParams.centralSecondMomentOfMass(2) = getRandomDouble(0.0,10.0);
+    inertiaParams.centralSecondMomentOfMass(1) = getRandomDouble(0.0,inertiaParams.centralSecondMomentOfMass(2));
+    inertiaParams.centralSecondMomentOfMass(0) = getRandomDouble(0.0,inertiaParams.centralSecondMomentOfMass(1));
+
+    // Analytical gradient
+    Matrix10x16 gradient = inertiaParams.getGradientWithRotationAsVec();
+
+    // Numerical gradient
+    Matrix10x16 numericalGradient;
+
+    // Let's compute the numericalGradient
+    double delta = 1e-4;
+    Vector16 currentValue = inertiaParams.asVectorWithRotationAsVec();
+    Vector10 currentOutput = inertiaParams.toRigidBodyInertia().asVector();
+
+    Vector16 upperPerturbation;
+    Vector16 lowerPerturbation;
+    Vector10 upperOutput;
+    Vector10 lowerOutput;
+    for(int i=0; i < 16; i++ )
+    {
+        upperPerturbation = currentValue;
+        lowerPerturbation = currentValue;
+
+        upperPerturbation(i) = currentValue(i) + delta;
+        lowerPerturbation(i) = currentValue(i) - delta;
+
+        RigidBodyInertiaNonLinearParametrization upperPertubed,lowerPertubed;
+        upperPertubed.fromVectorWithRotationAsVec(upperPerturbation);
+        lowerPertubed.fromVectorWithRotationAsVec(lowerPerturbation);
+
+        upperOutput = upperPertubed.toRigidBodyInertia().asVector();
+        lowerOutput = lowerPertubed.toRigidBodyInertia().asVector();
+
+
+        for(int j = 0; j < 10; j++)
+        {
+            numericalGradient(j,i) = (upperOutput(j)-lowerOutput(j))/(2*delta);
+        }
+    }
+
+    // Check that the two are consistent
+    ASSERT_EQUAL_MATRIX_TOL(gradient,numericalGradient,1e-8);
+
+}
+
+void checkRegressorsAsGradients()
+{
+    SpatialAcc a = getRandomTwist();
+    Twist v = getRandomTwist();
+    SpatialInertia I = getRandomInertia();
+
+    Matrix6x10 momentumGradient, momentumDerivativeGradient;
+    Matrix6x10 momentumGradientNum, momentumDerivativeGradientNum;
+
+    momentumGradient = SpatialInertia::momentumRegressor(v);
+    momentumDerivativeGradient = SpatialInertia::momentumDerivativeRegressor(v,a);
+
+    double delta = 1e-4;
+    Vector10 currentValue = I.asVector();
+    Vector6  currentOutputMom = (I*v).asVector();
+    Vector6  currentOutputMomDer = (I*a+v.cross(I*v)).asVector();
+
+    Vector10 upperPerturbation;
+    Vector10 lowerPerturbation;
+    Vector6 upperOutputMom, lowerOutputMom, upperOutputMomDer, lowerOutputMomDer;
+    for(int i=0; i < 10; i++ )
+    {
+        upperPerturbation = currentValue;
+        lowerPerturbation = currentValue;
+
+        upperPerturbation(i) = currentValue(i) + delta;
+        lowerPerturbation(i) = currentValue(i) - delta;
+
+        SpatialInertia upperPertubed,lowerPertubed;
+        upperPertubed.fromVector(upperPerturbation);
+        lowerPertubed.fromVector(lowerPerturbation);
+
+        upperOutputMom = (upperPertubed*v).asVector();
+        lowerOutputMom = (lowerPertubed*v).asVector();
+
+        upperOutputMomDer = (upperPertubed*a+v.cross(upperPertubed*v)).asVector();
+        lowerOutputMomDer = (lowerPertubed*a+v.cross(lowerPertubed*v)).asVector();
+
+        for(int j = 0; j < 6; j++)
+        {
+            momentumGradientNum(j,i) = (upperOutputMom(j)-lowerOutputMom(j))/(2*delta);
+            momentumDerivativeGradientNum(j,i) =  (upperOutputMomDer(j)-lowerOutputMomDer(j))/(2*delta);
+        }
+    }
+
+    // Check that the two are consistent
+    ASSERT_EQUAL_MATRIX_TOL(momentumGradient,momentumGradientNum,1e-8);
+    ASSERT_EQUAL_MATRIX_TOL(momentumDerivativeGradient,momentumDerivativeGradientNum,1e-8);
+
+}
+
+void checkInertiaIdentificationCostFunction()
+{
+    SpatialAcc a;
+    a.zero();
+    a(3) = 1.0;
+    Twist v;
+    v.zero();
+    Vector16 paramsVec;
+    paramsVec.zero();
+    paramsVec(0) = -1.0;
+
+    paramsVec(1) = 1.0;
+    paramsVec(2) = 1.0;
+    paramsVec(3) = 0.0;
+    /*
+    paramsVec(4) = 0.66474;
+    paramsVec(5) = 0.534487;
+    paramsVec(6) = -0.521962;
+    paramsVec(7) = 0.124066;
+    paramsVec(8) = 0.609993;
+    paramsVec(9) = 0.782634;
+    paramsVec(10) = 0.736701;
+    paramsVec(11) = -0.585006;
+    paramsVec(12) = 0.339175;
+    paramsVec(13) = 0.434594;
+    paramsVec(14) = -0.716795;
+    paramsVec(15) = 0.213938;*/
+    RigidBodyInertiaNonLinearParametrization params;
+    params.fromVectorWithRotationAsVec(paramsVec);
+    SpatialInertia I = params.toRigidBodyInertia();
+
+    Wrench f;
+    f.zero();
+    f(3) = 1.0;
+
+    Vector6 residual = (f-I*a).asVector();
+    double cost = toEigen(residual).transpose()*toEigen(residual);
+    Vector16 costGradient;
+    toEigen(costGradient) = 2*toEigen(I*a-f).transpose()*toEigen(SpatialInertia::momentumDerivativeRegressor(v,a))*toEigen(params.getGradientWithRotationAsVec());
+
+    double delta = 1e-4;
+    Vector16 currentValue = paramsVec;
+    double currentOutput = cost;
+
+    Vector16 upperPerturbation;
+    Vector16 lowerPerturbation;
+    Vector16 costGradientNumerical;
+    for(int i=0; i < 16; i++ )
+    {
+        upperPerturbation = currentValue;
+        lowerPerturbation = currentValue;
+
+        upperPerturbation(i) = currentValue(i) + delta;
+        lowerPerturbation(i) = currentValue(i) - delta;
+
+        SpatialInertia upperPertubed,lowerPertubed;
+        RigidBodyInertiaNonLinearParametrization upperParams, lowerParams;
+        upperParams.fromVectorWithRotationAsVec(upperPerturbation);
+        lowerParams.fromVectorWithRotationAsVec(lowerPerturbation);
+        upperPertubed = upperParams.toRigidBodyInertia();
+        lowerPertubed = lowerParams.toRigidBodyInertia();
+
+        Vector6 upperResidual = (f-upperPertubed*a).asVector();
+        double upperOutput = toEigen(upperResidual).transpose()*toEigen(upperResidual);
+
+        Vector6 lowerResidual = (f-lowerPertubed*a).asVector();
+        double lowerOutput = toEigen(lowerResidual).transpose()*toEigen(lowerResidual);
+
+        costGradientNumerical(i) = (upperOutput-lowerOutput)/(2*delta);
+    }
+
+    /*
+    std::cerr << "Residual                " << residual.toString() << std::endl;
+    std::cerr << "I                     \n" << I.asMatrix().toString() << std::endl;
+    std::cerr << "Cost                    " << cost << std::endl;
+    std::cerr << "Cost gradient           " << costGradient.toString() << std::endl;
+    std::cerr << "Cost gradient numerical " << costGradientNumerical.toString() << std::endl;
+    std::cerr << "toEigen(SpatialInertia::momentumDerivativeRegressor(v,a)):\n" << SpatialInertia::momentumDerivativeRegressor(v,a).toString() << std::endl;
+    std::cerr << "toEigen(params.getGradientWithRotationAsVec()):\n" << (params.getGradientWithRotationAsVec()).toString() << std::endl;
+    */
+
+    // Check that the two are consistent
+    ASSERT_EQUAL_VECTOR_TOL(costGradient,costGradientNumerical,1e-6);
+
+}
+
 int main()
 {
     Transform trans(Rotation::RPY(5.0,6.0,-4.0),Position(10,6,-4));
@@ -190,6 +455,13 @@ int main()
     checkInvariance(trans,inertia,twist);
     checkBiasWrench(inertia,twist);
 
+    inertia = getNonPhysicalConsistentInertia();
+
+    checkInertiaTwistProduct(inertia,twist);
+    checkInertiaTransformation(trans,inertia);
+    checkInvariance(trans,inertia,twist);
+    checkBiasWrench(inertia,twist);
+
     int nrOfChecks = 30;
     for(int i=0; i < nrOfChecks; i++ )
     {
@@ -199,7 +471,13 @@ int main()
         SpatialAcc a  = getRandomTwist();
 
         checkRegressors(inertia,twist,a,twist2);
+
+        checkInertiaNonLinearParametrization();
+        checkInertiaNonLinearParametrizationGradient();
+        checkRegressorsAsGradients();
     }
+
+    checkInertiaIdentificationCostFunction();
 
     return EXIT_SUCCESS;
 }
