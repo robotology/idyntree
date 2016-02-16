@@ -26,7 +26,7 @@ namespace iDynTree
          * element corresponding to row and col, using row
          * major ordering.
          */
-        const unsigned int rawIndexRowMajor(int row, int col) const;
+        unsigned int rawIndexRowMajor(int row, int col) const;
 
         /**
          * Return the raw index in the data vector of the
@@ -37,7 +37,7 @@ namespace iDynTree
          *          this function is used just in the fillColMajorBuffer
          *          method.
          */
-        const unsigned int rawIndexColMajor(int row, int col) const;
+        unsigned int rawIndexColMajor(int row, int col) const;
 
         /**
          * Set the capacity of the vector, resizing the buffer pointed by m_data.
