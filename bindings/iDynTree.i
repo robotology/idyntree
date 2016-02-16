@@ -120,10 +120,12 @@
 %template(Matrix4x4) iDynTree::MatrixFixSize<4,4>;
 %template(Matrix6x6) iDynTree::MatrixFixSize<6,6>;
 %template(Matrix6x10) iDynTree::MatrixFixSize<6,10>;
+%template(Matrix10x16) iDynTree::MatrixFixSize<10,16>;
 
 %template(Vector3) iDynTree::VectorFixSize<3>;
 %template(Vector6) iDynTree::VectorFixSize<6>;
 %template(Vector10) iDynTree::VectorFixSize<10>;
+%template(Vector16) iDynTree::VectorFixSize<16>;
 
 // Basic Vectors: Point Vectors and Spatial Vectors
 %include "iDynTree/Core/PositionRaw.h"

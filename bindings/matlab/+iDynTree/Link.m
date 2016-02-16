@@ -9,28 +9,28 @@ classdef Link < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(613, varargin{:});
+        tmp = iDynTreeMEX(647, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(614, self);
+        iDynTreeMEX(648, self);
         self.swigPtr=[];
       end
     end
     function varargout = setInertia(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(615, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(649, self, varargin{:});
     end
     function varargout = getInertia(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(616, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(650, self, varargin{:});
     end
     function varargout = setIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(617, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(651, self, varargin{:});
     end
     function varargout = getIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(618, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(652, self, varargin{:});
     end
   end
   methods(Static)

@@ -32,6 +32,16 @@ void assertStringAreEqual(const std::string& val1, const std::string& val2, doub
     }
 }
 
+void assertTrue(bool prop, std::string file, int line)
+{
+    if( !prop )
+    {
+       std::cerr << file << ":" << line << " : assertTrue failure" << std::endl;
+       exit(EXIT_FAILURE);
+    }
+}
+
+
 void assertDoubleAreEqual(const double& val1, const double& val2, double tol, std::string file, int line)
 {
     if( fabs(val1-val2) >= tol )

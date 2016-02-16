@@ -7,17 +7,17 @@ classdef LinearMotionVector3 < iDynTree.MotionVector3__LinearMotionVector3
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(297, varargin{:});
+        tmp = iDynTreeMEX(325, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(298, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(326, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(299, self);
+        iDynTreeMEX(327, self);
         self.swigPtr=[];
       end
     end

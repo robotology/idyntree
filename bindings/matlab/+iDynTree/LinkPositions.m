@@ -9,23 +9,23 @@ classdef LinkPositions < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(577, varargin{:});
+        tmp = iDynTreeMEX(611, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(578, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(612, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(579, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(613, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(580, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(614, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(581, self);
+        iDynTreeMEX(615, self);
         self.swigPtr=[];
       end
     end
