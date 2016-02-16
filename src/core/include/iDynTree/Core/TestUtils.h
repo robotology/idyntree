@@ -34,6 +34,8 @@ namespace iDynTree
     class Position;
     class Rotation;
 
+#define ASSERT_IS_TRUE(prop) iDynTree::assertTrue(prop,__FILE__,__LINE__)
+#define ASSERT_IS_FALSE(prop) iDynTree::assertTrue(!(prop),__FILE__,__LINE__)
 #define ASSERT_EQUAL_STRING(val1,val2) iDynTree::assertStringAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_DOUBLE(val1,val2) iDynTree::assertDoubleAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_VECTOR(val1,val2) assertVectorAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
@@ -71,6 +73,8 @@ namespace iDynTree
      *
      */
     void assertSpatialForceAreEqual(const SpatialForceVector & f1, const SpatialForceVector & f2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
+
+    void assertTrue(bool prop,std::string file="", int line=-1);
 
     /**
      * Get random bool
