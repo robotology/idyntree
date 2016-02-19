@@ -3,6 +3,11 @@
 %module iDynTree
 
 %include "std_string.i"
+%include "std_vector.i"
+
+namespace std {
+    %template(StringVector) vector<string>;
+}
 
 // Ignore some methods to avoid warnings
 %include "./ignore.i"
@@ -78,6 +83,7 @@
 
 // Model loading from external formats
 #include "iDynTree/ModelIO/URDFModelImport.h"
+#include "iDynTree/ModelIO/URDFDofsImport.h"
 
 // Sensors related data structures
 #include "iDynTree/Sensors/Sensors.h"
@@ -229,6 +235,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // Model loading from external formats
 %include "iDynTree/ModelIO/URDFModelImport.h"
+%include "iDynTree/ModelIO/URDFDofsImport.h"
 
 // Sensors related data structures
 %include "iDynTree/Sensors/Sensors.h"
