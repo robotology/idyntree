@@ -32,7 +32,7 @@ namespace iDynTree
          * element corresponding to row and col, using row
          * major ordering.
          */
-        const unsigned int rawIndexRowMajor(int row, int col) const;
+        unsigned int rawIndexRowMajor(int row, int col) const;
 
         /**
          * Return the raw index in the data vector of the
@@ -43,7 +43,7 @@ namespace iDynTree
          *          this function is used just in the fillColMajorBuffer
          *          method.
          */
-        const unsigned int rawIndexColMajor(int row, int col) const;
+        unsigned int rawIndexColMajor(int row, int col) const;
 
     protected:
         /**
@@ -273,13 +273,13 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    const unsigned int MatrixFixSize<nRows,nCols>::rawIndexRowMajor(int row, int col) const
+    unsigned int MatrixFixSize<nRows,nCols>::rawIndexRowMajor(int row, int col) const
     {
         return (nCols*row + col);
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    const unsigned int MatrixFixSize<nRows,nCols>::rawIndexColMajor(int row, int col) const
+    unsigned int MatrixFixSize<nRows,nCols>::rawIndexColMajor(int row, int col) const
     {
         return (row + nRows*col);
     }
@@ -318,6 +318,7 @@ namespace iDynTree
     typedef MatrixFixSize<6,1> Matrix6x1;
     typedef MatrixFixSize<6,6> Matrix6x6 ;
     typedef MatrixFixSize<6,10> Matrix6x10;
+    typedef MatrixFixSize<10,16> Matrix10x16;
 
 }
 

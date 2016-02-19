@@ -229,13 +229,12 @@ void MatrixDynSize::fillColMajorBuffer(double* colMajorBuf) const
     }
 }
 
-
-const unsigned int MatrixDynSize::rawIndexRowMajor(int row, int col) const
+unsigned int MatrixDynSize::rawIndexRowMajor(int row, int col) const
 {
     return (this->m_cols*row + col);
 }
 
-const unsigned int MatrixDynSize::rawIndexColMajor(int row, int col) const
+unsigned int MatrixDynSize::rawIndexColMajor(int row, int col) const
 {
     return (row + this->m_rows*col);
 }

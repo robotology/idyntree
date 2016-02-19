@@ -9,51 +9,51 @@ classdef TransformDerivative < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(552, varargin{:});
+        tmp = iDynTreeMEX(586, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(553, self);
+        iDynTreeMEX(587, self);
         self.swigPtr=[];
       end
     end
     function varargout = getRotationDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(554, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(588, self, varargin{:});
     end
     function varargout = getPositionDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(555, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(589, self, varargin{:});
     end
     function varargout = setRotationDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(556, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(590, self, varargin{:});
     end
     function varargout = setPositionDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(557, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(591, self, varargin{:});
     end
     function varargout = asHomogeneousTransformDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(559, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(593, self, varargin{:});
     end
     function varargout = asAdjointTransformDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(560, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(594, self, varargin{:});
     end
     function varargout = asAdjointTransformWrenchDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(561, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(595, self, varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(562, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(596, self, varargin{:});
     end
     function varargout = derivativeOfInverse(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(563, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(597, self, varargin{:});
     end
     function varargout = transform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(564, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(598, self, varargin{:});
     end
   end
   methods(Static)
     function varargout = Zero(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(558, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(592, varargin{:});
     end
   end
 end

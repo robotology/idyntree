@@ -15,8 +15,8 @@
 #include <yarp/os/LogStream.h>
 
 // iDynTree headers
-#include <kdl_codyco/sensors.hpp>
-#include <kdl_codyco/regressors/dynamicRegressorGenerator.hpp>
+#include <iDynTree/Sensors/Sensors.hpp>>
+#include <iDynTree/Regressors/DynamicsRegressorGenerator.h>
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
 #include <string>
@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
     //                     (in this example we don't consider FT sensors, so we put this to false)
     // * a list of "fake_links", for which no inertial parameters will be considered, useful for removing
     //   from the model "fake" links such as frames.
+
 
     KDL::Tree walkman_tree;
     if( !kdl_format_io::treeFromUrdfFile(urdf_filename,walkman_tree) )

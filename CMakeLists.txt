@@ -89,7 +89,7 @@ install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
 include(AddUninstallTarget)
 
 set(IDYNTREE_USES_LUA FALSE)
-set(IDYNTREE_USES_PYTHON FALSE)
+set(IDYNTREE_USES_PYTHON TRUE)
 set(IDYNTREE_USES_MATLAB FALSE)
 
 add_subdirectory(bindings)

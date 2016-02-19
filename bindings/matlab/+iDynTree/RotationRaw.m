@@ -7,54 +7,54 @@ classdef RotationRaw < iDynTree.Matrix3x3
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(470, varargin{:});
+        tmp = iDynTreeMEX(504, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = changeOrientFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(471, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(505, self, varargin{:});
     end
     function varargout = changeRefOrientFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(472, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(506, self, varargin{:});
     end
     function varargout = changeCoordFrameOf(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(475, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(509, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(481, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(515, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(482, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(516, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(483, self);
+        iDynTreeMEX(517, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(473, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(507, varargin{:});
     end
     function varargout = inverse2(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(474, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(508, varargin{:});
     end
     function varargout = RotX(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(476, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(510, varargin{:});
     end
     function varargout = RotY(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(477, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(511, varargin{:});
     end
     function varargout = RotZ(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(478, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(512, varargin{:});
     end
     function varargout = RPY(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(479, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(513, varargin{:});
     end
     function varargout = Identity(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(480, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(514, varargin{:});
     end
   end
 end

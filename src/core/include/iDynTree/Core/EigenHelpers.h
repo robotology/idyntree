@@ -86,6 +86,19 @@ inline Eigen::Matrix<double,6,1> toEigen(const SpatialForceVector & vec)
     return ret;
 }
 
+// Spatia vectors
+inline void fromEigen(SpatialMotionVector & vec, const Eigen::Matrix<double,6,1> & eigVec)
+{
+    toEigen(vec.getLinearVec3()) = eigVec.segment<3>(0);
+    toEigen(vec.getAngularVec3()) = eigVec.segment<3>(3);
+}
+
+inline void fromEigen(SpatialForceVector & vec, const Eigen::Matrix<double,6,1> & eigVec)
+{
+    toEigen(vec.getLinearVec3()) = eigVec.segment<3>(0);
+    toEigen(vec.getAngularVec3()) = eigVec.segment<3>(3);
+}
+
 template<class Derived>
 inline Eigen::Matrix<typename Derived::Scalar, 3, 3, Eigen::RowMajor> skew(const Eigen::MatrixBase<Derived> & vec)
 {

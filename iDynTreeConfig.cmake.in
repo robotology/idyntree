@@ -1,7 +1,7 @@
 find_package(orocos_kdl QUIET)
 #support also for the old version of kdl cmake package
 if(NOT orocos_kdl_FOUND)
-   find_package(Orocos-KDL REQUIRED)
+   find_package(Orocos-KDL QUIET)
    if(NOT Orocos-KDL_FOUND)
       message(WARNING "KDL not found: neither orocos_kdl or Orocos-KDL cmake packages are available")
    else(NOT Orocos-KDL_FOUND)

@@ -7,21 +7,21 @@ classdef RotationalInertiaRaw < iDynTree.Matrix3x3
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(433, varargin{:});
+        tmp = iDynTreeMEX(461, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(435, self);
+        iDynTreeMEX(463, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = Zero(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(434, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(462, varargin{:});
     end
   end
 end
