@@ -558,7 +558,7 @@ int DynamicRegressorGenerator::computeNumericalIdentifiableSubspace(Eigen::Matri
                                n_samples,
                                verbose);
     //std::cout << "generate_random_regressors" << std::endl;
-    return getRowSpaceBasis(A,basis,-1.0,true);
+    return getRowSpaceBasis(A,basis,-1.0, verbose);
 }
 
 
@@ -964,7 +964,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV2(Eige
          }
 
          Eigen::MatrixXd regrouped_basis;
-         getRowSpaceBasis((local_dense_basis*local_dense_basis.transpose()*basis_to_regroup).transpose(),regrouped_basis,1e-5,true);
+         getRowSpaceBasis((local_dense_basis*local_dense_basis.transpose()*basis_to_regroup).transpose(),regrouped_basis,1e-5,verbose);
 
          /*
          std::cout << "surviving_basis " << std::endl;
