@@ -16,12 +16,6 @@
 
 // iDynTree headers
 #include <iCub/iDynTree/DynTree.h>
-
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Regressors/DynamicsRegressorGenerator.h>
-
 #include <urdf_exception/exception.h>
 
 #include <string>
@@ -47,67 +41,59 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    std::string urdf_filename = rf.findFile("../bigman_left_arm.urdf");
-    yInfo() << "Trying to open " << urdf_filename << " as robot model";
+    std::string urdf_filename = rf.findFile("urdf");
 
-    iDynTree::Regressors::DynamicsRegressorGenerator generator;
-    generator.loadRobotAndSensorsModelFromFile(urdf_filename);
 
-    const char* regrXml =
-        "<regressor>"
-        "    <jointTorqueDynamics>"
-        "      <joints>"
-        "        <joint>LShSag</joint>"
-        "        <joint>LShLat</joint>"
-        "        <joint>LShYaw</joint>"
-        "        <joint>LElbj</joint>"
-        "        <joint>LForearmPlate</joint>"
-        "        <joint>LWrj1</joint>"
-        "        <joint>LWrj2</joint>"
-        "      </joints>"
-        "    </jointTorqueDynamics>"
-        "</regressor>";
+    yInfo() << "Tryng to open " << urdf_filename << " as robot model";
+    iCub::iDynTree::DynTree robot_model;
+    bool ok = robot_model.loadURDFModel(urdf_filename);
 
-    generator.loadRegressorStructureFromString(regrXml);
-
-    std::cout << generator.getDescriptionOfParameters() << std::endl;
-
-    uint N_DOFS = generator.getNrOfDegreesOfFreedom();
-    std::cout << "Nr of DOFs:" << N_DOFS << std::endl;
-    uint N_OUT = generator.getNrOfOutputs();
-    std::cout << "Nr of outputs:" << N_OUT << std::endl;
-    uint N_LINKS = generator.getNrOfLinks();
-    std::cout << "Nr of links:" << N_LINKS << std::endl;
-    std::cout << "Nr of fake links:" << generator.getNrOfFakeLinks() << std::endl;
-    uint N_PARAMS = generator.getNrOfParameters();
-    std::cout << "Nr of params:" << N_PARAMS << std::endl;
-    iDynTree::VectorDynSize cadParams(N_PARAMS);
-    generator.getModelParameters(cadParams);
-
-    iDynTree::Twist gravity_twist;
-    gravity_twist.zero();
-    gravity_twist.setVal(2, -9.81);
-
-    iDynTree::VectorDynSize qq (N_DOFS);
-    iDynTree::VectorDynSize dq (N_DOFS);
-    iDynTree::VectorDynSize ddq (N_DOFS);
-
-    /*for (uint dof=0; dof<N_DOFS; dof++) {
-        qq.setVal(dof, 1.0);
-        dq.setVal(dof, 0.01);
-        ddq.setVal(dof, 0.001);
-    }*/
-
-    generator.setRobotState(qq,dq,ddq, gravity_twist);
-    generator.setTorqueSensorMeasurement(0, 0.05);
-
-    iDynTree::MatrixDynSize regressor(N_OUT, N_PARAMS);  //Y
-    iDynTree::VectorDynSize knownTerms(N_OUT);  //corresponds to measured torques in this case
-    if (!generator.computeRegressor(regressor, knownTerms)) {
-        std::cout << "Error while computing regressor" << std::endl;
+    if( !ok )
+    {
+        std::cerr << "Loading urdf file " << urdf_filename << " failed, exiting" << std::endl;
+        return EXIT_FAILURE;
     }
 
-    std::cout << regressor.toString() << std::endl;
+    //
+    // Now we will set the variable necessary to compute the gravity compensation terms
+    //
+
+    // The gravity acceleration vector should be expressed in the base link frame,
+    // in this example we assume that this frame has the Z axis pointing up
+    // All the inputs are expressed in SI unit of measure, so the gravity acceleration
+    // is expressed in m/s^2
+    yarp::sig::Vector grav(3);
+    grav(0) = grav(1) = 0.0;
+    grav(2) = -9.8;
+
+    robot_model.setGravity(grav);
+
+    // We now need to set the joint position for the desired gravity compensation
+    // For the sake of example, we will put all the joint positions to 10.0 degrees;
+    yarp::sig::Vector q(robot_model.getNrOfDOFs());
+
+    double deg2rad = 3.14/180.0;
+
+    for(int i =0; i < q.size(); i++ )
+    {
+
+        q(i) = deg2rad*10.0;
+    }
+
+    // Now we set the joint values
+    robot_model.setAng(q);
+
+    // Now we can call the RNEA algorithm to compute the gravity torques
+    robot_model.kinematicRNEA();
+    robot_model.dynamicRNEA();
+
+    // The obtained torques are expressed in Nm
+    yarp::sig::Vector gravity_torques = robot_model.getTorques();
+
+    // Output some result
+    std::cout << "Input gravity : " << grav.toString() << std::endl;
+    std::cout << "Input joint positions : " << robot_model.getAng().toString() << std::endl;
+    std::cout << "Output joint torques  : " << gravity_torques.toString() << std::endl;
 
 
     return EXIT_SUCCESS;
