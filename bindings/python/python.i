@@ -24,12 +24,19 @@ namespace iDynTree
 
 #these need to be called after iDynTree module has been loaded
 def init_helpers():
-    def fromPyList(list):
+    def vd_fromPyList(list):
         out = VectorDynSize(len(list))
         for v in range(0,len(list)):
             out.setVal(v, list[v])
         return out
-    VectorDynSize.fromPyList = staticmethod(fromPyList)
+    VectorDynSize.fromPyList = staticmethod(vd_fromPyList)
+
+    def sa_fromPyList(list):
+        out = SpatialAcc()
+        for v in range(0,6)):
+            out.setVal(v, list[v])
+        return out
+    SpatialAcc.fromPyList = staticmethod(sa_fromPyList)
 
 def init_numpy_helpers():
     import numpy as np
