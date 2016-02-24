@@ -1,3 +1,22 @@
+## How to run the tests 
+iDynTree uses tests to prevent regressions caused by modification in the source code of the library. 
+To compile and run the test locally, enable the `IDYNTREE_COMPILE_TESTS` CMake option and then compile
+iDynTree as usual. Once you have compiled the library, run the `ctest` program from the build directory 
+to run all the tests. If you enabled the compilation of MATLAB bindings using the `IDYNTREE_USES_MATLAB` options, 
+test validating the functionality of the MATLAB interface will be automatically run. 
+
+## How to run the Valgrind-based tests 
+[Valgrind MemCheck](http://valgrind.org/) is a tool to identify memory related software bugs (use of initialize memory, memory leaks, ...). To automatically run the iDynTree test suite under Valgrind, just enabled the `IDYNTREE_RUN_VALGRIND_TESTS` CMake option (together with the `IDYNTREE_COMPILE_TESTS` option). 
+
+## How to get notified if my code fails to compile or create a failure in some tests 
+iDynTree uses [Travis](https://travis-ci.org/robotology/idyntree) and [AppVeyor](https://ci.appveyor.com/project/robotology/idyntree) Continous Integration (CI) services
+to make sure that all code commited to the repository. To be notified if some of your commits
+failed to pass tests, just sign in [Travis](https://travis-ci.org/) and [AppVeyor](https://ci.appveyor.com/login)
+with your GitHub account, and you will automatically receive notifications if your commits cause a failure. 
+
+## What are the things that needs to be done before merging a pull request?
+* Check if Travis and AppVeyor compiler and run the test without any failure.  
+
 ## How to add wrap a new class or function with SWIG 
 * Include the new header in [bindings/iDynTree.i](bindings/iDynTree.i) . 
   * Notice that the headers should be included two times, take inspiration from the headers already present to get the idea.

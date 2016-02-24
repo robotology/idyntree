@@ -74,6 +74,9 @@ Are you interested in a tutorial on a specific feature or algorithm? Just [reque
 The documentation for the complete API of iDynTree is automatically extracted from the C++ code using [Doxygen](www.doxygen.org),
 and is available at the URL : [http://wiki.icub.org/codyco/dox/html/idyntree/html/](http://wiki.icub.org/codyco/dox/html/idyntree/html/).
 
+## Developer Documentation 
+If you want to contribute to iDynTree development, please check the [Developer's FAQ](https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md). 
+
 ## Reference paper
 A paper describing the algorithms implemented in iDynTree and their use in a real world scenario can be downloaded [here](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) . If you're going to use this library for your work, please quote it within any resulting publication:
 ~~~
