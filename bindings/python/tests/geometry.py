@@ -2,6 +2,7 @@
  For testing iDynTree python bindings, we rely on the unittest standard python lib
 '''
 
+import os
 # This test is mean to be executed from the build,
 # so we add in PYTHONPATH the location of iDynTree.py and _iDynTree.so
 os.environ["PYTHONPATH"] = os.environ["PYTHONPATH"] + ":../:../../../lib/python/";
@@ -112,7 +113,6 @@ class PositionTest(unittest.TestCase):
             fZero.zero()
             self.checkSpatialVectorEqual(f-f,fZero,"f-f is not zero");
             self.checkSpatialVectorEqual(T.inverse()*T*f,f,"T.inverse()*T*f is not f");
-
 
 if __name__ == '__main__':
     # initalize the seed to have predictable results
