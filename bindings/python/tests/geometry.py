@@ -3,8 +3,11 @@
 '''
 
 # This test is mean to be executed from the build,
-# so we add in PYTHONPATH the location of iDynTree.py and _iDynTree.so
-os.environ["PYTHONPATH"] = os.environ["PYTHONPATH"] + ":../:../../../lib/python/";
+# so we add in sys.path the location of iDynTree.py and _iDynTree.so
+import sys
+
+sys.path.append("../")
+sys.path.append("../../../lib/python/")
 
 import unittest
 import iDynTree
