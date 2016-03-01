@@ -33,7 +33,7 @@ def init_helpers():
 
     def sa_fromPyList(list):
         out = SpatialAcc()
-        for v in range(0,6)):
+        for v in range(0,6):
             out.setVal(v, list[v])
         return out
     SpatialAcc.fromPyList = staticmethod(sa_fromPyList)
@@ -47,6 +47,7 @@ def init_numpy_helpers():
     Wrench.toNumPy = vecToNumPy
     Twist.toNumPy = vecToNumPy
     SpatialAcc.toNumPy = vecToNumPy
+    Position.toNumPy = vecToNumPy
 
     def matToNumPy(self):
         return np.fromstring(self.toString(), sep=' ').reshape(self.rows(), self.cols())

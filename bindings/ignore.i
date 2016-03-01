@@ -14,8 +14,6 @@
 %ignore *::pos() const;
 %ignore *::vel() const;
 %ignore *::acc() const;
-%ignore iDynTree::Model::getLink const;
-%ignore iDynTree::Model::getJoint const;
 %ignore *::getAngularVec3() const;
 %ignore *::getLinearVec3() const;
 
