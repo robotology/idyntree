@@ -19,16 +19,19 @@ macro(SWIG_GENERATE_MODULE name language)
   foreach(it ${swig_dot_i_sources})
     SWIG_ADD_SOURCE_TO_MODULE(${name} swig_generated_source ${it})
     set(swig_generated_sources ${swig_generated_sources} "${swig_generated_source}")
-    message(STATUS ${swig_generated_sources})
+    message(STATUS "swig generated sources" ${swig_generated_sources})
   endforeach()
 endmacro()
 
 macro(SWIG_COMPILE_MODULE name language)
   SWIG_MODULE_INITIALIZE(${name} ${language})
+  message("-----> ${SWIG_MODULE_${name}_REAL_NAME} " ${SWIG_MODULE_${name}_REAL_NAME})
+  message(swig generated sources--> ${swig_generated_sources})
+  message(other ----> ${swig_other_sources})
   add_library(${SWIG_MODULE_${name}_REAL_NAME}
-    MODULE
-    ${swig_generated_sources}
-    ${swig_other_sources})
+              MODULE
+              ${swig_generated_sources}
+              ${swig_other_sources})
 endmacro()
 
 
@@ -40,9 +43,7 @@ find_package(Matlab
 
 include_directories(${Matlab_INCLUDE_DIRS})
 
-set(sourcename iDynTreeMATLAB_wrap)
-set(modulename iDynTreeMEX)
-
+set(modulename iDynTreeMATLAB_wrap)
 # Generate SWIG wrapper
 if(IDYNTREE_GENERATE_MATLAB)
   # generate the wrapper
@@ -53,12 +54,6 @@ if(IDYNTREE_GENERATE_MATLAB)
   #set(CMAKE_SWIG_FLAGS "-redirectoutput")
   set(SWIG_MODULE_${modulename}_EXTRA_DEPS ${IDYNTREE_SWIG_DEPENDS_I_FILES})
   swig_generate_module(${modulename} matlab ../iDynTree.i)
-  add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
-    COMMAND ${CMAKE_COMMAND}
-    ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/../${sourcename}.cxx ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx
-    MAIN_DEPENDENCY ${CMAKE_CURRENT_BINARY_DIR}/../${sourcename}.cxx
-    COMMENT "Copy swig generated files to source dir")
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx PROPERTIES GENERATED 1)
 endif()
 
