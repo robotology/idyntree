@@ -20,7 +20,9 @@ angularInertia.setVal(1,2,0.0);
 angularInertia.setVal(2,0,0.0);
 angularInertia.setVal(2,1,0.0);
 
-inertiaInFrame1 = iDynTree.SpatialInertia(10,iDynTree.Position(),angularInertia);
+com = iDynTree.Position();
+com.fromMatlab([1,2,3]);
+inertiaInFrame1 = iDynTree.SpatialInertia(10,com,angularInertia);
 
 momentumInFrame1 = inertiaInFrame1*twistInFrame1;
 

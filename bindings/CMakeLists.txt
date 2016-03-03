@@ -4,10 +4,10 @@
 ## about this list, any SWIG-supported language should work - take a
 ## look at e.g. ruby code below for how to do it.
 
-set(IDYNTREE_USES_PYTHON FALSE CACHE BOOL "Do you want to create the Python interface")
-set(IDYNTREE_USES_LUA FALSE CACHE BOOL "Do you want to create the Lua interface")
-set(IDYNTREE_USES_MATLAB FALSE CACHE BOOL "Do you want to create the MATLAB Interface")
-set(IDYNTREE_GENERATE_MATLAB FALSE CACHE BOOL "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper")
+option(IDYNTREE_USES_PYTHON "Do you want to create the Python interface" FALSE)
+option(IDYNTREE_USES_LUA "Do you want to create the Lua interface" FALSE)
+option(IDYNTREE_USES_MATLAB "Do you want to create the MATLAB Interface" FALSE)
+option(IDYNTREE_GENERATE_MATLAB "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper" FALSE)
 
 if(IDYNTREE_USES_PYTHON OR
    IDYNTREE_USES_LUA OR

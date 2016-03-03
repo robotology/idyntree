@@ -42,10 +42,6 @@ if(IDYNTREE_COMPILE_TESTS)
 endif()
 
 #########################################################################
-# Turn on bindings compilation.
-option(IDYNTREE_COMPILE_BINDINGS "Compile iDynTree bindings" FALSE)
-
-#########################################################################
 # Turn on compilation of geometrical relations semantics check.
 option(IDYNTREE_USES_SEMANTICS "Compile iDynTree semantics check" FALSE)
 
