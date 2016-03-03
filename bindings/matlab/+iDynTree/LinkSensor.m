@@ -2,21 +2,21 @@ classdef LinkSensor < iDynTree.Sensor
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(881, self);
+        iDynTreeMEX(955, self);
         self.swigPtr=[];
       end
     end
     function varargout = getParentLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(882, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(956, self, varargin{:});
     end
     function varargout = getParentLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(883, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(957, self, varargin{:});
     end
     function varargout = setParentLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(884, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(958, self, varargin{:});
     end
     function varargout = setParentLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(885, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(959, self, varargin{:});
     end
     function self = LinkSensor(varargin)
       self@iDynTree.Sensor(SwigRef.Null);
