@@ -4,6 +4,13 @@
 
 %include "std_string.i"
 
+// Wrap the std::vector<std::string> params
+%include "std_vector.i"
+
+namespace std {
+    %template(StringVector) vector<string>;
+}
+
 // Ignore some methods to avoid warnings
 %include "./ignore.i"
 
@@ -73,8 +80,13 @@
 #include "iDynTree/Model/Traversal.h"
 #include "iDynTree/Model/Model.h"
 #include "iDynTree/Model/JointState.h"
+#include "iDynTree/Model/FreeFloatingMassMatrix.h"
 #include "iDynTree/Model/FreeFloatingState.h"
 #include "iDynTree/Model/ContactWrench.h"
+
+// Kinematics & Dynamics related functions
+#include "iDynTree/Model/ForwardKinematics.h"
+#include "iDynTree/Model/Dynamics.h"
 
 // Model loading from external formats
 #include "iDynTree/ModelIO/URDFModelImport.h"
@@ -223,9 +235,13 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Model/Traversal.h"
 %include "iDynTree/Model/Model.h"
 %include "iDynTree/Model/JointState.h"
+%include "iDynTree/Model/FreeFloatingMassMatrix.h"
 %include "iDynTree/Model/FreeFloatingState.h"
 %include "iDynTree/Model/ContactWrench.h"
 
+// Kinematics & Dynamics related functions
+%include "iDynTree/Model/ForwardKinematics.h"
+%include "iDynTree/Model/Dynamics.h"
 
 // Model loading from external formats
 %include "iDynTree/ModelIO/URDFModelImport.h"
@@ -241,6 +257,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // Sensors loading from external formats
 %include "iDynTree/ModelIO/URDFSensorsImport.h"
+
 
 // Estimation related classes
 %include "iDynTree/Estimation/ExternalWrenchesEstimation.h"

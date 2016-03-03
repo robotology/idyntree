@@ -9,57 +9,57 @@ classdef ArticulatedBodyInertia < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(489, varargin{:});
+        tmp = iDynTreeMEX(530, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = getLinearLinearSubmatrix(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(490, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(531, self, varargin{:});
     end
     function varargout = getLinearAngularSubmatrix(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(491, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(532, self, varargin{:});
     end
     function varargout = getAngularAngularSubmatrix(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(492, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(533, self, varargin{:});
     end
     function varargout = applyInverse(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(494, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(535, self, varargin{:});
     end
     function varargout = asMatrix(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(495, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(536, self, varargin{:});
     end
     function varargout = getInverse(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(496, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(537, self, varargin{:});
     end
     function varargout = plus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(497, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(538, self, varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(498, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(539, self, varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(499, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(540, self, varargin{:});
     end
     function varargout = zero(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(500, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(541, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(503, self);
+        iDynTreeMEX(544, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = combine(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(493, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(534, varargin{:});
     end
     function varargout = ABADyadHelper(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(501, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(542, varargin{:});
     end
     function varargout = ABADyadHelperLin(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(502, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(543, varargin{:});
     end
   end
 end

@@ -9,40 +9,40 @@ classdef ExtWrenchesAndJointTorquesEstimator < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1000, varargin{:});
+        tmp = iDynTreeMEX(1076, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1001, self);
+        iDynTreeMEX(1077, self);
         self.swigPtr=[];
       end
     end
     function varargout = setModelAndSensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1002, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1078, self, varargin{:});
     end
     function varargout = loadModelAndSensorsFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1003, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1079, self, varargin{:});
     end
     function varargout = model(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1004, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1080, self, varargin{:});
     end
     function varargout = sensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1005, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1081, self, varargin{:});
     end
     function varargout = updateKinematicsFromFloatingBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1006, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1082, self, varargin{:});
     end
     function varargout = updateKinematicsFromFixedBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1007, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1083, self, varargin{:});
     end
     function varargout = computeExpectedFTSensorsMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1008, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1084, self, varargin{:});
     end
     function varargout = estimateExtWrenchesAndJointTorques(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1009, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1085, self, varargin{:});
     end
   end
   methods(Static)
