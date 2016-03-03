@@ -71,8 +71,6 @@ macro(SWIG_MODULE_INITIALIZE name language)
   string(TOLOWER "${language}" swig_lowercase_language)
   set(SWIG_MODULE_${name}_LANGUAGE "${swig_uppercase_language}")
   set(SWIG_MODULE_${name}_SWIG_LANGUAGE_FLAG "${swig_lowercase_language}")
-  message(SWIG_MODULE_${name}_LANGUAGE : "${SWIG_MODULE_${name}_LANGUAGE}")
-  message(SWIG_MODULE_${name}_SWIG_LANGUAGE_FLAG : "${SWIG_MODULE_${name}_SWIG_LANGUAGE_FLAG}")
 
   set(SWIG_MODULE_${name}_REAL_NAME "${name}")
   if (";${CMAKE_SWIG_FLAGS};" MATCHES ";-noproxy;")
@@ -93,7 +91,6 @@ macro(SWIG_MODULE_INITIALIZE name language)
     set(SWIG_MODULE_${name}_EXTRA_FLAGS "-dllimport;${name}")
   endif()
 
-  message(SWIG_MODULE_${name}_REAL_NAME : "${SWIG_MODULE_${name}_REAL_NAME}")
 endmacro()
 
 #
@@ -178,8 +175,6 @@ macro(SWIG_ADD_SOURCE_TO_MODULE name outfiles infile)
       "${swig_generated_file_fullname}.c")
   endif()
 
-  message("SWIG_ADD_SOURCE_TO_MODULE: Full path to source file: ${swig_source_file_fullname}")
-  message("SWIG_ADD_SOURCE_TO_MODULE: Full path to the output file: ${swig_generated_file_fullname}")
   get_directory_property(cmake_include_directories INCLUDE_DIRECTORIES)
   list(REMOVE_DUPLICATES cmake_include_directories)
   set(swig_include_dirs)

@@ -19,15 +19,11 @@ macro(SWIG_GENERATE_MODULE name language)
   foreach(it ${swig_dot_i_sources})
     SWIG_ADD_SOURCE_TO_MODULE(${name} swig_generated_source ${it})
     set(swig_generated_sources ${swig_generated_sources} "${swig_generated_source}")
-    message(STATUS "swig generated sources" ${swig_generated_sources})
   endforeach()
 endmacro()
 
 macro(SWIG_COMPILE_MODULE name language)
   SWIG_MODULE_INITIALIZE(${name} ${language})
-  message("-----> ${SWIG_MODULE_${name}_REAL_NAME} " ${SWIG_MODULE_${name}_REAL_NAME})
-  message(swig generated sources--> ${swig_generated_sources})
-  message(other ----> ${swig_other_sources})
   add_library(${SWIG_MODULE_${name}_REAL_NAME}
               MODULE
               ${swig_generated_sources}
