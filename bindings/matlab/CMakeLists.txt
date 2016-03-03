@@ -43,7 +43,16 @@ find_package(Matlab
 
 include_directories(${Matlab_INCLUDE_DIRS})
 
-set(modulename iDynTreeMATLAB_wrap)
+# The name of the generated source named is
+# defined by the variable swig_generated_file_fullname
+# in the SWIG_ADD_SOURCE_TO_MODULE macro in UseSWIG.cmake
+set(sourcename iDynTreeMATLAB_wrap)
+
+# The name of the generated source should instead match the one
+# used by SWIG when generating the .m file.
+# See https://github.com/jaeandersson/swig/issues/44 for more details
+set(mexname    iDynTreeMEX)
+
 # Generate SWIG wrapper
 if(IDYNTREE_GENERATE_MATLAB)
   # generate the wrapper
@@ -52,25 +61,26 @@ if(IDYNTREE_GENERATE_MATLAB)
   # generate files in the source directory, so we can commit it
   set(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_SOURCE_DIR})
   #set(CMAKE_SWIG_FLAGS "-redirectoutput")
-  set(SWIG_MODULE_${modulename}_EXTRA_DEPS ${IDYNTREE_SWIG_DEPENDS_I_FILES})
-  swig_generate_module(${modulename} matlab ../iDynTree.i)
-  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx PROPERTIES GENERATED 1)
+  set(SWIG_MODULE_${mexname}_EXTRA_DEPS ${IDYNTREE_SWIG_DEPENDS_I_FILES})
+  swig_generate_module(${mexname} matlab ../iDynTree.i)
+  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/${sourcename}.cxx PROPERTIES GENERATED 1)
 endif()
 
 # use previously generated files
-set(swig_generated_sources ${CMAKE_CURRENT_SOURCE_DIR}/${modulename}.cxx)
+set(swig_generated_sources ${CMAKE_CURRENT_SOURCE_DIR}/${sourcename}.cxx)
 set(swig_other_sources)
 
-swig_compile_module(${modulename} matlab)
-swig_link_libraries(${modulename} ${Matlab_LIBRARIES} ${IDYNTREE_LIBRARIES} idyntree-core)
-set_target_properties(${modulename} PROPERTIES PREFIX "" SUFFIX .${Matlab_MEX_EXTENSION})
+# Set the generated mex name to be iDynTreeMEX, as it the defaul one used by SWIG while generating bindings
+swig_compile_module(${mexname} matlab)
+swig_link_libraries(${mexname} ${Matlab_LIBRARIES} ${IDYNTREE_LIBRARIES} idyntree-core)
+set_target_properties(${mexname} PROPERTIES PREFIX "" SUFFIX .${Matlab_MEX_EXTENSION})
 
 # Install the generated front-end to ${CMAKE_INSTALL_PREFIX}/matlab_tb
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/+iDynTree DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigRef.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigMem.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iDynTreesetup.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
-install(TARGETS ${modulename} DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
+install(TARGETS ${mexname} DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
 
 #On new versions of Clang, MATLAB requires C++11.
 #I enable it on all Clangs
