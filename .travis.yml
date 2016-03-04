@@ -55,7 +55,7 @@ before_script:
 script:
   - make
   - sudo make install
-  - ctest 
+  - ctest --output-on-failure 
 
 notifications:
   email:
