@@ -55,6 +55,7 @@ before_script:
 script:
   - make
   - sudo make install
+  - sudo ldconfig
   - ctest --output-on-failure 
 
 notifications:
