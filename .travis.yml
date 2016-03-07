@@ -18,7 +18,7 @@ install:
   - sudo add-apt-repository -y ppa:kalakris/cmake
   - sudo add-apt-repository -y ppa:kubuntu-ppa/backports
   - sudo apt-get update
-  - sudo apt-get install -qq libeigen3-dev libboost-system-dev libboost-thread-dev libboost-test-dev valgrind
+  - sudo apt-get install -qq libeigen3-dev libboost-system-dev libboost-thread-dev libboost-test-dev valgrind liblua5.1-0-dev lua5.1 swig python-dev
   - sudo apt-get --force-yes install icub-common
   - sudo apt-get install cmake
 
@@ -37,7 +37,7 @@ before_script:
   - mkdir build
   - cd build
   # using the YCM_EP_MAINTAINER_MODE variable to enable the subproject-dependees target
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DYCM_EP_MAINTAINER_MODE:BOOL=ON -DNON_INTERACTIVE_BUILD:BOOL=TRUE ..
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DYCM_EP_MAINTAINER_MODE:BOOL=ON -DNON_INTERACTIVE_BUILD:BOOL=TRUE  ..
   - make iDynTree-dependees 
   - pwd
   - cd ../..
@@ -50,12 +50,13 @@ before_script:
   - cd idyntree
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DCODYCO_TRAVIS_CI:BOOL=ON -DSTANDARD_FIND_MODULE_DEBUG:BOOL=ON ..
+  - cmake -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DCODYCO_TRAVIS_CI:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_USES_LUA:BOOL=ON ..
 
 script:
   - make
   - sudo make install
-  - ctest 
+  - sudo ldconfig
+  - ctest --output-on-failure 
 
 notifications:
   email:

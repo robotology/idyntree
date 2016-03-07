@@ -9,69 +9,69 @@ classdef PositionSemantics < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(176, varargin{:});
+        tmp = iDynTreeMEX(217, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = setToUnknown(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(177, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(218, self, varargin{:});
     end
     function varargout = getPoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(178, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(219, self, varargin{:});
     end
     function varargout = getBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(179, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(220, self, varargin{:});
     end
     function varargout = getReferencePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(180, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(221, self, varargin{:});
     end
     function varargout = getRefBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(181, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(222, self, varargin{:});
     end
     function varargout = getCoordinateFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(182, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(223, self, varargin{:});
     end
     function varargout = setPoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(183, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(224, self, varargin{:});
     end
     function varargout = setBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(184, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(225, self, varargin{:});
     end
     function varargout = setReferencePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(185, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(226, self, varargin{:});
     end
     function varargout = setRefBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(186, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(227, self, varargin{:});
     end
     function varargout = setCoordinateFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(187, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(228, self, varargin{:});
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(188, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(229, self, varargin{:});
     end
     function varargout = changeRefPoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(189, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(230, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(192, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(233, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(193, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(234, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(194, self);
+        iDynTreeMEX(235, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(190, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(231, varargin{:});
     end
     function varargout = inverse(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(191, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(232, varargin{:});
     end
   end
 end
