@@ -52,4 +52,5 @@ def init_numpy_helpers():
     def matToNumPy(self):
         return np.fromstring(self.toString(), sep=' ').reshape(self.rows(), self.cols())
     MatrixDynSize.toNumPy = matToNumPy
+    Rotation.toNumPy = matToNumPy
 }
