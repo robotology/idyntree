@@ -34,22 +34,25 @@ namespace iDynTree {
  *
  * The algorithm implemented is the following :
  *
- * 1a) At start (or at reset) the user of the class specifies:
- *       * a frame (world) that should be assumed as the inertial/world frame
- *       * a frame (fixed) that is rigidly attached to a link that is not moving
+ * -# During initialization (or at reset) the user of the class specifies (through init()):
+ *       * a frame (world) that should be assumed as the inertial/world frame (`initial_world_frame_position` or `initial_world_frame_position_index`)
+ *       * a frame (fixed) that is rigidly attached to a link that is not moving (`initial_fixed_link` or `initial_fixed_link_index`)
  *         with respect to the specified inertial frame.
- *     At the start, the world_H_fixed (${}^{world} H_{fixed}$) transfomr between this two specified
+ *     At the beginning, the `world_H_fixed` (\f${}^{world} H_{fixed}\f$) transform between these two specified
  *     frames will be saved.
- * 1b) At this point, the getWorldToFrameTransform(int frame_id) will return the world_H_frame
- *      ( ${}^{world} H_{frame}$ ) transform simply by computing the forward kinematics from the fixed frame
- *     to the frame specified by frame_id : world_H_frame = world_H_fixed * fixed_H_frame(qj)
- *                                          ${}^{world} H_{frame} = {}^{world} H_{fixed} {}^{fixed} H_{frame}(qj)$
- * 2) If the fixed frame changes, we can simply change the frame used as "fixed", and consistently update the
- *      world_H_fixed transform to be equal to world_H_new_fixed =  world_H_old_fixed * old_fixed_H_new_fixed(qj) :
- *      ${}^{world} H_{fixed} = {}^{world} H_{old_fixed} {}^{old_fixed} H_{new_fixed}(qj)$
- * 2b) After the update, the getWorldToFrameTransform(int frame_id) can be obtained as at the point 1b .
  *
- * \note we should update the state used by the odometry by calling the appropritate getDynTree().setAng() method.
+ * -# At this point, the `getWorldFrameTransform(int frame_id)` will return the `world_H_frame`
+ *      ( \f${}^{world} H_{frame}\f$ ) transform simply by computing the forward kinematics from the fixed frame
+ *     to the frame specified by `frame_id` : `world_H_frame = world_H_fixed * fixed_H_frame(qj)`, i.e.
+ *                                          \f${}^{world} H_{frame} = {}^{world} H_{fixed} \cdot {}^{fixed} H_{frame}(q_j)\f$
+ *
+ * -# If the fixed frame changes, we can simply change the frame used as "fixed" (changeFixedLink()), and consistently update the
+ *      `world_H_fixed` transform to be equal to `world_H_new_fixed =  world_H_old_fixed * old_fixed_H_new_fixed(qj)`, i.e.
+ *      \f${}^{world} H_{new\_fixed} = {}^{world} H_{old\_fixed} \cdot {}^{old\_fixed} H_{new\_fixed}(q_j)\f$
+ *
+ * -# After the update, the `getWorldFrameTransform(int frame_id)` can be obtained as in point 1b .
+ *
+ * \note we should update the state used by the odometry by calling the appropriate `getDynTree().setAng()` method.
  */
     class simpleLeggedOdometry
     {
@@ -88,9 +91,28 @@ namespace iDynTree {
          * inertial/world frame
          */
         bool changeFixedLink(const int & new_fixed_link_id);
-
+        
+//        /**
+//         * Change the link that the odometry assumes to be fixed along with
+//         * world_H_old_fixed if you want world to remain where initially specified.
+//         */
+//        bool changeFixedLink(const std::string & new_fixed_link_name, const KDL::Frame world_H_old_fixed);
+//
+//        /**
+//         * Change the link that the odometry assumes to be fixed along with
+//         * world_H_old_fixed if you want world to remain where initially specified.
+//         */
+//        bool changeFixedLink(const int & new_fixed_link_id, const KDL::Frame world_H_old_fixed);
+        
         /**
-         * Get the link currently considered fixed with rispect to the inertial frame.
+         *  This method changes fixed link from l_sole to r_foot and vicerversa.
+         *
+         *  @return True when successful, false otherwise.
+         */
+        bool changeFixedFoot();
+        
+        /**
+         * Get the link currently considered fixed with respect to the inertial frame.
          * @return the name of the link currently considered fixed.
          */
         std::string getCurrentFixedLink();

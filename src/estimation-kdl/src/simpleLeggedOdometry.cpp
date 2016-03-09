@@ -112,6 +112,49 @@ bool simpleLeggedOdometry::changeFixedLink(const int& new_fixed_link_id)
     return true;
 }
 
+//bool simpleLeggedOdometry::changeFixedLink(const std::string &new_fixed_link_name, const KDL::Frame world_H_old_fixed)
+//{
+//    int new_fixed_link_id = odometry_model->getLinkIndex(new_fixed_link_name);
+//    
+//    if ( new_fixed_link_id < 0 )
+//    {
+//        return false;
+//    }
+//    
+//    return changeFixedLink(new_fixed_link_id, world_H_old_fixed);
+//}
+//    
+//bool simpleLeggedOdometry::changeFixedLink(const int &new_fixed_link_id, const KDL::Frame world_H_old_fixed)
+//{
+//    int old_fixed_link_id = this->current_fixed_link_id;
+//    KDL::Frame old_fixed_H_new_fixed = odometry_model->getPositionKDL(old_fixed_link_id,new_fixed_link_id);
+//    this->world_H_fixed = world_H_old_fixed*old_fixed_H_new_fixed;
+//    this->current_fixed_link_id = new_fixed_link_id;
+//    return true;
+//}
+    
+bool simpleLeggedOdometry::changeFixedFoot()
+{
+    if ( !std::strcmp(this->getCurrentFixedLink().c_str(), std::string("l_sole").c_str())
+         || !std::strcmp(this->getCurrentFixedLink().c_str(), std::string("r_sole").c_str()) )
+        {
+            if ( !std::strcmp(this->getCurrentFixedLink().c_str(), std::string("l_sole").c_str()) )
+            {
+                changeFixedLink(std::string("r_sole"));
+            }
+            if ( !std::strcmp(this->getCurrentFixedLink().c_str(), std::string("r_sole").c_str()) )
+            {
+                changeFixedLink(std::string("l_sole"));
+            }
+        }
+    else {
+        yError("[simpleLeggedOdometry::changeFixedFoot] The current fixed link is not a foot. Used simpleLeggedOdometry::changeFixedLink() instead...");
+        return false;
+    }
+    return true;
+}
+    
+
 std::string simpleLeggedOdometry::getCurrentFixedLink()
 {
     std::string ret_string;
