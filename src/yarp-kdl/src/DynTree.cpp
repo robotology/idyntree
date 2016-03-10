@@ -718,7 +718,7 @@ KDL::Frame DynTree::getPositionKDL(const int first_link, const int second_link, 
     }
     computePositions();
     KDL::Frame tmp = X_dynamic_base[first_link].Inverse()*X_dynamic_base[second_link];
-    tmp.p = tmp.p + offset;
+    tmp.p = tmp.p - offset;
     return tmp;
 }
 
