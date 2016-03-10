@@ -98,7 +98,7 @@ bool simpleLeggedOdometry::init(KDL::CoDyCo::UndirectedTree & undirected_tree,
     }
     
     odometry_model = new iCub::iDynTree::DynTree(undirected_tree.getTree(),undirected_tree.getSerialization());
-    bool ok = reset(initial_world_frame_position_index,initial_fixed_link_index);
+    bool ok = reset(initial_world_frame_position_index,initial_fixed_link_index,initial_world_offset);
     return ok;
 }
 
