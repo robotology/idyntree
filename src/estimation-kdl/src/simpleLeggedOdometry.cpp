@@ -53,6 +53,23 @@ bool simpleLeggedOdometry::init(KDL::CoDyCo::UndirectedTree & undirected_tree,
     
     return init(undirected_tree,initial_world_frame_position_index,initial_fixed_link_index);
 }
+    
+bool simpleLeggedOdometry::init(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                const std::string& initial_world_frame_position,
+                                const std::string& initial_fixed_link,
+                                KDL::Vector initial_world_offset)
+{
+    int initial_world_frame_position_index = undirected_tree.getLink(initial_world_frame_position)->getLinkIndex();
+    int initial_fixed_link_index = undirected_tree.getLink(initial_fixed_link)->getLinkIndex();;
+    if( initial_fixed_link_index < 0 ||
+       initial_world_frame_position_index < 0 )
+    {
+        return false;
+    }
+    
+    return init(undirected_tree,initial_world_frame_position_index,initial_fixed_link_index,initial_world_offset);
+}
+
 
 bool simpleLeggedOdometry::init(KDL::CoDyCo::UndirectedTree & undirected_tree,
                                 const int initial_world_frame_position_index,
@@ -69,6 +86,23 @@ bool simpleLeggedOdometry::init(KDL::CoDyCo::UndirectedTree & undirected_tree,
     return ok;
 }
 
+bool simpleLeggedOdometry::init(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                                const int initial_world_frame_position_index,
+                                const int initial_fixed_link_index,
+                                KDL::Vector initial_world_offset)
+{
+    if( odometry_model )
+    {
+        delete odometry_model;
+        odometry_model=0;
+    }
+    
+    odometry_model = new iCub::iDynTree::DynTree(undirected_tree.getTree(),undirected_tree.getSerialization());
+    bool ok = reset(initial_world_frame_position_index,initial_fixed_link_index);
+    return ok;
+}
+
+    
 bool simpleLeggedOdometry::reset(const std::string& initial_world_frame_position, const std::string& initial_fixed_link)
 {
     int initial_world_frame_position_index = odometry_model->getLinkIndex(initial_world_frame_position);
@@ -86,6 +120,13 @@ bool simpleLeggedOdometry::reset(const int initial_world_frame_position_index, c
 {
     current_fixed_link_id = initial_fixed_link_index;
     world_H_fixed = odometry_model->getPositionKDL(initial_world_frame_position_index,initial_fixed_link_index);
+    return true;
+}
+    
+bool simpleLeggedOdometry::reset(const int initial_world_frame_position_index, const int initial_fixed_link_index, KDL::Vector initial_world_offset)
+{
+    current_fixed_link_id = initial_fixed_link_index;
+    world_H_fixed = odometry_model->getPositionKDL(initial_world_frame_position_index,initial_fixed_link_index, initial_world_offset);
     return true;
 }
 

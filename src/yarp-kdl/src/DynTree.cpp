@@ -700,6 +700,28 @@ KDL::Frame DynTree::getPositionKDL(const int first_link, const int second_link) 
    return (X_dynamic_base[first_link].Inverse()*X_dynamic_base[second_link]);
 }
 
+
+KDL::Frame DynTree::getPositionKDL(const int first_link, const int second_link, KDL::Vector offset) const
+{
+    if( first_link < 0
+        || first_link >= (int)undirected_tree.getNrOfLinks() )
+    {
+        std::cerr << "DynTree::getPosition: link index " << first_link <<  " out of bounds" << std::endl;
+        return error_frame;
+    }
+
+    if( second_link < 0
+        || second_link >= (int)undirected_tree.getNrOfLinks() )
+    {
+        std::cerr << "DynTree::getPosition: link index " << second_link <<  " out of bounds" << std::endl;
+        return error_frame;
+    }
+    computePositions();
+    KDL::Frame tmp = X_dynamic_base[first_link].Inverse()*X_dynamic_base[second_link];
+    tmp.p = tmp.p + offset;
+    return tmp;
+}
+
 yarp::sig::Vector DynTree::getVel(const int link_index, const bool local) const
 {
     if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) {

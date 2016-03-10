@@ -69,16 +69,31 @@ namespace iDynTree {
         bool init(KDL::CoDyCo::UndirectedTree & undirected_tree,
                   const std::string & initial_world_frame_position,
                   const std::string & initial_fixed_link);
+        
+        bool init(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                  const std::string & initial_world_frame_position,
+                  const std::string & initial_fixed_link,
+                  KDL::Vector initial_world_offset);
 
         bool init(KDL::CoDyCo::UndirectedTree & undirected_tree,
                   const int initial_world_frame_position_index,
                   const int initial_fixed_link_index);
-
+        
+        bool init(KDL::CoDyCo::UndirectedTree & undirected_tree,
+                  const int initial_world_frame_position_index,
+                  const int initial_fixed_link_index,
+                  KDL::Vector initial_world_offset);
+        
         bool reset(const std::string & initial_world_frame_position,
                    const std::string & initial_fixed_link);
 
         bool reset(const int initial_world_frame_position_index,
                    const int initial_fixed_link_index);
+        
+        bool reset(const int initial_world_frame_position_index,
+                   const int initial_fixed_link_index,
+                   KDL::Vector initial_world_offset);
+
 
         /**
          * Change the link that the odometry assumes to be fixed with the
