@@ -182,10 +182,11 @@ bool simpleLeggedOdometry::changeFixedFoot()
             if ( !std::strcmp(this->getCurrentFixedLink().c_str(), std::string("l_sole").c_str()) )
             {
                 changeFixedLink(std::string("r_sole"));
-            }
-            if ( !std::strcmp(this->getCurrentFixedLink().c_str(), std::string("r_sole").c_str()) )
-            {
-                changeFixedLink(std::string("l_sole"));
+            } else {
+                if ( !std::strcmp(this->getCurrentFixedLink().c_str(), std::string("r_sole").c_str()) )
+                {
+                    changeFixedLink(std::string("l_sole"));
+                }
             }
         }
     else {
