@@ -19,6 +19,8 @@
 
 #include "kdl/frames_io.hpp"
 
+#include <iostream>
+
 namespace iDynTree
 {
 
@@ -190,7 +192,7 @@ bool simpleLeggedOdometry::changeFixedFoot()
             }
         }
     else {
-        yError("[simpleLeggedOdometry::changeFixedFoot] The current fixed link is not a foot. Used simpleLeggedOdometry::changeFixedLink() instead...");
+        std::cerr << "[ERROR] [simpleLeggedOdometry::changeFixedFoot] The current fixed link is not a foot. Used simpleLeggedOdometry::changeFixedLink() instead..." << std::endl;
         return false;
     }
     return true;
