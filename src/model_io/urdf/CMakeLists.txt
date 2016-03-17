@@ -26,8 +26,8 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                           PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                   ${TinyXML_INCLUDE_DIRS})
 
-target_link_libraries(${libraryname} PUBLIC idyntree-model idyntree-sensors
-                                     PRIVATE ${TinyXML_LIBRARIES})
+target_link_libraries(${libraryname} LINK_PUBLIC idyntree-model idyntree-sensors
+                                     LINK_PRIVATE ${TinyXML_LIBRARIES})
 
 target_include_directories(${libraryname} PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                   ${TinyXML_INCLUDE_DIRS})
