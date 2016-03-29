@@ -128,6 +128,10 @@ namespace std {
 %include "./matlab/matlab_matvec.i"
 #endif
 
+#ifdef SWIGOCTAVE
+%include "./octave/octave_matvec.i"
+#endif
+
 %template(Matrix3x3) iDynTree::MatrixFixSize<3,3>;
 %template(Matrix4x4) iDynTree::MatrixFixSize<4,4>;
 %template(Matrix6x6) iDynTree::MatrixFixSize<6,6>;
