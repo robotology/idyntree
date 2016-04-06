@@ -668,6 +668,20 @@ class DynTree  {
         virtual yarp::sig::Matrix getPosition(const int first_link, const int second_link) const;
 
         virtual KDL::Frame getPositionKDL(const int first_link, const int second_link) const;
+    
+        /**
+         * Get the 4x4 rototranslation matrix between two link frames
+         * (in particular, of the second link frame expressed in the first link frame, \f$ {}^fH_s \f$))
+         * with an offset from the first link frame. This offset is *added* to the distance vector in
+         * \f$ {}^fH_s \f$.
+         *
+         *  @param first_link  index of the first link
+         *  @param second_link index of the second link
+         *  @param offset      Distance offset from first link frame.
+         *
+         *  @return 4x4 rototranslation KDL::Frame
+         */
+        virtual KDL::Frame getPositionKDL(const int first_link, const int second_link, KDL::Vector offset) const;
 
 
         /**
