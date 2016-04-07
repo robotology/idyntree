@@ -104,6 +104,12 @@ classdef DynamicsComputations < SwigRef
     function varargout = getModelDynamicsParameters(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1159, self, varargin{:});
     end
+    function varargout = getCenterOfMass(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1160, self, varargin{:});
+    end
+    function varargout = getCenterOfMassJacobian(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1161, self, varargin{:});
+    end
   end
   methods(Static)
   end
