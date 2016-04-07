@@ -1181,10 +1181,6 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
     SetToZero(com_jac_buffer);
     SetToZero(momentum_jac_buffer);
 
-    int part_id;
-    part_id = -1;
-
-
     computePositions();
 
     KDL::RigidBodyInertia base_total_inertia;
@@ -1221,6 +1217,9 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
     com_jac.setColumn(3,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)).RefPoint(total_inertia.getCOG()));
     com_jac.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(total_inertia.getCOG()));
     com_jac.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(total_inertia.getCOG()));
+
+    std::cerr << "Base inertia old " << base_total_inertia.getCOG() << std::endl;
+    std::cerr << "Total inertia old " << total_inertia.getCOG() << std::endl;
 
     momentum_jac.changeRefPoint(-total_inertia.getCOG());
 

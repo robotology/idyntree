@@ -6,7 +6,8 @@ project(iDynTree_YARP CXX)
 
 SET(iDynTree_YARP_source src/YARPConversions.cpp)
 
-SET(iDynTree_YARP_header include/iDynTree/yarp/YARPConversions.h)
+SET(iDynTree_YARP_header include/iDynTree/yarp/YARPConversions.h
+                         include/iDynTree/yarp/YARPEigenConversions.h)
 
 SOURCE_GROUP("Source Files" FILES ${iDynTree_YARP_source})
 SOURCE_GROUP("Header Files" FILES ${iDynTree_YARP_header})

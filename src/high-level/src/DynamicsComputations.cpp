@@ -21,6 +21,8 @@
 #include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/Wrench.h>
 
+#include <iDynTree/Core/EigenHelpers.h>
+
 
 #include <kdl_codyco/KDLConversions.h>
 #include <kdl_codyco/utils.hpp>
@@ -29,6 +31,8 @@
 #include <kdl_codyco/rnea_loops.hpp>
 #include <kdl_codyco/jacobian_loops.hpp>
 #include <kdl_codyco/regressor_loops.hpp>
+#include <kdl_codyco/com_loops.hpp>
+#include <kdl_codyco/momentumjacobian.hpp>
 
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
@@ -102,6 +106,7 @@ struct DynamicsComputations::DynamicsComputationsPrivateAttributes
     bool m_isFwdKinematicsUpdated;
 
     // storage of forward position kinematics results
+    // element i contains the world_H_i transform
     std::vector<KDL::Frame> m_fwdPosKinematicsResults;
 
     // storage of forward velocity kinematics results
@@ -124,8 +129,23 @@ struct DynamicsComputations::DynamicsComputationsPrivateAttributes
     // storage for base wrench force compute by inverseDynamics
     KDL::Wrench m_baseReactionForce;
 
-    // storage of jacobina results
+    // storage of jacobian results
     KDL::Jacobian m_jacobianBuf;
+
+    // storage of momentum jacobian results
+    KDL::CoDyCo::MomentumJacobian m_momentum_jac_buffer;
+    KDL::CoDyCo::MomentumJacobian m_momentum2_jac_buffer;
+
+
+    // storage of byproducts of COM computations
+    std::vector<KDL::Vector> m_subtree_COM;
+
+    // storage of byproducts of COM computations
+    std::vector<double> m_subtree_mass;
+
+    // storage of forward position kinematics results for com computations
+    // element i contains the baseLink_H_i transform
+    std::vector<KDL::Frame> m_baseLinkHframe;
 
     DynamicsComputationsPrivateAttributes()
     {
@@ -189,6 +209,11 @@ void DynamicsComputations::resizeInternalDataStructures()
     this->pimpl->m_ddqKDL.resize(nrOfDOFs);
     this->pimpl->m_torques.resize(nrOfDOFs);
     this->pimpl->m_jacobianBuf.resize(nrOfDOFs+6);
+    this->pimpl->m_momentum_jac_buffer.resize(nrOfDOFs+6);
+    this->pimpl->m_momentum2_jac_buffer.resize(nrOfDOFs+6);
+    this->pimpl->m_subtree_COM.resize(nrOfFrames);
+    this->pimpl->m_subtree_mass.resize(nrOfFrames);
+    this->pimpl->m_baseLinkHframe.resize(nrOfFrames);
 
     // set to zero
     KDL::SetToZero(this->pimpl->m_qKDL);
@@ -805,7 +830,8 @@ bool DynamicsComputations::getDynamicsRegressor(MatrixDynSize& outRegressor)
 
 bool DynamicsComputations::getModelDynamicsParameters(VectorDynSize& vec) const
 {
-    if( vec.size() != 10*this->getNrOfLinks() ) {
+    if( vec.size() != 10*this->getNrOfLinks() )
+    {
         vec.resize(10*this->getNrOfLinks());
     }
 
@@ -820,9 +846,86 @@ bool DynamicsComputations::getModelDynamicsParameters(VectorDynSize& vec) const
     return true;
 }
 
+iDynTree::Position DynamicsComputations::getCenterOfMass()
+{
+    KDL::Vector com_world;
+    KDL::CoDyCo::GeneralizedJntPositions q_fb(this->pimpl->m_world2base,this->pimpl->m_qKDL);
+    KDL::CoDyCo::getCenterOfMassLoop(this->pimpl->m_robot_model,q_fb,this->pimpl->m_traversal,this->pimpl->m_subtree_COM,this->pimpl->m_subtree_mass,com_world);
+
+    return iDynTree::ToiDynTree(com_world);
+}
 
 
 
+bool DynamicsComputations::getCenterOfMassJacobian(iDynTree::MatrixDynSize & outJacobian)
+{
+    //If the incoming matrix have the wrong number of rows/colums, resize it
+    if( outJacobian.rows() != (int)(3) ||
+        outJacobian.cols() != (int)(6+this->getNrOfDegreesOfFreedom()) )
+    {
+        outJacobian.resize(3,6+this->getNrOfDegreesOfFreedom());
+    }
+
+    // Compute Jacobian for the Orin Average Velocity (the first three rows are the COM Jacobian, let's ignore for now the last three rows)
+    this->pimpl->m_momentum_jac_buffer.data.setZero();
+    this->pimpl->m_momentum2_jac_buffer.data.setZero();
+    this->pimpl->m_jacobianBuf.data.setZero();
+
+    // compute fwd kinematics (if necessary)
+    bool ok =
+     (0 == KDL::CoDyCo::getFramesLoop(this->pimpl->m_robot_model,
+                                      this->pimpl->m_qKDL,
+                                      this->pimpl->m_traversal,
+                                      this->pimpl->m_baseLinkHframe,
+                                      KDL::Frame::Identity()));
+
+    if( !ok )
+    {
+        reportError("DynamicsComputations","getCenterOfMassJacobian","error in forward kinematics");
+        return false;
+    }
+
+    KDL::RigidBodyInertia base_total_inertia;
+    KDL::CoDyCo::getMomentumJacobianLoop(this->pimpl->m_robot_model,
+                                         this->pimpl->m_qKDL,
+                                         this->pimpl->m_traversal,
+                                         this->pimpl->m_baseLinkHframe,
+                                         this->pimpl->m_momentum_jac_buffer,
+                                         this->pimpl->m_jacobianBuf,
+                                         this->pimpl->m_momentum2_jac_buffer,
+                                         base_total_inertia);
+
+
+    this->pimpl->m_momentum_jac_buffer.changeRefFrame(KDL::Frame(this->pimpl->m_world2base.M));
+
+    KDL::RigidBodyInertia total_inertia = KDL::Frame(this->pimpl->m_world2base.M)*base_total_inertia;
+
+    if( total_inertia.getMass() == 0 )
+    {
+        std::cerr << "DynamicsComputations::getCenterOfMassJacobian error: Model has no mass " << std::endl;
+        return false;
+    }
+
+    // To get the center of mass velocity, we express the momentum at the center of mass
+    this->pimpl->m_momentum_jac_buffer.changeRefPoint(total_inertia.getCOG());
+
+    this->pimpl->m_jacobianBuf.data = (this->pimpl->m_momentum_jac_buffer.data)/total_inertia.getMass();
+
+    // Handle the incorrect computation done in getMomentumJacobianLoop
+    this->pimpl->m_jacobianBuf.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
+    this->pimpl->m_jacobianBuf.setColumn(1,KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
+    this->pimpl->m_jacobianBuf.setColumn(2,KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
+    this->pimpl->m_jacobianBuf.setColumn(3,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)).RefPoint(total_inertia.getCOG()));
+    this->pimpl->m_jacobianBuf.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(total_inertia.getCOG()));
+    this->pimpl->m_jacobianBuf.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(total_inertia.getCOG()));
+
+    std::cerr << "Base inertia new " << base_total_inertia.getCOG() << std::endl;
+    std::cerr << "Total inertia new " << total_inertia.getCOG() << std::endl;
+
+    iDynTree::toEigen(outJacobian) = this->pimpl->m_jacobianBuf.data.topRows<3>();
+
+    return true;
+}
 
 
 }

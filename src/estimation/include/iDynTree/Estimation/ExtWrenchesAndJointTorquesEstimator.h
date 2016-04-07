@@ -95,7 +95,7 @@ class ExtWrenchesAndJointTorquesEstimator
    /**
     * Copy operator is forbidden
     */
-   ExtWrenchesAndJointTorquesEstimator& operator=(const ExtWrenchesAndJointTorquesEstimator &other) {};
+   ExtWrenchesAndJointTorquesEstimator& operator=(const ExtWrenchesAndJointTorquesEstimator &other) {return *this;};
 
 public:
     /**
