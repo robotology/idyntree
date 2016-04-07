@@ -919,9 +919,6 @@ bool DynamicsComputations::getCenterOfMassJacobian(iDynTree::MatrixDynSize & out
     this->pimpl->m_jacobianBuf.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(total_inertia.getCOG()));
     this->pimpl->m_jacobianBuf.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(total_inertia.getCOG()));
 
-    std::cerr << "Base inertia new " << base_total_inertia.getCOG() << std::endl;
-    std::cerr << "Total inertia new " << total_inertia.getCOG() << std::endl;
-
     iDynTree::toEigen(outJacobian) = this->pimpl->m_jacobianBuf.data.topRows<3>();
 
     return true;
