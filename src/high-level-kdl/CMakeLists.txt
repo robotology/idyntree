@@ -2,21 +2,20 @@
 # Authors: Silvio Traversaro
 # CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
 
-project(iDynTree_HighLevel CXX)
+project(iDynTree_HighLevel_KDL CXX)
 
-set(IDYNTREE_HIGH_LEVEL_HEADERS include/iDynTree/HighLevel/DynamicsComputations.h)
+set(IDYNTREE_HIGH_LEVEL_KDL_HEADERS include/iDynTree/HighLevel/DynamicsComputations.h)
 
-set(IDYNTREE_HIGH_LEVEL_PRIVATE_INCLUDES )
+set(IDYNTREE_HIGH_LEVEL_KDL_PRIVATE_INCLUDES )
 
-set(IDYNTREE_HIGH_LEVEL_SOURCES src/DynamicsComputations.cpp)
+set(IDYNTREE_HIGH_LEVEL_KDL_SOURCES src/DynamicsComputations.cpp)
 
-SOURCE_GROUP("Source Files" FILES ${IDYNTREE_HIGH_LEVEL_SOURCES})
-SOURCE_GROUP("Header Files" FILES ${IDYNTREE_HIGH_LEVEL_HEADERS})
-#SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_HIGH_LEVEL_PRIVATE_INCLUDES})
+SOURCE_GROUP("Source Files" FILES ${IDYNTREE_HIGH_LEVEL_KDL_SOURCES})
+SOURCE_GROUP("Header Files" FILES ${IDYNTREE_HIGH_LEVEL_KDL_HEADERS})
 
-set(libraryname idyntree-high-level)
+set(libraryname idyntree-high-level-kdl)
 
-add_library(${libraryname} ${IDYNTREE_HIGH_LEVEL_SOURCES} ${IDYNTREE_HIGH_LEVEL_HEADERS} ${IDYNTREE_HIGH_LEVEL_PRIVATE_INCLUDES})
+add_library(${libraryname} ${IDYNTREE_HIGH_LEVEL_KDL_SOURCES} ${IDYNTREE_HIGH_LEVEL_KDL_HEADERS} ${IDYNTREE_HIGH_LEVEL_KDL_PRIVATE_INCLUDES})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
