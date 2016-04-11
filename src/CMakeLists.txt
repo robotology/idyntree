@@ -10,6 +10,7 @@ add_subdirectory(model)
 add_subdirectory(sensors)
 add_subdirectory(model_io)
 add_subdirectory(estimation)
+add_subdirectory(high-level)
 
 if(IDYNTREE_USES_YARP)
     add_subdirectory(yarp)
@@ -29,7 +30,7 @@ if(IDYNTREE_USES_KDL)
             add_subdirectory(icub-kdl)
         endif()
     endif()
-    add_subdirectory(high-level)
+    add_subdirectory(high-level-kdl)
 endif()
 
 # compile simple command line tools
