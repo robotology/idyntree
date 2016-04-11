@@ -1,12 +1,21 @@
-macro(IDYNTREE_ADD_TOOL tool_name tool_code)
+macro(IDYNTREE_ADD_TOOL_YARP_KDL tool_name tool_code)
     add_executable(${tool_name} ${tool_code})
     target_link_libraries(${tool_name} idyntree-core idyntree-regressors idyntree-modelio-urdf-kdl idyntree-modelio-symoro)
     include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS})
     install(TARGETS ${tool_name} DESTINATION bin)
+endmacro(IDYNTREE_ADD_TOOL_YARP_KDL tool_name tool_code)
+
+macro(IDYNTREE_ADD_TOOL tool_name tool_code)
+    add_executable(${tool_name} ${tool_code})
+    target_link_libraries(${tool_name} idyntree-core idyntree-model idyntree-high-level idyntree-modelio-urdf)
+    include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
+    install(TARGETS ${tool_name} DESTINATION bin)
 endmacro(IDYNTREE_ADD_TOOL tool_name tool_code)
 
+idyntree_add_tool(idyntree-model-info idyntree-model-info.cpp)
+
 if(IDYNTREE_USES_ICUB_MAIN)
-    idyntree_add_tool(par2urdf par2urdf.cpp)
+    idyntree_add_tool_yarp_kdl(par2urdf par2urdf.cpp)
 endif()
 
 if(IDYNTREE_USES_ICUB_MAIN)

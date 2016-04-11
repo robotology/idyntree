@@ -115,7 +115,7 @@ LinkIndex Model::getLinkIndex(const std::string& linkName) const
 bool Model::isValidLinkIndex(const LinkIndex index) const
 {
     return (index != LINK_INVALID_INDEX) &&
-           (index >= 0) && (index < this->getNrOfFrames());
+           (index >= 0) && (index < this->getNrOfLinks());
 }
 
 std::string Model::getLinkName(const LinkIndex linkIndex) const

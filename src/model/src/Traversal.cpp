@@ -82,6 +82,11 @@ const Link* Traversal::getLink(const TraversalIndex traversalIndex) const
     return this->links[traversalIndex];
 }
 
+const Link* Traversal::getBaseLink() const
+{
+    return this->getLink(0);
+}
+
 const IJoint* Traversal::getParentJoint(const TraversalIndex traversalIndex) const
 {
     return this->toParentJoints[traversalIndex];
