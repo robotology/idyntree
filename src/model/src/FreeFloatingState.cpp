@@ -63,6 +63,13 @@ FreeFloatingPos::~FreeFloatingPos()
 {
 }
 
+FreeFloatingVel::FreeFloatingVel()
+{
+    this->m_baseVel.zero();
+    this->m_jointVel.resize(0);
+    this->m_jointVel.zero();
+}
+
 
 FreeFloatingVel::FreeFloatingVel(const Model& model)
 {
