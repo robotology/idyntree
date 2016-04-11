@@ -1181,10 +1181,6 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
     SetToZero(com_jac_buffer);
     SetToZero(momentum_jac_buffer);
 
-    int part_id;
-    part_id = -1;
-
-
     computePositions();
 
     KDL::RigidBodyInertia base_total_inertia;
