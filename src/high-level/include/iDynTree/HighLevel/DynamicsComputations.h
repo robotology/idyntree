@@ -6,6 +6,7 @@
  */
 
 #ifndef IDYNTREE_DYNCOMPUTATIONS_H
+#define IDYNTREE_DYNCOMPUTATIONS_H
 
 #include <string>
 
@@ -503,5 +504,5 @@ public:
 }
 
 
-#endif
+#endif //end of include guard IDYNTREE_DYNCOMPUTATIONS_H
 
