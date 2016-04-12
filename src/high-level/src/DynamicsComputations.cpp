@@ -924,8 +924,29 @@ bool DynamicsComputations::getCenterOfMassJacobian(iDynTree::MatrixDynSize & out
     return true;
 }
 
+//////////////////////////////////////////////////////////////////////////////
+///// JOINT METHODS
+//////////////////////////////////////////////////////////////////////////////
+int DynamicsComputations::getJointIndex(const std::string &linkName)
+{
+    int index = -1;
+    for (int i = 0; i < getNrOfDegreesOfFreedom(); i++) {
+        if (this->getDescriptionOfDegreeOfFreedom(i) == linkName) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+std::string DynamicsComputations::getJointName(const unsigned int jointIndex)
+{
+    return this->getDescriptionOfDegreeOfFreedom(jointIndex);
+}
+
 
 }
 
 }
+
 
