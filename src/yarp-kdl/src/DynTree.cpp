@@ -1208,7 +1208,7 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
 
     /** \todo add a meaniful transformation for the rotational part of the jacobian */
     //KDL::CoDyCo::divideJacobianInertia(momentum_jacobian,total_inertia,com_jacobian);
-    com_jac.data = momentum_jacobian.data/total_inertia.getMass();
+    com_jac.data = momentum_jac.data/total_inertia.getMass();
 
     //As in iDynTree the base twist is expressed in the world frame, the first six columns are always the identity
     com_jac.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
