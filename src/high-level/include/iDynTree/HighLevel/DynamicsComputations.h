@@ -415,7 +415,7 @@ public:
 
      /**
      * Get the index corresponding to a given link name.
-     * @return a integer greater or equal then zero if the frame exist,
+     * @return a integer greater or equal then zero if the link exist,
      *         a negative integer otherwise.
      */
     int getLinkIndex(const std::string & linkName) const;
@@ -436,6 +436,32 @@ public:
      */
     iDynTree::SpatialInertia getLinkInertia(const std::string & linkName) const;
 
+    //@}
+
+
+    /**
+     * @name Methods to get joint information
+     */
+    //@{
+
+
+    /**
+     * Get the index corresponding to a given joint name.
+     * @note: the current implementation is slow.
+     * @return a integer greater or equal then zero if the joint exist,
+     *         a negative integer otherwise.
+     */
+    int getJointIndex(const std::string & linkName);
+
+    /**
+     * Get the name corresponding to a given joint index
+     * @note: not marked const 
+     * @param jointIndex the index of the joint which name is required
+     *
+     * @return the name of the joint at index jointIndex
+     */
+    std::string getJointName(const unsigned int jointIndex);
+    
     //@}
 
 
