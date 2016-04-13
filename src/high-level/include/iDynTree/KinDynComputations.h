@@ -6,6 +6,7 @@
  */
 
 #ifndef IDYNTREE_KINDYNCOMPUTATIONS_H
+#define IDYNTREE_KINDYNCOMPUTATIONS_H
 
 #include <string>
 
@@ -282,7 +283,8 @@ public:
 
     /**
      * Return the transform where the frame is the frame
-     * specified by frameIndex, and the reference frame is the world one.
+     * specified by frameIndex, and the reference frame is the world one
+     * (world_H_frame). 
      *
      */
     iDynTree::Transform getWorldTransform(const iDynTree::FrameIndex frameIndex);
@@ -299,7 +301,7 @@ public:
     /**
      * Return the transform where the frame is the frame
      * specified by frameIndex, and the reference frame is the one specified
-     * by refFrameIndex.
+     * by refFrameIndex (refFrame_H_frame). 
      *
      */
     iDynTree::Transform getRelativeTransform(const iDynTree::FrameIndex refFrameIndex,
