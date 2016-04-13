@@ -6,7 +6,7 @@ macro(add_icub_consistency_test testName)
     set(testname   ConsistencyTest${testName})
     add_executable(${testbinary} ${testsrc})
     target_include_directories(${testbinary} PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-modelio-urdf-kdl idyntree-icub-kdl idyntree-icub idyntree-core idyntree-kdl idyntree-model idyntree-estimation)
+    target_link_libraries(${testbinary} idyntree-modelio-urdf-kdl idyntree-icub idyntree-icub-kdl idyntree-icub idyntree-core idyntree-kdl idyntree-model idyntree-estimation)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
