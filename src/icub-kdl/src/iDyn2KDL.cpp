@@ -248,7 +248,7 @@ bool idynSensorChain2kdlChain(iCub::iDyn::iDynChain & idynChain,
             m = idynChain.getMass(sensor_link);
             m1 = idynSensor.getMass();
             m0 = m-m1;
-            //It is not possible that the semilink is more heavy then the link!!!
+            //It is not possible that the semilink is more heavy than the link!!!
             assert(m0 > 0);
 
             //r_{i,C_i}^i

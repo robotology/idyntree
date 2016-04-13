@@ -164,7 +164,7 @@ public:
     /**
      * Get the number of frames contained in the model.
      *
-     * \note The number of frames is always greater or equal then
+     * \note The number of frames is always greater than or equal to
      *       the number of links because every link has one link reference frame
      *       associated. An arbitrary number of additional reference frames
      *       can associated to a given link.
@@ -269,7 +269,7 @@ public:
 
     /**
      * Get the index corresponding to a given frame name.
-     * @return a integer greater or equal then zero if the frame exist,
+     * @return a integer greater than or equal to zero if the frame exist,
      *         a negative integer otherwise.
      */
     int getFrameIndex(const std::string & frameName) const;
