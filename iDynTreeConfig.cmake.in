@@ -1,21 +1,3 @@
-find_package(orocos_kdl QUIET)
-#support also for the old version of kdl cmake package
-if(NOT orocos_kdl_FOUND)
-   find_package(Orocos-KDL QUIET)
-   if(NOT Orocos-KDL_FOUND)
-      message(WARNING "KDL not found: neither orocos_kdl or Orocos-KDL cmake packages are available")
-   else(NOT Orocos-KDL_FOUND)
-      set(orocos_kdl_INCLUDE_DIRS ${Orocos-KDL_INCLUDE_DIRS})
-      set(orocos_kdl_LIBRARY_DIRS ${Orocos-KDL_LIBRARY_DIRS})
-      set(orocos_kdl_LIBRARIES ${Orocos-KDL_LIBRARIES})
-      set(orocos_kdl_FOUND true)
-   endif(NOT Orocos-KDL_FOUND)
-endif(NOT orocos_kdl_FOUND)
-
-find_package(YARP QUIET)
-find_package(ICUB QUIET)
-find_package(TinyXML QUIET)
-
 set(iDynTree_VERSION @iDynTree_VERSION@)
 
 @PACKAGE_INIT@
@@ -24,6 +6,29 @@ if(NOT TARGET iDynTree::idyntree-core)
   include("${CMAKE_CURRENT_LIST_DIR}/iDynTreeTargets.cmake")
 endif()
 
-# Compatibility
+if(TARGET iDynTree::idyntree-kdl)
+    find_package(orocos_kdl QUIET)
+    #support also for the old version of kdl cmake package
+    if(NOT orocos_kdl_FOUND)
+        find_package(Orocos-KDL QUIET)
+        if(NOT Orocos-KDL_FOUND)
+            message(WARNING "KDL not found: neither orocos_kdl or Orocos-KDL cmake packages are available")
+        else()
+            set(orocos_kdl_INCLUDE_DIRS ${Orocos-KDL_INCLUDE_DIRS})
+            set(orocos_kdl_LIBRARY_DIRS ${Orocos-KDL_LIBRARY_DIRS})
+            set(orocos_kdl_LIBRARIES ${Orocos-KDL_LIBRARIES})
+            set(orocos_kdl_FOUND true)
+        endif()
+endif()
+
+if(TARGET iDynTree::idyntree-yarp)
+    find_package(YARP QUIET)
+endif()
+
+if(TARGET iDynTree::idyntree-icub)
+    find_package(ICUB QUIET)
+endif()
+
+# Provide an iDynTree_LIBRARIES variable containing all the
+# targets exported by iDynTree
 set(iDynTree_LIBRARIES "@iDynTree_TARGETS@")
-set(iDynTree_INCLUDE_DIRS "@EIGEN3_INCLUDE_DIR@" "@Boost_INCLUDE_DIRS@")
