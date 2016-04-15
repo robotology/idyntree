@@ -21,6 +21,7 @@ macro(add_icub_test testName)
 endmacro()
 
 add_icub_test(iCubLeftArmRegressor)
+add_icub_test(iDynTreeCOM)
 add_icub_test(iDynTreeJacobian)
 add_icub_test(iDynTreeRelativeJacobian)
 add_icub_test(iDynTreeWholeBodyFTsensorEstimate)
