@@ -9,3 +9,4 @@ project("iDynTree_Examples")
 
 add_subdirectory(icubArmRegressor)
 add_subdirectory(walkmanLimbJTSRegressor)
+add_subdirectory(fixedBaseGravityCompensator)
