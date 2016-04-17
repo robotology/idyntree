@@ -19,6 +19,7 @@ if(TARGET iDynTree::idyntree-kdl)
             set(orocos_kdl_LIBRARIES ${Orocos-KDL_LIBRARIES})
             set(orocos_kdl_FOUND true)
         endif()
+    endif()
 endif()
 
 if(TARGET iDynTree::idyntree-yarp)
