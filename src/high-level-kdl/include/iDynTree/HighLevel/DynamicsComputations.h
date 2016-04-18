@@ -6,12 +6,13 @@
  */
 
 #ifndef IDYNTREE_DYNCOMPUTATIONS_H
+#define IDYNTREE_DYNCOMPUTATIONS_H
 
 #include <string>
 
 namespace iDynTree {
 
-
+class Position;
 class VectorDynSize;
 class MatrixDynSize;
 class Transform;
@@ -213,9 +214,9 @@ public:
     /**
      * Set the state for the robot (floating base)
      *
-     * @param q a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
-     * @param q_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
-     * @param q_dot a vector of getNrOfDegreesOfFreedom() joint acceleration (in rad/sec^2)
+     * @param qj a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
+     * @param qj_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
+     * @param qj_dotdot a vector of getNrOfDegreesOfFreedom() joint acceleration (in rad/sec^2)
      * @param world_T_base  the homogeneous transformation that transforms position vectors expressed in the base reference frame
      *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .
      * @param base_velocity The twist (linear/angular velocity) of the base, expressed in the world orientation frame and with respect
@@ -286,7 +287,7 @@ public:
 
     /**
      * Return the transform where the frame is the frame
-     * specified by frameIndex, and the reference frame is the world one.
+     * specified by frameIndex, and the reference frame is the world one (world_H_frame).
      *
      */
     iDynTree::Transform getWorldTransform(unsigned int frameIndex);
@@ -303,7 +304,7 @@ public:
     /**
      * Return the transform where the frame is the frame
      * specified by frameIndex, and the reference frame is the one specified
-     * by refFrameIndex.
+     * by refFrameIndex (refFrame_H_frame).
      *
      */
     iDynTree::Transform getRelativeTransform(unsigned int refFrameIndex,
@@ -414,7 +415,7 @@ public:
 
      /**
      * Get the index corresponding to a given link name.
-     * @return a integer greater or equal then zero if the frame exist,
+     * @return a integer greater or equal then zero if the link exist,
      *         a negative integer otherwise.
      */
     int getLinkIndex(const std::string & linkName) const;
@@ -439,6 +440,32 @@ public:
 
 
     /**
+     * @name Methods to get joint information
+     */
+    //@{
+
+
+    /**
+     * Get the index corresponding to a given joint name.
+     * @note: the current implementation is slow.
+     * @return a integer greater or equal then zero if the joint exist,
+     *         a negative integer otherwise.
+     */
+    int getJointIndex(const std::string & linkName);
+
+    /**
+     * Get the name corresponding to a given joint index
+     * @note: not marked const 
+     * @param jointIndex the index of the joint which name is required
+     *
+     * @return the name of the joint at index jointIndex
+     */
+    std::string getJointName(const unsigned int jointIndex);
+    
+    //@}
+
+
+    /**
      * @name Methods to compute Inverse Dynamics
      *
      */
@@ -449,10 +476,6 @@ public:
       * @name Methods to get Jacobians and Dynamics regressor
       */
     //@{
-    /**
-     *
-     *
-     */
 
     bool getFrameJacobian(const std::string & frameName,
                           iDynTree::MatrixDynSize & outJacobian) const;
@@ -474,6 +497,32 @@ public:
 
     //@}
 
+
+    /**
+      * @name Center of Mass related methods.
+      */
+    //@{
+
+    /**
+     * @brief getCenterOfMass return the center of mass of the model.
+     * @return the center of mass of the model, expressed in the world frame.
+     *
+     * \note to get the center of mass in any other frame of the robot,
+     *       just compute the transform between that frame and the world
+     *       and use if to transform the center of mass, as in:
+     *       dynComp.getWorldTransform("frameName").inverse()*getCenterOfMass();
+     */
+    iDynTree::Position getCenterOfMass();
+
+    /**
+     * @brief get the 3x(6+getNrOfDegreesOfFreedom()) jacobian of the center of mass
+     *        position expressed in the world frame.
+     * @param[out] outJacobian a 3x(6+getNrOfDegreesOfFreedom()) matrix, jacobian of the COM.
+     * @return true if all wen well, false if there was an error.
+     */
+    bool getCenterOfMassJacobian(iDynTree::MatrixDynSize & outJacobian);
+
+    //@}
 };
 
 }
@@ -481,5 +530,5 @@ public:
 }
 
 
-#endif
+#endif //end of include guard IDYNTREE_DYNCOMPUTATIONS_H
 

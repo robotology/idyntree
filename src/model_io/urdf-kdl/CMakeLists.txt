@@ -12,6 +12,7 @@ if( IDYNTREE_USES_INTERNAL_URDFDOM )
 else()
     find_package(urdfdom_headers REQUIRED)
     find_package(urdfdom REQUIRED)
+    find_package(Boost REQUIRED)
 endif()
 
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFSensorsImport.h)
@@ -59,7 +60,8 @@ target_link_libraries(${libraryname} idyntree-core
 include_directories(SYSTEM  ${orocos_kdl_INCLUDE_DIRS}
                             ${TinyXML_INCLUDE_DIRS}
                             ${urdfdom_headers_INCLUDE_DIRS}
-                            ${urdfdom_INCLUDE_DIRS})
+                            ${urdfdom_INCLUDE_DIRS}
+                            ${Boost_INCLUDE_DIRS})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
 set_property(TARGET ${libraryname} PROPERTY PRIVATE_HEADER ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})

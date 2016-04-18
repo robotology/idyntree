@@ -700,6 +700,28 @@ KDL::Frame DynTree::getPositionKDL(const int first_link, const int second_link) 
    return (X_dynamic_base[first_link].Inverse()*X_dynamic_base[second_link]);
 }
 
+
+KDL::Frame DynTree::getPositionKDL(const int first_link, const int second_link, KDL::Vector offset) const
+{
+    if( first_link < 0
+        || first_link >= (int)undirected_tree.getNrOfLinks() )
+    {
+        std::cerr << "DynTree::getPosition: link index " << first_link <<  " out of bounds" << std::endl;
+        return error_frame;
+    }
+
+    if( second_link < 0
+        || second_link >= (int)undirected_tree.getNrOfLinks() )
+    {
+        std::cerr << "DynTree::getPosition: link index " << second_link <<  " out of bounds" << std::endl;
+        return error_frame;
+    }
+    computePositions();
+    KDL::Frame tmp = X_dynamic_base[first_link].Inverse()*X_dynamic_base[second_link];
+    tmp.p = tmp.p - offset;
+    return tmp;
+}
+
 yarp::sig::Vector DynTree::getVel(const int link_index, const bool local) const
 {
     if( link_index < 0 || link_index >= (int)undirected_tree.getNrOfLinks() ) {
@@ -1093,12 +1115,12 @@ KDL::Vector DynTree::getCOMKDL(int link_index) const
         std::cerr << "DynTree::getCOM: link index " << link_index <<  " out of bounds" << std::endl;
         return KDL::Vector(0.0,0.0,0.0);
     }
-    if( (int)subtree_COM.size() != getNrOfLinks() ) { subtree_COM.resize(getNrOfLinks()); }
-    if( (int)subtree_mass.size() != getNrOfLinks() ) { subtree_mass.resize(getNrOfLinks()); }
+    if( (int)m_subtree_COM.size() != getNrOfLinks() ) { m_subtree_COM.resize(getNrOfLinks()); }
+    if( (int)m_subtree_mass.size() != getNrOfLinks() ) { m_subtree_mass.resize(getNrOfLinks()); }
 
     KDL::Vector com_world, com_return;
     KDL::CoDyCo::GeneralizedJntPositions q_fb(world_base_frame,q);
-    getCenterOfMassLoop(undirected_tree,q_fb,dynamic_traversal,subtree_COM,subtree_mass,com_world);
+    getCenterOfMassLoop(undirected_tree,q_fb,dynamic_traversal,m_subtree_COM,m_subtree_mass,com_world);
 
 
     if( link_index == -1 ) {
@@ -1136,12 +1158,12 @@ yarp::sig::Vector DynTree::getCOM(int link_index) const
 bool DynTree::getCOMJacobianKDL(KDL::Jacobian & jac)
 {
     KDL::CoDyCo::MomentumJacobian dummy;
-    if( (int)com_jacobian.columns() != 6+getNrOfDOFs() ) { com_jacobian.resize(6+getNrOfDOFs()); }
-    if( (int)momentum_jacobian.columns() != 6+getNrOfDOFs() ) { momentum_jacobian.resize(6+getNrOfDOFs()); }
-    SetToZero(com_jacobian);
-    SetToZero(momentum_jacobian);
-    bool result= getCOMJacobianKDL(com_jacobian,momentum_jacobian);
-    jac=com_jacobian;
+    if( (int)m_com_jacobian.columns() != 6+getNrOfDOFs() ) { m_com_jacobian.resize(6+getNrOfDOFs()); }
+    if( (int)m_momentum_jacobian.columns() != 6+getNrOfDOFs() ) { m_momentum_jacobian.resize(6+getNrOfDOFs()); }
+    SetToZero(m_com_jacobian);
+    SetToZero(m_momentum_jacobian);
+    bool result= getCOMJacobianKDL(m_com_jacobian,m_momentum_jacobian);
+    jac=m_com_jacobian;
 
     return result;
 
@@ -1151,23 +1173,19 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
 {
     if( (int)com_jac.columns() != 6+getNrOfDOFs() ) { com_jac.resize(6+getNrOfDOFs()); }
     if( (int)momentum_jac.columns() != 6+getNrOfDOFs() ) { momentum_jac.resize(6+getNrOfDOFs()); }
-    if( (int)com_jac_buffer.columns() != 6+getNrOfDOFs() ) { com_jac_buffer.resize(6+getNrOfDOFs()); }
-    if( (int)momentum_jac_buffer.columns() != 6+getNrOfDOFs() ) { momentum_jac_buffer.resize(6+getNrOfDOFs()); }
+    if( (int)m_com_jac_buffer.columns() != 6+getNrOfDOFs() ) { m_com_jac_buffer.resize(6+getNrOfDOFs()); }
+    if( (int)m_momentum_jac_buffer.columns() != 6+getNrOfDOFs() ) { m_momentum_jac_buffer.resize(6+getNrOfDOFs()); }
 
     SetToZero(com_jac);
     SetToZero(momentum_jac);
-    SetToZero(com_jac_buffer);
-    SetToZero(momentum_jac_buffer);
-
-    int part_id;
-    part_id = -1;
-
+    SetToZero(m_com_jac_buffer);
+    SetToZero(m_momentum_jac_buffer);
 
     computePositions();
 
     KDL::RigidBodyInertia base_total_inertia;
 
-    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jac,com_jac_buffer,momentum_jac_buffer,base_total_inertia);
+    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jac,m_com_jac_buffer,m_momentum_jac_buffer,base_total_inertia);
 
     /*
     std::cout << "Total Inertia for part " << part_name << " : " << std::endl
@@ -1178,29 +1196,29 @@ bool DynTree::getCOMJacobianKDL(KDL::Jacobian & com_jac,  KDL::CoDyCo::MomentumJ
 
     momentum_jac.changeRefFrame(KDL::Frame(world_base_frame.M));
 
-    total_inertia = KDL::Frame(world_base_frame.M)*base_total_inertia;
+    m_total_inertia = KDL::Frame(world_base_frame.M)*base_total_inertia;
 
-    if( total_inertia.getMass() == 0 )
+    if( m_total_inertia.getMass() == 0 )
     {
         std::cerr << "iDynTree::getCOMJacobian error: Tree has no mass " << std::endl;
         return false;
     }
 
-    momentum_jac.changeRefPoint(total_inertia.getCOG());
+    momentum_jac.changeRefPoint(m_total_inertia.getCOG());
 
     /** \todo add a meaniful transformation for the rotational part of the jacobian */
     //KDL::CoDyCo::divideJacobianInertia(momentum_jacobian,total_inertia,com_jacobian);
-    com_jac.data = momentum_jacobian.data/total_inertia.getMass();
+    com_jac.data = momentum_jac.data/m_total_inertia.getMass();
 
     //As in iDynTree the base twist is expressed in the world frame, the first six columns are always the identity
-    com_jac.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
-    com_jac.setColumn(1,KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
-    com_jac.setColumn(2,KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)).RefPoint(total_inertia.getCOG()));
-    com_jac.setColumn(3,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)).RefPoint(total_inertia.getCOG()));
-    com_jac.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(total_inertia.getCOG()));
-    com_jac.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(total_inertia.getCOG()));
+    com_jac.setColumn(0,KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)).RefPoint(m_total_inertia.getCOG()));
+    com_jac.setColumn(1,KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)).RefPoint(m_total_inertia.getCOG()));
+    com_jac.setColumn(2,KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)).RefPoint(m_total_inertia.getCOG()));
+    com_jac.setColumn(3,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)).RefPoint(m_total_inertia.getCOG()));
+    com_jac.setColumn(4,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)).RefPoint(m_total_inertia.getCOG()));
+    com_jac.setColumn(5,KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)).RefPoint(m_total_inertia.getCOG()));
 
-    momentum_jac.changeRefPoint(-total_inertia.getCOG());
+    momentum_jac.changeRefPoint(-m_total_inertia.getCOG());
 
     return true;
 }
@@ -1213,10 +1231,10 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac)
 
 bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & momentum_jac)
 {
-    if( (int)com_jacobian.columns() != 6+getNrOfDOFs() ) { com_jacobian.resize(6+getNrOfDOFs()); }
-    if( (int)momentum_jacobian.columns() != 6+getNrOfDOFs() ) { momentum_jacobian.resize(6+getNrOfDOFs()); }
-    if( (int)com_jac_buffer.columns() != 6+getNrOfDOFs() ) { com_jac_buffer.resize(6+getNrOfDOFs()); }
-    if( (int)momentum_jac_buffer.columns() != 6+getNrOfDOFs() ) { momentum_jac_buffer.resize(6+getNrOfDOFs()); }
+    if( (int)m_com_jacobian.columns() != 6+getNrOfDOFs() ) { m_com_jacobian.resize(6+getNrOfDOFs()); }
+    if( (int)m_momentum_jacobian.columns() != 6+getNrOfDOFs() ) { m_momentum_jacobian.resize(6+getNrOfDOFs()); }
+    if( (int)m_com_jac_buffer.columns() != 6+getNrOfDOFs() ) { m_com_jac_buffer.resize(6+getNrOfDOFs()); }
+    if( (int)m_momentum_jac_buffer.columns() != 6+getNrOfDOFs() ) { m_momentum_jac_buffer.resize(6+getNrOfDOFs()); }
 
     if( jac.rows() != (int)(6) || jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
         jac.resize(6,6+undirected_tree.getNrOfDOFs());
@@ -1226,23 +1244,23 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & moment
         momentum_jac.resize(6,6+undirected_tree.getNrOfDOFs());
     }
 
-    SetToZero(com_jacobian);
-    SetToZero(momentum_jacobian);
-    SetToZero(com_jac_buffer);
-    SetToZero(momentum_jac_buffer);
+    SetToZero(m_com_jacobian);
+    SetToZero(m_momentum_jacobian);
+    SetToZero(m_com_jac_buffer);
+    SetToZero(m_momentum_jac_buffer);
     jac.zero();
     momentum_jac.zero();
 
-    getCOMJacobianKDL(com_jacobian,momentum_jacobian);
+    getCOMJacobianKDL(m_com_jacobian,m_momentum_jacobian);
 
 
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_jacobian(jac.data(),jac.rows(),jac.cols());
 
-    mapped_jacobian = com_jacobian.data;
+    mapped_jacobian = m_com_jacobian.data;
 
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_momentum_jacobian(momentum_jac.data(),momentum_jac.rows(),momentum_jac.cols());
 
-    mapped_momentum_jacobian = momentum_jacobian.data;
+    mapped_momentum_jacobian = m_momentum_jacobian.data;
 
     return true;
 }
@@ -1251,22 +1269,22 @@ bool DynTree::getCOMJacobian(yarp::sig::Matrix & jac, yarp::sig::Matrix & moment
 
 bool DynTree::getCentroidalMomentumJacobian(yarp::sig::Matrix & momentum_jac)
 {
-    if( (int)momentum_jacobian.columns() != 6+getNrOfDOFs() ) { momentum_jacobian.resize(6+getNrOfDOFs()); }
-    if( (int)momentum_jac_buffer.columns() != 6+getNrOfDOFs() ) { momentum_jac_buffer.resize(6+getNrOfDOFs()); }
+    if( (int)m_momentum_jacobian.columns() != 6+getNrOfDOFs() ) { m_momentum_jacobian.resize(6+getNrOfDOFs()); }
+    if( (int)m_momentum_jac_buffer.columns() != 6+getNrOfDOFs() ) { m_momentum_jac_buffer.resize(6+getNrOfDOFs()); }
 
     if( momentum_jac.rows() != (int)(6) || momentum_jac.cols() != (int)(6+undirected_tree.getNrOfDOFs()) ) {
         momentum_jac.resize(6,6+undirected_tree.getNrOfDOFs());
     }
 
     momentum_jac.zero();
-    SetToZero(momentum_jacobian);
-    SetToZero(momentum_jac_buffer);
+    SetToZero(m_momentum_jacobian);
+    SetToZero(m_momentum_jac_buffer);
 
     computePositions();
 
     KDL::RigidBodyInertia base_total_inertia;
 
-    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,momentum_jacobian,com_jac_buffer,momentum_jac_buffer,base_total_inertia);
+    getMomentumJacobianLoop(undirected_tree,q,dynamic_traversal,X_dynamic_base,m_momentum_jacobian,m_com_jac_buffer,m_momentum_jac_buffer,base_total_inertia);
 
 
     //Fixed base mass matrix (the n x n bottom right submatrix) is ok in this way
@@ -1283,26 +1301,26 @@ bool DynTree::getCentroidalMomentumJacobian(yarp::sig::Matrix & momentum_jac)
     // doing some moltiplication by zero (inefficient? )
     //fb_jnt_mass_matrix.data.block<6,6>(0,0) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,6>(0,0);
     //fb_jnt_mass_matrix.data.block<6,6>(0,0) = fb_jnt_mass_matrix.data.block<6,6>(0,0)*world_base_rotation_adjoint_transformation.transpose();
-    Eigen::Matrix<double,6,6> buffer_mat_six_six =  world_base_rotation_adjoint_transformation* momentum_jacobian.data.block<6,6>(0,0);
-    momentum_jacobian.data.block<6,6>(0,0) = buffer_mat_six_six*(world_base_rotation_adjoint_transformation.transpose());
+    Eigen::Matrix<double,6,6> buffer_mat_six_six =  world_base_rotation_adjoint_transformation* m_momentum_jacobian.data.block<6,6>(0,0);
+    m_momentum_jacobian.data.block<6,6>(0,0) = buffer_mat_six_six*(world_base_rotation_adjoint_transformation.transpose());
 
     for(int dof=0; dof < undirected_tree.getNrOfDOFs(); dof++ ) {
         //fb_jnt_mass_matrix.data.block<6,1>(0,6+dof) = world_base_rotation_adjoint_transformation*fb_jnt_mass_matrix.data.block<6,1>(0,6+dof);
         //fb_jnt_mass_matrix.data.block<1,6>(6+dof,0) = fb_jnt_mass_matrix.data.block<6,1>(0,6+dof).transpose();
-        Eigen::Matrix<double,6,1> buffer_vec_six = world_base_rotation_adjoint_transformation*momentum_jacobian.data.block<6,1>(0,6+dof);
-        momentum_jacobian.data.block<6,1>(0,6+dof) = buffer_vec_six.transpose();
+        Eigen::Matrix<double,6,1> buffer_vec_six = world_base_rotation_adjoint_transformation*m_momentum_jacobian.data.block<6,1>(0,6+dof);
+        m_momentum_jacobian.data.block<6,1>(0,6+dof) = buffer_vec_six.transpose();
     }
 
 
-    total_inertia = (KDL::Frame(world_base_frame.M))*base_total_inertia;
+    m_total_inertia = (KDL::Frame(world_base_frame.M))*base_total_inertia;
 
-    momentum_jacobian.changeRefPoint(total_inertia.getCOG());
+    m_momentum_jacobian.changeRefPoint(m_total_inertia.getCOG());
 
     //std::cout << "Total inertia test " << total_inertia.RefPoint(total_inertia.getCOG()).getCOG() << std::endl;
 
     Eigen::Map< Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > mapped_momentum_jacobian(momentum_jac.data(),momentum_jac.rows(),momentum_jac.cols());
 
-    mapped_momentum_jacobian = momentum_jacobian.data;
+    mapped_momentum_jacobian = m_momentum_jacobian.data;
 
     return true;
 }

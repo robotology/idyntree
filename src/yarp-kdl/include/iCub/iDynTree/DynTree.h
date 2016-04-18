@@ -193,13 +193,13 @@ class DynTree  {
         KDL::Jacobian abs_jacobian; /**< dummy variable used by getJacobian */
 
         //COM related quantities
-        KDL::Jacobian com_jacobian;
-        KDL::CoDyCo::MomentumJacobian momentum_jacobian;
-        KDL::Jacobian com_jac_buffer;
-        KDL::CoDyCo::MomentumJacobian momentum_jac_buffer;
-        mutable std::vector<KDL::Vector> subtree_COM;
-        mutable std::vector<double> subtree_mass;
-        KDL::RigidBodyInertia total_inertia;
+        KDL::Jacobian m_com_jacobian;
+        KDL::CoDyCo::MomentumJacobian m_momentum_jacobian;
+        KDL::Jacobian m_com_jac_buffer;
+        KDL::CoDyCo::MomentumJacobian m_momentum_jac_buffer;
+        mutable std::vector<KDL::Vector> m_subtree_COM;
+        mutable std::vector<double> m_subtree_mass;
+        KDL::RigidBodyInertia m_total_inertia;
 
         //MassMatrix
         KDL::CoDyCo::FloatingJntSpaceInertiaMatrix fb_jnt_mass_matrix;
@@ -668,6 +668,20 @@ class DynTree  {
         virtual yarp::sig::Matrix getPosition(const int first_link, const int second_link) const;
 
         virtual KDL::Frame getPositionKDL(const int first_link, const int second_link) const;
+
+        /**
+         * Get the 4x4 rototranslation matrix between two link frames
+         * (in particular, of the second link frame expressed in the first link frame, \f$ {}^fH_s \f$))
+         * with an offset from the first link frame. This offset is *added* to the distance vector in
+         * \f$ {}^fH_s \f$.
+         *
+         *  @param first_link  index of the first link
+         *  @param second_link index of the second link
+         *  @param offset      Distance offset from first link frame.
+         *
+         *  @return 4x4 rototranslation KDL::Frame
+         */
+        virtual KDL::Frame getPositionKDL(const int first_link, const int second_link, KDL::Vector offset) const;
 
 
         /**

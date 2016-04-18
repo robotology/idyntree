@@ -34,7 +34,6 @@ namespace iDynTree
     {
     private:
         Transform m_worldBasePos;
-
         JointPosDoubleArray m_jointPos;
 
     public:
@@ -144,7 +143,8 @@ namespace iDynTree
 
     public:
         // Documentation inherited
-       FreeFloatingVel(const iDynTree::Model& model);
+        FreeFloatingVel();
+        FreeFloatingVel(const iDynTree::Model& model);
 
        /**
         * Resize the class to match the number of internal DOFs contained in a Model.

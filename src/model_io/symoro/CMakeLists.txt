@@ -2,9 +2,7 @@
 # Authors: Silvio Traversaro
 # CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
 
-project(iDynTree_ModelIO_iKin CXX)
-
-find_package(YARP REQUIRED)
+project(iDynTree_ModelIO_symoro CXX)
 
 # add external parser
 add_subdirectory(external/expression_parser)

@@ -141,7 +141,7 @@ void MatrixDynSize::reserve(const size_t _newCapacity)
 {
     assert(this->m_rows*this->m_cols <= this->m_capacity);
 
-    // If the capacity is already bigger then the requested
+    // If the capacity is already bigger than the requested
     // capacity, just return
     if( _newCapacity <= this->capacity() )
     {
