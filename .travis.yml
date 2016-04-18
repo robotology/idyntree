@@ -19,10 +19,10 @@ matrix:
       env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release", CMAKE_PREFIX_PATH="/home/travis/build/robotology/codyco-superbuild/build/install"
     - os: osx
       compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", CMAKE_PREFIX_PATH="/home/travis/build/robotology/codyco-superbuild/build/install"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", CMAKE_PREFIX_PATH="/Users/travis/build/robotology/codyco-superbuild/build/install"
     - os: osx
       compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", CMAKE_PREFIX_PATH="/home/travis/build/robotology/codyco-superbuild/build/install"
+      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", CMAKE_PREFIX_PATH="/Users/travis/build/robotology/codyco-superbuild/build/install"
 
 before_script:
   # workaround around opencv linking problem in clang:
