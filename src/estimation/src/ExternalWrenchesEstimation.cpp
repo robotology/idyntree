@@ -307,6 +307,9 @@ Wrench computeKnownTermsOfEstimationEquationWithoutInternalFT(const Model& model
              return bufs.b_contacts_subtree(visitedLinkIndex);
          }
      }
+
+     assert(false);
+     return Wrench::Zero();
 }
 
 Wrench computeKnownTermsOfEstimationEquationWithInternalFT(const Model& model,
@@ -361,6 +364,9 @@ Wrench computeKnownTermsOfEstimationEquationWithInternalFT(const Model& model,
              return bufs.b_contacts_subtree(visitedLinkIndex);
          }
      }
+
+     assert(false);
+     return Wrench::Zero();
 }
 
 size_t countUnknowns(const Traversal& traversal, const LinkUnknownWrenchContacts& unknownWrenches)
@@ -576,6 +582,8 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
    // Note that the logic of conversion between input/output contacts should be
    // the same used before in computeMatrixOfEstimationEquation
    storeResultsOfEstimation(traversal,unknownWrenches,subModelIndex,bufs,outputContactWrenches);
+
+   return true;
 }
 
 
