@@ -18,7 +18,7 @@ if(IDYNTREE_USES_ICUB_MAIN)
     idyntree_add_tool_yarp_kdl(par2urdf par2urdf.cpp)
 endif()
 
-if(IDYNTREE_USES_ICUB_MAIN)
+if(IDYNTREE_USES_ICUB_MAIN AND IDYNTREE_USES_KDL)
   find_package(YARP)
   find_package(ICUB)
   add_definitions(-D_USE_MATH_DEFINES)

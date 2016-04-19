@@ -26,32 +26,35 @@ classdef Traversal < SwigRef
     function varargout = getLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(810, self, varargin{:});
     end
-    function varargout = getParentLink(self,varargin)
+    function varargout = getBaseLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(811, self, varargin{:});
     end
-    function varargout = getParentJoint(self,varargin)
+    function varargout = getParentLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(812, self, varargin{:});
     end
-    function varargout = getParentLinkFromLinkIndex(self,varargin)
+    function varargout = getParentJoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(813, self, varargin{:});
     end
-    function varargout = getParentJointFromLinkIndex(self,varargin)
+    function varargout = getParentLinkFromLinkIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(814, self, varargin{:});
     end
-    function varargout = reset(self,varargin)
+    function varargout = getParentJointFromLinkIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(815, self, varargin{:});
     end
-    function varargout = addTraversalBase(self,varargin)
+    function varargout = reset(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(816, self, varargin{:});
     end
-    function varargout = addTraversalElement(self,varargin)
+    function varargout = addTraversalBase(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(817, self, varargin{:});
     end
-    function varargout = isParentOf(self,varargin)
+    function varargout = addTraversalElement(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(818, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = isParentOf(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(819, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(820, self, varargin{:});
     end
   end
   methods(Static)

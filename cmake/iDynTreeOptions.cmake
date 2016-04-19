@@ -1,6 +1,3 @@
-
-
-
 #########################################################################
 # Control whether libraries are shared or static.
 if( MSVC )
@@ -56,10 +53,11 @@ option(IDYNTREE_ENABLE_SYMORO_PAR "Enable support for SyMoRo par format" TRUE)
 option(IDYNTREE_USES_KDL "Compile iDynTree with KDL dependency" TRUE)
 option(IDYNTREE_USES_YARP "Compile iDynTree with YARP dependency" TRUE)
 option(IDYNTREE_USES_ICUB_MAIN  "Compiled iDynTree with icub-main dependencies (for iKin and skinDynLib helper functions and tools)" TRUE)
+
 if( MSVC )
-option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" TRUE)
+    option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" TRUE)
 else()
-option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" FALSE)
+    option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" FALSE)
 endif()
 
 if(IDYNTREE_USES_INTERNAL_URDFDOM)
@@ -71,7 +69,6 @@ endif()
 # Enable/disable warnings
 option(IDYNTREE_ENABLE_WARNINGS "Enable compilation warnings when compiling iDynTree." FALSE)
 option(IDYNTREE_ENABLE_DOCUMENTATION_WARNINGS "Enable documentation warnings when compiling iDynTree." FALSE)
-
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
