@@ -52,7 +52,6 @@ before_script:
 script:
   - cmake --build . --config ${TRAVIS_BUILD_TYPE}
   - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
-  - sudo ldconfig
   - ctest --output-on-failure 
   # test examples 
   - cd ../examples
