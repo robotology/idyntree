@@ -20,8 +20,7 @@ namespace iDynTree
 
 }
 
-%pythoncode {
-
+%pythoncode %{
 #these need to be called after iDynTree module has been loaded
 def init_helpers():
     def vd_fromPyList(list):
@@ -53,4 +52,4 @@ def init_numpy_helpers():
         return np.fromstring(self.toString(), sep=' ').reshape(self.rows(), self.cols())
     MatrixDynSize.toNumPy = matToNumPy
     Rotation.toNumPy = matToNumPy
-}
+%}
