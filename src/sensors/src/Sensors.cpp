@@ -189,6 +189,8 @@ bool SensorsList::setSerialization(const SensorType& sensor_type,
     }
 
     this->pimpl->VecSensors[sensor_type] = newVecSensors;
+    
+    return true;
 }
 
 unsigned int SensorsList::getNrOfSensors(const SensorType & sensor_type) const
@@ -374,7 +376,7 @@ bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
     }
 
 
-    return(ok);
+    return ok;
 }
 
 
