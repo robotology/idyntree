@@ -540,8 +540,8 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
                                                const JointPosDoubleArray& jointPos,
                                                const LinkVelArray& linkVel,
                                                const LinkAccArray& linkProperAcc,
-                                               estimateExternalWrenchesBuffers& bufs,
-                                               LinkContactWrenches& outputContactWrenches)
+                                                     estimateExternalWrenchesBuffers& bufs,
+                                                     LinkContactWrenches& outputContactWrenches)
 {
     /**< value extracted from old iDynContact */
     double tol = 1e-7;
@@ -550,7 +550,7 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
     if( bufs.getNrOfLinks() != model.getNrOfLinks() ||
         bufs.getNrOfSubModels() != 1 )
     {
-        std::cerr << "[ERROR] estimateExternalWrenchesWithoutInternalFT : input buffer has wrong size." << std::endl;
+        reportError("","estimateExternalWrenchesWithoutInternalFT","input buffer has wrong size.");
         return false;
     }
 

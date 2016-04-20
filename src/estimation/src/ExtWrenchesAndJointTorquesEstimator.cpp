@@ -288,14 +288,14 @@ bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(c
     if( !m_isModelValid )
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
-                    "Model and sensors information not setted.");
+                    "Model and sensors information not set.");
         return false;
     }
 
     if( !m_isKinematicsUpdated )
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
-                    "Kinematic information not setted.");
+                    "Kinematic information not set.");
         return false;
     }
 
@@ -306,10 +306,24 @@ bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(c
                                                         m_jointPos,m_linkVels,m_linkProperAccs,
                                                         m_calibBufs,estimatedContactWrenches);
 
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in estimating the external contact wrenches without using the internal FT sensors.");
+        return false;
+    }
+
     /**
      * Compute net external wrenches
      */
     ok = ok && estimatedContactWrenches.computeNetWrenches(m_linkNetExternalWrenches);
+
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in computing the net external wrenches from the estimated contact forces");
+        return false;
+    }
 
     /**
      * Compute joint torques
@@ -317,23 +331,25 @@ bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(c
     ok = ok && RNEADynamicPhase(m_model,m_dynamicTraversal,m_jointPos,m_linkVels,m_linkProperAccs,
                                 m_linkNetExternalWrenches,m_linkIntWrenches,m_generalizedTorques);
 
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in computing the dynamic phase of the RNEA.");
+        return false;
+    }
+
     /**
      * Simulate FT sensor measurements
      */
     predictSensorsMeasurementsFromRawBuffers(m_model,m_sensors,m_dynamicTraversal,
                                              m_linkVels,m_linkProperAccs,m_linkIntWrenches,predictedMeasures);
 
+
     /**
      * Copy the joint torques computed by the RNEA to the output
      */
     estimatedJointTorques = m_generalizedTorques.jointTorques();
 
-    if( !ok )
-    {
-        reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
-                    "Error in estimating external wrenches and joint torques.");
-        return false;
-    }
 
     return ok;
 }
@@ -346,14 +362,14 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
     if( !m_isModelValid )
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
-                    "Model and sensors information not setted.");
+                    "Model and sensors information not set.");
         return false;
     }
 
     if( !m_isKinematicsUpdated )
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
-                    "Kinematic information not setted.");
+                    "Kinematic information not set.");
         return false;
     }
 
@@ -364,10 +380,24 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
                                        unknowns,m_jointPos,m_linkVels,m_linkProperAccs,
                                        ftSensorsMeasures,m_bufs,estimateContactWrenches);
 
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in estimating the external contact wrenches");
+        return false;
+    }
+
     /**
      * Compute net external wrenches
      */
     ok = ok && estimateContactWrenches.computeNetWrenches(m_linkNetExternalWrenches);
+
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in computing the net external wrenches from the estimated contact forces");
+        return false;
+    }
 
     /**
      * Compute joint torques
@@ -375,17 +405,17 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
     ok = ok && RNEADynamicPhase(m_model,m_dynamicTraversal,m_jointPos,m_linkVels,m_linkProperAccs,
                                 m_linkNetExternalWrenches,m_linkIntWrenches,m_generalizedTorques);
 
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in computing the dynamic phase of the RNEA.");
+        return false;
+    }
+
     /**
      * Copy the joint torques computed by the RNEA to the output
      */
     jointTorques = m_generalizedTorques.jointTorques();
-
-    if( !ok )
-    {
-        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
-                    "Error in estimating external wrenches and joint torques.");
-        return false;
-    }
 
     return ok;
 }
