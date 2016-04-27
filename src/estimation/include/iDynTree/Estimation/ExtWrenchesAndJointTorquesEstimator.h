@@ -141,6 +141,13 @@ public:
      * @return the sensor model used for estimation.
      */
     const SensorsList & sensors() const;
+    
+    /**
+     * Get the used submodel decomposition.
+     *
+     * @return the used submodel decomposition.
+     */
+    const SubModelDecomposition & submodels() const;
 
     /**
      * Set the kinematic information necessary for the force estimation using the

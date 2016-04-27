@@ -181,6 +181,12 @@ const SensorsList& ExtWrenchesAndJointTorquesEstimator::sensors() const
     return m_sensors;
 }
 
+const SubModelDecomposition& ExtWrenchesAndJointTorquesEstimator::submodels() const
+{
+    return m_submodels;
+}
+
+
 bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFixedBase(const JointPosDoubleArray& jointPos,
                                                                         const JointDOFsDoubleArray& jointVel,
                                                                         const JointDOFsDoubleArray& jointAcc,

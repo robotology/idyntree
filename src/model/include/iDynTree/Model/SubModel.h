@@ -111,6 +111,12 @@ namespace iDynTree
          * Get the subModel to which a given links belongs.
          */
         size_t getSubModelOfLink(const LinkIndex & link) const;
+
+        /**
+         * Get the subModel to which a given frame belongs.
+         */
+        size_t getSubModelOfFrame(const Model & model, const FrameIndex& frame) const;
+
     };
 
     /**

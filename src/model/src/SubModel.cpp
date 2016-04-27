@@ -94,6 +94,24 @@ size_t SubModelDecomposition::getSubModelOfLink(const LinkIndex& link) const
     return ret;
 }
 
+size_t SubModelDecomposition::getSubModelOfFrame(const Model & model, const FrameIndex& frame) const
+{
+    size_t ret = 0;
+    LinkIndex linkOfFrame = model.getFrameLink(frame);
+
+    if( linkOfFrame != LINK_INVALID_INDEX )
+    {
+        ret = this->getSubModelOfLink(linkOfFrame);
+    }
+    else
+    {
+        std::cerr << "SubModelDecomposition error: requested frame index " << frame
+                  << "outside bounds " << std::endl;
+    }
+
+    return ret;
+}
+
 
 bool SubModelDecomposition::splitModelAlongJoints(const Model& model,
                                                   const Traversal& fullModelTraversal,
