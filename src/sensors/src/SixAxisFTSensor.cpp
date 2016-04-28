@@ -145,6 +145,44 @@ Sensor* SixAxisForceTorqueSensor::clone() const
     return (Sensor *)new SixAxisForceTorqueSensor(*this);
 }
 
+bool SixAxisForceTorqueSensor::updateIndeces(const Model& model)
+{
+    if( !( (this->pimpl->appliedWrenchLink == this->pimpl->link1) ||
+           (this->pimpl->appliedWrenchLink == this->pimpl->link2) ) )
+    {
+        return false;
+    }
+
+    std::string appliedWrenchLinkName;
+    if( this->pimpl->appliedWrenchLink == this->pimpl->link1 )
+    {
+        appliedWrenchLinkName = this->pimpl->link1Name;
+    }
+
+    if( this->pimpl->appliedWrenchLink == this->pimpl->link2 )
+    {
+        appliedWrenchLinkName = this->pimpl->link2Name;
+    }
+
+    iDynTree::LinkIndex link1NewIndex = model.getLinkIndex(this->pimpl->link1Name);
+    iDynTree::LinkIndex link2NewIndex = model.getLinkIndex(this->pimpl->link2Name);
+    iDynTree::LinkIndex appliedWrenchLinkNewIndex = model.getLinkIndex(appliedWrenchLinkName);
+
+    if( (link1NewIndex == iDynTree::LINK_INVALID_INDEX) ||
+        (link2NewIndex == iDynTree::LINK_INVALID_INDEX) ||
+        (appliedWrenchLinkNewIndex == iDynTree::LINK_INVALID_INDEX) )
+    {
+        return false;
+    }
+
+    this->pimpl->link1 = link1NewIndex;
+    this->pimpl->link2 = link2NewIndex;
+    this->pimpl->appliedWrenchLink = appliedWrenchLinkNewIndex;
+
+    return true;
+}
+
+
 
 std::string SixAxisForceTorqueSensor::getName() const
 {

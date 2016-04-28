@@ -77,6 +77,19 @@ enum UnknownWrenchContactType
 struct UnknownWrenchContact
 {
     /**
+     * Constructor
+     */
+    UnknownWrenchContact()
+    {}
+
+    UnknownWrenchContact(const UnknownWrenchContactType _unknownType,
+                         const Position & _contactPoint,
+                         const Direction & _forceDirection = iDynTree::Direction::Default()): unknownType(_unknownType),
+                                                                                              contactPoint(_contactPoint),
+                                                                                              forceDirection(_forceDirection)
+    {}
+
+    /**
      * Type of the unknown contact.
      */
     UnknownWrenchContactType unknownType;

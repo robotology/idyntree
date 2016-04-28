@@ -443,16 +443,16 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
 
     KDL::Frame root_link_H_l_foot_dh_frame, root_link_H_l_foot,l_foot_dh_frame_H_l_foot;
     int ret = pos_solv.JntToCart(pos,root_link_H_l_foot_dh_frame,"l_foot_dh_frame");
-    YARP_ASSERT(ret == 0);
+    yAssert(ret == 0);
     ret = pos_solv.JntToCart(pos,root_link_H_l_foot,"l_foot");
-    YARP_ASSERT(ret == 0);
+    yAssert(ret == 0);
     l_foot_dh_frame_H_l_foot = root_link_H_l_foot_dh_frame.Inverse()*root_link_H_l_foot;
 
     KDL::Frame root_link_H_r_foot_dh_frame, root_link_H_r_foot,r_foot_dh_frame_H_r_foot;
     ret = pos_solv.JntToCart(pos,root_link_H_r_foot_dh_frame,"r_foot_dh_frame");
-    YARP_ASSERT(ret == 0);
+    yAssert(ret == 0);
     ret = pos_solv.JntToCart(pos,root_link_H_r_foot,"r_foot");
-    YARP_ASSERT(ret == 0);
+    yAssert(ret == 0);
     r_foot_dh_frame_H_r_foot = root_link_H_r_foot_dh_frame.Inverse()*root_link_H_r_foot;
 
 
@@ -488,13 +488,13 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
     // Export chest_skin_frame, see https://github.com/robotology/icub-main/issues/124 for more info
     KDL::Frame root_link_H_chest;
     int retChest = pos_solv.JntToCart(pos,root_link_H_chest,"chest");
-    YARP_ASSERT(retChest == 0);
+    yAssert(retChest == 0);
     KDL::Frame root_link_H_chest_skin_frame;
     iCub::iKin::iCubTorso chest_skin_frame_chest;
     yarp::sig::Vector qTorso(chest_skin_frame_chest.getN());
     qTorso.zero();
     chest_skin_frame_chest.setAng(qTorso);
-    YARP_ASSERT(YarptoKDL(chest_skin_frame_chest.getH(),root_link_H_chest_skin_frame));
+    yAssert(YarptoKDL(chest_skin_frame_chest.getH(),root_link_H_chest_skin_frame));
 
     std::cout << "root_link_H_chest_skin_frame is " << root_link_H_chest_skin_frame << std::endl;
 

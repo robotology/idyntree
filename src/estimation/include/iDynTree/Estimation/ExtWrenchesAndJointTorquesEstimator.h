@@ -129,6 +129,24 @@ public:
     bool loadModelAndSensorsFromFile(const std::string filename, const std::string filetype="");
 
     /**
+     * Load model and sensors from file, specifieng the dof considered for the estimation.
+     *
+     * @param[in] filename path to the file to load.
+     * @param[in] consideredDOFs list of dof to consider in the model.
+     * @param[in] filetype (optional) explicit definiton of the filetype to load.
+     *                     Only "urdf" is supported at the moment.
+     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     *
+     *
+     * \note this will create e a reduced model only with the joint specified in consideredDOFs and  the
+     *       fixed joints in which FT sensor are mounted.
+     */
+    bool loadModelAndSensorsFromFileWithSpecifiedDOFs(const std::string filename,
+                                                      const std::vector<std::string> & consideredDOFs,
+                                                      const std::string filetype="");
+
+
+    /**
      * Get used model.
      *
      * @return the kinematic and dynamic model used for estimation.

@@ -202,12 +202,12 @@ void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
     //Setting a custom dof serialization (\todo TODO FIXME : quite an hack, substitute with proper)
     if( dof_serialization.size() != 0 )
     {
-        YARP_ASSERT(dof_serialization.size() == serial.getNrOfDOFs());
+        yAssert(dof_serialization.size() == serial.getNrOfDOFs());
         for(std::size_t dof=0; dof < dof_serialization.size(); dof++)
         {
             std::string dof_string = dof_serialization[dof];
-            YARP_ASSERT(serial.getDOFID(dof_string) != -1);
-            YARP_ASSERT(serial.getJunctionID(dof_string) != -1);
+            yAssert(serial.getDOFID(dof_string) != -1);
+            yAssert(serial.getJunctionID(dof_string) != -1);
         }
 
         for(std::size_t dof=0; dof < dof_serialization.size(); dof++)

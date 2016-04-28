@@ -123,6 +123,11 @@ namespace iDynTree {
          */
         Sensor * clone() const;
 
+        /*
+         * Documented in Sensor
+         */
+        bool updateIndeces(const Model & model);
+
         /**
          * Get the transform from the sensor to the specified link.
          *

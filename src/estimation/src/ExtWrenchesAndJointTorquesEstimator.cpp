@@ -32,6 +32,8 @@
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/ContactWrench.h>
 #include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/Model/ModelTransformers.h>
+#include <iDynTree/Sensors/ModelSensorsTransformers.h>
 
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/SixAxisFTSensor.h>
@@ -168,6 +170,53 @@ bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFile(const std:
     }
 
     return setModelAndSensors(_model,_sensors);
+}
+
+bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifiedDOFs(const std::string filename,
+                                                                                       const std::vector< std::string >& consideredDOFs,
+                                                                                       const std::string filetype)
+{
+    Model _modelFull;
+    SensorsList _sensorsFull;
+
+    bool parsingCorrect = false;
+
+    parsingCorrect = modelFromURDF(filename,_modelFull);
+
+    if( !parsingCorrect )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFileWithSpecifiedDOFs","Error in parsing model from URDF.");
+        return false;
+    }
+
+    parsingCorrect = sensorsFromURDF(filename,_modelFull,_sensorsFull);
+
+    if( !parsingCorrect )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFileWithSpecifiedDOFs","Error in parsing sensors from URDF.");
+        return false;
+    }
+
+    // We need to create a reduced model, inclusing only the consideredDOFs and the fixed joints used by the FT sensors
+    std::vector< std::string > consideredJoints = consideredDOFs;
+
+    // Add FT fixed joints
+    std::vector< std::string > ftJointNames;
+    getFTJointNames(_sensorsFull,ftJointNames);
+
+    for(size_t i=0; i < ftJointNames.size(); i++)
+    {
+        consideredJoints.push_back(ftJointNames[i]);
+    }
+
+
+    Model _modelReduced;
+    SensorsList _sensorsReduced;
+
+    //
+    iDynTree::createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
+
+    return setModelAndSensors(_modelReduced,_sensorsReduced);
 }
 
 
