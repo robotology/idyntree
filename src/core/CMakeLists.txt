@@ -98,6 +98,10 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_EXP_HEADERS})
 
+if(MSVC)
+   add_definitions(-D_USE_MATH_DEFINES)
+endif()
+
 install(TARGETS ${libraryname}
         EXPORT iDynTree
         COMPONENT runtime
