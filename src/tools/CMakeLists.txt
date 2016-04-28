@@ -14,7 +14,7 @@ endmacro(IDYNTREE_ADD_TOOL tool_name tool_code)
 
 idyntree_add_tool(idyntree-model-info idyntree-model-info.cpp)
 
-if(IDYNTREE_USES_ICUB_MAIN)
+if(IDYNTREE_USES_ICUB_MAIN AND IDYNTREE_USES_KDL)
     idyntree_add_tool_yarp_kdl(par2urdf par2urdf.cpp)
 endif()
 
