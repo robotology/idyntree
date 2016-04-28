@@ -153,15 +153,20 @@ namespace iDynTree {
         // Documented in JointSensor
         JointIndex getParentJointIndex() const;
 
-        /**
+        /*
          * Documented in Sensor
          */
         bool isValid() const;
 
-        /**
+        /*
          * Documented in Sensor
          */
         Sensor * clone() const;
+
+        /*
+         * Documented in Sensor
+         */
+        bool updateIndeces(const Model & model);
 
         /**
          * The Six Axis Force Torque sensor measure the Force Torque (wrench)

@@ -116,6 +116,21 @@ Sensor* GyroscopeSensor::clone() const
     return (Sensor *)new GyroscopeSensor(*this);
 }
 
+bool GyroscopeSensor::updateIndeces(const Model& model)
+{
+    iDynTree::LinkIndex linkNewIndex = model.getLinkIndex(this->pimpl->parent_link_name);
+
+    if( (linkNewIndex == iDynTree::LINK_INVALID_INDEX) )
+    {
+        return false;
+    }
+
+    this->pimpl->parent_link_name = linkNewIndex;
+
+    return true;
+}
+
+
 
 std::string GyroscopeSensor::getName() const
 {

@@ -14,13 +14,15 @@ set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/Sensors.h
                              include/iDynTree/Sensors/SixAxisFTSensor.h
                              include/iDynTree/Sensors/GyroscopeSensor.h
                              include/iDynTree/Sensors/AccelerometerSensor.h
-                             include/iDynTree/Sensors/PredictSensorsMeasurements.h)
+                             include/iDynTree/Sensors/PredictSensorsMeasurements.h
+                             include/iDynTree/Sensors/ModelSensorsTransformers.h)
 
 set(IDYNTREE_SENSORS_SOURCES src/Sensors.cpp
                              src/SixAxisFTSensor.cpp
                              src/AccelerometerSensor.cpp
                              src/GyroscopeSensor.cpp
-                             src/PredictSensorsMeasurements.cpp)
+                             src/PredictSensorsMeasurements.cpp
+                             src/ModelSensorsTransformers.cpp)
 
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_SENSORS_SOURCES})
