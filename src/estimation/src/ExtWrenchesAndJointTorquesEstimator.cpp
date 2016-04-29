@@ -72,7 +72,7 @@ ExtWrenchesAndJointTorquesEstimator::~ExtWrenchesAndJointTorquesEstimator()
 
 
 void getFTJointNames(const SensorsList & _sensors,
-                     std::vector<std::string> ftJointNames)
+                     std::vector<std::string>& ftJointNames)
 {
     ftJointNames.resize(0);
 
@@ -215,6 +215,7 @@ bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifi
 
     //
     iDynTree::createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
+   
 
     return setModelAndSensors(_modelReduced,_sensorsReduced);
 }

@@ -22,15 +22,15 @@ namespace iDynTree
 {
 
 bool createReducedModelAndSensors(const Model& fullModel,
-                        const SensorsList& fullSensors,
-                        const std::vector<std::string>& jointsInReducedModel,
-                              Model& reducedModel,
-                              SensorsList& reducedSensors)
+                                  const SensorsList& fullSensors,
+                                  const std::vector<std::string>& jointsInReducedModel,
+                                        Model& reducedModel,
+                                        SensorsList& reducedSensors)
 {
     bool ok = createReducedModel(fullModel,jointsInReducedModel,reducedModel);
 
     // make sure that reducedSensors is empty
-    assert(fullSensors.getNrOfSensors(SIX_AXIS_FORCE_TORQUE) == 0);
+    assert(reducedSensors.getNrOfSensors(SIX_AXIS_FORCE_TORQUE) == 0);
 
     if( !ok ) return false;
 
@@ -74,6 +74,8 @@ bool createReducedModelAndSensors(const Model& fullModel,
             delete sensorCopy;
         }
     }
+
+    return ok;
 }
 
 

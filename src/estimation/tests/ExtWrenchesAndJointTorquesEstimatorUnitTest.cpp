@@ -9,6 +9,8 @@
 
 #include "testModels.h"
 
+#include <iDynTree/Core/TestUtils.h>
+
 
 using namespace iDynTree;
 
@@ -17,7 +19,37 @@ int main()
 
     std::cerr << "Test ft offset estimation on the iCubGenova02 model: " << std::endl;
     ExtWrenchesAndJointTorquesEstimator estimator;
-    estimator.loadModelAndSensorsFromFile(getAbsModelPath("iCubGenova02.urdf"));
+    std::vector<std::string> consideredJoints;
+    consideredJoints.push_back("torso_pitch");
+    consideredJoints.push_back("torso_roll");
+    consideredJoints.push_back("torso_yaw");
+    consideredJoints.push_back("neck_pitch");
+    consideredJoints.push_back("neck_roll");
+    consideredJoints.push_back("neck_yaw");
+    consideredJoints.push_back("l_shoulder_pitch");
+    consideredJoints.push_back("l_shoulder_roll");
+    consideredJoints.push_back("l_shoulder_yaw");
+    consideredJoints.push_back("l_elbow");
+    consideredJoints.push_back("r_shoulder_pitch");
+    consideredJoints.push_back("r_shoulder_roll");
+    consideredJoints.push_back("r_shoulder_yaw");
+    consideredJoints.push_back("r_elbow");
+    consideredJoints.push_back("l_hip_pitch");
+    consideredJoints.push_back("l_hip_roll");
+    consideredJoints.push_back("l_hip_yaw");
+    consideredJoints.push_back("l_knee");
+    consideredJoints.push_back("l_ankle_pitch");
+    consideredJoints.push_back("l_ankle_roll");
+    consideredJoints.push_back("r_hip_pitch");
+    consideredJoints.push_back("r_hip_roll");
+    consideredJoints.push_back("r_hip_yaw");
+    consideredJoints.push_back("r_knee");
+    consideredJoints.push_back("r_ankle_pitch");
+    consideredJoints.push_back("r_ankle_roll");
+    
+    estimator.loadModelAndSensorsFromFileWithSpecifiedDOFs(getAbsModelPath("iCubGenova02.urdf"),consideredJoints);
+    
+    ASSERT_EQUAL_DOUBLE(estimator.sensors().getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),6);
 
     JointPosDoubleArray qj(estimator.model());
     JointDOFsDoubleArray dqj(estimator.model()), ddqj(estimator.model());
