@@ -502,6 +502,9 @@ void storeResultsOfEstimation(const Traversal& traversal,
             Wrench & estimatedWrench = outputContactWrenches.contactWrench(visitedLinkIndex,contact).contactWrench();
             outputContactWrenches.contactWrench(visitedLinkIndex,contact).contactPoint() = unknownWrench.contactPoint;
 
+            // Preserve the contact ID number
+            outputContactWrenches.contactWrench(visitedLinkIndex,contact).contactId() = unknownWrench.contactId;
+
             switch( unknownWrench.unknownType )
             {
                 case FULL_WRENCH:

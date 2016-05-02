@@ -33,6 +33,18 @@ const Wrench& ContactWrench::contactWrench() const
     return m_contactWrench;
 }
 
+long unsigned int& ContactWrench::contactId()
+{
+    return m_contactId;
+}
+
+
+const long unsigned int& ContactWrench::contactId() const
+{
+    return m_contactId;
+}
+
+
 LinkContactWrenches::LinkContactWrenches(unsigned int nrOfLinks)
 {
     this->resize(nrOfLinks);
