@@ -60,6 +60,14 @@ namespace iDynTree
                        const Transform& link1_X_link2, const Axis& _rotation_axis_wrt_link1);
 
         /**
+         * Constructor in which the LinkIndex to which the joint is attached are not specified.
+         * This constructor is tipically used together with the Model::addJoint or
+         * Model::addJointAndLink methods, in which the links to which the joint is attached are
+         * specified by the other arguments of the method.
+         */
+        RevoluteJoint(const Transform& link1_X_link2, const Axis& _rotation_axis_wrt_link1);
+
+        /**
          * Copy constructor
          */
         RevoluteJoint(const RevoluteJoint& other);

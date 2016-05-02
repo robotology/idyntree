@@ -22,7 +22,7 @@ if(IDYNTREE_USES_ICUB_MAIN)
     find_package(ICUB REQUIRED)
     include_directories(SYSTEM ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
     add_executable(check_iKin_export_random_chain check_iKin_export_random_chain.cpp)
-    target_link_libraries(check_iKin_export_random_chain idyntree-core idyntree-modelio-urdf-kdl idyntree-modelio-ikin ${YARP_LIBRARIES} iKin)
+    target_link_libraries(check_iKin_export_random_chain idyntree-core idyntree-modelio-urdf-kdl idyntree-modelio-ikin-kdl ${YARP_LIBRARIES} iKin)
     add_test(NAME test_check_iKin_export_random_chain COMMAND check_iKin_export_random_chain)
 
 endif()

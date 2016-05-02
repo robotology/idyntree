@@ -161,10 +161,11 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
 
 /**
  * Get random joint position consistently with the limits of the model.
+ * If the input vector has the wrong size, it will be resized.
  */
 inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
 {
-    assert(vec.size() == model.getNrOfPosCoords());
+    vec.resize(model.getNrOfPosCoords());
     for(JointIndex jntIdx=0; jntIdx < model.getNrOfJoints(); jntIdx++)
     {
         IJointConstPtr jntPtr = model.getJoint(jntIdx);
