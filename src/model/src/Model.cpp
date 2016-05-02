@@ -280,6 +280,38 @@ bool Model::isJointNameUsed(const std::string jointName) const
     return false;
 }
 
+JointIndex Model::addJoint(const std::string & link1, const std::string & link2,
+                            const std::string & jointName, IJointConstPtr joint)
+{
+    IJointPtr jointCopy = joint->clone();
+
+    LinkIndex link1Index = this->getLinkIndex(link1);
+    LinkIndex link2Index = this->getLinkIndex(link2);
+
+    if( link1Index == LINK_INVALID_INDEX )
+    {
+        std::string error = "a link of name " + link1 + " is not present in the model";
+        reportError("Model","addJoint",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+
+    if( link2Index == LINK_INVALID_INDEX )
+    {
+        std::string error = "a link of name " + link2 + " is not present in the model";
+        reportError("Model","addJoint",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+
+    jointCopy->setAttachedLinks(link1Index,link2Index);
+
+    JointIndex jntIdx = addJoint(jointName,jointCopy);
+
+    delete jointCopy;
+
+    return jntIdx;
+}
+
+
 JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
 {
     assert(joint->getFirstAttachedLink() != joint->getSecondAttachedLink());
@@ -338,6 +370,33 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
 
     return thisJointIndex;
 }
+
+JointIndex Model::addJointAndLink(const std::string& existingLink,
+                                  const std::string& jointName, IJointConstPtr joint,
+                                  const std::string& newLinkName, Link& newLink)
+{
+    if( !(this->isLinkNameUsed(existingLink)) )
+    {
+        std::string error = "a link of name " + existingLink + " is not present in the model";
+        reportError("Model","addJointAndLink",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+
+    LinkIndex newAddedLink = this->addLink(newLinkName,newLink);
+
+    if( newAddedLink == LINK_INVALID_INDEX )
+    {
+        std::string error = "Error adding link of name " + newLinkName;
+        reportError("Model","addJointAndLink",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+
+    return this->addJoint(existingLink,newLinkName,
+                          jointName,joint);
+}
+
+
+
 
 size_t Model::getNrOfPosCoords() const
 {

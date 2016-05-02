@@ -25,6 +25,13 @@ FixedJoint::FixedJoint(const LinkIndex _link1, const LinkIndex _link2,
 {
 }
 
+FixedJoint::FixedJoint(const Transform& _link1_X_link2):
+                       link1(LINK_INVALID_INDEX), link2(LINK_INVALID_INDEX),
+                       link1_X_link2(_link1_X_link2),
+                       link2_X_link1(_link1_X_link2.inverse())
+{
+}
+
 FixedJoint::FixedJoint(const FixedJoint& other):
                        link1(other.link1), link2(other.link2),
                        link1_X_link2(other.link1_X_link2),

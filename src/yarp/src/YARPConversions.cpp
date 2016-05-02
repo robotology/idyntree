@@ -8,6 +8,7 @@
 #include <iDynTree/yarp/YARPConversions.h>
 
 #include <iDynTree/Core/Direction.h>
+#include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/VectorDynSize.h>
 
 #include <yarp/math/Math.h>
@@ -107,8 +108,50 @@ bool toiDynTree(const yarp::sig::Vector& yarpVector, VectorDynSize& iDynTreeVect
     iDynTreeVector.resize(yarpVector.size());
     memcpy(iDynTreeVector.data(),yarpVector.data(),yarpVector.size()*sizeof(double));
     return true;
-
 }
+
+bool toiDynTree(const yarp::sig::Matrix& yarpHomogeneousMatrix,
+                iDynTree::Transform& iDynTreeTransform)
+{
+    if( yarpHomogeneousMatrix.rows() != 4 ||
+        yarpHomogeneousMatrix.cols() != 4 )
+    {
+        reportError("","toiDynTree","Input yarp homegeneous matrix is not 4x4");
+        return false;
+    }
+
+    Rotation rot;
+    for(int r=0; r<3; r++)
+    {
+        for( int c=0; c<3; c++)
+        {
+            rot(r,c) = yarpHomogeneousMatrix(r,c);
+        }
+    }
+
+    Position pos;
+    for(int i=0; i<3; i++)
+    {
+        pos(i) = yarpHomogeneousMatrix(i,3);
+    }
+
+    iDynTreeTransform.setPosition(pos);
+    iDynTreeTransform.setRotation(rot);
+
+    return true;
+}
+
+bool toYarp(const iDynTree::Transform& iDynTreeTransform,
+            yarp::sig::Matrix& yarpHomogeneousMatrix)
+{
+    iDynTree::Matrix4x4 homTrans = iDynTreeTransform.asHomogeneousTransform();
+
+    toYarp(homTrans,yarpHomogeneousMatrix);
+
+    return true;
+}
+
+
 
 
 

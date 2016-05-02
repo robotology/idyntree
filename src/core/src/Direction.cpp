@@ -8,6 +8,7 @@
 #include <iDynTree/Core/Direction.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
+
 #include <Eigen/Dense>
 
 #include <cstdio>
@@ -105,7 +106,6 @@ namespace iDynTree
                          -this->m_data[1],
                          -this->m_data[2]);
     }
-
 
     std::string Direction::toString() const
     {

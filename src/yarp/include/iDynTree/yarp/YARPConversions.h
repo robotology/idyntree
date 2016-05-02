@@ -18,6 +18,7 @@ namespace iDynTree
 
 class Direction;
 class VectorDynSize;
+class Transform;
 
 /**
  * Convert a yarp::sig::Vector to a iDynTree::Wrench
@@ -76,6 +77,22 @@ bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Direction & iDyn
  * @return true if conversion was sucessful, false otherwise
  */
 bool toYarp(const iDynTree::Vector3 & iDynTreeDirection, yarp::sig::Vector & yarpVector);
+
+/**
+ * Convert a 4x4 yarp::sig::Matrix representing an homegeneous matrix to a iDynTree::Transform
+ * @param yarpHomogeneousMatrix yarp::sig::Matrix 4x4 homegeneous matrix input
+ * @param iDynTreeTransform iDynTree::Transform output
+ * @return true if conversion was successful, false otherwise
+ */
+bool toiDynTree(const yarp::sig::Matrix & yarpHomogeneousMatrix, iDynTree::Transform & iDynTreeTransform);
+
+/**
+ * Convert a iDynTree::Transform to a 4x4 yarp::sig::Matrix representing an homegeneous matrix
+ * @param iDynTreeTransform iDynTree::Transform input
+ * @param yarpHomogeneousMatrix yarp::sig::Matrix 4x4 homegeneous matrix output
+ * @return true if conversion was successful, false otherwise
+ */
+bool toYarp(const iDynTree::Transform & iDynTreeTransform,  yarp::sig::Matrix & yarpHomogeneousMatrix);
 
 /**
  * Convert a yarp::sig::Vector to a iDynTree::VectorDynSize

@@ -107,11 +107,11 @@ namespace iDynTree
      * Fill a vector with random double.
      */
     template<typename VectorType>
-    void getRandomVector(VectorType & vec)
+    void getRandomVector(VectorType & vec, double min=0.0, double max=1.0)
     {
         for(unsigned int i=0; i<vec.size(); i++)
         {
-            vec(i) = getRandomDouble();
+            vec(i) = getRandomDouble(min,max);
         }
     }
 

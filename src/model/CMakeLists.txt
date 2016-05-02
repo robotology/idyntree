@@ -5,6 +5,7 @@
 project(iDynTree_Model CXX)
 
 set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
+                           include/iDynTree/Model/DenavitHartenberg.h
                            include/iDynTree/Model/FixedJoint.h
                            include/iDynTree/Model/ForwardKinematics.h
                            include/iDynTree/Model/FreeFloatingState.h
@@ -32,6 +33,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
 set(IDYNTREE_MODEL_PRIVATE_INCLUDES include/iDynTree/Model/ModelTestUtils.h)
 
 set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
+                           src/DenavitHartenberg.cpp
                            src/FixedJoint.cpp
                            src/ForwardKinematics.cpp
                            src/FreeFloatingState.cpp

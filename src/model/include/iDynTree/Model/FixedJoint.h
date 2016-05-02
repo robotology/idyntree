@@ -39,6 +39,14 @@ namespace iDynTree
                    const Transform& link1_X_link2);
 
         /**
+         * Constructor in which the LinkIndex to which the joint is attached are not specified.
+         * This constructor is tipically used together with the Model::addJoint or
+         * Model::addJointAndLink methods, in which the links to which the joint is attached are
+         * specified by the other arguments of the method.
+         */
+        FixedJoint(const Transform& link1_X_link2);
+
+        /**
          * Copy constructor
          */
         FixedJoint(const FixedJoint & other);

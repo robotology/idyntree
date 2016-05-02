@@ -261,10 +261,35 @@ namespace iDynTree
 
         /**
          *
+         * Add a joint to the model. The two links to which the joint is connected
+         * are specified in the joint itself, throught the appropriate methods.
          * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
          *         there was an error in adding the joint.
          */
         JointIndex addJoint(const std::string & jointName, IJointConstPtr joint);
+
+        /**
+         * Add a joint to the model, and specify the two links that are connected
+         * by the specified joints. The setAttachedLinks of the passed joint
+         * is called appropriatly, to ensure consistency in the model.
+         * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
+         *         there was an error in adding the joint.
+         */
+        JointIndex addJoint(const std::string & link1, const std::string & link2,
+                            const std::string & jointName, IJointConstPtr joint);
+
+        /**
+         * Add a joint to the model, and add also a link.
+         * The added joints connects an existing link of the model to the newly
+         * added link.
+         * The setAttachedLinks of the passed joint
+         * is called appropriatly, to ensure consistency in the model.
+         * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
+         *         there was an error in adding the joint.
+         */
+        JointIndex addJointAndLink(const std::string & existingLink,
+                                   const std::string & jointName, IJointConstPtr joint,
+                                   const std::string & newLinkName, Link & newLink);
 
         /**
          * Get the dimension of the vector used to parametrize the positions of the joints of the robot.
