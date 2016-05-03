@@ -215,7 +215,7 @@ bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifi
 
     //
     iDynTree::createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
-   
+
 
     return setModelAndSensors(_modelReduced,_sensorsReduced);
 }

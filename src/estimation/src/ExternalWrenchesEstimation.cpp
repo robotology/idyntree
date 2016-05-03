@@ -115,6 +115,15 @@ bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
     // Get the link of the frame
     LinkIndex linkIndex = model.getFrameLink(frameIndex);
 
+    if( !model.isValidLinkIndex(linkIndex) )
+    {
+        std::stringstream err;
+        err << "Unknown link index " << linkIndex << " in model that has " << model.getNrOfLinks() << " links.";
+        reportError("LinkUnknownWrenchContacts","addNewContactInFrame",err.str().c_str());
+        return false;
+    }
+
+
     UnknownWrenchContact unknownContactInLink;
 
     unknownContactInLink.unknownType = unknownContactInFrame.unknownType;

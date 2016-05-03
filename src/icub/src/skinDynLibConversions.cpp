@@ -332,7 +332,7 @@ bool skinDynLibConversionsHelper::updateSkinContactListFromLinkContactWrenches(c
 
             if( !skinDynLib_ID_found )
             {
-                std::cerr << "[ERROR] skinDynLibConversionsHelper::fromSkinDynLibToiDynTree skinDynLib_ID_found not found, skipping contact" << std::endl;
+                std::cerr << "[ERROR] skinDynLibConversionsHelper::fromSkinDynLibToiDynTree : link " << model.getLinkName(l) <<  " not found, skipping contact" << std::endl;
                 continue;
             }
 
