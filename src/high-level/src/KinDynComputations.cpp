@@ -459,6 +459,59 @@ Transform KinDynComputations::getRelativeTransform(const iDynTree::FrameIndex re
     return refFrame_H_frame;
 }
 
+Transform KinDynComputations::getRelativeTransformExplicit(const iDynTree::FrameIndex refFrameOriginIndex,
+                                                           const iDynTree::FrameIndex refFrameOrientationIndex,
+                                                           const iDynTree::FrameIndex    frameOriginIndex,
+                                                           const iDynTree::FrameIndex    frameOrientationIndex)
+{
+    if( refFrameOriginIndex >= this->pimpl->m_robot_model.getNrOfFrames() )
+    {
+        reportError("KinDynComputations","getRelativeTransformExplicit","refFrameOriginIndex out of bound");
+        return iDynTree::Transform::Identity();
+    }
+
+    if( refFrameOrientationIndex >= this->pimpl->m_robot_model.getNrOfFrames() )
+    {
+        reportError("KinDynComputations","getRelativeTransformExplicit","refFrameOrientationIndex out of bound");
+        return iDynTree::Transform::Identity();
+    }
+
+    if( frameOriginIndex >= this->pimpl->m_robot_model.getNrOfFrames() )
+    {
+        reportError("KinDynComputations","getRelativeTransformExplicit","frameOriginIndex out of bound");
+        return iDynTree::Transform::Identity();
+    }
+
+    if( frameOrientationIndex >= this->pimpl->m_robot_model.getNrOfFrames() )
+    {
+        reportError("KinDynComputations","getRelativeTransformExplicit","frameOrientationIndex out of bound");
+        return iDynTree::Transform::Identity();
+    }
+
+    // compute fwd kinematics (if necessary)
+    this->computeFwdKinematics();
+
+
+    // This part can be probably made more efficient, but unless a need for performance
+    // arise I prefer it to be readable for now
+
+    Transform world_H_refFrameOrientation = getWorldTransform(refFrameOrientationIndex);
+    Transform world_H_framOrientation = getWorldTransform(frameOrientationIndex);
+
+    // Orientation part
+    // refFrameOrientation_R_frameOrientation = world_R_refFrameOrientation^{-1} * world_R_frameOrientation
+    Rotation refFrameOrientation_R_frameOrientation = world_H_refFrameOrientation.getRotation().inverse()*world_H_framOrientation.getRotation();
+
+    // Position part
+    // refFrameOrientation_p_refFrameOrigin_frameOrigin =
+    //      refFrameOrientation_R_refFramePosition * refFramePosition_p_refFramePositon_framePosition
+    Rotation refFrameOrientation_R_refFramePosition = getRelativeTransform(refFrameOrientationIndex,refFrameOriginIndex).getRotation();
+    Position refFrameOrientation_p_refFrameOrigin_frameOrigin =
+        refFrameOrientation_R_refFramePosition*(this->getRelativeTransform(refFrameOriginIndex,frameOriginIndex).getPosition());
+
+    return Transform(refFrameOrientation_R_frameOrientation,refFrameOrientation_p_refFrameOrigin_frameOrigin);
+}
+
 Transform KinDynComputations::getWorldTransform(std::string frameName)
 {
     int frameIndex = getFrameIndex(frameName);

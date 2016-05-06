@@ -284,7 +284,7 @@ public:
     /**
      * Return the transform where the frame is the frame
      * specified by frameIndex, and the reference frame is the world one
-     * (world_H_frame). 
+     * (world_H_frame).
      *
      */
     iDynTree::Transform getWorldTransform(const iDynTree::FrameIndex frameIndex);
@@ -301,11 +301,29 @@ public:
     /**
      * Return the transform where the frame is the frame
      * specified by frameIndex, and the reference frame is the one specified
-     * by refFrameIndex (refFrame_H_frame). 
+     * by refFrameIndex (refFrame_H_frame).
      *
      */
     iDynTree::Transform getRelativeTransform(const iDynTree::FrameIndex refFrameIndex,
                                              const iDynTree::FrameIndex frameIndex);
+
+     /**
+     * Return the transform between the frame with the origin of the frameOriginIndex
+     * and the orientation of frameOrientationIndex and the one with the origin
+     * of refFrameOriginIndex and the orientation of refFrameOrientationIndex .
+     *
+     * In symbols we return the (refFrameOrigin,refFrameOrientation)_H_(frameOrigin,frameORientation)
+     *
+     * This is a variant of the getRelativeTransform in which the orientation and origin part of both
+     * side of the transform are explicited.
+     *
+     * \todo provide mode detailed documentation. 
+     *
+     */
+    iDynTree::Transform getRelativeTransformExplicit(const iDynTree::FrameIndex refFrameOriginIndex,
+                                                     const iDynTree::FrameIndex refFrameOrientationIndex,
+                                                     const iDynTree::FrameIndex    frameOriginIndex,
+                                                     const iDynTree::FrameIndex    frameOrientationIndex);
 
     /**
      * Version of getRelativeTransform where the frames are specified by name.
