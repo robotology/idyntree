@@ -159,7 +159,7 @@ public:
      * @return the sensor model used for estimation.
      */
     const SensorsList & sensors() const;
-    
+
     /**
      * Get the used submodel decomposition.
      *
@@ -266,6 +266,26 @@ public:
                                             const SensorsMeasurements & ftSensorsMeasures,
                                                   LinkContactWrenches & estimateContactWrenches,
                                                   JointDOFsDoubleArray & jointTorques);
+
+    /**
+     * Check if the kinematics set in the model are the one of a fixed model.
+     *
+     * While computing the expected F/T sensors measures, you tipically want the
+     * model to be still, to reduce the sources of noise .
+     *
+     * @param[in] gravityNorm the norm of the gravity (tipically 9.81) against with all the
+     *                        proper accelerations are check (for a still model, the proper
+     *                        acceleration norm should be close to the gravity norm.
+     * @param[in] properAccTol tolerance to use for the check on the proper acceleration norm.
+     * @param[in] verbose     true if you want to print debug information, false otherwise.
+     * @return true if the model is still, false if it is moving or if the kinematics was never setted.
+     *
+     * \note This method can be computationally expensive, so in most case it
+     *       may be a better idea to just do the check on the input variables (joint velocities, joint acceleration).
+     */
+    bool checkThatTheModelIsStill(const double gravityNorm,
+                                  const double properAccTol,
+                                  const double verbose);
 
 };
 

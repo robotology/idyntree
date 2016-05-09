@@ -42,6 +42,10 @@
 #include <iDynTree/ModelIO/URDFModelImport.h>
 #include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
 
+#include <iDynTree/Core/EigenHelpers.h>
+
+#include <sstream>
+
 namespace iDynTree
 {
 
@@ -474,6 +478,46 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
     jointTorques = m_generalizedTorques.jointTorques();
 
     return ok;
+}
+
+bool ExtWrenchesAndJointTorquesEstimator::checkThatTheModelIsStill(const double gravityNorm,
+                                                                   const double properAccTol,
+                                                                   const double verbose)
+{
+    if( !m_isModelValid )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","checkThatTheModelIsStill",
+                    "Model and sensors information not set.");
+        return false;
+    }
+
+    if( !m_isKinematicsUpdated )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","checkThatTheModelIsStill",
+                    "Kinematic information not set.");
+        return false;
+    }
+
+    bool ok = true;
+
+    for(iDynTree::LinkIndex link = 0; link < this->m_model.getNrOfLinks(); link++)
+    {
+        double properAccNorm = toEigen(m_linkProperAccs(link).getLinearVec3()).norm();
+
+        if( fabs(properAccNorm-gravityNorm) >= properAccTol )
+        {
+            ok = false;
+
+            if( verbose )
+            {
+                std::ostringstream strs;
+                strs << "Link " <<  this->m_model.getLinkName(link) << " has a proper acceleration of "
+                     <<  m_linkProperAccs(link).getLinearVec3().toString() <<  " (norm : " <<  properAccNorm << ")";
+                reportError("ExtWrenchesAndJointTorquesEstimator","checkThatTheModelIsStill",
+                            strs.str().c_str());
+            }
+        }
+    }
 }
 
 
