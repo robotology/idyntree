@@ -95,7 +95,7 @@ Position getRandomPosition()
 
 Rotation getRandomRotation()
 {
-    return Rotation::RPY(getRandomDouble(),getRandomDouble(-1,1),getRandomDouble());
+    return Rotation::RPY(getRandomDouble(-10,10),getRandomDouble(-10,10),getRandomDouble(-10,10));
 }
 
 Transform getRandomTransform()

@@ -38,6 +38,7 @@ namespace iDynTree
 #define ASSERT_IS_FALSE(prop) iDynTree::assertTrue(!(prop),__FILE__,__LINE__)
 #define ASSERT_EQUAL_STRING(val1,val2) iDynTree::assertStringAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_DOUBLE(val1,val2) iDynTree::assertDoubleAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
+#define ASSERT_EQUAL_DOUBLE_TOL(val1,val2,tol) iDynTree::assertDoubleAreEqual(val1,val2,tol,__FILE__,__LINE__)
 #define ASSERT_EQUAL_VECTOR(val1,val2) assertVectorAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_VECTOR_TOL(val1,val2,tol) assertVectorAreEqual(val1,val2,tol,__FILE__,__LINE__)
 #define ASSERT_EQUAL_SPATIAL_MOTION(val1,val2) assertSpatialMotionAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
