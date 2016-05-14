@@ -6,7 +6,6 @@
  */
 
 #include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
-
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
@@ -101,8 +100,6 @@ bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model
                                                              const SensorsList& _sensors)
 {
     // \todo TODO add isConsistent methods to Model and SensorList class
-
-
     m_model = _model;
     m_sensors = _sensors;
 
