@@ -216,7 +216,7 @@ void testFwdKinConsistency(std::string modelFilePath)
     }
 
     bool ok = RNEADynamicPhase(model,traversal,
-                               baseJntPos,
+                               baseJntPos.jointPos(),
                                linksVels,linksAcc,fExt,f,baseWrenchJointTorques);
 
     int retVal = KDL::CoDyCo::rneaDynamicLoop(undirected_tree,jntKDL,kdl_traversal,
@@ -248,21 +248,27 @@ void testFwdKinConsistency(std::string modelFilePath)
     // Check mass matrix
     iDynTree::FreeFloatingMassMatrix massMatrix(model);
     iDynTree::LinkInertias crbis(model);
-    ok = CompositeRigidBodyAlgorithm(model,traversal,baseJntPos,crbis,massMatrix);
+    ok = CompositeRigidBodyAlgorithm(model,traversal,
+                                     baseJntPos.jointPos(),
+                                     crbis,massMatrix);
 
     KDL::CoDyCo::FloatingJntSpaceInertiaMatrix massMatrixKDL(undirected_tree.getNrOfDOFs()+6);
     std::vector<KDL::RigidBodyInertia> Ic(undirected_tree.getNrOfLinks());
 
     retVal = KDL::CoDyCo::crba_floating_base_loop(undirected_tree,kdl_traversal,jntKDL,Ic,massMatrixKDL);
 
-    ASSERT_EQUAL_DOUBLE(ok,true);
-    ASSERT_EQUAL_DOUBLE(retVal,0);
+    ASSERT_IS_TRUE(ok);
+    ASSERT_EQUAL_DOUBLE_TOL(retVal,0,1e-8);
 
     // Check composite rigid body inertias
     for(int link = 0; link < model.getNrOfLinks(); link++ )
     {
          ASSERT_EQUAL_MATRIX(crbis(link).asMatrix(),ToiDynTree(Ic[idynTree2KDL_links[link]]).asMatrix());
     }
+
+    std::cerr << "iDynTree " << massMatrix.toString() << std::endl;
+    std::cerr << "massMatrix " << massMatrixKDL.data << std::endl;
+
 
     // Check CRBA algorithm
     for(int ii=0; ii < model.getNrOfDOFs()+6; ii++ )
@@ -271,9 +277,10 @@ void testFwdKinConsistency(std::string modelFilePath)
         {
             int idyntreeII = kdl2idyntreeFloatingDOFMapping(ii,kdl2idyntree_joints);
             int idyntreeJJ = kdl2idyntreeFloatingDOFMapping(jj,kdl2idyntree_joints);
-            ASSERT_EQUAL_DOUBLE(massMatrix(idyntreeII,idyntreeJJ),massMatrixKDL(ii,jj));
+            ASSERT_EQUAL_DOUBLE_TOL(massMatrix(idyntreeII,idyntreeJJ),massMatrixKDL(ii,jj),1e-8);
         }
     }
+
 
     return;
 }
