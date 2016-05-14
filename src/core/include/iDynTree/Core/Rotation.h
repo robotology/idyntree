@@ -150,7 +150,9 @@ namespace iDynTree
          /**
          * Get a roll, pitch and yaw corresponing to this rotation.
          *
-         * \todo TODO Add detailed docs .
+         * Get r \in [-180,180] , p \in [-90,90], y \in [-180,180]
+         * such that
+         * *this == RotZ(y)*RotY(p)*RotX(r) 
          *
          */
         void getRPY(double & r, double & p, double &y);
