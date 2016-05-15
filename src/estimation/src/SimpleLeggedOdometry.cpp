@@ -63,13 +63,13 @@ bool SimpleLeggedOdometry::init(const FrameIndex initialFixedFrameIndex,
         return false;
     }
 
-
-
     m_fixedLinkIndex = m_model.getFrameLink(initialFixedFrameIndex);
     Transform initialFixedFrame_H_fixedLink = m_model.getFrameTransform(initialFixedFrameIndex).inverse();
     m_world_H_fixedLink = world_H_initialFixedFrame*initialFixedFrame_H_fixedLink;
 
     m_isOdometryInitialized = true;
+
+    return true;
 }
 
 bool SimpleLeggedOdometry::updateKinematics(JointPosDoubleArray& jointPos)
