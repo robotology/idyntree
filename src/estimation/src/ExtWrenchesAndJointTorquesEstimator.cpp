@@ -6,7 +6,6 @@
  */
 
 #include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
-
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
@@ -101,8 +100,6 @@ bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model
                                                              const SensorsList& _sensors)
 {
     // \todo TODO add isConsistent methods to Model and SensorList class
-
-
     m_model = _model;
     m_sensors = _sensors;
 
@@ -487,7 +484,7 @@ bool ExtWrenchesAndJointTorquesEstimator::checkThatTheModelIsStill(const double 
         return false;
     }
 
-    bool ok = true;
+    bool isStill = true;
 
     for(iDynTree::LinkIndex link = 0; link < this->m_model.getNrOfLinks(); link++)
     {
@@ -495,7 +492,7 @@ bool ExtWrenchesAndJointTorquesEstimator::checkThatTheModelIsStill(const double 
 
         if( fabs(properAccNorm-gravityNorm) >= properAccTol )
         {
-            ok = false;
+            isStill = false;
 
             if( verbose )
             {
@@ -507,6 +504,8 @@ bool ExtWrenchesAndJointTorquesEstimator::checkThatTheModelIsStill(const double 
             }
         }
     }
+
+    return isStill;
 }
 
 

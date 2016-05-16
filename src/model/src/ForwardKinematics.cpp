@@ -19,7 +19,18 @@ namespace iDynTree
 
 bool ForwardPositionKinematics(const Model& model,
                                const Traversal& traversal,
-                               const FreeFloatingPos& jointPositions,
+                               const FreeFloatingPos& robotPosition,
+                                     LinkPositions& linkPositions)
+{
+    return ForwardPositionKinematics(model,traversal,
+                                     robotPosition.worldBasePos(),robotPosition.jointPos(),
+                                     linkPositions);
+}
+
+bool ForwardPositionKinematics(const Model& model,
+                               const Traversal& traversal,
+                               const Transform& worldHbase,
+                               const JointPosDoubleArray& jointPositions,
                                      LinkPositions& linkPositions)
 {
     bool retValue = true;
@@ -35,7 +46,7 @@ bool ForwardPositionKinematics(const Model& model,
             // If the visited link is the base, the base has no parent.
             // In this case the position of the base with respect to the world is simply
             // the worldBase transform contained in the jointPos input object
-            linkPositions(visitedLink->getIndex()) = jointPositions.worldBasePos();
+            linkPositions(visitedLink->getIndex()) =worldHbase;
         }
         else
         {
@@ -43,7 +54,7 @@ bool ForwardPositionKinematics(const Model& model,
             // world_H_link = world_H_parentLink * parentLink_H_link
             linkPositions(visitedLink->getIndex()) =
                 linkPositions(parentLink->getIndex())*
-                    toParentJoint->getTransform(jointPositions.jointPos(),parentLink->getIndex(),visitedLink->getIndex());
+                    toParentJoint->getTransform(jointPositions,parentLink->getIndex(),visitedLink->getIndex());
         }
     }
 
@@ -54,9 +65,9 @@ bool ForwardPosVelAccKinematics(const Model& model, const Traversal& traversal,
                                 const FreeFloatingPos& robotPos,
                                 const FreeFloatingVel& robotVel,
                                 const FreeFloatingAcc& robotAcc,
-                                LinkPositions& linkPos,
-                                LinkVelArray & linkVel,
-                                LinkAccArray & linkAcc)
+                                      LinkPositions& linkPos,
+                                      LinkVelArray & linkVel,
+                                      LinkAccArray & linkAcc)
 {
     bool retValue = true;
 
@@ -124,7 +135,8 @@ bool ForwardVelAccKinematics(const Model& model, const Traversal& traversal,
                                               robotVel.jointVel(),
                                               robotAcc.jointAcc(),
                                               linkVel, linkAcc,
-                                              visitedLink->getIndex(),parentLink->getIndex());
+                                              visitedLink->getIndex(),
+                                              parentLink->getIndex());
         }
 
     }

@@ -16,12 +16,14 @@ namespace iDynTree
 
 FreeFloatingMassMatrix::FreeFloatingMassMatrix(size_t nrOfDofs): MatrixDynSize(6+nrOfDofs,6+nrOfDofs)
 {
+    MatrixDynSize::zero();
 }
 
 
 FreeFloatingMassMatrix::FreeFloatingMassMatrix(const Model& model)
 {
     MatrixDynSize::resize(6+model.getNrOfDOFs(),6+model.getNrOfDOFs());
+    MatrixDynSize::zero();
 }
 
 void FreeFloatingMassMatrix::resize(const Model& model)
