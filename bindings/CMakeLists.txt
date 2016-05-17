@@ -9,6 +9,7 @@ option(IDYNTREE_USES_LUA "Do you want to create the Lua bindings" FALSE)
 option(IDYNTREE_USES_MATLAB "Do you want to create the MATLAB bindings" FALSE)
 option(IDYNTREE_USES_OCTAVE "Do you want to create the OCTAVE bindings" FALSE)
 option(IDYNTREE_GENERATE_MATLAB "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper" FALSE)
+option(IDYNTREE_USES_JAVA "Do you want to create the Java Interface" FALSE)
 
 find_package(SWIG)
 # It is possible to compile matlab/octave bindings without using SWIG
@@ -43,15 +44,21 @@ if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
     if(IDYNTREE_USES_PYTHON)
         add_subdirectory(python)
     endif(IDYNTREE_USES_PYTHON)
+    
+    if(IDYNTREE_USES_JAVA)
+       add_subdirectory(java)
+    endif()
 
     if(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB OR IDYNTREE_USES_OCTAVE)
         add_subdirectory(matlab)
     endif()
 endif()
 
+
 if(IDYNTREE_USES_PYTHON OR
    IDYNTREE_USES_LUA    OR
-   IDYNTREE_GENERATED_MATLAB)
+   IDYNTREE_GENERATED_MATLAB OR
+   IDYNTREE_USES_JAVA)
    if(NOT SWIG_FOUND)
        MESSAGE(FATAL_ERROR "Swig not found, impossible to compile or generate iDynTree bindings.")
    endif()
