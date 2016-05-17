@@ -32,6 +32,7 @@ for dof in range(dofs):
 # (the first three value are for the linear quantity, the 
 #  the last  three values are for the angular quantity)
 gravity = iDynTree.SpatialAcc();
+gravity.zero();
 gravity.setVal(2, -9.81);
 dynComp.setRobotState(q,dq,ddq,gravity);
 
