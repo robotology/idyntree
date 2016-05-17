@@ -281,7 +281,7 @@ void ArticulatedBodyAlgorithmInternalBuffers::resize(const Model& model)
     S.resize(model);
     U.resize(model);
     D.resize(model);
-    u.resize(model);
+    uu.resize(model);
     linksVel.resize(model);
     linksBiasAcceleration.resize(model);
     linksAccelerations.resize(model);
@@ -298,7 +298,7 @@ bool ArticulatedBodyAlgorithmInternalBuffers::isConsistent(const Model& model)
     ok = ok && S.isConsistent(model);
     ok = ok && U.isConsistent(model);
     ok = ok && D.isConsistent(model);
-    ok = ok && u.isConsistent(model);
+    ok = ok && uu.isConsistent(model);
     ok = ok && linksVel.isConsistent(model);
     ok = ok && linksBiasAcceleration.isConsistent(model);
     ok = ok && linkABIs.isConsistent(model);
@@ -398,13 +398,13 @@ bool ArticulatedBodyAlgorithm(const Model& model,
                 size_t dofIndex = toParentJoint->getDOFsOffset();
                 bufs.U(dofIndex) = bufs.linkABIs(visitedLinkIndex)*bufs.S(dofIndex);
                 bufs.D(dofIndex) = bufs.S(dofIndex).dot(bufs.U(dofIndex));
-                bufs.u(dofIndex) = jointTorques(dofIndex) - bufs.S(dofIndex).dot(bufs.linksBiasWrench(visitedLinkIndex));
+                bufs.uu(dofIndex) = jointTorques(dofIndex) - bufs.S(dofIndex).dot(bufs.linksBiasWrench(visitedLinkIndex));
 
                 Ia = bufs.linkABIs(visitedLinkIndex) - ArticulatedBodyInertia::ABADyadHelper(bufs.U(dofIndex),bufs.D(dofIndex));
 
                 pa                 =   bufs.linksBiasWrench(visitedLinkIndex)
                                      + Ia*bufs.linksBiasAcceleration(visitedLinkIndex)
-                                     + bufs.U(dofIndex)*(bufs.u(dofIndex)/bufs.D(dofIndex));
+                                     + bufs.U(dofIndex)*(bufs.uu(dofIndex)/bufs.D(dofIndex));
 
             }
 
@@ -457,7 +457,7 @@ bool ArticulatedBodyAlgorithm(const Model& model,
                bufs.linksAccelerations(visitedLinkIndex) =
                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*bufs.linksAccelerations(parentLinkIndex)
                    + bufs.linksBiasAcceleration(visitedLinkIndex);
-               robotAcc.jointAcc()(dofIndex) = (bufs.u(dofIndex)-bufs.U(dofIndex).dot(bufs.linksAccelerations(visitedLinkIndex)))/bufs.D(dofIndex);
+               robotAcc.jointAcc()(dofIndex) = (bufs.uu(dofIndex)-bufs.U(dofIndex).dot(bufs.linksAccelerations(visitedLinkIndex)))/bufs.D(dofIndex);
                bufs.linksAccelerations(visitedLinkIndex) = bufs.linksAccelerations(visitedLinkIndex) + bufs.S(dofIndex)*robotAcc.jointAcc()(dofIndex);
            }
            else

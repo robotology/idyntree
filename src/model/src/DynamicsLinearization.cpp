@@ -196,7 +196,7 @@ void ForwardDynamicsLinearizationWrtJointPos(const Model& model,
                 size_t dofIndex = toParentJoint->getDOFsOffset();
                 bufs.dPos[dofDeriv].U(dofIndex) = bufs.dPos[dofDeriv].linkABIs(visitedLinkIndex)*bufs.aba.S(dofIndex);
                 bufs.dPos[dofDeriv].D(dofIndex) = bufs.aba.S(dofIndex).dot(bufs.dPos[dofDeriv].U(dofIndex));
-                bufs.dPos[dofDeriv].u(dofIndex) =  - bufs.aba.S(dofIndex).dot(bufs.dPos[dofDeriv].linksBiasWrench(visitedLinkIndex));
+                bufs.dPos[dofDeriv].uu(dofIndex) =  - bufs.aba.S(dofIndex).dot(bufs.dPos[dofDeriv].linksBiasWrench(visitedLinkIndex));
 
                 double invD = 1/(bufs.aba.D(dofIndex));
                 double d_invD = - invD * bufs.dPos[dofDeriv].D(dofIndex) * invD;
@@ -209,8 +209,8 @@ void ForwardDynamicsLinearizationWrtJointPos(const Model& model,
                 dPos_pa    =  bufs.dPos[dofDeriv].linksBiasWrench(visitedLinkIndex)
                                      + dPos_Ia*bufs.aba.linksBiasAcceleration(visitedLinkIndex)
                                      + Ia*bufs.dPos[dofDeriv].linksBiasAcceleration(visitedLinkIndex)
-                                     + bufs.dPos[dofDeriv].U(dofIndex)*(bufs.aba.u(dofIndex)*invD)
-                                     + bufs.aba.U(dofIndex)*(bufs.dPos[dofDeriv].u(dofIndex)*invD + bufs.aba.u(dofIndex)*d_invD);
+                                     + bufs.dPos[dofDeriv].U(dofIndex)*(bufs.aba.uu(dofIndex)*invD)
+                                     + bufs.aba.U(dofIndex)*(bufs.dPos[dofDeriv].uu(dofIndex)*invD + bufs.aba.uu(dofIndex)*d_invD);
 
             }
 
@@ -246,7 +246,7 @@ void ForwardDynamicsLinearizationWrtJointPos(const Model& model,
 
                 SpatialForceVector pa =   bufs.aba.linksBiasWrench(visitedLinkIndex)
                                      + Ia*bufs.aba.linksBiasAcceleration(visitedLinkIndex)
-                                     + bufs.aba.U(dofIndex)*(bufs.aba.u(dofIndex)/bufs.aba.D(dofIndex));
+                                     + bufs.aba.U(dofIndex)*(bufs.aba.uu(dofIndex)/bufs.aba.D(dofIndex));
 
                 bufs.dPos[dofDeriv].linksBiasWrench(parentLinkIndex) = bufs.dPos[dofDeriv].linksBiasWrench(parentLinkIndex)
                                                                       + parent_dX_visited.transform(parent_X_visited,pa);
@@ -309,8 +309,8 @@ void ForwardDynamicsLinearizationWrtJointPos(const Model& model,
                double invD = 1/(bufs.aba.D(dofIndex));
                double d_invD = - invD * bufs.dPos[dofDeriv].D(dofIndex) * invD;
                double dPos_ddq =
-                    (bufs.aba.u(dofIndex)-bufs.aba.U(dofIndex).dot(bufs.aba.linksAccelerations(visitedLinkIndex)))*d_invD;
-                    (bufs.dPos[dofDeriv].u(dofIndex)
+                    (bufs.aba.uu(dofIndex)-bufs.aba.U(dofIndex).dot(bufs.aba.linksAccelerations(visitedLinkIndex)))*d_invD;
+                    (bufs.dPos[dofDeriv].uu(dofIndex)
                         -bufs.dPos[dofDeriv].U(dofIndex).dot(bufs.aba.linksAccelerations(visitedLinkIndex))
                         -bufs.aba.U(dofIndex).dot(bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex)))*invD;
 
@@ -599,13 +599,13 @@ void ForwardDynamicsLinearizationWrtJointVel(const Model& model,
             {
                 assert(toParentJoint->getNrOfDOFs()==1);
                 size_t dofIndex = toParentJoint->getDOFsOffset();
-                bufs.dVel[dofDeriv].u(dofIndex) = -bufs.aba.S(dofIndex).dot(bufs.dVel[dofDeriv].linksBiasWrench(visitedLinkIndex));
+                bufs.dVel[dofDeriv].uu(dofIndex) = -bufs.aba.S(dofIndex).dot(bufs.dVel[dofDeriv].linksBiasWrench(visitedLinkIndex));
 
                 Ia = bufs.aba.linkABIs(visitedLinkIndex) - ArticulatedBodyInertia::ABADyadHelper(bufs.aba.U(dofIndex),bufs.aba.D(dofIndex));
 
                 dVel_dofDeriv_pa   =   bufs.dVel[dofDeriv].linksBiasWrench(visitedLinkIndex)
                                      + Ia*bufs.dVel[dofDeriv].linksBiasAcceleration(visitedLinkIndex)
-                                     + bufs.aba.U(dofIndex)*(bufs.dVel[dofDeriv].u(dofIndex)/bufs.aba.D(dofIndex));
+                                     + bufs.aba.U(dofIndex)*(bufs.dVel[dofDeriv].uu(dofIndex)/bufs.aba.D(dofIndex));
 
             }
 
@@ -659,7 +659,7 @@ void ForwardDynamicsLinearizationWrtJointVel(const Model& model,
                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*bufs.dVel[dofDeriv].linksAccelerations(parentLinkIndex)
                    + bufs.dVel[dofDeriv].linksBiasAcceleration(visitedLinkIndex);
 
-               double dVel_dofDeriv_ddq_dofIndex = (bufs.dVel[dofDeriv].u(dofIndex)-bufs.aba.U(dofIndex).dot(bufs.dVel[dofDeriv].linksAccelerations(visitedLinkIndex)))/bufs.aba.D(dofIndex);
+               double dVel_dofDeriv_ddq_dofIndex = (bufs.dVel[dofDeriv].uu(dofIndex)-bufs.aba.U(dofIndex).dot(bufs.dVel[dofDeriv].linksAccelerations(visitedLinkIndex)))/bufs.aba.D(dofIndex);
 
                A(6+model.getNrOfDOFs()+6+dofIndex,6+model.getNrOfDOFs()+6+dofDeriv) = dVel_dofDeriv_ddq_dofIndex;
 

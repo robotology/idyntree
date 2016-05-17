@@ -108,8 +108,8 @@ void checkDifferenceInBuffers(const ForwardDynamicsLinearizationInternalBuffers 
             if( verbose )
             {
                  std::cerr << "Check difference in buffers for dof " << dof << std::endl;
-                 std::cerr << "Norm of diff in u : "
-                           << fabs(bufs.dVel[dofDeriv].u(dof)-numBufs.dVel[dofDeriv].u(dof)) << std::endl;
+                 std::cerr << "Norm of diff in uu : "
+                           << fabs(bufs.dVel[dofDeriv].uu(dof)-numBufs.dVel[dofDeriv].uu(dof)) << std::endl;
             }
         }
     }
@@ -145,7 +145,7 @@ void checkDifferenceInBuffers(const ForwardDynamicsLinearizationInternalBuffers 
             {
                  std::cerr << "Check difference in buffers for dof " << dof << std::endl;
                  std::cerr << "Norm of diff in u : "
-                           << fabs(bufs.dPos[dofDeriv].u(dof)-numBufs.dPos[dofDeriv].u(dof)) << std::endl;
+                           << fabs(bufs.dPos[dofDeriv].uu(dof)-numBufs.dPos[dofDeriv].uu(dof)) << std::endl;
                  std::cerr << "Norm of diff in D : "
                            << fabs(bufs.dPos[dofDeriv].D(dof)-numBufs.dPos[dofDeriv].D(dof)) << std::endl;
                  std::cerr << " D "
@@ -218,9 +218,9 @@ void fillLinBufsWithNumericalDerivativesWrtJointQuantity(const ArticulatedBodyAl
     }
 
     // set dofs buffers
-    for(size_t dof=0; dof < numBufs.u.size(); dof++ )
+    for(size_t dof=0; dof < numBufs.uu.size(); dof++ )
     {
-        numBufs.u(dof) = (bufsUpper.u(dof) - bufsLower.u(dof))/step;
+        numBufs.uu(dof) = (bufsUpper.uu(dof) - bufsLower.uu(dof))/step;
     }
 }
 
