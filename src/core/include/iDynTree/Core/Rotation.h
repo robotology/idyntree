@@ -229,7 +229,7 @@ namespace iDynTree
          * of the direction, and with \f$ \theta \f$ the input angle, the return rotation
          * matrix \f$ R \f$ can be computed using the Rodrigues' rotation formula [1] :
          * \f[
-         *  R = I_{3\times3} + d^{\vee} \sin(\theta) + {d^{\vee}}^2 (1-\cos(\theta))
+         *  R = I_{3\times3} + d^{\wedge} \sin(\theta) + {d^{\wedge}}^2 (1-\cos(\theta))
          * \f]
          *
          * [1] : http://mathworld.wolfram.com/RodriguesRotationFormula.html
