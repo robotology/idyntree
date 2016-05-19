@@ -20,6 +20,7 @@ if(TARGET iDynTree::idyntree-kdl)
             set(orocos_kdl_FOUND true)
         endif()
     endif()
+    find_package(TinyXML QUIET)
 endif()
 
 if(TARGET iDynTree::idyntree-yarp)
