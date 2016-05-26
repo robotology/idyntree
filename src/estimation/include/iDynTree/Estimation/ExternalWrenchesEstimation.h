@@ -77,6 +77,21 @@ enum UnknownWrenchContactType
 struct UnknownWrenchContact
 {
     /**
+     * Constructor
+     */
+    UnknownWrenchContact()
+    {}
+
+    UnknownWrenchContact(const UnknownWrenchContactType _unknownType,
+                         const Position & _contactPoint,
+                         const Direction & _forceDirection = iDynTree::Direction::Default(),
+                         const unsigned long & _contactId = 0): unknownType(_unknownType),
+                                                                          contactPoint(_contactPoint),
+                                                                          forceDirection(_forceDirection),
+                                                                          contactId(_contactId)
+    {}
+
+    /**
      * Type of the unknown contact.
      */
     UnknownWrenchContactType unknownType;
@@ -91,6 +106,13 @@ struct UnknownWrenchContact
      * contains the known direction (in link frame) of the force.
      */
     Direction forceDirection;
+
+    /**
+     * Unique id identifing the contact.
+     * This id is propagated to the contact wrench data structure.
+     * It is implemented mainly for compatibility with the skinDynLib library.
+     */
+    unsigned long contactId;
 };
 
 /**
@@ -319,5 +341,3 @@ bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
 }
 
 #endif
-
-

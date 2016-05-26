@@ -21,6 +21,7 @@
 namespace iDynTree
 {
 class Model;
+class SensorsList;
 
 /**
  * \function Remove all fake links in the model, transforming them in frames.
@@ -47,15 +48,15 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
                      Model& modelWithoutFakeLinks);
 
 /**
- * This function will take in input a iDynTree::Model and
- * an ordered list of joints and will return a model with
+ * This function takes in input a iDynTree::Model and
+ * an ordered list of joints and returns a model with
  * just the joint specified in the list, with that exact order.
  *
- * All other joints will be removed by lumping (i.e. fusing together)
+ * All other joints are be removed by lumping (i.e. fusing together)
  * the inertia of the links that are connected by that joint, assuming the joint
  * to be in "rest" position (i.e. zero for revolute joints). The links eliminated
- * with this process will be added back to the reduced model as "frames",
- * and will be copied in the same way all the additional frames of the lumped links.
+ * with this process are be added back to the reduced model as "frames",
+ * and are copied in the same way all the additional frames of the lumped links.
  * 
  */
 bool createReducedModel(const Model& fullModel,

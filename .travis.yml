@@ -1,6 +1,7 @@
 sudo: required
 dist: trusty
 language: cpp
+cache: ccache
 
 # set the CMAKE_PREFIX_PATH enviroment variable to get software installed by the superbuild
 matrix:

@@ -258,13 +258,32 @@ namespace iDynTree
 
     void Rotation::getRPY(double& r, double& p, double& y)
     {
-        Eigen::Map<const Matrix3dRowMajor> dataEigen(this->data());
+        Eigen::Map<const Matrix3dRowMajor> R(m_data);
 
-        Eigen::Vector3d rpy = dataEigen.eulerAngles(0,1,2);
 
-        r = rpy(0);
-        p = rpy(1);
-        y = rpy(2);
+        if (R(2,0)<1.0)
+        {
+            if (R(2,0)>-1.0)
+            {
+                r=atan2(R(2,1),R(2,2));
+                p=asin(-R(2,0));
+                y=atan2(R(1,0),R(0,0));
+            }
+            else
+            {
+                // Not a unique solution
+                r=0.0;
+                p=M_PI/2.0;
+                y=-atan2(-R(1,2),R(1,1));
+            }
+        }
+        else
+        {
+            // Not a unique solution
+            r=0.0;
+            p=-M_PI/2.0;
+            y=atan2(-R(1,2),R(1,1));
+        }
     }
 
 

@@ -44,6 +44,11 @@ bool LinkPositions::isConsistent(const Model& model) const
     return (this->m_linkPos.size() == model.getNrOfLinks());
 }
 
+size_t LinkPositions::getNrOfLinks() const
+{
+    return this->m_linkPos.size();
+}
+
 const Transform& LinkPositions::operator()(const LinkIndex link) const
 {
     return this->m_linkPos[link];
@@ -53,6 +58,19 @@ Transform& LinkPositions::operator()(const LinkIndex link)
 {
     return this->m_linkPos[link];
 }
+
+std::string LinkPositions::toString(const Model& model) const
+{
+   std::stringstream ss;
+
+    size_t nrOfLinks = this->getNrOfLinks();
+    for(size_t l=0; l < nrOfLinks; l++)
+    {
+        ss << "Position for link " << model.getLinkName(l) << ":" << this->operator()(l).toString() << std::endl;
+    }
+    return ss.str();
+}
+
 
 LinkPositions::~LinkPositions()
 {

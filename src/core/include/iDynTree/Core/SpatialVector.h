@@ -12,6 +12,7 @@
 #include "Rotation.h"
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 #include "Utils.h"
+#include <iDynTree/Core/PrivatePreProcessorUtils.h>
 #include <iDynTree/Core/PrivateSemanticsMacros.h>
 
 
@@ -205,13 +206,13 @@ SpatialVector<DerivedSpatialVecT>
                                                                               const AngularVec3SemanticsT & angularVec3)
     {
         return (   reportErrorIf(!checkEqualOrUnknown(linearVec3.getBody(), angularVec3.getBody()),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "linear and angular vectors are defined for different bodies\n")
                 && reportErrorIf(!checkEqualOrUnknown(linearVec3.getRefBody(), angularVec3.getRefBody()),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "linear and angular vectors have different reference bodies\n")
                 && reportErrorIf(!checkEqualOrUnknown(linearVec3.getCoordinateFrame(), angularVec3.getCoordinateFrame()),
-                                 __PRETTY_FUNCTION__,
+                                 IDYNTREE_PRETTY_FUNCTION,
                                  "linear and angular vectors are expressed in different coordinateFrames\n"));
     }
 

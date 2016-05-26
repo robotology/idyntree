@@ -150,7 +150,9 @@ namespace iDynTree
          /**
          * Get a roll, pitch and yaw corresponing to this rotation.
          *
-         * \todo TODO Add detailed docs .
+         * Get r \in [-180,180] , p \in [-90,90], y \in [-180,180]
+         * such that
+         * *this == RotZ(y)*RotY(p)*RotX(r) 
          *
          */
         void getRPY(double & r, double & p, double &y);
@@ -227,7 +229,7 @@ namespace iDynTree
          * of the direction, and with \f$ \theta \f$ the input angle, the return rotation
          * matrix \f$ R \f$ can be computed using the Rodrigues' rotation formula [1] :
          * \f[
-         *  R = I_{3\times3} + d^{\vee} \sin(\theta) + {d^{\vee}}^2 (1-\cos(\theta))
+         *  R = I_{3\times3} + d^{\wedge} \sin(\theta) + {d^{\wedge}}^2 (1-\cos(\theta))
          * \f]
          *
          * [1] : http://mathworld.wolfram.com/RodriguesRotationFormula.html

@@ -9,51 +9,159 @@
 
 #include "testModels.h"
 
+#include <iDynTree/Core/TestUtils.h>
+
 
 using namespace iDynTree;
+
+std::vector<std::string> getCanonical_iCubJoints()
+{
+    std::vector<std::string> consideredJoints;
+
+    consideredJoints.push_back("torso_pitch");
+    consideredJoints.push_back("torso_roll");
+    consideredJoints.push_back("torso_yaw");
+    consideredJoints.push_back("neck_pitch");
+    consideredJoints.push_back("neck_roll");
+    consideredJoints.push_back("neck_yaw");
+    consideredJoints.push_back("l_shoulder_pitch");
+    consideredJoints.push_back("l_shoulder_roll");
+    consideredJoints.push_back("l_shoulder_yaw");
+    consideredJoints.push_back("l_elbow");
+    consideredJoints.push_back("r_shoulder_pitch");
+    consideredJoints.push_back("r_shoulder_roll");
+    consideredJoints.push_back("r_shoulder_yaw");
+    consideredJoints.push_back("r_elbow");
+    consideredJoints.push_back("l_hip_pitch");
+    consideredJoints.push_back("l_hip_roll");
+    consideredJoints.push_back("l_hip_yaw");
+    consideredJoints.push_back("l_knee");
+    consideredJoints.push_back("l_ankle_pitch");
+    consideredJoints.push_back("l_ankle_roll");
+    consideredJoints.push_back("r_hip_pitch");
+    consideredJoints.push_back("r_hip_roll");
+    consideredJoints.push_back("r_hip_yaw");
+    consideredJoints.push_back("r_knee");
+    consideredJoints.push_back("r_ankle_pitch");
+    consideredJoints.push_back("r_ankle_roll");
+
+    return consideredJoints;
+}
+
+void setDOFsSubSetPositionsInDegrees(const iDynTree::Model & model,
+                                     const std::vector<std::string> & dofNames,
+                                     const std::vector<double> & dofPositionsInDegrees,
+                                     JointPosDoubleArray & qj)
+{
+    for(int i=0; i < dofNames.size(); i++)
+    {
+        iDynTree::JointIndex jntIdx = model.getJointIndex(dofNames[i]);
+        size_t dofOffset = model.getJoint(jntIdx)->getDOFsOffset();
+        qj(dofOffset) = deg2rad(dofPositionsInDegrees[i]);
+    }
+}
+
 
 int main()
 {
 
-    std::cerr << "Test ft offset estimation on the iCubGenova02 model: " << std::endl;
-    ExtWrenchesAndJointTorquesEstimator estimator;
-    estimator.loadModelAndSensorsFromFile(getAbsModelPath("iCubGenova02.urdf"));
+    std::cerr << "Test ft offset estimation on the iCubDarmstadt01 model: " << std::endl;
 
-    JointPosDoubleArray qj(estimator.model());
-    JointDOFsDoubleArray dqj(estimator.model()), ddqj(estimator.model());
+    // We will compare the estimatas obtained using
+    // the IMU measurement and the fixed base measurements
+    ExtWrenchesAndJointTorquesEstimator estimatorIMU, estimatorFixedBase;
+
+    std::vector<std::string> consideredJoints = getCanonical_iCubJoints();
+
+    estimatorIMU.loadModelAndSensorsFromFileWithSpecifiedDOFs(getAbsModelPath("iCubDarmstadt01.urdf"),consideredJoints);
+    estimatorFixedBase.setModelAndSensors(estimatorIMU.model(),estimatorIMU.sensors());
+
+    ASSERT_EQUAL_DOUBLE(estimatorIMU.sensors().getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),6);
+
+    JointPosDoubleArray qj(estimatorIMU.model());
+    JointDOFsDoubleArray dqj(estimatorIMU.model()), ddqj(estimatorIMU.model());
 
     qj.zero();
     dqj.zero();
     ddqj.zero();
 
-    Vector3 gravity;
-    gravity.zero();
-    gravity(2) = -9.8;
+    // Set a desired configuration
+    std::vector<std::string> dofNames;
+    std::vector<double> dofPositionsInDegrees;
 
-    FrameIndex l_sole_index = estimator.model().getFrameIndex("l_sole");
+    dofNames.push_back("l_shoulder_pitch");
+    dofPositionsInDegrees.push_back(-90.0);
+    dofNames.push_back("l_shoulder_roll");
+    dofPositionsInDegrees.push_back(15.0);
+    dofNames.push_back("l_shoulder_yaw");
+    dofPositionsInDegrees.push_back(0);
+    dofNames.push_back("l_elbow");
+    dofPositionsInDegrees.push_back(90.0);
+
+    dofNames.push_back("r_shoulder_pitch");
+    dofPositionsInDegrees.push_back(-90.0);
+    dofNames.push_back("r_shoulder_roll");
+    dofPositionsInDegrees.push_back(15.0);
+    dofNames.push_back("r_shoulder_yaw");
+    dofPositionsInDegrees.push_back(0);
+    dofNames.push_back("r_elbow");
+    dofPositionsInDegrees.push_back(90.0);
+
+
+    setDOFsSubSetPositionsInDegrees(estimatorIMU.model(),dofNames,dofPositionsInDegrees,qj);
+
+    Vector3 gravityOnRootLink;
+    gravityOnRootLink.zero();
+    gravityOnRootLink(2) = -9.81;
+
+    Vector3 properAccelerationInIMU;
+    properAccelerationInIMU.zero();
+    properAccelerationInIMU(2) = 9.81;
+
+    Vector3 zero;
+    zero.zero();
+
+    FrameIndex root_link_index = estimatorFixedBase.model().getFrameIndex("root_link");
+    FrameIndex imu_frame_index = estimatorIMU.model().getFrameIndex("imu_frame");
 
     // Set kinematics
-    estimator.updateKinematicsFromFixedBase(qj,dqj,ddqj,l_sole_index,gravity);
+    estimatorFixedBase.updateKinematicsFromFixedBase(qj,dqj,ddqj,root_link_index,gravityOnRootLink);
+    estimatorIMU.updateKinematicsFromFloatingBase(qj,dqj,ddqj,imu_frame_index,properAccelerationInIMU,zero,zero);
 
     // Compute ft sensor offset
     UnknownWrenchContact unknown;
     unknown.unknownType = iDynTree::FULL_WRENCH;
     unknown.contactPoint.zero();
 
-    LinkUnknownWrenchContacts fullBodyUnknowns(estimator.model());
+    LinkUnknownWrenchContacts fullBodyUnknowns(estimatorIMU.model());
 
-    fullBodyUnknowns.addNewContactInFrame(estimator.model(),l_sole_index,unknown);
+    fullBodyUnknowns.addNewContactInFrame(estimatorIMU.model(),root_link_index,unknown);
 
-    SensorsMeasurements sensOffset(estimator.sensors());
+    SensorsMeasurements sensOffsetIMU(estimatorIMU.sensors());
+    SensorsMeasurements sensOffsetFixedBase(estimatorFixedBase.sensors());
 
-    LinkContactWrenches estimatedContactWrenches(estimator.model());
-    JointDOFsDoubleArray estimatedJointTorques(estimator.model());
+    LinkContactWrenches estimatedContactWrenchesIMU(estimatorIMU.model());
+    LinkContactWrenches estimatedContactWrenchesFixedBase(estimatorFixedBase.model());
 
-    estimator.computeExpectedFTSensorsMeasurements(fullBodyUnknowns,sensOffset,estimatedContactWrenches,estimatedJointTorques);
+    JointDOFsDoubleArray estimatedJointTorquesIMU(estimatorIMU.model());
+    JointDOFsDoubleArray estimatedJointTorquesFixedBase(estimatorFixedBase.model());
 
-    std::cerr << "Estimated contact wrenches " << estimatedContactWrenches.toString(estimator.model()) << std::endl;
-    std::cerr << "Estimated joint torques " << estimatedJointTorques.toString() << std::endl;
+    estimatorIMU.computeExpectedFTSensorsMeasurements(fullBodyUnknowns,sensOffsetIMU,estimatedContactWrenchesIMU,estimatedJointTorquesIMU);
+    estimatorFixedBase.computeExpectedFTSensorsMeasurements(fullBodyUnknowns,sensOffsetFixedBase,estimatedContactWrenchesFixedBase,estimatedJointTorquesFixedBase);
 
+    for(unsigned int ft=0; ft < sensOffsetIMU.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); ft++)
+    {
+        iDynTree::Wrench ftIMU, ftFixedBase;
+
+
+        sensOffsetIMU.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft,ftIMU);
+        sensOffsetFixedBase.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft,ftFixedBase);
+
+        std::cerr << "Wrench for sensor " << estimatorIMU.sensors().getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,ft)->getName()
+                  << " are " << ftIMU.toString() << " (IMU) " << ftFixedBase.toString() << " (fixed base)" << std::endl;
+
+        ASSERT_EQUAL_SPATIAL_FORCE_TOL(ftIMU,ftFixedBase,1e-9);
+    }
 
     return EXIT_SUCCESS;
 }

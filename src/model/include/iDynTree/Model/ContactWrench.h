@@ -33,6 +33,13 @@ namespace iDynTree
         Position m_contactPoint;
         Wrench   m_contactWrench;
 
+        /**
+         * Unique id identifing the contact.
+         * This id is propagated to the contact wrench data structure.
+         * It is implemented mainly for compatibility with the skinDynLib library.
+         */
+        unsigned long m_contactId;
+
     public:
         /**
          * \brief Position of a point on the contact surface.
@@ -60,8 +67,13 @@ namespace iDynTree
          *
          */
         Wrench   & contactWrench();
+
+        unsigned long& contactId();
+
         const Position & contactPoint() const;
         const Wrench   & contactWrench() const;
+        const unsigned long& contactId() const;
+
     };
 
     /**

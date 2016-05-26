@@ -41,6 +41,17 @@ namespace iDynTree
      * Call report error if condition is true
      */
     bool reportErrorIf(bool condition, const char * className_methodName, const char * errorMessage);
+
+    /**
+     * Convert a double from degrees to radians.
+     */
+    double deg2rad(const double valueInDeg);
+
+    /**
+     * Convert a double from radians to degree.
+     */
+    double rad2deg(const double valueInRad);
+
 }
 
 #endif

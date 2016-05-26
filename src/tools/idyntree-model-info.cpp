@@ -24,6 +24,12 @@ void addOptions(cmdline::parser &cmd)
 
     cmd.add<std::string>("link-com-frame", '\0',
                          "If link-com is passed, link-com-frame specifies the frame in which the inertia information is printed (assuming that the model is in zero position)",false);
+    
+    cmd.add<std::string>("frame-pose", '\0',
+                         "Print t",false);
+
+    cmd.add<std::string>("frame-pose-reference-frame", '\0',
+                         "If frame-pose is passed, frame-pose-reference-frame specifies the reference frame in which the frame pose is expressed (assuming that the model is in zero position)",false);
 }
 
 void handleTotalMassOptions(iDynTree::KinDynComputations & comp, cmdline::parser & cmd)
@@ -44,6 +50,47 @@ void handleTotalMassOptions(iDynTree::KinDynComputations & comp, cmdline::parser
 
     std::cout << "The total mass of model is "
                   << totalMass << " Kg." << std::endl;
+}
+
+void handleFramePoseOptions(iDynTree::KinDynComputations & comp, cmdline::parser & cmd)
+{
+    using namespace iDynTree;
+    
+    const Model & model = comp.getRobotModel();
+
+    if( !cmd.exist("frame-pose") )
+    {
+        return;
+    }
+
+    std::string frameName = cmd.get<std::string>("frame-pose");
+
+    std::string referenceFrameName;
+    if( cmd.exist("frame-pose-reference-frame") )
+    {
+        referenceFrameName = cmd.get<std::string>("frame-pose-reference-frame");
+    }
+    else
+    {
+        referenceFrameName = model.getFrameName(comp.getRobotModel().getDefaultBaseLink());
+    }
+    
+    if( !model.isValidFrameIndex(model.getFrameIndex(frameName)) )
+    {
+        std::cerr << "Frame " << frameName << " not found in the model" << std::endl;
+	return;
+    }
+    
+    if( !model.isValidFrameIndex(model.getFrameIndex(referenceFrameName)) )
+    {
+        std::cerr << "Frame " << referenceFrameName << " not found in the model" << std::endl;
+	return;
+    }
+
+    Transform referenceFrame_H_name = comp.getRelativeTransform(referenceFrameName,frameName);
+
+
+    std::cout << referenceFrameName << "_H_" << frameName << " is \n" << referenceFrame_H_name.asHomogeneousTransform().toString() << std::endl;
 }
 
 void handleLinkCOMOptions(iDynTree::KinDynComputations & comp, cmdline::parser & cmd)
@@ -107,6 +154,9 @@ int main(int argc, char** argv)
 
     // Handle link com
     handleLinkCOMOptions(model,cmd);
+    
+    // Handle frame pose 
+    handleFramePoseOptions(model,cmd);
 
 
     return EXIT_SUCCESS;

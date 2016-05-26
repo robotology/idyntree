@@ -30,13 +30,13 @@ bool skinDynLibConversionsHelper::addSkinDynLibAlias(const Model& model, const s
    int iDynTree_link_index = model.getLinkIndex(iDynTree_link_name);
    if( iDynTree_link_index < 0 )
    {
-       std::cerr << "[ERR] addSkinDynLibAlias : link " << iDynTree_link_name << " not found in the model " << std::endl;
+       std::cerr << "[ERROR] addSkinDynLibAlias : link " << iDynTree_link_name << " not found in the model " << std::endl;
    }
 
    int iDynTree_frame_index = model.getFrameIndex(iDynTree_frame_name);
    if( iDynTree_frame_index < 0 )
    {
-       std::cerr << "[ERR] addSkinDynLibAlias : frame " << iDynTree_frame_name << " not found in the model " << std::endl;
+       std::cerr << "[ERROR] addSkinDynLibAlias : frame " << iDynTree_frame_name << " not found in the model " << std::endl;
    }
 
    skinDynLibLinkID sdl_id;
@@ -59,16 +59,16 @@ bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
                                                      const std::string iDynTree_link_name,
                                                      std::string & iDynTree_frame_name,
                                                      int & skinDynLib_body_part,
-                                                     int & skinDynLib_link_index)
+                                                     int & skinDynLib_link_index) const
 {
    int iDynTree_link_index = model.getLinkIndex(iDynTree_link_name);
    if( iDynTree_link_index < 0 )
    {
-       std::cerr << "[ERR] getSkinDynLibAlias : link " << iDynTree_link_name << " not found " << std::endl;
+       std::cerr << "[ERROR] getSkinDynLibAlias : link " << iDynTree_link_name << " not found " << std::endl;
        return false;
    }
 
-   for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.begin();
+   for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::const_iterator it = skinDynLibLinkMap.begin();
        it != skinDynLibLinkMap.end(); it++ )
    {
        if( it->second.link_index == iDynTree_link_index )
@@ -87,12 +87,12 @@ bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
 
 bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
                                                      const int iDynTree_link_index, int & iDynTree_frame_index,
-                                                     int & skinDynLib_body_part, int & skinDynLib_link_index)
+                                                     int & skinDynLib_body_part, int & skinDynLib_link_index) const
 {
   if( iDynTree_link_index < 0 || iDynTree_link_index >= model.getNrOfLinks() ) return false;
 
   // TODO \todo What is this crazyness??? Linear search of a map??
-   for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.begin();
+   for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::const_iterator it = skinDynLibLinkMap.begin();
        it != skinDynLibLinkMap.end(); it++ )
    {
        if( it->second.link_index == iDynTree_link_index )
@@ -113,7 +113,7 @@ bool skinDynLibConversionsHelper::removeSkinDynLibAlias(const Model& model, std:
    int link_index = model.getLinkIndex(link);
    if( link_index < 0 )
    {
-       std::cerr << "[ERR] removeSkinDynLibAlias : link " << link << " not found " << std::endl;
+       std::cerr << "[ERROR] removeSkinDynLibAlias : link " << link << " not found " << std::endl;
    }
 
    for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.begin();
@@ -132,17 +132,17 @@ bool skinDynLibConversionsHelper::removeSkinDynLibAlias(const Model& model, std:
 bool skinDynLibConversionsHelper::skinDynLib2iDynTree(const int skinDynLib_body_part,
                                                       const int skinDynLib_link_index,
                                                       int & iDynTree_link_index,
-                                                       int & iDynTree_frame_index)
+                                                       int & iDynTree_frame_index) const
 {
     skinDynLibLinkID skinID;
     skinID.body_part = skinDynLib_body_part;
     skinID.local_link_index = skinDynLib_link_index;
 
-    ::std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.find(skinID);
+    ::std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::const_iterator it = skinDynLibLinkMap.find(skinID);
 
     if( it == skinDynLibLinkMap.end() )
     {
-        std::cerr << "[ERR] DynTree::skinDynLib2iDynTree : skinDynLib link "
+        std::cerr << "[ERROR] DynTree::skinDynLib2iDynTree : skinDynLib link "
                   << skinDynLib_body_part << " " << skinDynLib_link_index << " not found " << std::endl;
         return false;
     }
@@ -153,9 +153,17 @@ bool skinDynLibConversionsHelper::skinDynLib2iDynTree(const int skinDynLib_body_
     return true;
 }
 
-bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
-                                                           const iCub::skinDynLib::dynContactList& dynList,
-                                                           LinkUnknownWrenchContacts& unknowns)
+/**
+ * Templated version of fromSkinDynLibToiDynTree, useful to implement
+ * the exact same function for dynContactList and skinContactList, that
+ * have exactly the same interface, but they don't have any common ancestor
+ * in the class structure.
+ */
+template<class contactsList>
+bool fromSkinDynLibToiDynTreeHelper(const Model& model,
+                                    const contactsList& dynList,
+                                          LinkUnknownWrenchContacts& unknowns,
+                                          const skinDynLibConversionsHelper& conversionHelper)
 {
     unknowns.resize(model);
 
@@ -165,7 +173,7 @@ bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
         unknowns.setNrOfContactsForLink(l,0);
     }
 
-    iCub::skinDynLib::dynContactList::const_iterator it;
+    typename contactsList::const_iterator it;
     for(it = dynList.begin(); it!=dynList.end(); it++)
     {
         // Unknown
@@ -178,12 +186,12 @@ bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
         LinkIndex iDynTree_link_index = LINK_INVALID_INDEX;
         FrameIndex iDynTree_skinFrame_index = FRAME_INVALID_INDEX;
 
-        bool skinDynLib_ID_found = skinDynLib2iDynTree(skinDynLib_body_part,skinDynLib_link_index,
-                                                       iDynTree_link_index,iDynTree_skinFrame_index);
+        bool skinDynLib_ID_found = conversionHelper.skinDynLib2iDynTree(skinDynLib_body_part,skinDynLib_link_index,
+                                                                        iDynTree_link_index,iDynTree_skinFrame_index);
 
         if( !skinDynLib_ID_found )
         {
-            std::cerr << "[ERR] skinDynLibConversionsHelper::fromSkinDynLibToiDynTree skinDynLib_ID_found not found, skipping contact" << std::endl;
+            std::cerr << "[ERROR] skinDynLibConversionsHelper::fromSkinDynLibToiDynTree skinDynLib_ID_found not found, skipping contact" << std::endl;
             continue;
         }
 
@@ -219,11 +227,29 @@ bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
             }
         }
 
+        // Save the contact ID
+        unknownWrench.contactId = it->getId();
+
         unknowns.addNewContactForLink((LinkIndex)iDynTree_link_index,unknownWrench);
     }
-    
+
     return true;
 }
+
+bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
+                                                           const iCub::skinDynLib::dynContactList& dynList,
+                                                           LinkUnknownWrenchContacts& unknowns)
+{
+    return fromSkinDynLibToiDynTreeHelper<iCub::skinDynLib::dynContactList>(model,dynList,unknowns,*this);
+}
+
+bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
+                                                           const iCub::skinDynLib::skinContactList& skinList,
+                                                           LinkUnknownWrenchContacts& unknowns)
+{
+    return fromSkinDynLibToiDynTreeHelper<iCub::skinDynLib::skinContactList>(model,skinList,unknowns,*this);
+}
+
 
 
 bool skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib(const Model & model,
@@ -250,7 +276,7 @@ bool skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib(const Model & model,
 
             if( !skinDynLib_ID_found )
             {
-                std::cerr << "[ERR] skinDynLibConversionsHelper::fromSkinDynLibToiDynTree skinDynLib_ID_found not found, skipping contact" << std::endl;
+                std::cerr << "[ERROR] skinDynLibConversionsHelper::fromSkinDynLibToiDynTree skinDynLib_ID_found not found, skipping contact" << std::endl;
                 continue;
             }
 
@@ -282,6 +308,84 @@ bool skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib(const Model & model,
 
     return true;
 }
+
+bool skinDynLibConversionsHelper::updateSkinContactListFromLinkContactWrenches(const Model& model,
+                                                                               const LinkContactWrenches& contactWrenches,
+                                                                               iCub::skinDynLib::skinContactList& skinContactListToUpdate)
+{
+    yarp::sig::Vector wrenchCache(6), positionCache(3);
+
+    size_t nrOfLinks = model.getNrOfLinks();
+    for(LinkIndex l=0; l < nrOfLinks; l++)
+    {
+        size_t nrOfContacts = contactWrenches.getNrOfContactsForLink(l);
+
+        if( nrOfContacts > 0 )
+        {
+            //get link index
+            int skinDynLib_body_part = -1;
+            int skinDynLib_link_index = -1;
+
+            FrameIndex iDynTree_skinFrame_index = FRAME_INVALID_INDEX;
+
+            bool skinDynLib_ID_found = getSkinDynLibAlias(model,l,iDynTree_skinFrame_index,skinDynLib_body_part,skinDynLib_link_index);
+
+            if( !skinDynLib_ID_found )
+            {
+                std::cerr << "[ERROR] skinDynLibConversionsHelper::fromSkinDynLibToiDynTree : link " << model.getLinkName(l) <<  " not found, skipping contact" << std::endl;
+                continue;
+            }
+
+            // Get the transform between the skinDynLib frame and the iDynTree link frame
+            iDynTree::Transform skinDynLibFrame_H_link = model.getFrameTransform(iDynTree_skinFrame_index).inverse();
+
+            for(size_t c=0; c < nrOfContacts; c++)
+            {
+                unsigned long contactId = contactWrenches.contactWrench(l,c).contactId();
+
+                // We need to convert the position of the contact from the iDynTree frame to the skinDynLib frame
+                Position skinDynLib_contactPoint = skinDynLibFrame_H_link*(contactWrenches.contactWrench(l,c).contactPoint());
+
+                // The wrench is always expressed wrt to the contact point, so we need just to change the orientation
+                Wrench skinDynLib_wrench = skinDynLibFrame_H_link.getRotation()*(contactWrenches.contactWrench(l,c).contactWrench());
+
+                // To set the contact in the skinContactList, we need to search it using the contactId
+                bool contactFound = false;
+                for(iCub::skinDynLib::skinContactList::iterator it = skinContactListToUpdate.begin();
+                    it != skinContactListToUpdate.end(); it++)
+                {
+                    if( it->getId() == contactId )
+                    {
+                        contactFound = true;
+
+                        toYarp(skinDynLib_wrench,wrenchCache);
+
+                        it->setForceMoment(wrenchCache);
+
+                        break;
+                    }
+                }
+
+                if(!contactFound)
+                {
+                    toYarp(skinDynLib_wrench,wrenchCache);
+                    toYarp(skinDynLib_contactPoint,positionCache);
+
+                    iCub::skinDynLib::skinContact skinLibContact;
+                    skinLibContact.setCoP(positionCache);
+                    skinLibContact.setForceMoment(wrenchCache);
+                    skinLibContact.setBodyPart((iCub::skinDynLib::BodyPart)skinDynLib_body_part);
+                    skinLibContact.setLinkNumber(skinDynLib_link_index);
+
+                    skinContactListToUpdate.push_back(skinLibContact);
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
 
 
 }

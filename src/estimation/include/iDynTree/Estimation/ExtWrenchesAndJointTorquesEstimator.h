@@ -1,19 +1,8 @@
 /*
  * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
- * Author: Silvio Traversaro
- * email: silvio.traversaro@iit.it
+ * Authors: Silvio Traversaro
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  *
- * Permission is granted to copy, distribute, and/or modify this program
- * under the terms of the GNU General Public License, version 2 or any
- * later version published by the Free Software Foundation.
- *
- * A copy of the license can be found at
- * http://www.robotcub.org/icub/license/gpl.txt
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
- * Public License for more details
  */
 
 #ifndef IDYNTREE_ESTIMATION_EXTWRENCHESANDJOINTTORQUEESTIMATOR_H
@@ -129,6 +118,24 @@ public:
     bool loadModelAndSensorsFromFile(const std::string filename, const std::string filetype="");
 
     /**
+     * Load model and sensors from file, specifieng the dof considered for the estimation.
+     *
+     * @param[in] filename path to the file to load.
+     * @param[in] consideredDOFs list of dof to consider in the model.
+     * @param[in] filetype (optional) explicit definiton of the filetype to load.
+     *                     Only "urdf" is supported at the moment.
+     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     *
+     *
+     * \note this will create e a reduced model only with the joint specified in consideredDOFs and  the
+     *       fixed joints in which FT sensor are mounted.
+     */
+    bool loadModelAndSensorsFromFileWithSpecifiedDOFs(const std::string filename,
+                                                      const std::vector<std::string> & consideredDOFs,
+                                                      const std::string filetype="");
+
+
+    /**
      * Get used model.
      *
      * @return the kinematic and dynamic model used for estimation.
@@ -141,6 +148,13 @@ public:
      * @return the sensor model used for estimation.
      */
     const SensorsList & sensors() const;
+
+    /**
+     * Get the used submodel decomposition.
+     *
+     * @return the used submodel decomposition.
+     */
+    const SubModelDecomposition & submodels() const;
 
     /**
      * Set the kinematic information necessary for the force estimation using the
@@ -241,6 +255,26 @@ public:
                                             const SensorsMeasurements & ftSensorsMeasures,
                                                   LinkContactWrenches & estimateContactWrenches,
                                                   JointDOFsDoubleArray & jointTorques);
+
+    /**
+     * Check if the kinematics set in the model are the one of a fixed model.
+     *
+     * While computing the expected F/T sensors measures, you tipically want the
+     * model to be still, to reduce the sources of noise .
+     *
+     * @param[in] gravityNorm the norm of the gravity (tipically 9.81) against with all the
+     *                        proper accelerations are check (for a still model, the proper
+     *                        acceleration norm should be close to the gravity norm.
+     * @param[in] properAccTol tolerance to use for the check on the proper acceleration norm.
+     * @param[in] verbose     true if you want to print debug information, false otherwise.
+     * @return true if the model is still, false if it is moving or if the kinematics was never setted.
+     *
+     * \note This method can be computationally expensive, so in most case it
+     *       may be a better idea to just do the check on the input variables (joint velocities, joint acceleration).
+     */
+    bool checkThatTheModelIsStill(const double gravityNorm,
+                                  const double properAccTol,
+                                  const double verbose);
 
 };
 

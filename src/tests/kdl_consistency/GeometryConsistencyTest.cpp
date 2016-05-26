@@ -36,6 +36,8 @@ void checkGetSetRPYIsIdempotent(double r, double p, double y)
     rotIDT.getRPY(roll, pitch, yaw);
 
     iDynTree::Rotation rotIDTchecl = iDynTree::Rotation::RPY(roll,pitch,yaw);
+
+    ASSERT_EQUAL_MATRIX(rotIDT,rotIDTchecl);
 }
 
 void checkSetRPYIsConsistentWithKDL(double r, double p, double y)

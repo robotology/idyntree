@@ -24,7 +24,7 @@ include_directories(${libraryname} SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INC
 target_link_libraries(${libraryname} idyntree-core idyntree-kdl idyntree-sensors idyntree-modelio-urdf-kdl ${TinyXML_LIBRARIES} )
 
 
-set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_HIGH_LEVEL_HEADERS})
+set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_HIGH_LEVEL_KDL_HEADERS})
 
 install(TARGETS ${libraryname}
         EXPORT iDynTree

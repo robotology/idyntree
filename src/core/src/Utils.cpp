@@ -10,12 +10,17 @@
 #include <iostream>
 
 #include <cassert>
+#include <cmath>
 
 namespace iDynTree
 {
     int UNKNOWN = -1;
 
     double DEFAULT_TOL = 1e-10;
+
+    const double IDYNTREE_PI=M_PI;
+    const double IDYNTREE_RAD2DEG=180.0/M_PI;
+    const double IDYNTREE_DEG2RAD=M_PI/180.0;
 
     bool checkEqualOrUnknown(const int op1, const int op2)
     {
@@ -49,5 +54,18 @@ namespace iDynTree
         }
         return !condition;
     }
+
+    double deg2rad(const double valueInDeg)
+    {
+        return IDYNTREE_DEG2RAD*valueInDeg;
+    }
+
+
+    double rad2deg(const double valueInRad)
+    {
+        return IDYNTREE_RAD2DEG*valueInRad;
+    }
+
+
 
 }

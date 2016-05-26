@@ -373,7 +373,7 @@ bool createReducedModel(const Model& fullModel,
         Transform newLink1_X_oldLink1 = subModelBase_X_link(oldLink1);
         Transform newLink2_X_oldLink2 = subModelBase_X_link(oldLink2);
 
-        // \todo handle this in a joint-agnostic way,
+        // \todo TODO handle this in a joint-agnostic way,
         // possibly extending the joint interface
         IJointPtr newJoint = 0;
         if( dynamic_cast<const FixedJoint*>(oldJoint) )
@@ -417,7 +417,6 @@ bool createReducedModel(const Model& fullModel,
 
     return ok;
 }
-
 
 
 }

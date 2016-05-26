@@ -36,8 +36,12 @@ namespace iDynTree
 
         bool isConsistent(const Model& model) const;
 
+        size_t getNrOfLinks() const;
+
         iDynTree::Transform & operator()(const LinkIndex link);
         const iDynTree::Transform & operator()(const LinkIndex link) const;
+
+        std::string toString(const Model & model) const;
 
         ~LinkPositions();
     };

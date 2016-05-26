@@ -115,6 +115,15 @@ bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
     // Get the link of the frame
     LinkIndex linkIndex = model.getFrameLink(frameIndex);
 
+    if( !model.isValidLinkIndex(linkIndex) )
+    {
+        std::stringstream err;
+        err << "Unknown link index " << linkIndex << " in model that has " << model.getNrOfLinks() << " links.";
+        reportError("LinkUnknownWrenchContacts","addNewContactInFrame",err.str().c_str());
+        return false;
+    }
+
+
     UnknownWrenchContact unknownContactInLink;
 
     unknownContactInLink.unknownType = unknownContactInFrame.unknownType;
@@ -502,6 +511,9 @@ void storeResultsOfEstimation(const Traversal& traversal,
             Wrench & estimatedWrench = outputContactWrenches.contactWrench(visitedLinkIndex,contact).contactWrench();
             outputContactWrenches.contactWrench(visitedLinkIndex,contact).contactPoint() = unknownWrench.contactPoint;
 
+            // Preserve the contact ID number
+            outputContactWrenches.contactWrench(visitedLinkIndex,contact).contactId() = unknownWrench.contactId;
+
             switch( unknownWrench.unknownType )
             {
                 case FULL_WRENCH:
@@ -540,8 +552,8 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
                                                const JointPosDoubleArray& jointPos,
                                                const LinkVelArray& linkVel,
                                                const LinkAccArray& linkProperAcc,
-                                               estimateExternalWrenchesBuffers& bufs,
-                                               LinkContactWrenches& outputContactWrenches)
+                                                     estimateExternalWrenchesBuffers& bufs,
+                                                     LinkContactWrenches& outputContactWrenches)
 {
     /**< value extracted from old iDynContact */
     double tol = 1e-7;
@@ -550,7 +562,7 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
     if( bufs.getNrOfLinks() != model.getNrOfLinks() ||
         bufs.getNrOfSubModels() != 1 )
     {
-        std::cerr << "[ERROR] estimateExternalWrenchesWithoutInternalFT : input buffer has wrong size." << std::endl;
+        reportError("","estimateExternalWrenchesWithoutInternalFT","input buffer has wrong size.");
         return false;
     }
 

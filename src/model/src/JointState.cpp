@@ -37,7 +37,7 @@ void JointPosDoubleArray::resize(unsigned int nrOfPosCoords)
 
 bool JointPosDoubleArray::isConsistent(const Model& model)
 {
-    return (this->size() != model.getNrOfPosCoords());
+    return (this->size() == model.getNrOfPosCoords());
 }
 
 JointPosDoubleArray::~JointPosDoubleArray()
@@ -69,7 +69,7 @@ void JointDOFsDoubleArray::resize(unsigned int nrOfDOFs)
 
 bool JointDOFsDoubleArray::isConsistent(const Model& model)
 {
-    return (this->size() != model.getNrOfDOFs());
+    return (this->size() == model.getNrOfDOFs());
 }
 
 JointDOFsDoubleArray::~JointDOFsDoubleArray()
