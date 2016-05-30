@@ -12,9 +12,9 @@ if(IDYNTREE_USES_KDL)
     # Benchmarks against old RNEA & CRBA based on kdl
     add_subdirectory(benchmark)
 
-    # Test implementations of RPY in iDynTree, Eigen, KDL and YARP
+    # Comparative tests of implementations of similar methods in iDynTree, Eigen, KDL and YARP
     if( IDYNTREE_USES_YARP )
-        add_subdirectory(yarp_kdl_rpy)
+        add_subdirectory(yarp_kdl_consistency)
     endif()
 
     if(IDYNTREE_USES_ICUB_MAIN)
