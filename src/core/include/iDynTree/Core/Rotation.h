@@ -157,6 +157,31 @@ namespace iDynTree
          */
         void getRPY(double & r, double & p, double &y);
 
+        /**
+         * Get the corresponding quaternion for this rotation
+         *
+         * The quaternion is defined as [s, r]
+         * where s \in \mathbb{R} is the real and
+         * r \in \mathbb{R}^3 is the imaginary part.
+         *
+         * @param[out] quaternion the output quaternion
+         */
+        bool getQuaternion(iDynTree::Vector4& quaternion) const;
+
+        /**
+         * Get the corresponding quaternion components for this rotation
+         *
+         * The quaternion is defined as [s, r]
+         * where s \in \mathbb{R} is the real and
+         * r \in \mathbb{R}^3 is the imaginary part.
+         *
+         * @param[out] s the real part
+         * @param[out] r1 the first component of the imaginary part (i.e. i base)
+         * @param[out] r2 the second component of the imaginary part (i.e. j base)
+         * @param[out] r3 the third component of the imaginary part (i.e. k base)
+         */
+        bool getQuaternion(double &s, double &r1, double &r2, double &r3) const;
+
 
         ///@}
 
@@ -270,6 +295,19 @@ namespace iDynTree
          *
          */
         static Rotation Identity();
+
+        /**
+         * Construct a rotation matrix from the given quaternion representation
+         *
+         * The quaternion is expected to be ordered in the following way:
+         * - s \in \mathbb{R} the real part of the quaterion
+         * - r \in \mathbb{R}^3 the imaginary part of the quaternion
+         *
+         * @param quaternion a quaternion representing a rotation
+         *
+         * @return The rotation matrix
+         */
+        static Rotation RotationFromQuaternion(const iDynTree::Vector4& quaternion);
 
         ///@}
 
