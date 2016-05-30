@@ -182,6 +182,16 @@ namespace iDynTree
          */
         bool getQuaternion(double &s, double &r1, double &r2, double &r3) const;
 
+        /**
+         * Get the corresponding quaternion for this rotation
+         *
+         * The quaternion is defined as [s, r]
+         * where s \in \mathbb{R} is the costituent and
+         * r \in \mathbb{R}^3 is the imaginary part.
+         *
+         * @return the output quaternion
+         */
+        iDynTree::Vector4 asQuaternion() const;
 
         ///@}
 

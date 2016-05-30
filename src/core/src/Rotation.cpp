@@ -351,6 +351,14 @@ namespace iDynTree
         return true;
     }
 
+    iDynTree::Vector4 Rotation::asQuaternion() const
+    {
+        iDynTree::Vector4 quaternion;
+        quaternion.zero();
+        getQuaternion(quaternion);
+        return quaternion;
+    }
+
 
     AngularMotionVector3 Rotation::log() const
     {
