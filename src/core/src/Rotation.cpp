@@ -300,45 +300,65 @@ namespace iDynTree
         //INRIA Sophia Antipolis
         //Equation 3.9 (page 101)
 
-        double q0 = ( R(0,0) + R(1,1) + R(2,2) + 1.0) / 4.0;
-        double q1 = ( R(0,0) - R(1,1) - R(2,2) + 1.0) / 4.0;
-        double q2 = (-R(0,0) + R(1,1) - R(2,2) + 1.0) / 4.0;
-        double q3 = (-R(0,0) - R(1,1) + R(2,2) + 1.0) / 4.0;
+        //Diagonal elements used only to find the maximum
+        //the furthest value from zero
+        //we use this value as denominator to find the other elements
+        double q0 = ( R(0,0) + R(1,1) + R(2,2) + 1.0);
+        double q1 = ( R(0,0) - R(1,1) - R(2,2) + 1.0);
+        double q2 = (-R(0,0) + R(1,1) - R(2,2) + 1.0);
+        double q3 = (-R(0,0) - R(1,1) + R(2,2) + 1.0);
 
         if (q0 < 0.0) q0 = 0.0;
         if (q1 < 0.0) q1 = 0.0;
         if (q2 < 0.0) q2 = 0.0;
         if (q3 < 0.0) q3 = 0.0;
 
-        q0 = std::sqrt(q0);
-        q1 = std::sqrt(q1);
-        q2 = std::sqrt(q2);
-        q3 = std::sqrt(q3);
-
         if (q0 >= q1 && q0 >= q2 && q0 >= q3) {
-            q0 *= 1.0;
-            q1 *= (R(2,1) - R(1,2)) >= 0 ? 1 : -1;
-            q2 *= (R(0,2) - R(2,0)) >= 0 ? 1 : -1;
-            q3 *= (R(1,0) - R(0,1)) >= 0 ? 1 : -1;
+            q0 = std::sqrt(q0);
+            q1 = (R(2,1) - R(1,2)) / (2.0 * q0);
+            q2 = (R(0,2) - R(2,0)) / (2.0 * q0);
+            q3 = (R(1,0) - R(0,1)) / (2.0 * q0);
+            q0 /= 2.0;
         } else if (q1 >= q0 && q1 >= q2 && q1 >= q3) {
-            q0 *= (R(2,1) - R(1,2)) >= 0 ? 1 : -1;
-            q1 *= 1.0;
-            q2 *= (R(1,0) + R(0,1)) >= 0 ? 1 : -1;
-            q3 *= (R(2,0) + R(0,2)) >= 0 ? 1 : -1;
+            q1 = std::sqrt(q1);
+            q0 = (R(2,1) - R(1,2)) / (2.0 * q1);
+            q2 = (R(1,0) + R(0,1)) / (2.0 * q1);
+            q3 = (R(2,0) + R(0,2)) / (2.0 * q1);
+            q1 /= 2.0;
         } else if (q2 >= q0 && q2 >= q1 && q2 >= q3) {
-            q0 *= (R(0,2) - R(2,0)) >= 0 ? 1 : -1;
-            q1 *= (R(1,0) + R(0,1)) >= 0 ? 1 : -1;
-            q2 *= 1.0;
-            q3 *= (R(1,2) + R(2,1)) >= 0 ? 1 : -1;
+            q2 = std::sqrt(q2);
+            q0 = (R(0,2) - R(2,0)) / (2.0 * q2);
+            q1 = (R(1,0) + R(0,1)) / (2.0 * q2);
+            q3 = (R(1,2) + R(2,1)) / (2.0 * q2);
+            q2 /= 2.0;
         } else if (q3 >= q0 && q3 >= q1 && q3 >= q2) {
-            q0 *= (R(1,0) - R(0,1)) >= 0 ? 1 : -1;
-            q1 *= (R(2,0) + R(0,2)) >= 0 ? 1 : -1;
-            q2 *= (R(1,2) + R(2,1)) >= 0 ? 1 : -1;
-            q3 *= 1.0;
+            q3 = std::sqrt(q3);
+            q0 = (R(1,0) - R(0,1)) / (2.0 * q3);
+            q1 = (R(2,0) + R(0,2)) / (2.0 * q3);
+            q2 = (R(1,2) + R(2,1)) / (2.0 * q3);
+            q3 /= 2.0;
         } else {
             reportError("Rotation", "getQuaternion", "Quaternion numerically bad conditioned");
             return false;
         }
+
+        //Here we impose that the leftmost nonzero element of the quaternion is positive
+        double eps = 1e-7;
+        double sign = 1.0;
+        if (q0 > eps || q0 < -eps) {
+            sign = q0 > 0 ? 1.0 : -1.0;
+        } else if (q1 > eps || q1 < -eps) {
+            sign = q1 > 0 ? 1.0 : -1.0;
+        } else if (q2 > eps || q2 < -eps) {
+            sign = q2 > 0 ? 1.0 : -1.0;
+        } else if (q3 > eps || q3 < -eps) {
+            sign = q3 > 0 ? 1.0 : -1.0;
+        }
+
+        q0 /= sign;
+        q1 /= sign;
+        q2 /= sign;
+        q3 /= sign;
 
         double quaternionNorm = std::sqrt(q0 * q0 +
                                           q1 * q1 +
