@@ -148,7 +148,7 @@ namespace iDynTree
         ///@{
 
          /**
-         * Get a roll, pitch and yaw corresponing to this rotation.
+         * Get a roll, pitch and yaw corresponding to this rotation.
          *
          * Get r \in [-180,180] , p \in [-90,90], y \in [-180,180]
          * such that
@@ -158,22 +158,40 @@ namespace iDynTree
         void getRPY(double & r, double & p, double &y);
 
         /**
-         * Get the corresponding quaternion for this rotation
+         * Get a unit quaternion corresponding to this rotation
          *
          * The quaternion is defined as [s, r]
          * where s \in \mathbb{R} is the real and
          * r \in \mathbb{R}^3 is the imaginary part.
+         *
+         * The returned quaternion is such that *this is
+         * equal to RotationFromQuaternion(quaternion).
+         *
+         * \note For each rotation, there are two quaternion
+         * corresponding to it. In this method we return
+         * the one that has the first non-zero (with a tolerance of 1e-7)
+         * component positive. If the real part is non-zero, this
+         * mean that we return the quaternion with positive real part.
          *
          * @param[out] quaternion the output quaternion
          */
         bool getQuaternion(iDynTree::Vector4& quaternion) const;
 
         /**
-         * Get the corresponding quaternion components for this rotation
+         * Get a unit quaternion corresponding to this rotation
          *
-         * The quaternion is defined as [s, r]
+         * The unit quaternion is defined as [s, r]
          * where s \in \mathbb{R} is the real and
          * r \in \mathbb{R}^3 is the imaginary part.
+         *
+         * The returned quaternion is such that *this is
+         * equal to RotationFromQuaternion(quaternion).
+         *
+         * \note For each rotation, there are two quaternion
+         * corresponding to it. In this method we return
+         * the one that has the first non-zero (with a tolerance of 1e-7)
+         * component positive. If the real part is non-zero, this
+         * mean that we return the quaternion with positive real part.
          *
          * @param[out] s the real part
          * @param[out] r1 the first component of the imaginary part (i.e. i base)
@@ -183,11 +201,20 @@ namespace iDynTree
         bool getQuaternion(double &s, double &r1, double &r2, double &r3) const;
 
         /**
-         * Get the corresponding quaternion for this rotation
+         * Get a unit quaternion corresponding to this rotation
          *
          * The quaternion is defined as [s, r]
          * where s \in \mathbb{R} is the costituent and
          * r \in \mathbb{R}^3 is the imaginary part.
+         *
+         * The returned quaternion is such that *this is
+         * equal to RotationFromQuaternion(quaternion).
+         *
+         * \note For each rotation, there are two quaternion
+         * corresponding to it. In this method we return
+         * the one that has the first non-zero (with a tolerance of 1e-7)
+         * component positive. If the real part is non-zero, this
+         * mean that we return the quaternion with positive real part.
          *
          * @return the output quaternion
          */
@@ -307,11 +334,20 @@ namespace iDynTree
         static Rotation Identity();
 
         /**
-         * Construct a rotation matrix from the given quaternion representation
+         * Construct a rotation matrix from the given unit quaternion representation
          *
          * The quaternion is expected to be ordered in the following way:
          * - s \in \mathbb{R} the real part of the quaterion
          * - r \in \mathbb{R}^3 the imaginary part of the quaternion
+         *
+         * The returned rotation matrix is given by the following formula:
+         * \f[
+         *   R(s,r) = I_{3\times3} + 2s r^{\wedge} + 2{r^\wedge}^2,
+         * \f]
+         * where \f$ r^{\wedge} \f$ is the skew-symmetric matrix such that:
+         * \f[
+         *   r \times v = r^\wedge v
+         * \f]
          *
          * @param quaternion a quaternion representing a rotation
          *
