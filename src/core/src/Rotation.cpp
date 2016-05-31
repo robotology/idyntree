@@ -300,10 +300,10 @@ namespace iDynTree
         //INRIA Sophia Antipolis
         //Equation 3.9 (page 101)
 
-        double q0 = ( R(1,1) + R(2,2) + R(3,3) + 1.0) / 4.0;
-        double q1 = ( R(1,1) - R(2,2) - R(3,3) + 1.0) / 4.0;
-        double q2 = (-R(1,1) + R(2,2) - R(3,3) + 1.0) / 4.0;
-        double q3 = (-R(1,1) - R(2,2) + R(3,3) + 1.0) / 4.0;
+        double q0 = ( R(0,0) + R(1,1) + R(2,2) + 1.0) / 4.0;
+        double q1 = ( R(0,0) - R(1,1) - R(2,2) + 1.0) / 4.0;
+        double q2 = (-R(0,0) + R(1,1) - R(2,2) + 1.0) / 4.0;
+        double q3 = (-R(0,0) - R(1,1) + R(2,2) + 1.0) / 4.0;
 
         if (q0 < 0.0) q0 = 0.0;
         if (q1 < 0.0) q1 = 0.0;
@@ -317,23 +317,23 @@ namespace iDynTree
 
         if (q0 >= q1 && q0 >= q2 && q0 >= q3) {
             q0 *= 1.0;
-            q1 *= (R(3,2) - R(2,3)) >= 0 ? 1 : -1;
-            q2 *= (R(1,3) - R(1,1)) >= 0 ? 1 : -1;
-            q3 *= (R(2,1) - R(1,2)) >= 0 ? 1 : -1;
+            q1 *= (R(2,1) - R(1,2)) >= 0 ? 1 : -1;
+            q2 *= (R(0,2) - R(2,0)) >= 0 ? 1 : -1;
+            q3 *= (R(1,0) - R(0,1)) >= 0 ? 1 : -1;
         } else if (q1 >= q0 && q1 >= q2 && q1 >= q3) {
-            q0 *= (R(3,2) - R(2,3)) >= 0 ? 1 : -1;
-            q1 *= 1.0;
-            q2 *= (R(2,1) + R(1,2)) >= 0 ? 1 : -1;
-            q3 *= (R(1,3) + R(1,1)) >= 0 ? 1 : -1;
-        } else if (q2 >= q0 && q2 >= q1 && q2 >= q3) {
-            q0 *= (R(1,3) - R(1,1)) >= 0 ? 1 : -1;
-            q1 *= (R(2,1) + R(1,2)) >= 0 ? 1 : -1;
-            q2 *= 1.0;
-            q3 *= (R(3,2) + R(2,3)) >= 0 ? 1 : -1;
-        } else if (q3 >= q0 && q3 >= q1 && q3 >= q2) {
             q0 *= (R(2,1) - R(1,2)) >= 0 ? 1 : -1;
-            q1 *= (R(1,1) + R(1,3)) >= 0 ? 1 : -1;
-            q2 *= (R(3,2) + R(2,3)) >= 0 ? 1 : -1;
+            q1 *= 1.0;
+            q2 *= (R(1,0) + R(0,1)) >= 0 ? 1 : -1;
+            q3 *= (R(2,0) + R(0,2)) >= 0 ? 1 : -1;
+        } else if (q2 >= q0 && q2 >= q1 && q2 >= q3) {
+            q0 *= (R(0,2) - R(2,0)) >= 0 ? 1 : -1;
+            q1 *= (R(1,0) + R(0,1)) >= 0 ? 1 : -1;
+            q2 *= 1.0;
+            q3 *= (R(1,2) + R(2,1)) >= 0 ? 1 : -1;
+        } else if (q3 >= q0 && q3 >= q1 && q3 >= q2) {
+            q0 *= (R(1,0) - R(0,1)) >= 0 ? 1 : -1;
+            q1 *= (R(2,0) + R(0,2)) >= 0 ? 1 : -1;
+            q2 *= (R(1,2) + R(2,1)) >= 0 ? 1 : -1;
             q3 *= 1.0;
         } else {
             reportError("Rotation", "getQuaternion", "Quaternion numerically bad conditioned");
@@ -423,7 +423,7 @@ namespace iDynTree
         return RotationRaw::Identity();
     }
 
-    Rotation Rotation::RotationFromQuaternion(const iDynTree::Vector4& quaternion)
+    Rotation Rotation::RotationFromQuaternion(const iDynTree::Vector4& _quaternion)
     {
         //Taken from "Contributions au contrôle automatique de véhicules aériens"
         //PhD thesis of "Minh Duc HUA"
@@ -433,19 +433,11 @@ namespace iDynTree
         // Rodriques's formula
         // R = I3 + 2s S(r) + 2S(r)^2,
         Rotation _rotation;
-        Eigen::Map<Eigen::Matrix3d> rotation(_rotation.data());
+        Eigen::Map<Eigen::Matrix<double, 3, 3, Eigen::RowMajor> > rotation = toEigen(_rotation);
         rotation.setIdentity();
 
-        Matrix3x3 _skewSymmetricMatrix;
-        Eigen::Map<Eigen::Matrix3d> skewSymmetricMatrix(_skewSymmetricMatrix.data());
-        skewSymmetricMatrix.setZero();
-        skewSymmetricMatrix(0, 1) = -quaternion(3);
-        skewSymmetricMatrix(0, 2) =  quaternion(2);
-        skewSymmetricMatrix(1, 2) = -quaternion(1);
-
-        skewSymmetricMatrix(1, 0) = -skewSymmetricMatrix(0, 1);
-        skewSymmetricMatrix(2, 0) = -skewSymmetricMatrix(0, 2);
-        skewSymmetricMatrix(2, 1) = -skewSymmetricMatrix(1, 2);
+        Eigen::Map<const Eigen::Vector4d> quaternion(_quaternion.data());
+        Eigen::Matrix3d skewSymmetricMatrix = iDynTree::skew(quaternion.tail<3>());
 
         rotation += 2 * quaternion(0) * skewSymmetricMatrix + 2 * skewSymmetricMatrix * skewSymmetricMatrix;
 

@@ -115,11 +115,10 @@ void checkRotationToQuaternion(const iDynTree::Rotation randRot, QuaternionMaxMi
         std::cerr << "Quaternion converted by iDynTree: " << quat_idyntree.toString() << " ( norm " << toEigen(quat_idyntree).norm() <<  " ) " << std::endl;
     }
 
-    /*
-    ASSERT_EQUAL_VECTOR(quat_kdl,quat_yarp);
-    ASSERT_EQUAL_VECTOR(quat_idyntree,quat_kdl);
-    ASSERT_EQUAL_VECTOR(quat_idyntree,quat_yarp);
-    */
+    // ASSERT_EQUAL_VECTOR(quat_kdl,quat_yarp);
+    // ASSERT_EQUAL_VECTOR(quat_idyntree,quat_kdl);
+    // ASSERT_EQUAL_VECTOR(quat_idyntree,quat_yarp);
+
 
     // Check going back to a rotation
     iDynTree::Rotation randRotCheck = iDynTree::Rotation::RotationFromQuaternion(quat_idyntree);
@@ -129,14 +128,13 @@ void checkRotationToQuaternion(const iDynTree::Rotation randRot, QuaternionMaxMi
         std::cerr << "Original rotation:\n" << randRot.toString() << std::endl;
         std::cerr << "Rotation converted back and forth from quaternion:\n" << randRotCheck.toString() << std::endl;
     }
-
-
-    //ASSERT_EQUAL_MATRIX(randRot,randRotCheck);
+    // ASSERT_EQUAL_MATRIX_TOL(randRot,randRotCheck);
 
     // Check range
     helper.idyntree.update(quat_idyntree);
     helper.kdl.update(quat_kdl);
     helper.yarp.update(quat_yarp);
+
 }
 
 int main()
@@ -158,9 +156,14 @@ int main()
     iDynTree::Rotation T_1060 = iDynTree::Rotation(0.4312,-0.2603,0.8639,
                                                    0.7289,-0.4637,-0.5036,
                                                    0.5317,0.8469,-0.0102);
+                                                   
+   iDynTree::Rotation T_fritz_1 = iDynTree::Rotation(0,-1,0,
+                                                  1,0,0,
+                                                  0,0,1);
 
     checkRotationToQuaternion(T_1059,rangeHelper,true);
     checkRotationToQuaternion(T_1060,rangeHelper,true);
+    checkRotationToQuaternion(T_fritz_1,rangeHelper,true);
 
     // Then some random ones
     int nrOfTrials = 100000;
