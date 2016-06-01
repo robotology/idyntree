@@ -298,6 +298,7 @@ namespace iDynTree
         //Taken from "Contributions au contrôle automatique de véhicules aériens"
         //PhD thesis of "Minh Duc HUA"
         //INRIA Sophia Antipolis
+        //www.isir.upmc.fr/files/2009THDR2323.pdf
         //Equation 3.9 (page 101)
 
         //Diagonal elements used only to find the maximum
