@@ -8,22 +8,22 @@ matrix:
   include:
     - os: linux
       compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", CMAKE_PREFIX_PATH="/home/travis/build/robotology/codyco-superbuild/build/install", VALGRIND_TESTS="ON", USE_PYTHON="ON"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", USE_PYTHON="ON"
     - os: linux
       compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release", CMAKE_PREFIX_PATH="/home/travis/build/robotology/codyco-superbuild/build/install", VALGRIND_TESTS="ON", USE_PYTHON="ON"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="ON", USE_PYTHON="ON"
     - os: linux
       compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", CMAKE_PREFIX_PATH="/home/travis/build/robotology/codyco-superbuild/build/install", VALGRIND_TESTS="ON", USE_PYTHON="ON"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", USE_PYTHON="ON"
     - os: linux
       compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release", CMAKE_PREFIX_PATH="/home/travis/build/robotology/codyco-superbuild/build/install", VALGRIND_TESTS="ON", USE_PYTHON="ON"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release",VALGRIND_TESTS="ON", USE_PYTHON="ON"
     - os: osx
       compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", CMAKE_PREFIX_PATH="/Users/travis/build/robotology/codyco-superbuild/build/install", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
     - os: osx
       compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", CMAKE_PREFIX_PATH="/Users/travis/build/robotology/codyco-superbuild/build/install", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
+      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
 
 before_script:
   # workaround around opencv linking problem in clang:
@@ -39,6 +39,7 @@ before_script:
   - sh .ci/travis-deps.sh
   - mkdir build
   - cd build
+  - export CMAKE_PREFIX_PATH=`pwd`/install
   # using the YCM_EP_MAINTAINER_MODE variable to enable the subproject-dependees target
   - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DYCM_EP_MAINTAINER_MODE:BOOL=ON -DNON_INTERACTIVE_BUILD:BOOL=TRUE  ..
   - cmake --build . --target iDynTree-dependees 
