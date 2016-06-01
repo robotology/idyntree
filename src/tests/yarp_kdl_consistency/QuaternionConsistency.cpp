@@ -142,7 +142,7 @@ void checkRotationToQuaternion(const iDynTree::Rotation randRot, QuaternionMaxMi
     }
 
     // Only iDynTree and KDL share the same "positive real part" assumption for quaternions 
-    ASSERT_EQUAL_VECTOR_TOL(quat_idyntree,quat_kdl,1e-7);
+    ASSERT_EQUAL_VECTOR_TOL(quat_idyntree,quat_kdl,1e-5);
     /*
     ASSERT_EQUAL_VECTOR(quat_kdl,quat_yarp);
     ASSERT_EQUAL_VECTOR(quat_idyntree,quat_yarp);
@@ -156,11 +156,11 @@ void checkRotationToQuaternion(const iDynTree::Rotation randRot, QuaternionMaxMi
         std::cerr << "Rotation converted back and forth from quaternion by Eigen:\n" << rotBack_eigen.toString() << std::endl;
     }
 
-    ASSERT_EQUAL_MATRIX_TOL(randRot,rotBack_idyntree,1e-7);
-    ASSERT_EQUAL_MATRIX_TOL(randRot,rotBack_kdl,1e-7);
+    ASSERT_EQUAL_MATRIX_TOL(randRot,rotBack_idyntree,1e-5);
+    ASSERT_EQUAL_MATRIX_TOL(randRot,rotBack_kdl,1e-5);
     // Commented out until we sort out the problem in YARP matrix
     //ASSERT_EQUAL_MATRIX_TOL(randRot,rotBack_yarp,1e-7);
-    ASSERT_EQUAL_MATRIX_TOL(randRot,rotBack_eigen,1e-7);
+    ASSERT_EQUAL_MATRIX_TOL(randRot,rotBack_eigen,1e-5);
 
 
     // Check range

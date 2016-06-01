@@ -224,7 +224,7 @@ namespace iDynTree
      */
     inline void printMatrixWrongElements(std::string name, std::vector< std::vector<TestMatrixMismatch> > & correctElems)
     {
-        std::cerr << name << "( \u2714 match, (expected,get) mismatch): \n";
+        std::cerr << name << "( \u2714 match, (expected,got:error) mismatch): \n";
 
         size_t rows = correctElems.size();
         size_t cols = correctElems[0].size();
@@ -238,7 +238,8 @@ namespace iDynTree
                 }
                 else
                 {
-                    std::cerr << "(" <<  correctElems[row][col].expected << "," << correctElems[row][col].realElement << ")";
+                    std::cerr << "(" <<  correctElems[row][col].expected << "," << correctElems[row][col].realElement
+                    << ":" << correctElems[row][col].realElement - correctElems[row][col].expected << ")";
                 }
 
                 std::cerr << " ";
