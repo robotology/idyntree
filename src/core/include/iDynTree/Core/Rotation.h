@@ -140,6 +140,15 @@ namespace iDynTree
          */
         AngularMotionVector3 log() const;
 
+        /**
+         * Set the rotation matrix as the passed rotation expressed in quaternion
+         *
+         * @note the quaternion is expressed as (real, imaginary) part with
+         * real \f$\in \mathbb{R}\f$ and imaginary \f$\in \mathbb{R}^3\f$
+         * @param quaternion the rotation expressed in quaternion
+         */
+        void fromQuaternion(const iDynTree::Vector4& quaternion);
+
 
         /**
          * @name Conversion to others represention of matrices.

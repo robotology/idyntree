@@ -256,6 +256,43 @@ namespace iDynTree
         return changeCoordFrameOf(other);
     }
 
+    void Rotation::fromQuaternion(const iDynTree::Vector4& _quaternion)
+    {
+        Eigen::Map<const Eigen::Vector4d> quaternion(_quaternion.data());
+
+        //to avoid memory allocation "unroll" the summation of Rodrigues' Formula
+        // R = I3 + 2s S(r) + 2S(r)^2,
+
+        //The square of S(r) is symmetric, thus the diagonal elements are
+        //filled only by that part
+        (*this)(0,0) = 1 -2 * (quaternion(3) * quaternion(3) + quaternion(2) * quaternion(2));
+        (*this)(1,1) = 1 -2 * (quaternion(3) * quaternion(3) + quaternion(1) * quaternion(1));
+        (*this)(2,2) = 1 -2 * (quaternion(2) * quaternion(2) + quaternion(1) * quaternion(1));
+
+        //The off diagonal elements are filled by
+        //(symmetrically) from the S(r)^2
+        //(antisymmetrically) from the S(r)
+        //Symmetric part
+        (*this)(0,1) = (*this)(1,0) = 2 * quaternion(1) * quaternion(2);
+        (*this)(0,2) = (*this)(2,0) = 2 * quaternion(1) * quaternion(3);
+        (*this)(1,2) = (*this)(2,1) = 2 * quaternion(2) * quaternion(3);
+
+        //antisymmetric part
+        double r01, r02, r12;
+
+        r01 = 2 * quaternion(0) * (-1) * quaternion(3);
+        r02 = 2 * quaternion(0) * (+1) * quaternion(2);
+        r12 = 2 * quaternion(0) * (-1) * quaternion(1);
+
+        (*this)(0,1) += r01;
+        (*this)(0,2) += r02;
+        (*this)(1,2) += r12;
+
+        (*this)(1,0) -= r01;
+        (*this)(2,0) -= r02;
+        (*this)(2,1) -= r12;
+    }
+
     void Rotation::getRPY(double& r, double& p, double& y)
     {
         Eigen::Map<const Matrix3dRowMajor> R(m_data);
@@ -451,17 +488,10 @@ namespace iDynTree
         //INRIA Sophia Antipolis
         //Equation 3.8 (page 101)
 
-        // Rodriques's formula
+        // Rodriques' formula
         // R = I3 + 2s S(r) + 2S(r)^2,
         Rotation _rotation;
-        Eigen::Map<Eigen::Matrix<double, 3, 3, Eigen::RowMajor> > rotation = toEigen(_rotation);
-        rotation.setIdentity();
-
-        Eigen::Map<const Eigen::Vector4d> quaternion(_quaternion.data());
-        Eigen::Matrix3d skewSymmetricMatrix = iDynTree::skew(quaternion.tail<3>());
-
-        rotation += 2 * quaternion(0) * skewSymmetricMatrix + 2 * skewSymmetricMatrix * skewSymmetricMatrix;
-
+        _rotation.fromQuaternion(_quaternion);
         return _rotation;
     }
 
