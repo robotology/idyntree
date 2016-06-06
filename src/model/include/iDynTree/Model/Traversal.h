@@ -75,6 +75,15 @@ namespace iDynTree
         const Link   * getLink(const TraversalIndex traversalIndex) const;
 
         /**
+         * Get the base link of the traversal.
+         *
+         * @note this is equivalent to getLink(0), as the base link
+         *       is by definition the first link of the traversal.
+         * @return a pointer to the base link of the traversal.
+         */
+        const Link   * getBaseLink() const;
+
+        /**
          * Get the parent link of the traversalIndex-th link of the traversal.
          *
          * @return a pointer to the parent link of the traversalIndex-th link of the traversal.

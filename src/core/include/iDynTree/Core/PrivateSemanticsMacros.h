@@ -8,6 +8,8 @@
 #ifndef IDYNTREE_PRIVATE_SEMANTICS_MACROS_H
 #define IDYNTREE_PRIVATE_SEMANTICS_MACROS_H
 
+#include <iDynTree/Core/PrivatePreProcessorUtils.h>
+
 /**
  * macro for activating the semantic checking.
  *
@@ -25,7 +27,7 @@
   #define IDYNTREE_DONT_USE_SEMANTICS
 #else
   #ifdef IDYNTREE_COMPILE_BINDINGS
-    #define iDynTreeAssert(semCheckBoolOut) ((void) ((semCheckBoolOut) ? (void)0 : assertWoAbort(#semCheckBoolOut, __FILE__, __PRETTY_FUNCTION__, __LINE__)))
+    #define iDynTreeAssert(semCheckBoolOut) ((void) ((semCheckBoolOut) ? (void)0 : assertWoAbort(#semCheckBoolOut, __FILE__, IDYNTREE_PRETTY_FUNCTION, __LINE__)))
     #define iDynTreeSemanticsOp(op) op
   #else
     #define iDynTreeAssert(semCheckBoolOut) assert(semCheckBoolOut)

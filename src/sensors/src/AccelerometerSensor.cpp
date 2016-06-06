@@ -131,6 +131,20 @@ Sensor* AccelerometerSensor::clone() const
     return (Sensor *)new AccelerometerSensor(*this);
 }
 
+bool AccelerometerSensor::updateIndeces(const Model& model)
+{
+    iDynTree::LinkIndex linkNewIndex = model.getLinkIndex(this->pimpl->parent_link_name);
+
+    if( (linkNewIndex == iDynTree::LINK_INVALID_INDEX) )
+    {
+        return false;
+    }
+
+    this->pimpl->parent_link_name = linkNewIndex;
+
+    return true;
+}
+
 
 std::string AccelerometerSensor::getName() const
 {

@@ -14,19 +14,37 @@ namespace iDynTree
 {
     class Model;
     class Traversal;
+    class Transform;
     class FreeFloatingPos;
     class FreeFloatingVel;
     class FreeFloatingAcc;
     class LinkPositions;
     class LinkVelArray;
     class LinkAccArray;
+    class JointPosDoubleArray;
 
     /**
-     * Function that computes, given a traversal
-     * the position forward kinematics of a FreeFloating robot.
-     *
      * \ingroup iDynTreeModel
      *
+     * Given a robot floating base configuration (i.e. world_H_base and the joint positions)
+     * compute for each link the world_H_link transform.
+     *
+     * @param[in]  model the used model,
+     * @param[in]  traversal the used traversal,
+     * @param[in]  worldHbase the world_H_base transform,
+     * @param[in]  jointPositions the vector of (internal) joint positions,
+     * @param[out] linkPositions linkPositions(l) contains the world_H_link transform.
+     * @return true if all went well, false otherwise.
+     */
+    bool ForwardPositionKinematics(const Model& model,
+                                   const Traversal& traversal,
+                                   const Transform& worldHbase,
+                                   const JointPosDoubleArray& jointPositions,
+                                         LinkPositions& linkPositions);
+
+    /**
+     * Variant of ForwardPositionKinematics that takes in input a FreeFloatingPos
+     * object instead of a separate couple of (worldHbase,jointPositions)
      *
      */
     bool ForwardPositionKinematics(const Model & model,

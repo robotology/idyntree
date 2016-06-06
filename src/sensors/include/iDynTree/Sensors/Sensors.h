@@ -33,6 +33,7 @@ namespace iDynTree {
 
 #include <iDynTree/Core/VectorDynSize.h>
 
+#include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Indeces.h>
 
 namespace iDynTree {
@@ -84,10 +85,6 @@ namespace iDynTree {
         virtual bool isValid() const = 0;
 
         /**
-         *  Return a pointer to a copy of this sensor.
-         *
-         */
-                /**
          * Set the id (name) of sensor.
          */
         virtual bool setName(const std::string &) = 0;
@@ -97,6 +94,11 @@ namespace iDynTree {
          *
          */
         virtual Sensor* clone() const = 0;
+
+        /**
+         * Update all the indeces (link/frames) contained in this sensor.
+         */
+        virtual bool updateIndeces(const Model & model) = 0;
     };
 
     /**

@@ -14,6 +14,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
                            include/iDynTree/Model/DynamicsLinearization.h
                            include/iDynTree/Model/DynamicsLinearizationHelpers.h
                            include/iDynTree/Model/Indeces.h
+                           include/iDynTree/Model/JointState.h
                            include/iDynTree/Model/Link.h
                            include/iDynTree/Model/LinkState.h
                            include/iDynTree/Model/Model.h

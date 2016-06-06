@@ -69,7 +69,7 @@ namespace iDynTree {
         bool init(KDL::CoDyCo::UndirectedTree & undirected_tree,
                   const std::string & initial_world_frame_position,
                   const std::string & initial_fixed_link);
-        
+
         bool init(KDL::CoDyCo::UndirectedTree & undirected_tree,
                   const std::string & initial_world_frame_position,
                   const std::string & initial_fixed_link,
@@ -78,18 +78,18 @@ namespace iDynTree {
         bool init(KDL::CoDyCo::UndirectedTree & undirected_tree,
                   const int initial_world_frame_position_index,
                   const int initial_fixed_link_index);
-        
+
         bool init(KDL::CoDyCo::UndirectedTree & undirected_tree,
                   const int initial_world_frame_position_index,
                   const int initial_fixed_link_index,
                   KDL::Vector initial_world_offset);
-        
+
         bool reset(const std::string & initial_world_frame_position,
                    const std::string & initial_fixed_link);
 
         bool reset(const int initial_world_frame_position_index,
                    const int initial_fixed_link_index);
-        
+
         bool reset(const int initial_world_frame_position_index,
                    const int initial_fixed_link_index,
                    KDL::Vector initial_world_offset);
@@ -106,7 +106,7 @@ namespace iDynTree {
          * inertial/world frame
          */
         bool changeFixedLink(const int & new_fixed_link_id);
-        
+
 //        /**
 //         * Change the link that the odometry assumes to be fixed along with
 //         * world_H_old_fixed if you want world to remain where initially specified.
@@ -118,14 +118,14 @@ namespace iDynTree {
 //         * world_H_old_fixed if you want world to remain where initially specified.
 //         */
 //        bool changeFixedLink(const int & new_fixed_link_id, const KDL::Frame world_H_old_fixed);
-        
+
         /**
          *  This method changes fixed link from l_sole to r_foot and vicerversa.
          *
          *  @return True when successful, false otherwise.
          */
         bool changeFixedFoot();
-        
+
         /**
          * Get the link currently considered fixed with respect to the inertial frame.
          * @return the name of the link currently considered fixed.

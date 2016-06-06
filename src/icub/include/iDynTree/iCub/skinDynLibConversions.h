@@ -15,6 +15,7 @@
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
 #include <iCub/skinDynLib/dynContactList.h>
+#include <iCub/skinDynLib/skinContactList.h>
 
 namespace iDynTree
 {
@@ -111,7 +112,7 @@ public:
                             const std::string iDynTree_link_name,
                                   std::string & iDynTree_frame_name,
                                   int & skinDynLib_body_part,
-                                  int & skinDynLib_link_index) ;
+                                  int & skinDynLib_link_index) const;
 
     /**
      * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method.
@@ -120,7 +121,7 @@ public:
                             const LinkIndex iDynTree_link_index,
                                   LinkIndex & iDynTree_frame_index,
                              int & skinDynLib_body_part,
-                             int & skinDynLib_link_index);
+                             int & skinDynLib_link_index) const;
 
     /**
      * Convert a skinDynLib identifier to a iDynTree link/frame identifier.
@@ -128,23 +129,52 @@ public:
     bool skinDynLib2iDynTree(const int skinDynLib_body_part,
                              const int skinDynLib_link_index,
                              int & iDynTree_link_index,
-                             int & iDynTree_frame_index);
+                             int & iDynTree_frame_index) const;
     /**
      * Remove a alias in the form (body_part, link_index) for a link
      */
     bool removeSkinDynLibAlias(const Model & model, const std::string linkName);
 
     /**
-     * Convert a dynContactList to a LinkUnknownWrenchContacts
+     * Convert a dynContactList to a LinkUnknownWrenchContacts.
+     *
+     * The contactId contained in the dynContactList is preserved and saved
+     * in the appropriate attribute in the LinkUnknownWrenchContacts class.
      */
-    bool fromSkinDynLibToiDynTree(const Model& model, const iCub::skinDynLib::dynContactList & dynList,
-                                               LinkUnknownWrenchContacts & unknowns);
+    bool fromSkinDynLibToiDynTree(const Model& model,
+                                  const iCub::skinDynLib::dynContactList & dynList,
+                                        LinkUnknownWrenchContacts & unknowns);
 
     /**
-     * Convert a LinkContactWrenches to a iCub::skinDynLib::dynContactList
+     * Convert a skinContactList to a LinkUnknownWrenchContacts.
+     *
+     * The contactId contained in the skinContactList is preserved and saved
+     * in the appropriate attribute in the LinkUnknownWrenchContacts class.
      */
-    bool fromiDynTreeToSkinDynLib(const Model& model, const LinkContactWrenches & contactWrenches,
+    bool fromSkinDynLibToiDynTree(const Model& model,
+                                  const iCub::skinDynLib::skinContactList & skinList,
+                                        LinkUnknownWrenchContacts & unknowns);
+
+    /**
+     * Convert a LinkContactWrenches to a iCub::skinDynLib::dynContactList.
+     *
+     * This function creates a new dynContactList.
+     *
+     */
+    bool fromiDynTreeToSkinDynLib(const Model& model,
+                                  const LinkContactWrenches & contactWrenches,
                                         iCub::skinDynLib::dynContactList & dynList);
+
+    /**
+     * Update an existing skinContactList in which some forces and torque are
+     * unknown using the estimated contact wrenches contained in
+     * a LinkContactWrenches. The matching between the skinContactList and
+     * the LinkContactWrenches contacts is done through the contactId, that then
+     * should be consistent between the two functions.
+     */
+    bool updateSkinContactListFromLinkContactWrenches(const Model& model,
+                                                      const LinkContactWrenches & contactWrenches,
+                                                            iCub::skinDynLib::skinContactList & skinContactListToUpdate);
 };
 
 }

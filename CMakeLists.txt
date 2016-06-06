@@ -13,7 +13,7 @@ set(VARS_PREFIX "iDynTree")
 
 set(${VARS_PREFIX}_MAJOR_VERSION 0)
 set(${VARS_PREFIX}_MINOR_VERSION 3)
-set(${VARS_PREFIX}_PATCH_VERSION 11)
+set(${VARS_PREFIX}_PATCH_VERSION 12)
 set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
@@ -87,10 +87,6 @@ install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
                                      NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 
 include(AddUninstallTarget)
-
-set(IDYNTREE_USES_LUA FALSE)
-set(IDYNTREE_USES_PYTHON FALSE)
-set(IDYNTREE_USES_MATLAB FALSE)
 
 add_subdirectory(bindings)
 

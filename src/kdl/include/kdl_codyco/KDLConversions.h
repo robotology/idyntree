@@ -54,7 +54,7 @@ namespace iDynTree
     KDL::Twist    ToKDL(const iDynTree::ClassicalAcc & idyntree_classical_acc);
     KDL::Wrench   ToKDL(const iDynTree::SpatialMomentum    & idyntree_spatial_momentum);
     bool          ToKDL(const iDynTree::VectorDynSize & idyntree_jntarray,
-                        KDL::JntArray             & kdl_jntarray);
+                               KDL::JntArray             & kdl_jntarray);
 
     /**
      * Convert the configuration of a free floating robot from iDynTree.

@@ -525,7 +525,23 @@ int main(int argc, char ** argv)
 
     if( output_contact_list_with_idyntree.size() != input_contact_list.size() )
     {
-        std::cout << "Error: Estimated a wrong number of contacts in iDynTree.";
+        std::cerr << "Error: Estimated a wrong number of contacts in iDynTree.";
+        return EXIT_FAILURE;
+    }
+
+    // Test also another (equivalent) method
+    skinContactList outputSkinContactListWithIdynTree;
+    iCubSkinHelper.updateSkinContactListFromLinkContactWrenches(model,externalWrenches,outputSkinContactListWithIdynTree);
+
+    if( outputSkinContactListWithIdynTree.size() != input_contact_list.size() )
+    {
+        std::cerr << "Error: Estimated a wrong number of contacts in iDynTree.";
+        return EXIT_FAILURE;
+    }
+
+    if( outputSkinContactListWithIdynTree.size() == 0 )
+    {
+        std::cerr << "Error: no forces have been estimated.";
         return EXIT_FAILURE;
     }
 

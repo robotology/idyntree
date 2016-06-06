@@ -18,6 +18,10 @@
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/SpatialAcc.h>
 
+#include <iDynTree/Core/EigenHelpers.h>
+
+#include <iDynTree/yarp/YARPConversions.h>
+#include <iDynTree/yarp/YARPEigenConversions.h>
 
 #include <iCub/iDynTree/DynTree.h>
 
@@ -133,7 +137,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
 
     iDynTree::VectorDynSize qj(dofs), dqj(dofs), ddqj(dofs);
 
-    worldTbase = iDynTree::Transform(Rotation::RPY(actual_random_double(),random_double(),random_double()),
+    worldTbase = iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
                                      Position(random_double(),random_double(),random_double()));
     for(int i=0; i < 3; i++)
     {
@@ -234,8 +238,49 @@ void testRegressorConsistency(iDynTree::HighLevel::DynamicsComputations & dynCom
     ASSERT_EQUAL_VECTOR(dynTreeParams,dynCompParams);
 }
 
+void testCOMConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp,
+                        iCub::iDynTree::DynTree & dynTree)
+{
+    size_t dofs = dynComp.getNrOfDegreesOfFreedom();
+
+    // check COM position
+    iDynTree::Position COMnew, COMold;
+
+    yarp::sig::Vector COMYarp;
+    COMYarp = dynTree.getCOM();
+
+    toiDynTree(COMYarp,COMold);
+
+    COMnew = dynComp.getCenterOfMass();
+
+    ASSERT_EQUAL_VECTOR(COMnew,COMold);
+
+    // check COM Jacobian
+    iDynTree::MatrixDynSize jacNew(3,6+dofs), jacOld(3,6+dofs);
+    yarp::sig::Matrix jacYARP(6,6+dofs);
+
+    bool ok = dynTree.getCOMJacobian(jacYARP);
+
+    ASSERT_IS_TRUE(ok);
+
+    iDynTree::toEigen(jacOld) = iDynTree::toEigen(jacYARP).topRows<3>();
+
+    ok = dynComp.getCenterOfMassJacobian(jacNew);
+
+    ASSERT_IS_TRUE(ok);
+
+    std::cerr << "jacNew \n " << jacNew.toString() << std::endl;
+
+    std::cerr << "jacOld \n " << jacOld.toString() << std::endl;
+
+    ASSERT_EQUAL_MATRIX(jacNew,jacOld);
+}
+
+
 void assertConsistency(std::string modelName)
 {
+    std::cerr << "DynamicsComputationsDynTreeConsistencyUnitTest running on model "
+              << modelName << std::endl;
     iDynTree::HighLevel::DynamicsComputations dynComp;
     iCub::iDynTree::DynTree dynTree;
 
@@ -251,6 +296,7 @@ void assertConsistency(std::string modelName)
     testTransformsConsistency(dynComp,dynTree);
     testJacobianConsistency(dynComp,dynTree);
     testRegressorConsistency(dynComp,dynTree);
+    testCOMConsistency(dynComp,dynTree);
 }
 
 int main()

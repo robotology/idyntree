@@ -4,7 +4,7 @@
 
 project(iDynTree_Estimation_KDL CXX)
 
-set(IDYNTREE_ESTIMATION_KDL_HEADERS include/iDynTree/Estimation/simpleLeggedOdometry.h
+set(IDYNTREE_ESTIMATION_KDL_HEADERS include/iDynTree/Estimation/simpleLeggedOdometryKDL.h
                                 include/iDynTree/Estimation/robotStatus.h)
 
 set(IDYNTREE_ESTIMATION_KDL_PRIVATE_INCLUDES )

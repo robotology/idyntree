@@ -115,6 +115,15 @@ bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
     // Get the link of the frame
     LinkIndex linkIndex = model.getFrameLink(frameIndex);
 
+    if( !model.isValidLinkIndex(linkIndex) )
+    {
+        std::stringstream err;
+        err << "Unknown link index " << linkIndex << " in model that has " << model.getNrOfLinks() << " links.";
+        reportError("LinkUnknownWrenchContacts","addNewContactInFrame",err.str().c_str());
+        return false;
+    }
+
+
     UnknownWrenchContact unknownContactInLink;
 
     unknownContactInLink.unknownType = unknownContactInFrame.unknownType;
@@ -307,6 +316,9 @@ Wrench computeKnownTermsOfEstimationEquationWithoutInternalFT(const Model& model
              return bufs.b_contacts_subtree(visitedLinkIndex);
          }
      }
+
+     assert(false);
+     return Wrench::Zero();
 }
 
 Wrench computeKnownTermsOfEstimationEquationWithInternalFT(const Model& model,
@@ -361,6 +373,9 @@ Wrench computeKnownTermsOfEstimationEquationWithInternalFT(const Model& model,
              return bufs.b_contacts_subtree(visitedLinkIndex);
          }
      }
+
+     assert(false);
+     return Wrench::Zero();
 }
 
 size_t countUnknowns(const Traversal& traversal, const LinkUnknownWrenchContacts& unknownWrenches)
@@ -496,6 +511,9 @@ void storeResultsOfEstimation(const Traversal& traversal,
             Wrench & estimatedWrench = outputContactWrenches.contactWrench(visitedLinkIndex,contact).contactWrench();
             outputContactWrenches.contactWrench(visitedLinkIndex,contact).contactPoint() = unknownWrench.contactPoint;
 
+            // Preserve the contact ID number
+            outputContactWrenches.contactWrench(visitedLinkIndex,contact).contactId() = unknownWrench.contactId;
+
             switch( unknownWrench.unknownType )
             {
                 case FULL_WRENCH:
@@ -534,8 +552,8 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
                                                const JointPosDoubleArray& jointPos,
                                                const LinkVelArray& linkVel,
                                                const LinkAccArray& linkProperAcc,
-                                               estimateExternalWrenchesBuffers& bufs,
-                                               LinkContactWrenches& outputContactWrenches)
+                                                     estimateExternalWrenchesBuffers& bufs,
+                                                     LinkContactWrenches& outputContactWrenches)
 {
     /**< value extracted from old iDynContact */
     double tol = 1e-7;
@@ -544,7 +562,7 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
     if( bufs.getNrOfLinks() != model.getNrOfLinks() ||
         bufs.getNrOfSubModels() != 1 )
     {
-        std::cerr << "[ERROR] estimateExternalWrenchesWithoutInternalFT : input buffer has wrong size." << std::endl;
+        reportError("","estimateExternalWrenchesWithoutInternalFT","input buffer has wrong size.");
         return false;
     }
 
@@ -576,6 +594,8 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
    // Note that the logic of conversion between input/output contacts should be
    // the same used before in computeMatrixOfEstimationEquation
    storeResultsOfEstimation(traversal,unknownWrenches,subModelIndex,bufs,outputContactWrenches);
+
+   return true;
 }
 
 

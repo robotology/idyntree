@@ -369,10 +369,8 @@ void checkSimpleModelExternalWrenchEstimationWithFTSensors()
 
 int main()
 {
-
     std::cerr << "Checking the simplest model: " << std::endl;
     checkSimpleModelExternalWrenchEstimation(0);
-
 
     checkRandomModelExternalWrenchEstimation(0);
     checkRandomModelExternalWrenchEstimation(1);

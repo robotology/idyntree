@@ -6,8 +6,16 @@ if(IDYNTREE_USES_KDL)
     # Integration tests of old kdl_codyco project
     add_subdirectory(kdl_tests)
 
+    # Consistency tests with kdl stuff
+    add_subdirectory(kdl_consistency)
+
     # Benchmarks against old RNEA & CRBA based on kdl
     add_subdirectory(benchmark)
+
+    # Test implementations of RPY in iDynTree, Eigen, KDL and YARP
+    if( IDYNTREE_USES_YARP )
+        add_subdirectory(yarp_kdl_rpy)
+    endif()
 
     if(IDYNTREE_USES_ICUB_MAIN)
         # Add benchmark test against yarp/icub functions

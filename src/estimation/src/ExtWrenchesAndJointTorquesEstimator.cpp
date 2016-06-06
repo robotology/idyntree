@@ -1,23 +1,11 @@
 /*
  * Copyright (C) 2016 Fondazione Istituto Italiano di Tecnologia
- * Author: Silvio Traversaro
- * email:  silvio.traversaro@iit.it
- * website: www.icub.org
- * Permission is granted to copy, distribute, and/or modify this program
- * under the terms of the GNU General Public License, version 2 or any
- * later version published by the Free Software Foundation.
+ * Authors: Silvio Traversaro
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  *
- * A copy of the license can be found at
- * http://www.robotcub.org/icub/license/gpl.txt
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
- * Public License for more details
-*/
+ */
 
 #include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
-
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
@@ -32,6 +20,8 @@
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/ContactWrench.h>
 #include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/Model/ModelTransformers.h>
+#include <iDynTree/Sensors/ModelSensorsTransformers.h>
 
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/SixAxisFTSensor.h>
@@ -39,6 +29,10 @@
 
 #include <iDynTree/ModelIO/URDFModelImport.h>
 #include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
+
+#include <iDynTree/Core/EigenHelpers.h>
+
+#include <sstream>
 
 namespace iDynTree
 {
@@ -70,7 +64,7 @@ ExtWrenchesAndJointTorquesEstimator::~ExtWrenchesAndJointTorquesEstimator()
 
 
 void getFTJointNames(const SensorsList & _sensors,
-                     std::vector<std::string> ftJointNames)
+                     std::vector<std::string>& ftJointNames)
 {
     ftJointNames.resize(0);
 
@@ -106,8 +100,6 @@ bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model
                                                              const SensorsList& _sensors)
 {
     // \todo TODO add isConsistent methods to Model and SensorList class
-
-
     m_model = _model;
     m_sensors = _sensors;
 
@@ -170,6 +162,54 @@ bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFile(const std:
     return setModelAndSensors(_model,_sensors);
 }
 
+bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifiedDOFs(const std::string filename,
+                                                                                       const std::vector< std::string >& consideredDOFs,
+                                                                                       const std::string filetype)
+{
+    Model _modelFull;
+    SensorsList _sensorsFull;
+
+    bool parsingCorrect = false;
+
+    parsingCorrect = modelFromURDF(filename,_modelFull);
+
+    if( !parsingCorrect )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFileWithSpecifiedDOFs","Error in parsing model from URDF.");
+        return false;
+    }
+
+    parsingCorrect = sensorsFromURDF(filename,_modelFull,_sensorsFull);
+
+    if( !parsingCorrect )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFileWithSpecifiedDOFs","Error in parsing sensors from URDF.");
+        return false;
+    }
+
+    // We need to create a reduced model, inclusing only the consideredDOFs and the fixed joints used by the FT sensors
+    std::vector< std::string > consideredJoints = consideredDOFs;
+
+    // Add FT fixed joints
+    std::vector< std::string > ftJointNames;
+    getFTJointNames(_sensorsFull,ftJointNames);
+
+    for(size_t i=0; i < ftJointNames.size(); i++)
+    {
+        consideredJoints.push_back(ftJointNames[i]);
+    }
+
+
+    Model _modelReduced;
+    SensorsList _sensorsReduced;
+
+    //
+    iDynTree::createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
+
+
+    return setModelAndSensors(_modelReduced,_sensorsReduced);
+}
+
 
 const Model& ExtWrenchesAndJointTorquesEstimator::model() const
 {
@@ -180,6 +220,12 @@ const SensorsList& ExtWrenchesAndJointTorquesEstimator::sensors() const
 {
     return m_sensors;
 }
+
+const SubModelDecomposition& ExtWrenchesAndJointTorquesEstimator::submodels() const
+{
+    return m_submodels;
+}
+
 
 bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFixedBase(const JointPosDoubleArray& jointPos,
                                                                         const JointDOFsDoubleArray& jointVel,
@@ -288,14 +334,14 @@ bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(c
     if( !m_isModelValid )
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
-                    "Model and sensors information not setted.");
+                    "Model and sensors information not set.");
         return false;
     }
 
     if( !m_isKinematicsUpdated )
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
-                    "Kinematic information not setted.");
+                    "Kinematic information not set.");
         return false;
     }
 
@@ -306,10 +352,24 @@ bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(c
                                                         m_jointPos,m_linkVels,m_linkProperAccs,
                                                         m_calibBufs,estimatedContactWrenches);
 
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in estimating the external contact wrenches without using the internal FT sensors.");
+        return false;
+    }
+
     /**
      * Compute net external wrenches
      */
     ok = ok && estimatedContactWrenches.computeNetWrenches(m_linkNetExternalWrenches);
+
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in computing the net external wrenches from the estimated contact forces");
+        return false;
+    }
 
     /**
      * Compute joint torques
@@ -317,23 +377,25 @@ bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(c
     ok = ok && RNEADynamicPhase(m_model,m_dynamicTraversal,m_jointPos,m_linkVels,m_linkProperAccs,
                                 m_linkNetExternalWrenches,m_linkIntWrenches,m_generalizedTorques);
 
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in computing the dynamic phase of the RNEA.");
+        return false;
+    }
+
     /**
      * Simulate FT sensor measurements
      */
     predictSensorsMeasurementsFromRawBuffers(m_model,m_sensors,m_dynamicTraversal,
                                              m_linkVels,m_linkProperAccs,m_linkIntWrenches,predictedMeasures);
 
+
     /**
      * Copy the joint torques computed by the RNEA to the output
      */
     estimatedJointTorques = m_generalizedTorques.jointTorques();
 
-    if( !ok )
-    {
-        reportError("ExtWrenchesAndJointTorquesEstimator","computeExpectedFTSensorsMeasurements",
-                    "Error in estimating external wrenches and joint torques.");
-        return false;
-    }
 
     return ok;
 }
@@ -346,14 +408,14 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
     if( !m_isModelValid )
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
-                    "Model and sensors information not setted.");
+                    "Model and sensors information not set.");
         return false;
     }
 
     if( !m_isKinematicsUpdated )
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
-                    "Kinematic information not setted.");
+                    "Kinematic information not set.");
         return false;
     }
 
@@ -364,10 +426,24 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
                                        unknowns,m_jointPos,m_linkVels,m_linkProperAccs,
                                        ftSensorsMeasures,m_bufs,estimateContactWrenches);
 
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in estimating the external contact wrenches");
+        return false;
+    }
+
     /**
      * Compute net external wrenches
      */
     ok = ok && estimateContactWrenches.computeNetWrenches(m_linkNetExternalWrenches);
+
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in computing the net external wrenches from the estimated contact forces");
+        return false;
+    }
 
     /**
      * Compute joint torques
@@ -375,19 +451,61 @@ bool ExtWrenchesAndJointTorquesEstimator::estimateExtWrenchesAndJointTorques(con
     ok = ok && RNEADynamicPhase(m_model,m_dynamicTraversal,m_jointPos,m_linkVels,m_linkProperAccs,
                                 m_linkNetExternalWrenches,m_linkIntWrenches,m_generalizedTorques);
 
+    if( !ok )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
+                    "Error in computing the dynamic phase of the RNEA.");
+        return false;
+    }
+
     /**
      * Copy the joint torques computed by the RNEA to the output
      */
     jointTorques = m_generalizedTorques.jointTorques();
 
-    if( !ok )
+    return ok;
+}
+
+bool ExtWrenchesAndJointTorquesEstimator::checkThatTheModelIsStill(const double gravityNorm,
+                                                                   const double properAccTol,
+                                                                   const double verbose)
+{
+    if( !m_isModelValid )
     {
-        reportError("ExtWrenchesAndJointTorquesEstimator","estimateExtWrenchesAndJointTorques",
-                    "Error in estimating external wrenches and joint torques.");
+        reportError("ExtWrenchesAndJointTorquesEstimator","checkThatTheModelIsStill",
+                    "Model and sensors information not set.");
         return false;
     }
 
-    return ok;
+    if( !m_isKinematicsUpdated )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","checkThatTheModelIsStill",
+                    "Kinematic information not set.");
+        return false;
+    }
+
+    bool isStill = true;
+
+    for(iDynTree::LinkIndex link = 0; link < this->m_model.getNrOfLinks(); link++)
+    {
+        double properAccNorm = toEigen(m_linkProperAccs(link).getLinearVec3()).norm();
+
+        if( fabs(properAccNorm-gravityNorm) >= properAccTol )
+        {
+            isStill = false;
+
+            if( verbose )
+            {
+                std::ostringstream strs;
+                strs << "Link " <<  this->m_model.getLinkName(link) << " has a proper acceleration of "
+                     <<  m_linkProperAccs(link).getLinearVec3().toString() <<  " (norm : " <<  properAccNorm << ")";
+                reportError("ExtWrenchesAndJointTorquesEstimator","checkThatTheModelIsStill",
+                            strs.str().c_str());
+            }
+        }
+    }
+
+    return isStill;
 }
 
 
