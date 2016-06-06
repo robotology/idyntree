@@ -239,6 +239,7 @@ namespace iDynTree
     // Add all the explicit instantiation that can be useful, but remember to add
     // them also in the iDynTree.i SWIG file
     typedef VectorFixSize<3>  Vector3;
+    typedef VectorFixSize<4>  Vector4;
     typedef VectorFixSize<6>  Vector6;
     typedef VectorFixSize<10> Vector10;
     typedef VectorFixSize<16> Vector16;

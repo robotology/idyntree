@@ -256,6 +256,43 @@ namespace iDynTree
         return changeCoordFrameOf(other);
     }
 
+    void Rotation::fromQuaternion(const iDynTree::Vector4& _quaternion)
+    {
+        Eigen::Map<const Eigen::Vector4d> quaternion(_quaternion.data());
+
+        //to avoid memory allocation "unroll" the summation of Rodrigues' Formula
+        // R = I3 + 2s S(r) + 2S(r)^2,
+
+        //The square of S(r) is symmetric, thus the diagonal elements are
+        //filled only by that part
+        (*this)(0,0) = 1 -2 * (quaternion(3) * quaternion(3) + quaternion(2) * quaternion(2));
+        (*this)(1,1) = 1 -2 * (quaternion(3) * quaternion(3) + quaternion(1) * quaternion(1));
+        (*this)(2,2) = 1 -2 * (quaternion(2) * quaternion(2) + quaternion(1) * quaternion(1));
+
+        //The off diagonal elements are filled by
+        //(symmetrically) from the S(r)^2
+        //(antisymmetrically) from the S(r)
+        //Symmetric part
+        (*this)(0,1) = (*this)(1,0) = 2 * quaternion(1) * quaternion(2);
+        (*this)(0,2) = (*this)(2,0) = 2 * quaternion(1) * quaternion(3);
+        (*this)(1,2) = (*this)(2,1) = 2 * quaternion(2) * quaternion(3);
+
+        //antisymmetric part
+        double r01, r02, r12;
+
+        r01 = 2 * quaternion(0) * (-1) * quaternion(3);
+        r02 = 2 * quaternion(0) * (+1) * quaternion(2);
+        r12 = 2 * quaternion(0) * (-1) * quaternion(1);
+
+        (*this)(0,1) += r01;
+        (*this)(0,2) += r02;
+        (*this)(1,2) += r12;
+
+        (*this)(1,0) -= r01;
+        (*this)(2,0) -= r02;
+        (*this)(2,1) -= r12;
+    }
+
     void Rotation::getRPY(double& r, double& p, double& y)
     {
         Eigen::Map<const Matrix3dRowMajor> R(m_data);
@@ -284,6 +321,100 @@ namespace iDynTree
             p=-M_PI/2.0;
             y=atan2(-R(1,2),R(1,1));
         }
+    }
+
+    bool Rotation::getQuaternion(iDynTree::Vector4& quaternion) const
+    {
+        return getQuaternion(quaternion(0), quaternion(1), quaternion(2), quaternion(3));
+    }
+
+    bool Rotation::getQuaternion(double &s, double &r1, double &r2, double &r3) const
+    {
+        Eigen::Map<const Matrix3dRowMajor> R(m_data);
+
+        //Taken from "Contributions au contrôle automatique de véhicules aériens"
+        //PhD thesis of "Minh Duc HUA"
+        //INRIA Sophia Antipolis
+        //www.isir.upmc.fr/files/2009THDR2323.pdf
+        //Equation 3.9 (page 101)
+
+        //Diagonal elements used only to find the maximum
+        //the furthest value from zero
+        //we use this value as denominator to find the other elements
+        double q0 = ( R(0,0) + R(1,1) + R(2,2) + 1.0);
+        double q1 = ( R(0,0) - R(1,1) - R(2,2) + 1.0);
+        double q2 = (-R(0,0) + R(1,1) - R(2,2) + 1.0);
+        double q3 = (-R(0,0) - R(1,1) + R(2,2) + 1.0);
+
+        if (q0 < 0.0) q0 = 0.0;
+        if (q1 < 0.0) q1 = 0.0;
+        if (q2 < 0.0) q2 = 0.0;
+        if (q3 < 0.0) q3 = 0.0;
+
+        if (q0 >= q1 && q0 >= q2 && q0 >= q3) {
+            q0 = std::sqrt(q0);
+            q1 = (R(2,1) - R(1,2)) / (2.0 * q0);
+            q2 = (R(0,2) - R(2,0)) / (2.0 * q0);
+            q3 = (R(1,0) - R(0,1)) / (2.0 * q0);
+            q0 /= 2.0;
+        } else if (q1 >= q0 && q1 >= q2 && q1 >= q3) {
+            q1 = std::sqrt(q1);
+            q0 = (R(2,1) - R(1,2)) / (2.0 * q1);
+            q2 = (R(1,0) + R(0,1)) / (2.0 * q1);
+            q3 = (R(2,0) + R(0,2)) / (2.0 * q1);
+            q1 /= 2.0;
+        } else if (q2 >= q0 && q2 >= q1 && q2 >= q3) {
+            q2 = std::sqrt(q2);
+            q0 = (R(0,2) - R(2,0)) / (2.0 * q2);
+            q1 = (R(1,0) + R(0,1)) / (2.0 * q2);
+            q3 = (R(1,2) + R(2,1)) / (2.0 * q2);
+            q2 /= 2.0;
+        } else if (q3 >= q0 && q3 >= q1 && q3 >= q2) {
+            q3 = std::sqrt(q3);
+            q0 = (R(1,0) - R(0,1)) / (2.0 * q3);
+            q1 = (R(2,0) + R(0,2)) / (2.0 * q3);
+            q2 = (R(1,2) + R(2,1)) / (2.0 * q3);
+            q3 /= 2.0;
+        } else {
+            reportError("Rotation", "getQuaternion", "Quaternion numerically bad conditioned");
+            return false;
+        }
+
+        //Here we impose that the leftmost nonzero element of the quaternion is positive
+        double eps = 1e-7;
+        double sign = 1.0;
+        if (q0 > eps || q0 < -eps) {
+            sign = q0 > 0 ? 1.0 : -1.0;
+        } else if (q1 > eps || q1 < -eps) {
+            sign = q1 > 0 ? 1.0 : -1.0;
+        } else if (q2 > eps || q2 < -eps) {
+            sign = q2 > 0 ? 1.0 : -1.0;
+        } else if (q3 > eps || q3 < -eps) {
+            sign = q3 > 0 ? 1.0 : -1.0;
+        }
+
+        q0 /= sign;
+        q1 /= sign;
+        q2 /= sign;
+        q3 /= sign;
+
+        double quaternionNorm = std::sqrt(q0 * q0 +
+                                          q1 * q1 +
+                                          q2 * q2 +
+                                          q3 * q3);
+        s  = q0 / quaternionNorm;
+        r1 = q1 / quaternionNorm;
+        r2 = q2 / quaternionNorm;
+        r3 = q3 / quaternionNorm;
+        return true;
+    }
+
+    iDynTree::Vector4 Rotation::asQuaternion() const
+    {
+        iDynTree::Vector4 quaternion;
+        quaternion.zero();
+        getQuaternion(quaternion);
+        return quaternion;
     }
 
 
@@ -348,6 +479,20 @@ namespace iDynTree
     Rotation Rotation::Identity()
     {
         return RotationRaw::Identity();
+    }
+
+    Rotation Rotation::RotationFromQuaternion(const iDynTree::Vector4& _quaternion)
+    {
+        //Taken from "Contributions au contrôle automatique de véhicules aériens"
+        //PhD thesis of "Minh Duc HUA"
+        //INRIA Sophia Antipolis
+        //Equation 3.8 (page 101)
+
+        // Rodriques' formula
+        // R = I3 + 2s S(r) + 2S(r)^2,
+        Rotation _rotation;
+        _rotation.fromQuaternion(_quaternion);
+        return _rotation;
     }
 
     std::string Rotation::toString() const

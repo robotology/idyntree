@@ -50,6 +50,15 @@ namespace iDynTree
 #define ASSERT_EQUAL_TRANSFORM_TOL(val1,val2,tol) assertTransformsAreEqual(val1,val2,tol,__FILE__,__LINE__)
 
 
+    struct TestMatrixMismatch {
+        bool match;
+        double expected;
+        double realElement;
+
+        TestMatrixMismatch(bool _match, double _expected, double _realElement)
+        : match(_match), expected(_expected), realElement(_realElement) {}
+    };
+
     void assertStringAreEqual(const std::string & val1, const std::string & val2, double tol = DEFAULT_TOL, std::string file="", int line=-1);
 
 
@@ -213,9 +222,9 @@ namespace iDynTree
      * Helper for printing the patter of wrong elements
      * in between two matrix
      */
-    inline void printMatrixWrongElements(std::string name, std::vector< std::vector<bool> > & correctElems)
+    inline void printMatrixWrongElements(std::string name, std::vector< std::vector<TestMatrixMismatch> > & correctElems)
     {
-        std::cerr << name << "( . match, X mismatch): \n";
+        std::cerr << name << "( \u2714 match, (expected,got:error) mismatch): \n";
 
         size_t rows = correctElems.size();
         size_t cols = correctElems[0].size();
@@ -223,13 +232,14 @@ namespace iDynTree
         {
             for( unsigned int col = 0; col < cols; col++ )
             {
-                if( correctElems[row][col] )
+                if( correctElems[row][col].match )
                 {
-                    std::cerr << ".";
+                    std::cerr << "\u2714";
                 }
                 else
                 {
-                    std::cerr << "X";
+                    std::cerr << "(" <<  correctElems[row][col].expected << "," << correctElems[row][col].realElement
+                    << ":" << correctElems[row][col].realElement - correctElems[row][col].expected << ")";
                 }
 
                 std::cerr << " ";
@@ -317,7 +327,7 @@ namespace iDynTree
             exit(EXIT_FAILURE);
         }
 
-        std::vector< std::vector<bool> > correctElements(mat2.rows(), std::vector<bool>(mat1.cols(),true) );
+        std::vector< std::vector<TestMatrixMismatch> > correctElements(mat2.rows(), std::vector<TestMatrixMismatch>(mat1.cols(), TestMatrixMismatch(true, 0, 0)) );
         bool checkCorrect = true;
 
         for( unsigned int row = 0; row < mat2.rows(); row++ )
@@ -327,7 +337,9 @@ namespace iDynTree
                 if( fabs(mat1(row,col)-mat2(row,col)) >= tol )
                 {
                     checkCorrect = false;
-                    correctElements[row][col] = false;
+                    correctElements[row][col].match = false;
+                    correctElements[row][col].expected = mat1(row,col);
+                    correctElements[row][col].realElement = mat2(row,col);
                 }
             }
         }
