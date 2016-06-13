@@ -145,6 +145,7 @@ namespace iDynTree
          *
          * @note the quaternion is expressed as (real, imaginary) part with
          * real \f$\in \mathbb{R}\f$ and imaginary \f$\in \mathbb{R}^3\f$
+         * @note the quaternion is normalized
          * @param quaternion the rotation expressed in quaternion
          */
         void fromQuaternion(const iDynTree::Vector4& quaternion);
@@ -358,6 +359,7 @@ namespace iDynTree
          *   r \times v = r^\wedge v
          * \f]
          *
+         * @note the quaternion is normalized
          * @param quaternion a quaternion representing a rotation
          *
          * @return The rotation matrix

@@ -258,7 +258,10 @@ namespace iDynTree
 
     void Rotation::fromQuaternion(const iDynTree::Vector4& _quaternion)
     {
-        Eigen::Map<const Eigen::Vector4d> quaternion(_quaternion.data());
+        Eigen::Map<const Eigen::Vector4d> quaternionIn(_quaternion.data());
+        //normalize input quaternion
+        Eigen::Vector4d quaternion(quaternionIn);
+        quaternion.normalize();
 
         //to avoid memory allocation "unroll" the summation of Rodrigues' Formula
         // R = I3 + 2s S(r) + 2S(r)^2,
