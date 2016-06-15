@@ -296,7 +296,7 @@ namespace iDynTree
         (*this)(2,1) -= r12;
     }
 
-    void Rotation::getRPY(double& r, double& p, double& y)
+    void Rotation::getRPY(double& r, double& p, double& y) const
     {
         Eigen::Map<const Matrix3dRowMajor> R(m_data);
 

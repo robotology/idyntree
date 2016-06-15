@@ -165,7 +165,7 @@ namespace iDynTree
          * *this == RotZ(y)*RotY(p)*RotX(r) 
          *
          */
-        void getRPY(double & r, double & p, double &y);
+        void getRPY(double & r, double & p, double &y) const;
 
         /**
          * Get a unit quaternion corresponding to this rotation
