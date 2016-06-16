@@ -241,7 +241,12 @@ int DynamicsComputations::getFrameIndex(const std::string& frameName) const
     // see https://github.com/robotology/codyco-modules/issues/39
     // Once we have a proper iDynTree::Model, we can properly implement
     // the difference between frame and link
-    int index = this->pimpl->m_robot_model.getLink(frameName)->getLinkIndex();
+    KDL::CoDyCo::LinkMap::const_iterator frame = this->pimpl->m_robot_model.getLink(frameName);
+    int index = -1;
+    if (frame == this->pimpl->m_robot_model.getInvalidLinkIterator())
+        index = -1;
+    else
+        index = frame->getLinkIndex();
     reportErrorIf(index < 0, "DynamicsComputations::getFrameIndex", "requested frameName not found in model");
     return index;
 }
@@ -250,9 +255,6 @@ std::string DynamicsComputations::getFrameName(int frameIndex) const
 {
     return this->pimpl->m_robot_model.getLink(frameIndex)->getName();
 }
-
-
-
 
 void DynamicsComputations::computeFwdKinematics()
 {
