@@ -147,6 +147,16 @@ struct DynamicsComputations::DynamicsComputationsPrivateAttributes
     // element i contains the baseLink_H_i transform
     std::vector<KDL::Frame> m_baseLinkHframe;
 
+    //Save here the joint limits, until we have a Model object
+    struct JointLimit
+    {
+        double min;
+        double max;
+    };
+
+    typedef std::map<int, JointLimit> JointLimitMap;
+    JointLimitMap jointLimits;
+
     DynamicsComputationsPrivateAttributes()
     {
         m_isModelValid = false;
@@ -326,8 +336,31 @@ bool DynamicsComputations::loadRobotModelFromString(const std::string& modelStri
     KDL::Tree local_model;
     bool ok = iDynTree::treeFromUrdfString(modelString,local_model,consider_root_link_inertia);
 
-
     this->pimpl->m_robot_model = KDL::CoDyCo::UndirectedTree(local_model);
+
+    //TODO:
+    std::vector<std::string> joint_names;
+    KDL::JntArray min;
+    KDL::JntArray max;
+    ok = ok && iDynTree::jointPosLimitsFromUrdfString(modelString,
+                                                      joint_names,
+                                                      min,
+                                                      max);
+
+    if (min.rows() != max.rows() || min.rows() != joint_names.size()) {
+        std::cerr << "[ERROR] error in loading joint limits" << std::endl;
+        return false;
+    }
+
+    for (size_t index = 0; index < joint_names.size(); ++index) {
+        int jointIndex = getJointIndex(joint_names[index]);
+        if (jointIndex >= 0) {
+            DynamicsComputationsPrivateAttributes::JointLimit limit;
+            limit.min = min(index);
+            limit.max = max(index);
+            this->pimpl->jointLimits.insert(DynamicsComputationsPrivateAttributes::JointLimitMap::value_type(jointIndex, limit));
+        }
+    }
 
     if( !ok )
     {
@@ -946,6 +979,30 @@ std::string DynamicsComputations::getJointName(const unsigned int jointIndex)
     return this->getDescriptionOfDegreeOfFreedom(jointIndex);
 }
 
+
+bool DynamicsComputations::getJointLimits(const std::string &jointName, double &min, double &max)
+{
+    assert(pimpl);
+
+    int index = getJointIndex(jointName);
+    if (index < 0) return false;
+
+    return getJointLimits(index, min, max);
+}
+
+bool DynamicsComputations::getJointLimits(const int &jointIndex, double &min, double &max)
+{
+    assert(pimpl);
+    if (jointIndex < 0) return false;
+
+    DynamicsComputationsPrivateAttributes::JointLimitMap::const_iterator found;
+    found = pimpl->jointLimits.find(jointIndex);
+    if (found == pimpl->jointLimits.end())
+        return false;
+    min = found->second.min;
+    max = found->second.max;
+    return true;
+}
 
 }
 

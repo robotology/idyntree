@@ -451,7 +451,7 @@ public:
      * @return a integer greater or equal then zero if the joint exist,
      *         a negative integer otherwise.
      */
-    int getJointIndex(const std::string & linkName);
+    int getJointIndex(const std::string & jointName);
 
     /**
      * Get the name corresponding to a given joint index
@@ -461,6 +461,34 @@ public:
      * @return the name of the joint at index jointIndex
      */
     std::string getJointName(const unsigned int jointIndex);
+
+    /**
+     * Find the joint limits for the specified joint.
+     *
+     * @note If you know the index of the joint, use the other method
+     * getJointLimits(const int &, double &, double &)
+     *
+     * @param[in] jointName  name of the joint
+     * @param[out] min       min value of the joint limit
+     * @param[out] max       max value of the joint limit
+     *
+     * @return true if the limit is found. False otherwise
+     */
+    bool getJointLimits(const std::string &jointName, double &min, double &max);
+
+    /**
+     * Find the joint limits for the specified joint.
+     *
+     * @note use this method instead of
+     * getJointLimits(const std::string &, double &, double &)
+     *
+     * @param[in] jointIndex index of the joint
+     * @param[out] min       min value of the joint limit
+     * @param[out] max       max value of the joint limit
+     *
+     * @return true if the limit is found. False otherwise
+     */
+    bool getJointLimits(const int &jointIndex, double &min, double &max);
     
     //@}
 
