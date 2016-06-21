@@ -314,7 +314,8 @@ void RPYToQuaternionConsistencyCheck()
 
         ASSERT_EQUAL_MATRIX(rotCheck_idyntree,rotCheck_kdl);
         ASSERT_EQUAL_MATRIX(rotCheck_idyntree,rotCheck_yarp);
-        //ASSERT_EQUAL_MATRIX(rotCheck_idyntree,rotCheck_yarp_dev);
+        // Commented out because https://github.com/robotology/yarp/issues/803
+        // ASSERT_EQUAL_MATRIX(rotCheck_idyntree,rotCheck_yarp_dev);
     }
 
     std::cerr << "RPYToQuaternion Consistency check passed." << std::endl;
