@@ -105,6 +105,15 @@ namespace iDynTree
         Transform(const Transform & other);
 
         /**
+         * Assigment operator
+         *
+         * @param other the rhs
+         *
+         * @return *this equal to the other object
+         */
+        Transform& operator=(const Transform& other);
+
+        /**
          * Semantic accessor
          */
         TransformSemantics & getSemantics();
