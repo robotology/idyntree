@@ -57,6 +57,39 @@ MatrixDynSize::MatrixDynSize(const double* in_data,
     }
 }
 
+MatrixDynSize::MatrixDynSize(const MatrixDynSize& other)
+: m_rows(other.m_rows)
+, m_cols(other.m_cols)
+, m_capacity(other.m_rows * other.m_cols)
+{
+    if (this->m_capacity == 0)
+    {
+        this->m_data = 0;
+        return;
+    }
+
+    this->m_data = new double[this->m_capacity];
+    std::memcpy(this->m_data, other.m_data, m_capacity * sizeof(double));
+}
+
+MatrixDynSize& MatrixDynSize::operator=(const MatrixDynSize& other)
+{
+    if (this == &other) return *this;
+    if (m_data) {
+        delete [] m_data;
+        m_data = 0;
+    }
+
+    m_rows = other.m_rows;
+    m_cols = other.m_cols;
+    m_capacity = m_rows * m_cols;
+    if (m_capacity > 0) {
+        m_data = new double[m_capacity];
+        std::memcpy(this->m_data, other.m_data, m_capacity * sizeof(double));
+    }
+    return *this;
+}
+
 MatrixDynSize::~MatrixDynSize()
 {
     if( this->m_capacity > 0 )
