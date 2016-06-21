@@ -77,12 +77,13 @@ namespace CoDyCo {
         return true;
     }*/
 
-    TreeInertialParametersRegressor::TreeInertialParametersRegressor(Tree & _tree,Vector grav,const TreeSerialization & serialization) : tree(_tree),
-                                                                      UndirectedTreeSolver(_tree,serialization),
-                                                                      nrOfLinks(undirected_tree.getNrOfLinks()),
-                                                                      X_b(nrOfLinks),
-                                                                      v(nrOfLinks),
-                                                                      a(nrOfLinks)
+    TreeInertialParametersRegressor::TreeInertialParametersRegressor(Tree & _tree,Vector grav,const TreeSerialization & serialization)
+    : UndirectedTreeSolver(_tree,serialization)
+    , nrOfLinks(undirected_tree.getNrOfLinks())
+    , X_b(nrOfLinks)
+    , v(nrOfLinks)
+    , a(nrOfLinks)
+    , tree(_tree)
     {
         //Initializing gravitational acceleration (if any)
         ag=-Twist(grav,Vector::Zero());

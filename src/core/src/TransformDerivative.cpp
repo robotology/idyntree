@@ -20,15 +20,16 @@ namespace iDynTree
 
 TransformDerivative::TransformDerivative(const Matrix3x3& _rotDeriv,
                                          const Vector3& posDeriv):
-                                         rotDerivative(_rotDeriv),
-                                         posDerivative(posDeriv)
+                                            posDerivative(posDeriv),
+                                            rotDerivative(_rotDeriv)
+
 {
 
 }
 
 TransformDerivative::TransformDerivative(const TransformDerivative& other):
-                                              rotDerivative(other.rotDerivative),
-                                              posDerivative(other.posDerivative)
+                                              posDerivative(other.posDerivative),
+                                              rotDerivative(other.rotDerivative)
 {
 }
 
