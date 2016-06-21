@@ -164,8 +164,20 @@ namespace iDynTree
          * such that
          * *this == RotZ(y)*RotY(p)*RotX(r) 
          *
+         * @param[out] r roll rotation angle
+         * @param[out] p pitch rotation angle
+         * @param[out] y yaw rotation angle
          */
         void getRPY(double & r, double & p, double &y) const;
+
+        /**
+         * Get a roll, pitch and yaw corresponding to this rotation,
+         * as for getRPY, but return a vector with the output
+         * parameters. This function is more suitable for bindings.
+         *
+         * @return the output vector with the r, p and y parameters.
+         */
+        iDynTree::Vector3 asRPY();
 
         /**
          * Get a unit quaternion corresponding to this rotation

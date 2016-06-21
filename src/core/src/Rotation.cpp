@@ -326,6 +326,17 @@ namespace iDynTree
         }
     }
 
+    iDynTree::Vector3 Rotation::asRPY()
+    {
+        // get r, p, y values
+        double r,p,y;
+        this->getRPY(r,p,y);
+
+        // return the result
+        double vectorRPY[3] = {r,p,y};
+        return iDynTree::Vector3(vectorRPY,3);
+    }
+
     bool Rotation::getQuaternion(iDynTree::Vector4& quaternion) const
     {
         return getQuaternion(quaternion(0), quaternion(1), quaternion(2), quaternion(3));
