@@ -326,7 +326,7 @@ namespace iDynTree
         }
     }
 
-    iDynTree::Vector3 Rotation::asRPY()
+    iDynTree::Vector3 Rotation::asRPY() const
     {
         // get r, p, y values
         double r,p,y;

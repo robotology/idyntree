@@ -177,7 +177,7 @@ namespace iDynTree
          *
          * @return the output vector with the r, p and y parameters.
          */
-        iDynTree::Vector3 asRPY();
+        iDynTree::Vector3 asRPY() const;
 
         /**
          * Get a unit quaternion corresponding to this rotation
