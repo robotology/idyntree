@@ -131,7 +131,7 @@ void runTest(const int& expID,const Model& model,const Traversal& traversal,
                 ASSERT_EQUAL_DOUBLE(gyro1(1),0);
                 ASSERT_EQUAL_DOUBLE(gyro1(2),0);
                 ASSERT_EQUAL_DOUBLE(accl2(0),0);
-                ASSERT_EQUAL_DOUBLE(accl2(1),-0.1*acclTestVal);
+                ASSERT_EQUAL_DOUBLE(accl2(1),0.1*acclTestVal);
                 ASSERT_EQUAL_DOUBLE(accl2(2),0);
                 break;
     }

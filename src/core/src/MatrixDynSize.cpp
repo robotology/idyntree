@@ -26,13 +26,13 @@ MatrixDynSize::MatrixDynSize(unsigned int _rows,
 {
     if( this->m_rows*this->m_cols == 0 )
     {
-        this->m_data = 0;
         this->m_capacity = 0;
+        this->m_data = 0;
     }
     else
     {
-        this->m_data = new double[this->m_rows*this->m_cols];
         this->m_capacity = this->m_rows*this->m_cols;
+        this->m_data = new double[this->m_capacity];
     }
 
     zero();
@@ -51,9 +51,9 @@ MatrixDynSize::MatrixDynSize(const double* in_data,
     }
     else
     {
-        this->m_data = new double[this->m_rows*this->m_cols];
-        std::memcpy(this->m_data,in_data,in_rows*in_cols*sizeof(double));
         this->m_capacity = this->m_rows*this->m_cols;
+        this->m_data = new double[this->m_capacity];
+        std::memcpy(this->m_data,in_data,in_rows*in_cols*sizeof(double));
     }
 }
 
@@ -75,18 +75,38 @@ MatrixDynSize::MatrixDynSize(const MatrixDynSize& other)
 MatrixDynSize& MatrixDynSize::operator=(const MatrixDynSize& other)
 {
     if (this == &other) return *this;
-    if (m_data) {
-        delete [] m_data;
-        m_data = 0;
-    }
 
+    // Copy the new rows
     m_rows = other.m_rows;
     m_cols = other.m_cols;
-    m_capacity = m_rows * m_cols;
-    if (m_capacity > 0) {
-        m_data = new double[m_capacity];
-        std::memcpy(this->m_data, other.m_data, m_capacity * sizeof(double));
+
+    // If the copied data fits in the currently allocated buffer,
+    // use that one (if the user want to free the memory can use
+    // the shrink_to_fit method).
+    // Otherwise, allocate a new buffer after deleting the old one)
+    if (m_capacity < m_rows*m_cols)
+    {
+        if( this->m_capacity > 0 )
+        {
+            delete[] this->m_data;
+            this->m_data = 0;
+        }
+
+        if( this->m_rows*this->m_cols == 0 )
+        {
+            this->m_data = 0;
+            this->m_capacity = 0;
+        }
+        else
+        {
+            this->m_capacity = this->m_rows*this->m_cols;
+            this->m_data = new double[this->m_capacity];
+        }
     }
+
+    // Now we are sure that m_capacity >= m_rows*m_cols
+    std::memcpy(this->m_data, other.m_data, m_rows * m_cols * sizeof(double));
+
     return *this;
 }
 
