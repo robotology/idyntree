@@ -165,7 +165,7 @@ AngVelocity GyroscopeSensor::predictMeasurement(const Twist& linkVel)
     AngVelocity angVel(0,0,0);
     if(this->pimpl->parent_link_index>=0)
     {
-        angVel = ((this->pimpl->link_H_sensor * linkVel).getAngularVec3());
+        angVel = ((this->pimpl->link_H_sensor.inverse() * linkVel).getAngularVec3());
     }
     return(angVel);
 }

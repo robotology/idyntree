@@ -166,8 +166,8 @@ LinAcceleration AccelerometerSensor::predictMeasurement(const SpatialAcc& linkAc
     LinAcceleration returnAcc(0,0,0);
     if( this->pimpl->parent_link_index >= 0)
     {
-        iDynTree::Twist localVelocity = this->pimpl->link_H_sensor * linkTwist;
-        returnAcc = ((this->pimpl->link_H_sensor* linkAcc).getLinearVec3() + (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3()));
+        iDynTree::Twist localVelocity = this->pimpl->link_H_sensor.inverse() * linkTwist;
+        returnAcc = ((this->pimpl->link_H_sensor.inverse() * linkAcc).getLinearVec3() + (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3()));
     }
 
     return(returnAcc);
