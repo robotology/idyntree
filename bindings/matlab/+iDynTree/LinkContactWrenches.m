@@ -5,39 +5,39 @@ classdef LinkContactWrenches < SwigRef
     end
     function self = LinkContactWrenches(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if varargin{1}~=SwigRef.Null
+        if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(905, varargin{:});
+        tmp = iDynTreeMEX(917, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(906, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(918, self, varargin{:});
     end
     function varargout = getNrOfContactsForLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(907, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(919, self, varargin{:});
     end
     function varargout = setNrOfContactsForLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(908, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(920, self, varargin{:});
     end
     function varargout = getNrOfLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(909, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(921, self, varargin{:});
     end
     function varargout = contactWrench(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(910, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(922, self, varargin{:});
     end
     function varargout = computeNetWrenches(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(911, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(923, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(912, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(924, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(913, self);
+        iDynTreeMEX(925, self);
         self.swigPtr=[];
       end
     end

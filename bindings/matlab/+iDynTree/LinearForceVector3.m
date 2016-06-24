@@ -3,7 +3,7 @@ classdef LinearForceVector3 < iDynTree.ForceVector3__LinearForceVector3
     function self = LinearForceVector3(varargin)
       self@iDynTree.ForceVector3__LinearForceVector3(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if varargin{1}~=SwigRef.Null
+        if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
