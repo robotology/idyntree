@@ -67,6 +67,7 @@ Currently we are commiting to the repo the matlab bindings generated with this c
 |:------:|:---:|:------:|:------:|
 | Use of the [DynamicsComputation class](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1HighLevel_1_1DynamicsComputations.html) for computing Jacobians and Dynamics Regressor | [doc/dcTutorialCpp.md](doc/dcTutorialCpp.md) | NA | NA |
 | Use of the [ExtWrenchesAndJointTorquesEstimator class](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors | NA | [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | NA |
+| How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1KinDynComputations.html) | NA | [ examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | NA | 
 
 Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
 
