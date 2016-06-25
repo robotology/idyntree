@@ -46,7 +46,7 @@ option simply enables *compilation* of the bindings. If you want to regenerate t
 for example because you modified some iDynTree classes, you can install the experimental
 version of Swig with Matlab support at https://github.com/casadi/casadi/wiki/matlab (just follow
 the first 4 points in the guide) and then enable Matlab bindings generation with the `IDYNTREE_GENERATE_MATLAB` options.
-Currently we are commiting to the repo the matlab bindings generated with this commit of `matlab-swig`: https://github.com/jaeandersson/swig/commit/234d6ea3a08ef7184f74a670216af06700392a26 .
+Currently we are commiting to the repo the matlab bindings generated with this commit of `matlab-swig`: https://github.com/jaeandersson/swig/commit/5d3770e452b71265162001c2249dea7961660629 .
 
 #### Dependencies
 ##### Build dependencies
@@ -67,6 +67,7 @@ Currently we are commiting to the repo the matlab bindings generated with this c
 |:------:|:---:|:------:|:------:|
 | Use of the [DynamicsComputation class](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1HighLevel_1_1DynamicsComputations.html) for computing Jacobians and Dynamics Regressor | [doc/dcTutorialCpp.md](doc/dcTutorialCpp.md) | NA | NA |
 | Use of the [ExtWrenchesAndJointTorquesEstimator class](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors | NA | [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | NA |
+| How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1KinDynComputations.html) | NA | [ examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | NA | 
 
 Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
 
@@ -74,8 +75,8 @@ Are you interested in a tutorial on a specific feature or algorithm? Just [reque
 The documentation for the complete API of iDynTree is automatically extracted from the C++ code using [Doxygen](www.doxygen.org),
 and is available at the URL : [http://wiki.icub.org/codyco/dox/html/idyntree/html/](http://wiki.icub.org/codyco/dox/html/idyntree/html/).
 
-## Developer Documentation 
-If you want to contribute to iDynTree development, please check the [Developer's FAQ](https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md). 
+## Developer Documentation
+If you want to contribute to iDynTree development, please check the [Developer's FAQ](https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md).
 
 ## Reference paper
 A paper describing the algorithms implemented in iDynTree and their use in a real world scenario can be downloaded [here](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) . If you're going to use this library for your work, please quote it within any resulting publication:

@@ -5,30 +5,30 @@ classdef FreeFloatingAcc < SwigRef
     end
     function self = FreeFloatingAcc(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if varargin{1}~=SwigRef.Null
+        if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(895, varargin{:});
+        tmp = iDynTreeMEX(906, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(896, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(907, self, varargin{:});
     end
     function varargout = baseAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(897, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(908, self, varargin{:});
     end
     function varargout = jointAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(898, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(909, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(899, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(910, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(900, self);
+        iDynTreeMEX(911, self);
         self.swigPtr=[];
       end
     end
