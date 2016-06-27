@@ -81,7 +81,7 @@ axis_local.toString
 
 % We can transform this axis in the root_link frame by applyng to it the
 % appropriate transform 
-axis_base = comp.getRelativeTransform('root_link','l_sole')*axis_local;
+axis_base = comp.getRelativeTransform('root_link','l_lower_leg')*axis_local;
 
 % Note that Transform*Axis operation is overloaded to apropriatly transform 
 % the two elements of the axis : the direction vector is just rotated, while 
