@@ -12,7 +12,7 @@ if(DOXYGEN_FOUND)
     option(IDYNTREE_DOXYGEN_XML "Generate doxygen XML output, for use by SWIG" NO)
     mark_as_advanced(IDYNTREE_DOXYGEN_XML)
 
-    option(IDYNTREE_DOXYGEN_VERBOSE "Generate a verbose HTML output for Doxygen, including call and caller graphs." YES)
+    option(IDYNTREE_DOXYGEN_VERBOSE "Generate a verbose HTML output for Doxygen, including call and caller graphs." OFF)
     mark_as_advanced(IDYNTREE_DOXYGEN_VERBOSE)
     set(DOX_VERBOSE NO)
     if(IDYNTREE_DOXYGEN_VERBOSE)
