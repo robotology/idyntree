@@ -31,3 +31,11 @@ with your GitHub account, and you will automatically receive notifications if yo
 ## How to add a class or a function to a component documentation 
 * For each component (i.e. "part" of iDynTree, such as Core, Model, ...) a [Doxygen group](https://www.stack.nl/~dimitri/doxygen/manual/grouping.html) is defined in [doc/main.dox](../../doc/main.dox), usually following the `iDynTree${ComponentName}` structure ( `iDynTreeCore`, `iDynTreeModel`). 
 * To add a class or a function to a group, just add `\ingroup iDynTree${ComponentName}` to the doxygen documentation of the class/function. Search for [`\ingroup` in the repo](https://github.com/robotology/idyntree/search?q=\ingroup)  to see how this is done for existing classes.
+
+## How do I generated Doxygen documentation locally on my computer? 
+* If you have [Doxygen](www.doxygen.org) installed on your machine, you can simply generate the iDynTree Doxygen documentation by building the `dox` target, for example using `make` you just need to type:
+~~~
+make dox
+~~~ 
+in the iDynTree build, and the Doxygen documentation in HTML format will be generated in `build/doc/html/index.html`. 
+* To generate the call/caller graphs in the Doxygen documentation to simplify code inspection, just enable the ` IDYNTREE_DOXYGEN_VERBOSE` advanced CMake option. This are disabled by default because they render the documentation quite unreadable for the simple users.
