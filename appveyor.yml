@@ -28,6 +28,7 @@ build_script:
   - cd c:\projects 
   - hg clone https://bitbucket.org/eigen/eigen
   - cd eigen
+  - hg checkout 3.3-beta1
   - md build
   - cd build 
   - cmake ..
