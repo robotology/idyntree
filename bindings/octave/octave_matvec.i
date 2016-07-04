@@ -14,15 +14,22 @@ namespace iDynTree
     }
     
     // Convert from a dense matrix
-    void fromMatlab(mxArray * in)
+    void fromMatlab(octave_value oct_val)
     {
-        // check size
-        const size_t * dims = mxGetDimensions(in);
-        size_t fixValSize = $self->size();
-        if( ( dims[0] == fixValSize && dims[1] == 1) ||
-            ( dims[0] == 1 && dims[1] == fixValSize ) )
+        if( !oct_val.is_matrix_type() )
         {
-            double* d = static_cast<double*>(mxGetData(in));
+            std::cerr << "VectorFixSize::fromMatlab : expected matrix argument" << std::endl;
+            return;
+        }
+
+        Matrix mat = oct_val.matrix_value();
+
+        // check size
+        size_t fixValSize = $self->size();
+        if( ( mat.rows() == fixValSize && mat.cols() == 1) ||
+            ( mat.rows() == 1 && mat.cols() == fixValSize ) )
+        {
+            double* d = static_cast<double*>(mat.fortran_vec());
             double* selfData = $self->data();
             for(size_t i=0; i < fixValSize; i++ )
             {
@@ -39,20 +46,26 @@ namespace iDynTree
     octave_value toMatlab() const
     {
         Matrix mat = Matrix($self->rows(), $self->cols());
-        $self->fillColMajorBuffer(mat.fortan_vec()); // Column-major
+        $self->fillColMajorBuffer(mat.fortran_vec()); // Column-major
         return octave_value(mat);
     }
 
     // Convert from a dense matrix
-    void fromMatlab(mxArray * in)
+    void fromMatlab(octave_value oct_val)
     {
+        if( !oct_val.is_matrix_type() )
+        {
+            std::cerr << "VectorFixSize::fromMatlab : expected matrix argument" << std::endl;
+            return;
+        }
+
+        Matrix mat = oct_val.matrix_value();
         // check size
-        const size_t * dims = mxGetDimensions(in);
         size_t fixValRows = $self->rows();
         size_t fixValCols = $self->cols();
-        if( dims[0] == fixValRows && dims[1] == fixValCols )
+        if( mat.rows() == fixValRows && mat.cols() == fixValCols )
         {
-            double* d = static_cast<double*>(mxGetData(in));
+            double* d = static_cast<double*>(mat.fortran_vec());
             for(size_t row=0; row < fixValRows; row++ )
             {
                 for(size_t col=0; col < fixValCols; col++ )
@@ -72,27 +85,26 @@ namespace iDynTree
     octave_value toMatlab() const
     {
         Matrix mat = Matrix($self->size(), 1);
-        $self->fillBuffer(mat.fortan_vec()); // Column-major
+        $self->fillBuffer(mat.fortran_vec()); // Column-major
         return octave_value(mat);
     }
 
     // Convert from a dense matrix
-    void fromMatlab(mxArray * in)
+    void fromMatlab(octave_value oct_val)
     {
+        Matrix mat = oct_val.matrix_value();
         // check size
-        const size_t * dims = mxGetDimensions(in);
-        $self->size();
-        if( ( dims[0] == 1 || dims[1] == 1) )
+        if( ( mat.rows() == 1 || mat.cols() == 1) )
         {
             // Get the size of the input vector
             size_t inSize;
-            if( dims[0] == 1 )
+            if( mat.rows() == 1 )
             {
-                inSize = dims[1];
+                inSize = mat.cols();
             }
             else
             {
-                inSize = dims[0];
+                inSize = mat.rows();
             }
 
             // If the input vector has a size different
@@ -103,7 +115,7 @@ namespace iDynTree
                 $self->resize(inSize);
             }
 
-            double* d = static_cast<double*>(mxGetData(in));
+            double* d = static_cast<double*>(mat.fortran_vec());
             double* selfData = $self->data();
             for(size_t i=0; i < inSize; i++ )
             {
@@ -123,4 +135,6 @@ namespace iDynTree
         $self->fillColMajorBuffer(mat.fortran_vec()); // Column-major
         return octave_value(mat);
     }
+}
+
 }

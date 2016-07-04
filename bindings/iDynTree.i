@@ -189,6 +189,10 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "./matlab/matlab_spatialvec.i"
 #endif
 
+#ifdef SWIGOCTAVE
+%include "./octave/octave_spatialvec.i"
+#endif
+
 %template(SpatialMotionVectorSemanticsBase) iDynTree::SpatialVectorSemantics<iDynTree::LinearMotionVector3Semantics,iDynTree::AngularMotionVector3Semantics>;
 %template(SpatialForceVectorSemanticsBase) iDynTree::SpatialVectorSemantics<iDynTree::LinearForceVector3Semantics,iDynTree::AngularForceVector3Semantics>;
 
