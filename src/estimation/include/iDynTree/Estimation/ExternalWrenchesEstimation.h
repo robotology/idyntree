@@ -337,6 +337,18 @@ bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
                                                      iDynTree::LinkVelArray & linkVel,
                                                      iDynTree::LinkAccArray  & linkProperAcc);
 
+/**
+ * \brief Compute the net external wrenches (excluding gravity forces) acting on the links.
+ * @param[in] model the input model
+ * @param[in] linkVel a vector of link twists, expressed w.r.t to the link orientation and the link origin
+ * @param[in] linkProperAcc a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin
+ * @param[in] linkNetWrenchesWithoutGravity the vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on link i, expressed (both orientation and point) with respect to the reference frame of link i
+ */
+bool computeLinkNetWrenchesWithoutGravity(const Model& model,
+                                          const LinkVelArray & linkVel,
+                                          const LinkAccArray & linkProperAcc,
+                                                LinkNetWrenchesWithoutGravity& linkNetWrenchesWithoutGravity);
+
 
 }
 

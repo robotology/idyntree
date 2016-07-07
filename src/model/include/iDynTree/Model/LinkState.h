@@ -113,6 +113,15 @@ namespace iDynTree
      */
     typedef LinkWrenches LinkInternalWrenches;
 
+
+    /**
+     * Vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on
+     * link i, expressed (both orientation and point) with respect to the reference frame of link i.
+     *
+     * This is tipically computed as I*a+v*(I*v) , where a is the proper acceleration.
+     */
+    typedef LinkWrenches LinkNetWrenchesWithoutGravity;
+
     /**
      * Class for storing a vector of SpatialInertia objects , one for each link in a model.
      */

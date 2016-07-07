@@ -5,6 +5,7 @@
  *
  */
 
+#include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
 
 #include "testModels.h"
@@ -162,6 +163,33 @@ int main()
 
         ASSERT_EQUAL_SPATIAL_FORCE_TOL(ftIMU,ftFixedBase,1e-9);
     }
+
+    // Add a test on net external wrenches
+    // Compute the net wrenches acting on a link
+    LinkNetWrenchesWithoutGravity netWrenchesWithoutGravity(estimatorIMU.model());
+    bool ok = estimatorIMU.estimateLinkNetWrenchesWithoutGravity(netWrenchesWithoutGravity);
+    ASSERT_IS_TRUE(ok);
+
+    // Compute the external wrenches
+    LinkNetExternalWrenches externalWrenches(estimatorIMU.model());
+    ok = estimatedContactWrenchesFixedBase.computeNetWrenches(externalWrenches);
+    ASSERT_IS_TRUE(ok);
+
+
+    LinkPositions base_H_link;
+    // Compute the transform from each link to the base
+    Traversal defaultTraversal;
+    estimatorIMU.model().computeFullTreeTraversal(defaultTraversal);
+    ok = iDynTree::ForwardPositionKinematics(estimatorIMU.model(),
+                                             defaultTraversal,
+                                             Transform::Identity(),
+                                             qj,base_H_link);
+
+    iDynTree::Wrench momentumDerivative;
+    momentumDerivative.zero();
+    iDynTree::Wrench externalForces;
+    externalForces.zero();
+
 
     return EXIT_SUCCESS;
 }

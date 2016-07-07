@@ -276,6 +276,19 @@ public:
                                   const double properAccTol,
                                   const double verbose);
 
+
+    /**
+     * Compute the vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on
+     * link i, expressed (both orientation and point) with respect to the reference frame of link i,
+     * using the articulated body model and the kinematics information provided by the updateKinematics* methods.
+     *
+     * This is tipically computed as I*a+v*(I*v) , where a is the proper acceleration.
+     *
+     * @param[out] netWrenches the vector of link net wrenches.
+     * @return true if all went ok, false otherwise.
+     */
+    bool estimateLinkNetWrenchesWithoutGravity(LinkNetWrenchesWithoutGravity & netWrenches);
+
 };
 
 }

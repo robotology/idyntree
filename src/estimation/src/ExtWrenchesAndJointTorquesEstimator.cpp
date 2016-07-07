@@ -508,6 +508,28 @@ bool ExtWrenchesAndJointTorquesEstimator::checkThatTheModelIsStill(const double 
     return isStill;
 }
 
+bool ExtWrenchesAndJointTorquesEstimator::estimateLinkNetWrenchesWithoutGravity(LinkNetWrenchesWithoutGravity& netWrenches)
+{
+   if( !m_isModelValid )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateLinkNetWrenchesWithoutGravity",
+                    "Model and sensors information not set.");
+        return false;
+    }
+
+    if( !m_isKinematicsUpdated )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","estimateLinkNetWrenchesWithoutGravity",
+                    "Kinematic information not set.");
+        return false;
+    }
+
+    netWrenches.resize(m_model);
+
+    return computeLinkNetWrenchesWithoutGravity(m_model,m_linkVels,m_linkProperAccs,netWrenches);
+}
+
+
 
 
 
