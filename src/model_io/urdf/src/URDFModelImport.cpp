@@ -5,6 +5,7 @@
  */
 
 #include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
 
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Transform.h>
@@ -13,6 +14,9 @@
 #include <iDynTree/Model/RevoluteJoint.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/ModelTransformers.h>
+
+#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors/SixAxisFTSensor.h>
 
 #include <tinyxml.h>
 
@@ -476,7 +480,8 @@ bool jointFromURDFXML(const Model & model,
 
 
 bool modelFromURDF(const std::string & urdf_filename,
-                         iDynTree::Model & output)
+                         iDynTree::Model & output,
+                         const URDFParserOptions options)
 {
     std::ifstream ifs(urdf_filename.c_str());
 
@@ -490,7 +495,7 @@ bool modelFromURDF(const std::string & urdf_filename,
     std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
                             (std::istreambuf_iterator<char>()    ) );
 
-    return modelFromURDFString(xml_string,output);
+    return modelFromURDFString(xml_string,output,options);
 }
 
 /**
@@ -550,8 +555,91 @@ void cleanupFixedJoints(std::vector<IJointPtr> & fixedJoints)
     }
 }
 
+
+/**
+ * Helper function to load all the sensor frames from
+ * as additional frames in the model, so they can be used
+ * in all the methods that are frame-specific such as Jacobian computations.
+ */
+bool addSensorFramesAsAdditionalFramesToModel(Model & model,
+                                              const SensorsList & sensors)
+{
+    bool ret = true;
+
+    // First, we cycle on all the sensor that are attached to a link, because their frame is easy to add
+    // TODO : not super happy about this cycle, but is doing is work well
+    for(SensorType type=SIX_AXIS_FORCE_TORQUE; type < NR_OF_SENSOR_TYPES; type = (SensorType)(type+1))
+    {
+        // TODO : link sensor are extremly widespared and they have all approximatly the same API,
+        //        so we need a better way to iterate over them
+        if( isLinkSensor(type) )
+        {
+            for(size_t sensIdx = 0; sensIdx < sensors.getNrOfSensors(type); sensIdx++)
+            {
+                LinkSensor * linkSensor = dynamic_cast<LinkSensor*>(sensors.getSensor(type,sensIdx));
+
+                LinkIndex   linkToWhichTheSensorIsAttached = linkSensor->getParentLinkIndex();
+                std::string linkToWhichTheSensorIsAttachedName = model.getLinkName(linkToWhichTheSensorIsAttached);
+
+                if( model.getFrameIndex(linkSensor->getName()) != FRAME_INVALID_INDEX )
+                {
+                    std::string err = "addSensorFramesAsAdditionalFrames is specified as an option, but it is impossible to add the frame of sensor " + linkSensor->getName() + " as there is already a frame with that name";
+                    reportWarning("","addSensorFramesAsAdditionalFramesToModel",err.c_str());
+                }
+                else
+                {
+                    std::cerr << "Adding sensor " << linkSensor->getName() << " to link " << linkToWhichTheSensorIsAttachedName << " as additional frame"<< std::endl;
+                    bool ok = model.addAdditionalFrameToLink(linkToWhichTheSensorIsAttachedName,linkSensor->getName(),linkSensor->getLinkSensorTransform());
+
+                    if( !ok )
+                    {
+                        std::string err = "addSensorFramesAsAdditionalFrames is specified as an option, but it is impossible to add the frame of sensor " + linkSensor->getName() + " for unknown reasons";
+                        reportError("","addSensorFramesAsAdditionalFramesToModel",err.c_str());
+                        ret = false;
+                    }
+                }
+            }
+        }
+
+        // Explictly address the case of F/T sensors
+        if( type == SIX_AXIS_FORCE_TORQUE )
+        {
+            // We add the sensor frame as an additional frame of the **child** link
+            // (as tipically for URDF sensors the child link frame is coincident with the F/T sensor frame
+            for(size_t sensIdx = 0; sensIdx < sensors.getNrOfSensors(type); sensIdx++)
+            {
+                SixAxisForceTorqueSensor * ftSensor = dynamic_cast<SixAxisForceTorqueSensor*>(sensors.getSensor(type,sensIdx));
+
+                std::string linkToWhichTheSensorIsAttachedName = ftSensor->getSecondLinkName();
+
+                if( model.getFrameIndex(ftSensor->getName()) != FRAME_INVALID_INDEX )
+                {
+                    std::string err = "addSensorFramesAsAdditionalFrames is specified as an option, but it is impossible to add the frame of sensor " + ftSensor->getName() + " as there is already a frame with that name";
+                    reportWarning("","addSensorFramesAsAdditionalFramesToModel",err.c_str());
+                }
+                else
+                {
+                    Transform link_H_sensor;
+                    bool ok = ftSensor->getLinkSensorTransform(ftSensor->getSecondLinkIndex(),link_H_sensor);
+                    ok = ok && model.addAdditionalFrameToLink(linkToWhichTheSensorIsAttachedName,ftSensor->getName(),link_H_sensor);
+
+                    if( !ok )
+                    {
+                        std::string err = "addSensorFramesAsAdditionalFrames is specified as an option, but it is impossible to add the frame of sensor " + ftSensor->getName() + " for unknown reasons";
+                        reportError("","addSensorFramesAsAdditionalFramesToModel",err.c_str());
+                        ret = false;
+                    }
+                }
+            }
+        }
+    }
+
+    return ret;
+}
+
 bool modelFromURDFString(const std::string& urdf_string,
-                               iDynTree::Model& model)
+                               iDynTree::Model& model,
+                               const URDFParserOptions options)
 {
     bool ok = true;
 
@@ -691,6 +779,17 @@ bool modelFromURDFString(const std::string& urdf_string,
 
     // Remove fake links and add them as frames
     ok = ok && removeFakeLinks(rawModel,model);
+
+    if( options.addSensorFramesAsAdditionalFrames )
+    {
+        // Add sensor frames as additional frames in the model
+
+        // We must first parse the sensor, as at the moment the two parsers are separated
+        iDynTree::SensorsList sensors;
+        sensorsFromURDFString(urdf_string,model,sensors);
+
+        addSensorFramesAsAdditionalFramesToModel(model,sensors);
+    }
 
     return ok;
 }

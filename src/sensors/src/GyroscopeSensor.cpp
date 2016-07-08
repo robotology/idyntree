@@ -76,7 +76,7 @@ bool GyroscopeSensor::setName(const std::string& _name)
 }
 
 
-bool GyroscopeSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor) const
+bool GyroscopeSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor)
 {
     this->pimpl->link_H_sensor = link_H_sensor;
     return true;
@@ -154,7 +154,7 @@ LinkIndex GyroscopeSensor::getParentLinkIndex() const
 }
 
 
-Transform GyroscopeSensor::getLinkSensorTransform(void)
+Transform GyroscopeSensor::getLinkSensorTransform() const
 {
     return(this->pimpl->link_H_sensor);
 
