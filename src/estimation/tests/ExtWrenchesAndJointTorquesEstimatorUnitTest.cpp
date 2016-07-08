@@ -176,7 +176,7 @@ int main()
     ASSERT_IS_TRUE(ok);
 
 
-    LinkPositions base_H_link;
+    LinkPositions base_H_link(estimatorIMU.model());
     // Compute the transform from each link to the base
     Traversal defaultTraversal;
     estimatorIMU.model().computeFullTreeTraversal(defaultTraversal);
@@ -189,6 +189,15 @@ int main()
     momentumDerivative.zero();
     iDynTree::Wrench externalForces;
     externalForces.zero();
+
+    for(LinkIndex idx = 0; idx < estimatorIMU.model().getNrOfLinks(); idx++)
+    {
+        momentumDerivative = momentumDerivative + base_H_link(idx)*netWrenchesWithoutGravity(idx);
+        externalForces     = externalForces + base_H_link(idx)*externalWrenches(idx);
+    }
+
+    // The sum of the netWrenchesWithoutGravity of all the links should be equal to the sum of the external wrenches
+    ASSERT_EQUAL_SPATIAL_FORCE_TOL(momentumDerivative,externalForces,1e-8);
 
 
     return EXIT_SUCCESS;
