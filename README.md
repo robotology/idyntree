@@ -11,6 +11,7 @@ iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) 
 * **[Installation](#installation)**
 * **[Tutorials](#tutorials)**
 * **[Documentation](#documentation)**
+* **[Developer Documentation](#developer-documentation)**
 * **[Reference Paper](#reference-paper)**
 * **[Acknowledgments](#acknowledgments)**
 
@@ -47,6 +48,7 @@ for example because you modified some iDynTree classes, you can install the expe
 version of Swig with Matlab support at https://github.com/casadi/casadi/wiki/matlab (just follow
 the first 4 points in the guide) and then enable Matlab bindings generation with the `IDYNTREE_GENERATE_MATLAB` options.
 Currently we are commiting to the repo the matlab bindings generated with this commit of `matlab-swig`: https://github.com/jaeandersson/swig/commit/5d3770e452b71265162001c2249dea7961660629 .
+For more info on how to modify the matlab bindings, see https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md#how-to-add-wrap-a-new-class-or-function-with-swig .
 
 #### Dependencies
 ##### Build dependencies
