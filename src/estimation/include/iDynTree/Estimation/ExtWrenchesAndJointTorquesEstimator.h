@@ -245,7 +245,11 @@ public:
      * Contact force estimations using tactile sensors and force/torque sensors.
      * URL : http://www.researchgate.net/profile/Andrea_Del_Prete/publication/236152161_Contact_Force_Estimations_Using_Tactile_Sensors_and_Force__Torque_Sensors/links/00b495166e74a5369d000000.pdf
      *
-     * @param[in] unknowns the unknown external wrenches.
+     * \note There should be at least 6 unknowns variables for each submodel for which the estimation of
+     *       external wrenches is performed (i.e. usually 1 unknown wrench for each submodel).
+     *       If is not the case, undefined results could occur in the estimation.
+     *
+     * @param[in] unknowns the unknown external wrenches
      * @param[in] ftSensorsMeasures the measurements for the FT sensors.
      * @param[out] estimatedContactWrenches the estimated contact wrenches.
      * @param[out] estimatedJointTorques the estimated joint torques.

@@ -178,6 +178,21 @@ public:
                               const UnknownWrenchContact& newContact);
 
     /**
+     * Add a full wrench unknown at the origin of the specified frame.
+     * Simplified version of a addNewContactInFrame, in which the contact
+     * point is the origin of the frame and the unknown type is FULL_WRENCH.
+     *
+     * Equivalent to
+     *   addNewContactInFrame(model,frame,UnknownWrenchContact(FULL_WRENCH,Position::Zero()))
+     *
+     * @param[in] model the model class for getting frame information.
+     * @param[in] frameIndex the index of the frame in which you are expressing the new unknown wrench.
+     * @return true if all went well, false otherwise
+     */
+    bool addNewUnknownFullWrenchInFrameOrigin(const Model& model,
+                                              const FrameIndex frame);
+
+    /**
      * Get a specific ContactWrench
      *
      * @param[in] linkIndex the index of the link for which the contact is retrieved

@@ -139,6 +139,12 @@ bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
     return true;
 }
 
+bool LinkUnknownWrenchContacts::addNewUnknownFullWrenchInFrameOrigin(const Model& model, const FrameIndex frame)
+{
+    return this->addNewContactInFrame(model,frame,UnknownWrenchContact(FULL_WRENCH,Position::Zero()));
+}
+
+
 
 
 std::string LinkUnknownWrenchContacts::toString(const Model& model) const
@@ -650,7 +656,6 @@ bool estimateExternalWrenches(const Model& model,
         // Note that the logic of conversion between input/output contacts should be
         // the same used before in computeMatrixOfEstimationEquation
         storeResultsOfEstimation(subModelTraversal,unknownWrenches,sm,bufs,outputContactWrenches);
-
     }
 
     return true;
