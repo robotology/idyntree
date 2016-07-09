@@ -16,6 +16,9 @@ void addOptions(cmdline::parser &cmd)
                          "Model to load.",
                          true);
 
+    cmd.add("print", 'p',
+            "Print the model.");
+
     cmd.add("total-mass", '\0',
             "Get the total mass of a model.");
 
@@ -24,12 +27,22 @@ void addOptions(cmdline::parser &cmd)
 
     cmd.add<std::string>("link-com-frame", '\0',
                          "If link-com is passed, link-com-frame specifies the frame in which the inertia information is printed (assuming that the model is in zero position)",false);
-    
+
     cmd.add<std::string>("frame-pose", '\0',
-                         "Print t",false);
+                         "Print the referenceFrame_H_frame transform.",false);
 
     cmd.add<std::string>("frame-pose-reference-frame", '\0',
                          "If frame-pose is passed, frame-pose-reference-frame specifies the reference frame in which the frame pose is expressed (assuming that the model is in zero position)",false);
+}
+
+void handlePrintOption(iDynTree::KinDynComputations & comp, cmdline::parser & cmd)
+{
+    if( !cmd.exist("print") )
+    {
+        return;
+    }
+
+    std::cout << comp.getRobotModel().toString() << std::endl;
 }
 
 void handleTotalMassOptions(iDynTree::KinDynComputations & comp, cmdline::parser & cmd)
@@ -55,7 +68,7 @@ void handleTotalMassOptions(iDynTree::KinDynComputations & comp, cmdline::parser
 void handleFramePoseOptions(iDynTree::KinDynComputations & comp, cmdline::parser & cmd)
 {
     using namespace iDynTree;
-    
+
     const Model & model = comp.getRobotModel();
 
     if( !cmd.exist("frame-pose") )
@@ -74,13 +87,13 @@ void handleFramePoseOptions(iDynTree::KinDynComputations & comp, cmdline::parser
     {
         referenceFrameName = model.getFrameName(comp.getRobotModel().getDefaultBaseLink());
     }
-    
+
     if( !model.isValidFrameIndex(model.getFrameIndex(frameName)) )
     {
         std::cerr << "Frame " << frameName << " not found in the model" << std::endl;
 	return;
     }
-    
+
     if( !model.isValidFrameIndex(model.getFrameIndex(referenceFrameName)) )
     {
         std::cerr << "Frame " << referenceFrameName << " not found in the model" << std::endl;
@@ -149,13 +162,16 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
 
+    // Handle print option
+    handlePrintOption(model,cmd);
+
     // Handle total mass option
     handleTotalMassOptions(model,cmd);
 
     // Handle link com
     handleLinkCOMOptions(model,cmd);
-    
-    // Handle frame pose 
+
+    // Handle frame pose
     handleFramePoseOptions(model,cmd);
 
 
