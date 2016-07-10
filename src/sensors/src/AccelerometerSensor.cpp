@@ -80,7 +80,7 @@ bool AccelerometerSensor::setName(const std::string& _name)
 }
 
 
-bool AccelerometerSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor) const
+bool AccelerometerSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor)
 {
       this->pimpl->link_H_sensor = link_H_sensor;
       return true;
@@ -156,7 +156,7 @@ SensorType AccelerometerSensor::getSensorType() const
     return ACCELEROMETER;
 }
 
-Transform AccelerometerSensor::getLinkSensorTransform(void)
+Transform AccelerometerSensor::getLinkSensorTransform() const
 {
     return(this->pimpl->link_H_sensor);
 }

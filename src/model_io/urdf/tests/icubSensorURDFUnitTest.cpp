@@ -25,7 +25,8 @@ using namespace iDynTree;
 void checkURDF(std::string fileName,
                unsigned int expectedNrOfAccelerometers,
                unsigned int expectedNrOfGyroscopes,
-               unsigned int expectedNrOfFTSensors
+               unsigned int expectedNrOfFTSensors,
+               const std::string nameOfASensorFrame
               )
 {
     std::cout<<"Tying to load model from URDF"<<std::endl;
@@ -57,6 +58,11 @@ void checkURDF(std::string fileName,
      ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::ACCELEROMETER),expectedNrOfAccelerometers);
      ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::GYROSCOPE),expectedNrOfGyroscopes);
      ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),expectedNrOfFTSensors);
+
+     // The default behavior is to load the sensor frame as additional frames, so we check
+     // if at least one sensor frame has been correctly loaded
+     ASSERT_IS_TRUE(model.isFrameNameUsed(nameOfASensorFrame));
+
 }
 
 
@@ -64,7 +70,7 @@ void checkURDF(std::string fileName,
 int main()
 {
     std::cout<<"iCub Sensor test running:\n";
-    checkURDF(getAbsModelPath("/icub_sensorised.urdf"),55,11,6);
+    checkURDF(getAbsModelPath("/icub_sensorised.urdf"),55,11,6,"root_link_ems_acc_eb5");
 
     std::cout <<"iCub Sensor test just ran\n";
     return 0;

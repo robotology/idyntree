@@ -37,7 +37,7 @@ void init(std::string fileName, Model &model, Traversal &traversal,
     ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(),2);
     ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(),1);
     ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(),1);
-    ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(),3);
+    ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(),6);
     ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()),"link1");
 
     ok = model.computeFullTreeTraversal(traversal);

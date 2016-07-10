@@ -43,6 +43,12 @@ namespace iDynTree
     bool reportErrorIf(bool condition, const char * className_methodName, const char * errorMessage);
 
     /**
+     * Helper function for reporting warnings in iDynTree
+     *
+     */
+    void reportWarning(const char * className, const char* methodName, const char * errorMessage);
+
+    /**
      * Convert a double from degrees to radians.
      */
     double deg2rad(const double valueInDeg);

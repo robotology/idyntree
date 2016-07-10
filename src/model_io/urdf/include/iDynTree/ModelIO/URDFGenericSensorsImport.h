@@ -19,18 +19,25 @@ class Model;
 /**
  * Load a iDynTree::SensorsList object from a URDF file.
  *
- * Supported sensors:
+ * The URDF syntax and the sensor supported are documented in
+ * https://github.com/robotology/idyntree/blob/master/doc/model_loading.md .
  *
- * * Gyroscope :
- *
- * \note Experimental version for a more generic set of sensors
- *  other than gazebo extension F/T.
  *
  * @return true if all went ok, false otherwise.
  */
 bool sensorsFromURDF(const std::string & urdf_filename,
                      iDynTree::SensorsList & output);
 
+/**
+ * Load a iDynTree::SensorsList object from a URDF file, using a previous loaded
+ * iDynTree::Model from the same URDF.
+ *
+ * The URDF syntax and the sensor supported are documented in
+ * https://github.com/robotology/idyntree/blob/master/doc/model_loading.md .
+ *
+ *
+ * @return true if all went ok, false otherwise.
+ */
 bool sensorsFromURDF(const std::string & urdf_filename,
                      const Model & model,
                      iDynTree::SensorsList & output);
@@ -38,13 +45,26 @@ bool sensorsFromURDF(const std::string & urdf_filename,
 /**
  * Load a iDynTree::SensorsList object from a URDF string.
  *
- * \note Experimental version for a more generic set of sensors
- *  other than gazebo extension F/T.
+ * The URDF syntax and the sensor supported are documented in
+ * https://github.com/robotology/idyntree/blob/master/doc/model_loading.md .
  *
  * @return true if all went ok, false otherwise.
  */
 bool sensorsFromURDFString(const std::string & urdf_string,
-                       iDynTree::SensorsList & output);
+                           iDynTree::SensorsList & output);
+
+/**
+ * Load a iDynTree::SensorsList object from a URDF string, using a previous loaded
+ * iDynTree::Model from the same URDF.
+ *
+ * The URDF syntax and the sensor supported are documented in
+ * https://github.com/robotology/idyntree/blob/master/doc/model_loading.md .
+ *
+ * @return true if all went ok, false otherwise.
+ */
+bool sensorsFromURDFString(const std::string & urdf_string,
+                           const Model & model,
+                           iDynTree::SensorsList & output);
 
 }
 
