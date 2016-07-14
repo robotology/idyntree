@@ -86,6 +86,8 @@ bool DynamicDatasetFileCollection::getSample(int sample_n, DynamicSample & sampl
 
         start_sample_index += datasets_samples[dataset_index];
     }
+
+    return false;
 }
 
 }

@@ -24,6 +24,14 @@ matrix:
     - os: osx
       compiler: clang
       env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
+    - os: osx
+      osx_image: xcode7.3
+      compiler: gcc
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
+    - os: osx
+      osx_image: xcode7.3
+      compiler: clang
+      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
 
 before_script:
   # workaround around opencv linking problem in clang:
@@ -49,12 +57,13 @@ before_script:
   - cd idyntree
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=${VALGRIND_TESTS} -DCODYCO_TRAVIS_CI:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=${USE_PYTHON} -DIDYNTREE_USES_LUA:BOOL=ON ..
+  # Xcode has support for multiple configurations. Passing -DCMAKE_BUILD_TYPE is ignored
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=${VALGRIND_TESTS} -DCODYCO_TRAVIS_CI:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=${USE_PYTHON} -DIDYNTREE_USES_LUA:BOOL=ON ..
 
 script:
   - cmake --build . --config ${TRAVIS_BUILD_TYPE}
   - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
-  - ctest --output-on-failure 
+  - ctest --output-on-failure --build-config ${TRAVIS_BUILD_TYPE}
   # test examples 
   - cd ../examples
   - mkdir build 

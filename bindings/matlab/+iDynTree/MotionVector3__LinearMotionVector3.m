@@ -3,7 +3,7 @@ classdef MotionVector3__LinearMotionVector3 < iDynTree.GeomVector3__LinearMotion
     function self = MotionVector3__LinearMotionVector3(varargin)
       self@iDynTree.GeomVector3__LinearMotionVector3(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if varargin{1}~=SwigRef.Null
+        if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else

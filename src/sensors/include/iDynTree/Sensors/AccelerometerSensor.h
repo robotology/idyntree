@@ -79,7 +79,7 @@ namespace iDynTree {
          *
          * @return true if link_index is parent link attached to the accelerometer sensor, false otherwise.
          */
-        bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor) const;
+        bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor);
 
         /*
          * Documented in Sensor
@@ -91,34 +91,37 @@ namespace iDynTree {
          */
         bool setParentLinkIndex(const LinkIndex & parent_index);
 
-        /**
+        /*
          * Documented in the sensor
          *
          */
         std::string getName() const;
 
-        /**
+        /*
          * Documented in Sensor
          */
         SensorType getSensorType() const;
 
 
-        /**
+        /*
          * Documented in Sensor
          */
         std::string getParentLink() const;
 
-        /**
+        /*
          * Documented in Sensor
          */
         LinkIndex getParentLinkIndex() const;
 
-        /**
+        // Documented in LinkSensor
+        Transform getLinkSensorTransform() const;
+
+        /*
          * Documented in Sensor
          */
         bool isValid() const;
 
-        /**
+        /*
          * Documented in Sensor
          */
         Sensor * clone() const;
@@ -128,12 +131,6 @@ namespace iDynTree {
          */
         bool updateIndeces(const Model & model);
 
-        /**
-         * Get the transform from the sensor to the specified link.
-         *
-         * @return Transform associated with the link Frame and the sensor
-         */
-       Transform getLinkSensorTransform(void);
 
 
       /**

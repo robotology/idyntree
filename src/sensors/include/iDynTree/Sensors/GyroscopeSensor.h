@@ -76,8 +76,7 @@ namespace iDynTree {
          *
          * @return true if link_index is the link attached to the Gyroscope, false otherwise.
          */
-        bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor) const;
-
+        bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor);
 
         /**
          * Documented in Sensor
@@ -112,6 +111,9 @@ namespace iDynTree {
          */
         LinkIndex getParentLinkIndex() const;
 
+        // Documented in LinkSensor
+        Transform getLinkSensorTransform() const;
+
         /**
          * Documented in Sensor
          */
@@ -126,13 +128,6 @@ namespace iDynTree {
          * Documented in Sensor
          */
         bool updateIndeces(const Model & model);
-
-        /**
-         * Get the transform from the sensor to the parent link.
-         *
-         * @return Transform associated with the link frame and the sensor
-         */
-        Transform getLinkSensorTransform(void);
 
         /**
          * Predict sensor measurement when given the parent link spatial velocity, expressed

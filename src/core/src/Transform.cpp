@@ -98,6 +98,16 @@ Transform::Transform(const Transform& other): pos(other.getPosition()),
 {
 }
 
+Transform& Transform::operator=(const Transform& other)
+{
+    if (this == &other) return *this;
+    this->pos = other.getPosition();
+    this->rot = other.getRotation();
+    this->semantics.setPositionSemantics(other.getPosition().getSemantics());
+    this->semantics.setRotationSemantics(other.getRotation().getSemantics());
+    return *this;
+}
+
 TransformSemantics& Transform::getSemantics()
 {
     return this->semantics;

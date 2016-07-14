@@ -147,6 +147,16 @@ struct DynamicsComputations::DynamicsComputationsPrivateAttributes
     // element i contains the baseLink_H_i transform
     std::vector<KDL::Frame> m_baseLinkHframe;
 
+    //Save here the joint limits, until we have a Model object
+    struct JointLimit
+    {
+        double min;
+        double max;
+    };
+
+    typedef std::map<int, JointLimit> JointLimitMap;
+    JointLimitMap jointLimits;
+
     DynamicsComputationsPrivateAttributes()
     {
         m_isModelValid = false;
@@ -241,7 +251,12 @@ int DynamicsComputations::getFrameIndex(const std::string& frameName) const
     // see https://github.com/robotology/codyco-modules/issues/39
     // Once we have a proper iDynTree::Model, we can properly implement
     // the difference between frame and link
-    int index = this->pimpl->m_robot_model.getLink(frameName)->getLinkIndex();
+    KDL::CoDyCo::LinkMap::const_iterator frame = this->pimpl->m_robot_model.getLink(frameName);
+    int index = -1;
+    if (frame == this->pimpl->m_robot_model.getInvalidLinkIterator())
+        index = -1;
+    else
+        index = frame->getLinkIndex();
     reportErrorIf(index < 0, "DynamicsComputations::getFrameIndex", "requested frameName not found in model");
     return index;
 }
@@ -250,9 +265,6 @@ std::string DynamicsComputations::getFrameName(int frameIndex) const
 {
     return this->pimpl->m_robot_model.getLink(frameIndex)->getName();
 }
-
-
-
 
 void DynamicsComputations::computeFwdKinematics()
 {
@@ -324,8 +336,31 @@ bool DynamicsComputations::loadRobotModelFromString(const std::string& modelStri
     KDL::Tree local_model;
     bool ok = iDynTree::treeFromUrdfString(modelString,local_model,consider_root_link_inertia);
 
-
     this->pimpl->m_robot_model = KDL::CoDyCo::UndirectedTree(local_model);
+
+    //TODO:
+    std::vector<std::string> joint_names;
+    KDL::JntArray min;
+    KDL::JntArray max;
+    ok = ok && iDynTree::jointPosLimitsFromUrdfString(modelString,
+                                                      joint_names,
+                                                      min,
+                                                      max);
+
+    if (min.rows() != max.rows() || min.rows() != joint_names.size()) {
+        std::cerr << "[ERROR] error in loading joint limits" << std::endl;
+        return false;
+    }
+
+    for (size_t index = 0; index < joint_names.size(); ++index) {
+        int jointIndex = getJointIndex(joint_names[index]);
+        if (jointIndex >= 0) {
+            DynamicsComputationsPrivateAttributes::JointLimit limit;
+            limit.min = min(index);
+            limit.max = max(index);
+            this->pimpl->jointLimits.insert(DynamicsComputationsPrivateAttributes::JointLimitMap::value_type(jointIndex, limit));
+        }
+    }
 
     if( !ok )
     {
@@ -944,6 +979,30 @@ std::string DynamicsComputations::getJointName(const unsigned int jointIndex)
     return this->getDescriptionOfDegreeOfFreedom(jointIndex);
 }
 
+
+bool DynamicsComputations::getJointLimits(const std::string &jointName, double &min, double &max)
+{
+    assert(pimpl);
+
+    int index = getJointIndex(jointName);
+    if (index < 0) return false;
+
+    return getJointLimits(index, min, max);
+}
+
+bool DynamicsComputations::getJointLimits(const int &jointIndex, double &min, double &max)
+{
+    assert(pimpl);
+    if (jointIndex < 0) return false;
+
+    DynamicsComputationsPrivateAttributes::JointLimitMap::const_iterator found;
+    found = pimpl->jointLimits.find(jointIndex);
+    if (found == pimpl->jointLimits.end())
+        return false;
+    min = found->second.min;
+    max = found->second.max;
+    return true;
+}
 
 }
 

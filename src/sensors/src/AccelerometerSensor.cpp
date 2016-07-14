@@ -80,7 +80,7 @@ bool AccelerometerSensor::setName(const std::string& _name)
 }
 
 
-bool AccelerometerSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor) const
+bool AccelerometerSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor)
 {
       this->pimpl->link_H_sensor = link_H_sensor;
       return true;
@@ -135,7 +135,7 @@ bool AccelerometerSensor::updateIndeces(const Model& model)
 {
     iDynTree::LinkIndex linkNewIndex = model.getLinkIndex(this->pimpl->parent_link_name);
 
-    if( (linkNewIndex == iDynTree::LINK_INVALID_INDEX) )
+    if( linkNewIndex == iDynTree::LINK_INVALID_INDEX )
     {
         return false;
     }
@@ -156,7 +156,7 @@ SensorType AccelerometerSensor::getSensorType() const
     return ACCELEROMETER;
 }
 
-Transform AccelerometerSensor::getLinkSensorTransform(void)
+Transform AccelerometerSensor::getLinkSensorTransform() const
 {
     return(this->pimpl->link_H_sensor);
 }
@@ -166,8 +166,8 @@ LinAcceleration AccelerometerSensor::predictMeasurement(const SpatialAcc& linkAc
     LinAcceleration returnAcc(0,0,0);
     if( this->pimpl->parent_link_index >= 0)
     {
-        iDynTree::Twist localVelocity = this->pimpl->link_H_sensor * linkTwist;
-        returnAcc = ((this->pimpl->link_H_sensor* linkAcc).getLinearVec3() + (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3()));
+        iDynTree::Twist localVelocity = this->pimpl->link_H_sensor.inverse() * linkTwist;
+        returnAcc = ((this->pimpl->link_H_sensor.inverse() * linkAcc).getLinearVec3() + (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3()));
     }
 
     return(returnAcc);

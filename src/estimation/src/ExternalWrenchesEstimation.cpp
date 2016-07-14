@@ -139,6 +139,12 @@ bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
     return true;
 }
 
+bool LinkUnknownWrenchContacts::addNewUnknownFullWrenchInFrameOrigin(const Model& model, const FrameIndex frame)
+{
+    return this->addNewContactInFrame(model,frame,UnknownWrenchContact(FULL_WRENCH,Position::Zero()));
+}
+
+
 
 
 std::string LinkUnknownWrenchContacts::toString(const Model& model) const
@@ -374,6 +380,7 @@ Wrench computeKnownTermsOfEstimationEquationWithInternalFT(const Model& model,
          }
      }
 
+     // If we reach this point of the code, something is really really wrong
      assert(false);
      return Wrench::Zero();
 }
@@ -649,7 +656,6 @@ bool estimateExternalWrenches(const Model& model,
         // Note that the logic of conversion between input/output contacts should be
         // the same used before in computeMatrixOfEstimationEquation
         storeResultsOfEstimation(subModelTraversal,unknownWrenches,sm,bufs,outputContactWrenches);
-
     }
 
     return true;
@@ -716,6 +722,28 @@ bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
     return retValue;
 
 }
+
+bool computeLinkNetWrenchesWithoutGravity(const Model& model,
+                                          const LinkVelArray& linkVel,
+                                          const LinkAccArray& linkProperAcc,
+                                                LinkNetWrenchesWithoutGravity& linkNetWrenchesWithoutGravity)
+{
+     // Note that we are not using a Traversal here: the main reason
+     // is that given that the computation that we are doing (once we have the linkVel and linkProperAcc
+     // does not depend on the topology, so we can visit the links in any possible order
+     for(LinkIndex visitedLinkIndex = 0; visitedLinkIndex < model.getNrOfLinks(); visitedLinkIndex++)
+     {
+         LinkConstPtr visitedLink = model.getLink(visitedLinkIndex);
+
+         const iDynTree::SpatialInertia & I = visitedLink->getInertia();
+         const iDynTree::SpatialAcc     & properAcc = linkProperAcc(visitedLinkIndex);
+         const iDynTree::Twist          & v = linkVel(visitedLinkIndex);
+         linkNetWrenchesWithoutGravity(visitedLinkIndex) = I*properAcc + v*(I*v);
+     }
+
+     return true;
+}
+
 
 
 

@@ -76,7 +76,7 @@ bool GyroscopeSensor::setName(const std::string& _name)
 }
 
 
-bool GyroscopeSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor) const
+bool GyroscopeSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor)
 {
     this->pimpl->link_H_sensor = link_H_sensor;
     return true;
@@ -120,7 +120,7 @@ bool GyroscopeSensor::updateIndeces(const Model& model)
 {
     iDynTree::LinkIndex linkNewIndex = model.getLinkIndex(this->pimpl->parent_link_name);
 
-    if( (linkNewIndex == iDynTree::LINK_INVALID_INDEX) )
+    if( linkNewIndex == iDynTree::LINK_INVALID_INDEX )
     {
         return false;
     }
@@ -154,7 +154,7 @@ LinkIndex GyroscopeSensor::getParentLinkIndex() const
 }
 
 
-Transform GyroscopeSensor::getLinkSensorTransform(void)
+Transform GyroscopeSensor::getLinkSensorTransform() const
 {
     return(this->pimpl->link_H_sensor);
 
@@ -165,7 +165,7 @@ AngVelocity GyroscopeSensor::predictMeasurement(const Twist& linkVel)
     AngVelocity angVel(0,0,0);
     if(this->pimpl->parent_link_index>=0)
     {
-        angVel = ((this->pimpl->link_H_sensor * linkVel).getAngularVec3());
+        angVel = ((this->pimpl->link_H_sensor.inverse() * linkVel).getAngularVec3());
     }
     return(angVel);
 }

@@ -117,6 +117,9 @@ namespace std {
 #include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
 
 // High level interfaces
+#include "iDynTree/KinDynComputations.h"
+
+// Legacy high level interfaces
 #include "iDynTree/HighLevel/DynamicsComputations.h"
 
 %}
@@ -247,6 +250,8 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Model/FreeFloatingState.h"
 %include "iDynTree/Model/ContactWrench.h"
 
+%include "joints.i"
+
 // Kinematics & Dynamics related functions
 %include "iDynTree/Model/ForwardKinematics.h"
 %include "iDynTree/Model/Dynamics.h"
@@ -277,5 +282,8 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Regressors/DynamicsRegressorGenerator.h"
 
 // High level interfaces
+%include "iDynTree/KinDynComputations.h"
+
+// Legacy high level interfaces
 %include "iDynTree/HighLevel/DynamicsComputations.h"
 

@@ -3,7 +3,7 @@ classdef ForceVector3Semantics__AngularForceVector3Semantics < iDynTree.GeomVect
     function self = ForceVector3Semantics__AngularForceVector3Semantics(varargin)
       self@iDynTree.GeomVector3Semantics__AngularForceVector3Semantics(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if varargin{1}~=SwigRef.Null
+        if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else

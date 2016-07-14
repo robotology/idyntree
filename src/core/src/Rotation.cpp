@@ -258,7 +258,10 @@ namespace iDynTree
 
     void Rotation::fromQuaternion(const iDynTree::Vector4& _quaternion)
     {
-        Eigen::Map<const Eigen::Vector4d> quaternion(_quaternion.data());
+        Eigen::Map<const Eigen::Vector4d> quaternionIn(_quaternion.data());
+        //normalize input quaternion
+        Eigen::Vector4d quaternion(quaternionIn);
+        quaternion.normalize();
 
         //to avoid memory allocation "unroll" the summation of Rodrigues' Formula
         // R = I3 + 2s S(r) + 2S(r)^2,
@@ -293,7 +296,7 @@ namespace iDynTree
         (*this)(2,1) -= r12;
     }
 
-    void Rotation::getRPY(double& r, double& p, double& y)
+    void Rotation::getRPY(double& r, double& p, double& y) const
     {
         Eigen::Map<const Matrix3dRowMajor> R(m_data);
 
@@ -321,6 +324,17 @@ namespace iDynTree
             p=-M_PI/2.0;
             y=atan2(-R(1,2),R(1,1));
         }
+    }
+
+    iDynTree::Vector3 Rotation::asRPY() const
+    {
+        // get r, p, y values
+        double r,p,y;
+        this->getRPY(r,p,y);
+
+        // return the result
+        double vectorRPY[3] = {r,p,y};
+        return iDynTree::Vector3(vectorRPY,3);
     }
 
     bool Rotation::getQuaternion(iDynTree::Vector4& quaternion) const

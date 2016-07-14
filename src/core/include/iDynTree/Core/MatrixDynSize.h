@@ -87,6 +87,22 @@ namespace iDynTree
         MatrixDynSize(const double * in_data, const unsigned int in_rows, const unsigned int in_cols);
 
         /**
+         * Copy constructor
+         *
+         * @param other the object to copy
+         */
+        MatrixDynSize(const MatrixDynSize& other);
+
+        /**
+         * Assignment operator
+         *
+         * @param other the object to copy into self
+         *
+         * @return *this
+         */
+        MatrixDynSize& operator=(const MatrixDynSize& other);
+
+        /**
          * Denstructor
          *
          * \warning performs dynamic memory allocation operations

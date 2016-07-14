@@ -145,6 +145,7 @@ namespace iDynTree
          *
          * @note the quaternion is expressed as (real, imaginary) part with
          * real \f$\in \mathbb{R}\f$ and imaginary \f$\in \mathbb{R}^3\f$
+         * @note the quaternion is normalized
          * @param quaternion the rotation expressed in quaternion
          */
         void fromQuaternion(const iDynTree::Vector4& quaternion);
@@ -163,8 +164,20 @@ namespace iDynTree
          * such that
          * *this == RotZ(y)*RotY(p)*RotX(r) 
          *
+         * @param[out] r roll rotation angle
+         * @param[out] p pitch rotation angle
+         * @param[out] y yaw rotation angle
          */
-        void getRPY(double & r, double & p, double &y);
+        void getRPY(double & r, double & p, double &y) const;
+
+        /**
+         * Get a roll, pitch and yaw corresponding to this rotation,
+         * as for getRPY, but return a vector with the output
+         * parameters. This function is more suitable for bindings.
+         *
+         * @return the output vector with the r, p and y parameters.
+         */
+        iDynTree::Vector3 asRPY() const;
 
         /**
          * Get a unit quaternion corresponding to this rotation
@@ -358,6 +371,7 @@ namespace iDynTree
          *   r \times v = r^\wedge v
          * \f]
          *
+         * @note the quaternion is normalized
          * @param quaternion a quaternion representing a rotation
          *
          * @return The rotation matrix

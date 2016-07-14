@@ -98,4 +98,68 @@ end
 % print the estimated contact forces
 estContactForces.toString(estimator.model())
 
+%% We can use the same class also for performing external wrenches estimation,
+%% assuming that calibrated (i.e. without offset) F/T sensor measurements are available
+%% For the sake of the example, we use the same FT measurements estimated, but
+%% if actual FT sensor measurements were available we could set them in the SensorsMeasurements
+%% object by calling the setMeasurements method.
+
+% We first need a new set of unknowns, as we now need 7 unknown wrenches, one for
+% each submodel in the estimator
+fullBodyUnknownsExtWrenchEst = iDynTree.LinkUnknownWrenchContacts(estimator.model());
+
+% We could fill this automatically, but in this example is interesting to have full control
+% of the frames in which this wrenches are expressed (to see the link and frames of a model,
+% just type idyntree-model-info -m nameOfUrdfFile.urdf -p in a terminal 
+
+% Foot contacts
+fullBodyUnknownsExtWrenchEst.addNewUnknownFullWrenchInFrameOrigin(estimator.model(),estimator.model().getFrameIndex('l_sole'));
+fullBodyUnknownsExtWrenchEst.addNewUnknownFullWrenchInFrameOrigin(estimator.model(),estimator.model().getFrameIndex('r_sole'));
+
+% Knee contacts
+fullBodyUnknownsExtWrenchEst.addNewUnknownFullWrenchInFrameOrigin(estimator.model(),estimator.model().getFrameIndex('l_lower_leg'));
+fullBodyUnknownsExtWrenchEst.addNewUnknownFullWrenchInFrameOrigin(estimator.model(),estimator.model().getFrameIndex('r_lower_leg'));
+
+% Contact on the central body
+fullBodyUnknownsExtWrenchEst.addNewUnknownFullWrenchInFrameOrigin(estimator.model(),estimator.model().getFrameIndex('root_link'));
+
+% Contacts on the hands
+fullBodyUnknownsExtWrenchEst.addNewUnknownFullWrenchInFrameOrigin(estimator.model(),estimator.model().getFrameIndex('l_elbow_1'));
+fullBodyUnknownsExtWrenchEst.addNewUnknownFullWrenchInFrameOrigin(estimator.model(),estimator.model().getFrameIndex('r_elbow_1'));
+
+% We also need to allocate the output of the estimation: a class for estimated contact wrenches and one for joint torques
+% The estimated external wrenches
+estContactForcesExtWrenchesEst = iDynTree.LinkContactWrenches(estimator.model());
+
+% The estimated joint torques
+estJointTorquesExtWrenchesEst = iDynTree.JointDOFsDoubleArray(dofs);
+
+% Now we can call the estimator
+estimator.estimateExtWrenchesAndJointTorques(fullBodyUnknownsExtWrenchEst,estFTmeasurements,estContactForcesExtWrenchesEst,estJointTorquesExtWrenchesEst);
+
+% We can now print the estimated external forces : as the FT sensor measurements where estimated
+% under the assumption that the only external wrench is acting on the left foot, we should see
+% that the only non-zero wrench is the one on the left foot (frame: l_sole)
+fprintf('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
+fprintf('External wrenches estimated using the F/T offset computed in the previous step\n');
+fprintf('%s',estContactForcesExtWrenchesEst.toString(estimator.model()));
+
+% Wrenches values can easily be obtained as matlab vectors
+estContactForcesExtWrenchesEst.contactWrench(estimator.model().getLinkIndex('l_foot'),0).contactWrench().getLinearVec3().toMatlab()
+
+
+% LinkContactWrenches is a structure that can contain multiple contact wrench for each link,
+% but usually is convenient to just deal with a collection of net wrenches for each link
+linkNetExtWrenches = iDynTree.LinkWrenches(estimator.model())
+estContactForcesExtWrenchesEst.computeNetWrenches(linkNetExtWrenches);
+
+% also net external wrenches can easily be obtained as matlab vectors
+wrench = linkNetExtWrenches(estimator.model().getLinkIndex('l_foot'));
+% 6d wrench (force/torques)
+wrench.toMatlab()
+% just the force
+wrench.getLinearVec3().toMatlab()
+
+
+
 

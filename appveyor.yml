@@ -39,6 +39,6 @@ build_script:
   - cmake .. -DEIGEN3_INCLUDE_DIR="C:/Program Files (x86)/Eigen/include/eigen3" -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" iDynTree.sln
   - cmake --build . --config Release
-  - cmake --build . --target RUN_TESTS --config Release
+  - ctest --output-on-failure --build-config Release
   - cmake --build . --config Release --target INSTALL 
   

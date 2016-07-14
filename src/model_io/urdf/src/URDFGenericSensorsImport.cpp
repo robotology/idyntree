@@ -519,7 +519,7 @@ bool sensorsFromURDF(const std::string & urdf_filename,
 }
 
 bool sensorsFromURDFString(const std::string& urdf_string,
-                                     iDynTree::SensorsList& output)
+                           iDynTree::SensorsList& output)
 {
     iDynTree::Model model;
     bool ok = modelFromURDFString(urdf_string,model);

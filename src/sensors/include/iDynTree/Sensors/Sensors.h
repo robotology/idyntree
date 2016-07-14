@@ -49,6 +49,28 @@ namespace iDynTree {
     //  in the SensorType enum
     const int NR_OF_SENSOR_TYPES = 3;
 
+    /**
+     * Short function to check if a SensorType is a LinkSensor
+     */
+    inline bool isLinkSensor(const SensorType type)
+    {
+        switch(type)
+        {
+        case SIX_AXIS_FORCE_TORQUE:
+            return false;
+        case ACCELEROMETER:
+        case GYROSCOPE:
+            return true;
+        }
+    }
+
+    /**
+     * Short function to check if a SensorType is
+     */
+    inline bool isJointSensor(const SensorType type)
+    {
+        return !isLinkSensor(type);
+    }
 
     /**
      * Interface for Sensor classes in iDynTree .
@@ -169,6 +191,16 @@ namespace iDynTree {
          * @return the index of the parent Link of the sensor.
          */
         virtual LinkIndex getParentLinkIndex() const = 0;
+
+        /**
+         * Return the transform that applied on a element
+         * expressed in sensor frames it transform it
+         * in one expressed in the link frame (\f[ {}^l H_s \f]).
+         *
+         * @return the link_H_sensor transform
+         */
+        virtual Transform getLinkSensorTransform() const = 0;
+
 
         /**
          * Set the name of the parent Link.
