@@ -122,6 +122,8 @@ bool SimpleLeggedOdometry::init(const FrameIndex initialFixedFrameIndex,
     m_world_H_fixedLink = worldFrame_H_linkAttachedToWorldFrame*linkAttachedToWorldFrameIndex_H_floatingBase*floatingBase_H_fixedLink;
 
     m_isOdometryInitialized = true;
+    
+    return true;
 }
 
 
