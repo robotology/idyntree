@@ -155,9 +155,6 @@ macro ( octave_add_oct FUNCTIONNAME )
   )
 endmacro ()
 
-message(DEBUG "Octave libraries : ${OCTAVE_LIBRARIES}")
-message(DEBUG "VERSION_VAR : ${OCTAVE_VERSION_STRING}")
-
 # handle REQUIRED and QUIET options
 include ( FindPackageHandleStandardArgs )
 if ( CMAKE_VERSION LESS 2.8.3 )
