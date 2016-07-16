@@ -13,3 +13,9 @@ swig_link_libraries(${target_name} ${OCTAVE_LIBRARIES})
 set_target_properties(${target_name} PROPERTIES PREFIX "")
 set_target_properties(${target_name} PROPERTIES OUTPUT_NAME "iDynTree")
 set_target_properties(${target_name} PROPERTIES SUFFIX ".oct")
+
+install(TARGETS ${target_name} DESTINATION ${CMAKE_INSTALL_LIBDIR}/octave)
+
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif()

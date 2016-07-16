@@ -21,7 +21,7 @@ if(IDYNTREE_USES_PYTHON OR
 endif()
 
 find_package(SWIG)
-# It is possible to compile matlab bindings without using SWIG 
+# It is possible to compile matlab bindings without using SWIG
 if(SWIG_FOUND OR IDYNTREE_USES_MATLAB)
     include(UseSWIG)
 
@@ -52,7 +52,7 @@ if(SWIG_FOUND OR IDYNTREE_USES_MATLAB)
     endif(IDYNTREE_USES_PYTHON)
 
     if(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB)
-       add_subdirectory(matlab)
+        add_subdirectory(matlab)
     endif()
 
     if(IDYNTREE_USES_OCTAVE)
@@ -63,9 +63,9 @@ endif()
 
 if(IDYNTREE_USES_PYTHON OR
    IDYNTREE_USES_LUA    OR
+   IDYNTREE_USES_OCTAVE OR
    IDYNTREE_GENERATED_MATLAB)
    if(NOT SWIG_FOUND)
        MESSAGE(FATAL_ERROR "Swig not found, impossible to compile or generate iDynTree bindings.")
    endif()
 endif()
-
