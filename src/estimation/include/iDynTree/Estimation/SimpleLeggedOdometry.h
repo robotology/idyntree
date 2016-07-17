@@ -170,15 +170,43 @@ public:
 
     /**
      * Initialize the odometry.
+     *
+     * @param[in] initialFixedFrame
+     * @param[in] world_H_initialFixedFrame
+     * @return true if all went well, false otherwise.
      */
     bool init(const std::string & initialFixedFrame,
               const Transform & world_H_initialFixedFrame);
 
     /**
      * Initialize the odometry.
+     *
+     * @param[in] initialFixedFrameIndex
+     * @param[in] world_H_initialFixedFrame
+     * @return true if all went well, false otherwise.
      */
     bool init(const FrameIndex initialFixedFrameIndex,
               const Transform & world_H_initialFixedFrame);
+
+    /**
+     * Initialize the odometry.
+     *
+     * @param[in] initialFixedFrame
+     * @param[in] initialWorldFrame
+     * @return true if all went well, false otherwise.
+     */
+    bool init(const std::string & initialFixedFrame,
+              const std::string & initialWorldFrame);
+
+    /**
+     * Initialize the odometry.
+     *
+     * @param[in] initialFixedFrameIndex
+     * @param[in] initialWorldFrameIndex
+     * @return true if all went well, false otherwise.
+     */
+    bool init(const FrameIndex initialFixedFrameIndex,
+              const FrameIndex initialWorldFrame);
 
     /**
      * Change the link that the odometry assumes to be fixed with

@@ -72,6 +72,61 @@ bool SimpleLeggedOdometry::init(const FrameIndex initialFixedFrameIndex,
     return true;
 }
 
+bool SimpleLeggedOdometry::init(const std::string& initialFixedFrame,
+                                const std::string& initialWorldFrame)
+{
+    return this->init(m_model.getFrameIndex(initialFixedFrame),
+                      m_model.getFrameIndex(initialWorldFrame));
+}
+
+
+bool SimpleLeggedOdometry::init(const FrameIndex initialFixedFrameIndex,
+                                const FrameIndex initialWorldFrameIndex)
+{
+    if( !m_isModelValid )
+    {
+         reportError("SimpleLeggedOdometry",
+                     "init",
+                     "Model not initialised.");
+         return false;
+    }
+
+    if( !m_model.isValidFrameIndex(initialFixedFrameIndex) ||
+        !m_model.isValidFrameIndex(initialWorldFrameIndex)
+    )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "init","invalid frame passed");
+        return false;
+    }
+
+    if( ! m_kinematicsUpdated )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "init","updateKinematics never called");
+        return false;
+    }
+
+    // Set the fixed link
+    m_fixedLinkIndex = m_model.getFrameLink(initialFixedFrameIndex);
+
+    // TODO : we need a simple class to get arbitrary transform in a model,
+    //        something even simpler then KinDynComputations to address this
+    //        kind of computation that appear from time to time 
+    // Set the world_H_fixedLink transform
+    LinkIndex linkAttachedToWorldFrameIndex = m_model.getFrameLink(initialWorldFrameIndex);
+    Transform worldFrame_H_linkAttachedToWorldFrame = m_model.getFrameTransform(initialWorldFrameIndex).inverse();
+    Transform linkAttachedToWorldFrameIndex_H_floatingBase = m_base_H_link(linkAttachedToWorldFrameIndex).inverse();
+    Transform floatingBase_H_fixedLink = m_base_H_link(m_fixedLinkIndex);
+
+    m_world_H_fixedLink = worldFrame_H_linkAttachedToWorldFrame*linkAttachedToWorldFrameIndex_H_floatingBase*floatingBase_H_fixedLink;
+
+    m_isOdometryInitialized = true;
+    
+    return true;
+}
+
+
 bool SimpleLeggedOdometry::updateKinematics(JointPosDoubleArray& jointPos)
 {
     if( !m_isModelValid )
