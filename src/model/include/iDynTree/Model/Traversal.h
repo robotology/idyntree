@@ -114,6 +114,15 @@ namespace iDynTree
         const IJoint * getParentJointFromLinkIndex(const LinkIndex linkIndex) const;
 
         /**
+         * Get the traversal index of the specified link
+         *
+         * @return the traversalIndex of the specified link, or TRAVERSAL_INDEX_INVALID if the link does not belong to the traversal.
+         */
+        TraversalIndex getTraversalIndexFromLinkIndex(const LinkIndex linkIndex) const;
+
+
+
+        /**
          * Reset the Traversal.
          *
          * After a call to reset, the Traversal will contain
@@ -179,6 +188,15 @@ namespace iDynTree
          * @return true if parentCandidate is actually the parent of childCandidate, false otherwise.
          */
         bool isParentOf(const LinkIndex parentCandidate, const LinkIndex childCandidate) const;
+
+        /**
+         * \brief Get the child link (according to the traversal) of a Joint.
+         *
+         * @param[in] m_model the considered model.
+         * @param[in] jntIdx the index of the joint of which we want to get the child link.
+         * @return the index of the child link if all went well, LINK_INVALID_INDEX otherwise .
+         */
+        LinkIndex getChildLinkIndexFromJointIndex(const Model & m_model, const JointIndex jntIdx) const;
 
         /**
          * Return a human-readable representation of the traversal.
