@@ -306,17 +306,9 @@ Transform SimpleLeggedOdometry::getWorldLinkTransform(const LinkIndex link_index
         return Transform::Identity();
     }
 
-    std::cerr << m_fixedLinkIndex << std::endl;
-    std::cerr << m_base_H_link.getNrOfLinks() << std::endl;
-
     assert(m_fixedLinkIndex < m_base_H_link.getNrOfLinks());
     Transform base_H_fixed = m_base_H_link(m_fixedLinkIndex);
     Transform base_H_link =  m_base_H_link(link_index);
-
-    std::cerr << "base_H_fixed " << base_H_fixed.toString() << std::endl;
-    std::cerr << "base_H_link " << base_H_link.toString() << std::endl;
-    std::cerr << "m_world_H_fixedLink " << m_world_H_fixedLink.toString() << std::endl;
-
 
     return m_world_H_fixedLink*base_H_fixed.inverse()*base_H_link;
 }
