@@ -8,6 +8,8 @@
 #ifndef IDYNTREE_UTILS_H
 #define IDYNTREE_UTILS_H
 
+#include <cstddef>
+
 namespace iDynTree
 {
 
@@ -57,6 +59,23 @@ namespace iDynTree
      * Convert a double from radians to degree.
      */
     double rad2deg(const double valueInRad);
+
+    /**
+     * Simple structure describing a range of rows or columns in a vector or a matrix.
+     * The offset attributes indicates the index of the first element of the range, while
+     * the size indicates the size of the range.
+     *
+     * Example: offset = 2, size = 3 measn the elements 2 3 4 .
+     */
+    struct IndexRange
+    {
+        std::ptrdiff_t offset;
+        std::ptrdiff_t size;
+
+        bool isValid();
+        static IndexRange InvalidRange();
+    };
+
 
 }
 
