@@ -72,21 +72,21 @@ namespace iDynTree
      *
      * @return true if the sensors in the list are all valid
      */
-     bool predictSensorsMeasurements(const iDynTree::Model & model,
-                                     const iDynTree::SensorsList &sensorsList,
-                                     const iDynTree::Traversal & traversal,
-                                     const iDynTree::FreeFloatingPos& robotPos,
-                                     const iDynTree::FreeFloatingVel& robotVel,
-                                     const iDynTree::FreeFloatingAcc& robotAcc,
-                                     const iDynTree::LinAcceleration & gravity,
+     bool predictSensorsMeasurements(const Model & model,
+                                     const SensorsList &sensorsList,
+                                     const Traversal & traversal,
+                                     const FreeFloatingPos& robotPos,
+                                     const FreeFloatingVel& robotVel,
+                                     const FreeFloatingAcc& robotAcc,
+                                     const LinAcceleration & gravity,
                                      const LinkNetExternalWrenches & externalWrenches,
-                                           iDynTree::FreeFloatingAcc& buf_properRobotAcc,
-                                           iDynTree::LinkPositions& buf_linkPos,
-                                           iDynTree::LinkVelArray& buf_linkVel,
-                                           iDynTree::LinkAccArray& buf_linkProperAcc,
+                                           FreeFloatingAcc& buf_properRobotAcc,
+                                           LinkPositions& buf_linkPos,
+                                           LinkVelArray& buf_linkVel,
+                                           LinkAccArray& buf_linkProperAcc,
                                            LinkInternalWrenches& buf_internalWrenches,
                                            FreeFloatingGeneralizedTorques& buf_outputTorques,
-                                           iDynTree::SensorsMeasurements &predictedMeasurement);
+                                           SensorsMeasurements &predictedMeasurement);
 
     /**
      * \brief Predict the measurement of a set of sensors.
@@ -107,13 +107,13 @@ namespace iDynTree
      *
      * @return true if the sensors in the list are all valid
      */
-     bool predictSensorsMeasurementsFromRawBuffers(const iDynTree::Model & model,
-                                                   const iDynTree::SensorsList &sensorsList,
-                                                   const iDynTree::Traversal & traversal,
-                                                   const iDynTree::LinkVelArray& buf_linkVel,
-                                                   const iDynTree::LinkAccArray& buf_linkProperAcc,
+     bool predictSensorsMeasurementsFromRawBuffers(const Model & model,
+                                                   const SensorsList &sensorsList,
+                                                   const Traversal & traversal,
+                                                   const LinkVelArray& buf_linkVel,
+                                                   const LinkAccArray& buf_linkProperAcc,
                                                    const LinkInternalWrenches& buf_internalWrenches,
-                                                         iDynTree::SensorsMeasurements &predictedMeasurement);
+                                                         SensorsMeasurements &predictedMeasurement);
 
 }
 

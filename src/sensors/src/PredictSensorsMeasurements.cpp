@@ -80,6 +80,17 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
                                               SensorsMeasurements& predictedMeasurement)
 {
     bool retVal = true;
+
+    size_t numOfFTs = sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+    for(size_t idx = 0; idx<numOfFTs; idx++)
+    {
+        SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)sensorsList.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
+
+        Wrench predictedWrench = ftSens->predictMeasurement(traversal,buf_internalWrenches);
+        predictedMeasurement.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,idx,predictedWrench);
+    }
+
+
     //Iterate through each accelrometer and find its parent. Compute local (classical accelration)
     // It is automatically proper acceleration since gravity is incorporated into the base acceleration
     unsigned int numAccl = sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER);
@@ -101,14 +112,6 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
         predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);
     }
 
-    size_t numOfFTs = sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
-    for(size_t idx = 0; idx<numOfFTs; idx++)
-    {
-        SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)sensorsList.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
-        
-        Wrench predictedWrench = ftSens->predictMeasurement(traversal,buf_internalWrenches);
-        predictedMeasurement.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,idx,predictedWrench);
-    }
 
     return retVal;
 }
