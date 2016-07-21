@@ -209,6 +209,28 @@ public:
     std::string toString(const Model & model) const;
 };
 
+/**
+ * Link traversal cache, store a traversal for each link in the model.
+ *
+ * Class that stores a traversal for each link in the model.
+ * It actually computes the traversal on the first time that a given traversal
+ * is requested
+ */
+class LinkTraversalsCache
+{
+private:
+    std::vector<Traversal *> m_linkTraversals;
+    void deleteTraversals();
+
+public:
+    LinkTraversalsCache();
+    ~LinkTraversalsCache();
+
+    void resize(unsigned int nrOfLinks);
+    void resize(const Model& model);
+
+    Traversal& getTraversalWithLinkAsBase(const Model & model, const LinkIndex linkIdx);
+};
 
 struct estimateExternalWrenchesBuffers
 {
@@ -304,7 +326,7 @@ bool estimateExternalWrenches(const Model& model,
 /**
  * \brief Modified forward kinematics for torque/force estimation.
  *
- * This is a version of forward dynamics modified to fit the needs
+ * This is a version of forward kinematics modified to fit the needs
  * of joint torques/external wrenches estimation.
  *
  * There are several difference with respect to the classical
@@ -312,9 +334,9 @@ bool estimateExternalWrenches(const Model& model,
  * The first one is that the only inputs necessary related to the base link are
  * the base link classical proper acceleration, the base link angular velocity
  * and the base link angular acceleration. This is because the dynamics
- * of a articulated system does not depend on its linear velocity, and hence
- * the estimation of joint torques/external wrenches is not affected by an offset
- * in linear velocity. This will mean that the link velocitity computed by this
+ * of an articulated system does not depend on an offset in linear velocity, and hence
+ * the estimation of joint torques/external wrenches is not affected by the base link
+ * linear velocity. This will mean that the link velocitity computed by this
  * algorithm are not the velocity of the links with respect to an inertial frame.
  * Nevertherless they can still be used for estimation.
  *
@@ -339,18 +361,56 @@ bool estimateExternalWrenches(const Model& model,
  * \param[in] jointAcc joint accelerations
  * \param[out] linkVel vector of link twists, expressed in the link frame for both orientation and origin
  * \param[out] linkAcc vector of link proper spatial acceleration, expressed in the link frame for both orientation and origin
+ * @return true if all went well, false otherwise
  *
  */
-bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
-                                               const iDynTree::Traversal & traversal,
+bool dynamicsEstimationForwardVelAccKinematics(const Model & model,
+                                               const Traversal & traversal,
                                                const Vector3 & base_classicalProperAcc,
                                                const Vector3 & base_angularVel,
                                                const Vector3 & base_angularAcc,
-                                               const iDynTree::JointPosDoubleArray & jointPos,
-                                               const iDynTree::JointDOFsDoubleArray & jointVel,
-                                               const iDynTree::JointDOFsDoubleArray & jointAcc,
-                                                     iDynTree::LinkVelArray & linkVel,
-                                                     iDynTree::LinkAccArray  & linkProperAcc);
+                                               const JointPosDoubleArray & jointPos,
+                                               const JointDOFsDoubleArray & jointVel,
+                                               const JointDOFsDoubleArray & jointAcc,
+                                                     LinkVelArray & linkVel,
+                                                     LinkAccArray  & linkProperAcc);
+
+/**
+ * \brief Modified forward kinematics for floating basedynamics estimation.
+ *
+ * This is a version of velocity forward kinematics modified to fit the needs
+ * of free floating dynamics estimation.
+ *
+ * There are several difference with respect to the classical
+ * forward kinematics.
+ * The first one is that the only inputs necessary related to the base link is
+ *   the base link angular velocity. This is because the dynamics
+ * of an articulated system does not depend on an offset in linear velocity.
+ * This will mean that the link velocities computed by this
+ * algorithm are not the velocity of the links with respect to an inertial frame.
+ * Nevertherless they can still be used for estimation.
+ *
+ * There are two main ways in which the base information is computed: one is
+ * exploiting the knoledge that a link is not moving with respect to an inertial frame:
+ * in this case the angular velocity is equal to zero.
+ * The other way is to exploit the measure of a gyroscope
+ * mounted on the base link of the traversal: the gyroscope will measure the link angular velocity.
+ *
+ *
+ * \param[in] model the input model
+ * \param[in] traversal the traversal used to propagate the velocity and the proper acceleration
+ * \param[in] base_angularVel angular velocity of the base link frame
+ * \param[in] jointPos joint positions
+ * \param[in] jointVel joint velocities
+ * \param[out] linkVel vector of link twists, expressed in the link frame for both orientation and origin
+ * @return true if all went well, false otherwise
+ */
+bool dynamicsEstimationForwardVelKinematics(const Model & model,
+                                            const Traversal & traversal,
+                                            const Vector3 & base_angularVel,
+                                            const JointPosDoubleArray & jointPos,
+                                            const JointDOFsDoubleArray & jointVel,
+                                                  LinkVelArray & linkVel);
 
 /**
  * \brief Compute the net external wrenches (excluding gravity forces) acting on the links.
@@ -362,7 +422,7 @@ bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
 bool computeLinkNetWrenchesWithoutGravity(const Model& model,
                                           const LinkVelArray & linkVel,
                                           const LinkAccArray & linkProperAcc,
-                                                LinkNetWrenchesWithoutGravity& linkNetWrenchesWithoutGravity);
+                                                LinkNetTotalWrenchesWithoutGravity& linkNetWrenchesWithoutGravity);
 
 
 }

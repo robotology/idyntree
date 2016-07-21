@@ -120,7 +120,7 @@ namespace iDynTree
      *
      * This is tipically computed as I*a+v*(I*v) , where a is the proper acceleration.
      */
-    typedef LinkWrenches LinkNetWrenchesWithoutGravity;
+    typedef LinkWrenches LinkNetTotalWrenchesWithoutGravity;
 
     /**
      * Class for storing a vector of SpatialInertia objects , one for each link in a model.
@@ -224,6 +224,11 @@ namespace iDynTree
 
         ~LinkAccArray();
     };
+
+    /**
+     * Typedef used when the vector is meant to be a vector of link proper accelerations. 
+     */
+    typedef LinkAccArray LinkProperAccArray;
 }
 
 #endif /* IDYNTREE_LINK_STATE_H */

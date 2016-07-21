@@ -179,6 +179,51 @@ std::string LinkUnknownWrenchContacts::toString(const Model& model) const
     return ss.str();
 }
 
+LinkTraversalsCache::LinkTraversalsCache()
+{
+
+}
+
+LinkTraversalsCache::~LinkTraversalsCache()
+{
+
+}
+
+void LinkTraversalsCache::deleteTraversals()
+{
+    for(size_t link=0; link < m_linkTraversals.size(); link++)
+    {
+        delete m_linkTraversals[link];
+    }
+    m_linkTraversals.resize(0);
+}
+
+
+void LinkTraversalsCache::resize(const Model& model)
+{
+    this->resize(model.getNrOfLinks());
+}
+
+void LinkTraversalsCache::resize(unsigned int nrOfLinks)
+{
+    m_linkTraversals.resize(nrOfLinks);
+    for(size_t link=0; link < m_linkTraversals.size(); link++)
+    {
+        m_linkTraversals[link] = new Traversal();
+    }
+}
+
+Traversal& LinkTraversalsCache::getTraversalWithLinkAsBase(const Model & model, const LinkIndex linkIdx)
+{
+    if( m_linkTraversals[linkIdx]->getNrOfVisitedLinks() == 0 )
+    {
+        model.computeFullTreeTraversal(*m_linkTraversals[linkIdx],linkIdx);
+    }
+
+    return *m_linkTraversals[linkIdx];
+}
+
+
 estimateExternalWrenchesBuffers::estimateExternalWrenchesBuffers()
 {
     resize(0,0);
@@ -726,7 +771,7 @@ bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
 bool computeLinkNetWrenchesWithoutGravity(const Model& model,
                                           const LinkVelArray& linkVel,
                                           const LinkAccArray& linkProperAcc,
-                                                LinkNetWrenchesWithoutGravity& linkNetWrenchesWithoutGravity)
+                                                LinkNetTotalWrenchesWithoutGravity& linkNetWrenchesWithoutGravity)
 {
      // Note that we are not using a Traversal here: the main reason
      // is that given that the computation that we are doing (once we have the linkVel and linkProperAcc
@@ -745,6 +790,53 @@ bool computeLinkNetWrenchesWithoutGravity(const Model& model,
 }
 
 
+
+bool dynamicsEstimationForwardVelKinematics(const Model & model,
+                                            const Traversal & traversal,
+                                            const Vector3 & base_angularVel,
+                                            const JointPosDoubleArray & jointPos,
+                                            const JointDOFsDoubleArray & jointVel,
+                                                  LinkVelArray & linkVel)
+{
+    bool retValue = true;
+
+    for(unsigned int traversalEl=0; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+        if( parentLink == 0 )
+        {
+            // If the visited link is the base, we can set the base velocity and proper acceleration
+            // from the input base information
+
+            // the dynamics is invariant to a linear velocity offset, so we can put an arbitrary
+            // value for the linear part of the twist: we choose to set it to zero for convenience,
+            // but please note that this **does not** mean that we are assuming that the body
+            // has a zero velocity with respect to a earth-fixed frame
+            LinearMotionVector3 linVel;
+            linVel.zero();
+            linkVel(visitedLink->getIndex()).setLinearVec3(linVel);
+
+            // We have the input angular velocity
+            AngularMotionVector3 angVel(base_angularVel.data(),3);
+            linkVel(visitedLink->getIndex()).setAngularVec3(angVel);
+        }
+        else
+        {
+            // Otherwise we compute the child velocity and acceleration from parent
+            toParentJoint->computeChildVel(jointPos,
+                                           jointVel,
+                                            linkVel,
+                                            visitedLink->getIndex(),parentLink->getIndex());
+        }
+
+    }
+
+    return retValue;
+
+}
 
 
 }
