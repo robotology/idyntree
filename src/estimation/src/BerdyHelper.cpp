@@ -687,6 +687,7 @@ bool BerdyHelper::resizeBerdyMatrices(MatrixDynSize& D, VectorDynSize& bD,
     bD.resize(getNrOfDynamicEquations());
     Y.resize(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
     bY.resize(getNrOfSensorsMeasurements());
+    return true;
 }
 
 bool BerdyHelper::updateKinematicsFromFixedBase(const JointPosDoubleArray& jointPos,
