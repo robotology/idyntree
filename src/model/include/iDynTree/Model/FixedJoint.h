@@ -109,6 +109,12 @@ namespace iDynTree
                                         const LinkIndex child, const LinkIndex parent) const;
 
         // Documentation inherited
+        virtual void computeChildVel(const VectorDynSize & jntPos,
+                                     const VectorDynSize & jntVel,
+                                           LinkVelArray & linkVels,
+                                     const LinkIndex child, const LinkIndex parent) const;
+
+        // Documentation inherited
         virtual void computeJointTorque(const VectorDynSize & jntPos, const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
                                         VectorDynSize & jntTorques) const;

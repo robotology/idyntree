@@ -214,6 +214,25 @@ void RevoluteJoint::computeChildVelAcc(const VectorDynSize & jntPos,
     return;
 }
 
+void RevoluteJoint::computeChildVel(const VectorDynSize & jntPos,
+                                    const VectorDynSize & jntVel,
+                                          LinkVelArray & linkVels,
+                                    const LinkIndex child, const LinkIndex parent) const
+{
+    double dang = jntVel(this->getDOFsOffset());
+
+    const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
+
+    // Propagate twist and spatial acceleration: for a revolute joint (as for any 1 dof joint)
+    // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
+    iDynTree::SpatialMotionVector S = this->getMotionSubspaceVector(0,child);
+
+    SpatialMotionVector vj = S*dang;
+    linkVels(child) = child_X_parent*linkVels(parent) + vj;
+
+    return;
+}
+
 void RevoluteJoint::computeChildPosVelAcc(const VectorDynSize & jntPos,
                                           const VectorDynSize & jntVel,
                                           const VectorDynSize & jntAcc,
