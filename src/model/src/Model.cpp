@@ -10,6 +10,7 @@
 
 #include <cassert>
 #include <deque>
+#include <sstream>
 
 namespace iDynTree
 {
@@ -109,6 +110,10 @@ LinkIndex Model::getLinkIndex(const std::string& linkName) const
         }
     }
 
+    // Report an error and return an invalid index
+    std::string error = "Impossible to find link " + linkName + " in the Model";
+    reportError("Model","getLinkIndex",error.c_str());
+
     return LINK_INVALID_INDEX;
 }
 
@@ -126,6 +131,9 @@ std::string Model::getLinkName(const LinkIndex linkIndex) const
     }
     else
     {
+        std::stringstream ss;
+        ss << "LinkIndex " << linkIndex << " is not valid, should be between 0 and " << this->getNrOfLinks()-1;
+        reportError("Model","getLinkName",ss.str().c_str());
         return LINK_INVALID_NAME;
     }
 }
@@ -155,6 +163,10 @@ JointIndex Model::getJointIndex(const std::string& jointName) const
         }
     }
 
+    std::stringstream ss;
+    ss << "jointName " << jointName << " not found in the model.";
+    reportError("Model","getJointIndex",ss.str().c_str());
+
     return JOINT_INVALID_INDEX;
 }
 
@@ -173,6 +185,9 @@ std::string Model::getJointName(const JointIndex jointIndex) const
     }
     else
     {
+        std::stringstream ss;
+        ss << "jointIndex " << jointIndex << " is not valid, should be between 0 and " << this->getNrOfJoints()-1;
+        reportError("Model","getJointName",ss.str().c_str());
         return JOINT_INVALID_NAME;
     }
 }
@@ -321,6 +336,9 @@ std::string Model::getFrameName(const FrameIndex frameIndex) const
     }
     else
     {
+        std::stringstream ss;
+        ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and " << this->getNrOfFrames()-1;
+        reportError("Model","getFrameName",ss.str().c_str());
         return FRAME_INVALID_NAME;
     }
 }
@@ -343,6 +361,9 @@ FrameIndex Model::getFrameIndex(const std::string& frameName) const
         }
     }
 
+    std::stringstream ss;
+    ss << "Frame named " << frameName << " not found in the model.";
+    reportError("Model","getFrameIndex",ss.str().c_str());
     return FRAME_INVALID_INDEX;
 }
 
@@ -390,10 +411,18 @@ bool Model::addAdditionalFrameToLink(const std::string& linkName,
 
 Transform Model::getFrameTransform(const FrameIndex frameIndex) const
 {
+    // If frameIndex is invalid return an error
+    if( frameIndex < 0 || frameIndex >= (FrameIndex) this->getNrOfFrames() )
+    {
+        std::stringstream ss;
+        ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and " << this->getNrOfFrames()-1;
+        reportError("Model","getFrameTransform",ss.str().c_str());
+        return Transform::Identity();
+    }
+
     // The link_H_frame transform for the link
     // main frame is the identity
-    if( frameIndex < (FrameIndex) this->getNrOfLinks() ||
-        frameIndex >= (FrameIndex) this->getNrOfFrames() )
+    if( frameIndex < (FrameIndex) this->getNrOfLinks() )
     {
         return Transform::Identity();
     }
@@ -423,6 +452,9 @@ LinkIndex Model::getFrameLink(const FrameIndex frameIndex) const
     }
 
     // If the frameIndex is out of bounds, return an invalid index
+    std::stringstream ss;
+    ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and " << this->getNrOfFrames()-1;
+    reportError("Model","getFrameLink",ss.str().c_str());
     return LINK_INVALID_INDEX;
 }
 
