@@ -13,4 +13,5 @@ add_custom_command(TARGET copy_matlab_tests_in_build PRE_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
                    ${CMAKE_CURRENT_SOURCE_DIR}/../SwigMem.m ${CMAKE_CURRENT_BINARY_DIR}/SwigMem.m)
 
-add_test(NAME matlab_idyntree_tests COMMAND ${Matlab_MAIN_PROGRAM} -nodisplay -nodesktop -nojvm -r "runiDynTreeTests")
+add_test(NAME matlab_idyntree_tests
+         COMMAND ${Matlab_MAIN_PROGRAM} -nodisplay -nodesktop -nojvm -r "addpath(genpath('${IDYNTREE_INTERNAL_MOXUNIT_PATH}'));fprintf(pwd());success=moxunit_runtests('-verbose');exit(~success);")
