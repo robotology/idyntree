@@ -31,60 +31,63 @@ endif()
 include(iDynTreeOptions)
 
 if(NOT IDYNTREE_ONLY_DOCS)
-# Find dependecies
+    # Find dependecies
 
-# Eigen is compulsory
-find_package(Eigen3 REQUIRED)
+    # Eigen is compulsory
+    find_package(Eigen3 REQUIRED)
 
-if(IDYNTREE_USES_YARP)
-    find_package(YARP REQUIRED)
-    if (YARP_HAS_MATH_LIB)
-        message(STATUS "found libYARP_math")
-    else(YARP_HAS_MATH_LIB)
-        message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
-    endif(YARP_HAS_MATH_LIB)
-endif()
+    if(IDYNTREE_USES_YARP)
+        find_package(YARP REQUIRED)
+        if (YARP_HAS_MATH_LIB)
+            message(STATUS "found libYARP_math")
+        else(YARP_HAS_MATH_LIB)
+            message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
+        endif(YARP_HAS_MATH_LIB)
+    endif()
 
-if(IDYNTREE_USES_ICUB_MAIN)
-    find_package(ICUB REQUIRED)
-endif()
+    if(IDYNTREE_USES_ICUB_MAIN)
+        find_package(ICUB REQUIRED)
+    endif()
 
-if(IDYNTREE_USES_KDL)
-    include(OrocosKDLFindLogic)
-    find_package(orocos_kdl REQUIRED)
-    find_package(TinyXML    REQUIRED)
-endif()
+    if(IDYNTREE_USES_KDL)
+        include(OrocosKDLFindLogic)
+        find_package(orocos_kdl REQUIRED)
+        find_package(TinyXML    REQUIRED)
+    endif()
 
-# Add external libraries that are embedded in iDynTree
-# source tree, if necessary (by default does not adds
-# anything) feel free to check teh logic inside
-add_subdirectory(extern)
+    # Add external libraries that are embedded in iDynTree
+    # source tree, if necessary (by default does not adds
+    # anything) feel free to check teh logic inside
+    add_subdirectory(extern)
 
-include(AddInstallRPATHSupport)
-add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
-                          LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
-                          DEPENDS IDYNTREE_ENABLE_RPATH
-                          USE_LINK_PATH)
+    include(AddInstallRPATHSupport)
+    add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
+                            LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
+                            DEPENDS IDYNTREE_ENABLE_RPATH
+                            USE_LINK_PATH)
 
-# add the actual components of the library
-add_subdirectory(src)
+    # add the actual components of the library
+    add_subdirectory(src)
 
-include(InstallBasicPackageFiles)
-install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
-                                     VERSION ${${VARS_PREFIX}_VERSION}
-                                     COMPATIBILITY SameMajorVersion
-                                     TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
-                                     NO_CHECK_REQUIRED_COMPONENTS_MACRO)
+    include(InstallBasicPackageFiles)
+    install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
+                                        VERSION ${${VARS_PREFIX}_VERSION}
+                                        COMPATIBILITY SameMajorVersion
+                                        TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
+                                        NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 
-include(AddUninstallTarget)
+    include(AddUninstallTarget)
 
-add_subdirectory(bindings)
+    add_subdirectory(bindings)
 
-# Add reminder to remove include_directories(SYSTEM as soon as we depend on CMake 2.8.12
-if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 2.8.12)
-    message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. include_directories(SYSTEM ..) can be substituted by target_include_directories(SYSTEM ...).")
-endif()
+    # Add reminder to remove include_directories(SYSTEM as soon as we depend on CMake 2.8.12
+    if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 2.8.12)
+        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. include_directories(SYSTEM ..) can be substituted by target_include_directories(SYSTEM ...).")
+    endif()
 
+    if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 3.0)
+        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. Multiline string are now supported,so we can have a readable matlab/octave test script.")
+    endif()
 endif()
 
 # add a dox target to generate doxygen documentation
