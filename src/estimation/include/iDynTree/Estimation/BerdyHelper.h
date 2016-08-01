@@ -110,7 +110,11 @@ enum BerdySensorTypes
     GYROSCOPE_SENSOR = GYROSCOPE,
     DOF_ACCELERATION_SENSOR = 1000,
     DOF_TORQUE_SENSOR       = 1001,
-    NET_EXT_WRENCH_SENSOR   = 1002
+    NET_EXT_WRENCH_SENSOR   = 1002,
+    /**
+     * Non-physical sensor that measures the wrench trasmitted by a joint.
+     */
+    JOINT_WRENCH_SENSOR     = 1003
 };
 
 bool isLinkBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
@@ -127,9 +131,9 @@ struct BerdyOptions
 {
 public:
     BerdyOptions() : berdyVariant(ORIGINAL_BERDY_FIXED_BASE),
-                     includeJointAccelerationsAsSensors(true),
-                     includeJointTorquesAsSensors(false),
-                     includeNetExternalWrenchesAsSensors(true),
+                     includeAllJointAccelerationsAsSensors(true),
+                     includeAllJointTorquesAsSensors(false),
+                     includeAllNetExternalWrenchesAsSensors(true),
                      includeFixedBaseExternalWrench(false)
     {
     }
@@ -149,21 +153,21 @@ public:
      *
      * Default value: true .
      */
-    bool includeJointAccelerationsAsSensors;
+    bool includeAllJointAccelerationsAsSensors;
 
     /**
      * If true, include the joint torques in the sensors vector.
      *
      * Default value: false .
      */
-    bool includeJointTorquesAsSensors;
+    bool includeAllJointTorquesAsSensors;
 
     /**
      * If true, include the joint torques in the sensors vector.
      *
      * Default value: true .
      */
-    bool includeNetExternalWrenchesAsSensors;
+    bool includeAllNetExternalWrenchesAsSensors;
 
     /**
      * If includeNetExternalWrenchesAsSensors is true and the
@@ -174,6 +178,15 @@ public:
      * Default value : false .
      */
     bool includeFixedBaseExternalWrench;
+    
+    /**
+     * Vector of joint names for which we assume that a virtual
+     * measurement of the wrench trasmitted on the joint is available.
+     * 
+     * \note This measurements are tipically used only for debug, actual 
+     *       internal wrenches are tipically measured using a SIX_AXIS_FORCE_TORQUE_SENSOR . 
+     */
+    std::vector<std::string> jointOnWhichTheInternalWrenchIsMeasured;
 };
 
 /**
@@ -311,6 +324,7 @@ class BerdyHelper
      */
     IndexRange getRangeSensorVariable(const SensorType type, const unsigned int sensorIdx);
     IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx);
+    IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx);
     IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx);
 
     /**
@@ -335,8 +349,28 @@ class BerdyHelper
     struct {
         size_t dofAccelerationOffset;
         size_t dofTorquesOffset;
-        size_t netWrenchAccelerationOffset;
+        size_t netExtWrenchOffset;
+        size_t jointWrenchOffset;
     } berdySensorTypeOffsets;
+    
+    /**
+     * Helper of additional sensors. 
+     */
+    struct {
+      /**
+       * List of joint wrench sensors.
+       */
+      std::vector<JointIndex> wrenchSensors;
+      /**
+       * Mapping between jndIx in wrenchSensor and
+       */
+      std::vector<size_t> jntIdxToOffset;
+    } berdySensorsInfo;
+
+    /**
+     * Buffer for sensor serialization.
+     */
+    VectorDynSize realSensorMeas;
 public:
     /**
      * Constructor
@@ -403,10 +437,10 @@ public:
     size_t getNrOfSensorsMeasurements() const;
 
     /**
-     * Resize Berdy matrices
+     * Resize and set to zero Berdy matrices.
      */
-    bool resizeBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
-                             MatrixDynSize & Y, VectorDynSize & bY);
+    bool resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
+                                    MatrixDynSize & Y, VectorDynSize & bY);
 
     /**
      * Get Berdy matrices
@@ -424,8 +458,17 @@ public:
                                    JointDOFsDoubleArray    & jointTorques,
                                    JointDOFsDoubleArray    & jointAccs,
                                    VectorDynSize& d);
+    /**
+     * Serialize sensor variable from separate buffers.
+     */
+    bool serializeSensorVariables(SensorsMeasurements     & sensMeas,
+                                  LinkNetExternalWrenches & netExtWrenches,
+                                  JointDOFsDoubleArray    & jointTorques,
+                                  JointDOFsDoubleArray    & jointAccs,
+                                  LinkInternalWrenches    & linkJointWrenches,
+                                  VectorDynSize& y);
 
-     /**
+    /**
       * @name Methods to submit the input data for dynamics computations.
       */
     //@{
@@ -471,7 +514,42 @@ public:
                                        const FrameIndex & fixedFrame,
                                        const Vector3 & gravity);
 
+    /**
+     * Set the kinematic information necessary for the dynamics estimation assuming that a
+     * given  baseframe (specified by the m_dynamicsTraversal) is not accelerating with respect to the inertial frame.
+     *
+     * @param[in] jointPos the position of the joints of the model.
+     * @param[in] jointVel the velocities of the joints of the model.
+     * @param[in] jointAcc the accelerations of the joints of the model.
+     * @param[in] gravity the gravity acceleration vector, expressed in the specified fixed frame.
+     *
+     * \note gravity is used only if selected BerdyVariant is ORIGINAL_BERDY_FIXED_BASE.
+     *
+     * @return true if all went ok, false otherwise.
+     *
+     * @note this is equivalent to updateKinematicsFromFixedBase(jointPos,jointVel,m_dynamicsTraversal.getBaseLink()->getIndex(),gravity);
+     *
+     */
+    bool updateKinematicsFromTraversalFixedBase(const JointPosDoubleArray  & jointPos,
+                                                const JointDOFsDoubleArray & jointVel,
+                                                const Vector3 & gravity);
+
     //@}
+
+
+    /**
+      * @name Methods to get informations on the serialization used.
+      */
+    //@{
+
+    /**
+     * Get a human readable description of the elements of the dynamic variables.
+     */
+    //std::string getDescriptionOfDynamicVariables();
+
+    //@}
+
+
 
 };
 
