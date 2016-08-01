@@ -183,9 +183,13 @@ bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifi
     Model _modelReduced;
     SensorsList _sensorsReduced;
 
-    //
-    iDynTree::createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
+    parsingCorrect = createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
 
+    if( !parsingCorrect )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFileWithSpecifiedDOFs","Error in creating reduced model and sensors.");
+        return false;
+    }
 
     return setModelAndSensors(_modelReduced,_sensorsReduced);
 }

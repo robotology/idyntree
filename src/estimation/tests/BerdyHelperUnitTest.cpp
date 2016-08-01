@@ -84,7 +84,7 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
     // Generated the Y e bY matrix and vector from berdy
     MatrixDynSize D, Y;
     VectorDynSize bD, bY;
-    berdy.resizeBerdyMatrices(D,bD,Y,bY);
+    berdy.resizeAndZeroBerdyMatrices(D,bD,Y,bY);
     bool ok = berdy.getBerdyMatrices(D,bD,Y,bY);
     ASSERT_IS_TRUE(ok);
 
@@ -176,6 +176,9 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
          linkNetWrenchesWithoutGravity(visitedLinkIndex) = I*properAcc + v*(I*v);
      }
 
+    // Get the angular v
+    berdy.updateKinematicsFromFixedBase(pos.jointPos(),vel.jointVel(),berdy.dynamicTraversal().getBaseLink()->getIndex(),grav);
+
     berdy.serializeDynamicVariables(linkProperAccs,
                                     linkNetWrenchesWithoutGravity,
                                     extWrenches,
@@ -184,14 +187,11 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
                                     generalizedProperAccs.jointAcc(),
                                     d);
 
-    // Get the angular v
-    berdy.updateKinematicsFromFixedBase(pos.jointPos(),vel.jointVel(),berdy.dynamicTraversal().getBaseLink()->getIndex(),grav);
-
     // Check D and bD , in particular that D*d + bD = 0
     // Generated the Y e bY matrix and vector from berdy
     MatrixDynSize D, Y;
     VectorDynSize bD, bY;
-    berdy.resizeBerdyMatrices(D,bD,Y,bY);
+    berdy.resizeAndZeroBerdyMatrices(D,bD,Y,bY);
     bool ok = berdy.getBerdyMatrices(D,bD,Y,bY);
     ASSERT_IS_TRUE(ok);
 
@@ -217,16 +217,27 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
         y.zero();
         SensorsMeasurements sensMeas(berdy.sensors());
         ok = predictSensorsMeasurementsFromRawBuffers(berdy.model(),berdy.sensors(),berdy.dynamicTraversal(),
-                                                           linkVels,linkProperAccs,intWrenches,sensMeas);
-
+                                                      linkVels,linkProperAccs,intWrenches,sensMeas);
         ASSERT_IS_TRUE(ok);
-        ok = sensMeas.toVector(y);
+
+        ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,y);
         ASSERT_IS_TRUE(ok);
 
         // Check that y = Y*d + bY
         VectorDynSize yFromBerdy(berdy.getNrOfSensorsMeasurements());
 
         toEigen(yFromBerdy) = toEigen(Y)*toEigen(d) + toEigen(bY);
+
+        std::cerr << "Y : " << std::endl;
+        std::cerr << Y.toString() << std::endl;
+        std::cerr << "d :\n" << d.toString() << std::endl;
+        std::cerr << "Y*d :\n" << toEigen(Y)*toEigen(d) << std::endl;
+        std::cerr << "bY :\n" << bY.toString() << std::endl;
+
+
+        std::cerr << Y.toString() << std::endl;
+        std::cerr << "Testing " << berdy.getOptions().jointOnWhichTheInternalWrenchIsMeasured[0] << std::endl;
+        std::cerr << intWrenches(berdy.model().getJointIndex(berdy.getOptions().jointOnWhichTheInternalWrenchIsMeasured[0])).toString() << std::endl;
 
         // Check if the two vectors are equal
         ASSERT_EQUAL_VECTOR(y,yFromBerdy);
@@ -246,6 +257,16 @@ void testBerdyHelpers(std::string fileName)
     // First test the original BERDY
     BerdyOptions options;
     options.berdyVariant = iDynTree::ORIGINAL_BERDY_FIXED_BASE;
+    options.includeAllJointAccelerationsAsSensors = false;
+    options.includeAllNetExternalWrenchesAsSensors = false;
+
+    // Add one arbitarry joint wrench sensor
+    if( estimator.model().getNrOfJoints() > 0 )
+    {
+        JointIndex jntIdx = estimator.model().getNrOfJoints()/2;
+        options.jointOnWhichTheInternalWrenchIsMeasured.push_back(estimator.model().getJointName(jntIdx));
+    }
+
     ok = berdyHelper.init(estimator.model(),estimator.sensors(),options);
 
     if( ok )

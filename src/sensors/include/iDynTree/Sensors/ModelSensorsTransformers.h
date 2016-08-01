@@ -24,7 +24,7 @@ class SensorsList;
 /**
  * Variant of createReducedModel function that also process the sensorList .
  *
- *
+ * Note
  */
 bool createReducedModelAndSensors(const Model& fullModel,
                                   const SensorsList& fullSensors,
