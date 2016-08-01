@@ -95,7 +95,7 @@ BerdyHelper::BerdyHelper(): m_areModelAndSensorsValid(false),
 
 bool BerdyHelper::init(const Model& model,
                         const SensorsList& sensors,
-                        const BerdyVariants variant)
+                        const BerdyOptions options)
 {
     // Reset the class
     m_kinematicsUpdated = false;
@@ -103,7 +103,7 @@ bool BerdyHelper::init(const Model& model,
 
     m_model = model;
     m_sensors = sensors;
-    m_berdyVariant = variant;
+    m_options = options;
 
     m_model.computeFullTreeTraversal(m_dynamicsTraversal);
     m_kinematicTraversals.resize(m_model);
@@ -112,7 +112,7 @@ bool BerdyHelper::init(const Model& model,
     m_linkVels.resize(m_model);
 
     bool res = false;
-    switch(m_berdyVariant)
+    switch(m_options.berdyVariant)
     {
         case ORIGINAL_BERDY_FIXED_BASE :
             res = initOriginalBerdyFixedBase();
@@ -138,6 +138,44 @@ bool BerdyHelper::init(const Model& model,
 
     return res;
 }
+
+BerdyOptions BerdyHelper::getOptions() const
+{
+    return m_options;
+}
+
+
+bool BerdyHelper::initSensorsMeasurements()
+{
+    // The number of sensors measurements is given by the sensors contained
+    // in sensorsList (informally: the number of measurments of sensors
+    // contained in the robot model) plus the additional/fictious sensors
+    // specified in the BerdyOptions
+    m_nrOfSensorsMeasurements = m_sensors.getSizeOfAllSensorsMeasurements();
+
+    // The offset of joint accelerations
+    berdySensorTypeOffsets.dofAccelerationOffset = m_nrOfSensorsMeasurements;
+
+    if( m_options.includeJointAccelerationsAsSensors )
+    {
+        m_nrOfSensorsMeasurements += this->m_model.getNrOfDOFs();
+    }
+
+    // The offset of joint torques
+    berdySensorTypeOffsets.dofTorquesOffset = m_nrOfSensorsMeasurements;
+
+    if( m_options.includeJointTorquesAsSensors )
+    {
+        m_nrOfSensorsMeasurements += this->m_model.getNrOfDOFs();
+    }
+
+    berdySensorTypeOffsets.netWrenchAccelerationOffset = m_nrOfSensorsMeasurements;
+    if( m_options.includeNetExternalWrenchesAsSensors )
+    {
+        m_nrOfSensorsMeasurements += 6*this->m_model.getNrOfLinks();
+    }
+}
+
 
 bool BerdyHelper::initOriginalBerdyFixedBase()
 {
@@ -191,7 +229,7 @@ bool BerdyHelper::initOriginalBerdyFixedBase()
     // 1 for the torque computations
     m_nrOfDynamicEquations   = (18+1)*nrOfDOFs;
 
-    m_nrOfSensorsMeasurements = m_sensors.getSizeOfAllSensorsMeasurements();
+    initSensorsMeasurements();
 
     return true;
 }
@@ -310,11 +348,63 @@ IndexRange BerdyHelper::getRangeSensorVariable(const SensorType type, const unsi
     return ret;
 }
 
+IndexRange BerdyHelper::getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx)
+{
+    IndexRange ret = IndexRange::InvalidRange();
+    ret.size = 1;
+
+    if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
+    {
+        // For ORIGINAL_BERDY_FIXED_BASE we know  that DOFIndex is always equalt to JointIndex
+        TraversalIndex trvIdx = getTraversalIndexFromJointIndex(m_model,m_dynamicsTraversal,(JointIndex)idx);
+
+        if( sensorType == DOF_ACCELERATION_SENSOR )
+        {
+            ret.offset = berdySensorTypeOffsets.dofAccelerationOffset + (trvIdx-1);
+        }
+
+        if( sensorType == DOF_TORQUE_SENSOR )
+        {
+            ret.offset = berdySensorTypeOffsets.dofTorquesOffset + (trvIdx-1);
+        }
+    }
+
+    return ret;
+}
+
+IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx)
+{
+    IndexRange ret = IndexRange::InvalidRange();
+    ret.size = 6;
+
+    if( sensorType == NET_EXT_WRENCH_SENSOR )
+    {
+        if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
+        {
+            TraversalIndex trvIdx = m_dynamicsTraversal.getTraversalIndexFromLinkIndex(idx);
+
+            if( m_options.includeFixedBaseExternalWrench )
+            {
+                ret.offset = berdySensorTypeOffsets.netWrenchAccelerationOffset + 6*trvIdx;
+            }
+            else
+            {
+                ret.offset = berdySensorTypeOffsets.netWrenchAccelerationOffset + 6*(trvIdx-1);
+            }
+        }
+    }
+
+    return ret;
+}
+
+
+
+
 IndexRange BerdyHelper::getRangeLinkProperAccDynEq(const LinkIndex idx)
 {
     IndexRange ret;
 
-    if( m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
+    if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
     {
         TraversalIndex trvIdx = m_dynamicsTraversal.getTraversalIndexFromLinkIndex(idx);
         ret.offset = 19*(trvIdx-1)+0;
@@ -329,7 +419,7 @@ IndexRange BerdyHelper::getRangeLinkNetTotalwrenchDynEq(const LinkIndex idx)
 {
     IndexRange ret;
 
-    if( m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
+    if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
     {
         TraversalIndex trvIdx = m_dynamicsTraversal.getTraversalIndexFromLinkIndex(idx);
         ret.offset = 19*(trvIdx-1)+6;
@@ -344,7 +434,7 @@ IndexRange BerdyHelper::getRangeJointWrench(const JointIndex idx)
 {
     IndexRange ret;
 
-    if( m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
+    if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
     {
         TraversalIndex trvIdx = getTraversalIndexFromJointIndex(m_model,m_dynamicsTraversal,idx);
         ret.offset = 19*(trvIdx-1)+12;
@@ -359,7 +449,7 @@ IndexRange BerdyHelper::getRangeDOFTorqueDynEq(const DOFIndex idx)
 {
     IndexRange ret;
 
-    if( m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
+    if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
     {
         TraversalIndex trvIdx = getTraversalIndexFromJointIndex(m_model,m_dynamicsTraversal,idx);
         ret.offset = 19*(trvIdx-1)+18;
@@ -401,7 +491,7 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
 
         // This should not be added if the variant is ORIGINAL_BERDY_FIXED_BASE and the parentLink is the base
         // because in that case the acceleration of the base is not a dynamic variable
-        if( !(m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE && parentLinkIdx == m_dynamicsTraversal.getBaseLink()->getIndex()) )
+        if( !(m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE && parentLinkIdx == m_dynamicsTraversal.getBaseLink()->getIndex()) )
         {
             setSubMatrix(D,
                            getRangeLinkProperAccDynEq(visitedLinkIdx),
@@ -433,7 +523,7 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
             biasAcc = biasAcc + m_linkVels(visitedLinkIdx).cross(S*m_jointVel(dofOffset+localDof));
         }
 
-        if( m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE && parentLinkIdx == m_dynamicsTraversal.getBaseLink()->getIndex() )
+        if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE && parentLinkIdx == m_dynamicsTraversal.getBaseLink()->getIndex() )
         {
             // If the variant is ORIGINAL_BERDY_FIXED_BASE variant, we need to account explicitly for the gravity for links whose parent is the base
             biasAcc = biasAcc - visited_X_parent*m_gravity6D;
@@ -444,7 +534,7 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
                      toEigen(biasAcc));
 
 
-        if( m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
+        if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
         {
             ///////////////////////////////////////////////////////////
             // Total net wrench without gravity (D part, only for ORIGINAL_BERDY_FIXED_BASE
@@ -510,7 +600,7 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
                                     getRangeLinkVariable(NET_EXT_WRENCH,visitedLinkIdx));
 
 
-        if( m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
+        if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
         {
             // In the ORIGINAL_BERDY_FIXED_BASE, we also add to the rows of the joint wrenches
             // the depend on the total wrenches
@@ -519,7 +609,7 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
                                    getRangeLinkVariable(NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV,visitedLinkIdx));
         }
 
-        if( m_berdyVariant == BERDY_FLOATING_BASE )
+        if( m_options.berdyVariant == BERDY_FLOATING_BASE )
         {
             // In the floating base variant, we embed all the inertia related terms directly in the floaging base
              setSubMatrix(D,
@@ -531,7 +621,7 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
         ///////////////////////////////////////////////////////////
         // Joint wrench (bD part, only for BERDY_FLOATING_BASE)
         ///////////////////////////////////////////////////////////
-        if( m_berdyVariant == BERDY_FLOATING_BASE )
+        if( m_options.berdyVariant == BERDY_FLOATING_BASE )
         {
             setSubVector(bD,
                          getRangeJointWrench(toParentJoint->getIndex()),
@@ -564,9 +654,12 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
     Y.zero();
     bY.zero();
 
-    std::cerr << "computeBerdySensorsMatrix " << m_nrOfSensorsMeasurements << " " << m_nrOfDynamicalVariables << std::endl;
 
     // For now handle all sensor types explicitly TODO clean this up
+
+    ////////////////////////////////////////////////////////////////////////
+    ///// SIX AXIS F/T SENSORS
+    ////////////////////////////////////////////////////////////////////////
     size_t numOfFTs = m_sensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
     for(size_t idx = 0; idx<numOfFTs; idx++)
     {
@@ -582,6 +675,9 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
         // bY for the F/T sensor is equal to zero
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    ///// ACCELEROMETERS
+    ////////////////////////////////////////////////////////////////////////
     unsigned int numAccl = m_sensors.getNrOfSensors(iDynTree::ACCELEROMETER);
     for(size_t idx = 0; idx<numAccl; idx++)
     {
@@ -594,14 +690,15 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
         // Y(sensorRange,linkBodyProperAcRange) for the accelerometer is the first three rows of the sensor_X_link adjoint matrix
         setSubMatrix(Y,sensorRange,linkBodyProperAcRange,toEigen(sensor_X_link.asAdjointTransform()).block<3,6>(0,0));
 
-        std::cerr << toEigen(sensor_X_link.asAdjointTransform()).block<3,6>(0,0) << std::endl;
-
         Twist vSensor = sensor_X_link*m_linkVels(parentLinkId);
 
         // bY for the accelerometer is the cross product of the angular part and the linear part of the body 6D velocity expressed in the sensor orientation and wrt to the
         setSubVector(bY,sensorRange, toEigen(vSensor.getAngularVec3().cross(vSensor.getLinearVec3())) );
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    ///// GYROSCOPES
+    ////////////////////////////////////////////////////////////////////////
     unsigned int numGyro = m_sensors.getNrOfSensors(iDynTree::GYROSCOPE);
     for(size_t idx = 0; idx<numGyro; idx++)
     {
@@ -616,6 +713,61 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
         setSubVector(bY,sensorRange,toEigen((sensor_X_link*m_linkVels(parentLinkId)).getAngularVec3()));
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    ///// JOINT ACCELERATIONS
+    ////////////////////////////////////////////////////////////////////////
+    if( m_options.includeJointAccelerationsAsSensors )
+    {
+        for(DOFIndex idx = 0; idx< this->m_model.getNrOfDOFs(); idx++)
+        {
+            // Y for the joint accelerations is just a rows of 0s and one 1  corresponding to the location
+            // of the relative joint acceleration in the dynamic variables vector
+            IndexRange sensorRange = this->getRangeDOFSensorVariable(DOF_ACCELERATION_SENSOR,idx);
+            IndexRange jointAccRange = this->getRangeDOFVariable(DOF_ACCELERATION,idx);
+
+            setSubMatrix(Y,sensorRange,jointAccRange,1.0);
+
+            // bY for the joint acceleration is zero
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    ///// JOINT TORQUES
+    ////////////////////////////////////////////////////////////////////////
+    if( m_options.includeJointTorquesAsSensors )
+    {
+        for(DOFIndex idx = 0; idx< this->m_model.getNrOfDOFs(); idx++)
+        {
+            // Y for the joint torques is just a rows of 0s and one 1  corresponding to the location
+            // of the relative joint torques in the dynamic variables vector
+            IndexRange sensorRange = this->getRangeDOFSensorVariable(DOF_TORQUE_SENSOR,idx);
+            IndexRange jointTrqRange = this->getRangeDOFVariable(DOF_TORQUE,idx);
+
+            setSubMatrix(Y,sensorRange,jointTrqRange,1.0);
+
+            // bY for the joint torques is zero
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    ///// NET EXTERNAL WRENCHES ACTING ON LINKS
+    ////////////////////////////////////////////////////////////////////////
+    if( m_options.includeNetExternalWrenchesAsSensors )
+    {
+        for(LinkIndex idx = 0; idx < this->m_model.getNrOfLinks(); idx++)
+        {
+            // Y for the net external wrenches is just
+            // six rows of 0 with an identity placed at the location
+            // of the net external wrenches in the dynamic variable vector
+            IndexRange sensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx);
+            IndexRange netExtWrenchRange = this->getRangeLinkVariable(NET_EXT_WRENCH,idx);
+
+            setSubMatrixToIdentity(Y,sensorRange,netExtWrenchRange);
+
+            // bY for the net external wrenches is zero
+        }
+    }
+
     return true;
 }
 
@@ -624,19 +776,13 @@ bool BerdyHelper::initBerdyFloatingBase()
 {
     bool res = false;
 
+    assert(false);
     //
+
+    initSensorsMeasurements();
 
     return res;
 }
-
-
-
-BerdyVariants BerdyHelper::getBerdyVariant() const
-{
-    return m_berdyVariant;
-}
-
-
 
 Model& BerdyHelper::model()
 {
@@ -791,9 +937,9 @@ bool BerdyHelper::serializeDynamicVariables(LinkProperAccArray& properAccs,
 {
 //     d.resize(this->getNrOfDynamicVariables());
 
-    assert(this->m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE);
+    assert(this->m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE);
 
-    if( this->m_berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
+    if( this->m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
     {
         // In the original formulation, also the totalNetWrenchesWithoutGravity where part of the variables
         // And the base link is not considered amoing the dynamic variables

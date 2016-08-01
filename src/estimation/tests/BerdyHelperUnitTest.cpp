@@ -244,7 +244,9 @@ void testBerdyHelpers(std::string fileName)
     BerdyHelper berdyHelper;
 
     // First test the original BERDY
-    ok = berdyHelper.init(estimator.model(),estimator.sensors(),iDynTree::ORIGINAL_BERDY_FIXED_BASE);
+    BerdyOptions options;
+    options.berdyVariant = iDynTree::ORIGINAL_BERDY_FIXED_BASE;
+    ok = berdyHelper.init(estimator.model(),estimator.sensors(),options);
 
     if( ok )
     {

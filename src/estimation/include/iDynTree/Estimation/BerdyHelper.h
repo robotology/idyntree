@@ -16,8 +16,8 @@
  * Public License for more details
  */
 
-#ifndef IDYNTREE_BERDY_HELPERS_H
-#define IDYNTREE_BERDY_HELPERS_H
+#ifndef IDYNTREE_BERDY_HELPER_H
+#define IDYNTREE_BERDY_HELPER_H
 
 #include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Position.h>
@@ -90,9 +90,91 @@ enum BerdyDynamicVariablesTypes
     DOF_ACCELERATION
 };
 
+/**
+ * Enumeration describing the possible sensor types implemented in Berdy.
+ *
+ * Note that the concept of "sensor" in Berdy estimation is more general that
+ * just a physical sensor mounted on the robot: for example it can include
+ * the information that a link is fixed to the ground (i.e. its angular velocity,
+ * angular and linear acceleration are zero) even if this information is not coming
+ * from an actual physical sensors. For this reason we do not use directly
+ * the iDynTree::SensorTypes enum, even if we reserve the first 1000 elements o
+ * of this enum to be compatibile with the iDynTree::SensorTypes enum.
+ * Enum values duplicates between BerdySensorTypes and SensorTypes are append a
+ * _SENSOR suffix to avoid problems when wrapping such enum wit SWIG.
+ */
+enum BerdySensorTypes
+{
+    SIX_AXIS_FORCE_TORQUE_SENSOR = SIX_AXIS_FORCE_TORQUE,
+    ACCELEROMETER_SENSOR = ACCELEROMETER,
+    GYROSCOPE_SENSOR = GYROSCOPE,
+    DOF_ACCELERATION_SENSOR = 1000,
+    DOF_TORQUE_SENSOR       = 1001,
+    NET_EXT_WRENCH_SENSOR   = 1002
+};
+
 bool isLinkBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
 bool isJointBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
 bool isDOFBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
+
+/**
+ * Options of the BerdyHelper class.
+ *
+ * Documentation of each option is provided as usual Doxygen documentation.
+ * Default values for each options are specified in the contstructor.
+ */
+struct BerdyOptions
+{
+public:
+    BerdyOptions() : berdyVariant(ORIGINAL_BERDY_FIXED_BASE),
+                     includeJointAccelerationsAsSensors(true),
+                     includeJointTorquesAsSensors(false),
+                     includeNetExternalWrenchesAsSensors(true),
+                     includeFixedBaseExternalWrench(false)
+    {
+    }
+
+    /**
+     * Type of berdy variant implemented.
+     *
+     * For description of each type of variant
+     * check the BerdyVariants enum documentation.
+     *
+     * Default value: ORIGINAL_BERDY_FIXED_BASE .
+     */
+    BerdyVariants berdyVariant;
+
+    /**
+     * If true, include the joint accelerations in the sensors vector.
+     *
+     * Default value: true .
+     */
+    bool includeJointAccelerationsAsSensors;
+
+    /**
+     * If true, include the joint torques in the sensors vector.
+     *
+     * Default value: false .
+     */
+    bool includeJointTorquesAsSensors;
+
+    /**
+     * If true, include the joint torques in the sensors vector.
+     *
+     * Default value: true .
+     */
+    bool includeNetExternalWrenchesAsSensors;
+
+    /**
+     * If includeNetExternalWrenchesAsSensors is true and the
+     * variant is ORIGINAL_BERDY_FIXED_BASE, if this is
+     * true the external wrench acting on the base fixed link
+     * is included in the sensors.
+     *
+     * Default value : false .
+     */
+    bool includeFixedBaseExternalWrench;
+};
 
 /**
  * \brief Helper class for computing Berdy matrices.
@@ -173,11 +255,9 @@ class BerdyHelper
     bool m_kinematicsUpdated;
 
     /**
-     * Type of berdy variant implemented,
-     * for description of each type of variant
-     * check the BerdyVariants enum documentation.
+     * Options of the current berdy variant used.
      */
-    BerdyVariants m_berdyVariant;
+    BerdyOptions m_options;
 
     size_t m_nrOfDynamicalVariables;
     size_t m_nrOfDynamicEquations;
@@ -212,16 +292,26 @@ class BerdyHelper
     SpatialAcc m_gravity6D;
 
     /**
-     * Helpers method
+     * Helpers method for initialization.
      */
     bool initOriginalBerdyFixedBase();
     bool initBerdyFloatingBase();
+    bool initSensorsMeasurements();
 
+    /**
+     * Ranges of dynamic variables
+     */
     IndexRange getRangeOriginalBerdyFixedBase(const BerdyDynamicVariablesTypes dynamicVariableType, const TraversalIndex idx);
     IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx);
     IndexRange getRangeJointVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const JointIndex idx);
     IndexRange getRangeDOFVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const DOFIndex idx);
+
+    /**
+     * Range
+     */
     IndexRange getRangeSensorVariable(const SensorType type, const unsigned int sensorIdx);
+    IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx);
+    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx);
 
     /**
      * Ranges for specific dynamics equations
@@ -236,9 +326,17 @@ class BerdyHelper
     IndexRange getRangeJointWrench(const JointIndex idx);
     IndexRange getRangeDOFTorqueDynEq(const DOFIndex idx);
 
-
     bool computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY);
     bool computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& bD);
+
+    /**
+     * Helper for mapping sensors measurements to the Y vector.
+     */
+    struct {
+        size_t dofAccelerationOffset;
+        size_t dofTorquesOffset;
+        size_t netWrenchAccelerationOffset;
+    } berdySensorTypeOffsets;
 public:
     /**
      * Constructor
@@ -270,19 +368,22 @@ public:
      */
     const SensorsList& sensors() const;
 
-
-
     /**
      * Init the class
+     *
+     * @param[in] model The used model.
+     * @param[in] sensors The used sensors.
+     * @param[in] options The used options, check BerdyOptions docs.
+     * @return true if all went well, false otherwise.
      */
     bool init(const Model& model,
               const SensorsList& sensors,
-              const BerdyVariants variant);
+              const BerdyOptions options=BerdyOptions());
 
     /**
-     * Get the used Berdy variant.
+     * Get currently used options.
      */
-    BerdyVariants getBerdyVariant() const;
+    BerdyOptions getOptions() const;
 
     /**
      * Get the number of columns of the D matrix.
