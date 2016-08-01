@@ -130,10 +130,6 @@ inline void setSubMatrix(MatrixDynSize& mat,
                          const IndexRange colRange,
                          const T& subMat)
 {
-    std::cerr << "Setting block " << rowRange.offset << " " << colRange.offset << " " << rowRange.size << " " << colRange.size << std::endl;
-    std::cerr << "to " << subMat.rows() << " " << subMat.cols() << std::endl;
-
-    std::cerr <<  toEigen(mat).block(rowRange.offset,colRange.offset,rowRange.size,colRange.size) << std::endl;
     toEigen(mat).block(rowRange.offset,colRange.offset,rowRange.size,colRange.size) = subMat;
     return;
 }
@@ -197,8 +193,6 @@ inline void setSubVector(VectorDynSize& vec,
                          const IndexRange range,
                          const T& subVec)
 {
-    std::cerr << "Setting block " << range.offset << " " << range.size << std::endl;
-    std::cerr << "To " << subVec << std::endl;
     toEigen(vec).segment(range.offset,range.size) = subVec;
     return;
 }
