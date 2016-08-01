@@ -1,3 +1,18 @@
+## What are best entry points to understand iDynTree structure? 
+The best way to understand iDynTree is probably to read directly the source code. 
+
+Some classes extremly used are the following:
+
+| Class name | Description |  Doxygen docs | Headers (`.h`) | Source Code (`.cpp`) | Relevant Tests | 
+|:----------:|:-----------:|:------------:|:--------------:|:-----------:|:-----:|
+| `iDynTree::Transform` | Generic transform between two different frames. | [link](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1Transform.html) | [ src/core/include/iDynTree/Core/Transform.h](../../src/core/include/iDynTree/Core/Transform.h) | [ src/core/src/Transform.cpp](../../src/core/src/Transform.cpp) | [src/core/tests](../../src/core/tests) | 
+| `iDynTree::Model` | Generic multibody model. | [link](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1Model.html) | [ src/model/include/iDynTree/Model/Model.h](../../src/model/include/iDynTree/Model/Model.h) | [ src/model/src/Model.cpp](../../src/model/src/Model.cpp) | [src/model/tests/ModelUnitTest.cpp](../../src/model/tests/ModelUnitTest.cpp) | 
+
+If you need any additional doxygen comments, please [open an issue](https://github.com/robotology/idyntree/issues/new) detailing which point of the code you find difficul to understand. 
+
+Internally iDynTree uses a lot the [`Eigen` C++ template vector library](https://eigen.tuxfamily.org/dox/index.html), and in particularly the [`Eigen::Map`](https://eigen.tuxfamily.org/dox/group__TutorialMapClass.html)
+class is used a lot. Please check [Eigen documentation](https://eigen.tuxfamily.org/dox/index.html) for more details. 
+
 ## How to run the tests 
 iDynTree uses tests to prevent regressions caused by modification in the source code of the library. 
 To compile and run the test locally, enable the `IDYNTREE_COMPILE_TESTS` CMake option and then compile
