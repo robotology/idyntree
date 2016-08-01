@@ -6,7 +6,9 @@ Some classes extremly used are the following:
 | Class name | Description |  Doxygen docs | Headers (`.h`) | Source Code (`.cpp`) | Relevant Tests | 
 |:----------:|:-----------:|:------------:|:--------------:|:-----------:|:-----:|
 | `iDynTree::Transform` | Generic transform between two different frames. | [link](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1Transform.html) | [ src/core/include/iDynTree/Core/Transform.h](../../src/core/include/iDynTree/Core/Transform.h) | [ src/core/src/Transform.cpp](../../src/core/src/Transform.cpp) | [src/core/tests](../../src/core/tests) | 
-| `iDynTree::Model` | Generic multibody model. | [link](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1Model.html) | [ src/model/include/iDynTree/Model/Model.h](../../src/model/include/iDynTree/Model/Model.h) | [ src/model/src/Model.cpp](../../src/model/src/Model.cpp) | [src/model/tests/ModelUnitTest.cpp](../../src/model/tests/ModelUnitTest.cpp) | 
+| `iDynTree::Model` | Generic undirected (i.e. with no "base") multibody model. | [link](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1Model.html) | [ src/model/include/iDynTree/Model/Model.h](../../src/model/include/iDynTree/Model/Model.h) | [ src/model/src/Model.cpp](../../src/model/src/Model.cpp) | [src/model/tests/ModelUnitTest.cpp](../../src/model/tests/ModelUnitTest.cpp) | 
+| `iDynTree::Traversal` | Class describing a order in which link are visited once a "base link" is choosen |  [link](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1Traversal.html) | [ src/model/include/iDynTree/Model/Traversal.h](../../src/model/include/iDynTree/Model/Traversal.h) | [ src/model/src/Traversal.cpp](../../src/model/src/Traversal.cpp) | [src/model/tests/ModelUnitTest.cpp](../../src/model/tests/ModelUnitTest.cpp) | 
+ 
 
 If you need any additional doxygen comments, please [open an issue](https://github.com/robotology/idyntree/issues/new) detailing which point of the code you find difficul to understand. 
 
