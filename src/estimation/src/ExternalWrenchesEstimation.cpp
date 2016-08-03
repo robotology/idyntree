@@ -186,7 +186,7 @@ LinkTraversalsCache::LinkTraversalsCache()
 
 LinkTraversalsCache::~LinkTraversalsCache()
 {
-
+    deleteTraversals();
 }
 
 void LinkTraversalsCache::deleteTraversals()
@@ -206,6 +206,7 @@ void LinkTraversalsCache::resize(const Model& model)
 
 void LinkTraversalsCache::resize(unsigned int nrOfLinks)
 {
+    deleteTraversals();
     m_linkTraversals.resize(nrOfLinks);
     for(size_t link=0; link < m_linkTraversals.size(); link++)
     {
