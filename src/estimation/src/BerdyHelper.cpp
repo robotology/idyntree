@@ -82,6 +82,20 @@ bool isDOFBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableT
     }
 }
 
+bool BerdyOptions::checkConsistency()
+{
+    if( this->includeAllNetExternalWrenchesAsSensors )
+    {
+        if( !this->includeAllNetExternalWrenchesAsDynamicVariables )
+        {
+            reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as includeAllNetExternalWrenchesAsSensors is set to true but includeAllNetExternalWrenchesAsDynamicVariables is set to false");
+            return false;
+        }
+    }
+
+    return true;
+}
+
 
 
 BerdyHelper::BerdyHelper(): m_areModelAndSensorsValid(false),
@@ -111,7 +125,14 @@ bool BerdyHelper::init(const Model& model,
     m_jointVel.resize(m_model);
     m_linkVels.resize(m_model);
 
-    bool res = false;
+    bool res = m_options.checkConsistency();
+
+    if( !res )
+    {
+        reportError("BerdyHelpers","init","BerdyOptions not consistent.");
+        return false;
+    }
+
     switch(m_options.berdyVariant)
     {
         case ORIGINAL_BERDY_FIXED_BASE :
@@ -126,6 +147,7 @@ bool BerdyHelper::init(const Model& model,
             reportError("BerdyHelpers","init","unknown berdy variant");
             res = false;
     }
+
 
     if( res )
     {
@@ -244,7 +266,8 @@ bool BerdyHelper::initOriginalBerdyFixedBase()
     size_t nrOfDOFs = m_model.getNrOfDOFs();
 
     // In the classical Berdy formulation, we have 6*4 + 2*1 dynamical variables
-    m_nrOfDynamicalVariables = (6*4+2*1)*nrOfDOFs;
+    size_t nrOfDynamicVariablesForDOFs = m_options.includeAllNetExternalWrenchesAsDynamicVariables ? 6*4+2*1 : 6*3+2*1;
+    m_nrOfDynamicalVariables = nrOfDynamicVariablesForDOFs*nrOfDOFs;
     // 19 Dynamics equations are considered in the original berdy :
     // 6 for the propagation of 6d acceleration
     // 6 for the computation of the net wrench from acc and vel
@@ -260,7 +283,17 @@ bool BerdyHelper::initOriginalBerdyFixedBase()
 IndexRange BerdyHelper::getRangeOriginalBerdyFixedBase(BerdyDynamicVariablesTypes dynamicVariableType, TraversalIndex idx)
 {
     IndexRange ret;
-    size_t dynamicVariableSize, dynamicVariableOffset;
+    size_t dynamicVariableSize, dynamicVariableOffset, nrOfVariablesForJoint;
+
+    if( m_options.includeAllNetExternalWrenchesAsDynamicVariables )
+    {
+        nrOfVariablesForJoint = 26;
+    }
+    else
+    {
+        nrOfVariablesForJoint = 20;
+    }
+
     switch(dynamicVariableType)
     {
         case LINK_BODY_PROPER_ACCELERATION:
@@ -280,18 +313,18 @@ IndexRange BerdyHelper::getRangeOriginalBerdyFixedBase(BerdyDynamicVariablesType
             dynamicVariableOffset = 18;
             break;
         case NET_EXT_WRENCH:
-            dynamicVariableSize = 6;
+            dynamicVariableSize = m_options.includeAllNetExternalWrenchesAsDynamicVariables ? 6 : 0;
             dynamicVariableOffset = 19;
             break;
         case DOF_ACCELERATION:
             dynamicVariableSize = 1;
-            dynamicVariableOffset = 25;
+            dynamicVariableOffset = m_options.includeAllNetExternalWrenchesAsDynamicVariables ? 25 : 19;
             break;
     }
 
     // Note that the traversal index 0 is for the base link, that is not considered
     // in the fixed base Berdy, so we start from the link with traversal index 1
-    ret.offset = 26*(idx-1)+dynamicVariableOffset;
+    ret.offset = nrOfVariablesForJoint*(idx-1)+dynamicVariableOffset;
     ret.size = dynamicVariableSize;
 
     return ret;
@@ -633,9 +666,12 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
         }
 
         // Net external wrench
-        setSubMatrixToMinusIdentity(D,
-                                    getRangeJointWrench(toParentJoint->getIndex()),
-                                    getRangeLinkVariable(NET_EXT_WRENCH,visitedLinkIdx));
+        if( m_options.includeAllNetExternalWrenchesAsDynamicVariables )
+        {
+            setSubMatrixToMinusIdentity(D,
+                                        getRangeJointWrench(toParentJoint->getIndex()),
+                                        getRangeLinkVariable(NET_EXT_WRENCH,visitedLinkIdx));
+        }
 
 
         if( m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE )
@@ -1051,7 +1087,10 @@ bool BerdyHelper::serializeDynamicVariables(LinkProperAccArray& properAccs,
             {
                 setSubVector(d,getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,linkIdx),toEigen(properAccs(linkIdx)));
                 setSubVector(d,getRangeLinkVariable(NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV,linkIdx),toEigen(netTotalWrenchesWithoutGrav(linkIdx)));
-                setSubVector(d,getRangeLinkVariable(NET_EXT_WRENCH,linkIdx),toEigen(netExtWrenches(linkIdx)));
+                if( m_options.includeAllNetExternalWrenchesAsDynamicVariables )
+                {
+                    setSubVector(d,getRangeLinkVariable(NET_EXT_WRENCH,linkIdx),toEigen(netExtWrenches(linkIdx)));
+                }
             }
         }
 

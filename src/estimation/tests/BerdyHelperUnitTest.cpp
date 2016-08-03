@@ -260,7 +260,7 @@ void testBerdyHelpers(std::string fileName)
     options.includeAllJointAccelerationsAsSensors = false;
     options.includeAllNetExternalWrenchesAsSensors = false;
 
-    // Add one arbitarry joint wrench sensor
+    // Add one arbitary joint wrench sensor
     if( estimator.model().getNrOfJoints() > 0 )
     {
         JointIndex jntIdx = estimator.model().getNrOfJoints()/2;
@@ -272,6 +272,10 @@ void testBerdyHelpers(std::string fileName)
     if( ok )
     {
         std::cerr << "Testing ORIGINAL_BERDY_FIXED_BASE tests for model " << fileName << " because the assumptions of ORIGINAL_BERDY_FIXED_BASE are respected" << std::endl;
+        testBerdyOriginalFixedBase(berdyHelper,fileName);
+        // Change the options a bit and test again
+        options.includeAllNetExternalWrenchesAsDynamicVariables = false;
+        berdyHelper.init(estimator.model(),estimator.sensors(),options);
         testBerdyOriginalFixedBase(berdyHelper,fileName);
     }
     else

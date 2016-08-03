@@ -131,6 +131,7 @@ struct BerdyOptions
 {
 public:
     BerdyOptions() : berdyVariant(ORIGINAL_BERDY_FIXED_BASE),
+                     includeAllNetExternalWrenchesAsDynamicVariables(true),
                      includeAllJointAccelerationsAsSensors(true),
                      includeAllJointTorquesAsSensors(false),
                      includeAllNetExternalWrenchesAsSensors(true),
@@ -149,6 +150,17 @@ public:
     BerdyVariants berdyVariant;
 
     /**
+     * If true, include the net external wrenches in the dynamic variables vector.
+     *
+     * Default value: true .
+     *
+     * \note the Net effect of setting this to zero is to consider all the external
+     *       wrenches to be equal to 0. If berdyVariant is ORIGINAL_BERDY_FIXED_BASE,
+     *       the "net" external wrenches does not include the wrench at the base.
+     */
+    bool includeAllNetExternalWrenchesAsDynamicVariables;
+
+    /**
      * If true, include the joint accelerations in the sensors vector.
      *
      * Default value: true .
@@ -163,7 +175,8 @@ public:
     bool includeAllJointTorquesAsSensors;
 
     /**
-     * If true, include the joint torques in the sensors vector.
+     * If true, include the net external wrenches in the sensors vector.
+     * It is not compatible with the use of includeAllNetExternalWrenchesAsDynamicVariables set to false.
      *
      * Default value: true .
      */
@@ -178,15 +191,20 @@ public:
      * Default value : false .
      */
     bool includeFixedBaseExternalWrench;
-    
+
     /**
      * Vector of joint names for which we assume that a virtual
      * measurement of the wrench trasmitted on the joint is available.
-     * 
-     * \note This measurements are tipically used only for debug, actual 
-     *       internal wrenches are tipically measured using a SIX_AXIS_FORCE_TORQUE_SENSOR . 
+     *
+     * \note This measurements are tipically used only for debug, actual
+     *       internal wrenches are tipically measured using a SIX_AXIS_FORCE_TORQUE_SENSOR .
      */
     std::vector<std::string> jointOnWhichTheInternalWrenchIsMeasured;
+
+    /**
+     * Check that the options are not self-contradicting. 
+     */
+    bool checkConsistency();
 };
 
 /**
@@ -352,9 +370,9 @@ class BerdyHelper
         size_t netExtWrenchOffset;
         size_t jointWrenchOffset;
     } berdySensorTypeOffsets;
-    
+
     /**
-     * Helper of additional sensors. 
+     * Helper of additional sensors.
      */
     struct {
       /**
