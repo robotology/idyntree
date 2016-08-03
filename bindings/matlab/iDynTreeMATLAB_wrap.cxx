@@ -2884,7 +2884,7 @@ SWIGINTERN void std_vector_Sl_std_string_Sg__insert__SWIG_1(std::vector< std::st
 
 // Model loading from external formats
 #include "iDynTree/ModelIO/URDFModelImport.h"
-#include "iDynTree/ModelIO/URDFSensorsImport.h"
+#include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 #include "iDynTree/ModelIO/ModelLoader.h"
 
 // Estimation related classes
@@ -51699,7 +51699,7 @@ int _wrap_modelFromURDFString (int resc, mxArray *resv[], int argc, mxArray *arg
 }
 
 
-int _wrap_sensorsListFromURDF (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_sensorsFromURDF__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   std::string *arg1 = 0 ;
   iDynTree::SensorsList *arg2 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -51708,29 +51708,29 @@ int _wrap_sensorsListFromURDF (int resc, mxArray *resv[], int argc, mxArray *arg
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("sensorsListFromURDF",argc,2,2,0)) {
+  if (!SWIG_check_num_args("sensorsFromURDF",argc,2,2,0)) {
     SWIG_fail;
   }
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(argv[0], &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sensorsListFromURDF" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sensorsFromURDF" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsListFromURDF" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDF" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     arg1 = ptr;
   }
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SensorsList,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "sensorsListFromURDF" "', argument " "2"" of type '" "iDynTree::SensorsList &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "sensorsFromURDF" "', argument " "2"" of type '" "iDynTree::SensorsList &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsListFromURDF" "', argument " "2"" of type '" "iDynTree::SensorsList &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDF" "', argument " "2"" of type '" "iDynTree::SensorsList &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::SensorsList * >(argp2);
-  result = (bool)iDynTree::sensorsListFromURDF((std::string const &)*arg1,*arg2);
+  result = (bool)iDynTree::sensorsFromURDF((std::string const &)*arg1,*arg2);
   _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out) --resc, *resv++ = _out;
   if (SWIG_IsNewObj(res1)) delete arg1;
@@ -51741,7 +51741,101 @@ fail:
 }
 
 
-int _wrap_sensorsListFromURDFString (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_sensorsFromURDF__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  std::string *arg1 = 0 ;
+  iDynTree::Model *arg2 = 0 ;
+  iDynTree::SensorsList *arg3 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("sensorsFromURDF",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(argv[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sensorsFromURDF" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDF" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Model,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "sensorsFromURDF" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDF" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Model * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__SensorsList,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "sensorsFromURDF" "', argument " "3"" of type '" "iDynTree::SensorsList &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDF" "', argument " "3"" of type '" "iDynTree::SensorsList &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::SensorsList * >(argp3);
+  result = (bool)iDynTree::sensorsFromURDF((std::string const &)*arg1,(iDynTree::Model const &)*arg2,*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return 0;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return 1;
+}
+
+
+int _wrap_sensorsFromURDF (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 2) {
+    int _v;
+    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SensorsList, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_sensorsFromURDF__SWIG_0(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Model, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_iDynTree__SensorsList, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_sensorsFromURDF__SWIG_1(resc,resv,argc,argv);
+        }
+      }
+    }
+  }
+  
+  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'sensorsFromURDF'."
+    "  Possible C/C++ prototypes are:\n"
+    "    iDynTree::sensorsFromURDF(std::string const &,iDynTree::SensorsList &)\n"
+    "    iDynTree::sensorsFromURDF(std::string const &,iDynTree::Model const &,iDynTree::SensorsList &)\n");
+  return 1;
+}
+
+
+int _wrap_sensorsFromURDFString__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   std::string *arg1 = 0 ;
   iDynTree::SensorsList *arg2 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -51750,35 +51844,129 @@ int _wrap_sensorsListFromURDFString (int resc, mxArray *resv[], int argc, mxArra
   mxArray * _out;
   bool result;
   
-  if (!SWIG_check_num_args("sensorsListFromURDFString",argc,2,2,0)) {
+  if (!SWIG_check_num_args("sensorsFromURDFString",argc,2,2,0)) {
     SWIG_fail;
   }
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(argv[0], &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sensorsListFromURDFString" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sensorsFromURDFString" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsListFromURDFString" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDFString" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     arg1 = ptr;
   }
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__SensorsList,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "sensorsListFromURDFString" "', argument " "2"" of type '" "iDynTree::SensorsList &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "sensorsFromURDFString" "', argument " "2"" of type '" "iDynTree::SensorsList &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsListFromURDFString" "', argument " "2"" of type '" "iDynTree::SensorsList &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDFString" "', argument " "2"" of type '" "iDynTree::SensorsList &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::SensorsList * >(argp2);
-  result = (bool)iDynTree::sensorsListFromURDFString((std::string const &)*arg1,*arg2);
+  result = (bool)iDynTree::sensorsFromURDFString((std::string const &)*arg1,*arg2);
   _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out) --resc, *resv++ = _out;
   if (SWIG_IsNewObj(res1)) delete arg1;
   return 0;
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
+  return 1;
+}
+
+
+int _wrap_sensorsFromURDFString__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  std::string *arg1 = 0 ;
+  iDynTree::Model *arg2 = 0 ;
+  iDynTree::SensorsList *arg3 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("sensorsFromURDFString",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(argv[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sensorsFromURDFString" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDFString" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Model,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "sensorsFromURDFString" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDFString" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Model * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__SensorsList,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "sensorsFromURDFString" "', argument " "3"" of type '" "iDynTree::SensorsList &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sensorsFromURDFString" "', argument " "3"" of type '" "iDynTree::SensorsList &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::SensorsList * >(argp3);
+  result = (bool)iDynTree::sensorsFromURDFString((std::string const &)*arg1,(iDynTree::Model const &)*arg2,*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return 0;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return 1;
+}
+
+
+int _wrap_sensorsFromURDFString (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 2) {
+    int _v;
+    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__SensorsList, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_sensorsFromURDFString__SWIG_0(resc,resv,argc,argv);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__Model, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_iDynTree__SensorsList, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_sensorsFromURDFString__SWIG_1(resc,resv,argc,argv);
+        }
+      }
+    }
+  }
+  
+  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'sensorsFromURDFString'."
+    "  Possible C/C++ prototypes are:\n"
+    "    iDynTree::sensorsFromURDFString(std::string const &,iDynTree::SensorsList &)\n"
+    "    iDynTree::sensorsFromURDFString(std::string const &,iDynTree::Model const &,iDynTree::SensorsList &)\n");
   return 1;
 }
 
@@ -66145,8 +66333,8 @@ const char* swigFunctionName_(int fcn_id) {
   case 1078: return "delete_URDFParserOptions";
   case 1079: return "_wrap_modelFromURDF";
   case 1080: return "_wrap_modelFromURDFString";
-  case 1081: return "_wrap_sensorsListFromURDF";
-  case 1082: return "_wrap_sensorsListFromURDFString";
+  case 1081: return "_wrap_sensorsFromURDF";
+  case 1082: return "_wrap_sensorsFromURDFString";
   case 1083: return "new_ModelLoader";
   case 1084: return "ModelLoader_loadModelFromString";
   case 1085: return "ModelLoader_loadModelFromFile";
@@ -67507,8 +67695,8 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 1078: flag=_wrap_delete_URDFParserOptions(resc,resv,argc,(mxArray**)(argv)); break;
   case 1079: flag=_wrap_modelFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
   case 1080: flag=_wrap_modelFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1081: flag=_wrap_sensorsListFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1082: flag=_wrap_sensorsListFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1081: flag=_wrap_sensorsFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1082: flag=_wrap_sensorsFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
   case 1083: flag=_wrap_new_ModelLoader(resc,resv,argc,(mxArray**)(argv)); break;
   case 1084: flag=_wrap_ModelLoader_loadModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
   case 1085: flag=_wrap_ModelLoader_loadModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
