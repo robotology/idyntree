@@ -718,6 +718,8 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
                          -1.0);
         }
     }
+
+    return true;
 }
 
 bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY)
