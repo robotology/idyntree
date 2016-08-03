@@ -8,6 +8,9 @@
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
 
+#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/EigenHelpers.h>
+
 #include <cassert>
 #include <deque>
 
@@ -546,6 +549,45 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
 
     return true;
 }
+
+bool Model::getInertialParameters(VectorDynSize& modelInertialParams) const
+{
+    // Resize vector if necessary
+    if( modelInertialParams.size() != this->getNrOfLinks()*10 )
+    {
+        modelInertialParams.resize(10*this->getNrOfLinks());
+    }
+
+    for(LinkIndex linkIdx = 0; linkIdx < this->getNrOfLinks(); linkIdx++ )
+    {
+        Vector10       inertiaParamsBuf = links[linkIdx].inertia().asVector();
+
+        toEigen(modelInertialParams).segment<10>(10*linkIdx) = toEigen(inertiaParamsBuf);
+    }
+
+    return true;
+}
+
+
+bool Model::updateInertialParameters(const VectorDynSize& modelInertialParams)
+{
+    if( modelInertialParams.size() != this->getNrOfLinks()*10 )
+    {
+        reportError("Model","updateInertialParameters","modelInertialParams has the wrong number of parameters");
+        return false;
+    }
+
+    for(LinkIndex linkIdx = 0; linkIdx < this->getNrOfLinks(); linkIdx++ )
+    {
+        Vector10       inertiaParamsBuf;
+        toEigen(inertiaParamsBuf) = toEigen(modelInertialParams).segment<10>(10*linkIdx);
+
+        links[linkIdx].inertia().fromVector(inertiaParamsBuf);
+    }
+
+    return true;
+}
+
 
 std::string Model::toString() const
 {

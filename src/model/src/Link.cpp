@@ -15,10 +15,17 @@ Link::Link(): m_index(LINK_INVALID_INDEX)
 
 }
 
-Link::~Link()
+SpatialInertia& Link::inertia()
 {
-
+    return m_inertia;
 }
+
+const SpatialInertia& Link::inertia() const
+{
+    return m_inertia;
+}
+
+
 
 void Link::setInertia(SpatialInertia& _inertia)
 {
