@@ -38,9 +38,7 @@ if(NOT IDYNTREE_ONLY_DOCS)
 
     if(IDYNTREE_USES_YARP)
         find_package(YARP REQUIRED)
-        if (YARP_HAS_MATH_LIB)
-            message(STATUS "found libYARP_math")
-        else(YARP_HAS_MATH_LIB)
+        if (NOT YARP_HAS_MATH_LIB)
             message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
         endif(YARP_HAS_MATH_LIB)
     endif()
@@ -53,6 +51,12 @@ if(NOT IDYNTREE_ONLY_DOCS)
         include(OrocosKDLFindLogic)
         find_package(orocos_kdl REQUIRED)
         find_package(TinyXML    REQUIRED)
+    else()
+        # If KDL is not used, an external TinyXML is not compulsory
+        # (because no public headers contain TinyXML includes)
+        # and so we can use the internal copy of TinyXML, see logic
+        # in extern/CMakeLists.txt
+        find_package(TinyXML)
     endif()
 
     # Add external libraries that are embedded in iDynTree

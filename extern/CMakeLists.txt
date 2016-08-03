@@ -12,7 +12,6 @@
 # copy of TinyXML, given that we don't include it in
 # our public headers
 if(NOT IDYNTREE_USES_KDL)
-    find_package(TinyXML)
     # If no TinyXML is found in the system, use the internal one
     if(NOT TinyXML_FOUND)
         # TinyXML
