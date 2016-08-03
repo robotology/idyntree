@@ -1,3 +1,3 @@
 function varargout = ArticulatedBodyAlgorithm(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(956, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(970, varargin{:});
 end

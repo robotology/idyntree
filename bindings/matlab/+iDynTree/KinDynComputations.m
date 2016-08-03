@@ -9,82 +9,82 @@ classdef KinDynComputations < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1165, varargin{:});
+        tmp = iDynTreeMEX(1247, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1166, self);
+        iDynTreeMEX(1248, self);
         self.swigPtr=[];
       end
     end
     function varargout = loadRobotModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1167, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1249, self, varargin{:});
     end
     function varargout = loadRobotModelFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1168, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1250, self, varargin{:});
     end
     function varargout = loadRobotModelFromString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1169, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1251, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1170, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1252, self, varargin{:});
     end
     function varargout = getNrOfDegreesOfFreedom(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1171, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1253, self, varargin{:});
     end
     function varargout = getDescriptionOfDegreeOfFreedom(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1172, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1254, self, varargin{:});
     end
     function varargout = getDescriptionOfDegreesOfFreedom(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1173, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1255, self, varargin{:});
     end
     function varargout = getNrOfLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1174, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1256, self, varargin{:});
     end
     function varargout = getNrOfFrames(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1175, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1257, self, varargin{:});
     end
     function varargout = getFloatingBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1176, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1258, self, varargin{:});
     end
     function varargout = setFloatingBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1177, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1259, self, varargin{:});
     end
     function varargout = getRobotModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1178, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1260, self, varargin{:});
     end
     function varargout = setRobotState(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1179, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1261, self, varargin{:});
     end
     function varargout = getWorldBaseTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1180, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1262, self, varargin{:});
     end
     function varargout = getBaseTwist(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1181, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1263, self, varargin{:});
     end
     function varargout = getJointPos(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1182, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1264, self, varargin{:});
     end
     function varargout = getJointVel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1183, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1265, self, varargin{:});
     end
     function varargout = getFrameIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1184, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1266, self, varargin{:});
     end
     function varargout = getFrameName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1185, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1267, self, varargin{:});
     end
     function varargout = getWorldTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1186, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1268, self, varargin{:});
     end
     function varargout = getRelativeTransformExplicit(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1187, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1269, self, varargin{:});
     end
     function varargout = getRelativeTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1188, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1270, self, varargin{:});
     end
   end
   methods(Static)
