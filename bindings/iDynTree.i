@@ -97,7 +97,7 @@ namespace std {
 
 // Model loading from external formats
 #include "iDynTree/ModelIO/URDFModelImport.h"
-#include "iDynTree/ModelIO/URDFSensorsImport.h"
+#include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 #include "iDynTree/ModelIO/ModelLoader.h"
 
 // Estimation related classes
@@ -268,7 +268,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // Model loading from external formats
 %include "iDynTree/ModelIO/URDFModelImport.h"
-%include "iDynTree/ModelIO/URDFSensorsImport.h"
+%include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 %include "iDynTree/ModelIO/ModelLoader.h"
 
 // Estimation related classes
