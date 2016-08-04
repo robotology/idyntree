@@ -40,7 +40,7 @@ if(NOT IDYNTREE_ONLY_DOCS)
         find_package(YARP REQUIRED)
         if (NOT YARP_HAS_MATH_LIB)
             message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
-        endif(YARP_HAS_MATH_LIB)
+        endif()
     endif()
 
     if(IDYNTREE_USES_ICUB_MAIN)
