@@ -2,7 +2,6 @@
  * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
  * Authors: Silvio Traversaro
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
- *
  */
 
 #ifndef IDYNTREE_ESTIMATION_EXTWRENCHESANDJOINTTORQUEESTIMATOR_H
@@ -56,15 +55,9 @@ class ExtWrenchesAndJointTorquesEstimator
 
     /**
      * Vector of Traversal used for the kinematic computations.
-     * m_kinematicTraversals[l] contains the traversal with base link l .
+     * m_kinematicTraversals.getTraversalWithLinkAsBase(l) contains the traversal with base link l .
      */
-    std::vector<Traversal *> m_kinematicTraversals;
-
-    /**
-     * Helper functions for dealing with the kinematic traversal dynamic allocation
-     */
-    void allocKinematicTraversals(const size_t nrOfLinks);
-    void freeKinematicTraversals();
+    LinkTraversalsCache m_kinematicTraversals;
 
     JointPosDoubleArray m_jointPos;
     LinkVelArray m_linkVels;
@@ -291,7 +284,7 @@ public:
      * @param[out] netWrenches the vector of link net wrenches.
      * @return true if all went ok, false otherwise.
      */
-    bool estimateLinkNetWrenchesWithoutGravity(LinkNetWrenchesWithoutGravity & netWrenches);
+    bool estimateLinkNetWrenchesWithoutGravity(LinkNetTotalWrenchesWithoutGravity & netWrenches);
 
 };
 

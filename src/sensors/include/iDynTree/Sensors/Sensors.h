@@ -72,6 +72,21 @@ namespace iDynTree {
         return !isLinkSensor(type);
     }
 
+    inline unsigned int getSensorTypeSize(const SensorType type)
+    {
+        switch(type)
+        {
+            case SIX_AXIS_FORCE_TORQUE:
+                return 6;
+            case ACCELEROMETER:
+            case GYROSCOPE:
+                return 3;
+            default:
+                return 0;
+        }
+    }
+
+
     /**
      * Interface for Sensor classes in iDynTree .
      *
@@ -294,6 +309,11 @@ namespace iDynTree {
              */
             int getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name) const;
 
+            /**
+             * Get the total size of sensor measurements.
+             */
+            size_t getSizeOfAllSensorsMeasurements() const;
+
 
             /**
              * Get the pointer to the sensor of index sensor_index and of type sensor_type
@@ -401,7 +421,12 @@ namespace iDynTree {
                                 const unsigned int & sensor_index,
                                 iDynTree::AngVelocity &measurement) const;
 
-
+            /**
+             * Get the total size of sensor measurements.
+             *
+             * \note this is the size of vector returned by toVector.
+             */
+            size_t getSizeOfAllSensorsMeasurements() const;
     };
 
 

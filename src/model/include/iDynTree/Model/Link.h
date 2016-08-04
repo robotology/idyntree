@@ -35,10 +35,15 @@ namespace iDynTree
         Link();
 
         /**
-         * Destructor
-         *
+         * Low-level accessor to the link inertia.
          */
-        virtual ~Link();
+        SpatialInertia & inertia();
+
+
+        /**
+         * Low-level const accessor to the link inertia.
+         */
+        const SpatialInertia & inertia() const;
 
         /**
          * Set the spatial inertia of the link,
@@ -46,10 +51,8 @@ namespace iDynTree
          * (i.e. with respect to the link reference
          *  frame origin and with the orientation
          *  of the link reference frame).
-         *
-         *
          */
-        virtual void setInertia(SpatialInertia & _inertia);
+        void setInertia(SpatialInertia & _inertia);
 
         /**
          * Get the spatial inertia of the link,
@@ -60,17 +63,17 @@ namespace iDynTree
          *
          * @return a reference to the inertia of the link.
          */
-        virtual const SpatialInertia & getInertia() const;
+        const SpatialInertia & getInertia() const;
 
         /**
          * Set the index of the link.
          */
-        virtual void setIndex(LinkIndex & _index);
+        void setIndex(LinkIndex & _index);
 
         /**
          * Get the index of the link.
          */
-        virtual LinkIndex getIndex() const;
+        LinkIndex getIndex() const;
     };
 
     typedef Link * LinkPtr;

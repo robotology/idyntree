@@ -12,6 +12,8 @@
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model/LinkState.h>
 
 #include <iDynTree/Core/TestUtils.h>
 
@@ -151,6 +153,34 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     }
 
     return model;
+}
+
+/**
+ * Get random robot positions, velocities and accelerations
+ * and external wrenches to be given as an input to InverseDynamics.
+ */
+inline bool getRandomInverseDynamicsInputs(FreeFloatingPos& pos,
+                                           FreeFloatingVel& vel,
+                                           FreeFloatingAcc& acc,
+                                           LinkNetExternalWrenches& extWrenches)
+{
+    pos.worldBasePos() =  getRandomTransform();
+    vel.baseVel() = getRandomTwist();
+    acc.baseAcc() =  getRandomTwist();
+
+
+    for(unsigned int jnt=0; jnt < pos.getNrOfPosCoords(); jnt++)
+    {
+        pos.jointPos()(jnt) = getRandomDouble();
+    }
+
+    for(unsigned int jnt=0; jnt < vel.getNrOfDOFs(); jnt++)
+    {
+        vel.jointVel()(jnt) = getRandomDouble();
+        acc.jointAcc()(jnt) = getRandomDouble();
+    }
+
+    return true;
 }
 
 }

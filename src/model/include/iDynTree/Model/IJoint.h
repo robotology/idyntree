@@ -199,8 +199,8 @@ namespace iDynTree
                                            const LinkIndex child, const LinkIndex parent) const = 0;
 
         /**
-         * Compute the velocity and acceleration of linkA,
-         * given the velocty and acceleration of linkB and
+         * Compute the velocity and acceleration of child,
+         * given the velocty and acceleration of parent and
          * the joint position, velocity and acceleration.
          *
          */
@@ -210,6 +210,17 @@ namespace iDynTree
                                         LinkVelArray & linkVels,
                                         LinkAccArray & linkAccs,
                                         const LinkIndex child, const LinkIndex parent) const = 0;
+
+        /**
+         * Compute the velocity of child,
+         * given the velocty of parent  and
+         * the joint position, velocity.
+         */
+        virtual void computeChildVel(const VectorDynSize & jntPos,
+                                     const VectorDynSize & jntVel,
+                                     LinkVelArray & linkVels,
+                                     const LinkIndex child,
+                                     const LinkIndex parent) const = 0;
 
         /**
          * Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies

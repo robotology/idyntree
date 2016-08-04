@@ -16,7 +16,9 @@ set(IDYNTREE_TESTS_URDFS icub.urdf
                          icubTwoLinks.urdf
                          robotModelTestTwoLinks.urdf
                          iCubGenova02.urdf
-                         iCubDarmstadt01.urdf)
+                         iCubDarmstadt01.urdf
+                         twoLinksWithoutBaseSensors.urdf
+                         twoLinksRotationOnZAxis.urdf)
 
 
 # configure an header containing the path

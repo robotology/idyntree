@@ -41,7 +41,7 @@ with your GitHub account, and you will automatically receive notifications if yo
 * If you add a instantiated template, remember to add it to swig with the `%template` SWIG command. 
 * Regenerate the MATLAB bindings, following the instructions in https://github.com/robotology/idyntree#matlab-bindings-modifications . 
 * (Optional) Add a new matlab test testing the new code in `bindings/matlab/tests`. 
-  * You should add a script named `testNameOfTheTest.m` and then add it to the `runiDynTreeTests.m` script. 
+  * The structure of tests in `bindings/matlab/tests` uses [MOxUnit](https://github.com/MOxUnit/MOxUnit) a unit test framework for Matlab and Octave. Please see the MOxUnit documentation and existing tests for understanding the structure of the tests. As the tests are run by `Travis` also on Octave, please make sure that your tests do not use Matlab-specific features.
 * Run matlab tests with `ctest -VV -R matlab` in the build directory, and check that they are running file. 
 * Commit the updated version of the bindings by adding everything inside the `bindings/matlab` directory, with commit message `[bindings] update matlab bindings`. 
 

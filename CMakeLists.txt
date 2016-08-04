@@ -31,70 +31,67 @@ endif()
 include(iDynTreeOptions)
 
 if(NOT IDYNTREE_ONLY_DOCS)
-# Find dependecies
+    # Find dependecies
 
-# Eigen is compulsory
-find_package(Eigen3 REQUIRED)
+    # Eigen is compulsory
+    find_package(Eigen3 REQUIRED)
 
-if(IDYNTREE_USES_YARP)
-    find_package(YARP REQUIRED)
-    if (YARP_HAS_MATH_LIB)
-        message(STATUS "found libYARP_math")
-    else(YARP_HAS_MATH_LIB)
-        message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
-    endif(YARP_HAS_MATH_LIB)
-endif()
-
-if(IDYNTREE_USES_ICUB_MAIN)
-    find_package(ICUB REQUIRED)
-endif()
-
-if(IDYNTREE_USES_KDL)
-    include(OrocosKDLFindLogic)
-    find_package(orocos_kdl REQUIRED)
-    find_package(TinyXML    REQUIRED)
-endif()
-
-# An external TinyXML is compulsory if compiling
-# with KDL support enabled, because KDL uses urdfdom
-# that include TinyXML in its public headers.
-# If KDL is not enabled, we can use also the internal
-# copy of TinyXML, given that we don't include it in
-# our public headers
-if(NOT IDYNTREE_USES_KDL)
-    find_package(TinyXML)
-    # If no TinyXML is found in the system, use the internal one
-    if(NOT TinyXML_FOUND)
-        add_subdirectory(extern)
+    if(IDYNTREE_USES_YARP)
+        find_package(YARP REQUIRED)
+        if (NOT YARP_HAS_MATH_LIB)
+            message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
+        endif(YARP_HAS_MATH_LIB)
     endif()
-endif()
 
+    if(IDYNTREE_USES_ICUB_MAIN)
+        find_package(ICUB REQUIRED)
+    endif()
 
-include(AddInstallRPATHSupport)
-add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
-                          LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
-                          DEPENDS IDYNTREE_ENABLE_RPATH
-                          USE_LINK_PATH)
+    if(IDYNTREE_USES_KDL)
+        include(OrocosKDLFindLogic)
+        find_package(orocos_kdl REQUIRED)
+        find_package(TinyXML    REQUIRED)
+    else()
+        # If KDL is not used, an external TinyXML is not compulsory
+        # (because no public headers contain TinyXML includes)
+        # and so we can use the internal copy of TinyXML, see logic
+        # in extern/CMakeLists.txt
+        find_package(TinyXML)
+    endif()
 
-# add the actual components of the library
-add_subdirectory(src)
+    # Add external libraries that are embedded in iDynTree
+    # source tree, if necessary (by default does not adds
+    # anything) feel free to check teh logic inside
+    add_subdirectory(extern)
 
-include(InstallBasicPackageFiles)
-install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
-                                     VERSION ${${VARS_PREFIX}_VERSION}
-                                     COMPATIBILITY SameMajorVersion
-                                     TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
-                                     NO_CHECK_REQUIRED_COMPONENTS_MACRO)
+    include(AddInstallRPATHSupport)
+    add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
+                            LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
+                            DEPENDS IDYNTREE_ENABLE_RPATH
+                            USE_LINK_PATH)
 
-include(AddUninstallTarget)
+    # add the actual components of the library
+    add_subdirectory(src)
 
-add_subdirectory(bindings)
+    include(InstallBasicPackageFiles)
+    install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
+                                        VERSION ${${VARS_PREFIX}_VERSION}
+                                        COMPATIBILITY SameMajorVersion
+                                        TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
+                                        NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 
-# Add reminder to remove include_directories(SYSTEM as soon as we depend on CMake 2.8.12
-if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 2.8.12)
-    message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. include_directories(SYSTEM ..) can be substituted by target_include_directories(SYSTEM ...).")
-endif()
+    include(AddUninstallTarget)
 
+    add_subdirectory(bindings)
+
+    # Add reminder to remove include_directories(SYSTEM as soon as we depend on CMake 2.8.12
+    if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 2.8.12)
+        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. include_directories(SYSTEM ..) can be substituted by target_include_directories(SYSTEM ...).")
+    endif()
+
+    if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 3.0)
+        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. Multiline string are now supported,so we can have a readable matlab/octave test script.")
+    endif()
 endif()
 
 # add a dox target to generate doxygen documentation

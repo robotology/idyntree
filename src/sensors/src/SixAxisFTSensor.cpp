@@ -22,6 +22,8 @@
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/Link.h>
 
+#include <iDynTree/Core/EigenHelpers.h>
+
 
 #include <cassert>
 
@@ -278,6 +280,91 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
         return false;
     }
 }
+
+bool SixAxisForceTorqueSensor::getWrenchAppliedOnLinkMatrix(const LinkIndex link_index,
+                                                            Matrix6x6& wrench_applied_on_link_matrix) const
+{
+    assert(this->isValid());
+
+    if( link_index == this->pimpl->link1 )
+    {
+        Transform & link_H_sensor = this->pimpl->link1_H_sensor;
+        // If the measure wrench is the one applied on the other link, change sign
+        if( this->getAppliedWrenchLink() != link_index )
+        {
+            toEigen(wrench_applied_on_link_matrix) = -toEigen(link_H_sensor.asAdjointTransformWrench());
+        }
+        else
+        {
+            toEigen(wrench_applied_on_link_matrix) = toEigen(link_H_sensor.asAdjointTransformWrench());
+        }
+
+        return true;
+    }
+    else if( link_index == this->pimpl->link2 )
+    {
+        Transform & link_H_sensor = this->pimpl->link2_H_sensor;
+
+        if( this->getAppliedWrenchLink() != link_index )
+        {
+            toEigen(wrench_applied_on_link_matrix) = -toEigen(link_H_sensor.asAdjointTransformWrench());
+        }
+        else
+        {
+            toEigen(wrench_applied_on_link_matrix) = toEigen(link_H_sensor.asAdjointTransformWrench());
+        }
+
+        return true;
+    }
+    else
+    {
+        wrench_applied_on_link_matrix.zero();
+        return false;
+    }
+}
+
+bool SixAxisForceTorqueSensor::getWrenchAppliedOnLinkInverseMatrix(const LinkIndex link_index,
+                                                                   Matrix6x6& wrench_applied_on_link_inverse_matrix) const
+{
+    assert(this->isValid());
+
+    if( link_index == this->pimpl->link1 )
+    {
+        Transform sensor_H_link = this->pimpl->link1_H_sensor.inverse();
+        // If the measure wrench is the one applied on the other link, change sign
+        if( this->getAppliedWrenchLink() != link_index )
+        {
+            toEigen(wrench_applied_on_link_inverse_matrix) = -toEigen(sensor_H_link.asAdjointTransformWrench());
+        }
+        else
+        {
+            toEigen(wrench_applied_on_link_inverse_matrix) = toEigen(sensor_H_link.asAdjointTransformWrench());
+        }
+
+        return true;
+    }
+    else if( link_index == this->pimpl->link2 )
+    {
+        Transform sensor_H_link = this->pimpl->link2_H_sensor.inverse();
+
+        if( this->getAppliedWrenchLink() != link_index )
+        {
+            toEigen(wrench_applied_on_link_inverse_matrix) = -toEigen(sensor_H_link.asAdjointTransformWrench());
+        }
+        else
+        {
+            toEigen(wrench_applied_on_link_inverse_matrix) = toEigen(sensor_H_link.asAdjointTransformWrench());
+        }
+
+        return true;
+    }
+    else
+    {
+        wrench_applied_on_link_inverse_matrix.zero();
+        return false;
+    }
+}
+
 
 LinkIndex SixAxisForceTorqueSensor::getFirstLinkIndex() const
 {

@@ -59,7 +59,6 @@ ExtWrenchesAndJointTorquesEstimator::ExtWrenchesAndJointTorquesEstimator():
 
 ExtWrenchesAndJointTorquesEstimator::~ExtWrenchesAndJointTorquesEstimator()
 {
-    freeKinematicTraversals();
 }
 
 
@@ -77,24 +76,6 @@ void getFTJointNames(const SensorsList & _sensors,
     return;
 }
 
-void ExtWrenchesAndJointTorquesEstimator::allocKinematicTraversals(const size_t nrOfLinks)
-{
-    m_kinematicTraversals.resize(nrOfLinks);
-    for(size_t link=0; link < m_kinematicTraversals.size(); link++)
-    {
-        m_kinematicTraversals[link] = new Traversal();
-    }
-}
-
-void ExtWrenchesAndJointTorquesEstimator::freeKinematicTraversals()
-{
-    for(size_t link=0; link < m_kinematicTraversals.size(); link++)
-    {
-        delete m_kinematicTraversals[link];
-    }
-    m_kinematicTraversals.resize(0);
-}
-
 
 bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model,
                                                              const SensorsList& _sensors)
@@ -105,8 +86,7 @@ bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model
 
     // resize the data structures
     m_model.computeFullTreeTraversal(m_dynamicTraversal);
-    freeKinematicTraversals();
-    allocKinematicTraversals(m_model.getNrOfLinks());
+    m_kinematicTraversals.resize(m_model);
 
 
     m_linkVels.resize(m_model);
@@ -203,9 +183,13 @@ bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifi
     Model _modelReduced;
     SensorsList _sensorsReduced;
 
-    //
-    iDynTree::createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
+    parsingCorrect = createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
 
+    if( !parsingCorrect )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFileWithSpecifiedDOFs","Error in creating reduced model and sensors.");
+        return false;
+    }
 
     return setModelAndSensors(_modelReduced,_sensorsReduced);
 }
@@ -275,55 +259,39 @@ bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const
     // Get link of the specified frame
     LinkIndex floatingLinkIndex = m_model.getFrameLink(floatingFrame);
 
-    // Build the traversal if it is not present
-    if( m_kinematicTraversals[floatingLinkIndex]->getNrOfVisitedLinks() == 0 )
-    {
-        m_model.computeFullTreeTraversal(*m_kinematicTraversals[floatingLinkIndex],floatingLinkIndex);
-    }
-
     // To initialize the kinematic propagation, we should first convert the kinematics
     // information from the frame in which they are specified to the main frame of the link
     Transform link_H_frame = m_model.getFrameTransform(floatingFrame);
 
+    // Convert the twist from the additional  frame to the link frame
     Twist      base_vel_frame, base_vel_link;
-    SpatialAcc base_acc_frame, base_acc_link;
-    ClassicalAcc  base_classical_acc_link;
-
     Vector3 zero3;
     zero3.zero();
-
     base_vel_frame.setLinearVec3(zero3);
     base_vel_frame.setAngularVec3(angularVel);
-
     base_vel_link = link_H_frame*base_vel_frame;
 
+    // Convert the acceleration from the additional  frame to the link frame
+    SpatialAcc base_acc_frame, base_acc_link;
+    ClassicalAcc  base_classical_acc_link;
     base_acc_frame.setLinearVec3(properClassicalLinearAcceleration);
     base_acc_frame.setAngularVec3(angularAcc);
-
     base_acc_link = link_H_frame*base_acc_frame;
-
     base_classical_acc_link.fromSpatial(base_acc_link,base_vel_link);
 
     // Propagate the kinematics information
-    bool ok = dynamicsEstimationForwardVelAccKinematics(m_model,*(m_kinematicTraversals[floatingLinkIndex]),
-                                                     base_classical_acc_link.getLinearVec3(),
-                                                     base_vel_link.getAngularVec3(),
-                                                     base_classical_acc_link.getAngularVec3(),
-                                                     jointPos,jointVel,jointAcc,
-                                                     m_linkVels,m_linkProperAccs);
+    bool ok = dynamicsEstimationForwardVelAccKinematics(m_model,m_kinematicTraversals.getTraversalWithLinkAsBase(m_model,floatingLinkIndex),
+                                                        base_classical_acc_link.getLinearVec3(),
+                                                        base_vel_link.getAngularVec3(),
+                                                        base_classical_acc_link.getAngularVec3(),
+                                                        jointPos,jointVel,jointAcc,
+                                                        m_linkVels,m_linkProperAccs);
 
     // Store joint positions
     m_jointPos = jointPos;
 
-    if( !ok )
-    {
-        return false;
-    }
-    else
-    {
-        m_isKinematicsUpdated = true;
-        return true;
-    }
+    m_isKinematicsUpdated = ok;
+    return ok;
 }
 
 bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(const LinkUnknownWrenchContacts& unknowns,
@@ -508,7 +476,7 @@ bool ExtWrenchesAndJointTorquesEstimator::checkThatTheModelIsStill(const double 
     return isStill;
 }
 
-bool ExtWrenchesAndJointTorquesEstimator::estimateLinkNetWrenchesWithoutGravity(LinkNetWrenchesWithoutGravity& netWrenches)
+bool ExtWrenchesAndJointTorquesEstimator::estimateLinkNetWrenchesWithoutGravity(LinkNetTotalWrenchesWithoutGravity& netWrenches)
 {
    if( !m_isModelValid )
     {

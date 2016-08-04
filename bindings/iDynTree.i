@@ -88,9 +88,6 @@ namespace std {
 #include "iDynTree/Model/ForwardKinematics.h"
 #include "iDynTree/Model/Dynamics.h"
 
-// Model loading from external formats
-#include "iDynTree/ModelIO/URDFModelImport.h"
-
 // Sensors related data structures
 #include "iDynTree/Sensors/Sensors.h"
 #include "iDynTree/Sensors/SixAxisFTSensor.h"
@@ -98,12 +95,16 @@ namespace std {
 #include "iDynTree/Sensors/GyroscopeSensor.h"
 #include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
-// Sensors loading from external formats
-#include "iDynTree/ModelIO/URDFSensorsImport.h"
+// Model loading from external formats
+#include "iDynTree/ModelIO/URDFModelImport.h"
+#include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
+#include "iDynTree/ModelIO/ModelLoader.h"
 
 // Estimation related classes
 #include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
 #include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
+#include "iDynTree/Estimation/SimpleLeggedOdometry.h"
+#include "iDynTree/Estimation/BerdyHelper.h"
 
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
@@ -256,9 +257,6 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Model/ForwardKinematics.h"
 %include "iDynTree/Model/Dynamics.h"
 
-// Model loading from external formats
-%include "iDynTree/ModelIO/URDFModelImport.h"
-
 // Sensors related data structures
 %include "iDynTree/Sensors/Sensors.h"
 %include "iDynTree/Sensors/SixAxisFTSensor.h"
@@ -268,13 +266,16 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 %include "sensors.i"
 
-// Sensors loading from external formats
-%include "iDynTree/ModelIO/URDFSensorsImport.h"
-
+// Model loading from external formats
+%include "iDynTree/ModelIO/URDFModelImport.h"
+%include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
+%include "iDynTree/ModelIO/ModelLoader.h"
 
 // Estimation related classes
 %include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
 %include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
+%include "iDynTree/Estimation/SimpleLeggedOdometry.h"
+%include "iDynTree/Estimation/BerdyHelper.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"
