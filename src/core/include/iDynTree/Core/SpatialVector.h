@@ -67,7 +67,7 @@ SpatialVectorSemantics<LinearVec3SemanticsT, AngularVec3SemanticsT>
     /**
      * Helper structure for dual space definition
      */
-    template <typename SpatialVectorT> struct DualSpace {};
+    template <class SpatialVectorT> struct DualSpace {};
 
     template <> struct DualSpace<SpatialMotionVector> {typedef SpatialForceVector Type;};
 
@@ -100,6 +100,7 @@ SpatialVector<DerivedSpatialVecT>
     public:
         typedef typename SpatialMotionForceVectorT_traits<DerivedSpatialVecT>::LinearVector3Type LinearVector3T;
         typedef typename SpatialMotionForceVectorT_traits<DerivedSpatialVecT>::AngularVector3Type AngularVector3T;
+        typedef typename DualSpace<DerivedSpatialVecT>::Type DualVectorT;
 
     protected:
         LinearVector3T linearVec3;
@@ -148,7 +149,7 @@ SpatialVector<DerivedSpatialVecT>
         /**
          * dot product
          */
-        double dot(const typename DualSpace<DerivedSpatialVecT>::Type & other) const;
+        double dot(const DualVectorT & other) const;
 
         /**
          * overloaded operators
@@ -389,7 +390,7 @@ SpatialVector<DerivedSpatialVecT>
 
     // dot product
     SPATIALVECTOR_TEMPLATE_HDR
-    double SPATIALVECTOR_INSTANCE_HDR::dot(const typename DualSpace<DerivedSpatialVecT>::Type & other) const
+    double SPATIALVECTOR_INSTANCE_HDR::dot(const DualVectorT & other) const
     {
         return (this->getLinearVec3().dot(other.getLinearVec3())
              + this->getAngularVec3().dot(other.getAngularVec3()));
