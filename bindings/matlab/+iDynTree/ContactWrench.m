@@ -3,18 +3,18 @@ classdef ContactWrench < SwigRef
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
     end
-    function varargout = contactPoint(self,varargin)
+    function varargout = contactId(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(929, self, varargin{:});
     end
-    function varargout = contactWrench(self,varargin)
+    function varargout = contactPoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(930, self, varargin{:});
     end
-    function varargout = contactId(self,varargin)
+    function varargout = contactWrench(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(931, self, varargin{:});
     end
     function self = ContactWrench(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if ~isnull(varargin{1})
+        if varargin{1}~=SwigRef.Null
           self.swigPtr = varargin{1}.swigPtr;
         end
       else

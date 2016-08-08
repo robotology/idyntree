@@ -3,7 +3,7 @@ classdef RotationalInertiaRaw < iDynTree.Matrix3x3
     function self = RotationalInertiaRaw(varargin)
       self@iDynTree.Matrix3x3(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if ~isnull(varargin{1})
+        if varargin{1}~=SwigRef.Null
           self.swigPtr = varargin{1}.swigPtr;
         end
       else

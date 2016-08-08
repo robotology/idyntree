@@ -3,7 +3,7 @@ classdef ClassicalAcc < iDynTree.Vector6
     function self = ClassicalAcc(varargin)
       self@iDynTree.Vector6(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if ~isnull(varargin{1})
+        if varargin{1}~=SwigRef.Null
           self.swigPtr = varargin{1}.swigPtr;
         end
       else

@@ -5,7 +5,7 @@ classdef SpatialMotionVectorSemanticsBase < SwigRef
     end
     function self = SpatialMotionVectorSemanticsBase(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if ~isnull(varargin{1})
+        if varargin{1}~=SwigRef.Null
           self.swigPtr = varargin{1}.swigPtr;
         end
       else

@@ -1,5 +1,5 @@
 classdef SwigRef < handle
-  properties(Hidden = true, Access = public) 
+  properties 
     swigPtr
   end
   methods(Static = true, Access = protected)
@@ -12,9 +12,6 @@ classdef SwigRef < handle
     end
   end
   methods
-    function b = isnull(self)
-      b = isempty(self.swigPtr);
-    end
     function disp(self)
       disp(sprintf('<Swig object, ptr=%d>',self.swigPtr))
     end
@@ -45,12 +42,6 @@ classdef SwigRef < handle
       else
         self = builtin('subsasgn',self,s,v);
       end
-    end
-    function SwigSet(self,ptr)
-        self.swigPtr = ptr;
-    end
-    function ptr = SwigGet(self)
-        ptr = self.swigPtr;
     end
   end
 end
