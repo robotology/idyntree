@@ -9,6 +9,8 @@
 
 #include <iDynTree/Core/EigenHelpers.h>
 
+#include <iDynTree/Model/ForwardKinematics.h>
+#include <iDynTree/Model/Dynamics.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Sensors/Sensors.h>
@@ -1111,6 +1113,59 @@ bool BerdyHelper::serializeDynamicVariables(LinkProperAccArray& properAccs,
 
     return true;
 }
+
+bool BerdyHelper::serializeDynamicVariablesComputedFromFixedBaseRNEA(JointDOFsDoubleArray& jointAccs,
+                                                                     LinkNetExternalWrenches& netExtWrenches,
+                                                                     VectorDynSize& d)
+{
+    assert(jointAccs.size() == this->m_model.getNrOfDOFs());
+    assert(netExtWrenches.isConsistent(this->m_model));
+
+    LinkInternalWrenches intWrenches(this->m_model);
+    FreeFloatingGeneralizedTorques genTrqs(this->m_model);
+
+    LinkVelArray linkVels(this->m_model);
+    LinkAccArray linkProperAccs(this->m_model);
+
+
+    Vector3 baseProperAcc;
+    toEigen(baseProperAcc) = -toEigen(m_gravity);
+    Vector3 zeroVec;
+    zeroVec.zero();
+    dynamicsEstimationForwardVelAccKinematics(m_model,m_dynamicsTraversal,
+                                                        baseProperAcc,
+                                                        zeroVec,
+                                                        zeroVec,
+                                                        m_jointPos,
+                                                        m_jointVel,
+                                                        jointAccs,
+                                                        linkVels,
+                                                        linkProperAccs);
+
+    RNEADynamicPhase(m_model,m_dynamicsTraversal,
+                     m_jointPos,linkVels,linkProperAccs,
+                     netExtWrenches,intWrenches,genTrqs);
+
+    // Generate the d vector of dynamical variables
+    assert(d.size() == this->getNrOfDynamicVariables());
+
+    // LinkNewInternalWrenches (necessary for the old-style berdy)
+    LinkNetTotalWrenchesWithoutGravity linkNetWrenchesWithoutGravity(this->model());
+
+    for(LinkIndex visitedLinkIndex = 0; visitedLinkIndex < this->model().getNrOfLinks(); visitedLinkIndex++)
+     {
+         LinkConstPtr visitedLink = this->model().getLink(visitedLinkIndex);
+
+         const iDynTree::SpatialInertia & I = visitedLink->getInertia();
+         const iDynTree::SpatialAcc     & properAcc = linkProperAccs(visitedLinkIndex);
+         const iDynTree::Twist          & v = linkVels(visitedLinkIndex);
+         linkNetWrenchesWithoutGravity(visitedLinkIndex) = I*properAcc + v*(I*v);
+     }
+
+     return serializeDynamicVariables(linkProperAccs,linkNetWrenchesWithoutGravity,netExtWrenches,
+                                      intWrenches,genTrqs.jointTorques(),jointAccs,d);
+}
+
 
 bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
                                            LinkNetExternalWrenches& netExtWrenches,

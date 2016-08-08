@@ -202,7 +202,7 @@ public:
     std::vector<std::string> jointOnWhichTheInternalWrenchIsMeasured;
 
     /**
-     * Check that the options are not self-contradicting. 
+     * Check that the options are not self-contradicting.
      */
     bool checkConsistency();
 };
@@ -485,6 +485,15 @@ public:
                                   JointDOFsDoubleArray    & jointAccs,
                                   LinkInternalWrenches    & linkJointWrenches,
                                   VectorDynSize& y);
+
+    /**
+     * Debug function:
+     *
+     * \note This method has been added for debug, and could be removed soon.
+     */
+    bool serializeDynamicVariablesComputedFromFixedBaseRNEA(JointDOFsDoubleArray  & jointAccs,
+                                                            LinkNetExternalWrenches & netExtWrenches,
+                                                            VectorDynSize& d);
 
     /**
       * @name Methods to submit the input data for dynamics computations.
