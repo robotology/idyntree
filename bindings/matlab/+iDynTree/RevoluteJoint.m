@@ -3,7 +3,7 @@ classdef RevoluteJoint < iDynTree.MovableJointImpl1
     function self = RevoluteJoint(varargin)
       self@iDynTree.MovableJointImpl1(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if varargin{1}~=SwigRef.Null
+        if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else

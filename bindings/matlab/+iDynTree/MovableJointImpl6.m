@@ -33,7 +33,7 @@ classdef MovableJointImpl6 < iDynTree.IJoint
     function self = MovableJointImpl6(varargin)
       self@iDynTree.IJoint(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if varargin{1}~=SwigRef.Null
+        if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else

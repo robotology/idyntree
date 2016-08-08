@@ -21,25 +21,25 @@ classdef StringVector < SwigRef
     function varargout = size(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(26, self, varargin{:});
     end
-    function varargout = clear(self,varargin)
+    function varargout = swap(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(27, self, varargin{:});
     end
-    function varargout = swap(self,varargin)
+    function varargout = begin(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(28, self, varargin{:});
     end
-    function varargout = get_allocator(self,varargin)
+    function varargout = end(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(29, self, varargin{:});
     end
-    function varargout = begin(self,varargin)
+    function varargout = rbegin(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(30, self, varargin{:});
     end
-    function varargout = end(self,varargin)
+    function varargout = rend(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(31, self, varargin{:});
     end
-    function varargout = rbegin(self,varargin)
+    function varargout = clear(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(32, self, varargin{:});
     end
-    function varargout = rend(self,varargin)
+    function varargout = get_allocator(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(33, self, varargin{:});
     end
     function varargout = pop_back(self,varargin)
@@ -50,7 +50,7 @@ classdef StringVector < SwigRef
     end
     function self = StringVector(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
-        if varargin{1}~=SwigRef.Null
+        if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
