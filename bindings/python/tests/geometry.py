@@ -4,11 +4,12 @@
 
 import sys
 
-# This test is mean to be executed from the build,
+# This test is meant to be executed from the build,
 # so we add in sys.path the location of iDynTree.py and _iDynTree.so
-# TODO: this probably does not work on Windows or XCode, fix it
+# TODO: this probably does not work on Windows, fix it
 sys.path.append("../../python/");
 sys.path.append("../../../lib/python/");
+sys.path.append("../../../lib/python/Debug/");
 
 
 import unittest
@@ -66,10 +67,8 @@ class PositionTest(unittest.TestCase):
         return res
 
     '''tests'''
-    # enable this when https://github.com/robotology/idyntree/issues/105 is solved
-    # to enable this test method, just make sure that the first letters are "test"
-    # by changing its name, i.e. restore the testInnerProductInvariance name
-    def notATestInnerProductInvariance(self, nrOfTests=5):
+
+    def testInnerProductInvariance(self, nrOfTests=5):
         ''' Check that the inner product between a wrench and a twist
         is invariant with respect to adjoint transforms'''
         print("Running test testInnerProductInvariance");
