@@ -77,9 +77,9 @@ int main()
     qj.zero();
 
     // Initialize the odometry
-    Transform world_H_l_sole = iDynTree::getRandomTransform();
+    Transform l_sole_H_world = iDynTree::getRandomTransform();
 
-    ok = simpleOdometry.init("l_sole",world_H_l_sole);
+    ok = simpleOdometry.init("l_sole",l_sole_H_world);
 
     ok = simpleOdometry.updateKinematics(qj);
 
