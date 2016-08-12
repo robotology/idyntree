@@ -196,7 +196,11 @@ bool BerdyHelper::initSensorsMeasurements()
     berdySensorTypeOffsets.netExtWrenchOffset = m_nrOfSensorsMeasurements;
     if( m_options.includeAllNetExternalWrenchesAsSensors )
     {
-        m_nrOfSensorsMeasurements += 6*this->m_model.getNrOfLinks();
+        unsigned numOfExternalWrenches = this->m_model.getNrOfLinks();
+        if (m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE
+            && !m_options.includeFixedBaseExternalWrench)
+            numOfExternalWrenches = this->m_model.getNrOfLinks() - 1;
+        m_nrOfSensorsMeasurements += 6 * numOfExternalWrenches;
     }
 
     berdySensorTypeOffsets.jointWrenchOffset = m_nrOfSensorsMeasurements;
@@ -859,7 +863,7 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
                         setSubMatrix(Y,
                                     getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx),
                                     getRangeJointVariable(JOINT_WRENCH,neighborJoint->getIndex()),
-                                    -toEigen(base_X_child.asAdjointTransformWrench()));
+                                    toEigen(base_X_child.asAdjointTransformWrench()));
                     }
 
                     // bY encodes the weight of the base link due to gravity (we omit the v*I*v as it is always zero)
