@@ -205,7 +205,7 @@ const IJoint* Model::getJoint(const JointIndex jointIndex) const
     return (joints[jointIndex]);
 }
 
-bool Model::isLinkNameUsed(const std::string linkName)
+bool Model::isLinkNameUsed(const std::string linkName) const
 {
     for(size_t i=0; i < this->getNrOfLinks(); i++ )
     {
@@ -251,7 +251,7 @@ LinkIndex Model::addLink(const std::string& name, const Link& link)
     return newLinkIndex;
 }
 
-bool Model::isJointNameUsed(const std::string jointName)
+bool Model::isJointNameUsed(const std::string jointName) const
 {
     for(size_t i=0; i < this->getNrOfJoints(); i++ )
     {
@@ -391,7 +391,7 @@ bool Model::isValidFrameIndex(const FrameIndex index) const
            (index >= 0) && (index < this->getNrOfFrames());
 }
 
-bool Model::isFrameNameUsed(const std::string frameName)
+bool Model::isFrameNameUsed(const std::string frameName) const
 {
     for(size_t i=0; i < this->getNrOfLinks(); i++ )
     {
