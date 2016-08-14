@@ -61,30 +61,30 @@ LinkSensor::~LinkSensor()
 
 struct SensorsList::SensorsListPimpl
 {
-    std::vector< std::vector<Sensor *> > VecSensors;
-    std::vector< std::map< std::string, unsigned int > > NamesSensors;
+    std::vector< std::vector<Sensor *> > allSensors;
+    std::vector< std::map< std::string, unsigned int > > sensorsNameToIndex;
 };
 
 SensorsList::SensorsList():
     pimpl(new SensorsListPimpl())
 {
     //resize datastructures;
-    this->pimpl->VecSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
-    this->pimpl->NamesSensors.resize(NR_OF_SENSOR_TYPES);
+    this->pimpl->allSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
+    this->pimpl->sensorsNameToIndex.resize(NR_OF_SENSOR_TYPES);
 }
 
 void SensorsList::constructor(const SensorsList& other)
 {
     this->pimpl = new SensorsListPimpl();
-    this->pimpl->VecSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
-    this->pimpl->NamesSensors.resize(NR_OF_SENSOR_TYPES);
+    this->pimpl->allSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
+    this->pimpl->sensorsNameToIndex.resize(NR_OF_SENSOR_TYPES);
     for(int sens_type = 0; sens_type < NR_OF_SENSOR_TYPES; sens_type++ )
     {
         for(unsigned int sens = 0; sens < other.getNrOfSensors((SensorType)sens_type); sens++ )
         {
-            this->pimpl->VecSensors[sens_type].push_back(other.pimpl->VecSensors[sens_type][sens]->clone());
+            this->pimpl->allSensors[sens_type].push_back(other.pimpl->allSensors[sens_type][sens]->clone());
             std::string sensor_name = other.getSensor((SensorType)sens_type,sens)->getName();
-            this->pimpl->NamesSensors[sens_type].insert(std::pair<std::string,int>(sensor_name,sens));
+            this->pimpl->sensorsNameToIndex[sens_type].insert(std::pair<std::string,int>(sensor_name,sens));
         }
     }
 }
@@ -109,13 +109,13 @@ void SensorsList::destructor()
     for( int sensor_type = 0; sensor_type < NR_OF_SENSOR_TYPES; sensor_type++ )
     {
         for(unsigned int sensor_index = 0;
-            sensor_index < this->pimpl->VecSensors[sensor_type].size(); sensor_index++ )
+            sensor_index < this->pimpl->allSensors[sensor_type].size(); sensor_index++ )
         {
-            delete this->pimpl->VecSensors[sensor_type][sensor_index];
+            delete this->pimpl->allSensors[sensor_type][sensor_index];
         }
     }
-    this->pimpl->VecSensors.resize(0);
-    this->pimpl->NamesSensors.resize(0);
+    this->pimpl->allSensors.resize(0);
+    this->pimpl->sensorsNameToIndex.resize(0);
 
     delete this->pimpl;
     this->pimpl = 0;
@@ -146,9 +146,9 @@ int SensorsList::addSensor(const Sensor& sensor)
              return -1;
     }
 
-    this->pimpl->VecSensors[newSensor->getSensorType()].push_back(newSensor);
-    int new_index = this->pimpl->VecSensors[newSensor->getSensorType()].size()-1;
-    this->pimpl->NamesSensors[newSensor->getSensorType()].insert(std::pair<std::string,int>(newSensor->getName(),new_index));
+    this->pimpl->allSensors[newSensor->getSensorType()].push_back(newSensor);
+    int new_index = this->pimpl->allSensors[newSensor->getSensorType()].size()-1;
+    this->pimpl->sensorsNameToIndex[newSensor->getSensorType()].insert(std::pair<std::string,int>(newSensor->getName(),new_index));
 
     return new_index;
 }
@@ -157,9 +157,9 @@ bool SensorsList::getSerialization(const SensorType& sensor_type, std::vector< s
 {
     serializaton.resize(0);
     for(unsigned int sensor_index = 0;
-        sensor_index < this->pimpl->VecSensors[sensor_type].size(); sensor_index++ )
+        sensor_index < this->pimpl->allSensors[sensor_type].size(); sensor_index++ )
     {
-        std::string sensorName = this->pimpl->VecSensors[sensor_type][sensor_index]->getName();
+        std::string sensorName = this->pimpl->allSensors[sensor_type][sensor_index]->getName();
         serializaton.push_back(sensorName);
     }
 
@@ -188,21 +188,21 @@ bool SensorsList::setSerialization(const SensorType& sensor_type,
         newVecSensors[i] = this->getSensor(sensor_type,oldSensIndex);
     }
 
-    this->pimpl->VecSensors[sensor_type] = newVecSensors;
+    this->pimpl->allSensors[sensor_type] = newVecSensors;
     
     return true;
 }
 
 unsigned int SensorsList::getNrOfSensors(const SensorType & sensor_type) const
 {
-    return this->pimpl->VecSensors[sensor_type].size();
+    return this->pimpl->allSensors[sensor_type].size();
 }
 
 bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
 {
     std::map< std::string, unsigned int >::const_iterator it;
-    it = this->pimpl->NamesSensors[sensor_type].find(_sensor_name);
-    if( it == this->pimpl->NamesSensors[sensor_type].end() )
+    it = this->pimpl->sensorsNameToIndex[sensor_type].find(_sensor_name);
+    if( it == this->pimpl->sensorsNameToIndex[sensor_type].end() )
     {
         std::cerr << "[ERROR] getSensorIndex did not find sensor " << _sensor_name << std::endl;
         return false;
@@ -238,7 +238,7 @@ Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) 
 {
     if( sensor_index < (int)getNrOfSensors(sensor_type) && sensor_index >= 0 )
     {
-        return this->pimpl->VecSensors[sensor_type][sensor_index];
+        return this->pimpl->allSensors[sensor_type][sensor_index];
     }
     else
     {
