@@ -224,14 +224,14 @@ namespace iDynTree
          *
          * @return true if a name is used by a link in a model, false otherwise.
          */
-        bool isLinkNameUsed(const std::string linkName);
+        bool isLinkNameUsed(const std::string linkName) const;
 
         /**
          * Check if a name is already used for a joint in the model.
          *
          * @return true if a name is used by a joint in a model, false otherwise.
          */
-        bool isJointNameUsed(const std::string jointName);
+        bool isJointNameUsed(const std::string jointName) const;
 
         /**
          * Check if a name is already used for a frame in the model.
@@ -239,7 +239,7 @@ namespace iDynTree
          * \note this function will check the name of the links and the names of the additional frames.
          * @return true if a name is used by a frame in a model, false otherwise.
          */
-        bool isFrameNameUsed(const std::string frameName);
+        bool isFrameNameUsed(const std::string frameName) const;
 
         /**
          *
