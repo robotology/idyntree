@@ -709,7 +709,7 @@ bool modelFromURDFString(const std::string& urdf_string,
 
         assert(joint->getFirstAttachedLink() != joint->getSecondAttachedLink());
 
-        // All joints expect the fixed one are immediatly added to the model
+        // All joints but the fixed one are immediatly added to the model
         if( jointType != "fixed" )
         {
             JointIndex newJointIndex = rawModel.addJoint(jointName,joint);

@@ -30,6 +30,7 @@ namespace iDynTree {
 
 #include <string>
 #include <vector>
+#include <iterator>
 
 #include <iDynTree/Core/VectorDynSize.h>
 
@@ -241,6 +242,9 @@ namespace iDynTree {
             void destructor();
         public:
 
+            /// Iterator for the SensorsList class
+            class Iterator;
+
             /**
              * Constructor.
              */
@@ -326,7 +330,41 @@ namespace iDynTree {
         bool removeSensor(const SensorType & sensor_type, const unsigned int sensor_index);
         bool removeAllSensorsOfType(const SensorType & sensor_type);
 
+        SensorsList::Iterator allSensorsIterator();
+        SensorsList::Iterator sensorsIteratorForType(const iDynTree::SensorType &sensor_type);
+
     };
+
+
+    class SensorsList::Iterator
+    {
+    protected:
+        //it can be created only by SensorsList class
+        Iterator();
+        friend class SensorsList;
+
+        void *m_pimpl;
+    public:
+        typedef typename std::ptrdiff_t difference_type;
+        typedef Sensor* value_type;
+        typedef Sensor*& reference;
+        typedef Sensor** pointer; //Not sure. Maybe this should be simply Sensor*??
+        typedef std::input_iterator_tag iterator_category;
+
+        virtual ~Iterator();
+
+        virtual Iterator& operator++();
+        virtual Iterator operator++(int);
+
+        virtual bool operator==(const Iterator&) const;
+        virtual inline bool operator!=(const Iterator& s) const { return !this->operator==(s); }
+
+        virtual reference operator*();
+        virtual pointer operator->();
+        
+        virtual bool isValid() const;
+    };
+
 
     /**
      * A list of measurements associated with a SensorsList .
@@ -431,7 +469,6 @@ namespace iDynTree {
              */
             size_t getSizeOfAllSensorsMeasurements() const;
     };
-
 
 }
 

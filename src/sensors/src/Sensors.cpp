@@ -294,6 +294,211 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
         return removeSensor(sensor_type, index);
     }
 
+
+    //Iterator implementation
+    struct IteratorPimpl
+    {
+    protected:
+        std::vector<Sensor *>::iterator internalIterator;
+
+    public:
+        friend class SensorsList;
+
+        virtual ~IteratorPimpl() {}
+        virtual void advance() {}
+
+        //this has been kept nonvirtual as we compare only the internal iterator
+        bool compare(const IteratorPimpl &it) const
+        {
+            return internalIterator == it.internalIterator;
+        }
+
+        virtual SensorsList::Iterator::reference dereference() = 0;
+        virtual SensorsList::Iterator::pointer derefpointer() = 0;
+        virtual bool isValid() const { return false; }
+
+    };
+
+    class TypedSensorsListIterator;
+    class AllSensorsListIterator;
+
+    class TypedSensorsListIterator : public IteratorPimpl
+    {
+    protected:
+        std::vector<Sensor *>& iteratingList;
+
+    public:
+        friend class AllSensorsListIterator;
+
+        TypedSensorsListIterator(std::vector<Sensor *>& list)
+        : iteratingList(list)
+        {
+            internalIterator = iteratingList.begin();
+        }
+
+        virtual void advance()
+        {
+            ++internalIterator;
+        }
+
+        virtual SensorsList::Iterator::reference dereference()
+        {
+            return *internalIterator;
+        }
+
+        virtual SensorsList::Iterator::pointer derefpointer()
+        {
+            return internalIterator.operator->();
+        }
+
+        virtual bool isValid() const
+        {
+            return internalIterator >= iteratingList.begin() &&
+            internalIterator < iteratingList.end();
+        }
+
+
+    };
+
+    class AllSensorsListIterator : public IteratorPimpl
+    {
+        std::vector< std::vector<Sensor *> >::iterator externalIterator;
+        std::vector< std::vector<Sensor *> >& iteratingList;
+
+    public:
+
+        friend class TypedSensorsListIterator;
+
+        AllSensorsListIterator(std::vector< std::vector<Sensor *> >& list)
+        : iteratingList(list)
+        {
+            //Start from the beginning
+            externalIterator = list.begin();
+            //While external list is empty, skip to the next one
+            while (externalIterator->empty()) {
+                ++externalIterator;
+            }
+            //if the iterator is still valid assign the internal
+            //otherwise the iterator itself is no longer valid
+            if (externalIterator != list.end()) {
+                internalIterator = externalIterator->begin();
+            }
+        }
+
+        virtual void advance()
+        {
+            ++internalIterator;
+            if (internalIterator >= externalIterator->end()) {
+                //end of inner list.
+                //Move to next list
+                do {
+                    ++externalIterator;
+                } while (externalIterator != iteratingList.end() &&
+                         externalIterator->empty());
+                
+                if (externalIterator != iteratingList.end()) {
+                    internalIterator = externalIterator->begin();
+                }
+            }
+        }
+
+        virtual SensorsList::Iterator::reference dereference()
+        {
+            return *internalIterator;
+        }
+
+        virtual SensorsList::Iterator::pointer derefpointer()
+        {
+            return internalIterator.operator->();
+        }
+
+        virtual bool isValid() const
+        {
+            return
+            //Check for external list consistency
+            externalIterator >= iteratingList.begin() &&
+            externalIterator < iteratingList.end() &&
+            //Check for internal list consistency
+            internalIterator >= externalIterator->begin() &&
+            internalIterator < externalIterator->end();
+        }
+
+    };
+
+    SensorsList::Iterator SensorsList::allSensorsIterator()
+    {
+        Iterator iterator;
+        iterator.m_pimpl = new AllSensorsListIterator(this->pimpl->allSensors);
+        return iterator;
+    }
+
+    SensorsList::Iterator SensorsList::sensorsIteratorForType(const iDynTree::SensorType &sensor_type)
+    {
+        Iterator iterator;
+        iterator.m_pimpl = new TypedSensorsListIterator(this->pimpl->allSensors[sensor_type]);
+        return iterator;
+    }
+
+
+    SensorsList::Iterator::Iterator(): m_pimpl(0) {}
+    SensorsList::Iterator::~Iterator()
+    {
+        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
+        if (pimpl) {
+            delete pimpl;
+            pimpl = 0;
+        }
+    }
+
+    SensorsList::Iterator& SensorsList::Iterator::operator++()
+    {
+        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
+        assert(pimpl);
+        pimpl->advance();
+        return *this;
+    }
+    SensorsList::Iterator SensorsList::Iterator::operator++(int)
+    {
+        SensorsList::Iterator previous(*this);
+        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
+        assert(pimpl);
+        pimpl->advance();
+        return previous;
+    }
+
+    bool SensorsList::Iterator::operator==(const SensorsList::Iterator&s) const
+    {
+        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
+        assert(pimpl);
+        const IteratorPimpl *otherPimpl = static_cast<const IteratorPimpl *>(s.m_pimpl);
+        if (!otherPimpl) return false; //avoid inner dynamic cast
+
+        //non valid iterators does not compare to anything
+        if (!this->isValid() || !s.isValid()) return false;
+        
+        return pimpl->compare(*otherPimpl);
+    }
+
+    SensorsList::Iterator::reference SensorsList::Iterator::operator*()
+    {
+        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
+        assert(pimpl);
+        return pimpl->dereference();
+    }
+    SensorsList::Iterator::pointer SensorsList::Iterator::operator->()
+    {
+        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
+        assert(pimpl);
+        return pimpl->derefpointer();
+    }
+
+    bool SensorsList::Iterator::isValid() const
+    {
+        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
+        assert(pimpl);
+        return pimpl->isValid();
+    }
+
 ///////////////////////////////////////////////////////////////////////////////
 ///// SensorMeasurements
 ///////////////////////////////////////////////////////////////////////////////
@@ -588,7 +793,5 @@ size_t SensorsMeasurements::getSizeOfAllSensorsMeasurements() const
     }
     return res;
 }
-
-
 
 }
