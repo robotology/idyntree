@@ -56,3 +56,6 @@ install(TARGETS ${libraryname}
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+if(IDYNTREE_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif(IDYNTREE_COMPILE_TESTS)

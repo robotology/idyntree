@@ -33,9 +33,7 @@
 
 #include <iDynTree/Core/VectorDynSize.h>
 
-
-
-
+#include <cassert>
 #include <iostream>
 
 namespace iDynTree {
@@ -260,8 +258,41 @@ size_t SensorsList::getSizeOfAllSensorsMeasurements() const
     return res;
 }
 
+bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type)
+{
+    //data is cloned when sensors are added. We have to release the associated memory
+    for (std::vector<Sensor*>::iterator it = this->pimpl->allSensors[sensor_type].begin();
+         it != this->pimpl->allSensors[sensor_type].end(); ++it) {
+        delete *it;
+    }
+    this->pimpl->allSensors[sensor_type].clear();
+    this->pimpl->sensorsNameToIndex[sensor_type].clear();
+    return true;
+}
 
+    bool SensorsList::removeSensor(const SensorType & sensor_type, const unsigned int sensor_index)
+    {
+        std::vector<Sensor*>& typeVector = this->pimpl->allSensors[sensor_type];
+        if (sensor_index >= typeVector.size())
+            return false;
+        Sensor *s = typeVector[sensor_index];
+        typeVector.erase(typeVector.begin() + sensor_index);
+        std::map< std::string, unsigned int >& nameToIndex = this->pimpl->sensorsNameToIndex[sensor_type];
+        std::map< std::string, unsigned int >::iterator nameToIndexIterator = nameToIndex.find(s->getName());
+        if (nameToIndexIterator != nameToIndex.end()) {
+            nameToIndex.erase(nameToIndexIterator);
+        }
 
+        delete s;
+        return true;
+    }
+
+    bool SensorsList::removeSensor(const iDynTree::SensorType &sensor_type, const std::string &_sensor_name)
+    {
+        int index = getSensorIndex(sensor_type, _sensor_name);
+        if (index < 0) return false;
+        return removeSensor(sensor_type, index);
+    }
 
 ///////////////////////////////////////////////////////////////////////////////
 ///// SensorMeasurements

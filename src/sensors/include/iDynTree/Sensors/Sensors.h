@@ -322,6 +322,9 @@ namespace iDynTree {
              */
             Sensor * getSensor(const SensorType & sensor_type, int sensor_index) const;
 
+        bool removeSensor(const SensorType & sensor_type, const std::string & _sensor_name);
+        bool removeSensor(const SensorType & sensor_type, const unsigned int sensor_index);
+        bool removeAllSensorsOfType(const SensorType & sensor_type);
 
     };
 
