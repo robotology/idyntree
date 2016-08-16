@@ -10,6 +10,7 @@
 
 #include <cmath>
 #include <cfloat>
+#include <ctime>
 
 #include "dynamicRegressorGenerator.hpp"
 #include "dirl_utils.hpp"
@@ -211,6 +212,12 @@ int DynamicRegressorGenerator::getNrOfDOFs() const
 
 int DynamicRegressorGenerator::getNrOfFakeLinks() const
 {
+    /*for (std::vector<std::string>::const_iterator i = fake_links_names.begin(); i != fake_links_names.end(); ++i) {
+        std::cout << *i << ' ';
+    }
+    std::cout << std::endl;
+    */
+
     return fake_links_names.size();
 }
 
@@ -456,6 +463,7 @@ int DynamicRegressorGenerator::generate_random_regressors(Eigen::MatrixXd & A,
 
         /** \todo store and restore class state */
 
+        std::srand((unsigned int) time(0));
         for(int i=0; i < n_samples; i++ ) {
             //RegressorSolver
             //Excite with random data RegressorSolver (random q, dq, ddq (for energy, simply do not use ddq)

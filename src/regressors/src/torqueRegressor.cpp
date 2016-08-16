@@ -180,7 +180,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
                                       Eigen::MatrixXd & regressor_matrix_global_column_serialization,
                                       Eigen::VectorXd & known_terms)
 {
-#ifndef NDEBUG
+#ifdef NDEBUG
     if( verbose ) std::cerr << "Called torqueRegressor::computeRegressor " << std::endl;
 #endif
     //const KDL::CoDyCo::UndirectedTree &  = *p_undirected_tree;
@@ -210,7 +210,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         int link_id = subtree_links_indices[i];
 
         if( linkIndeces2regrCols[link_id] != -1 ) {
-            #ifndef NDEBUG
+            #ifdef NDEBUG
             if( verbose ) std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the regressor relative to link " << p_undirected_tree->getLink(link_id)->getName() << std::endl;
             #endif
 
@@ -220,7 +220,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
         }
     }
 
-#ifndef NDEBUG
+#ifdef NDEBUG
     if( consider_ft_offset ) {
         if( verbose ) std::cerr << "considering ft offset" << std::endl;
     } else {

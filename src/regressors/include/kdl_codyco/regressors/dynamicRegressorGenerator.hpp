@@ -354,10 +354,19 @@ public:
 
     int getModelParameters(Eigen::VectorXd & values);
 
+    //utility function for generating a random regressor for numerical base parameter calculation
+    //Given n_samples, the Y (n_samples*getNrOfOutputs() X getNrOfParameters() ) regressor is obtained by stacking the n_samples generated regressors
+    //This function returns Y^T Y (getNrOfParameters() X getNrOfParameters() ) (that share the row space with Y)
+    int generate_random_regressors(Eigen::MatrixXd & output_matrix,
+                                   const bool static_regressor = false,
+                                   const bool fixed_base = false,
+                                   const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8),
+                                   int n_samples = 1000, const bool verbose = false);
+
     iDynTree::SensorsList sensorsList;
 
     //measured 6 axis Force/torques
-    iDynTree::SensorsMeasurements sensorMeasures;
+    iDynTree::SensorsMeasurements sensorMeasures;    
 
 private:
     KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization */
@@ -421,15 +430,6 @@ private:
     Eigen::MatrixXd six_rows_buffer;
     Eigen::VectorXd one_rows_vector;
     Eigen::VectorXd six_rows_vector;
-
-    //utility function for generating a random regressor for numerical base parameter calculation
-    //Given n_samples, the Y (n_samples*getNrOfOutputs() X getNrOfParameters() ) regressor is obtained by stacking the n_samples generated regressors
-    //This function returns Y^T Y (getNrOfParameters() X getNrOfParameters() ) (that share the row space with Y)
-    int generate_random_regressors(Eigen::MatrixXd & output_matrix,
-                                   const bool static_regressor = false,
-                                   const bool fixed_base = false,
-                                   const KDL::Vector grav_direction=KDL::Vector(0.0,0.0,9.8),
-                                   int n_samples = 1000, const bool verbose = false);
 
     int generate_random_regressors(Eigen::MatrixXd & output_matrix,
                                    const bool static_regressor,

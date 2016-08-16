@@ -216,7 +216,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
     sort( ignoredLinks.begin(), ignoredLinks.end() );
     ignoredLinks.erase( unique( ignoredLinks.begin(), ignoredLinks.end() ), ignoredLinks.end() );
 
-    bool verbose = true;
+    bool verbose = false;
     this->pimpl->m_pLegacyGenerator =
         new KDL::CoDyCo::Regressors::DynamicRegressorGenerator(*(this->pimpl->robot_model),
                                                            this->pimpl->sensors_model,
@@ -585,6 +585,19 @@ bool DynamicsRegressorGenerator::computeFixedBaseIdentifiableSubspace(MatrixDynS
     return (ret_value == 0);
 }
 
+int DynamicsRegressorGenerator::generate_random_regressors(iDynTree::MatrixDynSize & output_matrix, const bool static_regressor,
+                                   const bool fixed_base,
+                                   int n_samples) {
+
+    const KDL::Vector grav_direction = KDL::Vector(0.0,0.0,9.81);
+    Eigen::MatrixXd A;
+    this->pimpl->m_pLegacyGenerator->generate_random_regressors(A, static_regressor, fixed_base, grav_direction, n_samples, false);
+
+    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(output_matrix.data(),
+                                output_matrix.rows(),
+                                output_matrix.cols()) = A;
+    return 0;
+}
 
 
 }

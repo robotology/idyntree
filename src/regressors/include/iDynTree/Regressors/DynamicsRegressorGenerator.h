@@ -426,6 +426,10 @@ public:
      */
     bool computeFixedBaseIdentifiableSubspace(iDynTree::MatrixDynSize & basisMatrix);
 
+    int generate_random_regressors(iDynTree::MatrixDynSize & output_matrix,
+                                   const bool static_regressor = false,
+                                   const bool fixed_base = false,
+                                   int n_samples = 1000);
 
     //@}
 
