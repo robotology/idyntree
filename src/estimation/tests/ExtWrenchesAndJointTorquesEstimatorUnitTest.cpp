@@ -166,7 +166,7 @@ int main()
 
     // Add a test on net external wrenches
     // Compute the net wrenches acting on a link
-    LinkNetWrenchesWithoutGravity netWrenchesWithoutGravity(estimatorIMU.model());
+    LinkNetTotalWrenchesWithoutGravity netWrenchesWithoutGravity(estimatorIMU.model());
     bool ok = estimatorIMU.estimateLinkNetWrenchesWithoutGravity(netWrenchesWithoutGravity);
     ASSERT_IS_TRUE(ok);
 

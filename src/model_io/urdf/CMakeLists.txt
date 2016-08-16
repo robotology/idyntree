@@ -6,11 +6,13 @@ project(iDynTree_ModelIO_URDF CXX)
 
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFModelImport.h
                                   include/iDynTree/ModelIO/URDFDofsImport.h
-                                  include/iDynTree/ModelIO/URDFGenericSensorsImport.h)
+                                  include/iDynTree/ModelIO/URDFGenericSensorsImport.h
+                                  include/iDynTree/ModelIO/ModelLoader.h)
 
 set(IDYNTREE_MODELIO_URDF_SOURCES src/URDFModelImport.cpp
                                   src/URDFDofsImport.cpp
-                                  src/URDFGenericSensorsImport.cpp)
+                                  src/URDFGenericSensorsImport.cpp
+                                  src/ModelLoader.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_URDF_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODELIO_URDF_HEADERS})

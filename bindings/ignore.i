@@ -16,6 +16,7 @@
 %ignore *::acc() const;
 %ignore *::getAngularVec3() const;
 %ignore *::getLinearVec3() const;
+%ignore *::contactId() const;
 
 // for some reason ignore ::operator= does not work, we disable directly the warning instead
 #pragma SWIG nowarn=362

@@ -224,14 +224,14 @@ namespace iDynTree
          *
          * @return true if a name is used by a link in a model, false otherwise.
          */
-        bool isLinkNameUsed(const std::string linkName);
+        bool isLinkNameUsed(const std::string linkName) const;
 
         /**
          * Check if a name is already used for a joint in the model.
          *
          * @return true if a name is used by a joint in a model, false otherwise.
          */
-        bool isJointNameUsed(const std::string jointName);
+        bool isJointNameUsed(const std::string jointName) const;
 
         /**
          * Check if a name is already used for a frame in the model.
@@ -239,7 +239,7 @@ namespace iDynTree
          * \note this function will check the name of the links and the names of the additional frames.
          * @return true if a name is used by a frame in a model, false otherwise.
          */
-        bool isFrameNameUsed(const std::string frameName);
+        bool isFrameNameUsed(const std::string frameName) const;
 
         /**
          *
@@ -395,6 +395,47 @@ namespace iDynTree
          * \warning this function works only on Models without cycles.
          */
         bool computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase) const;
+
+        /**
+         * Get the inertial parameters of the links of the model in vector forms.
+         *
+         * This methods gets the inertial parameters (mass, center
+         * of mass, 3D inertia matrix) of the links of the robot.
+         *
+         * The output vector of inertial parameters must have 10*getNrOfLinks() elements,
+         * each 10 elements subvector corresponds to the inertial parameters of one link,
+         * following the serialization induced by the link indeces
+         * (link 0 corresponds to elements 0-9, link 1 to 10-19, etc).
+         *
+         * The mapping between the SpatialInertia class and the Vector10 elements is the one
+         * defined in SpatialInertia::asVector() method.
+         *
+         * @return true if all went well, false otherwise.
+         *
+         */
+        bool getInertialParameters(VectorDynSize & modelInertialParams) const;
+
+        /**
+         * Update the inertial parameters of the links of the model.
+         *
+         * This methods modifies the inertial parameters (mass, center
+         * of mass, 3D inertia matrix) of the links of the robot.
+         *
+         * The input vector of inertial parameters must have 10*getNrOfLinks() elements,
+         * each 10 elements subvector corresponds to the inertial parameters of one link,
+         * following the serialization induced by the link indeces
+         * (link 0 corresponds to elements 0-9, link 1 to 10-19, etc).
+         *
+         * The mapping between the SpatialInertia class and the Vector10 elements is the one
+         * defined in SpatialInertia::asVector() method.
+         *
+         * @note For efficency reason, inertial parameters are not checked for full physical
+         *       consistency before being update.
+         *
+         * @return true if all went well, false otherwise.
+         *
+         */
+        bool updateInertialParameters(const VectorDynSize & modelInertialParams);
 
 
         /**

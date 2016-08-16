@@ -8,8 +8,12 @@
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
 
+#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/EigenHelpers.h>
+
 #include <cassert>
 #include <deque>
+#include <sstream>
 
 namespace iDynTree
 {
@@ -109,6 +113,10 @@ LinkIndex Model::getLinkIndex(const std::string& linkName) const
         }
     }
 
+    // Report an error and return an invalid index
+    std::string error = "Impossible to find link " + linkName + " in the Model";
+    reportError("Model","getLinkIndex",error.c_str());
+
     return LINK_INVALID_INDEX;
 }
 
@@ -126,6 +134,9 @@ std::string Model::getLinkName(const LinkIndex linkIndex) const
     }
     else
     {
+        std::stringstream ss;
+        ss << "LinkIndex " << linkIndex << " is not valid, should be between 0 and " << this->getNrOfLinks()-1;
+        reportError("Model","getLinkName",ss.str().c_str());
         return LINK_INVALID_NAME;
     }
 }
@@ -155,6 +166,10 @@ JointIndex Model::getJointIndex(const std::string& jointName) const
         }
     }
 
+    std::stringstream ss;
+    ss << "jointName " << jointName << " not found in the model.";
+    reportError("Model","getJointIndex",ss.str().c_str());
+
     return JOINT_INVALID_INDEX;
 }
 
@@ -173,6 +188,9 @@ std::string Model::getJointName(const JointIndex jointIndex) const
     }
     else
     {
+        std::stringstream ss;
+        ss << "jointIndex " << jointIndex << " is not valid, should be between 0 and " << this->getNrOfJoints()-1;
+        reportError("Model","getJointName",ss.str().c_str());
         return JOINT_INVALID_NAME;
     }
 }
@@ -187,9 +205,17 @@ const IJoint* Model::getJoint(const JointIndex jointIndex) const
     return (joints[jointIndex]);
 }
 
-bool Model::isLinkNameUsed(const std::string linkName)
+bool Model::isLinkNameUsed(const std::string linkName) const
 {
-    return (LINK_INVALID_INDEX != getLinkIndex(linkName));
+    for(size_t i=0; i < this->getNrOfLinks(); i++ )
+    {
+        if( linkName == linkNames[i] )
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 LinkIndex Model::addLink(const std::string& name, const Link& link)
@@ -225,11 +251,18 @@ LinkIndex Model::addLink(const std::string& name, const Link& link)
     return newLinkIndex;
 }
 
-bool Model::isJointNameUsed(const std::string jointName)
+bool Model::isJointNameUsed(const std::string jointName) const
 {
-    return (JOINT_INVALID_INDEX != getJointIndex(jointName));
-}
+    for(size_t i=0; i < this->getNrOfJoints(); i++ )
+    {
+        if( jointName == jointNames[i] )
+        {
+            return true;
+        }
+    }
 
+    return false;
+}
 
 JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
 {
@@ -321,6 +354,9 @@ std::string Model::getFrameName(const FrameIndex frameIndex) const
     }
     else
     {
+        std::stringstream ss;
+        ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and " << this->getNrOfFrames()-1;
+        reportError("Model","getFrameName",ss.str().c_str());
         return FRAME_INVALID_NAME;
     }
 }
@@ -343,6 +379,9 @@ FrameIndex Model::getFrameIndex(const std::string& frameName) const
         }
     }
 
+    std::stringstream ss;
+    ss << "Frame named " << frameName << " not found in the model.";
+    reportError("Model","getFrameIndex",ss.str().c_str());
     return FRAME_INVALID_INDEX;
 }
 
@@ -352,9 +391,25 @@ bool Model::isValidFrameIndex(const FrameIndex index) const
            (index >= 0) && (index < this->getNrOfFrames());
 }
 
-bool Model::isFrameNameUsed(const std::string frameName)
+bool Model::isFrameNameUsed(const std::string frameName) const
 {
-    return (FRAME_INVALID_INDEX != getFrameIndex(frameName));
+    for(size_t i=0; i < this->getNrOfLinks(); i++ )
+    {
+        if( frameName == linkNames[i] )
+        {
+            return true;
+        }
+    }
+
+    for(size_t i=this->getNrOfLinks(); i < this->getNrOfFrames(); i++ )
+    {
+        if( frameName == this->frameNames[i-getNrOfLinks()] )
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
@@ -390,10 +445,18 @@ bool Model::addAdditionalFrameToLink(const std::string& linkName,
 
 Transform Model::getFrameTransform(const FrameIndex frameIndex) const
 {
+    // If frameIndex is invalid return an error
+    if( frameIndex < 0 || frameIndex >= (FrameIndex) this->getNrOfFrames() )
+    {
+        std::stringstream ss;
+        ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and " << this->getNrOfFrames()-1;
+        reportError("Model","getFrameTransform",ss.str().c_str());
+        return Transform::Identity();
+    }
+
     // The link_H_frame transform for the link
     // main frame is the identity
-    if( frameIndex < (FrameIndex) this->getNrOfLinks() ||
-        frameIndex >= (FrameIndex) this->getNrOfFrames() )
+    if( frameIndex < (FrameIndex) this->getNrOfLinks() )
     {
         return Transform::Identity();
     }
@@ -423,6 +486,9 @@ LinkIndex Model::getFrameLink(const FrameIndex frameIndex) const
     }
 
     // If the frameIndex is out of bounds, return an invalid index
+    std::stringstream ss;
+    ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and " << this->getNrOfFrames()-1;
+    reportError("Model","getFrameLink",ss.str().c_str());
     return LINK_INVALID_INDEX;
 }
 
@@ -546,6 +612,45 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
 
     return true;
 }
+
+bool Model::getInertialParameters(VectorDynSize& modelInertialParams) const
+{
+    // Resize vector if necessary
+    if( modelInertialParams.size() != this->getNrOfLinks()*10 )
+    {
+        modelInertialParams.resize(10*this->getNrOfLinks());
+    }
+
+    for(LinkIndex linkIdx = 0; linkIdx < this->getNrOfLinks(); linkIdx++ )
+    {
+        Vector10       inertiaParamsBuf = links[linkIdx].inertia().asVector();
+
+        toEigen(modelInertialParams).segment<10>(10*linkIdx) = toEigen(inertiaParamsBuf);
+    }
+
+    return true;
+}
+
+
+bool Model::updateInertialParameters(const VectorDynSize& modelInertialParams)
+{
+    if( modelInertialParams.size() != this->getNrOfLinks()*10 )
+    {
+        reportError("Model","updateInertialParameters","modelInertialParams has the wrong number of parameters");
+        return false;
+    }
+
+    for(LinkIndex linkIdx = 0; linkIdx < this->getNrOfLinks(); linkIdx++ )
+    {
+        Vector10       inertiaParamsBuf;
+        toEigen(inertiaParamsBuf) = toEigen(modelInertialParams).segment<10>(10*linkIdx);
+
+        links[linkIdx].inertia().fromVector(inertiaParamsBuf);
+    }
+
+    return true;
+}
+
 
 std::string Model::toString() const
 {

@@ -65,8 +65,6 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp)
         properAcc(i) = baseAcc(i) + gravity(i);
     }
 
-    std::cout << "Setted baseVel" << baseVel.toString() << std::endl;
-
     for(size_t dof=0; dof < dofs; dof++)
 
     {
@@ -99,18 +97,12 @@ void testJacobianVsForwardKinematicsConsistency(iDynTree::HighLevel::DynamicsCom
     for(size_t frame=0; frame < frames; frame++)
     {
         velFromFwdKin = dynComp.getFrameTwistInWorldOrient(frame);
-        std::cout << velFromFwdKin.toString() << std::endl;
         dynComp.getFrameJacobian(frame,jac);
 
         Eigen::Matrix<double,6,1> velJac = toEigen(jac)*robotVel;
 
-        std::cout << toEigen(jac) << std::endl;
-
         toEigen(velFromJac.getLinearVec3()) = velJac.segment<3>(0);
         toEigen(velFromJac.getAngularVec3()) = velJac.segment<3>(3);
-
-        std::cout << velFromJac.toString() << std::endl;
-
     }
 
     ASSERT_EQUAL_VECTOR(velFromFwdKin.asVector(),velFromJac.asVector());
@@ -158,6 +150,21 @@ void testModelConsistency(std::string modelFilePath)
     testRegressorVsInverseDynamicsConsistency(dynComp);
 }
 
+void testTwoLinksRotationOnZAxisRegressor()
+{
+    std::string urdfFileName = getAbsModelPath("twoLinksRotationOnZAxis.urdf");
+    HighLevel::DynamicsComputations dynComp;
+    bool ok = dynComp.loadRobotModelFromFile(urdfFileName);
+    ASSERT_IS_TRUE(ok);
+
+    setRandomState(dynComp);
+
+    MatrixDynSize regr;
+    ok = dynComp.getDynamicsRegressor(regr);
+    ASSERT_IS_TRUE(ok);
+    std::cerr << regr.toString() << std::endl;
+}
+
 int main()
 {
     for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
@@ -166,6 +173,10 @@ int main()
         std::cout << "Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) <<  std::endl;
         testModelConsistency(urdfFileName);
     }
+
+    // Do a special test for the regresson on a model that just has 1 joint that rotates
+    // around the Z axis, and both link frames have the origin on that axes
+    testTwoLinksRotationOnZAxisRegressor();
 
     return EXIT_SUCCESS;
 }

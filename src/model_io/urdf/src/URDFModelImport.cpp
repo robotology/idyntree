@@ -581,14 +581,14 @@ bool addSensorFramesAsAdditionalFramesToModel(Model & model,
                 LinkIndex   linkToWhichTheSensorIsAttached = linkSensor->getParentLinkIndex();
                 std::string linkToWhichTheSensorIsAttachedName = model.getLinkName(linkToWhichTheSensorIsAttached);
 
-                if( model.getFrameIndex(linkSensor->getName()) != FRAME_INVALID_INDEX )
+                if( model.isFrameNameUsed(linkSensor->getName()) )
                 {
                     std::string err = "addSensorFramesAsAdditionalFrames is specified as an option, but it is impossible to add the frame of sensor " + linkSensor->getName() + " as there is already a frame with that name";
                     reportWarning("","addSensorFramesAsAdditionalFramesToModel",err.c_str());
                 }
                 else
                 {
-                    std::cerr << "Adding sensor " << linkSensor->getName() << " to link " << linkToWhichTheSensorIsAttachedName << " as additional frame"<< std::endl;
+                    // std::cerr << "Adding sensor " << linkSensor->getName() << " to link " << linkToWhichTheSensorIsAttachedName << " as additional frame"<< std::endl;
                     bool ok = model.addAdditionalFrameToLink(linkToWhichTheSensorIsAttachedName,linkSensor->getName(),linkSensor->getLinkSensorTransform());
 
                     if( !ok )
@@ -612,7 +612,7 @@ bool addSensorFramesAsAdditionalFramesToModel(Model & model,
 
                 std::string linkToWhichTheSensorIsAttachedName = ftSensor->getSecondLinkName();
 
-                if( model.getFrameIndex(ftSensor->getName()) != FRAME_INVALID_INDEX )
+                if( model.isFrameNameUsed(ftSensor->getName()) )
                 {
                     std::string err = "addSensorFramesAsAdditionalFrames is specified as an option, but it is impossible to add the frame of sensor " + ftSensor->getName() + " as there is already a frame with that name";
                     reportWarning("","addSensorFramesAsAdditionalFramesToModel",err.c_str());
@@ -706,7 +706,7 @@ bool modelFromURDFString(const std::string& urdf_string,
 
         assert(joint->getFirstAttachedLink() != joint->getSecondAttachedLink());
 
-        // All joints expect the fixed one are immediatly add to the model
+        // All joints expect the fixed one are immediatly added to the model
         if( jointType != "fixed" )
         {
             JointIndex newJointIndex = rawModel.addJoint(jointName,joint);
@@ -769,7 +769,21 @@ bool modelFromURDFString(const std::string& urdf_string,
 
     if( rootCandidates.size() >= 2 )
     {
-        reportError("","modelFromURDFString","Multiple root links found in URDF string");
+        std::stringstream ss;
+        ss << "Multiple (" << rootCandidates.size() << ") root links: (";
+        for(size_t root=0; root < rootCandidates.size(); root++)
+        {
+            ss << rootCandidates[root];
+
+            if( root != rootCandidates.size()-1 )
+            {
+                ss << ", ";
+            }
+        }
+        ss << ") found in URDF string";
+
+        std::cerr << "Multiple roots!!!" << std::endl;
+        reportError("","modelFromURDFString",ss.str().c_str());
         model = Model();
         return false;
     }

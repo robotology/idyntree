@@ -7,20 +7,20 @@ classdef JointDOFsDoubleArray < iDynTree.VectorDynSize
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(874, varargin{:});
+        tmp = iDynTreeMEX(888, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(875, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(889, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(876, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(890, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(877, self);
+        iDynTreeMEX(891, self);
         self.swigPtr=[];
       end
     end

@@ -9,88 +9,18 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(934, varargin{:});
+        tmp = iDynTreeMEX(948, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(935, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(949, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(936, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(950, self, varargin{:});
     end
     function varargout = S(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(937, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(938, self, varargin{1});
-      end
-    end
-    function varargout = U(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(939, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(940, self, varargin{1});
-      end
-    end
-    function varargout = D(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(941, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(942, self, varargin{1});
-      end
-    end
-    function varargout = u(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(943, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(944, self, varargin{1});
-      end
-    end
-    function varargout = linksVel(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(945, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(946, self, varargin{1});
-      end
-    end
-    function varargout = linksBiasAcceleration(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(947, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(948, self, varargin{1});
-      end
-    end
-    function varargout = linksAccelerations(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(949, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(950, self, varargin{1});
-      end
-    end
-    function varargout = linkABIs(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -100,7 +30,7 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < SwigRef
         iDynTreeMEX(952, self, varargin{1});
       end
     end
-    function varargout = linksBiasWrench(self, varargin)
+    function varargout = U(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -110,9 +40,79 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < SwigRef
         iDynTreeMEX(954, self, varargin{1});
       end
     end
+    function varargout = D(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(955, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(956, self, varargin{1});
+      end
+    end
+    function varargout = u(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(957, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(958, self, varargin{1});
+      end
+    end
+    function varargout = linksVel(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(959, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(960, self, varargin{1});
+      end
+    end
+    function varargout = linksBiasAcceleration(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(961, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(962, self, varargin{1});
+      end
+    end
+    function varargout = linksAccelerations(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(963, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(964, self, varargin{1});
+      end
+    end
+    function varargout = linkABIs(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(965, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(966, self, varargin{1});
+      end
+    end
+    function varargout = linksBiasWrench(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(967, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(968, self, varargin{1});
+      end
+    end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(955, self);
+        iDynTreeMEX(969, self);
         self.swigPtr=[];
       end
     end

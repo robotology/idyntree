@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Fondazione Istituto Italiano di Tecnologia
  * Authors: Silvio Traversaro
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
@@ -37,16 +37,16 @@ SimpleLeggedOdometry::~SimpleLeggedOdometry()
 }
 
 bool SimpleLeggedOdometry::init(const std::string& initialFixedFrame,
-                                const Transform& world_H_initialFixedFrame)
+                                const Transform initialFixedFrame_H_world)
 {
     FrameIndex initialFixedFrameIndex = this->m_model.getFrameIndex(initialFixedFrame);
 
-    return init(initialFixedFrameIndex,world_H_initialFixedFrame);
+    return init(initialFixedFrameIndex,initialFixedFrame_H_world);
 }
 
 
 bool SimpleLeggedOdometry::init(const FrameIndex initialFixedFrameIndex,
-                                const Transform& world_H_initialFixedFrame)
+                                const Transform initialFixedFrame_H_world)
 {
     if( !m_isModelValid )
     {
@@ -64,8 +64,65 @@ bool SimpleLeggedOdometry::init(const FrameIndex initialFixedFrameIndex,
     }
 
     m_fixedLinkIndex = m_model.getFrameLink(initialFixedFrameIndex);
-    Transform initialFixedFrame_H_fixedLink = m_model.getFrameTransform(initialFixedFrameIndex).inverse();
-    m_world_H_fixedLink = world_H_initialFixedFrame*initialFixedFrame_H_fixedLink;
+
+    Transform world_H_initialFixedFrame = initialFixedFrame_H_world.inverse();
+    Transform initalFixedFrame_H_fixedLink =  m_model.getFrameTransform(m_fixedLinkIndex).inverse();
+
+    m_world_H_fixedLink = world_H_initialFixedFrame*initalFixedFrame_H_fixedLink;
+
+    m_isOdometryInitialized = true;
+
+    return true;
+}
+
+
+bool SimpleLeggedOdometry::init(const std::string & initialFixedFrame,
+                                const std::string & initalReferenceFrameForWorld,
+                                const Transform initialReferenceFrame_H_world)
+{
+    FrameIndex initialFixedFrameIndex = this->m_model.getFrameIndex(initialFixedFrame);
+    FrameIndex initalReferenceFrameIndexForWorld = this->m_model.getFrameIndex(initalReferenceFrameForWorld);
+
+    return init(initialFixedFrameIndex,initalReferenceFrameIndexForWorld,initialReferenceFrame_H_world);
+}
+
+
+bool SimpleLeggedOdometry::init(const FrameIndex initialFixedFrameIndex,
+                                const FrameIndex initalReferenceFrameIndexForWorld,
+                                const Transform initialReferenceFrame_H_world)
+{
+    if( !m_isModelValid )
+    {
+         reportError("SimpleLeggedOdometry",
+                     "init",
+                     "Model not initialised.");
+         return false;
+    }
+
+    if( !m_model.isValidFrameIndex(initialFixedFrameIndex) ||
+        !m_model.isValidFrameIndex(initalReferenceFrameIndexForWorld) )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "init","invalid frame passed");
+        return false;
+    }
+
+    if( ! m_kinematicsUpdated )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "init","updateKinematics never called");
+        return false;
+    }
+
+    m_fixedLinkIndex = m_model.getFrameLink(initialFixedFrameIndex);
+    LinkIndex linkAttachedToWorldIndex = m_model.getFrameLink(initalReferenceFrameIndexForWorld);
+
+    Transform world_H_initialReferenceFrame = initialReferenceFrame_H_world.inverse();
+    Transform initalReferenceFrame_H_linkAttachedToWorld =  m_model.getFrameTransform(initalReferenceFrameIndexForWorld).inverse();
+    Transform linkAttachedToWorld_H_floatingBase = m_base_H_link(linkAttachedToWorldIndex).inverse();
+    Transform floatingBase_H_fixedLink           = m_base_H_link(m_fixedLinkIndex);
+
+    m_world_H_fixedLink = world_H_initialReferenceFrame*initalReferenceFrame_H_linkAttachedToWorld*linkAttachedToWorld_H_floatingBase*floatingBase_H_fixedLink;
 
     m_isOdometryInitialized = true;
 
@@ -251,17 +308,9 @@ Transform SimpleLeggedOdometry::getWorldLinkTransform(const LinkIndex link_index
         return Transform::Identity();
     }
 
-    std::cerr << m_fixedLinkIndex << std::endl;
-    std::cerr << m_base_H_link.getNrOfLinks() << std::endl;
-
     assert(m_fixedLinkIndex < m_base_H_link.getNrOfLinks());
     Transform base_H_fixed = m_base_H_link(m_fixedLinkIndex);
     Transform base_H_link =  m_base_H_link(link_index);
-
-    std::cerr << "base_H_fixed " << base_H_fixed.toString() << std::endl;
-    std::cerr << "base_H_link " << base_H_link.toString() << std::endl;
-    std::cerr << "m_world_H_fixedLink " << m_world_H_fixedLink.toString() << std::endl;
-
 
     return m_world_H_fixedLink*base_H_fixed.inverse()*base_H_link;
 }

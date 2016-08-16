@@ -170,15 +170,59 @@ public:
 
     /**
      * Initialize the odometry.
+     * This method initializes the world location w.r.t. to a frame
+     * that is not the frame that is initially assumed fixed.
+     * For this reason it is necessary to call updateKinematics at least once before calling this method.
+     *
+     * @param[in] initialFixedFrame Frame initially assumed to be fixed.
+     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world).
+     * @return true if all went well, false otherwise.
      */
     bool init(const std::string & initialFixedFrame,
-              const Transform & world_H_initialFixedFrame);
+              const Transform initialFixedFrame_H_world = Transform::Identity());
 
-    /**
+     /**
      * Initialize the odometry.
+     * This method initializes the world location w.r.t. to a frame
+     * that is not the frame that is initially assumed fixed.
+     * For this reason it is necessary to call updateKinematics at least once before calling this method.
+     *
+     * @param[in] initialFixedFrameIndex Frame initially assumed to be fixed.
+     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world).
+     * @return true if all went well, false otherwise.
      */
     bool init(const FrameIndex initialFixedFrameIndex,
-              const Transform & world_H_initialFixedFrame);
+              const Transform initialFixedFrame_H_world = Transform::Identity());
+
+    /**
+     * Initialize the odometry, specifying separately initial fixed frame and world.
+     * This method initializes the world location w.r.t. to a frame
+     * that is not the frame that is initially assumed fixed,
+     * for this reason it is necessary to call updateKinematics at least once before calling this method.
+     *
+     * @param[in] initialFixedFrame Frame initially assumed to be fixed.
+     * @param[in] initialReferenceFrameForWorld Frame in which the initial world is expressed.
+     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial reference frame (default: identity, i.e. the initialReferenceFrameForWorld is the world).
+     * @return true if all went well, false otherwise.
+     */
+    bool init(const std::string & initialFixedFrame,
+              const std::string & initalReferenceFrameForWorld,
+              const Transform initialReferenceFrame_H_world = Transform::Identity());
+
+    /**
+     * Initialize the odometry, specifying separately initial fixed frame and world.
+     * This method initializes the world location w.r.t. to a frame
+     * that is not the frame that is initially assumed fixed,
+     * for this reason it is necessary to call updateKinematics at least once before calling this method.
+     *
+     * @param[in] initialFixedFrameIndex Frame initially assumed to be fixed.
+     * @param[in] initialReferenceFrameIndexForWorld Frame in which the initial world is expressed.
+     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial reference frame (default: identity, i.e. the initialReferenceFrameForWorld is the world).
+     * @return true if all went well, false otherwise.
+     */
+    bool init(const FrameIndex initialFixedFrameIndex,
+              const FrameIndex initalReferenceFrameIndexForWorld,
+              const Transform initialReferenceFrame_H_world = Transform::Identity());
 
     /**
      * Change the link that the odometry assumes to be fixed with

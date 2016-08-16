@@ -4,13 +4,15 @@
 
 project(iDynTree_Estimation CXX)
 
-set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/ExternalWrenchesEstimation.h
+set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdyHelper.h
+                                include/iDynTree/Estimation/ExternalWrenchesEstimation.h
                                 include/iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h
                                 include/iDynTree/Estimation/SimpleLeggedOdometry.h)
 
 set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES )
 
-set(IDYNTREE_ESTIMATION_SOURCES src/ExternalWrenchesEstimation.cpp
+set(IDYNTREE_ESTIMATION_SOURCES src/BerdyHelper.cpp
+                                src/ExternalWrenchesEstimation.cpp
                                 src/ExtWrenchesAndJointTorquesEstimator.cpp
                                 src/SimpleLeggedOdometry.cpp)
 

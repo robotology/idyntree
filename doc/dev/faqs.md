@@ -1,3 +1,20 @@
+## What are best entry points to understand iDynTree structure? 
+The best way to understand iDynTree is probably to read directly the source code. 
+
+Some classes extremly used are the following:
+
+| Class name | Description |  Doxygen docs | Headers (`.h`) | Source Code (`.cpp`) | Relevant Tests | 
+|:----------:|:-----------:|:------------:|:--------------:|:-----------:|:-----:|
+| `iDynTree::Transform` | Generic transform between two different frames. | [link](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1Transform.html) | [ src/core/include/iDynTree/Core/Transform.h](../../src/core/include/iDynTree/Core/Transform.h) | [ src/core/src/Transform.cpp](../../src/core/src/Transform.cpp) | [src/core/tests](../../src/core/tests) | 
+| `iDynTree::Model` | Generic undirected (i.e. with no "base") multibody model. | [link](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1Model.html) | [ src/model/include/iDynTree/Model/Model.h](../../src/model/include/iDynTree/Model/Model.h) | [ src/model/src/Model.cpp](../../src/model/src/Model.cpp) | [src/model/tests/ModelUnitTest.cpp](../../src/model/tests/ModelUnitTest.cpp) | 
+| `iDynTree::Traversal` | Class describing a order in which link are visited once a "base link" is choosen |  [link](http://wiki.icub.org/codyco/dox/html/idyntree/html/classiDynTree_1_1Traversal.html) | [ src/model/include/iDynTree/Model/Traversal.h](../../src/model/include/iDynTree/Model/Traversal.h) | [ src/model/src/Traversal.cpp](../../src/model/src/Traversal.cpp) | [src/model/tests/ModelUnitTest.cpp](../../src/model/tests/ModelUnitTest.cpp) | 
+ 
+
+If you need any additional doxygen comments, please [open an issue](https://github.com/robotology/idyntree/issues/new) detailing which point of the code you find difficul to understand. 
+
+Internally iDynTree uses a lot the [`Eigen` C++ template vector library](https://eigen.tuxfamily.org/dox/index.html), and in particularly the [`Eigen::Map`](https://eigen.tuxfamily.org/dox/group__TutorialMapClass.html)
+class is used a lot. Please check [Eigen documentation](https://eigen.tuxfamily.org/dox/index.html) for more details. 
+
 ## How to run the tests 
 iDynTree uses tests to prevent regressions caused by modification in the source code of the library. 
 To compile and run the test locally, enable the `IDYNTREE_COMPILE_TESTS` CMake option and then compile
@@ -24,7 +41,7 @@ with your GitHub account, and you will automatically receive notifications if yo
 * If you add a instantiated template, remember to add it to swig with the `%template` SWIG command. 
 * Regenerate the MATLAB bindings, following the instructions in https://github.com/robotology/idyntree#matlab-bindings-modifications . 
 * (Optional) Add a new matlab test testing the new code in `bindings/matlab/tests`. 
-  * You should add a script named `testNameOfTheTest.m` and then add it to the `runiDynTreeTests.m` script. 
+  * The structure of tests in `bindings/matlab/tests` uses [MOxUnit](https://github.com/MOxUnit/MOxUnit) a unit test framework for Matlab and Octave. Please see the MOxUnit documentation and existing tests for understanding the structure of the tests. As the tests are run by `Travis` also on Octave, please make sure that your tests do not use Matlab-specific features.
 * Run matlab tests with `ctest -VV -R matlab` in the build directory, and check that they are running file. 
 * Commit the updated version of the bindings by adding everything inside the `bindings/matlab` directory, with commit message `[bindings] update matlab bindings`. 
 

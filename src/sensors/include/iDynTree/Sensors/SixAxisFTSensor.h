@@ -204,6 +204,52 @@ namespace iDynTree {
                                     iDynTree::Wrench & wrench_applied_on_link ) const;
 
         /**
+         * Get the 6x6 matrix that multiplied by the wrench returned by the F/T sensors
+         * returnes the wrench applied on the specified link expressed in the specified link frame.
+         *
+         * If the F/T sensors is not connected to link_index, the function will return false
+         * and the matrix will be zeroed.
+         *
+         * \note This will return and adjoint transformation matrix, possibly with the sign
+         *       changed depending on the "direction" of the F/T sensor (i.e. if it is measures
+         *       the wrench applied by a link to another, of viceversa).
+         *
+         * \note The following condition should always hold :
+         * ~~~
+         * getWrenchAppliedOnLink(link,measured_wrench,wrench_on_link);
+         * getWrenchAppliedOnLinkMatrix(link,wrench_applied_on_link_matrix);
+         * wrench_applied_on_link_matrix*measured_wrench.toVector() == wrench_on_link
+         * ~~~
+         *
+         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
+         */
+        bool getWrenchAppliedOnLinkMatrix(const LinkIndex link_index,
+                                                Matrix6x6 & wrench_applied_on_link_matrix ) const;
+
+        /**
+         * Get the 6x6 matrix that multiplied by the wrench applied on the specified link expressed in the specified link frame
+         * returns the wrench measured by the F/T sensors.
+         *
+         * If the F/T sensors is not connected to link_index, the function will return false
+         * and the matrix will be zeroed.
+         *
+         * \note This will return an adjoint transformation matrix, possibly with the sign
+         *       changed depending on the "direction" of the F/T sensor (i.e. if it is measures
+         *       the wrench applied by a link to another, of viceversa).
+         *
+         * \note The following condition should always hold :
+         * ~~~
+         * getWrenchAppliedOnLink(link,measured_wrench,wrench_on_link);
+         * getWrenchAppliedOnLinkInverseMatrix(link,wrench_applied_on_link_inverse_matrix);
+         * measured_wrench.toVector() == wrench_applied_on_link_inverse_matrix*wrench_on_link
+         * ~~~
+         *
+         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
+         */
+        bool getWrenchAppliedOnLinkInverseMatrix(const LinkIndex link_index,
+                                                 Matrix6x6 & wrench_applied_on_link_inverse_matrix ) const;
+
+        /**
          * Predict sensor measurement when given a vector of internal wrenches
          * computed with a given traversal.
          *

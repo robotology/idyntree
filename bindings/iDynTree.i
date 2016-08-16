@@ -94,10 +94,6 @@ namespace std {
 #include "iDynTree/Model/ForwardKinematics.h"
 #include "iDynTree/Model/Dynamics.h"
 
-// Model loading from external formats
-#include "iDynTree/ModelIO/URDFModelImport.h"
-#include "iDynTree/ModelIO/URDFDofsImport.h"
-
 // Sensors related data structures
 #include "iDynTree/Sensors/Sensors.h"
 #include "iDynTree/Sensors/SixAxisFTSensor.h"
@@ -105,12 +101,17 @@ namespace std {
 #include "iDynTree/Sensors/GyroscopeSensor.h"
 #include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
-// Sensors loading from external formats
-#include "iDynTree/ModelIO/URDFSensorsImport.h"
+// Model loading from external formats
+#include "iDynTree/ModelIO/URDFModelImport.h"
+#include "iDynTree/ModelIO/URDFDofsImport.h"
+#include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
+#include "iDynTree/ModelIO/ModelLoader.h"
 
 // Estimation related classes
 #include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
 #include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
+#include "iDynTree/Estimation/SimpleLeggedOdometry.h"
+#include "iDynTree/Estimation/BerdyHelper.h"
 
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
@@ -136,6 +137,10 @@ namespace std {
 
 #ifdef SWIGMATLAB
 %include "./matlab/matlab_matvec.i"
+#endif
+
+#ifdef SWIGOCTAVE
+%include "./octave/octave_matvec.i"
 #endif
 
 %template(Matrix3x3) iDynTree::MatrixFixSize<3,3>;
@@ -191,8 +196,15 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 %include "iDynTree/Core/SpatialVector.h"
 
+%template() iDynTree::DualSpace<iDynTree::SpatialMotionVector>;
+%template() iDynTree::DualSpace<iDynTree::SpatialForceVector>;
+
 #ifdef SWIGMATLAB
 %include "./matlab/matlab_spatialvec.i"
+#endif
+
+#ifdef SWIGOCTAVE
+%include "./octave/octave_spatialvec.i"
 #endif
 
 %template(SpatialMotionVectorSemanticsBase) iDynTree::SpatialVectorSemantics<iDynTree::LinearMotionVector3Semantics,iDynTree::AngularMotionVector3Semantics>;
@@ -256,10 +268,6 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Model/ForwardKinematics.h"
 %include "iDynTree/Model/Dynamics.h"
 
-// Model loading from external formats
-%include "iDynTree/ModelIO/URDFModelImport.h"
-%include "iDynTree/ModelIO/URDFDofsImport.h"
-
 // Sensors related data structures
 %include "iDynTree/Sensors/Sensors.h"
 %include "iDynTree/Sensors/SixAxisFTSensor.h"
@@ -269,13 +277,17 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 %include "sensors.i"
 
-// Sensors loading from external formats
-%include "iDynTree/ModelIO/URDFSensorsImport.h"
-
+// Model loading from external formats
+%include "iDynTree/ModelIO/URDFModelImport.h"
+%include "iDynTree/ModelIO/URDFDofsImport.h"
+%include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
+%include "iDynTree/ModelIO/ModelLoader.h"
 
 // Estimation related classes
 %include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
 %include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
+%include "iDynTree/Estimation/SimpleLeggedOdometry.h"
+%include "iDynTree/Estimation/BerdyHelper.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"

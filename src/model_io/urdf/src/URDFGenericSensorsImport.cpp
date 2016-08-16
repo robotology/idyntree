@@ -186,10 +186,9 @@ bool sensorsFromURDFString(const std::string& urdfXml,
         }
         else
         {
-            std::cerr<<"[ERROR] Specified sensor type "<<sensorType<<" of " << sensorName <<
-                       " is not recognised, parsing failed.";
-            parsingSuccessful = false;
-            return false;
+            std::string errString = "Specified sensor type " + sensorType + " of " + sensorName +" is not recognised, parsing of this sensor failed.";
+            reportWarning("","sensorsFromURDFString",errString.c_str());
+            continue;
         }
 
         // Parse origin element

@@ -249,6 +249,18 @@ Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) 
     }
 }
 
+size_t SensorsList::getSizeOfAllSensorsMeasurements() const
+{
+    size_t res = 0;
+    for(int i=(int)SIX_AXIS_FORCE_TORQUE; i< NR_OF_SENSOR_TYPES; i++)
+    {
+        SensorType type = (SensorType)i;
+        res += getSensorTypeSize(type)*getNrOfSensors(type);
+    }
+    return res;
+}
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -534,6 +546,18 @@ unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) 
     }
     return(returnVal);
 }
+
+size_t SensorsMeasurements::getSizeOfAllSensorsMeasurements() const
+{
+    size_t res = 0;
+    for(int i=(int)SIX_AXIS_FORCE_TORQUE; i< NR_OF_SENSOR_TYPES; i++)
+    {
+        SensorType type = (SensorType)i;
+        res += getSensorTypeSize(type)*getNrOfSensors(type);
+    }
+    return res;
+}
+
 
 
 }

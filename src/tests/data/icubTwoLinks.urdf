@@ -93,4 +93,17 @@
             </geometry>
         </collision>
     </link>
+
+    <!-- for testing bery ORIGINAL_FIXED_BASE_BERDY variant -->
+    <sensor name="dummy_accl" type="accelerometer">
+        <parent link="l_hip_1"/>
+    </sensor>
+    <sensor name="dummy_gyro" type="gyroscope">
+        <parent link="l_hip_1"/>
+        <origin xyz="0 -0.01 +0.01" rpy="0 -0 0" />
+    </sensor>
+    <sensor name="dummy_accl2" type="accelerometer">
+        <parent link="l_hip_1"/>
+    </sensor>
+
 </robot>

@@ -118,6 +118,12 @@ namespace iDynTree
                                            const LinkIndex child, const LinkIndex parent) const;
 
         // Documentation inherited
+        virtual void computeChildVel(const VectorDynSize & jntPos,
+                                     const VectorDynSize & jntVel,
+                                     LinkVelArray & linkVels,
+                                     const LinkIndex child, const LinkIndex parent) const;
+
+        // Documentation inherited
         virtual void computeChildVelAcc(const VectorDynSize & jntPos,
                                         const VectorDynSize & jntVel,
                                         const VectorDynSize & jntAcc,

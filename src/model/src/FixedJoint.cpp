@@ -166,6 +166,18 @@ void FixedJoint::computeChildVelAcc(const VectorDynSize & jntPos,
     return;
 }
 
+void FixedJoint::computeChildVel(const VectorDynSize & jntPos,
+                                 const VectorDynSize & jntVel,
+                                       LinkVelArray & linkVels,
+                                       const LinkIndex child, const LinkIndex parent) const
+{
+    const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
+    // Propagate twist: for a fixed joint the twist of two attached links is the same,
+    // expect that they are usually expressed in different frames
+    linkVels(child) = child_X_parent*linkVels(parent);
+    return;
+}
+
 void FixedJoint::setIndex(JointIndex& _index)
 {
     this->m_index = _index;
