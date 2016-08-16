@@ -67,7 +67,7 @@ void checkList()
     list.removeSensor(SIX_AXIS_FORCE_TORQUE, ft3.getName());
     ASSERT_IS_TRUE(list.getNrOfSensors(SIX_AXIS_FORCE_TORQUE) == 2);
 
-    for (SensorsList::Iterator it = list.sensorsIteratorForType(SensorType::SIX_AXIS_FORCE_TORQUE);
+    for (SensorsList::typed_iterator it = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE);
          it.isValid(); ++it) {
         ASSERT_IS_TRUE((*it)->getName() != ft3.getName());
     }
@@ -132,7 +132,7 @@ void checkIterator()
 
     //Checking ACC iterator
     int checkIndex = 0;
-    for (SensorsList::Iterator it = list.sensorsIteratorForType(SensorType::ACCELEROMETER); it.isValid(); ++it, ++checkIndex) {
+    for (SensorsList::typed_iterator it = list.sensorsIteratorForType(ACCELEROMETER); it.isValid(); ++it, ++checkIndex) {
         //The following cannot be used because sensors are cloned when put inside the SensorList
 //        ASSERT_IS_TRUE(*it == accExpectedOrder[checkIndex]);
         //The following cannot be used as operator== does not exist in sensor
@@ -140,39 +140,57 @@ void checkIterator()
         Sensor *s = *it;
         ASSERT_IS_TRUE(accExpectedOrder[checkIndex]->getName() == s->getName());
         //the following does not work :( I don't know why
-
     }
 
     //Checking FTS iterator
     checkIndex = 0;
-    for (SensorsList::Iterator it = list.sensorsIteratorForType(SensorType::SIX_AXIS_FORCE_TORQUE); it.isValid(); ++it, ++checkIndex) {
+    for (SensorsList::typed_iterator it = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE); it.isValid(); ++it, ++checkIndex) {
+        Sensor *s = *it;
+        ASSERT_IS_TRUE(ftsExpectedOrder[checkIndex]->getName() == s->getName());
+    }
+
+    //Same checking on const iterator
+    checkIndex = 0;
+    for (SensorsList::const_typed_iterator it = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE); it.isValid(); ++it, ++checkIndex) {
         Sensor *s = *it;
         ASSERT_IS_TRUE(ftsExpectedOrder[checkIndex]->getName() == s->getName());
     }
 
     //Checking all sensors iterator
     checkIndex = 0;
-    for (SensorsList::Iterator it = list.allSensorsIterator(); it.isValid(); ++it, ++checkIndex) {
+    for (SensorsList::iterator it = list.allSensorsIterator(); it.isValid(); ++it, ++checkIndex) {
         Sensor *s = *it;
         ASSERT_IS_TRUE(allExpectedOrder[checkIndex]->getName() == s->getName());
     }
 
-    SensorsList::Iterator allIterator = list.allSensorsIterator();
-    SensorsList::Iterator allIterator2 = list.allSensorsIterator();
-    SensorsList::Iterator ftsIterator = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE);
+    //Same checking on const iterator
+    checkIndex = 0;
+    for (SensorsList::const_iterator it = list.allSensorsIterator(); it.isValid(); ++it, ++checkIndex) {
+        Sensor *s = *it;
+        ASSERT_IS_TRUE(allExpectedOrder[checkIndex]->getName() == s->getName());
+    }
 
-    //Because the interal ordering this two iterators should be equal
-    ASSERT_IS_TRUE(allIterator == ftsIterator);
-    ASSERT_IS_FALSE(allIterator != ftsIterator);
-    ++allIterator;
-    ASSERT_IS_FALSE(allIterator == ftsIterator);
-    ++allIterator;
-    ++allIterator2;
-    ++allIterator2;
-
+    SensorsList::iterator allIterator = list.allSensorsIterator();
+    SensorsList::iterator allIterator2 = allIterator;
+    SensorsList::const_iterator allIterator3 = allIterator;
     ASSERT_IS_TRUE(allIterator == allIterator2);
+    ASSERT_IS_TRUE(allIterator == allIterator3);
+    ++allIterator;
+    allIterator2++;
+    ++allIterator3;
+    ASSERT_IS_TRUE(allIterator == allIterator2);
+    ASSERT_IS_TRUE(allIterator == allIterator3);
 
-
+    SensorsList::typed_iterator ftsIterator = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE);
+    SensorsList::typed_iterator ftsIterator2 = ftsIterator;
+    SensorsList::const_typed_iterator ftsIterator3 = ftsIterator;
+    ASSERT_IS_TRUE(ftsIterator == ftsIterator2);
+    ASSERT_IS_TRUE(ftsIterator == ftsIterator3);
+    ++ftsIterator;
+    ftsIterator2++;
+    ++ftsIterator3;
+    ASSERT_IS_TRUE(ftsIterator == ftsIterator2);
+    ASSERT_IS_TRUE(ftsIterator == ftsIterator3);
 
 }
 

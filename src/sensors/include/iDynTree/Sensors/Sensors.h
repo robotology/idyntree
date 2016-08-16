@@ -43,7 +43,7 @@ namespace iDynTree {
     {
         SIX_AXIS_FORCE_TORQUE = 0,
         ACCELEROMETER = 1,
-        GYROSCOPE = 2,
+        GYROSCOPE = 2
     };
 
     // This should be equal to the number of option
@@ -242,8 +242,15 @@ namespace iDynTree {
             void destructor();
         public:
 
-            /// Iterator for the SensorsList class
+            /// Iterators for the SensorsList class
+            class TypedIterator;
+            class ConstTypedIterator;
+            typedef TypedIterator typed_iterator;
+            typedef ConstTypedIterator const_typed_iterator;
             class Iterator;
+            class ConstIterator;
+            typedef Iterator iterator;
+            typedef ConstIterator const_iterator;
 
             /**
              * Constructor.
@@ -330,39 +337,143 @@ namespace iDynTree {
         bool removeSensor(const SensorType & sensor_type, const unsigned int sensor_index);
         bool removeAllSensorsOfType(const SensorType & sensor_type);
 
-        SensorsList::Iterator allSensorsIterator();
-        SensorsList::Iterator sensorsIteratorForType(const iDynTree::SensorType &sensor_type);
+        iterator allSensorsIterator();
+        const_iterator allSensorsIterator() const;
+        typed_iterator sensorsIteratorForType(const iDynTree::SensorType &sensor_type);
+        const_typed_iterator sensorsIteratorForType(const iDynTree::SensorType &sensor_type) const;
 
     };
 
+    class SensorsList::TypedIterator
+    {
+    private:
+        TypedIterator(std::vector<Sensor *>& list);
+        friend class SensorsList;
+
+        std::vector<Sensor *>& iteratingList;
+        std::vector<Sensor *>::iterator internalIterator;
+
+    public:
+        typedef std::ptrdiff_t difference_type;
+        typedef Sensor* value_type;
+        typedef value_type& reference;
+        typedef value_type* pointer;
+        typedef std::input_iterator_tag iterator_category;
+
+        TypedIterator& operator++();
+        TypedIterator operator++(int);
+
+        bool operator==(const TypedIterator&) const;
+        bool operator==(const ConstTypedIterator&) const;
+        inline bool operator!=(const TypedIterator& s) const { return !this->operator==(s); }
+        inline bool operator!=(const ConstTypedIterator& s) const { return !this->operator==(s); }
+
+        reference operator*() const;
+        pointer operator->() const;
+
+        bool isValid() const;
+    };
+
+    class SensorsList::ConstTypedIterator
+    {
+    private:
+        ConstTypedIterator(std::vector<Sensor *>& list);
+        friend class SensorsList;
+
+        std::vector<Sensor *>& iteratingList;
+        std::vector<Sensor *>::const_iterator internalIterator;
+
+        void constructor();
+
+    public:
+        typedef std::ptrdiff_t difference_type;
+        typedef Sensor* value_type;
+        typedef const value_type& reference;
+        typedef const value_type* pointer; //Not sure. Maybe this should be simply Sensor*??
+        typedef std::input_iterator_tag iterator_category;
+
+        ConstTypedIterator(const TypedIterator&);
+
+        ConstTypedIterator& operator++();
+        ConstTypedIterator operator++(int);
+
+        bool operator==(const ConstTypedIterator&) const;
+        bool operator==(const TypedIterator&) const;
+        inline bool operator!=(const ConstTypedIterator& s) const { return !this->operator==(s); }
+        inline bool operator!=(const TypedIterator& s) const { return !this->operator==(s); }
+
+        reference operator*() const;
+        pointer operator->() const;
+        
+        bool isValid() const;
+    };
 
     class SensorsList::Iterator
     {
-    protected:
+    private:
         //it can be created only by SensorsList class
-        Iterator();
+        Iterator(std::vector< std::vector<Sensor *> >&);
         friend class SensorsList;
 
-        void *m_pimpl;
+        std::vector<Sensor *>::iterator internalIterator;
+        std::vector< std::vector<Sensor *> >::iterator externalIterator;
+        std::vector< std::vector<Sensor *> >& iteratingList;
+
     public:
-        typedef typename std::ptrdiff_t difference_type;
+        typedef std::ptrdiff_t difference_type;
         typedef Sensor* value_type;
-        typedef Sensor*& reference;
-        typedef Sensor** pointer; //Not sure. Maybe this should be simply Sensor*??
+        typedef value_type& reference;
+        typedef value_type* pointer; //Not sure. Maybe this should be simply Sensor*??
         typedef std::input_iterator_tag iterator_category;
 
-        virtual ~Iterator();
+        Iterator& operator++();
+        Iterator operator++(int);
 
-        virtual Iterator& operator++();
-        virtual Iterator operator++(int);
+        bool operator==(const Iterator&) const;
+        bool operator==(const ConstIterator&) const;
+        inline bool operator!=(const Iterator& s) const { return !this->operator==(s); }
+        inline bool operator!=(const ConstIterator& s) const { return !this->operator==(s); }
 
-        virtual bool operator==(const Iterator&) const;
-        virtual inline bool operator!=(const Iterator& s) const { return !this->operator==(s); }
-
-        virtual reference operator*();
-        virtual pointer operator->();
+        reference operator*() const;
+        pointer operator->() const;
         
-        virtual bool isValid() const;
+        bool isValid() const;
+    };
+
+    class SensorsList::ConstIterator
+    {
+    private:
+        //it can be created only by SensorsList class
+        ConstIterator(std::vector< std::vector<Sensor *> >&);
+        friend class SensorsList;
+
+        std::vector<Sensor *>::const_iterator internalIterator;
+        std::vector< std::vector<Sensor *> >::const_iterator externalIterator;
+        std::vector< std::vector<Sensor *> >& iteratingList;
+
+        void constructor();
+
+    public:
+        typedef std::ptrdiff_t difference_type;
+        typedef Sensor* value_type;
+        typedef const value_type& reference;
+        typedef const value_type* pointer; //Not sure. Maybe this should be simply Sensor*??
+        typedef std::input_iterator_tag iterator_category;
+
+        ConstIterator(const Iterator&);
+
+        ConstIterator& operator++();
+        ConstIterator operator++(int);
+
+        bool operator==(const ConstIterator&) const;
+        bool operator==(const Iterator&) const;
+        inline bool operator!=(const ConstIterator& s) const { return !this->operator==(s); }
+        inline bool operator!=(const Iterator& s) const { return !this->operator==(s); }
+
+        reference operator*() const;
+        pointer operator->() const;
+
+        bool isValid() const;
     };
 
 

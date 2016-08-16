@@ -296,207 +296,277 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
 
 
     //Iterator implementation
-    struct IteratorPimpl
-    {
-    protected:
-        std::vector<Sensor *>::iterator internalIterator;
-
-    public:
-        friend class SensorsList;
-
-        virtual ~IteratorPimpl() {}
-        virtual void advance() {}
-
-        //this has been kept nonvirtual as we compare only the internal iterator
-        bool compare(const IteratorPimpl &it) const
-        {
-            return internalIterator == it.internalIterator;
-        }
-
-        virtual SensorsList::Iterator::reference dereference() = 0;
-        virtual SensorsList::Iterator::pointer derefpointer() = 0;
-        virtual bool isValid() const { return false; }
-
-    };
-
-    class TypedSensorsListIterator;
-    class AllSensorsListIterator;
-
-    class TypedSensorsListIterator : public IteratorPimpl
-    {
-    protected:
-        std::vector<Sensor *>& iteratingList;
-
-    public:
-        friend class AllSensorsListIterator;
-
-        TypedSensorsListIterator(std::vector<Sensor *>& list)
-        : iteratingList(list)
-        {
-            internalIterator = iteratingList.begin();
-        }
-
-        virtual void advance()
-        {
-            ++internalIterator;
-        }
-
-        virtual SensorsList::Iterator::reference dereference()
-        {
-            return *internalIterator;
-        }
-
-        virtual SensorsList::Iterator::pointer derefpointer()
-        {
-            return internalIterator.operator->();
-        }
-
-        virtual bool isValid() const
-        {
-            return internalIterator >= iteratingList.begin() &&
-            internalIterator < iteratingList.end();
-        }
-
-
-    };
-
-    class AllSensorsListIterator : public IteratorPimpl
-    {
-        std::vector< std::vector<Sensor *> >::iterator externalIterator;
-        std::vector< std::vector<Sensor *> >& iteratingList;
-
-    public:
-
-        friend class TypedSensorsListIterator;
-
-        AllSensorsListIterator(std::vector< std::vector<Sensor *> >& list)
-        : iteratingList(list)
-        {
-            //Start from the beginning
-            externalIterator = list.begin();
-            //While external list is empty, skip to the next one
-            while (externalIterator->empty()) {
-                ++externalIterator;
-            }
-            //if the iterator is still valid assign the internal
-            //otherwise the iterator itself is no longer valid
-            if (externalIterator != list.end()) {
-                internalIterator = externalIterator->begin();
-            }
-        }
-
-        virtual void advance()
-        {
-            ++internalIterator;
-            if (internalIterator >= externalIterator->end()) {
-                //end of inner list.
-                //Move to next list
-                do {
-                    ++externalIterator;
-                } while (externalIterator != iteratingList.end() &&
-                         externalIterator->empty());
-                
-                if (externalIterator != iteratingList.end()) {
-                    internalIterator = externalIterator->begin();
-                }
-            }
-        }
-
-        virtual SensorsList::Iterator::reference dereference()
-        {
-            return *internalIterator;
-        }
-
-        virtual SensorsList::Iterator::pointer derefpointer()
-        {
-            return internalIterator.operator->();
-        }
-
-        virtual bool isValid() const
-        {
-            return
-            //Check for external list consistency
-            externalIterator >= iteratingList.begin() &&
-            externalIterator < iteratingList.end() &&
-            //Check for internal list consistency
-            internalIterator >= externalIterator->begin() &&
-            internalIterator < externalIterator->end();
-        }
-
-    };
-
     SensorsList::Iterator SensorsList::allSensorsIterator()
     {
-        Iterator iterator;
-        iterator.m_pimpl = new AllSensorsListIterator(this->pimpl->allSensors);
+        Iterator iterator(this->pimpl->allSensors);
         return iterator;
     }
 
-    SensorsList::Iterator SensorsList::sensorsIteratorForType(const iDynTree::SensorType &sensor_type)
+    SensorsList::ConstIterator SensorsList::allSensorsIterator() const
     {
-        Iterator iterator;
-        iterator.m_pimpl = new TypedSensorsListIterator(this->pimpl->allSensors[sensor_type]);
+        ConstIterator iterator(this->pimpl->allSensors);
         return iterator;
     }
 
-
-    SensorsList::Iterator::Iterator(): m_pimpl(0) {}
-    SensorsList::Iterator::~Iterator()
+    SensorsList::TypedIterator SensorsList::sensorsIteratorForType(const iDynTree::SensorType &sensor_type)
     {
-        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
-        if (pimpl) {
-            delete pimpl;
-            pimpl = 0;
+        TypedIterator iterator(this->pimpl->allSensors[sensor_type]);
+        return iterator;
+    }
+
+    SensorsList::ConstTypedIterator SensorsList::sensorsIteratorForType(const iDynTree::SensorType &sensor_type) const
+    {
+        ConstTypedIterator iterator(this->pimpl->allSensors[sensor_type]);
+        return iterator;
+    }
+
+    SensorsList::TypedIterator::TypedIterator(std::vector<Sensor *> &list)
+    : iteratingList(list)
+    {
+        internalIterator = iteratingList.begin();
+    }
+
+    SensorsList::TypedIterator& SensorsList::TypedIterator::operator++()
+    {
+        ++internalIterator;
+        return *this;
+    }
+    SensorsList::TypedIterator SensorsList::TypedIterator::operator++(int)
+    {
+        SensorsList::TypedIterator previous(*this);
+        this->operator++();
+        return previous;
+    }
+
+    bool SensorsList::TypedIterator::operator==(const SensorsList::TypedIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    bool SensorsList::TypedIterator::operator==(const SensorsList::ConstTypedIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    SensorsList::TypedIterator::reference SensorsList::TypedIterator::operator*() const
+    {
+        return *internalIterator;
+    }
+    SensorsList::TypedIterator::pointer SensorsList::TypedIterator::operator->() const
+    {
+        return internalIterator.operator->();
+    }
+
+    bool SensorsList::TypedIterator::isValid() const
+    {
+        return internalIterator >= iteratingList.begin() &&
+        internalIterator < iteratingList.end();
+    }
+
+    SensorsList::ConstTypedIterator::ConstTypedIterator(std::vector<Sensor *> &list)
+    : iteratingList(list)
+    {
+        constructor();
+    }
+
+    SensorsList::ConstTypedIterator::ConstTypedIterator(const TypedIterator&it)
+    : iteratingList(it.iteratingList)
+    {
+        constructor();
+    }
+
+    void SensorsList::ConstTypedIterator::constructor()
+    {
+        internalIterator = iteratingList.begin();
+    }
+
+    SensorsList::ConstTypedIterator& SensorsList::ConstTypedIterator::operator++()
+    {
+        ++internalIterator;
+        return *this;
+    }
+    SensorsList::ConstTypedIterator SensorsList::ConstTypedIterator::operator++(int)
+    {
+        SensorsList::ConstTypedIterator previous(*this);
+        this->operator++();
+        return previous;
+    }
+
+    bool SensorsList::ConstTypedIterator::operator==(const SensorsList::ConstTypedIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    bool SensorsList::ConstTypedIterator::operator==(const SensorsList::TypedIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    SensorsList::ConstTypedIterator::reference SensorsList::ConstTypedIterator::operator*() const
+    {
+        return internalIterator.operator*();
+    }
+    SensorsList::ConstTypedIterator::pointer SensorsList::ConstTypedIterator::operator->() const
+    {
+        return internalIterator.operator->();
+    }
+
+    bool SensorsList::ConstTypedIterator::isValid() const
+    {
+        return internalIterator >= iteratingList.begin() &&
+        internalIterator < iteratingList.end();
+    }
+
+    SensorsList::Iterator::Iterator(std::vector< std::vector<Sensor *> >&list)
+    : iteratingList(list)
+    {
+        //Start from the beginning
+        externalIterator = iteratingList.begin();
+        //While external list is empty, skip to the next one
+        while (externalIterator != iteratingList.end()
+               && externalIterator->empty()) {
+            ++externalIterator;
+        }
+        //if the iterator is still valid assign the internal
+        //otherwise the iterator itself is no longer valid
+        if (externalIterator != iteratingList.end()) {
+            internalIterator = externalIterator->begin();
         }
     }
 
     SensorsList::Iterator& SensorsList::Iterator::operator++()
     {
-        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
-        assert(pimpl);
-        pimpl->advance();
+        ++internalIterator;
+        if (internalIterator >= externalIterator->end()) {
+            //end of inner list.
+            //Move to next list
+            do {
+                ++externalIterator;
+            } while (externalIterator != iteratingList.end() &&
+                     externalIterator->empty());
+
+            if (externalIterator != iteratingList.end()) {
+                internalIterator = externalIterator->begin();
+            }
+        }
         return *this;
     }
     SensorsList::Iterator SensorsList::Iterator::operator++(int)
     {
         SensorsList::Iterator previous(*this);
-        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
-        assert(pimpl);
-        pimpl->advance();
+        this->operator++();
         return previous;
     }
 
     bool SensorsList::Iterator::operator==(const SensorsList::Iterator&s) const
     {
-        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
-        assert(pimpl);
-        const IteratorPimpl *otherPimpl = static_cast<const IteratorPimpl *>(s.m_pimpl);
-        if (!otherPimpl) return false; //avoid inner dynamic cast
-
-        //non valid iterators does not compare to anything
-        if (!this->isValid() || !s.isValid()) return false;
-        
-        return pimpl->compare(*otherPimpl);
+        return internalIterator == s.internalIterator;
     }
 
-    SensorsList::Iterator::reference SensorsList::Iterator::operator*()
+    bool SensorsList::Iterator::operator==(const SensorsList::ConstIterator&s) const
     {
-        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
-        assert(pimpl);
-        return pimpl->dereference();
+        return internalIterator == s.internalIterator;
     }
-    SensorsList::Iterator::pointer SensorsList::Iterator::operator->()
+
+    SensorsList::Iterator::reference SensorsList::Iterator::operator*() const
     {
-        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
-        assert(pimpl);
-        return pimpl->derefpointer();
+        return *internalIterator;
+    }
+    SensorsList::Iterator::pointer SensorsList::Iterator::operator->() const
+    {
+        return internalIterator.operator->();
     }
 
     bool SensorsList::Iterator::isValid() const
     {
-        IteratorPimpl *pimpl = static_cast<IteratorPimpl*>(m_pimpl);
-        assert(pimpl);
-        return pimpl->isValid();
+        return
+        //Check for external list consistency
+        externalIterator >= iteratingList.begin() &&
+        externalIterator < iteratingList.end() &&
+        //Check for internal list consistency
+        internalIterator >= externalIterator->begin() &&
+        internalIterator < externalIterator->end();
+    }
+
+    SensorsList::ConstIterator::ConstIterator(std::vector< std::vector<Sensor *> >&list)
+    : iteratingList(list)
+    {
+        constructor();
+    }
+
+    SensorsList::ConstIterator::ConstIterator(const SensorsList::Iterator& it)
+    : iteratingList(it.iteratingList)
+    {
+        constructor();
+    }
+
+    void SensorsList::ConstIterator::constructor()
+    {
+        //Start from the beginning
+        externalIterator = iteratingList.begin();
+        //While external list is empty, skip to the next one
+        while (externalIterator->empty()) {
+            ++externalIterator;
+        }
+        //if the iterator is still valid assign the internal
+        //otherwise the iterator itself is no longer valid
+        if (externalIterator != iteratingList.end()) {
+            internalIterator = externalIterator->begin();
+        }
+    }
+
+    SensorsList::ConstIterator& SensorsList::ConstIterator::operator++()
+    {
+        ++internalIterator;
+        if (internalIterator >= externalIterator->end()) {
+            //end of inner list.
+            //Move to next list
+            do {
+                ++externalIterator;
+            } while (externalIterator != iteratingList.end() &&
+                     externalIterator->empty());
+
+            if (externalIterator != iteratingList.end()) {
+                internalIterator = externalIterator->begin();
+            }
+        }
+        return *this;
+    }
+    SensorsList::ConstIterator SensorsList::ConstIterator::operator++(int)
+    {
+        SensorsList::ConstIterator previous(*this);
+        this->operator++();
+        return previous;
+    }
+
+    bool SensorsList::ConstIterator::operator==(const SensorsList::ConstIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    bool SensorsList::ConstIterator::operator==(const SensorsList::Iterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    SensorsList::ConstIterator::reference SensorsList::ConstIterator::operator*() const
+    {
+        return *internalIterator;
+    }
+    SensorsList::ConstIterator::pointer SensorsList::ConstIterator::operator->() const
+    {
+        return internalIterator.operator->();
+    }
+
+    bool SensorsList::ConstIterator::isValid() const
+    {
+        return
+        //Check for external list consistency
+        externalIterator >= iteratingList.begin() &&
+        externalIterator < iteratingList.end() &&
+        //Check for internal list consistency
+        internalIterator >= externalIterator->begin() &&
+        internalIterator < externalIterator->end();
     }
 
 ///////////////////////////////////////////////////////////////////////////////
