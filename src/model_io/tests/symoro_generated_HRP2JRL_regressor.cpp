@@ -1,15 +1,4 @@
 
-#include <ros/ros.h>
-#include <kdl/jntarray.hpp>
-#include <math.h>
-
-using namespace KDL;
-
-int main(int argc, char** argv)
-{
-  return 0;
-}
-
 int symoro_generated_HRP2JRL_IMU_regressor(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const KDL::Twist base_vel, const KDL::Twist base_acc, Eigen::MatrixXd & dynamics_regressor)
 {
     //Generated code, size are fixed for hrp2 structured robot
