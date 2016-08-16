@@ -493,10 +493,6 @@ LinkIndex Model::getFrameLink(const FrameIndex frameIndex) const
 }
 
 
-
-
-
-
 unsigned int Model::getNrOfNeighbors(const LinkIndex link) const
 {
     assert(link < this->neighbors.size());
