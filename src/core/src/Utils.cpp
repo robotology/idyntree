@@ -71,7 +71,7 @@ namespace iDynTree
         return IDYNTREE_RAD2DEG*valueInRad;
     }
 
-    bool IndexRange::isValid()
+    bool IndexRange::isValid() const 
     {
         return (offset >= 0) && (size >= 0);
     }

@@ -207,6 +207,23 @@ public:
     bool checkConsistency();
 };
 
+
+//Unfortunately some sensors used in berdy are not proper sensors.
+//I cannot use the Sensor class which has almost all the information needed
+/**
+ * Structure which describes the essential information about a sensor used in berdy
+ * A sensor is identified by the pair (type, id)
+ */
+struct BerdySensor {
+    iDynTree::BerdySensorTypes type; /*<! type of the sensor */
+    std::string id; /*<! ID of the sensor */
+    iDynTree::IndexRange range; /*<! Range of the sensor
+                                 * (starting location in the measurements equations
+                                 *  and number of measuremes equations associated with the sensor */
+
+    bool operator==(const struct BerdySensor&);
+};
+
 /**
  * \brief Helper class for computing Berdy matrices.
  *
@@ -465,6 +482,17 @@ public:
      */
     bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                           MatrixDynSize & Y, VectorDynSize & bY);
+
+
+    /**
+     * Return the internal ordering of the sensors
+     *
+     * Measurements are expected to respect the internal sensors ordering
+     * Use this function to obtain the sensors ordering.
+     *
+     * @return the sensors ordering
+     */
+    std::vector<BerdySensor> getSensorsOrdering();
 
     /**
      * Serialized dynamic variables from the separate buffers

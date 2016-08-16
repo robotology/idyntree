@@ -98,7 +98,11 @@ bool BerdyOptions::checkConsistency()
     return true;
 }
 
-
+bool BerdySensor::operator==(const struct BerdySensor &s)
+{
+    return s.type == this->type
+    && s.id == this->id;
+}
 
 BerdyHelper::BerdyHelper(): m_areModelAndSensorsValid(false),
                               m_kinematicsUpdated(false),
@@ -1072,6 +1076,102 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize& D, VectorDynSize& bD,
 
     return res;
 }
+
+    std::vector<BerdySensor> BerdyHelper::getSensorsOrdering()
+    {
+        //???: we can probably cache the result of this function in the init
+        //TODO: reserve space
+        unsigned size = 0;
+        std::vector<BerdySensor> sensorOrdering;
+        sensorOrdering.reserve(size);
+
+        //To be a bit more flexible, rely on getRangeSensorVariable to have the order of
+        //the URDF sensors
+        //???: Isn't this a loop in some way??
+        for (SensorsList::Iterator it = m_sensors.allSensorsIterator();
+             it.isValid(); ++it)
+        {
+            IndexRange sensorRange = this->getRangeSensorVariable((*it)->getSensorType(), m_sensors.getSensorIndex((*it)->getSensorType(), (*it)->getName()));
+
+            BerdySensor sensor;
+            sensor.type = static_cast<BerdySensorTypes>((*it)->getSensorType());
+            sensor.id = (*it)->getName();
+            sensor.range = sensorRange;
+            sensorOrdering.push_back(sensor);
+        }
+
+
+        //For each URDF sensor, get the offset with the function
+        //put everything in a sorted list (sort with the offset)
+        //the iterate and add the sensors to the vector
+
+        //The remaining sensor order is hardcoded for now
+        if (m_options.includeAllJointAccelerationsAsSensors)
+        {
+            for (DOFIndex idx = 0; idx < this->m_model.getNrOfDOFs(); idx++)
+            {
+                IndexRange sensorRange = this->getRangeDOFSensorVariable(DOF_ACCELERATION_SENSOR,idx);
+                BerdySensor jointAcc;
+                jointAcc.type = DOF_ACCELERATION_SENSOR;
+                jointAcc.id = m_model.getJointName(idx);
+                jointAcc.range = sensorRange;
+                sensorOrdering.push_back(jointAcc);
+
+            }
+        }
+
+        if (m_options.includeAllJointTorquesAsSensors)
+        {
+            for (DOFIndex idx = 0; idx < this->m_model.getNrOfDOFs(); idx++)
+            {
+                IndexRange sensorRange = this->getRangeDOFSensorVariable(DOF_TORQUE_SENSOR,idx);
+                BerdySensor jointSens;
+                jointSens.type = DOF_TORQUE_SENSOR;
+                jointSens.id = m_model.getJointName(idx);
+                jointSens.range = sensorRange;
+                sensorOrdering.push_back(jointSens);
+            }
+        }
+
+        if (m_options.includeAllNetExternalWrenchesAsSensors)
+        {
+            for (LinkIndex idx = 0; idx < this->m_model.getNrOfLinks(); idx++)
+            {
+                // If this link is the (fixed) base link and the
+                // berdy variant is ORIGINAL_BERDY_FIXED_BASE , then
+                // the net wrench applied on the base is not part of the dynamical
+                // system. Anyhow, we can still write the base wrench as a function
+                // of sum of the joint wrenches of all the joints attached to the base (tipically just one)
+                if (m_dynamicsTraversal.getBaseLink()->getIndex() == idx &&
+                    (m_options.berdyVariant != ORIGINAL_BERDY_FIXED_BASE ||
+                     !m_options.includeFixedBaseExternalWrench))
+                {
+                    continue;
+                }
+                IndexRange sensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx);
+                BerdySensor linkSens;
+                linkSens.type = NET_EXT_WRENCH_SENSOR;
+                linkSens.id = m_model.getLinkName(idx);
+                linkSens.range = sensorRange;
+                sensorOrdering.push_back(linkSens);
+
+            }
+        }
+
+        for (size_t i = 0; i < this->berdySensorsInfo.wrenchSensors.size(); i++)
+        {
+            IndexRange sensorRange = this->getRangeJointSensorVariable(JOINT_WRENCH_SENSOR,berdySensorsInfo.wrenchSensors[i]);
+
+            BerdySensor jointSens;
+            jointSens.type = JOINT_WRENCH_SENSOR;
+            jointSens.id = m_model.getJointName(i);
+            jointSens.range = sensorRange;
+            sensorOrdering.push_back(jointSens);
+        }
+
+
+        return sensorOrdering;
+    }
 
 bool BerdyHelper::serializeDynamicVariables(LinkProperAccArray& properAccs,
                                              LinkNetTotalWrenchesWithoutGravity& netTotalWrenchesWithoutGrav,
