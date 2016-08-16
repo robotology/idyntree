@@ -39,8 +39,6 @@
 
 #include <kdl/tree.hpp>
 #include "kdl_codyco/treefksolverpos_iterative.hpp"
-#include <urdf_model/model.h>
-#include <urdf_parser/urdf_parser.h>
 #include <iostream>
 #include <cstdlib>
 #include <kdl/jntarray.hpp>
