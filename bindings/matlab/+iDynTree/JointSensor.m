@@ -2,21 +2,21 @@ classdef JointSensor < iDynTree.Sensor
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(982, self);
+        iDynTreeMEX(1015, self);
         self.swigPtr=[];
       end
     end
     function varargout = getParentJoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(983, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1016, self, varargin{:});
     end
     function varargout = getParentJointIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(984, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1017, self, varargin{:});
     end
     function varargout = setParentJoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(985, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1018, self, varargin{:});
     end
     function varargout = setParentJointIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(986, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1019, self, varargin{:});
     end
     function self = JointSensor(varargin)
       self@iDynTree.Sensor(SwigRef.Null);

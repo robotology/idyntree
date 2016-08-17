@@ -7,23 +7,23 @@ classdef SpatialMomentum < iDynTree.SpatialForceVector
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(468, varargin{:});
+        tmp = iDynTreeMEX(501, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(469, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(502, self, varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(470, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(503, self, varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(471, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(504, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(472, self);
+        iDynTreeMEX(505, self);
         self.swigPtr=[];
       end
     end

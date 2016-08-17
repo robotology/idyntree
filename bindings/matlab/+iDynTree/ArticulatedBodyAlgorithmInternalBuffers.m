@@ -9,110 +9,110 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(948, varargin{:});
+        tmp = iDynTreeMEX(981, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(949, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(982, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(950, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(983, self, varargin{:});
     end
     function varargout = S(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(951, self);
+        varargout{1} = iDynTreeMEX(984, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(952, self, varargin{1});
+        iDynTreeMEX(985, self, varargin{1});
       end
     end
     function varargout = U(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(953, self);
+        varargout{1} = iDynTreeMEX(986, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(954, self, varargin{1});
+        iDynTreeMEX(987, self, varargin{1});
       end
     end
     function varargout = D(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(955, self);
+        varargout{1} = iDynTreeMEX(988, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(956, self, varargin{1});
+        iDynTreeMEX(989, self, varargin{1});
       end
     end
     function varargout = u(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(957, self);
+        varargout{1} = iDynTreeMEX(990, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(958, self, varargin{1});
+        iDynTreeMEX(991, self, varargin{1});
       end
     end
     function varargout = linksVel(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(959, self);
+        varargout{1} = iDynTreeMEX(992, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(960, self, varargin{1});
+        iDynTreeMEX(993, self, varargin{1});
       end
     end
     function varargout = linksBiasAcceleration(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(961, self);
+        varargout{1} = iDynTreeMEX(994, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(962, self, varargin{1});
+        iDynTreeMEX(995, self, varargin{1});
       end
     end
     function varargout = linksAccelerations(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(963, self);
+        varargout{1} = iDynTreeMEX(996, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(964, self, varargin{1});
+        iDynTreeMEX(997, self, varargin{1});
       end
     end
     function varargout = linkABIs(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(965, self);
+        varargout{1} = iDynTreeMEX(998, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(966, self, varargin{1});
+        iDynTreeMEX(999, self, varargin{1});
       end
     end
     function varargout = linksBiasWrench(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(967, self);
+        varargout{1} = iDynTreeMEX(1000, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(968, self, varargin{1});
+        iDynTreeMEX(1001, self, varargin{1});
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(969, self);
+        iDynTreeMEX(1002, self);
         self.swigPtr=[];
       end
     end
