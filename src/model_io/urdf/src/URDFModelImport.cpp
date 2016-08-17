@@ -647,7 +647,10 @@ bool modelFromURDFString(const std::string& urdf_string,
     Model rawModel = Model();
 
     TiXmlDocument urdfXml;
-    urdfXml.Parse(urdf_string.c_str());
+    if (urdfXml.Parse(urdf_string.c_str()) == 0) {
+        reportError("", "modelFromURDFString", "Invalid XML");
+        return false;
+    }
 
     TiXmlElement* robotXml = urdfXml.FirstChildElement("robot");
 
