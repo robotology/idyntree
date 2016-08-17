@@ -224,6 +224,12 @@ struct BerdySensor {
     bool operator==(const struct BerdySensor&);
 };
 
+    struct BerdyDynamicVariable {
+        iDynTree::BerdyDynamicVariablesTypes type;
+        std::string id;
+        iDynTree::IndexRange range;
+    };
+
 /**
  * \brief Helper class for computing Berdy matrices.
  *
@@ -339,6 +345,9 @@ class BerdyHelper
     Vector3 m_gravity;
     SpatialAcc m_gravity6D;
 
+    std::vector<BerdySensor> m_sensorsOrdering; /*<! Sensor ordering. Created on init */
+    std::vector<BerdyDynamicVariable> m_dynamicVariablesOrdering; /*<! Dynamic variable ordering. Created on init */
+
     /**
      * Helpers method for initialization.
      */
@@ -378,6 +387,9 @@ class BerdyHelper
     bool computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY);
     bool computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& bD);
 
+    void cacheSensorsOrdering();
+    void cacheDynamicVariablesOrdering();
+
     /**
      * Helper for mapping sensors measurements to the Y vector.
      */
@@ -406,6 +418,7 @@ class BerdyHelper
      * Buffer for sensor serialization.
      */
     VectorDynSize realSensorMeas;
+
 public:
     /**
      * Constructor
@@ -492,7 +505,9 @@ public:
      *
      * @return the sensors ordering
      */
-    std::vector<BerdySensor> getSensorsOrdering();
+    const std::vector<BerdySensor>& getSensorsOrdering() const;
+
+    const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering() const;
 
     /**
      * Serialized dynamic variables from the separate buffers
