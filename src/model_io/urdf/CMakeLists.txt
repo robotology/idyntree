@@ -9,9 +9,11 @@ set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFModelImport.h
                                   include/iDynTree/ModelIO/URDFGenericSensorsImport.h
                                   include/iDynTree/ModelIO/ModelLoader.h)
 
-set(IDYNTREE_MODELIO_URDF_SOURCES src/URDFModelImport.cpp
+set(IDYNTREE_MODELIO_URDF_SOURCES src/URDFParsingUtils.h
+                                  src/URDFModelImport.cpp
                                   src/URDFDofsImport.cpp
                                   src/URDFGenericSensorsImport.cpp
+                                  src/URDFSolidShapesImport.cpp
                                   src/ModelLoader.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_URDF_SOURCES})
