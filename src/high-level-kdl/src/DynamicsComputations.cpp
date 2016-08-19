@@ -483,7 +483,7 @@ bool DynamicsComputations::setRobotState(const VectorDynSize& q,
 
     if( !ok )
     {
-        std::cerr << "DynamicsRegressorGenerator::setRobotState failed" << std::endl;
+        std::cerr << "DynamicsComputations::setRobotState failed" << std::endl;
         return false;
     }
 

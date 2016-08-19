@@ -30,6 +30,9 @@ namespace std {
 %{
 /* Note : always include headers following the inheritance order */
 
+//Utils
+#include "iDynTree/Core/Utils.h"
+
 // Basic math classes
 #include "iDynTree/Core/MatrixDynSize.h"
 #include "iDynTree/Core/MatrixFixSize.h"
@@ -118,6 +121,13 @@ namespace std {
 
 %}
 
+//Wrap std::vector<BerdySensors>
+namespace std {
+    %template(BerdySensors) vector<iDynTree::BerdySensor>;
+}
+
+//Utils
+%include "iDynTree/Core/Utils.h"
 
 /* Note : always include headers following the inheritance order */
 // Basic math classes

@@ -7,57 +7,57 @@ classdef SpatialInertia < iDynTree.SpatialInertiaRaw
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(515, varargin{:});
+        tmp = iDynTreeMEX(548, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = asMatrix(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(517, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(550, self, varargin{:});
     end
     function varargout = plus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(518, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(551, self, varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(519, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(552, self, varargin{:});
     end
     function varargout = biasWrench(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(520, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(553, self, varargin{:});
     end
     function varargout = biasWrenchDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(521, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(554, self, varargin{:});
     end
     function varargout = asVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(523, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(556, self, varargin{:});
     end
     function varargout = fromVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(524, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(557, self, varargin{:});
     end
     function varargout = isPhysicallyConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(525, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(558, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(529, self);
+        iDynTreeMEX(562, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = combine(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(516, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(549, varargin{:});
     end
     function varargout = Zero(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(522, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(555, varargin{:});
     end
     function varargout = momentumRegressor(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(526, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(559, varargin{:});
     end
     function varargout = momentumDerivativeRegressor(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(527, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(560, varargin{:});
     end
     function varargout = momentumDerivativeSlotineLiRegressor(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(528, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(561, varargin{:});
     end
   end
 end

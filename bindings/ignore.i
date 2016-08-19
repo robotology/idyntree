@@ -18,6 +18,24 @@
 %ignore *::getLinearVec3() const;
 %ignore *::contactId() const;
 
+// There are some issues in generating the correct wrappers for SensorsList::Iterator
+// Simply disable it
+%ignore iDynTree::SensorsList::allSensorsIterator();
+%ignore iDynTree::SensorsList::allSensorsIterator() const;
+%ignore iDynTree::SensorsList::sensorsIteratorForType(const iDynTree::SensorType&);
+%ignore iDynTree::SensorsList::sensorsIteratorForType(const iDynTree::SensorType&) const;
+
+//Disable everything in Utils.h but IndexRange
+%ignore iDynTree::UNKNOWN;
+%ignore iDynTree::DEFAULT_TOL;
+%ignore iDynTree::assertWoAbort(const char *, const char*, const char*, int);
+%ignore iDynTree::checkEqualOrUnknown(const int, const int);
+%ignore iDynTree::reportError(const char *, const char*, const char *);
+%ignore iDynTree::reportErrorIf(bool, const char *, const char *);
+%ignore iDynTree::reportWarning(const char *, const char*, const char *);
+%ignore iDynTree::deg2rad(const double);
+%ignore iDynTree::rad2deg(const double);
+
 // for some reason ignore ::operator= does not work, we disable directly the warning instead
 #pragma SWIG nowarn=362
 
