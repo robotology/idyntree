@@ -50,6 +50,10 @@ before_script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CXX" == "clang++" ]; then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang++; fi; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CXX" == "clang++" ]; then export CXXFLAGS="-Qunused-arguments"; fi; fi
 
+  # Disable octave testing on macOS (see https://github.com/robotology/codyco-superbuild/issues/146 )
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export USE_OCTAVE="OFF"; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export USE_OCTAVE="ON"; fi
+
   # use superbuild for getting iDynTree dependencies
   - git clone https://github.com/robotology/codyco-superbuild
   - cd codyco-superbuild
@@ -69,7 +73,7 @@ before_script:
   - mkdir build
   - cd build
   # Xcode has support for multiple configurations. Passing -DCMAKE_BUILD_TYPE is ignored
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=${VALGRIND_TESTS} -DCODYCO_TRAVIS_CI:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=${USE_PYTHON} -DIDYNTREE_USES_LUA:BOOL=ON -DIDYNTREE_USES_OCTAVE:BOOL=ON ..
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=${VALGRIND_TESTS} -DCODYCO_TRAVIS_CI:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=${USE_PYTHON} -DIDYNTREE_USES_LUA:BOOL=ON -DIDYNTREE_USES_OCTAVE:BOOL=${USE_OCTAVE} ..
 
 script:
   - cmake --build . --config ${TRAVIS_BUILD_TYPE}
