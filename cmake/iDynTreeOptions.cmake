@@ -67,10 +67,6 @@ if(IDYNTREE_USES_INTERNAL_URDFDOM)
 endif()
 
 ##########################################################################
-# Enable/disable warnings
-option(IDYNTREE_ENABLE_WARNINGS "Enable compilation warnings when compiling iDynTree." FALSE)
-option(IDYNTREE_ENABLE_DOCUMENTATION_WARNINGS "Enable documentation warnings when compiling iDynTree." FALSE)
-
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC)
@@ -99,24 +95,18 @@ endif()
 include(ECMEnableSanitizers)
 
 # Enable warnings if requested
-if(${IDYNTREE_ENABLE_WARNINGS})
-    if(MSVC)
-         ###
-    else()
-        ##Other systems
-        if(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
-            SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Weverything -pedantic -Wnon-virtual-dtor -Woverloaded-virtual")
-            #disable padding alignment warnings. Cast align is more subtle. On X86 it should not create any problem but for different architecture we should handle this warning better.
-            SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-padded -Wno-cast-align")
-            if (NOT ${IDYNTREE_ENABLE_DOCUMENTATION_WARNINGS})
-                #disable documentation warnings and sign comparison. This is for Travis-CI
-                SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-documentation -Wno-documentation-unknown-command -Wno-sign-conversion")
-            endif()
-        elseif(${CMAKE_COMPILER_IS_GNUCC})
-            SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra")
-            if (NOT ${IDYNTREE_ENABLE_DOCUMENTATION_WARNINGS})
-                SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pedantic -Weffc++ -Woverloaded-virtual")
-            endif()
-        endif()
-    endif()
+
+# Save compiler specific warnings flags
+if(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
+    set(IDYNTREE_WARNING_FLAGS "-Weverything -pedantic -Wnon-virtual-dtor -Woverloaded-virtual -Wno-padded -Wno-cast-align")
 endif()
+
+if(${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
+    set(IDYNTREE_WARNING_FLAGS "")
+    list(APPEND IDYNTREE_WARNING_FLAGS -Wall)
+    list(APPEND IDYNTREE_WARNING_FLAGS -Wextra)
+    list(APPEND IDYNTREE_WARNING_FLAGS -Woverloaded-virtual)
+    list(APPEND IDYNTREE_WARNING_FLAGS -Wpedantic)
+endif()
+
+

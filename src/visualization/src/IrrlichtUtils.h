@@ -120,8 +120,6 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
             return 0;
         }
 
-        irr::scene::IMesh* loadedMesh = loadedAnimatedMesh->getMesh(0);
-
         // If multiple mesh are loaded, add them
         if( getFileExt(externalMesh->filename) == "dae" )
         {

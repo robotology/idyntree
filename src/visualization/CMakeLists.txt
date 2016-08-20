@@ -31,13 +31,19 @@ include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 target_link_libraries(idyntree-visualization LINK_PUBLIC idyntree-core
                                                          idyntree-model)
 
+# enable warnings on this part of the add_library
+target_compile_options(idyntree-visualization PRIVATE ${IDYNTREE_WARNING_FLAGS})
+# disable unused-parameter as it is affects a lot of function in irrlicht
+
 # To avoid having to regenerate the SWIG bindings code, we compile the visualization library
 # even if irrlicht is not used, this can be removed when we stop to commit swig generated code
-# to the repo 
+# to the repo
 if(IDYNTREE_USES_IRRLICHT)
     find_package(OpenGL)
     find_package(Irrlicht REQUIRED)
-    target_include_directories(idyntree-visualization PRIVATE ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
+    # Restore this once we have CMake 3.5 as a minimum version and we can support target_include_directories(.. SYSTEM)
+    # target_include_directories(idyntree-visualization PRIVATE SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
+    include_directories(SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
     target_link_libraries(idyntree-visualization LINK_PUBLIC ${IRRLICHT_LIBRARY} ${OPENGL_LIBRARIES})
     add_definitions(-DIDYNTREE_USES_IRRLICHT)
 endif()

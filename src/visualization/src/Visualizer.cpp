@@ -180,19 +180,19 @@ ModelVisualization::~ModelVisualization()
 }
 
 
-ModelVisualization::ModelVisualization(const ModelVisualization& other)
+ModelVisualization::ModelVisualization(const ModelVisualization& /*other*/)
 {
     assert(false);
 }
 
-ModelVisualization& ModelVisualization::operator=(const ModelVisualization& other)
+ModelVisualization& ModelVisualization::operator=(const ModelVisualization& /*other*/)
 {
     assert(false);
     return *this;
 }
 
 bool ModelVisualization::init(const Model& model,
-                              const std::string instanceName,
+                              const std::string /*instanceName*/,
                               Visualizer& visualizer)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
@@ -289,14 +289,15 @@ void ModelVisualization::close()
 }
 
 
-Visualizer::Visualizer(const Visualizer& other)
+Visualizer::Visualizer(const Visualizer& /*other*/)
 {
     assert(false);
 }
 
-Visualizer& Visualizer::operator=(const Visualizer& other)
+Visualizer& Visualizer::operator=(const Visualizer& /*other*/)
 {
     assert(false);
+    return *this;
 }
 
 Visualizer::Visualizer():
