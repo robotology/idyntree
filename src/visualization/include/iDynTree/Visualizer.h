@@ -75,7 +75,7 @@ struct VisualizerOptions
      */
     bool verbose;
 
-    VisualizerOptions(): verbose(true)
+    VisualizerOptions(): verbose(false)
     {
     }
 };
@@ -156,6 +156,18 @@ public:
      * Draw the visualization.
      */
     void draw();
+
+    /**
+     * Right the current visualization to a image file.
+     *
+     * The format of the image is desumed from the filename.
+     *
+     * For more info on the process of writing the image,
+     * check irr::video::IVideoDriver::writeImageToFile irrlicht method.
+     *
+     * @return true if all went ok, false otherwise.
+     */
+    bool drawToFile(const std::string filename="iDynTreeVisualizerScreenshot.png");
 
     /**
      * Close the visualizer.

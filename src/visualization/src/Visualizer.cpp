@@ -306,26 +306,7 @@ Visualizer::Visualizer():
 
 Visualizer::~Visualizer()
 {
-    if( pimpl )
-    {
-        for(size_t mdl=0; mdl < pimpl->m_modelViz.size(); mdl++)
-        {
-            if( pimpl->m_modelViz[mdl] )
-            {
-                delete pimpl->m_modelViz[mdl];
-                pimpl->m_modelViz[mdl] = 0;
-            }
-        }
-
-        pimpl->m_modelViz.resize(0);
-
-#ifdef IDYNTREE_USES_IRRLICHT
-        if( pimpl->m_irrDevice )
-        {
-            pimpl->m_irrDevice->drop();
-        }
-#endif
-    }
+    close();
 
     delete pimpl;
     pimpl = 0;
@@ -334,6 +315,11 @@ Visualizer::~Visualizer()
 bool Visualizer::init(const VisualizerOptions options)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
+    if( pimpl->m_isInitialized )
+    {
+        reportWarning("Visualizer","init","Visualier already initialized, call close() to close it to open it again.");
+        return false;
+    }
 
     irr::SIrrlichtCreationParameters irrDevParams;
 
@@ -457,41 +443,80 @@ void Visualizer::draw()
         return;
     }
 
-    if (pimpl->m_irrDevice->isWindowActive())
+    pimpl->m_irrDriver->beginScene(true,true, irr::video::SColor(255,0,100,100));
+
+    // Draw base plane
+    for(int i=-10; i <= 10; i++ )
     {
-        pimpl->m_irrDriver->beginScene(true,true, irr::video::SColor(255,0,100,100));
-
-        // Draw base plane
-        for(int i=-10; i <= 10; i++ )
-        {
-            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(-10,i,0),
-                                           irr::core::vector3df(10,i,0),
-                                           irr::video::SColor(100,100,100,100));
-            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(i,-10,0),
-                                           irr::core::vector3df(i,10,0),
-                                           irr::video::SColor(100,100,100,100));
-        }
-        pimpl->m_irrSmgr->drawAll();
-        pimpl->m_irrDriver->endScene();
-
-        int fps = pimpl->m_irrDriver->getFPS();
-
-        if (pimpl->lastFPS != fps)
-        {
-            irr::core::stringw str = L"iDynTree Visualizer [";
-            str += pimpl->m_irrDriver->getName();
-            str += "] FPS:";
-            str += fps;
-            str += " ";
-
-            pimpl->m_irrDevice->setWindowCaption(str.c_str());
-            pimpl->lastFPS = fps;
-        }
+        pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(-10,i,0),
+                                       irr::core::vector3df(10,i,0),
+                                       irr::video::SColor(100,100,100,100));
+        pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(i,-10,0),
+                                       irr::core::vector3df(i,10,0),
+                                       irr::video::SColor(100,100,100,100));
     }
+    pimpl->m_irrSmgr->drawAll();
+    pimpl->m_irrDriver->endScene();
+
+    int fps = pimpl->m_irrDriver->getFPS();
+
+    if (pimpl->lastFPS != fps)
+    {
+        irr::core::stringw str = L"iDynTree Visualizer [";
+        str += pimpl->m_irrDriver->getName();
+        str += "] FPS:";
+        str += fps;
+        str += " ";
+
+        pimpl->m_irrDevice->setWindowCaption(str.c_str());
+        pimpl->lastFPS = fps;
+    }
+
 #else
     reportError("Visualizer","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
 #endif
 }
+
+bool Visualizer::drawToFile(const std::string filename)
+{
+    bool retValue = false;
+
+    if( !pimpl->m_isInitialized )
+    {
+        reportError("Visualizer","drawToFile","Impossible to call drawToFile in a not initialized visualizer");
+        return false;
+    }
+
+#ifdef IDYNTREE_USES_IRRLICHT
+    // Method based on http://www.irrlicht3d.org/wiki/index.php?n=Main.TakingAScreenShot
+    irr::video::IImage* const image = pimpl->m_irrDriver->createScreenShot();
+    if (image) //should always be true, but you never know
+    {
+        //write screenshot to file
+        if (!pimpl->m_irrDriver->writeImageToFile(image, filename.c_str()))
+        {
+            std::stringstream ss;
+            ss << "Impossible to write image file to " << filename;
+            reportError("Visualizer","drawToFile",ss.str().c_str());
+            retValue = false;
+        }
+
+        //Don't forget to drop image since we don't need it anymore.
+        image->drop();
+
+        retValue = true;
+    }
+    else
+    {
+        reportError("Visualizer","drawToFile","Error in calling irr::video::IVideoDriver::createScreenShot method");
+        return retValue = false;
+    }
+
+#endif
+
+    return retValue;
+}
+
 
 ModelVisualization& Visualizer::modelViz(const std::string& instanceName)
 {
@@ -530,7 +555,6 @@ void Visualizer::close()
 #ifdef IDYNTREE_USES_IRRLICHT
     if( !pimpl->m_isInitialized )
     {
-        reportError("Visualizer","close","Impossible to close not initialized visualizer");
         return;
     }
 
@@ -538,6 +562,18 @@ void Visualizer::close()
     pimpl->m_irrDevice->drop();
     pimpl->m_irrDevice = 0;
     pimpl->m_isInitialized = false;
+
+    for(size_t mdl=0; mdl < pimpl->m_modelViz.size(); mdl++)
+    {
+        if( pimpl->m_modelViz[mdl] )
+        {
+            delete pimpl->m_modelViz[mdl];
+            pimpl->m_modelViz[mdl] = 0;
+        }
+    }
+
+    pimpl->m_modelViz.resize(0);
+
     return;
 #endif
 }
