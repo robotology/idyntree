@@ -19,20 +19,23 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           USE_LINK_PATH)
 
 
-add_library(idyntree-visualization ${iDynTree_visualization_source} ${iDynTree_visualization_header})
+set(libraryname idyntree-visualization)
+add_library(${libraryname} ${iDynTree_visualization_source} ${iDynTree_visualization_header})
 
-set_target_properties(idyntree-visualization PROPERTIES PUBLIC_HEADER "${iDynTree_visualization_header}")
+set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_visualization_header}")
 
-target_include_directories(idyntree-visualization PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
                                                          "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
-target_link_libraries(idyntree-visualization LINK_PUBLIC idyntree-core
-                                                         idyntree-model)
+target_link_libraries(${libraryname} LINK_PUBLIC idyntree-core
+                                                 idyntree-model)
 
 # enable warnings on this part of the add_library
-target_compile_options(idyntree-visualization PRIVATE ${IDYNTREE_WARNING_FLAGS})
+if(CMAKE_VERSION VERSION_GREATER 2.8.11)
+    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
 
 # To avoid having to regenerate the SWIG bindings code, we compile the visualization library
 # even if irrlicht is not used, this can be removed when we stop to commit swig generated code
@@ -40,18 +43,18 @@ target_compile_options(idyntree-visualization PRIVATE ${IDYNTREE_WARNING_FLAGS})
 if(IDYNTREE_USES_IRRLICHT)
     find_package(OpenGL)
     find_package(Irrlicht REQUIRED)
-    # Restore this once we have CMake 3.5 as a minimum version and we can support target_include_directories(.. SYSTEM)
+    # Restore this once we have CMake 3.0 as a minimum version and we can support target_include_directories(.. SYSTEM)
     # target_include_directories(idyntree-visualization PRIVATE SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
     include_directories(SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
-    target_link_libraries(idyntree-visualization LINK_PUBLIC ${IRRLICHT_LIBRARY} ${OPENGL_LIBRARIES})
+    target_link_libraries(${libraryname} LINK_PUBLIC ${IRRLICHT_LIBRARY} ${OPENGL_LIBRARIES})
     add_definitions(-DIDYNTREE_USES_IRRLICHT)
 endif()
 
-install(TARGETS idyntree-visualization
+install(TARGETS ${libraryname}
         EXPORT iDynTree
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
         PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree" COMPONENT dev)
 
-set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-visualization)
+set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})

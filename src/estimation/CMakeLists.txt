@@ -29,7 +29,9 @@ include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
 
 target_link_libraries(${libraryname} idyntree-core idyntree-model idyntree-sensors idyntree-modelio-urdf)
 
-target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+if(CMAKE_VERSION VERSION_GREATER 2.8.11)
+    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_ESTIMATION_HEADERS})
 

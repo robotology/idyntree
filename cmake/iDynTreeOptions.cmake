@@ -97,16 +97,12 @@ include(ECMEnableSanitizers)
 # Enable warnings if requested
 
 # Save compiler specific warnings flags
-if(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
-    set(IDYNTREE_WARNING_FLAGS "-Weverything -pedantic -Wnon-virtual-dtor -Woverloaded-virtual -Wno-padded -Wno-cast-align")
-endif()
-
-if(${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
+if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
     set(IDYNTREE_WARNING_FLAGS "")
     list(APPEND IDYNTREE_WARNING_FLAGS -Wall)
     list(APPEND IDYNTREE_WARNING_FLAGS -Wextra)
     list(APPEND IDYNTREE_WARNING_FLAGS -Woverloaded-virtual)
-    list(APPEND IDYNTREE_WARNING_FLAGS -Wpedantic)
+    list(APPEND IDYNTREE_WARNING_FLAGS -pedantic)
 endif()
 
 
