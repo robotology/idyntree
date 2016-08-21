@@ -66,9 +66,8 @@ enum BerdyVariants
      * for accounting for free floating dynamics and removing the NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV from the dynamic variables.
      *
      */
-    BERDY_FLOATING_BASE = 1,
+    BERDY_FLOATING_BASE = 1
 };
-
 
 /**
  * Enumeration descriing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration)

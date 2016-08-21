@@ -203,7 +203,7 @@ bool SimpleLeggedOdometry::loadModelFromFile(const std::string filename,
 
 bool SimpleLeggedOdometry::loadModelFromFileWithSpecifiedDOFs(const std::string filename,
                                                               const std::vector< std::string >& consideredDOFs,
-                                                              const std::string filetype)
+                                                              const std::string /*filetype*/)
 {
     Model _modelFull;
 
@@ -308,7 +308,7 @@ Transform SimpleLeggedOdometry::getWorldLinkTransform(const LinkIndex link_index
         return Transform::Identity();
     }
 
-    assert(m_fixedLinkIndex < m_base_H_link.getNrOfLinks());
+    assert(m_fixedLinkIndex < static_cast<LinkIndex>(m_base_H_link.getNrOfLinks()));
     Transform base_H_fixed = m_base_H_link(m_fixedLinkIndex);
     Transform base_H_link =  m_base_H_link(link_index);
 

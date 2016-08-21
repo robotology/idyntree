@@ -33,7 +33,6 @@ target_link_libraries(idyntree-visualization LINK_PUBLIC idyntree-core
 
 # enable warnings on this part of the add_library
 target_compile_options(idyntree-visualization PRIVATE ${IDYNTREE_WARNING_FLAGS})
-# disable unused-parameter as it is affects a lot of function in irrlicht
 
 # To avoid having to regenerate the SWIG bindings code, we compile the visualization library
 # even if irrlicht is not used, this can be removed when we stop to commit swig generated code
