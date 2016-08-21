@@ -3054,21 +3054,57 @@ SWIGINTERN mxArray *iDynTree_MatrixFixSize_Sl_3_Sc_3_Sg__toMatlab(iDynTree::Matr
         return p;
     }
 SWIGINTERN void iDynTree_MatrixFixSize_Sl_3_Sc_3_Sg__fromMatlab(iDynTree::MatrixFixSize< 3,3 > *self,mxArray *in){
+        
         // check size
         const size_t * dims = mxGetDimensions(in);
         size_t fixValRows = self->rows();
         size_t fixValCols = self->cols();
-        if( dims[0] == fixValRows && dims[1] == fixValCols )
+        if (dims[0] == fixValRows && dims[1] == fixValCols)
         {
-            double* d = static_cast<double*>(mxGetData(in));
-            for(size_t row=0; row < fixValRows; row++ )
+            if (mxIsSparse(in)) 
             {
-                for(size_t col=0; col < fixValCols; col++ )
+                //getting pointer to sparse structure
+                mwIndex* ir = mxGetIr(in);
+                mwIndex* jc = mxGetJc(in);
+                double *data = mxGetPr(in);
+
+                //zero the matrix (iDynTree matrix is dense)
+                self->zero();
+                for (mwIndex col = 0; col < fixValCols; col++)
                 {
-                    self->operator()(row,col) = d[col*fixValRows + row];
+                    /*
+                        jc[col] contains information about the nonzero values.
+                        jc[col + 1] - jc[col] = number of nonzero elements in column col
+                        These nonzero elements can be access with a for loop starting at 
+                        jc[col] and ending at jc[col + 1] - 1.
+                        
+                    */
+                    mwIndex startingRowIndex = jc[col];
+                    mwIndex endRowIndex = jc[col + 1];
+                    if (startingRowIndex == endRowIndex)
+                    {
+                        //no elements in this column
+                        continue;
+                    }
+                    for (mwIndex currentIndex = startingRowIndex; currentIndex < endRowIndex; currentIndex++)
+                    {
+                        //access the element
+                        mwIndex row = ir[currentIndex];
+                        self->operator()(row, col) = data[currentIndex];
+                    }
                 }
+
+            } else {
+                double* d = static_cast<double*>(mxGetData(in));
+                for (size_t row = 0; row < fixValRows; row++)
+                {
+                    for (size_t col = 0; col < fixValCols; col++)
+                    {
+                        self->operator()(row,col) = d[col*fixValRows + row];
+                    }
+                }
+                return;
             }
-            return;
         }
     }
 SWIGINTERN mxArray *iDynTree_MatrixFixSize_Sl_4_Sc_4_Sg__toMatlab(iDynTree::MatrixFixSize< 4,4 > const *self){
@@ -3078,21 +3114,57 @@ SWIGINTERN mxArray *iDynTree_MatrixFixSize_Sl_4_Sc_4_Sg__toMatlab(iDynTree::Matr
         return p;
     }
 SWIGINTERN void iDynTree_MatrixFixSize_Sl_4_Sc_4_Sg__fromMatlab(iDynTree::MatrixFixSize< 4,4 > *self,mxArray *in){
+        
         // check size
         const size_t * dims = mxGetDimensions(in);
         size_t fixValRows = self->rows();
         size_t fixValCols = self->cols();
-        if( dims[0] == fixValRows && dims[1] == fixValCols )
+        if (dims[0] == fixValRows && dims[1] == fixValCols)
         {
-            double* d = static_cast<double*>(mxGetData(in));
-            for(size_t row=0; row < fixValRows; row++ )
+            if (mxIsSparse(in)) 
             {
-                for(size_t col=0; col < fixValCols; col++ )
+                //getting pointer to sparse structure
+                mwIndex* ir = mxGetIr(in);
+                mwIndex* jc = mxGetJc(in);
+                double *data = mxGetPr(in);
+
+                //zero the matrix (iDynTree matrix is dense)
+                self->zero();
+                for (mwIndex col = 0; col < fixValCols; col++)
                 {
-                    self->operator()(row,col) = d[col*fixValRows + row];
+                    /*
+                        jc[col] contains information about the nonzero values.
+                        jc[col + 1] - jc[col] = number of nonzero elements in column col
+                        These nonzero elements can be access with a for loop starting at 
+                        jc[col] and ending at jc[col + 1] - 1.
+                        
+                    */
+                    mwIndex startingRowIndex = jc[col];
+                    mwIndex endRowIndex = jc[col + 1];
+                    if (startingRowIndex == endRowIndex)
+                    {
+                        //no elements in this column
+                        continue;
+                    }
+                    for (mwIndex currentIndex = startingRowIndex; currentIndex < endRowIndex; currentIndex++)
+                    {
+                        //access the element
+                        mwIndex row = ir[currentIndex];
+                        self->operator()(row, col) = data[currentIndex];
+                    }
                 }
+
+            } else {
+                double* d = static_cast<double*>(mxGetData(in));
+                for (size_t row = 0; row < fixValRows; row++)
+                {
+                    for (size_t col = 0; col < fixValCols; col++)
+                    {
+                        self->operator()(row,col) = d[col*fixValRows + row];
+                    }
+                }
+                return;
             }
-            return;
         }
     }
 SWIGINTERN mxArray *iDynTree_MatrixFixSize_Sl_6_Sc_6_Sg__toMatlab(iDynTree::MatrixFixSize< 6,6 > const *self){
@@ -3102,21 +3174,57 @@ SWIGINTERN mxArray *iDynTree_MatrixFixSize_Sl_6_Sc_6_Sg__toMatlab(iDynTree::Matr
         return p;
     }
 SWIGINTERN void iDynTree_MatrixFixSize_Sl_6_Sc_6_Sg__fromMatlab(iDynTree::MatrixFixSize< 6,6 > *self,mxArray *in){
+        
         // check size
         const size_t * dims = mxGetDimensions(in);
         size_t fixValRows = self->rows();
         size_t fixValCols = self->cols();
-        if( dims[0] == fixValRows && dims[1] == fixValCols )
+        if (dims[0] == fixValRows && dims[1] == fixValCols)
         {
-            double* d = static_cast<double*>(mxGetData(in));
-            for(size_t row=0; row < fixValRows; row++ )
+            if (mxIsSparse(in)) 
             {
-                for(size_t col=0; col < fixValCols; col++ )
+                //getting pointer to sparse structure
+                mwIndex* ir = mxGetIr(in);
+                mwIndex* jc = mxGetJc(in);
+                double *data = mxGetPr(in);
+
+                //zero the matrix (iDynTree matrix is dense)
+                self->zero();
+                for (mwIndex col = 0; col < fixValCols; col++)
                 {
-                    self->operator()(row,col) = d[col*fixValRows + row];
+                    /*
+                        jc[col] contains information about the nonzero values.
+                        jc[col + 1] - jc[col] = number of nonzero elements in column col
+                        These nonzero elements can be access with a for loop starting at 
+                        jc[col] and ending at jc[col + 1] - 1.
+                        
+                    */
+                    mwIndex startingRowIndex = jc[col];
+                    mwIndex endRowIndex = jc[col + 1];
+                    if (startingRowIndex == endRowIndex)
+                    {
+                        //no elements in this column
+                        continue;
+                    }
+                    for (mwIndex currentIndex = startingRowIndex; currentIndex < endRowIndex; currentIndex++)
+                    {
+                        //access the element
+                        mwIndex row = ir[currentIndex];
+                        self->operator()(row, col) = data[currentIndex];
+                    }
                 }
+
+            } else {
+                double* d = static_cast<double*>(mxGetData(in));
+                for (size_t row = 0; row < fixValRows; row++)
+                {
+                    for (size_t col = 0; col < fixValCols; col++)
+                    {
+                        self->operator()(row,col) = d[col*fixValRows + row];
+                    }
+                }
+                return;
             }
-            return;
         }
     }
 SWIGINTERN mxArray *iDynTree_MatrixFixSize_Sl_6_Sc_10_Sg__toMatlab(iDynTree::MatrixFixSize< 6,10 > const *self){
@@ -3126,21 +3234,57 @@ SWIGINTERN mxArray *iDynTree_MatrixFixSize_Sl_6_Sc_10_Sg__toMatlab(iDynTree::Mat
         return p;
     }
 SWIGINTERN void iDynTree_MatrixFixSize_Sl_6_Sc_10_Sg__fromMatlab(iDynTree::MatrixFixSize< 6,10 > *self,mxArray *in){
+        
         // check size
         const size_t * dims = mxGetDimensions(in);
         size_t fixValRows = self->rows();
         size_t fixValCols = self->cols();
-        if( dims[0] == fixValRows && dims[1] == fixValCols )
+        if (dims[0] == fixValRows && dims[1] == fixValCols)
         {
-            double* d = static_cast<double*>(mxGetData(in));
-            for(size_t row=0; row < fixValRows; row++ )
+            if (mxIsSparse(in)) 
             {
-                for(size_t col=0; col < fixValCols; col++ )
+                //getting pointer to sparse structure
+                mwIndex* ir = mxGetIr(in);
+                mwIndex* jc = mxGetJc(in);
+                double *data = mxGetPr(in);
+
+                //zero the matrix (iDynTree matrix is dense)
+                self->zero();
+                for (mwIndex col = 0; col < fixValCols; col++)
                 {
-                    self->operator()(row,col) = d[col*fixValRows + row];
+                    /*
+                        jc[col] contains information about the nonzero values.
+                        jc[col + 1] - jc[col] = number of nonzero elements in column col
+                        These nonzero elements can be access with a for loop starting at 
+                        jc[col] and ending at jc[col + 1] - 1.
+                        
+                    */
+                    mwIndex startingRowIndex = jc[col];
+                    mwIndex endRowIndex = jc[col + 1];
+                    if (startingRowIndex == endRowIndex)
+                    {
+                        //no elements in this column
+                        continue;
+                    }
+                    for (mwIndex currentIndex = startingRowIndex; currentIndex < endRowIndex; currentIndex++)
+                    {
+                        //access the element
+                        mwIndex row = ir[currentIndex];
+                        self->operator()(row, col) = data[currentIndex];
+                    }
                 }
+
+            } else {
+                double* d = static_cast<double*>(mxGetData(in));
+                for (size_t row = 0; row < fixValRows; row++)
+                {
+                    for (size_t col = 0; col < fixValCols; col++)
+                    {
+                        self->operator()(row,col) = d[col*fixValRows + row];
+                    }
+                }
+                return;
             }
-            return;
         }
     }
 SWIGINTERN mxArray *iDynTree_MatrixFixSize_Sl_10_Sc_16_Sg__toMatlab(iDynTree::MatrixFixSize< 10,16 > const *self){
@@ -3150,21 +3294,57 @@ SWIGINTERN mxArray *iDynTree_MatrixFixSize_Sl_10_Sc_16_Sg__toMatlab(iDynTree::Ma
         return p;
     }
 SWIGINTERN void iDynTree_MatrixFixSize_Sl_10_Sc_16_Sg__fromMatlab(iDynTree::MatrixFixSize< 10,16 > *self,mxArray *in){
+        
         // check size
         const size_t * dims = mxGetDimensions(in);
         size_t fixValRows = self->rows();
         size_t fixValCols = self->cols();
-        if( dims[0] == fixValRows && dims[1] == fixValCols )
+        if (dims[0] == fixValRows && dims[1] == fixValCols)
         {
-            double* d = static_cast<double*>(mxGetData(in));
-            for(size_t row=0; row < fixValRows; row++ )
+            if (mxIsSparse(in)) 
             {
-                for(size_t col=0; col < fixValCols; col++ )
+                //getting pointer to sparse structure
+                mwIndex* ir = mxGetIr(in);
+                mwIndex* jc = mxGetJc(in);
+                double *data = mxGetPr(in);
+
+                //zero the matrix (iDynTree matrix is dense)
+                self->zero();
+                for (mwIndex col = 0; col < fixValCols; col++)
                 {
-                    self->operator()(row,col) = d[col*fixValRows + row];
+                    /*
+                        jc[col] contains information about the nonzero values.
+                        jc[col + 1] - jc[col] = number of nonzero elements in column col
+                        These nonzero elements can be access with a for loop starting at 
+                        jc[col] and ending at jc[col + 1] - 1.
+                        
+                    */
+                    mwIndex startingRowIndex = jc[col];
+                    mwIndex endRowIndex = jc[col + 1];
+                    if (startingRowIndex == endRowIndex)
+                    {
+                        //no elements in this column
+                        continue;
+                    }
+                    for (mwIndex currentIndex = startingRowIndex; currentIndex < endRowIndex; currentIndex++)
+                    {
+                        //access the element
+                        mwIndex row = ir[currentIndex];
+                        self->operator()(row, col) = data[currentIndex];
+                    }
                 }
+
+            } else {
+                double* d = static_cast<double*>(mxGetData(in));
+                for (size_t row = 0; row < fixValRows; row++)
+                {
+                    for (size_t col = 0; col < fixValCols; col++)
+                    {
+                        self->operator()(row,col) = d[col*fixValRows + row];
+                    }
+                }
+                return;
             }
-            return;
         }
     }
 SWIGINTERN mxArray *iDynTree_VectorFixSize_Sl_3_Sg__toMatlab(iDynTree::VectorFixSize< 3 > const *self){
