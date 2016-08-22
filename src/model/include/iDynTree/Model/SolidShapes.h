@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 201y Fondazione Istituto Italiano di Tecnologia
+ * Copyright (C) 2016 Fondazione Istituto Italiano di Tecnologia
  * Authors: Silvio Traversaro
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  *
