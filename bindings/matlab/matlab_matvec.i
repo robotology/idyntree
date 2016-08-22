@@ -8,7 +8,7 @@ namespace iDynTree
     mwIndex* ir = mxGetIr(sparsevector);
     mwIndex* jc = mxGetJc(sparsevector);
     double *data = mxGetPr(sparsevector);
-    
+
     //If cols == 1 assume it is a column vector (or a 1 element vector)
     bool isColumnVector = (cols == 1);
 
@@ -19,9 +19,9 @@ namespace iDynTree
         /*
             jc[col] contains information about the nonzero values.
             jc[col + 1] - jc[col] = number of nonzero elements in column col
-            These nonzero elements can be access with a for loop starting at 
+            These nonzero elements can be access with a for loop starting at
             jc[col] and ending at jc[col + 1] - 1.
-        
+
         */
         mwIndex startingRowIndex = jc[col];
         mwIndex endRowIndex = jc[col + 1];
@@ -53,9 +53,9 @@ namespace iDynTree
         /*
             jc[col] contains information about the nonzero values.
             jc[col + 1] - jc[col] = number of nonzero elements in column col
-            These nonzero elements can be access with a for loop starting at 
+            These nonzero elements can be access with a for loop starting at
             jc[col] and ending at jc[col + 1] - 1.
-            
+
         */
         mwIndex startingRowIndex = jc[col];
         mwIndex endRowIndex = jc[col + 1];
@@ -91,7 +91,7 @@ namespace iDynTree
         const size_t * dims = mxGetDimensions(in);
         size_t fixValSize = $self->size();
         size_t nonSingletonDimension = (dims[0] == 1 ? dims[1] : dims[0]);
-        
+
         if (nonSingletonDimension == fixValSize)
         {
             if (mxIsSparse(in))
@@ -107,7 +107,7 @@ namespace iDynTree
             }
             return;
         } else {
-            mexErrMsgIdAndTxt("iDynTree:Core:wrongDimension", 
+            mexErrMsgIdAndTxt("iDynTree:Core:wrongDimension",
               "Wrong vector size. Matlab size: %d. iDynTree size: %d", nonSingletonDimension, fixValSize);
         }
     }
@@ -133,7 +133,7 @@ namespace iDynTree
         size_t fixValCols = $self->cols();
         if (dims[0] == fixValRows && dims[1] == fixValCols)
         {
-            if (mxIsSparse(in)) 
+            if (mxIsSparse(in))
             {
                 MATRIXSPARSECOPY(in, $self, fixValCols)
             } else {
@@ -147,8 +147,8 @@ namespace iDynTree
                 }
                 return;
             }
-            } else {
-            mexErrMsgIdAndTxt("iDynTree:Core:wrongDimension", 
+         } else {
+            mexErrMsgIdAndTxt("iDynTree:Core:wrongDimension",
               "Wrong matrix size. Matlab size: (%d,%d). iDynTree size: (%d,%d)", dims[0], dims[1], fixValRows, fixValCols);
         }
     }
@@ -220,7 +220,7 @@ namespace iDynTree
         $self->fillColMajorBuffer(d); // Column-major
         return p;
     }
-    
+
     // Convert from a dense or sparse matrix
     void fromMatlab(mxArray * in)
     {
@@ -230,11 +230,11 @@ namespace iDynTree
         size_t cols = $self->cols();
         if (dims[0] != rows || dims[1] == cols)
         {
-            $self->resize(rows, cols);
+            $self->resize(dims[0], dims[1]);
             mexWarnMsgIdAndTxt("iDynTree:Core:perfomance", "Resizing iDynTree vector to (%d,%d)", rows, cols);
         }
 
-        if (mxIsSparse(in)) 
+        if (mxIsSparse(in))
         {
             MATRIXSPARSECOPY(in, $self, cols)
         } else {
