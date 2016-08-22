@@ -49,7 +49,7 @@ inline std::string getFileExt(const std::string filename)
 
     idx = filename.rfind('.');
 
-    if(idx != std::string::npos)
+    if (idx != std::string::npos)
     {
        return filename.substr(idx+1);
     }
@@ -69,7 +69,7 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 
     irr::scene::ISceneNode * geomNode = 0;
 
-    if( geom->isBox() )
+    if (geom->isBox())
     {
         const iDynTree::Box* box = geom->asBox();
 
@@ -79,7 +79,7 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 
     }
 
-    if( geom->isSphere() )
+    if (geom->isSphere())
     {
         const iDynTree::Sphere* sphere = geom->asSphere();
 
@@ -90,7 +90,7 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
         geomNode = smgr->addMeshSceneNode(sphereMesh,linkNode);
     }
 
-    if( geom->isCylinder() )
+    if (geom->isCylinder())
     {
         const iDynTree::Cylinder* cylinder = geom->asCylinder();
 
@@ -108,20 +108,20 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
         geomNode = smgr->addMeshSceneNode(cylinderMesh,linkNode);
     }
 
-    if( geom->isExternalMesh() )
+    if (geom->isExternalMesh())
     {
         const iDynTree::ExternalMesh* externalMesh = geom->asExternalMesh();
 
         irr::scene::IAnimatedMesh* loadedAnimatedMesh = smgr->getMesh(externalMesh->filename.c_str());
 
-        if( !loadedAnimatedMesh )
+        if (!loadedAnimatedMesh)
         {
             std::cerr << "Error in loading mesh " << externalMesh->filename << std::endl;
             return 0;
         }
 
         // If multiple mesh are loaded, add them
-        if( getFileExt(externalMesh->filename) == "dae" )
+        if (getFileExt(externalMesh->filename) == "dae")
         {
             use_iDynTree_material = false;
         }
@@ -132,14 +132,14 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 
     }
 
-    if( !geomNode )
+    if (!geomNode)
     {
         std::cerr << "[ERROR] addGeometryToSceneManager: geometry not loaded" << std::endl;
         return 0;
     }
 
     // Set materials
-    if( use_iDynTree_material )
+    if (use_iDynTree_material)
     {
         for(irr::u32 mat=0; mat < geomNode->getMaterialCount(); mat++)
         {

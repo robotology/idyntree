@@ -81,7 +81,7 @@ namespace iDynTree
 
     SolidShape* Sphere::clone()
     {
-        return static_cast<SolidShape*>(new Sphere(*this));
+        return new Sphere(*this);
     }
 
     Box::~Box()
@@ -90,7 +90,7 @@ namespace iDynTree
 
     SolidShape* Box::clone()
     {
-        return static_cast<SolidShape*>(new Box(*this));
+        return new Box(*this);
     }
 
     Cylinder::~Cylinder()
@@ -99,7 +99,7 @@ namespace iDynTree
 
     SolidShape* Cylinder::clone()
     {
-        return static_cast<SolidShape*>(new Cylinder(*this));
+        return new Cylinder(*this);
     }
 
     ExternalMesh::~ExternalMesh()
@@ -108,14 +108,14 @@ namespace iDynTree
 
     SolidShape* ExternalMesh::clone()
     {
-        return static_cast<SolidShape*>(new ExternalMesh(*this));
+        return new ExternalMesh(*this);
     }
 
     void ModelSolidShapes::clear()
     {
-        for(size_t link = 0; link < linkSolidShapes.size(); link++)
+        for (size_t link = 0; link < linkSolidShapes.size(); link++)
         {
-            for(size_t geom = 0; geom < linkSolidShapes[link].size(); geom++)
+            for (size_t geom = 0; geom < linkSolidShapes[link].size(); geom++)
             {
                 delete linkSolidShapes[link][geom];
                 linkSolidShapes[link][geom] = 0;
@@ -129,10 +129,10 @@ namespace iDynTree
     {
         clear();
         this->linkSolidShapes.resize(other.linkSolidShapes.size());
-        for(size_t link = 0; link < other.linkSolidShapes.size(); link++)
+        for (size_t link = 0; link < other.linkSolidShapes.size(); link++)
         {
             this->linkSolidShapes[link].resize(other.linkSolidShapes[link].size());
-            for(size_t geom = 0; geom < other.linkSolidShapes[link].size(); geom++)
+            for (size_t geom = 0; geom < other.linkSolidShapes[link].size(); geom++)
             {
                 this->linkSolidShapes[link][geom] = other.linkSolidShapes[link][geom]->clone();
             }

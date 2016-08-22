@@ -579,16 +579,4 @@ void Visualizer::close()
 #endif
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 }
