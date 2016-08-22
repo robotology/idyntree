@@ -7,39 +7,39 @@ classdef PositionRaw < iDynTree.Vector3
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(241, varargin{:});
+        tmp = iDynTreeMEX(242, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(242, self, varargin{:});
-    end
-    function varargout = changeRefPoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(243, self, varargin{:});
     end
-    function varargout = changePointOf(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(246, self, varargin{:});
+    function varargout = changeRefPoint(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(244, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = changePointOf(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(247, self, varargin{:});
     end
-    function varargout = display(self,varargin)
+    function varargout = toString(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(248, self, varargin{:});
+    end
+    function varargout = display(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(249, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(249, self);
+        iDynTreeMEX(250, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(244, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(245, varargin{:});
     end
     function varargout = inverse(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(245, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(246, varargin{:});
     end
   end
 end

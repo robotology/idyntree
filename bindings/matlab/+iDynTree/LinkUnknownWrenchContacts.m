@@ -9,41 +9,41 @@ classdef LinkUnknownWrenchContacts < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1138, varargin{:});
+        tmp = iDynTreeMEX(1139, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = clear(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1139, self, varargin{:});
-    end
-    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1140, self, varargin{:});
     end
-    function varargout = getNrOfContactsForLink(self,varargin)
+    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1141, self, varargin{:});
     end
-    function varargout = setNrOfContactsForLink(self,varargin)
+    function varargout = getNrOfContactsForLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1142, self, varargin{:});
     end
-    function varargout = addNewContactForLink(self,varargin)
+    function varargout = setNrOfContactsForLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1143, self, varargin{:});
     end
-    function varargout = addNewContactInFrame(self,varargin)
+    function varargout = addNewContactForLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1144, self, varargin{:});
     end
-    function varargout = addNewUnknownFullWrenchInFrameOrigin(self,varargin)
+    function varargout = addNewContactInFrame(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1145, self, varargin{:});
     end
-    function varargout = contactWrench(self,varargin)
+    function varargout = addNewUnknownFullWrenchInFrameOrigin(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1146, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = contactWrench(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1147, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1148, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1148, self);
+        iDynTreeMEX(1149, self);
         self.swigPtr=[];
       end
     end
