@@ -57,11 +57,12 @@ namespace iDynTree {
     {
         switch(type)
         {
-        case SIX_AXIS_FORCE_TORQUE:
-            return false;
         case ACCELEROMETER:
         case GYROSCOPE:
             return true;
+        case SIX_AXIS_FORCE_TORQUE:
+        default:
+            return false;
         }
     }
 
@@ -404,7 +405,7 @@ namespace iDynTree {
 
         reference operator*() const;
         pointer operator->() const;
-        
+
         bool isValid() const;
     };
 
@@ -436,7 +437,7 @@ namespace iDynTree {
 
         reference operator*() const;
         pointer operator->() const;
-        
+
         bool isValid() const;
     };
 

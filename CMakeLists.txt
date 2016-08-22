@@ -86,7 +86,8 @@ if(NOT IDYNTREE_ONLY_DOCS)
 
     # Add reminder to remove include_directories(SYSTEM as soon as we depend on CMake 2.8.12
     if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 2.8.12)
-        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. include_directories(SYSTEM ..) can be substituted by target_include_directories(SYSTEM ...).")
+        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. include_directories(SYSTEM ..) can be substituted by target_include_directories(<target> SYSTEM ...).")
+        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. We can now drop the if surrounding calls to target_compile_options")
     endif()
 
     if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 3.0)

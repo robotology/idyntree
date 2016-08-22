@@ -21,7 +21,6 @@ void pseudoInverse_helper2(const MapType& A,
                          Eigen::JacobiSVD<Eigen::MatrixXd>& svdDecomposition,
                          MapType& Apinv,
                          double tolerance,
-                         int &nullSpaceRows, int &nullSpaceCols,
                          unsigned int computationOptions = Eigen::ComputeThinU|Eigen::ComputeThinV)
 {
     using namespace Eigen;
@@ -54,9 +53,7 @@ void pseudoInverse_helper1(const MapType& A,
                    unsigned int computationOptions = Eigen::ComputeThinU|Eigen::ComputeThinV)
 {
     using namespace Eigen;
-    int nullSpaceRows = -1, nullSpaceCols = -1;
-    pseudoInverse_helper2(A, svdDecomposition, Apinv, tolerance,
-                  nullSpaceRows, nullSpaceCols, computationOptions);
+    pseudoInverse_helper2(A, svdDecomposition, Apinv, tolerance, computationOptions);
 }
 
 template <typename MapType>

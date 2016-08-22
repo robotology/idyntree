@@ -1,3 +1,9 @@
+/**
+ * Copyright (C) 2016 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Silvio Traversaro
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ */
+
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/ModelIO/URDFModelImport.h>
 #include <iDynTree/KinDynComputations.h>

@@ -48,8 +48,8 @@ ExtWrenchesAndJointTorquesEstimator::ExtWrenchesAndJointTorquesEstimator():
     m_jointPos(),
     m_linkVels(),
     m_linkProperAccs(),
-    m_linkIntWrenches(),
     m_linkNetExternalWrenches(),
+    m_linkIntWrenches(),
     m_generalizedTorques(),
     m_calibBufs(),
     m_bufs()
@@ -144,7 +144,7 @@ bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFile(const std:
 
 bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifiedDOFs(const std::string filename,
                                                                                        const std::vector< std::string >& consideredDOFs,
-                                                                                       const std::string filetype)
+                                                                                       const std::string /*filetype*/)
 {
     Model _modelFull;
     SensorsList _sensorsFull;
@@ -250,7 +250,7 @@ bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const
     }
 
     if( floatingFrame == FRAME_INVALID_INDEX ||
-        floatingFrame < 0 || floatingFrame >= m_model.getNrOfFrames() )
+        floatingFrame < 0 || floatingFrame >= static_cast<FrameIndex>(m_model.getNrOfFrames()) )
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","updateKinematicsFromFloatingBase","Unknown frame index specified.");
         return false;
@@ -454,7 +454,7 @@ bool ExtWrenchesAndJointTorquesEstimator::checkThatTheModelIsStill(const double 
 
     bool isStill = true;
 
-    for(iDynTree::LinkIndex link = 0; link < this->m_model.getNrOfLinks(); link++)
+    for(LinkIndex link = 0; link < static_cast<LinkIndex>(m_model.getNrOfLinks()); link++)
     {
         double properAccNorm = toEigen(m_linkProperAccs(link).getLinearVec3()).norm();
 

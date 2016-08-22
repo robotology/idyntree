@@ -52,7 +52,8 @@ mark_as_advanced(IDYNTREE_ENABLE_RPATH)
 option(IDYNTREE_ENABLE_SYMORO_PAR "Enable support for SyMoRo par format" TRUE)
 option(IDYNTREE_USES_KDL "Compile iDynTree with KDL dependency" TRUE)
 option(IDYNTREE_USES_YARP "Compile iDynTree with YARP dependency" TRUE)
-option(IDYNTREE_USES_ICUB_MAIN  "Compiled iDynTree with icub-main dependencies (for iKin and skinDynLib helper functions and tools)" TRUE)
+option(IDYNTREE_USES_ICUB_MAIN  "Compile iDynTree with icub-main dependencies (for iKin and skinDynLib helper functions and tools)" TRUE)
+option(IDYNTREE_USES_IRRLICHT "Compile iDynTree with Irrlicht dependency (for visualizer)" FALSE)
 
 if( MSVC )
     option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" TRUE)
@@ -66,10 +67,6 @@ if(IDYNTREE_USES_INTERNAL_URDFDOM)
 endif()
 
 ##########################################################################
-# Enable/disable warnings
-option(IDYNTREE_ENABLE_WARNINGS "Enable compilation warnings when compiling iDynTree." FALSE)
-option(IDYNTREE_ENABLE_DOCUMENTATION_WARNINGS "Enable documentation warnings when compiling iDynTree." FALSE)
-
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif(MSVC)
@@ -98,24 +95,14 @@ endif()
 include(ECMEnableSanitizers)
 
 # Enable warnings if requested
-if(${IDYNTREE_ENABLE_WARNINGS})
-    if(MSVC)
-         ###
-    else()
-        ##Other systems
-        if(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
-            SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Weverything -pedantic -Wnon-virtual-dtor -Woverloaded-virtual")
-            #disable padding alignment warnings. Cast align is more subtle. On X86 it should not create any problem but for different architecture we should handle this warning better.
-            SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-padded -Wno-cast-align")
-            if (NOT ${IDYNTREE_ENABLE_DOCUMENTATION_WARNINGS})
-                #disable documentation warnings and sign comparison. This is for Travis-CI
-                SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-documentation -Wno-documentation-unknown-command -Wno-sign-conversion")
-            endif()
-        elseif(${CMAKE_COMPILER_IS_GNUCC})
-            SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra")
-            if (NOT ${IDYNTREE_ENABLE_DOCUMENTATION_WARNINGS})
-                SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pedantic -Weffc++ -Woverloaded-virtual")
-            endif()
-        endif()
-    endif()
+
+# Save compiler specific warnings flags
+if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
+    set(IDYNTREE_WARNING_FLAGS "")
+    list(APPEND IDYNTREE_WARNING_FLAGS -Wall)
+    list(APPEND IDYNTREE_WARNING_FLAGS -Wextra)
+    list(APPEND IDYNTREE_WARNING_FLAGS -Woverloaded-virtual)
+    list(APPEND IDYNTREE_WARNING_FLAGS -pedantic)
 endif()
+
+

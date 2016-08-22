@@ -684,9 +684,6 @@ bool estimateExternalWrenches(const Model& model,
         // Copy knownTerms in the buffers used for estimation
         bufs.b[sm] = knownTerms.asVector();
 
-        // Count unknowns
-        size_t unknowns = countUnknowns(subModelTraversal,unknownWrenches);
-
         // Now we compute the A matrix
         computeMatrixOfEstimationEquation(model,subModelTraversal,unknownWrenches,jointPos,sm,bufs);
 
@@ -707,7 +704,7 @@ bool estimateExternalWrenches(const Model& model,
     return true;
 }
 
-bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & model,
+bool dynamicsEstimationForwardVelAccKinematics(const iDynTree::Model & /*model*/,
                                                const iDynTree::Traversal & traversal,
                                                const Vector3 & base_classicalProperAcc,
                                                const Vector3 & base_angularVel,
@@ -777,7 +774,7 @@ bool computeLinkNetWrenchesWithoutGravity(const Model& model,
      // Note that we are not using a Traversal here: the main reason
      // is that given that the computation that we are doing (once we have the linkVel and linkProperAcc
      // does not depend on the topology, so we can visit the links in any possible order
-     for(LinkIndex visitedLinkIndex = 0; visitedLinkIndex < model.getNrOfLinks(); visitedLinkIndex++)
+     for(LinkIndex visitedLinkIndex = 0; visitedLinkIndex < static_cast<LinkIndex>(model.getNrOfLinks()); visitedLinkIndex++)
      {
          LinkConstPtr visitedLink = model.getLink(visitedLinkIndex);
 
@@ -792,7 +789,7 @@ bool computeLinkNetWrenchesWithoutGravity(const Model& model,
 
 
 
-bool dynamicsEstimationForwardVelKinematics(const Model & model,
+bool dynamicsEstimationForwardVelKinematics(const Model & /*model*/,
                                             const Traversal & traversal,
                                             const Vector3 & base_angularVel,
                                             const JointPosDoubleArray & jointPos,

@@ -195,7 +195,7 @@ SpatialVector<DerivedSpatialVecT>
     }
 
     SPATIALVECTORSEMANTICS_TEMPLATE_HDR
-    SPATIALVECTORSEMANTICS_INSTANCE_HDR & SPATIALVECTORSEMANTICS_INSTANCE_HDR::operator=(const SpatialVectorSemantics & other)
+    SPATIALVECTORSEMANTICS_INSTANCE_HDR & SPATIALVECTORSEMANTICS_INSTANCE_HDR::operator=(const SpatialVectorSemantics & /*other*/)
     {
         return *this;
     }

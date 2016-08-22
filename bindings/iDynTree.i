@@ -81,6 +81,7 @@ namespace std {
 #include "iDynTree/Model/MovableJointImpl.h"
 #include "iDynTree/Model/RevoluteJoint.h"
 #include "iDynTree/Model/Traversal.h"
+#include "iDynTree/Model/SolidShapes.h"
 #include "iDynTree/Model/Model.h"
 #include "iDynTree/Model/JointState.h"
 #include "iDynTree/Model/FreeFloatingMassMatrix.h"
@@ -115,6 +116,9 @@ namespace std {
 
 // High level interfaces
 #include "iDynTree/KinDynComputations.h"
+
+// Visualization
+#include "iDynTree/Visualizer.h"
 
 // Legacy high level interfaces
 #include "iDynTree/HighLevel/DynamicsComputations.h"
@@ -258,6 +262,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 %include "iDynTree/Model/RevoluteJoint.h"
 %include "iDynTree/Model/Traversal.h"
+%include "iDynTree/Model/SolidShapes.h"
 %include "iDynTree/Model/Model.h"
 %include "iDynTree/Model/JointState.h"
 %include "iDynTree/Model/FreeFloatingMassMatrix.h"
@@ -296,6 +301,9 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // High level interfaces
 %include "iDynTree/KinDynComputations.h"
+
+// Visualization
+%include "iDynTree/Visualizer.h"
 
 // Legacy high level interfaces
 %include "iDynTree/HighLevel/DynamicsComputations.h"

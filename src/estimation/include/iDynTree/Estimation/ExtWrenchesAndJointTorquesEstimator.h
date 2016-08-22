@@ -68,16 +68,16 @@ class ExtWrenchesAndJointTorquesEstimator
 
     estimateExternalWrenchesBuffers m_calibBufs;
     estimateExternalWrenchesBuffers m_bufs;
-
+    
     /**
      * Disable copy constructor and copy operator
      */
-   ExtWrenchesAndJointTorquesEstimator(const ExtWrenchesAndJointTorquesEstimator & other) {};
+   ExtWrenchesAndJointTorquesEstimator(const ExtWrenchesAndJointTorquesEstimator & /*other*/) {};
 
    /**
     * Copy operator is forbidden
     */
-   ExtWrenchesAndJointTorquesEstimator& operator=(const ExtWrenchesAndJointTorquesEstimator &other) {return *this;};
+   ExtWrenchesAndJointTorquesEstimator& operator=(const ExtWrenchesAndJointTorquesEstimator &/*other*/) {return *this;};
 
 public:
     /**

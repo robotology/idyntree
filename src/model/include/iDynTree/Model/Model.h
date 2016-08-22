@@ -13,6 +13,7 @@
 #include <iDynTree/Core/Transform.h>
 
 #include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/SolidShapes.h>
 
 #include <cstdlib>
 #include <vector>
@@ -124,6 +125,16 @@ namespace iDynTree
          *  This is just the sum of all the getNrOfDOFs of the joint in the model.
          */
         unsigned int nrOfDOFs;
+
+        /**
+         * Solid shapes used for visualization.
+         */
+        ModelSolidShapes m_visualSolidShapes;
+
+        /**
+         * Solid shapes used for collision checking.
+         */
+        ModelSolidShapes m_collisionSolidShapes;
 
         /**
          * Copy the structure of the model from another instance of a model.
@@ -437,6 +448,34 @@ namespace iDynTree
          */
         bool updateInertialParameters(const VectorDynSize & modelInertialParams);
 
+        /**
+         * Get the ModelSolidShapes meant for visualization.
+         *
+         * @return a reference to ModelSolidShapes meant for visualization.
+         */
+        ModelSolidShapes& visualSolidShapes();
+
+        /**
+         * Get the ModelSolidShapes meant for visualization (const version)
+         *
+         * @return a reference to ModelSolidShapes meant for visualization.
+         */
+        const ModelSolidShapes& visualSolidShapes() const;
+
+        /**
+         * Get the ModelSolidShapes meant for collision checking.
+         *
+         * @return a reference to ModelSolidShapes meant for visualization.
+         */
+        ModelSolidShapes& collisionSolidShapes();
+
+
+        /**
+         * Get the ModelSolidShapes meant for collision checking (const version)
+         *
+         * @return a reference to ModelSolidShapes meant for visualization.
+         */
+        const ModelSolidShapes& collisionSolidShapes() const;
 
         /**
          * \brief Get a printable representation of the Model.
