@@ -1,3 +1,3 @@
 function varargout = getSensorTypeSize(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1007, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1059, varargin{:});
 end

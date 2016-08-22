@@ -1,3 +1,3 @@
 function varargout = modelFromURDFString(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1115, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1169, varargin{:});
 end
