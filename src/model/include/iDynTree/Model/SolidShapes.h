@@ -101,6 +101,7 @@ namespace iDynTree
         ~ModelSolidShapes();
         void resize(size_t nrOfLinks);
         void resize(const Model& model);
+        bool isConsistent(const Model & model) const;
 
         /**
          * Storage ot ModelSolidShapes.

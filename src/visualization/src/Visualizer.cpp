@@ -196,6 +196,13 @@ bool ModelVisualization::init(const Model& model,
                               Visualizer& visualizer)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
+    // Check if the visual of the models are consisten with the rest of the model
+    if( !model.visualSolidShapes().isConsistent(model) )
+    {
+        reportError("ModelVisualization","init","Impossible to use load model, as the visual solid shapes of the model are not consistent with the model itself.");
+        return false;
+    }
+
     this->pimpl->m_irrSmgr = visualizer.pimpl->m_irrSmgr;
 
     // Copy the model and create a traversal from the default base
@@ -219,7 +226,7 @@ bool ModelVisualization::init(const Model& model,
 
     return true;
 #else
-    reportError("Visualizer","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    reportError("ModelVisualization","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
 }

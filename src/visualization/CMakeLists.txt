@@ -58,3 +58,7 @@ install(TARGETS ${libraryname}
         PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
+
+if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_IRRLICHT)
+    add_subdirectory(tests)
+endif()
