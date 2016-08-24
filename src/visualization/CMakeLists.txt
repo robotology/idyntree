@@ -33,7 +33,7 @@ target_link_libraries(${libraryname} LINK_PUBLIC idyntree-core
                                                  idyntree-model)
 
 # enable warnings on this part of the add_library
-if(CMAKE_VERSION VERSION_GREATER 2.8.11)
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
     target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 endif()
 
