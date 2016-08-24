@@ -62,7 +62,11 @@ private:
 
 
 public:
+    // True if the the model is valid, false otherwise.
     bool m_isModelValid;
+
+    // Frame  velocity representaiton used by the class
+    FrameVelocityRepresentation m_frameVelRepr;
 
     // Model used for dynamics computations
     iDynTree::Model m_robot_model;
@@ -78,14 +82,14 @@ public:
 
     // Velocity of the floating system
     // (Warning: this members is designed to work with the low-level
-    // dynamics algorithms of iDynTree , and so it is set throught
-    //  setRobotState with an appropriate conversion). In particular
-    // the setRobotState sets the mixed base velocity (i.e. orientation
-    // of the velocity is the one of inertial/world frame, while the point
-    // is the origin of the base frame) while this class encodes the
-    // base velocity with the orientation of the base and pint is the base
-    // origin (so-called "body" velocity).
-    //iDynTree::FreeFloatingVel m_vel;
+    // dynamics algorithms of iDynTree , and so it always contain
+    // the base velocity expressed with the BODY_FIXED representation.
+    // If a different convention is used by the class, an approprate
+    // conversion is performed on set/get .
+    iDynTree::FreeFloatingVel m_vel;
+
+    // 3d gravity vector, expressed with the orientation of the inertial (world) frame
+    iDynTree::Vector3 m_gravityAcc;
 
     // Forward kinematics data structure
     // true whenever computePosition has been called
@@ -96,12 +100,12 @@ public:
     iDynTree::LinkPositions m_linkPos;
 
     // storage of forward velocity kinematics results
-    // (to add)
-    //iDynTree::LinkVelArray m_linkVel;
+    iDynTree::LinkVelArray m_linkVel;
 
     KinDynComputationsPrivateAttributes()
     {
         m_isModelValid = false;
+        m_frameVelRepr = MIXED_REPRESENTATION;
         m_isFwdKinematicsUpdated = false;
     }
 };
@@ -250,11 +254,28 @@ bool KinDynComputations::loadRobotModel(const Model& model)
     return true;
 }
 
-
-
 bool KinDynComputations::isValid()
 {
     return (this->pimpl->m_isModelValid);
+}
+
+FrameVelocityConvention KinDynComputations::getFrameVelocityRepresentation() const
+{
+    return pimpl->m_frameVelRepr;
+}
+
+bool KinDynComputations::setFrameVelocityRepresentation(const FrameVelocityRepresentation frameVelRepr) const
+{
+    if( frameVelRepr != INERTIAL_FIXED_REPRESENTATION &&
+        frameVelRepr != BODY_FIXED_REPRESENTATION &&
+        frameVelRepr != MIXED_REPRESENTATION )
+    {
+        reportError("KinDynComputations","setFrameVelocityRepresentation","unknown frame velocity representation");
+        return false;
+    }
+
+    pimpl->m_frameVelRepr = frameVelRepr;
+    return true;
 }
 
 std::string KinDynComputations::getFloatingBase() const
@@ -279,6 +300,10 @@ const Model& KinDynComputations::getRobotModel() const
     return this->pimpl->m_robot_model;
 }
 
+const Model& KinDynComputations::model() const
+{
+    return pimpl->m_robot_model;
+}
 
 //////////////////////////////////////////////////////////////////////////////
 //// Degrees of freedom related methods
@@ -306,29 +331,6 @@ std::string KinDynComputations::getDescriptionOfDegreesOfFreedom()
     return ss.str();
 }
 
-//////////////////////////////////////////////////////////////////////////////
-//// Links related methods
-//////////////////////////////////////////////////////////////////////////////
-
-/*
-unsigned int DynamicsRegressorGenerator::getNrOfLinks() const
-{
-    assert(false);
-    return (unsigned int)this->pimpl->m_pLegacyGenerator->getNrOfDOFs();
-}
-
-std::string DynamicsRegressorGenerator::getDescriptionOfLink(int link_index)
-{
-
-}
-
-std::string DynamicsRegressorGenerator::getDescriptionOfLinks()
-{
-
-}*/
-
-
-
 bool KinDynComputations::setRobotState(const VectorDynSize& q,
                                        const VectorDynSize& q_dot,
                                        const Vector3& world_gravity)
@@ -342,27 +344,54 @@ bool KinDynComputations::setRobotState(const VectorDynSize& q,
 }
 
 bool KinDynComputations::setRobotState(const Transform& world_T_base,
-                                       const VectorDynSize& q,
+                                       const VectorDynSize& qj,
                                        const Twist& base_velocity,
-                                       const VectorDynSize& q_dot,
+                                       const VectorDynSize& qj_dot,
                                        const Vector3& world_gravity)
 {
-    bool ok = true;
 
+    bool ok = qj.size() == pimpl->m_robot_model.getNrOfPosCoords();
     if( !ok )
     {
-        std::cerr << "DynamicsRegressorGenerator::setRobotState failed" << std::endl;
+        reportError("KinDynComputations","setRobotState","Wrong size in input joint positions");
+        return false;
+    }
+
+    bool ok = qj_dot.size() == pimpl->m_robot_model.getNrOfDOFs();
+    if( !ok )
+    {
+        reportError("KinDynComputations","setRobotState","Wrong size in input joint velocities");
         return false;
     }
 
     this->invalidateCache();
 
-    // Save gravity \todo
-    // this->pimpl->m_gravityAcc = world_gravity;
-    this->pimpl->m_pos.worldBasePos() = world_T_base;
-    toEigen(this->pimpl->m_pos.jointPos()) = toEigen(q);
+    // Save gravity
+    this->pimpl->m_gravityAcc = world_gravity;
 
-    // Handle mixed --> body transform
+    // Save pos
+    this->pimpl->m_pos.worldBasePos() = world_T_base;
+    this->pimpl->m_pos.jointPos() = qj;
+
+    // Save vel
+    pimpl->m_vel.jointVel() = qj_dot;
+
+    // Account for the different possible representations
+    if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        pimpl->m_vel.baseVel() = pimpl->m_pos.worldBasePos().getRotation().inverse()*base_velocity;
+    }
+    else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // Data is stored in body fixed
+        pimpl->m_vel.baseVel() = base_velocity;
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        // base_X_inertial \ls^inertial v_base
+        pimpl->m_vel.baseVel() = pimpl->m_pos.worldBasePos().inverse()*base_velocity;
+    }
 
     return true;
 }
@@ -374,7 +403,22 @@ Transform KinDynComputations::getWorldBaseTransform()
 
 Twist KinDynComputations::getBaseTwist()
 {
-    // to implement
+    if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        return pimpl->m_pos.worldBasePos().getRotation()*(pimpl->m_vel.baseVel());
+    }
+    else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // Data is stored in body fixed
+        return pimpl->m_vel.baseVel();
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        // inertial_X_base \ls^base v_base
+        return pimpl->m_pos.worldBasePos()*(pimpl->m_vel.baseVel());
+    }
+
     assert(false);
     return Twist::Zero();
 }
@@ -388,15 +432,14 @@ bool KinDynComputations::getJointPos(VectorDynSize& q)
 
 bool KinDynComputations::getJointVel(VectorDynSize& dq)
 {
-    //dq = this->pimpl->m_pos.jointPos();
-    //return true;
-    // to implement
-    return false;
+    dq.resize(pimpl->m_robot_model.getNrOfDOFs());
+    dq = this->pimpl->m_vel.jointVel();
+    return true;
 }
 
 
 Transform KinDynComputations::getRelativeTransform(const std::string& refFrameName,
-                                                     const std::string& frameName)
+                                                   const std::string& frameName)
 {
     int refFrameIndex = getFrameIndex(refFrameName);
     int frameIndex = getFrameIndex(frameName);
@@ -587,6 +630,7 @@ unsigned int KinDynComputations::getNrOfFrames() const
 {
     return this->pimpl->m_robot_model.getNrOfFrames();
 }
+
 
 
 }

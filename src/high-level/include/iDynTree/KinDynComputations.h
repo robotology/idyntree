@@ -11,8 +11,10 @@
 #include <string>
 
 #include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Core/MatrixDynSize.h>
 
 #include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/FreeFloatingMatrices.h>
 
 namespace iDynTree
 {
@@ -28,11 +30,21 @@ class Wrench;
 class Model;
 class Traversal;
 
+
 /**
  * \ingroup iDynTreeHighLevel
  *
+ * \brief High level stateful class wrapping several kinematics and dynamics algorithms.
+ *
  * The kinematics dynamics computations class is an high level class stateful to access
  * several algorithms related to kinematics and dynamics of free floating robot systems.
+ *
+ * This class supports three possible convention to express the floating base information :
+ * the inertial, the body-fixed and the mixed convention.
+ * To get more info on this three conventions, check section II.C  of
+ * On  the  Base  Frame  Choice  in  Free-Floating  Mechanical  Systems
+ * and  its  Connection  to  Centroidal  Dynamics
+ * https://traversaro.github.io/preprints/changebase.pdf
  *
  */
 class KinDynComputations {
@@ -54,7 +66,6 @@ private:
 
     // Resize internal data structures after a model has been successfully loaded
     void resizeInternalDataStructures();
-
 public:
 
     /**
@@ -109,12 +120,21 @@ public:
     bool loadRobotModelFromString(const std::string & modelString, const std::string & filetype="urdf");
 
     /**
-     * Return true if the models for the robot, sensors and regressors have been correctly
-     * loaded and the regressor generator is ready to compute regressors.
+     * Return true if the models for the robot have been correctly.
      *
-     * @return True if the regressor generator is correctly configure, false otherwise.
+     * @return True if the class has been correctly configure, false otherwise.
      */
-    bool isValid();
+    bool isValid() const;
+
+    /**
+     * Get the used FrameVelocityConvention.
+     */
+    bool setFrameVelocityRepresentation(const FrameVelocityConvention ) const;
+
+    /**
+     * Get the used FrameVelocityConvention.
+     */
+    FrameVelocityConvention getFrameVelocityRepresentation() const;
     //@}
 
 
@@ -186,8 +206,6 @@ public:
      */
     //std::string getDescriptionOfLinks();
 
-
-
     /**
      * Get the name of the link considered as the floating base.
      *
@@ -212,6 +230,7 @@ public:
      */
     //@{
 
+    const Model & model() const;
     const Model & getRobotModel() const;
 
     //@}
@@ -228,10 +247,8 @@ public:
      * @param q_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
      * @param world_T_base  the homogeneous transformation that transforms position vectors expressed in the base reference frame
      *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .
-     * @param base_velocity The twist (linear/angular velocity) of the base, expressed in the world orientation frame and with respect
-     *                      to the base origin.
+     * @param base_velocity The twist (linear/angular velocity) of the base, expressed with the convention specified by the used FrameVelocityConvention.
      *
-     * \note this convention is the same used in the wholeBodyInterface classes.
      *
      */
     bool setRobotState(const iDynTree::Transform &world_T_base,
@@ -334,6 +351,30 @@ public:
     iDynTree::Transform getRelativeTransform(const std::string & refFrameName,
                                              const std::string & frameName);
 
+    //@}
+
+    /**
+      * @name Methods to get frame velocity information given the current state.
+      */
+    //@{
+
+    /**
+     * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation .
+     */
+    iDynTree::Twist getFrameVel(const std::string & frameName);
+
+    /**
+     * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation .
+     */
+    iDynTree::Twist getFrameVel(const FrameIndex frameIdx);
+
+    bool getFrameJacobian(const std::string & frameName,
+                          iDynTree::MatrixDynSize & outJacobian) const;
+
+    bool getFrameJacobian(const unsigned int & frameIndex,
+                          iDynTree::MatrixDynSize & outJacobian) const;
+
+    //@}
 
 
 };

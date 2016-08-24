@@ -333,6 +333,11 @@ IndexRange BerdyHelper::getRangeOriginalBerdyFixedBase(BerdyDynamicVariablesType
             dynamicVariableSize = 1;
             dynamicVariableOffset = m_options.includeAllNetExternalWrenchesAsDynamicVariables ? 25 : 19;
             break;
+        default:
+            assert(false);
+            dynamicVariableSize = 0;
+            dynamicVariableOffset = 0;
+            break;
     }
 
     // Note that the traversal index 0 is for the base link, that is not considered
