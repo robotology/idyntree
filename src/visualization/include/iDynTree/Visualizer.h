@@ -19,6 +19,28 @@ class Transform;
 class Visualizer;
 
 /**
+ * Interface to manipulate the camera parameters.
+ */
+class ICamera
+{
+public:
+    /**
+      * Destructor
+      */
+    virtual ~ICamera() = 0;
+
+    /**
+     * Set the linear position of the camera w.r.t to the world.
+     */
+    virtual void setPosition(const iDynTree::Position & cameraPos) = 0;
+
+    /**
+     * Set the target of the camera (i.e. the point the camera is looking into) w.r.t. the world.
+     */
+    virtual void setTarget(const iDynTree::Position & cameraPos) = 0;
+};
+
+/**
  * Interface to the visualization of a model istance.
  */
 class ModelVisualization
@@ -96,7 +118,7 @@ private:
     Visualizer& operator=(const Visualizer& other);
 public:
     Visualizer();
-    ~Visualizer();
+    virtual ~Visualizer();
 
     /**
      * Initialize the visualization.
@@ -130,7 +152,6 @@ public:
     bool addModel(const iDynTree::Model & model,
                   const std::string & instanceName);
 
-
     /**
      * Return an interface to a visualization of a model.
      *
@@ -146,6 +167,11 @@ public:
      * @return a reference to a valid ModelVisualization if instanceName is the name of a model instance.
      */
     ModelVisualization& modelViz(const std::string & instanceName);
+
+    /**
+     * Return an interface to manipulate the camera in the visualization.
+     */
+    ICamera& camera();
 
     /**
      * Wrap the run method of the Irrlicht device.
@@ -173,7 +199,6 @@ public:
      * Close the visualizer.
      */
     void close();
-
 };
 
 }

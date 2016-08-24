@@ -15,12 +15,17 @@
 #ifdef IDYNTREE_USES_IRRLICHT
 #include <irrlicht.h>
 #include "IrrlichtUtils.h"
+#include "Camera.h"
 #endif
 
 #include <cassert>
 
 namespace iDynTree
 {
+
+ICamera::~ICamera()
+{
+}
 
 struct ModelVisualization::ModelVisualizationPimpl
 {
@@ -105,7 +110,7 @@ struct Visualizer::VisualizerPimpl
     /**
      * Camera used by the visualization.
      */
-    irr::scene::ICameraSceneNode * m_irrCamera;
+    Camera m_camera;
 #endif
 
     VisualizerPimpl()
@@ -118,7 +123,6 @@ struct Visualizer::VisualizerPimpl
         m_irrDevice = 0;
         m_irrSmgr   = 0;
         m_irrDriver = 0;
-        m_irrCamera = 0;
 #endif
     }
 };
@@ -368,7 +372,7 @@ bool Visualizer::init(const VisualizerOptions options)
     // Add visualization elements
     addVizEnviroment(pimpl->m_irrSmgr);
     addVizLights(pimpl->m_irrSmgr);
-    pimpl->m_irrCamera = addVizCamera(pimpl->m_irrSmgr);
+    pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
 
     pimpl->m_isInitialized = true;
     pimpl->lastFPS         = -1;
@@ -541,6 +545,12 @@ ModelVisualization& Visualizer::modelViz(size_t modelIdx)
 {
     return *(this->pimpl->m_modelViz[modelIdx]);
 }
+
+ICamera& Visualizer::camera()
+{
+    return pimpl->m_camera;
+}
+
 
 bool Visualizer::run()
 {
