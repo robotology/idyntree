@@ -170,4 +170,9 @@ namespace iDynTree
     {
         this->clear();
     }
+
+    bool ModelSolidShapes::isConsistent(const Model& model) const
+    {
+        return (this->linkSolidShapes.size() == model.getNrOfLinks());
+    }
 }

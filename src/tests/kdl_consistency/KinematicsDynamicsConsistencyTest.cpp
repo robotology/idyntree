@@ -281,7 +281,6 @@ void testFwdKinConsistency(std::string modelFilePath)
         }
     }
 
-
     return;
 }
 
