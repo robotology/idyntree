@@ -8,6 +8,7 @@
 #ifndef IDYNTREE_IRRLICHT_UTILS_H
 #define IDYNTREE_IRRLICHT_UTILS_H
 
+#include <iDynTree/Model/SolidShapes.h>
 #include <iDynTree/Visualizer.h>
 
 #include <irrlicht.h>

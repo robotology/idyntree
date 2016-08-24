@@ -4,6 +4,14 @@
 
 set(iDynTree_visualization_source src/Visualizer.cpp)
 set(iDynTree_visualization_header include/iDynTree/Visualizer.h)
+set(iDynTree_visualization_private_headers)
+
+if(IDYNTREE_USES_IRRLICHT)
+    # Some files are compiled only when irrlicht is available
+    list(APPEND iDynTree_visualization_private_headers src/IrrlichtUtils.h)
+    list(APPEND iDynTree_visualization_private_headers src/Camera.h)
+    list(APPEND iDynTree_visualization_source src/Camera.cpp)
+endif()
 
 source_group("Source Files" FILES ${iDynTree_visualization_source})
 source_group("Header Files" FILES ${iDynTree_visualization_header})
@@ -20,12 +28,12 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 
 
 set(libraryname idyntree-visualization)
-add_library(${libraryname} ${iDynTree_visualization_source} ${iDynTree_visualization_header})
+add_library(${libraryname} ${iDynTree_visualization_source} ${iDynTree_visualization_header} ${iDynTree_visualization_private_headers})
 
 set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_visualization_header}")
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
-                                                         "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
