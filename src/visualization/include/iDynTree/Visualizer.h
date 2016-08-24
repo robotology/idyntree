@@ -11,6 +11,7 @@
 
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/ContactWrench.h>
 
 namespace iDynTree
 {
@@ -48,6 +49,20 @@ public:
      * Set the positions of the model by directly specifing link positions wrt to the world.
      */
     bool setLinkPositions(const LinkPositions & linkPos);
+
+    /**
+     * Enable/disable external wrenches visualization.
+     *
+     * @return true if the visualization was successfully enabled/disabled.
+     */
+    bool visualizeContactWrenches(bool visualize);
+
+    /**
+     * Set the contact wrenches to visualize.
+     *
+     * @return true if all went well, false otherwise.
+     */
+    bool setContactWrenches(const LinkContactWrenches & contactWrenches);
 
     /**
      * Reference to the used model.
