@@ -46,8 +46,16 @@ if(IDYNTREE_USES_IRRLICHT)
     # Restore this once we have CMake 3.0 as a minimum version and we can support target_include_directories(.. SYSTEM)
     # target_include_directories(idyntree-visualization PRIVATE SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
     include_directories(SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
-    target_link_libraries(${libraryname} LINK_PUBLIC ${IRRLICHT_LIBRARY} ${OPENGL_LIBRARIES})
+    target_link_libraries(${libraryname} LINK_PRIVATE ${IRRLICHT_LIBRARY} ${OPENGL_LIBRARIES})
     add_definitions(-DIDYNTREE_USES_IRRLICHT)
+    
+    # On Apple system, irrlicht uses some system libraries 
+    if (APPLE)
+    	find_library(CARBON_LIBRARY Carbon)
+    	find_library(COCOA_LIBRARY Cocoa)
+    	find_library(IOKIT_LIBRARY IOKit)
+    	target_link_libraries(${libraryname} LINK_PRIVATE ${CARBON_LIBRARY} ${COCOA_LIBRARY} ${IOKIT_LIBRARY})
+    endif ()
 endif()
 
 install(TARGETS ${libraryname}
