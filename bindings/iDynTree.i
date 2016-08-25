@@ -84,7 +84,7 @@ namespace std {
 #include "iDynTree/Model/SolidShapes.h"
 #include "iDynTree/Model/Model.h"
 #include "iDynTree/Model/JointState.h"
-#include "iDynTree/Model/FreeFloatingMassMatrix.h"
+#include "iDynTree/Model/FreeFloatingMatrices.h"
 #include "iDynTree/Model/FreeFloatingState.h"
 #include "iDynTree/Model/ContactWrench.h"
 
@@ -265,7 +265,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Model/SolidShapes.h"
 %include "iDynTree/Model/Model.h"
 %include "iDynTree/Model/JointState.h"
-%include "iDynTree/Model/FreeFloatingMassMatrix.h"
+%include "iDynTree/Model/FreeFloatingMatrices.h"
 %include "iDynTree/Model/FreeFloatingState.h"
 %include "iDynTree/Model/ContactWrench.h"
 

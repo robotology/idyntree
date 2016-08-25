@@ -22,6 +22,8 @@ namespace iDynTree
     class Twist;
     class SpatialMomentum;
     class SpatialAcc;
+    class SpatialMotionVector;
+    class SpatialForceVector;
     class SpatialInertia;
     class ArticulatedBodyInertia;
 
@@ -239,7 +241,6 @@ namespace iDynTree
          *
          */
         Position operator*(const Position & other) const;
-        SpatialForceVector operator*(const SpatialForceVector & other) const;
 
         /**
          * Change frame in which a Wrench is expressed.
@@ -336,6 +337,22 @@ namespace iDynTree
          * for the mathematical details.
          */
         SpatialAcc   operator*(const SpatialAcc & other) const;
+
+        /**
+         * Change the frame in which a SpatialMotionVector is expressed.
+         *
+         * Check the operator*(const Twist & other) documentation
+         * for the mathematical details.
+         */
+        SpatialMotionVector   operator*(const SpatialMotionVector & other) const;
+
+        /**
+         * Change the frame in which a SpatialForceVector is expressed.
+         *
+         * Check the operator*(const Wrench & other) documentation
+         * for the mathematical details.
+         */
+        SpatialForceVector   operator*(const SpatialForceVector & other) const;
 
         /**
          * Change the frame in which a SpatialInertia is expressed.

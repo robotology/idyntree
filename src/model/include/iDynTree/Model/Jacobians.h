@@ -22,6 +22,7 @@ namespace iDynTree
     class LinkVelArray;
     class LinkAccArray;
     class JointPosDoubleArray;
+    class MatrixDynSize;
 
     /**
      * \ingroup iDynTreeModel
@@ -45,8 +46,7 @@ namespace iDynTree
                                           const LinkIndex linkIndex,
                                           const Transform & jacobFrame_X_world,
                                           const Transform & baseFrame_X_jacobBaseFrame,
-                                          const MatrixDynSize & jacobian
-                                         );
+                                                 MatrixDynSize & jacobian);
 
 
 }
