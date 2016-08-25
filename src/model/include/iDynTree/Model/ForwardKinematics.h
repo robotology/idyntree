@@ -90,14 +90,12 @@ namespace iDynTree
      *
      *
      */
-    bool ForwardPosVelAccKinematics(const iDynTree::Model & model,
-                                    const iDynTree::Traversal & traversal,
-                                    const iDynTree::FreeFloatingPos & robotPos,
-                                    const iDynTree::FreeFloatingVel & robotVel,
-                                    const iDynTree::FreeFloatingAcc & robotAcc,
-                                          iDynTree::LinkPositions & linkPos,
-                                          iDynTree::LinkVelArray & linkVel,
-                                          iDynTree::LinkAccArray  & linkAcc);
+    bool ForwardPosVelKinematics(const iDynTree::Model & model,
+                                 const iDynTree::Traversal & traversal,
+                                 const iDynTree::FreeFloatingPos & robotPos,
+                                 const iDynTree::FreeFloatingVel & robotVel,
+                                       iDynTree::LinkPositions & linkPos,
+                                       iDynTree::LinkVelArray & linkVel);
 
 }
 

@@ -12,6 +12,7 @@
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model/LinkState.h>
 
 namespace iDynTree
 {
@@ -23,13 +24,13 @@ bool FreeFloatingJacobianUsingLinkPos(const Model& model,
                                       const LinkIndex jacobianLinkIndex,
                                       const Transform& jacobFrame_X_world,
                                       const Transform& baseFrame_X_jacobBaseFrame,
-                                      const MatrixDynSize& jacobian)
+                                            MatrixDynSize& jacobian)
 {
     // We zero the jacobian
     jacobian.zero();
 
     // Compute base part
-    const Transform & world_H_base = world_H_links[traversal.getBaseLink()->getIndex()];
+    const Transform & world_H_base = world_H_links(traversal.getBaseLink()->getIndex());
     toEigen(jacobian).block(0,0,6,6) = toEigen((jacobFrame_X_world*world_H_base*baseFrame_X_jacobBaseFrame).asAdjointTransform());
 
     // Compute joint part
@@ -45,7 +46,7 @@ bool FreeFloatingJacobianUsingLinkPos(const Model& model,
         for(int i=0; i < joint->getNrOfDOFs(); i++)
         {
             toEigen(jacobian).block(0,6+dofOffset+i,6,1) =
-                toEigen(jacobFrame_X_world*(world_H_links[visitedLinkIdx]*joint->getMotionSubspaceVector(i,visitedLinkIdx,parentLinkIdx)));
+                toEigen(jacobFrame_X_world*(world_H_links(visitedLinkIdx)*joint->getMotionSubspaceVector(i,visitedLinkIdx,parentLinkIdx)));
         }
 
         visitedLinkIdx = parentLinkIdx;

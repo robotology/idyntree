@@ -227,6 +227,15 @@ SpatialAcc Transform::operator*(const SpatialAcc& op2) const
 #endif
 }
 
+SpatialMotionVector Transform::operator*(const SpatialMotionVector& op2) const
+{
+#ifdef IDYNTREE_DONT_USE_SEMANTICS
+    return transformTwistEfficient(*this,op2);
+#else
+    return transform<SpatialMotionVector>(*this,op2);
+#endif
+}
+
 
 SpatialInertia Transform::operator*(const SpatialInertia& op2) const
 {

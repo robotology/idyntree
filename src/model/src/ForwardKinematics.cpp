@@ -175,7 +175,7 @@ bool ForwardPosVelKinematics(const Model& model,
             // world_H_link = world_H_parentLink * parentLink_H_link
             linkPos(visitedLink->getIndex()) =
                 linkPos(parentLink->getIndex()) *
-                    toParentJoint->getTransform(parentLink->getIndex(),visitedLink->getIndex());
+                    toParentJoint->getTransform(robotPos.jointPos(),parentLink->getIndex(),visitedLink->getIndex());
 
             // The link velocity are recursivly
             // compute from the joint position, velocities

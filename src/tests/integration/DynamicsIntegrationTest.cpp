@@ -19,7 +19,7 @@
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/FreeFloatingMassMatrix.h>
+#include <iDynTree/Model/FreeFloatingMatrices.h>
 
 #include "testModels.h"
 

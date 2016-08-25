@@ -253,12 +253,12 @@ bool KinDynComputations::loadRobotModel(const Model& model)
     return true;
 }
 
-bool KinDynComputations::isValid()
+bool KinDynComputations::isValid() const
 {
     return (this->pimpl->m_isModelValid);
 }
 
-FrameVelocityConvention KinDynComputations::getFrameVelocityRepresentation() const
+FrameVelocityRepresentation KinDynComputations::getFrameVelocityRepresentation() const
 {
     return pimpl->m_frameVelRepr;
 }
@@ -356,7 +356,7 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
         return false;
     }
 
-    bool ok = qj_dot.size() == pimpl->m_robot_model.getNrOfDOFs();
+    ok = qj_dot.size() == pimpl->m_robot_model.getNrOfDOFs();
     if( !ok )
     {
         reportError("KinDynComputations","setRobotState","Wrong size in input joint velocities");
@@ -370,10 +370,10 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
 
     // Save pos
     this->pimpl->m_pos.worldBasePos() = world_T_base;
-    this->pimpl->m_pos.jointPos() = qj;
+    toEigen(this->pimpl->m_pos.jointPos()) = toEigen(qj);
 
     // Save vel
-    pimpl->m_vel.jointVel() = qj_dot;
+    toEigen(pimpl->m_vel.jointVel()) = toEigen(qj_dot);
 
     // Account for the different possible representations
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
@@ -649,7 +649,7 @@ Twist KinDynComputations::getFrameVel(const FrameIndex frameIdx)
     // Compute frame body-fixed velocity
     Transform frame_X_link = pimpl->m_robot_model.getFrameTransform(frameIdx).inverse();
 
-    Twist v_frame_body_fixed = frame_X_link*pimpl->m_linkVel[pimpl->m_robot_model.getFrameLink(frameIdx)];
+    Twist v_frame_body_fixed = frame_X_link*pimpl->m_linkVel(pimpl->m_robot_model.getFrameLink(frameIdx));
 
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
@@ -675,13 +675,13 @@ Twist KinDynComputations::getFrameVel(const FrameIndex frameIdx)
 
 
 bool KinDynComputations::getFrameFreeFloatingJacobian(const std::string& frameName,
-                                          MatrixDynSize& outJacobian) const
+                                          MatrixDynSize& outJacobian)
 {
-    return getFrameFreeFloatingJacobian(getFrameIndex(frameName));
+    return getFrameFreeFloatingJacobian(getFrameIndex(frameName),outJacobian);
 }
 
 bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
-                                          MatrixDynSize& outJacobian) const
+                                                      MatrixDynSize& outJacobian)
 {
     if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
     {
@@ -708,13 +708,13 @@ bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameInde
     else if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
     {
         // This is tricky.. needs to be properly documented
-        Transform world_X_frame = (pimpl->m_linkPos[jacobLink]*jacobLink_H_frame);
+        Transform world_X_frame = (pimpl->m_linkPos(jacobLink)*jacobLink_H_frame);
         jacobFrame_X_world = Transform(Rotation::Identity(),-world_X_frame.getPosition());
     }
     else
     {
         assert(pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION);
-        Transform world_X_frame = (pimpl->m_linkPos[jacobLink]*jacobLink_H_frame);
+        Transform world_X_frame = (pimpl->m_linkPos(jacobLink)*jacobLink_H_frame);
         jacobFrame_X_world = world_X_frame.inverse();
     }
 
@@ -727,13 +727,13 @@ bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameInde
     }
     else if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        Transform base_X_world = (pimpl->m_linkPos[pimpl->m_traversal.getBaseLink()->getIndex()]).inverse();
+        Transform base_X_world = (pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex())).inverse();
         baseFrame_X_jacobBaseFrame = Transform(base_X_world.getRotation(),Position::Zero());
     }
     else
     {
         assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
-        Transform world_X_base = (pimpl->m_linkPos[pimpl->m_traversal.getBaseLink()->getIndex()]);
+        Transform world_X_base = (pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex()));
         baseFrame_X_jacobBaseFrame = world_X_base.inverse();
     }
 

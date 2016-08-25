@@ -129,12 +129,12 @@ public:
     /**
      * Get the used FrameVelocityConvention.
      */
-    bool setFrameVelocityRepresentation(const FrameVelocityConvention ) const;
+    bool setFrameVelocityRepresentation(const FrameVelocityRepresentation framVelRepr) const;
 
     /**
      * Get the used FrameVelocityConvention.
      */
-    FrameVelocityConvention getFrameVelocityRepresentation() const;
+    FrameVelocityRepresentation getFrameVelocityRepresentation() const;
     //@}
 
 
@@ -369,10 +369,10 @@ public:
     iDynTree::Twist getFrameVel(const FrameIndex frameIdx);
 
     bool getFrameFreeFloatingJacobian(const std::string & frameName,
-                                      iDynTree::MatrixDynSize & outJacobian) const;
+                                      iDynTree::MatrixDynSize & outJacobian);
 
     bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
-                                      iDynTree::MatrixDynSize & outJacobian) const;
+                                      iDynTree::MatrixDynSize & outJacobian);
 
     // Todo getFrameRelativeVel and getFrameRelativeJacobian to match the getRelativeTransform behaviour
 
