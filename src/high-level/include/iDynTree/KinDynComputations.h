@@ -61,7 +61,7 @@ private:
     // exits without further computations
     void computeFwdKinematics();
 
-    // Invalidate the cache of intermediated results (called by setRobotState
+    // Invalidate the cache of intermediated results (called by setRobotState)
     void invalidateCache();
 
     // Resize internal data structures after a model has been successfully loaded
@@ -334,7 +334,7 @@ public:
      * This is a variant of the getRelativeTransform in which the orientation and origin part of both
      * side of the transform are explicited.
      *
-     * \todo provide mode detailed documentation. 
+     * \todo provide mode detailed documentation.
      *
      */
     iDynTree::Transform getRelativeTransformExplicit(const iDynTree::FrameIndex refFrameOriginIndex,
@@ -368,11 +368,13 @@ public:
      */
     iDynTree::Twist getFrameVel(const FrameIndex frameIdx);
 
-    bool getFrameJacobian(const std::string & frameName,
-                          iDynTree::MatrixDynSize & outJacobian) const;
+    bool getFrameFreeFloatingJacobian(const std::string & frameName,
+                                      iDynTree::MatrixDynSize & outJacobian) const;
 
-    bool getFrameJacobian(const unsigned int & frameIndex,
-                          iDynTree::MatrixDynSize & outJacobian) const;
+    bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
+                                      iDynTree::MatrixDynSize & outJacobian) const;
+
+    // Todo getFrameRelativeVel and getFrameRelativeJacobian to match the getRelativeTransform behaviour
 
     //@}
 

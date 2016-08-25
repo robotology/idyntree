@@ -52,6 +52,8 @@ namespace iDynTree
                                    const FreeFloatingPos & jointPos,
                                          LinkPositions   & linkPos);
 
+
+
     /**
      * Function that compute the links velocities and accelerations
      * given the free floating robot velocities and accelerations.
@@ -68,8 +70,23 @@ namespace iDynTree
                                        iDynTree::LinkAccArray  & linkAcc);
 
     /**
-     * Function that compute the links velocities and accelerations
-     * given the free floating robot velocities and accelerations.
+     * Function that compute the links position, velocities and accelerations
+     * given the free floating robot position, velocities and accelerations.
+     *
+     *
+     */
+    bool ForwardPosVelAccKinematics(const iDynTree::Model & model,
+                                    const iDynTree::Traversal & traversal,
+                                    const iDynTree::FreeFloatingPos & robotPos,
+                                    const iDynTree::FreeFloatingVel & robotVel,
+                                    const iDynTree::FreeFloatingAcc & robotAcc,
+                                          iDynTree::LinkPositions & linkPos,
+                                          iDynTree::LinkVelArray & linkVel,
+                                          iDynTree::LinkAccArray  & linkAcc);
+
+    /**
+     * Function that compute the links position and velocities and accelerations
+     * given the free floating robot position and velocities.
      *
      *
      */

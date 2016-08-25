@@ -28,6 +28,7 @@
 #include <iDynTree/Model/FreeFloatingState.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/ForwardKinematics.h>
+#include <iDynTree/Model/Jacobians.h>
 
 #include <iDynTree/ModelIO/URDFModelImport.h>
 
@@ -156,15 +157,11 @@ void KinDynComputations::resizeInternalDataStructures()
 
     this->pimpl->m_pos.resize(this->pimpl->m_robot_model);
     this->pimpl->m_linkPos.resize(this->pimpl->m_robot_model);
-    //this->pimpl->m_linkVel.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_linkVel.resize(this->pimpl->m_robot_model);
 }
 
 int KinDynComputations::getFrameIndex(const std::string& frameName) const
 {
-    // Currently KDL::CoDyCo::UndirectedTree mixes the concepts of frames and links
-    // see https://github.com/robotology/codyco-modules/issues/39
-    // Once we have a proper iDynTree::Model, we can properly implement
-    // the difference between frame and link
     int index = this->pimpl->m_robot_model.getFrameIndex(frameName);
     reportErrorIf(index < 0, "KinDynComputations::getFrameIndex", "requested frameName not found in model");
     return index;
@@ -185,11 +182,13 @@ void KinDynComputations::computeFwdKinematics()
         return;
     }
 
-    // Compute position kinematics (to implement ForwardPosVelKinematics
-    bool ok = ForwardPositionKinematics(this->pimpl->m_robot_model,
-                                        this->pimpl->m_traversal,
-                                        this->pimpl->m_pos,
-                                        this->pimpl->m_linkPos);
+    // Compute position kinematics
+    bool ok = ForwardPosVelKinematics(this->pimpl->m_robot_model,
+                                      this->pimpl->m_traversal,
+                                      this->pimpl->m_pos,
+                                      this->pimpl->m_vel,
+                                      this->pimpl->m_linkPos,
+                                      this->pimpl->m_linkVel);
 
     this->pimpl->m_isFwdKinematicsUpdated = ok;
 
@@ -631,6 +630,118 @@ unsigned int KinDynComputations::getNrOfFrames() const
     return this->pimpl->m_robot_model.getNrOfFrames();
 }
 
+Twist KinDynComputations::getFrameVel(const std::string& frameName)
+{
+    return getFrameVel(getFrameIndex(frameName));
+}
+
+Twist KinDynComputations::getFrameVel(const FrameIndex frameIdx)
+{
+    if (!pimpl->m_robot_model.isValidFrameIndex(frameIdx))
+    {
+        reportError("KinDynComputations","getFrameVel","Frame index out of bounds");
+        return Twist::Zero();
+    }
+
+    // compute fwd kinematics (if necessary)
+    this->computeFwdKinematics();
+
+    // Compute frame body-fixed velocity
+    Transform frame_X_link = pimpl->m_robot_model.getFrameTransform(frameIdx).inverse();
+
+    Twist v_frame_body_fixed = frame_X_link*pimpl->m_linkVel[pimpl->m_robot_model.getFrameLink(frameIdx)];
+
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        return v_frame_body_fixed;
+    }
+    else
+    {
+        // To convert the twist to a mixed or inertial representation, we need world_H_frame
+        Transform world_H_frame = getWorldTransform(frameIdx);
+
+        if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION )
+        {
+            return (world_H_frame.getRotation())*v_frame_body_fixed;
+        }
+        else
+        {
+            assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+            return world_H_frame*v_frame_body_fixed;
+        }
+    }
+
+}
+
+
+bool KinDynComputations::getFrameFreeFloatingJacobian(const std::string& frameName,
+                                          MatrixDynSize& outJacobian) const
+{
+    return getFrameFreeFloatingJacobian(getFrameIndex(frameName));
+}
+
+bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
+                                          MatrixDynSize& outJacobian) const
+{
+    if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
+    {
+        reportError("KinDynComputations","getFrameJacobian","Frame index out of bounds");
+        return false;
+    }
+
+    // compute fwd kinematics (if necessary)
+    this->computeFwdKinematics();
+
+    // Get the link to which the frame is attached
+    LinkIndex jacobLink = pimpl->m_robot_model.getFrameLink(frameIndex);
+    const Transform & jacobLink_H_frame = pimpl->m_robot_model.getFrameTransform(frameIndex);
+
+    // The frame on which the jacobian is expressed is (frame,frame)
+    // in the case of BODY_FIXED_REPRESENTATION, (frame,world) for MIXED_REPRESENTATION
+    // and (world,world) for INERTIAL_FIXED_REPRESENTATION .
+    Transform jacobFrame_X_world;
+
+    if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+    {
+        jacobFrame_X_world = Transform::Identity();
+    }
+    else if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        // This is tricky.. needs to be properly documented
+        Transform world_X_frame = (pimpl->m_linkPos[jacobLink]*jacobLink_H_frame);
+        jacobFrame_X_world = Transform(Rotation::Identity(),-world_X_frame.getPosition());
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION);
+        Transform world_X_frame = (pimpl->m_linkPos[jacobLink]*jacobLink_H_frame);
+        jacobFrame_X_world = world_X_frame.inverse();
+    }
+
+    // To address for different representation of the base velocity, we construct the
+    // baseFrame_X_jacobBaseFrame matrix
+    Transform baseFrame_X_jacobBaseFrame;
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        baseFrame_X_jacobBaseFrame = Transform::Identity();
+    }
+    else if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        Transform base_X_world = (pimpl->m_linkPos[pimpl->m_traversal.getBaseLink()->getIndex()]).inverse();
+        baseFrame_X_jacobBaseFrame = Transform(base_X_world.getRotation(),Position::Zero());
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        Transform world_X_base = (pimpl->m_linkPos[pimpl->m_traversal.getBaseLink()->getIndex()]);
+        baseFrame_X_jacobBaseFrame = world_X_base.inverse();
+    }
+
+    return FreeFloatingJacobianUsingLinkPos(pimpl->m_robot_model,pimpl->m_traversal,
+                                            pimpl->m_pos.jointPos(),pimpl->m_linkPos,
+                                            jacobLink,jacobFrame_X_world,baseFrame_X_jacobBaseFrame,
+                                            outJacobian);
+}
 
 
 }
