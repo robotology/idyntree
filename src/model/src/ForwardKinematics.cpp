@@ -145,6 +145,51 @@ bool ForwardVelAccKinematics(const Model& model, const Traversal& traversal,
 
 }
 
+bool ForwardPosVelKinematics(const Model& model,
+                             const Traversal& traversal,
+                             const FreeFloatingPos& robotPos,
+                             const FreeFloatingVel& robotVel,
+                                   LinkPositions& linkPos,
+                                   LinkVelArray& linkVel)
+{
+    bool retValue = true;
+
+    for (TraversalIndex traversalEl=0; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+        if (parentLink == 0)
+        {
+            // If the visited link is the base, the base has no parent.
+            // In this case the position of the base with respect to the world is simply
+            // the worldBase transform contained in the jointPos input object and the velocity
+            // of the base is the base velocity
+            linkPos(visitedLink->getIndex()) = robotPos.worldBasePos();
+            linkVel(visitedLink->getIndex()) = robotVel.baseVel();
+        }
+        else
+        {
+            // Otherwise we compute the world_H_link transform as:
+            // world_H_link = world_H_parentLink * parentLink_H_link
+            linkPos(visitedLink->getIndex()) =
+                linkPos(parentLink->getIndex()) *
+                    toParentJoint->getTransform(parentLink->getIndex(),visitedLink->getIndex());
+
+            // The link velocity are recursivly
+            // compute from the joint position, velocities
+            // and from the velocity of the parent link
+            toParentJoint->computeChildVel(robotPos.jointPos(),
+                                           robotVel.jointVel(),
+                                           linkVel,
+                                           visitedLink->getIndex(),parentLink->getIndex());
+        }
+    }
+
+    return retValue;
+}
+
 
 
 }
