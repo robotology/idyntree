@@ -284,7 +284,8 @@ namespace CoDyCo
     public:
 
         UndirectedTreeJunction() {};
-        UndirectedTreeJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1, const int body_part_q_nr_in=-1):
+        //UndirectedTreeJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1, const int body_part_in = -1, const int body_part_q_nr_in=-1):
+	UndirectedTreeJunction(const std::string & name, const Joint & joint_in, const Frame & f_tip_in, const int q_nr_in = -1):
                                joint_name(name), joint(joint_in), f_tip(f_tip_in), q_nr(q_nr_in) { q_previous=-1.0; update_buffers(0.0);};
 
 

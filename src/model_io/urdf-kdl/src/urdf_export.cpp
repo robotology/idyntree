@@ -321,7 +321,7 @@ bool treeToUrdfModel(const KDL::Tree& tree, const std::string & robot_name, urdf
 //update topology and parameters
 //use only on KDL models obtained from KDL_import from the corresponding urdf tree
 
-bool treeUpdateUrdfModel(const KDL::Tree& tree, urdf::ModelInterface& robot_model)
+bool treeUpdateUrdfModel(const KDL::Tree& /*tree*/, urdf::ModelInterface& /*robot_model*/)
 {
     /*
     KDL::SegmentMap::iterator seg;

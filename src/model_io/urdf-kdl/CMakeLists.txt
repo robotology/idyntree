@@ -55,6 +55,9 @@ target_link_libraries(${libraryname} idyntree-core
                                      ${console_bridge_LIBRARIES}
                                      ${TinyXML_LIBRARIES})
 
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
 # make sure that the installed include directories are added after the include
 # directories added with the other targets
 include_directories(SYSTEM  ${orocos_kdl_INCLUDE_DIRS}
