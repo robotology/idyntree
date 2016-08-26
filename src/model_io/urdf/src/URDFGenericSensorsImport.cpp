@@ -71,7 +71,6 @@ bool findJointParentsAndChild(TiXmlElement* robotXml,
     for (TiXmlElement* joint_xml = robotXml->FirstChildElement("joint");
          joint_xml; joint_xml = joint_xml->NextSiblingElement("joint"))
     {
-        //IJointPtr joint=0;
         std::string jointName;
 
         const char *name = joint_xml->Attribute("name");
