@@ -156,6 +156,7 @@ void KinDynComputations::resizeInternalDataStructures()
     assert(this->pimpl->m_isModelValid);
 
     this->pimpl->m_pos.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_vel.resize(this->pimpl->m_robot_model);
     this->pimpl->m_linkPos.resize(this->pimpl->m_robot_model);
     this->pimpl->m_linkVel.resize(this->pimpl->m_robot_model);
 }

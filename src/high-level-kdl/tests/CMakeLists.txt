@@ -15,7 +15,7 @@ macro(add_unit_test_hl_yarp classname)
     set(testname   UnitTest${classname})
     add_executable(${testbinary} ${testsrc})
     target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR} ${IDYNTREE_TREE_INCLUDE_DIRS})
-    target_link_libraries(${testbinary} idyntree-high-level-kdl idyntree-yarp-kdl idyntree-yarp)
+    target_link_libraries(${testbinary} idyntree-high-level-kdl idyntree-yarp-kdl idyntree-yarp idyntree-high-level)
     add_test(NAME ${testname} COMMAND ${testbinary})
 endmacro()
 

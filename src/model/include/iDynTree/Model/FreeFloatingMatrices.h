@@ -30,31 +30,31 @@ enum FrameVelocityRepresentation
 /**
  * Jacobian of the 6D frame velocity.
  */
-class FrameJacobian : MatrixDynSize
+class FrameFreeFloatingJacobian : public MatrixDynSize
 {
 public:
-    FrameJacobian(size_t nrOfDofs=0);
-    FrameJacobian(const iDynTree::Model & model);
+    FrameFreeFloatingJacobian(size_t nrOfDofs=0);
+    FrameFreeFloatingJacobian(const iDynTree::Model & model);
 
     void resize(const iDynTree::Model & model);
     bool isConsistent(const iDynTree::Model & model) const;
 
-    virtual ~FrameJacobian();
+    virtual ~FrameFreeFloatingJacobian();
 };
 
 /**
  * Jacobian of the 6D momentum.
  */
-class MomentumJacobian : MatrixDynSize
+class MomentumFreeFloatingJacobian : public MatrixDynSize
 {
 public:
-    MomentumJacobian(size_t nrOfDofs=0);
-    MomentumJacobian(const iDynTree::Model & model);
+    MomentumFreeFloatingJacobian(size_t nrOfDofs=0);
+    MomentumFreeFloatingJacobian(const iDynTree::Model & model);
 
     void resize(const iDynTree::Model & model);
     bool isConsistent(const iDynTree::Model & model) const;
 
-    virtual ~MomentumJacobian();
+    virtual ~MomentumFreeFloatingJacobian();
 };
 
 

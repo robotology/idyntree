@@ -68,7 +68,6 @@ namespace iDynTree
         /**
          * Constructor from a C-style matrix (row major).
          *
-         *
          * \warning this class stores data using the row major order
          */
         MatrixFixSize(const double * in_data, const unsigned int in_rows, const unsigned int in_cols);
@@ -77,8 +76,6 @@ namespace iDynTree
          * @name Matrix interface methods.
          * Methods exposing a matrix-like interface to MatrixFixSize.
          *
-         * \warning Notice that using this methods you can damage the underlyng rotation matrix.
-         *          In doubt, don't use them and rely on more high level functions.
          */
         ///@{
         double operator()(const unsigned int row, const unsigned int col) const;
