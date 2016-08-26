@@ -24,11 +24,13 @@ class MatrixDynSize;
 class Transform;
 class Twist;
 class SpatialInertia;
+class SpatialMomentum;
 class ClassicalAcc;
 class SpatialAcc;
 class Wrench;
 class Model;
 class Traversal;
+class Position;
 
 
 /**
@@ -60,6 +62,11 @@ private:
     // If it was already called before the last call to setRobotState,
     // exits without further computations
     void computeFwdKinematics();
+
+    // Make sure that (if necessary) mass matrix is updated
+    // If it was already called before the last call to setRobotState,
+    // exits without further computations
+    void computeRawMassMatrixAndTotalMomentum();
 
     // Invalidate the cache of intermediated results (called by setRobotState)
     void invalidateCache();
@@ -277,6 +284,12 @@ public:
     bool getJointPos(iDynTree::VectorDynSize &q);
     bool getJointVel(iDynTree::VectorDynSize &dq);
 
+    /**
+     * Get the n+6 velocity of the model.
+     * Obtained by stacking the output of getBaseTwist and of getJointVel .
+     */
+    bool getModelVel(iDynTree::VectorDynSize &nu);
+
     //@}
 
     /**
@@ -375,6 +388,96 @@ public:
                                       iDynTree::MatrixDynSize & outJacobian);
 
     // Todo getFrameRelativeVel and getFrameRelativeJacobian to match the getRelativeTransform behaviour
+
+    //@}
+
+
+    /**
+      * @name Methods to get quantities related to centroidal dynamics.
+      *
+      * \note Implementation incomplete, please refrain to use until this warning has been removed.
+      */
+    //@{
+
+    /**
+     * Return the center of mass position.
+     *
+     * Return the center of mass position, expressed in the world/inertial frame.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    iDynTree::Position getCenterOfMassPosition();
+
+    /**
+     * Return the center of mass velocity, with respect to the world/inertial frame.
+     *
+     * \note This is the derivative of the quantity returned by getCenterOfMassPosition .
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    //iDynTree::Vector3 getCenterOfMassVelocity();
+
+    /**
+     * Return the center of mass jacobian, i.e. the 3 \times (n+6) matrix such that:
+     *  getCenterOfMassVelocity() == getCenterOfMassJacobian() * \nu .
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    //bool getCenterOfMassJacobian(MatrixDynSize & comJacobian);
+
+    /**
+     * Get the average velocity of the robot.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note the linear part of this twist correspond to the getCenterOfMassVelocity only if the FrameVelocityConvention is set to MIXED.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    iDynTree::Twist getAverageVelocity();
+
+    /**
+     * Get the jacobian of the average velocity of the robot.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note the linear part of this jacobian correspond to the getCenterOfMassVelocity only if the FrameVelocityConvention is set to MIXED.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    bool getAverageVelocityJacobian(MatrixDynSize & avgVelocityJacobian);
+
+    /**
+     * Get the linear and angular momentum of the robot.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    iDynTree::SpatialMomentum getLinearAngularMomentum();
+
+    /**
+     * Get the linear and angular momentum of the robot.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    bool getLinearAngularMomentumJacobian(MatrixDynSize & linAngMomentumJacobian);
+
+    //@}
+
+
+    /**
+      * @name Methods to get quantities related to dynamics matrices.
+      */
+    //@{
+
+
+
+    //@}
+
+    /**
+      * @name Methods to unconstrained free floating dynamics.
+      */
+    //@{
+
 
     //@}
 

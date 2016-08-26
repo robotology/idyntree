@@ -74,6 +74,32 @@ Matrix6x6 SpatialInertia::asMatrix() const
     return ret;
 }
 
+Twist SpatialInertia::applyInverse(const SpatialMomentum& mom) const
+{
+    Twist vel;
+
+    Eigen::Matrix<double,6,1> momEigen = toEigen(mom.asVector());
+
+    Matrix6x6 I = this->asMatrix();
+    Eigen::Matrix<double,6,1> velEigen = toEigen(I).householderQr().solve(momEigen);
+
+    toEigen(vel.getLinearVec3()) = velEigen.block<3,1>(0,0);
+    toEigen(vel.getAngularVec3()) = velEigen.block<3,1>(3,0);
+
+    return vel;
+}
+
+Matrix6x6 SpatialInertia::getInverse() const
+{
+    Matrix6x6 ret;
+    Matrix6x6 In = this->asMatrix();
+
+    toEigen(ret) = toEigen(In).inverse();
+
+    return ret;
+}
+
+
 SpatialInertia SpatialInertia::operator+(const SpatialInertia& other) const
 {
     return SpatialInertia::combine(*this,other);

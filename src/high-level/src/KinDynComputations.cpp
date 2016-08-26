@@ -28,6 +28,7 @@
 #include <iDynTree/Model/FreeFloatingState.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/ForwardKinematics.h>
+#include <iDynTree/Model/Dynamics.h>
 #include <iDynTree/Model/Jacobians.h>
 
 #include <iDynTree/ModelIO/URDFModelImport.h>
@@ -103,11 +104,32 @@ public:
     // storage of forward velocity kinematics results
     iDynTree::LinkVelArray m_linkVel;
 
+    bool m_isRawMassMatrixUpdated;
+
+    // storage of the CRBs, used to extract
+    LinkCompositeRigidBodyInertias m_linkCRBIs;
+
+    // Helper function to get the lockedInertia of the robot from the m_linkCRBIs
+    SpatialInertia & getRobotLockedInertia();
+
+    // Process a jacobian that expects a body fixed base velocity depending on the selected FrameVelocityRepresentation
+    void processOnRightSideBodyFixedJacobian(MatrixDynSize & jac);
+    void processOnLeftSideBodyFixedBaseJacobian(MatrixDynSize & jac);
+    void processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize & jac);
+
+    // storage of the raw output of the CRBA, used to extract
+    // the mass matrix and most the centroidal quantities
+    FreeFloatingMassMatrix m_rawMassMatrix;
+
+    // Total linear and angular momentum, expressed in the world frame
+    SpatialMomentum m_totalMomentum;
+
     KinDynComputationsPrivateAttributes()
     {
         m_isModelValid = false;
         m_frameVelRepr = MIXED_REPRESENTATION;
         m_isFwdKinematicsUpdated = false;
+        m_isRawMassMatrixUpdated = false;
     }
 };
 
@@ -149,6 +171,7 @@ KinDynComputations::~KinDynComputations()
 void KinDynComputations::invalidateCache()
 {
     this->pimpl->m_isFwdKinematicsUpdated = false;
+    this->pimpl->m_isRawMassMatrixUpdated = false;
 }
 
 void KinDynComputations::resizeInternalDataStructures()
@@ -159,6 +182,8 @@ void KinDynComputations::resizeInternalDataStructures()
     this->pimpl->m_vel.resize(this->pimpl->m_robot_model);
     this->pimpl->m_linkPos.resize(this->pimpl->m_robot_model);
     this->pimpl->m_linkVel.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_linkCRBIs.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_rawMassMatrix.resize(this->pimpl->m_robot_model);
 }
 
 int KinDynComputations::getFrameIndex(const std::string& frameName) const
@@ -173,9 +198,6 @@ std::string KinDynComputations::getFrameName(int frameIndex) const
     return this->pimpl->m_robot_model.getFrameName(frameIndex);
 }
 
-
-
-
 void KinDynComputations::computeFwdKinematics()
 {
     if( this->pimpl->m_isFwdKinematicsUpdated )
@@ -183,7 +205,7 @@ void KinDynComputations::computeFwdKinematics()
         return;
     }
 
-    // Compute position kinematics
+    // Compute position and velocity kinematics
     bool ok = ForwardPosVelKinematics(this->pimpl->m_robot_model,
                                       this->pimpl->m_traversal,
                                       this->pimpl->m_pos,
@@ -195,6 +217,32 @@ void KinDynComputations::computeFwdKinematics()
 
     return;
 }
+
+void KinDynComputations::computeRawMassMatrixAndTotalMomentum()
+{
+    if( this->pimpl->m_isRawMassMatrixUpdated )
+    {
+        return;
+    }
+
+    // Compute raw mass matrix
+    bool ok = CompositeRigidBodyAlgorithm(pimpl->m_robot_model,
+                                          pimpl->m_traversal,
+                                          pimpl->m_pos.jointPos(),
+                                          pimpl->m_linkCRBIs,
+                                          pimpl->m_rawMassMatrix);
+
+    reportErrorIf(!ok,"KinDynComputations::computeRawMassMatrix","Error in computing mass matrix.");
+
+    // Compute total momentum
+    ComputeLinearAndAngularMomentum(pimpl->m_robot_model,
+                                    pimpl->m_linkPos,
+                                    pimpl->m_linkVel,
+                                    pimpl->m_totalMomentum);
+
+    this->pimpl->m_isRawMassMatrixUpdated = ok;
+}
+
 
 bool KinDynComputations::loadRobotModelFromFile(const std::string& filename,
                                                   const std::string& filetype)
@@ -436,6 +484,16 @@ bool KinDynComputations::getJointVel(VectorDynSize& dq)
     dq = this->pimpl->m_vel.jointVel();
     return true;
 }
+
+bool KinDynComputations::getModelVel(VectorDynSize& nu)
+{
+    nu.resize(pimpl->m_robot_model.getNrOfDOFs()+6);
+    toEigen(nu).segment<6>(0) = toEigen(getBaseTwist());
+    toEigen(nu).segment(6,pimpl->m_robot_model.getNrOfDOFs()) = toEigen(this->pimpl->m_vel.jointVel());
+
+    return true;
+}
+
 
 
 Transform KinDynComputations::getRelativeTransform(const std::string& refFrameName,
@@ -744,6 +802,193 @@ bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameInde
                                             outJacobian);
 }
 
+iDynTree::Position KinDynComputations::getCenterOfMassPosition()
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+
+    // Extract the {}^B com from the upper left part of the inertia matrix
+    iDynTree::Position base_com =  pimpl->m_linkCRBIs(pimpl->m_traversal.getBaseLink()->getIndex()).getCenterOfMass();
+
+    // Return {}^world com = {}^world H_base \ls_base com
+    return pimpl->m_pos.worldBasePos()*base_com;
+}
+
+/*
+Vector3 KinDynComputations::getCenterOfMassVelocity()
+{
+
+}
+
+bool KinDynComputations::getCenterOfMassJacobian(MatrixDynSize& comJacobian)
+{
+
+}*/
+
+SpatialInertia& KinDynComputations::KinDynComputationsPrivateAttributes::getRobotLockedInertia()
+{
+    return m_linkCRBIs(m_traversal.getBaseLink()->getIndex());
+}
+
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSideBodyFixedJacobian(MatrixDynSize& jac)
+{
+    assert(jac.rows() == 6);
+    assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
+
+    Transform baseFrame_X_newJacobBaseFrame;
+    if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        return;
+    }
+    else if (m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        Transform base_X_world = (m_linkPos(m_traversal.getBaseLink()->getIndex())).inverse();
+        baseFrame_X_newJacobBaseFrame = Transform(base_X_world.getRotation(),Position::Zero());
+    }
+    else
+    {
+        assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        Transform world_X_base = (m_linkPos(m_traversal.getBaseLink()->getIndex()));
+        baseFrame_X_newJacobBaseFrame = world_X_base.inverse();
+    }
+
+    Matrix6x6 baseFrame_X_newJacobBaseFrame_ = baseFrame_X_newJacobBaseFrame.asAdjointTransform();
+
+    toEigen(jac).block<6,6>(0,0) = toEigen(jac).block<6,6>(0,0)*toEigen(baseFrame_X_newJacobBaseFrame_);
+}
+
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseJacobian(MatrixDynSize& jac)
+{
+    assert(jac.rows() == 6);
+    assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
+
+    Transform newOutputFrame_X_oldOutputFrame;
+    if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        return;
+    }
+    else if (m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        Transform & world_X_base = m_pos.worldBasePos();
+        newOutputFrame_X_oldOutputFrame = Transform(world_X_base.getRotation(),Position::Zero());
+    }
+    else
+    {
+        assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        newOutputFrame_X_oldOutputFrame = m_pos.worldBasePos();
+    }
+
+    Matrix6x6 newOutputFrame_X_oldOutputFrame_ = newOutputFrame_X_oldOutputFrame.asAdjointTransform();
+
+    toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(jac);
+}
+
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize& jac)
+{
+    assert(jac.rows() == 6);
+    assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
+
+    Transform newOutputFrame_X_oldOutputFrame;
+    if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        return;
+    }
+    else if (m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        Transform & world_X_base = m_pos.worldBasePos();
+        newOutputFrame_X_oldOutputFrame = Transform(world_X_base.getRotation(),Position::Zero());
+    }
+    else
+    {
+        assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        newOutputFrame_X_oldOutputFrame = m_pos.worldBasePos();
+    }
+
+    Matrix6x6 newOutputFrame_X_oldOutputFrame_ = newOutputFrame_X_oldOutputFrame.asAdjointTransformWrench();
+
+    toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(jac);
+}
+
+
+Twist KinDynComputations::getAverageVelocity()
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+
+    SpatialInertia & base_lockedInertia = pimpl->getRobotLockedInertia();
+    SpatialMomentum base_momentum = pimpl->m_pos.worldBasePos().inverse()*pimpl->m_totalMomentum;
+    Twist           base_averageVelocity = base_lockedInertia.applyInverse(base_momentum);
+
+    if( pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION )
+    {
+        return base_averageVelocity;
+    }
+    else if( pimpl->m_frameVelRepr == MIXED_REPRESENTATION )
+    {
+        return this->pimpl->m_pos.worldBasePos().getRotation()*base_averageVelocity;
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        return this->pimpl->m_pos.worldBasePos()*base_averageVelocity;
+    }
+
+    assert(false);
+}
+
+bool KinDynComputations::getAverageVelocityJacobian(MatrixDynSize& avgVelocityJacobian)
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+
+    avgVelocityJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
+    SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
+    Matrix6x6 invLockedInertia = lockedInertia.getInverse();
+
+    // The first six rows of the mass matrix are the base-base mass matrix
+    toEigen(avgVelocityJacobian) = toEigen(invLockedInertia)*toEigen(pimpl->m_rawMassMatrix).block(0,0,6,6+pimpl->m_robot_model.getNrOfDOFs());
+
+    // Handle the different representations
+    pimpl->processOnRightSideBodyFixedJacobian(avgVelocityJacobian);
+    pimpl->processOnLeftSideBodyFixedBaseJacobian(avgVelocityJacobian);
+
+    return true;
+}
+
+iDynTree::SpatialMomentum KinDynComputations::getLinearAngularMomentum()
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+
+    SpatialMomentum base_momentum = pimpl->m_pos.worldBasePos().inverse()*pimpl->m_totalMomentum;
+
+    if( pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION )
+    {
+        return base_momentum;
+    }
+    else if( pimpl->m_frameVelRepr == MIXED_REPRESENTATION )
+    {
+        return this->pimpl->m_pos.worldBasePos().getRotation()*base_momentum;
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        return this->pimpl->m_totalMomentum;
+    }
+
+    assert(false);
+}
+
+bool KinDynComputations::getLinearAngularMomentumJacobian(MatrixDynSize& linAngMomentumJacobian)
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+
+    linAngMomentumJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    toEigen(linAngMomentumJacobian) = toEigen(pimpl->m_rawMassMatrix).block(0,0,6,6+pimpl->m_robot_model.getNrOfDOFs());
+
+    // Handle the different representations
+    pimpl->processOnRightSideBodyFixedJacobian(linAngMomentumJacobian);
+    pimpl->processOnLeftSideBodyFixedBaseMomentumJacobian(linAngMomentumJacobian);
+
+    return true;
+}
 
 }
 

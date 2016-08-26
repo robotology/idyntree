@@ -47,6 +47,9 @@ namespace iDynTree
         // Get the SpatialInertia as a 6x6 matrix
         Matrix6x6 asMatrix() const;
 
+        Twist applyInverse(const SpatialMomentum& mom) const;
+        Matrix6x6 getInverse() const;
+
         // overloaded operators
         SpatialInertia  operator+(const SpatialInertia& other) const;
         SpatialForceVector operator*(const SpatialMotionVector &other) const;
