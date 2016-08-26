@@ -8,6 +8,10 @@
 #include "testModels.h"
 
 #include <iDynTree/HighLevel/DynamicsComputations.h>
+#include <iDynTree/Model/FreeFloatingMatrices.h>
+
+#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/KinDynComputations.h>
 
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/TestUtils.h>
@@ -126,8 +130,11 @@ iDynTree::Transform yarpTransform2idyntree(yarp::sig::Matrix transformYarp)
 }
 
 void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
-                    iCub::iDynTree::DynTree & dynTree)
+                    iCub::iDynTree::DynTree & dynTree,
+                    iDynTree::KinDynComputations& kinDynComp)
 {
+   std::cerr << " setRandomState" << std::endl;
+    
     size_t dofs = dynComp.getNrOfDegreesOfFreedom();
     Transform    worldTbase;
     Twist        baseVel;
@@ -162,6 +169,8 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
     }
 
     bool ok = dynComp.setRobotState(qj,dqj,ddqj,worldTbase,baseVel,baseAcc,gravity);
+    
+    ASSERT_IS_TRUE(ok);
 
     dynTree.setAng(idyntree2yarp(qj));
     dynTree.setDAng(idyntree2yarp(dqj));
@@ -169,11 +178,20 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
     dynTree.setWorldBasePose(idyntreeMat2yarp(worldTbase.asHomogeneousTransform()));
     dynTree.setKinematicBaseVelAcc(idyntree2yarp(baseVel),idyntree2yarp(properAcc));
 
-    ASSERT_EQUAL_DOUBLE(ok,true);
+    std::cerr << " Setting state in kinDyn" << std::endl;
+    ASSERT_EQUAL_DOUBLE(qj.size(),kinDynComp.getRobotModel().getNrOfPosCoords());
+    ASSERT_EQUAL_DOUBLE(dqj.size(),kinDynComp.getRobotModel().getNrOfDOFs());
+
+    Vector3 grav3d = gravity.getLinearVec3();
+    ok = kinDynComp.setRobotState(worldTbase,qj,baseVel,dqj,grav3d);
+    ASSERT_IS_TRUE(ok);
+    
+    std::cerr << "state setted" << std::endl;
 }
 
 void testTransformsConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp,
-                               iCub::iDynTree::DynTree & dynTree)
+                               iCub::iDynTree::DynTree & dynTree,
+                               iDynTree::KinDynComputations & kinDynComp)
 {
     for(size_t frame=0; frame < dynComp.getNrOfFrames(); frame++ )
     {
@@ -185,20 +203,25 @@ void testTransformsConsistency(iDynTree::HighLevel::DynamicsComputations & dynCo
 
         ASSERT_EQUAL_STRING(frameNameDynComp,frameNameDynTree);
 
-        // todo assert equal string
         Transform dynTreeTransform = yarpTransform2idyntree(dynTree.getPosition(frame));
         Transform dynCompTransform = dynComp.getWorldTransform(frame);
 
         ASSERT_EQUAL_TRANSFORM(dynCompTransform,dynTreeTransform);
+        
+        Transform kinDynCompTransform = kinDynComp.getWorldTransform(frameNameDynComp);
+        
+        ASSERT_EQUAL_TRANSFORM(dynCompTransform,kinDynCompTransform);
     }
 }
 
 void testJacobianConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp,
-                             iCub::iDynTree::DynTree & dynTree)
+                             iCub::iDynTree::DynTree & dynTree,
+                             iDynTree::KinDynComputations & kinDynComp)
 {
     size_t dofs = dynComp.getNrOfDegreesOfFreedom();
     MatrixDynSize dynTreeJacobian(6,6+dofs),dynCompJacobian(6,6+dofs);
     yarp::sig::Matrix        dynTreeJacobianYarp(6,6+dofs);
+    FrameFreeFloatingJacobian kinDynCompJacobian(kinDynComp.getRobotModel());
 
     for(size_t frame=0; frame < dynComp.getNrOfFrames(); frame++ )
     {
@@ -206,8 +229,22 @@ void testJacobianConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp
         yarp2idyntree(dynTreeJacobianYarp,dynTreeJacobian);
 
         dynComp.getFrameJacobian(frame,dynCompJacobian);
+        
+        std::string frameName = dynComp.getFrameName(frame);
 
         ASSERT_EQUAL_MATRIX(dynTreeJacobian,dynCompJacobian);
+        
+        std::cerr << "Testing frame " << frameName << std::endl;
+        
+        bool ok = kinDynComp.getFrameFreeFloatingJacobian(frameName,kinDynCompJacobian);
+        
+        std::cerr << "DynamicsComputations: " << std::endl;
+        std::cerr << dynCompJacobian.toString() << std::endl;
+        std::cerr << "KinamicsDynamicsComputations : " << std::endl;
+        std::cerr << kinDynCompJacobian.toString() << std::endl;
+        
+        ASSERT_IS_TRUE(ok);
+        ASSERT_EQUAL_MATRIX(kinDynCompJacobian,dynCompJacobian);
     }
 }
 
@@ -287,14 +324,48 @@ void assertConsistency(std::string modelName)
     bool ok = dynComp.loadRobotModelFromFile(modelName);
          ok = ok && dynTree.loadURDFModel(modelName);
 
-    ASSERT_EQUAL_DOUBLE(ok,true);
+    ASSERT_IS_TRUE(ok);
 
     ASSERT_EQUAL_DOUBLE(dynTree.getNrOfDOFs(),dynComp.getNrOfDegreesOfFreedom());
     ASSERT_EQUAL_DOUBLE(dynTree.getNrOfFrames(),dynComp.getNrOfFrames());
+    
+    // Load model with the same joint ordering of the DynTree 
+    iDynTree::ModelLoader mdlLoader;
+    ok = mdlLoader.loadModelFromFile(modelName);
+    ASSERT_IS_TRUE(ok);
+    
+    std::cerr << "Loaded model " << std::endl;
+    
+    std::vector<std::string> consideredJoints;
+    KDL::CoDyCo::UndirectedTree undirectedTree = dynTree.getKDLUndirectedTree();
+    for(int i=0; i < undirectedTree.getNrOfJunctions(); i++)
+    {
+        std::string jointName = undirectedTree.getJunction(i)->getName();
+        
+        // If the joint belong to the new model, include it in the considered joints 
+        if( mdlLoader.model().isJointNameUsed(jointName) )
+        {
+            consideredJoints.push_back(jointName);
+        }
+    }
+    
+    iDynTree::ModelLoader mdlLoaderReduced;
+    ok = mdlLoaderReduced.loadReducedModelFromFullModel(mdlLoader.model(),consideredJoints);
+    ASSERT_IS_TRUE(ok);
+    
+    iDynTree::KinDynComputations kinDynComp;
+    
+    ok = kinDynComp.loadRobotModel(mdlLoaderReduced.model());
+    ASSERT_IS_TRUE(ok);
+    
+    std::cerr << "Loaded model in kinDynComp" << std::endl;
 
-    setRandomState(dynComp,dynTree);
-    testTransformsConsistency(dynComp,dynTree);
-    testJacobianConsistency(dynComp,dynTree);
+    
+    setRandomState(dynComp,dynTree,kinDynComp);
+    std::cerr << "Test transforms " << std::endl;
+    testTransformsConsistency(dynComp,dynTree,kinDynComp);
+    std::cerr << "Test jacob " << std::endl;
+    testJacobianConsistency(dynComp,dynTree,kinDynComp);
     testRegressorConsistency(dynComp,dynTree);
     testCOMConsistency(dynComp,dynTree);
 }

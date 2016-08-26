@@ -14,58 +14,58 @@
 namespace iDynTree
 {
 
-FrameJacobian::FrameJacobian(size_t nrOfDofs): MatrixDynSize(6,6+nrOfDofs)
+FrameFreeFloatingJacobian::FrameFreeFloatingJacobian(size_t nrOfDofs): MatrixDynSize(6,6+nrOfDofs)
 {
     MatrixDynSize::zero();
 }
 
 
-FrameJacobian::FrameJacobian(const Model& model)
+FrameFreeFloatingJacobian::FrameFreeFloatingJacobian(const Model& model)
 {
     MatrixDynSize::resize(6,6+model.getNrOfDOFs());
     MatrixDynSize::zero();
 }
 
-bool FrameJacobian::isConsistent(const Model& model) const
+bool FrameFreeFloatingJacobian::isConsistent(const Model& model) const
 {
     return (MatrixDynSize::rows() == 6 &&
             MatrixDynSize::cols() == 6+model.getNrOfDOFs());
 }
 
-void FrameJacobian::resize(const Model& model)
+void FrameFreeFloatingJacobian::resize(const Model& model)
 {
     MatrixDynSize::resize(6,6+model.getNrOfDOFs());
 }
 
-FrameJacobian::~FrameJacobian()
+FrameFreeFloatingJacobian::~FrameFreeFloatingJacobian()
 {
 
 }
 
-MomentumJacobian::MomentumJacobian(size_t nrOfDofs): MatrixDynSize(6,6+nrOfDofs)
+MomentumFreeFloatingJacobian::MomentumFreeFloatingJacobian(size_t nrOfDofs): MatrixDynSize(6,6+nrOfDofs)
 {
     MatrixDynSize::zero();
 }
 
 
-MomentumJacobian::MomentumJacobian(const Model& model)
+MomentumFreeFloatingJacobian::MomentumFreeFloatingJacobian(const Model& model)
 {
     MatrixDynSize::resize(6,6+model.getNrOfDOFs());
     MatrixDynSize::zero();
 }
 
-bool MomentumJacobian::isConsistent(const Model& model) const
+bool MomentumFreeFloatingJacobian::isConsistent(const Model& model) const
 {
     return (MatrixDynSize::rows() == 6 &&
             MatrixDynSize::cols() == 6+model.getNrOfDOFs());
 }
 
-void MomentumJacobian::resize(const Model& model)
+void MomentumFreeFloatingJacobian::resize(const Model& model)
 {
     MatrixDynSize::resize(6,6+model.getNrOfDOFs());
 }
 
-MomentumJacobian::~MomentumJacobian()
+MomentumFreeFloatingJacobian::~MomentumFreeFloatingJacobian()
 {
 
 }
