@@ -300,9 +300,11 @@ int main(int argc, char ** argv)
     std::vector<std::string> usedJoints;
     getJointSerializationFromDynTree(*icub_model_estimation,fullModel,usedJoints);
     bool ok = iDynTree::createReducedModel(fullModel,usedJoints,model);
-    if( !ok )
+    if (!ok)
     {
         std::cerr << "Error in creating reduced model" << std::endl;
+        delete icub_model_estimation;
+        icub_model_estimation = 0;
         return EXIT_FAILURE;
     }
 

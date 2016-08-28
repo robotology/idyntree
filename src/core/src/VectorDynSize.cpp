@@ -182,9 +182,13 @@ void VectorDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
         if( this->m_size > 0 )
         {
             memcpy(this->m_data,localBuf,this->m_size*sizeof(double));
-            delete[] localBuf;
-            localBuf = 0;
         }
+    }
+    
+    if( localBuf )
+    {
+        delete[] localBuf;
+        localBuf = 0;
     }
 }
 
