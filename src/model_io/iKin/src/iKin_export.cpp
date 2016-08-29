@@ -623,8 +623,6 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
 
         if( verbose > 2 )
             std::cout << "iKinLink added " << a_i[i+1] << " " << d_i[i+1] << " " << alpha_i[i+1] << " " << theta_i[i+1] << endl;
-        
-        delete p_new_link;
     }
 
     //Calculate the base pose with iKinChain (with HN = Identity) and the KDL::Chain . The difference is the desired HN
