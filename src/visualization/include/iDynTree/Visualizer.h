@@ -64,7 +64,7 @@ public:
     /**
      * Set the position of the model (using base position and joint positions)
      */
-    bool setPositions(const Transform & world_H_base, const JointPosDoubleArray & jointPos);
+    bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos);
 
     /**
      * Set the positions of the model by directly specifing link positions wrt to the world.

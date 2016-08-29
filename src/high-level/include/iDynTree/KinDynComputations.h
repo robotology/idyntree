@@ -248,20 +248,30 @@ public:
     //@{
 
     /**
+     * @brief Set the (internal) joint positions.
+     *
+     * \note This method sets only the joint positions, leaving all the other components of the state to their previous value.
+     *
+     * @param[in] s A vector of dimension this->model().getNrOfPosCoords() .
+     * @return true if all went well, false otherwise.
+     */
+    bool setJointPos(const iDynTree::VectorDynSize& s);
+
+    /**
      * Set the state for the robot (floating base)
      *
-     * @param q a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
-     * @param q_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
      * @param world_T_base  the homogeneous transformation that transforms position vectors expressed in the base reference frame
      *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .
+     * @param s a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
      * @param base_velocity The twist (linear/angular velocity) of the base, expressed with the convention specified by the used FrameVelocityConvention.
-     *
+     * @param s_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
+     * @param world_gravity a 3d vector of the gravity acceleration vector, expressed in the world/inertial frame.
      *
      */
     bool setRobotState(const iDynTree::Transform &world_T_base,
-                       const iDynTree::VectorDynSize& q,
+                       const iDynTree::VectorDynSize& s,
                        const iDynTree::Twist& base_velocity,
-                       const iDynTree::VectorDynSize& q_dot,
+                       const iDynTree::VectorDynSize& s_dot,
                        const iDynTree::Vector3& world_gravity);
 
     /**
@@ -271,8 +281,8 @@ public:
      *  base_velocity     = iDynTree::Twist::Zero();
      *
      */
-    bool setRobotState(const iDynTree::VectorDynSize &q,
-                       const iDynTree::VectorDynSize &q_dot,
+    bool setRobotState(const iDynTree::VectorDynSize &s,
+                       const iDynTree::VectorDynSize &s_dot,
                        const iDynTree::Vector3& world_gravity);
 
     /**

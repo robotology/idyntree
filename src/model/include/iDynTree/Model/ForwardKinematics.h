@@ -22,6 +22,7 @@ namespace iDynTree
     class LinkVelArray;
     class LinkAccArray;
     class JointPosDoubleArray;
+    class VectorDynSize;
 
     /**
      * \ingroup iDynTreeModel
@@ -39,7 +40,7 @@ namespace iDynTree
     bool ForwardPositionKinematics(const Model& model,
                                    const Traversal& traversal,
                                    const Transform& worldHbase,
-                                   const JointPosDoubleArray& jointPositions,
+                                   const VectorDynSize& jointPositions,
                                          LinkPositions& linkPositions);
 
     /**
