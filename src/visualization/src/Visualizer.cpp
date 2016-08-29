@@ -196,7 +196,7 @@ ModelVisualization& ModelVisualization::operator=(const ModelVisualization& /*ot
 }
 
 bool ModelVisualization::init(const Model& model,
-                              const std::string /*instanceName*/,
+                              const std::string instanceName,
                               Visualizer& visualizer)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
@@ -206,6 +206,7 @@ bool ModelVisualization::init(const Model& model,
         reportError("ModelVisualization","init","Impossible to use load model, as the visual solid shapes of the model are not consistent with the model itself.");
         return false;
     }
+    this->pimpl->m_instanceName = instanceName;
 
     this->pimpl->m_irrSmgr = visualizer.pimpl->m_irrSmgr;
 
@@ -240,10 +241,10 @@ Model& ModelVisualization::model()
     return this->pimpl->m_model;
 }
 
-bool ModelVisualization::setPositions(const Transform& world_H_base, const JointPosDoubleArray& jointPos)
+bool ModelVisualization::setPositions(const Transform& world_H_base, const VectorDynSize& jointPos)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !jointPos.isConsistent(model()) )
+    if( (jointPos.size() != model().getNrOfPosCoords()) )
     {
         reportError("ModelVisualization","setPositions","Input size mismatch.");
         return false;

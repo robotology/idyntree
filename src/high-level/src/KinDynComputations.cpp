@@ -444,6 +444,22 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
     return true;
 }
 
+bool KinDynComputations::setJointPos(const VectorDynSize& s)
+{
+    bool ok = (s.size() == pimpl->m_robot_model.getNrOfPosCoords());
+    if( !ok )
+    {
+        reportError("KinDynComputations","setJointPos","Wrong size in input joint positions");
+        return false;
+    }
+
+    toEigen(this->pimpl->m_pos.jointPos()) = toEigen(s);
+
+    // Invalidate cache 
+    this->invalidateCache();
+}
+
+
 Transform KinDynComputations::getWorldBaseTransform()
 {
     return this->pimpl->m_pos.worldBasePos();

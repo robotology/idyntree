@@ -30,7 +30,7 @@ bool ForwardPositionKinematics(const Model& model,
 bool ForwardPositionKinematics(const Model& model,
                                const Traversal& traversal,
                                const Transform& worldHbase,
-                               const JointPosDoubleArray& jointPositions,
+                               const VectorDynSize& jointPositions,
                                      LinkPositions& linkPositions)
 {
     bool retValue = true;
