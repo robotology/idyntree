@@ -9,6 +9,8 @@
 
 #include <string>
 
+#include <iDynTree/Core/Direction.h>
+
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/LinkState.h>
 
@@ -38,6 +40,11 @@ public:
      * Set the target of the camera (i.e. the point the camera is looking into) w.r.t. the world.
      */
     virtual void setTarget(const iDynTree::Position & cameraPos) = 0;
+
+    /**
+     * Set the up vector of the camera w.r.t to the world.
+     */
+    virtual void setUpVector(const Direction& upVector) = 0;
 };
 
 /**
