@@ -129,7 +129,7 @@ void set_random_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree)
     double base_vel_c = 1.0;
     double base_acc_c = 1.0;
 
-    YARP_ASSERT(icub_tree.setWorldBasePose(H_w2b));
+    yAssert(icub_tree.setWorldBasePose(H_w2b));
 
     std::cout << "iDynTree Jacobian test world pose " << icub_tree.getWorldBasePose().toString() << std::endl;
 
@@ -158,7 +158,7 @@ void set_random_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree)
 
     //std::cout << "iDynTreeJacobianTest: Setting base_acc " << base_acc.toString() << " ( " << norm(base_acc) << " ) " <<  std::endl;
 
-    YARP_ASSERT(icub_tree.kinematicRNEA());
+    yAssert(icub_tree.kinematicRNEA());
 
     //std::cout << "iDynTreeJacobianTest: Acc at the base " << icub_tree.getAcc(icub_tree.getLinkIndex("root_link")).toString() << " ( " << norm(icub_tree.getAcc(icub_tree.getLinkIndex("root_link"))) << " ) " << std::endl;
 
