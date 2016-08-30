@@ -29,7 +29,9 @@ public:
     irr::scene::ICameraSceneNode * irrlichtCamera();
 
     virtual void setPosition(const Position& cameraPos);
-    virtual void setTarget(const Position& cameraPos);
+    virtual void setTarget(const Position& targetPos);
+    virtual void setUpVector(const Direction& upVector);
+
 };
 
 }

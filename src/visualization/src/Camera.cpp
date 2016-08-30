@@ -54,4 +54,16 @@ void Camera::setTarget(const Position& cameraTargetPos)
     }
 }
 
+void Camera::setUpVector(const Direction& cameraUpVector)
+{
+    if(m_irrCamera)
+    {
+        m_irrCamera->setUpVector(idyntree2irr_pos(cameraUpVector));
+    }
+    else
+    {
+        reportError("Camera","setTarget","Impossible to set up vector of a null camera");
+    }
+}
+
 }
