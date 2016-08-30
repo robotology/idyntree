@@ -4,6 +4,9 @@ macro(IDYNTREE_ADD_TOOL_YARP_KDL tool_name tool_code)
                                        idyntree-regressors
                                        idyntree-modelio-urdf-kdl
                                        idyntree-modelio-symoro)
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_compile_options(${tool_name} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
     include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS})
     install(TARGETS ${tool_name} DESTINATION bin)
 endmacro(IDYNTREE_ADD_TOOL_YARP_KDL tool_name tool_code)
@@ -15,6 +18,9 @@ macro(IDYNTREE_ADD_TOOL tool_name tool_code)
                                        idyntree-high-level
                                        idyntree-modelio-urdf
                                        idyntree-visualization)
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_compile_options(${tool_name} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
     include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
     install(TARGETS ${tool_name} DESTINATION bin)
 endmacro(IDYNTREE_ADD_TOOL tool_name tool_code)
