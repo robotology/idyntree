@@ -150,7 +150,7 @@ namespace iDynTree
                                  "the body of the first operand does not match the refBody of the second operand\n"));
     }
 
-    bool RotationSemantics::check_inverse2(const RotationSemantics& op)
+    bool RotationSemantics::check_inverse2(const RotationSemantics& /*op*/)
     {
         return true;
     }

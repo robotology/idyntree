@@ -52,7 +52,7 @@ namespace iDynTree
     }
 
 
-    RotationRaw::RotationRaw(const RotationRaw& other)
+    RotationRaw::RotationRaw(const RotationRaw& other):MatrixFixSize< int(3), int(3) >(other)
     {
         Eigen::Map<Matrix3dRowMajor> thisData(this->m_data);
         Eigen::Map<const Matrix3dRowMajor> otherData(other.m_data);
@@ -60,7 +60,7 @@ namespace iDynTree
         thisData = otherData;
     }
 
-    const RotationRaw& RotationRaw::changeOrientFrame(const RotationRaw& newOrientFrame)
+    const RotationRaw& RotationRaw::changeOrientFrame(const RotationRaw& /*newOrientFrame*/)
     {
         Eigen::Map<Matrix3dRowMajor> thisData(this->m_data);
         Eigen::Map<Matrix3dRowMajor> newOrientFrameData(this->m_data);
@@ -70,7 +70,7 @@ namespace iDynTree
         return *this;
     }
 
-    const RotationRaw& RotationRaw::changeRefOrientFrame(const RotationRaw& newRefOrientFrame)
+    const RotationRaw& RotationRaw::changeRefOrientFrame(const RotationRaw& /*newRefOrientFrame*/)
     {
         Eigen::Map<Matrix3dRowMajor> thisData(this->m_data);
         Eigen::Map<Matrix3dRowMajor> newRefOrientFrameData(this->m_data);

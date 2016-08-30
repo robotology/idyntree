@@ -22,7 +22,7 @@
 namespace iDynTree
 {
 
-void assertStringAreEqual(const std::string& val1, const std::string& val2, double tol, std::string file, int line)
+void assertStringAreEqual(const std::string& val1, const std::string& val2, double /*tol*/, std::string file, int line)
 {
     if( val1 != val2 )
     {

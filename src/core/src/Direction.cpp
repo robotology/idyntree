@@ -29,7 +29,7 @@ namespace iDynTree
         this->Normalize();
     }
 
-    Direction::Direction(const Direction& other)
+    Direction::Direction(const Direction& other):VectorFixSize< int(3) >(other)
     {
         this->m_data[0] = other.m_data[0];
         this->m_data[1] = other.m_data[1];
