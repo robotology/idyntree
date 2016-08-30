@@ -32,6 +32,10 @@ target_include_directories(idyntree-icub PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRE
 
 target_link_libraries(idyntree-icub LINK_PUBLIC skinDynLib idyntree-core idyntree-model idyntree-yarp idyntree-estimation)
 
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_compile_options(idyntree-icub PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
+
 target_include_directories(idyntree-icub INTERFACE ${skinDynLib_INCLUDE_DIRS})
 
 include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS})

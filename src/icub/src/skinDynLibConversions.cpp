@@ -89,7 +89,7 @@ bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
                                                      const int iDynTree_link_index, int & iDynTree_frame_index,
                                                      int & skinDynLib_body_part, int & skinDynLib_link_index) const
 {
-  if( iDynTree_link_index < 0 || iDynTree_link_index >= model.getNrOfLinks() ) return false;
+  if( iDynTree_link_index < 0 || iDynTree_link_index >= static_cast<LinkIndex>(model.getNrOfLinks()) ) return false;
 
   // TODO \todo What is this crazyness??? Linear search of a map??
    for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::const_iterator it = skinDynLibLinkMap.begin();
@@ -260,7 +260,7 @@ bool skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib(const Model & model,
     yarp::sig::Vector forceCache(3), momentCache(3), positionCache(3);
 
     size_t nrOfLinks = model.getNrOfLinks();
-    for(LinkIndex l=0; l < nrOfLinks; l++)
+    for(LinkIndex l=0; l < static_cast<LinkIndex>(nrOfLinks); l++)
     {
         size_t nrOfContacts = contactWrenches.getNrOfContactsForLink(l);
 
@@ -316,7 +316,7 @@ bool skinDynLibConversionsHelper::updateSkinContactListFromLinkContactWrenches(c
     yarp::sig::Vector wrenchCache(6), positionCache(3);
 
     size_t nrOfLinks = model.getNrOfLinks();
-    for(LinkIndex l=0; l < nrOfLinks; l++)
+    for(LinkIndex l=0; l < static_cast<LinkIndex>(nrOfLinks); l++)
     {
         size_t nrOfContacts = contactWrenches.getNrOfContactsForLink(l);
 
