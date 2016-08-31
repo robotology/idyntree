@@ -1,0 +1,44 @@
+<robot name="frame">
+    <link name="link1">
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
+        </inertial>
+        <visual>
+            <geometry>
+                <sphere radius="0.04"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+        <visual>
+            <origin rpy="0 1.57 0" xyz="0.2 0 0.0"/>
+            <geometry>
+                <cylinder length="0.4" radius="0.02"/>
+            </geometry>
+            <material name="red">
+                <color rgba="0.8 0 0 1"/>
+            </material>
+        </visual>
+        <visual>
+            <origin rpy="1.57 0 0" xyz="0.0 0.2 0.0"/>
+            <geometry>
+                <cylinder length="0.4" radius="0.02"/>
+            </geometry>
+            <material name="green">
+                <color rgba="0 0.8 0 1"/>
+            </material>
+        </visual>
+        <visual>
+            <origin rpy="0.0 0 0" xyz="0.0 0.0 0.2"/>
+            <geometry>
+                <cylinder length="0.4" radius="0.02"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 .8 1"/>
+            </material>
+        </visual>
+
+    </link>
+</robot>
