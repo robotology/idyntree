@@ -96,8 +96,8 @@ void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations & 
     iDynTree::VectorDynSize nu(dynComp.getNrOfDegreesOfFreedom()+6);
     dynComp.getModelVel(nu);
 
-    MomentumJacobian momJac(dynComp.getRobotModel());
-    FrameJacobian    avgVelJac(dynComp.getRobotModel());
+    MomentumFreeFloatingJacobian momJac(dynComp.getRobotModel());
+    FrameFreeFloatingJacobian    avgVelJac(dynComp.getRobotModel());
 
     avgVel = dynComp.getAverageVelocity();
     bool ok = dynComp.getAverageVelocityJacobian(avgVelJac);
@@ -130,7 +130,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
     {
         setRandomState(dynComp);
         testRelativeTransform(dynComp);
-        //testAverageVelocityAndTotalMomentumJacobian(dynComp);
+        testAverageVelocityAndTotalMomentumJacobian(dynComp);
     }
 
 }
