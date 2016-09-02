@@ -282,6 +282,18 @@ void inline addVizLights(irr::scene::ISceneManager* smgr)
     sun_node->setLightData(sun_data);
     sun_node->setPosition(irr::core::vector3df(5,0,5));
     sun_node->setRotation(irr::core::vector3df(0,0,0));
+
+    irr::scene::ILightSceneNode * sun_node2=smgr->addLightSceneNode();
+    irr::video::SLight sun_data2;
+    sun_data.Direction=irr::core::vector3df(-1,1,1);
+    sun_data.Type=irr::video::ELT_POINT;
+    sun_data.AmbientColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
+    sun_data.SpecularColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
+    sun_data.DiffuseColor=irr::video::SColorf(0.7f,0.7f,0.7f,1);
+    sun_data.CastShadows=false;
+    sun_node2->setLightData(sun_data2);
+    sun_node2->setPosition(irr::core::vector3df(-5,5,5));
+    sun_node2->setRotation(irr::core::vector3df(0,0,0));
 }
 
 inline irr::scene::ICameraSceneNode* addVizCamera(irr::scene::ISceneManager* smgr)
