@@ -938,15 +938,8 @@ Twist KinDynComputations::getAverageVelocity()
     SpatialMomentum base_momentum = pimpl->m_pos.worldBasePos().inverse()*pimpl->m_totalMomentum;
     Twist           base_averageVelocity = base_lockedInertia.applyInverse(base_momentum);
 
-    std::cerr << "model base vel " << pimpl->m_vel.baseVel().toString() << std::endl;
-    std::cerr << "model jnt  vel " << pimpl->m_vel.jointVel().toString() << std::endl;
-    std::cerr << "base_momentum : " << base_momentum.toString() << std::endl;
-    std::cerr << "total momentum " << pimpl->m_totalMomentum.toString() << std::endl;
-
     if( pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION )
     {
-        std::cerr << "getAverageVelocity returning " << base_averageVelocity.toString() << std::endl;
-
         return base_averageVelocity;
     }
     else if( pimpl->m_frameVelRepr == MIXED_REPRESENTATION )

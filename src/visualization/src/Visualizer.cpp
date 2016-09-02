@@ -69,6 +69,33 @@ struct ModelVisualization::ModelVisualizationPimpl
     }
 };
 
+/**
+ * Dummy camera.
+ */
+class DummyCamera : ICamera
+{
+public:
+    /**
+      * Destructor
+      */
+    virtual ~DummyCamera() {};
+
+    /**
+     * Set the linear position of the camera w.r.t to the world.
+     */
+    virtual void setPosition(const iDynTree::Position &) {};
+
+    /**
+     * Set the target of the camera (i.e. the point the camera is looking into) w.r.t. the world.
+     */
+    virtual void setTarget(const iDynTree::Position &) {};
+
+    /**
+     * Set the up vector of the camera w.r.t to the world.
+     */
+    virtual void setUpVector(const Direction&) {};
+};
+
 struct Visualizer::VisualizerPimpl
 {
     /**
@@ -111,6 +138,8 @@ struct Visualizer::VisualizerPimpl
      * Camera used by the visualization.
      */
     Camera m_camera;
+#else
+    DummyCamera m_camera;
 #endif
 
     VisualizerPimpl()
@@ -246,7 +275,9 @@ bool ModelVisualization::setPositions(const Transform& world_H_base, const Vecto
 #ifdef IDYNTREE_USES_IRRLICHT
     if( (jointPos.size() != model().getNrOfPosCoords()) )
     {
-        reportError("ModelVisualization","setPositions","Input size mismatch.");
+        std::stringstream ss;
+        ss << "Input size mismatch: model internal position coords " << model().getNrOfPosCoords() << " provided vector " << jointPos.size();
+        reportError("ModelVisualization","setPositions",ss.str().c_str());
         return false;
     }
 
@@ -551,7 +582,6 @@ ICamera& Visualizer::camera()
 {
     return pimpl->m_camera;
 }
-
 
 bool Visualizer::run()
 {
