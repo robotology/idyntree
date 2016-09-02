@@ -109,4 +109,4 @@ namespace iDynTree
     };
 }
 
-#endif /* IDYNTREE_JOINT_STATE_H */
+#endif

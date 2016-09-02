@@ -246,4 +246,4 @@ namespace iDynTree
 
 }
 
-#endif /* IDYNTREE_FREE_FLOATING_STATE_H */
+#endif

@@ -116,8 +116,8 @@ void toYarp(const MatrixType& iDynTreeMatrix, yarp::sig::Matrix& yarpMatrix)
     size_t rows = iDynTreeMatrix.rows();
     size_t cols = iDynTreeMatrix.cols();
 
-    if( yarpMatrix.rows() != rows ||
-        yarpMatrix.cols() != cols )
+    if( static_cast<size_t>(yarpMatrix.rows()) != rows ||
+        static_cast<size_t>(yarpMatrix.cols()) != cols )
     {
         yarpMatrix.resize(rows,cols);
     }
