@@ -23,19 +23,39 @@ namespace iDynTree
 %pythoncode %{
 #these need to be called after iDynTree module has been loaded
 def init_helpers():
-    def vd_fromPyList(list):
-        out = VectorDynSize(len(list))
+    def dyn_fromList(cls, list):
+        out = cls(len(list))
         for v in range(0,len(list)):
             out.setVal(v, list[v])
         return out
-    VectorDynSize.fromPyList = staticmethod(vd_fromPyList)
+    VectorDynSize.fromList = classmethod(dyn_fromList)
 
-    def sa_fromPyList(list):
-        out = SpatialAcc()
+    def three_fromList(cls, list):
+        if len(list) < 3:
+            raise ValueError("list needs to have exactly 3 items!")
+        out = cls()
+        for v in range(0,3):
+            out.setVal(v, list[v])
+        return out
+    LinearForceVector3.fromList = classmethod(three_fromList)
+    LinearMotionVector3.fromList = classmethod(three_fromList)
+    AngularForceVector3.fromList = classmethod(three_fromList)
+    AngularMotionVector3.fromList = classmethod(three_fromList)
+
+    def six_fromList(cls, list):
+        if len(list) < 6:
+            raise ValueError("list needs to have exactly 6 items!")
+        out = cls()
         for v in range(0,6):
             out.setVal(v, list[v])
         return out
-    SpatialAcc.fromPyList = staticmethod(sa_fromPyList)
+    SpatialAcc.fromList = classmethod(six_fromList)
+    ClassicalAcc.fromList = classmethod(six_fromList)
+    SpatialInertia.fromList = classmethod(six_fromList)
+    SpatialMomentum.fromList = classmethod(six_fromList)
+    SpatialMotionVector.fromList = classmethod(six_fromList)
+    Twist.fromList = classmethod(six_fromList)
+    Wrench.fromList = classmethod(six_fromList)
 
 def init_numpy_helpers():
     import numpy as np
