@@ -56,8 +56,8 @@ ArticulatedBodyInertia::ArticulatedBodyInertia(const SpatialInertia& rigidBodyIn
 }
 
 ArticulatedBodyInertia::ArticulatedBodyInertia(const double* in_data,
-                                               const unsigned int in_rows,
-                                               const unsigned int in_cols)
+                                               const unsigned int /*in_rows*/,
+                                               const unsigned int /*in_cols*/)
 {
     Eigen::Map<const Matrix6dRowMajor> rbiEigen(in_data);
 
@@ -236,7 +236,7 @@ ArticulatedBodyInertia ArticulatedBodyInertia::ABADyadHelper(const SpatialForceV
 }
 
 ArticulatedBodyInertia ArticulatedBodyInertia::ABADyadHelperLin(const SpatialForceVector& U, const double inv_d,
-                                                                const SpatialForceVector& dU, const double d_inv_d)
+                                                                const SpatialForceVector& /*dU*/, const double d_inv_d)
 {
     ArticulatedBodyInertia ret;
 

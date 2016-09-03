@@ -98,6 +98,10 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_EXP_HEADERS})
 
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
+
 if(MSVC)
    add_definitions(-D_USE_MATH_DEFINES)
 endif()

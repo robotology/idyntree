@@ -452,7 +452,7 @@ Wrench SixAxisForceTorqueSensor::predictMeasurement(const Traversal& traversal, 
     return simulated_measurement;
 }
 
-std::string SixAxisForceTorqueSensor::toString(const Model& model) const
+std::string SixAxisForceTorqueSensor::toString(const Model&  /*model*/) const
 {
     std::stringstream ss;
 

@@ -129,7 +129,7 @@ void setSubVector(std::string part_name,
                                const yarp::sig::Vector & small_vector)
 {
     VectorSlice part = parts[part_name];
-    YARP_ASSERT(small_vector.size() == part.length);
+    yAssert(small_vector.size() == part.length);
     for(size_t i=0; i < part.length; i++)
     {
         big_vector[part.firstIndex+i] = small_vector[i];

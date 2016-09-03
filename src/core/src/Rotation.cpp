@@ -72,7 +72,7 @@ namespace iDynTree
 
     }
 
-    Rotation::Rotation(const RotationRaw& otherPos, RotationSemantics & otherSem): RotationRaw(otherPos)
+    Rotation::Rotation(const RotationRaw& otherPos, RotationSemantics & /*otherSem*/): RotationRaw(otherPos)
     {
         iDynTreeSemanticsOp(this->semantics = otherSem);
     }

@@ -56,7 +56,7 @@ bool ModelLoader::setModelAndSensors(const Model& _model,
 }
 
 bool ModelLoader::loadModelFromFile(const std::string& filename,
-                                    const std::string& filetype)
+                                    const std::string& /*filetype*/)
 {
     Model _model;
     SensorsList _sensors;
@@ -83,7 +83,7 @@ bool ModelLoader::loadModelFromFile(const std::string& filename,
 }
 
 bool ModelLoader::loadModelFromString(const std::string& modelString,
-                                      const std::string& filetype)
+                                      const std::string& /*filetype*/)
 {
     Model _model;
     SensorsList _sensors;
@@ -111,7 +111,7 @@ bool ModelLoader::loadModelFromString(const std::string& modelString,
 
 bool ModelLoader::loadReducedModelFromFullModel(const Model& fullModel,
                                                 const std::vector< std::string >& consideredJoints,
-                                                const std::string filetype)
+                                                const std::string /*filetype*/)
 {
     SensorsList _sensorsFull, _sensorsReduced;
     Model _modelReduced;
@@ -127,7 +127,7 @@ bool ModelLoader::loadReducedModelFromFullModel(const Model& fullModel,
 
 bool ModelLoader::loadReducedModelFromString(const std::string modelString,
                                              const std::vector< std::string >& consideredJoints,
-                                             const std::string filetype)
+                                             const std::string /*filetype*/)
 {
     SensorsList _sensorsFull, _sensorsReduced;
     Model _modelFull, _modelReduced;
@@ -160,7 +160,7 @@ bool ModelLoader::loadReducedModelFromString(const std::string modelString,
 
 bool ModelLoader::loadReducedModelFromFile(const std::string filename,
                                            const std::vector< std::string >& consideredJoints,
-                                           const std::string filetype)
+                                           const std::string /*filetype*/)
 {
     SensorsList _sensorsFull, _sensorsReduced;
     Model _modelFull, _modelReduced;

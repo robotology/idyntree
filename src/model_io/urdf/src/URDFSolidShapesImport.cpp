@@ -37,7 +37,7 @@ bool solidShapesFromURDF(const std::string & urdf_filename,
     return solidShapesFromURDFString(xml_string,urdf_filename,model,urdfGeometryType,output);
 }
 
-void parseURDFMaterial(const iDynTree::Model & model,
+void parseURDFMaterial(const iDynTree::Model & /*model*/,
                       iDynTree::Vector4 & material_rgba,
                   TiXmlElement* materialXml)
 {

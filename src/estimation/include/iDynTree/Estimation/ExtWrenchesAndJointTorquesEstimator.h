@@ -291,5 +291,3 @@ public:
 }
 
 #endif
-
-

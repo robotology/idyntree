@@ -32,6 +32,10 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 
 target_link_libraries(${libraryname} LINK_PUBLIC idyntree-model idyntree-sensors
                                      LINK_PRIVATE ${TinyXML_LIBRARIES})
+                                     
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
 
 target_include_directories(${libraryname} PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                   ${TinyXML_INCLUDE_DIRS})

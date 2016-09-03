@@ -42,6 +42,10 @@ include_directories(SYSTEM AFTER ${orocos_kdl_INCLUDE_DIRS}
 
 target_link_libraries(${libraryname} idyntree-core idyntree-model)
 
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
+
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_SENSORS_HEADERS})
 
 install(TARGETS ${libraryname}

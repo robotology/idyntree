@@ -47,7 +47,12 @@ target_link_libraries(idyntree-icub-kdl LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${Boost_LIBRARIES}
                                             ${TinyXML_LIBRARIES})
 
-target_include_directories(idyntree-icub-kdl INTERFACE ${skinDynLib_INCLUDE_DIRS} ${iDyn_INCLUDE_DIRS})
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_include_directories(idyntree-icub-kdl SYSTEM INTERFACE ${skinDynLib_INCLUDE_DIRS} ${iDyn_INCLUDE_DIRS})
+else()
+    target_include_directories(idyntree-icub-kdl INTERFACE ${skinDynLib_INCLUDE_DIRS} ${iDyn_INCLUDE_DIRS})
+endif()
+                
 
 include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS}
                            ${iDyn_INCLUDE_DIRS}
