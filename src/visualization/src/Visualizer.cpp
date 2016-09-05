@@ -16,6 +16,7 @@
 #include <irrlicht.h>
 #include "IrrlichtUtils.h"
 #include "Camera.h"
+#include "Environment.h"
 #endif
 
 #include <cassert>
@@ -26,6 +27,11 @@ namespace iDynTree
 ICamera::~ICamera()
 {
 }
+
+IEnvironment::~IEnvironment()
+{
+}
+
 
 struct ModelVisualization::ModelVisualizationPimpl
 {
@@ -75,25 +81,22 @@ struct ModelVisualization::ModelVisualizationPimpl
 class DummyCamera : ICamera
 {
 public:
-    /**
-      * Destructor
-      */
     virtual ~DummyCamera() {};
 
-    /**
-     * Set the linear position of the camera w.r.t to the world.
-     */
     virtual void setPosition(const iDynTree::Position &) {};
-
-    /**
-     * Set the target of the camera (i.e. the point the camera is looking into) w.r.t. the world.
-     */
     virtual void setTarget(const iDynTree::Position &) {};
-
-    /**
-     * Set the up vector of the camera w.r.t to the world.
-     */
     virtual void setUpVector(const Direction&) {};
+};
+
+/**
+ * Dummy environment.
+ */
+class DummyEnvironment : IEnvironment
+{
+public:
+    virtual ~DummyEnvironment() {};
+    virtual bool setElementVisibility(const std::string elementKey, bool isVisible) {return false;}
+    virtual std::vector< std::string > getElements() {  return std::vector< std::string >(); }
 };
 
 struct Visualizer::VisualizerPimpl
@@ -138,8 +141,14 @@ struct Visualizer::VisualizerPimpl
      * Camera used by the visualization.
      */
     Camera m_camera;
+
+    /**
+     * Environment used by the visualization.
+     */
+    Environment m_environment;
 #else
     DummyCamera m_camera;
+    DummyEnvironment m_environment;
 #endif
 
     VisualizerPimpl()
@@ -401,8 +410,10 @@ bool Visualizer::init(const VisualizerOptions options)
     // Always visualize the mouse cursor
     pimpl->m_irrDevice->getCursorControl()->setVisible(true);
 
-    // Add visualization elements
-    addVizEnviroment(pimpl->m_irrSmgr);
+    // Add environment
+    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr);
+    pimpl->m_environment.m_gridLinesVisible = true;
+
     addVizLights(pimpl->m_irrSmgr);
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
 
@@ -490,15 +501,19 @@ void Visualizer::draw()
     pimpl->m_irrDriver->beginScene(true,true, irr::video::SColor(255,0,100,100));
 
     // Draw base plane
-    for(int i=-10; i <= 10; i++ )
+    if( pimpl->m_environment.m_gridLinesVisible )
     {
-        pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(-10,i,0),
-                                       irr::core::vector3df(10,i,0),
-                                       irr::video::SColor(100,100,100,100));
-        pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(i,-10,0),
-                                       irr::core::vector3df(i,10,0),
-                                       irr::video::SColor(100,100,100,100));
+        for(int i=-10; i <= 10; i++ )
+        {
+            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(-10,i,0),
+                                           irr::core::vector3df(10,i,0),
+                                           irr::video::SColor(100,100,100,100));
+            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(i,-10,0),
+                                           irr::core::vector3df(i,10,0),
+                                           irr::video::SColor(100,100,100,100));
+        }
     }
+
     pimpl->m_irrSmgr->drawAll();
     pimpl->m_irrDriver->endScene();
 
