@@ -156,8 +156,8 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 }
 
 inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
-                                             irr::f32 arrowLenght,
-                                             irr::scene::ISceneNode * parentNode)
+                                             irr::f32 arrowLenght=1.0,
+                                             irr::scene::ISceneNode * parentNode=0)
 {
     irr::u32 alphaLev = 20;
     irr::video::SMaterial transRed;
@@ -216,7 +216,7 @@ inline void setWorldHNode(irr::scene::ISceneNode* node, const iDynTree::Transfor
  */
 void inline addVizEnviroment(irr::scene::ISceneManager* smgr)
 {
-    // Add Origin sphere
+    // Add origin frame
     irr::u32 alphaLev = 20;
     irr::video::SMaterial transRed;
     transRed.AmbientColor = irr::video::SColor(alphaLev,255,0,0);
@@ -258,9 +258,7 @@ void inline addVizEnviroment(irr::scene::ISceneManager* smgr)
     zArrow->getMaterial(0) = transBlue;
     zArrow->getMaterial(1) = transBlue;
 
-    irr::scene::ISceneNode* light = smgr->addSphereSceneNode(0.05);
-    light->setPosition(irr::core::vector3df(5.0,0.0,5.0));
-    light->getMaterial(0) = transYellow;
+
 }
 
 void inline addVizLights(irr::scene::ISceneManager* smgr)

@@ -48,6 +48,33 @@ public:
 };
 
 /**
+ * Interface to manipulate the elements in the enviroment (background, root frame, reference lines)
+ */
+class IEnvironment
+{
+public:
+    /**
+     * Denstructor
+     */
+    virtual ~IEnvironment() = 0;
+
+    /**
+     * Get the list of the elements in the enviroment.
+     *
+     * The function returns the following list:
+     *  * floor_grid
+     *  * world_frame
+     */
+    virtual std::vector<std::string> getElements() = 0;
+
+    /**
+     *
+     * @return true if the visibility is correctly setted, false otherwise.
+     */
+    virtual bool setElementVisibility(const std::string elementKey, bool isVisible) = 0;
+};
+
+/**
  * Interface to the visualization of a model istance.
  */
 class ModelVisualization
