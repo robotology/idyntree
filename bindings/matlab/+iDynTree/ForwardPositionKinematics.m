@@ -1,3 +1,3 @@
 function varargout = ForwardPositionKinematics(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1028, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1042, varargin{:});
 end

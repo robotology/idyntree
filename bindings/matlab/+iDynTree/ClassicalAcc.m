@@ -7,30 +7,30 @@ classdef ClassicalAcc < iDynTree.Vector6
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(511, varargin{:});
+        tmp = iDynTreeMEX(524, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = changeCoordFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(512, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(525, self, varargin{:});
     end
     function varargout = fromSpatial(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(514, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(527, self, varargin{:});
     end
     function varargout = toSpatial(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(515, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(528, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(516, self);
+        iDynTreeMEX(529, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = Zero(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(513, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(526, varargin{:});
     end
   end
 end
