@@ -157,6 +157,7 @@ namespace std {
 %template(Matrix10x16) iDynTree::MatrixFixSize<10,16>;
 
 %template(Vector3) iDynTree::VectorFixSize<3>;
+%template(Vector4) iDynTree::VectorFixSize<4>;
 %template(Vector6) iDynTree::VectorFixSize<6>;
 %template(Vector10) iDynTree::VectorFixSize<10>;
 %template(Vector16) iDynTree::VectorFixSize<16>;
