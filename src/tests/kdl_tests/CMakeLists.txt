@@ -3,8 +3,6 @@ get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DI
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS} ${orocos_kdl_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
-if(IDYNTREE_USES_ICUB_MAIN)
-
 macro(add_all_components_test testName)
     set(testsrc ${testName}_test.cpp testhumanoid.cpp testdoublejoint.cpp testkukalwr.cpp testsinglejoint.cpp testsinglelink.cpp)
     set(testbinary ${testName}_test)
@@ -28,6 +26,7 @@ add_all_components_test(comjacobian)
 add_all_components_test(inversedynamics_different_loops)
 add_all_components_test(DynamicsComputationsConsistency)
 
+if(IDYNTREE_USES_ICUB_MAIN)
   find_package(YARP)
   find_package(ICUB)
   add_executable(urdf2dh_test urdf2dh_tests.cpp)
