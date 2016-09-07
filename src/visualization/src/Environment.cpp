@@ -29,6 +29,8 @@ std::vector< std::string > Environment::getElements()
     std::vector<std::string> elements;
     elements.push_back("floor_grid");
     elements.push_back("root_frame");
+
+    return elements;
 }
 
 bool Environment::setElementVisibility(const std::string elementKey, bool isVisible)

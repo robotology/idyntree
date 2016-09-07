@@ -208,6 +208,11 @@ public:
     ICamera& camera();
 
     /**
+     * Return an interface to manipulate the visualization environment.
+     */
+    IEnvironment& enviroment();
+
+    /**
      * Wrap the run method of the Irrlicht device.
      */
     bool run();

@@ -32,7 +32,6 @@ IEnvironment::~IEnvironment()
 {
 }
 
-
 struct ModelVisualization::ModelVisualizationPimpl
 {
     std::string m_instanceName;
@@ -95,7 +94,7 @@ class DummyEnvironment : IEnvironment
 {
 public:
     virtual ~DummyEnvironment() {};
-    virtual bool setElementVisibility(const std::string elementKey, bool isVisible) {return false;}
+    virtual bool setElementVisibility(const std::string /*elementKey*/, bool /*isVisible*/) {return false;}
     virtual std::vector< std::string > getElements() {  return std::vector< std::string >(); }
 };
 
@@ -146,6 +145,7 @@ struct Visualizer::VisualizerPimpl
      * Environment used by the visualization.
      */
     Environment m_environment;
+
 #else
     DummyCamera m_camera;
     DummyEnvironment m_environment;
@@ -176,7 +176,7 @@ struct Visualizer::VisualizerPimpl
  *  the kinematic graph of iDynTree Model
  */
 void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManager(const iDynTree::Model & model,
-                                                              const iDynTree::ModelSolidShapes & modelGeom)
+                                                                                   const iDynTree::ModelSolidShapes & modelGeom)
 {
     this->modelNode = this->m_irrSmgr->addEmptySceneNode();
     this->linkNodes.resize(model.getNrOfLinks());
@@ -377,6 +377,7 @@ bool Visualizer::init(const VisualizerOptions options)
     irr::SIrrlichtCreationParameters irrDevParams;
 
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
+    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(800, 800);
 
     if( options.verbose )
     {
@@ -498,7 +499,7 @@ void Visualizer::draw()
         return;
     }
 
-    pimpl->m_irrDriver->beginScene(true,true, irr::video::SColor(255,0,100,100));
+    pimpl->m_irrDriver->beginScene(true,true, irr::video::SColor(255,255,255,255));
 
     // Draw base plane
     if( pimpl->m_environment.m_gridLinesVisible )
@@ -596,6 +597,11 @@ ModelVisualization& Visualizer::modelViz(size_t modelIdx)
 ICamera& Visualizer::camera()
 {
     return pimpl->m_camera;
+}
+
+IEnvironment& Visualizer::enviroment()
+{
+    return pimpl->m_environment;
 }
 
 bool Visualizer::run()
