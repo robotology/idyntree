@@ -61,8 +61,8 @@ inline std::string getFileExt(const std::string filename)
 }
 
 inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidShape * geom,
-                                              irr::scene::ISceneNode* linkNode,
-                                              irr::scene::ISceneManager* smgr)
+                                                                irr::scene::ISceneNode* linkNode,
+                                                                irr::scene::ISceneManager* smgr)
 {
     // In general we use the material provided by iDynTree, unless the external
     // mesh has a specific formal (for now collada) that we now specifies internally materials
@@ -265,33 +265,18 @@ void inline addVizLights(irr::scene::ISceneManager* smgr)
 {
     smgr->setAmbientLight(irr::video::SColor(255,255,255,255));
 
-    //cube->setMaterialFlag(video::EMF_LIGHTING, true);
-    //cube->getMaterial(0).AmbientColor.set(255,0,100,100);
-
     // Create nice light
     irr::scene::ILightSceneNode * sun_node=smgr->addLightSceneNode();
     irr::video::SLight sun_data;
-    sun_data.Direction=irr::core::vector3df(1,0,1);
-    sun_data.Type=irr::video::ELT_POINT;
-    sun_data.AmbientColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
-    sun_data.SpecularColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
+    sun_data.Direction=irr::core::vector3df(0,0,-1);
+    sun_data.Type=irr::video::ELT_DIRECTIONAL;
+    sun_data.AmbientColor=irr::video::SColorf(0.9f,0.9f,0.9f,1);
+    sun_data.SpecularColor=irr::video::SColorf(0.3f,0.3f,0.3f,1);
     sun_data.DiffuseColor=irr::video::SColorf(0.7f,0.7f,0.7f,1);
     sun_data.CastShadows=false;
     sun_node->setLightData(sun_data);
-    sun_node->setPosition(irr::core::vector3df(5,0,5));
+    sun_node->setPosition(irr::core::vector3df(0,0,10));
     sun_node->setRotation(irr::core::vector3df(0,0,0));
-
-    irr::scene::ILightSceneNode * sun_node2=smgr->addLightSceneNode();
-    irr::video::SLight sun_data2;
-    sun_data.Direction=irr::core::vector3df(-1,1,1);
-    sun_data.Type=irr::video::ELT_POINT;
-    sun_data.AmbientColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
-    sun_data.SpecularColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
-    sun_data.DiffuseColor=irr::video::SColorf(0.7f,0.7f,0.7f,1);
-    sun_data.CastShadows=false;
-    sun_node2->setLightData(sun_data2);
-    sun_node2->setPosition(irr::core::vector3df(-5,5,5));
-    sun_node2->setRotation(irr::core::vector3df(0,0,0));
 }
 
 inline irr::scene::ICameraSceneNode* addVizCamera(irr::scene::ISceneManager* smgr)
@@ -304,10 +289,18 @@ inline irr::scene::ICameraSceneNode* addVizCamera(irr::scene::ISceneManager* smg
     camera->setTarget(irr::core::vector3df(0,0,0));
     camera->setUpVector(irr::core::vector3df(0.0,0.0,1.0));
 
+
+
+    irr::core::matrix4 projMat;
+    projMat.buildProjectionMatrixOrthoRH(4.3,4.3,4,-4);
+    camera->setProjectionMatrix(projMat);
+
     // See http://irrlicht.sourceforge.net/forum/viewtopic.php?f=4&t=47734
+
     irr::core::matrix4 matproj = camera->getProjectionMatrix();
     matproj(0,0) *= -1;
     camera->setProjectionMatrix(matproj);
+
 
     return camera;
 }
