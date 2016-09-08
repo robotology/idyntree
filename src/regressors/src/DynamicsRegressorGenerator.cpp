@@ -224,6 +224,19 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
                                                            consider_ft_offset,
                                                            ignoredLinks, verbose);
 
+
+    //add regressor for 6 rows of base link dynamics
+    if (TiXmlElement* torqueDynamicsXml = regressorXml->FirstChildElement("baseLinkDynamics"))
+    {
+        if( this->pimpl->m_pLegacyGenerator->addBaseRegressorRows() != 0 )
+        {
+            std::cerr << "[ERROR] error in loading baseDynamicsRegressor" << std::endl;
+            delete this->pimpl->m_pLegacyGenerator;
+            this->pimpl->m_pLegacyGenerator = 0;
+            return false;
+        }
+    }
+
     // Get all subregressors of type subtreeBaseDynamics
     // For each subtreeBaseDynamics subregressor, add it to the legacy class
     for (TiXmlElement* subtreeBaseDynamicsXml = regressorXml->FirstChildElement("subtreeBaseDynamics");
@@ -262,7 +275,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
                 this->pimpl->m_pLegacyGenerator = 0;
                 return false;
             }
-        }        
+        }
         else if (TiXmlElement* jointsXml = torqueDynamicsXml->FirstChildElement("joints"))
         {
             for (TiXmlElement* jointXml = jointsXml->FirstChildElement("joint");
