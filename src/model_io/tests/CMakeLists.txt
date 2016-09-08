@@ -3,6 +3,8 @@
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS})
+FIND_PACKAGE(Boost)
+include_directories(${Boost_INCLUDE_DIR})
 
 add_executable(check_urdf_import_export check_urdf_import_export.cpp)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/format_examples/urdf/black_icub.urdf ${CMAKE_CURRENT_BINARY_DIR}/black_icub.urdf)
