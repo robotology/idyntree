@@ -32,6 +32,22 @@ IEnvironment::~IEnvironment()
 {
 }
 
+ILight::~ILight()
+{
+}
+
+ColorViz::ColorViz()
+{
+
+}
+
+ColorViz::ColorViz()
+{
+
+}
+
+
+
 struct ModelVisualization::ModelVisualizationPimpl
 {
     std::string m_instanceName;
@@ -420,6 +436,8 @@ bool Visualizer::init(const VisualizerOptions options)
     // Add environment
     pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr);
     pimpl->m_environment.m_gridLinesVisible = true;
+    pimpl->m_environment.m_sceneManager = pimpl->m_irrSmgr;
+    pimpl->m_environment.m_backgroundColor = SColor(255,50,50,50);
 
     addVizLights(pimpl->m_irrSmgr);
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
