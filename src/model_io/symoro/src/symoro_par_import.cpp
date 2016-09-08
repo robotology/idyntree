@@ -397,7 +397,7 @@ bool parModelFromString(const string& _parfile_content, symoro_par_model & model
     return true;
 }
 
-bool treeFromParModelTree(const symoro_par_model& par_model, Tree& tree, const bool consider_first_link_inertia)
+bool treeFromParModelTree(const symoro_par_model& par_model, Tree& tree, const bool /*consider_first_link_inertia*/)
 {
     const std::string base_name = "Link0";
     tree = Tree(base_name);

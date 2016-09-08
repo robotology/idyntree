@@ -11,6 +11,7 @@ iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) 
 * **[Installation](#installation)**
 * **[Tutorials](#tutorials)**
 * **[Documentation](#documentation)**
+* **[Announcements](#announcements)**
 * **[Developer Documentation](#developer-documentation)**
 * **[Reference Paper](#reference-paper)**
 * **[Acknowledgments](#acknowledgments)**
@@ -76,6 +77,9 @@ Are you interested in a tutorial on a specific feature or algorithm? Just [reque
 ## Documentation
 The documentation for the complete API of iDynTree is automatically extracted from the C++ code using [Doxygen](www.doxygen.org),
 and is available at the URL : [http://wiki.icub.org/codyco/dox/html/idyntree/html/](http://wiki.icub.org/codyco/dox/html/idyntree/html/).
+
+## Announcements 
+Announcements on new releases, API changes or other news are done on the `robotcub-hackers` mailing list, you can subscribe at https://lists.sourceforge.net/lists/listinfo/robotcub-hackers .
 
 ## Developer Documentation
 If you want to contribute to iDynTree development, please check the [Developer's FAQ](https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md).

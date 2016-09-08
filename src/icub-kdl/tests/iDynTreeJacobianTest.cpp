@@ -139,7 +139,7 @@ void set_random_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree)
 
     H_w2b_kdl.Make4x4(H_w2b.data());
 
-    YARP_ASSERT(icub_tree.setWorldBasePose(H_w2b));
+    yAssert(icub_tree.setWorldBasePose(H_w2b));
 
     std::cout << "iDynTree Jacobian test world pose " << icub_tree.getWorldBasePose().toString() << std::endl;
 
@@ -168,7 +168,7 @@ void set_random_q_dq_ddq(yarp::os::Random & rng, DynTree & icub_tree)
 
     //std::cout << "iDynTreeJacobianTest: Setting base_acc " << base_acc.toString() << " ( " << norm(base_acc) << " ) " <<  std::endl;
 
-    YARP_ASSERT(icub_tree.kinematicRNEA());
+    yAssert(icub_tree.kinematicRNEA());
 
     //std::cout << "iDynTreeJacobianTest: Acc at the base " << icub_tree.getAcc(icub_tree.getLinkIndex("root_link")).toString() << " ( " << norm(icub_tree.getAcc(icub_tree.getLinkIndex("root_link"))) << " ) " << std::endl;
 
@@ -309,7 +309,7 @@ int main(int argc, char** argv)
     com_jacobian = com_jacobian_6d.submatrix(0,2,0,com_jacobian_6d.cols()-1);
     yarp::sig::Vector v_com, v_com_jacobian;
     v_com = icub_idyntree.getVelCOM();
-    YARP_ASSERT( com_jacobian.cols() == icub_idyntree.getNrOfDOFs()+6);
+    yAssert( com_jacobian.cols() == icub_idyntree.getNrOfDOFs()+6);
     v_com_jacobian = com_jacobian*icub_idyntree.getDQ_fb();
 
     std::cout << "Comparison between com velocities" << std::endl
@@ -329,17 +329,17 @@ int main(int argc, char** argv)
     yarp::sig::Vector six_zeros(6,0.0);
     yarp::sig::Vector dof_zeros(icub_idyntree.getNrOfDOFs(),0.0);
 
-    YARP_ASSERT(waist_imu_icub.setWorldBasePose(icub_idyntree.getWorldBasePose()));
+    yAssert(waist_imu_icub.setWorldBasePose(icub_idyntree.getWorldBasePose()));
     waist_imu_icub.setKinematicBaseVelAcc(icub_idyntree.getVel(icub_idyntree.getLinkIndex(kinematic_base_link_name)),
                                           six_zeros);
 
     waist_imu_icub.setAng(icub_idyntree.getAng());
     waist_imu_icub.setDAng(icub_idyntree.getDAng());
     waist_imu_icub.setD2Ang(dof_zeros);
-    YARP_ASSERT(waist_imu_icub.kinematicRNEA());
-    YARP_ASSERT(icub_idyntree.kinematicRNEA());
+    yAssert(waist_imu_icub.kinematicRNEA());
+    yAssert(icub_idyntree.kinematicRNEA());
 
-    YARP_ASSERT(icub_idyntree.getLinkIndex(kinematic_base_link_name) == waist_imu_icub.getLinkIndex(kinematic_base_link_name));
+    yAssert(icub_idyntree.getLinkIndex(kinematic_base_link_name) == waist_imu_icub.getLinkIndex(kinematic_base_link_name));
 
     std::cout << "Acc at the base " << icub_idyntree.getAcc(icub_idyntree.getLinkIndex(kinematic_base_link_name)).toString() << std::endl;
     a_com_jacobian = com_jacobian*icub_idyntree.getD2Q_fb() + waist_imu_icub.getAccCOM();

@@ -66,7 +66,7 @@ namespace iDynTree
 
     }
 
-    Position::Position(const PositionRaw & otherPos, const PositionSemantics & otherSem): PositionRaw(otherPos)
+    Position::Position(const PositionRaw & otherPos, const PositionSemantics & /*otherSem*/): PositionRaw(otherPos)
     {
         iDynTreeSemanticsOp(this->semantics = otherSem);
     }

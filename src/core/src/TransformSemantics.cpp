@@ -53,7 +53,7 @@ namespace iDynTree
                                  "position Ref point is different from the Ref orientation frame origin\n"));
     }
 
-    bool TransformSemantics::setPositionSemantics(const PositionSemantics& position)
+    bool TransformSemantics::setPositionSemantics(const PositionSemantics& /*position*/)
     {
         bool status = true;
 
@@ -66,7 +66,7 @@ namespace iDynTree
         return status;
     }
 
-    bool TransformSemantics::setRotationSemantics(const RotationSemantics& rotation)
+    bool TransformSemantics::setRotationSemantics(const RotationSemantics& /*rotation*/)
     {
         bool status = true;
 
@@ -79,7 +79,7 @@ namespace iDynTree
         return status;
     }
 
-    TransformSemantics & TransformSemantics::operator= (const TransformSemantics & other)
+    TransformSemantics & TransformSemantics::operator= (const TransformSemantics & /*other*/)
     {
         return *this;
     }

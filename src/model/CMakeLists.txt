@@ -21,6 +21,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
                            include/iDynTree/Model/ModelTransformers.h
                            include/iDynTree/Model/MovableJointImpl.h
                            include/iDynTree/Model/RevoluteJoint.h
+                           include/iDynTree/Model/SolidShapes.h
                            include/iDynTree/Model/SubModel.h
                            include/iDynTree/Model/Traversal.h)
 
@@ -42,6 +43,7 @@ set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/ModelTransformers.cpp
                            src/ModelInterfaceDestructors.cpp
                            src/RevoluteJoint.cpp
+                           src/SolidShapes.cpp
                            src/SubModel.cpp
                            src/Traversal.cpp)
 

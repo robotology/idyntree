@@ -114,4 +114,4 @@ namespace iDynTree
 }
 
 
-#endif /* IDYNTREE_DYNAMICS_H */
+#endif

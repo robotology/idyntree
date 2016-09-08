@@ -19,8 +19,8 @@ namespace iDynTree
     double DEFAULT_TOL = 1e-10;
 
     const double IDYNTREE_PI=M_PI;
-    const double IDYNTREE_RAD2DEG=180.0/M_PI;
-    const double IDYNTREE_DEG2RAD=M_PI/180.0;
+    const double IDYNTREE_RAD2DEG=180.0/IDYNTREE_PI;
+    const double IDYNTREE_DEG2RAD=IDYNTREE_PI/180.0;
 
     bool checkEqualOrUnknown(const int op1, const int op2)
     {
@@ -71,7 +71,7 @@ namespace iDynTree
         return IDYNTREE_RAD2DEG*valueInRad;
     }
 
-    bool IndexRange::isValid()
+    bool IndexRange::isValid() const 
     {
         return (offset >= 0) && (size >= 0);
     }

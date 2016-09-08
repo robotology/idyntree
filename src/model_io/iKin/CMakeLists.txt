@@ -21,13 +21,21 @@ set(libraryname idyntree-modelio-ikin)
 add_library(${libraryname} ${IDYNTREE_MODELIO_IKIN_SOURCES} ${IDYNTREE_MODELIO_IKIN_HEADERS})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                 ${orocos_kdl_INCLUDE_DIRS}
-                                                 ${iKin_INCLUDE_DIRS}
-                                                 ${YARP_INCLUDE_DIRS}
-                                          PRIVATE ${EIGEN3_INCLUDE_DIR})
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+                                          
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_include_directories(${libraryname} SYSTEM PUBLIC ${orocos_kdl_INCLUDE_DIRS} ${iKin_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+    target_include_directories(${libraryname} SYSTEM PRIVATE ${EIGEN3_INCLUDE_DIR})
+else()
+    target_include_directories(${libraryname} PUBLIC ${orocos_kdl_INCLUDE_DIRS} ${iKin_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+    target_include_directories(${libraryname} PRIVATE ${EIGEN3_INCLUDE_DIR})
+endif()
 
 target_link_libraries(${libraryname} idyntree-core iKin ${orocos_kdl_LIBRARIES})
+
+if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
+    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
+endif()
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_IKIN_HEADERS})
 

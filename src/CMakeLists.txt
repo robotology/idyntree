@@ -33,6 +33,8 @@ if(IDYNTREE_USES_KDL)
     add_subdirectory(high-level-kdl)
 endif()
 
+add_subdirectory(visualization)
+
 # compile simple command line tools
 add_subdirectory(tools)
 

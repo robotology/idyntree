@@ -35,6 +35,9 @@ namespace std {
 %{
 /* Note : always include headers following the inheritance order */
 
+//Utils
+#include "iDynTree/Core/Utils.h"
+
 // Basic math classes
 #include "iDynTree/Core/MatrixDynSize.h"
 #include "iDynTree/Core/MatrixFixSize.h"
@@ -84,6 +87,7 @@ namespace std {
 #include "iDynTree/Model/MovableJointImpl.h"
 #include "iDynTree/Model/RevoluteJoint.h"
 #include "iDynTree/Model/Traversal.h"
+#include "iDynTree/Model/SolidShapes.h"
 #include "iDynTree/Model/Model.h"
 #include "iDynTree/Model/JointState.h"
 #include "iDynTree/Model/FreeFloatingMassMatrix.h"
@@ -120,11 +124,21 @@ namespace std {
 // High level interfaces
 #include "iDynTree/KinDynComputations.h"
 
+// Visualization
+#include "iDynTree/Visualizer.h"
+
 // Legacy high level interfaces
 #include "iDynTree/HighLevel/DynamicsComputations.h"
 
 %}
 
+//Wrap std::vector<BerdySensors>
+namespace std {
+    %template(BerdySensors) vector<iDynTree::BerdySensor>;
+}
+
+//Utils
+%include "iDynTree/Core/Utils.h"
 
 /* Note : always include headers following the inheritance order */
 // Basic math classes
@@ -150,6 +164,7 @@ namespace std {
 %template(Matrix10x16) iDynTree::MatrixFixSize<10,16>;
 
 %template(Vector3) iDynTree::VectorFixSize<3>;
+%template(Vector4) iDynTree::VectorFixSize<4>;
 %template(Vector6) iDynTree::VectorFixSize<6>;
 %template(Vector10) iDynTree::VectorFixSize<10>;
 %template(Vector16) iDynTree::VectorFixSize<16>;
@@ -256,6 +271,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 %include "iDynTree/Model/RevoluteJoint.h"
 %include "iDynTree/Model/Traversal.h"
+%include "iDynTree/Model/SolidShapes.h"
 %include "iDynTree/Model/Model.h"
 %include "iDynTree/Model/JointState.h"
 %include "iDynTree/Model/FreeFloatingMassMatrix.h"
@@ -295,6 +311,9 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // High level interfaces
 %include "iDynTree/KinDynComputations.h"
+
+// Visualization
+%include "iDynTree/Visualizer.h"
 
 // Legacy high level interfaces
 %include "iDynTree/HighLevel/DynamicsComputations.h"

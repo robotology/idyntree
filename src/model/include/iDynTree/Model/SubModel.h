@@ -150,4 +150,4 @@ namespace iDynTree
 
 }
 
-#endif /* IDYNTREE_LINK_H */
+#endif

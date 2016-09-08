@@ -269,6 +269,60 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
                                                subModelBase_H_additionalFrame);
         }
     }
+}
+
+void reducedModelAddSolidShapes(const Model& fullModel,
+                                      Model& reducedModel,
+                                const std::string linkInReducedModel,
+                                const Traversal& linkSubModel,
+                                const FreeFloatingPos& pos,
+                                      LinkPositions& subModelBase_X_link)
+{
+    // First compute the transform between each link in the submodel and the submodel base
+    computeTransformToTraversalBase(fullModel,linkSubModel,pos.jointPos(),subModelBase_X_link);
+
+    LinkIndex subModelBaseIndexInReducedModel = reducedModel.getLinkIndex(linkInReducedModel);
+
+    // All the geometries collected in the traversal are lumped into the base link
+    for(unsigned int traversalEl=0; traversalEl < linkSubModel.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = linkSubModel.getLink(traversalEl);
+        LinkConstPtr parentLink  = linkSubModel.getParentLink(traversalEl);
+
+        LinkIndex visitedLinkIndex = visitedLink->getIndex();
+        Transform subModelBase_H_visitedLink     = subModelBase_X_link(visitedLinkIndex);
+
+        // Add visual shapes to the new lumped link, i.e. the subModelBase
+        for(int shapeIdx=0; shapeIdx < fullModel.visualSolidShapes().linkSolidShapes[visitedLinkIndex].size(); shapeIdx++)
+        {
+            // Clone the shape
+            SolidShape * copiedShape = fullModel.visualSolidShapes().linkSolidShapes[visitedLinkIndex][shapeIdx]->clone();
+
+            // Update shape transform from the old link to the new link
+            Transform visitedLink_H_shape = fullModel.visualSolidShapes().linkSolidShapes[visitedLinkIndex][shapeIdx]->link_H_geometry;
+            copiedShape->link_H_geometry = subModelBase_H_visitedLink*visitedLink_H_shape;
+
+            // Ownership of the new pointer is transfered to the ModelSolidShapes class
+            // (it will be eventually deleted by the close() method
+            reducedModel.visualSolidShapes().linkSolidShapes[subModelBaseIndexInReducedModel].push_back(copiedShape);
+        }
+
+        // Add collision shapes to the new lumped link, i.e. the subModelBase
+        for(int shapeIdx=0; shapeIdx < fullModel.collisionSolidShapes().linkSolidShapes[visitedLinkIndex].size(); shapeIdx++)
+        {
+            // Clone the shape : ownership of the new pointer is transfered to the ModelSolidShapes class
+            // (it will be eventually deleted by the close() method
+            SolidShape * copiedShape = fullModel.collisionSolidShapes().linkSolidShapes[visitedLinkIndex][shapeIdx]->clone();
+
+            // Update shape transform from the old link to the new link
+            Transform visitedLink_H_shape = fullModel.collisionSolidShapes().linkSolidShapes[visitedLinkIndex][shapeIdx]->link_H_geometry;
+            copiedShape->link_H_geometry = subModelBase_H_visitedLink*visitedLink_H_shape;
+
+            // Ownership of the new pointer is transfered to the ModelSolidShapes class
+            // (it will be eventually deleted by the close() method
+            reducedModel.collisionSolidShapes().linkSolidShapes[subModelBaseIndexInReducedModel].push_back(copiedShape);
+        }
+    }
 
 }
 
@@ -340,6 +394,11 @@ bool createReducedModel(const Model& fullModel,
         reducedModelAddAdditionalFrames(fullModel,reducedModel,
                                         linkName,subModels.getTraversal(linkInReducedModel),
                                         jointPos,subModelBase_X_link);
+
+        // Lump the visual and collision shapes in the new model
+        reducedModelAddSolidShapes(fullModel,reducedModel,
+                                   linkName,subModels.getTraversal(linkInReducedModel),
+                                   jointPos,subModelBase_X_link);
 
     }
 

@@ -33,9 +33,7 @@
 
 #include <iDynTree/Core/VectorDynSize.h>
 
-
-
-
+#include <cassert>
 #include <iostream>
 
 namespace iDynTree {
@@ -61,30 +59,30 @@ LinkSensor::~LinkSensor()
 
 struct SensorsList::SensorsListPimpl
 {
-    std::vector< std::vector<Sensor *> > VecSensors;
-    std::vector< std::map< std::string, unsigned int > > NamesSensors;
+    std::vector< std::vector<Sensor *> > allSensors;
+    std::vector< std::map< std::string, unsigned int > > sensorsNameToIndex;
 };
 
 SensorsList::SensorsList():
     pimpl(new SensorsListPimpl())
 {
     //resize datastructures;
-    this->pimpl->VecSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
-    this->pimpl->NamesSensors.resize(NR_OF_SENSOR_TYPES);
+    this->pimpl->allSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
+    this->pimpl->sensorsNameToIndex.resize(NR_OF_SENSOR_TYPES);
 }
 
 void SensorsList::constructor(const SensorsList& other)
 {
     this->pimpl = new SensorsListPimpl();
-    this->pimpl->VecSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
-    this->pimpl->NamesSensors.resize(NR_OF_SENSOR_TYPES);
+    this->pimpl->allSensors.resize(NR_OF_SENSOR_TYPES,std::vector<Sensor *>(0));
+    this->pimpl->sensorsNameToIndex.resize(NR_OF_SENSOR_TYPES);
     for(int sens_type = 0; sens_type < NR_OF_SENSOR_TYPES; sens_type++ )
     {
         for(unsigned int sens = 0; sens < other.getNrOfSensors((SensorType)sens_type); sens++ )
         {
-            this->pimpl->VecSensors[sens_type].push_back(other.pimpl->VecSensors[sens_type][sens]->clone());
+            this->pimpl->allSensors[sens_type].push_back(other.pimpl->allSensors[sens_type][sens]->clone());
             std::string sensor_name = other.getSensor((SensorType)sens_type,sens)->getName();
-            this->pimpl->NamesSensors[sens_type].insert(std::pair<std::string,int>(sensor_name,sens));
+            this->pimpl->sensorsNameToIndex[sens_type].insert(std::pair<std::string,int>(sensor_name,sens));
         }
     }
 }
@@ -109,13 +107,13 @@ void SensorsList::destructor()
     for( int sensor_type = 0; sensor_type < NR_OF_SENSOR_TYPES; sensor_type++ )
     {
         for(unsigned int sensor_index = 0;
-            sensor_index < this->pimpl->VecSensors[sensor_type].size(); sensor_index++ )
+            sensor_index < this->pimpl->allSensors[sensor_type].size(); sensor_index++ )
         {
-            delete this->pimpl->VecSensors[sensor_type][sensor_index];
+            delete this->pimpl->allSensors[sensor_type][sensor_index];
         }
     }
-    this->pimpl->VecSensors.resize(0);
-    this->pimpl->NamesSensors.resize(0);
+    this->pimpl->allSensors.resize(0);
+    this->pimpl->sensorsNameToIndex.resize(0);
 
     delete this->pimpl;
     this->pimpl = 0;
@@ -146,9 +144,9 @@ int SensorsList::addSensor(const Sensor& sensor)
              return -1;
     }
 
-    this->pimpl->VecSensors[newSensor->getSensorType()].push_back(newSensor);
-    int new_index = this->pimpl->VecSensors[newSensor->getSensorType()].size()-1;
-    this->pimpl->NamesSensors[newSensor->getSensorType()].insert(std::pair<std::string,int>(newSensor->getName(),new_index));
+    this->pimpl->allSensors[newSensor->getSensorType()].push_back(newSensor);
+    int new_index = this->pimpl->allSensors[newSensor->getSensorType()].size()-1;
+    this->pimpl->sensorsNameToIndex[newSensor->getSensorType()].insert(std::pair<std::string,int>(newSensor->getName(),new_index));
 
     return new_index;
 }
@@ -157,9 +155,9 @@ bool SensorsList::getSerialization(const SensorType& sensor_type, std::vector< s
 {
     serializaton.resize(0);
     for(unsigned int sensor_index = 0;
-        sensor_index < this->pimpl->VecSensors[sensor_type].size(); sensor_index++ )
+        sensor_index < this->pimpl->allSensors[sensor_type].size(); sensor_index++ )
     {
-        std::string sensorName = this->pimpl->VecSensors[sensor_type][sensor_index]->getName();
+        std::string sensorName = this->pimpl->allSensors[sensor_type][sensor_index]->getName();
         serializaton.push_back(sensorName);
     }
 
@@ -188,21 +186,21 @@ bool SensorsList::setSerialization(const SensorType& sensor_type,
         newVecSensors[i] = this->getSensor(sensor_type,oldSensIndex);
     }
 
-    this->pimpl->VecSensors[sensor_type] = newVecSensors;
+    this->pimpl->allSensors[sensor_type] = newVecSensors;
     
     return true;
 }
 
 unsigned int SensorsList::getNrOfSensors(const SensorType & sensor_type) const
 {
-    return this->pimpl->VecSensors[sensor_type].size();
+    return this->pimpl->allSensors[sensor_type].size();
 }
 
 bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
 {
     std::map< std::string, unsigned int >::const_iterator it;
-    it = this->pimpl->NamesSensors[sensor_type].find(_sensor_name);
-    if( it == this->pimpl->NamesSensors[sensor_type].end() )
+    it = this->pimpl->sensorsNameToIndex[sensor_type].find(_sensor_name);
+    if( it == this->pimpl->sensorsNameToIndex[sensor_type].end() )
     {
         std::cerr << "[ERROR] getSensorIndex did not find sensor " << _sensor_name << std::endl;
         return false;
@@ -238,7 +236,7 @@ Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) 
 {
     if( sensor_index < (int)getNrOfSensors(sensor_type) && sensor_index >= 0 )
     {
-        return this->pimpl->VecSensors[sensor_type][sensor_index];
+        return this->pimpl->allSensors[sensor_type][sensor_index];
     }
     else
     {
@@ -260,8 +258,316 @@ size_t SensorsList::getSizeOfAllSensorsMeasurements() const
     return res;
 }
 
+bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type)
+{
+    //data is cloned when sensors are added. We have to release the associated memory
+    for (std::vector<Sensor*>::iterator it = this->pimpl->allSensors[sensor_type].begin();
+         it != this->pimpl->allSensors[sensor_type].end(); ++it) {
+        delete *it;
+    }
+    this->pimpl->allSensors[sensor_type].clear();
+    this->pimpl->sensorsNameToIndex[sensor_type].clear();
+    return true;
+}
+
+    bool SensorsList::removeSensor(const SensorType & sensor_type, const unsigned int sensor_index)
+    {
+        std::vector<Sensor*>& typeVector = this->pimpl->allSensors[sensor_type];
+        if (sensor_index >= typeVector.size())
+            return false;
+        Sensor *s = typeVector[sensor_index];
+        typeVector.erase(typeVector.begin() + sensor_index);
+        std::map< std::string, unsigned int >& nameToIndex = this->pimpl->sensorsNameToIndex[sensor_type];
+        std::map< std::string, unsigned int >::iterator nameToIndexIterator = nameToIndex.find(s->getName());
+        if (nameToIndexIterator != nameToIndex.end()) {
+            nameToIndex.erase(nameToIndexIterator);
+        }
+
+        delete s;
+        return true;
+    }
+
+    bool SensorsList::removeSensor(const iDynTree::SensorType &sensor_type, const std::string &_sensor_name)
+    {
+        int index = getSensorIndex(sensor_type, _sensor_name);
+        if (index < 0) return false;
+        return removeSensor(sensor_type, index);
+    }
 
 
+    //Iterator implementation
+    SensorsList::Iterator SensorsList::allSensorsIterator()
+    {
+        Iterator iterator(this->pimpl->allSensors);
+        return iterator;
+    }
+
+    SensorsList::ConstIterator SensorsList::allSensorsIterator() const
+    {
+        ConstIterator iterator(this->pimpl->allSensors);
+        return iterator;
+    }
+
+    SensorsList::TypedIterator SensorsList::sensorsIteratorForType(const iDynTree::SensorType &sensor_type)
+    {
+        TypedIterator iterator(this->pimpl->allSensors[sensor_type]);
+        return iterator;
+    }
+
+    SensorsList::ConstTypedIterator SensorsList::sensorsIteratorForType(const iDynTree::SensorType &sensor_type) const
+    {
+        ConstTypedIterator iterator(this->pimpl->allSensors[sensor_type]);
+        return iterator;
+    }
+
+    SensorsList::TypedIterator::TypedIterator(std::vector<Sensor *> &list)
+    : iteratingList(list)
+    {
+        internalIterator = iteratingList.begin();
+    }
+
+    SensorsList::TypedIterator& SensorsList::TypedIterator::operator++()
+    {
+        ++internalIterator;
+        return *this;
+    }
+    SensorsList::TypedIterator SensorsList::TypedIterator::operator++(int)
+    {
+        SensorsList::TypedIterator previous(*this);
+        this->operator++();
+        return previous;
+    }
+
+    bool SensorsList::TypedIterator::operator==(const SensorsList::TypedIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    bool SensorsList::TypedIterator::operator==(const SensorsList::ConstTypedIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    SensorsList::TypedIterator::reference SensorsList::TypedIterator::operator*() const
+    {
+        return *internalIterator;
+    }
+    SensorsList::TypedIterator::pointer SensorsList::TypedIterator::operator->() const
+    {
+        return internalIterator.operator->();
+    }
+
+    bool SensorsList::TypedIterator::isValid() const
+    {
+        return internalIterator >= iteratingList.begin() &&
+        internalIterator < iteratingList.end();
+    }
+
+    SensorsList::ConstTypedIterator::ConstTypedIterator(std::vector<Sensor *> &list)
+    : iteratingList(list)
+    {
+        constructor();
+    }
+
+    SensorsList::ConstTypedIterator::ConstTypedIterator(const TypedIterator&it)
+    : iteratingList(it.iteratingList)
+    {
+        constructor();
+    }
+
+    void SensorsList::ConstTypedIterator::constructor()
+    {
+        internalIterator = iteratingList.begin();
+    }
+
+    SensorsList::ConstTypedIterator& SensorsList::ConstTypedIterator::operator++()
+    {
+        ++internalIterator;
+        return *this;
+    }
+    SensorsList::ConstTypedIterator SensorsList::ConstTypedIterator::operator++(int)
+    {
+        SensorsList::ConstTypedIterator previous(*this);
+        this->operator++();
+        return previous;
+    }
+
+    bool SensorsList::ConstTypedIterator::operator==(const SensorsList::ConstTypedIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    bool SensorsList::ConstTypedIterator::operator==(const SensorsList::TypedIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    SensorsList::ConstTypedIterator::reference SensorsList::ConstTypedIterator::operator*() const
+    {
+        return internalIterator.operator*();
+    }
+    SensorsList::ConstTypedIterator::pointer SensorsList::ConstTypedIterator::operator->() const
+    {
+        return internalIterator.operator->();
+    }
+
+    bool SensorsList::ConstTypedIterator::isValid() const
+    {
+        return internalIterator >= iteratingList.begin() &&
+        internalIterator < iteratingList.end();
+    }
+
+    SensorsList::Iterator::Iterator(std::vector< std::vector<Sensor *> >&list)
+    : iteratingList(list)
+    {
+        //Start from the beginning
+        externalIterator = iteratingList.begin();
+        //While external list is empty, skip to the next one
+        while (externalIterator != iteratingList.end()
+               && externalIterator->empty()) {
+            ++externalIterator;
+        }
+        //if the iterator is still valid assign the internal
+        //otherwise the iterator itself is no longer valid
+        if (externalIterator != iteratingList.end()) {
+            internalIterator = externalIterator->begin();
+        }
+    }
+
+    SensorsList::Iterator& SensorsList::Iterator::operator++()
+    {
+        ++internalIterator;
+        if (internalIterator >= externalIterator->end()) {
+            //end of inner list.
+            //Move to next list
+            do {
+                ++externalIterator;
+            } while (externalIterator != iteratingList.end() &&
+                     externalIterator->empty());
+
+            if (externalIterator != iteratingList.end()) {
+                internalIterator = externalIterator->begin();
+            }
+        }
+        return *this;
+    }
+    SensorsList::Iterator SensorsList::Iterator::operator++(int)
+    {
+        SensorsList::Iterator previous(*this);
+        this->operator++();
+        return previous;
+    }
+
+    bool SensorsList::Iterator::operator==(const SensorsList::Iterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    bool SensorsList::Iterator::operator==(const SensorsList::ConstIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    SensorsList::Iterator::reference SensorsList::Iterator::operator*() const
+    {
+        return *internalIterator;
+    }
+    SensorsList::Iterator::pointer SensorsList::Iterator::operator->() const
+    {
+        return internalIterator.operator->();
+    }
+
+    bool SensorsList::Iterator::isValid() const
+    {
+        return
+        //Check for external list consistency
+        externalIterator >= iteratingList.begin() &&
+        externalIterator < iteratingList.end() &&
+        //Check for internal list consistency
+        internalIterator >= externalIterator->begin() &&
+        internalIterator < externalIterator->end();
+    }
+
+    SensorsList::ConstIterator::ConstIterator(std::vector< std::vector<Sensor *> >&list)
+    : iteratingList(list)
+    {
+        constructor();
+    }
+
+    SensorsList::ConstIterator::ConstIterator(const SensorsList::Iterator& it)
+    : iteratingList(it.iteratingList)
+    {
+        constructor();
+    }
+
+    void SensorsList::ConstIterator::constructor()
+    {
+        //Start from the beginning
+        externalIterator = iteratingList.begin();
+        //While external list is empty, skip to the next one
+        while (externalIterator->empty()) {
+            ++externalIterator;
+        }
+        //if the iterator is still valid assign the internal
+        //otherwise the iterator itself is no longer valid
+        if (externalIterator != iteratingList.end()) {
+            internalIterator = externalIterator->begin();
+        }
+    }
+
+    SensorsList::ConstIterator& SensorsList::ConstIterator::operator++()
+    {
+        ++internalIterator;
+        if (internalIterator >= externalIterator->end()) {
+            //end of inner list.
+            //Move to next list
+            do {
+                ++externalIterator;
+            } while (externalIterator != iteratingList.end() &&
+                     externalIterator->empty());
+
+            if (externalIterator != iteratingList.end()) {
+                internalIterator = externalIterator->begin();
+            }
+        }
+        return *this;
+    }
+    SensorsList::ConstIterator SensorsList::ConstIterator::operator++(int)
+    {
+        SensorsList::ConstIterator previous(*this);
+        this->operator++();
+        return previous;
+    }
+
+    bool SensorsList::ConstIterator::operator==(const SensorsList::ConstIterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    bool SensorsList::ConstIterator::operator==(const SensorsList::Iterator&s) const
+    {
+        return internalIterator == s.internalIterator;
+    }
+
+    SensorsList::ConstIterator::reference SensorsList::ConstIterator::operator*() const
+    {
+        return *internalIterator;
+    }
+    SensorsList::ConstIterator::pointer SensorsList::ConstIterator::operator->() const
+    {
+        return internalIterator.operator->();
+    }
+
+    bool SensorsList::ConstIterator::isValid() const
+    {
+        return
+        //Check for external list consistency
+        externalIterator >= iteratingList.begin() &&
+        externalIterator < iteratingList.end() &&
+        //Check for internal list consistency
+        internalIterator >= externalIterator->begin() &&
+        internalIterator < externalIterator->end();
+    }
 
 ///////////////////////////////////////////////////////////////////////////////
 ///// SensorMeasurements
@@ -557,7 +863,5 @@ size_t SensorsMeasurements::getSizeOfAllSensorsMeasurements() const
     }
     return res;
 }
-
-
 
 }

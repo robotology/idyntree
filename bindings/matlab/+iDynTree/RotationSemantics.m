@@ -9,72 +9,72 @@ classdef RotationSemantics < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(559, varargin{:});
+        tmp = iDynTreeMEX(605, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = setToUnknown(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(560, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(606, self, varargin{:});
     end
     function varargout = getOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(561, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(607, self, varargin{:});
     end
     function varargout = getBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(562, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(608, self, varargin{:});
     end
     function varargout = getReferenceOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(563, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(609, self, varargin{:});
     end
     function varargout = getRefBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(564, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(610, self, varargin{:});
     end
     function varargout = getCoordinateFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(565, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(611, self, varargin{:});
     end
     function varargout = setOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(566, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(612, self, varargin{:});
     end
     function varargout = setBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(567, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(613, self, varargin{:});
     end
     function varargout = setReferenceOrientationFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(568, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(614, self, varargin{:});
     end
     function varargout = setRefBody(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(569, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(615, self, varargin{:});
     end
     function varargout = setCoordinateFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(570, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(616, self, varargin{:});
     end
     function varargout = changeOrientFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(571, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(617, self, varargin{:});
     end
     function varargout = changeRefOrientFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(572, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(618, self, varargin{:});
     end
     function varargout = changeCoordFrameOf(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(573, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(619, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(576, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(622, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(577, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(623, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(578, self);
+        iDynTreeMEX(624, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(574, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(620, varargin{:});
     end
     function varargout = inverse2(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(575, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(621, varargin{:});
     end
   end
 end

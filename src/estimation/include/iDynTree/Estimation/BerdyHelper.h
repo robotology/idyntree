@@ -66,9 +66,8 @@ enum BerdyVariants
      * for accounting for free floating dynamics and removing the NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV from the dynamic variables.
      *
      */
-    BERDY_FLOATING_BASE = 1,
+    BERDY_FLOATING_BASE = 1
 };
-
 
 /**
  * Enumeration descriing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration)
@@ -207,6 +206,29 @@ public:
     bool checkConsistency();
 };
 
+
+//Unfortunately some sensors used in berdy are not proper sensors.
+//I cannot use the Sensor class which has almost all the information needed
+/**
+ * Structure which describes the essential information about a sensor used in berdy
+ * A sensor is identified by the pair (type, id)
+ */
+struct BerdySensor {
+    iDynTree::BerdySensorTypes type; /*<! type of the sensor */
+    std::string id; /*<! ID of the sensor */
+    iDynTree::IndexRange range; /*<! Range of the sensor
+                                 * (starting location in the measurements equations
+                                 *  and number of measuremes equations associated with the sensor */
+
+    bool operator==(const struct BerdySensor&);
+};
+
+    struct BerdyDynamicVariable {
+        iDynTree::BerdyDynamicVariablesTypes type;
+        std::string id;
+        iDynTree::IndexRange range;
+    };
+
 /**
  * \brief Helper class for computing Berdy matrices.
  *
@@ -322,6 +344,9 @@ class BerdyHelper
     Vector3 m_gravity;
     SpatialAcc m_gravity6D;
 
+    std::vector<BerdySensor> m_sensorsOrdering; /*<! Sensor ordering. Created on init */
+    std::vector<BerdyDynamicVariable> m_dynamicVariablesOrdering; /*<! Dynamic variable ordering. Created on init */
+
     /**
      * Helpers method for initialization.
      */
@@ -361,6 +386,9 @@ class BerdyHelper
     bool computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY);
     bool computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& bD);
 
+    void cacheSensorsOrdering();
+    void cacheDynamicVariablesOrdering();
+
     /**
      * Helper for mapping sensors measurements to the Y vector.
      */
@@ -389,6 +417,7 @@ class BerdyHelper
      * Buffer for sensor serialization.
      */
     VectorDynSize realSensorMeas;
+
 public:
     /**
      * Constructor
@@ -465,6 +494,19 @@ public:
      */
     bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                           MatrixDynSize & Y, VectorDynSize & bY);
+
+
+    /**
+     * Return the internal ordering of the sensors
+     *
+     * Measurements are expected to respect the internal sensors ordering
+     * Use this function to obtain the sensors ordering.
+     *
+     * @return the sensors ordering
+     */
+    const std::vector<BerdySensor>& getSensorsOrdering() const;
+
+    const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering() const;
 
     /**
      * Serialized dynamic variables from the separate buffers

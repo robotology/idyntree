@@ -72,7 +72,7 @@ namespace iDynTree
         std::ptrdiff_t offset;
         std::ptrdiff_t size;
 
-        bool isValid();
+        bool isValid() const;
         static IndexRange InvalidRange();
     };
 

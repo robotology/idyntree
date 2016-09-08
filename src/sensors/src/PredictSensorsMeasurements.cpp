@@ -71,7 +71,7 @@ bool predictSensorsMeasurements(const Model & model,
                                                     buf_internalWrenches,predictedMeasurement);
 }
 
-bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
+bool predictSensorsMeasurementsFromRawBuffers(const Model& /*model*/,
                                               const SensorsList& sensorsList,
                                               const Traversal& traversal,
                                               const LinkVelArray& buf_linkVel,

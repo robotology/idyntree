@@ -595,7 +595,8 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
 
     bool ok = iKin_chain.setH0(KDLtoYarp_position(H0_kdl));
     assert(ok);
-
+    (void) ok; 
+    
     yarp::sig::Matrix R(3,3);
     KDLtoYarp(H0_kdl.M,R);
 
@@ -644,6 +645,7 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
     assert(fabs(yarp::math::det(R)-1) < tol);
 
     assert(ret);
+    (void) ret;
 
     if( verbose > 2 )
         std::cout << "iKinLink HN " << HN_kdl << endl;

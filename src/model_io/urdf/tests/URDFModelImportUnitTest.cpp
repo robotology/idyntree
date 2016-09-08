@@ -12,6 +12,7 @@
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/ModelIO/URDFModelImport.h>
 #include <iDynTree/ModelIO/URDFDofsImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 
 #include <cassert>
 #include <cstdio>
@@ -73,10 +74,28 @@ void checkURDF(std::string fileName,
 
 
     ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfLinks(),expectedNrOfLinks);
-      (modelCopyAssigned.getNrOfJoints(),expectedNrOfJoints);
+    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfJoints(),expectedNrOfJoints);
     ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfDOFs(),expectedNrOfDOFs);
     ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfFrames(),expectedNrOfFrames);
     ASSERT_EQUAL_STRING(modelCopyAssigned.getLinkName(modelCopyAssigned.getDefaultBaseLink()),expectedDefaultBase);
+}
+
+void checkModelLoderForURDFFile(std::string urdfFile)
+{
+    ModelLoader loader;
+    bool result = loader.loadModelFromFile(urdfFile);
+    ASSERT_IS_TRUE(result && loader.isValid());
+}
+
+void checkModelLoaderFromURDFString(std::string urdfString, bool shouldBeCorrect = true)
+{
+    ModelLoader loader;
+    bool result = loader.loadModelFromString(urdfString);
+    if (shouldBeCorrect) {
+        ASSERT_IS_TRUE(result && loader.isValid());
+    } else {
+        ASSERT_IS_TRUE(!result && !loader.isValid());
+    }
 
 }
 
@@ -87,6 +106,8 @@ int main()
     checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,62,"root_link");
     checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,111,"root_link");
 
+    checkModelLoderForURDFFile(getAbsModelPath("/oneLink.urdf"));
+    checkModelLoaderFromURDFString("this is not an xml", false);
 
     return EXIT_SUCCESS;
 }

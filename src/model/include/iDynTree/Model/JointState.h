@@ -32,7 +32,7 @@ namespace iDynTree
         void resize(unsigned int nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
-        bool isConsistent(const iDynTree::Model & model);
+        bool isConsistent(const iDynTree::Model & model) const;
 
         ~JointPosDoubleArray();
     };
@@ -50,7 +50,7 @@ namespace iDynTree
         void resize(unsigned int nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
-        bool isConsistent(const iDynTree::Model & model);
+        bool isConsistent(const iDynTree::Model & model) const;
 
         ~JointDOFsDoubleArray();
     };
@@ -76,7 +76,7 @@ namespace iDynTree
         void resize(const unsigned int nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
-        bool isConsistent(const iDynTree::Model & model);
+        bool isConsistent(const iDynTree::Model & model) const;
 
         iDynTree::SpatialForceVector & operator()(const size_t dof);
         const iDynTree::SpatialForceVector & operator()(const size_t dof) const;
@@ -100,7 +100,7 @@ namespace iDynTree
         void resize(const unsigned int nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
-        bool isConsistent(const iDynTree::Model & model);
+        bool isConsistent(const iDynTree::Model & model) const;
 
         iDynTree::SpatialMotionVector & operator()(const size_t dof);
         const iDynTree::SpatialMotionVector & operator()(const size_t dof) const;
@@ -109,4 +109,4 @@ namespace iDynTree
     };
 }
 
-#endif /* IDYNTREE_JOINT_STATE_H */
+#endif

@@ -187,7 +187,7 @@ namespace iDynTree
         return status;
     }
 
-    bool PositionSemantics::check_inverse(const PositionSemantics& op)
+    bool PositionSemantics::check_inverse(const PositionSemantics& /*op*/)
     {
         return true;
     }

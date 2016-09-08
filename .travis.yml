@@ -46,9 +46,7 @@ before_script:
 
   # Use ccache also for clang and clang++ on linux
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "clang" ]; then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang; fi; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "clang" ]; then export CFLAGS="-Qunused-arguments"; fi; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CXX" == "clang++" ]; then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang++; fi; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CXX" == "clang++" ]; then export CXXFLAGS="-Qunused-arguments"; fi; fi
 
   # use superbuild for getting iDynTree dependencies
   - git clone https://github.com/robotology/codyco-superbuild

@@ -57,7 +57,7 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
  * to be in "rest" position (i.e. zero for revolute joints). The links eliminated
  * with this process are be added back to the reduced model as "frames",
  * and are copied in the same way all the additional frames of the lumped links.
- * 
+ *
  */
 bool createReducedModel(const Model& fullModel,
                         const std::vector<std::string>& jointsInReducedModel,

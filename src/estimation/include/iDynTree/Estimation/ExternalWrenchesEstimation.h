@@ -43,7 +43,6 @@ class LinkAccArray;
 class JointPosDoubleArray;
 class JointDOFsDoubleArray;
 
-
 /**
  * Type of a UnknownWrenchContact.
  */

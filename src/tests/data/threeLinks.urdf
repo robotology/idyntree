@@ -1,5 +1,5 @@
 <robot name="twoLinks">
-    <link name="base_link" />
+   <link name="base_link" />
    <joint name="base_fixed_joint" type="fixed">
         <origin xyz="0 0 0" rpy="0 -0 0" />
         <axis xyz="0 0 0" />
@@ -11,6 +11,21 @@
             <mass value="1" />
             <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
         </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                 <box size="1 1 1" />
+            </geometry>
+            <material name="Cyan">
+                <color rgba="0 1.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                 <box size="1 1 1" />
+            </geometry>
+        </collision>
     </link>
     <joint name="joint_1_2" type="continuous">
         <origin xyz="1 0 0" rpy="0 -0 0" />
@@ -24,6 +39,21 @@
             <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
             <origin xyz="1 0 0" rpy="0 -0 0" />
         </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                 <box size="1 1 1" />
+            </geometry>
+            <material name="Cyan">
+                <color rgba="0 1.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                 <box size="1 1 1" />
+            </geometry>
+        </collision>
     </link>
     <joint name="joint_2_3" type="continuous">
         <origin xyz="1 0 0" rpy="0 -0 0" />
@@ -37,5 +67,20 @@
             <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
             <origin xyz="1 0 0" rpy="0 -0 0" />
         </inertial>
+                <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                 <box size="1 1 1" />
+            </geometry>
+            <material name="Cyan">
+                <color rgba="0 1.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                 <box size="1 1 1" />
+            </geometry>
+        </collision>
     </link>
 </robot>

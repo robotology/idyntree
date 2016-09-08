@@ -35,7 +35,7 @@ void JointPosDoubleArray::resize(unsigned int nrOfPosCoords)
     this->zero();
 }
 
-bool JointPosDoubleArray::isConsistent(const Model& model)
+bool JointPosDoubleArray::isConsistent(const Model& model) const
 {
     return (this->size() == model.getNrOfPosCoords());
 }
@@ -67,7 +67,7 @@ void JointDOFsDoubleArray::resize(unsigned int nrOfDOFs)
     this->zero();
 }
 
-bool JointDOFsDoubleArray::isConsistent(const Model& model)
+bool JointDOFsDoubleArray::isConsistent(const Model& model) const
 {
     return (this->size() == model.getNrOfDOFs());
 }
@@ -97,7 +97,7 @@ void DOFSpatialForceArray::resize(const unsigned int nrOfDOFs)
     this->m_dofSpatialForce.resize(nrOfDOFs,iDynTree::SpatialForceVector::Zero());
 }
 
-bool DOFSpatialForceArray::isConsistent(const Model& model)
+bool DOFSpatialForceArray::isConsistent(const Model& model) const
 {
     return (this->m_dofSpatialForce.size() == model.getNrOfDOFs());
 }
@@ -134,7 +134,7 @@ void DOFSpatialMotionArray::resize(const iDynTree::Model& model)
     resize(model.getNrOfDOFs());
 }
 
-bool DOFSpatialMotionArray::isConsistent(const Model& model)
+bool DOFSpatialMotionArray::isConsistent(const Model& model) const
 {
     return (this->m_dofSpatialMotion.size() == model.getNrOfDOFs());
 }
