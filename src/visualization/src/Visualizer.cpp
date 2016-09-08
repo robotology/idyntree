@@ -77,7 +77,7 @@ struct ModelVisualization::ModelVisualizationPimpl
 /**
  * Dummy camera.
  */
-class DummyCamera : ICamera
+class DummyCamera : public ICamera
 {
 public:
     virtual ~DummyCamera() {};
@@ -90,7 +90,7 @@ public:
 /**
  * Dummy environment.
  */
-class DummyEnvironment : IEnvironment
+class DummyEnvironment : public IEnvironment
 {
 public:
     virtual ~DummyEnvironment() {};
@@ -269,6 +269,9 @@ bool ModelVisualization::init(const Model& model,
 
     return true;
 #else
+    IDYNTREE_UNUSED(model);
+    IDYNTREE_UNUSED(instanceName);
+    IDYNTREE_UNUSED(visualizer);
     reportError("ModelVisualization","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -307,6 +310,8 @@ bool ModelVisualization::setPositions(const Transform& world_H_base, const Vecto
     return ok;
 
 #else
+    IDYNTREE_UNUSED(world_H_base);
+    IDYNTREE_UNUSED(jointPos);
     reportError("ModelVisualization","setPositions","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -324,6 +329,7 @@ bool ModelVisualization::setLinkPositions(const LinkPositions& linkPos)
     this->pimpl->updateLinkPositions(linkPos);
     return true;
 #else
+    IDYNTREE_UNUSED(linkPos);
     reportError("ModelVisualization","setLinkPositions","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -423,6 +429,7 @@ bool Visualizer::init(const VisualizerOptions options)
 
     return true;
 #else
+    IDYNTREE_UNUSED(options);
     reportError("Visualizer","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -485,6 +492,8 @@ bool Visualizer::addModel(const Model& model, const std::string& instanceName)
 
     return true;
 #else
+    IDYNTREE_UNUSED(model);
+    IDYNTREE_UNUSED(instanceName);
     reportError("Visualizer","addModel","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -571,7 +580,8 @@ bool Visualizer::drawToFile(const std::string filename)
         reportError("Visualizer","drawToFile","Error in calling irr::video::IVideoDriver::createScreenShot method");
         return retValue = false;
     }
-
+#else
+    IDYNTREE_UNUSED(filename);
 #endif
 
     return retValue;
