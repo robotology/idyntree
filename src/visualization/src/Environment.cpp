@@ -11,7 +11,8 @@
 namespace iDynTree
 {
 
-Environment::Environment(): m_rootFrameNode(0),
+Environment::Environment(): m_sceneManager(0),
+                            m_rootFrameNode(0),
                             m_gridLinesVisible(true)
 {
 
@@ -55,5 +56,52 @@ bool Environment::setElementVisibility(const std::string elementKey, bool isVisi
 
     return retValue;
 }
+
+void Environment::setBackgroundColor(const ColorViz& backgroundColor)
+{
+    this->m_backgroundColor = idyntree2irrllicht(backgroundColor);
+}
+
+void Environment::setAmbientLight(const ColorViz& ambientLight)
+{
+    this->m_sceneManager->setAmbientLight(idyntree2irrllicht(ambientLight));
+}
+
+std::vector< std::string > Environment::getLights()
+{
+    std::vector< std::string > lightsNames;
+
+    for(size_t i=0; i < m_lights.size(); i++)
+    {
+        lightsNames.push_back(m_lights[i].name);
+    }
+
+    return lightsNames;
+}
+
+bool Environment::addLight(const std::string& lightName)
+{
+    for(size_t i=0; i < m_lights.size(); i++)
+    {
+        if( m_lights[i].name == lightName )
+        {
+            reportError("Environment","addLight","Light with the requested name already exists, impossible to add it.");
+        }
+    }
+
+    // Add a new light
+    pimpl->m_sceneManager->addLightSceneNode();
+}
+
+ILight& Environment::lightViz(const std::string& lightName)
+{
+
+}
+
+bool Environment::removeLight(const std::__cxx11::string& lightName)
+{
+}
+
+
 
 }

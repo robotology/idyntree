@@ -48,6 +48,122 @@ public:
 };
 
 /**
+ * Basic structure to encode color information
+ */
+class ColorViz
+{
+public:
+    /**
+     * Red component of the color.
+     */
+    float r;
+
+    /**
+     * Green component of the color.
+     */
+    float g;
+
+    /**
+     * Blue component of the color.
+     */
+    float b;
+
+    /**
+     * Alpha component of the color.
+     */
+    float a;
+
+    /**
+     * Default constructor (to white)
+     */
+    ColorViz();
+
+    /**
+     * Build a color from a Vector4 rgba.
+     */
+    ColorViz(const Vector4 & rgba);
+};
+
+enum LightType
+{
+    //! point light, it has a position in space and radiates light in all directions
+    POINT_LIGHT,
+    //! directional light, coming from a direction from an infinite distance
+    DIRECTIONAL_LIGHT
+};
+
+/**
+ * Interface to a light visualization.
+ */
+class ILight
+{
+    /**
+     * Denstructor
+     */
+    virtual ~ILight() = 0;
+
+    /**
+     * Set the light type.
+     */
+    virtual void setType(const LightType type) = 0;
+
+    /**
+     * Get the light type.
+     */
+    virtual LightType getType() = 0;
+
+    /**
+     * Set the linear position of the light w.r.t to the world.
+     */
+    virtual void setPosition(const iDynTree::Position & cameraPos) = 0;
+
+    /**
+     * Get the linear position of the light w.r.t to the world.
+     */
+    virtual iDynTree::Position getPosition() = 0;
+
+    /**
+     * Set the light direction (only meaningful if the light is DIRECTIONAL_LIGHT).
+     */
+    virtual void setDirection(const Direction& lightDirection) = 0;
+
+    /**
+     * Get the light direction (only meaningful if the light is DIRECTIONAL_LIGHT).
+     */
+    virtual Direction getDirection() = 0;
+
+    /**
+     * Set ambient color of the light.
+     */
+    virtual void setAmbientColor(const ColorViz & ambientColor) = 0;
+
+    /**
+     * Get ambient color of the light.
+     */
+    virtual ColorViz getAmbientColor() = 0;
+
+    /**
+     * Set specular color of the light.
+     */
+    virtual void setSpecularColor(const ColorViz & ambientColor) = 0;
+
+    /**
+     * Get specular color of the light.
+     */
+    virtual ColorViz getSpecularColor() = 0;
+
+    /**
+     * Set ambient color of the light.
+     */
+    virtual void setDiffuseColor(const ColorViz & ambientColor) = 0;
+
+    /**
+     * Get ambient color of the light.
+     */
+    virtual ColorViz getDiffuseColor() = 0;
+};
+
+/**
  * Interface to manipulate the elements in the enviroment (background, root frame, reference lines)
  */
 class IEnvironment
@@ -72,7 +188,41 @@ public:
      * @return true if the visibility is correctly setted, false otherwise.
      */
     virtual bool setElementVisibility(const std::string elementKey, bool isVisible) = 0;
+
+    /**
+     * Set the background color.
+     */
+    virtual void setBackgroundColor(const ColorViz & backgroundColor) = 0;
+
+    /**
+     * Set the ambient light of the enviroment.
+     */
+    virtual void setAmbientLight(const ColorViz & ambientLight) = 0;
+
+    /**
+     * Get the list of lights present in the visualization.
+     */
+    virtual std::vector<std::string> getLights() = 0;
+
+    /**
+     * Add a light.
+     */
+    virtual bool addLight(const std::string & lightName);
+
+    /**
+     * Return an interface to a light.
+     */
+    virtual ILight & lightViz(const std::string & lightName);
+
+    /**
+     * Remove a light from visualization.
+     *
+     * @return true if the light was present and was removed, false otherwise.
+     */
+    virtual bool removeLight(const std::string & lightName);
 };
+
+
 
 /**
  * Interface to the visualization of a model istance.
