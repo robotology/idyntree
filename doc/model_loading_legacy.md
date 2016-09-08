@@ -1,7 +1,7 @@
 # How to load Sensor information in iDynTree (Legacy KDL-based functions)
 
 **Warning: this page describe how sensor information is loaded from URDF files using the legacy KDL-based function [`iDynTree::sensorsListFromURDF`](http://wiki.icub.org/codyco/dox/html/idyntree/html/namespaceiDynTree.html#a2886164ec0bdd0526a5bbdd1c9b1dacc). 
-  For the URDF extensions used in the modern iDynTree-native code, please check [model_loading](model_loading)**. 
+  For the URDF extensions used in the modern iDynTree-native code, please check [model_loading](model_loading.md)**. 
   
 ### Gazebo URDF Sensor extensions 
 The old KDL-based joint torque estimation classes are loading information on the Six Axis F/T sensors present in the model using the Gazebo URDF extensions documented in [http://gazebosim.org/tutorials/?tut=ros_urdf](http://gazebosim.org/tutorials/?tut=ros_urdf). 
