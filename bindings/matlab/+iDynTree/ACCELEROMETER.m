@@ -1,7 +1,7 @@
 function v = ACCELEROMETER()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = iDynTreeMEX(0, 1);
+    vInitialized = iDynTreeMEX(0, 4);
   end
   v = vInitialized;
 end

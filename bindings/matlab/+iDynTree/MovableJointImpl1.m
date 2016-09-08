@@ -2,33 +2,33 @@ classdef MovableJointImpl1 < iDynTree.IJoint
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(803, self);
+        iDynTreeMEX(805, self);
         self.swigPtr=[];
       end
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(804, self, varargin{:});
-    end
-    function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(805, self, varargin{:});
-    end
-    function varargout = setIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(806, self, varargin{:});
     end
-    function varargout = getIndex(self,varargin)
+    function varargout = getNrOfDOFs(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(807, self, varargin{:});
     end
-    function varargout = setPosCoordsOffset(self,varargin)
+    function varargout = setIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(808, self, varargin{:});
     end
-    function varargout = getPosCoordsOffset(self,varargin)
+    function varargout = getIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(809, self, varargin{:});
     end
-    function varargout = setDOFsOffset(self,varargin)
+    function varargout = setPosCoordsOffset(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(810, self, varargin{:});
     end
-    function varargout = getDOFsOffset(self,varargin)
+    function varargout = getPosCoordsOffset(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(811, self, varargin{:});
+    end
+    function varargout = setDOFsOffset(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(812, self, varargin{:});
+    end
+    function varargout = getDOFsOffset(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(813, self, varargin{:});
     end
     function self = MovableJointImpl1(varargin)
       self@iDynTree.IJoint(SwigRef.Null);

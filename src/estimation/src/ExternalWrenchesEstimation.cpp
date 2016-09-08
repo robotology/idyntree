@@ -306,6 +306,7 @@ Wrench getMeasuredWrench(const SensorsList & sensors_list,
 
         bool ok = sensor_measures.getMeasurement(SIX_AXIS_FORCE_TORQUE,ft,measured_wrench_by_sensor);
 
+        IDYNTREE_UNUSED(ok);
         assert(ok);
 
         // If the sensor with index ft is not attached to the link

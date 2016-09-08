@@ -1,7 +1,7 @@
 function v = NET_EXT_WRENCH()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = iDynTreeMEX(0, 12);
+    vInitialized = iDynTreeMEX(0, 15);
   end
   v = vInitialized;
 end
