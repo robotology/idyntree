@@ -36,17 +36,19 @@ ILight::~ILight()
 {
 }
 
-ColorViz::ColorViz()
+ColorViz::ColorViz(): r(1.0), g(1.0), b(1.0), a(1.0)
+{
+    // default color is white
+}
+
+ColorViz::ColorViz(float _r, float _g, float _b, float _a): r(_r), g(_g), b(_b), a(_a)
+{
+}
+
+ColorViz::ColorViz(const Vector4& rgba): r(rgba(0)), g(rgba(1)), b(rgba(2)), a(rgba(3))
 {
 
 }
-
-ColorViz::ColorViz()
-{
-
-}
-
-
 
 struct ModelVisualization::ModelVisualizationPimpl
 {
@@ -88,30 +90,6 @@ struct ModelVisualization::ModelVisualizationPimpl
         m_isValid = false;
         m_instanceName = "";
     }
-};
-
-/**
- * Dummy camera.
- */
-class DummyCamera : public ICamera
-{
-public:
-    virtual ~DummyCamera() {};
-
-    virtual void setPosition(const iDynTree::Position &) {};
-    virtual void setTarget(const iDynTree::Position &) {};
-    virtual void setUpVector(const Direction&) {};
-};
-
-/**
- * Dummy environment.
- */
-class DummyEnvironment : public IEnvironment
-{
-public:
-    virtual ~DummyEnvironment() {};
-    virtual bool setElementVisibility(const std::string /*elementKey*/, bool /*isVisible*/) {return false;}
-    virtual std::vector< std::string > getElements() {  return std::vector< std::string >(); }
 };
 
 struct Visualizer::VisualizerPimpl
@@ -437,9 +415,18 @@ bool Visualizer::init(const VisualizerOptions options)
     pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr);
     pimpl->m_environment.m_gridLinesVisible = true;
     pimpl->m_environment.m_sceneManager = pimpl->m_irrSmgr;
-    pimpl->m_environment.m_backgroundColor = SColor(255,50,50,50);
+    pimpl->m_environment.m_backgroundColor = irr::video::SColorf(0.3,0.3,0.3,1.0);
 
+    // Add default light (sun, directional light pointing backwards
     addVizLights(pimpl->m_irrSmgr);
+    std::string sunName = "sun";
+    pimpl->m_environment.addLight(sunName);
+    ILight & sun = pimpl->m_environment.lightViz(sunName);
+    sun.setDirection(iDynTree::Direction(0,0,1));
+    sun.setDiffuseColor(iDynTree::ColorViz(0.7,0.7,0.7,1.0));
+    sun.setSpecularColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
+    sun.setAmbientColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
+
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
 
     pimpl->m_isInitialized = true;

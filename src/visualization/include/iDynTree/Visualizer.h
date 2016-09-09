@@ -79,6 +79,11 @@ public:
     ColorViz();
 
     /**
+     * Constructor for rgba.
+     */
+    ColorViz(float r, float g, float b, float a);
+
+    /**
      * Build a color from a Vector4 rgba.
      */
     ColorViz(const Vector4 & rgba);
@@ -97,10 +102,16 @@ enum LightType
  */
 class ILight
 {
+public:
     /**
      * Denstructor
      */
     virtual ~ILight() = 0;
+
+    /**
+     * Get the name.
+     */
+    virtual const std::string & getName() const = 0;
 
     /**
      * Set the light type.
@@ -207,19 +218,19 @@ public:
     /**
      * Add a light.
      */
-    virtual bool addLight(const std::string & lightName);
+    virtual bool addLight(const std::string & lightName) = 0;
 
     /**
      * Return an interface to a light.
      */
-    virtual ILight & lightViz(const std::string & lightName);
+    virtual ILight & lightViz(const std::string & lightName) = 0;
 
     /**
      * Remove a light from visualization.
      *
      * @return true if the light was present and was removed, false otherwise.
      */
-    virtual bool removeLight(const std::string & lightName);
+    virtual bool removeLight(const std::string & lightName) = 0;
 };
 
 
