@@ -70,6 +70,12 @@ set(swig_other_sources)
 swig_compile_module(${mexname} matlab)
 swig_link_libraries(${mexname} ${Matlab_LIBRARIES} ${IDYNTREE_LIBRARIES} idyntree-core)
 set_target_properties(${mexname} PROPERTIES PREFIX "" SUFFIX .${Matlab_MEX_EXTENSION})
+# entry point in the mex file + taking care of visibility and symbol clashes.
+if(WIN32)
+  set_target_properties(${mexname}
+      PROPERTIES
+      DEFINE_SYMBOL "DLL_EXPORT_SYM=__declspec(dllexport)")
+endif()
 
 # Install the generated front-end to ${CMAKE_INSTALL_PREFIX}/matlab_tb
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/+iDynTree DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
