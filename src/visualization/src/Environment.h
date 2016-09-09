@@ -10,6 +10,7 @@
 
 #include <iDynTree/Visualizer.h>
 #include "Light.h"
+#include "DummyImplementations.h"
 
 #include <irrlicht.h>
 
@@ -23,7 +24,10 @@ public:
     irr::scene::ISceneNode * m_rootFrameNode;
     bool m_gridLinesVisible;
     irr::video::SColorf m_backgroundColor;
-    std::vector<Light> m_lights;
+
+    std::vector<Light*> m_lights;
+    DummyLight          m_dummyLight;
+
 
     Environment();
     virtual ~Environment();

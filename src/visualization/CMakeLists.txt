@@ -13,6 +13,8 @@ if(IDYNTREE_USES_IRRLICHT)
     list(APPEND iDynTree_visualization_source src/Camera.cpp)
     list(APPEND iDynTree_visualization_private_headers src/Environment.h)
     list(APPEND iDynTree_visualization_source src/Environment.cpp)
+    list(APPEND iDynTree_visualization_private_headers src/Light.h)
+    list(APPEND iDynTree_visualization_source src/Light.cpp)
 endif()
 
 source_group("Source Files" FILES ${iDynTree_visualization_source})

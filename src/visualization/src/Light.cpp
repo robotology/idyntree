@@ -43,6 +43,32 @@ Light::Light(): m_lightSceneNode(0)
 
 Light::~Light()
 {
+    removeLight();
+}
+
+void Light::addLight(const std::string _name, irr::scene::ILightSceneNode* _lightSceneNode)
+{
+    if( m_lightSceneNode )
+    {
+        removeLight();
+    }
+
+    m_name = _name;
+    m_lightSceneNode = _lightSceneNode;
+}
+
+void Light::removeLight()
+{
+    if( m_lightSceneNode )
+    {
+        m_lightSceneNode->remove();
+        m_lightSceneNode = 0;
+    }
+}
+
+const std::string& Light::getName() const
+{
+    return m_name;
 }
 
 void Light::setType(const LightType type)
@@ -84,7 +110,7 @@ Position Light::getPosition()
 {
     if(m_lightSceneNode)
     {
-        return irr2idyntree_pos(m_lightSceneNode->getLightType());
+        return irr2idyntree_pos(m_lightSceneNode->getPosition());
     }
 
     reportError("Light","getPosition","Invalid light node");
@@ -149,7 +175,7 @@ ColorViz Light::getAmbientColor()
     }
 
     reportError("Light","getAmbientColor","Invalid light node");
-    return POINT_LIGHT;
+    return ColorViz();
 }
 
 void Light::setDiffuseColor(const ColorViz& ambientColor)
@@ -172,7 +198,7 @@ ColorViz Light::getDiffuseColor()
     }
 
     reportError("Light","getDiffuseColor","Invalid light node");
-    return POINT_LIGHT;
+    return ColorViz();
 }
 
 void Light::setSpecularColor(const ColorViz& ambientColor)
@@ -195,7 +221,7 @@ ColorViz Light::getSpecularColor()
     }
 
     reportError("Light","getSpecularColor","Invalid light node");
-    return POINT_LIGHT;
+    return ColorViz();
 }
 
 }

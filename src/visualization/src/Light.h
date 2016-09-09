@@ -18,19 +18,16 @@ namespace iDynTree
 class Light : public ILight
 {
     irr::scene::ILightSceneNode * m_lightSceneNode;
-    std::string name;
+    std::string m_name;
 public:
-
-
     Light();
     virtual ~Light();
-
-    std::string getName() const;
 
     void addLight(const std::string name,
                   irr::scene::ILightSceneNode * lightSceneNode);
     void removeLight();
 
+    virtual const std::string & getName() const;
     virtual void setType(const LightType type);
     virtual LightType getType();
     virtual void setPosition(const iDynTree::Position & cameraPos);
