@@ -18,7 +18,7 @@ Environment::Environment(): m_sceneManager(0),
 
 }
 
-Environment::~Environment()
+void Environment::close()
 {
     for(size_t i=0; i < m_lights.size(); i++)
     {
@@ -28,6 +28,11 @@ Environment::~Environment()
     }
 
     m_lights.resize(0);
+}
+
+Environment::~Environment()
+{
+    close();
 }
 
 std::vector< std::string > Environment::getElements()

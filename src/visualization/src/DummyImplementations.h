@@ -5,6 +5,9 @@
  *
  */
 
+#ifndef IDYNTREE_DUMMYIMPLEMENTATIONS_H
+#define IDYNTREE_DUMMYIMPLEMENTATIONS_H
+
 #include <iDynTree/Visualizer.h>
 
 namespace iDynTree
@@ -21,17 +24,6 @@ public:
     virtual void setPosition(const iDynTree::Position &) {};
     virtual void setTarget(const iDynTree::Position &) {};
     virtual void setUpVector(const Direction&) {};
-};
-
-/**
- * Dummy environment.
- */
-class DummyEnvironment : public IEnvironment
-{
-public:
-    virtual ~DummyEnvironment() {};
-    virtual bool setElementVisibility(const std::string /*elementKey*/, bool /*isVisible*/) {return false;}
-    virtual std::vector< std::string > getElements() {  return std::vector< std::string >(); }
 };
 
 /**
@@ -58,4 +50,25 @@ public:
     virtual ColorViz getDiffuseColor()  { return ColorViz(); }
 };
 
+/**
+ * Dummy environment.
+ */
+class DummyEnvironment : public IEnvironment
+{
+    DummyLight m_dummyLight;
+public:
+    virtual ~DummyEnvironment() {};
+    virtual bool setElementVisibility(const std::string /*elementKey*/, bool /*isVisible*/) {return false;}
+    virtual std::vector< std::string > getElements() {  return std::vector< std::string >(); }
+    virtual void setBackgroundColor(const ColorViz & ) {}
+    virtual void setAmbientLight(const ColorViz &) {};
+    virtual std::vector<std::string> getLights() { return std::vector<std::string>(); }
+    virtual bool addLight(const std::string &) { return false; }
+    virtual ILight & lightViz(const std::string &) { return m_dummyLight; }
+    virtual bool removeLight(const std::string &) { return false; }
+};
+
+
 }
+
+#endif

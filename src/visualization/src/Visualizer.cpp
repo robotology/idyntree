@@ -19,6 +19,8 @@
 #include "Environment.h"
 #endif
 
+#include "DummyImplementations.h"
+
 #include <cassert>
 
 namespace iDynTree
@@ -415,14 +417,15 @@ bool Visualizer::init(const VisualizerOptions options)
     pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr);
     pimpl->m_environment.m_gridLinesVisible = true;
     pimpl->m_environment.m_sceneManager = pimpl->m_irrSmgr;
-    pimpl->m_environment.m_backgroundColor = irr::video::SColorf(0.3,0.3,0.3,1.0);
+    pimpl->m_environment.m_backgroundColor = irr::video::SColorf(0.0,0.4,0.4,1.0);
 
     // Add default light (sun, directional light pointing backwards
     addVizLights(pimpl->m_irrSmgr);
     std::string sunName = "sun";
     pimpl->m_environment.addLight(sunName);
     ILight & sun = pimpl->m_environment.lightViz(sunName);
-    sun.setDirection(iDynTree::Direction(0,0,1));
+    sun.setType(DIRECTIONAL_LIGHT);
+    sun.setDirection(iDynTree::Direction(0,0,-1));
     sun.setDiffuseColor(iDynTree::ColorViz(0.7,0.7,0.7,1.0));
     sun.setSpecularColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
     sun.setAmbientColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
@@ -513,23 +516,27 @@ void Visualizer::draw()
         return;
     }
 
-    pimpl->m_irrDriver->beginScene(true,true, irr::video::SColor(255,255,255,255));
+
+    pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor());
+
+    pimpl->m_irrSmgr->drawAll();
 
     // Draw base plane
     if( pimpl->m_environment.m_gridLinesVisible )
     {
         for(int i=-10; i <= 10; i++ )
         {
-            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(-10,i,0),
-                                           irr::core::vector3df(10,i,0),
+            // For some reason, we seem to draw lines in the y-z plane to visualize
+            // them in the x-y plane. This needs to be investigated
+            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(0,-10,i),
+                                           irr::core::vector3df(0,10,i),
                                            irr::video::SColor(100,100,100,100));
-            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(i,-10,0),
-                                           irr::core::vector3df(i,10,0),
+            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(0,i,-10),
+                                           irr::core::vector3df(0,i,10),
                                            irr::video::SColor(100,100,100,100));
         }
     }
 
-    pimpl->m_irrSmgr->drawAll();
     pimpl->m_irrDriver->endScene();
 
     int fps = pimpl->m_irrDriver->getFPS();
@@ -642,6 +649,8 @@ void Visualizer::close()
     {
         return;
     }
+
+    pimpl->m_environment.close();
 
     pimpl->m_irrDevice->closeDevice();
     pimpl->m_irrDevice->drop();
