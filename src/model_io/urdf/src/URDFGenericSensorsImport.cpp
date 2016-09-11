@@ -29,29 +29,6 @@
 namespace iDynTree
 {
 
-struct GenericSensorData
-{
-    enum { LINK, JOINT} parentObject;
-    std::string parentObjectName;
-    std::string sensorName;
-    SensorType sensorType;
-    iDynTree::Transform sensorPose;
-    unsigned int updateRate;
-};
-
-typedef GenericSensorData AccelerometerData;
-typedef GenericSensorData GyroscopeData;
-
-struct GenericFTSensorData : GenericSensorData
-{
-     enum { PARENT_LINK_FRAME ,
-         CHILD_LINK_FRAME  ,
-         SENSOR_FRAME } frame;
-     enum { PARENT_TO_CHILD,
-         CHILD_TO_PARENT }
-         measure_direction;
-};
-
 std::vector<std::string> &splitString(const std::string &s, std::vector<std::string> &elems)
 {
     std::stringstream ss(s);
