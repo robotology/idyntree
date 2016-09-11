@@ -30,6 +30,7 @@ public:
 
 
     Environment();
+    void close();
     virtual ~Environment();
 
     virtual std::vector< std::string > getElements();
