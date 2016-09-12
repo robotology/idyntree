@@ -5,22 +5,28 @@
 set(iDynTree_visualization_source src/Visualizer.cpp)
 set(iDynTree_visualization_header include/iDynTree/Visualizer.h)
 set(iDynTree_visualization_private_headers)
+set(iDynTree_visualization_private_source)
+
 
 if(IDYNTREE_USES_IRRLICHT)
     # Some files are compiled only when irrlicht is available
-    list(APPEND iDynTree_visualization_private_headers src/IrrlichtUtils.h)
-    list(APPEND iDynTree_visualization_private_headers src/Camera.h)
-    list(APPEND iDynTree_visualization_source src/Camera.cpp)
-    list(APPEND iDynTree_visualization_private_headers src/Environment.h)
-    list(APPEND iDynTree_visualization_source src/Environment.cpp)
-    list(APPEND iDynTree_visualization_private_headers src/Light.h)
-    list(APPEND iDynTree_visualization_source src/Light.cpp)
-    list(APPEND iDynTree_visualization_private_headers src/FloorGridSceneNode.h)
-    list(APPEND iDynTree_visualization_source src/FloorGridSceneNode.cpp)
+    set(iDynTree_visualization_private_headers src/IrrlichtUtils.h
+                                               src/Camera.h
+                                               src/Environment.h
+                                               src/ModelVisualization.h
+                                               src/Light.h
+                                               src/FloorGridSceneNode.h)
+    set(iDynTree_visualization_private_source  src/Camera.cpp
+                                               src/Environment.cpp
+                                               src/ModelVisualization.cpp
+                                               src/Light.cpp
+                                               src/FloorGridSceneNode.cpp)
 endif()
 
 source_group("Source Files" FILES ${iDynTree_visualization_source})
 source_group("Header Files" FILES ${iDynTree_visualization_header})
+source_group("Private Source Files" FILES ${iDynTree_visualization_source})
+source_group("Private Header Files" FILES ${iDynTree_visualization_header})
 
 # share headers with all iDynTree targets
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -34,7 +40,8 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 
 
 set(libraryname idyntree-visualization)
-add_library(${libraryname} ${iDynTree_visualization_source} ${iDynTree_visualization_header} ${iDynTree_visualization_private_headers})
+add_library(${libraryname} ${iDynTree_visualization_source} ${iDynTree_visualization_header}
+                           ${iDynTree_visualization_private_source} ${iDynTree_visualization_private_headers})
 
 set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_visualization_header}")
 
