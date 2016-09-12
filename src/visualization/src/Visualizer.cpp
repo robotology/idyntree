@@ -519,15 +519,13 @@ void Visualizer::draw()
 
     pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor());
 
-    pimpl->m_irrSmgr->drawAll();
-
     // Draw base plane
     if( pimpl->m_environment.m_gridLinesVisible )
     {
         for(int i=-10; i <= 10; i++ )
         {
             // For some reason, we seem to draw lines in the y-z plane to visualize
-            // them in the x-y plane. This needs to be investigated
+            // them in the x-y plane. This needs to be investigatedrlicht draw
             pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(0,-10,i),
                                            irr::core::vector3df(0,10,i),
                                            irr::video::SColor(100,100,100,100));
@@ -536,6 +534,8 @@ void Visualizer::draw()
                                            irr::video::SColor(100,100,100,100));
         }
     }
+
+    pimpl->m_irrSmgr->drawAll();
 
     pimpl->m_irrDriver->endScene();
 
