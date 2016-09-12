@@ -21,8 +21,9 @@ class Environment : public IEnvironment
 {
 public:
     irr::scene::ISceneManager * m_sceneManager;
+    irr::scene::ISceneNode * m_envNode;
     irr::scene::ISceneNode * m_rootFrameNode;
-    bool m_gridLinesVisible;
+    irr::scene::ISceneNode * m_floorGridNode;
     irr::video::SColorf m_backgroundColor;
 
     std::vector<Light*> m_lights;
