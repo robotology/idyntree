@@ -18,6 +18,8 @@
 
 #include <iDynTree/Core/EigenHelpers.h>
 
+#include "FloorGridSceneNode.h"
+
 namespace iDynTree
 {
 
@@ -222,8 +224,8 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 }
 
 inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
-                                             irr::f32 arrowLenght=1.0,
-                                             irr::scene::ISceneNode * parentNode=0)
+                                             irr::scene::ISceneNode * parentNode=0,
+                                             irr::f32 arrowLenght=1.0)
 {
     irr::u32 alphaLev = 20;
     irr::video::SMaterial transRed;
@@ -269,6 +271,14 @@ inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
     zArrow->getMaterial(1) = transBlue;
 
     return frameNode;
+}
+
+inline irr::scene::ISceneNode * addFloorGridNode(irr::scene::ISceneManager* smgr,
+                                                irr::scene::ISceneNode * parentNode=0)
+{
+    irr::scene::ISceneNode * retPtr;
+    retPtr = new CFloorGridSceneNode(parentNode,smgr);
+    return retPtr;
 }
 
 inline void setWorldHNode(irr::scene::ISceneNode* node, const iDynTree::Transform & trans)

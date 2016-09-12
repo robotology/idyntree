@@ -13,7 +13,7 @@ namespace iDynTree
 
 Environment::Environment(): m_sceneManager(0),
                             m_rootFrameNode(0),
-                            m_gridLinesVisible(true)
+                            m_floorGridNode(0)
 {
 
 }
@@ -49,7 +49,7 @@ std::vector< std::string > Environment::getElements()
 bool Environment::setElementVisibility(const std::string elementKey, bool isVisible)
 {
     bool retValue = false;
-    if( elementKey == "floor_grid"  )
+    if( elementKey == "root_frame"  )
     {
         if( m_rootFrameNode )
         {
@@ -59,11 +59,14 @@ bool Environment::setElementVisibility(const std::string elementKey, bool isVisi
         }
     }
 
-    if( elementKey == "root_frame" )
+    if( elementKey == "floor_grid" )
     {
-        m_gridLinesVisible = isVisible;
+        if( m_floorGridNode )
+        {
+            m_floorGridNode->setVisible(isVisible);
 
-        retValue = true;
+            retValue = true;
+        }
     }
 
     return retValue;

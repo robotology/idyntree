@@ -414,8 +414,9 @@ bool Visualizer::init(const VisualizerOptions options)
     pimpl->m_irrDevice->getCursorControl()->setVisible(true);
 
     // Add environment
-    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr);
-    pimpl->m_environment.m_gridLinesVisible = true;
+    pimpl->m_environment.m_envNode       = pimpl->m_irrSmgr->addEmptySceneNode();
+    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode);
+    pimpl->m_environment.m_floorGridNode = addFloorGridNode(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode);
     pimpl->m_environment.m_sceneManager = pimpl->m_irrSmgr;
     pimpl->m_environment.m_backgroundColor = irr::video::SColorf(0.0,0.4,0.4,1.0);
 
@@ -518,22 +519,6 @@ void Visualizer::draw()
 
 
     pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor());
-
-    // Draw base plane
-    if( pimpl->m_environment.m_gridLinesVisible )
-    {
-        for(int i=-10; i <= 10; i++ )
-        {
-            // For some reason, we seem to draw lines in the y-z plane to visualize
-            // them in the x-y plane. This needs to be investigatedrlicht draw
-            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(0,-10,i),
-                                           irr::core::vector3df(0,10,i),
-                                           irr::video::SColor(100,100,100,100));
-            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(0,i,-10),
-                                           irr::core::vector3df(0,i,10),
-                                           irr::video::SColor(100,100,100,100));
-        }
-    }
 
     pimpl->m_irrSmgr->drawAll();
 
