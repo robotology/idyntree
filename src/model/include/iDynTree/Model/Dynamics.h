@@ -25,7 +25,23 @@ namespace iDynTree
     class JointDOFsDoubleArray;
     class DOFSpatialForceArray;
     class DOFSpatialMotionArray;
+    class SpatialMomentum;
 
+    /**
+     * \ingroup iDynTreeModel
+     *
+     * Compute the total linear and angular momentum of a robot, expressed in the world frame.
+     *
+     * @param[in]  model the used model,
+     * @param[in]  linkPositions linkPositions(l) contains the world_H_link transform.
+     * @param[in]  linkVels linkVels(l) contains the link l velocity expressed in l frame.
+     * @param[out] totalMomentum total momentum, expressed in world frame.
+     * @return true if all went well, false otherwise.
+     */
+    bool ComputeLinearAndAngularMomentum(const Model& model,
+                                         const LinkPositions& linkPositions,
+                                         const LinkVelArray&  linkVels,
+                                               SpatialMomentum& totalMomentum);
 
     bool RNEADynamicPhase(const iDynTree::Model & model,
                           const iDynTree::Traversal & traversal,
@@ -115,3 +131,4 @@ namespace iDynTree
 
 
 #endif
+

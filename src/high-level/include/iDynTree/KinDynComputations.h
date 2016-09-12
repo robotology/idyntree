@@ -11,8 +11,10 @@
 #include <string>
 
 #include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Core/MatrixDynSize.h>
 
 #include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/FreeFloatingMatrices.h>
 
 namespace iDynTree
 {
@@ -22,17 +24,29 @@ class MatrixDynSize;
 class Transform;
 class Twist;
 class SpatialInertia;
+class SpatialMomentum;
 class ClassicalAcc;
 class SpatialAcc;
 class Wrench;
 class Model;
 class Traversal;
+class Position;
+
 
 /**
  * \ingroup iDynTreeHighLevel
  *
+ * \brief High level stateful class wrapping several kinematics and dynamics algorithms.
+ *
  * The kinematics dynamics computations class is an high level class stateful to access
  * several algorithms related to kinematics and dynamics of free floating robot systems.
+ *
+ * This class supports three possible convention to express the floating base information :
+ * the inertial, the body-fixed and the mixed convention.
+ * To get more info on this three conventions, check section II.C  of
+ * On  the  Base  Frame  Choice  in  Free-Floating  Mechanical  Systems
+ * and  its  Connection  to  Centroidal  Dynamics
+ * https://traversaro.github.io/preprints/changebase.pdf
  *
  */
 class KinDynComputations {
@@ -49,12 +63,16 @@ private:
     // exits without further computations
     void computeFwdKinematics();
 
-    // Invalidate the cache of intermediated results (called by setRobotState
+    // Make sure that (if necessary) mass matrix is updated
+    // If it was already called before the last call to setRobotState,
+    // exits without further computations
+    void computeRawMassMatrixAndTotalMomentum();
+
+    // Invalidate the cache of intermediated results (called by setRobotState)
     void invalidateCache();
 
     // Resize internal data structures after a model has been successfully loaded
     void resizeInternalDataStructures();
-
 public:
 
     /**
@@ -109,12 +127,21 @@ public:
     bool loadRobotModelFromString(const std::string & modelString, const std::string & filetype="urdf");
 
     /**
-     * Return true if the models for the robot, sensors and regressors have been correctly
-     * loaded and the regressor generator is ready to compute regressors.
+     * Return true if the models for the robot have been correctly.
      *
-     * @return True if the regressor generator is correctly configure, false otherwise.
+     * @return True if the class has been correctly configure, false otherwise.
      */
-    bool isValid();
+    bool isValid() const;
+
+    /**
+     * Get the used FrameVelocityConvention.
+     */
+    bool setFrameVelocityRepresentation(const FrameVelocityRepresentation framVelRepr) const;
+
+    /**
+     * Get the used FrameVelocityConvention.
+     */
+    FrameVelocityRepresentation getFrameVelocityRepresentation() const;
     //@}
 
 
@@ -186,8 +213,6 @@ public:
      */
     //std::string getDescriptionOfLinks();
 
-
-
     /**
      * Get the name of the link considered as the floating base.
      *
@@ -212,6 +237,7 @@ public:
      */
     //@{
 
+    const Model & model() const;
     const Model & getRobotModel() const;
 
     //@}
@@ -222,22 +248,30 @@ public:
     //@{
 
     /**
+     * @brief Set the (internal) joint positions.
+     *
+     * \note This method sets only the joint positions, leaving all the other components of the state to their previous value.
+     *
+     * @param[in] s A vector of dimension this->model().getNrOfPosCoords() .
+     * @return true if all went well, false otherwise.
+     */
+    bool setJointPos(const iDynTree::VectorDynSize& s);
+
+    /**
      * Set the state for the robot (floating base)
      *
-     * @param q a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
-     * @param q_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
      * @param world_T_base  the homogeneous transformation that transforms position vectors expressed in the base reference frame
      *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .
-     * @param base_velocity The twist (linear/angular velocity) of the base, expressed in the world orientation frame and with respect
-     *                      to the base origin.
-     *
-     * \note this convention is the same used in the wholeBodyInterface classes.
+     * @param s a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
+     * @param base_velocity The twist (linear/angular velocity) of the base, expressed with the convention specified by the used FrameVelocityConvention.
+     * @param s_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
+     * @param world_gravity a 3d vector of the gravity acceleration vector, expressed in the world/inertial frame.
      *
      */
     bool setRobotState(const iDynTree::Transform &world_T_base,
-                       const iDynTree::VectorDynSize& q,
+                       const iDynTree::VectorDynSize& s,
                        const iDynTree::Twist& base_velocity,
-                       const iDynTree::VectorDynSize& q_dot,
+                       const iDynTree::VectorDynSize& s_dot,
                        const iDynTree::Vector3& world_gravity);
 
     /**
@@ -247,8 +281,8 @@ public:
      *  base_velocity     = iDynTree::Twist::Zero();
      *
      */
-    bool setRobotState(const iDynTree::VectorDynSize &q,
-                       const iDynTree::VectorDynSize &q_dot,
+    bool setRobotState(const iDynTree::VectorDynSize &s,
+                       const iDynTree::VectorDynSize &s_dot,
                        const iDynTree::Vector3& world_gravity);
 
     /**
@@ -259,6 +293,12 @@ public:
 
     bool getJointPos(iDynTree::VectorDynSize &q);
     bool getJointVel(iDynTree::VectorDynSize &dq);
+
+    /**
+     * Get the n+6 velocity of the model.
+     * Obtained by stacking the output of getBaseTwist and of getJointVel .
+     */
+    bool getModelVel(iDynTree::VectorDynSize &nu);
 
     //@}
 
@@ -317,7 +357,7 @@ public:
      * This is a variant of the getRelativeTransform in which the orientation and origin part of both
      * side of the transform are explicited.
      *
-     * \todo provide mode detailed documentation. 
+     * \todo provide mode detailed documentation.
      *
      */
     iDynTree::Transform getRelativeTransformExplicit(const iDynTree::FrameIndex refFrameOriginIndex,
@@ -334,6 +374,122 @@ public:
     iDynTree::Transform getRelativeTransform(const std::string & refFrameName,
                                              const std::string & frameName);
 
+    //@}
+
+    /**
+      * @name Methods to get frame velocity information given the current state.
+      */
+    //@{
+
+    /**
+     * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation .
+     */
+    iDynTree::Twist getFrameVel(const std::string & frameName);
+
+    /**
+     * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation .
+     */
+    iDynTree::Twist getFrameVel(const FrameIndex frameIdx);
+
+    bool getFrameFreeFloatingJacobian(const std::string & frameName,
+                                      iDynTree::MatrixDynSize & outJacobian);
+
+    bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
+                                      iDynTree::MatrixDynSize & outJacobian);
+
+    // Todo getFrameRelativeVel and getFrameRelativeJacobian to match the getRelativeTransform behaviour
+
+    //@}
+
+
+    /**
+      * @name Methods to get quantities related to centroidal dynamics.
+      *
+      * \note Implementation incomplete, please refrain to use until this warning has been removed.
+      */
+    //@{
+
+    /**
+     * Return the center of mass position.
+     *
+     * Return the center of mass position, expressed in the world/inertial frame.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    iDynTree::Position getCenterOfMassPosition();
+
+    /**
+     * Return the center of mass velocity, with respect to the world/inertial frame.
+     *
+     * \note This is the derivative of the quantity returned by getCenterOfMassPosition .
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    //iDynTree::Vector3 getCenterOfMassVelocity();
+
+    /**
+     * Return the center of mass jacobian, i.e. the 3 \times (n+6) matrix such that:
+     *  getCenterOfMassVelocity() == getCenterOfMassJacobian() * \nu .
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    //bool getCenterOfMassJacobian(MatrixDynSize & comJacobian);
+
+    /**
+     * Get the average velocity of the robot.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note the linear part of this twist correspond to the getCenterOfMassVelocity only if the FrameVelocityConvention is set to MIXED.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    iDynTree::Twist getAverageVelocity();
+
+    /**
+     * Get the jacobian of the average velocity of the robot.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note the linear part of this jacobian correspond to the getCenterOfMassVelocity only if the FrameVelocityConvention is set to MIXED.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    bool getAverageVelocityJacobian(MatrixDynSize & avgVelocityJacobian);
+
+    /**
+     * Get the linear and angular momentum of the robot.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    iDynTree::SpatialMomentum getLinearAngularMomentum();
+
+    /**
+     * Get the linear and angular momentum of the robot.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     */
+    bool getLinearAngularMomentumJacobian(MatrixDynSize & linAngMomentumJacobian);
+
+    //@}
+
+
+    /**
+      * @name Methods to get quantities related to dynamics matrices.
+      */
+    //@{
+
+
+
+    //@}
+
+    /**
+      * @name Methods to unconstrained free floating dynamics.
+      */
+    //@{
+
+
+    //@}
 
 
 };

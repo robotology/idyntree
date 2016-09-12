@@ -27,7 +27,7 @@
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/FreeFloatingMassMatrix.h>
+#include <iDynTree/Model/FreeFloatingMatrices.h>
 
 #include <iDynTree/ModelIO/URDFModelImport.h>
 

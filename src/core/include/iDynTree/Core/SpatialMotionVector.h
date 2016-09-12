@@ -148,4 +148,4 @@ namespace iDynTree
 
 }
 
-#endif /* IDYNTREE_SPATIAL_MOTION_RAW_H */
+#endif

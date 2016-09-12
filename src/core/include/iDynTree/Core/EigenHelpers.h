@@ -109,6 +109,13 @@ inline Eigen::Matrix<typename Derived::Scalar, 3, 3, Eigen::RowMajor> skew(const
                                                                              -vec[1], vec[0], 0.0).finished();
 }
 
+template<class Derived>
+inline Eigen::Matrix<typename Derived::Scalar, 3, 1> unskew(const Eigen::MatrixBase<Derived> & mat)
+{
+    EIGEN_STATIC_ASSERT_MATRIX_SPECIFIC_SIZE(Derived, 3, 3);
+    return (Eigen::Matrix<typename Derived::Scalar, 3, 1>() << mat(2,1), mat(0,2), mat(1,0) ).finished();
+}
+
 
 /**
  * Submatrix helpers

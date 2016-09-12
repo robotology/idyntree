@@ -10,9 +10,15 @@
 
 #include <cstddef>
 
+/**
+ * \brief Macro to suppress unused variable warnings
+ *
+ * see http://stackoverflow.com/a/4851173
+ */
+#define IDYNTREE_UNUSED(var) ((void)var)
+
 namespace iDynTree
 {
-
     extern int UNKNOWN;
 
     /// Default tolerance for methods with a tolerance, setted to 1e-10

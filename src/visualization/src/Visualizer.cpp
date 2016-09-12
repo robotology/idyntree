@@ -15,12 +15,22 @@
 #ifdef IDYNTREE_USES_IRRLICHT
 #include <irrlicht.h>
 #include "IrrlichtUtils.h"
+#include "Camera.h"
+#include "Environment.h"
 #endif
 
 #include <cassert>
 
 namespace iDynTree
 {
+
+ICamera::~ICamera()
+{
+}
+
+IEnvironment::~IEnvironment()
+{
+}
 
 struct ModelVisualization::ModelVisualizationPimpl
 {
@@ -64,6 +74,30 @@ struct ModelVisualization::ModelVisualizationPimpl
     }
 };
 
+/**
+ * Dummy camera.
+ */
+class DummyCamera : public ICamera
+{
+public:
+    virtual ~DummyCamera() {};
+
+    virtual void setPosition(const iDynTree::Position &) {};
+    virtual void setTarget(const iDynTree::Position &) {};
+    virtual void setUpVector(const Direction&) {};
+};
+
+/**
+ * Dummy environment.
+ */
+class DummyEnvironment : public IEnvironment
+{
+public:
+    virtual ~DummyEnvironment() {};
+    virtual bool setElementVisibility(const std::string /*elementKey*/, bool /*isVisible*/) {return false;}
+    virtual std::vector< std::string > getElements() {  return std::vector< std::string >(); }
+};
+
 struct Visualizer::VisualizerPimpl
 {
     /**
@@ -105,7 +139,16 @@ struct Visualizer::VisualizerPimpl
     /**
      * Camera used by the visualization.
      */
-    irr::scene::ICameraSceneNode * m_irrCamera;
+    Camera m_camera;
+
+    /**
+     * Environment used by the visualization.
+     */
+    Environment m_environment;
+
+#else
+    DummyCamera m_camera;
+    DummyEnvironment m_environment;
 #endif
 
     VisualizerPimpl()
@@ -118,7 +161,6 @@ struct Visualizer::VisualizerPimpl
         m_irrDevice = 0;
         m_irrSmgr   = 0;
         m_irrDriver = 0;
-        m_irrCamera = 0;
 #endif
     }
 };
@@ -134,7 +176,7 @@ struct Visualizer::VisualizerPimpl
  *  the kinematic graph of iDynTree Model
  */
 void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManager(const iDynTree::Model & model,
-                                                              const iDynTree::ModelSolidShapes & modelGeom)
+                                                                                   const iDynTree::ModelSolidShapes & modelGeom)
 {
     this->modelNode = this->m_irrSmgr->addEmptySceneNode();
     this->linkNodes.resize(model.getNrOfLinks());
@@ -192,7 +234,7 @@ ModelVisualization& ModelVisualization::operator=(const ModelVisualization& /*ot
 }
 
 bool ModelVisualization::init(const Model& model,
-                              const std::string /*instanceName*/,
+                              const std::string instanceName,
                               Visualizer& visualizer)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
@@ -202,6 +244,7 @@ bool ModelVisualization::init(const Model& model,
         reportError("ModelVisualization","init","Impossible to use load model, as the visual solid shapes of the model are not consistent with the model itself.");
         return false;
     }
+    this->pimpl->m_instanceName = instanceName;
 
     this->pimpl->m_irrSmgr = visualizer.pimpl->m_irrSmgr;
 
@@ -226,6 +269,9 @@ bool ModelVisualization::init(const Model& model,
 
     return true;
 #else
+    IDYNTREE_UNUSED(model);
+    IDYNTREE_UNUSED(instanceName);
+    IDYNTREE_UNUSED(visualizer);
     reportError("ModelVisualization","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -236,12 +282,14 @@ Model& ModelVisualization::model()
     return this->pimpl->m_model;
 }
 
-bool ModelVisualization::setPositions(const Transform& world_H_base, const JointPosDoubleArray& jointPos)
+bool ModelVisualization::setPositions(const Transform& world_H_base, const VectorDynSize& jointPos)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !jointPos.isConsistent(model()) )
+    if( (jointPos.size() != model().getNrOfPosCoords()) )
     {
-        reportError("ModelVisualization","setPositions","Input size mismatch.");
+        std::stringstream ss;
+        ss << "Input size mismatch: model internal position coords " << model().getNrOfPosCoords() << " provided vector " << jointPos.size();
+        reportError("ModelVisualization","setPositions",ss.str().c_str());
         return false;
     }
 
@@ -262,6 +310,8 @@ bool ModelVisualization::setPositions(const Transform& world_H_base, const Joint
     return ok;
 
 #else
+    IDYNTREE_UNUSED(world_H_base);
+    IDYNTREE_UNUSED(jointPos);
     reportError("ModelVisualization","setPositions","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -279,6 +329,7 @@ bool ModelVisualization::setLinkPositions(const LinkPositions& linkPos)
     this->pimpl->updateLinkPositions(linkPos);
     return true;
 #else
+    IDYNTREE_UNUSED(linkPos);
     reportError("ModelVisualization","setLinkPositions","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -332,6 +383,7 @@ bool Visualizer::init(const VisualizerOptions options)
     irr::SIrrlichtCreationParameters irrDevParams;
 
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
+    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(800, 800);
 
     if( options.verbose )
     {
@@ -365,16 +417,19 @@ bool Visualizer::init(const VisualizerOptions options)
     // Always visualize the mouse cursor
     pimpl->m_irrDevice->getCursorControl()->setVisible(true);
 
-    // Add visualization elements
-    addVizEnviroment(pimpl->m_irrSmgr);
+    // Add environment
+    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr);
+    pimpl->m_environment.m_gridLinesVisible = true;
+
     addVizLights(pimpl->m_irrSmgr);
-    pimpl->m_irrCamera = addVizCamera(pimpl->m_irrSmgr);
+    pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
 
     pimpl->m_isInitialized = true;
     pimpl->lastFPS         = -1;
 
     return true;
 #else
+    IDYNTREE_UNUSED(options);
     reportError("Visualizer","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -437,6 +492,8 @@ bool Visualizer::addModel(const Model& model, const std::string& instanceName)
 
     return true;
 #else
+    IDYNTREE_UNUSED(model);
+    IDYNTREE_UNUSED(instanceName);
     reportError("Visualizer","addModel","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -451,18 +508,22 @@ void Visualizer::draw()
         return;
     }
 
-    pimpl->m_irrDriver->beginScene(true,true, irr::video::SColor(255,0,100,100));
+    pimpl->m_irrDriver->beginScene(true,true, irr::video::SColor(255,255,255,255));
 
     // Draw base plane
-    for(int i=-10; i <= 10; i++ )
+    if( pimpl->m_environment.m_gridLinesVisible )
     {
-        pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(-10,i,0),
-                                       irr::core::vector3df(10,i,0),
-                                       irr::video::SColor(100,100,100,100));
-        pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(i,-10,0),
-                                       irr::core::vector3df(i,10,0),
-                                       irr::video::SColor(100,100,100,100));
+        for(int i=-10; i <= 10; i++ )
+        {
+            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(-10,i,0),
+                                           irr::core::vector3df(10,i,0),
+                                           irr::video::SColor(100,100,100,100));
+            pimpl->m_irrDriver->draw3DLine(irr::core::vector3df(i,-10,0),
+                                           irr::core::vector3df(i,10,0),
+                                           irr::video::SColor(100,100,100,100));
+        }
     }
+
     pimpl->m_irrSmgr->drawAll();
     pimpl->m_irrDriver->endScene();
 
@@ -519,7 +580,8 @@ bool Visualizer::drawToFile(const std::string filename)
         reportError("Visualizer","drawToFile","Error in calling irr::video::IVideoDriver::createScreenShot method");
         return retValue = false;
     }
-
+#else
+    IDYNTREE_UNUSED(filename);
 #endif
 
     return retValue;
@@ -540,6 +602,16 @@ ModelVisualization& Visualizer::modelViz(const std::string& instanceName)
 ModelVisualization& Visualizer::modelViz(size_t modelIdx)
 {
     return *(this->pimpl->m_modelViz[modelIdx]);
+}
+
+ICamera& Visualizer::camera()
+{
+    return pimpl->m_camera;
+}
+
+IEnvironment& Visualizer::enviroment()
+{
+    return pimpl->m_environment;
 }
 
 bool Visualizer::run()

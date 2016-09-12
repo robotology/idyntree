@@ -28,6 +28,7 @@ matrix:
       osx_image: xcode7.3
       compiler: gcc
       env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
+  allow_failures:
     - os: osx
       osx_image: xcode7.3
       compiler: clang

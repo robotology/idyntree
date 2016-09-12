@@ -12,7 +12,10 @@
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/VectorDynSize.h>
+
+#include <iDynTree/Core/EigenHelpers.h>
 
 #include <iDynTree/KinDynComputations.h>
 
@@ -62,7 +65,6 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
     ASSERT_EQUAL_DOUBLE(ok,true);
 }
 
-
 void testRelativeTransform(iDynTree::KinDynComputations & dynComp)
 {
     using namespace iDynTree;
@@ -86,18 +88,51 @@ void testRelativeTransform(iDynTree::KinDynComputations & dynComp)
     ASSERT_EQUAL_TRANSFORM(A_B_X_E_F,E_F_X_A_B.inverse());
 }
 
+void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations & dynComp)
+{
+    iDynTree::Twist avgVel;
+    iDynTree::SpatialMomentum mom;
+    iDynTree::Vector6 avgVelCheck, momCheck;
+    iDynTree::VectorDynSize nu(dynComp.getNrOfDegreesOfFreedom()+6);
+    dynComp.getModelVel(nu);
 
-void testModelConsistency(std::string modelFilePath)
+    MomentumFreeFloatingJacobian momJac(dynComp.getRobotModel());
+    FrameFreeFloatingJacobian    avgVelJac(dynComp.getRobotModel());
+
+    avgVel = dynComp.getAverageVelocity();
+    bool ok = dynComp.getAverageVelocityJacobian(avgVelJac);
+
+    ASSERT_IS_TRUE(ok);
+
+    mom = dynComp.getLinearAngularMomentum();
+    ok = dynComp.getLinearAngularMomentumJacobian(momJac);
+
+    ASSERT_IS_TRUE(ok);
+
+    toEigen(momCheck) = toEigen(momJac)*toEigen(nu);
+    toEigen(avgVelCheck) = toEigen(avgVelJac)*toEigen(nu);
+
+    ASSERT_EQUAL_VECTOR(momCheck,mom.asVector());
+    ASSERT_EQUAL_VECTOR(avgVelCheck,avgVel.asVector());
+}
+
+void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
     iDynTree::KinDynComputations dynComp;
 
     bool ok = dynComp.loadRobotModelFromFile(modelFilePath);
+    ASSERT_IS_TRUE(ok);
 
-    for(int i=0; i < 100; i++)
+    ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
+    ASSERT_IS_TRUE(ok);
+
+    for(int i=0; i < 5; i++)
     {
         setRandomState(dynComp);
         testRelativeTransform(dynComp);
+        testAverageVelocityAndTotalMomentumJacobian(dynComp);
     }
+
 }
 
 int main()
@@ -106,7 +141,9 @@ int main()
     {
         std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
         std::cout << "Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) <<  std::endl;
-        testModelConsistency(urdfFileName);
+        testModelConsistency(urdfFileName,iDynTree::MIXED_REPRESENTATION);
+        testModelConsistency(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
+        testModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
     }
 
     return EXIT_SUCCESS;

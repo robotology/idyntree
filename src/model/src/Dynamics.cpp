@@ -11,7 +11,7 @@
 #include <iDynTree/Model/Traversal.h>
 
 #include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/FreeFloatingMassMatrix.h>
+#include <iDynTree/Model/FreeFloatingMatrices.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/JointState.h>
 
@@ -25,6 +25,25 @@
 
 namespace iDynTree
 {
+
+bool ComputeLinearAndAngularMomentum(const Model& model,
+                                const LinkPositions& linkPositions,
+                                const LinkVelArray& linkVels,
+                                      SpatialMomentum& totalMomentum)
+{
+    totalMomentum.zero();
+
+    for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(model.getNrOfLinks()); lnkIdx++)
+    {
+        const Transform & commonFrame_X_link = linkPositions(lnkIdx);
+        const Twist     & v = linkVels(lnkIdx);
+        const SpatialInertia & I = model.getLink(lnkIdx)->getInertia();
+        totalMomentum = totalMomentum + commonFrame_X_link*(I*v);
+    }
+
+    return true;
+}
+
 
 bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
                       const JointPosDoubleArray& jointPos,

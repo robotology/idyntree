@@ -9,6 +9,8 @@
 
 #include <string>
 
+#include <iDynTree/Core/Direction.h>
+
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/LinkState.h>
 
@@ -17,6 +19,60 @@ namespace iDynTree
 class Model;
 class Transform;
 class Visualizer;
+
+/**
+ * Interface to manipulate the camera parameters.
+ */
+class ICamera
+{
+public:
+    /**
+      * Destructor
+      */
+    virtual ~ICamera() = 0;
+
+    /**
+     * Set the linear position of the camera w.r.t to the world.
+     */
+    virtual void setPosition(const iDynTree::Position & cameraPos) = 0;
+
+    /**
+     * Set the target of the camera (i.e. the point the camera is looking into) w.r.t. the world.
+     */
+    virtual void setTarget(const iDynTree::Position & cameraPos) = 0;
+
+    /**
+     * Set the up vector of the camera w.r.t to the world.
+     */
+    virtual void setUpVector(const Direction& upVector) = 0;
+};
+
+/**
+ * Interface to manipulate the elements in the enviroment (background, root frame, reference lines)
+ */
+class IEnvironment
+{
+public:
+    /**
+     * Denstructor
+     */
+    virtual ~IEnvironment() = 0;
+
+    /**
+     * Get the list of the elements in the enviroment.
+     *
+     * The function returns the following list:
+     *  * floor_grid
+     *  * world_frame
+     */
+    virtual std::vector<std::string> getElements() = 0;
+
+    /**
+     *
+     * @return true if the visibility is correctly setted, false otherwise.
+     */
+    virtual bool setElementVisibility(const std::string elementKey, bool isVisible) = 0;
+};
 
 /**
  * Interface to the visualization of a model istance.
@@ -42,7 +98,7 @@ public:
     /**
      * Set the position of the model (using base position and joint positions)
      */
-    bool setPositions(const Transform & world_H_base, const JointPosDoubleArray & jointPos);
+    bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos);
 
     /**
      * Set the positions of the model by directly specifing link positions wrt to the world.
@@ -96,7 +152,7 @@ private:
     Visualizer& operator=(const Visualizer& other);
 public:
     Visualizer();
-    ~Visualizer();
+    virtual ~Visualizer();
 
     /**
      * Initialize the visualization.
@@ -130,7 +186,6 @@ public:
     bool addModel(const iDynTree::Model & model,
                   const std::string & instanceName);
 
-
     /**
      * Return an interface to a visualization of a model.
      *
@@ -146,6 +201,16 @@ public:
      * @return a reference to a valid ModelVisualization if instanceName is the name of a model instance.
      */
     ModelVisualization& modelViz(const std::string & instanceName);
+
+    /**
+     * Return an interface to manipulate the camera in the visualization.
+     */
+    ICamera& camera();
+
+    /**
+     * Return an interface to manipulate the visualization environment.
+     */
+    IEnvironment& enviroment();
 
     /**
      * Wrap the run method of the Irrlicht device.
@@ -173,7 +238,6 @@ public:
      * Close the visualizer.
      */
     void close();
-
 };
 
 }

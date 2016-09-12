@@ -22,6 +22,7 @@ namespace iDynTree
     class LinkVelArray;
     class LinkAccArray;
     class JointPosDoubleArray;
+    class VectorDynSize;
 
     /**
      * \ingroup iDynTreeModel
@@ -39,7 +40,7 @@ namespace iDynTree
     bool ForwardPositionKinematics(const Model& model,
                                    const Traversal& traversal,
                                    const Transform& worldHbase,
-                                   const JointPosDoubleArray& jointPositions,
+                                   const VectorDynSize& jointPositions,
                                          LinkPositions& linkPositions);
 
     /**
@@ -51,6 +52,8 @@ namespace iDynTree
                                    const Traversal & traversal,
                                    const FreeFloatingPos & jointPos,
                                          LinkPositions   & linkPos);
+
+
 
     /**
      * Function that compute the links velocities and accelerations
@@ -68,8 +71,8 @@ namespace iDynTree
                                        iDynTree::LinkAccArray  & linkAcc);
 
     /**
-     * Function that compute the links velocities and accelerations
-     * given the free floating robot velocities and accelerations.
+     * Function that compute the links position, velocities and accelerations
+     * given the free floating robot position, velocities and accelerations.
      *
      *
      */
@@ -81,6 +84,19 @@ namespace iDynTree
                                           iDynTree::LinkPositions & linkPos,
                                           iDynTree::LinkVelArray & linkVel,
                                           iDynTree::LinkAccArray  & linkAcc);
+
+    /**
+     * Function that compute the links position and velocities and accelerations
+     * given the free floating robot position and velocities.
+     *
+     *
+     */
+    bool ForwardPosVelKinematics(const iDynTree::Model & model,
+                                 const iDynTree::Traversal & traversal,
+                                 const iDynTree::FreeFloatingPos & robotPos,
+                                 const iDynTree::FreeFloatingVel & robotVel,
+                                       iDynTree::LinkPositions & linkPos,
+                                       iDynTree::LinkVelArray & linkVel);
 
 }
 

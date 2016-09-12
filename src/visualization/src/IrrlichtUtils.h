@@ -8,6 +8,7 @@
 #ifndef IDYNTREE_IRRLICHT_UTILS_H
 #define IDYNTREE_IRRLICHT_UTILS_H
 
+#include <iDynTree/Model/SolidShapes.h>
 #include <iDynTree/Visualizer.h>
 
 #include <irrlicht.h>
@@ -155,8 +156,8 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 }
 
 inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
-                                             irr::f32 arrowLenght,
-                                             irr::scene::ISceneNode * parentNode)
+                                             irr::f32 arrowLenght=1.0,
+                                             irr::scene::ISceneNode * parentNode=0)
 {
     irr::u32 alphaLev = 20;
     irr::video::SMaterial transRed;
@@ -215,7 +216,7 @@ inline void setWorldHNode(irr::scene::ISceneNode* node, const iDynTree::Transfor
  */
 void inline addVizEnviroment(irr::scene::ISceneManager* smgr)
 {
-    // Add Origin sphere
+    // Add origin frame
     irr::u32 alphaLev = 20;
     irr::video::SMaterial transRed;
     transRed.AmbientColor = irr::video::SColor(alphaLev,255,0,0);
@@ -257,9 +258,7 @@ void inline addVizEnviroment(irr::scene::ISceneManager* smgr)
     zArrow->getMaterial(0) = transBlue;
     zArrow->getMaterial(1) = transBlue;
 
-    irr::scene::ISceneNode* light = smgr->addSphereSceneNode(0.05);
-    light->setPosition(irr::core::vector3df(5.0,0.0,5.0));
-    light->getMaterial(0) = transYellow;
+
 }
 
 void inline addVizLights(irr::scene::ISceneManager* smgr)
@@ -281,6 +280,18 @@ void inline addVizLights(irr::scene::ISceneManager* smgr)
     sun_node->setLightData(sun_data);
     sun_node->setPosition(irr::core::vector3df(5,0,5));
     sun_node->setRotation(irr::core::vector3df(0,0,0));
+
+    irr::scene::ILightSceneNode * sun_node2=smgr->addLightSceneNode();
+    irr::video::SLight sun_data2;
+    sun_data.Direction=irr::core::vector3df(-1,1,1);
+    sun_data.Type=irr::video::ELT_POINT;
+    sun_data.AmbientColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
+    sun_data.SpecularColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
+    sun_data.DiffuseColor=irr::video::SColorf(0.7f,0.7f,0.7f,1);
+    sun_data.CastShadows=false;
+    sun_node2->setLightData(sun_data2);
+    sun_node2->setPosition(irr::core::vector3df(-5,5,5));
+    sun_node2->setRotation(irr::core::vector3df(0,0,0));
 }
 
 inline irr::scene::ICameraSceneNode* addVizCamera(irr::scene::ISceneManager* smgr)
