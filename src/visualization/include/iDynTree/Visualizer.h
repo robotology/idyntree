@@ -238,48 +238,33 @@ public:
 /**
  * Interface to the visualization of a model istance.
  */
-class ModelVisualization
+class IModelVisualization
 {
-private:
-    struct ModelVisualizationPimpl;
-    ModelVisualizationPimpl * pimpl;
-
-    // Disable copy for now
-    ModelVisualization(const ModelVisualization& other);
-    ModelVisualization& operator=(const ModelVisualization& other);
 public:
-    ModelVisualization();
-    ~ModelVisualization();
-
     /**
-     * Create the model in the visualization.
+     * Denstructor
      */
-    bool init(const Model& model, const std::string instanceName, Visualizer & visualizer);
+    virtual ~IModelVisualization() = 0;
 
     /**
      * Set the position of the model (using base position and joint positions)
      */
-    bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos);
+    virtual bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos) = 0;
 
     /**
      * Set the positions of the model by directly specifing link positions wrt to the world.
      */
-    bool setLinkPositions(const LinkPositions & linkPos);
+    virtual bool setLinkPositions(const LinkPositions & linkPos) = 0;
 
     /**
      * Reference to the used model.
      */
-    Model & model();
-
-    /**
-     * Remove the model from the visualization.
-     */
-    void close();
+    virtual Model & model() = 0;
 
     /**
      * Get the instance name.
      */
-    std::string getInstanceName();
+    virtual std::string getInstanceName() = 0;
 };
 
 /**
@@ -354,14 +339,14 @@ public:
      *
      * @return a reference to a valid ModelVisualization if instanceName is the name of a model instance.
      */
-    ModelVisualization& modelViz(size_t modelIdx);
+    IModelVisualization& modelViz(size_t modelIdx);
 
     /**
      * Return an interface to a visualization of a model.
      *
      * @return a reference to a valid ModelVisualization if instanceName is the name of a model instance.
      */
-    ModelVisualization& modelViz(const std::string & instanceName);
+    IModelVisualization& modelViz(const std::string & instanceName);
 
     /**
      * Return an interface to manipulate the camera in the visualization.

@@ -9,6 +9,7 @@
 #define IDYNTREE_DUMMYIMPLEMENTATIONS_H
 
 #include <iDynTree/Visualizer.h>
+#include <iDynTree/Model/Model.h>
 
 namespace iDynTree
 {
@@ -68,6 +69,21 @@ public:
     virtual bool removeLight(const std::string &) { return false; }
 };
 
+/**
+ * Dummy model visualization.
+ */
+class DummyModelVisualization : public IModelVisualization
+{
+    Model m_dummyModel;
+public:
+    virtual ~DummyModelVisualization() {};
+    virtual bool init(const Model& , const std::string , Visualizer &) { return false; }
+    virtual bool setPositions(const Transform & , const VectorDynSize & ) { return false; }
+    virtual bool setLinkPositions(const LinkPositions & ) { return false; }
+    virtual Model & model() { return m_dummyModel; }
+    virtual void close() {}
+    virtual std::string getInstanceName() { return "dummyModelVisualizationInstance"; }
+};
 
 }
 
