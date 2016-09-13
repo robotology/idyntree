@@ -83,8 +83,13 @@ public:
     virtual Model & model() { return m_dummyModel; }
     virtual void close() {}
     virtual std::string getInstanceName() { return "dummyModelVisualizationInstance"; }
+    virtual void setModelVisibility(const bool) {}
+    virtual void setModelColor(const ColorViz & ) {}
+    virtual void resetModelColor() {}
+    virtual std::vector< std::string > getLinkNames() { return std::vector<std::string>(); };
+    virtual bool setLinkVisibility(const std::string &, bool) { return false; }
     virtual std::vector<std::string> getFeatures() { return std::vector<std::string>(); }
-    virtual bool setFeatureVisibility(const std::string , bool) { return false; }
+    virtual bool setFeatureVisibility(const std::string& , bool) { return false; }
 
 };
 

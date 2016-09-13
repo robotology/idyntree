@@ -34,8 +34,13 @@ public:
     virtual bool setLinkPositions(const LinkPositions & linkPos);
     virtual Model & model();
     virtual std::string getInstanceName();
+    virtual void setModelVisibility(const bool isVisible);
+    virtual void setModelColor(const ColorViz & modelColor);
+    virtual void resetModelColor();
+    virtual std::vector< std::string > getLinkNames();
+    virtual bool setLinkVisibility(const std::string & linkName, bool isVisible);
     virtual std::vector<std::string> getFeatures();
-    virtual bool setFeatureVisibility(const std::string elementKey, bool isVisible);
+    virtual bool setFeatureVisibility(const std::string & elementKey, bool isVisible);
     void setWireframeVisibility(bool isVisible);
     void setTransparent(bool isTransparent);
 };

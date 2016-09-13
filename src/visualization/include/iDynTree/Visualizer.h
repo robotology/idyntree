@@ -270,6 +270,34 @@ public:
     virtual std::string getInstanceName() = 0;
 
     /**
+     * Set the visibility of all the link of the model.
+     */
+    virtual void setModelVisibility(const bool isVisible) = 0;
+
+    /**
+     * Set the color of all the geometries of the model.
+     *
+     * This will overwrite the material of the model, but it can be
+     * reset by resetModelColor.
+     */
+    virtual void setModelColor(const ColorViz & modelColor) = 0;
+
+    /**
+     * Reset the colors of the model.
+     */
+    virtual void resetModelColor() = 0;
+
+    /**
+     * Get the name of the link in the model.
+     */
+    virtual std::vector< std::string > getLinkNames() = 0;
+
+    /**
+     * Set a given link visibility.
+     */
+    virtual bool setLinkVisibility(const std::string & linkName, bool isVisible) = 0;
+
+    /**
      * Get list of visualization features that can be enabled/disabled.
      *
      * This method will return the follow list:
@@ -282,7 +310,7 @@ public:
     /**
      * @return true if the visibility is correctly setted, false otherwise.
      */
-    virtual bool setFeatureVisibility(const std::string elementKey, bool isVisible) = 0;
+    virtual bool setFeatureVisibility(const std::string& elementKey, bool isVisible) = 0;
 
 };
 
