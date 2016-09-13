@@ -158,7 +158,7 @@ bool Visualizer::init(const VisualizerOptions options)
     irr::SIrrlichtCreationParameters irrDevParams;
 
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
-    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(800, 800);
+    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(options.winWidth, options.winHeight);
 
     if( options.verbose )
     {
