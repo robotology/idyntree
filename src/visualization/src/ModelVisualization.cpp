@@ -222,6 +222,127 @@ std::string ModelVisualization::getInstanceName()
     return this->pimpl->m_instanceName;
 }
 
+void ModelVisualization::setModelVisibility(const bool isVisible)
+{
+    if( pimpl->modelNode )
+    {
+        pimpl->modelNode->setVisible(isVisible);
+    }
+}
+
+void ModelVisualization::setModelColor(const ColorViz& modelColor)
+{
+    irr::video::SColor col = idyntree2irrlicht(modelColor).toSColor();
+
+    for(size_t linkIdx=0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
+    {
+        for(size_t geom=0; geom < pimpl->geomNodes[linkIdx].size(); geom++)
+        {
+            if( pimpl->geomNodes[linkIdx][geom] )
+            {
+                irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIdx][geom];
+
+                for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
+                {
+                    irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
+
+                    // R
+                    geomMat.AmbientColor.setRed(col.getRed());
+                    geomMat.DiffuseColor.setRed(col.getRed());
+                    geomMat.SpecularColor.setRed(col.getRed());
+                    geomMat.EmissiveColor.setRed(col.getRed());
+
+                    // G
+                    geomMat.AmbientColor.setGreen(col.getGreen());
+                    geomMat.DiffuseColor.setGreen(col.getGreen());
+                    geomMat.SpecularColor.setGreen(col.getGreen());
+                    geomMat.EmissiveColor.setGreen(col.getGreen());
+
+                    // B
+                    geomMat.AmbientColor.setBlue(col.getBlue());
+                    geomMat.DiffuseColor.setBlue(col.getBlue());
+                    geomMat.SpecularColor.setBlue(col.getBlue());
+                    geomMat.EmissiveColor.setBlue(col.getBlue());
+
+                    geomNode->getMaterial(mat) = geomMat;
+                }
+            }
+        }
+    }
+}
+
+void ModelVisualization::resetModelColor()
+{
+    for(size_t linkIdx=0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
+    {
+        for(size_t geom=0; geom < pimpl->geomNodes[linkIdx].size(); geom++)
+        {
+            if( pimpl->geomNodes[linkIdx][geom] )
+            {
+                irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIdx][geom];
+                std::vector< irr::video::SMaterial > & materialCache = pimpl->geomNodesNotTransparentMaterialCache[linkIdx][geom];
+
+                for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
+                {
+                    irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
+
+                    // R
+                    geomMat.AmbientColor.setRed(materialCache[mat].AmbientColor.getRed());
+                    geomMat.DiffuseColor.setRed(materialCache[mat].DiffuseColor.getRed());
+                    geomMat.SpecularColor.setRed(materialCache[mat].SpecularColor.getRed());
+                    geomMat.EmissiveColor.setRed(materialCache[mat].EmissiveColor.getRed());
+
+                    // G
+                    geomMat.AmbientColor.setGreen(materialCache[mat].AmbientColor.getGreen());
+                    geomMat.DiffuseColor.setGreen(materialCache[mat].DiffuseColor.getGreen());
+                    geomMat.SpecularColor.setGreen(materialCache[mat].SpecularColor.getGreen());
+                    geomMat.EmissiveColor.setGreen(materialCache[mat].EmissiveColor.getGreen());
+
+                    // B
+                    geomMat.AmbientColor.setBlue(materialCache[mat].AmbientColor.getBlue());
+                    geomMat.DiffuseColor.setBlue(materialCache[mat].DiffuseColor.getBlue());
+                    geomMat.SpecularColor.setBlue(materialCache[mat].SpecularColor.getBlue());
+                    geomMat.EmissiveColor.setBlue(materialCache[mat].EmissiveColor.getBlue());
+
+                    geomNode->getMaterial(mat) = geomMat;
+                }
+            }
+        }
+    }
+}
+
+std::vector< std::string > ModelVisualization::getLinkNames()
+{
+    std::vector< std::string > ret;
+
+    for( size_t i=0; i < model().getNrOfLinks(); i++)
+    {
+        ret.push_back(model().getLinkName(i));
+    }
+
+    return ret;
+}
+
+bool ModelVisualization::setLinkVisibility(const std::string& linkName, bool isVisible)
+{
+    LinkIndex linkIdx = model().getLinkIndex(linkName);
+
+    if( linkIdx == LINK_INVALID_INDEX )
+    {
+        std::stringstream ss;
+        ss << "Unknown link " << linkName;
+        reportError("ModelVisualization","setLinkVisibility",ss.str().c_str());
+        return false;
+    }
+
+    if( pimpl->linkNodes[linkIdx] )
+    {
+        pimpl->linkNodes[linkIdx]->setVisible(isVisible);
+        return true;
+    }
+
+    return false;
+}
 
 void ModelVisualization::close()
 {
@@ -237,7 +358,7 @@ std::vector<std::string> ModelVisualization::getFeatures()
     return ret;
 }
 
-bool ModelVisualization::setFeatureVisibility(const std::string elementKey, bool isVisible)
+bool ModelVisualization::setFeatureVisibility(const std::string& elementKey, bool isVisible)
 {
     bool retValue = false;
     if( elementKey == "wireframe"  )
@@ -264,12 +385,10 @@ void ModelVisualization::setWireframeVisibility(bool isVisible)
             if( pimpl->geomNodes[linkIdx][geom] )
             {
                 irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIdx][geom];
-                std::vector< irr::video::SMaterial > & materialCache = pimpl->geomNodesNotTransparentMaterialCache[linkIdx][geom];
 
                 for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
                 {
                     geomNode->getMaterial(mat).setFlag(irr::video::EMF_WIREFRAME,isVisible);
-                    materialCache[mat].setFlag(irr::video::EMF_WIREFRAME,isVisible);
                 }
             }
         }
@@ -299,13 +418,19 @@ void ModelVisualization::setTransparent(bool isTransparent)
                         geomMat.AmbientColor.setAlpha(std::min(alphaValue,geomMat.AmbientColor.getAlpha()));
                         geomMat.DiffuseColor.setAlpha(std::min(alphaValue,geomMat.DiffuseColor.getAlpha()));
                         geomMat.SpecularColor.setAlpha(std::min(alphaValue,geomMat.SpecularColor.getAlpha()));
-                        geomMat.DiffuseColor.setAlpha(std::min(alphaValue,geomMat.DiffuseColor.getAlpha()));
+                        geomMat.EmissiveColor.setAlpha(std::min(alphaValue,geomMat.EmissiveColor.getAlpha()));
                         geomNode->getMaterial(mat) = geomMat;
                     }
                     else
                     {
-                        // otherwise we just restore the cached value of the material
-                        geomNode->getMaterial(mat) = materialCache[mat];
+                        // otherwise we just restore the cached value of alpha
+                        irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
+                        geomMat.MaterialType = materialCache[mat].MaterialType;
+                        geomMat.AmbientColor.setAlpha(materialCache[mat].AmbientColor.getAlpha());
+                        geomMat.DiffuseColor.setAlpha(materialCache[mat].DiffuseColor.getAlpha());
+                        geomMat.SpecularColor.setAlpha(materialCache[mat].SpecularColor.getAlpha());
+                        geomMat.EmissiveColor.setAlpha(materialCache[mat].EmissiveColor.getAlpha());
+                        geomNode->getMaterial(mat) = geomMat;
                     }
 
                 }
