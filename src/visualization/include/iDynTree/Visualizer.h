@@ -189,8 +189,11 @@ public:
      * Get the list of the elements in the enviroment.
      *
      * The function returns the following list:
-     *  * floor_grid
-     *  * world_frame
+     *
+     * | Element name  | Description |
+     * |:-------------:|:-----------:|
+     * |  floor_grid   | Grid used to indicated the z = 0 plane. |
+     * |  world_frame  | XYZ (RBG) arrows indicating the world frame. |
      */
     virtual std::vector<std::string> getElements() = 0;
 
@@ -265,6 +268,22 @@ public:
      * Get the instance name.
      */
     virtual std::string getInstanceName() = 0;
+
+    /**
+     * Get list of visualization features that can be enabled/disabled.
+     *
+     * This method will return the follow list:
+     * | Visualization  feature | Description                              | Default value |
+     * |:----------------------:|:----------------------------------------:|:-------------:|
+     * |  wireframe             | Visualize mesh of the model as wireframe | false  |
+     */
+    virtual std::vector<std::string> getFeatures() = 0;
+
+    /**
+     * @return true if the visibility is correctly setted, false otherwise.
+     */
+    virtual bool setFeatureVisibility(const std::string elementKey, bool isVisible) = 0;
+
 };
 
 /**
@@ -277,7 +296,19 @@ struct VisualizerOptions
      */
     bool verbose;
 
-    VisualizerOptions(): verbose(false)
+    /**
+     * Initial width (in pixels) of the created windows (default: 800).
+     */
+    int winWidth;
+
+    /**
+     * Initial height (in pixels) of the created window (default: 600).
+     */
+    int winHeight;
+
+    VisualizerOptions(): verbose(false),
+                         winWidth(800),
+                         winHeight(600)
     {
     }
 };

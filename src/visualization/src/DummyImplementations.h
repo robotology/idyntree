@@ -83,6 +83,9 @@ public:
     virtual Model & model() { return m_dummyModel; }
     virtual void close() {}
     virtual std::string getInstanceName() { return "dummyModelVisualizationInstance"; }
+    virtual std::vector<std::string> getFeatures() { return std::vector<std::string>(); }
+    virtual bool setFeatureVisibility(const std::string , bool) { return false; }
+
 };
 
 }

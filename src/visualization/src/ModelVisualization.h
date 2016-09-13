@@ -27,13 +27,17 @@ private:
 public:
     ModelVisualization();
     ~ModelVisualization();
-
     bool init(const Model& model, const std::string instanceName, irr::scene::ISceneManager * sceneManager);
-    bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos);
-    bool setLinkPositions(const LinkPositions & linkPos);
-    Model & model();
     void close();
-    std::string getInstanceName();
+
+    virtual bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos);
+    virtual bool setLinkPositions(const LinkPositions & linkPos);
+    virtual Model & model();
+    virtual std::string getInstanceName();
+    virtual std::vector<std::string> getFeatures();
+    virtual bool setFeatureVisibility(const std::string elementKey, bool isVisible);
+    void setWireframeVisibility(bool isVisible);
+    void setTransparent(bool isTransparent);
 };
 
 }
