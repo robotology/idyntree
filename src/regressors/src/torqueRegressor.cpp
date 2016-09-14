@@ -274,7 +274,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
             assert(ok);
 
             regressor_local_parametrization.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6)
-                = sign*toEigen(S).transpose()*regressor_local_parametrization*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*iDynTree::ToKDL(leaf_link_H_sensor));
+                = sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*iDynTree::ToKDL(leaf_link_H_sensor));
 
         }
     }
