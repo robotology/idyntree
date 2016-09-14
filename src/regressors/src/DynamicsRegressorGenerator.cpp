@@ -53,8 +53,9 @@ struct DynamicsRegressorGenerator::DynamicsRegressorGeneratorPrivateAttributes
 
     DynamicsRegressorGeneratorPrivateAttributes()
     {
+        m_isRegressorValid = false;
         m_isModelValid = false;
-        m_isModelValid = false;
+        robot_model = 0;
         m_pLegacyGenerator = 0;
     }
 };
@@ -88,7 +89,17 @@ DynamicsRegressorGenerator& DynamicsRegressorGenerator::operator=(const Dynamics
 
 DynamicsRegressorGenerator::~DynamicsRegressorGenerator()
 {
-    delete this->pimpl->m_pLegacyGenerator;
+    if( this->pimpl->robot_model )
+    {
+        delete this->pimpl->robot_model;
+        this->pimpl->robot_model = 0;
+    }
+
+    if( this->pimpl->m_pLegacyGenerator )
+    {
+        delete this->pimpl->m_pLegacyGenerator;
+        this->pimpl->m_pLegacyGenerator = 0;
+    }
     delete this->pimpl;
 }
 
@@ -130,6 +141,11 @@ bool DynamicsRegressorGenerator::loadRobotAndSensorsModelFromString(const std::s
     KDL::Tree local_model;
     bool ok = iDynTree::treeFromUrdfString(modelString,local_model,consider_root_link_inertia);
 
+    if( this->pimpl->robot_model )
+    {
+        delete this->pimpl->robot_model;
+        this->pimpl->robot_model = 0;
+    }
 
     this->pimpl->robot_model = new KDL::CoDyCo::UndirectedTree(local_model);
     this->pimpl->sensors_model = iDynTree::sensorsListFromURDFString(*(this->pimpl->robot_model),
@@ -217,6 +233,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
     ignoredLinks.erase( unique( ignoredLinks.begin(), ignoredLinks.end() ), ignoredLinks.end() );
 
     bool verbose = false;
+
     this->pimpl->m_pLegacyGenerator =
         new KDL::CoDyCo::Regressors::DynamicRegressorGenerator(*(this->pimpl->robot_model),
                                                            this->pimpl->sensors_model,
