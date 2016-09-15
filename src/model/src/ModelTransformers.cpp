@@ -370,6 +370,8 @@ bool createReducedModel(const Model& fullModel,
                linkInReducedModel < nrOfLinksInReducedModel;
                linkInReducedModel++)
     {
+        assert(linkInReducedModel < subModels.getNrOfSubModels());
+        assert(subModels.getTraversal(linkInReducedModel).getNrOfVisitedLinks() > 0);
         LinkIndex linkFullModelIndex = subModels.getTraversal(linkInReducedModel).getLink(0)->getIndex();
 
         std::string linkName =

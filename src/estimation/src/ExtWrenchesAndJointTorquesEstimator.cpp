@@ -167,16 +167,20 @@ bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifi
         return false;
     }
 
-    // We need to create a reduced model, inclusing only the consideredDOFs and the fixed joints used by the FT sensors
+    // We need to create a reduced model, inclusing only the consideredDOFs and the joints used by the FT sensors
     std::vector< std::string > consideredJoints = consideredDOFs;
 
-    // Add FT fixed joints
+    // Add FT joints (if they are not already in the consideredDOFs list
     std::vector< std::string > ftJointNames;
     getFTJointNames(_sensorsFull,ftJointNames);
 
     for(size_t i=0; i < ftJointNames.size(); i++)
     {
-        consideredJoints.push_back(ftJointNames[i]);
+        // Only add an F/T sensor joint if it is not already in consideredDOFs
+        if( std::find(consideredJoints.begin(),consideredJoints.end(),ftJointNames[i]) == consideredJoints.end() )
+	{
+	    consideredJoints.push_back(ftJointNames[i]);
+	}
     }
 
 
