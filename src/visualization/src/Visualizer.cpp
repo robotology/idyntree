@@ -62,11 +62,6 @@ struct Visualizer::VisualizerPimpl
     bool m_isInitialized;
 
     /**
-     * Collection of model visualization.
-     */
-    std::vector<ModelVisualization*> m_modelViz;
-
-    /**
      * Invalid model visualization, useful to return in case of error.
      */
     DummyModelVisualization m_invalidModelViz;
@@ -77,6 +72,11 @@ struct Visualizer::VisualizerPimpl
     int lastFPS;
 
 #ifdef IDYNTREE_USES_IRRLICHT
+    /**
+     * Collection of model visualization.
+     */
+    std::vector<ModelVisualization*> m_modelViz;
+
     /**
      * Irrlicht device used by the visualizer.
      */
@@ -110,10 +110,10 @@ struct Visualizer::VisualizerPimpl
     VisualizerPimpl()
     {
         m_isInitialized = false;
-        m_modelViz.resize(0);
         lastFPS = -1;
 
 #ifdef IDYNTREE_USES_IRRLICHT
+        m_modelViz.resize(0);
         m_irrDevice = 0;
         m_irrSmgr   = 0;
         m_irrDriver = 0;
@@ -225,7 +225,11 @@ bool Visualizer::init(const VisualizerOptions options)
 
 size_t Visualizer::getNrOfVisualizedModels()
 {
+#ifdef IDYNTREE_USES_IRRLICHT
     return pimpl->m_modelViz.size();
+#else
+    return 0;
+#endif
 }
 
 
@@ -236,11 +240,17 @@ std::string Visualizer::getModelInstanceName(size_t modelInstanceIndex)
         return "";
     }
 
+#ifdef IDYNTREE_USES_IRRLICHT
     return pimpl->m_modelViz[modelInstanceIndex]->getInstanceName();
+#else
+    return "";
+#endif
+
 }
 
 int Visualizer::getModelInstanceIndex(const std::string instanceName)
 {
+#ifdef IDYNTREE_USES_IRRLICHT
     for(size_t mdlInst=0; mdlInst < getNrOfVisualizedModels(); mdlInst++)
     {
         if( pimpl->m_modelViz[mdlInst]->getInstanceName() == instanceName )
@@ -248,6 +258,9 @@ int Visualizer::getModelInstanceIndex(const std::string instanceName)
             return static_cast<int>(mdlInst);
         }
     }
+#else
+    IDYNTREE_UNUSED(instanceName);
+#endif
 
     reportError("Visualizer","getModelInstanceIndex","Impossible to find model instance with the specified name");
     return -1;
@@ -372,12 +385,20 @@ IModelVisualization& Visualizer::modelViz(const std::string& instanceName)
         return this->pimpl->m_invalidModelViz;
     }
 
+#ifdef IDYNTREE_USES_IRRLICHT
     return *(this->pimpl->m_modelViz[idx]);
+#else
+    return this->pimpl->m_invalidModelViz;
+#endif
 }
 
 IModelVisualization& Visualizer::modelViz(size_t modelIdx)
 {
+#ifdef IDYNTREE_USES_IRRLICHT
     return *(this->pimpl->m_modelViz[modelIdx]);
+#else
+    return this->pimpl->m_invalidModelViz;
+#endif
 }
 
 ICamera& Visualizer::camera()
