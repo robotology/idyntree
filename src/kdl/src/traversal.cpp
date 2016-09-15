@@ -43,6 +43,7 @@ namespace CoDyCo {
 
     LinkMap::const_iterator Traversal::getBaseLink() const
     {
+        assert(order.size() != 0);
         return order[0];
     }
 

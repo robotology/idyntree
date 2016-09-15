@@ -3,6 +3,11 @@
 %module iDynTree
 
 %include "std_string.i"
+%include "std_vector.i"
+
+namespace std {
+    %template(StringVector) vector<string>;
+}
 
 // Wrap the std::vector<std::string> params
 %include "std_vector.i"
@@ -63,6 +68,7 @@ namespace std {
 #include "iDynTree/Core/SpatialInertiaRaw.h"
 #include "iDynTree/Core/SpatialInertia.h"
 #include "iDynTree/Core/ArticulatedBodyInertia.h"
+#include "iDynTree/Core/InertiaNonLinearParametrization.h"
 
 // Transformations: Rotation and Transform
 #include "iDynTree/Core/RotationRaw.h"
@@ -101,6 +107,7 @@ namespace std {
 
 // Model loading from external formats
 #include "iDynTree/ModelIO/URDFModelImport.h"
+#include "iDynTree/ModelIO/URDFDofsImport.h"
 #include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 #include "iDynTree/ModelIO/ModelLoader.h"
 
@@ -236,6 +243,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Core/SpatialInertiaRaw.h"
 %include "iDynTree/Core/SpatialInertia.h"
 %include "iDynTree/Core/ArticulatedBodyInertia.h"
+%include "iDynTree/Core/InertiaNonLinearParametrization.h"
 
 // Transformations: Rotation and Transform
 %include "iDynTree/Core/RotationRaw.h"
@@ -287,6 +295,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // Model loading from external formats
 %include "iDynTree/ModelIO/URDFModelImport.h"
+%include "iDynTree/ModelIO/URDFDofsImport.h"
 %include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 %include "iDynTree/ModelIO/ModelLoader.h"
 

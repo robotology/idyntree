@@ -19,8 +19,8 @@ macro(add_unit_test_hl_yarp classname)
     add_test(NAME ${testname} COMMAND ${testbinary})
 endmacro()
 
+if(IDYNTREE_USES_YARP)
 # todo
-add_unit_test_hl(DynamicsComputations)
-
-#
-add_unit_test_hl_yarp(DynamicsComputationsDynTreeConsistency)
+    add_unit_test_hl(DynamicsComputations)
+    add_unit_test_hl_yarp(DynamicsComputationsDynTreeConsistency)
+endif()

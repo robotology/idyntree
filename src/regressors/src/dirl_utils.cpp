@@ -165,56 +165,59 @@ int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row
     return getRowSpaceBasis(input_matrix,row_space_basis_matrix,tol,verbose,dummy);
 }
 
-int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol, bool /*verbose*/, Eigen::VectorXd & sigma)
+int getRowSpaceBasis(const Eigen::MatrixXd & input_matrix, Eigen::MatrixXd & row_space_basis_matrix, double tol, bool verbose, Eigen::VectorXd & sigma)
 {
     if( input_matrix.rows() == 0 ) {
         row_space_basis_matrix.resize(input_matrix.cols(),0);
         return 0;
     }
+
+    if(verbose){
         std::cout << "Called getRowSpaceBasis " << std::endl;
-        //std::cout << input_matrix << std::endl;
-        //Probably can be improved using a different decomposition (QR?)
-        //NOT REAL TIME!!
-        Eigen::JacobiSVD<Eigen::MatrixXd> svd(input_matrix, Eigen::ComputeThinU | Eigen::ComputeFullV);
+    }
+    //std::cout << input_matrix << std::endl;
+    //Probably can be improved using a different decomposition (QR?)
+    //NOT REAL TIME!!
+    Eigen::JacobiSVD<Eigen::MatrixXd> svd(input_matrix, Eigen::ComputeThinU | Eigen::ComputeFullV);
 
 
+    int n = input_matrix.rows();
+    int m = input_matrix.cols();
 
-        int n = input_matrix.rows();
-        int m = input_matrix.cols();
+    sigma = svd.singularValues();
 
-        sigma = svd.singularValues();
-
-
-        if( tol <= 0 ) {
-            /** \todo find a better and consistend heuristic */
-            //To avoid problem on numerically zero matrices
-            if( sigma[0] >= sqrt(DBL_EPSILON) ) {
-                tol = 1000*sigma[0]*std::max(n,m)*DBL_EPSILON;
-            } else {
-                //Matrix is probably numerically zero
-                //It is wise to consider all the matrix as a zero matrix
-                tol = sqrt(DBL_EPSILON);
-            }
+    if( tol <= 0 ) {
+        /** \todo find a better and consistend heuristic */
+        //To avoid problem on numerically zero matrices
+        if( sigma[0] >= sqrt(DBL_EPSILON) ) {
+            tol = 1000*sigma[0]*std::max(n,m)*DBL_EPSILON;
+        } else {
+            //Matrix is probably numerically zero
+            //It is wise to consider all the matrix as a zero matrix
+            tol = sqrt(DBL_EPSILON);
         }
+    }
 
-        int ll;
-        for(ll=0; ll < sigma.size(); ll++ ) {
-            if( sigma[ll] < tol ) { break;}
-        }
+    int ll;
+    for(ll=0; ll < sigma.size(); ll++ ) {
+        if( sigma[ll] < tol ) { break;}
+    }
 
-        int rank = ll;
+    int rank = ll;
 
-        Eigen::MatrixXd V = svd.matrixV();
-        assert(V.cols() == V.rows());
-        if( V.cols() != V.rows() ) { std::cout << "V is not square" << std::endl; }
-        assert(rank <= m);
+    Eigen::MatrixXd V = svd.matrixV();
+    assert(V.cols() == V.rows());
+    if( V.cols() != V.rows() ) { std::cout << "V is not square" << std::endl; }
+    assert(rank <= m);
 
-        row_space_basis_matrix.resize(m,rank);
+    row_space_basis_matrix.resize(m,rank);
+    row_space_basis_matrix = V.block(0,0,m,rank);
+    if(verbose){
         std::cout << "Matrix has rank " << rank << std::endl; std::cout << " m " << m << " rank " << rank << " V size " << V.rows() << " " << V.cols() << std::endl;
-        row_space_basis_matrix = V.block(0,0,m,rank);
         std::cout << "basis calculated, tol used " << tol << std::endl;
+    }
 
-        return 0;
+    return 0;
 }
 
 int getFirstFTSensorOnLink(const iDynTree::SensorsList & sensors_tree,

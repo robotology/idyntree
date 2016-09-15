@@ -40,7 +40,7 @@ struct DynamicsRegressorGenerator::DynamicsRegressorGeneratorPrivateAttributes
 {
     bool m_isRegressorValid;
     bool m_isModelValid;
-    KDL::CoDyCo::UndirectedTree robot_model;
+    KDL::CoDyCo::UndirectedTree *robot_model;
     iDynTree::SensorsList sensors_model;
     KDL::CoDyCo::Regressors::DynamicRegressorGenerator * m_pLegacyGenerator;
     Eigen::MatrixXd m_regressor;
@@ -53,8 +53,9 @@ struct DynamicsRegressorGenerator::DynamicsRegressorGeneratorPrivateAttributes
 
     DynamicsRegressorGeneratorPrivateAttributes()
     {
+        m_isRegressorValid = false;
         m_isModelValid = false;
-        m_isModelValid = false;
+        robot_model = 0;
         m_pLegacyGenerator = 0;
     }
 };
@@ -88,7 +89,17 @@ DynamicsRegressorGenerator& DynamicsRegressorGenerator::operator=(const Dynamics
 
 DynamicsRegressorGenerator::~DynamicsRegressorGenerator()
 {
-    delete this->pimpl->m_pLegacyGenerator;
+    if( this->pimpl->robot_model )
+    {
+        delete this->pimpl->robot_model;
+        this->pimpl->robot_model = 0;
+    }
+
+    if( this->pimpl->m_pLegacyGenerator )
+    {
+        delete this->pimpl->m_pLegacyGenerator;
+        this->pimpl->m_pLegacyGenerator = 0;
+    }
     delete this->pimpl;
 }
 
@@ -130,9 +141,14 @@ bool DynamicsRegressorGenerator::loadRobotAndSensorsModelFromString(const std::s
     KDL::Tree local_model;
     bool ok = iDynTree::treeFromUrdfString(modelString,local_model,consider_root_link_inertia);
 
+    if( this->pimpl->robot_model )
+    {
+        delete this->pimpl->robot_model;
+        this->pimpl->robot_model = 0;
+    }
 
-    this->pimpl->robot_model = KDL::CoDyCo::UndirectedTree(local_model);
-    this->pimpl->sensors_model = iDynTree::sensorsListFromURDFString(this->pimpl->robot_model,
+    this->pimpl->robot_model = new KDL::CoDyCo::UndirectedTree(local_model);
+    this->pimpl->sensors_model = iDynTree::sensorsListFromURDFString(*(this->pimpl->robot_model),
                                                                           modelString);
 
     if( !ok )
@@ -176,7 +192,7 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
 {
     if( !(pimpl->m_isModelValid) )
     {
-        std::cerr << "[ERROR] please load a valid mode in DynamicRegressorGenerator before tryng"
+        std::cerr << "[ERROR] please load a valid model in DynamicRegressorGenerator before trying"
                      " to load a regressor structure" << std::endl;
         return false;
     }
@@ -202,8 +218,8 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
 
     // We remove the fake links that in the urdf
     // we use as surrogate for frames
-    iDynTree::framesFromKDLTree(this->pimpl->robot_model.getTree(),
-                                     ignoredLinks,dummy);
+    iDynTree::framesFromKDLTree(this->pimpl->robot_model->getTree(),
+                                     ignoredLinks, dummy);
 
     // Add ignored links to the list of links consired "fake"
     for (TiXmlElement* ignoredLinkXml = regressorXml->FirstChildElement("ignoredLink");
@@ -212,14 +228,31 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
         std::string ignoredLinkName = ignoredLinkXml->GetText();
         ignoredLinks.push_back(ignoredLinkName);
     }
+    //remove duplicates
+    sort( ignoredLinks.begin(), ignoredLinks.end() );
+    ignoredLinks.erase( unique( ignoredLinks.begin(), ignoredLinks.end() ), ignoredLinks.end() );
 
-    bool verbose = true;
+    bool verbose = false;
+
     this->pimpl->m_pLegacyGenerator =
-        new KDL::CoDyCo::Regressors::DynamicRegressorGenerator(this->pimpl->robot_model,
+        new KDL::CoDyCo::Regressors::DynamicRegressorGenerator(*(this->pimpl->robot_model),
                                                            this->pimpl->sensors_model,
                                                            kinematic_base,
                                                            consider_ft_offset,
-                                                           ignoredLinks,verbose);
+                                                           ignoredLinks, verbose);
+
+
+    //add regressor for 6 rows of base link dynamics
+    if (TiXmlElement* torqueDynamicsXml = regressorXml->FirstChildElement("baseLinkDynamics"))
+    {
+        if( this->pimpl->m_pLegacyGenerator->addBaseRegressorRows() != 0 )
+        {
+            std::cerr << "[ERROR] error in loading baseDynamicsRegressor" << std::endl;
+            delete this->pimpl->m_pLegacyGenerator;
+            this->pimpl->m_pLegacyGenerator = 0;
+            return false;
+        }
+    }
 
     // Get all subregressors of type subtreeBaseDynamics
     // For each subtreeBaseDynamics subregressor, add it to the legacy class
@@ -241,6 +274,38 @@ bool DynamicsRegressorGenerator::loadRegressorStructureFromString(const std::str
             delete this->pimpl->m_pLegacyGenerator;
             this->pimpl->m_pLegacyGenerator = 0;
             return false;
+        }
+    }
+
+    //Get all joint torque regressors
+    for (TiXmlElement* torqueDynamicsXml = regressorXml->FirstChildElement("jointTorqueDynamics");
+         torqueDynamicsXml; torqueDynamicsXml = torqueDynamicsXml->NextSiblingElement("jointTorqueDynamics"))
+    {
+        //TODO: allow adding subtrees, create addTorqueRegressorRowsSubtree()
+
+        if (TiXmlElement* jointsXml = torqueDynamicsXml->FirstChildElement("allJoints"))
+        {
+            if( this->pimpl->m_pLegacyGenerator->addAllTorqueRegressorRows() != 0 )
+            {
+                std::cerr << "[ERROR] error in loading jointTorqueDynamics regressor" << std::endl;
+                delete this->pimpl->m_pLegacyGenerator;
+                this->pimpl->m_pLegacyGenerator = 0;
+                return false;
+            }
+        }
+        else if (TiXmlElement* jointsXml = torqueDynamicsXml->FirstChildElement("joints"))
+        {
+            for (TiXmlElement* jointXml = jointsXml->FirstChildElement("joint");
+                 jointXml; jointXml = jointXml->NextSiblingElement("joint"))
+            {
+                if( this->pimpl->m_pLegacyGenerator->addTorqueRegressorRows(jointXml->GetText()) != 0 )
+                {
+                    std::cerr << "[ERROR] error in loading jointTorqueDynamics regressor (joint with no name?)" << std::endl;
+                    delete this->pimpl->m_pLegacyGenerator;
+                    this->pimpl->m_pLegacyGenerator = 0;
+                    return false;
+                }
+            }
         }
     }
 
@@ -281,8 +346,14 @@ const SensorsList& DynamicsRegressorGenerator::getSensorsModel() const
 
 std::string DynamicsRegressorGenerator::getBaseLinkName()
 {
-    int base_link = this->pimpl->m_pLegacyGenerator->getDynamicBaseIndex();
-    return this->pimpl->robot_model.getLink(base_link)->getName();
+    if(this->pimpl->m_pLegacyGenerator) {
+        int base_link = this->pimpl->m_pLegacyGenerator->getDynamicBaseIndex();
+        return this->pimpl->robot_model->getLink(base_link)->getName();
+    } else
+    {
+       std::cerr << "[WARNING] No regressor structure set" << std::endl;
+       return "";
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -342,7 +413,7 @@ unsigned int DynamicsRegressorGenerator::getNrOfDegreesOfFreedom() const
 
 std::string DynamicsRegressorGenerator::getDescriptionOfDegreeOfFreedom(int dof_index)
 {
-    return this->pimpl->robot_model.getJunction(dof_index)->getName();
+    return this->pimpl->robot_model->getJunction(dof_index)->getName();
 }
 
 std::string DynamicsRegressorGenerator::getDescriptionOfDegreesOfFreedom()
@@ -361,23 +432,25 @@ std::string DynamicsRegressorGenerator::getDescriptionOfDegreesOfFreedom()
 //// Links related methods
 //////////////////////////////////////////////////////////////////////////////
 
-/*
+
 unsigned int DynamicsRegressorGenerator::getNrOfLinks() const
 {
-    assert(false);
-    return (unsigned int)this->pimpl->m_pLegacyGenerator->getNrOfDOFs();
+   return (unsigned int)this->pimpl->robot_model->getNrOfLinks();
 }
 
+unsigned int DynamicsRegressorGenerator::getNrOfFakeLinks() const
+{
+   return (unsigned int)this->pimpl->m_pLegacyGenerator->getNrOfFakeLinks();
+}
+
+/*
 std::string DynamicsRegressorGenerator::getDescriptionOfLink(int link_index)
 {
-
 }
 
 std::string DynamicsRegressorGenerator::getDescriptionOfLinks()
 {
-
 }*/
-
 
 
 bool DynamicsRegressorGenerator::getModelParameters(VectorDynSize& values)
@@ -457,6 +530,20 @@ SensorsMeasurements& DynamicsRegressorGenerator::getSensorsMeasurements()
     return this->pimpl->m_pLegacyGenerator->sensorMeasures;
 }
 
+int DynamicsRegressorGenerator::setTorqueSensorMeasurement(const int dof_index, const double measure)
+{
+    return this->pimpl->m_pLegacyGenerator->setTorqueSensorMeasurement(dof_index, measure);
+}
+
+
+int DynamicsRegressorGenerator::setTorqueSensorMeasurement(iDynTree::VectorDynSize &torques)
+{
+    KDL::JntArray torques_legacy(torques.size());
+    for(int i=0; i<torques.size(); i++){
+        torques_legacy(i)=torques(i);
+    }
+    return this->pimpl->m_pLegacyGenerator->setTorqueSensorMeasurement(torques_legacy);
+}
 
 bool DynamicsRegressorGenerator::computeRegressor(MatrixDynSize& regressor, VectorDynSize& known_terms)
 {
@@ -528,6 +615,19 @@ bool DynamicsRegressorGenerator::computeFixedBaseIdentifiableSubspace(MatrixDynS
     return (ret_value == 0);
 }
 
+int DynamicsRegressorGenerator::generate_random_regressors(iDynTree::MatrixDynSize & output_matrix, const bool static_regressor,
+                                   const bool fixed_base,
+                                   int n_samples) {
+
+    const KDL::Vector grav_direction = KDL::Vector(0.0,0.0,9.81);
+    Eigen::MatrixXd A;
+    this->pimpl->m_pLegacyGenerator->generate_random_regressors(A, static_regressor, fixed_base, grav_direction, n_samples, false);
+
+    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(output_matrix.data(),
+                                output_matrix.rows(),
+                                output_matrix.cols()) = A;
+    return 0;
+}
 
 
 }

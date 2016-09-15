@@ -252,6 +252,18 @@ public:
     std::string getDescriptionOfDegreesOfFreedom();
 
     /**
+     * Get the number of links contained in the model.
+     *
+     */
+    unsigned int getNrOfLinks() const;
+
+    /**
+     * Get the number of fake links contained in the model (detected and specified)
+     *
+     */
+    unsigned int getNrOfFakeLinks() const;
+
+    /**
      * Get a human readable description of a given link considered in the regressor.
      *
      * @return a human readable description of a given link considered in the regressor.
@@ -343,6 +355,9 @@ public:
      */
     SensorsMeasurements & getSensorsMeasurements();
 
+    int setTorqueSensorMeasurement(const int dof_index, const double measure);
+    int setTorqueSensorMeasurement(iDynTree::VectorDynSize &torques);
+
     //@}
 
     /** @name Methods to calculate the regressor
@@ -411,6 +426,10 @@ public:
      */
     bool computeFixedBaseIdentifiableSubspace(iDynTree::MatrixDynSize & basisMatrix);
 
+    int generate_random_regressors(iDynTree::MatrixDynSize & output_matrix,
+                                   const bool static_regressor = false,
+                                   const bool fixed_base = false,
+                                   int n_samples = 1000);
 
     //@}
 

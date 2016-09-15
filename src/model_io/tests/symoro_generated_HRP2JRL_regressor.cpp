@@ -1,11 +1,11 @@
 
 int symoro_generated_HRP2JRL_IMU_regressor(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const KDL::Twist base_vel, const KDL::Twist base_acc, Eigen::MatrixXd & dynamics_regressor)
 {
-    //Generated code, size are fixed for hrp2 structured robot 
+    //Generated code, size are fixed for hrp2 structured robot
     if( q.rows() != 47 || q_dot.rows() != 47 || q_dotdot.rows() != 47 ) return -1;
     if( dynamics_regressor.rows() != 6 || dynamics_regressor.cols() != 48*10 ) return -1;
-    
-    
+
+
     //Copy-pasted generated code
     #define sign(x) (x<0.0 ? -1.0 : (x=0.0 ? 0.0 : 1.0))
 
@@ -26,9 +26,9 @@ int symoro_generated_HRP2JRL_IMU_regressor(const KDL::JntArray &q, const KDL::Jn
 	double QP37, QDP37, QP38, QDP38, QP39, QDP39, QP40, QDP40, QP41, QDP41;
 	double QP42, QDP42, QP43, QDP43, QP44, QDP44, QP45, QDP45, QP46, QDP46;
 	double QP47, QDP47;
-	
+
     //Assignment of input
-    Vector base_lin_acc_classical;
+  Vector base_lin_acc_classical;
     base_lin_acc_classical = base_acc.vel + base_vel.rot*base_vel.vel;
     WX = base_vel.rot[0];
     WY = base_vel.rot[1];
@@ -40,9 +40,9 @@ int symoro_generated_HRP2JRL_IMU_regressor(const KDL::JntArray &q, const KDL::Jn
     WPY = base_acc.rot[1];
     WPZ = base_acc.rot[2];
     G3 = 0;
-    
+
     pi = M_PI;
-    
+
     t1=q(0);
 	t2=q(1);
 	t3=q(2);
@@ -184,7 +184,7 @@ int symoro_generated_HRP2JRL_IMU_regressor(const KDL::JntArray &q, const KDL::Jn
 	QDP45=q_dotdot(44);
 	QDP46=q_dotdot(45);
 	QDP47=q_dotdot(46);
-	
+
 
 	/* Declaration of global output variables */
 	double DMX0XX1, DMY0XX1, DMZ0XX1, DMX0XY1, DMY0XY1, DMZ0XY1, DMX0XZ1, DMY0XZ1, DMZ0XZ1, DMX0YY1;
@@ -384,7 +384,7 @@ int symoro_generated_HRP2JRL_IMU_regressor(const KDL::JntArray &q, const KDL::Jn
 	double DMY0ZZ47, DMZ0ZZ47, DFX0MX47, DFY0MX47, DFZ0MX47, DMX0MX47, DMY0MX47, DMZ0MX47, DFX0MY47, DFY0MY47;
 	double DFZ0MY47, DMX0MY47, DMY0MY47, DMZ0MY47, DFX0MZ47, DFY0MZ47, DFZ0MZ47, DMX0MZ47, DMY0MZ47, DMZ0MZ47;
 	double DFX0M47, DFY0M47, DFZ0M47, DMX0M47, DMY0M47, DMZ0M47;
-	
+
 	//Additional always zero output
 	double DFX0XX1 = 0;
 	double DFX0XY1 = 0;
@@ -19407,14 +19407,14 @@ int symoro_generated_HRP2JRL_IMU_regressor(const KDL::JntArray &q, const KDL::Jn
 	DMX0M47=C1*N1M471 - N1M472*S1;
 	DMY0M47=C1*N1M472 + N1M471*S1;
 	DMZ0M47=N2M473;
-	
-	
-	
+
+
+
 	//The first 10 columns are all zero, as dirl considers also the base link not present in this regressor
     dynamics_regressor.block(0,0,6,10).setZero();
-    
+
     //Then we map the rest
-    //Actually python generated code	
+    //Actually python generated code
     dynamics_regressor(0,10) = DFX0M1;
 	dynamics_regressor(0,11) = DFX0MX1;
 	dynamics_regressor(0,12) = DFX0MY1;
@@ -22236,6 +22236,6 @@ int symoro_generated_HRP2JRL_IMU_regressor(const KDL::JntArray &q, const KDL::Jn
 	dynamics_regressor(5,478) = DMZ0YZ47;
 	dynamics_regressor(5,479) = DMZ0ZZ47;
 
-    
+
     return 0;
 }

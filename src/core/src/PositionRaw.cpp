@@ -120,11 +120,7 @@ namespace iDynTree
     std::string PositionRaw::toString() const
     {
         std::stringstream ss;
-
-        ss << " x " << this->m_data[0]
-        << " y " << this->m_data[1]
-        << " z " << this->m_data[2];
-
+        ss << this->m_data[0] << " " << this->m_data[1] << " " << this->m_data[2];
         return ss.str();
     }
 

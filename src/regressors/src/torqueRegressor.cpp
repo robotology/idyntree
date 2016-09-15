@@ -145,7 +145,7 @@ int torqueRegressor::configure()
                                 p_sensors_tree->getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),
                                 this->consider_ft_offset);
 
-    regressor_local_parametrization.resize(6,localSerialization.parameters.size());
+    regressor_local_parametrization.resize(getNrOfOutputs(),localSerialization.parameters.size());
 
     return 0;
 }
@@ -180,30 +180,28 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
                                       Eigen::MatrixXd & regressor_matrix_global_column_serialization,
                                       Eigen::VectorXd & known_terms)
 {
-#ifndef NDEBUG
+#ifdef NDEBUG
     if( verbose ) std::cerr << "Called torqueRegressor::computeRegressor " << std::endl;
 #endif
     //const KDL::CoDyCo::UndirectedTree &  = *p_undirected_tree;
     //const KDL::CoDyCo::FTSensorList & ft_list = *p_ft_list;
 
 
-    if( regressor_local_parametrization.rows() != getNrOfOutputs() ) {
-        return -1;
-    }
+    assert( regressor_local_parametrization.rows() == getNrOfOutputs() );
 
-         /**
-         * \todo move this stuff in UndirectedTree
-         *
-         */
-        JunctionMap::const_iterator torque_dof_it = p_undirected_tree->getJunction(torque_dof_index);
-        LinkMap::const_iterator parent_root_it;
-        if( torque_dof_it->getChildLink() == p_undirected_tree->getLink(subtree_root_link_id) ) {
-            parent_root_it = torque_dof_it->getParentLink();
-        } else {
-            parent_root_it = torque_dof_it->getChildLink();
-        }
-        assert(torque_dof_it->getJunctionIndex() < (int)p_undirected_tree->getNrOfDOFs());
-        KDL::Twist S = parent_root_it->S(p_undirected_tree->getLink(subtree_root_link_id),q(torque_dof_it->getJunctionIndex()));
+     /**
+     * \todo move this stuff in UndirectedTree
+     *
+     */
+    JunctionMap::const_iterator torque_dof_it = p_undirected_tree->getJunction(torque_dof_index);
+    LinkMap::const_iterator parent_root_it;
+    if( torque_dof_it->getChildLink() == p_undirected_tree->getLink(subtree_root_link_id) ) {
+        parent_root_it = torque_dof_it->getParentLink();
+    } else {
+        parent_root_it = torque_dof_it->getChildLink();
+    }
+    assert(torque_dof_it->getJunctionIndex() < (int)p_undirected_tree->getNrOfDOFs());
+    KDL::Twist S = parent_root_it->S(p_undirected_tree->getLink(subtree_root_link_id),q(torque_dof_it->getJunctionIndex()));
 
     //all other columns, beside the one relative to the inertial parameters of the links of the subtree, are zero
     regressor_local_parametrization.setZero();
@@ -211,18 +209,18 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
     for(int i =0; i < (int)subtree_links_indices.size(); i++ ) {
         int link_id = subtree_links_indices[i];
 
-        #ifndef NDEBUG
-        if( verbose ) std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the regressor relative to link " << p_undirected_tree->getLink(link_id)->getName() << std::endl;
-        #endif
-
         if( linkIndeces2regrCols[link_id] != -1 ) {
+            #ifdef NDEBUG
+            if( verbose ) std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the regressor relative to link " << p_undirected_tree->getLink(link_id)->getName() << std::endl;
+            #endif
+
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);
             regressor_local_parametrization.block(0,(int)(10*linkIndeces2regrCols[link_id]),getNrOfOutputs(),10)
                 = toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[link_id])*netWrenchRegressor_i;
         }
     }
 
-#ifndef NDEBUG
+#ifdef NDEBUG
     if( consider_ft_offset ) {
         if( verbose ) std::cerr << "considering ft offset" << std::endl;
     } else {
@@ -276,7 +274,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
             assert(ok);
 
             regressor_local_parametrization.block(0,(int)(10*NrOfRealLinks_subtree+6*ft_id),getNrOfOutputs(),6)
-                = sign*toEigen(S).transpose()*regressor_local_parametrization*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*iDynTree::ToKDL(leaf_link_H_sensor));
+                = sign*toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[leaf_link_id]*iDynTree::ToKDL(leaf_link_H_sensor));
 
         }
     }
