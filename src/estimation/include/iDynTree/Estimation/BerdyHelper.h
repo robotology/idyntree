@@ -134,7 +134,8 @@ public:
                      includeAllJointAccelerationsAsSensors(true),
                      includeAllJointTorquesAsSensors(false),
                      includeAllNetExternalWrenchesAsSensors(true),
-                     includeFixedBaseExternalWrench(false)
+                     includeFixedBaseExternalWrench(false),
+                     baseLink("")
     {
     }
 
@@ -199,6 +200,14 @@ public:
      *       internal wrenches are tipically measured using a SIX_AXIS_FORCE_TORQUE_SENSOR .
      */
     std::vector<std::string> jointOnWhichTheInternalWrenchIsMeasured;
+
+    /**
+     * Name of the link which will be considered as a base frame.
+     *
+     * \note If the string is empty the default base link will be used,
+     *       i.e. the root of the tree
+     */
+    std::string baseLink;
 
     /**
      * Check that the options are not self-contradicting.
