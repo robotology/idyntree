@@ -1,3 +1,3 @@
 function varargout = ComputeLinearAndAngularMomentum(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1056, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1074, varargin{:});
 end
