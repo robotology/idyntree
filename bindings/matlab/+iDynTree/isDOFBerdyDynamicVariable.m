@@ -1,3 +1,3 @@
 function varargout = isDOFBerdyDynamicVariable(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1283, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1303, varargin{:});
 end
