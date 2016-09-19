@@ -125,18 +125,24 @@ bool BerdyHelper::init(const Model& model,
     m_sensors = sensors;
     m_options = options;
 
-    if (!options.baseLink.empty()) {
+    LinkIndex baseLinkIndex;
+    if (!options.baseLink.empty())
+    {
         //find the LinkIndex corresponding to the baseLink option
-        LinkIndex baseLinkIndex =  m_model.getLinkIndex(options.baseLink);
+        baseLinkIndex =  m_model.getLinkIndex(options.baseLink);
         
-        if (baseLinkIndex == LINK_INVALID_INDEX
-            || !m_model.setDefaultBaseLink(baseLinkIndex)) {
-            reportError("BerdyHelpers","init",("Error while setting base frame to " + options.baseLink + ".").c_str());
+        if (baseLinkIndex == LINK_INVALID_INDEX)
+        {
+            reportError("BerdyHelpers","init",("Error while setting base link  to " + options.baseLink + ".").c_str());
             return false;
         }
     }
+    else
+    {
+        baseLinkIndex = m_model.getDefaultBaseLink();
+    }
 
-    m_model.computeFullTreeTraversal(m_dynamicsTraversal);
+    m_model.computeFullTreeTraversal(m_dynamicsTraversal,baseLinkIndex);
     m_kinematicTraversals.resize(m_model);
     m_jointPos.resize(m_model);
     m_jointVel.resize(m_model);

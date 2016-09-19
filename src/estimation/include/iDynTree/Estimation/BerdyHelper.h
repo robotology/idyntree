@@ -202,10 +202,9 @@ public:
     std::vector<std::string> jointOnWhichTheInternalWrenchIsMeasured;
 
     /**
-     * Name of the link which will be considered as a base frame.
+     * Name of the link which will be considered as a base link for Berdy computations.
      *
-     * \note If the string is empty the default base link will be used,
-     *       i.e. the root of the tree
+     * \note If the string is empty the default base link of the model will be used.
      */
     std::string baseLink;
 
