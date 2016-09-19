@@ -42,6 +42,10 @@ include_directories(SYSTEM AFTER ${orocos_kdl_INCLUDE_DIRS}
 
 target_link_libraries(${libraryname} idyntree-core idyntree-model)
 
+# Ensure that build include directories are always included before system ones
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
+
 if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
     target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 endif()

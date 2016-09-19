@@ -34,6 +34,10 @@ target_include_directories(${libraryname} INTERFACE ${EIGEN3_INCLUDE_DIR}
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR}
                            ${orocos_kdl_INCLUDE_DIRS})
 
+# Ensure that build include directories are always included before system ones
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
+
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_KDL_HEADERS})
 
 install(TARGETS ${libraryname}

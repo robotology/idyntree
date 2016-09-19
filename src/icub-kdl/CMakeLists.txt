@@ -24,19 +24,19 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           DEPENDS IDYNTREE_ENABLE_RPATH
                           USE_LINK_PATH)
 
+set(libraryname idyntree-icub-kdl)
+add_library(${libraryname} ${iDynTree_ICUB_KDL_source} ${iDynTree_ICUB_KDL_header})
 
-add_library(idyntree-icub-kdl ${iDynTree_ICUB_KDL_source} ${iDynTree_ICUB_KDL_header})
-
-set_target_properties(idyntree-icub-kdl PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
+set_target_properties(${libraryname} PROPERTIES VERSION ${${VARS_PREFIX}_VERSION}
                                            SOVERSION ${${VARS_PREFIX}_VERSION}
                                            PUBLIC_HEADER "${iDynTree_ICUB_KDL_header}")
 
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
-target_include_directories(idyntree-icub-kdl PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(idyntree-icub-kdl LINK_PUBLIC  skinDynLib iKin iDyn
+target_link_libraries(${libraryname} LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}
                                             idyntree-core
@@ -48,9 +48,9 @@ target_link_libraries(idyntree-icub-kdl LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${TinyXML_LIBRARIES})
 
 if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
-    target_include_directories(idyntree-icub-kdl SYSTEM INTERFACE ${skinDynLib_INCLUDE_DIRS} ${iDyn_INCLUDE_DIRS})
+    target_include_directories(${libraryname} SYSTEM INTERFACE ${skinDynLib_INCLUDE_DIRS} ${iDyn_INCLUDE_DIRS})
 else()
-    target_include_directories(idyntree-icub-kdl INTERFACE ${skinDynLib_INCLUDE_DIRS} ${iDyn_INCLUDE_DIRS})
+    target_include_directories(${libraryname} INTERFACE ${skinDynLib_INCLUDE_DIRS} ${iDyn_INCLUDE_DIRS})
 endif()
                 
 
@@ -60,6 +60,10 @@ include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS}
                            ${YARP_INCLUDE_DIRS}
                            ${EIGEN3_INCLUDE_DIR}
                            ${orocos_kdl_INCLUDE_DIRS})
+
+# Ensure that build include directories are always included before system ones
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 install(TARGETS idyntree-icub-kdl
         EXPORT iDynTree

@@ -40,6 +40,10 @@ endif()
 target_include_directories(${libraryname} PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                   ${TinyXML_INCLUDE_DIRS})
 
+# Ensure that build include directories are always included before system ones
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
+
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
 
 install(TARGETS ${libraryname}
