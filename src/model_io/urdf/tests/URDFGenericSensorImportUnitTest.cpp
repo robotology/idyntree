@@ -5,8 +5,9 @@
  *
  */
 
-# include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
-# include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
+#include <iDynTree/Sensors/Sensors.h>
 #include "testModels.h"
 
 #include <iDynTree/Core/TestUtils.h>
@@ -29,8 +30,18 @@ void checkURDF(std::string fileName,
 
     ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::ACCELEROMETER),expectedNrOfAccelerometers);
     ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::GYROSCOPE),expectedNrOfGyroscopes);
-}
 
+    // Load the reduced model without any joint (this will clamp all the link in one big link)
+    iDynTree::ModelLoader mdlLoader;
+    std::vector<std::string> consideredJoints;
+    bool ok = mdlLoader.loadReducedModelFromFile(fileName,consideredJoints);
+
+    ASSERT_IS_TRUE(ok);
+
+    // The number of gyro and accelerometers (and in general of link sensors) should be converved
+    ASSERT_EQUAL_DOUBLE(mdlLoader.sensors().getNrOfSensors(iDynTree::ACCELEROMETER),expectedNrOfAccelerometers);
+    ASSERT_EQUAL_DOUBLE(mdlLoader.sensors().getNrOfSensors(iDynTree::GYROSCOPE),expectedNrOfGyroscopes);
+}
 
 
 int main()
