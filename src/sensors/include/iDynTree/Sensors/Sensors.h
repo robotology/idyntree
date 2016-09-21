@@ -218,16 +218,22 @@ namespace iDynTree {
          */
         virtual Transform getLinkSensorTransform() const = 0;
 
-
         /**
          * Set the name of the parent Link.
          */
         virtual bool setParentLink(const std::string & parentLinkName) = 0;
 
         /**
-         * Set the numeric index of the parent joint of the sensor.
+         * Set the numeric index of the parent link of the sensor.
          */
         virtual bool setParentLinkIndex(const LinkIndex &) = 0;
+
+        /**
+         * Set the transform from the sensor to the parent link sensor is attached to.
+         *
+         * @return true if link_index is the link attached to the Gyroscope, false otherwise.
+         */
+        virtual bool setLinkSensorTransform(const iDynTree::Transform &) = 0;
     };
 
     /**
