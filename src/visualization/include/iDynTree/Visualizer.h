@@ -48,6 +48,133 @@ public:
 };
 
 /**
+ * Basic structure to encode color information
+ */
+class ColorViz
+{
+public:
+    /**
+     * Red component of the color.
+     */
+    float r;
+
+    /**
+     * Green component of the color.
+     */
+    float g;
+
+    /**
+     * Blue component of the color.
+     */
+    float b;
+
+    /**
+     * Alpha component of the color.
+     */
+    float a;
+
+    /**
+     * Default constructor (to white)
+     */
+    ColorViz();
+
+    /**
+     * Constructor for rgba.
+     */
+    ColorViz(float r, float g, float b, float a);
+
+    /**
+     * Build a color from a Vector4 rgba.
+     */
+    ColorViz(const Vector4 & rgba);
+};
+
+enum LightType
+{
+    //! point light, it has a position in space and radiates light in all directions
+    POINT_LIGHT,
+    //! directional light, coming from a direction from an infinite distance
+    DIRECTIONAL_LIGHT
+};
+
+/**
+ * Interface to a light visualization.
+ */
+class ILight
+{
+public:
+    /**
+     * Denstructor
+     */
+    virtual ~ILight() = 0;
+
+    /**
+     * Get the name.
+     */
+    virtual const std::string & getName() const = 0;
+
+    /**
+     * Set the light type.
+     */
+    virtual void setType(const LightType type) = 0;
+
+    /**
+     * Get the light type.
+     */
+    virtual LightType getType() = 0;
+
+    /**
+     * Set the linear position of the light w.r.t to the world.
+     */
+    virtual void setPosition(const iDynTree::Position & cameraPos) = 0;
+
+    /**
+     * Get the linear position of the light w.r.t to the world.
+     */
+    virtual iDynTree::Position getPosition() = 0;
+
+    /**
+     * Set the light direction (only meaningful if the light is DIRECTIONAL_LIGHT).
+     */
+    virtual void setDirection(const Direction& lightDirection) = 0;
+
+    /**
+     * Get the light direction (only meaningful if the light is DIRECTIONAL_LIGHT).
+     */
+    virtual Direction getDirection() = 0;
+
+    /**
+     * Set ambient color of the light.
+     */
+    virtual void setAmbientColor(const ColorViz & ambientColor) = 0;
+
+    /**
+     * Get ambient color of the light.
+     */
+    virtual ColorViz getAmbientColor() = 0;
+
+    /**
+     * Set specular color of the light.
+     */
+    virtual void setSpecularColor(const ColorViz & ambientColor) = 0;
+
+    /**
+     * Get specular color of the light.
+     */
+    virtual ColorViz getSpecularColor() = 0;
+
+    /**
+     * Set ambient color of the light.
+     */
+    virtual void setDiffuseColor(const ColorViz & ambientColor) = 0;
+
+    /**
+     * Get ambient color of the light.
+     */
+    virtual ColorViz getDiffuseColor() = 0;
+};
+
+/**
  * Interface to manipulate the elements in the enviroment (background, root frame, reference lines)
  */
 class IEnvironment
@@ -62,8 +189,11 @@ public:
      * Get the list of the elements in the enviroment.
      *
      * The function returns the following list:
-     *  * floor_grid
-     *  * world_frame
+     *
+     * | Element name  | Description |
+     * |:-------------:|:-----------:|
+     * |  floor_grid   | Grid used to indicated the z = 0 plane. |
+     * |  world_frame  | XYZ (RBG) arrows indicating the world frame. |
      */
     virtual std::vector<std::string> getElements() = 0;
 
@@ -72,53 +202,116 @@ public:
      * @return true if the visibility is correctly setted, false otherwise.
      */
     virtual bool setElementVisibility(const std::string elementKey, bool isVisible) = 0;
+
+    /**
+     * Set the background color.
+     */
+    virtual void setBackgroundColor(const ColorViz & backgroundColor) = 0;
+
+    /**
+     * Set the ambient light of the enviroment.
+     */
+    virtual void setAmbientLight(const ColorViz & ambientLight) = 0;
+
+    /**
+     * Get the list of lights present in the visualization.
+     */
+    virtual std::vector<std::string> getLights() = 0;
+
+    /**
+     * Add a light.
+     */
+    virtual bool addLight(const std::string & lightName) = 0;
+
+    /**
+     * Return an interface to a light.
+     */
+    virtual ILight & lightViz(const std::string & lightName) = 0;
+
+    /**
+     * Remove a light from visualization.
+     *
+     * @return true if the light was present and was removed, false otherwise.
+     */
+    virtual bool removeLight(const std::string & lightName) = 0;
 };
+
+
 
 /**
  * Interface to the visualization of a model istance.
  */
-class ModelVisualization
+class IModelVisualization
 {
-private:
-    struct ModelVisualizationPimpl;
-    ModelVisualizationPimpl * pimpl;
-
-    // Disable copy for now
-    ModelVisualization(const ModelVisualization& other);
-    ModelVisualization& operator=(const ModelVisualization& other);
 public:
-    ModelVisualization();
-    ~ModelVisualization();
-
     /**
-     * Create the model in the visualization.
+     * Denstructor
      */
-    bool init(const Model& model, const std::string instanceName, Visualizer & visualizer);
+    virtual ~IModelVisualization() = 0;
 
     /**
      * Set the position of the model (using base position and joint positions)
      */
-    bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos);
+    virtual bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos) = 0;
 
     /**
      * Set the positions of the model by directly specifing link positions wrt to the world.
      */
-    bool setLinkPositions(const LinkPositions & linkPos);
+    virtual bool setLinkPositions(const LinkPositions & linkPos) = 0;
 
     /**
      * Reference to the used model.
      */
-    Model & model();
-
-    /**
-     * Remove the model from the visualization.
-     */
-    void close();
+    virtual Model & model() = 0;
 
     /**
      * Get the instance name.
      */
-    std::string getInstanceName();
+    virtual std::string getInstanceName() = 0;
+
+    /**
+     * Set the visibility of all the link of the model.
+     */
+    virtual void setModelVisibility(const bool isVisible) = 0;
+
+    /**
+     * Set the color of all the geometries of the model.
+     *
+     * This will overwrite the material of the model, but it can be
+     * reset by resetModelColor.
+     */
+    virtual void setModelColor(const ColorViz & modelColor) = 0;
+
+    /**
+     * Reset the colors of the model.
+     */
+    virtual void resetModelColor() = 0;
+
+    /**
+     * Get the name of the link in the model.
+     */
+    virtual std::vector< std::string > getLinkNames() = 0;
+
+    /**
+     * Set a given link visibility.
+     */
+    virtual bool setLinkVisibility(const std::string & linkName, bool isVisible) = 0;
+
+    /**
+     * Get list of visualization features that can be enabled/disabled.
+     *
+     * This method will return the follow list:
+     * | Visualization  feature | Description                              | Default value |
+     * |:----------------------:|:----------------------------------------:|:-------------:|
+     * |  wireframe             | Visualize mesh of the model as wireframe | false  |
+     */
+    virtual std::vector<std::string> getFeatures() = 0;
+
+    /**
+     * @return true if the visibility is correctly setted, false otherwise.
+     */
+    virtual bool setFeatureVisibility(const std::string& elementKey, bool isVisible) = 0;
+
 };
 
 /**
@@ -131,7 +324,19 @@ struct VisualizerOptions
      */
     bool verbose;
 
-    VisualizerOptions(): verbose(false)
+    /**
+     * Initial width (in pixels) of the created windows (default: 800).
+     */
+    int winWidth;
+
+    /**
+     * Initial height (in pixels) of the created window (default: 600).
+     */
+    int winHeight;
+
+    VisualizerOptions(): verbose(false),
+                         winWidth(800),
+                         winHeight(600)
     {
     }
 };
@@ -193,14 +398,14 @@ public:
      *
      * @return a reference to a valid ModelVisualization if instanceName is the name of a model instance.
      */
-    ModelVisualization& modelViz(size_t modelIdx);
+    IModelVisualization& modelViz(size_t modelIdx);
 
     /**
      * Return an interface to a visualization of a model.
      *
      * @return a reference to a valid ModelVisualization if instanceName is the name of a model instance.
      */
-    ModelVisualization& modelViz(const std::string & instanceName);
+    IModelVisualization& modelViz(const std::string & instanceName);
 
     /**
      * Return an interface to manipulate the camera in the visualization.

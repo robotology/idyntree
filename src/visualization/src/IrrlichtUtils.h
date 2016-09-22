@@ -13,18 +13,62 @@
 
 #include <irrlicht.h>
 
+#include <Eigen/Core>
+#include <Eigen/LU>
+
+#include <iDynTree/Core/EigenHelpers.h>
+
+#include "FloorGridSceneNode.h"
+
 namespace iDynTree
 {
 
+inline irr::video::SColorf idyntree2irrlicht(iDynTree::ColorViz color)
+{
+    return irr::video::SColorf(color.r,color.g,color.b,color.a);
+}
+
+inline iDynTree::ColorViz  irrlicht2idyntree(irr::video::SColorf color)
+{
+    return iDynTree::ColorViz((double)color.r,(double)color.g,(double)color.b,(double)color.a);
+}
+
+
 inline irr::core::vector3df idyntree2irr_rpy(const iDynTree::Vector3 & vecId)
 {
-    const double rad2deg = 180/M_PI;
-    return irr::core::vector3df(rad2deg*vecId(0),rad2deg*vecId(1),rad2deg*vecId(2));
+    const double kRad2deg = 180/M_PI;
+    return irr::core::vector3df(kRad2deg*vecId(0),kRad2deg*vecId(1),kRad2deg*vecId(2));
 }
 
 inline irr::core::vector3df idyntree2irr_pos(const iDynTree::Vector3 & vecId)
 {
     return irr::core::vector3df(vecId(0),vecId(1),vecId(2));
+}
+
+inline  iDynTree::Position irr2idyntree_pos(const irr::core::vector3df & vecIrr)
+{
+    return iDynTree::Position(vecIrr.X,vecIrr.Y,vecIrr.Z);
+}
+
+inline iDynTree::Vector3 irr2idyntree_rpy(const irr::core::vector3df & vecIrr)
+{
+    const double kDeg2rad = M_PI/180;
+    iDynTree::Vector3 ret;
+    ret(0) = kDeg2rad*vecIrr.X;
+    ret(1) = kDeg2rad*vecIrr.Y;
+    ret(2) = kDeg2rad*vecIrr.Z;
+    return ret;
+}
+
+inline iDynTree::Rotation irr2idyntree_rot(const irr::core::vector3df & rotIrr)
+{
+    iDynTree::Vector3 rpy = irr2idyntree_rpy(rotIrr);
+    return iDynTree::Rotation::RPY(rpy(0),rpy(1),rpy(2));
+}
+
+inline const irr::core::vector3df idyntree2irr_rot(const iDynTree::Rotation & rot)
+{
+    return idyntree2irr_rpy(rot.asRPY());
 }
 
 inline irr::video::SMaterial idyntree2irr(const iDynTree::Vector4 & rgbaMaterialId)
@@ -42,6 +86,30 @@ inline irr::video::SMaterial idyntree2irr(const iDynTree::Vector4 & rgbaMaterial
                                                         rgbaMaterialId(3)).toSColor();
 
     return ret;
+}
+
+/**
+ * Get a rotation matrix whose z column is the provided direction.
+ */
+inline iDynTree::Rotation RotationWithPrescribedZColumn(const iDynTree::Direction zAxis)
+{
+    // We need a normal vector perpendicular to z : we can extract this
+    // from the nullspace of the transpose of z
+    Eigen::Vector3d z = iDynTree::toEigen(zAxis);
+    Eigen::Matrix<double,1,3> zTrans = z.transpose();
+
+    // x is a normal vector orthognal to z
+    Eigen::Vector3d x = zTrans.fullPivLu().kernel().block<3,1>(0,0).normalized();
+
+    Eigen::Vector3d y = z.cross(x);
+
+    iDynTree::Rotation R;
+
+    toEigen(R).block<3,1>(0,0) = x;
+    toEigen(R).block<3,1>(0,1) = y;
+    toEigen(R).block<3,1>(0,2) = z;
+
+    return R;
 }
 
 inline std::string getFileExt(const std::string filename)
@@ -156,8 +224,8 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 }
 
 inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
-                                             irr::f32 arrowLenght=1.0,
-                                             irr::scene::ISceneNode * parentNode=0)
+                                             irr::scene::ISceneNode * parentNode=0,
+                                             irr::f32 arrowLenght=1.0)
 {
     irr::u32 alphaLev = 20;
     irr::video::SMaterial transRed;
@@ -203,6 +271,14 @@ inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
     zArrow->getMaterial(1) = transBlue;
 
     return frameNode;
+}
+
+inline irr::scene::ISceneNode * addFloorGridNode(irr::scene::ISceneManager* smgr,
+                                                irr::scene::ISceneNode * parentNode=0)
+{
+    irr::scene::ISceneNode * retPtr;
+    retPtr = new CFloorGridSceneNode(parentNode,smgr);
+    return retPtr;
 }
 
 inline void setWorldHNode(irr::scene::ISceneNode* node, const iDynTree::Transform & trans)
@@ -264,34 +340,6 @@ void inline addVizEnviroment(irr::scene::ISceneManager* smgr)
 void inline addVizLights(irr::scene::ISceneManager* smgr)
 {
     smgr->setAmbientLight(irr::video::SColor(255,255,255,255));
-
-    //cube->setMaterialFlag(video::EMF_LIGHTING, true);
-    //cube->getMaterial(0).AmbientColor.set(255,0,100,100);
-
-    // Create nice light
-    irr::scene::ILightSceneNode * sun_node=smgr->addLightSceneNode();
-    irr::video::SLight sun_data;
-    sun_data.Direction=irr::core::vector3df(1,0,1);
-    sun_data.Type=irr::video::ELT_POINT;
-    sun_data.AmbientColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
-    sun_data.SpecularColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
-    sun_data.DiffuseColor=irr::video::SColorf(0.7f,0.7f,0.7f,1);
-    sun_data.CastShadows=false;
-    sun_node->setLightData(sun_data);
-    sun_node->setPosition(irr::core::vector3df(5,0,5));
-    sun_node->setRotation(irr::core::vector3df(0,0,0));
-
-    irr::scene::ILightSceneNode * sun_node2=smgr->addLightSceneNode();
-    irr::video::SLight sun_data2;
-    sun_data.Direction=irr::core::vector3df(-1,1,1);
-    sun_data.Type=irr::video::ELT_POINT;
-    sun_data.AmbientColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
-    sun_data.SpecularColor=irr::video::SColorf(0.1f,0.1f,0.1f,1);
-    sun_data.DiffuseColor=irr::video::SColorf(0.7f,0.7f,0.7f,1);
-    sun_data.CastShadows=false;
-    sun_node2->setLightData(sun_data2);
-    sun_node2->setPosition(irr::core::vector3df(-5,5,5));
-    sun_node2->setRotation(irr::core::vector3df(0,0,0));
 }
 
 inline irr::scene::ICameraSceneNode* addVizCamera(irr::scene::ISceneManager* smgr)

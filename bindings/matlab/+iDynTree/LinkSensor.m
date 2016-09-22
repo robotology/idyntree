@@ -21,6 +21,9 @@ classdef LinkSensor < iDynTree.Sensor
     function varargout = setParentLinkIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1121, self, varargin{:});
     end
+    function varargout = setLinkSensorTransform(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1122, self, varargin{:});
+    end
     function self = LinkSensor(varargin)
       self@iDynTree.Sensor(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')

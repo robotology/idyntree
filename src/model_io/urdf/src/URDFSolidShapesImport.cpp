@@ -10,6 +10,7 @@
 #include <iDynTree/Model/Model.h>
 
 #include <fstream>
+#include <map>
 
 #include "URDFParsingUtils.h"
 
@@ -37,9 +38,20 @@ bool solidShapesFromURDF(const std::string & urdf_filename,
     return solidShapesFromURDFString(xml_string,urdf_filename,model,urdfGeometryType,output);
 }
 
-void parseURDFMaterial(const iDynTree::Model & /*model*/,
-                      iDynTree::Vector4 & material_rgba,
-                  TiXmlElement* materialXml)
+/**
+ * URDF files provide a model-wide material database,
+ * in the form of <material> tags under <robot>.
+ *
+ * This material can be refenced from <material>
+ * under <link> using the `name` attribute.
+ *
+ * See http://wiki.ros.org/urdf/XML/link
+ */
+typedef std::map<std::string,iDynTree::Vector4> URDFModelMaterialDatabase;
+
+void parseURDFMaterial(const URDFModelMaterialDatabase & materialDB,
+                       iDynTree::Vector4 & material_rgba,
+                       TiXmlElement* materialXml)
 {
     bool parsingSuccessfull = false;
     if( materialXml )
@@ -53,12 +65,62 @@ void parseURDFMaterial(const iDynTree::Model & /*model*/,
             if( rgba )
             {
                 vector4FromString(std::string(rgba),material_rgba);
+                parsingSuccessfull = true;
+            }
+            else
+            {
+                reportError("","parseURDFMaterial","Impossible to parse URDF material, color tag has now rgba element");
             }
         }
+
+        TiXmlElement* textureXml = materialXml->FirstChildElement("texture");
+
+        if( textureXml )
+        {
+            const char * filename = colorXml->Attribute("filename");
+
+            if( filename )
+            {
+                reportError("","parseURDFMaterial","Impossible to parse URDF material, texture tag not supported by iDynTree.");
+            }
+        }
+
+        if( !parsingSuccessfull )
+        {
+            const char * materialName = materialXml->Attribute("name");
+
+            // If there is a valid name, query the model material database
+            if( materialName )
+            {
+                std::string materialNameCpp(materialName);
+                URDFModelMaterialDatabase::const_iterator it = materialDB.find(materialNameCpp);
+
+                if( it != materialDB.end() )
+                {
+                    material_rgba = it->second;
+                    parsingSuccessfull = true;
+                }
+                else
+                {
+                    std::stringstream ss;
+                    ss << "Impossible to parse URDF material, material " << materialNameCpp << " not found in model database.";
+                    reportError("","parseURDFMaterial",ss.str().c_str());
+                }
+            }
+            else
+            {
+                reportError("","parseURDFMaterial","Impossible to parse URDF material, material name attribute not found.");
+            }
+        }
+
     }
 
-    if( parsingSuccessfull )
+    if( !parsingSuccessfull )
     {
+        if( materialXml )
+        {
+            reportError("","parseURDFMaterial","Impossible to parse URDF material, setting material to white.");
+        }
         // Set default material
         material_rgba(0) = 1.0;
         material_rgba(1) = 1.0;
@@ -66,6 +128,31 @@ void parseURDFMaterial(const iDynTree::Model & /*model*/,
         material_rgba(3) = 1.0;
     }
 
+}
+
+void parseURDFModelMaterialDatabase(TiXmlElement* robotXml,
+                                    URDFModelMaterialDatabase& materialDB)
+{
+    URDFModelMaterialDatabase emptyDB;
+
+    for (TiXmlElement* materialXml = robotXml->FirstChildElement("material");
+          materialXml; materialXml = materialXml->NextSiblingElement("material"))
+    {
+         // Get the linkName
+         std::string urdfMaterialName = materialXml->Attribute("name");
+
+         // Parse the color
+         iDynTree::Vector4 color;
+
+         // Material child of robot element cannot refer to the model
+         // database,
+         parseURDFMaterial(emptyDB,color,materialXml);
+
+         // Save material in DB
+         materialDB[urdfMaterialName] = color;
+     }
+
+     return;
 }
 
 /**
@@ -124,6 +211,7 @@ bool addURDFGeometryToModelGeometries(const iDynTree::Model& model,
                                       const std::string urdfGeomName,
                                       const Transform urdfLink_H_geometry,
                                       const std::string urdf_filename,
+                                      const URDFModelMaterialDatabase& materialDB,
                                             ModelSolidShapes & modelGeoms,
                                             TiXmlElement* geomXml,
                                             TiXmlElement* materialXml)
@@ -226,9 +314,8 @@ bool addURDFGeometryToModelGeometries(const iDynTree::Model& model,
         return false;
     }
 
-    // parse material
-    parseURDFMaterial(model,pGeom->material,materialXml);
-
+    // parse material (eventually checking the material database)
+    parseURDFMaterial(materialDB,pGeom->material,materialXml);
 
     pGeom->name = urdfGeomName;
     pGeom->link_H_geometry = idyntreeLink_H_geometry;
@@ -268,10 +355,14 @@ bool solidShapesFromURDFString(const std::string & urdf_string,
         std::cerr << "Impossible to find robot element in urdf xml" << std::endl;
     }
 
+    // Get material database
+    URDFModelMaterialDatabase materialDB;
+    parseURDFModelMaterialDatabase(robotXml,materialDB);
+
     // Get all the link elements of robot element
     for (TiXmlElement* linkXml = robotXml->FirstChildElement("link");
           linkXml; linkXml = linkXml->NextSiblingElement("link"))
-     {
+    {
          // Get the linkName
          std::string urdfLinkName = linkXml->Attribute("name");
 
@@ -301,7 +392,7 @@ bool solidShapesFromURDFString(const std::string & urdf_string,
 
              TiXmlElement* materialXml = visXml->FirstChildElement("material");
 
-             parsingSuccessful = parsingSuccessful && addURDFGeometryToModelGeometries(model,urdfLinkName,geomName,urdfLink_H_geometry,urdf_filename,
+             parsingSuccessful = parsingSuccessful && addURDFGeometryToModelGeometries(model,urdfLinkName,geomName,urdfLink_H_geometry,urdf_filename,materialDB,
                                                                                        newGeoms,geomXml,materialXml);
          }
      }

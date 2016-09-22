@@ -9,22 +9,22 @@ classdef LinkTraversalsCache < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1249, varargin{:});
+        tmp = iDynTreeMEX(1250, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1250, self);
+        iDynTreeMEX(1251, self);
         self.swigPtr=[];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1251, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1252, self, varargin{:});
     end
     function varargout = getTraversalWithLinkAsBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1252, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1253, self, varargin{:});
     end
   end
   methods(Static)
