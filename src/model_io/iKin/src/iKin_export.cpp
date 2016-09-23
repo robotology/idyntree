@@ -629,6 +629,7 @@ bool iKinLimbFromKDLChain(const KDL::Chain& kdl_chain,
     //Calculate the base pose with iKinChain (with HN = Identity) and the KDL::Chain . The difference is the desired HN
     KDL::Frame H_ef_iKinChain;
 
+    iKin_chain.setAllConstraints(false);
     for(size_t i=0; i < nj; i++ ) { iKin_chain.releaseLink(i); }
     for(size_t i=0; i < nj; i++ ) { iKin_chain.setAng(i,0.0); }
     yarp::sig::Matrix H_ef_iKinChain_yarp = iKin_chain.getH();
