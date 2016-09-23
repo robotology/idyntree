@@ -177,8 +177,8 @@ int main(int argc, char** argv)
   if( !checkChainsAreEqual(kdl_chain,ikin_limb) )
   {
       cerr << "urdf2dh error: KDL::Chain and iKinChain results does not match" << endl;
-      std::cerr << "urdf2dh: Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
-      return false;
+      std::cerr << "urdf2dh: Please open an issue at https://github.com/robotology/idyntree/issues " << std::endl;
+      return EXIT_FAILURE;
   }
 
   yarp::os::Property prop;
