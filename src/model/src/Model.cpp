@@ -102,6 +102,11 @@ Model::~Model()
     destroy();
 }
 
+Model Model::copy() const
+{
+    return Model(*this);
+}
+
 size_t Model::getNrOfLinks() const
 {
     return links.size();

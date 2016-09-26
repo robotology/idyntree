@@ -164,6 +164,13 @@ namespace iDynTree
         Model& operator=(const Model &other);
 
         /**
+         * Copy the model.
+         *
+         * Get a copy of the model.
+         */
+        Model copy() const;
+
+        /**
          * Destructor
          *
          */
