@@ -5,42 +5,42 @@ classdef IModelVisualization < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1482, self);
+        iDynTreeMEX(1483, self);
         self.swigPtr=[];
       end
     end
     function varargout = setPositions(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1483, self, varargin{:});
-    end
-    function varargout = setLinkPositions(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1484, self, varargin{:});
     end
-    function varargout = model(self,varargin)
+    function varargout = setLinkPositions(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1485, self, varargin{:});
     end
-    function varargout = getInstanceName(self,varargin)
+    function varargout = model(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1486, self, varargin{:});
     end
-    function varargout = setModelVisibility(self,varargin)
+    function varargout = getInstanceName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1487, self, varargin{:});
     end
-    function varargout = setModelColor(self,varargin)
+    function varargout = setModelVisibility(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1488, self, varargin{:});
     end
-    function varargout = resetModelColor(self,varargin)
+    function varargout = setModelColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1489, self, varargin{:});
     end
-    function varargout = getLinkNames(self,varargin)
+    function varargout = resetModelColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1490, self, varargin{:});
     end
-    function varargout = setLinkVisibility(self,varargin)
+    function varargout = getLinkNames(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1491, self, varargin{:});
     end
-    function varargout = getFeatures(self,varargin)
+    function varargout = setLinkVisibility(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1492, self, varargin{:});
     end
-    function varargout = setFeatureVisibility(self,varargin)
+    function varargout = getFeatures(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1493, self, varargin{:});
+    end
+    function varargout = setFeatureVisibility(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1494, self, varargin{:});
     end
     function self = IModelVisualization(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')

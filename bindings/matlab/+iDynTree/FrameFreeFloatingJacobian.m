@@ -7,20 +7,20 @@ classdef FrameFreeFloatingJacobian < iDynTree.MatrixDynSize
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1021, varargin{:});
+        tmp = iDynTreeMEX(1022, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1022, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1023, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1023, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1024, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1024, self);
+        iDynTreeMEX(1025, self);
         self.swigPtr=[];
       end
     end
