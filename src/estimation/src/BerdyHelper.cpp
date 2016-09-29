@@ -323,8 +323,6 @@ IndexRange BerdyHelper::getRangeOriginalBerdyFixedBase(BerdyDynamicVariablesType
     {
         nrOfVariablesForJoint = 20;
     }
-    std::cerr << "nrOfVariablesForJoint : " << nrOfVariablesForJoint << std::endl;
-
 
     switch(dynamicVariableType)
     {
