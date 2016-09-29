@@ -1,3 +1,3 @@
 function varargout = sensorsFromURDF(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1218, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1243, varargin{:});
 end

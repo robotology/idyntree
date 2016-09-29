@@ -9,86 +9,86 @@ classdef estimateExternalWrenchesBuffers < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1255, varargin{:});
+        tmp = iDynTreeMEX(1280, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1256, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1281, self, varargin{:});
     end
     function varargout = getNrOfSubModels(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1257, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1282, self, varargin{:});
     end
     function varargout = getNrOfLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1258, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1283, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1259, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1284, self, varargin{:});
     end
     function varargout = A(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1260, self);
+        varargout{1} = iDynTreeMEX(1285, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1261, self, varargin{1});
+        iDynTreeMEX(1286, self, varargin{1});
       end
     end
     function varargout = x(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1262, self);
+        varargout{1} = iDynTreeMEX(1287, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1263, self, varargin{1});
+        iDynTreeMEX(1288, self, varargin{1});
       end
     end
     function varargout = b(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1264, self);
+        varargout{1} = iDynTreeMEX(1289, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1265, self, varargin{1});
+        iDynTreeMEX(1290, self, varargin{1});
       end
     end
     function varargout = pinvA(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1266, self);
+        varargout{1} = iDynTreeMEX(1291, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1267, self, varargin{1});
+        iDynTreeMEX(1292, self, varargin{1});
       end
     end
     function varargout = b_contacts_subtree(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1268, self);
+        varargout{1} = iDynTreeMEX(1293, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1269, self, varargin{1});
+        iDynTreeMEX(1294, self, varargin{1});
       end
     end
     function varargout = subModelBase_H_link(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1270, self);
+        varargout{1} = iDynTreeMEX(1295, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1271, self, varargin{1});
+        iDynTreeMEX(1296, self, varargin{1});
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1272, self);
+        iDynTreeMEX(1297, self);
         self.swigPtr=[];
       end
     end

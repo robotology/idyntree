@@ -2,9 +2,9 @@ function varargout = TRAVERSAL_INVALID_INDEX(varargin)
   narginchk(0,1)
   if nargin==0
     nargoutchk(0,1)
-    varargout{1} = iDynTreeMEX(727);
+    varargout{1} = iDynTreeMEX(752);
   else
     nargoutchk(0,0)
-    iDynTreeMEX(728,varargin{1});
+    iDynTreeMEX(753,varargin{1});
   end
 end

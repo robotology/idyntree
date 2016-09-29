@@ -7,65 +7,65 @@ classdef RigidBodyInertiaNonLinearParametrization < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(593, self);
+        varargout{1} = iDynTreeMEX(618, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(594, self, varargin{1});
+        iDynTreeMEX(619, self, varargin{1});
       end
     end
     function varargout = com(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(595, self);
+        varargout{1} = iDynTreeMEX(620, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(596, self, varargin{1});
+        iDynTreeMEX(621, self, varargin{1});
       end
     end
     function varargout = link_R_centroidal(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(597, self);
+        varargout{1} = iDynTreeMEX(622, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(598, self, varargin{1});
+        iDynTreeMEX(623, self, varargin{1});
       end
     end
     function varargout = centralSecondMomentOfMass(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(599, self);
+        varargout{1} = iDynTreeMEX(624, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(600, self, varargin{1});
+        iDynTreeMEX(625, self, varargin{1});
       end
     end
     function varargout = getLinkCentroidalTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(601, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(626, self, varargin{:});
     end
     function varargout = fromRigidBodyInertia(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(602, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(627, self, varargin{:});
     end
     function varargout = fromInertialParameters(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(603, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(628, self, varargin{:});
     end
     function varargout = toRigidBodyInertia(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(604, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(629, self, varargin{:});
     end
     function varargout = isPhysicallyConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(605, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(630, self, varargin{:});
     end
     function varargout = asVectorWithRotationAsVec(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(606, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(631, self, varargin{:});
     end
     function varargout = fromVectorWithRotationAsVec(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(607, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(632, self, varargin{:});
     end
     function varargout = getGradientWithRotationAsVec(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(608, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(633, self, varargin{:});
     end
     function self = RigidBodyInertiaNonLinearParametrization(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
@@ -73,14 +73,14 @@ classdef RigidBodyInertiaNonLinearParametrization < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(609, varargin{:});
+        tmp = iDynTreeMEX(634, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(610, self);
+        iDynTreeMEX(635, self);
         self.swigPtr=[];
       end
     end

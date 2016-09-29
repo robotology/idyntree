@@ -9,68 +9,68 @@ classdef BerdyHelper < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1342, varargin{:});
+        tmp = iDynTreeMEX(1367, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = dynamicTraversal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1343, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1368, self, varargin{:});
     end
     function varargout = model(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1344, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1369, self, varargin{:});
     end
     function varargout = sensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1345, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1370, self, varargin{:});
     end
     function varargout = init(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1346, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1371, self, varargin{:});
     end
     function varargout = getOptions(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1347, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1372, self, varargin{:});
     end
     function varargout = getNrOfDynamicVariables(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1348, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1373, self, varargin{:});
     end
     function varargout = getNrOfDynamicEquations(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1349, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1374, self, varargin{:});
     end
     function varargout = getNrOfSensorsMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1350, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1375, self, varargin{:});
     end
     function varargout = resizeAndZeroBerdyMatrices(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1351, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1376, self, varargin{:});
     end
     function varargout = getBerdyMatrices(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1352, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1377, self, varargin{:});
     end
     function varargout = getSensorsOrdering(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1353, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1378, self, varargin{:});
     end
     function varargout = getDynamicVariablesOrdering(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1354, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1379, self, varargin{:});
     end
     function varargout = serializeDynamicVariables(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1355, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1380, self, varargin{:});
     end
     function varargout = serializeSensorVariables(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1356, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1381, self, varargin{:});
     end
     function varargout = serializeDynamicVariablesComputedFromFixedBaseRNEA(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1357, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1382, self, varargin{:});
     end
     function varargout = updateKinematicsFromFloatingBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1358, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1383, self, varargin{:});
     end
     function varargout = updateKinematicsFromFixedBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1359, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1384, self, varargin{:});
     end
     function varargout = updateKinematicsFromTraversalFixedBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1360, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1385, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1361, self);
+        iDynTreeMEX(1386, self);
         self.swigPtr=[];
       end
     end
