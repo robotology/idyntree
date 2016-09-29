@@ -135,6 +135,7 @@ namespace std {
 //Wrap std::vector<BerdySensors>
 namespace std {
     %template(BerdySensors) vector<iDynTree::BerdySensor>;
+    %template(BerdyDynamicVariables) vector<iDynTree::BerdyDynamicVariable>;
 }
 
 //Utils
