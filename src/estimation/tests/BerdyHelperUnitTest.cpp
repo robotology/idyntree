@@ -117,6 +117,27 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
     }
 }
 
+/*
+ * In the ORIGINAL_BERDY_FIXED_BASE, the serialization of the
+ * dynamic variables returned by getDynamicVariablesOrdering
+ * should be contiguous. Check this.
+ */
+void testBerdyOriginalFixedBaseDynamicEquationSerialization(BerdyHelper& berdy)
+{
+    std::vector<iDynTree::BerdyDynamicVariable> dynVarOrdering = berdy.getDynamicVariablesOrdering();
+
+    // Variables containing the first index not described by dynVarOrdering
+    size_t accumulator=0;
+    for(size_t i=0; i < dynVarOrdering.size(); i++)
+    {
+        ASSERT_EQUAL_DOUBLE(accumulator,dynVarOrdering[i].range.offset);
+        accumulator += dynVarOrdering[i].range.size;
+    }
+
+    // Once we finish, accumulator should be equal to the number of dyn equations
+    ASSERT_EQUAL_DOUBLE(berdy.getNrOfDynamicVariables(),accumulator);
+}
+
 void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
 {
     // Check the concistency of the sensor matrices
@@ -242,6 +263,8 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
         // Check if the two vectors are equal
         ASSERT_EQUAL_VECTOR(y,yFromBerdy);
     }
+
+    testBerdyOriginalFixedBaseDynamicEquationSerialization(berdy);
 }
 
 void testBerdyHelpers(std::string fileName)

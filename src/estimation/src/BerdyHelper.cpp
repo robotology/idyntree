@@ -323,6 +323,8 @@ IndexRange BerdyHelper::getRangeOriginalBerdyFixedBase(BerdyDynamicVariablesType
     {
         nrOfVariablesForJoint = 20;
     }
+    std::cerr << "nrOfVariablesForJoint : " << nrOfVariablesForJoint << std::endl;
+
 
     switch(dynamicVariableType)
     {
@@ -1227,34 +1229,34 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize& D, VectorDynSize& bD,
             //???: I don't know if the following is a sort of loop.
             //Ignore for now, but in case we want to locate all the hardcoded ordering in
             //one function we have to be sure of this.
-            acceleration.range = getRangeLinkProperAccDynEq(realLinkIndex);
+            acceleration.range = getRangeLinkVariable(acceleration.type , realLinkIndex);
 
             BerdyDynamicVariable linkWrench;
             linkWrench.type = NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV;
             linkWrench.id = linkName;
-            linkWrench.range = getRangeLinkNetTotalwrenchDynEq(realLinkIndex);
+            linkWrench.range = getRangeLinkVariable(linkWrench.type, realLinkIndex);
 
             BerdyDynamicVariable jointWrench;
             jointWrench.type = JOINT_WRENCH;
             jointWrench.id = parentJointName;
-            jointWrench.range = getRangeJointWrench(jointIndex);
+            jointWrench.range = getRangeJointVariable(jointWrench.type, jointIndex);
 
             BerdyDynamicVariable jointTorque;
             jointTorque.type = DOF_TORQUE;
             jointTorque.id = parentJointName;
             //TODO: for now assume 1 dof joint
-            jointTorque.range = getRangeDOFTorqueDynEq(jointIndex);
+            jointTorque.range = getRangeDOFVariable(jointTorque.type, jointIndex);
 
             BerdyDynamicVariable netExternalWrench;
             netExternalWrench.type = NET_EXT_WRENCH;
             netExternalWrench.id = linkName;
-            netExternalWrench.range = getRangeLinkVariable(NET_EXT_WRENCH, realLinkIndex);
+            netExternalWrench.range = getRangeLinkVariable(netExternalWrench.type, realLinkIndex);
 
             BerdyDynamicVariable jointAcceleration;
             jointAcceleration.type = DOF_ACCELERATION;
             jointAcceleration.id = parentJointName;
             //TODO: for now assume 1 dof joint
-            jointAcceleration.range = getRangeDOFVariable(DOF_ACCELERATION, jointIndex);
+            jointAcceleration.range = getRangeDOFVariable(jointAcceleration.type, jointIndex);
 
             m_dynamicVariablesOrdering.push_back(acceleration);
             m_dynamicVariablesOrdering.push_back(linkWrench);

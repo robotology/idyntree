@@ -452,6 +452,8 @@ bool Model::addAdditionalFrameToLink(const std::string& linkName,
     }
 
     // If all error has passed, actually add the frame
+    assert(additionalFrames.size() == additionalFramesLinks.size());
+    assert(additionalFrames.size() == frameNames.size());
     this->additionalFrames.push_back(link_H_frame);
     this->additionalFramesLinks.push_back(linkIndex);
     this->frameNames.push_back(frameName);
