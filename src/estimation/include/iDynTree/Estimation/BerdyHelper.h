@@ -228,14 +228,18 @@ struct BerdySensor {
                                  * (starting location in the measurements equations
                                  *  and number of measuremes equations associated with the sensor */
 
-    bool operator==(const struct BerdySensor&);
+    bool operator==(const struct BerdySensor&) const;
+    bool operator<(const struct BerdySensor&) const;
 };
 
-    struct BerdyDynamicVariable {
-        iDynTree::BerdyDynamicVariablesTypes type;
-        std::string id;
-        iDynTree::IndexRange range;
-    };
+struct BerdyDynamicVariable {
+    iDynTree::BerdyDynamicVariablesTypes type;
+    std::string id;
+    iDynTree::IndexRange range;
+
+    bool operator==(const struct BerdyDynamicVariable&) const;
+    bool operator<(const struct BerdyDynamicVariable&) const;
+};
 
 /**
  * \brief Helper class for computing Berdy matrices.

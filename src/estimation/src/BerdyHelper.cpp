@@ -17,6 +17,7 @@
 #include <iDynTree/Sensors/AllSensorsTypes.h>
 
 #include <sstream>
+#include <algorithm>
 
 namespace iDynTree
 {
@@ -98,10 +99,26 @@ bool BerdyOptions::checkConsistency()
     return true;
 }
 
-bool BerdySensor::operator==(const struct BerdySensor &s)
+bool BerdySensor::operator==(const struct BerdySensor &s) const
 {
     return s.type == this->type
     && s.id == this->id;
+}
+
+bool BerdySensor::operator<(const struct BerdySensor &s) const
+{
+    return this->range.offset < s.range.offset;
+}
+
+bool BerdyDynamicVariable::operator==(const struct BerdyDynamicVariable &v) const
+{
+    return v.type == this->type
+    && v.id == this->id;
+}
+
+bool BerdyDynamicVariable::operator<(const struct BerdyDynamicVariable &v) const
+{
+    return this->range.offset < v.range.offset;
 }
 
 BerdyHelper::BerdyHelper(): m_areModelAndSensorsValid(false),
@@ -1188,6 +1205,9 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize& D, VectorDynSize& bD,
             jointSens.range = sensorRange;
             m_sensorsOrdering.push_back(jointSens);
         }
+
+        //To avoid any problem, sort m_sensorsOrdering by range.offset
+        std::sort(m_sensorsOrdering.begin(), m_sensorsOrdering.end());
     }
 
     void BerdyHelper::cacheDynamicVariablesOrdering()
@@ -1264,6 +1284,9 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize& D, VectorDynSize& bD,
             m_dynamicVariablesOrdering.push_back(jointAcceleration);
 
         }
+
+        //To avoid any problem, sort m_dynamicVariablesOrdering by range.offset
+        std::sort(m_dynamicVariablesOrdering.begin(), m_dynamicVariablesOrdering.end());
 
 
     }
