@@ -1,9 +1,9 @@
 sudo: required
 dist: trusty
+osx_image: xcode7.3
 language: cpp
 cache: ccache
 
-# set the CMAKE_PREFIX_PATH enviroment variable to get software installed by the superbuild
 matrix:
   include:
     - os: linux
@@ -21,16 +21,8 @@ matrix:
     - os: osx
       compiler: gcc
       env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
-    - os: osx
-      compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
-    - os: osx
-      osx_image: xcode7.3
-      compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
   allow_failures:
     - os: osx
-      osx_image: xcode7.3
       compiler: clang
       env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="OFF", USE_PYTHON="OFF"
 
