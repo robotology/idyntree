@@ -317,7 +317,7 @@ std::string DynamicRegressorGenerator::getDescriptionOfLinks()
     for(int i = 0; i < (int)undirected_tree.getNrOfLinks(); i++) {
         KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.getOrderedLink(i);
 
-        std::string desc = getDescriptionOfOutput(link_it->getLinkIndex());
+        std::string desc = getDescriptionOfLink(link_it->getLinkIndex());
         if (std::find(fake_links_names.begin(), fake_links_names.end(), desc) != fake_links_names.end()) {
             //ignore fake links
             continue;
