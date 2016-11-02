@@ -252,6 +252,20 @@ public:
     std::string getDescriptionOfDegreesOfFreedom();
 
     /**
+     * Get a human readable description of a given link considered in the regressor.
+     *
+     * @return a human readable description of a given link considered in the regressor.
+     */
+    std::string getDescriptionOfLink(int link_index);
+
+    /**
+     * Get a human readable description of all links considered in the regressor.
+     *
+     * @return a std::string containing the description of all the links.
+     */
+    std::string getDescriptionOfLinks();
+
+    /**
      * Get the number of links contained in the model.
      *
      */
@@ -262,20 +276,6 @@ public:
      *
      */
     unsigned int getNrOfFakeLinks() const;
-
-    /**
-     * Get a human readable description of a given link considered in the regressor.
-     *
-     * @return a human readable description of a given link considered in the regressor.
-     */
-    //std::string getDescriptionOfLink(int link_index);
-
-    /**
-     * Get a human readable description of all links considered in the regressor.
-     *
-     * @return a std::string containing the description of all the links.
-     */
-    //std::string getDescriptionOfLinks();
 
     /**
      * Get name of the base link.
