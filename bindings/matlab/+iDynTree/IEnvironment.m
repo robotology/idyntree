@@ -5,33 +5,33 @@ classdef IEnvironment < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1499, self);
+        iDynTreeMEX(1503, self);
         self.swigPtr=[];
       end
     end
     function varargout = getElements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1500, self, varargin{:});
-    end
-    function varargout = setElementVisibility(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1501, self, varargin{:});
-    end
-    function varargout = setBackgroundColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1502, self, varargin{:});
-    end
-    function varargout = setAmbientLight(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1503, self, varargin{:});
-    end
-    function varargout = getLights(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1504, self, varargin{:});
     end
-    function varargout = addLight(self,varargin)
+    function varargout = setElementVisibility(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1505, self, varargin{:});
     end
-    function varargout = lightViz(self,varargin)
+    function varargout = setBackgroundColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1506, self, varargin{:});
     end
-    function varargout = removeLight(self,varargin)
+    function varargout = setAmbientLight(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1507, self, varargin{:});
+    end
+    function varargout = getLights(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1508, self, varargin{:});
+    end
+    function varargout = addLight(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1509, self, varargin{:});
+    end
+    function varargout = lightViz(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1510, self, varargin{:});
+    end
+    function varargout = removeLight(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1511, self, varargin{:});
     end
     function self = IEnvironment(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
