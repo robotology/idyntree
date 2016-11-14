@@ -33,6 +33,8 @@
 #include <kdl_codyco/regressor_loops.hpp>
 #include <kdl_codyco/com_loops.hpp>
 #include <kdl_codyco/momentumjacobian.hpp>
+#include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
+#include <kdl_codyco/crba_loops.hpp>
 
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
@@ -136,6 +138,10 @@ struct DynamicsComputations::DynamicsComputationsPrivateAttributes
     KDL::CoDyCo::MomentumJacobian m_momentum_jac_buffer;
     KDL::CoDyCo::MomentumJacobian m_momentum2_jac_buffer;
 
+    // storage of mass matrix results
+    KDL::CoDyCo::FloatingJntSpaceInertiaMatrix m_massMatrixBuf;
+    std::vector<KDL::RigidBodyInertia> m_subtreeCRBIBuf;
+
 
     // storage of byproducts of COM computations
     std::vector<KDL::Vector> m_subtree_COM;
@@ -221,6 +227,8 @@ void DynamicsComputations::resizeInternalDataStructures()
     this->pimpl->m_jacobianBuf.resize(nrOfDOFs+6);
     this->pimpl->m_momentum_jac_buffer.resize(nrOfDOFs+6);
     this->pimpl->m_momentum2_jac_buffer.resize(nrOfDOFs+6);
+    this->pimpl->m_massMatrixBuf.resize(nrOfDOFs+6);
+    this->pimpl->m_subtreeCRBIBuf.resize(nrOfFrames);
     this->pimpl->m_subtree_COM.resize(nrOfFrames);
     this->pimpl->m_subtree_mass.resize(nrOfFrames);
     this->pimpl->m_baseLinkHframe.resize(nrOfFrames);
@@ -340,14 +348,14 @@ bool DynamicsComputations::loadRobotModelFromString(const std::string& modelStri
 
     //TODO:
     std::vector<std::string> joint_names;
-    KDL::JntArray min;
-    KDL::JntArray max;
+    KDL::JntArray minPos;
+    KDL::JntArray maxPos;
     ok = ok && iDynTree::jointPosLimitsFromUrdfString(modelString,
                                                       joint_names,
-                                                      min,
-                                                      max);
+                                                      minPos,
+                                                      maxPos);
 
-    if (min.rows() != max.rows() || min.rows() != joint_names.size()) {
+    if (minPos.rows() != maxPos.rows() || minPos.rows() != joint_names.size()) {
         std::cerr << "[ERROR] error in loading joint limits" << std::endl;
         return false;
     }
@@ -356,8 +364,8 @@ bool DynamicsComputations::loadRobotModelFromString(const std::string& modelStri
         int jointIndex = getJointIndex(joint_names[index]);
         if (jointIndex >= 0) {
             DynamicsComputationsPrivateAttributes::JointLimit limit;
-            limit.min = min(index);
-            limit.max = max(index);
+            limit.min = minPos(index);
+            limit.max = maxPos(index);
             this->pimpl->jointLimits.insert(DynamicsComputationsPrivateAttributes::JointLimitMap::value_type(jointIndex, limit));
         }
     }
@@ -726,36 +734,55 @@ SpatialAcc DynamicsComputations::getFrameProperSpatialAcceleration(const int fra
 }
 
 bool DynamicsComputations::inverseDynamics(VectorDynSize& outTorques,
-                                           Wrench& baseReactionForce)
-{
-    if( outTorques.size() != this->getNrOfDegreesOfFreedom() )
-    {
+                                           Wrench& baseReactionForce) {
+    if (outTorques.size() != this->getNrOfDegreesOfFreedom()) {
         outTorques.resize(this->getNrOfDegreesOfFreedom());
         outTorques.zero();
     }
 
     this->computeFwdKinematics();
 
-     // Compute velocity and acceleration kinematics
-     bool ok =
-        (0 == KDL::CoDyCo::rneaDynamicLoop(this->pimpl->m_robot_model,
-                                           this->pimpl->m_qKDL,
-                                           this->pimpl->m_traversal,
-                                           this->pimpl->m_fwdVelKinematicsResults,
-                                           this->pimpl->m_fwdProperAccKinematicsResults,
-                                           this->pimpl->m_extWrenches,
-                                           this->pimpl->m_intWrenches,
-                                           this->pimpl->m_torques,
-                                           this->pimpl->m_baseReactionForce));
+    // Compute velocity and acceleration kinematics
+    bool ok =
+            (0 == KDL::CoDyCo::rneaDynamicLoop(this->pimpl->m_robot_model,
+                                               this->pimpl->m_qKDL,
+                                               this->pimpl->m_traversal,
+                                               this->pimpl->m_fwdVelKinematicsResults,
+                                               this->pimpl->m_fwdProperAccKinematicsResults,
+                                               this->pimpl->m_extWrenches,
+                                               this->pimpl->m_intWrenches,
+                                               this->pimpl->m_torques,
+                                               this->pimpl->m_baseReactionForce));
 
     // todo \todo add semantics
-    baseReactionForce = this->getWorldTransform(this->pimpl->m_traversal.getBaseLink()->getLinkIndex()).getRotation()*iDynTree::ToiDynTree(this->pimpl->m_baseReactionForce);
+    baseReactionForce = this->getWorldTransform(this->pimpl->m_traversal.getBaseLink()->getLinkIndex()).getRotation() *
+                        iDynTree::ToiDynTree(this->pimpl->m_baseReactionForce);
 
-    ok = ok && iDynTree::ToiDynTree(this->pimpl->m_torques,outTorques);
+    ok = ok && iDynTree::ToiDynTree(this->pimpl->m_torques, outTorques);
 
     return ok;
 }
 
+bool DynamicsComputations::getFreeFloatingMassMatrix(iDynTree::MatrixDynSize &freeFloatingMassMatrix)
+{
+    bool ok = true;
+
+    freeFloatingMassMatrix.resize(getNrOfDegreesOfFreedom()+6,getNrOfDegreesOfFreedom()+6);
+
+    // Compute mass matrix (note: crba_floating_base_loop already returns the mixed-mixed mass matrix)
+    KDL::CoDyCo::GeneralizedJntPositions q_fb(this->pimpl->m_world2base,this->pimpl->m_qKDL);
+
+    this->pimpl->m_massMatrixBuf.data.setZero();
+    int successfull_return = KDL::CoDyCo::crba_floating_base_loop(this->pimpl->m_robot_model,
+                                                                  this->pimpl->m_traversal,
+                                                                  q_fb,
+                                                                  this->pimpl->m_subtreeCRBIBuf,
+                                                                  this->pimpl->m_massMatrixBuf);
+
+    iDynTree::toEigen(freeFloatingMassMatrix) = this->pimpl->m_massMatrixBuf.data;
+
+    return ok;
+}
 
 
 //////////////////////////////////////////////////////////////////////////////

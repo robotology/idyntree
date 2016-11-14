@@ -113,7 +113,7 @@ public:
     SpatialInertia & getRobotLockedInertia();
 
     // Process a jacobian that expects a body fixed base velocity depending on the selected FrameVelocityRepresentation
-    void processOnRightSideBodyFixedJacobian(MatrixDynSize & jac);
+    void processOnRightSideMatrixExpectingBodyFixedModelVelocity(MatrixDynSize &mat);
     void processOnLeftSideBodyFixedBaseJacobian(MatrixDynSize & jac);
     void processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize & jac);
 
@@ -184,6 +184,7 @@ void KinDynComputations::resizeInternalDataStructures()
     this->pimpl->m_linkVel.resize(this->pimpl->m_robot_model);
     this->pimpl->m_linkCRBIs.resize(this->pimpl->m_robot_model);
     this->pimpl->m_rawMassMatrix.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_rawMassMatrix.zero();
 }
 
 int KinDynComputations::getFrameIndex(const std::string& frameName) const
@@ -462,6 +463,8 @@ bool KinDynComputations::setJointPos(const VectorDynSize& s)
 
     // Invalidate cache
     this->invalidateCache();
+
+    return true;
 }
 
 
@@ -850,10 +853,11 @@ SpatialInertia& KinDynComputations::KinDynComputationsPrivateAttributes::getRobo
     return m_linkCRBIs(m_traversal.getBaseLink()->getIndex());
 }
 
-void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSideBodyFixedJacobian(MatrixDynSize& jac)
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSideMatrixExpectingBodyFixedModelVelocity(
+        MatrixDynSize &mat)
 {
-    assert(jac.rows() == 6);
-    assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
+    assert(mat.rows() == 6);
+    assert(mat.cols() == m_robot_model.getNrOfDOFs()+6);
 
     Transform baseFrame_X_newJacobBaseFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
@@ -874,12 +878,14 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSide
 
     Matrix6x6 baseFrame_X_newJacobBaseFrame_ = baseFrame_X_newJacobBaseFrame.asAdjointTransform();
 
-    toEigen(jac).block<6,6>(0,0) = toEigen(jac).block<6,6>(0,0)*toEigen(baseFrame_X_newJacobBaseFrame_);
+    // The first six columns of the matrix needs to be modified to account for a different representation
+    // for the base velocity. This can be written as as a modification of the rows \times 6 left submatrix.
+    int rows = mat.rows();
+    toEigen(mat).block(0,0,rows,6) = toEigen(mat).block(0,0,rows,6)*toEigen(baseFrame_X_newJacobBaseFrame_);
 }
 
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseJacobian(MatrixDynSize& jac)
 {
-    assert(jac.rows() == 6);
     assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
 
     Transform newOutputFrame_X_oldOutputFrame;
@@ -903,10 +909,9 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideB
     toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(jac);
 }
 
-void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize& jac)
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize& mat)
 {
-    assert(jac.rows() == 6);
-    assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
+    assert(mat.cols() == m_robot_model.getNrOfDOFs()+6);
 
     Transform newOutputFrame_X_oldOutputFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
@@ -926,7 +931,8 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideB
 
     Matrix6x6 newOutputFrame_X_oldOutputFrame_ = newOutputFrame_X_oldOutputFrame.asAdjointTransformWrench();
 
-    toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(jac);
+    int cols = mat.cols();
+    toEigen(mat).block(0,0,6,cols) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(mat).block(0,0,6,cols);
 }
 
 
@@ -967,7 +973,7 @@ bool KinDynComputations::getAverageVelocityJacobian(MatrixDynSize& avgVelocityJa
     toEigen(avgVelocityJacobian) = toEigen(invLockedInertia)*toEigen(pimpl->m_rawMassMatrix).block(0,0,6,6+pimpl->m_robot_model.getNrOfDOFs());
 
     // Handle the different representations
-    pimpl->processOnRightSideBodyFixedJacobian(avgVelocityJacobian);
+    pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(avgVelocityJacobian);
     pimpl->processOnLeftSideBodyFixedBaseJacobian(avgVelocityJacobian);
 
     return true;
@@ -1005,11 +1011,30 @@ bool KinDynComputations::getLinearAngularMomentumJacobian(MatrixDynSize& linAngM
     toEigen(linAngMomentumJacobian) = toEigen(pimpl->m_rawMassMatrix).block(0,0,6,6+pimpl->m_robot_model.getNrOfDOFs());
 
     // Handle the different representations
-    pimpl->processOnRightSideBodyFixedJacobian(linAngMomentumJacobian);
+    pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(linAngMomentumJacobian);
     pimpl->processOnLeftSideBodyFixedBaseMomentumJacobian(linAngMomentumJacobian);
 
     return true;
 }
+
+bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMassMatrix)
+{
+    // Compute the body-fixed-body-fixed mass matrix, if necessary 
+    this->computeRawMassMatrixAndTotalMomentum();
+    
+    // If the matrix has the right size, this should be inexpensive 
+    freeFloatingMassMatrix.resize(pimpl->m_robot_model.getNrOfDOFs()+6,pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    toEigen(freeFloatingMassMatrix) = toEigen(pimpl->m_rawMassMatrix);
+    
+    // Handle the different representations
+    pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(freeFloatingMassMatrix);
+    pimpl->processOnLeftSideBodyFixedBaseMomentumJacobian(freeFloatingMassMatrix);
+
+    // Return
+    return true;
+}
+
 
 }
 

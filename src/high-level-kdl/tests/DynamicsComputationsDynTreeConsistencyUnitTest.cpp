@@ -248,6 +248,38 @@ void testJacobianConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp
     }
 }
 
+void testMassMatrixConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp,
+                               iCub::iDynTree::DynTree & dynTree,
+                               iDynTree::KinDynComputations & kinDynComp)
+{
+    size_t dofs = dynComp.getNrOfDegreesOfFreedom();
+    yarp::sig::Matrix        dynTreeMassMatrixYarp(6+dofs,6+dofs);
+    MatrixDynSize dynTreeMassMatrix(6+dofs,6+dofs);
+
+    MatrixDynSize dynCompMassMatrix(6+dofs,6+dofs);
+    FreeFloatingMassMatrix kinDynMassMatrix(kinDynComp.getRobotModel());
+
+    // iCub::iDynTree::DynTree
+    bool ok = dynTree.getFloatingBaseMassMatrix(dynTreeMassMatrixYarp);
+    ASSERT_IS_TRUE(ok);
+
+    ok = toiDynTree(dynTreeMassMatrixYarp,dynTreeMassMatrix);
+    ASSERT_IS_TRUE(ok);
+
+
+    // iDynTree::HighLevel::DynamicsComputations
+    ok = dynComp.getFreeFloatingMassMatrix(dynCompMassMatrix);
+    ASSERT_IS_TRUE(ok);
+
+    // iDynTree::KinDynComputations
+    ok = kinDynComp.getFreeFloatingMassMatrix(kinDynMassMatrix);
+    ASSERT_IS_TRUE(ok);
+
+    // Check all matrices are equal
+    ASSERT_EQUAL_MATRIX(dynTreeMassMatrix,dynCompMassMatrix);
+    ASSERT_EQUAL_MATRIX(dynCompMassMatrix,kinDynMassMatrix);
+}
+
 void testRegressorConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp,
                               iCub::iDynTree::DynTree & dynTree)
 {
@@ -368,6 +400,8 @@ void assertConsistency(std::string modelName)
     testJacobianConsistency(dynComp,dynTree,kinDynComp);
     testRegressorConsistency(dynComp,dynTree);
     testCOMConsistency(dynComp,dynTree);
+    testMassMatrixConsistency(dynComp,dynTree,kinDynComp);
+
 }
 
 int main()
