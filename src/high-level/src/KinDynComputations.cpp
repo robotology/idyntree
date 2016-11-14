@@ -856,7 +856,6 @@ SpatialInertia& KinDynComputations::KinDynComputationsPrivateAttributes::getRobo
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSideMatrixExpectingBodyFixedModelVelocity(
         MatrixDynSize &mat)
 {
-    assert(mat.rows() == 6);
     assert(mat.cols() == m_robot_model.getNrOfDOFs()+6);
 
     Transform baseFrame_X_newJacobBaseFrame;
@@ -886,7 +885,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSide
 
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseJacobian(MatrixDynSize& jac)
 {
-    assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
+    assert(jac.rows() == 6);
 
     Transform newOutputFrame_X_oldOutputFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
@@ -911,8 +910,6 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideB
 
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize& mat)
 {
-    assert(mat.cols() == m_robot_model.getNrOfDOFs()+6);
-
     Transform newOutputFrame_X_oldOutputFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {

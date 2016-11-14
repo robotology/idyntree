@@ -23,6 +23,7 @@
 
 #include <tinyxml.h>
 
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 
@@ -128,6 +129,25 @@ bool sensorsFromURDFString(const std::string& urdfXml,
 
     TiXmlElement* robotXml = tiUrdfXml.FirstChildElement("robot");
 
+    // Several sensor types have been proposed for use in URDF,
+    // see http://wiki.ros.org/urdf/XML/sensor/proposals ,
+    // but few of them (the one more relevant to dynamics) are supported by iDynTree
+    // To avoid printing too many warnings, a warning about the ignored sensor
+    // is printed only if the sensor has a type that is not on the following list
+    // In this way we can print a warning to catch eventual typos, but avoid flooding
+    // the user with meaningless warnings if he loads (for example) a model full of cameras
+    std::vector<std::string> sensorTypesUsedInURDFButNotSupportedInIDynTree;
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("camera");
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("ray");
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("imu");
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("magnetometer");
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("gps");
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("contact");
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("sonar");
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("rfidtag");
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("rfid");
+
+
     // Get all the sensors elements of robot element
     for (TiXmlElement* sensorXml = robotXml->FirstChildElement("sensor");
          sensorXml; sensorXml = sensorXml->NextSiblingElement("sensor"))
@@ -148,6 +168,8 @@ bool sensorsFromURDFString(const std::string& urdfXml,
 
         iDynTree::SensorType type;
 
+
+
         if(sensorType.compare("accelerometer") == 0)
         {
             type = ACCELEROMETER;
@@ -162,8 +184,13 @@ bool sensorsFromURDFString(const std::string& urdfXml,
         }
         else
         {
-            std::string errString = "Specified sensor type " + sensorType + " of " + sensorName +" is not recognised, parsing of this sensor failed.";
-            reportWarning("","sensorsFromURDFString",errString.c_str());
+            // Print the warning about ignored sensors only if the sensor type is not on the list (to catch typos)
+            if( std::find(sensorTypesUsedInURDFButNotSupportedInIDynTree.begin(),sensorTypesUsedInURDFButNotSupportedInIDynTree.end(), sensorType)
+                     == sensorTypesUsedInURDFButNotSupportedInIDynTree.end() )
+            {
+                std::string errString = "Specified sensor type " + sensorType + " of sensor with name " + sensorName +" is not recognised, this sensor was ignored by the iDynTree sensor parser.";
+                reportWarning("","sensorsFromURDFString",errString.c_str());
+            }
             continue;
         }
 
