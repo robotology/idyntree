@@ -13,7 +13,7 @@ set(VARS_PREFIX "iDynTree")
 
 set(${VARS_PREFIX}_MAJOR_VERSION 0)
 set(${VARS_PREFIX}_MINOR_VERSION 3)
-set(${VARS_PREFIX}_PATCH_VERSION 12)
+set(${VARS_PREFIX}_PATCH_VERSION 13)
 set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
