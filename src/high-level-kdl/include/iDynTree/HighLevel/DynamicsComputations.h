@@ -494,11 +494,23 @@ public:
 
 
     /**
-     * @name Methods to compute Inverse Dynamics
+     * @name Methods to compute Dynamics related quantities.
+     *
+     */
+    //@{
+
+    /**
+     * Compute the free-floating inverse dynamics.
      *
      */
     bool inverseDynamics(iDynTree::VectorDynSize & outTorques,
                          iDynTree::Wrench & baseReactionForce);
+
+    /**
+     * Compute the free-floating mass matrix.
+     *
+     */
+    bool getFreeFloatingMassMatrix(iDynTree::MatrixDynSize & freeFloatingMassMatrix);
 
     /**
       * @name Methods to get Jacobians and Dynamics regressor

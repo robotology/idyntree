@@ -134,12 +134,12 @@ public:
     bool isValid() const;
 
     /**
-     * Get the used FrameVelocityConvention.
+     * Set the used FrameVelocityRepresentation.
      */
     bool setFrameVelocityRepresentation(const FrameVelocityRepresentation framVelRepr) const;
 
     /**
-     * Get the used FrameVelocityConvention.
+     * Get the used FrameVelocityRepresentation.
      */
     FrameVelocityRepresentation getFrameVelocityRepresentation() const;
     //@}
@@ -479,7 +479,23 @@ public:
       */
     //@{
 
-
+    /**
+     * Get the free floating mass matrix of the system.
+     *
+     * The mass matrix depends on the joint positions, specified by the setRobotState methods.
+     * If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or INERTIAL_FIXED_REPRESENTATION,
+     * the mass matrix depends also on the base orientation with respect to the inertial frame,
+     * that is also set by the  setRobotState methods.
+     *
+     * For more details on the structure of the free floating mass matrix, please check:
+     * S. Traversaro, A. Saccon
+     * Multibody Dynamics Notation
+     * http://repository.tue.nl/849895
+     *
+     * @param[out] freeFloatingMassMatrix the getNrOfDOFs() times getNrOfDOFs() output mass matrix.
+     * @return true if all went well, false otherwise.
+     */
+    bool getFreeFloatingMassMatrix(MatrixDynSize & freeFloatingMassMatrix);
 
     //@}
 
