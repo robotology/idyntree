@@ -132,6 +132,23 @@ namespace iDynTree
                                         const LinkIndex child, const LinkIndex parent) const;
 
         // Documentation inherited
+        virtual void computeChildAcc(const VectorDynSize & jntPos,
+                                     const VectorDynSize & jntVel,
+                                     const LinkVelArray & linkVels,
+                                     const VectorDynSize & jntAcc,
+                                     LinkAccArray & linkAccs,
+                                     const LinkIndex child,
+                                     const LinkIndex parent) const;
+
+        // Documentation inherited
+        virtual void computeChildBiasAcc(const VectorDynSize & jntPos,
+                                         const VectorDynSize & jntVel,
+                                         const LinkVelArray & linkVels,
+                                         LinkAccArray & linkBiasAccs,
+                                         const LinkIndex child,
+                                         const LinkIndex parent) const;
+
+        // Documentation inherited
         virtual void computeJointTorque(const VectorDynSize & jntPos, const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
                                         VectorDynSize & jntTorques) const;

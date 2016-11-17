@@ -18,14 +18,20 @@
 #include <iDynTree/Core/EigenHelpers.h>
 
 #include <iDynTree/KinDynComputations.h>
+#include <iDynTree/Model/JointState.h>
+#include <iDynTree/Model/FreeFloatingState.h>
 
 using namespace iDynTree;
 
 double random_double()
 {
-    return ((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+    return 0.0*((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
 }
 
+double real_random_double()
+{
+    return 1.0*((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+}
 
 void setRandomState(iDynTree::KinDynComputations & dynComp)
 {
@@ -45,11 +51,11 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
         gravity(i) = random_double();
     }
 
-    gravity(2) = 10.0;
+    gravity(2) = 0.0;
 
     for(int i=0; i < 6; i++)
     {
-        baseVel(i) = random_double();
+        baseVel(i) = i; //real_random_double();
     }
 
     for(size_t dof=0; dof < dofs; dof++)
@@ -116,6 +122,88 @@ void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations & 
     ASSERT_EQUAL_VECTOR(avgVelCheck,avgVel.asVector());
 }
 
+inline Eigen::VectorXd toEigen(const Vector6 & baseAcc, const VectorDynSize & jntAccs)
+{
+    Eigen::VectorXd concat(6+jntAccs.size());
+    if( jntAccs.size() > 0 )
+    {
+        concat << toEigen(baseAcc), toEigen(jntAccs);
+    }
+    else
+    {
+        concat = toEigen(baseAcc);
+    }
+    return concat;
+}
+
+inline Eigen::VectorXd toEigen(const FreeFloatingGeneralizedTorques & genForces)
+{
+    Eigen::VectorXd concat(6+genForces.jointTorques().size());
+    // TODO(traversaro) : We should teach toEigen to handle empty matrices correctly?
+    // relevant: https://forum.kde.org/viewtopic.php?f=74&t=107974
+    if( genForces.jointTorques().size() > 0 )
+    {
+        concat << toEigen(genForces.baseWrench()), toEigen(genForces.jointTorques());
+    }
+    else
+    {
+        concat = toEigen(genForces.baseWrench());
+    }
+    return concat;
+}
+
+// Test different ways of computing inverse dynamics
+void testInverseDynamics(KinDynComputations & dynComp)
+{
+    int dofs = dynComp.getNrOfDegreesOfFreedom();
+    iDynTree::Vector6 baseAcc;
+    iDynTree::JointDOFsDoubleArray shapeAccs(dynComp.model());
+
+    iDynTree::LinkNetExternalWrenches netExternalWrenches(dynComp.model());
+    netExternalWrenches.zero();
+
+    // Go component for component, for simplifyng debugging
+    for(int i=0; i < 6+dofs; i++)
+    {
+        baseAcc.zero();
+        shapeAccs.zero();
+        if( i < 6 )
+        {
+            baseAcc(i) = 0.0;
+        }
+        else
+        {
+            shapeAccs(i-6) = 0.0;
+        }
+
+        FreeFloatingGeneralizedTorques invDynForces(dynComp.model());
+        FreeFloatingGeneralizedTorques massMatrixInvDynForces(dynComp.model());
+
+        // Run classical inverse dynamics
+        bool ok = dynComp.inverseDynamics(baseAcc,shapeAccs,netExternalWrenches,invDynForces);
+        ASSERT_IS_TRUE(ok);
+
+        // Run inverse dynamics with mass matrix
+        FreeFloatingMassMatrix massMatrix(dynComp.model());
+        ok = dynComp.getFreeFloatingMassMatrix(massMatrix);
+        ASSERT_IS_TRUE(ok);
+
+        FreeFloatingGeneralizedTorques invDynBiasForces(dynComp.model());
+        ok = dynComp.generalizedBiasForces(invDynBiasForces);
+        ASSERT_IS_TRUE(ok);
+
+        VectorDynSize massMatrixInvDynForcesContinuous(6+dofs);
+        toEigen(massMatrixInvDynForcesContinuous) = toEigen(massMatrix)*toEigen(baseAcc,shapeAccs) + toEigen(invDynBiasForces);
+        toEigen(massMatrixInvDynForces.baseWrench().getLinearVec3()) = toEigen(massMatrixInvDynForcesContinuous).segment<3>(0);
+        toEigen(massMatrixInvDynForces.baseWrench().getAngularVec3()) = toEigen(massMatrixInvDynForcesContinuous).segment<3>(3);
+        toEigen(massMatrixInvDynForces.jointTorques()) = toEigen(massMatrixInvDynForcesContinuous).segment(6,dofs);
+
+        ASSERT_EQUAL_SPATIAL_FORCE(massMatrixInvDynForces.baseWrench(),invDynForces.baseWrench());
+        ASSERT_EQUAL_VECTOR(massMatrixInvDynForces.jointTorques(),invDynForces.jointTorques());
+
+    }
+}
+
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
     iDynTree::KinDynComputations dynComp;
@@ -131,6 +219,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
         setRandomState(dynComp);
         testRelativeTransform(dynComp);
         testAverageVelocityAndTotalMomentumJacobian(dynComp);
+        testInverseDynamics(dynComp);
     }
 
 }

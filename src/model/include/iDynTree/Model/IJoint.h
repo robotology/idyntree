@@ -200,7 +200,7 @@ namespace iDynTree
 
         /**
          * Compute the velocity and acceleration of child,
-         * given the velocty and acceleration of parent and
+         * given the velocity and acceleration of parent and
          * the joint position, velocity and acceleration.
          *
          */
@@ -213,7 +213,7 @@ namespace iDynTree
 
         /**
          * Compute the velocity of child,
-         * given the velocty of parent  and
+         * given the velocity of parent  and
          * the joint position, velocity.
          */
         virtual void computeChildVel(const VectorDynSize & jntPos,
@@ -221,6 +221,29 @@ namespace iDynTree
                                      LinkVelArray & linkVels,
                                      const LinkIndex child,
                                      const LinkIndex parent) const = 0;
+
+        /**
+         * Compute the (body-fixed) acceleration of a child link
+         * given the (body-fixed) acceleration of the parent
+         */
+        virtual void computeChildAcc(const VectorDynSize & jntPos,
+                                     const VectorDynSize & jntVel,
+                                     const LinkVelArray & linkVels,
+                                     const VectorDynSize & jntAcc,
+                                           LinkAccArray & linkAccs,
+                                     const LinkIndex child,
+                                     const LinkIndex parent) const = 0;
+
+        /**
+         * Compute the (body-fixed) bias acceleration of a child link
+         * given the (body-fixed) bias acceleration of the parent
+         */
+        virtual void computeChildBiasAcc(const VectorDynSize & jntPos,
+                                         const VectorDynSize & jntVel,
+                                         const LinkVelArray & linkVels,
+                                               LinkAccArray & linkBiasAccs,
+                                         const LinkIndex child,
+                                         const LinkIndex parent) const = 0;
 
         /**
          * Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies

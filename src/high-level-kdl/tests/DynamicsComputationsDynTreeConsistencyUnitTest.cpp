@@ -32,6 +32,9 @@
 #include <yarp/sig/Vector.h>
 #include <yarp/sig/Matrix.h>
 
+#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model/JointState.h>
+
 
 using namespace iDynTree;
 
@@ -131,7 +134,9 @@ iDynTree::Transform yarpTransform2idyntree(yarp::sig::Matrix transformYarp)
 
 void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
                     iCub::iDynTree::DynTree & dynTree,
-                    iDynTree::KinDynComputations& kinDynComp)
+                    iDynTree::KinDynComputations& kinDynComp,
+                    iDynTree::Vector6& baseAccKinDyn,
+                    iDynTree::JointDOFsDoubleArray& jointAccKinDyn)
 {
    std::cerr << " setRandomState" << std::endl;
     
@@ -160,6 +165,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
         properAcc(i) = baseAcc(i) - gravity(i);
     }
 
+    jointAccKinDyn.resize(dofs);
     for(size_t dof=0; dof < dofs; dof++)
 
     {
@@ -184,6 +190,8 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
 
     Vector3 grav3d = gravity.getLinearVec3();
     ok = kinDynComp.setRobotState(worldTbase,qj,baseVel,dqj,grav3d);
+    toEigen(jointAccKinDyn) = toEigen(ddqj);
+    toEigen(baseAccKinDyn)  = toEigen(baseAcc);
     ASSERT_IS_TRUE(ok);
     
     std::cerr << "state setted" << std::endl;
@@ -308,12 +316,13 @@ void testRegressorConsistency(iDynTree::HighLevel::DynamicsComputations & dynCom
 }
 
 void testCOMConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp,
-                        iCub::iDynTree::DynTree & dynTree)
+                        iCub::iDynTree::DynTree & dynTree,
+                        iDynTree::KinDynComputations & kinDynComp)
 {
     size_t dofs = dynComp.getNrOfDegreesOfFreedom();
 
     // check COM position
-    iDynTree::Position COMnew, COMold;
+    iDynTree::Position COMnew, COMold, COMKinDyn;
 
     yarp::sig::Vector COMYarp;
     COMYarp = dynTree.getCOM();
@@ -322,10 +331,13 @@ void testCOMConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp,
 
     COMnew = dynComp.getCenterOfMass();
 
+    COMKinDyn = kinDynComp.getCenterOfMassPosition();
+
     ASSERT_EQUAL_VECTOR(COMnew,COMold);
+    ASSERT_EQUAL_VECTOR(COMnew,COMKinDyn);
 
     // check COM Jacobian
-    iDynTree::MatrixDynSize jacNew(3,6+dofs), jacOld(3,6+dofs);
+    iDynTree::MatrixDynSize jacNew(3,6+dofs), jacOld(3,6+dofs), jacKinDyn(3,6+dofs);
     yarp::sig::Matrix jacYARP(6,6+dofs);
 
     bool ok = dynTree.getCOMJacobian(jacYARP);
@@ -338,11 +350,40 @@ void testCOMConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp,
 
     ASSERT_IS_TRUE(ok);
 
-    std::cerr << "jacNew \n " << jacNew.toString() << std::endl;
-
-    std::cerr << "jacOld \n " << jacOld.toString() << std::endl;
-
     ASSERT_EQUAL_MATRIX(jacNew,jacOld);
+
+    ok = kinDynComp.getCenterOfMassJacobian(jacKinDyn);
+
+    ASSERT_IS_TRUE(ok);
+
+    ASSERT_EQUAL_MATRIX(jacNew,jacKinDyn);
+}
+
+void testInverseDynamicsConsistency(iDynTree::HighLevel::DynamicsComputations & dynComp,
+                                    iDynTree::KinDynComputations & kinDynComp,
+                                    const iDynTree::Vector6& baseAccKinDyn,
+                                    const iDynTree::JointDOFsDoubleArray& jointAccKinDyn)
+{
+    size_t dofs = dynComp.getNrOfDegreesOfFreedom();
+
+    Wrench baseWrenchDynComp;
+    VectorDynSize jntTorquesDynComp(dofs);
+    FreeFloatingGeneralizedTorques generalizedTorquesKinDyn(kinDynComp.model());
+    bool ok = dynComp.inverseDynamics(jntTorquesDynComp,baseWrenchDynComp);
+
+    LinkNetExternalWrenches linkExtWrenches(kinDynComp.model());
+
+    for(int l=0; l < kinDynComp.model().getNrOfLinks(); l++)
+    {
+        linkExtWrenches(l).zero();
+    }
+
+    ASSERT_IS_TRUE(ok);
+
+    ok = kinDynComp.inverseDynamics(baseAccKinDyn,jointAccKinDyn,linkExtWrenches,generalizedTorquesKinDyn);
+
+    ASSERT_EQUAL_SPATIAL_FORCE(baseWrenchDynComp,generalizedTorquesKinDyn.baseWrench());
+    ASSERT_EQUAL_VECTOR(jntTorquesDynComp,generalizedTorquesKinDyn.jointTorques());
 }
 
 
@@ -392,16 +433,17 @@ void assertConsistency(std::string modelName)
     
     std::cerr << "Loaded model in kinDynComp" << std::endl;
 
-    
-    setRandomState(dynComp,dynTree,kinDynComp);
+    Vector6 baseAccKinDyn;
+    JointDOFsDoubleArray jntAccKinDyn;
+    setRandomState(dynComp,dynTree,kinDynComp,baseAccKinDyn,jntAccKinDyn);
     std::cerr << "Test transforms " << std::endl;
     testTransformsConsistency(dynComp,dynTree,kinDynComp);
     std::cerr << "Test jacob " << std::endl;
     testJacobianConsistency(dynComp,dynTree,kinDynComp);
     testRegressorConsistency(dynComp,dynTree);
-    testCOMConsistency(dynComp,dynTree);
+    testCOMConsistency(dynComp,dynTree,kinDynComp);
     testMassMatrixConsistency(dynComp,dynTree,kinDynComp);
-
+    testInverseDynamicsConsistency(dynComp,kinDynComp,baseAccKinDyn,jntAccKinDyn);
 }
 
 int main()

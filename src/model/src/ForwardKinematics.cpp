@@ -190,6 +190,79 @@ bool ForwardPosVelKinematics(const Model& model,
     return retValue;
 }
 
+bool ForwardAccKinematics(const Model& model,
+                          const Traversal& traversal,
+                          const FreeFloatingPos & robotPos,
+                          const FreeFloatingVel & robotVel,
+                          const iDynTree::FreeFloatingAcc & robotAcc,
+                          const LinkVelArray & linkVel,
+                                LinkAccArray & linkAcc)
+{
+    bool retValue = true;
 
+    for(unsigned int traversalEl=0; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+        if( parentLink == 0 )
+        {
+            // If the visited link is the base, the base has no parent.
+            // In this case the acceleration is (by definition) part of robotAcc
+            linkAcc(visitedLink->getIndex()) = robotAcc.baseAcc();
+        }
+        else
+        {
+            // Otherwise we compute the child velocity and acceleration from parent
+            toParentJoint->computeChildAcc(robotPos.jointPos(),
+                                           robotVel.jointVel(),
+                                           linkVel,
+                                           robotAcc.jointAcc(),
+                                           linkAcc,
+                                           visitedLink->getIndex(),
+                                           parentLink->getIndex());
+        }
+
+    }
+
+    return retValue;
+}
+
+bool ForwardBiasAccKinematics(const Model& model,
+                              const Traversal& traversal,
+                              const FreeFloatingPos & robotPos,
+                              const FreeFloatingVel & robotVel,
+                              const LinkVelArray & linkVel,
+                                    LinkAccArray & linkBiasAcc)
+{
+    bool retValue = true;
+
+    for(unsigned int traversalEl=0; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = traversal.getLink(traversalEl);
+        LinkConstPtr parentLink  = traversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = traversal.getParentJoint(traversalEl);
+
+        if( parentLink == 0 )
+        {
+            // If the visited link is the base, the base has no parent.
+            // In this case the bias acceleration is (by definition) zero
+            linkBiasAcc(visitedLink->getIndex()).zero();
+        }
+        else
+        {
+            // Otherwise we compute the child velocity and acceleration from parent
+            toParentJoint->computeChildBiasAcc(robotPos.jointPos(),
+                                               robotVel.jointVel(),
+                                               linkVel, linkBiasAcc,
+                                               visitedLink->getIndex(),
+                                               parentLink->getIndex());
+        }
+
+    }
+
+    return retValue;
+}
 
 }

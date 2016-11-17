@@ -93,6 +93,9 @@ public:
     // 3d gravity vector, expressed with the orientation of the inertial (world) frame
     iDynTree::Vector3 m_gravityAcc;
 
+    // 3d gravity vector, expressed with the orientation of the base link frame
+    iDynTree::Vector3 m_gravityAccInBaseLinkFrame;
+
     // Forward kinematics data structure
     // true whenever computePosition has been called
     // since the last call to setRobotState
@@ -110,12 +113,17 @@ public:
     LinkCompositeRigidBodyInertias m_linkCRBIs;
 
     // Helper function to get the lockedInertia of the robot from the m_linkCRBIs
-    SpatialInertia & getRobotLockedInertia();
+    const SpatialInertia & getRobotLockedInertia();
 
     // Process a jacobian that expects a body fixed base velocity depending on the selected FrameVelocityRepresentation
     void processOnRightSideMatrixExpectingBodyFixedModelVelocity(MatrixDynSize &mat);
-    void processOnLeftSideBodyFixedBaseJacobian(MatrixDynSize & jac);
     void processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize & jac);
+    void processOnLeftSideBodyFixedAvgVelocityJacobian(MatrixDynSize &jac);
+    void processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(MatrixDynSize &jac, const FrameVelocityRepresentation & leftSideRepresentation);
+
+    // Transform a wrench from and to body fixed and the used representation
+    Wrench fromBodyFixedToUsedRepresentation(const Wrench & wrenchInBodyFixed, const Transform & inertial_X_link);
+    Wrench fromUsedRepresentationToBodyFixed(const Wrench & wrenchInBodyFixed, const Transform & inertial_X_link);
 
     // storage of the raw output of the CRBA, used to extract
     // the mass matrix and most the centroidal quantities
@@ -124,12 +132,45 @@ public:
     // Total linear and angular momentum, expressed in the world frame
     SpatialMomentum m_totalMomentum;
 
+    // Jacobian buffer, used for intermediate computation in COM jacobian
+    MatrixDynSize m_jacBuffer;
+
+    // Bias accelerations buffers
+    bool m_areBiasAccelerationsUpdated;
+
+    // storage of bias accelerations buffers (contains the bias acceleration for the given link in body-fixed)
+    LinkAccArray m_linkBiasAcc;
+
+    // Inverse dynamics buffers
+
+    /** Base acceleration, in body-fixed representation */
+    SpatialAcc m_invDynBaseAcc;
+
+    /** Generalized **proper** (real-gravity) acceleration, base part in body-fixed representation */
+    FreeFloatingAcc m_invDynGeneralizedProperAccs;
+
+    /** **Proper** (real-gravity) acceleration of each link, in body-fixed representation */
+    LinkProperAccArray m_invDynLinkProperAccs;
+
+    /** External wrenches, in body-fixed representation */
+    LinkNetExternalWrenches m_invDynNetExtWrenches;
+
+    /** Internal wrenches, in body-fixed representation */
+    LinkInternalWrenches m_invDynInternalWrenches;
+
+    /** Buffer of robot velocity, always set to zero for gravity computations */
+    FreeFloatingVel m_invDynZeroVel;
+
+    /** Buffer of link velocities, always set to zero for gravity computations */
+    LinkVelArray m_invDynZeroLinkVel;
+
     KinDynComputationsPrivateAttributes()
     {
         m_isModelValid = false;
         m_frameVelRepr = MIXED_REPRESENTATION;
         m_isFwdKinematicsUpdated = false;
         m_isRawMassMatrixUpdated = false;
+        m_areBiasAccelerationsUpdated = false;
     }
 };
 
@@ -185,6 +226,23 @@ void KinDynComputations::resizeInternalDataStructures()
     this->pimpl->m_linkCRBIs.resize(this->pimpl->m_robot_model);
     this->pimpl->m_rawMassMatrix.resize(this->pimpl->m_robot_model);
     this->pimpl->m_rawMassMatrix.zero();
+    this->pimpl->m_jacBuffer.resize(6,6+this->pimpl->m_robot_model.getNrOfDOFs());
+    this->pimpl->m_jacBuffer.zero();
+    this->pimpl->m_linkBiasAcc.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_invDynBaseAcc.zero();
+    this->pimpl->m_invDynGeneralizedProperAccs.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_invDynNetExtWrenches.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_invDynInternalWrenches.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_invDynLinkProperAccs.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_invDynZeroVel.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_invDynZeroVel.baseVel().zero();
+    this->pimpl->m_invDynZeroVel.jointVel().zero();
+    this->pimpl->m_invDynZeroLinkVel.resize(this->pimpl->m_robot_model);
+
+    for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(pimpl->m_robot_model.getNrOfLinks()); lnkIdx++)
+    {
+        pimpl->m_invDynZeroLinkVel(lnkIdx).zero();
+    }
 }
 
 int KinDynComputations::getFrameIndex(const std::string& frameName) const
@@ -249,6 +307,25 @@ void KinDynComputations::computeRawMassMatrixAndTotalMomentum()
     this->pimpl->m_isRawMassMatrixUpdated = ok;
 }
 
+void KinDynComputations::computeBiasAccFwdKinematics()
+{
+    if( this->pimpl->m_areBiasAccelerationsUpdated )
+    {
+        return;
+    }
+
+    // Compute body-fixed bias accelerations
+    bool ok = ForwardBiasAccKinematics(pimpl->m_robot_model,
+                                       pimpl->m_traversal,
+                                       pimpl->m_pos,
+                                       pimpl->m_vel,
+                                       pimpl->m_linkVel,
+                                       pimpl->m_linkBiasAcc);
+
+    reportErrorIf(!ok,"KinDynComputations::computeBiasAccFwdKinematics","Error in computing the bias accelerations.");
+
+    this->pimpl->m_areBiasAccelerationsUpdated = ok;
+}
 
 bool KinDynComputations::loadRobotModelFromFile(const std::string& filename,
                                                   const std::string& filetype)
@@ -420,12 +497,14 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
 
     this->invalidateCache();
 
-    // Save gravity
-    this->pimpl->m_gravityAcc = world_gravity;
-
     // Save pos
     this->pimpl->m_pos.worldBasePos() = world_T_base;
     toEigen(this->pimpl->m_pos.jointPos()) = toEigen(qj);
+
+    // Save gravity
+    this->pimpl->m_gravityAcc = world_gravity;
+    Rotation base_R_inertial = this->pimpl->m_pos.worldBasePos().getRotation().inverse();
+    toEigen(pimpl->m_gravityAccInBaseLinkFrame) = toEigen(base_R_inertial)*toEigen(this->pimpl->m_gravityAcc);
 
     // Save vel
     toEigen(pimpl->m_vel.jointVel()) = toEigen(qj_dot);
@@ -826,7 +905,145 @@ bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameInde
                                             outJacobian);
 }
 
-iDynTree::Position KinDynComputations::getCenterOfMassPosition()
+Vector6 KinDynComputations::getFrameBiasAcc(const std::string & frameName)
+{
+    return getFrameBiasAcc(getFrameIndex(frameName));
+}
+
+
+/**
+ * Function to convert a body fixed acceleration to a mixed acceleration.
+ *
+ * TODO refactor in a more general handling of conversion between the three
+ * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
+ * acceleration.
+ *
+ * @return The mixed acceleration
+ */
+typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+
+Vector6 convertBodyFixedAccelerationToMixedAcceleration(const SpatialAcc & bodyFixedAcc,
+                                                        const Twist & bodyFixedVel,
+                                                        const Rotation & inertial_R_body)
+{
+    Vector6 mixedAcceleration;
+
+    Eigen::Map<const Eigen::Vector3d> linBodyFixedAcc(bodyFixedAcc.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angBodyFixedAcc(bodyFixedAcc.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> linBodyFixedTwist(bodyFixedVel.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angBodyFixedTwist(bodyFixedVel.getAngularVec3().data());
+
+    Eigen::Map<Eigen::Vector3d> linMixedAcc(mixedAcceleration.data());
+    Eigen::Map<Eigen::Vector3d> angMixedAcc(mixedAcceleration.data()+3);
+
+    Eigen::Map<const Matrix3dRowMajor> inertial_R_body_eig(inertial_R_body.data());
+
+    // First we account for the effect of linear/angular velocity
+    linMixedAcc = inertial_R_body_eig*(linBodyFixedAcc + angBodyFixedTwist.cross(linBodyFixedTwist));
+
+    // Angular acceleration can be copied
+    angMixedAcc = inertial_R_body_eig*angMixedAcc;
+
+    return mixedAcceleration;
+}
+
+/**
+ * Function to convert mixed acceleration to body fixed acceleration
+ *
+ * TODO refactor in a more general handling of conversion between the three
+ * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
+ * acceleration.
+ *
+ * @return The body fixed acceleration
+ */
+SpatialAcc convertMixedAccelerationToBodyFixedAcceleration(const Vector6 & mixedAcc,
+                                                           const Twist & bodyFixedVel,
+                                                           const Rotation & inertial_R_body)
+{
+    SpatialAcc bodyFixedAcc;
+
+    Eigen::Map<const Eigen::Vector3d> linMixedAcc(mixedAcc.data());
+    Eigen::Map<const Eigen::Vector3d> angMixedAcc(mixedAcc.data()+3);
+
+    Eigen::Map<const Eigen::Vector3d> linBodyFixedTwist(bodyFixedVel.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angBodyFixedTwist(bodyFixedVel.getAngularVec3().data());
+
+    Eigen::Map<const Matrix3dRowMajor> inertial_R_body_eig(inertial_R_body.data());
+
+    Eigen::Map<Eigen::Vector3d> linBodyFixedAcc(bodyFixedAcc.getLinearVec3().data());
+    Eigen::Map<Eigen::Vector3d> angBodyFixedAcc(bodyFixedAcc.getAngularVec3().data());
+
+    linBodyFixedAcc = inertial_R_body_eig.transpose()*linMixedAcc - angBodyFixedTwist.cross(linBodyFixedTwist);
+    angBodyFixedAcc = inertial_R_body_eig.transpose()*angMixedAcc;
+
+    return bodyFixedAcc;
+}
+
+/**
+ * Function to convert inertial acceleration to body acceleration.
+ *
+ * TODO refactor in a more general handling of conversion between the three
+ * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
+ * acceleration.
+ *
+ * @return The body fixed acceleration
+ */
+SpatialAcc convertInertialAccelerationToBodyFixedAcceleration(const Vector6 & inertialAcc,
+                                                              const Transform & inertial_H_body)
+{
+    SpatialAcc inertialAccProperForm;
+    fromEigen(inertialAccProperForm,toEigen(inertialAcc));
+    return inertial_H_body.inverse()*inertialAccProperForm;
+}
+
+
+Vector6 KinDynComputations::getFrameBiasAcc(const FrameIndex frameIdx)
+{
+    if (!pimpl->m_robot_model.isValidFrameIndex(frameIdx))
+    {
+        reportError("KinDynComputations","getFrameBiasAcc","Frame index out of bounds");
+        Vector6 zero;
+        zero.zero();
+        return zero;
+    }
+
+    // compute fwd kinematics and bias acceleration kinematics (if necessary)
+    this->computeFwdKinematics();
+    this->computeBiasAccFwdKinematics();
+
+    // Compute frame body-fixed bias acceleration and velocity
+    Transform frame_X_link = pimpl->m_robot_model.getFrameTransform(frameIdx).inverse();
+
+    SpatialAcc bias_acc_frame_body_fixed = frame_X_link*pimpl->m_linkBiasAcc(pimpl->m_robot_model.getFrameLink(frameIdx));
+    Twist      vel_frame_body_fixed      = frame_X_link*pimpl->m_linkVel(pimpl->m_robot_model.getFrameLink(frameIdx));
+
+    // In body fixed and inertial representation, we can transform the bias acceleration with just a adjoint
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+
+        return bias_acc_frame_body_fixed.asVector();
+    }
+    else
+    {
+        // To convert the twist to a mixed or inertial representation, we need world_H_frame
+        Transform world_H_frame = getWorldTransform(frameIdx);
+
+        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION )
+        {
+            return (world_H_frame*bias_acc_frame_body_fixed).asVector();
+        }
+        else
+        {
+            // In the mixed case, we need to account for the non-vanishing term related to the
+            // derivative of the transform between mixed and body representation
+            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+            return convertBodyFixedAccelerationToMixedAcceleration(bias_acc_frame_body_fixed,vel_frame_body_fixed,world_H_frame.getRotation());
+        }
+    }
+}
+
+Position KinDynComputations::getCenterOfMassPosition()
 {
     this->computeRawMassMatrixAndTotalMomentum();
 
@@ -837,18 +1054,89 @@ iDynTree::Position KinDynComputations::getCenterOfMassPosition()
     return pimpl->m_pos.worldBasePos()*base_com;
 }
 
-/*
 Vector3 KinDynComputations::getCenterOfMassVelocity()
 {
+    this->computeRawMassMatrixAndTotalMomentum();
 
+    // We exploit the structure of the cached total momentum to the the com velocity
+    Position com_in_inertial = this->getCenterOfMassPosition();
+
+    // Express the total momentum with the orientation of the inertial frame but in the center of mass
+    SpatialMomentum m_totalMomentum_in_com_inertial = Transform(Rotation::Identity(),-com_in_inertial)*this->pimpl->m_totalMomentum;
+
+    // The com velocity is just the linear part divided by the total mass
+    double total_mass = pimpl->getRobotLockedInertia().getMass();
+
+    Vector3 com_vel;
+    toEigen(com_vel) = toEigen(m_totalMomentum_in_com_inertial.getLinearVec3())/total_mass;
+
+    return com_vel;
 }
 
 bool KinDynComputations::getCenterOfMassJacobian(MatrixDynSize& comJacobian)
 {
+    this->computeRawMassMatrixAndTotalMomentum();
 
-}*/
+    comJacobian.resize(3,pimpl->m_robot_model.getNrOfDOFs()+6);
 
-SpatialInertia& KinDynComputations::KinDynComputationsPrivateAttributes::getRobotLockedInertia()
+    const SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
+    Matrix6x6 invLockedInertia = lockedInertia.getInverse();
+
+    // The first six rows of the mass matrix are the base-base average velocity jacobian
+    toEigen(pimpl->m_jacBuffer) = toEigen(invLockedInertia)*toEigen(pimpl->m_rawMassMatrix).block(0,0,6,6+pimpl->m_robot_model.getNrOfDOFs());
+
+    // Process right side of the jacobian
+    pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(pimpl->m_jacBuffer);
+
+    // Process the left side: we are interested in the actual "point" acceleration of the com,
+    // so we get always the mixed representation
+    pimpl->processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(pimpl->m_jacBuffer,MIXED_REPRESENTATION);
+
+    // Extract the linear part, i.e. the first 3 rows
+    toEigen(comJacobian) = toEigen(pimpl->m_jacBuffer).block(0,0,3,pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    return true;
+}
+
+Vector3 KinDynComputations::getCenterOfMassBiasAcc()
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+    this->computeBiasAccFwdKinematics();
+
+    // We compute the bias of the center of mass from the bias of the total momentum derivative
+    Wrench totalMomentumBiasInInertialInertial;
+    ComputeLinearAndAngularMomentumDerivativeBias(pimpl->m_robot_model,
+                                                  pimpl->m_linkPos,
+                                                  pimpl->m_linkVel,
+                                                  pimpl->m_linkBiasAcc,
+                                                  totalMomentumBiasInInertialInertial);
+
+    // The total momentum is written in the (inertial,inertial) frame
+    // To get the com velocity, acceleration, we need to write it in the (com,inertial) frame
+    // For the velocity we need just to multiply it for the adjoint, for the acceleration
+    // we need also to account for the derivative of the adjoint term
+    Position com_in_inertial = this->getCenterOfMassPosition();
+    Wrench totalMomentumBiasInCOMInertial = Transform(Rotation::Identity(),-com_in_inertial)*totalMomentumBiasInInertialInertial;
+
+    // TODO : cache com velocity
+    Vector3 comVel = KinDynComputations::getCenterOfMassVelocity();
+
+    // We account for the derivative of the transform (we can avoid this computation because we are intersted only in the linear part
+    // of the momentum derivative
+    // toEigen(totalMomentumBiasInCOMInertial.getAngularVec3()) =
+    //    toEigen(pimpl->m_totalMomentum.getLinearVec3()).cross(toEigen(comVel));
+
+    double total_mass = pimpl->getRobotLockedInertia().getMass();
+
+    // Mass is constant, so we can easily divide disregarding the derivative
+    Vector3 comBiasAcc;
+
+    toEigen(comBiasAcc) = toEigen(totalMomentumBiasInCOMInertial.getLinearVec3())/total_mass;
+
+    return comBiasAcc;
+}
+
+const SpatialInertia& KinDynComputations::KinDynComputationsPrivateAttributes::getRobotLockedInertia()
 {
     return m_linkCRBIs(m_traversal.getBaseLink()->getIndex());
 }
@@ -883,7 +1171,8 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSide
     toEigen(mat).block(0,0,rows,6) = toEigen(mat).block(0,0,rows,6)*toEigen(baseFrame_X_newJacobBaseFrame_);
 }
 
-void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseJacobian(MatrixDynSize& jac)
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedAvgVelocityJacobian(
+        MatrixDynSize &jac)
 {
     assert(jac.rows() == 6);
 
@@ -937,7 +1226,7 @@ Twist KinDynComputations::getAverageVelocity()
 {
     this->computeRawMassMatrixAndTotalMomentum();
 
-    SpatialInertia & base_lockedInertia = pimpl->getRobotLockedInertia();
+    const SpatialInertia & base_lockedInertia = pimpl->getRobotLockedInertia();
     SpatialMomentum base_momentum = pimpl->m_pos.worldBasePos().inverse()*pimpl->m_totalMomentum;
     Twist           base_averageVelocity = base_lockedInertia.applyInverse(base_momentum);
 
@@ -963,15 +1252,96 @@ bool KinDynComputations::getAverageVelocityJacobian(MatrixDynSize& avgVelocityJa
     this->computeRawMassMatrixAndTotalMomentum();
 
     avgVelocityJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
-    SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
+    const SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
     Matrix6x6 invLockedInertia = lockedInertia.getInverse();
 
-    // The first six rows of the mass matrix are the base-base mass matrix
+    // The first six rows of the mass matrix are the base-base average velocity jacobian
     toEigen(avgVelocityJacobian) = toEigen(invLockedInertia)*toEigen(pimpl->m_rawMassMatrix).block(0,0,6,6+pimpl->m_robot_model.getNrOfDOFs());
 
     // Handle the different representations
     pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(avgVelocityJacobian);
-    pimpl->processOnLeftSideBodyFixedBaseJacobian(avgVelocityJacobian);
+    pimpl->processOnLeftSideBodyFixedAvgVelocityJacobian(avgVelocityJacobian);
+
+    return true;
+}
+
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(
+        MatrixDynSize &jac, const FrameVelocityRepresentation & leftSideRepresentation)
+{
+    assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
+
+    // Get the center of mass in the base frame
+    Position vectorFromComToBaseWithRotationOfBase = PositionRaw::inverse(this->getRobotLockedInertia().getCenterOfMass());
+
+    Transform newOutputFrame_X_oldOutputFrame;
+    if (leftSideRepresentation == BODY_FIXED_REPRESENTATION)
+    {
+        // oldOutputFrame is B
+        // newOutputFrame is G[B]
+
+        newOutputFrame_X_oldOutputFrame =  Transform(Rotation::Identity(),vectorFromComToBaseWithRotationOfBase);
+    }
+    else
+    {
+        assert(leftSideRepresentation == INERTIAL_FIXED_REPRESENTATION ||
+                       leftSideRepresentation == MIXED_REPRESENTATION);
+        // oldOutputFrame is B
+        // newOutputFrame is G[A]
+        const Rotation & A_R_B = m_pos.worldBasePos().getRotation();
+        newOutputFrame_X_oldOutputFrame = Transform(m_pos.worldBasePos().getRotation(),A_R_B*(vectorFromComToBaseWithRotationOfBase));
+    }
+
+    Matrix6x6 newOutputFrame_X_oldOutputFrame_ = newOutputFrame_X_oldOutputFrame.asAdjointTransform();
+
+    toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(jac);
+}
+
+Twist KinDynComputations::getCentroidalAverageVelocity()
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+
+    const SpatialInertia & base_lockedInertia = pimpl->getRobotLockedInertia();
+    SpatialMomentum base_momentum = pimpl->m_pos.worldBasePos().inverse()*pimpl->m_totalMomentum;
+    Twist           base_averageVelocity = base_lockedInertia.applyInverse(base_momentum);
+
+    // Get the center of mass in the base frame
+    Position vectorFromComToBaseWithRotationOfBase = PositionRaw::inverse(pimpl->getRobotLockedInertia().getCenterOfMass());
+
+    Transform newOutputFrame_X_oldOutputFrame;
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // oldOutputFrame is B
+        // newOutputFrame is G[B]
+
+        newOutputFrame_X_oldOutputFrame =  Transform(Rotation::Identity(),vectorFromComToBaseWithRotationOfBase);
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION ||
+               pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+        // oldOutputFrame is B
+        // newOutputFrame is G[A]
+        const Rotation & A_R_B = pimpl->m_pos.worldBasePos().getRotation();
+        newOutputFrame_X_oldOutputFrame = Transform(pimpl->m_pos.worldBasePos().getRotation(),A_R_B*(vectorFromComToBaseWithRotationOfBase));
+    }
+
+    return newOutputFrame_X_oldOutputFrame*base_averageVelocity;
+}
+
+
+bool KinDynComputations::getCentroidalAverageVelocityJacobian(MatrixDynSize& centroidalAvgVelocityJacobian)
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+
+    centroidalAvgVelocityJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
+    const SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
+    Matrix6x6 invLockedInertia = lockedInertia.getInverse();
+    // The first six rows of the mass matrix are the base-base average velocity jacobian
+    toEigen(centroidalAvgVelocityJacobian) = toEigen(invLockedInertia)*toEigen(pimpl->m_rawMassMatrix).block(0,0,6,6+pimpl->m_robot_model.getNrOfDOFs());
+
+    // Handle the different representations
+    pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(centroidalAvgVelocityJacobian);
+    pimpl->processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(centroidalAvgVelocityJacobian,pimpl->m_frameVelRepr);
 
     return true;
 }
@@ -1014,6 +1384,35 @@ bool KinDynComputations::getLinearAngularMomentumJacobian(MatrixDynSize& linAngM
     return true;
 }
 
+SpatialMomentum KinDynComputations::getCentroidalTotalMomentum()
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+
+    SpatialMomentum base_momentum = pimpl->m_pos.worldBasePos().inverse()*pimpl->m_totalMomentum;
+
+    // Get the center of mass in the base frame
+    Position vectorFromComToBaseWithRotationOfBase = PositionRaw::inverse(pimpl->getRobotLockedInertia().getCenterOfMass());
+
+    Transform newOutputFrame_X_oldOutputFrame;
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // oldOutputFrame is B
+        // newOutputFrame is G[B]
+        newOutputFrame_X_oldOutputFrame =  Transform(Rotation::Identity(),vectorFromComToBaseWithRotationOfBase);
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION ||
+               pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+        // oldOutputFrame is B
+        // newOutputFrame is G[A]
+        const Rotation & A_R_B = pimpl->m_pos.worldBasePos().getRotation();
+        newOutputFrame_X_oldOutputFrame = Transform(pimpl->m_pos.worldBasePos().getRotation(),A_R_B*(vectorFromComToBaseWithRotationOfBase));
+    }
+
+    return newOutputFrame_X_oldOutputFrame*base_momentum;
+}
+
 bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMassMatrix)
 {
     // Compute the body-fixed-body-fixed mass matrix, if necessary 
@@ -1032,6 +1431,219 @@ bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMa
     return true;
 }
 
+Wrench KinDynComputations::KinDynComputationsPrivateAttributes::fromUsedRepresentationToBodyFixed(const Wrench & wrenchInUsedRepresentation,
+                                                                                                  const Transform & inertial_X_bodyFixed)
+{
+    if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        return Wrench(wrenchInUsedRepresentation);
+    }
+    else if (m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        return (inertial_X_bodyFixed.getRotation().inverse())*wrenchInUsedRepresentation;
+    }
+    else
+    {
+        assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        return inertial_X_bodyFixed.inverse()*wrenchInUsedRepresentation;
+    }
+
+    assert(false);
+    return Wrench::Zero();
+}
+
+Wrench KinDynComputations::KinDynComputationsPrivateAttributes::fromBodyFixedToUsedRepresentation(const Wrench & wrenchInBodyFixed,
+                                                                                                  const Transform & inertial_X_bodyFixed)
+{
+    if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        return Wrench(wrenchInBodyFixed);
+    }
+    else if (m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        return inertial_X_bodyFixed.getRotation()*wrenchInBodyFixed;
+    }
+    else
+    {
+        assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        return inertial_X_bodyFixed*wrenchInBodyFixed;
+    }
+
+    assert(false);
+    return Wrench::Zero();
+}
+
+bool KinDynComputations::inverseDynamics(const Vector6& baseAcc,
+                                         const VectorDynSize& s_ddot,
+                                         const LinkNetExternalWrenches & linkExtForces,
+                                               FreeFloatingGeneralizedTorques & baseForceAndJointTorques)
+{
+    // Needed for using pimpl->m_linkVel
+    this->computeFwdKinematics();
+
+    // Convert input base acceleration
+    if( pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION )
+    {
+        fromEigen(pimpl->m_invDynBaseAcc,toEigen(baseAcc));
+    }
+    else if( pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION )
+    {
+        pimpl->m_invDynBaseAcc = convertInertialAccelerationToBodyFixedAcceleration(baseAcc,pimpl->m_pos.worldBasePos());
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+        pimpl->m_invDynBaseAcc = convertMixedAccelerationToBodyFixedAcceleration(baseAcc,
+                                                                                 pimpl->m_vel.baseVel(),
+                                                                                 pimpl->m_pos.worldBasePos().getRotation());
+    }
+
+    // Convert input external forces
+    if( pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION ||
+        pimpl->m_frameVelRepr == MIXED_REPRESENTATION )
+    {
+        this->computeFwdKinematics();
+
+        for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(pimpl->m_robot_model.getNrOfLinks()); lnkIdx++)
+        {
+            const Transform & inertialFrame_X_link = pimpl->m_linkPos(lnkIdx);
+            pimpl->m_invDynNetExtWrenches(lnkIdx) = pimpl->fromUsedRepresentationToBodyFixed(linkExtForces(lnkIdx),inertialFrame_X_link);
+        }
+    }
+    else
+    {
+        for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(pimpl->m_robot_model.getNrOfLinks()); lnkIdx++)
+        {
+            pimpl->m_invDynNetExtWrenches(lnkIdx) = linkExtForces(lnkIdx);
+        }
+    }
+
+    // Prepare the vector of generalized proper accs
+    pimpl->m_invDynGeneralizedProperAccs.baseAcc() = pimpl->m_invDynBaseAcc;
+    toEigen(pimpl->m_invDynGeneralizedProperAccs.baseAcc().getLinearVec3()) =
+        toEigen(pimpl->m_invDynBaseAcc.getLinearVec3()) - toEigen(pimpl->m_gravityAccInBaseLinkFrame);
+    toEigen(pimpl->m_invDynGeneralizedProperAccs.jointAcc()) = toEigen(s_ddot);
+
+    // Run inverse dynamics
+    ForwardAccKinematics(pimpl->m_robot_model,
+                         pimpl->m_traversal,
+                         pimpl->m_pos,
+                         pimpl->m_vel,
+                         pimpl->m_invDynGeneralizedProperAccs,
+                         pimpl->m_linkVel,
+                         pimpl->m_invDynLinkProperAccs);
+
+    RNEADynamicPhase(pimpl->m_robot_model,
+                     pimpl->m_traversal,
+                     pimpl->m_pos.jointPos(),
+                     pimpl->m_linkVel,
+                     pimpl->m_invDynLinkProperAccs,
+                     pimpl->m_invDynNetExtWrenches,
+                     pimpl->m_invDynInternalWrenches,
+                     baseForceAndJointTorques);
+
+    // Convert output base force
+    baseForceAndJointTorques.baseWrench() = pimpl->fromBodyFixedToUsedRepresentation(baseForceAndJointTorques.baseWrench(),
+                                                                              pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex()));
+
+    return true;
+}
+
+bool KinDynComputations::generalizedBiasForces(FreeFloatingGeneralizedTorques & generalizedBiasForces)
+{
+    // Needed for using pimpl->m_linkVel
+    this->computeFwdKinematics();
+
+    // The external wrenches need to be set to zero
+    pimpl->m_invDynNetExtWrenches.zero();
+
+    // The base acceleration is "zero" in the chosen representation,
+    // but the "zero" in mixed means non-zero in body-fixed, and we should account for that
+    Vector6 zeroBaseAcc;
+    zeroBaseAcc.zero();
+    if( pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION )
+    {
+        fromEigen(pimpl->m_invDynBaseAcc,toEigen(zeroBaseAcc));
+    }
+    else if( pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION )
+    {
+        pimpl->m_invDynBaseAcc = convertInertialAccelerationToBodyFixedAcceleration(zeroBaseAcc,pimpl->m_pos.worldBasePos());
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+        pimpl->m_invDynBaseAcc = convertMixedAccelerationToBodyFixedAcceleration(zeroBaseAcc,
+                                                                                 pimpl->m_vel.baseVel(),
+                                                                                 pimpl->m_pos.worldBasePos().getRotation());
+    }
+
+    pimpl->m_invDynGeneralizedProperAccs.baseAcc() = pimpl->m_invDynBaseAcc;
+    toEigen(pimpl->m_invDynGeneralizedProperAccs.baseAcc().getLinearVec3()) =
+            toEigen(pimpl->m_invDynBaseAcc.getLinearVec3()) - toEigen(pimpl->m_gravityAccInBaseLinkFrame);
+    pimpl->m_invDynGeneralizedProperAccs.jointAcc().zero();
+
+    // Run inverse dynamics
+    ForwardAccKinematics(pimpl->m_robot_model,
+                         pimpl->m_traversal,
+                         pimpl->m_pos,
+                         pimpl->m_vel,
+                         pimpl->m_invDynGeneralizedProperAccs,
+                         pimpl->m_linkVel,
+                         pimpl->m_invDynLinkProperAccs);
+
+    RNEADynamicPhase(pimpl->m_robot_model,
+                     pimpl->m_traversal,
+                     pimpl->m_pos.jointPos(),
+                     pimpl->m_linkVel,
+                     pimpl->m_invDynLinkProperAccs,
+                     pimpl->m_invDynNetExtWrenches,
+                     pimpl->m_invDynInternalWrenches,
+                     generalizedBiasForces);
+
+    // Convert output base force
+    generalizedBiasForces.baseWrench() = pimpl->fromBodyFixedToUsedRepresentation(generalizedBiasForces.baseWrench(),
+                                                                           pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex()));
+
+    return true;
+}
+
+bool KinDynComputations::generalizedGravityForces(FreeFloatingGeneralizedTorques & generalizedGravityForces)
+{
+    // Clear input buffers that need to be cleared
+    for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(pimpl->m_robot_model.getNrOfLinks()); lnkIdx++)
+    {
+        pimpl->m_invDynNetExtWrenches(lnkIdx).zero();
+    }
+    pimpl->m_invDynGeneralizedProperAccs.baseAcc().zero();
+    toEigen(pimpl->m_invDynGeneralizedProperAccs.baseAcc().getLinearVec3()) =
+            - toEigen(pimpl->m_gravityAccInBaseLinkFrame);
+    pimpl->m_invDynGeneralizedProperAccs.jointAcc().zero();
+
+    // Run inverse dynamics
+    ForwardAccKinematics(pimpl->m_robot_model,
+                         pimpl->m_traversal,
+                         pimpl->m_pos,
+                         pimpl->m_invDynZeroVel,
+                         pimpl->m_invDynGeneralizedProperAccs,
+                         pimpl->m_invDynZeroLinkVel,
+                         pimpl->m_invDynLinkProperAccs);
+
+    RNEADynamicPhase(pimpl->m_robot_model,
+                     pimpl->m_traversal,
+                     pimpl->m_pos.jointPos(),
+                     pimpl->m_invDynZeroLinkVel,
+                     pimpl->m_invDynLinkProperAccs,
+                     pimpl->m_invDynNetExtWrenches,
+                     pimpl->m_invDynInternalWrenches,
+                     generalizedGravityForces);
+
+
+    // Convert output base force
+    generalizedGravityForces.baseWrench() = pimpl->fromBodyFixedToUsedRepresentation(generalizedGravityForces.baseWrench(),
+                                                                              pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex()));
+
+    return true;
+}
 
 }
 

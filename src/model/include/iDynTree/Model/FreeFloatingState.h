@@ -200,7 +200,8 @@ namespace iDynTree
 
     public:
         // Documentation inherited
-       FreeFloatingAcc(const iDynTree::Model& model);
+        FreeFloatingAcc();
+        FreeFloatingAcc(const iDynTree::Model& model);
 
        /**
         * Resize the class to match the number of internal DOFs contained in a Model.

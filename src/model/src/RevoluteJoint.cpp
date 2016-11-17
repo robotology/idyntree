@@ -214,6 +214,7 @@ void RevoluteJoint::computeChildVelAcc(const VectorDynSize & jntPos,
     return;
 }
 
+
 void RevoluteJoint::computeChildVel(const VectorDynSize & jntPos,
                                     const VectorDynSize & jntVel,
                                           LinkVelArray & linkVels,
@@ -264,6 +265,32 @@ void RevoluteJoint::computeChildPosVelAcc(const VectorDynSize & jntPos,
     return;
 }
 
+void RevoluteJoint::computeChildAcc(const VectorDynSize &jntPos, const VectorDynSize &jntVel,
+                                    const LinkVelArray &linkVels, const VectorDynSize &jntAcc,
+                                    LinkAccArray &linkAccs, const LinkIndex child, const LinkIndex parent) const
+{
+    double dang = jntVel(this->getDOFsOffset());
+    double d2ang = jntAcc(this->getDOFsOffset());
+    const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
+    const Transform & parent_X_child = this->getTransform(jntPos,parent,child);
+    iDynTree::SpatialMotionVector S = this->getMotionSubspaceVector(0,child);
+    SpatialMotionVector vj = S*dang;
+    linkAccs(child) = child_X_parent*linkAccs(parent) + S*d2ang + linkVels(child)*vj;
+}
+
+void RevoluteJoint::computeChildBiasAcc(const VectorDynSize &jntPos,
+                                        const VectorDynSize &jntVel,
+                                        const LinkVelArray &linkVels,
+                                              LinkAccArray &linkBiasAccs,
+                                         const LinkIndex child, const LinkIndex parent) const
+{
+    double dang = jntVel(this->getDOFsOffset());
+    const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
+    const Transform & parent_X_child = this->getTransform(jntPos,parent,child);
+    iDynTree::SpatialMotionVector S = this->getMotionSubspaceVector(0,child);
+    SpatialMotionVector vj = S*dang;
+    linkBiasAccs(child) = child_X_parent*linkBiasAccs(parent) + linkVels(child)*vj;
+}
 
 void RevoluteJoint::computeJointTorque(const VectorDynSize& jntPos, const Wrench& internalWrench,
                                        LinkIndex linkThatAppliesWrench, LinkIndex linkOnWhichWrenchIsApplied,
@@ -276,11 +303,6 @@ void RevoluteJoint::computeJointTorque(const VectorDynSize& jntPos, const Wrench
 
     return;
 }
-
-
-
-
-
 
 
 }

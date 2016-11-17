@@ -113,6 +113,13 @@ FreeFloatingVel::~FreeFloatingVel()
 
 }
 
+FreeFloatingAcc::FreeFloatingAcc()
+{
+    this->m_baseAcc.zero();
+    this->m_jointAcc.resize(0);
+    this->m_jointAcc.zero();
+}
+
 FreeFloatingAcc::FreeFloatingAcc(const Model& model)
 {
     resize(model);
