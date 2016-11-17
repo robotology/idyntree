@@ -13,9 +13,9 @@ if(IDYNTREE_USES_KDL)
     add_subdirectory(benchmark)
 
     # Comparative tests of implementations of similar methods in iDynTree, Eigen, KDL and YARP
-    if( IDYNTREE_USES_YARP )
-        add_subdirectory(yarp_kdl_consistency)
-    endif()
+    # if( IDYNTREE_USES_YARP )
+    #     add_subdirectory(yarp_kdl_consistency)
+    # endif()
 
     if(IDYNTREE_USES_ICUB_MAIN)
         # Add benchmark test against yarp/icub functions
