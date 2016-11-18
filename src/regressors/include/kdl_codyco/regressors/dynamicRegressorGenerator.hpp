@@ -170,6 +170,20 @@ public:
     //double getFixedParameter(FixedParameterIndex fixed_par_index);
     //unfixParameter(ParameterIndex par_index);
 
+    /**
+     * Get a human readable description of a given link considered in the regressor.
+     *
+     * @return a human readable description of a given link considered in the regressor.
+     */
+    std::string getDescriptionOfLink(int link_index);
+
+    /**
+     * Get a human readable description of all links considered in the regressor.
+     *
+     * @return a std::string containing the description of all the links.
+     */
+    std::string getDescriptionOfLinks();
+
 
     /**
      * Get a human readable description of a given parameter
@@ -366,7 +380,7 @@ public:
     iDynTree::SensorsList sensorsList;
 
     //measured 6 axis Force/torques
-    iDynTree::SensorsMeasurements sensorMeasures;    
+    iDynTree::SensorsMeasurements sensorMeasures;
 
 private:
     KDL::CoDyCo::UndirectedTree undirected_tree; /**< UndirectedTree object: it encodes the TreeSerialization */

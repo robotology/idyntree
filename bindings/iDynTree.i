@@ -5,16 +5,8 @@
 %include "std_string.i"
 %include "std_vector.i"
 
-namespace std {
-    %template(StringVector) vector<string>;
-}
-
 // Wrap the std::vector<std::string> params
-%include "std_vector.i"
-
-namespace std {
-    %template(StringVector) vector<string>;
-}
+%template(StringVector) std::vector<std::string>;
 
 // Ignore some methods to avoid warnings
 %include "./ignore.i"

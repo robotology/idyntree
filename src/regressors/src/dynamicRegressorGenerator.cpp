@@ -301,6 +301,34 @@ std::string DynamicRegressorGenerator::getDescriptionOfOutputs()
     return ss.str();
 }
 
+std::string DynamicRegressorGenerator::getDescriptionOfLink(int link_index)
+{
+    KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.getOrderedLink(link_index);
+    std::stringstream ss;
+    ss << link_it->getName();
+
+    return ss.str();
+}
+
+std::string DynamicRegressorGenerator::getDescriptionOfLinks()
+{
+    std::stringstream ss;
+
+    for(int i = 0; i < (int)undirected_tree.getNrOfLinks(); i++) {
+        KDL::CoDyCo::LinkMap::const_iterator link_it = dynamic_traversal.getOrderedLink(i);
+
+        std::string desc = getDescriptionOfLink(link_it->getLinkIndex());
+        if (std::find(fake_links_names.begin(), fake_links_names.end(), desc) != fake_links_names.end()) {
+            //ignore fake links
+            continue;
+        }
+
+        ss << desc << std::endl;
+    }
+
+    return ss.str();
+}
+
 int DynamicRegressorGenerator::setRobotState(const KDL::JntArray &_q, const KDL::JntArray &_q_dot, const KDL::JntArray &_q_dotdot, const KDL::Twist& _base_velocity, const KDL::Twist& _base_acceleration)
 {
     if( (int)_q.rows() != NrOfDOFs || (int)_q_dot.rows() != NrOfDOFs || (int)_q_dotdot.rows() != NrOfDOFs ) {

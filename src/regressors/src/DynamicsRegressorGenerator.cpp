@@ -443,14 +443,16 @@ unsigned int DynamicsRegressorGenerator::getNrOfFakeLinks() const
    return (unsigned int)this->pimpl->m_pLegacyGenerator->getNrOfFakeLinks();
 }
 
-/*
+
 std::string DynamicsRegressorGenerator::getDescriptionOfLink(int link_index)
 {
+    return this->pimpl->m_pLegacyGenerator->getDescriptionOfLink(link_index);
 }
 
 std::string DynamicsRegressorGenerator::getDescriptionOfLinks()
 {
-}*/
+    return this->pimpl->m_pLegacyGenerator->getDescriptionOfLinks();
+}
 
 
 bool DynamicsRegressorGenerator::getModelParameters(VectorDynSize& values)
