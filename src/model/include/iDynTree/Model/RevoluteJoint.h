@@ -32,6 +32,12 @@ namespace iDynTree
         Transform link1_X_link2_at_rest;
         Axis rotation_axis_wrt_link1;
 
+        // Limits
+        void disablePosLimits();
+        bool m_hasPosLimits;
+        double m_minPos;
+        double m_maxPos;
+
         // Cache attributes
         mutable double q_previous;
         mutable Transform link1_X_link2;
@@ -153,7 +159,14 @@ namespace iDynTree
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
                                         VectorDynSize & jntTorques) const;
 
+        // LIMITS METHODS
+        virtual bool hasPosLimits() const;
+        virtual bool enablePosLimits(const bool enable);
+        virtual bool getPosLimits(const size_t _index, double & min, double & max) const;
+        virtual double getMinPosLimit(const size_t _index) const;
+        virtual double getMaxPosLimit(const size_t _index) const;
+        virtual bool setPosLimits(const size_t _index, double & min, double & max);
     };
 }
 
-#endif /* IDYNTREE_FIXED_JOINT_H */
+#endif

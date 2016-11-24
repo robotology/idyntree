@@ -174,6 +174,47 @@ bool axisFromURDFXML(TiXmlElement* axisXml,
     return true;
 }
 
+bool posLimitsFromURDFXML(TiXmlElement* limXml,
+                          double & posLimMin, double & posLimMax)
+{
+    if ( limXml->Attribute("lower") )
+    {
+        if( !stringToDouble(limXml->Attribute("lower"),posLimMin) )
+        {
+            std::stringstream stm;
+            stm << " [" << limXml->Attribute("lower")
+                << "] is not a double, failing the parsing.";
+            reportError("","posLimitsFromURDFXML",stm.str().c_str());
+            return false;
+        }
+    }
+    else
+    {
+        reportWarning("","posLimitsFromURDFXML","lower tag not present in revolute joint, defaulting to 0.0 .");
+        posLimMin = 0.0;
+    }
+
+    if ( limXml->Attribute("upper") )
+    {
+        if( !stringToDouble(limXml->Attribute("upper"),posLimMax) )
+        {
+            std::stringstream stm;
+            stm << " [" << limXml->Attribute("upper")
+                << "] is not a double, failing the parsing.";
+            reportError("","posLimitsFromURDFXML",stm.str().c_str());
+            return false;
+        }
+    }
+    else
+    {
+        reportWarning("","posLimitsFromURDFXML","upper tag not present in revolute joint, defaulting to 0.0 .");
+        posLimMax = 0.0;
+    }
+
+    return true;
+}
+
+
 /**
  * This function allocated dinamically the joint.
  * The joint should be then deleted by the parser
@@ -326,31 +367,42 @@ bool jointFromURDFXML(const Model & model,
     }
 
     assert(p_joint != 0);
-    return true;
 
-    // Get limit
-    /*
-    TiXmlElement *limit_xml = config->FirstChildElement("limit");
+    // Get Joint limits
+    TiXmlElement *limit_xml = jointXml->FirstChildElement("limit");
     if (limit_xml)
     {
-        resetPtr(joint.limits,new JointLimits());
-        if (!parseJointLimits(*joint.limits, limit_xml))
+        double posLimMin, posLimMax;
+        if( !posLimitsFromURDFXML(limit_xml,posLimMin,posLimMax) )
         {
-        logError("Could not parse limit element for joint [%s]", joint.name.c_str());
-        resetPtr(joint.limits);
-        return false;
+            std::string errStr = "Parsing limits failed for joint " + jointName + ", URDF parsing failed.";
+            reportError("", "jointFromURDFXML", errStr.c_str());
+            delete p_joint;
+            p_joint = 0;
+            return false;
         }
+
+        if( p_joint->getNrOfDOFs() == 0 )
+        {
+            std::string warnStr = "Limits are presented in joint " + jointName + ", that has zero DOFs.";
+            reportWarning("", "jointFromURDFXML", warnStr.c_str());
+        }
+
+        p_joint->enablePosLimits(true);
+        p_joint->setPosLimits(0,posLimMin,posLimMax);
     }
-    else if (joint.type == Joint::REVOLUTE)
+    else if (type_str == "revolute")
     {
-        logError("Joint [%s] is of type REVOLUTE but it does not specify limits", joint.name.c_str());
-        return false;
+        std::string errStr = "Joint " + jointName + " has type revolute but the limit tag is missing.";
+        reportWarning("","jointFromURDFXML",errStr.c_str());
     }
-    else if (joint.type == Joint::PRISMATIC)
+    else if (type_str == "prismatic")
     {
-        logError("Joint [%s] is of type PRISMATIC without limits", joint.name.c_str());
-        return false;
-    }*/
+        std::string errStr = "Joint " + jointName + " has type prismatic but the limit tag is missing.";
+        reportWarning("","jointFromURDFXML",errStr.c_str());
+    }
+
+    return true;
 }
 
 

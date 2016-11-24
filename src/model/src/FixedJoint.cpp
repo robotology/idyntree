@@ -227,4 +227,34 @@ size_t FixedJoint::getDOFsOffset() const
     return this->m_DOFsOffset;
 }
 
+bool FixedJoint::hasPosLimits() const
+{
+    return false;
+}
+
+bool FixedJoint::enablePosLimits(const bool /*enable*/)
+{
+    return false;
+}
+
+bool FixedJoint::getPosLimits(const size_t _index, double & min, double & max) const
+{
+    return false;
+}
+
+double FixedJoint::getMinPosLimit(const size_t _index) const
+{
+    return 0.0;
+}
+
+double FixedJoint::getMaxPosLimit(const size_t _index) const
+{
+    return 0.0;
+}
+
+bool FixedJoint::setPosLimits(const size_t /*_index*/, double & /*min*/, double & /*max*/)
+{
+    return false;
+}
+
 }

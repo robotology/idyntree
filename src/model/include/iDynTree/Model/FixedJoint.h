@@ -154,6 +154,14 @@ namespace iDynTree
 
         // Documentation inherited
         virtual size_t getDOFsOffset() const;
+
+        // LIMITS METHODS
+        virtual bool hasPosLimits() const;
+        virtual bool enablePosLimits(const bool enable);
+        virtual bool getPosLimits(const size_t _index, double & min, double & max) const;
+        virtual double getMinPosLimit(const size_t _index) const;
+        virtual double getMaxPosLimit(const size_t _index) const;
+        virtual bool setPosLimits(const size_t _index, double & min, double & max);
     };
 }
 

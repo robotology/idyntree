@@ -16,6 +16,8 @@
 
 #include <cassert>
 
+#include <cfloat>
+
 namespace iDynTree
 {
 
@@ -29,12 +31,15 @@ RevoluteJoint::RevoluteJoint(const LinkIndex _link1, const LinkIndex _link2,
 
     this->resetAxisBuffers();
     this->resetBuffers(0);
+    this->disablePosLimits();
 }
 
 RevoluteJoint::RevoluteJoint(const RevoluteJoint& other):
                              link1(other.link1), link2(other.link2),
                              link1_X_link2_at_rest(other.link1_X_link2_at_rest),
-                             rotation_axis_wrt_link1(other.rotation_axis_wrt_link1)
+                             rotation_axis_wrt_link1(other.rotation_axis_wrt_link1),
+                             m_hasPosLimits(other.m_hasPosLimits),
+                             m_minPos(other.m_minPos), m_maxPos(other.m_maxPos)
 {
     this->setPosCoordsOffset(other.getPosCoordsOffset());
     this->setDOFsOffset(other.getDOFsOffset());
@@ -303,6 +308,51 @@ void RevoluteJoint::computeJointTorque(const VectorDynSize& jntPos, const Wrench
 
     return;
 }
+
+void RevoluteJoint::disablePosLimits()
+{
+    m_hasPosLimits = false;
+    m_minPos = -DBL_MAX;
+    m_maxPos = DBL_MAX;
+}
+
+bool RevoluteJoint::hasPosLimits() const
+{
+    return m_hasPosLimits;
+}
+
+bool RevoluteJoint::enablePosLimits(const bool enable)
+{
+    m_hasPosLimits = enable;
+    return true;
+}
+
+bool RevoluteJoint::getPosLimits(const size_t /*_index*/, double & min, double & max) const
+{
+    min = m_minPos;
+    max = m_maxPos;
+
+    return true;
+}
+
+double RevoluteJoint::getMinPosLimit(const size_t /*_index*/) const
+{
+    return m_minPos;
+}
+
+double RevoluteJoint::getMaxPosLimit(const size_t /*_index*/) const
+{
+    return m_maxPos;
+}
+
+bool RevoluteJoint::setPosLimits(const size_t /*_index*/, double & min, double & max)
+{
+    m_minPos = min;
+    m_maxPos = max;
+
+    return true;
+}
+
 
 
 }
