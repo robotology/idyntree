@@ -288,7 +288,7 @@ int main(int argc, char** argv)
     srand(0);
 
     // \todo TODO : test fails for dof ~= 100 , check why and fix
-    for(int i=0;i<10;i++)
+    for(int i=1;i<10;i++)
     {
         for(int permutation=0; permutation < 16; permutation++ )
         {
