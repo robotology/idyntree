@@ -27,9 +27,9 @@ namespace iDynTree
 {
 
 bool ComputeLinearAndAngularMomentum(const Model& model,
-                                const LinkPositions& linkPositions,
-                                const LinkVelArray& linkVels,
-                                      SpatialMomentum& totalMomentum)
+                                     const LinkPositions& linkPositions,
+                                     const LinkVelArray& linkVels,
+                                           SpatialMomentum& totalMomentum)
 {
     totalMomentum.zero();
 
@@ -39,6 +39,26 @@ bool ComputeLinearAndAngularMomentum(const Model& model,
         const Twist     & v = linkVels(lnkIdx);
         const SpatialInertia & I = model.getLink(lnkIdx)->getInertia();
         totalMomentum = totalMomentum + commonFrame_X_link*(I*v);
+    }
+
+    return true;
+}
+
+bool ComputeLinearAndAngularMomentumDerivativeBias(const Model & model,
+                                                   const LinkPositions& linkPositions,
+                                                   const LinkVelArray & linkVel,
+                                                   const LinkAccArray & linkBiasAcc,
+                                                         Wrench& totalMomentumBias)
+{
+    totalMomentumBias.zero();
+
+    for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(model.getNrOfLinks()); lnkIdx++)
+    {
+        const Transform & commonFrame_X_link = linkPositions(lnkIdx);
+        const Twist     & v = linkVel(lnkIdx);
+        const SpatialAcc & a_bias = linkBiasAcc(lnkIdx);
+        const SpatialInertia & I = model.getLink(lnkIdx)->getInertia();
+        totalMomentumBias = totalMomentumBias + commonFrame_X_link*(I*a_bias+v*(I*v));
     }
 
     return true;
@@ -99,12 +119,11 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
             // If the visited link is the base, the base has no parent, and hence no
             // joint torque to compute.
             // In this case the base wrench is simply saved in the output generalized
-            // torques vector (with a minus because the base force is the one applied
-            // on the base, while f[visitedLinkIndex] stores the one applied by the base.
+            // torques vector (without a minus because they both express the wrench applied on the base).
             // Notice that this force, if the model, the accelerations and the external wrenches
             // are coherent, should be zero. This because any external wrench on the base should
             // be present also in the fExt vector .
-            baseWrenchJntTorques.baseWrench() = -f(visitedLinkIndex);
+            baseWrenchJntTorques.baseWrench() = f(visitedLinkIndex);
         }
         else
         {

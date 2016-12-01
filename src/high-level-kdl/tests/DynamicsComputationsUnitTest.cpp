@@ -174,7 +174,7 @@ int main()
         testModelConsistency(urdfFileName);
     }
 
-    // Do a special test for the regresson on a model that just has 1 joint that rotates
+    // Do a special test for the regression on a model that just has 1 joint that rotates
     // around the Z axis, and both link frames have the origin on that axes
     testTwoLinksRotationOnZAxisRegressor();
 

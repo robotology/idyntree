@@ -32,6 +32,12 @@ namespace iDynTree
         Transform link1_X_link2_at_rest;
         Axis rotation_axis_wrt_link1;
 
+        // Limits
+        void disablePosLimits();
+        bool m_hasPosLimits;
+        double m_minPos;
+        double m_maxPos;
+
         // Cache attributes
         mutable double q_previous;
         mutable Transform link1_X_link2;
@@ -132,11 +138,35 @@ namespace iDynTree
                                         const LinkIndex child, const LinkIndex parent) const;
 
         // Documentation inherited
+        virtual void computeChildAcc(const VectorDynSize & jntPos,
+                                     const VectorDynSize & jntVel,
+                                     const LinkVelArray & linkVels,
+                                     const VectorDynSize & jntAcc,
+                                     LinkAccArray & linkAccs,
+                                     const LinkIndex child,
+                                     const LinkIndex parent) const;
+
+        // Documentation inherited
+        virtual void computeChildBiasAcc(const VectorDynSize & jntPos,
+                                         const VectorDynSize & jntVel,
+                                         const LinkVelArray & linkVels,
+                                         LinkAccArray & linkBiasAccs,
+                                         const LinkIndex child,
+                                         const LinkIndex parent) const;
+
+        // Documentation inherited
         virtual void computeJointTorque(const VectorDynSize & jntPos, const Wrench & internalWrench,
                                         const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied,
                                         VectorDynSize & jntTorques) const;
 
+        // LIMITS METHODS
+        virtual bool hasPosLimits() const;
+        virtual bool enablePosLimits(const bool enable);
+        virtual bool getPosLimits(const size_t _index, double & min, double & max) const;
+        virtual double getMinPosLimit(const size_t _index) const;
+        virtual double getMaxPosLimit(const size_t _index) const;
+        virtual bool setPosLimits(const size_t _index, double & min, double & max);
     };
 }
 
-#endif /* IDYNTREE_FIXED_JOINT_H */
+#endif

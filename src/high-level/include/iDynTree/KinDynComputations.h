@@ -15,6 +15,7 @@
 
 #include <iDynTree/Model/Indeces.h>
 #include <iDynTree/Model/FreeFloatingMatrices.h>
+#include <iDynTree/Model/LinkState.h>
 
 namespace iDynTree
 {
@@ -31,7 +32,7 @@ class Wrench;
 class Model;
 class Traversal;
 class Position;
-
+class FreeFloatingGeneralizedTorques;
 
 /**
  * \ingroup iDynTreeHighLevel
@@ -67,6 +68,11 @@ private:
     // If it was already called before the last call to setRobotState,
     // exits without further computations
     void computeRawMassMatrixAndTotalMomentum();
+
+    // Make sure that (if necessary) the kinematics bias acc is update
+    // If it was already called before the last call to setRobotState,
+    // exits without further computations
+    void computeBiasAccFwdKinematics();
 
     // Invalidate the cache of intermediated results (called by setRobotState)
     void invalidateCache();
@@ -397,6 +403,21 @@ public:
     bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
                                       iDynTree::MatrixDynSize & outJacobian);
 
+    /**
+     * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
+     *
+     * This term is usually called $\dot{J} \nu$ or $\dot{J} \dot{q}$.
+     */
+    Vector6 getFrameBiasAcc(const FrameIndex frameIdx);
+
+    /**
+     * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
+     *
+     * This term is usually called $\dot{J} \nu$ or $\dot{J} \dot{q}$.
+     */
+    Vector6 getFrameBiasAcc(const std::string & frameName);
+
+
     // Todo getFrameRelativeVel and getFrameRelativeJacobian to match the getRelativeTransform behaviour
 
     //@}
@@ -405,35 +426,39 @@ public:
     /**
       * @name Methods to get quantities related to centroidal dynamics.
       *
-      * \note Implementation incomplete, please refrain to use until this warning has been removed.
+      * For a precise definition of the quantities computed by this methods, please check:
+      * S. Traversaro, D. Pucci, F. Nori
+      * On the Base Frame Choice in Free-Floating Mechanical Systems and its Connection to Centroidal Dynamics
+      * https://traversaro.github.io/preprints/changebase.pdf
       */
     //@{
 
     /**
      * Return the center of mass position.
      *
-     * Return the center of mass position, expressed in the world/inertial frame.
-     *
-     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     * @return the center of mass position, expressed in the world/inertial frame.
      */
     iDynTree::Position getCenterOfMassPosition();
 
     /**
      * Return the center of mass velocity, with respect to the world/inertial frame.
      *
-     * \note This is the derivative of the quantity returned by getCenterOfMassPosition .
+     * \note This is the time derivative of the quantity returned by getCenterOfMassPosition .
      *
-     * \note Implementation incomplete, please refrain to use until this warning has been removed.
      */
-    //iDynTree::Vector3 getCenterOfMassVelocity();
+    iDynTree::Vector3 getCenterOfMassVelocity();
 
     /**
      * Return the center of mass jacobian, i.e. the 3 \times (n+6) matrix such that:
      *  getCenterOfMassVelocity() == getCenterOfMassJacobian() * \nu .
      *
-     * \note Implementation incomplete, please refrain to use until this warning has been removed.
      */
-    //bool getCenterOfMassJacobian(MatrixDynSize & comJacobian);
+    bool getCenterOfMassJacobian(MatrixDynSize & comJacobian);
+
+    /**
+     * Return the center of mass bias acceleration.
+     */
+     Vector3 getCenterOfMassBiasAcc();
 
     /**
      * Get the average velocity of the robot.
@@ -456,6 +481,26 @@ public:
     bool getAverageVelocityJacobian(MatrixDynSize & avgVelocityJacobian);
 
     /**
+     * Get the centroidal average velocity of the robot.
+     *
+     * The quantity is the average velocity returned by getAverageVelocity, but computed in the center of mass
+     * and with the orientation of the FrameVelocityRepresentation used.
+     * It we indicate with G the center of mass, it is expressed in (G[A]) for the mixed and inertial representation,
+     * and in (G[B]) for the base body-fixed representation.
+     *
+     * \note the linear part of this twist correspond to the getCenterOfMassVelocity only if the FrameVelocityConvention is set to MIXED or INERTIAL.
+     *
+     */
+    iDynTree::Twist getCentroidalAverageVelocity();
+
+    /**
+     * Get the jacobian of the centroidal average velocity of the robot.
+     *
+     * See the getCentroidalAverageVelocity method for more info on this.
+     */
+    bool getCentroidalAverageVelocityJacobian(MatrixDynSize & centroidalAvgVelocityJacobian);
+
+    /**
      * Get the linear and angular momentum of the robot.
      * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
      *
@@ -470,6 +515,13 @@ public:
      * \note Implementation incomplete, please refrain to use until this warning has been removed.
      */
     bool getLinearAngularMomentumJacobian(MatrixDynSize & linAngMomentumJacobian);
+
+    /**
+     * Get the centroidal (total) momentum of the robot.
+     * If G is the center of mass, this quantity is expressed in (G[A]), (G[A]) or (G[B]) depending on the FrameVelocityConvention used.
+     *
+     */
+    iDynTree::SpatialMomentum getCentroidalTotalMomentum();
 
     //@}
 
@@ -492,7 +544,7 @@ public:
      * Multibody Dynamics Notation
      * http://repository.tue.nl/849895
      *
-     * @param[out] freeFloatingMassMatrix the getNrOfDOFs() times getNrOfDOFs() output mass matrix.
+     * @param[out] freeFloatingMassMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass matrix.
      * @return true if all went well, false otherwise.
      */
     bool getFreeFloatingMassMatrix(MatrixDynSize & freeFloatingMassMatrix);
@@ -504,6 +556,51 @@ public:
       */
     //@{
 
+    /**
+     * Compute the free floating inverse dynamics.
+     *
+     * The semantics of baseAcc, the base part of baseForceAndJointTorques
+     * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @param[in] baseAcc the acceleration of the base link
+     * @param[in] s_ddot the accelerations of the joints
+     * @param[in] linkExtForces the external wrenches excerted by the environment on the model
+     * @param[out] baseForceAndJointTorques the output generalized torques
+     * @return true if all went well, false otherwise
+     */
+    bool inverseDynamics(const Vector6& baseAcc,
+                         const VectorDynSize& s_ddot,
+                         const LinkNetExternalWrenches & linkExtForces,
+                               FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
+
+    /**
+     * Compute the getNrOfDOFS()+6 vector of generalized bias (gravity+coriolis) forces.
+     *
+     * The semantics of baseAcc, the base part of baseForceAndJointTorques
+     * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @param[in] linkExtForces the external wrenches excerted by the environment on the model
+     * @param[out] baseForceAndJointTorques the output generalized bias forces
+     * @return true if all went well, false otherwise
+     */
+    bool generalizedBiasForces(FreeFloatingGeneralizedTorques & generalizedGravityForces);
+
+    /**
+     * Compute the getNrOfDOFS()+6 vector of generalized gravity forces.
+     *
+     * The semantics of baseAcc, the base part of baseForceAndJointTorques
+     * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @param[out] baseForceAndJointTorques the output gravity generalized forces
+     * @return true if all went well, false otherwise
+     */
+    bool generalizedGravityForces(FreeFloatingGeneralizedTorques & generalizedGravityForces);
 
     //@}
 

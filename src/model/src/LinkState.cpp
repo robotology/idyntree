@@ -131,6 +131,15 @@ std::string LinkWrenches::toString(const Model& model) const
     return ss.str();
 }
 
+void LinkWrenches::zero()
+{
+    size_t nrOfLinks = this->getNrOfLinks();
+    for(size_t l=0; l < nrOfLinks; l++)
+    {
+        this->operator()(l).zero();
+    }
+}
+
 
 LinkWrenches::~LinkWrenches()
 {

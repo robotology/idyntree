@@ -84,11 +84,15 @@ namespace iDynTree
         bool isConsistent(const Model& model) const;
         size_t getNrOfLinks() const;
 
-
         iDynTree::Wrench & operator()(const LinkIndex link);
         const iDynTree::Wrench & operator()(const LinkIndex link) const;
 
         std::string toString(const Model & model) const;
+
+        /**
+         * Set all the elements to zero.
+         */
+        void zero();
 
         ~LinkWrenches();
     };

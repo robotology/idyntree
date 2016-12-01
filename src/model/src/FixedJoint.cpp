@@ -178,6 +178,25 @@ void FixedJoint::computeChildVel(const VectorDynSize & jntPos,
     return;
 }
 
+void FixedJoint::computeChildAcc(const VectorDynSize &jntPos, const VectorDynSize &jntVel,
+                                    const LinkVelArray &linkVels, const VectorDynSize &jntAcc,
+                                    LinkAccArray &linkAccs, const LinkIndex child, const LinkIndex parent) const
+{
+
+    const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
+    linkAccs(child) = child_X_parent*linkAccs(parent);
+}
+
+void FixedJoint::computeChildBiasAcc(const VectorDynSize &jntPos,
+                                        const VectorDynSize &jntVel,
+                                        const LinkVelArray &linkVels,
+                                        LinkAccArray &linkBiasAccs,
+                                        const LinkIndex child, const LinkIndex parent) const
+{
+    const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
+    linkBiasAccs(child) = child_X_parent*linkBiasAccs(parent);
+}
+
 void FixedJoint::setIndex(JointIndex& _index)
 {
     this->m_index = _index;
@@ -206,6 +225,36 @@ void FixedJoint::setDOFsOffset(const size_t _offset)
 size_t FixedJoint::getDOFsOffset() const
 {
     return this->m_DOFsOffset;
+}
+
+bool FixedJoint::hasPosLimits() const
+{
+    return false;
+}
+
+bool FixedJoint::enablePosLimits(const bool /*enable*/)
+{
+    return false;
+}
+
+bool FixedJoint::getPosLimits(const size_t _index, double & min, double & max) const
+{
+    return false;
+}
+
+double FixedJoint::getMinPosLimit(const size_t _index) const
+{
+    return 0.0;
+}
+
+double FixedJoint::getMaxPosLimit(const size_t _index) const
+{
+    return 0.0;
+}
+
+bool FixedJoint::setPosLimits(const size_t /*_index*/, double & /*min*/, double & /*max*/)
+{
+    return false;
 }
 
 }

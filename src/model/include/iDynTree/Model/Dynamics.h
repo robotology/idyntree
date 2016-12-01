@@ -43,14 +43,29 @@ namespace iDynTree
                                          const LinkVelArray&  linkVels,
                                                SpatialMomentum& totalMomentum);
 
+    /**
+     * Compute the total momentum derivatitive bias, i.e. the part of the total momentum derivative that does not depend on robot acceleration.
+     *
+     * The linear and angular momentum derivative depends on the robot position, velocity and acceleration.
+     * This function computes the part that do not depend on the robot accelearation.
+     *
+     * This function returns the bias of the derivative of the ComputeLinearAndAngularMomentum function.
+     */
+    bool ComputeLinearAndAngularMomentumDerivativeBias(const Model & model,
+                                                       const LinkPositions& linkPositions,
+                                                       const LinkVelArray & linkVel,
+                                                       const LinkAccArray & linkBiasAcc,
+                                                             Wrench& totalMomentumBias);
+
+
     bool RNEADynamicPhase(const iDynTree::Model & model,
                           const iDynTree::Traversal & traversal,
                           const iDynTree::JointPosDoubleArray & jointPos,
                           const iDynTree::LinkVelArray & linksVel,
                           const iDynTree::LinkAccArray & linksAcc,
                           const iDynTree::LinkNetExternalWrenches & linkExtForces,
-                          iDynTree::LinkInternalWrenches       & linkIntWrenches,
-                          iDynTree::FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
+                                iDynTree::LinkInternalWrenches       & linkIntWrenches,
+                                iDynTree::FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
 
     /**
      * Compute the floating base mass matrix, using the

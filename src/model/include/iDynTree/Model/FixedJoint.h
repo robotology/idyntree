@@ -111,8 +111,26 @@ namespace iDynTree
         // Documentation inherited
         virtual void computeChildVel(const VectorDynSize & jntPos,
                                      const VectorDynSize & jntVel,
-                                           LinkVelArray & linkVels,
-                                     const LinkIndex child, const LinkIndex parent) const;
+                                     LinkVelArray & linkVels,
+                                     const LinkIndex child,
+                                     const LinkIndex parent) const;
+
+        // Documentation inherited
+        virtual void computeChildAcc(const VectorDynSize & jntPos,
+                                     const VectorDynSize & jntVel,
+                                     const LinkVelArray & linkVels,
+                                     const VectorDynSize & jntAcc,
+                                           LinkAccArray & linkAccs,
+                                     const LinkIndex child,
+                                     const LinkIndex parent) const;
+
+        // Documentation inherited
+        virtual void computeChildBiasAcc(const VectorDynSize & jntPos,
+                                         const VectorDynSize & jntVel,
+                                         const LinkVelArray & linkVels,
+                                               LinkAccArray & linkBiasAccs,
+                                         const LinkIndex child,
+                                         const LinkIndex parent) const;
 
         // Documentation inherited
         virtual void computeJointTorque(const VectorDynSize & jntPos, const Wrench & internalWrench,
@@ -136,6 +154,14 @@ namespace iDynTree
 
         // Documentation inherited
         virtual size_t getDOFsOffset() const;
+
+        // LIMITS METHODS
+        virtual bool hasPosLimits() const;
+        virtual bool enablePosLimits(const bool enable);
+        virtual bool getPosLimits(const size_t _index, double & min, double & max) const;
+        virtual double getMinPosLimit(const size_t _index) const;
+        virtual double getMaxPosLimit(const size_t _index) const;
+        virtual bool setPosLimits(const size_t _index, double & min, double & max);
     };
 }
 

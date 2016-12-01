@@ -200,7 +200,7 @@ namespace iDynTree
 
         /**
          * Compute the velocity and acceleration of child,
-         * given the velocty and acceleration of parent and
+         * given the velocity and acceleration of parent and
          * the joint position, velocity and acceleration.
          *
          */
@@ -213,7 +213,7 @@ namespace iDynTree
 
         /**
          * Compute the velocity of child,
-         * given the velocty of parent  and
+         * given the velocity of parent  and
          * the joint position, velocity.
          */
         virtual void computeChildVel(const VectorDynSize & jntPos,
@@ -221,6 +221,29 @@ namespace iDynTree
                                      LinkVelArray & linkVels,
                                      const LinkIndex child,
                                      const LinkIndex parent) const = 0;
+
+        /**
+         * Compute the (body-fixed) acceleration of a child link
+         * given the (body-fixed) acceleration of the parent
+         */
+        virtual void computeChildAcc(const VectorDynSize & jntPos,
+                                     const VectorDynSize & jntVel,
+                                     const LinkVelArray & linkVels,
+                                     const VectorDynSize & jntAcc,
+                                           LinkAccArray & linkAccs,
+                                     const LinkIndex child,
+                                     const LinkIndex parent) const = 0;
+
+        /**
+         * Compute the (body-fixed) bias acceleration of a child link
+         * given the (body-fixed) bias acceleration of the parent
+         */
+        virtual void computeChildBiasAcc(const VectorDynSize & jntPos,
+                                         const VectorDynSize & jntVel,
+                                         const LinkVelArray & linkVels,
+                                               LinkAccArray & linkBiasAccs,
+                                         const LinkIndex child,
+                                         const LinkIndex parent) const = 0;
 
         /**
          * Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies
@@ -275,6 +298,62 @@ namespace iDynTree
          * joint in the velocity/acceleration coordiantes serialization of the model.
          */
         virtual size_t getDOFsOffset() const = 0;
+
+        /**
+         * @name Limit handling methods.
+         *  Methods for handling physical limits of joints.
+         *
+         *  The model used for limits is rather simple: a joint can have limits (being bounded)
+         *  or not.
+         *
+         *  In the current version the limits are supported only for simple
+         *  joints in which the velocity is the derivative of the position coordinate,
+         *  and then getNrOfPosCoords() is equal to getNrOfDOFs() .
+         *  The limits for such joints are specified by two constant vectors of dimension getNrOfDOFs(),
+         *  the vector of minimum positions and the vector of maximum positions.
+         */
+        ///@{
+        /**
+         * Method to check if the joint has limits.
+         *
+         * @return true if the joints has limits
+         */
+        virtual bool hasPosLimits() const = 0;
+
+        /**
+         * Method to set if the joint has limits.
+         *
+         * @return true if everything went correctly, false otherwise
+         *         (for example if the joint does not support joint position limits)
+         */
+        virtual bool enablePosLimits(bool enable) = 0;
+
+        /**
+         * Get min and max position limits of the joint, for the _index dof.
+         * @param[in] _index index of the dof for which the limit are obtained.
+         * @return true if everything is correct, false otherwise.
+         */
+        virtual bool getPosLimits(const size_t _index, double & min, double & max) const = 0;
+
+        /**
+         * Get the min position limit of the joint, bindings-friendly version.
+         */
+        virtual double getMinPosLimit(const size_t _index) const = 0;
+
+        /**
+         * Get the max position limit of the joint, bindings-friendly version.
+         */
+        virtual double getMaxPosLimit(const size_t _index) const = 0;
+
+        /**
+         * Set the position limits for a dof the joint.
+         *
+         * @note This just sets the internal position limits of the joint.
+         *       To set them as enabled, you need to call the enablePosLimits(true) method.
+         */
+        virtual bool setPosLimits(const size_t _index, double & min, double & max) = 0;
+
+        ///@}
     };
 
     typedef IJoint * IJointPtr;

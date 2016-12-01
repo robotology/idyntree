@@ -404,9 +404,8 @@ Wrench SixAxisForceTorqueSensor::predictMeasurement(const Traversal& traversal, 
 
     //Check that the input size is consistent
     assert(this->isValid());
-    assert(this->getFirstLinkIndex() >= 0 && this->getFirstLinkIndex() < traversal.getNrOfVisitedLinks());
-    assert(this->getSecondLinkIndex() >= 0 && this->getSecondLinkIndex() < traversal.getNrOfVisitedLinks());
-
+    assert(this->getFirstLinkIndex() >= 0 && this->getFirstLinkIndex() < static_cast<LinkIndex>(traversal.getNrOfVisitedLinks()));
+    assert(this->getSecondLinkIndex() >= 0 && this->getSecondLinkIndex() < static_cast<LinkIndex>(traversal.getNrOfVisitedLinks()));
 
     // The intWrenches vector is assumed to be the output of the RNEADynamicPhase function called
     // with the passed traversal.
