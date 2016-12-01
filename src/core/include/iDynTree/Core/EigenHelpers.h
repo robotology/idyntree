@@ -15,6 +15,7 @@
 #include <iDynTree/Core/MatrixFixSize.h>
 #include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
 
 namespace iDynTree
@@ -98,6 +99,18 @@ inline void fromEigen(SpatialForceVector & vec, const Eigen::Matrix<double,6,1> 
 {
     toEigen(vec.getLinearVec3()) = eigVec.segment<3>(0);
     toEigen(vec.getAngularVec3()) = eigVec.segment<3>(3);
+}
+
+inline void fromEigen(Transform & trans, const Eigen::Matrix4d & eigMat)
+{
+    Rotation rot;
+    Position pos;
+
+    toEigen(rot) = eigMat.block<3,3>(0,0);
+    toEigen(pos) = eigMat.block<3,1>(0,3);
+
+    trans.setRotation(rot);
+    trans.setPosition(pos);
 }
 
 template<class Derived>
