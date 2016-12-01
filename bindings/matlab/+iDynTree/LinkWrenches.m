@@ -29,9 +29,12 @@ classdef LinkWrenches < SwigRef
     function varargout = toString(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(766, self, varargin{:});
     end
+    function varargout = zero(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(767, self, varargin{:});
+    end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(767, self);
+        iDynTreeMEX(768, self);
         self.swigPtr=[];
       end
     end

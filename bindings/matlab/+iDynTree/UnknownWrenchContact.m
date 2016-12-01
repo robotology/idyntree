@@ -9,7 +9,7 @@ classdef UnknownWrenchContact < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1255, varargin{:});
+        tmp = iDynTreeMEX(1281, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
@@ -18,45 +18,45 @@ classdef UnknownWrenchContact < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1256, self);
+        varargout{1} = iDynTreeMEX(1282, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1257, self, varargin{1});
+        iDynTreeMEX(1283, self, varargin{1});
       end
     end
     function varargout = contactPoint(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1258, self);
+        varargout{1} = iDynTreeMEX(1284, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1259, self, varargin{1});
+        iDynTreeMEX(1285, self, varargin{1});
       end
     end
     function varargout = forceDirection(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1260, self);
+        varargout{1} = iDynTreeMEX(1286, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1261, self, varargin{1});
+        iDynTreeMEX(1287, self, varargin{1});
       end
     end
     function varargout = contactId(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1262, self);
+        varargout{1} = iDynTreeMEX(1288, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1263, self, varargin{1});
+        iDynTreeMEX(1289, self, varargin{1});
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1264, self);
+        iDynTreeMEX(1290, self);
         self.swigPtr=[];
       end
     end
