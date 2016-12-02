@@ -160,8 +160,8 @@ bool toiDynTree(const yarp::sig::Matrix& yarpMatrix, MatrixType& iDynTreeMatrix)
     size_t rows = iDynTreeMatrix.rows();
     size_t cols = iDynTreeMatrix.cols();
 
-    if( yarpMatrix.rows() != rows ||
-        yarpMatrix.cols() != cols )
+    if( static_cast<size_t>(yarpMatrix.rows()) != rows ||
+        static_cast<size_t>(yarpMatrix.cols()) != cols )
     {
         return false;
     }
