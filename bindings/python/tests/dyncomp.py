@@ -2,10 +2,10 @@
  For testing iDynTree python bindings, we rely on the unittest standard python lib
 '''
 
-import os
+import sys
 # This test is mean to be executed from the build,
 # so we add in PYTHONPATH the location of iDynTree.py and _iDynTree.so
-os.environ["PYTHONPATH"] = os.environ["PYTHONPATH"] + ":../:../../../lib/python/"
+sys.path.append("../:../../../lib/python/")
 
 import unittest
 import iDynTree; iDynTree.init_helpers(); iDynTree.init_numpy_helpers()
@@ -37,13 +37,13 @@ class DynCompTest(unittest.TestCase):
 
         # set state
         dofs = dynComp.getNrOfDegreesOfFreedom()
-        print "dofs: {}".format(dofs)
-        q = iDynTree.VectorDynSize.fromPyList([random.random() for i in range(0, dofs)])
-        dq = iDynTree.VectorDynSize.fromPyList([random.random() for i in range(0, dofs)])
-        ddq = iDynTree.VectorDynSize.fromPyList([random.random() for i in range(0, dofs)])
+        print("dofs: {}".format(dofs))
+        q = iDynTree.VectorDynSize.fromList([random.random() for i in range(0, dofs)])
+        dq = iDynTree.VectorDynSize.fromList([random.random() for i in range(0, dofs)])
+        ddq = iDynTree.VectorDynSize.fromList([random.random() for i in range(0, dofs)])
 
         # set gravity
-        grav = iDynTree.SpatialAcc.fromPyList([0.0, 0.0, -9.81, 0.0, 0.0, 0.0])
+        grav = iDynTree.SpatialAcc.fromList([0.0, 0.0, -9.81, 0.0, 0.0, 0.0])
         dynComp.setRobotState(q,dq,ddq,grav)
 
         torques = iDynTree.VectorDynSize(dofs+6)
@@ -63,7 +63,7 @@ class DynCompTest(unittest.TestCase):
         np_params = params.toNumPy()
         generalizedForces = np.dot(np_reg, np_params)
 
-        print 'Result of inverse dynamics:'
+        print('Result of inverse dynamics:')
         #print 'baseReactionForce: {} \nTorques: {}'.format(baseReactionForce,torques)
         #print 'Generalized Forces: {}'.format(generalizedForces)
 
@@ -73,7 +73,7 @@ class DynCompTest(unittest.TestCase):
                        generalizedForces,
                        rtol=1e-04, atol=1e-04)
         )
-        print 'Test of DynamicsComputations completed successfully.'
+        print('Test of DynamicsComputations completed successfully.')
 
 if __name__ == '__main__':
     random.seed()

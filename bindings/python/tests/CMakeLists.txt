@@ -5,3 +5,5 @@ add_custom_command(TARGET copy_python_tests_in_build PRE_BUILD
                    ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
 add_test(NAME PythonGeometryTests COMMAND ${PYTHON_EXECUTABLE} geometry.py)
+add_test(NAME DynCompTest COMMAND ${PYTHON_EXECUTABLE} dyncomp.py)
+add_test(NAME HelpersTest COMMAND ${PYTHON_EXECUTABLE} helpers.py)

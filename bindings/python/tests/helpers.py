@@ -2,10 +2,10 @@
  For testing iDynTree python bindings, we rely on the unittest standard python lib
 '''
 
-import os
+import sys
 # This test is mean to be executed from the build,
 # so we add in PYTHONPATH the location of iDynTree.py and _iDynTree.so
-os.environ["PYTHONPATH"] = os.environ["PYTHONPATH"] + ":../:../../../lib/python/";
+sys.path.append("../:../../../lib/python/")
 
 import unittest
 import iDynTree; iDynTree.init_helpers()
@@ -32,7 +32,7 @@ class HelpersTest(unittest.TestCase):
     '''tests'''
     def testPyHelpers(self):
         pos = [1.0, 2.0, 3.0]
-        p1 = iDynTree.VectorDynSize.fromPyList(pos)
+        p1 = iDynTree.VectorDynSize.fromList(pos)
         p2 = iDynTree.VectorDynSize(3)
         p2.setVal(0, pos[0])
         p2.setVal(1, pos[1])

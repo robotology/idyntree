@@ -117,6 +117,7 @@ class PositionTest(unittest.TestCase):
             self.checkSpatialVectorEqual(f-f,fZero,"f-f is not zero");
             self.checkSpatialVectorEqual(T.inverse()*T*f,f,"T.inverse()*T*f is not f");
 
+
 if __name__ == '__main__':
     # initalize the seed to have predictable results
     random.seed(0);
