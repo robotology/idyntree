@@ -108,8 +108,9 @@ void parseURDFMaterial(const URDFModelMaterialDatabase & materialDB,
                 }
             }
             else
-            {
-                reportError("","parseURDFMaterial","Impossible to parse URDF material, material name attribute not found.");
+            { 
+                // Error print suppressed until https://github.com/robotology-playground/icub-model-generator/issues/36 is fixed
+                // reportError("","parseURDFMaterial","Impossible to parse URDF material, material name attribute not found.");
             }
         }
 
@@ -119,7 +120,8 @@ void parseURDFMaterial(const URDFModelMaterialDatabase & materialDB,
     {
         if( materialXml )
         {
-            reportError("","parseURDFMaterial","Impossible to parse URDF material, setting material to white.");
+            // Error print suppressed until https://github.com/robotology-playground/icub-model-generator/issues/36 is fixed
+            // reportError("","parseURDFMaterial","Impossible to parse URDF material, setting material to white.");
         }
         // Set default material
         material_rgba(0) = 1.0;
