@@ -133,8 +133,8 @@ inline Eigen::Matrix<typename Derived::Scalar, 3, 1> unskew(const Eigen::MatrixB
 /**
  * Submatrix helpers
  */
-template<unsigned int nRows, unsigned int nCols>
-inline void setSubMatrix(MatrixDynSize& mat,
+template<unsigned int nRows, unsigned int nCols, typename iDynTreeMatrixType>
+inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const IndexRange rowRange,
                          const IndexRange colRange,
                          const MatrixFixSize<nRows,nCols>& subMat)
@@ -144,17 +144,18 @@ inline void setSubMatrix(MatrixDynSize& mat,
     return;
 }
 
-template<typename T>
-inline void setSubMatrix(MatrixDynSize& mat,
+template<typename iDynTreeMatrixType, typename EigMatType>
+inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const IndexRange rowRange,
                          const IndexRange colRange,
-                         const T& subMat)
+                         const EigMatType& subMat)
 {
     toEigen(mat).block(rowRange.offset,colRange.offset,rowRange.size,colRange.size) = subMat;
     return;
 }
 
-inline void setSubMatrix(MatrixDynSize& mat,
+template<typename iDynTreeMatrixType>
+inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const IndexRange rowRange,
                          const IndexRange colRange,
                          const double subMat)
@@ -165,7 +166,8 @@ inline void setSubMatrix(MatrixDynSize& mat,
     return;
 }
 
-inline void setSubMatrixToIdentity(MatrixDynSize& mat,
+template<typename iDynTreeMatrixType>
+inline void setSubMatrixToIdentity(iDynTreeMatrixType& mat,
                                    const IndexRange rowRange,
                                    const IndexRange colRange)
 {
@@ -177,7 +179,8 @@ inline void setSubMatrixToIdentity(MatrixDynSize& mat,
     return;
 }
 
-inline void setSubMatrixToMinusIdentity(MatrixDynSize& mat,
+template<typename iDynTreeMatrixType>
+inline void setSubMatrixToMinusIdentity(iDynTreeMatrixType& mat,
                                         const IndexRange rowRange,
                                         const IndexRange colRange)
 {
