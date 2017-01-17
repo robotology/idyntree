@@ -99,6 +99,32 @@ void checkModelLoaderFromURDFString(std::string urdfString, bool shouldBeCorrect
 
 }
 
+void checkLimitsForJointsAreDefined(std::string urdfFileName)
+{
+    Model model;
+    bool ok = modelFromURDF(urdfFileName,model);
+    ASSERT_IS_TRUE(ok);
+    
+    for(JointIndex jnt=0; jnt < model.getNrOfJoints(); jnt++)
+    {
+        IJointPtr jntPtr = model.getJoint(jnt);
+        
+        ASSERT_IS_TRUE(jntPtr != 0);
+        
+        if( jntPtr->getNrOfDOFs() == 1 )
+        {
+            ASSERT_IS_TRUE(jntPtr->hasPosLimits());
+            
+            double max = jntPtr->getMaxPosLimit(0);
+            double min = jntPtr->getMinPosLimit(0);
+            
+            ASSERT_IS_TRUE(min <= max);
+            ASSERT_IS_TRUE(min > -10e7);
+            ASSERT_IS_TRUE(max < 10e7);
+        }
+    }
+}
+
 int main()
 {
     checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,"link1");
@@ -108,6 +134,8 @@ int main()
 
     checkModelLoderForURDFFile(getAbsModelPath("/oneLink.urdf"));
     checkModelLoaderFromURDFString("this is not an xml", false);
+    
+    checkLimitsForJointsAreDefined(getAbsModelPath("iCubGenova02.urdf"));
 
     return EXIT_SUCCESS;
 }
