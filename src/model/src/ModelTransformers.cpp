@@ -457,7 +457,11 @@ bool createReducedModel(const Model& fullModel,
 
             Axis rotationAxis_wrt_newLink1 = newLink1_X_oldLink1*oldJointRevolute->getAxis(oldLink1);
 
-            RevoluteJoint* newJointRevolute = new RevoluteJoint(newLink1,newLink2,newLink1_X_newLink2,rotationAxis_wrt_newLink1);
+            RevoluteJoint* newJointRevolute = new RevoluteJoint(*oldJointRevolute);
+
+            newJointRevolute->setAttachedLinks(newLink1,newLink2);
+            newJointRevolute->setRestTransform(newLink1_X_newLink2);
+            newJointRevolute->setAxis(rotationAxis_wrt_newLink1);
 
             newJoint = (IJointPtr) newJointRevolute;
         }

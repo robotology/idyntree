@@ -99,6 +99,61 @@ void checkModelLoaderFromURDFString(std::string urdfString, bool shouldBeCorrect
 
 }
 
+void checkLimitsForJointsAreDefined(Model & model)
+{
+
+    for(JointIndex jnt=0; jnt < model.getNrOfJoints(); jnt++)
+    {
+        IJointPtr jntPtr = model.getJoint(jnt);
+        
+        ASSERT_IS_TRUE(jntPtr != 0);
+        
+        if( jntPtr->getNrOfDOFs() == 1 )
+        {
+            ASSERT_IS_TRUE(jntPtr->hasPosLimits());
+            
+            double max = jntPtr->getMaxPosLimit(0);
+            double min = jntPtr->getMinPosLimit(0);
+            
+            ASSERT_IS_TRUE(min <= max);
+            ASSERT_IS_TRUE(min > -10e7);
+            ASSERT_IS_TRUE(max < 10e7);
+        }
+    }
+}
+
+void checkLimitsForJointsAreDefinedFromFileName(std::string urdfFileName)
+{
+    Model model;
+    bool ok = modelFromURDF(urdfFileName,model);
+    ASSERT_IS_TRUE(ok);
+    
+    checkLimitsForJointsAreDefined(model);
+    
+    Model copyConstructedModel = model;
+    
+    checkLimitsForJointsAreDefined(copyConstructedModel);
+    
+    Model assignedModel;
+    assignedModel = model;
+    
+    checkLimitsForJointsAreDefined(assignedModel);
+    
+    // Check the reduced model loader 
+    std::vector<std::string> dofsOfModel;
+    ok = dofsListFromURDF(urdfFileName,dofsOfModel);
+    ASSERT_IS_TRUE(ok);
+
+    ModelLoader loader;
+    ok = loader.loadReducedModelFromFile(urdfFileName,dofsOfModel);
+    
+    ASSERT_IS_TRUE(ok);
+    
+    Model reducedModel = loader.model();
+    
+    checkLimitsForJointsAreDefined(reducedModel);
+}
+
 int main()
 {
     checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,"link1");
@@ -108,6 +163,8 @@ int main()
 
     checkModelLoderForURDFFile(getAbsModelPath("/oneLink.urdf"));
     checkModelLoaderFromURDFString("this is not an xml", false);
+    
+    checkLimitsForJointsAreDefinedFromFileName(getAbsModelPath("iCubGenova02.urdf"));
 
     return EXIT_SUCCESS;
 }
