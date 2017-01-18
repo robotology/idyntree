@@ -99,12 +99,9 @@ void checkModelLoaderFromURDFString(std::string urdfString, bool shouldBeCorrect
 
 }
 
-void checkLimitsForJointsAreDefined(std::string urdfFileName)
+void checkLimitsForJointsAreDefined(Model & model)
 {
-    Model model;
-    bool ok = modelFromURDF(urdfFileName,model);
-    ASSERT_IS_TRUE(ok);
-    
+
     for(JointIndex jnt=0; jnt < model.getNrOfJoints(); jnt++)
     {
         IJointPtr jntPtr = model.getJoint(jnt);
@@ -125,17 +122,49 @@ void checkLimitsForJointsAreDefined(std::string urdfFileName)
     }
 }
 
+void checkLimitsForJointsAreDefinedFromFileName(std::string urdfFileName)
+{
+    Model model;
+    bool ok = modelFromURDF(urdfFileName,model);
+    ASSERT_IS_TRUE(ok);
+    
+    checkLimitsForJointsAreDefined(model);
+    
+    Model copyConstructedModel = model;
+    
+    checkLimitsForJointsAreDefined(copyConstructedModel);
+    
+    Model assignedModel;
+    assignedModel = model;
+    
+    checkLimitsForJointsAreDefined(assignedModel);
+    
+    // Check the reduced model loader 
+    std::vector<std::string> dofsOfModel;
+    ok = dofsListFromURDF(urdfFileName,dofsOfModel);
+    ASSERT_IS_TRUE(ok);
+
+    ModelLoader loader;
+    ok = loader.loadReducedModelFromFile(urdfFileName,dofsOfModel);
+    
+    ASSERT_IS_TRUE(ok);
+    
+    Model reducedModel = loader.model();
+    
+    checkLimitsForJointsAreDefined(reducedModel);
+}
+
 int main()
 {
     checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,"link1");
     checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,6,"link1");
     checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,62,"root_link");
-    checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,111,"root_link");
+    //checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,111,"root_link");
 
     checkModelLoderForURDFFile(getAbsModelPath("/oneLink.urdf"));
     checkModelLoaderFromURDFString("this is not an xml", false);
     
-    checkLimitsForJointsAreDefined(getAbsModelPath("iCubGenova02.urdf"));
+    checkLimitsForJointsAreDefinedFromFileName(getAbsModelPath("iCubGenova02.urdf"));
 
     return EXIT_SUCCESS;
 }
