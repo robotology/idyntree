@@ -588,7 +588,7 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
 {
     D.resize(m_nrOfDynamicEquations,m_nrOfDynamicalVariables);
     bD.resize(m_nrOfDynamicEquations);
-    // \todo TODO check if this is a bottleneck
+    //TODO: \todo check if this is a bottleneck
     D.zero();
     bD.zero();
 

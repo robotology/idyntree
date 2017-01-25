@@ -70,8 +70,8 @@ enum BerdyVariants
 };
 
 /**
- * Enumeration descriing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration)
- * used in
+ * Enumeration describing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration)
+ * used in Berdy
  */
 enum BerdyDynamicVariablesTypes
 {
@@ -226,19 +226,37 @@ struct BerdySensor {
     std::string id; /*<! ID of the sensor */
     iDynTree::IndexRange range; /*<! Range of the sensor
                                  * (starting location in the measurements equations
-                                 *  and number of measuremes equations associated with the sensor */
+                                 *  and number of measurements equations associated with the sensor) */
 
-    bool operator==(const struct BerdySensor&) const;
-    bool operator<(const struct BerdySensor&) const;
+    /**
+     * Overload of equality operator
+     *
+     * Two sensors are considered equals if they have the same type and id
+     * @param sensor the sensor to which the current sensor is compared to
+     * @return true if the two sensors are equal. False otherwise
+     */
+    bool operator==(const struct BerdySensor& sensor) const;
+
+    bool operator<(const struct BerdySensor& sensor) const;
 };
 
 struct BerdyDynamicVariable {
-    iDynTree::BerdyDynamicVariablesTypes type;
-    std::string id;
-    iDynTree::IndexRange range;
+    iDynTree::BerdyDynamicVariablesTypes type; /*<! type of the dynamic variable */
+    std::string id; /*<! ID of the dynamic variable */
+    iDynTree::IndexRange range; /*<! Range of the dynamic variable
+                                 * (starting location in the dynamic equations
+                                 *  and number of equations associated with the variable) */
 
-    bool operator==(const struct BerdyDynamicVariable&) const;
-    bool operator<(const struct BerdyDynamicVariable&) const;
+    /**
+     * Overload of equality operator
+     *
+     * Two variables are considered equals if they have the same type and id
+     * @param variable the variable to which the current variable is compared to
+     * @return true if the two variables are equal. False otherwise
+     */
+    bool operator==(const struct BerdyDynamicVariable& variable) const;
+
+    bool operator<(const struct BerdyDynamicVariable& variable) const;
 };
 
 /**
