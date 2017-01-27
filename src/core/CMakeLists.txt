@@ -45,7 +45,9 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/GeomVector3.h
                               include/iDynTree/Core/MotionVector3.h
                               include/iDynTree/Core/ForceVector3.h
-                              include/iDynTree/Core/SpatialVector.h)
+                              include/iDynTree/Core/SpatialVector.h
+                              include/iDynTree/Core/SparseMatrix.h
+                              include/iDynTree/Core/Triplets.h)
 
 
 set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
@@ -82,11 +84,18 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/Utils.cpp
                               src/VectorDynSize.cpp
                               src/Wrench.cpp
-                              src/PrivateUtils.cpp)
+                              src/PrivateUtils.cpp
+                              src/SparseMatrix.cpp
+                              src/Triplets.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})
 #SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
+
+# Check if this does not break existing build
+# reason: avoid including with <iDynTree/Core/**> inside .cpp but using directly
+# "**" which clearly states the difference between in-library files and external files
+include_directories(include/iDynTree/Core)
 
 set(libraryname idyntree-core)
 
