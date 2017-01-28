@@ -9,10 +9,13 @@
 #define IDYNTREE_EIGEN_HELPERS_H
 
 #include <Eigen/Dense>
+#include <Eigen/SparseCore>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/MatrixFixSize.h>
+#include <iDynTree/Core/SparseMatrix.h>
+#include <iDynTree/Core/Triplets.h>
 #include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/SpatialForceVector.h>
 #include <iDynTree/Core/Transform.h>
@@ -88,7 +91,7 @@ inline Eigen::Matrix<double,6,1> toEigen(const SpatialForceVector & vec)
     return ret;
 }
 
-// Spatia vectors
+// Spatial vectors
 inline void fromEigen(SpatialMotionVector & vec, const Eigen::Matrix<double,6,1> & eigVec)
 {
     toEigen(vec.getLinearVec3()) = eigVec.segment<3>(0);
@@ -139,6 +142,10 @@ inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const IndexRange colRange,
                          const MatrixFixSize<nRows,nCols>& subMat)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
 
     toEigen(mat).block(rowRange.offset,colRange.offset,rowRange.size,colRange.size) = toEigen(subMat);
     return;
@@ -150,6 +157,10 @@ inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const IndexRange colRange,
                          const EigMatType& subMat)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
     toEigen(mat).block(rowRange.offset,colRange.offset,rowRange.size,colRange.size) = subMat;
     return;
 }
@@ -160,6 +171,10 @@ inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const IndexRange colRange,
                          const double subMat)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
     assert(rowRange.size == 1);
     assert(colRange.size == 1);
     mat(rowRange.offset,colRange.offset) = subMat;
@@ -171,6 +186,10 @@ inline void setSubMatrixToIdentity(iDynTreeMatrixType& mat,
                                    const IndexRange rowRange,
                                    const IndexRange colRange)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
     assert(rowRange.size == colRange.size);
     for(int i=0; i < rowRange.size; i++)
     {
@@ -184,6 +203,10 @@ inline void setSubMatrixToMinusIdentity(iDynTreeMatrixType& mat,
                                         const IndexRange rowRange,
                                         const IndexRange colRange)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
     assert(rowRange.size == colRange.size);
     for(int i=0; i < rowRange.size; i++)
     {
@@ -221,5 +244,30 @@ inline void setSubVector(VectorDynSize& vec,
 }
 
 }
+
+
+//SparseMatrix helpers
+inline Eigen::Map< Eigen::SparseMatrix<double, Eigen::RowMajor> > toEigen(iDynTree::SparseMatrix & mat)
+{
+    return Eigen::Map<Eigen::SparseMatrix<double, Eigen::RowMajor> >(mat.rows(),
+                                                                     mat.columns(),
+                                                                     mat.numberOfNonZeros(),
+                                                                     mat.outerIndecesBuffer(),
+                                                                     mat.innerIndecesBuffer(),
+                                                                     mat.valuesBuffer(),
+                                                                     0); //compressed format
+}
+
+inline Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor> > toEigen(const iDynTree::SparseMatrix & mat)
+{
+    return Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor> >(mat.rows(),
+                                                                           mat.columns(),
+                                                                           mat.numberOfNonZeros(),
+                                                                           mat.outerIndecesBuffer(),
+                                                                           mat.innerIndecesBuffer(),
+                                                                           mat.valuesBuffer(),
+                                                                           0); //compressed format
+}
+
 
 #endif /* IDYNTREE_EIGEN_HELPERS_H */
