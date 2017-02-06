@@ -64,13 +64,25 @@ inline Eigen::Map< Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> > toEigen(M
     return Eigen::Map< Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> >(mat.data());
 }
 
+template<unsigned int nRows>
+inline Eigen::Map< Eigen::Matrix<double,nRows,1> > toEigen(MatrixFixSize<nRows,1> & mat)
+{
+    return Eigen::Map< Eigen::Matrix<double,nRows,1> >(mat.data());
+}
+
+template<unsigned int nCols>
+inline Eigen::Map< Eigen::Matrix<double,1,nCols> > toEigen(MatrixFixSize<1, nCols> & mat)
+{
+    return Eigen::Map< Eigen::Matrix<double,1, nCols> >(mat.data());
+}
+
 template<unsigned int nRows, unsigned int nCols>
 inline Eigen::Map< const Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> > toEigen(const MatrixFixSize<nRows,nCols> & mat)
 {
     return Eigen::Map< const Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> >(mat.data());
 }
 
-// Spatia vectors
+// Spatial vectors
 inline Eigen::Matrix<double,6,1> toEigen(const SpatialMotionVector & vec)
 {
     Eigen::Matrix<double,6,1> ret;
