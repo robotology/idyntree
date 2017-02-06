@@ -12,7 +12,7 @@ namespace iDynTree
         $self->fillBuffer(mat.fortran_vec()); // Column-major
         return octave_value(mat);
     }
-    
+
     // Convert from a dense matrix
     void fromMatlab(octave_value oct_val)
     {
@@ -134,6 +134,62 @@ namespace iDynTree
         Matrix mat = Matrix($self->rows(), $self->cols());
         $self->fillColMajorBuffer(mat.fortran_vec()); // Column-major
         return octave_value(mat);
+    }
+
+    // Convert from a dense matrix
+    void fromMatlab(octave_value oct_val)
+    {
+        if( !oct_val.is_matrix_type() && !oct_val.is_sparse_type() )
+        {
+            std::cerr << "VectorFixSize::fromMatlab : expected matrix or sparse matrix argument" << std::endl;
+            return;
+        }
+
+        // check size
+        size_t currRows = $self->rows();
+        size_t currCols = $self->cols();
+
+        // Copy dense matrix
+        if (oct_val.is_matrix_type())
+        {
+            Matrix mat = oct_val.matrix_value();
+
+            if (mat.rows() != currRows && mat.cols() != currCols)
+            {
+                $self->resize(mat.rows(),mat.cols());
+            }
+
+            double* d = static_cast<double*>(mat.fortran_vec());
+            for (size_t row=0; row < mat.rows(); row++)
+            {
+                for(size_t col=0; col < mat.cols(); col++ )
+                {
+                    $self->operator()(row,col) = d[col*mat.rows() + row];
+                }
+            }
+            return;
+        }
+
+        // Copy sparse matrix
+        if (oct_val.is_sparse_type())
+        {
+            SparseMatrix mat = oct_val.sparse_matrix_value();
+
+            if (mat.rows() != currRows && mat.cols() != currCols)
+            {
+                $self->resize(mat.rows(),mat.cols());
+            }
+
+
+            for (size_t row=0; row < mat.rows(); row++)
+            {
+                for (size_t col=0; col < mat.cols(); col++ )
+                {
+                    $self->operator()(row,col) = mat(row,col);
+                }
+            }
+
+        }
     }
 }
 
