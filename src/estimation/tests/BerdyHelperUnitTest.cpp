@@ -178,6 +178,7 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
                      pos.jointPos(),linkVels,linkProperAccs,
                      extWrenches,intWrenches,genTrqs);
 
+
     // Correct for the unconsistency between the input net wrenches and the residual of the RNEA
     extWrenches(berdy.dynamicTraversal().getBaseLink()->getIndex()) = extWrenches(berdy.dynamicTraversal().getBaseLink()->getIndex())-genTrqs.baseWrench();
 
@@ -221,7 +222,7 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
     toEigen(dynamicsResidual) = toEigen(D)*toEigen(d) + toEigen(bD);
 
     std::cerr << "D : " << std::endl;
-    std::cerr << D.description() << std::endl;
+    std::cerr << D.description(true) << std::endl;
     std::cerr << "d :\n" << d.toString() << std::endl;
     std::cerr << "D*d :\n" << toEigen(D)*toEigen(d) << std::endl;
     std::cerr << "bD :\n" << bD.toString() << std::endl;
@@ -250,13 +251,13 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
         toEigen(yFromBerdy) = toEigen(Y)*toEigen(d) + toEigen(bY);
 
         std::cerr << "Y : " << std::endl;
-        std::cerr << Y.description() << std::endl;
+        std::cerr << Y.description(true) << std::endl;
         std::cerr << "d :\n" << d.toString() << std::endl;
         std::cerr << "Y*d :\n" << toEigen(Y)*toEigen(d) << std::endl;
         std::cerr << "bY :\n" << bY.toString() << std::endl;
 
 
-        std::cerr << Y.description() << std::endl;
+        std::cerr << Y.description(true) << std::endl;
         std::cerr << "Testing " << berdy.getOptions().jointOnWhichTheInternalWrenchIsMeasured[0] << std::endl;
         std::cerr << intWrenches(berdy.model().getJointIndex(berdy.getOptions().jointOnWhichTheInternalWrenchIsMeasured[0])).toString() << std::endl;
 

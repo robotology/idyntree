@@ -232,6 +232,10 @@ namespace iDynTree {
     {
         //suppress unused parameter for now
         ((void)columnNNZInformation);
+        //Avoid destroying the matrix if the size is the same
+        if (m_rows == rows && m_columns == columns)
+            return;
+
         m_rows = rows;
         m_columns = columns;
 
@@ -272,7 +276,6 @@ namespace iDynTree {
 #if __cplusplus > 199711L
         m_innerIndeces.resize(0);
         m_outerStarts.resize(0);
-#else
 #endif
     }
 

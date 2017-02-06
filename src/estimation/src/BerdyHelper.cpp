@@ -584,12 +584,12 @@ IndexRange BerdyHelper::getRangeDOFTorqueDynEq(const DOFIndex idx)
 }
 
 
-bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& bD)
+bool BerdyHelper::computeBerdyDynamicsMatrices(SparseMatrix& D, VectorDynSize& bD)
 {
     D.resize(m_nrOfDynamicEquations,m_nrOfDynamicalVariables);
     bD.resize(m_nrOfDynamicEquations);
     //TODO: \todo check if this is a bottleneck
-    D.zero();
+    matrixDElements.clear();
     bD.zero();
 
     // We follow the traversal skipping the base because all the equations of the RNEA are not directly affecting the base
@@ -609,18 +609,17 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
         const Transform & visited_X_parent = toParentJoint->getTransform(m_jointPos,visitedLinkIdx,parentLinkIdx);
 
         // Proper acc propagation equations
-        setSubMatrixToMinusIdentity(D,
-                                    getRangeLinkProperAccDynEq(visitedLinkIdx),
-                                    getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,visitedLinkIdx));
+        matrixDElements.addDiagonalMatrix(getRangeLinkProperAccDynEq(visitedLinkIdx),
+                                          getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,visitedLinkIdx),
+                                          -1);
 
         // This should not be added if the variant is ORIGINAL_BERDY_FIXED_BASE and the parentLink is the base
         // because in that case the acceleration of the base is not a dynamic variable
         if( !(m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE && parentLinkIdx == m_dynamicsTraversal.getBaseLink()->getIndex()) )
         {
-            setSubMatrix(D,
-                           getRangeLinkProperAccDynEq(visitedLinkIdx),
-                           getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,parentLinkIdx),
-                           visited_X_parent.asAdjointTransform());
+            matrixDElements.addSubMatrix(getRangeLinkProperAccDynEq(visitedLinkIdx).offset,
+                                         getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,parentLinkIdx).offset,
+                                         visited_X_parent.asAdjointTransform());
         }
 
         size_t jointDOFs = toParentJoint->getNrOfDOFs();
@@ -629,10 +628,13 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
         for(size_t localDof = 0; localDof < jointDOFs; localDof++)
         {
             SpatialMotionVector S = toParentJoint->getMotionSubspaceVector(localDof,visitedLinkIdx,parentLinkIdx);
-            setSubMatrix(D,
-                         getRangeLinkProperAccDynEq(visitedLinkIdx),
-                         getRangeDOFVariable(DOF_ACCELERATION,dofOffset+localDof),
-                         toEigen(S));
+            Matrix6x1 SdynTree;
+            toEigen(SdynTree) = toEigen(S);
+
+            //From S to iDynTreeMatrix
+            matrixDElements.addSubMatrix(getRangeLinkProperAccDynEq(visitedLinkIdx).offset,
+                                         getRangeDOFVariable(DOF_ACCELERATION,dofOffset+localDof).offset,
+                                         SdynTree);
         }
 
         ///////////////////////////////////////////////////////////
@@ -663,14 +665,13 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
             ///////////////////////////////////////////////////////////
             // Total net wrench without gravity (D part, only for ORIGINAL_BERDY_FIXED_BASE
             ///////////////////////////////////////////////////////////
-             setSubMatrixToMinusIdentity(D,
-                                         getRangeLinkNetTotalwrenchDynEq(visitedLinkIdx),
-                                         getRangeLinkVariable(NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV,visitedLinkIdx));
+            matrixDElements.addDiagonalMatrix(getRangeLinkNetTotalwrenchDynEq(visitedLinkIdx),
+                                              getRangeLinkVariable(NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV,visitedLinkIdx),
+                                              -1);
 
-             setSubMatrix(D,
-                          getRangeLinkNetTotalwrenchDynEq(visitedLinkIdx),
-                          getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,visitedLinkIdx),
-                          visitedLink->getInertia().asMatrix());
+            matrixDElements.addSubMatrix(getRangeLinkNetTotalwrenchDynEq(visitedLinkIdx).offset,
+                                         getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,visitedLinkIdx).offset,
+                                         visitedLink->getInertia().asMatrix());
 
             ///////////////////////////////////////////////////////////
             // Total net wrench without gravity (bD part, only for ORIGINAL_BERDY_FIXED_BASE
@@ -686,9 +687,9 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
         ///////////////////////////////////////////////////////////
 
         // Joint wrench itself
-        setSubMatrixToMinusIdentity(D,
-                                    getRangeJointWrench(toParentJoint->getIndex()),
-                                    getRangeJointVariable(JOINT_WRENCH,toParentJoint->getIndex()));
+        matrixDElements.addDiagonalMatrix(getRangeJointWrench(toParentJoint->getIndex()),
+                                          getRangeJointVariable(JOINT_WRENCH,toParentJoint->getIndex()),
+                                          -1);
 
         // Wrench of child links
         // Iterate on childs of visitedLink
@@ -706,10 +707,9 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
                  IJointConstPtr neighborJoint = m_model.getJoint(m_model.getNeighbor(visitedLinkIdx,neigh_i).neighborJoint);
                  const Transform & visitedLink_X_child = neighborJoint->getTransform(m_jointPos,visitedLinkIdx,childIndex);
 
-                 setSubMatrix(D,
-                              getRangeJointWrench(toParentJoint->getIndex()),
-                              getRangeJointVariable(JOINT_WRENCH,neighborJoint->getIndex()),
-                              visitedLink_X_child.asAdjointTransformWrench());
+                 matrixDElements.addSubMatrix(getRangeJointWrench(toParentJoint->getIndex()).offset,
+                                              getRangeJointVariable(JOINT_WRENCH,neighborJoint->getIndex()).offset,
+                                              visitedLink_X_child.asAdjointTransformWrench());
 
              }
         }
@@ -717,9 +717,9 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
         // Net external wrench
         if( m_options.includeAllNetExternalWrenchesAsDynamicVariables )
         {
-            setSubMatrixToMinusIdentity(D,
-                                        getRangeJointWrench(toParentJoint->getIndex()),
-                                        getRangeLinkVariable(NET_EXT_WRENCH,visitedLinkIdx));
+            matrixDElements.addDiagonalMatrix(getRangeJointWrench(toParentJoint->getIndex()),
+                                              getRangeLinkVariable(NET_EXT_WRENCH,visitedLinkIdx),
+                                              -1);
         }
 
 
@@ -727,18 +727,18 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
         {
             // In the ORIGINAL_BERDY_FIXED_BASE, we also add to the rows of the joint wrenches
             // the depend on the total wrenches
-            setSubMatrixToIdentity(D,
-                                   getRangeJointWrench(toParentJoint->getIndex()),
-                                   getRangeLinkVariable(NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV,visitedLinkIdx));
+            matrixDElements.addDiagonalMatrix(getRangeJointWrench(toParentJoint->getIndex()),
+                                              getRangeLinkVariable(NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV,visitedLinkIdx),
+                                              1);
+
         }
 
         if( m_options.berdyVariant == BERDY_FLOATING_BASE )
         {
             // In the floating base variant, we embed all the inertia related terms directly in the floaging base
-             setSubMatrix(D,
-                          getRangeJointWrench(toParentJoint->getIndex()),
-                          getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,visitedLinkIdx),
-                          visitedLink->getInertia().asMatrix());
+            matrixDElements.addSubMatrix(getRangeJointWrench(toParentJoint->getIndex()).offset,
+                                         getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,visitedLinkIdx).offset,
+                                         visitedLink->getInertia().asMatrix());
         }
 
         ///////////////////////////////////////////////////////////
@@ -757,26 +757,31 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& 
         for(size_t localDof = 0; localDof < jointDOFs; localDof++)
         {
             SpatialMotionVector S = toParentJoint->getMotionSubspaceVector(localDof,visitedLinkIdx,parentLinkIdx);
-            setSubMatrix(D,
-                         getRangeDOFTorqueDynEq(dofOffset+localDof),
-                         getRangeJointVariable(JOINT_WRENCH,toParentJoint->getIndex()),
-                         toEigen(S).transpose());
-            setSubMatrix(D,
-                         getRangeDOFTorqueDynEq(dofOffset+localDof),
-                         getRangeDOFVariable(DOF_TORQUE,dofOffset+localDof),
-                         -1.0);
+            Matrix1x6 SdynTree;
+            toEigen(SdynTree) = toEigen(S).transpose();
+
+            matrixDElements.addSubMatrix(getRangeDOFTorqueDynEq(dofOffset+localDof).offset,
+                                         getRangeJointVariable(JOINT_WRENCH,toParentJoint->getIndex()).offset,
+                                         SdynTree);
+
+            matrixDElements.pushTriplet(Triplet(getRangeDOFTorqueDynEq(dofOffset+localDof).offset,
+                                                getRangeDOFVariable(DOF_TORQUE,dofOffset+localDof).offset,
+                                                -1));
+
         }
     }
 
+    D.setFromTriplets(matrixDElements);
     return true;
 }
 
-bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY)
+bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix& Y, VectorDynSize& bY)
 {
     Y.resize(m_nrOfSensorsMeasurements,m_nrOfDynamicalVariables);
     bY.resize(m_nrOfSensorsMeasurements);
     // \todo TODO check if this is a bottleneck
-    Y.zero();
+//    Y.zero();
+    matrixYElements.clear();
     bY.zero();
 
 
@@ -795,7 +800,10 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
         ftSens->getWrenchAppliedOnLinkInverseMatrix(childLink,sensor_M_link);
         IndexRange sensorRange = this->getRangeSensorVariable(SIX_AXIS_FORCE_TORQUE,idx);
         IndexRange jointWrenchRange = this->getRangeJointVariable(JOINT_WRENCH,ftSens->getParentJointIndex());
-        setSubMatrix(Y,sensorRange,jointWrenchRange,sensor_M_link);
+
+        matrixYElements.addSubMatrix(sensorRange.offset,
+                                     jointWrenchRange.offset,
+                                     sensor_M_link);
 
         // bY for the F/T sensor is equal to zero
     }
@@ -813,7 +821,12 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
         IndexRange linkBodyProperAcRange = this->getRangeLinkVariable(LINK_BODY_PROPER_ACCELERATION,parentLinkId);
 
         // Y(sensorRange,linkBodyProperAcRange) for the accelerometer is the first three rows of the sensor_X_link adjoint matrix
-        setSubMatrix(Y,sensorRange,linkBodyProperAcRange,toEigen(sensor_X_link.asAdjointTransform()).block<3,6>(0,0));
+        MatrixFixSize<3, 6> xLinkLinear;
+        toEigen(xLinkLinear) = toEigen(sensor_X_link.asAdjointTransform()).block<3,6>(0,0);
+
+        matrixYElements.addSubMatrix(sensorRange.offset,
+                                     linkBodyProperAcRange.offset,
+                                     xLinkLinear);
 
         Twist vSensor = sensor_X_link*m_linkVels(parentLinkId);
 
@@ -850,7 +863,7 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
             IndexRange sensorRange = this->getRangeDOFSensorVariable(DOF_ACCELERATION_SENSOR,idx);
             IndexRange jointAccRange = this->getRangeDOFVariable(DOF_ACCELERATION,idx);
 
-            setSubMatrix(Y,sensorRange,jointAccRange,1.0);
+            matrixYElements.pushTriplet(Triplet(sensorRange.offset, jointAccRange.offset, 1));
 
             // bY for the joint acceleration is zero
         }
@@ -868,7 +881,7 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
             IndexRange sensorRange = this->getRangeDOFSensorVariable(DOF_TORQUE_SENSOR,idx);
             IndexRange jointTrqRange = this->getRangeDOFVariable(DOF_TORQUE,idx);
 
-            setSubMatrix(Y,sensorRange,jointTrqRange,1.0);
+            matrixYElements.pushTriplet(Triplet(sensorRange.offset, jointTrqRange.offset, 1));
 
             // bY for the joint torques is zero
         }
@@ -902,10 +915,8 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
                         IJointConstPtr neighborJoint = m_model.getJoint(m_model.getNeighbor(idx,neigh_i).neighborJoint);
                         const Transform & base_X_child = neighborJoint->getTransform(m_jointPos,idx,childIndex);
 
-                        setSubMatrix(Y,
-                                    getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx),
-                                    getRangeJointVariable(JOINT_WRENCH,neighborJoint->getIndex()),
-                                    toEigen(base_X_child.asAdjointTransformWrench()));
+                        matrixYElements.addSubMatrix(getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx).offset,
+                                                     getRangeJointVariable(JOINT_WRENCH,neighborJoint->getIndex()).offset, base_X_child.asAdjointTransformWrench());
                     }
 
                     // bY encodes the weight of the base link due to gravity (we omit the v*I*v as it is always zero)
@@ -921,7 +932,9 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
                 IndexRange sensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx);
                 IndexRange netExtWrenchRange = this->getRangeLinkVariable(NET_EXT_WRENCH,idx);
 
-                setSubMatrixToIdentity(Y,sensorRange,netExtWrenchRange);
+                matrixYElements.addDiagonalMatrix(sensorRange,
+                                                  netExtWrenchRange,
+                                                  1);
 
                 // bY for the net external wrenches is zero
             }
@@ -941,11 +954,14 @@ bool BerdyHelper::computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY
 
         assert(sensorRange.size == 6);
         assert(jointWrenchOffset.size == 6);
-        setSubMatrixToIdentity(Y,sensorRange,jointWrenchOffset);
+        matrixYElements.addDiagonalMatrix(sensorRange,
+                                          jointWrenchOffset,
+                                          1);
 
         // bY for the joint wrenches is zero
     }
 
+    Y.setFromTriplets(matrixYElements);
     return true;
 }
 
@@ -1004,8 +1020,22 @@ size_t BerdyHelper::getNrOfSensorsMeasurements() const
     return m_nrOfSensorsMeasurements;
 }
 
-bool BerdyHelper::resizeAndZeroBerdyMatrices(MatrixDynSize& D, VectorDynSize& bD,
-                                            MatrixDynSize& Y, VectorDynSize& bY)
+bool BerdyHelper::resizeAndZeroBerdyMatrices(SparseMatrix& D, VectorDynSize& bD,
+                                             SparseMatrix& Y, VectorDynSize& bY)
+{
+    D.resize(getNrOfDynamicEquations(),getNrOfDynamicVariables());
+    bD.resize(getNrOfDynamicEquations());
+    Y.resize(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
+    bY.resize(getNrOfSensorsMeasurements());
+    D.zero();
+    bD.zero();
+    Y.zero();
+    bY.zero();
+    return true;
+}
+
+bool BerdyHelper::resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
+                                             MatrixDynSize & Y, VectorDynSize & bY)
 {
     D.resize(getNrOfDynamicEquations(),getNrOfDynamicVariables());
     bD.resize(getNrOfDynamicEquations());
@@ -1090,10 +1120,10 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
     return ok;
 }
 
-bool BerdyHelper::getBerdyMatrices(MatrixDynSize& D, VectorDynSize& bD,
-                                    MatrixDynSize& Y, VectorDynSize& bY)
+bool BerdyHelper::getBerdyMatrices(SparseMatrix& D, VectorDynSize& bD,
+                                   SparseMatrix& Y, VectorDynSize& bY)
 {
-    if( !m_kinematicsUpdated )
+    if (!m_kinematicsUpdated)
     {
         reportError("BerdyHelpers","getBerdyMatrices",
                     "Kinematic information not set.");
@@ -1103,17 +1133,36 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize& D, VectorDynSize& bD,
 
     bool res = true;
 
-    bool ok;
     // Compute D matrix of dynamics equations
-    ok = computeBerdyDynamicsMatrices(D,bD);
+    res = res && computeBerdyDynamicsMatrices(D, bD);
 
     // Compute Y matrix of sensors
-    ok = computeBerdySensorMatrices(Y,bY);
-
-    res = res && ok;
+    res = res && computeBerdySensorMatrices(Y, bY);
 
     return res;
 }
+
+    bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
+                                       MatrixDynSize & Y, VectorDynSize & bY)
+    {
+        SparseMatrix DSparse(getNrOfDynamicEquations(),getNrOfDynamicVariables());
+        SparseMatrix YSparse(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
+
+        bool result = getBerdyMatrices(DSparse, bD, YSparse, bY);
+        if (!result) return false;
+
+        for (SparseMatrix::const_iterator it(DSparse.begin());
+             it != DSparse.end(); ++it) {
+            D(it->row, it->column) = it->value;
+        }
+
+        for (SparseMatrix::const_iterator it(YSparse.begin());
+             it != YSparse.end(); ++it) {
+            Y(it->row, it->column) = it->value;
+        }
+        return true;
+    }
+
 
     void BerdyHelper::cacheSensorsOrdering()
     {
