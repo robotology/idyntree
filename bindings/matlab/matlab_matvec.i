@@ -251,4 +251,122 @@ namespace iDynTree
     }
 }
 
+%extend SparseMatrix
+{
+    // Convert to a sparse matrix
+    mxArray * toMatlab() const
+    {
+        mxArray *p = mxCreateSparse($self->rows(), $self->columns(),
+                                    $self->numberOfNonZeros(), mxREAL);
+        if (!p) return 0;
+
+        mwIndex* ir = mxGetIr(p);
+        mwIndex* jc = mxGetJc(p);
+        double *data = mxGetPr(p);
+
+        //for compatibility with the interface I need to create a wrapper of int*
+        //not of mwIndex*
+        int *tempIr = new int[self->numberOfNonZeros()];
+        if (!tempIr) return p;
+
+        int *tempJc = new int[self->columns() + 1];
+        if (!tempJc) {
+            delete [] tempJc;
+            return p;
+        }
+
+
+        self->convertToColumnMajor(data, tempIr, tempJc);
+
+        //copy back into real arrays
+        for (unsigned i = 0; i < self->numberOfNonZeros(); ++i) {
+            ir[i] = tempIr[i];
+        }
+        for (unsigned i = 0; i < self->columns() + 1; ++i) {
+            jc[i] = tempJc[i];
+        }
+        //delete buffers
+        delete [] tempIr;
+        delete [] tempJc;
+
+        return p;
+    }
+
+    // Convert to a dense matrix
+    mxArray * toMatlabDense() const
+    {
+        mxArray *p  = mxCreateDoubleMatrix($self->rows(), $self->columns(), mxREAL);
+        double* d = static_cast<double*>(mxGetData(p));
+        //mapping output matrix to dense 
+        memset(d, 0, sizeof(double) * self->rows() * self->columns());
+        //mapping output matrix to dense
+        for (iDynTree::SparseMatrix::const_iterator it(self->begin());
+             it != self->end(); ++it) {
+            d[self->rows() * it->column + it->row] = it->value;
+
+        }
+        return p;
+    }
+
+
+    // Convert from a dense or sparse matrix
+    void fromMatlab(mxArray * in)
+    {
+        // check size
+        const size_t * dims = mxGetDimensions(in);
+        size_t rows = $self->rows();
+        size_t cols = $self->columns();
+        if (dims[0] != rows || dims[1] == cols)
+        {
+            $self->resize(dims[0], dims[1]);
+            mexWarnMsgIdAndTxt("iDynTree:Core:perfomance", "Resizing iDynTree vector to (%d,%d)", rows, cols);
+        }
+
+        if (mxIsSparse(in))
+        {
+            mwIndex* ir = mxGetIr(in);
+            mwIndex* jc = mxGetJc(in);
+            double *data = mxGetPr(in);
+            const size_t * dims = mxGetDimensions(in);
+            mwIndex nnz = jc[dims[1]];
+
+            int *tempIr = new int[nnz];
+            if (!tempIr) return;
+
+            int *tempJc = new int[dims[1] + 1];
+            if (!tempJc) {
+                delete [] tempIr;
+                return;
+            }
+
+            for (unsigned i = 0; i < nnz; ++i) {
+                tempIr[i] = ir[i];
+            }
+
+            for (unsigned i = 0; i < dims[1] + 1; ++i) {
+                tempJc[i] = jc[i];
+            }
+
+            self->convertFromColumnMajor(dims[0], dims[1], 
+                                          (unsigned)nnz,
+                                          data, tempIr, tempJc);
+
+            delete [] tempIr;
+            delete [] tempJc;
+
+        } else {
+            double* d = static_cast<double*>(mxGetData(in));
+            //for now very slow
+            for (size_t row = 0; row < rows; row++)
+            {
+                for (size_t col = 0; col < cols; col++)
+                {
+                    $self->operator()(row, col) = d[col * rows + row];
+                }
+            }
+            return;
+        }
+    }
+}
+
 }
