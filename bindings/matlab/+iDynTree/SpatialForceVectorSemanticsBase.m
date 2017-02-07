@@ -9,23 +9,23 @@ classdef SpatialForceVectorSemanticsBase < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(461, varargin{:});
+        tmp = iDynTreeMEX(480, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = check_linear2angularConsistency(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(462, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(481, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(463, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(482, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(464, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(483, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(465, self);
+        iDynTreeMEX(484, self);
         self.swigPtr=[];
       end
     end
