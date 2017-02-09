@@ -245,6 +245,8 @@ bool BerdyHelper::initSensorsMeasurements()
 
     // Check the considered joint wrenches are actually part of the model
     berdySensorsInfo.jntIdxToOffset.resize(m_model.getNrOfJoints(),JOINT_INVALID_INDEX);
+    berdySensorsInfo.wrenchSensors.clear();
+    berdySensorsInfo.wrenchSensors.reserve(m_options.jointOnWhichTheInternalWrenchIsMeasured.size());
     for(size_t i=0; i < m_options.jointOnWhichTheInternalWrenchIsMeasured.size(); i++)
     {
         JointIndex jntIdx = m_model.getJointIndex(m_options.jointOnWhichTheInternalWrenchIsMeasured[i]);
