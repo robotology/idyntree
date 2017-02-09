@@ -21,9 +21,9 @@ namespace iDynTree {
 /**
  * \brief Sparse Matrix class
  *
- * This class uses a modified version of the Compressed Row Storage scheme
+ * This class uses the Compressed Row Storage scheme
  * (see https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29)
- * so that it can be used with the Eigen library (by using Map).
+ * which is compatible with the format used in the Eigen library (by using Map).
  */
 class iDynTree::SparseMatrix
 {
@@ -37,17 +37,12 @@ public:
 private:
 
     iDynTree::VectorDynSize m_values; /*<! Contains all the non zero (NZ) elements */
-#if __cplusplus > 199711L
+
     std::vector<int> m_innerIndeces; /*<! column index of the NZ elements  */
     std::vector<int> m_outerStarts; /*<! for each row contains the index of the first NZ in the
                                      *   previous two arrays
                                      */
-#else
-    int *m_innerIndeces; /*<! column index of the NZ elements  */
-    int *m_outerStarts; /*<! for each row contains the index of the first NZ in the
-                         *   previous two arrays
-                         */
-#endif
+
 
     unsigned m_allocatedSize; /*<! size of the memory allocated for m_values and m_innerIndeces */
 
@@ -104,16 +99,6 @@ public:
      */
     ~SparseMatrix();
 
-#if __cplusplus <= 199711L
-    SparseMatrix(const SparseMatrix&);
-    SparseMatrix& operator=(const SparseMatrix&);
-#endif
-
-    static SparseMatrix sparseMatrixFromTriplets(unsigned rows, unsigned cols, const iDynTree::Triplets& nonZeroElements);
-
-//    void setValuesFromTriplets(std::vector<iDynTree::Triplet> triplets);
-//    void addValuesFromTriplets(std::vector<iDynTree::Triplet> triplets);
-
     /**
      * Returns the number of nonzero elements in this sparse matrix
      *
@@ -147,7 +132,6 @@ public:
     void resize(unsigned rows, unsigned columns, const iDynTree::VectorDynSize &columnNNZInformation);
 
     void reserve(unsigned nonZeroElements);
-//    void reserve(const iDynTree::VectorDynSize &columnNNZInformation);
 
 
     /**
@@ -155,7 +139,6 @@ public:
      *
      * @note In C++11 it is not guaranteed that this function performs no memory allocation,
      * depending on the standard library implementation.
-     * In C++ 98 this never allocates memory, and previously reserved memory is kept
      */
     void zero();
 
@@ -196,6 +179,10 @@ public:
      * @param triplets triplets containing the non zero elements
      */
     void setFromTriplets(iDynTree::Triplets& triplets);
+
+    static SparseMatrix sparseMatrixFromTriplets(unsigned rows,
+                                                 unsigned cols,
+                                                 const iDynTree::Triplets& nonZeroElements);
 
 
     /**
@@ -346,10 +333,6 @@ public:
     Iterator& operator++();
     Iterator operator++(int);
 
-    // Required by the Bidirectional iterator
-//    Iterator& operator--();
-//    Iterator operator--(int);
-
     // Required by the input iterator
     bool operator==(const Iterator&) const;
     bool operator==(const ConstIterator&) const;
@@ -399,10 +382,6 @@ public:
     // Required by the iterator type
     ConstIterator& operator++();
     ConstIterator operator++(int);
-
-    // Required by the Bidirectional iterator
-//    ConstIterator& operator--();
-//    ConstIterator operator--(int);
 
     // Required by the input iterator
     bool operator==(const ConstIterator&) const;

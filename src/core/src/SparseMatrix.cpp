@@ -23,8 +23,6 @@
 
 namespace iDynTree {
 
-#if __cplusplus > 199711L
-
     SparseMatrix::SparseMatrix() : SparseMatrix(0, 0) {}
 
     SparseMatrix::SparseMatrix(unsigned rows, unsigned cols)
@@ -33,119 +31,30 @@ namespace iDynTree {
 
     SparseMatrix::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
     : m_outerStarts(rows + 1, 0)
+    , m_allocatedSize(0)
     , m_rows(rows)
     , m_columns(cols)
     , m_ordering(RowMajor)
     {
         initializeMatrix(rows, cols, memoryReserveDescription.data(), memoryReserveDescription.size());
     }
-#else
-    SparseMatrix::SparseMatrix()
-    {
-        initializeMatrix(0, 0, 0, 0);
-    }
-
-    SparseMatrix::SparseMatrix(unsigned rows, unsigned cols)
-    {
-        initializeMatrix(rows, cols, 0, 0);
-    }
-
-    SparseMatrix::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
-    {
-        initializeMatrix(rows, cols, memoryReserveDescription.data(), memoryReserveDescription.size());
-    }
-
-#endif
 
     void SparseMatrix::initializeMatrix(unsigned rows, unsigned cols, const double *vector, unsigned vectorSize)
     {
-#if __cplusplus <= 199711L
-        m_rows = rows;
-        m_columns = cols;
-        m_ordering = RowMajor;
-
-        //Outer starts has same size of number of rows + 1
-        m_outerStarts = new int[rows + 1];
-        if (!m_outerStarts) {
-            //TODO: throw exception?
-        }
-        memset(m_outerStarts, 0, sizeof(int) * (rows + 1));
-#else
         UNUSED(rows);
         UNUSED(cols);
-#endif
 
-        
-        m_allocatedSize = 0;
         for (unsigned i = 0; i < vectorSize; ++i) {
             m_allocatedSize += vector[i];
         }
 
         m_values.reserve(m_allocatedSize);
 
-#if __cplusplus > 199711L
         // Inner indeces has same size of values
         m_innerIndeces.reserve(m_allocatedSize);
-#else
-        m_innerIndeces = new int[m_allocatedSize];
-#endif
-
     }
 
-    SparseMatrix::~SparseMatrix()
-    {
-#if __cplusplus <= 199711L
-        delete [] m_innerIndeces;
-        m_innerIndeces = 0;
-        delete [] m_outerStarts;
-        m_outerStarts = 0;
-#endif
-    }
-#if __cplusplus <= 199711L
-    SparseMatrix::SparseMatrix(const SparseMatrix &matrix)
-    : m_values(matrix.m_values)
-    , m_innerIndeces(0)
-    , m_outerStarts(0)
-    , m_allocatedSize(matrix.m_allocatedSize)
-    , m_rows(matrix.m_rows)
-    , m_columns(matrix.m_columns)
-    , m_ordering(matrix.m_ordering)
-    {
-        m_innerIndeces = new int[m_allocatedSize];
-        m_outerStarts = new int[m_rows + 1];
-        std::memcpy(m_innerIndeces, matrix.m_innerIndeces, sizeof(int) * m_values.size());
-        std::memcpy(m_outerStarts, matrix.m_outerStarts, sizeof(int) * (m_rows + 1));
-        //reserve more memory for m_values if needed
-        m_values.reserve(m_allocatedSize);
-
-    }
-
-    SparseMatrix& SparseMatrix::operator=(const SparseMatrix &matrix)
-    {
-        if (this == &matrix) return *this;
-        //cleanup memory
-        delete [] m_innerIndeces;
-        delete [] m_outerStarts;
-        //allocate new memory
-        m_rows = matrix.m_rows;
-        m_columns = matrix.m_columns;
-        //copy outer start
-        m_outerStarts = new int[m_rows + 1];
-        std::memcpy(m_outerStarts, matrix.m_outerStarts, sizeof(int) * (m_rows + 1));
-        //copy values
-        m_allocatedSize = matrix.m_allocatedSize;
-        m_values.reserve(m_allocatedSize);
-        m_values = matrix.m_values;
-        //copy inner indeces
-        m_innerIndeces = new int[m_allocatedSize];
-        std::memcpy(m_innerIndeces, matrix.m_innerIndeces, sizeof(int) * m_values.size());
-        //copy ordering
-        m_ordering = matrix.m_ordering;
-
-        return *this;
-    }
-
-#endif
+    SparseMatrix::~SparseMatrix() {}
 
     bool SparseMatrix::valueIndex(unsigned row, unsigned col, unsigned &rowNZIndex) const
     {
@@ -192,9 +101,8 @@ namespace iDynTree {
 
         //I found the index. Now I have to shift to the right the values and inner elements
         m_values.resize(m_values.size() + 1);
-#if __cplusplus > 199711L
         m_innerIndeces.resize(m_innerIndeces.size() + 1);
-#endif
+
         for (unsigned i = insertionIndex; i < m_values.size() - 1; ++i) {
             m_values(i + 1) = m_values(i);
             m_innerIndeces[i + 1] = m_innerIndeces[i];
@@ -239,14 +147,9 @@ namespace iDynTree {
         m_rows = rows;
         m_columns = columns;
 
-#if __cplusplus > 199711L
         m_outerStarts.resize(rows);
         m_outerStarts.assign(rows, 0);
-#else
-        delete [] m_outerStarts;
-        m_outerStarts = new int[rows + 1];
-        memset(m_outerStarts, 0, sizeof(int) * (rows + 1));
-#endif
+
         //TODO: use the information on the NNZ to reserve memory
     }
 
@@ -255,16 +158,7 @@ namespace iDynTree {
         if (nonZeroElements <= m_allocatedSize) return; //do nothing
 
         m_values.reserve(nonZeroElements);
-#if __cplusplus > 199711L
         m_innerIndeces.reserve(nonZeroElements);
-#else
-        int *newBuffer = new int[nonZeroElements];
-        if (m_innerIndeces) {
-            memcpy(newBuffer, m_innerIndeces, sizeof(int) * m_allocatedSize);
-        }
-        delete [] m_innerIndeces;
-        m_innerIndeces = newBuffer;
-#endif
         m_allocatedSize = nonZeroElements;
 
     }
@@ -273,10 +167,8 @@ namespace iDynTree {
     {
         //zero: simply clear
         m_values.resize(0);
-#if __cplusplus > 199711L
         m_innerIndeces.resize(0);
         m_outerStarts.resize(0);
-#endif
     }
 
 
@@ -302,12 +194,8 @@ namespace iDynTree {
         //Note: find is useless if array is sorted
         //Resize to maximum value. Will shrink at the end
         m_values.resize(triplets.size());
-#if __cplusplus > 199711L
         m_innerIndeces.resize(triplets.size());
         m_outerStarts.assign(m_rows + 1, 0); //reset vector
-#else
-        memset(m_outerStarts, 0, sizeof(int) * (m_rows + 1));
-#endif
 
         //initializing the first element
 //        std::iterator<std::forward_iterator_tag, Triplet> iterator(triplets.begin());
@@ -357,9 +245,16 @@ namespace iDynTree {
 
         //Shrink containers
         m_values.resize(valueIndex + 1);
-#if __cplusplus > 199711L
         m_innerIndeces.resize(valueIndex + 1);
-#endif
+    }
+
+    SparseMatrix SparseMatrix::sparseMatrixFromTriplets(unsigned rows,
+                                                        unsigned cols,
+                                                        const iDynTree::Triplets& nonZeroElements)
+    {
+        SparseMatrix newMatrix(rows, cols);
+        newMatrix.setFromConstTriplets(nonZeroElements);
+        return newMatrix;
     }
 
     unsigned SparseMatrix::rows() const { return m_rows; }
@@ -397,38 +292,22 @@ namespace iDynTree {
 
     int * SparseMatrix::innerIndecesBuffer()
     {
-#if __cplusplus > 199711L
         return m_innerIndeces.data();
-#else
-        return m_innerIndeces;
-#endif
     }
 
     int const * SparseMatrix::innerIndecesBuffer() const
     {
-#if __cplusplus > 199711L
         return m_innerIndeces.data();
-#else
-        return m_innerIndeces;
-#endif
     }
 
     int * SparseMatrix::outerIndecesBuffer()
     {
-#if __cplusplus > 199711L
         return m_outerStarts.data();
-#else
-        return m_outerStarts;
-#endif
     }
 
     int const * SparseMatrix::outerIndecesBuffer() const
     {
-#if __cplusplus > 199711L
         return m_outerStarts.data();
-#else
-        return m_outerStarts;
-#endif
     }
 
     std::string SparseMatrix::description(bool fullMatrix) const
@@ -540,10 +419,6 @@ namespace iDynTree {
                 for (unsigned col = currentColumn + 1; col <= it->column; ++col) {
                     outerBuffer[col] = currentNNZ-1;
                 }
-//                outerBuffer[it->column] = currentNNZ - 1; //this is to compensate with the
-                //current increment which is not of this column
-                //and by the way this should be equivalent to
-                //outerBuffer[it->column] = index
                 currentColumn = it->column;
             }
 
@@ -648,29 +523,6 @@ namespace iDynTree {
         return newIterator;
     }
 
-//    SparseMatrix::Iterator& SparseMatrix::Iterator::operator--()
-//    {
-//        if (m_index < 0) {
-//            //Iterator is not valid. We do nothing
-//            return *this;
-//        }
-//        m_index--;
-//        updateTriplet();
-//
-//        return *this;
-//    }
-//
-//    SparseMatrix::Iterator SparseMatrix::Iterator::operator--(int)
-//    {
-//        if (m_index < 0) {
-//            //Iterator is not valid. We do nothing
-//            return *this;
-//        }
-//        Iterator newIterator(*this);
-//        --newIterator;
-//        return newIterator;
-//    }
-
     bool SparseMatrix::Iterator::operator==(const Iterator &it) const
     {
         return &m_matrix == &((&it)->m_matrix) //check that we are pointing to the same matrix
@@ -765,27 +617,6 @@ namespace iDynTree {
         ++newIterator;
         return newIterator;
     }
-
-//    SparseMatrix::ConstIterator& SparseMatrix::ConstIterator::operator--()
-//    {
-//        if (m_index < 0) {
-//            //Iterator is not valid. We do nothing
-//            return *this;
-//        }
-//        m_index--;
-//        return *this;
-//    }
-//
-//    SparseMatrix::ConstIterator SparseMatrix::ConstIterator::operator--(int)
-//    {
-//        if (m_index < 0) {
-//            //Iterator is not valid. We do nothing
-//            return *this;
-//        }
-//        ConstIterator newIterator(*this);
-//        --newIterator;
-//        return newIterator;
-//    }
 
     bool SparseMatrix::ConstIterator::operator==(const ConstIterator &it) const
     {
