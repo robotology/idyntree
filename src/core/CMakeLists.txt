@@ -4,6 +4,28 @@
 
 project(iDynTree_Base CXX)
 
+#Adding C++11 for core
+include(CheckCXXCompilerFlag)
+unset(CXX11_FLAGS)
+check_cxx_compiler_flag("-std=c++11" CXX_HAS_STD_CXX11)
+check_cxx_compiler_flag("-std=c++0x" CXX_HAS_STD_CXX0X)
+if(CXX_HAS_STD_CXX11)
+  set(CXX11_FLAGS "-std=c++11")
+elseif(CXX_HAS_STD_CXX0X)
+  set(CXX11_FLAGS "-std=c++0x")
+endif()
+    
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED 11)
+if(NOT CMAKE_MINIMUM_REQUIRED_VERSION VERSION_LESS 3.1)
+  message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. This check can be removed.")
+endif()
+if(${CMAKE_VERSION} VERSION_LESS 3.1)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX11_FLAGS}")
+endif()
+
+
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/ArticulatedBodyInertia.h
                               include/iDynTree/Core/ClassicalAcc.h
@@ -100,6 +122,13 @@ include_directories(include/iDynTree/Core)
 set(libraryname idyntree-core)
 
 add_library(${libraryname} ${IDYNTREE_CORE_EXP_SOURCES} ${IDYNTREE_CORE_EXP_HEADERS} ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
+
+if (DEFINED ${CMAKE_COMPILER_IS_GNUCXX} 
+  AND ${CMAKE_COMPILER_IS_GNUCXX}
+  AND ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 5)
+  target_compile_options(idyntree-core INTERFACE ${CXX11_FLAGS})
+endif()
+
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
