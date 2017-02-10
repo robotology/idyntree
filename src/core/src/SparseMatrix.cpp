@@ -60,25 +60,40 @@ namespace iDynTree {
     {
         assert(row >= 0 && row < rows()
                && col >= 0 && col < columns());
-        //TODO: more fast search?
+        //We can use std::lower_bound to between rowNZIndex and rowNZIndex + rowNNZ
+        //They are already sorted. The only critical point is if we have -1 in the matrix
+        //Which right now it does not apply
+        int colBegin = m_outerStarts[row];
+        int colEnd = m_outerStarts[row + 1];
+        std::vector<int>::const_iterator innerVectorBegin = m_innerIndeces.begin();
 
-        //find the row and how many zeros are in that row
-        rowNZIndex = m_outerStarts[row];
-        unsigned rowNNZ = m_outerStarts[row + 1] - rowNZIndex;
-
-        //find inner position
-        for (unsigned i = rowNZIndex; i < rowNZIndex + rowNNZ; ++i) {
-            if (m_innerIndeces[i] < 0) continue;
-            if (col == static_cast<unsigned>(m_innerIndeces[i])) {
-                rowNZIndex = i;
-                return true;
-            }
-            if (static_cast<unsigned>(m_innerIndeces[i]) > col) {
-                rowNZIndex = i;
-                return false;
-            }
+        //initialize the return value to be the first element of the row
+        rowNZIndex = colBegin;
+        if (colEnd - colBegin == 0) {
+            //empty row, avoid searching
+            return false;
         }
-        rowNZIndex += rowNNZ;
+
+        std::vector<int>::const_iterator foundIndex = std::lower_bound(innerVectorBegin + colBegin,
+                                                                       innerVectorBegin + colEnd, col);
+
+        //Compute the index of the first element next or equal to the one we
+        //were looking for
+
+        rowNZIndex = std::distance(innerVectorBegin, foundIndex);
+        if (foundIndex == innerVectorBegin + colEnd) {
+            //not found
+            //return the index of the last element of the row
+            //as we have to put the element as last element
+            return false;
+        }
+
+        if (*foundIndex >= 0
+            && static_cast<unsigned>(*foundIndex) == col) {
+            //found
+            return true;
+        }
+        
         return false;
     }
 
