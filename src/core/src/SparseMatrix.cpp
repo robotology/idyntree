@@ -212,55 +212,37 @@ namespace iDynTree {
         m_innerIndeces.resize(triplets.size());
         m_outerStarts.assign(m_rows + 1, 0); //reset vector
 
-        //initializing the first element
-//        std::iterator<std::forward_iterator_tag, Triplet> iterator(triplets.begin());
-        std::vector<Triplet>::const_iterator iterator(triplets.begin());
-        //saving coordinates of last inserted value
-        unsigned lastRow = iterator->row, lastCol = iterator->column;
-        //saving value
-        m_values(0) = iterator->value;
-        //and column
-        m_innerIndeces[0] = iterator->column;
 
-        //setting the NNZ of next row (only if we are not inserting in last row)
-        //if (iterator->row + 1 < m_rows) m_outerStarts[iterator->row + 1] = 1;
-        m_outerStarts[iterator->row + 1] = 1;
+        unsigned lastRow = 0;
+        int innerIndex = 0;
 
-        //starting loop
-        ++iterator;
-        //saving last inserted index
-        unsigned valueIndex = 0;
-        for (; iterator != triplets.end(); ++iterator) {
+        for (std::vector<Triplet>::const_iterator iterator(triplets.begin());
+             iterator != triplets.end(); ++iterator) {
+            //if current row is different from lastRow
+            //I have to update the outerStarts vector
             if (lastRow != iterator->row) {
-                //initialize NNZ for row
-                for (unsigned rowIndex = lastRow + 1;
-                     rowIndex <= iterator->row && rowIndex < rows(); ++rowIndex) {
-                    m_outerStarts[rowIndex + 1] = m_outerStarts[rowIndex];
+                for (std::vector<int>::iterator outerIt(m_outerStarts.begin() + lastRow + 1);
+                     outerIt <= m_outerStarts.begin() + iterator->row; ++outerIt) {
+                    *outerIt = innerIndex;
                 }
+                lastRow = iterator->row;
+            }
+            m_values(innerIndex) = iterator->value;
+            m_innerIndeces[innerIndex] = iterator->column;
+            ++innerIndex;
+        }
+        if (lastRow < m_rows) {
+            for (std::vector<int>::iterator outerIt(m_outerStarts.begin() + lastRow + 1);
+                 outerIt < m_outerStarts.end(); ++outerIt) {
+                *outerIt = innerIndex;
             }
 
-            if (lastRow == iterator->row
-                && lastCol == iterator->column) {
-                //duplicate
-                m_values(valueIndex) += iterator->value;
-                continue;
-            }
-
-            //updating NNZ
-            ++m_outerStarts[iterator->row + 1];
-
-            //Different coordinate. Insert new value
-            valueIndex++;
-            m_values(valueIndex) = iterator->value;
-            m_innerIndeces[valueIndex] = iterator->column;
-
-            lastRow = iterator->row;
-            lastCol = iterator->column;
         }
 
         //Shrink containers
-        m_values.resize(valueIndex + 1);
-        m_innerIndeces.resize(valueIndex + 1);
+        m_values.resize(innerIndex);
+        m_innerIndeces.resize(innerIndex);
+
     }
 
     SparseMatrix SparseMatrix::sparseMatrixFromTriplets(unsigned rows,
