@@ -9,13 +9,10 @@
 #define IDYNTREE_EIGEN_HELPERS_H
 
 #include <Eigen/Dense>
-#include <Eigen/SparseCore>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/MatrixFixSize.h>
-#include <iDynTree/Core/SparseMatrix.h>
-#include <iDynTree/Core/Triplets.h>
 #include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/SpatialForceVector.h>
 #include <iDynTree/Core/Transform.h>
@@ -23,6 +20,10 @@
 
 namespace iDynTree
 {
+#if __cplusplus > 199711L
+    //This is needed for template checking
+    class SparseMatrix;
+#endif
 
 // Dynamics size toEigen methods
 inline Eigen::Map<Eigen::VectorXd> toEigen(VectorDynSize & vec)
@@ -256,30 +257,5 @@ inline void setSubVector(VectorDynSize& vec,
 }
 
 }
-
-
-//SparseMatrix helpers
-inline Eigen::Map< Eigen::SparseMatrix<double, Eigen::RowMajor> > toEigen(iDynTree::SparseMatrix & mat)
-{
-    return Eigen::Map<Eigen::SparseMatrix<double, Eigen::RowMajor> >(mat.rows(),
-                                                                     mat.columns(),
-                                                                     mat.numberOfNonZeros(),
-                                                                     mat.outerIndecesBuffer(),
-                                                                     mat.innerIndecesBuffer(),
-                                                                     mat.valuesBuffer(),
-                                                                     0); //compressed format
-}
-
-inline Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor> > toEigen(const iDynTree::SparseMatrix & mat)
-{
-    return Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor> >(mat.rows(),
-                                                                           mat.columns(),
-                                                                           mat.numberOfNonZeros(),
-                                                                           mat.outerIndecesBuffer(),
-                                                                           mat.innerIndecesBuffer(),
-                                                                           mat.valuesBuffer(),
-                                                                           0); //compressed format
-}
-
 
 #endif /* IDYNTREE_EIGEN_HELPERS_H */

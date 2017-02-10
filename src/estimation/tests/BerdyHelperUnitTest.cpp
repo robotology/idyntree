@@ -12,7 +12,9 @@
 
 #include "testModels.h"
 #include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Core/EigenSparseHelpers.h>
 #include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Core/SparseMatrix.h>
 #include <iDynTree/Model/ModelTestUtils.h>
 
 #include <iDynTree/Model/ForwardKinematics.h>

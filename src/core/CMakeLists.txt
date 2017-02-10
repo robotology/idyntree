@@ -30,6 +30,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/ArticulatedBodyInertia.h
                               include/iDynTree/Core/ClassicalAcc.h
                               include/iDynTree/Core/Direction.h
+                              include/iDynTree/Core/EigenSparseHelpers.h
                               include/iDynTree/Core/EigenHelpers.h
                               include/iDynTree/Core/InertiaNonLinearParametrization.h
                               include/iDynTree/Core/MatrixDynSize.h

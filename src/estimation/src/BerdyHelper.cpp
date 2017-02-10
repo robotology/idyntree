@@ -8,6 +8,7 @@
 #include <iDynTree/Estimation/BerdyHelper.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Core/SparseMatrix.h>
 
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/Dynamics.h>
