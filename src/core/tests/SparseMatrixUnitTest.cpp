@@ -16,29 +16,34 @@ using namespace std;
 
 void testCreateMatrixFromAccessorOperator()
 {
+    std::cout << "------------------------------------" << std::endl;
+    std::cout << "testCreateMatrixFromAccessorOperator" << std::endl;
     SparseMatrix matrix(5,5);
     matrix(2,0) = 7;
-    std::cout << matrix.description() << "\n";
+    std::cout << matrix.description() << std::endl;
     matrix(0,1) = 3;
-    std::cout << matrix.description() << "\n";
+    std::cout << matrix.description() << std::endl;
     matrix(1,0) = 22;
-    std::cout << matrix.description() << "\n";
+    std::cout << matrix.description() << std::endl;
     matrix(1,4) = 17;
-    std::cout << matrix.description() << "\n";
+    std::cout << matrix.description() << std::endl;
     matrix(2,1) = 5;
-    std::cout << matrix.description() << "\n";
+    std::cout << matrix.description() << std::endl;
     matrix(2,3) = 1;
-    std::cout << matrix.description() << "\n";
+    std::cout << matrix.description() << std::endl;
     matrix(4,2) = 14;
-    std::cout << matrix.description() << "\n";
+    std::cout << matrix.description() << std::endl;
     matrix(4,4) = 8;
-    std::cout << matrix.description() << "\n";
+    std::cout << matrix.description() << std::endl;
 
-    std::cout << "Matrix:\n" << matrix.description(true) << "\n";
+    std::cout << "Matrix:\n" << matrix.description(true) << std::endl;
+    std::cout << "------------------------------------" << std::endl;
 }
 
 void testCreateMatrixFromTriplets()
 {
+    std::cout << "------------------------------------" << std::endl;
+    std::cout << "testCreateMatrixFromTriplets" << std::endl;
     SparseMatrix matrix(5,5);
     Triplets triplets;
     triplets.pushTriplet(iDynTree::Triplet(2, 0, 7));
@@ -53,10 +58,13 @@ void testCreateMatrixFromTriplets()
     matrix.setFromTriplets(triplets);
 
     std::cout << "Matrix:\n" << matrix.description(true) << "\n";
+    std::cout << "------------------------------------" << std::endl;
 }
 
 void testCreateMatrixFromDuplicateTriplets()
 {
+    std::cout << "------------------------------------" << std::endl;
+    std::cout << "testCreateMatrixFromDuplicateTriplets" << std::endl;
     SparseMatrix matrix(5,5);
     Triplets triplets;
     triplets.pushTriplet(iDynTree::Triplet(2, 0, 7));
@@ -73,10 +81,13 @@ void testCreateMatrixFromDuplicateTriplets()
     matrix.setFromTriplets(triplets);
 
     std::cout << "Matrix:\n" << matrix.description(true) << "\n";
+    std::cout << "------------------------------------" << std::endl;
 }
 
 void testMatrixIterator(SparseMatrix matrix)
 {
+    std::cout << "------------------------------------" << std::endl;
+    std::cout << "testMatrixIterator" << std::endl;
     //iterator can modify values
     for (SparseMatrix::iterator it(matrix.begin()); it != matrix.end(); ++it) {
         it->value()++;
@@ -86,27 +97,37 @@ void testMatrixIterator(SparseMatrix matrix)
     for (SparseMatrix::const_iterator it(matrix.begin()); it!= matrix.end() ; ++it) {
         std::cout << it->value << "(" << it->row << "," << it->column << ")\n";
     }
+
+    std::cout << "------------------------------------" << std::endl;
 }
 
 void testZeroingMatrix(SparseMatrix matrix)
 {
+    std::cout << "------------------------------------" << std::endl;
+    std::cout << "testZeroingMatrix" << std::endl;
     matrix.zero();
     std::cout << matrix.description() << std::endl;
+    std::cout << "------------------------------------" << std::endl;
 }
 
 void testClassesTraits()
 {
 #if __cplusplus > 199711L
+    std::cout << "------------------------------------" << std::endl;
+    std::cout << "testClassesTraits" << std::endl;
     std::cout << std::boolalpha;
     std::cout << "is_trivially_destructible:" << std::endl;
     std::cout << "Triplet: " << std::is_trivially_destructible<Triplet>::value << std::endl;
     std::cout << "Triplets: " << std::is_trivially_destructible<Triplets>::value << std::endl;
+    std::cout << "------------------------------------" << std::endl;
 #endif
 }
 
 void testRowColumnMajorConversion(SparseMatrix matrix)
 {
-    std::cout << "Initial matrix" << std::endl;
+    std::cout << "------------------------------------" << std::endl;
+    std::cout << "testRowColumnMajorConversion" << std::endl;
+    std::cout << "Initial (row Major) matrix" << std::endl;
     std::cout << matrix.description(true) << std::endl << std::endl;
 
     double *values = new double[matrix.numberOfNonZeros()];
@@ -115,14 +136,16 @@ void testRowColumnMajorConversion(SparseMatrix matrix)
 
     matrix.convertToColumnMajor(values, inner, outer);
 
-    std::cout << "Values and column\n";
+    std::cout << "Col Major matrix" << std::endl;
+    std::cout << "Values and column" << std::endl;
     for (unsigned i = 0; i < matrix.numberOfNonZeros(); ++i) {
         std::cout << "(" << values[i] << "," << inner[i] << ") ";
     }
-    std::cout << "\nouter\n";
+    std::cout << std::endl << "outer" << std::endl;
     for (unsigned i = 0; i <= matrix.columns(); ++i) {
         std::cout << outer[i] << " ";
     }
+    std::cout << std::endl;
 
     //Now convert back to row
     SparseMatrix rowMatrix(matrix.rows(), matrix.columns());
@@ -132,7 +155,8 @@ void testRowColumnMajorConversion(SparseMatrix matrix)
                                      inner,
                                      outer);
 
-    std::cerr << "\n\nRow matrix is\n" << rowMatrix.description(true) << "\n";
+    std::cout << "Row Major matrix (converted)" << std::endl;
+    std::cout << rowMatrix.description(true) << std::endl;
 
     delete [] values;
     delete [] inner;
@@ -140,8 +164,7 @@ void testRowColumnMajorConversion(SparseMatrix matrix)
 
     //Now I should assert matrix == rowMatrix
 
-    std::flush(std::cout);
-
+    std::cout << "------------------------------------" << std::endl;
 }
 
 int main()
