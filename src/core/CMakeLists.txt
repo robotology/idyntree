@@ -124,12 +124,11 @@ set(libraryname idyntree-core)
 
 add_library(${libraryname} ${IDYNTREE_CORE_EXP_SOURCES} ${IDYNTREE_CORE_EXP_HEADERS} ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
 
-if (DEFINED ${CMAKE_COMPILER_IS_GNUCXX} 
-  AND ${CMAKE_COMPILER_IS_GNUCXX}
-  AND ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 5)
-  target_compile_options(idyntree-core INTERFACE ${CXX11_FLAGS})
+if (DEFINED CMAKE_COMPILER_IS_GNUCXX)
+  if(${CMAKE_COMPILER_IS_GNUCXX} AND ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 5)
+    target_compile_options(idyntree-core INTERFACE ${CXX11_FLAGS})
+  endif()
 endif()
-
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
