@@ -214,10 +214,26 @@ namespace iDynTree {
 
 
         unsigned lastRow = 0;
-        int innerIndex = 0;
+        unsigned lastColumn = 0;
+        unsigned innerIndex = 0;
+        unsigned lastIndex = innerIndex;
+        m_values(0) = 0; //initialize the first element
 
         for (std::vector<Triplet>::const_iterator iterator(triplets.begin());
              iterator != triplets.end(); ++iterator) {
+            // As triplets are ordered, only subsequent elements can be equal
+            if (lastRow == iterator->row && lastColumn == iterator->column) {
+                //Adjust for the first element
+                //this should happen only the first time
+                m_values(lastIndex) += iterator->value;
+                //innerIndex should point to the next element
+                //If the next element is at the same position, innerIndex will be ignored,
+                //otherwise it will point to the next (free) element
+                innerIndex = lastIndex + 1;
+                continue;
+            }
+
+
             //if current row is different from lastRow
             //I have to update the outerStarts vector
             if (lastRow != iterator->row) {
@@ -229,7 +245,11 @@ namespace iDynTree {
             }
             m_values(innerIndex) = iterator->value;
             m_innerIndeces[innerIndex] = iterator->column;
+            lastIndex = innerIndex;
+            //increment index as this should always point to the next element
             ++innerIndex;
+            lastColumn = iterator->column;
+
         }
         if (lastRow < m_rows) {
             for (std::vector<int>::iterator outerIt(m_outerStarts.begin() + lastRow + 1);

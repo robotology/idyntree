@@ -16,32 +16,38 @@ using namespace iDynTree;
 
 void sparseMatrixTest()
 {
-    SparseMatrix matrix(5,5);
-    matrix(2,0) = 7;
-    matrix(0,1) = 3;
-    matrix(1,0) = 22;
-    matrix(1,4) = 17;
-    matrix(2,1) = 5;
-    matrix(2,3) = 1;
-    matrix(4,2) = 14;
-    matrix(4,4) = 8;
+    Triplets triplets;
+    triplets.pushTriplet(iDynTree::Triplet(2, 0, 7));
+    triplets.pushTriplet(iDynTree::Triplet(0, 1, 3));
+    triplets.pushTriplet(iDynTree::Triplet(1, 0, 22));
+    triplets.pushTriplet(iDynTree::Triplet(1, 4, 17));
+    triplets.pushTriplet(iDynTree::Triplet(2, 1, 5));
+    triplets.pushTriplet(iDynTree::Triplet(2, 3, 1));
+    triplets.pushTriplet(iDynTree::Triplet(4, 2, 14));
+    triplets.pushTriplet(iDynTree::Triplet(4, 4, 8));
 
+    SparseMatrix matrix(5,5);
     Eigen::SparseMatrix<double, Eigen::RowMajor> eig(5, 5);
-    eig.coeffRef(0,1) = 3;
-    eig.coeffRef(1,0) = 22;
-    eig.coeffRef(1,4) = 17;
-    eig.coeffRef(2,0) = 7;
-    eig.coeffRef(2,1) = 5;
-    eig.coeffRef(2,3) = 1;
-    eig.coeffRef(4,2) = 14;
-    eig.coeffRef(4,4) = 8;
+    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it) {
+        matrix(it->row, it->column) = it->value;
+        eig.coeffRef(it->row, it->column) = it->value;
+    }
 
     eig.makeCompressed();
+    
+    Eigen::Map<Eigen::SparseMatrix<double, Eigen::RowMajor> > mapped = toEigen(matrix);
 
-//    std::cout << "Matrix:\n" << matrix.description(true) << "\n";
-//    std::cout << "Eigen Map:\n" << toEigen(matrix) << "\n";
-//
-//    std::cout << "Eigen:\n" << eig << "\n";
+    ASSERT_IS_TRUE(mapped.rows() == eig.rows());
+    ASSERT_IS_TRUE(mapped.cols() == eig.cols());
+    ASSERT_IS_TRUE(mapped.nonZeros() == eig.nonZeros());
+
+    auto mappedCoefficients = mapped.coeffs();
+    auto coefficients = eig.coeffs();
+
+    for (unsigned i = 0; i < mappedCoefficients.size(); ++i) {
+        ASSERT_EQUAL_DOUBLE(mappedCoefficients.coeff(i), coefficients.coeff(i));
+    }
+
 }
 
 int main()

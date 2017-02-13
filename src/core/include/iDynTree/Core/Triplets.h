@@ -131,11 +131,14 @@ public:
 
     unsigned size() const;
 
+    typedef std::vector<iDynTree::Triplet>::iterator iterator;
+    typedef std::vector<iDynTree::Triplet>::const_iterator const_iterator;
+
     //for now simply return the vector iterator and do not implement our own iterator
-    std::vector<iDynTree::Triplet>::const_iterator begin() const;
-    std::vector<iDynTree::Triplet>::iterator begin();
-    std::vector<iDynTree::Triplet>::const_iterator end() const;
-    std::vector<iDynTree::Triplet>::iterator end();
+    const_iterator begin() const;
+    iterator begin();
+    const_iterator end() const;
+    iterator end();
 
 };
 

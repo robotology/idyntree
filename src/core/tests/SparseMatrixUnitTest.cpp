@@ -16,28 +16,34 @@ using namespace std;
 
 void testCreateMatrixFromAccessorOperator()
 {
+
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testCreateMatrixFromAccessorOperator" << std::endl;
+
+    Triplets triplets;
+    triplets.pushTriplet(iDynTree::Triplet(2, 0, 7));
+    triplets.pushTriplet(iDynTree::Triplet(0, 1, 3));
+    triplets.pushTriplet(iDynTree::Triplet(1, 0, 22));
+    triplets.pushTriplet(iDynTree::Triplet(1, 4, 17));
+    triplets.pushTriplet(iDynTree::Triplet(2, 1, 5));
+    triplets.pushTriplet(iDynTree::Triplet(2, 3, 1));
+    triplets.pushTriplet(iDynTree::Triplet(4, 2, 14));
+    triplets.pushTriplet(iDynTree::Triplet(4, 4, 8));
+
     SparseMatrix matrix(5,5);
-    matrix(2,0) = 7;
-    std::cout << matrix.description() << std::endl;
-    matrix(0,1) = 3;
-    std::cout << matrix.description() << std::endl;
-    matrix(1,0) = 22;
-    std::cout << matrix.description() << std::endl;
-    matrix(1,4) = 17;
-    std::cout << matrix.description() << std::endl;
-    matrix(2,1) = 5;
-    std::cout << matrix.description() << std::endl;
-    matrix(2,3) = 1;
-    std::cout << matrix.description() << std::endl;
-    matrix(4,2) = 14;
-    std::cout << matrix.description() << std::endl;
-    matrix(4,4) = 8;
-    std::cout << matrix.description() << std::endl;
+    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it) {
+        matrix(it->row, it->column) = it->value;
+    }
 
     std::cout << "Matrix:\n" << matrix.description(true) << std::endl;
     std::cout << "------------------------------------" << std::endl;
+
+    //expect elements at the correct position
+    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it) {
+        ASSERT_EQUAL_DOUBLE(matrix(it->row, it->column), it->value);
+        matrix(it->row, it->column) = it->value;
+    }
+
 }
 
 void testCreateMatrixFromTriplets()
@@ -46,6 +52,7 @@ void testCreateMatrixFromTriplets()
     std::cout << "testCreateMatrixFromTriplets" << std::endl;
     SparseMatrix matrix(5,5);
     Triplets triplets;
+    triplets.pushTriplet(iDynTree::Triplet(0, 0, -6));
     triplets.pushTriplet(iDynTree::Triplet(2, 0, 7));
     triplets.pushTriplet(iDynTree::Triplet(0, 1, 3));
     triplets.pushTriplet(iDynTree::Triplet(1, 0, 22));
@@ -59,6 +66,12 @@ void testCreateMatrixFromTriplets()
 
     std::cout << "Matrix:\n" << matrix.description(true) << "\n";
     std::cout << "------------------------------------" << std::endl;
+
+    //expect elements at the correct position
+    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it) {
+        ASSERT_EQUAL_DOUBLE(matrix(it->row, it->column), it->value);
+        matrix(it->row, it->column) = it->value;
+    }
 }
 
 void testCreateMatrixFromDuplicateTriplets()
@@ -67,6 +80,8 @@ void testCreateMatrixFromDuplicateTriplets()
     std::cout << "testCreateMatrixFromDuplicateTriplets" << std::endl;
     SparseMatrix matrix(5,5);
     Triplets triplets;
+    triplets.pushTriplet(iDynTree::Triplet(0, 0, -6));
+    triplets.pushTriplet(iDynTree::Triplet(0, 0, 5));
     triplets.pushTriplet(iDynTree::Triplet(2, 0, 7));
     triplets.pushTriplet(iDynTree::Triplet(0, 1, 3));
     triplets.pushTriplet(iDynTree::Triplet(1, 0, 22));
@@ -82,10 +97,25 @@ void testCreateMatrixFromDuplicateTriplets()
 
     std::cout << "Matrix:\n" << matrix.description(true) << "\n";
     std::cout << "------------------------------------" << std::endl;
+
+    //I still have to implement a sort of "Merge" triplets.
+    //Until that, manually write the asserts
+
+    ASSERT_EQUAL_DOUBLE(matrix(0, 0), -1);
+    ASSERT_EQUAL_DOUBLE(matrix(2, 0), 7);
+    ASSERT_EQUAL_DOUBLE(matrix(0, 1), 7);
+    ASSERT_EQUAL_DOUBLE(matrix(1, 0), 22);
+    ASSERT_EQUAL_DOUBLE(matrix(1, 4), 12);
+    ASSERT_EQUAL_DOUBLE(matrix(2, 1), 5);
+    ASSERT_EQUAL_DOUBLE(matrix(2, 3), 1);
+    ASSERT_EQUAL_DOUBLE(matrix(4, 2), 14);
+    ASSERT_EQUAL_DOUBLE(matrix(4, 4), 8);
+
 }
 
 void testMatrixIterator(SparseMatrix matrix)
 {
+    SparseMatrix originalMatrix(matrix);
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testMatrixIterator" << std::endl;
     //iterator can modify values
@@ -98,6 +128,12 @@ void testMatrixIterator(SparseMatrix matrix)
         std::cout << it->value << "(" << it->row << "," << it->column << ")\n";
     }
 
+    //Assertion:
+    //All the elements in matrix = originalMatrix + 1
+    for (SparseMatrix::const_iterator it(matrix.begin()); it!= matrix.end() ; ++it) {
+        ASSERT_EQUAL_DOUBLE(matrix(it->row, it->column), 1 + originalMatrix(it->row, it->column));
+    }
+
     std::cout << "------------------------------------" << std::endl;
 }
 
@@ -108,6 +144,10 @@ void testZeroingMatrix(SparseMatrix matrix)
     matrix.zero();
     std::cout << matrix.description() << std::endl;
     std::cout << "------------------------------------" << std::endl;
+
+    ASSERT_IS_TRUE(matrix.numberOfNonZeros() == 0);
+    ASSERT_IS_FALSE(matrix.begin().isValid());
+
 }
 
 void testClassesTraits()
@@ -118,6 +158,7 @@ void testClassesTraits()
     std::cout << std::boolalpha;
     std::cout << "is_trivially_destructible:" << std::endl;
     std::cout << "Triplet: " << std::is_trivially_destructible<Triplet>::value << std::endl;
+    ASSERT_IS_TRUE(std::is_trivially_destructible<Triplet>::value);
     std::cout << "Triplets: " << std::is_trivially_destructible<Triplets>::value << std::endl;
     std::cout << "------------------------------------" << std::endl;
 #endif
@@ -163,6 +204,12 @@ void testRowColumnMajorConversion(SparseMatrix matrix)
     delete [] outer;
 
     //Now I should assert matrix == rowMatrix
+    //Do the long computation: all all the values!
+    for (unsigned row = 0; row < matrix.rows(); row++) {
+        for (unsigned col = 0; col < matrix.columns(); col++) {
+            ASSERT_EQUAL_DOUBLE(matrix(row, col), rowMatrix(row, col));
+        }
+    }
 
     std::cout << "------------------------------------" << std::endl;
 }
