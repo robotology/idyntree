@@ -32,6 +32,12 @@ IEnvironment::~IEnvironment()
 {
 }
 
+IJetsVisualization::~IJetsVisualization()
+{
+
+}
+
+
 IModelVisualization::~IModelVisualization()
 {
 }
@@ -39,6 +45,7 @@ IModelVisualization::~IModelVisualization()
 ILight::~ILight()
 {
 }
+
 
 ColorViz::ColorViz(): r(1.0), g(1.0), b(1.0), a(1.0)
 {

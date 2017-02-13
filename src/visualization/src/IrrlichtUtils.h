@@ -88,6 +88,17 @@ inline irr::video::SMaterial idyntree2irr(const iDynTree::Vector4 & rgbaMaterial
     return ret;
 }
 
+inline irr::video::SMaterial idyntree2irr(const iDynTree::ColorViz & rgbaMaterial)
+{
+    iDynTree::Vector4 vec4;
+    vec4(0) = rgbaMaterial.r;
+    vec4(1) = rgbaMaterial.g;
+    vec4(2) = rgbaMaterial.b;
+    vec4(3) = rgbaMaterial.a;
+    return idyntree2irr(vec4);
+}
+
+
 /**
  * Get a rotation matrix whose z column is the provided direction.
  */
@@ -359,6 +370,81 @@ inline irr::scene::ICameraSceneNode* addVizCamera(irr::scene::ISceneManager* smg
 
     return camera;
 }
+
+// Imported from http://irrlicht.sourceforge.net/forum/viewtopic.php?f=9&t=45413
+// TODO : rewrite for efficency
+inline irr::scene::IMesh* createFrustumMesh(irr::f32 topRadius,
+                                            irr::f32 bottomRadius,
+                                            irr::f32 height,
+                                            irr::u32 tesselation = 8)
+{
+    irr::scene::SMeshBuffer* buffer = new irr::scene::SMeshBuffer();
+    irr::video::S3DVertex v;
+    irr::f32 radius;
+    irr::f32 angle;
+    irr::f32 x, y, z;
+    irr::f32 s, t;
+
+    for (irr::u32 m = 0; m <= tesselation; ++m) // height step:
+    {
+        z = height * irr::f32(m) / irr::f32(tesselation);
+        radius = ((height - z) * (bottomRadius - topRadius) / height) + topRadius;
+        //radius = 15.0f;
+        t = 1.0f - irr::f32(m) / irr::f32(tesselation);
+        for (irr::u32 n = 0; n <= tesselation; ++n) // subdivide circle:
+        {
+            angle = irr::core::PI * 2.0f * irr::f32(n) / irr::f32(tesselation);
+            x = radius * cosf(angle);
+            y = radius * sinf(angle);
+            s = irr::f32(n) / irr::f32(tesselation);
+
+            v.Pos.X = x;
+            v.Pos.Y = y;
+            v.Pos.Z = z;
+
+            v.Normal = v.Pos;
+            v.Normal.normalize();
+            v.Color = 0xFFFFFFFF;
+
+            //v.TCoords.X = s;
+            //v.TCoords.Y = t;
+            v.TCoords = irr::core::vector2df(s, t);
+
+            buffer->Vertices.push_back(v);
+            //printf("(s,t)=%f,%f\n", s, t);
+        }
+    }
+
+    irr::u32 index00, index10, index11, index01;
+    for (irr::u32 m = 0; m < tesselation; ++m)
+    {
+        for (irr::u32 n = 0; n < tesselation; ++n)
+        {
+            index00 = m * (tesselation + 1) + n;
+            index10 = (m + 1) * (tesselation + 1) + n;
+            index11 = (m + 1) * (tesselation + 1) + n + 1;
+            index01 = m * (tesselation + 1) + n + 1;
+
+            buffer->Indices.push_back(index00);
+            buffer->Indices.push_back(index10);
+            buffer->Indices.push_back(index11);
+
+            buffer->Indices.push_back(index00);
+            buffer->Indices.push_back(index11);
+            buffer->Indices.push_back(index01);
+        }
+    }
+
+    buffer->recalculateBoundingBox();
+    irr::scene::SMesh* mesh = new irr::scene::SMesh();
+    mesh->addMeshBuffer(buffer);
+    buffer->drop();
+
+    mesh->setHardwareMappingHint(irr::scene::EHM_STATIC);
+    mesh->recalculateBoundingBox();
+    return mesh;
+}
+
 
 
 }

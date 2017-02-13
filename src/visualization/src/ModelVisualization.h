@@ -43,6 +43,7 @@ public:
     virtual bool setFeatureVisibility(const std::string & elementKey, bool isVisible);
     void setWireframeVisibility(bool isVisible);
     void setTransparent(bool isTransparent);
+    virtual IJetsVisualization& jets();
 };
 
 }

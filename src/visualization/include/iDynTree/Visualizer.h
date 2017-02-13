@@ -236,6 +236,58 @@ public:
     virtual bool removeLight(const std::string & lightName) = 0;
 };
 
+/**
+ * Interface to the visualization of jets attached to a model.
+ */
+class IJetsVisualization
+{
+public:
+    /**
+     * Denstructor
+     */
+    virtual ~IJetsVisualization() = 0;
+
+    /**
+     * Set the frame on the model on which the jets are visualized.
+     *
+     * @note this will delete any state related to jets visualization.
+     */
+    virtual bool setJetsFrames(const std::vector< std::string > & jetsFrames) = 0;
+
+    /**
+     * Get the number of visualized jets.
+     *
+     */
+    virtual size_t getNrOfJets() const = 0;
+
+    /**
+     * Get jet direction.
+     */
+    virtual Direction getJetDirection(const int jetIndex) const = 0;
+
+    /**
+     * Set jet direction.
+     */
+    virtual bool setJetDirection(const int jetIndex, const Direction & jetDirection) = 0;
+
+    /**
+     * Set jet color.
+     */
+    virtual bool setJetColor(const int jetIndex, const ColorViz & jetColor) = 0;
+
+    /**
+     * The jets are visualized as cones attached to the frame,
+     */
+    virtual bool setJetsDimensions(const double & minRadius, const double & maxRadius, const double & maxLenght) = 0;
+
+    /**
+     * Set the jets intensity.
+     *
+     * @param[in] jetsIntensity a vector of getNrOfJets values, from 0 (no thrust) 1 (max thrust).
+     *
+     */
+    virtual bool setJetsIntensity(const VectorDynSize & jetsIntensity) = 0;
+};
 
 
 /**
@@ -311,6 +363,12 @@ public:
      * @return true if the visibility is correctly setted, false otherwise.
      */
     virtual bool setFeatureVisibility(const std::string& elementKey, bool isVisible) = 0;
+
+    /**
+     * Get a reference to the internal IJetsVisualization interface.
+     */
+    virtual IJetsVisualization& jets() = 0;
+
 
 };
 
