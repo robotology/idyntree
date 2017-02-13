@@ -319,6 +319,7 @@ public:
  */
 struct VisualizerOptions
 {
+    public:
     /**
      * Set the visualizer to be verbose, useful for debug (default : false).
      */
@@ -333,10 +334,16 @@ struct VisualizerOptions
      * Initial height (in pixels) of the created window (default: 600).
      */
     int winHeight;
+    
+    /**
+     * Dimension of the root frame arrows
+     */
+    double arrowsDimension;
 
     VisualizerOptions(): verbose(false),
                          winWidth(800),
-                         winHeight(600)
+                         winHeight(600),
+                         arrowsDimension(1.0)
     {
     }
 };

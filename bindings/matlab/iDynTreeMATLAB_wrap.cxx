@@ -73762,6 +73762,61 @@ fail:
 }
 
 
+int _wrap_VisualizerOptions_arrowsDimension_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::VisualizerOptions *arg1 = (iDynTree::VisualizerOptions *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("VisualizerOptions_arrowsDimension_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__VisualizerOptions, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VisualizerOptions_arrowsDimension_set" "', argument " "1"" of type '" "iDynTree::VisualizerOptions *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::VisualizerOptions * >(argp1);
+  ecode2 = SWIG_AsVal_double(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VisualizerOptions_arrowsDimension_set" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  if (arg1) (arg1)->arrowsDimension = arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_VisualizerOptions_arrowsDimension_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::VisualizerOptions *arg1 = (iDynTree::VisualizerOptions *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  double result;
+  
+  if (!SWIG_check_num_args("VisualizerOptions_arrowsDimension_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__VisualizerOptions, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VisualizerOptions_arrowsDimension_get" "', argument " "1"" of type '" "iDynTree::VisualizerOptions *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::VisualizerOptions * >(argp1);
+  result = (double) ((arg1)->arrowsDimension);
+  _out = SWIG_From_double(static_cast< double >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_new_VisualizerOptions (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
   iDynTree::VisualizerOptions *result = 0 ;
@@ -79598,58 +79653,60 @@ const char* swigFunctionName_(int fcn_id) {
   case 1565: return "VisualizerOptions_winWidth_set";
   case 1566: return "VisualizerOptions_winHeight_get";
   case 1567: return "VisualizerOptions_winHeight_set";
-  case 1568: return "new_VisualizerOptions";
-  case 1569: return "delete_VisualizerOptions";
-  case 1570: return "new_Visualizer";
-  case 1571: return "delete_Visualizer";
-  case 1572: return "Visualizer_init";
-  case 1573: return "Visualizer_getNrOfVisualizedModels";
-  case 1574: return "Visualizer_getModelInstanceName";
-  case 1575: return "Visualizer_getModelInstanceIndex";
-  case 1576: return "Visualizer_addModel";
-  case 1577: return "Visualizer_modelViz";
-  case 1578: return "Visualizer_camera";
-  case 1579: return "Visualizer_enviroment";
-  case 1580: return "Visualizer_run";
-  case 1581: return "Visualizer_draw";
-  case 1582: return "Visualizer_drawToFile";
-  case 1583: return "Visualizer_close";
-  case 1584: return "new_DynamicsComputations";
-  case 1585: return "delete_DynamicsComputations";
-  case 1586: return "DynamicsComputations_loadRobotModelFromFile";
-  case 1587: return "DynamicsComputations_loadRobotModelFromString";
-  case 1588: return "DynamicsComputations_isValid";
-  case 1589: return "DynamicsComputations_getNrOfDegreesOfFreedom";
-  case 1590: return "DynamicsComputations_getDescriptionOfDegreeOfFreedom";
-  case 1591: return "DynamicsComputations_getDescriptionOfDegreesOfFreedom";
-  case 1592: return "DynamicsComputations_getNrOfLinks";
-  case 1593: return "DynamicsComputations_getNrOfFrames";
-  case 1594: return "DynamicsComputations_getFloatingBase";
-  case 1595: return "DynamicsComputations_setFloatingBase";
-  case 1596: return "DynamicsComputations_setRobotState";
-  case 1597: return "DynamicsComputations_getWorldBaseTransform";
-  case 1598: return "DynamicsComputations_getBaseTwist";
-  case 1599: return "DynamicsComputations_getJointPos";
-  case 1600: return "DynamicsComputations_getJointVel";
-  case 1601: return "DynamicsComputations_getFrameIndex";
-  case 1602: return "DynamicsComputations_getFrameName";
-  case 1603: return "DynamicsComputations_getWorldTransform";
-  case 1604: return "DynamicsComputations_getRelativeTransform";
-  case 1605: return "DynamicsComputations_getFrameTwist";
-  case 1606: return "DynamicsComputations_getFrameTwistInWorldOrient";
-  case 1607: return "DynamicsComputations_getFrameProperSpatialAcceleration";
-  case 1608: return "DynamicsComputations_getLinkIndex";
-  case 1609: return "DynamicsComputations_getLinkInertia";
-  case 1610: return "DynamicsComputations_getJointIndex";
-  case 1611: return "DynamicsComputations_getJointName";
-  case 1612: return "DynamicsComputations_getJointLimits";
-  case 1613: return "DynamicsComputations_inverseDynamics";
-  case 1614: return "DynamicsComputations_getFreeFloatingMassMatrix";
-  case 1615: return "DynamicsComputations_getFrameJacobian";
-  case 1616: return "DynamicsComputations_getDynamicsRegressor";
-  case 1617: return "DynamicsComputations_getModelDynamicsParameters";
-  case 1618: return "DynamicsComputations_getCenterOfMass";
-  case 1619: return "DynamicsComputations_getCenterOfMassJacobian";
+  case 1568: return "VisualizerOptions_arrowsDimension_get";
+  case 1569: return "VisualizerOptions_arrowsDimension_set";
+  case 1570: return "new_VisualizerOptions";
+  case 1571: return "delete_VisualizerOptions";
+  case 1572: return "new_Visualizer";
+  case 1573: return "delete_Visualizer";
+  case 1574: return "Visualizer_init";
+  case 1575: return "Visualizer_getNrOfVisualizedModels";
+  case 1576: return "Visualizer_getModelInstanceName";
+  case 1577: return "Visualizer_getModelInstanceIndex";
+  case 1578: return "Visualizer_addModel";
+  case 1579: return "Visualizer_modelViz";
+  case 1580: return "Visualizer_camera";
+  case 1581: return "Visualizer_enviroment";
+  case 1582: return "Visualizer_run";
+  case 1583: return "Visualizer_draw";
+  case 1584: return "Visualizer_drawToFile";
+  case 1585: return "Visualizer_close";
+  case 1586: return "new_DynamicsComputations";
+  case 1587: return "delete_DynamicsComputations";
+  case 1588: return "DynamicsComputations_loadRobotModelFromFile";
+  case 1589: return "DynamicsComputations_loadRobotModelFromString";
+  case 1590: return "DynamicsComputations_isValid";
+  case 1591: return "DynamicsComputations_getNrOfDegreesOfFreedom";
+  case 1592: return "DynamicsComputations_getDescriptionOfDegreeOfFreedom";
+  case 1593: return "DynamicsComputations_getDescriptionOfDegreesOfFreedom";
+  case 1594: return "DynamicsComputations_getNrOfLinks";
+  case 1595: return "DynamicsComputations_getNrOfFrames";
+  case 1596: return "DynamicsComputations_getFloatingBase";
+  case 1597: return "DynamicsComputations_setFloatingBase";
+  case 1598: return "DynamicsComputations_setRobotState";
+  case 1599: return "DynamicsComputations_getWorldBaseTransform";
+  case 1600: return "DynamicsComputations_getBaseTwist";
+  case 1601: return "DynamicsComputations_getJointPos";
+  case 1602: return "DynamicsComputations_getJointVel";
+  case 1603: return "DynamicsComputations_getFrameIndex";
+  case 1604: return "DynamicsComputations_getFrameName";
+  case 1605: return "DynamicsComputations_getWorldTransform";
+  case 1606: return "DynamicsComputations_getRelativeTransform";
+  case 1607: return "DynamicsComputations_getFrameTwist";
+  case 1608: return "DynamicsComputations_getFrameTwistInWorldOrient";
+  case 1609: return "DynamicsComputations_getFrameProperSpatialAcceleration";
+  case 1610: return "DynamicsComputations_getLinkIndex";
+  case 1611: return "DynamicsComputations_getLinkInertia";
+  case 1612: return "DynamicsComputations_getJointIndex";
+  case 1613: return "DynamicsComputations_getJointName";
+  case 1614: return "DynamicsComputations_getJointLimits";
+  case 1615: return "DynamicsComputations_inverseDynamics";
+  case 1616: return "DynamicsComputations_getFreeFloatingMassMatrix";
+  case 1617: return "DynamicsComputations_getFrameJacobian";
+  case 1618: return "DynamicsComputations_getDynamicsRegressor";
+  case 1619: return "DynamicsComputations_getModelDynamicsParameters";
+  case 1620: return "DynamicsComputations_getCenterOfMass";
+  case 1621: return "DynamicsComputations_getCenterOfMassJacobian";
   default: return 0;
   }
 }
@@ -81274,58 +81331,60 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 1565: flag=_wrap_VisualizerOptions_winWidth_set(resc,resv,argc,(mxArray**)(argv)); break;
   case 1566: flag=_wrap_VisualizerOptions_winHeight_get(resc,resv,argc,(mxArray**)(argv)); break;
   case 1567: flag=_wrap_VisualizerOptions_winHeight_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1568: flag=_wrap_new_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1569: flag=_wrap_delete_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1570: flag=_wrap_new_Visualizer(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1571: flag=_wrap_delete_Visualizer(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1572: flag=_wrap_Visualizer_init(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1573: flag=_wrap_Visualizer_getNrOfVisualizedModels(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1574: flag=_wrap_Visualizer_getModelInstanceName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1575: flag=_wrap_Visualizer_getModelInstanceIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1576: flag=_wrap_Visualizer_addModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1577: flag=_wrap_Visualizer_modelViz(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1578: flag=_wrap_Visualizer_camera(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1579: flag=_wrap_Visualizer_enviroment(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1580: flag=_wrap_Visualizer_run(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1581: flag=_wrap_Visualizer_draw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1582: flag=_wrap_Visualizer_drawToFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1583: flag=_wrap_Visualizer_close(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1584: flag=_wrap_new_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1585: flag=_wrap_delete_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1586: flag=_wrap_DynamicsComputations_loadRobotModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1587: flag=_wrap_DynamicsComputations_loadRobotModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1588: flag=_wrap_DynamicsComputations_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1589: flag=_wrap_DynamicsComputations_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1590: flag=_wrap_DynamicsComputations_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1591: flag=_wrap_DynamicsComputations_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1592: flag=_wrap_DynamicsComputations_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1593: flag=_wrap_DynamicsComputations_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1594: flag=_wrap_DynamicsComputations_getFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1595: flag=_wrap_DynamicsComputations_setFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1596: flag=_wrap_DynamicsComputations_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1597: flag=_wrap_DynamicsComputations_getWorldBaseTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1598: flag=_wrap_DynamicsComputations_getBaseTwist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1599: flag=_wrap_DynamicsComputations_getJointPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1600: flag=_wrap_DynamicsComputations_getJointVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1601: flag=_wrap_DynamicsComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1602: flag=_wrap_DynamicsComputations_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1603: flag=_wrap_DynamicsComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1604: flag=_wrap_DynamicsComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1605: flag=_wrap_DynamicsComputations_getFrameTwist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1606: flag=_wrap_DynamicsComputations_getFrameTwistInWorldOrient(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1607: flag=_wrap_DynamicsComputations_getFrameProperSpatialAcceleration(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1608: flag=_wrap_DynamicsComputations_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1609: flag=_wrap_DynamicsComputations_getLinkInertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1610: flag=_wrap_DynamicsComputations_getJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1611: flag=_wrap_DynamicsComputations_getJointName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1612: flag=_wrap_DynamicsComputations_getJointLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1613: flag=_wrap_DynamicsComputations_inverseDynamics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1614: flag=_wrap_DynamicsComputations_getFreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1615: flag=_wrap_DynamicsComputations_getFrameJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1616: flag=_wrap_DynamicsComputations_getDynamicsRegressor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1617: flag=_wrap_DynamicsComputations_getModelDynamicsParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1618: flag=_wrap_DynamicsComputations_getCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1619: flag=_wrap_DynamicsComputations_getCenterOfMassJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1568: flag=_wrap_VisualizerOptions_arrowsDimension_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1569: flag=_wrap_VisualizerOptions_arrowsDimension_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1570: flag=_wrap_new_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1571: flag=_wrap_delete_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1572: flag=_wrap_new_Visualizer(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1573: flag=_wrap_delete_Visualizer(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1574: flag=_wrap_Visualizer_init(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1575: flag=_wrap_Visualizer_getNrOfVisualizedModels(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1576: flag=_wrap_Visualizer_getModelInstanceName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1577: flag=_wrap_Visualizer_getModelInstanceIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1578: flag=_wrap_Visualizer_addModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1579: flag=_wrap_Visualizer_modelViz(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1580: flag=_wrap_Visualizer_camera(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1581: flag=_wrap_Visualizer_enviroment(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1582: flag=_wrap_Visualizer_run(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1583: flag=_wrap_Visualizer_draw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1584: flag=_wrap_Visualizer_drawToFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1585: flag=_wrap_Visualizer_close(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1586: flag=_wrap_new_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1587: flag=_wrap_delete_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1588: flag=_wrap_DynamicsComputations_loadRobotModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1589: flag=_wrap_DynamicsComputations_loadRobotModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1590: flag=_wrap_DynamicsComputations_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1591: flag=_wrap_DynamicsComputations_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1592: flag=_wrap_DynamicsComputations_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1593: flag=_wrap_DynamicsComputations_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1594: flag=_wrap_DynamicsComputations_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1595: flag=_wrap_DynamicsComputations_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1596: flag=_wrap_DynamicsComputations_getFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1597: flag=_wrap_DynamicsComputations_setFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1598: flag=_wrap_DynamicsComputations_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1599: flag=_wrap_DynamicsComputations_getWorldBaseTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1600: flag=_wrap_DynamicsComputations_getBaseTwist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1601: flag=_wrap_DynamicsComputations_getJointPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1602: flag=_wrap_DynamicsComputations_getJointVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1603: flag=_wrap_DynamicsComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1604: flag=_wrap_DynamicsComputations_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1605: flag=_wrap_DynamicsComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1606: flag=_wrap_DynamicsComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1607: flag=_wrap_DynamicsComputations_getFrameTwist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1608: flag=_wrap_DynamicsComputations_getFrameTwistInWorldOrient(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1609: flag=_wrap_DynamicsComputations_getFrameProperSpatialAcceleration(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1610: flag=_wrap_DynamicsComputations_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1611: flag=_wrap_DynamicsComputations_getLinkInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1612: flag=_wrap_DynamicsComputations_getJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1613: flag=_wrap_DynamicsComputations_getJointName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1614: flag=_wrap_DynamicsComputations_getJointLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1615: flag=_wrap_DynamicsComputations_inverseDynamics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1616: flag=_wrap_DynamicsComputations_getFreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1617: flag=_wrap_DynamicsComputations_getFrameJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1618: flag=_wrap_DynamicsComputations_getDynamicsRegressor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1619: flag=_wrap_DynamicsComputations_getModelDynamicsParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1620: flag=_wrap_DynamicsComputations_getCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1621: flag=_wrap_DynamicsComputations_getCenterOfMassJacobian(resc,resv,argc,(mxArray**)(argv)); break;
   default: flag=1, SWIG_Error(SWIG_RuntimeError, "No function id %d.", fcn_id);
   }
   if (flag) {
