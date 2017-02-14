@@ -145,6 +145,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp,
     Twist        baseVel;
     ClassicalAcc baseAcc;
     SpatialAcc gravity;
+    gravity.zero();
     Vector6    properAcc;
 
     iDynTree::VectorDynSize qj(dofs), dqj(dofs), ddqj(dofs);
@@ -296,7 +297,10 @@ void testRegressorConsistency(iDynTree::HighLevel::DynamicsComputations & dynCom
 
     // check regressor matrix
     MatrixDynSize dynTreeRegressor(6+dofs,10*nrOfLinks),dynCompRegressor(6+dofs,10*nrOfLinks);
+    dynTreeRegressor.zero();
+    dynCompRegressor.zero();
     yarp::sig::Matrix        dynTreeRegressorYarp(6+dofs,10*nrOfLinks);
+    dynTreeRegressorYarp.zero();
     dynTree.kinematicRNEA();
     dynTree.getDynamicsRegressor(dynTreeRegressorYarp);
     yarp2idyntree(dynTreeRegressorYarp,dynTreeRegressor);

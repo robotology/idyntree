@@ -505,7 +505,8 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
         //Start from the beginning
         externalIterator = iteratingList.begin();
         //While external list is empty, skip to the next one
-        while (externalIterator->empty()) {
+        while (externalIterator != iteratingList.end() &&
+               externalIterator->empty()) {
             ++externalIterator;
         }
         //if the iterator is still valid assign the internal
