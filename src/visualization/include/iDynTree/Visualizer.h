@@ -319,7 +319,6 @@ public:
  */
 struct VisualizerOptions
 {
-    public:
     /**
      * Set the visualizer to be verbose, useful for debug (default : false).
      */
@@ -336,14 +335,14 @@ struct VisualizerOptions
     int winHeight;
     
     /**
-     * Dimension of the root frame arrows
+     * Dimension of the root frame arrows in meters (default: 1.0).
      */
-    double arrowsDimension;
+    double rootFrameArrowsDimension;
 
     VisualizerOptions(): verbose(false),
                          winWidth(800),
                          winHeight(600),
-                         arrowsDimension(1.0)
+                         rootFrameArrowsDimension(1.0)
     {
     }
 };
