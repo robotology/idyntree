@@ -33,7 +33,7 @@ classdef VisualizerOptions < SwigRef
         iDynTreeMEX(1567, self, varargin{1});
       end
     end
-    function varargout = arrowsDimension(self, varargin)
+    function varargout = rootFrameArrowsDimension(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)

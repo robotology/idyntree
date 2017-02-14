@@ -73762,7 +73762,7 @@ fail:
 }
 
 
-int _wrap_VisualizerOptions_arrowsDimension_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_VisualizerOptions_rootFrameArrowsDimension_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::VisualizerOptions *arg1 = (iDynTree::VisualizerOptions *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
@@ -73771,20 +73771,20 @@ int _wrap_VisualizerOptions_arrowsDimension_set (int resc, mxArray *resv[], int 
   int ecode2 = 0 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("VisualizerOptions_arrowsDimension_set",argc,2,2,0)) {
+  if (!SWIG_check_num_args("VisualizerOptions_rootFrameArrowsDimension_set",argc,2,2,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__VisualizerOptions, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VisualizerOptions_arrowsDimension_set" "', argument " "1"" of type '" "iDynTree::VisualizerOptions *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VisualizerOptions_rootFrameArrowsDimension_set" "', argument " "1"" of type '" "iDynTree::VisualizerOptions *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::VisualizerOptions * >(argp1);
   ecode2 = SWIG_AsVal_double(argv[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VisualizerOptions_arrowsDimension_set" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VisualizerOptions_rootFrameArrowsDimension_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->arrowsDimension = arg2;
+  if (arg1) (arg1)->rootFrameArrowsDimension = arg2;
   _out = (mxArray*)0;
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -73793,22 +73793,22 @@ fail:
 }
 
 
-int _wrap_VisualizerOptions_arrowsDimension_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_VisualizerOptions_rootFrameArrowsDimension_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::VisualizerOptions *arg1 = (iDynTree::VisualizerOptions *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   double result;
   
-  if (!SWIG_check_num_args("VisualizerOptions_arrowsDimension_get",argc,1,1,0)) {
+  if (!SWIG_check_num_args("VisualizerOptions_rootFrameArrowsDimension_get",argc,1,1,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__VisualizerOptions, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VisualizerOptions_arrowsDimension_get" "', argument " "1"" of type '" "iDynTree::VisualizerOptions *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VisualizerOptions_rootFrameArrowsDimension_get" "', argument " "1"" of type '" "iDynTree::VisualizerOptions *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::VisualizerOptions * >(argp1);
-  result = (double) ((arg1)->arrowsDimension);
+  result = (double) ((arg1)->rootFrameArrowsDimension);
   _out = SWIG_From_double(static_cast< double >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -79653,8 +79653,8 @@ const char* swigFunctionName_(int fcn_id) {
   case 1565: return "VisualizerOptions_winWidth_set";
   case 1566: return "VisualizerOptions_winHeight_get";
   case 1567: return "VisualizerOptions_winHeight_set";
-  case 1568: return "VisualizerOptions_arrowsDimension_get";
-  case 1569: return "VisualizerOptions_arrowsDimension_set";
+  case 1568: return "VisualizerOptions_rootFrameArrowsDimension_get";
+  case 1569: return "VisualizerOptions_rootFrameArrowsDimension_set";
   case 1570: return "new_VisualizerOptions";
   case 1571: return "delete_VisualizerOptions";
   case 1572: return "new_Visualizer";
@@ -81331,8 +81331,8 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 1565: flag=_wrap_VisualizerOptions_winWidth_set(resc,resv,argc,(mxArray**)(argv)); break;
   case 1566: flag=_wrap_VisualizerOptions_winHeight_get(resc,resv,argc,(mxArray**)(argv)); break;
   case 1567: flag=_wrap_VisualizerOptions_winHeight_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1568: flag=_wrap_VisualizerOptions_arrowsDimension_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1569: flag=_wrap_VisualizerOptions_arrowsDimension_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1568: flag=_wrap_VisualizerOptions_rootFrameArrowsDimension_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1569: flag=_wrap_VisualizerOptions_rootFrameArrowsDimension_set(resc,resv,argc,(mxArray**)(argv)); break;
   case 1570: flag=_wrap_new_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
   case 1571: flag=_wrap_delete_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
   case 1572: flag=_wrap_new_Visualizer(resc,resv,argc,(mxArray**)(argv)); break;
