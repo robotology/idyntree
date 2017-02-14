@@ -68,6 +68,9 @@ classdef MatrixDynSize < SwigRef
     function varargout = toMatlab(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(121, self, varargin{:});
     end
+    function varargout = fromMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(122, self, varargin{:});
+    end
   end
   methods(Static)
   end

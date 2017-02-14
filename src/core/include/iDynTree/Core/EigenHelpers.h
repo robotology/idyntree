@@ -20,6 +20,10 @@
 
 namespace iDynTree
 {
+#if __cplusplus > 199711L
+    //This is needed for template checking
+    class SparseMatrix;
+#endif
 
 // Dynamics size toEigen methods
 inline Eigen::Map<Eigen::VectorXd> toEigen(VectorDynSize & vec)
@@ -61,13 +65,25 @@ inline Eigen::Map< Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> > toEigen(M
     return Eigen::Map< Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> >(mat.data());
 }
 
+template<unsigned int nRows>
+inline Eigen::Map< Eigen::Matrix<double,nRows,1> > toEigen(MatrixFixSize<nRows,1> & mat)
+{
+    return Eigen::Map< Eigen::Matrix<double,nRows,1> >(mat.data());
+}
+
+template<unsigned int nCols>
+inline Eigen::Map< Eigen::Matrix<double,1,nCols> > toEigen(MatrixFixSize<1, nCols> & mat)
+{
+    return Eigen::Map< Eigen::Matrix<double,1, nCols> >(mat.data());
+}
+
 template<unsigned int nRows, unsigned int nCols>
 inline Eigen::Map< const Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> > toEigen(const MatrixFixSize<nRows,nCols> & mat)
 {
     return Eigen::Map< const Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> >(mat.data());
 }
 
-// Spatia vectors
+// Spatial vectors
 inline Eigen::Matrix<double,6,1> toEigen(const SpatialMotionVector & vec)
 {
     Eigen::Matrix<double,6,1> ret;
@@ -88,7 +104,7 @@ inline Eigen::Matrix<double,6,1> toEigen(const SpatialForceVector & vec)
     return ret;
 }
 
-// Spatia vectors
+// Spatial vectors
 inline void fromEigen(SpatialMotionVector & vec, const Eigen::Matrix<double,6,1> & eigVec)
 {
     toEigen(vec.getLinearVec3()) = eigVec.segment<3>(0);
@@ -139,6 +155,10 @@ inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const IndexRange colRange,
                          const MatrixFixSize<nRows,nCols>& subMat)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
 
     toEigen(mat).block(rowRange.offset,colRange.offset,rowRange.size,colRange.size) = toEigen(subMat);
     return;
@@ -150,6 +170,10 @@ inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const IndexRange colRange,
                          const EigMatType& subMat)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
     toEigen(mat).block(rowRange.offset,colRange.offset,rowRange.size,colRange.size) = subMat;
     return;
 }
@@ -160,6 +184,10 @@ inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const IndexRange colRange,
                          const double subMat)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
     assert(rowRange.size == 1);
     assert(colRange.size == 1);
     mat(rowRange.offset,colRange.offset) = subMat;
@@ -171,6 +199,10 @@ inline void setSubMatrixToIdentity(iDynTreeMatrixType& mat,
                                    const IndexRange rowRange,
                                    const IndexRange colRange)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
     assert(rowRange.size == colRange.size);
     for(int i=0; i < rowRange.size; i++)
     {
@@ -184,6 +216,10 @@ inline void setSubMatrixToMinusIdentity(iDynTreeMatrixType& mat,
                                         const IndexRange rowRange,
                                         const IndexRange colRange)
 {
+#if __cplusplus > 199711L
+    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
+                  "You cannot set a subMatrix on a SparseMatrix.");
+#endif
     assert(rowRange.size == colRange.size);
     for(int i=0; i < rowRange.size; i++)
     {

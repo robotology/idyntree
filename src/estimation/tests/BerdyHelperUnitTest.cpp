@@ -12,7 +12,9 @@
 
 #include "testModels.h"
 #include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Core/EigenSparseHelpers.h>
 #include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Core/SparseMatrix.h>
 #include <iDynTree/Model/ModelTestUtils.h>
 
 #include <iDynTree/Model/ForwardKinematics.h>
@@ -82,7 +84,7 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
 
     // Check D and bD , in particular that D*d + bD = 0
     // Generated the Y e bY matrix and vector from berdy
-    MatrixDynSize D, Y;
+    SparseMatrix D, Y;
     VectorDynSize bD, bY;
     berdy.resizeAndZeroBerdyMatrices(D,bD,Y,bY);
     bool ok = berdy.getBerdyMatrices(D,bD,Y,bY);
@@ -178,6 +180,7 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
                      pos.jointPos(),linkVels,linkProperAccs,
                      extWrenches,intWrenches,genTrqs);
 
+
     // Correct for the unconsistency between the input net wrenches and the residual of the RNEA
     extWrenches(berdy.dynamicTraversal().getBaseLink()->getIndex()) = extWrenches(berdy.dynamicTraversal().getBaseLink()->getIndex())-genTrqs.baseWrench();
 
@@ -210,7 +213,7 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
 
     // Check D and bD , in particular that D*d + bD = 0
     // Generated the Y e bY matrix and vector from berdy
-    MatrixDynSize D, Y;
+    SparseMatrix D, Y;
     VectorDynSize bD, bY;
     berdy.resizeAndZeroBerdyMatrices(D,bD,Y,bY);
     bool ok = berdy.getBerdyMatrices(D,bD,Y,bY);
@@ -221,7 +224,7 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
     toEigen(dynamicsResidual) = toEigen(D)*toEigen(d) + toEigen(bD);
 
     std::cerr << "D : " << std::endl;
-    std::cerr << D.toString() << std::endl;
+    std::cerr << D.description(true) << std::endl;
     std::cerr << "d :\n" << d.toString() << std::endl;
     std::cerr << "D*d :\n" << toEigen(D)*toEigen(d) << std::endl;
     std::cerr << "bD :\n" << bD.toString() << std::endl;
@@ -250,13 +253,13 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
         toEigen(yFromBerdy) = toEigen(Y)*toEigen(d) + toEigen(bY);
 
         std::cerr << "Y : " << std::endl;
-        std::cerr << Y.toString() << std::endl;
+        std::cerr << Y.description(true) << std::endl;
         std::cerr << "d :\n" << d.toString() << std::endl;
         std::cerr << "Y*d :\n" << toEigen(Y)*toEigen(d) << std::endl;
         std::cerr << "bY :\n" << bY.toString() << std::endl;
 
 
-        std::cerr << Y.toString() << std::endl;
+        std::cerr << Y.description(true) << std::endl;
         std::cerr << "Testing " << berdy.getOptions().jointOnWhichTheInternalWrenchIsMeasured[0] << std::endl;
         std::cerr << intWrenches(berdy.model().getJointIndex(berdy.getOptions().jointOnWhichTheInternalWrenchIsMeasured[0])).toString() << std::endl;
 

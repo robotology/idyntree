@@ -9,32 +9,32 @@ classdef LinkWrenches < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(761, varargin{:});
+        tmp = iDynTreeMEX(780, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(762, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(781, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(763, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(782, self, varargin{:});
     end
     function varargout = getNrOfLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(764, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(783, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(765, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(784, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(766, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(785, self, varargin{:});
     end
     function varargout = zero(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(767, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(786, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(768, self);
+        iDynTreeMEX(787, self);
         self.swigPtr=[];
       end
     end

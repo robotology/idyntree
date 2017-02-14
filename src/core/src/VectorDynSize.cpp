@@ -154,38 +154,27 @@ bool VectorDynSize::setVal(const unsigned int index, const double new_el)
 
 void VectorDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
 {
-    // If we change the data buffer, we need to
-    // copy the old content to a local buffer
-    double * localBuf = 0;
-    if( this->m_size > 0 )
-    {
-       localBuf = new double[this->m_size];
-       memcpy(localBuf,this->m_data,this->m_size*sizeof(double));
+    //Corner case: zero capacity
+    if (_newCapacity == 0) {
+        delete [] this->m_data;
+        m_data = 0;
+        this->m_size = 0;
+        this->m_capacity = 0;
+        return;
     }
 
-    if( this->m_data )
-    {
-        delete[] this->m_data;
+    double *localBuf = new double[_newCapacity];
+
+    if (this->m_data && this->m_size <= _newCapacity) {
+        memcpy(localBuf, this->m_data, this->m_size * sizeof(double));
+    }
+    if (this->m_data) {
+        delete [] this->m_data;
+        this->m_data = 0;
     }
 
     this->m_capacity = _newCapacity;
-
-    if( this->m_capacity == 0 )
-    {
-        this->m_data = 0;
-    }
-    else
-    {
-        this->m_data = new double[this->m_capacity];
-        zero();
-
-        if( this->m_size > 0 )
-        {
-            memcpy(this->m_data,localBuf,this->m_size*sizeof(double));
-            delete[] localBuf;
-            localBuf = 0;
-        }
-    }
+    this->m_data = localBuf;
 }
 
 void VectorDynSize::reserve(const unsigned int _newCapacity)
@@ -202,6 +191,11 @@ void VectorDynSize::reserve(const unsigned int _newCapacity)
 
 void VectorDynSize::resize(const unsigned int _newSize)
 {
+    //Possible cases:
+    // 1) Reduce size -> don't touch capacity. Lose elements > _newSize
+    // 2) Increase size
+    //    a) capacity already at least _newSize
+    //    b) capacity < _newSize
     reserve(_newSize);
     this->m_size = _newSize;
 }

@@ -7,55 +7,55 @@ classdef AccelerometerSensor < iDynTree.LinkSensor
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1227, varargin{:});
+        tmp = iDynTreeMEX(1246, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1228, self);
+        iDynTreeMEX(1247, self);
         self.swigPtr=[];
       end
     end
     function varargout = setName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1229, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1248, self, varargin{:});
     end
     function varargout = setLinkSensorTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1230, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1249, self, varargin{:});
     end
     function varargout = setParentLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1231, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1250, self, varargin{:});
     end
     function varargout = setParentLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1232, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1251, self, varargin{:});
     end
     function varargout = getName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1233, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1252, self, varargin{:});
     end
     function varargout = getSensorType(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1234, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1253, self, varargin{:});
     end
     function varargout = getParentLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1235, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1254, self, varargin{:});
     end
     function varargout = getParentLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1236, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1255, self, varargin{:});
     end
     function varargout = getLinkSensorTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1237, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1256, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1238, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1257, self, varargin{:});
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1239, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1258, self, varargin{:});
     end
     function varargout = updateIndeces(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1240, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1259, self, varargin{:});
     end
     function varargout = predictMeasurement(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1241, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1260, self, varargin{:});
     end
   end
   methods(Static)

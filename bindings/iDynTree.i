@@ -33,6 +33,7 @@
 // Basic math classes
 #include "iDynTree/Core/MatrixDynSize.h"
 #include "iDynTree/Core/MatrixFixSize.h"
+#include "iDynTree/Core/SparseMatrix.h"
 
 #include "iDynTree/Core/VectorDynSize.h"
 #include "iDynTree/Core/VectorFixSize.h"
@@ -137,7 +138,7 @@ namespace std {
 // Basic math classes
 %include "iDynTree/Core/MatrixDynSize.h"
 %include "iDynTree/Core/MatrixFixSize.h"
-
+%include "iDynTree/Core/SparseMatrix.h"
 
 %include "iDynTree/Core/VectorDynSize.h"
 %include "iDynTree/Core/VectorFixSize.h"

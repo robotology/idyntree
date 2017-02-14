@@ -25,6 +25,7 @@
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/Triplets.h>
 
 #include <iDynTree/Model/Indeces.h>
 #include <iDynTree/Model/LinkState.h>
@@ -70,8 +71,8 @@ enum BerdyVariants
 };
 
 /**
- * Enumeration descriing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration)
- * used in
+ * Enumeration describing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration)
+ * used in Berdy
  */
 enum BerdyDynamicVariablesTypes
 {
@@ -226,19 +227,37 @@ struct BerdySensor {
     std::string id; /*<! ID of the sensor */
     iDynTree::IndexRange range; /*<! Range of the sensor
                                  * (starting location in the measurements equations
-                                 *  and number of measuremes equations associated with the sensor */
+                                 *  and number of measurements equations associated with the sensor) */
 
-    bool operator==(const struct BerdySensor&) const;
-    bool operator<(const struct BerdySensor&) const;
+    /**
+     * Overload of equality operator
+     *
+     * Two sensors are considered equals if they have the same type and id
+     * @param sensor the sensor to which the current sensor is compared to
+     * @return true if the two sensors are equal. False otherwise
+     */
+    bool operator==(const struct BerdySensor& sensor) const;
+
+    bool operator<(const struct BerdySensor& sensor) const;
 };
 
 struct BerdyDynamicVariable {
-    iDynTree::BerdyDynamicVariablesTypes type;
-    std::string id;
-    iDynTree::IndexRange range;
+    iDynTree::BerdyDynamicVariablesTypes type; /*<! type of the dynamic variable */
+    std::string id; /*<! ID of the dynamic variable */
+    iDynTree::IndexRange range; /*<! Range of the dynamic variable
+                                 * (starting location in the dynamic equations
+                                 *  and number of equations associated with the variable) */
 
-    bool operator==(const struct BerdyDynamicVariable&) const;
-    bool operator<(const struct BerdyDynamicVariable&) const;
+    /**
+     * Overload of equality operator
+     *
+     * Two variables are considered equals if they have the same type and id
+     * @param variable the variable to which the current variable is compared to
+     * @return true if the two variables are equal. False otherwise
+     */
+    bool operator==(const struct BerdyDynamicVariable& variable) const;
+
+    bool operator<(const struct BerdyDynamicVariable& variable) const;
 };
 
 /**
@@ -395,8 +414,8 @@ class BerdyHelper
     IndexRange getRangeJointWrench(const JointIndex idx);
     IndexRange getRangeDOFTorqueDynEq(const DOFIndex idx);
 
-    bool computeBerdySensorMatrices(MatrixDynSize& Y, VectorDynSize& bY);
-    bool computeBerdyDynamicsMatrices(MatrixDynSize& D, VectorDynSize& bD);
+    bool computeBerdySensorMatrices(SparseMatrix& Y, VectorDynSize& bY);
+    bool computeBerdyDynamicsMatrices(SparseMatrix& D, VectorDynSize& bD);
 
     void cacheSensorsOrdering();
     void cacheDynamicVariablesOrdering();
@@ -429,6 +448,10 @@ class BerdyHelper
      * Buffer for sensor serialization.
      */
     VectorDynSize realSensorMeas;
+
+    Triplets matrixDElements;
+    Triplets matrixYElements;
+
 
 public:
     /**
@@ -498,11 +521,26 @@ public:
     /**
      * Resize and set to zero Berdy matrices.
      */
+    bool resizeAndZeroBerdyMatrices(SparseMatrix &D, VectorDynSize &bD,
+                                    SparseMatrix &Y, VectorDynSize &bY);
+
+    /**
+     * Resize and set to zero Berdy matrices.
+     *
+     */
     bool resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                                     MatrixDynSize & Y, VectorDynSize & bY);
 
     /**
      * Get Berdy matrices
+     */
+    bool getBerdyMatrices(SparseMatrix &D, VectorDynSize &bD,
+                          SparseMatrix &Y, VectorDynSize &bY);
+    /**
+     * Get Berdy matrices
+     *
+     * \note internally this function uses sparse matrices
+     * Prefer the use of resizeAndZeroBerdyMatrices(SparseMatrix &, VectorDynSize &, SparseMatrix &, VectorDynSize &)
      */
     bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                           MatrixDynSize & Y, VectorDynSize & bY);
