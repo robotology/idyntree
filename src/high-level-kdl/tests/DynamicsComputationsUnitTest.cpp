@@ -43,6 +43,7 @@ void setRandomState(iDynTree::HighLevel::DynamicsComputations & dynComp)
     Twist        baseVel;
     ClassicalAcc baseAcc;
     SpatialAcc gravity;
+    gravity.zero();
     Vector6    properAcc;
 
     iDynTree::VectorDynSize qj(dofs), dqj(dofs), ddqj(dofs);
