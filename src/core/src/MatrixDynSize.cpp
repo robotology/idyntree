@@ -243,9 +243,13 @@ void MatrixDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
         if( this->m_rows*this->m_cols > 0 )
         {
             memcpy(this->m_data,localBuf,this->m_rows*this->m_cols*sizeof(double));
-            delete[] localBuf;
-            localBuf = 0;
         }
+    }
+    
+    if (localBuf)
+    {
+        delete[] localBuf;
+        localBuf = 0;
     }
 }
 
