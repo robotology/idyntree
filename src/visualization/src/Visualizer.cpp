@@ -201,7 +201,7 @@ bool Visualizer::init(const VisualizerOptions options)
 
     // Add environment
     pimpl->m_environment.m_envNode       = pimpl->m_irrSmgr->addEmptySceneNode();
-    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode);
+    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode,options.rootFrameArrowsDimension);
     pimpl->m_environment.m_floorGridNode = addFloorGridNode(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode);
     pimpl->m_environment.m_sceneManager = pimpl->m_irrSmgr;
     pimpl->m_environment.m_backgroundColor = irr::video::SColorf(0.0,0.4,0.4,1.0);

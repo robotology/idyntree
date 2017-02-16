@@ -392,9 +392,15 @@ struct VisualizerOptions
      */
     int winHeight;
 
+    /**
+     * Dimension of the root frame arrows in meters (default: 1.0).
+     */
+    double rootFrameArrowsDimension;
+
     VisualizerOptions(): verbose(false),
                          winWidth(800),
-                         winHeight(600)
+                         winHeight(600),
+                         rootFrameArrowsDimension(1.0)
     {
     }
 };
