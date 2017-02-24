@@ -14,10 +14,10 @@
 
 namespace iDynTree {
 
-    Triplet::Triplet(unsigned row, unsigned column, double value)
-    : row(row)
-    , column(column)
-    , value(value) {}
+    Triplet::Triplet(unsigned _row, unsigned _column, double _value)
+    : row(_row)
+    , column(_column)
+    , value(_value) {}
 
     bool Triplet::operator<(const iDynTree::Triplet &other) const
     {

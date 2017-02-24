@@ -38,7 +38,7 @@ namespace iDynTree
          * The data is not reset to zero for perfomance reason.
          * Please initialize the data in the vector before any use.
          */
-        inline SpatialInertiaRaw() {};
+        inline SpatialInertiaRaw() {}
 
         /**
          * @param mass mass of the rigid body

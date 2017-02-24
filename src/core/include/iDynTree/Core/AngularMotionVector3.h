@@ -48,7 +48,7 @@ namespace iDynTree
         /**
          * constructors
          */
-        inline AngularMotionVector3() {};
+        inline AngularMotionVector3() {}
         AngularMotionVector3(double x, double y, double z);
         AngularMotionVector3(const double* in_data, const unsigned int in_size);
         AngularMotionVector3(const AngularMotionVector3 & other);

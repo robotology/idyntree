@@ -36,15 +36,15 @@ public:
 
 private:
 
-    iDynTree::VectorDynSize m_values; /*<! Contains all the non zero (NZ) elements */
+    iDynTree::VectorDynSize m_values; /**< Contains all the non zero (NZ) elements */
 
-    std::vector<int> m_innerIndeces; /*<! column index of the NZ elements  */
-    std::vector<int> m_outerStarts; /*<! for each row contains the index of the first NZ in the
+    std::vector<int> m_innerIndeces; /**< column index of the NZ elements  */
+    std::vector<int> m_outerStarts; /**< for each row contains the index of the first NZ in the
                                      *   previous two arrays
                                      */
 
 
-    unsigned m_allocatedSize; /*<! size of the memory allocated for m_values and m_innerIndeces */
+    unsigned m_allocatedSize; /**< size of the memory allocated for m_values and m_innerIndeces */
 
     unsigned m_rows;
     unsigned m_columns;

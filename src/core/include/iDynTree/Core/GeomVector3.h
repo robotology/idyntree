@@ -37,7 +37,7 @@ namespace iDynTree
         /**
          * Constructors:
          */
-        inline GeomVector3Semantics() {};
+        inline GeomVector3Semantics() {}
         GeomVector3Semantics(int _body, int _refBody, int _coordinateFrame);
         GeomVector3Semantics(const GeomVector3Semantics & other);
 
@@ -87,7 +87,7 @@ namespace iDynTree
         /**
          * constructors
          */
-        inline GeomVector3() {};
+        inline GeomVector3() {}
         GeomVector3(const double* in_data, const unsigned int in_size);
         GeomVector3(const GeomVector3 & other);
 

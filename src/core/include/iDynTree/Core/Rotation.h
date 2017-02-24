@@ -160,7 +160,7 @@ namespace iDynTree
          /**
          * Get a roll, pitch and yaw corresponding to this rotation.
          *
-         * Get r \in [-180,180] , p \in [-90,90], y \in [-180,180]
+         * Get \f$ r \in [-180,180] , p \in [-90,90], y \in [-180,180]\f$
          * such that
          * *this == RotZ(y)*RotY(p)*RotX(r) 
          *
@@ -183,8 +183,8 @@ namespace iDynTree
          * Get a unit quaternion corresponding to this rotation
          *
          * The quaternion is defined as [s, r]
-         * where s \in \mathbb{R} is the real and
-         * r \in \mathbb{R}^3 is the imaginary part.
+         * where \f$s \in \mathbb{R}\f$ is the real and
+         * \f$r \in \mathbb{R}^3\f$ is the imaginary part.
          *
          * The returned quaternion is such that *this is
          * equal to RotationFromQuaternion(quaternion).
@@ -203,8 +203,8 @@ namespace iDynTree
          * Get a unit quaternion corresponding to this rotation
          *
          * The unit quaternion is defined as [s, r]
-         * where s \in \mathbb{R} is the real and
-         * r \in \mathbb{R}^3 is the imaginary part.
+         * where \f$s \in \mathbb{R}\f$ is the real and
+         * \f$r \in \mathbb{R}^3\f$ is the imaginary part.
          *
          * The returned quaternion is such that *this is
          * equal to RotationFromQuaternion(quaternion).
@@ -226,8 +226,8 @@ namespace iDynTree
          * Get a unit quaternion corresponding to this rotation
          *
          * The quaternion is defined as [s, r]
-         * where s \in \mathbb{R} is the costituent and
-         * r \in \mathbb{R}^3 is the imaginary part.
+         * where \f$s \in \mathbb{R}\f$ is the costituent and
+         * \f$r \in \mathbb{R}^3\f$ is the imaginary part.
          *
          * The returned quaternion is such that *this is
          * equal to RotationFromQuaternion(quaternion).
@@ -359,8 +359,8 @@ namespace iDynTree
          * Construct a rotation matrix from the given unit quaternion representation
          *
          * The quaternion is expected to be ordered in the following way:
-         * - s \in \mathbb{R} the real part of the quaterion
-         * - r \in \mathbb{R}^3 the imaginary part of the quaternion
+         * - \f$s \in \mathbb{R}\f$ the real part of the quaterion
+         * - \f$r \in \mathbb{R}^3\f$ the imaginary part of the quaternion
          *
          * The returned rotation matrix is given by the following formula:
          * \f[

@@ -33,7 +33,7 @@ namespace iDynTree
          * The data is not reset to zero for perfomance reason.
          * Please initialize the data in the vector before any use.
          */
-        inline SpatialInertia() {};
+        inline SpatialInertia() {}
         SpatialInertia(const double mass,
                        const PositionRaw & com,
                        const RotationalInertiaRaw & rotInertia);

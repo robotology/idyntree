@@ -149,8 +149,8 @@ namespace iDynTree
         /**
          * Change the size of the matrix, without preserving old content.
          *
-         * @param newRows the new rows of the matrix
-         * @param newCols the new cols of the matrix
+         * @param _newRows the new rows of the matrix
+         * @param _newCols the new cols of the matrix
          *
          * \warning performs dynamic memory allocation operations if newRows*newCols > capacity()
          */

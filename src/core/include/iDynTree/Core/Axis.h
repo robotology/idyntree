@@ -47,7 +47,7 @@ namespace iDynTree
          * The data is not reset to the default for perfomance reason.
          * Please initialize the data in the class before any use.
          */
-        inline Axis() {};
+        inline Axis() {}
 
         /**
          * Constructor from a Direction and an origin, represented by a Position object.

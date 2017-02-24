@@ -120,7 +120,7 @@ namespace iDynTree
         // Static helpers
 
         /**
-         * Build the ArticulatedInertia U d^-1 U^\top .
+         * Build the ArticulatedInertia \f$U d^{-1} U^\top\f$ .
          * Used in the articulated body algorithm .
          */
         static ArticulatedBodyInertia ABADyadHelper(const SpatialForceVector & U, const double d);

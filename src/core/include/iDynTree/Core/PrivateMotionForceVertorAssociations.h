@@ -136,7 +136,7 @@ namespace iDynTree
     
     
     /**
-     * Helper class providing the result class of the cross product for the operator (w\times or v\times).
+     * Helper class providing the result class of the cross product for the operator (\f$w\times\f$ or \f$v\times\f$).
      * (AngularMotionVector3 x MotionForce or LinearMotionVector3 x MotionForce)
      */
     template <class MotionT, class MotionForce2deriveT>

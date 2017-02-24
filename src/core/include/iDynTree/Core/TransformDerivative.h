@@ -48,7 +48,7 @@ namespace iDynTree
          * The data is not reset to the default for perfomance reasons.
          * Please initialize the data in the class before any use.
          */
-        TransformDerivative() {};
+        TransformDerivative() {}
 
         /**
          * Constructor from a Matrix3x3 and a Vector3 .
@@ -65,7 +65,7 @@ namespace iDynTree
         /**
          * Default destructor.
          */
-        ~TransformDerivative() {};
+        ~TransformDerivative() {}
 
         /**
          * Get the derivative of the rotation part of the transform

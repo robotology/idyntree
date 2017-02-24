@@ -38,7 +38,7 @@ namespace iDynTree
          * The data is not reset to the default for perfomance reason.
          * Please initialize the data in the class before any use.
          */
-        inline Direction() {};
+        inline Direction() {}
 
         /**
          * Constructor from 3 doubles: initialize the direction with the passed values.
@@ -62,7 +62,7 @@ namespace iDynTree
          * and you want to be sure that this direction is actually
          * a unit vector.
          *
-         * @parma tol if the norm of the vector < tol, set the direction to 1,0,0
+         * @param tol if the norm of the vector < tol, set the direction to 1,0,0
          */
         void Normalize(double tol=DEFAULT_TOL);
 

@@ -54,7 +54,7 @@ namespace iDynTree
         /**
          * constructors
          */
-        inline SpatialMotionVector() {};
+        inline SpatialMotionVector() {}
         SpatialMotionVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
         SpatialMotionVector(const SpatialMotionVector & other);
         SpatialMotionVector(const SpatialVector<SpatialMotionVector> & other);
