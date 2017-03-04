@@ -16,6 +16,7 @@
 #include <cassert>
 #include <cmath>
 
+namespace internal {
 namespace kinematics {
 
     //To understand IPOpt log:
@@ -1037,4 +1038,4 @@ namespace kinematics {
 
     }
 }
-
+}

@@ -9,6 +9,7 @@
 #include "Transform.h"
 #include <iDynTree/Core/Transform.h>
 
+namespace internal {
 namespace kinematics {
 
     Transform::Transform(std::string frameName, TransformType type): m_type(type), m_frameName(frameName) {}
@@ -61,4 +62,4 @@ namespace kinematics {
     const iDynTree::Transform& Transform::getTransform() const { return m_transform; }
     const std::string& Transform::getFrameName() const { return m_frameName; }
 }
-
+}

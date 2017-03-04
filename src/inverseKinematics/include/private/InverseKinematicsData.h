@@ -9,46 +9,46 @@
 #ifndef IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H
 #define IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H
 
-#include <iDynTree/HighLevel/DynamicsComputations.h>
+#include <iDynTree/KinDynComputations.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/ClassicalAcc.h>
 #include <vector>
 #include <map>
 #include <IpIpoptApplication.hpp>
 
 #include "InverseKinematics.h"
 
-namespace kinematics {
+namespace internal {
+namespace kinematics{
+
     class InverseKinematicsData;
     class Transform;
-    typedef std::map<int, kinematics::Transform> TransformMap; //ordered map. Order is important
+    typedef std::map<int, internal::kinematics::Transform> TransformMap; //ordered map. Order is important
 
     class InverseKinematicsNLP;
 }
+}
 
-class kinematics::InverseKinematicsData {
+class internal::kinematics::InverseKinematicsData {
 
 //    InverseKinematicsData(const InverseKinematicsData&);
 //    InverseKinematicsData& operator=(const InverseKinematicsData&);
 
-    //!!!: I have to divide variables between the optimized one (buffers inside the Solver, but results and I/O variables here)
+    //!!!: I have to divide variables between the optimized one (buffers inside the Solver, except results and I/O variables here)
     // and the "model" variables.
 
     //Model section
-    iDynTree::HighLevel::DynamicsComputations m_dynamics;
+    iDynTree::KinDynComputations m_dynamics;
 
     //Initial robot state
     struct {
         iDynTree::VectorDynSize jointsConfiguration; //Size dofs
         iDynTree::Transform basePose;
-        iDynTree::VectorDynSize jointsVelocityAndAcceleration; //Size dofs - set to zero
+        iDynTree::VectorDynSize jointsVelocity; //Size dofs - set to zero
         iDynTree::Twist baseTwist;
-        iDynTree::ClassicalAcc baseAcceleration;
-        iDynTree::SpatialAcc worldGravity;
+        iDynTree::Vector3 worldGravity;
     } m_state;
 
     //Number of Dofs in the model
@@ -60,7 +60,7 @@ class kinematics::InverseKinematicsData {
 
     //Optimization section
 
-    enum InverseKinematicsRotationParametrization m_rotationParametrization;
+    enum iDynTree::InverseKinematicsRotationParametrization m_rotationParametrization;
 
     //Joint - variables mapping. By default they match the Dofs
     std::vector<int> m_variablesToJointsMapping;
@@ -74,7 +74,7 @@ class kinematics::InverseKinematicsData {
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
 
     bool areInitialConditionsSet;
-    enum InverseKinematicsTargetResolutionMode targetResolutionMode;
+    enum iDynTree::InverseKinematicsTargetResolutionMode targetResolutionMode;
 
     //Result of optimization
     iDynTree::VectorDynSize m_optimizedRobotDofs;
@@ -99,8 +99,8 @@ public:
      */
     void clearProblem();
 
-    bool addFrameConstraint(const kinematics::Transform& frameTransform);
-    bool addTarget(const kinematics::Transform& frameTransform, double weight = 1);
+    bool addFrameConstraint(const internal::kinematics::Transform& frameTransform);
+    bool addTarget(const internal::kinematics::Transform& frameTransform, double weight = 1);
 
     bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration, const iDynTree::VectorDynSize& jointConfiguration);
     bool setJointConfiguration(const std::string& jointName, const double jointConfiguration);
@@ -111,17 +111,17 @@ public:
     bool setRobotConfiguration(const iDynTree::VectorDynSize& robotConfiguration);
     bool setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* initialCondition);
 
-    void setRotationParametrization(enum InverseKinematicsRotationParametrization parametrization);
-    enum InverseKinematicsRotationParametrization rotationParametrization();
+    void setRotationParametrization(enum iDynTree::InverseKinematicsRotationParametrization parametrization);
+    enum iDynTree::InverseKinematicsRotationParametrization rotationParametrization();
 
-    void setTargetResolutionMode(enum InverseKinematicsTargetResolutionMode mode);
+    void setTargetResolutionMode(enum iDynTree::InverseKinematicsTargetResolutionMode mode);
 
     void prepareForOptimization();
 
     friend class InverseKinematicsNLP;
 
 
-    iDynTree::HighLevel::DynamicsComputations& dynamics();
+    iDynTree::KinDynComputations& dynamics();
     Ipopt::SmartPtr<Ipopt::IpoptApplication> solver;
 
 };

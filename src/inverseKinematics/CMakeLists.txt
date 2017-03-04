@@ -26,7 +26,7 @@ target_include_directories(${libraryname} PRIVATE include/private)
 # CMake 3.0 we can increase the min version
 target_include_directories(${libraryname} SYSTEM PUBLIC ${IPOPT_INCLUDE_DIRS})
 target_include_directories(${libraryname} SYSTEM PRIVATE ${EIGEN3_INCLUDE_DIR})
-target_link_libraries(${libraryname} idyntree-core ${IPOPT_LIBRARIES})
+target_link_libraries(${libraryname} idyntree-core idyntree-high-level ${IPOPT_LIBRARIES})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYN_TREE_IK_HEADERS})
 

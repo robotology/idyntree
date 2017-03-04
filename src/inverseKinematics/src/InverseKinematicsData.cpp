@@ -14,6 +14,7 @@
 
 #include <cassert>
 
+namespace internal {
 namespace kinematics {
 
 //    InverseKinematicsData::InverseKinematicsData(const InverseKinematicsData&) {}
@@ -21,17 +22,16 @@ namespace kinematics {
 
     InverseKinematicsData::InverseKinematicsData()
     : m_dofs(0)
-    , m_rotationParametrization(InverseKinematicsRotationParametrizationQuaternion)
+    , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationQuaternion)
     , areInitialConditionsSet(false)
-    , targetResolutionMode(InverseKinematicsTargetResolutionModeFull)
+    , targetResolutionMode(iDynTree::InverseKinematicsTargetResolutionModeFull)
     , solver(NULL)
     {
         //These variables are touched only once.
         m_state.worldGravity.zero();
-        m_state.worldGravity.setLinearVec3(iDynTree::LinearMotionVector3(0, 0, -9.81));
+        m_state.worldGravity(3) = -9.81;
 
         m_state.baseTwist.zero();
-        m_state.baseAcceleration.zero();
     }
 
     bool InverseKinematicsData::setupFromURDFModelWithFilePath(std::string urdfFilePath)
@@ -64,8 +64,8 @@ namespace kinematics {
         m_state.jointsConfiguration.resize(m_dofs);
         m_state.jointsConfiguration.zero();
 
-        m_state.jointsVelocityAndAcceleration.resize(m_dofs);
-        m_state.jointsVelocityAndAcceleration.zero();
+        m_state.jointsVelocity.resize(m_dofs);
+        m_state.jointsVelocity.zero();
 
         m_state.basePose.setPosition(iDynTree::Position(0, 0, 0));
         m_state.basePose.setRotation(iDynTree::Rotation::Identity());
@@ -145,7 +145,7 @@ namespace kinematics {
         return result.second;
     }
 
-    iDynTree::HighLevel::DynamicsComputations& InverseKinematicsData::dynamics() { return m_dynamics; }
+    iDynTree::KinDynComputations& InverseKinematicsData::dynamics() { return m_dynamics; }
 
     bool InverseKinematicsData::setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* initialCondition)
     {
@@ -186,22 +186,19 @@ namespace kinematics {
         return true;
     }
 
-    void InverseKinematicsData::setRotationParametrization(enum InverseKinematicsRotationParametrization parametrization)
+    void InverseKinematicsData::setRotationParametrization(enum iDynTree::InverseKinematicsRotationParametrization parametrization)
     {
         m_rotationParametrization = parametrization;
     }
 
-    enum InverseKinematicsRotationParametrization InverseKinematicsData::rotationParametrization() { return m_rotationParametrization; }
+    enum iDynTree::InverseKinematicsRotationParametrization InverseKinematicsData::rotationParametrization() { return m_rotationParametrization; }
 
     void InverseKinematicsData::updateRobotConfiguration()
     {
-
-        m_dynamics.setRobotState(m_state.jointsConfiguration,
-                                 m_state.jointsVelocityAndAcceleration,
-                                 m_state.jointsVelocityAndAcceleration,
-                                 m_state.basePose,
+        m_dynamics.setRobotState(m_state.basePose,
+                                 m_state.jointsConfiguration,
                                  m_state.baseTwist,
-                                 m_state.baseAcceleration,
+                                 m_state.jointsVelocity,
                                  m_state.worldGravity);
     }
 
@@ -222,18 +219,19 @@ namespace kinematics {
             }
 
             m_optimizedBasePosition = m_state.basePose.getPosition();
-            if (m_rotationParametrization == InverseKinematicsRotationParametrizationQuaternion) {
+            if (m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
                 m_state.basePose.getRotation().getQuaternion(m_optimizedBaseOrientation);
-            } else if (m_rotationParametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
+            } else if (m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
                 m_state.basePose.getRotation().getRPY(m_optimizedBaseOrientation(0), m_optimizedBaseOrientation(1), m_optimizedBaseOrientation(2));
             }
         }
 
     }
 
-    void InverseKinematicsData::setTargetResolutionMode(enum InverseKinematicsTargetResolutionMode mode)
+    void InverseKinematicsData::setTargetResolutionMode(enum iDynTree::InverseKinematicsTargetResolutionMode mode)
     {
         targetResolutionMode = mode;
     }
 
+}
 }

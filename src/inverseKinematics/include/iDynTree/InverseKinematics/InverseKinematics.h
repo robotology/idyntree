@@ -2,6 +2,7 @@
  * @file InverseKinematics.h
  * @author Francesco Romano
  * @copyright 2016 iCub Facility - Istituto Italiano di Tecnologia
+ * @date 2016
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  *
  */
@@ -23,11 +24,13 @@ namespace iDynTree {
 
 namespace iDynTree {
     class InverseKinematics;
-    class InverseKinematicsData;
 
+    /*!
+     * @brief type of parametrization for the rotation (SO3) element
+     */
     enum InverseKinematicsRotationParametrization {
-        InverseKinematicsRotationParametrizationQuaternion,
-        InverseKinematicsRotationParametrizationRollPitchYaw,
+        InverseKinematicsRotationParametrizationQuaternion, /*!< Quaternion parametrization */
+        InverseKinematicsRotationParametrizationRollPitchYaw, /*!< Roll Pitch Yaw parametrization */
     };
 
     inline unsigned sizeOfRotationParametrization(enum InverseKinematicsRotationParametrization rotationParametrization)
@@ -40,6 +43,14 @@ namespace iDynTree {
         }
     }
 
+    /*!
+     * @brief Specify how to solve for the desired target
+     *
+     * A target frame can be solved as a constraints 
+     * (i.e. if it cannot be obtained the problem is unfeasible)
+     * or as a cost (best-effort to reach the target)
+     * @todo change name as it is ambigous
+     */
     enum InverseKinematicsTargetResolutionMode {
         InverseKinematicsTargetResolutionModeNone = 0, //both as costs
         InverseKinematicsTargetResolutionModePositionOnly = 1, //position as constraint, rotation as cost
@@ -49,13 +60,29 @@ namespace iDynTree {
 }
 
 //TODO: how to handle conflicting requirements
-/**
+/*!
+ * @brief NLP-based Inverse kinematics
  *
- * @note all the cartesian frames must be specified w.r.t. the same world frame.
- * This library does not assume any particular world frame
+ * Given a mechanical structure configuration
+ * \f[ q \in SE(3) \times \mathbb{R}^n \f] and
+ * possibly multiple target frames
+ * \f[ F_i^d \in \SE(3) \f]
+ * the inverse kinematics is responsible to find the
+ * configuration \f$ q^* \f$ such that
+ * \f[ F_i(q^*) = F_i^d \forall i, \f]
+ * where the meaning of the \f$=\f$ and \f$\forall\f$
+ * depends on the resolution mode and on the references specified
+ *
+ * Example
+ * @code
+ * //Allocate an inverse kinematics object
+ * iDynTree::InverseKinematric ik;
+ * @endcode
+ *
+ * @note all the cartesian frames must be specified w.r.t. the same global frame.
+ * This library does not assume any particular global frame
  *
  *
- * \code
  *
  */
 class iDynTree::InverseKinematics
@@ -271,7 +298,7 @@ public:
 
 private:
     
-    InverseKinematicsData *m_pimpl;
+    void* m_pimpl;
 
 };
 

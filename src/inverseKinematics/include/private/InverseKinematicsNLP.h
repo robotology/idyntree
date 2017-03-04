@@ -18,18 +18,20 @@
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/Transform.h>
 
-#include <map> //if moving to c++ use unordered map here which is faster
+#include <map> //if moving to c++11 use unordered map here which is faster
 
 // use expression as sub-expression,
 // then make type of full expression int, discard result
 #define UNUSED_VARIABLE(x) (void)(sizeof((x), 0))
 
+namespace internal {
 namespace kinematics {
     class InverseKinematicsNLP;
     class InverseKinematicsData;
 }
+}
 
-class kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
+class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
 
     struct FrameInfo {
         iDynTree::Transform transform;
