@@ -19,6 +19,7 @@ namespace iDynTree {
     class Transform;
     class Position;
     class Rotation;
+    class Model;
 }
 
 
@@ -49,7 +50,8 @@ namespace iDynTree {
      * A target frame can be solved as a constraints 
      * (i.e. if it cannot be obtained the problem is unfeasible)
      * or as a cost (best-effort to reach the target)
-     * @todo change name as it is ambigous
+     * @todo change name as it is ambigous.
+     * something like InverseKinematicsTargetTreatAsConstraint
      */
     enum InverseKinematicsTargetResolutionMode {
         InverseKinematicsTargetResolutionModeNone = 0, //both as costs
@@ -89,57 +91,17 @@ class iDynTree::InverseKinematics
 {
 
 public:
-    /**
+    /*!
      * Default constructor
      */
     InverseKinematics();
 
-    /**
+    /*!
      * Destructor
      */
     ~InverseKinematics();
 
-    /**
-     * Loads the kinematic model from the URDF file
-     *
-     * @param urdfFile path to the urdf file describing the model
-     *
-     * @return true if successful. False otherwise
-     */
-    bool loadModelFromURDFFileWithName(const std::string& urdfFile);
-
-    /**
-     * Reset the variables.
-     * @note the model is not removed
-     */
-    void clearProblem();
-
-    bool setFloatingBaseOnFrameNamed(const std::string &floatingBaseFrameName);
-
-    /**
-     * Sets the robot configuration
-     *
-     *
-     * @param baseConfiguration  transformation identifying the base pose with respect to the world frame
-     * @param robotConfiguration the robot configuration
-     *
-     * @return true if successful, false otherwise.
-     */
-    bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
-                               const iDynTree::VectorDynSize& jointConfiguration);
-
-    /**
-     * Set configuration for the specified joint
-     *
-     * @param jointName          name of the joint
-     * @param jointConfiguration new value for the joint
-     *
-     * @return true if successful, false otherwise.
-     */
-    bool setJointConfiguration(const std::string& jointName,
-                               const double jointConfiguration);
-
-    /**
+    /*!
      * Sets which joints are considered as optimization variables
      *
      * The map is
@@ -151,14 +113,69 @@ public:
      *
      * @return true if successful, false otherwise.
      */
-    bool setOptimizationVariablesToJointsMapping(const std::vector<std::string> &variableToDoFMapping);
 
+    /*!
+     * @brief Loads the kinematic model from the URDF file
+     *
+     * You can specify an optional list specifying which joints
+     * are considered as optimization variables (all the joints not
+     * contained in the list are considered fixed joint). If the vector is
+     * empty all the joints in the model will be considered as optimization variables.
+     *
+     * @param urdfFile path to the urdf file describing the model
+     * @param variableToDoFMapping list of joints describing which joints are optimized
+     * @return true if successful. False otherwise
+     */
+    bool loadModelFromURDFFileWithName(const std::string& urdfFile,
+                                       const std::vector<std::string> &variableToDoFMapping = std::vector<std::string>());
+
+    /*!
+     * @brief set the kinematic model to be used in the optimization
+     *
+     * All the degrees of freedom of the model will be used as 
+     * optimization variables
+     *
+     * @param model the kinematic model to be used in the optimization
+     * @return true if successful. False otherwise
+     */
+    bool setModel(const iDynTree::Model &model);
+
+    /*!
+     * Reset the variables.
+     * @note the model is not removed
+     */
+    void clearProblem();
+
+    bool setFloatingBaseOnFrameNamed(const std::string &floatingBaseFrameName);
+
+    /*!
+     * Sets the robot configuration
+     *
+     *
+     * @param baseConfiguration  transformation identifying the base pose with respect to the world frame
+     * @param robotConfiguration the robot configuration
+     *
+     * @return true if successful, false otherwise.
+     */
+    bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
+                               const iDynTree::VectorDynSize& jointConfiguration);
+
+    /*!
+     * Set configuration for the specified joint
+     *
+     * @param jointName          name of the joint
+     * @param jointConfiguration new value for the joint
+     *
+     * @return true if successful, false otherwise.
+     */
+    bool setJointConfiguration(const std::string& jointName,
+                               const double jointConfiguration);
 
     void setRotationParametrization(enum InverseKinematicsRotationParametrization parametrization);
 
     enum InverseKinematicsRotationParametrization rotationParametrization();
 
-    /**
+    /*!
      * Adds a (constancy) constraint for the specified frame
      *
      * The constraint is
@@ -172,7 +189,7 @@ public:
      */
     bool addFrameConstraint(const std::string& frameName);
 
-    /**
+    /*!
      * Adds a (constancy) constraint for the specified frame
      *
      * The homogeneous trasformation of the specified frame w.r.t. the inertial frame
@@ -186,7 +203,7 @@ public:
     bool addFrameConstraint(const std::string& frameName,
                             const iDynTree::Transform& constraintValue);
 
-    /**
+    /*!
      * Adds a (constancy) position constraint for the specified frame
      *
      * Only the position component of the frame is constrained
@@ -198,7 +215,7 @@ public:
     bool addFramePositionConstraint(const std::string& frameName,
                                     const iDynTree::Position& constraintValue);
 
-    /**
+    /*!
      * Adds a (constancy) position constraint for the specified frame
      *
      * Only the position component of the frame is constrained
@@ -210,7 +227,7 @@ public:
     bool addFramePositionConstraint(const std::string& frameName,
                                     const iDynTree::Transform& constraintValue);
 
-    /**
+    /*!
      * Adds a (constancy) orientation constraint for the specified frame
      *
      * Only the orientation component of the frame is constrained
@@ -222,7 +239,7 @@ public:
     bool addFrameRotationConstraint(const std::string& frameName,
                                     const iDynTree::Rotation& constraintValue);
 
-    /**
+    /*!
      * Adds a (constancy) orientation constraint for the specified frame
      *
      * Only the orientation component of the frame is constrained
@@ -234,7 +251,7 @@ public:
     bool addFrameRotationConstraint(const std::string& frameName,
                                     const iDynTree::Transform& constraintValue);
 
-    /**
+    /*!
      * Adds a target for the specified frame
      *
      * @param frameName       the name of the frame which represents the target
@@ -257,7 +274,7 @@ public:
     bool addRotationTarget(const std::string& frameName,
                            const iDynTree::Transform& constraintValue);
 
-    /**
+    /*!
      * Sets a desired final configuration for the joints.
      *
      * The solver will try to obtain solutions as similar to the specified configuration as possible
@@ -268,7 +285,7 @@ public:
      */
     bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration);
 
-    /**
+    /*!
      * Initial guess for the solution
      *
      * @param baseTransform     initial base pose

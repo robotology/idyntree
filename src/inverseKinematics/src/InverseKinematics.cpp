@@ -8,15 +8,24 @@
 
 #include "InverseKinematics.h"
 #include "InverseKinematicsData.h"
-#include "Transform.h"
 #include "InverseKinematicsNLP.h"
+#include "Transform.h"
 
 #include <iDynTree/Core/Transform.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 
 #include <cassert>
 #include <iostream>
 
 #define IK_PIMPL(x) static_cast<internal::kinematics::InverseKinematicsData*>((x))
+
+/*
+ * Private implementation is divided in two classes.
+ * - IKData is responsible of handling all the data and functions which are 
+ *   tied to a particular solver
+ * - IKNLP is an IPOPT NLP implementation. It manages only IPOPT related data
+ *   and implements IPOPT related functions
+ */
 
 namespace iDynTree {
 
@@ -34,17 +43,31 @@ namespace iDynTree {
         }
     }
 
-    bool InverseKinematics::loadModelFromURDFFileWithName(const std::string& urdfFile)
+    bool InverseKinematics::loadModelFromURDFFileWithName(const std::string& urdfFile,
+                                                          const std::vector<std::string> &variableToDoFMapping)
+    {
+        ModelLoader loader;
+        if (!loader.loadModelFromFile(urdfFile) || !loader.isValid()) {
+            std::cerr << "Failed to load model from URDF file " << urdfFile << std::endl;
+            return false;
+        }
+
+
+        if (!variableToDoFMapping.empty()) {
+            if (!loader.loadReducedModelFromFullModel(loader.model(), variableToDoFMapping)
+                || !loader.isValid()) {
+                std::cerr << "Failed to reduce model" << std::endl;
+                return false;
+            }
+        }
+
+        return setModel(loader.model());
+    }
+
+    bool InverseKinematics::setModel(const iDynTree::Model &model)
     {
         assert(m_pimpl);
-
-        //First reset the problem
-        IK_PIMPL(m_pimpl)->clearProblem();
-
-        if (!IK_PIMPL(m_pimpl)->setupFromURDFModelWithFilePath(urdfFile))
-            return false;
-
-        return true;
+        return IK_PIMPL(m_pimpl)->setModel(model);
     }
 
     void InverseKinematics::clearProblem()
@@ -69,12 +92,6 @@ namespace iDynTree {
     {
         assert(m_pimpl);
         return IK_PIMPL(m_pimpl)->setJointConfiguration(jointName, jointConfiguration);
-    }
-
-    bool InverseKinematics::setOptimizationVariablesToJointsMapping(const std::vector<std::string> &variableToDoFMapping)
-    {
-        assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->setOptimizationVariablesToJointsMapping(variableToDoFMapping);
     }
 
     void InverseKinematics::setRotationParametrization(enum InverseKinematicsRotationParametrization parametrization)

@@ -6,8 +6,8 @@
  *
  */
 
-#ifndef IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H
-#define IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H
+#ifndef IDYNTREE_INTERNAL_INVERSEKINEMATICSDATA_H
+#define IDYNTREE_INTERNAL_INVERSEKINEMATICSDATA_H
 
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/Core/VectorDynSize.h>
@@ -19,6 +19,10 @@
 #include <IpIpoptApplication.hpp>
 
 #include "InverseKinematics.h"
+
+namespace iDynTree {
+    class Model;
+}
 
 namespace internal {
 namespace kinematics{
@@ -33,8 +37,8 @@ namespace kinematics{
 
 class internal::kinematics::InverseKinematicsData {
 
-//    InverseKinematicsData(const InverseKinematicsData&);
-//    InverseKinematicsData& operator=(const InverseKinematicsData&);
+    InverseKinematicsData(const InverseKinematicsData&);
+    InverseKinematicsData& operator=(const InverseKinematicsData&);
 
     //!!!: I have to divide variables between the optimized one (buffers inside the Solver, except results and I/O variables here)
     // and the "model" variables.
@@ -62,8 +66,7 @@ class internal::kinematics::InverseKinematicsData {
 
     enum iDynTree::InverseKinematicsRotationParametrization m_rotationParametrization;
 
-    //Joint - variables mapping. By default they match the Dofs
-    std::vector<int> m_variablesToJointsMapping;
+//    std::vector<int> m_variablesToJointsMapping;
 
     //Constraints
     TransformMap m_constraints;
@@ -73,10 +76,12 @@ class internal::kinematics::InverseKinematicsData {
     //Size #size of optimization variables
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
 
-    bool areInitialConditionsSet;
+    bool m_areInitialConditionsSet;
     enum iDynTree::InverseKinematicsTargetResolutionMode targetResolutionMode;
 
     //Result of optimization
+    //These variables also containts the initial condition if
+    //the solver has not obtained a solution yet
     iDynTree::VectorDynSize m_optimizedRobotDofs;
     iDynTree::Position m_optimizedBasePosition;
     iDynTree::Vector4 m_optimizedBaseOrientation;
@@ -86,9 +91,8 @@ class internal::kinematics::InverseKinematicsData {
     void updateRobotConfiguration();
 public:
     InverseKinematicsData();
-    
-    bool setupFromURDFModelWithFilePath(std::string urdfFilePath);
-    bool setOptimizationVariablesToJointsMapping(const std::vector<std::string> &variableToDoFMapping);
+
+    bool setModel(const iDynTree::Model& model);
 
     /**
      * Reset variables to defaults
@@ -126,4 +130,4 @@ public:
 
 };
 
-#endif /* end of include guard: IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H */
+#endif /* end of include guard: IDYNTREE_INTERNAL_INVERSEKINEMATICSDATA_H */

@@ -31,16 +31,53 @@ namespace kinematics {
 }
 }
 
+/*!
+ * @brief Implementation of the inverse kinematics with IPOPT
+ *
+ * Implements the following optimization problem
+ * \f{align}{
+ * \min_{x} & \Sum_i || w_H_{f_i} (w_H_{f_i}^d)^{-1} ||^2 + w_q || q_j - q_j^d ||^2 \\
+ * \text{s.t.} & w_H_{f_i} = w_H_{f_i}^d \\
+ *             & q_{min} \leq q \leq q_{max}
+ * \f}
+ * where
+ * \f{align}{
+ * & q = \{w_H_{base}, q_j\} \in SE(3) \times \mathbb{R}^n \\
+ * & w_H_{f_i} \in SE(3)
+ * \f}
+ * 
+ * A target (entirely or partially, with partial meaning the two components composing 
+ * a tranform, i.e. position and orientation) can be enforced by either considering
+ * it as a constraint or as a cost
+ *
+ * \note Implementation details
+ * this class coordinates with InverseKinematicsData to manages internal data
+ * In particular to manages constraints and targets it uses an std::map which is an 
+ * ordered container. Once the order is defined at configuration time, it is exploited
+ * during the optimization by iterating on its elements. As this order is the same as the 
+ * IPOPT variables the fact that we use a map instead of an unordered_map (which is faster
+ * at construction and for random access) is relevant.
+ *
+ * @todo specify weight for different targets
+ * @todo together with InverseKinematicsData there is some cleanup to do
+ * as remove unnecessary variables. This is needed for two reasons:
+ * - it has never been optimized
+ * - we migrated from iDynTree full Model to reduced Model, so we now have equivalence
+ *   between iDynTree DoFs and optimizer DoFs which was not present before
+ */
 class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
 
+    /*! @brief information about a Frame during optimization
+     * All the values are computed given the current robot configuration
+     */
     struct FrameInfo {
-        iDynTree::Transform transform;
-        iDynTree::MatrixDynSize jacobian;
-        iDynTree::MatrixFixSize<4, 3> quaternionDerivativeMap;
+        iDynTree::Transform transform; /*!< frame w.r.t. global frame, i.e. \f$ {}^w R_f \f$ */
+        iDynTree::MatrixDynSize jacobian; /*!< Jacobian */
+        iDynTree::MatrixFixSize<4, 3> quaternionDerivativeMap; /*!< map used during the derivative if the quaternion representation is used */
     };
     typedef std::map<int, FrameInfo> FrameInfoMap;
 
-    InverseKinematicsData& m_data;
+    InverseKinematicsData& m_data; /*!< Reference to the InverseKinematicsData object. Non IPOPT-specific data are saved and accessed in that object */
     iDynTree::VectorDynSize jointsConfiguration; //this is used to update the model at an optimization step
 
     //Buffers and variables used in the optimization
@@ -84,13 +121,17 @@ public:
 
     virtual ~InverseKinematicsNLP();
 
-    virtual bool get_nlp_info(Ipopt::Index& n, Ipopt::Index& m, Ipopt::Index& nnz_jac_g,
-                              Ipopt::Index& nnz_h_lag, IndexStyleEnum& index_style);
+    virtual bool get_nlp_info(Ipopt::Index& n,
+                              Ipopt::Index& m,
+                              Ipopt::Index& nnz_jac_g,
+                              Ipopt::Index& nnz_h_lag,
+                              IndexStyleEnum& index_style);
 
     virtual bool get_bounds_info(Ipopt::Index n, Ipopt::Number* x_l, Ipopt::Number* x_u,
                                  Ipopt::Index m, Ipopt::Number* g_l, Ipopt::Number* g_u);
 
-    virtual bool get_starting_point(Ipopt::Index n, bool init_x, Ipopt::Number* x,
+    virtual bool get_starting_point(Ipopt::Index n,
+                                    bool init_x, Ipopt::Number* x,
                                     bool init_z, Ipopt::Number* z_L, Ipopt::Number* z_U,
                                     Ipopt::Index m, bool init_lambda, Ipopt::Number* lambda);
 
