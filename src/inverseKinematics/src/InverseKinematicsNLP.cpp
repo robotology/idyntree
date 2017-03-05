@@ -217,11 +217,11 @@ namespace kinematics {
         //add target if considered as constraints
         for (TransformMap::const_iterator it = m_data.m_targets.begin();
              it != m_data.m_targets.end(); ++it) {
-            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModePositionOnly
+            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                 && it->second.hasPositionConstraint()) {
                 m += 3;
             }
-            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModeRotationOnly
+            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                 && it->second.hasRotationConstraint()) {
 
                 m += sizeOfRotationParametrization(m_data.m_rotationParametrization);;
@@ -327,7 +327,7 @@ namespace kinematics {
         //target <=> position constraint
         for (TransformMap::const_iterator it = m_data.m_targets.begin();
              it != m_data.m_targets.end(); ++it) {
-            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModePositionOnly
+            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                 && it->second.hasPositionConstraint()) {
                 //This target position is considered as constraint
                 const iDynTree::Position& position = it->second.getPosition();
@@ -338,7 +338,7 @@ namespace kinematics {
                 g_l[constraintIndex] = g_u[constraintIndex] = position(2);
                 constraintIndex++;
             }
-            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModeRotationOnly
+            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                 && it->second.hasRotationConstraint()) {
                 //This target orientation is considered as a constraint
                 const iDynTree::Rotation& rotation = it->second.getRotation();
@@ -428,18 +428,18 @@ namespace kinematics {
 
         obj_value = 0.5 * jointCostWeight * jointError.squaredNorm();
 
-        if (m_data.targetResolutionMode != iDynTree::InverseKinematicsTargetResolutionModeFull) {
+        if (m_data.targetResolutionMode != iDynTree::InverseKinematicsTreatTargetAsConstraintFull) {
             //if at least one cost mode
             //compute errors on rotation
             for (TransformMap::const_iterator target = m_data.m_targets.begin();
                  target != m_data.m_targets.end(); ++target) {
 
-                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModeRotationOnly
+                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                     && target->second.hasPositionConstraint()) {
                     //this implies that position is a soft constraint.
                     //TODO: implement this part
                 }
-                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModePositionOnly
+                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                     && target->second.hasRotationConstraint()) {
                     //this implies that rotation is a soft constraint.
                     //Get actual and desired orientation of target and compute the
@@ -490,16 +490,16 @@ namespace kinematics {
 
         //Second part of the gradient: this part depends on all q, i.e. x
         //compute errors on rotation
-        if (m_data.targetResolutionMode != iDynTree::InverseKinematicsTargetResolutionModeFull) {
+        if (m_data.targetResolutionMode != iDynTree::InverseKinematicsTreatTargetAsConstraintFull) {
             //if at least one cost mode
             for (TransformMap::const_iterator target = m_data.m_targets.begin();
                  target != m_data.m_targets.end(); ++target) {
-                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModeRotationOnly
+                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                     && target->second.hasPositionConstraint()) {
                     //this implies that position is a soft constraint.
                     //TODO: implement this part
                 }
-                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModePositionOnly
+                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                     && target->second.hasRotationConstraint()) {
                     //Derivative is (\tilde{Q} - 1) \partial_x Q
                     //FIXME: see same point when computing f
@@ -581,14 +581,14 @@ namespace kinematics {
              target != m_data.m_targets.end(); ++target) {
             iDynTree::Transform &currentTransform = targetsInfo[target->first].transform;
 
-            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModePositionOnly
+            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                 && target->second.hasPositionConstraint()) {
                 //add the position target as constraint
                 const iDynTree::Position& currentPosition = currentTransform.getPosition();
                 constraints.segment(index, 3) = iDynTree::toEigen(currentPosition);
                 index += 3;
             }
-            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModeRotationOnly
+            if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                 && target->second.hasRotationConstraint()) {
                 //Add the orientation target as constraint
                 const iDynTree::Rotation& currentRotation = currentTransform.getRotation();
@@ -760,9 +760,9 @@ namespace kinematics {
                     //Depending if we need position and/or orientation
                     //we have to adapt different parts of the jacobian
                     int computationOption = 0;
-                    if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModePositionOnly)
+                    if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)
                         computationOption |= ComputeContraintJacobianOptionLinearPart;
-                    if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModeRotationOnly)
+                    if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly)
                         computationOption |= ComputeContraintJacobianOptionAngularPart;
 
                     computeConstraintJacobian(targetInfo.jacobian,
@@ -774,7 +774,7 @@ namespace kinematics {
                     new (&constraintJacobian) iDynTree::iDynTreeEigenMatrixMap (transformWithQuaternionJacobianBuffer.data(), transformWithQuaternionJacobianBuffer.rows(), transformWithQuaternionJacobianBuffer.cols());
                 }
 
-                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModePositionOnly
+                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                     && target->second.hasPositionConstraint()) {
                     //Copy position part
                     for (Ipopt::Index row = 0; row < 3; ++row) {
@@ -792,7 +792,7 @@ namespace kinematics {
                     }
                     constraintIndex += 3;
                 }
-                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTargetResolutionModeRotationOnly
+                if (m_data.targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                     && target->second.hasRotationConstraint()) {
                     //Orientation part
 
@@ -923,7 +923,8 @@ namespace kinematics {
         }
     }
 
-    void InverseKinematicsNLP::omegaToRPYParameters(const iDynTree::Vector3& rpyAngles, iDynTree::Matrix3x3 &map)
+    void InverseKinematicsNLP::omegaToRPYParameters(const iDynTree::Vector3& rpyAngles,
+                                                    iDynTree::Matrix3x3 &map)
     {
         /*
          {}^I omega =

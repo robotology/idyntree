@@ -179,7 +179,7 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->setInitialCondition(baseTransform, initialCondition);
     }
 
-    void InverseKinematics::setTargetResolutionMode(enum InverseKinematicsTargetResolutionMode mode)
+    void InverseKinematics::setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode)
     {
         assert(m_pimpl);
         

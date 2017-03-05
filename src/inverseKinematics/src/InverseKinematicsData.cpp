@@ -25,7 +25,7 @@ namespace kinematics {
     : m_dofs(0)
     , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationQuaternion)
     , m_areInitialConditionsSet(false)
-    , targetResolutionMode(iDynTree::InverseKinematicsTargetResolutionModeFull)
+    , targetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintFull)
     , solver(NULL)
     {
         //These variables are touched only once.
@@ -206,7 +206,7 @@ namespace kinematics {
 
     }
 
-    void InverseKinematicsData::setTargetResolutionMode(enum iDynTree::InverseKinematicsTargetResolutionMode mode)
+    void InverseKinematicsData::setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
     {
         targetResolutionMode = mode;
     }

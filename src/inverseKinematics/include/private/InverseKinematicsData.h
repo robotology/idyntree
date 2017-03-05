@@ -37,47 +37,52 @@ namespace kinematics{
 
 class internal::kinematics::InverseKinematicsData {
 
+    //forbid copy
     InverseKinematicsData(const InverseKinematicsData&);
     InverseKinematicsData& operator=(const InverseKinematicsData&);
 
     //!!!: I have to divide variables between the optimized one (buffers inside the Solver, except results and I/O variables here)
     // and the "model" variables.
 
-    //Model section
-    iDynTree::KinDynComputations m_dynamics;
 
-    //Initial robot state
+    /*! @name Model-related variables
+     */
+    ///@{
+    iDynTree::KinDynComputations m_dynamics; /*!< object for kinematics and dynamics computation */
+
+    /*! 
+     * Variables needed to identify the state of the robot
+     * i.e. position and velocity
+     */
     struct {
-        iDynTree::VectorDynSize jointsConfiguration; //Size dofs
-        iDynTree::Transform basePose;
-        iDynTree::VectorDynSize jointsVelocity; //Size dofs - set to zero
-        iDynTree::Twist baseTwist;
-        iDynTree::Vector3 worldGravity;
+        iDynTree::VectorDynSize jointsConfiguration; /*!< joint configuration \f$ q_j \in \mathbb{R}^n \f$ */
+        iDynTree::Transform basePose; /*!< base position \f$ w_H_{base} \in SE(3) \f$ */
+        iDynTree::VectorDynSize jointsVelocity; /*!< joint velotiy \f$ \dot{q}_j \in \mathbb{R}^n \f$ */
+        iDynTree::Twist baseTwist; /*!< base velocity \f$ [\dot{p}, {}^I \omega] \in se(3) \f$ */
+        iDynTree::Vector3 worldGravity; /*!< gravity acceleration in inertial frame, i.e. -9.81 along z */
     } m_state;
 
-    //Number of Dofs in the model
-    unsigned m_dofs;
+    unsigned m_dofs; /*!< internal DoFs of the model, i.e. size of joint vectors */
 
-    std::vector<std::pair<double, double> > m_jointLimits; //limits for joints (Dofs)
+    std::vector<std::pair<double, double> > m_jointLimits; /*!< Limits for joints. The pair is ordered as min and max */
 
-    //END model section
+    ///@}
 
-    //Optimization section
+    /*! @name Optimization-related variables
+     */
+    ///@{
 
-    enum iDynTree::InverseKinematicsRotationParametrization m_rotationParametrization;
+    enum iDynTree::InverseKinematicsRotationParametrization m_rotationParametrization; /*!< type of parametrization of the orientation */
 
-//    std::vector<int> m_variablesToJointsMapping;
-
-    //Constraints
-    TransformMap m_constraints;
-    TransformMap m_targets;
+    TransformMap m_constraints; /*!< list of hard constraints */
+    TransformMap m_targets; /*!< list of targets */
 
     //Preferred joints configuration for the optimization
     //Size #size of optimization variables
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
 
-    bool m_areInitialConditionsSet;
-    enum iDynTree::InverseKinematicsTargetResolutionMode targetResolutionMode;
+    bool m_areInitialConditionsSet; /*!< True if initial condition are provided by the user */
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode; /*!< Specify how targets are solved (Partially/Fully in cost or as hard constraints) */
 
     //Result of optimization
     //These variables also containts the initial condition if
@@ -86,7 +91,7 @@ class internal::kinematics::InverseKinematicsData {
     iDynTree::Position m_optimizedBasePosition;
     iDynTree::Vector4 m_optimizedBaseOrientation;
 
-    //END Optimization section
+    ///@}
 
     void updateRobotConfiguration();
 public:
@@ -118,7 +123,7 @@ public:
     void setRotationParametrization(enum iDynTree::InverseKinematicsRotationParametrization parametrization);
     enum iDynTree::InverseKinematicsRotationParametrization rotationParametrization();
 
-    void setTargetResolutionMode(enum iDynTree::InverseKinematicsTargetResolutionMode mode);
+    void setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
 
     void prepareForOptimization();
 

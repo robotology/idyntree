@@ -50,14 +50,12 @@ namespace iDynTree {
      * A target frame can be solved as a constraints 
      * (i.e. if it cannot be obtained the problem is unfeasible)
      * or as a cost (best-effort to reach the target)
-     * @todo change name as it is ambigous.
-     * something like InverseKinematicsTargetTreatAsConstraint
      */
-    enum InverseKinematicsTargetResolutionMode {
-        InverseKinematicsTargetResolutionModeNone = 0, //both as costs
-        InverseKinematicsTargetResolutionModePositionOnly = 1, //position as constraint, rotation as cost
-        InverseKinematicsTargetResolutionModeRotationOnly = 1 << 1, //rotation as constraint, position as cost
-        InverseKinematicsTargetResolutionModeFull = InverseKinematicsTargetResolutionModePositionOnly | InverseKinematicsTargetResolutionModeRotationOnly, //both as constraints
+    enum InverseKinematicsTreatTargetAsConstraint {
+        InverseKinematicsTreatTargetAsConstraintNone = 0, //both as costs
+        InverseKinematicsTreatTargetAsConstraintPositionOnly = 1, //position as constraint, rotation as cost
+        InverseKinematicsTreatTargetAsConstraintRotationOnly = 1 << 1, //rotation as constraint, position as cost
+        InverseKinematicsTreatTargetAsConstraintFull = InverseKinematicsTreatTargetAsConstraintPositionOnly | InverseKinematicsTreatTargetAsConstraintRotationOnly, //both as constraints
     };
 }
 
@@ -295,7 +293,7 @@ public:
     bool setInitialCondition(const iDynTree::Transform* baseTransform,
                              const iDynTree::VectorDynSize* initialCondition);
 
-    void setTargetResolutionMode(enum InverseKinematicsTargetResolutionMode mode);
+    void setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode);
 
     bool solve();
 

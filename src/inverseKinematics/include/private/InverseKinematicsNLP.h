@@ -69,6 +69,7 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
 
     /*! @brief information about a Frame during optimization
      * All the values are computed given the current robot configuration
+     * i.e. the one specified in the IPOPT callbacks (x)
      */
     struct FrameInfo {
         iDynTree::Transform transform; /*!< frame w.r.t. global frame, i.e. \f$ {}^w R_f \f$ */
@@ -78,6 +79,7 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
     typedef std::map<int, FrameInfo> FrameInfoMap;
 
     InverseKinematicsData& m_data; /*!< Reference to the InverseKinematicsData object. Non IPOPT-specific data are saved and accessed in that object */
+
     iDynTree::VectorDynSize jointsConfiguration; //this is used to update the model at an optimization step
 
     //Buffers and variables used in the optimization
@@ -96,30 +98,79 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
 
     double jointCostWeight;
 
+    /*!
+     * @brief update all the configuration dependent variables
+     *
+     * Update the robot configuration, the tranforms
+     * the jacobian and all the variables depending on 
+     * the actual value of the optimization state
+     * @param x the current optimization state
+     * @return true if successfull, false otherwise
+     */
     bool updateState(const Ipopt::Number * x);
 
+    /*!
+     * @brief Initialize buffers given the specified problem size
+     *
+     * @param n size of the optimization variable
+     * @param m size of the constraints
+     */
     void initializeInternalData(Ipopt::Index n, Ipopt::Index m);
 
+    /*!
+     * Specify which part of the Jacobian should be computed/updated
+     */
     enum ComputeContraintJacobianOption {
-        ComputeContraintJacobianOptionLinearPart = 1,
-        ComputeContraintJacobianOptionAngularPart = 1 << 1,
+        ComputeContraintJacobianOptionLinearPart = 1, /*!< Update the linear (position) part, i.e. first 3 lines */
+        ComputeContraintJacobianOptionAngularPart = 1 << 1, /*!< Update the angular part, i.e. last 3/4 lines depending on the orientation parametrization */
     };
 
+    /*!
+     * @brief compute the IPOPT Jacobian given an iDynTree Jacobian
+     * 
+     * Jacobians as outputted by iDynTree relates linear and angular velocities
+     * with "internal" velocity (the velocity of the robot).
+     * IPOPT is interested in the Jacobian as the derivative of the constraints
+     * w.r.t. a variation of the optimization variable (not the time derivative).
+     * This function is responsible of adapting the iDynTree Jacobian 
+     * to obtain a Jacobian usable by IPOPT
+     *
+     * @param[in] transformJacobian the Jacobian of the frame Transform
+     * @param[in] quaternionDerivativeMapBuffer map for the quaternion derivative
+     * @param[in] quaternionDerivativeInverseMapBuffer inverse map for the quaternion derivative
+     * @param[in] computationOption bitwise mask of ComputeContraintJacobianOption
+     * @param[out] constraintJacobianBuffer resulting IPOPT compatible Jacobian
+     */
     void computeConstraintJacobian(const iDynTree::MatrixDynSize& transformJacobian,
                                    const iDynTree::MatrixFixSize<4, 3>& quaternionDerivativeMapBuffer,
                                    const iDynTree::MatrixFixSize<3, 4>& quaternionDerivativeInverseMapBuffer,
                                    const int computationOption,
                                    iDynTree::MatrixDynSize& constraintJacobianBuffer);
 
+    /*!
+     * @brief Map between RPY angles and angular velocity in the inertial frame
+     *
+     * The angular velocity \f$ \omega \f$ is related with the derivative
+     * of the RPY angles by a 3x3 matrix, i.e.
+     * \f[
+     * {}^I \omega = M(w) \frac{d w}{dt},
+     * \f]
+     * where \f$ w \in \mathbb{R}^3 \f$ are the roll, pitch and yaw angles.
+     * @param[in] rpyAngles roll, pitch, yaw angles
+     * @param[out] map resulting 3x3 matrix
+     */
     void omegaToRPYParameters(const iDynTree::Vector3& rpyAngles,
                               iDynTree::Matrix3x3& map);
 
 public:
+    /*! Constructor
+     * @param data reference to the InverseKinematicsData object
+     */
     InverseKinematicsNLP(InverseKinematicsData& data);
 
-#pragma mark - IpOpt methods
-
     virtual ~InverseKinematicsNLP();
+
+#pragma mark - IpOpt methods
 
     virtual bool get_nlp_info(Ipopt::Index& n,
                               Ipopt::Index& m,
@@ -165,8 +216,6 @@ public:
     virtual bool get_list_of_nonlinear_variables(Ipopt::Index num_nonlin_vars,
                                                  Ipopt::Index* pos_nonlin_vars);
 
-    void testDerivatives(const iDynTree::VectorDynSize& derivativePoint, int frameIndex, double epsilon, double tolerance, int parametrization);
-
     virtual bool intermediate_callback(Ipopt::AlgorithmMode mode,
                                                              Ipopt::Index iter, Ipopt::Number obj_value,
                                                              Ipopt::Number inf_pr, Ipopt::Number inf_du,
@@ -176,6 +225,9 @@ public:
                                                              Ipopt::Index ls_trials,
                                                              const Ipopt::IpoptData* ip_data,
                                                              Ipopt::IpoptCalculatedQuantities* ip_cq);
+
+    void testDerivatives(const iDynTree::VectorDynSize& derivativePoint, int frameIndex, double epsilon, double tolerance, int parametrization);
+    
 };
 
 #endif /* end of include guard: IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H */
