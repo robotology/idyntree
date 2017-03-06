@@ -61,8 +61,6 @@ namespace kinematics {
             info.jacobian.resize(6, m_data.m_dofs + 6);
             constraintsInfo.insert(FrameInfoMap::value_type(constraint->first, info));
         }
-
-
     }
 
     bool InverseKinematicsNLP::updateState(const Ipopt::Number * x)
@@ -94,11 +92,15 @@ namespace kinematics {
             //Quaternion parametrization
             baseOrientationRotation.fromQuaternion(this->baseOrientation);
 
-            /*As we used a quaternion we have to update the maps
-             *used when we compute the derivatives
+            /*! As we used a quaternion we have to update the maps
+             * used when we compute the derivatives as we
+             * need to update the iDynTree Jacobians.
+             * See Eq. 16 of the IK document
              * i.e.
              *
-             * TODO: write how this maps are used
+             * \f[ J \Rightarrow \bar{J} \f]
+             * that is
+             *
              */
             iDynTree::Vector4 normQuaternioniDyn = this->baseOrientation;
             iDynTree::toEigen(normQuaternioniDyn).normalize();
@@ -106,8 +108,16 @@ namespace kinematics {
             Eigen::Map<Eigen::Matrix<double, 3, 4, Eigen::RowMajor> > inverseMap = iDynTree::toEigen(quaternionDerivativeInverseMapBuffer);
 
             //Set the inverse map
-            /*
-             * TODO: write the map
+            /*!
+             * Inverse map: from omega to derivative of the quaternion
+             * This is done only once as it depends on the quaternion parametrization 
+             * of the orientation of the base
+             *
+             * \f[
+             * G^{-1}(z) = 2 \begin{bmatrix}
+             * -r & -r^\wedge + s 1_3
+             * \end{bmatrix}.
+             * \f]
              */
             inverseMap.setZero();
             inverseMap.leftCols<1>() = -iDynTree::toEigen(normQuaternioniDyn).tail<3>();
@@ -117,11 +127,16 @@ namespace kinematics {
 
             inverseMap *= 2;
 
-            //And the direct map
-            /*
-             * TODO: write the map
+            /*! 
+             * We also have to add an additional component to the inverse map
+             * It can happen that the quaternion given by IPOPT is not normalized.
+             * This matrix corrects this possibility by adding the derivative of a unit quaternion
+             * w.r.t. a non-unitary quaternion, i.e.
+             * \f[
+             *  \frac{\partial z_f}{\partial \bar{z}_B} &= \frac{\partial z_f}{\partial z_B} \frac{\partial z_B}{\partial \bar{z}_B}
+             * \f]
+             * where \f$ \bar{z}_B : z_B = \frac{\bar{z}_B}{\norm{\bar{z}_B}} \f$
              */
-
             Eigen::Matrix<double, 4, 4, Eigen::RowMajor> normalizedQuaternionDerivative;
             Eigen::Map<Eigen::Vector4d> quaternion = iDynTree::toEigen(this->baseOrientation);
             double quaternionSNorm = quaternion.squaredNorm();
@@ -162,6 +177,18 @@ namespace kinematics {
             iDynTree::Vector4 transformQuat;
             frameInfo.transform.getRotation().getQuaternion(transformQuat);
             //compute quaternionDerivativeMapBuffer
+            /*!
+             * Direct map: from omega to quaternion derivative to omega
+             * As this depends on the frame we have to compute it for each frame
+             *
+             * \f[
+             * G(z) = \frac{1}{2} \begin{bmatrix}
+             * -r^\top \\
+             * r^\wedge + s 1_3
+             * \end{bmatrix}.
+             * \f]
+             */
+
             Eigen::Map<Eigen::Matrix<double, 4, 3, Eigen::RowMajor> > map = iDynTree::toEigen(frameInfo.quaternionDerivativeMap);
             map.topRows<1>() = -iDynTree::toEigen(transformQuat).tail<3>().transpose();
             map.bottomRows<3>().setIdentity();
@@ -181,6 +208,7 @@ namespace kinematics {
             iDynTree::Vector4 transformQuat;
             frameInfo.transform.getRotation().getQuaternion(transformQuat);
             //compute quaternionDerivativeMapBuffer
+            //See in target for details on the computation
             Eigen::Map<Eigen::Matrix<double, 4, 3, Eigen::RowMajor> > map = iDynTree::toEigen(frameInfo.quaternionDerivativeMap);
             map.topRows<1>() = -iDynTree::toEigen(transformQuat).tail<3>().transpose();
             map.bottomRows<3>().setIdentity();
@@ -432,20 +460,22 @@ namespace kinematics {
         if (m_data.m_targetResolutionMode != iDynTree::InverseKinematicsTreatTargetAsConstraintFull) {
             //if at least one cost mode
             //compute errors on rotation
+            //TODO missing weights for the elements
             for (TransformMap::const_iterator target = m_data.m_targets.begin();
                  target != m_data.m_targets.end(); ++target) {
 
                 if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                     && target->second.hasPositionConstraint()) {
                     //this implies that position is a soft constraint.
-                    //TODO: implement this part
+                    iDynTree::Position positionError = targetsInfo[target->first].transform.getPosition() - target->second.getPosition();
+                    obj_value += 0.5 * (iDynTree::toEigen(positionError)).squaredNorm();
                 }
                 if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                     && target->second.hasRotationConstraint()) {
                     //this implies that rotation is a soft constraint.
                     //Get actual and desired orientation of target and compute the
-                    //orientation error, as  w_R_f * (w_R_f^d)^_1
-                    //FIXME: Check this! Probably is the contrary (if what I wrote before is correct!!)
+                    //orientation error, as  w_R_f * (w_R_f^d)^{-1} = w_\tilde{R}_w (R tilde expressed in inertial)
+                    //TODO: check if it is correct to express it in the inertial
                     iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
 
                     //Quaternion corresponding to the orientation error
@@ -498,12 +528,23 @@ namespace kinematics {
                 if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                     && target->second.hasPositionConstraint()) {
                     //this implies that position is a soft constraint.
-                    //TODO: implement this part
+                    iDynTree::Position positionError = targetsInfo[target->first].transform.getPosition() - target->second.getPosition();
+
+                    computeConstraintJacobian(targetsInfo[target->first].jacobian,
+                                              targetsInfo[target->first].quaternionDerivativeMap,
+                                              quaternionDerivativeInverseMapBuffer,
+                                              ComputeContraintJacobianOptionLinearPart,
+                                              transformWithQuaternionJacobianBuffer);
+
+                    //Note: transpose probably creates a temporary matrix. As position is
+                    //Fixedsize this should not fire a memory allocation in the heap, but we should
+                    //profile the code at some point
+                    gradient += iDynTree::toEigen(positionError).transpose() * iDynTree::toEigen(transformWithQuaternionJacobianBuffer).topRows<3>();
+
                 }
                 if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                     && target->second.hasRotationConstraint()) {
                     //Derivative is (\tilde{Q} - 1) \partial_x Q
-                    //FIXME: see same point when computing f
                     iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
 
                     iDynTree::Vector4 orientationErrorQuaternion;
@@ -909,6 +950,7 @@ namespace kinematics {
         iDynTree::iDynTreeEigenConstMatrixMap frameJacobian = iDynTree::toEigen(transformJacobianBuffer);
         iDynTree::iDynTreeEigenMatrixMap constraintJacobian = iDynTree::toEigen(constraintJacobianBuffer);
 
+        //This implement Eq. 16 of the IK document
         if (computationOption & ComputeContraintJacobianOptionLinearPart) {
             //Position (linear) part of the Jacobian
             constraintJacobian.topLeftCorner<3, 3>() = frameJacobian.topLeftCorner<3, 3>();

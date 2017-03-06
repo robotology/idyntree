@@ -19,7 +19,7 @@
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/Transform.h>
 
-#include <map> //if moving to c++11 use unordered map here which is faster
+#include <map>
 
 // use expression as sub-expression,
 // then make type of full expression int, discard result
