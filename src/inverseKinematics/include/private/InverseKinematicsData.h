@@ -82,20 +82,31 @@ class internal::kinematics::InverseKinematicsData {
     //Size #size of optimization variables
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
 
-    bool m_areInitialConditionsSet; /*!< True if initial condition are provided by the user */
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_targetResolutionMode; /*!< Specify how targets are solved (Partially/Fully in cost or as hard constraints) */
 
+    bool m_areBaseInitialConditionsSet; /*!< True if initial condition for the base pose are provided by the user */
+    bool m_areJointsInitialConditionsSet; /*!< True if initial condition for the joints are provided by the user */
     //Result of optimization
     //These variables also containts the initial condition if
     //the solver has not obtained a solution yet
     //Actually they contains either the initial condition or the solution
     iDynTree::VectorDynSize m_optimizedRobotDofs;
-    iDynTree::Position m_optimizedBasePosition;
-    iDynTree::Vector4 m_optimizedBaseOrientation;
+    iDynTree::Transform m_optimizedBasePose;
 
     ///@}
 
+    Ipopt::SmartPtr<Ipopt::IpoptApplication> m_solver; /*!< Instance of IPOPT solver */
+
+    /*!
+     * Update internal variables given a change in the robot state
+     */
     void updateRobotConfiguration();
+
+    /*!
+     * Prepare the internal data to run an optimization
+     */
+    void prepareForOptimization();
+
 public:
     /*!
      * Default constructor
@@ -118,7 +129,6 @@ public:
      */
     void clearProblem();
 
-
     /*!
      * Add a constraint for the specified frame
      *
@@ -126,7 +136,6 @@ public:
      * @return true if successfull, false otherwise
      */
     bool addFrameConstraint(const internal::kinematics::Transform& frameTransform);
-
 
     /*!
      * Add a target for the specified frame
@@ -137,16 +146,20 @@ public:
      */
     bool addTarget(const internal::kinematics::Transform& frameTransform, double weight = 1);
 
-
     /*!
-     * Set the initial robot configuration
+     * Set the current robot configuration
+     *
+     * This confguration will be used for all internal calls to kinematics functions
+     *
+     * @note if setInitialCondition is not called then the robot configuration is assumed 
+     * as initial condition
+     * @see setJointConfiguration
      *
      * @param baseConfiguration base configuration (position and orientation)
      * @param jointConfiguration joints configuration
      * @return true if successfull, false otherwise
      */
     bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration, const iDynTree::VectorDynSize& jointConfiguration);
-
 
     /*!
      * Set the initial robot joint configuration for a specified joint
@@ -157,24 +170,25 @@ public:
      */
     bool setJointConfiguration(const std::string& jointName, const double jointConfiguration);
 
-
     /*!
-     * Set the desired robot joint configurations, i.e. guess for the solver
+     * Set the desired robot joint configurations
+     *
+     * This term will be used as reference for the regularization term
      *
      * @param desiredJointConfiguration desired joint configuration
      * @return true if successfull, false otherwise
      */
     bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration);
 
-
     /*!
-
-     I don't remember
-     @param baseTransform
-     @param initialCondition
-     @return true if successfull, false otherwise
+     * Set the initial condition for the solver (i.e. guess solution)
+     *
+     *
+     * @param baseTransform the guess for the base pose or NULL if no guess is provided
+     * @param jointInitialConditions the guess for the joint variables or NULL if no guess is provided
+     * @return true if successfull, false otherwise
      */
-    bool setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* initialCondition);
+    bool setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* jointInitialConditions);
 
     /*!
      * Set the type of parametrization for the SO3 (rotation)
@@ -187,7 +201,6 @@ public:
      * @return the current rotation parametrization
      */
     enum iDynTree::InverseKinematicsRotationParametrization rotationParametrization();
-
 
     /*!
      * Set how targets should be considered in the optimization problem
@@ -202,14 +215,11 @@ public:
      */
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode();
 
-
-    /*!
-     * Prepare the internal data to run an optimization
+    /*! Solve the NLP problem
+     *
+     * @return true if the problem is solved. False otherwise
      */
-    void prepareForOptimization();
-
-    friend class InverseKinematicsNLP;
-
+    bool solveProblem();
 
     /*!
      * Access the Kinematics and Dynamics object used by the solver
@@ -218,7 +228,9 @@ public:
      */
     iDynTree::KinDynComputations& dynamics();
 
-    Ipopt::SmartPtr<Ipopt::IpoptApplication> solver; /*!< I don't remember why I put it public and not private */
+
+    //Declare as friend the IKNLP class so as it can access the private data
+    friend class InverseKinematicsNLP;
 
 };
 

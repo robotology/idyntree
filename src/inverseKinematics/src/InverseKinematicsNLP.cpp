@@ -414,17 +414,29 @@ namespace kinematics {
         
         //initial conditions
         if (init_x) {
+            iDynTree::Position position = m_data.m_optimizedBasePose.getPosition();
             for (Ipopt::Index i = 0; i < 3; ++i) {
-                x[i] = m_data.m_optimizedBasePosition(i);
+                x[i] = position(i);
             }
-            for (Ipopt::Index i = 0; i < sizeOfRotationParametrization(m_data.m_rotationParametrization); ++i) {
-                x[3 + i] = m_data.m_optimizedBaseOrientation(i);
+
+            iDynTree::Vector4 baseQuaternion;
+            Eigen::Map<Eigen::VectorXd> baseRotation(&x[3], sizeOfRotationParametrization(m_data.m_rotationParametrization));
+
+            switch (m_data.m_rotationParametrization) {
+                case iDynTree::InverseKinematicsRotationParametrizationQuaternion:
+                    baseRotation = iDynTree::toEigen(m_data.m_optimizedBasePose.getRotation().asQuaternion());
+                    break;
+                case iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw:
+                    baseRotation.head<3>() = iDynTree::toEigen(m_data.m_optimizedBasePose.getRotation().asRPY());
+                    break;
+                default:
+                    return false;
             }
 
             Ipopt::Index baseSize = 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization);
-            for (Ipopt::Index i = 0; i < (n - baseSize); ++i) {
-                x[baseSize + i] = m_data.m_optimizedRobotDofs(i);
-            }
+            Eigen::Map<Eigen::VectorXd> joints(&x[baseSize], n - baseSize);
+            joints = iDynTree::toEigen(m_data.m_optimizedRobotDofs);
+
         }
         //We do not initialize the other components
         if (init_z) {
@@ -844,17 +856,32 @@ namespace kinematics {
                                                  Ipopt::IpoptCalculatedQuantities* ip_cq)
     {
         //TODO: save the status
-        m_data.m_optimizedBasePosition(0) = x[0];
-        m_data.m_optimizedBasePosition(1) = x[1];
-        m_data.m_optimizedBasePosition(2) = x[2];
 
 
-        //TODO: check status
+        //Obtain base position
+        iDynTree::Position basePosition;
+        basePosition(0) = x[0];
+        basePosition(1) = x[1];
+        basePosition(2) = x[2];
 
-        //orientation
+        //Obtain base orientation
+        iDynTree::Vector4 baseOrientationSerialization;
         for (unsigned i = 0; i < sizeOfRotationParametrization(m_data.m_rotationParametrization); ++i) {
-            m_data.m_optimizedBaseOrientation(i) = x[3 + i];
+            baseOrientationSerialization(i) = x[3 + i];
         }
+
+        iDynTree::Rotation baseOrientation = iDynTree::Rotation::Identity();
+        if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
+            baseOrientation.fromQuaternion(baseOrientationSerialization);
+
+        } else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
+            baseOrientation = iDynTree::Rotation::RPY(baseOrientationSerialization(0),
+                                                      baseOrientationSerialization(1),
+                                                      baseOrientationSerialization(2));
+        }
+        //Save base pose
+        m_data.m_optimizedBasePose.setPosition(basePosition);
+        m_data.m_optimizedBasePose.setRotation(baseOrientation);
 
         //joints
         for (unsigned index = 0; index < m_data.m_dofs; ++index) {

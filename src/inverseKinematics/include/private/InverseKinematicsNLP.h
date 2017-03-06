@@ -7,7 +7,6 @@
  *
  */
 
-
 #ifndef IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H
 #define IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H
 
@@ -16,7 +15,6 @@
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/Transform.h>
 
 #include <map>

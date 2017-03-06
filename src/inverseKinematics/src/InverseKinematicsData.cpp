@@ -8,6 +8,7 @@
  */
 
 #include "InverseKinematicsData.h"
+#include "InverseKinematicsNLP.h"
 #include "Transform.h"
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/ClassicalAcc.h>
@@ -25,9 +26,10 @@ namespace kinematics {
     InverseKinematicsData::InverseKinematicsData()
     : m_dofs(0)
     , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationQuaternion)
-    , m_areInitialConditionsSet(false)
     , m_targetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintFull)
-    , solver(NULL)
+    , m_areBaseInitialConditionsSet(false)
+    , m_areJointsInitialConditionsSet(false)
+    , m_solver(NULL)
     {
         //These variables are touched only once.
         m_state.worldGravity.zero();
@@ -99,7 +101,8 @@ namespace kinematics {
         m_constraints.clear();
         m_targets.clear();
 
-        m_areInitialConditionsSet = false;
+        m_areBaseInitialConditionsSet = false;
+        m_areJointsInitialConditionsSet = false;
     }
 
     bool InverseKinematicsData::addFrameConstraint(const kinematics::Transform& frameTransform)
@@ -129,13 +132,14 @@ namespace kinematics {
                                                     const iDynTree::VectorDynSize* initialJointCondition)
     {
         if (baseTransform) {
-            m_optimizedBasePosition = baseTransform->getPosition();
-            //if quaternion
-            baseTransform->getRotation().getQuaternion(m_optimizedBaseOrientation);
+            m_optimizedBasePose = *baseTransform;
+            m_areBaseInitialConditionsSet = true;
         }
         if (initialJointCondition) {
             m_optimizedRobotDofs = *initialJointCondition;
+            m_areJointsInitialConditionsSet = true;
         }
+
         return true;
     }
 
@@ -162,7 +166,6 @@ namespace kinematics {
     {
         assert(m_optimizedRobotDofs.size() == desiredJointConfiguration.size());
         m_preferredJointsConfiguration = desiredJointConfiguration;
-        updateRobotConfiguration();
         return true;
     }
 
@@ -186,22 +189,21 @@ namespace kinematics {
     {
         //Do all stuff needed before starting an optimization problem
         //1) prepare initial condition if not explicitly set
-        if (!m_areInitialConditionsSet) {
-            for (size_t i = 0; i < m_optimizedRobotDofs.size(); ++i) {
-                //check joint to be inside limit
-                double jointValue = m_state.jointsConfiguration(i);
-                if (jointValue < m_jointLimits[i].first || jointValue > m_jointLimits[i].second) {
-                    //set the initial value to be at the middle of the limits
-                    jointValue = (m_jointLimits[i].second + m_jointLimits[i].first) / 2.0;
-                }
-                m_optimizedRobotDofs(i) = jointValue;
-            }
+        if (!m_areBaseInitialConditionsSet) {
+            m_optimizedBasePose = m_state.basePose;
+        }
 
-            m_optimizedBasePosition = m_state.basePose.getPosition();
-            if (m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
-                m_state.basePose.getRotation().getQuaternion(m_optimizedBaseOrientation);
-            } else if (m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
-                m_state.basePose.getRotation().getRPY(m_optimizedBaseOrientation(0), m_optimizedBaseOrientation(1), m_optimizedBaseOrientation(2));
+        if (!m_areJointsInitialConditionsSet) {
+            m_optimizedRobotDofs = m_state.jointsConfiguration;
+        }
+
+        //2) Check joint limits.. Is this necessary?
+        for (size_t i = 0; i < m_optimizedRobotDofs.size(); ++i) {
+            //check joint to be inside limit
+            double &jointValue = m_optimizedRobotDofs(i);
+            if (jointValue < m_jointLimits[i].first || jointValue > m_jointLimits[i].second) {
+                //set the initial value to be at the middle of the limits
+                jointValue = (m_jointLimits[i].second + m_jointLimits[i].first) / 2.0;
             }
         }
 
@@ -215,6 +217,47 @@ namespace kinematics {
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint InverseKinematicsData::targetResolutionMode()
     {
         return m_targetResolutionMode;
+    }
+
+    bool InverseKinematicsData::solveProblem()
+    {
+        Ipopt::ApplicationReturnStatus solverStatus;
+
+        if (Ipopt::IsNull(m_solver)) {
+            m_solver = IpoptApplicationFactory();
+
+            //TODO: set options
+            //For example, one needed option is the linear solver type
+            //Best thing is to wrap the IPOPT options with new structure so as to abstract them
+            m_solver->Options()->SetStringValue("hessian_approximation", "limited-memory");
+            //            m_pimpl->solver->Options()->SetIntegerValue("max_iter", 1);
+#ifndef NDEBUG
+            m_solver->Options()->SetStringValue("derivative_test", "first-order");
+#endif
+
+            solverStatus = m_solver->Initialize();
+            if (solverStatus != Ipopt::Solve_Succeeded) {
+                return false;
+            }
+        }
+
+        prepareForOptimization();
+
+        //instantiate the IpOpt problem
+        internal::kinematics::InverseKinematicsNLP *iKin = new internal::kinematics::InverseKinematicsNLP(*this);
+        //Do something (if necessary)
+        Ipopt::SmartPtr<Ipopt::TNLP> problem(iKin);
+
+
+        // Ask Ipopt to solve the problem
+        solverStatus = m_solver->OptimizeTNLP(problem);
+
+        if (solverStatus == Ipopt::Solve_Succeeded) {
+            std::cout << "*** The problem solved!\n";
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

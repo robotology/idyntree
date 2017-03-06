@@ -8,7 +8,6 @@
 
 #include "InverseKinematics.h"
 #include "InverseKinematicsData.h"
-#include "InverseKinematicsNLP.h"
 #include "Transform.h"
 
 #include <iDynTree/Core/Transform.h>
@@ -194,43 +193,7 @@ namespace iDynTree {
     bool InverseKinematics::solve()
     {
         assert(m_pimpl);
-        //TODO: add error output
-
-        Ipopt::ApplicationReturnStatus solverStatus;
-
-        if (Ipopt::IsNull(IK_PIMPL(m_pimpl)->solver)) {
-            IK_PIMPL(m_pimpl)->solver = IpoptApplicationFactory();
-
-            //TODO: set options
-            IK_PIMPL(m_pimpl)->solver->Options()->SetStringValue("hessian_approximation", "limited-memory");
-//            m_pimpl->solver->Options()->SetIntegerValue("max_iter", 1);
-#ifndef NDEBUG
-            IK_PIMPL(m_pimpl)->solver->Options()->SetStringValue("derivative_test", "first-order");
-#endif
-
-            solverStatus = IK_PIMPL(m_pimpl)->solver->Initialize();
-            if (solverStatus != Ipopt::Solve_Succeeded) {
-                return false;
-            }
-        }
-
-        IK_PIMPL(m_pimpl)->prepareForOptimization();
-
-        //instantiate the IpOpt problem
-        internal::kinematics::InverseKinematicsNLP *iKin = new internal::kinematics::InverseKinematicsNLP(*IK_PIMPL(m_pimpl));
-        //Do something (if necessary)
-        Ipopt::SmartPtr<Ipopt::TNLP> problem(iKin);
-
-
-        // Ask Ipopt to solve the problem
-        solverStatus = IK_PIMPL(m_pimpl)->solver->OptimizeTNLP(problem);
-
-        if (solverStatus == Ipopt::Solve_Succeeded) {
-            std::cout << "*** The problem solved!\n";
-            return true;
-        } else {
-            return false;
-        }
+        return IK_PIMPL(m_pimpl)->solveProblem();
     }
 
     bool InverseKinematics::getPoseForFrame(const std::string& frameName,
