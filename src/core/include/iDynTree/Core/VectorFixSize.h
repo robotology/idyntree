@@ -113,6 +113,7 @@ namespace iDynTree
     template<unsigned int VecSize>
     VectorFixSize<VecSize>::VectorFixSize()
     {
+        
     }
 
 

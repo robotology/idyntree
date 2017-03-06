@@ -88,6 +88,7 @@ class internal::kinematics::InverseKinematicsData {
     //Result of optimization
     //These variables also containts the initial condition if
     //the solver has not obtained a solution yet
+    //Actually they contains either the initial condition or the solution
     iDynTree::VectorDynSize m_optimizedRobotDofs;
     iDynTree::Position m_optimizedBasePosition;
     iDynTree::Vector4 m_optimizedBaseOrientation;
@@ -96,11 +97,19 @@ class internal::kinematics::InverseKinematicsData {
 
     void updateRobotConfiguration();
 public:
+    /*!
+     * Default constructor
+     */
     InverseKinematicsData();
 
+    /*!
+     * Set the kinematic model to be used for the computations
+     * @param model the model to be used
+     * @return true if successfull, false otherwise
+     */
     bool setModel(const iDynTree::Model& model);
 
-    /**
+    /*!
      * Reset variables to defaults
      *
      * If the model has been loaded, defaults means #dofs size
@@ -109,31 +118,107 @@ public:
      */
     void clearProblem();
 
+
+    /*!
+     * Add a constraint for the specified frame
+     *
+     * @param frameTransform the frame to be considered as a constraint
+     * @return true if successfull, false otherwise
+     */
     bool addFrameConstraint(const internal::kinematics::Transform& frameTransform);
+
+
+    /*!
+     * Add a target for the specified frame
+     *
+     * @param frameTransform the frame to be considered as a target
+     * @param weight weight for the associated target. Currently ignored
+     * @return true if successfull, false otherwise
+     */
     bool addTarget(const internal::kinematics::Transform& frameTransform, double weight = 1);
 
+
+    /*!
+     * Set the initial robot configuration
+     *
+     * @param baseConfiguration base configuration (position and orientation)
+     * @param jointConfiguration joints configuration
+     * @return true if successfull, false otherwise
+     */
     bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration, const iDynTree::VectorDynSize& jointConfiguration);
+
+
+    /*!
+     * Set the initial robot joint configuration for a specified joint
+     *
+     * @param jointName name of the joint
+     * @param jointConfiguration value of the joint
+     * @return true if successfull, false otherwise
+     */
     bool setJointConfiguration(const std::string& jointName, const double jointConfiguration);
 
+
+    /*!
+     * Set the desired robot joint configurations, i.e. guess for the solver
+     *
+     * @param desiredJointConfiguration desired joint configuration
+     * @return true if successfull, false otherwise
+     */
     bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration);
 
-    
-    bool setRobotConfiguration(const iDynTree::VectorDynSize& robotConfiguration);
+
+    /*!
+
+     I don't remember
+     @param baseTransform
+     @param initialCondition
+     @return true if successfull, false otherwise
+     */
     bool setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* initialCondition);
 
+    /*!
+     * Set the type of parametrization for the SO3 (rotation)
+     * Currently RPY and Quaternion are supported
+     * @param parametrization type of parametrization
+     */
     void setRotationParametrization(enum iDynTree::InverseKinematicsRotationParametrization parametrization);
+
+    /*! Return the current rotation parametrization used by the solver
+     * @return the current rotation parametrization
+     */
     enum iDynTree::InverseKinematicsRotationParametrization rotationParametrization();
 
+
+    /*!
+     * Set how targets should be considered in the optimization problem
+     * i.e. as soft or hard constraints
+     *
+     * @param mode how to treat the targets
+     */
     void setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
+
+    /*! Return the current rotation parametrization used by the solver
+     * @return the current rotation parametrization
+     */
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode();
 
+
+    /*!
+     * Prepare the internal data to run an optimization
+     */
     void prepareForOptimization();
 
     friend class InverseKinematicsNLP;
 
 
+    /*!
+     * Access the Kinematics and Dynamics object used by the solver
+     *
+     * @return reference to the kinematics and dynamics object
+     */
     iDynTree::KinDynComputations& dynamics();
-    Ipopt::SmartPtr<Ipopt::IpoptApplication> solver;
+
+    Ipopt::SmartPtr<Ipopt::IpoptApplication> solver; /*!< I don't remember why I put it public and not private */
 
 };
 

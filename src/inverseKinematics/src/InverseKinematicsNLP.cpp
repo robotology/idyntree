@@ -559,7 +559,6 @@ namespace kinematics {
                                               finalJacobianBuffer);
 
                     //These are the first baseSize columns + the joint columns
-                    //TODO: create a buffer here and assign
                     gradient += (iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows<4>();
                 }
             }
@@ -1020,6 +1019,7 @@ namespace kinematics {
         std::cerr << "Jacobian (iDynTree)\n" << dynTreeJacobian.toString() << "\n";
 
         if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
+            iDynTree::MatrixFixSize<4, 3> quaternionDerivativeMapBuffer;
             computeConstraintJacobian(dynTreeJacobian,
                                       quaternionDerivativeMapBuffer,
                                       quaternionDerivativeInverseMapBuffer,
