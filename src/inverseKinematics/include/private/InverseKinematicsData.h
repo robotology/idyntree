@@ -2,7 +2,8 @@
  * @file InverseKinematicsData.h
  * @author Francesco Romano
  * @copyright 2016 iCub Facility - Istituto Italiano di Tecnologia
- * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *            Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ * @date 2016
  *
  */
 
@@ -82,7 +83,7 @@ class internal::kinematics::InverseKinematicsData {
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
 
     bool m_areInitialConditionsSet; /*!< True if initial condition are provided by the user */
-    enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode; /*!< Specify how targets are solved (Partially/Fully in cost or as hard constraints) */
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_targetResolutionMode; /*!< Specify how targets are solved (Partially/Fully in cost or as hard constraints) */
 
     //Result of optimization
     //These variables also containts the initial condition if
@@ -124,6 +125,7 @@ public:
     enum iDynTree::InverseKinematicsRotationParametrization rotationParametrization();
 
     void setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode();
 
     void prepareForOptimization();
 

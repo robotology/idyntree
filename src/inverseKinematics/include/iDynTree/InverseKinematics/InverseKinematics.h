@@ -2,8 +2,8 @@
  * @file InverseKinematics.h
  * @author Francesco Romano
  * @copyright 2016 iCub Facility - Istituto Italiano di Tecnologia
+ *            Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  * @date 2016
- * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  *
  */
 
@@ -173,6 +173,10 @@ public:
 
     enum InverseKinematicsRotationParametrization rotationParametrization();
 
+    /*! @name Constraints-related methods
+     */
+    ///@{
+
     /*!
      * Adds a (constancy) constraint for the specified frame
      *
@@ -249,6 +253,12 @@ public:
     bool addFrameRotationConstraint(const std::string& frameName,
                                     const iDynTree::Transform& constraintValue);
 
+    ///@}
+
+    /*! @name Target-related methods
+     */
+    ///@{
+
     /*!
      * Adds a target for the specified frame
      *
@@ -260,17 +270,81 @@ public:
     bool addTarget(const std::string& frameName,
                    const iDynTree::Transform& constraintValue);
 
+
+    /*!
+     * Adds a position (3D) target for the specified frame
+     *
+     * @param frameName the name of the frame which represents the target
+     * @param constraintValue value that the origin of the frame frameName should reach
+     * @return true if successful, false otherwise.
+     */
     bool addPositionTarget(const std::string& frameName,
                            const iDynTree::Position& constraintValue);
 
+    /*!
+     * Adds a position (3D) target for the specified frame
+     *
+     * \note only the position component of the constraintValue parameter
+     * will be considered
+     * @param frameName the name of the frame which represents the target
+     * @param constraintValue value that the origin of the frame frameName should reach
+     * @return true if successful, false otherwise.
+     */
     bool addPositionTarget(const std::string& frameName,
                            const iDynTree::Transform& constraintValue);
 
+    /*!
+     * Adds an orientation target for the specified frame
+     *
+     * @param frameName the name of the frame which represents the target
+     * @param constraintValue value that the orientation of the frame frameName should reach
+     * @return true if successful, false otherwise.
+     */
     bool addRotationTarget(const std::string& frameName,
                            const iDynTree::Rotation& constraintValue);
 
+    /*!
+     * Adds an orientation target for the specified frame
+     *
+     * \note only the orientation component of the constraintValue parameter
+     * will be considered
+     *
+     * This call is equivalent to call
+     * @code
+     * addRotationTarget(frameName, constraintValue.rotation());
+     * @endcode
+     * @see 
+     * addRotationTarget(const std::string&, const iDynTree::Rotation&)
+     * addTarget(const std::string&, const iDynTree::Transform&)
+     *
+     * @param frameName the name of the frame which represents the target
+     * @param constraintValue value that the orientation of the frame frameName should reach
+     * @return true if successful, false otherwise.
+     */
     bool addRotationTarget(const std::string& frameName,
                            const iDynTree::Transform& constraintValue);
+
+
+    /*!
+     * Specify the method to solve the specified targets
+     * 
+     * Targets can be solved fully as cost, partially (position or orientation) 
+     * as cost and the other component as hard constraint or 
+     * fully as hard constraints
+     * @see targetResolutionMode()
+     *
+     * @param mode the target resolution mode
+     */
+    void setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode);
+
+    /*!
+     * Return the current target resolution mode
+     *
+     * @see setTargetResolutionMode
+     * @return the current target resolution mode
+     */
+    enum InverseKinematicsTreatTargetAsConstraint targetResolutionMode();
+    ///@}
 
     /*!
      * Sets a desired final configuration for the joints.
@@ -293,8 +367,9 @@ public:
     bool setInitialCondition(const iDynTree::Transform* baseTransform,
                              const iDynTree::VectorDynSize* initialCondition);
 
-    void setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode);
 
+
+    // This is one part should be checked so as to properly enable warm start
     bool solve();
 
 
@@ -313,7 +388,7 @@ public:
 
 private:
     
-    void* m_pimpl;
+    void* m_pimpl; /*!< private implementation */
 
 };
 

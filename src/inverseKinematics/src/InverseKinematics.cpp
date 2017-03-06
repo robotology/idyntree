@@ -2,8 +2,8 @@
  * @file InverseKinematics.cpp
  * @author Francesco Romano
  * @copyright 2016 iCub Facility - Istituto Italiano di Tecnologia
- * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
- *
+ *            Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ * @date 2016
  */
 
 #include "InverseKinematics.h"
@@ -182,9 +182,14 @@ namespace iDynTree {
     void InverseKinematics::setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode)
     {
         assert(m_pimpl);
-        
+        IK_PIMPL(m_pimpl)->setTargetResolutionMode(mode);
     }
 
+    enum InverseKinematicsTreatTargetAsConstraint InverseKinematics::targetResolutionMode()
+    {
+        assert(m_pimpl);
+        return IK_PIMPL(m_pimpl)->targetResolutionMode();
+    }
 
     bool InverseKinematics::solve()
     {

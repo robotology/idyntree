@@ -2,7 +2,8 @@
  * @file InverseKinematicsData.cpp
  * @author Francesco Romano
  * @copyright 2016 iCub Facility - Istituto Italiano di Tecnologia
- * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *            Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ * @date 2016
  *
  */
 
@@ -25,7 +26,7 @@ namespace kinematics {
     : m_dofs(0)
     , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationQuaternion)
     , m_areInitialConditionsSet(false)
-    , targetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintFull)
+    , m_targetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintFull)
     , solver(NULL)
     {
         //These variables are touched only once.
@@ -208,7 +209,12 @@ namespace kinematics {
 
     void InverseKinematicsData::setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
     {
-        targetResolutionMode = mode;
+        m_targetResolutionMode = mode;
+    }
+
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint InverseKinematicsData::targetResolutionMode()
+    {
+        return m_targetResolutionMode;
     }
 
 }
