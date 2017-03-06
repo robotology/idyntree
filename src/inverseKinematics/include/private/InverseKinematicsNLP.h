@@ -84,7 +84,6 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
     iDynTree::VectorDynSize jointsConfiguration; //this is used to update the model at an optimization step
 
     //Buffers and variables used in the optimization
-    iDynTree::MatrixDynSize transformWithQuaternionJacobianBuffer;
     iDynTree::MatrixFixSize<4, 3> quaternionDerivativeMapBuffer;
     iDynTree::MatrixFixSize<3, 4> quaternionDerivativeInverseMapBuffer;
     iDynTree::MatrixDynSize finalJacobianBuffer;

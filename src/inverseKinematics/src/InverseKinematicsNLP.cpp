@@ -41,7 +41,6 @@ namespace kinematics {
         optimizedJoints.resize(n - (3 + sizeOfRotationParametrization(m_data.m_rotationParametrization)));
 
         //resize some buffers
-        transformWithQuaternionJacobianBuffer.resize(7, m_data.m_dofs + 7); //used only for quaternion
         finalJacobianBuffer.resize((3 + sizeOfRotationParametrization(m_data.m_rotationParametrization)), n);
 
         constraintsInfo.clear();
@@ -534,12 +533,12 @@ namespace kinematics {
                                               targetsInfo[target->first].quaternionDerivativeMap,
                                               quaternionDerivativeInverseMapBuffer,
                                               ComputeContraintJacobianOptionLinearPart,
-                                              transformWithQuaternionJacobianBuffer);
+                                              finalJacobianBuffer);
 
                     //Note: transpose probably creates a temporary matrix. As position is
                     //Fixedsize this should not fire a memory allocation in the heap, but we should
                     //profile the code at some point
-                    gradient += iDynTree::toEigen(positionError).transpose() * iDynTree::toEigen(transformWithQuaternionJacobianBuffer).topRows<3>();
+                    gradient += iDynTree::toEigen(positionError).transpose() * iDynTree::toEigen(finalJacobianBuffer).topRows<3>();
 
                 }
                 if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
@@ -557,19 +556,11 @@ namespace kinematics {
                                               targetsInfo[target->first].quaternionDerivativeMap,
                                               quaternionDerivativeInverseMapBuffer,
                                               ComputeContraintJacobianOptionAngularPart,
-                                              transformWithQuaternionJacobianBuffer);
-
-                    //TODO: remove difference between complete and final.
-                    //it is a leftover when we did not have the reduced model
-                    //and we had to manually select the DoFs
-                    iDynTree::iDynTreeEigenMatrixMap completeJacobian = iDynTree::toEigen(transformWithQuaternionJacobianBuffer);
-                    iDynTree::iDynTreeEigenMatrixMap finalJacobian = iDynTree::toEigen(finalJacobianBuffer);
-                    finalJacobian = completeJacobian;
-
+                                              finalJacobianBuffer);
 
                     //These are the first baseSize columns + the joint columns
                     //TODO: create a buffer here and assign
-                    gradient += (iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).transpose() * finalJacobian.bottomRows<4>();
+                    gradient += (iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows<4>();
                 }
             }
         }
@@ -715,7 +706,6 @@ namespace kinematics {
                     return false;
             }
 
-            Ipopt::Index baseSize = 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization);
             Ipopt::Index constraintIndex = 0;
 
             for (TransformMap::const_iterator constraint = m_data.m_constraints.begin();
@@ -737,10 +727,10 @@ namespace kinematics {
                                               constraintInfo.quaternionDerivativeMap,
                                               quaternionDerivativeInverseMapBuffer,
                                               ComputeContraintJacobianOptionLinearPart|ComputeContraintJacobianOptionAngularPart,
-                                              transformWithQuaternionJacobianBuffer);
+                                              finalJacobianBuffer);
 
                     //The Eigen map now points to the modified Jacobian (7 x 7 + ndofs)
-                    new (&constraintJacobian) iDynTree::iDynTreeEigenMatrixMap(transformWithQuaternionJacobianBuffer.data(), transformWithQuaternionJacobianBuffer.rows(), transformWithQuaternionJacobianBuffer.cols());
+                    new (&constraintJacobian) iDynTree::iDynTreeEigenMatrixMap(finalJacobianBuffer.data(), finalJacobianBuffer.rows(), finalJacobianBuffer.cols());
 
                 } else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
                     //RPY parametrization
@@ -755,35 +745,17 @@ namespace kinematics {
                 //We have to assign it to the correct variable
                 if (constraint->second.hasPositionConstraint()) {
                     //Position part
-                    for (Ipopt::Index row = 0; row < 3; ++row) {
-                        //base part
-                        //TODO: the following part can be merged as we do not have anymore
-                        //Maybe use EigenMap directly
-                        //the dof <-> joint mapping
-                        for (Ipopt::Index col = 0; col < baseSize; ++col) {
-                            values[(constraintIndex + row) * n + col] = constraintJacobian(row, col);
-                        }
-                        //joints part
-                        for (Ipopt::Index col = 0; col < (n - baseSize); ++col) {
-                            values[(constraintIndex + row) * n + col + baseSize] = constraintJacobian(row, baseSize + col);
-                        }
-                    }
+                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex], 3, n);
+                    currentConstraint = constraintJacobian.topRows<3>();
                     constraintIndex += 3;
                 }
                 if (constraint->second.hasRotationConstraint()) {
                     //Orientation part
                     for (Ipopt::Index row = 0; row < sizeOfRotationParametrization(m_data.m_rotationParametrization); ++row) {
-                        //TODO: the following part can be merged as we do not have anymore
-                        //the dof <-> joint mapping
-                        //Maybe use EigenMap directly
-                        //base part
-                        for (Ipopt::Index col = 0; col < baseSize; ++col) {
-                            values[(constraintIndex + row) * n + col] = transformWithQuaternionJacobianBuffer(3 + row, col);
-                        }
-                        //joints part
-                        for (Ipopt::Index col = 0; col < (n - baseSize); ++col) {
-                            values[(constraintIndex + row) * n + col + baseSize] = transformWithQuaternionJacobianBuffer(3 + row, baseSize + col);
-                        }
+
+                        Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex], sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
+                        currentConstraint = constraintJacobian.bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                        constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                     }
                     constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                 }
@@ -811,46 +783,29 @@ namespace kinematics {
                                               targetInfo.quaternionDerivativeMap,
                                               quaternionDerivativeInverseMapBuffer,
                                               computationOption,
-                                              transformWithQuaternionJacobianBuffer);
-                    //The Eigen map now points to the modified Jacobian (7 x 7 + ndofs)
-                    new (&constraintJacobian) iDynTree::iDynTreeEigenMatrixMap (transformWithQuaternionJacobianBuffer.data(), transformWithQuaternionJacobianBuffer.rows(), transformWithQuaternionJacobianBuffer.cols());
+                                              finalJacobianBuffer);
+
+                    //Modify the Eigen Map to point to the Jacobain of size (7 x 7 + ndofs)
+                    new (&constraintJacobian) iDynTree::iDynTreeEigenMatrixMap(finalJacobianBuffer.data(),
+                                                                               finalJacobianBuffer.rows(),
+                                                                               finalJacobianBuffer.cols());
                 }
 
                 if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                     && target->second.hasPositionConstraint()) {
+
                     //Copy position part
-                    for (Ipopt::Index row = 0; row < 3; ++row) {
-                        //TODO: the following part can be merged as we do not have anymore
-                        //the dof <-> joint mapping
-                        //Maybe use EigenMap directly
-                        //base part
-                        for (Ipopt::Index col = 0; col < baseSize; ++col) {
-                            values[(constraintIndex + row) * n + col] = constraintJacobian(row, col);
-                        }
-                        //joints part
-                        for (Ipopt::Index col = 0; col < (n - baseSize); ++col) {
-                            values[(constraintIndex + row) * n + col + baseSize] = constraintJacobian(row, baseSize + col);
-                        }
-                    }
+                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex], 3, n);
+                    currentConstraint = constraintJacobian.topRows<3>();
                     constraintIndex += 3;
                 }
+
                 if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                     && target->second.hasRotationConstraint()) {
                     //Orientation part
 
-                    for (Ipopt::Index row = 0; row < sizeOfRotationParametrization(m_data.m_rotationParametrization); ++row) {
-                        //TODO: the following part can be merged as we do not have anymore
-                        //the dof <-> joint mapping
-                        //Maybe use EigenMap directly
-                        //base part
-                        for (Ipopt::Index col = 0; col < baseSize; ++col) {
-                            values[(constraintIndex + row) * n + col] = transformWithQuaternionJacobianBuffer(3 + row, col);
-                        }
-                        //joints part
-                        for (Ipopt::Index col = 0; col < (n - baseSize); ++col) {
-                            values[(constraintIndex + row) * n + col + baseSize] = transformWithQuaternionJacobianBuffer(3 + row, baseSize + col);
-                        }
-                    }
+                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex], sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
+                    currentConstraint = constraintJacobian.bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
                     constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                 }
             }
