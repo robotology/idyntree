@@ -6,6 +6,7 @@
  */
 
 #include "ModelVisualization.h"
+#include "JetsVisualization.h"
 #include "IrrlichtUtils.h"
 
 #include <iDynTree/Model/ForwardKinematics.h>
@@ -40,11 +41,21 @@ struct ModelVisualization::ModelVisualizationPimpl
     LinkPositions m_fwdKinBuffer;
 
     irr::scene::ISceneNode * modelNode;
+
+    /**
+     * Empty SceneNode representing the link frames.
+     */
     std::vector<irr::scene::ISceneNode *> linkNodes;
+
+    /**
+     * Empty SceneNodes representing the frames, both the principal link frames and the added ones.
+     */
+    std::vector<irr::scene::ISceneNode *> frameNodes;
+
     std::vector<irr::scene::ISceneNode *> linkFramesNodes;
     std::vector< std::vector<irr::scene::ISceneNode *> > geomNodes;
 
-    /**S
+    /**
      * Cache of the original material of of the scene node
      */
     std::vector< std::vector< std::vector< irr::video::SMaterial > > > geomNodesNotTransparentMaterialCache;
@@ -52,6 +63,11 @@ struct ModelVisualization::ModelVisualizationPimpl
 
     void addModelGeometriesToSceneManager(const iDynTree::Model & model, const iDynTree::ModelSolidShapes & modelGeom);
     void updateLinkPositions(const iDynTree::LinkPositions & world_H_link);
+
+    /**
+     * JetsVisualization helper class
+     */
+    JetsVisualization m_jets;
 
 
     ModelVisualizationPimpl()
@@ -74,6 +90,7 @@ void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManag
 {
     this->modelNode = this->m_irrSmgr->addEmptySceneNode();
     this->linkNodes.resize(model.getNrOfLinks());
+    this->frameNodes.resize(model.getNrOfFrames());
     this->linkFramesNodes.resize(model.getNrOfLinks());
     this->geomNodes.resize(model.getNrOfLinks());
     this->geomNodesNotTransparentMaterialCache.resize(model.getNrOfLinks());
@@ -81,6 +98,7 @@ void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManag
     for(size_t linkIdx=0; linkIdx < model.getNrOfLinks(); linkIdx++)
     {
         this->linkNodes[linkIdx] = this->m_irrSmgr->addEmptySceneNode(this->modelNode);
+        this->frameNodes[linkIdx] = this->linkNodes[linkIdx];
 
         this->geomNodes[linkIdx].resize(modelGeom.linkSolidShapes[linkIdx].size());
         this->geomNodesNotTransparentMaterialCache[linkIdx].resize(modelGeom.linkSolidShapes[linkIdx].size());
@@ -99,6 +117,17 @@ void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManag
                  }
             }
         }
+    }
+
+    // Add also all the additional frames of each link
+    for(size_t frameIdx=model.getNrOfLinks(); frameIdx < model.getNrOfFrames(); frameIdx++ )
+    {
+        LinkIndex parentLinkIdx = model.getFrameLink(frameIdx);
+        this->frameNodes[frameIdx] = this->m_irrSmgr->addEmptySceneNode(this->linkNodes[parentLinkIdx]);
+
+        // Set the position of the added frame w.r.t. to the parent link, that will remain constant
+        this->frameNodes[frameIdx]->setPosition(idyntree2irr_pos(model.getFrameTransform(frameIdx).getPosition()));
+        this->frameNodes[frameIdx]->setRotation(idyntree2irr_rpy(model.getFrameTransform(frameIdx).getRotation().asRPY()));
     }
 }
 
@@ -167,6 +196,9 @@ bool ModelVisualization::init(const Model& model,
     jointPos.zero();
 
     this->setPositions(world_H_base,jointPos);
+
+    // Initialize the jets visualizer
+    this->pimpl->m_jets.init(this->pimpl->m_irrSmgr,this,&(this->pimpl->frameNodes));
 
     pimpl->m_isValid = true;
 
@@ -437,6 +469,11 @@ void ModelVisualization::setTransparent(bool isTransparent)
             }
         }
     }
+}
+
+IJetsVisualization & ModelVisualization::jets()
+{
+    return this->pimpl->m_jets;
 }
 
 }

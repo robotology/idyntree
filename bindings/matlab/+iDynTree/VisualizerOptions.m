@@ -7,30 +7,40 @@ classdef VisualizerOptions < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1581, self);
+        varargout{1} = iDynTreeMEX(1590, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1582, self, varargin{1});
+        iDynTreeMEX(1591, self, varargin{1});
       end
     end
     function varargout = winWidth(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1583, self);
+        varargout{1} = iDynTreeMEX(1592, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1584, self, varargin{1});
+        iDynTreeMEX(1593, self, varargin{1});
       end
     end
     function varargout = winHeight(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1585, self);
+        varargout{1} = iDynTreeMEX(1594, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1586, self, varargin{1});
+        iDynTreeMEX(1595, self, varargin{1});
+      end
+    end
+    function varargout = rootFrameArrowsDimension(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(1596, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(1597, self, varargin{1});
       end
     end
     function self = VisualizerOptions(varargin)
@@ -39,14 +49,14 @@ classdef VisualizerOptions < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1587, varargin{:});
+        tmp = iDynTreeMEX(1598, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1588, self);
+        iDynTreeMEX(1599, self);
         self.swigPtr=[];
       end
     end

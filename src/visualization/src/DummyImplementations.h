@@ -69,12 +69,31 @@ public:
     virtual bool removeLight(const std::string &) { return false; }
 };
 
+
+/**
+ * Dummy jets.
+ */
+class DummyJetsVisualization : public IJetsVisualization
+{
+public:
+    virtual ~DummyJetsVisualization() {};
+    virtual bool setJetsFrames(const std::vector< std::string > & ) { return false; };
+    virtual size_t getNrOfJets() const  { return 0; };
+    virtual Direction getJetDirection(const int ) const  { return Direction::Default(); };
+    virtual bool setJetDirection(const int , const Direction & )  { return false; };
+    virtual bool setJetColor(const int , const ColorViz & )  { return false; };
+    virtual bool setJetsDimensions(const double & , const double & , const double & ) { return false; };
+    virtual bool setJetsIntensity(const VectorDynSize & ) { return false; };
+};
+
+
 /**
  * Dummy model visualization.
  */
 class DummyModelVisualization : public IModelVisualization
 {
     Model m_dummyModel;
+    DummyJetsVisualization m_dummyJets;
 public:
     virtual ~DummyModelVisualization() {};
     virtual bool init(const Model& , const std::string , Visualizer &) { return false; }
@@ -90,6 +109,7 @@ public:
     virtual bool setLinkVisibility(const std::string &, bool) { return false; }
     virtual std::vector<std::string> getFeatures() { return std::vector<std::string>(); }
     virtual bool setFeatureVisibility(const std::string& , bool) { return false; }
+    virtual IJetsVisualization& jets() { return m_dummyJets;  }
 
 };
 
