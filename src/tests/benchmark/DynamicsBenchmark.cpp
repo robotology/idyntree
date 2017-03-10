@@ -43,7 +43,7 @@ using namespace iDynTree;
  * Return the current time in seconds, with respect
  * to an arbitrary point in time.
  */
-double clockInSec()
+inline double clockInSec()
 {
     clock_t ret = clock();
     return ((double)ret)/((double)CLOCKS_PER_SEC);

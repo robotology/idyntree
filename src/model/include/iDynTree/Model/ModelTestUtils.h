@@ -18,6 +18,7 @@
 #include <iDynTree/Core/TestUtils.h>
 
 #include <cassert>
+#include "IJoint.h"
 
 namespace iDynTree
 {
@@ -153,6 +154,37 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     }
 
     return model;
+}
+
+
+/**
+ * Get random joint position consistently with the limits of the model.
+ */
+inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
+{
+    assert(vec.size() == model.getNrOfPosCoords());
+    for(JointIndex jntIdx=0; jntIdx < model.getNrOfJoints(); jntIdx++)
+    {
+        IJointConstPtr jntPtr = model.getJoint(jntIdx);
+        if( jntPtr->hasPosLimits() )
+        {
+            for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
+            {
+                double max = jntPtr->getMaxPosLimit(i);
+                double min = jntPtr->getMinPosLimit(i);
+                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble(min,max);
+            }
+        }
+        else
+        {
+            for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
+            {
+                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble();
+            }
+        }
+    }
+
+    return;
 }
 
 /**

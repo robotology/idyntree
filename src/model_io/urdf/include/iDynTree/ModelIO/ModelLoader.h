@@ -77,8 +77,7 @@ public:
      *
      * @param[in] filename path to the file to load.
      * @param[in] consideredJoints list of joints to consider in the model.
-     * @param[in] filetype (optional) explicit definiton of the filetype to load.
-     *                     Only "urdf" is supported at the moment.
+     * @param[in] filetype (optional) explicit definition of the type of the loaded file. Only "urdf" is supported at the moment.
      * @return true if all went well (files were correctly loaded and consistent), false otherwise.
      *
      * \note Until https://github.com/robotology/idyntree/issues/132 is fixed, this method does not
