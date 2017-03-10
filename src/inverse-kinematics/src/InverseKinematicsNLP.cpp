@@ -10,7 +10,7 @@
 #include "InverseKinematicsNLP.h"
 
 #include "InverseKinematicsData.h"
-#include "Transform.h"
+#include "TransformConstraint.h"
 
 #include <Eigen/Core>
 #include <iDynTree/Core/EigenHelpers.h>
@@ -762,12 +762,8 @@ namespace kinematics {
                 }
                 if (constraint->second.hasRotationConstraint()) {
                     //Orientation part
-                    for (Ipopt::Index row = 0; row < sizeOfRotationParametrization(m_data.m_rotationParametrization); ++row) {
-
-                        Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex], sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
-                        currentConstraint = constraintJacobian.bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
-                        constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
-                    }
+                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex], sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
+                    currentConstraint = constraintJacobian.bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
                     constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                 }
             }
@@ -820,6 +816,7 @@ namespace kinematics {
                     constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                 }
             }
+
 
             //Finally, the norm of the base orientation quaternion parametrization
             if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {

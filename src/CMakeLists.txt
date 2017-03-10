@@ -12,9 +12,8 @@ add_subdirectory(model_io)
 add_subdirectory(estimation)
 add_subdirectory(high-level)
 
-find_package(IPOPT)
-if (${IPOPT_FOUND})
-  add_subdirectory(inverseKinematics)
+if (${IDYNTREE_USES_IPOPT})
+  add_subdirectory(inverse-kinematics)
 endif()
 
 if(IDYNTREE_USES_YARP)

@@ -113,19 +113,21 @@ public:
      */
 
     /*!
-     * @brief Loads the kinematic model from the URDF file
+     * @brief Loads the kinematic model from an external file.
      *
      * You can specify an optional list specifying which joints
      * are considered as optimization variables (all the joints not
      * contained in the list are considered fixed joint). If the vector is
      * empty all the joints in the model will be considered as optimization variables.
      *
-     * @param urdfFile path to the urdf file describing the model
-     * @param variableToDoFMapping list of joints describing which joints are optimized
+     * @param[in] urdfFile path to the urdf file describing the model
+     * @param[in] consideredJoints list of internal joints describing which joints are optimized
+     * @param[in] filetype (optional) explicit definition of the type of the loaded file. Only "urdf" is supported at the moment.
      * @return true if successful. False otherwise
      */
-    bool loadModelFromURDFFileWithName(const std::string& urdfFile,
-                                       const std::vector<std::string> &variableToDoFMapping = std::vector<std::string>());
+    bool loadModelFromFile(const std::string & filename,
+                           const std::vector<std::string> &consideredJoints = std::vector<std::string>(),
+                           const std::string & filetype="urdf");
 
     /*!
      * @brief set the kinematic model to be used in the optimization
@@ -270,7 +272,6 @@ public:
     bool addTarget(const std::string& frameName,
                    const iDynTree::Transform& constraintValue);
 
-
     /*!
      * Adds a position (3D) target for the specified frame
      *
@@ -372,6 +373,21 @@ public:
     // This is one part should be checked so as to properly enable warm start
     bool solve();
 
+    /*! @name Solution-related methods
+      */
+    ///@{
+
+    /*!
+     * Initial guess for the solution
+     *
+     * @param[out] baseTransformSolution  solution for the base position
+     * @param[out] shapeSolution       solution for the shape (the internal configurations)
+     */
+    void getSolution(iDynTree::Transform & baseTransformSolution,
+                     iDynTree::VectorDynSize & shapeSolution);
+
+    ///@}
+
 
     bool getPoseForFrame(const std::string& frameName, iDynTree::Transform& transform);
 
@@ -386,8 +402,14 @@ public:
      - add check on modelLoaded, and other stuff if needed
      */
 
+    /*!
+     *  Access the model used by the InverseKinematics .
+     *
+     * @return A constant reference to iDynTree::Model used by the inverse kinematics.
+     */
+    const Model & model() const;
+
 private:
-    
     void* m_pimpl; /*!< private implementation */
 
 };

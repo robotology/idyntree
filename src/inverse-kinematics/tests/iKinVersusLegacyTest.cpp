@@ -1,4 +1,4 @@
-#include <InverseKinematics.h>
+#include <iDynTree/InverseKinematics.h>
 #include <yarp/os/ResourceFinder.h>
 #include <yarp/os/Network.h>
 #include <yarp/os/LogStream.h>

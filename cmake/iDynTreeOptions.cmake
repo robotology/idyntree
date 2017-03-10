@@ -50,9 +50,10 @@ mark_as_advanced(IDYNTREE_ENABLE_RPATH)
 #########################################################################
 # Enable/disable dependencies
 option(IDYNTREE_ENABLE_SYMORO_PAR "Enable support for SyMoRo par format" TRUE)
-option(IDYNTREE_USES_KDL "Compile iDynTree with KDL dependency" TRUE)
+option(IDYNTREE_USES_KDL "Compile iDynTree with KDL dependency" FALSE)
 option(IDYNTREE_USES_YARP "Compile iDynTree with YARP dependency" TRUE)
 option(IDYNTREE_USES_ICUB_MAIN  "Compile iDynTree with icub-main dependencies (for iKin and skinDynLib helper functions and tools)" TRUE)
+option(IDYNTREE_USES_IPOPT "Compile iDynTree with Irrlicht dependency (for inverse-kinematics)" TRUE)
 option(IDYNTREE_USES_IRRLICHT "Compile iDynTree with Irrlicht dependency (for visualizer)" FALSE)
 
 if( MSVC )

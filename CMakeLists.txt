@@ -62,6 +62,10 @@ if(NOT IDYNTREE_ONLY_DOCS)
         find_package(TinyXML)
     endif()
 
+    if(IDYNTREE_USES_IPOPT)
+        find_package(IPOPT REQUIRED)
+    endif()
+
     # Add external libraries that are embedded in iDynTree
     # source tree, if necessary (by default does not adds
     # anything) feel free to check teh logic inside

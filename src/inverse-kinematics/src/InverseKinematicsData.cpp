@@ -9,7 +9,7 @@
 
 #include "InverseKinematicsData.h"
 #include "InverseKinematicsNLP.h"
-#include "Transform.h"
+#include "TransformConstraint.h"
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/SpatialAcc.h>
@@ -105,18 +105,18 @@ namespace kinematics {
         m_areJointsInitialConditionsSet = false;
     }
 
-    bool InverseKinematicsData::addFrameConstraint(const kinematics::Transform& frameTransform)
+    bool InverseKinematicsData::addFrameConstraint(const kinematics::TransformConstraint& frameTransformConstraint)
     {
-        int frameIndex = m_dynamics.getFrameIndex(frameTransform.getFrameName());
+        int frameIndex = m_dynamics.getFrameIndex(frameTransformConstraint.getFrameName());
         if (frameIndex < 0)
             return false;
 
         //add the constraint to the set
-        std::pair<TransformMap::iterator, bool> result = m_constraints.insert(TransformMap::value_type(frameIndex, frameTransform));
+        std::pair<TransformMap::iterator, bool> result = m_constraints.insert(TransformMap::value_type(frameIndex, frameTransformConstraint));
         return result.second;
     }
 
-    bool InverseKinematicsData::addTarget(const kinematics::Transform& frameTransform, double weight)
+    bool InverseKinematicsData::addTarget(const kinematics::TransformConstraint& frameTransform, double weight)
     {
         int frameIndex = m_dynamics.getFrameIndex(frameTransform.getFrameName());
         if (frameIndex < 0)
@@ -248,7 +248,6 @@ namespace kinematics {
         //Do something (if necessary)
         Ipopt::SmartPtr<Ipopt::TNLP> problem(iKin);
 
-
         // Ask Ipopt to solve the problem
         solverStatus = m_solver->OptimizeTNLP(problem);
 
@@ -258,6 +257,13 @@ namespace kinematics {
         } else {
             return false;
         }
+    }
+
+    void InverseKinematicsData::getSolution(iDynTree::Transform & baseTransformSolution,
+                                            iDynTree::VectorDynSize & shapeSolution)
+    {
+        baseTransformSolution = m_optimizedBasePose;
+        shapeSolution         = m_optimizedRobotDofs;
     }
 
 }

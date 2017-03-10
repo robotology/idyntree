@@ -19,7 +19,7 @@
 #include <map>
 #include <IpIpoptApplication.hpp>
 
-#include "InverseKinematics.h"
+#include <iDynTree/InverseKinematics.h>
 
 namespace iDynTree {
     class Model;
@@ -29,8 +29,8 @@ namespace internal {
 namespace kinematics{
 
     class InverseKinematicsData;
-    class Transform;
-    typedef std::map<int, internal::kinematics::Transform> TransformMap; //ordered map. Order is important
+    class TransformConstraint;
+    typedef std::map<int, internal::kinematics::TransformConstraint> TransformMap; //ordered map. Order is important
 
     class InverseKinematicsNLP;
 }
@@ -135,7 +135,7 @@ public:
      * @param frameTransform the frame to be considered as a constraint
      * @return true if successfull, false otherwise
      */
-    bool addFrameConstraint(const internal::kinematics::Transform& frameTransform);
+    bool addFrameConstraint(const internal::kinematics::TransformConstraint& frameTransformConstraint);
 
     /*!
      * Add a target for the specified frame
@@ -144,7 +144,7 @@ public:
      * @param weight weight for the associated target. Currently ignored
      * @return true if successfull, false otherwise
      */
-    bool addTarget(const internal::kinematics::Transform& frameTransform, double weight = 1);
+    bool addTarget(const internal::kinematics::TransformConstraint& frameTransform, double weight = 1);
 
     /*!
      * Set the current robot configuration
@@ -220,6 +220,9 @@ public:
      * @return true if the problem is solved. False otherwise
      */
     bool solveProblem();
+
+    void getSolution(iDynTree::Transform & baseTransformSolution,
+                     iDynTree::VectorDynSize & shapeSolution);
 
     /*!
      * Access the Kinematics and Dynamics object used by the solver

@@ -6,9 +6,9 @@
  * @date 2016
  */
 
-#include "InverseKinematics.h"
+#include <iDynTree/InverseKinematics.h>
 #include "InverseKinematicsData.h"
-#include "Transform.h"
+#include "TransformConstraint.h"
 
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
@@ -42,20 +42,21 @@ namespace iDynTree {
         }
     }
 
-    bool InverseKinematics::loadModelFromURDFFileWithName(const std::string& urdfFile,
-                                                          const std::vector<std::string> &variableToDoFMapping)
+    bool InverseKinematics::loadModelFromFile(const std::string & filename,
+                                              const std::vector<std::string> &consideredJoints,
+                                              const std::string & filetype)
     {
         ModelLoader loader;
-        if (!loader.loadModelFromFile(urdfFile) || !loader.isValid()) {
-            std::cerr << "Failed to load model from URDF file " << urdfFile << std::endl;
+        if (!loader.loadModelFromFile(filename) || !loader.isValid()) {
+            std::cerr << "[ERROR] iDynTree::InverseDynamics : Failed to load model from URDF file " << filename << std::endl;
             return false;
         }
 
 
-        if (!variableToDoFMapping.empty()) {
-            if (!loader.loadReducedModelFromFullModel(loader.model(), variableToDoFMapping)
+        if (!consideredJoints.empty()) {
+            if (!loader.loadReducedModelFromFullModel(loader.model(), consideredJoints)
                 || !loader.isValid()) {
-                std::cerr << "Failed to reduce model" << std::endl;
+                std::cerr << "[ERROR] iDynTree::InverseDynamics : Failed to reduce model" << std::endl;
                 return false;
             }
         }
@@ -115,61 +116,67 @@ namespace iDynTree {
     bool InverseKinematics::addFrameConstraint(const std::string& frameName, const iDynTree::Transform& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::Transform::transformConstraint(frameName, constraintValue));
+        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::TransformConstraint::fullTransformConstraint(frameName, constraintValue));
     }
 
     bool InverseKinematics::addFramePositionConstraint(const std::string& frameName, const iDynTree::Position& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::Transform::positionConstraint(frameName, constraintValue));
+        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::TransformConstraint::positionConstraint(frameName, constraintValue));
     }
 
     bool InverseKinematics::addFramePositionConstraint(const std::string& frameName, const iDynTree::Transform& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::Transform::positionConstraint(frameName, constraintValue.getPosition()));
+        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::TransformConstraint::positionConstraint(frameName, constraintValue.getPosition()));
     }
 
     bool InverseKinematics::addFrameRotationConstraint(const std::string& frameName, const iDynTree::Rotation& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::Transform::rotationConstraint(frameName, constraintValue));
+        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::TransformConstraint::rotationConstraint(frameName, constraintValue));
     }
 
     bool InverseKinematics::addFrameRotationConstraint(const std::string& frameName, const iDynTree::Transform& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::Transform::rotationConstraint(frameName, constraintValue.getRotation()));
+        return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::TransformConstraint::rotationConstraint(frameName, constraintValue.getRotation()));
     }
 
     bool InverseKinematics::addTarget(const std::string& frameName, const iDynTree::Transform& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::Transform::transformConstraint(frameName,  constraintValue));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::fullTransformConstraint(frameName,  constraintValue));
     }
 
     bool InverseKinematics::addPositionTarget(const std::string& frameName, const iDynTree::Position& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::Transform::positionConstraint(frameName,  constraintValue));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::positionConstraint(frameName,  constraintValue));
     }
 
     bool InverseKinematics::addPositionTarget(const std::string& frameName, const iDynTree::Transform& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::Transform::positionConstraint(frameName,  constraintValue.getPosition()));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::positionConstraint(frameName,  constraintValue.getPosition()));
     }
 
     bool InverseKinematics::addRotationTarget(const std::string& frameName, const iDynTree::Rotation& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::Transform::rotationConstraint(frameName,  constraintValue));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::rotationConstraint(frameName,  constraintValue));
     }
 
     bool InverseKinematics::addRotationTarget(const std::string& frameName, const iDynTree::Transform& constraintValue)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::Transform::rotationConstraint(frameName,  constraintValue.getRotation()));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::rotationConstraint(frameName,  constraintValue.getRotation()));
+    }
+
+    bool InverseKinematics::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration)
+    {
+        assert(m_pimpl);
+        return IK_PIMPL(m_pimpl)->setDesiredJointConfiguration(desiredJointConfiguration);
     }
 
     bool InverseKinematics::setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* initialCondition)
@@ -196,6 +203,14 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->solveProblem();
     }
 
+    void InverseKinematics::getSolution(iDynTree::Transform & baseTransformSolution,
+                                        iDynTree::VectorDynSize & shapeSolution)
+    {
+        assert(m_pimpl);
+        IK_PIMPL(m_pimpl)->getSolution(baseTransformSolution,shapeSolution);
+        return;
+    }
+
     bool InverseKinematics::getPoseForFrame(const std::string& frameName,
                                             iDynTree::Transform& transform)
     {
@@ -205,4 +220,8 @@ namespace iDynTree {
 
     }
 
+    const Model & InverseKinematics::model() const
+    {
+        return IK_PIMPL(m_pimpl)->dynamics().model();
+    }
 }
