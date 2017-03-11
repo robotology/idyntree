@@ -7,6 +7,7 @@
 
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/PrismaticJoint.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/ModelTestUtils.h>
 #include <iDynTree/Model/Traversal.h>
