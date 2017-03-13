@@ -31,6 +31,8 @@ target_include_directories(${libraryname} SYSTEM PUBLIC ${IPOPT_INCLUDE_DIRS})
 target_include_directories(${libraryname} SYSTEM PRIVATE ${EIGEN3_INCLUDE_DIR})
 target_link_libraries(${libraryname} idyntree-core idyntree-high-level ${IPOPT_LIBRARIES})
 
+target_compile_definitions(${libraryname} PRIVATE ${IPOPT_DEFINITIONS})
+
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYN_TREE_IK_HEADERS})
 
 install(TARGETS ${libraryname}

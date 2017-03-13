@@ -141,6 +141,12 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
                                    const iDynTree::MatrixFixSize<3, 4>& quaternionDerivativeInverseMapBuffer,
                                    const int computationOption,
                                    iDynTree::MatrixDynSize& constraintJacobianBuffer);
+    
+    void computeConstraintJacobianRPY(const iDynTree::MatrixDynSize& transformJacobian,
+                                      const iDynTree::MatrixFixSize<3, 3>& rpyDerivativeMapBuffer,
+                                      const iDynTree::MatrixFixSize<3, 3>& rpyDerivativeInverseMapBuffer,
+                                      const int computationOption,
+                                      iDynTree::MatrixDynSize& constraintJacobianBuffer);
 
     /*!
      * @brief Map between RPY angles and angular velocity in the inertial frame
