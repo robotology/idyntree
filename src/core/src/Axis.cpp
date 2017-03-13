@@ -92,6 +92,47 @@ namespace iDynTree
 
         return nonRotated_T_rotated;
     }
+    
+      Transform Axis::getTranslationTransform(const double dist) const
+    {
+        // Formula for rotation around and arbitrary axis given by
+        // http://inside.mines.edu/fs_home/gmurray/ArbitraryAxisRotation/
+        Transform nonTranslated_T_translated;
+
+        //No rotation
+        const double theta = 0.0;
+        nonTranslated_T_translated.setRotation(Rotation::RotAxis(this->getDirection(),theta));
+
+        // translation
+        double cost = cos(theta);
+        double sint = sin(theta);
+        double u   = this->getDirection()(0);
+        double u2  = u*u;
+        double v   = this->getDirection()(1);
+        double v2  = v*v;
+        double w   = this->getDirection()(2);
+        double w2  = w*w;
+        double a    = this->getOrigin()(0);
+        double b    = this->getOrigin()(1);
+        double c    = this->getOrigin()(2);
+
+        Position translationPosition;
+        translationPosition(0) =
+            (a*(v2+w2) - u*(b*v+c*w))*(1-cost) + (b*w-c*v)*sint;
+        translationPosition(1) =
+            (b*(u2+w2) - v*(a*u+c*w))*(1-cost) + (c*u-a*w)*sint;
+        translationPosition(2) =
+            (c*(u2+v2) - w*(a*u+b*v))*(1-cost) + (a*v-b*u)*sint;
+            
+        //Translation because of joint variable    
+        translationPosition(0) = translationPosition(0) + u*dist + a;
+        translationPosition(1) = translationPosition(1) + v*dist + b;
+        translationPosition(2) = translationPosition(2) + w*dist + c;
+
+        nonTranslated_T_translated.setPosition(translationPosition);
+
+        return nonTranslated_T_translated;
+    }
 
     TransformDerivative Axis::getRotationTransformDerivative(const double theta) const
     {
@@ -128,6 +169,51 @@ namespace iDynTree
 
         return derivative_nonRotated_T_rotated;
     }
+    
+    TransformDerivative Axis::getTranslationTransformDerivative(const double dist) const
+    {
+        // Formula for rotation around and arbitrary axis given by
+        // http://inside.mines.edu/fs_home/gmurray/ArbitraryAxisRotation/
+        // In this function we
+        TransformDerivative derivative_nonTranslated_T_translated;
+
+        // rotation
+        //No rotation
+        const double theta = 0.0;
+        derivative_nonTranslated_T_translated.setRotationDerivative(Rotation::RotAxisDerivative(this->getDirection(),theta));
+
+        // translation
+        double cost = cos(theta);
+        double sint = sin(theta);
+        double u   = this->getDirection()(0);
+        double u2  = u*u;
+        double v   = this->getDirection()(1);
+        double v2  = v*v;
+        double w   = this->getDirection()(2);
+        double w2  = w*w;
+        double a    = this->getOrigin()(0);
+        double b    = this->getOrigin()(1);
+        double c    = this->getOrigin()(2);
+
+        Vector3 translationPositionDerivative;
+        translationPositionDerivative(0) =
+            (a*(v2+w2) - u*(b*v+c*w))*(sint) + (b*w-c*v)*cost;
+        translationPositionDerivative(1) =
+            (b*(u2+w2) - v*(a*u+c*w))*(sint) + (c*u-a*w)*cost;
+        translationPositionDerivative(2) =
+            (c*(u2+v2) - w*(a*u+b*v))*(sint) + (a*v-b*u)*cost;
+            
+        //Translation because of joint variable    
+        translationPositionDerivative(0) = translationPositionDerivative(0) + u*dist + a;
+        translationPositionDerivative(1) = translationPositionDerivative(1) + v*dist + b;
+        translationPositionDerivative(2) = translationPositionDerivative(2) + w*dist + c;
+
+
+        derivative_nonTranslated_T_translated.setPositionDerivative(translationPositionDerivative);
+
+        return derivative_nonTranslated_T_translated;
+    }
+
 
 
     Twist Axis::getRotationTwist(const double dtheta) const
@@ -142,6 +228,22 @@ namespace iDynTree
 
         linVel = dtheta*(orig.cross(dir));
         angVel = dir*dtheta;
+
+        return ret;
+    }
+    
+    Twist Axis::getTranslationTwist(const double ddist) const
+    {
+        Twist ret;
+
+        Eigen::Map<Eigen::Vector3d> linVel(ret.getLinearVec3().data());
+        Eigen::Map<Eigen::Vector3d> angVel(ret.getAngularVec3().data());
+
+        Eigen::Map<const Eigen::Vector3d> dir(direction.data());
+        Eigen::Map<const Eigen::Vector3d> orig(origin.data());
+
+        linVel = dir*ddist;
+        angVel << 0,0,0;
 
         return ret;
     }
@@ -161,7 +263,23 @@ namespace iDynTree
 
         return ret;
     }
+    
+    SpatialAcc Axis::getTranslationSpatialAcc(const double d2dist) const
+    {
+        SpatialAcc ret;
 
+        Eigen::Map<Eigen::Vector3d> lin(ret.getLinearVec3().data());
+        Eigen::Map<Eigen::Vector3d> ang(ret.getAngularVec3().data());
+
+        Eigen::Map<const Eigen::Vector3d> dir(direction.data());
+        Eigen::Map<const Eigen::Vector3d> orig(origin.data());
+
+        lin = dir*d2dist;
+        ang << 0,0,0;
+
+        return ret;
+    }
+    
     std::string Axis::toString() const
     {
         std::stringstream ss;

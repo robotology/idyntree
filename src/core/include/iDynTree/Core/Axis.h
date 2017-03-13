@@ -98,6 +98,26 @@ namespace iDynTree
         Twist getRotationTwist(const double dtheta) const;
 
         SpatialAcc getRotationSpatialAcc(const double d2theta) const;
+        
+        /**
+         * Get the transform induced by a translation of a distance dist
+         * along this axis. The returned transform is the nonTranslated_T_translated,
+         * such that if we have a quantity expressed in the frame obtained
+         * by the translation v_translated, we can transform it back in the
+         * non-translated frame using the returned transform:
+         * v_nonTranslated = nonTranslated_T_translated*v_translated
+         */
+        Transform getTranslationTransform(const double dist) const;
+
+        /**
+         * Get the derivative of the getTranslationTransform function with respect
+         * to the dist argument.
+         */
+        TransformDerivative getTranslationTransformDerivative(const double dist) const;
+
+        Twist getTranslationTwist(const double ddist) const;
+
+        SpatialAcc getTranslationSpatialAcc(const double d2dist) const;
 
         /**
          * @name Output helpers.
