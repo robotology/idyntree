@@ -37,8 +37,70 @@ iDynTree::JointPosDoubleArray getRandomJointPositions(const iDynTree::Model & mo
     return sRandom;
 }
 
-// Check the consistency of a simple IK test case
-void simpleIKConsistency()
+void simpleChainIK(int maxNrOfJoints)
+{
+	// Solve a simple IK problem for a chain, with no constraints 
+	for (int i = 1; i <= maxNrOfJoints; i++)
+	{
+		std::cerr << "simpleChainIK with " << i << " dofs " << std::endl;
+		iDynTree::Model chain = iDynTree::getRandomChain(i,10,false);
+
+		ASSERT_EQUAL_DOUBLE(i, chain.getNrOfDOFs());
+		
+		// Name of the targetFrame the leaf added by getRandomChain 
+		std::string targetFrame = "link" + iDynTree::int2string(i - 1);
+
+		// Create IK 
+		iDynTree::InverseKinematics ik;
+		bool ok = ik.setModel(chain);
+		ASSERT_IS_TRUE(ok);
+		// Always express the target as cost
+		ik.setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
+
+		// Create also a KinDyn object to perform forward kinematics for the desired values and the optimized ones
+		iDynTree::KinDynComputations kinDynDes;
+		ok = kinDynDes.loadRobotModel(ik.model());
+		ASSERT_IS_TRUE(ok);
+		iDynTree::KinDynComputations kinDynOpt;
+		ok = kinDynOpt.loadRobotModel(ik.model());
+		ASSERT_IS_TRUE(ok);
+
+		// Create a random vector of internal joint positions
+		// used to get reasonable values for the constraints and the targets
+		iDynTree::JointPosDoubleArray s = getRandomJointPositions(kinDynDes.model());
+		ok = kinDynDes.setJointPos(s);
+		ASSERT_IS_TRUE(ok);
+
+		// Add the fixed base constraint 
+		ok = ik.addFrameConstraint("baseLink", iDynTree::Transform::Identity());
+
+		// Add target 
+		ok = ik.addTarget(targetFrame, kinDynDes.getWorldTransform(targetFrame));
+		ASSERT_IS_TRUE(ok);
+
+		// Start from the initial one 
+		double tic = clockInSec();
+		ok = ik.solve();
+		double toc = clockInSec();
+		std::cerr << "Inverse Kinematics solved in " << toc - tic << " seconds. " << std::endl;
+		ASSERT_IS_TRUE(ok);
+		
+		// Get the solution 
+		iDynTree::Transform baseOpt;
+		iDynTree::JointPosDoubleArray sOpt(ik.model());
+		ik.getSolution(baseOpt,sOpt);
+		
+		// Check if the base link constraint is still valid 
+		ASSERT_EQUAL_TRANSFORM(kinDynDes.getWorldBaseTransform(), iDynTree::Transform::Identity());
+		
+		// Check if the target is realized 
+		ASSERT_EQUAL_TRANSFORM(kinDynDes.getWorldBaseTransform("l_sole"), kinDynOpt.getWorldBaseTransform("l_sole"));
+	}
+
+}
+
+// Check the consistency of a simple humanoid wholebody IK test case
+void simpleHumanoidWholeBodyIKConsistency()
 {
     iDynTree::InverseKinematics ik;
 
@@ -114,7 +176,7 @@ void simpleIKConsistency()
 
 int main()
 {
-
-    simpleIKConsistency();
+	simpleChainIK(1);
+	//simpleHumanoidWholeBodyIKConsistency();
     return EXIT_SUCCESS;
 }

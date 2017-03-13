@@ -7,6 +7,12 @@
  *
  */
 
+//For using the M_PI macro in visual studio it
+//is necessary to define _USE_MATH_DEFINES
+#ifndef _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
+#endif
+
 #include "InverseKinematicsNLP.h"
 
 #include "InverseKinematicsData.h"
@@ -16,6 +22,8 @@
 #include <iDynTree/Core/EigenHelpers.h>
 #include <cassert>
 #include <cmath>
+
+
 
 namespace internal {
 namespace kinematics {
@@ -1033,7 +1041,7 @@ namespace kinematics {
         //Compute analytical derivatives
         MatrixDynSize _analyticalJacobian(3 + sizeOfRotationParametrization(parametrization), derivativePoint.size());
         _analyticalJacobian.zero();
-        Map<Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > analyticalJacobian = toEigen(_analyticalJacobian);
+        Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > analyticalJacobian = toEigen(_analyticalJacobian);
 
         updateState(_x);
 
@@ -1067,7 +1075,7 @@ namespace kinematics {
         //Compute numerical derivative
         MatrixDynSize _finiteDifferenceJacobian(3 + sizeOfRotationParametrization(parametrization), derivativePoint.size());
         _finiteDifferenceJacobian.zero();
-        Map<Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > finiteDifferenceJacobian = toEigen(_finiteDifferenceJacobian);
+        Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > finiteDifferenceJacobian = toEigen(_finiteDifferenceJacobian);
 
         Number * _xPlusIncrement = new Number[derivativePoint.size()];
         Map<VectorXd> xPlusIncrement(_xPlusIncrement, derivativePoint.size());
@@ -1150,7 +1158,7 @@ namespace kinematics {
         std::cerr.precision(7);
 
         //Checking error
-        for (int i = 0; i < derivativePoint.size(); ++i) {
+        for (size_t i = 0; i < derivativePoint.size(); ++i) {
             VectorXd error = analyticalJacobian.col(i) - finiteDifferenceJacobian.col(i);
             for (unsigned row = 0; row < (3 + sizeOfRotationParametrization(parametrization)); ++row) {
                 if (std::abs(error(row)) > tolerance) {

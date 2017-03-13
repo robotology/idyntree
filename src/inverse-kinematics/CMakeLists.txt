@@ -46,6 +46,6 @@ set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_S
 
 
 if(IDYNTREE_COMPILE_TESTS)
-  #add_subdirectory(tests)
+  add_subdirectory(tests)
 endif()
 

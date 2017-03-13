@@ -48,7 +48,7 @@ inline Link getRandomLink()
 /**
  * Add a random link with random model.
  */
-inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName)
+inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, bool noFixed=false)
 {
     // Add Link
     LinkIndex newLinkIndex = model.addLink(newLinkName,getRandomLink());
@@ -60,7 +60,7 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
 
     int jointType = rand() % nrOfJointTypes;
 
-    jointType = 1;
+    if( noFixed ) jointType = 1;
 
     if( jointType == 0 )
     {
@@ -132,7 +132,7 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     return model;
 }
 
-inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10)
+inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool noFixed=false)
 {
     Model model;
 
@@ -143,7 +143,7 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = linkName;
         linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName);
+        addRandomLinkToModel(model,parentLink,linkName,noFixed);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
@@ -155,7 +155,6 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
 
     return model;
 }
-
 
 /**
  * Get random joint position consistently with the limits of the model.

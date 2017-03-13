@@ -42,6 +42,8 @@ namespace iDynTree {
             case InverseKinematicsRotationParametrizationRollPitchYaw:
                 return 3;
         }
+
+		return 0;
     }
 
     /*!
@@ -100,19 +102,6 @@ public:
     ~InverseKinematics();
 
     /*!
-     * Sets which joints are considered as optimization variables
-     *
-     * The map is
-     * [index] => joint name
-     * If the joint is not in the map, it is kept fixed
-     * @note if not called all the joints are considered in the optimization procedure
-     *
-     * @param variableToDoFMapping structure describing which joints are optimized
-     *
-     * @return true if successful, false otherwise.
-     */
-
-    /*!
      * @brief Loads the kinematic model from an external file.
      *
      * You can specify an optional list specifying which joints
@@ -133,7 +122,9 @@ public:
      * @brief set the kinematic model to be used in the optimization
      *
      * All the degrees of freedom of the model will be used as 
-     * optimization variables
+     * optimization variables. If you want to perform the inverse kinematics 
+	 * just on a subset of the internal joints of the robot, please use the  
+	 * loadReducedModelFromFullModel method contained in the ModelLoader class.
      *
      * @param model the kinematic model to be used in the optimization
      * @return true if successful. False otherwise
