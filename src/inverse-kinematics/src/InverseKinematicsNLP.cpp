@@ -761,13 +761,13 @@ namespace kinematics {
                 //We have to assign it to the correct variable
                 if (constraint->second.hasPositionConstraint()) {
                     //Position part
-                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex], 3, n);
+                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*finalJacobianBuffer.cols()], 3, n);
                     currentConstraint = constraintJacobian.topRows<3>();
                     constraintIndex += 3;
                 }
                 if (constraint->second.hasRotationConstraint()) {
                     //Orientation part
-                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex], sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
+                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*finalJacobianBuffer.cols()], sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
                     currentConstraint = constraintJacobian.bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
                     constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                 }
@@ -862,9 +862,9 @@ namespace kinematics {
 
         //Obtain base position
         iDynTree::Position basePosition;
-        optimizedBasePosition(0) = x[0];
-        optimizedBasePosition(1) = x[1];
-        optimizedBasePosition(2) = x[2];
+        basePosition(0) = x[0];
+        basePosition(1) = x[1];
+        basePosition(2) = x[2];
 
         //Obtain base orientation
         iDynTree::Vector4 baseOrientationSerialization;
