@@ -30,7 +30,7 @@ namespace iDynTree
         LinkIndex link1;
         LinkIndex link2;
         Transform link1_X_link2_at_rest;
-        Axis rotation_axis_wrt_link1;
+        Axis translation_axis_wrt_link1;
 
         // Limits
         void disablePosLimits();
@@ -54,7 +54,7 @@ namespace iDynTree
          * Constructor
          */
         PrismaticJoint(const LinkIndex link1, const LinkIndex link2,
-                      const Transform& link1_X_link2, const Axis& _rotation_axis_wrt_link1);
+                      const Transform& link1_X_link2, const Axis& _translation_axis_wrt_link1);
 
         /**
          * Copy constructor

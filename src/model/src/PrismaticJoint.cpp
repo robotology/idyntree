@@ -22,9 +22,9 @@ namespace iDynTree
 {
 
 PrismaticJoint::PrismaticJoint(const LinkIndex _link1, const LinkIndex _link2,
-                             const Transform& _link1_X_link2, const Axis& _rotation_axis_wrt_link1):
+                             const Transform& _link1_X_link2, const Axis& _translation_axis_wrt_link1):
                              link1(_link1), link2(_link2), link1_X_link2_at_rest(_link1_X_link2),
-                             rotation_axis_wrt_link1(_rotation_axis_wrt_link1)
+                             translation_axis_wrt_link1(_translation_axis_wrt_link1)
 {
     this->setPosCoordsOffset(0);
     this->setDOFsOffset(0);
@@ -37,7 +37,7 @@ PrismaticJoint::PrismaticJoint(const LinkIndex _link1, const LinkIndex _link2,
 PrismaticJoint::PrismaticJoint(const PrismaticJoint& other):
                              link1(other.link1), link2(other.link2),
                              link1_X_link2_at_rest(other.link1_X_link2_at_rest),
-                             rotation_axis_wrt_link1(other.rotation_axis_wrt_link1),
+                             translation_axis_wrt_link1(other.translation_axis_wrt_link1),
                              m_hasPosLimits(other.m_hasPosLimits),
                              m_minPos(other.m_minPos), m_maxPos(other.m_maxPos)
 {
@@ -102,7 +102,7 @@ void PrismaticJoint::updateBuffers(const double new_q) const
 
 void PrismaticJoint::resetBuffers(const double new_q) const
 {
-    this->link1_X_link2 = rotation_axis_wrt_link1.getRotationTransform(new_q)*link1_X_link2_at_rest;
+    this->link1_X_link2 = translation_axis_wrt_link1.getTranslationTransform(new_q)*link1_X_link2_at_rest;
     this->link2_X_link1 = link1_X_link2.inverse();
 
     q_previous = new_q;
@@ -110,16 +110,16 @@ void PrismaticJoint::resetBuffers(const double new_q) const
 
 void PrismaticJoint::resetAxisBuffers() const
 {
-    this->S_link1_link2 = -(rotation_axis_wrt_link1).getRotationTwist(1.0);
-    this->S_link2_link1 = (link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1).getRotationTwist(1.0);
+    this->S_link1_link2 = -(translation_axis_wrt_link1).getTranslationTwist(1.0);
+    this->S_link2_link1 = (link1_X_link2_at_rest.inverse()*translation_axis_wrt_link1).getTranslationTwist(1.0);
 }
 
 const Transform & PrismaticJoint::getTransform(const VectorDynSize& jntPos,
                                               const LinkIndex p_linkA,
                                               const LinkIndex p_linkB) const
 {
-    const double ang = jntPos(this->getPosCoordsOffset());
-    updateBuffers(ang);
+    const double dist = jntPos(this->getPosCoordsOffset());
+    updateBuffers(dist);
     if( p_linkA == link1 )
     {
         assert(p_linkB == link2);
@@ -138,9 +138,9 @@ TransformDerivative PrismaticJoint::getTransformDerivative(const VectorDynSize& 
                                                           const LinkIndex linkB,
                                                           const int posCoord_i) const
 {
-    const double ang = jntPos(this->getPosCoordsOffset());
+    const double dist = jntPos(this->getPosCoordsOffset());
 
-    TransformDerivative link1_dX_link2 = rotation_axis_wrt_link1.getRotationTransformDerivative(ang)*link1_X_link2_at_rest;
+    TransformDerivative link1_dX_link2 = translation_axis_wrt_link1.getTranslationTransformDerivative(dist)*link1_X_link2_at_rest;
 
     if( linkA == this->link1 )
     {
@@ -148,7 +148,7 @@ TransformDerivative PrismaticJoint::getTransformDerivative(const VectorDynSize& 
     }
     else
     {
-        updateBuffers(ang);
+        updateBuffers(dist);
         TransformDerivative linkA_dX_linkB = link1_dX_link2.derivativeOfInverse(this->link1_X_link2);
         return linkA_dX_linkB;
     }
@@ -174,12 +174,12 @@ Axis PrismaticJoint::getAxis(const LinkIndex linkA) const
 {
     if( linkA == link1 )
     {
-        return rotation_axis_wrt_link1;
+        return translation_axis_wrt_link1;
     }
     else
     {
         assert(linkA == link2);
-        return link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1;
+        return link1_X_link2_at_rest.inverse()*translation_axis_wrt_link1;
     }
 }
 
@@ -191,7 +191,7 @@ void PrismaticJoint::setAttachedLinks(const LinkIndex _link1, const LinkIndex _l
 
 void PrismaticJoint::setAxis(const Axis& prismaticAxis_wrt_link1)
 {
-    this->rotation_axis_wrt_link1 = prismaticAxis_wrt_link1;
+    this->translation_axis_wrt_link1 = prismaticAxis_wrt_link1;
 
     this->resetAxisBuffers();
 }
@@ -203,8 +203,8 @@ void PrismaticJoint::computeChildVelAcc(const VectorDynSize & jntPos,
                                        LinkAccArray & linkAccs,
                                        const LinkIndex child, const LinkIndex parent) const
 {
-    double dang = jntVel(this->getDOFsOffset());
-    double d2ang = jntAcc(this->getDOFsOffset());
+    double ddist = jntVel(this->getDOFsOffset());
+    double d2dist = jntAcc(this->getDOFsOffset());
 
     const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
 
@@ -212,9 +212,9 @@ void PrismaticJoint::computeChildVelAcc(const VectorDynSize & jntPos,
     // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
     iDynTree::SpatialMotionVector S = this->getMotionSubspaceVector(0,child);
 
-    SpatialMotionVector vj = S*dang;
+    SpatialMotionVector vj = S*ddist;
     linkVels(child) = child_X_parent*linkVels(parent) + vj;
-    linkAccs(child) = child_X_parent*linkAccs(parent) + S*d2ang + linkVels(child)*vj;
+    linkAccs(child) = child_X_parent*linkAccs(parent) + S*d2dist + linkVels(child)*vj;
 
     return;
 }
@@ -225,7 +225,7 @@ void PrismaticJoint::computeChildVel(const VectorDynSize & jntPos,
                                           LinkVelArray & linkVels,
                                     const LinkIndex child, const LinkIndex parent) const
 {
-    double dang = jntVel(this->getDOFsOffset());
+    double ddist = jntVel(this->getDOFsOffset());
 
     const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
 
@@ -233,7 +233,7 @@ void PrismaticJoint::computeChildVel(const VectorDynSize & jntPos,
     // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
     iDynTree::SpatialMotionVector S = this->getMotionSubspaceVector(0,child);
 
-    SpatialMotionVector vj = S*dang;
+    SpatialMotionVector vj = S*ddist;
     linkVels(child) = child_X_parent*linkVels(parent) + vj;
 
     return;
@@ -248,8 +248,8 @@ void PrismaticJoint::computeChildPosVelAcc(const VectorDynSize & jntPos,
                                           const LinkIndex child,
                                           const LinkIndex parent) const
 {
-    double dang = jntVel(this->getDOFsOffset());
-    double d2ang = jntAcc(this->getDOFsOffset());
+    double ddist = jntVel(this->getDOFsOffset());
+    double d2dist = jntAcc(this->getDOFsOffset());
 
     const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
     const Transform & parent_X_child = this->getTransform(jntPos,parent,child);
@@ -263,9 +263,9 @@ void PrismaticJoint::computeChildPosVelAcc(const VectorDynSize & jntPos,
     // we implement equation 5.14 and 5.15 of Feathestone RBDA, 2008
     iDynTree::SpatialMotionVector S = this->getMotionSubspaceVector(0,child);
 
-    SpatialMotionVector vj = S*dang;
+    SpatialMotionVector vj = S*ddist;
     linkVels(child) = child_X_parent*linkVels(parent) + vj;
-    linkAccs(child) = child_X_parent*linkAccs(parent) + S*d2ang + linkVels(child)*vj;
+    linkAccs(child) = child_X_parent*linkAccs(parent) + S*d2dist + linkVels(child)*vj;
 
     return;
 }
@@ -274,13 +274,13 @@ void PrismaticJoint::computeChildAcc(const VectorDynSize &jntPos, const VectorDy
                                     const LinkVelArray &linkVels, const VectorDynSize &jntAcc,
                                     LinkAccArray &linkAccs, const LinkIndex child, const LinkIndex parent) const
 {
-    double dang = jntVel(this->getDOFsOffset());
-    double d2ang = jntAcc(this->getDOFsOffset());
+    double ddist = jntVel(this->getDOFsOffset());
+    double d2dist = jntAcc(this->getDOFsOffset());
     const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
     const Transform & parent_X_child = this->getTransform(jntPos,parent,child);
     iDynTree::SpatialMotionVector S = this->getMotionSubspaceVector(0,child);
-    SpatialMotionVector vj = S*dang;
-    linkAccs(child) = child_X_parent*linkAccs(parent) + S*d2ang + linkVels(child)*vj;
+    SpatialMotionVector vj = S*ddist;
+    linkAccs(child) = child_X_parent*linkAccs(parent) + S*d2dist + linkVels(child)*vj;
 }
 
 void PrismaticJoint::computeChildBiasAcc(const VectorDynSize &jntPos,
@@ -289,11 +289,11 @@ void PrismaticJoint::computeChildBiasAcc(const VectorDynSize &jntPos,
                                               LinkAccArray &linkBiasAccs,
                                          const LinkIndex child, const LinkIndex parent) const
 {
-    double dang = jntVel(this->getDOFsOffset());
+    double ddist = jntVel(this->getDOFsOffset());
     const Transform & child_X_parent = this->getTransform(jntPos,child,parent);
     const Transform & parent_X_child = this->getTransform(jntPos,parent,child);
     iDynTree::SpatialMotionVector S = this->getMotionSubspaceVector(0,child);
-    SpatialMotionVector vj = S*dang;
+    SpatialMotionVector vj = S*ddist;
     linkBiasAccs(child) = child_X_parent*linkBiasAccs(parent) + linkVels(child)*vj;
 }
 
