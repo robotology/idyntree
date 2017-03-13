@@ -19,7 +19,7 @@ namespace iDynTree
 {
     /**
      * Class representing a prismatic joint, i.e. a joint that
-     * constraint two links to move only around a common axis.
+     * constraint two links to translate only along an axis.
      *
      * \ingroup iDynTreeModel
      */
