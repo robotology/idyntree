@@ -16,6 +16,7 @@
 #include <iDynTree/Model/Model.h>
 
 #include <cassert>
+#include <private/InverseKinematicsData.h>
 
 namespace internal {
 namespace kinematics {
@@ -84,8 +85,10 @@ namespace kinematics {
     void InverseKinematicsData::clearProblem()
     {
         //resize vectors
-        m_optimizedRobotDofs.resize(m_dofs);
-        m_optimizedRobotDofs.zero();
+        m_jointInitialConditions.resize(m_dofs);
+        m_jointInitialConditions.zero();
+        m_jointsResults.resize(m_dofs);
+        m_jointsResults.zero();
         m_preferredJointsConfiguration.resize(m_dofs);
         m_preferredJointsConfiguration.zero();
 
@@ -132,11 +135,11 @@ namespace kinematics {
                                                     const iDynTree::VectorDynSize* initialJointCondition)
     {
         if (baseTransform) {
-            m_optimizedBasePose = *baseTransform;
+            m_baseInitialCondition = *baseTransform;
             m_areBaseInitialConditionsSet = true;
         }
         if (initialJointCondition) {
-            m_optimizedRobotDofs = *initialJointCondition;
+            m_jointInitialConditions = *initialJointCondition;
             m_areJointsInitialConditionsSet = true;
         }
 
@@ -164,7 +167,7 @@ namespace kinematics {
 
     bool InverseKinematicsData::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration)
     {
-        assert(m_optimizedRobotDofs.size() == desiredJointConfiguration.size());
+        assert(m_preferredJointsConfiguration.size() == desiredJointConfiguration.size());
         m_preferredJointsConfiguration = desiredJointConfiguration;
         return true;
     }
@@ -190,17 +193,17 @@ namespace kinematics {
         //Do all stuff needed before starting an optimization problem
         //1) prepare initial condition if not explicitly set
         if (!m_areBaseInitialConditionsSet) {
-            m_optimizedBasePose = m_state.basePose;
+            m_baseInitialCondition = m_state.basePose;
         }
 
         if (!m_areJointsInitialConditionsSet) {
-            m_optimizedRobotDofs = m_state.jointsConfiguration;
+            m_jointInitialConditions = m_state.jointsConfiguration;
         }
 
         //2) Check joint limits.. Is this necessary?
-        for (size_t i = 0; i < m_optimizedRobotDofs.size(); ++i) {
+        for (size_t i = 0; i < m_jointInitialConditions.size(); ++i) {
             //check joint to be inside limit
-            double &jointValue = m_optimizedRobotDofs(i);
+            double &jointValue = m_jointInitialConditions(i);
             if (jointValue < m_jointLimits[i].first || jointValue > m_jointLimits[i].second) {
                 //set the initial value to be at the middle of the limits
                 jointValue = (m_jointLimits[i].second + m_jointLimits[i].first) / 2.0;
@@ -230,7 +233,8 @@ namespace kinematics {
             //For example, one needed option is the linear solver type
             //Best thing is to wrap the IPOPT options with new structure so as to abstract them
             m_solver->Options()->SetStringValue("hessian_approximation", "limited-memory");
-            //            m_pimpl->solver->Options()->SetIntegerValue("max_iter", 1);
+            m_solver->Options()->SetIntegerValue("print_level",5);
+            m_solver->Options()->SetIntegerValue("max_iter", 40);
 #ifndef NDEBUG
             m_solver->Options()->SetStringValue("derivative_test", "first-order");
 #endif
@@ -262,8 +266,8 @@ namespace kinematics {
     void InverseKinematicsData::getSolution(iDynTree::Transform & baseTransformSolution,
                                             iDynTree::VectorDynSize & shapeSolution)
     {
-        baseTransformSolution = m_optimizedBasePose;
-        shapeSolution         = m_optimizedRobotDofs;
+        baseTransformSolution = m_baseResults;
+        shapeSolution         = m_jointsResults;
     }
 
 }

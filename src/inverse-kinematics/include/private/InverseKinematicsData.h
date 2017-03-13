@@ -86,12 +86,14 @@ class internal::kinematics::InverseKinematicsData {
 
     bool m_areBaseInitialConditionsSet; /*!< True if initial condition for the base pose are provided by the user */
     bool m_areJointsInitialConditionsSet; /*!< True if initial condition for the joints are provided by the user */
+
+    //These variables containts the initial condition
+    iDynTree::Transform m_baseInitialCondition;
+    iDynTree::VectorDynSize m_jointInitialConditions;
+
     //Result of optimization
-    //These variables also containts the initial condition if
-    //the solver has not obtained a solution yet
-    //Actually they contains either the initial condition or the solution
-    iDynTree::VectorDynSize m_optimizedRobotDofs;
-    iDynTree::Transform m_optimizedBasePose;
+    iDynTree::Transform m_baseResults;
+    iDynTree::VectorDynSize m_jointsResults;
 
     ///@}
 

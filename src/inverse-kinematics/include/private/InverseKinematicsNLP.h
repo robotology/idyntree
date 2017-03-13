@@ -79,8 +79,6 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
 
     InverseKinematicsData& m_data; /*!< Reference to the InverseKinematicsData object. Non IPOPT-specific data are saved and accessed in that object */
 
-    iDynTree::VectorDynSize jointsConfiguration; //this is used to update the model at an optimization step
-
     //Buffers and variables used in the optimization
     iDynTree::MatrixFixSize<3, 4> quaternionDerivativeInverseMapBuffer; /*!< this is used to contain the quaternionDerivativeInverseMap, computed once for each optimization step */
     iDynTree::MatrixDynSize finalJacobianBuffer; /*!< Buffer to contain the Jacobian as modified to handle quaternions */
@@ -89,8 +87,8 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
     FrameInfoMap targetsInfo; /*!< FrameInfo map for the targets */
 
     //Temporary optimized variables
-    iDynTree::Position basePosition; /*!< Hold the base frame origin at an optimization step */
-    iDynTree::Vector4 baseOrientation; /*!< Hold the base frame orientation at an optimization step. Note that if orientation is RPY, the last component should not be accessed */
+    iDynTree::Position optimizedBasePosition; /*!< Hold the base frame origin at an optimization step */
+    iDynTree::Vector4 optimizedBaseOrientation; /*!< Hold the base frame orientation at an optimization step. Note that if orientation is RPY, the last component should not be accessed */
     iDynTree::VectorDynSize optimizedJoints; /*!< Hold the joints configuration at an optimization step */
 
     double jointCostWeight; /*!< regularization weight. This should probably be changed as soon as each task is weighted */

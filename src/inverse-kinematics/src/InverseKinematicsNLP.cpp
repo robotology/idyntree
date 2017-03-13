@@ -44,8 +44,6 @@ namespace kinematics {
         UNUSED_VARIABLE(m);
         //This method should initialize all the internal buffers used during
         //the optimization
-
-        jointsConfiguration = m_data.m_state.jointsConfiguration; //copy the vector
         optimizedJoints.resize(n - (3 + sizeOfRotationParametrization(m_data.m_rotationParametrization)));
 
         //resize some buffers
@@ -76,19 +74,19 @@ namespace kinematics {
 
         //first: save robot configuration
         //position
-        basePosition(0) = x[0];
-        basePosition(1) = x[1];
-        basePosition(2) = x[2];
+        optimizedBasePosition(0) = x[0];
+        optimizedBasePosition(1) = x[1];
+        optimizedBasePosition(2) = x[2];
 
         //orientation
         for (unsigned i = 0; i < sizeOfRotationParametrization(m_data.m_rotationParametrization); ++i) {
-            this->baseOrientation(i) = x[3 + i];
+            this->optimizedBaseOrientation(i) = x[3 + i];
         }
 
         //joints
         for (unsigned index = 0; index < m_data.m_dofs; ++index) {
             this->optimizedJoints(index) = x[3 + sizeOfRotationParametrization(m_data.m_rotationParametrization) + index];
-            this->optimizedJoints(index) = jointsConfiguration(index);
+            //this->optimizedJoints(index) = jointsConfiguration(index);
         }
 
         //Update robot state and state-dependent variables
@@ -97,7 +95,7 @@ namespace kinematics {
         //Get the rotation from the used serialization
         if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
             //Quaternion parametrization
-            baseOrientationRotation.fromQuaternion(this->baseOrientation);
+            baseOrientationRotation.fromQuaternion(this->optimizedBaseOrientation);
 
             /*! As we used a quaternion we have to update the maps
              * used when we compute the derivatives as we
@@ -109,7 +107,7 @@ namespace kinematics {
              * that is
              *
              */
-            iDynTree::Vector4 normQuaternioniDyn = this->baseOrientation;
+            iDynTree::Vector4 normQuaternioniDyn = this->optimizedBaseOrientation;
             iDynTree::toEigen(normQuaternioniDyn).normalize();
 
             Eigen::Map<Eigen::Matrix<double, 3, 4, Eigen::RowMajor> > inverseMap = iDynTree::toEigen(quaternionDerivativeInverseMapBuffer);
@@ -145,7 +143,7 @@ namespace kinematics {
              * where \f$ \bar{z}_B : z_B = \frac{\bar{z}_B}{\norm{\bar{z}_B}} \f$
              */
             Eigen::Matrix<double, 4, 4, Eigen::RowMajor> normalizedQuaternionDerivative;
-            Eigen::Map<Eigen::Vector4d> quaternion = iDynTree::toEigen(this->baseOrientation);
+            Eigen::Map<Eigen::Vector4d> quaternion = iDynTree::toEigen(this->optimizedBaseOrientation);
             double quaternionSNorm = quaternion.squaredNorm();
             normalizedQuaternionDerivative.setIdentity();
             normalizedQuaternionDerivative *= quaternionSNorm;
@@ -156,13 +154,13 @@ namespace kinematics {
 
         } else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
             //RPY parametrization
-            baseOrientationRotation = iDynTree::Rotation::RPY(this->baseOrientation(0), this->baseOrientation(1), this->baseOrientation(2));
+            baseOrientationRotation = iDynTree::Rotation::RPY(this->optimizedBaseOrientation(0), this->optimizedBaseOrientation(1), this->optimizedBaseOrientation(2));
         }
         // base pose
-        iDynTree::Transform basePose(baseOrientationRotation, basePosition);
+        iDynTree::Transform basePose(baseOrientationRotation, optimizedBasePosition);
 
         if (!m_data.m_dynamics.setRobotState(basePose,
-                                             jointsConfiguration,
+                                             optimizedJoints,
                                              m_data.m_state.baseTwist,
                                              m_data.m_state.jointsVelocity,
                                              m_data.m_state.worldGravity)) {
@@ -235,7 +233,7 @@ namespace kinematics {
                                             IndexStyleEnum& index_style)
     {
         //Size of optimization variables is 3 + Orientation (base) + size of joints we optimize
-        n = 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization) + m_data.m_optimizedRobotDofs.size();
+        n = 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization) + m_data.m_dofs;
 
         //Start adding constraints
         m = 0;
@@ -422,7 +420,7 @@ namespace kinematics {
         
         //initial conditions
         if (init_x) {
-            iDynTree::Position position = m_data.m_optimizedBasePose.getPosition();
+            iDynTree::Position position = m_data.m_baseInitialCondition.getPosition();
             for (Ipopt::Index i = 0; i < 3; ++i) {
                 x[i] = position(i);
             }
@@ -432,10 +430,10 @@ namespace kinematics {
 
             switch (m_data.m_rotationParametrization) {
                 case iDynTree::InverseKinematicsRotationParametrizationQuaternion:
-                    baseRotation = iDynTree::toEigen(m_data.m_optimizedBasePose.getRotation().asQuaternion());
+                    baseRotation = iDynTree::toEigen(m_data.m_baseInitialCondition.getRotation().asQuaternion());
                     break;
                 case iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw:
-                    baseRotation.head<3>() = iDynTree::toEigen(m_data.m_optimizedBasePose.getRotation().asRPY());
+                    baseRotation.head<3>() = iDynTree::toEigen(m_data.m_baseInitialCondition.getRotation().asRPY());
                     break;
                 default:
                     return false;
@@ -443,7 +441,7 @@ namespace kinematics {
 
             Ipopt::Index baseSize = 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization);
             Eigen::Map<Eigen::VectorXd> joints(&x[baseSize], n - baseSize);
-            joints = iDynTree::toEigen(m_data.m_optimizedRobotDofs);
+            joints = iDynTree::toEigen(m_data.m_jointInitialConditions);
 
         }
         //We do not initialize the other components
@@ -470,9 +468,7 @@ namespace kinematics {
         //Cost function
         //J = Sum_i^#targets  Error on rotation   + ||q - q_des ||^2 (as regularization term)
 
-        Eigen::Map<Eigen::VectorXd> qj_desired = iDynTree::toEigen(m_data.m_preferredJointsConfiguration);
-        Eigen::Map<Eigen::VectorXd> jointError = iDynTree::toEigen(this->optimizedJoints);
-        jointError -= qj_desired;
+        Eigen::VectorXd jointError = iDynTree::toEigen(this->optimizedJoints)-iDynTree::toEigen(m_data.m_preferredJointsConfiguration);
 
         obj_value = 0.5 * jointCostWeight * jointError.squaredNorm();
 
@@ -513,7 +509,6 @@ namespace kinematics {
                 }
             }
         }
-        
 
         return true;
     }
@@ -583,6 +578,8 @@ namespace kinematics {
                 }
             }
         }
+
+
 
         return true;
     }
@@ -663,7 +660,7 @@ namespace kinematics {
         if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
             //Quaternion norm constraint
             // || Q(base) ||^2 = 1
-            constraints[index++] = iDynTree::toEigen(this->baseOrientation).squaredNorm();
+            constraints[index++] = iDynTree::toEigen(this->optimizedBaseOrientation).squaredNorm();
         }
 
         assert(index == m);
@@ -755,7 +752,7 @@ namespace kinematics {
                     //RPY parametrization
                     iDynTree::Matrix3x3 omegaToRPYMap;
                     iDynTree::Vector3 rpy;
-                    iDynTree::toEigen(rpy) = iDynTree::toEigen(this->baseOrientation).head<3>();
+                    iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
                     omegaToRPYParameters(rpy, omegaToRPYMap);
                     constraintJacobian.bottomRows<3>() = iDynTree::toEigen(omegaToRPYMap) * constraintJacobian.bottomRows<3>();
                 }
@@ -831,7 +828,7 @@ namespace kinematics {
                 //Quaternion norm derivative
                 // = 2 * Q^\top
                 Eigen::Map<Eigen::VectorXd> quaternionDerivative(&values[constraintIndex * n], 4);
-                quaternionDerivative = 2 * iDynTree::toEigen(this->baseOrientation).transpose();
+                quaternionDerivative = 2 * iDynTree::toEigen(this->optimizedBaseOrientation).transpose();
                 constraintIndex++;
             }
             assert(m == constraintIndex);
@@ -865,9 +862,9 @@ namespace kinematics {
 
         //Obtain base position
         iDynTree::Position basePosition;
-        basePosition(0) = x[0];
-        basePosition(1) = x[1];
-        basePosition(2) = x[2];
+        optimizedBasePosition(0) = x[0];
+        optimizedBasePosition(1) = x[1];
+        optimizedBasePosition(2) = x[2];
 
         //Obtain base orientation
         iDynTree::Vector4 baseOrientationSerialization;
@@ -885,12 +882,12 @@ namespace kinematics {
                                                       baseOrientationSerialization(2));
         }
         //Save base pose
-        m_data.m_optimizedBasePose.setPosition(basePosition);
-        m_data.m_optimizedBasePose.setRotation(baseOrientation);
+        m_data.m_baseResults.setPosition(basePosition);
+        m_data.m_baseResults.setRotation(baseOrientation);
 
         //joints
         for (unsigned index = 0; index < m_data.m_dofs; ++index) {
-            m_data.m_optimizedRobotDofs(index) = x[3 + sizeOfRotationParametrization(m_data.m_rotationParametrization) + index];
+            m_data.m_jointsResults(index) = x[3 + sizeOfRotationParametrization(m_data.m_rotationParametrization) + index];
         }
 
 
