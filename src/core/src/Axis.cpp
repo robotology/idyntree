@@ -95,39 +95,22 @@ namespace iDynTree
     
       Transform Axis::getTranslationTransform(const double dist) const
     {
-        // Formula for rotation around and arbitrary axis given by
-        // http://inside.mines.edu/fs_home/gmurray/ArbitraryAxisRotation/
         Transform nonTranslated_T_translated;
 
         //No rotation
-        const double theta = 0.0;
-        nonTranslated_T_translated.setRotation(Rotation::RotAxis(this->getDirection(),theta));
+        nonTranslated_T_translated.setRotation(Rotation::RotAxis(this->getDirection(),0.0));
 
         // translation
-        double cost = cos(theta);
-        double sint = sin(theta);
         double u   = this->getDirection()(0);
-        double u2  = u*u;
         double v   = this->getDirection()(1);
-        double v2  = v*v;
         double w   = this->getDirection()(2);
-        double w2  = w*w;
-        double a    = this->getOrigin()(0);
-        double b    = this->getOrigin()(1);
-        double c    = this->getOrigin()(2);
-
+       
         Position translationPosition;
-        translationPosition(0) =
-            (a*(v2+w2) - u*(b*v+c*w))*(1-cost) + (b*w-c*v)*sint;
-        translationPosition(1) =
-            (b*(u2+w2) - v*(a*u+c*w))*(1-cost) + (c*u-a*w)*sint;
-        translationPosition(2) =
-            (c*(u2+v2) - w*(a*u+b*v))*(1-cost) + (a*v-b*u)*sint;
             
         //Translation because of joint variable    
-        translationPosition(0) = translationPosition(0) + u*dist + a;
-        translationPosition(1) = translationPosition(1) + v*dist + b;
-        translationPosition(2) = translationPosition(2) + w*dist + c;
+        translationPosition(0) = u*dist;
+        translationPosition(1) = v*dist;
+        translationPosition(2) = w*dist;
 
         nonTranslated_T_translated.setPosition(translationPosition);
 
@@ -172,42 +155,22 @@ namespace iDynTree
     
     TransformDerivative Axis::getTranslationTransformDerivative(const double dist) const
     {
-        // Formula for rotation around and arbitrary axis given by
-        // http://inside.mines.edu/fs_home/gmurray/ArbitraryAxisRotation/
-        // In this function we
         TransformDerivative derivative_nonTranslated_T_translated;
 
-        // rotation
         //No rotation
-        const double theta = 0.0;
-        derivative_nonTranslated_T_translated.setRotationDerivative(Rotation::RotAxisDerivative(this->getDirection(),theta));
+        derivative_nonTranslated_T_translated.setRotationDerivative(Rotation::RotAxisDerivative(this->getDirection(),0.0));
 
         // translation
-        double cost = cos(theta);
-        double sint = sin(theta);
         double u   = this->getDirection()(0);
-        double u2  = u*u;
         double v   = this->getDirection()(1);
-        double v2  = v*v;
         double w   = this->getDirection()(2);
-        double w2  = w*w;
-        double a    = this->getOrigin()(0);
-        double b    = this->getOrigin()(1);
-        double c    = this->getOrigin()(2);
-
+        
         Vector3 translationPositionDerivative;
-        translationPositionDerivative(0) =
-            (a*(v2+w2) - u*(b*v+c*w))*(sint) + (b*w-c*v)*cost;
-        translationPositionDerivative(1) =
-            (b*(u2+w2) - v*(a*u+c*w))*(sint) + (c*u-a*w)*cost;
-        translationPositionDerivative(2) =
-            (c*(u2+v2) - w*(a*u+b*v))*(sint) + (a*v-b*u)*cost;
             
         //Translation because of joint variable    
-        translationPositionDerivative(0) = translationPositionDerivative(0) + u*dist + a;
-        translationPositionDerivative(1) = translationPositionDerivative(1) + v*dist + b;
-        translationPositionDerivative(2) = translationPositionDerivative(2) + w*dist + c;
-
+        translationPositionDerivative(0) = u*dist;
+        translationPositionDerivative(1) = v*dist;
+        translationPositionDerivative(2) = w*dist;
 
         derivative_nonTranslated_T_translated.setPositionDerivative(translationPositionDerivative);
 
