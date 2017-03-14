@@ -27,6 +27,7 @@
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 #include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model/LinkTraversalsCache.h>
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/Dynamics.h>
 #include <iDynTree/Model/Jacobians.h>
@@ -76,6 +77,9 @@ public:
     // Traversal (i.e. visit order of the links) used for dynamics computations
     // this defines the link that is used as a floating base
     iDynTree::Traversal m_traversal;
+
+    // Traversal cache
+    iDynTree::LinkTraversalsCache m_traversalCache;
 
     // State of the model
     // Frame where the reference frame is the world one
@@ -238,6 +242,7 @@ void KinDynComputations::resizeInternalDataStructures()
     this->pimpl->m_invDynZeroVel.baseVel().zero();
     this->pimpl->m_invDynZeroVel.jointVel().zero();
     this->pimpl->m_invDynZeroLinkVel.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_traversalCache.resize(this->pimpl->m_robot_model);
 
     for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(pimpl->m_robot_model.getNrOfLinks()); lnkIdx++)
     {
@@ -941,6 +946,122 @@ bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameInde
                                             pimpl->m_pos.jointPos(),pimpl->m_linkPos,
                                             jacobLink,jacobFrame_X_world,baseFrame_X_jacobBaseFrame,
                                             outJacobian);
+}
+
+
+bool KinDynComputations::getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
+                                             const iDynTree::FrameIndex frameIndex,
+                                             iDynTree::MatrixDynSize & outJacobian)
+{
+
+    iDynTree::FrameIndex expressedOriginFrame = iDynTree::FRAME_INVALID_INDEX;
+    iDynTree::FrameIndex expressedOrientationFrame = iDynTree::FRAME_INVALID_INDEX;
+
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION) {
+        //left trivialized: we want to expressed the information wrt child frame
+        expressedOriginFrame = expressedOrientationFrame = frameIndex;
+
+    } else if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION) {
+        //right trivialized: we want to expressed the information wrt parent frame
+        expressedOriginFrame = expressedOrientationFrame = refFrameIndex;
+    } else if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION) {
+        //Mixed representation: origin as child, orientation as parent
+        expressedOriginFrame = frameIndex;
+        expressedOrientationFrame = refFrameIndex;
+    }
+
+    return getRelativeJacobianExplicit(refFrameIndex, frameIndex, expressedOriginFrame, expressedOrientationFrame, outJacobian);
+}
+
+bool KinDynComputations::getRelativeJacobianExplicit(const iDynTree::FrameIndex refFrameIndex,
+                                                     const iDynTree::FrameIndex frameIndex,
+                                                     const iDynTree::FrameIndex expressedOriginFrameIndex,
+                                                     const iDynTree::FrameIndex expressedOrientationFrameIndex,
+                                                     iDynTree::MatrixDynSize & outJacobian)
+{
+    if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
+    {
+        reportError("KinDynComputations","getRelativeJacobian","Frame index out of bounds");
+        return false;
+    }
+    if (!pimpl->m_robot_model.isValidFrameIndex(refFrameIndex))
+    {
+        reportError("KinDynComputations","getRelativeJacobian","Reference frame index out of bounds");
+        return false;
+    }
+    if (!pimpl->m_robot_model.isValidFrameIndex(expressedOriginFrameIndex))
+    {
+        reportError("KinDynComputations","getRelativeJacobian","expressedOrigin frame index out of bounds");
+        return false;
+    }
+    if (!pimpl->m_robot_model.isValidFrameIndex(expressedOrientationFrameIndex))
+    {
+        reportError("KinDynComputations","getRelativeJacobian","expressedOrientation frame index out of bounds");
+        return false;
+    }
+
+    //See Traversaro's PhD thesis, 3.37
+    // (with: D:= frame, L := refFrame)
+    //Given two links, D and L, the left-trivialized relative jacobian
+    //{}^D S_{L, D} (i.e. the relative jacobian of D w.r.t. L written in D.
+    // which yields the left-trivialized relative velocity {}^D V_{L,D},
+    // i.e. the relative velocity of D wrt L written in D and where
+    // {}^D V_{L,D} = {}^D S_{L, D} \dot{s}
+    //
+    // The jacobian can be computed column-wise as
+    // {}^D S_{L, D}_i =
+    // Case: - {}^D X_F {}^F s_{E,F}  if i \in \pi^{DOF}_L (D) and DoFOffset({E, F}) = i
+    //       - 0 otherwise
+    // where,
+    // {}^D X_F is the velocity transformation from F to D
+    // {}^F s_{E,F} (as velocity vector) also called joint motion subspace vector: Describes the
+    //              velocity of the joint motion, relative velocity of F w.r.t. E written in F.
+    // \pi^{DOF}_L (D) degrees of freedom in the path connecting the Link D to the link L (as if it were the base).
+
+
+    // compute fwd kinematics (if necessary)
+    this->computeFwdKinematics();
+
+    // Get the links to which the frames are attached
+    LinkIndex jacobianLinkIndex = pimpl->m_robot_model.getFrameLink(frameIndex);
+    LinkIndex refJacobianLink = pimpl->m_robot_model.getFrameLink(refFrameIndex);
+
+    //I have the two links. Create the jacobian
+    outJacobian.resize(6, pimpl->m_robot_model.getNrOfDOFs());
+    outJacobian.zero();
+
+    iDynTree::Traversal& relativeTraversal = pimpl->m_traversalCache.getTraversalWithLinkAsBase(pimpl->m_robot_model, refJacobianLink);
+
+    // Compute joint part
+    // We iterate from the link up in the traveral until we reach the base
+    LinkIndex visitedLinkIdx = jacobianLinkIndex;
+
+    while (visitedLinkIdx != relativeTraversal.getBaseLink()->getIndex())
+    {
+        //get the pair of links in the traversal
+        //In the thesis this corresponds to links E and F, where
+        // - F current visited link
+        // - E parent of F wrt base L
+        // i.e. E = \lambda_L(F)
+        LinkIndex parentLinkIdx = relativeTraversal.getParentLinkFromLinkIndex(visitedLinkIdx)->getIndex();
+        IJointConstPtr joint = relativeTraversal.getParentJointFromLinkIndex(visitedLinkIdx);
+
+        //get {}^D X_F
+        Matrix6x6 Expressed_X_visited = getRelativeTransformExplicit(expressedOriginFrameIndex, expressedOrientationFrameIndex, visitedLinkIdx, visitedLinkIdx).asAdjointTransform();
+
+        //Now for each Dof get the motion subspace
+        //{}^F s_{E,F}, i.e. the velocity of F wrt E written in F.
+        size_t dofOffset = joint->getDOFsOffset();
+        for (int i = 0; i < joint->getNrOfDOFs(); ++i)
+        {
+            toEigen(outJacobian).col(dofOffset + i) = toEigen(Expressed_X_visited) * toEigen(joint->getMotionSubspaceVector(i, visitedLinkIdx, parentLinkIdx));
+        }
+
+        visitedLinkIdx = parentLinkIdx;
+    }
+
+    return true;
+
 }
 
 Vector6 KinDynComputations::getFrameBiasAcc(const std::string & frameName)
