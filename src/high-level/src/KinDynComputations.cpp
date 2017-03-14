@@ -529,6 +529,44 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
     return true;
 }
 
+void KinDynComputations::getRobotState(Transform& world_T_base,
+                                       VectorDynSize& s,
+                                       Twist& base_velocity,
+                                       VectorDynSize& s_dot,
+                                       Vector3& world_gravity)
+{
+    getRobotState(s, s_dot, world_gravity);
+
+    world_T_base = this->pimpl->m_pos.worldBasePos();
+
+    // Account for the different possible representations
+    if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        base_velocity = pimpl->m_pos.worldBasePos().getRotation() * pimpl->m_vel.baseVel();
+    }
+    else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // Data is stored in body fixed
+        base_velocity = pimpl->m_vel.baseVel();
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        // base_X_inertial \ls^inertial v_base
+        base_velocity = pimpl->m_pos.worldBasePos() * pimpl->m_vel.baseVel();
+    }
+    
+}
+
+void KinDynComputations::getRobotState(iDynTree::VectorDynSize &s,
+                                       iDynTree::VectorDynSize &s_dot,
+                                       iDynTree::Vector3& world_gravity)
+{
+    world_gravity = pimpl->m_gravityAcc;
+    toEigen(s) = toEigen(this->pimpl->m_pos.jointPos());
+    toEigen(s_dot) = toEigen(pimpl->m_vel.jointVel());
+}
+
 bool KinDynComputations::setJointPos(const VectorDynSize& s)
 {
     bool ok = (s.size() == pimpl->m_robot_model.getNrOfPosCoords());

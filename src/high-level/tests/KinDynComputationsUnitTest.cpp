@@ -68,6 +68,18 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
 
     bool ok = dynComp.setRobotState(worldTbase,qj,baseVel,dqj,gravity);
 
+    iDynTree::VectorDynSize qj_read(dofs), dqj_read(dofs);
+    Vector3 gravity_read;
+    Transform    worldTbase_read;
+    Twist        baseVel_read;
+    dynComp.getRobotState(worldTbase_read, qj_read, baseVel_read, dqj_read, gravity_read);
+
+    ASSERT_EQUAL_VECTOR(qj_read, qj);
+    ASSERT_EQUAL_VECTOR(dqj_read, dqj);
+    ASSERT_EQUAL_VECTOR(gravity_read, gravity);
+    ASSERT_EQUAL_TRANSFORM(worldTbase_read, worldTbase);
+    ASSERT_EQUAL_VECTOR(baseVel_read.asVector(), baseVel.asVector());
+
     ASSERT_EQUAL_DOUBLE(ok,true);
 }
 
@@ -75,7 +87,6 @@ void testRelativeTransform(iDynTree::KinDynComputations & dynComp)
 {
     using namespace iDynTree;
 
-    size_t dofs = dynComp.getNrOfDegreesOfFreedom();
     size_t frames = dynComp.getNrOfFrames();
 
     // Create some frames for random consistency checks

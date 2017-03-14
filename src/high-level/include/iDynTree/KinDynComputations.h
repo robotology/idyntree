@@ -291,6 +291,16 @@ public:
                        const iDynTree::VectorDynSize &s_dot,
                        const iDynTree::Vector3& world_gravity);
 
+    void getRobotState(iDynTree::Transform &world_T_base,
+                       iDynTree::VectorDynSize& s,
+                       iDynTree::Twist& base_velocity,
+                       iDynTree::VectorDynSize& s_dot,
+                       iDynTree::Vector3& world_gravity);
+
+    void getRobotState(iDynTree::VectorDynSize &s,
+                       iDynTree::VectorDynSize &s_dot,
+                       iDynTree::Vector3& world_gravity);
+
     /**
      * Access the robot state.
      */
