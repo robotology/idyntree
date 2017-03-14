@@ -25,12 +25,18 @@ using namespace iDynTree;
 
 double random_double()
 {
-    return 0.0*((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+    return 1.0*((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
 }
 
 double real_random_double()
 {
     return 1.0*((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+}
+
+int real_random_int(int initialValue, int finalValue)
+{
+    int length = finalValue - initialValue;
+    return initialValue + rand() % length;
 }
 
 void setRandomState(iDynTree::KinDynComputations & dynComp)
@@ -215,6 +221,86 @@ void testInverseDynamics(KinDynComputations & dynComp)
     }
 }
 
+void testRelativeJacobians(KinDynComputations & dynComp)
+{
+    if (dynComp.getNrOfLinks() < 2) return;
+    FrameIndex frame = -1;
+    FrameIndex refFrame = -1;
+
+    if (dynComp.getNrOfLinks() == 2) {
+        frame = 0;
+        refFrame = 1;
+    } else {
+        //Pick two frames at random
+        frame = real_random_int(0, dynComp.getNrOfFrames());
+        refFrame = -1;
+        //be sure to pick two different frames
+        do {
+            refFrame = real_random_int(0, dynComp.getNrOfFrames());
+        } while (refFrame == frame && frame >= 0);
+    }
+
+    FrameVelocityRepresentation representation = dynComp.getFrameVelocityRepresentation();
+    dynComp.setFrameVelocityRepresentation(MIXED_REPRESENTATION);
+
+    //Compute the relative Jacobian
+    iDynTree::MatrixDynSize relativeJacobian(6, dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getRelativeJacobian(refFrame, frame, relativeJacobian);
+
+    iDynTree::VectorDynSize qj(dynComp.getNrOfDegreesOfFreedom()), dqj(dynComp.getNrOfDegreesOfFreedom());
+    Vector3 gravity;
+    dynComp.getRobotState(qj, dqj, gravity);
+
+    Twist relativeVel;
+    Eigen::Matrix<double, 6, 1> relativeVelTemp;
+    relativeVelTemp = toEigen(relativeJacobian) * toEigen(dqj);
+    fromEigen(relativeVel, relativeVelTemp);
+
+    //this velocity depends on where the Jacobian is expressed
+
+    Twist frameVel = dynComp.getFrameVel(frame);
+    Twist refFrameVel = dynComp.getFrameVel(refFrame);
+
+    if (dynComp.getFrameVelocityRepresentation() == INERTIAL_FIXED_REPRESENTATION) {
+        //Inertial = right trivialized.
+        //frameVel is written wrt A
+        //refFrameVel is written wrt A
+        //relativeJacobian is written wrt refFrame
+        Eigen::Matrix<double, 6, 1> temp = toEigen(dynComp.getWorldTransform(refFrame).asAdjointTransform()) * toEigen(relativeVel);
+        fromEigen(relativeVel, temp);
+    } else if (dynComp.getFrameVelocityRepresentation() == BODY_FIXED_REPRESENTATION) {
+        //BODY = left trivialized.
+        //frameVel is written wrt frame
+        //refFrameVel is written wrt refFrame
+        //relativeJacobian is written wrt frame
+        //convert refFrameVel to frame
+        Eigen::Matrix<double, 6, 1> temp = toEigen(dynComp.getRelativeTransform(frame, refFrame).asAdjointTransform()) * toEigen(refFrameVel);
+        fromEigen(refFrameVel, temp);
+    } else if (dynComp.getFrameVelocityRepresentation() == MIXED_REPRESENTATION) {
+        //MIXED
+        //frameVel is written wrt frame, [A]
+        //refFrameVel is written wrt refFrame, [A]
+        //relativeJacobian is written wrt frame, [refFrame]
+        //convert refFrameVel to frame, [A]
+        Transform frame_A_H_frame(dynComp.getWorldTransform(frame).getRotation(), Position::Zero());
+
+        //refFrameVel = ref_[A]_v_ref, I want frame_[A]_v_ref. As I do not have an explicit A frame I do the following:
+        // frame_[A]_H_frame_[frame] * frame_[frame]_H_ref_[frame] * ref_[frame]_H_ref_[A] * ref_[A]_v_ref
+        Eigen::Matrix<double, 6, 1> temp = toEigen((frame_A_H_frame * dynComp.getRelativeTransformExplicit(frame, frame, refFrame, frame) * frame_A_H_frame.inverse()).asAdjointTransform()) * toEigen(refFrameVel);
+        fromEigen(refFrameVel, temp);
+        //and relativeVel to frame [A]
+        temp = toEigen((frame_A_H_frame * dynComp.getRelativeTransformExplicit(frame, frame, frame, refFrame)).asAdjointTransform()) * toEigen(relativeVel);
+        fromEigen(relativeVel, temp);
+    }
+
+    //now compute the error velocity
+    //now they should be expressed in the same frame
+    Twist velDifference = frameVel - refFrameVel;
+    ASSERT_EQUAL_VECTOR(velDifference, relativeVel);
+
+    dynComp.setFrameVelocityRepresentation(representation);
+}
+
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
     iDynTree::KinDynComputations dynComp;
@@ -231,6 +317,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
         testRelativeTransform(dynComp);
         testAverageVelocityAndTotalMomentumJacobian(dynComp);
         testInverseDynamics(dynComp);
+        testRelativeJacobians(dynComp);
     }
 
 }
