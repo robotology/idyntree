@@ -23,8 +23,11 @@ add_unit_test(Wrench)
 add_unit_test(ExpLog)
 add_unit_test(VectorDynSize)
 add_unit_test(MatrixDynSize)
-add_unit_test(SparseMatrix) 
+add_unit_test(SparseMatrix)
 add_unit_test(EigenHelpers)
+add_unit_test(Rotation)
+
+
 if (NOT ${EIGEN3_VERSION} VERSION_LESS 3.3)
   add_unit_test(EigenSparseHelpers)
 endif()

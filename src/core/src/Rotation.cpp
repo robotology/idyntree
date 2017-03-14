@@ -490,6 +490,55 @@ namespace iDynTree
         return Rotation(RotationRaw::RPY(roll, pitch, yaw));
     }
 
+    Matrix3x3 Rotation::RPYRightTrivializedDerivative(const double /*roll*/, const double pitch, const double yaw)
+    {
+        // See doc/symbolic/RPYExpressionReference.py
+
+        Matrix3x3 map;
+
+        double sp = std::sin(pitch);
+        double cp = std::cos(pitch);
+        double sy = std::sin(yaw);
+        double cy = std::cos(yaw);
+
+        map(0, 0) = cp*cy;
+        map(1, 0) = sy*cp;
+        map(2, 0) = -sp;
+        map(0, 1) = -sy;
+        map(1, 1) = cy;
+        map(2, 1) = 0.0;
+        map(0, 2) = 0.0;
+        map(1, 2) = 0.0;
+        map(2, 2) = 1.0;
+
+        return map;
+    }
+
+    Matrix3x3 Rotation::RPYRightTrivializedDerivativeInverse(const double /*roll*/, const double pitch, const double yaw)
+    {
+        // See doc/symbolic/RPYExpressionReference.py
+
+        Matrix3x3 map;
+
+        double cp = std::cos(pitch);
+        double tp = std::tan(pitch);
+        double sy = std::sin(yaw);
+        double cy = std::cos(yaw);
+
+        map(0, 0) = cy/cp;
+        map(1, 0) = -sy;
+        map(2, 0) = cy*tp;
+        map(0, 1) = sy/cp;
+        map(1, 1) = cy;
+        map(2, 1) = sy*tp;
+        map(0, 2) = 0.0;
+        map(1, 2) = 0.0;
+        map(2, 2) = 1.0;
+
+        return map;
+    }
+
+
     Rotation Rotation::Identity()
     {
         return RotationRaw::Identity();
@@ -508,7 +557,7 @@ namespace iDynTree
         _rotation.fromQuaternion(_quaternion);
         return _rotation;
     }
-
+    
     std::string Rotation::toString() const
     {
         std::stringstream ss;

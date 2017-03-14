@@ -11,6 +11,7 @@
 #include <string>
 #include <iDynTree/Core/RotationRaw.h>
 #include <iDynTree/Core/RotationSemantics.h>
+#include <iDynTree/Core/VectorFixSize.h>
 
 namespace iDynTree
 {
@@ -162,7 +163,7 @@ namespace iDynTree
          *
          * Get \f$ r \in [-180,180] , p \in [-90,90], y \in [-180,180]\f$
          * such that
-         * *this == RotZ(y)*RotY(p)*RotX(r) 
+         * *this == RotZ(y)*RotY(p)*RotX(r)
          *
          * @param[out] r roll rotation angle
          * @param[out] p pitch rotation angle
@@ -347,6 +348,27 @@ namespace iDynTree
          * @note This method is compatible with the KDL::Rotation::RPY method.
          */
         static Rotation RPY(const double roll, const double pitch, const double yaw);
+
+        /**
+         * Return the right-trivialized derivative of the RPY function.
+         *
+         * If we indicate with \f$ rpy \in \mathbb{R}^3 \f$ the roll pitch yaw vector,
+         * and with \f$  RPY(rpy) : \mathbb{R}^3 \mapsto SO(3) \f$ the function implemented
+         * in the Rotation::RPY method, this method returns the right-trivialized partial
+         * derivative of Rotation::RPY, i.e. :
+         * \f[
+         *    (RPY(rpy) \frac{\partial RPY(rpy)}{\partial rpy})^\vee
+         * \f]
+         */
+        static Matrix3x3 RPYRightTrivializedDerivative(const double roll, const double pitch, const double yaw);
+
+        /**
+         * Return the inverse of the right-trivialized derivative of the RPY function.
+         *
+         * See RPYRightTrivializedDerivative for a detailed description of the method.
+         *
+         */
+        static Matrix3x3 RPYRightTrivializedDerivativeInverse(const double roll, const double pitch, const double yaw);
 
         /**
          * Return an identity rotation.
