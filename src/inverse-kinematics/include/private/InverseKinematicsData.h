@@ -79,7 +79,7 @@ class internal::kinematics::InverseKinematicsData {
     TransformMap m_targets; /*!< list of targets */
 
     //Preferred joints configuration for the optimization
-    //Size #size of optimization variables
+    //Size: getNrOfDOFs of the considered model
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
 
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_targetResolutionMode; /*!< Specify how targets are solved (Partially/Fully in cost or as hard constraints) */

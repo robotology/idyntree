@@ -205,6 +205,7 @@ namespace kinematics {
             //check joint to be inside limit
             double &jointValue = m_jointInitialConditions(i);
             if (jointValue < m_jointLimits[i].first || jointValue > m_jointLimits[i].second) {
+                std::cerr << "[WARNING] InverseKinematics: joint with DOFIndex " << i << " initial condition is outside the limits " << m_jointLimits[i].first << " " << m_jointLimits[i].second << std::endl;
                 //set the initial value to be at the middle of the limits
                 jointValue = (m_jointLimits[i].second + m_jointLimits[i].first) / 2.0;
             }
@@ -234,7 +235,7 @@ namespace kinematics {
             //Best thing is to wrap the IPOPT options with new structure so as to abstract them
             m_solver->Options()->SetStringValue("hessian_approximation", "limited-memory");
             m_solver->Options()->SetIntegerValue("print_level",5);
-            m_solver->Options()->SetIntegerValue("max_iter", 40);
+            m_solver->Options()->SetIntegerValue("max_iter", 600);
 #ifndef NDEBUG
             m_solver->Options()->SetStringValue("derivative_test", "first-order");
 #endif
@@ -255,7 +256,7 @@ namespace kinematics {
         // Ask Ipopt to solve the problem
         solverStatus = m_solver->OptimizeTNLP(problem);
 
-        if (solverStatus == Ipopt::Solve_Succeeded) {
+        if (solverStatus == Ipopt::Solve_Succeeded || solverStatus == Ipopt::Solved_To_Acceptable_Level ) {
             std::cout << "*** The problem solved!\n";
             return true;
         } else {
