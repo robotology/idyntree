@@ -208,29 +208,6 @@ public:
     std::string toString(const Model & model) const;
 };
 
-/**
- * Link traversal cache, store a traversal for each link in the model.
- *
- * Class that stores a traversal for each link in the model.
- * It actually computes the traversal on the first time that a given traversal
- * is requested
- */
-class LinkTraversalsCache
-{
-private:
-    std::vector<Traversal *> m_linkTraversals;
-    void deleteTraversals();
-
-public:
-    LinkTraversalsCache();
-    ~LinkTraversalsCache();
-
-    void resize(unsigned int nrOfLinks);
-    void resize(const Model& model);
-
-    Traversal& getTraversalWithLinkAsBase(const Model & model, const LinkIndex linkIdx);
-};
-
 struct estimateExternalWrenchesBuffers
 {
     estimateExternalWrenchesBuffers();

@@ -16,6 +16,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
                            include/iDynTree/Model/Indeces.h
                            include/iDynTree/Model/Jacobians.h
                            include/iDynTree/Model/JointState.h
+                           include/iDynTree/Model/LinkTraversalsCache.h
                            include/iDynTree/Model/Link.h
                            include/iDynTree/Model/LinkState.h
                            include/iDynTree/Model/Model.h
@@ -39,6 +40,7 @@ set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/DynamicsLinearizationHelpers.cpp
                            src/Link.cpp
                            src/LinkState.cpp
+                           src/LinkTraversalsCache.cpp
                            src/Jacobians.cpp
                            src/JointState.cpp
                            src/Model.cpp
