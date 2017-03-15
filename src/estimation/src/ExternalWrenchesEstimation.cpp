@@ -28,6 +28,7 @@
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/ContactWrench.h>
+#include <iDynTree/Model/LinkTraversalsCache.h>
 
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/SixAxisFTSensor.h>
@@ -178,52 +179,6 @@ std::string LinkUnknownWrenchContacts::toString(const Model& model) const
     }
     return ss.str();
 }
-
-LinkTraversalsCache::LinkTraversalsCache()
-{
-
-}
-
-LinkTraversalsCache::~LinkTraversalsCache()
-{
-    deleteTraversals();
-}
-
-void LinkTraversalsCache::deleteTraversals()
-{
-    for(size_t link=0; link < m_linkTraversals.size(); link++)
-    {
-        delete m_linkTraversals[link];
-    }
-    m_linkTraversals.resize(0);
-}
-
-
-void LinkTraversalsCache::resize(const Model& model)
-{
-    this->resize(model.getNrOfLinks());
-}
-
-void LinkTraversalsCache::resize(unsigned int nrOfLinks)
-{
-    deleteTraversals();
-    m_linkTraversals.resize(nrOfLinks);
-    for(size_t link=0; link < m_linkTraversals.size(); link++)
-    {
-        m_linkTraversals[link] = new Traversal();
-    }
-}
-
-Traversal& LinkTraversalsCache::getTraversalWithLinkAsBase(const Model & model, const LinkIndex linkIdx)
-{
-    if( m_linkTraversals[linkIdx]->getNrOfVisitedLinks() == 0 )
-    {
-        model.computeFullTreeTraversal(*m_linkTraversals[linkIdx],linkIdx);
-    }
-
-    return *m_linkTraversals[linkIdx];
-}
-
 
 estimateExternalWrenchesBuffers::estimateExternalWrenchesBuffers()
 {

@@ -17,6 +17,8 @@
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/AllSensorsTypes.h>
 
+#include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
+
 #include <sstream>
 #include <algorithm>
 

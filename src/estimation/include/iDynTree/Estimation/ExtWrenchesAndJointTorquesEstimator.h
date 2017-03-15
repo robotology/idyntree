@@ -13,10 +13,11 @@
 #include <iDynTree/Model/SubModel.h>
 #include <iDynTree/Model/ContactWrench.h>
 #include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Sensors/Sensors.h>
-
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model/LinkTraversalsCache.h>
+
+#include <iDynTree/Sensors/Sensors.h>
 
 namespace iDynTree
 {

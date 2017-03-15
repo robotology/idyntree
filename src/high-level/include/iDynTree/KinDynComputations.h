@@ -291,6 +291,16 @@ public:
                        const iDynTree::VectorDynSize &s_dot,
                        const iDynTree::Vector3& world_gravity);
 
+    void getRobotState(iDynTree::Transform &world_T_base,
+                       iDynTree::VectorDynSize& s,
+                       iDynTree::Twist& base_velocity,
+                       iDynTree::VectorDynSize& s_dot,
+                       iDynTree::Vector3& world_gravity);
+
+    void getRobotState(iDynTree::VectorDynSize &s,
+                       iDynTree::VectorDynSize &s_dot,
+                       iDynTree::Vector3& world_gravity);
+
     /**
      * Access the robot state.
      */
@@ -402,6 +412,43 @@ public:
 
     bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
                                       iDynTree::MatrixDynSize & outJacobian);
+
+
+    /**
+     * Return the relative Jacobian between the two frames
+     *
+     * The Jacobian maps the internal robot shape with the relative
+     * velocity of refFrame w.r.t. frame expressed depending on the velocity representation, i.e
+     * \f[
+     *  v_{refFrame, frame} = J_{refFrame, frame}(s) \dot{s}
+     * \f]
+     *
+     */
+    bool getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
+                             const iDynTree::FrameIndex frameIndex,
+                             iDynTree::MatrixDynSize & outJacobian);
+
+    /**
+     * Return the relative Jacobian between the two frames
+     *
+     * The Jacobian maps the internal robot shape with the relative
+     * velocity of refFrame w.r.t. frame expressed in the specified frame, i.e
+     * \f[
+     *  {}^{expressedOriginFrame, [expressedOrientationFrame]} v_{refFrame, frame} = {}^{expressedOriginFrame, [expressedOrientationFrame]} J_{refFrame, frame}(s) \dot{s}
+     * \f]
+     *
+     * @param refFrameIndex reference frame
+     * @param frameIndex considered frame
+     * @param expressedOriginFrameIndex frame whose origin is used to express the Jacobian
+     * @param expressedOrientationFrameIndex frame whose orientation is used to express the Jacobian
+     * @return true on success, false otherwise
+     */
+    bool getRelativeJacobianExplicit(const iDynTree::FrameIndex refFrameIndex,
+                                     const iDynTree::FrameIndex frameIndex,
+                                     const iDynTree::FrameIndex expressedOriginFrameIndex,
+                                     const iDynTree::FrameIndex expressedOrientationFrameIndex,
+                                     iDynTree::MatrixDynSize & outJacobian);
+
 
     /**
      * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
