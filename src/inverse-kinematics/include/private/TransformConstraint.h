@@ -161,10 +161,20 @@ public:
     const iDynTree::Position& getPosition() const;
 
     /*!
+     * Set the position component of the current constrained value of the Transform.
+     */
+    void setPosition(iDynTree::Position& newPos);
+
+    /*!
      * Return the rotation component of the current constrained value of the Transform.
      * @return the transform rotation component
      */
     const iDynTree::Rotation& getRotation() const;
+
+    /*!
+     * Set the rotation component of the current constrained value of the Transform.
+     */
+    void setRotation(iDynTree::Rotation& newRot);
 
     /*!
      * Return the current constrained value of the Transform.
@@ -179,16 +189,26 @@ public:
     const std::string& getFrameName() const;
 
     /*!
-     * Return the current weight for the position
-     * @return the curretn weight for the position
+     * Return the weight for the position
+     * @return the weight for the position
      */
     const double getPositionWeight() const;
 
     /*!
-     * Return the current weight for the rotation
-     * @return the curretn weight for the rotation
+     * Set the weight for the position
+     */
+    void setPositionWeight(const double newPosWeight);
+
+    /*!
+     * Return the weight for the rotation
+     * @return the weight for the rotation
      */
     const double getRotationWeight() const;
+
+    /*!
+     * Set the weight for the position
+     */
+    void setRotationWeight(const double newRotWeight);
 
 };
 

@@ -45,7 +45,7 @@ class internal::kinematics::InverseKinematicsData {
     // The variables are divided among the optimized one (buffers inside the Solver, except results and I/O variables here),
     // the "model" variables and the parameters of the optimization.
 
-
+public:
     /*! @name Model-related variables
      */
     ///@{
@@ -110,7 +110,6 @@ class internal::kinematics::InverseKinematicsData {
      */
     void prepareForOptimization();
 
-public:
     /*! @name Optimization-related parameters
      */
     ///@{
@@ -160,6 +159,27 @@ public:
      * @return true if successfull, false otherwise
      */
     bool addTarget(const internal::kinematics::TransformConstraint& frameTransform);
+
+    /*!
+     * Get target if it exists.
+     *
+     * Get a reference to a target if it exists, or
+     * return m_targets::end() print an error otherwise.
+     */
+    TransformMap::iterator getTargetRefIfItExists(const std::string targetFrameName);
+
+    /*!
+     * Update the position reference for a target
+     *
+     */
+    void updatePositionTarget(TransformMap::iterator target, iDynTree::Position newPos, double newPosWeight);
+
+    /*!
+     * Update the position reference for a target
+     *
+     */
+    void updateRotationTarget(TransformMap::iterator target, iDynTree::Rotation newRot, double newRotWeight);
+
 
     /*!
      * Set the current robot configuration

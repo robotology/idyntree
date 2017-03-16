@@ -138,6 +138,31 @@ namespace kinematics {
         return result.second;
     }
 
+    TransformMap::iterator InverseKinematicsData::getTargetRefIfItExists(const std::string targetFrameName)
+    {
+        // The error for this check is already printed in getFrameIndex
+        int frameIndex = m_dynamics.getFrameIndex(targetFrameName);
+        if (frameIndex == iDynTree::FRAME_INVALID_INDEX)
+            return m_targets.end();
+
+        // Find the target (if this fails, it will return m_targets.end()
+        return m_targets.find(frameIndex);
+    }
+
+    void InverseKinematicsData::updatePositionTarget(TransformMap::iterator target, iDynTree::Position newPos, double newPosWeight)
+    {
+        assert(target != m_targets.end());
+        target->second.setPosition(newPos);
+        target->second.setPositionWeight(newPosWeight);
+    }
+
+    void InverseKinematicsData::updateRotationTarget(TransformMap::iterator target, iDynTree::Rotation newRot, double newRotWeight)
+    {
+        assert(target != m_targets.end());
+        target->second.setRotation(newRot);
+        target->second.setRotationWeight(newRotWeight);
+    }
+
     iDynTree::KinDynComputations& InverseKinematicsData::dynamics() { return m_dynamics; }
 
     bool InverseKinematicsData::setInitialCondition(const iDynTree::Transform* baseTransform,

@@ -229,6 +229,62 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::rotationConstraint(frameName,  constraintValue.getRotation(), rotationWeight));
     }
 
+    bool InverseKinematics::updateTarget(const std::string& frameName,
+                                         const Transform& targetValue,
+                                         const double positionWeight,
+                                         const double rotationWeight)
+    {
+        internal::kinematics::TransformMap::iterator transConstr = IK_PIMPL(m_pimpl)->getTargetRefIfItExists(frameName);
+
+        if( transConstr == IK_PIMPL(m_pimpl)->m_targets.end() )
+        {
+            std::stringstream ss;
+            ss << "No target for frame " << frameName << " was added to the InverseKinematics problem.";
+            reportError("InverseKinematics","updateTarget",ss.str().c_str());
+            return false;
+        }
+
+        IK_PIMPL(m_pimpl)->updatePositionTarget(transConstr,targetValue.getPosition(),positionWeight);
+        IK_PIMPL(m_pimpl)->updateRotationTarget(transConstr,targetValue.getRotation(),rotationWeight);
+        return true;
+    }
+
+    bool InverseKinematics::updatePositionTarget(const std::string& frameName,
+                                                 const Position& targetValue,
+                                                 const double positionWeight)
+    {
+        internal::kinematics::TransformMap::iterator transConstr = IK_PIMPL(m_pimpl)->getTargetRefIfItExists(frameName);
+
+        if( transConstr == IK_PIMPL(m_pimpl)->m_targets.end() )
+        {
+            std::stringstream ss;
+            ss << "No target for frame " << frameName << " was added to the InverseKinematics problem.";
+            reportError("InverseKinematics","updatePositionTarget",ss.str().c_str());
+            return false;
+        }
+
+        IK_PIMPL(m_pimpl)->updatePositionTarget(transConstr,targetValue,positionWeight);
+        return true;
+    }
+
+    bool InverseKinematics::updateRotationTarget(const std::string& frameName,
+                                                 const Rotation& targetValue,
+                                                 const double rotationWeight)
+    {
+        internal::kinematics::TransformMap::iterator transConstr = IK_PIMPL(m_pimpl)->getTargetRefIfItExists(frameName);
+
+        if( transConstr == IK_PIMPL(m_pimpl)->m_targets.end() )
+        {
+            std::stringstream ss;
+            ss << "No target for frame " << frameName << " was added to the InverseKinematics problem.";
+            reportError("InverseKinematics","updateRotationTarget",ss.str().c_str());
+            return false;
+        }
+
+        IK_PIMPL(m_pimpl)->updateRotationTarget(transConstr,targetValue,rotationWeight);
+        return true;
+    }
+
     bool InverseKinematics::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight)
     {
         assert(m_pimpl);

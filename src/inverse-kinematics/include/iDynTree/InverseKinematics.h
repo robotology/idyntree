@@ -418,6 +418,51 @@ public:
                            const iDynTree::Transform& targetValue,
                            const double rotationWeight=1.0);
 
+    /*!
+     * Update the desired target and weights for the specified frame.
+     *
+     * @param frameName       the name of the frame which represents the target
+     * @param targetValue value that the frame should reach
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is the the last one previously set.
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is the the last one previously set.
+     * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget .
+     */
+    bool updateTarget(const std::string& frameName,
+                      const iDynTree::Transform& targetValue,
+                      const double positionWeight=-1.0,
+                      const double rotationWeight=-1.0);
+
+    /*!
+     * Update the position (3D) target for the specified frame
+     *
+     * @param frameName the name of the frame which represents the target
+     * @param targetValue value that the origin of the frame frameName should reach
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is the last one previously set.
+     * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addPositionTarget .
+     */
+    bool updatePositionTarget(const std::string& frameName,
+                              const iDynTree::Position& targetValue,
+                              const double positionWeight=-1.0);
+    /*!
+     * Update an orientation target for the specified frame
+     *
+     * @param frameName the name of the frame which represents the target
+     * @param targetValue value that the orientation of the frame frameName should reach
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is the last one previously set.
+     * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget .
+     */
+    bool updateRotationTarget(const std::string& frameName,
+                              const iDynTree::Rotation& targetValue,
+                              const double rotationWeight=-1.0);
+
 
     /*!
      * Specify the method to solve the specified targets
