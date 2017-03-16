@@ -17,14 +17,13 @@
 #include <iDynTree/Core/SpatialForceVector.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
+#if __cplusplus > 199711L
+#include <iDynTree/Core/SparseMatrix.h>
+#endif
+
 
 namespace iDynTree
 {
-#if __cplusplus > 199711L
-    //This is needed for template checking
-    class SparseMatrix;
-#endif
-
 // Dynamics size toEigen methods
 inline Eigen::Map<Eigen::VectorXd> toEigen(VectorDynSize & vec)
 {
