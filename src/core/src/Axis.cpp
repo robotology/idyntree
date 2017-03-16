@@ -98,7 +98,7 @@ namespace iDynTree
         Transform nonTranslated_T_translated;
 
         //No rotation
-        nonTranslated_T_translated.setRotation(Rotation::RotAxis(this->getDirection(),0.0));
+        nonTranslated_T_translated.setRotation(iDynTree::Rotation::Identity());
 
         // translation
         double u   = this->getDirection()(0);
