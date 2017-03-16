@@ -78,7 +78,7 @@ namespace kinematics {
         clearProblem();
 
         updateRobotConfiguration();
-        
+
         return true;
     }
 
@@ -91,6 +91,7 @@ namespace kinematics {
         m_jointsResults.zero();
         m_preferredJointsConfiguration.resize(m_dofs);
         m_preferredJointsConfiguration.zero();
+        m_preferredJointsWeight = 1e-6;
 
         m_state.jointsConfiguration.resize(m_dofs);
         m_state.jointsConfiguration.zero();
@@ -119,7 +120,7 @@ namespace kinematics {
         return result.second;
     }
 
-    bool InverseKinematicsData::addTarget(const kinematics::TransformConstraint& frameTransform, double weight)
+    bool InverseKinematicsData::addTarget(const kinematics::TransformConstraint& frameTransform)
     {
         int frameIndex = m_dynamics.getFrameIndex(frameTransform.getFrameName());
         if (frameIndex < 0)
@@ -165,10 +166,13 @@ namespace kinematics {
         return true;
     }
 
-    bool InverseKinematicsData::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration)
+    bool InverseKinematicsData::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const double weight)
     {
         assert(m_preferredJointsConfiguration.size() == desiredJointConfiguration.size());
         m_preferredJointsConfiguration = desiredJointConfiguration;
+        if( weight >= 0.0 ) {
+            m_preferredJointsWeight = weight;
+        }
         return true;
     }
 

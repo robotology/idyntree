@@ -51,7 +51,7 @@ class internal::kinematics::InverseKinematicsData {
     ///@{
     iDynTree::KinDynComputations m_dynamics; /*!< object for kinematics and dynamics computation */
 
-    /*! 
+    /*!
      * Variables needed to identify the state of the robot
      * i.e. position and velocity
      */
@@ -81,6 +81,7 @@ class internal::kinematics::InverseKinematicsData {
     //Preferred joints configuration for the optimization
     //Size: getNrOfDOFs of the considered model
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
+    double m_preferredJointsWeight;
 
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_targetResolutionMode; /*!< Specify how targets are solved (Partially/Fully in cost or as hard constraints) */
 
@@ -143,17 +144,16 @@ public:
      * Add a target for the specified frame
      *
      * @param frameTransform the frame to be considered as a target
-     * @param weight weight for the associated target. Currently ignored
      * @return true if successfull, false otherwise
      */
-    bool addTarget(const internal::kinematics::TransformConstraint& frameTransform, double weight = 1);
+    bool addTarget(const internal::kinematics::TransformConstraint& frameTransform);
 
     /*!
      * Set the current robot configuration
      *
      * This confguration will be used for all internal calls to kinematics functions
      *
-     * @note if setInitialCondition is not called then the robot configuration is assumed 
+     * @note if setInitialCondition is not called then the robot configuration is assumed
      * as initial condition
      * @see setJointConfiguration
      *
@@ -178,9 +178,10 @@ public:
      * This term will be used as reference for the regularization term
      *
      * @param desiredJointConfiguration desired joint configuration
+     * @param desiredJointWeight weight for the regularization term
      * @return true if successfull, false otherwise
      */
-    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration);
+    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const double desiredJointWeight);
 
     /*!
      * Set the initial condition for the solver (i.e. guess solution)

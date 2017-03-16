@@ -46,21 +46,21 @@ struct simpleChainIKOptions
 
 void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::InverseKinematicsRotationParametrization rotationParametrization)
 {
-    // Solve a simple IK problem for a chain, with no constraints 
+    // Solve a simple IK problem for a chain, with no constraints
     for (int i = minNrOfJoints; i <= maxNrOfJoints; i++)
     {
         assert(i >= 2);
-        
+
         std::cerr << "~~~~~~~> simpleChainIK with " << i << " dofs " << std::endl;
         bool noFixedJoints = true;
         iDynTree::Model chain = iDynTree::getRandomChain(i,10,noFixedJoints);
 
         ASSERT_EQUAL_DOUBLE(i, chain.getNrOfDOFs());
-        
-        // Name of the targetFrame the leaf added by getRandomChain 
+
+        // Name of the targetFrame the leaf added by getRandomChain
         std::string targetFrame = "link" + iDynTree::int2string(i - 1);
 
-        // Create IK 
+        // Create IK
         iDynTree::InverseKinematics ik;
         bool ok = ik.setModel(chain);
         ASSERT_IS_TRUE(ok);
@@ -84,16 +84,16 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
         ok = kinDynDes.setJointPos(s);
         ASSERT_IS_TRUE(ok);
 
-        // Add the fixed base constraint 
+        // Add the fixed base constraint
         ok = ik.addFrameConstraint("link1", kinDynDes.getWorldTransform("link1"));
         //ok = ik.addFrameRotationConstraint("link1", iDynTree::Transform::Identity().getRotation());
         //ok = ik.addFramePositionConstraint("link1", iDynTree::Transform::Identity().getPosition());
         ASSERT_IS_TRUE(ok);
 
-        // Add target 
+        // Add target
         ok = ik.addPositionTarget(targetFrame, kinDynDes.getWorldTransform(targetFrame));
         ASSERT_IS_TRUE(ok);
-       
+
 
         // Add a random initial guess
         iDynTree::Transform baseDes = kinDynDes.getWorldBaseTransform();
@@ -102,16 +102,16 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
 
         // Add a random desired position
         iDynTree::JointPosDoubleArray sDesired = getRandomJointPositions(ik.model());
-        ik.setDesiredJointConfiguration(sDesired);
+        ik.setDesiredJointConfiguration(sDesired,1e-12);
 
         // Start from the initial one
         double tic = clockInSec();
         ok = ik.solve();
         double toc = clockInSec();
-        
+
         ASSERT_IS_TRUE(ok);
-        
-        // Get the solution 
+
+        // Get the solution
         iDynTree::Transform baseOpt = iDynTree::Transform::Identity();
         iDynTree::JointPosDoubleArray sOpt(ik.model());
         ik.getSolution(baseOpt,sOpt);
@@ -121,15 +121,15 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
         dummyGrav.zero();
         iDynTree::JointDOFsDoubleArray dummyJointVel(ik.model());
         dummyJointVel.zero();
-        
+
         kinDynOpt.setRobotState(baseOpt,sOpt,dummyVel,dummyJointVel,dummyGrav);
         double tolConstraints = 1e-7;
         double tolTargets     = 1e-6;
 
-        // Check if the base link constraint is still valid 
+        // Check if the base link constraint is still valid
         ASSERT_EQUAL_TRANSFORM_TOL(kinDynOpt.getWorldTransform("link1"), kinDynDes.getWorldTransform("link1"), tolConstraints);
-        
-        // Check if the target is realized 
+
+        // Check if the target is realized
         ASSERT_EQUAL_VECTOR_TOL(kinDynDes.getWorldTransform(targetFrame).getPosition(), kinDynOpt.getWorldTransform(targetFrame).getPosition(), tolTargets);
     }
 
@@ -142,7 +142,7 @@ void simpleHumanoidWholeBodyIKConsistency(const iDynTree::InverseKinematicsRotat
 
     bool ok = ik.loadModelFromFile(getAbsModelPath("iCubGenova02.urdf"));
     ASSERT_IS_TRUE(ok);
-    
+
     //ik.setFloatingBaseOnFrameNamed("l_foot");
 
     ik.setRotationParametrization(rotationParametrization);
@@ -163,7 +163,7 @@ void simpleHumanoidWholeBodyIKConsistency(const iDynTree::InverseKinematicsRotat
     // The l_sole frame is our world absolute frame (i.e. {}^A H_{l_sole} = identity
     ok = ik.addFrameConstraint("l_foot",kinDynDes.getWorldTransform("l_foot"));
     ASSERT_IS_TRUE(ok);
-    
+
     std::cerr << "kinDynDes.getWorldTransform(l_foot) : " << kinDynDes.getWorldTransform("l_foot").toString() << std::endl;
 
     // The relative position of the r_sole should be the initial one
@@ -179,10 +179,10 @@ void simpleHumanoidWholeBodyIKConsistency(const iDynTree::InverseKinematicsRotat
     //ASSERT_IS_TRUE(ok);
 
     iDynTree::Transform initialH = kinDynDes.getWorldBaseTransform();
-       
+
     ik.setInitialCondition(&initialH,&s);
-    //ik.setDesiredJointConfiguration(s);
-    
+    ik.setDesiredJointConfiguration(s,1e-15);
+
     // Solve the optimization problem
     double tic = clockInSec();
     ok = ik.solve();
@@ -193,7 +193,7 @@ void simpleHumanoidWholeBodyIKConsistency(const iDynTree::InverseKinematicsRotat
     iDynTree::Transform basePosOptimized;
     iDynTree::JointPosDoubleArray sOptimized(ik.model());
     sOptimized.zero();
-    
+
     ik.getSolution(basePosOptimized,sOptimized);
 
     // We create a new KinDyn object to perform forward kinematics for the optimized values
@@ -224,8 +224,8 @@ int main()
 
     // This is not working at the moment, there is some problem with quaternion constraints
     //simpleChainIK(10,iDynTree::InverseKinematicsRotationParametrizationQuaternion);
-    
+
     simpleHumanoidWholeBodyIKConsistency(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
-    
+
     return EXIT_SUCCESS;
 }

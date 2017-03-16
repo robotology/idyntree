@@ -20,7 +20,7 @@
 
 /*
  * Private implementation is divided in two classes.
- * - IKData is responsible of handling all the data and functions which are 
+ * - IKData is responsible of handling all the data and functions which are
  *   tied to a particular solver
  * - IKNLP is an IPOPT NLP implementation. It manages only IPOPT related data
  *   and implements IPOPT related functions
@@ -143,40 +143,46 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::TransformConstraint::rotationConstraint(frameName, constraintValue.getRotation()));
     }
 
-    bool InverseKinematics::addTarget(const std::string& frameName, const iDynTree::Transform& constraintValue)
+    bool InverseKinematics::addTarget(const std::string& frameName,
+                                      const iDynTree::Transform& constraintValue,
+                                      const double positionWeight,
+                                      const double rotationWeight)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::fullTransformConstraint(frameName,  constraintValue));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::fullTransformConstraint(frameName,
+                                                                                                               constraintValue,
+                                                                                                               positionWeight,
+                                                                                                               rotationWeight));
     }
 
-    bool InverseKinematics::addPositionTarget(const std::string& frameName, const iDynTree::Position& constraintValue)
+    bool InverseKinematics::addPositionTarget(const std::string& frameName, const iDynTree::Position& constraintValue, const double positionWeight)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::positionConstraint(frameName,  constraintValue));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::positionConstraint(frameName,  constraintValue, positionWeight));
     }
 
-    bool InverseKinematics::addPositionTarget(const std::string& frameName, const iDynTree::Transform& constraintValue)
+    bool InverseKinematics::addPositionTarget(const std::string& frameName, const iDynTree::Transform& constraintValue, const double positionWeight)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::positionConstraint(frameName,  constraintValue.getPosition()));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::positionConstraint(frameName,  constraintValue.getPosition(), positionWeight));
     }
 
-    bool InverseKinematics::addRotationTarget(const std::string& frameName, const iDynTree::Rotation& constraintValue)
+    bool InverseKinematics::addRotationTarget(const std::string& frameName, const iDynTree::Rotation& constraintValue, const double rotationWeight)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::rotationConstraint(frameName,  constraintValue));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::rotationConstraint(frameName,  constraintValue, rotationWeight));
     }
 
-    bool InverseKinematics::addRotationTarget(const std::string& frameName, const iDynTree::Transform& constraintValue)
+    bool InverseKinematics::addRotationTarget(const std::string& frameName, const iDynTree::Transform& constraintValue, const double rotationWeight)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::rotationConstraint(frameName,  constraintValue.getRotation()));
+        return IK_PIMPL(m_pimpl)->addTarget(internal::kinematics::TransformConstraint::rotationConstraint(frameName,  constraintValue.getRotation(), rotationWeight));
     }
 
-    bool InverseKinematics::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration)
+    bool InverseKinematics::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->setDesiredJointConfiguration(desiredJointConfiguration);
+        return IK_PIMPL(m_pimpl)->setDesiredJointConfiguration(desiredJointConfiguration, weight);
     }
 
     bool InverseKinematics::setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* initialCondition)

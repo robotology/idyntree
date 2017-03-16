@@ -44,16 +44,16 @@ namespace kinematics {
  * & q = \{w_H_{base}, q_j\} \in SE(3) \times \mathbb{R}^n \\
  * & w_H_{f_i} \in SE(3)
  * \f}
- * 
- * A target (entirely or partially, with partial meaning the two components composing 
+ *
+ * A target (entirely or partially, with partial meaning the two components composing
  * a tranform, i.e. position and orientation) can be enforced by either considering
  * it as a constraint or as a cost
  *
  * \note Implementation details
  * this class coordinates with InverseKinematicsData to manages internal data
- * In particular to manages constraints and targets it uses an std::map which is an 
+ * In particular to manages constraints and targets it uses an std::map which is an
  * ordered container. Once the order is defined at configuration time, it is exploited
- * during the optimization by iterating on its elements. As this order is the same as the 
+ * during the optimization by iterating on its elements. As this order is the same as the
  * IPOPT variables the fact that we use a map instead of an unordered_map (which is faster
  * at construction and for random access) is relevant.
  *
@@ -91,13 +91,11 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
     iDynTree::Vector4 optimizedBaseOrientation; /*!< Hold the base frame orientation at an optimization step. Note that if orientation is RPY, the last component should not be accessed */
     iDynTree::VectorDynSize optimizedJoints; /*!< Hold the joints configuration at an optimization step */
 
-    double jointCostWeight; /*!< regularization weight. This should probably be changed as soon as each task is weighted */
-
     /*!
      * @brief update all the configuration dependent variables
      *
      * Update the robot configuration, the tranforms
-     * the jacobian and all the variables depending on 
+     * the jacobian and all the variables depending on
      * the actual value of the optimization state
      * @param x the current optimization state
      * @return true if successfull, false otherwise
@@ -122,12 +120,12 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
 
     /*!
      * @brief compute the IPOPT Jacobian given an iDynTree Jacobian
-     * 
+     *
      * Jacobians as outputted by iDynTree relates linear and angular velocities
      * with "internal" velocity (the velocity of the robot).
      * IPOPT is interested in the Jacobian as the derivative of the constraints
      * w.r.t. a variation of the optimization variable (not the time derivative).
-     * This function is responsible of adapting the iDynTree Jacobian 
+     * This function is responsible of adapting the iDynTree Jacobian
      * to obtain a Jacobian usable by IPOPT
      *
      * @param[in] transformJacobian the Jacobian of the frame Transform
@@ -141,7 +139,7 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
                                    const iDynTree::MatrixFixSize<3, 4>& quaternionDerivativeInverseMapBuffer,
                                    const int computationOption,
                                    iDynTree::MatrixDynSize& constraintJacobianBuffer);
-    
+
     void computeConstraintJacobianRPY(const iDynTree::MatrixDynSize& transformJacobian,
                                       const iDynTree::MatrixFixSize<3, 3>& rpyDerivativeMapBuffer,
                                       const iDynTree::MatrixFixSize<3, 3>& rpyDerivativeInverseMapBuffer,
@@ -228,7 +226,7 @@ public:
                                                              Ipopt::IpoptCalculatedQuantities* ip_cq);
 
     void testDerivatives(const iDynTree::VectorDynSize& derivativePoint, int frameIndex, double epsilon, double tolerance, int parametrization);
-    
+
 };
 
 #endif /* end of include guard: IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H */

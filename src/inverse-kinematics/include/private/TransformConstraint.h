@@ -61,6 +61,8 @@ private:
     TransformConstraintType m_type; /*!< type of transform */
     iDynTree::Transform m_transform; /*!< Constrained value for ${}^A H_C$. */
     std::string m_frameName; /*!< C constrained frame. */
+    double m_posWeight; /*!< Weight for the (eventual) cost associated with the position part of the task */
+    double m_rotWeight; /*!< Weight for the (eventual) cost associated with the rotation part of the task */
 
 public:
 
@@ -70,9 +72,10 @@ public:
      *
      * @param constrainedFrameName the name of the constrained frame, i.e. C
      * @param position the position to be considered as constraint for the frame
+     * @param posWeight the weight of the position cost if the position is associated with a cost
      * @return a newly created TransformConstraint object
      */
-    static TransformConstraint positionConstraint(const std::string& frameName, const iDynTree::Position &position);
+    static TransformConstraint positionConstraint(const std::string& frameName, const iDynTree::Position &position, const double posWeight=1.0);
 
     /*! @brief create an orientation constraint for the specified frame
      *
@@ -80,9 +83,10 @@ public:
      *
      * @param constrainedFrameName the name of the constrained frame, i.e. C
      * @param rotation the rotation to be considered as constraint for the frame
+     * @param rotWeight the weight of the rotation cost if the rotation is associated with a cost
      * @return a newly created Transform object
      */
-    static TransformConstraint rotationConstraint(const std::string& frameName, const iDynTree::Rotation &rotation);
+    static TransformConstraint rotationConstraint(const std::string& frameName, const iDynTree::Rotation &rotation, const double rotWeight=1.0);
 
     /*! @brief create a full Transform constraint for the specified frame
      *
@@ -95,9 +99,15 @@ public:
      * @param constrainedFrameName the name of the constrained frame, i.e. C
      * @param position the position to be considered as constraint for the frame
      * @param rotation the rotation to be considered as constraint for the frame
+     * @param posWeight the weight of the position cost if the position is associated with a cost
+     * @param rotWeight the weight of the rotation cost if the rotation is associated with a cost
      * @return a newly created Transform object
      */
-    static TransformConstraint fullTransformConstraint(const std::string& constrainedFrameName, const iDynTree::Position &position, const iDynTree::Rotation &rotation);
+    static TransformConstraint fullTransformConstraint(const std::string& constrainedFrameName,
+                                                       const iDynTree::Position &position,
+                                                       const iDynTree::Rotation &rotation,
+                                                       const double posWeight=1.0,
+                                                       const double rotWeight=1.0);
 
     /*! @brief create a full Transform constraint for the specified frame
      *
@@ -108,10 +118,15 @@ public:
      * @see fullTransformConstraint
      *
      * @param constrainedFrameName the name of the constrained frame, i.e. C
-     * @param position the position to be considered as constraint for the frame
+     * @param transform the transform to be considered as constraint for the frame
+     * @param posWeight the weight of the position cost if the position is associated with a cost
+     * @param rotWeight the weight of the rotation cost if the rotation is associated with a cost
      * @return a newly created Transform object
      */
-    static TransformConstraint fullTransformConstraint(const std::string& constrainedFrameName, const iDynTree::Transform &transform);
+    static TransformConstraint fullTransformConstraint(const std::string& constrainedFrameName,
+                                                       const iDynTree::Transform &transform,
+                                                       const double posWeight=1.0,
+                                                       const double rotWeight=1.0);
 
     /*!
      * @brief return the size of the constraint identified by this Constrained
@@ -162,7 +177,19 @@ public:
      * @return the transform frame name
      */
     const std::string& getFrameName() const;
-    
+
+    /*!
+     * Return the current weight for the position
+     * @return the curretn weight for the position
+     */
+    const double getPositionWeight() const;
+
+    /*!
+     * Return the current weight for the rotation
+     * @return the curretn weight for the rotation
+     */
+    const double getRotationWeight() const;
+
 };
 
 #endif /* end of include guard: IDYNTREE_INTERNAL_TRANSFORM_H */

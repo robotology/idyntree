@@ -49,7 +49,7 @@ namespace iDynTree {
     /*!
      * @brief Specify how to solve for the desired target
      *
-     * A target frame can be solved as a constraints 
+     * A target frame can be solved as a constraints
      * (i.e. if it cannot be obtained the problem is unfeasible)
      * or as a cost (best-effort to reach the target)
      */
@@ -121,9 +121,9 @@ public:
     /*!
      * @brief set the kinematic model to be used in the optimization
      *
-     * All the degrees of freedom of the model will be used as 
-     * optimization variables. If you want to perform the inverse kinematics 
-	 * just on a subset of the internal joints of the robot, please use the  
+     * All the degrees of freedom of the model will be used as
+     * optimization variables. If you want to perform the inverse kinematics
+	 * just on a subset of the internal joints of the robot, please use the
 	 * loadReducedModelFromFullModel method contained in the ModelLoader class.
      *
      * @param model the kinematic model to be used in the optimization
@@ -256,72 +256,95 @@ public:
      * Adds a target for the specified frame
      *
      * @param frameName       the name of the frame which represents the target
-     * @param constraintValue value that the frame should reach
-     *
+     * @param targetValue value that the frame should reach
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
      * @return true if successful, false otherwise.
      */
     bool addTarget(const std::string& frameName,
-                   const iDynTree::Transform& constraintValue);
+                   const iDynTree::Transform& targetValue,
+                   const double positionWeight=1.0,
+                   const double rotationWeight=1.0);
 
     /*!
      * Adds a position (3D) target for the specified frame
      *
      * @param frameName the name of the frame which represents the target
-     * @param constraintValue value that the origin of the frame frameName should reach
+     * @param targetValue value that the origin of the frame frameName should reach
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
      * @return true if successful, false otherwise.
      */
     bool addPositionTarget(const std::string& frameName,
-                           const iDynTree::Position& constraintValue);
+                           const iDynTree::Position& targetValue,
+                           const double positionWeight=1.0);
 
     /*!
      * Adds a position (3D) target for the specified frame
      *
-     * \note only the position component of the constraintValue parameter
+     * \note only the position component of the targetValue parameter
      * will be considered
      * @param frameName the name of the frame which represents the target
-     * @param constraintValue value that the origin of the frame frameName should reach
+     * @param targetValue value that the origin of the frame frameName should reach
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
      * @return true if successful, false otherwise.
      */
     bool addPositionTarget(const std::string& frameName,
-                           const iDynTree::Transform& constraintValue);
+                           const iDynTree::Transform& targetValue,
+                           const double positionWeight=1.0);
 
     /*!
      * Adds an orientation target for the specified frame
      *
      * @param frameName the name of the frame which represents the target
-     * @param constraintValue value that the orientation of the frame frameName should reach
+     * @param targetValue value that the orientation of the frame frameName should reach
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
      * @return true if successful, false otherwise.
      */
     bool addRotationTarget(const std::string& frameName,
-                           const iDynTree::Rotation& constraintValue);
+                           const iDynTree::Rotation& targetValue,
+                           const double rotationWeight=1.0);
 
     /*!
      * Adds an orientation target for the specified frame
      *
-     * \note only the orientation component of the constraintValue parameter
+     * \note only the orientation component of the targetValue parameter
      * will be considered
      *
      * This call is equivalent to call
      * @code
-     * addRotationTarget(frameName, constraintValue.rotation());
+     * addRotationTarget(frameName, targetValue.rotation());
      * @endcode
-     * @see 
+     * @see
      * addRotationTarget(const std::string&, const iDynTree::Rotation&)
      * addTarget(const std::string&, const iDynTree::Transform&)
      *
      * @param frameName the name of the frame which represents the target
-     * @param constraintValue value that the orientation of the frame frameName should reach
+     * @param targetValue value that the orientation of the frame frameName should reach
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
      * @return true if successful, false otherwise.
      */
     bool addRotationTarget(const std::string& frameName,
-                           const iDynTree::Transform& constraintValue);
+                           const iDynTree::Transform& targetValue,
+                           const double rotationWeight=1.0);
 
 
     /*!
      * Specify the method to solve the specified targets
-     * 
-     * Targets can be solved fully as cost, partially (position or orientation) 
-     * as cost and the other component as hard constraint or 
+     *
+     * Targets can be solved fully as cost, partially (position or orientation)
+     * as cost and the other component as hard constraint or
      * fully as hard constraints
      * @see targetResolutionMode()
      *
@@ -343,11 +366,14 @@ public:
      *
      * The solver will try to obtain solutions as similar to the specified configuration as possible
      *
-     * @param desiredJointConfiguration configuration for the joints
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weight weight for the joint configuration cost.
+     *                   If it is not passed, the previous passed value will be mantained.
+     *                   If the value was never passed, its value is 1e-6 .
      *
      * @return true if successful, false otherwise.
      */
-    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration);
+    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
 
     /*!
      * Initial guess for the solution
