@@ -158,7 +158,7 @@ namespace iDynTree
         TransformDerivative derivative_nonTranslated_T_translated;
 
         //No rotation
-        derivative_nonTranslated_T_translated.setRotationDerivative(Rotation::RotAxisDerivative(this->getDirection(),0.0));
+        derivative_nonTranslated_T_translated.setRotationDerivative(iDynTree::Rotation::Identity());
 
         // translation
         double u   = this->getDirection()(0);
@@ -168,9 +168,9 @@ namespace iDynTree
         Vector3 translationPositionDerivative;
             
         //Translation because of joint variable    
-        translationPositionDerivative(0) = u*dist;
-        translationPositionDerivative(1) = v*dist;
-        translationPositionDerivative(2) = w*dist;
+        translationPositionDerivative(0) = u;
+        translationPositionDerivative(1) = v;
+        translationPositionDerivative(2) = w;
 
         derivative_nonTranslated_T_translated.setPositionDerivative(translationPositionDerivative);
 
