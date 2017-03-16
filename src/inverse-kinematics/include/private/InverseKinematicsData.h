@@ -42,7 +42,7 @@ class internal::kinematics::InverseKinematicsData {
     InverseKinematicsData(const InverseKinematicsData&);
     InverseKinematicsData& operator=(const InverseKinematicsData&);
 
-    //!!!: The variables are divided among the optimized one (buffers inside the Solver, except results and I/O variables here),
+    // The variables are divided among the optimized one (buffers inside the Solver, except results and I/O variables here),
     // the "model" variables and the parameters of the optimization.
 
 
