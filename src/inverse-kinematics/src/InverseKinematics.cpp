@@ -106,6 +106,56 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->rotationParametrization();
     }
 
+    void InverseKinematics::setMaxIter(const int max_iter)
+    {
+        if (max_iter>0)
+            IK_PIMPL(m_pimpl)->m_maxIter = max_iter;
+        else
+            IK_PIMPL(m_pimpl)->m_maxIter = std::numeric_limits<int>::max();
+
+    }
+
+    int InverseKinematics::getMaxIter() const
+    {
+        return IK_PIMPL(m_pimpl)->m_maxIter;
+    }
+
+    void InverseKinematics::setMaxCpuTime(const double max_cpu_time)
+    {
+        IK_PIMPL(m_pimpl)->m_maxCpuTime = max_cpu_time;
+    }
+
+    double InverseKinematics::getMaxCpuTime() const
+    {
+        return IK_PIMPL(m_pimpl)->m_maxCpuTime;
+    }
+
+    void InverseKinematics::setTol(const double tol)
+    {
+        IK_PIMPL(m_pimpl)->m_tol = tol;
+    }
+
+    double InverseKinematics::getTol() const
+    {
+        return IK_PIMPL(m_pimpl)->m_tol;
+    }
+
+    void InverseKinematics::setConstrTol(const double constr_tol)
+    {
+        IK_PIMPL(m_pimpl)->m_constrTol = constr_tol;
+    }
+
+    double InverseKinematics::getConstrTol() const
+    {
+        return IK_PIMPL(m_pimpl)->m_constrTol;
+    }
+
+    void InverseKinematics::setVerbosity(const unsigned int verbose)
+    {
+        assert(m_pimpl);
+        IK_PIMPL(m_pimpl)->m_verbosityLevel = verbose;
+    }
+
     bool InverseKinematics::addFrameConstraint(const std::string& frameName)
     {
         assert(m_pimpl);

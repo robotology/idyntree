@@ -31,6 +31,14 @@ namespace kinematics {
     , m_areBaseInitialConditionsSet(false)
     , m_areJointsInitialConditionsSet(false)
     , m_solver(NULL)
+    // The default values for the ipopt related parameters are exactly the one of IPOPT,
+    // see https://www.coin-or.org/Ipopt/documentation/node41.html
+    //     https://www.coin-or.org/Ipopt/documentation/node42.html
+    , m_maxIter(3000)
+    , m_maxCpuTime(1e6)
+    , m_tol(1e-8)
+    , m_constrTol(1e-4)
+    , m_verbosityLevel(5)
     {
         //These variables are touched only once.
         m_state.worldGravity.zero();
@@ -238,8 +246,11 @@ namespace kinematics {
             //For example, one needed option is the linear solver type
             //Best thing is to wrap the IPOPT options with new structure so as to abstract them
             m_solver->Options()->SetStringValue("hessian_approximation", "limited-memory");
-            m_solver->Options()->SetIntegerValue("print_level",5);
-            m_solver->Options()->SetIntegerValue("max_iter", 600);
+            m_solver->Options()->SetIntegerValue("print_level",m_verbosityLevel);
+            m_solver->Options()->SetIntegerValue("max_iter", m_maxIter);
+            m_solver->Options()->SetNumericValue("max_cpu_time", m_maxCpuTime);
+            m_solver->Options()->SetNumericValue("tol",m_tol);
+            m_solver->Options()->SetNumericValue("constr_viol_tol",m_constrTol);
 #ifndef NDEBUG
             m_solver->Options()->SetStringValue("derivative_test", "first-order");
 #endif

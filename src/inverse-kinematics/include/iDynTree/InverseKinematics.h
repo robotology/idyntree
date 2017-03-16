@@ -134,6 +134,7 @@ public:
     /*!
      * Reset the variables.
      * @note the model is not removed
+     * @note The parameters such as max iterations, max cpu time and verbosity are resetted with this method.
      */
     void clearProblem();
 
@@ -165,6 +166,84 @@ public:
     void setRotationParametrization(enum InverseKinematicsRotationParametrization parametrization);
 
     enum InverseKinematicsRotationParametrization rotationParametrization();
+
+    /*! @name Parameters-related methods
+     */
+    ///@{
+
+    /**
+     * Sets Maximum Iteration.
+     *
+     * The default value for this parameter is 3000 .
+     *
+     * @param max_iter exits if iter>=max_iter (max_iter<0
+     *                   disables this check).
+     */
+    void setMaxIter(const int max_iter);
+
+    /**
+     * Retrieves the current value of Maximum Iteration.
+     * @return max_iter.
+     */
+    int getMaxIter() const;
+
+    /**
+     * Sets Maximum CPU seconds.
+     *
+     * The default value for this parameter is \frac$ 10^{6} \frac$ .
+     *
+     * @param max_cpu_time exits if cpu_time>=max_cpu_time given in
+     *                     seconds.
+     */
+    void setMaxCpuTime(const double max_cpu_time);
+
+    /**
+     * Retrieves the current value of Maximum CPU seconds.
+     * @return max_cpu_time.
+     */
+    double getMaxCpuTime() const;
+
+    /**
+     * Sets cost function tolerance.
+     *
+     * The default value for this parameter is \frac$ 10^{-8} \frac$  .
+     *
+     * @param tol tolerance.
+     */
+    void setTol(const double tol);
+
+    /**
+     * Retrieves cost function tolerance.
+     * @return tolerance.
+     */
+    double getTol() const;
+
+    /**
+     * Sets constraints tolerance.
+     *
+     * The default value for this parameter is \frac$ 10^{-4} \frac$  .
+     *
+     * @param tol tolerance.
+     */
+    void setConstrTol(const double constr_tol);
+
+    /**
+     * Retrieves constraints tolerance.
+     * @return tolerance.
+     */
+    double getConstrTol() const;
+
+    /*!
+     * Sets Verbosity.
+     * @param verbose is a integer number which progressively enables
+     *                different levels of warning messages or status
+     *                dump. The larger this value the more detailed
+     *                is the output.
+    */
+    void setVerbosity(const unsigned int verbose);
+
+    ///@}
+
 
     /*! @name Constraints-related methods
      */

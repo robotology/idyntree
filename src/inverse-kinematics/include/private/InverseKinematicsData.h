@@ -42,8 +42,8 @@ class internal::kinematics::InverseKinematicsData {
     InverseKinematicsData(const InverseKinematicsData&);
     InverseKinematicsData& operator=(const InverseKinematicsData&);
 
-    //!!!: I have to divide variables between the optimized one (buffers inside the Solver, except results and I/O variables here)
-    // and the "model" variables.
+    //!!!: The variables are divided among the optimized one (buffers inside the Solver, except results and I/O variables here),
+    // the "model" variables and the parameters of the optimization.
 
 
     /*! @name Model-related variables
@@ -111,6 +111,19 @@ class internal::kinematics::InverseKinematicsData {
     void prepareForOptimization();
 
 public:
+    /*! @name Optimization-related parameters
+     */
+    ///@{
+
+    int m_maxIter; /*!< Maximum number of iterations */
+    double m_maxCpuTime; /*!< Maximum CPU time */
+    double m_tol; /*!< Tolerance for the cost */
+    double m_constrTol; /*!< Tolerance for the constraints */
+    int m_verbosityLevel; /*!< Verbosity level */
+
+    ///@}
+
+
     /*!
      * Default constructor
      */
