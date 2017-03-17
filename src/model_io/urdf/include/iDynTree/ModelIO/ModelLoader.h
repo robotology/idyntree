@@ -75,6 +75,9 @@ public:
      * All other joints will be considered to be fixed to their default position,
      * and their child links will be lumped together.
      *
+     * @note the order of the degreese of freedom of the newly loaded model
+     * will be the one specified by the input joints serialization, i.e. consideredJoints
+     *
      * @param[in] filename path to the file to load.
      * @param[in] consideredJoints list of joints to consider in the model.
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
