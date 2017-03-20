@@ -47,6 +47,8 @@ before_script:
   # install dependencies using the codyco-superbuild script
   - chmod +x ./.ci/travis-deps.sh
   - sh .ci/travis-deps.sh
+  # On macOS, install ipopt from homebrew 
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ipopt; fi
   - mkdir build
   - cd build
   - export CMAKE_PREFIX_PATH=`pwd`/install
