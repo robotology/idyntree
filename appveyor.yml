@@ -14,32 +14,32 @@ install:
 build:
 
 build_script:
-  # download and build tinyxml 
+  # download and build tinyxml
   - cd c:\projects
   - git clone https://github.com/robotology-dependencies/tinyxml
-  - cd tinyxml 
+  - cd tinyxml
   - md build
-  - cd build 
+  - cd build
   - cmake ..
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" tinyxml.sln
   - cmake --build . --config Release
   - cmake --build . --config Release --target INSTALL
-  # download and install eigen3 
-  - cd c:\projects 
+  # download and install eigen3
+  - cd c:\projects
   - hg clone https://bitbucket.org/eigen/eigen
   - cd eigen
   - hg checkout 3.3-beta2
   - md build
-  - cd build 
+  - cd build
   - cmake ..
   - cmake --build . --config Release --target INSTALL
   # compile iDynTree
   - cd c:\projects\idyntree
   - md build
   - cd build
-  - cmake .. -DEIGEN3_INCLUDE_DIR="C:/Program Files (x86)/Eigen/include/eigen3" -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
+  - cmake .. -DEIGEN3_INCLUDE_DIR="C:/Program Files (x86)/Eigen/include/eigen3" -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" iDynTree.sln
   - cmake --build . --config Release
   - ctest --output-on-failure --build-config Release
-  - cmake --build . --config Release --target INSTALL 
-  
+  - cmake --build . --config Release --target INSTALL
+
