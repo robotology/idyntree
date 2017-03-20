@@ -538,6 +538,34 @@ namespace iDynTree
         return map;
     }
 
+    MatrixFixSize<4, 3> Rotation::QuaternionRightTrivializedDerivative(Vector4 quaternion)
+    {
+        MatrixFixSize<4, 3> outputMatrix;
+        Eigen::Map<Eigen::Matrix<double, 4, 3, Eigen::RowMajor> > map = iDynTree::toEigen(outputMatrix);
+        map.topRows<1>() = -iDynTree::toEigen(quaternion).tail<3>().transpose();
+        map.bottomRows<3>().setIdentity();
+        map.bottomRows<3>() *= quaternion(0);
+        map.bottomRows<3>() -= iDynTree::skew(iDynTree::toEigen(quaternion).tail<3>());
+        map *= 0.5;
+        return outputMatrix;
+    }
+
+    MatrixFixSize<3, 4> Rotation::QuaternionRightTrivializedDerivativeInverse(Vector4 quaternion)
+    {
+        MatrixFixSize<3, 4> outputMatrix;
+        Eigen::Map<Eigen::Matrix<double, 3, 4, Eigen::RowMajor> > map = iDynTree::toEigen(outputMatrix);
+
+        map.setZero();
+        map.leftCols<1>() = -iDynTree::toEigen(quaternion).tail<3>();
+        map.rightCols<3>().setIdentity();
+        map.rightCols<3>() *= iDynTree::toEigen(quaternion)(0);
+        map.rightCols<3>() += iDynTree::skew(iDynTree::toEigen(quaternion).tail<3>());
+
+        map *= 2;
+        return outputMatrix;
+    }
+
+
 
     Rotation Rotation::Identity()
     {

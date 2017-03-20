@@ -371,6 +371,28 @@ namespace iDynTree
         static Matrix3x3 RPYRightTrivializedDerivativeInverse(const double roll, const double pitch, const double yaw);
 
         /**
+         * Return the right-trivialized derivative of the Quaternion function.
+         *
+         * If we indicate with \f$ quat \in \mathbb{Q} \f$ the quaternion,
+         * and with \f$  QUAT(quat) : \mathbb{Q} \mapsto SO(3) \f$ the function implemented
+         * in the Rotation::RotationFromQuaternion method, this method returns the right-trivialized partial
+         * derivative of Rotation::RotationFromQuaternion, i.e. :
+         * \f[
+         *    (QUAT(quat) \frac{\partial QUAT(quat)}{\partial quat})^\vee
+         * \f]
+         */
+        static MatrixFixSize<4, 3> QuaternionRightTrivializedDerivative(Vector4 quaternion);
+
+        /**
+         * Return the inverse of the right-trivialized derivative of the Quaternion function.
+         *
+         * @see QuaternionRightTrivializedDerivative for a detailed description of the method.
+         *
+         */
+        static MatrixFixSize<3, 4> QuaternionRightTrivializedDerivativeInverse(Vector4 quaternion);
+
+
+        /**
          * Return an identity rotation.
          *
          *
