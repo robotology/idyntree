@@ -220,6 +220,9 @@ void simpleHumanoidWholeBodyIKConsistency(const iDynTree::InverseKinematicsRotat
 
 int main()
 {
+    // Improve repetability (at least in the same platform)
+    srand(0);
+
     simpleChainIK(2,13,iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
 
     // This is not working at the moment, there is some problem with quaternion constraints
