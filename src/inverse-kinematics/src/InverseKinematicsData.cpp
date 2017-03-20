@@ -31,6 +31,14 @@ namespace kinematics {
     , m_areBaseInitialConditionsSet(false)
     , m_areJointsInitialConditionsSet(false)
     , m_solver(NULL)
+    // The default values for the ipopt related parameters are exactly the one of IPOPT,
+    // see https://www.coin-or.org/Ipopt/documentation/node41.html
+    //     https://www.coin-or.org/Ipopt/documentation/node42.html
+    , m_maxIter(3000)
+    , m_maxCpuTime(1e6)
+    , m_tol(1e-8)
+    , m_constrTol(1e-4)
+    , m_verbosityLevel(5)
     {
         //These variables are touched only once.
         m_state.worldGravity.zero();
@@ -78,7 +86,7 @@ namespace kinematics {
         clearProblem();
 
         updateRobotConfiguration();
-        
+
         return true;
     }
 
@@ -91,6 +99,7 @@ namespace kinematics {
         m_jointsResults.zero();
         m_preferredJointsConfiguration.resize(m_dofs);
         m_preferredJointsConfiguration.zero();
+        m_preferredJointsWeight = 1e-6;
 
         m_state.jointsConfiguration.resize(m_dofs);
         m_state.jointsConfiguration.zero();
@@ -119,7 +128,7 @@ namespace kinematics {
         return result.second;
     }
 
-    bool InverseKinematicsData::addTarget(const kinematics::TransformConstraint& frameTransform, double weight)
+    bool InverseKinematicsData::addTarget(const kinematics::TransformConstraint& frameTransform)
     {
         int frameIndex = m_dynamics.getFrameIndex(frameTransform.getFrameName());
         if (frameIndex < 0)
@@ -127,6 +136,31 @@ namespace kinematics {
 
         std::pair<TransformMap::iterator, bool> result = m_targets.insert(TransformMap::value_type(frameIndex, frameTransform));
         return result.second;
+    }
+
+    TransformMap::iterator InverseKinematicsData::getTargetRefIfItExists(const std::string targetFrameName)
+    {
+        // The error for this check is already printed in getFrameIndex
+        int frameIndex = m_dynamics.getFrameIndex(targetFrameName);
+        if (frameIndex == iDynTree::FRAME_INVALID_INDEX)
+            return m_targets.end();
+
+        // Find the target (if this fails, it will return m_targets.end()
+        return m_targets.find(frameIndex);
+    }
+
+    void InverseKinematicsData::updatePositionTarget(TransformMap::iterator target, iDynTree::Position newPos, double newPosWeight)
+    {
+        assert(target != m_targets.end());
+        target->second.setPosition(newPos);
+        target->second.setPositionWeight(newPosWeight);
+    }
+
+    void InverseKinematicsData::updateRotationTarget(TransformMap::iterator target, iDynTree::Rotation newRot, double newRotWeight)
+    {
+        assert(target != m_targets.end());
+        target->second.setRotation(newRot);
+        target->second.setRotationWeight(newRotWeight);
     }
 
     iDynTree::KinDynComputations& InverseKinematicsData::dynamics() { return m_dynamics; }
@@ -165,10 +199,13 @@ namespace kinematics {
         return true;
     }
 
-    bool InverseKinematicsData::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration)
+    bool InverseKinematicsData::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const double weight)
     {
         assert(m_preferredJointsConfiguration.size() == desiredJointConfiguration.size());
         m_preferredJointsConfiguration = desiredJointConfiguration;
+        if( weight >= 0.0 ) {
+            m_preferredJointsWeight = weight;
+        }
         return true;
     }
 
@@ -234,8 +271,11 @@ namespace kinematics {
             //For example, one needed option is the linear solver type
             //Best thing is to wrap the IPOPT options with new structure so as to abstract them
             m_solver->Options()->SetStringValue("hessian_approximation", "limited-memory");
-            m_solver->Options()->SetIntegerValue("print_level",5);
-            m_solver->Options()->SetIntegerValue("max_iter", 600);
+            m_solver->Options()->SetIntegerValue("print_level",m_verbosityLevel);
+            m_solver->Options()->SetIntegerValue("max_iter", m_maxIter);
+            m_solver->Options()->SetNumericValue("max_cpu_time", m_maxCpuTime);
+            m_solver->Options()->SetNumericValue("tol",m_tol);
+            m_solver->Options()->SetNumericValue("constr_viol_tol",m_constrTol);
 #ifndef NDEBUG
             m_solver->Options()->SetStringValue("derivative_test", "first-order");
 #endif

@@ -42,16 +42,16 @@ class internal::kinematics::InverseKinematicsData {
     InverseKinematicsData(const InverseKinematicsData&);
     InverseKinematicsData& operator=(const InverseKinematicsData&);
 
-    //!!!: I have to divide variables between the optimized one (buffers inside the Solver, except results and I/O variables here)
-    // and the "model" variables.
+    // The variables are divided among the optimized one (buffers inside the Solver, except results and I/O variables here),
+    // the "model" variables and the parameters of the optimization.
 
-
+public:
     /*! @name Model-related variables
      */
     ///@{
     iDynTree::KinDynComputations m_dynamics; /*!< object for kinematics and dynamics computation */
 
-    /*! 
+    /*!
      * Variables needed to identify the state of the robot
      * i.e. position and velocity
      */
@@ -81,6 +81,7 @@ class internal::kinematics::InverseKinematicsData {
     //Preferred joints configuration for the optimization
     //Size: getNrOfDOFs of the considered model
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
+    double m_preferredJointsWeight;
 
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_targetResolutionMode; /*!< Specify how targets are solved (Partially/Fully in cost or as hard constraints) */
 
@@ -109,7 +110,19 @@ class internal::kinematics::InverseKinematicsData {
      */
     void prepareForOptimization();
 
-public:
+    /*! @name Optimization-related parameters
+     */
+    ///@{
+
+    int m_maxIter; /*!< Maximum number of iterations */
+    double m_maxCpuTime; /*!< Maximum CPU time */
+    double m_tol; /*!< Tolerance for the cost */
+    double m_constrTol; /*!< Tolerance for the constraints */
+    int m_verbosityLevel; /*!< Verbosity level */
+
+    ///@}
+
+
     /*!
      * Default constructor
      */
@@ -143,17 +156,37 @@ public:
      * Add a target for the specified frame
      *
      * @param frameTransform the frame to be considered as a target
-     * @param weight weight for the associated target. Currently ignored
      * @return true if successfull, false otherwise
      */
-    bool addTarget(const internal::kinematics::TransformConstraint& frameTransform, double weight = 1);
+    bool addTarget(const internal::kinematics::TransformConstraint& frameTransform);
+
+    /*!
+     * Get target if it exists.
+     *
+     * Get a reference to a target if it exists, or
+     * return m_targets::end() print an error otherwise.
+     */
+    TransformMap::iterator getTargetRefIfItExists(const std::string targetFrameName);
+
+    /*!
+     * Update the position reference for a target
+     *
+     */
+    void updatePositionTarget(TransformMap::iterator target, iDynTree::Position newPos, double newPosWeight);
+
+    /*!
+     * Update the position reference for a target
+     *
+     */
+    void updateRotationTarget(TransformMap::iterator target, iDynTree::Rotation newRot, double newRotWeight);
+
 
     /*!
      * Set the current robot configuration
      *
      * This confguration will be used for all internal calls to kinematics functions
      *
-     * @note if setInitialCondition is not called then the robot configuration is assumed 
+     * @note if setInitialCondition is not called then the robot configuration is assumed
      * as initial condition
      * @see setJointConfiguration
      *
@@ -178,9 +211,10 @@ public:
      * This term will be used as reference for the regularization term
      *
      * @param desiredJointConfiguration desired joint configuration
+     * @param desiredJointWeight weight for the regularization term
      * @return true if successfull, false otherwise
      */
-    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration);
+    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const double desiredJointWeight);
 
     /*!
      * Set the initial condition for the solver (i.e. guess solution)
