@@ -51,6 +51,8 @@ public:
     ///@{
     iDynTree::KinDynComputations m_dynamics; /*!< object for kinematics and dynamics computation */
 
+    std::vector<std::pair<double, double> > m_jointLimits; /*!< Limits for joints. The pair is ordered as min and max */
+
     /*!
      * Variables needed to identify the state of the robot
      * i.e. position and velocity
@@ -64,8 +66,6 @@ public:
     } m_state;
 
     unsigned m_dofs; /*!< internal DoFs of the model, i.e. size of joint vectors */
-
-    std::vector<std::pair<double, double> > m_jointLimits; /*!< Limits for joints. The pair is ordered as min and max */
 
     ///@}
 
