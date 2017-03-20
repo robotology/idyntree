@@ -37,6 +37,38 @@ iDynTree::JointPosDoubleArray getRandomJointPositions(const iDynTree::Model & mo
     return sRandom;
 }
 
+
+inline iDynTree::JointPosDoubleArray getRandomJointPositionsCloseTo(const iDynTree::Model& model, iDynTree::VectorDynSize s, double maxDelta)
+{
+    iDynTree::JointPosDoubleArray vec(model);
+
+    assert(vec.size() == model.getNrOfPosCoords());
+    for(iDynTree::JointIndex jntIdx=0; jntIdx < model.getNrOfJoints(); jntIdx++)
+    {
+        iDynTree::IJointConstPtr jntPtr = model.getJoint(jntIdx);
+        if( jntPtr->hasPosLimits() )
+        {
+            for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
+            {
+                int dofIndex = jntPtr->getDOFsOffset()+i;
+                double max = std::min(jntPtr->getMaxPosLimit(i),s(dofIndex)+maxDelta);
+                double min = std::max(jntPtr->getMinPosLimit(i),s(dofIndex)-maxDelta);
+                vec(dofIndex) = iDynTree::getRandomDouble(min,max);
+            }
+        }
+        else
+        {
+            for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
+            {
+                int dofIndex = jntPtr->getDOFsOffset()+i;
+                vec(jntPtr->getDOFsOffset()+i) = iDynTree::getRandomDouble(s(dofIndex)-maxDelta,s(dofIndex)+maxDelta);
+            }
+        }
+    }
+
+    return vec;
+}
+
 struct simpleChainIKOptions
 {
     iDynTree::InverseKinematicsRotationParametrization rotationParametrization;
@@ -70,6 +102,9 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
         // Use the requested parametrization
         ik.setRotationParametrization(rotationParametrization);
 
+        ik.setTol(1e-6);
+        ik.setConstrTol(1e-7);
+
         // Create also a KinDyn object to perform forward kinematics for the desired values and the optimized ones
         iDynTree::KinDynComputations kinDynDes;
         ok = kinDynDes.loadRobotModel(ik.model());
@@ -97,7 +132,9 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
 
         // Add a random initial guess
         iDynTree::Transform baseDes = kinDynDes.getWorldBaseTransform();
-        iDynTree::JointPosDoubleArray sInitial = getRandomJointPositions(ik.model());
+        // Set a max delta to avoid local minima in testing
+        double maxDelta = 0.01;
+        iDynTree::JointPosDoubleArray sInitial = getRandomJointPositionsCloseTo(ik.model(),s,maxDelta);
         ik.setInitialCondition(&(baseDes),&(sInitial));
 
         // Add a random desired position
@@ -123,8 +160,8 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
         dummyJointVel.zero();
 
         kinDynOpt.setRobotState(baseOpt,sOpt,dummyVel,dummyJointVel,dummyGrav);
-        double tolConstraints = 1e-7;
-        double tolTargets     = 1e-6;
+        double tolConstraints = 1e-6;
+        double tolTargets     = 1e-3;
 
         // Check if the base link constraint is still valid
         ASSERT_EQUAL_TRANSFORM_TOL(kinDynOpt.getWorldTransform("link1"), kinDynDes.getWorldTransform("link1"), tolConstraints);
