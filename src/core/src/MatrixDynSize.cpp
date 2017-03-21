@@ -152,11 +152,15 @@ const double* MatrixDynSize::data() const
 
 double& MatrixDynSize::operator()(const unsigned int row, const unsigned int col)
 {
+    assert(row < this->rows());
+    assert(col < this->cols());
     return this->m_data[rawIndexRowMajor(row,col)];
 }
 
 double MatrixDynSize::operator()(const unsigned int row, const unsigned int col) const
 {
+    assert(row < this->rows());
+    assert(col < this->cols());
     return this->m_data[rawIndexRowMajor(row,col)];
 }
 

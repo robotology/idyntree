@@ -311,12 +311,14 @@ SpatialVector<DerivedSpatialVecT>
     SPATIALVECTOR_TEMPLATE_HDR
     double SPATIALVECTOR_INSTANCE_HDR::operator()(const unsigned int index) const
     {
+        assert(index < SpatialVector::totalSize);
         return (index<SpatialVector::angularOffset? this->linearVec3(index) : this->angularVec3(index-3));
     }
 
     SPATIALVECTOR_TEMPLATE_HDR
     double& SPATIALVECTOR_INSTANCE_HDR::operator()(const unsigned int index)
     {
+        assert(index < SpatialVector::totalSize);
         return (index<SpatialVector::angularOffset? this->linearVec3(index) : this->angularVec3(index-3));
     }
 
