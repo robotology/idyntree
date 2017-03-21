@@ -3,21 +3,21 @@ classdef SparseMatrix < SwigRef
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
     end
-    function delete(self)
-      if self.swigPtr
-        iDynTreeMEX(123, self);
-        self.swigPtr=[];
-      end
-    end
     function self = SparseMatrix(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(124, varargin{:});
+        tmp = iDynTreeMEX(123, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
+      end
+    end
+    function delete(self)
+      if self.swigPtr
+        iDynTreeMEX(124, self);
+        self.swigPtr=[];
       end
     end
     function varargout = numberOfNonZeros(self,varargin)

@@ -120,6 +120,7 @@ const double* VectorDynSize::data() const
 
 double& VectorDynSize::operator()(unsigned int index)
 {
+    assert(index < this->size());
     return this->m_data[index];
 }
 
@@ -130,7 +131,7 @@ double VectorDynSize::operator()(unsigned int index) const
 
 double VectorDynSize::getVal(const unsigned int index) const
 {
-    if( index > this->size() )
+    if( index >= this->size() )
     {
         reportError("VectorDynSize","getVal","index out of bounds");
         return 0.0;
@@ -141,7 +142,7 @@ double VectorDynSize::getVal(const unsigned int index) const
 
 bool VectorDynSize::setVal(const unsigned int index, const double new_el)
 {
-    if( index > this->size() )
+    if( index >= this->size() )
     {
         reportError("VectorDynSize","getVal","index out of bounds");
         return false;

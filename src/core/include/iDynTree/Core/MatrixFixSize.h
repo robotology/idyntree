@@ -11,6 +11,7 @@
 
 #include <iDynTree/Core/Utils.h>
 
+#include <cassert>
 #include <cstring>
 #include <string>
 #include <iostream>
@@ -212,20 +213,24 @@ namespace iDynTree
     template<unsigned int nRows, unsigned int nCols>
     double& MatrixFixSize<nRows,nCols>::operator()(const unsigned int row, const unsigned int col)
     {
+        assert(row < nRows);
+        assert(col < nCols);
         return this->m_data[rawIndexRowMajor(row,col)];
     }
 
     template<unsigned int nRows, unsigned int nCols>
     double MatrixFixSize<nRows,nCols>::operator()(const unsigned int row, const unsigned int col) const
     {
+        assert(row < nRows);
+        assert(col < nCols);
         return this->m_data[rawIndexRowMajor(row,col)];
     }
 
     template<unsigned int nRows, unsigned int nCols>
     double MatrixFixSize<nRows,nCols>::getVal(const unsigned int row, const unsigned int col) const
     {
-        if( row > this->rows() ||
-            col  > this->cols() )
+        if( row >= this->rows() ||
+            col  >= this->cols() )
         {
             reportError("MatrixDynSize","getVal","indeces out of bounds");
             return 0.0;
@@ -237,8 +242,8 @@ namespace iDynTree
     template<unsigned int nRows, unsigned int nCols>
     bool MatrixFixSize<nRows,nCols>::setVal(const unsigned int row, const unsigned int col, const double new_el)
     {
-        if( row > this->rows() ||
-            col   > this->cols() )
+        if( row >= this->rows() ||
+            col   >= this->cols() )
         {
             reportError("MatrixDynSize","setVal","indeces out of bounds");
             return false;

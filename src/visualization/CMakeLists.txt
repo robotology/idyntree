@@ -14,11 +14,13 @@ if(IDYNTREE_USES_IRRLICHT)
                                                src/Camera.h
                                                src/Environment.h
                                                src/ModelVisualization.h
+                                               src/JetsVisualization.h
                                                src/Light.h
                                                src/FloorGridSceneNode.h)
     set(iDynTree_visualization_private_source  src/Camera.cpp
                                                src/Environment.cpp
                                                src/ModelVisualization.cpp
+                                               src/JetsVisualization.cpp
                                                src/Light.cpp
                                                src/FloorGridSceneNode.cpp)
 endif()
@@ -70,7 +72,7 @@ if(IDYNTREE_USES_IRRLICHT)
     include_directories(SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
     target_link_libraries(${libraryname} LINK_PRIVATE ${IRRLICHT_LIBRARY} ${OPENGL_LIBRARIES})
     add_definitions(-DIDYNTREE_USES_IRRLICHT)
-    
+
     # On Apple system, irrlicht uses some system libraries 
     if (APPLE)
     	find_library(CARBON_LIBRARY Carbon)

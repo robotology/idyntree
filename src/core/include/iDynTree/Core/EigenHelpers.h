@@ -18,19 +18,21 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
 
-namespace iDynTree
-{
 #if __cplusplus > 199711L
-    //This is needed for template checking
-    class SparseMatrix;
+#include <iDynTree/Core/SparseMatrix.h>
 #endif
 
+
+namespace iDynTree
+{
     //Useful typedefs
     //TODO: change methods below to use these typedefs
     typedef Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> iDynTreeEigenMatrix;
     typedef const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> iDynTreeEigenConstMatrix;
     typedef Eigen::Map<iDynTreeEigenMatrix> iDynTreeEigenMatrixMap;
     typedef Eigen::Map<iDynTreeEigenConstMatrix> iDynTreeEigenConstMatrixMap;
+
+
 
 
 // Dynamics size toEigen methods

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <cstdio>
 #include <cstdlib>
+#include <algorithm>
 
 using namespace iDynTree;
 
@@ -154,6 +155,42 @@ void checkLimitsForJointsAreDefinedFromFileName(std::string urdfFileName)
     checkLimitsForJointsAreDefined(reducedModel);
 }
 
+void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
+{
+    ModelLoader loader;
+    ASSERT_IS_TRUE(loader.loadModelFromFile(urdfFileName) && loader.isValid());
+
+    Model loadedModel = loader.model();
+    //get all joints in order
+    std::vector<std::string> dofsName;
+    dofsName.resize(loadedModel.getNrOfDOFs());
+
+    for (JointIndex index = 0; index < loadedModel.getNrOfJoints(); ++index) {
+        IJointPtr joint = loadedModel.getJoint(index);
+        std::string jointName = loadedModel.getJointName(index);
+
+        for (unsigned dof = 0; dof < joint->getNrOfDOFs(); ++dof) {
+            dofsName[joint->getDOFsOffset() + dof] = jointName;
+        }
+    }
+
+    std::random_shuffle(dofsName.begin(), dofsName.end());
+
+    //now load the new model and check they are the same
+    ASSERT_IS_TRUE(loader.loadReducedModelFromFullModel(loadedModel, dofsName) && loader.isValid());
+
+    Model shuffledModel = loader.model();
+    for (JointIndex index = 0; index < shuffledModel.getNrOfJoints(); ++index) {
+        IJointPtr joint = shuffledModel.getJoint(index);
+        std::string jointName = shuffledModel.getJointName(index);
+        for (unsigned dof = 0; dof < joint->getNrOfDOFs(); ++dof) {
+            ASSERT_IS_TRUE(dofsName[joint->getDOFsOffset() + dof] == jointName);
+        }
+    }
+
+
+}
+
 int main()
 {
     checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,"link1");
@@ -165,6 +202,8 @@ int main()
     checkModelLoaderFromURDFString("this is not an xml", false);
     
     checkLimitsForJointsAreDefinedFromFileName(getAbsModelPath("iCubGenova02.urdf"));
+
+    checkLoadReducedModelOrderIsKept(getAbsModelPath("iCubGenova02.urdf"));
 
     return EXIT_SUCCESS;
 }

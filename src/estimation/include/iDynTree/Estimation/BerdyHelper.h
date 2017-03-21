@@ -34,7 +34,7 @@
 
 #include <iDynTree/Sensors/Sensors.h>
 
-#include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
+#include <iDynTree/Model/LinkTraversalsCache.h>
 
 #include <vector>
 
