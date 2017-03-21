@@ -11,6 +11,7 @@
 #include <iDynTree/Core/Utils.h>
 #include <string>
 #include <sstream>
+#include <cassert>
 #include <cstring>
 
 namespace iDynTree
@@ -162,12 +163,14 @@ namespace iDynTree
     template<unsigned int VecSize>
     double VectorFixSize<VecSize>::operator()(const unsigned int index) const
     {
+        assert(index < VecSize);
         return this->m_data[index];
     }
 
     template<unsigned int VecSize>
     double & VectorFixSize<VecSize>::operator()(const unsigned int index)
     {
+        assert(index < VecSize);
         return this->m_data[index];
     }
 
