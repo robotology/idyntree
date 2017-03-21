@@ -42,7 +42,6 @@ namespace kinematics {
     {
         //These variables are touched only once.
         m_state.worldGravity.zero();
-        m_state.worldGravity(3) = -9.81;
 
         m_state.baseTwist.zero();
     }
