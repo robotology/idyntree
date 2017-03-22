@@ -278,6 +278,9 @@ namespace kinematics {
 #ifndef NDEBUG
             m_solver->Options()->SetStringValue("derivative_test", "first-order");
 #endif
+            if (!m_solverName.empty()) {
+                m_solver->Options()->SetStringValue("linear_solver", m_solverName);
+            }
 
             solverStatus = m_solver->Initialize();
             if (solverStatus != Ipopt::Solve_Succeeded) {

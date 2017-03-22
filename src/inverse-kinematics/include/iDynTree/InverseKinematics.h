@@ -242,6 +242,8 @@ public:
     */
     void setVerbosity(const unsigned int verbose);
 
+    void setLinearSolverName(const std::string &solverName);
+
     ///@}
 
 

@@ -156,6 +156,12 @@ namespace iDynTree {
         IK_PIMPL(m_pimpl)->m_verbosityLevel = verbose;
     }
 
+    void InverseKinematics::setLinearSolverName(const std::string &solverName)
+    {
+        assert(m_pimpl);
+        IK_PIMPL(m_pimpl)->m_solverName = solverName;
+    }
+
     bool InverseKinematics::addFrameConstraint(const std::string& frameName)
     {
         assert(m_pimpl);

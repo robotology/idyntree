@@ -119,6 +119,7 @@ public:
     double m_tol; /*!< Tolerance for the cost */
     double m_constrTol; /*!< Tolerance for the constraints */
     int m_verbosityLevel; /*!< Verbosity level */
+    std::string m_solverName;
 
     ///@}
 
