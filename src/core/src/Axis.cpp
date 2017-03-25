@@ -158,7 +158,9 @@ namespace iDynTree
         TransformDerivative derivative_nonTranslated_T_translated;
 
         //No rotation
-        derivative_nonTranslated_T_translated.setRotationDerivative(iDynTree::Rotation::Identity());
+        Matrix3x3 zeroRot;
+        zeroRot.zero();
+        derivative_nonTranslated_T_translated.setRotationDerivative(zeroRot);
 
         // translation
         double u   = this->getDirection()(0);
