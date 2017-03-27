@@ -11,6 +11,7 @@
 #include "SparseMatrix.h"
 
 #include <algorithm>
+#include <sstream>
 
 namespace iDynTree {
 
@@ -94,6 +95,7 @@ namespace iDynTree {
         }
     }
 
+    bool Triplets::isEmpty() const { return m_triplets.empty(); }
     unsigned Triplets::size() const { return m_triplets.size(); }
 
     std::vector<iDynTree::Triplet>::const_iterator Triplets::begin() const { return m_triplets.begin(); }
@@ -161,6 +163,16 @@ namespace iDynTree {
         } else {
             m_triplets.push_back(triplet);
         }
+    }
+
+
+    std::string Triplets::description() const
+    {
+        std::ostringstream str;
+        for (const_iterator triplet(begin()); triplet != end(); ++triplet) {
+            str << "(" << triplet->row << "," << triplet->column << ")" << std::endl;
+        }
+        return str.str();
     }
 
 

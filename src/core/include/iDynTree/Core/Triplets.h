@@ -129,7 +129,10 @@ public:
 
     void setTriplet(const Triplet& triplet);
 
+    bool isEmpty() const;
     unsigned size() const;
+
+    std::string description() const;
 
     typedef std::vector<iDynTree::Triplet>::iterator iterator;
     typedef std::vector<iDynTree::Triplet>::const_iterator const_iterator;
