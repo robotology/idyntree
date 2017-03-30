@@ -153,7 +153,7 @@ namespace iDynTree
         return derivative_nonRotated_T_rotated;
     }
     
-    TransformDerivative Axis::getTranslationTransformDerivative(const double dist) const
+    TransformDerivative Axis::getTranslationTransformDerivative(const double /*dist*/) const
     {
         TransformDerivative derivative_nonTranslated_T_translated;
 

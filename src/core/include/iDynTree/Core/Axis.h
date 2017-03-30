@@ -113,7 +113,7 @@ namespace iDynTree
          * Get the derivative of the getTranslationTransform function with respect
          * to the dist argument.
          */
-        TransformDerivative getTranslationTransformDerivative(const double dist) const;
+        TransformDerivative getTranslationTransformDerivative(const double /*dist*/) const;
 
         Twist getTranslationTwist(const double ddist) const;
 
