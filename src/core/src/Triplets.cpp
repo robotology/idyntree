@@ -170,7 +170,7 @@ namespace iDynTree {
     {
         std::ostringstream str;
         for (const_iterator triplet(begin()); triplet != end(); ++triplet) {
-            str << "(" << triplet->row << "," << triplet->column << ")" << std::endl;
+            str << "(" << triplet->row << "," << triplet->column << ")" << triplet->value << std::endl;
         }
         return str.str();
     }
