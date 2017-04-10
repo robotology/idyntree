@@ -142,7 +142,7 @@ public:
 
     /**
      *
-     * @param[in]
+     * @param[in] nrOfLinks the number of links used to resize
      */
     void resize(unsigned int nrOfLinks);
     void resize(const Model & model);
@@ -189,7 +189,7 @@ public:
      * @return true if all went well, false otherwise
      */
     bool addNewUnknownFullWrenchInFrameOrigin(const Model& model,
-                                              const FrameIndex frame);
+                                              const FrameIndex frameIndex);
 
     /**
      * Get a specific ContactWrench
@@ -336,7 +336,7 @@ bool estimateExternalWrenches(const Model& model,
  * \param[in] jointVel joint velocities
  * \param[in] jointAcc joint accelerations
  * \param[out] linkVel vector of link twists, expressed in the link frame for both orientation and origin
- * \param[out] linkAcc vector of link proper spatial acceleration, expressed in the link frame for both orientation and origin
+ * \param[out] linkProperAcc vector of link proper spatial acceleration, expressed in the link frame for both orientation and origin
  * @return true if all went well, false otherwise
  *
  */

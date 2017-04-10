@@ -175,7 +175,7 @@ public:
      * For this reason it is necessary to call updateKinematics at least once before calling this method.
      *
      * @param[in] initialFixedFrame Frame initially assumed to be fixed.
-     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world).
+     * @param[in] initialFixedFrame_H_world Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world).
      * @return true if all went well, false otherwise.
      */
     bool init(const std::string & initialFixedFrame,
@@ -188,7 +188,7 @@ public:
      * For this reason it is necessary to call updateKinematics at least once before calling this method.
      *
      * @param[in] initialFixedFrameIndex Frame initially assumed to be fixed.
-     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world).
+     * @param[in] initialFixedFrame_H_world Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world).
      * @return true if all went well, false otherwise.
      */
     bool init(const FrameIndex initialFixedFrameIndex,
@@ -206,7 +206,7 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool init(const std::string & initialFixedFrame,
-              const std::string & initalReferenceFrameForWorld,
+              const std::string & initialReferenceFrameForWorld,
               const Transform initialReferenceFrame_H_world = Transform::Identity());
 
     /**
@@ -221,7 +221,7 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool init(const FrameIndex initialFixedFrameIndex,
-              const FrameIndex initalReferenceFrameIndexForWorld,
+              const FrameIndex initialReferenceFrameIndexForWorld,
               const Transform initialReferenceFrame_H_world = Transform::Identity());
 
     /**

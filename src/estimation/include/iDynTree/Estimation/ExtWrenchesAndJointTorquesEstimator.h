@@ -251,8 +251,8 @@ public:
      */
     bool estimateExtWrenchesAndJointTorques(const LinkUnknownWrenchContacts & unknowns,
                                             const SensorsMeasurements & ftSensorsMeasures,
-                                                  LinkContactWrenches & estimateContactWrenches,
-                                                  JointDOFsDoubleArray & jointTorques);
+                                                  LinkContactWrenches & estimatedContactWrenches,
+                                                  JointDOFsDoubleArray & estimatedJointTorques);
 
     /**
      * Check if the kinematics set in the model are the one of a fixed model.

@@ -1070,6 +1070,7 @@ Vector6 KinDynComputations::getFrameBiasAcc(const std::string & frameName)
 }
 
 
+typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 /**
  * Function to convert a body fixed acceleration to a mixed acceleration.
  *
@@ -1079,8 +1080,6 @@ Vector6 KinDynComputations::getFrameBiasAcc(const std::string & frameName)
  *
  * @return The mixed acceleration
  */
-typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
-
 Vector6 convertBodyFixedAccelerationToMixedAcceleration(const SpatialAcc & bodyFixedAcc,
                                                         const Twist & bodyFixedVel,
                                                         const Rotation & inertial_R_body)

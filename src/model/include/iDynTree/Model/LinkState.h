@@ -76,7 +76,7 @@ namespace iDynTree
         /**
          * Resize the vector to have size nrOfLinks.
          *
-         * @param[in]
+         * @param[in] nrOfLinks new size for the vector
          */
         void resize(unsigned int nrOfLinks);
         void resize(const iDynTree::Model & model);
