@@ -111,6 +111,7 @@ namespace kinematics {
 
         m_constraints.clear();
         m_targets.clear();
+        m_comConstraint.setActive(false);
 
         m_areBaseInitialConditionsSet = false;
         m_areJointsInitialConditionsSet = false;

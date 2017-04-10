@@ -86,6 +86,16 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
     FrameInfoMap constraintsInfo; /*!< FrameInfo map for the constraints */
     FrameInfoMap targetsInfo; /*!< FrameInfo map for the targets */
 
+    struct COMInfo {
+        iDynTree::Position com; /*!< COM position w.r.t. global frame */
+        iDynTree::Vector2 projectedCom; /*!< COM projection in the support plane */
+        iDynTree::MatrixDynSize comJacobian; /*!< 3 X (6 + nDofs) center of mass jacobian */
+        iDynTree::MatrixDynSize comJacobianAnalytical; /*!< 3 x ( 3 + sizeOfRotationParams + nDofs) processed jacobian */
+        iDynTree::MatrixDynSize projectedComJacobian; /*!< 2 x ( 3 + sizeOfRotationParams + nDofs) processed jacobian */
+    };
+
+    COMInfo comInfo;
+
     //Temporary optimized variables
     iDynTree::Position optimizedBasePosition; /*!< Hold the base frame origin at an optimization step */
     iDynTree::Vector4 optimizedBaseOrientation; /*!< Hold the base frame orientation at an optimization step. Note that if orientation is RPY, the last component should not be accessed */
@@ -145,6 +155,10 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
                                       const iDynTree::MatrixFixSize<3, 3>& rpyDerivativeInverseMapBuffer,
                                       const int computationOption,
                                       iDynTree::MatrixDynSize& constraintJacobianBuffer);
+
+    void computeConstraintJacobianCOMRPY(const iDynTree::MatrixDynSize& comJacobianBuffer,
+                                         const iDynTree::MatrixFixSize<3, 3>& _rpyDerivativeInverseMap,
+                                               iDynTree::MatrixDynSize& constraintComJacobianBuffer);
 
     /*!
      * @brief Map between RPY angles and angular velocity in the inertial frame

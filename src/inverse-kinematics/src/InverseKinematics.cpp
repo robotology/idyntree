@@ -10,6 +10,8 @@
 #include "InverseKinematicsData.h"
 #include "TransformConstraint.h"
 
+#include <iDynTree/Core/Axis.h>
+#include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 
@@ -197,6 +199,105 @@ namespace iDynTree {
     {
         assert(m_pimpl);
         return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::TransformConstraint::rotationConstraint(frameName, constraintValue.getRotation()));
+    }
+
+    bool InverseKinematics::addCenterOfMassProjectionConstraint(const std::string &firstSupportFrame,
+                                                                const Polygon &firstSupportPolygon,
+                                                                const iDynTree::Direction xAxisOfPlaneInWorld,
+                                                                const iDynTree::Direction yAxisOfPlaneInWorld,
+                                                                const iDynTree::Position originOfPlaneInWorld)
+    {
+        std::vector<std::string> supportFrames;
+        std::vector<Polygon> supportPolygons;
+        supportFrames.push_back(firstSupportFrame);
+        supportPolygons.push_back(firstSupportPolygon);
+        return addCenterOfMassProjectionConstraint(supportFrames,supportPolygons,xAxisOfPlaneInWorld,yAxisOfPlaneInWorld,originOfPlaneInWorld);
+    }
+
+    bool InverseKinematics::addCenterOfMassProjectionConstraint(const std::string &firstSupportFrame,
+                                                                const Polygon &firstSupportPolygon,
+                                                                const std::string &secondSupportFrame,
+                                                                const Polygon &secondSupportPolygon,
+                                                                const iDynTree::Direction xAxisOfPlaneInWorld,
+                                                                const iDynTree::Direction yAxisOfPlaneInWorld,
+                                                                const iDynTree::Position originOfPlaneInWorld)
+    {
+        std::vector<std::string> supportFrames;
+        std::vector<Polygon> supportPolygons;
+        supportFrames.push_back(firstSupportFrame);
+        supportFrames.push_back(secondSupportFrame);
+        supportPolygons.push_back(firstSupportPolygon);
+        supportPolygons.push_back(secondSupportPolygon);
+        return addCenterOfMassProjectionConstraint(supportFrames,supportPolygons,xAxisOfPlaneInWorld,yAxisOfPlaneInWorld,originOfPlaneInWorld);
+    }
+
+    bool InverseKinematics::addCenterOfMassProjectionConstraint(const std::vector<std::string> &supportFrames,
+                                                                const std::vector<Polygon> &supportPolygons,
+                                                                const iDynTree::Direction xAxisOfPlaneInWorld,
+                                                                const iDynTree::Direction yAxisOfPlaneInWorld,
+                                                                const iDynTree::Position originOfPlaneInWorld)
+    {
+        if( supportFrames.size() == 0 )
+        {
+            reportError("InverseKinematics","addCenterOfMassProjectionConstraint","No support frames specified");
+            return false;
+        }
+
+        if( supportFrames.size() != supportPolygons.size() )
+        {
+            reportError("InverseKinematics","addCenterOfMassProjectionConstraint","Size mismatch between supportFrames and supportPolygons");
+            return false;
+        }
+
+        size_t nrOfSupportLinks = supportFrames.size();
+
+        std::vector<iDynTree::Transform> world_H_support(nrOfSupportLinks);
+
+        for (int i=0; i < nrOfSupportLinks; i++)
+        {
+            // check for transform
+            int frameIndex = IK_PIMPL(m_pimpl)->m_dynamics.getFrameIndex(supportFrames[i]);
+            if (frameIndex  == iDynTree::FRAME_INVALID_INDEX)
+            {
+                std::stringstream ss;
+                ss << "Frame " << supportFrames[i] << " not found in the model";
+                reportError("InverseKinematics","addCenterOfMassProjectionConstraint",ss.str().c_str());
+                return false;
+            }
+
+            internal::kinematics::TransformMap::iterator constraintIt = IK_PIMPL(m_pimpl)->m_constraints.find(frameIndex);
+            if (constraintIt == IK_PIMPL(m_pimpl)->m_constraints.end())
+            {
+                std::stringstream ss;
+                ss << "Frame " << supportFrames[i] << " is not subject to a constraint";
+                reportError("InverseKinematics","addCenterOfMassProjectionConstraint",ss.str().c_str());
+                return false;
+            }
+
+            // Store the constrained value for this frame
+            world_H_support[i] = constraintIt->second.getTransform();
+        }
+
+        iDynTree::Axis projectionPlaneXaxisInAbsoluteFrame(xAxisOfPlaneInWorld,originOfPlaneInWorld);
+        iDynTree::Axis projectionPlaneYaxisInAbsoluteFrame(yAxisOfPlaneInWorld,originOfPlaneInWorld);
+
+        // Compute the constraint
+        bool ok = IK_PIMPL(m_pimpl)->m_comConstraint.buildConvexHull(xAxisOfPlaneInWorld,
+                                                                     yAxisOfPlaneInWorld,
+                                                                     originOfPlaneInWorld,
+                                                                     supportPolygons,
+                                                                     world_H_support);
+
+        if (!ok)
+        {
+            reportError("InverseKinematics","addCenterOfMassProjectionConstraint","Problem in computing COM constraint matrices.");
+            return false;
+        }
+
+        // Configuration went fine, enable constraint
+        IK_PIMPL(m_pimpl)->m_comConstraint.setActive(true);
+
+        return true;
     }
 
     bool InverseKinematics::addTarget(const std::string& frameName,

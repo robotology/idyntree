@@ -20,6 +20,8 @@ namespace iDynTree {
     class Position;
     class Rotation;
     class Model;
+    class Polygon;
+    class Direction;
 }
 
 
@@ -326,6 +328,50 @@ public:
      */
     bool addFrameRotationConstraint(const std::string& frameName,
                                     const iDynTree::Transform& constraintValue);
+
+    /*!
+     * Add a constant inequality constraint on the projection of the center of mass,
+     * assuming one support links.
+     *
+     * This method assume that the position of two links is constrained by a FrameConstraint,
+     * and adds a inequality constraint to ensure that the center of mass projection lies on the
+     * convex hull of the contact polygon.
+     */
+    bool addCenterOfMassProjectionConstraint(const std::string& firstSupportFrame,
+                                             const Polygon& firstSupportPolygon,
+                                             const iDynTree::Direction xAxisOfPlaneInWorld,
+                                             const iDynTree::Direction yAxisOfPlaneInWorld,
+                                             const iDynTree::Position originOfPlaneInWorld);
+
+    /*!
+     * Add a constant inequality constraint on the projection of the center of mass,
+     * assuming two support links.
+     *
+     * This method assume that the position of two links is constrained by a FrameConstraint,
+     * and adds a inequality constraint to ensure that the center of mass projection lies on the
+     * convex hull of the contact polygons.
+     */
+    bool addCenterOfMassProjectionConstraint(const std::string& firstSupportFrame,
+                                             const Polygon& firstSupportPolygon,
+                                             const std::string& secondSupportFrame,
+                                             const Polygon& secondSupportPolygon,
+                                             const iDynTree::Direction xAxisOfPlaneInWorld,
+                                             const iDynTree::Direction yAxisOfPlaneInWorld,
+                                             const iDynTree::Position originOfPlaneInWorld);
+
+    /*!
+     * Add a constant inequality constraint on the projection of the center of mass,
+     * assuming an arbitrary number of support links.
+     *
+     * This method assume that the position of two links is constrained by a FrameConstraint,
+     * and adds a inequality constraint to ensure that the center of mass projection lies on the
+     * convex hull of the contact polygons.
+     */
+    bool addCenterOfMassProjectionConstraint(const std::vector<std::string>& supportFrames,
+                                             const std::vector<Polygon>& supportPolygons,
+                                             const iDynTree::Direction xAxisOfPlaneInWorld,
+                                             const iDynTree::Direction yAxisOfPlaneInWorld,
+                                             const iDynTree::Position originOfPlaneInWorld);
 
     ///@}
 

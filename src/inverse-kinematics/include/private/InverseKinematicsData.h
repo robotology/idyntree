@@ -19,6 +19,7 @@
 #include <map>
 #include <IpIpoptApplication.hpp>
 
+#include <iDynTree/ConvexHullHelpers.h>
 #include <iDynTree/InverseKinematics.h>
 
 namespace iDynTree {
@@ -77,6 +78,7 @@ public:
 
     TransformMap m_constraints; /*!< list of hard constraints */
     TransformMap m_targets; /*!< list of targets */
+    iDynTree::ConvexHullProjectionConstraint m_comConstraint; /*!< Helper to implement COM constraint */
 
     //Preferred joints configuration for the optimization
     //Size: getNrOfDOFs of the considered model
