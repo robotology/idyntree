@@ -289,7 +289,7 @@ namespace iDynTree {
              * The passed sensor will be dynamic casted to the specified sensor type,
              * and will be copied in the sensors tree only if the dynamic cast will be successful.
              *
-             * @param[in] a constant reference to the Sensor to add.
+             * @param[in] sensor constant reference to the Sensor to add.
              * @return the sensor index of the newly added sensor, or -1 in case of error.
              */
             int addSensor(const Sensor & sensor);

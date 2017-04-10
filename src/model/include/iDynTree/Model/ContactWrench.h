@@ -99,7 +99,7 @@ namespace iDynTree
         /**
          *
          *
-         * @param[in]
+         * @param[in] nrOfLinks the number of links to which resize this object
          */
         void resize(unsigned int nrOfLinks);
         void resize(const Model & model);
