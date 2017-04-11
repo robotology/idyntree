@@ -7,6 +7,7 @@
 
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/Utils.h>
+#include <algorithm>
 #include <cassert>
 #include <cstdio>
 #include <sstream>
@@ -76,37 +77,30 @@ MatrixDynSize& MatrixDynSize::operator=(const MatrixDynSize& other)
 {
     if (this == &other) return *this;
 
-    // Copy the new rows
+    // Copy the new rows and columns
     m_rows = other.m_rows;
     m_cols = other.m_cols;
+    unsigned requiredCapacity = m_rows * m_cols;
+
+    // if other is empty, return
+    if (requiredCapacity == 0) return  *this;
 
     // If the copied data fits in the currently allocated buffer,
     // use that one (if the user want to free the memory can use
     // the shrink_to_fit method).
     // Otherwise, allocate a new buffer after deleting the old one)
-    if (m_capacity < m_rows*m_cols)
-    {
-        if( this->m_capacity > 0 )
-        {
-            delete[] this->m_data;
-            this->m_data = 0;
+    if (m_capacity < requiredCapacity) {
+        // need to allocate new buffer
+        // if old buffer exists, delete it
+        if (m_capacity > 0) {
+            delete [] m_data;
         }
-
-        if( this->m_rows*this->m_cols == 0 )
-        {
-            this->m_data = 0;
-            this->m_capacity = 0;
-        }
-        else
-        {
-            this->m_capacity = this->m_rows*this->m_cols;
-            this->m_data = new double[this->m_capacity];
-        }
+        m_data = new double[requiredCapacity];
+        m_capacity = requiredCapacity;
     }
 
     // Now we are sure that m_capacity >= m_rows*m_cols
-    std::memcpy(this->m_data, other.m_data, m_rows * m_cols * sizeof(double));
-
+    std::memcpy(this->m_data, other.m_data, requiredCapacity * sizeof(double));
     return *this;
 }
 
@@ -219,38 +213,29 @@ void MatrixDynSize::shrink_to_fit()
 
 void MatrixDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
 {
-    // If we change the data buffer, we need to
-    // copy the old content to a local buffer
-    double * localBuf = 0;
-    if( this->m_rows*this->m_cols > 0 )
-    {
-       localBuf = new double[this->m_rows*this->m_cols];
-       memcpy(localBuf,this->m_data,this->m_rows*this->m_cols*sizeof(double));
+    // same capacity => do nothing
+    if (m_capacity == _newCapacity) return;
+
+    if (_newCapacity == 0) {
+        // Simply delete all buffers
+        delete [] m_data;
+        m_capacity = 0;
+        return;
     }
 
-    if( this->m_data )
-    {
-        delete[] this->m_data;
+    // we have to create a new buffer and copy old data (if exists)
+    double* newBuffer = new double[_newCapacity];
+    m_capacity = _newCapacity;
+    // zero the buffer
+    std::fill(newBuffer, newBuffer + _newCapacity, 0.0);
+
+    if (m_data) {
+        // something to copy from old buffer (m_data)
+        std::memcpy(newBuffer, m_data, std::min(this->m_rows * this->m_cols, _newCapacity) * sizeof(double));
     }
 
-    this->m_capacity = _newCapacity;
-
-    if( this->m_capacity == 0 )
-    {
-        this->m_data = 0;
-    }
-    else
-    {
-        this->m_data = new double[this->m_capacity];
-        zero();
-
-        if( this->m_rows*this->m_cols > 0 )
-        {
-            memcpy(this->m_data,localBuf,this->m_rows*this->m_cols*sizeof(double));
-            delete[] localBuf;
-            localBuf = 0;
-        }
-    }
+    delete [] m_data;
+    m_data = newBuffer;
 }
 
 void MatrixDynSize::resize(const unsigned int _newRows, const unsigned int _newCols)
