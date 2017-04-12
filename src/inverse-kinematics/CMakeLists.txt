@@ -4,8 +4,10 @@ project(iDynTree_InverseKinematics CXX)
 
 set(libraryname idyntree-inverse-kinematics)
 
-set(IDYN_TREE_IK_SOURCES src/InverseKinematics.cpp)
-set(IDYN_TREE_IK_HEADERS include/iDynTree/InverseKinematics.h)
+set(IDYN_TREE_IK_SOURCES src/ConvexHullHelpers.cpp
+                         src/InverseKinematics.cpp)
+set(IDYN_TREE_IK_HEADERS include/iDynTree/ConvexHullHelpers.h
+                         include/iDynTree/InverseKinematics.h)
 
 set(PRIVATE_IDYN_TREE_IK_SOURCES src/InverseKinematicsNLP.cpp
                                  src/InverseKinematicsData.cpp

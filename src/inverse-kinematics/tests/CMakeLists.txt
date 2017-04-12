@@ -13,4 +13,6 @@ macro(add_ik_test classname)
   endif()
 endmacro()
 
+add_ik_test(ConvexHullHelpers)
 add_ik_test(InverseKinematics)
+

@@ -68,6 +68,12 @@ namespace kinematics {
             info.jacobian.zero();
             constraintsInfo.insert(FrameInfoMap::value_type(constraint->first, info));
         }
+
+        //prepare buffer for COM constraint
+        comInfo.com.zero();
+        comInfo.comJacobian.resize(3, m_data.m_dofs + 6);
+        comInfo.comJacobianAnalytical.resize(3, m_data.m_dofs + 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization));
+        comInfo.projectedComJacobian.resize(m_data.m_comConstraint.getNrOfConstraints(), m_data.m_dofs + 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization));
     }
 
     bool InverseKinematicsNLP::updateState(const Ipopt::Number * x)
@@ -224,6 +230,16 @@ namespace kinematics {
             map *= 0.5;
         }
 
+        // Update com position and jacobian
+        if (m_data.m_comConstraint.isActive()) {
+            comInfo.com = m_data.m_dynamics.getCenterOfMassPosition();
+            m_data.m_dynamics.getCenterOfMassJacobian(comInfo.comJacobian);
+
+            // Project the jacobian and the com
+            iDynTree::toEigen(comInfo.projectedCom) =
+                iDynTree::toEigen(m_data.m_comConstraint.P)*iDynTree::toEigen(comInfo.com-m_data.m_comConstraint.o);
+        }
+
         return true;
     }
 
@@ -247,6 +263,12 @@ namespace kinematics {
             if (it->second.hasRotationConstraint()) {
                 m += sizeOfRotationParametrization(m_data.m_rotationParametrization);
             }
+        }
+
+        // COM constraint
+        if (m_data.m_comConstraint.isActive())
+        {
+            m += m_data.m_comConstraint.getNrOfConstraints();
         }
 
         //add target if considered as constraints
@@ -356,6 +378,15 @@ namespace kinematics {
                         constraintIndex++;
                     }
                 }
+            }
+        }
+
+        // COM constraint (Ax <= b)
+        if (m_data.m_comConstraint.isActive()) {
+            for (int i = 0; i < m_data.m_comConstraint.getNrOfConstraints(); i++) {
+                g_l[constraintIndex] = -2e19;
+                g_u[constraintIndex] = m_data.m_comConstraint.b(i);
+                constraintIndex++;
             }
         }
 
@@ -659,6 +690,13 @@ namespace kinematics {
             }
         }
 
+        // COM constraint
+        if (m_data.m_comConstraint.isActive()) {
+            constraints.segment(index, m_data.m_comConstraint.getNrOfConstraints()) =
+                iDynTree::toEigen(m_data.m_comConstraint.A)*iDynTree::toEigen(comInfo.projectedCom);
+            index = index+m_data.m_comConstraint.getNrOfConstraints();
+        }
+
         //Targets considered as constraints
         for (TransformMap::const_iterator target = m_data.m_targets.begin();
              target != m_data.m_targets.end(); ++target) {
@@ -788,9 +826,9 @@ namespace kinematics {
 
                     computeConstraintJacobianRPY(constraintInfo.jacobian,
                                                  omegaToRPYMap_target,
-                                                RPYToOmega,
-                                              ComputeContraintJacobianOptionLinearPart|ComputeContraintJacobianOptionAngularPart,
-                                              finalJacobianBuffer);
+                                                 RPYToOmega,
+                                                 ComputeContraintJacobianOptionLinearPart|ComputeContraintJacobianOptionAngularPart,
+                                                 finalJacobianBuffer);
                 }
 
 
@@ -810,6 +848,20 @@ namespace kinematics {
                     constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                 }
             }
+
+            //For COM constraint
+            //RPY parametrization for the base
+            if (m_data.m_comConstraint.isActive()) {
+                assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
+                iDynTree::Vector3 rpy;
+                iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
+                iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0), rpy(1), rpy(2));
+                computeConstraintJacobianCOMRPY(comInfo.comJacobian,RPYToOmega,comInfo.comJacobianAnalytical);
+                // Project the jacobian
+                iDynTree::toEigen(comInfo.projectedComJacobian) =
+                        iDynTree::toEigen(m_data.m_comConstraint.AtimesP)*iDynTree::toEigen(comInfo.comJacobianAnalytical);
+            }
+
 
             //For all targets enforced as constraints
             for (TransformMap::const_iterator target = m_data.m_targets.begin();
@@ -1033,6 +1085,27 @@ namespace kinematics {
             constraintJacobian.block<3, 3>(3, 3) = rpyDerivativeMap * frameJacobian.block<3, 3>(3, 3) * rpyDerivativeInverseMap;
             constraintJacobian.bottomRightCorner(3, n) = rpyDerivativeMap * frameJacobian.bottomRightCorner(3, n);
         }
+    }
+
+    void InverseKinematicsNLP::computeConstraintJacobianCOMRPY(const iDynTree::MatrixDynSize& comJacobianBuffer,
+                                                               const iDynTree::MatrixFixSize<3, 3>& _rpyDerivativeInverseMap,
+                                                                     iDynTree::MatrixDynSize& constraintComJacobianBuffer)
+    {
+        Eigen::Map<const Eigen::Matrix<double, 3, 3, Eigen::RowMajor> > rpyDerivativeInverseMap = iDynTree::toEigen(_rpyDerivativeInverseMap);
+
+        //Number of joints
+        unsigned n = constraintComJacobianBuffer.cols() - 6;
+
+        constraintComJacobianBuffer.zero();
+
+        iDynTree::iDynTreeEigenConstMatrixMap comJacobian = iDynTree::toEigen(comJacobianBuffer);
+        iDynTree::iDynTreeEigenMatrixMap constraintJacobian = iDynTree::toEigen(constraintComJacobianBuffer);
+
+
+        //Position (linear) part of the Jacobian
+        constraintJacobian.topLeftCorner<3, 3>() = comJacobian.topLeftCorner<3, 3>();
+        constraintJacobian.block<3, 3>(0, 3) = comJacobian.block<3, 3>(0, 3) * rpyDerivativeInverseMap;
+        constraintJacobian.topRightCorner(3, n) = comJacobian.topRightCorner(3, n);
     }
 
     void InverseKinematicsNLP::omegaToRPYParameters(const iDynTree::Vector3& rpyAngles,

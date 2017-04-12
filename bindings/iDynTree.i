@@ -151,6 +151,8 @@ namespace std {
 %include "./octave/octave_matvec.i"
 #endif
 
+%template(Matrix1x6) iDynTree::MatrixFixSize<1,6>;
+%template(Matrix2x3) iDynTree::MatrixFixSize<2,3>;
 %template(Matrix3x3) iDynTree::MatrixFixSize<3,3>;
 %template(Matrix4x4) iDynTree::MatrixFixSize<4,4>;
 %template(Matrix6x6) iDynTree::MatrixFixSize<6,6>;
