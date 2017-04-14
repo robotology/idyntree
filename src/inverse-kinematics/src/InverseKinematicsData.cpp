@@ -276,6 +276,7 @@ namespace kinematics {
             m_solver->Options()->SetNumericValue("max_cpu_time", m_maxCpuTime);
             m_solver->Options()->SetNumericValue("tol",m_tol);
             m_solver->Options()->SetNumericValue("constr_viol_tol",m_constrTol);
+            m_solver->Options()->SetIntegerValue("acceptable_iter",0);
 #ifndef NDEBUG
             m_solver->Options()->SetStringValue("derivative_test", "first-order");
 #endif

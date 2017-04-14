@@ -237,7 +237,7 @@ namespace kinematics {
 
             // Project the jacobian and the com
             iDynTree::toEigen(comInfo.projectedCom) =
-                iDynTree::toEigen(m_data.m_comConstraint.P)*iDynTree::toEigen(comInfo.com-m_data.m_comConstraint.o);
+                iDynTree::toEigen(m_data.m_comConstraint.P)*iDynTree::toEigen(comInfo.com -m_data.m_comConstraint.o);
         }
 
         return true;
@@ -860,6 +860,10 @@ namespace kinematics {
                 // Project the jacobian
                 iDynTree::toEigen(comInfo.projectedComJacobian) =
                         iDynTree::toEigen(m_data.m_comConstraint.AtimesP)*iDynTree::toEigen(comInfo.comJacobianAnalytical);
+
+                Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*n], comInfo.projectedComJacobian.rows(), n);
+                currentConstraint = iDynTree::toEigen(comInfo.projectedComJacobian);
+                constraintIndex += comInfo.projectedComJacobian.rows();
             }
 
 
@@ -937,6 +941,7 @@ namespace kinematics {
                 quaternionDerivative = 2 * iDynTree::toEigen(this->optimizedBaseOrientation).transpose();
                 constraintIndex++;
             }
+
             assert(m == constraintIndex);
 
         }
@@ -1111,7 +1116,6 @@ namespace kinematics {
     void InverseKinematicsNLP::omegaToRPYParameters(const iDynTree::Vector3& rpyAngles,
                                                     iDynTree::Matrix3x3 &map)
     {
-        std::cerr << "omegaToRPYParameters: " << rpyAngles.toString() << std::endl;
         /*
          {}^I omega =
          [ cos(psi)*cos(theta), -sin(psi), 0]
