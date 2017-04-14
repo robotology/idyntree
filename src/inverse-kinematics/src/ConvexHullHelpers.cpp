@@ -62,6 +62,18 @@ namespace iDynTree
         return m_vertices[idx];
     }
 
+    Polygon Polygon::XYRectangleFromOffsets(const double front, const double back, const double left, const double right)
+    {
+        Polygon ret;
+        ret.m_vertices.push_back(iDynTree::Position(front,left,0.0));
+        ret.m_vertices.push_back(iDynTree::Position(-back,left,0.0));
+        ret.m_vertices.push_back(iDynTree::Position(-back,-right,0.0));
+        ret.m_vertices.push_back(iDynTree::Position(front,-right,0.0));
+
+        return ret;
+    }
+
+
     Polygon2D::Polygon2D(): m_vertices(0)
     {
 

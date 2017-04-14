@@ -19,7 +19,9 @@ set(PRIVATE_IDYN_TREE_IK_HEADERS include/private/InverseKinematicsNLP.h
 source_group("Private\\Header Files" FILES ${PRIVATE_IDYN_TREE_IK_HEADERS})
 source_group("Private\\Source Files" FILES ${PRIVATE_IDYN_TREE_IK_SOURCES})
 
-add_library(${libraryname} ${IDYN_TREE_IK_HEADERS} ${IDYN_TREE_IK_SOURCES} 
+idyntree_enable_cxx11()
+
+add_library(${libraryname} ${IDYN_TREE_IK_HEADERS} ${IDYN_TREE_IK_SOURCES}
                            ${PRIVATE_IDYN_TREE_IK_SOURCES} ${PRIVATE_IDYN_TREE_IK_HEADERS})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"

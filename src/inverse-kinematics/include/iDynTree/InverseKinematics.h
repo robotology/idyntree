@@ -14,6 +14,8 @@
 #include <string>
 #include <vector>
 
+#include <iDynTree/ConvexHullHelpers.h>
+
 namespace iDynTree {
     class VectorDynSize;
     class Transform;
@@ -341,7 +343,7 @@ public:
                                              const Polygon& firstSupportPolygon,
                                              const iDynTree::Direction xAxisOfPlaneInWorld,
                                              const iDynTree::Direction yAxisOfPlaneInWorld,
-                                             const iDynTree::Position originOfPlaneInWorld);
+                                             const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero());
 
     /*!
      * Add a constant inequality constraint on the projection of the center of mass,
@@ -357,7 +359,7 @@ public:
                                              const Polygon& secondSupportPolygon,
                                              const iDynTree::Direction xAxisOfPlaneInWorld,
                                              const iDynTree::Direction yAxisOfPlaneInWorld,
-                                             const iDynTree::Position originOfPlaneInWorld);
+                                             const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero());
 
     /*!
      * Add a constant inequality constraint on the projection of the center of mass,

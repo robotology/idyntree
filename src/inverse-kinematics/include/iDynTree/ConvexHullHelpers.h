@@ -68,6 +68,13 @@ namespace iDynTree
 
         Position& operator()(const size_t idx);
         const Position & operator()(const size_t idx) const;
+
+        /**
+         * Return the polygon of a rectangle on the XY plane given
+         * the front (x positive), back (x negative), left (y positive) and right (y negative) offsets.
+         *
+         */
+        static Polygon XYRectangleFromOffsets(const double front, const double back, const double left, const double right);
     };
 
     /**
