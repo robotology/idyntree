@@ -38,7 +38,7 @@ namespace kinematics {
     , m_maxCpuTime(1e6)
     , m_tol(1e-8)
     , m_constrTol(1e-4)
-    , m_verbosityLevel(5)
+    , m_verbosityLevel(0)
     {
         //These variables are touched only once.
         m_state.worldGravity.zero();
@@ -301,7 +301,6 @@ namespace kinematics {
         solverStatus = m_solver->OptimizeTNLP(problem);
 
         if (solverStatus == Ipopt::Solve_Succeeded || solverStatus == Ipopt::Solved_To_Acceptable_Level ) {
-            std::cout << "*** The problem solved!\n";
             return true;
         } else {
             return false;
