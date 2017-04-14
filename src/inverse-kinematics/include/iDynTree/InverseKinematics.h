@@ -15,6 +15,7 @@
 #include <vector>
 
 #include <iDynTree/ConvexHullHelpers.h>
+#include <iDynTree/Core/Direction.h>
 
 namespace iDynTree {
     class VectorDynSize;
@@ -23,7 +24,6 @@ namespace iDynTree {
     class Rotation;
     class Model;
     class Polygon;
-    class Direction;
 }
 
 
