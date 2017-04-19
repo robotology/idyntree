@@ -32,16 +32,15 @@ typedef std::map<std::string, JointPtr > JointPtrMap;
 namespace urdf
 {
 
-typedef boost::shared_ptr<Joint> JointPtr;
-typedef boost::shared_ptr<Link>  LinkPtr;
-typedef boost::shared_ptr<const Link>  ConstLinkPtr;
-typedef boost::shared_ptr<Inertial> InertialPtr;
-typedef std::vector<boost::shared_ptr<urdf::Link> > LinkVector;
-typedef boost::shared_ptr<urdf::ModelInterface> ModelInterfacePtr;
-typedef std::map<std::string, boost::shared_ptr<urdf::Joint> > JointPtrMap;
+typedef JointSharedPtr JointPtr;
+typedef LinkSharedPtr  LinkPtr;
+typedef ConstLinkSharedPtr  ConstLinkPtr;
+typedef InertialSharedPtr InertialPtr;
+typedef std::vector< LinkPtr > LinkVector;
+typedef ModelInterfaceSharedPtr ModelInterfacePtr;
+typedef std::map<std::string, JointPtr > JointPtrMap;
 template<class PtrType> inline void resetPtr(PtrType & ptr) { ptr.reset(); }
 template<class PtrType, class PlainType> inline void resetPtr(PtrType & ptr, PlainType * plain_ptr) { ptr.reset(plain_ptr); }
-
 
 }
 
