@@ -13,6 +13,9 @@ else()
     find_package(urdfdom_headers REQUIRED)
     find_package(urdfdom REQUIRED)
     find_package(Boost REQUIRED)
+    # urdfdom_headers_VERSION is defined for all the versions of urdfdom_headers 
+    # that provide their own typedefs, so we need to redefine them only 
+    # for urdfdom_headers <= 0.4, that incidentally do not define urdfdom_headers_VERSION
     if (NOT(DEFINED urdfdom_headers_VERSION))
         add_definitions(-DURDF_REDEFINE_BOOST_PTR_TYPEDEFS)
     endif ()
