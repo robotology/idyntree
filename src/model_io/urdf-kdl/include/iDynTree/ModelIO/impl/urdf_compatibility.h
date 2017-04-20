@@ -15,6 +15,7 @@
 
 #include <urdf_model/model.h>
 #include <urdf_parser/urdf_parser.h>
+#include <urdf_world/world.h>
 
 #ifdef IDYNTREE_USE_INTERNAL_URDFDOM
 
@@ -28,6 +29,8 @@ typedef std::map<std::string, JointPtr > JointPtrMap;
 }
 
 #else
+
+#ifdef URDF_REDEFINE_BOOST_PTR_TYPEDEFS
 
 namespace urdf
 {
@@ -45,6 +48,23 @@ template<class PtrType, class PlainType> inline void resetPtr(PtrType & ptr, Pla
 
 }
 
-#endif
+#else
 
-#endif
+namespace urdf
+{
+
+typedef JointSharedPtr JointPtr;
+typedef LinkSharedPtr  LinkPtr;
+typedef LinkConstSharedPtr  ConstLinkPtr;
+typedef InertialSharedPtr InertialPtr;
+typedef std::vector< LinkPtr > LinkVector;
+typedef ModelInterfaceSharedPtr ModelInterfacePtr;
+typedef std::map<std::string, JointPtr > JointPtrMap;
+template<class PtrType> inline void resetPtr(PtrType & ptr) { ptr.reset(); }
+template<class PtrType, class PlainType> inline void resetPtr(PtrType & ptr, PlainType * plain_ptr) { ptr.reset(plain_ptr); }
+
+}
+
+#endif /* URDF_REDEFINE_BOOST_PTR_TYPEDEFS */
+#endif /* IDYNTREE_USE_INTERNAL_URDFDOM */
+#endif /* IDYNTREE_MODELIO_URDFCOMPATIBILITY_H */
