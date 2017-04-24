@@ -80,8 +80,8 @@ namespace kinematics {
     const iDynTree::Transform& TransformConstraint::getTransform() const { return m_transform; }
     const std::string& TransformConstraint::getFrameName() const { return m_frameName; }
     const double TransformConstraint::getPositionWeight() const { return m_posWeight; }
-    void TransformConstraint::setPositionWeight(const double newPosWeight) { m_posWeight = newPosWeight; }
+    void TransformConstraint::setPositionWeight(const double newPosWeight) { if (newPosWeight >= 0.0) m_posWeight = newPosWeight; }
     const double TransformConstraint::getRotationWeight() const { return m_rotWeight; }
-    void TransformConstraint::setRotationWeight(const double newRotWeight) { m_posWeight = newRotWeight; }
+    void TransformConstraint::setRotationWeight(const double newRotWeight) { if (newRotWeight >= 0.0) m_posWeight = newRotWeight; }
 }
 }
