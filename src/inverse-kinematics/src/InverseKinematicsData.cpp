@@ -243,8 +243,14 @@ namespace kinematics {
             double &jointValue = m_jointInitialConditions(i);
             if (jointValue < m_jointLimits[i].first || jointValue > m_jointLimits[i].second) {
                 std::cerr << "[WARNING] InverseKinematics: joint with DOFIndex " << i << " initial condition is outside the limits " << m_jointLimits[i].first << " " << m_jointLimits[i].second << std::endl;
-                //set the initial value to be at the middle of the limits
-                jointValue = (m_jointLimits[i].second + m_jointLimits[i].first) / 2.0;
+                //set the initial value to at the limit
+                if (jointValue < m_jointLimits[i].first) {
+                    jointValue = m_jointLimits[i].first;
+                }
+
+                if (jointValue > m_jointLimits[i].second) {
+                    jointValue = m_jointLimits[i].second;
+                }
             }
         }
 
