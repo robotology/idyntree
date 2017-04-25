@@ -42,6 +42,12 @@ class internal::kinematics::InverseKinematicsData {
     //forbid copy
     InverseKinematicsData(const InverseKinematicsData&);
     InverseKinematicsData& operator=(const InverseKinematicsData&);
+    
+    struct {
+        bool isActive;
+        iDynTree::Position desiredPosition;
+        double weight;
+    } m_comTarget;
 
     // The variables are divided among the optimized one (buffers inside the Solver, except results and I/O variables here),
     // the "model" variables and the parameters of the optimization.
@@ -78,8 +84,8 @@ public:
 
     TransformMap m_constraints; /*!< list of hard constraints */
     TransformMap m_targets; /*!< list of targets */
-    iDynTree::ConvexHullProjectionConstraint m_comConstraint; /*!< Helper to implement COM constraint */
-
+    iDynTree::ConvexHullProjectionConstraint m_comHullConstraint; /*!< Helper to implement COM constraint */
+    
     //Preferred joints configuration for the optimization
     //Size: getNrOfDOFs of the considered model
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
@@ -269,8 +275,11 @@ public:
      * @return reference to the kinematics and dynamics object
      */
     iDynTree::KinDynComputations& dynamics();
-
-
+    
+    
+    void setCoMTarget(iDynTree::Position desiredPosition, double weight);
+    
+    bool isCoMTargetActive();
     //Declare as friend the IKNLP class so as it can access the private data
     friend class InverseKinematicsNLP;
 

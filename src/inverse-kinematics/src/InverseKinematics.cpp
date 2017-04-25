@@ -282,7 +282,7 @@ namespace iDynTree {
         iDynTree::Axis projectionPlaneYaxisInAbsoluteFrame(yAxisOfPlaneInWorld,originOfPlaneInWorld);
 
         // Compute the constraint
-        bool ok = IK_PIMPL(m_pimpl)->m_comConstraint.buildConvexHull(xAxisOfPlaneInWorld,
+        bool ok = IK_PIMPL(m_pimpl)->m_comHullConstraint.buildConvexHull(xAxisOfPlaneInWorld,
                                                                      yAxisOfPlaneInWorld,
                                                                      originOfPlaneInWorld,
                                                                      supportPolygons,
@@ -295,7 +295,7 @@ namespace iDynTree {
         }
 
         // Configuration went fine, enable constraint
-        IK_PIMPL(m_pimpl)->m_comConstraint.setActive(true);
+        IK_PIMPL(m_pimpl)->m_comHullConstraint.setActive(true);
 
         return true;
     }
