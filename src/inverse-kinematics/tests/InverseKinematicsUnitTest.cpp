@@ -261,6 +261,8 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
 {
     iDynTree::InverseKinematics ik;
 
+    ik.setVerbosity(5);
+    
     bool ok = ik.loadModelFromFile(getAbsModelPath("iCubGenova02.urdf"));
     ASSERT_IS_TRUE(ok);
 
