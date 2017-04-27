@@ -57,9 +57,9 @@ namespace iDynTree
      * @param[in] model the model used to predict the sensor measurements.
      * @param[in] sensorList the sensors list used to predict the sensors measurements.
      * @param[in] traversal the Traversal used for predict the sensor measurements.
-     * @param[in] robotpos the position of the model used for prediction.
-     * @param[in] robotvel the velocity of the model used for prediction.
-     * @param[in] robotacc the acceleration of the model used for prediction.
+     * @param[in] robotPos the position of the model used for prediction.
+     * @param[in] robotVel the velocity of the model used for prediction.
+     * @param[in] robotAcc the acceleration of the model used for prediction.
      * @param[in] gravity the gravity acceleration (in world frame) used for prediction.
      * @param[in] externalWrenches the net external wrench acting on each link.
      * @param[out] buf_properRobotAcc internal buffer, storing the proper acceleration of the model.
@@ -73,7 +73,7 @@ namespace iDynTree
      * @return true if the sensors in the list are all valid
      */
      bool predictSensorsMeasurements(const Model & model,
-                                     const SensorsList &sensorsList,
+                                     const SensorsList &sensorList,
                                      const Traversal & traversal,
                                      const FreeFloatingPos& robotPos,
                                      const FreeFloatingVel& robotVel,
@@ -98,17 +98,15 @@ namespace iDynTree
      * @param[in] model the model used to predict the sensor measurements.
      * @param[in] sensorList the sensors list used to predict the sensors measurements.
      * @param[in] traversal the Traversal used for predict the sensor measurements.
-     * @param[in] buf_properRobotAcc internal buffer, storing the proper acceleration of the model.
      * @param[in] buf_linkVel internal buffer, storing the velocity of every link in the model.
      * @param[in] buf_linkProperAcc internal buffer, storing the proper acceleration of every link in the model.
      * @param[in] buf_internalWrenches internal buffer, storing the internal wrenches.
-     * @param[in] buf_outputTorques internal buffer, storing the generalized joint torques.
      * @param[out] predictedMeasurement the predicted measurements for the sensors.
      *
      * @return true if the sensors in the list are all valid
      */
      bool predictSensorsMeasurementsFromRawBuffers(const Model & model,
-                                                   const SensorsList &sensorsList,
+                                                   const SensorsList &sensorList,
                                                    const Traversal & traversal,
                                                    const LinkVelArray& buf_linkVel,
                                                    const LinkAccArray& buf_linkProperAcc,

@@ -36,7 +36,7 @@ namespace iDynTree
      * @param[in]  linkIndex     the index of the link of which we compute the jacobian.
      * @param[in]  jacobFrame_X_world TODO
      * @param[in]  baseFrame_X_jacobBaseFrame TODO
-     * @param[out]
+     * @param[out] jacobian the computed Jacobian
      * @return true if all went well, false otherwise.
      */
     bool FreeFloatingJacobianUsingLinkPos(const Model& model,
@@ -46,7 +46,7 @@ namespace iDynTree
                                           const LinkIndex linkIndex,
                                           const Transform & jacobFrame_X_world,
                                           const Transform & baseFrame_X_jacobBaseFrame,
-                                                 MatrixDynSize & jacobian);
+                                                MatrixDynSize & jacobian);
 
 
 }

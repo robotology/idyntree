@@ -76,17 +76,17 @@ enum BerdyVariants
  */
 enum BerdyDynamicVariablesTypes
 {
-    //< a_i
+    /*!< \f$ a_i \f$ */
     LINK_BODY_PROPER_ACCELERATION,
-    // f^B_i
+    /*!< \f$ f^B_i \f$ */
     NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV,
-    // f_i
+    /*!< \f$ f_i \f$ */
     JOINT_WRENCH,
-    // tau_i
+    /*!< \f$ \tau_i \f$ */
     DOF_TORQUE,
-    // f^x_i
+    /*!< \f$ f^x_i \f$ */
     NET_EXT_WRENCH,
-    // \ddot{q}_i
+    /*!< \f$ \ddot{q}_i \f$ */
     DOF_ACCELERATION
 };
 
@@ -223,9 +223,9 @@ public:
  * A sensor is identified by the pair (type, id)
  */
 struct BerdySensor {
-    iDynTree::BerdySensorTypes type; /*<! type of the sensor */
-    std::string id; /*<! ID of the sensor */
-    iDynTree::IndexRange range; /*<! Range of the sensor
+    iDynTree::BerdySensorTypes type; /*!< type of the sensor */
+    std::string id; /*!< ID of the sensor */
+    iDynTree::IndexRange range; /*!< Range of the sensor
                                  * (starting location in the measurements equations
                                  *  and number of measurements equations associated with the sensor) */
 
@@ -242,9 +242,9 @@ struct BerdySensor {
 };
 
 struct BerdyDynamicVariable {
-    iDynTree::BerdyDynamicVariablesTypes type; /*<! type of the dynamic variable */
-    std::string id; /*<! ID of the dynamic variable */
-    iDynTree::IndexRange range; /*<! Range of the dynamic variable
+    iDynTree::BerdyDynamicVariablesTypes type; /*!< type of the dynamic variable */
+    std::string id; /*!< ID of the dynamic variable */
+    iDynTree::IndexRange range; /*!< Range of the dynamic variable
                                  * (starting location in the dynamic equations
                                  *  and number of equations associated with the variable) */
 
@@ -375,8 +375,8 @@ class BerdyHelper
     Vector3 m_gravity;
     SpatialAcc m_gravity6D;
 
-    std::vector<BerdySensor> m_sensorsOrdering; /*<! Sensor ordering. Created on init */
-    std::vector<BerdyDynamicVariable> m_dynamicVariablesOrdering; /*<! Dynamic variable ordering. Created on init */
+    std::vector<BerdySensor> m_sensorsOrdering; /*!< Sensor ordering. Created on init */
+    std::vector<BerdyDynamicVariable> m_dynamicVariablesOrdering; /*!< Dynamic variable ordering. Created on init */
 
     /**
      * Helpers method for initialization.
@@ -603,7 +603,6 @@ public:
      *
      * @param[in] jointPos the position of the joints of the model.
      * @param[in] jointVel the velocities of the joints of the model.
-     * @param[in] jointAcc the accelerations of the joints of the model.
      * @param[in] floatingFrame the index of the frame for which kinematic information is provided.
      * @param[in] angularVel angular velocity (wrt to any inertial frame) of the specified floating frame,
      *                       expressed in the specified floating frame orientation.
@@ -620,7 +619,6 @@ public:
      *
      * @param[in] jointPos the position of the joints of the model.
      * @param[in] jointVel the velocities of the joints of the model.
-     * @param[in] jointAcc the accelerations of the joints of the model.
      * @param[in] fixedFrame the index of the frame that is not accelerating with respect to the inertial frame.
      * @param[in] gravity the gravity acceleration vector, expressed in the specified fixed frame.
      *
@@ -639,14 +637,15 @@ public:
      *
      * @param[in] jointPos the position of the joints of the model.
      * @param[in] jointVel the velocities of the joints of the model.
-     * @param[in] jointAcc the accelerations of the joints of the model.
      * @param[in] gravity the gravity acceleration vector, expressed in the specified fixed frame.
      *
      * \note gravity is used only if selected BerdyVariant is ORIGINAL_BERDY_FIXED_BASE.
      *
      * @return true if all went ok, false otherwise.
      *
-     * @note this is equivalent to updateKinematicsFromFixedBase(jointPos,jointVel,m_dynamicsTraversal.getBaseLink()->getIndex(),gravity);
+     * @note this is equivalent to 
+     * @code updateKinematicsFromFixedBase(jointPos,jointVel,m_dynamicsTraversal.getBaseLink()->getIndex(),gravity);
+     * @endcode
      *
      */
     bool updateKinematicsFromTraversalFixedBase(const JointPosDoubleArray  & jointPos,

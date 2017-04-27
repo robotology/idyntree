@@ -243,16 +243,16 @@ bool estimateExternalWrenchesBuffers::isConsistent(const SubModelDecomposition& 
  * @param[in] sensor_measures list of measurements of the considered sensors
  * @param[in] link_id the index of the considered link.
  */
-Wrench getMeasuredWrench(const SensorsList & sensors_list,
+Wrench getMeasuredWrench(const SensorsList & sensor_list,
                          const SensorsMeasurements & sensor_measures,
                          const LinkIndex link_id)
 {
-    size_t NrOfFTSensors = sensors_list.getNrOfSensors(SIX_AXIS_FORCE_TORQUE);
+    size_t NrOfFTSensors = sensor_list.getNrOfSensors(SIX_AXIS_FORCE_TORQUE);
     ::iDynTree::Wrench total_measured_applied_wrench = ::iDynTree::Wrench::Zero();
     for(size_t ft=0; ft < NrOfFTSensors; ft++ )
     {
         ::iDynTree::SixAxisForceTorqueSensor * sens
-            = (::iDynTree::SixAxisForceTorqueSensor *) sensors_list.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft);
+            = (::iDynTree::SixAxisForceTorqueSensor *) sensor_list.getSensor(::iDynTree::SIX_AXIS_FORCE_TORQUE,ft);
 
         assert(sens != 0);
 

@@ -126,7 +126,7 @@ public:
     /**
      * Load the model of the robot  from a string.
      *
-     * @param filename string containg the model of the robot.
+     * @param modelString string containg the model of the robot.
      * @param filetype type of the file to load, currently supporting only urdf type.
      *
      */
@@ -630,11 +630,10 @@ public:
      *
      * The state is the one given set by the setRobotState method.
      *
-     * @param[in] linkExtForces the external wrenches excerted by the environment on the model
-     * @param[out] baseForceAndJointTorques the output generalized bias forces
+     * @param[out] generalizedBiasForces the output generalized bias forces
      * @return true if all went well, false otherwise
      */
-    bool generalizedBiasForces(FreeFloatingGeneralizedTorques & generalizedGravityForces);
+    bool generalizedBiasForces(FreeFloatingGeneralizedTorques & generalizedBiasForces);
 
     /**
      * Compute the getNrOfDOFS()+6 vector of generalized gravity forces.
@@ -644,7 +643,7 @@ public:
      *
      * The state is the one given set by the setRobotState method.
      *
-     * @param[out] baseForceAndJointTorques the output gravity generalized forces
+     * @param[out] generalizedGravityForces the output gravity generalized forces
      * @return true if all went well, false otherwise
      */
     bool generalizedGravityForces(FreeFloatingGeneralizedTorques & generalizedGravityForces);
