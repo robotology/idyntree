@@ -443,4 +443,22 @@ namespace iDynTree {
     {
         return IK_PIMPL(m_pimpl)->dynamics().model();
     }
+    
+    bool InverseKinematics::isCoMTargetActive()
+    {
+        return IK_PIMPL(m_pimpl)->isCoMTargetActive();
+    }
+    
+    void InverseKinematics::setCoMTarget(Position& desiredPosition, double weight)
+    {
+        return IK_PIMPL(m_pimpl)->setCoMTarget(desiredPosition, weight);
+    }
+    
+    void InverseKinematics::setCoMTargetInactive()
+    {
+        return IK_PIMPL(m_pimpl)->setCoMTargetInactive();
+    }
+
+
+
 }

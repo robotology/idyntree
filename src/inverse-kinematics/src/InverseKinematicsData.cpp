@@ -119,6 +119,10 @@ namespace kinematics {
 
         m_areBaseInitialConditionsSet = false;
         m_areJointsInitialConditionsSet = false;
+        
+        m_comTarget.isActive = false;
+        m_comTarget.weight = 0;
+        m_comTarget.desiredPosition.zero();
     }
 
     bool InverseKinematicsData::addFrameConstraint(const kinematics::TransformConstraint& frameTransformConstraint)
@@ -324,7 +328,7 @@ namespace kinematics {
         shapeSolution         = m_jointsResults;
     }
     
-    void InverseKinematicsData::setCoMTarget(iDynTree::Position desiredPosition, double weight){
+    void InverseKinematicsData::setCoMTarget(iDynTree::Position& desiredPosition, double weight){
         this->m_comTarget.isActive = true;
         this->m_comTarget.desiredPosition = desiredPosition;
         
@@ -336,5 +340,13 @@ namespace kinematics {
     bool InverseKinematicsData::isCoMTargetActive(){
         return this->m_comTarget.isActive;
     }
+    
+    void InverseKinematicsData::setCoMTargetInactive()
+    {
+        this->m_comTarget.isActive = false;
+        this->m_comTarget.weight = 0;
+        this->m_comTarget.desiredPosition.zero();
+    }
+
 }
 }

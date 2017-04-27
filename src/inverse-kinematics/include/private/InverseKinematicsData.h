@@ -277,9 +277,11 @@ public:
     iDynTree::KinDynComputations& dynamics();
     
     
-    void setCoMTarget(iDynTree::Position desiredPosition, double weight);
+    void setCoMTarget(iDynTree::Position& desiredPosition, double weight);
     
     bool isCoMTargetActive();
+    
+    void setCoMTargetInactive();
     //Declare as friend the IKNLP class so as it can access the private data
     friend class InverseKinematicsNLP;
 
