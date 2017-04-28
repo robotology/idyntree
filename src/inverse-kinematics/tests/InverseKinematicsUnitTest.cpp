@@ -256,12 +256,12 @@ void simpleHumanoidWholeBodyIKConsistency(const iDynTree::InverseKinematicsRotat
 }
 
 // Check the consistency of a simple humanoid wholebody IK test case, setting a CoM target.
-void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRotationParametrization rotationParametrization, 
+void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRotationParametrization rotationParametrization,
                                              const iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode)
 {
     iDynTree::InverseKinematics ik;
 
-    ik.setVerbosity(5);
+    ik.setVerbosity(3);
     
     bool ok = ik.loadModelFromFile(getAbsModelPath("iCubGenova02.urdf"));
     ASSERT_IS_TRUE(ok);
@@ -296,15 +296,16 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
     // The two cartesian targets should be reasonable values
     ik.setTargetResolutionMode(targetResolutionMode);
     iDynTree::Position comDes = kinDynDes.getCenterOfMassPosition();
-    ik.setCoMTarget(comDes);
+    ik.setCoMTarget(comDes, 1);
+    ik.setCoMasConstraintTolerance(1e-8);
 
     //ok = ik.addPositionTarget("r_elbow_1",kinDynDes.getRelativeTransform("l_sole","r_elbow_1").getPosition());
     //ASSERT_IS_TRUE(ok);
 
     iDynTree::Transform initialH = kinDynDes.getWorldBaseTransform();
 
-    ik.setInitialCondition(&initialH,&s);
-    ik.setDesiredJointConfiguration(s,1e-15);
+    ik.setInitialCondition(&initialH, &s);
+    ik.setDesiredJointConfiguration(s, 1e-15);
 
     // Solve the optimization problem
     double tic = clockInSec();
@@ -336,7 +337,7 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
     ASSERT_EQUAL_TRANSFORM_TOL(kinDynDes.getWorldTransform("l_foot"),kinDynOpt.getWorldTransform("l_foot"),tolConstraints);
     ASSERT_EQUAL_TRANSFORM_TOL(kinDynDes.getWorldTransform("r_sole"),kinDynOpt.getWorldTransform("r_sole"),tolConstraints);
     ASSERT_EQUAL_VECTOR_TOL(kinDynDes.getCenterOfMassPosition(),
-                            kinDynOpt.getCenterOfMassPosition(),tolTargets);
+                            kinDynOpt.getCenterOfMassPosition(), tolTargets);
 
     return;
 }

@@ -398,7 +398,8 @@ namespace kinematics {
         //COM target treated as constraint
         if (m_data.m_comTarget.isActive && (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)){
            for (int i = 0; i<3; ++i){
-               g_l[constraintIndex] = g_u[constraintIndex] = 0;
+               g_l[constraintIndex] = - m_data.m_comTarget.constraintTolerance;
+               g_u[constraintIndex] =   m_data.m_comTarget.constraintTolerance;
                constraintIndex++;
            }
         }

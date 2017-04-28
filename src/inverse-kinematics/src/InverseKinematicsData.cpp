@@ -48,6 +48,7 @@ namespace kinematics {
         m_comTarget.isActive = false;
         m_comTarget.weight = 0;
         m_comTarget.desiredPosition.zero();
+        m_comTarget.constraintTolerance = 1e-8;
     }
 
     bool InverseKinematicsData::setModel(const iDynTree::Model& model)
@@ -123,6 +124,7 @@ namespace kinematics {
         m_comTarget.isActive = false;
         m_comTarget.weight = 0;
         m_comTarget.desiredPosition.zero();
+        m_comTarget.constraintTolerance = 1e-8;
     }
 
     bool InverseKinematicsData::addFrameConstraint(const kinematics::TransformConstraint& frameTransformConstraint)
@@ -336,6 +338,12 @@ namespace kinematics {
             this->m_comTarget.weight = weight;
         }
     }
+
+    void InverseKinematicsData::setCoMasConstraintTolerance(double TOL)
+    {
+        this->m_comTarget.constraintTolerance = TOL;
+    }
+
     
     bool InverseKinematicsData::isCoMTargetActive(){
         return this->m_comTarget.isActive;

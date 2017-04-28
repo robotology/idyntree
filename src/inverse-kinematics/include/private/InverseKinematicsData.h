@@ -47,6 +47,7 @@ class internal::kinematics::InverseKinematicsData {
         bool isActive;
         iDynTree::Position desiredPosition;
         double weight;
+        double constraintTolerance;
     } m_comTarget;
 
     // The variables are divided among the optimized one (buffers inside the Solver, except results and I/O variables here),
@@ -278,6 +279,8 @@ public:
     
     
     void setCoMTarget(iDynTree::Position& desiredPosition, double weight);
+    
+    void setCoMasConstraintTolerance(double TOL);
     
     bool isCoMTargetActive();
     

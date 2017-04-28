@@ -451,12 +451,18 @@ namespace iDynTree {
     
     void InverseKinematics::setCoMTarget(Position& desiredPosition, double weight)
     {
-        return IK_PIMPL(m_pimpl)->setCoMTarget(desiredPosition, weight);
+        IK_PIMPL(m_pimpl)->setCoMTarget(desiredPosition, weight);
     }
+    
+    void InverseKinematics::setCoMasConstraintTolerance(double tolerance)
+    {
+        IK_PIMPL(m_pimpl)->setCoMasConstraintTolerance(tolerance);
+    }
+
     
     void InverseKinematics::setCoMTargetInactive()
     {
-        return IK_PIMPL(m_pimpl)->setCoMTargetInactive();
+        IK_PIMPL(m_pimpl)->setCoMTargetInactive();
     }
 
 
