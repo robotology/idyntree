@@ -110,7 +110,7 @@ void PrismaticJoint::resetBuffers(const double new_q) const
 
 void PrismaticJoint::resetAxisBuffers() const
 {
-    this->S_link1_link2 = -(translation_axis_wrt_link1).getTranslationTwist(1.0);
+    this->S_link1_link2 = translation_axis_wrt_link1.getTranslationTwist(1.0);
     this->S_link2_link1 = (link1_X_link2_at_rest.inverse()*translation_axis_wrt_link1).getTranslationTwist(1.0);
 }
 
