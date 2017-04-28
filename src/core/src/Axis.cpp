@@ -93,7 +93,7 @@ namespace iDynTree
         return nonRotated_T_rotated;
     }
     
-      Transform Axis::getTranslationTransform(const double dist) const
+    Transform Axis::getTranslationTransform(const double dist) const
     {
         Transform nonTranslated_T_translated;
 
