@@ -44,3 +44,7 @@ if(IDYNTREE_USES_ICUB_MAIN AND IDYNTREE_USES_KDL)
   target_link_libraries(urdf2dh iKin idyntree-core idyntree-regressors  idyntree-modelio-urdf-kdl idyntree-modelio-ikin)
   install(TARGETS urdf2dh DESTINATION bin)
 endif()
+
+if (IDYNTREE_USES_YARP AND IDYNTREE_USES_QT5)
+    add_subdirectory(idyntree-sole-gui)
+endif()
