@@ -53,8 +53,10 @@ option(IDYNTREE_ENABLE_SYMORO_PAR "Enable support for SyMoRo par format" TRUE)
 option(IDYNTREE_USES_KDL "Compile iDynTree with KDL dependency" FALSE)
 option(IDYNTREE_USES_YARP "Compile iDynTree with YARP dependency" TRUE)
 option(IDYNTREE_USES_ICUB_MAIN  "Compile iDynTree with icub-main dependencies (for iKin and skinDynLib helper functions and tools)" TRUE)
-option(IDYNTREE_USES_IPOPT "Compile iDynTree with Irrlicht dependency (for inverse-kinematics)" TRUE)
+option(IDYNTREE_USES_IPOPT "Compile iDynTree with Ipopt dependency (for inverse-kinematics)" TRUE)
 option(IDYNTREE_USES_IRRLICHT "Compile iDynTree with Irrlicht dependency (for visualizer)" FALSE)
+option(IDYNTREE_USES_QT5 "Compile iDynTree with Qt5 dependency (for visualization tools)" FALSE)
+
 
 if( MSVC )
     option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" TRUE)
