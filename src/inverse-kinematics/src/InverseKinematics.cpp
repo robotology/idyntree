@@ -282,7 +282,7 @@ namespace iDynTree {
         iDynTree::Axis projectionPlaneYaxisInAbsoluteFrame(yAxisOfPlaneInWorld,originOfPlaneInWorld);
 
         // Compute the constraint
-        bool ok = IK_PIMPL(m_pimpl)->m_comConstraint.buildConvexHull(xAxisOfPlaneInWorld,
+        bool ok = IK_PIMPL(m_pimpl)->m_comHullConstraint.buildConvexHull(xAxisOfPlaneInWorld,
                                                                      yAxisOfPlaneInWorld,
                                                                      originOfPlaneInWorld,
                                                                      supportPolygons,
@@ -295,7 +295,7 @@ namespace iDynTree {
         }
 
         // Configuration went fine, enable constraint
-        IK_PIMPL(m_pimpl)->m_comConstraint.setActive(true);
+        IK_PIMPL(m_pimpl)->m_comHullConstraint.setActive(true);
 
         return true;
     }
@@ -443,4 +443,28 @@ namespace iDynTree {
     {
         return IK_PIMPL(m_pimpl)->dynamics().model();
     }
+    
+    bool InverseKinematics::isCoMTargetActive()
+    {
+        return IK_PIMPL(m_pimpl)->isCoMTargetActive();
+    }
+    
+    void InverseKinematics::setCoMTarget(Position& desiredPosition, double weight)
+    {
+        IK_PIMPL(m_pimpl)->setCoMTarget(desiredPosition, weight);
+    }
+    
+    void InverseKinematics::setCoMasConstraintTolerance(double tolerance)
+    {
+        IK_PIMPL(m_pimpl)->setCoMasConstraintTolerance(tolerance);
+    }
+
+    
+    void InverseKinematics::setCoMTargetInactive()
+    {
+        IK_PIMPL(m_pimpl)->setCoMTargetInactive();
+    }
+
+
+
 }

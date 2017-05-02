@@ -599,6 +599,14 @@ public:
      * @return A constant reference to iDynTree::Model used by the inverse kinematics.
      */
     const Model & model() const;
+    
+    void setCoMTarget(iDynTree::Position& desiredPosition, double weight = 1.0);
+    
+    void setCoMasConstraintTolerance(double tolerance = 1e-8);
+    
+    bool isCoMTargetActive();
+    
+    void setCoMTargetInactive();
 
 private:
     void* m_pimpl; /*!< private implementation */

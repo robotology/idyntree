@@ -73,7 +73,7 @@ namespace kinematics {
         comInfo.com.zero();
         comInfo.comJacobian.resize(3, m_data.m_dofs + 6);
         comInfo.comJacobianAnalytical.resize(3, m_data.m_dofs + 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization));
-        comInfo.projectedComJacobian.resize(m_data.m_comConstraint.getNrOfConstraints(), m_data.m_dofs + 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization));
+        comInfo.projectedComJacobian.resize(m_data.m_comHullConstraint.getNrOfConstraints(), m_data.m_dofs + 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization));
     }
 
     bool InverseKinematicsNLP::updateState(const Ipopt::Number * x)
@@ -231,13 +231,15 @@ namespace kinematics {
         }
 
         // Update com position and jacobian
-        if (m_data.m_comConstraint.isActive()) {
+        if (m_data.m_comHullConstraint.isActive() || m_data.m_comTarget.isActive) {
             comInfo.com = m_data.m_dynamics.getCenterOfMassPosition();
             m_data.m_dynamics.getCenterOfMassJacobian(comInfo.comJacobian);
 
-            // Project the jacobian and the com
-            iDynTree::toEigen(comInfo.projectedCom) =
-                iDynTree::toEigen(m_data.m_comConstraint.P)*iDynTree::toEigen(comInfo.com -m_data.m_comConstraint.o);
+            if(m_data.m_comHullConstraint.isActive()){
+                // Project the jacobian and the com
+                iDynTree::toEigen(comInfo.projectedCom) =
+                    iDynTree::toEigen(m_data.m_comHullConstraint.P)*iDynTree::toEigen(comInfo.com -m_data.m_comHullConstraint.o);
+            }
         }
 
         return true;
@@ -265,12 +267,15 @@ namespace kinematics {
             }
         }
 
-        // COM constraint
-        if (m_data.m_comConstraint.isActive())
+        // COM Convex Hull constraint
+        if (m_data.m_comHullConstraint.isActive())
         {
-            m += m_data.m_comConstraint.getNrOfConstraints();
+            m += m_data.m_comHullConstraint.getNrOfConstraints();
         }
 
+        if (m_data.m_comTarget.isActive && (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)){
+            m += 3;
+        }
         //add target if considered as constraints
         for (TransformMap::const_iterator it = m_data.m_targets.begin();
              it != m_data.m_targets.end(); ++it) {
@@ -381,14 +386,24 @@ namespace kinematics {
             }
         }
 
-        // COM constraint (Ax <= b)
-        if (m_data.m_comConstraint.isActive()) {
-            for (int i = 0; i < m_data.m_comConstraint.getNrOfConstraints(); i++) {
+        // COM Convex Hull constraint (Ax <= b)
+        if (m_data.m_comHullConstraint.isActive()) {
+            for (int i = 0; i < m_data.m_comHullConstraint.getNrOfConstraints(); i++) {
                 g_l[constraintIndex] = -2e19;
-                g_u[constraintIndex] = m_data.m_comConstraint.b(i);
+                g_u[constraintIndex] = m_data.m_comHullConstraint.b(i);
                 constraintIndex++;
             }
         }
+        
+        //COM target treated as constraint
+        if (m_data.m_comTarget.isActive && (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)){
+           for (int i = 0; i<3; ++i){
+               g_l[constraintIndex] = - m_data.m_comTarget.constraintTolerance;
+               g_u[constraintIndex] =   m_data.m_comTarget.constraintTolerance;
+               constraintIndex++;
+           }
+        }
+
 
         //target <=> position constraint
         for (TransformMap::const_iterator it = m_data.m_targets.begin();
@@ -548,6 +563,11 @@ namespace kinematics {
             }
 
 
+            if (m_data.m_comTarget.isActive && !(m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)){
+                iDynTree::Position comPositionError;
+                comPositionError = comInfo.com - m_data.m_comTarget.desiredPosition;
+                obj_value += 0.5 * m_data.m_comTarget.weight * iDynTree::toEigen(comPositionError).squaredNorm();
+            }
         }
 
         return true;
@@ -642,6 +662,18 @@ namespace kinematics {
                     gradient +=  target->second.getRotationWeight()*(iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
                 }
             }
+            
+            if (m_data.m_comTarget.isActive && !(m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)) {
+                assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
+                iDynTree::Vector3 rpy;
+                iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
+                iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0), rpy(1), rpy(2));
+                computeConstraintJacobianCOMRPY(comInfo.comJacobian,RPYToOmega,comInfo.comJacobianAnalytical);
+
+                iDynTree::Position comPositionError;
+                comPositionError = comInfo.com - m_data.m_comTarget.desiredPosition;
+                gradient += m_data.m_comTarget.weight*iDynTree::toEigen(comPositionError).transpose() * iDynTree::toEigen(comInfo.comJacobianAnalytical);
+            }
         }
 
 
@@ -691,10 +723,17 @@ namespace kinematics {
         }
 
         // COM constraint
-        if (m_data.m_comConstraint.isActive()) {
-            constraints.segment(index, m_data.m_comConstraint.getNrOfConstraints()) =
-                iDynTree::toEigen(m_data.m_comConstraint.A)*iDynTree::toEigen(comInfo.projectedCom);
-            index = index+m_data.m_comConstraint.getNrOfConstraints();
+        if (m_data.m_comHullConstraint.isActive()) {
+            constraints.segment(index, m_data.m_comHullConstraint.getNrOfConstraints()) =
+                iDynTree::toEigen(m_data.m_comHullConstraint.A)*iDynTree::toEigen(comInfo.projectedCom);
+            index = index+m_data.m_comHullConstraint.getNrOfConstraints();
+        }
+        
+        if (m_data.m_comTarget.isActive && (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)){
+            iDynTree::Position comPositionError;
+            comPositionError = comInfo.com - m_data.m_comTarget.desiredPosition;
+            constraints.segment<3>(index) = iDynTree::toEigen(comPositionError);
+            index += 3;
         }
 
         //Targets considered as constraints
@@ -851,19 +890,28 @@ namespace kinematics {
 
             //For COM constraint
             //RPY parametrization for the base
-            if (m_data.m_comConstraint.isActive()) {
+            if (m_data.m_comHullConstraint.isActive() || (m_data.m_comTarget.isActive && (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly))) {
                 assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
                 iDynTree::Vector3 rpy;
                 iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
                 iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0), rpy(1), rpy(2));
                 computeConstraintJacobianCOMRPY(comInfo.comJacobian,RPYToOmega,comInfo.comJacobianAnalytical);
-                // Project the jacobian
-                iDynTree::toEigen(comInfo.projectedComJacobian) =
-                        iDynTree::toEigen(m_data.m_comConstraint.AtimesP)*iDynTree::toEigen(comInfo.comJacobianAnalytical);
+                
+                if ( m_data.m_comHullConstraint.isActive() ){
+                    // Project the jacobian
+                    iDynTree::toEigen(comInfo.projectedComJacobian) =
+                            iDynTree::toEigen(m_data.m_comHullConstraint.AtimesP)*iDynTree::toEigen(comInfo.comJacobianAnalytical);
 
-                Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*n], comInfo.projectedComJacobian.rows(), n);
-                currentConstraint = iDynTree::toEigen(comInfo.projectedComJacobian);
-                constraintIndex += comInfo.projectedComJacobian.rows();
+                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*n], comInfo.projectedComJacobian.rows(), n);
+                    currentConstraint = iDynTree::toEigen(comInfo.projectedComJacobian);
+                    constraintIndex += comInfo.projectedComJacobian.rows();
+                }
+                
+                if (m_data.m_comTarget.isActive){
+                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*n], comInfo.comJacobianAnalytical.rows(), n);
+                    currentConstraint = iDynTree::toEigen(comInfo.comJacobianAnalytical);
+                    constraintIndex += 3;
+                }
             }
 
 
