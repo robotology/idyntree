@@ -15,7 +15,6 @@
 
 #include <urdf_model/model.h>
 #include <urdf_parser/urdf_parser.h>
-#include <urdf_world/world.h>
 
 #ifdef IDYNTREE_USE_INTERNAL_URDFDOM
 
@@ -29,6 +28,8 @@ typedef std::map<std::string, JointPtr > JointPtrMap;
 }
 
 #else
+
+#include <urdf_world/world.h>
 
 #ifdef URDF_REDEFINE_BOOST_PTR_TYPEDEFS
 
