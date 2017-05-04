@@ -26,10 +26,10 @@ namespace iDynTree {
 #if _MSC_VER > 1600
     SparseMatrix::SparseMatrix() : SparseMatrix(0, 0) {}
 #else
-	SparseMatrix::SparseMatrix()
-	{
-		initializeMatrix(0,0,NULL,0);
-	}
+    SparseMatrix::SparseMatrix()
+    {
+        initializeMatrix(0,0,NULL,0);
+    }
 #endif 
 
 	
@@ -39,9 +39,9 @@ namespace iDynTree {
     { }
 #else
     SparseMatrix::SparseMatrix(unsigned rows, unsigned cols)
-	{
-		initializeMatrix(rows,cols,NULL,0);
-	}
+    {
+        initializeMatrix(rows,cols,NULL,0);
+    }
 #endif
 
     SparseMatrix::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
