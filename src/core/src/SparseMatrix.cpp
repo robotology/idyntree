@@ -23,11 +23,26 @@
 
 namespace iDynTree {
 
+#if _MSC_VER > 1600
     SparseMatrix::SparseMatrix() : SparseMatrix(0, 0) {}
+#else
+	SparseMatrix::SparseMatrix()
+	{
+		initializeMatrix(0,0,NULL,0);
+	}
+#endif 
 
+	
+#if _MSC_VER > 1600
     SparseMatrix::SparseMatrix(unsigned rows, unsigned cols)
     : SparseMatrix(rows, cols, iDynTree::VectorDynSize())
     { }
+#else
+    SparseMatrix::SparseMatrix(unsigned rows, unsigned cols)
+	{
+		initializeMatrix(rows,cols,NULL,0);
+	}
+#endif
 
     SparseMatrix::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
     : m_outerStarts(rows + 1, 0)
