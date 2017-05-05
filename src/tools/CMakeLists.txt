@@ -47,4 +47,5 @@ endif()
 
 if (IDYNTREE_USES_YARP AND IDYNTREE_USES_QT5)
     add_subdirectory(idyntree-sole-gui)
+    add_subdirectory(plotter)
 endif()
