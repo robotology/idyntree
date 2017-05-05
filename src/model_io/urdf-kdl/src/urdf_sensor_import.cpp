@@ -74,6 +74,13 @@ std::vector<std::string> &split(const std::string &s, std::vector<std::string> &
     return elems;
 }
 
+bool inline localStringToDoubleWithClassicLocale(const std::string & inStr, double & outDouble)
+{
+    std::istringstream ss(inStr);
+    ss.imbue(std::locale::classic());
+    ss >> outDouble;
+    return !(ss.fail());
+}
 
 bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorData> & ft_sensors)
 {
@@ -160,13 +167,16 @@ bool ftSensorsFromUrdfString(const std::string& urdf_xml, std::vector<FTSensorDa
                           {
                               return false;
                           }
-                          double roll  = atof(pose_elems[3].c_str());
-                          double pitch = atof(pose_elems[4].c_str());
-                          double yaw   = atof(pose_elems[5].c_str());
+
+                          double roll, pitch, yaw;
+                          bool okParse = localStringToDoubleWithClassicLocale(pose_elems[3], roll);
+                          okParse = okParse && localStringToDoubleWithClassicLocale(pose_elems[4], pitch);
+                          okParse = okParse && localStringToDoubleWithClassicLocale(pose_elems[5], yaw);
                           new_ft.sensor_pose.M = KDL::Rotation::RPY(roll,pitch,yaw);
-                          double x  = atof(pose_elems[0].c_str());
-                          double y = atof(pose_elems[1].c_str());
-                          double z   = atof(pose_elems[2].c_str());
+                          double x, y, z;
+                          okParse = okParse && localStringToDoubleWithClassicLocale(pose_elems[0], x);
+                          okParse = okParse && localStringToDoubleWithClassicLocale(pose_elems[1], y);
+                          okParse = okParse && localStringToDoubleWithClassicLocale(pose_elems[2], z);
                           new_ft.sensor_pose.p = KDL::Vector(x,y,z);
                       }
 
