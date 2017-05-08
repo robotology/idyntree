@@ -61,7 +61,7 @@ bool inertiaFromURDFXML(TiXmlElement * inertiaXml,
     }
 
     double mass;
-    if( !stringToDouble(mass_xml->Attribute("value"),mass) )
+    if( !stringToDoubleWithClassicLocale(mass_xml->Attribute("value"),mass) )
     {
         std::stringstream stm;
         stm << "Inertial: mass [" << mass_xml->Attribute("value")
@@ -85,12 +85,12 @@ bool inertiaFromURDFXML(TiXmlElement * inertiaXml,
     }
 
     double ixx, ixy, ixz, iyy, iyz, izz;
-    if( !stringToDouble(inertia_xml->Attribute("ixx"),ixx)
-        || !stringToDouble(inertia_xml->Attribute("ixy"),ixy)
-        || !stringToDouble(inertia_xml->Attribute("ixz"),ixz)
-        || !stringToDouble(inertia_xml->Attribute("iyy"),iyy)
-        || !stringToDouble(inertia_xml->Attribute("iyz"),iyz)
-        || !stringToDouble(inertia_xml->Attribute("izz"),izz) )
+    if( !stringToDoubleWithClassicLocale(inertia_xml->Attribute("ixx"),ixx)
+        || !stringToDoubleWithClassicLocale(inertia_xml->Attribute("ixy"),ixy)
+        || !stringToDoubleWithClassicLocale(inertia_xml->Attribute("ixz"),ixz)
+        || !stringToDoubleWithClassicLocale(inertia_xml->Attribute("iyy"),iyy)
+        || !stringToDoubleWithClassicLocale(inertia_xml->Attribute("iyz"),iyz)
+        || !stringToDoubleWithClassicLocale(inertia_xml->Attribute("izz"),izz) )
 
     {
         std::stringstream stm;
@@ -179,7 +179,7 @@ bool posLimitsFromURDFXML(TiXmlElement* limXml,
 {
     if ( limXml->Attribute("lower") )
     {
-        if( !stringToDouble(limXml->Attribute("lower"),posLimMin) )
+        if( !stringToDoubleWithClassicLocale(limXml->Attribute("lower"),posLimMin) )
         {
             std::stringstream stm;
             stm << " [" << limXml->Attribute("lower")
@@ -196,7 +196,7 @@ bool posLimitsFromURDFXML(TiXmlElement* limXml,
 
     if ( limXml->Attribute("upper") )
     {
-        if( !stringToDouble(limXml->Attribute("upper"),posLimMax) )
+        if( !stringToDoubleWithClassicLocale(limXml->Attribute("upper"),posLimMax) )
         {
             std::stringstream stm;
             stm << " [" << limXml->Attribute("upper")

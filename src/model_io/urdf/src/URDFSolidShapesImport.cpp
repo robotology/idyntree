@@ -269,17 +269,30 @@ bool addURDFGeometryToModelGeometries(const iDynTree::Model& model,
 
     if( geomXml->FirstChildElement("sphere") != 0 )
     {
-        Sphere * pSphere = new Sphere();
-        pSphere->radius = std::atof(geomXml->FirstChildElement("sphere")->Attribute("radius"));
-        pGeom = static_cast<SolidShape *>(pSphere);
+        double radiusD;
+        parseOk = stringToDoubleWithClassicLocale(geomXml->FirstChildElement("cylinder")->Attribute("radius"),radiusD);
+
+        if (parseOk)
+        {
+            Sphere * pSphere = new Sphere();
+            pSphere->radius = radiusD;
+            pGeom = static_cast<SolidShape *>(pSphere);
+        }
     }
 
     if( geomXml->FirstChildElement("cylinder") != 0 )
     {
-        Cylinder * pCylinder = new Cylinder();
-        pCylinder->radius = std::atof(geomXml->FirstChildElement("cylinder")->Attribute("radius"));
-        pCylinder->length = std::atof(geomXml->FirstChildElement("cylinder")->Attribute("length"));
-        pGeom = static_cast<SolidShape *>(pCylinder);
+        double radiusD, lengthD;
+        parseOk = stringToDoubleWithClassicLocale(geomXml->FirstChildElement("cylinder")->Attribute("radius"),radiusD);
+        parseOk = parseOk && stringToDoubleWithClassicLocale(geomXml->FirstChildElement("cylinder")->Attribute("length"),lengthD);
+
+        if (parseOk)
+        {
+            Cylinder * pCylinder = new Cylinder();
+            pCylinder->radius = radiusD;
+            pCylinder->length = lengthD;
+            pGeom = static_cast<SolidShape *>(pCylinder);
+        }
     }
 
     if( geomXml->FirstChildElement("mesh") != 0 )

@@ -27,19 +27,12 @@
 #include <iostream>
 #include <fstream>
 
+#include "URDFParsingUtils.h"
+
+
 namespace iDynTree
 {
 
-std::vector<std::string> &splitString(const std::string &s, std::vector<std::string> &elems)
-{
-    std::stringstream ss(s);
-    std::string item;
-    while (ss >> item)
-    {
-        elems.push_back(item);
-    }
-    return elems;
-}
 
 bool findJointParentsAndChild(TiXmlElement* robotXml,
                               const std::string queriedJointName,
@@ -199,36 +192,15 @@ bool sensorsFromURDFString(const std::string& urdfXml,
         // Parse origin element
         Transform link_H_pose;
         TiXmlElement* originTag = sensorXml->FirstChildElement("origin");
-        if( originTag )
-        {
-            std::string  rpyText(originTag->Attribute("rpy"));
-            std::string  xyzText(originTag->Attribute("xyz"));
 
-            std::vector<std::string> rpyElems;
-            std::vector<std::string> xyzElems;
-            splitString(rpyText,rpyElems);
-            splitString(xyzText,xyzElems);
+        bool ok = transformFromURDFXML(originTag, link_H_pose);
 
-            if( rpyElems.size() != 3 && xyzElems.size() !=3 )
-            {
-               std::cerr<<"[ERROR] Pose attribute for sensor " << sensorName << " specified incorrectly, parsing failed.";
-               parsingSuccessful = false;
-               return false;
-            }
-            double roll  = atof(rpyElems[0].c_str());
-            double pitch = atof(rpyElems[1].c_str());
-            double yaw   = atof(rpyElems[2].c_str());
-            iDynTree::Rotation rot = iDynTree::Rotation::RPY(roll,pitch,yaw);
-            double x  = atof(xyzElems[0].c_str());
-            double y = atof(xyzElems[1].c_str());
-            double z   = atof(xyzElems[2].c_str());
-            iDynTree::Position pos(x,y,z);
-            link_H_pose = iDynTree::Transform(rot,pos);
-        }
-        else
+        if (!ok)
         {
-            // default value
-            link_H_pose = iDynTree::Transform::Identity();
+            std::cerr<< "[ERROR] impossible to parse origin element of " << sensorName <<
+                        ", parsing failed." << std::endl;
+            parsingSuccessful = false;
+            return false;
         }
 
         // Parse parent element
