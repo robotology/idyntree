@@ -48,7 +48,7 @@ namespace urdf {
  * Convert a string to a double
  *
  */
-bool inline stringToDoubleWithClassicLocale(const std::string & inStr, double & outDouble)
+bool inline stringToDouble(const std::string & inStr, double & outDouble)
 {
     std::istringstream ss(inStr);
     ss.imbue(std::locale::classic());
@@ -56,7 +56,7 @@ bool inline stringToDoubleWithClassicLocale(const std::string & inStr, double & 
     return !(ss.fail());
 }
 
-bool inline stringToIntWithClassicLocale(const std::string & inStr, int & outInt)
+bool inline stringToInt(const std::string & inStr, int & outInt)
 {
     std::istringstream ss(inStr);
     ss.imbue(std::locale::classic());
@@ -64,7 +64,7 @@ bool inline stringToIntWithClassicLocale(const std::string & inStr, int & outInt
     return !(ss.fail());
 }
 
-bool inline stringToUnsignedIntWithClassicLocale(const std::string & inStr, unsigned int & outInt)
+bool inline stringToUnsignedInt(const std::string & inStr, unsigned int & outInt)
 {
     std::istringstream ss(inStr);
     ss.imbue(std::locale::classic());
