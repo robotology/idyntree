@@ -13,6 +13,8 @@
 
 #include <Eigen/Core>
 
+#include <algorithm>
+
 namespace iDynTree
 {
     Polygon::Polygon(): m_vertices(0)
@@ -146,8 +148,8 @@ namespace iDynTree
         {
             for(size_t vertex=0; vertex < supportPolygonsExpressedInAbsoluteFrame[poly].getNrOfVertices(); vertex++)
             {
-                 Vector2 newProjectedPoint;
-                 toEigen(newProjectedPoint) = toEigen(P)*toEigen(supportPolygonsExpressedInAbsoluteFrame[poly](vertex)-o);
+                 Vector2 newProjectedPoint = project(supportPolygonsExpressedInAbsoluteFrame[poly](vertex));
+                 //toEigen(newProjectedPoint) = toEigen(P)*toEigen(supportPolygonsExpressedInAbsoluteFrame[poly](vertex)-o);
                  projectedPoints.push_back(newProjectedPoint);
             }
         }
@@ -247,4 +249,98 @@ namespace iDynTree
 
         return;
     }
+
+    Vector2 ConvexHullProjectionConstraint::project(Position& pos3dInAbsoluteFrame)
+    {
+        iDynTree::Vector2 projected;
+        toEigen(projected) = toEigen(P)*toEigen(pos3dInAbsoluteFrame-o);
+        return projected;
+    }
+
+    double distanceBetweentTwoPoints(const Vector2& firstPoint,
+                                     const Vector2& secondPoint)
+    {
+        return (toEigen(firstPoint)-toEigen(secondPoint)).norm();
+    }
+
+    double distanceBetweenPointAndSegment(const Vector2& point,
+                                          const Vector2& segmentFirstPoint,
+                                          const Vector2& segmentLastPoint)
+    {
+        double segmentLengthSquared = (toEigen(segmentLastPoint)-toEigen(segmentFirstPoint)).squaredNorm();
+
+        // First case: the segment is actually a point
+        if (segmentLengthSquared == 0.0)
+        {
+            return distanceBetweentTwoPoints(point, segmentFirstPoint);
+        }
+
+        // The segment can be written as the set of segment points sp that can be written as:
+        // sp = segmentFirstPoint + t*( segmentLastPoint - segmentFirstPoint )
+        // for t \in [0, 1]
+        // To find the segment point closest to the point, we can just find the t of the projection
+        // of the point in the segment, and clamp it to [0, 1]
+        double tProjection = ((toEigen(point)-toEigen(segmentFirstPoint)).dot(toEigen(segmentLastPoint)-toEigen(segmentFirstPoint)))/segmentLengthSquared;
+
+        double tClosestPoint = std::max(0.0, std::min(1.0, tProjection));
+
+        Vector2 closestPoint;
+        toEigen(closestPoint) = toEigen(segmentFirstPoint) + tClosestPoint*(toEigen(segmentLastPoint)-toEigen(segmentFirstPoint));
+
+        return distanceBetweentTwoPoints(point, closestPoint);
+    }
+
+    double ConvexHullProjectionConstraint::computeMargin(const Vector2& posIn2D)
+    {
+        bool isInside = true;
+
+        // First check if the point is inside the convex hull or not
+        iDynTree::VectorDynSize Ax(A.rows());
+
+        toEigen(Ax) = toEigen(A)*toEigen(posIn2D);
+
+        // If even one of the constraint is violated, then the point is outside the convex hull
+        for (int i=0; i < Ax.size(); i++)
+        {
+            if (!(Ax(i) <= b(i)))
+            {
+                isInside = false;
+                break;
+            }
+        }
+
+        // Then, compute the distance between each segment of the convex hull and the point :
+        // the minimum one is the distance of the point from the convex hull
+
+        // We start from the last segment that do not follow the segment[i],segment[i+1] structure
+        double distanceWithoutSign = distanceBetweenPointAndSegment(posIn2D,
+                                                                    projectedConvexHull(projectedConvexHull.getNrOfVertices()-1),
+                                                                    projectedConvexHull(0));
+        // Find the minimum distance
+        for (int i=0; i < projectedConvexHull.getNrOfVertices()-1; i++)
+        {
+            double candidateDistance = distanceBetweenPointAndSegment(posIn2D,
+                                                                      projectedConvexHull(i),
+                                                                      projectedConvexHull(i+1));
+
+            if (candidateDistance < distanceWithoutSign)
+            {
+                distanceWithoutSign = candidateDistance;
+            }
+        }
+
+        double margin;
+        // If the point is inside the convex hull, we return the distance, otherwise the negated distance
+        if (isInside)
+        {
+            margin = distanceWithoutSign;
+        }
+        else
+        {
+            margin = -distanceWithoutSign;
+        }
+        return margin;
+    }
+
+
 }

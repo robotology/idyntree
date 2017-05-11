@@ -251,6 +251,7 @@ namespace iDynTree {
 
         size_t nrOfSupportLinks = supportFrames.size();
 
+        IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndeces.resize(0);
         std::vector<iDynTree::Transform> world_H_support(nrOfSupportLinks);
 
         for (int i=0; i < nrOfSupportLinks; i++)
@@ -274,6 +275,8 @@ namespace iDynTree {
                 return false;
             }
 
+            IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndeces.push_back(frameIndex);
+
             // Store the constrained value for this frame
             world_H_support[i] = constraintIt->second.getTransform();
         }
@@ -283,10 +286,13 @@ namespace iDynTree {
 
         // Compute the constraint
         bool ok = IK_PIMPL(m_pimpl)->m_comHullConstraint.buildConvexHull(xAxisOfPlaneInWorld,
-                                                                     yAxisOfPlaneInWorld,
-                                                                     originOfPlaneInWorld,
-                                                                     supportPolygons,
-                                                                     world_H_support);
+                                                                         yAxisOfPlaneInWorld,
+                                                                         originOfPlaneInWorld,
+                                                                         supportPolygons,
+                                                                         world_H_support);
+
+        // Save some info on the constraints
+        IK_PIMPL(m_pimpl)->m_comHullConstraint.absoluteFrame_X_supportFrame = world_H_support;
 
         if (!ok)
         {
@@ -298,6 +304,17 @@ namespace iDynTree {
         IK_PIMPL(m_pimpl)->m_comHullConstraint.setActive(true);
 
         return true;
+    }
+
+    double InverseKinematics::getCenterOfMassProjectionMargin()
+    {
+        // Compute center of mass in the first constraint frame
+        iDynTree::KinDynComputations & kinDyn = IK_PIMPL(m_pimpl)->m_dynamics;
+        iDynTree::Position comInAbsoluteConstraintFrame =
+            IK_PIMPL(m_pimpl)->m_comHullConstraint.absoluteFrame_X_supportFrame[0]*(kinDyn.getWorldTransform(IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndeces[0]).inverse()*kinDyn.getCenterOfMassPosition());
+
+        iDynTree::Vector2 comProjection = IK_PIMPL(m_pimpl)->m_comHullConstraint.project(comInAbsoluteConstraintFrame);
+        return IK_PIMPL(m_pimpl)->m_comHullConstraint.computeMargin(comProjection);
     }
 
     bool InverseKinematics::addTarget(const std::string& frameName,
