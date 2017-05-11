@@ -13,7 +13,6 @@
 #include <iostream>
 #include <cmath>
 
-
 iDynTree::CubicSpline::CubicSpline()
 :m_v0(0)
 ,m_vf(0)
@@ -35,17 +34,17 @@ iDynTree::CubicSpline::~CubicSpline()
 bool iDynTree::CubicSpline::setData(const iDynTree::VectorDynSize& time, const iDynTree::VectorDynSize& yData)
 {
     if((time.size() == 0) && (yData.size() == 0)){
-        std::cerr << "[CUBICSPLINE] The input data are empty!" << std::endl;
+        std::cerr << "[ERROR][CUBICSPLINE] The input data are empty!" << std::endl;
         return false;
     }
     
     if(time.size() != yData.size()){
-        std::cerr << "[CUBICSPLINE] The input data are expected to have the same dimension: xData = " << time.size() << ", yData = " << yData.size() << "." <<std::endl;
+        std::cerr << "[ERROR][CUBICSPLINE] The input data are expected to have the same dimension: xData = " << time.size() << ", yData = " << yData.size() << "." <<std::endl;
         return false;
     }
     
     if(time.size() < 2){
-        std::cerr << "[CUBICSPLINE] At least two data points are needed to compute the spline." << std::endl;
+        std::cerr << "[ERROR][CUBICSPLINE] At least two data points are needed to compute the spline." << std::endl;
         return false;
     }
 
@@ -123,12 +122,12 @@ bool iDynTree::CubicSpline::computePhasesDuration()
         m_T(i) = m_time(i+1) - m_time(i);
         
         if(m_T(i) == 0){
-            std::cerr << "[CUBICSPLINE] Two consecutive points have the same time coordinate." << std::endl; //For stability purposes, the matrix below may not be invertible
+            std::cerr << "[ERROR][CUBICSPLINE] Two consecutive points have the same time coordinate." << std::endl; //For stability purposes, the matrix below may not be invertible
             return false;
         }
         
         if(m_T(i) < 0){
-            std::cerr << "[CUBICSPLINE] The input points are expected to be consecutive, strictly increasing in the time variable." << std::endl; //For stability purposes
+            std::cerr << "[ERROR][CUBICSPLINE] The input points are expected to be consecutive, strictly increasing in the time variable." << std::endl; //For stability purposes
             return false;
         }
         
@@ -151,8 +150,8 @@ void iDynTree::CubicSpline::setFinalConditions(double finalVelocity, double fina
 double iDynTree::CubicSpline::evaluatePoint(double t)
 {
     if(m_time.size() == 0){
-        std::cerr << "[CUBICSPLINE] First you have to load data! The returned data should not be considered." << std::endl; 
-        return 1e19;
+        std::cerr << "[ERROR][CUBICSPLINE] First you have to load data! The returned data should not be considered." << std::endl; 
+        return std::nan("");
     }
     
     if( t < m_time(0) )
