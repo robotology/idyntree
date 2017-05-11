@@ -537,28 +537,36 @@ namespace kinematics {
                       m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
                     && target->second.hasRotationConstraint()) {
 
-                    // TODO implement errors using RPY
-                    assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion);
+                    if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion){
 
-                    //this implies that rotation is a soft constraint.
-                    //Get actual and desired orientation of target and compute the
-                    //orientation error, as  w_R_f * (w_R_f^d)^{-1} = w_\tilde{R}_w (R tilde expressed in inertial)
-                    //TODO: check if it is correct to express it in the inertial
-                    iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
+                        //this implies that rotation is a soft constraint.
+                        //Get actual and desired orientation of target and compute the
+                        //orientation error, as  w_R_f * (w_R_f^d)^{-1} = w_\tilde{R}_w (R tilde expressed in inertial)
+                        //TODO: check if it is correct to express it in the inertial
+                        iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
 
-                    //Quaternion corresponding to the orientation error
-                    iDynTree::Vector4 orientationErrorQuaternion;
-                    transformError.getQuaternion(orientationErrorQuaternion);
+                        //Quaternion corresponding to the orientation error
+                        iDynTree::Vector4 orientationErrorQuaternion;
+                        transformError.getQuaternion(orientationErrorQuaternion);
 
-                    iDynTree::Vector4 identityQuaternion;
-                    iDynTree::Rotation::Identity().getQuaternion(identityQuaternion);
+                        iDynTree::Vector4 identityQuaternion;
+                        iDynTree::Rotation::Identity().getQuaternion(identityQuaternion);
 
-                    //Implementing orientation cost as
-                    // \tilde(Q) = Q_error
-                    // Q_1 = Q_identity
-                    //|| \tilde(Q) - Q_1 ||^2 as measure of error
-                    // there is an alternative cost. See latex (using trace of R)
-                    obj_value += 0.5 * target->second.getRotationWeight() * (iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).squaredNorm();
+                        //Implementing orientation cost as
+                        // \tilde(Q) = Q_error
+                        // Q_1 = Q_identity
+                        //|| \tilde(Q) - Q_1 ||^2 as measure of error
+                        // there is an alternative cost. See latex (using trace of R)
+                        obj_value += 0.5 * target->second.getRotationWeight() * (iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).squaredNorm();
+                    }
+                    else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw){
+                        FrameInfo &targetInfo = targetsInfo[target->first];
+
+                        iDynTree::Vector3 rpy_target = targetInfo.transform.getRotation().asRPY();
+                        iDynTree::Vector3 rpy_desired = target->second.getRotation().asRPY();
+                        //TODO Investigate the derivative of the cost using the RPY representation of the error matrix R*\hat{R}'
+                        obj_value += 0.5 * target->second.getRotationWeight() * ( iDynTree::toEigen(rpy_target) - iDynTree::toEigen(rpy_desired) ).squaredNorm();
+                    }
                 }
             }
 
@@ -639,27 +647,49 @@ namespace kinematics {
                 if ( (m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly||
                       m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
                     && target->second.hasRotationConstraint()) {
-                    //Derivative is (\tilde{Q} - 1) \partial_x Q
-                    iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
+                    
+                    if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion){
+                        //Derivative is (\tilde{Q} - 1) \partial_x Q
+                        iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
 
-                    iDynTree::Vector4 orientationErrorQuaternion;
-                    transformError.getQuaternion(orientationErrorQuaternion);
+                        iDynTree::Vector4 orientationErrorQuaternion;
+                        transformError.getQuaternion(orientationErrorQuaternion);
 
-                    iDynTree::Vector4 identityQuaternion;
-                    iDynTree::Rotation::Identity().getQuaternion(identityQuaternion);
+                        iDynTree::Vector4 identityQuaternion;
+                        iDynTree::Rotation::Identity().getQuaternion(identityQuaternion);
 
-                    // TODO : handling targets with RPY
-                    assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion);
+                        //assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion);
 
 
-                    computeConstraintJacobian(targetsInfo[target->first].jacobian,
-                                              targetsInfo[target->first].quaternionDerivativeMap,
-                                              quaternionDerivativeInverseMapBuffer,
-                                              ComputeContraintJacobianOptionAngularPart,
-                                              finalJacobianBuffer);
+                        computeConstraintJacobian(targetsInfo[target->first].jacobian,
+                                                targetsInfo[target->first].quaternionDerivativeMap,
+                                                quaternionDerivativeInverseMapBuffer,
+                                                ComputeContraintJacobianOptionAngularPart,
+                                                finalJacobianBuffer);
 
-                    //These are the first baseSize columns + the joint columns
-                    gradient +=  target->second.getRotationWeight()*(iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                        //These are the first baseSize columns + the joint columns
+                        gradient +=  target->second.getRotationWeight()*(iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                    }
+                    else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw){
+                        //RPY parametrization for the base
+                        iDynTree::Vector3 rpy;
+                        iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
+                        iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0),rpy(1),rpy(2));
+                        FrameInfo &targetInfo = targetsInfo[target->first];
+
+                        iDynTree::Vector3 rpy_target = targetInfo.transform.getRotation().asRPY();
+                        iDynTree::Vector3 rpy_desired = target->second.getRotation().asRPY();
+                        iDynTree::Matrix3x3 omegaToRPYMap_target = iDynTree::Rotation::RPYRightTrivializedDerivativeInverse(rpy_target(0),rpy_target(1),rpy_target(2));
+
+                        computeConstraintJacobianRPY(targetInfo.jacobian,
+                                                    omegaToRPYMap_target,
+                                                    RPYToOmega,
+                                                    ComputeContraintJacobianOptionAngularPart,
+                                                    finalJacobianBuffer);
+                        //TODO Investigate the derivative of the cost using the RPY representation of the error matrix R*\hat{R}'
+                        gradient += target->second.getRotationWeight()*( iDynTree::toEigen(rpy_target) - iDynTree::toEigen(rpy_desired) ).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                        
+                    }
                 }
             }
             
