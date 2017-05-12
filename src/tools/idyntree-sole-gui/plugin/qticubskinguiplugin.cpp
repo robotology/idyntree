@@ -43,7 +43,7 @@ QtiDynTreeSoleGuiPlugin::QtiDynTreeSoleGuiPlugin(QQuickItem *parent):
 
      timer.setInterval(50);
      timer.setSingleShot(false);
-     connect(&timer,SIGNAL(timeout()),this,SLOT(onTimeout()));
+     connect(&timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
 
 }
 
@@ -52,7 +52,7 @@ QtiDynTreeSoleGuiPlugin::~QtiDynTreeSoleGuiPlugin()
     timer.stop();
     mutex.lock();
 
-    if(observerThread){
+    if (observerThread){
         observerThread->stop();
         delete observerThread;
     }
@@ -64,7 +64,7 @@ QtiDynTreeSoleGuiPlugin::~QtiDynTreeSoleGuiPlugin()
 void QtiDynTreeSoleGuiPlugin::paint(QPainter *painter)
 {
 
-    if(!timer.isActive()){
+    if (!timer.isActive()){
         return;
     }
 
@@ -129,7 +129,7 @@ bool QtiDynTreeSoleGuiPlugin::parseParameters(QStringList params)
     int c = params.count();
     char **v;
     v = (char**)malloc(sizeof(char*) * c);
-    for(int i=0;i<params.count();i++){
+    for (int i=0; i<params.count(); i++){
         v[i] = (char*)malloc(sizeof(char) * params.at(i).length()+1);
         strcpy(v[i],params.at(i).toLatin1().data());
     }
@@ -155,7 +155,7 @@ bool QtiDynTreeSoleGuiPlugin::parseParameters(QStringList params)
     widthChanged();
     heightChanged();
 
-    yDebug("RF: %s",rf.toString().data());
+    yDebug("RF: %s", rf.toString().data());
 
     gRowStride=3*gWidth;
     gImageSize=gRowStride*gHeight;
@@ -170,7 +170,7 @@ bool QtiDynTreeSoleGuiPlugin::parseParameters(QStringList params)
 
     timer.start();
 
-    connect(this,SIGNAL(init()),this,SLOT(onInit()),Qt::QueuedConnection);
+    connect(this, SIGNAL(init()), this, SLOT(onInit()), Qt::QueuedConnection);
     init();
 
 
@@ -187,7 +187,7 @@ void QtiDynTreeSoleGuiPlugin::onInit()
 {
     int period = rf.check("period")?rf.find("period").asInt():50;
 
-    observerThread=new ObserverThread(rf,period);
+    observerThread=new ObserverThread(rf, period);
     observerThread->start();
 
     done();
