@@ -270,7 +270,7 @@ bool addURDFGeometryToModelGeometries(const iDynTree::Model& model,
     if( geomXml->FirstChildElement("sphere") != 0 )
     {
         double radiusD;
-        parseOk = stringToDoubleWithClassicLocale(geomXml->FirstChildElement("cylinder")->Attribute("radius"),radiusD);
+        parseOk = stringToDoubleWithClassicLocale(geomXml->FirstChildElement("sphere")->Attribute("radius"), radiusD);
 
         if (parseOk)
         {
