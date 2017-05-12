@@ -62,7 +62,7 @@ bool getVectorOfStringFromProperty(yarp::os::Property& prop, std::string key, st
     return true;
 }
 
-ObserverThread::ObserverThread(yarp::os::ResourceFinder& config,int period) : RateThread(period), mutex(1)
+ObserverThread::ObserverThread(yarp::os::ResourceFinder& config, int period) : RateThread(period), mutex(1)
 {
     yDebug("ObserverThread running at %g ms.", getRate());
 
@@ -131,7 +131,7 @@ bool ObserverThread::init(yarp::os::ResourceFinder& config)
     m_wholeBodyDevice.view(m_iposdir);
 
     iDynTree::ModelLoader mdlLoader;
-    bool ok = mdlLoader.loadReducedModelFromFile(config.findFileByName(model),usedDOFs);
+    bool ok = mdlLoader.loadReducedModelFromFile(config.findFileByName(model), usedDOFs);
 
     if (!ok)
     {
@@ -172,16 +172,16 @@ bool ObserverThread::init(yarp::os::ResourceFinder& config)
         m_primarySolePressure.open(propPrimaryAnalog);
 
         yarp::os::Property propSecondaryAnalog;
-        propSecondaryAnalog.put("device","analogsensorclient");
-        propSecondaryAnalog.put("local","/soleGui/secondarySolePressure");
-        propSecondaryAnalog.put("remote",pressuresensorsarrayPropSecondarySole.find("remotePortName").asString());
+        propSecondaryAnalog.put("device", "analogsensorclient");
+        propSecondaryAnalog.put("local", "/soleGui/secondarySolePressure");
+        propSecondaryAnalog.put("remote", pressuresensorsarrayPropSecondarySole.find("remotePortName").asString());
         m_secondarySolePressure.open(propSecondaryAnalog);
 
         m_primarySolePressure.view(m_primaryPressureAnalog);
         m_secondarySolePressure.view(m_secondaryPressureAnalog);
 
         std::vector<std::string> pressurePadsNamesPrimarySole;
-        getVectorOfStringFromProperty(pressuresensorsarrayPropPrimarySole, "pressureFrameNames",pressurePadsNamesPrimarySole);
+        getVectorOfStringFromProperty(pressuresensorsarrayPropPrimarySole, "pressureFrameNames", pressurePadsNamesPrimarySole);
         m_measuredPressurePrimarySoleInN.resize(pressurePadsNamesPrimarySole.size());
 
 
@@ -189,11 +189,11 @@ bool ObserverThread::init(yarp::os::ResourceFinder& config)
         // Save the pressure pads position from URDF
         for (std::string & padName : pressurePadsNamesPrimarySole)
         {
-            m_primaryPressurePadsInPrimarySole.push_back(m_kinDyn.getRelativeTransform(m_primarySole,padName).getPosition());
+            m_primaryPressurePadsInPrimarySole.push_back(m_kinDyn.getRelativeTransform(m_primarySole, padName).getPosition());
         }
 
         std::vector<std::string> pressurePadsNamesSecondarySole;
-        getVectorOfStringFromProperty(pressuresensorsarrayPropSecondarySole, "pressureFrameNames",pressurePadsNamesSecondarySole);
+        getVectorOfStringFromProperty(pressuresensorsarrayPropSecondarySole, "pressureFrameNames", pressurePadsNamesSecondarySole);
         m_measuredPressureSecondarySoleInN.resize(pressurePadsNamesPrimarySole.size());
 
         m_secondaryPressurePadsInSecondarySole.resize(0);
@@ -234,7 +234,7 @@ void ObserverThread::run()
     iDynTree::VectorDynSize m_desiredJointPositionsInRad(m_desiredJointPositionsInDeg.size());
 
     // Convert in rad for iDynTree use
-    for(int i = 0; i < m_measuredEncodersInRad.size(); i++)
+    for (int i = 0; i < m_measuredEncodersInRad.size(); i++)
     {
         double deg2rad = (3.14159265359/180.0);
         m_measuredEncodersInRad(i) = deg2rad*m_measuredEncodersInDeg[i];
@@ -334,7 +334,7 @@ void ObserverThread::threadRelease()
 
 QPointF toQt2D(iDynTree::Position& pos)
 {
-    return QPointF(pos(0),pos(1));
+    return QPointF(pos(0), pos(1));
 }
 
 QPolygonF toQt2D(iDynTree::Polygon& poly)
@@ -395,10 +395,10 @@ void ObserverThread::draw(QPainter* qpainter, int widthInPixels, int heightInPix
 
     double safetyMarginX=0.01;
     double safetyMarginY=0.005;
-    iDynTree::Polygon primarySolePolygonInPrimarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025,0.015,0.01,0.01);
-    iDynTree::Polygon secondarySolePolygonInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025,0.015,0.01,0.01);
-    iDynTree::Polygon primarySolePolygonWithSafetyInPrimarySole  = iDynTree::Polygon::XYRectangleFromOffsets(0.025-safetyMarginX,0.015-safetyMarginX,0.01-safetyMarginY,0.01-safetyMarginY);
-    iDynTree::Polygon secondarySolePolygonWithSafetyInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025-safetyMarginX,0.015-safetyMarginX,0.01-safetyMarginY,0.01-safetyMarginY);
+    iDynTree::Polygon primarySolePolygonInPrimarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025, 0.015, 0.01, 0.01);
+    iDynTree::Polygon secondarySolePolygonInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025, 0.015, 0.01, 0.01);
+    iDynTree::Polygon primarySolePolygonWithSafetyInPrimarySole  = iDynTree::Polygon::XYRectangleFromOffsets(0.025-safetyMarginX, 0.015-safetyMarginX, 0.01-safetyMarginY, 0.01-safetyMarginY);
+    iDynTree::Polygon secondarySolePolygonWithSafetyInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025-safetyMarginX, 0.015-safetyMarginX, 0.01-safetyMarginY, 0.01-safetyMarginY);
 
     iDynTree::Polygon secondarySolePolygonInPrimarySole = secondarySolePolygonInSecondarySole.applyTransform(m_primarySole_X_secondarySole);
     iDynTree::Polygon secondarySolePolygonWithSafetyInPrimarySole = secondarySolePolygonWithSafetyInSecondarySole.applyTransform(m_primarySole_X_secondarySole);
