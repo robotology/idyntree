@@ -134,7 +134,7 @@ bool QtiDynTreeSoleGuiPlugin::parseParameters(QStringList params)
         strcpy(v[i],params.at(i).toLatin1().data());
     }
 
-    if(!rf.configure(c, v)){
+    if (!rf.configure(c, v)){
         free(v);
         return false;
     }
