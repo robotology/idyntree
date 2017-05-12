@@ -131,7 +131,7 @@ bool QtiDynTreeSoleGuiPlugin::parseParameters(QStringList params)
     v = (char**)malloc(sizeof(char*) * c);
     for (int i=0; i<params.count(); i++){
         v[i] = (char*)malloc(sizeof(char) * params.at(i).length()+1);
-        strcpy(v[i],params.at(i).toLatin1().data());
+        strcpy(v[i], params.at(i).toLatin1().data());
     }
 
     if (!rf.configure(c, v)){
