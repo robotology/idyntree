@@ -59,8 +59,9 @@ LinkSensor::~LinkSensor()
 
 struct SensorsList::SensorsListPimpl
 {
-    std::vector< std::vector<Sensor *> > allSensors;
-    std::vector< std::map< std::string, unsigned int > > sensorsNameToIndex;
+    std::vector<std::vector<Sensor *> > allSensors;
+    typedef std::map<std::string, unsigned int> SensorNameToIndexMap;
+    std::vector<SensorNameToIndexMap> sensorsNameToIndex;
 };
 
 SensorsList::SensorsList():
@@ -198,7 +199,7 @@ unsigned int SensorsList::getNrOfSensors(const SensorType & sensor_type) const
 
 bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
 {
-    std::map< std::string, unsigned int >::const_iterator it;
+    SensorsListPimpl::SensorNameToIndexMap::const_iterator it;
     it = this->pimpl->sensorsNameToIndex[sensor_type].find(_sensor_name);
     if( it == this->pimpl->sensorsNameToIndex[sensor_type].end() )
     {
@@ -277,10 +278,11 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
             return false;
         Sensor *s = typeVector[sensor_index];
         typeVector.erase(typeVector.begin() + sensor_index);
-        std::map< std::string, unsigned int >& nameToIndex = this->pimpl->sensorsNameToIndex[sensor_type];
-        std::map< std::string, unsigned int >::iterator nameToIndexIterator = nameToIndex.find(s->getName());
-        if (nameToIndexIterator != nameToIndex.end()) {
-            nameToIndex.erase(nameToIndexIterator);
+        SensorsListPimpl::SensorNameToIndexMap& nameToIndex = this->pimpl->sensorsNameToIndex[sensor_type];
+        // We have to rebuild the name->index map as indeces have changed
+        nameToIndex.clear();
+        for (size_t index = 0; index < typeVector.size(); ++index) {
+            nameToIndex.insert(SensorsListPimpl::SensorNameToIndexMap::value_type(typeVector[index]->getName(), index));
         }
 
         delete s;
