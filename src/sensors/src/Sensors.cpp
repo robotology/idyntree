@@ -60,7 +60,7 @@ LinkSensor::~LinkSensor()
 struct SensorsList::SensorsListPimpl
 {
     std::vector<std::vector<Sensor *> > allSensors;
-    typedef std::map<std::string, unsigned int> SensorNameToIndexMap;
+    typedef std::map<std::string, size_t> SensorNameToIndexMap;
     std::vector<SensorNameToIndexMap> sensorsNameToIndex;
 };
 
@@ -107,7 +107,7 @@ void SensorsList::destructor()
 {
     for( int sensor_type = 0; sensor_type < NR_OF_SENSOR_TYPES; sensor_type++ )
     {
-        for(unsigned int sensor_index = 0;
+        for(size_t sensor_index = 0;
             sensor_index < this->pimpl->allSensors[sensor_type].size(); sensor_index++ )
         {
             delete this->pimpl->allSensors[sensor_type][sensor_index];
@@ -155,7 +155,7 @@ int SensorsList::addSensor(const Sensor& sensor)
 bool SensorsList::getSerialization(const SensorType& sensor_type, std::vector< std::string >& serializaton)
 {
     serializaton.resize(0);
-    for(unsigned int sensor_index = 0;
+    for (size_t sensor_index = 0;
         sensor_index < this->pimpl->allSensors[sensor_type].size(); sensor_index++ )
     {
         std::string sensorName = this->pimpl->allSensors[sensor_type][sensor_index]->getName();
