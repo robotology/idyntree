@@ -24,10 +24,11 @@ const char *IDYNTREE_TESTS_URDFS[] = {"oneLink.urdf",
                                       "icub2BB5Sea.urdf",
                                       "iCubGenova02.urdf",
                                       "iCubDarmstadt01.urdf",
-                                      "twoLinksRotationOnZAxis.urdf"
+                                      "twoLinksRotationOnZAxis.urdf",
+                                      "frame.urdf"
 };
 
-const unsigned int IDYNTREE_TESTS_URDFS_NR = 15;
+const unsigned int IDYNTREE_TESTS_URDFS_NR = 16;
 
 inline std::string getAbsModelPath(std::string modelName)
 {

@@ -375,6 +375,16 @@ public:
                                              const iDynTree::Direction yAxisOfPlaneInWorld,
                                              const iDynTree::Position originOfPlaneInWorld);
 
+    /*!
+     * Get the distance between the projection of the center of mass projection for the current configuration (set through setRobotConfiguration)
+     * and the limit of the convex hull (positive if the center of mass is inside the convex hull, negative if the com is outside the convex hull).
+     *
+     * If no constraint has been added through a call to addCenterOfMassProjectionConstraint, return 0.0 .
+     *
+     * \todo Move this function in a contraint-specific class.
+     */
+    double getCenterOfMassProjectionMargin();
+
     ///@}
 
     /*! @name Target-related methods

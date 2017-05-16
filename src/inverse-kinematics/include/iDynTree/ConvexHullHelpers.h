@@ -199,6 +199,30 @@ namespace iDynTree
                              const std::vector<Polygon> & supportPolygonsExpressedInSupportFrame,
                              const std::vector<Transform> & absoluteFrame_X_supportFrame);
 
+        /**
+         * List of support frames.
+         */
+        std::vector<int> supportFrameIndeces;
+
+        /**
+         * List of absolue_X_supportFrames
+         */
+        std::vector<Transform> absoluteFrame_X_supportFrame;
+
+        /**
+         * Project a point in the plane of the convex hull.
+         * The point is expressed in the absolute frame of the constriant.
+         */
+        Vector2 project(iDynTree::Position& posIn3dInAbsoluteFrame);
+
+        /**
+         * Compute distance of a 2D point from the convex hull.
+         * The distance is positive if the point is inside the convex hull,
+         * zero if the point is on the boundary of the convex hull,
+         * and negative if it is outside of the convex hull.
+         */
+        double computeMargin(const Vector2& posIn2D);
+
 
     };
 }

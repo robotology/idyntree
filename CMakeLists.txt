@@ -2,18 +2,22 @@ cmake_minimum_required(VERSION 2.8.11)
 
 project(iDynTree CXX)
 
-# Disable in source build
-if("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
+# Disable in source build, unless Eclipse is used
+if( ("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}") AND
+    (NOT ("${CMAKE_EXTRA_GENERATOR}" STREQUAL "Eclipse CDT4")) )
    message(FATAL_ERROR "In-source builds of iDynTree are not allowed. "
                        "Please remove CMakeCache.txt and the CMakeFiles/ directory, then build out-of-source. "
-                       "If you really want to do an in-source build, feel free to comment out this error.")
-endif("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
+                       "If you really want to do an in-source build, feel free to comment out this error"
+                       " or use Eclipse CDT4 Extra Generator, that is tipically used for in-source builds."
+                       "Note that to use re-generate the project usign the Eclipse CDT4 Extra Generator"
+                       "you need to remove CMakeCache.txt and CMakeFiles/ as well.")
+endif()
 
 set(VARS_PREFIX "iDynTree")
 
 set(${VARS_PREFIX}_MAJOR_VERSION 0)
 set(${VARS_PREFIX}_MINOR_VERSION 5)
-set(${VARS_PREFIX}_PATCH_VERSION 0)
+set(${VARS_PREFIX}_PATCH_VERSION 1)
 set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
