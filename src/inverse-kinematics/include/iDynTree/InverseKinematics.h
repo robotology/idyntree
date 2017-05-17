@@ -525,7 +525,7 @@ public:
 
 
     /*!
-     * Specify the method to solve the specified targets
+     * Specify the method to solve all the specified targets
      *
      * Targets can be solved fully as cost, partially (position or orientation)
      * as cost and the other component as hard constraint or
@@ -533,16 +533,33 @@ public:
      * @see targetResolutionMode()
      *
      * @param mode the target resolution mode
+     * 
+     * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget .
      */
-    void setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode);
+    bool setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode);
+    
+    /*!
+     * Specify the method to solve the specified target
+     *
+     * Targets can be solved fully as cost, partially (position or orientation)
+     * as cost and the other component as hard constraint or
+     * fully as hard constraints
+     * @see targetResolutionMode()
+     *
+     * @param mode the target resolution mode
+     * 
+     *@return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget .
+     */
+    bool setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode, const std::string& frameName);
+    
 
     /*!
-     * Return the current target resolution mode
+     * Return the target resolution mode
      *
      * @see setTargetResolutionMode
-     * @return the current target resolution mode
+     * @return the current target resolution mode. @NOTE: If the target hasn't been specified yet, it returns "InverseKinematicsTreatTargetAsConstraintNone".
      */
-    enum InverseKinematicsTreatTargetAsConstraint targetResolutionMode();
+    enum InverseKinematicsTreatTargetAsConstraint targetResolutionMode(const std::string& frameName);
     ///@}
 
     /*!
@@ -612,7 +629,11 @@ public:
     
     void setCoMTarget(iDynTree::Position& desiredPosition, double weight = 1.0);
     
+    void setCoMasConstraint(bool asConstraint = true);
+    
     void setCoMasConstraintTolerance(double tolerance = 1e-8);
+    
+    bool isCoMaCOnstraint();
     
     bool isCoMTargetActive();
     

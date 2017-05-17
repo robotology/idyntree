@@ -421,16 +421,44 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->setInitialCondition(baseTransform, initialCondition);
     }
 
-    void InverseKinematics::setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode)
+    bool InverseKinematics::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
     {
         assert(m_pimpl);
         IK_PIMPL(m_pimpl)->setTargetResolutionMode(mode);
     }
-
-    enum InverseKinematicsTreatTargetAsConstraint InverseKinematics::targetResolutionMode()
+    
+    bool InverseKinematics::setTargetResolutionMode(InverseKinematicsTreatTargetAsConstraint mode, const std::string& frameName)
     {
         assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->targetResolutionMode();
+        internal::kinematics::TransformMap::iterator transConstr = IK_PIMPL(m_pimpl)->getTargetRefIfItExists(frameName);
+        
+        if( transConstr == IK_PIMPL(m_pimpl)->m_targets.end() )
+        {
+            std::stringstream ss;
+            ss << "No target for frame " << frameName << " was added to the InverseKinematics problem.";
+            reportError("InverseKinematics","setTargetResolutionMode",ss.str().c_str());
+            return false;
+        }
+        
+        IK_PIMPL(m_pimpl)->setTargetResolutionMode(mode, transConstr);
+        return true;
+    }
+
+
+    enum InverseKinematicsTreatTargetAsConstraint InverseKinematics::targetResolutionMode(const std::string& frameName)
+    {
+        assert(m_pimpl);
+        internal::kinematics::TransformMap::iterator transConstr = IK_PIMPL(m_pimpl)->getTargetRefIfItExists(frameName);
+        
+        if( transConstr == IK_PIMPL(m_pimpl)->m_targets.end() )
+        {
+            std::stringstream ss;
+            ss << "No target for frame " << frameName << " was added to the InverseKinematics problem.";
+            reportError("InverseKinematics","targetResolutionMode",ss.str().c_str());
+            return InverseKinematicsTreatTargetAsConstraintNone;
+        }
+        
+        return IK_PIMPL(m_pimpl)->targetResolutionMode(transConstr);
     }
 
     bool InverseKinematics::solve()
@@ -465,6 +493,18 @@ namespace iDynTree {
     {
         return IK_PIMPL(m_pimpl)->isCoMTargetActive();
     }
+    
+    void InverseKinematics::setCoMasConstraint(bool asConstraint)
+    {
+        IK_PIMPL(m_pimpl)->setCoMasConstraint(asConstraint);
+    }
+
+    
+    bool InverseKinematics::isCoMaCOnstraint()
+    {
+        return IK_PIMPL(m_pimpl)->isCoMaConstraint();
+    }
+
     
     void InverseKinematics::setCoMTarget(Position& desiredPosition, double weight)
     {

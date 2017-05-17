@@ -47,6 +47,7 @@ class internal::kinematics::InverseKinematicsData {
         bool isActive;
         iDynTree::Position desiredPosition;
         double weight;
+        bool isConstraint;
         double constraintTolerance;
     } m_comTarget;
 
@@ -91,8 +92,6 @@ public:
     //Size: getNrOfDOFs of the considered model
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
     double m_preferredJointsWeight;
-
-    enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_targetResolutionMode; /*!< Specify how targets are solved (Partially/Fully in cost or as hard constraints) */
 
     bool m_areBaseInitialConditionsSet; /*!< True if initial condition for the base pose are provided by the user */
     bool m_areJointsInitialConditionsSet; /*!< True if initial condition for the joints are provided by the user */
@@ -250,16 +249,24 @@ public:
 
     /*!
      * Set how targets should be considered in the optimization problem
-     * i.e. as soft or hard constraints
+     * i.e. as soft or hard constraints. It applies to all the targets already inserted.
      *
      * @param mode how to treat the targets
      */
     void setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
 
-    /*! Return the current rotation parametrization used by the solver
-     * @return the current rotation parametrization
+    /*!
+     * Set how the specified target should be considered in the optimization problem
+     * i.e. as soft or hard constraints
+     *
+     * @param mode how to treat the target
      */
-    enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode();
+    void setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode, TransformMap::iterator target);
+
+    /*! Return the resolution mode adopted for the specified target
+     * @return the resolution mode
+     */
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode(TransformMap::iterator target) const;
 
     /*! Solve the NLP problem
      *
@@ -276,14 +283,17 @@ public:
      * @return reference to the kinematics and dynamics object
      */
     iDynTree::KinDynComputations& dynamics();
-    
-    
+
     void setCoMTarget(iDynTree::Position& desiredPosition, double weight);
     
+    void setCoMasConstraint(bool asConstraint);
+    
+    bool isCoMaConstraint();
+
     void setCoMasConstraintTolerance(double TOL);
-    
+
     bool isCoMTargetActive();
-    
+
     void setCoMTargetInactive();
     //Declare as friend the IKNLP class so as it can access the private data
     friend class InverseKinematicsNLP;

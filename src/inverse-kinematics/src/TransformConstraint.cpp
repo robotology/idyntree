@@ -15,6 +15,7 @@ namespace kinematics {
 
     TransformConstraint::TransformConstraint(const std::string& constrainedFrameName, TransformConstraintType type): m_type(type),
                                                                                                                      m_frameName(constrainedFrameName),
+                                                                                                                     m_resolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone),
                                                                                                                      m_posWeight(1.0),
                                                                                                                      m_rotWeight(1.0)
     {}
@@ -83,5 +84,9 @@ namespace kinematics {
     void TransformConstraint::setPositionWeight(const double newPosWeight) { if (newPosWeight >= 0.0) m_posWeight = newPosWeight; }
     const double TransformConstraint::getRotationWeight() const { return m_rotWeight; }
     void TransformConstraint::setRotationWeight(const double newRotWeight) { if (newRotWeight >= 0.0) m_posWeight = newRotWeight; }
+    
+    void TransformConstraint::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode){ m_resolutionMode = mode; }
+    iDynTree::InverseKinematicsTreatTargetAsConstraint TransformConstraint::targetResolutionMode() const{ return m_resolutionMode; }
+    
 }
 }

@@ -231,7 +231,7 @@ namespace kinematics {
         }
 
         // Update com position and jacobian
-        if (m_data.m_comHullConstraint.isActive() || m_data.m_comTarget.isActive) {
+        if (m_data.m_comHullConstraint.isActive() || m_data.isCoMTargetActive()) {
             comInfo.com = m_data.m_dynamics.getCenterOfMassPosition();
             m_data.m_dynamics.getCenterOfMassJacobian(comInfo.comJacobian);
 
@@ -273,17 +273,17 @@ namespace kinematics {
             m += m_data.m_comHullConstraint.getNrOfConstraints();
         }
 
-        if (m_data.m_comTarget.isActive && (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)){
+        if (m_data.isCoMTargetActive() && m_data.isCoMaConstraint()){
             m += 3;
         }
         //add target if considered as constraints
         for (TransformMap::const_iterator it = m_data.m_targets.begin();
              it != m_data.m_targets.end(); ++it) {
-            if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
+            if (it->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                 && it->second.hasPositionConstraint()) {
                 m += 3;
             }
-            if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
+            if (it->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                 && it->second.hasRotationConstraint()) {
 
                 m += sizeOfRotationParametrization(m_data.m_rotationParametrization);;
@@ -396,7 +396,7 @@ namespace kinematics {
         }
         
         //COM target treated as constraint
-        if (m_data.m_comTarget.isActive && (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)){
+        if (m_data.isCoMTargetActive() && m_data.isCoMaConstraint()){
            for (int i = 0; i<3; ++i){
                g_l[constraintIndex] = - m_data.m_comTarget.constraintTolerance;
                g_u[constraintIndex] =   m_data.m_comTarget.constraintTolerance;
@@ -408,7 +408,7 @@ namespace kinematics {
         //target <=> position constraint
         for (TransformMap::const_iterator it = m_data.m_targets.begin();
              it != m_data.m_targets.end(); ++it) {
-            if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
+            if (it->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                 && it->second.hasPositionConstraint()) {
                 //This target position is considered as constraint
                 const iDynTree::Position& position = it->second.getPosition();
@@ -419,7 +419,7 @@ namespace kinematics {
                 g_l[constraintIndex] = g_u[constraintIndex] = position(2);
                 constraintIndex++;
             }
-            if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
+            if (it->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                 && it->second.hasRotationConstraint()) {
                 //This target orientation is considered as a constraint
                 const iDynTree::Rotation& rotation = it->second.getRotation();
@@ -519,63 +519,60 @@ namespace kinematics {
 
         obj_value = 0.5 * jointCostWeight * jointError.squaredNorm();
 
-        if (m_data.m_targetResolutionMode != iDynTree::InverseKinematicsTreatTargetAsConstraintFull) {
-            //if at least one cost mode
-            //compute errors on rotation
-            //TODO missing weights for the elements
-            for (TransformMap::const_iterator target = m_data.m_targets.begin();
-                 target != m_data.m_targets.end(); ++target) {
+        //compute errors on rotation
+        //TODO missing weights for the elements
+        for (TransformMap::const_iterator target = m_data.m_targets.begin();
+                target != m_data.m_targets.end(); ++target) {
 
-                if ( (m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly ||
-                      m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
-                    && target->second.hasPositionConstraint()) {
-                    //this implies that position is a soft constraint.
-                    iDynTree::Position positionError = targetsInfo[target->first].transform.getPosition() - target->second.getPosition();
-                    obj_value += 0.5 * target->second.getPositionWeight() * (iDynTree::toEigen(positionError)).squaredNorm();
+            if ( (target->second.targetResolutionMode() == iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly ||
+                    target->second.targetResolutionMode() == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
+                && target->second.hasPositionConstraint()) {
+                //this implies that position is a soft constraint.
+                iDynTree::Position positionError = targetsInfo[target->first].transform.getPosition() - target->second.getPosition();
+                obj_value += 0.5 * target->second.getPositionWeight() * (iDynTree::toEigen(positionError)).squaredNorm();
+            }
+            if ( (target->second.targetResolutionMode() == iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly ||
+                    target->second.targetResolutionMode() == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
+                && target->second.hasRotationConstraint()) {
+
+                if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion){
+
+                    //this implies that rotation is a soft constraint.
+                    //Get actual and desired orientation of target and compute the
+                    //orientation error, as  w_R_f * (w_R_f^d)^{-1} = w_\tilde{R}_w (R tilde expressed in inertial)
+                    //TODO: check if it is correct to express it in the inertial
+                    iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
+
+                    //Quaternion corresponding to the orientation error
+                    iDynTree::Vector4 orientationErrorQuaternion;
+                    transformError.getQuaternion(orientationErrorQuaternion);
+
+                    iDynTree::Vector4 identityQuaternion;
+                    iDynTree::Rotation::Identity().getQuaternion(identityQuaternion);
+
+                    //Implementing orientation cost as
+                    // \tilde(Q) = Q_error
+                    // Q_1 = Q_identity
+                    //|| \tilde(Q) - Q_1 ||^2 as measure of error
+                    // there is an alternative cost. See latex (using trace of R)
+                    obj_value += 0.5 * target->second.getRotationWeight() * (iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).squaredNorm();
                 }
-                if ( (m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly ||
-                      m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
-                    && target->second.hasRotationConstraint()) {
+                else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw){
+                    FrameInfo &targetInfo = targetsInfo[target->first];
 
-                    if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion){
-
-                        //this implies that rotation is a soft constraint.
-                        //Get actual and desired orientation of target and compute the
-                        //orientation error, as  w_R_f * (w_R_f^d)^{-1} = w_\tilde{R}_w (R tilde expressed in inertial)
-                        //TODO: check if it is correct to express it in the inertial
-                        iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
-
-                        //Quaternion corresponding to the orientation error
-                        iDynTree::Vector4 orientationErrorQuaternion;
-                        transformError.getQuaternion(orientationErrorQuaternion);
-
-                        iDynTree::Vector4 identityQuaternion;
-                        iDynTree::Rotation::Identity().getQuaternion(identityQuaternion);
-
-                        //Implementing orientation cost as
-                        // \tilde(Q) = Q_error
-                        // Q_1 = Q_identity
-                        //|| \tilde(Q) - Q_1 ||^2 as measure of error
-                        // there is an alternative cost. See latex (using trace of R)
-                        obj_value += 0.5 * target->second.getRotationWeight() * (iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).squaredNorm();
-                    }
-                    else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw){
-                        FrameInfo &targetInfo = targetsInfo[target->first];
-
-                        iDynTree::Vector3 rpy_target = targetInfo.transform.getRotation().asRPY();
-                        iDynTree::Vector3 rpy_desired = target->second.getRotation().asRPY();
-                        //TODO Investigate the derivative of the cost using the RPY representation of the error matrix R*\hat{R}'
-                        obj_value += 0.5 * target->second.getRotationWeight() * ( iDynTree::toEigen(rpy_target) - iDynTree::toEigen(rpy_desired) ).squaredNorm();
-                    }
+                    iDynTree::Vector3 rpy_target = targetInfo.transform.getRotation().asRPY();
+                    iDynTree::Vector3 rpy_desired = target->second.getRotation().asRPY();
+                    //TODO Investigate the derivative of the cost using the RPY representation of the error matrix R*\hat{R}'
+                    obj_value += 0.5 * target->second.getRotationWeight() * ( iDynTree::toEigen(rpy_target) - iDynTree::toEigen(rpy_desired) ).squaredNorm();
                 }
             }
+        }
 
 
-            if (m_data.m_comTarget.isActive && !(m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)){
-                iDynTree::Position comPositionError;
-                comPositionError = comInfo.com - m_data.m_comTarget.desiredPosition;
-                obj_value += 0.5 * m_data.m_comTarget.weight * iDynTree::toEigen(comPositionError).squaredNorm();
-            }
+        if (m_data.isCoMTargetActive() && !(m_data.isCoMaConstraint())){
+            iDynTree::Position comPositionError;
+            comPositionError = comInfo.com - m_data.m_comTarget.desiredPosition;
+            obj_value += 0.5 * m_data.m_comTarget.weight * iDynTree::toEigen(comPositionError).squaredNorm();
         }
 
         return true;
@@ -604,109 +601,104 @@ namespace kinematics {
 
         //Second part of the gradient: this part depends on all q, i.e. x
         //compute errors on rotation
-        if (m_data.m_targetResolutionMode != iDynTree::InverseKinematicsTreatTargetAsConstraintFull) {
-            //if at least one cost mode
-            for (TransformMap::const_iterator target = m_data.m_targets.begin();
-                 target != m_data.m_targets.end(); ++target) {
-                if ( (m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly ||
-                      m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
-                    && target->second.hasPositionConstraint()) {
-                    //this implies that position is a soft constraint.
-                    iDynTree::Position positionError = targetsInfo[target->first].transform.getPosition() - target->second.getPosition();
+        for (TransformMap::const_iterator target = m_data.m_targets.begin();
+                target != m_data.m_targets.end(); ++target) {
+            if ((target->second.targetResolutionMode() == iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly ||
+                    target->second.targetResolutionMode() == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
+                && target->second.hasPositionConstraint()) {
+                //this implies that position is a soft constraint.
+                iDynTree::Position positionError = targetsInfo[target->first].transform.getPosition() - target->second.getPosition();
 
-                    if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
-                        computeConstraintJacobian(targetsInfo[target->first].jacobian,
-                                                  targetsInfo[target->first].quaternionDerivativeMap,
-                                                  quaternionDerivativeInverseMapBuffer,
-                                                  ComputeContraintJacobianOptionLinearPart,
-                                                  finalJacobianBuffer);
-                    } else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
-                        //RPY parametrization for the base
-                        iDynTree::Vector3 rpy;
-                        iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
-                        iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0),rpy(1),rpy(2));
-
-                        // RPY parametrization for the constraint
-                        iDynTree::Vector3 rpy_target = targetsInfo[target->first].transform.getRotation().asRPY();
-                        iDynTree::Matrix3x3 omegaToRPYMap_target = iDynTree::Rotation::RPYRightTrivializedDerivativeInverse(rpy_target(0),rpy_target(1),rpy_target(2));
-
-                        computeConstraintJacobianRPY(targetsInfo[target->first].jacobian,
-                                                     omegaToRPYMap_target,
-                                                     RPYToOmega,
-                                                     ComputeContraintJacobianOptionLinearPart,
-                                                     finalJacobianBuffer);
-                    }
-
-
-                    //Note: transpose probably creates a temporary matrix. As position is
-                    //Fixedsize this should not fire a memory allocation in the heap, but we should
-                    //profile the code at some point
-                    gradient +=  target->second.getPositionWeight()*iDynTree::toEigen(positionError).transpose() * iDynTree::toEigen(finalJacobianBuffer).topRows<3>();
-
-                }
-                if ( (m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly||
-                      m_data.m_targetResolutionMode == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
-                    && target->second.hasRotationConstraint()) {
-                    
-                    if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion){
-                        //Derivative is (\tilde{Q} - 1) \partial_x Q
-                        iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
-
-                        iDynTree::Vector4 orientationErrorQuaternion;
-                        transformError.getQuaternion(orientationErrorQuaternion);
-
-                        iDynTree::Vector4 identityQuaternion;
-                        iDynTree::Rotation::Identity().getQuaternion(identityQuaternion);
-
-                        //assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion);
-
-
-                        computeConstraintJacobian(targetsInfo[target->first].jacobian,
+                if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
+                    computeConstraintJacobian(targetsInfo[target->first].jacobian,
                                                 targetsInfo[target->first].quaternionDerivativeMap,
                                                 quaternionDerivativeInverseMapBuffer,
-                                                ComputeContraintJacobianOptionAngularPart,
+                                                ComputeContraintJacobianOptionLinearPart,
                                                 finalJacobianBuffer);
+                } else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
+                    //RPY parametrization for the base
+                    iDynTree::Vector3 rpy;
+                    iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
+                    iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0),rpy(1),rpy(2));
 
-                        //These are the first baseSize columns + the joint columns
-                        gradient +=  target->second.getRotationWeight()*(iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
-                    }
-                    else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw){
-                        //RPY parametrization for the base
-                        iDynTree::Vector3 rpy;
-                        iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
-                        iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0),rpy(1),rpy(2));
-                        FrameInfo &targetInfo = targetsInfo[target->first];
+                    // RPY parametrization for the constraint
+                    iDynTree::Vector3 rpy_target = targetsInfo[target->first].transform.getRotation().asRPY();
+                    iDynTree::Matrix3x3 omegaToRPYMap_target = iDynTree::Rotation::RPYRightTrivializedDerivativeInverse(rpy_target(0),rpy_target(1),rpy_target(2));
 
-                        iDynTree::Vector3 rpy_target = targetInfo.transform.getRotation().asRPY();
-                        iDynTree::Vector3 rpy_desired = target->second.getRotation().asRPY();
-                        iDynTree::Matrix3x3 omegaToRPYMap_target = iDynTree::Rotation::RPYRightTrivializedDerivativeInverse(rpy_target(0),rpy_target(1),rpy_target(2));
-
-                        computeConstraintJacobianRPY(targetInfo.jacobian,
+                    computeConstraintJacobianRPY(targetsInfo[target->first].jacobian,
                                                     omegaToRPYMap_target,
                                                     RPYToOmega,
-                                                    ComputeContraintJacobianOptionAngularPart,
+                                                    ComputeContraintJacobianOptionLinearPart,
                                                     finalJacobianBuffer);
-                        //TODO Investigate the derivative of the cost using the RPY representation of the error matrix R*\hat{R}'
-                        gradient += target->second.getRotationWeight()*( iDynTree::toEigen(rpy_target) - iDynTree::toEigen(rpy_desired) ).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
-                        
-                    }
+                }
+
+
+                //Note: transpose probably creates a temporary matrix. As position is
+                //Fixedsize this should not fire a memory allocation in the heap, but we should
+                //profile the code at some point
+                gradient +=  target->second.getPositionWeight()*iDynTree::toEigen(positionError).transpose() * iDynTree::toEigen(finalJacobianBuffer).topRows<3>();
+
+            }
+            if ( (target->second.targetResolutionMode() == iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly||
+                    target->second.targetResolutionMode() == iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
+                && target->second.hasRotationConstraint()) {
+                
+                if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion){
+                    //Derivative is (\tilde{Q} - 1) \partial_x Q
+                    iDynTree::Rotation transformError = targetsInfo[target->first].transform.getRotation() * target->second.getRotation().inverse();
+
+                    iDynTree::Vector4 orientationErrorQuaternion;
+                    transformError.getQuaternion(orientationErrorQuaternion);
+
+                    iDynTree::Vector4 identityQuaternion;
+                    iDynTree::Rotation::Identity().getQuaternion(identityQuaternion);
+
+                    //assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion);
+
+
+                    computeConstraintJacobian(targetsInfo[target->first].jacobian,
+                                            targetsInfo[target->first].quaternionDerivativeMap,
+                                            quaternionDerivativeInverseMapBuffer,
+                                            ComputeContraintJacobianOptionAngularPart,
+                                            finalJacobianBuffer);
+
+                    //These are the first baseSize columns + the joint columns
+                    gradient +=  target->second.getRotationWeight()*(iDynTree::toEigen(orientationErrorQuaternion) - iDynTree::toEigen(identityQuaternion)).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                }
+                else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw){
+                    //RPY parametrization for the base
+                    iDynTree::Vector3 rpy;
+                    iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
+                    iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0),rpy(1),rpy(2));
+                    FrameInfo &targetInfo = targetsInfo[target->first];
+
+                    iDynTree::Vector3 rpy_target = targetInfo.transform.getRotation().asRPY();
+                    iDynTree::Vector3 rpy_desired = target->second.getRotation().asRPY();
+                    iDynTree::Matrix3x3 omegaToRPYMap_target = iDynTree::Rotation::RPYRightTrivializedDerivativeInverse(rpy_target(0),rpy_target(1),rpy_target(2));
+
+                    computeConstraintJacobianRPY(targetInfo.jacobian,
+                                                omegaToRPYMap_target,
+                                                RPYToOmega,
+                                                ComputeContraintJacobianOptionAngularPart,
+                                                finalJacobianBuffer);
+                    //TODO Investigate the derivative of the cost using the RPY representation of the error matrix R*\hat{R}'
+                    gradient += target->second.getRotationWeight()*( iDynTree::toEigen(rpy_target) - iDynTree::toEigen(rpy_desired) ).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                    
                 }
             }
-            
-            if (m_data.m_comTarget.isActive && !(m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)) {
-                assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
-                iDynTree::Vector3 rpy;
-                iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
-                iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0), rpy(1), rpy(2));
-                computeConstraintJacobianCOMRPY(comInfo.comJacobian,RPYToOmega,comInfo.comJacobianAnalytical);
-
-                iDynTree::Position comPositionError;
-                comPositionError = comInfo.com - m_data.m_comTarget.desiredPosition;
-                gradient += m_data.m_comTarget.weight*iDynTree::toEigen(comPositionError).transpose() * iDynTree::toEigen(comInfo.comJacobianAnalytical);
-            }
         }
+        
+        if (m_data.isCoMTargetActive() && !(m_data.isCoMaConstraint())) {
+            assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
+            iDynTree::Vector3 rpy;
+            iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
+            iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0), rpy(1), rpy(2));
+            computeConstraintJacobianCOMRPY(comInfo.comJacobian,RPYToOmega,comInfo.comJacobianAnalytical);
 
-
+            iDynTree::Position comPositionError;
+            comPositionError = comInfo.com - m_data.m_comTarget.desiredPosition;
+            gradient += m_data.m_comTarget.weight*iDynTree::toEigen(comPositionError).transpose() * iDynTree::toEigen(comInfo.comJacobianAnalytical);
+        }
 
         return true;
     }
@@ -759,7 +751,7 @@ namespace kinematics {
             index = index+m_data.m_comHullConstraint.getNrOfConstraints();
         }
         
-        if (m_data.m_comTarget.isActive && (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)){
+        if (m_data.isCoMTargetActive() && (m_data.isCoMaConstraint())){
             iDynTree::Position comPositionError;
             comPositionError = comInfo.com - m_data.m_comTarget.desiredPosition;
             constraints.segment<3>(index) = iDynTree::toEigen(comPositionError);
@@ -771,14 +763,14 @@ namespace kinematics {
              target != m_data.m_targets.end(); ++target) {
             iDynTree::Transform &currentTransform = targetsInfo[target->first].transform;
 
-            if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
+            if (target->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                 && target->second.hasPositionConstraint()) {
                 //add the position target as constraint
                 const iDynTree::Position& currentPosition = currentTransform.getPosition();
                 constraints.segment(index, 3) = iDynTree::toEigen(currentPosition);
                 index += 3;
             }
-            if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
+            if (target->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                 && target->second.hasRotationConstraint()) {
                 //Add the orientation target as constraint
                 const iDynTree::Rotation& currentRotation = currentTransform.getRotation();
@@ -920,7 +912,7 @@ namespace kinematics {
 
             //For COM constraint
             //RPY parametrization for the base
-            if (m_data.m_comHullConstraint.isActive() || (m_data.m_comTarget.isActive && (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly))) {
+            if (m_data.m_comHullConstraint.isActive() || (m_data.isCoMTargetActive() && m_data.isCoMaConstraint())) {
                 assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
                 iDynTree::Vector3 rpy;
                 iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
@@ -937,7 +929,7 @@ namespace kinematics {
                     constraintIndex += comInfo.projectedComJacobian.rows();
                 }
                 
-                if (m_data.m_comTarget.isActive){
+                if (m_data.isCoMTargetActive()){
                     Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*n], comInfo.comJacobianAnalytical.rows(), n);
                     currentConstraint = iDynTree::toEigen(comInfo.comJacobianAnalytical);
                     constraintIndex += 3;
@@ -956,9 +948,9 @@ namespace kinematics {
                 //Depending if we need position and/or orientation
                 //we have to adapt different parts of the jacobian
                 int computationOption = 0;
-                if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)
+                if (target->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)
                     computationOption |= ComputeContraintJacobianOptionLinearPart;
-                if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly)
+                if (target->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly)
                     computationOption |= ComputeContraintJacobianOptionAngularPart;
 
                 if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
@@ -991,7 +983,7 @@ namespace kinematics {
                                                  finalJacobianBuffer);
                 }
 
-                if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
+                if (target->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
                     && target->second.hasPositionConstraint()) {
 
                     //Copy position part
@@ -1000,7 +992,7 @@ namespace kinematics {
                     constraintIndex += 3;
                 }
 
-                if (m_data.m_targetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
+                if (target->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                     && target->second.hasRotationConstraint()) {
                     //Orientation part
 

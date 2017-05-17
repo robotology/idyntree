@@ -11,6 +11,7 @@
 #define IDYNTREE_INTERNAL_TRANSFORM_CONSTRAINT_H
 
 #include <iDynTree/Core/Transform.h>
+#include <iDynTree/InverseKinematics.h>
 
 namespace internal {
     namespace kinematics {
@@ -63,6 +64,7 @@ private:
     std::string m_frameName; /*!< C constrained frame. */
     double m_posWeight; /*!< Weight for the (eventual) cost associated with the position part of the task */
     double m_rotWeight; /*!< Weight for the (eventual) cost associated with the rotation part of the task */
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_resolutionMode; /*!< Resolution mode in case of target */
 
 public:
 
@@ -209,6 +211,19 @@ public:
      * Set the weight for the position
      */
     void setRotationWeight(const double newRotWeight);
+
+    /*!
+     * Set how targets should be considered in the optimization problem
+     * i.e. as soft or hard constraints
+     *
+     * @param mode how to treat the targets
+     */
+    void setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
+    
+    /*! Return the current rotation parametrization used by the solver
+     * @return the current rotation parametrization
+     */
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode() const;
 
 };
 

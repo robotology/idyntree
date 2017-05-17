@@ -27,7 +27,6 @@ namespace kinematics {
     InverseKinematicsData::InverseKinematicsData()
     : m_dofs(0)
     , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationQuaternion)
-    , m_targetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintFull)
     , m_areBaseInitialConditionsSet(false)
     , m_areJointsInitialConditionsSet(false)
     , m_solver(NULL)
@@ -49,6 +48,7 @@ namespace kinematics {
         m_comTarget.weight = 0;
         m_comTarget.desiredPosition.zero();
         m_comTarget.constraintTolerance = 1e-8;
+        m_comTarget.isConstraint = false;
     }
 
     bool InverseKinematicsData::setModel(const iDynTree::Model& model)
@@ -266,14 +266,33 @@ namespace kinematics {
 
     }
 
-    void InverseKinematicsData::setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
+    void InverseKinematicsData::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
     {
-        m_targetResolutionMode = mode;
+        if (m_targets.size() > 0){
+            for (TransformMap::iterator it = m_targets.begin();
+                 it != m_targets.end(); ++it){
+                this->setTargetResolutionMode(mode, it);
+            }
+        }
+        
+        if(mode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly){
+            this->setCoMasConstraint(true);
+        }
+        else{
+            this->setCoMasConstraint(false);
+        }
     }
 
-    enum iDynTree::InverseKinematicsTreatTargetAsConstraint InverseKinematicsData::targetResolutionMode()
+    void InverseKinematicsData::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode, TransformMap::iterator target)
     {
-        return m_targetResolutionMode;
+       assert(target != m_targets.end());
+       target->second.setTargetResolutionMode(mode);
+    }
+
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint InverseKinematicsData::targetResolutionMode(TransformMap::iterator target) const
+    {
+        assert(target != m_targets.end());
+        return target->second.targetResolutionMode();
     }
 
     bool InverseKinematicsData::solveProblem()
@@ -339,16 +358,25 @@ namespace kinematics {
         }
     }
 
+    void InverseKinematicsData::setCoMasConstraint(bool asConstraint)
+    {
+        this->m_comTarget.isConstraint = asConstraint;
+    }
+
+    bool InverseKinematicsData::isCoMaConstraint()
+    {
+        return this->m_comTarget.isConstraint;
+    }
+
     void InverseKinematicsData::setCoMasConstraintTolerance(double TOL)
     {
         this->m_comTarget.constraintTolerance = TOL;
     }
 
-    
     bool InverseKinematicsData::isCoMTargetActive(){
         return this->m_comTarget.isActive;
     }
-    
+
     void InverseKinematicsData::setCoMTargetInactive()
     {
         this->m_comTarget.isActive = false;
