@@ -389,7 +389,7 @@ void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKine
 
     ik.setTargetResolutionMode(targetResolutionMode);
     
-    ok = ik.addRotationTarget("chest",kinDynDes.getWorldTransform("chest").getRotation(), 100);
+    ok = ik.addRotationTarget("chest", kinDynDes.getWorldTransform("chest").getRotation(), 100);
     ASSERT_IS_TRUE(ok);
     //ik.setTargetResolutionMode(targetResolutionMode, "chest");
 

@@ -275,11 +275,13 @@ namespace kinematics {
             }
         }
         
-        if(mode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly){
-            this->setCoMasConstraint(true);
-        }
-        else{
-            this->setCoMasConstraint(false);
+        if(m_comTarget.isActive){
+            if(mode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly){
+                this->setCoMasConstraint(true);
+            }
+            else{
+                this->setCoMasConstraint(false);
+            }
         }
     }
 
