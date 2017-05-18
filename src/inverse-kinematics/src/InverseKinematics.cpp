@@ -421,7 +421,7 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->setInitialCondition(baseTransform, initialCondition);
     }
 
-    bool InverseKinematics::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
+    void InverseKinematics::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
     {
         assert(m_pimpl);
         IK_PIMPL(m_pimpl)->setTargetResolutionMode(mode);

@@ -536,7 +536,7 @@ public:
      * 
      * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget .
      */
-    bool setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode);
+    void setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
     
     /*!
      * Specify the method to solve the specified target
