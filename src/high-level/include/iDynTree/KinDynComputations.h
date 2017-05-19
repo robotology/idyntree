@@ -434,7 +434,7 @@ public:
      * The Jacobian maps the internal robot shape with the relative
      * velocity of refFrame w.r.t. frame expressed in the specified frame, i.e
      * \f[
-     *  {}^{expressedOriginFrame, [expressedOrientationFrame]} v_{refFrame, frame} = {}^{expressedOriginFrame, [expressedOrientationFrame]} J_{refFrame, frame}(s) \dot{s}
+     *  {}^{expressedOriginFrame, [expressedOrientationFrame]} \mathrm{v}_{refFrame, frame} = {}^{expressedOriginFrame, [expressedOrientationFrame]} J_{refFrame, frame}(s) \dot{s}
      * \f]
      *
      * @param refFrameIndex reference frame
@@ -453,14 +453,14 @@ public:
     /**
      * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
      *
-     * This term is usually called $\dot{J} \nu$ or $\dot{J} \dot{q}$.
+     * This term is usually called \f$\dot{J} \nu\f$ or \f$\dot{J} \dot{q}\f$.
      */
     Vector6 getFrameBiasAcc(const FrameIndex frameIdx);
 
     /**
      * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
      *
-     * This term is usually called $\dot{J} \nu$ or $\dot{J} \dot{q}$.
+     * This term is usually called \f$\dot{J} \nu\f$ or \f$\dot{J} \dot{q}\f$.
      */
     Vector6 getFrameBiasAcc(const std::string & frameName);
 
