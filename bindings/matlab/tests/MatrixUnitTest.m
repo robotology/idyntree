@@ -8,6 +8,9 @@ function test_sparse_matrices
     randSparseId = iDynTree.MatrixDynSize();
     randSparseId.fromMatlab(randSparse);
     % Sparse matrix fromMatlab/toMatlab do not work correctly in octave
-    if (not(exist ("OCTAVE_VERSION", "builtin") > 0))
+    % See https://github.com/robotology/idyntree/issues/304 for more info
+    if (not(exist ('OCTAVE_VERSION', 'builtin') > 0))
         assertElementsAlmostEqual(randSparseId.toMatlab(),full(randSparse))
+    else 
+        
     end
