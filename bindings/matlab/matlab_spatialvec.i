@@ -22,7 +22,7 @@ namespace iDynTree
     void fromMatlab(mxArray * in)
     {
         // check size
-        const size_t * dims = mxGetDimensions(in);
+        const mwSize * dims = mxGetDimensions(in);
         size_t fixValSize = $self->size();
         if( ( dims[0] == fixValSize && dims[1] == 1) ||
             ( dims[0] == 1 && dims[1] == fixValSize ) )
