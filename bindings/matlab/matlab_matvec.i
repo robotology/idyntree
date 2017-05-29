@@ -88,7 +88,7 @@ namespace iDynTree
     void fromMatlab(mxArray * in)
     {
         // check size
-        const size_t * dims = mxGetDimensions(in);
+        const mwSize * dims = mxGetDimensions(in);
         size_t fixValSize = $self->size();
         size_t nonSingletonDimension = (dims[0] == 1 ? dims[1] : dims[0]);
 
@@ -128,7 +128,7 @@ namespace iDynTree
     void fromMatlab(mxArray * in)
     {
         // check size
-        const size_t * dims = mxGetDimensions(in);
+        const mwSize * dims = mxGetDimensions(in);
         size_t fixValRows = $self->rows();
         size_t fixValCols = $self->cols();
         if (dims[0] == fixValRows && dims[1] == fixValCols)
@@ -170,7 +170,7 @@ namespace iDynTree
     void fromMatlab(mxArray * in)
     {
         // check size
-        const size_t * dims = mxGetDimensions(in);
+        const mwSize * dims = mxGetDimensions(in);
         $self->size();
         if (( dims[0] == 1 || dims[1] == 1))
         {
@@ -225,7 +225,7 @@ namespace iDynTree
     void fromMatlab(mxArray * in)
     {
         // check size
-        const size_t * dims = mxGetDimensions(in);
+        const mwSize * dims = mxGetDimensions(in);
         size_t rows = $self->rows();
         size_t cols = $self->cols();
         if (dims[0] != rows || dims[1] == cols)
@@ -313,7 +313,7 @@ namespace iDynTree
     void fromMatlab(mxArray * in)
     {
         // check size
-        const size_t * dims = mxGetDimensions(in);
+        const mwSize * dims = mxGetDimensions(in);
         size_t rows = $self->rows();
         size_t cols = $self->columns();
         if (dims[0] != rows || dims[1] == cols)
@@ -327,7 +327,7 @@ namespace iDynTree
             mwIndex* ir = mxGetIr(in);
             mwIndex* jc = mxGetJc(in);
             double *data = mxGetPr(in);
-            const size_t * dims = mxGetDimensions(in);
+            const mwSize * dims = mxGetDimensions(in);
             mwIndex nnz = jc[dims[1]];
 
             int *tempIr = new int[nnz];
