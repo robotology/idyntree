@@ -140,7 +140,7 @@ bool AccelerometerSensor::updateIndeces(const Model& model)
         return false;
     }
 
-    this->pimpl->parent_link_name = linkNewIndex;
+    this->pimpl->parent_link_index = linkNewIndex;
 
     return true;
 }
