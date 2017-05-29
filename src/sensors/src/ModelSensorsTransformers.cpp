@@ -90,7 +90,14 @@ bool createReducedModelAndSensors(const Model& fullModel,
             // If the link to wicht the sensors is attached (parentLink) is also in the reduced model, we can just copy the sensor to the reduced sensors models
             if( reducedModel.isLinkNameUsed(sensorLinkInFullModel) )
             {
-                reducedSensors.addSensor(*s);
+                // update the link index of the reduced model
+                LinkSensor *sensorInReducedModel = static_cast<LinkSensor*>(linkSens->clone());
+                if (!sensorInReducedModel || !sensorInReducedModel->updateIndeces(reducedModel)) {
+                    reportError("","createReducedModelAndSensors", "Failed to duplicate LinkSensor and update indeces");
+                    return false;
+                }
+                reducedSensors.addSensor(*sensorInReducedModel);
+                delete sensorInReducedModel;
             }
             else
             {
