@@ -9,34 +9,34 @@ classdef ModelSolidShapes < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1021, varargin{:});
+        tmp = iDynTreeMEX(1055, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = clear(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1022, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1056, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1023, self);
+        iDynTreeMEX(1057, self);
         self.swigPtr=[];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1024, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1058, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1025, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1059, self, varargin{:});
     end
     function varargout = linkSolidShapes(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1026, self);
+        varargout{1} = iDynTreeMEX(1060, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1027, self, varargin{1});
+        iDynTreeMEX(1061, self, varargin{1});
       end
     end
   end

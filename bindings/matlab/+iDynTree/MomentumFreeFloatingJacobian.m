@@ -7,20 +7,20 @@ classdef MomentumFreeFloatingJacobian < iDynTree.MatrixDynSize
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1093, varargin{:});
+        tmp = iDynTreeMEX(1127, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1094, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1128, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1095, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1129, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1096, self);
+        iDynTreeMEX(1130, self);
         self.swigPtr=[];
       end
     end

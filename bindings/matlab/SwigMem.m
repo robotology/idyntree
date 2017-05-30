@@ -1,12 +1,18 @@
 function varargout = SwigMem(varargin)
   persistent mem
   mlock
-  narginchk(0,1)
+  if (nargin > 1)
+    error('Too many input arguments')
+  end
   if nargin==0
-    nargoutchk(0,1)
+    if (nargout > 1)
+      error('Too many output arguments')
+    end
     varargout{1} = mem;
   else
-    nargoutchk(0,0)
+    if (nargout > 0)
+      error('Too many output arguments')
+    end
     mem = varargin{1};
   end
 end

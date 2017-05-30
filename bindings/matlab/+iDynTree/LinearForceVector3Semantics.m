@@ -7,14 +7,14 @@ classdef LinearForceVector3Semantics < iDynTree.ForceVector3Semantics__LinearFor
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(464, varargin{:});
+        tmp = iDynTreeMEX(494, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(465, self);
+        iDynTreeMEX(495, self);
         self.swigPtr=[];
       end
     end
