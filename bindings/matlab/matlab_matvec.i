@@ -228,11 +228,14 @@ namespace iDynTree
         const mwSize * dims = mxGetDimensions(in);
         size_t rows = $self->rows();
         size_t cols = $self->cols();
-        if (dims[0] != rows || dims[1] == cols)
+        if (dims[0] != rows || dims[1] != cols)
         {
             $self->resize(dims[0], dims[1]);
-            mexWarnMsgIdAndTxt("iDynTree:Core:perfomance", "Resizing iDynTree vector to (%d,%d)", rows, cols);
+            mexWarnMsgIdAndTxt("iDynTree:Core:perfomance", "Resizing iDynTree vector to (%d,%d)", dims[0], dims[1]);
         }
+        // Update rows and cols
+        rows = $self->rows();
+        cols = $self->cols();
 
         if (mxIsSparse(in))
         {

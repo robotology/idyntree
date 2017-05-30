@@ -2,7 +2,6 @@ function test_suite=InertiaUnitTest
     initTestSuite
 
 function test_momentum_invariance
-    iDynTreeLoad;
     tol = 1e-9;
     twistInFrame1_m = [1;2;3;4;5;6];
     twistInFrame1 = iDynTree.Twist();

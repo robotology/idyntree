@@ -30,6 +30,23 @@ macro(SWIG_COMPILE_MODULE name language)
               ${swig_other_sources})
 endmacro()
 
+# Options related to installation directories
+# If you want to install bindings for packaging you may need to install
+# following several rules (for example placing the .m files in share
+# and the compiled libraries in some architecture-specific directory)
+# We support this use-cases by exposing this CMake advanced option.
+# The default values, however, are choosen to simplify the use of
+# the bindings for a developer that compiled the library from source:
+# to use the octave bindings just add <prefix>/octave to the octave path,
+# to use the matlab bindings just add <prefix>/mex    to the matlab path.
+set(IDYNTREE_INSTALL_MATLAB_LIBDIR "mex" CACHE STRING "Location (relative to the install prefix) in which the Matlab mex libraries are installed.")
+mark_as_advanced(IDYNTREE_INSTALL_MATLAB_LIBDIR)
+set(IDYNTREE_INSTALL_MATLAB_MFILESDIR "mex" CACHE STRING "Location (relative to the install prefix) in which the Matlab .m files are installed.")
+mark_as_advanced(IDYNTREE_INSTALL_MATLAB_MFILESDIR)
+set(IDYNTREE_INSTALL_OCTAVE_LIBDIR "octave" CACHE STRING "Location (relative to the install prefix) in which the Octave mex libraries are installed.")
+mark_as_advanced(IDYNTREE_INSTALL_OCTAVE_LIBDIR)
+set(IDYNTREE_INSTALL_OCTAVE_MFILESDIR "octave" CACHE STRING "Location (relative to the install prefix) in which the Octave .m files are installed.")
+mark_as_advanced(IDYNTREE_INSTALL_OCTAVE_MFILESDIR)
 
 # The name of the generated source named is
 # defined by the variable swig_generated_file_fullname
@@ -70,7 +87,7 @@ set(swig_generated_sources ${CMAKE_CURRENT_SOURCE_DIR}/${sourcename}.cxx)
 set(swig_other_sources)
 
 # Set the generated mex name to be iDynTreeMEX, as it the defaul one used by SWIG while generating bindings
-if(SWIG_USES_MATLAB)
+if(IDYNTREE_USES_MATLAB)
   find_package(Matlab
                REQUIRED
                MX_LIBRARY
@@ -89,12 +106,12 @@ if(SWIG_USES_MATLAB)
   endif()
 
   # Install the generated front-end to ${CMAKE_INSTALL_PREFIX}/mex 
-  install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/+iDynTree DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigGet.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigRef.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigMem.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iDynTreesetup.m DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
-  install(TARGETS ${mexname} DESTINATION ${CMAKE_INSTALL_PREFIX}/mex)
+  install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/+iDynTree DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_MATLAB_MFILESDIR})
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigGet.m DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_MATLAB_MFILESDIR})
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigRef.m DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_MATLAB_MFILESDIR})
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigMem.m DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_MATLAB_MFILESDIR})
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iDynTreesetup.m DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_MATLAB_MFILESDIR})
+  install(TARGETS ${mexname} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_MATLAB_LIBDIR})
 
   #On new versions of Clang, MATLAB requires C++11.
   #I enable it on all Clangs
@@ -131,11 +148,11 @@ if(IDYNTREE_USES_OCTAVE_MEX)
   install(TARGETS idyntreeOctaveMex DESTINATION ${CMAKE_INSTALL_PREFIX}/oct)
 
   # Install the generated front-end to ${CMAKE_INSTALL_PREFIX}/mex 
-  install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/+iDynTree DESTINATION ${CMAKE_INSTALL_PREFIX}/oct)
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigGet.m DESTINATION ${CMAKE_INSTALL_PREFIX}/oct)
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigRef.m DESTINATION ${CMAKE_INSTALL_PREFIX}/oct)
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigMem.m DESTINATION ${CMAKE_INSTALL_PREFIX}/oct)
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iDynTreesetup.m DESTINATION ${CMAKE_INSTALL_PREFIX}/oct)
+  install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/+iDynTree DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_OCTAVE_MFILESDIR})
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigGet.m DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_OCTAVE_MFILESDIR})
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigRef.m DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_OCTAVE_MFILESDIR})
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SwigMem.m DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_OCTAVE_MFILESDIR})
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iDynTreesetup.m DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_OCTAVE_LIBDIR})
 endif()
 
 # if compile tests compile also matlab/octave tests
