@@ -2,7 +2,6 @@ function test_suite=DynamicsComputationsUnitTest
     initTestSuite
 
 function test_inverse_dynamics_consistency
-    iDynTreeLoad;
     tol = 1e-9;
 
     dynComp = iDynTree.DynamicsComputations();
