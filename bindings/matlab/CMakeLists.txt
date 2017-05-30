@@ -126,7 +126,7 @@ if(IDYNTREE_USES_MATLAB)
   endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 endif()
 
-if(IDYNTREE_USES_OCTAVE_MEX)
+if(IDYNTREE_USES_OCTAVE)
   find_package(Octave REQUIRED)
   if ("${OCTAVE_VERSION_STRING}" VERSION_LESS 4.0)
     message(FATAL_ERROR "Octave mex-based bindings required at least Octave version 4.0 or greater.")

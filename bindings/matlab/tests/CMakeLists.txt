@@ -11,7 +11,7 @@ if (IDYNTREE_USES_MATLAB)
            COMMAND ${Matlab_MAIN_PROGRAM} -nodisplay -nodesktop -nojvm -r "addpath('$<TARGET_FILE_DIR:${mexname}>');addpath('${CMAKE_CURRENT_SOURCE_DIR}/../');addpath('${CMAKE_CURRENT_SOURCE_DIR}/');addpath(genpath('${IDYNTREE_INTERNAL_MOXUNIT_PATH}'));success=moxunit_runtests('${CMAKE_CURRENT_SOURCE_DIR}','-verbose');exit(~success);")
 endif()
 
-if (IDYNTREE_USES_OCTAVE_MEX)
-  add_test(NAME octave_mex_idyntree_tests
+if (IDYNTREE_USES_OCTAVE)
+  add_test(NAME octave_idyntree_tests
            COMMAND ${OCTAVE_EXECUTABLE} --no-gui --quiet --eval "addpath('$<TARGET_FILE_DIR:idyntreeOctaveMex>');addpath('${CMAKE_CURRENT_SOURCE_DIR}/../');addpath('${CMAKE_CURRENT_SOURCE_DIR}/');addpath(genpath('${IDYNTREE_INTERNAL_MOXUNIT_PATH}'));success=moxunit_runtests('${CMAKE_CURRENT_SOURCE_DIR}','-verbose');exit(~success);")
 endif()

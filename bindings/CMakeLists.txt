@@ -7,15 +7,13 @@
 option(IDYNTREE_USES_PYTHON "Do you want to create the Python bindings" FALSE)
 option(IDYNTREE_USES_LUA "Do you want to create the Lua bindings" FALSE)
 option(IDYNTREE_USES_MATLAB "Do you want to create the MATLAB bindings" FALSE)
-option(IDYNTREE_USES_OCTAVE "Do you want to create the OCTAVE bindings using the Octave native C++ interface?" FALSE)
-option(IDYNTREE_USES_OCTAVE_MEX "Do you want to create the OCTAVE bindings using the mex Octave interface" FALSE)
+option(IDYNTREE_USES_OCTAVE "Do you want to create the OCTAVE bindings" FALSE)
 option(IDYNTREE_GENERATE_MATLAB "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper" FALSE)
 
 if(IDYNTREE_USES_PYTHON OR
    IDYNTREE_USES_LUA OR
    IDYNTREE_USES_MATLAB OR
    IDYNTREE_USES_OCTAVE OR
-   IDYNTREE_USES_OCTAVE_MEX OR
    IDYNTREE_GENERATE_MATLAB)
     if(NOT IDYNTREE_USES_KDL)
         message(FATAL_ERROR "Impossible generated bindings if KDL is not enabled")
@@ -24,7 +22,7 @@ endif()
 
 find_package(SWIG)
 # It is possible to compile matlab/octave bindings without using SWIG
-if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE_MEX)
+if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
     include(UseSWIG)
 
     set_source_files_properties(iDynTree.i PROPERTIES CPLUSPLUS ON)
@@ -53,19 +51,13 @@ if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE_MEX)
         add_subdirectory(python)
     endif(IDYNTREE_USES_PYTHON)
 
-    if(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB OR IDYNTREE_USES_OCTAVE_MEX)
+    if(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB OR IDYNTREE_USES_OCTAVE)
         add_subdirectory(matlab)
     endif()
-
-    if(IDYNTREE_USES_OCTAVE)
-        add_subdirectory(octave)
-    endif(IDYNTREE_USES_OCTAVE)
-
 endif()
 
 if(IDYNTREE_USES_PYTHON OR
    IDYNTREE_USES_LUA    OR
-   IDYNTREE_USES_OCTAVE OR
    IDYNTREE_GENERATED_MATLAB)
    if(NOT SWIG_FOUND)
        MESSAGE(FATAL_ERROR "Swig not found, impossible to compile or generate iDynTree bindings.")
