@@ -7,30 +7,30 @@ classdef Direction < iDynTree.Vector3
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(574, varargin{:});
+        tmp = iDynTreeMEX(604, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = Normalize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(575, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(605, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(576, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(606, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(577, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(607, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(579, self);
+        iDynTreeMEX(609, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = Default(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(578, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(608, varargin{:});
     end
   end
 end

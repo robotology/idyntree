@@ -12,11 +12,11 @@ classdef SwigRef < handle
     end
   end
   methods
+    function out = saveobj(self)
+      error('Serializing SWIG objects not supported.')
+    end
     function b = isnull(self)
       b = isempty(self.swigPtr);
-    end
-    function disp(self)
-      disp(sprintf('<Swig object, ptr=%d>',self.swigPtr))
     end
     function varargout = subsref(self,s)
       if numel(s)==1

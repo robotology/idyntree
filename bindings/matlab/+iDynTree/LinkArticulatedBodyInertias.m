@@ -9,23 +9,23 @@ classdef LinkArticulatedBodyInertias < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(793, varargin{:});
+        tmp = iDynTreeMEX(827, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(794, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(828, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(795, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(829, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(796, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(830, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(797, self);
+        iDynTreeMEX(831, self);
         self.swigPtr=[];
       end
     end

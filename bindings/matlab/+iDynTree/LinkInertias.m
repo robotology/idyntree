@@ -9,23 +9,23 @@ classdef LinkInertias < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(788, varargin{:});
+        tmp = iDynTreeMEX(822, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(789, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(823, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(790, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(824, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(791, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(825, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(792, self);
+        iDynTreeMEX(826, self);
         self.swigPtr=[];
       end
     end
