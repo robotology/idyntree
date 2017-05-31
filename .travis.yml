@@ -47,6 +47,9 @@ before_script:
   # install dependencies using the codyco-superbuild script
   - chmod +x ./.ci/travis-deps.sh
   - sh .ci/travis-deps.sh
+  # On Ubuntu, make sure not to use openblas as blas backend, see 
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install libatlas-base-dev; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo update-alternatives --set libblas.so.3  /usr/lib/atlas-base/atlas/libblas.so.3 ; fi
   # On macOS, install ipopt from homebrew 
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ipopt; fi
   - mkdir build
