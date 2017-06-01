@@ -18,8 +18,8 @@ if (${Qt5_FOUND})
   target_link_libraries(${PROJECT_NAME}-service YARP::YARP_init YARP::YARP_OS YARP::YARP_sig)
   
   
-  set(SOURCES src/main.cpp src/ChartsManager.cpp)
-  set(HEADERS include/ChartsManager.h)
+  set(SOURCES src/main.cpp src/ChartsManager.cpp src/ChartsManagerWindow.cpp)
+  set(HEADERS include/ChartsManager.h include/ChartsManagerWindow.h)
   
   add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
   target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)

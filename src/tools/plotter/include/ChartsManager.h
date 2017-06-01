@@ -18,6 +18,8 @@ namespace QtCharts {
     class QAbstractSeries;
 }
 
+#include "ChartsManagerWindow.h" //to be removed 
+class ChartsManagerWindow;
 
 class ChartsManager
 : public ChartsService
@@ -77,6 +79,10 @@ class ChartsManager
         friend class ChartsManager;
 
     };
+
+
+    //Main window
+    std::unique_ptr<ChartsManagerWindow> m_mainWindow;
 
     yarp::os::Port m_rpcPort;
 

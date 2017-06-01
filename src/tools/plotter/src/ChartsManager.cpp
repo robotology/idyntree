@@ -1,5 +1,7 @@
 #include "ChartsManager.h"
 
+#include "ChartsManagerWindow.h"
+
 #include <yarp/os/ResourceFinder.h>
 #include <yarp/os/Time.h>
 
@@ -134,7 +136,17 @@ bool ChartsManager::initialize()
     if (!m_rpcPort.open("/" + serverName + "/rpc")) {
         return false;
     }
-    return yarp().attachAsServer(m_rpcPort);
+    bool result = yarp().attachAsServer(m_rpcPort);
+
+    // Create main window
+    m_mainWindow = std::unique_ptr<ChartsManagerWindow>(new ChartsManagerWindow());
+    if (!m_mainWindow) {
+        close();
+        return false;
+    }
+    m_mainWindow->show();
+
+    return result;
 }
 
 void ChartsManager::close()
