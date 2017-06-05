@@ -17,6 +17,29 @@
  */
 #define IDYNTREE_UNUSED(var) ((void)var)
 
+/**
+ * \brief Macro to deprecate functions and methods
+ *
+ * see https://blog.samat.io/2017/02/27/Deprecating-functions-and-methods-in-Cplusplus/
+ */
+// C++14
+#if __cplusplus >= 201402L
+  #if defined(__has_cpp_attribute)
+    #if __has_cpp_attribute(deprecated)
+      #define IDYNTREE_DEPRECATED(msg, func) [[deprecated(msg)]] func
+    #endif
+  #endif
+// Earlier standards
+#else
+  #if defined(__GNUC__) || defined(__clang__)
+    #define IDYNTREE_DEPRECATED(msg, func) func __attribute__ ((deprecated(msg)))
+  #elif defined(_MSC_VER)
+    #define IDYNTREE_DEPRECATED(msg, func) __declspec(deprecated(msg)) func
+  #else
+    #define IDYNTREE_DEPRECATED(msg, func)
+  #endif
+#endif
+
 namespace iDynTree
 {
     extern int UNKNOWN;

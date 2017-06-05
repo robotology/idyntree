@@ -8,15 +8,6 @@
 #ifndef IDYNTREE_H
 #define IDYNTREE_H
 
-#if defined(__GNUC__) || defined(__clang__) //clang defines also __GNUC__, but I check for it anyway
-#define IDYN_DEPRECATED __attribute__((deprecated))
-#elif defined(_MSC_VER)
-#define IDYN_DEPRECATED __declspec(deprecated)
-#else
-#pragma message("WARNING: You need to implement DEPRECATED for this compiler")
-#define IDYN_DEPRECATED
-#endif
-
 #include <yarp/sig/Matrix.h>
 #include <yarp/sig/Vector.h>
 
@@ -963,7 +954,5 @@ class DynTree  {
 }//end namespace
 
 }
-
-#undef IDYN_DEPRECATED
 
 #endif //end IDYNTREE_H
