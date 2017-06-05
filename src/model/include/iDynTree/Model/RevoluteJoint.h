@@ -12,7 +12,7 @@
 #include <iDynTree/Core/SpatialMotionVector.h>
 
 #include <iDynTree/Core/Axis.h>
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/MovableJointImpl.h>
 
 namespace iDynTree

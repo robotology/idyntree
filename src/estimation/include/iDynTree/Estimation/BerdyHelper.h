@@ -27,7 +27,7 @@
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/Triplets.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FreeFloatingState.h>

@@ -35,7 +35,7 @@ namespace iDynTree {
 #include <iDynTree/Core/VectorDynSize.h>
 
 #include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 namespace iDynTree {
 

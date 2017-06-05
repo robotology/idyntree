@@ -2915,7 +2915,7 @@ SWIGINTERN void std_vector_Sl_std_string_Sg__insert__SWIG_1(std::vector< std::st
 #include "iDynTree/Core/TransformDerivative.h"
 
 // Model related data structures
-#include "iDynTree/Model/Indeces.h"
+#include "iDynTree/Model/Indices.h"
 #include "iDynTree/Model/LinkState.h"
 #include "iDynTree/Model/Link.h"
 #include "iDynTree/Model/IJoint.h"

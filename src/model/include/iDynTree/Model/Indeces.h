@@ -8,30 +8,10 @@
 #ifndef IDYNTREE_INDECES_H
 #define IDYNTREE_INDECES_H
 
-#include <string>
+#ifdef __DEPRECATED
+  #warning <iDynTree/Model/Indeces.h> is deprecated. Please use <iDynTree/Model/Indices.h>. To disable this warning use -Wno-deprecated.
+#endif
 
-namespace iDynTree
-{
-    typedef int LinkIndex;
-    extern LinkIndex LINK_INVALID_INDEX;
-    extern std::string LINK_INVALID_NAME;
-
-    typedef int JointIndex;
-    extern int JOINT_INVALID_INDEX;
-    extern std::string JOINT_INVALID_NAME;
-
-    typedef int DOFIndex;
-    extern int DOF_INVALID_INDEX;
-    extern std::string DOF_INVALID_NAME;
-
-
-    typedef int FrameIndex;
-    extern int FRAME_INVALID_INDEX;
-    extern std::string FRAME_INVALID_NAME;
-
-    typedef int TraversalIndex;
-    extern TraversalIndex TRAVERSAL_INVALID_INDEX;
-
-}
+#include "iDynTree/Model/Indices.h"
 
 #endif /* IDYNTREE_INDECES_H */
