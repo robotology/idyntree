@@ -35,7 +35,7 @@ namespace iDynTree
 const int WORLD_FRAME = -10;
 const int DEFAULT_INDEX_VALUE = -20;
 
-class skinDynLibLinkID {
+IDYNTREE_DEPRECATED(class skinDynLibLinkID) {
      public:
           int body_part;
           int local_link_index;
@@ -63,7 +63,7 @@ class skinDynLibLinkID {
     }
 };
 
-class iDynTreeLinkAndFrame {
+IDYNTREE_DEPRECATED(class iDynTreeLinkAndFrame) {
      public:
           int link_index;
           int frame_index;
@@ -85,7 +85,7 @@ class iDynTreeLinkAndFrame {
  *          Relativity generate the same dynamics of the "real" ones
  *
  */
-class DynTree  {
+IDYNTREE_DEPRECATED(class DynTree, "Use KinDynComputations instead")  {
     protected:
         /** configured flag: if true the model was correctly loaded
          *  if false not an all the methods will return false */
