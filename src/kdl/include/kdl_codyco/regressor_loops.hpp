@@ -7,6 +7,10 @@
 #ifndef KDL_CODYCO_REGRESSOR_LOOPS_HPP
 #define KDL_CODYCO_REGRESSOR_LOOPS_HPP
 
+#ifdef __DEPRECATED
+  #warning <regressor_loops.hpp> is deprecated.
+#endif
+
 #include <Eigen/Core>
 #include <Eigen/Dense>
 

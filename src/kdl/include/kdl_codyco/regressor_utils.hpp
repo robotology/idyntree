@@ -7,6 +7,10 @@
 #ifndef _KDL_CODYCO_REGRESSOR_UTILS_HPP
 #define _KDL_CODYCO_REGRESSOR_UTILS_HPP
 
+#ifdef __DEPRECATED
+  #warning <regressor_utils.hpp> is deprecated.
+#endif
+
 #include <Eigen/Core>
 
 #include <kdl/rotationalinertia.hpp>

@@ -8,6 +8,10 @@
 #ifndef KDL_CODYCO_RNEA_LOOPS_HPP
 #define KDL_CODYCO_RNEA_LOOPS_HPP
 
+#ifdef __DEPRECATED
+  #warning <rnea_loops.hpp> is deprecated.
+#endif
+
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
 

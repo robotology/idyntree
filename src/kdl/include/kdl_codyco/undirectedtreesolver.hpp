@@ -7,6 +7,10 @@
 #ifndef UNDIRECTED_TREE_SOLVER_H
 #define UNDIRECTED_TREE_SOLVER_H
 
+#ifdef __DEPRECATED
+  #warning <undirectedtreesolver.hpp> is deprecated.
+#endif
+
 #include <kdl/tree.hpp>
 #include "undirectedtree.hpp"
 #include "treeserialization.hpp"

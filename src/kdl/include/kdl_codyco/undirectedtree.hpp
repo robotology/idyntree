@@ -17,6 +17,10 @@
 #ifndef KDL_CODYCO_UNDIRECTED_TREE_HPP
 #define KDL_CODYCO_UNDIRECTED_TREE_HPP
 
+#ifdef __DEPRECATED
+  #warning <undirectedtree.hpp> is deprecated.
+#endif
+
 #include <string>
 #include <map>
 
@@ -538,8 +542,3 @@ namespace CoDyCo
 }
 }
 #endif
-
-
-
-
-

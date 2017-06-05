@@ -22,6 +22,10 @@
 #ifndef KDL_CODYCO_FLOATINGJNTSPACEINERTIAMATRIX_HPP
 #define KDL_CODYCO_FLOATINGJNTSPACEINERTIAMATRIX_HPP
 
+#ifdef __DEPRECATED
+  #warning <floatingjntspaceinertiamatrix.hpp> is deprecated.
+#endif
+
 #include <kdl/frames.hpp>
 #include <kdl/jacobian.hpp>
 #include <kdl/jntarray.hpp>

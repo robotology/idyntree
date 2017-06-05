@@ -7,6 +7,10 @@
 #ifndef KDL_CODYCO_CONFIG_H
 #define KDL_CODYCO_CONFIG_H
 
+#ifdef __DEPRECATED
+  #warning <config.h> is deprecated.
+#endif
+
 #ifndef KDLCodycoOrocosKDLMinVersion
 #define KDLCodycoOrocosKDLMinVersion(Major, Minor, Patch) \
 OROCOS_KDL_VERSION_MAJOR > Major \

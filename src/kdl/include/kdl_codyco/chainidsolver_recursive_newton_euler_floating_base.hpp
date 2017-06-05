@@ -22,6 +22,10 @@
 #ifndef KDL_CHAIN_IDSOLVER_RECURSIVE_NEWTON_EULER_FLOATING_BASE_HPP
 #define KDL_CHAIN_IDSOLVER_RECURSIVE_NEWTON_EULER_FLOATING_BASE_HPP
 
+#ifdef __DEPRECATED
+#warning <chainidsolver_recursive_newton_euler_floating_base.hpp> is deprecated.
+#endif
+
 #include <kdl_codyco/chainidsolver_floating_base.hpp>
 
 namespace KDL{
