@@ -8,6 +8,8 @@
 #ifndef IDYNTREE_DYNCOMPUTATIONS_H
 #define IDYNTREE_DYNCOMPUTATIONS_H
 
+#include <iDynTree/Core/Utils.h>
+
 #include <string>
 
 namespace iDynTree {
@@ -32,7 +34,7 @@ namespace HighLevel {
  * robot systems.
  *
  */
-class DynamicsComputations {
+class IDYNTREE_DEPRECATED_WITH_MSG("Use KinDynComputations instead") DynamicsComputations {
 private:
     struct DynamicsComputationsPrivateAttributes;
     DynamicsComputationsPrivateAttributes * pimpl;

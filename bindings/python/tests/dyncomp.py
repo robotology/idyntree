@@ -33,6 +33,9 @@ class DynCompTest(unittest.TestCase):
 
         ok = dynComp.loadRobotModelFromFile('./model.urdf')
 
+        if not(ok):
+            print("Skipping testDynComp because iDynTree is compiled with IDYNTREE_USES_KDL to OFF")
+
         #dynComp.getFloatingBase()
 
         # set state

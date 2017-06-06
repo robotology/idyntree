@@ -8,6 +8,11 @@ function test_inverse_dynamics_consistency
 
     ok = dynComp.loadRobotModelFromFile('./model.urdf');
 
+    if not(ok)
+        fprintf('Skipping test_inverse_dynamics_consistency because iDynTree is compiled with IDYNTREE_USES_KDL to OFF');
+        return;
+    end
+
     dynComp.getFloatingBase();
 
     % set state

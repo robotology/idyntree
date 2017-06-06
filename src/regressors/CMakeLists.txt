@@ -14,10 +14,11 @@ file(GLOB IDYNTREE_REGRESSORS_HEADERS
 set(IDYNTREE_REGRESSOR_HEADERS_EXP include/iDynTree/Regressors/DynamicsRegressorParameters.h)
 
 # TODO \todo : avoid globbing and explicitly state everithing
-
-file(GLOB IDYNTREE_REGRESSORS_SOURCES
-    "src/*.cpp"
-)
+if (IDYNTREE_USES_KDL)
+  file(GLOB IDYNTREE_REGRESSORS_SOURCES "src/*.cpp")
+else()
+  set(IDYNTREE_REGRESSORS_SOURCES src/DynamicsRegressorParameters.cpp src/dummy/DummyDynamicsRegressorGenerator.cpp)
+endif()
 
 set(IDYNTREE_REGRESSOR_SOURCES_EXP DynamicsRegressorParameters.cpp)
 
@@ -33,7 +34,10 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${TinyXML_INCLUDE_DIRS})
 
-target_link_libraries(${libraryname} idyntree-core idyntree-sensors idyntree-modelio-urdf-kdl ${orocos_kdl_LIBRARIES} ${TinyXML_LIBRARIES} )
+target_link_libraries(${libraryname} idyntree-core idyntree-sensors)
+if (IDYNTREE_USES_KDL)
+  target_link_libraries(${libraryname} idyntree-modelio-urdf-kdl ${orocos_kdl_LIBRARIES} ${TinyXML_LIBRARIES})
+endif ()
 
 # Ensure that build include directories are always included before system ones
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
