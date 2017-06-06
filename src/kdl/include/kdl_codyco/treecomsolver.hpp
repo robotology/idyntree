@@ -7,6 +7,10 @@
 #ifndef TREE_COM_SOLVER_H
 #define TREE_COM_SOLVER_H
 
+#ifdef __DEPRECATED
+  #warning <treecomsolver.hpp> is deprecated.
+#endif
+
 #include <kdl/tree.hpp>
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>

@@ -232,7 +232,7 @@ namespace iDynTree
         if( row >= this->rows() ||
             col  >= this->cols() )
         {
-            reportError("MatrixDynSize","getVal","indeces out of bounds");
+            reportError("MatrixDynSize","getVal","indices out of bounds");
             return 0.0;
         }
 
@@ -245,7 +245,7 @@ namespace iDynTree
         if( row >= this->rows() ||
             col   >= this->cols() )
         {
-            reportError("MatrixDynSize","setVal","indeces out of bounds");
+            reportError("MatrixDynSize","setVal","indices out of bounds");
             return false;
         }
 

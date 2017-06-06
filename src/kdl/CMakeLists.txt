@@ -27,6 +27,10 @@ get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DI
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
+if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
+    target_compile_options(${libraryname} PRIVATE "-Wno-deprecated")
+endif()
+
 target_link_libraries(${libraryname} idyntree-core idyntree-model ${orocos_kdl_LIBRARIES})
 
 target_include_directories(${libraryname} INTERFACE ${EIGEN3_INCLUDE_DIR}
@@ -51,4 +55,3 @@ install(TARGETS ${libraryname}
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
-

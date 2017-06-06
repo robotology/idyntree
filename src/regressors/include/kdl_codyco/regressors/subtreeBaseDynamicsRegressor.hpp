@@ -31,7 +31,7 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
     const iDynTree::SensorsList * p_sensors_tree;
 
-    const std::vector<int> linkIndeces2regrCols;
+    const std::vector<int> linkIndices2regrCols;
 
     std::vector< std::string > subtree_leaf_links;
 
@@ -45,9 +45,9 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
     iDynTree::Transform sensor_H_parent_link;
     int first_ft_sensor_parent_link_id;
 
-    std::vector< int > subtree_links_indices; /** indeces of the links belonging to the considered subtree */
+    std::vector< int > subtree_links_indices; /** indices of the links belonging to the considered subtree */
 
-    std::vector< int > subtree_leaf_links_indeces;
+    std::vector< int > subtree_leaf_links_indices;
 
     bool verbose;
 
@@ -77,24 +77,24 @@ class subtreeBaseDynamicsRegressor : public DynamicRegressorInterface
          */
         subtreeBaseDynamicsRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
                                      const iDynTree::SensorsList & _sensors_tree,
-                                     const std::vector<int> & _linkIndeces2regrCols,
+                                     const std::vector<int> & _linkIndices2regrCols,
                                      std::vector< std::string> _subtree_leaf_links=std::vector< std::string>(0),
                                      const bool _consider_ft_offset=false,
                                      bool _verbose=true):
                                             p_undirected_tree(&_undirected_tree),
                                             p_sensors_tree(&_sensors_tree),
-                                            linkIndeces2regrCols(_linkIndeces2regrCols),
+                                            linkIndices2regrCols(_linkIndices2regrCols),
                                             subtree_leaf_links(_subtree_leaf_links),
                                             consider_ft_offset(_consider_ft_offset),
                                             subtree_links_indices(0),
                                             verbose(_verbose),
                                             NrOfRealLinks_subtree(0)
         {
-            assert(linkIndeces2regrCols.size() == p_undirected_tree->getNrOfLinks());
+            assert(linkIndices2regrCols.size() == p_undirected_tree->getNrOfLinks());
             NrOfRealLinks_subtree = 0;
-            for(int ll=0; ll < (int)linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
+            for(int ll=0; ll < (int)linkIndices2regrCols.size(); ll++ ) { if( linkIndices2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
             assert(NrOfRealLinks_subtree >= 0);
-            assert(NrOfRealLinks_subtree <= (int)linkIndeces2regrCols.size());
+            assert(NrOfRealLinks_subtree <= (int)linkIndices2regrCols.size());
         }
 
         virtual ~subtreeBaseDynamicsRegressor() {};

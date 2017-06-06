@@ -19,7 +19,7 @@
 #include <iDynTree/Sensors/GyroscopeSensor.h>
 
 #include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 #include <tinyxml.h>
 

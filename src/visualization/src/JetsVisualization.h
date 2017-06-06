@@ -29,7 +29,7 @@ private:
     ModelVisualization * m_modelViz;
     std::vector<irr::scene::ISceneNode *> * m_framesNodes;
 
-    std::vector<FrameIndex> m_jetsFrameIndeces;
+    std::vector<FrameIndex> m_jetsFrameIndices;
     std::vector<irr::scene::ISceneNode *> m_jetsNodes;
     std::vector<Direction> m_jetsDirections;
     std::vector<ColorViz>  m_jetsColors;

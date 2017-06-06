@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_CENTROIDAL_H
 #define IDYNTREE_CENTROIDAL_H
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 namespace iDynTree
 {

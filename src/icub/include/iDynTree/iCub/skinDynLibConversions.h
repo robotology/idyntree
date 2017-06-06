@@ -11,7 +11,7 @@
 #include <map>
 #include <string>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
 #include <iCub/skinDynLib/dynContactList.h>

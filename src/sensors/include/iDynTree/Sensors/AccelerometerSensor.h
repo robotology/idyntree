@@ -129,9 +129,10 @@ namespace iDynTree {
         /*
          * Documented in Sensor
          */
-        bool updateIndeces(const Model & model);
+        bool updateIndices(const Model & model);
 
-
+        // Deprecated
+        bool IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead") updateIndeces(const Model & model);
 
       /**
         * Following method is to be implemented after defining the interface

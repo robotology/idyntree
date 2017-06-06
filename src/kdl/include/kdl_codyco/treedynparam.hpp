@@ -16,6 +16,10 @@
 #ifndef KDLCODYCOTREEDYNPARAM_HPP
 #define KDLCODYCOTREEDYNPARAM_HPP
 
+#ifdef __DEPRECATED
+  #warning <treedynparam.hpp> is deprecated.
+#endif
+
 #include <kdl/chainidsolver_recursive_newton_euler.hpp>
 #include <kdl/articulatedbodyinertia.hpp>
 #include <kdl/jntspaceinertiamatrix.hpp>

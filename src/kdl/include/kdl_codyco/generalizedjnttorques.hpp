@@ -21,6 +21,10 @@
 #ifndef KDL_CODYCO_GENERALIZEDJNTTORQUES_HPP
 #define KDL_CODYCO_GENERALIZEDJNTTORQUES_HPP
 
+#ifdef __DEPRECATED
+  #warning <generalizedjnttorques.hpp> is deprecated.
+#endif
+
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
 

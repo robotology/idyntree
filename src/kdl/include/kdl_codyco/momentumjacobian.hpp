@@ -19,6 +19,10 @@
 #ifndef KDL_CODYCO_MOMENTUM_JACOBIAN_HPP
 #define KDL_CODYCO_MOMENTUM_JACOBIAN_HPP
 
+#ifdef __DEPRECATED
+  #warning <momentumjacobian.hpp> is deprecated.
+#endif
+
 #include <kdl/frames.hpp>
 #include <Eigen/Core>
 

@@ -19,6 +19,11 @@ add_library(${libraryname} ${IDYNTREE_HIGH_LEVEL_KDL_SOURCES} ${IDYNTREE_HIGH_LE
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+
+if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
+    target_compile_options(${libraryname} PRIVATE "-Wno-deprecated")
+endif()
+
 include_directories(${libraryname} SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS} ${TinyXML_INCLUDE_DIRS})
 
 target_link_libraries(${libraryname} idyntree-core idyntree-kdl idyntree-sensors idyntree-modelio-urdf-kdl ${TinyXML_LIBRARIES} )

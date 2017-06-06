@@ -21,6 +21,10 @@
 #ifndef KDL_CODYCO_GENERALIZEDJNTMOTIONS_HPP
 #define KDL_CODYCO_GENERALIZEDJNTMOTIONS_HPP
 
+#ifdef __DEPRECATED
+  #warning <generalizedjntmotions.hpp> is deprecated.
+#endif
+
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
 

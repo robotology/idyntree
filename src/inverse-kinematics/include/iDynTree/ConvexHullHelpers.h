@@ -202,7 +202,7 @@ namespace iDynTree
         /**
          * List of support frames.
          */
-        std::vector<int> supportFrameIndeces;
+        std::vector<int> supportFrameIndices;
 
         /**
          * List of absolue_X_supportFrames

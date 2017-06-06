@@ -22,6 +22,10 @@
 #ifndef KDL_CHAIN_IDSOLVER_FLOATING_BASE_HPP
 #define KDL_CHAIN_IDSOLVER_FLOATING_BASE_HPP
 
+#ifdef __DEPRECATED
+#warning <chainidsolver_floating_base.hpp> is deprecated.
+#endif
+
 #include <kdl/chain.hpp>
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>

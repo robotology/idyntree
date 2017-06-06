@@ -38,13 +38,13 @@ private:
 
     iDynTree::VectorDynSize m_values; /**< Contains all the non zero (NZ) elements */
 
-    std::vector<int> m_innerIndeces; /**< column index of the NZ elements  */
+    std::vector<int> m_innerIndices; /**< column index of the NZ elements  */
     std::vector<int> m_outerStarts; /**< for each row contains the index of the first NZ in the
                                      *   previous two arrays
                                      */
 
 
-    unsigned m_allocatedSize; /**< size of the memory allocated for m_values and m_innerIndeces */
+    unsigned m_allocatedSize; /**< size of the memory allocated for m_values and m_innerIndices */
 
     unsigned m_rows;
     unsigned m_columns;
@@ -55,7 +55,7 @@ private:
 
     /**
      * Insert a new element at the specified position
-     * 
+     *
      * It returns the index in m_values of the inserted element
      * @param row row of the new element
      * @param col column of the new element
@@ -66,9 +66,9 @@ private:
 
     /**
      * Check if the element at row-col is present in the matrix.
-     * 
+     *
      * If it is present the function returns true and the index in the
-     * out parameter index, otherwise it returns false and index will 
+     * out parameter index, otherwise it returns false and index will
      * contain the index of the next element in the value array
      *
      * @param[in] row row index
@@ -235,19 +235,25 @@ public:
 
     double const * valuesBuffer() const;
 
-    int * innerIndecesBuffer();
+    int * innerIndicesBuffer();
 
-    int const * innerIndecesBuffer() const;
+    int const * innerIndicesBuffer() const;
 
-    int * outerIndecesBuffer();
+    int * outerIndicesBuffer();
 
-    int const * outerIndecesBuffer() const;
+    int const * outerIndicesBuffer() const;
+
+    // Deprecated
+    int * IDYNTREE_DEPRECATED_WITH_MSG("Use innerIndicesBuffer() instead") innerIndecesBuffer();
+    int const * IDYNTREE_DEPRECATED_WITH_MSG("Use innerIndicesBuffer() instead") innerIndecesBuffer()const;
+    int * IDYNTREE_DEPRECATED_WITH_MSG("Use outerIndicesBuffer() instead") outerIndecesBuffer();
+    int const * IDYNTREE_DEPRECATED_WITH_MSG("Use outerIndicesBuffer() instead") outerIndecesBuffer() const;
 
 
 
     /**
      * Returns a textual description of the matrix.
-     * 
+     *
      * If true is passed, the whole matrix (with also zero elements) is printed
      * Default to false
      * @param fullMatrix true to return the full matrix, false for only the non zero elements. Default to false
@@ -393,7 +399,7 @@ public:
     // Also Output iterator if the reference modifies the container
     reference operator*();
     pointer operator->();
-    
+
     bool isValid() const;
 };
 

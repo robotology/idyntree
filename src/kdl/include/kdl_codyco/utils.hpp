@@ -7,6 +7,10 @@
 #ifndef KDL_CODYCO_UTILS_HPP
 #define KDL_CODYCO_UTILS_HPP
 
+#ifdef __DEPRECATED
+  #warning <utils.hpp> is deprecated.
+#endif
+
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
 #include "undirectedtree.hpp"

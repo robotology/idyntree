@@ -7,6 +7,10 @@
 #ifndef KDL_TREE_SERIALIZATION_HPP
 #define KDL_TREE_SERIALIZATION_HPP
 
+#ifdef __DEPRECATED
+  #warning <treeserialization.hpp> is deprecated.
+#endif
+
 #include <string>
 #include <kdl/tree.hpp>
 
