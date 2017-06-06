@@ -50,8 +50,8 @@ namespace iDynTree {
 
         m_values.reserve(m_allocatedSize);
 
-        // Inner indeces has same size of values
-        m_innerIndeces.reserve(m_allocatedSize);
+        // Inner indices has same size of values
+        m_innerIndices.reserve(m_allocatedSize);
     }
 
     SparseMatrix::~SparseMatrix() {}
@@ -65,7 +65,7 @@ namespace iDynTree {
         //Which right now it does not apply
         int colBegin = m_outerStarts[row];
         int colEnd = m_outerStarts[row + 1];
-        std::vector<int>::const_iterator innerVectorBegin = m_innerIndeces.begin();
+        std::vector<int>::const_iterator innerVectorBegin = m_innerIndices.begin();
 
         //initialize the return value to be the first element of the row
         rowNZIndex = colBegin;
@@ -93,7 +93,7 @@ namespace iDynTree {
             //found
             return true;
         }
-        
+
         return false;
     }
 
@@ -116,14 +116,14 @@ namespace iDynTree {
 
         //I found the index. Now I have to shift to the right the values and inner elements
         m_values.resize(m_values.size() + 1);
-        m_innerIndeces.resize(m_innerIndeces.size() + 1);
+        m_innerIndices.resize(m_innerIndices.size() + 1);
 
         for (unsigned i = insertionIndex; i < m_values.size() - 1; ++i) {
             m_values(i + 1) = m_values(i);
-            m_innerIndeces[i + 1] = m_innerIndeces[i];
+            m_innerIndices[i + 1] = m_innerIndices[i];
         }
         m_values(insertionIndex) = value;
-        m_innerIndeces[insertionIndex] = col;
+        m_innerIndices[insertionIndex] = col;
         //update row NNZ
         for (unsigned rowIndex = row; rowIndex < rows(); ++rowIndex) {
             m_outerStarts[rowIndex + 1]++;
@@ -133,7 +133,7 @@ namespace iDynTree {
     }
 
 
-    
+
     unsigned SparseMatrix::numberOfNonZeros() const
     {
         return m_values.size();
@@ -173,7 +173,7 @@ namespace iDynTree {
         if (nonZeroElements <= m_allocatedSize) return; //do nothing
 
         m_values.reserve(nonZeroElements);
-        m_innerIndeces.reserve(nonZeroElements);
+        m_innerIndices.reserve(nonZeroElements);
         m_allocatedSize = nonZeroElements;
 
     }
@@ -182,7 +182,7 @@ namespace iDynTree {
     {
         //zero: simply clear
         m_values.resize(0);
-        m_innerIndeces.resize(0);
+        m_innerIndices.resize(0);
         m_outerStarts.resize(0);
     }
 
@@ -209,7 +209,7 @@ namespace iDynTree {
         //Note: find is useless if array is sorted
         //Resize to maximum value. Will shrink at the end
         m_values.resize(triplets.size());
-        m_innerIndeces.resize(triplets.size());
+        m_innerIndices.resize(triplets.size());
         m_outerStarts.assign(m_rows + 1, 0); //reset vector
 
 
@@ -244,7 +244,7 @@ namespace iDynTree {
                 lastRow = iterator->row;
             }
             m_values(innerIndex) = iterator->value;
-            m_innerIndeces[innerIndex] = iterator->column;
+            m_innerIndices[innerIndex] = iterator->column;
             lastIndex = innerIndex;
             //increment index as this should always point to the next element
             ++innerIndex;
@@ -261,7 +261,7 @@ namespace iDynTree {
 
         //Shrink containers
         m_values.resize(innerIndex);
-        m_innerIndeces.resize(innerIndex);
+        m_innerIndices.resize(innerIndex);
 
     }
 
@@ -307,24 +307,45 @@ namespace iDynTree {
 
     double const * SparseMatrix::valuesBuffer() const { return m_values.data(); }
 
+    int * SparseMatrix::innerIndicesBuffer()
+    {
+        return m_innerIndices.data();
+    }
+
+    int const * SparseMatrix::innerIndicesBuffer() const
+    {
+        return m_innerIndices.data();
+    }
+
+    int * SparseMatrix::outerIndicesBuffer()
+    {
+        return m_outerStarts.data();
+    }
+
+    int const * SparseMatrix::outerIndicesBuffer() const
+    {
+        return m_outerStarts.data();
+    }
+
+    // Deprecated
     int * SparseMatrix::innerIndecesBuffer()
     {
-        return m_innerIndeces.data();
+        return innerIndicesBuffer();
     }
-
+    // Deprecated
     int const * SparseMatrix::innerIndecesBuffer() const
     {
-        return m_innerIndeces.data();
+        return innerIndicesBuffer();
     }
-
+    // Deprecated
     int * SparseMatrix::outerIndecesBuffer()
     {
-        return m_outerStarts.data();
+        return outerIndicesBuffer();
     }
-
+    // Deprecated
     int const * SparseMatrix::outerIndecesBuffer() const
     {
-        return m_outerStarts.data();
+        return outerIndicesBuffer();
     }
 
     std::string SparseMatrix::description(bool fullMatrix) const
@@ -359,11 +380,11 @@ namespace iDynTree {
         for (unsigned i = 0; i < m_values.size(); ++i) {
             stream << m_values(i) << " ";
         }
-        stream << "\nInner indeces: \n";
+        stream << "\nInner indices: \n";
         for (unsigned i = 0; i < m_values.size(); ++i) {
-            stream << m_innerIndeces[i] << " ";
+            stream << m_innerIndices[i] << " ";
         }
-        stream << "\nOuter indeces: \n";
+        stream << "\nOuter indices: \n";
         for (unsigned i = 0; i < m_rows + 1; ++i) {
             stream << m_outerStarts[i] << " ";
         }
@@ -493,7 +514,7 @@ namespace iDynTree {
     void SparseMatrix::Iterator::updateTriplet()
     {
         m_currentTriplet.m_value = &(m_matrix.m_values(m_index));
-        m_currentTriplet.m_column = m_matrix.m_innerIndeces[m_index];
+        m_currentTriplet.m_column = m_matrix.m_innerIndices[m_index];
 
         if (--m_nonZerosInRow <= 0) {
             //increment row
@@ -561,7 +582,7 @@ namespace iDynTree {
     {
         return &m_currentTriplet;
     }
-    
+
     bool SparseMatrix::Iterator::isValid() const
     {
         return m_index >= 0
@@ -589,7 +610,7 @@ namespace iDynTree {
     void SparseMatrix::ConstIterator::updateTriplet()
     {
         m_currentTriplet.value = m_matrix.m_values(m_index);
-        m_currentTriplet.column = m_matrix.m_innerIndeces[m_index];
+        m_currentTriplet.column = m_matrix.m_innerIndices[m_index];
 
         if (--m_nonZerosInRow <= 0) {
             //increment row

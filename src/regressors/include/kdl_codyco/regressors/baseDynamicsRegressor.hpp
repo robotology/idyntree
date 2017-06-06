@@ -33,7 +33,7 @@ class baseDynamicsRegressor : public DynamicRegressorInterface
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
     const iDynTree::SensorsList * p_sensors_tree;
 
-    const std::vector<int> linkIndeces2regrCols;
+    const std::vector<int> linkIndices2regrCols;
 
     bool verbose;
 
@@ -56,17 +56,17 @@ class baseDynamicsRegressor : public DynamicRegressorInterface
          *
          */
         baseDynamicsRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
-                              const std::vector<int> & _linkIndeces2regrCols,
+                              const std::vector<int> & _linkIndices2regrCols,
                                      bool _verbose=true):
                                             p_undirected_tree(&_undirected_tree),
-                                            linkIndeces2regrCols(_linkIndeces2regrCols),
+                                            linkIndices2regrCols(_linkIndices2regrCols),
                                             verbose(_verbose)
         {
-            assert(linkIndeces2regrCols.size() == p_undirected_tree->getNrOfLinks());
+            assert(linkIndices2regrCols.size() == p_undirected_tree->getNrOfLinks());
             NrOfRealLinks_subtree = 0;
-            for(int ll=0; ll < (int)linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
+            for(int ll=0; ll < (int)linkIndices2regrCols.size(); ll++ ) { if( linkIndices2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
             assert(NrOfRealLinks_subtree >= 0);
-            assert(NrOfRealLinks_subtree <= (int)linkIndeces2regrCols.size());
+            assert(NrOfRealLinks_subtree <= (int)linkIndices2regrCols.size());
         }
 
         virtual ~baseDynamicsRegressor() {};

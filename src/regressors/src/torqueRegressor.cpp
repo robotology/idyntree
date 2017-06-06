@@ -115,8 +115,8 @@ int torqueRegressor::configure()
             {
                 //if the parent is in the subtree (true/white) but it is connected to the link by an activated FT sensor
                 is_link_in_subtree[link_id] = false;
-                //In this case we have to add the parent to subtree_leaf_links_indeces
-                subtree_leaf_links_indeces.push_back(parent_id);
+                //In this case we have to add the parent to subtree_leaf_links_indices
+                subtree_leaf_links_indices.push_back(parent_id);
 
             }
             else if ( junction_index == torque_dof_index )
@@ -141,7 +141,7 @@ int torqueRegressor::configure()
         }
     }
 
-    iDynTree::Regressors::DynamicsRegressorParametersList localSerialization = getLegacyUsedParameters(linkIndeces2regrCols,
+    iDynTree::Regressors::DynamicsRegressorParametersList localSerialization = getLegacyUsedParameters(linkIndices2regrCols,
                                 p_sensors_tree->getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),
                                 this->consider_ft_offset);
 
@@ -162,9 +162,9 @@ std::vector<int> torqueRegressor::getRelativeJunctions()
 
 iDynTree::Regressors::DynamicsRegressorParametersList torqueRegressor::getUsedParameters()
 {
-    assert(p_undirected_tree->getNrOfLinks() == linkIndeces2regrCols.size());
+    assert(p_undirected_tree->getNrOfLinks() == linkIndices2regrCols.size());
 
-    return getLegacyUsedParameters(linkIndeces2regrCols,
+    return getLegacyUsedParameters(linkIndices2regrCols,
                                    activated_ft_sensors.size(),
                                    this->consider_ft_offset);
 }
@@ -209,13 +209,13 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
     for(int i =0; i < (int)subtree_links_indices.size(); i++ ) {
         int link_id = subtree_links_indices[i];
 
-        if( linkIndeces2regrCols[link_id] != -1 ) {
+        if( linkIndices2regrCols[link_id] != -1 ) {
             #ifdef NDEBUG
             if( verbose ) std::cerr << "Adding to the torque regressor of joint " << torque_dof_it->getName() << " the regressor relative to link " << p_undirected_tree->getLink(link_id)->getName() << std::endl;
             #endif
 
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);
-            regressor_local_parametrization.block(0,(int)(10*linkIndeces2regrCols[link_id]),getNrOfOutputs(),10)
+            regressor_local_parametrization.block(0,(int)(10*linkIndices2regrCols[link_id]),getNrOfOutputs(),10)
                 = toEigen(S).transpose()*WrenchTransformationMatrix(X_dynamic_base[subtree_root_link_id].Inverse()*X_dynamic_base[link_id])*netWrenchRegressor_i;
         }
     }
@@ -234,9 +234,9 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
     // In particular, the offset of a sensor is considered
     // as an addictive on the measured wrench, so f_s = f_sr + f_o, where the frame of expression
     // and the sign of f_s are defined in the SensorsTree structure
-    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indeces.size(); leaf_id++ ) {
+    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indices.size(); leaf_id++ ) {
         if( consider_ft_offset ) {
-            int leaf_link_id = subtree_leaf_links_indeces[leaf_id];
+            int leaf_link_id = subtree_leaf_links_indices[leaf_id];
 
             // for now we are supporting just one six axis FT sensor for link
             //std::vector< FTSensor> fts_link = ft_list.getFTSensorsOnLink(leaf_link_id);
@@ -256,7 +256,7 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
                                     << sens->getName() << std::endl;
             #endif
 
-            /** \todo find a more robust way to get columns indeces relative to a given parameters */
+            /** \todo find a more robust way to get columns indices relative to a given parameters */
             assert(ft_id >= 0 && ft_id < 100);
             assert(10*NrOfRealLinks_subtree+6*ft_id+5 < regressor_local_parametrization.cols());
 
@@ -287,8 +287,8 @@ int torqueRegressor::computeRegressor(const KDL::JntArray &q,
     //std::cerr << "computing kt " << std::endl;
     //std::cerr << (ft_list).toString();
 #endif
-    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indeces.size(); leaf_id++ ) {
-        int leaf_link_id = subtree_leaf_links_indeces[leaf_id];
+    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indices.size(); leaf_id++ ) {
+        int leaf_link_id = subtree_leaf_links_indices[leaf_id];
 
         int ft_id = getFirstFTSensorOnLink(*p_sensors_tree,leaf_link_id);
         assert( ft_id >= 0 );
@@ -329,7 +329,7 @@ std::cout << known_terms << std::endl;
 bool torqueRegressor::setGlobalParameters(const iDynTree::Regressors::DynamicsRegressorParametersList& globalParameters)
 {
     iDynTree::Regressors::DynamicsRegressorParametersList localSerialiaziation =
-        getLegacyUsedParameters(linkIndeces2regrCols,
+        getLegacyUsedParameters(linkIndices2regrCols,
                                 p_sensors_tree->getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),
                                 this->consider_ft_offset);
 

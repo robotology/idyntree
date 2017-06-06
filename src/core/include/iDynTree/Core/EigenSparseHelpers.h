@@ -20,8 +20,8 @@ inline Eigen::Map< Eigen::SparseMatrix<double, Eigen::RowMajor> > toEigen(iDynTr
     return Eigen::Map<Eigen::SparseMatrix<double, Eigen::RowMajor> >(mat.rows(),
                                                                      mat.columns(),
                                                                      mat.numberOfNonZeros(),
-                                                                     mat.outerIndecesBuffer(),
-                                                                     mat.innerIndecesBuffer(),
+                                                                     mat.outerIndicesBuffer(),
+                                                                     mat.innerIndicesBuffer(),
                                                                      mat.valuesBuffer(),
                                                                      0); //compressed format
 }
@@ -31,8 +31,8 @@ inline Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor> > toEigen(c
     return Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor> >(mat.rows(),
                                                                            mat.columns(),
                                                                            mat.numberOfNonZeros(),
-                                                                           mat.outerIndecesBuffer(),
-                                                                           mat.innerIndecesBuffer(),
+                                                                           mat.outerIndicesBuffer(),
+                                                                           mat.innerIndicesBuffer(),
                                                                            mat.valuesBuffer(),
                                                                            0); //compressed format
 }

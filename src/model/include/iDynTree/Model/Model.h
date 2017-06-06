@@ -50,7 +50,7 @@ namespace iDynTree
      * and joint are added to the model using the `addLink` and `addJoint`
      * methods.
      *
-     * The DOF indeces are also assigned when the joint is added to the model
+     * The DOF indices are also assigned when the joint is added to the model
      * with the addJoint method. For example if a model is composed only of
      * 0 or 1 DOF joints and the 1 DOFs joints are added before the 0 DOFs then
      * the joint index and dof index for 1 DOF joints will be coincident (this is
@@ -62,7 +62,7 @@ namespace iDynTree
      * "main" link frame of the link with the same index. The frame indices
      * between getNrOfLinks() and getNrOfFrames()-1 are assigned when the additional
      * frame is added to the model with the addAdditionalFrameToLink call. All the additional
-     * frame indeces are increased of 1 whenever a new link is added, to ensure that
+     * frame indices are increased of 1 whenever a new link is added, to ensure that
      * its "link frame" has a frame index in the 0...getNrOfLinks()-1 range.
      *
      *
@@ -85,7 +85,7 @@ namespace iDynTree
         std::vector<Transform> additionalFrames;
 
         /**
-         *  Vector of link indeces corresponding to an additional frame.
+         *  Vector of link indices corresponding to an additional frame.
          *  The element additionalFrameNames[frameOffset] will be the link_H_frame transform  of the frame with
          *  FrameIndex getNrOfLinks() + frameOffset .
          */
@@ -422,7 +422,7 @@ namespace iDynTree
          *
          * The output vector of inertial parameters must have 10*getNrOfLinks() elements,
          * each 10 elements subvector corresponds to the inertial parameters of one link,
-         * following the serialization induced by the link indeces
+         * following the serialization induced by the link indices
          * (link 0 corresponds to elements 0-9, link 1 to 10-19, etc).
          *
          * The mapping between the SpatialInertia class and the Vector10 elements is the one
@@ -441,7 +441,7 @@ namespace iDynTree
          *
          * The input vector of inertial parameters must have 10*getNrOfLinks() elements,
          * each 10 elements subvector corresponds to the inertial parameters of one link,
-         * following the serialization induced by the link indeces
+         * following the serialization induced by the link indices
          * (link 0 corresponds to elements 0-9, link 1 to 10-19, etc).
          *
          * The mapping between the SpatialInertia class and the Vector10 elements is the one

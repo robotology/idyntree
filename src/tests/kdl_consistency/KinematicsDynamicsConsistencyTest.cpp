@@ -90,7 +90,7 @@ void testFwdKinConsistency(std::string modelFilePath)
 
 
     // Build a map between KDL joints and iDynTree joints because we are not sure
-    // that the joint indeces will match
+    // that the joint indices will match
     std::vector<int> kdl2idyntree_joints;
     kdl2idyntree_joints.resize(undirected_tree.getNrOfDOFs());
 
@@ -121,7 +121,7 @@ void testFwdKinConsistency(std::string modelFilePath)
 
 
     // Build a map between KDL links and iDynTree links because we are not sure
-    // that the link indeces will match
+    // that the link indices will match
     std::vector<int> idynTree2KDL_links;
     idynTree2KDL_links.resize(model.getNrOfLinks());
 

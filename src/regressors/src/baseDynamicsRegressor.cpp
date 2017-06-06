@@ -23,7 +23,7 @@ namespace Regressors {
 
 int baseDynamicsRegressor::configure()
 {
-    iDynTree::Regressors::DynamicsRegressorParametersList localSerialization = getLegacyUsedParameters(linkIndeces2regrCols);
+    iDynTree::Regressors::DynamicsRegressorParametersList localSerialization = getLegacyUsedParameters(linkIndices2regrCols);
 
     regressor_local_parametrization.resize(6,localSerialization.parameters.size());
 
@@ -43,9 +43,9 @@ std::vector<int> baseDynamicsRegressor::getRelativeJunctions()
 
 iDynTree::Regressors::DynamicsRegressorParametersList baseDynamicsRegressor::getUsedParameters()
 {
-    assert(p_undirected_tree->getNrOfLinks() == linkIndeces2regrCols.size());
+    assert(p_undirected_tree->getNrOfLinks() == linkIndices2regrCols.size());
 
-    return getLegacyUsedParameters(linkIndeces2regrCols);
+    return getLegacyUsedParameters(linkIndices2regrCols);
 }
 
 
@@ -76,9 +76,9 @@ int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
 
     for(int link_id =0; link_id < (int)undirected_tree.getNrOfLinks(); link_id++ ) {
 
-        if( linkIndeces2regrCols[link_id] != -1 ) {
+        if( linkIndices2regrCols[link_id] != -1 ) {
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);
-            regressor_local_parametrization.block(0,(int)(10*linkIndeces2regrCols[link_id]),getNrOfOutputs(),10) = WrenchTransformationMatrix(X_dynamic_base[link_id])*netWrenchRegressor_i;
+            regressor_local_parametrization.block(0,(int)(10*linkIndices2regrCols[link_id]),getNrOfOutputs(),10) = WrenchTransformationMatrix(X_dynamic_base[link_id])*netWrenchRegressor_i;
         }
     }
 
@@ -90,7 +90,7 @@ int baseDynamicsRegressor::computeRegressor(const KDL::JntArray &q,
 bool baseDynamicsRegressor::setGlobalParameters(const iDynTree::Regressors::DynamicsRegressorParametersList& globalParameters)
 {
     iDynTree::Regressors::DynamicsRegressorParametersList localSerialiaziation =
-        getLegacyUsedParameters(linkIndeces2regrCols);
+        getLegacyUsedParameters(linkIndices2regrCols);
 
     buildParametersMapping(localSerialiaziation,globalParameters,this->localParametersIndexToOutputParametersIndex);
 

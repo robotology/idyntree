@@ -251,7 +251,7 @@ namespace iDynTree {
 
         size_t nrOfSupportLinks = supportFrames.size();
 
-        IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndeces.resize(0);
+        IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices.resize(0);
         std::vector<iDynTree::Transform> world_H_support(nrOfSupportLinks);
 
         for (int i=0; i < nrOfSupportLinks; i++)
@@ -275,7 +275,7 @@ namespace iDynTree {
                 return false;
             }
 
-            IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndeces.push_back(frameIndex);
+            IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices.push_back(frameIndex);
 
             // Store the constrained value for this frame
             world_H_support[i] = constraintIt->second.getTransform();
@@ -311,7 +311,7 @@ namespace iDynTree {
         // Compute center of mass in the first constraint frame
         iDynTree::KinDynComputations & kinDyn = IK_PIMPL(m_pimpl)->m_dynamics;
         iDynTree::Position comInAbsoluteConstraintFrame =
-            IK_PIMPL(m_pimpl)->m_comHullConstraint.absoluteFrame_X_supportFrame[0]*(kinDyn.getWorldTransform(IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndeces[0]).inverse()*kinDyn.getCenterOfMassPosition());
+            IK_PIMPL(m_pimpl)->m_comHullConstraint.absoluteFrame_X_supportFrame[0]*(kinDyn.getWorldTransform(IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices[0]).inverse()*kinDyn.getCenterOfMassPosition());
 
         iDynTree::Vector2 comProjection = IK_PIMPL(m_pimpl)->m_comHullConstraint.project(comInAbsoluteConstraintFrame);
         return IK_PIMPL(m_pimpl)->m_comHullConstraint.computeMargin(comProjection);
@@ -460,23 +460,23 @@ namespace iDynTree {
     {
         return IK_PIMPL(m_pimpl)->dynamics().model();
     }
-    
+
     bool InverseKinematics::isCoMTargetActive()
     {
         return IK_PIMPL(m_pimpl)->isCoMTargetActive();
     }
-    
+
     void InverseKinematics::setCoMTarget(Position& desiredPosition, double weight)
     {
         IK_PIMPL(m_pimpl)->setCoMTarget(desiredPosition, weight);
     }
-    
+
     void InverseKinematics::setCoMasConstraintTolerance(double tolerance)
     {
         IK_PIMPL(m_pimpl)->setCoMasConstraintTolerance(tolerance);
     }
 
-    
+
     void InverseKinematics::setCoMTargetInactive()
     {
         IK_PIMPL(m_pimpl)->setCoMTargetInactive();

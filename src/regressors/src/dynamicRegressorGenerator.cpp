@@ -105,8 +105,8 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::Undirect
 
     //Take into account the real or fake links
     is_link_real.resize(undirected_tree.getNrOfLinks(),true);
-    linkIndeces2regrColumns.resize(undirected_tree.getNrOfLinks(),-1);
-    regrColumns2linkIndeces.resize(NrOfRealLinks_gen,-1);
+    linkIndices2regrColumns.resize(undirected_tree.getNrOfLinks(),-1);
+    regrColumns2linkIndices.resize(NrOfRealLinks_gen,-1);
     for(int ll=0; ll < (int)fake_links_names.size(); ll++ ) {
         KDL::CoDyCo::LinkMap::const_iterator link_it = undirected_tree.getLink(fake_links_names[ll]);
         if( link_it == undirected_tree.getInvalidLinkIterator() )
@@ -121,11 +121,11 @@ DynamicRegressorGenerator::DynamicRegressorGenerator(const KDL::CoDyCo::Undirect
     for(int link_index=0; link_index < (int)undirected_tree.getNrOfLinks(); link_index++ ) {
         if( is_link_real[link_index] ) {
             assert( regressor_link_index < NrOfRealLinks_gen );
-            linkIndeces2regrColumns[link_index] = regressor_link_index;
-            regrColumns2linkIndeces[regressor_link_index] = link_index;
+            linkIndices2regrColumns[link_index] = regressor_link_index;
+            regrColumns2linkIndices[regressor_link_index] = link_index;
             regressor_link_index++;
         } else {
-           linkIndeces2regrColumns[link_index] = -1;
+           linkIndices2regrColumns[link_index] = -1;
         }
     }
     assert(regressor_link_index == NrOfRealLinks_gen);
@@ -907,7 +907,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV2(Eige
 
         int link_index = link_it->getLinkIndex();
 
-        int regressor_link_index = linkIndeces2regrColumns[link_index];
+        int regressor_link_index = linkIndices2regrColumns[link_index];
 
         if( regressor_link_index == -1 ) {
             //This link is fake link introduced in the structure to simulate multidof systems
@@ -950,12 +950,12 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceV2(Eige
          //Suboptimal
          /** \todo improve */
          for(int n = 0; n < (int)undirected_tree.getNrOfLinks(); n++ ) {
-             if( !link_is_descendant[n] || linkIndeces2regrColumns[n] == -1 ) { continue; }
+             if( !link_is_descendant[n] || linkIndices2regrColumns[n] == -1 ) { continue; }
              for(int m = 0; m < (int)undirected_tree.getNrOfLinks(); m++ ) {
-                if( !link_is_descendant[m] || linkIndeces2regrColumns[m] == -1) { continue; }
+                if( !link_is_descendant[m] || linkIndices2regrColumns[m] == -1) { continue; }
 
-                sparseA.block<10,10>(10*linkIndeces2regrColumns[n],10*linkIndeces2regrColumns[m]) =
-                    A.block<10,10>(10*linkIndeces2regrColumns[n],10*linkIndeces2regrColumns[m]);
+                sparseA.block<10,10>(10*linkIndices2regrColumns[n],10*linkIndices2regrColumns[m]) =
+                    A.block<10,10>(10*linkIndices2regrColumns[n],10*linkIndices2regrColumns[m]);
              }
          }
 
@@ -1061,7 +1061,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleA
 
         int link_index = link_it->getLinkIndex();
 
-        int regressor_link_index = linkIndeces2regrColumns[link_index];
+        int regressor_link_index = linkIndices2regrColumns[link_index];
 
         if( regressor_link_index == -1 ) {
             //This link is fake link introduced in the structure to simulate multidof systems
@@ -1157,7 +1157,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceAdvance
 
         int link_index = link_it->getLinkIndex();
 
-        int regressor_link_index = linkIndeces2regrColumns[link_index];
+        int regressor_link_index = linkIndices2regrColumns[link_index];
 
         if( regressor_link_index == -1 ) {
             //This link is fake link introduced in the structure to simulate multidof systems
@@ -1308,7 +1308,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceAdvance
 
         int link_index = link_it->getLinkIndex();
 
-        int regressor_link_index = linkIndeces2regrColumns[link_index];
+        int regressor_link_index = linkIndices2regrColumns[link_index];
 
         if( regressor_link_index == -1 ) {
             //This link is fake link introduced in the structure to simulate multidof systems
@@ -1411,9 +1411,9 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceAdvance
          //Suboptimal
          /** \todo improve */
          for(int n = 0; n < (int)undirected_tree.getNrOfLinks(); n++ ) {
-             if( !link_is_descendant[n] || linkIndeces2regrColumns[n] == -1 ) { continue; }
+             if( !link_is_descendant[n] || linkIndices2regrColumns[n] == -1 ) { continue; }
 
-              projector_B_nu_i.block<10,10>(10*linkIndeces2regrColumns[n],10*linkIndeces2regrColumns[n]) = Eigen::Matrix<double,10,10>::Identity();
+              projector_B_nu_i.block<10,10>(10*linkIndices2regrColumns[n],10*linkIndices2regrColumns[n]) = Eigen::Matrix<double,10,10>::Identity();
 
          }
 
@@ -1498,7 +1498,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleP
 
         int link_index = link_it->getLinkIndex();
 
-        int regressor_link_index = linkIndeces2regrColumns[link_index];
+        int regressor_link_index = linkIndices2regrColumns[link_index];
 
         if( regressor_link_index == -1 ) {
             //This link is fake link introduced in the structure to simulate multidof systems
@@ -1555,9 +1555,9 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleP
          //Suboptimal
          /** \todo improve */
          for(int n = 0; n < (int)undirected_tree.getNrOfLinks(); n++ ) {
-             if( !link_is_descendant[n] || linkIndeces2regrColumns[n] == -1 ) { continue; }
+             if( !link_is_descendant[n] || linkIndices2regrColumns[n] == -1 ) { continue; }
 
-              projector_B_nu_i.block<10,10>(10*linkIndeces2regrColumns[n],10*linkIndeces2regrColumns[n]) = Eigen::Matrix<double,10,10>::Identity();
+              projector_B_nu_i.block<10,10>(10*linkIndices2regrColumns[n],10*linkIndices2regrColumns[n]) = Eigen::Matrix<double,10,10>::Identity();
 
          }
 
@@ -1638,7 +1638,7 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleG
 
         int link_index = link_it->getLinkIndex();
 
-        int regressor_link_index = linkIndeces2regrColumns[link_index];
+        int regressor_link_index = linkIndices2regrColumns[link_index];
 
         if( regressor_link_index == -1 ) {
             //This link is fake link introduced in the structure to simulate multidof systems
@@ -1700,9 +1700,9 @@ int DynamicRegressorGenerator::computeSparseNumericalIdentifiableSubspaceSimpleG
          /** \todo improve */
          int free_column = 0;
          for(int n = 0; n < (int)undirected_tree.getNrOfLinks(); n++ ) {
-             if( !link_is_descendant[n] || linkIndeces2regrColumns[n] == -1 ) { continue; }
+             if( !link_is_descendant[n] || linkIndices2regrColumns[n] == -1 ) { continue; }
 
-              B_nu_i.block<10,10>(10*linkIndeces2regrColumns[n],free_column) = Eigen::Matrix<double,10,10>::Identity();
+              B_nu_i.block<10,10>(10*linkIndices2regrColumns[n],free_column) = Eigen::Matrix<double,10,10>::Identity();
               free_column+= 10;
          }
 
@@ -1864,8 +1864,8 @@ std::string DynamicRegressorGenerator::analyseSparseBaseSubspace(const Eigen::Ma
         parameter_type = -1;
         for(int link_id = 0; link_id < (int)undirected_tree.getNrOfLinks(); link_id++) {
             //std::cout << "analyseSparseBaseSubspace: bp " << bp << " considering link " << link_id << std::endl;
-            if( linkIndeces2regrColumns[link_id] == -1 ) { continue; } // fake link, don't consider
-            int regr_link_id = linkIndeces2regrColumns[link_id];
+            if( linkIndices2regrColumns[link_id] == -1 ) { continue; } // fake link, don't consider
+            int regr_link_id = linkIndices2regrColumns[link_id];
 
             for( int local_param=0; local_param < 10; local_param++ ) {
                 int p = 10*regr_link_id+local_param;
@@ -1878,7 +1878,7 @@ std::string DynamicRegressorGenerator::analyseSparseBaseSubspace(const Eigen::Ma
                 if( fabs(full_basis_projection(bp,p)) > tol ) {
                     if( relative_link == -1 ) {
                         //Check the first nonzero parameter
-                        relative_link = regrColumns2linkIndeces[regr_link_id];
+                        relative_link = regrColumns2linkIndices[regr_link_id];
                         //if the element of the matrix is 1, the base parameter is of type III
                         if(fabs(full_basis_projection(bp,p)-1) < tol ) {
                             parameter_type = 3;
@@ -1889,7 +1889,7 @@ std::string DynamicRegressorGenerator::analyseSparseBaseSubspace(const Eigen::Ma
                             comp_ident_parameter = -1;
                         }
                     } else {
-                        if( regrColumns2linkIndeces[regr_link_id] != relative_link ) {
+                        if( regrColumns2linkIndices[regr_link_id] != relative_link ) {
                             parameter_type = 1;
                             comp_ident_parameter = -1;
                             //and then we can exit from the loop
@@ -1980,7 +1980,7 @@ int DynamicRegressorGenerator::addSubtreeRegressorRows(const std::vector< std::s
     DynamicRegressorInterface * new_regr;
     subtreeBaseDynamicsRegressor * new_st_regr;
 
-    new_st_regr = new subtreeBaseDynamicsRegressor(undirected_tree,sensorsList,linkIndeces2regrColumns,_subtree_leaf_links,consider_ft_offset,verbose);
+    new_st_regr = new subtreeBaseDynamicsRegressor(undirected_tree,sensorsList,linkIndices2regrColumns,_subtree_leaf_links,consider_ft_offset,verbose);
 
     new_regr = (DynamicRegressorInterface *) new_st_regr;
 
@@ -2008,7 +2008,7 @@ int DynamicRegressorGenerator::addTorqueRegressorRows(const std::string & dof_na
     DynamicRegressorInterface * new_regr;
     torqueRegressor * new_st_regr;
 
-    new_st_regr = new torqueRegressor(undirected_tree,sensorsList,linkIndeces2regrColumns,dof_name,reverse_direction,_activated_ft_sensors,consider_ft_offset,verbose);
+    new_st_regr = new torqueRegressor(undirected_tree,sensorsList,linkIndices2regrColumns,dof_name,reverse_direction,_activated_ft_sensors,consider_ft_offset,verbose);
 
     new_regr = (DynamicRegressorInterface *) new_st_regr;
 
@@ -2081,7 +2081,7 @@ int DynamicRegressorGenerator::addBaseRegressorRows()
     DynamicRegressorInterface * new_regr;
     baseDynamicsRegressor * new_base_regr;
 
-    new_base_regr = new baseDynamicsRegressor(undirected_tree,linkIndeces2regrColumns,verbose);
+    new_base_regr = new baseDynamicsRegressor(undirected_tree,linkIndices2regrColumns,verbose);
 
     new_regr = (DynamicRegressorInterface *) new_base_regr;
 

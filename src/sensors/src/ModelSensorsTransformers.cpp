@@ -44,7 +44,7 @@ bool createReducedModelAndSensors(const Model& fullModel,
         // If the sensor at which the sensor is attached is not in the reduced model, drop the sensor
         if( reducedModel.isJointNameUsed(parentJointName) )
         {
-            // If we add the sensor to the new sensors list, we have to upgrade the indeces
+            // If we add the sensor to the new sensors list, we have to upgrade the indices
             SixAxisForceTorqueSensor* sensorCopy = (SixAxisForceTorqueSensor*)pSens->clone();
 
             // For now we assume that the two links at which the FT sensors is attached are not reduced.
@@ -66,8 +66,8 @@ bool createReducedModelAndSensors(const Model& fullModel,
                 return false;
             }
 
-            // Update indeces
-            sensorCopy->updateIndeces(reducedModel);
+            // Update indices
+            sensorCopy->updateIndices(reducedModel);
 
             reducedSensors.addSensor(*sensorCopy);
 
@@ -92,8 +92,8 @@ bool createReducedModelAndSensors(const Model& fullModel,
             {
                 // update the link index of the reduced model
                 LinkSensor *sensorInReducedModel = static_cast<LinkSensor*>(linkSens->clone());
-                if (!sensorInReducedModel || !sensorInReducedModel->updateIndeces(reducedModel)) {
-                    reportError("","createReducedModelAndSensors", "Failed to duplicate LinkSensor and update indeces");
+                if (!sensorInReducedModel || !sensorInReducedModel->updateIndices(reducedModel)) {
+                    reportError("","createReducedModelAndSensors", "Failed to duplicate LinkSensor and update indices");
                     return false;
                 }
                 reducedSensors.addSensor(*sensorInReducedModel);
@@ -128,7 +128,7 @@ bool createReducedModelAndSensors(const Model& fullModel,
                 // Update the pose
                 sensorCopy->setLinkSensorTransform(sensorLinkInReducedModel_H_sensorFrame);
 
-                // Update the link name and indeces
+                // Update the link name and indices
                 sensorCopy->setParentLink(sensorLinkInReducedModel);
                 sensorCopy->setParentLinkIndex(reducedModel.getLinkIndex(sensorLinkInReducedModel));
 

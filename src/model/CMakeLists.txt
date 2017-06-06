@@ -35,7 +35,7 @@ set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/ForwardKinematics.cpp
                            src/FreeFloatingState.cpp
                            src/FreeFloatingMatrices.cpp
-                           src/Indeces.cpp
+                           src/Indices.cpp
                            src/Dynamics.cpp
                            src/DynamicsLinearization.cpp
                            src/DynamicsLinearizationHelpers.cpp
