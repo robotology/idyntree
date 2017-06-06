@@ -26,17 +26,21 @@
 #if __cplusplus >= 201402L
   #if defined(__has_cpp_attribute)
     #if __has_cpp_attribute(deprecated)
-      #define IDYNTREE_DEPRECATED(msg, func) [[deprecated(msg)]] func
+      #define IDYNTREE_DEPRECATED [[deprecated]]
+      #define IDYNTREE_DEPRECATED_WITH_MSG(msg) [[deprecated(msg)]]
     #endif
   #endif
 // Earlier standards
 #else
   #if defined(__GNUC__) || defined(__clang__)
-    #define IDYNTREE_DEPRECATED(msg, func) func __attribute__ ((deprecated(msg)))
+    #define IDYNTREE_DEPRECATED __attribute__((deprecated))
+    #define IDYNTREE_DEPRECATED_WITH_MSG(msg) __attribute__((deprecated(msg)))
   #elif defined(_MSC_VER)
-    #define IDYNTREE_DEPRECATED(msg, func) __declspec(deprecated(msg)) func
+    #define IDYNTREE_DEPRECATED __declspec(deprecated)
+    #define IDYNTREE_DEPRECATED_WITH_MSG(msg) __declspec(deprecated(msg))
   #else
-    #define IDYNTREE_DEPRECATED(msg, func)
+    #define IDYNTREE_DEPRECATED
+    #define IDYNTREE_DEPRECATED_WITH_MSG(msg)
   #endif
 #endif
 
