@@ -235,13 +235,14 @@ public:
 
     double const * valuesBuffer() const;
 
-    int * innerIndecesBuffer();
 
-    int const * innerIndecesBuffer() const;
 
-    int * outerIndecesBuffer();
 
-    int const * outerIndecesBuffer() const;
+    // Deprecated
+    int * IDYNTREE_DEPRECATED_WITH_MSG("Use innerIndicesBuffer() instead") innerIndecesBuffer();
+    int const * IDYNTREE_DEPRECATED_WITH_MSG("Use innerIndicesBuffer() instead") innerIndecesBuffer()const;
+    int * IDYNTREE_DEPRECATED_WITH_MSG("Use outerIndicesBuffer() instead") outerIndecesBuffer();
+    int const * IDYNTREE_DEPRECATED_WITH_MSG("Use outerIndicesBuffer() instead") outerIndecesBuffer() const;
 
 
 
