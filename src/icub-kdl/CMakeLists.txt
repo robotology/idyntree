@@ -52,7 +52,6 @@ if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
 else()
     target_include_directories(${libraryname} INTERFACE ${skinDynLib_INCLUDE_DIRS} ${iDyn_INCLUDE_DIRS})
 endif()
-                
 
 include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS}
                            ${iDyn_INCLUDE_DIRS}
@@ -64,6 +63,10 @@ include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS}
 # Ensure that build include directories are always included before system ones
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
+
+if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
+    target_compile_options(${libraryname} PRIVATE "-Wno-deprecated")
+endif()
 
 install(TARGETS idyntree-icub-kdl
         EXPORT iDynTree

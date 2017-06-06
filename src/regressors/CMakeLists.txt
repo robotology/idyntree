@@ -39,6 +39,10 @@ target_link_libraries(${libraryname} idyntree-core idyntree-sensors idyntree-mod
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
 
+if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
+    target_compile_options(${libraryname} PRIVATE "-Wno-deprecated")
+endif()
+
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_REGRESSORS_HEADERS})
 
 install(TARGETS ${libraryname}
@@ -56,4 +60,3 @@ set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
 get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
-
