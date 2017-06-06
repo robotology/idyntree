@@ -26,7 +26,6 @@ endif()
 
 if(IDYNTREE_USES_KDL)
     add_subdirectory(kdl)
-    add_subdirectory(regressors)
     if(IDYNTREE_USES_YARP)
         add_subdirectory(yarp-kdl)
         add_subdirectory(estimation-kdl)
@@ -34,8 +33,13 @@ if(IDYNTREE_USES_KDL)
             add_subdirectory(icub-kdl)
         endif()
     endif()
-    add_subdirectory(high-level-kdl)
 endif()
+
+# This should directory should not compiled if IDYNTREE_USES_KDL
+# is not enabled, but they are necessary to compile the bindings,
+# see https://github.com/robotology/idyntree/issues/227
+add_subdirectory(high-level-kdl)
+add_subdirectory(regressors)
 
 add_subdirectory(visualization)
 
