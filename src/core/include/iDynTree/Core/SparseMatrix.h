@@ -10,6 +10,7 @@
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/Triplets.h>
+#include <iDynTree/Core/Utils.h>
 #include <vector>
 
 namespace iDynTree {
@@ -244,10 +245,10 @@ public:
     int const * outerIndicesBuffer() const;
 
     // Deprecated
-    int * IDYNTREE_DEPRECATED_WITH_MSG("Use innerIndicesBuffer() instead") innerIndecesBuffer();
-    int const * IDYNTREE_DEPRECATED_WITH_MSG("Use innerIndicesBuffer() instead") innerIndecesBuffer()const;
-    int * IDYNTREE_DEPRECATED_WITH_MSG("Use outerIndicesBuffer() instead") outerIndecesBuffer();
-    int const * IDYNTREE_DEPRECATED_WITH_MSG("Use outerIndicesBuffer() instead") outerIndecesBuffer() const;
+    IDYNTREE_DEPRECATED_WITH_MSG("Use innerIndicesBuffer() instead") int * innerIndecesBuffer();
+    IDYNTREE_DEPRECATED_WITH_MSG("Use innerIndicesBuffer() instead") int const * innerIndecesBuffer() const;
+    IDYNTREE_DEPRECATED_WITH_MSG("Use outerIndicesBuffer() instead") int * outerIndecesBuffer();
+    IDYNTREE_DEPRECATED_WITH_MSG("Use outerIndicesBuffer() instead") int const * outerIndecesBuffer() const;
 
 
 
