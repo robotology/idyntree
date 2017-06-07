@@ -4,12 +4,38 @@ clone_folder: c:\projects\idyntree
 
 environment:
   Eigen3_DIR:          C:/Program Files (x86)/Eigen/lib/cmake/eigen3/
+  IPOPT_DIR :          C:/Program Files (x86)/robotology/ipopt-3.11.7
 
 os:
  - Visual Studio 2013
- - Visual Studio 2015
 
 install:
+  # to install unzipper do: "cinst 7zip.commandline -x86"
+  # the format is: "7z x c:\path-to-archive\archive.zip -oc:\path-where-unzip -y > nul"
+
+  - ps: >-
+      $dwntool = New-Object System.Net.WebClient
+
+      $Stoploop = $false
+
+      do {
+          try {
+            $dwntool.DownloadFile('https://github.com/robotology/yarp/releases/download/v2.3.66/yarp_2.3.66_v12_x86_1.exe','c:\dev\yarp.exe')
+            $dwntool.DownloadFile('https://github.com/robotology/icub-main/releases/download/v1.4.0/iCub_1.4.0_v12_x86_1.exe','c:\dev\icub.exe')
+            $Stoploop = $true
+          }
+          catch {
+            Start-Sleep -Seconds 15
+          }
+      }
+      While ($Stoploop -eq $false)
+
+  - cmd: start "" /WAIT "c:\dev\yarp.exe" /S
+  - cmd: timeout 10
+  - cmd: start "" /WAIT "c:\dev\icub.exe" /S
+  - cmd: timeout 10
+  - cmd: dir "c:\Program Files (x86)\robotology"
+
 
 build:
 
@@ -37,7 +63,7 @@ build_script:
   - cd c:\projects\idyntree
   - md build
   - cd build
-  - cmake .. -DEIGEN3_INCLUDE_DIR="C:/Program Files (x86)/Eigen/include/eigen3" -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
+  - cmake .. -DEIGEN3_INCLUDE_DIR="C:/Program Files (x86)/Eigen/include/eigen3" -DIDYNTREE_USES_KDL:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_COMPILE_TESTS:BOOL=ON
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" iDynTree.sln
   - cmake --build . --config Release
   - ctest --output-on-failure --build-config Release
