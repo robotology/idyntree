@@ -74,12 +74,12 @@ script:
   - cmake --build . --config ${TRAVIS_BUILD_TYPE}
   - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
   - ctest --output-on-failure --build-config ${TRAVIS_BUILD_TYPE}
-  # test examples 
-  - cd ../examples
-  - mkdir build 
-  - cd build
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
-  - cmake --build . --config ${TRAVIS_BUILD_TYPE}
+  # test examples (only on macOS because on Trusty Eigen3 does not ship with an Eigen3Config.cmake
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cd ../examples ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mkdir build ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cd build ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} .. ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cmake --build . --config ${TRAVIS_BUILD_TYPE} ; fi
 
 notifications:
   email:
