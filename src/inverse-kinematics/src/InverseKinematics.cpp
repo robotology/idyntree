@@ -500,13 +500,13 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->isCoMTargetActive();
     }
     
-    void InverseKinematics::setCoMasConstraint(bool asConstraint)
+    void InverseKinematics::setCoMAsConstraint(bool asConstraint)
     {
         IK_PIMPL(m_pimpl)->setCoMasConstraint(asConstraint);
     }
 
     
-    bool InverseKinematics::isCoMaCOnstraint()
+    bool InverseKinematics::isCoMAConstraint()
     {
         return IK_PIMPL(m_pimpl)->isCoMaConstraint();
     }
@@ -516,7 +516,7 @@ namespace iDynTree {
         IK_PIMPL(m_pimpl)->setCoMTarget(desiredPosition, weight);
     }
 
-    void InverseKinematics::setCoMasConstraintTolerance(double tolerance)
+    void InverseKinematics::setCoMAsConstraintTolerance(double tolerance)
     {
         IK_PIMPL(m_pimpl)->setCoMasConstraintTolerance(tolerance);
     }

@@ -296,7 +296,7 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
     // The two cartesian targets should be reasonable values
     iDynTree::Position comDes = kinDynDes.getCenterOfMassPosition();
     ik.setCoMTarget(comDes, 1);
-    ik.setCoMasConstraintTolerance(1e-8);
+    ik.setCoMAsConstraintTolerance(1e-8);
 
     ik.setTargetResolutionMode(targetResolutionMode);
     
@@ -385,7 +385,7 @@ void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKine
     // The two cartesian targets should be reasonable values
     iDynTree::Position comDes = kinDynDes.getCenterOfMassPosition();
     ik.setCoMTarget(comDes, 1);
-    ik.setCoMasConstraintTolerance(1e-8);
+    ik.setCoMAsConstraintTolerance(1e-8);
 
     ik.setTargetResolutionMode(targetResolutionMode);
     

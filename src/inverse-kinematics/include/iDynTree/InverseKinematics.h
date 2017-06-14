@@ -630,11 +630,11 @@ public:
     
     void setCoMTarget(iDynTree::Position& desiredPosition, double weight = 1.0);
     
-    void setCoMasConstraint(bool asConstraint = true);
+    void setCoMAsConstraint(bool asConstraint = true);
     
-    void setCoMasConstraintTolerance(double tolerance = 1e-8);
+    void setCoMAsConstraintTolerance(double tolerance = 1e-8);
     
-    bool isCoMaCOnstraint();
+    bool isCoMAConstraint();
     
     bool isCoMTargetActive();
     
