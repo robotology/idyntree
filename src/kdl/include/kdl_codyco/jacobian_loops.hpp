@@ -7,6 +7,10 @@
 #ifndef KDL_CODYCO_JACOBIAN_LOOPS_HPP
 #define KDL_CODYCO_JACOBIAN_LOOPS_HPP
 
+#ifdef __DEPRECATED
+  #warning <jacobian_loops.hpp> is deprecated.
+#endif
+
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
 #include <kdl/jacobian.hpp>

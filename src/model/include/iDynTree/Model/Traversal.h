@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_TRAVERSAL_H
 #define IDYNTREE_TRAVERSAL_H
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 #include <vector>
 

@@ -116,7 +116,7 @@ Sensor* GyroscopeSensor::clone() const
     return (Sensor *)new GyroscopeSensor(*this);
 }
 
-bool GyroscopeSensor::updateIndeces(const Model& model)
+bool GyroscopeSensor::updateIndices(const Model& model)
 {
     iDynTree::LinkIndex linkNewIndex = model.getLinkIndex(this->pimpl->parent_link_name);
 
@@ -125,9 +125,15 @@ bool GyroscopeSensor::updateIndeces(const Model& model)
         return false;
     }
 
-    this->pimpl->parent_link_name = linkNewIndex;
+    this->pimpl->parent_link_index = linkNewIndex;
 
     return true;
+}
+
+// Deprecated
+bool GyroscopeSensor::updateIndeces(const Model& model)
+{
+    return updateIndices(model);
 }
 
 

@@ -21,6 +21,10 @@
 #ifndef KDL_CODYCO_GENERALIZEDJNTPOSITIONS_HPP
 #define KDL_CODYCO_GENERALIZEDJNTPOSITIONS_HPP
 
+#ifdef __DEPRECATED
+  #warning <generalizedjntpositions.hpp> is deprecated.
+#endif
+
 #include <kdl/frames.hpp>
 #include <kdl/jntarray.hpp>
 

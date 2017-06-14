@@ -8,23 +8,26 @@ matrix:
   include:
     - os: linux
       compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="ON"
     - os: linux
       compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="ON"
     - os: linux
       compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="ON"
     - os: linux
       compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release",VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release",VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="ON"
+    - os: linux
+      compiler: gcc
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="OFF"
     - os: osx
       compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", COMPILE_BINDINGS="OFF"
+      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", COMPILE_BINDINGS="OFF", FULL_DEPS="ON"
   allow_failures:
     - os: osx
       compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="OFF", COMPILE_BINDINGS="OFF"
+      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="OFF", COMPILE_BINDINGS="OFF", FULL_DEPS="ON"
 
 before_script:
   # workaround around opencv linking problem in clang:
@@ -47,6 +50,9 @@ before_script:
   # install dependencies using the codyco-superbuild script
   - chmod +x ./.ci/travis-deps.sh
   - sh .ci/travis-deps.sh
+  # On Ubuntu, make sure not to use openblas as blas backend, see 
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install libatlas-base-dev; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo update-alternatives --set libblas.so.3  /usr/lib/atlas-base/atlas/libblas.so.3 ; fi
   # On macOS, install ipopt from homebrew 
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ipopt; fi
   - mkdir build
@@ -62,18 +68,18 @@ before_script:
   - mkdir build
   - cd build
   # Xcode has support for multiple configurations. Passing -DCMAKE_BUILD_TYPE is ignored
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=${VALGRIND_TESTS} -DCODYCO_TRAVIS_CI:BOOL=ON -DIDYNTREE_USES_KDL:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=${COMPILE_BINDINGS} -DIDYNTREE_USES_LUA:BOOL=${COMPILE_BINDINGS} -DIDYNTREE_USES_OCTAVE:BOOL=${COMPILE_BINDINGS} ..
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=${VALGRIND_TESTS} -DCODYCO_TRAVIS_CI:BOOL=ON -DIDYNTREE_USES_KDL:BOOL=${FULL_DEPS} -DIDYNTREE_USES_YARP:BOOL=${FULL_DEPS} -DIDYNTREE_USES_ICUB_MAIN:BOOL=${FULL_DEPS}  -DIDYNTREE_USES_PYTHON:BOOL=${COMPILE_BINDINGS} -DIDYNTREE_USES_LUA:BOOL=${COMPILE_BINDINGS} -DIDYNTREE_USES_OCTAVE:BOOL=${COMPILE_BINDINGS} ..
 
 script:
   - cmake --build . --config ${TRAVIS_BUILD_TYPE}
   - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
   - ctest --output-on-failure --build-config ${TRAVIS_BUILD_TYPE}
-  # test examples 
-  - cd ../examples
-  - mkdir build 
-  - cd build
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
-  - cmake --build . --config ${TRAVIS_BUILD_TYPE}
+  # test examples (only on macOS because on Trusty Eigen3 does not ship with an Eigen3Config.cmake
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cd ../examples ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mkdir build ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cd build ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} .. ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cmake --build . --config ${TRAVIS_BUILD_TYPE} ; fi
 
 notifications:
   email:

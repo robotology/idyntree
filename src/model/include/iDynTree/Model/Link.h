@@ -10,7 +10,7 @@
 
 #include <iDynTree/Core/SpatialInertia.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 
 namespace iDynTree

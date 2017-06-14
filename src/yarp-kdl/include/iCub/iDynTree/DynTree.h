@@ -8,15 +8,6 @@
 #ifndef IDYNTREE_H
 #define IDYNTREE_H
 
-#if defined(__GNUC__) || defined(__clang__) //clang defines also __GNUC__, but I check for it anyway
-#define IDYN_DEPRECATED __attribute__((deprecated))
-#elif defined(_MSC_VER)
-#define IDYN_DEPRECATED __declspec(deprecated)
-#else
-#pragma message("WARNING: You need to implement DEPRECATED for this compiler")
-#define IDYN_DEPRECATED
-#endif
-
 #include <yarp/sig/Matrix.h>
 #include <yarp/sig/Vector.h>
 
@@ -24,6 +15,8 @@
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/momentumjacobian.hpp>
 #include <kdl_codyco/floatingjntspaceinertiamatrix.hpp>
+
+#include <iDynTree/Core/Utils.h>
 
 #include "iDynTree/Sensors/Sensors.h"
 
@@ -44,7 +37,7 @@ namespace iDynTree
 const int WORLD_FRAME = -10;
 const int DEFAULT_INDEX_VALUE = -20;
 
-class skinDynLibLinkID {
+class IDYNTREE_DEPRECATED skinDynLibLinkID {
      public:
           int body_part;
           int local_link_index;
@@ -72,7 +65,7 @@ class skinDynLibLinkID {
     }
 };
 
-class iDynTreeLinkAndFrame {
+class IDYNTREE_DEPRECATED iDynTreeLinkAndFrame {
      public:
           int link_index;
           int frame_index;
@@ -94,7 +87,7 @@ class iDynTreeLinkAndFrame {
  *          Relativity generate the same dynamics of the "real" ones
  *
  */
-class DynTree  {
+class IDYNTREE_DEPRECATED_WITH_MSG("Use KinDynComputations instead") DynTree {
     protected:
         /** configured flag: if true the model was correctly loaded
          *  if false not an all the methods will return false */
@@ -963,7 +956,5 @@ class DynTree  {
 }//end namespace
 
 }
-
-#undef IDYN_DEPRECATED
 
 #endif //end IDYNTREE_H

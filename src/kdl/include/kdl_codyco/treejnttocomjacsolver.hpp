@@ -6,6 +6,10 @@
 #ifndef _KDL_CODYCO_TREEJNTTOCOMJACSOLVER_HPP_
 #define _KDL_CODYCO_TREEJNTTOCOMJACSOLVER_HPP_
 
+#ifdef __DEPRECATED
+  #warning <treejnttocomjacsolver.hpp> is deprecated.
+#endif
+
 #include <kdl/tree.hpp>
 #include <kdl/jntarray.hpp>
 

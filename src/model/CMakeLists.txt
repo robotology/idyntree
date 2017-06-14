@@ -14,6 +14,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
                            include/iDynTree/Model/DynamicsLinearization.h
                            include/iDynTree/Model/DynamicsLinearizationHelpers.h
                            include/iDynTree/Model/Indeces.h
+                           include/iDynTree/Model/Indices.h
                            include/iDynTree/Model/Jacobians.h
                            include/iDynTree/Model/JointState.h
                            include/iDynTree/Model/LinkTraversalsCache.h
@@ -34,7 +35,7 @@ set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/ForwardKinematics.cpp
                            src/FreeFloatingState.cpp
                            src/FreeFloatingMatrices.cpp
-                           src/Indeces.cpp
+                           src/Indices.cpp
                            src/Dynamics.cpp
                            src/DynamicsLinearization.cpp
                            src/DynamicsLinearizationHelpers.cpp

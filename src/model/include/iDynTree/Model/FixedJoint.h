@@ -10,7 +10,7 @@
 
 #include <iDynTree/Core/Transform.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/IJoint.h>
 
 namespace iDynTree

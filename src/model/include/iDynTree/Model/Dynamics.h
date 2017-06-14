@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_INVERSE_DYNAMICS_H
 #define IDYNTREE_INVERSE_DYNAMICS_H
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/JointState.h>

@@ -59,8 +59,9 @@ LinkSensor::~LinkSensor()
 
 struct SensorsList::SensorsListPimpl
 {
-    std::vector< std::vector<Sensor *> > allSensors;
-    std::vector< std::map< std::string, unsigned int > > sensorsNameToIndex;
+    std::vector<std::vector<Sensor *> > allSensors;
+    typedef std::map<std::string, size_t> SensorNameToIndexMap;
+    std::vector<SensorNameToIndexMap> sensorsNameToIndex;
 };
 
 SensorsList::SensorsList():
@@ -106,7 +107,7 @@ void SensorsList::destructor()
 {
     for( int sensor_type = 0; sensor_type < NR_OF_SENSOR_TYPES; sensor_type++ )
     {
-        for(unsigned int sensor_index = 0;
+        for(size_t sensor_index = 0;
             sensor_index < this->pimpl->allSensors[sensor_type].size(); sensor_index++ )
         {
             delete this->pimpl->allSensors[sensor_type][sensor_index];
@@ -154,7 +155,7 @@ int SensorsList::addSensor(const Sensor& sensor)
 bool SensorsList::getSerialization(const SensorType& sensor_type, std::vector< std::string >& serializaton)
 {
     serializaton.resize(0);
-    for(unsigned int sensor_index = 0;
+    for (size_t sensor_index = 0;
         sensor_index < this->pimpl->allSensors[sensor_type].size(); sensor_index++ )
     {
         std::string sensorName = this->pimpl->allSensors[sensor_type][sensor_index]->getName();
@@ -187,7 +188,7 @@ bool SensorsList::setSerialization(const SensorType& sensor_type,
     }
 
     this->pimpl->allSensors[sensor_type] = newVecSensors;
-    
+
     return true;
 }
 
@@ -198,7 +199,7 @@ unsigned int SensorsList::getNrOfSensors(const SensorType & sensor_type) const
 
 bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
 {
-    std::map< std::string, unsigned int >::const_iterator it;
+    SensorsListPimpl::SensorNameToIndexMap::const_iterator it;
     it = this->pimpl->sensorsNameToIndex[sensor_type].find(_sensor_name);
     if( it == this->pimpl->sensorsNameToIndex[sensor_type].end() )
     {
@@ -277,10 +278,11 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
             return false;
         Sensor *s = typeVector[sensor_index];
         typeVector.erase(typeVector.begin() + sensor_index);
-        std::map< std::string, unsigned int >& nameToIndex = this->pimpl->sensorsNameToIndex[sensor_type];
-        std::map< std::string, unsigned int >::iterator nameToIndexIterator = nameToIndex.find(s->getName());
-        if (nameToIndexIterator != nameToIndex.end()) {
-            nameToIndex.erase(nameToIndexIterator);
+        SensorsListPimpl::SensorNameToIndexMap& nameToIndex = this->pimpl->sensorsNameToIndex[sensor_type];
+        // We have to rebuild the name->index map as indices have changed
+        nameToIndex.clear();
+        for (size_t index = 0; index < typeVector.size(); ++index) {
+            nameToIndex.insert(SensorsListPimpl::SensorNameToIndexMap::value_type(typeVector[index]->getName(), index));
         }
 
         delete s;

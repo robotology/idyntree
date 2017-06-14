@@ -23,6 +23,10 @@
 
 #pragma once
 
+#ifdef __DEPRECATED
+  #warning <treeidsolver_recursive_newton_euler.hpp> is deprecated.
+#endif
+
 #include "treeidsolver.hpp"
 #include "treeserialization.hpp"
 

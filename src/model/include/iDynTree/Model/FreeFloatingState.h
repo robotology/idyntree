@@ -12,7 +12,7 @@
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/VectorDynSize.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/JointState.h>
 

@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_I_JOINT_H
 #define IDYNTREE_I_JOINT_H
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 namespace iDynTree
 {
