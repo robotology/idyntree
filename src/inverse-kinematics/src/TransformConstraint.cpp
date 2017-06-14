@@ -13,11 +13,13 @@
 namespace internal {
 namespace kinematics {
 
-    TransformConstraint::TransformConstraint(const std::string& constrainedFrameName, TransformConstraintType type): m_type(type),
-                                                                                                                     m_frameName(constrainedFrameName),
-                                                                                                                     m_resolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone),
-                                                                                                                     m_posWeight(1.0),
-                                                                                                                     m_rotWeight(1.0)
+    TransformConstraint::TransformConstraint(const std::string& constrainedFrameName,
+                                             TransformConstraintType type)
+    : m_type(type)
+    , m_frameName(constrainedFrameName)
+    , m_posWeight(1.0)
+    , m_rotWeight(1.0)
+    , m_resolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
     {}
 
     TransformConstraint TransformConstraint::positionConstraint(const std::string& frameName, const iDynTree::Position &position, const double posWeight)

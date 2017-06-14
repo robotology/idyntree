@@ -65,7 +65,6 @@ namespace iDynTree {
     };
 }
 
-//TODO: how to handle conflicting requirements
 /*!
  * @brief NLP-based Inverse kinematics
  *
@@ -183,13 +182,13 @@ public:
      * @param max_iter exits if iter>=max_iter (max_iter<0
      *                   disables this check).
      */
-    void setMaxIter(const int max_iter);
+    void setMaxIterations(const int max_iter);
 
     /**
      * Retrieves the current value of Maximum Iteration.
      * @return max_iter.
      */
-    int getMaxIter() const;
+    int maxIterations() const;
 
     /**
      * Sets Maximum CPU seconds.
@@ -199,13 +198,13 @@ public:
      * @param max_cpu_time exits if cpu_time>=max_cpu_time given in
      *                     seconds.
      */
-    void setMaxCpuTime(const double max_cpu_time);
+    void setMaxCPUTime(const double max_cpu_time);
 
     /**
      * Retrieves the current value of Maximum CPU seconds.
      * @return max_cpu_time.
      */
-    double getMaxCpuTime() const;
+    double maxCPUTime() const;
 
     /**
      * Sets cost function tolerance.
@@ -214,13 +213,13 @@ public:
      *
      * @param tol tolerance.
      */
-    void setTol(const double tol);
+    void setCostTolerance(const double tol);
 
     /**
      * Retrieves cost function tolerance.
      * @return tolerance.
      */
-    double getTol() const;
+    double costTolerance() const;
 
     /**
      * Sets constraints tolerance.
@@ -229,13 +228,13 @@ public:
      *
      * @param tol tolerance.
      */
-    void setConstrTol(const double constr_tol);
+    void setConstraintsTolerance(const double constr_tol);
 
     /**
      * Retrieves constraints tolerance.
      * @return tolerance.
      */
-    double getConstrTol() const;
+    double constraintsTolerance() const;
 
     /*!
      * Sets Verbosity.
@@ -526,19 +525,32 @@ public:
 
 
     /*!
-     * Specify the method to solve all the specified targets
+     * Specify the default method to solve all the specified targets
      *
      * Targets can be solved fully as cost, partially (position or orientation)
      * as cost and the other component as hard constraint or
      * fully as hard constraints
      * @see targetResolutionMode()
+     * All the newly added target will have as default resolution mode the one specified in this
+     * function. Existing targets will remain unchanged
      *
      * @param mode the target resolution mode
      * 
-     * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget .
+     * @return true if successful, false otherwise.
      */
-    void setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
-    
+    void setDefaultTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
+
+    /*!
+     * Returns the default method to solve all the specified targets
+     *
+     * @see setDefaultTargetResolutionMode()
+     * All the newly added target will have as default resolution mode the one returned in this
+     * function.
+     *
+     * @return the current default method to solve targets
+     */
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint defaultTargetResolutionMode();
+
     /*!
      * Specify the method to solve the specified target
      *
@@ -548,17 +560,18 @@ public:
      * @see targetResolutionMode()
      *
      * @param mode the target resolution mode
-     * 
-     *@return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget .
+     * @param targetName the name (frame) identified the target
+     * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget .
      */
-    bool setTargetResolutionMode(enum InverseKinematicsTreatTargetAsConstraint mode, const std::string& frameName);
+    bool setTargetResolutionMode(const std::string& targetName, enum InverseKinematicsTreatTargetAsConstraint mode);
     
 
     /*!
      * Return the target resolution mode
      *
      * @see setTargetResolutionMode
-     * @return the current target resolution mode. @NOTE: If the target hasn't been specified yet, it returns "InverseKinematicsTreatTargetAsConstraintNone".
+     * @note If the target hasn't been specified yet, it returns "InverseKinematicsTreatTargetAsConstraintNone"
+     * @return the current target resolution mode, or InverseKinematicsTreatTargetAsConstraintNone if the target cannot be found
      */
     enum InverseKinematicsTreatTargetAsConstraint targetResolutionMode(const std::string& frameName);
     ///@}
@@ -628,17 +641,17 @@ public:
      */
     const Model & model() const;
     
-    void setCoMTarget(iDynTree::Position& desiredPosition, double weight = 1.0);
+    void setCOMTarget(iDynTree::Position& desiredPosition, double weight = 1.0);
     
-    void setCoMAsConstraint(bool asConstraint = true);
+    void setCOMAsConstraint(bool asConstraint = true);
     
-    void setCoMAsConstraintTolerance(double tolerance = 1e-8);
+    void setCOMAsConstraintTolerance(double tolerance = 1e-8);
     
-    bool isCoMAConstraint();
+    bool isCOMAConstraint();
     
-    bool isCoMTargetActive();
+    bool isCOMTargetActive();
     
-    void setCoMTargetInactive();
+    void deactivateCOMTarget();
 
 private:
     void* m_pimpl; /*!< private implementation */

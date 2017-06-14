@@ -25,7 +25,8 @@ namespace kinematics {
     InverseKinematicsData& InverseKinematicsData::operator=(const InverseKinematicsData&) { return *this; }
 
     InverseKinematicsData::InverseKinematicsData()
-    : m_dofs(0)
+    : m_defaultTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
+    , m_dofs(0)
     , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationQuaternion)
     , m_areBaseInitialConditionsSet(false)
     , m_areJointsInitialConditionsSet(false)
@@ -145,6 +146,10 @@ namespace kinematics {
             return false;
 
         std::pair<TransformMap::iterator, bool> result = m_targets.insert(TransformMap::value_type(frameIndex, frameTransform));
+        // As the input is const, I can only modify it after insertion
+        if (result.second) {
+            result.first->second.setTargetResolutionMode(m_defaultTargetResolutionMode);
+        }
         return result.second;
     }
 
@@ -266,26 +271,26 @@ namespace kinematics {
 
     }
 
-    void InverseKinematicsData::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
+    void InverseKinematicsData::setDefaultTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
     {
-        if (m_targets.size() > 0){
-            for (TransformMap::iterator it = m_targets.begin();
-                 it != m_targets.end(); ++it){
-                this->setTargetResolutionMode(mode, it);
-            }
-        }
-        
-        if(m_comTarget.isActive){
-            if(mode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly){
-                this->setCoMasConstraint(true);
-            }
-            else{
-                this->setCoMasConstraint(false);
-            }
-        }
+        m_defaultTargetResolutionMode = mode;
+
+//        if(m_comTarget.isActive){
+//            if(mode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly){
+//                this->setCoMasConstraint(true);
+//            }
+//            else{
+//                this->setCoMasConstraint(false);
+//            }
+//        }
     }
 
-    void InverseKinematicsData::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode, TransformMap::iterator target)
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint InverseKinematicsData::defaultTargetResolutionMode()
+    {
+        return m_defaultTargetResolutionMode;
+    }
+
+    void InverseKinematicsData::setTargetResolutionMode(TransformMap::iterator target, iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
     {
        assert(target != m_targets.end());
        target->second.setTargetResolutionMode(mode);
@@ -354,12 +359,18 @@ namespace kinematics {
     }
     
     void InverseKinematicsData::setCoMTarget(iDynTree::Position& desiredPosition, double weight){
-        this->m_comTarget.isActive = true;
         this->m_comTarget.desiredPosition = desiredPosition;
+
+        if (!this->m_comTarget.isActive
+            && m_defaultTargetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly) {
+            this->m_comTarget.isConstraint = true;
+        }
         
-        if (!(weight < 0)){
+        if (!(weight < 0)) {
             this->m_comTarget.weight = weight;
         }
+
+        this->m_comTarget.isActive = true;
     }
 
     void InverseKinematicsData::setCoMasConstraint(bool asConstraint)

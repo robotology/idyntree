@@ -97,13 +97,13 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
         bool ok = ik.setModel(chain);
         ASSERT_IS_TRUE(ok);
         // Always express the target as cost
-        ik.setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
+        ik.setDefaultTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
 
         // Use the requested parametrization
         ik.setRotationParametrization(rotationParametrization);
 
-        ik.setTol(1e-6);
-        ik.setConstrTol(1e-7);
+        ik.setCostTolerance(1e-6);
+        ik.setConstraintsTolerance(1e-7);
 
         // Create also a KinDyn object to perform forward kinematics for the desired values and the optimized ones
         iDynTree::KinDynComputations kinDynDes;
@@ -208,7 +208,7 @@ void simpleHumanoidWholeBodyIKConsistency(const iDynTree::InverseKinematicsRotat
     ASSERT_IS_TRUE(ok);
 
     // The two cartesian targets should be reasonable values
-    ik.setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
+    ik.setDefaultTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
     ok = ik.addPositionTarget("l_elbow_1",kinDynDes.getWorldTransform("l_elbow_1"));
     ASSERT_IS_TRUE(ok);
 
@@ -295,10 +295,10 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
 
     // The two cartesian targets should be reasonable values
     iDynTree::Position comDes = kinDynDes.getCenterOfMassPosition();
-    ik.setCoMTarget(comDes, 1);
-    ik.setCoMAsConstraintTolerance(1e-8);
+    ik.setCOMTarget(comDes, 1);
+    ik.setCOMAsConstraintTolerance(1e-8);
 
-    ik.setTargetResolutionMode(targetResolutionMode);
+    ik.setDefaultTargetResolutionMode(targetResolutionMode);
     
     //ok = ik.addPositionTarget("r_elbow_1",kinDynDes.getRelativeTransform("l_sole","r_elbow_1").getPosition());
     //ASSERT_IS_TRUE(ok);
@@ -350,6 +350,7 @@ void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKine
 {
     iDynTree::InverseKinematics ik;
 
+    ik.setMaxIterations(500);
     ik.setVerbosity(3);
     
     bool ok = ik.loadModelFromFile(getAbsModelPath("iCubGenova02.urdf"));
@@ -358,6 +359,7 @@ void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKine
     //ik.setFloatingBaseOnFrameNamed("l_foot");
 
     ik.setRotationParametrization(rotationParametrization);
+    ik.setDefaultTargetResolutionMode(targetResolutionMode);
 
     // Create also a KinDyn object to perform forward kinematics for the desired values
     iDynTree::KinDynComputations kinDynDes;
@@ -384,14 +386,13 @@ void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKine
 
     // The two cartesian targets should be reasonable values
     iDynTree::Position comDes = kinDynDes.getCenterOfMassPosition();
-    ik.setCoMTarget(comDes, 1);
-    ik.setCoMAsConstraintTolerance(1e-8);
+    ik.setCOMTarget(comDes, 1);
+    ik.setCOMAsConstraintTolerance(1e-8);
 
-    ik.setTargetResolutionMode(targetResolutionMode);
-    
+
     ok = ik.addRotationTarget("chest", kinDynDes.getWorldTransform("chest").getRotation(), 100);
     ASSERT_IS_TRUE(ok);
-    //ik.setTargetResolutionMode(targetResolutionMode, "chest");
+    ik.setTargetResolutionMode("chest", iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
 
     iDynTree::Transform initialH = kinDynDes.getWorldBaseTransform();
 

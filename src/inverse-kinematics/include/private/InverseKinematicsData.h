@@ -54,6 +54,7 @@ class internal::kinematics::InverseKinematicsData {
     // The variables are divided among the optimized one (buffers inside the Solver, except results and I/O variables here),
     // the "model" variables and the parameters of the optimization.
 
+    iDynTree::InverseKinematicsTreatTargetAsConstraint m_defaultTargetResolutionMode;
 public:
     /*! @name Model-related variables
      */
@@ -249,11 +250,13 @@ public:
 
     /*!
      * Set how targets should be considered in the optimization problem
-     * i.e. as soft or hard constraints. It applies to all the targets already inserted.
+     * i.e. as soft or hard constraints. It applies only to the newly added targets
      *
      * @param mode how to treat the targets
      */
-    void setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
+    void setDefaultTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
+
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint defaultTargetResolutionMode();
 
     /*!
      * Set how the specified target should be considered in the optimization problem
@@ -261,7 +264,7 @@ public:
      *
      * @param mode how to treat the target
      */
-    void setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode, TransformMap::iterator target);
+    void setTargetResolutionMode(TransformMap::iterator target, enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
 
     /*! Return the resolution mode adopted for the specified target
      * @return the resolution mode
