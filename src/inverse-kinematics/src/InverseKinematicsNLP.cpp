@@ -560,10 +560,13 @@ namespace kinematics {
                 else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw){
                     FrameInfo &targetInfo = targetsInfo[target->first];
 
-                    iDynTree::Vector3 rpy_target = targetInfo.transform.getRotation().asRPY();
-                    iDynTree::Vector3 rpy_desired = target->second.getRotation().asRPY();
+                    iDynTree::Rotation rotation_target = targetInfo.transform.getRotation();
+                    iDynTree::Rotation rotation_desired = target->second.getRotation();
+                    iDynTree::Rotation rotation_error;
+                    iDynTree::toEigen(rotation_error) = iDynTree::toEigen(rotation_desired).transpose() * iDynTree::toEigen(rotation_target);
+                    
                     //TODO Investigate the derivative of the cost using the RPY representation of the error matrix R*\hat{R}'
-                    obj_value += 0.5 * target->second.getRotationWeight() * ( iDynTree::toEigen(rpy_target) - iDynTree::toEigen(rpy_desired) ).squaredNorm();
+                    obj_value += 0.5 * target->second.getRotationWeight() * iDynTree::toEigen(rotation_error.asRPY()).squaredNorm();
                 }
             }
         }
@@ -672,9 +675,13 @@ namespace kinematics {
                     iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0),rpy(1),rpy(2));
                     FrameInfo &targetInfo = targetsInfo[target->first];
 
-                    iDynTree::Vector3 rpy_target = targetInfo.transform.getRotation().asRPY();
-                    iDynTree::Vector3 rpy_desired = target->second.getRotation().asRPY();
-                    iDynTree::Matrix3x3 omegaToRPYMap_target = iDynTree::Rotation::RPYRightTrivializedDerivativeInverse(rpy_target(0),rpy_target(1),rpy_target(2));
+                    iDynTree::Rotation rotation_target = targetInfo.transform.getRotation();
+                    iDynTree::Rotation rotation_desired = target->second.getRotation();
+                    iDynTree::Rotation rotation_error;
+                    iDynTree::toEigen(rotation_error) = iDynTree::toEigen(rotation_desired).transpose() * iDynTree::toEigen(rotation_target);
+                    iDynTree::Vector3 rpy_error = rotation_error.asRPY();
+                    iDynTree::Matrix3x3 omegaToRPYMap_target;
+                    iDynTree::toEigen(omegaToRPYMap_target) = iDynTree::toEigen(iDynTree::Rotation::RPYRightTrivializedDerivativeInverse(rpy_error(0),rpy_error(1),rpy_error(2))) * iDynTree::toEigen(rotation_desired).transpose();
 
                     computeConstraintJacobianRPY(targetInfo.jacobian,
                                                 omegaToRPYMap_target,
@@ -682,7 +689,7 @@ namespace kinematics {
                                                 ComputeContraintJacobianOptionAngularPart,
                                                 finalJacobianBuffer);
                     //TODO Investigate the derivative of the cost using the RPY representation of the error matrix R*\hat{R}'
-                    gradient += target->second.getRotationWeight()*( iDynTree::toEigen(rpy_target) - iDynTree::toEigen(rpy_desired) ).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                    gradient += target->second.getRotationWeight()*( iDynTree::toEigen(rpy_error)).transpose() * iDynTree::toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
                     
                 }
             }

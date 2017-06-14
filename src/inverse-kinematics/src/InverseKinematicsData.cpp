@@ -319,6 +319,8 @@ namespace kinematics {
 #endif
             if (!m_solverName.empty()) {
                 m_solver->Options()->SetStringValue("linear_solver", m_solverName);
+            } else {
+                m_solver->Options()->GetStringValue("linear_solver", m_solverName, "");
             }
 
             solverStatus = m_solver->Initialize();
