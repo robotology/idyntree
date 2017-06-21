@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.0)
 project(iDynTreePlotter)
 
 find_package(Qt5 COMPONENTS Widgets Charts)
-if (${Qt5_FOUND})
-  set(CMAKE_CXX_STANDARD 11)
+if (${Qt5Charts_FOUND})
+  idyntree_enable_cxx11()
   
   find_package(YARP REQUIRED)
   list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH})
