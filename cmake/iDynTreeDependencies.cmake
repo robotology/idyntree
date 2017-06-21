@@ -5,7 +5,7 @@
 #########################################################################
 # Enable/disable dependencies
 macro(idyntree_handle_dependency package)
-  set(multiValueArgs COMPONENTS OPTIONAL_COMPONENTS)
+  set(multiValueArgs COMPONENTS)
   cmake_parse_arguments(IHD "" "" "${multiValueArgs}" ${ARGN})
   if (IHD_COMPONENTS)
     find_package(${package} COMPONENTS ${IHD_COMPONENTS})
@@ -16,11 +16,7 @@ macro(idyntree_handle_dependency package)
   option(IDYNTREE_USES_${PKG} "Build the part of iDynTree that depends on package ${package}" ${${package}_FOUND})
   if (IDYNTREE_USES_${PKG})
     if (IHD_COMPONENTS)
-      if (IHD_OPTIONAL_COMPONENTS)
-        find_package(${package} COMPONENTS ${IHD_COMPONENTS} OPTIONAL_COMPONENTS ${IHD_OPTIONAL_COMPONENTS} REQUIRED )
-      else()
-        find_package(${package} COMPONENTS ${IHD_COMPONENTS} REQUIRED)
-      endif()
+      find_package(${package} COMPONENTS ${IHD_COMPONENTS} REQUIRED)
     else ()
       find_package(${package} REQUIRED)
     endif ()
@@ -47,8 +43,7 @@ endif ()
 idyntree_handle_dependency(YARP)
 idyntree_handle_dependency(IPOPT)
 idyntree_handle_dependency(Irrlicht)
-idyntree_handle_dependency(Qt5 COMPONENTS Qml Quick Widgets
-                               OPTIONAL_COMPONENTS Charts)
+idyntree_handle_dependency(Qt5 COMPONENTS Qml Quick Widgets)
 
 
 # If KDL is not used, an external TinyXML is not compulsory
