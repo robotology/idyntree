@@ -97,13 +97,13 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
         bool ok = ik.setModel(chain);
         ASSERT_IS_TRUE(ok);
         // Always express the target as cost
-        ik.setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
+        ik.setDefaultTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
 
         // Use the requested parametrization
         ik.setRotationParametrization(rotationParametrization);
 
-        ik.setTol(1e-6);
-        ik.setConstrTol(1e-7);
+        ik.setCostTolerance(1e-6);
+        ik.setConstraintsTolerance(1e-7);
 
         // Create also a KinDyn object to perform forward kinematics for the desired values and the optimized ones
         iDynTree::KinDynComputations kinDynDes;
@@ -208,7 +208,7 @@ void simpleHumanoidWholeBodyIKConsistency(const iDynTree::InverseKinematicsRotat
     ASSERT_IS_TRUE(ok);
 
     // The two cartesian targets should be reasonable values
-    ik.setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
+    ik.setDefaultTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
     ok = ik.addPositionTarget("l_elbow_1",kinDynDes.getWorldTransform("l_elbow_1"));
     ASSERT_IS_TRUE(ok);
 
@@ -294,11 +294,12 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
     ASSERT_IS_TRUE(ok);
 
     // The two cartesian targets should be reasonable values
-    ik.setTargetResolutionMode(targetResolutionMode);
     iDynTree::Position comDes = kinDynDes.getCenterOfMassPosition();
-    ik.setCoMTarget(comDes, 1);
-    ik.setCoMasConstraintTolerance(1e-8);
+    ik.setCOMTarget(comDes, 1);
+    ik.setCOMAsConstraintTolerance(1e-8);
 
+    ik.setDefaultTargetResolutionMode(targetResolutionMode);
+    
     //ok = ik.addPositionTarget("r_elbow_1",kinDynDes.getRelativeTransform("l_sole","r_elbow_1").getPosition());
     //ASSERT_IS_TRUE(ok);
 
@@ -342,6 +343,98 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
     return;
 }
 
+
+// Check the consistency of a simple humanoid wholebody IK test case, setting a CoM target.
+void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKinematicsRotationParametrization rotationParametrization,
+                                             const iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode)
+{
+    iDynTree::InverseKinematics ik;
+
+    ik.setMaxIterations(500);
+    ik.setVerbosity(3);
+    
+    bool ok = ik.loadModelFromFile(getAbsModelPath("iCubGenova02.urdf"));
+    ASSERT_IS_TRUE(ok);
+
+    //ik.setFloatingBaseOnFrameNamed("l_foot");
+
+    ik.setRotationParametrization(rotationParametrization);
+    ik.setDefaultTargetResolutionMode(targetResolutionMode);
+
+    // Create also a KinDyn object to perform forward kinematics for the desired values
+    iDynTree::KinDynComputations kinDynDes;
+    ok = kinDynDes.loadRobotModel(ik.model());
+    ASSERT_IS_TRUE(ok);
+
+    // Create a random vector of internal joint positions
+    // used to get reasonable values for the constraints and the targets
+    iDynTree::JointPosDoubleArray s = getRandomJointPositions(kinDynDes.model());
+    ok = kinDynDes.setJointPos(s);
+    ASSERT_IS_TRUE(ok);
+
+    // Create a simple IK problem with the foot constraint
+
+    // The l_sole frame is our world absolute frame (i.e. {}^A H_{l_sole} = identity
+    ok = ik.addFrameConstraint("l_foot",kinDynDes.getWorldTransform("l_foot"));
+    ASSERT_IS_TRUE(ok);
+
+    std::cerr << "kinDynDes.getWorldTransform(l_foot) : " << kinDynDes.getWorldTransform("l_foot").toString() << std::endl;
+
+    // The relative position of the r_sole should be the initial one
+    ok = ik.addFrameConstraint("r_sole",kinDynDes.getWorldTransform("r_sole"));
+    ASSERT_IS_TRUE(ok);
+
+    // The two cartesian targets should be reasonable values
+    iDynTree::Position comDes = kinDynDes.getCenterOfMassPosition();
+    ik.setCOMTarget(comDes, 1);
+    ik.setCOMAsConstraintTolerance(1e-8);
+
+
+    ok = ik.addRotationTarget("chest", kinDynDes.getWorldTransform("chest").getRotation(), 100);
+    ASSERT_IS_TRUE(ok);
+    ik.setTargetResolutionMode("chest", iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
+
+    iDynTree::Transform initialH = kinDynDes.getWorldBaseTransform();
+
+    ik.setInitialCondition(&initialH, &s);
+    ik.setDesiredJointConfiguration(s, 1e-15);
+
+    // Solve the optimization problem
+    double tic = clockInSec();
+    ok = ik.solve();
+    double toc = clockInSec();
+    std::cerr << "Inverse Kinematics solved in " << toc-tic << " seconds. " << std::endl;
+    ASSERT_IS_TRUE(ok);
+
+    iDynTree::Transform basePosOptimized;
+    iDynTree::JointPosDoubleArray sOptimized(ik.model());
+    sOptimized.zero();
+
+    ik.getSolution(basePosOptimized,sOptimized);
+
+    // We create a new KinDyn object to perform forward kinematics for the optimized values
+    iDynTree::KinDynComputations kinDynOpt;
+    kinDynOpt.loadRobotModel(ik.model());
+    iDynTree::Twist dummyVel;
+    dummyVel.zero();
+    iDynTree::Vector3 dummyGrav;
+    dummyGrav.zero();
+    iDynTree::JointDOFsDoubleArray dummyJointVel(ik.model());
+    dummyJointVel.zero();
+    kinDynOpt.setRobotState(basePosOptimized, sOptimized, dummyVel, dummyJointVel, dummyGrav);
+
+    // Check that the contraint and the targets are respected
+    double tolConstraints = 1e-7;
+    double tolTargets     = 1e-6;
+    ASSERT_EQUAL_TRANSFORM_TOL(kinDynDes.getWorldTransform("l_foot"),kinDynOpt.getWorldTransform("l_foot"),tolConstraints);
+    ASSERT_EQUAL_TRANSFORM_TOL(kinDynDes.getWorldTransform("r_sole"),kinDynOpt.getWorldTransform("r_sole"),tolConstraints);
+    ASSERT_EQUAL_VECTOR_TOL(kinDynDes.getCenterOfMassPosition(),
+                            kinDynOpt.getCenterOfMassPosition(), tolTargets);
+    ASSERT_EQUAL_MATRIX_TOL(kinDynDes.getWorldTransform("chest").getRotation(), kinDynOpt.getWorldTransform("chest").getRotation(), tolTargets);
+
+    return;
+}
+
 int main()
 {
     // Improve repetability (at least in the same platform)
@@ -355,6 +448,7 @@ int main()
     simpleHumanoidWholeBodyIKConsistency(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
     simpleHumanoidWholeBodyIKCoMConsistency(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw, iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
     simpleHumanoidWholeBodyIKCoMConsistency(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw, iDynTree::InverseKinematicsTreatTargetAsConstraintFull);
+    simpleHumanoidWholeBodyIKCoMandChestConsistency(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw, iDynTree::InverseKinematicsTreatTargetAsConstraintFull);
 
     return EXIT_SUCCESS;
 }
