@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(iDynTreePlotter)
 
-find_package(Qt5 COMPONENTS Widgets Charts)
+find_package(Qt5 COMPONENTS Widgets Charts QUIET)
 if (${Qt5Charts_FOUND})
   idyntree_enable_cxx11()
   

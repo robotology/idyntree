@@ -31,7 +31,7 @@ target_link_libraries(QtiDynTreeSoleGuiPlugin YARP::YARP_OS
                                               ${GSL_LIBRARIES}
                                               idyntree-high-level
                                               idyntree-inverse-kinematics)
-qticub_use_modules(QtiDynTreeSoleGuiPlugin Quick)
+target_link_libraries(QtiDynTreeSoleGuiPlugin Qt5::Quick)
 
 qticub_qml_plugin(QtiDynTreeSoleGuiPlugin "${QtiDynTreeSoleGuiPlugin_QMLDIR}")
 
