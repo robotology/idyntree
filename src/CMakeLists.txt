@@ -12,7 +12,8 @@ add_subdirectory(model_io)
 add_subdirectory(estimation)
 add_subdirectory(high-level)
 
-if (${IDYNTREE_USES_IPOPT})
+if (IDYNTREE_USES_IPOPT)
+  set(IDYNTREE_BUILD_IK TRUE)
   add_subdirectory(inverse-kinematics)
 endif()
 
