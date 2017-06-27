@@ -29,13 +29,9 @@ qticub_use_qml_plugin()
 add_executable(idyntree-sole-gui WIN32 ${iDynTreeSoleGui_SRCS}
                                        ${iDynTreeSoleGui_HDRS}
                                        ${iDynTreeSoleGui_QRC_GEN_SRCS})
-qticub_use_modules(idyntree-sole-gui Widgets
-                                     Qml
-                                     Quick)
-qticub_deprecate_with_cmake_version(2.8.11)
-if(WIN32 AND CMAKE_VERSION VERSION_LESS 2.8.11)
-  target_link_libraries(idyntree-sole-gui Qt5::WinMain)
-endif()
+
+target_link_libraries(idyntree-sole-gui Qt5::Widgets Qt5::Qml Qt5::Quick)
+
 
 install(TARGETS idyntree-sole-gui
         COMPONENT utilities
