@@ -12,6 +12,7 @@
 
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/PrismaticJoint.h>
 
 #include <cassert>
 #include <set>
@@ -465,10 +466,27 @@ bool createReducedModel(const Model& fullModel,
 
             newJoint = (IJointPtr) newJointRevolute;
         }
+        else if( dynamic_cast<const PrismaticJoint*>(oldJoint) )
+        {
+            const PrismaticJoint* oldJointPrismatic = dynamic_cast<const PrismaticJoint*>(oldJoint);
+            
+            Transform oldLink1_X_oldLink2 = oldJointPrismatic->getRestTransform(oldLink1,oldLink2);
+            Transform newLink1_X_newLink2 = newLink1_X_oldLink1*oldLink1_X_oldLink2*newLink2_X_oldLink2.inverse();
+            
+            Axis prismaticAxis_wrt_newLink1 = newLink1_X_oldLink1*oldJointPrismatic->getAxis(oldLink1);
+            
+            PrismaticJoint* newJointPrismatic = new PrismaticJoint(*oldJointPrismatic);
+            
+            newJointPrismatic->setAttachedLinks(newLink1,newLink2);
+            newJointPrismatic->setRestTransform(newLink1_X_newLink2);
+            newJointPrismatic->setAxis(prismaticAxis_wrt_newLink1);
+            
+            newJoint = (IJointPtr) newJointPrismatic;
+        }
         else
         {
             std::cerr << "[ERROR] createReducedModel error : "
-                      << " processing joint that is not revolute neither fixed. "
+                      << " processing joint that is not revolute, prismatic or fixed. "
                       << std::endl;
             return false;
         }
