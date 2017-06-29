@@ -134,7 +134,7 @@ int main()
     {
         // Random prismatic joint
         // connecting links 0 and 1
-        PrismaticJoint priJoint(0,1,getRandomTransform(),getRandomAxis());
+        PrismaticJoint priJoint(0, 1, getRandomTransform(), getRandomAxis());
         priJoint.setPosCoordsOffset(0);
         priJoint.setDOFsOffset(0);
 
@@ -142,10 +142,10 @@ int main()
         jointPos(priJoint.getPosCoordsOffset()) = getRandomDouble();
 
         // Test the joint in both directions
-        validateJointTransformDerivative(priJoint,jointPos,
-                                         priJoint.getFirstAttachedLink(),priJoint.getSecondAttachedLink());
-        validateJointTransformDerivative(priJoint,jointPos,
-                                         priJoint.getSecondAttachedLink(),priJoint.getFirstAttachedLink());
+        validateJointTransformDerivative(priJoint, jointPos, 
+                                         priJoint.getFirstAttachedLink(), priJoint.getSecondAttachedLink());
+        validateJointTransformDerivative(priJoint, jointPos, 
+                                         priJoint.getSecondAttachedLink(), priJoint.getFirstAttachedLink());
     }
 
     return EXIT_SUCCESS;
