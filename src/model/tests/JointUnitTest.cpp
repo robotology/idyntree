@@ -142,9 +142,9 @@ int main()
         jointPos(priJoint.getPosCoordsOffset()) = getRandomDouble();
 
         // Test the joint in both directions
-        validateJointTransformDerivative(priJoint, jointPos, 
+        validateJointTransformDerivative(priJoint, jointPos,
                                          priJoint.getFirstAttachedLink(), priJoint.getSecondAttachedLink());
-        validateJointTransformDerivative(priJoint, jointPos, 
+        validateJointTransformDerivative(priJoint, jointPos,
                                          priJoint.getSecondAttachedLink(), priJoint.getFirstAttachedLink());
     }
 
