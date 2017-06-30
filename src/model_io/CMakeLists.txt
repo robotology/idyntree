@@ -4,6 +4,7 @@ if(IDYNTREE_USES_KDL)
     add_subdirectory(urdf-kdl)
 endif()
 
+option(IDYNTREE_ENABLE_SYMORO_PAR "Enable support for SyMoRo par format" TRUE)
 if(IDYNTREE_ENABLE_SYMORO_PAR AND IDYNTREE_USES_KDL)
     add_subdirectory(symoro)
 endif()

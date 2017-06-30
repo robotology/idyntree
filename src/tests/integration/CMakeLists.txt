@@ -10,7 +10,7 @@ macro(add_integration_test testname)
     add_test(NAME ${testtarget} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
-        add_test(NAME memcheck_${testtarget} COMMAND ${MEMCHECK_COMMAND_COMPLETE} ./${testbinary})
+        add_test(NAME memcheck_${testtarget} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}>)
     endif()
 endmacro()
 

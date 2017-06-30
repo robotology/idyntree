@@ -17,6 +17,10 @@
 #ifndef KDL_CODYCO_UNDIRECTED_TREE_HPP
 #define KDL_CODYCO_UNDIRECTED_TREE_HPP
 
+#ifdef __DEPRECATED
+  #warning <undirectedtree.hpp> is deprecated.
+#endif
+
 #include <string>
 #include <map>
 
@@ -112,7 +116,7 @@ namespace CoDyCo
     class SubTreeTraversal : public Traversal
     {
         SubTreeTraversal(const KDL::CoDyCo::UndirectedTree & undirected_tree, std::string base_link, std::vector<std::string> cut_junctions );
-        SubTreeTraversal(const KDL::CoDyCo::UndirectedTree & undirected_tree, int base_link_index, std::vector<int> cut_junctions_indeces );
+        SubTreeTraversal(const KDL::CoDyCo::UndirectedTree & undirected_tree, int base_link_index, std::vector<int> cut_junctions_indices );
         ~SubTreeTraversal() {};
     };
 
@@ -515,10 +519,10 @@ namespace CoDyCo
          *
          * @param traversal the result traversal
          * @param base_link the index of the base link
-         * @param cut_junctions a vector of the indeces of the junctions that separated the subtree from the rest of the tree
+         * @param cut_junctions a vector of the indices of the junctions that separated the subtree from the rest of the tree
          * @return 0 if all went well, another integer if there where errors
          */
-        int compute_traversal_subtree(Traversal & traversal, const int base_link_index, const std::vector<int> & cut_junctions_indeces);
+        int compute_traversal_subtree(Traversal & traversal, const int base_link_index, const std::vector<int> & cut_junctions_indices);
 
 
         Tree getTree(std::string base="") const;
@@ -538,8 +542,3 @@ namespace CoDyCo
 }
 }
 #endif
-
-
-
-
-

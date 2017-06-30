@@ -47,14 +47,6 @@ option(IDYNTREE_USES_SEMANTICS "Compile iDynTree semantics check" FALSE)
 option(IDYNTREE_ENABLE_RPATH "Enable RPATH for the library" TRUE)
 mark_as_advanced(IDYNTREE_ENABLE_RPATH)
 
-#########################################################################
-# Enable/disable dependencies
-option(IDYNTREE_ENABLE_SYMORO_PAR "Enable support for SyMoRo par format" TRUE)
-option(IDYNTREE_USES_KDL "Compile iDynTree with KDL dependency" TRUE)
-option(IDYNTREE_USES_YARP "Compile iDynTree with YARP dependency" TRUE)
-option(IDYNTREE_USES_ICUB_MAIN  "Compile iDynTree with icub-main dependencies (for iKin and skinDynLib helper functions and tools)" TRUE)
-option(IDYNTREE_USES_IRRLICHT "Compile iDynTree with Irrlicht dependency (for visualizer)" FALSE)
-
 if( MSVC )
     option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" TRUE)
 else()
@@ -105,4 +97,32 @@ if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES
     list(APPEND IDYNTREE_WARNING_FLAGS -pedantic)
 endif()
 
+# Create build artifacts in ${build}/bin for binaries and ${build}/lib for libraries
+# This simplifies the use of isaac software directly from the build directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
+
+# Macro to add C++11 support for a specific part of iDynTree
+macro(idyntree_enable_cxx11)
+  include(CheckCXXCompilerFlag)
+  unset(CXX11_FLAGS)
+  check_cxx_compiler_flag("-std=c++11" CXX_HAS_STD_CXX11)
+  check_cxx_compiler_flag("-std=c++0x" CXX_HAS_STD_CXX0X)
+  if(CXX_HAS_STD_CXX11)
+    set(CXX11_FLAGS "-std=c++11")
+  elseif(CXX_HAS_STD_CXX0X)
+    set(CXX11_FLAGS "-std=c++0x")
+  endif()
+
+  set(CMAKE_CXX_EXTENSIONS OFF)
+  set(CMAKE_CXX_STANDARD 11)
+  set(CMAKE_CXX_STANDARD_REQUIRED 11)
+  if(NOT CMAKE_MINIMUM_REQUIRED_VERSION VERSION_LESS 3.1)
+    message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. This check can be removed.")
+  endif()
+  if(${CMAKE_VERSION} VERSION_LESS 3.1)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX11_FLAGS}")
+  endif()
+endmacro()
 

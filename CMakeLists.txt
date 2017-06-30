@@ -16,8 +16,8 @@ endif()
 set(VARS_PREFIX "iDynTree")
 
 set(${VARS_PREFIX}_MAJOR_VERSION 0)
-set(${VARS_PREFIX}_MINOR_VERSION 4)
-set(${VARS_PREFIX}_PATCH_VERSION 0)
+set(${VARS_PREFIX}_MINOR_VERSION 5)
+set(${VARS_PREFIX}_PATCH_VERSION 1)
 set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
@@ -36,31 +36,13 @@ include(iDynTreeOptions)
 
 if(NOT IDYNTREE_ONLY_DOCS)
     # Find dependecies
-
-    # Eigen is compulsory
-    find_package(Eigen3 REQUIRED)
+    include(iDynTreeDependencies)
 
     if(IDYNTREE_USES_YARP)
         find_package(YARP REQUIRED)
         if (NOT YARP_HAS_MATH_LIB)
             message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
         endif()
-    endif()
-
-    if(IDYNTREE_USES_ICUB_MAIN)
-        find_package(ICUB REQUIRED)
-    endif()
-
-    if(IDYNTREE_USES_KDL)
-        include(OrocosKDLFindLogic)
-        find_package(orocos_kdl REQUIRED)
-        find_package(TinyXML    REQUIRED)
-    else()
-        # If KDL is not used, an external TinyXML is not compulsory
-        # (because no public headers contain TinyXML includes)
-        # and so we can use the internal copy of TinyXML, see logic
-        # in extern/CMakeLists.txt
-        find_package(TinyXML)
     endif()
 
     # Add external libraries that are embedded in iDynTree

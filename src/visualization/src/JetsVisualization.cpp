@@ -21,7 +21,7 @@ namespace iDynTree
 JetsVisualization::JetsVisualization(): m_smgr(0),
                                         m_modelViz(0),
                                         m_framesNodes(0),
-                                        m_jetsFrameIndeces(0),
+                                        m_jetsFrameIndices(0),
                                         m_jetsNodes(0),
                                         m_jetsDirections(0),
                                         m_jetsColors(0),
@@ -42,7 +42,7 @@ void JetsVisualization::init(irr::scene::ISceneManager* smgr, ModelVisualization
 
 void JetsVisualization::reset()
 {
-    m_jetsFrameIndeces.resize(0);
+    m_jetsFrameIndices.resize(0);
     m_jetsNodes.resize(0);
     m_jetsDirections.resize(0);
     m_jetsColors.resize(0);
@@ -112,7 +112,7 @@ bool JetsVisualization::setJetsFrames(const std::vector <std::string> &jetsFrame
     // Clean previous jets created
     reset();
 
-    m_jetsFrameIndeces.resize(jetsFrames.size(),FRAME_INVALID_INDEX);
+    m_jetsFrameIndices.resize(jetsFrames.size(),FRAME_INVALID_INDEX);
     m_jetsNodes.resize(jetsFrames.size(),0);
     m_jetsDirections.resize(jetsFrames.size(),Direction(0.0,0.0,1.0));
     m_jetsColors.resize(jetsFrames.size(),ColorViz(1.0,1.0,1.0,0.0));
@@ -129,7 +129,7 @@ bool JetsVisualization::setJetsFrames(const std::vector <std::string> &jetsFrame
             return false;
         }
 
-        m_jetsFrameIndeces[i] = jetFrameIdx;
+        m_jetsFrameIndices[i] = jetFrameIdx;
     }
 
     // Set the initial jets values to 0
@@ -154,7 +154,7 @@ void JetsVisualization::drawJet(size_t i, double intensity)
 
     // Create new node
     irr::scene::IMesh* coneMesh = createFrustumMesh(intensity*m_maxRadius,intensity*m_minRadius,intensity*m_maxLength);
-    this->m_jetsNodes[i] = m_smgr->addMeshSceneNode(coneMesh,(*(this->m_framesNodes))[this->m_jetsFrameIndeces[i]]);
+    this->m_jetsNodes[i] = m_smgr->addMeshSceneNode(coneMesh,(*(this->m_framesNodes))[this->m_jetsFrameIndices[i]]);
     coneMesh->drop();
     coneMesh = 0;
 

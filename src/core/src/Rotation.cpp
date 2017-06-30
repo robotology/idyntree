@@ -565,8 +565,6 @@ namespace iDynTree
         return outputMatrix;
     }
 
-
-
     Rotation Rotation::Identity()
     {
         return RotationRaw::Identity();

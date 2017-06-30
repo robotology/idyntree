@@ -7,6 +7,10 @@
 #ifndef KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 #define KDL_CODYCO_TREE_INERTIALPARAMETERS_HPP
 
+#ifdef __DEPRECATED
+  #warning <treeinertialparameters.hpp> is deprecated.
+#endif
+
 #include "undirectedtree.hpp"
 #include "undirectedtreesolver.hpp"
 #include "regressor_utils.hpp"

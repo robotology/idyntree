@@ -13,7 +13,7 @@
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/FreeFloatingMatrices.h>
 #include <iDynTree/Model/LinkState.h>
 

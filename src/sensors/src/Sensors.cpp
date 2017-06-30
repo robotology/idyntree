@@ -188,7 +188,7 @@ bool SensorsList::setSerialization(const SensorType& sensor_type,
     }
 
     this->pimpl->allSensors[sensor_type] = newVecSensors;
-    
+
     return true;
 }
 
@@ -279,7 +279,7 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
         Sensor *s = typeVector[sensor_index];
         typeVector.erase(typeVector.begin() + sensor_index);
         SensorsListPimpl::SensorNameToIndexMap& nameToIndex = this->pimpl->sensorsNameToIndex[sensor_type];
-        // We have to rebuild the name->index map as indeces have changed
+        // We have to rebuild the name->index map as indices have changed
         nameToIndex.clear();
         for (size_t index = 0; index < typeVector.size(); ++index) {
             nameToIndex.insert(SensorsListPimpl::SensorNameToIndexMap::value_type(typeVector[index]->getName(), index));

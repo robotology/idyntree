@@ -30,13 +30,13 @@
 %ignore iDynTree::SparseMatrix::begin() const;
 %ignore iDynTree::SparseMatrix::end();
 %ignore iDynTree::SparseMatrix::end() const;
-// Disable access to Sparse Matrix buffers 
+// Disable access to Sparse Matrix buffers
 %ignore iDynTree::SparseMatrix::valuesBuffer();
 %ignore iDynTree::SparseMatrix::valuesBuffer() const;
-%ignore iDynTree::SparseMatrix::innerIndecesBuffer();
-%ignore iDynTree::SparseMatrix::innerIndecesBuffer() const;
-%ignore iDynTree::SparseMatrix::outerIndecesBuffer();
-%ignore iDynTree::SparseMatrix::outerIndecesBuffer() const;
+%ignore iDynTree::SparseMatrix::innerIndicesBuffer();
+%ignore iDynTree::SparseMatrix::innerIndicesBuffer() const;
+%ignore iDynTree::SparseMatrix::outerIndicesBuffer();
+%ignore iDynTree::SparseMatrix::outerIndicesBuffer() const;
 %ignore iDynTree::SparseMatrix::operator()(unsigned, unsigned);
 %ignore iDynTree::SparseMatrix::operator()(unsigned, unsigned) const;
 %ignore iDynTree::SparseMatrix::convertToColumnMajor(double *, int *, int *) const;

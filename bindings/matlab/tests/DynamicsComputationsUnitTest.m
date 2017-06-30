@@ -2,12 +2,16 @@ function test_suite=DynamicsComputationsUnitTest
     initTestSuite
 
 function test_inverse_dynamics_consistency
-    iDynTreeLoad;
     tol = 1e-9;
 
     dynComp = iDynTree.DynamicsComputations();
 
     ok = dynComp.loadRobotModelFromFile('./model.urdf');
+
+    if not(ok)
+        fprintf('Skipping test_inverse_dynamics_consistency because iDynTree is compiled with IDYNTREE_USES_KDL to OFF');
+        return;
+    end
 
     dynComp.getFloatingBase();
 

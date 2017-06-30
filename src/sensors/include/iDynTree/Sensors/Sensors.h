@@ -35,7 +35,7 @@ namespace iDynTree {
 #include <iDynTree/Core/VectorDynSize.h>
 
 #include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 namespace iDynTree {
 
@@ -135,9 +135,12 @@ namespace iDynTree {
         virtual Sensor* clone() const = 0;
 
         /**
-         * Update all the indeces (link/frames) contained in this sensor.
+         * Update all the indices (link/frames) contained in this sensor.
          */
-        virtual bool updateIndeces(const Model & model) = 0;
+        virtual bool updateIndices(const Model & model) = 0;
+
+        // Deprecated
+        virtual bool IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead") updateIndeces(const Model & model) = 0;
     };
 
     /**

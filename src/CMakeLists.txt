@@ -12,6 +12,11 @@ add_subdirectory(model_io)
 add_subdirectory(estimation)
 add_subdirectory(high-level)
 
+if (IDYNTREE_USES_IPOPT)
+  set(IDYNTREE_BUILD_IK TRUE)
+  add_subdirectory(inverse-kinematics)
+endif()
+
 if(IDYNTREE_USES_YARP)
     add_subdirectory(yarp)
 endif()
@@ -22,7 +27,6 @@ endif()
 
 if(IDYNTREE_USES_KDL)
     add_subdirectory(kdl)
-    add_subdirectory(regressors)
     if(IDYNTREE_USES_YARP)
         add_subdirectory(yarp-kdl)
         add_subdirectory(estimation-kdl)
@@ -30,8 +34,13 @@ if(IDYNTREE_USES_KDL)
             add_subdirectory(icub-kdl)
         endif()
     endif()
-    add_subdirectory(high-level-kdl)
 endif()
+
+# This should directory should not compiled if IDYNTREE_USES_KDL
+# is not enabled, but they are necessary to compile the bindings,
+# see https://github.com/robotology/idyntree/issues/227
+add_subdirectory(high-level-kdl)
+add_subdirectory(regressors)
 
 add_subdirectory(visualization)
 

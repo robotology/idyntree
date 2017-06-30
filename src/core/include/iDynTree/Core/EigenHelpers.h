@@ -17,6 +17,7 @@
 #include <iDynTree/Core/SpatialForceVector.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Utils.h>
+
 #if __cplusplus > 199711L
 #include <iDynTree/Core/SparseMatrix.h>
 #endif
@@ -24,6 +25,16 @@
 
 namespace iDynTree
 {
+    //Useful typedefs
+    //TODO: change methods below to use these typedefs
+    typedef Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> iDynTreeEigenMatrix;
+    typedef const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> iDynTreeEigenConstMatrix;
+    typedef Eigen::Map<iDynTreeEigenMatrix> iDynTreeEigenMatrixMap;
+    typedef Eigen::Map<iDynTreeEigenConstMatrix> iDynTreeEigenConstMatrixMap;
+
+
+
+
 // Dynamics size toEigen methods
 inline Eigen::Map<Eigen::VectorXd> toEigen(VectorDynSize & vec)
 {

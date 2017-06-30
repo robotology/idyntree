@@ -1,0 +1,17 @@
+/*
+ * Copyright (C) 2017 iCub Facility, Istituto Italiano di Tecnologia
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ */
+
+
+/**
+
+@page changelog iDynTree ChangeLog
+
+This page lists the main changes introduced in iDynTree at each release.
+
+
+<h1>iDynTree 0.8 Series</h1>
+\li \subpage v0_8
+
+*/

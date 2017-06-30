@@ -43,6 +43,10 @@ target_include_directories(idyntree-yarp-kdl INTERFACE ${EIGEN3_INCLUDE_DIR}
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR}
                            ${YARP_INCLUDE_DIRS})
 
+if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
+    target_compile_options(idyntree-yarp-kdl PRIVATE "-Wno-deprecated")
+endif()
+
 target_link_libraries(idyntree-yarp-kdl LINK_PUBLIC
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}

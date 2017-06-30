@@ -427,7 +427,7 @@ bool createReducedModel(const Model& fullModel,
         LinkIndex oldLink2 = oldJoint->getSecondAttachedLink();
 
         // We get the new link that the joint connects, after the lumping
-        // (consider that the subModel index not matches the indeces of the new links
+        // (consider that the subModel index not matches the indices of the new links
         // in the new reduced model
         LinkIndex newLink1 = (LinkIndex) subModels.getSubModelOfLink(oldLink1);
         LinkIndex newLink2 = (LinkIndex) subModels.getSubModelOfLink(oldLink2);

@@ -332,7 +332,7 @@ bool jointFromURDFXML(const Model & model,
         return false;
     }
 
-    // Get indeces in model for the links involved in the joint
+    // Get indices in model for the links involved in the joint
     LinkIndex parentLinkIndex = model.getLinkIndex(parentLinkName);
 
     if( parentLinkIndex == LINK_INVALID_INDEX )
@@ -759,4 +759,3 @@ bool modelFromURDFString(const std::string& urdf_string,
 }
 
 }
-

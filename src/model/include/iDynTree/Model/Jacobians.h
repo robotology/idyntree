@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_JACOBIANS_H
 #define IDYNTREE_JACOBIANS_H
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 namespace iDynTree
 {

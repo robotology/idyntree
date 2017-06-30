@@ -163,7 +163,7 @@ double MatrixDynSize::getVal(const unsigned int row, const unsigned int col) con
     if( row > this->rows() ||
         col  > this->cols() )
     {
-        reportError("MatrixDynSize","getVal","indeces out of bounds");
+        reportError("MatrixDynSize","getVal","indices out of bounds");
         return 0.0;
     }
 
@@ -175,7 +175,7 @@ bool MatrixDynSize::setVal(const unsigned int row, const unsigned int col, const
     if( row > this->rows() ||
         col   > this->cols() )
     {
-        reportError("MatrixDynSize","setVal","indeces out of bounds");
+        reportError("MatrixDynSize","setVal","indices out of bounds");
         return false;
     }
 

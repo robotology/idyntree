@@ -131,7 +131,7 @@ Sensor* AccelerometerSensor::clone() const
     return (Sensor *)new AccelerometerSensor(*this);
 }
 
-bool AccelerometerSensor::updateIndeces(const Model& model)
+bool AccelerometerSensor::updateIndices(const Model& model)
 {
     iDynTree::LinkIndex linkNewIndex = model.getLinkIndex(this->pimpl->parent_link_name);
 
@@ -143,6 +143,12 @@ bool AccelerometerSensor::updateIndeces(const Model& model)
     this->pimpl->parent_link_index = linkNewIndex;
 
     return true;
+}
+
+// Deprecated
+bool AccelerometerSensor::updateIndeces(const Model& model)
+{
+    return updateIndices(model);
 }
 
 

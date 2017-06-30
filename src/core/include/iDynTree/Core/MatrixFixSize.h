@@ -232,7 +232,7 @@ namespace iDynTree
         if( row >= this->rows() ||
             col  >= this->cols() )
         {
-            reportError("MatrixDynSize","getVal","indeces out of bounds");
+            reportError("MatrixDynSize","getVal","indices out of bounds");
             return 0.0;
         }
 
@@ -245,7 +245,7 @@ namespace iDynTree
         if( row >= this->rows() ||
             col   >= this->cols() )
         {
-            reportError("MatrixDynSize","setVal","indeces out of bounds");
+            reportError("MatrixDynSize","setVal","indices out of bounds");
             return false;
         }
 
@@ -315,6 +315,7 @@ namespace iDynTree
     // Add all the explicit instantiation that can be useful, but remember to add
     // them also in the iDynTree.i SWIG file
     typedef MatrixFixSize<1,6> Matrix1x6;
+    typedef MatrixFixSize<2,3> Matrix2x3;
     typedef MatrixFixSize<3,3> Matrix3x3;
     typedef MatrixFixSize<4,4> Matrix4x4;
     typedef MatrixFixSize<6,1> Matrix6x1;

@@ -24,6 +24,9 @@
 #ifndef KDL_CODYCO_TREE_ID_SOLVER 
 #define KDL_CODYCO_TREE_ID_SOLVER
 
+#ifdef __DEPRECATED
+  #warning <treeidsolver.hpp> is deprecated.
+#endif
 
 #include "kdl/tree.hpp"
 #include "kdl/chain.hpp"
