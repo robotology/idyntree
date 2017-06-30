@@ -54,7 +54,7 @@ bool removeFakeLinks(const Model& modelWithFakeLinks,
  *
  * All other joints are be removed by lumping (i.e. fusing together)
  * the inertia of the links that are connected by that joint, assuming the joint
- * to be in "rest" position (i.e. zero for revolute joints). The links eliminated
+ * to be in "rest" position (i.e. zero for revolute or prismatic joints). The links eliminated
  * with this process are be added back to the reduced model as "frames",
  * and are copied in the same way all the additional frames of the lumped links.
  *
