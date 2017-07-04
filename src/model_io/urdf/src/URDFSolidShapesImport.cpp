@@ -104,7 +104,7 @@ void parseURDFMaterial(const URDFModelMaterialDatabase & materialDB,
                 {
                     std::stringstream ss;
                     ss << "Impossible to parse URDF material, material " << materialNameCpp << " not found in model database.";
-                    reportError("","parseURDFMaterial",ss.str().c_str());
+                    reportWarning("","parseURDFMaterial",ss.str().c_str());
                 }
             }
             else
