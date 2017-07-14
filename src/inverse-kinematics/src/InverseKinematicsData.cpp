@@ -14,6 +14,8 @@
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Model/Model.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/Core/EigenHelpers.h>
 
 #include <cassert>
 #include <private/InverseKinematicsData.h>
@@ -29,7 +31,7 @@ namespace kinematics {
     , m_dofs(0)
     , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationQuaternion)
     , m_areBaseInitialConditionsSet(false)
-    , m_areJointsInitialConditionsSet(false)
+    , m_areJointsInitialConditionsSet(InverseKinematicsInitialConditionNotSet)
     , m_solver(NULL)
     // The default values for the ipopt related parameters are exactly the one of IPOPT,
     // see https://www.coin-or.org/Ipopt/documentation/node41.html
@@ -52,29 +54,45 @@ namespace kinematics {
         m_comTarget.isConstraint = false;
     }
 
-    bool InverseKinematicsData::setModel(const iDynTree::Model& model)
+    bool InverseKinematicsData::setModel(const iDynTree::Model& model, const std::vector<std::string> &consideredJoints)
     {
+        m_dofs = model.getNrOfDOFs();
+        m_reducedVariablesInfo.fixedVariables.assign(m_dofs, false);
+        m_reducedVariablesInfo.modelJointsToOptimisedJoints.clear();
+
+        if (!consideredJoints.empty()) {
+            for (iDynTree::JointIndex jointIdx = 0; jointIdx < model.getNrOfDOFs(); ++jointIdx) {
+                std::string jointName = model.getJointName(jointIdx);
+                std::vector<std::string>::const_iterator found = std::find(consideredJoints.begin(), consideredJoints.end(), jointName);
+                if (found == consideredJoints.end()) {
+                    m_reducedVariablesInfo.fixedVariables[jointIdx] = true;
+                    continue;
+                }
+                // found => get the index in the optimised joints vector
+                size_t optimisedIndex = std::distance(consideredJoints.begin(), found);
+                m_reducedVariablesInfo.modelJointsToOptimisedJoints.insert(std::unordered_map<int, int>::value_type(optimisedIndex, jointIdx));
+            }
+        } else {
+            for (iDynTree::JointIndex jointIdx = 0; jointIdx < model.getNrOfDOFs(); ++jointIdx) {
+                m_reducedVariablesInfo.modelJointsToOptimisedJoints.insert(std::unordered_map<int, int>::value_type(jointIdx, jointIdx));
+            }
+        }
+
         bool result = m_dynamics.loadRobotModel(model);
         if (!result || !m_dynamics.isValid()) {
             std::cerr << "[ERROR] Error loading robot model" << std::endl;
             return false;
         }
 
-        // I don't know if KinDyn can perform some operations on the model
-        // For safety I get the model loaded instead of using the input one
-        const iDynTree::Model& loadedModel = m_dynamics.model();
-        m_dofs = loadedModel.getNrOfDOFs();
-
-        //prepare jiont limits
+        //prepare joint limits
         m_jointLimits.clear();
-        m_jointLimits.resize(m_dofs);
         //TODO to be changed to +_ infinity
         //default: no limits
         m_jointLimits.assign(m_dofs, std::pair<double, double>(-2e+19, 2e+19));
 
         //for each joint, ask the limits
-        for (iDynTree::JointIndex jointIdx = 0; jointIdx < loadedModel.getNrOfJoints(); ++jointIdx) {
-            iDynTree::IJointConstPtr joint = loadedModel.getJoint(jointIdx);
+        for (iDynTree::JointIndex jointIdx = 0; jointIdx < model.getNrOfJoints(); ++jointIdx) {
+            iDynTree::IJointConstPtr joint = model.getJoint(jointIdx);
             //if the joint does not have limits skip it
             if (!joint->hasPosLimits())
                 continue;
@@ -120,7 +138,7 @@ namespace kinematics {
         m_comHullConstraint.setActive(false);
 
         m_areBaseInitialConditionsSet = false;
-        m_areJointsInitialConditionsSet = false;
+        m_areJointsInitialConditionsSet = internal::kinematics::InverseKinematicsData::InverseKinematicsInitialConditionNotSet;
         
         m_comTarget.isActive = false;
         m_comTarget.weight = 0;
@@ -188,8 +206,9 @@ namespace kinematics {
             m_areBaseInitialConditionsSet = true;
         }
         if (initialJointCondition) {
+            assert(initialJointCondition->size() == m_jointInitialConditions.size());
             m_jointInitialConditions = *initialJointCondition;
-            m_areJointsInitialConditionsSet = true;
+            m_areJointsInitialConditionsSet = internal::kinematics::InverseKinematicsData::InverseKinematicsInitialConditionFull;
         }
 
         return true;
@@ -218,7 +237,7 @@ namespace kinematics {
     {
         assert(m_preferredJointsConfiguration.size() == desiredJointConfiguration.size());
         m_preferredJointsConfiguration = desiredJointConfiguration;
-        if( weight >= 0.0 ) {
+        if (weight >= 0.0) {
             m_preferredJointsWeight = weight;
         }
         return true;
@@ -248,11 +267,25 @@ namespace kinematics {
             m_baseInitialCondition = m_state.basePose;
         }
 
-        if (!m_areJointsInitialConditionsSet) {
-            m_jointInitialConditions = m_state.jointsConfiguration;
+        switch (m_areJointsInitialConditionsSet) {
+            case InverseKinematicsInitialConditionNotSet:
+                m_jointInitialConditions = m_state.jointsConfiguration;
+                break;
+            case InverseKinematicsInitialConditionPartial:
+                // in this case we have to set in m_jointInitialConditions
+                // the joints in m_state.jointsConfiguration which are not considered
+                // in the reduced variables
+                for (size_t i = 0; i < m_reducedVariablesInfo.fixedVariables.size(); ++i) {
+                    if (!m_reducedVariablesInfo.fixedVariables[i]) continue;
+                    // joint is fixed => set the initial condition
+                    m_jointInitialConditions(i) = m_state.jointsConfiguration(i);
+                }
+                break;
+            default:
+                break;
         }
 
-        //2) Check joint limits.. Is this necessary?
+        //2) Check joint limits..
         for (size_t i = 0; i < m_jointInitialConditions.size(); ++i) {
             //check joint to be inside limit
             double &jointValue = m_jointInitialConditions(i);
@@ -274,15 +307,6 @@ namespace kinematics {
     void InverseKinematicsData::setDefaultTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode)
     {
         m_defaultTargetResolutionMode = mode;
-
-//        if(m_comTarget.isActive){
-//            if(mode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly){
-//                this->setCoMasConstraint(true);
-//            }
-//            else{
-//                this->setCoMasConstraint(false);
-//            }
-//        }
     }
 
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint InverseKinematicsData::defaultTargetResolutionMode()
@@ -316,9 +340,10 @@ namespace kinematics {
             m_solver->Options()->SetIntegerValue("print_level",m_verbosityLevel);
             m_solver->Options()->SetIntegerValue("max_iter", m_maxIter);
             m_solver->Options()->SetNumericValue("max_cpu_time", m_maxCpuTime);
-            m_solver->Options()->SetNumericValue("tol",m_tol);
-            m_solver->Options()->SetNumericValue("constr_viol_tol",m_constrTol);
-            m_solver->Options()->SetIntegerValue("acceptable_iter",0);
+            m_solver->Options()->SetNumericValue("tol", m_tol);
+            m_solver->Options()->SetNumericValue("constr_viol_tol", m_constrTol);
+            m_solver->Options()->SetIntegerValue("acceptable_iter", 5);
+            m_solver->Options()->SetStringValue("fixed_variable_treatment", "make_parameter"); //which btw is the default option
 #ifndef NDEBUG
             m_solver->Options()->SetStringValue("derivative_test", "first-order");
 #endif
@@ -354,6 +379,7 @@ namespace kinematics {
     void InverseKinematicsData::getSolution(iDynTree::Transform & baseTransformSolution,
                                             iDynTree::VectorDynSize & shapeSolution)
     {
+        assert(shapeSolution.size() == m_dofs);
         baseTransformSolution = m_baseResults;
         shapeSolution         = m_jointsResults;
     }

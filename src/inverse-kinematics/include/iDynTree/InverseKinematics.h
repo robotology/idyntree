@@ -124,15 +124,18 @@ public:
     /*!
      * @brief set the kinematic model to be used in the optimization
      *
-     * All the degrees of freedom of the model will be used as
-     * optimization variables. If you want to perform the inverse kinematics
-	 * just on a subset of the internal joints of the robot, please use the
+     * All the degrees of freedom listed in the second parameters will be used as
+     * optimization variables. 
+     * If the vector is empty, all the joints will be used.
+     *
+     * @note you may want to simplify the model by calling
 	 * loadReducedModelFromFullModel method contained in the ModelLoader class.
      *
      * @param model the kinematic model to be used in the optimization
      * @return true if successful. False otherwise
      */
-    bool setModel(const iDynTree::Model &model);
+    bool setModel(const iDynTree::Model &model,
+                  const std::vector<std::string> &consideredJoints = std::vector<std::string>());
 
     /*!
      * Reset the variables.
@@ -144,16 +147,35 @@ public:
     bool setFloatingBaseOnFrameNamed(const std::string &floatingBaseFrameName);
 
     /*!
-     * Sets the robot configuration
+     * Sets the robot current configuration
      *
      *
      * @param baseConfiguration  transformation identifying the base pose with respect to the world frame
      * @param robotConfiguration the robot configuration
      *
+     * @note the size (and order) of jointConfiguration must match the joints in the model, not
+     * in the consideredJoints variable
+     *
      * @return true if successful, false otherwise.
      */
-    bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
-                               const iDynTree::VectorDynSize& jointConfiguration);
+    bool IDYNTREE_DEPRECATED_WITH_MSG("Use setCurrentRobotConfiguration instead")
+    setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
+                          const iDynTree::VectorDynSize& jointConfiguration);
+
+    /*!
+     * Sets the robot current configuration
+     *
+     *
+     * @param baseConfiguration  transformation identifying the base pose with respect to the world frame
+     * @param robotConfiguration the robot configuration
+     *
+     * @note the size (and order) of jointConfiguration must match the joints in the model, not
+     * in the consideredJoints variable
+     *
+     * @return true if successful, false otherwise.
+     */
+    bool setCurrentRobotConfiguration(const iDynTree::Transform& baseConfiguration,
+                                      const iDynTree::VectorDynSize& jointConfiguration);
 
     /*!
      * Set configuration for the specified joint
@@ -581,6 +603,8 @@ public:
      *
      * The solver will try to obtain solutions as similar to the specified configuration as possible
      *
+     * @note the desiredJointConfiguration have the same serialisation of the joints in the specified model
+     *
      * @param[in] desiredJointConfiguration configuration for the joints
      * @param[in] weight weight for the joint configuration cost.
      *                   If it is not passed, the previous passed value will be mantained.
@@ -588,19 +612,28 @@ public:
      *
      * @return true if successful, false otherwise.
      */
-    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+    bool IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setDesiredFullJointsConfiguration or setDesiredReducedJointConfiguration instead")
+    setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+    bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+    bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+
 
     /*!
      * Initial guess for the solution
      *
+     * @note the initialCondition variable have the same serialisation of the joints in the specified model
      * @param baseTransform     initial base pose
      * @param initialCondition  initial joints configuration
      * @return
      */
-    bool setInitialCondition(const iDynTree::Transform* baseTransform,
-                             const iDynTree::VectorDynSize* initialCondition);
+    bool IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setFullJointsInitialCondition or setReducedInitialCondition instead")
+    setInitialCondition(const iDynTree::Transform* baseTransform,
+                        const iDynTree::VectorDynSize* initialCondition);
 
-
+    bool setFullJointsInitialCondition(const iDynTree::Transform* baseTransform,
+                                       const iDynTree::VectorDynSize* initialCondition);
+    bool setReducedInitialCondition(const iDynTree::Transform* baseTransform,
+                                    const iDynTree::VectorDynSize* initialCondition);
 
     // This is one part should be checked so as to properly enable warm start
     bool solve();
@@ -610,13 +643,28 @@ public:
     ///@{
 
     /*!
-     * Initial guess for the solution
+     * Return the last solution of the inverse kinematics problem
      *
      * @param[out] baseTransformSolution  solution for the base position
      * @param[out] shapeSolution       solution for the shape (the internal configurations)
      */
-    void getSolution(iDynTree::Transform & baseTransformSolution,
-                     iDynTree::VectorDynSize & shapeSolution);
+    void IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit getFullJointsSolution or getReducedSolution instead")
+    getSolution(iDynTree::Transform& baseTransformSolution,
+                iDynTree::VectorDynSize& shapeSolution);
+
+    void getFullJointsSolution(iDynTree::Transform& baseTransformSolution,
+                               iDynTree::VectorDynSize& shapeSolution);
+
+    /*!
+     * Return the last solution of the inverse kinematics problem
+     *
+     * This method returns in the shapeSolution variable only the joints that have been optimised
+     * viz. only the joints specified in the consideredJoints variable in the initialization 
+     * @param[out] baseTransformSolution  solution for the base position
+     * @param[out] shapeSolution       solution for the shape (the internal configurations)
+     */
+    void getReducedSolution(iDynTree::Transform& baseTransformSolution,
+                            iDynTree::VectorDynSize& shapeSolution);
 
     ///@}
 
@@ -626,7 +674,6 @@ public:
     /*
      Other iKin features:
      - set joint limits for each joint (different from the one loaded)
-     - block joint
      - Select different solutions for the target
      */
 
@@ -640,7 +687,9 @@ public:
      * @return A constant reference to iDynTree::Model used by the inverse kinematics.
      */
     const Model & model() const;
-    
+
+    size_t numberOfOptimisationVariables() const;
+
     void setCOMTarget(iDynTree::Position& desiredPosition, double weight = 1.0);
     
     void setCOMAsConstraint(bool asConstraint = true);
