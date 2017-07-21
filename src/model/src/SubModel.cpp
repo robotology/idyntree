@@ -128,7 +128,25 @@ bool SubModelDecomposition::splitModelAlongJoints(const Model& model,
                       << " but no joint with that is in the model. " << std::endl;
             return false;
         }
+
+        // Check for duplicates (while it would be possible to handle duplicates,
+        // duplicates are tipically associated with some error in the input parameters)
+        // O(n^2) solution for checking the duplicates, it can be improved but this simple solution
+        // should work fine for tipical uses cases
+        for (size_t duplicateJnt=0; duplicateJnt < splitJoints.size(); duplicateJnt++ )
+        {
+            if (duplicateJnt != jnt && splitJoints[jnt] == splitJoints[duplicateJnt])
+            {
+                std::cerr << "[ERROR] SubModelDecomposition::splitModelAlongJoints error : "
+                          << " the joint " << splitJoints[jnt] << " is both the element "
+                          << jnt << " and " << duplicateJnt << " of the splitJoints list,"
+                          << " please check the list of joints." << std::endl;
+                return false;
+            }
+        }
     }
+
+    // secondly we check for duplicates
 
     // The number of link in the decomposition is exactly
     // the number of links in the model
