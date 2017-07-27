@@ -216,7 +216,10 @@ void checkSimpleModelExternalWrenchEstimationWithFTSensors()
     Direction dir(1.0,0.0,0.0);
     axis.setDirection(dir);
     axis.setOrigin(Position::Zero());
-    RevoluteJoint joint23(2,3,iDynTree::Transform::Identity(),axis);
+    RevoluteJoint joint23;
+    joint23.setAttachedLinks(2, 3);
+    joint23.setRestTransform(iDynTree::Transform::Identity());
+    joint23.setAxis(axis, 3);
 
     model.addJoint("joint01",&joint01);
     model.addJoint("joint12",&joint12);

@@ -493,8 +493,10 @@ int main()
 
     iDynTree::Axis axis(Direction(0,0,1),Position::Zero());
 
-    IJoint* p_joint = new RevoluteJoint(0,1,
-                                iDynTree::Transform(Rotation::RPY(0,0,0),Position(0.0,0.0,0.0)),axis);
+    RevoluteJoint* p_joint = new RevoluteJoint();
+    p_joint->setAttachedLinks(0,1);
+    p_joint->setRestTransform(iDynTree::Transform(Rotation::RPY(0,0,0),Position(0.0,0.0,0.0)));
+    p_joint->setAxis(axis, 1);
     //IJoint* p_joint = new FixedJoint(0,1,
     //                            iDynTree::Transform(Rotation::RPY(0,0,0),Position(0.0,0.0,0.0)));
 

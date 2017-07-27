@@ -21,6 +21,18 @@
 namespace iDynTree
 {
 
+PrismaticJoint::PrismaticJoint():
+        link1(LINK_INVALID_INDEX), link2(LINK_INVALID_INDEX), link1_X_link2_at_rest(Transform::Identity()),
+        translation_axis_wrt_link1(Axis(Direction(1.0, 0.0, 0.0), Position::Zero()))
+{
+    this->setPosCoordsOffset(0);
+    this->setDOFsOffset(0);
+
+    this->resetAxisBuffers();
+    this->resetBuffers(0);
+    this->disablePosLimits();
+}
+
 PrismaticJoint::PrismaticJoint(const LinkIndex _link1, const LinkIndex _link2,
                              const Transform& _link1_X_link2, const Axis& _translation_axis_wrt_link1):
                              link1(_link1), link2(_link2), link1_X_link2_at_rest(_link1_X_link2),
@@ -110,7 +122,7 @@ void PrismaticJoint::resetBuffers(const double new_q) const
 
 void PrismaticJoint::resetAxisBuffers() const
 {
-    this->S_link1_link2 = translation_axis_wrt_link1.getTranslationTwist(1.0);
+    this->S_link1_link2 = -translation_axis_wrt_link1.getTranslationTwist(1.0);
     this->S_link2_link1 = (link1_X_link2_at_rest.inverse()*translation_axis_wrt_link1).getTranslationTwist(1.0);
 }
 
@@ -170,15 +182,16 @@ SpatialMotionVector PrismaticJoint::getMotionSubspaceVector(int dof_i,
 }
 
 
-Axis PrismaticJoint::getAxis(const LinkIndex linkA) const
+Axis PrismaticJoint::getAxis(const LinkIndex child,
+                             const LinkIndex /*parent*/) const
 {
-    if( linkA == link1 )
+    if( child == link1 )
     {
-        return translation_axis_wrt_link1;
+        return translation_axis_wrt_link1.reverse();
     }
     else
     {
-        assert(linkA == link2);
+        assert(child == link2);
         return link1_X_link2_at_rest.inverse()*translation_axis_wrt_link1;
     }
 }
@@ -194,6 +207,20 @@ void PrismaticJoint::setAxis(const Axis& prismaticAxis_wrt_link1)
     this->translation_axis_wrt_link1 = prismaticAxis_wrt_link1;
 
     this->resetAxisBuffers();
+}
+
+void PrismaticJoint::setAxis(const Axis &prismaticAxis,
+                             const LinkIndex child, const LinkIndex /*parent*/)
+{
+    if( child == link1 )
+    {
+        translation_axis_wrt_link1 = prismaticAxis.reverse();
+    }
+    else
+    {
+        assert(child == link2);
+        translation_axis_wrt_link1 = link1_X_link2_at_rest*prismaticAxis;
+    }
 }
 
 void PrismaticJoint::computeChildVelAcc(const VectorDynSize & jntPos,

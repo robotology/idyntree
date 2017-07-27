@@ -168,7 +168,14 @@ namespace iDynTree
          * vector  such that
          * v_child = S_{child,parent}*dq_i + child_X_parent*v_parent
          * if the velocities associated to all other DOFs of the joint
-         * are considered zero.
+         * are considered zero, where v_child and v_parent are the left-trivialized
+         * (body) velocities of the link child and parent.
+         *
+         * See
+         * "Modelling, Estimation and Identification of Humanoid Robots Dynamics"
+         * Silvio Traversaro - Section 3.2
+         * https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf
+         * for more details.
          *
          * @return the motion subspace vector.
          *
