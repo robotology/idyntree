@@ -265,7 +265,7 @@ void getJointSerializationFromDynTree(DynTree & dynTree,
         assert(ok);
 
         // if the joints is also in the model, add it
-        if( model.getJointIndex(jointName) != iDynTree::JOINT_INVALID_INDEX )
+        if( model.isJointNameUsed(jointName) )
         {
             joints.push_back(jointName);
         }
@@ -290,6 +290,7 @@ int main(int argc, char ** argv)
 
     //Creating the DynTree : kinematic/dynamics structure, force torque sensors, imu sensor
     std::string urdf_filename = getAbsModelPath("icub_skin_frames.urdf");
+    std::cerr << "Creating TorqueEstimationTree from file " << urdf_filename << std::endl;
     iCub::iDynTree::TorqueEstimationTree * icub_model_estimation =
         new iCub::iDynTree::TorqueEstimationTree(urdf_filename,dof_serialization,ft_serialization,"imu_frame");
 

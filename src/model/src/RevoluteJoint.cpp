@@ -21,6 +21,18 @@
 namespace iDynTree
 {
 
+RevoluteJoint::RevoluteJoint():
+        link1(LINK_INVALID_INDEX), link2(LINK_INVALID_INDEX), link1_X_link2_at_rest(Transform::Identity()),
+        rotation_axis_wrt_link1(Axis(Direction(1.0, 0.0, 0.0), Position::Zero()))
+{
+    this->setPosCoordsOffset(0);
+    this->setDOFsOffset(0);
+
+    this->resetAxisBuffers();
+    this->resetBuffers(0);
+    this->disablePosLimits();
+}
+
 RevoluteJoint::RevoluteJoint(const LinkIndex _link1, const LinkIndex _link2,
                              const Transform& _link1_X_link2, const Axis& _rotation_axis_wrt_link1):
                              link1(_link1), link2(_link2), link1_X_link2_at_rest(_link1_X_link2),
@@ -170,15 +182,16 @@ SpatialMotionVector RevoluteJoint::getMotionSubspaceVector(int dof_i,
 }
 
 
-Axis RevoluteJoint::getAxis(const LinkIndex linkA) const
+Axis RevoluteJoint::getAxis(const LinkIndex child,
+                            const LinkIndex /*parent*/) const
 {
-    if( linkA == link1 )
+    if( child == link1 )
     {
-        return rotation_axis_wrt_link1;
+        return rotation_axis_wrt_link1.reverse();
     }
     else
     {
-        assert(linkA == link2);
+        assert(child == link2);
         return link1_X_link2_at_rest.inverse()*rotation_axis_wrt_link1;
     }
 }
@@ -192,6 +205,22 @@ void RevoluteJoint::setAttachedLinks(const LinkIndex _link1, const LinkIndex _li
 void RevoluteJoint::setAxis(const Axis& revoluteAxis_wrt_link1)
 {
     this->rotation_axis_wrt_link1 = revoluteAxis_wrt_link1;
+
+    this->resetAxisBuffers();
+}
+
+void RevoluteJoint::setAxis(const Axis &revoluteAxis,
+                            const LinkIndex child, const LinkIndex /*parent*/)
+{
+    if( child == link1 )
+    {
+        rotation_axis_wrt_link1 = revoluteAxis.reverse();
+    }
+    else
+    {
+        assert(child == link2);
+        rotation_axis_wrt_link1 = link1_X_link2_at_rest*revoluteAxis;
+    }
 
     this->resetAxisBuffers();
 }

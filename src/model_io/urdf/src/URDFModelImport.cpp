@@ -369,13 +369,19 @@ bool jointFromURDFXML(const Model & model,
     else if ( type_str == "revolute"
            || type_str == "continuous" )
     {
-        p_joint = new RevoluteJoint(parentLinkIndex,childLinkIndex,
-                                    parent_T_joint,parent_T_joint*axis_wrt_childLink);
+        RevoluteJoint * rev_joint = new RevoluteJoint();
+        rev_joint->setAttachedLinks(parentLinkIndex,childLinkIndex);
+        rev_joint->setRestTransform(parent_T_joint);
+        rev_joint->setAxis(axis_wrt_childLink, childLinkIndex);
+        p_joint = static_cast<IJoint*>(rev_joint);
     }
     else if (type_str == "prismatic")
     {
-        p_joint = new PrismaticJoint(parentLinkIndex,childLinkIndex,
-                                    parent_T_joint,parent_T_joint*axis_wrt_childLink);
+        PrismaticJoint * prism_joint = new PrismaticJoint();
+        prism_joint->setAttachedLinks(parentLinkIndex,childLinkIndex);
+        prism_joint->setRestTransform(parent_T_joint);
+        prism_joint->setAxis(axis_wrt_childLink, childLinkIndex);
+        p_joint = static_cast<IJoint*>(prism_joint);
     }
 
     assert(p_joint != 0);

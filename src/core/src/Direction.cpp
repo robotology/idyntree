@@ -7,6 +7,7 @@
 
 #include <iDynTree/Core/Direction.h>
 
+#include <iDynTree/Core/EigenHelpers.h>
 #include <Eigen/Dense>
 
 #include <cstdio>
@@ -59,6 +60,52 @@ namespace iDynTree
 
         return;
     }
+
+    bool Direction::isParallel(const Direction& otherDirection, double tolerance) const
+    {
+        // The tolerance should be positive
+        assert(tolerance > 0);
+
+        // Compute the difference of the norm
+        Eigen::Vector3d diff = toEigen(*this)-toEigen(otherDirection);
+        double diffNorm = diff.norm();
+
+        // There are two possibilities for two directions to be parallel
+        // either they point in the same direction, or in opposite directions
+        if( ( diffNorm < tolerance ) ||
+            ( fabs(diffNorm-2) < tolerance ) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool Direction::isPerpendicular(const Direction& otherDirection, double tolerance) const
+    {
+        assert(tolerance > 0);
+
+        double fabsDotProduct = fabs(toEigen(*this).dot(toEigen(otherDirection)));
+
+        if( fabsDotProduct > tolerance )
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    Direction Direction::reverse() const
+    {
+        return Direction(-this->m_data[0],
+                         -this->m_data[1],
+                         -this->m_data[2]);
+    }
+
 
     std::string Direction::toString() const
     {

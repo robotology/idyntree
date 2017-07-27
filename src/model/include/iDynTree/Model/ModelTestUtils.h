@@ -69,7 +69,10 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
     }
     else if( jointType == 1 )
     {
-        RevoluteJoint revJoint(parentLinkIndex,newLinkIndex,getRandomTransform(),getRandomAxis());
+        RevoluteJoint revJoint;
+        revJoint.setAttachedLinks(parentLinkIndex,newLinkIndex);
+        revJoint.setRestTransform(getRandomTransform());
+        revJoint.setAxis(getRandomAxis(),newLinkIndex);
         model.addJoint(newLinkName+"joint",&revJoint);
     }
     else

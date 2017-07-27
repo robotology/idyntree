@@ -12,7 +12,7 @@
 #include <iDynTree/Core/SpatialMotionVector.h>
 
 #include <iDynTree/Core/Axis.h>
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/MovableJointImpl.h>
 
 namespace iDynTree
@@ -53,6 +53,9 @@ namespace iDynTree
         /**
          * Constructor
          */
+        PrismaticJoint();
+
+        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter methods to specify the parameters of the joint")
         PrismaticJoint(const LinkIndex link1, const LinkIndex link2,
                       const Transform& link1_X_link2, const Axis& _translation_axis_wrt_link1);
 
@@ -75,7 +78,21 @@ namespace iDynTree
         // Documentation inherited
         virtual void setRestTransform(const Transform& link1_X_link2);
 
+        /**
+         * Set the prismatic axis of the joint, expressed in specified link frame, that is considered the "child"
+         * frame regarding the sign of the axis.
+         *
+         * See getAxis method for more information.
+         *
+         * @warning This method should be called after a valid restTransform between link1 and link2 has been
+         *          set by calling the setRestTransform method.
+         */
+        virtual void setAxis(const Axis& prismaticAxis,
+                             const LinkIndex child,
+                             const LinkIndex parent=LINK_INVALID_INDEX);
+
         // Set the prismatic axis expressed in link1
+        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setAxis method in which the link considered \"child\" is explicitly specified")
         virtual void setAxis(const Axis& prismaticAxis_wrt_link1);
 
         // Documentation inherited
@@ -85,13 +102,31 @@ namespace iDynTree
         virtual LinkIndex getSecondAttachedLink() const;
 
         /**
-         * Get the prismatic axis of the robot, expressed in linkA frame.
+         * Get the revolute axis of the robot, expressed in linkA frame.
          *
-         * @param linkA the link frame (one of the two at which the link is attached)
-         *              in which the returned axis is expressed.
+         * @param child the link frame (one of the two at which the link is attached)
+         *              in which the returned axis is expressed. Furthermore, the
+         *              axis direction depends on the assumption that this frame is
+         *              considered the "child" in the relationship.
          *
+         * See
+         *
+         * Seth, A., Sherman, M., Eastman, P., & Delp, S. (2010).
+         * Minimal formulation of joint motion for biomechanisms.
+         * Nonlinear Dynamics, 62(1), 291-303.
+         * https://nmbl.stanford.edu/publications/pdf/Seth2010.pdf
+         * Section 2.4
+         *
+         * and
+         *
+         * "Modelling, Estimation and Identification of Humanoid Robots Dynamics"
+         * Traversaro - Section 3.2
+         * https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf
+         *
+         * for more details.
          */
-        virtual Axis getAxis(const LinkIndex linkA) const;
+        virtual Axis getAxis(const LinkIndex child,
+                             const LinkIndex parent=LINK_INVALID_INDEX) const;
 
         // Documentation inherited
         virtual Transform getRestTransform(const LinkIndex child,
