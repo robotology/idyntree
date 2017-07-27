@@ -59,3 +59,7 @@ if (IDYNTREE_USES_YARP AND IDYNTREE_USES_QT5 AND IDYNTREE_USES_ICUB_MAIN)
     endif()
     add_subdirectory(plotter)
 endif()
+
+if (IDYNTREE_USES_YARP)
+    add_subdirectory(yarprobotstatepublisher)
+endif ()
