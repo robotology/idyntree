@@ -61,7 +61,12 @@ enum UnknownWrenchContactType
     /**
      * Contact assumed to be a pure force with a known direction excerted on the contact point
      */
-    PURE_FORCE_WITH_KNOWN_DIRECTION
+    PURE_FORCE_WITH_KNOWN_DIRECTION,
+
+    /**
+     * The contact forces is assumed to be known.
+     */
+    NO_UNKNOWNS
 };
 
 
@@ -82,12 +87,14 @@ struct UnknownWrenchContact
     {}
 
     UnknownWrenchContact(const UnknownWrenchContactType _unknownType,
-                         const Position & _contactPoint,
+                         const Position  & _contactPoint,
                          const Direction & _forceDirection = iDynTree::Direction::Default(),
+                         const Wrench    & _knownWrench = iDynTree::Wrench(),
                          const unsigned long & _contactId = 0): unknownType(_unknownType),
-                                                                          contactPoint(_contactPoint),
-                                                                          forceDirection(_forceDirection),
-                                                                          contactId(_contactId)
+                                                                contactPoint(_contactPoint),
+                                                                forceDirection(_forceDirection),
+                                                                knownWrench(_knownWrench),
+                                                                contactId(_contactId)
     {}
 
     /**
@@ -105,6 +112,13 @@ struct UnknownWrenchContact
      * contains the known direction (in link frame) of the force.
      */
     Direction forceDirection;
+
+    /**
+     * If unknownType is NO_UNKNOWNS,
+     * contains the value of the contact force, with the orientation of the link frame,
+     * and w.r.t. to the origin of the link frame, i.e. it ignores the contactPoint attribute.
+     */
+    Wrench knownWrench;
 
     /**
      * Unique id identifing the contact.
