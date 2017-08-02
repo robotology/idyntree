@@ -124,7 +124,6 @@ bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
         return false;
     }
 
-
     UnknownWrenchContact unknownContactInLink;
 
     unknownContactInLink.unknownType = unknownContactInFrame.unknownType;
@@ -133,6 +132,11 @@ bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
     if( unknownContactInFrame.unknownType == PURE_FORCE_WITH_KNOWN_DIRECTION )
     {
         unknownContactInLink.forceDirection =  link_H_frame*unknownContactInFrame.forceDirection;
+    }
+
+    if (unknownContactInFrame.unknownType == NO_UNKNOWNS)
+    {
+        unknownContactInLink.knownWrench =  link_H_frame*unknownContactInFrame.knownWrench;
     }
 
     addNewContactForLink(linkIndex,unknownContactInLink);
@@ -172,6 +176,9 @@ std::string LinkUnknownWrenchContacts::toString(const Model& model) const
                         break;
                     case PURE_FORCE_WITH_KNOWN_DIRECTION:
                         ss << "One pure force contact with known direction with pos: " << this->contactWrench(l,c).contactPoint.toString() << ":" << std::endl;
+                        break;
+                    case NO_UNKNOWNS:
+                        ss << "One fully known contact wrench with value: " << this->contactWrench(l,c).knownWrench.toString() << ":" << std::endl;
                         break;
                 }
             }
@@ -414,6 +421,9 @@ size_t countUnknowns(const Traversal& traversal, const LinkUnknownWrenchContacts
                 case PURE_FORCE_WITH_KNOWN_DIRECTION:
                     unknowns += 1;
                     break;
+                case NO_UNKNOWNS:
+                    //unknowns += 0;
+                    break;
                 default:
                     assert(false);
                     break;
@@ -424,12 +434,12 @@ size_t countUnknowns(const Traversal& traversal, const LinkUnknownWrenchContacts
     return unknowns;
 }
 
-void computeMatrixOfEstimationEquation(const Model& model,
-                                       const Traversal& traversal,
-                                       const LinkUnknownWrenchContacts& unknownWrenches,
-                                       const JointPosDoubleArray & jointPos,
-                                       const size_t subModelIndex,
-                                             estimateExternalWrenchesBuffers& bufs)
+void computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(const Model& model,
+                                                             const Traversal& traversal,
+                                                             const LinkUnknownWrenchContacts& unknownWrenches,
+                                                             const JointPosDoubleArray & jointPos,
+                                                             const size_t subModelIndex,
+                                                                   estimateExternalWrenchesBuffers& bufs)
 {
     // Count unknowns
      size_t unknowns = countUnknowns(traversal,unknownWrenches);
@@ -486,6 +496,12 @@ void computeMatrixOfEstimationEquation(const Model& model,
                      Aeig.block<6,1>(0,AcolsToWrite) =
                          toEigen(subModelBase_H_contact.asAdjointTransformWrench())*fDir;
                      AcolsToWrite += 1;
+                 }
+                     break;
+                 case NO_UNKNOWNS:
+                 {
+                     //AcolsToWrite += 0;
+                     toEigen(bufs.b[subModelIndex]) += -toEigen(subModelBase_H_link*(unknownWrench.knownWrench));
                  }
                      break;
                  default:
@@ -547,6 +563,8 @@ void storeResultsOfEstimation(const Traversal& traversal,
                     estimatedWrench.getAngularVec3().zero();
                     nextUnknownToRead += 1;
                     break;
+                case NO_UNKNOWNS:
+                    break;
                 default:
                     assert(false);
                     break;
@@ -589,7 +607,7 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
    bufs.b[subModelIndex] = knownTerms.asVector();
 
    // Now we compute the A matrix
-   computeMatrixOfEstimationEquation(model,traversal,unknownWrenches,jointPos,subModelIndex,bufs);
+   computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(model,traversal,unknownWrenches,jointPos,subModelIndex,bufs);
 
    // Now we compute the pseudo inverse
    pseudoInverse(toEigen(bufs.A[subModelIndex]),
@@ -641,7 +659,7 @@ bool estimateExternalWrenches(const Model& model,
         bufs.b[sm] = knownTerms.asVector();
 
         // Now we compute the A matrix
-        computeMatrixOfEstimationEquation(model,subModelTraversal,unknownWrenches,jointPos,sm,bufs);
+        computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(model,subModelTraversal,unknownWrenches,jointPos,sm,bufs);
 
         // Now we compute the pseudo inverse
         pseudoInverse(toEigen(bufs.A[sm]),
