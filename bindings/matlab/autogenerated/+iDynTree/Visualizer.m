@@ -9,52 +9,52 @@ classdef Visualizer < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1633, varargin{:});
+        tmp = iDynTreeMEX(1645, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1634, self);
+        iDynTreeMEX(1646, self);
         self.swigPtr=[];
       end
     end
     function varargout = init(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1635, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1647, self, varargin{:});
     end
     function varargout = getNrOfVisualizedModels(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1636, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1648, self, varargin{:});
     end
     function varargout = getModelInstanceName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1637, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1649, self, varargin{:});
     end
     function varargout = getModelInstanceIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1638, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1650, self, varargin{:});
     end
     function varargout = addModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1639, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1651, self, varargin{:});
     end
     function varargout = modelViz(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1640, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1652, self, varargin{:});
     end
     function varargout = camera(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1641, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1653, self, varargin{:});
     end
     function varargout = enviroment(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1642, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1654, self, varargin{:});
     end
     function varargout = run(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1643, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1655, self, varargin{:});
     end
     function varargout = draw(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1644, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1656, self, varargin{:});
     end
     function varargout = drawToFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1645, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1657, self, varargin{:});
     end
     function varargout = close(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1646, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1658, self, varargin{:});
     end
   end
   methods(Static)

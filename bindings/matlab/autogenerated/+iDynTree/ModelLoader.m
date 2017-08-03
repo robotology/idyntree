@@ -9,38 +9,38 @@ classdef ModelLoader < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1324, varargin{:});
+        tmp = iDynTreeMEX(1334, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = loadModelFromString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1325, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1335, self, varargin{:});
     end
     function varargout = loadModelFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1326, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1336, self, varargin{:});
     end
     function varargout = loadReducedModelFromFullModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1327, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1337, self, varargin{:});
     end
     function varargout = loadReducedModelFromString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1328, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1338, self, varargin{:});
     end
     function varargout = loadReducedModelFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1329, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1339, self, varargin{:});
     end
     function varargout = model(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1330, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1340, self, varargin{:});
     end
     function varargout = sensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1331, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1341, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1332, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1342, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1333, self);
+        iDynTreeMEX(1343, self);
         self.swigPtr=[];
       end
     end

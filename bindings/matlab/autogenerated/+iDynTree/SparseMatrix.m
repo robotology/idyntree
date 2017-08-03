@@ -53,20 +53,26 @@ classdef SparseMatrix < SwigRef
     function varargout = columns(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(135, self, varargin{:});
     end
-    function varargout = description(self,varargin)
+    function varargout = innerIndecesBuffer(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(136, self, varargin{:});
     end
-    function varargout = convertFromColumnMajor(self,varargin)
+    function varargout = outerIndecesBuffer(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(137, self, varargin{:});
     end
-    function varargout = toMatlab(self,varargin)
+    function varargout = description(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(138, self, varargin{:});
     end
-    function varargout = toMatlabDense(self,varargin)
+    function varargout = convertFromColumnMajor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(139, self, varargin{:});
     end
-    function varargout = fromMatlab(self,varargin)
+    function varargout = toMatlab(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(140, self, varargin{:});
+    end
+    function varargout = toMatlabDense(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(141, self, varargin{:});
+    end
+    function varargout = fromMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(142, self, varargin{:});
     end
   end
   methods(Static)

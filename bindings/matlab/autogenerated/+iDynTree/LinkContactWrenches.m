@@ -9,35 +9,35 @@ classdef LinkContactWrenches < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1163, varargin{:});
+        tmp = iDynTreeMEX(1169, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1164, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1170, self, varargin{:});
     end
     function varargout = getNrOfContactsForLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1165, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1171, self, varargin{:});
     end
     function varargout = setNrOfContactsForLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1166, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1172, self, varargin{:});
     end
     function varargout = getNrOfLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1167, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1173, self, varargin{:});
     end
     function varargout = contactWrench(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1168, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1174, self, varargin{:});
     end
     function varargout = computeNetWrenches(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1169, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1175, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1170, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1176, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1171, self);
+        iDynTreeMEX(1177, self);
         self.swigPtr=[];
       end
     end
