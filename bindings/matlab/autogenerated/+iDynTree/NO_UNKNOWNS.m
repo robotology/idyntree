@@ -1,7 +1,7 @@
-function v = SENSOR_FT_OFFSET_TORQUE_Z()
+function v = NO_UNKNOWNS()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = iDynTreeMEX(0, 44);
+    vInitialized = iDynTreeMEX(0, 11);
   end
   v = vInitialized;
 end
