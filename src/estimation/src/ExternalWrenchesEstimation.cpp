@@ -500,7 +500,7 @@ void computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(const Model& model,
                      break;
                  case NO_UNKNOWNS:
                  {
-                     //AcolsToWrite += 0;
+                     //why is it only using subModelBase_H_link instead of subModelBase_H_contact
                      toEigen(bufs.b[subModelIndex]) += -toEigen(subModelBase_H_link*(unknownWrench.knownWrench));
                  }
                      break;
@@ -564,6 +564,11 @@ void storeResultsOfEstimation(const Traversal& traversal,
                     nextUnknownToRead += 1;
                     break;
                 case NO_UNKNOWNS:
+                    //const Transform & subModelBase_H_link = bufs.subModelBase_H_link(visitedLinkIndex);
+                    //Transform link_H_contact = Transform(Rotation::Identity(),unknownWrench.contactPoint);
+                    //Transform subModelBase_H_contact = subModelBase_H_link*link_H_contact;
+                    //estimatedWrench=subModelBase_H_link*(unknownWrench.knownWrench);
+                    estimatedWrench=unknownWrench.knownWrench;
                     break;
                 default:
                     assert(false);
