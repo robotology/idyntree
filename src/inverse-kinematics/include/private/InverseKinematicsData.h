@@ -11,6 +11,7 @@
 #define IDYNTREE_INTERNAL_INVERSEKINEMATICSDATA_H
 
 #include <iDynTree/KinDynComputations.h>
+#include <iDynTree/Model/Model.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/Transform.h>
@@ -25,10 +26,6 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
-
-namespace iDynTree {
-    class Model;
-}
 
 namespace internal {
 namespace kinematics{
@@ -94,6 +91,7 @@ public:
     struct {
         std::vector<bool> fixedVariables; /* for each variable it says if it is fixed or optimisation variable */
         std::unordered_map<int, int> modelJointsToOptimisedJoints; // that is key = index in the reduced set of variables, value = index in the full model
+        iDynTree::Model reducedModel;
     } m_reducedVariablesInfo;
 
     ///@}
@@ -236,27 +234,6 @@ public:
     bool setJointConfiguration(const std::string& jointName, const double jointConfiguration);
 
     /*!
-     * Set the desired robot joint configurations
-     *
-     * This term will be used as reference for the regularization term
-     *
-     * @param desiredJointConfiguration desired joint configuration
-     * @param desiredJointWeight weight for the regularization term
-     * @return true if successfull, false otherwise
-     */
-    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const double desiredJointWeight);
-
-    /*!
-     * Set the initial condition for the solver (i.e. guess solution)
-     *
-     *
-     * @param baseTransform the guess for the base pose or NULL if no guess is provided
-     * @param jointInitialConditions the guess for the joint variables or NULL if no guess is provided
-     * @return true if successfull, false otherwise
-     */
-    bool setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* jointInitialConditions);
-
-    /*!
      * Set the type of parametrization for the SO3 (rotation)
      * Currently RPY and Quaternion are supported
      * @param parametrization type of parametrization
@@ -296,9 +273,6 @@ public:
      * @return true if the problem is solved. False otherwise
      */
     bool solveProblem();
-
-    void getSolution(iDynTree::Transform & baseTransformSolution,
-                     iDynTree::VectorDynSize & shapeSolution);
 
     /*!
      * Access the Kinematics and Dynamics object used by the solver

@@ -686,9 +686,12 @@ public:
      *
      * @return A constant reference to iDynTree::Model used by the inverse kinematics.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit fullModel or reducedModel instead")
     const Model & model() const;
 
-    size_t numberOfOptimisationVariables() const;
+    const Model & fullModel() const;
+    
+    const Model & reducedModel() const;
 
     void setCOMTarget(iDynTree::Position& desiredPosition, double weight = 1.0);
     

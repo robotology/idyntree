@@ -417,8 +417,7 @@ namespace iDynTree {
 
     bool InverseKinematics::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight)
     {
-        assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->setDesiredJointConfiguration(desiredJointConfiguration, weight);
+        return this->setDesiredReducedJointConfiguration(desiredJointConfiguration, weight);
     }
 
     bool InverseKinematics::setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight)
@@ -436,7 +435,6 @@ namespace iDynTree {
     {
         assert(m_pimpl);
         assert(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size() == desiredJointConfiguration.size());
-        //TODO: change here
         for (size_t i = 0; i < desiredJointConfiguration.size(); ++i) {
             IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = desiredJointConfiguration(i);
         }
@@ -449,8 +447,7 @@ namespace iDynTree {
 
     bool InverseKinematics::setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* initialCondition)
     {
-        assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->setInitialCondition(baseTransform, initialCondition);
+        return this->setReducedInitialCondition(baseTransform, initialCondition);
     }
 
     bool InverseKinematics::setFullJointsInitialCondition(const iDynTree::Transform* baseTransform,
@@ -479,7 +476,6 @@ namespace iDynTree {
         }
         if (initialCondition) {
             assert(initialCondition->size() == IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size());
-            //TODO: change this part
             for (size_t i = 0; i < initialCondition->size(); ++i) {
                 IK_PIMPL(m_pimpl)->m_jointInitialConditions(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = (*initialCondition)(i);
             }
@@ -543,8 +539,7 @@ namespace iDynTree {
     void InverseKinematics::getSolution(iDynTree::Transform & baseTransformSolution,
                                         iDynTree::VectorDynSize & shapeSolution)
     {
-        assert(m_pimpl);
-        IK_PIMPL(m_pimpl)->getSolution(baseTransformSolution,shapeSolution);
+        this->getReducedSolution(baseTransformSolution, shapeSolution);
         return;
     }
 
@@ -562,7 +557,6 @@ namespace iDynTree {
     {
         assert(m_pimpl);
         baseTransformSolution = IK_PIMPL(m_pimpl)->m_baseResults;
-        //TODO: change this line
         assert(shapeSolution.size() == IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size());
         for (size_t i = 0; i < shapeSolution.size(); ++i) {
             shapeSolution(i) = IK_PIMPL(m_pimpl)->m_jointsResults(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]);
@@ -581,14 +575,22 @@ namespace iDynTree {
 
     const Model& InverseKinematics::model() const
     {
+        assert(m_pimpl);
+        return this->reducedModel();
+    }
+
+    const Model& InverseKinematics::fullModel() const
+    {
+        assert(m_pimpl);
         return IK_PIMPL(m_pimpl)->m_dynamics.model();
     }
-
-    size_t InverseKinematics::numberOfOptimisationVariables() const
+    
+    const Model& InverseKinematics::reducedModel() const
     {
-        return IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size();
+        assert(m_pimpl);
+        return IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.reducedModel;
     }
-
+    
     bool InverseKinematics::isCOMTargetActive()
     {
         return IK_PIMPL(m_pimpl)->isCoMTargetActive();

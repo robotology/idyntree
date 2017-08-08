@@ -13,7 +13,6 @@
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/SpatialAcc.h>
-#include <iDynTree/Model/Model.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/Core/EigenHelpers.h>
 
@@ -57,10 +56,19 @@ namespace kinematics {
     bool InverseKinematicsData::setModel(const iDynTree::Model& model, const std::vector<std::string> &consideredJoints)
     {
         m_dofs = model.getNrOfDOFs();
+
         m_reducedVariablesInfo.fixedVariables.assign(m_dofs, false);
         m_reducedVariablesInfo.modelJointsToOptimisedJoints.clear();
 
         if (!consideredJoints.empty()) {
+
+            iDynTree::ModelLoader reducedModelLoader;
+            if (!reducedModelLoader.loadReducedModelFromFullModel(model, consideredJoints)){
+                std::cerr << "[ERROR] Error loading reduced robot model" << std::endl;
+                return false;
+            }
+            m_reducedVariablesInfo.reducedModel = reducedModelLoader.model();
+
             for (iDynTree::JointIndex jointIdx = 0; jointIdx < model.getNrOfDOFs(); ++jointIdx) {
                 std::string jointName = model.getJointName(jointIdx);
                 std::vector<std::string>::const_iterator found = std::find(consideredJoints.begin(), consideredJoints.end(), jointName);
@@ -73,6 +81,9 @@ namespace kinematics {
                 m_reducedVariablesInfo.modelJointsToOptimisedJoints.insert(std::unordered_map<int, int>::value_type(optimisedIndex, jointIdx));
             }
         } else {
+
+            m_reducedVariablesInfo.reducedModel = model;
+
             for (iDynTree::JointIndex jointIdx = 0; jointIdx < model.getNrOfDOFs(); ++jointIdx) {
                 m_reducedVariablesInfo.modelJointsToOptimisedJoints.insert(std::unordered_map<int, int>::value_type(jointIdx, jointIdx));
             }
@@ -198,22 +209,6 @@ namespace kinematics {
 
     iDynTree::KinDynComputations& InverseKinematicsData::dynamics() { return m_dynamics; }
 
-    bool InverseKinematicsData::setInitialCondition(const iDynTree::Transform* baseTransform,
-                                                    const iDynTree::VectorDynSize* initialJointCondition)
-    {
-        if (baseTransform) {
-            m_baseInitialCondition = *baseTransform;
-            m_areBaseInitialConditionsSet = true;
-        }
-        if (initialJointCondition) {
-            assert(initialJointCondition->size() == m_jointInitialConditions.size());
-            m_jointInitialConditions = *initialJointCondition;
-            m_areJointsInitialConditionsSet = internal::kinematics::InverseKinematicsData::InverseKinematicsInitialConditionFull;
-        }
-
-        return true;
-    }
-
     bool InverseKinematicsData::setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
                                                       const iDynTree::VectorDynSize& jointConfiguration)
     {
@@ -230,16 +225,6 @@ namespace kinematics {
         if (jointIndex == iDynTree::JOINT_INVALID_INDEX) return false;
         m_state.jointsConfiguration(jointIndex) = jointConfiguration;
         updateRobotConfiguration();
-        return true;
-    }
-
-    bool InverseKinematicsData::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const double weight)
-    {
-        assert(m_preferredJointsConfiguration.size() == desiredJointConfiguration.size());
-        m_preferredJointsConfiguration = desiredJointConfiguration;
-        if (weight >= 0.0) {
-            m_preferredJointsWeight = weight;
-        }
         return true;
     }
 
@@ -374,14 +359,6 @@ namespace kinematics {
         } else {
             return false;
         }
-    }
-
-    void InverseKinematicsData::getSolution(iDynTree::Transform & baseTransformSolution,
-                                            iDynTree::VectorDynSize & shapeSolution)
-    {
-        assert(shapeSolution.size() == m_dofs);
-        baseTransformSolution = m_baseResults;
-        shapeSolution         = m_jointsResults;
     }
     
     void InverseKinematicsData::setCoMTarget(iDynTree::Position& desiredPosition, double weight){
