@@ -3,7 +3,7 @@
 #include "ChartsManagerWindow.h"
 
 #include <yarp/os/ResourceFinder.h>
-#include <yarp/os/Time.h>
+#include <yarp/os/SystemClock.h>
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -284,7 +284,7 @@ std::string ChartsManager::createChartKey(const Chart& chart)
     //Create a unique key
     std::ostringstream keyStream;
     keyStream << "Chart_" << rand();
-    keyStream << "_" << yarp::os::Time::now();
+    keyStream << "_" << yarp::os::SystemClock::nowSystem();
     return keyStream.str();
 
 }
