@@ -9,26 +9,26 @@ classdef FreeFloatingAcc < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1158, varargin{:});
+        tmp = iDynTreeMEX(1163, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1159, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1164, self, varargin{:});
     end
     function varargout = baseAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1160, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1165, self, varargin{:});
     end
     function varargout = jointAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1161, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1166, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1162, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1167, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1163, self);
+        iDynTreeMEX(1168, self);
         self.swigPtr=[];
       end
     end

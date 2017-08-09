@@ -9,32 +9,32 @@ classdef TransformSemantics < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(756, varargin{:});
+        tmp = iDynTreeMEX(761, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = getRotationSemantics(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(757, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(762, self, varargin{:});
     end
     function varargout = getPositionSemantics(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(758, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(763, self, varargin{:});
     end
     function varargout = setRotationSemantics(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(759, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(764, self, varargin{:});
     end
     function varargout = setPositionSemantics(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(760, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(765, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(761, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(766, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(762, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(767, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(763, self);
+        iDynTreeMEX(768, self);
         self.swigPtr=[];
       end
     end

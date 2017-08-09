@@ -2,31 +2,31 @@ classdef ExternalMesh < iDynTree.SolidShape
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1054, self);
+        iDynTreeMEX(1059, self);
         self.swigPtr=[];
       end
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1055, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1060, self, varargin{:});
     end
     function varargout = filename(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1056, self);
+        varargout{1} = iDynTreeMEX(1061, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1057, self, varargin{1});
+        iDynTreeMEX(1062, self, varargin{1});
       end
     end
     function varargout = scale(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1058, self);
+        varargout{1} = iDynTreeMEX(1063, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1059, self, varargin{1});
+        iDynTreeMEX(1064, self, varargin{1});
       end
     end
     function self = ExternalMesh(varargin)
@@ -36,7 +36,7 @@ classdef ExternalMesh < iDynTree.SolidShape
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1060, varargin{:});
+        tmp = iDynTreeMEX(1065, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end

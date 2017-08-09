@@ -5,33 +5,33 @@ classdef IEnvironment < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1605, self);
+        iDynTreeMEX(1610, self);
         self.swigPtr=[];
       end
     end
     function varargout = getElements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1606, self, varargin{:});
-    end
-    function varargout = setElementVisibility(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1607, self, varargin{:});
-    end
-    function varargout = setBackgroundColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1608, self, varargin{:});
-    end
-    function varargout = setAmbientLight(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1609, self, varargin{:});
-    end
-    function varargout = getLights(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1610, self, varargin{:});
-    end
-    function varargout = addLight(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1611, self, varargin{:});
     end
-    function varargout = lightViz(self,varargin)
+    function varargout = setElementVisibility(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1612, self, varargin{:});
     end
-    function varargout = removeLight(self,varargin)
+    function varargout = setBackgroundColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1613, self, varargin{:});
+    end
+    function varargout = setAmbientLight(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1614, self, varargin{:});
+    end
+    function varargout = getLights(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1615, self, varargin{:});
+    end
+    function varargout = addLight(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1616, self, varargin{:});
+    end
+    function varargout = lightViz(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1617, self, varargin{:});
+    end
+    function varargout = removeLight(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1618, self, varargin{:});
     end
     function self = IEnvironment(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
