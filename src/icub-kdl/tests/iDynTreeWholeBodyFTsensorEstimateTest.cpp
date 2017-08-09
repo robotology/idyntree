@@ -20,7 +20,7 @@
 #include <yarp/sig/Vector.h>
 #include <yarp/sig/Matrix.h>
 
-#include <yarp/os/Time.h>
+#include <yarp/os/SystemClock.h>
 #include <yarp/os/Random.h>
 
 #include <yarp/math/api.h>
@@ -268,7 +268,7 @@ int main()
     //We can initialize the values to random to test that
     //iDyn and iDynTree return the same results
     yarp::os::Random rng;
-    rng.seed((int)yarp::os::Time::now());
+    rng.seed((int)yarp::os::SystemClock::nowSystem());
     double coeff = 1.0;
     set_random_vector(q_head,rng,coeff);
     set_random_vector(q_larm,rng,coeff);

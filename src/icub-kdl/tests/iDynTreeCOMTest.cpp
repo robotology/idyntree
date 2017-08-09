@@ -7,7 +7,7 @@
 #include <kdl/frames.hpp>
 
 #include <yarp/os/Random.h>
-#include <yarp/os/Time.h>
+#include <yarp/os/SystemClock.h>
 
 #include <yarp/math/api.h>
 #include <yarp/os/Log.h>
@@ -177,7 +177,7 @@ int main()
 
     //Initializing the random number generator
     yarp::os::Random rng;
-    rng.seed(yarp::os::Time::now());
+    rng.seed(yarp::os::SystemClock::nowSystem());
 
     ////////////////////////////////////////////////////////////////////
     //// iCubTree
