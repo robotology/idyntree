@@ -2,9 +2,9 @@ function varargout = JOINT_INVALID_NAME(varargin)
   narginchk(0,1)
   if nargin==0
     nargoutchk(0,1)
-    varargout{1} = iDynTreeMEX(801);
+    varargout{1} = iDynTreeMEX(806);
   else
     nargoutchk(0,0)
-    iDynTreeMEX(802,varargin{1});
+    iDynTreeMEX(807,varargin{1});
   end
 end

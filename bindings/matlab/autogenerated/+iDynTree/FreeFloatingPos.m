@@ -9,26 +9,26 @@ classdef FreeFloatingPos < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1140, varargin{:});
+        tmp = iDynTreeMEX(1145, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1141, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1146, self, varargin{:});
     end
     function varargout = worldBasePos(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1142, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1147, self, varargin{:});
     end
     function varargout = jointPos(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1143, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1148, self, varargin{:});
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1144, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1149, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1145, self);
+        iDynTreeMEX(1150, self);
         self.swigPtr=[];
       end
     end
