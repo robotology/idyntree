@@ -32,7 +32,7 @@ namespace iDynTree {
  * (see https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29)
  * which is compatible with the format used in the Eigen library (by using Map).
  */
-template <iDynTree::MatrixStorageOrdering ordering = iDynTree::ColumnMajor>
+template <iDynTree::MatrixStorageOrdering ordering>
 class iDynTree::SparseMatrix
 {
 private:

@@ -414,8 +414,8 @@ class BerdyHelper
     IndexRange getRangeJointWrench(const JointIndex idx);
     IndexRange getRangeDOFTorqueDynEq(const DOFIndex idx);
 
-    bool computeBerdySensorMatrices(SparseMatrix& Y, VectorDynSize& bY);
-    bool computeBerdyDynamicsMatrices(SparseMatrix& D, VectorDynSize& bD);
+    bool computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY);
+    bool computeBerdyDynamicsMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
 
     void cacheSensorsOrdering();
     void cacheDynamicVariablesOrdering();
@@ -485,6 +485,13 @@ public:
     const SensorsList& sensors() const;
 
     /**
+     * Returns if the helper is valid.
+     * The helper is valid if the model and the sensors have been loaded
+     * @return true if the helper is valid. False otherwise
+     */
+    bool isValid() const;
+
+    /**
      * Init the class
      *
      * @param[in] model The used model.
@@ -521,8 +528,8 @@ public:
     /**
      * Resize and set to zero Berdy matrices.
      */
-    bool resizeAndZeroBerdyMatrices(SparseMatrix &D, VectorDynSize &bD,
-                                    SparseMatrix &Y, VectorDynSize &bY);
+    bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
+                                    SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
 
     /**
      * Resize and set to zero Berdy matrices.
@@ -534,8 +541,8 @@ public:
     /**
      * Get Berdy matrices
      */
-    bool getBerdyMatrices(SparseMatrix &D, VectorDynSize &bD,
-                          SparseMatrix &Y, VectorDynSize &bY);
+    bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
+                          SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
     /**
      * Get Berdy matrices
      *

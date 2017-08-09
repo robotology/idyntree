@@ -254,7 +254,7 @@ namespace iDynTree
     }
 }
 
-%extend SparseMatrix
+%extend SparseMatrix<iDynTree::ColumnMajor>
 {
     // Convert to a sparse matrix
     mxArray * toMatlab() const
@@ -267,31 +267,18 @@ namespace iDynTree
         mwIndex* jc = mxGetJc(p);
         double *data = mxGetPr(p);
 
-        //for compatibility with the interface I need to create a wrapper of int*
-        //not of mwIndex*
-        int *tempIr = new int[self->numberOfNonZeros()];
-        if (!tempIr) return p;
-
-        int *tempJc = new int[self->columns() + 1];
-        if (!tempJc) {
-            delete [] tempJc;
-            return p;
-        }
-
-
-        self->convertToColumnMajor(data, tempIr, tempJc);
+        double* matrixBuffer = self->valuesBuffer();
+        int* tempIr = self->innerIndicesBuffer();
+        int* tempJc = self->outerIndicesBuffer();
 
         //copy back into real arrays
         for (unsigned i = 0; i < self->numberOfNonZeros(); ++i) {
             ir[i] = tempIr[i];
+            data[i] = matrixBuffer[i];
         }
         for (unsigned i = 0; i < self->columns() + 1; ++i) {
             jc[i] = tempJc[i];
         }
-        //delete buffers
-        delete [] tempIr;
-        delete [] tempJc;
-
         return p;
     }
 
@@ -303,7 +290,7 @@ namespace iDynTree
         //mapping output matrix to dense 
         memset(d, 0, sizeof(double) * self->rows() * self->columns());
         //mapping output matrix to dense
-        for (iDynTree::SparseMatrix::const_iterator it(self->begin());
+        for (typename iDynTree::SparseMatrix<iDynTree::ColumnMajor>::const_iterator it(self->begin());
              it != self->end(); ++it) {
             d[self->rows() * it->column + it->row] = it->value;
 

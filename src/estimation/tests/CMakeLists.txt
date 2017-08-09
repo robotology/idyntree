@@ -14,9 +14,10 @@ macro(add_estimation_test classname)
     endif()
 endmacro()
 
-if (NOT ${EIGEN3_VERSION} VERSION_LESS 3.3)
-  add_estimation_test(BerdyHelper)
-endif()
+
+add_estimation_test(BerdyHelper)
+add_estimation_test(BerdyMAPSolver)
+
 add_estimation_test(ExternalWrenchesEstimation)
 add_estimation_test(ExtWrenchesAndJointTorquesEstimator)
 add_estimation_test(SimpleLeggedOdometry)

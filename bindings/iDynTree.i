@@ -139,6 +139,9 @@ namespace std {
 %include "iDynTree/Core/MatrixDynSize.h"
 %include "iDynTree/Core/MatrixFixSize.h"
 %include "iDynTree/Core/SparseMatrix.h"
+%template(SparseMatrixRowMajor) iDynTree::SparseMatrix<iDynTree::RowMajor>;
+%template(SparseMatrixColMajor) iDynTree::SparseMatrix<iDynTree::ColumnMajor>;
+
 
 %include "iDynTree/Core/VectorDynSize.h"
 %include "iDynTree/Core/VectorFixSize.h"

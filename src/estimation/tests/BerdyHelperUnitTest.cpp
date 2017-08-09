@@ -84,7 +84,7 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
 
     // Check D and bD , in particular that D*d + bD = 0
     // Generated the Y e bY matrix and vector from berdy
-    SparseMatrix D, Y;
+    SparseMatrix<iDynTree::ColumnMajor> D, Y;
     VectorDynSize bD, bY;
     berdy.resizeAndZeroBerdyMatrices(D,bD,Y,bY);
     bool ok = berdy.getBerdyMatrices(D,bD,Y,bY);
@@ -213,7 +213,7 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
 
     // Check D and bD , in particular that D*d + bD = 0
     // Generated the Y e bY matrix and vector from berdy
-    SparseMatrix D, Y;
+    SparseMatrix<iDynTree::ColumnMajor> D, Y;
     VectorDynSize bD, bY;
     berdy.resizeAndZeroBerdyMatrices(D,bD,Y,bY);
     bool ok = berdy.getBerdyMatrices(D,bD,Y,bY);
