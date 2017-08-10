@@ -14,6 +14,7 @@
 using namespace iDynTree;
 using namespace std;
 
+template <iDynTree::MatrixStorageOrdering ordering>
 void testCreateMatrixFromAccessorOperator()
 {
 
@@ -30,7 +31,7 @@ void testCreateMatrixFromAccessorOperator()
     triplets.pushTriplet(iDynTree::Triplet(4, 2, 14));
     triplets.pushTriplet(iDynTree::Triplet(4, 4, 8));
 
-    SparseMatrix matrix(5,5);
+    SparseMatrix<ordering> matrix(5, 5);
     for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it) {
         matrix(it->row, it->column) = it->value;
     }
@@ -46,11 +47,13 @@ void testCreateMatrixFromAccessorOperator()
 
 }
 
+template <iDynTree::MatrixStorageOrdering ordering>
 void testCreateMatrixFromTriplets()
 {
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testCreateMatrixFromTriplets" << std::endl;
-    SparseMatrix matrix(5,5);
+    SparseMatrix<ordering> matrix;
+    matrix.resize(5, 5);
     Triplets triplets;
     triplets.pushTriplet(iDynTree::Triplet(0, 0, -6));
     triplets.pushTriplet(iDynTree::Triplet(2, 0, 7));
@@ -74,11 +77,12 @@ void testCreateMatrixFromTriplets()
     }
 }
 
+template <iDynTree::MatrixStorageOrdering ordering>
 void testCreateMatrixFromDuplicateTriplets()
 {
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testCreateMatrixFromDuplicateTriplets" << std::endl;
-    SparseMatrix matrix(5,5);
+    SparseMatrix<ordering> matrix(5, 5);
     Triplets triplets;
     triplets.pushTriplet(iDynTree::Triplet(0, 0, -6));
     triplets.pushTriplet(iDynTree::Triplet(0, 0, 5));
@@ -113,31 +117,33 @@ void testCreateMatrixFromDuplicateTriplets()
 
 }
 
-void testMatrixIterator(SparseMatrix matrix)
+template <iDynTree::MatrixStorageOrdering ordering>
+void testMatrixIterator(SparseMatrix<ordering> matrix)
 {
-    SparseMatrix originalMatrix(matrix);
+    SparseMatrix<ordering> originalMatrix(matrix);
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testMatrixIterator" << std::endl;
     //iterator can modify values
-    for (SparseMatrix::iterator it(matrix.begin()); it != matrix.end(); ++it) {
+    for (typename SparseMatrix<ordering>::iterator it(matrix.begin()); it != matrix.end(); ++it) {
         it->value()++;
     }
 
     //const iterator cannot
-    for (SparseMatrix::const_iterator it(matrix.begin()); it!= matrix.end() ; ++it) {
+    for (typename SparseMatrix<ordering>::const_iterator it(matrix.begin()); it!= matrix.end() ; ++it) {
         std::cout << it->value << "(" << it->row << "," << it->column << ")\n";
     }
 
     //Assertion:
     //All the elements in matrix = originalMatrix + 1
-    for (SparseMatrix::const_iterator it(matrix.begin()); it!= matrix.end() ; ++it) {
+    for (typename SparseMatrix<ordering>::const_iterator it(matrix.begin()); it!= matrix.end() ; ++it) {
         ASSERT_EQUAL_DOUBLE(matrix(it->row, it->column), 1 + originalMatrix(it->row, it->column));
     }
 
     std::cout << "------------------------------------" << std::endl;
 }
 
-void testZeroingMatrix(SparseMatrix matrix)
+template <iDynTree::MatrixStorageOrdering ordering>
+void testZeroingMatrix(SparseMatrix<ordering> matrix)
 {
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testZeroingMatrix" << std::endl;
@@ -164,50 +170,29 @@ void testClassesTraits()
 #endif
 }
 
-void testRowColumnMajorConversion(SparseMatrix matrix)
+void testRowColumnMajorConversion(SparseMatrix<iDynTree::RowMajor> matrix)
 {
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testRowColumnMajorConversion" << std::endl;
     std::cout << "Initial (row Major) matrix" << std::endl;
     std::cout << matrix.description(true) << std::endl << std::endl;
 
-    double *values = new double[matrix.numberOfNonZeros()];
-    int *inner = new int[matrix.numberOfNonZeros()];
-    int *outer = new int[matrix.columns() + 1];
+    SparseMatrix<iDynTree::ColumnMajor> columnMajorMatrix;
+    columnMajorMatrix = matrix;
 
-    matrix.convertToColumnMajor(values, inner, outer);
-
-    std::cout << "Col Major matrix" << std::endl;
-    std::cout << "Values and column" << std::endl;
-    for (unsigned i = 0; i < matrix.numberOfNonZeros(); ++i) {
-        std::cout << "(" << values[i] << "," << inner[i] << ") ";
+    for (unsigned row = 0; row < matrix.rows(); row++) {
+        for (unsigned col = 0; col < matrix.columns(); col++) {
+            ASSERT_EQUAL_DOUBLE(matrix(row, col), columnMajorMatrix(row, col));
+        }
     }
-    std::cout << std::endl << "outer" << std::endl;
-    for (unsigned i = 0; i <= matrix.columns(); ++i) {
-        std::cout << outer[i] << " ";
-    }
-    std::cout << std::endl;
 
-    //Now convert back to row
-    SparseMatrix rowMatrix(matrix.rows(), matrix.columns());
-    rowMatrix.convertFromColumnMajor(matrix.rows(), matrix.columns(),
-                                     matrix.numberOfNonZeros(),
-                                     values,
-                                     inner,
-                                     outer);
-
-    std::cout << "Row Major matrix (converted)" << std::endl;
-    std::cout << rowMatrix.description(true) << std::endl;
-
-    delete [] values;
-    delete [] inner;
-    delete [] outer;
+    SparseMatrix<iDynTree::RowMajor> rowMajorMatrixConverted(columnMajorMatrix);
 
     //Now I should assert matrix == rowMatrix
     //Do the long computation: all all the values!
     for (unsigned row = 0; row < matrix.rows(); row++) {
         for (unsigned col = 0; col < matrix.columns(); col++) {
-            ASSERT_EQUAL_DOUBLE(matrix(row, col), rowMatrix(row, col));
+            ASSERT_EQUAL_DOUBLE(matrix(row, col), rowMajorMatrixConverted(row, col));
         }
     }
 
@@ -216,11 +201,13 @@ void testRowColumnMajorConversion(SparseMatrix matrix)
 
 int main()
 {
-    testCreateMatrixFromAccessorOperator();
-    testCreateMatrixFromTriplets();
-    testCreateMatrixFromDuplicateTriplets();
+    std::cerr << "Testing RowMajor ordering" << std::endl;
+    // Row major
+    testCreateMatrixFromAccessorOperator<iDynTree::RowMajor>();
+    testCreateMatrixFromTriplets<iDynTree::RowMajor>();
+    testCreateMatrixFromDuplicateTriplets<iDynTree::RowMajor>();
 
-    SparseMatrix matrix(5,5);
+    SparseMatrix<iDynTree::RowMajor> matrix(5, 5);
     Triplets triplets;
     triplets.pushTriplet(iDynTree::Triplet(2, 0, 7));
     triplets.pushTriplet(iDynTree::Triplet(0, 1, 3));
@@ -236,13 +223,28 @@ int main()
     testMatrixIterator(matrix);
     testZeroingMatrix(matrix);
     testClassesTraits();
+
+    std::cerr << "Testing ColumnMajor ordering" << std::endl;
+    //Column major
+    testCreateMatrixFromAccessorOperator<iDynTree::ColumnMajor>();
+    testCreateMatrixFromTriplets<iDynTree::ColumnMajor>();
+    testCreateMatrixFromDuplicateTriplets<iDynTree::ColumnMajor>();
+
+
+    std::cerr << "Testing RowMajor-ColumnMajor conversions" << std::endl;
+    // Testing conversion
+
     testRowColumnMajorConversion(matrix);
 
-    SparseMatrix matrix2(5,5);
+    SparseMatrix<iDynTree::RowMajor> matrix2(5, 5);
     matrix2.setValue(0, 2, 5);
     matrix2.setValue(1, 4, 8.8);
     matrix2.setValue(2, 2, 1.8);
 
     std::cerr << "\n\n";
     testRowColumnMajorConversion(matrix2);
+
+
+
+
 }
