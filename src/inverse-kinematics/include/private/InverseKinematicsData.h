@@ -11,20 +11,21 @@
 #define IDYNTREE_INTERNAL_INVERSEKINEMATICSDATA_H
 
 #include <iDynTree/KinDynComputations.h>
+#include <iDynTree/Model/Model.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Twist.h>
-#include <vector>
-#include <map>
-#include <IpIpoptApplication.hpp>
 
 #include <iDynTree/ConvexHullHelpers.h>
 #include <iDynTree/InverseKinematics.h>
 
-namespace iDynTree {
-    class Model;
-}
+#include <IpIpoptApplication.hpp>
+
+
+#include <vector>
+#include <map>
+#include <unordered_map>
 
 namespace internal {
 namespace kinematics{
@@ -38,11 +39,15 @@ namespace kinematics{
 }
 
 class internal::kinematics::InverseKinematicsData {
+    //Declare as friend the IKNLP class so as it can access the private data
+    friend class InverseKinematicsNLP;
+    // and also inverseKineamtics
+    friend class iDynTree::InverseKinematics;
 
     //forbid copy
     InverseKinematicsData(const InverseKinematicsData&);
     InverseKinematicsData& operator=(const InverseKinematicsData&);
-    
+
     struct {
         bool isActive;
         iDynTree::Position desiredPosition;
@@ -55,6 +60,13 @@ class internal::kinematics::InverseKinematicsData {
     // the "model" variables and the parameters of the optimization.
 
     iDynTree::InverseKinematicsTreatTargetAsConstraint m_defaultTargetResolutionMode;
+
+    enum InverseKinematicsInitialConditionType {
+        InverseKinematicsInitialConditionNotSet,
+        InverseKinematicsInitialConditionPartial,
+        InverseKinematicsInitialConditionFull
+    };
+    
 public:
     /*! @name Model-related variables
      */
@@ -75,7 +87,12 @@ public:
         iDynTree::Vector3 worldGravity; /*!< gravity acceleration in inertial frame, i.e. -9.81 along z */
     } m_state;
 
-    unsigned m_dofs; /*!< internal DoFs of the model, i.e. size of joint vectors */
+    size_t m_dofs; /*!< internal DoFs of the model, i.e. size of joint vectors */
+    struct {
+        std::vector<bool> fixedVariables; /* for each variable it says if it is fixed or optimisation variable */
+        std::unordered_map<int, int> modelJointsToOptimisedJoints; // that is key = index in the reduced set of variables, value = index in the full model
+        iDynTree::Model reducedModel;
+    } m_reducedVariablesInfo;
 
     ///@}
 
@@ -95,7 +112,8 @@ public:
     double m_preferredJointsWeight;
 
     bool m_areBaseInitialConditionsSet; /*!< True if initial condition for the base pose are provided by the user */
-    bool m_areJointsInitialConditionsSet; /*!< True if initial condition for the joints are provided by the user */
+    
+    InverseKinematicsInitialConditionType m_areJointsInitialConditionsSet; /*!< specify if the initial condition for the joints are provided by the user */
 
     //These variables containts the initial condition
     iDynTree::Transform m_baseInitialCondition;
@@ -143,7 +161,7 @@ public:
      * @param model the model to be used
      * @return true if successfull, false otherwise
      */
-    bool setModel(const iDynTree::Model& model);
+    bool setModel(const iDynTree::Model& model, const std::vector<std::string> &consideredJoints = std::vector<std::string>());
 
     /*!
      * Reset variables to defaults
@@ -216,27 +234,6 @@ public:
     bool setJointConfiguration(const std::string& jointName, const double jointConfiguration);
 
     /*!
-     * Set the desired robot joint configurations
-     *
-     * This term will be used as reference for the regularization term
-     *
-     * @param desiredJointConfiguration desired joint configuration
-     * @param desiredJointWeight weight for the regularization term
-     * @return true if successfull, false otherwise
-     */
-    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const double desiredJointWeight);
-
-    /*!
-     * Set the initial condition for the solver (i.e. guess solution)
-     *
-     *
-     * @param baseTransform the guess for the base pose or NULL if no guess is provided
-     * @param jointInitialConditions the guess for the joint variables or NULL if no guess is provided
-     * @return true if successfull, false otherwise
-     */
-    bool setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* jointInitialConditions);
-
-    /*!
      * Set the type of parametrization for the SO3 (rotation)
      * Currently RPY and Quaternion are supported
      * @param parametrization type of parametrization
@@ -277,9 +274,6 @@ public:
      */
     bool solveProblem();
 
-    void getSolution(iDynTree::Transform & baseTransformSolution,
-                     iDynTree::VectorDynSize & shapeSolution);
-
     /*!
      * Access the Kinematics and Dynamics object used by the solver
      *
@@ -298,8 +292,6 @@ public:
     bool isCoMTargetActive();
 
     void setCoMTargetInactive();
-    //Declare as friend the IKNLP class so as it can access the private data
-    friend class InverseKinematicsNLP;
 
 };
 

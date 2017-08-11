@@ -99,7 +99,7 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
     //Temporary optimized variables
     iDynTree::Position optimizedBasePosition; /*!< Hold the base frame origin at an optimization step */
     iDynTree::Vector4 optimizedBaseOrientation; /*!< Hold the base frame orientation at an optimization step. Note that if orientation is RPY, the last component should not be accessed */
-    iDynTree::VectorDynSize optimizedJoints; /*!< Hold the joints configuration at an optimization step */
+    iDynTree::VectorDynSize jointsAtOptimisationStep; /*!< Hold the joints configuration at an optimization step */
 
     /*!
      * @brief update all the configuration dependent variables
