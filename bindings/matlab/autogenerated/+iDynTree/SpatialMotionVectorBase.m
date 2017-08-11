@@ -9,87 +9,87 @@ classdef SpatialMotionVectorBase < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(517, varargin{:});
+        tmp = iDynTreeMEX(529, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = getLinearVec3(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(518, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(530, self, varargin{:});
     end
     function varargout = getAngularVec3(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(519, self, varargin{:});
-    end
-    function varargout = setLinearVec3(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(520, self, varargin{:});
-    end
-    function varargout = setAngularVec3(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(521, self, varargin{:});
-    end
-    function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(522, self, varargin{:});
-    end
-    function varargout = getVal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(523, self, varargin{:});
-    end
-    function varargout = setVal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(524, self, varargin{:});
-    end
-    function varargout = size(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(525, self, varargin{:});
-    end
-    function varargout = zero(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(526, self, varargin{:});
-    end
-    function varargout = changePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(527, self, varargin{:});
-    end
-    function varargout = changeCoordFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(528, self, varargin{:});
-    end
-    function varargout = dot(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(531, self, varargin{:});
     end
-    function varargout = plus(self,varargin)
+    function varargout = setLinearVec3(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(532, self, varargin{:});
     end
-    function varargout = minus(self,varargin)
+    function varargout = setAngularVec3(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(533, self, varargin{:});
     end
-    function varargout = uminus(self,varargin)
+    function varargout = paren(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(534, self, varargin{:});
     end
-    function varargout = asVector(self,varargin)
+    function varargout = getVal(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(535, self, varargin{:});
+    end
+    function varargout = setVal(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(536, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = size(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(537, self, varargin{:});
     end
-    function varargout = display(self,varargin)
+    function varargout = zero(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(538, self, varargin{:});
     end
-    function varargout = toMatlab(self,varargin)
+    function varargout = changePoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(539, self, varargin{:});
     end
-    function varargout = fromMatlab(self,varargin)
+    function varargout = changeCoordFrame(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(540, self, varargin{:});
+    end
+    function varargout = dot(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(543, self, varargin{:});
+    end
+    function varargout = plus(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(544, self, varargin{:});
+    end
+    function varargout = minus(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(545, self, varargin{:});
+    end
+    function varargout = uminus(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(546, self, varargin{:});
+    end
+    function varargout = asVector(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(548, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(549, self, varargin{:});
+    end
+    function varargout = display(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(550, self, varargin{:});
+    end
+    function varargout = toMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(551, self, varargin{:});
+    end
+    function varargout = fromMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(552, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(541, self);
+        iDynTreeMEX(553, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(529, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(541, varargin{:});
     end
     function varargout = inverse(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(530, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(542, varargin{:});
     end
     function varargout = Zero(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(535, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(547, varargin{:});
     end
   end
 end

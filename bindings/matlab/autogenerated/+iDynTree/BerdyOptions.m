@@ -9,7 +9,7 @@ classdef BerdyOptions < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1423, varargin{:});
+        tmp = iDynTreeMEX(1436, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
@@ -18,88 +18,88 @@ classdef BerdyOptions < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1424, self);
+        varargout{1} = iDynTreeMEX(1437, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1425, self, varargin{1});
+        iDynTreeMEX(1438, self, varargin{1});
       end
     end
     function varargout = includeAllNetExternalWrenchesAsDynamicVariables(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1426, self);
+        varargout{1} = iDynTreeMEX(1439, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1427, self, varargin{1});
+        iDynTreeMEX(1440, self, varargin{1});
       end
     end
     function varargout = includeAllJointAccelerationsAsSensors(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1428, self);
+        varargout{1} = iDynTreeMEX(1441, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1429, self, varargin{1});
+        iDynTreeMEX(1442, self, varargin{1});
       end
     end
     function varargout = includeAllJointTorquesAsSensors(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1430, self);
+        varargout{1} = iDynTreeMEX(1443, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1431, self, varargin{1});
+        iDynTreeMEX(1444, self, varargin{1});
       end
     end
     function varargout = includeAllNetExternalWrenchesAsSensors(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1432, self);
+        varargout{1} = iDynTreeMEX(1445, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1433, self, varargin{1});
+        iDynTreeMEX(1446, self, varargin{1});
       end
     end
     function varargout = includeFixedBaseExternalWrench(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1434, self);
+        varargout{1} = iDynTreeMEX(1447, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1435, self, varargin{1});
+        iDynTreeMEX(1448, self, varargin{1});
       end
     end
     function varargout = jointOnWhichTheInternalWrenchIsMeasured(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1436, self);
+        varargout{1} = iDynTreeMEX(1449, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1437, self, varargin{1});
+        iDynTreeMEX(1450, self, varargin{1});
       end
     end
     function varargout = baseLink(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1438, self);
+        varargout{1} = iDynTreeMEX(1451, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1439, self, varargin{1});
+        iDynTreeMEX(1452, self, varargin{1});
       end
     end
     function varargout = checkConsistency(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1440, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1453, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1441, self);
+        iDynTreeMEX(1454, self);
         self.swigPtr=[];
       end
     end

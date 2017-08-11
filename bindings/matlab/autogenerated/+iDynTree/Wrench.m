@@ -7,23 +7,23 @@ classdef Wrench < iDynTree.SpatialForceVector
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(585, varargin{:});
+        tmp = iDynTreeMEX(597, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(586, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(598, self, varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(587, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(599, self, varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(588, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(600, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(589, self);
+        iDynTreeMEX(601, self);
         self.swigPtr=[];
       end
     end
