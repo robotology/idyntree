@@ -109,6 +109,7 @@
 #include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
 #include "iDynTree/Estimation/SimpleLeggedOdometry.h"
 #include "iDynTree/Estimation/BerdyHelper.h"
+#include "iDynTree/Estimation/BerdySparseMAPSolver.h"
 
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
@@ -303,6 +304,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
 %include "iDynTree/Estimation/SimpleLeggedOdometry.h"
 %include "iDynTree/Estimation/BerdyHelper.h"
+%include "iDynTree/Estimation/BerdySparseMAPSolver.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"
