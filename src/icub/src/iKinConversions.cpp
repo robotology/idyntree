@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
 
-#include <iDynTree/iCub/iKinConversions.h>
+#include <iDynTree/iKinConversions.h>
 #include <iDynTree/Model/DenavitHartenberg.h>
 
 #include <iDynTree/yarp/YARPConversions.h>
