@@ -7,7 +7,7 @@
 
 #include <iDynTree/Core/TestUtils.h>
 
-#include <iDynTree/iCub/iKinConversions.h>
+#include <iDynTree/iKinConversions.h>
 
 #include <iDynTree/KinDynComputations.h>
 

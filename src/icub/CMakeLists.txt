@@ -7,8 +7,8 @@ project(iDynTree_ICUB CXX)
 SET(iDynTree_ICUB_source src/iKinConversions.cpp
                          src/skinDynLibConversions.cpp)
 
-SET(iDynTree_ICUB_header include/iDynTree/iCub/iKinConversions.h
-                         include/iDynTree/iCub/skinDynLibConversions.h)
+SET(iDynTree_ICUB_header include/iDynTree/iKinConversions.h
+                         include/iDynTree/skinDynLibConversions.h)
 
 SOURCE_GROUP("Source Files" FILES ${iDynTree_ICUB_source})
 SOURCE_GROUP("Header Files" FILES ${iDynTree_ICUB_header})
@@ -52,9 +52,13 @@ install(TARGETS ${libraryname}
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/iCub" COMPONENT dev)
+        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-icub)
 
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+# Install headers in deprecated location
+install(DIRECTORY include/iDynTree/iCub
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/iCub")
 

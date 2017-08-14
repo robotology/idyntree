@@ -8,7 +8,7 @@
  * http://www.codyco.eu
  */
 
-#include <iDynTree/iCub/skinDynLibConversions.h>
+#include <iDynTree/skinDynLibConversions.h>
 
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Wrench.h>

@@ -42,7 +42,7 @@
 #include <iDynTree/Model/ModelTestUtils.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/KinDynComputations.h>
-#include <iDynTree/iCub/iKinConversions.h>
+#include <iDynTree/iKinConversions.h>
 #include <iCub/iKin/iKinFwd.h>
 
 #include <yarp/os/Property.h>

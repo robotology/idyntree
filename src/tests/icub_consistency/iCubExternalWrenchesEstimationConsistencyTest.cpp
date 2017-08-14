@@ -42,7 +42,7 @@
 #include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 #include <iDynTree/yarp/YARPConversions.h>
-#include <iDynTree/iCub/skinDynLibConversions.h>
+#include <iDynTree/skinDynLibConversions.h>
 
 using namespace iCub::iDyn;
 using namespace iCub::ctrl;
