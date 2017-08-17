@@ -342,5 +342,20 @@ namespace iDynTree
         return margin;
     }
 
+    Vector2 ConvexHullProjectionConstraint::projectAlongGravity(iDynTree::Position& posIn3dInAbsoluteFrame)
+    {
+        iDynTree::Vector2 projected;
+        toEigen(projected) = toEigen(Pimu)*toEigen(posIn3dInAbsoluteFrame-o);
+        return projected;
+    }
+
+    void ConvexHullProjectionConstraint::setPimu(const iDynTree::Direction xProjection, const iDynTree::Direction yProjection, const iDynTree::Position originOfPlaneInWorld)
+    {
+        o = originOfPlaneInWorld;
+
+        toEigen(Pimu).block<1,3>(0,0) = toEigen(xProjection);
+        toEigen(Pimu).block<1,3>(1,0) = toEigen(yProjection);
+    }
+
 
 }

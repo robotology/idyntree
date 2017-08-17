@@ -174,6 +174,13 @@ namespace iDynTree
         Matrix2x3 P;
 
         /**
+         * Projection matrix 'Pimu', obtained using the IMU's measurements.
+        * The projection 'x' of a 3D point 'c' along the gravity vector is obtained as:
+         * x = Pimu*(c-o).
+         */
+        Matrix2x3 Pimu;
+
+        /**
          * Matrix obtained multiplyng the matrix A for the matrix P.
          */
         MatrixDynSize AtimesP;
@@ -216,6 +223,12 @@ namespace iDynTree
         Vector2 project(iDynTree::Position& posIn3dInAbsoluteFrame);
 
         /**
+             * Project a 3D point along the gravity vector.
+             * The point is expressed in the absolute frame of the constraint.
+             */
+            Vector2 projectAlongGravity(iDynTree::Position& posIn3dInAbsoluteFrame);//, Vector3 gravity);
+
+        /**
          * Compute distance of a 2D point from the convex hull.
          * The distance is positive if the point is inside the convex hull,
          * zero if the point is on the boundary of the convex hull,
@@ -223,6 +236,10 @@ namespace iDynTree
          */
         double computeMargin(const Vector2& posIn2D);
 
+        // TODO
+        void setPimu(const iDynTree::Direction xProjection,
+                     const iDynTree::Direction yProjection,
+                     const iDynTree::Position originOfPlaneInWorld);
 
     };
 }

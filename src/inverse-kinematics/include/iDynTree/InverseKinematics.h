@@ -705,6 +705,17 @@ public:
     
     void deactivateCOMTarget();
 
+    /*!
+     * Set the directions along which a point will be projected
+     *
+     * @param xProjection     x direction of the projection
+     * @param yProjection     y direction of the projection
+     * @return
+     */
+    void setProjectionDirection(const iDynTree::Direction xProjection,
+                                                   const iDynTree::Direction yProjection,
+                                                   const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero());
+
 private:
     void* m_pimpl; /*!< private implementation */
 

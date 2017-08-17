@@ -624,6 +624,12 @@ namespace iDynTree {
         IK_PIMPL(m_pimpl)->setCoMTargetInactive();
     }
 
-
+    void InverseKinematics::setProjectionDirection(const iDynTree::Direction xProjection,
+                                                   const iDynTree::Direction yProjection,
+                                                   const iDynTree::Position originOfPlaneInWorld)
+    {
+        // define the projection matrix 'Pimu'
+        IK_PIMPL(m_pimpl)->m_comHullConstraint.setPimu(xProjection, yProjection, originOfPlaneInWorld);
+    }
 
 }
