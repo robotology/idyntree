@@ -238,8 +238,13 @@ namespace kinematics {
 
             if (m_data.m_comHullConstraint.isActive()) {
                 // Project the jacobian and the com
-                iDynTree::toEigen(comInfo.projectedCom) =
-                    iDynTree::toEigen(m_data.m_comHullConstraint.P) * iDynTree::toEigen(comInfo.com - m_data.m_comHullConstraint.o);
+                //iDynTree::toEigen(comInfo.projectedCom) =
+                //    iDynTree::toEigen(m_data.m_comHullConstraint.P)*iDynTree::toEigen(comInfo.com - m_data.m_comHullConstraint.o);
+                // The previous lines could be substituted by:
+                // comInfo.projectedCom = m_data.m_comHullConstraint.project(comInfo.com);
+
+                // Project the COM along the gravity vector
+                comInfo.projectedCom = m_data.m_comHullConstraint.projectAlongGravity(comInfo.com);
             }
         }
 
