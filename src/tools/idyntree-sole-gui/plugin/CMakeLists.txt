@@ -2,11 +2,11 @@
 # Author: Daniele E. Domenichelli <daniele.domenichelli@iit.it>
 # CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  
-
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 include_directories(${YARP_INCLUDE_DIRS}
-                    ${GSL_INCLUDE_DIRS})
+                    ${GSL_INCLUDE_DIRS}
+                    ${ctrlLib_INCLUDE_DIRS})
 
 set(QtiDynTreeSoleGuiPlugin_SRCS
                              qticubskinguiplugin.cpp
@@ -30,7 +30,8 @@ target_link_libraries(QtiDynTreeSoleGuiPlugin YARP::YARP_OS
                                               YARP::YARP_dev
                                               ${GSL_LIBRARIES}
                                               idyntree-high-level
-                                              idyntree-inverse-kinematics)
+                                              idyntree-inverse-kinematics
+                                              ctrlLib)
 target_link_libraries(QtiDynTreeSoleGuiPlugin Qt5::Quick)
 
 qticub_qml_plugin(QtiDynTreeSoleGuiPlugin "${QtiDynTreeSoleGuiPlugin_QMLDIR}")

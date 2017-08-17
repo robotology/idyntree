@@ -24,8 +24,11 @@
 
 #include <yarp/sig/Vector.h>
 
+#include <iDynTree/Core/Direction.h>
 #include <iDynTree/ConvexHullHelpers.h>
 #include <iDynTree/KinDynComputations.h>
+
+#include <iCub/ctrl/minJerkCtrl.h>
 
 using namespace yarp::dev;
 
@@ -56,6 +59,16 @@ protected:
     yarp::sig::Vector m_measuredPressureSecondarySoleInN;
 
     yarp::os::BufferedPort<yarp::os::Bottle> skin_port;
+
+    // Attributes to read gravity direction
+    bool m_skip_gravity;
+    yarp::os::BufferedPort<yarp::sig::Vector> m_imuPort;
+    std::string m_imuFrameName;
+    std::string m_remoteImuPortName;
+    std::string m_localImuPortName;
+    iDynTree::Direction m_gravityDirection;
+    iCub::ctrl::FirstOrderLowPassFilter *filtIMUGravity;    //!< filter the gravity vector received from the IMU
+
     yarp::os::Semaphore mutex;
 
     int sensorsNum;

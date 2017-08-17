@@ -641,7 +641,6 @@ public:
     /*! @name Solution-related methods
       */
     ///@{
-
     /*!
      * Return the last solution of the inverse kinematics problem
      *
@@ -704,6 +703,15 @@ public:
     bool isCOMTargetActive();
     
     void deactivateCOMTarget();
+
+    /*!
+     * Set the directions along which a point will be projected.
+     *
+     * \author Aiko Dinale (29/08/2017)
+     *
+     * @param direction    vector along which we want to project a point
+     */
+    void setCOMConstraintProjectionDirection(iDynTree::Vector3 direction);
 
 private:
     void* m_pimpl; /*!< private implementation */

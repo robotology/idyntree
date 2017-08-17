@@ -174,6 +174,13 @@ namespace iDynTree
         Matrix2x3 P;
 
         /**
+         * Projection matrix 'Pdirection' defined by a given direction.
+         * The projection 'x' of a 3D point 'c' along a given vector is obtained as:
+         * x = Pdirection*(c-o).
+         */
+        Matrix2x3 Pdirection;
+
+        /**
          * Matrix obtained multiplyng the matrix A for the matrix P.
          */
         MatrixDynSize AtimesP;
@@ -223,6 +230,23 @@ namespace iDynTree
          */
         double computeMargin(const Vector2& posIn2D);
 
+        /*!
+         * Set the projection matrix 'Pdirection' given a desired projection direction.
+         *
+         * \author Aiko Dinale (29/08/2017)
+         *
+         * @param direction     vector along which we want to project a point
+         */
+        void setProjectionAlongDirection(Vector3 direction);
+
+        /*!
+         * Project a point along a direction defined by the projection matrix 'Pdirection'
+         *
+         * \author Aiko Dinale (29/08/2017)
+         *
+         * @param posIn3dInAbsoluteFrame     a point we want to project
+         */
+        Vector2 projectAlongDirection(iDynTree::Position& posIn3dInAbsoluteFrame);
 
     };
 }

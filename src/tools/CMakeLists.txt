@@ -45,7 +45,7 @@ if(IDYNTREE_USES_ICUB_MAIN)
   install(TARGETS urdf2dh DESTINATION bin)
 endif()
 
-if (IDYNTREE_USES_YARP AND IDYNTREE_USES_QT5)
+if (IDYNTREE_USES_YARP AND IDYNTREE_USES_QT5 AND IDYNTREE_USES_ICUB_MAIN)
     if (IDYNTREE_BUILD_IK)
         add_subdirectory(idyntree-sole-gui)
     endif()

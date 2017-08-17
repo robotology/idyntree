@@ -128,8 +128,8 @@ namespace iDynTree
                                                          const std::vector<Transform> &absoluteFrame_X_supportFrame)
     {
         o = originOfPlaneInWorld;
-        toEigen(P).block<1,3>(0,0) = toEigen(xAxisOfPlaneInWorld);
-        toEigen(P).block<1,3>(1,0) = toEigen(yAxisOfPlaneInWorld);
+        toEigen(P).block<1, 3>(0,0) = toEigen(xAxisOfPlaneInWorld);
+        toEigen(P).block<1, 3>(1,0) = toEigen(yAxisOfPlaneInWorld);
 
         // Transform the polygons in the absolute frame
         std::vector<Polygon> supportPolygonsExpressedInAbsoluteFrame;
@@ -253,7 +253,7 @@ namespace iDynTree
     Vector2 ConvexHullProjectionConstraint::project(Position& pos3dInAbsoluteFrame)
     {
         iDynTree::Vector2 projected;
-        toEigen(projected) = toEigen(P)*toEigen(pos3dInAbsoluteFrame-o);
+        toEigen(projected) = toEigen(P) * toEigen(pos3dInAbsoluteFrame - o);
         return projected;
     }
 
@@ -339,8 +339,35 @@ namespace iDynTree
         {
             margin = -distanceWithoutSign;
         }
+
         return margin;
     }
 
+    void ConvexHullProjectionConstraint::setProjectionAlongDirection(Vector3 direction)
+    {
+        Vector3 xProjection, yProjection;
+
+        // define the projection for the x-component
+        xProjection.setVal(0, 1.0);
+        xProjection.setVal(1, 0.0);
+        xProjection.setVal(2, -direction.getVal(0) / direction.getVal(2));
+
+        // define the projection for the y-component
+        yProjection.setVal(0, 0.0);
+        yProjection.setVal(1, 1.0);
+        yProjection.setVal(2, -direction.getVal(1) / direction.getVal(2));
+
+        // fill the projection matrix
+        toEigen(Pdirection).block<1, 3>(0,0) = toEigen(xProjection);
+        toEigen(Pdirection).block<1, 3>(1,0) = toEigen(yProjection);
+
+    }
+
+    Vector2 ConvexHullProjectionConstraint::projectAlongDirection(iDynTree::Position& posIn3dInAbsoluteFrame)
+    {
+        iDynTree::Vector2 projected;
+        toEigen(projected) = toEigen(Pdirection) * toEigen(posIn3dInAbsoluteFrame - o);
+        return projected;
+    }
 
 }
