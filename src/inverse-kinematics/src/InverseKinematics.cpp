@@ -475,6 +475,7 @@ namespace iDynTree {
             IK_PIMPL(m_pimpl)->m_areBaseInitialConditionsSet = true;
         }
         if (initialCondition) {
+            // This function passes a guess for the ik for the optimised joints only
             assert(initialCondition->size() == IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size());
             for (size_t i = 0; i < initialCondition->size(); ++i) {
                 IK_PIMPL(m_pimpl)->m_jointInitialConditions(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = (*initialCondition)(i);
