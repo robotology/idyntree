@@ -50,7 +50,6 @@ namespace kinematics {
         m_state.worldGravity.zero();
 
         m_state.baseTwist.zero();
-        
         m_comTarget.isActive = false;
         m_comTarget.weight = 0;
         m_comTarget.desiredPosition.zero();

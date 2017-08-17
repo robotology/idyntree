@@ -13,10 +13,10 @@
 #include <yarp/os/Time.h>
 
 #include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/Direction.h>
 #include <iDynTree/ConvexHullHelpers.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
-
 
 #include <QPainter>
 
@@ -204,6 +204,30 @@ bool ObserverThread::init(yarp::os::ResourceFinder& config)
 
 
     }
+
+    // Open the imu
+    m_skip_gravity = !config.check("imu-port");
+
+    if (!m_skip_gravity)
+    {
+        m_remoteImuPortName = config.find("imu-port").asString();
+        m_imuFrameName    = config.find("imu-frame").asString();
+        m_localImuPortName = "/soleGui/imu:i";
+        m_imuPort.open(m_localImuPortName.c_str());
+        yarp::os::Network::connect(m_remoteImuPortName.c_str(),
+                                   m_localImuPortName.c_str());
+        // Initialize gravity
+        m_gravityDirection(0) = 0.0;
+        m_gravityDirection(1) = 0.0;
+        m_gravityDirection(2) = -9.81;
+
+        // Initialize IMU filter
+        yarp::sig::Vector initIMUFilter;
+        initIMUFilter.resize(3, 0.0);
+        initIMUFilter[2] = -9.81;
+
+        filtIMUGravity = new iCub::ctrl::FirstOrderLowPassFilter(6.0, this->getRate()/1000.0, initIMUFilter);
+    }
 }
 
 ObserverThread::~ObserverThread()
@@ -216,6 +240,7 @@ bool ObserverThread::threadInit()
     yDebug("..done!");
 
     yInfo("Waiting for port connection..");
+
     return true;
 }
 
@@ -311,6 +336,43 @@ void ObserverThread::run()
         m_totalCopInPrimarySole(1) = (m_primaryCopInPrimarySole(1)*primaryTotalForce + m_secondaryCopInPrimarySole(1)*secondaryTotalForce)/(primaryTotalForce+secondaryTotalForce);
     }
 
+    // Get the gravity direction
+    if (!m_skip_gravity)
+    {
+        bool shouldWait = false;
+        yarp::sig::Vector* p_imuRead = m_imuPort.read(shouldWait);
+        if (p_imuRead && p_imuRead->size() >= 6)
+        {
+            iDynTree::Direction gravityDirectionInSensorFrame;
+            gravityDirectionInSensorFrame(0) = p_imuRead->operator()(3);
+            gravityDirectionInSensorFrame(1) = p_imuRead->operator()(4);
+            gravityDirectionInSensorFrame(2) = p_imuRead->operator()(5);
+
+            // filter the IMU readings
+            yarp::sig::Vector gravityDirectionInSensorFrameV(3, 0.0);
+            gravityDirectionInSensorFrameV[0] = gravityDirectionInSensorFrame(0);
+            gravityDirectionInSensorFrameV[1] = gravityDirectionInSensorFrame(1);
+            gravityDirectionInSensorFrameV[2] = gravityDirectionInSensorFrame(2);
+
+            yarp::sig::Vector gravityDirectionInSensorFrameFilteredV;
+            gravityDirectionInSensorFrameFilteredV = filtIMUGravity->filt(gravityDirectionInSensorFrameV);
+
+            iDynTree::Direction gravityDirectionInSensorFrameFiltered;
+            gravityDirectionInSensorFrameFiltered(0) = gravityDirectionInSensorFrameFilteredV[0];
+            gravityDirectionInSensorFrameFiltered(1) = gravityDirectionInSensorFrameFilteredV[1];
+            gravityDirectionInSensorFrameFiltered(2) = gravityDirectionInSensorFrameFilteredV[2];
+
+//          gravityDirectionInSensorFrame.Normalize();
+//
+//          m_gravityDirection = m_kinDyn.getRelativeTransform(m_primarySole, m_imuFrameName).getRotation()*gravityDirectionInSensorFrame;
+
+            m_gravityDirection = m_kinDyn.getRelativeTransform(m_primarySole, m_imuFrameName).getRotation()*gravityDirectionInSensorFrameFiltered;
+
+            std::cerr << "Pitch [deg]: " << std::atan2(m_gravityDirection(0), m_gravityDirection(2));
+            std::cerr << " Roll [deg]: " << std::atan2(m_gravityDirection(1), m_gravityDirection(2)) << std::endl;
+        }
+    }
+
 
     // Compute the desired com in the primarySole frame
     m_kinDyn.setJointPos(m_desiredJointPositionsInRad);
@@ -323,12 +385,23 @@ void ObserverThread::threadRelease()
 {
     yDebug("ObserverThread releasing...");
     m_wholeBodyDevice.close();
-    if (m_skip_pressure)
+    if (!m_skip_pressure)
     {
         m_primarySolePressure.close();
         m_secondarySolePressure.close();
     }
+    if (!m_skip_gravity)
+    {
+        m_imuPort.interrupt();
+        yarp::os::Network::connect(m_remoteImuPortName.c_str(),
+                                   m_localImuPortName.c_str());
+        m_imuPort.close();
+    }
+
     skin_port.close();
+
+    filtIMUGravity = 0;
+
     yDebug("... done.");
 }
 
@@ -393,15 +466,57 @@ void ObserverThread::draw(QPainter* qpainter, int widthInPixels, int heightInPix
     pen.setColor(QColor("green"));
     qpainter->setPen(pen);
 
-    double safetyMarginX=0.01;
-    double safetyMarginY=0.005;
-    iDynTree::Polygon primarySolePolygonInPrimarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025, 0.015, 0.01, 0.01);
-    iDynTree::Polygon secondarySolePolygonInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025, 0.015, 0.01, 0.01);
-    iDynTree::Polygon primarySolePolygonWithSafetyInPrimarySole  = iDynTree::Polygon::XYRectangleFromOffsets(0.025-safetyMarginX, 0.015-safetyMarginX, 0.01-safetyMarginY, 0.01-safetyMarginY);
-    iDynTree::Polygon secondarySolePolygonWithSafetyInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025-safetyMarginX, 0.015-safetyMarginX, 0.01-safetyMarginY, 0.01-safetyMarginY);
+    double safetyMarginX = 0.012;
+    double safetyMarginY = 0.0095;
+
+    double soleWidth = 0.028;   // along y-direction
+    double soleLength = 0.048;  // along x-direction
+    double xOffset = 0.005;     // offset along x-direction between frame's origin and visual's origin (URDF)
+
+    double front, back, left, right;
+
+    front = soleLength/2 + xOffset;
+    back = soleLength/2 - xOffset;
+    left = soleWidth/2;
+    right = left;
+
+    iDynTree::Polygon primarySolePolygonInPrimarySole = iDynTree::Polygon::XYRectangleFromOffsets(front, back, left, right);
+    iDynTree::Polygon secondarySolePolygonInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(front, back, left, right);
+    iDynTree::Polygon primarySolePolygonWithSafetyInPrimarySole  = iDynTree::Polygon::XYRectangleFromOffsets(front - safetyMarginX, back - safetyMarginX, left - safetyMarginY, right - safetyMarginY);
+    iDynTree::Polygon secondarySolePolygonWithSafetyInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(front - safetyMarginX, back - safetyMarginX, left - safetyMarginY, right - safetyMarginY);
+//    iDynTree::Polygon primarySolePolygonInPrimarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025, 0.015, 0.01, 0.01);
+//    iDynTree::Polygon secondarySolePolygonInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025, 0.015, 0.01, 0.01);
+//    iDynTree::Polygon primarySolePolygonWithSafetyInPrimarySole  = iDynTree::Polygon::XYRectangleFromOffsets(0.025-safetyMarginX, 0.015-safetyMarginX, 0.01-safetyMarginY, 0.01-safetyMarginY);
+//    iDynTree::Polygon secondarySolePolygonWithSafetyInSecondarySole = iDynTree::Polygon::XYRectangleFromOffsets(0.025-safetyMarginX, 0.015-safetyMarginX, 0.01-safetyMarginY, 0.01-safetyMarginY);
 
     iDynTree::Polygon secondarySolePolygonInPrimarySole = secondarySolePolygonInSecondarySole.applyTransform(m_primarySole_X_secondarySole);
     iDynTree::Polygon secondarySolePolygonWithSafetyInPrimarySole = secondarySolePolygonWithSafetyInSecondarySole.applyTransform(m_primarySole_X_secondarySole);
+
+    // Build convexhull
+    iDynTree::ConvexHullProjectionConstraint m_convexHullSoles;
+    std::vector<iDynTree::Transform> transforms;
+    transforms.push_back(iDynTree::Transform::Identity());
+    transforms.push_back(m_primarySole_X_secondarySole);
+    std::vector<iDynTree::Polygon>   polygons;
+    polygons.push_back(primarySolePolygonInPrimarySole);
+    polygons.push_back(secondarySolePolygonInSecondarySole);
+    std::vector<iDynTree::Polygon>   polygonsWithSafety;
+    polygonsWithSafety.push_back(primarySolePolygonWithSafetyInPrimarySole);
+    polygonsWithSafety.push_back(secondarySolePolygonWithSafetyInSecondarySole);
+    m_convexHullSoles.buildConvexHull(iDynTree::Direction(1.0, 0.0, 0.0),
+                                      iDynTree::Direction(0.0, 1.0, 0.0),
+                                      iDynTree::Position::Zero(),
+                                      polygons, transforms);
+    m_convexHullSoles.setProjectionAlongDirection(m_gravityDirection);
+
+
+    iDynTree::ConvexHullProjectionConstraint m_convexHullSolesWithSafety;
+    m_convexHullSolesWithSafety.buildConvexHull(iDynTree::Direction(1.0, 0.0, 0.0),
+                                      iDynTree::Direction(0.0, 1.0, 0.0),
+                                      iDynTree::Position::Zero(),
+                                      polygonsWithSafety, transforms);
+    m_convexHullSolesWithSafety.setProjectionAlongDirection(m_gravityDirection);
+
 
     // Draw soles
     this->drawPolygon(qpainter, primarySolePolygonInPrimarySole);
@@ -439,12 +554,28 @@ void ObserverThread::draw(QPainter* qpainter, int widthInPixels, int heightInPix
     qpainter->setPen(pen);
     qpainter->drawEllipse(QPointF(m_desiredComInPrimarySole(0), m_desiredComInPrimarySole(1)), pointRadiusInM, pointRadiusInM);
 
-    // Draw measured com (in green)
+    // Draw measured com (in Green)
     pen = qpainter->pen();
     pen.setColor(QColor("green"));
     pen.setWidthF(0.002);
     qpainter->setPen(pen);
     qpainter->drawEllipse(QPointF(m_comInPrimarySole(0), m_comInPrimarySole(1)), pointRadiusInM, pointRadiusInM);
+
+    // Draw desired COM projected along the IMU direction (in pink)
+    pen = qpainter->pen();
+    pen.setColor(QColor("pink"));
+    pen.setWidthF(0.002);
+    qpainter->setPen(pen);
+    iDynTree::Vector2 desiredComProjectedAlongGravity = m_convexHullSolesWithSafety.projectAlongDirection(m_desiredComInPrimarySole);
+    qpainter->drawEllipse(QPointF(desiredComProjectedAlongGravity(0), desiredComProjectedAlongGravity(1)), pointRadiusInM, pointRadiusInM);
+
+    // Draw measured COM projected along the gravity direction (in palegreen)
+    pen = qpainter->pen();
+    pen.setColor(QColor("palegreen"));
+    pen.setWidthF(0.002);
+    qpainter->setPen(pen);
+    iDynTree::Vector2 comProjectedAlongGravity = m_convexHullSolesWithSafety.projectAlongDirection(m_comInPrimarySole);
+    qpainter->drawEllipse(QPointF(comProjectedAlongGravity(0), comProjectedAlongGravity(1)), pointRadiusInM, pointRadiusInM);
 
     // Draw Center of pressure (in blue)
     pen = qpainter->pen();

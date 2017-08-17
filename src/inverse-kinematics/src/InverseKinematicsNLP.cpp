@@ -238,8 +238,10 @@ namespace kinematics {
 
             if (m_data.m_comHullConstraint.isActive()) {
                 // Project the jacobian and the com
-                iDynTree::toEigen(comInfo.projectedCom) =
-                    iDynTree::toEigen(m_data.m_comHullConstraint.P) * iDynTree::toEigen(comInfo.com - m_data.m_comHullConstraint.o);
+                // comInfo.projectedCom = m_data.m_comHullConstraint.project(comInfo.com);
+
+                // Project the COM along the gravity vector
+                comInfo.projectedCom = m_data.m_comHullConstraint.projectAlongDirection(comInfo.com);
             }
         }
 
@@ -898,7 +900,7 @@ namespace kinematics {
                 if (m_data.m_comHullConstraint.isActive()) {
                     // Project the jacobian
                     iDynTree::toEigen(comInfo.projectedComJacobian) =
-                            iDynTree::toEigen(m_data.m_comHullConstraint.AtimesP) * iDynTree::toEigen(comInfo.comJacobianAnalytical);
+                            iDynTree::toEigen(m_data.m_comHullConstraint.A) * iDynTree::toEigen(m_data.m_comHullConstraint.Pdirection) * iDynTree::toEigen(comInfo.comJacobianAnalytical);
 
                     Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*n], comInfo.projectedComJacobian.rows(), n);
                     currentConstraint = iDynTree::toEigen(comInfo.projectedComJacobian);

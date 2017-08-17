@@ -15,6 +15,8 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 
+#include <iDynTree/Core/EigenHelpers.h>
+
 #include <cassert>
 #include <iostream>
 
@@ -289,6 +291,12 @@ namespace iDynTree {
 
         iDynTree::Axis projectionPlaneXaxisInAbsoluteFrame(xAxisOfPlaneInWorld,originOfPlaneInWorld);
         iDynTree::Axis projectionPlaneYaxisInAbsoluteFrame(yAxisOfPlaneInWorld,originOfPlaneInWorld);
+	
+	// Initialize the COM's projection direction in such a way that is along the lien perpendicular to the xy-axes of the World
+	iDynTree::Direction zAxisOfPlaneInWorld;
+	toEigen(zAxisOfPlaneInWorld) = toEigen(xAxisOfPlaneInWorld).cross(toEigen(yAxisOfPlaneInWorld));
+		
+	IK_PIMPL(m_pimpl)->m_comHullConstraint.setProjectionAlongDirection(zAxisOfPlaneInWorld);
 
         // Compute the constraint
         bool ok = IK_PIMPL(m_pimpl)->m_comHullConstraint.buildConvexHull(xAxisOfPlaneInWorld,
@@ -319,7 +327,8 @@ namespace iDynTree {
         iDynTree::Position comInAbsoluteConstraintFrame =
             IK_PIMPL(m_pimpl)->m_comHullConstraint.absoluteFrame_X_supportFrame[0]*(kinDyn.getWorldTransform(IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices[0]).inverse()*kinDyn.getCenterOfMassPosition());
 
-        iDynTree::Vector2 comProjection = IK_PIMPL(m_pimpl)->m_comHullConstraint.project(comInAbsoluteConstraintFrame);
+        //iDynTree::Vector2 comProjection = IK_PIMPL(m_pimpl)->m_comHullConstraint.project(comInAbsoluteConstraintFrame);
+        iDynTree::Vector2 comProjection = IK_PIMPL(m_pimpl)->m_comHullConstraint.projectAlongDirection(comInAbsoluteConstraintFrame);
         return IK_PIMPL(m_pimpl)->m_comHullConstraint.computeMargin(comProjection);
     }
 
@@ -624,6 +633,10 @@ namespace iDynTree {
         IK_PIMPL(m_pimpl)->setCoMTargetInactive();
     }
 
-
+    void InverseKinematics::setCOMConstraintProjectionDirection(iDynTree::Vector3 direction)
+    {
+        // define the projection matrix 'Pdirection' in the class 'ConvexHullProjectionConstraint'
+        IK_PIMPL(m_pimpl)->m_comHullConstraint.setProjectionAlongDirection(direction);
+    }
 
 }
