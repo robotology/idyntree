@@ -223,10 +223,10 @@ namespace iDynTree
         Vector2 project(iDynTree::Position& posIn3dInAbsoluteFrame);
 
         /**
-             * Project a 3D point along the gravity vector.
-             * The point is expressed in the absolute frame of the constraint.
-             */
-            Vector2 projectAlongGravity(iDynTree::Position& posIn3dInAbsoluteFrame);//, Vector3 gravity);
+         * Project a 3D point along the gravity vector.
+         * The point is expressed in the absolute frame of the constraint.
+         */
+        Vector2 projectAlongGravity(iDynTree::Position& posIn3dInAbsoluteFrame);//, Vector3 gravity);
 
         /**
          * Compute distance of a 2D point from the convex hull.
@@ -236,7 +236,7 @@ namespace iDynTree
          */
         double computeMargin(const Vector2& posIn2D);
 
-        // TODO
+        // TODO: write documentation for this method!
         void setPimu(const iDynTree::Direction xProjection,
                      const iDynTree::Direction yProjection,
                      const iDynTree::Position originOfPlaneInWorld);
