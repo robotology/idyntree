@@ -954,8 +954,6 @@ namespace kinematics {
 
                 FrameInfo &targetInfo = targetsInfo[target->first];
 
-                iDynTree::iDynTreeEigenMatrixMap constraintJacobian = iDynTree::toEigen(targetInfo.jacobian);
-
                 //Depending if we need position and/or orientation
                 //we have to adapt different parts of the jacobian
                 int computationOption = 0;
@@ -999,7 +997,7 @@ namespace kinematics {
 
                     //Copy position part
                     Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*finalJacobianBuffer.cols()], 3, n);
-                    currentConstraint = constraintJacobian.topRows<3>();
+                    currentConstraint = toEigen(finalJacobianBuffer).topRows<3>();
                     constraintIndex += 3;
                 }
 
@@ -1008,7 +1006,7 @@ namespace kinematics {
                     //Orientation part
 
                     Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*finalJacobianBuffer.cols()], sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
-                    currentConstraint = constraintJacobian.bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                    currentConstraint = toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
                     constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                 }
             }
