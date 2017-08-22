@@ -10,15 +10,16 @@
 #ifndef IDYNTREE_INTERNAL_INVERSEKINEMATICSDATA_H
 #define IDYNTREE_INTERNAL_INVERSEKINEMATICSDATA_H
 
+#include "InverseKinematicsNLP.h"
+#include <iDynTree/ConvexHullHelpers.h>
+#include <iDynTree/InverseKinematics.h>
+
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Twist.h>
-
-#include <iDynTree/ConvexHullHelpers.h>
-#include <iDynTree/InverseKinematics.h>
 
 #include <IpIpoptApplication.hpp>
 
@@ -122,10 +123,17 @@ public:
     //Result of optimization
     iDynTree::Transform m_baseResults;
     iDynTree::VectorDynSize m_jointsResults;
+    iDynTree::VectorDynSize m_constraintMultipliers;
+    iDynTree::VectorDynSize m_lowerBoundMultipliers;
+    iDynTree::VectorDynSize m_upperBoundMultipliers;
 
     ///@}
 
+    bool m_problemInitialized;
+    size_t m_numberOfOptimisationVariables;
+    size_t m_numberOfOptimisationConstraints;
     Ipopt::SmartPtr<Ipopt::IpoptApplication> m_solver; /*!< Instance of IPOPT solver */
+    Ipopt::SmartPtr<internal::kinematics::InverseKinematicsNLP> m_nlpProblem;
 
     /*!
      * Update internal variables given a change in the robot state
@@ -136,6 +144,11 @@ public:
      * Prepare the internal data to run an optimization
      */
     void prepareForOptimization();
+
+    /*!
+     * compute the problem size (number of optimisation variables and constraints)
+     */
+    void computeProblemSizeAndResizeBuffers();
 
     /*! @name Optimization-related parameters
      */

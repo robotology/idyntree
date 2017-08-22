@@ -113,14 +113,6 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
     bool updateState(const Ipopt::Number * x);
 
     /*!
-     * @brief Initialize buffers given the specified problem size
-     *
-     * @param n size of the optimization variable
-     * @param m size of the constraints
-     */
-    void initializeInternalData(Ipopt::Index n, Ipopt::Index m);
-
-    /*!
      * Specify which part of the Jacobian should be computed/updated
      */
     enum ComputeContraintJacobianOption {
@@ -182,6 +174,14 @@ public:
     InverseKinematicsNLP(InverseKinematicsData& data);
 
     virtual ~InverseKinematicsNLP();
+
+    /*!
+     * @brief Initialize buffers given the specified problem size
+     *
+     * @param n size of the optimization variable
+     * @param m size of the constraints
+     */
+    void initializeInternalData();
 
 #pragma mark - IpOpt methods
 

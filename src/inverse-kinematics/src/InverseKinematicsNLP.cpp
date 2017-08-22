@@ -38,9 +38,8 @@ namespace kinematics {
     InverseKinematicsNLP::~InverseKinematicsNLP() {}
 
 
-    void InverseKinematicsNLP::initializeInternalData(Ipopt::Index n, Ipopt::Index m)
+    void InverseKinematicsNLP::initializeInternalData()
     {
-        UNUSED_VARIABLE(m);
         //This method should initialize all the internal buffers used during
         //the optimization
         optimizedBaseOrientation.zero();
@@ -49,7 +48,8 @@ namespace kinematics {
         m_data.m_dynamics.getJointPos(jointsAtOptimisationStep);
 
         //resize some buffers
-        finalJacobianBuffer.resize((3 + sizeOfRotationParametrization(m_data.m_rotationParametrization)), n);
+        finalJacobianBuffer.resize((3 + sizeOfRotationParametrization(m_data.m_rotationParametrization)),
+                                   3 + sizeOfRotationParametrization(m_data.m_rotationParametrization) + m_data.m_dofs);
 
         constraintsInfo.clear();
         targetsInfo.clear();
@@ -252,61 +252,20 @@ namespace kinematics {
                                             Ipopt::Index& nnz_h_lag,
                                             IndexStyleEnum& index_style)
     {
-        //Size of optimization variables is 3 + Orientation (base) + size of joints we optimize
-        n = 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization) + m_data.m_dofs;
+        n = m_data.m_numberOfOptimisationVariables;
+        m = m_data.m_numberOfOptimisationConstraints;
 
-        //Start adding constraints
-        m = 0;
-        for (TransformMap::const_iterator it = m_data.m_constraints.begin();
-             it != m_data.m_constraints.end(); ++it) {
-            //Frame constraint: it can have position, rotation or both elements
-            if (it->second.hasPositionConstraint()) {
-                m += 3;
-            }
-            if (it->second.hasRotationConstraint()) {
-                m += sizeOfRotationParametrization(m_data.m_rotationParametrization);
-            }
-        }
-
-        // COM Convex Hull constraint
-        if (m_data.m_comHullConstraint.isActive())
-        {
-            m += m_data.m_comHullConstraint.getNrOfConstraints();
-        }
-
-        if (m_data.isCoMTargetActive() && m_data.isCoMaConstraint()){
-            m += 3;
-        }
-        //add target if considered as constraints
-        for (TransformMap::const_iterator it = m_data.m_targets.begin();
-             it != m_data.m_targets.end(); ++it) {
-            if (it->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
-                && it->second.hasPositionConstraint()) {
-                m += 3;
-            }
-            if (it->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
-                && it->second.hasRotationConstraint()) {
-
-                m += sizeOfRotationParametrization(m_data.m_rotationParametrization);;
-            }
-        }
-
-        //TODO: implement in iDynTree the sparsity pattern of Jacobian and Hessians
         nnz_jac_g = m * n;
 
         if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
-            //If the rotation is parametrized as quaternion
-            //that the base orientation yields an additional
-            //constraint, i.e. norm of quaternion = 1
-            m += 1; //quaternion norm constraint
-            nnz_jac_g += 4; //quaternion norm is sparse.
+            // constraints already considers the quaternion constraints.
+            // so the Jacobian should be changed
+            nnz_jac_g = (m - 1) * n + 4;
         }
 
         nnz_h_lag = n * n; //this is currently ignored
 
         index_style = C_STYLE;
-
-        initializeInternalData(n, m);
 
         return true;
     }
@@ -495,12 +454,18 @@ namespace kinematics {
             joints = iDynTree::toEigen(m_data.m_jointInitialConditions);
 
         }
-        //We do not initialize the other components
+
         if (init_z) {
-            return false;
+            Eigen::Map<Eigen::VectorXd> lowerBounds(z_L, n);
+            Eigen::Map<Eigen::VectorXd> upperBounds(z_U, n);
+
+            lowerBounds = iDynTree::toEigen(m_data.m_lowerBoundMultipliers);
+            upperBounds = iDynTree::toEigen(m_data.m_upperBoundMultipliers);
         }
         if (init_lambda) {
-            return false;
+            Eigen::Map<Eigen::VectorXd> multipliers(lambda, m);
+
+            multipliers = iDynTree::toEigen(m_data.m_constraintMultipliers);
         }
         return true;
     }
@@ -1078,6 +1043,15 @@ namespace kinematics {
         //joints
         Eigen::Map<const Eigen::VectorXd> optimisedJoints(&x[3 + sizeOfRotationParametrization(m_data.m_rotationParametrization)], m_data.m_dofs);
         iDynTree::toEigen(m_data.m_jointsResults) = optimisedJoints;
+
+        // additional info: multipliers
+        Eigen::Map<const Eigen::VectorXd> multipliers(lambda, m);
+        iDynTree::toEigen(m_data.m_constraintMultipliers) = multipliers;
+
+        Eigen::Map<const Eigen::VectorXd> lowerBounds(z_L, n);
+        Eigen::Map<const Eigen::VectorXd> upperBounds(z_U, n);
+        iDynTree::toEigen(m_data.m_lowerBoundMultipliers) = lowerBounds;
+        iDynTree::toEigen(m_data.m_upperBoundMultipliers) = upperBounds;
 
     }
 
