@@ -640,7 +640,7 @@ public:
 
     /*! @name Solution-related methods
       */
-    ///@{
+
 
     /*!
      * Return the last solution of the inverse kinematics problem

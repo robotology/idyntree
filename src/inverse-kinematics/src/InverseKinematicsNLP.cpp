@@ -240,6 +240,7 @@ namespace kinematics {
                 // Project the jacobian and the com
                 //iDynTree::toEigen(comInfo.projectedCom) =
                 //    iDynTree::toEigen(m_data.m_comHullConstraint.P)*iDynTree::toEigen(comInfo.com - m_data.m_comHullConstraint.o);
+
                 // NOTE: The previous lines could be substituted by:
                 // comInfo.projectedCom = m_data.m_comHullConstraint.project(comInfo.com);
 
