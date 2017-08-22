@@ -130,6 +130,7 @@ public:
     ///@}
 
     bool m_problemInitialized;
+    bool m_warmStartEnabled;
     size_t m_numberOfOptimisationVariables;
     size_t m_numberOfOptimisationConstraints;
     Ipopt::SmartPtr<Ipopt::IpoptApplication> m_solver; /*!< Instance of IPOPT solver */

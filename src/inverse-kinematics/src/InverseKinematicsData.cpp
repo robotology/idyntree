@@ -32,6 +32,7 @@ namespace kinematics {
     , m_areBaseInitialConditionsSet(false)
     , m_areJointsInitialConditionsSet(InverseKinematicsInitialConditionNotSet)
     , m_problemInitialized(false)
+    , m_warmStartEnabled(false)
     , m_numberOfOptimisationVariables(0)
     , m_numberOfOptimisationConstraints(0)
     , m_solver(NULL)
@@ -161,6 +162,13 @@ namespace kinematics {
         m_comTarget.constraintTolerance = 1e-8;
 
         m_problemInitialized = false;
+        if (m_warmStartEnabled) {
+            m_warmStartEnabled = false;
+            if (!Ipopt::IsNull(m_solver)) {
+                m_solver->Options()->SetStringValue("warm_start_init_point", "no");
+                m_solver->Options()->SetStringValue("warm_start_same_structure", "no");
+            }
+        }
     }
 
     bool InverseKinematicsData::addFrameConstraint(const kinematics::TransformConstraint& frameTransformConstraint)
@@ -348,6 +356,12 @@ namespace kinematics {
                 m_solver->Options()->GetStringValue("linear_solver", m_solverName, "");
             }
 
+            m_solver->Options()->SetNumericValue("warm_start_bound_frac", 1e-6);
+            m_solver->Options()->SetNumericValue("warm_start_bound_push", 1e-6);
+            m_solver->Options()->SetNumericValue("warm_start_mult_bound_push", 1e-6);
+            m_solver->Options()->SetNumericValue("warm_start_slack_bound_frac", 1e-6);
+            m_solver->Options()->SetNumericValue("warm_start_slack_bound_push", 1e-6);
+
             solverStatus = m_solver->Initialize();
             if (solverStatus != Ipopt::Solve_Succeeded) {
                 return false;
@@ -363,6 +377,10 @@ namespace kinematics {
         solverStatus = m_solver->OptimizeTNLP(m_nlpProblem);
 
         if (solverStatus == Ipopt::Solve_Succeeded || solverStatus == Ipopt::Solved_To_Acceptable_Level ) {
+            if (!m_warmStartEnabled) {
+                m_warmStartEnabled = true;
+                m_solver->Options()->SetStringValue("warm_start_init_point", "yes");
+            }
             return true;
         } else {
             return false;
