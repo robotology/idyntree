@@ -109,6 +109,14 @@ namespace iDynTree
         static IndexRange InvalidRange();
     };
 
+    /**
+     * Enum describing the possible matrix storage ordering
+     */
+    enum MatrixStorageOrdering {
+        RowMajor, /*!< Row Major ordering, i.e. matrix is serialized row by row */
+        ColumnMajor /*!< Column Major ordering, i.e. matrix is serialized row by column */
+    };
+
 
 }
 

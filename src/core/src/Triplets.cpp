@@ -68,21 +68,6 @@ namespace iDynTree {
         }
     }
 
-    void Triplets::addSubMatrix(unsigned startingRow,
-                                unsigned startingColumn,
-                                const SparseMatrix &matrix)
-    {
-        //if enough memory has been reserved this should be a noop
-        m_triplets.reserve(m_triplets.size() + matrix.numberOfNonZeros());
-
-        for (SparseMatrix::const_iterator it(matrix.begin());
-             it != matrix.end(); ++it) {
-            m_triplets.push_back(Triplet(startingRow + it->row,
-                                         startingColumn + it->column,
-                                         it->value));
-        }
-    }
-
     void Triplets::addDiagonalMatrix(unsigned startingRow,
                                      unsigned startingColumn,
                                      double value,
@@ -122,21 +107,6 @@ namespace iDynTree {
             for (unsigned col = 0; col < cols; ++col) {
                 setTriplet(Triplet(startingRow + row, startingColumn + col, matrix(row, col)));
             }
-        }
-    }
-
-    void Triplets::setSubMatrix(unsigned startingRow,
-                                unsigned startingColumn,
-                                const SparseMatrix &matrix)
-    {
-        //if enough memory has been reserved this should be a noop
-        m_triplets.reserve(m_triplets.size() + matrix.numberOfNonZeros());
-
-        for (SparseMatrix::const_iterator it(matrix.begin());
-             it != matrix.end(); ++it) {
-            setTriplet(Triplet(startingRow + it->row,
-                               startingColumn + it->column,
-                               it->value));
         }
     }
 

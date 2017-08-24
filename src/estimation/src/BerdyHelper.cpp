@@ -589,7 +589,7 @@ IndexRange BerdyHelper::getRangeDOFTorqueDynEq(const DOFIndex idx)
 }
 
 
-bool BerdyHelper::computeBerdyDynamicsMatrices(SparseMatrix& D, VectorDynSize& bD)
+bool BerdyHelper::computeBerdyDynamicsMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD)
 {
     D.resize(m_nrOfDynamicEquations,m_nrOfDynamicalVariables);
     bD.resize(m_nrOfDynamicEquations);
@@ -780,7 +780,7 @@ bool BerdyHelper::computeBerdyDynamicsMatrices(SparseMatrix& D, VectorDynSize& b
     return true;
 }
 
-bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix& Y, VectorDynSize& bY)
+bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY)
 {
     Y.resize(m_nrOfSensorsMeasurements,m_nrOfDynamicalVariables);
     bY.resize(m_nrOfSensorsMeasurements);
@@ -1008,7 +1008,7 @@ const Traversal& BerdyHelper::dynamicTraversal()
     return this->m_dynamicsTraversal;
 }
 
-
+bool BerdyHelper::isValid() const { return m_areModelAndSensorsValid; }
 
 size_t BerdyHelper::getNrOfDynamicVariables() const
 {
@@ -1025,8 +1025,8 @@ size_t BerdyHelper::getNrOfSensorsMeasurements() const
     return m_nrOfSensorsMeasurements;
 }
 
-bool BerdyHelper::resizeAndZeroBerdyMatrices(SparseMatrix& D, VectorDynSize& bD,
-                                             SparseMatrix& Y, VectorDynSize& bY)
+bool BerdyHelper::resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD,
+                                             SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY)
 {
     D.resize(getNrOfDynamicEquations(),getNrOfDynamicVariables());
     bD.resize(getNrOfDynamicEquations());
@@ -1125,8 +1125,8 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
     return ok;
 }
 
-bool BerdyHelper::getBerdyMatrices(SparseMatrix& D, VectorDynSize& bD,
-                                   SparseMatrix& Y, VectorDynSize& bY)
+bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD,
+                                   SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY)
 {
     if (!m_kinematicsUpdated)
     {
@@ -1150,18 +1150,18 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix& D, VectorDynSize& bD,
     bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                                        MatrixDynSize & Y, VectorDynSize & bY)
     {
-        SparseMatrix DSparse(getNrOfDynamicEquations(),getNrOfDynamicVariables());
-        SparseMatrix YSparse(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
+        SparseMatrix<iDynTree::ColumnMajor> DSparse(getNrOfDynamicEquations(),getNrOfDynamicVariables());
+        SparseMatrix<iDynTree::ColumnMajor> YSparse(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
 
         bool result = getBerdyMatrices(DSparse, bD, YSparse, bY);
         if (!result) return false;
 
-        for (SparseMatrix::const_iterator it(DSparse.begin());
+        for (SparseMatrix<iDynTree::ColumnMajor>::const_iterator it(DSparse.begin());
              it != DSparse.end(); ++it) {
             D(it->row, it->column) = it->value;
         }
 
-        for (SparseMatrix::const_iterator it(YSparse.begin());
+        for (SparseMatrix<iDynTree::ColumnMajor>::const_iterator it(YSparse.begin());
              it != YSparse.end(); ++it) {
             Y(it->row, it->column) = it->value;
         }

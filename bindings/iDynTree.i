@@ -109,6 +109,7 @@
 #include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
 #include "iDynTree/Estimation/SimpleLeggedOdometry.h"
 #include "iDynTree/Estimation/BerdyHelper.h"
+#include "iDynTree/Estimation/BerdySparseMAPSolver.h"
 
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
@@ -139,6 +140,9 @@ namespace std {
 %include "iDynTree/Core/MatrixDynSize.h"
 %include "iDynTree/Core/MatrixFixSize.h"
 %include "iDynTree/Core/SparseMatrix.h"
+%template(SparseMatrixRowMajor) iDynTree::SparseMatrix<iDynTree::RowMajor>;
+%template(SparseMatrixColMajor) iDynTree::SparseMatrix<iDynTree::ColumnMajor>;
+
 
 %include "iDynTree/Core/VectorDynSize.h"
 %include "iDynTree/Core/VectorFixSize.h"
@@ -300,6 +304,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
 %include "iDynTree/Estimation/SimpleLeggedOdometry.h"
 %include "iDynTree/Estimation/BerdyHelper.h"
+%include "iDynTree/Estimation/BerdySparseMAPSolver.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"

@@ -286,7 +286,7 @@ Matrix6x10 SpatialInertia::momentumRegressor(const Twist& v)
 
     Matrix6x10 ret;
 
-    Map< Matrix<double,6,10, RowMajor> > res = toEigen(ret);
+    Map< Matrix<double,6,10, Eigen::RowMajor> > res = toEigen(ret);
 
     res <<  toEigen(v.getLinearVec3()),  mySkewIn(toEigen(v.getAngularVec3())), Matrix<double, 3, 6>::Zero(),
                     Vector3d::Zero(), -mySkewIn(toEigen(v.getLinearVec3())), rotationalMomentumRegressor(v.getAngularVec3());

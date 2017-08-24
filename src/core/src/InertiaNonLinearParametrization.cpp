@@ -245,7 +245,7 @@ Matrix10x16 RigidBodyInertiaNonLinearParametrization::getGradientWithRotationAsV
     using namespace Eigen;
     Matrix10x16 ret;
 
-    Map< Matrix<double, 10, 16, RowMajor> > retEigen = toEigen(ret);
+    Map< Matrix<double, 10, 16, Eigen::RowMajor> > retEigen = toEigen(ret);
 
     retEigen.setZero();
 

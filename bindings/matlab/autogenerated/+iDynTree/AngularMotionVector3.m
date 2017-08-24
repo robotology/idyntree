@@ -7,17 +7,17 @@ classdef AngularMotionVector3 < iDynTree.MotionVector3__AngularMotionVector3
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(493, varargin{:});
+        tmp = iDynTreeMEX(505, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = exp(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(494, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(506, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(495, self);
+        iDynTreeMEX(507, self);
         self.swigPtr=[];
       end
     end

@@ -26,6 +26,8 @@
 %ignore iDynTree::SensorsList::sensorsIteratorForType(const iDynTree::SensorType&) const;
 
 // Disable sparse matrix methods
+%ignore iDynTree::SparseMatrix::Iterator;
+%ignore iDynTree::SparseMatrix::ConstIterator;
 %ignore iDynTree::SparseMatrix::begin();
 %ignore iDynTree::SparseMatrix::begin() const;
 %ignore iDynTree::SparseMatrix::end();
@@ -39,7 +41,6 @@
 %ignore iDynTree::SparseMatrix::outerIndicesBuffer() const;
 %ignore iDynTree::SparseMatrix::operator()(unsigned, unsigned);
 %ignore iDynTree::SparseMatrix::operator()(unsigned, unsigned) const;
-%ignore iDynTree::SparseMatrix::convertToColumnMajor(double *, int *, int *) const;
 %ignore iDynTree::SparseMatrix::sparseMatrixFromTriplets(unsigned, unsigned, const iDynTree::Triplets&);
 %ignore iDynTree::SparseMatrix::internalDescription() const;
 

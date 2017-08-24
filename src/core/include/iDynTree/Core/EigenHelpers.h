@@ -32,6 +32,13 @@ namespace iDynTree
     typedef Eigen::Map<iDynTreeEigenMatrix> iDynTreeEigenMatrixMap;
     typedef Eigen::Map<iDynTreeEigenConstMatrix> iDynTreeEigenConstMatrixMap;
 
+#if __cplusplus > 199711L
+    template<typename>
+    struct is_sparsematrix : std::false_type {};
+
+    template<iDynTree::MatrixStorageOrdering ordering>
+    struct is_sparsematrix<iDynTree::SparseMatrix<ordering>> : std::true_type {};
+#endif
 
 
 
@@ -166,8 +173,7 @@ inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const MatrixFixSize<nRows,nCols>& subMat)
 {
 #if __cplusplus > 199711L
-    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
-                  "You cannot set a subMatrix on a SparseMatrix.");
+    static_assert(!iDynTree::is_sparsematrix<iDynTreeMatrixType>::value, "You cannot set a subMatrix on a SparseMatrix.");
 #endif
 
     toEigen(mat).block(rowRange.offset,colRange.offset,rowRange.size,colRange.size) = toEigen(subMat);
@@ -181,8 +187,7 @@ inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const EigMatType& subMat)
 {
 #if __cplusplus > 199711L
-    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
-                  "You cannot set a subMatrix on a SparseMatrix.");
+    static_assert(!iDynTree::is_sparsematrix<iDynTreeMatrixType>::value, "You cannot set a subMatrix on a SparseMatrix.");
 #endif
     toEigen(mat).block(rowRange.offset,colRange.offset,rowRange.size,colRange.size) = subMat;
     return;
@@ -195,8 +200,7 @@ inline void setSubMatrix(iDynTreeMatrixType& mat,
                          const double subMat)
 {
 #if __cplusplus > 199711L
-    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
-                  "You cannot set a subMatrix on a SparseMatrix.");
+    static_assert(!iDynTree::is_sparsematrix<iDynTreeMatrixType>::value, "You cannot set a subMatrix on a SparseMatrix.");
 #endif
     assert(rowRange.size == 1);
     assert(colRange.size == 1);
@@ -210,8 +214,7 @@ inline void setSubMatrixToIdentity(iDynTreeMatrixType& mat,
                                    const IndexRange colRange)
 {
 #if __cplusplus > 199711L
-    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
-                  "You cannot set a subMatrix on a SparseMatrix.");
+    static_assert(!iDynTree::is_sparsematrix<iDynTreeMatrixType>::value, "You cannot set a setSubMatrixToIdentity on a SparseMatrix.");
 #endif
     assert(rowRange.size == colRange.size);
     for(int i=0; i < rowRange.size; i++)
@@ -227,8 +230,7 @@ inline void setSubMatrixToMinusIdentity(iDynTreeMatrixType& mat,
                                         const IndexRange colRange)
 {
 #if __cplusplus > 199711L
-    static_assert(!std::is_base_of<iDynTreeMatrixType, SparseMatrix>::value,
-                  "You cannot set a subMatrix on a SparseMatrix.");
+    static_assert(!iDynTree::is_sparsematrix<iDynTreeMatrixType>::value, "You cannot set a setSubMatrixToMinusIdentity on a SparseMatrix.");
 #endif
     assert(rowRange.size == colRange.size);
     for(int i=0; i < rowRange.size; i++)
