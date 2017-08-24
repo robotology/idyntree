@@ -31,7 +31,12 @@ namespace kinematics {
     , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationQuaternion)
     , m_areBaseInitialConditionsSet(false)
     , m_areJointsInitialConditionsSet(InverseKinematicsInitialConditionNotSet)
+    , m_problemInitialized(false)
+    , m_warmStartEnabled(false)
+    , m_numberOfOptimisationVariables(0)
+    , m_numberOfOptimisationConstraints(0)
     , m_solver(NULL)
+    , m_nlpProblem(new internal::kinematics::InverseKinematicsNLP(*this))
     // The default values for the ipopt related parameters are exactly the one of IPOPT,
     // see https://www.coin-or.org/Ipopt/documentation/node41.html
     //     https://www.coin-or.org/Ipopt/documentation/node42.html
@@ -155,6 +160,15 @@ namespace kinematics {
         m_comTarget.weight = 0;
         m_comTarget.desiredPosition.zero();
         m_comTarget.constraintTolerance = 1e-8;
+
+        m_problemInitialized = false;
+        if (m_warmStartEnabled) {
+            m_warmStartEnabled = false;
+            if (!Ipopt::IsNull(m_solver)) {
+                m_solver->Options()->SetStringValue("warm_start_init_point", "no");
+                m_solver->Options()->SetStringValue("warm_start_same_structure", "no");
+            }
+        }
     }
 
     bool InverseKinematicsData::addFrameConstraint(const kinematics::TransformConstraint& frameTransformConstraint)
@@ -342,23 +356,31 @@ namespace kinematics {
                 m_solver->Options()->GetStringValue("linear_solver", m_solverName, "");
             }
 
+            m_solver->Options()->SetNumericValue("warm_start_bound_frac", 1e-6);
+            m_solver->Options()->SetNumericValue("warm_start_bound_push", 1e-6);
+            m_solver->Options()->SetNumericValue("warm_start_mult_bound_push", 1e-6);
+            m_solver->Options()->SetNumericValue("warm_start_slack_bound_frac", 1e-6);
+            m_solver->Options()->SetNumericValue("warm_start_slack_bound_push", 1e-6);
+
             solverStatus = m_solver->Initialize();
             if (solverStatus != Ipopt::Solve_Succeeded) {
                 return false;
             }
         }
 
+        if (!m_problemInitialized) {
+            computeProblemSizeAndResizeBuffers();
+        }
+
         prepareForOptimization();
-
-        //instantiate the IpOpt problem
-        internal::kinematics::InverseKinematicsNLP *iKin = new internal::kinematics::InverseKinematicsNLP(*this);
-        //Do something (if necessary)
-        Ipopt::SmartPtr<Ipopt::TNLP> problem(iKin);
-
         // Ask Ipopt to solve the problem
-        solverStatus = m_solver->OptimizeTNLP(problem);
+        solverStatus = m_solver->OptimizeTNLP(m_nlpProblem);
 
         if (solverStatus == Ipopt::Solve_Succeeded || solverStatus == Ipopt::Solved_To_Acceptable_Level ) {
+            if (!m_warmStartEnabled) {
+                m_warmStartEnabled = true;
+                m_solver->Options()->SetStringValue("warm_start_init_point", "yes");
+            }
             return true;
         } else {
             return false;
@@ -404,6 +426,62 @@ namespace kinematics {
         this->m_comTarget.isActive = false;
         this->m_comTarget.weight = 0;
         this->m_comTarget.desiredPosition.zero();
+    }
+
+    void InverseKinematicsData::computeProblemSizeAndResizeBuffers()
+    {
+        //Size of optimization variables is 3 + Orientation (base) + size of joints we optimize
+        m_numberOfOptimisationVariables = 3 + sizeOfRotationParametrization(m_rotationParametrization) + m_dofs;
+
+        //Start adding constraints
+        m_numberOfOptimisationConstraints = 0;
+        for (auto && constraint : m_constraints) {
+            //Frame constraint: it can have position, rotation or both elements
+            if (constraint.second.hasPositionConstraint()) {
+                m_numberOfOptimisationConstraints += 3;
+            }
+            if (constraint.second.hasRotationConstraint()) {
+                m_numberOfOptimisationConstraints += sizeOfRotationParametrization(m_rotationParametrization);
+            }
+        }
+
+        // COM Convex Hull constraint
+        if (m_comHullConstraint.isActive()) {
+            m_numberOfOptimisationConstraints += m_comHullConstraint.getNrOfConstraints();
+        }
+
+        if (isCoMTargetActive() && isCoMaConstraint()) {
+            m_numberOfOptimisationConstraints += 3;
+        }
+        //add target if considered as constraints
+        for (auto && target : m_targets) {
+            if (target.second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly
+                && target.second.hasPositionConstraint()) {
+                m_numberOfOptimisationConstraints += 3;
+            }
+            if (target.second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
+                && target.second.hasRotationConstraint()) {
+
+                m_numberOfOptimisationConstraints += sizeOfRotationParametrization(m_rotationParametrization);;
+            }
+        }
+
+        if (m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
+            //If the rotation is parametrized as quaternion
+            //that the base orientation yields an additional
+            //constraint, i.e. norm of quaternion = 1
+            m_numberOfOptimisationConstraints += 1; //quaternion norm constraint
+        }
+
+        m_constraintMultipliers.resize(m_numberOfOptimisationConstraints);
+        m_constraintMultipliers.zero();
+        m_lowerBoundMultipliers.resize(m_numberOfOptimisationVariables);
+        m_lowerBoundMultipliers.zero();
+        m_upperBoundMultipliers.resize(m_numberOfOptimisationVariables);
+        m_upperBoundMultipliers.zero();
+        m_nlpProblem->initializeInternalData();
+
+        m_problemInitialized = true;
     }
 
 }
