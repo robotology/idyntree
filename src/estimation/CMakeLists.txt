@@ -9,19 +9,16 @@ idyntree_enable_cxx11()
 set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdyHelper.h
                                 include/iDynTree/Estimation/ExternalWrenchesEstimation.h
                                 include/iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h
-                                include/iDynTree/Estimation/SimpleLeggedOdometry.h)
+                                include/iDynTree/Estimation/SimpleLeggedOdometry.h
+                                include/iDynTree/Estimation/BerdySparseMAPSolver.h)
 
 set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES )
 
 set(IDYNTREE_ESTIMATION_SOURCES src/BerdyHelper.cpp
                                 src/ExternalWrenchesEstimation.cpp
                                 src/ExtWrenchesAndJointTorquesEstimator.cpp
-                                src/SimpleLeggedOdometry.cpp)
-                                
-if (NOT ${EIGEN3_VERSION} VERSION_LESS 3.3)
-  list(APPEND IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdySparseMAPSolver.h)
-  list(APPEND IDYNTREE_ESTIMATION_SOURCES src/BerdySparseMAPSolver.cpp)
-endif()
+                                src/SimpleLeggedOdometry.cpp
+                                src/BerdySparseMAPSolver.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_HEADERS})
