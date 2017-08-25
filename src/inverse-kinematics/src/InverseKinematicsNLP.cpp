@@ -246,6 +246,8 @@ namespace kinematics {
 
                 // Project the COM along the gravity vector
                 comInfo.projectedCom = m_data.m_comHullConstraint.projectAlongGravity(comInfo.com);
+//                std::cerr << "COM: " << comInfo.com.getVal(0) << ", " << comInfo.com.getVal(1) << ", " << comInfo.com.getVal(2) << std::endl;
+//                std::cerr << "Projected COM: " << comInfo.projectedCom.getVal(0) << ", " << comInfo.projectedCom.getVal(1) << std::endl << std::endl;
             }
         }
 
