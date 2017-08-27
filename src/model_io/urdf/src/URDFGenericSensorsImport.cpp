@@ -383,7 +383,7 @@ bool sensorsFromURDFString(const std::string& urdfXml,
             SixAxisForceTorqueSensor * sensor = new SixAxisForceTorqueSensor();
             sensor->setName(sensorName);
             sensor->setParentJoint(parentJoint);
-            sensor->setParentJointIndex(parentLinkIndex);
+            sensor->setParentJointIndex(parentJointIndex);
             if( measure_direction_type == PARENT_TO_CHILD )
             {
                 sensor->setAppliedWrenchLink(childLinkIndex);
