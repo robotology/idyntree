@@ -24,8 +24,8 @@ macro(idyntree_handle_dependency package)
   endif ()
 endmacro ()
 
-# Eigen is compulsory (minimum version 3.3)
-find_package(Eigen3 REQUIRED 3.3)
+# Eigen is compulsory (minimum version 3.2.92)
+find_package(Eigen3 3.2.92 REQUIRED)
 
 # For orocos_kdl we have custom logic, because we want to set it to FALSE by default
 option(IDYNTREE_USES_KDL "Build the part of iDynTree that depends on package orocos_kdl" FALSE)
