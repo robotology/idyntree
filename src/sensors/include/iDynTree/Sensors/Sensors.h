@@ -43,12 +43,13 @@ namespace iDynTree {
     {
         SIX_AXIS_FORCE_TORQUE = 0,
         ACCELEROMETER = 1,
-        GYROSCOPE = 2
+        GYROSCOPE = 2,
+        THREE_AXIS_ANGULAR_ACCELEROMETER = 3
     };
 
     // This should be equal to the number of option
     //  in the SensorType enum
-    const int NR_OF_SENSOR_TYPES = 3;
+    const int NR_OF_SENSOR_TYPES = 4;
 
     /**
      * Short function to check if a SensorType is a LinkSensor
@@ -59,6 +60,7 @@ namespace iDynTree {
         {
         case ACCELEROMETER:
         case GYROSCOPE:
+        case THREE_AXIS_ANGULAR_ACCELEROMETER:
             return true;
         case SIX_AXIS_FORCE_TORQUE:
         default:
@@ -82,6 +84,7 @@ namespace iDynTree {
                 return 6;
             case ACCELEROMETER:
             case GYROSCOPE:
+            case THREE_AXIS_ANGULAR_ACCELEROMETER:
                 return 3;
             default:
                 return 0;
@@ -135,12 +138,20 @@ namespace iDynTree {
         virtual Sensor* clone() const = 0;
 
         /**
+         * Check if the sensor is consistent with the specified model.
+         */
+        virtual bool isConsistent(const Model & model) const = 0;
+
+        /**
          * Update all the indices (link/frames) contained in this sensor.
          */
         virtual bool updateIndices(const Model & model) = 0;
 
         // Deprecated
-        virtual bool IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead") updateIndeces(const Model & model) = 0;
+        virtual bool IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead") updateIndeces(const Model & model)
+        {
+            return updateIndices(model);
+        }
     };
 
     /**
@@ -182,6 +193,11 @@ namespace iDynTree {
          * Set the numeric index of the parent joint of the sensor.
          */
         virtual bool setParentJointIndex(const int &) = 0;
+
+        /**
+         * Check if the sensor is consistent with the specified model.
+         */
+        virtual bool isConsistent(const Model& model) const;
     };
 
     /**
@@ -234,9 +250,14 @@ namespace iDynTree {
         /**
          * Set the transform from the sensor to the parent link sensor is attached to.
          *
-         * @return true if link_index is the link attached to the Gyroscope, false otherwise.
+         * @return true if link_index is the link attached to the link sensor, false otherwise.
          */
         virtual bool setLinkSensorTransform(const iDynTree::Transform &) = 0;
+
+        /**
+         * Check if the sensor is consistent with the specified model.
+         */
+        virtual bool isConsistent(const Model& model) const;
     };
 
     /**
@@ -343,14 +364,19 @@ namespace iDynTree {
              */
             Sensor * getSensor(const SensorType & sensor_type, int sensor_index) const;
 
-        bool removeSensor(const SensorType & sensor_type, const std::string & _sensor_name);
-        bool removeSensor(const SensorType & sensor_type, const unsigned int sensor_index);
-        bool removeAllSensorsOfType(const SensorType & sensor_type);
+            /**
+             * Check if all the sensors in the list are consistent with the specified model.
+             */
+            bool isConsistent(const Model& model) const;
 
-        iterator allSensorsIterator();
-        const_iterator allSensorsIterator() const;
-        typed_iterator sensorsIteratorForType(const iDynTree::SensorType &sensor_type);
-        const_typed_iterator sensorsIteratorForType(const iDynTree::SensorType &sensor_type) const;
+            bool removeSensor(const SensorType & sensor_type, const std::string & _sensor_name);
+            bool removeSensor(const SensorType & sensor_type, const unsigned int sensor_index);
+            bool removeAllSensorsOfType(const SensorType & sensor_type);
+
+            iterator allSensorsIterator();
+            const_iterator allSensorsIterator() const;
+            typed_iterator sensorsIteratorForType(const iDynTree::SensorType &sensor_type);
+            const_typed_iterator sensorsIteratorForType(const iDynTree::SensorType &sensor_type) const;
 
     };
 
@@ -557,14 +583,15 @@ namespace iDynTree {
             bool setMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
                                 const iDynTree::Wrench & measurement);
-
             bool setMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
                                 const iDynTree::LinAcceleration & measurement);
-
             bool setMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
                                 const iDynTree::AngVelocity & measurement);
+            bool setMeasurement(const SensorType & sensor_type,
+                                const unsigned int & sensor_index,
+                                const Vector3 & measurement);
 
 
             /**
@@ -582,6 +609,9 @@ namespace iDynTree {
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
                                 iDynTree::AngVelocity &measurement) const;
+            bool getMeasurement(const SensorType & sensor_type,
+                                const unsigned int & sensor_index,
+                                Vector3& measurement) const;
 
             /**
              * Get the total size of sensor measurements.
