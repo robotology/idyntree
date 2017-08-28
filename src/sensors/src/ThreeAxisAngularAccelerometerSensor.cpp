@@ -18,16 +18,18 @@
 
 # include "iDynTree/Core/LinearMotionVector3.h"
 
-#include "iDynTree/Sensors/AccelerometerSensor.h"
+#include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
 
 #include "iDynTree/Core/Transform.h"
 
 #include "iDynTree/Core/SpatialAcc.h"
 #include "iDynTree/Core/Twist.h"
 
+#include <iDynTree/Core/EigenHelpers.h>
+
 namespace iDynTree {
 
-struct AccelerometerSensor::AccelerometerPrivateAttributes
+struct ThreeAxisAngularAccelerometerSensor::ThreeAxisAngularAccelerometerPrivateAttributes
 {
     // Name/id of the sensor
     std::string name;
@@ -41,9 +43,9 @@ struct AccelerometerSensor::AccelerometerPrivateAttributes
 };
 
 
-AccelerometerSensor::AccelerometerSensor()
+ThreeAxisAngularAccelerometerSensor::ThreeAxisAngularAccelerometerSensor()
 {
-    this->pimpl = new AccelerometerPrivateAttributes;
+    this->pimpl = new ThreeAxisAngularAccelerometerPrivateAttributes;
 
     this->pimpl->name = "";
     this->pimpl->link_H_sensor = Transform::Identity();
@@ -52,13 +54,13 @@ AccelerometerSensor::AccelerometerSensor()
 
 }
 
-AccelerometerSensor::AccelerometerSensor(const AccelerometerSensor& other):
-    pimpl(new AccelerometerPrivateAttributes(*(other.pimpl)))
+ThreeAxisAngularAccelerometerSensor::ThreeAxisAngularAccelerometerSensor(const ThreeAxisAngularAccelerometerSensor& other):
+    pimpl(new ThreeAxisAngularAccelerometerPrivateAttributes(*(other.pimpl)))
 {
 
 }
 
-AccelerometerSensor& AccelerometerSensor::operator=(const AccelerometerSensor& other)
+ThreeAxisAngularAccelerometerSensor& ThreeAxisAngularAccelerometerSensor::operator=(const ThreeAxisAngularAccelerometerSensor& other)
 {
     if(this != &other)
     {
@@ -68,49 +70,49 @@ AccelerometerSensor& AccelerometerSensor::operator=(const AccelerometerSensor& o
 }
 
 
-AccelerometerSensor::~AccelerometerSensor()
+ThreeAxisAngularAccelerometerSensor::~ThreeAxisAngularAccelerometerSensor()
 {
     delete this->pimpl;
 }
 
-bool AccelerometerSensor::setName(const std::string& _name)
+bool ThreeAxisAngularAccelerometerSensor::setName(const std::string& _name)
 {
     this->pimpl->name = _name;
     return true;
 }
 
 
-bool AccelerometerSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor)
+bool ThreeAxisAngularAccelerometerSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor)
 {
       this->pimpl->link_H_sensor = link_H_sensor;
       return true;
 }
 
 
-bool AccelerometerSensor::setParentLink(const std::string& parent)
+bool ThreeAxisAngularAccelerometerSensor::setParentLink(const std::string& parent)
 {
     this->pimpl->parent_link_name = parent;
     return true;
 }
 
-bool AccelerometerSensor::setParentLinkIndex(const LinkIndex &parent_index)
+bool ThreeAxisAngularAccelerometerSensor::setParentLinkIndex(const LinkIndex &parent_index)
 {
     this->pimpl->parent_link_index = parent_index;
     return true;
 
 }
 
-std::string AccelerometerSensor::getParentLink() const
+std::string ThreeAxisAngularAccelerometerSensor::getParentLink() const
 {
     return(this->pimpl->parent_link_name);
 }
 
-int AccelerometerSensor::getParentLinkIndex() const
+int ThreeAxisAngularAccelerometerSensor::getParentLinkIndex() const
 {
     return(this->pimpl->parent_link_index);
 }
 
-bool AccelerometerSensor::isValid() const
+bool ThreeAxisAngularAccelerometerSensor::isValid() const
 {
     if( this->getName() == "" )
     {
@@ -126,12 +128,12 @@ bool AccelerometerSensor::isValid() const
     return true;
 }
 
-Sensor* AccelerometerSensor::clone() const
+Sensor* ThreeAxisAngularAccelerometerSensor::clone() const
 {
-    return (Sensor *)new AccelerometerSensor(*this);
+    return (Sensor *)new ThreeAxisAngularAccelerometerSensor(*this);
 }
 
-bool AccelerometerSensor::updateIndices(const Model& model)
+bool ThreeAxisAngularAccelerometerSensor::updateIndices(const Model& model)
 {
     iDynTree::LinkIndex linkNewIndex = model.getLinkIndex(this->pimpl->parent_link_name);
 
@@ -145,47 +147,31 @@ bool AccelerometerSensor::updateIndices(const Model& model)
     return true;
 }
 
-// Deprecated
-bool AccelerometerSensor::updateIndeces(const Model& model)
-{
-    return updateIndices(model);
-}
-
-
-std::string AccelerometerSensor::getName() const
+std::string ThreeAxisAngularAccelerometerSensor::getName() const
 {
     return this->pimpl->name;
 }
 
-SensorType AccelerometerSensor::getSensorType() const
+SensorType ThreeAxisAngularAccelerometerSensor::getSensorType() const
 {
-    return ACCELEROMETER;
+    return THREE_AXIS_ANGULAR_ACCELEROMETER;
 }
 
-Transform AccelerometerSensor::getLinkSensorTransform() const
+Transform ThreeAxisAngularAccelerometerSensor::getLinkSensorTransform() const
 {
     return(this->pimpl->link_H_sensor);
 }
 
-LinAcceleration AccelerometerSensor::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& linkTwist)
+Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& )
 {
-    LinAcceleration returnAcc(0,0,0);
+    Vector3 returnAcc;
+    returnAcc.zero();
     if( this->pimpl->parent_link_index >= 0)
     {
-        iDynTree::Twist localVelocity = this->pimpl->link_H_sensor.inverse() * linkTwist;
-        returnAcc = ((this->pimpl->link_H_sensor.inverse() * linkAcc).getLinearVec3() + (localVelocity.getAngularVec3()).cross(localVelocity.getLinearVec3()));
+        toEigen(returnAcc) = toEigen(this->pimpl->link_H_sensor.getRotation().inverse()) * toEigen(linkAcc.getAngularVec3());
     }
 
-    return(returnAcc);
+    return returnAcc;
 }
 
-
-/*
- * To be implmented in future based on interface and requirements
-bool getAccelerationOfLink(const iDynTree::LinAcceleration & measured_acceleration,
-                           iDynTree::LinAcceleration & linear_acceleration_of_link )
-{
-    return(true);
-}
-*/
 }

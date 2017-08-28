@@ -364,6 +364,7 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLinkInverseMatrix(const LinkInd
     }
     else
     {
+        assert(false);
         wrench_applied_on_link_inverse_matrix.zero();
         return false;
     }
