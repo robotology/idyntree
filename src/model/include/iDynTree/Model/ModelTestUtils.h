@@ -199,8 +199,8 @@ inline bool getRandomInverseDynamicsInputs(FreeFloatingPos& pos,
                                            FreeFloatingAcc& acc,
                                            LinkNetExternalWrenches& extWrenches)
 {
-    pos.worldBasePos() =  getRandomTransform();
-    vel.baseVel() = getRandomTwist();
+    pos.worldBasePos() = getRandomTransform();
+    vel.baseVel() =  getRandomTwist();
     acc.baseAcc() =  getRandomTwist();
 
 
