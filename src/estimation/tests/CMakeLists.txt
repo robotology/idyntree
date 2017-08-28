@@ -14,10 +14,8 @@ macro(add_estimation_test classname)
     endif()
 endmacro()
 
-
 add_estimation_test(BerdyHelper)
 add_estimation_test(BerdyMAPSolver)
-
 add_estimation_test(ExternalWrenchesEstimation)
 add_estimation_test(ExtWrenchesAndJointTorquesEstimator)
 add_estimation_test(SimpleLeggedOdometry)
