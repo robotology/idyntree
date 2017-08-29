@@ -1,5 +1,8 @@
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
+# Legacy tests, remove deprecated warnings when compiling
+idyntree_disable_deprecation_warnings()
+
 macro(add_kdl_consistency_test testName)
     set(testsrc ${testName}ConsistencyTest.cpp)
     set(testbinary ${testName}ConsistencyTest)
@@ -14,6 +17,7 @@ macro(add_kdl_consistency_test testName)
 
     endif()
 endmacro()
+
 
 add_kdl_consistency_test(Geometry)
 add_kdl_consistency_test(KinematicsDynamics)

@@ -18,6 +18,9 @@ SOURCE_GROUP("Source Files" FILES ${IDYNTREE_KDL_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_KDL_HEADERS})
 SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_KDL_PRIVATE_INCLUDES})
 
+# Legacy library, remove deprecated warnings when compiling
+idyntree_disable_deprecation_warnings()
+
 set(libraryname idyntree-kdl)
 
 add_library(${libraryname} ${IDYNTREE_KDL_SOURCES} ${IDYNTREE_KDL_HEADERS} ${IDYNTREE_KDL_PRIVATE_INCLUDES})
