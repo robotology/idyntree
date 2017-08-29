@@ -23,6 +23,9 @@ if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
     include_directories(${IDYNTREE_INCLUDE_DIRS})
     link_libraries(${IDYNTREE_LIBRARIES})
 
+    # Remove the deprecation warnings because by definition we always build bindings also of deprecated modules
+    idyntree_disable_deprecation_warnings()
+
     # list all dependencies of the process of generating
     # SWIG bindings (for now just .i files included in the main
     # iDynTree.i file)

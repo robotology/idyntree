@@ -15,6 +15,10 @@ set(IDYNTREE_ESTIMATION_KDL_SOURCES src/simpleLeggedOdometry.cpp
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_KDL_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_KDL_HEADERS})
 
+# Legacy library, remove deprecated warnings when compiling
+idyntree_disable_deprecation_warnings()
+
+
 set(libraryname idyntree-estimation-kdl)
 
 add_library(${libraryname} ${IDYNTREE_ESTIMATION_KDL_SOURCES} ${IDYNTREE_ESTIMATION_KDL_HEADERS} ${IDYNTREE_ESTIMATION_KDL_PRIVATE_INCLUDES})

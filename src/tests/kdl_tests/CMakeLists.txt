@@ -1,5 +1,8 @@
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
+# Legacy tests, remove deprecated warnings when compiling
+idyntree_disable_deprecation_warnings()
+
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS} ${orocos_kdl_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 

@@ -44,7 +44,6 @@ double random_double()
     return ((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
 }
 
-
 iDynTree::Wrench simulateFTSensorFromKinematicState(const KDL::CoDyCo::UndirectedTree & icub_undirected_tree,
                                         const KDL::JntArray & q,
                                         const KDL::JntArray & dq,

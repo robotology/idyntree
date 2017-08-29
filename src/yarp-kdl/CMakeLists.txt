@@ -25,6 +25,8 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           DEPENDS IDYNTREE_ENABLE_RPATH
                           USE_LINK_PATH)
 
+# Legacy library, remove deprecated warnings when compiling
+idyntree_disable_deprecation_warnings()
 
 add_library(idyntree-yarp-kdl ${iDynTree_YARP_KDL_source} ${iDynTree_YARP_KDL_header})
 

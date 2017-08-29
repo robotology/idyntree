@@ -25,6 +25,9 @@ set(IDYNTREE_REGRESSOR_SOURCES_EXP DynamicsRegressorParameters.cpp)
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_REGRESSORS_SOURCES} ${IDYNTREE_REGRESSORS_SOURCES_EXP})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_REGRESSORS_HEADERS} ${IDYNTREE_REGRESSORS_HEADERS_EXP})
 
+# Legacy library, remove deprecated warnings when compiling
+idyntree_disable_deprecation_warnings()
+
 set(libraryname idyntree-regressors)
 
 add_library(${libraryname} ${IDYNTREE_REGRESSORS_SOURCES}     ${IDYNTREE_REGRESSORS_HEADERS}

@@ -24,6 +24,9 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           DEPENDS IDYNTREE_ENABLE_RPATH
                           USE_LINK_PATH)
 
+# Legacy library, remove deprecated warnings when compiling
+idyntree_disable_deprecation_warnings()
+
 set(libraryname idyntree-icub-kdl)
 add_library(${libraryname} ${iDynTree_ICUB_KDL_source} ${iDynTree_ICUB_KDL_header})
 
