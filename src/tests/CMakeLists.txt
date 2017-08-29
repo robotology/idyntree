@@ -1,3 +1,6 @@
+# Enable C++11 for tests
+idyntree_enable_cxx11()
+
 # add integration tests, that
 # test interaction between components
 add_subdirectory(integration)
