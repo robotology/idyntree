@@ -45,8 +45,6 @@ namespace iDynTree {
         iDynTree::VectorDynSize priorDynamicsRegularizationExpectedValue; // mu_d
         iDynTree::SparseMatrix<iDynTree::ColumnMajor> priorMeasurementsCovarianceInverse; // Sigma_y^-1
 
-        iDynTree::Vector3 gravity;
-
         // The following variables are mainly buffers to contain intermediate results
 
         // These matrices contain the elements representing the berdy system
@@ -191,15 +189,35 @@ namespace iDynTree {
         return init && m_pimpl->valid;
     }
 
-    void BerdySparseMAPSolver::updateEstimateInformation(const iDynTree::JointPosDoubleArray& jointsConfiguration,
-                                                         const iDynTree::JointDOFsDoubleArray& jointsVelocity,
-                                                         const iDynTree::VectorDynSize& measurements)
+    void BerdySparseMAPSolver::updateEstimateInformationFixedBase(const iDynTree::JointPosDoubleArray& jointsConfiguration,
+                                                                  const iDynTree::JointDOFsDoubleArray& jointsVelocity,
+                                                                  const FrameIndex fixedFrame,
+                                                                  const Vector3& gravity,
+                                                                  const iDynTree::VectorDynSize& measurements)
     {
         assert(m_pimpl);
 
         m_pimpl->jointsConfiguration = jointsConfiguration;
         m_pimpl->jointsVelocity = jointsVelocity;
         m_pimpl->measurements = measurements;
+
+        m_pimpl->berdy.updateKinematicsFromFixedBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity, fixedFrame, gravity);
+    }
+
+    void BerdySparseMAPSolver::updateEstimateInformationFloatingBase(const iDynTree::JointPosDoubleArray& jointsConfiguration,
+                                                                     const iDynTree::JointDOFsDoubleArray& jointsVelocity,
+                                                                     const FrameIndex floatingFrame,
+                                                                     const Vector3& bodyAngularVelocityOfSpecifiedFrame,
+                                                                     const iDynTree::VectorDynSize& measurements)
+    {
+        assert(m_pimpl);
+
+        m_pimpl->jointsConfiguration = jointsConfiguration;
+        m_pimpl->jointsVelocity = jointsVelocity;
+        m_pimpl->measurements = measurements;
+
+        m_pimpl->berdy.updateKinematicsFromFloatingBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
+                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
     }
 
     bool BerdySparseMAPSolver::doEstimate()
@@ -209,10 +227,8 @@ namespace iDynTree {
 #ifdef EIGEN_RUNTIME_NO_MALLOC
         Eigen::internal::set_is_malloc_allowed(false);
 #endif
-        m_pimpl->berdy.updateKinematicsFromTraversalFixedBase(m_pimpl->jointsConfiguration,
-                                                              m_pimpl->jointsVelocity,
-                                                              m_pimpl->gravity);
-        m_pimpl->computeMAP(false);
+        bool computePermutation = false;
+        m_pimpl->computeMAP(computePermutation);
 
 #ifdef EIGEN_RUNTIME_NO_MALLOC
         Eigen::internal::set_is_malloc_allowed(true);
@@ -340,10 +356,11 @@ namespace iDynTree {
         priorDynamicsRegularizationExpectedValue.resize(numberOfDynVariables);
         priorDynamicsRegularizationExpectedValue.zero();
 
-        gravity.zero();
-        gravity(2) = -9.81;
+        Vector3 initialGravity;
+        initialGravity.zero();
+        initialGravity(2) = -9.81;
 
-        berdy.updateKinematicsFromTraversalFixedBase(jointsConfiguration, jointsVelocity, gravity);
+        berdy.updateKinematicsFromFixedBase(jointsConfiguration, jointsVelocity, berdy.dynamicTraversal().getBaseLink()->getIndex(), initialGravity);
         computeMAP(true);
 
         valid = true;
