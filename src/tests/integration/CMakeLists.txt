@@ -6,7 +6,7 @@ macro(add_integration_test testname)
     set(testtarget   IntegrationTest${testname})
     add_executable(${testbinary} ${testsrc})
     target_include_directories(${testbinary} PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf idyntree-high-level)
+    target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf idyntree-high-level idyntree-sensors idyntree-estimation)
     add_test(NAME ${testtarget} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
@@ -25,7 +25,7 @@ endmacro()
 
 add_integration_test(Dynamics)
 add_integration_test(DenavitHartenberg)
-
+add_integration_test(iCubTorqueEstimation)
 
 # Until we fix it, add DynamicsLinearization test but don't execute it
 add_integration_exe(DynamicsLinearization)

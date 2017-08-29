@@ -45,8 +45,6 @@ namespace iDynTree {
         iDynTree::VectorDynSize priorDynamicsRegularizationExpectedValue; // mu_d
         iDynTree::SparseMatrix<iDynTree::ColumnMajor> priorMeasurementsCovarianceInverse; // Sigma_y^-1
 
-        iDynTree::Vector3 gravity;
-
         // The following variables are mainly buffers to contain intermediate results
 
         // These matrices contain the elements representing the berdy system
@@ -59,6 +57,8 @@ namespace iDynTree {
         iDynTree::JointPosDoubleArray jointsConfiguration;
         iDynTree::JointDOFsDoubleArray jointsVelocity;
         iDynTree::VectorDynSize measurements;
+        // Gravity is only used if updateEstimateInformationFixedBase is called
+        iDynTree::Vector3 gravity;
 
         // Expected value and variance of the prior on the dynamics
         iDynTree::VectorDynSize expectedDynamicsPrior;
@@ -191,15 +191,48 @@ namespace iDynTree {
         return init && m_pimpl->valid;
     }
 
-    void BerdySparseMAPSolver::updateEstimateInformation(const iDynTree::JointPosDoubleArray& jointsConfiguration,
-                                                         const iDynTree::JointDOFsDoubleArray& jointsVelocity,
-                                                         const iDynTree::VectorDynSize& measurements)
+    void BerdySparseMAPSolver::updateEstimateInformationFixedBase(const iDynTree::JointPosDoubleArray& jointsConfiguration,
+                                                                  const iDynTree::JointDOFsDoubleArray& jointsVelocity,
+                                                                  const iDynTree::VectorDynSize& measurements)
     {
         assert(m_pimpl);
 
         m_pimpl->jointsConfiguration = jointsConfiguration;
         m_pimpl->jointsVelocity = jointsVelocity;
         m_pimpl->measurements = measurements;
+
+        m_pimpl->berdy.updateKinematicsFromTraversalFixedBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity, m_pimpl->gravity);
+    }
+
+    void BerdySparseMAPSolver::updateEstimateInformationFixedBase(const iDynTree::JointPosDoubleArray& jointsConfiguration,
+                                                                  const iDynTree::JointDOFsDoubleArray& jointsVelocity,
+                                                                  const iDynTree::VectorDynSize& measurements,
+                                                                  const Vector3& gravity)
+    {
+        assert(m_pimpl);
+
+        m_pimpl->jointsConfiguration = jointsConfiguration;
+        m_pimpl->jointsVelocity = jointsVelocity;
+        m_pimpl->measurements = measurements;
+        m_pimpl->gravity      = gravity;
+
+        m_pimpl->berdy.updateKinematicsFromTraversalFixedBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity, m_pimpl->gravity);
+    }
+
+    void BerdySparseMAPSolver::updateEstimateInformationFloatingBase(const iDynTree::JointPosDoubleArray& jointsConfiguration,
+                                                                     const iDynTree::JointDOFsDoubleArray& jointsVelocity,
+                                                                     const iDynTree::VectorDynSize& measurements,
+                                                                     const FrameIndex& floatingFrame,
+                                                                     const Vector3& bodyAngularVelocityOfSpecifiedFrame)
+    {
+        assert(m_pimpl);
+
+        m_pimpl->jointsConfiguration = jointsConfiguration;
+        m_pimpl->jointsVelocity = jointsVelocity;
+        m_pimpl->measurements = measurements;
+
+        m_pimpl->berdy.updateKinematicsFromFloatingBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
+                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
     }
 
     bool BerdySparseMAPSolver::doEstimate()
@@ -209,10 +242,8 @@ namespace iDynTree {
 #ifdef EIGEN_RUNTIME_NO_MALLOC
         Eigen::internal::set_is_malloc_allowed(false);
 #endif
-        m_pimpl->berdy.updateKinematicsFromTraversalFixedBase(m_pimpl->jointsConfiguration,
-                                                              m_pimpl->jointsVelocity,
-                                                              m_pimpl->gravity);
-        m_pimpl->computeMAP(false);
+        bool computePermutation = false;
+        m_pimpl->computeMAP(computePermutation);
 
 #ifdef EIGEN_RUNTIME_NO_MALLOC
         Eigen::internal::set_is_malloc_allowed(true);
