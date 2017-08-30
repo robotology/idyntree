@@ -344,6 +344,8 @@ namespace iDynTree
 
     void ConvexHullProjectionConstraint::setProjectionAlongDirection(Vector3 direction, const iDynTree::Position originOfPlaneInWorld)
     {
+        o = originOfPlaneInWorld;
+
         Vector3 xProjection, yProjection;
 
         // define the projection for the x-component
