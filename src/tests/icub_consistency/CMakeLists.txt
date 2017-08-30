@@ -21,7 +21,7 @@ macro(add_icub_consistency_test testName)
     set(testbinary ${testName}ConsistencyTest)
     set(testname   ConsistencyTest${testName})
     add_executable(${testbinary} ${testsrc})
-    target_link_libraries(${testbinary} idyntree-modelio-urdf-kdl idyntree-yarp idyntree-high-level idyntree-icub idyntree-icub idyntree-icub-kdl idyntree-icub idyntree-core idyntree-kdl idyntree-model idyntree-estimation)
+    target_link_libraries(${testbinary} idyntree-yarp idyntree-high-level idyntree-icub idyntree-icub idyntree-icub idyntree-core idyntree-model idyntree-estimation)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
