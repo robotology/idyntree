@@ -7,6 +7,8 @@
 
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Position.h>
+#include <iDynTree/Core/RotationRaw.h>
+#include <iDynTree/Core/PositionRaw.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/Wrench.h>
@@ -91,6 +93,10 @@ Transform::Transform(const Rotation& _rot, const Position& origin): pos(origin),
 {
     iDynTreeSemanticsOp(this->semantics.check_position2rotationConsistency(pos.getSemantics(), rot.getSemantics()));
 }
+
+Transform::Transform(double* in_data, const unsigned int in_size)
+    : Transform(fromHomogeneousTransform(in_data,in_size))
+{}
 
 Transform::Transform(const Transform& other): pos(other.getPosition()),
                                               rot(other.getRotation()),
@@ -271,7 +277,7 @@ std::string Transform::toString() const
        << pos.toString();
 
     iDynTreeSemanticsOp(ss << " " << semantics.toString());
-    
+
     ss << std::endl;
 
     return ss.str();
@@ -471,6 +477,17 @@ std::string Transform::reservedToString() const
 
 
         return ret;
+    }
+
+    Transform Transform::fromHomogeneousTransform(double* in_data, const unsigned int in_size)
+    {
+        Eigen::Map<Eigen::Matrix<double,4,4,Eigen::RowMajor> > homogeneousMatrix(in_data);
+
+        Eigen::Matrix<double,3,3,Eigen::RowMajor> rotation(homogeneousMatrix.block<3, 3>(0, 0));
+        Eigen::Matrix<double,3,1> position(homogeneousMatrix.block<3, 1>(0, 3));
+
+        return Transform(RotationRaw(rotation.data(), 3, 3),
+                         PositionRaw(position.data(), 3));
     }
 
     Matrix6x6 Transform::asAdjointTransform() const

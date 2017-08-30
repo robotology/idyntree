@@ -102,9 +102,23 @@ namespace iDynTree
         Transform(const Rotation & _rot, const Position & origin);
 
         /**
+        * Constructor from a raw row-major ordered buffer of doubles
+        * @param in_data the raw buffer of 16 doubles
+        * @param in_size size of the buffer (must be 16)
+        */
+        Transform(double* in_data, const unsigned int in_size);
+
+        /**
          * Copy constructor: create a Transform from another Transform.
          */
         Transform(const Transform & other);
+
+        /**
+         * Set rotation and translation from a row-major ordered buffer containing the transform
+         * @param in_data the raw buffer of 16 doubles
+         * @param in_size size of the buffer (must be 16)
+         */
+        Transform fromHomogeneousTransform(double* in_data, const unsigned int in_size);
 
         /**
          * Assigment operator
