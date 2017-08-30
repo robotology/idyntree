@@ -56,6 +56,12 @@ protected:
     yarp::sig::Vector m_measuredPressureSecondarySoleInN;
 
     yarp::os::BufferedPort<yarp::os::Bottle> skin_port;
+
+    // Attributes to read gravity direction
+    bool m_skip_gravity;
+    yarp::os::BufferedPort<yarp::sig::Vector> m_imuPort;
+    std::string m_imuFrameName;
+
     yarp::os::Semaphore mutex;
 
     int sensorsNum;
