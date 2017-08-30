@@ -708,13 +708,11 @@ public:
     /*!
      * Set the directions along which a point will be projected.
      *
-     * \author Aiko Dinale (xx/08/2017)
+     * \author Aiko Dinale (29/08/2017)
      *
-     * @param xProjection     x direction of the projection
-     * @param yProjection     y direction of the projection
+     * @param direction     vector along which we want to project a point
      */
-    void setProjectionDirection(const iDynTree::Direction xProjection,
-                                const iDynTree::Direction yProjection,
+    void setProjectionDirection(iDynTree::Vector3 direction,
                                 const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero());
 
 private:

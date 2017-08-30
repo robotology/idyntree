@@ -97,19 +97,37 @@ void testConvexHullProjectionWithGravity()
     // Note: positive margin means inside, negative outside
     ASSERT_IS_TRUE(projectionConstraint.computeMargin(projectionConstraint.project(testPoint)) < 0);
 
-    // If the direction along with we are projecting is the normal of the plane, the projection
+    // If the direction along witch we are projecting is the normal of the plane, the projection
     // should match the one done without direction
-    iDynTree::Direction planeNormal(0.0, 0.0, -1.0);
-    //ASSERT_EQUAL_VECTOR(projectionConstraint.project(testPoint), projectionConstraint.projectAlongDirection(testPoint, planeNormal));
 
-    // If the direction of the projection of is "skewed" to the left, the point should instead be inside the convex hull
-    iDynTree::Direction skewedDirection(-1.0, 0.0, -1.0);
-    // ASSERT_IS_TRUE(projectionConstraint.computeMargin(projectionConstraint.projectAlongDirection(testPoint, skewedDirection)) < 0);
+    //iDynTree::Direction planeNormal(0.0, 0.0, -1.0);
+    //ASSERT_EQUAL_VECTOR(projectionConstraint.project(testPoint), projectionConstraint.projectAlongDirection(testPoint, planeNormal));
+    iDynTree::Vector3 planeNormalVector;
+    planeNormalVector.setVal(0, 0.0);
+    planeNormalVector.setVal(1, 0.0);
+    planeNormalVector.setVal(2, -1.0);
+
+    projectionConstraint.setProjectionAlongDirection(planeNormalVector, iDynTree::Position::Zero());
+
+    ASSERT_EQUAL_VECTOR(projectionConstraint.project(testPoint), projectionConstraint.projectAlongDirection(testPoint));
+
+    //ASSERT_IS_TRUE(false);
+
+    // If the direction of the projection is "skewed" to the left, the point should instead be inside the convex hull
+    //iDynTree::Direction skewedDirection(-1.0, 0.0, -1.0);
+    //ASSERT_IS_TRUE(projectionConstraint.computeMargin(projectionConstraint.projectAlongDirection(testPoint, skewedDirection)) < 0);
+    iDynTree::Vector3 skewedDirection;
+    skewedDirection.setVal(0, -1.0);
+    skewedDirection.setVal(1, 0.0);
+    skewedDirection.setVal(2, 1.0);
+
+    ASSERT_IS_TRUE(projectionConstraint.computeMargin(projectionConstraint.projectAlongDirection(testPoint)) < 0);
 }
 
 int main()
 {
     testConvexHullProjectionConstraint();
+    testConvexHullProjectionWithGravity();
 
     return EXIT_SUCCESS;
 }

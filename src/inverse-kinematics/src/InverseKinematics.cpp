@@ -320,7 +320,7 @@ namespace iDynTree {
             IK_PIMPL(m_pimpl)->m_comHullConstraint.absoluteFrame_X_supportFrame[0]*(kinDyn.getWorldTransform(IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices[0]).inverse()*kinDyn.getCenterOfMassPosition());
 
         //iDynTree::Vector2 comProjection = IK_PIMPL(m_pimpl)->m_comHullConstraint.project(comInAbsoluteConstraintFrame);
-        iDynTree::Vector2 comProjection = IK_PIMPL(m_pimpl)->m_comHullConstraint.projectAlongGravity(comInAbsoluteConstraintFrame);
+        iDynTree::Vector2 comProjection = IK_PIMPL(m_pimpl)->m_comHullConstraint.projectAlongDirection(comInAbsoluteConstraintFrame);
         return IK_PIMPL(m_pimpl)->m_comHullConstraint.computeMargin(comProjection);
     }
 
@@ -625,12 +625,11 @@ namespace iDynTree {
         IK_PIMPL(m_pimpl)->setCoMTargetInactive();
     }
 
-    void InverseKinematics::setProjectionDirection(const iDynTree::Direction xProjection,
-                                                   const iDynTree::Direction yProjection,
+    void InverseKinematics::setProjectionDirection(iDynTree::Vector3 direction,
                                                    const iDynTree::Position originOfPlaneInWorld)
     {
-        // define the projection matrix 'Pimu'
-        IK_PIMPL(m_pimpl)->m_comHullConstraint.setPimu(xProjection, yProjection, originOfPlaneInWorld);
+        // define the projection matrix 'Pdirection' in the class 'ConvexHullProjectionConstraint'
+        IK_PIMPL(m_pimpl)->m_comHullConstraint.setProjectionAlongDirection(direction, originOfPlaneInWorld);
     }
 
 }

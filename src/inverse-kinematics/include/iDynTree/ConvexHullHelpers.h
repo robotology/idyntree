@@ -174,11 +174,11 @@ namespace iDynTree
         Matrix2x3 P;
 
         /**
-         * Projection matrix 'Pimu', obtained using the IMU's measurements.
-        * The projection 'x' of a 3D point 'c' along the gravity vector is obtained as:
-         * x = Pimu*(c-o).
+         * Projection matrix 'Pdirection' defined by a given direction.
+         * The projection 'x' of a 3D point 'c' along a given vector is obtained as:
+         * x = Pdirection*(c-o).
          */
-        Matrix2x3 Pimu;
+        Matrix2x3 Pdirection;
 
         /**
          * Matrix obtained multiplyng the matrix A for the matrix P.
@@ -223,12 +223,6 @@ namespace iDynTree
         Vector2 project(iDynTree::Position& posIn3dInAbsoluteFrame);
 
         /**
-         * Project a 3D point along the gravity vector.
-         * The point is expressed in the absolute frame of the constraint.
-         */
-        Vector2 projectAlongGravity(iDynTree::Position& posIn3dInAbsoluteFrame);//, Vector3 gravity);
-
-        /**
          * Compute distance of a 2D point from the convex hull.
          * The distance is positive if the point is inside the convex hull,
          * zero if the point is on the boundary of the convex hull,
@@ -236,10 +230,23 @@ namespace iDynTree
          */
         double computeMargin(const Vector2& posIn2D);
 
-        // TODO: write documentation for this method!
-        void setPimu(const iDynTree::Direction xProjection,
-                     const iDynTree::Direction yProjection,
-                     const iDynTree::Position originOfPlaneInWorld);
+        /*!
+         * Set the projection matrix 'Pdirection' given a desired projection direction.
+         *
+         * \author Aiko Dinale (29/08/2017)
+         *
+         * @param direction     vector along which we want to project a point
+         */
+        void setProjectionAlongDirection(Vector3 direction, const Position originOfPlaneInWorld);
+
+        /*!
+         * Project a point along a direction defined by the projection matrix 'Pdirection'
+         *
+         * \author Aiko Dinale (29/08/2017)
+         *
+         * @param posIn3dInAbsoluteFrame     a point we want to project
+         */
+        Vector2 projectAlongDirection(iDynTree::Position& posIn3dInAbsoluteFrame);
 
     };
 }

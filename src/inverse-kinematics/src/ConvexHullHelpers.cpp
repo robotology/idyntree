@@ -342,20 +342,31 @@ namespace iDynTree
         return margin;
     }
 
-    Vector2 ConvexHullProjectionConstraint::projectAlongGravity(iDynTree::Position& posIn3dInAbsoluteFrame)
+    void ConvexHullProjectionConstraint::setProjectionAlongDirection(Vector3 direction, const iDynTree::Position originOfPlaneInWorld)
+    {
+        Vector3 xProjection, yProjection;
+
+        // define the projection for the x-component
+        xProjection.setVal(0, 1.0);
+        xProjection.setVal(1, 0.0);
+        xProjection.setVal(2, direction.getVal(0)/direction.getVal(2));
+
+        // define the projection for the y-component
+        yProjection.setVal(0, 0.0);
+        yProjection.setVal(1, 1.0);
+        yProjection.setVal(2, direction.getVal(1)/direction.getVal(2));
+
+        // fill the projection matrix
+        toEigen(Pdirection).block<1,3>(0,0) = toEigen(xProjection);
+        toEigen(Pdirection).block<1,3>(1,0) = toEigen(yProjection);
+
+    }
+
+    Vector2 ConvexHullProjectionConstraint::projectAlongDirection(iDynTree::Position& posIn3dInAbsoluteFrame)
     {
         iDynTree::Vector2 projected;
-        toEigen(projected) = toEigen(Pimu)*toEigen(posIn3dInAbsoluteFrame-o);
+        toEigen(projected) = toEigen(Pdirection)*toEigen(posIn3dInAbsoluteFrame-o);
         return projected;
     }
-
-    void ConvexHullProjectionConstraint::setPimu(const iDynTree::Direction xProjection, const iDynTree::Direction yProjection, const iDynTree::Position originOfPlaneInWorld)
-    {
-        o = originOfPlaneInWorld;
-
-        toEigen(Pimu).block<1,3>(0,0) = toEigen(xProjection);
-        toEigen(Pimu).block<1,3>(1,0) = toEigen(yProjection);
-    }
-
 
 }
