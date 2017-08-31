@@ -11,6 +11,7 @@
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/TransformSemantics.h>
+#include <iDynTree/Core/MatrixFixSize.h>
 
 #include <string>
 
@@ -102,9 +103,21 @@ namespace iDynTree
         Transform(const Rotation & _rot, const Position & origin);
 
         /**
+        * Constructor from a Matrix4x4 object. It is equivalent of calling fromHomogeneousTransform()
+        * @param transform The input homogeneous matrix
+        */
+        Transform(const Matrix4x4 & transform);
+
+        /**
          * Copy constructor: create a Transform from another Transform.
          */
         Transform(const Transform & other);
+
+        /**
+         * Set rotation and translation from a iDynTree::Matrix4x4 object
+         * @param transform The input homogeneous matrix
+         */
+        void fromHomogeneousTransform(const Matrix4x4& transform);
 
         /**
          * Assigment operator

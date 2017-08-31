@@ -16,6 +16,7 @@
 #include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/ArticulatedBodyInertia.h>
+#include <iDynTree/Core/MatrixFixSize.h>
 
 #include <iDynTree/Core/PrivateUtils.h>
 #include <iDynTree/Core/PrivateSemanticsMacros.h>
@@ -90,6 +91,12 @@ Transform::Transform(const Rotation& _rot, const Position& origin): pos(origin),
                                                                     semantics(pos.getSemantics(), rot.getSemantics())
 {
     iDynTreeSemanticsOp(this->semantics.check_position2rotationConsistency(pos.getSemantics(), rot.getSemantics()));
+}
+
+Transform::Transform(const Matrix4x4& transform)
+: semantics(pos.getSemantics(), rot.getSemantics())
+{
+    fromHomogeneousTransform(transform);
 }
 
 Transform::Transform(const Transform& other): pos(other.getPosition()),
@@ -257,6 +264,13 @@ Axis Transform::operator*(const Axis& op2) const
     return Axis(this->getRotation()*op2.getDirection(),(*this)*op2.getOrigin());
 }
 
+void Transform::fromHomogeneousTransform(const Matrix4x4& transform)
+{
+    Eigen::Map<Eigen::Matrix<double,4,4,Eigen::RowMajor> > homogeneousMatrix((double*) transform.data());
+
+    toEigen(pos) = homogeneousMatrix.block<3, 1>(0, 3);
+    toEigen(rot) = homogeneousMatrix.block<3, 3>(0, 0);
+}
 
 Transform Transform::Identity()
 {
@@ -271,7 +285,7 @@ std::string Transform::toString() const
        << pos.toString();
 
     iDynTreeSemanticsOp(ss << " " << semantics.toString());
-    
+
     ss << std::endl;
 
     return ss.str();
