@@ -7,8 +7,6 @@
 
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/RotationRaw.h>
-#include <iDynTree/Core/PositionRaw.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/Wrench.h>
@@ -18,6 +16,7 @@
 #include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/ArticulatedBodyInertia.h>
+#include <iDynTree/Core/MatrixFixSize.h>
 
 #include <iDynTree/Core/PrivateUtils.h>
 #include <iDynTree/Core/PrivateSemanticsMacros.h>
@@ -94,9 +93,11 @@ Transform::Transform(const Rotation& _rot, const Position& origin): pos(origin),
     iDynTreeSemanticsOp(this->semantics.check_position2rotationConsistency(pos.getSemantics(), rot.getSemantics()));
 }
 
-Transform::Transform(double* in_data, const unsigned int in_size)
-    : Transform(fromHomogeneousTransform(in_data,in_size))
-{}
+Transform::Transform(const Matrix4x4& transform)
+: semantics(pos.getSemantics(), rot.getSemantics())
+{
+    fromHomogeneousTransform(transform);
+}
 
 Transform::Transform(const Transform& other): pos(other.getPosition()),
                                               rot(other.getRotation()),
@@ -263,6 +264,13 @@ Axis Transform::operator*(const Axis& op2) const
     return Axis(this->getRotation()*op2.getDirection(),(*this)*op2.getOrigin());
 }
 
+void Transform::fromHomogeneousTransform(const Matrix4x4& transform)
+{
+    Eigen::Map<Eigen::Matrix<double,4,4,Eigen::RowMajor> > homogeneousMatrix((double*) transform.data());
+
+    toEigen(pos) = homogeneousMatrix.block<3, 1>(0, 3);
+    toEigen(rot) = homogeneousMatrix.block<3, 3>(0, 0);
+}
 
 Transform Transform::Identity()
 {
@@ -477,17 +485,6 @@ std::string Transform::reservedToString() const
 
 
         return ret;
-    }
-
-    Transform Transform::fromHomogeneousTransform(double* in_data, const unsigned int in_size)
-    {
-        Eigen::Map<Eigen::Matrix<double,4,4,Eigen::RowMajor> > homogeneousMatrix(in_data);
-
-        Eigen::Matrix<double,3,3,Eigen::RowMajor> rotation(homogeneousMatrix.block<3, 3>(0, 0));
-        Eigen::Matrix<double,3,1> position(homogeneousMatrix.block<3, 1>(0, 3));
-
-        return Transform(RotationRaw(rotation.data(), 3, 3),
-                         PositionRaw(position.data(), 3));
     }
 
     Matrix6x6 Transform::asAdjointTransform() const

@@ -11,6 +11,7 @@
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/TransformSemantics.h>
+#include <iDynTree/Core/MatrixFixSize.h>
 
 #include <string>
 
@@ -102,11 +103,10 @@ namespace iDynTree
         Transform(const Rotation & _rot, const Position & origin);
 
         /**
-        * Constructor from a raw row-major ordered buffer of doubles
-        * @param in_data the raw buffer of 16 doubles
-        * @param in_size size of the buffer (must be 16)
+        * Constructor from a Matrix4x4 object. It is equivalent of calling fromHomogeneousTransform()
+        * @param transform The input homogeneous matrix
         */
-        Transform(double* in_data, const unsigned int in_size);
+        Transform(const Matrix4x4 & transform);
 
         /**
          * Copy constructor: create a Transform from another Transform.
@@ -114,11 +114,10 @@ namespace iDynTree
         Transform(const Transform & other);
 
         /**
-         * Set rotation and translation from a row-major ordered buffer containing the transform
-         * @param in_data the raw buffer of 16 doubles
-         * @param in_size size of the buffer (must be 16)
+         * Set rotation and translation from a iDynTree::Matrix4x4 object
+         * @param transform The input homogeneous matrix
          */
-        Transform fromHomogeneousTransform(double* in_data, const unsigned int in_size);
+        void fromHomogeneousTransform(const Matrix4x4& transform);
 
         /**
          * Assigment operator
