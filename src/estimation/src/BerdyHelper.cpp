@@ -1835,7 +1835,7 @@ bool BerdyHelper::serializeDynamicVariablesFloatingBase(LinkProperAccArray& prop
                                                      LinkNetTotalWrenchesWithoutGravity& netTotalWrenchesWithoutGrav,
                                                      LinkNetExternalWrenches& netExtWrenches,
                                                      LinkInternalWrenches& linkJointWrenches,
-                                                     JointDOFsDoubleArray& jointTorques,
+                                                     JointDOFsDoubleArray&,
                                                      JointDOFsDoubleArray& jointAccs,
                                                      VectorDynSize& d)
 {
@@ -2013,12 +2013,52 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
     return ret;
 }
 
-/*
-std::string BerdyHelper::getDescriptionOfDynamicVariables()
+bool BerdyHelper::extractJointTorquesFromDynamicVariables(const VectorDynSize& d,
+                                                          const VectorDynSize& jointPos,
+                                                                VectorDynSize& jointTorques) const
 {
-    std::stringstream ss;
-}*/
+    const Model& model = this->model();
 
+    for (JointIndex jntIdx = 0; jntIdx < static_cast<JointIndex>(model.getNrOfJoints()); ++jntIdx)
+    {
+        IJointConstPtr joint = model.getJoint(jntIdx);
+
+        // Handle joint wrench
+        // Warning: for legacy reason linkJointWrenches is addressed using the child link index of its joint
+        LinkIndex childLinkIndex  = this->dynamicTraversal().getChildLinkIndexFromJointIndex(model, jntIdx);
+        LinkIndex parentLinkIndex = this->dynamicTraversal().getParentLinkIndexFromJointIndex(model, jntIdx);
+
+        IndexRange range = this->getRangeJointVariable(JOINT_WRENCH, jntIdx);
+        LinearForceVector3   force(d.data() + range.offset, 3);
+        AngularMotionVector3 torque(d.data() + range.offset + 3, 3);
+        Wrench jointWrench = iDynTree::Wrench(force, torque);
+
+
+        // If the joint is not fixed, we can compute the joint torque
+        joint->computeJointTorque(jointPos,
+                                  jointWrench,
+                                  parentLinkIndex,
+                                  childLinkIndex,
+                                  jointTorques);
+    }
+
+    return true;
+}
+
+bool BerdyHelper::extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
+                                                                      LinkNetExternalWrenches& netExtWrenches) const
+{
+    const Model& model = this->model();
+    for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(model.getNrOfLinks()); lnkIdx++)
+    {
+        IndexRange range = this->getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx);
+        LinearForceVector3   force(d.data() + range.offset, 3);
+        AngularMotionVector3 torque(d.data() + range.offset + 3, 3);
+        netExtWrenches(lnkIdx) = Wrench(force, torque);
+    }
+
+    return true;
+}
 
 
 
