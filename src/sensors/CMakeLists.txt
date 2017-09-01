@@ -10,7 +10,8 @@ get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DI
 
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
-set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/Sensors.h
+set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/AllSensorsTypes.h
+                             include/iDynTree/Sensors/Sensors.h
                              include/iDynTree/Sensors/SixAxisFTSensor.h
                              include/iDynTree/Sensors/GyroscopeSensor.h
                              include/iDynTree/Sensors/AccelerometerSensor.h

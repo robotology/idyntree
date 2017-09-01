@@ -259,6 +259,24 @@ inline void setSubVector(VectorDynSize& vec,
     return;
 }
 
+inline void setSubVector(VectorDynSize& vec,
+                         const IndexRange range,
+                         const SpatialMotionVector& twist)
+{
+    assert(range.size==6);
+    toEigen(vec).segment(range.offset,range.size) = toEigen(twist);
+    return;
+}
+
+inline void setSubVector(VectorDynSize& vec,
+                         const IndexRange range,
+                         const SpatialForceVector& wrench)
+{
+    assert(range.size==6);
+    toEigen(vec).segment(range.offset,range.size) = toEigen(wrench);
+    return;
+}
+
 template<typename T>
 inline void setSubVector(VectorDynSize& vec,
                          const IndexRange range,
