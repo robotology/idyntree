@@ -61,5 +61,5 @@ set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_S
 
 # Install headers in deprecated location
 install(DIRECTORY include/iDynTree/iCub
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/iCub")
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree")
 
