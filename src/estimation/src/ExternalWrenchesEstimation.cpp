@@ -811,6 +811,49 @@ bool dynamicsEstimationForwardVelKinematics(const Model & /*model*/,
 
 }
 
+bool estimateLinkContactWrenchesFromLinkNetExternalWrenches(const Model& model,
+                                                            const LinkUnknownWrenchContacts& unknownWrenches,
+                                                            const LinkNetExternalWrenches& netExtWrenches,
+                                                                  LinkContactWrenches & outputContactWrenches)
+{
+    for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(model.getNrOfLinks()); lnkIdx++)
+    {
+        if (unknownWrenches.getNrOfContactsForLink(lnkIdx) > 1)
+        {
+            std::stringstream ss;
+            ss << "estimateLinkContactWrenchesFromLinkNetExternalWrenches is currently in testing phase, and does not support "
+               << " handling multiple contacts in one link. Skipping contacts on link " << model.getLinkName(lnkIdx);
+            reportWarning("","estimateLinkContactWrenchesFromLinkNetExternalWrenches", ss.str().c_str());
+            outputContactWrenches.setNrOfContactsForLink(lnkIdx, 0);
+            continue;
+        }
+
+        if (unknownWrenches.getNrOfContactsForLink(lnkIdx) == 1 &&
+            unknownWrenches.contactWrench(lnkIdx, 0).unknownType != FULL_WRENCH)
+        {
+            std::stringstream ss;
+            ss << "estimateLinkContactWrenchesFromLinkNetExternalWrenches is currently in testing phase, and does not support "
+               << " contact of type different from FULL_WRENCH, skipping contacts  " << model.getLinkName(lnkIdx);
+            reportWarning("","estimateLinkContactWrenchesFromLinkNetExternalWrenches", ss.str().c_str());
+            outputContactWrenches.setNrOfContactsForLink(lnkIdx, 0);
+            continue;
+        }
+
+        const UnknownWrenchContact& unknownWrench = unknownWrenches.contactWrench(lnkIdx, 0);
+        outputContactWrenches.setNrOfContactsForLink(lnkIdx, unknownWrenches.getNrOfContactsForLink(lnkIdx));
+        ContactWrench& knownWrench          = outputContactWrenches.contactWrench(lnkIdx, 0);
+
+        Transform link_H_contact = Transform(Rotation::Identity(), unknownWrench.contactPoint);
+
+        // Transform the wrench from the link frame to the contact frame
+        knownWrench.contactPoint() = unknownWrench.contactPoint;
+        knownWrench.contactId()    = unknownWrench.contactId;
+        knownWrench.contactWrench() = link_H_contact.inverse()*netExtWrenches(lnkIdx);
+    }
+
+    return true;
+}
+
 
 }
 

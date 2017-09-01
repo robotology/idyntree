@@ -623,6 +623,8 @@ public:
                                   LinkInternalWrenches    & linkJointWrenches,
                                   VectorDynSize& y);
 
+
+
     /**
      * Debug function:
      *
@@ -631,6 +633,21 @@ public:
     bool serializeDynamicVariablesComputedFromFixedBaseRNEA(JointDOFsDoubleArray  & jointAccs,
                                                             LinkNetExternalWrenches & netExtWrenches,
                                                             VectorDynSize& d);
+
+
+    /**
+     * Extract the joint torques from the dynamic variables
+     */
+    bool extractJointTorquesFromDynamicVariables(const VectorDynSize& d,
+                                                 const VectorDynSize& jointPos,
+                                                       VectorDynSize& jointTorques) const;
+
+    /**
+     * Extract the net external force-torques from the dynamic variables
+     */
+    bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
+                                                            LinkNetExternalWrenches& netExtWrenches) const;
+
 
     /**
       * @name Methods to submit the input data for dynamics computations.

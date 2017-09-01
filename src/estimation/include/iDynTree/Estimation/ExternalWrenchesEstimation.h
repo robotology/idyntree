@@ -403,7 +403,7 @@ bool dynamicsEstimationForwardVelKinematics(const Model & model,
                                                   LinkVelArray & linkVel);
 
 /**
- * \brief Compute the net external wrenches (excluding gravity forces) acting on the links.
+ * \brief Compute the net internal and external wrenches (excluding gravity forces) acting on the links.
  * @param[in] model the input model
  * @param[in] linkVel a vector of link twists, expressed w.r.t to the link orientation and the link origin
  * @param[in] linkProperAcc a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin
@@ -414,6 +414,19 @@ bool computeLinkNetWrenchesWithoutGravity(const Model& model,
                                           const LinkAccArray & linkProperAcc,
                                                 LinkNetTotalWrenchesWithoutGravity& linkNetWrenchesWithoutGravity);
 
+/**
+ * Compute the link contact wrenches from the net external wrenches
+ *
+ * If there are more than 6 unknows for link, the problem becomes ill-defined
+ * and the function just assign all the external wrench to the first contact.
+ * \todo(traversaro): support arbitrary LinkUnknownWrenchContacts by performing
+ *                    a least square fitting, similar to what implemented in
+ *                    the estimateExternalWrenches .
+ */
+bool estimateLinkContactWrenchesFromLinkNetExternalWrenches(const Model& model,
+                                                            const LinkUnknownWrenchContacts& unknownWrenches,
+                                                            const LinkNetExternalWrenches& netExtWrenches,
+                                                                  LinkContactWrenches & outputContactWrenches);
 
 }
 
