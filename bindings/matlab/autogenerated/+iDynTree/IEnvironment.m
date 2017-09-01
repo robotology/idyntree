@@ -5,33 +5,33 @@ classdef IEnvironment < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1639, self);
+        iDynTreeMEX(1652, self);
         self.swigPtr=[];
       end
     end
     function varargout = getElements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1640, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1653, self, varargin{:});
     end
     function varargout = setElementVisibility(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1641, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1654, self, varargin{:});
     end
     function varargout = setBackgroundColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1642, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1655, self, varargin{:});
     end
     function varargout = setAmbientLight(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1643, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1656, self, varargin{:});
     end
     function varargout = getLights(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1644, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1657, self, varargin{:});
     end
     function varargout = addLight(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1645, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1658, self, varargin{:});
     end
     function varargout = lightViz(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1646, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1659, self, varargin{:});
     end
     function varargout = removeLight(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1647, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1660, self, varargin{:});
     end
     function self = IEnvironment(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')

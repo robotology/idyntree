@@ -59,8 +59,11 @@ classdef Traversal < SwigRef
     function varargout = getChildLinkIndexFromJointIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1032, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = getParentLinkIndexFromJointIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1033, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1034, self, varargin{:});
     end
   end
   methods(Static)

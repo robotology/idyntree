@@ -1,7 +1,7 @@
 function v = DOF_ACCELERATION_SENSOR()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = iDynTreeMEX(0, 23);
+    vInitialized = iDynTreeMEX(0, 26);
   end
   v = vInitialized;
 end

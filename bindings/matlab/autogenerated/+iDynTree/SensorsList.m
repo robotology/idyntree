@@ -9,52 +9,55 @@ classdef SensorsList < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1253, varargin{:});
+        tmp = iDynTreeMEX(1257, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1254, self);
+        iDynTreeMEX(1258, self);
         self.swigPtr=[];
       end
     end
     function varargout = addSensor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1255, self, varargin{:});
-    end
-    function varargout = setSerialization(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1256, self, varargin{:});
-    end
-    function varargout = getSerialization(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1257, self, varargin{:});
-    end
-    function varargout = getNrOfSensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1258, self, varargin{:});
-    end
-    function varargout = getSensorIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1259, self, varargin{:});
     end
-    function varargout = getSizeOfAllSensorsMeasurements(self,varargin)
+    function varargout = setSerialization(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1260, self, varargin{:});
     end
-    function varargout = getSensor(self,varargin)
+    function varargout = getSerialization(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1261, self, varargin{:});
     end
-    function varargout = removeSensor(self,varargin)
+    function varargout = getNrOfSensors(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1262, self, varargin{:});
     end
-    function varargout = removeAllSensorsOfType(self,varargin)
+    function varargout = getSensorIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1263, self, varargin{:});
     end
-    function varargout = getSixAxisForceTorqueSensor(self,varargin)
+    function varargout = getSizeOfAllSensorsMeasurements(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1264, self, varargin{:});
     end
-    function varargout = getAccelerometerSensor(self,varargin)
+    function varargout = getSensor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1265, self, varargin{:});
     end
-    function varargout = getGyroscopeSensor(self,varargin)
+    function varargout = isConsistent(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1266, self, varargin{:});
+    end
+    function varargout = removeSensor(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1267, self, varargin{:});
+    end
+    function varargout = removeAllSensorsOfType(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1268, self, varargin{:});
+    end
+    function varargout = getSixAxisForceTorqueSensor(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1269, self, varargin{:});
+    end
+    function varargout = getAccelerometerSensor(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1270, self, varargin{:});
+    end
+    function varargout = getGyroscopeSensor(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1271, self, varargin{:});
     end
   end
   methods(Static)
