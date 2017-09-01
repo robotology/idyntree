@@ -47,7 +47,7 @@ void setDiagonalMatrix(SparseMatrix<ColumnMajor>& mat, const IndexRange range, d
 {
     for (int i=0; i < range.size; i++)
     {
-        mat(range.offset+i,range.offset+i) = val;
+        mat(range.offset+i, range.offset+i) = val;
     }
 }
 
@@ -190,7 +190,7 @@ void compareEstimators(const std::string& urdfFileName,
     LinkContactWrenches contactWrenchesEstimatedByDeterministic(model);
     JointDOFsDoubleArray jointTorquesEstimatedByDeterministic(model);
 
-    double tic = clock();
+    std::clock_t tic = clock();
     ok = determininsticEstimator.updateKinematicsFromFloatingBase(jointPos, jointVel, jointAcc, imuFrameIdx,
                                                              imuLinAccReading, imuAngularVel, imuAngAccReading);
     ASSERT_IS_TRUE(ok);
@@ -198,8 +198,8 @@ void compareEstimators(const std::string& urdfFileName,
     ok = determininsticEstimator.estimateExtWrenchesAndJointTorques(unknownWrenchContacts, sensMeas,
                                                                     contactWrenchesEstimatedByDeterministic, jointTorquesEstimatedByDeterministic);
     ASSERT_IS_TRUE(ok);
-    double toc = clock();
-    double deterministicTime = (toc-tic)/CLOCKS_PER_SEC;
+    std::clock_t toc = std::clock();
+    double deterministicTime = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
 
     /// PROBABILISTIC ESTIMATOR
     LinkContactWrenches contactWrenchesEstimatedByBerdy(model);
@@ -212,6 +212,7 @@ void compareEstimators(const std::string& urdfFileName,
     double lowCovariance  = 1e-6;
 
     // Dynamics regularization
+    tic = clock();
     iDynTree::VectorDynSize dynamicsPriorMean(berdyHelper.getNrOfDynamicVariables());
     dynamicsPriorMean.zero();
     probabilistEstimator.setDynamicsRegularizationPriorExpectedValue(dynamicsPriorMean);
@@ -221,19 +222,27 @@ void compareEstimators(const std::string& urdfFileName,
     dynamicsRegularizationCovariance.setFromTriplets(dynamicsRegularizationCovarianceTriplets);
     ASSERT_IS_TRUE(ok);
     probabilistEstimator.setDynamicsRegularizationPriorCovariance(dynamicsRegularizationCovariance);
+    toc = clock();
+    double timeToUpdateDynamicsRegularizationPrior = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
+
     // std::cerr << "dynamicsRegularizationCovariance:\n" << toEigen(dynamicsRegularizationCovariance) << std::endl;
 
 
     // Dynamics contraint
+    tic = std::clock();
     iDynTree::Triplets dynamicsConstraintCovarianceTriplets;
     dynamicsConstraintCovarianceTriplets.setDiagonalMatrix(0, 0, lowCovariance, berdyHelper.getNrOfDynamicEquations());
     iDynTree::SparseMatrix<iDynTree::ColumnMajor> dynamicsConstraintCovariance(berdyHelper.getNrOfDynamicEquations(), berdyHelper.getNrOfDynamicEquations());
     dynamicsConstraintCovariance.setFromTriplets(dynamicsConstraintCovarianceTriplets);
     probabilistEstimator.setDynamicsConstraintsPriorCovariance(dynamicsConstraintCovariance);
+    toc = std::clock();
+    double timeToUpdateDynamicsConstraintPrior = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
+
     // std::cerr << "dynamicsConstraintCovariance:\n" << toEigen(dynamicsConstraintCovariance) << std::endl;
 
 
     // Measurements covariance and values
+    tic = std::clock();
     iDynTree::VectorDynSize measures(berdyHelper.getNrOfSensorsMeasurements());
     tic = std::clock();
 
@@ -285,6 +294,7 @@ void compareEstimators(const std::string& urdfFileName,
     toc = std::clock();
     double timeToUpdateMeasurementsPrior = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
 
+
     // std::cerr << "measurementsCovariance:\n" << toEigen(measurementsCovariance) << std::endl;
 
     tic = clock();
@@ -294,7 +304,7 @@ void compareEstimators(const std::string& urdfFileName,
     ok = probabilistEstimator.doEstimate();
     ASSERT_IS_TRUE(ok);
     toc = clock();
-    double probabilisticTime = (toc-tic)/CLOCKS_PER_SEC;
+    double probabilisticTime = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
 
 
     iDynTree::VectorDynSize estimatedDynamicVariables(berdyHelper.getNrOfDynamicVariables());
@@ -309,8 +319,14 @@ void compareEstimators(const std::string& urdfFileName,
     ASSERT_EQUAL_VECTOR_REL_TOL(jointTorquesEstimatedByDeterministic, jointTorquesEstimatedByBerdy, 1e-4, 1e-6);
 
     std::cerr << "iCubTorqueEstimationIntegrationTest working fine for model " << urdfFileName << std::endl;
-    std::cerr << "Time for deterministic estimation " << deterministicTime << std::endl;
-    std::cerr << "Time for probabilistic estimation " << probabilisticTime << std::endl;
+    std::cerr << "Number Of Dynamics Variables                 " << berdyHelper.getNrOfDynamicVariables() << std::endl;
+    std::cerr << "Number Of Dynamics Equations                 " << berdyHelper.getNrOfDynamicEquations() << std::endl;
+    std::cerr << "Number Of Measurements                       " << berdyHelper.getNrOfSensorsMeasurements() << std::endl;
+    std::cerr << "Time to update dynamics variables prior      " << timeToUpdateDynamicsRegularizationPrior << std::endl;
+    std::cerr << "Time to update dynamics equations prior      " << timeToUpdateDynamicsConstraintPrior << std::endl;
+    std::cerr << "Time to update measurements prior            " << timeToUpdateMeasurementsPrior << std::endl;
+    std::cerr << "Time for deterministic estimation            " << deterministicTime << std::endl;
+    std::cerr << "Time for probabilistic estimation            " << probabilisticTime << std::endl;
 
 
     return;
