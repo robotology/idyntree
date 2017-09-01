@@ -31,7 +31,7 @@ if(IDYNTREE_USES_IRRLICHT)
     idyntree_add_tool(idyntree-model-view idyntree-model-view.cpp)
 endif()
 
-if(IDYNTREE_USES_ICUB_MAIN AND IDYNTREE_USES_KDL)
+if(IDYNTREE_USES_ICUB_MAIN AND IDYNTREE_USES_KDL AND IDYNTREE_USES_SYMORO_PAR)
     idyntree_add_tool_yarp_kdl(par2urdf par2urdf.cpp)
 endif()
 
