@@ -44,12 +44,13 @@ namespace iDynTree {
         SIX_AXIS_FORCE_TORQUE = 0,
         ACCELEROMETER = 1,
         GYROSCOPE = 2,
-        THREE_AXIS_ANGULAR_ACCELEROMETER = 3
+        THREE_AXIS_ANGULAR_ACCELEROMETER = 3,
+        THREE_AXIS_FORCE_TORQUE_CONTACT = 4
     };
 
     // This should be equal to the number of option
     //  in the SensorType enum
-    const int NR_OF_SENSOR_TYPES = 4;
+    const int NR_OF_SENSOR_TYPES = 5;
 
     /**
      * Short function to check if a SensorType is a LinkSensor
@@ -61,6 +62,7 @@ namespace iDynTree {
         case ACCELEROMETER:
         case GYROSCOPE:
         case THREE_AXIS_ANGULAR_ACCELEROMETER:
+        case THREE_AXIS_FORCE_TORQUE_CONTACT:
             return true;
         case SIX_AXIS_FORCE_TORQUE:
         default:
@@ -85,6 +87,7 @@ namespace iDynTree {
             case ACCELEROMETER:
             case GYROSCOPE:
             case THREE_AXIS_ANGULAR_ACCELEROMETER:
+            case THREE_AXIS_FORCE_TORQUE_CONTACT:
                 return 3;
             default:
                 return 0;

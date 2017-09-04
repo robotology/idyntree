@@ -12,5 +12,6 @@
 #include <iDynTree/Sensors/AccelerometerSensor.h>
 #include <iDynTree/Sensors/GyroscopeSensor.h>
 #include <iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h>
+#include <iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h>
 
 #endif

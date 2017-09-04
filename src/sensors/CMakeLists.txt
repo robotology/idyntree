@@ -16,6 +16,7 @@ set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/AllSensorsTypes.h
                              include/iDynTree/Sensors/GyroscopeSensor.h
                              include/iDynTree/Sensors/AccelerometerSensor.h
                              include/iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h
+                             include/iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h
                              include/iDynTree/Sensors/PredictSensorsMeasurements.h
                              include/iDynTree/Sensors/ModelSensorsTransformers.h)
 
@@ -24,6 +25,7 @@ set(IDYNTREE_SENSORS_SOURCES src/Sensors.cpp
                              src/AccelerometerSensor.cpp
                              src/GyroscopeSensor.cpp
                              src/ThreeAxisAngularAccelerometerSensor.cpp
+                             src/ThreeAxisForceTorqueContactSensor.cpp
                              src/PredictSensorsMeasurements.cpp
                              src/ModelSensorsTransformers.cpp)
 
