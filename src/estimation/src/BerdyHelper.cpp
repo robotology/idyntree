@@ -542,6 +542,11 @@ IndexRange BerdyHelper::getRangeSensorVariable(const SensorType type, const unsi
         sensorOffset += 3*m_sensors.getNrOfSensors(THREE_AXIS_ANGULAR_ACCELEROMETER);
     }
 
+    if( type > THREE_AXIS_FORCE_TORQUE_CONTACT )
+    {
+        sensorOffset += 3*m_sensors.getNrOfSensors(THREE_AXIS_FORCE_TORQUE_CONTACT);
+    }
+
     sensorOffset += sensorIdx*getSensorTypeSize(type);
 
     IndexRange ret;
@@ -1190,6 +1195,29 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     }
 
     ////////////////////////////////////////////////////////////////////////
+    ///// THREE AXIS FORCE TORQUE CONTACT
+    ////////////////////////////////////////////////////////////////////////
+    unsigned int numThreeAxisForceTorqueContact = m_sensors.getNrOfSensors(iDynTree::THREE_AXIS_FORCE_TORQUE_CONTACT);
+    for(size_t idx = 0; idx<numThreeAxisForceTorqueContact; idx++)
+    {
+        ThreeAxisForceTorqueContactSensor * threeAxisFTContactSensor = (ThreeAxisForceTorqueContactSensor*)m_sensors.getSensor(iDynTree::THREE_AXIS_FORCE_TORQUE_CONTACT, idx);
+        LinkIndex parentLinkId = threeAxisFTContactSensor->getParentLinkIndex();
+        Transform sensor_X_link = threeAxisFTContactSensor->getLinkSensorTransform().inverse();
+        IndexRange sensorRange = this->getRangeSensorVariable(THREE_AXIS_FORCE_TORQUE_CONTACT, idx);
+        IndexRange linkNetExtForceTorque = this->getRangeLinkVariable(NET_EXT_WRENCH, parentLinkId);
+
+        // Y is just the third (force on z) fourth and fifth (torque on x, y) component of the Transform
+        MatrixFixSize<3, 6> threeAxisFTtransform;
+        toEigen(threeAxisFTtransform) = toEigen(sensor_X_link.asAdjointTransform()).block<3, 6>(2, 0);
+
+        matrixYElements.addSubMatrix(sensorRange.offset,
+                                     linkNetExtForceTorque.offset,
+                                     threeAxisFTtransform);
+
+        // bY is zero
+    }
+
+    ////////////////////////////////////////////////////////////////////////
     ///// JOINT ACCELERATIONS
     ////////////////////////////////////////////////////////////////////////
     if( m_options.includeAllJointAccelerationsAsSensors )
@@ -1832,7 +1860,7 @@ bool BerdyHelper::serializeDynamicVariablesFixedBase(LinkProperAccArray& properA
 }
 
 bool BerdyHelper::serializeDynamicVariablesFloatingBase(LinkProperAccArray& properAccs,
-                                                     LinkNetTotalWrenchesWithoutGravity& netTotalWrenchesWithoutGrav,
+                                                     LinkNetTotalWrenchesWithoutGravity& /*netTotalWrenchesWithoutGrav*/,
                                                      LinkNetExternalWrenches& netExtWrenches,
                                                      LinkInternalWrenches& linkJointWrenches,
                                                      JointDOFsDoubleArray&,
