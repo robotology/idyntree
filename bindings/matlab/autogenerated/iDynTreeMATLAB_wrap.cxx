@@ -3122,7 +3122,7 @@ SWIGINTERN void iDynTree_MatrixDynSize_fromMatlab(iDynTree::MatrixDynSize *self,
 
         if (mxIsSparse(in))
         {
-            /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
+            /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3388,7 +3388,7 @@ SWIGINTERN void iDynTree_VectorDynSize_fromMatlab(iDynTree::VectorDynSize *self,
 
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3450,7 +3450,7 @@ SWIGINTERN void iDynTree_MatrixFixSize_Sl_1_Sc_6_Sg__fromMatlab(iDynTree::Matrix
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3513,7 +3513,7 @@ SWIGINTERN void iDynTree_MatrixFixSize_Sl_2_Sc_3_Sg__fromMatlab(iDynTree::Matrix
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3576,7 +3576,7 @@ SWIGINTERN void iDynTree_MatrixFixSize_Sl_3_Sc_3_Sg__fromMatlab(iDynTree::Matrix
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3639,7 +3639,7 @@ SWIGINTERN void iDynTree_MatrixFixSize_Sl_4_Sc_4_Sg__fromMatlab(iDynTree::Matrix
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3702,7 +3702,7 @@ SWIGINTERN void iDynTree_MatrixFixSize_Sl_6_Sc_6_Sg__fromMatlab(iDynTree::Matrix
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3765,7 +3765,7 @@ SWIGINTERN void iDynTree_MatrixFixSize_Sl_6_Sc_10_Sg__fromMatlab(iDynTree::Matri
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3828,7 +3828,7 @@ SWIGINTERN void iDynTree_MatrixFixSize_Sl_10_Sc_16_Sg__fromMatlab(iDynTree::Matr
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,43,MATRIXSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3892,7 +3892,7 @@ SWIGINTERN void iDynTree_VectorFixSize_Sl_3_Sg__fromMatlab(iDynTree::VectorFixSi
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -3958,7 +3958,7 @@ SWIGINTERN void iDynTree_VectorFixSize_Sl_4_Sg__fromMatlab(iDynTree::VectorFixSi
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -4024,7 +4024,7 @@ SWIGINTERN void iDynTree_VectorFixSize_Sl_6_Sg__fromMatlab(iDynTree::VectorFixSi
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -4090,7 +4090,7 @@ SWIGINTERN void iDynTree_VectorFixSize_Sl_10_Sg__fromMatlab(iDynTree::VectorFixS
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -4156,7 +4156,7 @@ SWIGINTERN void iDynTree_VectorFixSize_Sl_16_Sg__fromMatlab(iDynTree::VectorFixS
         {
             if (mxIsSparse(in))
             {
-                /*@SWIG:/Users/makaveli/Projects/src/codyco-superbuild/libraries/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
+                /*@SWIG:/Users/traversaro/src/isaac-superbuild/isaac/iDynTree/bindings/./matlab/matlab_matvec.i,6,VECTORSPARSECOPY@*/
     //getting pointer to sparse structure
     mwIndex* ir = mxGetIr(in);
     mwIndex* jc = mxGetJc(in);
@@ -38526,6 +38526,33 @@ fail:
 
 
 int _wrap_new_Transform__SWIG_2(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Matrix4x4 *arg1 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::Transform *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_Transform",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__MatrixFixSizeT_4_4_t,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Transform" "', argument " "1"" of type '" "iDynTree::Matrix4x4 const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Transform" "', argument " "1"" of type '" "iDynTree::Matrix4x4 const &""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Matrix4x4 * >(argp1);
+  result = (iDynTree::Transform *)new iDynTree::Transform((iDynTree::Matrix4x4 const &)*arg1);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Transform, 1 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_new_Transform__SWIG_3(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Transform *arg1 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
@@ -38559,10 +38586,19 @@ int _wrap_new_Transform(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__MatrixFixSizeT_4_4_t, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_new_Transform__SWIG_2(resc,resv,argc,argv);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Transform, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_Transform__SWIG_3(resc,resv,argc,argv);
     }
   }
   if (argc == 2) {
@@ -38584,7 +38620,42 @@ int _wrap_new_Transform(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
     "  Possible C/C++ prototypes are:\n"
     "    iDynTree::Transform::Transform()\n"
     "    iDynTree::Transform::Transform(iDynTree::Rotation const &,iDynTree::Position const &)\n"
+    "    iDynTree::Transform::Transform(iDynTree::Matrix4x4 const &)\n"
     "    iDynTree::Transform::Transform(iDynTree::Transform const &)\n");
+  return 1;
+}
+
+
+int _wrap_Transform_fromHomogeneousTransform(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Transform *arg1 = (iDynTree::Transform *) 0 ;
+  iDynTree::Matrix4x4 *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("Transform_fromHomogeneousTransform",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Transform, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transform_fromHomogeneousTransform" "', argument " "1"" of type '" "iDynTree::Transform *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Transform * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__MatrixFixSizeT_4_4_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transform_fromHomogeneousTransform" "', argument " "2"" of type '" "iDynTree::Matrix4x4 const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transform_fromHomogeneousTransform" "', argument " "2"" of type '" "iDynTree::Matrix4x4 const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Matrix4x4 * >(argp2);
+  (arg1)->fromHomogeneousTransform((iDynTree::Matrix4x4 const &)*arg2);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
   return 1;
 }
 
@@ -49483,6 +49554,49 @@ fail:
 }
 
 
+int _wrap_Traversal_getParentLinkIndexFromJointIndex(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Traversal *arg1 = (iDynTree::Traversal *) 0 ;
+  iDynTree::Model *arg2 = 0 ;
+  iDynTree::JointIndex arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::LinkIndex result;
+  
+  if (!SWIG_check_num_args("Traversal_getParentLinkIndexFromJointIndex",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Traversal, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Traversal_getParentLinkIndexFromJointIndex" "', argument " "1"" of type '" "iDynTree::Traversal const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Traversal * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Model,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Traversal_getParentLinkIndexFromJointIndex" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Traversal_getParentLinkIndexFromJointIndex" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Model * >(argp2);
+  ecode3 = SWIG_AsVal_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Traversal_getParentLinkIndexFromJointIndex" "', argument " "3"" of type '" "iDynTree::JointIndex""'");
+  } 
+  arg3 = static_cast< iDynTree::JointIndex >(val3);
+  result = (iDynTree::LinkIndex)((iDynTree::Traversal const *)arg1)->getParentLinkIndexFromJointIndex((iDynTree::Model const &)*arg2,arg3);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_Traversal_toString(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Traversal *arg1 = (iDynTree::Traversal *) 0 ;
   iDynTree::Model *arg2 = 0 ;
@@ -58872,6 +58986,41 @@ fail:
 }
 
 
+int _wrap_Sensor_isConsistent(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
+  iDynTree::Model *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("Sensor_isConsistent",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Sensor_isConsistent" "', argument " "1"" of type '" "iDynTree::Sensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Sensor * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Model,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Sensor_isConsistent" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Sensor_isConsistent" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Model * >(argp2);
+  result = (bool)((iDynTree::Sensor const *)arg1)->isConsistent((iDynTree::Model const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_Sensor_updateIndices(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
   iDynTree::Model *arg2 = 0 ;
@@ -59090,6 +59239,41 @@ fail:
 }
 
 
+int _wrap_JointSensor_isConsistent(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::JointSensor *arg1 = (iDynTree::JointSensor *) 0 ;
+  iDynTree::Model *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("JointSensor_isConsistent",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__JointSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "JointSensor_isConsistent" "', argument " "1"" of type '" "iDynTree::JointSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::JointSensor * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Model,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "JointSensor_isConsistent" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "JointSensor_isConsistent" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Model * >(argp2);
+  result = (bool)((iDynTree::JointSensor const *)arg1)->isConsistent((iDynTree::Model const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_delete_LinkSensor(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::LinkSensor *arg1 = (iDynTree::LinkSensor *) 0 ;
   void *argp1 = 0 ;
@@ -59289,6 +59473,41 @@ int _wrap_LinkSensor_setLinkSensorTransform(int resc, mxArray *resv[], int argc,
   }
   arg2 = reinterpret_cast< iDynTree::Transform * >(argp2);
   result = (bool)(arg1)->setLinkSensorTransform((iDynTree::Transform const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_LinkSensor_isConsistent(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::LinkSensor *arg1 = (iDynTree::LinkSensor *) 0 ;
+  iDynTree::Model *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("LinkSensor_isConsistent",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__LinkSensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LinkSensor_isConsistent" "', argument " "1"" of type '" "iDynTree::LinkSensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::LinkSensor * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Model,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LinkSensor_isConsistent" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LinkSensor_isConsistent" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Model * >(argp2);
+  result = (bool)((iDynTree::LinkSensor const *)arg1)->isConsistent((iDynTree::Model const &)*arg2);
   _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -59780,6 +59999,41 @@ int _wrap_SensorsList_getSensor(int resc, mxArray *resv[], int argc, mxArray *ar
   arg3 = static_cast< int >(val3);
   result = (iDynTree::Sensor *)((iDynTree::SensorsList const *)arg1)->getSensor((iDynTree::SensorType const &)*arg2,arg3);
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_SensorsList_isConsistent(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsList *arg1 = (iDynTree::SensorsList *) 0 ;
+  iDynTree::Model *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SensorsList_isConsistent",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsList, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsList_isConsistent" "', argument " "1"" of type '" "iDynTree::SensorsList const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsList * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Model,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SensorsList_isConsistent" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsList_isConsistent" "', argument " "2"" of type '" "iDynTree::Model const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Model * >(argp2);
+  result = (bool)((iDynTree::SensorsList const *)arg1)->isConsistent((iDynTree::Model const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -60507,6 +60761,62 @@ fail:
 }
 
 
+int _wrap_SensorsMeasurements_setMeasurement__SWIG_3(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsMeasurements *arg1 = (iDynTree::SensorsMeasurements *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  unsigned int *arg3 = 0 ;
+  iDynTree::Vector3 *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  unsigned int temp3 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SensorsMeasurements_setMeasurement",argc,4,4,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsMeasurements, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsMeasurements_setMeasurement" "', argument " "1"" of type '" "iDynTree::SensorsMeasurements *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsMeasurements * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsMeasurements_setMeasurement" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  ecode3 = SWIG_AsVal_unsigned_SS_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "SensorsMeasurements_setMeasurement" "', argument " "3"" of type '" "unsigned int""'");
+  } 
+  temp3 = static_cast< unsigned int >(val3);
+  arg3 = &temp3;
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__VectorFixSizeT_3_t,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "SensorsMeasurements_setMeasurement" "', argument " "4"" of type '" "iDynTree::Vector3 const &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsMeasurements_setMeasurement" "', argument " "4"" of type '" "iDynTree::Vector3 const &""'"); 
+  }
+  arg4 = reinterpret_cast< iDynTree::Vector3 * >(argp4);
+  result = (bool)(arg1)->setMeasurement((iDynTree::SensorType const &)*arg2,(unsigned int const &)*arg3,(iDynTree::Vector3 const &)*arg4);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_SensorsMeasurements_setMeasurement(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 4) {
     int _v;
@@ -60586,12 +60896,39 @@ int _wrap_SensorsMeasurements_setMeasurement(int resc, mxArray *resv[], int argc
       }
     }
   }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SensorsMeasurements, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_unsigned_SS_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_iDynTree__VectorFixSizeT_3_t, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_SensorsMeasurements_setMeasurement__SWIG_3(resc,resv,argc,argv);
+          }
+        }
+      }
+    }
+  }
   
   SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'SensorsMeasurements_setMeasurement'."
     "  Possible C/C++ prototypes are:\n"
     "    iDynTree::SensorsMeasurements::setMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::Wrench const &)\n"
     "    iDynTree::SensorsMeasurements::setMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::LinAcceleration const &)\n"
-    "    iDynTree::SensorsMeasurements::setMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::AngVelocity const &)\n");
+    "    iDynTree::SensorsMeasurements::setMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::AngVelocity const &)\n"
+    "    iDynTree::SensorsMeasurements::setMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::Vector3 const &)\n");
   return 1;
 }
 
@@ -60764,6 +61101,62 @@ fail:
 }
 
 
+int _wrap_SensorsMeasurements_getMeasurement__SWIG_3(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::SensorsMeasurements *arg1 = (iDynTree::SensorsMeasurements *) 0 ;
+  iDynTree::SensorType *arg2 = 0 ;
+  unsigned int *arg3 = 0 ;
+  iDynTree::Vector3 *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  iDynTree::SensorType temp2 ;
+  unsigned int temp3 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("SensorsMeasurements_getMeasurement",argc,4,4,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__SensorsMeasurements, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorsMeasurements_getMeasurement" "', argument " "1"" of type '" "iDynTree::SensorsMeasurements const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::SensorsMeasurements * >(argp1);
+  ecode2 = SWIG_AsVal_int (argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SensorsMeasurements_getMeasurement" "', argument " "2"" of type '" "iDynTree::SensorType const &""'");
+  } else {
+    temp2 = static_cast< iDynTree::SensorType >(val2);
+    arg2 = &temp2;
+  }
+  ecode3 = SWIG_AsVal_unsigned_SS_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "SensorsMeasurements_getMeasurement" "', argument " "3"" of type '" "unsigned int""'");
+  } 
+  temp3 = static_cast< unsigned int >(val3);
+  arg3 = &temp3;
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__VectorFixSizeT_3_t,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "SensorsMeasurements_getMeasurement" "', argument " "4"" of type '" "iDynTree::Vector3 &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensorsMeasurements_getMeasurement" "', argument " "4"" of type '" "iDynTree::Vector3 &""'"); 
+  }
+  arg4 = reinterpret_cast< iDynTree::Vector3 * >(argp4);
+  result = (bool)((iDynTree::SensorsMeasurements const *)arg1)->getMeasurement((iDynTree::SensorType const &)*arg2,(unsigned int const &)*arg3,*arg4);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_SensorsMeasurements_getMeasurement(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 4) {
     int _v;
@@ -60843,12 +61236,39 @@ int _wrap_SensorsMeasurements_getMeasurement(int resc, mxArray *resv[], int argc
       }
     }
   }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__SensorsMeasurements, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_unsigned_SS_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_iDynTree__VectorFixSizeT_3_t, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_SensorsMeasurements_getMeasurement__SWIG_3(resc,resv,argc,argv);
+          }
+        }
+      }
+    }
+  }
   
   SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'SensorsMeasurements_getMeasurement'."
     "  Possible C/C++ prototypes are:\n"
     "    iDynTree::SensorsMeasurements::getMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::Wrench &) const\n"
     "    iDynTree::SensorsMeasurements::getMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::LinAcceleration &) const\n"
-    "    iDynTree::SensorsMeasurements::getMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::AngVelocity &) const\n");
+    "    iDynTree::SensorsMeasurements::getMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::AngVelocity &) const\n"
+    "    iDynTree::SensorsMeasurements::getMeasurement(iDynTree::SensorType const &,unsigned int const &,iDynTree::Vector3 &) const\n");
   return 1;
 }
 
@@ -67302,6 +67722,66 @@ fail:
 }
 
 
+int _wrap_estimateLinkContactWrenchesFromLinkNetExternalWrenches(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Model *arg1 = 0 ;
+  iDynTree::LinkUnknownWrenchContacts *arg2 = 0 ;
+  iDynTree::LinkNetExternalWrenches *arg3 = 0 ;
+  iDynTree::LinkContactWrenches *arg4 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("estimateLinkContactWrenchesFromLinkNetExternalWrenches",argc,4,4,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Model,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "estimateLinkContactWrenchesFromLinkNetExternalWrenches" "', argument " "1"" of type '" "iDynTree::Model const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "estimateLinkContactWrenchesFromLinkNetExternalWrenches" "', argument " "1"" of type '" "iDynTree::Model const &""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Model * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__LinkUnknownWrenchContacts,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "estimateLinkContactWrenchesFromLinkNetExternalWrenches" "', argument " "2"" of type '" "iDynTree::LinkUnknownWrenchContacts const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "estimateLinkContactWrenchesFromLinkNetExternalWrenches" "', argument " "2"" of type '" "iDynTree::LinkUnknownWrenchContacts const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::LinkUnknownWrenchContacts * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__LinkWrenches,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "estimateLinkContactWrenchesFromLinkNetExternalWrenches" "', argument " "3"" of type '" "iDynTree::LinkNetExternalWrenches const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "estimateLinkContactWrenchesFromLinkNetExternalWrenches" "', argument " "3"" of type '" "iDynTree::LinkNetExternalWrenches const &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::LinkNetExternalWrenches * >(argp3);
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__LinkContactWrenches,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "estimateLinkContactWrenchesFromLinkNetExternalWrenches" "', argument " "4"" of type '" "iDynTree::LinkContactWrenches &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "estimateLinkContactWrenchesFromLinkNetExternalWrenches" "', argument " "4"" of type '" "iDynTree::LinkContactWrenches &""'"); 
+  }
+  arg4 = reinterpret_cast< iDynTree::LinkContactWrenches * >(argp4);
+  result = (bool)iDynTree::estimateLinkContactWrenchesFromLinkNetExternalWrenches((iDynTree::Model const &)*arg1,(iDynTree::LinkUnknownWrenchContacts const &)*arg2,(iDynTree::LinkWrenches const &)*arg3,*arg4);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_new_ExtWrenchesAndJointTorquesEstimator(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
   iDynTree::ExtWrenchesAndJointTorquesEstimator *result = 0 ;
@@ -70502,10 +70982,10 @@ int _wrap_BerdyHelper_dynamicTraversal(int resc, mxArray *resv[], int argc, mxAr
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_dynamicTraversal" "', argument " "1"" of type '" "iDynTree::BerdyHelper *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_dynamicTraversal" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
-  result = (iDynTree::Traversal *) &(arg1)->dynamicTraversal();
+  result = (iDynTree::Traversal *) &((iDynTree::BerdyHelper const *)arg1)->dynamicTraversal();
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Traversal, 0 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -71329,6 +71809,286 @@ fail:
 }
 
 
+int _wrap_BerdyHelper_getRangeSensorVariable(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::SensorType arg2 ;
+  unsigned int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::IndexRange result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_getRangeSensorVariable",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_getRangeSensorVariable" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BerdyHelper_getRangeSensorVariable" "', argument " "2"" of type '" "iDynTree::SensorType""'");
+  } 
+  arg2 = static_cast< iDynTree::SensorType >(val2);
+  ecode3 = SWIG_AsVal_unsigned_SS_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BerdyHelper_getRangeSensorVariable" "', argument " "3"" of type '" "unsigned int""'");
+  } 
+  arg3 = static_cast< unsigned int >(val3);
+  result = ((iDynTree::BerdyHelper const *)arg1)->getRangeSensorVariable(arg2,arg3);
+  _out = SWIG_NewPointerObj((new iDynTree::IndexRange(static_cast< const iDynTree::IndexRange& >(result))), SWIGTYPE_p_iDynTree__IndexRange, SWIG_POINTER_OWN |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdyHelper_getRangeDOFSensorVariable(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::BerdySensorTypes arg2 ;
+  iDynTree::DOFIndex arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::IndexRange result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_getRangeDOFSensorVariable",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_getRangeDOFSensorVariable" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BerdyHelper_getRangeDOFSensorVariable" "', argument " "2"" of type '" "iDynTree::BerdySensorTypes""'");
+  } 
+  arg2 = static_cast< iDynTree::BerdySensorTypes >(val2);
+  ecode3 = SWIG_AsVal_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BerdyHelper_getRangeDOFSensorVariable" "', argument " "3"" of type '" "iDynTree::DOFIndex""'");
+  } 
+  arg3 = static_cast< iDynTree::DOFIndex >(val3);
+  result = ((iDynTree::BerdyHelper const *)arg1)->getRangeDOFSensorVariable(arg2,arg3);
+  _out = SWIG_NewPointerObj((new iDynTree::IndexRange(static_cast< const iDynTree::IndexRange& >(result))), SWIGTYPE_p_iDynTree__IndexRange, SWIG_POINTER_OWN |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdyHelper_getRangeJointSensorVariable(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::BerdySensorTypes arg2 ;
+  iDynTree::JointIndex arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::IndexRange result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_getRangeJointSensorVariable",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_getRangeJointSensorVariable" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BerdyHelper_getRangeJointSensorVariable" "', argument " "2"" of type '" "iDynTree::BerdySensorTypes""'");
+  } 
+  arg2 = static_cast< iDynTree::BerdySensorTypes >(val2);
+  ecode3 = SWIG_AsVal_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BerdyHelper_getRangeJointSensorVariable" "', argument " "3"" of type '" "iDynTree::JointIndex""'");
+  } 
+  arg3 = static_cast< iDynTree::JointIndex >(val3);
+  result = ((iDynTree::BerdyHelper const *)arg1)->getRangeJointSensorVariable(arg2,arg3);
+  _out = SWIG_NewPointerObj((new iDynTree::IndexRange(static_cast< const iDynTree::IndexRange& >(result))), SWIGTYPE_p_iDynTree__IndexRange, SWIG_POINTER_OWN |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdyHelper_getRangeLinkSensorVariable(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::BerdySensorTypes arg2 ;
+  iDynTree::LinkIndex arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::IndexRange result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_getRangeLinkSensorVariable",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_getRangeLinkSensorVariable" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BerdyHelper_getRangeLinkSensorVariable" "', argument " "2"" of type '" "iDynTree::BerdySensorTypes""'");
+  } 
+  arg2 = static_cast< iDynTree::BerdySensorTypes >(val2);
+  ecode3 = SWIG_AsVal_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BerdyHelper_getRangeLinkSensorVariable" "', argument " "3"" of type '" "iDynTree::LinkIndex""'");
+  } 
+  arg3 = static_cast< iDynTree::LinkIndex >(val3);
+  result = ((iDynTree::BerdyHelper const *)arg1)->getRangeLinkSensorVariable(arg2,arg3);
+  _out = SWIG_NewPointerObj((new iDynTree::IndexRange(static_cast< const iDynTree::IndexRange& >(result))), SWIGTYPE_p_iDynTree__IndexRange, SWIG_POINTER_OWN |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdyHelper_getRangeLinkVariable(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::BerdyDynamicVariablesTypes arg2 ;
+  iDynTree::LinkIndex arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::IndexRange result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_getRangeLinkVariable",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_getRangeLinkVariable" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BerdyHelper_getRangeLinkVariable" "', argument " "2"" of type '" "iDynTree::BerdyDynamicVariablesTypes""'");
+  } 
+  arg2 = static_cast< iDynTree::BerdyDynamicVariablesTypes >(val2);
+  ecode3 = SWIG_AsVal_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BerdyHelper_getRangeLinkVariable" "', argument " "3"" of type '" "iDynTree::LinkIndex""'");
+  } 
+  arg3 = static_cast< iDynTree::LinkIndex >(val3);
+  result = ((iDynTree::BerdyHelper const *)arg1)->getRangeLinkVariable(arg2,arg3);
+  _out = SWIG_NewPointerObj((new iDynTree::IndexRange(static_cast< const iDynTree::IndexRange& >(result))), SWIGTYPE_p_iDynTree__IndexRange, SWIG_POINTER_OWN |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdyHelper_getRangeJointVariable(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::BerdyDynamicVariablesTypes arg2 ;
+  iDynTree::JointIndex arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::IndexRange result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_getRangeJointVariable",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_getRangeJointVariable" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BerdyHelper_getRangeJointVariable" "', argument " "2"" of type '" "iDynTree::BerdyDynamicVariablesTypes""'");
+  } 
+  arg2 = static_cast< iDynTree::BerdyDynamicVariablesTypes >(val2);
+  ecode3 = SWIG_AsVal_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BerdyHelper_getRangeJointVariable" "', argument " "3"" of type '" "iDynTree::JointIndex""'");
+  } 
+  arg3 = static_cast< iDynTree::JointIndex >(val3);
+  result = ((iDynTree::BerdyHelper const *)arg1)->getRangeJointVariable(arg2,arg3);
+  _out = SWIG_NewPointerObj((new iDynTree::IndexRange(static_cast< const iDynTree::IndexRange& >(result))), SWIGTYPE_p_iDynTree__IndexRange, SWIG_POINTER_OWN |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdyHelper_getRangeDOFVariable(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::BerdyDynamicVariablesTypes arg2 ;
+  iDynTree::DOFIndex arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  mxArray * _out;
+  iDynTree::IndexRange result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_getRangeDOFVariable",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_getRangeDOFVariable" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BerdyHelper_getRangeDOFVariable" "', argument " "2"" of type '" "iDynTree::BerdyDynamicVariablesTypes""'");
+  } 
+  arg2 = static_cast< iDynTree::BerdyDynamicVariablesTypes >(val2);
+  ecode3 = SWIG_AsVal_int(argv[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BerdyHelper_getRangeDOFVariable" "', argument " "3"" of type '" "iDynTree::DOFIndex""'");
+  } 
+  arg3 = static_cast< iDynTree::DOFIndex >(val3);
+  result = ((iDynTree::BerdyHelper const *)arg1)->getRangeDOFVariable(arg2,arg3);
+  _out = SWIG_NewPointerObj((new iDynTree::IndexRange(static_cast< const iDynTree::IndexRange& >(result))), SWIGTYPE_p_iDynTree__IndexRange, SWIG_POINTER_OWN |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_BerdyHelper_getDynamicVariablesOrdering(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
   void *argp1 = 0 ;
@@ -71601,6 +72361,109 @@ fail:
 }
 
 
+int _wrap_BerdyHelper_extractJointTorquesFromDynamicVariables(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::VectorDynSize *arg2 = 0 ;
+  iDynTree::VectorDynSize *arg3 = 0 ;
+  iDynTree::VectorDynSize *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_extractJointTorquesFromDynamicVariables",argc,4,4,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_extractJointTorquesFromDynamicVariables" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "BerdyHelper_extractJointTorquesFromDynamicVariables" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdyHelper_extractJointTorquesFromDynamicVariables" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::VectorDynSize * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BerdyHelper_extractJointTorquesFromDynamicVariables" "', argument " "3"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdyHelper_extractJointTorquesFromDynamicVariables" "', argument " "3"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::VectorDynSize * >(argp3);
+  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "BerdyHelper_extractJointTorquesFromDynamicVariables" "', argument " "4"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdyHelper_extractJointTorquesFromDynamicVariables" "', argument " "4"" of type '" "iDynTree::VectorDynSize &""'"); 
+  }
+  arg4 = reinterpret_cast< iDynTree::VectorDynSize * >(argp4);
+  result = (bool)((iDynTree::BerdyHelper const *)arg1)->extractJointTorquesFromDynamicVariables((iDynTree::VectorDynSize const &)*arg2,(iDynTree::VectorDynSize const &)*arg3,*arg4);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdyHelper_extractLinkNetExternalWrenchesFromDynamicVariables(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::VectorDynSize *arg2 = 0 ;
+  iDynTree::LinkNetExternalWrenches *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_extractLinkNetExternalWrenchesFromDynamicVariables",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_extractLinkNetExternalWrenchesFromDynamicVariables" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "BerdyHelper_extractLinkNetExternalWrenchesFromDynamicVariables" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdyHelper_extractLinkNetExternalWrenchesFromDynamicVariables" "', argument " "2"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::VectorDynSize * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__LinkWrenches,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BerdyHelper_extractLinkNetExternalWrenchesFromDynamicVariables" "', argument " "3"" of type '" "iDynTree::LinkNetExternalWrenches &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdyHelper_extractLinkNetExternalWrenchesFromDynamicVariables" "', argument " "3"" of type '" "iDynTree::LinkNetExternalWrenches &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::LinkNetExternalWrenches * >(argp3);
+  result = (bool)((iDynTree::BerdyHelper const *)arg1)->extractLinkNetExternalWrenchesFromDynamicVariables((iDynTree::VectorDynSize const &)*arg2,*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_BerdyHelper_updateKinematicsFromFloatingBase(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
   iDynTree::JointPosDoubleArray *arg2 = 0 ;
@@ -71784,6 +72647,92 @@ int _wrap_BerdyHelper_updateKinematicsFromTraversalFixedBase(int resc, mxArray *
   }
   arg4 = reinterpret_cast< iDynTree::Vector3 * >(argp4);
   result = (bool)(arg1)->updateKinematicsFromTraversalFixedBase((iDynTree::JointPosDoubleArray const &)*arg2,(iDynTree::JointDOFsDoubleArray const &)*arg3,(iDynTree::Vector3 const &)*arg4);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdyHelper_setNetExternalWrenchMeasurementFrame(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::LinkIndex arg2 ;
+  iDynTree::Transform *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_setNetExternalWrenchMeasurementFrame",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_setNetExternalWrenchMeasurementFrame" "', argument " "1"" of type '" "iDynTree::BerdyHelper *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BerdyHelper_setNetExternalWrenchMeasurementFrame" "', argument " "2"" of type '" "iDynTree::LinkIndex""'");
+  } 
+  arg2 = static_cast< iDynTree::LinkIndex >(val2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__Transform,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BerdyHelper_setNetExternalWrenchMeasurementFrame" "', argument " "3"" of type '" "iDynTree::Transform const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdyHelper_setNetExternalWrenchMeasurementFrame" "', argument " "3"" of type '" "iDynTree::Transform const &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::Transform * >(argp3);
+  result = (bool)(arg1)->setNetExternalWrenchMeasurementFrame(arg2,(iDynTree::Transform const &)*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdyHelper_getNetExternalWrenchMeasurementFrame(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdyHelper *arg1 = (iDynTree::BerdyHelper *) 0 ;
+  iDynTree::LinkIndex arg2 ;
+  iDynTree::Transform *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  bool result;
+  
+  if (!SWIG_check_num_args("BerdyHelper_getNetExternalWrenchMeasurementFrame",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdyHelper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdyHelper_getNetExternalWrenchMeasurementFrame" "', argument " "1"" of type '" "iDynTree::BerdyHelper const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdyHelper * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BerdyHelper_getNetExternalWrenchMeasurementFrame" "', argument " "2"" of type '" "iDynTree::LinkIndex""'");
+  } 
+  arg2 = static_cast< iDynTree::LinkIndex >(val2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__Transform,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BerdyHelper_getNetExternalWrenchMeasurementFrame" "', argument " "3"" of type '" "iDynTree::Transform &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdyHelper_getNetExternalWrenchMeasurementFrame" "', argument " "3"" of type '" "iDynTree::Transform &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::Transform * >(argp3);
+  result = (bool)((iDynTree::BerdyHelper const *)arg1)->getNetExternalWrenchMeasurementFrame(arg2,*arg3);
   _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -72361,54 +73310,148 @@ fail:
 }
 
 
-int _wrap_BerdySparseMAPSolver_updateEstimateInformation(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_BerdySparseMAPSolver_updateEstimateInformationFixedBase(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::BerdySparseMAPSolver *arg1 = (iDynTree::BerdySparseMAPSolver *) 0 ;
   iDynTree::JointPosDoubleArray *arg2 = 0 ;
   iDynTree::JointDOFsDoubleArray *arg3 = 0 ;
-  iDynTree::VectorDynSize *arg4 = 0 ;
+  iDynTree::FrameIndex arg4 ;
+  iDynTree::Vector3 *arg5 = 0 ;
+  iDynTree::VectorDynSize *arg6 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
   void *argp3 ;
   int res3 = 0 ;
-  void *argp4 ;
-  int res4 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  void *argp6 ;
+  int res6 = 0 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("BerdySparseMAPSolver_updateEstimateInformation",argc,4,4,0)) {
+  if (!SWIG_check_num_args("BerdySparseMAPSolver_updateEstimateInformationFixedBase",argc,6,6,0)) {
     SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdySparseMAPSolver, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdySparseMAPSolver_updateEstimateInformation" "', argument " "1"" of type '" "iDynTree::BerdySparseMAPSolver *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "1"" of type '" "iDynTree::BerdySparseMAPSolver *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::BerdySparseMAPSolver * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__JointPosDoubleArray,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "BerdySparseMAPSolver_updateEstimateInformation" "', argument " "2"" of type '" "iDynTree::JointPosDoubleArray const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "2"" of type '" "iDynTree::JointPosDoubleArray const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformation" "', argument " "2"" of type '" "iDynTree::JointPosDoubleArray const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "2"" of type '" "iDynTree::JointPosDoubleArray const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::JointPosDoubleArray * >(argp2);
   res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__JointDOFsDoubleArray,  0 );
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BerdySparseMAPSolver_updateEstimateInformation" "', argument " "3"" of type '" "iDynTree::JointDOFsDoubleArray const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "3"" of type '" "iDynTree::JointDOFsDoubleArray const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformation" "', argument " "3"" of type '" "iDynTree::JointDOFsDoubleArray const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "3"" of type '" "iDynTree::JointDOFsDoubleArray const &""'"); 
   }
   arg3 = reinterpret_cast< iDynTree::JointDOFsDoubleArray * >(argp3);
-  res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
-  if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "BerdySparseMAPSolver_updateEstimateInformation" "', argument " "4"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  ecode4 = SWIG_AsVal_int(argv[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "4"" of type '" "iDynTree::FrameIndex""'");
+  } 
+  arg4 = static_cast< iDynTree::FrameIndex >(val4);
+  res5 = SWIG_ConvertPtr(argv[4], &argp5, SWIGTYPE_p_iDynTree__VectorFixSizeT_3_t,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "5"" of type '" "iDynTree::Vector3 const &""'"); 
   }
-  if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformation" "', argument " "4"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "5"" of type '" "iDynTree::Vector3 const &""'"); 
   }
-  arg4 = reinterpret_cast< iDynTree::VectorDynSize * >(argp4);
-  (arg1)->updateEstimateInformation((iDynTree::JointPosDoubleArray const &)*arg2,(iDynTree::JointDOFsDoubleArray const &)*arg3,(iDynTree::VectorDynSize const &)*arg4);
+  arg5 = reinterpret_cast< iDynTree::Vector3 * >(argp5);
+  res6 = SWIG_ConvertPtr(argv[5], &argp6, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res6)) {
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "6"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp6) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformationFixedBase" "', argument " "6"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg6 = reinterpret_cast< iDynTree::VectorDynSize * >(argp6);
+  (arg1)->updateEstimateInformationFixedBase((iDynTree::JointPosDoubleArray const &)*arg2,(iDynTree::JointDOFsDoubleArray const &)*arg3,arg4,(iDynTree::Vector3 const &)*arg5,(iDynTree::VectorDynSize const &)*arg6);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_BerdySparseMAPSolver_updateEstimateInformationFloatingBase(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::BerdySparseMAPSolver *arg1 = (iDynTree::BerdySparseMAPSolver *) 0 ;
+  iDynTree::JointPosDoubleArray *arg2 = 0 ;
+  iDynTree::JointDOFsDoubleArray *arg3 = 0 ;
+  iDynTree::FrameIndex arg4 ;
+  iDynTree::Vector3 *arg5 = 0 ;
+  iDynTree::VectorDynSize *arg6 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  void *argp6 ;
+  int res6 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("BerdySparseMAPSolver_updateEstimateInformationFloatingBase",argc,6,6,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__BerdySparseMAPSolver, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "1"" of type '" "iDynTree::BerdySparseMAPSolver *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::BerdySparseMAPSolver * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__JointPosDoubleArray,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "2"" of type '" "iDynTree::JointPosDoubleArray const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "2"" of type '" "iDynTree::JointPosDoubleArray const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::JointPosDoubleArray * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__JointDOFsDoubleArray,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "3"" of type '" "iDynTree::JointDOFsDoubleArray const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "3"" of type '" "iDynTree::JointDOFsDoubleArray const &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::JointDOFsDoubleArray * >(argp3);
+  ecode4 = SWIG_AsVal_int(argv[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "4"" of type '" "iDynTree::FrameIndex""'");
+  } 
+  arg4 = static_cast< iDynTree::FrameIndex >(val4);
+  res5 = SWIG_ConvertPtr(argv[4], &argp5, SWIGTYPE_p_iDynTree__VectorFixSizeT_3_t,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "5"" of type '" "iDynTree::Vector3 const &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "5"" of type '" "iDynTree::Vector3 const &""'"); 
+  }
+  arg5 = reinterpret_cast< iDynTree::Vector3 * >(argp5);
+  res6 = SWIG_ConvertPtr(argv[5], &argp6, SWIGTYPE_p_iDynTree__VectorDynSize,  0 );
+  if (!SWIG_IsOK(res6)) {
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "6"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  if (!argp6) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BerdySparseMAPSolver_updateEstimateInformationFloatingBase" "', argument " "6"" of type '" "iDynTree::VectorDynSize const &""'"); 
+  }
+  arg6 = reinterpret_cast< iDynTree::VectorDynSize * >(argp6);
+  (arg1)->updateEstimateInformationFloatingBase((iDynTree::JointPosDoubleArray const &)*arg2,(iDynTree::JointDOFsDoubleArray const &)*arg3,arg4,(iDynTree::Vector3 const &)*arg5,(iDynTree::VectorDynSize const &)*arg6);
   _out = (mxArray*)0;
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -83992,45 +85035,50 @@ SWIGINTERN const char* SwigConstantName(int con_id) {
   case 5: return "SIX_AXIS_FORCE_TORQUE";
   case 6: return "ACCELEROMETER";
   case 7: return "GYROSCOPE";
-  case 8: return "FULL_WRENCH";
-  case 9: return "PURE_FORCE";
-  case 10: return "PURE_FORCE_WITH_KNOWN_DIRECTION";
-  case 11: return "NO_UNKNOWNS";
-  case 12: return "ORIGINAL_BERDY_FIXED_BASE";
-  case 13: return "BERDY_FLOATING_BASE";
-  case 14: return "LINK_BODY_PROPER_ACCELERATION";
-  case 15: return "NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV";
-  case 16: return "JOINT_WRENCH";
-  case 17: return "DOF_TORQUE";
-  case 18: return "NET_EXT_WRENCH";
-  case 19: return "DOF_ACCELERATION";
-  case 20: return "SIX_AXIS_FORCE_TORQUE_SENSOR";
-  case 21: return "ACCELEROMETER_SENSOR";
-  case 22: return "GYROSCOPE_SENSOR";
-  case 23: return "DOF_ACCELERATION_SENSOR";
-  case 24: return "DOF_TORQUE_SENSOR";
-  case 25: return "NET_EXT_WRENCH_SENSOR";
-  case 26: return "JOINT_WRENCH_SENSOR";
-  case 27: return "LINK_PARAM";
-  case 28: return "SENSOR_FT_PARAM";
-  case 29: return "LINK_MASS";
-  case 30: return "LINK_FIRST_MOMENT_OF_MASS_X";
-  case 31: return "LINK_FIRST_MOMENT_OF_MASS_Y";
-  case 32: return "LINK_FIRST_MOMENT_OF_MASS_Z";
-  case 33: return "LINK_MOMENT_OF_INERTIA_XX";
-  case 34: return "LINK_MOMENT_OF_INERTIA_XY";
-  case 35: return "LINK_MOMENT_OF_INERTIA_XZ";
-  case 36: return "LINK_MOMENT_OF_INERTIA_YY";
-  case 37: return "LINK_MOMENT_OF_INERTIA_YZ";
-  case 38: return "LINK_MOMENT_OF_INERTIA_ZZ";
-  case 39: return "SENSOR_FT_OFFSET_FORCE_X";
-  case 40: return "SENSOR_FT_OFFSET_FORCE_Y";
-  case 41: return "SENSOR_FT_OFFSET_FORCE_Z";
-  case 42: return "SENSOR_FT_OFFSET_TORQUE_X";
-  case 43: return "SENSOR_FT_OFFSET_TORQUE_Y";
-  case 44: return "SENSOR_FT_OFFSET_TORQUE_Z";
-  case 45: return "POINT_LIGHT";
-  case 46: return "DIRECTIONAL_LIGHT";
+  case 8: return "THREE_AXIS_ANGULAR_ACCELEROMETER";
+  case 9: return "THREE_AXIS_FORCE_TORQUE_CONTACT";
+  case 10: return "FULL_WRENCH";
+  case 11: return "PURE_FORCE";
+  case 12: return "PURE_FORCE_WITH_KNOWN_DIRECTION";
+  case 13: return "NO_UNKNOWNS";
+  case 14: return "ORIGINAL_BERDY_FIXED_BASE";
+  case 15: return "BERDY_FLOATING_BASE";
+  case 16: return "LINK_BODY_PROPER_ACCELERATION";
+  case 17: return "NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV";
+  case 18: return "JOINT_WRENCH";
+  case 19: return "DOF_TORQUE";
+  case 20: return "NET_EXT_WRENCH";
+  case 21: return "DOF_ACCELERATION";
+  case 22: return "LINK_BODY_PROPER_CLASSICAL_ACCELERATION";
+  case 23: return "SIX_AXIS_FORCE_TORQUE_SENSOR";
+  case 24: return "ACCELEROMETER_SENSOR";
+  case 25: return "GYROSCOPE_SENSOR";
+  case 26: return "THREE_AXIS_ANGULAR_ACCELEROMETER_SENSOR";
+  case 27: return "THREE_AXIS_FORCE_TORQUE_CONTACT_SENSOR";
+  case 28: return "DOF_ACCELERATION_SENSOR";
+  case 29: return "DOF_TORQUE_SENSOR";
+  case 30: return "NET_EXT_WRENCH_SENSOR";
+  case 31: return "JOINT_WRENCH_SENSOR";
+  case 32: return "LINK_PARAM";
+  case 33: return "SENSOR_FT_PARAM";
+  case 34: return "LINK_MASS";
+  case 35: return "LINK_FIRST_MOMENT_OF_MASS_X";
+  case 36: return "LINK_FIRST_MOMENT_OF_MASS_Y";
+  case 37: return "LINK_FIRST_MOMENT_OF_MASS_Z";
+  case 38: return "LINK_MOMENT_OF_INERTIA_XX";
+  case 39: return "LINK_MOMENT_OF_INERTIA_XY";
+  case 40: return "LINK_MOMENT_OF_INERTIA_XZ";
+  case 41: return "LINK_MOMENT_OF_INERTIA_YY";
+  case 42: return "LINK_MOMENT_OF_INERTIA_YZ";
+  case 43: return "LINK_MOMENT_OF_INERTIA_ZZ";
+  case 44: return "SENSOR_FT_OFFSET_FORCE_X";
+  case 45: return "SENSOR_FT_OFFSET_FORCE_Y";
+  case 46: return "SENSOR_FT_OFFSET_FORCE_Z";
+  case 47: return "SENSOR_FT_OFFSET_TORQUE_X";
+  case 48: return "SENSOR_FT_OFFSET_TORQUE_Y";
+  case 49: return "SENSOR_FT_OFFSET_TORQUE_Z";
+  case 50: return "POINT_LIGHT";
+  case 51: return "DIRECTIONAL_LIGHT";
   default: return 0;
   }
 }
@@ -84069,45 +85117,50 @@ SWIGINTERN int swigConstant(int SWIGUNUSEDPARM(resc), mxArray *resv[], int argc,
   case 5: *resv = SWIG_Matlab_SetConstant(module_ns,"SIX_AXIS_FORCE_TORQUE",SWIG_From_int(static_cast< int >(iDynTree::SIX_AXIS_FORCE_TORQUE)));; break;
   case 6: *resv = SWIG_Matlab_SetConstant(module_ns,"ACCELEROMETER",SWIG_From_int(static_cast< int >(iDynTree::ACCELEROMETER)));; break;
   case 7: *resv = SWIG_Matlab_SetConstant(module_ns,"GYROSCOPE",SWIG_From_int(static_cast< int >(iDynTree::GYROSCOPE)));; break;
-  case 8: *resv = SWIG_Matlab_SetConstant(module_ns,"FULL_WRENCH",SWIG_From_int(static_cast< int >(iDynTree::FULL_WRENCH)));; break;
-  case 9: *resv = SWIG_Matlab_SetConstant(module_ns,"PURE_FORCE",SWIG_From_int(static_cast< int >(iDynTree::PURE_FORCE)));; break;
-  case 10: *resv = SWIG_Matlab_SetConstant(module_ns,"PURE_FORCE_WITH_KNOWN_DIRECTION",SWIG_From_int(static_cast< int >(iDynTree::PURE_FORCE_WITH_KNOWN_DIRECTION)));; break;
-  case 11: *resv = SWIG_Matlab_SetConstant(module_ns,"NO_UNKNOWNS",SWIG_From_int(static_cast< int >(iDynTree::NO_UNKNOWNS)));; break;
-  case 12: *resv = SWIG_Matlab_SetConstant(module_ns,"ORIGINAL_BERDY_FIXED_BASE",SWIG_From_int(static_cast< int >(iDynTree::ORIGINAL_BERDY_FIXED_BASE)));; break;
-  case 13: *resv = SWIG_Matlab_SetConstant(module_ns,"BERDY_FLOATING_BASE",SWIG_From_int(static_cast< int >(iDynTree::BERDY_FLOATING_BASE)));; break;
-  case 14: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_BODY_PROPER_ACCELERATION",SWIG_From_int(static_cast< int >(iDynTree::LINK_BODY_PROPER_ACCELERATION)));; break;
-  case 15: *resv = SWIG_Matlab_SetConstant(module_ns,"NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV",SWIG_From_int(static_cast< int >(iDynTree::NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV)));; break;
-  case 16: *resv = SWIG_Matlab_SetConstant(module_ns,"JOINT_WRENCH",SWIG_From_int(static_cast< int >(iDynTree::JOINT_WRENCH)));; break;
-  case 17: *resv = SWIG_Matlab_SetConstant(module_ns,"DOF_TORQUE",SWIG_From_int(static_cast< int >(iDynTree::DOF_TORQUE)));; break;
-  case 18: *resv = SWIG_Matlab_SetConstant(module_ns,"NET_EXT_WRENCH",SWIG_From_int(static_cast< int >(iDynTree::NET_EXT_WRENCH)));; break;
-  case 19: *resv = SWIG_Matlab_SetConstant(module_ns,"DOF_ACCELERATION",SWIG_From_int(static_cast< int >(iDynTree::DOF_ACCELERATION)));; break;
-  case 20: *resv = SWIG_Matlab_SetConstant(module_ns,"SIX_AXIS_FORCE_TORQUE_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::SIX_AXIS_FORCE_TORQUE_SENSOR)));; break;
-  case 21: *resv = SWIG_Matlab_SetConstant(module_ns,"ACCELEROMETER_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::ACCELEROMETER_SENSOR)));; break;
-  case 22: *resv = SWIG_Matlab_SetConstant(module_ns,"GYROSCOPE_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::GYROSCOPE_SENSOR)));; break;
-  case 23: *resv = SWIG_Matlab_SetConstant(module_ns,"DOF_ACCELERATION_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::DOF_ACCELERATION_SENSOR)));; break;
-  case 24: *resv = SWIG_Matlab_SetConstant(module_ns,"DOF_TORQUE_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::DOF_TORQUE_SENSOR)));; break;
-  case 25: *resv = SWIG_Matlab_SetConstant(module_ns,"NET_EXT_WRENCH_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::NET_EXT_WRENCH_SENSOR)));; break;
-  case 26: *resv = SWIG_Matlab_SetConstant(module_ns,"JOINT_WRENCH_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::JOINT_WRENCH_SENSOR)));; break;
-  case 27: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_PARAM)));; break;
-  case 28: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_PARAM)));; break;
-  case 29: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MASS",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MASS)));; break;
-  case 30: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_X)));; break;
-  case 31: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Y)));; break;
-  case 32: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Z)));; break;
-  case 33: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XX",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XX)));; break;
-  case 34: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XY)));; break;
-  case 35: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XZ)));; break;
-  case 36: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YY)));; break;
-  case 37: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YZ)));; break;
-  case 38: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_ZZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_ZZ)));; break;
-  case 39: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_X)));; break;
-  case 40: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Y)));; break;
-  case 41: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Z)));; break;
-  case 42: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_X)));; break;
-  case 43: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Y)));; break;
-  case 44: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Z)));; break;
-  case 45: *resv = SWIG_Matlab_SetConstant(module_ns,"POINT_LIGHT",SWIG_From_int(static_cast< int >(iDynTree::POINT_LIGHT)));; break;
-  case 46: *resv = SWIG_Matlab_SetConstant(module_ns,"DIRECTIONAL_LIGHT",SWIG_From_int(static_cast< int >(iDynTree::DIRECTIONAL_LIGHT)));; break;
+  case 8: *resv = SWIG_Matlab_SetConstant(module_ns,"THREE_AXIS_ANGULAR_ACCELEROMETER",SWIG_From_int(static_cast< int >(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER)));; break;
+  case 9: *resv = SWIG_Matlab_SetConstant(module_ns,"THREE_AXIS_FORCE_TORQUE_CONTACT",SWIG_From_int(static_cast< int >(iDynTree::THREE_AXIS_FORCE_TORQUE_CONTACT)));; break;
+  case 10: *resv = SWIG_Matlab_SetConstant(module_ns,"FULL_WRENCH",SWIG_From_int(static_cast< int >(iDynTree::FULL_WRENCH)));; break;
+  case 11: *resv = SWIG_Matlab_SetConstant(module_ns,"PURE_FORCE",SWIG_From_int(static_cast< int >(iDynTree::PURE_FORCE)));; break;
+  case 12: *resv = SWIG_Matlab_SetConstant(module_ns,"PURE_FORCE_WITH_KNOWN_DIRECTION",SWIG_From_int(static_cast< int >(iDynTree::PURE_FORCE_WITH_KNOWN_DIRECTION)));; break;
+  case 13: *resv = SWIG_Matlab_SetConstant(module_ns,"NO_UNKNOWNS",SWIG_From_int(static_cast< int >(iDynTree::NO_UNKNOWNS)));; break;
+  case 14: *resv = SWIG_Matlab_SetConstant(module_ns,"ORIGINAL_BERDY_FIXED_BASE",SWIG_From_int(static_cast< int >(iDynTree::ORIGINAL_BERDY_FIXED_BASE)));; break;
+  case 15: *resv = SWIG_Matlab_SetConstant(module_ns,"BERDY_FLOATING_BASE",SWIG_From_int(static_cast< int >(iDynTree::BERDY_FLOATING_BASE)));; break;
+  case 16: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_BODY_PROPER_ACCELERATION",SWIG_From_int(static_cast< int >(iDynTree::LINK_BODY_PROPER_ACCELERATION)));; break;
+  case 17: *resv = SWIG_Matlab_SetConstant(module_ns,"NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV",SWIG_From_int(static_cast< int >(iDynTree::NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV)));; break;
+  case 18: *resv = SWIG_Matlab_SetConstant(module_ns,"JOINT_WRENCH",SWIG_From_int(static_cast< int >(iDynTree::JOINT_WRENCH)));; break;
+  case 19: *resv = SWIG_Matlab_SetConstant(module_ns,"DOF_TORQUE",SWIG_From_int(static_cast< int >(iDynTree::DOF_TORQUE)));; break;
+  case 20: *resv = SWIG_Matlab_SetConstant(module_ns,"NET_EXT_WRENCH",SWIG_From_int(static_cast< int >(iDynTree::NET_EXT_WRENCH)));; break;
+  case 21: *resv = SWIG_Matlab_SetConstant(module_ns,"DOF_ACCELERATION",SWIG_From_int(static_cast< int >(iDynTree::DOF_ACCELERATION)));; break;
+  case 22: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_BODY_PROPER_CLASSICAL_ACCELERATION",SWIG_From_int(static_cast< int >(iDynTree::LINK_BODY_PROPER_CLASSICAL_ACCELERATION)));; break;
+  case 23: *resv = SWIG_Matlab_SetConstant(module_ns,"SIX_AXIS_FORCE_TORQUE_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::SIX_AXIS_FORCE_TORQUE_SENSOR)));; break;
+  case 24: *resv = SWIG_Matlab_SetConstant(module_ns,"ACCELEROMETER_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::ACCELEROMETER_SENSOR)));; break;
+  case 25: *resv = SWIG_Matlab_SetConstant(module_ns,"GYROSCOPE_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::GYROSCOPE_SENSOR)));; break;
+  case 26: *resv = SWIG_Matlab_SetConstant(module_ns,"THREE_AXIS_ANGULAR_ACCELEROMETER_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER_SENSOR)));; break;
+  case 27: *resv = SWIG_Matlab_SetConstant(module_ns,"THREE_AXIS_FORCE_TORQUE_CONTACT_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::THREE_AXIS_FORCE_TORQUE_CONTACT_SENSOR)));; break;
+  case 28: *resv = SWIG_Matlab_SetConstant(module_ns,"DOF_ACCELERATION_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::DOF_ACCELERATION_SENSOR)));; break;
+  case 29: *resv = SWIG_Matlab_SetConstant(module_ns,"DOF_TORQUE_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::DOF_TORQUE_SENSOR)));; break;
+  case 30: *resv = SWIG_Matlab_SetConstant(module_ns,"NET_EXT_WRENCH_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::NET_EXT_WRENCH_SENSOR)));; break;
+  case 31: *resv = SWIG_Matlab_SetConstant(module_ns,"JOINT_WRENCH_SENSOR",SWIG_From_int(static_cast< int >(iDynTree::JOINT_WRENCH_SENSOR)));; break;
+  case 32: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_PARAM)));; break;
+  case 33: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_PARAM",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_PARAM)));; break;
+  case 34: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MASS",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MASS)));; break;
+  case 35: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_X)));; break;
+  case 36: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Y)));; break;
+  case 37: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_FIRST_MOMENT_OF_MASS_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_FIRST_MOMENT_OF_MASS_Z)));; break;
+  case 38: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XX",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XX)));; break;
+  case 39: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XY)));; break;
+  case 40: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_XZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_XZ)));; break;
+  case 41: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YY",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YY)));; break;
+  case 42: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_YZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_YZ)));; break;
+  case 43: *resv = SWIG_Matlab_SetConstant(module_ns,"LINK_MOMENT_OF_INERTIA_ZZ",SWIG_From_int(static_cast< int >(iDynTree::Regressors::LINK_MOMENT_OF_INERTIA_ZZ)));; break;
+  case 44: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_X)));; break;
+  case 45: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Y)));; break;
+  case 46: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_FORCE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_FORCE_Z)));; break;
+  case 47: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_X",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_X)));; break;
+  case 48: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Y",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Y)));; break;
+  case 49: *resv = SWIG_Matlab_SetConstant(module_ns,"SENSOR_FT_OFFSET_TORQUE_Z",SWIG_From_int(static_cast< int >(iDynTree::Regressors::SENSOR_FT_OFFSET_TORQUE_Z)));; break;
+  case 50: *resv = SWIG_Matlab_SetConstant(module_ns,"POINT_LIGHT",SWIG_From_int(static_cast< int >(iDynTree::POINT_LIGHT)));; break;
+  case 51: *resv = SWIG_Matlab_SetConstant(module_ns,"DIRECTIONAL_LIGHT",SWIG_From_int(static_cast< int >(iDynTree::DIRECTIONAL_LIGHT)));; break;
   default:
     SWIG_Error(SWIG_RuntimeError, "No such constant.");
     return 1;
@@ -84899,953 +85952,972 @@ SWIGINTERN const char* SwigFunctionName(int fcn_id) {
   case 779: return "TransformSemantics_display";
   case 780: return "delete_TransformSemantics";
   case 781: return "new_Transform";
-  case 782: return "Transform_getSemantics";
-  case 783: return "Transform_getRotation";
-  case 784: return "Transform_getPosition";
-  case 785: return "Transform_setRotation";
-  case 786: return "Transform_setPosition";
-  case 787: return "Transform_compose";
-  case 788: return "Transform_inverse2";
-  case 789: return "Transform_inverse";
-  case 790: return "Transform_mtimes";
-  case 791: return "Transform_Identity";
-  case 792: return "Transform_asHomogeneousTransform";
-  case 793: return "Transform_asAdjointTransform";
-  case 794: return "Transform_asAdjointTransformWrench";
-  case 795: return "Transform_log";
-  case 796: return "Transform_toString";
-  case 797: return "Transform_display";
-  case 798: return "delete_Transform";
-  case 799: return "new_TransformDerivative";
-  case 800: return "delete_TransformDerivative";
-  case 801: return "TransformDerivative_getRotationDerivative";
-  case 802: return "TransformDerivative_getPositionDerivative";
-  case 803: return "TransformDerivative_setRotationDerivative";
-  case 804: return "TransformDerivative_setPositionDerivative";
-  case 805: return "TransformDerivative_Zero";
-  case 806: return "TransformDerivative_asHomogeneousTransformDerivative";
-  case 807: return "TransformDerivative_asAdjointTransformDerivative";
-  case 808: return "TransformDerivative_asAdjointTransformWrenchDerivative";
-  case 809: return "TransformDerivative_mtimes";
-  case 810: return "TransformDerivative_derivativeOfInverse";
-  case 811: return "TransformDerivative_transform";
-  case 812: return "LINK_INVALID_INDEX_get";
-  case 813: return "LINK_INVALID_INDEX_set";
-  case 814: return "LINK_INVALID_NAME_get";
-  case 815: return "LINK_INVALID_NAME_set";
-  case 816: return "JOINT_INVALID_INDEX_get";
-  case 817: return "JOINT_INVALID_INDEX_set";
-  case 818: return "JOINT_INVALID_NAME_get";
-  case 819: return "JOINT_INVALID_NAME_set";
-  case 820: return "DOF_INVALID_INDEX_get";
-  case 821: return "DOF_INVALID_INDEX_set";
-  case 822: return "DOF_INVALID_NAME_get";
-  case 823: return "DOF_INVALID_NAME_set";
-  case 824: return "FRAME_INVALID_INDEX_get";
-  case 825: return "FRAME_INVALID_INDEX_set";
-  case 826: return "FRAME_INVALID_NAME_get";
-  case 827: return "FRAME_INVALID_NAME_set";
-  case 828: return "TRAVERSAL_INVALID_INDEX_get";
-  case 829: return "TRAVERSAL_INVALID_INDEX_set";
-  case 830: return "new_LinkPositions";
-  case 831: return "LinkPositions_resize";
-  case 832: return "LinkPositions_isConsistent";
-  case 833: return "LinkPositions_getNrOfLinks";
-  case 834: return "LinkPositions_paren";
-  case 835: return "LinkPositions_toString";
-  case 836: return "delete_LinkPositions";
-  case 837: return "new_LinkWrenches";
-  case 838: return "LinkWrenches_resize";
-  case 839: return "LinkWrenches_isConsistent";
-  case 840: return "LinkWrenches_getNrOfLinks";
-  case 841: return "LinkWrenches_paren";
-  case 842: return "LinkWrenches_toString";
-  case 843: return "LinkWrenches_zero";
-  case 844: return "delete_LinkWrenches";
-  case 845: return "new_LinkInertias";
-  case 846: return "LinkInertias_resize";
-  case 847: return "LinkInertias_isConsistent";
-  case 848: return "LinkInertias_paren";
-  case 849: return "delete_LinkInertias";
-  case 850: return "new_LinkArticulatedBodyInertias";
-  case 851: return "LinkArticulatedBodyInertias_resize";
-  case 852: return "LinkArticulatedBodyInertias_isConsistent";
-  case 853: return "LinkArticulatedBodyInertias_paren";
-  case 854: return "delete_LinkArticulatedBodyInertias";
-  case 855: return "new_LinkVelArray";
-  case 856: return "LinkVelArray_resize";
-  case 857: return "LinkVelArray_isConsistent";
-  case 858: return "LinkVelArray_getNrOfLinks";
-  case 859: return "LinkVelArray_paren";
-  case 860: return "LinkVelArray_toString";
-  case 861: return "delete_LinkVelArray";
-  case 862: return "new_LinkAccArray";
-  case 863: return "LinkAccArray_resize";
-  case 864: return "LinkAccArray_isConsistent";
-  case 865: return "LinkAccArray_paren";
-  case 866: return "LinkAccArray_getNrOfLinks";
-  case 867: return "LinkAccArray_toString";
-  case 868: return "delete_LinkAccArray";
-  case 869: return "new_Link";
-  case 870: return "Link_inertia";
-  case 871: return "Link_setInertia";
-  case 872: return "Link_getInertia";
-  case 873: return "Link_setIndex";
-  case 874: return "Link_getIndex";
-  case 875: return "delete_Link";
-  case 876: return "delete_IJoint";
-  case 877: return "IJoint_clone";
-  case 878: return "IJoint_getNrOfPosCoords";
-  case 879: return "IJoint_getNrOfDOFs";
-  case 880: return "IJoint_setAttachedLinks";
-  case 881: return "IJoint_setRestTransform";
-  case 882: return "IJoint_getFirstAttachedLink";
-  case 883: return "IJoint_getSecondAttachedLink";
-  case 884: return "IJoint_getRestTransform";
-  case 885: return "IJoint_getTransform";
-  case 886: return "IJoint_getTransformDerivative";
-  case 887: return "IJoint_getMotionSubspaceVector";
-  case 888: return "IJoint_computeChildPosVelAcc";
-  case 889: return "IJoint_computeChildVelAcc";
-  case 890: return "IJoint_computeChildVel";
-  case 891: return "IJoint_computeChildAcc";
-  case 892: return "IJoint_computeChildBiasAcc";
-  case 893: return "IJoint_computeJointTorque";
-  case 894: return "IJoint_setIndex";
-  case 895: return "IJoint_getIndex";
-  case 896: return "IJoint_setPosCoordsOffset";
-  case 897: return "IJoint_getPosCoordsOffset";
-  case 898: return "IJoint_setDOFsOffset";
-  case 899: return "IJoint_getDOFsOffset";
-  case 900: return "IJoint_hasPosLimits";
-  case 901: return "IJoint_enablePosLimits";
-  case 902: return "IJoint_getPosLimits";
-  case 903: return "IJoint_getMinPosLimit";
-  case 904: return "IJoint_getMaxPosLimit";
-  case 905: return "IJoint_setPosLimits";
-  case 906: return "IJoint_isRevoluteJoint";
-  case 907: return "IJoint_isFixedJoint";
-  case 908: return "IJoint_asRevoluteJoint";
-  case 909: return "IJoint_asFixedJoint";
-  case 910: return "delete_FixedJoint";
-  case 911: return "FixedJoint_clone";
-  case 912: return "FixedJoint_getNrOfPosCoords";
-  case 913: return "FixedJoint_getNrOfDOFs";
-  case 914: return "FixedJoint_setAttachedLinks";
-  case 915: return "FixedJoint_setRestTransform";
-  case 916: return "FixedJoint_getFirstAttachedLink";
-  case 917: return "FixedJoint_getSecondAttachedLink";
-  case 918: return "FixedJoint_getRestTransform";
-  case 919: return "FixedJoint_getTransform";
-  case 920: return "FixedJoint_getTransformDerivative";
-  case 921: return "FixedJoint_getMotionSubspaceVector";
-  case 922: return "FixedJoint_computeChildPosVelAcc";
-  case 923: return "FixedJoint_computeChildVelAcc";
-  case 924: return "FixedJoint_computeChildVel";
-  case 925: return "FixedJoint_computeChildAcc";
-  case 926: return "FixedJoint_computeChildBiasAcc";
-  case 927: return "FixedJoint_computeJointTorque";
-  case 928: return "FixedJoint_setIndex";
-  case 929: return "FixedJoint_getIndex";
-  case 930: return "FixedJoint_setPosCoordsOffset";
-  case 931: return "FixedJoint_getPosCoordsOffset";
-  case 932: return "FixedJoint_setDOFsOffset";
-  case 933: return "FixedJoint_getDOFsOffset";
-  case 934: return "FixedJoint_hasPosLimits";
-  case 935: return "FixedJoint_enablePosLimits";
-  case 936: return "FixedJoint_getPosLimits";
-  case 937: return "FixedJoint_getMinPosLimit";
-  case 938: return "FixedJoint_getMaxPosLimit";
-  case 939: return "FixedJoint_setPosLimits";
-  case 940: return "delete_MovableJointImpl1";
-  case 941: return "MovableJointImpl1_getNrOfPosCoords";
-  case 942: return "MovableJointImpl1_getNrOfDOFs";
-  case 943: return "MovableJointImpl1_setIndex";
-  case 944: return "MovableJointImpl1_getIndex";
-  case 945: return "MovableJointImpl1_setPosCoordsOffset";
-  case 946: return "MovableJointImpl1_getPosCoordsOffset";
-  case 947: return "MovableJointImpl1_setDOFsOffset";
-  case 948: return "MovableJointImpl1_getDOFsOffset";
-  case 949: return "delete_MovableJointImpl2";
-  case 950: return "MovableJointImpl2_getNrOfPosCoords";
-  case 951: return "MovableJointImpl2_getNrOfDOFs";
-  case 952: return "MovableJointImpl2_setIndex";
-  case 953: return "MovableJointImpl2_getIndex";
-  case 954: return "MovableJointImpl2_setPosCoordsOffset";
-  case 955: return "MovableJointImpl2_getPosCoordsOffset";
-  case 956: return "MovableJointImpl2_setDOFsOffset";
-  case 957: return "MovableJointImpl2_getDOFsOffset";
-  case 958: return "delete_MovableJointImpl3";
-  case 959: return "MovableJointImpl3_getNrOfPosCoords";
-  case 960: return "MovableJointImpl3_getNrOfDOFs";
-  case 961: return "MovableJointImpl3_setIndex";
-  case 962: return "MovableJointImpl3_getIndex";
-  case 963: return "MovableJointImpl3_setPosCoordsOffset";
-  case 964: return "MovableJointImpl3_getPosCoordsOffset";
-  case 965: return "MovableJointImpl3_setDOFsOffset";
-  case 966: return "MovableJointImpl3_getDOFsOffset";
-  case 967: return "delete_MovableJointImpl4";
-  case 968: return "MovableJointImpl4_getNrOfPosCoords";
-  case 969: return "MovableJointImpl4_getNrOfDOFs";
-  case 970: return "MovableJointImpl4_setIndex";
-  case 971: return "MovableJointImpl4_getIndex";
-  case 972: return "MovableJointImpl4_setPosCoordsOffset";
-  case 973: return "MovableJointImpl4_getPosCoordsOffset";
-  case 974: return "MovableJointImpl4_setDOFsOffset";
-  case 975: return "MovableJointImpl4_getDOFsOffset";
-  case 976: return "delete_MovableJointImpl5";
-  case 977: return "MovableJointImpl5_getNrOfPosCoords";
-  case 978: return "MovableJointImpl5_getNrOfDOFs";
-  case 979: return "MovableJointImpl5_setIndex";
-  case 980: return "MovableJointImpl5_getIndex";
-  case 981: return "MovableJointImpl5_setPosCoordsOffset";
-  case 982: return "MovableJointImpl5_getPosCoordsOffset";
-  case 983: return "MovableJointImpl5_setDOFsOffset";
-  case 984: return "MovableJointImpl5_getDOFsOffset";
-  case 985: return "delete_MovableJointImpl6";
-  case 986: return "MovableJointImpl6_getNrOfPosCoords";
-  case 987: return "MovableJointImpl6_getNrOfDOFs";
-  case 988: return "MovableJointImpl6_setIndex";
-  case 989: return "MovableJointImpl6_getIndex";
-  case 990: return "MovableJointImpl6_setPosCoordsOffset";
-  case 991: return "MovableJointImpl6_getPosCoordsOffset";
-  case 992: return "MovableJointImpl6_setDOFsOffset";
-  case 993: return "MovableJointImpl6_getDOFsOffset";
-  case 994: return "delete_RevoluteJoint";
-  case 995: return "RevoluteJoint_clone";
-  case 996: return "RevoluteJoint_setAttachedLinks";
-  case 997: return "RevoluteJoint_setRestTransform";
-  case 998: return "RevoluteJoint_setAxis";
-  case 999: return "RevoluteJoint_getFirstAttachedLink";
-  case 1000: return "RevoluteJoint_getSecondAttachedLink";
-  case 1001: return "RevoluteJoint_getAxis";
-  case 1002: return "RevoluteJoint_getRestTransform";
-  case 1003: return "RevoluteJoint_getTransform";
-  case 1004: return "RevoluteJoint_getTransformDerivative";
-  case 1005: return "RevoluteJoint_getMotionSubspaceVector";
-  case 1006: return "RevoluteJoint_computeChildPosVelAcc";
-  case 1007: return "RevoluteJoint_computeChildVel";
-  case 1008: return "RevoluteJoint_computeChildVelAcc";
-  case 1009: return "RevoluteJoint_computeChildAcc";
-  case 1010: return "RevoluteJoint_computeChildBiasAcc";
-  case 1011: return "RevoluteJoint_computeJointTorque";
-  case 1012: return "RevoluteJoint_hasPosLimits";
-  case 1013: return "RevoluteJoint_enablePosLimits";
-  case 1014: return "RevoluteJoint_getPosLimits";
-  case 1015: return "RevoluteJoint_getMinPosLimit";
-  case 1016: return "RevoluteJoint_getMaxPosLimit";
-  case 1017: return "RevoluteJoint_setPosLimits";
-  case 1018: return "new_Traversal";
-  case 1019: return "delete_Traversal";
-  case 1020: return "Traversal_getNrOfVisitedLinks";
-  case 1021: return "Traversal_getLink";
-  case 1022: return "Traversal_getBaseLink";
-  case 1023: return "Traversal_getParentLink";
-  case 1024: return "Traversal_getParentJoint";
-  case 1025: return "Traversal_getParentLinkFromLinkIndex";
-  case 1026: return "Traversal_getParentJointFromLinkIndex";
-  case 1027: return "Traversal_getTraversalIndexFromLinkIndex";
-  case 1028: return "Traversal_reset";
-  case 1029: return "Traversal_addTraversalBase";
-  case 1030: return "Traversal_addTraversalElement";
-  case 1031: return "Traversal_isParentOf";
-  case 1032: return "Traversal_getChildLinkIndexFromJointIndex";
-  case 1033: return "Traversal_toString";
-  case 1034: return "delete_SolidShape";
-  case 1035: return "SolidShape_clone";
-  case 1036: return "SolidShape_name_get";
-  case 1037: return "SolidShape_name_set";
-  case 1038: return "SolidShape_link_H_geometry_get";
-  case 1039: return "SolidShape_link_H_geometry_set";
-  case 1040: return "SolidShape_material_get";
-  case 1041: return "SolidShape_material_set";
-  case 1042: return "SolidShape_isSphere";
-  case 1043: return "SolidShape_isBox";
-  case 1044: return "SolidShape_isCylinder";
-  case 1045: return "SolidShape_isExternalMesh";
-  case 1046: return "SolidShape_asSphere";
-  case 1047: return "SolidShape_asBox";
-  case 1048: return "SolidShape_asCylinder";
-  case 1049: return "SolidShape_asExternalMesh";
-  case 1050: return "delete_Sphere";
-  case 1051: return "Sphere_clone";
-  case 1052: return "Sphere_radius_get";
-  case 1053: return "Sphere_radius_set";
-  case 1054: return "new_Sphere";
-  case 1055: return "delete_Box";
-  case 1056: return "Box_clone";
-  case 1057: return "Box_x_get";
-  case 1058: return "Box_x_set";
-  case 1059: return "Box_y_get";
-  case 1060: return "Box_y_set";
-  case 1061: return "Box_z_get";
-  case 1062: return "Box_z_set";
-  case 1063: return "new_Box";
-  case 1064: return "delete_Cylinder";
-  case 1065: return "Cylinder_clone";
-  case 1066: return "Cylinder_length_get";
-  case 1067: return "Cylinder_length_set";
-  case 1068: return "Cylinder_radius_get";
-  case 1069: return "Cylinder_radius_set";
-  case 1070: return "new_Cylinder";
-  case 1071: return "delete_ExternalMesh";
-  case 1072: return "ExternalMesh_clone";
-  case 1073: return "ExternalMesh_filename_get";
-  case 1074: return "ExternalMesh_filename_set";
-  case 1075: return "ExternalMesh_scale_get";
-  case 1076: return "ExternalMesh_scale_set";
-  case 1077: return "new_ExternalMesh";
-  case 1078: return "new_ModelSolidShapes";
-  case 1079: return "ModelSolidShapes_clear";
-  case 1080: return "delete_ModelSolidShapes";
-  case 1081: return "ModelSolidShapes_resize";
-  case 1082: return "ModelSolidShapes_isConsistent";
-  case 1083: return "ModelSolidShapes_linkSolidShapes_get";
-  case 1084: return "ModelSolidShapes_linkSolidShapes_set";
-  case 1085: return "Neighbor_neighborLink_get";
-  case 1086: return "Neighbor_neighborLink_set";
-  case 1087: return "Neighbor_neighborJoint_get";
-  case 1088: return "Neighbor_neighborJoint_set";
-  case 1089: return "new_Neighbor";
-  case 1090: return "delete_Neighbor";
-  case 1091: return "new_Model";
-  case 1092: return "Model_copy";
-  case 1093: return "delete_Model";
-  case 1094: return "Model_getNrOfLinks";
-  case 1095: return "Model_getLinkName";
-  case 1096: return "Model_getLinkIndex";
-  case 1097: return "Model_isValidLinkIndex";
-  case 1098: return "Model_getLink";
-  case 1099: return "Model_addLink";
-  case 1100: return "Model_getNrOfJoints";
-  case 1101: return "Model_getJointName";
-  case 1102: return "Model_getJointIndex";
-  case 1103: return "Model_getJoint";
-  case 1104: return "Model_isValidJointIndex";
-  case 1105: return "Model_isLinkNameUsed";
-  case 1106: return "Model_isJointNameUsed";
-  case 1107: return "Model_isFrameNameUsed";
-  case 1108: return "Model_addJoint";
-  case 1109: return "Model_addJointAndLink";
-  case 1110: return "Model_getNrOfPosCoords";
-  case 1111: return "Model_getNrOfDOFs";
-  case 1112: return "Model_getNrOfFrames";
-  case 1113: return "Model_addAdditionalFrameToLink";
-  case 1114: return "Model_getFrameName";
-  case 1115: return "Model_getFrameIndex";
-  case 1116: return "Model_isValidFrameIndex";
-  case 1117: return "Model_getFrameTransform";
-  case 1118: return "Model_getFrameLink";
-  case 1119: return "Model_getNrOfNeighbors";
-  case 1120: return "Model_getNeighbor";
-  case 1121: return "Model_setDefaultBaseLink";
-  case 1122: return "Model_getDefaultBaseLink";
-  case 1123: return "Model_computeFullTreeTraversal";
-  case 1124: return "Model_getInertialParameters";
-  case 1125: return "Model_updateInertialParameters";
-  case 1126: return "Model_visualSolidShapes";
-  case 1127: return "Model_collisionSolidShapes";
-  case 1128: return "Model_toString";
-  case 1129: return "new_JointPosDoubleArray";
-  case 1130: return "JointPosDoubleArray_resize";
-  case 1131: return "JointPosDoubleArray_isConsistent";
-  case 1132: return "delete_JointPosDoubleArray";
-  case 1133: return "new_JointDOFsDoubleArray";
-  case 1134: return "JointDOFsDoubleArray_resize";
-  case 1135: return "JointDOFsDoubleArray_isConsistent";
-  case 1136: return "delete_JointDOFsDoubleArray";
-  case 1137: return "new_DOFSpatialForceArray";
-  case 1138: return "DOFSpatialForceArray_resize";
-  case 1139: return "DOFSpatialForceArray_isConsistent";
-  case 1140: return "DOFSpatialForceArray_paren";
-  case 1141: return "delete_DOFSpatialForceArray";
-  case 1142: return "new_DOFSpatialMotionArray";
-  case 1143: return "DOFSpatialMotionArray_resize";
-  case 1144: return "DOFSpatialMotionArray_isConsistent";
-  case 1145: return "DOFSpatialMotionArray_paren";
-  case 1146: return "delete_DOFSpatialMotionArray";
-  case 1147: return "new_FrameFreeFloatingJacobian";
-  case 1148: return "FrameFreeFloatingJacobian_resize";
-  case 1149: return "FrameFreeFloatingJacobian_isConsistent";
-  case 1150: return "delete_FrameFreeFloatingJacobian";
-  case 1151: return "new_MomentumFreeFloatingJacobian";
-  case 1152: return "MomentumFreeFloatingJacobian_resize";
-  case 1153: return "MomentumFreeFloatingJacobian_isConsistent";
-  case 1154: return "delete_MomentumFreeFloatingJacobian";
-  case 1155: return "new_FreeFloatingMassMatrix";
-  case 1156: return "FreeFloatingMassMatrix_resize";
-  case 1157: return "delete_FreeFloatingMassMatrix";
-  case 1158: return "new_FreeFloatingPos";
-  case 1159: return "FreeFloatingPos_resize";
-  case 1160: return "FreeFloatingPos_worldBasePos";
-  case 1161: return "FreeFloatingPos_jointPos";
-  case 1162: return "FreeFloatingPos_getNrOfPosCoords";
-  case 1163: return "delete_FreeFloatingPos";
-  case 1164: return "new_FreeFloatingGeneralizedTorques";
-  case 1165: return "FreeFloatingGeneralizedTorques_resize";
-  case 1166: return "FreeFloatingGeneralizedTorques_baseWrench";
-  case 1167: return "FreeFloatingGeneralizedTorques_jointTorques";
-  case 1168: return "FreeFloatingGeneralizedTorques_getNrOfDOFs";
-  case 1169: return "delete_FreeFloatingGeneralizedTorques";
-  case 1170: return "new_FreeFloatingVel";
-  case 1171: return "FreeFloatingVel_resize";
-  case 1172: return "FreeFloatingVel_baseVel";
-  case 1173: return "FreeFloatingVel_jointVel";
-  case 1174: return "FreeFloatingVel_getNrOfDOFs";
-  case 1175: return "delete_FreeFloatingVel";
-  case 1176: return "new_FreeFloatingAcc";
-  case 1177: return "FreeFloatingAcc_resize";
-  case 1178: return "FreeFloatingAcc_baseAcc";
-  case 1179: return "FreeFloatingAcc_jointAcc";
-  case 1180: return "FreeFloatingAcc_getNrOfDOFs";
-  case 1181: return "delete_FreeFloatingAcc";
-  case 1182: return "ContactWrench_contactId";
-  case 1183: return "ContactWrench_contactPoint";
-  case 1184: return "ContactWrench_contactWrench";
-  case 1185: return "new_ContactWrench";
-  case 1186: return "delete_ContactWrench";
-  case 1187: return "new_LinkContactWrenches";
-  case 1188: return "LinkContactWrenches_resize";
-  case 1189: return "LinkContactWrenches_getNrOfContactsForLink";
-  case 1190: return "LinkContactWrenches_setNrOfContactsForLink";
-  case 1191: return "LinkContactWrenches_getNrOfLinks";
-  case 1192: return "LinkContactWrenches_contactWrench";
-  case 1193: return "LinkContactWrenches_computeNetWrenches";
-  case 1194: return "LinkContactWrenches_toString";
-  case 1195: return "delete_LinkContactWrenches";
-  case 1196: return "_wrap_ForwardPositionKinematics";
-  case 1197: return "_wrap_ForwardVelAccKinematics";
-  case 1198: return "_wrap_ForwardPosVelAccKinematics";
-  case 1199: return "_wrap_ForwardPosVelKinematics";
-  case 1200: return "_wrap_ForwardAccKinematics";
-  case 1201: return "_wrap_ForwardBiasAccKinematics";
-  case 1202: return "_wrap_ComputeLinearAndAngularMomentum";
-  case 1203: return "_wrap_ComputeLinearAndAngularMomentumDerivativeBias";
-  case 1204: return "_wrap_RNEADynamicPhase";
-  case 1205: return "_wrap_CompositeRigidBodyAlgorithm";
-  case 1206: return "new_ArticulatedBodyAlgorithmInternalBuffers";
-  case 1207: return "ArticulatedBodyAlgorithmInternalBuffers_resize";
-  case 1208: return "ArticulatedBodyAlgorithmInternalBuffers_isConsistent";
-  case 1209: return "ArticulatedBodyAlgorithmInternalBuffers_S_get";
-  case 1210: return "ArticulatedBodyAlgorithmInternalBuffers_S_set";
-  case 1211: return "ArticulatedBodyAlgorithmInternalBuffers_U_get";
-  case 1212: return "ArticulatedBodyAlgorithmInternalBuffers_U_set";
-  case 1213: return "ArticulatedBodyAlgorithmInternalBuffers_D_get";
-  case 1214: return "ArticulatedBodyAlgorithmInternalBuffers_D_set";
-  case 1215: return "ArticulatedBodyAlgorithmInternalBuffers_u_get";
-  case 1216: return "ArticulatedBodyAlgorithmInternalBuffers_u_set";
-  case 1217: return "ArticulatedBodyAlgorithmInternalBuffers_linksVel_get";
-  case 1218: return "ArticulatedBodyAlgorithmInternalBuffers_linksVel_set";
-  case 1219: return "ArticulatedBodyAlgorithmInternalBuffers_linksBiasAcceleration_get";
-  case 1220: return "ArticulatedBodyAlgorithmInternalBuffers_linksBiasAcceleration_set";
-  case 1221: return "ArticulatedBodyAlgorithmInternalBuffers_linksAccelerations_get";
-  case 1222: return "ArticulatedBodyAlgorithmInternalBuffers_linksAccelerations_set";
-  case 1223: return "ArticulatedBodyAlgorithmInternalBuffers_linkABIs_get";
-  case 1224: return "ArticulatedBodyAlgorithmInternalBuffers_linkABIs_set";
-  case 1225: return "ArticulatedBodyAlgorithmInternalBuffers_linksBiasWrench_get";
-  case 1226: return "ArticulatedBodyAlgorithmInternalBuffers_linksBiasWrench_set";
-  case 1227: return "delete_ArticulatedBodyAlgorithmInternalBuffers";
-  case 1228: return "_wrap_ArticulatedBodyAlgorithm";
-  case 1229: return "NR_OF_SENSOR_TYPES_get";
-  case 1230: return "_wrap_isLinkSensor";
-  case 1231: return "_wrap_isJointSensor";
-  case 1232: return "_wrap_getSensorTypeSize";
-  case 1233: return "delete_Sensor";
-  case 1234: return "Sensor_getName";
-  case 1235: return "Sensor_getSensorType";
-  case 1236: return "Sensor_isValid";
-  case 1237: return "Sensor_setName";
-  case 1238: return "Sensor_clone";
-  case 1239: return "Sensor_updateIndices";
-  case 1240: return "Sensor_updateIndeces";
-  case 1241: return "delete_JointSensor";
-  case 1242: return "JointSensor_getParentJoint";
-  case 1243: return "JointSensor_getParentJointIndex";
-  case 1244: return "JointSensor_setParentJoint";
-  case 1245: return "JointSensor_setParentJointIndex";
-  case 1246: return "delete_LinkSensor";
-  case 1247: return "LinkSensor_getParentLink";
-  case 1248: return "LinkSensor_getParentLinkIndex";
-  case 1249: return "LinkSensor_getLinkSensorTransform";
-  case 1250: return "LinkSensor_setParentLink";
-  case 1251: return "LinkSensor_setParentLinkIndex";
-  case 1252: return "LinkSensor_setLinkSensorTransform";
-  case 1253: return "new_SensorsList";
-  case 1254: return "delete_SensorsList";
-  case 1255: return "SensorsList_addSensor";
-  case 1256: return "SensorsList_setSerialization";
-  case 1257: return "SensorsList_getSerialization";
-  case 1258: return "SensorsList_getNrOfSensors";
-  case 1259: return "SensorsList_getSensorIndex";
-  case 1260: return "SensorsList_getSizeOfAllSensorsMeasurements";
-  case 1261: return "SensorsList_getSensor";
-  case 1262: return "SensorsList_removeSensor";
-  case 1263: return "SensorsList_removeAllSensorsOfType";
-  case 1264: return "SensorsList_getSixAxisForceTorqueSensor";
-  case 1265: return "SensorsList_getAccelerometerSensor";
-  case 1266: return "SensorsList_getGyroscopeSensor";
-  case 1267: return "new_SensorsMeasurements";
-  case 1268: return "delete_SensorsMeasurements";
-  case 1269: return "SensorsMeasurements_setNrOfSensors";
-  case 1270: return "SensorsMeasurements_getNrOfSensors";
-  case 1271: return "SensorsMeasurements_resize";
-  case 1272: return "SensorsMeasurements_toVector";
-  case 1273: return "SensorsMeasurements_setMeasurement";
-  case 1274: return "SensorsMeasurements_getMeasurement";
-  case 1275: return "SensorsMeasurements_getSizeOfAllSensorsMeasurements";
-  case 1276: return "new_SixAxisForceTorqueSensor";
-  case 1277: return "delete_SixAxisForceTorqueSensor";
-  case 1278: return "SixAxisForceTorqueSensor_setName";
-  case 1279: return "SixAxisForceTorqueSensor_setFirstLinkSensorTransform";
-  case 1280: return "SixAxisForceTorqueSensor_setSecondLinkSensorTransform";
-  case 1281: return "SixAxisForceTorqueSensor_getFirstLinkIndex";
-  case 1282: return "SixAxisForceTorqueSensor_getSecondLinkIndex";
-  case 1283: return "SixAxisForceTorqueSensor_setFirstLinkName";
-  case 1284: return "SixAxisForceTorqueSensor_setSecondLinkName";
-  case 1285: return "SixAxisForceTorqueSensor_getFirstLinkName";
-  case 1286: return "SixAxisForceTorqueSensor_getSecondLinkName";
-  case 1287: return "SixAxisForceTorqueSensor_setParentJoint";
-  case 1288: return "SixAxisForceTorqueSensor_setParentJointIndex";
-  case 1289: return "SixAxisForceTorqueSensor_setAppliedWrenchLink";
-  case 1290: return "SixAxisForceTorqueSensor_getName";
-  case 1291: return "SixAxisForceTorqueSensor_getSensorType";
-  case 1292: return "SixAxisForceTorqueSensor_getParentJoint";
-  case 1293: return "SixAxisForceTorqueSensor_getParentJointIndex";
-  case 1294: return "SixAxisForceTorqueSensor_isValid";
-  case 1295: return "SixAxisForceTorqueSensor_clone";
-  case 1296: return "SixAxisForceTorqueSensor_updateIndices";
-  case 1297: return "SixAxisForceTorqueSensor_updateIndeces";
-  case 1298: return "SixAxisForceTorqueSensor_getAppliedWrenchLink";
-  case 1299: return "SixAxisForceTorqueSensor_isLinkAttachedToSensor";
-  case 1300: return "SixAxisForceTorqueSensor_getLinkSensorTransform";
-  case 1301: return "SixAxisForceTorqueSensor_getWrenchAppliedOnLink";
-  case 1302: return "SixAxisForceTorqueSensor_getWrenchAppliedOnLinkMatrix";
-  case 1303: return "SixAxisForceTorqueSensor_getWrenchAppliedOnLinkInverseMatrix";
-  case 1304: return "SixAxisForceTorqueSensor_predictMeasurement";
-  case 1305: return "SixAxisForceTorqueSensor_toString";
-  case 1306: return "new_AccelerometerSensor";
-  case 1307: return "delete_AccelerometerSensor";
-  case 1308: return "AccelerometerSensor_setName";
-  case 1309: return "AccelerometerSensor_setLinkSensorTransform";
-  case 1310: return "AccelerometerSensor_setParentLink";
-  case 1311: return "AccelerometerSensor_setParentLinkIndex";
-  case 1312: return "AccelerometerSensor_getName";
-  case 1313: return "AccelerometerSensor_getSensorType";
-  case 1314: return "AccelerometerSensor_getParentLink";
-  case 1315: return "AccelerometerSensor_getParentLinkIndex";
-  case 1316: return "AccelerometerSensor_getLinkSensorTransform";
-  case 1317: return "AccelerometerSensor_isValid";
-  case 1318: return "AccelerometerSensor_clone";
-  case 1319: return "AccelerometerSensor_updateIndices";
-  case 1320: return "AccelerometerSensor_updateIndeces";
-  case 1321: return "AccelerometerSensor_predictMeasurement";
-  case 1322: return "new_GyroscopeSensor";
-  case 1323: return "delete_GyroscopeSensor";
-  case 1324: return "GyroscopeSensor_setName";
-  case 1325: return "GyroscopeSensor_setLinkSensorTransform";
-  case 1326: return "GyroscopeSensor_setParentLink";
-  case 1327: return "GyroscopeSensor_setParentLinkIndex";
-  case 1328: return "GyroscopeSensor_getName";
-  case 1329: return "GyroscopeSensor_getSensorType";
-  case 1330: return "GyroscopeSensor_getParentLink";
-  case 1331: return "GyroscopeSensor_getParentLinkIndex";
-  case 1332: return "GyroscopeSensor_getLinkSensorTransform";
-  case 1333: return "GyroscopeSensor_isValid";
-  case 1334: return "GyroscopeSensor_clone";
-  case 1335: return "GyroscopeSensor_updateIndices";
-  case 1336: return "GyroscopeSensor_updateIndeces";
-  case 1337: return "GyroscopeSensor_predictMeasurement";
-  case 1338: return "_wrap_predictSensorsMeasurements";
-  case 1339: return "_wrap_predictSensorsMeasurementsFromRawBuffers";
-  case 1340: return "URDFParserOptions_addSensorFramesAsAdditionalFrames_get";
-  case 1341: return "URDFParserOptions_addSensorFramesAsAdditionalFrames_set";
-  case 1342: return "URDFParserOptions_originalFilename_get";
-  case 1343: return "URDFParserOptions_originalFilename_set";
-  case 1344: return "new_URDFParserOptions";
-  case 1345: return "delete_URDFParserOptions";
-  case 1346: return "_wrap_modelFromURDF";
-  case 1347: return "_wrap_modelFromURDFString";
-  case 1348: return "_wrap_dofsListFromURDF";
-  case 1349: return "_wrap_dofsListFromURDFString";
-  case 1350: return "_wrap_sensorsFromURDF";
-  case 1351: return "_wrap_sensorsFromURDFString";
-  case 1352: return "new_ModelLoader";
-  case 1353: return "ModelLoader_loadModelFromString";
-  case 1354: return "ModelLoader_loadModelFromFile";
-  case 1355: return "ModelLoader_loadReducedModelFromFullModel";
-  case 1356: return "ModelLoader_loadReducedModelFromString";
-  case 1357: return "ModelLoader_loadReducedModelFromFile";
-  case 1358: return "ModelLoader_model";
-  case 1359: return "ModelLoader_sensors";
-  case 1360: return "ModelLoader_isValid";
-  case 1361: return "delete_ModelLoader";
-  case 1362: return "new_UnknownWrenchContact";
-  case 1363: return "UnknownWrenchContact_unknownType_get";
-  case 1364: return "UnknownWrenchContact_unknownType_set";
-  case 1365: return "UnknownWrenchContact_contactPoint_get";
-  case 1366: return "UnknownWrenchContact_contactPoint_set";
-  case 1367: return "UnknownWrenchContact_forceDirection_get";
-  case 1368: return "UnknownWrenchContact_forceDirection_set";
-  case 1369: return "UnknownWrenchContact_knownWrench_get";
-  case 1370: return "UnknownWrenchContact_knownWrench_set";
-  case 1371: return "UnknownWrenchContact_contactId_get";
-  case 1372: return "UnknownWrenchContact_contactId_set";
-  case 1373: return "delete_UnknownWrenchContact";
-  case 1374: return "new_LinkUnknownWrenchContacts";
-  case 1375: return "LinkUnknownWrenchContacts_clear";
-  case 1376: return "LinkUnknownWrenchContacts_resize";
-  case 1377: return "LinkUnknownWrenchContacts_getNrOfContactsForLink";
-  case 1378: return "LinkUnknownWrenchContacts_setNrOfContactsForLink";
-  case 1379: return "LinkUnknownWrenchContacts_addNewContactForLink";
-  case 1380: return "LinkUnknownWrenchContacts_addNewContactInFrame";
-  case 1381: return "LinkUnknownWrenchContacts_addNewUnknownFullWrenchInFrameOrigin";
-  case 1382: return "LinkUnknownWrenchContacts_contactWrench";
-  case 1383: return "LinkUnknownWrenchContacts_toString";
-  case 1384: return "delete_LinkUnknownWrenchContacts";
-  case 1385: return "new_estimateExternalWrenchesBuffers";
-  case 1386: return "estimateExternalWrenchesBuffers_resize";
-  case 1387: return "estimateExternalWrenchesBuffers_getNrOfSubModels";
-  case 1388: return "estimateExternalWrenchesBuffers_getNrOfLinks";
-  case 1389: return "estimateExternalWrenchesBuffers_isConsistent";
-  case 1390: return "estimateExternalWrenchesBuffers_A_get";
-  case 1391: return "estimateExternalWrenchesBuffers_A_set";
-  case 1392: return "estimateExternalWrenchesBuffers_x_get";
-  case 1393: return "estimateExternalWrenchesBuffers_x_set";
-  case 1394: return "estimateExternalWrenchesBuffers_b_get";
-  case 1395: return "estimateExternalWrenchesBuffers_b_set";
-  case 1396: return "estimateExternalWrenchesBuffers_pinvA_get";
-  case 1397: return "estimateExternalWrenchesBuffers_pinvA_set";
-  case 1398: return "estimateExternalWrenchesBuffers_b_contacts_subtree_get";
-  case 1399: return "estimateExternalWrenchesBuffers_b_contacts_subtree_set";
-  case 1400: return "estimateExternalWrenchesBuffers_subModelBase_H_link_get";
-  case 1401: return "estimateExternalWrenchesBuffers_subModelBase_H_link_set";
-  case 1402: return "delete_estimateExternalWrenchesBuffers";
-  case 1403: return "_wrap_estimateExternalWrenchesWithoutInternalFT";
-  case 1404: return "_wrap_estimateExternalWrenches";
-  case 1405: return "_wrap_dynamicsEstimationForwardVelAccKinematics";
-  case 1406: return "_wrap_dynamicsEstimationForwardVelKinematics";
-  case 1407: return "_wrap_computeLinkNetWrenchesWithoutGravity";
-  case 1408: return "new_ExtWrenchesAndJointTorquesEstimator";
-  case 1409: return "delete_ExtWrenchesAndJointTorquesEstimator";
-  case 1410: return "ExtWrenchesAndJointTorquesEstimator_setModelAndSensors";
-  case 1411: return "ExtWrenchesAndJointTorquesEstimator_loadModelAndSensorsFromFile";
-  case 1412: return "ExtWrenchesAndJointTorquesEstimator_loadModelAndSensorsFromFileWithSpecifiedDOFs";
-  case 1413: return "ExtWrenchesAndJointTorquesEstimator_model";
-  case 1414: return "ExtWrenchesAndJointTorquesEstimator_sensors";
-  case 1415: return "ExtWrenchesAndJointTorquesEstimator_submodels";
-  case 1416: return "ExtWrenchesAndJointTorquesEstimator_updateKinematicsFromFloatingBase";
-  case 1417: return "ExtWrenchesAndJointTorquesEstimator_updateKinematicsFromFixedBase";
-  case 1418: return "ExtWrenchesAndJointTorquesEstimator_computeExpectedFTSensorsMeasurements";
-  case 1419: return "ExtWrenchesAndJointTorquesEstimator_estimateExtWrenchesAndJointTorques";
-  case 1420: return "ExtWrenchesAndJointTorquesEstimator_checkThatTheModelIsStill";
-  case 1421: return "ExtWrenchesAndJointTorquesEstimator_estimateLinkNetWrenchesWithoutGravity";
-  case 1422: return "new_SimpleLeggedOdometry";
-  case 1423: return "delete_SimpleLeggedOdometry";
-  case 1424: return "SimpleLeggedOdometry_setModel";
-  case 1425: return "SimpleLeggedOdometry_loadModelFromFile";
-  case 1426: return "SimpleLeggedOdometry_loadModelFromFileWithSpecifiedDOFs";
-  case 1427: return "SimpleLeggedOdometry_model";
-  case 1428: return "SimpleLeggedOdometry_updateKinematics";
-  case 1429: return "SimpleLeggedOdometry_init";
-  case 1430: return "SimpleLeggedOdometry_changeFixedFrame";
-  case 1431: return "SimpleLeggedOdometry_getCurrentFixedLink";
-  case 1432: return "SimpleLeggedOdometry_getWorldLinkTransform";
-  case 1433: return "_wrap_isLinkBerdyDynamicVariable";
-  case 1434: return "_wrap_isJointBerdyDynamicVariable";
-  case 1435: return "_wrap_isDOFBerdyDynamicVariable";
-  case 1436: return "new_BerdyOptions";
-  case 1437: return "BerdyOptions_berdyVariant_get";
-  case 1438: return "BerdyOptions_berdyVariant_set";
-  case 1439: return "BerdyOptions_includeAllNetExternalWrenchesAsDynamicVariables_get";
-  case 1440: return "BerdyOptions_includeAllNetExternalWrenchesAsDynamicVariables_set";
-  case 1441: return "BerdyOptions_includeAllJointAccelerationsAsSensors_get";
-  case 1442: return "BerdyOptions_includeAllJointAccelerationsAsSensors_set";
-  case 1443: return "BerdyOptions_includeAllJointTorquesAsSensors_get";
-  case 1444: return "BerdyOptions_includeAllJointTorquesAsSensors_set";
-  case 1445: return "BerdyOptions_includeAllNetExternalWrenchesAsSensors_get";
-  case 1446: return "BerdyOptions_includeAllNetExternalWrenchesAsSensors_set";
-  case 1447: return "BerdyOptions_includeFixedBaseExternalWrench_get";
-  case 1448: return "BerdyOptions_includeFixedBaseExternalWrench_set";
-  case 1449: return "BerdyOptions_jointOnWhichTheInternalWrenchIsMeasured_get";
-  case 1450: return "BerdyOptions_jointOnWhichTheInternalWrenchIsMeasured_set";
-  case 1451: return "BerdyOptions_baseLink_get";
-  case 1452: return "BerdyOptions_baseLink_set";
-  case 1453: return "BerdyOptions_checkConsistency";
-  case 1454: return "delete_BerdyOptions";
-  case 1455: return "BerdySensor_type_get";
-  case 1456: return "BerdySensor_type_set";
-  case 1457: return "BerdySensor_id_get";
-  case 1458: return "BerdySensor_id_set";
-  case 1459: return "BerdySensor_range_get";
-  case 1460: return "BerdySensor_range_set";
-  case 1461: return "BerdySensor_eq";
-  case 1462: return "BerdySensor_lt";
-  case 1463: return "new_BerdySensor";
-  case 1464: return "delete_BerdySensor";
-  case 1465: return "BerdyDynamicVariable_type_get";
-  case 1466: return "BerdyDynamicVariable_type_set";
-  case 1467: return "BerdyDynamicVariable_id_get";
-  case 1468: return "BerdyDynamicVariable_id_set";
-  case 1469: return "BerdyDynamicVariable_range_get";
-  case 1470: return "BerdyDynamicVariable_range_set";
-  case 1471: return "BerdyDynamicVariable_eq";
-  case 1472: return "BerdyDynamicVariable_lt";
-  case 1473: return "new_BerdyDynamicVariable";
-  case 1474: return "delete_BerdyDynamicVariable";
-  case 1475: return "new_BerdyHelper";
-  case 1476: return "BerdyHelper_dynamicTraversal";
-  case 1477: return "BerdyHelper_model";
-  case 1478: return "BerdyHelper_sensors";
-  case 1479: return "BerdyHelper_isValid";
-  case 1480: return "BerdyHelper_init";
-  case 1481: return "BerdyHelper_getOptions";
-  case 1482: return "BerdyHelper_getNrOfDynamicVariables";
-  case 1483: return "BerdyHelper_getNrOfDynamicEquations";
-  case 1484: return "BerdyHelper_getNrOfSensorsMeasurements";
-  case 1485: return "BerdyHelper_resizeAndZeroBerdyMatrices";
-  case 1486: return "BerdyHelper_getBerdyMatrices";
-  case 1487: return "BerdyHelper_getSensorsOrdering";
-  case 1488: return "BerdyHelper_getDynamicVariablesOrdering";
-  case 1489: return "BerdyHelper_serializeDynamicVariables";
-  case 1490: return "BerdyHelper_serializeSensorVariables";
-  case 1491: return "BerdyHelper_serializeDynamicVariablesComputedFromFixedBaseRNEA";
-  case 1492: return "BerdyHelper_updateKinematicsFromFloatingBase";
-  case 1493: return "BerdyHelper_updateKinematicsFromFixedBase";
-  case 1494: return "BerdyHelper_updateKinematicsFromTraversalFixedBase";
-  case 1495: return "delete_BerdyHelper";
-  case 1496: return "new_BerdySparseMAPSolver";
-  case 1497: return "delete_BerdySparseMAPSolver";
-  case 1498: return "BerdySparseMAPSolver_setDynamicsConstraintsPriorCovariance";
-  case 1499: return "BerdySparseMAPSolver_setDynamicsRegularizationPriorCovariance";
-  case 1500: return "BerdySparseMAPSolver_setDynamicsRegularizationPriorExpectedValue";
-  case 1501: return "BerdySparseMAPSolver_setMeasurementsPriorCovariance";
-  case 1502: return "BerdySparseMAPSolver_dynamicsConstraintsPriorCovarianceInverse";
-  case 1503: return "BerdySparseMAPSolver_dynamicsRegularizationPriorCovarianceInverse";
-  case 1504: return "BerdySparseMAPSolver_dynamicsRegularizationPriorExpectedValue";
-  case 1505: return "BerdySparseMAPSolver_measurementsPriorCovarianceInverse";
-  case 1506: return "BerdySparseMAPSolver_isValid";
-  case 1507: return "BerdySparseMAPSolver_initialize";
-  case 1508: return "BerdySparseMAPSolver_updateEstimateInformation";
-  case 1509: return "BerdySparseMAPSolver_doEstimate";
-  case 1510: return "BerdySparseMAPSolver_getLastEstimate";
-  case 1511: return "DynamicsRegressorParameter_category_get";
-  case 1512: return "DynamicsRegressorParameter_category_set";
-  case 1513: return "DynamicsRegressorParameter_elemIndex_get";
-  case 1514: return "DynamicsRegressorParameter_elemIndex_set";
-  case 1515: return "DynamicsRegressorParameter_type_get";
-  case 1516: return "DynamicsRegressorParameter_type_set";
-  case 1517: return "DynamicsRegressorParameter_lt";
-  case 1518: return "DynamicsRegressorParameter_eq";
-  case 1519: return "DynamicsRegressorParameter_ne";
-  case 1520: return "new_DynamicsRegressorParameter";
-  case 1521: return "delete_DynamicsRegressorParameter";
-  case 1522: return "DynamicsRegressorParametersList_parameters_get";
-  case 1523: return "DynamicsRegressorParametersList_parameters_set";
-  case 1524: return "DynamicsRegressorParametersList_getDescriptionOfParameter";
-  case 1525: return "DynamicsRegressorParametersList_addParam";
-  case 1526: return "DynamicsRegressorParametersList_addList";
-  case 1527: return "DynamicsRegressorParametersList_findParam";
-  case 1528: return "DynamicsRegressorParametersList_getNrOfParameters";
-  case 1529: return "new_DynamicsRegressorParametersList";
-  case 1530: return "delete_DynamicsRegressorParametersList";
-  case 1531: return "new_DynamicsRegressorGenerator";
-  case 1532: return "delete_DynamicsRegressorGenerator";
-  case 1533: return "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile";
-  case 1534: return "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString";
-  case 1535: return "DynamicsRegressorGenerator_loadRegressorStructureFromFile";
-  case 1536: return "DynamicsRegressorGenerator_loadRegressorStructureFromString";
-  case 1537: return "DynamicsRegressorGenerator_isValid";
-  case 1538: return "DynamicsRegressorGenerator_getNrOfParameters";
-  case 1539: return "DynamicsRegressorGenerator_getNrOfOutputs";
-  case 1540: return "DynamicsRegressorGenerator_getNrOfDegreesOfFreedom";
-  case 1541: return "DynamicsRegressorGenerator_getDescriptionOfParameter";
-  case 1542: return "DynamicsRegressorGenerator_getDescriptionOfParameters";
-  case 1543: return "DynamicsRegressorGenerator_getDescriptionOfOutput";
-  case 1544: return "DynamicsRegressorGenerator_getDescriptionOfOutputs";
-  case 1545: return "DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom";
-  case 1546: return "DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom";
-  case 1547: return "DynamicsRegressorGenerator_getDescriptionOfLink";
-  case 1548: return "DynamicsRegressorGenerator_getDescriptionOfLinks";
-  case 1549: return "DynamicsRegressorGenerator_getNrOfLinks";
-  case 1550: return "DynamicsRegressorGenerator_getNrOfFakeLinks";
-  case 1551: return "DynamicsRegressorGenerator_getBaseLinkName";
-  case 1552: return "DynamicsRegressorGenerator_getSensorsModel";
-  case 1553: return "DynamicsRegressorGenerator_setRobotState";
-  case 1554: return "DynamicsRegressorGenerator_getSensorsMeasurements";
-  case 1555: return "DynamicsRegressorGenerator_setTorqueSensorMeasurement";
-  case 1556: return "DynamicsRegressorGenerator_computeRegressor";
-  case 1557: return "DynamicsRegressorGenerator_getModelParameters";
-  case 1558: return "DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace";
-  case 1559: return "DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace";
-  case 1560: return "DynamicsRegressorGenerator_generate_random_regressors";
-  case 1561: return "new_KinDynComputations";
-  case 1562: return "delete_KinDynComputations";
-  case 1563: return "KinDynComputations_loadRobotModel";
-  case 1564: return "KinDynComputations_loadRobotModelFromFile";
-  case 1565: return "KinDynComputations_loadRobotModelFromString";
-  case 1566: return "KinDynComputations_isValid";
-  case 1567: return "KinDynComputations_setFrameVelocityRepresentation";
-  case 1568: return "KinDynComputations_getFrameVelocityRepresentation";
-  case 1569: return "KinDynComputations_getNrOfDegreesOfFreedom";
-  case 1570: return "KinDynComputations_getDescriptionOfDegreeOfFreedom";
-  case 1571: return "KinDynComputations_getDescriptionOfDegreesOfFreedom";
-  case 1572: return "KinDynComputations_getNrOfLinks";
-  case 1573: return "KinDynComputations_getNrOfFrames";
-  case 1574: return "KinDynComputations_getFloatingBase";
-  case 1575: return "KinDynComputations_setFloatingBase";
-  case 1576: return "KinDynComputations_model";
-  case 1577: return "KinDynComputations_getRobotModel";
-  case 1578: return "KinDynComputations_setJointPos";
-  case 1579: return "KinDynComputations_setRobotState";
-  case 1580: return "KinDynComputations_getRobotState";
-  case 1581: return "KinDynComputations_getWorldBaseTransform";
-  case 1582: return "KinDynComputations_getBaseTwist";
-  case 1583: return "KinDynComputations_getJointPos";
-  case 1584: return "KinDynComputations_getJointVel";
-  case 1585: return "KinDynComputations_getModelVel";
-  case 1586: return "KinDynComputations_getFrameIndex";
-  case 1587: return "KinDynComputations_getFrameName";
-  case 1588: return "KinDynComputations_getWorldTransform";
-  case 1589: return "KinDynComputations_getRelativeTransformExplicit";
-  case 1590: return "KinDynComputations_getRelativeTransform";
-  case 1591: return "KinDynComputations_getFrameVel";
-  case 1592: return "KinDynComputations_getFrameFreeFloatingJacobian";
-  case 1593: return "KinDynComputations_getRelativeJacobian";
-  case 1594: return "KinDynComputations_getRelativeJacobianExplicit";
-  case 1595: return "KinDynComputations_getFrameBiasAcc";
-  case 1596: return "KinDynComputations_getCenterOfMassPosition";
-  case 1597: return "KinDynComputations_getCenterOfMassVelocity";
-  case 1598: return "KinDynComputations_getCenterOfMassJacobian";
-  case 1599: return "KinDynComputations_getCenterOfMassBiasAcc";
-  case 1600: return "KinDynComputations_getAverageVelocity";
-  case 1601: return "KinDynComputations_getAverageVelocityJacobian";
-  case 1602: return "KinDynComputations_getCentroidalAverageVelocity";
-  case 1603: return "KinDynComputations_getCentroidalAverageVelocityJacobian";
-  case 1604: return "KinDynComputations_getLinearAngularMomentum";
-  case 1605: return "KinDynComputations_getLinearAngularMomentumJacobian";
-  case 1606: return "KinDynComputations_getCentroidalTotalMomentum";
-  case 1607: return "KinDynComputations_getFreeFloatingMassMatrix";
-  case 1608: return "KinDynComputations_inverseDynamics";
-  case 1609: return "KinDynComputations_generalizedBiasForces";
-  case 1610: return "KinDynComputations_generalizedGravityForces";
-  case 1611: return "delete_ICamera";
-  case 1612: return "ICamera_setPosition";
-  case 1613: return "ICamera_setTarget";
-  case 1614: return "ICamera_setUpVector";
-  case 1615: return "ColorViz_r_get";
-  case 1616: return "ColorViz_r_set";
-  case 1617: return "ColorViz_g_get";
-  case 1618: return "ColorViz_g_set";
-  case 1619: return "ColorViz_b_get";
-  case 1620: return "ColorViz_b_set";
-  case 1621: return "ColorViz_a_get";
-  case 1622: return "ColorViz_a_set";
-  case 1623: return "new_ColorViz";
-  case 1624: return "delete_ColorViz";
-  case 1625: return "delete_ILight";
-  case 1626: return "ILight_getName";
-  case 1627: return "ILight_setType";
-  case 1628: return "ILight_getType";
-  case 1629: return "ILight_setPosition";
-  case 1630: return "ILight_getPosition";
-  case 1631: return "ILight_setDirection";
-  case 1632: return "ILight_getDirection";
-  case 1633: return "ILight_setAmbientColor";
-  case 1634: return "ILight_getAmbientColor";
-  case 1635: return "ILight_setSpecularColor";
-  case 1636: return "ILight_getSpecularColor";
-  case 1637: return "ILight_setDiffuseColor";
-  case 1638: return "ILight_getDiffuseColor";
-  case 1639: return "delete_IEnvironment";
-  case 1640: return "IEnvironment_getElements";
-  case 1641: return "IEnvironment_setElementVisibility";
-  case 1642: return "IEnvironment_setBackgroundColor";
-  case 1643: return "IEnvironment_setAmbientLight";
-  case 1644: return "IEnvironment_getLights";
-  case 1645: return "IEnvironment_addLight";
-  case 1646: return "IEnvironment_lightViz";
-  case 1647: return "IEnvironment_removeLight";
-  case 1648: return "delete_IJetsVisualization";
-  case 1649: return "IJetsVisualization_setJetsFrames";
-  case 1650: return "IJetsVisualization_getNrOfJets";
-  case 1651: return "IJetsVisualization_getJetDirection";
-  case 1652: return "IJetsVisualization_setJetDirection";
-  case 1653: return "IJetsVisualization_setJetColor";
-  case 1654: return "IJetsVisualization_setJetsDimensions";
-  case 1655: return "IJetsVisualization_setJetsIntensity";
-  case 1656: return "delete_IModelVisualization";
-  case 1657: return "IModelVisualization_setPositions";
-  case 1658: return "IModelVisualization_setLinkPositions";
-  case 1659: return "IModelVisualization_model";
-  case 1660: return "IModelVisualization_getInstanceName";
-  case 1661: return "IModelVisualization_setModelVisibility";
-  case 1662: return "IModelVisualization_setModelColor";
-  case 1663: return "IModelVisualization_resetModelColor";
-  case 1664: return "IModelVisualization_getLinkNames";
-  case 1665: return "IModelVisualization_setLinkVisibility";
-  case 1666: return "IModelVisualization_getFeatures";
-  case 1667: return "IModelVisualization_setFeatureVisibility";
-  case 1668: return "IModelVisualization_jets";
-  case 1669: return "VisualizerOptions_verbose_get";
-  case 1670: return "VisualizerOptions_verbose_set";
-  case 1671: return "VisualizerOptions_winWidth_get";
-  case 1672: return "VisualizerOptions_winWidth_set";
-  case 1673: return "VisualizerOptions_winHeight_get";
-  case 1674: return "VisualizerOptions_winHeight_set";
-  case 1675: return "VisualizerOptions_rootFrameArrowsDimension_get";
-  case 1676: return "VisualizerOptions_rootFrameArrowsDimension_set";
-  case 1677: return "new_VisualizerOptions";
-  case 1678: return "delete_VisualizerOptions";
-  case 1679: return "new_Visualizer";
-  case 1680: return "delete_Visualizer";
-  case 1681: return "Visualizer_init";
-  case 1682: return "Visualizer_getNrOfVisualizedModels";
-  case 1683: return "Visualizer_getModelInstanceName";
-  case 1684: return "Visualizer_getModelInstanceIndex";
-  case 1685: return "Visualizer_addModel";
-  case 1686: return "Visualizer_modelViz";
-  case 1687: return "Visualizer_camera";
-  case 1688: return "Visualizer_enviroment";
-  case 1689: return "Visualizer_run";
-  case 1690: return "Visualizer_draw";
-  case 1691: return "Visualizer_drawToFile";
-  case 1692: return "Visualizer_close";
-  case 1693: return "new_DynamicsComputations";
-  case 1694: return "delete_DynamicsComputations";
-  case 1695: return "DynamicsComputations_loadRobotModelFromFile";
-  case 1696: return "DynamicsComputations_loadRobotModelFromString";
-  case 1697: return "DynamicsComputations_isValid";
-  case 1698: return "DynamicsComputations_getNrOfDegreesOfFreedom";
-  case 1699: return "DynamicsComputations_getDescriptionOfDegreeOfFreedom";
-  case 1700: return "DynamicsComputations_getDescriptionOfDegreesOfFreedom";
-  case 1701: return "DynamicsComputations_getNrOfLinks";
-  case 1702: return "DynamicsComputations_getNrOfFrames";
-  case 1703: return "DynamicsComputations_getFloatingBase";
-  case 1704: return "DynamicsComputations_setFloatingBase";
-  case 1705: return "DynamicsComputations_setRobotState";
-  case 1706: return "DynamicsComputations_getWorldBaseTransform";
-  case 1707: return "DynamicsComputations_getBaseTwist";
-  case 1708: return "DynamicsComputations_getJointPos";
-  case 1709: return "DynamicsComputations_getJointVel";
-  case 1710: return "DynamicsComputations_getFrameIndex";
-  case 1711: return "DynamicsComputations_getFrameName";
-  case 1712: return "DynamicsComputations_getWorldTransform";
-  case 1713: return "DynamicsComputations_getRelativeTransform";
-  case 1714: return "DynamicsComputations_getFrameTwist";
-  case 1715: return "DynamicsComputations_getFrameTwistInWorldOrient";
-  case 1716: return "DynamicsComputations_getFrameProperSpatialAcceleration";
-  case 1717: return "DynamicsComputations_getLinkIndex";
-  case 1718: return "DynamicsComputations_getLinkInertia";
-  case 1719: return "DynamicsComputations_getJointIndex";
-  case 1720: return "DynamicsComputations_getJointName";
-  case 1721: return "DynamicsComputations_getJointLimits";
-  case 1722: return "DynamicsComputations_inverseDynamics";
-  case 1723: return "DynamicsComputations_getFreeFloatingMassMatrix";
-  case 1724: return "DynamicsComputations_getFrameJacobian";
-  case 1725: return "DynamicsComputations_getDynamicsRegressor";
-  case 1726: return "DynamicsComputations_getModelDynamicsParameters";
-  case 1727: return "DynamicsComputations_getCenterOfMass";
-  case 1728: return "DynamicsComputations_getCenterOfMassJacobian";
+  case 782: return "Transform_fromHomogeneousTransform";
+  case 783: return "Transform_getSemantics";
+  case 784: return "Transform_getRotation";
+  case 785: return "Transform_getPosition";
+  case 786: return "Transform_setRotation";
+  case 787: return "Transform_setPosition";
+  case 788: return "Transform_compose";
+  case 789: return "Transform_inverse2";
+  case 790: return "Transform_inverse";
+  case 791: return "Transform_mtimes";
+  case 792: return "Transform_Identity";
+  case 793: return "Transform_asHomogeneousTransform";
+  case 794: return "Transform_asAdjointTransform";
+  case 795: return "Transform_asAdjointTransformWrench";
+  case 796: return "Transform_log";
+  case 797: return "Transform_toString";
+  case 798: return "Transform_display";
+  case 799: return "delete_Transform";
+  case 800: return "new_TransformDerivative";
+  case 801: return "delete_TransformDerivative";
+  case 802: return "TransformDerivative_getRotationDerivative";
+  case 803: return "TransformDerivative_getPositionDerivative";
+  case 804: return "TransformDerivative_setRotationDerivative";
+  case 805: return "TransformDerivative_setPositionDerivative";
+  case 806: return "TransformDerivative_Zero";
+  case 807: return "TransformDerivative_asHomogeneousTransformDerivative";
+  case 808: return "TransformDerivative_asAdjointTransformDerivative";
+  case 809: return "TransformDerivative_asAdjointTransformWrenchDerivative";
+  case 810: return "TransformDerivative_mtimes";
+  case 811: return "TransformDerivative_derivativeOfInverse";
+  case 812: return "TransformDerivative_transform";
+  case 813: return "LINK_INVALID_INDEX_get";
+  case 814: return "LINK_INVALID_INDEX_set";
+  case 815: return "LINK_INVALID_NAME_get";
+  case 816: return "LINK_INVALID_NAME_set";
+  case 817: return "JOINT_INVALID_INDEX_get";
+  case 818: return "JOINT_INVALID_INDEX_set";
+  case 819: return "JOINT_INVALID_NAME_get";
+  case 820: return "JOINT_INVALID_NAME_set";
+  case 821: return "DOF_INVALID_INDEX_get";
+  case 822: return "DOF_INVALID_INDEX_set";
+  case 823: return "DOF_INVALID_NAME_get";
+  case 824: return "DOF_INVALID_NAME_set";
+  case 825: return "FRAME_INVALID_INDEX_get";
+  case 826: return "FRAME_INVALID_INDEX_set";
+  case 827: return "FRAME_INVALID_NAME_get";
+  case 828: return "FRAME_INVALID_NAME_set";
+  case 829: return "TRAVERSAL_INVALID_INDEX_get";
+  case 830: return "TRAVERSAL_INVALID_INDEX_set";
+  case 831: return "new_LinkPositions";
+  case 832: return "LinkPositions_resize";
+  case 833: return "LinkPositions_isConsistent";
+  case 834: return "LinkPositions_getNrOfLinks";
+  case 835: return "LinkPositions_paren";
+  case 836: return "LinkPositions_toString";
+  case 837: return "delete_LinkPositions";
+  case 838: return "new_LinkWrenches";
+  case 839: return "LinkWrenches_resize";
+  case 840: return "LinkWrenches_isConsistent";
+  case 841: return "LinkWrenches_getNrOfLinks";
+  case 842: return "LinkWrenches_paren";
+  case 843: return "LinkWrenches_toString";
+  case 844: return "LinkWrenches_zero";
+  case 845: return "delete_LinkWrenches";
+  case 846: return "new_LinkInertias";
+  case 847: return "LinkInertias_resize";
+  case 848: return "LinkInertias_isConsistent";
+  case 849: return "LinkInertias_paren";
+  case 850: return "delete_LinkInertias";
+  case 851: return "new_LinkArticulatedBodyInertias";
+  case 852: return "LinkArticulatedBodyInertias_resize";
+  case 853: return "LinkArticulatedBodyInertias_isConsistent";
+  case 854: return "LinkArticulatedBodyInertias_paren";
+  case 855: return "delete_LinkArticulatedBodyInertias";
+  case 856: return "new_LinkVelArray";
+  case 857: return "LinkVelArray_resize";
+  case 858: return "LinkVelArray_isConsistent";
+  case 859: return "LinkVelArray_getNrOfLinks";
+  case 860: return "LinkVelArray_paren";
+  case 861: return "LinkVelArray_toString";
+  case 862: return "delete_LinkVelArray";
+  case 863: return "new_LinkAccArray";
+  case 864: return "LinkAccArray_resize";
+  case 865: return "LinkAccArray_isConsistent";
+  case 866: return "LinkAccArray_paren";
+  case 867: return "LinkAccArray_getNrOfLinks";
+  case 868: return "LinkAccArray_toString";
+  case 869: return "delete_LinkAccArray";
+  case 870: return "new_Link";
+  case 871: return "Link_inertia";
+  case 872: return "Link_setInertia";
+  case 873: return "Link_getInertia";
+  case 874: return "Link_setIndex";
+  case 875: return "Link_getIndex";
+  case 876: return "delete_Link";
+  case 877: return "delete_IJoint";
+  case 878: return "IJoint_clone";
+  case 879: return "IJoint_getNrOfPosCoords";
+  case 880: return "IJoint_getNrOfDOFs";
+  case 881: return "IJoint_setAttachedLinks";
+  case 882: return "IJoint_setRestTransform";
+  case 883: return "IJoint_getFirstAttachedLink";
+  case 884: return "IJoint_getSecondAttachedLink";
+  case 885: return "IJoint_getRestTransform";
+  case 886: return "IJoint_getTransform";
+  case 887: return "IJoint_getTransformDerivative";
+  case 888: return "IJoint_getMotionSubspaceVector";
+  case 889: return "IJoint_computeChildPosVelAcc";
+  case 890: return "IJoint_computeChildVelAcc";
+  case 891: return "IJoint_computeChildVel";
+  case 892: return "IJoint_computeChildAcc";
+  case 893: return "IJoint_computeChildBiasAcc";
+  case 894: return "IJoint_computeJointTorque";
+  case 895: return "IJoint_setIndex";
+  case 896: return "IJoint_getIndex";
+  case 897: return "IJoint_setPosCoordsOffset";
+  case 898: return "IJoint_getPosCoordsOffset";
+  case 899: return "IJoint_setDOFsOffset";
+  case 900: return "IJoint_getDOFsOffset";
+  case 901: return "IJoint_hasPosLimits";
+  case 902: return "IJoint_enablePosLimits";
+  case 903: return "IJoint_getPosLimits";
+  case 904: return "IJoint_getMinPosLimit";
+  case 905: return "IJoint_getMaxPosLimit";
+  case 906: return "IJoint_setPosLimits";
+  case 907: return "IJoint_isRevoluteJoint";
+  case 908: return "IJoint_isFixedJoint";
+  case 909: return "IJoint_asRevoluteJoint";
+  case 910: return "IJoint_asFixedJoint";
+  case 911: return "delete_FixedJoint";
+  case 912: return "FixedJoint_clone";
+  case 913: return "FixedJoint_getNrOfPosCoords";
+  case 914: return "FixedJoint_getNrOfDOFs";
+  case 915: return "FixedJoint_setAttachedLinks";
+  case 916: return "FixedJoint_setRestTransform";
+  case 917: return "FixedJoint_getFirstAttachedLink";
+  case 918: return "FixedJoint_getSecondAttachedLink";
+  case 919: return "FixedJoint_getRestTransform";
+  case 920: return "FixedJoint_getTransform";
+  case 921: return "FixedJoint_getTransformDerivative";
+  case 922: return "FixedJoint_getMotionSubspaceVector";
+  case 923: return "FixedJoint_computeChildPosVelAcc";
+  case 924: return "FixedJoint_computeChildVelAcc";
+  case 925: return "FixedJoint_computeChildVel";
+  case 926: return "FixedJoint_computeChildAcc";
+  case 927: return "FixedJoint_computeChildBiasAcc";
+  case 928: return "FixedJoint_computeJointTorque";
+  case 929: return "FixedJoint_setIndex";
+  case 930: return "FixedJoint_getIndex";
+  case 931: return "FixedJoint_setPosCoordsOffset";
+  case 932: return "FixedJoint_getPosCoordsOffset";
+  case 933: return "FixedJoint_setDOFsOffset";
+  case 934: return "FixedJoint_getDOFsOffset";
+  case 935: return "FixedJoint_hasPosLimits";
+  case 936: return "FixedJoint_enablePosLimits";
+  case 937: return "FixedJoint_getPosLimits";
+  case 938: return "FixedJoint_getMinPosLimit";
+  case 939: return "FixedJoint_getMaxPosLimit";
+  case 940: return "FixedJoint_setPosLimits";
+  case 941: return "delete_MovableJointImpl1";
+  case 942: return "MovableJointImpl1_getNrOfPosCoords";
+  case 943: return "MovableJointImpl1_getNrOfDOFs";
+  case 944: return "MovableJointImpl1_setIndex";
+  case 945: return "MovableJointImpl1_getIndex";
+  case 946: return "MovableJointImpl1_setPosCoordsOffset";
+  case 947: return "MovableJointImpl1_getPosCoordsOffset";
+  case 948: return "MovableJointImpl1_setDOFsOffset";
+  case 949: return "MovableJointImpl1_getDOFsOffset";
+  case 950: return "delete_MovableJointImpl2";
+  case 951: return "MovableJointImpl2_getNrOfPosCoords";
+  case 952: return "MovableJointImpl2_getNrOfDOFs";
+  case 953: return "MovableJointImpl2_setIndex";
+  case 954: return "MovableJointImpl2_getIndex";
+  case 955: return "MovableJointImpl2_setPosCoordsOffset";
+  case 956: return "MovableJointImpl2_getPosCoordsOffset";
+  case 957: return "MovableJointImpl2_setDOFsOffset";
+  case 958: return "MovableJointImpl2_getDOFsOffset";
+  case 959: return "delete_MovableJointImpl3";
+  case 960: return "MovableJointImpl3_getNrOfPosCoords";
+  case 961: return "MovableJointImpl3_getNrOfDOFs";
+  case 962: return "MovableJointImpl3_setIndex";
+  case 963: return "MovableJointImpl3_getIndex";
+  case 964: return "MovableJointImpl3_setPosCoordsOffset";
+  case 965: return "MovableJointImpl3_getPosCoordsOffset";
+  case 966: return "MovableJointImpl3_setDOFsOffset";
+  case 967: return "MovableJointImpl3_getDOFsOffset";
+  case 968: return "delete_MovableJointImpl4";
+  case 969: return "MovableJointImpl4_getNrOfPosCoords";
+  case 970: return "MovableJointImpl4_getNrOfDOFs";
+  case 971: return "MovableJointImpl4_setIndex";
+  case 972: return "MovableJointImpl4_getIndex";
+  case 973: return "MovableJointImpl4_setPosCoordsOffset";
+  case 974: return "MovableJointImpl4_getPosCoordsOffset";
+  case 975: return "MovableJointImpl4_setDOFsOffset";
+  case 976: return "MovableJointImpl4_getDOFsOffset";
+  case 977: return "delete_MovableJointImpl5";
+  case 978: return "MovableJointImpl5_getNrOfPosCoords";
+  case 979: return "MovableJointImpl5_getNrOfDOFs";
+  case 980: return "MovableJointImpl5_setIndex";
+  case 981: return "MovableJointImpl5_getIndex";
+  case 982: return "MovableJointImpl5_setPosCoordsOffset";
+  case 983: return "MovableJointImpl5_getPosCoordsOffset";
+  case 984: return "MovableJointImpl5_setDOFsOffset";
+  case 985: return "MovableJointImpl5_getDOFsOffset";
+  case 986: return "delete_MovableJointImpl6";
+  case 987: return "MovableJointImpl6_getNrOfPosCoords";
+  case 988: return "MovableJointImpl6_getNrOfDOFs";
+  case 989: return "MovableJointImpl6_setIndex";
+  case 990: return "MovableJointImpl6_getIndex";
+  case 991: return "MovableJointImpl6_setPosCoordsOffset";
+  case 992: return "MovableJointImpl6_getPosCoordsOffset";
+  case 993: return "MovableJointImpl6_setDOFsOffset";
+  case 994: return "MovableJointImpl6_getDOFsOffset";
+  case 995: return "delete_RevoluteJoint";
+  case 996: return "RevoluteJoint_clone";
+  case 997: return "RevoluteJoint_setAttachedLinks";
+  case 998: return "RevoluteJoint_setRestTransform";
+  case 999: return "RevoluteJoint_setAxis";
+  case 1000: return "RevoluteJoint_getFirstAttachedLink";
+  case 1001: return "RevoluteJoint_getSecondAttachedLink";
+  case 1002: return "RevoluteJoint_getAxis";
+  case 1003: return "RevoluteJoint_getRestTransform";
+  case 1004: return "RevoluteJoint_getTransform";
+  case 1005: return "RevoluteJoint_getTransformDerivative";
+  case 1006: return "RevoluteJoint_getMotionSubspaceVector";
+  case 1007: return "RevoluteJoint_computeChildPosVelAcc";
+  case 1008: return "RevoluteJoint_computeChildVel";
+  case 1009: return "RevoluteJoint_computeChildVelAcc";
+  case 1010: return "RevoluteJoint_computeChildAcc";
+  case 1011: return "RevoluteJoint_computeChildBiasAcc";
+  case 1012: return "RevoluteJoint_computeJointTorque";
+  case 1013: return "RevoluteJoint_hasPosLimits";
+  case 1014: return "RevoluteJoint_enablePosLimits";
+  case 1015: return "RevoluteJoint_getPosLimits";
+  case 1016: return "RevoluteJoint_getMinPosLimit";
+  case 1017: return "RevoluteJoint_getMaxPosLimit";
+  case 1018: return "RevoluteJoint_setPosLimits";
+  case 1019: return "new_Traversal";
+  case 1020: return "delete_Traversal";
+  case 1021: return "Traversal_getNrOfVisitedLinks";
+  case 1022: return "Traversal_getLink";
+  case 1023: return "Traversal_getBaseLink";
+  case 1024: return "Traversal_getParentLink";
+  case 1025: return "Traversal_getParentJoint";
+  case 1026: return "Traversal_getParentLinkFromLinkIndex";
+  case 1027: return "Traversal_getParentJointFromLinkIndex";
+  case 1028: return "Traversal_getTraversalIndexFromLinkIndex";
+  case 1029: return "Traversal_reset";
+  case 1030: return "Traversal_addTraversalBase";
+  case 1031: return "Traversal_addTraversalElement";
+  case 1032: return "Traversal_isParentOf";
+  case 1033: return "Traversal_getChildLinkIndexFromJointIndex";
+  case 1034: return "Traversal_getParentLinkIndexFromJointIndex";
+  case 1035: return "Traversal_toString";
+  case 1036: return "delete_SolidShape";
+  case 1037: return "SolidShape_clone";
+  case 1038: return "SolidShape_name_get";
+  case 1039: return "SolidShape_name_set";
+  case 1040: return "SolidShape_link_H_geometry_get";
+  case 1041: return "SolidShape_link_H_geometry_set";
+  case 1042: return "SolidShape_material_get";
+  case 1043: return "SolidShape_material_set";
+  case 1044: return "SolidShape_isSphere";
+  case 1045: return "SolidShape_isBox";
+  case 1046: return "SolidShape_isCylinder";
+  case 1047: return "SolidShape_isExternalMesh";
+  case 1048: return "SolidShape_asSphere";
+  case 1049: return "SolidShape_asBox";
+  case 1050: return "SolidShape_asCylinder";
+  case 1051: return "SolidShape_asExternalMesh";
+  case 1052: return "delete_Sphere";
+  case 1053: return "Sphere_clone";
+  case 1054: return "Sphere_radius_get";
+  case 1055: return "Sphere_radius_set";
+  case 1056: return "new_Sphere";
+  case 1057: return "delete_Box";
+  case 1058: return "Box_clone";
+  case 1059: return "Box_x_get";
+  case 1060: return "Box_x_set";
+  case 1061: return "Box_y_get";
+  case 1062: return "Box_y_set";
+  case 1063: return "Box_z_get";
+  case 1064: return "Box_z_set";
+  case 1065: return "new_Box";
+  case 1066: return "delete_Cylinder";
+  case 1067: return "Cylinder_clone";
+  case 1068: return "Cylinder_length_get";
+  case 1069: return "Cylinder_length_set";
+  case 1070: return "Cylinder_radius_get";
+  case 1071: return "Cylinder_radius_set";
+  case 1072: return "new_Cylinder";
+  case 1073: return "delete_ExternalMesh";
+  case 1074: return "ExternalMesh_clone";
+  case 1075: return "ExternalMesh_filename_get";
+  case 1076: return "ExternalMesh_filename_set";
+  case 1077: return "ExternalMesh_scale_get";
+  case 1078: return "ExternalMesh_scale_set";
+  case 1079: return "new_ExternalMesh";
+  case 1080: return "new_ModelSolidShapes";
+  case 1081: return "ModelSolidShapes_clear";
+  case 1082: return "delete_ModelSolidShapes";
+  case 1083: return "ModelSolidShapes_resize";
+  case 1084: return "ModelSolidShapes_isConsistent";
+  case 1085: return "ModelSolidShapes_linkSolidShapes_get";
+  case 1086: return "ModelSolidShapes_linkSolidShapes_set";
+  case 1087: return "Neighbor_neighborLink_get";
+  case 1088: return "Neighbor_neighborLink_set";
+  case 1089: return "Neighbor_neighborJoint_get";
+  case 1090: return "Neighbor_neighborJoint_set";
+  case 1091: return "new_Neighbor";
+  case 1092: return "delete_Neighbor";
+  case 1093: return "new_Model";
+  case 1094: return "Model_copy";
+  case 1095: return "delete_Model";
+  case 1096: return "Model_getNrOfLinks";
+  case 1097: return "Model_getLinkName";
+  case 1098: return "Model_getLinkIndex";
+  case 1099: return "Model_isValidLinkIndex";
+  case 1100: return "Model_getLink";
+  case 1101: return "Model_addLink";
+  case 1102: return "Model_getNrOfJoints";
+  case 1103: return "Model_getJointName";
+  case 1104: return "Model_getJointIndex";
+  case 1105: return "Model_getJoint";
+  case 1106: return "Model_isValidJointIndex";
+  case 1107: return "Model_isLinkNameUsed";
+  case 1108: return "Model_isJointNameUsed";
+  case 1109: return "Model_isFrameNameUsed";
+  case 1110: return "Model_addJoint";
+  case 1111: return "Model_addJointAndLink";
+  case 1112: return "Model_getNrOfPosCoords";
+  case 1113: return "Model_getNrOfDOFs";
+  case 1114: return "Model_getNrOfFrames";
+  case 1115: return "Model_addAdditionalFrameToLink";
+  case 1116: return "Model_getFrameName";
+  case 1117: return "Model_getFrameIndex";
+  case 1118: return "Model_isValidFrameIndex";
+  case 1119: return "Model_getFrameTransform";
+  case 1120: return "Model_getFrameLink";
+  case 1121: return "Model_getNrOfNeighbors";
+  case 1122: return "Model_getNeighbor";
+  case 1123: return "Model_setDefaultBaseLink";
+  case 1124: return "Model_getDefaultBaseLink";
+  case 1125: return "Model_computeFullTreeTraversal";
+  case 1126: return "Model_getInertialParameters";
+  case 1127: return "Model_updateInertialParameters";
+  case 1128: return "Model_visualSolidShapes";
+  case 1129: return "Model_collisionSolidShapes";
+  case 1130: return "Model_toString";
+  case 1131: return "new_JointPosDoubleArray";
+  case 1132: return "JointPosDoubleArray_resize";
+  case 1133: return "JointPosDoubleArray_isConsistent";
+  case 1134: return "delete_JointPosDoubleArray";
+  case 1135: return "new_JointDOFsDoubleArray";
+  case 1136: return "JointDOFsDoubleArray_resize";
+  case 1137: return "JointDOFsDoubleArray_isConsistent";
+  case 1138: return "delete_JointDOFsDoubleArray";
+  case 1139: return "new_DOFSpatialForceArray";
+  case 1140: return "DOFSpatialForceArray_resize";
+  case 1141: return "DOFSpatialForceArray_isConsistent";
+  case 1142: return "DOFSpatialForceArray_paren";
+  case 1143: return "delete_DOFSpatialForceArray";
+  case 1144: return "new_DOFSpatialMotionArray";
+  case 1145: return "DOFSpatialMotionArray_resize";
+  case 1146: return "DOFSpatialMotionArray_isConsistent";
+  case 1147: return "DOFSpatialMotionArray_paren";
+  case 1148: return "delete_DOFSpatialMotionArray";
+  case 1149: return "new_FrameFreeFloatingJacobian";
+  case 1150: return "FrameFreeFloatingJacobian_resize";
+  case 1151: return "FrameFreeFloatingJacobian_isConsistent";
+  case 1152: return "delete_FrameFreeFloatingJacobian";
+  case 1153: return "new_MomentumFreeFloatingJacobian";
+  case 1154: return "MomentumFreeFloatingJacobian_resize";
+  case 1155: return "MomentumFreeFloatingJacobian_isConsistent";
+  case 1156: return "delete_MomentumFreeFloatingJacobian";
+  case 1157: return "new_FreeFloatingMassMatrix";
+  case 1158: return "FreeFloatingMassMatrix_resize";
+  case 1159: return "delete_FreeFloatingMassMatrix";
+  case 1160: return "new_FreeFloatingPos";
+  case 1161: return "FreeFloatingPos_resize";
+  case 1162: return "FreeFloatingPos_worldBasePos";
+  case 1163: return "FreeFloatingPos_jointPos";
+  case 1164: return "FreeFloatingPos_getNrOfPosCoords";
+  case 1165: return "delete_FreeFloatingPos";
+  case 1166: return "new_FreeFloatingGeneralizedTorques";
+  case 1167: return "FreeFloatingGeneralizedTorques_resize";
+  case 1168: return "FreeFloatingGeneralizedTorques_baseWrench";
+  case 1169: return "FreeFloatingGeneralizedTorques_jointTorques";
+  case 1170: return "FreeFloatingGeneralizedTorques_getNrOfDOFs";
+  case 1171: return "delete_FreeFloatingGeneralizedTorques";
+  case 1172: return "new_FreeFloatingVel";
+  case 1173: return "FreeFloatingVel_resize";
+  case 1174: return "FreeFloatingVel_baseVel";
+  case 1175: return "FreeFloatingVel_jointVel";
+  case 1176: return "FreeFloatingVel_getNrOfDOFs";
+  case 1177: return "delete_FreeFloatingVel";
+  case 1178: return "new_FreeFloatingAcc";
+  case 1179: return "FreeFloatingAcc_resize";
+  case 1180: return "FreeFloatingAcc_baseAcc";
+  case 1181: return "FreeFloatingAcc_jointAcc";
+  case 1182: return "FreeFloatingAcc_getNrOfDOFs";
+  case 1183: return "delete_FreeFloatingAcc";
+  case 1184: return "ContactWrench_contactId";
+  case 1185: return "ContactWrench_contactPoint";
+  case 1186: return "ContactWrench_contactWrench";
+  case 1187: return "new_ContactWrench";
+  case 1188: return "delete_ContactWrench";
+  case 1189: return "new_LinkContactWrenches";
+  case 1190: return "LinkContactWrenches_resize";
+  case 1191: return "LinkContactWrenches_getNrOfContactsForLink";
+  case 1192: return "LinkContactWrenches_setNrOfContactsForLink";
+  case 1193: return "LinkContactWrenches_getNrOfLinks";
+  case 1194: return "LinkContactWrenches_contactWrench";
+  case 1195: return "LinkContactWrenches_computeNetWrenches";
+  case 1196: return "LinkContactWrenches_toString";
+  case 1197: return "delete_LinkContactWrenches";
+  case 1198: return "_wrap_ForwardPositionKinematics";
+  case 1199: return "_wrap_ForwardVelAccKinematics";
+  case 1200: return "_wrap_ForwardPosVelAccKinematics";
+  case 1201: return "_wrap_ForwardPosVelKinematics";
+  case 1202: return "_wrap_ForwardAccKinematics";
+  case 1203: return "_wrap_ForwardBiasAccKinematics";
+  case 1204: return "_wrap_ComputeLinearAndAngularMomentum";
+  case 1205: return "_wrap_ComputeLinearAndAngularMomentumDerivativeBias";
+  case 1206: return "_wrap_RNEADynamicPhase";
+  case 1207: return "_wrap_CompositeRigidBodyAlgorithm";
+  case 1208: return "new_ArticulatedBodyAlgorithmInternalBuffers";
+  case 1209: return "ArticulatedBodyAlgorithmInternalBuffers_resize";
+  case 1210: return "ArticulatedBodyAlgorithmInternalBuffers_isConsistent";
+  case 1211: return "ArticulatedBodyAlgorithmInternalBuffers_S_get";
+  case 1212: return "ArticulatedBodyAlgorithmInternalBuffers_S_set";
+  case 1213: return "ArticulatedBodyAlgorithmInternalBuffers_U_get";
+  case 1214: return "ArticulatedBodyAlgorithmInternalBuffers_U_set";
+  case 1215: return "ArticulatedBodyAlgorithmInternalBuffers_D_get";
+  case 1216: return "ArticulatedBodyAlgorithmInternalBuffers_D_set";
+  case 1217: return "ArticulatedBodyAlgorithmInternalBuffers_u_get";
+  case 1218: return "ArticulatedBodyAlgorithmInternalBuffers_u_set";
+  case 1219: return "ArticulatedBodyAlgorithmInternalBuffers_linksVel_get";
+  case 1220: return "ArticulatedBodyAlgorithmInternalBuffers_linksVel_set";
+  case 1221: return "ArticulatedBodyAlgorithmInternalBuffers_linksBiasAcceleration_get";
+  case 1222: return "ArticulatedBodyAlgorithmInternalBuffers_linksBiasAcceleration_set";
+  case 1223: return "ArticulatedBodyAlgorithmInternalBuffers_linksAccelerations_get";
+  case 1224: return "ArticulatedBodyAlgorithmInternalBuffers_linksAccelerations_set";
+  case 1225: return "ArticulatedBodyAlgorithmInternalBuffers_linkABIs_get";
+  case 1226: return "ArticulatedBodyAlgorithmInternalBuffers_linkABIs_set";
+  case 1227: return "ArticulatedBodyAlgorithmInternalBuffers_linksBiasWrench_get";
+  case 1228: return "ArticulatedBodyAlgorithmInternalBuffers_linksBiasWrench_set";
+  case 1229: return "delete_ArticulatedBodyAlgorithmInternalBuffers";
+  case 1230: return "_wrap_ArticulatedBodyAlgorithm";
+  case 1231: return "NR_OF_SENSOR_TYPES_get";
+  case 1232: return "_wrap_isLinkSensor";
+  case 1233: return "_wrap_isJointSensor";
+  case 1234: return "_wrap_getSensorTypeSize";
+  case 1235: return "delete_Sensor";
+  case 1236: return "Sensor_getName";
+  case 1237: return "Sensor_getSensorType";
+  case 1238: return "Sensor_isValid";
+  case 1239: return "Sensor_setName";
+  case 1240: return "Sensor_clone";
+  case 1241: return "Sensor_isConsistent";
+  case 1242: return "Sensor_updateIndices";
+  case 1243: return "Sensor_updateIndeces";
+  case 1244: return "delete_JointSensor";
+  case 1245: return "JointSensor_getParentJoint";
+  case 1246: return "JointSensor_getParentJointIndex";
+  case 1247: return "JointSensor_setParentJoint";
+  case 1248: return "JointSensor_setParentJointIndex";
+  case 1249: return "JointSensor_isConsistent";
+  case 1250: return "delete_LinkSensor";
+  case 1251: return "LinkSensor_getParentLink";
+  case 1252: return "LinkSensor_getParentLinkIndex";
+  case 1253: return "LinkSensor_getLinkSensorTransform";
+  case 1254: return "LinkSensor_setParentLink";
+  case 1255: return "LinkSensor_setParentLinkIndex";
+  case 1256: return "LinkSensor_setLinkSensorTransform";
+  case 1257: return "LinkSensor_isConsistent";
+  case 1258: return "new_SensorsList";
+  case 1259: return "delete_SensorsList";
+  case 1260: return "SensorsList_addSensor";
+  case 1261: return "SensorsList_setSerialization";
+  case 1262: return "SensorsList_getSerialization";
+  case 1263: return "SensorsList_getNrOfSensors";
+  case 1264: return "SensorsList_getSensorIndex";
+  case 1265: return "SensorsList_getSizeOfAllSensorsMeasurements";
+  case 1266: return "SensorsList_getSensor";
+  case 1267: return "SensorsList_isConsistent";
+  case 1268: return "SensorsList_removeSensor";
+  case 1269: return "SensorsList_removeAllSensorsOfType";
+  case 1270: return "SensorsList_getSixAxisForceTorqueSensor";
+  case 1271: return "SensorsList_getAccelerometerSensor";
+  case 1272: return "SensorsList_getGyroscopeSensor";
+  case 1273: return "new_SensorsMeasurements";
+  case 1274: return "delete_SensorsMeasurements";
+  case 1275: return "SensorsMeasurements_setNrOfSensors";
+  case 1276: return "SensorsMeasurements_getNrOfSensors";
+  case 1277: return "SensorsMeasurements_resize";
+  case 1278: return "SensorsMeasurements_toVector";
+  case 1279: return "SensorsMeasurements_setMeasurement";
+  case 1280: return "SensorsMeasurements_getMeasurement";
+  case 1281: return "SensorsMeasurements_getSizeOfAllSensorsMeasurements";
+  case 1282: return "new_SixAxisForceTorqueSensor";
+  case 1283: return "delete_SixAxisForceTorqueSensor";
+  case 1284: return "SixAxisForceTorqueSensor_setName";
+  case 1285: return "SixAxisForceTorqueSensor_setFirstLinkSensorTransform";
+  case 1286: return "SixAxisForceTorqueSensor_setSecondLinkSensorTransform";
+  case 1287: return "SixAxisForceTorqueSensor_getFirstLinkIndex";
+  case 1288: return "SixAxisForceTorqueSensor_getSecondLinkIndex";
+  case 1289: return "SixAxisForceTorqueSensor_setFirstLinkName";
+  case 1290: return "SixAxisForceTorqueSensor_setSecondLinkName";
+  case 1291: return "SixAxisForceTorqueSensor_getFirstLinkName";
+  case 1292: return "SixAxisForceTorqueSensor_getSecondLinkName";
+  case 1293: return "SixAxisForceTorqueSensor_setParentJoint";
+  case 1294: return "SixAxisForceTorqueSensor_setParentJointIndex";
+  case 1295: return "SixAxisForceTorqueSensor_setAppliedWrenchLink";
+  case 1296: return "SixAxisForceTorqueSensor_getName";
+  case 1297: return "SixAxisForceTorqueSensor_getSensorType";
+  case 1298: return "SixAxisForceTorqueSensor_getParentJoint";
+  case 1299: return "SixAxisForceTorqueSensor_getParentJointIndex";
+  case 1300: return "SixAxisForceTorqueSensor_isValid";
+  case 1301: return "SixAxisForceTorqueSensor_clone";
+  case 1302: return "SixAxisForceTorqueSensor_updateIndices";
+  case 1303: return "SixAxisForceTorqueSensor_updateIndeces";
+  case 1304: return "SixAxisForceTorqueSensor_getAppliedWrenchLink";
+  case 1305: return "SixAxisForceTorqueSensor_isLinkAttachedToSensor";
+  case 1306: return "SixAxisForceTorqueSensor_getLinkSensorTransform";
+  case 1307: return "SixAxisForceTorqueSensor_getWrenchAppliedOnLink";
+  case 1308: return "SixAxisForceTorqueSensor_getWrenchAppliedOnLinkMatrix";
+  case 1309: return "SixAxisForceTorqueSensor_getWrenchAppliedOnLinkInverseMatrix";
+  case 1310: return "SixAxisForceTorqueSensor_predictMeasurement";
+  case 1311: return "SixAxisForceTorqueSensor_toString";
+  case 1312: return "new_AccelerometerSensor";
+  case 1313: return "delete_AccelerometerSensor";
+  case 1314: return "AccelerometerSensor_setName";
+  case 1315: return "AccelerometerSensor_setLinkSensorTransform";
+  case 1316: return "AccelerometerSensor_setParentLink";
+  case 1317: return "AccelerometerSensor_setParentLinkIndex";
+  case 1318: return "AccelerometerSensor_getName";
+  case 1319: return "AccelerometerSensor_getSensorType";
+  case 1320: return "AccelerometerSensor_getParentLink";
+  case 1321: return "AccelerometerSensor_getParentLinkIndex";
+  case 1322: return "AccelerometerSensor_getLinkSensorTransform";
+  case 1323: return "AccelerometerSensor_isValid";
+  case 1324: return "AccelerometerSensor_clone";
+  case 1325: return "AccelerometerSensor_updateIndices";
+  case 1326: return "AccelerometerSensor_updateIndeces";
+  case 1327: return "AccelerometerSensor_predictMeasurement";
+  case 1328: return "new_GyroscopeSensor";
+  case 1329: return "delete_GyroscopeSensor";
+  case 1330: return "GyroscopeSensor_setName";
+  case 1331: return "GyroscopeSensor_setLinkSensorTransform";
+  case 1332: return "GyroscopeSensor_setParentLink";
+  case 1333: return "GyroscopeSensor_setParentLinkIndex";
+  case 1334: return "GyroscopeSensor_getName";
+  case 1335: return "GyroscopeSensor_getSensorType";
+  case 1336: return "GyroscopeSensor_getParentLink";
+  case 1337: return "GyroscopeSensor_getParentLinkIndex";
+  case 1338: return "GyroscopeSensor_getLinkSensorTransform";
+  case 1339: return "GyroscopeSensor_isValid";
+  case 1340: return "GyroscopeSensor_clone";
+  case 1341: return "GyroscopeSensor_updateIndices";
+  case 1342: return "GyroscopeSensor_updateIndeces";
+  case 1343: return "GyroscopeSensor_predictMeasurement";
+  case 1344: return "_wrap_predictSensorsMeasurements";
+  case 1345: return "_wrap_predictSensorsMeasurementsFromRawBuffers";
+  case 1346: return "URDFParserOptions_addSensorFramesAsAdditionalFrames_get";
+  case 1347: return "URDFParserOptions_addSensorFramesAsAdditionalFrames_set";
+  case 1348: return "URDFParserOptions_originalFilename_get";
+  case 1349: return "URDFParserOptions_originalFilename_set";
+  case 1350: return "new_URDFParserOptions";
+  case 1351: return "delete_URDFParserOptions";
+  case 1352: return "_wrap_modelFromURDF";
+  case 1353: return "_wrap_modelFromURDFString";
+  case 1354: return "_wrap_dofsListFromURDF";
+  case 1355: return "_wrap_dofsListFromURDFString";
+  case 1356: return "_wrap_sensorsFromURDF";
+  case 1357: return "_wrap_sensorsFromURDFString";
+  case 1358: return "new_ModelLoader";
+  case 1359: return "ModelLoader_loadModelFromString";
+  case 1360: return "ModelLoader_loadModelFromFile";
+  case 1361: return "ModelLoader_loadReducedModelFromFullModel";
+  case 1362: return "ModelLoader_loadReducedModelFromString";
+  case 1363: return "ModelLoader_loadReducedModelFromFile";
+  case 1364: return "ModelLoader_model";
+  case 1365: return "ModelLoader_sensors";
+  case 1366: return "ModelLoader_isValid";
+  case 1367: return "delete_ModelLoader";
+  case 1368: return "new_UnknownWrenchContact";
+  case 1369: return "UnknownWrenchContact_unknownType_get";
+  case 1370: return "UnknownWrenchContact_unknownType_set";
+  case 1371: return "UnknownWrenchContact_contactPoint_get";
+  case 1372: return "UnknownWrenchContact_contactPoint_set";
+  case 1373: return "UnknownWrenchContact_forceDirection_get";
+  case 1374: return "UnknownWrenchContact_forceDirection_set";
+  case 1375: return "UnknownWrenchContact_knownWrench_get";
+  case 1376: return "UnknownWrenchContact_knownWrench_set";
+  case 1377: return "UnknownWrenchContact_contactId_get";
+  case 1378: return "UnknownWrenchContact_contactId_set";
+  case 1379: return "delete_UnknownWrenchContact";
+  case 1380: return "new_LinkUnknownWrenchContacts";
+  case 1381: return "LinkUnknownWrenchContacts_clear";
+  case 1382: return "LinkUnknownWrenchContacts_resize";
+  case 1383: return "LinkUnknownWrenchContacts_getNrOfContactsForLink";
+  case 1384: return "LinkUnknownWrenchContacts_setNrOfContactsForLink";
+  case 1385: return "LinkUnknownWrenchContacts_addNewContactForLink";
+  case 1386: return "LinkUnknownWrenchContacts_addNewContactInFrame";
+  case 1387: return "LinkUnknownWrenchContacts_addNewUnknownFullWrenchInFrameOrigin";
+  case 1388: return "LinkUnknownWrenchContacts_contactWrench";
+  case 1389: return "LinkUnknownWrenchContacts_toString";
+  case 1390: return "delete_LinkUnknownWrenchContacts";
+  case 1391: return "new_estimateExternalWrenchesBuffers";
+  case 1392: return "estimateExternalWrenchesBuffers_resize";
+  case 1393: return "estimateExternalWrenchesBuffers_getNrOfSubModels";
+  case 1394: return "estimateExternalWrenchesBuffers_getNrOfLinks";
+  case 1395: return "estimateExternalWrenchesBuffers_isConsistent";
+  case 1396: return "estimateExternalWrenchesBuffers_A_get";
+  case 1397: return "estimateExternalWrenchesBuffers_A_set";
+  case 1398: return "estimateExternalWrenchesBuffers_x_get";
+  case 1399: return "estimateExternalWrenchesBuffers_x_set";
+  case 1400: return "estimateExternalWrenchesBuffers_b_get";
+  case 1401: return "estimateExternalWrenchesBuffers_b_set";
+  case 1402: return "estimateExternalWrenchesBuffers_pinvA_get";
+  case 1403: return "estimateExternalWrenchesBuffers_pinvA_set";
+  case 1404: return "estimateExternalWrenchesBuffers_b_contacts_subtree_get";
+  case 1405: return "estimateExternalWrenchesBuffers_b_contacts_subtree_set";
+  case 1406: return "estimateExternalWrenchesBuffers_subModelBase_H_link_get";
+  case 1407: return "estimateExternalWrenchesBuffers_subModelBase_H_link_set";
+  case 1408: return "delete_estimateExternalWrenchesBuffers";
+  case 1409: return "_wrap_estimateExternalWrenchesWithoutInternalFT";
+  case 1410: return "_wrap_estimateExternalWrenches";
+  case 1411: return "_wrap_dynamicsEstimationForwardVelAccKinematics";
+  case 1412: return "_wrap_dynamicsEstimationForwardVelKinematics";
+  case 1413: return "_wrap_computeLinkNetWrenchesWithoutGravity";
+  case 1414: return "_wrap_estimateLinkContactWrenchesFromLinkNetExternalWrenches";
+  case 1415: return "new_ExtWrenchesAndJointTorquesEstimator";
+  case 1416: return "delete_ExtWrenchesAndJointTorquesEstimator";
+  case 1417: return "ExtWrenchesAndJointTorquesEstimator_setModelAndSensors";
+  case 1418: return "ExtWrenchesAndJointTorquesEstimator_loadModelAndSensorsFromFile";
+  case 1419: return "ExtWrenchesAndJointTorquesEstimator_loadModelAndSensorsFromFileWithSpecifiedDOFs";
+  case 1420: return "ExtWrenchesAndJointTorquesEstimator_model";
+  case 1421: return "ExtWrenchesAndJointTorquesEstimator_sensors";
+  case 1422: return "ExtWrenchesAndJointTorquesEstimator_submodels";
+  case 1423: return "ExtWrenchesAndJointTorquesEstimator_updateKinematicsFromFloatingBase";
+  case 1424: return "ExtWrenchesAndJointTorquesEstimator_updateKinematicsFromFixedBase";
+  case 1425: return "ExtWrenchesAndJointTorquesEstimator_computeExpectedFTSensorsMeasurements";
+  case 1426: return "ExtWrenchesAndJointTorquesEstimator_estimateExtWrenchesAndJointTorques";
+  case 1427: return "ExtWrenchesAndJointTorquesEstimator_checkThatTheModelIsStill";
+  case 1428: return "ExtWrenchesAndJointTorquesEstimator_estimateLinkNetWrenchesWithoutGravity";
+  case 1429: return "new_SimpleLeggedOdometry";
+  case 1430: return "delete_SimpleLeggedOdometry";
+  case 1431: return "SimpleLeggedOdometry_setModel";
+  case 1432: return "SimpleLeggedOdometry_loadModelFromFile";
+  case 1433: return "SimpleLeggedOdometry_loadModelFromFileWithSpecifiedDOFs";
+  case 1434: return "SimpleLeggedOdometry_model";
+  case 1435: return "SimpleLeggedOdometry_updateKinematics";
+  case 1436: return "SimpleLeggedOdometry_init";
+  case 1437: return "SimpleLeggedOdometry_changeFixedFrame";
+  case 1438: return "SimpleLeggedOdometry_getCurrentFixedLink";
+  case 1439: return "SimpleLeggedOdometry_getWorldLinkTransform";
+  case 1440: return "_wrap_isLinkBerdyDynamicVariable";
+  case 1441: return "_wrap_isJointBerdyDynamicVariable";
+  case 1442: return "_wrap_isDOFBerdyDynamicVariable";
+  case 1443: return "new_BerdyOptions";
+  case 1444: return "BerdyOptions_berdyVariant_get";
+  case 1445: return "BerdyOptions_berdyVariant_set";
+  case 1446: return "BerdyOptions_includeAllNetExternalWrenchesAsDynamicVariables_get";
+  case 1447: return "BerdyOptions_includeAllNetExternalWrenchesAsDynamicVariables_set";
+  case 1448: return "BerdyOptions_includeAllJointAccelerationsAsSensors_get";
+  case 1449: return "BerdyOptions_includeAllJointAccelerationsAsSensors_set";
+  case 1450: return "BerdyOptions_includeAllJointTorquesAsSensors_get";
+  case 1451: return "BerdyOptions_includeAllJointTorquesAsSensors_set";
+  case 1452: return "BerdyOptions_includeAllNetExternalWrenchesAsSensors_get";
+  case 1453: return "BerdyOptions_includeAllNetExternalWrenchesAsSensors_set";
+  case 1454: return "BerdyOptions_includeFixedBaseExternalWrench_get";
+  case 1455: return "BerdyOptions_includeFixedBaseExternalWrench_set";
+  case 1456: return "BerdyOptions_jointOnWhichTheInternalWrenchIsMeasured_get";
+  case 1457: return "BerdyOptions_jointOnWhichTheInternalWrenchIsMeasured_set";
+  case 1458: return "BerdyOptions_baseLink_get";
+  case 1459: return "BerdyOptions_baseLink_set";
+  case 1460: return "BerdyOptions_checkConsistency";
+  case 1461: return "delete_BerdyOptions";
+  case 1462: return "BerdySensor_type_get";
+  case 1463: return "BerdySensor_type_set";
+  case 1464: return "BerdySensor_id_get";
+  case 1465: return "BerdySensor_id_set";
+  case 1466: return "BerdySensor_range_get";
+  case 1467: return "BerdySensor_range_set";
+  case 1468: return "BerdySensor_eq";
+  case 1469: return "BerdySensor_lt";
+  case 1470: return "new_BerdySensor";
+  case 1471: return "delete_BerdySensor";
+  case 1472: return "BerdyDynamicVariable_type_get";
+  case 1473: return "BerdyDynamicVariable_type_set";
+  case 1474: return "BerdyDynamicVariable_id_get";
+  case 1475: return "BerdyDynamicVariable_id_set";
+  case 1476: return "BerdyDynamicVariable_range_get";
+  case 1477: return "BerdyDynamicVariable_range_set";
+  case 1478: return "BerdyDynamicVariable_eq";
+  case 1479: return "BerdyDynamicVariable_lt";
+  case 1480: return "new_BerdyDynamicVariable";
+  case 1481: return "delete_BerdyDynamicVariable";
+  case 1482: return "new_BerdyHelper";
+  case 1483: return "BerdyHelper_dynamicTraversal";
+  case 1484: return "BerdyHelper_model";
+  case 1485: return "BerdyHelper_sensors";
+  case 1486: return "BerdyHelper_isValid";
+  case 1487: return "BerdyHelper_init";
+  case 1488: return "BerdyHelper_getOptions";
+  case 1489: return "BerdyHelper_getNrOfDynamicVariables";
+  case 1490: return "BerdyHelper_getNrOfDynamicEquations";
+  case 1491: return "BerdyHelper_getNrOfSensorsMeasurements";
+  case 1492: return "BerdyHelper_resizeAndZeroBerdyMatrices";
+  case 1493: return "BerdyHelper_getBerdyMatrices";
+  case 1494: return "BerdyHelper_getSensorsOrdering";
+  case 1495: return "BerdyHelper_getRangeSensorVariable";
+  case 1496: return "BerdyHelper_getRangeDOFSensorVariable";
+  case 1497: return "BerdyHelper_getRangeJointSensorVariable";
+  case 1498: return "BerdyHelper_getRangeLinkSensorVariable";
+  case 1499: return "BerdyHelper_getRangeLinkVariable";
+  case 1500: return "BerdyHelper_getRangeJointVariable";
+  case 1501: return "BerdyHelper_getRangeDOFVariable";
+  case 1502: return "BerdyHelper_getDynamicVariablesOrdering";
+  case 1503: return "BerdyHelper_serializeDynamicVariables";
+  case 1504: return "BerdyHelper_serializeSensorVariables";
+  case 1505: return "BerdyHelper_serializeDynamicVariablesComputedFromFixedBaseRNEA";
+  case 1506: return "BerdyHelper_extractJointTorquesFromDynamicVariables";
+  case 1507: return "BerdyHelper_extractLinkNetExternalWrenchesFromDynamicVariables";
+  case 1508: return "BerdyHelper_updateKinematicsFromFloatingBase";
+  case 1509: return "BerdyHelper_updateKinematicsFromFixedBase";
+  case 1510: return "BerdyHelper_updateKinematicsFromTraversalFixedBase";
+  case 1511: return "BerdyHelper_setNetExternalWrenchMeasurementFrame";
+  case 1512: return "BerdyHelper_getNetExternalWrenchMeasurementFrame";
+  case 1513: return "delete_BerdyHelper";
+  case 1514: return "new_BerdySparseMAPSolver";
+  case 1515: return "delete_BerdySparseMAPSolver";
+  case 1516: return "BerdySparseMAPSolver_setDynamicsConstraintsPriorCovariance";
+  case 1517: return "BerdySparseMAPSolver_setDynamicsRegularizationPriorCovariance";
+  case 1518: return "BerdySparseMAPSolver_setDynamicsRegularizationPriorExpectedValue";
+  case 1519: return "BerdySparseMAPSolver_setMeasurementsPriorCovariance";
+  case 1520: return "BerdySparseMAPSolver_dynamicsConstraintsPriorCovarianceInverse";
+  case 1521: return "BerdySparseMAPSolver_dynamicsRegularizationPriorCovarianceInverse";
+  case 1522: return "BerdySparseMAPSolver_dynamicsRegularizationPriorExpectedValue";
+  case 1523: return "BerdySparseMAPSolver_measurementsPriorCovarianceInverse";
+  case 1524: return "BerdySparseMAPSolver_isValid";
+  case 1525: return "BerdySparseMAPSolver_initialize";
+  case 1526: return "BerdySparseMAPSolver_updateEstimateInformationFixedBase";
+  case 1527: return "BerdySparseMAPSolver_updateEstimateInformationFloatingBase";
+  case 1528: return "BerdySparseMAPSolver_doEstimate";
+  case 1529: return "BerdySparseMAPSolver_getLastEstimate";
+  case 1530: return "DynamicsRegressorParameter_category_get";
+  case 1531: return "DynamicsRegressorParameter_category_set";
+  case 1532: return "DynamicsRegressorParameter_elemIndex_get";
+  case 1533: return "DynamicsRegressorParameter_elemIndex_set";
+  case 1534: return "DynamicsRegressorParameter_type_get";
+  case 1535: return "DynamicsRegressorParameter_type_set";
+  case 1536: return "DynamicsRegressorParameter_lt";
+  case 1537: return "DynamicsRegressorParameter_eq";
+  case 1538: return "DynamicsRegressorParameter_ne";
+  case 1539: return "new_DynamicsRegressorParameter";
+  case 1540: return "delete_DynamicsRegressorParameter";
+  case 1541: return "DynamicsRegressorParametersList_parameters_get";
+  case 1542: return "DynamicsRegressorParametersList_parameters_set";
+  case 1543: return "DynamicsRegressorParametersList_getDescriptionOfParameter";
+  case 1544: return "DynamicsRegressorParametersList_addParam";
+  case 1545: return "DynamicsRegressorParametersList_addList";
+  case 1546: return "DynamicsRegressorParametersList_findParam";
+  case 1547: return "DynamicsRegressorParametersList_getNrOfParameters";
+  case 1548: return "new_DynamicsRegressorParametersList";
+  case 1549: return "delete_DynamicsRegressorParametersList";
+  case 1550: return "new_DynamicsRegressorGenerator";
+  case 1551: return "delete_DynamicsRegressorGenerator";
+  case 1552: return "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile";
+  case 1553: return "DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString";
+  case 1554: return "DynamicsRegressorGenerator_loadRegressorStructureFromFile";
+  case 1555: return "DynamicsRegressorGenerator_loadRegressorStructureFromString";
+  case 1556: return "DynamicsRegressorGenerator_isValid";
+  case 1557: return "DynamicsRegressorGenerator_getNrOfParameters";
+  case 1558: return "DynamicsRegressorGenerator_getNrOfOutputs";
+  case 1559: return "DynamicsRegressorGenerator_getNrOfDegreesOfFreedom";
+  case 1560: return "DynamicsRegressorGenerator_getDescriptionOfParameter";
+  case 1561: return "DynamicsRegressorGenerator_getDescriptionOfParameters";
+  case 1562: return "DynamicsRegressorGenerator_getDescriptionOfOutput";
+  case 1563: return "DynamicsRegressorGenerator_getDescriptionOfOutputs";
+  case 1564: return "DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom";
+  case 1565: return "DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom";
+  case 1566: return "DynamicsRegressorGenerator_getDescriptionOfLink";
+  case 1567: return "DynamicsRegressorGenerator_getDescriptionOfLinks";
+  case 1568: return "DynamicsRegressorGenerator_getNrOfLinks";
+  case 1569: return "DynamicsRegressorGenerator_getNrOfFakeLinks";
+  case 1570: return "DynamicsRegressorGenerator_getBaseLinkName";
+  case 1571: return "DynamicsRegressorGenerator_getSensorsModel";
+  case 1572: return "DynamicsRegressorGenerator_setRobotState";
+  case 1573: return "DynamicsRegressorGenerator_getSensorsMeasurements";
+  case 1574: return "DynamicsRegressorGenerator_setTorqueSensorMeasurement";
+  case 1575: return "DynamicsRegressorGenerator_computeRegressor";
+  case 1576: return "DynamicsRegressorGenerator_getModelParameters";
+  case 1577: return "DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace";
+  case 1578: return "DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace";
+  case 1579: return "DynamicsRegressorGenerator_generate_random_regressors";
+  case 1580: return "new_KinDynComputations";
+  case 1581: return "delete_KinDynComputations";
+  case 1582: return "KinDynComputations_loadRobotModel";
+  case 1583: return "KinDynComputations_loadRobotModelFromFile";
+  case 1584: return "KinDynComputations_loadRobotModelFromString";
+  case 1585: return "KinDynComputations_isValid";
+  case 1586: return "KinDynComputations_setFrameVelocityRepresentation";
+  case 1587: return "KinDynComputations_getFrameVelocityRepresentation";
+  case 1588: return "KinDynComputations_getNrOfDegreesOfFreedom";
+  case 1589: return "KinDynComputations_getDescriptionOfDegreeOfFreedom";
+  case 1590: return "KinDynComputations_getDescriptionOfDegreesOfFreedom";
+  case 1591: return "KinDynComputations_getNrOfLinks";
+  case 1592: return "KinDynComputations_getNrOfFrames";
+  case 1593: return "KinDynComputations_getFloatingBase";
+  case 1594: return "KinDynComputations_setFloatingBase";
+  case 1595: return "KinDynComputations_model";
+  case 1596: return "KinDynComputations_getRobotModel";
+  case 1597: return "KinDynComputations_setJointPos";
+  case 1598: return "KinDynComputations_setRobotState";
+  case 1599: return "KinDynComputations_getRobotState";
+  case 1600: return "KinDynComputations_getWorldBaseTransform";
+  case 1601: return "KinDynComputations_getBaseTwist";
+  case 1602: return "KinDynComputations_getJointPos";
+  case 1603: return "KinDynComputations_getJointVel";
+  case 1604: return "KinDynComputations_getModelVel";
+  case 1605: return "KinDynComputations_getFrameIndex";
+  case 1606: return "KinDynComputations_getFrameName";
+  case 1607: return "KinDynComputations_getWorldTransform";
+  case 1608: return "KinDynComputations_getRelativeTransformExplicit";
+  case 1609: return "KinDynComputations_getRelativeTransform";
+  case 1610: return "KinDynComputations_getFrameVel";
+  case 1611: return "KinDynComputations_getFrameFreeFloatingJacobian";
+  case 1612: return "KinDynComputations_getRelativeJacobian";
+  case 1613: return "KinDynComputations_getRelativeJacobianExplicit";
+  case 1614: return "KinDynComputations_getFrameBiasAcc";
+  case 1615: return "KinDynComputations_getCenterOfMassPosition";
+  case 1616: return "KinDynComputations_getCenterOfMassVelocity";
+  case 1617: return "KinDynComputations_getCenterOfMassJacobian";
+  case 1618: return "KinDynComputations_getCenterOfMassBiasAcc";
+  case 1619: return "KinDynComputations_getAverageVelocity";
+  case 1620: return "KinDynComputations_getAverageVelocityJacobian";
+  case 1621: return "KinDynComputations_getCentroidalAverageVelocity";
+  case 1622: return "KinDynComputations_getCentroidalAverageVelocityJacobian";
+  case 1623: return "KinDynComputations_getLinearAngularMomentum";
+  case 1624: return "KinDynComputations_getLinearAngularMomentumJacobian";
+  case 1625: return "KinDynComputations_getCentroidalTotalMomentum";
+  case 1626: return "KinDynComputations_getFreeFloatingMassMatrix";
+  case 1627: return "KinDynComputations_inverseDynamics";
+  case 1628: return "KinDynComputations_generalizedBiasForces";
+  case 1629: return "KinDynComputations_generalizedGravityForces";
+  case 1630: return "delete_ICamera";
+  case 1631: return "ICamera_setPosition";
+  case 1632: return "ICamera_setTarget";
+  case 1633: return "ICamera_setUpVector";
+  case 1634: return "ColorViz_r_get";
+  case 1635: return "ColorViz_r_set";
+  case 1636: return "ColorViz_g_get";
+  case 1637: return "ColorViz_g_set";
+  case 1638: return "ColorViz_b_get";
+  case 1639: return "ColorViz_b_set";
+  case 1640: return "ColorViz_a_get";
+  case 1641: return "ColorViz_a_set";
+  case 1642: return "new_ColorViz";
+  case 1643: return "delete_ColorViz";
+  case 1644: return "delete_ILight";
+  case 1645: return "ILight_getName";
+  case 1646: return "ILight_setType";
+  case 1647: return "ILight_getType";
+  case 1648: return "ILight_setPosition";
+  case 1649: return "ILight_getPosition";
+  case 1650: return "ILight_setDirection";
+  case 1651: return "ILight_getDirection";
+  case 1652: return "ILight_setAmbientColor";
+  case 1653: return "ILight_getAmbientColor";
+  case 1654: return "ILight_setSpecularColor";
+  case 1655: return "ILight_getSpecularColor";
+  case 1656: return "ILight_setDiffuseColor";
+  case 1657: return "ILight_getDiffuseColor";
+  case 1658: return "delete_IEnvironment";
+  case 1659: return "IEnvironment_getElements";
+  case 1660: return "IEnvironment_setElementVisibility";
+  case 1661: return "IEnvironment_setBackgroundColor";
+  case 1662: return "IEnvironment_setAmbientLight";
+  case 1663: return "IEnvironment_getLights";
+  case 1664: return "IEnvironment_addLight";
+  case 1665: return "IEnvironment_lightViz";
+  case 1666: return "IEnvironment_removeLight";
+  case 1667: return "delete_IJetsVisualization";
+  case 1668: return "IJetsVisualization_setJetsFrames";
+  case 1669: return "IJetsVisualization_getNrOfJets";
+  case 1670: return "IJetsVisualization_getJetDirection";
+  case 1671: return "IJetsVisualization_setJetDirection";
+  case 1672: return "IJetsVisualization_setJetColor";
+  case 1673: return "IJetsVisualization_setJetsDimensions";
+  case 1674: return "IJetsVisualization_setJetsIntensity";
+  case 1675: return "delete_IModelVisualization";
+  case 1676: return "IModelVisualization_setPositions";
+  case 1677: return "IModelVisualization_setLinkPositions";
+  case 1678: return "IModelVisualization_model";
+  case 1679: return "IModelVisualization_getInstanceName";
+  case 1680: return "IModelVisualization_setModelVisibility";
+  case 1681: return "IModelVisualization_setModelColor";
+  case 1682: return "IModelVisualization_resetModelColor";
+  case 1683: return "IModelVisualization_getLinkNames";
+  case 1684: return "IModelVisualization_setLinkVisibility";
+  case 1685: return "IModelVisualization_getFeatures";
+  case 1686: return "IModelVisualization_setFeatureVisibility";
+  case 1687: return "IModelVisualization_jets";
+  case 1688: return "VisualizerOptions_verbose_get";
+  case 1689: return "VisualizerOptions_verbose_set";
+  case 1690: return "VisualizerOptions_winWidth_get";
+  case 1691: return "VisualizerOptions_winWidth_set";
+  case 1692: return "VisualizerOptions_winHeight_get";
+  case 1693: return "VisualizerOptions_winHeight_set";
+  case 1694: return "VisualizerOptions_rootFrameArrowsDimension_get";
+  case 1695: return "VisualizerOptions_rootFrameArrowsDimension_set";
+  case 1696: return "new_VisualizerOptions";
+  case 1697: return "delete_VisualizerOptions";
+  case 1698: return "new_Visualizer";
+  case 1699: return "delete_Visualizer";
+  case 1700: return "Visualizer_init";
+  case 1701: return "Visualizer_getNrOfVisualizedModels";
+  case 1702: return "Visualizer_getModelInstanceName";
+  case 1703: return "Visualizer_getModelInstanceIndex";
+  case 1704: return "Visualizer_addModel";
+  case 1705: return "Visualizer_modelViz";
+  case 1706: return "Visualizer_camera";
+  case 1707: return "Visualizer_enviroment";
+  case 1708: return "Visualizer_run";
+  case 1709: return "Visualizer_draw";
+  case 1710: return "Visualizer_drawToFile";
+  case 1711: return "Visualizer_close";
+  case 1712: return "new_DynamicsComputations";
+  case 1713: return "delete_DynamicsComputations";
+  case 1714: return "DynamicsComputations_loadRobotModelFromFile";
+  case 1715: return "DynamicsComputations_loadRobotModelFromString";
+  case 1716: return "DynamicsComputations_isValid";
+  case 1717: return "DynamicsComputations_getNrOfDegreesOfFreedom";
+  case 1718: return "DynamicsComputations_getDescriptionOfDegreeOfFreedom";
+  case 1719: return "DynamicsComputations_getDescriptionOfDegreesOfFreedom";
+  case 1720: return "DynamicsComputations_getNrOfLinks";
+  case 1721: return "DynamicsComputations_getNrOfFrames";
+  case 1722: return "DynamicsComputations_getFloatingBase";
+  case 1723: return "DynamicsComputations_setFloatingBase";
+  case 1724: return "DynamicsComputations_setRobotState";
+  case 1725: return "DynamicsComputations_getWorldBaseTransform";
+  case 1726: return "DynamicsComputations_getBaseTwist";
+  case 1727: return "DynamicsComputations_getJointPos";
+  case 1728: return "DynamicsComputations_getJointVel";
+  case 1729: return "DynamicsComputations_getFrameIndex";
+  case 1730: return "DynamicsComputations_getFrameName";
+  case 1731: return "DynamicsComputations_getWorldTransform";
+  case 1732: return "DynamicsComputations_getRelativeTransform";
+  case 1733: return "DynamicsComputations_getFrameTwist";
+  case 1734: return "DynamicsComputations_getFrameTwistInWorldOrient";
+  case 1735: return "DynamicsComputations_getFrameProperSpatialAcceleration";
+  case 1736: return "DynamicsComputations_getLinkIndex";
+  case 1737: return "DynamicsComputations_getLinkInertia";
+  case 1738: return "DynamicsComputations_getJointIndex";
+  case 1739: return "DynamicsComputations_getJointName";
+  case 1740: return "DynamicsComputations_getJointLimits";
+  case 1741: return "DynamicsComputations_inverseDynamics";
+  case 1742: return "DynamicsComputations_getFreeFloatingMassMatrix";
+  case 1743: return "DynamicsComputations_getFrameJacobian";
+  case 1744: return "DynamicsComputations_getDynamicsRegressor";
+  case 1745: return "DynamicsComputations_getModelDynamicsParameters";
+  case 1746: return "DynamicsComputations_getCenterOfMass";
+  case 1747: return "DynamicsComputations_getCenterOfMassJacobian";
   default: return 0;
   }
 }
@@ -86684,953 +87756,972 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 779: flag=_wrap_TransformSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
   case 780: flag=_wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
   case 781: flag=_wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 782: flag=_wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 783: flag=_wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 784: flag=_wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 785: flag=_wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 786: flag=_wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 787: flag=_wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 788: flag=_wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 789: flag=_wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 790: flag=_wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 791: flag=_wrap_Transform_Identity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 792: flag=_wrap_Transform_asHomogeneousTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 793: flag=_wrap_Transform_asAdjointTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 794: flag=_wrap_Transform_asAdjointTransformWrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 795: flag=_wrap_Transform_log(resc,resv,argc,(mxArray**)(argv)); break;
-  case 796: flag=_wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 797: flag=_wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 798: flag=_wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 799: flag=_wrap_new_TransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 800: flag=_wrap_delete_TransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 801: flag=_wrap_TransformDerivative_getRotationDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 802: flag=_wrap_TransformDerivative_getPositionDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 803: flag=_wrap_TransformDerivative_setRotationDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 804: flag=_wrap_TransformDerivative_setPositionDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 805: flag=_wrap_TransformDerivative_Zero(resc,resv,argc,(mxArray**)(argv)); break;
-  case 806: flag=_wrap_TransformDerivative_asHomogeneousTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 807: flag=_wrap_TransformDerivative_asAdjointTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 808: flag=_wrap_TransformDerivative_asAdjointTransformWrenchDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 809: flag=_wrap_TransformDerivative_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 810: flag=_wrap_TransformDerivative_derivativeOfInverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 811: flag=_wrap_TransformDerivative_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 812: flag=_wrap_LINK_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 813: flag=_wrap_LINK_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 814: flag=_wrap_LINK_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 815: flag=_wrap_LINK_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 816: flag=_wrap_JOINT_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 817: flag=_wrap_JOINT_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 818: flag=_wrap_JOINT_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 819: flag=_wrap_JOINT_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 820: flag=_wrap_DOF_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 821: flag=_wrap_DOF_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 822: flag=_wrap_DOF_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 823: flag=_wrap_DOF_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 824: flag=_wrap_FRAME_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 825: flag=_wrap_FRAME_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 826: flag=_wrap_FRAME_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 827: flag=_wrap_FRAME_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 828: flag=_wrap_TRAVERSAL_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 829: flag=_wrap_TRAVERSAL_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 830: flag=_wrap_new_LinkPositions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 831: flag=_wrap_LinkPositions_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 832: flag=_wrap_LinkPositions_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 833: flag=_wrap_LinkPositions_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 834: flag=_wrap_LinkPositions_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 835: flag=_wrap_LinkPositions_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 836: flag=_wrap_delete_LinkPositions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 837: flag=_wrap_new_LinkWrenches(resc,resv,argc,(mxArray**)(argv)); break;
-  case 838: flag=_wrap_LinkWrenches_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 839: flag=_wrap_LinkWrenches_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 840: flag=_wrap_LinkWrenches_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 841: flag=_wrap_LinkWrenches_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 842: flag=_wrap_LinkWrenches_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 843: flag=_wrap_LinkWrenches_zero(resc,resv,argc,(mxArray**)(argv)); break;
-  case 844: flag=_wrap_delete_LinkWrenches(resc,resv,argc,(mxArray**)(argv)); break;
-  case 845: flag=_wrap_new_LinkInertias(resc,resv,argc,(mxArray**)(argv)); break;
-  case 846: flag=_wrap_LinkInertias_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 847: flag=_wrap_LinkInertias_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 848: flag=_wrap_LinkInertias_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 849: flag=_wrap_delete_LinkInertias(resc,resv,argc,(mxArray**)(argv)); break;
-  case 850: flag=_wrap_new_LinkArticulatedBodyInertias(resc,resv,argc,(mxArray**)(argv)); break;
-  case 851: flag=_wrap_LinkArticulatedBodyInertias_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 852: flag=_wrap_LinkArticulatedBodyInertias_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 853: flag=_wrap_LinkArticulatedBodyInertias_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 854: flag=_wrap_delete_LinkArticulatedBodyInertias(resc,resv,argc,(mxArray**)(argv)); break;
-  case 855: flag=_wrap_new_LinkVelArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 856: flag=_wrap_LinkVelArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 857: flag=_wrap_LinkVelArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 858: flag=_wrap_LinkVelArray_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 859: flag=_wrap_LinkVelArray_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 860: flag=_wrap_LinkVelArray_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 861: flag=_wrap_delete_LinkVelArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 862: flag=_wrap_new_LinkAccArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 863: flag=_wrap_LinkAccArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 864: flag=_wrap_LinkAccArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 865: flag=_wrap_LinkAccArray_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 866: flag=_wrap_LinkAccArray_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 867: flag=_wrap_LinkAccArray_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 868: flag=_wrap_delete_LinkAccArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 869: flag=_wrap_new_Link(resc,resv,argc,(mxArray**)(argv)); break;
-  case 870: flag=_wrap_Link_inertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 871: flag=_wrap_Link_setInertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 872: flag=_wrap_Link_getInertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 873: flag=_wrap_Link_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 874: flag=_wrap_Link_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 875: flag=_wrap_delete_Link(resc,resv,argc,(mxArray**)(argv)); break;
-  case 876: flag=_wrap_delete_IJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 877: flag=_wrap_IJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 878: flag=_wrap_IJoint_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 879: flag=_wrap_IJoint_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 880: flag=_wrap_IJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 881: flag=_wrap_IJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 882: flag=_wrap_IJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 883: flag=_wrap_IJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 884: flag=_wrap_IJoint_getRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 885: flag=_wrap_IJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 886: flag=_wrap_IJoint_getTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 887: flag=_wrap_IJoint_getMotionSubspaceVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 888: flag=_wrap_IJoint_computeChildPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 889: flag=_wrap_IJoint_computeChildVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 890: flag=_wrap_IJoint_computeChildVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 891: flag=_wrap_IJoint_computeChildAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 892: flag=_wrap_IJoint_computeChildBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 893: flag=_wrap_IJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
-  case 894: flag=_wrap_IJoint_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 895: flag=_wrap_IJoint_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 896: flag=_wrap_IJoint_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 897: flag=_wrap_IJoint_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 898: flag=_wrap_IJoint_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 899: flag=_wrap_IJoint_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 900: flag=_wrap_IJoint_hasPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 901: flag=_wrap_IJoint_enablePosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 902: flag=_wrap_IJoint_getPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 903: flag=_wrap_IJoint_getMinPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 904: flag=_wrap_IJoint_getMaxPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 905: flag=_wrap_IJoint_setPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 906: flag=_wrap_IJoint_isRevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 907: flag=_wrap_IJoint_isFixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 908: flag=_wrap_IJoint_asRevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 909: flag=_wrap_IJoint_asFixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 910: flag=_wrap_delete_FixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 911: flag=_wrap_FixedJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 912: flag=_wrap_FixedJoint_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 913: flag=_wrap_FixedJoint_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 914: flag=_wrap_FixedJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 915: flag=_wrap_FixedJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 916: flag=_wrap_FixedJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 917: flag=_wrap_FixedJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 918: flag=_wrap_FixedJoint_getRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 919: flag=_wrap_FixedJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 920: flag=_wrap_FixedJoint_getTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 921: flag=_wrap_FixedJoint_getMotionSubspaceVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 922: flag=_wrap_FixedJoint_computeChildPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 923: flag=_wrap_FixedJoint_computeChildVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 924: flag=_wrap_FixedJoint_computeChildVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 925: flag=_wrap_FixedJoint_computeChildAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 926: flag=_wrap_FixedJoint_computeChildBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 927: flag=_wrap_FixedJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
-  case 928: flag=_wrap_FixedJoint_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 929: flag=_wrap_FixedJoint_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 930: flag=_wrap_FixedJoint_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 931: flag=_wrap_FixedJoint_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 932: flag=_wrap_FixedJoint_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 933: flag=_wrap_FixedJoint_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 934: flag=_wrap_FixedJoint_hasPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 935: flag=_wrap_FixedJoint_enablePosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 936: flag=_wrap_FixedJoint_getPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 937: flag=_wrap_FixedJoint_getMinPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 938: flag=_wrap_FixedJoint_getMaxPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 939: flag=_wrap_FixedJoint_setPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 940: flag=_wrap_delete_MovableJointImpl1(resc,resv,argc,(mxArray**)(argv)); break;
-  case 941: flag=_wrap_MovableJointImpl1_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 942: flag=_wrap_MovableJointImpl1_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 943: flag=_wrap_MovableJointImpl1_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 944: flag=_wrap_MovableJointImpl1_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 945: flag=_wrap_MovableJointImpl1_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 946: flag=_wrap_MovableJointImpl1_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 947: flag=_wrap_MovableJointImpl1_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 948: flag=_wrap_MovableJointImpl1_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 949: flag=_wrap_delete_MovableJointImpl2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 950: flag=_wrap_MovableJointImpl2_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 951: flag=_wrap_MovableJointImpl2_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 952: flag=_wrap_MovableJointImpl2_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 953: flag=_wrap_MovableJointImpl2_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 954: flag=_wrap_MovableJointImpl2_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 955: flag=_wrap_MovableJointImpl2_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 956: flag=_wrap_MovableJointImpl2_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 957: flag=_wrap_MovableJointImpl2_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 958: flag=_wrap_delete_MovableJointImpl3(resc,resv,argc,(mxArray**)(argv)); break;
-  case 959: flag=_wrap_MovableJointImpl3_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 960: flag=_wrap_MovableJointImpl3_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 961: flag=_wrap_MovableJointImpl3_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 962: flag=_wrap_MovableJointImpl3_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 963: flag=_wrap_MovableJointImpl3_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 964: flag=_wrap_MovableJointImpl3_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 965: flag=_wrap_MovableJointImpl3_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 966: flag=_wrap_MovableJointImpl3_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 967: flag=_wrap_delete_MovableJointImpl4(resc,resv,argc,(mxArray**)(argv)); break;
-  case 968: flag=_wrap_MovableJointImpl4_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 969: flag=_wrap_MovableJointImpl4_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 970: flag=_wrap_MovableJointImpl4_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 971: flag=_wrap_MovableJointImpl4_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 972: flag=_wrap_MovableJointImpl4_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 973: flag=_wrap_MovableJointImpl4_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 974: flag=_wrap_MovableJointImpl4_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 975: flag=_wrap_MovableJointImpl4_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 976: flag=_wrap_delete_MovableJointImpl5(resc,resv,argc,(mxArray**)(argv)); break;
-  case 977: flag=_wrap_MovableJointImpl5_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 978: flag=_wrap_MovableJointImpl5_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 979: flag=_wrap_MovableJointImpl5_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 980: flag=_wrap_MovableJointImpl5_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 981: flag=_wrap_MovableJointImpl5_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 982: flag=_wrap_MovableJointImpl5_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 983: flag=_wrap_MovableJointImpl5_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 984: flag=_wrap_MovableJointImpl5_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 985: flag=_wrap_delete_MovableJointImpl6(resc,resv,argc,(mxArray**)(argv)); break;
-  case 986: flag=_wrap_MovableJointImpl6_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 987: flag=_wrap_MovableJointImpl6_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 988: flag=_wrap_MovableJointImpl6_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 989: flag=_wrap_MovableJointImpl6_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 990: flag=_wrap_MovableJointImpl6_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 991: flag=_wrap_MovableJointImpl6_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 992: flag=_wrap_MovableJointImpl6_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 993: flag=_wrap_MovableJointImpl6_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 994: flag=_wrap_delete_RevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 995: flag=_wrap_RevoluteJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 996: flag=_wrap_RevoluteJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 997: flag=_wrap_RevoluteJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 998: flag=_wrap_RevoluteJoint_setAxis(resc,resv,argc,(mxArray**)(argv)); break;
-  case 999: flag=_wrap_RevoluteJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1000: flag=_wrap_RevoluteJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1001: flag=_wrap_RevoluteJoint_getAxis(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1002: flag=_wrap_RevoluteJoint_getRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1003: flag=_wrap_RevoluteJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1004: flag=_wrap_RevoluteJoint_getTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1005: flag=_wrap_RevoluteJoint_getMotionSubspaceVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1006: flag=_wrap_RevoluteJoint_computeChildPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1007: flag=_wrap_RevoluteJoint_computeChildVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1008: flag=_wrap_RevoluteJoint_computeChildVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1009: flag=_wrap_RevoluteJoint_computeChildAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1010: flag=_wrap_RevoluteJoint_computeChildBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1011: flag=_wrap_RevoluteJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1012: flag=_wrap_RevoluteJoint_hasPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1013: flag=_wrap_RevoluteJoint_enablePosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1014: flag=_wrap_RevoluteJoint_getPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1015: flag=_wrap_RevoluteJoint_getMinPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1016: flag=_wrap_RevoluteJoint_getMaxPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1017: flag=_wrap_RevoluteJoint_setPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1018: flag=_wrap_new_Traversal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1019: flag=_wrap_delete_Traversal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1020: flag=_wrap_Traversal_getNrOfVisitedLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1021: flag=_wrap_Traversal_getLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1022: flag=_wrap_Traversal_getBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1023: flag=_wrap_Traversal_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1024: flag=_wrap_Traversal_getParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1025: flag=_wrap_Traversal_getParentLinkFromLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1026: flag=_wrap_Traversal_getParentJointFromLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1027: flag=_wrap_Traversal_getTraversalIndexFromLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1028: flag=_wrap_Traversal_reset(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1029: flag=_wrap_Traversal_addTraversalBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1030: flag=_wrap_Traversal_addTraversalElement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1031: flag=_wrap_Traversal_isParentOf(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1032: flag=_wrap_Traversal_getChildLinkIndexFromJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1033: flag=_wrap_Traversal_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1034: flag=_wrap_delete_SolidShape(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1035: flag=_wrap_SolidShape_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1036: flag=_wrap_SolidShape_name_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1037: flag=_wrap_SolidShape_name_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1038: flag=_wrap_SolidShape_link_H_geometry_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1039: flag=_wrap_SolidShape_link_H_geometry_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1040: flag=_wrap_SolidShape_material_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1041: flag=_wrap_SolidShape_material_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1042: flag=_wrap_SolidShape_isSphere(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1043: flag=_wrap_SolidShape_isBox(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1044: flag=_wrap_SolidShape_isCylinder(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1045: flag=_wrap_SolidShape_isExternalMesh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1046: flag=_wrap_SolidShape_asSphere(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1047: flag=_wrap_SolidShape_asBox(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1048: flag=_wrap_SolidShape_asCylinder(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1049: flag=_wrap_SolidShape_asExternalMesh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1050: flag=_wrap_delete_Sphere(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1051: flag=_wrap_Sphere_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1052: flag=_wrap_Sphere_radius_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1053: flag=_wrap_Sphere_radius_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1054: flag=_wrap_new_Sphere(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1055: flag=_wrap_delete_Box(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1056: flag=_wrap_Box_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1057: flag=_wrap_Box_x_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1058: flag=_wrap_Box_x_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1059: flag=_wrap_Box_y_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1060: flag=_wrap_Box_y_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1061: flag=_wrap_Box_z_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1062: flag=_wrap_Box_z_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1063: flag=_wrap_new_Box(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1064: flag=_wrap_delete_Cylinder(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1065: flag=_wrap_Cylinder_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1066: flag=_wrap_Cylinder_length_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1067: flag=_wrap_Cylinder_length_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1068: flag=_wrap_Cylinder_radius_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1069: flag=_wrap_Cylinder_radius_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1070: flag=_wrap_new_Cylinder(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1071: flag=_wrap_delete_ExternalMesh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1072: flag=_wrap_ExternalMesh_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1073: flag=_wrap_ExternalMesh_filename_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1074: flag=_wrap_ExternalMesh_filename_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1075: flag=_wrap_ExternalMesh_scale_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1076: flag=_wrap_ExternalMesh_scale_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1077: flag=_wrap_new_ExternalMesh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1078: flag=_wrap_new_ModelSolidShapes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1079: flag=_wrap_ModelSolidShapes_clear(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1080: flag=_wrap_delete_ModelSolidShapes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1081: flag=_wrap_ModelSolidShapes_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1082: flag=_wrap_ModelSolidShapes_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1083: flag=_wrap_ModelSolidShapes_linkSolidShapes_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1084: flag=_wrap_ModelSolidShapes_linkSolidShapes_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1085: flag=_wrap_Neighbor_neighborLink_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1086: flag=_wrap_Neighbor_neighborLink_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1087: flag=_wrap_Neighbor_neighborJoint_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1088: flag=_wrap_Neighbor_neighborJoint_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1089: flag=_wrap_new_Neighbor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1090: flag=_wrap_delete_Neighbor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1091: flag=_wrap_new_Model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1092: flag=_wrap_Model_copy(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1093: flag=_wrap_delete_Model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1094: flag=_wrap_Model_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1095: flag=_wrap_Model_getLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1096: flag=_wrap_Model_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1097: flag=_wrap_Model_isValidLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1098: flag=_wrap_Model_getLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1099: flag=_wrap_Model_addLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1100: flag=_wrap_Model_getNrOfJoints(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1101: flag=_wrap_Model_getJointName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1102: flag=_wrap_Model_getJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1103: flag=_wrap_Model_getJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1104: flag=_wrap_Model_isValidJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1105: flag=_wrap_Model_isLinkNameUsed(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1106: flag=_wrap_Model_isJointNameUsed(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1107: flag=_wrap_Model_isFrameNameUsed(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1108: flag=_wrap_Model_addJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1109: flag=_wrap_Model_addJointAndLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1110: flag=_wrap_Model_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1111: flag=_wrap_Model_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1112: flag=_wrap_Model_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1113: flag=_wrap_Model_addAdditionalFrameToLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1114: flag=_wrap_Model_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1115: flag=_wrap_Model_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1116: flag=_wrap_Model_isValidFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1117: flag=_wrap_Model_getFrameTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1118: flag=_wrap_Model_getFrameLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1119: flag=_wrap_Model_getNrOfNeighbors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1120: flag=_wrap_Model_getNeighbor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1121: flag=_wrap_Model_setDefaultBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1122: flag=_wrap_Model_getDefaultBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1123: flag=_wrap_Model_computeFullTreeTraversal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1124: flag=_wrap_Model_getInertialParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1125: flag=_wrap_Model_updateInertialParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1126: flag=_wrap_Model_visualSolidShapes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1127: flag=_wrap_Model_collisionSolidShapes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1128: flag=_wrap_Model_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1129: flag=_wrap_new_JointPosDoubleArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1130: flag=_wrap_JointPosDoubleArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1131: flag=_wrap_JointPosDoubleArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1132: flag=_wrap_delete_JointPosDoubleArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1133: flag=_wrap_new_JointDOFsDoubleArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1134: flag=_wrap_JointDOFsDoubleArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1135: flag=_wrap_JointDOFsDoubleArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1136: flag=_wrap_delete_JointDOFsDoubleArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1137: flag=_wrap_new_DOFSpatialForceArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1138: flag=_wrap_DOFSpatialForceArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1139: flag=_wrap_DOFSpatialForceArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1140: flag=_wrap_DOFSpatialForceArray_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1141: flag=_wrap_delete_DOFSpatialForceArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1142: flag=_wrap_new_DOFSpatialMotionArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1143: flag=_wrap_DOFSpatialMotionArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1144: flag=_wrap_DOFSpatialMotionArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1145: flag=_wrap_DOFSpatialMotionArray_paren(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1146: flag=_wrap_delete_DOFSpatialMotionArray(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1147: flag=_wrap_new_FrameFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1148: flag=_wrap_FrameFreeFloatingJacobian_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1149: flag=_wrap_FrameFreeFloatingJacobian_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1150: flag=_wrap_delete_FrameFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1151: flag=_wrap_new_MomentumFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1152: flag=_wrap_MomentumFreeFloatingJacobian_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1153: flag=_wrap_MomentumFreeFloatingJacobian_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1154: flag=_wrap_delete_MomentumFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1155: flag=_wrap_new_FreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1156: flag=_wrap_FreeFloatingMassMatrix_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1157: flag=_wrap_delete_FreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1158: flag=_wrap_new_FreeFloatingPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1159: flag=_wrap_FreeFloatingPos_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1160: flag=_wrap_FreeFloatingPos_worldBasePos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1161: flag=_wrap_FreeFloatingPos_jointPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1162: flag=_wrap_FreeFloatingPos_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1163: flag=_wrap_delete_FreeFloatingPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1164: flag=_wrap_new_FreeFloatingGeneralizedTorques(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1165: flag=_wrap_FreeFloatingGeneralizedTorques_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1166: flag=_wrap_FreeFloatingGeneralizedTorques_baseWrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1167: flag=_wrap_FreeFloatingGeneralizedTorques_jointTorques(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1168: flag=_wrap_FreeFloatingGeneralizedTorques_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1169: flag=_wrap_delete_FreeFloatingGeneralizedTorques(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1170: flag=_wrap_new_FreeFloatingVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1171: flag=_wrap_FreeFloatingVel_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1172: flag=_wrap_FreeFloatingVel_baseVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1173: flag=_wrap_FreeFloatingVel_jointVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1174: flag=_wrap_FreeFloatingVel_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1175: flag=_wrap_delete_FreeFloatingVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1176: flag=_wrap_new_FreeFloatingAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1177: flag=_wrap_FreeFloatingAcc_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1178: flag=_wrap_FreeFloatingAcc_baseAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1179: flag=_wrap_FreeFloatingAcc_jointAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1180: flag=_wrap_FreeFloatingAcc_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1181: flag=_wrap_delete_FreeFloatingAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1182: flag=_wrap_ContactWrench_contactId(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1183: flag=_wrap_ContactWrench_contactPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1184: flag=_wrap_ContactWrench_contactWrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1185: flag=_wrap_new_ContactWrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1186: flag=_wrap_delete_ContactWrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1187: flag=_wrap_new_LinkContactWrenches(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1188: flag=_wrap_LinkContactWrenches_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1189: flag=_wrap_LinkContactWrenches_getNrOfContactsForLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1190: flag=_wrap_LinkContactWrenches_setNrOfContactsForLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1191: flag=_wrap_LinkContactWrenches_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1192: flag=_wrap_LinkContactWrenches_contactWrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1193: flag=_wrap_LinkContactWrenches_computeNetWrenches(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1194: flag=_wrap_LinkContactWrenches_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1195: flag=_wrap_delete_LinkContactWrenches(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1196: flag=_wrap_ForwardPositionKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1197: flag=_wrap_ForwardVelAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1198: flag=_wrap_ForwardPosVelAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1199: flag=_wrap_ForwardPosVelKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1200: flag=_wrap_ForwardAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1201: flag=_wrap_ForwardBiasAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1202: flag=_wrap_ComputeLinearAndAngularMomentum(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1203: flag=_wrap_ComputeLinearAndAngularMomentumDerivativeBias(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1204: flag=_wrap_RNEADynamicPhase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1205: flag=_wrap_CompositeRigidBodyAlgorithm(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1206: flag=_wrap_new_ArticulatedBodyAlgorithmInternalBuffers(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1207: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1208: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1209: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_S_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1210: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_S_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1211: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_U_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1212: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_U_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1213: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_D_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1214: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_D_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1215: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_u_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1216: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_u_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1217: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksVel_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1218: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksVel_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1219: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksBiasAcceleration_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1220: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksBiasAcceleration_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1221: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksAccelerations_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1222: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksAccelerations_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1223: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linkABIs_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1224: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linkABIs_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1225: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksBiasWrench_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1226: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksBiasWrench_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1227: flag=_wrap_delete_ArticulatedBodyAlgorithmInternalBuffers(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1228: flag=_wrap_ArticulatedBodyAlgorithm(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1229: flag=_wrap_NR_OF_SENSOR_TYPES_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1230: flag=_wrap_isLinkSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1231: flag=_wrap_isJointSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1232: flag=_wrap_getSensorTypeSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1233: flag=_wrap_delete_Sensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1234: flag=_wrap_Sensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1235: flag=_wrap_Sensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1236: flag=_wrap_Sensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1237: flag=_wrap_Sensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1238: flag=_wrap_Sensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1239: flag=_wrap_Sensor_updateIndices(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1240: flag=_wrap_Sensor_updateIndeces(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1241: flag=_wrap_delete_JointSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1242: flag=_wrap_JointSensor_getParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1243: flag=_wrap_JointSensor_getParentJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1244: flag=_wrap_JointSensor_setParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1245: flag=_wrap_JointSensor_setParentJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1246: flag=_wrap_delete_LinkSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1247: flag=_wrap_LinkSensor_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1248: flag=_wrap_LinkSensor_getParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1249: flag=_wrap_LinkSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1250: flag=_wrap_LinkSensor_setParentLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1251: flag=_wrap_LinkSensor_setParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1252: flag=_wrap_LinkSensor_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1253: flag=_wrap_new_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1254: flag=_wrap_delete_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1255: flag=_wrap_SensorsList_addSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1256: flag=_wrap_SensorsList_setSerialization(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1257: flag=_wrap_SensorsList_getSerialization(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1258: flag=_wrap_SensorsList_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1259: flag=_wrap_SensorsList_getSensorIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1260: flag=_wrap_SensorsList_getSizeOfAllSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1261: flag=_wrap_SensorsList_getSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1262: flag=_wrap_SensorsList_removeSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1263: flag=_wrap_SensorsList_removeAllSensorsOfType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1264: flag=_wrap_SensorsList_getSixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1265: flag=_wrap_SensorsList_getAccelerometerSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1266: flag=_wrap_SensorsList_getGyroscopeSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1267: flag=_wrap_new_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1268: flag=_wrap_delete_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1269: flag=_wrap_SensorsMeasurements_setNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1270: flag=_wrap_SensorsMeasurements_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1271: flag=_wrap_SensorsMeasurements_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1272: flag=_wrap_SensorsMeasurements_toVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1273: flag=_wrap_SensorsMeasurements_setMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1274: flag=_wrap_SensorsMeasurements_getMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1275: flag=_wrap_SensorsMeasurements_getSizeOfAllSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1276: flag=_wrap_new_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1277: flag=_wrap_delete_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1278: flag=_wrap_SixAxisForceTorqueSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1279: flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1280: flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1281: flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1282: flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1283: flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1284: flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1285: flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1286: flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1287: flag=_wrap_SixAxisForceTorqueSensor_setParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1288: flag=_wrap_SixAxisForceTorqueSensor_setParentJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1289: flag=_wrap_SixAxisForceTorqueSensor_setAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1290: flag=_wrap_SixAxisForceTorqueSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1291: flag=_wrap_SixAxisForceTorqueSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1292: flag=_wrap_SixAxisForceTorqueSensor_getParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1293: flag=_wrap_SixAxisForceTorqueSensor_getParentJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1294: flag=_wrap_SixAxisForceTorqueSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1295: flag=_wrap_SixAxisForceTorqueSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1296: flag=_wrap_SixAxisForceTorqueSensor_updateIndices(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1297: flag=_wrap_SixAxisForceTorqueSensor_updateIndeces(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1298: flag=_wrap_SixAxisForceTorqueSensor_getAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1299: flag=_wrap_SixAxisForceTorqueSensor_isLinkAttachedToSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1300: flag=_wrap_SixAxisForceTorqueSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1301: flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1302: flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLinkMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1303: flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLinkInverseMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1304: flag=_wrap_SixAxisForceTorqueSensor_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1305: flag=_wrap_SixAxisForceTorqueSensor_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1306: flag=_wrap_new_AccelerometerSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1307: flag=_wrap_delete_AccelerometerSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1308: flag=_wrap_AccelerometerSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1309: flag=_wrap_AccelerometerSensor_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1310: flag=_wrap_AccelerometerSensor_setParentLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1311: flag=_wrap_AccelerometerSensor_setParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1312: flag=_wrap_AccelerometerSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1313: flag=_wrap_AccelerometerSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1314: flag=_wrap_AccelerometerSensor_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1315: flag=_wrap_AccelerometerSensor_getParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1316: flag=_wrap_AccelerometerSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1317: flag=_wrap_AccelerometerSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1318: flag=_wrap_AccelerometerSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1319: flag=_wrap_AccelerometerSensor_updateIndices(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1320: flag=_wrap_AccelerometerSensor_updateIndeces(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1321: flag=_wrap_AccelerometerSensor_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1322: flag=_wrap_new_GyroscopeSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1323: flag=_wrap_delete_GyroscopeSensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1324: flag=_wrap_GyroscopeSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1325: flag=_wrap_GyroscopeSensor_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1326: flag=_wrap_GyroscopeSensor_setParentLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1327: flag=_wrap_GyroscopeSensor_setParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1328: flag=_wrap_GyroscopeSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1329: flag=_wrap_GyroscopeSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1330: flag=_wrap_GyroscopeSensor_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1331: flag=_wrap_GyroscopeSensor_getParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1332: flag=_wrap_GyroscopeSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1333: flag=_wrap_GyroscopeSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1334: flag=_wrap_GyroscopeSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1335: flag=_wrap_GyroscopeSensor_updateIndices(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1336: flag=_wrap_GyroscopeSensor_updateIndeces(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1337: flag=_wrap_GyroscopeSensor_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1338: flag=_wrap_predictSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1339: flag=_wrap_predictSensorsMeasurementsFromRawBuffers(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1340: flag=_wrap_URDFParserOptions_addSensorFramesAsAdditionalFrames_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1341: flag=_wrap_URDFParserOptions_addSensorFramesAsAdditionalFrames_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1342: flag=_wrap_URDFParserOptions_originalFilename_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1343: flag=_wrap_URDFParserOptions_originalFilename_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1344: flag=_wrap_new_URDFParserOptions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1345: flag=_wrap_delete_URDFParserOptions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1346: flag=_wrap_modelFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1347: flag=_wrap_modelFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1348: flag=_wrap_dofsListFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1349: flag=_wrap_dofsListFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1350: flag=_wrap_sensorsFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1351: flag=_wrap_sensorsFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1352: flag=_wrap_new_ModelLoader(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1353: flag=_wrap_ModelLoader_loadModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1354: flag=_wrap_ModelLoader_loadModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1355: flag=_wrap_ModelLoader_loadReducedModelFromFullModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1356: flag=_wrap_ModelLoader_loadReducedModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1357: flag=_wrap_ModelLoader_loadReducedModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1358: flag=_wrap_ModelLoader_model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1359: flag=_wrap_ModelLoader_sensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1360: flag=_wrap_ModelLoader_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1361: flag=_wrap_delete_ModelLoader(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1362: flag=_wrap_new_UnknownWrenchContact(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1363: flag=_wrap_UnknownWrenchContact_unknownType_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1364: flag=_wrap_UnknownWrenchContact_unknownType_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1365: flag=_wrap_UnknownWrenchContact_contactPoint_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1366: flag=_wrap_UnknownWrenchContact_contactPoint_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1367: flag=_wrap_UnknownWrenchContact_forceDirection_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1368: flag=_wrap_UnknownWrenchContact_forceDirection_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1369: flag=_wrap_UnknownWrenchContact_knownWrench_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1370: flag=_wrap_UnknownWrenchContact_knownWrench_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1371: flag=_wrap_UnknownWrenchContact_contactId_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1372: flag=_wrap_UnknownWrenchContact_contactId_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1373: flag=_wrap_delete_UnknownWrenchContact(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1374: flag=_wrap_new_LinkUnknownWrenchContacts(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1375: flag=_wrap_LinkUnknownWrenchContacts_clear(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1376: flag=_wrap_LinkUnknownWrenchContacts_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1377: flag=_wrap_LinkUnknownWrenchContacts_getNrOfContactsForLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1378: flag=_wrap_LinkUnknownWrenchContacts_setNrOfContactsForLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1379: flag=_wrap_LinkUnknownWrenchContacts_addNewContactForLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1380: flag=_wrap_LinkUnknownWrenchContacts_addNewContactInFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1381: flag=_wrap_LinkUnknownWrenchContacts_addNewUnknownFullWrenchInFrameOrigin(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1382: flag=_wrap_LinkUnknownWrenchContacts_contactWrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1383: flag=_wrap_LinkUnknownWrenchContacts_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1384: flag=_wrap_delete_LinkUnknownWrenchContacts(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1385: flag=_wrap_new_estimateExternalWrenchesBuffers(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1386: flag=_wrap_estimateExternalWrenchesBuffers_resize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1387: flag=_wrap_estimateExternalWrenchesBuffers_getNrOfSubModels(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1388: flag=_wrap_estimateExternalWrenchesBuffers_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1389: flag=_wrap_estimateExternalWrenchesBuffers_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1390: flag=_wrap_estimateExternalWrenchesBuffers_A_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1391: flag=_wrap_estimateExternalWrenchesBuffers_A_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1392: flag=_wrap_estimateExternalWrenchesBuffers_x_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1393: flag=_wrap_estimateExternalWrenchesBuffers_x_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1394: flag=_wrap_estimateExternalWrenchesBuffers_b_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1395: flag=_wrap_estimateExternalWrenchesBuffers_b_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1396: flag=_wrap_estimateExternalWrenchesBuffers_pinvA_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1397: flag=_wrap_estimateExternalWrenchesBuffers_pinvA_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1398: flag=_wrap_estimateExternalWrenchesBuffers_b_contacts_subtree_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1399: flag=_wrap_estimateExternalWrenchesBuffers_b_contacts_subtree_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1400: flag=_wrap_estimateExternalWrenchesBuffers_subModelBase_H_link_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1401: flag=_wrap_estimateExternalWrenchesBuffers_subModelBase_H_link_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1402: flag=_wrap_delete_estimateExternalWrenchesBuffers(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1403: flag=_wrap_estimateExternalWrenchesWithoutInternalFT(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1404: flag=_wrap_estimateExternalWrenches(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1405: flag=_wrap_dynamicsEstimationForwardVelAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1406: flag=_wrap_dynamicsEstimationForwardVelKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1407: flag=_wrap_computeLinkNetWrenchesWithoutGravity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1408: flag=_wrap_new_ExtWrenchesAndJointTorquesEstimator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1409: flag=_wrap_delete_ExtWrenchesAndJointTorquesEstimator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1410: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_setModelAndSensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1411: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_loadModelAndSensorsFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1412: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_loadModelAndSensorsFromFileWithSpecifiedDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1413: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1414: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_sensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1415: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_submodels(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1416: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_updateKinematicsFromFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1417: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_updateKinematicsFromFixedBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1418: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_computeExpectedFTSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1419: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_estimateExtWrenchesAndJointTorques(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1420: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_checkThatTheModelIsStill(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1421: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_estimateLinkNetWrenchesWithoutGravity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1422: flag=_wrap_new_SimpleLeggedOdometry(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1423: flag=_wrap_delete_SimpleLeggedOdometry(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1424: flag=_wrap_SimpleLeggedOdometry_setModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1425: flag=_wrap_SimpleLeggedOdometry_loadModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1426: flag=_wrap_SimpleLeggedOdometry_loadModelFromFileWithSpecifiedDOFs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1427: flag=_wrap_SimpleLeggedOdometry_model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1428: flag=_wrap_SimpleLeggedOdometry_updateKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1429: flag=_wrap_SimpleLeggedOdometry_init(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1430: flag=_wrap_SimpleLeggedOdometry_changeFixedFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1431: flag=_wrap_SimpleLeggedOdometry_getCurrentFixedLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1432: flag=_wrap_SimpleLeggedOdometry_getWorldLinkTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1433: flag=_wrap_isLinkBerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1434: flag=_wrap_isJointBerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1435: flag=_wrap_isDOFBerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1436: flag=_wrap_new_BerdyOptions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1437: flag=_wrap_BerdyOptions_berdyVariant_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1438: flag=_wrap_BerdyOptions_berdyVariant_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1439: flag=_wrap_BerdyOptions_includeAllNetExternalWrenchesAsDynamicVariables_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1440: flag=_wrap_BerdyOptions_includeAllNetExternalWrenchesAsDynamicVariables_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1441: flag=_wrap_BerdyOptions_includeAllJointAccelerationsAsSensors_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1442: flag=_wrap_BerdyOptions_includeAllJointAccelerationsAsSensors_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1443: flag=_wrap_BerdyOptions_includeAllJointTorquesAsSensors_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1444: flag=_wrap_BerdyOptions_includeAllJointTorquesAsSensors_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1445: flag=_wrap_BerdyOptions_includeAllNetExternalWrenchesAsSensors_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1446: flag=_wrap_BerdyOptions_includeAllNetExternalWrenchesAsSensors_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1447: flag=_wrap_BerdyOptions_includeFixedBaseExternalWrench_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1448: flag=_wrap_BerdyOptions_includeFixedBaseExternalWrench_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1449: flag=_wrap_BerdyOptions_jointOnWhichTheInternalWrenchIsMeasured_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1450: flag=_wrap_BerdyOptions_jointOnWhichTheInternalWrenchIsMeasured_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1451: flag=_wrap_BerdyOptions_baseLink_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1452: flag=_wrap_BerdyOptions_baseLink_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1453: flag=_wrap_BerdyOptions_checkConsistency(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1454: flag=_wrap_delete_BerdyOptions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1455: flag=_wrap_BerdySensor_type_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1456: flag=_wrap_BerdySensor_type_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1457: flag=_wrap_BerdySensor_id_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1458: flag=_wrap_BerdySensor_id_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1459: flag=_wrap_BerdySensor_range_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1460: flag=_wrap_BerdySensor_range_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1461: flag=_wrap_BerdySensor_eq(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1462: flag=_wrap_BerdySensor_lt(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1463: flag=_wrap_new_BerdySensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1464: flag=_wrap_delete_BerdySensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1465: flag=_wrap_BerdyDynamicVariable_type_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1466: flag=_wrap_BerdyDynamicVariable_type_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1467: flag=_wrap_BerdyDynamicVariable_id_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1468: flag=_wrap_BerdyDynamicVariable_id_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1469: flag=_wrap_BerdyDynamicVariable_range_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1470: flag=_wrap_BerdyDynamicVariable_range_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1471: flag=_wrap_BerdyDynamicVariable_eq(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1472: flag=_wrap_BerdyDynamicVariable_lt(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1473: flag=_wrap_new_BerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1474: flag=_wrap_delete_BerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1475: flag=_wrap_new_BerdyHelper(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1476: flag=_wrap_BerdyHelper_dynamicTraversal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1477: flag=_wrap_BerdyHelper_model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1478: flag=_wrap_BerdyHelper_sensors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1479: flag=_wrap_BerdyHelper_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1480: flag=_wrap_BerdyHelper_init(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1481: flag=_wrap_BerdyHelper_getOptions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1482: flag=_wrap_BerdyHelper_getNrOfDynamicVariables(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1483: flag=_wrap_BerdyHelper_getNrOfDynamicEquations(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1484: flag=_wrap_BerdyHelper_getNrOfSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1485: flag=_wrap_BerdyHelper_resizeAndZeroBerdyMatrices(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1486: flag=_wrap_BerdyHelper_getBerdyMatrices(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1487: flag=_wrap_BerdyHelper_getSensorsOrdering(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1488: flag=_wrap_BerdyHelper_getDynamicVariablesOrdering(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1489: flag=_wrap_BerdyHelper_serializeDynamicVariables(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1490: flag=_wrap_BerdyHelper_serializeSensorVariables(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1491: flag=_wrap_BerdyHelper_serializeDynamicVariablesComputedFromFixedBaseRNEA(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1492: flag=_wrap_BerdyHelper_updateKinematicsFromFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1493: flag=_wrap_BerdyHelper_updateKinematicsFromFixedBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1494: flag=_wrap_BerdyHelper_updateKinematicsFromTraversalFixedBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1495: flag=_wrap_delete_BerdyHelper(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1496: flag=_wrap_new_BerdySparseMAPSolver(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1497: flag=_wrap_delete_BerdySparseMAPSolver(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1498: flag=_wrap_BerdySparseMAPSolver_setDynamicsConstraintsPriorCovariance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1499: flag=_wrap_BerdySparseMAPSolver_setDynamicsRegularizationPriorCovariance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1500: flag=_wrap_BerdySparseMAPSolver_setDynamicsRegularizationPriorExpectedValue(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1501: flag=_wrap_BerdySparseMAPSolver_setMeasurementsPriorCovariance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1502: flag=_wrap_BerdySparseMAPSolver_dynamicsConstraintsPriorCovarianceInverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1503: flag=_wrap_BerdySparseMAPSolver_dynamicsRegularizationPriorCovarianceInverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1504: flag=_wrap_BerdySparseMAPSolver_dynamicsRegularizationPriorExpectedValue(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1505: flag=_wrap_BerdySparseMAPSolver_measurementsPriorCovarianceInverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1506: flag=_wrap_BerdySparseMAPSolver_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1507: flag=_wrap_BerdySparseMAPSolver_initialize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1508: flag=_wrap_BerdySparseMAPSolver_updateEstimateInformation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1509: flag=_wrap_BerdySparseMAPSolver_doEstimate(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1510: flag=_wrap_BerdySparseMAPSolver_getLastEstimate(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1511: flag=_wrap_DynamicsRegressorParameter_category_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1512: flag=_wrap_DynamicsRegressorParameter_category_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1513: flag=_wrap_DynamicsRegressorParameter_elemIndex_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1514: flag=_wrap_DynamicsRegressorParameter_elemIndex_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1515: flag=_wrap_DynamicsRegressorParameter_type_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1516: flag=_wrap_DynamicsRegressorParameter_type_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1517: flag=_wrap_DynamicsRegressorParameter_lt(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1518: flag=_wrap_DynamicsRegressorParameter_eq(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1519: flag=_wrap_DynamicsRegressorParameter_ne(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1520: flag=_wrap_new_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1521: flag=_wrap_delete_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1522: flag=_wrap_DynamicsRegressorParametersList_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1523: flag=_wrap_DynamicsRegressorParametersList_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1524: flag=_wrap_DynamicsRegressorParametersList_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1525: flag=_wrap_DynamicsRegressorParametersList_addParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1526: flag=_wrap_DynamicsRegressorParametersList_addList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1527: flag=_wrap_DynamicsRegressorParametersList_findParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1528: flag=_wrap_DynamicsRegressorParametersList_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1529: flag=_wrap_new_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1530: flag=_wrap_delete_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1531: flag=_wrap_new_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1532: flag=_wrap_delete_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1533: flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1534: flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1535: flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1536: flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1537: flag=_wrap_DynamicsRegressorGenerator_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1538: flag=_wrap_DynamicsRegressorGenerator_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1539: flag=_wrap_DynamicsRegressorGenerator_getNrOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1540: flag=_wrap_DynamicsRegressorGenerator_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1541: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1542: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1543: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutput(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1544: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1545: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1546: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1547: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1548: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1549: flag=_wrap_DynamicsRegressorGenerator_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1550: flag=_wrap_DynamicsRegressorGenerator_getNrOfFakeLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1551: flag=_wrap_DynamicsRegressorGenerator_getBaseLinkName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1552: flag=_wrap_DynamicsRegressorGenerator_getSensorsModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1553: flag=_wrap_DynamicsRegressorGenerator_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1554: flag=_wrap_DynamicsRegressorGenerator_getSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1555: flag=_wrap_DynamicsRegressorGenerator_setTorqueSensorMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1556: flag=_wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1557: flag=_wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1558: flag=_wrap_DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1559: flag=_wrap_DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1560: flag=_wrap_DynamicsRegressorGenerator_generate_random_regressors(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1561: flag=_wrap_new_KinDynComputations(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1562: flag=_wrap_delete_KinDynComputations(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1563: flag=_wrap_KinDynComputations_loadRobotModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1564: flag=_wrap_KinDynComputations_loadRobotModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1565: flag=_wrap_KinDynComputations_loadRobotModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1566: flag=_wrap_KinDynComputations_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1567: flag=_wrap_KinDynComputations_setFrameVelocityRepresentation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1568: flag=_wrap_KinDynComputations_getFrameVelocityRepresentation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1569: flag=_wrap_KinDynComputations_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1570: flag=_wrap_KinDynComputations_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1571: flag=_wrap_KinDynComputations_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1572: flag=_wrap_KinDynComputations_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1573: flag=_wrap_KinDynComputations_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1574: flag=_wrap_KinDynComputations_getFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1575: flag=_wrap_KinDynComputations_setFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1576: flag=_wrap_KinDynComputations_model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1577: flag=_wrap_KinDynComputations_getRobotModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1578: flag=_wrap_KinDynComputations_setJointPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1579: flag=_wrap_KinDynComputations_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1580: flag=_wrap_KinDynComputations_getRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1581: flag=_wrap_KinDynComputations_getWorldBaseTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1582: flag=_wrap_KinDynComputations_getBaseTwist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1583: flag=_wrap_KinDynComputations_getJointPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1584: flag=_wrap_KinDynComputations_getJointVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1585: flag=_wrap_KinDynComputations_getModelVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1586: flag=_wrap_KinDynComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1587: flag=_wrap_KinDynComputations_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1588: flag=_wrap_KinDynComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1589: flag=_wrap_KinDynComputations_getRelativeTransformExplicit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1590: flag=_wrap_KinDynComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1591: flag=_wrap_KinDynComputations_getFrameVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1592: flag=_wrap_KinDynComputations_getFrameFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1593: flag=_wrap_KinDynComputations_getRelativeJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1594: flag=_wrap_KinDynComputations_getRelativeJacobianExplicit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1595: flag=_wrap_KinDynComputations_getFrameBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1596: flag=_wrap_KinDynComputations_getCenterOfMassPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1597: flag=_wrap_KinDynComputations_getCenterOfMassVelocity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1598: flag=_wrap_KinDynComputations_getCenterOfMassJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1599: flag=_wrap_KinDynComputations_getCenterOfMassBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1600: flag=_wrap_KinDynComputations_getAverageVelocity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1601: flag=_wrap_KinDynComputations_getAverageVelocityJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1602: flag=_wrap_KinDynComputations_getCentroidalAverageVelocity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1603: flag=_wrap_KinDynComputations_getCentroidalAverageVelocityJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1604: flag=_wrap_KinDynComputations_getLinearAngularMomentum(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1605: flag=_wrap_KinDynComputations_getLinearAngularMomentumJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1606: flag=_wrap_KinDynComputations_getCentroidalTotalMomentum(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1607: flag=_wrap_KinDynComputations_getFreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1608: flag=_wrap_KinDynComputations_inverseDynamics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1609: flag=_wrap_KinDynComputations_generalizedBiasForces(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1610: flag=_wrap_KinDynComputations_generalizedGravityForces(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1611: flag=_wrap_delete_ICamera(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1612: flag=_wrap_ICamera_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1613: flag=_wrap_ICamera_setTarget(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1614: flag=_wrap_ICamera_setUpVector(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1615: flag=_wrap_ColorViz_r_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1616: flag=_wrap_ColorViz_r_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1617: flag=_wrap_ColorViz_g_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1618: flag=_wrap_ColorViz_g_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1619: flag=_wrap_ColorViz_b_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1620: flag=_wrap_ColorViz_b_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1621: flag=_wrap_ColorViz_a_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1622: flag=_wrap_ColorViz_a_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1623: flag=_wrap_new_ColorViz(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1624: flag=_wrap_delete_ColorViz(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1625: flag=_wrap_delete_ILight(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1626: flag=_wrap_ILight_getName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1627: flag=_wrap_ILight_setType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1628: flag=_wrap_ILight_getType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1629: flag=_wrap_ILight_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1630: flag=_wrap_ILight_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1631: flag=_wrap_ILight_setDirection(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1632: flag=_wrap_ILight_getDirection(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1633: flag=_wrap_ILight_setAmbientColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1634: flag=_wrap_ILight_getAmbientColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1635: flag=_wrap_ILight_setSpecularColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1636: flag=_wrap_ILight_getSpecularColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1637: flag=_wrap_ILight_setDiffuseColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1638: flag=_wrap_ILight_getDiffuseColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1639: flag=_wrap_delete_IEnvironment(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1640: flag=_wrap_IEnvironment_getElements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1641: flag=_wrap_IEnvironment_setElementVisibility(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1642: flag=_wrap_IEnvironment_setBackgroundColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1643: flag=_wrap_IEnvironment_setAmbientLight(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1644: flag=_wrap_IEnvironment_getLights(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1645: flag=_wrap_IEnvironment_addLight(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1646: flag=_wrap_IEnvironment_lightViz(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1647: flag=_wrap_IEnvironment_removeLight(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1648: flag=_wrap_delete_IJetsVisualization(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1649: flag=_wrap_IJetsVisualization_setJetsFrames(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1650: flag=_wrap_IJetsVisualization_getNrOfJets(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1651: flag=_wrap_IJetsVisualization_getJetDirection(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1652: flag=_wrap_IJetsVisualization_setJetDirection(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1653: flag=_wrap_IJetsVisualization_setJetColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1654: flag=_wrap_IJetsVisualization_setJetsDimensions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1655: flag=_wrap_IJetsVisualization_setJetsIntensity(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1656: flag=_wrap_delete_IModelVisualization(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1657: flag=_wrap_IModelVisualization_setPositions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1658: flag=_wrap_IModelVisualization_setLinkPositions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1659: flag=_wrap_IModelVisualization_model(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1660: flag=_wrap_IModelVisualization_getInstanceName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1661: flag=_wrap_IModelVisualization_setModelVisibility(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1662: flag=_wrap_IModelVisualization_setModelColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1663: flag=_wrap_IModelVisualization_resetModelColor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1664: flag=_wrap_IModelVisualization_getLinkNames(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1665: flag=_wrap_IModelVisualization_setLinkVisibility(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1666: flag=_wrap_IModelVisualization_getFeatures(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1667: flag=_wrap_IModelVisualization_setFeatureVisibility(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1668: flag=_wrap_IModelVisualization_jets(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1669: flag=_wrap_VisualizerOptions_verbose_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1670: flag=_wrap_VisualizerOptions_verbose_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1671: flag=_wrap_VisualizerOptions_winWidth_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1672: flag=_wrap_VisualizerOptions_winWidth_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1673: flag=_wrap_VisualizerOptions_winHeight_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1674: flag=_wrap_VisualizerOptions_winHeight_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1675: flag=_wrap_VisualizerOptions_rootFrameArrowsDimension_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1676: flag=_wrap_VisualizerOptions_rootFrameArrowsDimension_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1677: flag=_wrap_new_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1678: flag=_wrap_delete_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1679: flag=_wrap_new_Visualizer(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1680: flag=_wrap_delete_Visualizer(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1681: flag=_wrap_Visualizer_init(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1682: flag=_wrap_Visualizer_getNrOfVisualizedModels(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1683: flag=_wrap_Visualizer_getModelInstanceName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1684: flag=_wrap_Visualizer_getModelInstanceIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1685: flag=_wrap_Visualizer_addModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1686: flag=_wrap_Visualizer_modelViz(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1687: flag=_wrap_Visualizer_camera(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1688: flag=_wrap_Visualizer_enviroment(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1689: flag=_wrap_Visualizer_run(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1690: flag=_wrap_Visualizer_draw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1691: flag=_wrap_Visualizer_drawToFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1692: flag=_wrap_Visualizer_close(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1693: flag=_wrap_new_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1694: flag=_wrap_delete_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1695: flag=_wrap_DynamicsComputations_loadRobotModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1696: flag=_wrap_DynamicsComputations_loadRobotModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1697: flag=_wrap_DynamicsComputations_isValid(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1698: flag=_wrap_DynamicsComputations_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1699: flag=_wrap_DynamicsComputations_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1700: flag=_wrap_DynamicsComputations_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1701: flag=_wrap_DynamicsComputations_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1702: flag=_wrap_DynamicsComputations_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1703: flag=_wrap_DynamicsComputations_getFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1704: flag=_wrap_DynamicsComputations_setFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1705: flag=_wrap_DynamicsComputations_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1706: flag=_wrap_DynamicsComputations_getWorldBaseTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1707: flag=_wrap_DynamicsComputations_getBaseTwist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1708: flag=_wrap_DynamicsComputations_getJointPos(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1709: flag=_wrap_DynamicsComputations_getJointVel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1710: flag=_wrap_DynamicsComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1711: flag=_wrap_DynamicsComputations_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1712: flag=_wrap_DynamicsComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1713: flag=_wrap_DynamicsComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1714: flag=_wrap_DynamicsComputations_getFrameTwist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1715: flag=_wrap_DynamicsComputations_getFrameTwistInWorldOrient(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1716: flag=_wrap_DynamicsComputations_getFrameProperSpatialAcceleration(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1717: flag=_wrap_DynamicsComputations_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1718: flag=_wrap_DynamicsComputations_getLinkInertia(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1719: flag=_wrap_DynamicsComputations_getJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1720: flag=_wrap_DynamicsComputations_getJointName(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1721: flag=_wrap_DynamicsComputations_getJointLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1722: flag=_wrap_DynamicsComputations_inverseDynamics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1723: flag=_wrap_DynamicsComputations_getFreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1724: flag=_wrap_DynamicsComputations_getFrameJacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1725: flag=_wrap_DynamicsComputations_getDynamicsRegressor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1726: flag=_wrap_DynamicsComputations_getModelDynamicsParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1727: flag=_wrap_DynamicsComputations_getCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 1728: flag=_wrap_DynamicsComputations_getCenterOfMassJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 782: flag=_wrap_Transform_fromHomogeneousTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 783: flag=_wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 784: flag=_wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 785: flag=_wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 786: flag=_wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 787: flag=_wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 788: flag=_wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 789: flag=_wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 790: flag=_wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 791: flag=_wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 792: flag=_wrap_Transform_Identity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 793: flag=_wrap_Transform_asHomogeneousTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 794: flag=_wrap_Transform_asAdjointTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 795: flag=_wrap_Transform_asAdjointTransformWrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 796: flag=_wrap_Transform_log(resc,resv,argc,(mxArray**)(argv)); break;
+  case 797: flag=_wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 798: flag=_wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 799: flag=_wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 800: flag=_wrap_new_TransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 801: flag=_wrap_delete_TransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 802: flag=_wrap_TransformDerivative_getRotationDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 803: flag=_wrap_TransformDerivative_getPositionDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 804: flag=_wrap_TransformDerivative_setRotationDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 805: flag=_wrap_TransformDerivative_setPositionDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 806: flag=_wrap_TransformDerivative_Zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 807: flag=_wrap_TransformDerivative_asHomogeneousTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 808: flag=_wrap_TransformDerivative_asAdjointTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 809: flag=_wrap_TransformDerivative_asAdjointTransformWrenchDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 810: flag=_wrap_TransformDerivative_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 811: flag=_wrap_TransformDerivative_derivativeOfInverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 812: flag=_wrap_TransformDerivative_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 813: flag=_wrap_LINK_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 814: flag=_wrap_LINK_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 815: flag=_wrap_LINK_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 816: flag=_wrap_LINK_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 817: flag=_wrap_JOINT_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 818: flag=_wrap_JOINT_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 819: flag=_wrap_JOINT_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 820: flag=_wrap_JOINT_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 821: flag=_wrap_DOF_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 822: flag=_wrap_DOF_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 823: flag=_wrap_DOF_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 824: flag=_wrap_DOF_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 825: flag=_wrap_FRAME_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 826: flag=_wrap_FRAME_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 827: flag=_wrap_FRAME_INVALID_NAME_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 828: flag=_wrap_FRAME_INVALID_NAME_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 829: flag=_wrap_TRAVERSAL_INVALID_INDEX_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 830: flag=_wrap_TRAVERSAL_INVALID_INDEX_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 831: flag=_wrap_new_LinkPositions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 832: flag=_wrap_LinkPositions_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 833: flag=_wrap_LinkPositions_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 834: flag=_wrap_LinkPositions_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 835: flag=_wrap_LinkPositions_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 836: flag=_wrap_LinkPositions_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 837: flag=_wrap_delete_LinkPositions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 838: flag=_wrap_new_LinkWrenches(resc,resv,argc,(mxArray**)(argv)); break;
+  case 839: flag=_wrap_LinkWrenches_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 840: flag=_wrap_LinkWrenches_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 841: flag=_wrap_LinkWrenches_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 842: flag=_wrap_LinkWrenches_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 843: flag=_wrap_LinkWrenches_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 844: flag=_wrap_LinkWrenches_zero(resc,resv,argc,(mxArray**)(argv)); break;
+  case 845: flag=_wrap_delete_LinkWrenches(resc,resv,argc,(mxArray**)(argv)); break;
+  case 846: flag=_wrap_new_LinkInertias(resc,resv,argc,(mxArray**)(argv)); break;
+  case 847: flag=_wrap_LinkInertias_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 848: flag=_wrap_LinkInertias_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 849: flag=_wrap_LinkInertias_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 850: flag=_wrap_delete_LinkInertias(resc,resv,argc,(mxArray**)(argv)); break;
+  case 851: flag=_wrap_new_LinkArticulatedBodyInertias(resc,resv,argc,(mxArray**)(argv)); break;
+  case 852: flag=_wrap_LinkArticulatedBodyInertias_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 853: flag=_wrap_LinkArticulatedBodyInertias_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 854: flag=_wrap_LinkArticulatedBodyInertias_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 855: flag=_wrap_delete_LinkArticulatedBodyInertias(resc,resv,argc,(mxArray**)(argv)); break;
+  case 856: flag=_wrap_new_LinkVelArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 857: flag=_wrap_LinkVelArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 858: flag=_wrap_LinkVelArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 859: flag=_wrap_LinkVelArray_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 860: flag=_wrap_LinkVelArray_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 861: flag=_wrap_LinkVelArray_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 862: flag=_wrap_delete_LinkVelArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 863: flag=_wrap_new_LinkAccArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 864: flag=_wrap_LinkAccArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 865: flag=_wrap_LinkAccArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 866: flag=_wrap_LinkAccArray_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 867: flag=_wrap_LinkAccArray_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 868: flag=_wrap_LinkAccArray_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 869: flag=_wrap_delete_LinkAccArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 870: flag=_wrap_new_Link(resc,resv,argc,(mxArray**)(argv)); break;
+  case 871: flag=_wrap_Link_inertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 872: flag=_wrap_Link_setInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 873: flag=_wrap_Link_getInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 874: flag=_wrap_Link_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 875: flag=_wrap_Link_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 876: flag=_wrap_delete_Link(resc,resv,argc,(mxArray**)(argv)); break;
+  case 877: flag=_wrap_delete_IJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 878: flag=_wrap_IJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 879: flag=_wrap_IJoint_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 880: flag=_wrap_IJoint_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 881: flag=_wrap_IJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 882: flag=_wrap_IJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 883: flag=_wrap_IJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 884: flag=_wrap_IJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 885: flag=_wrap_IJoint_getRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 886: flag=_wrap_IJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 887: flag=_wrap_IJoint_getTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 888: flag=_wrap_IJoint_getMotionSubspaceVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 889: flag=_wrap_IJoint_computeChildPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 890: flag=_wrap_IJoint_computeChildVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 891: flag=_wrap_IJoint_computeChildVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 892: flag=_wrap_IJoint_computeChildAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 893: flag=_wrap_IJoint_computeChildBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 894: flag=_wrap_IJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
+  case 895: flag=_wrap_IJoint_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 896: flag=_wrap_IJoint_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 897: flag=_wrap_IJoint_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 898: flag=_wrap_IJoint_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 899: flag=_wrap_IJoint_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 900: flag=_wrap_IJoint_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 901: flag=_wrap_IJoint_hasPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 902: flag=_wrap_IJoint_enablePosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 903: flag=_wrap_IJoint_getPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 904: flag=_wrap_IJoint_getMinPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 905: flag=_wrap_IJoint_getMaxPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 906: flag=_wrap_IJoint_setPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 907: flag=_wrap_IJoint_isRevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 908: flag=_wrap_IJoint_isFixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 909: flag=_wrap_IJoint_asRevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 910: flag=_wrap_IJoint_asFixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 911: flag=_wrap_delete_FixedJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 912: flag=_wrap_FixedJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 913: flag=_wrap_FixedJoint_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 914: flag=_wrap_FixedJoint_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 915: flag=_wrap_FixedJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 916: flag=_wrap_FixedJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 917: flag=_wrap_FixedJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 918: flag=_wrap_FixedJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 919: flag=_wrap_FixedJoint_getRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 920: flag=_wrap_FixedJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 921: flag=_wrap_FixedJoint_getTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 922: flag=_wrap_FixedJoint_getMotionSubspaceVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 923: flag=_wrap_FixedJoint_computeChildPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 924: flag=_wrap_FixedJoint_computeChildVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 925: flag=_wrap_FixedJoint_computeChildVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 926: flag=_wrap_FixedJoint_computeChildAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 927: flag=_wrap_FixedJoint_computeChildBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 928: flag=_wrap_FixedJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
+  case 929: flag=_wrap_FixedJoint_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 930: flag=_wrap_FixedJoint_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 931: flag=_wrap_FixedJoint_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 932: flag=_wrap_FixedJoint_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 933: flag=_wrap_FixedJoint_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 934: flag=_wrap_FixedJoint_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 935: flag=_wrap_FixedJoint_hasPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 936: flag=_wrap_FixedJoint_enablePosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 937: flag=_wrap_FixedJoint_getPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 938: flag=_wrap_FixedJoint_getMinPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 939: flag=_wrap_FixedJoint_getMaxPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 940: flag=_wrap_FixedJoint_setPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 941: flag=_wrap_delete_MovableJointImpl1(resc,resv,argc,(mxArray**)(argv)); break;
+  case 942: flag=_wrap_MovableJointImpl1_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 943: flag=_wrap_MovableJointImpl1_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 944: flag=_wrap_MovableJointImpl1_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 945: flag=_wrap_MovableJointImpl1_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 946: flag=_wrap_MovableJointImpl1_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 947: flag=_wrap_MovableJointImpl1_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 948: flag=_wrap_MovableJointImpl1_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 949: flag=_wrap_MovableJointImpl1_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 950: flag=_wrap_delete_MovableJointImpl2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 951: flag=_wrap_MovableJointImpl2_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 952: flag=_wrap_MovableJointImpl2_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 953: flag=_wrap_MovableJointImpl2_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 954: flag=_wrap_MovableJointImpl2_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 955: flag=_wrap_MovableJointImpl2_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 956: flag=_wrap_MovableJointImpl2_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 957: flag=_wrap_MovableJointImpl2_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 958: flag=_wrap_MovableJointImpl2_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 959: flag=_wrap_delete_MovableJointImpl3(resc,resv,argc,(mxArray**)(argv)); break;
+  case 960: flag=_wrap_MovableJointImpl3_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 961: flag=_wrap_MovableJointImpl3_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 962: flag=_wrap_MovableJointImpl3_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 963: flag=_wrap_MovableJointImpl3_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 964: flag=_wrap_MovableJointImpl3_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 965: flag=_wrap_MovableJointImpl3_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 966: flag=_wrap_MovableJointImpl3_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 967: flag=_wrap_MovableJointImpl3_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 968: flag=_wrap_delete_MovableJointImpl4(resc,resv,argc,(mxArray**)(argv)); break;
+  case 969: flag=_wrap_MovableJointImpl4_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 970: flag=_wrap_MovableJointImpl4_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 971: flag=_wrap_MovableJointImpl4_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 972: flag=_wrap_MovableJointImpl4_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 973: flag=_wrap_MovableJointImpl4_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 974: flag=_wrap_MovableJointImpl4_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 975: flag=_wrap_MovableJointImpl4_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 976: flag=_wrap_MovableJointImpl4_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 977: flag=_wrap_delete_MovableJointImpl5(resc,resv,argc,(mxArray**)(argv)); break;
+  case 978: flag=_wrap_MovableJointImpl5_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 979: flag=_wrap_MovableJointImpl5_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 980: flag=_wrap_MovableJointImpl5_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 981: flag=_wrap_MovableJointImpl5_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 982: flag=_wrap_MovableJointImpl5_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 983: flag=_wrap_MovableJointImpl5_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 984: flag=_wrap_MovableJointImpl5_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 985: flag=_wrap_MovableJointImpl5_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 986: flag=_wrap_delete_MovableJointImpl6(resc,resv,argc,(mxArray**)(argv)); break;
+  case 987: flag=_wrap_MovableJointImpl6_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 988: flag=_wrap_MovableJointImpl6_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 989: flag=_wrap_MovableJointImpl6_setIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 990: flag=_wrap_MovableJointImpl6_getIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 991: flag=_wrap_MovableJointImpl6_setPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 992: flag=_wrap_MovableJointImpl6_getPosCoordsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 993: flag=_wrap_MovableJointImpl6_setDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 994: flag=_wrap_MovableJointImpl6_getDOFsOffset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 995: flag=_wrap_delete_RevoluteJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 996: flag=_wrap_RevoluteJoint_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 997: flag=_wrap_RevoluteJoint_setAttachedLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 998: flag=_wrap_RevoluteJoint_setRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 999: flag=_wrap_RevoluteJoint_setAxis(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1000: flag=_wrap_RevoluteJoint_getFirstAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1001: flag=_wrap_RevoluteJoint_getSecondAttachedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1002: flag=_wrap_RevoluteJoint_getAxis(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1003: flag=_wrap_RevoluteJoint_getRestTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1004: flag=_wrap_RevoluteJoint_getTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1005: flag=_wrap_RevoluteJoint_getTransformDerivative(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1006: flag=_wrap_RevoluteJoint_getMotionSubspaceVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1007: flag=_wrap_RevoluteJoint_computeChildPosVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1008: flag=_wrap_RevoluteJoint_computeChildVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1009: flag=_wrap_RevoluteJoint_computeChildVelAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1010: flag=_wrap_RevoluteJoint_computeChildAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1011: flag=_wrap_RevoluteJoint_computeChildBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1012: flag=_wrap_RevoluteJoint_computeJointTorque(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1013: flag=_wrap_RevoluteJoint_hasPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1014: flag=_wrap_RevoluteJoint_enablePosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1015: flag=_wrap_RevoluteJoint_getPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1016: flag=_wrap_RevoluteJoint_getMinPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1017: flag=_wrap_RevoluteJoint_getMaxPosLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1018: flag=_wrap_RevoluteJoint_setPosLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1019: flag=_wrap_new_Traversal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1020: flag=_wrap_delete_Traversal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1021: flag=_wrap_Traversal_getNrOfVisitedLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1022: flag=_wrap_Traversal_getLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1023: flag=_wrap_Traversal_getBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1024: flag=_wrap_Traversal_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1025: flag=_wrap_Traversal_getParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1026: flag=_wrap_Traversal_getParentLinkFromLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1027: flag=_wrap_Traversal_getParentJointFromLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1028: flag=_wrap_Traversal_getTraversalIndexFromLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1029: flag=_wrap_Traversal_reset(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1030: flag=_wrap_Traversal_addTraversalBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1031: flag=_wrap_Traversal_addTraversalElement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1032: flag=_wrap_Traversal_isParentOf(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1033: flag=_wrap_Traversal_getChildLinkIndexFromJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1034: flag=_wrap_Traversal_getParentLinkIndexFromJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1035: flag=_wrap_Traversal_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1036: flag=_wrap_delete_SolidShape(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1037: flag=_wrap_SolidShape_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1038: flag=_wrap_SolidShape_name_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1039: flag=_wrap_SolidShape_name_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1040: flag=_wrap_SolidShape_link_H_geometry_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1041: flag=_wrap_SolidShape_link_H_geometry_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1042: flag=_wrap_SolidShape_material_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1043: flag=_wrap_SolidShape_material_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1044: flag=_wrap_SolidShape_isSphere(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1045: flag=_wrap_SolidShape_isBox(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1046: flag=_wrap_SolidShape_isCylinder(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1047: flag=_wrap_SolidShape_isExternalMesh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1048: flag=_wrap_SolidShape_asSphere(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1049: flag=_wrap_SolidShape_asBox(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1050: flag=_wrap_SolidShape_asCylinder(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1051: flag=_wrap_SolidShape_asExternalMesh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1052: flag=_wrap_delete_Sphere(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1053: flag=_wrap_Sphere_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1054: flag=_wrap_Sphere_radius_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1055: flag=_wrap_Sphere_radius_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1056: flag=_wrap_new_Sphere(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1057: flag=_wrap_delete_Box(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1058: flag=_wrap_Box_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1059: flag=_wrap_Box_x_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1060: flag=_wrap_Box_x_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1061: flag=_wrap_Box_y_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1062: flag=_wrap_Box_y_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1063: flag=_wrap_Box_z_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1064: flag=_wrap_Box_z_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1065: flag=_wrap_new_Box(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1066: flag=_wrap_delete_Cylinder(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1067: flag=_wrap_Cylinder_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1068: flag=_wrap_Cylinder_length_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1069: flag=_wrap_Cylinder_length_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1070: flag=_wrap_Cylinder_radius_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1071: flag=_wrap_Cylinder_radius_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1072: flag=_wrap_new_Cylinder(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1073: flag=_wrap_delete_ExternalMesh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1074: flag=_wrap_ExternalMesh_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1075: flag=_wrap_ExternalMesh_filename_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1076: flag=_wrap_ExternalMesh_filename_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1077: flag=_wrap_ExternalMesh_scale_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1078: flag=_wrap_ExternalMesh_scale_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1079: flag=_wrap_new_ExternalMesh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1080: flag=_wrap_new_ModelSolidShapes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1081: flag=_wrap_ModelSolidShapes_clear(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1082: flag=_wrap_delete_ModelSolidShapes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1083: flag=_wrap_ModelSolidShapes_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1084: flag=_wrap_ModelSolidShapes_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1085: flag=_wrap_ModelSolidShapes_linkSolidShapes_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1086: flag=_wrap_ModelSolidShapes_linkSolidShapes_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1087: flag=_wrap_Neighbor_neighborLink_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1088: flag=_wrap_Neighbor_neighborLink_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1089: flag=_wrap_Neighbor_neighborJoint_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1090: flag=_wrap_Neighbor_neighborJoint_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1091: flag=_wrap_new_Neighbor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1092: flag=_wrap_delete_Neighbor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1093: flag=_wrap_new_Model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1094: flag=_wrap_Model_copy(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1095: flag=_wrap_delete_Model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1096: flag=_wrap_Model_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1097: flag=_wrap_Model_getLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1098: flag=_wrap_Model_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1099: flag=_wrap_Model_isValidLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1100: flag=_wrap_Model_getLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1101: flag=_wrap_Model_addLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1102: flag=_wrap_Model_getNrOfJoints(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1103: flag=_wrap_Model_getJointName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1104: flag=_wrap_Model_getJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1105: flag=_wrap_Model_getJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1106: flag=_wrap_Model_isValidJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1107: flag=_wrap_Model_isLinkNameUsed(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1108: flag=_wrap_Model_isJointNameUsed(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1109: flag=_wrap_Model_isFrameNameUsed(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1110: flag=_wrap_Model_addJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1111: flag=_wrap_Model_addJointAndLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1112: flag=_wrap_Model_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1113: flag=_wrap_Model_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1114: flag=_wrap_Model_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1115: flag=_wrap_Model_addAdditionalFrameToLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1116: flag=_wrap_Model_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1117: flag=_wrap_Model_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1118: flag=_wrap_Model_isValidFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1119: flag=_wrap_Model_getFrameTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1120: flag=_wrap_Model_getFrameLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1121: flag=_wrap_Model_getNrOfNeighbors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1122: flag=_wrap_Model_getNeighbor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1123: flag=_wrap_Model_setDefaultBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1124: flag=_wrap_Model_getDefaultBaseLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1125: flag=_wrap_Model_computeFullTreeTraversal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1126: flag=_wrap_Model_getInertialParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1127: flag=_wrap_Model_updateInertialParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1128: flag=_wrap_Model_visualSolidShapes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1129: flag=_wrap_Model_collisionSolidShapes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1130: flag=_wrap_Model_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1131: flag=_wrap_new_JointPosDoubleArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1132: flag=_wrap_JointPosDoubleArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1133: flag=_wrap_JointPosDoubleArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1134: flag=_wrap_delete_JointPosDoubleArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1135: flag=_wrap_new_JointDOFsDoubleArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1136: flag=_wrap_JointDOFsDoubleArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1137: flag=_wrap_JointDOFsDoubleArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1138: flag=_wrap_delete_JointDOFsDoubleArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1139: flag=_wrap_new_DOFSpatialForceArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1140: flag=_wrap_DOFSpatialForceArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1141: flag=_wrap_DOFSpatialForceArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1142: flag=_wrap_DOFSpatialForceArray_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1143: flag=_wrap_delete_DOFSpatialForceArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1144: flag=_wrap_new_DOFSpatialMotionArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1145: flag=_wrap_DOFSpatialMotionArray_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1146: flag=_wrap_DOFSpatialMotionArray_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1147: flag=_wrap_DOFSpatialMotionArray_paren(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1148: flag=_wrap_delete_DOFSpatialMotionArray(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1149: flag=_wrap_new_FrameFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1150: flag=_wrap_FrameFreeFloatingJacobian_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1151: flag=_wrap_FrameFreeFloatingJacobian_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1152: flag=_wrap_delete_FrameFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1153: flag=_wrap_new_MomentumFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1154: flag=_wrap_MomentumFreeFloatingJacobian_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1155: flag=_wrap_MomentumFreeFloatingJacobian_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1156: flag=_wrap_delete_MomentumFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1157: flag=_wrap_new_FreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1158: flag=_wrap_FreeFloatingMassMatrix_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1159: flag=_wrap_delete_FreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1160: flag=_wrap_new_FreeFloatingPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1161: flag=_wrap_FreeFloatingPos_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1162: flag=_wrap_FreeFloatingPos_worldBasePos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1163: flag=_wrap_FreeFloatingPos_jointPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1164: flag=_wrap_FreeFloatingPos_getNrOfPosCoords(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1165: flag=_wrap_delete_FreeFloatingPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1166: flag=_wrap_new_FreeFloatingGeneralizedTorques(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1167: flag=_wrap_FreeFloatingGeneralizedTorques_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1168: flag=_wrap_FreeFloatingGeneralizedTorques_baseWrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1169: flag=_wrap_FreeFloatingGeneralizedTorques_jointTorques(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1170: flag=_wrap_FreeFloatingGeneralizedTorques_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1171: flag=_wrap_delete_FreeFloatingGeneralizedTorques(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1172: flag=_wrap_new_FreeFloatingVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1173: flag=_wrap_FreeFloatingVel_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1174: flag=_wrap_FreeFloatingVel_baseVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1175: flag=_wrap_FreeFloatingVel_jointVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1176: flag=_wrap_FreeFloatingVel_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1177: flag=_wrap_delete_FreeFloatingVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1178: flag=_wrap_new_FreeFloatingAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1179: flag=_wrap_FreeFloatingAcc_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1180: flag=_wrap_FreeFloatingAcc_baseAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1181: flag=_wrap_FreeFloatingAcc_jointAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1182: flag=_wrap_FreeFloatingAcc_getNrOfDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1183: flag=_wrap_delete_FreeFloatingAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1184: flag=_wrap_ContactWrench_contactId(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1185: flag=_wrap_ContactWrench_contactPoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1186: flag=_wrap_ContactWrench_contactWrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1187: flag=_wrap_new_ContactWrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1188: flag=_wrap_delete_ContactWrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1189: flag=_wrap_new_LinkContactWrenches(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1190: flag=_wrap_LinkContactWrenches_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1191: flag=_wrap_LinkContactWrenches_getNrOfContactsForLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1192: flag=_wrap_LinkContactWrenches_setNrOfContactsForLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1193: flag=_wrap_LinkContactWrenches_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1194: flag=_wrap_LinkContactWrenches_contactWrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1195: flag=_wrap_LinkContactWrenches_computeNetWrenches(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1196: flag=_wrap_LinkContactWrenches_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1197: flag=_wrap_delete_LinkContactWrenches(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1198: flag=_wrap_ForwardPositionKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1199: flag=_wrap_ForwardVelAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1200: flag=_wrap_ForwardPosVelAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1201: flag=_wrap_ForwardPosVelKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1202: flag=_wrap_ForwardAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1203: flag=_wrap_ForwardBiasAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1204: flag=_wrap_ComputeLinearAndAngularMomentum(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1205: flag=_wrap_ComputeLinearAndAngularMomentumDerivativeBias(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1206: flag=_wrap_RNEADynamicPhase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1207: flag=_wrap_CompositeRigidBodyAlgorithm(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1208: flag=_wrap_new_ArticulatedBodyAlgorithmInternalBuffers(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1209: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1210: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1211: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_S_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1212: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_S_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1213: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_U_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1214: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_U_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1215: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_D_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1216: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_D_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1217: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_u_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1218: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_u_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1219: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksVel_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1220: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksVel_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1221: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksBiasAcceleration_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1222: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksBiasAcceleration_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1223: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksAccelerations_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1224: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksAccelerations_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1225: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linkABIs_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1226: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linkABIs_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1227: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksBiasWrench_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1228: flag=_wrap_ArticulatedBodyAlgorithmInternalBuffers_linksBiasWrench_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1229: flag=_wrap_delete_ArticulatedBodyAlgorithmInternalBuffers(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1230: flag=_wrap_ArticulatedBodyAlgorithm(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1231: flag=_wrap_NR_OF_SENSOR_TYPES_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1232: flag=_wrap_isLinkSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1233: flag=_wrap_isJointSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1234: flag=_wrap_getSensorTypeSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1235: flag=_wrap_delete_Sensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1236: flag=_wrap_Sensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1237: flag=_wrap_Sensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1238: flag=_wrap_Sensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1239: flag=_wrap_Sensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1240: flag=_wrap_Sensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1241: flag=_wrap_Sensor_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1242: flag=_wrap_Sensor_updateIndices(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1243: flag=_wrap_Sensor_updateIndeces(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1244: flag=_wrap_delete_JointSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1245: flag=_wrap_JointSensor_getParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1246: flag=_wrap_JointSensor_getParentJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1247: flag=_wrap_JointSensor_setParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1248: flag=_wrap_JointSensor_setParentJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1249: flag=_wrap_JointSensor_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1250: flag=_wrap_delete_LinkSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1251: flag=_wrap_LinkSensor_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1252: flag=_wrap_LinkSensor_getParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1253: flag=_wrap_LinkSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1254: flag=_wrap_LinkSensor_setParentLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1255: flag=_wrap_LinkSensor_setParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1256: flag=_wrap_LinkSensor_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1257: flag=_wrap_LinkSensor_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1258: flag=_wrap_new_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1259: flag=_wrap_delete_SensorsList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1260: flag=_wrap_SensorsList_addSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1261: flag=_wrap_SensorsList_setSerialization(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1262: flag=_wrap_SensorsList_getSerialization(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1263: flag=_wrap_SensorsList_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1264: flag=_wrap_SensorsList_getSensorIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1265: flag=_wrap_SensorsList_getSizeOfAllSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1266: flag=_wrap_SensorsList_getSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1267: flag=_wrap_SensorsList_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1268: flag=_wrap_SensorsList_removeSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1269: flag=_wrap_SensorsList_removeAllSensorsOfType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1270: flag=_wrap_SensorsList_getSixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1271: flag=_wrap_SensorsList_getAccelerometerSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1272: flag=_wrap_SensorsList_getGyroscopeSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1273: flag=_wrap_new_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1274: flag=_wrap_delete_SensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1275: flag=_wrap_SensorsMeasurements_setNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1276: flag=_wrap_SensorsMeasurements_getNrOfSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1277: flag=_wrap_SensorsMeasurements_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1278: flag=_wrap_SensorsMeasurements_toVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1279: flag=_wrap_SensorsMeasurements_setMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1280: flag=_wrap_SensorsMeasurements_getMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1281: flag=_wrap_SensorsMeasurements_getSizeOfAllSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1282: flag=_wrap_new_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1283: flag=_wrap_delete_SixAxisForceTorqueSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1284: flag=_wrap_SixAxisForceTorqueSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1285: flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1286: flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1287: flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1288: flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1289: flag=_wrap_SixAxisForceTorqueSensor_setFirstLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1290: flag=_wrap_SixAxisForceTorqueSensor_setSecondLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1291: flag=_wrap_SixAxisForceTorqueSensor_getFirstLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1292: flag=_wrap_SixAxisForceTorqueSensor_getSecondLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1293: flag=_wrap_SixAxisForceTorqueSensor_setParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1294: flag=_wrap_SixAxisForceTorqueSensor_setParentJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1295: flag=_wrap_SixAxisForceTorqueSensor_setAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1296: flag=_wrap_SixAxisForceTorqueSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1297: flag=_wrap_SixAxisForceTorqueSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1298: flag=_wrap_SixAxisForceTorqueSensor_getParentJoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1299: flag=_wrap_SixAxisForceTorqueSensor_getParentJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1300: flag=_wrap_SixAxisForceTorqueSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1301: flag=_wrap_SixAxisForceTorqueSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1302: flag=_wrap_SixAxisForceTorqueSensor_updateIndices(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1303: flag=_wrap_SixAxisForceTorqueSensor_updateIndeces(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1304: flag=_wrap_SixAxisForceTorqueSensor_getAppliedWrenchLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1305: flag=_wrap_SixAxisForceTorqueSensor_isLinkAttachedToSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1306: flag=_wrap_SixAxisForceTorqueSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1307: flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1308: flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLinkMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1309: flag=_wrap_SixAxisForceTorqueSensor_getWrenchAppliedOnLinkInverseMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1310: flag=_wrap_SixAxisForceTorqueSensor_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1311: flag=_wrap_SixAxisForceTorqueSensor_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1312: flag=_wrap_new_AccelerometerSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1313: flag=_wrap_delete_AccelerometerSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1314: flag=_wrap_AccelerometerSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1315: flag=_wrap_AccelerometerSensor_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1316: flag=_wrap_AccelerometerSensor_setParentLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1317: flag=_wrap_AccelerometerSensor_setParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1318: flag=_wrap_AccelerometerSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1319: flag=_wrap_AccelerometerSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1320: flag=_wrap_AccelerometerSensor_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1321: flag=_wrap_AccelerometerSensor_getParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1322: flag=_wrap_AccelerometerSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1323: flag=_wrap_AccelerometerSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1324: flag=_wrap_AccelerometerSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1325: flag=_wrap_AccelerometerSensor_updateIndices(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1326: flag=_wrap_AccelerometerSensor_updateIndeces(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1327: flag=_wrap_AccelerometerSensor_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1328: flag=_wrap_new_GyroscopeSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1329: flag=_wrap_delete_GyroscopeSensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1330: flag=_wrap_GyroscopeSensor_setName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1331: flag=_wrap_GyroscopeSensor_setLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1332: flag=_wrap_GyroscopeSensor_setParentLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1333: flag=_wrap_GyroscopeSensor_setParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1334: flag=_wrap_GyroscopeSensor_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1335: flag=_wrap_GyroscopeSensor_getSensorType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1336: flag=_wrap_GyroscopeSensor_getParentLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1337: flag=_wrap_GyroscopeSensor_getParentLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1338: flag=_wrap_GyroscopeSensor_getLinkSensorTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1339: flag=_wrap_GyroscopeSensor_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1340: flag=_wrap_GyroscopeSensor_clone(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1341: flag=_wrap_GyroscopeSensor_updateIndices(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1342: flag=_wrap_GyroscopeSensor_updateIndeces(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1343: flag=_wrap_GyroscopeSensor_predictMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1344: flag=_wrap_predictSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1345: flag=_wrap_predictSensorsMeasurementsFromRawBuffers(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1346: flag=_wrap_URDFParserOptions_addSensorFramesAsAdditionalFrames_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1347: flag=_wrap_URDFParserOptions_addSensorFramesAsAdditionalFrames_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1348: flag=_wrap_URDFParserOptions_originalFilename_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1349: flag=_wrap_URDFParserOptions_originalFilename_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1350: flag=_wrap_new_URDFParserOptions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1351: flag=_wrap_delete_URDFParserOptions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1352: flag=_wrap_modelFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1353: flag=_wrap_modelFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1354: flag=_wrap_dofsListFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1355: flag=_wrap_dofsListFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1356: flag=_wrap_sensorsFromURDF(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1357: flag=_wrap_sensorsFromURDFString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1358: flag=_wrap_new_ModelLoader(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1359: flag=_wrap_ModelLoader_loadModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1360: flag=_wrap_ModelLoader_loadModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1361: flag=_wrap_ModelLoader_loadReducedModelFromFullModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1362: flag=_wrap_ModelLoader_loadReducedModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1363: flag=_wrap_ModelLoader_loadReducedModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1364: flag=_wrap_ModelLoader_model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1365: flag=_wrap_ModelLoader_sensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1366: flag=_wrap_ModelLoader_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1367: flag=_wrap_delete_ModelLoader(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1368: flag=_wrap_new_UnknownWrenchContact(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1369: flag=_wrap_UnknownWrenchContact_unknownType_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1370: flag=_wrap_UnknownWrenchContact_unknownType_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1371: flag=_wrap_UnknownWrenchContact_contactPoint_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1372: flag=_wrap_UnknownWrenchContact_contactPoint_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1373: flag=_wrap_UnknownWrenchContact_forceDirection_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1374: flag=_wrap_UnknownWrenchContact_forceDirection_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1375: flag=_wrap_UnknownWrenchContact_knownWrench_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1376: flag=_wrap_UnknownWrenchContact_knownWrench_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1377: flag=_wrap_UnknownWrenchContact_contactId_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1378: flag=_wrap_UnknownWrenchContact_contactId_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1379: flag=_wrap_delete_UnknownWrenchContact(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1380: flag=_wrap_new_LinkUnknownWrenchContacts(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1381: flag=_wrap_LinkUnknownWrenchContacts_clear(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1382: flag=_wrap_LinkUnknownWrenchContacts_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1383: flag=_wrap_LinkUnknownWrenchContacts_getNrOfContactsForLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1384: flag=_wrap_LinkUnknownWrenchContacts_setNrOfContactsForLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1385: flag=_wrap_LinkUnknownWrenchContacts_addNewContactForLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1386: flag=_wrap_LinkUnknownWrenchContacts_addNewContactInFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1387: flag=_wrap_LinkUnknownWrenchContacts_addNewUnknownFullWrenchInFrameOrigin(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1388: flag=_wrap_LinkUnknownWrenchContacts_contactWrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1389: flag=_wrap_LinkUnknownWrenchContacts_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1390: flag=_wrap_delete_LinkUnknownWrenchContacts(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1391: flag=_wrap_new_estimateExternalWrenchesBuffers(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1392: flag=_wrap_estimateExternalWrenchesBuffers_resize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1393: flag=_wrap_estimateExternalWrenchesBuffers_getNrOfSubModels(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1394: flag=_wrap_estimateExternalWrenchesBuffers_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1395: flag=_wrap_estimateExternalWrenchesBuffers_isConsistent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1396: flag=_wrap_estimateExternalWrenchesBuffers_A_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1397: flag=_wrap_estimateExternalWrenchesBuffers_A_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1398: flag=_wrap_estimateExternalWrenchesBuffers_x_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1399: flag=_wrap_estimateExternalWrenchesBuffers_x_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1400: flag=_wrap_estimateExternalWrenchesBuffers_b_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1401: flag=_wrap_estimateExternalWrenchesBuffers_b_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1402: flag=_wrap_estimateExternalWrenchesBuffers_pinvA_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1403: flag=_wrap_estimateExternalWrenchesBuffers_pinvA_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1404: flag=_wrap_estimateExternalWrenchesBuffers_b_contacts_subtree_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1405: flag=_wrap_estimateExternalWrenchesBuffers_b_contacts_subtree_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1406: flag=_wrap_estimateExternalWrenchesBuffers_subModelBase_H_link_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1407: flag=_wrap_estimateExternalWrenchesBuffers_subModelBase_H_link_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1408: flag=_wrap_delete_estimateExternalWrenchesBuffers(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1409: flag=_wrap_estimateExternalWrenchesWithoutInternalFT(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1410: flag=_wrap_estimateExternalWrenches(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1411: flag=_wrap_dynamicsEstimationForwardVelAccKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1412: flag=_wrap_dynamicsEstimationForwardVelKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1413: flag=_wrap_computeLinkNetWrenchesWithoutGravity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1414: flag=_wrap_estimateLinkContactWrenchesFromLinkNetExternalWrenches(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1415: flag=_wrap_new_ExtWrenchesAndJointTorquesEstimator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1416: flag=_wrap_delete_ExtWrenchesAndJointTorquesEstimator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1417: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_setModelAndSensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1418: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_loadModelAndSensorsFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1419: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_loadModelAndSensorsFromFileWithSpecifiedDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1420: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1421: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_sensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1422: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_submodels(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1423: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_updateKinematicsFromFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1424: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_updateKinematicsFromFixedBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1425: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_computeExpectedFTSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1426: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_estimateExtWrenchesAndJointTorques(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1427: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_checkThatTheModelIsStill(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1428: flag=_wrap_ExtWrenchesAndJointTorquesEstimator_estimateLinkNetWrenchesWithoutGravity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1429: flag=_wrap_new_SimpleLeggedOdometry(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1430: flag=_wrap_delete_SimpleLeggedOdometry(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1431: flag=_wrap_SimpleLeggedOdometry_setModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1432: flag=_wrap_SimpleLeggedOdometry_loadModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1433: flag=_wrap_SimpleLeggedOdometry_loadModelFromFileWithSpecifiedDOFs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1434: flag=_wrap_SimpleLeggedOdometry_model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1435: flag=_wrap_SimpleLeggedOdometry_updateKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1436: flag=_wrap_SimpleLeggedOdometry_init(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1437: flag=_wrap_SimpleLeggedOdometry_changeFixedFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1438: flag=_wrap_SimpleLeggedOdometry_getCurrentFixedLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1439: flag=_wrap_SimpleLeggedOdometry_getWorldLinkTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1440: flag=_wrap_isLinkBerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1441: flag=_wrap_isJointBerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1442: flag=_wrap_isDOFBerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1443: flag=_wrap_new_BerdyOptions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1444: flag=_wrap_BerdyOptions_berdyVariant_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1445: flag=_wrap_BerdyOptions_berdyVariant_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1446: flag=_wrap_BerdyOptions_includeAllNetExternalWrenchesAsDynamicVariables_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1447: flag=_wrap_BerdyOptions_includeAllNetExternalWrenchesAsDynamicVariables_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1448: flag=_wrap_BerdyOptions_includeAllJointAccelerationsAsSensors_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1449: flag=_wrap_BerdyOptions_includeAllJointAccelerationsAsSensors_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1450: flag=_wrap_BerdyOptions_includeAllJointTorquesAsSensors_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1451: flag=_wrap_BerdyOptions_includeAllJointTorquesAsSensors_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1452: flag=_wrap_BerdyOptions_includeAllNetExternalWrenchesAsSensors_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1453: flag=_wrap_BerdyOptions_includeAllNetExternalWrenchesAsSensors_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1454: flag=_wrap_BerdyOptions_includeFixedBaseExternalWrench_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1455: flag=_wrap_BerdyOptions_includeFixedBaseExternalWrench_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1456: flag=_wrap_BerdyOptions_jointOnWhichTheInternalWrenchIsMeasured_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1457: flag=_wrap_BerdyOptions_jointOnWhichTheInternalWrenchIsMeasured_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1458: flag=_wrap_BerdyOptions_baseLink_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1459: flag=_wrap_BerdyOptions_baseLink_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1460: flag=_wrap_BerdyOptions_checkConsistency(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1461: flag=_wrap_delete_BerdyOptions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1462: flag=_wrap_BerdySensor_type_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1463: flag=_wrap_BerdySensor_type_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1464: flag=_wrap_BerdySensor_id_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1465: flag=_wrap_BerdySensor_id_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1466: flag=_wrap_BerdySensor_range_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1467: flag=_wrap_BerdySensor_range_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1468: flag=_wrap_BerdySensor_eq(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1469: flag=_wrap_BerdySensor_lt(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1470: flag=_wrap_new_BerdySensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1471: flag=_wrap_delete_BerdySensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1472: flag=_wrap_BerdyDynamicVariable_type_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1473: flag=_wrap_BerdyDynamicVariable_type_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1474: flag=_wrap_BerdyDynamicVariable_id_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1475: flag=_wrap_BerdyDynamicVariable_id_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1476: flag=_wrap_BerdyDynamicVariable_range_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1477: flag=_wrap_BerdyDynamicVariable_range_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1478: flag=_wrap_BerdyDynamicVariable_eq(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1479: flag=_wrap_BerdyDynamicVariable_lt(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1480: flag=_wrap_new_BerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1481: flag=_wrap_delete_BerdyDynamicVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1482: flag=_wrap_new_BerdyHelper(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1483: flag=_wrap_BerdyHelper_dynamicTraversal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1484: flag=_wrap_BerdyHelper_model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1485: flag=_wrap_BerdyHelper_sensors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1486: flag=_wrap_BerdyHelper_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1487: flag=_wrap_BerdyHelper_init(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1488: flag=_wrap_BerdyHelper_getOptions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1489: flag=_wrap_BerdyHelper_getNrOfDynamicVariables(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1490: flag=_wrap_BerdyHelper_getNrOfDynamicEquations(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1491: flag=_wrap_BerdyHelper_getNrOfSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1492: flag=_wrap_BerdyHelper_resizeAndZeroBerdyMatrices(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1493: flag=_wrap_BerdyHelper_getBerdyMatrices(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1494: flag=_wrap_BerdyHelper_getSensorsOrdering(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1495: flag=_wrap_BerdyHelper_getRangeSensorVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1496: flag=_wrap_BerdyHelper_getRangeDOFSensorVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1497: flag=_wrap_BerdyHelper_getRangeJointSensorVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1498: flag=_wrap_BerdyHelper_getRangeLinkSensorVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1499: flag=_wrap_BerdyHelper_getRangeLinkVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1500: flag=_wrap_BerdyHelper_getRangeJointVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1501: flag=_wrap_BerdyHelper_getRangeDOFVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1502: flag=_wrap_BerdyHelper_getDynamicVariablesOrdering(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1503: flag=_wrap_BerdyHelper_serializeDynamicVariables(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1504: flag=_wrap_BerdyHelper_serializeSensorVariables(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1505: flag=_wrap_BerdyHelper_serializeDynamicVariablesComputedFromFixedBaseRNEA(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1506: flag=_wrap_BerdyHelper_extractJointTorquesFromDynamicVariables(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1507: flag=_wrap_BerdyHelper_extractLinkNetExternalWrenchesFromDynamicVariables(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1508: flag=_wrap_BerdyHelper_updateKinematicsFromFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1509: flag=_wrap_BerdyHelper_updateKinematicsFromFixedBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1510: flag=_wrap_BerdyHelper_updateKinematicsFromTraversalFixedBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1511: flag=_wrap_BerdyHelper_setNetExternalWrenchMeasurementFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1512: flag=_wrap_BerdyHelper_getNetExternalWrenchMeasurementFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1513: flag=_wrap_delete_BerdyHelper(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1514: flag=_wrap_new_BerdySparseMAPSolver(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1515: flag=_wrap_delete_BerdySparseMAPSolver(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1516: flag=_wrap_BerdySparseMAPSolver_setDynamicsConstraintsPriorCovariance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1517: flag=_wrap_BerdySparseMAPSolver_setDynamicsRegularizationPriorCovariance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1518: flag=_wrap_BerdySparseMAPSolver_setDynamicsRegularizationPriorExpectedValue(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1519: flag=_wrap_BerdySparseMAPSolver_setMeasurementsPriorCovariance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1520: flag=_wrap_BerdySparseMAPSolver_dynamicsConstraintsPriorCovarianceInverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1521: flag=_wrap_BerdySparseMAPSolver_dynamicsRegularizationPriorCovarianceInverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1522: flag=_wrap_BerdySparseMAPSolver_dynamicsRegularizationPriorExpectedValue(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1523: flag=_wrap_BerdySparseMAPSolver_measurementsPriorCovarianceInverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1524: flag=_wrap_BerdySparseMAPSolver_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1525: flag=_wrap_BerdySparseMAPSolver_initialize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1526: flag=_wrap_BerdySparseMAPSolver_updateEstimateInformationFixedBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1527: flag=_wrap_BerdySparseMAPSolver_updateEstimateInformationFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1528: flag=_wrap_BerdySparseMAPSolver_doEstimate(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1529: flag=_wrap_BerdySparseMAPSolver_getLastEstimate(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1530: flag=_wrap_DynamicsRegressorParameter_category_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1531: flag=_wrap_DynamicsRegressorParameter_category_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1532: flag=_wrap_DynamicsRegressorParameter_elemIndex_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1533: flag=_wrap_DynamicsRegressorParameter_elemIndex_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1534: flag=_wrap_DynamicsRegressorParameter_type_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1535: flag=_wrap_DynamicsRegressorParameter_type_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1536: flag=_wrap_DynamicsRegressorParameter_lt(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1537: flag=_wrap_DynamicsRegressorParameter_eq(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1538: flag=_wrap_DynamicsRegressorParameter_ne(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1539: flag=_wrap_new_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1540: flag=_wrap_delete_DynamicsRegressorParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1541: flag=_wrap_DynamicsRegressorParametersList_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1542: flag=_wrap_DynamicsRegressorParametersList_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1543: flag=_wrap_DynamicsRegressorParametersList_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1544: flag=_wrap_DynamicsRegressorParametersList_addParam(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1545: flag=_wrap_DynamicsRegressorParametersList_addList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1546: flag=_wrap_DynamicsRegressorParametersList_findParam(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1547: flag=_wrap_DynamicsRegressorParametersList_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1548: flag=_wrap_new_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1549: flag=_wrap_delete_DynamicsRegressorParametersList(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1550: flag=_wrap_new_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1551: flag=_wrap_delete_DynamicsRegressorGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1552: flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1553: flag=_wrap_DynamicsRegressorGenerator_loadRobotAndSensorsModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1554: flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1555: flag=_wrap_DynamicsRegressorGenerator_loadRegressorStructureFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1556: flag=_wrap_DynamicsRegressorGenerator_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1557: flag=_wrap_DynamicsRegressorGenerator_getNrOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1558: flag=_wrap_DynamicsRegressorGenerator_getNrOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1559: flag=_wrap_DynamicsRegressorGenerator_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1560: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1561: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1562: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutput(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1563: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfOutputs(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1564: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1565: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1566: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1567: flag=_wrap_DynamicsRegressorGenerator_getDescriptionOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1568: flag=_wrap_DynamicsRegressorGenerator_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1569: flag=_wrap_DynamicsRegressorGenerator_getNrOfFakeLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1570: flag=_wrap_DynamicsRegressorGenerator_getBaseLinkName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1571: flag=_wrap_DynamicsRegressorGenerator_getSensorsModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1572: flag=_wrap_DynamicsRegressorGenerator_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1573: flag=_wrap_DynamicsRegressorGenerator_getSensorsMeasurements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1574: flag=_wrap_DynamicsRegressorGenerator_setTorqueSensorMeasurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1575: flag=_wrap_DynamicsRegressorGenerator_computeRegressor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1576: flag=_wrap_DynamicsRegressorGenerator_getModelParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1577: flag=_wrap_DynamicsRegressorGenerator_computeFloatingBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1578: flag=_wrap_DynamicsRegressorGenerator_computeFixedBaseIdentifiableSubspace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1579: flag=_wrap_DynamicsRegressorGenerator_generate_random_regressors(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1580: flag=_wrap_new_KinDynComputations(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1581: flag=_wrap_delete_KinDynComputations(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1582: flag=_wrap_KinDynComputations_loadRobotModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1583: flag=_wrap_KinDynComputations_loadRobotModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1584: flag=_wrap_KinDynComputations_loadRobotModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1585: flag=_wrap_KinDynComputations_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1586: flag=_wrap_KinDynComputations_setFrameVelocityRepresentation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1587: flag=_wrap_KinDynComputations_getFrameVelocityRepresentation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1588: flag=_wrap_KinDynComputations_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1589: flag=_wrap_KinDynComputations_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1590: flag=_wrap_KinDynComputations_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1591: flag=_wrap_KinDynComputations_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1592: flag=_wrap_KinDynComputations_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1593: flag=_wrap_KinDynComputations_getFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1594: flag=_wrap_KinDynComputations_setFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1595: flag=_wrap_KinDynComputations_model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1596: flag=_wrap_KinDynComputations_getRobotModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1597: flag=_wrap_KinDynComputations_setJointPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1598: flag=_wrap_KinDynComputations_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1599: flag=_wrap_KinDynComputations_getRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1600: flag=_wrap_KinDynComputations_getWorldBaseTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1601: flag=_wrap_KinDynComputations_getBaseTwist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1602: flag=_wrap_KinDynComputations_getJointPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1603: flag=_wrap_KinDynComputations_getJointVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1604: flag=_wrap_KinDynComputations_getModelVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1605: flag=_wrap_KinDynComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1606: flag=_wrap_KinDynComputations_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1607: flag=_wrap_KinDynComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1608: flag=_wrap_KinDynComputations_getRelativeTransformExplicit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1609: flag=_wrap_KinDynComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1610: flag=_wrap_KinDynComputations_getFrameVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1611: flag=_wrap_KinDynComputations_getFrameFreeFloatingJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1612: flag=_wrap_KinDynComputations_getRelativeJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1613: flag=_wrap_KinDynComputations_getRelativeJacobianExplicit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1614: flag=_wrap_KinDynComputations_getFrameBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1615: flag=_wrap_KinDynComputations_getCenterOfMassPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1616: flag=_wrap_KinDynComputations_getCenterOfMassVelocity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1617: flag=_wrap_KinDynComputations_getCenterOfMassJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1618: flag=_wrap_KinDynComputations_getCenterOfMassBiasAcc(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1619: flag=_wrap_KinDynComputations_getAverageVelocity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1620: flag=_wrap_KinDynComputations_getAverageVelocityJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1621: flag=_wrap_KinDynComputations_getCentroidalAverageVelocity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1622: flag=_wrap_KinDynComputations_getCentroidalAverageVelocityJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1623: flag=_wrap_KinDynComputations_getLinearAngularMomentum(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1624: flag=_wrap_KinDynComputations_getLinearAngularMomentumJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1625: flag=_wrap_KinDynComputations_getCentroidalTotalMomentum(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1626: flag=_wrap_KinDynComputations_getFreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1627: flag=_wrap_KinDynComputations_inverseDynamics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1628: flag=_wrap_KinDynComputations_generalizedBiasForces(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1629: flag=_wrap_KinDynComputations_generalizedGravityForces(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1630: flag=_wrap_delete_ICamera(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1631: flag=_wrap_ICamera_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1632: flag=_wrap_ICamera_setTarget(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1633: flag=_wrap_ICamera_setUpVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1634: flag=_wrap_ColorViz_r_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1635: flag=_wrap_ColorViz_r_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1636: flag=_wrap_ColorViz_g_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1637: flag=_wrap_ColorViz_g_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1638: flag=_wrap_ColorViz_b_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1639: flag=_wrap_ColorViz_b_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1640: flag=_wrap_ColorViz_a_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1641: flag=_wrap_ColorViz_a_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1642: flag=_wrap_new_ColorViz(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1643: flag=_wrap_delete_ColorViz(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1644: flag=_wrap_delete_ILight(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1645: flag=_wrap_ILight_getName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1646: flag=_wrap_ILight_setType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1647: flag=_wrap_ILight_getType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1648: flag=_wrap_ILight_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1649: flag=_wrap_ILight_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1650: flag=_wrap_ILight_setDirection(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1651: flag=_wrap_ILight_getDirection(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1652: flag=_wrap_ILight_setAmbientColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1653: flag=_wrap_ILight_getAmbientColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1654: flag=_wrap_ILight_setSpecularColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1655: flag=_wrap_ILight_getSpecularColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1656: flag=_wrap_ILight_setDiffuseColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1657: flag=_wrap_ILight_getDiffuseColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1658: flag=_wrap_delete_IEnvironment(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1659: flag=_wrap_IEnvironment_getElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1660: flag=_wrap_IEnvironment_setElementVisibility(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1661: flag=_wrap_IEnvironment_setBackgroundColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1662: flag=_wrap_IEnvironment_setAmbientLight(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1663: flag=_wrap_IEnvironment_getLights(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1664: flag=_wrap_IEnvironment_addLight(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1665: flag=_wrap_IEnvironment_lightViz(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1666: flag=_wrap_IEnvironment_removeLight(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1667: flag=_wrap_delete_IJetsVisualization(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1668: flag=_wrap_IJetsVisualization_setJetsFrames(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1669: flag=_wrap_IJetsVisualization_getNrOfJets(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1670: flag=_wrap_IJetsVisualization_getJetDirection(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1671: flag=_wrap_IJetsVisualization_setJetDirection(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1672: flag=_wrap_IJetsVisualization_setJetColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1673: flag=_wrap_IJetsVisualization_setJetsDimensions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1674: flag=_wrap_IJetsVisualization_setJetsIntensity(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1675: flag=_wrap_delete_IModelVisualization(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1676: flag=_wrap_IModelVisualization_setPositions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1677: flag=_wrap_IModelVisualization_setLinkPositions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1678: flag=_wrap_IModelVisualization_model(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1679: flag=_wrap_IModelVisualization_getInstanceName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1680: flag=_wrap_IModelVisualization_setModelVisibility(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1681: flag=_wrap_IModelVisualization_setModelColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1682: flag=_wrap_IModelVisualization_resetModelColor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1683: flag=_wrap_IModelVisualization_getLinkNames(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1684: flag=_wrap_IModelVisualization_setLinkVisibility(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1685: flag=_wrap_IModelVisualization_getFeatures(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1686: flag=_wrap_IModelVisualization_setFeatureVisibility(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1687: flag=_wrap_IModelVisualization_jets(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1688: flag=_wrap_VisualizerOptions_verbose_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1689: flag=_wrap_VisualizerOptions_verbose_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1690: flag=_wrap_VisualizerOptions_winWidth_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1691: flag=_wrap_VisualizerOptions_winWidth_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1692: flag=_wrap_VisualizerOptions_winHeight_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1693: flag=_wrap_VisualizerOptions_winHeight_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1694: flag=_wrap_VisualizerOptions_rootFrameArrowsDimension_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1695: flag=_wrap_VisualizerOptions_rootFrameArrowsDimension_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1696: flag=_wrap_new_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1697: flag=_wrap_delete_VisualizerOptions(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1698: flag=_wrap_new_Visualizer(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1699: flag=_wrap_delete_Visualizer(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1700: flag=_wrap_Visualizer_init(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1701: flag=_wrap_Visualizer_getNrOfVisualizedModels(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1702: flag=_wrap_Visualizer_getModelInstanceName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1703: flag=_wrap_Visualizer_getModelInstanceIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1704: flag=_wrap_Visualizer_addModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1705: flag=_wrap_Visualizer_modelViz(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1706: flag=_wrap_Visualizer_camera(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1707: flag=_wrap_Visualizer_enviroment(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1708: flag=_wrap_Visualizer_run(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1709: flag=_wrap_Visualizer_draw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1710: flag=_wrap_Visualizer_drawToFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1711: flag=_wrap_Visualizer_close(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1712: flag=_wrap_new_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1713: flag=_wrap_delete_DynamicsComputations(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1714: flag=_wrap_DynamicsComputations_loadRobotModelFromFile(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1715: flag=_wrap_DynamicsComputations_loadRobotModelFromString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1716: flag=_wrap_DynamicsComputations_isValid(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1717: flag=_wrap_DynamicsComputations_getNrOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1718: flag=_wrap_DynamicsComputations_getDescriptionOfDegreeOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1719: flag=_wrap_DynamicsComputations_getDescriptionOfDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1720: flag=_wrap_DynamicsComputations_getNrOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1721: flag=_wrap_DynamicsComputations_getNrOfFrames(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1722: flag=_wrap_DynamicsComputations_getFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1723: flag=_wrap_DynamicsComputations_setFloatingBase(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1724: flag=_wrap_DynamicsComputations_setRobotState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1725: flag=_wrap_DynamicsComputations_getWorldBaseTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1726: flag=_wrap_DynamicsComputations_getBaseTwist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1727: flag=_wrap_DynamicsComputations_getJointPos(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1728: flag=_wrap_DynamicsComputations_getJointVel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1729: flag=_wrap_DynamicsComputations_getFrameIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1730: flag=_wrap_DynamicsComputations_getFrameName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1731: flag=_wrap_DynamicsComputations_getWorldTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1732: flag=_wrap_DynamicsComputations_getRelativeTransform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1733: flag=_wrap_DynamicsComputations_getFrameTwist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1734: flag=_wrap_DynamicsComputations_getFrameTwistInWorldOrient(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1735: flag=_wrap_DynamicsComputations_getFrameProperSpatialAcceleration(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1736: flag=_wrap_DynamicsComputations_getLinkIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1737: flag=_wrap_DynamicsComputations_getLinkInertia(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1738: flag=_wrap_DynamicsComputations_getJointIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1739: flag=_wrap_DynamicsComputations_getJointName(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1740: flag=_wrap_DynamicsComputations_getJointLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1741: flag=_wrap_DynamicsComputations_inverseDynamics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1742: flag=_wrap_DynamicsComputations_getFreeFloatingMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1743: flag=_wrap_DynamicsComputations_getFrameJacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1744: flag=_wrap_DynamicsComputations_getDynamicsRegressor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1745: flag=_wrap_DynamicsComputations_getModelDynamicsParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1746: flag=_wrap_DynamicsComputations_getCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 1747: flag=_wrap_DynamicsComputations_getCenterOfMassJacobian(resc,resv,argc,(mxArray**)(argv)); break;
   default: flag=1, SWIG_Error(SWIG_RuntimeError, "No function id %d.", fcn_id);
   }
   if (flag) {

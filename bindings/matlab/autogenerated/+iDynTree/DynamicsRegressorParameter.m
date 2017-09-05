@@ -7,40 +7,40 @@ classdef DynamicsRegressorParameter < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1511, self);
+        varargout{1} = iDynTreeMEX(1530, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1512, self, varargin{1});
+        iDynTreeMEX(1531, self, varargin{1});
       end
     end
     function varargout = elemIndex(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1513, self);
+        varargout{1} = iDynTreeMEX(1532, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1514, self, varargin{1});
+        iDynTreeMEX(1533, self, varargin{1});
       end
     end
     function varargout = type(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1515, self);
+        varargout{1} = iDynTreeMEX(1534, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1516, self, varargin{1});
+        iDynTreeMEX(1535, self, varargin{1});
       end
     end
     function varargout = lt(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1517, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1536, self, varargin{:});
     end
     function varargout = eq(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1518, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1537, self, varargin{:});
     end
     function varargout = ne(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1519, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1538, self, varargin{:});
     end
     function self = DynamicsRegressorParameter(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
@@ -48,14 +48,14 @@ classdef DynamicsRegressorParameter < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1520, varargin{:});
+        tmp = iDynTreeMEX(1539, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1521, self);
+        iDynTreeMEX(1540, self);
         self.swigPtr=[];
       end
     end
