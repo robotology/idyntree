@@ -159,19 +159,19 @@ namespace iDynTree {
         /**
          * Get the load cells locations in sensor frame.
          */
-        std::vector<Position> getLoadCellLocations();
+        std::vector<Position> getLoadCellLocations() const;
 
         /**
          * Compute the force/torque measurements from the raw load cell readings.
          *
          * @return a zero vector in case of error, the result otherwise.
          */
-        Vector3 computeThreeAxisForceTorqueFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements);
+        Vector3 computeThreeAxisForceTorqueFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements) const;
 
         /**
          * Compute the center of pressure in sensor frame from the raw load cell readings.
          */
-        Position computeCenterOfPressureFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements);
+        Position computeCenterOfPressureFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements) const;
 
         ///@}
 

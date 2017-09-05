@@ -1281,7 +1281,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
                         LinkIndex childIndex = neighborIndex;
                         IJointConstPtr neighborJoint = m_model.getJoint(m_model.getNeighbor(idx,neigh_i).neighborJoint);
                         const Transform & base_X_child = neighborJoint->getTransform(m_jointPos,idx,childIndex);
-                        Transform measurementFrame_X_child = (m_link_H_externalWrenchMeasurementFrame[idx].inverse())*base_X_child;
+                        Transform measurementFrame_X_child = m_link_H_externalWrenchMeasurementFrame[idx].inverse()*base_X_child;
 
                         matrixYElements.addSubMatrix(getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx).offset,
                                                      getRangeJointVariable(JOINT_WRENCH,neighborJoint->getIndex()).offset, measurementFrame_X_child.asAdjointTransformWrench());
@@ -1300,7 +1300,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
                 IndexRange sensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx);
                 IndexRange netExtWrenchRange = this->getRangeLinkVariable(NET_EXT_WRENCH,idx);
 
-                Transform measurementFrame_X_link = (m_link_H_externalWrenchMeasurementFrame[idx].inverse());
+                Transform measurementFrame_X_link = m_link_H_externalWrenchMeasurementFrame[idx].inverse();
 
                 matrixYElements.addSubMatrix(sensorRange.offset,
                                              netExtWrenchRange.offset,
@@ -2102,7 +2102,7 @@ bool BerdyHelper::setNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex,
 }
 
 
-bool BerdyHelper::getNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, Transform& link_H_externalWrenchMeasurementFrame)
+bool BerdyHelper::getNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, Transform& link_H_externalWrenchMeasurementFrame) const
 {
     if (!m_model.isValidLinkIndex(lnkIndex)) return false;
 

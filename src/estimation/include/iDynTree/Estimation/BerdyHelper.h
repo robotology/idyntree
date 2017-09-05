@@ -736,7 +736,7 @@ public:
      */
     ///@{
     bool setNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, const Transform& link_H_contact);
-    bool getNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, Transform& link_H_contact);
+    bool getNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, Transform& link_H_contact) const;
     ///@}
 
 
