@@ -14,3 +14,4 @@ macro(add_unit_test classname)
 endmacro()
 
 add_unit_test(SensorsList)
+add_unit_test(ThreeAxisForceTorqueContactSensor)
