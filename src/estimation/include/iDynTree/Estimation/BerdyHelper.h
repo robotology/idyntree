@@ -476,6 +476,12 @@ class BerdyHelper
     Triplets matrixDElements;
     Triplets matrixYElements;
 
+    /**
+     * Transform between the frame in which the external net wrench measurements are expressed
+     * and the link frames.
+     */
+    std::vector<Transform> m_link_H_externalWrenchMeasurementFrame;
+
 
 public:
     /**
@@ -716,6 +722,22 @@ public:
                                                 const Vector3 & gravity);
 
     //@}
+
+    /**
+     * Set/get the transformation link_H_contact between the link frame and the frame in which the measured net ext wrench is expressed.
+     *
+     * The default value is the identity. This is extremly useful to correctly tune the variances when only a subset of the external
+     * net wrench is known (for example when it is known that the external net wrench is a pure force on a point different from the
+     * link frame.
+     *
+     * \note This will only change the frame in which the measurent equation of the net external wrench is expressed,
+     *       not how the Newton-Euler equation of the link are expressed or how the net ext wrenches are serialized in
+     *       the LinkNetExternalWrenches class.
+     */
+    ///@{
+    bool setNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, const Transform& link_H_contact);
+    bool getNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, Transform& link_H_contact);
+    ///@}
 
 
     /**

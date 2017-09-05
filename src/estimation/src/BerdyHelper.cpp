@@ -174,6 +174,7 @@ bool BerdyHelper::init(const Model& model,
     m_jointPos.resize(m_model);
     m_jointVel.resize(m_model);
     m_linkVels.resize(m_model);
+    m_link_H_externalWrenchMeasurementFrame.resize(m_model.getNrOfLinks(),Transform::Identity());
 
     bool res = m_options.checkConsistency();
 
@@ -1280,9 +1281,10 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
                         LinkIndex childIndex = neighborIndex;
                         IJointConstPtr neighborJoint = m_model.getJoint(m_model.getNeighbor(idx,neigh_i).neighborJoint);
                         const Transform & base_X_child = neighborJoint->getTransform(m_jointPos,idx,childIndex);
+                        Transform measurementFrame_X_child = (m_link_H_externalWrenchMeasurementFrame[idx].inverse())*base_X_child;
 
                         matrixYElements.addSubMatrix(getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx).offset,
-                                                     getRangeJointVariable(JOINT_WRENCH,neighborJoint->getIndex()).offset, base_X_child.asAdjointTransformWrench());
+                                                     getRangeJointVariable(JOINT_WRENCH,neighborJoint->getIndex()).offset, measurementFrame_X_child.asAdjointTransformWrench());
                     }
 
                     // bY encodes the weight of the base link due to gravity (we omit the v*I*v as it is always zero)
@@ -1298,9 +1300,11 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
                 IndexRange sensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx);
                 IndexRange netExtWrenchRange = this->getRangeLinkVariable(NET_EXT_WRENCH,idx);
 
-                matrixYElements.addDiagonalMatrix(sensorRange,
-                                                  netExtWrenchRange,
-                                                  1);
+                Transform measurementFrame_X_link = (m_link_H_externalWrenchMeasurementFrame[idx].inverse());
+
+                matrixYElements.addSubMatrix(sensorRange.offset,
+                                             netExtWrenchRange.offset,
+                                             measurementFrame_X_link.asAdjointTransformWrench());
 
                 // bY for the net external wrenches is zero
             }
@@ -2021,7 +2025,7 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
             {
                 IndexRange sensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx);
 
-                setSubVector(y,sensorRange,toEigen(netExtWrenches(idx)));
+                setSubVector(y,sensorRange,toEigen(m_link_H_externalWrenchMeasurementFrame[idx].inverse()*netExtWrenches(idx)));
             }
         }
     }
@@ -2088,6 +2092,24 @@ bool BerdyHelper::extractLinkNetExternalWrenchesFromDynamicVariables(const Vecto
     return true;
 }
 
+bool BerdyHelper::setNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, const Transform& link_H_externalWrenchMeasurementFrame)
+{
+    if (!m_model.isValidLinkIndex(lnkIndex)) return false;
+
+    m_link_H_externalWrenchMeasurementFrame[lnkIndex] = link_H_externalWrenchMeasurementFrame;
+
+    return true;
+}
+
+
+bool BerdyHelper::getNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, Transform& link_H_externalWrenchMeasurementFrame)
+{
+    if (!m_model.isValidLinkIndex(lnkIndex)) return false;
+
+    link_H_externalWrenchMeasurementFrame = m_link_H_externalWrenchMeasurementFrame[lnkIndex];
+
+    return true;
+}
 
 
 
