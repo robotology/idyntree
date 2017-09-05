@@ -164,12 +164,12 @@ void ThreeAxisForceTorqueContactSensor::setLoadCellLocations(std::vector<Positio
     pimpl->m_loadCellLocations = loadCellLocations;
 }
 
-std::vector<Position>  ThreeAxisForceTorqueContactSensor::getLoadCellLocations()
+std::vector<Position>  ThreeAxisForceTorqueContactSensor::getLoadCellLocations() const
 {
     return pimpl->m_loadCellLocations;
 }
 
-Vector3  ThreeAxisForceTorqueContactSensor::computeThreeAxisForceTorqueFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements)
+Vector3  ThreeAxisForceTorqueContactSensor::computeThreeAxisForceTorqueFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements) const
 {
     if (loadCellMeasurements.size() != pimpl->m_loadCellLocations.size())
     {
@@ -198,7 +198,7 @@ Vector3  ThreeAxisForceTorqueContactSensor::computeThreeAxisForceTorqueFromLoadC
     return ret;
 }
 
-Position ThreeAxisForceTorqueContactSensor::computeCenterOfPressureFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements)
+Position ThreeAxisForceTorqueContactSensor::computeCenterOfPressureFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements) const
 {
     if (loadCellMeasurements.size() != pimpl->m_loadCellLocations.size())
     {
