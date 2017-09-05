@@ -785,7 +785,7 @@ bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
     }
     for(itr = 0; itr<numThreeAxisAngularAcc; itr++)
     {
-        int offset = 6*numFT + 3*numAcc + 3*numGyro;
+        int offset = 6*numFT + 3*numAcc + 3*numGyro + 3*itr;
         Vector3 thisAngAcc = this->pimpl->ThreeAxisAngularAccelerometerMeasurements.at(itr);
         ok && measurementVector.setVal(offset,   thisAngAcc.getVal(0));
         ok && measurementVector.setVal(offset+1, thisAngAcc.getVal(1));
@@ -793,7 +793,7 @@ bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
     }
     for(itr = 0; itr<numThreeAxisFT; itr++)
     {
-        int offset = 6*numFT + 3*numAcc + 3*numGyro + 3*numThreeAxisAngularAcc;
+        int offset = 6*numFT + 3*numAcc + 3*numGyro + 3*numThreeAxisAngularAcc + 3*itr;
         Vector3 thisThreeAxisFT = this->pimpl->ThreeAxisForceTorqueContactMeasurements.at(itr);
         ok && measurementVector.setVal(offset,   thisThreeAxisFT.getVal(0));
         ok && measurementVector.setVal(offset+1, thisThreeAxisFT.getVal(1));
@@ -1098,6 +1098,9 @@ unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) 
             break;
         case THREE_AXIS_ANGULAR_ACCELEROMETER :
             returnVal =  this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size();
+            break;
+        case THREE_AXIS_FORCE_TORQUE_CONTACT :
+            returnVal =  this->pimpl->ThreeAxisForceTorqueContactMeasurements.size();
             break;
         default :
             returnVal = 0;
