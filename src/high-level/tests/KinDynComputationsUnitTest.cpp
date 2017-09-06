@@ -301,6 +301,16 @@ void testRelativeJacobians(KinDynComputations & dynComp)
     dynComp.setFrameVelocityRepresentation(representation);
 }
 
+// Dummy test: for now it just prints the frameBiasAcc, to check there is no
+// usage of not initialized memory
+void testFrameBiasAcc(KinDynComputations & dynComp)
+{
+    FrameIndex frame = real_random_int(0, dynComp.getNrOfFrames());
+
+    // Compute and print frameBiasAcc
+    std::cerr << "Computed frameBiasAcc " << dynComp.getFrameBiasAcc(frame).toString() << std::endl;
+}
+
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
     iDynTree::KinDynComputations dynComp;
@@ -318,6 +328,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
         testAverageVelocityAndTotalMomentumJacobian(dynComp);
         testInverseDynamics(dynComp);
         testRelativeJacobians(dynComp);
+        testFrameBiasAcc(dynComp);
     }
 
 }
