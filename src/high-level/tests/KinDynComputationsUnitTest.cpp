@@ -333,16 +333,24 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
 
 }
 
+void testModelConsistencyAllRepresentations(std::string modelName)
+{
+    std::string urdfFileName = getAbsModelPath(modelName);
+    std::cout << "Testing file " << urdfFileName <<  std::endl;
+    testModelConsistency(urdfFileName,iDynTree::MIXED_REPRESENTATION);
+    testModelConsistency(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
+    testModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
+}
+
 int main()
 {
-    for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
-    {
-        std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
-        std::cout << "Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) <<  std::endl;
-        testModelConsistency(urdfFileName,iDynTree::MIXED_REPRESENTATION);
-        testModelConsistency(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
-        testModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
-    }
+    // Just run the tests on a handful of models to avoid
+    // a long testing time under valgrind
+    testModelConsistencyAllRepresentations("oneLink.urdf");
+    testModelConsistencyAllRepresentations("twoLinks.urdf");
+    testModelConsistencyAllRepresentations("threeLinks.urdf");
+    testModelConsistencyAllRepresentations("bigman.urdf");
+    testModelConsistencyAllRepresentations("icub_skin_frames.urdf");
 
     return EXIT_SUCCESS;
 }
