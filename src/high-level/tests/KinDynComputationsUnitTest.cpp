@@ -301,6 +301,16 @@ void testRelativeJacobians(KinDynComputations & dynComp)
     dynComp.setFrameVelocityRepresentation(representation);
 }
 
+// Dummy test: for now it just prints the frameBiasAcc, to check there is no
+// usage of not initialized memory
+void testFrameBiasAcc(KinDynComputations & dynComp)
+{
+    FrameIndex frame = real_random_int(0, dynComp.getNrOfFrames());
+
+    // Compute and print frameBiasAcc
+    std::cerr << "Computed frameBiasAcc " << dynComp.getFrameBiasAcc(frame).toString() << std::endl;
+}
+
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
     iDynTree::KinDynComputations dynComp;
@@ -311,27 +321,36 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
     ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
     ASSERT_IS_TRUE(ok);
 
-    for(int i=0; i < 5; i++)
+    for(int i=0; i < 1; i++)
     {
         setRandomState(dynComp);
         testRelativeTransform(dynComp);
         testAverageVelocityAndTotalMomentumJacobian(dynComp);
         testInverseDynamics(dynComp);
         testRelativeJacobians(dynComp);
+        testFrameBiasAcc(dynComp);
     }
 
 }
 
+void testModelConsistencyAllRepresentations(std::string modelName)
+{
+    std::string urdfFileName = getAbsModelPath(modelName);
+    std::cout << "Testing file " << urdfFileName <<  std::endl;
+    testModelConsistency(urdfFileName,iDynTree::MIXED_REPRESENTATION);
+    testModelConsistency(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
+    testModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
+}
+
 int main()
 {
-    for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
-    {
-        std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
-        std::cout << "Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) <<  std::endl;
-        testModelConsistency(urdfFileName,iDynTree::MIXED_REPRESENTATION);
-        testModelConsistency(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
-        testModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
-    }
+    // Just run the tests on a handful of models to avoid
+    // a long testing time under valgrind
+    testModelConsistencyAllRepresentations("oneLink.urdf");
+    testModelConsistencyAllRepresentations("twoLinks.urdf");
+    testModelConsistencyAllRepresentations("threeLinks.urdf");
+    testModelConsistencyAllRepresentations("bigman.urdf");
+    testModelConsistencyAllRepresentations("icub_skin_frames.urdf");
 
     return EXIT_SUCCESS;
 }

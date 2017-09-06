@@ -1101,7 +1101,7 @@ Vector6 convertBodyFixedAccelerationToMixedAcceleration(const SpatialAcc & bodyF
     linMixedAcc = inertial_R_body_eig*(linBodyFixedAcc + angBodyFixedTwist.cross(linBodyFixedTwist));
 
     // Angular acceleration can be copied
-    angMixedAcc = inertial_R_body_eig*angMixedAcc;
+    angMixedAcc = inertial_R_body_eig*angBodyFixedAcc;
 
     return mixedAcceleration;
 }
