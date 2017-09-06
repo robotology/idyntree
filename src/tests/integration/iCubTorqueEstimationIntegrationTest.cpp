@@ -363,11 +363,14 @@ int main()
     compareEstimatorsOptions.removeAllFTSensors = true;
 
     // We can easily perform the test for all models in this easy case
+    // However, this are commented out because in Debug mode under
+    // valgrind this will take too much time
+    /*
     std::cerr << "Testing BERDY without any internal FT sensor" << std::endl;
     for (unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
     {
         compareEstimators(std::string(IDYNTREE_TESTS_URDFS[mdl]));
-    }
+    }*/
 
     urdfFileName = "twoLinks.urdf";
     contactFrameNames = {"link1"};
