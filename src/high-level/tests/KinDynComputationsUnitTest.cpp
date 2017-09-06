@@ -321,7 +321,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
     ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
     ASSERT_IS_TRUE(ok);
 
-    for(int i=0; i < 5; i++)
+    for(int i=0; i < 1; i++)
     {
         setRandomState(dynComp);
         testRelativeTransform(dynComp);
