@@ -237,10 +237,7 @@ namespace kinematics {
             m_data.m_dynamics.getCenterOfMassJacobian(comInfo.comJacobian);
 
             if (m_data.m_comHullConstraint.isActive()) {
-                // Project the jacobian and the com
-                // comInfo.projectedCom = m_data.m_comHullConstraint.project(comInfo.com);
-
-                // Project the COM along the gravity vector
+                // Project the COM along the desired direction
                 comInfo.projectedCom = m_data.m_comHullConstraint.projectAlongDirection(comInfo.com);
             }
         }
