@@ -20,6 +20,8 @@
 
 #include <QPainter>
 
+#include <cmath>
+
 
 using namespace yarp::os;
 
