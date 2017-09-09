@@ -3,6 +3,7 @@ dist: trusty
 osx_image: xcode7.3
 language: cpp
 cache: ccache
+group: deprecated-2017Q3
 
 matrix:
   include:
