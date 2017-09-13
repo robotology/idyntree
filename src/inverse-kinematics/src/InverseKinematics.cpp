@@ -327,7 +327,26 @@ namespace iDynTree {
         iDynTree::Position comInAbsoluteConstraintFrame =
             IK_PIMPL(m_pimpl)->m_comHullConstraint.absoluteFrame_X_supportFrame[0]*(kinDyn.getWorldTransform(IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices[0]).inverse()*kinDyn.getCenterOfMassPosition());
 
-        iDynTree::Vector2 comProjection = IK_PIMPL(m_pimpl)->m_comHullConstraint.projectAlongDirection(comInAbsoluteConstraintFrame);
+        iDynTree::Vector2 comProjectionBeforeTrick = IK_PIMPL(m_pimpl)->m_comHullConstraint.projectAlongDirection(comInAbsoluteConstraintFrame);
+
+        /* In order to reduce the convexhull's margin along the y-component,
+         * we use a trick an drif the measurement along y to make the robot
+         * more reactive along y.
+         */
+        iDynTree::Vector2 comProjection;
+        comProjection.setVal(0, comProjectionBeforeTrick(0));
+
+        double yOffset = 0.02; // [m]
+
+        if (comProjectionBeforeTrick(1) >= 0)
+        {
+            comProjection.setVal(1, comProjectionBeforeTrick(1) + yOffset);
+        }
+        else
+        {
+            comProjection.setVal(1, comProjectionBeforeTrick(1) - yOffset);
+        }
+
         return IK_PIMPL(m_pimpl)->m_comHullConstraint.computeMargin(comProjection);
     }
 

@@ -228,7 +228,7 @@ bool ObserverThread::init(yarp::os::ResourceFinder& config)
         initIMUFilter.resize(3, 0.0);
         initIMUFilter[2] = -9.81;
 
-        filtIMUGravity = new iCub::ctrl::FirstOrderLowPassFilter(6.0, this->getRate()/1000.0, initIMUFilter);
+        filtIMUGravity = new iCub::ctrl::FirstOrderLowPassFilter(3.0, this->getRate()/1000.0, initIMUFilter);
     }
 }
 

@@ -237,8 +237,24 @@ namespace kinematics {
             m_data.m_dynamics.getCenterOfMassJacobian(comInfo.comJacobian);
 
             if (m_data.m_comHullConstraint.isActive()) {
-                // Project the COM along the desired direction
-                comInfo.projectedCom = m_data.m_comHullConstraint.projectAlongDirection(comInfo.com);
+//                 // Project the COM along the desired direction
+//                 comInfo.projectedCom = m_data.m_comHullConstraint.projectAlongDirection(comInfo.com);
+
+                iDynTree::Vector2 projectedComBeforeTrick = m_data.m_comHullConstraint.projectAlongDirection(comInfo.com);
+
+                comInfo.projectedCom.setVal(0, projectedComBeforeTrick(0));
+
+
+                double yOffset = 0.02; // [m]
+
+                if (projectedComBeforeTrick(1) >= 0)
+                {
+                    comInfo.projectedCom.setVal(1, projectedComBeforeTrick(1) + yOffset);
+                }
+                else
+                {
+                    comInfo.projectedCom.setVal(1, projectedComBeforeTrick(1) - yOffset);
+                }
             }
         }
 
