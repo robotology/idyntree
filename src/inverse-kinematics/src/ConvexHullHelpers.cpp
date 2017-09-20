@@ -125,7 +125,8 @@ namespace iDynTree
                                                          const iDynTree::Direction yAxisOfPlaneInWorld,
                                                          const iDynTree::Position originOfPlaneInWorld,
                                                          const std::vector<Polygon> &supportPolygonsExpressedInSupportFrame,
-                                                         const std::vector<Transform> &absoluteFrame_X_supportFrame)
+                                                         const std::vector<Transform> &absoluteFrame_X_supportFrame,
+                                                         const double safetyMargin)
     {
         o = originOfPlaneInWorld;
         toEigen(P).block<1, 3>(0,0) = toEigen(xAxisOfPlaneInWorld);

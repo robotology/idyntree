@@ -213,13 +213,14 @@ namespace iDynTree {
                                                                 const Polygon &firstSupportPolygon,
                                                                 const iDynTree::Direction xAxisOfPlaneInWorld,
                                                                 const iDynTree::Direction yAxisOfPlaneInWorld,
-                                                                const iDynTree::Position originOfPlaneInWorld)
+                                                                const iDynTree::Position originOfPlaneInWorld,
+                                                                const double safetyMargin)
     {
         std::vector<std::string> supportFrames;
         std::vector<Polygon> supportPolygons;
         supportFrames.push_back(firstSupportFrame);
         supportPolygons.push_back(firstSupportPolygon);
-        return addCenterOfMassProjectionConstraint(supportFrames,supportPolygons,xAxisOfPlaneInWorld,yAxisOfPlaneInWorld,originOfPlaneInWorld);
+        return addCenterOfMassProjectionConstraint(supportFrames,supportPolygons,xAxisOfPlaneInWorld,yAxisOfPlaneInWorld,originOfPlaneInWorld, safetyMargin);
     }
 
     bool InverseKinematics::addCenterOfMassProjectionConstraint(const std::string &firstSupportFrame,
@@ -228,7 +229,8 @@ namespace iDynTree {
                                                                 const Polygon &secondSupportPolygon,
                                                                 const iDynTree::Direction xAxisOfPlaneInWorld,
                                                                 const iDynTree::Direction yAxisOfPlaneInWorld,
-                                                                const iDynTree::Position originOfPlaneInWorld)
+                                                                const iDynTree::Position originOfPlaneInWorld,
+                                                                const double safetyMargin)
     {
         std::vector<std::string> supportFrames;
         std::vector<Polygon> supportPolygons;
@@ -236,14 +238,15 @@ namespace iDynTree {
         supportFrames.push_back(secondSupportFrame);
         supportPolygons.push_back(firstSupportPolygon);
         supportPolygons.push_back(secondSupportPolygon);
-        return addCenterOfMassProjectionConstraint(supportFrames,supportPolygons,xAxisOfPlaneInWorld,yAxisOfPlaneInWorld,originOfPlaneInWorld);
+        return addCenterOfMassProjectionConstraint(supportFrames,supportPolygons,xAxisOfPlaneInWorld,yAxisOfPlaneInWorld,originOfPlaneInWorld, safetyMargin);
     }
 
     bool InverseKinematics::addCenterOfMassProjectionConstraint(const std::vector<std::string> &supportFrames,
                                                                 const std::vector<Polygon> &supportPolygons,
                                                                 const iDynTree::Direction xAxisOfPlaneInWorld,
                                                                 const iDynTree::Direction yAxisOfPlaneInWorld,
-                                                                const iDynTree::Position originOfPlaneInWorld)
+                                                                const iDynTree::Position originOfPlaneInWorld,
+                                                                const double safetyMargin)
     {
         if( supportFrames.size() == 0 )
         {

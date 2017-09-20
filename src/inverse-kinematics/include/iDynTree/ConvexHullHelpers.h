@@ -92,12 +92,14 @@ namespace iDynTree
         Polygon2D();
 
         /**
-         * Set the number of vertices (the vertices can then be accessed with the operator()
+         * Set the number of vertices.
+         *
+         * The vertices can then be accessed with operator() .
          */
         void setNrOfVertices(size_t size);
 
         /**
-         * Get the number of vertices in the Polygon
+         * \brief Get the number of vertices in the Polygon
          * @return the number of vertices
          */
         size_t getNrOfVertices() const;
@@ -192,19 +194,27 @@ namespace iDynTree
         iDynTree::Position o;
 
         /**
-         * Build the projected convex hull.
+         * \brief Build the projected convex hull.
          *
-         * @param projectionPlaneXaxisInAbsoluteFrame X direction of the projection axis, in the absolute frame.
-         * @param projectionPlaneYaxisInAbsoluteFrame Y direction of the projection axis, in the absolute frame.
-         * @param supportPolygonsExpressedInSupportFrame Vector of the support polygons, expressed in the support frames.
-         * @param absoluteFrame_X_supportFrame Vector of the transform between each support frame and the absolute frame.
+         * All the polygons are transformed in the the absolute frame, and then they are
+         * projected in the projection plane. Once the point have been projected to the 2D plane,
+         * a preliminary convex hull is computed using the Monotone Chain algorithm. The preliminary
+         * convex hull is transformed in the definitive one by "removing" the specified safety margin.
+         *
+         * @param[in] projectionPlaneXaxisInAbsoluteFrame X direction of the projection plane, in the absolute frame.
+         * @param[in] projectionPlaneYaxisInAbsoluteFrame Y direction of the projection plane, in the absolute frame.
+         * @param[in] originOfPlaneInAbsoluteFrame        origin of the projection plane, in the absolute frame.
+         * @param[in] supportPolygonsExpressedInSupportFrame Vector of the support polygons, expressed in the support frames.
+         * @param[in] absoluteFrame_X_supportFrame Vector of the transform between each support frame and the absolute frame.
+         * @param[in] safetyMargin the safety margin of the compute convex hull (default: 0.0).
          * @return true if all went well, false otherwise.
          */
-        bool buildConvexHull(const iDynTree::Direction xAxisOfPlaneInWorld,
-                             const iDynTree::Direction yAxisOfPlaneInWorld,
-                             const iDynTree::Position originOfPlaneInWorld,
+        bool buildConvexHull(const Direction projectionPlaneXaxisInAbsoluteFrame,
+                             const Direction projectionPlaneYaxisInAbsoluteFrame,
+                             const Position originOfPlaneInAbsoluteFrame,
                              const std::vector<Polygon> & supportPolygonsExpressedInSupportFrame,
-                             const std::vector<Transform> & absoluteFrame_X_supportFrame);
+                             const std::vector<Transform> & absoluteFrame_X_supportFrame,
+                             const double safetyMargin = 0.0);
 
         /**
          * List of support frames.

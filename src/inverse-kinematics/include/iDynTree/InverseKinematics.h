@@ -365,7 +365,8 @@ public:
                                              const Polygon& firstSupportPolygon,
                                              const iDynTree::Direction xAxisOfPlaneInWorld,
                                              const iDynTree::Direction yAxisOfPlaneInWorld,
-                                             const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero());
+                                             const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero(),
+                                             const double safetyMargin = 0.0);
 
     /*!
      * Add a constant inequality constraint on the projection of the center of mass,
@@ -381,7 +382,8 @@ public:
                                              const Polygon& secondSupportPolygon,
                                              const iDynTree::Direction xAxisOfPlaneInWorld,
                                              const iDynTree::Direction yAxisOfPlaneInWorld,
-                                             const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero());
+                                             const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero(),
+                                             const double safetyMargin = 0.0);
 
     /*!
      * Add a constant inequality constraint on the projection of the center of mass,
@@ -395,7 +397,8 @@ public:
                                              const std::vector<Polygon>& supportPolygons,
                                              const iDynTree::Direction xAxisOfPlaneInWorld,
                                              const iDynTree::Direction yAxisOfPlaneInWorld,
-                                             const iDynTree::Position originOfPlaneInWorld);
+                                             const iDynTree::Position originOfPlaneInWorld,
+                                             const double safetyMargin = 0.0);
 
     /*!
      * Get the distance between the projection of the center of mass projection for the current configuration (set through setRobotConfiguration)
