@@ -291,12 +291,12 @@ namespace iDynTree {
 
         iDynTree::Axis projectionPlaneXaxisInAbsoluteFrame(xAxisOfPlaneInWorld,originOfPlaneInWorld);
         iDynTree::Axis projectionPlaneYaxisInAbsoluteFrame(yAxisOfPlaneInWorld,originOfPlaneInWorld);
-	
-	// Initialize the COM's projection direction in such a way that is along the lien perpendicular to the xy-axes of the World
-	iDynTree::Direction zAxisOfPlaneInWorld;
-	toEigen(zAxisOfPlaneInWorld) = toEigen(xAxisOfPlaneInWorld).cross(toEigen(yAxisOfPlaneInWorld));
-		
-	IK_PIMPL(m_pimpl)->m_comHullConstraint.setProjectionAlongDirection(zAxisOfPlaneInWorld);
+    
+        // Initialize the COM's projection direction in such a way that is along the lien perpendicular to the xy-axes of the World
+        iDynTree::Direction zAxisOfPlaneInWorld;
+        toEigen(zAxisOfPlaneInWorld) = toEigen(xAxisOfPlaneInWorld).cross(toEigen(yAxisOfPlaneInWorld));
+
+        IK_PIMPL(m_pimpl)->m_comHullConstraint.setProjectionAlongDirection(zAxisOfPlaneInWorld);
 
         // Compute the constraint
         bool ok = IK_PIMPL(m_pimpl)->m_comHullConstraint.buildConvexHull(xAxisOfPlaneInWorld,
