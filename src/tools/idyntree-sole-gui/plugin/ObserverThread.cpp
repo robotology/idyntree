@@ -395,7 +395,7 @@ void ObserverThread::threadRelease()
     if (!m_skip_gravity)
     {
         m_imuPort.interrupt();
-        yarp::os::Network::connect(m_remoteImuPortName.c_str(),
+        yarp::os::Network::disconnect(m_remoteImuPortName.c_str(),
                                    m_localImuPortName.c_str());
         m_imuPort.close();
     }
