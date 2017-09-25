@@ -66,6 +66,8 @@ namespace iDynTree {
 }
 
 /*!
+ * \ingroup iDynTreeExperimental
+ *
  * @brief NLP-based Inverse kinematics
  *
  * Given a mechanical structure configuration
@@ -87,7 +89,7 @@ namespace iDynTree {
  * @note all the cartesian frames must be specified w.r.t. the same global frame.
  * This library does not assume any particular global frame
  *
- *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
  *
  */
 class iDynTree::InverseKinematics

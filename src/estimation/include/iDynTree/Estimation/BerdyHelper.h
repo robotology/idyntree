@@ -44,6 +44,9 @@ namespace iDynTree
 /**
  * Enumeration of the Berdy variants implemented
  * in this class.
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 enum BerdyVariants
 {
@@ -73,6 +76,9 @@ enum BerdyVariants
 /**
  * Enumeration describing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration)
  * used in Berdy
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 enum BerdyDynamicVariablesTypes
 {
@@ -113,6 +119,9 @@ enum BerdyDynamicVariablesTypes
  * of this enum to be compatibile with the iDynTree::SensorTypes enum.
  * Enum values duplicates between BerdySensorTypes and SensorTypes are append a
  * _SENSOR suffix to avoid problems when wrapping such enum wit SWIG.
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 enum BerdySensorTypes
 {
@@ -139,6 +148,9 @@ bool isDOFBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableT
  *
  * Documentation of each option is provided as usual Doxygen documentation.
  * Default values for each options are specified in the contstructor.
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 struct BerdyOptions
 {
@@ -236,6 +248,9 @@ public:
 /**
  * Structure which describes the essential information about a sensor used in berdy
  * A sensor is identified by the pair (type, id)
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 struct BerdySensor {
     iDynTree::BerdySensorTypes type; /*!< type of the sensor */
@@ -318,8 +333,8 @@ struct BerdyDynamicVariable {
  *       base of the robot, even in the case that BERDY_FLOATING_BASE is used. The assumed traversal (i.e.
  *       which link is the floating base and how the link are visited) is accessible with the dynamicTraversal() method.
  *
- * \note This class is still under heavy development, and its interface can change
- *       without any warning.
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 class BerdyHelper
 {

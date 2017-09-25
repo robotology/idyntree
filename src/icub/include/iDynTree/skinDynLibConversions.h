@@ -24,6 +24,8 @@ class LinkContactWrenches;
 
 /**
  * Identifier for a link and a body frame in skinDynLib.
+ *
+ * \ingroup iDynTreeICUB
  */
 class skinDynLibLinkID
 {
@@ -56,6 +58,8 @@ public:
 
 /**
  * Identifier for a link and frame couple in an iDynTree model.
+ *
+ * \ingroup iDynTreeICUB
  */
 class iDynTreeLinkAndFrame
 {
@@ -76,6 +80,8 @@ class iDynTreeLinkAndFrame
  *  * The link frame of a link in iDynTree does not match the link frame assumed in skinDynLib.
  *    For this reason we need to specify an additional frame to specify the frame of the link
  *    used by skinDynLib, to properly convert the contact data back and forth.
+ *
+ * \ingroup iDynTreeICUB
  */
 class skinDynLibConversionsHelper
 {
