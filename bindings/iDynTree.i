@@ -26,6 +26,7 @@
 
 %{
 /* Note : always include headers following the inheritance order */
+#include <cmath>
 
 //Utils
 #include "iDynTree/Core/Utils.h"
