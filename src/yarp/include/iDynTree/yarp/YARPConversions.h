@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 RobotCub Consortium
+ * Copyright (C) 2015-2017 Fondazione Istituto Italiano di Tecnologia
  * Author: Silvio Traversaro
  * CopyPolicy: Released under the terms of the GNU LGPL v2.0 (or any later version)
  *
@@ -101,7 +101,7 @@ bool toiDynTree(const yarp::sig::Matrix & yarpHomogeneousMatrix, iDynTree::Trans
  * Convert a iDynTree::Transform to a 4x4 yarp::sig::Matrix representing an homegeneous matrix
  * @param iDynTreeTransform iDynTree::Transform input
  * @param yarpHomogeneousMatrix yarp::sig::Matrix 4x4 homegeneous matrix output
- * @return true if conversion was successful, false
+ * @return true if conversion was successful, false otherwise
  *
  * \ingroup iDynTreeYARP
  */
