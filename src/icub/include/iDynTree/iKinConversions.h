@@ -20,25 +20,29 @@ class Model;
 class DHChain;
 
 /**
- *
- * Load a iDynTree::DHChain object from a iCub::iKin::iKinChain .
+ * \brief Load a iDynTree::DHChain object from a iCub::iKin::iKinChain .
  *
  * @return true if all went ok, false otherwise.
+ *
+ * \ingroup iDynTreeICUB
  */
 bool DHChainFromiKinChain(iCub::iKin::iKinChain & ikinChain,
                           DHChain & out);
 
 /**
- *
- * Load a iDynTree::Model object from a iCub::iKin::iKinChain .
+ * \brief Load a iDynTree::Model object from a iCub::iKin::iKinChain .
  *
  * @return true if all went ok, false otherwise.
+ *
+ * \ingroup iDynTreeICUB
  */
 bool modelFromiKinChain(iCub::iKin::iKinChain & ikinChain,
                         Model & output);
 
 /**
- * iKinLimb class to extract a iKinLimb from iDynTree structures.
+ * \brief iKinLimb class to extract a iKinLimb from iDynTree structures.
+ *
+ * \ingroup iDynTreeICUB
  */
 class iKinLimbImported : public iCub::iKin::iKinLimb
 {
@@ -67,10 +71,11 @@ public:
 };
 
 /**
- *
- * Extract an iCub::iKin::iKinLimb from an iDynTree::Model .
+ * \brief Extract an iCub::iKin::iKinLimb from an iDynTree::Model .
  *
  * @return true if all went ok, false otherwise.
+ *
+ * \ingroup iDynTreeICUB
  */
 bool iKinLimbFromModel(const Model & model,
                         const std::string& baseFrame,
@@ -78,8 +83,9 @@ bool iKinLimbFromModel(const Model & model,
                         iCub::iKin::iKinLimb & ikinLimb);
 
 /**
+ * \brief Create a iCub::iKin::iKinLimb from an iDynTree::DHChain
  *
- * Create a iCub::iKin::iKinLimb from an iDynTree::DHChain
+ * \ingroup iDynTreeICUB
  */
 bool iKinLimbFromDHChain(const DHChain & dhChain,
                          iCub::iKin::iKinLimb& ikinLimb);
