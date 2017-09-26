@@ -41,6 +41,7 @@ namespace iDynTree
 #define ASSERT_EQUAL_DOUBLE_TOL(val1,val2,tol) iDynTree::assertDoubleAreEqual(val1,val2,tol,__FILE__,__LINE__)
 #define ASSERT_EQUAL_VECTOR(val1,val2) assertVectorAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_VECTOR_TOL(val1,val2,tol) assertVectorAreEqual(val1,val2,tol,__FILE__,__LINE__)
+#define ASSERT_EQUAL_VECTOR_REL_TOL(val1,val2,relTol,minAbsTol) assertVectorAreEqualWithRelativeTol(val1,val2,relTol,minAbsTol,__FILE__,__LINE__)
 #define ASSERT_EQUAL_SPATIAL_MOTION(val1,val2) assertSpatialMotionAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_SPATIAL_FORCE(val1,val2) assertSpatialForceAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)
 #define ASSERT_EQUAL_SPATIAL_FORCE_TOL(val1,val2,tol) assertSpatialForceAreEqual(val1,val2,tol,__FILE__,__LINE__)
@@ -107,11 +108,11 @@ namespace iDynTree
      * Fill a vector with random double.
      */
     template<typename VectorType>
-    void getRandomVector(VectorType & vec)
+    void getRandomVector(VectorType & vec, double min=0.0, double max=1.0)
     {
         for(unsigned int i=0; i<vec.size(); i++)
         {
-            vec(i) = getRandomDouble();
+            vec(i) = getRandomDouble(min,max);
         }
     }
 
@@ -193,7 +194,7 @@ namespace iDynTree
 
         for(unsigned int i=0; i < minSize; i++ )
         {
-            std::cerr << vec1(i) - vec2(i) << "\n";
+            std::cerr << vec1(i) - vec2(i) << " ( " << (vec1(i) - vec2(i))/std::max(vec1(i),vec2(i)) << " ) " << "\n";
         }
     }
 
@@ -276,7 +277,6 @@ namespace iDynTree
     /**
      * Assert that two vectors are equal, and
      * exit with EXIT_FAILURE if they are not.
-     *
      */
     template<typename VectorType1, typename VectorType2>
     void assertVectorAreEqual(const VectorType1& vec1, const VectorType2& vec2, double tol, std::string file, int line)
@@ -303,6 +303,46 @@ namespace iDynTree
         if( !checkCorrect )
         {
             std::cerr << file << ":" << line << " : assertVectorAreEqual failure: " << std::endl;
+            printVector("vec1",vec1);
+            printVector("vec2",vec2);
+            printVectorDifference("vec1-vec2",vec1,vec2);
+            printVectorWrongElements("wrong el:",correctElements);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    /**
+     * Assert that two vectors are equal, and exit with EXIT_FAILURE if they are not.
+     *
+     * The tolerance passed in this function is a relative tolerance on the max element of the comparison, i.e.
+     * absoluteTol = max(relativeTol*max(val1,val2), minAbsoluteTol)
+     */
+    template<typename VectorType1, typename VectorType2>
+    void assertVectorAreEqualWithRelativeTol(const VectorType1& vec1, const VectorType2& vec2, double relativeTol, double minAbsoluteTol, std::string file, int line)
+    {
+        if( vec1.size() != vec2.size() )
+        {
+            std::cerr << file << ":" << line << " : assertVectorAreEqualWithRelativeTol failure: vec1 has size " << vec1.size()
+                      << " while vec2 has size " << vec2.size() << std::endl;
+            exit(EXIT_FAILURE);
+        }
+
+        std::vector<bool> correctElements(vec1.size(),true);
+        bool checkCorrect = true;
+
+        for( unsigned int i = 0; i < vec1.size(); i++ )
+        {
+            double absoluteTol = std::max(relativeTol*std::max(std::abs(vec1(i)), std::abs(vec2(i))), minAbsoluteTol);
+            if( fabs(vec1(i)-vec2(i)) >= absoluteTol )
+            {
+                checkCorrect = false;
+                correctElements[i] = false;
+            }
+        }
+
+        if( !checkCorrect )
+        {
+            std::cerr << file << ":" << line << " : assertVectorAreEqualWithRelativeTol failure: " << std::endl;
             printVector("vec1",vec1);
             printVector("vec2",vec2);
             printVectorDifference("vec1-vec2",vec1,vec2);

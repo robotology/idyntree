@@ -11,7 +11,7 @@
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Wrench.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/LinkState.h>
 
 

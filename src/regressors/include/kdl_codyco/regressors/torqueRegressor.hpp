@@ -30,9 +30,9 @@ class torqueRegressor : public DynamicRegressorInterface
     const KDL::CoDyCo::UndirectedTree * p_undirected_tree;
     const iDynTree::SensorsList * p_sensors_tree;
 
-    std::vector< int > subtree_leaf_links_indeces; /** indices of the leafs (excluding the root) */
+    std::vector< int > subtree_leaf_links_indices; /** indices of the leafs (excluding the root) */
 
-    std::vector<int> linkIndeces2regrCols;
+    std::vector<int> linkIndices2regrCols;
 
     std::string torque_dof;
 
@@ -42,7 +42,7 @@ class torqueRegressor : public DynamicRegressorInterface
 
     bool consider_ft_offset;
 
-    std::vector< int > subtree_links_indices; /** indeces of the links belonging to the considered subtree */
+    std::vector< int > subtree_links_indices; /** indices of the links belonging to the considered subtree */
 
     bool verbose;
 
@@ -74,7 +74,7 @@ public:
          */
         torqueRegressor(const KDL::CoDyCo::UndirectedTree & _undirected_tree,
                         const iDynTree::SensorsList & _sensors_tree,
-                        const std::vector<int> & _linkIndeces2regrCols,
+                        const std::vector<int> & _linkIndices2regrCols,
                         const std::string & dof_name,
                         const bool _reverse_direction = false,
                         const std::vector<bool> & _activated_ft_sensors=std::vector< bool>(0),
@@ -83,7 +83,7 @@ public:
                         )
                         :   p_undirected_tree(&_undirected_tree),
                                             p_sensors_tree(&_sensors_tree),
-                                            linkIndeces2regrCols(_linkIndeces2regrCols),
+                                            linkIndices2regrCols(_linkIndices2regrCols),
                                             torque_dof(dof_name),
                                             reverse_direction(_reverse_direction),
                                             activated_ft_sensors(_activated_ft_sensors),
@@ -93,11 +93,11 @@ public:
                                             NrOfRealLinks_subtree(0)
 
         {
-            assert(linkIndeces2regrCols.size() == p_undirected_tree->getNrOfLinks());
+            assert(linkIndices2regrCols.size() == p_undirected_tree->getNrOfLinks());
             NrOfRealLinks_subtree = 0;
-            for(int ll=0; ll < (int)linkIndeces2regrCols.size(); ll++ ) { if( linkIndeces2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
+            for(int ll=0; ll < (int)linkIndices2regrCols.size(); ll++ ) { if( linkIndices2regrCols[ll] != -1 ) { NrOfRealLinks_subtree++; } }
             assert(NrOfRealLinks_subtree >= 0);
-            assert(NrOfRealLinks_subtree <= (int)linkIndeces2regrCols.size());
+            assert(NrOfRealLinks_subtree <= (int)linkIndices2regrCols.size());
         }
 
         virtual ~torqueRegressor() {};

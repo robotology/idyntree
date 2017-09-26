@@ -1,5 +1,8 @@
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
+# Legacy tests, remove deprecated warnings when compiling
+idyntree_disable_deprecation_warnings()
+
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS} ${orocos_kdl_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
@@ -13,7 +16,8 @@ macro(add_all_components_test testName)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
-        add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} ./${testbinary})
+        add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}>)
+
     endif()
 endmacro()
 
@@ -36,8 +40,9 @@ if(IDYNTREE_USES_ICUB_MAIN)
   find_package(ICUB)
   add_executable(urdf2dh_standalone_test urdf2dh_test.cpp)
   target_include_directories(urdf2dh_standalone_test PUBLIC ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
-  target_link_libraries(urdf2dh_standalone_test iKin idyntree-kdl idyntree-yarp-kdl idyntree-regressors idyntree-modelio-urdf-kdl idyntree-modelio-ikin)
-
+  target_link_libraries(urdf2dh_standalone_test iKin idyntree-kdl idyntree-yarp-kdl idyntree-regressors idyntree-modelio-urdf-kdl idyntree-modelio-ikin-kdl)
+# \todo reenable this test
+  #add_test(NAME test_urdf2dh COMMAND urdf2dh_test urdf_icub_test.urdf)
 endif()
 
 FIND_PACKAGE(Boost)

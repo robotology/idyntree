@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
- * Author: Naveen Kuppuswamy
- * email:  naveen.kuppuswamyt@iit.it
+ * Copyright (C) 2017 Fondazione Istituto Italiano di Tecnologia
+ * Author: Silvio Traversaro
+ * email:  silvio.traversaro@iit.it
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
  * later version published by the Free Software Foundation.
@@ -131,7 +131,7 @@ Sensor* AccelerometerSensor::clone() const
     return (Sensor *)new AccelerometerSensor(*this);
 }
 
-bool AccelerometerSensor::updateIndeces(const Model& model)
+bool AccelerometerSensor::updateIndices(const Model& model)
 {
     iDynTree::LinkIndex linkNewIndex = model.getLinkIndex(this->pimpl->parent_link_name);
 
@@ -143,6 +143,12 @@ bool AccelerometerSensor::updateIndeces(const Model& model)
     this->pimpl->parent_link_index = linkNewIndex;
 
     return true;
+}
+
+// Deprecated
+bool AccelerometerSensor::updateIndeces(const Model& model)
+{
+    return updateIndices(model);
 }
 
 

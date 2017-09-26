@@ -15,6 +15,7 @@
 #include <iDynTree/Core/EigenHelpers.h>
 
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/PrismaticJoint.h>
 
 #include <cstdio>
 #include <cstdlib>
@@ -127,6 +128,24 @@ int main()
                                          revJoint.getFirstAttachedLink(),revJoint.getSecondAttachedLink());
         validateJointTransformDerivative(revJoint,jointPos,
                                          revJoint.getSecondAttachedLink(),revJoint.getFirstAttachedLink());
+    }
+    
+    for(unsigned int i=0; i < 10; i++)
+    {
+        // Random prismatic joint
+        // connecting links 0 and 1
+        PrismaticJoint priJoint(0, 1, getRandomTransform(), getRandomAxis());
+        priJoint.setPosCoordsOffset(0);
+        priJoint.setDOFsOffset(0);
+
+        VectorDynSize jointPos(priJoint.getNrOfPosCoords());
+        jointPos(priJoint.getPosCoordsOffset()) = getRandomDouble();
+
+        // Test the joint in both directions
+        validateJointTransformDerivative(priJoint, jointPos,
+                                         priJoint.getFirstAttachedLink(), priJoint.getSecondAttachedLink());
+        validateJointTransformDerivative(priJoint, jointPos,
+                                         priJoint.getSecondAttachedLink(), priJoint.getFirstAttachedLink());
     }
 
     return EXIT_SUCCESS;

@@ -27,7 +27,7 @@
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/Triplets.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FreeFloatingState.h>
@@ -44,6 +44,9 @@ namespace iDynTree
 /**
  * Enumeration of the Berdy variants implemented
  * in this class.
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 enum BerdyVariants
 {
@@ -73,10 +76,16 @@ enum BerdyVariants
 /**
  * Enumeration describing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration)
  * used in Berdy
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 enum BerdyDynamicVariablesTypes
 {
-    /*!< \f$ a_i \f$ */
+    /*!< \f$ a_i  \f$
+     * Note that is is the **spatial** proper acceleration expressed,
+     * i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame.
+     **/
     LINK_BODY_PROPER_ACCELERATION,
     /*!< \f$ f^B_i \f$ */
     NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV,
@@ -87,7 +96,15 @@ enum BerdyDynamicVariablesTypes
     /*!< \f$ f^x_i \f$ */
     NET_EXT_WRENCH,
     /*!< \f$ \ddot{q}_i \f$ */
-    DOF_ACCELERATION
+    DOF_ACCELERATION,
+    /*!<
+     * This is the classical proper acceleration,
+     * i.e. the time derivative of the mixed velocity of the body frame minus the gravity expressed in body frame.
+     * In Traversaro's PhD thesis this is called sensor proper acceleration.
+     * This is the necessary for avoiding dependencies on the linear velocity of the base in the floating variant of
+     * Berdy.
+     */
+    LINK_BODY_PROPER_CLASSICAL_ACCELERATION
 };
 
 /**
@@ -102,12 +119,17 @@ enum BerdyDynamicVariablesTypes
  * of this enum to be compatibile with the iDynTree::SensorTypes enum.
  * Enum values duplicates between BerdySensorTypes and SensorTypes are append a
  * _SENSOR suffix to avoid problems when wrapping such enum wit SWIG.
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 enum BerdySensorTypes
 {
     SIX_AXIS_FORCE_TORQUE_SENSOR = SIX_AXIS_FORCE_TORQUE,
     ACCELEROMETER_SENSOR = ACCELEROMETER,
     GYROSCOPE_SENSOR = GYROSCOPE,
+    THREE_AXIS_ANGULAR_ACCELEROMETER_SENSOR = THREE_AXIS_ANGULAR_ACCELEROMETER,
+    THREE_AXIS_FORCE_TORQUE_CONTACT_SENSOR  = THREE_AXIS_FORCE_TORQUE_CONTACT,
     DOF_ACCELERATION_SENSOR = 1000,
     DOF_TORQUE_SENSOR       = 1001,
     NET_EXT_WRENCH_SENSOR   = 1002,
@@ -126,6 +148,9 @@ bool isDOFBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableT
  *
  * Documentation of each option is provided as usual Doxygen documentation.
  * Default values for each options are specified in the contstructor.
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 struct BerdyOptions
 {
@@ -158,6 +183,8 @@ public:
      * \note the Net effect of setting this to zero is to consider all the external
      *       wrenches to be equal to 0. If berdyVariant is ORIGINAL_BERDY_FIXED_BASE,
      *       the "net" external wrenches does not include the wrench at the base.
+     *
+     * \note if berdyVariant is BERDY_FLOATING_BASE, this option cannot be set to false.
      */
     bool includeAllNetExternalWrenchesAsDynamicVariables;
 
@@ -221,6 +248,9 @@ public:
 /**
  * Structure which describes the essential information about a sensor used in berdy
  * A sensor is identified by the pair (type, id)
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 struct BerdySensor {
     iDynTree::BerdySensorTypes type; /*!< type of the sensor */
@@ -303,8 +333,8 @@ struct BerdyDynamicVariable {
  *       base of the robot, even in the case that BERDY_FLOATING_BASE is used. The assumed traversal (i.e.
  *       which link is the floating base and how the link are visited) is accessible with the dynamicTraversal() method.
  *
- * \note This class is still under heavy development, and its interface can change
- *       without any warning.
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
  */
 class BerdyHelper
 {
@@ -385,40 +415,49 @@ class BerdyHelper
     bool initBerdyFloatingBase();
     bool initSensorsMeasurements();
 
-    /**
-     * Ranges of dynamic variables
-     */
-    IndexRange getRangeOriginalBerdyFixedBase(const BerdyDynamicVariablesTypes dynamicVariableType, const TraversalIndex idx);
-    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx);
-    IndexRange getRangeJointVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const JointIndex idx);
-    IndexRange getRangeDOFVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const DOFIndex idx);
+    IndexRange getRangeOriginalBerdyFixedBase(const BerdyDynamicVariablesTypes dynamicVariableType, const TraversalIndex idx) const;
 
-    /**
-     * Range
-     */
-    IndexRange getRangeSensorVariable(const SensorType type, const unsigned int sensorIdx);
-    IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx);
-    IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx);
-    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx);
 
     /**
      * Ranges for specific dynamics equations
      */
-    IndexRange getRangeLinkProperAccDynEq(const LinkIndex idx);
 
-    /**
-     * This used only by ORIGINAL_BERDY_FIXED_BASE, for BERDY_FLOATING_BASE this is
-     * included in the JointWrench equations.
-     */
-    IndexRange getRangeLinkNetTotalwrenchDynEq(const LinkIndex idx);
-    IndexRange getRangeJointWrench(const JointIndex idx);
-    IndexRange getRangeDOFTorqueDynEq(const DOFIndex idx);
+    // Dynamic equations for ORIGINAL_BERDY_FIXED_BASE
+    IndexRange getRangeLinkProperAccDynEqFixedBase(const LinkIndex idx) const;
+    IndexRange getRangeLinkNetTotalWrenchDynEqFixedBase(const LinkIndex idx) const;
+    IndexRange getRangeJointWrenchDynEqFixedBase(const JointIndex idx) const;
+    IndexRange getRangeDOFTorqueDynEqFixedBase(const DOFIndex idx) const;
 
-    bool computeBerdySensorMatrices(SparseMatrix& Y, VectorDynSize& bY);
-    bool computeBerdyDynamicsMatrices(SparseMatrix& D, VectorDynSize& bD);
+    // Dynamic equations for BERDY_FLOATING_BASE
+    IndexRange getRangeAccelerationPropagationFloatingBase(const LinkIndex idx) const;
+    IndexRange getRangeNewtonEulerEquationsFloatingBase(const LinkIndex idx) const;
 
+    bool computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY);
+    bool computeBerdyDynamicsMatricesFixedBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
+    bool computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
+
+    // Helper method
+    Matrix6x1 getBiasTermJointAccelerationPropagation(IJointConstPtr joint,
+                                                      const LinkIndex parentLinkIdx,
+                                                      const LinkIndex childLinkIdx,
+                                                      const Transform &child_X_parent);
     void cacheSensorsOrdering();
-    void cacheDynamicVariablesOrdering();
+    void cacheDynamicVariablesOrderingFixedBase();
+    void cacheDynamicVariablesOrderingFloatingBase();
+    bool serializeDynamicVariablesFixedBase(LinkProperAccArray & properAccs,
+                                            LinkNetTotalWrenchesWithoutGravity & netTotalWrenchesWithoutGrav,
+                                            LinkNetExternalWrenches & netExtWrenches,
+                                            LinkInternalWrenches    & linkJointWrenches,
+                                            JointDOFsDoubleArray    & jointTorques,
+                                            JointDOFsDoubleArray    & jointAccs,
+                                            VectorDynSize& d);
+    bool serializeDynamicVariablesFloatingBase(LinkProperAccArray & properAccs,
+                                               LinkNetTotalWrenchesWithoutGravity & netTotalWrenchesWithoutGrav,
+                                               LinkNetExternalWrenches & netExtWrenches,
+                                               LinkInternalWrenches    & linkJointWrenches,
+                                               JointDOFsDoubleArray    & jointTorques,
+                                               JointDOFsDoubleArray    & jointAccs,
+                                               VectorDynSize& d);
 
     /**
      * Helper for mapping sensors measurements to the Y vector.
@@ -452,6 +491,12 @@ class BerdyHelper
     Triplets matrixDElements;
     Triplets matrixYElements;
 
+    /**
+     * Transform between the frame in which the external net wrench measurements are expressed
+     * and the link frames.
+     */
+    std::vector<Transform> m_link_H_externalWrenchMeasurementFrame;
+
 
 public:
     /**
@@ -472,7 +517,7 @@ public:
     /**
      * Acces the traveral used for the dynamics computations (const version)
      */
-    const Traversal& dynamicTraversal();
+    const Traversal& dynamicTraversal() const;
 
     /**
      * Access the model (const version).
@@ -483,6 +528,13 @@ public:
      * Access the model (const version).
      */
     const SensorsList& sensors() const;
+
+    /**
+     * Returns if the helper is valid.
+     * The helper is valid if the model and the sensors have been loaded
+     * @return true if the helper is valid. False otherwise
+     */
+    bool isValid() const;
 
     /**
      * Init the class
@@ -521,8 +573,8 @@ public:
     /**
      * Resize and set to zero Berdy matrices.
      */
-    bool resizeAndZeroBerdyMatrices(SparseMatrix &D, VectorDynSize &bD,
-                                    SparseMatrix &Y, VectorDynSize &bY);
+    bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
+                                    SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
 
     /**
      * Resize and set to zero Berdy matrices.
@@ -534,8 +586,8 @@ public:
     /**
      * Get Berdy matrices
      */
-    bool getBerdyMatrices(SparseMatrix &D, VectorDynSize &bD,
-                          SparseMatrix &Y, VectorDynSize &bY);
+    bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
+                          SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
     /**
      * Get Berdy matrices
      *
@@ -555,6 +607,21 @@ public:
      * @return the sensors ordering
      */
     const std::vector<BerdySensor>& getSensorsOrdering() const;
+
+    /**
+     * Get the range of the specified sensor in
+     */
+    IndexRange getRangeSensorVariable(const SensorType type, const unsigned int sensorIdx) const;
+    IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
+    IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
+    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
+
+    /**
+     * Ranges of dynamic variables
+     */
+    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx) const;
+    IndexRange getRangeJointVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const JointIndex idx) const;
+    IndexRange getRangeDOFVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const DOFIndex idx) const;
 
     const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering() const;
 
@@ -578,6 +645,8 @@ public:
                                   LinkInternalWrenches    & linkJointWrenches,
                                   VectorDynSize& y);
 
+
+
     /**
      * Debug function:
      *
@@ -586,6 +655,21 @@ public:
     bool serializeDynamicVariablesComputedFromFixedBaseRNEA(JointDOFsDoubleArray  & jointAccs,
                                                             LinkNetExternalWrenches & netExtWrenches,
                                                             VectorDynSize& d);
+
+
+    /**
+     * Extract the joint torques from the dynamic variables
+     */
+    bool extractJointTorquesFromDynamicVariables(const VectorDynSize& d,
+                                                 const VectorDynSize& jointPos,
+                                                       VectorDynSize& jointTorques) const;
+
+    /**
+     * Extract the net external force-torques from the dynamic variables
+     */
+    bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
+                                                            LinkNetExternalWrenches& netExtWrenches) const;
+
 
     /**
       * @name Methods to submit the input data for dynamics computations.
@@ -653,6 +737,22 @@ public:
                                                 const Vector3 & gravity);
 
     //@}
+
+    /**
+     * Set/get the transformation link_H_contact between the link frame and the frame in which the measured net ext wrench is expressed.
+     *
+     * The default value is the identity. This is extremly useful to correctly tune the variances when only a subset of the external
+     * net wrench is known (for example when it is known that the external net wrench is a pure force on a point different from the
+     * link frame.
+     *
+     * \note This will only change the frame in which the measurent equation of the net external wrench is expressed,
+     *       not how the Newton-Euler equation of the link are expressed or how the net ext wrenches are serialized in
+     *       the LinkNetExternalWrenches class.
+     */
+    ///@{
+    bool setNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, const Transform& link_H_contact);
+    bool getNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, Transform& link_H_contact) const;
+    ///@}
 
 
     /**

@@ -14,6 +14,23 @@
 
 using namespace iDynTree;
 
+// Coeffs is not available in Eigen3.3-beta2
+// See http://eigen.tuxfamily.org/bz/show_bug.cgi?id=1271
+// Remove when we do need to support Eigen 3.3-beta2 (i.e. Ubuntu 16.04)
+// anymore
+template<typename ScalarType, typename SparseMatrixType>
+const Eigen::Map<const Eigen::Array<ScalarType, Eigen::Dynamic, 1> > coeffs(const SparseMatrixType& mat)
+{
+    return Eigen::Array<ScalarType, Eigen::Dynamic, 1>::Map(mat.valuePtr(), mat.nonZeros());
+}
+template<typename ScalarType, typename SparseMatrixType>
+Eigen::Map<Eigen::Array<ScalarType, Eigen::Dynamic, 1> > coeffs(SparseMatrixType& mat)
+{
+    return Eigen::Array<ScalarType, Eigen::Dynamic, 1>::Map(mat.valuePtr(), mat.nonZeros());
+}
+
+
+template <iDynTree::MatrixStorageOrdering iDynTreeOrdering, int storageOptions>
 void sparseMatrixTest()
 {
     Triplets triplets;
@@ -26,8 +43,8 @@ void sparseMatrixTest()
     triplets.pushTriplet(iDynTree::Triplet(4, 2, 14));
     triplets.pushTriplet(iDynTree::Triplet(4, 4, 8));
 
-    SparseMatrix matrix(5,5);
-    Eigen::SparseMatrix<double, Eigen::RowMajor> eig(5, 5);
+    SparseMatrix<iDynTreeOrdering> matrix(5, 5);
+    Eigen::SparseMatrix<double, storageOptions> eig(5, 5);
     for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it) {
         matrix(it->row, it->column) = it->value;
         eig.coeffRef(it->row, it->column) = it->value;
@@ -35,14 +52,14 @@ void sparseMatrixTest()
 
     eig.makeCompressed();
     
-    Eigen::Map<Eigen::SparseMatrix<double, Eigen::RowMajor> > mapped = toEigen(matrix);
+    Eigen::Map<Eigen::SparseMatrix<double, storageOptions> > mapped = toEigen(matrix);
 
     ASSERT_IS_TRUE(mapped.rows() == eig.rows());
     ASSERT_IS_TRUE(mapped.cols() == eig.cols());
     ASSERT_IS_TRUE(mapped.nonZeros() == eig.nonZeros());
 
-    auto mappedCoefficients = mapped.coeffs();
-    auto coefficients = eig.coeffs();
+    auto mappedCoefficients = coeffs<double, Eigen::Map<Eigen::SparseMatrix<double, storageOptions>>>(mapped);
+    auto coefficients = coeffs<double, Eigen::SparseMatrix<double, storageOptions> >(eig);
 
     for (unsigned i = 0; i < mappedCoefficients.size(); ++i) {
         ASSERT_EQUAL_DOUBLE(mappedCoefficients.coeff(i), coefficients.coeff(i));
@@ -52,7 +69,8 @@ void sparseMatrixTest()
 
 int main()
 {
-    sparseMatrixTest();
+    sparseMatrixTest<iDynTree::RowMajor, Eigen::RowMajor>();
+    sparseMatrixTest<iDynTree::ColumnMajor, Eigen::ColMajor>();
 
     return 0;
 }

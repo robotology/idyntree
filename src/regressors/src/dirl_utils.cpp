@@ -433,18 +433,18 @@ int getInertialParameterLocalIndex(const iDynTree::Regressors::DynamicsRegressor
 
 
 iDynTree::Regressors::DynamicsRegressorParametersList
-    getLegacyUsedParameters(const std::vector<int> & linkIndeces2regrCols,
+    getLegacyUsedParameters(const std::vector<int> & linkIndices2regrCols,
                             const int nrOfFTSensors,
                             const bool withFToffset )
 {
     iDynTree::Regressors::DynamicsRegressorParametersList ret_values;
 
     // add considered links
-    for(unsigned int link=0; link < linkIndeces2regrCols.size(); link++ )
+    for(unsigned int link=0; link < linkIndices2regrCols.size(); link++ )
     {
         // if a link is valid and not a fake link, push
         // in the vector of used parameters all the 10 link inertial parameters
-        if( linkIndeces2regrCols[link] != -1 )
+        if( linkIndices2regrCols[link] != -1 )
         {
             for(unsigned int link_param_type = 0 ; link_param_type < 10; link_param_type++ )
             {
@@ -479,14 +479,14 @@ iDynTree::Regressors::DynamicsRegressorParametersList
 
 void convertLocalRegressorToGlobalRegressor(const Eigen::MatrixXd & localRegressor,
                                             Eigen::MatrixXd & globalRegressor,
-                                            std::vector<int> localColIndecesToGlobalColIndeces)
+                                            std::vector<int> localColIndicesToGlobalColIndices)
 {
     assert(localRegressor.rows() == globalRegressor.rows());
-    assert(localRegressor.cols() == localColIndecesToGlobalColIndeces.size());
+    assert(localRegressor.cols() == localColIndicesToGlobalColIndices.size());
 
-    for(int localParam = 0; localParam <  (int)localColIndecesToGlobalColIndeces.size(); localParam++)
+    for(int localParam = 0; localParam <  (int)localColIndicesToGlobalColIndices.size(); localParam++)
     {
-        int globalParam = localColIndecesToGlobalColIndeces[localParam];
+        int globalParam = localColIndicesToGlobalColIndices[localParam];
 
         if( globalParam >= 0 )
         {
@@ -499,14 +499,14 @@ void convertLocalRegressorToGlobalRegressor(const Eigen::MatrixXd & localRegress
 
 void convertLocalParametersToGlobalParameters(const Eigen::VectorXd & localRegressor,
                                               Eigen::VectorXd & globalRegressor,
-                                              std::vector<int> localColIndecesToGlobalColIndeces)
+                                              std::vector<int> localColIndicesToGlobalColIndices)
 {
     assert(localRegressor.rows() == globalRegressor.rows());
-    assert(localRegressor.cols() == localColIndecesToGlobalColIndeces.size());
+    assert(localRegressor.cols() == localColIndicesToGlobalColIndices.size());
 
-    for(int localParam = 0; localParam <  (int)localColIndecesToGlobalColIndeces.size(); localParam++)
+    for(int localParam = 0; localParam <  (int)localColIndicesToGlobalColIndices.size(); localParam++)
     {
-        int globalParam = localColIndecesToGlobalColIndeces[localParam];
+        int globalParam = localColIndicesToGlobalColIndices[localParam];
 
         if( globalParam >= 0 )
         {

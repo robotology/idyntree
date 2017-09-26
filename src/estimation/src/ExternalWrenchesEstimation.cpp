@@ -124,7 +124,6 @@ bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
         return false;
     }
 
-
     UnknownWrenchContact unknownContactInLink;
 
     unknownContactInLink.unknownType = unknownContactInFrame.unknownType;
@@ -133,6 +132,11 @@ bool LinkUnknownWrenchContacts::addNewContactInFrame(const Model & model,
     if( unknownContactInFrame.unknownType == PURE_FORCE_WITH_KNOWN_DIRECTION )
     {
         unknownContactInLink.forceDirection =  link_H_frame*unknownContactInFrame.forceDirection;
+    }
+
+    if (unknownContactInFrame.unknownType == NO_UNKNOWNS)
+    {
+        unknownContactInLink.knownWrench =  link_H_frame*unknownContactInFrame.knownWrench;
     }
 
     addNewContactForLink(linkIndex,unknownContactInLink);
@@ -172,6 +176,9 @@ std::string LinkUnknownWrenchContacts::toString(const Model& model) const
                         break;
                     case PURE_FORCE_WITH_KNOWN_DIRECTION:
                         ss << "One pure force contact with known direction with pos: " << this->contactWrench(l,c).contactPoint.toString() << ":" << std::endl;
+                        break;
+                    case NO_UNKNOWNS:
+                        ss << "One fully known contact wrench with value: " << this->contactWrench(l,c).knownWrench.toString() << ":" << std::endl;
                         break;
                 }
             }
@@ -414,6 +421,9 @@ size_t countUnknowns(const Traversal& traversal, const LinkUnknownWrenchContacts
                 case PURE_FORCE_WITH_KNOWN_DIRECTION:
                     unknowns += 1;
                     break;
+                case NO_UNKNOWNS:
+                    //unknowns += 0;
+                    break;
                 default:
                     assert(false);
                     break;
@@ -424,12 +434,12 @@ size_t countUnknowns(const Traversal& traversal, const LinkUnknownWrenchContacts
     return unknowns;
 }
 
-void computeMatrixOfEstimationEquation(const Model& model,
-                                       const Traversal& traversal,
-                                       const LinkUnknownWrenchContacts& unknownWrenches,
-                                       const JointPosDoubleArray & jointPos,
-                                       const size_t subModelIndex,
-                                             estimateExternalWrenchesBuffers& bufs)
+void computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(const Model& model,
+                                                             const Traversal& traversal,
+                                                             const LinkUnknownWrenchContacts& unknownWrenches,
+                                                             const JointPosDoubleArray & jointPos,
+                                                             const size_t subModelIndex,
+                                                                   estimateExternalWrenchesBuffers& bufs)
 {
     // Count unknowns
      size_t unknowns = countUnknowns(traversal,unknownWrenches);
@@ -486,6 +496,12 @@ void computeMatrixOfEstimationEquation(const Model& model,
                      Aeig.block<6,1>(0,AcolsToWrite) =
                          toEigen(subModelBase_H_contact.asAdjointTransformWrench())*fDir;
                      AcolsToWrite += 1;
+                 }
+                     break;
+                 case NO_UNKNOWNS:
+                 {
+                     // AcolsToWrite += 1;
+                     toEigen(bufs.b[subModelIndex]) += -toEigen(subModelBase_H_link*(unknownWrench.knownWrench));
                  }
                      break;
                  default:
@@ -547,6 +563,9 @@ void storeResultsOfEstimation(const Traversal& traversal,
                     estimatedWrench.getAngularVec3().zero();
                     nextUnknownToRead += 1;
                     break;
+                case NO_UNKNOWNS:
+                    estimatedWrench = unknownWrench.knownWrench;
+                    break;
                 default:
                     assert(false);
                     break;
@@ -589,7 +608,7 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
    bufs.b[subModelIndex] = knownTerms.asVector();
 
    // Now we compute the A matrix
-   computeMatrixOfEstimationEquation(model,traversal,unknownWrenches,jointPos,subModelIndex,bufs);
+   computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(model,traversal,unknownWrenches,jointPos,subModelIndex,bufs);
 
    // Now we compute the pseudo inverse
    pseudoInverse(toEigen(bufs.A[subModelIndex]),
@@ -641,7 +660,7 @@ bool estimateExternalWrenches(const Model& model,
         bufs.b[sm] = knownTerms.asVector();
 
         // Now we compute the A matrix
-        computeMatrixOfEstimationEquation(model,subModelTraversal,unknownWrenches,jointPos,sm,bufs);
+        computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(model,subModelTraversal,unknownWrenches,jointPos,sm,bufs);
 
         // Now we compute the pseudo inverse
         pseudoInverse(toEigen(bufs.A[sm]),
@@ -790,6 +809,49 @@ bool dynamicsEstimationForwardVelKinematics(const Model & /*model*/,
 
     return retValue;
 
+}
+
+bool estimateLinkContactWrenchesFromLinkNetExternalWrenches(const Model& model,
+                                                            const LinkUnknownWrenchContacts& unknownWrenches,
+                                                            const LinkNetExternalWrenches& netExtWrenches,
+                                                                  LinkContactWrenches & outputContactWrenches)
+{
+    for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(model.getNrOfLinks()); lnkIdx++)
+    {
+        if (unknownWrenches.getNrOfContactsForLink(lnkIdx) > 1)
+        {
+            std::stringstream ss;
+            ss << "estimateLinkContactWrenchesFromLinkNetExternalWrenches is currently in testing phase, and does not support "
+               << " handling multiple contacts in one link. Skipping contacts on link " << model.getLinkName(lnkIdx);
+            reportWarning("","estimateLinkContactWrenchesFromLinkNetExternalWrenches", ss.str().c_str());
+            outputContactWrenches.setNrOfContactsForLink(lnkIdx, 0);
+            continue;
+        }
+
+        if (unknownWrenches.getNrOfContactsForLink(lnkIdx) == 1 &&
+            unknownWrenches.contactWrench(lnkIdx, 0).unknownType != FULL_WRENCH)
+        {
+            std::stringstream ss;
+            ss << "estimateLinkContactWrenchesFromLinkNetExternalWrenches is currently in testing phase, and does not support "
+               << " contact of type different from FULL_WRENCH, skipping contacts  " << model.getLinkName(lnkIdx);
+            reportWarning("","estimateLinkContactWrenchesFromLinkNetExternalWrenches", ss.str().c_str());
+            outputContactWrenches.setNrOfContactsForLink(lnkIdx, 0);
+            continue;
+        }
+
+        const UnknownWrenchContact& unknownWrench = unknownWrenches.contactWrench(lnkIdx, 0);
+        outputContactWrenches.setNrOfContactsForLink(lnkIdx, unknownWrenches.getNrOfContactsForLink(lnkIdx));
+        ContactWrench& knownWrench          = outputContactWrenches.contactWrench(lnkIdx, 0);
+
+        Transform link_H_contact = Transform(Rotation::Identity(), unknownWrench.contactPoint);
+
+        // Transform the wrench from the link frame to the contact frame
+        knownWrench.contactPoint() = unknownWrench.contactPoint;
+        knownWrench.contactId()    = unknownWrench.contactId;
+        knownWrench.contactWrench() = link_H_contact.inverse()*netExtWrenches(lnkIdx);
+    }
+
+    return true;
 }
 
 

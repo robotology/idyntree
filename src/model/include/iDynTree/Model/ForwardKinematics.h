@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_FORWARD_KINEMATICS_H
 #define IDYNTREE_FORWARD_KINEMATICS_H
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 namespace iDynTree
 {

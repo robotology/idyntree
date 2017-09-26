@@ -143,10 +143,15 @@ bool Traversal::isParentOf(const LinkIndex parentCandidate,
     }
 }
 
-LinkIndex Traversal::getChildLinkIndexFromJointIndex(const Model& m_model, const JointIndex jntIdx) const
+LinkIndex Traversal::getChildLinkIndexFromJointIndex(const Model& model, const JointIndex jntIdx) const
 {
     // Get the two links connected by this joint
-    IJointConstPtr jnt = m_model.getJoint(jntIdx);
+    IJointConstPtr jnt = model.getJoint(jntIdx);
+    if (!jnt)
+    {
+        return LINK_INVALID_INDEX;
+    }
+
     LinkIndex link1 = jnt->getFirstAttachedLink();
     LinkIndex link2 = jnt->getSecondAttachedLink();
 
@@ -162,6 +167,32 @@ LinkIndex Traversal::getChildLinkIndexFromJointIndex(const Model& m_model, const
     }
 
     return childLink;
+}
+
+LinkIndex Traversal::getParentLinkIndexFromJointIndex(const Model& model, const JointIndex jntIdx) const
+{
+    // Get the two links connected by this joint
+    IJointConstPtr jnt = model.getJoint(jntIdx);
+    if (!jnt)
+    {
+        return LINK_INVALID_INDEX;
+    }
+
+    LinkIndex link1 = jnt->getFirstAttachedLink();
+    LinkIndex link2 = jnt->getSecondAttachedLink();
+
+    // Get the traversal index of the child link (according to the traversal)
+    LinkIndex parentLink;
+    if( this->isParentOf(link1,link2) )
+    {
+        parentLink = link1;
+    }
+    else
+    {
+        parentLink = link2;
+    }
+
+    return parentLink;
 }
 
 

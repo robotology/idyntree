@@ -8,9 +8,11 @@
 #ifndef IDYNTREE_TRIPLETS_H
 #define IDYNTREE_TRIPLETS_H
 
-#include <vector>
-#include <iterator>
 #include <iDynTree/Core/Utils.h>
+
+#include <iterator>
+#include <vector>
+
 
 namespace iDynTree {
     class Triplet;
@@ -19,7 +21,10 @@ namespace iDynTree {
     class MatrixDynSize;
     template <unsigned rows, unsigned cols>
     class MatrixFixSize;
+
+    template <MatrixStorageOrdering ordering>
     class SparseMatrix;
+
     struct IndexRange;
 }
 
@@ -68,9 +73,21 @@ public:
                       unsigned startingColumn,
                       const MatrixDynSize&);
 
+    template <MatrixStorageOrdering ordering>
     void addSubMatrix(unsigned startingRow,
                       unsigned startingColumn,
-                      const SparseMatrix&);
+                      const SparseMatrix<ordering>& matrix)
+    {
+        //if enough memory has been reserved this should be a noop
+        m_triplets.reserve(m_triplets.size() + matrix.numberOfNonZeros());
+
+        for (typename SparseMatrix<ordering>::const_iterator it(matrix.begin());
+             it != matrix.end(); ++it) {
+            m_triplets.push_back(Triplet(startingRow + it->row,
+                                         startingColumn + it->column,
+                                         it->value));
+        }
+    }
 
     inline void addDiagonalMatrix(IndexRange startingRow,
                                   IndexRange startingColumn,
@@ -107,9 +124,21 @@ public:
                       unsigned startingColumn,
                       const MatrixDynSize&);
 
+    template <MatrixStorageOrdering ordering>
     void setSubMatrix(unsigned startingRow,
                       unsigned startingColumn,
-                      const SparseMatrix&);
+                      const SparseMatrix<ordering>& matrix)
+    {
+        //if enough memory has been reserved this should be a noop
+        m_triplets.reserve(m_triplets.size() + matrix.numberOfNonZeros());
+
+        for (typename SparseMatrix<ordering>::const_iterator it(matrix.begin());
+             it != matrix.end(); ++it) {
+            setTriplet(Triplet(startingRow + it->row,
+                               startingColumn + it->column,
+                               it->value));
+        }
+    }
 
     inline void setDiagonalMatrix(IndexRange startingRow,
                                   IndexRange startingColumn,

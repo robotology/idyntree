@@ -67,6 +67,28 @@ namespace iDynTree
         void Normalize(double tol=DEFAULT_TOL);
 
         /**
+         * Check if two directions are parallel.
+         *
+         * @param otherDirection the direction to check for parallelism.
+         * @param tolerance tolerance to use in the parallelism check.
+         */
+        bool isParallel(const Direction & otherDirection, double tolerance) const;
+
+        /**
+         * Check if two directions are perpendicular.
+         *
+         * @param otherDirection the direction to check for the perpendicular check.
+         * @param tolerance tolerance to use in the perpendicular check.
+         */
+        bool isPerpendicular(const Direction & otherDirection, double tolerance) const;
+
+        /**
+         * Return the direction, i.e. return its opposite.
+         *
+         */
+        Direction reverse() const;
+
+        /**
          * @name Output helpers.
          *  Output helpers.
          */

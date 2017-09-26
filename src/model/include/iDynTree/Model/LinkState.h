@@ -14,7 +14,7 @@
 #include <iDynTree/Core/Wrench.h>
 #include <iDynTree/Core/ArticulatedBodyInertia.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 #include <vector>
 

@@ -3,7 +3,6 @@ function test_suite=PositionUnitTest
     test_sum_of_positions
 
 function test_sum_of_positions
-    iDynTreeLoad;
     pos1_m = [10;20;30];
     pos2_m = [1;2;3];
 

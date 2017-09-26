@@ -12,7 +12,7 @@
 #include <iDynTree/Model/Link.h>
 #include <iDynTree/Core/Transform.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/SolidShapes.h>
 
 #include <cstdlib>
@@ -50,7 +50,7 @@ namespace iDynTree
      * and joint are added to the model using the `addLink` and `addJoint`
      * methods.
      *
-     * The DOF indeces are also assigned when the joint is added to the model
+     * The DOF indices are also assigned when the joint is added to the model
      * with the addJoint method. For example if a model is composed only of
      * 0 or 1 DOF joints and the 1 DOFs joints are added before the 0 DOFs then
      * the joint index and dof index for 1 DOF joints will be coincident (this is
@@ -62,7 +62,7 @@ namespace iDynTree
      * "main" link frame of the link with the same index. The frame indices
      * between getNrOfLinks() and getNrOfFrames()-1 are assigned when the additional
      * frame is added to the model with the addAdditionalFrameToLink call. All the additional
-     * frame indeces are increased of 1 whenever a new link is added, to ensure that
+     * frame indices are increased of 1 whenever a new link is added, to ensure that
      * its "link frame" has a frame index in the 0...getNrOfLinks()-1 range.
      *
      *
@@ -85,7 +85,7 @@ namespace iDynTree
         std::vector<Transform> additionalFrames;
 
         /**
-         *  Vector of link indeces corresponding to an additional frame.
+         *  Vector of link indices corresponding to an additional frame.
          *  The element additionalFrameNames[frameOffset] will be the link_H_frame transform  of the frame with
          *  FrameIndex getNrOfLinks() + frameOffset .
          */
@@ -261,10 +261,35 @@ namespace iDynTree
 
         /**
          *
+         * Add a joint to the model. The two links to which the joint is connected
+         * are specified in the joint itself, throught the appropriate methods.
          * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
          *         there was an error in adding the joint.
          */
         JointIndex addJoint(const std::string & jointName, IJointConstPtr joint);
+
+        /**
+         * Add a joint to the model, and specify the two links that are connected
+         * by the specified joints. The setAttachedLinks of the passed joint
+         * is called appropriatly, to ensure consistency in the model.
+         * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
+         *         there was an error in adding the joint.
+         */
+        JointIndex addJoint(const std::string & link1, const std::string & link2,
+                            const std::string & jointName, IJointConstPtr joint);
+
+        /**
+         * Add a joint to the model, and add also a link.
+         * The added joints connects an existing link of the model to the newly
+         * added link.
+         * The setAttachedLinks of the passed joint
+         * is called appropriatly, to ensure consistency in the model.
+         * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
+         *         there was an error in adding the joint.
+         */
+        JointIndex addJointAndLink(const std::string & existingLink,
+                                   const std::string & jointName, IJointConstPtr joint,
+                                   const std::string & newLinkName, Link & newLink);
 
         /**
          * Get the dimension of the vector used to parametrize the positions of the joints of the robot.
@@ -422,7 +447,7 @@ namespace iDynTree
          *
          * The output vector of inertial parameters must have 10*getNrOfLinks() elements,
          * each 10 elements subvector corresponds to the inertial parameters of one link,
-         * following the serialization induced by the link indeces
+         * following the serialization induced by the link indices
          * (link 0 corresponds to elements 0-9, link 1 to 10-19, etc).
          *
          * The mapping between the SpatialInertia class and the Vector10 elements is the one
@@ -441,7 +466,7 @@ namespace iDynTree
          *
          * The input vector of inertial parameters must have 10*getNrOfLinks() elements,
          * each 10 elements subvector corresponds to the inertial parameters of one link,
-         * following the serialization induced by the link indeces
+         * following the serialization induced by the link indices
          * (link 0 corresponds to elements 0-9, link 1 to 10-19, etc).
          *
          * The mapping between the SpatialInertia class and the Vector10 elements is the one

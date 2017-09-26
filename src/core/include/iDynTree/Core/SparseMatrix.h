@@ -10,52 +10,51 @@
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/Triplets.h>
+#include <iDynTree/Core/Utils.h>
+
 #include <vector>
 
 namespace iDynTree {
+
+    template <MatrixStorageOrdering ordering>
     class SparseMatrix;
+    
     class Triplet;
     class Triplets;
 }
 
+// MARK: - SparseMatrix class
+
 /**
  * \brief Sparse Matrix class
  *
- * This class uses the Compressed Row Storage scheme
+ * This class uses the Compressed Column (Row) Storage scheme
  * (see https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29)
  * which is compatible with the format used in the Eigen library (by using Map).
  */
+template <iDynTree::MatrixStorageOrdering ordering>
 class iDynTree::SparseMatrix
 {
-
-public:
-    enum StorageOrdering {
-        RowMajor,
-        ColumnMajor
-    };
-
 private:
 
     iDynTree::VectorDynSize m_values; /**< Contains all the non zero (NZ) elements */
 
-    std::vector<int> m_innerIndeces; /**< column index of the NZ elements  */
+    std::vector<int> m_innerIndices; /**< column index of the NZ elements  */
     std::vector<int> m_outerStarts; /**< for each row contains the index of the first NZ in the
                                      *   previous two arrays
                                      */
 
 
-    unsigned m_allocatedSize; /**< size of the memory allocated for m_values and m_innerIndeces */
+    unsigned m_allocatedSize; /**< size of the memory allocated for m_values and m_innerIndices */
 
     unsigned m_rows;
     unsigned m_columns;
 
-    StorageOrdering m_ordering;
-
-    void initializeMatrix(unsigned rows, unsigned cols, const double*, unsigned vectorSize);
+    void initializeMatrix(unsigned outerSize, const double* vector, unsigned vectorSize);
 
     /**
      * Insert a new element at the specified position
-     * 
+     *
      * It returns the index in m_values of the inserted element
      * @param row row of the new element
      * @param col column of the new element
@@ -66,9 +65,9 @@ private:
 
     /**
      * Check if the element at row-col is present in the matrix.
-     * 
+     *
      * If it is present the function returns true and the index in the
-     * out parameter index, otherwise it returns false and index will 
+     * out parameter index, otherwise it returns false and index will
      * contain the index of the next element in the value array
      *
      * @param[in] row row index
@@ -76,7 +75,7 @@ private:
      * @param[out] index if found contains the index, if not the index of the next element
      * @return true if the value has been found
      */
-    bool valueIndex(unsigned row, unsigned col, unsigned &index) const;
+    bool valueIndexForOuterAndInnerIndices(unsigned outerIndex, unsigned innerIndex, unsigned& valueIndex) const;
 
 public:
 
@@ -92,7 +91,15 @@ public:
     SparseMatrix(unsigned rows, unsigned cols);
 
 
-    SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription);
+    SparseMatrix(unsigned rows, unsigned cols,
+                 const iDynTree::VectorDynSize& memoryReserveDescription);
+
+    template <iDynTree::MatrixStorageOrdering otherOrdering>
+    SparseMatrix(const SparseMatrix<otherOrdering>&);
+
+    template <iDynTree::MatrixStorageOrdering otherOrdering>
+    SparseMatrix& operator=(const SparseMatrix<otherOrdering>&);
+
 
     /**
      * Default destructor
@@ -105,10 +112,6 @@ public:
      * @return the number of non zero elements
      */
     unsigned numberOfNonZeros() const;
-
-
-    unsigned nonZeroElementsForRowAtIndex(unsigned rowIndex) const;
-
 
     /**
      * Resize the matrix to the specified new dimensions
@@ -127,9 +130,9 @@ public:
      * \warning this function may perform memory allocation
      * @param rows the new number of rows of this matrix
      * @param columns the new number of columns of this matrix
-     * @param columnNNZInformation information on the NNZ for each column, used to reserve memory in advance
+     * @param innerIndicesInformation information on the NNZ for each column (row), used to reserve memory in advance. It depends on the storage ordering
      */
-    void resize(unsigned rows, unsigned columns, const iDynTree::VectorDynSize &columnNNZInformation);
+    void resize(unsigned rows, unsigned columns, const iDynTree::VectorDynSize &innerIndicesInformation);
 
     void reserve(unsigned nonZeroElements);
 
@@ -235,19 +238,18 @@ public:
 
     double const * valuesBuffer() const;
 
-    int * innerIndecesBuffer();
+    int * innerIndicesBuffer();
 
-    int const * innerIndecesBuffer() const;
+    int const * innerIndicesBuffer() const;
 
-    int * outerIndecesBuffer();
+    int * outerIndicesBuffer();
 
-    int const * outerIndecesBuffer() const;
-
+    int const * outerIndicesBuffer() const;
 
 
     /**
      * Returns a textual description of the matrix.
-     * 
+     *
      * If true is passed, the whole matrix (with also zero elements) is printed
      * Default to false
      * @param fullMatrix true to return the full matrix, false for only the non zero elements. Default to false
@@ -273,16 +275,14 @@ public:
     iterator end();
     const_iterator end() const;
 
-    void convertToColumnMajor(double *values, int *innerBuffer, int *outerBuffer) const;
-    void convertFromColumnMajor(unsigned rows,
-                                unsigned columns,
-                                unsigned numberOfNonZeros,
-                                double * const values,
-                                int * const innerBuffer,
-                                int * const outerBuffer);
 };
 
-class iDynTree::SparseMatrix::Iterator
+// MARK: - Iterator classes
+
+#ifndef SWIG
+
+template <iDynTree::MatrixStorageOrdering ordering>
+class iDynTree::SparseMatrix<ordering>::Iterator
 {
 public:
     class TripletRef {
@@ -292,7 +292,7 @@ public:
         double *m_value;
 
         TripletRef(unsigned row, unsigned column, double *value);
-        friend class iDynTree::SparseMatrix::Iterator;
+        friend class iDynTree::SparseMatrix<ordering>::Iterator;
 
     public:
 
@@ -310,21 +310,21 @@ private:
      * @param matrix the sparse matrix to iterate
      * @param valid false if the created iterator is invalid. True by default
      */
-    Iterator(iDynTree::SparseMatrix &matrix, bool valid = true);
-    friend class iDynTree::SparseMatrix;
+    Iterator(iDynTree::SparseMatrix<ordering> &matrix, bool valid = true);
+    friend class iDynTree::SparseMatrix<ordering>;
 
-    iDynTree::SparseMatrix &m_matrix;
+    iDynTree::SparseMatrix<ordering> &m_matrix;
 
     int m_index;
     TripletRef m_currentTriplet;
-    int m_nonZerosInRow;
+    int m_nonZerosInOuterDirection;
 
     void updateTriplet();
 
 public:
 
     typedef std::ptrdiff_t difference_type;
-    typedef iDynTree::SparseMatrix::Iterator::TripletRef value_type;
+    typedef typename iDynTree::SparseMatrix<ordering>::Iterator::TripletRef value_type;
     typedef value_type& reference;
     typedef value_type* pointer;
     typedef std::output_iterator_tag iterator_category;
@@ -347,7 +347,8 @@ public:
     bool isValid() const;
 };
 
-class iDynTree::SparseMatrix::ConstIterator
+template <iDynTree::MatrixStorageOrdering ordering>
+class iDynTree::SparseMatrix<ordering>::ConstIterator
 {
 
 private:
@@ -357,14 +358,14 @@ private:
      * @param matrix the sparse matrix to iterate
      * @param valid false if the created iterator is invalid. True by default
      */
-    ConstIterator(const iDynTree::SparseMatrix &matrix, bool valid = true);
-    friend class iDynTree::SparseMatrix;
+    ConstIterator(const iDynTree::SparseMatrix<ordering> &matrix, bool valid = true);
+    friend class iDynTree::SparseMatrix<ordering>;
 
-    const iDynTree::SparseMatrix &m_matrix;
+    const iDynTree::SparseMatrix<ordering> &m_matrix;
 
     int m_index;
     iDynTree::Triplet m_currentTriplet;
-    int m_nonZerosInRow;
+    int m_nonZerosInOuterDirection;
 
     void updateTriplet();
 
@@ -393,10 +394,10 @@ public:
     // Also Output iterator if the reference modifies the container
     reference operator*();
     pointer operator->();
-    
+
     bool isValid() const;
 };
 
-
+#endif
 
 #endif /* end of include guard: IDYNTREE_SPARSE_MATRIX_H */

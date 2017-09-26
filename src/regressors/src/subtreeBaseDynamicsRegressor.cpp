@@ -27,8 +27,8 @@ namespace Regressors {
 
 int subtreeBaseDynamicsRegressor::isSubtreeLeaf(const int link_id) const
 {
-    for( int i=0; i < (int)subtree_leaf_links_indeces.size(); i++ ) {
-        if( link_id == subtree_leaf_links_indeces[i] ) return true;
+    for( int i=0; i < (int)subtree_leaf_links_indices.size(); i++ ) {
+        if( link_id == subtree_leaf_links_indices[i] ) return true;
     }
     return false;
 }
@@ -39,7 +39,7 @@ int subtreeBaseDynamicsRegressor::configure()
     const iDynTree::SensorsList & sensors_tree = *p_sensors_tree;
 
     //Checking if the provided subtree leafs define a proper subtree
-    subtree_leaf_links_indeces.resize(subtree_leaf_links.size());
+    subtree_leaf_links_indices.resize(subtree_leaf_links.size());
 
     if( subtree_leaf_links.size() == 0 )
     {
@@ -86,21 +86,21 @@ int subtreeBaseDynamicsRegressor::configure()
         }
 
         /** \todo add further check that the indicated subtree is a proper one */
-        subtree_leaf_links_indeces[i] = link_it->getLinkIndex();
+        subtree_leaf_links_indices[i] = link_it->getLinkIndex();
     }
 
     //Now store all the links that belong to the subtree
     //We first compute the spanning starting at one (the first) of the leafs
     KDL::CoDyCo::Traversal subtree_traversal;
 
-    undirected_tree.compute_traversal(subtree_traversal,subtree_leaf_links_indeces[0]);
+    undirected_tree.compute_traversal(subtree_traversal,subtree_leaf_links_indices[0]);
 
     //Then we color the nodes: if white (true) the links belongs to the subtree
     //if black (false) it does not belongs to the node
     std::vector<bool> is_link_in_subtree(undirected_tree.getNrOfLinks(),false);
 
     //the leaf that we chose as starting link clearly belongs to the subtree
-    is_link_in_subtree[subtree_leaf_links_indeces[0]] = true;
+    is_link_in_subtree[subtree_leaf_links_indices[0]] = true;
 
     //then, all the other links can be classified using the following rules:
     for(int i=1; i < (int)subtree_traversal.getNrOfVisitedLinks(); i++ ) {
@@ -135,9 +135,9 @@ int subtreeBaseDynamicsRegressor::configure()
     //Configuring the relative_junctions vector
     relative_junctions.resize(0);
 
-    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indeces.size(); leaf_id++ ) {
+    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indices.size(); leaf_id++ ) {
         if( consider_ft_offset ) {
-            int leaf_link_id = subtree_leaf_links_indeces[leaf_id];
+            int leaf_link_id = subtree_leaf_links_indices[leaf_id];
 
            int ft_sensor_index = getFirstFTSensorOnLink(sensors_tree,leaf_link_id);
 
@@ -168,7 +168,7 @@ int subtreeBaseDynamicsRegressor::configure()
     {
         regressor_plucker_frame = USE_FIRST_FT_SENSOR_PLUCKER_FRAME;
 
-        int first_leaf_link_id = subtree_leaf_links_indeces[0];
+        int first_leaf_link_id = subtree_leaf_links_indices[0];
         int ft_id = getFirstFTSensorOnLink(*p_sensors_tree,first_leaf_link_id);
 
         iDynTree::SixAxisForceTorqueSensor * sens
@@ -186,7 +186,7 @@ int subtreeBaseDynamicsRegressor::configure()
         sensor_H_parent_link = parent_link_H_sensor.inverse();
     }
 
-    iDynTree::Regressors::DynamicsRegressorParametersList localSerialization = getLegacyUsedParameters(linkIndeces2regrCols,
+    iDynTree::Regressors::DynamicsRegressorParametersList localSerialization = getLegacyUsedParameters(linkIndices2regrCols,
                                 p_sensors_tree->getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),
                                 this->consider_ft_offset);
 
@@ -209,7 +209,7 @@ iDynTree::Regressors::DynamicsRegressorParametersList subtreeBaseDynamicsRegress
 {
     iDynTree::Regressors::DynamicsRegressorParametersList ret_values;
 
-    assert(p_undirected_tree->getNrOfLinks() == linkIndeces2regrCols.size());
+    assert(p_undirected_tree->getNrOfLinks() == linkIndices2regrCols.size());
 
     // add considered links
     for(int i =0; i < (int)subtree_links_indices.size(); i++ )
@@ -217,7 +217,7 @@ iDynTree::Regressors::DynamicsRegressorParametersList subtreeBaseDynamicsRegress
         int link_id = subtree_links_indices[i];
         // if a link is valid and not a fake link, push
         // in the vector of used parameters all the 10 link inertial parameters
-        if( linkIndeces2regrCols[link_id] != -1 )
+        if( linkIndices2regrCols[link_id] != -1 )
         {
             for(unsigned int link_param_type = 0 ; link_param_type < 10; link_param_type++ )
             {
@@ -231,11 +231,11 @@ iDynTree::Regressors::DynamicsRegressorParametersList subtreeBaseDynamicsRegress
     }
 
 
-    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indeces.size(); leaf_id++ )
+    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indices.size(); leaf_id++ )
     {
         if( consider_ft_offset )
         {
-            int leaf_link_id = subtree_leaf_links_indeces[leaf_id];
+            int leaf_link_id = subtree_leaf_links_indices[leaf_id];
 
             int ft_id = getFirstFTSensorOnLink(*p_sensors_tree,leaf_link_id);
             for(unsigned int ft_param_type = 0 ; ft_param_type < 6; ft_param_type++ )
@@ -290,12 +290,12 @@ int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &/*q*/,
     for(int i =0; i < (int)subtree_links_indices.size(); i++ ) {
         int link_id = subtree_links_indices[i];
 
-        if( linkIndeces2regrCols[link_id] != -1 ) {
+        if( linkIndices2regrCols[link_id] != -1 ) {
 
             Eigen::Matrix<double,6,10> netWrenchRegressor_i = netWrenchRegressor(v[link_id],a[link_id]);
 
 
-            regressor_local_parametrization.block(0,(int)(10*linkIndeces2regrCols[link_id]),6,10) = WrenchTransformationMatrix(X_measure_dynamic_base*X_dynamic_base[link_id])*netWrenchRegressor_i;
+            regressor_local_parametrization.block(0,(int)(10*linkIndices2regrCols[link_id]),6,10) = WrenchTransformationMatrix(X_measure_dynamic_base*X_dynamic_base[link_id])*netWrenchRegressor_i;
         }
     }
 
@@ -304,9 +304,9 @@ int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &/*q*/,
     //So the sign of the offset should be consistent with the other place where it is defined. In particular, the offset of a sensor is considered
     //as an addictive on the measured wrench, so f_s = f_sr + f_o, where the frame of expression and the sign of f_s is defined in
     //KDL::CoDyCo::FTSensor
-    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indeces.size(); leaf_id++ ) {
+    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indices.size(); leaf_id++ ) {
         if( consider_ft_offset ) {
-            int leaf_link_id = subtree_leaf_links_indeces[leaf_id];
+            int leaf_link_id = subtree_leaf_links_indices[leaf_id];
 
             int ft_id = getFirstFTSensorOnLink(*p_sensors_tree,leaf_link_id);
 
@@ -317,7 +317,7 @@ int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &/*q*/,
 
             assert( sens->isLinkAttachedToSensor(leaf_link_id) );
 
-            /** \todo find a more robust way to get columns indeces relative to a given parameters */
+            /** \todo find a more robust way to get columns indices relative to a given parameters */
             assert(ft_id >= 0 && ft_id < 100);
             if( !(10*NrOfRealLinks_subtree+6*ft_id+5 < regressor_local_parametrization.cols()) ) {
                 std::cout << "NrOfRealLinks " << NrOfRealLinks_subtree << std::endl;
@@ -351,8 +351,8 @@ int  subtreeBaseDynamicsRegressor::computeRegressor(const KDL::JntArray &/*q*/,
     //std::cerr << "computing kt " << std::endl;
     //std::cerr << (ft_list).toString();
 #endif
-    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indeces.size(); leaf_id++ ) {
-        int leaf_link_id = subtree_leaf_links_indeces[leaf_id];
+    for(int leaf_id = 0; leaf_id < (int) subtree_leaf_links_indices.size(); leaf_id++ ) {
+        int leaf_link_id = subtree_leaf_links_indices[leaf_id];
 
         int ft_id = getFirstFTSensorOnLink(*p_sensors_tree,leaf_link_id);
 
@@ -393,7 +393,7 @@ std::cout << known_terms << std::endl;
 bool subtreeBaseDynamicsRegressor::setGlobalParameters(const iDynTree::Regressors::DynamicsRegressorParametersList& globalParameters)
 {
     iDynTree::Regressors::DynamicsRegressorParametersList localSerialiaziation =
-        getLegacyUsedParameters(linkIndeces2regrCols,
+        getLegacyUsedParameters(linkIndices2regrCols,
                                 p_sensors_tree->getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),
                                 this->consider_ft_offset);
 

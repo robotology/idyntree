@@ -137,7 +137,7 @@ int SensorsList::addSensor(const Sensor& sensor)
          return -1;
     }
 
-    if( !(newSensor->getSensorType() >= 0 && newSensor->getSensorType() < NR_OF_SENSOR_TYPES) )
+    if( !(newSensor->getSensorType() >= 0) )
     {
          std::cerr << "[ERR] SensorsTree::addSensor error : sensor  " << sensor.getName()
                        << " has an unknown sensor type " << newSensor->getSensorType() << std::endl;
@@ -188,7 +188,7 @@ bool SensorsList::setSerialization(const SensorType& sensor_type,
     }
 
     this->pimpl->allSensors[sensor_type] = newVecSensors;
-    
+
     return true;
 }
 
@@ -259,6 +259,18 @@ size_t SensorsList::getSizeOfAllSensorsMeasurements() const
     return res;
 }
 
+bool SensorsList::isConsistent(const Model& model) const
+{
+    bool isConsistent = true;
+    for (SensorsList::ConstIterator it = this->allSensorsIterator();
+         it.isValid(); ++it)
+    {
+        bool isCurrentSensorConsistent = (*it)->isConsistent(model);
+        isConsistent = isConsistent && isCurrentSensorConsistent;
+    }
+    return isConsistent;
+}
+
 bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type)
 {
     //data is cloned when sensors are added. We have to release the associated memory
@@ -279,7 +291,7 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
         Sensor *s = typeVector[sensor_index];
         typeVector.erase(typeVector.begin() + sensor_index);
         SensorsListPimpl::SensorNameToIndexMap& nameToIndex = this->pimpl->sensorsNameToIndex[sensor_type];
-        // We have to rebuild the name->index map as indeces have changed
+        // We have to rebuild the name->index map as indices have changed
         nameToIndex.clear();
         for (size_t index = 0; index < typeVector.size(); ++index) {
             nameToIndex.insert(SensorsListPimpl::SensorNameToIndexMap::value_type(typeVector[index]->getName(), index));
@@ -573,6 +585,58 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
     }
 
 ///////////////////////////////////////////////////////////////////////////////
+///// LinkSensor
+///////////////////////////////////////////////////////////////////////////////
+
+bool LinkSensor::isConsistent(const Model& model) const
+{
+    LinkIndex lnkIdxInModel = model.getLinkIndex(this->getParentLink());
+
+    if (lnkIdxInModel == LINK_INVALID_INDEX)
+    {
+        std::cerr << "[ERROR] Sensor " << this->getName() << " is not consistent because the link "
+                  << this->getParentLink() << " does not exist in the specified model" << std::endl;
+        return false;
+    }
+
+    if (lnkIdxInModel != this->getParentLinkIndex())
+    {
+        std::cerr << "[ERROR] Sensor " << this->getName() << " is not consistent because it is attached to link "
+                  << this->getParentLink() << " that has index " << lnkIdxInModel << " in the model, while the sensor "
+                  << " has it saved with link index " << this->getParentLinkIndex() << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///// JointSensor
+///////////////////////////////////////////////////////////////////////////////
+
+bool JointSensor::isConsistent(const Model& model) const
+{
+    LinkIndex jntIdxInModel = model.getJointIndex(this->getParentJoint());
+
+    if (jntIdxInModel == JOINT_INVALID_INDEX)
+    {
+        std::cerr << "[ERROR] Sensor " << this->getName() << " is not consistent because the joint "
+                  << this->getParentJoint() << " does not exist in the specified model" << std::endl;
+        return false;
+    }
+
+    if (jntIdxInModel != this->getParentJointIndex())
+    {
+        std::cerr << "[ERROR] Sensor " << this->getName() << " is not consistent because it is attached to joint "
+                  << this->getParentJoint() << " that has index " << jntIdxInModel << " in the model, while the sensor "
+                  << " has it saved with link index " << this->getParentJointIndex() << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 ///// SensorMeasurements
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -581,6 +645,9 @@ struct SensorsMeasurements::SensorsMeasurementsPrivateAttributes
     std::vector< iDynTree::Wrench > SixAxisFTSensorsMeasurements;
     std::vector< iDynTree::AngVelocity > GyroscopeMeasurements;
     std::vector< iDynTree::LinAcceleration> AccelerometerMeasurements;
+    std::vector< Vector3 > ThreeAxisAngularAccelerometerMeasurements;
+    std::vector< Vector3 > ThreeAxisForceTorqueContactMeasurements;
+
 };
 
 
@@ -592,9 +659,10 @@ struct SensorsMeasurements::SensorsMeasurementsPrivateAttributes
 SensorsMeasurements::SensorsMeasurements(const SensorsList &sensorsList)
 {
     this->pimpl = new SensorsMeasurementsPrivateAttributes;
-    this->pimpl->SixAxisFTSensorsMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE));
-    this->pimpl->AccelerometerMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER));
-    this->pimpl->GyroscopeMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::GYROSCOPE));
+    this->pimpl->SixAxisFTSensorsMeasurements.resize(sensorsList.getNrOfSensors(SIX_AXIS_FORCE_TORQUE));
+    this->pimpl->AccelerometerMeasurements.resize(sensorsList.getNrOfSensors(ACCELEROMETER));
+    this->pimpl->GyroscopeMeasurements.resize(sensorsList.getNrOfSensors(GYROSCOPE));
+    this->pimpl->ThreeAxisAngularAccelerometerMeasurements.resize(sensorsList.getNrOfSensors(THREE_AXIS_ANGULAR_ACCELEROMETER));
 }
 SensorsMeasurements::SensorsMeasurements(const SensorsMeasurements & other):
 pimpl(new SensorsMeasurementsPrivateAttributes(*(other.pimpl)))
@@ -621,7 +689,7 @@ bool SensorsMeasurements::setNrOfSensors(const SensorType& sensor_type, unsigned
     Wrench zeroWrench;
     LinAcceleration zeroLinAcc;
     AngVelocity zeroAngVel;
-    unsigned int returnVal = 0;
+    bool ret = true;
     switch (sensor_type)
     {
         case SIX_AXIS_FORCE_TORQUE :
@@ -635,13 +703,27 @@ bool SensorsMeasurements::setNrOfSensors(const SensorType& sensor_type, unsigned
         case GYROSCOPE :
             zeroAngVel.zero();
             this->pimpl->GyroscopeMeasurements.resize(nrOfSensors,zeroAngVel);
+            break;
+        case THREE_AXIS_ANGULAR_ACCELEROMETER:
+        {
+            Vector3 zeroAngAcc;
+            zeroAngAcc.zero();
+            this->pimpl->ThreeAxisAngularAccelerometerMeasurements.resize(nrOfSensors, zeroAngAcc);
+        }
+            break;
+        case THREE_AXIS_FORCE_TORQUE_CONTACT:
+        {
+            Vector3 zeroFT;
+            zeroFT.zero();
+            this->pimpl->ThreeAxisForceTorqueContactMeasurements.resize(nrOfSensors, zeroFT);
+        }
+            break;
         default :
-            returnVal = 0;
+            ret = false;
+            break;
     }
-   return(returnVal);
 
-
-    return true;
+    return ret;
 }
 
 bool SensorsMeasurements::resize(const SensorsList &sensorsList)
@@ -649,10 +731,13 @@ bool SensorsMeasurements::resize(const SensorsList &sensorsList)
     Wrench zeroWrench;zeroWrench.zero();
     LinAcceleration zeroLinAcc;zeroLinAcc.zero();
     AngVelocity zeroAngVel;zeroAngVel.zero();
+    Vector3  zeroVec3; zeroVec3.zero();
 
     this->pimpl->SixAxisFTSensorsMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),zeroWrench);
     this->pimpl->AccelerometerMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER),zeroLinAcc);
     this->pimpl->GyroscopeMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::GYROSCOPE),zeroAngVel);
+    this->pimpl->ThreeAxisAngularAccelerometerMeasurements.resize(sensorsList.getNrOfSensors(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER),zeroAngVel);
+    this->pimpl->ThreeAxisForceTorqueContactMeasurements.resize(sensorsList.getNrOfSensors(THREE_AXIS_FORCE_TORQUE_CONTACT), zeroVec3);
 
     return true;
 }
@@ -666,9 +751,12 @@ bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
     unsigned int numFT = this->pimpl->SixAxisFTSensorsMeasurements.size();
     unsigned int numAcc = this->pimpl->AccelerometerMeasurements.size();
     unsigned int numGyro = this->pimpl->GyroscopeMeasurements.size();
+    unsigned int numThreeAxisAngularAcc = this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size();
+    unsigned int numThreeAxisFT = this->pimpl->ThreeAxisForceTorqueContactMeasurements.size();
+
     bool ok = true;
 
-    measurementVector.resize(6*numFT + 3*numAcc + 3*numGyro);
+    measurementVector.resize(6*numFT + 3*numAcc + 3*numGyro + 3*numThreeAxisAngularAcc + 3*numThreeAxisFT);
 
     for(itr = 0; itr<numFT; itr++)
     {
@@ -695,7 +783,22 @@ bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
         ok && measurementVector.setVal(6*numFT + 3*numAcc + 3*itr+1,thisAngVel.getVal(1));
         ok && measurementVector.setVal(6*numFT + 3*numAcc + 3*itr+2,thisAngVel.getVal(2));
     }
-
+    for(itr = 0; itr<numThreeAxisAngularAcc; itr++)
+    {
+        int offset = 6*numFT + 3*numAcc + 3*numGyro + 3*itr;
+        Vector3 thisAngAcc = this->pimpl->ThreeAxisAngularAccelerometerMeasurements.at(itr);
+        ok && measurementVector.setVal(offset,   thisAngAcc.getVal(0));
+        ok && measurementVector.setVal(offset+1, thisAngAcc.getVal(1));
+        ok && measurementVector.setVal(offset+2, thisAngAcc.getVal(2));
+    }
+    for(itr = 0; itr<numThreeAxisFT; itr++)
+    {
+        int offset = 6*numFT + 3*numAcc + 3*numGyro + 3*numThreeAxisAngularAcc + 3*itr;
+        Vector3 thisThreeAxisFT = this->pimpl->ThreeAxisForceTorqueContactMeasurements.at(itr);
+        ok && measurementVector.setVal(offset,   thisThreeAxisFT.getVal(0));
+        ok && measurementVector.setVal(offset+1, thisThreeAxisFT.getVal(1));
+        ok && measurementVector.setVal(offset+2, thisThreeAxisFT.getVal(2));
+    }
 
     return ok;
 }
@@ -748,8 +851,8 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
 }
 
 bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
-                                         const iDynTree::AngVelocity & measurement)
+                                          const unsigned int& sensor_index,
+                                          const iDynTree::AngVelocity & measurement)
 {
     if( sensor_type == GYROSCOPE )
     {
@@ -769,6 +872,78 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
 
     return false;
 }
+
+bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
+                                         const unsigned int& sensor_index,
+                                         const Vector3& measurement)
+{
+    if( sensor_type == ACCELEROMETER )
+    {
+        if( sensor_index < this->pimpl->AccelerometerMeasurements.size() )
+        {
+            this->pimpl->AccelerometerMeasurements[sensor_index] = measurement;
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] setMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->AccelerometerMeasurements.size() << std::endl;
+            return false;
+        }
+    }
+
+    if( sensor_type == GYROSCOPE )
+    {
+        if( sensor_index < this->pimpl->GyroscopeMeasurements.size() )
+        {
+            this->pimpl->GyroscopeMeasurements[sensor_index] = measurement;
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] setMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->GyroscopeMeasurements.size() << std::endl;
+            return false;
+        }
+    }
+
+    if (sensor_type == THREE_AXIS_ANGULAR_ACCELEROMETER)
+    {
+        if( sensor_index < this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size() )
+        {
+            this->pimpl->ThreeAxisAngularAccelerometerMeasurements[sensor_index] = measurement;
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] setMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size() << std::endl;
+            return false;
+        }
+    }
+
+    if (sensor_type == THREE_AXIS_FORCE_TORQUE_CONTACT)
+    {
+        if( sensor_index < this->pimpl->ThreeAxisForceTorqueContactMeasurements.size() )
+        {
+            this->pimpl->ThreeAxisForceTorqueContactMeasurements[sensor_index] = measurement;
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] setMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->ThreeAxisForceTorqueContactMeasurements.size() << std::endl;
+            return false;
+        }
+    }
+
+    return false;
+}
+
 bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
                                          const unsigned int& sensor_index,
                                          Wrench& measurement) const
@@ -837,6 +1012,76 @@ bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
     return false;
 }
 
+bool SensorsMeasurements::getMeasurement(const SensorType &sensor_type, const unsigned int &sensor_index,
+                                         Vector3 &measurement) const
+{
+    if( sensor_type == ACCELEROMETER )
+    {
+        if( sensor_index < this->pimpl->AccelerometerMeasurements.size() )
+        {
+            measurement = this->pimpl->AccelerometerMeasurements[sensor_index];
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->AccelerometerMeasurements.size() << std::endl;
+            return false;
+        }
+    }
+
+    if( sensor_type == GYROSCOPE )
+    {
+        if( sensor_index < this->pimpl->GyroscopeMeasurements.size() )
+        {
+            measurement = this->pimpl->GyroscopeMeasurements[sensor_index];
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->GyroscopeMeasurements.size() << std::endl;
+            return false;
+        }
+    }
+
+    if( sensor_type == THREE_AXIS_ANGULAR_ACCELEROMETER )
+    {
+        if( sensor_index < this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size() )
+        {
+            measurement = this->pimpl->ThreeAxisAngularAccelerometerMeasurements[sensor_index];
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size() << std::endl;
+            return false;
+        }
+    }
+
+    if( sensor_type == THREE_AXIS_FORCE_TORQUE_CONTACT )
+    {
+        if( sensor_index < this->pimpl->ThreeAxisForceTorqueContactMeasurements.size() )
+        {
+            measurement = this->pimpl->ThreeAxisForceTorqueContactMeasurements[sensor_index];
+            return true;
+        }
+        else
+        {
+            std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
+                      << "is out of bounds, because nrOfSensors is "
+                      << this->pimpl->ThreeAxisForceTorqueContactMeasurements.size() << std::endl;
+            return false;
+        }
+    }
+
+    return false;
+}
+
 unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) const
 {
     unsigned int returnVal = 0;
@@ -850,6 +1095,13 @@ unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) 
             break;
         case GYROSCOPE :
             returnVal =  this->pimpl->GyroscopeMeasurements.size();
+            break;
+        case THREE_AXIS_ANGULAR_ACCELEROMETER :
+            returnVal =  this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size();
+            break;
+        case THREE_AXIS_FORCE_TORQUE_CONTACT :
+            returnVal =  this->pimpl->ThreeAxisForceTorqueContactMeasurements.size();
+            break;
         default :
             returnVal = 0;
     }

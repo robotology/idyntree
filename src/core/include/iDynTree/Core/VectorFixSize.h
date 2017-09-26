@@ -114,6 +114,7 @@ namespace iDynTree
     template<unsigned int VecSize>
     VectorFixSize<VecSize>::VectorFixSize()
     {
+        
     }
 
 
@@ -241,6 +242,7 @@ namespace iDynTree
     //  and the only ones that users are supposed to manipulate manipulate
     // Add all the explicit instantiation that can be useful, but remember to add
     // them also in the iDynTree.i SWIG file
+    typedef VectorFixSize<2>  Vector2;
     typedef VectorFixSize<3>  Vector3;
     typedef VectorFixSize<4>  Vector4;
     typedef VectorFixSize<6>  Vector6;

@@ -147,7 +147,7 @@ Sensor* SixAxisForceTorqueSensor::clone() const
     return (Sensor *)new SixAxisForceTorqueSensor(*this);
 }
 
-bool SixAxisForceTorqueSensor::updateIndeces(const Model& model)
+bool SixAxisForceTorqueSensor::updateIndices(const Model& model)
 {
     if( !( (this->pimpl->appliedWrenchLink == this->pimpl->link1) ||
            (this->pimpl->appliedWrenchLink == this->pimpl->link2) ) )
@@ -184,7 +184,11 @@ bool SixAxisForceTorqueSensor::updateIndeces(const Model& model)
     return true;
 }
 
-
+// Deprecated
+bool SixAxisForceTorqueSensor::updateIndeces(const Model& model)
+{
+    return updateIndices(model);
+}
 
 std::string SixAxisForceTorqueSensor::getName() const
 {
@@ -360,6 +364,7 @@ bool SixAxisForceTorqueSensor::getWrenchAppliedOnLinkInverseMatrix(const LinkInd
     }
     else
     {
+        assert(false);
         wrench_applied_on_link_inverse_matrix.zero();
         return false;
     }

@@ -400,8 +400,8 @@ private:
 
     //Take in account the real and fake links
     std::vector< bool > is_link_real;
-    std::vector< int > regrColumns2linkIndeces;
-    std::vector< int > linkIndeces2regrColumns;
+    std::vector< int > regrColumns2linkIndices;
+    std::vector< int > linkIndices2regrColumns;
     std::vector< std::string > fake_links_names;
 
     //Robot state

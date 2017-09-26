@@ -13,6 +13,7 @@
 
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/PrismaticJoint.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/ModelTransformers.h>
 
@@ -175,7 +176,7 @@ bool axisFromURDFXML(TiXmlElement* axisXml,
 }
 
 bool posLimitsFromURDFXML(TiXmlElement* limXml,
-                          double & posLimMin, double & posLimMax)
+                          double & posLimMin, double & posLimMax, std::string & jointName)
 {
     if ( limXml->Attribute("lower") )
     {
@@ -190,7 +191,10 @@ bool posLimitsFromURDFXML(TiXmlElement* limXml,
     }
     else
     {
-        reportWarning("","posLimitsFromURDFXML","lower tag not present in revolute joint, defaulting to 0.0 .");
+        if(jointName == "revolute")
+            reportWarning("","posLimitsFromURDFXML","lower tag not present in revolute joint, defaulting to 0.0 .");
+        else if(jointName == "prismatic")
+            reportWarning("","posLimitsFromURDFXML","lower tag not present in prismatic joint, defaulting to 0.0 .");
         posLimMin = 0.0;
     }
 
@@ -207,7 +211,10 @@ bool posLimitsFromURDFXML(TiXmlElement* limXml,
     }
     else
     {
-        reportWarning("","posLimitsFromURDFXML","upper tag not present in revolute joint, defaulting to 0.0 .");
+        if(jointName == "revolute")
+            reportWarning("","posLimitsFromURDFXML","upper tag not present in revolute joint, defaulting to 0.0 .");
+        else if(jointName == "prismatic")
+            reportWarning("","posLimitsFromURDFXML","upper tag not present in prismatic joint, defaulting to 0.0 .");
         posLimMax = 0.0;
     }
 
@@ -305,8 +312,7 @@ bool jointFromURDFXML(const Model & model,
     std::string type_str = type_char;
     jointType = type_str;
     if (type_str == "planar" ||
-        type_str == "floating" ||
-        type_str == "prismatic" )
+        type_str == "floating")
     {
         std::string errStr = "Joint " + jointName + " has type " + type_str + " that is not currently supported by iDynTree";
         reportError("","jointFromURDFXML",errStr.c_str());
@@ -314,7 +320,8 @@ bool jointFromURDFXML(const Model & model,
     }
     else if (type_str == "fixed" ||
              type_str == "revolute"  ||
-             type_str == "continuous")
+             type_str == "continuous" ||
+             type_str == "prismatic")
     {
         // perfect, type supported by iDynTree, parsing happening later
     }
@@ -325,7 +332,7 @@ bool jointFromURDFXML(const Model & model,
         return false;
     }
 
-    // Get indeces in model for the links involved in the joint
+    // Get indices in model for the links involved in the joint
     LinkIndex parentLinkIndex = model.getLinkIndex(parentLinkName);
 
     if( parentLinkIndex == LINK_INVALID_INDEX )
@@ -362,8 +369,19 @@ bool jointFromURDFXML(const Model & model,
     else if ( type_str == "revolute"
            || type_str == "continuous" )
     {
-        p_joint = new RevoluteJoint(parentLinkIndex,childLinkIndex,
-                                    parent_T_joint,parent_T_joint*axis_wrt_childLink);
+        RevoluteJoint * rev_joint = new RevoluteJoint();
+        rev_joint->setAttachedLinks(parentLinkIndex,childLinkIndex);
+        rev_joint->setRestTransform(parent_T_joint);
+        rev_joint->setAxis(axis_wrt_childLink, childLinkIndex);
+        p_joint = static_cast<IJoint*>(rev_joint);
+    }
+    else if (type_str == "prismatic")
+    {
+        PrismaticJoint * prism_joint = new PrismaticJoint();
+        prism_joint->setAttachedLinks(parentLinkIndex,childLinkIndex);
+        prism_joint->setRestTransform(parent_T_joint);
+        prism_joint->setAxis(axis_wrt_childLink, childLinkIndex);
+        p_joint = static_cast<IJoint*>(prism_joint);
     }
 
     assert(p_joint != 0);
@@ -373,7 +391,7 @@ bool jointFromURDFXML(const Model & model,
     if (limit_xml)
     {
         double posLimMin, posLimMax;
-        if( !posLimitsFromURDFXML(limit_xml,posLimMin,posLimMax) )
+        if( !posLimitsFromURDFXML(limit_xml,posLimMin,posLimMax,jointName) )
         {
             std::string errStr = "Parsing limits failed for joint " + jointName + ", URDF parsing failed.";
             reportError("", "jointFromURDFXML", errStr.c_str());
@@ -747,4 +765,3 @@ bool modelFromURDFString(const std::string& urdf_string,
 }
 
 }
-

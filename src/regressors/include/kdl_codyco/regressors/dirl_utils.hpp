@@ -122,7 +122,7 @@ namespace Regressors
      *
      */
     iDynTree::Regressors::DynamicsRegressorParametersList
-        getLegacyUsedParameters(const std::vector<int> & linkIndeces2regrCols,
+        getLegacyUsedParameters(const std::vector<int> & linkIndices2regrCols,
                                 const int nrOfFTSensors = -1,
                                 const bool withFToffsetParameters=false);
 
@@ -134,11 +134,11 @@ namespace Regressors
      */
      void convertLocalRegressorToGlobalRegressor(const Eigen::MatrixXd & localRegressor,
                                             Eigen::MatrixXd & globalRegressor,
-                                            std::vector<int> localColIndecesToGlobalColIndeces);
+                                            std::vector<int> localColIndicesToGlobalColIndices);
 
      void convertLocalParametersToGlobalParameters(const Eigen::VectorXd & localRegressor,
                                               Eigen::VectorXd & globalRegressor,
-                                              std::vector<int> localColIndecesToGlobalColIndeces);
+                                              std::vector<int> localColIndicesToGlobalColIndices);
 
 
     void buildParametersMapping(const iDynTree::Regressors::DynamicsRegressorParametersList & localSerialiaziation,

@@ -9,7 +9,7 @@ macro(add_unit_test_hl classname)
     add_test(NAME ${testname} COMMAND ${testbinary})
     
     if(IDYNTREE_RUN_VALGRIND_TESTS)
-        add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} ./${testbinary})
+        add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}>)
     endif()
 endmacro()
 

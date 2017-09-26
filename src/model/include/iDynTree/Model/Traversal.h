@@ -8,7 +8,7 @@
 #ifndef IDYNTREE_TRAVERSAL_H
 #define IDYNTREE_TRAVERSAL_H
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 
 #include <vector>
 
@@ -196,7 +196,16 @@ namespace iDynTree
          * @param[in] jntIdx the index of the joint of which we want to get the child link.
          * @return the index of the child link if all went well, LINK_INVALID_INDEX otherwise .
          */
-        LinkIndex getChildLinkIndexFromJointIndex(const Model & m_model, const JointIndex jntIdx) const;
+        LinkIndex getChildLinkIndexFromJointIndex(const Model & model, const JointIndex jntIdx) const;
+
+        /**
+         * \brief Get the parent link (according to the traversal) of a Joint.
+         *
+         * @param[in] m_model the considered model.
+         * @param[in] jntIdx the index of the joint of which we want to get the parent link.
+         * @return the index of the parent link if all went well, LINK_INVALID_INDEX otherwise .
+         */
+        LinkIndex getParentLinkIndexFromJointIndex(const Model & model, const JointIndex jntIdx) const;
 
         /**
          * Return a human-readable representation of the traversal.

@@ -4,9 +4,11 @@
 
 project(iDynTree_ICUB CXX)
 
-SET(iDynTree_ICUB_source src/skinDynLibConversions.cpp)
+SET(iDynTree_ICUB_source src/iKinConversions.cpp
+                         src/skinDynLibConversions.cpp)
 
-SET(iDynTree_ICUB_header include/iDynTree/iCub/skinDynLibConversions.h)
+SET(iDynTree_ICUB_header include/iDynTree/iKinConversions.h
+                         include/iDynTree/skinDynLibConversions.h)
 
 SOURCE_GROUP("Source Files" FILES ${iDynTree_ICUB_source})
 SOURCE_GROUP("Header Files" FILES ${iDynTree_ICUB_header})
@@ -32,26 +34,32 @@ set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_ICUB_h
 
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
-                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} LINK_PUBLIC skinDynLib idyntree-core idyntree-model idyntree-yarp idyntree-estimation)
+target_link_libraries(${libraryname} LINK_PUBLIC iKin skinDynLib idyntree-core idyntree-model idyntree-yarp idyntree-estimation)
 
 if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
     target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 endif()
 
 target_include_directories(${libraryname} INTERFACE ${skinDynLib_INCLUDE_DIRS})
-
 include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS})
+target_include_directories(${libraryname} INTERFACE ${iKin_INCLUDE_DIRS})
+include_directories(SYSTEM ${iKin_INCLUDE_DIRS})
+
 
 install(TARGETS ${libraryname}
         EXPORT iDynTree
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/iCub" COMPONENT dev)
+        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-icub)
 
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+# Install headers in deprecated location
+install(DIRECTORY include/iDynTree/iCub
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree")
 

@@ -34,8 +34,18 @@
 
 /* Author: Silvio Traversaro */
 
-#include "urdf2dh_helpers.h"
+#include <iostream>
+#include <fstream>
 
+#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Model/DenavitHartenberg.h>
+#include <iDynTree/Model/ModelTestUtils.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/KinDynComputations.h>
+#include <iDynTree/iKinConversions.h>
+#include <iCub/iKin/iKinFwd.h>
+
+#include <yarp/os/Property.h>
 
 void printHelp()
 {
@@ -47,6 +57,133 @@ void printHelp()
     std::cerr << "Usage: urdf2dh robot.urdf base_link_name end_effector_link_name dhParams.ini" << std::endl;
 }
 
+bool ExtractReducedJointPosFromFullModel(const iDynTree::Model& fullModel,
+                                         const iDynTree::VectorDynSize& fullJntPos,
+                                         const iDynTree::Model& reducedModel,
+                                               iDynTree::VectorDynSize& reducedJntPos)
+{
+    assert(fullJntPos.size() == fullModel.getNrOfPosCoords());
+    reducedJntPos.resize(reducedModel.getNrOfJoints());
+
+    for (iDynTree::JointIndex reducedJntIdx=0; reducedJntIdx < reducedModel.getNrOfJoints(); reducedJntIdx++)
+    {
+        // Check that joint is present in the full model
+        iDynTree::FrameIndex fullJntIdx = fullModel.getJointIndex(reducedModel.getJointName(reducedJntIdx));
+        assert(fullJntIdx != iDynTree::FRAME_INVALID_INDEX);
+
+        // Compute the dofs of the joints and full/reduced model offsets
+        assert(fullModel.getJoint(fullJntIdx)->getNrOfDOFs() ==
+               reducedModel.getJoint(reducedJntIdx)->getNrOfDOFs());
+        unsigned int nrOfDofs =fullModel.getJoint(fullJntIdx)->getNrOfDOFs();
+        size_t fullDofOffset = fullModel.getJoint(fullJntIdx)->getDOFsOffset();
+        size_t reducedDofOffset = reducedModel.getJoint(reducedJntIdx)->getDOFsOffset();
+
+        // Copy the jnt pos
+        for (int j=0; j < nrOfDofs; j++)
+        {
+            reducedJntPos(reducedDofOffset+j) = fullJntPos(fullDofOffset+j);
+        }
+
+    }
+
+    return true;
+}
+
+template<typename VectorType1, typename VectorType2>
+bool checkVectorsAreEqual(const VectorType1& vec1, const VectorType2& vec2, double tol)
+{
+    for (unsigned int i = 0; i < vec1.size(); i++ )
+    {
+        if ( fabs(vec1(i)-vec2(i)) >= tol )
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+template<typename MatrixType1, typename MatrixType2 >
+bool checkMatricesAreEqual(const MatrixType1& mat1, const MatrixType2& mat2, double tol)
+{
+    for (unsigned int i = 0; i < mat1.rows(); i++)
+    {
+        for (unsigned int j = 0; j < mat1.rows(); j++)
+        {
+            if (fabs(mat1(i, j)-mat2(i, j)) >= tol )
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+bool checkTransformsAreEqual(const iDynTree::Transform& trans1,
+                             const iDynTree::Transform& trans2,
+                             double tol)
+{
+    return checkVectorsAreEqual(trans1.getPosition(), trans2.getPosition(), tol) &&
+           checkMatricesAreEqual(trans1.getRotation(), trans2.getRotation(), tol);
+}
+
+bool checkiKinChainConversion(const iDynTree::Model& model,
+                              const std::string& baseFrame, const std::string& distalFrame)
+{
+    iDynTree::KinDynComputations kinDynComp;
+
+    bool ok = kinDynComp.loadRobotModel(model);
+
+    if (!ok)
+    {
+        return false;
+    }
+
+    // Create a model from a DH chain
+    iDynTree::DHChain idynDhChain;
+    iDynTree::Model modelExtractedFromChain;
+    ok = iDynTree::ExtractDHChainFromModel(model, baseFrame, distalFrame, idynDhChain);
+    ok = ok && iDynTree::CreateModelFromDHChain(idynDhChain,
+                                                modelExtractedFromChain);
+
+    iDynTree::VectorDynSize fullJntPos, reducedJntPos;
+
+    iDynTree::KinDynComputations chainKinDynComp;
+    ok = ok && chainKinDynComp.loadRobotModel(modelExtractedFromChain);
+
+    if (!ok)
+    {
+        return false;
+    }
+
+    for (int i=0; i < 10; i++)
+    {
+        // Set a random joint state for the model, that will be used
+        // to check the transform provided by the DH chain
+        iDynTree::getRandomJointPositions(fullJntPos, model);
+        kinDynComp.setJointPos(fullJntPos);
+
+        // Extract the state of the Chain from the complete state
+        ExtractReducedJointPosFromFullModel(model, fullJntPos, modelExtractedFromChain, reducedJntPos);
+
+        chainKinDynComp.setJointPos(reducedJntPos);
+
+        // Compare the two frames
+        ok = ok && checkTransformsAreEqual(kinDynComp.getRelativeTransform(baseFrame, distalFrame),
+                                       chainKinDynComp.getRelativeTransform("baseFrame", "distalFrame"), 1e-5);
+    }
+
+    return ok;
+}
+
+std::string inline int2string(const int inInt)
+{
+    std::stringstream ss;
+    ss.imbue(std::locale::classic());
+    ss << inInt;
+    return ss.str();
+}
 
 int main(int argc, char** argv)
 {
@@ -70,156 +207,67 @@ int main(int argc, char** argv)
   std::string end_effector_link_name = argv[3];
   std::string ikin_ini_file_name     = argv[4];
 
-  KDL::Tree kdl_tree;
-  KDL::Chain kdl_chain;
-  iCub::iKin::iKinLimb ikin_limb;
-  std::vector<std::string> joint_names;
-  KDL::JntArray min,max;
+  //
+  // URDF --> iDynTree::Model
+  //
+  iDynTree::ModelLoader mdlLoader;
+  bool ok = mdlLoader.loadModelFromFile(urdf_file_name);
+  iDynTree::Model model = mdlLoader.model();
 
-  //
-  // URDF --> KDL::Tree
-  //
-  bool root_inertia_workaround = true;
-  if( !treeFromUrdfFile(urdf_file_name,kdl_tree,root_inertia_workaround) )
+  if (!ok)
   {
-      cerr << "urdf2dh: Could not parse urdf robot model" << endl;
-      std::cerr << "urdf2dh: Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
+      std::cerr << "urdf2dh: error in loading the model" << std::endl;
+  }
 
+  //
+  // Extract the chain from the model to a iKin limb (i.e. DH parameters)
+  //
+  iCub::iKin::iKinLimb limb;
+  ok = iDynTree::iKinLimbFromModel(model, base_link_name, end_effector_link_name, limb);
+
+  if (!ok)
+  {
+      std::cerr << "urdf2dh: Could not extract iKinChain" << std::endl;
       return EXIT_FAILURE;
   }
 
-  //
-  // URDF --> position ranges
-  //
-  if( !jointPosLimitsFromUrdfFile(urdf_file_name,joint_names,min,max) )
+
+  if (!checkiKinChainConversion(mdlLoader.model(), base_link_name, end_effector_link_name) )
   {
-      cerr << "Could not parse urdf robot model limits" << endl;
-      return EXIT_FAILURE;
-  }
-
-  if( joint_names.size() != min.rows() ||
-      joint_names.size() != max.rows() ||
-      joint_names.size() == 0)
-  {
-      cerr << "Inconsistent joint limits got from urdf (nr of joints extracted: " << joint_names.size() << " ) " << endl;
-      return EXIT_FAILURE;
-  }
-
-  //
-  // KDL::Tree --> KDL::CoDyCo::UndirectedTree
-  // (for extracting arbitrary chains,
-  //    using KDL::Tree you can just get chains where the base of the chain
-  //    is proximal to the tree base with respect to the end effector.
-  //
-  KDL::CoDyCo::UndirectedTree undirected_tree(kdl_tree);
-
-  KDL::Tree kdl_rotated_tree = undirected_tree.getTree(base_link_name);
-
-  bool result = kdl_rotated_tree.getChain(base_link_name,end_effector_link_name,kdl_chain);
-  if( !result )
-  {
-      cerr << "urdf2dh: Impossible to find " << base_link_name << " or "
-           << end_effector_link_name << " in the URDF."  << endl;
-      return EXIT_FAILURE;
-  }
-
-  //
-  // Copy the limits extracted from the URDF to the chain
-  //
-  int nj = kdl_chain.getNrOfJoints();
-  KDL::JntArray chain_min(nj), chain_max(nj);
-
-  size_t seg_i, jnt_i;
-  for(seg_i=0,jnt_i=0; seg_i < kdl_chain.getNrOfSegments(); seg_i++)
-  {
-      const Segment & seg = kdl_chain.getSegment(seg_i);
-      if( seg.getJoint().getType() != KDL::Joint::None )
-      {
-          std::string jnt_name = seg.getJoint().getName();
-         // std::cerr << "searching for joint " << jnt_name << std::endl;
-          int tree_jnt = 0;
-          for(tree_jnt = 0; tree_jnt < joint_names.size(); tree_jnt++ )
-          {
-              //std::cerr << "joint_names[ " << tree_jnt << "] is " << joint_names[tree_jnt] << std::endl;
-              if( joint_names[tree_jnt] == jnt_name )
-              {
-                  chain_min(jnt_i) = min(tree_jnt);
-                  chain_max(jnt_i) = max(tree_jnt);
-                  jnt_i++;
-                  break;
-              }
-          }
-          if( tree_jnt == joint_names.size() )
-          {
-              std::cerr << "urdf2dh failure in converting limits from tree to chain, unable to find joint " << jnt_name << std::endl;
-              return EXIT_FAILURE;
-          }
-      }
-  }
-
-  if( jnt_i != nj )
-  {
-      std::cerr << "urdf2dh failure in converting limits from tree to chain" << std::endl;
-      return EXIT_FAILURE;
-  }
-
-  //
-  // Convert the chain and the limits to an iKin chain (i.e. DH parameters)
-  //
-  result = iKinLimbFromKDLChain(kdl_chain,ikin_limb,chain_min,chain_max);
-  if( !result )
-  {
-      cerr << "urdf2dh: Could not export KDL::Tree to iKinChain" << endl;
-      return EXIT_FAILURE;
-  }
-
-  bool result_corrupted = false;
-  if( !checkChainsAreEqual(kdl_chain,ikin_limb) )
-  {
-      cerr << "urdf2dh error: KDL::Chain and iKinChain results does not match" << endl;
+      std::cerr << "urdf2dh error: iDynTree::Model and iKinChain results does not match" << std::endl;
       std::cerr << "urdf2dh: Please open an issue at https://github.com/robotology/idyntree/issues " << std::endl;
       return EXIT_FAILURE;
   }
 
   yarp::os::Property prop;
-  result = ikin_limb.toLinksProperties(prop);
-  if( !result )
+  bool result = limb.toLinksProperties(prop);
+  if (!result)
   {
-      cerr << "urdf2dh: Could not export Link Properties from ikin_limb" << endl;
+      std::cerr << "urdf2dh: Could not export Link Properties from ikin_limb" << std::endl;
       return EXIT_FAILURE;
   } else {
       std::cout << "urdf2dh: Conversion to iKin DH chain completed correctly" << std::endl;
   }
 
-  std::string ikin_prop = prop.toString();
   yarp::os::Bottle prop_bot;
   prop_bot.fromString(prop.toString());
 
   //Write the properties to file
-   std::ofstream ofs (ikin_ini_file_name.c_str(), std::ofstream::out);
+  std::ofstream ofs (ikin_ini_file_name.c_str(), std::ofstream::out);
 
-   ofs << prop_bot.findGroup("type").toString() << std::endl;
-   ofs << prop_bot.findGroup("numLinks").toString() << std::endl;
-   ofs << prop_bot.findGroup("H0").toString() << std::endl;
-   for( int link = 0; link < ikin_limb.getN(); link++ )
-   {
-        std::string link_name = "link_" + int2string(link);
-        ofs << prop_bot.findGroup(link_name).toString() << std::endl;
+  ofs << prop_bot.findGroup("type").toString() << std::endl;
+  ofs << prop_bot.findGroup("numLinks").toString() << std::endl;
+  ofs << prop_bot.findGroup("H0").toString() << std::endl;
+  for (int link = 0; link < limb.getN(); link++)
+  {
+       std::string link_name = "link_" + int2string(link);
+       ofs << prop_bot.findGroup(link_name).toString() << std::endl;
 
-   }
-   ofs << prop_bot.findGroup("HN").toString() << std::endl;
+  }
+  ofs << prop_bot.findGroup("HN").toString() << std::endl;
+  ofs.close();
 
-
-   ofs.close();
-
-   if( result_corrupted )
-   {
-       return EXIT_FAILURE;
-   }
-   else
-   {
-     return EXIT_SUCCESS;
-   }
+  return EXIT_SUCCESS;
 }
 
 

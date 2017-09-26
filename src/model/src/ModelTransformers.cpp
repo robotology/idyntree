@@ -12,6 +12,7 @@
 
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/PrismaticJoint.h>
 
 #include <cassert>
 #include <set>
@@ -426,7 +427,7 @@ bool createReducedModel(const Model& fullModel,
         LinkIndex oldLink2 = oldJoint->getSecondAttachedLink();
 
         // We get the new link that the joint connects, after the lumping
-        // (consider that the subModel index not matches the indeces of the new links
+        // (consider that the subModel index not matches the indices of the new links
         // in the new reduced model
         LinkIndex newLink1 = (LinkIndex) subModels.getSubModelOfLink(oldLink1);
         LinkIndex newLink2 = (LinkIndex) subModels.getSubModelOfLink(oldLink2);
@@ -455,20 +456,37 @@ bool createReducedModel(const Model& fullModel,
             Transform oldLink1_X_oldLink2 = oldJointRevolute->getRestTransform(oldLink1,oldLink2);
             Transform newLink1_X_newLink2 = newLink1_X_oldLink1*oldLink1_X_oldLink2*newLink2_X_oldLink2.inverse();
 
-            Axis rotationAxis_wrt_newLink1 = newLink1_X_oldLink1*oldJointRevolute->getAxis(oldLink1);
+            Axis rotationAxis_wrt_newLink2 = newLink2_X_oldLink2*oldJointRevolute->getAxis(oldLink2);
 
             RevoluteJoint* newJointRevolute = new RevoluteJoint(*oldJointRevolute);
 
             newJointRevolute->setAttachedLinks(newLink1,newLink2);
             newJointRevolute->setRestTransform(newLink1_X_newLink2);
-            newJointRevolute->setAxis(rotationAxis_wrt_newLink1);
+            newJointRevolute->setAxis(rotationAxis_wrt_newLink2, newLink2);
 
             newJoint = (IJointPtr) newJointRevolute;
+        }
+        else if( dynamic_cast<const PrismaticJoint*>(oldJoint) )
+        {
+            const PrismaticJoint* oldJointPrismatic = dynamic_cast<const PrismaticJoint*>(oldJoint);
+            
+            Transform oldLink1_X_oldLink2 = oldJointPrismatic->getRestTransform(oldLink1,oldLink2);
+            Transform newLink1_X_newLink2 = newLink1_X_oldLink1*oldLink1_X_oldLink2*newLink2_X_oldLink2.inverse();
+            
+            Axis prismaticAxis_wrt_newLink2 = newLink2_X_oldLink2*oldJointPrismatic->getAxis(oldLink2);
+            
+            PrismaticJoint* newJointPrismatic = new PrismaticJoint(*oldJointPrismatic);
+            
+            newJointPrismatic->setAttachedLinks(newLink1,newLink2);
+            newJointPrismatic->setRestTransform(newLink1_X_newLink2);
+            newJointPrismatic->setAxis(prismaticAxis_wrt_newLink2, newLink2);
+            
+            newJoint = (IJointPtr) newJointPrismatic;
         }
         else
         {
             std::cerr << "[ERROR] createReducedModel error : "
-                      << " processing joint that is not revolute neither fixed. "
+                      << " processing joint that is not revolute, prismatic or fixed. "
                       << std::endl;
             return false;
         }

@@ -2,7 +2,6 @@ function test_suite=TransformUnitTest
     initTestSuite
 
 function test_pos_twist_wrench_invariance
-    iDynTreeLoad;
     posInFrame1_m = [1;2;3;1];
 
     posInFrame1 = iDynTree.Position();

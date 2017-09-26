@@ -23,26 +23,20 @@
 
 namespace iDynTree {
 
-    SparseMatrix::SparseMatrix() : SparseMatrix(0, 0) {}
+    // MARK: - generic SparseMatrix implementation
 
-    SparseMatrix::SparseMatrix(unsigned rows, unsigned cols)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    SparseMatrix<ordering>::SparseMatrix() : SparseMatrix(0, 0) {}
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    SparseMatrix<ordering>::SparseMatrix(unsigned rows, unsigned cols)
     : SparseMatrix(rows, cols, iDynTree::VectorDynSize())
     { }
 
-    SparseMatrix::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
-    : m_outerStarts(rows + 1, 0)
-    , m_allocatedSize(0)
-    , m_rows(rows)
-    , m_columns(cols)
-    , m_ordering(RowMajor)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    void SparseMatrix<ordering>::initializeMatrix(unsigned outerSize, const double* vector, unsigned vectorSize)
     {
-        initializeMatrix(rows, cols, memoryReserveDescription.data(), memoryReserveDescription.size());
-    }
-
-    void SparseMatrix::initializeMatrix(unsigned rows, unsigned cols, const double *vector, unsigned vectorSize)
-    {
-        UNUSED(rows);
-        UNUSED(cols);
+        m_outerStarts.assign(outerSize + 1, 0);
 
         for (unsigned i = 0; i < vectorSize; ++i) {
             m_allocatedSize += vector[i];
@@ -51,37 +45,96 @@ namespace iDynTree {
         m_values.reserve(m_allocatedSize);
 
         // Inner indeces has same size of values
-        m_innerIndeces.reserve(m_allocatedSize);
+        m_innerIndices.reserve(m_allocatedSize);
     }
 
-    SparseMatrix::~SparseMatrix() {}
+    template <iDynTree::MatrixStorageOrdering ordering>
+    SparseMatrix<ordering>::~SparseMatrix() {}
 
-    bool SparseMatrix::valueIndex(unsigned row, unsigned col, unsigned &rowNZIndex) const
+    template <iDynTree::MatrixStorageOrdering ordering>
+    template <iDynTree::MatrixStorageOrdering otherOrdering>
+    SparseMatrix<ordering>::SparseMatrix(const SparseMatrix<otherOrdering>& other)
+    : m_values(other.m_values)
+    , m_innerIndices(other.m_innerIndices)
+    , m_outerStarts(other.m_outerStarts)
+    , m_allocatedSize(other.m_allocatedSize)
+    , m_rows(other.m_rows)
+    , m_columns(other.m_columns) {}
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    unsigned SparseMatrix<ordering>::numberOfNonZeros() const
     {
-        assert(row >= 0 && row < rows()
-               && col >= 0 && col < columns());
+        return m_values.size();
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    template <iDynTree::MatrixStorageOrdering otherOrdering>
+    SparseMatrix<ordering>& SparseMatrix<ordering>::operator=(const SparseMatrix<otherOrdering>& other)
+    {
+        if (this == &other) return *this;
+
+        m_values = other.m_values;
+        m_innerIndices = other.m_innerIndices;
+        m_outerStarts = other.m_outerStarts;
+        m_allocatedSize = other.m_allocatedSize;
+        m_rows = other.m_rows;
+        m_columns = other.m_columns;
+        return *this;
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    void SparseMatrix<ordering>::resize(unsigned rows, unsigned columns)
+    {
+        VectorDynSize empty; //this does not allocate memory
+        resize(rows, columns, empty);
+    }
+
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    void SparseMatrix<ordering>::reserve(unsigned nonZeroElements)
+    {
+        if (nonZeroElements <= m_allocatedSize) return; //do nothing
+
+        m_values.reserve(nonZeroElements);
+        m_innerIndices.reserve(nonZeroElements);
+        m_allocatedSize = nonZeroElements;
+
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    void SparseMatrix<ordering>::zero()
+    {
+        //zero: simply clear
+        m_values.resize(0);
+        m_innerIndices.resize(0);
+        m_outerStarts.assign(m_outerStarts.size(), 0);
+    }
+
+    template <MatrixStorageOrdering ordering>
+    bool SparseMatrix<ordering>::valueIndexForOuterAndInnerIndices(unsigned outerIndex, unsigned innerIndex, unsigned& valueIndex) const
+    {
         //We can use std::lower_bound to between rowNZIndex and rowNZIndex + rowNNZ
         //They are already sorted. The only critical point is if we have -1 in the matrix
         //Which right now it does not apply
-        int colBegin = m_outerStarts[row];
-        int colEnd = m_outerStarts[row + 1];
-        std::vector<int>::const_iterator innerVectorBegin = m_innerIndeces.begin();
+        int outerBegin = m_outerStarts[outerIndex];
+        int outerEnd = m_outerStarts[outerIndex + 1];
+        std::vector<int>::const_iterator innerVectorBegin = m_innerIndices.begin();
 
         //initialize the return value to be the first element of the row
-        rowNZIndex = colBegin;
-        if (colEnd - colBegin == 0) {
-            //empty row, avoid searching
+        valueIndex = outerBegin;
+        if (outerEnd - outerBegin == 0) {
+            //empty block, avoid searching
             return false;
         }
 
-        std::vector<int>::const_iterator foundIndex = std::lower_bound(innerVectorBegin + colBegin,
-                                                                       innerVectorBegin + colEnd, col);
+        std::vector<int>::const_iterator foundIndex = std::lower_bound(innerVectorBegin + outerBegin,
+                                                                       innerVectorBegin + outerEnd, innerIndex);
 
         //Compute the index of the first element next or equal to the one we
         //were looking for
 
-        rowNZIndex = std::distance(innerVectorBegin, foundIndex);
-        if (foundIndex == innerVectorBegin + colEnd) {
+        valueIndex = std::distance(innerVectorBegin, foundIndex);
+        if (foundIndex == innerVectorBegin + outerEnd) {
             //not found
             //return the index of the last element of the row
             //as we have to put the element as last element
@@ -89,19 +142,17 @@ namespace iDynTree {
         }
 
         if (*foundIndex >= 0
-            && static_cast<unsigned>(*foundIndex) == col) {
+            && static_cast<unsigned>(*foundIndex) == innerIndex) {
             //found
             return true;
         }
-        
+
         return false;
     }
 
-    unsigned SparseMatrix::insert(unsigned int row, unsigned int col, double value)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    unsigned SparseMatrix<ordering>::insert(unsigned outerIndex, unsigned innerIndex, double value)
     {
-        assert(row >= 0 && row < rows()
-               && col >= 0 && col < columns());
-
         //first: check if there is space in the arrays
         if (m_allocatedSize <= m_values.size()) {
             reserve(m_values.size() + 10);
@@ -109,52 +160,232 @@ namespace iDynTree {
 
         //find insertion position
         unsigned insertionIndex = 0;
-        if (valueIndex(row, col, insertionIndex)) {
+        if (valueIndexForOuterAndInnerIndices(outerIndex, innerIndex, insertionIndex)) {
             //???: what if the element exists alredy in the matrix?
             return insertionIndex;
         }
 
         //I found the index. Now I have to shift to the right the values and inner elements
         m_values.resize(m_values.size() + 1);
-        m_innerIndeces.resize(m_innerIndeces.size() + 1);
+        m_innerIndices.resize(m_innerIndices.size() + 1);
 
-        for (unsigned i = insertionIndex; i < m_values.size() - 1; ++i) {
-            m_values(i + 1) = m_values(i);
-            m_innerIndeces[i + 1] = m_innerIndeces[i];
+        for (unsigned i = m_values.size() - 1; i > insertionIndex && i > 0; --i) {
+            m_values(i) = m_values(i - 1);
+            m_innerIndices[i] = m_innerIndices[i - 1];
         }
+
         m_values(insertionIndex) = value;
-        m_innerIndeces[insertionIndex] = col;
+        m_innerIndices[insertionIndex] = innerIndex;
         //update row NNZ
-        for (unsigned rowIndex = row; rowIndex < rows(); ++rowIndex) {
-            m_outerStarts[rowIndex + 1]++;
+        for (unsigned nextOuterIndex = outerIndex; nextOuterIndex < m_outerStarts.size() - 1; ++nextOuterIndex) {
+            m_outerStarts[nextOuterIndex + 1]++;
         }
 
         return insertionIndex;
     }
 
-
-    
-    unsigned SparseMatrix::numberOfNonZeros() const
+    template <iDynTree::MatrixStorageOrdering ordering>
+    void SparseMatrix<ordering>::setFromConstTriplets(const iDynTree::Triplets& triplets)
     {
-        return m_values.size();
+        iDynTree::Triplets copy(triplets);
+        setFromTriplets(copy);
     }
 
-    unsigned SparseMatrix::nonZeroElementsForRowAtIndex(unsigned rowIndex) const
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    SparseMatrix<ordering> SparseMatrix<ordering>::sparseMatrixFromTriplets(unsigned rows,
+                                                                            unsigned cols,
+                                                                            const iDynTree::Triplets& nonZeroElements)
     {
-        assert(rowIndex >= 0 && rowIndex < rows());
-        return m_outerStarts[rowIndex + 1] - m_outerStarts[rowIndex];
+        SparseMatrix newMatrix(rows, cols);
+        newMatrix.setFromConstTriplets(nonZeroElements);
+        return newMatrix;
     }
 
-    void SparseMatrix::resize(unsigned rows, unsigned columns)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    unsigned SparseMatrix<ordering>::rows() const { return m_rows; }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    unsigned SparseMatrix<ordering>::columns() const { return m_columns; }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    double * SparseMatrix<ordering>::valuesBuffer() { return m_values.data(); }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    double const * SparseMatrix<ordering>::valuesBuffer() const { return m_values.data(); }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    int * SparseMatrix<ordering>::innerIndicesBuffer()
     {
-        VectorDynSize empty; //this does not allocate memory
-        resize(rows, columns, empty);
+        return m_innerIndices.data();
     }
 
-    void SparseMatrix::resize(unsigned rows, unsigned columns, const iDynTree::VectorDynSize &columnNNZInformation)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    int const * SparseMatrix<ordering>::innerIndicesBuffer() const
     {
-        //suppress unused parameter for now
-        ((void)columnNNZInformation);
+        return m_innerIndices.data();
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    int * SparseMatrix<ordering>::outerIndicesBuffer()
+    {
+        return m_outerStarts.data();
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    int const * SparseMatrix<ordering>::outerIndicesBuffer() const
+    {
+        return m_outerStarts.data();
+    }
+
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    std::string SparseMatrix<ordering>::description(bool fullMatrix) const
+    {
+        std::ostringstream stream;
+        if (!fullMatrix) {
+            for (const_iterator it = begin(); it != end(); ++it) {
+                stream << it->value << "(" << it->row << ", " << it->column << ") ";
+            }
+        } else {
+            for (unsigned row = 0; row < rows(); ++row) {
+                for (unsigned col = 0; col < columns(); ++col) {
+                    stream << this->operator()(row, col) << " ";
+                }
+                stream << std::endl;
+            }
+
+        }
+        return stream.str();
+    }
+
+#ifndef NDEBUG
+    template <iDynTree::MatrixStorageOrdering ordering>
+    std::string SparseMatrix<ordering>::internalDescription() const
+    {
+        std::ostringstream stream;
+        stream << "Values: \n";
+        for (unsigned i = 0; i < m_values.size(); ++i) {
+            stream << m_values(i) << " ";
+        }
+        stream << "\nInner indices: \n";
+        for (unsigned i = 0; i < m_values.size(); ++i) {
+            stream << m_innerIndices[i] << " ";
+        }
+        stream << "\nOuter indices: \n";
+        for (unsigned i = 0; i < m_rows + 1; ++i) {
+            stream << m_outerStarts[i] << " ";
+        }
+        stream << "\n";
+        return stream.str();
+    }
+#endif
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::iterator SparseMatrix<ordering>::begin()
+    {
+        return iterator(*this);
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::const_iterator SparseMatrix<ordering>::begin() const
+    {
+        return const_iterator(*this);
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::iterator SparseMatrix<ordering>::end()
+    {
+        iterator it(*this, false);
+        (&it)->m_index = -1;
+        return it;
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::const_iterator SparseMatrix<ordering>::end() const
+    {
+        const_iterator it(*this, false);
+        (&it)->m_index = -1;
+        return it;
+    }
+
+    // MARK: - Methods to be explicitly implemented (thus asserted false)
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    SparseMatrix<ordering>::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
+    : m_allocatedSize(0)
+    , m_rows(rows)
+    , m_columns(cols)
+    {
+        UNUSED(memoryReserveDescription);
+        assert(false);
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    double SparseMatrix<ordering>::operator()(unsigned int, unsigned int) const
+    {
+        assert(false);
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    double& SparseMatrix<ordering>::operator()(unsigned int, unsigned int)
+    {
+        assert(false);
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    void SparseMatrix<ordering>::resize(unsigned, unsigned, const iDynTree::VectorDynSize&)
+    {
+        assert(false);
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    void SparseMatrix<ordering>::setFromTriplets(iDynTree::Triplets&)
+    {
+        assert(false);
+    }
+
+    // MARK: - Row-Major implementation
+    template <>
+    SparseMatrix<iDynTree::RowMajor>::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
+    : m_allocatedSize(0)
+    , m_rows(rows)
+    , m_columns(cols)
+    {
+        initializeMatrix(rows, memoryReserveDescription.data(), memoryReserveDescription.size());
+    }
+
+    template <>
+    double SparseMatrix<iDynTree::RowMajor>::operator()(unsigned int row, unsigned int col) const
+    {
+        assert(row >= 0 && row < rows()
+               && col >= 0 && col < columns());
+
+        unsigned index = 0;
+        double value = 0;
+        if (valueIndexForOuterAndInnerIndices(row, col, index)) {
+            value = m_values(index);
+        }
+        return value;
+    }
+
+    template <>
+    double& SparseMatrix<iDynTree::RowMajor>::operator()(unsigned int row, unsigned int col)
+    {
+        assert(row >= 0 && row < rows()
+               && col >= 0 && col < columns());
+
+        unsigned index = 0;
+        if (valueIndexForOuterAndInnerIndices(row, col, index)) {
+            return m_values(index);
+        } else {
+            return m_values(insert(row, col, 0));
+        }
+    }
+
+    template <>
+    void SparseMatrix<iDynTree::RowMajor>::resize(unsigned rows, unsigned columns, const iDynTree::VectorDynSize &columnNNZInformation)
+    {
         //Avoid destroying the matrix if the size is the same
         if (m_rows == rows && m_columns == columns)
             return;
@@ -162,38 +393,11 @@ namespace iDynTree {
         m_rows = rows;
         m_columns = columns;
 
-        m_outerStarts.resize(rows);
-        m_outerStarts.assign(rows, 0);
-
-        //TODO: use the information on the NNZ to reserve memory
+        initializeMatrix(rows, columnNNZInformation.data(), columnNNZInformation.size());
     }
 
-    void SparseMatrix::reserve(unsigned nonZeroElements)
-    {
-        if (nonZeroElements <= m_allocatedSize) return; //do nothing
-
-        m_values.reserve(nonZeroElements);
-        m_innerIndeces.reserve(nonZeroElements);
-        m_allocatedSize = nonZeroElements;
-
-    }
-
-    void SparseMatrix::zero()
-    {
-        //zero: simply clear
-        m_values.resize(0);
-        m_innerIndeces.resize(0);
-        m_outerStarts.resize(0);
-    }
-
-
-    void SparseMatrix::setFromConstTriplets(const iDynTree::Triplets& triplets)
-    {
-        iDynTree::Triplets copy(triplets);
-        setFromTriplets(copy);
-    }
-
-    void SparseMatrix::setFromTriplets(iDynTree::Triplets& triplets)
+    template <>
+    void SparseMatrix<iDynTree::RowMajor>::setFromTriplets(iDynTree::Triplets& triplets)
     {
         if (triplets.size() == 0) return;
 
@@ -209,7 +413,7 @@ namespace iDynTree {
         //Note: find is useless if array is sorted
         //Resize to maximum value. Will shrink at the end
         m_values.resize(triplets.size());
-        m_innerIndeces.resize(triplets.size());
+        m_innerIndices.resize(triplets.size());
         m_outerStarts.assign(m_rows + 1, 0); //reset vector
 
 
@@ -244,7 +448,7 @@ namespace iDynTree {
                 lastRow = iterator->row;
             }
             m_values(innerIndex) = iterator->value;
-            m_innerIndeces[innerIndex] = iterator->column;
+            m_innerIndices[innerIndex] = iterator->column;
             lastIndex = innerIndex;
             //increment index as this should always point to the next element
             ++innerIndex;
@@ -261,228 +465,204 @@ namespace iDynTree {
 
         //Shrink containers
         m_values.resize(innerIndex);
-        m_innerIndeces.resize(innerIndex);
+        m_innerIndices.resize(innerIndex);
 
     }
 
-    SparseMatrix SparseMatrix::sparseMatrixFromTriplets(unsigned rows,
-                                                        unsigned cols,
-                                                        const iDynTree::Triplets& nonZeroElements)
+    template <>
+    template <>
+    SparseMatrix<iDynTree::RowMajor>::SparseMatrix(const SparseMatrix<iDynTree::ColumnMajor>& other)
+    : m_allocatedSize(0)
+    , m_rows(other.rows())
+    , m_columns(other.columns())
     {
-        SparseMatrix newMatrix(rows, cols);
-        newMatrix.setFromConstTriplets(nonZeroElements);
-        return newMatrix;
+        iDynTree::Triplets oldTriplets;
+        oldTriplets.reserve(other.numberOfNonZeros());
+        oldTriplets.addSubMatrix(0, 0, other);
+
+        setFromTriplets(oldTriplets);
     }
 
-    unsigned SparseMatrix::rows() const { return m_rows; }
-    unsigned SparseMatrix::columns() const { return m_columns; }
+    template <>
+    template <>
+    SparseMatrix<iDynTree::RowMajor>& SparseMatrix<iDynTree::RowMajor>::operator=(const SparseMatrix<iDynTree::ColumnMajor>& other)
+    {
+        resize(other.rows(), other.columns());
+        iDynTree::Triplets oldTriplets;
+        oldTriplets.reserve(other.numberOfNonZeros());
+        oldTriplets.addSubMatrix(0, 0, other);
 
-    double SparseMatrix::operator()(unsigned int row, unsigned int col) const
+        setFromTriplets(oldTriplets);
+
+        return *this;
+    }
+
+    // MARK: - Column-Major implementation
+    template <>
+    SparseMatrix<iDynTree::ColumnMajor>::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
+    : m_allocatedSize(0)
+    , m_rows(rows)
+    , m_columns(cols)
+    {
+        initializeMatrix(cols, memoryReserveDescription.data(), memoryReserveDescription.size());
+    }
+
+    template <>
+    double SparseMatrix<iDynTree::ColumnMajor>::operator()(unsigned int row, unsigned int col) const
     {
         assert(row >= 0 && row < rows()
                && col >= 0 && col < columns());
 
         unsigned index = 0;
         double value = 0;
-        if (valueIndex(row, col, index)) {
+        if (valueIndexForOuterAndInnerIndices(col, row, index)) {
             value = m_values(index);
         }
         return value;
     }
 
-    double& SparseMatrix::operator()(unsigned int row, unsigned int col)
+    template <>
+    double& SparseMatrix<iDynTree::ColumnMajor>::operator()(unsigned int row, unsigned int col)
     {
         assert(row >= 0 && row < rows()
                && col >= 0 && col < columns());
 
         unsigned index = 0;
-        if (valueIndex(row, col, index)) {
+        if (valueIndexForOuterAndInnerIndices(col, row, index)) {
             return m_values(index);
         } else {
-            return m_values(insert(row, col, 0));
+            return m_values(insert(col, row, 0));
         }
     }
 
-    double * SparseMatrix::valuesBuffer() { return m_values.data(); }
-
-    double const * SparseMatrix::valuesBuffer() const { return m_values.data(); }
-
-    int * SparseMatrix::innerIndecesBuffer()
+    template <>
+    void SparseMatrix<iDynTree::ColumnMajor>::resize(unsigned rows, unsigned columns, const iDynTree::VectorDynSize &columnNNZInformation)
     {
-        return m_innerIndeces.data();
+        //Avoid destroying the matrix if the size is the same
+        if (m_rows == rows && m_columns == columns)
+            return;
+
+        m_rows = rows;
+        m_columns = columns;
+
+        initializeMatrix(columns, columnNNZInformation.data(), columnNNZInformation.size());
     }
 
-    int const * SparseMatrix::innerIndecesBuffer() const
+    template <>
+    void SparseMatrix<iDynTree::ColumnMajor>::setFromTriplets(iDynTree::Triplets& triplets)
     {
-        return m_innerIndeces.data();
-    }
+        if (triplets.size() == 0) return;
 
-    int * SparseMatrix::outerIndecesBuffer()
-    {
-        return m_outerStarts.data();
-    }
+        //Get number of NZ and reserve buffers O(1) : size of compressed vector
+        //We can overestimate with the size of triplets
+        reserve(triplets.size());
 
-    int const * SparseMatrix::outerIndecesBuffer() const
-    {
-        return m_outerStarts.data();
-    }
+        //Fastest way is to order by row and column N*log2(N)
+        std::sort(triplets.begin(), triplets.end(), Triplet::columnMajorCompare);
 
-    std::string SparseMatrix::description(bool fullMatrix) const
-    {
-        std::ostringstream stream;
-        if (!fullMatrix) {
-            for (const_iterator it = begin(); it != end(); ++it) {
-                stream << it->value << "(" << it->row << ", " << it->column << ") ";
+        //now is a simple insert O(N) +
+        //find to remove duplicates
+        //Note: find is useless if array is sorted
+        //Resize to maximum value. Will shrink at the end
+        m_values.resize(triplets.size());
+        m_innerIndices.resize(triplets.size());
+        m_outerStarts.assign(m_columns + 1, 0); //reset vector
+
+
+        unsigned lastRow = 0;
+        unsigned lastColumn = 0;
+        unsigned innerIndex = 0;
+        unsigned lastIndex = innerIndex;
+        m_values(0) = 0; //initialize the first element
+
+        for (std::vector<Triplet>::const_iterator iterator(triplets.begin());
+             iterator != triplets.end(); ++iterator) {
+            // As triplets are ordered, only subsequent elements can be equal
+            if (lastRow == iterator->row && lastColumn == iterator->column) {
+                //Adjust for the first element
+                //this should happen only the first time
+                m_values(lastIndex) += iterator->value;
+                //innerIndex should point to the next element
+                //If the next element is at the same position, innerIndex will be ignored,
+                //otherwise it will point to the next (free) element
+                innerIndex = lastIndex + 1;
+                continue;
             }
-        } else {
-            for (unsigned row = 0; row < rows(); ++row) {
-                for (unsigned col = 0; col < columns(); ++col) {
-                    unsigned index = 0;
-                    if (!valueIndex(row, col, index)) {
-                        stream << "0 ";
-                    } else {
-                        stream << m_values(index) << " ";
-                    }
+
+
+            //if current row is different from lastRow
+            //I have to update the outerStarts vector
+            if (lastColumn != iterator->column) {
+                for (std::vector<int>::iterator outerIt(m_outerStarts.begin() + lastColumn + 1);
+                     outerIt <= m_outerStarts.begin() + iterator->column; ++outerIt) {
+                    *outerIt = innerIndex;
                 }
-                stream << std::endl;
+                lastColumn = iterator->column;
+            }
+            m_values(innerIndex) = iterator->value;
+            m_innerIndices[innerIndex] = iterator->row;
+            lastIndex = innerIndex;
+            //increment index as this should always point to the next element
+            ++innerIndex;
+            lastRow = iterator->row;
+
+        }
+        if (lastColumn < m_columns) {
+            for (std::vector<int>::iterator outerIt(m_outerStarts.begin() + lastColumn + 1);
+                 outerIt < m_outerStarts.end(); ++outerIt) {
+                *outerIt = innerIndex;
             }
 
         }
-        return stream.str();
+
+        //Shrink containers
+        m_values.resize(innerIndex);
+        m_innerIndices.resize(innerIndex);
+
     }
 
-#ifndef NDEBUG
-    std::string SparseMatrix::internalDescription() const
+    template <>
+    template <>
+    SparseMatrix<iDynTree::ColumnMajor>::SparseMatrix(const SparseMatrix<iDynTree::RowMajor>& other)
+    : m_allocatedSize(0)
+    , m_rows(other.rows())
+    , m_columns(other.columns())
     {
-        std::ostringstream stream;
-        stream << "Values: \n";
-        for (unsigned i = 0; i < m_values.size(); ++i) {
-            stream << m_values(i) << " ";
-        }
-        stream << "\nInner indeces: \n";
-        for (unsigned i = 0; i < m_values.size(); ++i) {
-            stream << m_innerIndeces[i] << " ";
-        }
-        stream << "\nOuter indeces: \n";
-        for (unsigned i = 0; i < m_rows + 1; ++i) {
-            stream << m_outerStarts[i] << " ";
-        }
-        stream << "\n";
-        return stream.str();
-    }
-#endif
+        iDynTree::Triplets oldTriplets;
+        oldTriplets.reserve(other.numberOfNonZeros());
+        oldTriplets.addSubMatrix(0, 0, other);
 
-    SparseMatrix::iterator SparseMatrix::begin()
+        setFromTriplets(oldTriplets);
+    }
+
+    template <>
+    template <>
+    SparseMatrix<iDynTree::ColumnMajor>& SparseMatrix<iDynTree::ColumnMajor>::operator=(const SparseMatrix<iDynTree::RowMajor>& other)
     {
-        return iterator(*this);
+        resize(other.rows(), other.columns());
+        iDynTree::Triplets oldTriplets;
+        oldTriplets.reserve(other.numberOfNonZeros());
+        oldTriplets.addSubMatrix(0, 0, other);
+
+        setFromTriplets(oldTriplets);
+
+        return *this;
     }
 
-    SparseMatrix::const_iterator SparseMatrix::begin() const
-    {
-        return const_iterator(*this);
-    }
+    // MARK: - Iterator implementation
 
-    SparseMatrix::iterator SparseMatrix::end()
-    {
-        iterator it(*this, false);
-        (&it)->m_index = -1;
-        return it;
-    }
-
-    SparseMatrix::const_iterator SparseMatrix::end() const
-    {
-        const_iterator it(*this, false);
-        (&it)->m_index = -1;
-        return it;
-    }
-
-    void SparseMatrix::convertToColumnMajor(double *values, int *innerBuffer, int *outerBuffer) const
-    {
-        //empty matrix
-        if (m_values.size() == 0) return;
-
-        //assume buffers are allocated correctly
-        //reset outer buffer
-        std::memset(outerBuffer, 0, sizeof(int) * (m_columns + 1));
-
-        //Insert each element by looking for the correct position
-        //sorted insertion => O(N logN)
-        //This is equivalent to a sort :)
-        //The only think is that we sort a temporary array as we have to keep track
-        //of the values assosiated with the column
-        std::vector<Triplet> colMajorInnerContainer;
-        colMajorInnerContainer.reserve(m_values.size());
-
-        for (const_iterator it(begin()); it != end(); ++it) {
-            colMajorInnerContainer.push_back(Triplet(it->row, it->column, it->value));
-        }
-
-        std::sort(colMajorInnerContainer.begin(), colMajorInnerContainer.end(), Triplet::columnMajorCompare);
-
-        //Now we iterate on the vector and fill the outputs
-        //We can directly fill the values and the row index
-        std::vector<Triplet>::iterator it(colMajorInnerContainer.begin());
-        std::vector<Triplet>::iterator begin = it;
-        unsigned currentColumn = begin->column;
-        unsigned currentNNZ = 0;
-        for (; it != colMajorInnerContainer.end(); ++it) {
-            unsigned index = std::distance(begin, it);
-            currentNNZ++;
-
-            if (currentColumn != it->column) {
-                //this column is different from the previous one
-                //Copy the current NNZ to all the columns till the new one
-                //And start counting again the NNZ
-                for (unsigned col = currentColumn + 1; col <= it->column; ++col) {
-                    outerBuffer[col] = currentNNZ-1;
-                }
-                currentColumn = it->column;
-            }
-
-            values[index] = it->value;
-            innerBuffer[index] = it->row;
-        }
-        //update last value
-        outerBuffer[columns()] = currentNNZ;
-    }
-
-    void SparseMatrix::convertFromColumnMajor(unsigned rows,
-                                              unsigned columns,
-                                              unsigned numberOfNonZeros,
-                                              double * const values,
-                                              int * const innerBuffer,
-                                              int * const outerBuffer)
-    {
-        //reset size
-        resize(rows, columns);
-
-        //iterate over all values and fill a triplet list
-        Triplets triplets;
-        triplets.reserve(numberOfNonZeros);
-
-        for (unsigned col = 0; col < columns; ++col) {
-            //iterate over the rows nz
-            for (int innerIndex = outerBuffer[col]; innerIndex < outerBuffer[col + 1]; ++innerIndex) {
-                triplets.pushTriplet(Triplet(innerBuffer[innerIndex], col, values[innerIndex]));
-            }
-        }
-
-        setFromTriplets(triplets);
-
-    }
-
-    // Iterator implementation
-
-    SparseMatrix::Iterator::TripletRef::TripletRef(unsigned row, unsigned column, double *value)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    SparseMatrix<ordering>::Iterator::TripletRef::TripletRef(unsigned row, unsigned column, double *value)
     : m_row(row)
     , m_column(column)
     , m_value(value) {}
 
-    SparseMatrix::Iterator::Iterator(iDynTree::SparseMatrix &matrix, bool valid)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    SparseMatrix<ordering>::Iterator::Iterator(iDynTree::SparseMatrix<ordering> &matrix, bool valid)
     : m_matrix(matrix)
     , m_index(-1)
     , m_currentTriplet(-1, -1, 0)
-    , m_nonZerosInRow(1) //to initialize the counter
+    , m_nonZerosInOuterDirection(1) //to initialize the counter
     {
         if (matrix.m_values.size() == 0 || !valid) return;
         m_index = 0;
@@ -490,29 +670,14 @@ namespace iDynTree {
         updateTriplet();
     }
 
-    void SparseMatrix::Iterator::updateTriplet()
+    template <iDynTree::MatrixStorageOrdering ordering>
+    void SparseMatrix<ordering>::Iterator::updateTriplet()
     {
-        m_currentTriplet.m_value = &(m_matrix.m_values(m_index));
-        m_currentTriplet.m_column = m_matrix.m_innerIndeces[m_index];
-
-        if (--m_nonZerosInRow <= 0) {
-            //increment row
-            m_currentTriplet.m_row++;
-            while (static_cast<unsigned>(m_currentTriplet.m_row) < m_matrix.rows()) {
-                //compute row NNZ
-                m_nonZerosInRow = m_matrix.m_outerStarts[m_currentTriplet.m_row + 1]
-                - m_matrix.m_outerStarts[m_currentTriplet.m_row];
-                if (m_nonZerosInRow > 0)
-                    break;
-
-                //increment row
-                m_currentTriplet.m_row++;
-            }
-        }
-
+        assert(false);
     }
 
-    SparseMatrix::Iterator& SparseMatrix::Iterator::operator++()
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::Iterator& SparseMatrix<ordering>::Iterator::operator++()
     {
         if (m_index < 0) {
             //Iterator is not valid. We do nothing
@@ -529,7 +694,8 @@ namespace iDynTree {
         return *this;
     }
 
-    SparseMatrix::Iterator SparseMatrix::Iterator::operator++(int)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::Iterator SparseMatrix<ordering>::Iterator::operator++(int)
     {
         if (m_index < 0) {
             //Iterator is not valid. We do nothing
@@ -540,39 +706,89 @@ namespace iDynTree {
         return newIterator;
     }
 
-    bool SparseMatrix::Iterator::operator==(const Iterator &it) const
+    template <iDynTree::MatrixStorageOrdering ordering>
+    bool SparseMatrix<ordering>::Iterator::operator==(const Iterator &it) const
     {
         return &m_matrix == &((&it)->m_matrix) //check that we are pointing to the same matrix
         && m_index == it.m_index;
     }
 
-    bool SparseMatrix::Iterator::operator==(const ConstIterator &it) const
+    template <iDynTree::MatrixStorageOrdering ordering>
+    bool SparseMatrix<ordering>::Iterator::operator==(const ConstIterator &it) const
     {
         return &m_matrix == &((&it)->m_matrix) //check that we are pointing to the same matrix
         && m_index == it.m_index;
     }
 
-    SparseMatrix::Iterator::reference SparseMatrix::Iterator::operator*()
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::Iterator::reference SparseMatrix<ordering>::Iterator::operator*()
     {
         return m_currentTriplet;
     }
 
-    SparseMatrix::Iterator::pointer SparseMatrix::Iterator::operator->()
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::Iterator::pointer SparseMatrix<ordering>::Iterator::operator->()
     {
         return &m_currentTriplet;
     }
-    
-    bool SparseMatrix::Iterator::isValid() const
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    bool SparseMatrix<ordering>::Iterator::isValid() const
     {
         return m_index >= 0
         && true; //TODO: check if we are < than end or >= begin
     }
 
-    SparseMatrix::ConstIterator::ConstIterator(const iDynTree::SparseMatrix &matrix, bool valid)
+    template <>
+    void SparseMatrix<iDynTree::RowMajor>::Iterator::updateTriplet()
+    {
+        m_currentTriplet.m_value = &(m_matrix.m_values(m_index));
+        m_currentTriplet.m_column = m_matrix.m_innerIndices[m_index];
+
+        if (--m_nonZerosInOuterDirection <= 0) {
+            //increment row
+            m_currentTriplet.m_row++;
+            while (static_cast<unsigned>(m_currentTriplet.m_row) < m_matrix.rows()) {
+                //compute row NNZ
+                m_nonZerosInOuterDirection = m_matrix.m_outerStarts[m_currentTriplet.m_row + 1]
+                - m_matrix.m_outerStarts[m_currentTriplet.m_row];
+                if (m_nonZerosInOuterDirection > 0)
+                    break;
+
+                //increment row
+                m_currentTriplet.m_row++;
+            }
+        }
+    }
+
+    template <>
+    void SparseMatrix<iDynTree::ColumnMajor>::Iterator::updateTriplet()
+    {
+        m_currentTriplet.m_value = &(m_matrix.m_values(m_index));
+        m_currentTriplet.m_row = m_matrix.m_innerIndices[m_index];
+
+        if (--m_nonZerosInOuterDirection <= 0) {
+            m_currentTriplet.m_column++;
+            while (static_cast<unsigned>(m_currentTriplet.m_column) < m_matrix.columns()) {
+                //compute row NNZ
+                m_nonZerosInOuterDirection = m_matrix.m_outerStarts[m_currentTriplet.m_column + 1]
+                - m_matrix.m_outerStarts[m_currentTriplet.m_column];
+                if (m_nonZerosInOuterDirection > 0)
+                    break;
+
+                //increment row
+                m_currentTriplet.m_column++;
+            }
+        }
+    }
+
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    SparseMatrix<ordering>::ConstIterator::ConstIterator(const iDynTree::SparseMatrix<ordering> &matrix, bool valid)
     : m_matrix(matrix)
     , m_index(-1)
     , m_currentTriplet(-1, -1, 0)
-    , m_nonZerosInRow(1) //to initialize the counter
+    , m_nonZerosInOuterDirection(1) //to initialize the counter
     {
         if (matrix.m_values.size() == 0 || !valid) return;
         m_index = 0;
@@ -580,25 +796,33 @@ namespace iDynTree {
         updateTriplet();
     }
 
-    SparseMatrix::ConstIterator::ConstIterator(const SparseMatrix::Iterator& iterator)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    SparseMatrix<ordering>::ConstIterator::ConstIterator(const typename SparseMatrix<ordering>::Iterator& iterator)
     : m_matrix(iterator.m_matrix)
     , m_index(iterator.m_index)
     , m_currentTriplet(iterator.m_currentTriplet.row(), iterator.m_currentTriplet.column(), iterator.isValid() ? iterator.m_currentTriplet.value() : 0)
-    , m_nonZerosInRow(iterator.m_nonZerosInRow) { }
+    , m_nonZerosInOuterDirection(iterator.m_nonZerosInOuterDirection) { }
 
-    void SparseMatrix::ConstIterator::updateTriplet()
+    template <iDynTree::MatrixStorageOrdering ordering>
+    void SparseMatrix<ordering>::ConstIterator::updateTriplet()
+    {
+        assert(false);
+    }
+
+    template <>
+    void SparseMatrix<iDynTree::RowMajor>::ConstIterator::updateTriplet()
     {
         m_currentTriplet.value = m_matrix.m_values(m_index);
-        m_currentTriplet.column = m_matrix.m_innerIndeces[m_index];
+        m_currentTriplet.column = m_matrix.m_innerIndices[m_index];
 
-        if (--m_nonZerosInRow <= 0) {
+        if (--m_nonZerosInOuterDirection <= 0) {
             //increment row
             m_currentTriplet.row++;
             while (static_cast<unsigned>(m_currentTriplet.row) < m_matrix.rows()) {
                 //compute row NNZ
-                m_nonZerosInRow = m_matrix.m_outerStarts[m_currentTriplet.row + 1]
+                m_nonZerosInOuterDirection = m_matrix.m_outerStarts[m_currentTriplet.row + 1]
                 - m_matrix.m_outerStarts[m_currentTriplet.row];
-                if (m_nonZerosInRow > 0)
+                if (m_nonZerosInOuterDirection > 0)
                     break;
 
                 //increment row
@@ -607,7 +831,30 @@ namespace iDynTree {
         }
     }
 
-    SparseMatrix::ConstIterator& SparseMatrix::ConstIterator::operator++()
+    template <>
+    void SparseMatrix<iDynTree::ColumnMajor>::ConstIterator::updateTriplet()
+    {
+        m_currentTriplet.value = m_matrix.m_values(m_index);
+        m_currentTriplet.row = m_matrix.m_innerIndices[m_index];
+
+        if (--m_nonZerosInOuterDirection <= 0) {
+            //increment row
+            m_currentTriplet.column++;
+            while (static_cast<unsigned>(m_currentTriplet.column) < m_matrix.columns()) {
+                //compute row NNZ
+                m_nonZerosInOuterDirection = m_matrix.m_outerStarts[m_currentTriplet.column + 1]
+                - m_matrix.m_outerStarts[m_currentTriplet.column];
+                if (m_nonZerosInOuterDirection > 0)
+                    break;
+
+                //increment row
+                m_currentTriplet.column++;
+            }
+        }
+    }
+
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::ConstIterator& SparseMatrix<ordering>::ConstIterator::operator++()
     {
         if (m_index < 0) {
             //Iterator is not valid. We do nothing
@@ -624,7 +871,8 @@ namespace iDynTree {
         return *this;
     }
 
-    SparseMatrix::ConstIterator SparseMatrix::ConstIterator::operator++(int)
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::ConstIterator SparseMatrix<ordering>::ConstIterator::operator++(int)
     {
         if (m_index < 0) {
             //Iterator is not valid. We do nothing
@@ -635,32 +883,42 @@ namespace iDynTree {
         return newIterator;
     }
 
-    bool SparseMatrix::ConstIterator::operator==(const ConstIterator &it) const
+    template <iDynTree::MatrixStorageOrdering ordering>
+    bool SparseMatrix<ordering>::ConstIterator::operator==(const ConstIterator &it) const
     {
         return &m_matrix == &((&it)->m_matrix) //check that we are pointing to the same matrix
         && m_index == it.m_index;
     }
 
-    bool SparseMatrix::ConstIterator::operator==(const Iterator &it) const
+    template <iDynTree::MatrixStorageOrdering ordering>
+    bool SparseMatrix<ordering>::ConstIterator::operator==(const Iterator &it) const
     {
         return &m_matrix == &((&it)->m_matrix) //check that we are pointing to the same matrix
         && m_index == it.m_index;
     }
-
-    SparseMatrix::ConstIterator::reference SparseMatrix::ConstIterator::operator*()
+    
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::ConstIterator::reference SparseMatrix<ordering>::ConstIterator::operator*()
     {
         return m_currentTriplet;
     }
-
-    SparseMatrix::ConstIterator::pointer SparseMatrix::ConstIterator::operator->()
+    
+    template <iDynTree::MatrixStorageOrdering ordering>
+    typename SparseMatrix<ordering>::ConstIterator::pointer SparseMatrix<ordering>::ConstIterator::operator->()
     {
         return &m_currentTriplet;
     }
-
-    bool SparseMatrix::ConstIterator::isValid() const
+    
+    template <iDynTree::MatrixStorageOrdering ordering>
+    
+    bool SparseMatrix<ordering>::ConstIterator::isValid() const
     {
         return m_index >= 0
         && true; //TODO: check if we are < than end or >= begin
     }
-
+    
 }
+
+// MARK: - Explicit instantiation of available templates
+template class iDynTree::SparseMatrix<iDynTree::RowMajor>;
+template class iDynTree::SparseMatrix<iDynTree::ColumnMajor>;

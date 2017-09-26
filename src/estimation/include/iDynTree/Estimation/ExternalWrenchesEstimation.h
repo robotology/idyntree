@@ -25,7 +25,7 @@
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/VectorFixSize.h>
 
-#include <iDynTree/Model/Indeces.h>
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/LinkState.h>
 
 #include <vector>
@@ -61,7 +61,12 @@ enum UnknownWrenchContactType
     /**
      * Contact assumed to be a pure force with a known direction excerted on the contact point
      */
-    PURE_FORCE_WITH_KNOWN_DIRECTION
+    PURE_FORCE_WITH_KNOWN_DIRECTION,
+
+    /**
+     * The contact forces is assumed to be known.
+     */
+    NO_UNKNOWNS
 };
 
 
@@ -82,12 +87,14 @@ struct UnknownWrenchContact
     {}
 
     UnknownWrenchContact(const UnknownWrenchContactType _unknownType,
-                         const Position & _contactPoint,
+                         const Position  & _contactPoint,
                          const Direction & _forceDirection = iDynTree::Direction::Default(),
+                         const Wrench    & _knownWrench = iDynTree::Wrench(),
                          const unsigned long & _contactId = 0): unknownType(_unknownType),
-                                                                          contactPoint(_contactPoint),
-                                                                          forceDirection(_forceDirection),
-                                                                          contactId(_contactId)
+                                                                contactPoint(_contactPoint),
+                                                                forceDirection(_forceDirection),
+                                                                knownWrench(_knownWrench),
+                                                                contactId(_contactId)
     {}
 
     /**
@@ -105,6 +112,13 @@ struct UnknownWrenchContact
      * contains the known direction (in link frame) of the force.
      */
     Direction forceDirection;
+
+    /**
+     * If unknownType is NO_UNKNOWNS,
+     * contains the value of the contact force, with the orientation of the link frame,
+     * and w.r.t. to the origin of the link frame, i.e. it ignores the contactPoint attribute.
+     */
+    Wrench knownWrench;
 
     /**
      * Unique id identifing the contact.
@@ -389,7 +403,7 @@ bool dynamicsEstimationForwardVelKinematics(const Model & model,
                                                   LinkVelArray & linkVel);
 
 /**
- * \brief Compute the net external wrenches (excluding gravity forces) acting on the links.
+ * \brief Compute the net internal and external wrenches (excluding gravity forces) acting on the links.
  * @param[in] model the input model
  * @param[in] linkVel a vector of link twists, expressed w.r.t to the link orientation and the link origin
  * @param[in] linkProperAcc a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin
@@ -400,6 +414,19 @@ bool computeLinkNetWrenchesWithoutGravity(const Model& model,
                                           const LinkAccArray & linkProperAcc,
                                                 LinkNetTotalWrenchesWithoutGravity& linkNetWrenchesWithoutGravity);
 
+/**
+ * Compute the link contact wrenches from the net external wrenches
+ *
+ * If there are more than 6 unknows for link, the problem becomes ill-defined
+ * and the function just assign all the external wrench to the first contact.
+ * \todo(traversaro): support arbitrary LinkUnknownWrenchContacts by performing
+ *                    a least square fitting, similar to what implemented in
+ *                    the estimateExternalWrenches .
+ */
+bool estimateLinkContactWrenchesFromLinkNetExternalWrenches(const Model& model,
+                                                            const LinkUnknownWrenchContacts& unknownWrenches,
+                                                            const LinkNetExternalWrenches& netExtWrenches,
+                                                                  LinkContactWrenches & outputContactWrenches);
 
 }
 

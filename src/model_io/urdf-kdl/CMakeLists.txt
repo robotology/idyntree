@@ -13,8 +13,8 @@ else()
     find_package(urdfdom_headers REQUIRED)
     find_package(urdfdom REQUIRED)
     find_package(Boost REQUIRED)
-    # urdfdom_headers_VERSION is defined for all the versions of urdfdom_headers 
-    # that provide their own typedefs, so we need to redefine them only 
+    # urdfdom_headers_VERSION is defined for all the versions of urdfdom_headers
+    # that provide their own typedefs, so we need to redefine them only
     # for urdfdom_headers <= 0.4, that incidentally do not define urdfdom_headers_VERSION
     if (NOT(DEFINED urdfdom_headers_VERSION))
         add_definitions(-DURDF_REDEFINE_BOOST_PTR_TYPEDEFS)
@@ -50,6 +50,10 @@ include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+
+if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
+    target_compile_options(${libraryname} PRIVATE "-Wno-deprecated")
+endif()
 
 target_link_libraries(${libraryname} idyntree-core
                                      idyntree-model

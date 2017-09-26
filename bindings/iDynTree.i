@@ -26,6 +26,7 @@
 
 %{
 /* Note : always include headers following the inheritance order */
+#include <cmath>
 
 //Utils
 #include "iDynTree/Core/Utils.h"
@@ -72,7 +73,7 @@
 #include "iDynTree/Core/TransformDerivative.h"
 
 // Model related data structures
-#include "iDynTree/Model/Indeces.h"
+#include "iDynTree/Model/Indices.h"
 #include "iDynTree/Model/LinkState.h"
 #include "iDynTree/Model/Link.h"
 #include "iDynTree/Model/IJoint.h"
@@ -109,6 +110,7 @@
 #include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
 #include "iDynTree/Estimation/SimpleLeggedOdometry.h"
 #include "iDynTree/Estimation/BerdyHelper.h"
+#include "iDynTree/Estimation/BerdySparseMAPSolver.h"
 
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
@@ -139,6 +141,9 @@ namespace std {
 %include "iDynTree/Core/MatrixDynSize.h"
 %include "iDynTree/Core/MatrixFixSize.h"
 %include "iDynTree/Core/SparseMatrix.h"
+%template(SparseMatrixRowMajor) iDynTree::SparseMatrix<iDynTree::RowMajor>;
+%template(SparseMatrixColMajor) iDynTree::SparseMatrix<iDynTree::ColumnMajor>;
+
 
 %include "iDynTree/Core/VectorDynSize.h"
 %include "iDynTree/Core/VectorFixSize.h"
@@ -151,6 +156,8 @@ namespace std {
 %include "./octave/octave_matvec.i"
 #endif
 
+%template(Matrix1x6) iDynTree::MatrixFixSize<1,6>;
+%template(Matrix2x3) iDynTree::MatrixFixSize<2,3>;
 %template(Matrix3x3) iDynTree::MatrixFixSize<3,3>;
 %template(Matrix4x4) iDynTree::MatrixFixSize<4,4>;
 %template(Matrix6x6) iDynTree::MatrixFixSize<6,6>;
@@ -249,7 +256,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 
 // Model related data structures
-%include "iDynTree/Model/Indeces.h"
+%include "iDynTree/Model/Indices.h"
 %include "iDynTree/Model/LinkState.h"
 %include "iDynTree/Model/Link.h"
 %include "iDynTree/Model/IJoint.h"
@@ -298,6 +305,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
 %include "iDynTree/Estimation/SimpleLeggedOdometry.h"
 %include "iDynTree/Estimation/BerdyHelper.h"
+%include "iDynTree/Estimation/BerdySparseMAPSolver.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"
@@ -311,4 +319,3 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // Legacy high level interfaces
 %include "iDynTree/HighLevel/DynamicsComputations.h"
-
