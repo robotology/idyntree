@@ -670,6 +670,25 @@ bool estimateExternalWrenches(const Model& model,
         // Now we compute the unknowns
         toEigen(bufs.x[sm]) = toEigen(bufs.pinvA[sm])*toEigen(bufs.b[sm]);
 
+        // Check if there are any nan in the estimation results
+        bool someResultIsNan = false;
+        for(size_t i=0; i < bufs.x[sm].size(); i++)
+        {
+            if( std::isnan(bufs.x[sm](i)) )
+            {
+                someResultIsNan = true;
+            }
+        }
+
+        if (someResultIsNan)
+        {
+            reportError("", "estimateExternalWrenches", "NaN found in estimation result, estimation failed");
+            std::cerr << "A: " << std::endl << toEigen(bufs.A[sm]) << std::endl;
+            std::cerr << "x "  << std::endl << toEigen(bufs.x[sm]) << std::endl;
+            std::cerr << "b "  << std::endl << toEigen(bufs.b[sm]) << std::endl;
+            return false;
+        }
+
         // We copy the estimated unknowns in the outputContactWrenches
         // Note that the logic of conversion between input/output contacts should be
         // the same used before in computeMatrixOfEstimationEquation
