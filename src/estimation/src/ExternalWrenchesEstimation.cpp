@@ -684,9 +684,6 @@ bool estimateExternalWrenches(const Model& model,
         if (someResultIsNan)
         {
             reportError("", "estimateExternalWrenches", "NaN found in estimation result, estimation failed");
-            std::cerr << "A: " << std::endl << toEigen(bufs.A[sm]) << std::endl;
-            std::cerr << "x "  << std::endl << toEigen(bufs.x[sm]) << std::endl;
-            std::cerr << "b "  << std::endl << toEigen(bufs.b[sm]) << std::endl;
             return false;
         }
 
