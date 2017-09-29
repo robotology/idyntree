@@ -20,6 +20,24 @@ void validateSkewUnskew(const Vector3 randVec)
     ASSERT_EQUAL_VECTOR(randVec,randVecCheck);
 }
 
+void testSpatialVectors()
+{
+    SpatialForceVector zeroVector;
+    zeroVector.zero();
+
+    for (size_t i = 0; i < zeroVector.size(); ++i) {
+        ASSERT_EQUAL_DOUBLE(zeroVector(i), 0);
+    }
+
+    // now change the number
+    // But as the method is read-only, this should not actually change the initial value
+    toEigen(zeroVector).setConstant(3.14);
+    for (size_t i = 0; i < zeroVector.size(); ++i) {
+        ASSERT_EQUAL_DOUBLE(zeroVector(i), 0);
+    }
+
+}
+
 int main()
 {
     Vector3 vec;
@@ -29,6 +47,9 @@ int main()
     vec(2) = 3;
 
     validateSkewUnskew(vec);
+
+    testSpatialVectors();
+
 
     return EXIT_SUCCESS;
 }
