@@ -101,7 +101,7 @@ inline Eigen::Map< const Eigen::Matrix<double,nRows,nCols,Eigen::RowMajor> > toE
 }
 
 // Spatial vectors
-inline Eigen::Matrix<double,6,1> toEigen(const SpatialMotionVector & vec)
+inline const Eigen::Matrix<double,6,1> toEigen(const SpatialMotionVector & vec)
 {
     Eigen::Matrix<double,6,1> ret;
 
@@ -111,7 +111,7 @@ inline Eigen::Matrix<double,6,1> toEigen(const SpatialMotionVector & vec)
     return ret;
 }
 
-inline Eigen::Matrix<double,6,1> toEigen(const SpatialForceVector & vec)
+inline const Eigen::Matrix<double,6,1> toEigen(const SpatialForceVector & vec)
 {
     Eigen::Matrix<double,6,1> ret;
 

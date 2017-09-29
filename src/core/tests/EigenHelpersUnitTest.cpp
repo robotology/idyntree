@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2016 Fondazione Istituto Italiano di Tecnologia
- * Authors: Silvio Traversaro
+ * Copyright (C) 2017 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Francesco Romano, Silvio Traversaro
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  *
  */
@@ -28,14 +28,6 @@ void testSpatialVectors()
     for (size_t i = 0; i < zeroVector.size(); ++i) {
         ASSERT_EQUAL_DOUBLE(zeroVector(i), 0);
     }
-
-    // now change the number
-    // But as the method is read-only, this should not actually change the initial value
-    toEigen(zeroVector).setConstant(3.14);
-    for (size_t i = 0; i < zeroVector.size(); ++i) {
-        ASSERT_EQUAL_DOUBLE(zeroVector(i), 0);
-    }
-
 }
 
 int main()
