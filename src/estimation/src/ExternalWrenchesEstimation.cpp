@@ -677,6 +677,7 @@ bool estimateExternalWrenches(const Model& model,
             if( std::isnan(bufs.x[sm](i)) )
             {
                 someResultIsNan = true;
+                break;
             }
         }
 
