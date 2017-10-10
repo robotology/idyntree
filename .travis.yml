@@ -37,6 +37,9 @@ before_script:
   - cmake --version
   - cd ..
   
+  # Update homebrew on osx
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
+  
   # Install ccache on osx
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ccache; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PATH="/usr/local/opt/ccache/libexec:$PATH"; fi
