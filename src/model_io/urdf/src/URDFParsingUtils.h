@@ -45,6 +45,16 @@ bool inline stringToUnsignedIntWithClassicLocale(const std::string & inStr, unsi
     return !(ss.fail());
 }
 
+bool inline doubleToStringWithClassicLocale(const double & inDouble, std::string& outStr)
+{
+    std::ostringstream ss;
+    ss.imbue(std::locale::classic());
+    ss << inDouble;
+    outStr = ss.str();
+    return !(ss.fail());
+}
+
+
 std::string inline intToString(const int inInt)
 {
     std::stringstream ss;
@@ -112,6 +122,27 @@ bool inline vector3FromString(const std::string & vector_str, Vector3 & out)
     out(2) = xyz[2];
 
     return true;
+}
+
+template<typename iDynTreeVectorType>
+bool inline vectorToString(const iDynTreeVectorType & in, std::string & out_str)
+{
+    std::stringstream ss;
+    bool ok = true;
+    for (unsigned int i = 0; i < in.size(); ++i)
+    {
+        std::string bufStr;
+        ok = ok && doubleToStringWithClassicLocale(in(i), bufStr);
+        if (i != 0)
+        {
+            ss << " ";
+        }
+        ss << bufStr;
+    }
+
+    out_str = ss.str();
+
+    return ok;
 }
 
 

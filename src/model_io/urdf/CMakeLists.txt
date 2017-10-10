@@ -4,12 +4,16 @@
 
 project(iDynTree_ModelIO_URDF CXX)
 
-set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFModelImport.h
+idyntree_enable_cxx11()
+
+set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFModelExport.h
+                                  include/iDynTree/ModelIO/URDFModelImport.h
                                   include/iDynTree/ModelIO/URDFDofsImport.h
                                   include/iDynTree/ModelIO/URDFGenericSensorsImport.h
                                   include/iDynTree/ModelIO/ModelLoader.h)
 
 set(IDYNTREE_MODELIO_URDF_SOURCES src/URDFParsingUtils.h
+                                  src/URDFModelExport.cpp
                                   src/URDFModelImport.cpp
                                   src/URDFDofsImport.cpp
                                   src/URDFGenericSensorsImport.cpp
