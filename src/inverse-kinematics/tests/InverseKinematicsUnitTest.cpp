@@ -33,6 +33,10 @@ inline double clockInSec()
     return ((double)ret)/((double)CLOCKS_PER_SEC);
 }
 
+inline double clockDurationInSeconds(clock_t duration)
+{
+    return static_cast<double>(duration) / static_cast<double>(CLOCKS_PER_SEC);
+}
 
 iDynTree::JointPosDoubleArray getRandomJointPositions(const iDynTree::Model & model)
 {
@@ -146,9 +150,9 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
         ik.setDesiredFullJointsConfiguration(sDesired, 1e-12);
 
         // Start from the initial one
-        double tic = clockInSec();
+        clock_t tic = clock();
         ok = ik.solve();
-        double toc = clockInSec();
+        std::cerr << "IK Solved in " << clockDurationInSeconds(clock() - tic) << "s" << std::endl;
 
         ASSERT_IS_TRUE(ok);
 
@@ -225,10 +229,9 @@ void simpleHumanoidWholeBodyIKConsistency(const iDynTree::InverseKinematicsRotat
     ik.setDesiredFullJointsConfiguration(s, 1e-15);
 
     // Solve the optimization problem
-    double tic = clockInSec();
+    clock_t tic = clock();
     ok = ik.solve();
-    double toc = clockInSec();
-    std::cerr << "Inverse Kinematics solved in " << toc-tic << " seconds. " << std::endl;
+    std::cerr << "IK Solved in " << clockDurationInSeconds(clock() - tic) << "s" << std::endl;
     ASSERT_IS_TRUE(ok);
 
     iDynTree::Transform basePosOptimized;
@@ -266,7 +269,7 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
 {
     iDynTree::InverseKinematics ik;
 
-    ik.setVerbosity(3);
+    ik.setVerbosity(0);
 
     std::vector<std::string> consideredJoints;
     iDynTree::ModelLoader loader;
@@ -343,10 +346,9 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
     ik.setDesiredFullJointsConfiguration(s, 1e-15);
 
     // Solve the optimization problem
-    double tic = clockInSec();
+    clock_t tic = clock();
     ok = ik.solve();
-    double toc = clockInSec();
-    std::cerr << "Inverse Kinematics solved in " << toc-tic << " seconds. " << std::endl;
+    std::cerr << "IK Solved in " << clockDurationInSeconds(clock() - tic) << "s" << std::endl;
     ASSERT_IS_TRUE(ok);
 
     iDynTree::Transform basePosOptimized;
@@ -392,7 +394,7 @@ void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKine
     iDynTree::InverseKinematics ik;
 
     ik.setMaxIterations(500);
-    ik.setVerbosity(3);
+    ik.setVerbosity(0);
     
     bool ok = ik.loadModelFromFile(getAbsModelPath("iCubGenova02.urdf"));
     ASSERT_IS_TRUE(ok);
@@ -441,10 +443,9 @@ void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKine
     ik.setDesiredFullJointsConfiguration(s, 1e-15);
 
     // Solve the optimization problem
-    double tic = clockInSec();
+    clock_t tic = clock();
     ok = ik.solve();
-    double toc = clockInSec();
-    std::cerr << "Inverse Kinematics solved in " << toc-tic << " seconds. " << std::endl;
+    std::cerr << "IK Solved in " << clockDurationInSeconds(clock() - tic) << "s" << std::endl;
     ASSERT_IS_TRUE(ok);
 
     iDynTree::Transform basePosOptimized;
