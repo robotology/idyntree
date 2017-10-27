@@ -166,6 +166,13 @@ namespace kinematics {
 
     //MARK: - InverseKinematicsNLP implementation
 
+#ifndef NDEBUG
+    bool InverseKinematicsNLP::eval_f_called = false;
+    bool InverseKinematicsNLP::eval_grad_f_called = false;
+    bool InverseKinematicsNLP::eval_g_called = false;
+    bool InverseKinematicsNLP::eval_jac_g_called = false;
+#endif
+
     //To understand IPOpt log:
     //http://www.coin-or.org/Ipopt/documentation/node36.html#sec:output
 
@@ -759,11 +766,21 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
     {
         UNUSED_VARIABLE(n);
         if (new_x) {
+#ifndef NDEBUG
+            eval_f_called = false;
+            eval_grad_f_called = false;
+            eval_g_called = false;
+            eval_jac_g_called = false;
+#endif
             //First time we get called with this new value for the solution
             //Update the state and variables
             if (!updateState(x))
                 return false;
         }
+#ifndef NDEBUG
+        assert(!eval_f_called);
+        eval_f_called = true;
+#endif
 
         //Cost function
         //J = Sum_i^#targets  Error on rotation   + ||q - q_des ||^2 (as regularization term)
@@ -841,11 +858,21 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
                                            Ipopt::Number* grad_f)
     {
         if (new_x) {
+#ifndef NDEBUG
+            eval_f_called = false;
+            eval_grad_f_called = false;
+            eval_g_called = false;
+            eval_jac_g_called = false;
+#endif
             //First time we get called with this new value for the solution
             //Update the state and variables
             if (!updateState(x))
                 return false;
         }
+#ifndef NDEBUG
+        assert(!eval_grad_f_called);
+        eval_grad_f_called = true;
+#endif
 
         Eigen::Map<Eigen::VectorXd> gradient(grad_f, n);
         gradient.setZero();
@@ -974,11 +1001,21 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
     {
         UNUSED_VARIABLE(n);
         if (new_x) {
+#ifndef NDEBUG
+            eval_f_called = false;
+            eval_grad_f_called = false;
+            eval_g_called = false;
+            eval_jac_g_called = false;
+#endif
             //First time we get called with this new value for the solution
             //Update the state and variables
             if (!updateState(x))
                 return false;
         }
+#ifndef NDEBUG
+        assert(!eval_g_called);
+        eval_g_called = true;
+#endif
 
         Ipopt::Index index = 0;
         Eigen::Map<Eigen::VectorXd> constraints(g, m);
@@ -1090,14 +1127,24 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
             assert(nele_jac == index);
 
         } else {
+            
             //This is called every time
             if (new_x) {
+#ifndef NDEBUG
+                eval_f_called = false;
+                eval_grad_f_called = false;
+                eval_g_called = false;
+                eval_jac_g_called = false;
+#endif
                 //First time we get called with this new value for the solution
                 //Update the state and variables
                 if (!updateState(x))
                     return false;
             }
-
+#ifndef NDEBUG
+            assert(!eval_jac_g_called);
+            eval_jac_g_called = true;
+#endif
             Ipopt::Index constraintIndex = 0;
 
             for (TransformMap::const_iterator constraint = m_data.m_constraints.begin();

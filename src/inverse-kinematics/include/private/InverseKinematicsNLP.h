@@ -339,6 +339,18 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
      */
     void initializeSparsityInformation();
 
+#ifndef NDEBUG
+    // IpOpt should not call the same callback twice for the same set of input parameters
+    // To be sure of this, we add some assert in the code
+    // In the case, in the future, IpOpt changes behaviour, this asserts will
+    // notify us of this change, and we can (easily, at the cost of adding more functions)
+    // circunvent this with our code.
+    static bool eval_f_called;
+    static bool eval_grad_f_called;
+    static bool eval_g_called;
+    static bool eval_jac_g_called;
+#endif
+
 public:
     /*! Constructor
      * @param data reference to the InverseKinematicsData object
