@@ -66,6 +66,7 @@ private:
     double m_posWeight; /*!< Weight for the (eventual) cost associated with the position part of the task */
     double m_rotWeight; /*!< Weight for the (eventual) cost associated with the rotation part of the task */
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_resolutionMode; /*!< Resolution mode in case of target */
+    bool m_isActive; /*! Is the constraint active or not? */
 
 public:
 
@@ -166,7 +167,7 @@ public:
     /*!
      * Set the position component of the current constrained value of the Transform.
      */
-    void setPosition(iDynTree::Position& newPos);
+    void setPosition(const iDynTree::Position& newPos);
 
     /*!
      * Return the rotation component of the current constrained value of the Transform.
@@ -177,7 +178,7 @@ public:
     /*!
      * Set the rotation component of the current constrained value of the Transform.
      */
-    void setRotation(iDynTree::Rotation& newRot);
+    void setRotation(const iDynTree::Rotation& newRot);
 
     /*!
      * Return the current constrained value of the Transform.
@@ -225,6 +226,12 @@ public:
      * @return the current rotation parametrization
      */
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode() const;
+
+    /*! Set if the task is active or not */
+    void setActive(const bool isActive);
+
+    /*! Get if the task is active or not */
+    bool isActive() const;
 
 };
 

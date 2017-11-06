@@ -21,6 +21,7 @@ namespace kinematics {
     , m_posWeight(1.0)
     , m_rotWeight(1.0)
     , m_resolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
+    , m_isActive(true)
     {}
 
     TransformConstraint TransformConstraint::positionConstraint(const std::string& frameName, const iDynTree::Position &position, const double posWeight)
@@ -78,18 +79,28 @@ namespace kinematics {
     bool TransformConstraint::hasRotationConstraint() const { return m_type == TransformConstraintTypeRotation || m_type == TransformConstraintTypeFullTransform; }
 
     const iDynTree::Position& TransformConstraint::getPosition() const { return m_transform.getPosition(); }
-    void TransformConstraint::setPosition(iDynTree::Position& newPos) { m_transform.setPosition(newPos); }
+    void TransformConstraint::setPosition(const iDynTree::Position& newPos) { m_transform.setPosition(newPos); }
     const iDynTree::Rotation& TransformConstraint::getRotation() const { return m_transform.getRotation(); }
-    void TransformConstraint::setRotation(iDynTree::Rotation& newRot) { m_transform.setRotation(newRot); }
+    void TransformConstraint::setRotation(const iDynTree::Rotation& newRot) { m_transform.setRotation(newRot); }
     const iDynTree::Transform& TransformConstraint::getTransform() const { return m_transform; }
     const std::string& TransformConstraint::getFrameName() const { return m_frameName; }
     const double TransformConstraint::getPositionWeight() const { return m_posWeight; }
     void TransformConstraint::setPositionWeight(const double newPosWeight) { if (newPosWeight >= 0.0) m_posWeight = newPosWeight; }
     const double TransformConstraint::getRotationWeight() const { return m_rotWeight; }
     void TransformConstraint::setRotationWeight(const double newRotWeight) { if (newRotWeight >= 0.0) m_posWeight = newRotWeight; }
-    
+
     void TransformConstraint::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode){ m_resolutionMode = mode; }
     iDynTree::InverseKinematicsTreatTargetAsConstraint TransformConstraint::targetResolutionMode() const{ return m_resolutionMode; }
-    
+
+    void TransformConstraint::setActive(const bool isActive)
+    {
+        m_isActive = isActive;
+    }
+
+    bool TransformConstraint::isActive() const
+    {
+        return m_isActive;
+    }
+
 }
 }
