@@ -10,6 +10,7 @@
 #include "InverseKinematicsData.h"
 #include "InverseKinematicsNLP.h"
 #include "TransformConstraint.h"
+#include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/SpatialAcc.h>
@@ -436,16 +437,19 @@ namespace kinematics {
         m_numberOfOptimisationConstraints = 0;
         for (auto && constraint : m_constraints) {
             //Frame constraint: it can have position, rotation or both elements
-            if (constraint.second.hasPositionConstraint()) {
-                m_numberOfOptimisationConstraints += 3;
-            }
-            if (constraint.second.hasRotationConstraint()) {
-                m_numberOfOptimisationConstraints += sizeOfRotationParametrization(m_rotationParametrization);
+            if (constraint.second.isActive()) {
+                if (constraint.second.hasPositionConstraint()) {
+                    m_numberOfOptimisationConstraints += 3;
+                }
+                if (constraint.second.hasRotationConstraint()) {
+                    m_numberOfOptimisationConstraints += sizeOfRotationParametrization(m_rotationParametrization);
+                }
             }
         }
 
         // COM Convex Hull constraint
         if (m_comHullConstraint.isActive()) {
+            this->configureCenterOfMassProjectionConstraint();
             m_numberOfOptimisationConstraints += m_comHullConstraint.getNrOfConstraints();
         }
 
@@ -481,6 +485,47 @@ namespace kinematics {
         m_nlpProblem->initializeInternalData();
 
         m_problemInitialized = true;
+    }
+
+    void InverseKinematicsData::configureCenterOfMassProjectionConstraint()
+    {
+        this->m_comHullConstraint.supportFrameIndices.resize(0);
+        std::vector<iDynTree::Transform> world_H_support;
+        std::vector<iDynTree::Polygon> used_polygons;
+
+        // We iterate on all possible support frames
+        for (int i=0; i < m_comHullConstraint_supportFramesIndeces.size(); i++)
+        {
+            // check for transform
+            int frameIndex = m_comHullConstraint_supportFramesIndeces[i];
+
+            internal::kinematics::TransformMap::iterator constraintIt = this->m_constraints.find(frameIndex);
+
+            if (constraintIt->second.isActive())
+            {
+                // Store the constrained value for this frame
+                world_H_support.push_back(constraintIt->second.getTransform());
+                used_polygons.push_back(m_comHullConstraint_supportPolygons[i]);
+            }
+        }
+
+        iDynTree::Axis projectionPlaneXaxisInAbsoluteFrame(m_comHullConstraint_xAxisOfPlaneInWorld, m_comHullConstraint_originOfPlaneInWorld);
+        iDynTree::Axis projectionPlaneYaxisInAbsoluteFrame(m_comHullConstraint_yAxisOfPlaneInWorld, m_comHullConstraint_originOfPlaneInWorld);
+
+        // Initialize the COM's projection direction in such a way that is along the lien perpendicular to the xy-axes of the World
+        this->m_comHullConstraint.setProjectionAlongDirection(m_comHullConstraint_projDirection);
+
+        // Compute the constraint
+        bool ok = this->m_comHullConstraint.buildConvexHull(m_comHullConstraint_xAxisOfPlaneInWorld,
+                                                            m_comHullConstraint_yAxisOfPlaneInWorld,
+                                                            m_comHullConstraint_originOfPlaneInWorld,
+                                                            used_polygons,
+                                                            world_H_support);
+
+        // Save some info on the constraints
+        this->m_comHullConstraint.absoluteFrame_X_supportFrame = world_H_support;
+
+        return;
     }
 
 }

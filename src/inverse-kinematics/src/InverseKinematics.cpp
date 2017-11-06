@@ -116,7 +116,6 @@ namespace iDynTree {
             IK_PIMPL(m_pimpl)->m_maxIter = max_iter;
         else
             IK_PIMPL(m_pimpl)->m_maxIter = std::numeric_limits<int>::max();
-
     }
 
     int InverseKinematics::maxIterations() const
@@ -209,6 +208,52 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->addFrameConstraint(internal::kinematics::TransformConstraint::rotationConstraint(frameName, constraintValue.getRotation()));
     }
 
+    bool InverseKinematics::activateFrameConstraint(const std::string& frameName, const Transform& newConstraintValue)
+    {
+        iDynTree::LinkIndex frameIndex = IK_PIMPL(m_pimpl)->m_dynamics.getFrameIndex(frameName);
+        if (frameIndex < 0)
+        {
+            return false;
+        }
+
+        internal::kinematics::TransformMap::iterator it = IK_PIMPL(m_pimpl)->m_constraints.find(frameIndex);
+        if (it == IK_PIMPL(m_pimpl)->m_constraints.end())
+        {
+            return false;
+        }
+
+        it->second.setActive(true);
+        it->second.setPosition(newConstraintValue.getPosition());
+        it->second.setRotation(newConstraintValue.getRotation());
+
+        // The problem needs to be reinitialized
+        IK_PIMPL(m_pimpl)->m_problemInitialized = false;
+
+        return true;
+    }
+
+    bool InverseKinematics::deactivateFrameConstraint(const std::string& frameName)
+    {
+        iDynTree::LinkIndex frameIndex = IK_PIMPL(m_pimpl)->m_dynamics.getFrameIndex(frameName);
+        if (frameIndex < 0)
+        {
+            return false;
+        }
+
+        internal::kinematics::TransformMap::iterator it = IK_PIMPL(m_pimpl)->m_constraints.find(frameIndex);
+        if (it == IK_PIMPL(m_pimpl)->m_constraints.end())
+        {
+            return false;
+        }
+
+        it->second.setActive(false);
+
+        // The problem needs to be reinitialized
+        IK_PIMPL(m_pimpl)->m_problemInitialized = false;
+
+        return true;
+    }
+
     bool InverseKinematics::addCenterOfMassProjectionConstraint(const std::string &firstSupportFrame,
                                                                 const Polygon &firstSupportPolygon,
                                                                 const iDynTree::Direction xAxisOfPlaneInWorld,
@@ -257,10 +302,9 @@ namespace iDynTree {
             return false;
         }
 
-        size_t nrOfSupportLinks = supportFrames.size();
 
-        IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices.resize(0);
-        std::vector<iDynTree::Transform> world_H_support(nrOfSupportLinks);
+        size_t nrOfSupportLinks = supportFrames.size();
+        IK_PIMPL(m_pimpl)->m_comHullConstraint_supportFramesIndeces.resize(nrOfSupportLinks);
 
         for (int i=0; i < nrOfSupportLinks; i++)
         {
@@ -274,6 +318,8 @@ namespace iDynTree {
                 return false;
             }
 
+            IK_PIMPL(m_pimpl)->m_comHullConstraint_supportFramesIndeces[i] = frameIndex;
+
             internal::kinematics::TransformMap::iterator constraintIt = IK_PIMPL(m_pimpl)->m_constraints.find(frameIndex);
             if (constraintIt == IK_PIMPL(m_pimpl)->m_constraints.end())
             {
@@ -282,40 +328,20 @@ namespace iDynTree {
                 reportError("InverseKinematics","addCenterOfMassProjectionConstraint",ss.str().c_str());
                 return false;
             }
-
-            IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices.push_back(frameIndex);
-
-            // Store the constrained value for this frame
-            world_H_support[i] = constraintIt->second.getTransform();
         }
 
-        iDynTree::Axis projectionPlaneXaxisInAbsoluteFrame(xAxisOfPlaneInWorld,originOfPlaneInWorld);
-        iDynTree::Axis projectionPlaneYaxisInAbsoluteFrame(yAxisOfPlaneInWorld,originOfPlaneInWorld);
-	
-	// Initialize the COM's projection direction in such a way that is along the lien perpendicular to the xy-axes of the World
-	iDynTree::Direction zAxisOfPlaneInWorld;
-	toEigen(zAxisOfPlaneInWorld) = toEigen(xAxisOfPlaneInWorld).cross(toEigen(yAxisOfPlaneInWorld));
-		
-	IK_PIMPL(m_pimpl)->m_comHullConstraint.setProjectionAlongDirection(zAxisOfPlaneInWorld);
+        // Initialize the COM's projection direction in such a way that is along the lien perpendicular to the xy-axes of the World
+	    iDynTree::Direction zAxisOfPlaneInWorld;
+        toEigen(zAxisOfPlaneInWorld) = toEigen(xAxisOfPlaneInWorld).cross(toEigen(yAxisOfPlaneInWorld));
 
-        // Compute the constraint
-        bool ok = IK_PIMPL(m_pimpl)->m_comHullConstraint.buildConvexHull(xAxisOfPlaneInWorld,
-                                                                         yAxisOfPlaneInWorld,
-                                                                         originOfPlaneInWorld,
-                                                                         supportPolygons,
-                                                                         world_H_support);
+        IK_PIMPL(m_pimpl)->m_comHullConstraint_projDirection = zAxisOfPlaneInWorld;
 
-        // Save some info on the constraints
-        IK_PIMPL(m_pimpl)->m_comHullConstraint.absoluteFrame_X_supportFrame = world_H_support;
-
-        if (!ok)
-        {
-            reportError("InverseKinematics","addCenterOfMassProjectionConstraint","Problem in computing COM constraint matrices.");
-            return false;
-        }
-
-        // Configuration went fine, enable constraint
+        // Configuration went fine, enable constraint and save the parameters
         IK_PIMPL(m_pimpl)->m_comHullConstraint.setActive(true);
+        IK_PIMPL(m_pimpl)->m_comHullConstraint_supportPolygons = supportPolygons;
+        IK_PIMPL(m_pimpl)->m_comHullConstraint_xAxisOfPlaneInWorld = xAxisOfPlaneInWorld;
+        IK_PIMPL(m_pimpl)->m_comHullConstraint_yAxisOfPlaneInWorld = yAxisOfPlaneInWorld;
+        IK_PIMPL(m_pimpl)->m_comHullConstraint_originOfPlaneInWorld = originOfPlaneInWorld;
 
         return true;
     }
@@ -635,6 +661,7 @@ namespace iDynTree {
     void InverseKinematics::setCOMConstraintProjectionDirection(iDynTree::Vector3 direction)
     {
         // define the projection matrix 'Pdirection' in the class 'ConvexHullProjectionConstraint'
+        IK_PIMPL(m_pimpl)->m_comHullConstraint_projDirection = direction;
         IK_PIMPL(m_pimpl)->m_comHullConstraint.setProjectionAlongDirection(direction);
     }
 

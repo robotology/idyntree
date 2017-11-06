@@ -214,21 +214,24 @@ namespace kinematics {
         for (TransformMap::const_iterator constraint = m_data.m_constraints.begin();
              constraint != m_data.m_constraints.end(); ++constraint) {
 
-            FrameInfo &frameInfo = constraintsInfo[constraint->first];
-            frameInfo.transform = m_data.m_dynamics.getWorldTransform(constraint->first);
-            m_data.m_dynamics.getFrameFreeFloatingJacobian(constraint->first, frameInfo.jacobian);
+            if (constraint->second.isActive()) {
+                FrameInfo &frameInfo = constraintsInfo[constraint->first];
+                frameInfo.transform = m_data.m_dynamics.getWorldTransform(constraint->first);
+                m_data.m_dynamics.getFrameFreeFloatingJacobian(constraint->first, frameInfo.jacobian);
 
-            iDynTree::Vector4 transformQuat;
-            frameInfo.transform.getRotation().getQuaternion(transformQuat);
-            //compute quaternionDerivativeMapBuffer
-            //See in target for details on the computation
-            Eigen::Map<Eigen::Matrix<double, 4, 3, Eigen::RowMajor> > map = iDynTree::toEigen(frameInfo.quaternionDerivativeMap);
-            map.topRows<1>() = -iDynTree::toEigen(transformQuat).tail<3>().transpose();
-            map.bottomRows<3>().setIdentity();
-            map.bottomRows<3>() *= transformQuat(0);
-            map.bottomRows<3>() -= iDynTree::skew(iDynTree::toEigen(transformQuat).tail<3>());
+                iDynTree::Vector4 transformQuat;
+                frameInfo.transform.getRotation().getQuaternion(transformQuat);
+                //compute quaternionDerivativeMapBuffer
+                //See in target for details on the computation
+                Eigen::Map<Eigen::Matrix<double, 4, 3, Eigen::RowMajor> > map = iDynTree::toEigen(
+                        frameInfo.quaternionDerivativeMap);
+                map.topRows<1>() = -iDynTree::toEigen(transformQuat).tail<3>().transpose();
+                map.bottomRows<3>().setIdentity();
+                map.bottomRows<3>() *= transformQuat(0);
+                map.bottomRows<3>() -= iDynTree::skew(iDynTree::toEigen(transformQuat).tail<3>());
 
-            map *= 0.5;
+                map *= 0.5;
+            }
         }
 
         // Update com position and jacobian
@@ -312,38 +315,43 @@ namespace kinematics {
         Ipopt::Index constraintIndex = 0;
         for (TransformMap::const_iterator it = m_data.m_constraints.begin();
              it != m_data.m_constraints.end(); it++) {
+            if (it->second.isActive()) {
+                //This is a constraint on a frame position
+                if (it->second.hasPositionConstraint()) {
+                    const iDynTree::Position &position = it->second.getPosition();
+                    g_l[constraintIndex] = g_u[constraintIndex] = position(0);
+                    constraintIndex++;
+                    g_l[constraintIndex] = g_u[constraintIndex] = position(1);
+                    constraintIndex++;
+                    g_l[constraintIndex] = g_u[constraintIndex] = position(2);
+                    constraintIndex++;
+                }
+                //This is a constraint on a frame orientation
+                if (it->second.hasRotationConstraint()) {
+                    const iDynTree::Rotation &rotation = it->second.getRotation();
 
-            //This is a constraint on a frame position
-            if (it->second.hasPositionConstraint()) {
-                const iDynTree::Position& position = it->second.getPosition();
-                g_l[constraintIndex] = g_u[constraintIndex] = position(0);
-                constraintIndex++;
-                g_l[constraintIndex] = g_u[constraintIndex] = position(1);
-                constraintIndex++;
-                g_l[constraintIndex] = g_u[constraintIndex] = position(2);
-                constraintIndex++;
-            }
-            //This is a constraint on a frame orientation
-            if (it->second.hasRotationConstraint()) {
-                const iDynTree::Rotation& rotation = it->second.getRotation();
+                    //Get the desired orientation in its representation
+                    if (m_data.m_rotationParametrization ==
+                        iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
+                        iDynTree::Vector4 quaternion;
+                        rotation.getQuaternion(quaternion);
 
-                //Get the desired orientation in its representation
-                if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
-                    iDynTree::Vector4 quaternion;
-                    rotation.getQuaternion(quaternion);
+                        for (Ipopt::Index i = 0; i < 4; ++i)
+                        {
+                            g_l[constraintIndex] = g_u[constraintIndex] = quaternion(i);
+                            constraintIndex++;
+                        }
 
-                    for (Ipopt::Index i = 0; i < 4; ++i) {
-                        g_l[constraintIndex] = g_u[constraintIndex] = quaternion(i);
-                        constraintIndex++;
-                    }
+                    } else if (m_data.m_rotationParametrization ==
+                               iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
+                        iDynTree::Vector3 rpy;
+                        rotation.getRPY(rpy(0), rpy(1), rpy(2));
 
-                } else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
-                    iDynTree::Vector3 rpy;
-                    rotation.getRPY(rpy(0), rpy(1), rpy(2));
-
-                    for (Ipopt::Index i = 0; i < 3; ++i) {
-                        g_l[constraintIndex] = g_u[constraintIndex] = rpy(i);
-                        constraintIndex++;
+                        for (Ipopt::Index i = 0; i < 3; ++i)
+                        {
+                            g_l[constraintIndex] = g_u[constraintIndex] = rpy(i);
+                            constraintIndex++;
+                        }
                     }
                 }
             }
@@ -694,28 +702,32 @@ namespace kinematics {
         //Start with the explicit constraints
         for (TransformMap::const_iterator constraint = m_data.m_constraints.begin();
             constraint != m_data.m_constraints.end(); ++constraint) {
-            iDynTree::Transform &currentTransform = constraintsInfo[constraint->first].transform;
+            if (constraint->second.isActive()) {
+                iDynTree::Transform &currentTransform = constraintsInfo[constraint->first].transform;
 
-            if (constraint->second.hasPositionConstraint()) {
-                //get the position part
-                const iDynTree::Position& currentPosition = currentTransform.getPosition();
-                constraints.segment(index, 3) = iDynTree::toEigen(currentPosition);
-                index += 3;
-            }
-            if (constraint->second.hasRotationConstraint()) {
-                //get the rotation part
-                const iDynTree::Rotation& currentRotation = currentTransform.getRotation();
-                if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
-
-                    //quaternion parametrization
-                    iDynTree::Vector4 quaternionBuffer;
-                    currentRotation.getQuaternion(quaternionBuffer);
-                    constraints.segment(index, 4) = iDynTree::toEigen(quaternionBuffer);
-                } else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
-
-                    currentRotation.getRPY(constraints(index), constraints(index + 1), constraints(index + 2));
+                if (constraint->second.hasPositionConstraint()) {
+                    //get the position part
+                    const iDynTree::Position &currentPosition = currentTransform.getPosition();
+                    constraints.segment(index, 3) = iDynTree::toEigen(currentPosition);
+                    index += 3;
                 }
-                index += sizeOfRotationParametrization(m_data.m_rotationParametrization);
+                if (constraint->second.hasRotationConstraint()) {
+                    //get the rotation part
+                    const iDynTree::Rotation &currentRotation = currentTransform.getRotation();
+                    if (m_data.m_rotationParametrization ==
+                        iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
+
+                        //quaternion parametrization
+                        iDynTree::Vector4 quaternionBuffer;
+                        currentRotation.getQuaternion(quaternionBuffer);
+                        constraints.segment(index, 4) = iDynTree::toEigen(quaternionBuffer);
+                    } else if (m_data.m_rotationParametrization ==
+                               iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
+
+                        currentRotation.getRPY(constraints(index), constraints(index + 1), constraints(index + 2));
+                    }
+                    index += sizeOfRotationParametrization(m_data.m_rotationParametrization);
+                }
             }
         }
 
@@ -834,54 +846,66 @@ namespace kinematics {
 
             for (TransformMap::const_iterator constraint = m_data.m_constraints.begin();
                  constraint != m_data.m_constraints.end(); ++constraint) {
-                //For each constraint compute its jacobian
-                FrameInfo &constraintInfo = constraintsInfo[constraint->first];
 
-                if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
+                if (constraint->second.isActive()) {
+                    //For each constraint compute its jacobian
+                    FrameInfo &constraintInfo = constraintsInfo[constraint->first];
 
-                    //We adapt the jacobian to handle two things
-                    // - the orientation part is represented as a quaternion
-                    // - the iDynTree Jacobian gives the corresponding velocity in term of
-                    //   angular velocity. Here the derivative is not w.r.t. time
-                    //   but w.r.t. an arbitrary variation of the configuration
-                    computeConstraintJacobian(constraintInfo.jacobian,
-                                              constraintInfo.quaternionDerivativeMap,
-                                              quaternionDerivativeInverseMapBuffer,
-                                              ComputeContraintJacobianOptionLinearPart|ComputeContraintJacobianOptionAngularPart,
-                                              finalJacobianBuffer);
+                    if (m_data.m_rotationParametrization ==
+                        iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
 
-                } else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
-                    //RPY parametrization for the base
-                    iDynTree::Vector3 rpy;
-                    iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
-                    iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0), rpy(1), rpy(2));
+                        //We adapt the jacobian to handle two things
+                        // - the orientation part is represented as a quaternion
+                        // - the iDynTree Jacobian gives the corresponding velocity in term of
+                        //   angular velocity. Here the derivative is not w.r.t. time
+                        //   but w.r.t. an arbitrary variation of the configuration
+                        computeConstraintJacobian(constraintInfo.jacobian,
+                                                  constraintInfo.quaternionDerivativeMap,
+                                                  quaternionDerivativeInverseMapBuffer,
+                                                  ComputeContraintJacobianOptionLinearPart |
+                                                  ComputeContraintJacobianOptionAngularPart,
+                                                  finalJacobianBuffer);
 
-                    // RPY parametrization for the constraint
-                    iDynTree::Vector3 rpy_target = constraintInfo.transform.getRotation().asRPY();
-                    iDynTree::Matrix3x3 omegaToRPYMap_target = iDynTree::Rotation::RPYRightTrivializedDerivativeInverse(rpy_target(0), rpy_target(1), rpy_target(2));
+                    } else if (m_data.m_rotationParametrization ==
+                               iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
+                        //RPY parametrization for the base
+                        iDynTree::Vector3 rpy;
+                        iDynTree::toEigen(rpy) = iDynTree::toEigen(this->optimizedBaseOrientation).head<3>();
+                        iDynTree::Matrix3x3 RPYToOmega = iDynTree::Rotation::RPYRightTrivializedDerivative(rpy(0),
+                                                                                                           rpy(1),
+                                                                                                           rpy(2));
 
-                    computeConstraintJacobianRPY(constraintInfo.jacobian,
-                                                 omegaToRPYMap_target,
-                                                 RPYToOmega,
-                                                 ComputeContraintJacobianOptionLinearPart|ComputeContraintJacobianOptionAngularPart,
-                                                 finalJacobianBuffer);
-                }
+                        // RPY parametrization for the constraint
+                        iDynTree::Vector3 rpy_target = constraintInfo.transform.getRotation().asRPY();
+                        iDynTree::Matrix3x3 omegaToRPYMap_target = iDynTree::Rotation::RPYRightTrivializedDerivativeInverse(
+                                rpy_target(0), rpy_target(1), rpy_target(2));
 
+                        computeConstraintJacobianRPY(constraintInfo.jacobian,
+                                                     omegaToRPYMap_target,
+                                                     RPYToOmega,
+                                                     ComputeContraintJacobianOptionLinearPart |
+                                                     ComputeContraintJacobianOptionAngularPart,
+                                                     finalJacobianBuffer);
+                    }
 
-
-                //Now that we computed the actual Jacobian needed by IPOPT
-                //We have to assign it to the correct variable
-                if (constraint->second.hasPositionConstraint()) {
-                    //Position part
-                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex * finalJacobianBuffer.cols()], 3, n);
-                    currentConstraint = toEigen(finalJacobianBuffer).topRows<3>();
-                    constraintIndex += 3;
-                }
-                if (constraint->second.hasRotationConstraint()) {
-                    //Orientation part
-                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex * finalJacobianBuffer.cols()], sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
-                    currentConstraint = toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
-                    constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
+                    //Now that we computed the actual Jacobian needed by IPOPT
+                    //We have to assign it to the correct variable
+                    if (constraint->second.hasPositionConstraint()) {
+                        //Position part
+                        Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(
+                                &values[constraintIndex * finalJacobianBuffer.cols()], 3, n);
+                        currentConstraint = toEigen(finalJacobianBuffer).topRows<3>();
+                        constraintIndex += 3;
+                    }
+                    if (constraint->second.hasRotationConstraint()) {
+                        //Orientation part
+                        Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(
+                                &values[constraintIndex * finalJacobianBuffer.cols()],
+                                sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
+                        currentConstraint = toEigen(finalJacobianBuffer).bottomRows(
+                                sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                        constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
+                    }
                 }
             }
 
