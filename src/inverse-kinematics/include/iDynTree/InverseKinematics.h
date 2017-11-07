@@ -356,12 +356,44 @@ public:
                                     const iDynTree::Transform& constraintValue);
 
     /*!
-     * Add a constant inequality constraint on the projection of the center of mass,
-     * assuming one support links.
+     * Activate a given constraint previously added with an addFrame**Constraint method.
      *
-     * This method assume that the position of two links is constrained by a FrameConstraint,
-     * and adds a inequality constraint to ensure that the center of mass projection lies on the
-     * convex hull of the contact polygon.
+     * \note In this version of iDynTree, it is not possible to change the nature of the constraint
+     *       (Full, Position or Rotation) when activating it again.
+     *
+     * @note This method returns true even if the frame constraint was already activate, it only
+     *       returns false if the constraint was never added.
+     * @warning This method is not meant to be called at each IK loop, and it can increase the computational
+     *          time of the next call to solve.
+     *
+     * @param frameName       the name of the frame on which to attach the constraint
+     * @param newConstraintValue the pose of the constrained frame (r) in the world frame (w), i.e. ʷHᵣ .
+     * @return true if successful, false otherwise.
+     */
+    bool activateFrameConstraint(const std::string& frameName,
+                                 const Transform& newConstraintValue);
+    /*!
+     * Deactivate a given constraint previously added with an addFrame**Constraint method.
+     *
+     * @note This method returns true even if the frame constraint was already deactivated, it only
+     *       returns false if the constraint was never added.
+     *
+     * @param frameName       the name of the frame on which to attach the constraint
+     * @return true if successful (i.e. the constraint is present) , false otherwise.
+     */
+    bool deactivateFrameConstraint(const std::string& frameName);
+
+    /*!
+     * Check if a given constraint is active or not.
+
+     *
+     * @param frameName       the name of the constrained frame
+     * @return true if the constraint is active, false if it is not active or it does not exist, or if the frame does not exist.
+     */
+    bool isFrameConstraintActive(const std::string& frameName) const;
+
+    /*!
+     * Specialization of addCenterOfMassProjectionConstraint when only two support frames are specified.
      */
     bool addCenterOfMassProjectionConstraint(const std::string& firstSupportFrame,
                                              const Polygon& firstSupportPolygon,
@@ -370,12 +402,7 @@ public:
                                              const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero());
 
     /*!
-     * Add a constant inequality constraint on the projection of the center of mass,
-     * assuming two support links.
-     *
-     * This method assume that the position of two links is constrained by a FrameConstraint,
-     * and adds a inequality constraint to ensure that the center of mass projection lies on the
-     * convex hull of the contact polygons.
+     * Specialization of addCenterOfMassProjectionConstraint when only two support frames are specified.
      */
     bool addCenterOfMassProjectionConstraint(const std::string& firstSupportFrame,
                                              const Polygon& firstSupportPolygon,
@@ -389,9 +416,9 @@ public:
      * Add a constant inequality constraint on the projection of the center of mass,
      * assuming an arbitrary number of support links.
      *
-     * This method assume that the position of two links is constrained by a FrameConstraint,
-     * and adds a inequality constraint to ensure that the center of mass projection lies on the
-     * convex hull of the contact polygons.
+     * If a subset of the supportFrames is contrained by a FrameConstraint (both position and constraint) and such
+     * constraint is active, this constraint adds a inequality constraint to ensure that the center of mass projection
+     * lies on the convex hull of the contact polygons.
      */
     bool addCenterOfMassProjectionConstraint(const std::vector<std::string>& supportFrames,
                                              const std::vector<Polygon>& supportPolygons,

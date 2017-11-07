@@ -8,6 +8,7 @@
 #include <iDynTree/InverseKinematics.h>
 #include <iDynTree/KinDynComputations.h>
 
+#include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/ModelTestUtils.h>
@@ -19,6 +20,8 @@
 #include <cstdlib>
 
 #include <ctime>
+
+using namespace iDynTree;
 
 /**
  * Return the current time in seconds, with respect
@@ -474,6 +477,144 @@ void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKine
     return;
 }
 
+void COMConvexHullConstraintWithSwitchingConstraints()
+{
+    // Load an humanoid model
+    iDynTree::InverseKinematics ik;
+
+    ik.setMaxIterations(500);
+    ik.setVerbosity(0);
+
+    // Use the requested parametrization
+    ik.setRotationParametrization(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
+
+    //ik.setCostTolerance(1e-4);
+    //ik.setConstraintsTolerance(1e-5);
+
+    bool ok = ik.loadModelFromFile(getAbsModelPath("iCubGenova02.urdf"));
+    ASSERT_IS_TRUE(ok);
+
+    // Also create a KinDynComputation object for some forward kinematics
+    KinDynComputations kinDynRef;
+    ok = kinDynRef.loadRobotModel(ik.fullModel());
+    ASSERT_IS_TRUE(ok);
+    KinDynComputations kinDynsol;
+    ok = kinDynsol.loadRobotModel(ik.fullModel());
+    ASSERT_IS_TRUE(ok);
+
+
+    // We use the joints all set to 0 as a reference position
+    Transform identityTransform = Transform::Identity();
+    VectorDynSize refereceJointPos(ik.fullModel().getNrOfDOFs());
+    refereceJointPos.zero();
+
+    // For the elbow we set another position as 0 is outside the limits
+    const Model& model = ik.fullModel();
+    int lElbowDofIndex = model.getJoint(model.getJointIndex("l_elbow"))->getDOFsOffset();
+    refereceJointPos(lElbowDofIndex) = 0.5;
+    int rElbowDofIndex = model.getJoint(model.getJointIndex("r_elbow"))->getDOFsOffset();
+    refereceJointPos(rElbowDofIndex) = 0.5;
+
+    kinDynRef.setJointPos(refereceJointPos);
+
+    // Add a postural "task" to the IK
+    ik.setDesiredFullJointsConfiguration(refereceJointPos, 1e-2);
+
+    // Add two frames constraints on both soles (assuming initially that l_sole == world)
+    ik.addFrameConstraint("l_sole", Transform::Identity());
+    ik.addFrameConstraint("r_sole", kinDynRef.getRelativeTransform("l_sole", "r_sole"));
+
+    // Add the COM convex hull constraint, where the polygon are just a long strip of 2 centimeters at the origin of the frames
+    // The COM projection plane will always be the world XY plane, so the world plane need to be always coincident with a support sole
+    iDynTree::Direction xAxis(1.0, 0.0, 0.0);
+    iDynTree::Direction yAxis(0.0, 1.0, 0.0);
+    // The strips are long on the x direction so we don't need to care where the COM is actually in the X direction
+    double stripWidth = 0.02;
+    ik.addCenterOfMassProjectionConstraint("l_sole", iDynTree::Polygon::XYRectangleFromOffsets(1, 1, stripWidth/2, stripWidth/2),
+                                           "r_sole", iDynTree::Polygon::XYRectangleFromOffsets(1, 1, stripWidth/2, stripWidth/2),
+                                           xAxis, yAxis);
+
+    // Solve the problem in this case: as the com projection of all the joint set to 0 is in in between the soles
+    // the inverse kinematics should give the joints all to zero as the solution
+    clock_t tic = clock();
+    Transform initialCondition = kinDynRef.getRelativeTransform("l_sole", "root_link");
+    ik.setFullJointsInitialCondition(&initialCondition, &refereceJointPos);
+    //ik.setVerbosity(5);
+    ok = ik.solve();
+    ASSERT_IS_TRUE(ok);
+    std::cerr << "COMConvexHullConstraintWithSwitchingConstraints: IK with both constraints solved in " << clockDurationInSeconds(clock() - tic) << "s" << std::endl;
+
+    Transform baseSolution;
+    VectorDynSize jointPosSolution(ik.fullModel().getNrOfDOFs());
+    ik.getFullJointsSolution(baseSolution, jointPosSolution);
+
+    ASSERT_EQUAL_VECTOR_TOL(refereceJointPos,
+                            jointPosSolution, 1e-4);
+
+    // We deactivate both constraints. The solution should be still all the joints to zero
+    ok = ik.deactivateFrameConstraint("l_sole");
+    ASSERT_IS_TRUE(ok);
+    ASSERT_IS_FALSE(ik.isFrameConstraintActive("l_sole"));
+
+    ok = ik.deactivateFrameConstraint("r_sole");
+    ASSERT_IS_TRUE(ok);
+    ASSERT_IS_FALSE(ik.isFrameConstraintActive("r_sole"));
+
+    tic = clock();
+    ik.setFullJointsInitialCondition(&identityTransform, &refereceJointPos);
+    ok = ik.solve();
+    std::cerr << "COMConvexHullConstraintWithSwitchingConstraints: IK with no constraints solved in " << clockDurationInSeconds(clock() - tic) << "s" << std::endl;
+    ASSERT_IS_TRUE(ok);
+
+    ik.getFullJointsSolution(baseSolution, jointPosSolution);
+
+    ASSERT_EQUAL_VECTOR_TOL(refereceJointPos,
+                            jointPosSolution, 1e-3);
+
+    // We only activate the left sole constraint, placing the "world" on the left_sole
+    ok = ik.activateFrameConstraint("l_sole", Transform::Identity());
+    ASSERT_IS_TRUE(ok);
+    ASSERT_IS_TRUE(ik.isFrameConstraintActive("l_sole"));
+
+    ok = ik.deactivateFrameConstraint("r_sole");
+    ASSERT_IS_TRUE(ok);
+    ASSERT_IS_FALSE(ik.isFrameConstraintActive("r_sole"));
+
+    // We solve the problem and verify that the y-component of com projected in the l_sole frame is less than stripWidth/2
+    tic = clock();
+    ik.setFullJointsInitialCondition(&identityTransform, &refereceJointPos);
+    ok = ik.solve();
+    std::cerr << "COMConvexHullConstraintWithSwitchingConstraints: IK with l_sole constraint solved in " << clockDurationInSeconds(clock() - tic) << "s" << std::endl;
+    ASSERT_IS_TRUE(ok);
+
+    ik.getFullJointsSolution(baseSolution, jointPosSolution);
+    kinDynsol.setJointPos(jointPosSolution);
+    Position com_l_sole = kinDynsol.getWorldTransform("l_sole").inverse()*(kinDynsol.getCenterOfMassPosition());
+    ASSERT_IS_TRUE(std::abs(com_l_sole(1)) < stripWidth/2.0 + 1e-9);
+
+    // We only activate the right sole constraint, placing the "world" on the left_sole
+    ok = ik.activateFrameConstraint("r_sole", Transform::Identity());
+    ASSERT_IS_TRUE(ok);
+    ASSERT_IS_TRUE(ik.isFrameConstraintActive("r_sole"));
+
+    ok = ik.deactivateFrameConstraint("l_sole");
+    ASSERT_IS_TRUE(ok);
+    ASSERT_IS_FALSE(ik.isFrameConstraintActive("l_sole"));
+
+    // We solve the problem and verify that the y-component of com projected in the l_sole frame is less than stripWidth/2
+    tic = clock();
+    ik.setFullJointsInitialCondition(&identityTransform, &refereceJointPos);
+    ok = ik.solve();
+    std::cerr << "COMConvexHullConstraintWithSwitchingConstraints: IK with r_sole constraint solved in " << clockDurationInSeconds(clock() - tic) << "s" << std::endl;
+    ASSERT_IS_TRUE(ok);
+
+    ik.getFullJointsSolution(baseSolution, jointPosSolution);
+    kinDynsol.setJointPos(jointPosSolution);
+    Position com_r_sole = kinDynsol.getWorldTransform("r_sole").inverse()*(kinDynsol.getCenterOfMassPosition());
+    ASSERT_IS_TRUE(std::abs(com_r_sole(1)) < stripWidth/2.0 + 1e-9);
+
+}
+
 int main()
 {
     // Improve repetability (at least in the same platform)
@@ -483,7 +624,6 @@ int main()
 
     // This is not working at the moment, there is some problem with quaternion constraints
     //simpleChainIK(10,iDynTree::InverseKinematicsRotationParametrizationQuaternion);
-
     simpleHumanoidWholeBodyIKConsistency(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
     simpleHumanoidWholeBodyIKCoMConsistency(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw, iDynTree::InverseKinematicsTreatTargetAsConstraintNone);
     simpleHumanoidWholeBodyIKCoMConsistency(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw, iDynTree::InverseKinematicsTreatTargetAsConstraintFull);
@@ -493,6 +633,8 @@ int main()
         std::cerr << "Removing " << i << " Dofs" << std::endl;
         simpleHumanoidWholeBodyIKCoMConsistency(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw, iDynTree::InverseKinematicsTreatTargetAsConstraintFull, i);
     }
+
+    COMConvexHullConstraintWithSwitchingConstraints();
 
 
     return EXIT_SUCCESS;
