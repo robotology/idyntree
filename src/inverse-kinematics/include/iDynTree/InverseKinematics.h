@@ -379,9 +379,18 @@ public:
      *       returns false if the constraint was never added.
      *
      * @param frameName       the name of the frame on which to attach the constraint
-     * @return true if successful (i.e. the constraint is present , false otherwise.
+     * @return true if successful (i.e. the constraint is present) , false otherwise.
      */
     bool deactivateFrameConstraint(const std::string& frameName);
+
+    /*!
+     * Check if a given constraint is active or not.
+
+     *
+     * @param frameName       the name of the constrained frame
+     * @return true if the constraint is active, false if it is not active or it does not exist, or if the frame does not exist.
+     */
+    bool isFrameConstraintActive(const std::string& frameName) const;
 
     /*!
      * Specialization of addCenterOfMassProjectionConstraint when only two support frames are specified.

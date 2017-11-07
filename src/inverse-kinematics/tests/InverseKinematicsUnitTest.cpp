@@ -554,8 +554,11 @@ void COMConvexHullConstraintWithSwitchingConstraints()
     // We deactivate both constraints. The solution should be still all the joints to zero
     ok = ik.deactivateFrameConstraint("l_sole");
     ASSERT_IS_TRUE(ok);
+    ASSERT_IS_FALSE(ik.isFrameConstraintActive("l_sole"));
+
     ok = ik.deactivateFrameConstraint("r_sole");
     ASSERT_IS_TRUE(ok);
+    ASSERT_IS_FALSE(ik.isFrameConstraintActive("r_sole"));
 
     tic = clock();
     ik.setFullJointsInitialCondition(&identityTransform, &refereceJointPos);
@@ -571,8 +574,11 @@ void COMConvexHullConstraintWithSwitchingConstraints()
     // We only activate the left sole constraint, placing the "world" on the left_sole
     ok = ik.activateFrameConstraint("l_sole", Transform::Identity());
     ASSERT_IS_TRUE(ok);
+    ASSERT_IS_TRUE(ik.isFrameConstraintActive("l_sole"));
+
     ok = ik.deactivateFrameConstraint("r_sole");
     ASSERT_IS_TRUE(ok);
+    ASSERT_IS_FALSE(ik.isFrameConstraintActive("r_sole"));
 
     // We solve the problem and verify that the y-component of com projected in the l_sole frame is less than stripWidth/2
     tic = clock();
@@ -589,8 +595,11 @@ void COMConvexHullConstraintWithSwitchingConstraints()
     // We only activate the right sole constraint, placing the "world" on the left_sole
     ok = ik.activateFrameConstraint("r_sole", Transform::Identity());
     ASSERT_IS_TRUE(ok);
+    ASSERT_IS_TRUE(ik.isFrameConstraintActive("r_sole"));
+
     ok = ik.deactivateFrameConstraint("l_sole");
     ASSERT_IS_TRUE(ok);
+    ASSERT_IS_FALSE(ik.isFrameConstraintActive("l_sole"));
 
     // We solve the problem and verify that the y-component of com projected in the l_sole frame is less than stripWidth/2
     tic = clock();
