@@ -256,6 +256,24 @@ namespace iDynTree {
         return true;
     }
 
+    bool  InverseKinematics::isFrameConstraintActive(const std::string& frameName) const
+    {
+        iDynTree::LinkIndex frameIndex = IK_PIMPL(m_pimpl)->m_dynamics.getFrameIndex(frameName);
+        if (frameIndex < 0)
+        {
+            return false;
+        }
+
+        internal::kinematics::TransformMap::iterator it = IK_PIMPL(m_pimpl)->m_constraints.find(frameIndex);
+        if (it == IK_PIMPL(m_pimpl)->m_constraints.end())
+        {
+            return false;
+        }
+
+        return it->second.isActive();
+    }
+
+
     bool InverseKinematics::addCenterOfMassProjectionConstraint(const std::string &firstSupportFrame,
                                                                 const Polygon &firstSupportPolygon,
                                                                 const iDynTree::Direction xAxisOfPlaneInWorld,
