@@ -16,9 +16,9 @@
 
 #include "testModels.h"
 
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
-
 #include <ctime>
 
 using namespace iDynTree;
@@ -612,6 +612,10 @@ void COMConvexHullConstraintWithSwitchingConstraints()
     kinDynsol.setJointPos(jointPosSolution);
     Position com_r_sole = kinDynsol.getWorldTransform("r_sole").inverse()*(kinDynsol.getCenterOfMassPosition());
     ASSERT_IS_TRUE(std::abs(com_r_sole(1)) < stripWidth/2.0 + 1e-9);
+
+    // Check that getting the margin works fine
+    double margin = ik.getCenterOfMassProjectionMargin();
+    ASSERT_IS_FALSE(std::isnan(margin));
 
 }
 
