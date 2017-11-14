@@ -507,6 +507,7 @@ namespace kinematics {
                 // Store the constrained value for this frame
                 world_H_support.push_back(constraintIt->second.getTransform());
                 used_polygons.push_back(m_comHullConstraint_supportPolygons[i]);
+                this->m_comHullConstraint.supportFrameIndices.push_back(frameIndex);
             }
         }
 

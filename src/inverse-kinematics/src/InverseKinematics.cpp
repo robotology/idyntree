@@ -368,8 +368,13 @@ namespace iDynTree {
 
     double InverseKinematics::getCenterOfMassProjectionMargin()
     {
+        if (!IK_PIMPL(m_pimpl)->m_problemInitialized) {
+            IK_PIMPL(m_pimpl)->computeProblemSizeAndResizeBuffers();
+        }
+
         // Compute center of mass in the first constraint frame
         iDynTree::KinDynComputations & kinDyn = IK_PIMPL(m_pimpl)->m_dynamics;
+        assert(IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices.size() > 0);
         iDynTree::Position comInAbsoluteConstraintFrame =
             IK_PIMPL(m_pimpl)->m_comHullConstraint.absoluteFrame_X_supportFrame[0]*(kinDyn.getWorldTransform(IK_PIMPL(m_pimpl)->m_comHullConstraint.supportFrameIndices[0]).inverse()*kinDyn.getCenterOfMassPosition());
 
