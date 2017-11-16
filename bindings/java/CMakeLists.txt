@@ -1,34 +1,126 @@
-set(CMAKE_SWIG_FLAGS "-Wextra;-module;iDynTree;-package;iDynTree")
+# Copyright: (C) 2017 iCub Facility
+# Authors: Francesco Romano, Daniele Domenichelli
+# CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
 
-find_package(Java REQUIRED COMPONENTS Runtime Development)
-find_package(JNI  REQUIRED)
-
+# include CMake Java utilities and JNI
+find_package(Java REQUIRED)
+find_package(JNI REQUIRED)
 include(UseJava)
+include(${SWIG_USE_FILE})
 
-# CMake structure inspired by http://stackoverflow.com/a/31750207/1379427
-
-# Specify where to place generated *.java files
-SET(CMAKE_SWIG_OUTDIR "${CMAKE_CURRENT_BINARY_DIR}/java")
-
-# Add module
-set(target_name iDynTree_java)
+# this is set in the parent directory, but for some reason it does not get inherited
 set_source_files_properties(../iDynTree.i PROPERTIES CPLUSPLUS ON)
-swig_add_module(${target_name} java ../iDynTree.i)
+
+if(NOT ${Java_VERSION_MAJOR} VERSION_LESS 9)
+  # Java >= 9
+  set(JAVA_RELEASE_VERSION 7 CACHE STRING "Compile for a specific VM version. See javac --help (--release option)")
+  mark_as_advanced(JAVA_RELEASE_VERSION)
+  if(NOT JAVA_RELEASE_VERSION STREQUAL "")
+    list(APPEND CMAKE_JAVA_COMPILE_FLAGS "--release" "${JAVA_RELEASE_VERSION}")
+  endif()
+  # clean old variable
+  unset(JAVA_TARGET_VERSION CACHE)
+  unset(JAVA_SOURCE_VERSION CACHE)
+else()
+  # Java < 9: --release option not present
+  set(JAVA_TARGET_VERSION ${Java_VERSION_MINOR} CACHE STRING "Java target version. See javac --help (-target option)")
+  set(JAVA_SOURCE_VERSION ${Java_VERSION_MINOR} CACHE STRING "Java source version. See javac --help (-source option)")
+  mark_as_advanced(JAVA_TARGET_VERSION)
+  mark_as_advanced(JAVA_SOURCE_VERSION)
+  if(NOT JAVA_TARGET_VERSION STREQUAL "")
+    list(APPEND CMAKE_JAVA_COMPILE_FLAGS "-target" "${JAVA_TARGET_VERSION}")
+  endif()
+  if(NOT JAVA_SOURCE_VERSION STREQUAL "")
+    list(APPEND CMAKE_JAVA_COMPILE_FLAGS "-source" "${JAVA_SOURCE_VERSION}")
+  endif()
+  unset(JAVA_RELEASE_VERSION CACHE)
+endif()
+
+set(JAVA_FLAGS "" CACHE STRING "Additional flags to be passed to javac. E.g. -bootclasspath if you want to cross compile")
+mark_as_advanced(JAVA_FLAGS)
+list(APPEND CMAKE_JAVA_COMPILE_FLAGS "${JAVA_FLAGS}")
+
+# SWIG JAVA file generation
+set(CMAKE_SWIG_OUTDIR "${CMAKE_CURRENT_BINARY_DIR}")
+set(CMAKE_SWIG_FLAGS "-package;iDynTree;-Wall;-module;iDynTree;${SWIG_COMMON_FLAGS}")
+
+# this includes are needed to compile the JNI lib
 include_directories(SYSTEM ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
 
-# Create directory for the *class files
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/classes")
+swig_add_library(iDynTree_java
+                 LANGUAGE java
+                 SOURCES ../iDynTree.i)
 
-# Create JAR including compiled .class file 
-add_custom_command(TARGET ${target_name} POST_BUILD
-                   COMMAND "${Java_JAVAC_EXECUTABLE}" -d classes java/*.java
-                   COMMAND "${Java_JAR_EXECUTABLE}" -cfM iDynTree.jar -C classes .)
+swig_link_libraries(iDynTree_java ${IDYNTREE_LIBRARIES}) #SWIG_YARP_LIBRARIES
 
-# Store Path to iDynTree JAR in variable:
-SET(IDYNTREE_JAR "${CMAKE_CURRENT_BINARY_DIR}/iDynTree.jar")
+if(NOT MSVC)
+  check_cxx_compiler_flag("-Wno-strict-aliasing" CXX_HAS_WNO_STRICT_ALIASING)
+  if(CXX_HAS_WNO_STRICT_ALIASING)
+    target_compile_options(${SWIG_MODULE_iDynTree_java_REAL_NAME} PRIVATE "-Wno-strict-aliasing")
+  endif()
+endif()
+
+# issue on MINGW where C++ name-mangling prevents java finding methods
+if(MINGW)
+  message(STATUS "untested MINGW patch - see CMakeLists.txt")
+  set_target_properties(${SWIG_MODULE_iDynTree_java_REAL_NAME} PROPERTIES
+    LINK_FLAGS "--add-stdcall-alias")
+endif(MINGW)
+
+set(_CMAKE_INSTALL_JNIDIR "${CMAKE_INSTALL_LIBDIR}/jni")
+set(CMAKE_INSTALL_JNIDIR ${_CMAKE_INSTALL_JNIDIR} CACHE PATH "java bindings (${_CMAKE_INSTALL_JNIDIR})")
+mark_as_advanced(CMAKE_INSTALL_JNIDIR)
+if(NOT IS_ABSOLUTE ${CMAKE_INSTALL_JNIDIR})
+  set(CMAKE_INSTALL_FULL_JNIDIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_JNIDIR}")
+else()
+  set(CMAKE_INSTALL_FULL_JNIDIR "${CMAKE_INSTALL_JNIDIR}")
+endif()
+
+set_target_properties(${SWIG_MODULE_iDynTree_java_REAL_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_JNIDIR})
+
+# Update RPATH
+if(NOT CMAKE_SKIP_RPATH AND NOT CMAKE_SKIP_INSTALL_RPATH)
+  file(RELATIVE_PATH _rel_path "${CMAKE_INSTALL_FULL_JNIDIR}" "${CMAKE_INSTALL_FULL_LIBDIR}")
+  get_target_property(_current_rpath "${SWIG_MODULE_iDynTree_java_REAL_NAME}" INSTALL_RPATH)
+  if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    list(APPEND _current_rpath "@loader_path/${_rel_path}")
+  else()
+    list(APPEND _current_rpath "\$ORIGIN/${_rel_path}")
+  endif()
+  set_target_properties(${SWIG_MODULE_iDynTree_java_REAL_NAME} PROPERTIES INSTALL_RPATH "${_current_rpath}")
+endif()
 
 
-# if compile tests execute also java tests
-# if(IDYNTREE_COMPILE_TESTS)
-#    add_subdirectory(tests)
-# endif()
+set(CMAKE_JNI_TARGET TRUE)
+set(CMAKE_JAVA_TARGET_OUTPUT_DIR "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_DATADIR}/iDynTree/java")
+
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/GenerateSwigiDynTreeFileList.cmake"
+"file(GLOB _JAVA_COMPILE_FILES \"${CMAKE_SWIG_OUTDIR}/*.java\")
+string(REPLACE \";\" \"\\\"\\n\\\"\" _JAVA_COMPILE_STRING \"\\\"\${_JAVA_COMPILE_FILES}\\\"\")
+file(MAKE_DIRECTORY \"${CMAKE_JAVA_TARGET_OUTPUT_DIR}\")
+file(WRITE \"${CMAKE_JAVA_TARGET_OUTPUT_DIR}${CMAKE_FILES_DIRECTORY}/idyntree_java_jar.dir/swig_java_filelist\" \${_JAVA_COMPILE_STRING})
+")
+
+add_custom_command(TARGET ${SWIG_MODULE_iDynTree_java_REAL_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/GenerateSwigiDynTreeFileList.cmake"
+                   COMMENT "Generating list of JAVA files generated by swig")
+
+
+add_jar(idyntree_java_jar
+        SOURCES @${CMAKE_JAVA_TARGET_OUTPUT_DIR}${CMAKE_FILES_DIRECTORY}/idyntree_java_jar.dir/swig_java_filelist
+        OUTPUT_NAME iDynTree
+        VERSION ${iDynTree_VERSION})
+
+add_dependencies(idyntree_java_jar ${SWIG_MODULE_iDynTree_java_REAL_NAME})
+
+# installation part
+install(TARGETS ${SWIG_MODULE_iDynTree_java_REAL_NAME}
+        DESTINATION ${CMAKE_INSTALL_JNIDIR}
+        COMPONENT bindings_java)
+
+install_jar(idyntree_java_jar
+            DESTINATION ${CMAKE_INSTALL_DATADIR}/iDynTree/java
+            COMPONENT bindings_java)
+install_jni_symlink(idyntree_java_jar
+                    DESTINATION ${CMAKE_INSTALL_DATADIR}/java
+                    COMPONENT bindings_java)
