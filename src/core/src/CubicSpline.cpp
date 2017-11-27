@@ -177,11 +177,17 @@ double iDynTree::CubicSpline::evaluatePoint(double t, double &velocity, double &
         return std::nan("");
     }
 
-    if( t < m_time(0) )
+    if( t < m_time(0) ){
+        velocity = m_v0;
+        acceleration = m_a0;
         return m_y(0);
+    }
 
-    if( t >= m_time(m_time.size()-1))
+    if( t >= m_time(m_time.size()-1)){
+        velocity = m_vf;
+        acceleration = m_af;
         return m_y(m_y.size()-1);
+    }
 
     size_t coeffIndex = 0;
     while( (coeffIndex < m_time.size()) && (t >= m_time(coeffIndex)) ){
