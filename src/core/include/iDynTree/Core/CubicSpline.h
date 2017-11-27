@@ -36,6 +36,9 @@ namespace iDynTree
         
     public:
         CubicSpline();
+
+        CubicSpline(unsigned int buffersDimension);
+
         ~CubicSpline();
         
         bool setData(const iDynTree::VectorDynSize& time, const iDynTree::VectorDynSize& yData);

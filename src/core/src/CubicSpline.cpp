@@ -25,7 +25,20 @@ iDynTree::CubicSpline::CubicSpline()
     m_velocities.resize(0);
     m_time.resize(0);
     m_y.resize(0);
-    m_T.resize(0);;
+    m_T.resize(0);
+}
+
+iDynTree::CubicSpline::CubicSpline(unsigned int buffersDimension)
+    :m_coefficients(buffersDimension - 1)
+    ,m_velocities(buffersDimension)
+    ,m_time(buffersDimension)
+    ,m_y(buffersDimension)
+    ,m_T(buffersDimension - 1)
+    ,m_v0(0)
+    ,m_vf(0)
+    ,m_a0(0)
+    ,m_af(0)
+{
 }
 
 iDynTree::CubicSpline::~CubicSpline()
