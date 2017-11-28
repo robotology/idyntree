@@ -30,13 +30,14 @@ bool setNpoints(size_t n, double initialTime, double finalTime, const Vector4& p
         yVec(i) = parameters(0) + parameters(1)*tVec(i) + parameters(2)*pow(tVec(i),2) + parameters(3)*pow(tVec(i),3);
     }
 
-    assertTrue(spline.setData(tVec, yVec));
     double initialVelocity = parameters(1) + 2*parameters(2)*initialTime + 3*parameters(3)*pow(initialTime,2);
     double initialAcceleration = 2*parameters(2) + 6*parameters(3)*initialTime;
     spline.setInitialConditions(initialVelocity, initialAcceleration);
     double finalVelocity = parameters(1) + 2*parameters(2)*finalTime + 3*parameters(3)*pow(finalTime,2);
     double finalAcceleration = 2*parameters(2) + 6*parameters(3)*finalTime;
     spline.setFinalConditions(finalVelocity, finalAcceleration);
+
+    assertTrue(spline.setData(tVec, yVec));
     return true;
 }
 
@@ -48,12 +49,16 @@ bool checkNpoints(size_t n, double initialTime, double finalTime, const Vector4&
     double dT = (finalTime-initialTime)/(static_cast<double>(n));
     VectorDynSize tVec, yVec;
     double expected, t;
-
+    double velocity, acceleration;
 
     for (int i =0; i <= n; ++i){
         t = dT*i + initialTime;
         expected = parameters(0) + parameters(1)*t + parameters(2)*pow(t,2) + parameters(3)*pow(t,3);
-        assertDoubleAreEqual(expected, spline.evaluatePoint(t), std::abs(expected)*relTol);
+        assertDoubleAreEqual(expected, spline.evaluatePoint(t, velocity, acceleration), std::abs(expected)*relTol, "Pos i = ", i);
+        expected = parameters(1) + 2*parameters(2)*t + 3*parameters(3)*pow(t,2);
+        assertDoubleAreEqual(expected, velocity, std::abs(expected)*relTol, "Vel i = ", i);
+        expected = 2*parameters(2) + 6*parameters(3)*t;
+        assertDoubleAreEqual(expected, acceleration, std::abs(expected)*relTol, "Acc i = ", i);
     }
     return true;
 }
@@ -71,8 +76,7 @@ bool splineTest(){
     double finalTime = 2.0;
 
     assertTrue(setNpoints(100,initialTime,finalTime,parameters, spline));
-    assertTrue(checkNpoints(100, initialTime, finalTime, parameters, spline));
-    assertTrue(checkNpoints(500, initialTime, finalTime, parameters, spline, 1E-2)); //the tolerance here is high, but there may be numeric errors while computing the coefficients for the spline, thus, for some points, the difference between the ideal cubic and the spline may be relevant. In any case, on the interpolation points they need to be equal.
+    assertTrue(checkNpoints(500, initialTime, finalTime, parameters, spline));
     return true;
 }
 
