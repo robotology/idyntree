@@ -63,7 +63,7 @@ before_script:
   - cd build
   - export CMAKE_PREFIX_PATH=`pwd`/install
   # using the YCM_EP_MAINTAINER_MODE variable to enable the subproject-dependees target
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DYCM_EP_MAINTAINER_MODE:BOOL=ON -DNON_INTERACTIVE_BUILD:BOOL=TRUE  ..
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_USES_KDL:BOOL=ON -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DYCM_EP_MAINTAINER_MODE:BOOL=ON -DNON_INTERACTIVE_BUILD:BOOL=TRUE  ..
   - cmake --build . --target iDynTree-dependees 
   - pwd
   - cd ../..
