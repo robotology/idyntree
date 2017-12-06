@@ -41,11 +41,6 @@ iDynTree::CubicSpline::CubicSpline(unsigned int buffersDimension)
 {
 }
 
-iDynTree::CubicSpline::~CubicSpline()
-{}
-
-
-
 bool iDynTree::CubicSpline::setData(const iDynTree::VectorDynSize& time, const iDynTree::VectorDynSize& yData)
 {
     if((time.size() == 0) && (yData.size() == 0)){

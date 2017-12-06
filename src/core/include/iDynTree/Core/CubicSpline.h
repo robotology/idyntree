@@ -38,8 +38,6 @@ namespace iDynTree
         CubicSpline();
 
         CubicSpline(unsigned int buffersDimension);
-
-        ~CubicSpline();
         
         bool setData(const iDynTree::VectorDynSize& time, const iDynTree::VectorDynSize& yData);
         void setInitialConditions(double initialVelocity, double initialAcceleration);
