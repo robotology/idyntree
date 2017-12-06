@@ -28,6 +28,8 @@ add_unit_test(EigenHelpers)
 add_unit_test(Rotation)
 add_unit_test(EigenSparseHelpers)
 add_unit_test(TransformFromMatrix4x4)
+add_unit_test(CubicSpline)
+
 
 # We have also some usages of the API that we want to make sure that do not compile
 macro(add_compilation_error_test name)
