@@ -15,6 +15,8 @@ add_subdirectory(high-level)
 if (IDYNTREE_USES_IPOPT)
   set(IDYNTREE_BUILD_IK TRUE)
   add_subdirectory(inverse-kinematics)
+
+  add_subdirectory(optimalcontrol)
 endif()
 
 if(IDYNTREE_USES_YARP)
