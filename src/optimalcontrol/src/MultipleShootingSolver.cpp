@@ -103,7 +103,7 @@ namespace iDynTree {
         bool MultipleShootingSolver::solve()
         {
             assert(m_pimpl);
-            
+            return true;
         }
     }
 }
