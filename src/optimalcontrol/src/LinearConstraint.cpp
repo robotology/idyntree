@@ -10,7 +10,7 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "LinearConstraint.h"
+#include "iDynTree/LinearConstraint.h"
 
 #include <iDynTree/Core/EigenHelpers.h>
 

@@ -24,6 +24,11 @@ namespace iDynTree {
 namespace optimalcontrol {
     class Controller;
 
+    /**
+     * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+     * \ingroup iDynTreeExperimental
+     */
+
     class DynamicalSystem {
 
     public:

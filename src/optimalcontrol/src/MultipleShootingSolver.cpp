@@ -10,10 +10,10 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "OCSolvers/MultipleShootingSolver.h"
+#include "iDynTree/OCSolvers/MultipleShootingSolver.h"
 
-#include "OptimalControlProblem.h"
-#include "DynamicalSystem.h"
+#include "iDynTree/OptimalControlProblem.h"
+#include "iDynTree/DynamicalSystem.h"
 
 #include <iDynTree/Core/VectorDynSize.h>
 
@@ -103,7 +103,7 @@ namespace iDynTree {
         bool MultipleShootingSolver::solve()
         {
             assert(m_pimpl);
-            return true;
+            return false;
         }
     }
 }

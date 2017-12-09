@@ -10,9 +10,9 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "OptimalControlSolver.h"
+#include "iDynTree/OptimalControlSolver.h"
 
-#include "OptimalControlProblem.h"
+#include "iDynTree/OptimalControlProblem.h"
 
 #include <iDynTree/Core/VectorDynSize.h>
 

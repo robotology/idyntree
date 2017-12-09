@@ -10,8 +10,8 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "LinearSystem.h"
-#include "Controller.h"
+#include "iDynTree/LinearSystem.h"
+#include "iDynTree/Controller.h"
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
@@ -72,18 +72,18 @@ namespace iDynTree {
         iDynTree::MatrixDynSize& LinearSystem::stateMatrix(double time) const
         {
             assert(m_pimpl);
-            if (!m_pimpl->timeVarying) {
+            //if (!m_pimpl->timeVarying) {
                 return m_pimpl->stateMatrix;
-            }
+            //}
 
         }
 
         iDynTree::MatrixDynSize& LinearSystem::controlMatrix(double time) const
         {
             assert(m_pimpl);
-            if (!m_pimpl->timeVarying) {
+            //if (!m_pimpl->timeVarying) {
                 return m_pimpl->controlMatrix;
-            }
+            //}
         }
 
 

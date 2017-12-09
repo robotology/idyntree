@@ -20,6 +20,11 @@
 namespace iDynTree {
     namespace optimalcontrol {
 
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
+
         /*@
          * Models a cost of the form
          * \f[
