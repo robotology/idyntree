@@ -28,6 +28,11 @@ namespace iDynTree {
         class ConstraintsGroup;
         class Cost;
 
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
+
         class OptimalControlProblem {
         public:
 

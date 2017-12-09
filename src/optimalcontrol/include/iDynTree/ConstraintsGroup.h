@@ -26,6 +26,11 @@ namespace iDynTree {
         class Constraint;
         class TimeRange;
 
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
+
         class ConstraintsGroup{ //The group of constraint is used when there is a TimeRange associated with the constraint
         public:
             ConstraintsGroup(const std::string& name, unsigned int maxConstraintSize);

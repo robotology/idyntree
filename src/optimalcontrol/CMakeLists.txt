@@ -30,9 +30,10 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/QuadraticCost.h
                    include/iDynTree/LinearConstraint.h
                    include/iDynTree/Controller.h
-                   include/iDynTree/Integrators/RK4.h
                    include/iDynTree/TimeRange.h
                    include/iDynTree/ConstraintsGroup.h)
+set(INTEGRATORS_PUBLIC_HEADERS include/iDynTree/Integrators/RK4.h)
+
 
 set(SOURCES src/DynamicalSystem.cpp
             src/LinearSystem.cpp
@@ -52,10 +53,10 @@ set(SOURCES src/DynamicalSystem.cpp
             src/TimeRange.cpp
             src/ConstraintsGroup.cpp)
 
-add_library(${libraryname} ${PUBLIC_HEADERS} ${SOURCES})
+add_library(${libraryname} ${PUBLIC_HEADERS} ${INTEGRATORS_PUBLIC_HEADERS} ${SOURCES})
 target_include_directories(${libraryname} SYSTEM PUBLIC ${EIGEN3_INCLUDE_DIR})
-target_include_directories(${libraryname} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/iDynTree>)
-target_include_directories(${libraryname} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/iDynTree>)
+target_include_directories(${libraryname} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+target_include_directories(${libraryname} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model)
 
 
@@ -69,6 +70,8 @@ install(TARGETS ${libraryname}
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
+
+install(FILES ${INTEGRATORS_PUBLIC_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Integrators)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)

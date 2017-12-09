@@ -10,8 +10,8 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "Integrator.h"
-#include "DynamicalSystem.h"
+#include "iDynTree/Integrator.h"
+#include "iDynTree/DynamicalSystem.h"
 #include "iDynTree/Core/Utils.h"
 #include "iDynTree/Core/EigenHelpers.h"
 
@@ -69,7 +69,7 @@ namespace iDynTree {
                 }
 
                 for (std::vector<solutionElement>::const_iterator iteration = m_solution.cbegin();
-                     (iteration +1) != m_solution.cend(); iteration++){
+                     (iteration +1) != m_solution.cend(); ++iteration){
 
                     if ((iteration->time <= time) && ((iteration + 1)->time >= time)){
                         return interpolatePoints(iteration, iteration+1, time, solution);

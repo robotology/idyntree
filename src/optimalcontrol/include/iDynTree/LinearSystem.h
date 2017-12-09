@@ -25,6 +25,12 @@ namespace iDynTree {
         class Controller;
         // Add somewhere the idea of output. In case of time varying system it may share the same parameter of
         // the A or B matrix
+
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
+
         class LinearSystem 
         : public iDynTree::optimalcontrol::DynamicalSystem {
 

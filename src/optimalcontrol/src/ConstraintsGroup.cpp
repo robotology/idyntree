@@ -12,9 +12,9 @@
 
 #include "iDynTree/Core/VectorDynSize.h"
 #include "iDynTree/Core/Utils.h"
-#include "ConstraintsGroup.h"
-#include "Constraint.h"
-#include "TimeRange.h"
+#include "iDynTree/ConstraintsGroup.h"
+#include "iDynTree/Constraint.h"
+#include "iDynTree/TimeRange.h"
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
@@ -148,6 +148,7 @@ namespace optimalcontrol {
 
 
             //the jacobian should be updated
+            return true;
         }
 
         bool ConstraintsGroup::removeConstraint(const std::string& name)

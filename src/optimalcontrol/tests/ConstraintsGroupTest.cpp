@@ -1,6 +1,6 @@
-#include "Constraint.h"
-#include "ConstraintsGroup.h"
-#include "TimeRange.h"
+#include "iDynTree/Constraint.h"
+#include "iDynTree/ConstraintsGroup.h"
+#include "iDynTree/TimeRange.h"
 #include "iDynTree/Core/VectorDynSize.h"
 #include "iDynTree/Core/TestUtils.h"
 #include <memory>

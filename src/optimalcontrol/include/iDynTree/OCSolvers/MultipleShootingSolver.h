@@ -13,12 +13,17 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_MULTIPLESHOOTINGSOLVER_H
 #define IDYNTREE_OPTIMALCONTROL_MULTIPLESHOOTINGSOLVER_H
 
-#include "OptimalControlSolver.h"
+#include "iDynTree/OptimalControlSolver.h"
 
 namespace iDynTree {
     namespace optimalcontrol {
 
         class OptimalControlProblem;
+
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
 
         class MultipleShootingSolver
         : public OptimalControlSolver {

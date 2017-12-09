@@ -13,7 +13,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_RK4_H
 #define IDYNTREE_OPTIMALCONTROL_RK4_H
 
-#include "Integrator.h"
+#include "iDynTree/Integrator.h"
 #include "Eigen/Sparse"
 #include "Eigen/Dense"
 #include "iDynTree/Core/VectorDynSize.h"
@@ -24,6 +24,11 @@ namespace iDynTree {
         class DynamicalSystem;
 
         namespace integrators {
+
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
 
             class RK4 : public Integrator
             {
