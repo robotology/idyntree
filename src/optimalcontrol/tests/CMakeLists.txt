@@ -1,30 +1,17 @@
-cmake_minimum_required(VERSION 3.1)
+get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+macro(add_oc_test classname)
+    set(testsrc ${classname}Test.cpp)
+    set(testbinary ${classname}UnitTest)
+    set(testname   UnitTest${classname})
+    add_executable(${testbinary} ${testsrc})
+    target_include_directories(${testbinary} PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
+    target_link_libraries(${testbinary} idyntree-model idyntree-optimalcontrol)
+    add_test(NAME ${testname} COMMAND ${testbinary})
 
-set (CMAKE_CXX_STANDARD 11)
+    if(IDYNTREE_RUN_VALGRIND_TESTS)
+        add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}>)
+    endif()
+endmacro()
 
-
-project(OptimalControlTests)
-
-#add_executable(OptimalControlTest OptimalControlTest.cpp)
-
-#target_link_libraries(OptimalControlTest iDynTree::optimalcontrol ${iDynTree_LIBRARIES})
-
-#add_test(NAME OptimalControlTest
-#        COMMAND ${PROJECT_NAME})
-
-add_executable(ConstraintsGroupTest ConstraintsGroupTest.cpp)
-
-target_link_libraries(ConstraintsGroupTest PRIVATE idyntree-optimalcontrol ${iDynTree_LIBRARIES})
-
-
-add_test(NAME ConstraintsGroupTest
-        COMMAND ConstraintsGroupTest)
-
-
-add_executable(RK4Test RK4Test.cpp)
-
-target_link_libraries(RK4Test PRIVATE idyntree-optimalcontrol ${iDynTree_LIBRARIES})
-
-
-add_test(NAME RK4Test
-         COMMAND RK4Test)
+add_oc_test(ConstraintsGroup)
+add_oc_test(RK4)

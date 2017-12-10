@@ -10,12 +10,12 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "OptimalControlProblem.h"
-#include "DynamicalSystem.h"
-#include "ConstraintsGroup.h"
-#include "Constraint.h"
-#include "Cost.h"
-#include "TimeRange.h"
+#include "iDynTree/OptimalControlProblem.h"
+#include "iDynTree/DynamicalSystem.h"
+#include "iDynTree/ConstraintsGroup.h"
+#include "iDynTree/Constraint.h"
+#include "iDynTree/Cost.h"
+#include "iDynTree/TimeRange.h"
 #include "iDynTree/Core/VectorDynSize.h"
 #include "iDynTree/Core/Utils.h"
 #include <map>

@@ -10,4 +10,4 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "MPC.h"
+#include "iDynTree/MPC.h"

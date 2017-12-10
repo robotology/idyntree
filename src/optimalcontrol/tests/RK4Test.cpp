@@ -1,8 +1,8 @@
-#include "DynamicalSystem.h"
+#include "iDynTree/DynamicalSystem.h"
 #include "iDynTree/Core/TestUtils.h"
 #include "iDynTree/Core/VectorDynSize.h"
-#include "Integrators/RK4.h"
-#include "Controller.h"
+#include "iDynTree/Integrators/RK4.h"
+#include "iDynTree/Controller.h"
 #include <memory>
 #include <cmath>
 #include <iostream>

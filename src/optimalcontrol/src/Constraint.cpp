@@ -10,7 +10,7 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "Constraint.h"
+#include "iDynTree/Constraint.h"
 #include "iDynTree/Core/Utils.h"
 
 namespace iDynTree {
