@@ -22,13 +22,10 @@ matrix:
     - os: linux
       compiler: gcc
       env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="OFF"
-    - os: osx
-      compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", COMPILE_BINDINGS="OFF", FULL_DEPS="ON"
   allow_failures:
     - os: osx
       compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="OFF", COMPILE_BINDINGS="OFF", FULL_DEPS="ON"
+      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", COMPILE_BINDINGS="OFF", FULL_DEPS="ON"
 
 before_script:
   # workaround around opencv linking problem in clang:
