@@ -27,51 +27,144 @@ bool createReducedModelAndSensors(const Model& fullModel,
                                         Model& reducedModel,
                                         SensorsList& reducedSensors)
 {
-    bool ok = createReducedModel(fullModel,jointsInReducedModel,reducedModel);
+    if (!createReducedModel(fullModel, jointsInReducedModel, reducedModel)) {
+        return false;
+    }
 
     // make sure that reducedSensors is empty
     assert(reducedSensors.getNrOfSensors(SIX_AXIS_FORCE_TORQUE) == 0);
+    assert(reducedSensors.getNrOfSensors(ACCELEROMETER) == 0);
+    assert(reducedSensors.getNrOfSensors(GYROSCOPE) == 0);
 
-    if( !ok ) return false;
 
     // Process first F/T sensors
-    for(size_t sens=0; sens < fullSensors.getNrOfSensors(SIX_AXIS_FORCE_TORQUE); sens++)
-    {
-        SixAxisForceTorqueSensor* pSens = static_cast<SixAxisForceTorqueSensor*>(fullSensors.getSensor(SIX_AXIS_FORCE_TORQUE,sens));
-        std::string parentJointName = pSens->getParentJoint();
+    for (auto it = fullSensors.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE); it.isValid(); ++it) {
+        Sensor* s = *it;
+        JointSensor* jointSens = dynamic_cast<JointSensor*>(s);
 
+        // If the sensor is a joint sensor
+        if (jointSens) {
+            // The parent joint can be present in the reduced model, or it could have been assigned to
+            // a submodel after the reduction
+            std::string parentJointName = jointSens->getParentJoint();
 
-        // If the sensor at which the sensor is attached is not in the reduced model, drop the sensor
-        if( reducedModel.isJointNameUsed(parentJointName) )
-        {
-            // If we add the sensor to the new sensors list, we have to upgrade the indices
-            SixAxisForceTorqueSensor* sensorCopy = (SixAxisForceTorqueSensor*)pSens->clone();
+            // If the parent's joint is present in the model
+            if (reducedModel.isJointNameUsed(parentJointName)) {
+                // If we add the sensor to the new sensors list, we have to upgrade the indices
+                SixAxisForceTorqueSensor* sensorCopy;
+                sensorCopy = static_cast<SixAxisForceTorqueSensor*>(jointSens->clone());
 
-            // For now we assume that the two links at which the FT sensors is attached are not reduced.
-            // A more advanced version of this function could properly handle that case \todo TODO
-            std::string firstLinkName  = sensorCopy->getFirstLinkName();
-            std::string secondLinkName = sensorCopy->getSecondLinkName();
+                std::string oldFirstLinkName = sensorCopy->getFirstLinkName();
+                std::string oldSecondLinkName = sensorCopy->getSecondLinkName();
 
-            iDynTree::LinkIndex firstLinkIndex = reducedModel.getLinkIndex(firstLinkName);
-            if( firstLinkIndex == iDynTree::LINK_INVALID_INDEX )
-            {
-                std::cerr << "[ERROR] createReducedModelAndSensors : " << firstLinkName << " is not in the reduced model, reducing sensors failed" << std::endl;
-                return false;
+                iDynTree::LinkIndex firstLinkIndex = reducedModel.getLinkIndex(oldFirstLinkName);
+                iDynTree::LinkIndex secondLinkIndex = reducedModel.getLinkIndex(oldSecondLinkName);
+
+                // The reduced model contains both the links attached to the joint
+                // No particular operations are required in this case
+                if ((firstLinkIndex != iDynTree::LINK_INVALID_INDEX) &&
+                    (secondLinkIndex != iDynTree::LINK_INVALID_INDEX)) {
+                    // Update indices
+                    sensorCopy->updateIndices(reducedModel);
+                    // Add the sensor to the reduced model
+                    reducedSensors.addSensor(*sensorCopy);
+                }
+                // If one of the links attached to the joint has been lumped in the reduced model,
+                // updating the transform is required
+                else if (firstLinkIndex != iDynTree::LINK_INVALID_INDEX) {
+                    // The secondLink has been lumped
+                    // Get the link to which it was merged
+                    FrameIndex frameIndexOfSecondLink = reducedModel.getFrameIndex(oldSecondLinkName);
+                    LinkIndex newSecondLinkIndex = reducedModel.getFrameLink(frameIndexOfSecondLink);
+
+                    // Update the transform. It requires two steps:
+                    // New second link (reducedModel) -> Old second link (fullModel) -> jointSens frame
+                    Transform oldSecondLinkInFullModel_H_sensorFrame;
+
+                    sensorCopy->getLinkSensorTransform(sensorCopy->getSecondLinkIndex(),
+                                                       oldSecondLinkInFullModel_H_sensorFrame);
+
+                    Transform newSecondLinkInReducedModel_H_oldSecondLinkInFullModel =
+                        reducedModel.getFrameTransform(frameIndexOfSecondLink);
+
+                    // Get the name of the new second link (to which the old one has been lumped)
+                    std::string newSecondLinkName = reducedModel.getLinkName(newSecondLinkIndex);
+
+                    // Set the name of the new secondLink and update its index
+                    sensorCopy->setSecondLinkName(newSecondLinkName);
+                    sensorCopy->updateIndices(reducedModel);
+
+                    // Update the transform
+                    sensorCopy->setSecondLinkSensorTransform(sensorCopy->getSecondLinkIndex(),
+                                                            newSecondLinkInReducedModel_H_oldSecondLinkInFullModel*oldSecondLinkInFullModel_H_sensorFrame);
+
+                    // Update the appliedWrenchLink
+                    if (fullModel.getLinkName(sensorCopy->getAppliedWrenchLink()) == oldSecondLinkName) {
+                        sensorCopy->setAppliedWrenchLink(reducedModel.getLinkIndex(newSecondLinkName));
+                    }
+
+                    // Add the sensor to the reduced model
+                    reducedSensors.addSensor(*sensorCopy);
+                }
+                else if (secondLinkIndex != iDynTree::LINK_INVALID_INDEX) {
+                    // The firstLink has been lumped
+                    // Get the link to which it was merged
+                    FrameIndex frameIndexOfFirstLink = reducedModel.getFrameIndex(oldFirstLinkName);
+                    LinkIndex newFirstLinkIndex = reducedModel.getFrameLink(frameIndexOfFirstLink);
+
+                    // Update the transform. It requires two steps:
+                    // New first link (reducedModel) -> Old first link (fullModel) -> jointSens frame
+                    Transform oldFirstLinkInFullModel_H_sensorFrame;
+
+                    sensorCopy->getLinkSensorTransform(sensorCopy->getFirstLinkIndex(),
+                                                       oldFirstLinkInFullModel_H_sensorFrame);
+
+                    Transform newFirstLinkInReducedModel_H_oldFirstLinkInFullModel =
+                        reducedModel.getFrameTransform(frameIndexOfFirstLink);
+
+                    // Get the name of the new first link (to which the old one has been lumped)
+                    std::string newFirstLinkName = reducedModel.getLinkName(newFirstLinkIndex);
+
+                    // Set the name of the new firstLink and update its index
+                    sensorCopy->setFirstLinkName(newFirstLinkName);
+                    sensorCopy->updateIndices(reducedModel);
+
+                    // Update the transform
+                    sensorCopy->setFirstLinkSensorTransform(sensorCopy->getFirstLinkIndex(),
+                                                            newFirstLinkInReducedModel_H_oldFirstLinkInFullModel*oldFirstLinkInFullModel_H_sensorFrame);
+
+                    // Update the appliedWrenchLink
+                    if (fullModel.getLinkName(sensorCopy->getAppliedWrenchLink()) == oldFirstLinkName) {
+                        sensorCopy->setAppliedWrenchLink(reducedModel.getLinkIndex(newFirstLinkName));
+                    }
+
+                    // Add the sensor to the reduced model
+                    reducedSensors.addSensor(*sensorCopy);
+                }
+                else {
+                    std::stringstream ss;
+                    ss << "The links related to the joint sensor attached on " << parentJointName << " have an invalid index" << std::endl;
+                    reportError("", "createReducedModelAndSensors", ss.str().c_str());
+                    delete sensorCopy;
+                    return false;
+                }
+
+                delete sensorCopy;
             }
+            // If the joint to which is attached the sensor has been lumped, notify that the joint
+            // sensor will not be present in the reduced model
+            else {
+                std::stringstream ss;
+                ss << "The joint " << parentJointName << " is not in the reduced model, the associated joint sensor won't be present" << std::endl;
+                reportWarning("", "createReducedModelAndSensors", ss.str().c_str());
 
-            iDynTree::LinkIndex secondLinkIndex = reducedModel.getLinkIndex(secondLinkName);
-            if( secondLinkIndex == iDynTree::LINK_INVALID_INDEX )
-            {
-                std::cerr << "[ERROR] createReducedModelAndSensors : " << secondLinkName << " is not in the reduced model, reducing sensors failed" << std::endl;
-                return false;
             }
+        }
+        else {
+            std::stringstream ss;
+            ss << "The processed FT sensor couldn't be cast as a joint sensor" << std::endl;
+            reportWarning("", "createReducedModelAndSensors", ss.str().c_str());
 
-            // Update indices
-            sensorCopy->updateIndices(reducedModel);
-
-            reducedSensors.addSensor(*sensorCopy);
-
-            delete sensorCopy;
         }
     }
 
@@ -79,7 +172,6 @@ bool createReducedModelAndSensors(const Model& fullModel,
     for (SensorsList::const_iterator it = fullSensors.allSensorsIterator(); it.isValid(); ++it)
     {
         Sensor *s = *it;
-
 
         // This should select only link sensors
         LinkSensor *linkSens = dynamic_cast<LinkSensor*>(s);
@@ -140,7 +232,7 @@ bool createReducedModelAndSensors(const Model& fullModel,
         }
     }
 
-    return ok;
+    return true;
 }
 
 
