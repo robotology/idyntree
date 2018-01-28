@@ -10,7 +10,10 @@ set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdyHelper.h
                                 include/iDynTree/Estimation/ExternalWrenchesEstimation.h
                                 include/iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h
                                 include/iDynTree/Estimation/SimpleLeggedOdometry.h
-                                include/iDynTree/Estimation/BerdySparseMAPSolver.h)
+                                include/iDynTree/Estimation/BerdySparseMAPSolver.h
+                                include/iDynTree/Estimation/SchmittTrigger.h
+                                include/iDynTree/Estimation/ContactStateMachine.h
+                                include/iDynTree/Estimation/BipedFootContactClassifier.h)
 
 set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES )
 
@@ -18,7 +21,10 @@ set(IDYNTREE_ESTIMATION_SOURCES src/BerdyHelper.cpp
                                 src/ExternalWrenchesEstimation.cpp
                                 src/ExtWrenchesAndJointTorquesEstimator.cpp
                                 src/SimpleLeggedOdometry.cpp
-                                src/BerdySparseMAPSolver.cpp)
+                                src/BerdySparseMAPSolver.cpp
+                                src/SchmittTrigger.cpp
+                                src/ContactStateMachine.cpp
+                                src/BipedFootContactClassifier.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_HEADERS})
