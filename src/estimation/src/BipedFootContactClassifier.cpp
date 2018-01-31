@@ -4,7 +4,7 @@ namespace iDynTree
 {
 
 BipedFootContactClassifier::BipedFootContactClassifier(const SchmittParams& leftFootSchmittParams, 
-                                             const SchmittParams& rightFootSchmittParams) : m_primaryFoot(LEFT_FOOT),                                                                                          
+                                             const SchmittParams& rightFootSchmittParams) : m_primaryFoot(RIGHT_FOOT),                                                                                          
                                                                                             m_leftFootContactState(true),
                                                                                             m_rightFootContactState(true),
                                                                                             m_pattern(ALTERNATE_CONTACT)

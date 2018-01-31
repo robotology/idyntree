@@ -116,6 +116,12 @@ namespace iDynTree
          * @param pattern switching pattern
          */
         void setContactSwitchingPattern(SwitchingPattern pattern) { m_pattern = pattern; } 
+        
+        /**
+         * set  primary foot
+         * @param foot primary foot
+         */
+        void setPrimaryFoot(contactFoot foot) { m_primaryFoot = foot; }
        
         // unique pointer to contact state machine for left foot
         std::unique_ptr<ContactStateMachine> m_leftFootContactClassifier;
