@@ -1,3 +1,12 @@
+/*
+ * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ *
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
+ */
 
 int symoro_generated_HRP2JRL_IMU_regressor(const KDL::JntArray &q, const KDL::JntArray &q_dot, const KDL::JntArray &q_dotdot, const KDL::Twist base_vel, const KDL::Twist base_acc, Eigen::MatrixXd & dynamics_regressor)
 {

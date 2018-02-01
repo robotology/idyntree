@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2013 IIT - Istituto Italiano di Tecnologia - http://www.iit.it
- * Author: Silvio Traversaro
- * CopyPolicy: Released under the terms of the GNU LGPL v2.0 (or any later version)
- * 
- * The development of this software was supported by the FP7 EU project 
- * CoDyCo (No. 600716 ICT 2011.2.1 Cognitive Systems and Robotics (b)) 
- * http://www.codyco.eu
+ * Copyright (C) 2013 Fondazione Istituto Italiano di Tecnologia
+ *
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
  */
 
 #ifndef _DIRL_SPARSE_NUMERICAL_BASE_PARAMETERS_

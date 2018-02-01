@@ -1,9 +1,12 @@
-/**
-* Copyright: 2010-2013 RobotCub Consortium
-* Author: Silvio Traversaro, Serena Ivaldi
-* CopyPolicy: Released under the terms of the GNU GPL v2.0.
-**/
-
+/*
+ * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ *
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
+ */
 //
 // This test/example is based on the iDyn tutorial with the same name,
 // to show the similarities in the API between iDyn and iDynTree (and
