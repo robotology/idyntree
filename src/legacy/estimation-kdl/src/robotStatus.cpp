@@ -1,20 +1,12 @@
 /*
- * Copyright (C) 2014 RobotCub Consortium, European Commission FP6 Project IST-004370
- * Author: Silvio Traversaro
- * email:  silvio.traversaro@iit.it
- * website: www.icub.org
- * Permission is granted to copy, distribute, and/or modify this program
- * under the terms of the GNU General Public License, version 2 or any
- * later version published by the Free Software Foundation.
+ * Copyright (C) 2014 Fondazione Istituto Italiano di Tecnologia
  *
- * A copy of the license can be found at
- * http://www.robotcub.org/icub/license/gpl.txt
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
- * Public License for more details
-*/
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
+ */
 
 #include "iDynTree/Estimation/robotStatus.h"
 

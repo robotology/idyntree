@@ -1,4 +1,4 @@
-iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=master)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/1uecfmyvxb2dujt9/branch/master?svg=true)](https://ci.appveyor.com/project/robotology/idyntree/branch/master)
+iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=maste2013-r)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/1uecfmyvxb2dujt9/branch/master?svg=true)](https://ci.appveyor.com/project/robotology/idyntree/branch/master) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![License: LGPL v2](https://img.shields.io/badge/License-LGPL%20v2-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)
 ===========
 
 iDynTree is a library of robots dynamics algorithms for control, estimation and simulation.
@@ -115,3 +115,9 @@ The development of iDynTree is supported by the FP7 EU projects [CoDyCo (No. 600
 Systems and Robotics)](http://www.codyco.eu/)  and [Koroibot (No. 611909 ICT- 2013.2.1 Cognitive Systems and Robotics)](http://koroibot.eu/).
 The development is also supported by the [Istituto Italiano di Tecnologia](http://www.iit.it).
 
+## License 
+iDynTree is licensed under either the GNU Lesser General Public License v3.0 : 
+https://www.gnu.org/licenses/lgpl-3.0.html
+or the GNU Lesser General Public License v2.1 :
+https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+at your option.
