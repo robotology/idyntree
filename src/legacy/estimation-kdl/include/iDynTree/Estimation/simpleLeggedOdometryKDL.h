@@ -6,7 +6,6 @@
  * or the GNU Lesser General Public License v2.1 :
  * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  * at your option.
- */e for more details
  */
 
 #ifndef _IDYNTREE_SIMPLE_LEGGED_ODOMETRY_
