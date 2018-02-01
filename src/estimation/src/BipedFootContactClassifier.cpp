@@ -35,8 +35,9 @@ void BipedFootContactClassifier::detectFeetTransition()
         case SwitchingPattern::ALTERNATE_CONTACT:
             if (m_primaryFoot == LEFT_FOOT)
             {                
-                if ((leftFootTransition == ContactStateMachine::CONTACT_BREAK && rightFootTransition == ContactStateMachine::CONTACT_MAKE) 
-                    || (leftFootTransition == ContactStateMachine::CONTACT_BREAK && rightFootTransition == ContactStateMachine::STABLE_ONCONTACT))
+//                 if ((leftFootTransition == ContactStateMachine::CONTACT_BREAK && rightFootTransition == ContactStateMachine::CONTACT_MAKE) 
+//                     || (leftFootTransition == ContactStateMachine::CONTACT_BREAK && rightFootTransition == ContactStateMachine::STABLE_ONCONTACT))
+                if ( rightFootTransition == ContactStateMachine::CONTACT_MAKE && m_leftFootContactState == true)
                 {
                     m_primaryFoot = RIGHT_FOOT; 
                 }
@@ -55,8 +56,9 @@ void BipedFootContactClassifier::detectFeetTransition()
             }
             else if (m_primaryFoot == RIGHT_FOOT)
             {                
-                if ((rightFootTransition == ContactStateMachine::CONTACT_BREAK && leftFootTransition == ContactStateMachine::CONTACT_MAKE)
-                    || (rightFootTransition == ContactStateMachine::CONTACT_BREAK && leftFootTransition == ContactStateMachine::STABLE_ONCONTACT))
+//                 if ((rightFootTransition == ContactStateMachine::CONTACT_BREAK && leftFootTransition == ContactStateMachine::CONTACT_MAKE)
+//                     || (rightFootTransition == ContactStateMachine::CONTACT_BREAK && leftFootTransition == ContactStateMachine::STABLE_ONCONTACT))
+                if ( leftFootTransition == ContactStateMachine::CONTACT_MAKE && m_rightFootContactState == true)
                 {
                     m_primaryFoot = LEFT_FOOT;
                 }
