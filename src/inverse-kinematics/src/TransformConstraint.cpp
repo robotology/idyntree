@@ -1,10 +1,11 @@
-/*!
- * @file Transform.cpp
- * @author Francesco Romano
- * @copyright 2016 iCub Facility - Istituto Italiano di Tecnologia
- *            Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
- * @date 2016
+/*
+ * Copyright (C) 2016 Fondazione Istituto Italiano di Tecnologia
  *
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
  */
 
 #include "TransformConstraint.h"
