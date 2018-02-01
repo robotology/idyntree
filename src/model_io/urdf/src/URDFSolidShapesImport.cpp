@@ -1,7 +1,11 @@
 /*
  * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
- * Authors: Silvio Traversaro
- * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
  */
 
 #include <iDynTree/ModelIO/URDFModelImport.h>
