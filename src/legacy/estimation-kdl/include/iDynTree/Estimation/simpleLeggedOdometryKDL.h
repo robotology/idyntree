@@ -1,19 +1,12 @@
 /*
- * Copyright (C) 2015 Robotics, Brain and Cognitive Sciences - Istituto Italiano di Tecnologia
- * Author: Silvio Traversaro
- * email: silvio.traversaro@iit.it
+ * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
  *
- * Permission is granted to copy, distribute, and/or modify this program
- * under the terms of the GNU General Public License, version 2 or any
- * later version published by the Free Software Foundation.
- *
- * A copy of the license can be found at
- * http://www.robotcub.org/icub/license/gpl.txt
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
- * Public License for more details
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
+ */e for more details
  */
 
 #ifndef _IDYNTREE_SIMPLE_LEGGED_ODOMETRY_
