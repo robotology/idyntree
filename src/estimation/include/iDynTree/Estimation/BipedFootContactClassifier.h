@@ -116,6 +116,16 @@ namespace iDynTree
          * @param pattern switching pattern
          */
         void setContactSwitchingPattern(SwitchingPattern pattern) { m_pattern = pattern; } 
+        
+        /**
+         * set  primary foot
+         * This method was mainly intended to be called by an external process 
+         * to set the primary foot in the initial setting, before any contact is broken. 
+         * In case it is set to UNKNOWN_FOOT, it waits for the foot normal force measurements (checks left first and then right), 
+         * and activates corresponding foot, handled in the detectTransitions() method.
+         * @param foot primary foot
+         */
+        void setPrimaryFoot(contactFoot foot) { m_primaryFoot = foot; }
        
         // unique pointer to contact state machine for left foot
         std::unique_ptr<ContactStateMachine> m_leftFootContactClassifier;
