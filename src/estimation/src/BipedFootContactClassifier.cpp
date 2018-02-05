@@ -19,7 +19,7 @@ void BipedFootContactClassifier::updateFootContactState(double currentTime, doub
     m_leftFootContactClassifier.get()->contactMeasurementUpdate(currentTime, leftFootNormalForce);
     m_rightFootContactClassifier.get()->contactMeasurementUpdate(currentTime, rightFootNormalForce);
     m_leftFootContactState = m_leftFootContactClassifier.get()->contactState();
-    m_rightFootContactState = m_leftFootContactClassifier.get()->contactState();
+    m_rightFootContactState = m_rightFootContactClassifier.get()->contactState();
     
     detectFeetTransition();
 }
