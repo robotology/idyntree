@@ -5,7 +5,7 @@ namespace iDynTree
 
 SchmittTrigger::SchmittTrigger(double stableOFFTime, double stableONTime, double lowValueThreshold, double highValueThreshold)
 {
-    configure(stableOFFTime, stableONTime, highValueThreshold, lowValueThreshold);
+    configure(stableOFFTime, stableONTime, lowValueThreshold, highValueThreshold);
     resetDevice();
 }
 
