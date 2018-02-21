@@ -145,7 +145,7 @@ public:
     /**
      * Set the used FrameVelocityRepresentation.
      */
-    bool setFrameVelocityRepresentation(const FrameVelocityRepresentation framVelRepr) const;
+    bool setFrameVelocityRepresentation(const FrameVelocityRepresentation frameVelRepr) const;
 
     /**
      * Get the used FrameVelocityRepresentation.

@@ -127,7 +127,7 @@ public:
 
     // Transform a wrench from and to body fixed and the used representation
     Wrench fromBodyFixedToUsedRepresentation(const Wrench & wrenchInBodyFixed, const Transform & inertial_X_link);
-    Wrench fromUsedRepresentationToBodyFixed(const Wrench & wrenchInBodyFixed, const Transform & inertial_X_link);
+    Wrench fromUsedRepresentationToBodyFixed(const Wrench & wrenchInUsedRepresentation, const Transform & inertial_X_link);
 
     // storage of the raw output of the CRBA, used to extract
     // the mass matrix and most the centroidal quantities
@@ -278,8 +278,6 @@ void KinDynComputations::computeFwdKinematics()
                                       this->pimpl->m_linkVel);
 
     this->pimpl->m_isFwdKinematicsUpdated = ok;
-
-    return;
 }
 
 void KinDynComputations::computeRawMassMatrixAndTotalMomentum()
@@ -467,33 +465,33 @@ std::string KinDynComputations::getDescriptionOfDegreesOfFreedom()
     return ss.str();
 }
 
-bool KinDynComputations::setRobotState(const VectorDynSize& q,
-                                       const VectorDynSize& q_dot,
+bool KinDynComputations::setRobotState(const VectorDynSize& s,
+                                       const VectorDynSize& s_dot,
                                        const Vector3& world_gravity)
 {
     Transform world_T_base = Transform::Identity();
     Twist base_velocity = Twist::Zero();
 
-    return setRobotState(world_T_base,q,
-                         base_velocity,q_dot,
+    return setRobotState(world_T_base,s,
+                         base_velocity,s_dot,
                          world_gravity);
 }
 
 bool KinDynComputations::setRobotState(const Transform& world_T_base,
-                                       const VectorDynSize& qj,
+                                       const VectorDynSize& s,
                                        const Twist& base_velocity,
-                                       const VectorDynSize& qj_dot,
+                                       const VectorDynSize& s_dot,
                                        const Vector3& world_gravity)
 {
 
-    bool ok = qj.size() == pimpl->m_robot_model.getNrOfPosCoords();
+    bool ok = s.size() == pimpl->m_robot_model.getNrOfPosCoords();
     if( !ok )
     {
         reportError("KinDynComputations","setRobotState","Wrong size in input joint positions");
         return false;
     }
 
-    ok = qj_dot.size() == pimpl->m_robot_model.getNrOfDOFs();
+    ok = s_dot.size() == pimpl->m_robot_model.getNrOfDOFs();
     if( !ok )
     {
         reportError("KinDynComputations","setRobotState","Wrong size in input joint velocities");
@@ -504,7 +502,7 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
 
     // Save pos
     this->pimpl->m_pos.worldBasePos() = world_T_base;
-    toEigen(this->pimpl->m_pos.jointPos()) = toEigen(qj);
+    toEigen(this->pimpl->m_pos.jointPos()) = toEigen(s);
 
     // Save gravity
     this->pimpl->m_gravityAcc = world_gravity;
@@ -512,7 +510,7 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
     toEigen(pimpl->m_gravityAccInBaseLinkFrame) = toEigen(base_R_inertial)*toEigen(this->pimpl->m_gravityAcc);
 
     // Save vel
-    toEigen(pimpl->m_vel.jointVel()) = toEigen(qj_dot);
+    toEigen(pimpl->m_vel.jointVel()) = toEigen(s_dot);
 
     // Account for the different possible representations
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
@@ -759,6 +757,7 @@ Transform KinDynComputations::getRelativeTransformExplicit(const iDynTree::Frame
     return Transform(refFrameOrientation_R_frameOrientation,refFrameOrientation_p_refFrameOrigin_frameOrigin);
 }
 
+// TODO: When it is possible to break the API, change the parameter to a const &
 Transform KinDynComputations::getWorldTransform(std::string frameName)
 {
     int frameIndex = getFrameIndex(frameName);
@@ -1355,7 +1354,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideB
     toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(jac);
 }
 
-void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize& mat)
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize& jac)
 {
     Transform newOutputFrame_X_oldOutputFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
@@ -1375,8 +1374,8 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideB
 
     Matrix6x6 newOutputFrame_X_oldOutputFrame_ = newOutputFrame_X_oldOutputFrame.asAdjointTransformWrench();
 
-    int cols = mat.cols();
-    toEigen(mat).block(0,0,6,cols) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(mat).block(0,0,6,cols);
+    int cols = jac.cols();
+    toEigen(jac).block(0,0,6,cols) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(jac).block(0,0,6,cols);
 }
 
 
@@ -1590,7 +1589,7 @@ bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMa
 }
 
 Wrench KinDynComputations::KinDynComputationsPrivateAttributes::fromUsedRepresentationToBodyFixed(const Wrench & wrenchInUsedRepresentation,
-                                                                                                  const Transform & inertial_X_bodyFixed)
+                                                                                                  const Transform & inertial_X_link)
 {
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
@@ -1598,12 +1597,12 @@ Wrench KinDynComputations::KinDynComputationsPrivateAttributes::fromUsedRepresen
     }
     else if (m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        return (inertial_X_bodyFixed.getRotation().inverse())*wrenchInUsedRepresentation;
+        return (inertial_X_link.getRotation().inverse())*wrenchInUsedRepresentation;
     }
     else
     {
         assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
-        return inertial_X_bodyFixed.inverse()*wrenchInUsedRepresentation;
+        return inertial_X_link.inverse()*wrenchInUsedRepresentation;
     }
 
     assert(false);
@@ -1611,7 +1610,7 @@ Wrench KinDynComputations::KinDynComputationsPrivateAttributes::fromUsedRepresen
 }
 
 Wrench KinDynComputations::KinDynComputationsPrivateAttributes::fromBodyFixedToUsedRepresentation(const Wrench & wrenchInBodyFixed,
-                                                                                                  const Transform & inertial_X_bodyFixed)
+                                                                                                  const Transform & inertial_X_link)
 {
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
@@ -1619,12 +1618,12 @@ Wrench KinDynComputations::KinDynComputationsPrivateAttributes::fromBodyFixedToU
     }
     else if (m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        return inertial_X_bodyFixed.getRotation()*wrenchInBodyFixed;
+        return inertial_X_link.getRotation()*wrenchInBodyFixed;
     }
     else
     {
         assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
-        return inertial_X_bodyFixed*wrenchInBodyFixed;
+        return inertial_X_link*wrenchInBodyFixed;
     }
 
     assert(false);
