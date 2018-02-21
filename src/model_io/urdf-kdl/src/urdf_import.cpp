@@ -16,7 +16,6 @@
 #include <kdl/jntarray.hpp>
 #include <tinyxml.h>
 
-using namespace std;
 using namespace KDL;
 
 namespace iDynTree{
@@ -151,9 +150,9 @@ bool addChildrenToTree(urdf::LinkPtr root, Tree& tree)
 }
 
 
-bool treeFromUrdfFile(const string& file, Tree& tree,const bool consider_root_link_inertia)
+bool treeFromUrdfFile(const std::string& file, Tree& tree,const bool consider_root_link_inertia)
 {
-    ifstream ifs(file.c_str());
+    std::ifstream ifs(file.c_str());
     std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
@@ -192,7 +191,7 @@ std::cout << "robot name is: " << robot->getName() << std::endl;
   return 0;
 }
 
-bool treeFromUrdfString(const string& xml, Tree& tree, const bool consider_root_link_inertia)
+bool treeFromUrdfString(const std::string& xml, Tree& tree, const bool consider_root_link_inertia)
 {
   urdf::ModelInterfacePtr urdf_model;
   urdf_model = urdf::parseURDF(xml);
@@ -266,7 +265,7 @@ bool jointPosLimitsFromUrdfFile(const std::string& file,
                              KDL::JntArray & min,
                              KDL::JntArray & max)
 {
-    ifstream ifs(file.c_str());
+    std::ifstream ifs(file.c_str());
     std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 
