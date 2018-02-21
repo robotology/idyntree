@@ -17,9 +17,6 @@
 #include <kdl/tree.hpp>
 #include <kdl/joint.hpp>
 
-
-using namespace std;
-
 namespace iDynTree {
 
 // construct vector
@@ -148,7 +145,7 @@ urdf::Inertial toUrdf(KDL::RigidBodyInertia i)
 }
 
 
-bool treeToUrdfFile(const string& file, const KDL::Tree& tree, const std::string & robot_name)
+bool treeToUrdfFile(const std::string& file, const KDL::Tree& tree, const std::string & robot_name)
 {
   bool ok = false;
   TiXmlDocument * urdf_xml;
