@@ -6,6 +6,8 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
+idyntree_enable_cxx11()
+
 add_subdirectory(urdf)
 
 if(IDYNTREE_USES_KDL)

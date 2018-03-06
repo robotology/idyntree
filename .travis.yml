@@ -28,12 +28,6 @@ matrix:
       env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", COMPILE_BINDINGS="OFF", FULL_DEPS="ON"
 
 before_script:
-  # workaround around opencv linking problem in clang:
-  # http://stackoverflow.com/questions/12689304/ctypes-error-libdc1394-error-failed-to-initialize-libdc1394
-  - sudo ln /dev/null /dev/raw1394
-  - cmake --version
-  - cd ..
-  
   # Update homebrew on osx
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
   
@@ -45,25 +39,82 @@ before_script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "clang" ]; then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang; fi; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CXX" == "clang++" ]; then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang++; fi; fi
 
-  # use superbuild for getting iDynTree dependencies
-  - git clone https://github.com/robotology/codyco-superbuild
-  - cd codyco-superbuild
-  # install dependencies using the codyco-superbuild script
-  - chmod +x ./.ci/travis-deps.sh
-  - sh .ci/travis-deps.sh
-  # On Ubuntu, make sure not to use openblas as blas backend, see 
+  # install system dependencies using apt (linux) or homebrew (macos)
+  # note: we install a lot of dependencies, as we compile iDynTree with all dependencies enabled
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository ppa:octave/stable -y; fi 
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository ppa:nschloe/eigen-backports -y; fi 
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo sh -c 'echo "deb http://www.icub.org/ubuntu trusty contrib/science" > /etc/apt/sources.list.d/icub.list'; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi 
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install --allow-unauthenticated build-essential cmake3 icub-common libboost-system-dev libboost-filesystem-dev libboost-thread-dev libeigen3-dev libtinyxml-dev libace-dev libgsl0-dev libcv-dev libhighgui-dev libcvaux-dev libode-dev liboctave-dev liblua5.1-dev lua5.1 git swig; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ace eigen cmake boost tinyxml swig gsl pkg-config jpeg sqlite readline tinyxml dartsim/dart/ipopt octave; fi 
+ 
+  # avoid using openblas
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install libatlas-base-dev; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo update-alternatives --set libblas.so.3  /usr/lib/atlas-base/atlas/libblas.so.3 ; fi
-  # On macOS, install ipopt from homebrew 
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ipopt; fi
+  
+  # check cmake version
+  - cmake --version
+  
+  # build everything else from source (opyionsl dependencies)
+  - pwd 
+  # Switch to the parent directory of the git repository folder 
+  - cd ..
+  
+  # Build YARP 
+  - git clone https://github.com/robotology/yarp
+  - cd yarp
   - mkdir build
-  - cd build
-  - export CMAKE_PREFIX_PATH=`pwd`/install
-  # using the YCM_EP_MAINTAINER_MODE variable to enable the subproject-dependees target
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_USES_KDL:BOOL=ON -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DYCM_EP_MAINTAINER_MODE:BOOL=ON -DNON_INTERACTIVE_BUILD:BOOL=TRUE  ..
-  - cmake --build . --target iDynTree-dependees 
-  - pwd
+  - cd build 
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCREATE_LIB_MATH:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
+  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
   - cd ../..
+  
+  # Build ICUB
+  - git clone https://github.com/robotology/icub-main
+  - cd icub-main
+  - mkdir build
+  - cd build 
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
+  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
+  - cd ../..
+  
+  # Dependencies of the deprecated part of iDynTree that depends on KDL, but we need to keep testing that part 
+  # Build console_bridge
+  - git clone https://github.com/ros/console_bridge
+  - cd console_bridge
+  - mkdir build
+  - cd build 
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
+  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
+  - cd ../..
+ 
+  # Build urdfdom_headers 
+  - git clone https://github.com/ros/urdfdom_headers 
+  - cd urdfdom_headers
+  - mkdir build
+  - cd build 
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
+  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
+  - cd ../..
+  
+  # Build urdfdom 
+  - git clone https://github.com/ros/urdfdom
+  - cd urdfdom
+  - mkdir build
+  - cd build 
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
+  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
+  - cd ../..
+  
+  # Build orocos_kdl 
+  - git clone https://github.com/orocos/orocos_kinematics_dynamics
+  - cd orocos_kinematics_dynamics/orocos_kdl
+  - mkdir build
+  - cd build 
+  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
+  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
+  - cd ../../..
+  
   # Prepare iDynTree build
   - cd idyntree
   - mkdir build
