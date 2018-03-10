@@ -20,6 +20,7 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/LinearSystem.h
                    include/iDynTree/MultiBodySystem.h
                    include/iDynTree/Integrator.h
+                   include/iDynTree/LinearMPC.h
                    include/iDynTree/MPC.h
                    include/iDynTree/OptimalControlProblem.h
                    include/iDynTree/OptimalControlSolver.h
@@ -32,13 +33,16 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/Controller.h
                    include/iDynTree/TimeRange.h
                    include/iDynTree/ConstraintsGroup.h)
-set(INTEGRATORS_PUBLIC_HEADERS include/iDynTree/Integrators/RK4.h)
+set(INTEGRATORS_PUBLIC_HEADERS include/iDynTree/Integrators/FixedStepIntegrator.h
+                               include/iDynTree/Integrators/RK4.h
+                               include/iDynTree/Integrators/ImplicitTrapezoidal.h)
 
 
 set(SOURCES src/DynamicalSystem.cpp
             src/LinearSystem.cpp
             src/MultiBodySystem.cpp
             src/Integrator.cpp
+            src/LinearMPC.cpp
             src/MPC.cpp
             src/OptimalControlProblem.cpp
             src/OptimalControlSolver.cpp
@@ -49,7 +53,9 @@ set(SOURCES src/DynamicalSystem.cpp
             src/QuadraticCost.cpp
             src/LinearConstraint.cpp
             src/Controller.cpp
+            src/FixedStepIntegrator.cpp
             src/RK4.cpp
+            src/ImplicitTrapezoidal.cpp
             src/TimeRange.cpp
             src/ConstraintsGroup.cpp)
 

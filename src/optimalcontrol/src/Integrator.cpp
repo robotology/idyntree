@@ -24,8 +24,10 @@ namespace iDynTree {
         namespace integrators {
 
             Integrator::Integrator(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem)
-            : m_dynamicalSystem_ptr(dynamicalSystem)
-            , m_dTmax(0)
+            : m_dTmax(0)
+            , m_dynamicalSystem_ptr(dynamicalSystem)
+            , m_infoData(new IntegratorInfoData)
+            , m_info(m_infoData)
             {
             }
 
@@ -36,7 +38,7 @@ namespace iDynTree {
 
             bool Integrator::setMaximumStepSize(const double dT){
                 if (dT <= 0){
-                    reportError("Integrator", "setMaximumStepSize", "The dT must be positive.");
+                    reportError(m_info.name().c_str(), "setMaximumStepSize", "The dT must be positive.");
                     return false;
                 }
 
@@ -55,7 +57,7 @@ namespace iDynTree {
 
             bool Integrator::getSolution(double time, VectorDynSize &solution) const{
                 if (m_solution.size() == 0){
-                    reportError("Integrator", "getSolution", "No solution computed yet.");
+                    reportError(m_info.name().c_str(), "getSolution", "No solution computed yet.");
                     return false;
                 }
 
@@ -64,7 +66,7 @@ namespace iDynTree {
                     errorMsg << "Time outside the computed range. ";
                     errorMsg << "Valid range: [" << m_solution.front().time << ", " << m_solution.back().time << "]. ";
                     errorMsg << "Requested value: " << time << ".";
-                    reportError("Integrator", "getSolution", errorMsg.str().c_str());
+                    reportError(m_info.name().c_str(), "getSolution", errorMsg.str().c_str());
                     return false;
                 }
 
@@ -76,7 +78,7 @@ namespace iDynTree {
                     }
                 }
 
-                reportError("Integrator", "getSolution", "Error while searching the desired time.");
+                reportError(m_info.name().c_str(), "getSolution", "Error while searching the desired time.");
                 return false;
             }
 
@@ -87,6 +89,21 @@ namespace iDynTree {
             void Integrator::clearSolution()
             {
                 m_solution.clear();
+            }
+
+            bool Integrator::evaluateCollocationConstraint(const std::vector<VectorDynSize> &collocationPoints, double &constraintValue)
+            {
+                return false;
+            }
+
+            bool Integrator::evaluateCollocationConstraintJacobian(const std::vector<VectorDynSize> &collocationPoints, MatrixDynSize &jacobianValue)
+            {
+                return false;
+            }
+
+            const IntegratorInfo &Integrator::info() const
+            {
+                return m_info;
             }
 
             bool Integrator::interpolatePoints(const std::vector<solutionElement>::const_iterator &first, const std::vector<solutionElement>::const_iterator &second, double time, VectorDynSize &outputPoint) const{

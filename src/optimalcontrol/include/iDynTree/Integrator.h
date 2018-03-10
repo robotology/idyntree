@@ -14,7 +14,9 @@
 #define IDYNTREE_OPTIMALCONTROL_INTEGRATOR_H
 
 #include "iDynTree/Core/VectorDynSize.h"
+#include "iDynTree/Core/MatrixDynSize.h"
 #include <vector>
+#include <string>
 #include <memory>
 
 namespace iDynTree {
@@ -25,10 +27,43 @@ namespace optimalcontrol {
 
         namespace integrators {
 
+            /**
+             * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+             * \ingroup iDynTreeExperimental
+             */
+
             class solutionElement{
             public:
                 VectorDynSize stateAtT;
                 double time;
+            };
+
+
+            class IntegratorInfoData {
+            protected:
+                friend class Integrator;
+                IntegratorInfoData():name("Integrator"),isExplicit(true),numberOfStages(0){}
+            public:
+                std::string name;
+
+                bool isExplicit;
+
+                size_t numberOfStages;
+            };
+
+            class IntegratorInfo {
+            private:
+                std::shared_ptr<IntegratorInfoData> m_data;
+            public:
+                IntegratorInfo(std::shared_ptr<IntegratorInfoData> data):m_data(data){}
+
+                IntegratorInfo(const IntegratorInfo &other) = delete;
+
+                const std::string &name() const {return m_data->name;}
+
+                const bool isExplicit() const {return m_data->isExplicit;}
+
+                const size_t numberOfStages() const {return m_data->numberOfStages;}
             };
 
             /**
@@ -45,7 +80,7 @@ namespace optimalcontrol {
 
                 virtual bool integrate(double initialTime, double finalTime) = 0;
 
-                bool setMaximumStepSize(const double dT);//maybe I should define an empty interface and an abstarct class to implement these basic methods
+                bool setMaximumStepSize(const double dT);
 
                 double maximumStepSize() const;
 
@@ -57,14 +92,22 @@ namespace optimalcontrol {
 
                 virtual void clearSolution();
 
+                virtual bool evaluateCollocationConstraint(const std::vector<VectorDynSize>& collocationPoints, double& constraintValue);
+
+                virtual bool evaluateCollocationConstraintJacobian(const std::vector<VectorDynSize>& collocationPoints, MatrixDynSize& jacobianValue);
+
+                const IntegratorInfo& info() const;
+
             protected:
                 double m_dTmax;
                 std::shared_ptr<DynamicalSystem> m_dynamicalSystem_ptr;
                 std::vector<solutionElement> m_solution;
+                std::shared_ptr<IntegratorInfoData> m_infoData;
+                IntegratorInfo m_info;
 
-                bool interpolatePoints(const std::vector<solutionElement>::const_iterator &first,
-                                       const std::vector<solutionElement>::const_iterator &second,
-                                       double time, VectorDynSize& outputPoint) const;
+                virtual bool interpolatePoints(const std::vector<solutionElement>::const_iterator &first,
+                                               const std::vector<solutionElement>::const_iterator &second,
+                                               double time, VectorDynSize& outputPoint) const;
             };
         }
 
