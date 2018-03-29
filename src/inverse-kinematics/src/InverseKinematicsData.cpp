@@ -529,6 +529,31 @@ namespace kinematics {
 
         return;
     }
+    
+    bool InverseKinematicsData::setJointLimits(std::vector<std::pair<double, double> >& jointLimits)
+    {        
+        // check that the dimension of the vector is correct  
+        if(jointLimits.size() != m_jointLimits.size())
+            return false;
+
+        // clear the old limits and assign new limits
+        m_jointLimits.clear();
+        m_jointLimits = jointLimits;
+
+        return true;
+    }
+    
+    bool InverseKinematicsData::getJointLimits(std::vector<std::pair<double, double> >& jointLimits)
+    {        
+      // check that the dimension of the vector is correct  
+      if(jointLimits.size() != m_jointLimits.size())
+        return false;
+      
+      // return the current limits
+      jointLimits = m_jointLimits;
+      
+      return true;
+    }
 
 }
 }
