@@ -139,6 +139,22 @@ public:
      */
     bool setModel(const iDynTree::Model &model,
                   const std::vector<std::string> &consideredJoints = std::vector<std::string>());
+    
+    /*!
+     * Set new joint limits
+     * \author Yue Hu
+     * @param jointLimits vector of new joint limits to be imposed
+     * @return true if successfull, false otherwise
+     */
+    bool setJointLimits(std::vector<std::pair<double, double> >& jointLimits);
+    
+    /*!
+     * Get current joint limits
+     * \author Yue Hu
+     * @param jointLimits vector of current joint limits
+     * @return true if successfull, false otherwise
+     */
+    bool getJointLimits(std::vector<std::pair<double, double> >& jointLimits);
 
     /*!
      * Reset the variables.

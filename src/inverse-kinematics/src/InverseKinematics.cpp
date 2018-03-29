@@ -68,6 +68,18 @@ namespace iDynTree {
         assert(m_pimpl);
         return IK_PIMPL(m_pimpl)->setModel(model, consideredJoints);
     }
+    
+    bool InverseKinematics::setJointLimits(std::vector<std::pair<double, double> >& jointLimits)
+    {
+      assert(m_pimpl);
+      return IK_PIMPL(m_pimpl)->setJointLimits(jointLimits);
+    }
+    
+    bool InverseKinematics::getJointLimits(std::vector<std::pair<double, double> >& jointLimits)
+    {
+      assert(m_pimpl);
+      return IK_PIMPL(m_pimpl)->getJointLimits(jointLimits);
+    }
 
     void InverseKinematics::clearProblem()
     {
