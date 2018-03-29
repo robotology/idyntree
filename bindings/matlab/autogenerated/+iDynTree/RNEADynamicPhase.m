@@ -1,3 +1,3 @@
 function varargout = RNEADynamicPhase(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1206, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1233, varargin{:});
 end

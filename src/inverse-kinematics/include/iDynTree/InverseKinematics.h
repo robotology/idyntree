@@ -394,6 +394,7 @@ public:
      *
      * @note This method returns true even if the frame constraint was already deactivated, it only
      *       returns false if the constraint was never added.
+<<<<<<< HEAD
      *
      * @param frameName       the name of the frame on which to attach the constraint
      * @return true if successful (i.e. the constraint is present) , false otherwise.
@@ -404,6 +405,18 @@ public:
      * Check if a given constraint is active or not.
 
      *
+=======
+     *
+     * @param frameName       the name of the frame on which to attach the constraint
+     * @return true if successful (i.e. the constraint is present) , false otherwise.
+     */
+    bool deactivateFrameConstraint(const std::string& frameName);
+
+    /*!
+     * Check if a given constraint is active or not.
+
+     *
+>>>>>>> db02dbb7a72fd7fdf1d779fe39ca585acd085437
      * @param frameName       the name of the constrained frame
      * @return true if the constraint is active, false if it is not active or it does not exist, or if the frame does not exist.
      */

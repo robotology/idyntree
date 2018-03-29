@@ -529,6 +529,7 @@ namespace kinematics {
 
         return;
     }
+<<<<<<< HEAD
     
     bool InverseKinematicsData::setJointLimits(std::vector<std::pair<double, double> >& jointLimits)
     {        
@@ -554,6 +555,8 @@ namespace kinematics {
       
       return true;
     }
+=======
+>>>>>>> db02dbb7a72fd7fdf1d779fe39ca585acd085437
 
 }
 }
