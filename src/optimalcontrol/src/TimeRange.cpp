@@ -18,6 +18,7 @@ namespace iDynTree {
         TimeRange::TimeRange()
         :m_initTime(0.0)
         ,m_endTime(0.0)
+        ,m_anyTime(false)
         {
         }
 
@@ -27,11 +28,8 @@ namespace iDynTree {
                 reportError("TimeRange", "TimeRange", "Invalid initialization. Setting equal to AnyTime.");
                 m_initTime = -1;
                 m_endTime = -1;
+                m_anyTime = true;
             }
-        }
-
-        TimeRange::~TimeRange()
-        {
         }
 
         double TimeRange::initTime() const
@@ -52,11 +50,6 @@ namespace iDynTree {
 
         bool TimeRange::setTimeInterval(const double init, const double end)
         {
-            if((init < 0)||(end < 0)){
-                reportError("TimeRange", "setTimeInterval", "Both the init time and the end time should be grater than zero.");
-                return false;
-            }
-
             if(init > end){
                 reportError("TimeRange", "setTimeInterval", "The init time should be grater than the end.");
                 return false;
@@ -73,42 +66,58 @@ namespace iDynTree {
             TimeRange output;
             output.m_initTime = -1;
             output.m_endTime = -1;
+            output.m_anyTime = true;
             return output;
         }
 
         TimeRange TimeRange::Instant(const double time)
         {
-            if (time < 0)
-                return AnyTime();
-
             return TimeRange(time, time);
         }
 
-        bool TimeRange::operator<(const TimeRange rhs) const
+        bool TimeRange::operator<(const TimeRange &rhs) const
         {
+            if (this->m_anyTime && rhs.m_anyTime)
+                return false;
+
+            if (rhs.m_anyTime)
+                return true;
+
+            if (this ->m_anyTime)
+                return false;
+
             if(this->m_initTime != rhs.initTime())
                 return this->m_initTime < rhs.initTime();
             else return this->m_endTime < rhs.endTime();
         }
 
-        bool TimeRange::operator==(const TimeRange rhs) const
+        bool TimeRange::operator==(const TimeRange &rhs) const
         {
+            if (this->m_anyTime && rhs.m_anyTime)
+                return true;
+
+            if (rhs.m_anyTime)
+                return false;
+
+            if (this ->m_anyTime)
+                return false;
+
             return ((this->m_initTime == rhs.initTime())&&(this->m_endTime == rhs.endTime()));
         }
 
-        bool TimeRange::operator!=(const TimeRange rhs) const
+        bool TimeRange::operator!=(const TimeRange &rhs) const
         {
             return !(this->operator==(rhs));
         }
 
         bool TimeRange::isValid() const
         {
-            return !((m_initTime < 0) || (m_endTime < 0) || (m_initTime > m_endTime));
+            return !(m_initTime > m_endTime);
         }
 
         bool TimeRange::isInRange(double time) const
         {
-            if ((m_initTime == -1) && (m_endTime == -1))
+            if (m_anyTime)
                 return true;
             return ((m_initTime <= time) && (m_endTime >= time));
         }

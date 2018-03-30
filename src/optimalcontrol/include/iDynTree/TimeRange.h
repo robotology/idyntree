@@ -24,17 +24,18 @@ namespace iDynTree{
         class TimeRange {
             double m_initTime;
             double m_endTime;
+            bool m_anyTime;
         public:
             TimeRange();
             TimeRange(const double init, const double end);
-            ~TimeRange();
+
             double initTime() const;
             double endTime() const;
             double length() const;
             bool setTimeInterval(const double init, const double end);
-            bool operator<(const TimeRange rhs) const; //The comparison is only on the init time
-            bool operator==(const TimeRange rhs) const;
-            bool operator!=(const TimeRange rhs) const;
+            bool operator<(const TimeRange &rhs) const; //The comparison is only on the init time
+            bool operator==(const TimeRange &rhs) const;
+            bool operator!=(const TimeRange &rhs) const;
             bool isValid() const;
             bool isInRange(double time) const;
             static TimeRange AnyTime();
