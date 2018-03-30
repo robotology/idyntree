@@ -73,10 +73,12 @@ namespace iDynTree {
                                   VectorDynSize& stateDynamics) override;
 
             virtual bool dynamicsStateFirstDerivative(const VectorDynSize& state,
+                                                      const VectorDynSize& control,
                                                       double time,
                                                       MatrixDynSize& dynamicsDerivative) override;
 
             virtual bool dynamicsControlFirstDerivative(const VectorDynSize& state,
+                                                        const VectorDynSize& control,
                                                         double time,
                                                         MatrixDynSize& dynamicsDerivative) override;
 

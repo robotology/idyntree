@@ -42,7 +42,7 @@ namespace optimalcontrol {
             class IntegratorInfoData {
             protected:
                 friend class Integrator;
-                IntegratorInfoData():name("Integrator"),isExplicit(true),numberOfStages(0){}
+                IntegratorInfoData():name("Integrator"),isExplicit(true),numberOfStages(1){}
             public:
                 std::string name;
 
@@ -56,6 +56,8 @@ namespace optimalcontrol {
                 std::shared_ptr<IntegratorInfoData> m_data;
             public:
                 IntegratorInfo(std::shared_ptr<IntegratorInfoData> data):m_data(data){}
+
+                IntegratorInfo() = delete;
 
                 IntegratorInfo(const IntegratorInfo &other) = delete;
 
@@ -92,9 +94,14 @@ namespace optimalcontrol {
 
                 virtual void clearSolution();
 
-                virtual bool evaluateCollocationConstraint(const std::vector<VectorDynSize>& collocationPoints, double& constraintValue);
+                virtual bool evaluateCollocationConstraint(const std::vector<VectorDynSize>& collocationPoints,
+                                                           const std::vector<VectorDynSize>& controlInputs,
+                                                           double time, VectorDynSize& constraintValue);
 
-                virtual bool evaluateCollocationConstraintJacobian(const std::vector<VectorDynSize>& collocationPoints, MatrixDynSize& jacobianValue);
+                virtual bool evaluateCollocationConstraintJacobian(const std::vector<VectorDynSize>& collocationPoints,
+                                                                   const std::vector<VectorDynSize>& controlInputs, double time,
+                                                                   std::vector<MatrixDynSize>& stateJacobianValues,
+                                                                   std::vector<MatrixDynSize>& controlJacobianValues);
 
                 const IntegratorInfo& info() const;
 

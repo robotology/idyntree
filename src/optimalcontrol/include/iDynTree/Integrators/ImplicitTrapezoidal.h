@@ -29,13 +29,26 @@ namespace iDynTree {
 
             class ImplicitTrapezoidal : public FixedStepIntegrator{
 
+                VectorDynSize m_computationBuffer, m_computationBuffer2;
+                MatrixDynSize m_identity, m_stateJacBuffer, m_controlJacBuffer;
+
                 bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
 
             public:
 
                 ImplicitTrapezoidal(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
-                ~ImplicitTrapezoidal();
+                virtual ~ImplicitTrapezoidal();
+
+                bool evaluateCollocationConstraint(const std::vector<VectorDynSize> &collocationPoints,
+                                                   const std::vector<VectorDynSize> &controlInputs,
+                                                   double time,
+                                                   VectorDynSize &constraintValue) override;
+
+                bool evaluateCollocationConstraintJacobian(const std::vector<VectorDynSize> &collocationPoints,
+                                                           const std::vector<VectorDynSize> &controlInputs, double time,
+                                                           std::vector<MatrixDynSize> &stateJacobianValues,
+                                                           std::vector<MatrixDynSize> &controlJacobianValues) override;
 
             };
 

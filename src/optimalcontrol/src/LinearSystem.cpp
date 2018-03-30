@@ -107,7 +107,7 @@ namespace iDynTree {
             return true;
         }
 
-        bool LinearSystem::dynamicsStateFirstDerivative(const VectorDynSize& state,
+        bool LinearSystem::dynamicsStateFirstDerivative(const VectorDynSize& state, const VectorDynSize &control,
                                                   double time,
                                                   MatrixDynSize& dynamicsDerivative)
         {
@@ -115,7 +115,7 @@ namespace iDynTree {
             return true;
         }
 
-        bool LinearSystem::dynamicsControlFirstDerivative(const VectorDynSize& state,
+        bool LinearSystem::dynamicsControlFirstDerivative(const VectorDynSize& state, const VectorDynSize &control,
                                                     double time,
                                                     MatrixDynSize& dynamicsDerivative)
         {

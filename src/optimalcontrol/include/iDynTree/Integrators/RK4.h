@@ -43,7 +43,7 @@ namespace iDynTree {
             public:
                 RK4(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
-                ~RK4();
+                virtual ~RK4();
             };
         }
     }

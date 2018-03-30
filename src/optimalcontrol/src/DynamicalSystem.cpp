@@ -28,12 +28,24 @@ namespace iDynTree {
         size_t DynamicalSystem::stateSpaceSize() const{ return m_stateSize; }
         size_t DynamicalSystem::controlSpaceSize() const{ return m_controlSize; }
 
-        bool  DynamicalSystem::dynamicsStateFirstDerivative(const VectorDynSize& state,
+        bool DynamicalSystem::dynamics(const VectorDynSize &state, double time, VectorDynSize &stateDynamics)
+        {
+            reportError("DynamicalSystem", "dynamics", "No autonomous dynamics specified.");
+            return false;
+        }
+
+        bool DynamicalSystem::dynamics(const VectorDynSize &state, const VectorDynSize &control, double time, VectorDynSize &stateDynamics)
+        {
+            reportError("DynamicalSystem", "dynamics", "No controlled dynamics specified.");
+            return false;
+        }
+
+        bool  DynamicalSystem::dynamicsStateFirstDerivative(const VectorDynSize& state, const VectorDynSize &control,
                                                             double time,
                                                             MatrixDynSize& dynamicsDerivative)
         { return false; }
 
-        bool DynamicalSystem::dynamicsControlFirstDerivative(const VectorDynSize& state,
+        bool DynamicalSystem::dynamicsControlFirstDerivative(const VectorDynSize& state, const VectorDynSize &control,
                                                              double time,
                                                              MatrixDynSize& dynamicsDerivative)
         { return false; }

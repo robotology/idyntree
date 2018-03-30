@@ -48,17 +48,22 @@ namespace optimalcontrol {
 
         virtual bool dynamics(const VectorDynSize& state,
                               double time,
-                              VectorDynSize& stateDynamics) = 0;
+                              VectorDynSize& stateDynamics);
+
+        virtual bool dynamics(const VectorDynSize &state, const VectorDynSize &control,
+                              double time, VectorDynSize &stateDynamics);
 
         virtual const VectorDynSize& initialState() const = 0;
 
         //TODO: for now putting these functions as not virtual
         //TODO: add also second derivative?
         virtual bool dynamicsStateFirstDerivative(const VectorDynSize& state,
+                                                  const VectorDynSize& control,
                                                   double time,
                                                   MatrixDynSize& dynamicsDerivative);
 
         virtual bool dynamicsControlFirstDerivative(const VectorDynSize& state,
+                                                    const VectorDynSize& control,
                                                     double time,
                                                     MatrixDynSize& dynamicsDerivative);
 
