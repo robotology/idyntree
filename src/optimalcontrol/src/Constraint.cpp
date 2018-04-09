@@ -43,6 +43,16 @@ namespace iDynTree {
             return true;
         }
 
+        bool Constraint::getLowerBound(VectorDynSize &lowerBound)
+        {
+            if (!m_isLowerBounded)
+                    return false;
+            if (lowerBound.size() != m_lowerBound.size())
+                lowerBound.resize(m_lowerBound.size());
+            lowerBound = m_lowerBound;
+            return true;
+        }
+
         bool Constraint::setUpperBound(const VectorDynSize &upperBound)
         {
             if (upperBound.size() != m_contraintSize){
@@ -54,6 +64,16 @@ namespace iDynTree {
             return true;
         }
 
+        bool Constraint::getUpperBound(VectorDynSize &upperBound)
+        {
+            if (!m_isUpperBounded)
+                    return false;
+            if (upperBound.size() != m_upperBound.size())
+                upperBound.resize(m_upperBound.size());
+            upperBound = m_upperBound;
+            return true;
+        }
+
         bool Constraint::constraintJacobianWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
         {
             return false;
@@ -62,6 +82,16 @@ namespace iDynTree {
         bool Constraint::constraintJacobianWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
         {
             return false;
+        }
+
+        size_t Constraint::expectedStateSpaceSize() const
+        {
+            return 0;
+        }
+
+        size_t Constraint::expectedControlSpaceSize() const
+        {
+            return 0;
         }
 
     }

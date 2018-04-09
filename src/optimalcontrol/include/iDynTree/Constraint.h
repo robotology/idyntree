@@ -40,7 +40,12 @@ namespace iDynTree {
             const std::string& name() const; //the name must not be changed
 
             bool setLowerBound(const VectorDynSize& lowerBound);
+
+            bool getLowerBound(VectorDynSize& lowerBound);
+
             bool setUpperBound(const VectorDynSize& upperBound);
+
+            bool getUpperBound(VectorDynSize& upperBound);
 
             virtual bool isFeasiblePoint(double time,
                                          const VectorDynSize& state,
@@ -60,6 +65,10 @@ namespace iDynTree {
                                                     const VectorDynSize& state,
                                                     const VectorDynSize& control,
                                                     MatrixDynSize& jacobian);
+
+            virtual size_t expectedStateSpaceSize() const;
+
+            virtual size_t expectedControlSpaceSize() const;
 
 
         protected:

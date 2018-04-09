@@ -20,6 +20,7 @@
 namespace iDynTree {
 
     class VectorDynSize;
+    class MatrixDynSize;
 
     namespace optimalcontrol {
 
@@ -39,10 +40,12 @@ namespace iDynTree {
 
             ConstraintsGroup(const ConstraintsGroup& other) = delete;
 
-            const std::string name() const; //the name must not be changed
+            const std::string name() const;
 
             bool addConstraint(std::shared_ptr<Constraint> constraint, const TimeRange& timeRange);
+
             bool updateTimeRange(const std::string& name, const TimeRange& timeRange);
+
             bool removeConstraint(const std::string &name);
 
             bool getTimeRange(const std::string& name, TimeRange& timeRange);
@@ -54,15 +57,27 @@ namespace iDynTree {
             bool evaluateConstraints(double time,
                                      const VectorDynSize& state,
                                      const VectorDynSize& control,
-                                     VectorDynSize& constraints); //constraints has the maxConstraintSize dimension and return false if time is not in any range.
+                                     VectorDynSize& constraints);
+
+            bool getLowerBounds(double time, VectorDynSize& lowerBound);
+
+            bool getUpperBounds(double time, VectorDynSize& upperBound);
+
+            bool constraintJacobianWRTState(double time,
+                                            const VectorDynSize& state,
+                                            const VectorDynSize& control,
+                                            MatrixDynSize& jacobian);
+
+            bool constraintJacobianWRTControl(double time,
+                                              const VectorDynSize& state,
+                                              const VectorDynSize& control,
+                                              MatrixDynSize& jacobian);
 
             bool isAnyTimeGroup();
 
             unsigned int numberOfConstraints() const;
 
             const std::vector<std::string> listConstraints() const;
-
-            //HOW SHOULD THE GRADIENT METHOD BE DEFINED??
 
         private:
             class ConstraintsGroupPimpl;

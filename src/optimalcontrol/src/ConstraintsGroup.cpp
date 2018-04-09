@@ -11,10 +11,13 @@
  */
 
 #include "iDynTree/Core/VectorDynSize.h"
+#include "iDynTree/Core/MatrixDynSize.h"
 #include "iDynTree/Core/Utils.h"
 #include "iDynTree/ConstraintsGroup.h"
 #include "iDynTree/Constraint.h"
 #include "iDynTree/TimeRange.h"
+#include "iDynTree/Core/EigenHelpers.h"
+#include "Eigen/Dense"
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
@@ -27,6 +30,8 @@ namespace optimalcontrol {
         typedef struct{
             std::shared_ptr<Constraint> constraint;
             TimeRange timeRange;
+            MatrixDynSize stateJacobianBuffer;
+            MatrixDynSize controlJacobianBuffer;
         }TimedConstraint;
 
         typedef std::shared_ptr< TimedConstraint> TimedConstraint_ptr;
@@ -39,6 +44,12 @@ namespace optimalcontrol {
             std::vector< TimedConstraint_ptr > orderedIntervals;
             std::string name;
             unsigned int maxConstraintSize;
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator findActiveConstraint(double time){
+                return std::find_if(orderedIntervals.rbegin(),
+                                    orderedIntervals.rend(),
+                                    [time](const TimedConstraint_ptr & a) -> bool { return a->timeRange.isInRange(time); }); //find the last element in the vector with init time lower than the specified time
+            }
         };
 
         ConstraintsGroup::ConstraintsGroup(const std::string &name, unsigned int maxConstraintSize)
@@ -99,6 +110,8 @@ namespace optimalcontrol {
 
             newConstraint->timeRange = timeRange;
             newConstraint->constraint = constraint;
+            newConstraint->stateJacobianBuffer.resize(constraint->constraintSize(), constraint->expectedStateSpaceSize());
+            newConstraint->controlJacobianBuffer.resize(constraint->constraintSize(), constraint->expectedControlSpaceSize());
 
             std::pair< GroupOfConstraintsMap::iterator, bool> result;
             result = m_pimpl->group.insert(GroupOfConstraintsMap::value_type(constraint->name(), newConstraint));
@@ -183,10 +196,7 @@ namespace optimalcontrol {
                 return m_pimpl->group.begin()->second.get()->constraint->isFeasiblePoint(time, state, control);
             }
 
-            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator =
-                    std::find_if(m_pimpl->orderedIntervals.rbegin(),
-                                 m_pimpl->orderedIntervals.rend(),
-                                 [time](const TimedConstraint_ptr & a) -> bool { return a->timeRange.isInRange(time); }); //find the last element in the vector with init time lower than the specified time
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
             if (constraintIterator == m_pimpl->orderedIntervals.rend()) //it means that there are no constraints at that time
                 return true;
 
@@ -199,17 +209,13 @@ namespace optimalcontrol {
                 return m_pimpl->group.begin()->second.get()->constraint->evaluateConstraint(time, state, control, constraints);
             }
 
-            constraints.reserve(m_pimpl->maxConstraintSize);
+            constraints.resize(m_pimpl->maxConstraintSize);
 
-            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator =
-                    std::find_if(m_pimpl->orderedIntervals.rbegin(),
-                                 m_pimpl->orderedIntervals.rend(),
-                                 [time](const TimedConstraint_ptr & a) -> bool { return a->timeRange.isInRange(time); }); //find the last element in the vector with init time lower than the specified time
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
             if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //it means that there are no constraints at that time, what should be the constraint value?
-                std::ostringstream errorMsg;
-                errorMsg << "No constraint defined at time "<<time<< std::endl;
-                reportError("ConstraintsGroup", "evaluateConstraints", errorMsg.str().c_str());
-                return false;
+                for (unsigned int i = 0; i < m_pimpl->maxConstraintSize; ++i)
+                    constraints(i) = 0.0;
+                return true;
             }
             
             if(!(constraintIterator->get()->constraint->evaluateConstraint(time, state, control, constraints)))
@@ -222,6 +228,121 @@ namespace optimalcontrol {
             }
 
             return true;
+        }
+
+        bool ConstraintsGroup::getLowerBounds(double time, VectorDynSize &lowerBound)
+        {
+            if (isAnyTimeGroup()){
+                return m_pimpl->group.begin()->second.get()->constraint->getLowerBound(lowerBound);
+            }
+
+            lowerBound.reserve(m_pimpl->maxConstraintSize);
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                return false; //to be considered as unbounded
+            }
+
+            if(!(constraintIterator->get()->constraint->getLowerBound(lowerBound)))
+                return false;
+
+            if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize){
+                lowerBound.resize(m_pimpl->maxConstraintSize);
+                for (size_t i = constraintIterator->get()->constraint->constraintSize(); i < m_pimpl->maxConstraintSize; ++i)
+                    lowerBound(static_cast<unsigned int>(i)) = -1.0; //append -1.0 at the end to equate the maxConstraintSize.
+            }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::getUpperBounds(double time, VectorDynSize &upperBound)
+        {
+            if (isAnyTimeGroup()){
+                return m_pimpl->group.begin()->second.get()->constraint->getUpperBound(upperBound);
+            }
+
+            upperBound.reserve(m_pimpl->maxConstraintSize);
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                return false; //to be considered as unbounded
+            }
+
+            if(!(constraintIterator->get()->constraint->getUpperBound(upperBound)))
+                return false;
+
+            if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize){
+                upperBound.resize(m_pimpl->maxConstraintSize);
+                for (size_t i = constraintIterator->get()->constraint->constraintSize(); i < m_pimpl->maxConstraintSize; ++i)
+                    upperBound(static_cast<unsigned int>(i)) = 1.0; //append -1.0 at the end to equate the maxConstraintSize.
+            }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintJacobianWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
+        {
+            if (isAnyTimeGroup()){
+                return m_pimpl->group.begin()->second.get()->constraint->constraintJacobianWRTState(time, state, control, jacobian);
+            }
+
+            if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != state.size()))
+                jacobian.resize(m_pimpl->maxConstraintSize, state.size());
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                toEigen(jacobian).setZero();
+                return true;
+            }
+
+            if(!(constraintIterator->get()->constraint->constraintJacobianWRTState(time, state, control,
+                                                                                   constraintIterator->get()->stateJacobianBuffer)))
+                return false;
+
+            if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize){
+                toEigen(jacobian).block(0, 0, constraintIterator->get()->stateJacobianBuffer.rows(), state.size()) =
+                        toEigen(constraintIterator->get()->stateJacobianBuffer);
+                int nMissing = m_pimpl->maxConstraintSize - constraintIterator->get()->constraint->constraintSize();
+                toEigen(jacobian).block(constraintIterator->get()->stateJacobianBuffer.rows(), 0, nMissing, state.size()).setZero();
+            } else {
+                jacobian = constraintIterator->get()->stateJacobianBuffer;
+            }
+
+            return false;
+        }
+
+        bool ConstraintsGroup::constraintJacobianWRTControl(double time,
+                                                            const VectorDynSize &state,
+                                                            const VectorDynSize &control,
+                                                            MatrixDynSize &jacobian)
+        {
+            if (isAnyTimeGroup()){
+                return m_pimpl->group.begin()->second.get()->constraint->constraintJacobianWRTControl(time, state, control, jacobian);
+            }
+
+            if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != state.size()))
+                jacobian.resize(m_pimpl->maxConstraintSize, state.size());
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                toEigen(jacobian).setZero();
+                return true;
+            }
+
+            if(!(constraintIterator->get()->constraint->constraintJacobianWRTControl(time, state, control,
+                                                                                   constraintIterator->get()->controlJacobianBuffer)))
+                return false;
+
+            if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize){
+                toEigen(jacobian).block(0, 0, constraintIterator->get()->controlJacobianBuffer.rows(), state.size()) =
+                        toEigen(constraintIterator->get()->controlJacobianBuffer);
+                int nMissing = m_pimpl->maxConstraintSize - constraintIterator->get()->constraint->constraintSize();
+                toEigen(jacobian).block(constraintIterator->get()->controlJacobianBuffer.rows(), 0, nMissing, state.size()).setZero();
+            } else {
+                jacobian = constraintIterator->get()->controlJacobianBuffer;
+            }
+
+            return false;
         }
 
         bool ConstraintsGroup::isAnyTimeGroup()
