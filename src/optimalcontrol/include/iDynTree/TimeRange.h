@@ -38,6 +38,7 @@ namespace iDynTree{
             bool operator!=(const TimeRange &rhs) const;
             bool isValid() const;
             bool isInRange(double time) const;
+            bool isInstant() const;
             static TimeRange AnyTime();
             static TimeRange Instant(const double time);
         };
