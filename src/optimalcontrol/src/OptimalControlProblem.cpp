@@ -246,11 +246,24 @@ namespace iDynTree {
 
         bool OptimalControlProblem::addLagrangeTerm(double weight, double startingTime, double finalTime, std::shared_ptr<Cost> cost)
         {
+            TimeRange timeRange;
+
+            if (!timeRange.setTimeInterval(startingTime, finalTime)){
+                std::ostringstream errorMsg;
+                errorMsg << "The cost named " << cost->name() <<" has invalid time settings.";
+                reportError("OptimalControlProblem", "addLagrangeTerm", errorMsg.str().c_str());
+                return false;
+            }
+
+            return addLagrangeTerm(weight, timeRange, cost);
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, const TimeRange &timeRange, std::shared_ptr<Cost> cost)
+        {
             TimedCost newCost;
             newCost.cost = cost;
             newCost.weight = weight;
-            if(!newCost.timeRange.setTimeInterval(startingTime, finalTime))
-                return false;
+            newCost.timeRange = timeRange;
 
             std::pair<CostsMap::iterator, bool> costResult;
             costResult = m_pimpl->costs.insert(std::pair<std::string, TimedCost>(cost->name(), newCost));
@@ -261,6 +274,47 @@ namespace iDynTree {
                 return false;
             }
             return true;
+        }
+
+        bool OptimalControlProblem::updateCostTimeRange(const std::string &name, double newStartingTime, double newEndTime)
+        {
+            TimeRange timeRange;
+
+            if (!timeRange.setTimeInterval(newStartingTime, newEndTime)){
+                std::ostringstream errorMsg;
+                errorMsg << "Invalid time settings. Cannot apply changes to cost " << name <<".";
+                reportError("OptimalControlProblem", "updateCostTimeRange", errorMsg.str().c_str());
+                return false;
+            }
+
+            return updateCostTimeRange(name, timeRange);
+        }
+
+        bool OptimalControlProblem::updateCostTimeRange(const std::string &name, const TimeRange &newTimeRange)
+        {
+            CostsMap::iterator costIterator;
+            costIterator = m_pimpl->costs.find(name);
+            if (costIterator == m_pimpl->costs.end()){
+                std::ostringstream errorMsg;
+                errorMsg << "Unable to find cost named "<<name<< std::endl;
+                reportError("OptimalControlProblem", "updateCostTimeRange", errorMsg.str().c_str());
+                return false;
+            }
+
+            costIterator->second.timeRange = newTimeRange;
+            return true;
+        }
+
+        bool OptimalControlProblem::removeCost(const std::string &name)
+        {
+            if (m_pimpl->costs.erase(name)){
+                return true;
+            }
+
+            std::ostringstream errorMsg;
+            errorMsg << "Failed to remove cost named "<<name<< std::endl;
+            reportError("OptimalControlProblem", "removeCost", errorMsg.str().c_str());
+            return false;
         }
 
         bool OptimalControlProblem::setStateBoxConstraints(const VectorDynSize &minState, const VectorDynSize &maxState)

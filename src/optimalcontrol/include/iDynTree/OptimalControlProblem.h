@@ -27,6 +27,7 @@ namespace iDynTree {
         class Constraint;
         class ConstraintsGroup;
         class Cost;
+        class TimeRange;
 
         /**
          * @warning This class is still in active development, and so API interface can change between iDynTree versions.
@@ -42,7 +43,6 @@ namespace iDynTree {
 
             OptimalControlProblem(const OptimalControlProblem& other) = delete;
 
-            // startingTime >= 0
             bool setTimeHorizon(double startingTime, double finalTime);
             double initialTime() const;
             double finalTime() const;
@@ -70,7 +70,13 @@ namespace iDynTree {
                                  double finalTime,
                                  std::shared_ptr<Cost> cost); // integral cost with explicit integration limits
 
-            //Remove costs?
+            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<Cost> cost);
+
+            bool updateCostTimeRange(const std::string& name, double newStartingTime, double newEndTime);
+
+            bool updateCostTimeRange(const std::string& name, const TimeRange& newTimeRange);
+
+            bool removeCost(const std::string& name);
 
             bool setStateBoxConstraints(const iDynTree::VectorDynSize& minState,
                                         const iDynTree::VectorDynSize& maxState);
