@@ -17,7 +17,7 @@
 //Most of this file has been taken from https://github.com/Microsoft/GSL/blob/master/tests/span_tests.cpp
 
 /*
- * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ * Copyright (C) 2018 Fondazione Istituto Italiano di Tecnologia
  *
  * Licensed under either the GNU Lesser General Public License v3.0 :
  * https://www.gnu.org/licenses/lgpl-3.0.html
