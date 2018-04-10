@@ -660,6 +660,7 @@ public:
      */
     IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setDesiredFullJointsConfiguration or setDesiredReducedJointConfiguration instead")
     bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+<<<<<<< 496d090c03bf452cd29c86cb84378ff160575525
 
     /*!
      * Sets a desired final configuration for all the robot joints.
@@ -675,6 +676,8 @@ public:
      *
      * @return true if successful, false otherwise.
      */
+=======
+>>>>>>> Moved return type after deprecation to suppress warnings.
     bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
 
     /*!
@@ -760,7 +763,11 @@ public:
      */
     IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit getFullJointsSolution or getReducedSolution instead")
     void getSolution(iDynTree::Transform& baseTransformSolution,
+<<<<<<< 496d090c03bf452cd29c86cb84378ff160575525
                      iDynTree::VectorDynSize& shapeSolution);
+=======
+                iDynTree::VectorDynSize& shapeSolution);
+>>>>>>> Moved return type after deprecation to suppress warnings.
 
     void getFullJointsSolution(iDynTree::Transform& baseTransformSolution,
                                iDynTree::VectorDynSize& shapeSolution);

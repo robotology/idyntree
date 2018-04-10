@@ -31,6 +31,7 @@ add_unit_test(Rotation)
 add_unit_test(EigenSparseHelpers)
 add_unit_test(TransformFromMatrix4x4)
 add_unit_test(CubicSpline)
+add_unit_test(Span)
 
 
 # We have also some usages of the API that we want to make sure that do not compile

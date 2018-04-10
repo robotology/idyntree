@@ -8,10 +8,6 @@
 
 project(iDynTree_Base CXX)
 
-#Adding C++11 for core
-idyntree_enable_cxx11()
-
-
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/ArticulatedBodyInertia.h
                               include/iDynTree/Core/ClassicalAcc.h
@@ -58,7 +54,8 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/SpatialVector.h
                               include/iDynTree/Core/SparseMatrix.h
                               include/iDynTree/Core/Triplets.h
-                              include/iDynTree/Core/CubicSpline.h)
+                              include/iDynTree/Core/CubicSpline.h
+                              include/iDynTree/Core/Span.h)
 
 
 set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
@@ -125,13 +122,13 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_EXP_HEADERS})
 
-if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
-    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
-endif()
+target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
 if(MSVC)
    add_definitions(-D_USE_MATH_DEFINES)
 endif()
+
+target_compile_features(${libraryname} PUBLIC cxx_attribute_deprecated)
 
 install(TARGETS ${libraryname}
         EXPORT iDynTree

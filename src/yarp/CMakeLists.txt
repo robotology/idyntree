@@ -40,15 +40,13 @@ include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 target_include_directories(idyntree-yarp INTERFACE ${YARP_INCLUDE_DIRS})
 
-include_directories(SYSTEM ${YARP_INCLUDE_DIRS})
+target_include_directories(idyntree-yarp PRIVATE SYSTEM ${YARP_INCLUDE_DIRS})
 
 target_link_libraries(idyntree-yarp idyntree-core
                                     idyntree-model
                                     ${YARP_LIBRARIES})
                                     
-if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
-    target_compile_options(idyntree-yarp PRIVATE ${IDYNTREE_WARNING_FLAGS})
-endif()
+target_compile_options(idyntree-yarp PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
 install(TARGETS idyntree-yarp
         EXPORT iDynTree
