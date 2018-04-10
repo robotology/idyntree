@@ -8,8 +8,8 @@
 
 project(iDynTree_Sensors CXX)
 
-# Enable C++11 for sensors
-idyntree_enable_cxx11()
+# Enable C++14 for sensors
+idyntree_enable_cxx14()
 
 # share headers with all iDynTree targets
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")

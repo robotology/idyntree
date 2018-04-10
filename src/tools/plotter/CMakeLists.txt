@@ -4,7 +4,7 @@ project(iDynTreePlotter)
 
 find_package(Qt5 COMPONENTS Widgets Charts QUIET)
 if (${Qt5Charts_FOUND})
-  idyntree_enable_cxx11()
+  idyntree_enable_cxx14()
   
   find_package(YARP REQUIRED)
   list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH})

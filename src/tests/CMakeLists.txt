@@ -1,5 +1,5 @@
-# Enable C++11 for tests
-idyntree_enable_cxx11()
+# Enable C++14 for tests
+idyntree_enable_cxx14()
 
 # add integration tests, that
 # test interaction between components

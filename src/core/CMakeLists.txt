@@ -8,10 +8,10 @@
 
 project(iDynTree_Base CXX)
 
-#Adding C++11 for core
-#idyntree_enable_cxx11()
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+#Adding C++14 for core
+idyntree_enable_cxx14()
+#set(CMAKE_CXX_STANDARD 14)
+#set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/ArticulatedBodyInertia.h

@@ -135,7 +135,7 @@ if(IDYNTREE_USES_OCTAVE)
   endif ()
   if (NOT(OCTAVE_VERSION_STRING VERSION_LESS 4.2) )
     # Octave >= 4.2 requires C++11 enabled, see https://github.com/robotology/idyntree/issues/344
-    idyntree_enable_cxx11()
+    idyntree_enable_cxx14()
   endif ()
 
   # Compile MEX file
