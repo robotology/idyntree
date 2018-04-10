@@ -9,8 +9,9 @@
 project(iDynTree_Base CXX)
 
 #Adding C++11 for core
-idyntree_enable_cxx11()
-
+#idyntree_enable_cxx11()
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/ArticulatedBodyInertia.h
@@ -57,7 +58,8 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/SpatialVector.h
                               include/iDynTree/Core/SparseMatrix.h
                               include/iDynTree/Core/Triplets.h
-                              include/iDynTree/Core/CubicSpline.h)
+                              include/iDynTree/Core/CubicSpline.h
+                              include/iDynTree/Core/Span.h)
 
 
 set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
