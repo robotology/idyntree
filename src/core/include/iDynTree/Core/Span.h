@@ -16,6 +16,19 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+//Most of this file has been taken from https://github.com/Microsoft/GSL/blob/master/include/gsl/span
+
+/*
+ * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ *
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
+ */
+
+
 #include <cassert>
 
 #include <algorithm> // for lexicographical_compare
@@ -36,7 +49,6 @@
 
 // blanket turn off warnings from CppCoreCheck for now
 // so people aren't annoyed by them when running the tool.
-// more targeted suppressions will be added in a future update to the GSL
 #pragma warning(disable : 26481 26482 26483 26485 26490 26491 26492 26493 26495)
 
 #if _MSC_VER < 1910

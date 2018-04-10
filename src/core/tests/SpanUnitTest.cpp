@@ -14,11 +14,17 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-//#include <catch/catch.hpp> // for AssertionHandler, StringRef, ASSERT_IS_TRUE, TEST_...
+//Most of this file has been taken from https://github.com/Microsoft/GSL/blob/master/tests/span_tests.cpp
 
-//#include <gsl/gsl_byte> // for byte
-//#include <gsl/gsl_util> // for static_cast, at
-//#include <gsl/span>     // for span, span_iterator, operator==, operator!=
+/*
+ * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ *
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
+ */
 
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/Span.h>
