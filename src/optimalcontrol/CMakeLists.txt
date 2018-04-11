@@ -5,8 +5,6 @@ project(idyntree_optimalcontrol)
 set(libraryname idyntree-optimalcontrol)
 
 
-idyntree_enable_cxx14()
-
 option(BUILD_SHARED_LIBS "Build libraries as shared" TRUE)
 
 # Dependencies

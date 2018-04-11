@@ -13,8 +13,6 @@ macro(add_unit_test classname)
     endif()
 endmacro()
 
-idyntree_enable_cxx14()
-
 add_unit_test(SensorsList)
 add_unit_test(ThreeAxisForceTorqueContactSensor)
 add_unit_test(ReducedModelWithFT)

@@ -8,8 +8,6 @@
 
 project(iDynTree_Estimation CXX)
 
-idyntree_enable_cxx14()
-
 set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdyHelper.h
                                 include/iDynTree/Estimation/ExternalWrenchesEstimation.h
                                 include/iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h

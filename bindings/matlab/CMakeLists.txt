@@ -133,10 +133,6 @@ if(IDYNTREE_USES_OCTAVE)
   if ("${OCTAVE_VERSION_STRING}" VERSION_LESS 4.0)
     message(FATAL_ERROR "Octave mex-based bindings required at least Octave version 4.0 or greater.")
   endif ()
-  if (NOT(OCTAVE_VERSION_STRING VERSION_LESS 4.2) )
-    # Octave >= 4.2 requires C++11 enabled, see https://github.com/robotology/idyntree/issues/344
-    idyntree_enable_cxx14()
-  endif ()
 
   # Compile MEX file
   add_library(idyntreeOctaveMex MODULE ${swig_generated_sources} ${swig_other_sources})

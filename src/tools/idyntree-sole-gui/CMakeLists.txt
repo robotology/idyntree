@@ -4,10 +4,6 @@
 
 find_package(Qt5 COMPONENTS Qml Quick Widgets)
 
-
-#Adding C++14 for core
-idyntree_enable_cxx14()
-
 include(GNUInstallDirs)
 
 

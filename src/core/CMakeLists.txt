@@ -8,11 +8,6 @@
 
 project(iDynTree_Base CXX)
 
-#Adding C++14 for core
-idyntree_enable_cxx14()
-#set(CMAKE_CXX_STANDARD 14)
-#set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/ArticulatedBodyInertia.h
                               include/iDynTree/Core/ClassicalAcc.h
@@ -133,6 +128,8 @@ endif()
 if(MSVC)
    add_definitions(-D_USE_MATH_DEFINES)
 endif()
+
+target_compile_features(${libraryname} PUBLIC cxx_relaxed_constexpr)
 
 install(TARGETS ${libraryname}
         EXPORT iDynTree

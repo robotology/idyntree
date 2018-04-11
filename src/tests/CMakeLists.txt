@@ -1,6 +1,3 @@
-# Enable C++14 for tests
-idyntree_enable_cxx14()
-
 # add integration tests, that
 # test interaction between components
 add_subdirectory(integration)
