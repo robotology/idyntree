@@ -177,8 +177,8 @@ public:
      *
      * @return true if successful, false otherwise.
      */
-    bool IDYNTREE_DEPRECATED_WITH_MSG("Use setCurrentRobotConfiguration instead")
-    setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
+    IDYNTREE_DEPRECATED_WITH_MSG("Use setCurrentRobotConfiguration instead")
+    bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
                           const iDynTree::VectorDynSize& jointConfiguration);
 
     /*!
@@ -658,8 +658,8 @@ public:
      *
      * @return true if successful, false otherwise.
      */
-    bool IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setDesiredFullJointsConfiguration or setDesiredReducedJointConfiguration instead")
-    setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+    IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setDesiredFullJointsConfiguration or setDesiredReducedJointConfiguration instead")
+    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
     bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
     bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
 
@@ -672,8 +672,8 @@ public:
      * @param initialCondition  initial joints configuration
      * @return
      */
-    bool IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setFullJointsInitialCondition or setReducedInitialCondition instead")
-    setInitialCondition(const iDynTree::Transform* baseTransform,
+    IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setFullJointsInitialCondition or setReducedInitialCondition instead")
+    bool setInitialCondition(const iDynTree::Transform* baseTransform,
                         const iDynTree::VectorDynSize* initialCondition);
 
     bool setFullJointsInitialCondition(const iDynTree::Transform* baseTransform,
@@ -693,8 +693,8 @@ public:
      * @param[out] baseTransformSolution  solution for the base position
      * @param[out] shapeSolution       solution for the shape (the internal configurations)
      */
-    void IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit getFullJointsSolution or getReducedSolution instead")
-    getSolution(iDynTree::Transform& baseTransformSolution,
+    IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit getFullJointsSolution or getReducedSolution instead")
+    void getSolution(iDynTree::Transform& baseTransformSolution,
                 iDynTree::VectorDynSize& shapeSolution);
 
     void getFullJointsSolution(iDynTree::Transform& baseTransformSolution,
