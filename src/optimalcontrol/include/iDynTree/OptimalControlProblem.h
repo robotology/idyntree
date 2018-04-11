@@ -64,7 +64,9 @@ namespace iDynTree {
             // Mayer term
             // Lagrange term
             bool addMayerTerm(double weight, std::shared_ptr<Cost> cost); // final cost
+
             bool addLagrangeTerm(double weight, std::shared_ptr<Cost> cost); // integral cost
+
             bool addLagrangeTerm(double weight,
                                  double startingTime,
                                  double finalTime,

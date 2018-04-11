@@ -43,6 +43,7 @@ namespace iDynTree {
             ConstraintsGroupsMap constraintsGroups;
             CostsMap costs;
             VectorDynSize stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
+            std::vector<std::string> mayerCostnames;
         };
 
 
@@ -66,7 +67,25 @@ namespace iDynTree {
 
         bool OptimalControlProblem::setTimeHorizon(double startingTime, double finalTime)
         {
-            return m_pimpl->horizon.setTimeInterval(startingTime,finalTime);
+            if (!(m_pimpl->horizon.setTimeInterval(startingTime,finalTime)))
+                return false;
+
+            CostsMap::iterator costIterator;
+            for (auto mayerCost : m_pimpl->mayerCostnames){
+                if (mayerCost.size() > 0){
+                    costIterator = m_pimpl->costs.find(mayerCost);
+                    if (costIterator == m_pimpl->costs.end()){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Unable to find cost named "<<mayerCost<< std::endl;
+                        reportError("OptimalControlProblem", "updateCostTimeRange", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    costIterator->second.timeRange = TimeRange::Instant(finalTime);
+                }
+            }
+
+            return true;
         }
 
         double OptimalControlProblem::initialTime() const
@@ -210,6 +229,10 @@ namespace iDynTree {
 
         bool OptimalControlProblem::addMayerTerm(double weight, std::shared_ptr<Cost> cost)
         {
+            if (!cost){
+                reportError("OptimalControlProblem", "addMayerTerm", "Empty cost pointer");
+                return false;
+            }
             TimedCost newCost;
             newCost.cost = cost;
             newCost.weight = weight;
@@ -223,11 +246,17 @@ namespace iDynTree {
                 reportError("OptimalControlProblem", "addMayerTerm", errorMsg.str().c_str());
                 return false;
             }
+            m_pimpl->mayerCostnames.push_back(cost->name());
             return true;
         }
 
         bool OptimalControlProblem::addLagrangeTerm(double weight, std::shared_ptr<Cost> cost)
         {
+            if (!cost){
+                reportError("OptimalControlProblem", "addLagrangeTerm", "Empty cost pointer");
+                return false;
+            }
+
             TimedCost newCost;
             newCost.cost = cost;
             newCost.weight = weight;
@@ -292,6 +321,13 @@ namespace iDynTree {
 
         bool OptimalControlProblem::updateCostTimeRange(const std::string &name, const TimeRange &newTimeRange)
         {
+            for (auto mayerCost : m_pimpl->mayerCostnames)
+                if (name == mayerCost){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Cannot change the TimeRange of cost named " << name << " since it is a terminal cost." << std::endl;
+                    reportError("OptimalControlProblem", "updateCostTimeRange", errorMsg.str().c_str());
+                }
+
             CostsMap::iterator costIterator;
             costIterator = m_pimpl->costs.find(name);
             if (costIterator == m_pimpl->costs.end()){
@@ -308,6 +344,10 @@ namespace iDynTree {
         bool OptimalControlProblem::removeCost(const std::string &name)
         {
             if (m_pimpl->costs.erase(name)){
+                for (auto mayerCost : m_pimpl->mayerCostnames)
+                    if (name == mayerCost)
+                        mayerCost.erase();
+
                 return true;
             }
 
