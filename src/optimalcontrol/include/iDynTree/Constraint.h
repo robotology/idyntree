@@ -71,9 +71,10 @@ namespace iDynTree {
             virtual size_t expectedControlSpaceSize() const;
 
 
-        protected:
+        private:
             size_t m_constraintSize;
             std::string m_constraintName;
+        protected:
             VectorDynSize m_lowerBound;
             VectorDynSize m_upperBound;
             bool m_isLowerBounded;

@@ -28,10 +28,21 @@ namespace iDynTree {
                 m_infoData->name = "FixedStepIntegrator";
             }
 
+            FixedStepIntegrator::FixedStepIntegrator()
+            {
+                m_infoData->name = "FixedStepIntegrator";
+            }
+
             FixedStepIntegrator::~FixedStepIntegrator(){
             }
 
             bool FixedStepIntegrator::integrate(double initialTime, double finalTime){
+
+                if (!m_dynamicalSystem_ptr){
+                    reportError(m_info.name().c_str(), "integrate", "No dynamical system have been set yet.");
+                    return false;
+                }
+
                 if ((finalTime - initialTime) < 0){
                     reportError(m_info.name().c_str(), "integrate", "The final time is supposed to be greater than the initial time.");
                     return false;

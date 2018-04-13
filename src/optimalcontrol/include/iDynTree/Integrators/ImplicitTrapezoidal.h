@@ -32,9 +32,13 @@ namespace iDynTree {
                 VectorDynSize m_computationBuffer, m_computationBuffer2;
                 MatrixDynSize m_identity, m_stateJacBuffer, m_controlJacBuffer;
 
+                bool allocateBuffers() override;
+
                 bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
 
             public:
+
+                ImplicitTrapezoidal();
 
                 ImplicitTrapezoidal(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 

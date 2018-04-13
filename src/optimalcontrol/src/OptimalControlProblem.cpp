@@ -115,6 +115,10 @@ namespace iDynTree {
 
         bool OptimalControlProblem::setDynamicalSystemConstraint(std::shared_ptr<DynamicalSystem> dynamicalSystem)
         {
+            if (m_pimpl->dynamicalSystem){
+                reportError("OptimalControlProblem", "setDynamicalSystemConstraint", "Change dynamical system is forbidden.");
+                return false;
+            }
             m_pimpl->dynamicalSystem = dynamicalSystem;
             return true;
         }
@@ -630,9 +634,6 @@ namespace iDynTree {
         {
             for(auto group : m_pimpl->constraintsGroups){
                 if(!group.second.group_ptr->isFeasibilePoint(time, state, control)){
-                    std::ostringstream errorMsg;
-                    errorMsg << "Error while evaluating constraint " << group.second.group_ptr->name() <<".";
-                    reportError("OptimalControlProblem", "isFeasiblePoint", errorMsg.str().c_str());
                     return false;
                 }
             }

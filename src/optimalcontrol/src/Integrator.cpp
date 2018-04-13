@@ -23,6 +23,14 @@ namespace iDynTree {
     namespace optimalcontrol {
         namespace integrators {
 
+            Integrator::Integrator()
+            : m_dTmax(0)
+            , m_dynamicalSystem_ptr(nullptr)
+            , m_infoData(new IntegratorInfoData)
+            , m_info(m_infoData)
+            {
+            }
+
             Integrator::Integrator(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem)
             : m_dTmax(0)
             , m_dynamicalSystem_ptr(dynamicalSystem)
@@ -48,6 +56,18 @@ namespace iDynTree {
 
             double Integrator::maximumStepSize() const{
                 return m_dTmax;
+            }
+
+            bool Integrator::setDynamicalSystem(const std::shared_ptr<DynamicalSystem> dynamicalSystem)
+            {
+                if (m_dynamicalSystem_ptr){
+                    reportError(m_info.name().c_str(), "setDynamicalSystem", "Change dynamical system is forbidden."); //I want to prevent the change of dynamical system between two iterations of an eventual optimal control problem. This change would not be detected and would cause problems of dimensions.
+                    return false;
+                }
+
+                m_dynamicalSystem_ptr = dynamicalSystem;
+
+                return allocateBuffers();
             }
 
             const std::weak_ptr<const DynamicalSystem> Integrator::dynamicalSystem() const{
@@ -121,6 +141,11 @@ namespace iDynTree {
                 }
                 toEigen(outputPoint) = ratio * toEigen(first->stateAtT) + (1-ratio) * toEigen(second->stateAtT);
 
+                return true;
+            }
+
+            bool Integrator::allocateBuffers()
+            {
                 return true;
             }
 

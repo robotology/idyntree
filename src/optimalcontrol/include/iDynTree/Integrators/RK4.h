@@ -40,7 +40,11 @@ namespace iDynTree {
 
                 bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
 
+                bool allocateBuffers() override;
+
             public:
+                RK4();
+
                 RK4(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
                 virtual ~RK4();

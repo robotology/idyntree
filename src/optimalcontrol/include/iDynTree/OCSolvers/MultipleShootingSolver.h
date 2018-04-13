@@ -36,8 +36,6 @@ namespace iDynTree {
             void setInitialGuess(const iDynTree::VectorDynSize& initialGuess);
             const iDynTree::VectorDynSize& lastSolution();
 
-            
-            void setNumberOfMeshPoints(size_t numberOfMeshPoints);
 
             virtual bool initialize() override;
             virtual bool solve() override;

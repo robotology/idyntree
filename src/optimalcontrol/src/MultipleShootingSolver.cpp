@@ -35,8 +35,6 @@ namespace iDynTree {
 
             OptimalControlProblem& controlProblem;
             iDynTree::VectorDynSize lastSolution;
-            size_t numberOfMeshPoints;
-
 
             iDynTree::VectorDynSize optimisationVariable;
 
@@ -65,37 +63,9 @@ namespace iDynTree {
             return m_pimpl->lastSolution;
         }
 
-        void MultipleShootingSolver::setNumberOfMeshPoints(size_t numberOfMeshPoints)
-        {
-            assert(m_pimpl);
-            m_pimpl->numberOfMeshPoints = numberOfMeshPoints;
-        }
-
         bool MultipleShootingSolver::initialize()
         {
             assert(m_pimpl);
-            // 1) allocate space needed for the NLP
-            // TODO: size of variable depends on the integration schema
-            // size of optimisation variable
-            // z = #mesh points * size of state + #mesh points * size of control
-
-            size_t sizeOfOptimisation = 0;
-            sizeOfOptimisation += m_pimpl->numberOfMeshPoints * m_pimpl->controlProblem.dynamicalSystem().lock()->stateSpaceSize();
-            // TODO: for now assume Trapezoidal discretisation (no midpoint)
-            sizeOfOptimisation += m_pimpl->numberOfMeshPoints * m_pimpl->controlProblem.dynamicalSystem().lock()->controlSpaceSize();
-            m_pimpl->optimisationVariable.resize(sizeOfOptimisation);
-
-            // do the same for the constraints
-            size_t numberOfConstraints = 0;
-            // x_i+1 - x_i - h_i/2 * (f_i - f_i+1)
-            numberOfConstraints += m_pimpl->numberOfMeshPoints; // dynamic equations => defect constraints
-            // also the path constraints must be discretized
-
-            // do the same for the cost
-
-
-
-
 
             return true;
         }

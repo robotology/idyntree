@@ -23,16 +23,11 @@ namespace iDynTree {
     namespace optimalcontrol {
         namespace integrators {
 
-            bool ImplicitTrapezoidal::oneStepIntegration(double t0, double dT, const iDynTree::VectorDynSize &x0, iDynTree::VectorDynSize &x)
+            bool ImplicitTrapezoidal::allocateBuffers()
             {
-                reportError(m_info.name().c_str(), "oneStepIntegration", "The ImplicitTrapezoidal method has not been implemented to integrate a dynamical system yet.");
-            }
+                if (!m_dynamicalSystem_ptr)
+                    return false;
 
-            ImplicitTrapezoidal::ImplicitTrapezoidal(const std::shared_ptr<DynamicalSystem> dynamicalSystem) : FixedStepIntegrator(dynamicalSystem)
-            {
-                m_infoData->name = "ImplicitTrapezoidal";
-                m_infoData->isExplicit = false;
-                m_infoData->numberOfStages = 1;
                 m_computationBuffer.resize(m_dynamicalSystem_ptr->stateSpaceSize());
                 m_computationBuffer2.resize(m_dynamicalSystem_ptr->stateSpaceSize());
 
@@ -44,7 +39,28 @@ namespace iDynTree {
 
                 m_stateJacBuffer.resize(nx, nx);
                 m_controlJacBuffer.resize(nx,nu);
+                return true;
+            }
 
+            bool ImplicitTrapezoidal::oneStepIntegration(double t0, double dT, const iDynTree::VectorDynSize &x0, iDynTree::VectorDynSize &x)
+            {
+                reportError(m_info.name().c_str(), "oneStepIntegration", "The ImplicitTrapezoidal method has not been implemented to integrate a dynamical system yet.");
+                return false;
+            }
+
+            ImplicitTrapezoidal::ImplicitTrapezoidal()
+            {
+                m_infoData->name = "ImplicitTrapezoidal";
+                m_infoData->isExplicit = false;
+                m_infoData->numberOfStages = 1;
+            }
+
+            ImplicitTrapezoidal::ImplicitTrapezoidal(const std::shared_ptr<DynamicalSystem> dynamicalSystem) : FixedStepIntegrator(dynamicalSystem)
+            {
+                m_infoData->name = "ImplicitTrapezoidal";
+                m_infoData->isExplicit = false;
+                m_infoData->numberOfStages = 1;
+                allocateBuffers();
             }
 
             ImplicitTrapezoidal::~ImplicitTrapezoidal()
@@ -54,6 +70,11 @@ namespace iDynTree {
                                                                     const std::vector<VectorDynSize> &controlInputs,
                                                                     double time, VectorDynSize &constraintValue)
             {
+                if (!m_dynamicalSystem_ptr){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Dynamical system not set.");
+                    return false;
+                }
+
                 if (collocationPoints.size() != 2){
                     std::ostringstream errorMsg;
                     errorMsg << "The size of the matrix containing the collocation point does not match the expected one. Input = ";
@@ -94,6 +115,11 @@ namespace iDynTree {
                                                                             std::vector<MatrixDynSize> &stateJacobianValues,
                                                                             std::vector<MatrixDynSize> &controlJacobianValues)
             {
+                if (!m_dynamicalSystem_ptr){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Dynamical system not set.");
+                    return false;
+                }
+
                 if (collocationPoints.size() != 2){
                     std::ostringstream errorMsg;
                     errorMsg << "The size of the matrix containing the collocation point does not match the expected one. Input = ";

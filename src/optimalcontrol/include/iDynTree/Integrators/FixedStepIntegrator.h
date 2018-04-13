@@ -35,9 +35,11 @@ namespace iDynTree {
                 virtual bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) = 0;
 
             public:
+                FixedStepIntegrator();
+
                 FixedStepIntegrator(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
-                ~FixedStepIntegrator();
+                virtual ~FixedStepIntegrator();
 
                 virtual bool integrate(double initialTime, double finalTime) override;
 

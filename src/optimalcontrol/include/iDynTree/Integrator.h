@@ -63,9 +63,9 @@ namespace optimalcontrol {
 
                 const std::string &name() const {return m_data->name;}
 
-                const bool isExplicit() const {return m_data->isExplicit;}
+                 bool isExplicit() const {return m_data->isExplicit;}
 
-                const size_t numberOfStages() const {return m_data->numberOfStages;}
+                 size_t numberOfStages() const {return m_data->numberOfStages;}
             };
 
             /**
@@ -76,15 +76,20 @@ namespace optimalcontrol {
             class Integrator {
 
             public:
+
+                Integrator();
+
                 Integrator(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
-                ~Integrator();
+                virtual ~Integrator();
 
                 virtual bool integrate(double initialTime, double finalTime) = 0;
 
                 bool setMaximumStepSize(const double dT);
 
                 double maximumStepSize() const;
+
+                bool setDynamicalSystem(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
                 const std::weak_ptr<const DynamicalSystem> dynamicalSystem() const;
 
@@ -115,6 +120,8 @@ namespace optimalcontrol {
                 virtual bool interpolatePoints(const std::vector<solutionElement>::const_iterator &first,
                                                const std::vector<solutionElement>::const_iterator &second,
                                                double time, VectorDynSize& outputPoint) const;
+
+                virtual bool allocateBuffers();
             };
         }
 
