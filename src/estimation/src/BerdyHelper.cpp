@@ -1615,7 +1615,7 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
                 // system. Anyhow, we can still write the base wrench as a function
                 // of sum of the joint wrenches of all the joints attached to the base (tipically just one)
                 if (m_dynamicsTraversal.getBaseLink()->getIndex() == idx &&
-                    (m_options.berdyVariant != ORIGINAL_BERDY_FIXED_BASE ||
+                    (m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE &&
                      !m_options.includeFixedBaseExternalWrench))
                 {
                     continue;
