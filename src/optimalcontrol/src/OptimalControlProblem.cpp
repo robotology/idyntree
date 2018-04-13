@@ -17,15 +17,28 @@
 #include "iDynTree/Cost.h"
 #include "iDynTree/TimeRange.h"
 #include "iDynTree/Core/VectorDynSize.h"
+#include "iDynTree/Core/MatrixDynSize.h"
 #include "iDynTree/Core/Utils.h"
+
+#include <iDynTree/Core/EigenHelpers.h>
+#include <Eigen/Dense>
+
 #include <map>
 #include <cassert>
 #include <sstream>
 
+
+
 namespace iDynTree {
     namespace optimalcontrol {
 
-        typedef std::map< std::string, std::shared_ptr<ConstraintsGroup>> ConstraintsGroupsMap;
+        typedef struct {
+            std::shared_ptr<ConstraintsGroup> group_ptr;
+            VectorDynSize constraintsBuffer;
+            MatrixDynSize stateJacobianBuffer, controlJacobianBuffer;
+        } BufferedGroup;
+
+        typedef std::map< std::string, BufferedGroup> ConstraintsGroupsMap;
 
         typedef struct{
             std::shared_ptr<Cost> cost;
@@ -42,6 +55,8 @@ namespace iDynTree {
             std::shared_ptr<DynamicalSystem> dynamicalSystem;
             ConstraintsGroupsMap constraintsGroups;
             CostsMap costs;
+            VectorDynSize costStateJacobianBuffer, costControlJacobianBuffer;
+            MatrixDynSize costStateHessianBuffer, costControlHessianBuffer, costMixedHessianBuffer;
             VectorDynSize stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
             std::vector<std::string> mayerCostnames;
         };
@@ -111,8 +126,17 @@ namespace iDynTree {
 
         bool OptimalControlProblem::addGroupOfConstraints(std::shared_ptr<ConstraintsGroup> groupOfConstraints)
         {
+            if (!groupOfConstraints){
+                 reportError("OptimalControlProblem", "addGroupOfConstraints", "Empty group pointer");
+                 return false;
+            }
+
+            BufferedGroup newGroup;
+            newGroup.group_ptr = groupOfConstraints;
+            newGroup.constraintsBuffer.resize(groupOfConstraints->constraintsDimension());
+
             std::pair< ConstraintsGroupsMap::iterator, bool> groupResult;
-            groupResult = m_pimpl->constraintsGroups.insert(std::pair< std::string, std::shared_ptr<ConstraintsGroup>>(groupOfConstraints->name(), groupOfConstraints));
+            groupResult = m_pimpl->constraintsGroups.insert(std::pair< std::string, BufferedGroup>(groupOfConstraints->name(), newGroup));
 
             if(!groupResult.second){
                 std::ostringstream errorMsg;
@@ -170,7 +194,7 @@ namespace iDynTree {
             ConstraintsGroupsMap::iterator groupIterator;
             groupIterator = m_pimpl->constraintsGroups.find(name);
             if(groupIterator != m_pimpl->constraintsGroups.end()){
-                if(groupIterator->second->isAnyTimeGroup()){
+                if(groupIterator->second.group_ptr->isAnyTimeGroup()){
                     if(m_pimpl->constraintsGroups.erase(name)){
                         return true;
                     }
@@ -199,10 +223,20 @@ namespace iDynTree {
             unsigned int number = 0;
 
             for(auto group: m_pimpl->constraintsGroups){
-                number += group.second->numberOfConstraints();
+                number += group.second.group_ptr->numberOfConstraints();
             }
 
             return number;
+        }
+
+        unsigned int OptimalControlProblem::getConstraintsDimension() const
+        {
+            unsigned int dimension = 0;
+
+            for (auto group: m_pimpl->constraintsGroups){
+                dimension += group.second.group_ptr->constraintsDimension();
+            }
+            return dimension;
         }
 
         const std::vector<std::string> OptimalControlProblem::listConstraints() const
@@ -211,7 +245,7 @@ namespace iDynTree {
             std::vector<std::string> temp;
 
             for(auto group: m_pimpl->constraintsGroups){
-                temp =  group.second->listConstraints();
+                temp =  group.second.group_ptr->listConstraints();
                 output.insert(output.end(), temp.begin(), temp.end());
             }
             return output;
@@ -222,7 +256,7 @@ namespace iDynTree {
             std::vector<std::string> output;
 
             for(auto group: m_pimpl->constraintsGroups){
-                output.insert(output.end(), group.second->numberOfConstraints(), group.second->name());
+                output.insert(output.end(), group.second.group_ptr->numberOfConstraints(), group.second.group_ptr->name());
             }
             return output;
         }
@@ -379,7 +413,7 @@ namespace iDynTree {
                 if (cost.second.timeRange.isInRange(time)){
                     if(!cost.second.cost->costEvaluation(time, state, control, addCost)){
                         std::ostringstream errorMsg;
-                        errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<" .";
+                        errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
                         reportError("OptimalControlProblem", "costsEvaluation", errorMsg.str().c_str());
                         return false;
                     }
@@ -390,11 +424,262 @@ namespace iDynTree {
             return true;
         }
 
+        bool OptimalControlProblem::costsFirstPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &partialDerivative)
+        {
+            if (partialDerivative.size() != state.size())
+                partialDerivative.resize(state.size());
+
+            if (m_pimpl->costStateJacobianBuffer.size() != state.size())
+                m_pimpl->costStateJacobianBuffer.resize(state.size());
+
+            bool first = true;
+
+            for(auto cost : m_pimpl->costs){
+                if (cost.second.timeRange.isInRange(time)){
+                    if(!cost.second.cost->costFirstPartialDerivativeWRTState(time, state, control, m_pimpl->costStateJacobianBuffer)){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
+                        reportError("OptimalControlProblem", "costsFirstPartialDerivativeWRTState", errorMsg.str().c_str());
+                        return false;
+                    }
+                    if (m_pimpl->costStateJacobianBuffer.size() != state.size()){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the jacobian size is expected to match the state dimension.";
+                        reportError("OptimalControlProblem", "costsFirstPartialDerivativeWRTState", errorMsg.str().c_str());
+                        return false;
+                    }
+                    if (first){
+                        partialDerivative = m_pimpl->costStateJacobianBuffer;
+                        first = false;
+                    } else {
+                        toEigen(partialDerivative) += toEigen(m_pimpl->costStateJacobianBuffer);
+                    }
+                }
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::costFirstPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &partialDerivative)
+        {
+            if (partialDerivative.size() != control.size())
+                partialDerivative.resize(control.size());
+
+            if (m_pimpl->costControlJacobianBuffer.size() != control.size())
+                m_pimpl->costControlJacobianBuffer.resize(control.size());
+
+            bool first = true;
+
+            for(auto cost : m_pimpl->costs){
+                if (cost.second.timeRange.isInRange(time)){
+                    if (!cost.second.cost->costFirstPartialDerivativeWRTControl(time, state, control, m_pimpl->costControlJacobianBuffer)){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
+                        reportError("OptimalControlProblem", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
+                        return false;
+                    }
+                    if (m_pimpl->costControlJacobianBuffer.size() != control.size()){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the jacobian size is expected to match the control dimension.";
+                        reportError("OptimalControlProblem", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
+                        return false;
+                    }
+                    if (first){
+                        partialDerivative = m_pimpl->costControlJacobianBuffer;
+                        first = false;
+                    } else {
+                        toEigen(partialDerivative) += toEigen(m_pimpl->costControlJacobianBuffer);
+                    }
+                }
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::costSecondPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
+        {
+            if ((partialDerivative.rows() != state.size()) || (partialDerivative.cols() != state.size()))
+                partialDerivative.resize(state.size(), state.size());
+
+            if ((m_pimpl->costStateHessianBuffer.rows() != state.size()) || (m_pimpl->costStateHessianBuffer.cols() != state.size()))
+                m_pimpl->costStateHessianBuffer.resize(state.size(), state.size());
+
+            bool first = true;
+
+            for (auto cost : m_pimpl->costs){
+                if (cost.second.timeRange.isInRange(time)){
+                    if (!cost.second.cost->costSecondPartialDerivativeWRTState(time, state, control, m_pimpl->costStateHessianBuffer)){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
+                        reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    if ((m_pimpl->costStateHessianBuffer.rows() != state.size()) || (m_pimpl->costStateHessianBuffer.cols() != state.size())){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the hessian size is expected to be a square matrix matching the state dimension.";
+                        reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                        return false;
+                    }
+                    if (first){
+                        partialDerivative = m_pimpl->costStateHessianBuffer;
+                        first = false;
+                    } else {
+                        toEigen(partialDerivative) += toEigen(m_pimpl->costStateHessianBuffer);
+                    }
+                }
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::costSecondPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
+        {
+            if ((partialDerivative.rows() != control.size()) || (partialDerivative.cols() != control.size()))
+                partialDerivative.resize(control.size(), control.size());
+
+            if ((m_pimpl->costControlHessianBuffer.rows() != control.size()) || (m_pimpl->costControlHessianBuffer.cols() != control.size()))
+                m_pimpl->costControlHessianBuffer.resize(control.size(), control.size());
+
+            bool first = true;
+
+            for (auto cost : m_pimpl->costs){
+                if (cost.second.timeRange.isInRange(time)){
+                    if (!cost.second.cost->costSecondPartialDerivativeWRTControl(time, state, control, m_pimpl->costControlHessianBuffer)){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
+                        reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    if ((m_pimpl->costControlHessianBuffer.rows() != control.size()) || (m_pimpl->costControlHessianBuffer.cols() != control.size())){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the hessian size is expected to be a square matrix matching the control dimension.";
+                        reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    if (first){
+                        partialDerivative = m_pimpl->costControlHessianBuffer;
+                        first = false;
+                    } else {
+                        toEigen(partialDerivative) += toEigen(m_pimpl->costControlHessianBuffer);
+                    }
+                }
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::costSecondPartialDerivativeWRTStateControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
+        {
+            if ((partialDerivative.rows() != state.size()) || (partialDerivative.cols() != control.size()))
+                partialDerivative.resize(state.size(), control.size());
+
+            if ((m_pimpl->costMixedHessianBuffer.rows() != state.size()) || (m_pimpl->costMixedHessianBuffer.cols() != control.size()))
+                m_pimpl->costMixedHessianBuffer.resize(state.size(), control.size());
+
+            bool first = true;
+
+            for (auto cost : m_pimpl->costs){
+                if (cost.second.timeRange.isInRange(time)){
+                    if (!cost.second.cost->costSecondPartialDerivativeWRTStateControl(time, state, control, m_pimpl->costMixedHessianBuffer)){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
+                        reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    if ((m_pimpl->costMixedHessianBuffer.rows() != state.size()) || (m_pimpl->costMixedHessianBuffer.cols() != control.size())){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the hessian size is expected to have as many rows as the state dimension and a number of columns matching the control dimension.";
+                        reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    if (first){
+                        partialDerivative = m_pimpl->costMixedHessianBuffer;
+                        first = false;
+                    } else {
+                        toEigen(partialDerivative) += toEigen(m_pimpl->costMixedHessianBuffer);
+                    }
+                }
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintsEvaluation(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &constraintsValue)
+        {
+            if (constraintsValue.size() != getConstraintsDimension())
+                constraintsValue.resize(getConstraintsDimension());
+
+            Eigen::Map< Eigen::VectorXd > constraintsEvaluation = toEigen(constraintsValue);
+            Eigen::Index offset = 0;
+
+            for (auto group : m_pimpl->constraintsGroups){
+                if (! group.second.group_ptr->evaluateConstraints(time, state, control, group.second.constraintsBuffer)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second.group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "constraintsEvaluation", errorMsg.str().c_str());
+                    return false;
+                }
+                constraintsEvaluation.segment(offset, group.second.constraintsBuffer.size()) = toEigen(group.second.constraintsBuffer);
+                offset += group.second.constraintsBuffer.size();
+            }
+
+            return true;
+        }
+
         bool OptimalControlProblem::isFeasiblePoint(double time, const VectorDynSize &state, const VectorDynSize &control)
         {
             for(auto group : m_pimpl->constraintsGroups){
-                if(!group.second->isFeasibilePoint(time, state, control))
+                if(!group.second.group_ptr->isFeasibilePoint(time, state, control)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second.group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "isFeasiblePoint", errorMsg.str().c_str());
                     return false;
+                }
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintsJacobianWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
+        {
+            unsigned int nc = getConstraintsDimension();
+            if ((jacobian.rows() != nc) || (jacobian.cols() != state.size()))
+                jacobian.resize(nc, state.size());
+
+            iDynTreeEigenMatrixMap jacobianMap = toEigen(jacobian);
+            Eigen::Index offset = 0;
+
+            for (auto group : m_pimpl->constraintsGroups){
+                if (! group.second.group_ptr->constraintJacobianWRTState(time, state, control, group.second.stateJacobianBuffer)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second.group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "constraintsJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                jacobianMap.block(offset, 0, group.second.group_ptr->constraintsDimension(), state.size()) = toEigen(group.second.stateJacobianBuffer);
+                offset += group.second.stateJacobianBuffer.rows();
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintsJacobianWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
+        {
+            unsigned int nc = getConstraintsDimension();
+            if ((jacobian.rows() != nc) || (jacobian.cols() != control.size()))
+                jacobian.resize(nc, control.size());
+
+            iDynTreeEigenMatrixMap jacobianMap = toEigen(jacobian);
+            Eigen::Index offset = 0;
+
+            for (auto group : m_pimpl->constraintsGroups){
+                if (! group.second.group_ptr->constraintJacobianWRTControl(time, state, control, group.second.controlJacobianBuffer)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second.group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "constraintsJacobianWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+                jacobianMap.block(offset, 0, group.second.group_ptr->constraintsDimension(), control.size()) = toEigen(group.second.controlJacobianBuffer);
+                offset += group.second.controlJacobianBuffer.rows();
             }
             return true;
         }

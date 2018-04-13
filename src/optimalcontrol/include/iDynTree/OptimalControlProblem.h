@@ -20,6 +20,7 @@
 namespace iDynTree {
 
     class VectorDynSize;
+    class MatrixDynSize;
 
     namespace optimalcontrol {
 
@@ -57,6 +58,7 @@ namespace iDynTree {
             bool addContraint(std::shared_ptr<Constraint> newConstraint); // this apply for the full horizon. It creates a group named with the same name and containing only newConstraint
             bool removeConstraint(const std::string& name); //this removes only the constraints added with the above method
             unsigned int countConstraints() const;
+            unsigned int getConstraintsDimension() const;
             const std::vector<std::string> listConstraints() const;
             const std::vector<std::string> listGroups() const; //the i-th entry of the list contains the i-th constraint displayed with listConstraints()
 
@@ -87,10 +89,45 @@ namespace iDynTree {
 
             bool costsEvaluation(double time, const iDynTree::VectorDynSize& state, const iDynTree::VectorDynSize& control, double& costValue);
 
+            bool costsFirstPartialDerivativeWRTState(double time,
+                                                     const iDynTree::VectorDynSize& state,
+                                                     const iDynTree::VectorDynSize& control,
+                                                     iDynTree::VectorDynSize& partialDerivative);
+
+            bool costFirstPartialDerivativeWRTControl(double time,
+                                                      const iDynTree::VectorDynSize& state,
+                                                      const iDynTree::VectorDynSize& control,
+                                                      iDynTree::VectorDynSize& partialDerivative);
+
+            bool costSecondPartialDerivativeWRTState(double time,
+                                                     const iDynTree::VectorDynSize& state,
+                                                     const iDynTree::VectorDynSize& control,
+                                                     iDynTree::MatrixDynSize& partialDerivative);
+
+            bool costSecondPartialDerivativeWRTControl(double time,
+                                                       const iDynTree::VectorDynSize& state,
+                                                       const iDynTree::VectorDynSize& control,
+                                                       iDynTree::MatrixDynSize& partialDerivative);
+
+
+            bool costSecondPartialDerivativeWRTStateControl(double time,
+                                                            const iDynTree::VectorDynSize& state,
+                                                            const iDynTree::VectorDynSize& control,
+                                                            iDynTree::MatrixDynSize& partialDerivative);
+
+            bool constraintsEvaluation(double time, const iDynTree::VectorDynSize& state, const iDynTree::VectorDynSize& control, iDynTree::VectorDynSize& constraintsValue);
+
             bool isFeasiblePoint(double time, const iDynTree::VectorDynSize& state, const iDynTree::VectorDynSize& control);
 
-            //TODO: ALL JACOBIAN METHODS
-            //TODO: ALL HESSIAN METHODS
+            bool constraintsJacobianWRTState(double time,
+                                             const VectorDynSize& state,
+                                             const VectorDynSize& control,
+                                             MatrixDynSize& jacobian);
+
+            bool constraintsJacobianWRTControl(double time,
+                                               const VectorDynSize& state,
+                                               const VectorDynSize& control,
+                                               MatrixDynSize& jacobian);
 
         private:
             class OptimalControlProblemPimpl;

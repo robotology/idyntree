@@ -30,6 +30,7 @@ namespace optimalcontrol {
         typedef struct{
             std::shared_ptr<Constraint> constraint;
             TimeRange timeRange;
+            VectorDynSize constraintBuffer;
             MatrixDynSize stateJacobianBuffer;
             MatrixDynSize controlJacobianBuffer;
         }TimedConstraint;
@@ -73,8 +74,18 @@ namespace optimalcontrol {
             return m_pimpl->name;
         }
 
+        unsigned int ConstraintsGroup::constraintsDimension() const
+        {
+            return m_pimpl->maxConstraintSize;
+        }
+
         bool ConstraintsGroup::addConstraint(std::shared_ptr<Constraint> constraint, const TimeRange &timeRange)
         {
+            if (!constraint){
+                reportError("ConstraintsGroup", "addConstraint", "Empty constraint pointer.");
+                return false;
+            }
+
             if (constraint->constraintSize() > m_pimpl->maxConstraintSize){
                 reportError("ConstraintsGroup", "addConstraint", "The constraint dimension is greater than the maximum allowed by the group.");
                 return false;
@@ -110,6 +121,7 @@ namespace optimalcontrol {
 
             newConstraint->timeRange = timeRange;
             newConstraint->constraint = constraint;
+            newConstraint->constraintBuffer.resize(constraint->constraintSize());
             newConstraint->stateJacobianBuffer.resize(constraint->constraintSize(), constraint->expectedStateSpaceSize());
             newConstraint->controlJacobianBuffer.resize(constraint->constraintSize(), constraint->expectedControlSpaceSize());
 
@@ -209,22 +221,21 @@ namespace optimalcontrol {
                 return m_pimpl->group.begin()->second.get()->constraint->evaluateConstraint(time, state, control, constraints);
             }
 
-            constraints.resize(m_pimpl->maxConstraintSize);
+            if (constraints.size() < m_pimpl->maxConstraintSize)
+                constraints.resize(m_pimpl->maxConstraintSize);
 
             std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
             if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //it means that there are no constraints at that time, what should be the constraint value?
-                for (unsigned int i = 0; i < m_pimpl->maxConstraintSize; ++i)
-                    constraints(i) = 0.0;
+                constraints.zero();
                 return true;
             }
             
-            if(!(constraintIterator->get()->constraint->evaluateConstraint(time, state, control, constraints)))
+            if(!(constraintIterator->get()->constraint->evaluateConstraint(time, state, control, constraintIterator->get()->constraintBuffer)))
                 return false;
 
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize){
-                constraints.resize(m_pimpl->maxConstraintSize);
-                for (size_t i = constraintIterator->get()->constraint->constraintSize(); i < m_pimpl->maxConstraintSize; ++i)
-                    constraints(i) = 0.0; //append 0 at the end to equate the maxConstraintSize.
+                toEigen(constraints).segment(0,constraintIterator->get()->constraintBuffer.size()) = toEigen(constraintIterator->get()->constraintBuffer);
+                toEigen(constraints).tail(m_pimpl->maxConstraintSize - constraintIterator->get()->constraintBuffer.size()).setZero(); //append 0 at the end to equate the maxConstraintSize.
             }
 
             return true;
@@ -296,8 +307,26 @@ namespace optimalcontrol {
             }
 
             if(!(constraintIterator->get()->constraint->constraintJacobianWRTState(time, state, control,
-                                                                                   constraintIterator->get()->stateJacobianBuffer)))
+                                                                                   constraintIterator->get()->stateJacobianBuffer))){
+                std::ostringstream errorMsg;
+                errorMsg << "Failed to evaluate "<< constraintIterator->get()->constraint->name() << std::endl;
+                reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
                 return false;
+            }
+
+            if (constraintIterator->get()->stateJacobianBuffer.rows() != constraintIterator->get()->constraint->constraintSize()){
+                std::ostringstream errorMsg;
+                errorMsg << "The state jacobian of constraint "<< constraintIterator->get()->constraint->name() << " has a number of rows different from the size of the constraint." << std::endl;
+                reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (constraintIterator->get()->stateJacobianBuffer.cols() != state.size()){
+                std::ostringstream errorMsg;
+                errorMsg << "The state jacobian of constraint "<< constraintIterator->get()->constraint->name() << " has a number of columns different from the state size." << std::endl;
+                reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                return false;
+            }
 
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize){
                 toEigen(jacobian).block(0, 0, constraintIterator->get()->stateJacobianBuffer.rows(), state.size()) =
@@ -330,8 +359,26 @@ namespace optimalcontrol {
             }
 
             if(!(constraintIterator->get()->constraint->constraintJacobianWRTControl(time, state, control,
-                                                                                   constraintIterator->get()->controlJacobianBuffer)))
+                                                                                     constraintIterator->get()->controlJacobianBuffer))){
+                std::ostringstream errorMsg;
+                errorMsg << "Failed to evaluate "<< constraintIterator->get()->constraint->name() << std::endl;
+                reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                 return false;
+            }
+
+            if (constraintIterator->get()->controlJacobianBuffer.rows() != constraintIterator->get()->constraint->constraintSize()){
+                std::ostringstream errorMsg;
+                errorMsg << "The control jacobian of constraint "<< constraintIterator->get()->constraint->name() << " has a number of rows different from the size of the constraint." << std::endl;
+                reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (constraintIterator->get()->controlJacobianBuffer.cols() != control.size()){
+                std::ostringstream errorMsg;
+                errorMsg << "The control jacobian of constraint "<< constraintIterator->get()->constraint->name() << " has a number of columns different from the control size." << std::endl;
+                reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
+                return false;
+            }
 
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize){
                 toEigen(jacobian).block(0, 0, constraintIterator->get()->controlJacobianBuffer.rows(), state.size()) =

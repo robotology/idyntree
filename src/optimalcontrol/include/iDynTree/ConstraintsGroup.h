@@ -42,6 +42,8 @@ namespace iDynTree {
 
             const std::string name() const;
 
+            unsigned int constraintsDimension() const;
+
             bool addConstraint(std::shared_ptr<Constraint> constraint, const TimeRange& timeRange);
 
             bool updateTimeRange(const std::string& name, const TimeRange& timeRange);

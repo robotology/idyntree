@@ -72,7 +72,7 @@ namespace iDynTree {
 
 
         protected:
-            size_t m_contraintSize;
+            size_t m_constraintSize;
             std::string m_constraintName;
             VectorDynSize m_lowerBound;
             VectorDynSize m_upperBound;

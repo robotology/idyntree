@@ -17,7 +17,7 @@ namespace iDynTree {
     namespace optimalcontrol {
 
         Constraint::Constraint(size_t size, const std::string name)
-        : m_contraintSize(size)
+        : m_constraintSize(size)
         , m_constraintName(name)
         , m_isLowerBounded(false)
         , m_isUpperBounded(false)
@@ -28,13 +28,13 @@ namespace iDynTree {
 
         Constraint::~Constraint() {}
 
-        size_t Constraint::constraintSize() const { return m_contraintSize; }
+        size_t Constraint::constraintSize() const { return m_constraintSize; }
 
         const std::string &Constraint::name() const { return m_constraintName; }
 
         bool Constraint::setLowerBound(const VectorDynSize &lowerBound)
         {
-            if (lowerBound.size() != m_contraintSize){
+            if (lowerBound.size() != m_constraintSize){
                 reportError("Constraint", "setLowerBound", "The lowerBound dimension is not coherent with the constraint size.");
                 return false;
             }
@@ -55,7 +55,7 @@ namespace iDynTree {
 
         bool Constraint::setUpperBound(const VectorDynSize &upperBound)
         {
-            if (upperBound.size() != m_contraintSize){
+            if (upperBound.size() != m_constraintSize){
                 reportError("Constraint", "setUpperBound", "The upperBound dimension is not coherent with the constraint size.");
                 return false;
             }
