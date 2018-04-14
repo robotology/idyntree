@@ -111,16 +111,14 @@ namespace iDynTree {
                 m_solution.clear();
             }
 
-            bool Integrator::evaluateCollocationConstraint(const std::vector<VectorDynSize> &collocationPoints,
-                                                           const std::vector<VectorDynSize> &controlInputs,
-                                                           double time, VectorDynSize &constraintValue)
+            bool Integrator::evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                           const std::vector<VectorDynSize> &controlInputs, double dT, VectorDynSize &constraintValue)
             {
                 return false;
             }
 
-            bool Integrator::evaluateCollocationConstraintJacobian(const std::vector<VectorDynSize> &collocationPoints,
-                                                                   const std::vector<VectorDynSize> &controlInputs,
-                                                                   double time,
+            bool Integrator::evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                                   const std::vector<VectorDynSize> &controlInputs, double dT,
                                                                    std::vector<MatrixDynSize> &stateJacobianValues,
                                                                    std::vector<MatrixDynSize> &controlJacobianValues)
             {

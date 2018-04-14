@@ -99,12 +99,12 @@ namespace optimalcontrol {
 
                 virtual void clearSolution();
 
-                virtual bool evaluateCollocationConstraint(const std::vector<VectorDynSize>& collocationPoints,
-                                                           const std::vector<VectorDynSize>& controlInputs,
-                                                           double time, VectorDynSize& constraintValue);
+                virtual bool evaluateCollocationConstraint(double time, const std::vector<VectorDynSize>& collocationPoints,
+                                                           const std::vector<VectorDynSize>& controlInputs, double dT,
+                                                           VectorDynSize& constraintValue);
 
-                virtual bool evaluateCollocationConstraintJacobian(const std::vector<VectorDynSize>& collocationPoints,
-                                                                   const std::vector<VectorDynSize>& controlInputs, double time,
+                virtual bool evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize>& collocationPoints,
+                                                                   const std::vector<VectorDynSize>& controlInputs, double dT,
                                                                    std::vector<MatrixDynSize>& stateJacobianValues,
                                                                    std::vector<MatrixDynSize>& controlJacobianValues);
 

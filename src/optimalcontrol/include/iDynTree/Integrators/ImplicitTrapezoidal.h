@@ -44,13 +44,12 @@ namespace iDynTree {
 
                 virtual ~ImplicitTrapezoidal();
 
-                bool evaluateCollocationConstraint(const std::vector<VectorDynSize> &collocationPoints,
-                                                   const std::vector<VectorDynSize> &controlInputs,
-                                                   double time,
+                bool evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                   const std::vector<VectorDynSize> &controlInputs, double dT,
                                                    VectorDynSize &constraintValue) override;
 
-                bool evaluateCollocationConstraintJacobian(const std::vector<VectorDynSize> &collocationPoints,
-                                                           const std::vector<VectorDynSize> &controlInputs, double time,
+                bool evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                           const std::vector<VectorDynSize> &controlInputs, double dT,
                                                            std::vector<MatrixDynSize> &stateJacobianValues,
                                                            std::vector<MatrixDynSize> &controlJacobianValues) override;
 

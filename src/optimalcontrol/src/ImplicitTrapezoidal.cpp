@@ -66,9 +66,9 @@ namespace iDynTree {
             ImplicitTrapezoidal::~ImplicitTrapezoidal()
             {}
 
-            bool ImplicitTrapezoidal::evaluateCollocationConstraint(const std::vector<VectorDynSize> &collocationPoints,
-                                                                    const std::vector<VectorDynSize> &controlInputs,
-                                                                    double time, VectorDynSize &constraintValue)
+            bool ImplicitTrapezoidal::evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                                    const std::vector<VectorDynSize> &controlInputs, double dT,
+                                                                    VectorDynSize &constraintValue)
             {
                 if (!m_dynamicalSystem_ptr){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Dynamical system not set.");
@@ -99,7 +99,7 @@ namespace iDynTree {
                     return false;
                 }
 
-                if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[1], controlInputs[1], time+m_dTmax, m_computationBuffer2))){
+                if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[1], controlInputs[1], time+dT, m_computationBuffer2))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while evaluating the dynamical system.");
                     return false;
                 }
@@ -110,8 +110,8 @@ namespace iDynTree {
                 return true;
             }
 
-            bool ImplicitTrapezoidal::evaluateCollocationConstraintJacobian(const std::vector<VectorDynSize> &collocationPoints,
-                                                                            const std::vector<VectorDynSize> &controlInputs, double time,
+            bool ImplicitTrapezoidal::evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                                            const std::vector<VectorDynSize> &controlInputs, double dT,
                                                                             std::vector<MatrixDynSize> &stateJacobianValues,
                                                                             std::vector<MatrixDynSize> &controlJacobianValues)
             {
@@ -153,18 +153,18 @@ namespace iDynTree {
                     return false;
                 }
 
-                toEigen(stateJacobianValues[0]) = toEigen(m_identity) + m_dTmax/2*toEigen(m_stateJacBuffer);
+                toEigen(stateJacobianValues[0]) = toEigen(m_identity) + dT/2*toEigen(m_stateJacBuffer);
 
                 if ((stateJacobianValues[1].rows() != nx) || (stateJacobianValues[1].cols() != nx))
                     stateJacobianValues[1].resize(nx,nx);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsStateFirstDerivative(collocationPoints[1], controlInputs[1], time+m_dTmax, m_stateJacBuffer))){
+                if (!(m_dynamicalSystem_ptr->dynamicsStateFirstDerivative(collocationPoints[1], controlInputs[1], time+dT, m_stateJacBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
                                 "Error while evaluating the dynamical system jacobian.");
                     return false;
                 }
 
-                toEigen(stateJacobianValues[1]) = -toEigen(m_identity) + m_dTmax/2*toEigen(m_stateJacBuffer);
+                toEigen(stateJacobianValues[1]) = -toEigen(m_identity) + dT/2*toEigen(m_stateJacBuffer);
 
                 //Control Jacobians
 
@@ -180,18 +180,18 @@ namespace iDynTree {
                     return false;
                 }
 
-                toEigen(controlJacobianValues[0]) = m_dTmax/2*toEigen(m_controlJacBuffer);
+                toEigen(controlJacobianValues[0]) = dT/2*toEigen(m_controlJacBuffer);
 
                 if ((controlJacobianValues[1].rows() != nx) || (controlJacobianValues[1].cols() != nu))
                     controlJacobianValues[1].resize(nx,nu);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[1], controlInputs[1], time, m_controlJacBuffer))){
+                if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[1], controlInputs[1], time + dT, m_controlJacBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
                                 "Error while evaluating the dynamical system control jacobian.");
                     return false;
                 }
 
-                toEigen(controlJacobianValues[1]) = m_dTmax/2*toEigen(m_controlJacBuffer);
+                toEigen(controlJacobianValues[1]) = dT/2*toEigen(m_controlJacBuffer);
 
                 return true;
 
