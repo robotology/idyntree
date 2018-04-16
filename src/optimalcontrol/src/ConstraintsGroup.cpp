@@ -45,6 +45,7 @@ namespace optimalcontrol {
             std::vector< TimedConstraint_ptr > orderedIntervals;
             std::string name;
             unsigned int maxConstraintSize;
+            std::vector<TimeRange> timeRanges;
 
             std::vector< TimedConstraint_ptr >::reverse_iterator findActiveConstraint(double time){
                 return std::find_if(orderedIntervals.rbegin(),
@@ -184,6 +185,26 @@ namespace optimalcontrol {
                 reportError("ConstraintsGroup", "removeConstraint", errorMsg.str().c_str());
                 return false;
             }
+
+            bool found = false;
+            std::vector<TimedConstraint_ptr>::iterator it = m_pimpl->orderedIntervals.begin();
+            while ((!found) && (it != m_pimpl->orderedIntervals.end())){
+                if (it->get()->constraint->name() == name){
+                    m_pimpl->orderedIntervals.erase(it);
+                    found = true;
+                } else{
+                    it++;
+                }
+            }
+
+            if(!found){
+                std::ostringstream errorMsg;
+                errorMsg << "Unable to find constraint named "<<name<< "on the ordered vector. This is most likely a bug." << std::endl;
+                reportError("ConstraintsGroup", "removeConstraint", errorMsg.str().c_str());
+                return false;
+            }
+
+            std::sort(m_pimpl->orderedIntervals.begin(), m_pimpl->orderedIntervals.end(), [](const TimedConstraint_ptr&a, const TimedConstraint_ptr&b) { return a->timeRange < b->timeRange;}); //reorder the vector
             return true;
         }
 
@@ -200,6 +221,19 @@ namespace optimalcontrol {
 
             timeRange = constraintIterator->second->timeRange;
             return true;
+        }
+
+        std::vector<TimeRange>& ConstraintsGroup::getTimeRanges() const
+        {
+            if (m_pimpl->timeRanges.size() != numberOfConstraints())
+                m_pimpl->timeRanges.resize(numberOfConstraints());
+
+            size_t i=0;
+            for (auto constraint : m_pimpl->group){
+                m_pimpl->timeRanges[i] = constraint.second->timeRange;
+                ++i;
+            }
+            return m_pimpl->timeRanges;
         }
 
         bool ConstraintsGroup::isFeasibilePoint(double time, const VectorDynSize &state, const VectorDynSize &control)
@@ -241,7 +275,7 @@ namespace optimalcontrol {
             return true;
         }
 
-        bool ConstraintsGroup::getLowerBounds(double time, VectorDynSize &lowerBound)
+        bool ConstraintsGroup::getLowerBound(double time, VectorDynSize &lowerBound)
         {
             if (isAnyTimeGroup()){
                 return m_pimpl->group.begin()->second.get()->constraint->getLowerBound(lowerBound);
@@ -266,7 +300,7 @@ namespace optimalcontrol {
             return true;
         }
 
-        bool ConstraintsGroup::getUpperBounds(double time, VectorDynSize &upperBound)
+        bool ConstraintsGroup::getUpperBound(double time, VectorDynSize &upperBound)
         {
             if (isAnyTimeGroup()){
                 return m_pimpl->group.begin()->second.get()->constraint->getUpperBound(upperBound);

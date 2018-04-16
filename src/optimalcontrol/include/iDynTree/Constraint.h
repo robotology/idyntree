@@ -41,11 +41,11 @@ namespace iDynTree {
 
             bool setLowerBound(const VectorDynSize& lowerBound);
 
-            bool getLowerBound(VectorDynSize& lowerBound);
+            bool getLowerBound(VectorDynSize& lowerBound); //return false if not lower bounded
 
             bool setUpperBound(const VectorDynSize& upperBound);
 
-            bool getUpperBound(VectorDynSize& upperBound);
+            bool getUpperBound(VectorDynSize& upperBound); //return false if not upper bounded
 
             virtual bool isFeasiblePoint(double time,
                                          const VectorDynSize& state,

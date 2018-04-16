@@ -55,6 +55,8 @@ namespace optimalcontrol {
 
         virtual const VectorDynSize& initialState() const = 0;
 
+        virtual bool setInitialState(const VectorDynSize &state);
+
         //TODO: for now putting these functions as not virtual
         //TODO: add also second derivative?
         virtual bool dynamicsStateFirstDerivative(const VectorDynSize& state,
@@ -73,7 +75,7 @@ namespace optimalcontrol {
 
 
 
-    protected:
+    private:
         // TODO: does it make sense to have members in this abstrac class?
         size_t m_stateSize;
         size_t m_controlSize;

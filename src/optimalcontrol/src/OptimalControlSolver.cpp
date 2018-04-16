@@ -21,7 +21,7 @@
 namespace iDynTree {
     namespace optimalcontrol {
 
-        OptimalControlSolver::OptimalControlSolver(OptimalControlProblem&) {}
+        OptimalControlSolver::OptimalControlSolver(const std::shared_ptr<OptimalControlProblem> ocProblem) {}
         OptimalControlSolver::~OptimalControlSolver() {}
         
         // MARK: Private implementation

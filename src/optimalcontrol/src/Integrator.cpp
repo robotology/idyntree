@@ -70,7 +70,7 @@ namespace iDynTree {
                 return allocateBuffers();
             }
 
-            const std::weak_ptr<const DynamicalSystem> Integrator::dynamicalSystem() const{
+            const std::weak_ptr<DynamicalSystem> Integrator::dynamicalSystem() const{
                 return m_dynamicalSystem_ptr;
             }
 
@@ -90,7 +90,7 @@ namespace iDynTree {
                     return false;
                 }
 
-                for (std::vector<solutionElement>::const_iterator iteration = m_solution.cbegin();
+                for (std::vector<SolutionElement>::const_iterator iteration = m_solution.cbegin();
                      (iteration +1) != m_solution.cend(); ++iteration){
 
                     if ((iteration->time <= time) && ((iteration + 1)->time >= time)){
@@ -102,7 +102,7 @@ namespace iDynTree {
                 return false;
             }
 
-            const std::vector<solutionElement> &Integrator::getFullSolution() const{
+            const std::vector<SolutionElement> &Integrator::getFullSolution() const{
                 return m_solution;
             }
 
@@ -130,7 +130,7 @@ namespace iDynTree {
                 return m_info;
             }
 
-            bool Integrator::interpolatePoints(const std::vector<solutionElement>::const_iterator &first, const std::vector<solutionElement>::const_iterator &second, double time, VectorDynSize &outputPoint) const{
+            bool Integrator::interpolatePoints(const std::vector<SolutionElement>::const_iterator &first, const std::vector<SolutionElement>::const_iterator &second, double time, VectorDynSize &outputPoint) const{
 
                 double ratio = (second->time - time)/(second->time - first->time);
 

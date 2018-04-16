@@ -13,6 +13,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_OPTIMALCONTROLSOLVER_H
 #define IDYNTREE_OPTIMALCONTROL_OPTIMALCONTROLSOLVER_H
 
+#include <memory>
 #include <cstddef>
 
 namespace iDynTree {
@@ -35,7 +36,7 @@ namespace iDynTree {
         public:
             OptimalControlSolver() = delete;
 
-            OptimalControlSolver(OptimalControlProblem&);
+            OptimalControlSolver(const std::shared_ptr<OptimalControlProblem> ocProblem);
             virtual ~OptimalControlSolver();
 
             virtual bool initialize() = 0;

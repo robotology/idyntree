@@ -40,6 +40,12 @@ namespace iDynTree {
             return false;
         }
 
+        bool DynamicalSystem::setInitialState(const VectorDynSize &state)
+        {
+            reportError("DynamicalSystem", "setInitialState", "Method not implemented.");
+            return false;
+        }
+
         bool  DynamicalSystem::dynamicsStateFirstDerivative(const VectorDynSize& state, const VectorDynSize &control,
                                                             double time,
                                                             MatrixDynSize& dynamicsDerivative)

@@ -32,7 +32,7 @@ namespace optimalcontrol {
              * \ingroup iDynTreeExperimental
              */
 
-            class solutionElement{
+            class SolutionElement{
             public:
                 VectorDynSize stateAtT;
                 double time;
@@ -91,11 +91,11 @@ namespace optimalcontrol {
 
                 bool setDynamicalSystem(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
-                const std::weak_ptr<const DynamicalSystem> dynamicalSystem() const;
+                const std::weak_ptr<DynamicalSystem> dynamicalSystem() const;
 
                 virtual bool getSolution(double time, VectorDynSize& solution) const;
 
-                virtual const std::vector<solutionElement>& getFullSolution() const;
+                virtual const std::vector<SolutionElement>& getFullSolution() const;
 
                 virtual void clearSolution();
 
@@ -113,12 +113,12 @@ namespace optimalcontrol {
             protected:
                 double m_dTmax;
                 std::shared_ptr<DynamicalSystem> m_dynamicalSystem_ptr;
-                std::vector<solutionElement> m_solution;
+                std::vector<SolutionElement> m_solution;
                 std::shared_ptr<IntegratorInfoData> m_infoData;
                 IntegratorInfo m_info;
 
-                virtual bool interpolatePoints(const std::vector<solutionElement>::const_iterator &first,
-                                               const std::vector<solutionElement>::const_iterator &second,
+                virtual bool interpolatePoints(const std::vector<SolutionElement>::const_iterator &first,
+                                               const std::vector<SolutionElement>::const_iterator &second,
                                                double time, VectorDynSize& outputPoint) const;
 
                 virtual bool allocateBuffers();
