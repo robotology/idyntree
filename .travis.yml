@@ -44,8 +44,6 @@ addons:
       - lua5.1
       # Python bindings
       - python3-dev
-      # Octave bindings
-      - liboctave-dev
 
 matrix:
   include:
@@ -93,7 +91,7 @@ before_script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository ppa:nschloe/eigen-backports -y; fi 
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo sh -c 'echo "deb http://www.icub.org/ubuntu trusty contrib/science" > /etc/apt/sources.list.d/icub.list'; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi 
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install --allow-unauthenticated build-essential icub-common libeigen3-dev; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install --allow-unauthenticated build-essential icub-common libeigen3-dev liboctave-dev; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ace eigen cmake boost tinyxml swig gsl pkg-config jpeg sqlite readline tinyxml dartsim/dart/ipopt octave; fi 
  
   # avoid using openblas
