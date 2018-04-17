@@ -82,10 +82,10 @@ before_script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CXX" == "clang++" ]; then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang++; fi; fi
 
   # Force gcc-5
-  - if [ "TRAVISOSNAME"=="linux"]; then if [ "CC" == "gcc" ]; then export CC=gcc-5; export CXX=g++-5; fi; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "gcc" ]; then export CC=gcc-5; export CXX=g++-5; fi; fi
 
   # Force clang-5.0
-  - if [ "TRAVISOSNAME"=="linux"]; then if [ "CC" == "clang" ]; then export CC=clang-5.0; export CXX=clang++-5.0; fi; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "clang" ]; then export CC=clang-5.0; export CXX=clang++-5.0; fi; fi
 
   # install system dependencies using apt (linux) or homebrew (macos)
   # note: we install a lot of dependencies, as we compile iDynTree with all dependencies enabled
