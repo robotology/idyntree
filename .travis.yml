@@ -36,7 +36,7 @@ addons:
       - libtinyxml-dev
       - libode-dev 
       # Bindings
-      - swig3.0
+      - swig
       # C# bindings
       - mono-mcs
       # Lua bindings
