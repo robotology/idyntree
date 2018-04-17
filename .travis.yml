@@ -43,7 +43,7 @@ addons:
       - liblua5.1-0-dev
       - lua5.1
       # Python bindings
-      - python3-dev
+      - python-dev
 
 matrix:
   include:
