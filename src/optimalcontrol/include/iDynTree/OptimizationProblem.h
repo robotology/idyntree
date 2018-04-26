@@ -45,9 +45,9 @@ namespace iDynTree {
 
             virtual bool getConstraintsInfo(unsigned int& numberOfConstraints, VectorDynSize& constraintsLowerBounds, VectorDynSize& constraintsUpperBounds);
 
-            virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound);
+            virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound); //return false if not upper bounded
 
-            virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound);
+            virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound); //return false if not lower bounded
 
             virtual bool getConstraintsJacobianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
 

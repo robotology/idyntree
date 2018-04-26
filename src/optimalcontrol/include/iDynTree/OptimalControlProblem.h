@@ -86,10 +86,27 @@ namespace iDynTree {
 
             std::vector<TimeRange>& getCostsTimeRanges() const;
 
+            bool setStateLowerBound(const VectorDynSize& minState);
+
+            bool setStateUpperBound(const VectorDynSize& maxState);
+
+            bool setControlLowerBound(const VectorDynSize& minControl);
+
+            bool setControlUpperBound(const VectorDynSize& maxControl);
+
             bool setStateBoxConstraints(const VectorDynSize& minState,
                                         const VectorDynSize& maxState);
+
             bool setControlBoxConstraints(const VectorDynSize& minControl,
                                           const VectorDynSize& maxControl);
+
+            bool getStateLowerBound(VectorDynSize& minState) const;  //return false if the corresponding bound is not set
+
+            bool getStateUpperBound(VectorDynSize& maxState) const;  //return false if the corresponding bound is not set
+
+            bool getControlLowerBound(VectorDynSize& minControl) const;  //return false if the corresponding bound is not set
+
+            bool getControlUpperBound(VectorDynSize& maxControl) const;  //return false if the corresponding bound is not set
 
             bool costsEvaluation(double time, const VectorDynSize& state, const VectorDynSize& control, double& costValue);
 
@@ -98,26 +115,26 @@ namespace iDynTree {
                                                      const VectorDynSize& control,
                                                      VectorDynSize& partialDerivative);
 
-            bool costFirstPartialDerivativeWRTControl(double time,
-                                                      const VectorDynSize& state,
-                                                      const VectorDynSize& control,
-                                                      VectorDynSize& partialDerivative);
-
-            bool costSecondPartialDerivativeWRTState(double time,
-                                                     const VectorDynSize& state,
-                                                     const VectorDynSize& control,
-                                                     MatrixDynSize& partialDerivative);
-
-            bool costSecondPartialDerivativeWRTControl(double time,
+            bool costsFirstPartialDerivativeWRTControl(double time,
                                                        const VectorDynSize& state,
                                                        const VectorDynSize& control,
-                                                       MatrixDynSize& partialDerivative);
+                                                       VectorDynSize& partialDerivative);
+
+            bool costsSecondPartialDerivativeWRTState(double time,
+                                                      const VectorDynSize& state,
+                                                      const VectorDynSize& control,
+                                                      MatrixDynSize& partialDerivative);
+
+            bool costsSecondPartialDerivativeWRTControl(double time,
+                                                        const VectorDynSize& state,
+                                                        const VectorDynSize& control,
+                                                        MatrixDynSize& partialDerivative);
 
 
-            bool costSecondPartialDerivativeWRTStateControl(double time,
-                                                            const VectorDynSize& state,
-                                                            const VectorDynSize& control,
-                                                            MatrixDynSize& partialDerivative);
+            bool costsSecondPartialDerivativeWRTStateControl(double time,
+                                                             const VectorDynSize& state,
+                                                             const VectorDynSize& control,
+                                                             MatrixDynSize& partialDerivative);
 
             bool constraintsEvaluation(double time, const VectorDynSize& state, const VectorDynSize& control, VectorDynSize& constraintsValue);
 

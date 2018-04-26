@@ -57,6 +57,7 @@ namespace iDynTree {
             CostsMap costs;
             VectorDynSize costStateJacobianBuffer, costControlJacobianBuffer;
             MatrixDynSize costStateHessianBuffer, costControlHessianBuffer, costMixedHessianBuffer;
+            bool stateLowerBounded, stateUpperBounded, controlLowerBounded, controlUpperBounded;
             VectorDynSize stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
             std::vector<std::string> mayerCostnames;
             std::vector<TimeRange> constraintsTimeRanges, costTimeRanges;
@@ -71,6 +72,11 @@ namespace iDynTree {
             assert(m_pimpl);
             m_pimpl->horizon = TimeRange::Instant(0.0);
             m_pimpl->dynamicalSystem = nullptr;
+            m_pimpl->stateLowerBounded = false;
+            m_pimpl->stateUpperBounded = false;
+            m_pimpl->controlLowerBounded = false;
+            m_pimpl->controlUpperBounded = false;
+
         }
 
         OptimalControlProblem::~OptimalControlProblem()
@@ -428,18 +434,114 @@ namespace iDynTree {
             return m_pimpl->costTimeRanges;
         }
 
-        bool OptimalControlProblem::setStateBoxConstraints(const VectorDynSize &minState, const VectorDynSize &maxState)
+        bool OptimalControlProblem::setStateLowerBound(const VectorDynSize &minState)
         {
+            if (!(m_pimpl->dynamicalSystem)){
+                reportError("OptimalControlProblem", "setStateLowerBound", "First a dynamical system has to be set.");
+                return false;
+            }
+
+            if (minState.size() != m_pimpl->dynamicalSystem->stateSpaceSize()) {
+                reportError("OptimalControlProblem", "setStateLowerBound", "The dimension of minState does not coincide with the state dimension.");
+                return false;
+            }
+            m_pimpl->stateLowerBounded = true;
             m_pimpl->stateLowerBound = minState;
+            return true;
+        }
+
+        bool OptimalControlProblem::setStateUpperBound(const VectorDynSize &maxState)
+        {
+            if (!(m_pimpl->dynamicalSystem)){
+                reportError("OptimalControlProblem", "setStateUpperBound", "First a dynamical system has to be set.");
+                return false;
+            }
+
+            if (maxState.size() != m_pimpl->dynamicalSystem->stateSpaceSize()) {
+                reportError("OptimalControlProblem", "setStateUpperBound", "The dimension of maxState does not coincide with the state dimension.");
+                return false;
+            }
+            m_pimpl->stateUpperBounded = true;
             m_pimpl->stateUpperBound = maxState;
             return true;
         }
 
-        bool OptimalControlProblem::setControlBoxConstraints(const VectorDynSize &minControl, const VectorDynSize &maxControl)
+        bool OptimalControlProblem::setControlLowerBound(const VectorDynSize &minControl)
         {
+            if (!(m_pimpl->dynamicalSystem)){
+                reportError("OptimalControlProblem", "setControlLowerBound", "First a dynamical system has to be set.");
+                return false;
+            }
+
+            if (minControl.size() != m_pimpl->dynamicalSystem->controlSpaceSize()) {
+                reportError("OptimalControlProblem", "setControlLowerBound", "The dimension of minControl does not coincide with the control dimension.");
+                return false;
+            }
+            m_pimpl->controlLowerBounded = true;
             m_pimpl->controlLowerBound = minControl;
+            return true;
+        }
+
+        bool OptimalControlProblem::setControlUpperBound(const VectorDynSize &maxControl)
+        {
+            if (!(m_pimpl->dynamicalSystem)){
+                reportError("OptimalControlProblem", "setControlUpperBound", "First a dynamical system has to be set.");
+                return false;
+            }
+
+            if (maxControl.size() != m_pimpl->dynamicalSystem->controlSpaceSize()) {
+                reportError("OptimalControlProblem", "setControlUpperBound", "The dimension of maxControl does not coincide with the control dimension.");
+                return false;
+            }
+            m_pimpl->controlUpperBounded = true;
             m_pimpl->controlUpperBound = maxControl;
             return true;
+        }
+
+        bool OptimalControlProblem::setStateBoxConstraints(const VectorDynSize &minState, const VectorDynSize &maxState)
+        {
+            return setStateLowerBound(minState) && setStateUpperBound(maxState);
+        }
+
+        bool OptimalControlProblem::setControlBoxConstraints(const VectorDynSize &minControl, const VectorDynSize &maxControl)
+        {
+            return setControlLowerBound(minControl) && setControlUpperBound(maxControl);
+        }
+
+        bool OptimalControlProblem::getStateLowerBound(VectorDynSize &minState) const
+        {
+            if (m_pimpl->stateLowerBounded){
+                minState = m_pimpl->stateLowerBound;
+                return true;
+            }
+            return false;
+        }
+
+        bool OptimalControlProblem::getStateUpperBound(VectorDynSize &maxState) const
+        {
+            if (m_pimpl->stateUpperBounded){
+                maxState = m_pimpl->stateUpperBound;
+                return true;
+            }
+            return false;
+        }
+
+        bool OptimalControlProblem::getControlLowerBound(VectorDynSize &minControl) const
+        {
+            if (m_pimpl->controlLowerBounded){
+                minControl = m_pimpl->controlLowerBound;
+                return true;
+            }
+            return false;
+        }
+
+        bool OptimalControlProblem::getControlUpperBound(VectorDynSize &maxControl) const
+        {
+            if (m_pimpl->controlUpperBounded){
+                maxControl = m_pimpl->controlUpperBound;
+                return true;
+            }
+            return false;
         }
 
         bool OptimalControlProblem::costsEvaluation(double time, const VectorDynSize &state, const VectorDynSize &control, double &costValue)
@@ -496,7 +598,7 @@ namespace iDynTree {
             return true;
         }
 
-        bool OptimalControlProblem::costFirstPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &partialDerivative)
+        bool OptimalControlProblem::costsFirstPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &partialDerivative)
         {
             if (partialDerivative.size() != control.size())
                 partialDerivative.resize(control.size());
@@ -531,7 +633,7 @@ namespace iDynTree {
             return true;
         }
 
-        bool OptimalControlProblem::costSecondPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
+        bool OptimalControlProblem::costsSecondPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
         {
             if ((partialDerivative.rows() != state.size()) || (partialDerivative.cols() != state.size()))
                 partialDerivative.resize(state.size(), state.size());
@@ -567,7 +669,7 @@ namespace iDynTree {
             return true;
         }
 
-        bool OptimalControlProblem::costSecondPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
+        bool OptimalControlProblem::costsSecondPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
         {
             if ((partialDerivative.rows() != control.size()) || (partialDerivative.cols() != control.size()))
                 partialDerivative.resize(control.size(), control.size());
@@ -604,7 +706,7 @@ namespace iDynTree {
             return true;
         }
 
-        bool OptimalControlProblem::costSecondPartialDerivativeWRTStateControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
+        bool OptimalControlProblem::costsSecondPartialDerivativeWRTStateControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
         {
             if ((partialDerivative.rows() != state.size()) || (partialDerivative.cols() != control.size()))
                 partialDerivative.resize(state.size(), control.size());

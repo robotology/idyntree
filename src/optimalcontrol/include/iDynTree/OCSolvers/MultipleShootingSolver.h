@@ -68,6 +68,12 @@ namespace iDynTree {
 
             void setMinusInfinity(double minusInfinity);
 
+            bool setInitialState(const VectorDynSize &initialState);
+
+            bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
+
+            bool getSolution(std::vector<VectorDynSize>& states, std::vector<VectorDynSize>& controls);
+
             class MultipleShootingTranscriptionPimpl;
             MultipleShootingTranscriptionPimpl *m_pimpl;
 
@@ -83,27 +89,27 @@ namespace iDynTree {
 
             virtual bool getConstraintsInfo(unsigned int& numberOfConstraints, VectorDynSize& constraintsLowerBounds, VectorDynSize& constraintsUpperBounds) override;
 
-//            virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound);
+            virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound) override;
 
-//            virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound);
+            virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound) override;
 
-//            virtual bool getConstraintsJacobianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+            virtual bool getConstraintsJacobianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) override;
 
-//            virtual bool getHessianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+            virtual bool getHessianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) override;
 
-//            virtual bool setVariables(const VectorDynSize& variables);
+            virtual bool setVariables(const VectorDynSize& variables) override;
 
-//            virtual bool evaluateCostFunction(double& costValue);
+            virtual bool evaluateCostFunction(double& costValue) override;
 
-//            virtual bool evaluateCostGradient(VectorDynSize& gradient);
+            virtual bool evaluateCostGradient(VectorDynSize& gradient) override;
 
-//            virtual bool evaluateCostHessian(MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained
+            virtual bool evaluateCostHessian(MatrixDynSize& hessian) override; //using dense matrices, but the sparsity pattern is still obtained
 
-//            virtual bool evaluateConstraints(VectorDynSize& constraints);
+            virtual bool evaluateConstraints(VectorDynSize& constraints) override;
 
-//            virtual bool evaluateConstraintsJacobian(MatrixDynSize& jacobian); //using dense matrices, but the sparsity pattern is still obtained
+            virtual bool evaluateConstraintsJacobian(MatrixDynSize& jacobian) override; //using dense matrices, but the sparsity pattern is still obtained
 
-//            virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers, MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained
+            virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers, MatrixDynSize& hessian) override; //using dense matrices, but the sparsity pattern is still obtained
 
         };
 
@@ -127,16 +133,15 @@ namespace iDynTree {
 
             bool setOptimizer(std::shared_ptr<optimization::Optimizer> optimizer);
 
+            bool setInitialState(const VectorDynSize &initialState);
 
-
-            // FIXME: These two cannot be used as VectorDynTree
-            // as they are trajectories, not single vectors
-            void setInitialGuess(const iDynTree::VectorDynSize& initialGuess);
-            const iDynTree::VectorDynSize& lastSolution();
-
+            bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
 
             virtual bool initialize() override;
+
             virtual bool solve() override;
+
+            bool getSolution(std::vector<VectorDynSize>& states, std::vector<VectorDynSize>& controls);
 
         private:
             std::shared_ptr<MultipleShootingTranscription> m_transcription;

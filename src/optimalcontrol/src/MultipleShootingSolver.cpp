@@ -87,7 +87,13 @@ namespace iDynTree {
             size_t jacobianNonZeros, hessianNonZeros;
             double plusInfinity, minusInfinity;
             VectorDynSize constraintsLowerBound, constraintsUpperBound;
-            VectorDynSize constraintsBuffer;
+            VectorDynSize constraintsBuffer, stateBuffer, controlBuffer, variablesBuffer, costStateGradientBuffer, costControlGradientBuffer;
+            MatrixDynSize costHessianStateBuffer, costHessianControlBuffer, costHessianStateControlBuffer, costHessianControlStateBuffer;
+            std::vector<VectorDynSize> collocationStateBuffer, collocationControlBuffer;
+            std::vector<MatrixDynSize> collocationStateJacBuffer, collocationControlJacBuffer;
+            MatrixDynSize constraintsStateJacBuffer, constraintsControlJacBuffer;
+            VectorDynSize solution;
+            bool solved;
 
             void resetMeshPoints(){
                 meshPointsEnd = meshPoints.begin();
@@ -167,6 +173,77 @@ namespace iDynTree {
                 }
             }
 
+            void allocateBuffers(){
+                if (stateBuffer.size() != nx)
+                    stateBuffer.resize(static_cast<unsigned int>(nx));
+
+                if (costStateGradientBuffer.size() != nx)
+                    costStateGradientBuffer.resize(static_cast<unsigned int>(nx));
+
+                if ((costHessianStateBuffer.rows() != nx) || (costHessianStateBuffer.cols() != nx))
+                    costHessianStateBuffer.resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nx));
+
+                if (controlBuffer.size() != nu)
+                    controlBuffer.resize(static_cast<unsigned int>(nu));
+
+                if (costControlGradientBuffer.size() != nu)
+                    costControlGradientBuffer.resize(static_cast<unsigned int>(nu));
+
+                if ((costHessianControlBuffer.rows() != nu) || (costHessianControlBuffer.cols() != nu))
+                    costHessianControlBuffer.resize(static_cast<unsigned int>(nu), static_cast<unsigned int>(nu));
+
+                if ((costHessianStateControlBuffer.rows() != nx) || (costHessianStateControlBuffer.cols() != nu))
+                    costHessianStateControlBuffer.resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nu));
+
+                if ((costHessianControlStateBuffer.rows() != nu) || (costHessianControlStateBuffer.cols() != nx))
+                    costHessianControlStateBuffer.resize(static_cast<unsigned int>(nu), static_cast<unsigned int>(nx));
+
+
+                //TODO: I should consider also the possibility to have auxiliary variables in the integrator
+                if (variablesBuffer.size() != numberOfVariables)
+                    variablesBuffer.resize(static_cast<unsigned int>(numberOfVariables));
+
+                if (constraintsBuffer.size() != constraintsPerInstant)
+                    constraintsBuffer.resize(static_cast<unsigned int>(constraintsPerInstant));
+
+                if (constraintsLowerBound.size() != numberOfConstraints)
+                    constraintsLowerBound.resize(static_cast<unsigned int>(numberOfConstraints));
+
+                if (constraintsUpperBound.size() != numberOfConstraints)
+                    constraintsUpperBound.resize(static_cast<unsigned int>(numberOfConstraints));
+
+                //TODO: I should consider also the possibility to have auxiliary variables in the integrator
+                if (collocationStateBuffer.size() != 2)
+                    collocationStateBuffer.resize(2);
+                for (auto buf : collocationStateBuffer)
+                    if (buf.size() != nx)
+                        buf.resize(static_cast<unsigned int>(nx));
+
+                if (collocationControlBuffer.size() != 2)
+                    collocationControlBuffer.resize(2);
+                for (auto buf : collocationControlBuffer)
+                    if (buf.size() != nu)
+                        buf.resize(static_cast<unsigned int>(nu));
+
+                if (collocationStateJacBuffer.size() != 2)
+                    collocationStateJacBuffer.resize(2);
+                for (auto buf : collocationStateJacBuffer)
+                    if ((buf.rows() != nx) || (buf.cols() != nx))
+                        buf.resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nx));
+
+                if (collocationControlJacBuffer.size() != 2)
+                    collocationControlJacBuffer.resize(2);
+                for (auto buf : collocationControlJacBuffer)
+                    if ((buf.rows() != nx) || (buf.cols() != nu))
+                        buf.resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nu));
+
+                if ((constraintsStateJacBuffer.rows() != constraintsPerInstant) || (constraintsStateJacBuffer.cols() != nx))
+                    constraintsStateJacBuffer.resize(static_cast<unsigned int>(constraintsPerInstant), static_cast<unsigned int>(nx));
+
+                if ((constraintsControlJacBuffer.rows() != constraintsPerInstant) || (constraintsControlJacBuffer.cols() != nu))
+                    constraintsStateJacBuffer.resize(static_cast<unsigned int>(constraintsPerInstant), static_cast<unsigned int>(nu));
+            }
+
 
 
             MultipleShootingTranscriptionPimpl()
@@ -185,7 +262,8 @@ namespace iDynTree {
             ,constraintsPerInstant(0)
             ,numberOfConstraints(0)
             ,plusInfinity(1e19)
-            ,minusInfinity(1e19)
+            ,minusInfinity(-1e19)
+            ,solved(false)
             {}
 
             MultipleShootingTranscriptionPimpl(const std::shared_ptr<OptimalControlProblem> problem,
@@ -205,7 +283,8 @@ namespace iDynTree {
             ,constraintsPerInstant(0)
             ,numberOfConstraints(0)
             ,plusInfinity(1e19)
-            ,minusInfinity(1e19)
+            ,minusInfinity(-1e19)
+            ,solved(false)
             {}
         };
 
@@ -590,6 +669,96 @@ namespace iDynTree {
             m_pimpl->minusInfinity = minusInfinity;
         }
 
+        bool MultipleShootingTranscription::setInitialState(const VectorDynSize &initialState)
+        {
+            if (!(m_pimpl->ocproblem)){
+                reportError("MultipleShootingTranscription", "setInitialState", "The optimal control problem pointer is empty.");
+                return false;
+            }
+
+            if (m_pimpl->ocproblem->dynamicalSystem().expired()){
+                reportError("MultipleShootingTranscription", "setInitialState", "The optimal control problem does not point to any dynamical system.");
+                return false;
+            }
+
+            if (!(m_pimpl->ocproblem->dynamicalSystem().lock()->setInitialState(initialState))){
+                reportError("MultipleShootingTranscription", "setInitialState", "Error while setting the initial state to the dynamical system.");
+                return false;
+            }
+
+            return true;
+        }
+
+        bool MultipleShootingTranscription::getTimings(std::vector<double> &stateEvaluations, std::vector<double> &controlEvaluations)
+        {
+            if (!(m_pimpl->prepared)){
+                reportError("MultipleShootingTranscription", "getTimings", "First you need to call the prepare method");
+                return false;
+            }
+
+            if (stateEvaluations.size() != (m_pimpl->totalMeshes - 1))
+                stateEvaluations.resize(m_pimpl->totalMeshes - 1);
+
+            if (controlEvaluations.size() != m_pimpl->controlMeshes)
+                controlEvaluations.resize(m_pimpl->controlMeshes);
+
+            size_t stateIndex = 0, controlIndex = 0;
+
+            MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+
+            for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
+                if (mesh->origin != first){
+                    stateEvaluations[stateIndex] = mesh->time;
+                    stateIndex++;
+                }
+                if (mesh->type == MeshPointType::Control){
+                    controlEvaluations[controlIndex] = mesh->time;
+                    controlIndex++;
+                }
+            }
+
+            return true;
+        }
+
+        bool MultipleShootingTranscription::getSolution(std::vector<VectorDynSize> &states, std::vector<VectorDynSize> &controls)
+        {
+            if (!(m_pimpl->solved)){
+                reportError("MultipleShootingTranscription", "getSolution", "First you need to solve the problem once.");
+                return false;
+            }
+
+            if (states.size() != (m_pimpl->totalMeshes - 1))
+                states.resize((m_pimpl->totalMeshes - 1));
+
+            if (controls.size() != m_pimpl->controlMeshes)
+                controls.resize(m_pimpl->controlMeshes);
+
+            Eigen::Map<Eigen::VectorXd> solutionMap = toEigen(m_pimpl->solution);
+
+            size_t stateIndex = 0, controlIndex = 0;
+
+            MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+
+            for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
+                if (mesh->origin != first){
+                    if (states[stateIndex].size() !=  m_pimpl->nx)
+                        states[stateIndex].resize(m_pimpl->nx);
+
+                    toEigen(states[stateIndex]) = solutionMap.segment(mesh->stateIndex, m_pimpl->nx);
+                    stateIndex++;
+                }
+                if (mesh->type == MeshPointType::Control){
+                    if (controls[controlIndex].size() !=  m_pimpl->nu)
+                        controls[controlIndex].resize(m_pimpl->nu);
+
+                    toEigen(controls[controlIndex]) = solutionMap.segment(mesh->controlIndex, m_pimpl->nu);
+                    controlIndex++;
+                }
+            }
+
+            return true;
+        }
+
 
         bool MultipleShootingTranscription::prepare()
         {
@@ -622,7 +791,7 @@ namespace iDynTree {
                 return false;
             }
 
-            if (!m_pimpl->prepared){
+            if (!(m_pimpl->prepared)){
                 if (m_pimpl->ocproblem->dynamicalSystem().expired()){
                     if (m_pimpl->integrator->dynamicalSystem().expired()){
                         reportError("MultipleShootingTranscription", "prepare",
@@ -657,27 +826,24 @@ namespace iDynTree {
             if (!setMeshPoints()){
                 return false;
             }
+
             size_t nx = m_pimpl->integrator->dynamicalSystem().lock()->stateSpaceSize();
             m_pimpl->nx = nx;
+
             size_t nu = m_pimpl->integrator->dynamicalSystem().lock()->controlSpaceSize();
             m_pimpl->nu = nu;
+
             //TODO: I should consider also the possibility to have auxiliary variables in the integrator
             m_pimpl->numberOfVariables = (m_pimpl->totalMeshes - 1) * nx + m_pimpl->controlMeshes * nu; //the -1 removes the initial state from the set of optimization varibales
+
             m_pimpl->constraintsPerInstant = m_pimpl->ocproblem->getConstraintsDimension();
             size_t nc = m_pimpl->constraintsPerInstant;
             m_pimpl->numberOfConstraints = (m_pimpl->totalMeshes - 1) * nx + (m_pimpl->constraintsPerInstant) * (m_pimpl->totalMeshes); //dynamical constraints (removing the initial state) and normal constraints
 
-            if (m_pimpl->constraintsBuffer.size() != nc)
-                m_pimpl->constraintsBuffer.resize(static_cast<unsigned int>(nc));
+            m_pimpl->allocateBuffers();
 
-            if (m_pimpl->constraintsLowerBound.size() != m_pimpl->numberOfConstraints)
-                m_pimpl->constraintsLowerBound.resize(static_cast<unsigned int>(m_pimpl->numberOfConstraints));
             Eigen::Map<Eigen::VectorXd> lowerBoundMap = toEigen(m_pimpl->constraintsLowerBound);
-
-            if (m_pimpl->constraintsUpperBound.size() != m_pimpl->numberOfConstraints)
-                m_pimpl->constraintsUpperBound.resize(static_cast<unsigned int>(m_pimpl->numberOfConstraints));
             Eigen::Map<Eigen::VectorXd> upperBoundMap = toEigen(m_pimpl->constraintsUpperBound);
-
 
             m_pimpl->resetNonZerosCount();
 
@@ -868,6 +1034,459 @@ namespace iDynTree {
             return true;
         }
 
+        bool MultipleShootingTranscription::getVariablesUpperBound(VectorDynSize &variablesUpperBound)
+        {
+            bool stateBounded = true, controlBounded = true;
+
+            Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_pimpl->stateBuffer);
+            Eigen::Map<Eigen::VectorXd> controlBufferMap = toEigen(m_pimpl->controlBuffer);
+
+            if (!(m_pimpl->ocproblem->getStateUpperBound(m_pimpl->stateBuffer))) {
+                stateBounded = false;
+                stateBufferMap.setConstant(m_pimpl->plusInfinity);
+            }
+
+            if (!(m_pimpl->ocproblem->getControlUpperBound(m_pimpl->controlBuffer))) {
+                controlBounded = false;
+                controlBufferMap.setConstant(m_pimpl->plusInfinity);
+            }
+
+            if (!controlBounded && !stateBounded)
+                return false;
+
+            if (variablesUpperBound.size() != m_pimpl->numberOfVariables)
+                variablesUpperBound.resize(m_pimpl->numberOfVariables);
+            Eigen::Map<Eigen::VectorXd> upperBoundMap = toEigen(variablesUpperBound);
+
+            Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
+            Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
+
+            MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+            for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
+                if (mesh->origin == first){
+                    upperBoundMap.segment(mesh->controlIndex, nu) = controlBufferMap;
+                } else if (mesh->type == MeshPointType::Control) {
+                    upperBoundMap.segment(mesh->controlIndex, nu) = controlBufferMap;
+                    upperBoundMap.segment(mesh->stateIndex, nx) = stateBufferMap;
+                } else if (mesh->type == MeshPointType::State) {
+                    upperBoundMap.segment(mesh->stateIndex, nx) = stateBufferMap;
+                }
+            }
+            return true;
+        }
+
+        bool MultipleShootingTranscription::getVariablesLowerBound(VectorDynSize &variablesLowerBound)
+        {
+            bool stateBounded = true, controlBounded = true;
+
+            Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_pimpl->stateBuffer);
+            Eigen::Map<Eigen::VectorXd> controlBufferMap = toEigen(m_pimpl->controlBuffer);
+
+            if (!(m_pimpl->ocproblem->getStateLowerBound(m_pimpl->stateBuffer))) {
+                stateBounded = false;
+                stateBufferMap.setConstant(m_pimpl->minusInfinity);
+            }
+
+            if (!(m_pimpl->ocproblem->getControlLowerBound(m_pimpl->controlBuffer))) {
+                controlBounded = false;
+                controlBufferMap.setConstant(m_pimpl->minusInfinity);
+            }
+
+            if (!controlBounded && !stateBounded)
+                return false;
+
+            if (variablesLowerBound.size() != m_pimpl->numberOfVariables)
+                variablesLowerBound.resize(m_pimpl->numberOfVariables);
+            Eigen::Map<Eigen::VectorXd> lowerBoundMap = toEigen(variablesLowerBound);
+
+            Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
+            Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
+
+            MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+            for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
+                if (mesh->origin == first){
+                    lowerBoundMap.segment(mesh->controlIndex, nu) = controlBufferMap;
+                } else if (mesh->type == MeshPointType::Control) {
+                    lowerBoundMap.segment(mesh->controlIndex, nu) = controlBufferMap;
+                    lowerBoundMap.segment(mesh->stateIndex, nx) = stateBufferMap;
+                } else if (mesh->type == MeshPointType::State) {
+                    lowerBoundMap.segment(mesh->stateIndex, nx) = stateBufferMap;
+                }
+            }
+            return true;
+        }
+
+        bool MultipleShootingTranscription::getConstraintsJacobianInfo(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        {
+            if (!(m_pimpl->prepared)){
+                reportError("MultipleShootingTranscription", "getConstraintsInfo", "First you need to call the prepare method");
+                return false;
+            }
+
+            nonZeroElementRows = m_pimpl->jacobianNZRows;
+            nonZeroElementColumns = m_pimpl->jacobianNZCols;
+
+            return true;
+        }
+
+        bool MultipleShootingTranscription::getHessianInfo(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        {
+            if (!(m_pimpl->prepared)){
+                reportError("MultipleShootingTranscription", "getHessianInfo", "First you need to call the prepare method");
+                return false;
+            }
+
+            nonZeroElementRows = m_pimpl->hessianNZRows;
+            nonZeroElementColumns = m_pimpl->hessianNZCols;
+
+            return true;
+        }
+
+        bool MultipleShootingTranscription::setVariables(const VectorDynSize &variables)
+        {
+            if (variables.size() != m_pimpl->variablesBuffer.size()){
+                reportError("MultipleShootingTranscription", "setVariables", "The input variables have a size different from the expected one.");
+                return false;
+            }
+
+            m_pimpl->variablesBuffer = variables;
+            return true;
+        }
+
+        bool MultipleShootingTranscription::evaluateCostFunction(double &costValue)
+        {
+            if (!(m_pimpl->prepared)){
+                reportError("MultipleShootingTranscription", "evaluateCostFunction", "First you need to call the prepare method");
+                return false;
+            }
+
+            Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_pimpl->stateBuffer);
+            Eigen::Map<Eigen::VectorXd> controlBufferMap = toEigen(m_pimpl->controlBuffer);
+            Eigen::Map<Eigen::VectorXd> variablesBuffer = toEigen(m_pimpl->variablesBuffer);
+
+            Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
+            Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
+
+            costValue = 0;
+            double singleCost;
+
+            MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+            for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
+                if (mesh->origin == first){
+                    stateBufferMap = toEigen(m_pimpl->ocproblem->dynamicalSystem().lock()->initialState());
+                } else {
+                    stateBufferMap = variablesBuffer.segment(mesh->stateIndex, nx);
+                }
+                controlBufferMap = variablesBuffer.segment(mesh->controlIndex, nu);
+
+                if (!(m_pimpl->ocproblem->costsEvaluation(mesh->time, m_pimpl->stateBuffer, m_pimpl->controlBuffer, singleCost))){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating cost at time t = " << mesh->time << ".";
+                    reportError("MultipleShootingTranscription", "evaluateCostFunction", errorMsg.str().c_str());
+                    return false;
+                }
+
+                costValue += singleCost;
+
+            }
+            return true;
+
+        }
+
+        bool MultipleShootingTranscription::evaluateCostGradient(VectorDynSize &gradient)
+        {
+            if (!(m_pimpl->prepared)){
+                reportError("MultipleShootingTranscription", "evaluateCostGradient", "First you need to call the prepare method");
+                return false;
+            }
+
+            Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_pimpl->stateBuffer);
+            Eigen::Map<Eigen::VectorXd> controlBufferMap = toEigen(m_pimpl->controlBuffer);
+            Eigen::Map<Eigen::VectorXd> variablesBuffer = toEigen(m_pimpl->variablesBuffer);
+            Eigen::Map<Eigen::VectorXd> costStateGradient = toEigen(m_pimpl->costStateGradientBuffer);
+            Eigen::Map<Eigen::VectorXd> costControlGradient = toEigen(m_pimpl->costControlGradientBuffer);
+
+            Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
+            Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
+
+            if (gradient.size() != m_pimpl->numberOfVariables)
+                gradient.resize(static_cast<unsigned int>(m_pimpl->numberOfVariables));
+
+            Eigen::Map<Eigen::VectorXd> gradientMap = toEigen(gradient);
+
+            MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+            for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
+                if (mesh->origin == first){
+                    stateBufferMap = toEigen(m_pimpl->ocproblem->dynamicalSystem().lock()->initialState());
+                } else {
+                    stateBufferMap = variablesBuffer.segment(mesh->stateIndex, nx);
+                }
+                controlBufferMap = variablesBuffer.segment(mesh->controlIndex, nu);
+
+                if (mesh->origin != first){
+                    if (!(m_pimpl->ocproblem->costsFirstPartialDerivativeWRTState(mesh->time, m_pimpl->stateBuffer, m_pimpl->controlBuffer, m_pimpl->costStateGradientBuffer))){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost state gradient at time t = " << mesh->time << ".";
+                        reportError("MultipleShootingTranscription", "evaluateCostGradient", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    gradientMap.segment(mesh->stateIndex, nx) = costStateGradient;
+                }
+
+                if (!(m_pimpl->ocproblem->costsFirstPartialDerivativeWRTControl(mesh->time, m_pimpl->stateBuffer, m_pimpl->controlBuffer, m_pimpl->costControlGradientBuffer))){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating cost control gradient at time t = " << mesh->time << ".";
+                    reportError("MultipleShootingTranscription", "evaluateCostGradient", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (mesh->type == MeshPointType::Control){
+                    gradientMap.segment(mesh->controlIndex, nu) = costControlGradient;
+                } else if (mesh->type == MeshPointType::State) {
+                    gradientMap.segment(mesh->controlIndex, nu) += costControlGradient;
+                }
+
+            }
+
+            return true;
+        }
+
+        bool MultipleShootingTranscription::evaluateCostHessian(MatrixDynSize &hessian)
+        {
+            if (!(m_pimpl->prepared)){
+                reportError("MultipleShootingTranscription", "evaluateCostHessian", "First you need to call the prepare method");
+                return false;
+            }
+
+            Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_pimpl->stateBuffer);
+            Eigen::Map<Eigen::VectorXd> controlBufferMap = toEigen(m_pimpl->controlBuffer);
+            Eigen::Map<Eigen::VectorXd> variablesBuffer = toEigen(m_pimpl->variablesBuffer);
+            iDynTreeEigenMatrixMap costStateHessian = toEigen(m_pimpl->costHessianStateBuffer);
+            iDynTreeEigenMatrixMap costControlHessian = toEigen(m_pimpl->costHessianControlBuffer);
+            iDynTreeEigenMatrixMap costStateControlHessian = toEigen(m_pimpl->costHessianStateControlBuffer);
+            iDynTreeEigenMatrixMap costControlStateHessian = toEigen(m_pimpl->costHessianControlStateBuffer);
+
+
+            Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
+            Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
+
+            if ((hessian.rows() != m_pimpl->numberOfVariables) || (hessian.cols() != m_pimpl->numberOfVariables))
+                hessian.resize(static_cast<unsigned int>(m_pimpl->numberOfVariables), static_cast<unsigned int>(m_pimpl->numberOfVariables));
+
+            iDynTreeEigenMatrixMap hessianMap = toEigen(hessian);
+
+            MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+            for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
+                if (mesh->origin == first){
+                    stateBufferMap = toEigen(m_pimpl->ocproblem->dynamicalSystem().lock()->initialState());
+                } else {
+                    stateBufferMap = variablesBuffer.segment(mesh->stateIndex, nx);
+                }
+                controlBufferMap = variablesBuffer.segment(mesh->controlIndex, nu);
+
+                if (mesh->origin != first){
+                    if (!(m_pimpl->ocproblem->costsSecondPartialDerivativeWRTState(mesh->time, m_pimpl->stateBuffer, m_pimpl->controlBuffer, m_pimpl->costHessianStateBuffer))){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost state hessian at time t = " << mesh->time << ".";
+                        reportError("MultipleShootingTranscription", "evaluateCostHessian", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    hessianMap.block(mesh->stateIndex, mesh->stateIndex, nx, nx) = costStateHessian;
+
+                    if (!(m_pimpl->ocproblem->costsSecondPartialDerivativeWRTStateControl(mesh->time, m_pimpl->stateBuffer, m_pimpl->controlBuffer, m_pimpl->costHessianStateControlBuffer))){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost state-control hessian at time t = " << mesh->time << ".";
+                        reportError("MultipleShootingTranscription", "evaluateCostHessian", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    hessianMap.block(mesh->stateIndex, mesh->controlIndex, nx, nu) = costStateControlHessian;
+                    costControlStateHessian = costStateControlHessian.transpose();
+                    hessianMap.block(mesh->controlIndex, mesh->stateIndex, nu, nx) = costControlStateHessian;
+                }
+
+                if (!(m_pimpl->ocproblem->costsSecondPartialDerivativeWRTControl(mesh->time, m_pimpl->stateBuffer, m_pimpl->controlBuffer, m_pimpl->costHessianControlBuffer))){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating cost control hessian at time t = " << mesh->time << ".";
+                    reportError("MultipleShootingTranscription", "evaluateCostHessian", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (mesh->type == MeshPointType::Control){
+                    hessianMap.block(mesh->controlIndex, mesh->controlIndex, nu, nu) = costControlHessian;
+                } else if (mesh->type == MeshPointType::State) {
+                    hessianMap.block(mesh->controlIndex, mesh->controlIndex, nu, nu) += costControlHessian;
+                }
+            }
+            return true;
+        }
+
+        bool MultipleShootingTranscription::evaluateConstraints(VectorDynSize &constraints)
+        {
+            if (!(m_pimpl->prepared)){
+                reportError("MultipleShootingTranscription", "evaluateConstraints", "First you need to call the prepare method");
+                return false;
+            }
+
+            Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_pimpl->stateBuffer);
+            Eigen::Map<Eigen::VectorXd> variablesBuffer = toEigen(m_pimpl->variablesBuffer);
+            Eigen::Map<Eigen::VectorXd> constraintsBufferMap = toEigen(m_pimpl->constraintsBuffer);
+            Eigen::Map<Eigen::VectorXd> currentState = toEigen(m_pimpl->collocationStateBuffer[1]);
+            Eigen::Map<Eigen::VectorXd> previousState = toEigen(m_pimpl->collocationStateBuffer[0]);
+            Eigen::Map<Eigen::VectorXd> currentControl = toEigen(m_pimpl->collocationControlBuffer[1]);
+            Eigen::Map<Eigen::VectorXd> previousControl = toEigen(m_pimpl->collocationControlBuffer[0]);
+
+
+            Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
+            Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
+            Eigen::Index nc = static_cast<Eigen::Index>(m_pimpl->constraintsPerInstant);
+
+            if (constraints.size() != m_pimpl->numberOfConstraints)
+                constraints.resize(static_cast<unsigned int>(m_pimpl->numberOfConstraints));
+
+            Eigen::Map<Eigen::VectorXd> constraintsMap = toEigen(constraints);
+
+
+            MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+            Eigen::Index constraintIndex = 0;
+            double dT = 0;
+            for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
+                if (mesh->origin == first){
+                     currentState= toEigen(m_pimpl->ocproblem->dynamicalSystem().lock()->initialState());
+                } else {
+                    currentState = variablesBuffer.segment(mesh->stateIndex, nx);
+                    if ((mesh -1)->origin == first){
+                        previousState = toEigen(m_pimpl->ocproblem->dynamicalSystem().lock()->initialState());
+                    } else {
+                        previousState = variablesBuffer.segment((mesh - 1)->stateIndex, nx);
+                    }
+                }
+                currentControl  = variablesBuffer.segment(mesh->controlIndex, nu);
+                previousControl = variablesBuffer.segment(mesh->previousControlIndex, nu);
+
+                if (mesh->origin != first){
+                    dT = mesh->time - (mesh - 1)->time;
+                    if (!(m_pimpl->integrator->evaluateCollocationConstraint(mesh->time, m_pimpl->collocationStateBuffer, m_pimpl->collocationControlBuffer, dT, m_pimpl->stateBuffer))){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating the collocation constraint at time " << mesh->time << ".";
+                        reportError("MultipleShootingTranscription", "evaluateConstraints", errorMsg.str().c_str());
+                        return false;
+                    }
+                    constraintsMap.segment(constraintIndex, nx) = stateBufferMap;
+                    constraintIndex += nx;
+                }
+
+                if (!(m_pimpl->ocproblem->constraintsEvaluation(mesh->time, m_pimpl->collocationStateBuffer[1], m_pimpl->collocationControlBuffer[1], m_pimpl->constraintsBuffer))){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating the constraints at time " << mesh->time << ".";
+                    reportError("MultipleShootingTranscription", "evaluateConstraints", errorMsg.str().c_str());
+                    return false;
+                }
+                constraintsMap.segment(constraintIndex, nc) = constraintsBufferMap;
+                constraintIndex += nc;
+            }
+            assert(static_cast<size_t>(constraintIndex) == m_pimpl->numberOfConstraints);
+            return true;
+        }
+
+        bool MultipleShootingTranscription::evaluateConstraintsJacobian(MatrixDynSize &jacobian)
+        {
+            if (!(m_pimpl->prepared)){
+                reportError("MultipleShootingTranscription", "evaluateConstraints", "First you need to call the prepare method");
+                return false;
+            }
+
+            Eigen::Map<Eigen::VectorXd> variablesBuffer = toEigen(m_pimpl->variablesBuffer);
+            Eigen::Map<Eigen::VectorXd> currentState = toEigen(m_pimpl->collocationStateBuffer[1]);
+            Eigen::Map<Eigen::VectorXd> previousState = toEigen(m_pimpl->collocationStateBuffer[0]);
+            Eigen::Map<Eigen::VectorXd> currentControl = toEigen(m_pimpl->collocationControlBuffer[1]);
+            Eigen::Map<Eigen::VectorXd> previousControl = toEigen(m_pimpl->collocationControlBuffer[0]);
+
+
+            Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
+            Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
+            Eigen::Index nc = static_cast<Eigen::Index>(m_pimpl->constraintsPerInstant);
+
+            if (jacobian.rows() != m_pimpl->numberOfConstraints || jacobian.cols() != m_pimpl->numberOfVariables)
+                jacobian.resize(static_cast<unsigned int>(m_pimpl->numberOfConstraints), static_cast<unsigned int>(m_pimpl->numberOfVariables));
+
+            iDynTreeEigenMatrixMap jacobianMap = toEigen(jacobian);
+
+            MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+            Eigen::Index constraintIndex = 0;
+            double dT = 0;
+            for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
+                if (mesh->origin == first){
+                     currentState= toEigen(m_pimpl->ocproblem->dynamicalSystem().lock()->initialState());
+                } else {
+                    currentState = variablesBuffer.segment(mesh->stateIndex, nx);
+                    if ((mesh -1)->origin == first){
+                        previousState = toEigen(m_pimpl->ocproblem->dynamicalSystem().lock()->initialState());
+                    } else {
+                        previousState = variablesBuffer.segment((mesh - 1)->stateIndex, nx);
+                    }
+                }
+                currentControl  = variablesBuffer.segment(mesh->controlIndex, nu);
+                previousControl = variablesBuffer.segment(mesh->previousControlIndex, nu);
+
+                if (mesh->origin != first){
+                    dT = mesh->time - (mesh - 1)->time;
+                    if (!(m_pimpl->integrator->evaluateCollocationConstraintJacobian(mesh->time, m_pimpl->collocationStateBuffer, m_pimpl->collocationControlBuffer, dT, m_pimpl->collocationStateJacBuffer, m_pimpl->collocationControlJacBuffer))){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating the collocation constraint jacobian at time " << mesh->time << ".";
+                        reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    if ((mesh -1)->origin != first)
+                        jacobianMap.block(constraintIndex, (mesh-1)->stateIndex, nx, nx) = toEigen(m_pimpl->collocationStateJacBuffer[0]);
+
+                    jacobianMap.block(constraintIndex, mesh->stateIndex, nx, nx) = toEigen(m_pimpl->collocationStateJacBuffer[1]);
+
+                    jacobianMap.block(constraintIndex, mesh->controlIndex, nx, nu) = toEigen(m_pimpl->collocationControlJacBuffer[1]);
+
+                    if (mesh->type == MeshPointType::Control)
+                        jacobianMap.block(constraintIndex, mesh->previousControlIndex, nx, nu) = toEigen(m_pimpl->collocationControlJacBuffer[0]);
+                    else if (mesh->type == MeshPointType::State)
+                        jacobianMap.block(constraintIndex, mesh->previousControlIndex, nx, nu) += toEigen(m_pimpl->collocationControlJacBuffer[0]); //the previous and the current control coincides
+                    constraintIndex += nx;
+                }
+
+                if (!(m_pimpl->ocproblem->constraintsJacobianWRTState(mesh->time, m_pimpl->collocationStateBuffer[1], m_pimpl->collocationControlBuffer[1], m_pimpl->constraintsStateJacBuffer))){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating the constraints state jacobian at time " << mesh->time << ".";
+                    reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (mesh->origin != first)
+                    jacobianMap.block(constraintIndex, mesh->stateIndex, nc, nx) = toEigen(m_pimpl->constraintsStateJacBuffer);
+
+                if (!(m_pimpl->ocproblem->constraintsJacobianWRTControl(mesh->time, m_pimpl->collocationStateBuffer[1], m_pimpl->collocationControlBuffer[1], m_pimpl->constraintsControlJacBuffer))){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating the constraints control jacobian at time " << mesh->time << ".";
+                    reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
+                    return false;
+                }
+
+                jacobianMap.block(constraintIndex, mesh->controlIndex, nc, nu) = toEigen(m_pimpl->constraintsControlJacBuffer);
+                constraintIndex += nc;
+            }
+            assert(static_cast<size_t>(constraintIndex) == m_pimpl->numberOfConstraints);
+            return true;
+        }
+
+        bool MultipleShootingTranscription::evaluateConstraintsHessian(const VectorDynSize &constraintsMultipliers, MatrixDynSize &hessian)
+        {
+            if (!(toEigen(constraintsMultipliers).isZero(0))){
+                reportWarning("MultipleShootingTranscription", "evaluateConstraintsHessian", "The constraints hessian is currently unavailable.");
+            }
+            hessian.zero();
+            return true;
+        }
+
 
         // MARK: Class implementation
 
@@ -925,14 +1544,14 @@ namespace iDynTree {
             return true;
         }
 
-        void MultipleShootingSolver::setInitialGuess(const iDynTree::VectorDynSize& initialGuess)
+        bool MultipleShootingSolver::setInitialState(const VectorDynSize &initialState)
         {
-
+            return m_transcription->setInitialState(initialState);
         }
 
-        const iDynTree::VectorDynSize& MultipleShootingSolver::lastSolution()
+        bool MultipleShootingSolver::getTimings(std::vector<double> &stateEvaluations, std::vector<double> &controlEvaluations)
         {
-
+            return m_transcription->getTimings(stateEvaluations, controlEvaluations);
         }
 
         bool MultipleShootingSolver::initialize()
@@ -946,7 +1565,26 @@ namespace iDynTree {
 
         bool MultipleShootingSolver::solve()
         {
-            return false;
+            if (!m_optimizer){
+                reportError("MultipleShootingSolver", "solve", "No optimizer selected.");
+                return false;
+            }
+            if (m_optimizer->solve()){
+                if (!(m_optimizer->getPrimalVariables(m_transcription->m_pimpl->solution))){
+                    reportError("MultipleShootingSolver", "solve", "Error while retrieving the primal variables from the optimizer.");
+                    return false;
+                }
+            } else {
+                reportError("MultipleShootingSolver", "solve", "Error when calling the optimizer solve method.");
+                return false;
+            }
+            m_transcription->m_pimpl->solved = true;
+            return true;
+        }
+
+        bool MultipleShootingSolver::getSolution(std::vector<VectorDynSize> &states, std::vector<VectorDynSize> &controls)
+        {
+            return m_transcription->getSolution(states, controls);
         }
     }
 }
