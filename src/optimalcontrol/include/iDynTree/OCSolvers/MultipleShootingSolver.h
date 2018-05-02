@@ -87,7 +87,9 @@ namespace iDynTree {
 
             virtual unsigned int numberOfVariables() override;
 
-            virtual bool getConstraintsInfo(unsigned int& numberOfConstraints, VectorDynSize& constraintsLowerBounds, VectorDynSize& constraintsUpperBounds) override;
+            virtual unsigned int numberOfConstraints() override;
+
+            virtual bool getConstraintsBounds(VectorDynSize& constraintsLowerBounds, VectorDynSize& constraintsUpperBounds) override;
 
             virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound) override;
 

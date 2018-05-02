@@ -63,12 +63,27 @@ set(SOURCES src/DynamicalSystem.cpp
             src/OptimizationProblem.cpp
             src/Optimizer.cpp)
 
-add_library(${libraryname} ${PUBLIC_HEADERS} ${INTEGRATORS_PUBLIC_HEADERS} ${SOURCES})
-target_include_directories(${libraryname} SYSTEM PUBLIC ${EIGEN3_INCLUDE_DIR})
+set(OPTIMIZERS_HEADERS)
+set(OPTIMIZERS_SOURCES)
+list(APPEND LINK_LIST idyntree-core idyntree-model)
+list(APPEND INCLUDE_LIST ${EIGEN3_INCLUDE_DIR})
+
+if (IDYNTREE_USES_IPOPT)
+    set(OPTIMIZERS_HEADERS ${OPTIMIZERS_HEADERS} include/iDynTree/Optimizers/IpoptInterface.h)
+    set(OPTIMIZERS_SOURCES ${OPTIMIZERS_SOURCES} src/IpoptInterface.cpp)
+    list(APPEND LINK_LIST ${IPOPT_LIBRARIES})
+    list(APPEND INCLUDE_LIST ${IPOPT_INCLUDE_DIRS})
+endif()
+
+add_library(${libraryname} ${PUBLIC_HEADERS} ${INTEGRATORS_PUBLIC_HEADERS} ${OPTIMIZERS_HEADERS} ${SOURCES} ${OPTIMIZERS_SOURCES})
+target_include_directories(${libraryname} SYSTEM PUBLIC ${INCLUDE_LIST})
 target_include_directories(${libraryname} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 target_include_directories(${libraryname} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model)
+target_link_libraries(${libraryname} PUBLIC ${LINK_LIST})
 
+if (IDYNTREE_USES_IPOPT)
+    target_compile_definitions(${libraryname} PRIVATE ${IPOPT_DEFINITIONS})
+endif()
 
 # install
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${PUBLIC_HEADERS})
@@ -82,6 +97,7 @@ install(TARGETS ${libraryname}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
 install(FILES ${INTEGRATORS_PUBLIC_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Integrators)
+install(FILES ${OPTIMIZERS_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Optimizers)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)

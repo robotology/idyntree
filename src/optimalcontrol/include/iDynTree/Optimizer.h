@@ -14,10 +14,11 @@
 #define IDYNTREE_OPTIMALCONTROL_OPTIMIZER_H
 
 #include <memory>
-#include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/OptimizationProblem.h>
 
 namespace iDynTree {
+
+    class VectorDynSize;
 
     namespace optimization {
 
@@ -41,13 +42,19 @@ namespace iDynTree {
 
             virtual const std::weak_ptr<OptimizationProblem> problem() const;
 
+            virtual bool setInitialGuess(VectorDynSize &initialGuess);
+
             virtual bool solve() = 0; //warm start capabilities should be implemented in the solver specific interface
 
             virtual bool getPrimalVariables(VectorDynSize &primalVariables);
 
-            virtual bool getDualVariables(VectorDynSize &dualVariables);
+            virtual bool getDualVariables(VectorDynSize &constraintsMultipliers,
+                                          VectorDynSize &lowerBoundsMultipliers,
+                                          VectorDynSize &upperBoundsMultipliers);
 
             virtual bool getOptimalCost(double &optimalCost);
+
+            virtual bool getOptimalConstraintsValues(VectorDynSize &constraintsValues);
 
             virtual double minusInfinity();
 

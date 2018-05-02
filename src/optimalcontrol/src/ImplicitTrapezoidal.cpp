@@ -105,7 +105,7 @@ namespace iDynTree {
                 }
 
                 toEigen(constraintValue) = -toEigen(collocationPoints[1]) + toEigen(collocationPoints[0]) +
-                        m_dTmax/2*(toEigen(m_computationBuffer)+toEigen(m_computationBuffer2));
+                        m_dTmax/2.0*(toEigen(m_computationBuffer)+toEigen(m_computationBuffer2));
 
                 return true;
             }
@@ -180,7 +180,7 @@ namespace iDynTree {
                     return false;
                 }
 
-                toEigen(controlJacobianValues[0]) = dT/2*toEigen(m_controlJacBuffer);
+                toEigen(controlJacobianValues[0]) = dT/2.0*toEigen(m_controlJacBuffer);
 
                 if ((controlJacobianValues[1].rows() != nx) || (controlJacobianValues[1].cols() != nu))
                     controlJacobianValues[1].resize(nx,nu);
@@ -191,7 +191,7 @@ namespace iDynTree {
                     return false;
                 }
 
-                toEigen(controlJacobianValues[1]) = dT/2*toEigen(m_controlJacBuffer);
+                toEigen(controlJacobianValues[1]) = dT/2.0*toEigen(m_controlJacBuffer);
 
                 return true;
 

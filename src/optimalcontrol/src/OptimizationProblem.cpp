@@ -36,10 +36,9 @@ namespace iDynTree {
 
         }
 
-
-        bool OptimizationProblem::getConstraintsInfo(unsigned int &numberOfConstraints, VectorDynSize &constraintsLowerBounds, VectorDynSize &constraintsUpperBounds)
+        bool OptimizationProblem::getConstraintsBounds(VectorDynSize &constraintsLowerBounds, VectorDynSize &constraintsUpperBounds)
         {
-            reportError("OptimizationProblem", "getConstraintsInfo", "Method not implemented.");
+            reportError("OptimizationProblem", "getConstraintsBounds", "Method not implemented.");
             return false;
         }
 
