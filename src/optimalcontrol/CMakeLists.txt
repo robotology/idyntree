@@ -37,7 +37,8 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/Optimizer.h)
 set(INTEGRATORS_PUBLIC_HEADERS include/iDynTree/Integrators/FixedStepIntegrator.h
                                include/iDynTree/Integrators/RK4.h
-                               include/iDynTree/Integrators/ImplicitTrapezoidal.h)
+                               include/iDynTree/Integrators/ImplicitTrapezoidal.h
+                               include/iDynTree/Integrators/ForwardEuler.h)
 
 
 set(SOURCES src/DynamicalSystem.cpp
@@ -61,7 +62,8 @@ set(SOURCES src/DynamicalSystem.cpp
             src/TimeRange.cpp
             src/ConstraintsGroup.cpp
             src/OptimizationProblem.cpp
-            src/Optimizer.cpp)
+            src/Optimizer.cpp
+            src/ForwardEuler.cpp)
 
 set(OPTIMIZERS_HEADERS)
 set(OPTIMIZERS_SOURCES)

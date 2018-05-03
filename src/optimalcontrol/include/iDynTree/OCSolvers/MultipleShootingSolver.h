@@ -139,11 +139,12 @@ namespace iDynTree {
 
             bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
 
-            virtual bool initialize() override;
-
             virtual bool solve() override;
 
             bool getSolution(std::vector<VectorDynSize>& states, std::vector<VectorDynSize>& controls);
+
+            void resetTranscription();
+
 
         private:
             std::shared_ptr<MultipleShootingTranscription> m_transcription;

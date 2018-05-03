@@ -324,17 +324,23 @@ namespace iDynTree {
                 controlMeshes++;
             }
 
+            std::vector<MeshPoint>::iterator lastControlMeshIterator = (m_pimpl->meshPointsEnd)-1;
+
+            if ((lastControlMeshIterator->origin == MeshPointOrigin::LastPoint()) && (m_pimpl->integrator->info().isExplicit())) {//the last control input would have no effect
+                controlMeshes--;
+                m_pimpl->setIgnoredMesh(lastControlMeshIterator);
+            }
+
             newMeshPoint.origin = MeshPointOrigin::LastPoint();
             newMeshPoint.type = MeshPointType::State;
             newMeshPoint.time = endTime;
 
-            if (m_pimpl->meshPoints[controlMeshes - 1].time < endTime){
-                if ((m_pimpl->meshPoints[controlMeshes - 1].time + m_pimpl->minStepSize) > endTime){ //if last control mesh point is too close to the end, remove it and place a state mesh point at the end
-                    m_pimpl->meshPoints[controlMeshes - 1] = newMeshPoint;
+            if (lastControlMeshIterator->time < endTime){
+                if ((lastControlMeshIterator->time + m_pimpl->minStepSize) > endTime){ //if last control mesh point is too close to the end, remove it and place a state mesh point at the end
+                    m_pimpl->setIgnoredMesh(lastControlMeshIterator);
                     controlMeshes--;
-                } else {
-                    m_pimpl->addMeshPoint(newMeshPoint);  //otherwise add a mesh point at the end;
                 }
+                m_pimpl->addMeshPoint(newMeshPoint);  //add a mesh point at the end;
             }
             return controlMeshes;
         }
@@ -1572,14 +1578,6 @@ namespace iDynTree {
             return m_transcription->getTimings(stateEvaluations, controlEvaluations);
         }
 
-        bool MultipleShootingSolver::initialize()
-        {
-            if (!m_optimizer){
-                reportError("MultipleShootingSolver", "initialize", "No optimizer selected.");
-                return false;
-            }
-            return m_transcription->prepare();
-        }
 
         bool MultipleShootingSolver::solve()
         {
@@ -1603,6 +1601,11 @@ namespace iDynTree {
         bool MultipleShootingSolver::getSolution(std::vector<VectorDynSize> &states, std::vector<VectorDynSize> &controls)
         {
             return m_transcription->getSolution(states, controls);
+        }
+
+        void MultipleShootingSolver::resetTranscription()
+        {
+            m_transcription->reset();
         }
     }
 }

@@ -55,11 +55,6 @@ namespace iDynTree {
 
             virtual bool getHessianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns); //costs and constraints together
 
-           /* virtual bool getStartingPoint(VectorDynSize& variablesGuess,
-                                          VectorDynSize& lowerBoundsMultipliersGuess,
-                                          VectorDynSize& upperBoundsMultipliersGuess,
-                                          VectorDynSize& constraintsMultiplierGuess); */ //This method should be part of the solver interface
-
             virtual bool setVariables(const VectorDynSize& variables);
 
             virtual bool evaluateCostFunction(double& costValue);

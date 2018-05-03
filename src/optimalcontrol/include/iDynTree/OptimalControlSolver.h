@@ -37,14 +37,10 @@ namespace iDynTree {
             OptimalControlSolver() = delete;
 
             OptimalControlSolver(const std::shared_ptr<OptimalControlProblem> ocProblem);
+
             virtual ~OptimalControlSolver();
 
-            virtual bool initialize() = 0;
             virtual bool solve() = 0;
-
-        protected:
-//            class OptimalControlSolverPimpl;
-//            OptimalControlSolverPimpl* m_pimpl;
 
         };
 

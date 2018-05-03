@@ -10,65 +10,83 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/Integrators/ImplicitTrapezoidal.h"
+#include "iDynTree/Integrators/ForwardEuler.h"
 #include "iDynTree/DynamicalSystem.h"
 #include "iDynTree/Core/Utils.h"
+
+#include "iDynTree/Core/VectorDynSize.h"
 #include <Eigen/Dense>
-#include "iDynTree/Core/EigenHelpers.h"
-#include <cstddef>
-#include <sstream>
-#include <string>
+#include <iDynTree/Core/EigenHelpers.h>
 
 namespace iDynTree {
-    namespace optimalcontrol {
-        namespace integrators {
+namespace optimalcontrol {
+namespace integrators {
 
-            bool ImplicitTrapezoidal::allocateBuffers()
+            bool ForwardEuler::allocateBuffers()
             {
                 if (!m_dynamicalSystem_ptr)
                     return false;
 
-                m_computationBuffer.resize(m_dynamicalSystem_ptr->stateSpaceSize());
-                m_computationBuffer2.resize(m_dynamicalSystem_ptr->stateSpaceSize());
+                unsigned int nx = static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize());
+                unsigned int nu = static_cast<unsigned int>(m_dynamicalSystem_ptr->controlSpaceSize());
 
-                size_t nx = m_dynamicalSystem_ptr->stateSpaceSize();
-                size_t nu = m_dynamicalSystem_ptr->controlSpaceSize();
+                m_computationBuffer.resize(nx);
 
                 m_identity.resize(nx, nx);
                 toEigen(m_identity) = iDynTreeEigenMatrix::Identity(nx, nx);
 
                 m_stateJacBuffer.resize(nx, nx);
                 m_controlJacBuffer.resize(nx,nu);
+
                 return true;
             }
 
-            bool ImplicitTrapezoidal::oneStepIntegration(double t0, double dT, const iDynTree::VectorDynSize &x0, iDynTree::VectorDynSize &x)
+            bool ForwardEuler::oneStepIntegration(double t0, double dT, const VectorDynSize &x0, VectorDynSize &x)
             {
-                reportError(m_info.name().c_str(), "oneStepIntegration", "The ImplicitTrapezoidal method has not been implemented to integrate a dynamical system yet.");
-                return false;
+                if (!m_dynamicalSystem_ptr) {
+                    reportError(m_info.name().c_str(), "oneStepIntegration", "First you have to specify a dynamical system");
+                    return false;
+                }
+
+                if (x0.size() != m_dynamicalSystem_ptr->stateSpaceSize()){
+                    reportError(m_info.name().c_str(), "oneStepIntegration", "Wrong initial state dimension.");
+                    return false;
+                }
+
+                if (x.size() != m_dynamicalSystem_ptr->stateSpaceSize()){
+                    x.resize(static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize()));
+                }
+
+                if (!m_dynamicalSystem_ptr->dynamics(x0, t0, m_computationBuffer)){
+                    reportError(m_info.name().c_str(), "oneStepIntegration", "Error while evaluating the autonomous dynamics.");
+                    return false;
+                }
+
+                toEigen(x) = toEigen(x0) + dT * toEigen(m_computationBuffer);
+
+                return true;
             }
 
-            ImplicitTrapezoidal::ImplicitTrapezoidal()
+            ForwardEuler::ForwardEuler()
             {
-                m_infoData->name = "ImplicitTrapezoidal";
-                m_infoData->isExplicit = false;
+                m_infoData->name = "ForwardEuler";
+                m_infoData->isExplicit = true;
                 m_infoData->numberOfStages = 1;
             }
 
-            ImplicitTrapezoidal::ImplicitTrapezoidal(const std::shared_ptr<DynamicalSystem> dynamicalSystem) : FixedStepIntegrator(dynamicalSystem)
+            ForwardEuler::ForwardEuler(const std::shared_ptr<DynamicalSystem> dynamicalSystem): FixedStepIntegrator(dynamicalSystem)
             {
-                m_infoData->name = "ImplicitTrapezoidal";
-                m_infoData->isExplicit = false;
+                m_infoData->name = "ForwardEuler";
+                m_infoData->isExplicit = true;
                 m_infoData->numberOfStages = 1;
                 allocateBuffers();
             }
 
-            ImplicitTrapezoidal::~ImplicitTrapezoidal()
-            {}
+            ForwardEuler::~ForwardEuler() {}
 
-            bool ImplicitTrapezoidal::evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
-                                                                    const std::vector<VectorDynSize> &controlInputs, double dT,
-                                                                    VectorDynSize &constraintValue)
+            bool ForwardEuler::evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                             const std::vector<VectorDynSize> &controlInputs,
+                                                             double dT, VectorDynSize &constraintValue)
             {
                 if (!m_dynamicalSystem_ptr){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Dynamical system not set.");
@@ -83,37 +101,32 @@ namespace iDynTree {
                     return false;
                 }
 
-                if (controlInputs.size() != 2){
+                if (controlInputs.size() < 1){
                     std::ostringstream errorMsg;
                     errorMsg << "The size of the matrix containing the control inputs does not match the expected one. Input = ";
-                    errorMsg << controlInputs.size() << ", Expected = 2.";
+                    errorMsg << controlInputs.size() << ", Expected = 1 (at least).";
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", errorMsg.str().c_str());
                     return false;
                 }
 
                 if (constraintValue.size() != m_dynamicalSystem_ptr->stateSpaceSize())
-                    constraintValue.resize(m_dynamicalSystem_ptr->stateSpaceSize());
+                    constraintValue.resize(static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize()));
 
                 if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[0], controlInputs[0], time, m_computationBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while evaluating the dynamical system.");
                     return false;
                 }
 
-                if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[1], controlInputs[1], time+dT, m_computationBuffer2))){
-                    reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while evaluating the dynamical system.");
-                    return false;
-                }
-
                 toEigen(constraintValue) = -toEigen(collocationPoints[1]) + toEigen(collocationPoints[0]) +
-                        dT/2.0*(toEigen(m_computationBuffer)+toEigen(m_computationBuffer2));
+                        dT*toEigen(m_computationBuffer);
 
                 return true;
             }
 
-            bool ImplicitTrapezoidal::evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize> &collocationPoints,
-                                                                            const std::vector<VectorDynSize> &controlInputs, double dT,
-                                                                            std::vector<MatrixDynSize> &stateJacobianValues,
-                                                                            std::vector<MatrixDynSize> &controlJacobianValues)
+            bool ForwardEuler::evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                                     const std::vector<VectorDynSize> &controlInputs, double dT,
+                                                                     std::vector<MatrixDynSize> &stateJacobianValues,
+                                                                     std::vector<MatrixDynSize> &controlJacobianValues)
             {
                 if (!m_dynamicalSystem_ptr){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Dynamical system not set.");
@@ -139,8 +152,6 @@ namespace iDynTree {
                 unsigned int nx = static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize());
                 unsigned int nu = static_cast<unsigned int>(m_dynamicalSystem_ptr->controlSpaceSize());
 
-                //State Jacobians
-
                 if (stateJacobianValues.size() != 2)
                     stateJacobianValues.resize(2);
 
@@ -153,18 +164,12 @@ namespace iDynTree {
                     return false;
                 }
 
-                toEigen(stateJacobianValues[0]) = toEigen(m_identity) + dT/2*toEigen(m_stateJacBuffer);
+                toEigen(stateJacobianValues[0]) = toEigen(m_identity) + dT*toEigen(m_stateJacBuffer);
 
                 if ((stateJacobianValues[1].rows() != nx) || (stateJacobianValues[1].cols() != nx))
                     stateJacobianValues[1].resize(nx,nx);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsStateFirstDerivative(collocationPoints[1], controlInputs[1], time+dT, m_stateJacBuffer))){
-                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
-                                "Error while evaluating the dynamical system jacobian.");
-                    return false;
-                }
-
-                toEigen(stateJacobianValues[1]) = -toEigen(m_identity) + dT/2*toEigen(m_stateJacBuffer);
+                toEigen(stateJacobianValues[1]) = -toEigen(m_identity);
 
                 //Control Jacobians
 
@@ -180,24 +185,15 @@ namespace iDynTree {
                     return false;
                 }
 
-                toEigen(controlJacobianValues[0]) = dT/2.0*toEigen(m_controlJacBuffer);
+                toEigen(controlJacobianValues[0]) = dT*toEigen(m_controlJacBuffer);
 
                 if ((controlJacobianValues[1].rows() != nx) || (controlJacobianValues[1].cols() != nu))
                     controlJacobianValues[1].resize(nx,nu);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[1], controlInputs[1], time + dT, m_controlJacBuffer))){
-                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
-                                "Error while evaluating the dynamical system control jacobian.");
-                    return false;
-                }
-
-                toEigen(controlJacobianValues[1]) = dT/2.0*toEigen(m_controlJacBuffer);
+                controlJacobianValues[1].zero();
 
                 return true;
-
             }
-
-
         }
     }
 }

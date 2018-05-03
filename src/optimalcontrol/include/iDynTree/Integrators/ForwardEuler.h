@@ -10,8 +10,8 @@
 * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
 */
 
-#ifndef IDYNTREE_OPTIMALCONTROL_IMPLICITTRAPEZOIDAL_H
-#define IDYNTREE_OPTIMALCONTROL_IMPLICITTRAPEZOIDAL_H
+#ifndef IDYNTREE_OPTIMALCONTROL_FORWARDEULER_H
+#define IDYNTREE_OPTIMALCONTROL_FORWARDEULER_H
 
 #include "iDynTree/Integrators/FixedStepIntegrator.h"
 
@@ -27,10 +27,10 @@ namespace iDynTree {
          * \ingroup iDynTreeExperimental
          */
 
-            class ImplicitTrapezoidal : public FixedStepIntegrator{
+            class ForwardEuler : public FixedStepIntegrator{
 
-                VectorDynSize m_computationBuffer, m_computationBuffer2;
-                MatrixDynSize m_identity, m_stateJacBuffer, m_controlJacBuffer;
+                VectorDynSize m_computationBuffer;
+                MatrixDynSize m_stateJacBuffer, m_controlJacBuffer, m_identity;
 
                 bool allocateBuffers() override;
 
@@ -38,11 +38,11 @@ namespace iDynTree {
 
             public:
 
-                ImplicitTrapezoidal();
+                ForwardEuler();
 
-                ImplicitTrapezoidal(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
+                ForwardEuler(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
-                virtual ~ImplicitTrapezoidal() override;
+                virtual ~ForwardEuler() override;
 
                 bool evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
                                                    const std::vector<VectorDynSize> &controlInputs, double dT,
@@ -54,9 +54,10 @@ namespace iDynTree {
                                                            std::vector<MatrixDynSize> &controlJacobianValues) override;
 
             };
-
         }
     }
 }
 
-#endif // IMPLICITTRAPEZOIDAL_H
+
+
+#endif // IDYNTREE_OPTIMALCONTROL_FORWARDEULER_H
