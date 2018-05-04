@@ -162,7 +162,7 @@ namespace iDynTree {
                     Eigen::Map<Eigen::VectorXd> x_map(x, n);
                     if (initialGuessSet) {
                         if (initialGuess.size() == static_cast<unsigned int>(n)){
-                            x_map = iDynTree::toEigen(solution);
+                            x_map = iDynTree::toEigen(initialGuess);
                         } else {
                             reportWarning("NLPImplementation", "get_starting_point", "The specified initial guess has dimension different from the number of variables. Ignoring.");
                             if (solution.size() == static_cast<unsigned int>(n))
@@ -261,15 +261,20 @@ namespace iDynTree {
                     }
                 }
 
-                if (!(problem->evaluateConstraintsJacobian(m_jacobianBuffer))){
-                    reportError("NLPImplementation", "eval_jac_g", "Error while evaluating the constraints jacobian.");
-                    return false;
+                if (values != nullptr){
+                    if (!(problem->evaluateConstraintsJacobian(m_jacobianBuffer))){
+                        reportError("NLPImplementation", "eval_jac_g", "Error while evaluating the constraints jacobian.");
+                        return false;
+                    }
                 }
 
                 for (size_t i = 0; i < constraintsJacNNZRows.size(); ++i){
-                    iRow[i] = static_cast<Ipopt::Index>(constraintsJacNNZRows[i]); //these two vectors have been filled in the get_nlp_info method
-                    jCol[i] = static_cast<Ipopt::Index>(constraintsJacNNZCols[i]);
-                    values[i] = m_jacobianBuffer(static_cast<unsigned int>(constraintsJacNNZRows[i]), static_cast<unsigned int>(constraintsJacNNZCols[i]));
+                    if (values == nullptr){
+                        iRow[i] = static_cast<Ipopt::Index>(constraintsJacNNZRows[i]); //these two vectors have been filled in the get_nlp_info method
+                        jCol[i] = static_cast<Ipopt::Index>(constraintsJacNNZCols[i]);
+                    } else {
+                        values[i] = m_jacobianBuffer(static_cast<unsigned int>(constraintsJacNNZRows[i]), static_cast<unsigned int>(constraintsJacNNZCols[i]));
+                    }
                 }
                 return true;
             }
@@ -288,27 +293,32 @@ namespace iDynTree {
                     }
                 }
 
-                if (!problem->evaluateCostHessian(m_costHessianBuffer)){
-                    reportError("NLPImplementation", "eval_h", "Error while evaluating the cost hessian.");
-                    return false;
+                if (values != nullptr){
+                    if (!problem->evaluateCostHessian(m_costHessianBuffer)){
+                        reportError("NLPImplementation", "eval_h", "Error while evaluating the cost hessian.");
+                        return false;
+                    }
+
+                    if (new_x || new_lambda){
+                        Eigen::Map<const Eigen::VectorXd> lambdaMap(lambda, m);
+                        toEigen(constraintMultipliers) = lambdaMap;
+                        if (!problem->evaluateConstraintsHessian(constraintMultipliers, m_constraintsHessianBuffer)){
+                            reportError("NLPImplementation", "eval_h", "Error while evaluating the constraints hessian.");
+                            return false;
+                        }
+                    }
+                    toEigen(m_lagrangianHessianBuffer) = obj_factor * toEigen(m_costHessianBuffer) + toEigen(m_constraintsHessianBuffer);
                 }
 
-                if (new_x || new_lambda){
-                    Eigen::Map<const Eigen::VectorXd> lambdaMap(lambda, m);
-                    toEigen(constraintMultipliers) = lambdaMap;
-                    if (!problem->evaluateConstraintsHessian(constraintMultipliers, m_constraintsHessianBuffer)){
-                        reportError("NLPImplementation", "eval_h", "Error while evaluating the constraints hessian.");
-                        return false;
+                for (size_t i = 0; i < hessianNNZRows.size(); ++i){
+                    if (values == nullptr){
+                        iRow[i] = static_cast<Ipopt::Index>(hessianNNZRows[i]); //these two vectors have been filled in the get_nlp_info method
+                        jCol[i] = static_cast<Ipopt::Index>(hessianNNZCols[i]);
+                    } else {
+                        values[i] = m_lagrangianHessianBuffer(static_cast<unsigned int>(hessianNNZRows[i]), static_cast<unsigned int>(hessianNNZCols[i]));
                     }
                 }
 
-                toEigen(m_lagrangianHessianBuffer) = obj_factor * toEigen(m_costHessianBuffer) + toEigen(m_constraintsHessianBuffer);
-
-                for (size_t i = 0; i < hessianNNZRows.size(); ++i){
-                    iRow[i] = static_cast<Ipopt::Index>(hessianNNZRows[i]); //these two vectors have been filled in the get_nlp_info method
-                    jCol[i] = static_cast<Ipopt::Index>(hessianNNZCols[i]);
-                    values[i] = m_lagrangianHessianBuffer(static_cast<unsigned int>(hessianNNZRows[i]), static_cast<unsigned int>(hessianNNZCols[i]));
-                }
                 return true;
             }
 
@@ -323,6 +333,9 @@ namespace iDynTree {
 
                     if (solution.size() != static_cast<unsigned int>(n))
                         solution.resize(static_cast<unsigned int>(n));
+
+                    if (initialGuess.size() != static_cast<unsigned int>(n))
+                        initialGuess.resize(static_cast<unsigned int>(n));
 
                     toEigen(solution) = x_map;
                     toEigen(initialGuess) = x_map;
@@ -587,9 +600,9 @@ namespace iDynTree {
 
         double IpoptInterface::minusInfinity()
         {
-            Ipopt::Number output;
-            bool ok = m_pimpl->loader->Options()->GetNumericValue("nlp_lower_bound_inf", output, "");
-            if (!ok){
+            Ipopt::Number output = 1;
+            m_pimpl->loader->Options()->GetNumericValue("nlp_lower_bound_inf", output, "");
+            if (output > 0){
                 reportWarning("IpoptInterface", "minusInfinity", "Error while reading the nlp_lower_bound_inf value from Ipopt. Returning the default.");
                 return Optimizer::minusInfinity();
             }
@@ -598,9 +611,9 @@ namespace iDynTree {
 
         double IpoptInterface::plusInfinity()
         {
-            Ipopt::Number output;
-            bool ok = m_pimpl->loader->Options()->GetNumericValue("nlp_upper_bound_inf", output, "");
-            if (!ok){
+            Ipopt::Number output = -1;
+            m_pimpl->loader->Options()->GetNumericValue("nlp_upper_bound_inf", output, "");
+            if (output < 0){
                 reportWarning("IpoptInterface", "minusInfinity", "Error while reading the nlp_upper_bound_inf value from Ipopt. Returning the default.");
                 return Optimizer::plusInfinity();
             }

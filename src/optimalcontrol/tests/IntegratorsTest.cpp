@@ -1,7 +1,9 @@
 #include "iDynTree/DynamicalSystem.h"
 #include "iDynTree/Core/TestUtils.h"
 #include "iDynTree/Core/VectorDynSize.h"
+#include "iDynTree/Integrator.h"
 #include "iDynTree/Integrators/RK4.h"
+#include "iDynTree/Integrators/ForwardEuler.h"
 #include "iDynTree/Controller.h"
 #include <memory>
 #include <cmath>
@@ -130,26 +132,19 @@ public:
 
 };
 
-int main(){
+double lambda1 = 1;
+double lambda2 = 0.01;
+double dT = 0.005;
+double x1 =-1.0;
+double x2 =2.0;
+double initTime = 1.0;
+double endTime = 20.0;
+double relTol = 1E-8;
 
-    double lambda1 = 1;
-    double lambda2 = 0.01;
-    double dT = 0.01;
-    double x1 =-1.0;
-    double x2 =2.0;
-    double initTime = 1.0;
-    double endTime = 20.0;
-    double relTol = 1E-8;
+void IntegratorTest1(Integrator &toBeTested) {
 
-    std::cerr << "Test 1" << std::endl;
-
-    std::shared_ptr<TestEquation1> dynamicalSystem = std::make_shared<TestEquation1>(lambda1);
-
-    RK4 integrator(dynamicalSystem);
-
-    assertTrue(integrator.setMaximumStepSize(dT));
-    dynamicalSystem->setInitialCondition(x1);
-    assertTrue(integrator.integrate(initTime, endTime));
+    assertTrue(toBeTested.setMaximumStepSize(dT));
+    assertTrue(toBeTested.integrate(initTime, endTime));
 
     int iterations = std::round((endTime-initTime)/dT);
     double t = initTime;
@@ -158,51 +153,95 @@ int main(){
 
     for (int i = 0; i <= iterations; ++i){
         t = initTime + dT*i;
-        assertTrue(integrator.getSolution(t, sol));
+        assertTrue(toBeTested.getSolution(t, sol));
         expected = x1 * std::exp(lambda1*(t - initTime));
         assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
     }
 
+}
 
-    std::cerr << "Test 2" << std::endl;
+void IntegratorTest2(Integrator &toBeTested) {
+    assertTrue(toBeTested.setMaximumStepSize(dT));
+    assertTrue(toBeTested.integrate(initTime, endTime));
 
-
-    std::shared_ptr<TestEquation2> dynamicalSystem2 = std::make_shared<TestEquation2>(lambda1, lambda2);
-
-    RK4 integrator2(dynamicalSystem2);
-
-    assertTrue(integrator2.setMaximumStepSize(dT));
-    dynamicalSystem2->setInitialCondition(x1, x2);
-    assertTrue(integrator2.integrate(initTime, endTime));
+    int iterations = std::round((endTime-initTime)/dT);
+    double t = initTime;
+    iDynTree::VectorDynSize sol;
+    double expected;
 
     for (int i = 0; i <= iterations; ++i){
         t = initTime + dT*i;
-        assertTrue(integrator2.getSolution(t, sol));
+        assertTrue(toBeTested.getSolution(t, sol));
         expected = x1 * std::exp(lambda1*(t - initTime));
         assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
         expected = x2 * std::exp(lambda2*(t - initTime));
         assertDoubleAreEqual(expected, sol(1), std::abs(expected)*relTol); //up to the eight significative digit
     }
+}
+
+void IntegratorTest3(Integrator &toBeTested) {
+
+    assertTrue(toBeTested.setMaximumStepSize(dT));
+    assertTrue(toBeTested.integrate(initTime, endTime));
+
+    int iterations = std::round((endTime-initTime)/dT);
+    double t = initTime;
+    iDynTree::VectorDynSize sol;
+    double expected;
+
+    for (int i = 0; i <= iterations; ++i){
+        t = initTime + dT*i;
+        assertTrue(toBeTested.getSolution(t, sol));
+        expected = x1 * std::exp(lambda1*(t - initTime));
+        assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
+    }
+
+}
+
+int main(){
+
+    std::cerr << "Test 1" << std::endl;
+
+    std::shared_ptr<TestEquation1> dynamicalSystem = std::make_shared<TestEquation1>(lambda1);
+    dynamicalSystem->setInitialCondition(x1);
+
+    RK4 RK4_1(dynamicalSystem);
+
+    ForwardEuler FE_1(dynamicalSystem);
+
+    relTol = 1E-8;
+    IntegratorTest1(RK4_1);
+    relTol = 5E-2;
+    IntegratorTest1(FE_1);
+
+    std::cerr << "Test 2" << std::endl;
+
+
+    std::shared_ptr<TestEquation2> dynamicalSystem2 = std::make_shared<TestEquation2>(lambda1, lambda2);
+    dynamicalSystem2->setInitialCondition(x1, x2);
+
+    RK4 RK4_2(dynamicalSystem2);
+    ForwardEuler FE_2(dynamicalSystem2);
+
+    relTol = 1E-8;
+    IntegratorTest2(RK4_2);
+    relTol = 5E-2;
+    IntegratorTest2(FE_2);
+
 
     std::cerr << "Test 3" << std::endl;
 
     std::shared_ptr<ControlledTestEquation> dynamicalSystemCtrl = std::make_shared<ControlledTestEquation>(lambda1);
 
-    RK4 integrator3(dynamicalSystemCtrl);
+    RK4 RK4_3(dynamicalSystemCtrl);
+    ForwardEuler FE_3(dynamicalSystemCtrl);
 
-    assertTrue(integrator3.setMaximumStepSize(dT));
     dynamicalSystemCtrl->setInitialCondition(x1);
-    assertTrue(integrator3.integrate(initTime, endTime));
 
-
-    for (int i = 0; i <= iterations; ++i){
-        t = initTime + dT*i;
-        assertTrue(integrator3.getSolution(t, sol));
-        expected = x1 * std::exp(lambda1*(t - initTime));
-        assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
-    }
-
-
+    relTol = 1E-8;
+    IntegratorTest3(RK4_3);
+    relTol = 5E-2;
+    IntegratorTest3(FE_3);
 
     return EXIT_SUCCESS;
 }

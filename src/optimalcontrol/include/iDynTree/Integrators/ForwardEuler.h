@@ -58,6 +58,4 @@ namespace iDynTree {
     }
 }
 
-
-
 #endif // IDYNTREE_OPTIMALCONTROL_FORWARDEULER_H

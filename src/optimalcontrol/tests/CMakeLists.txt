@@ -14,4 +14,5 @@ macro(add_oc_test classname)
 endmacro()
 
 add_oc_test(ConstraintsGroup)
-add_oc_test(RK4)
+add_oc_test(Integrators)
+add_oc_test(Optimizer)

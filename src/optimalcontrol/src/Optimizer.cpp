@@ -58,12 +58,12 @@ namespace iDynTree {
 
         double Optimizer::minusInfinity()
         {
-            return -1e19;
+            return -1E19;
         }
 
         double Optimizer::plusInfinity()
         {
-            return 1e19;
+            return 1E19;
         }
 
         bool Optimizer::getOptimalCost(double &optimalCost)
