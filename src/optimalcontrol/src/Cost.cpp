@@ -23,7 +23,7 @@ namespace iDynTree {
         Cost::~Cost()
         { }
 
-        const std::string Cost::name() const
+        const std::string &Cost::name() const
         {
             return m_costName;
         }

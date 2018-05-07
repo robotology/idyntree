@@ -13,16 +13,16 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_DYNAMICALSYSTEM_H
 #define IDYNTREE_OPTIMALCONTROL_DYNAMICALSYSTEM_H
 
+#include <iDynTree/Core/VectorDynSize.h>
+
 #include <cstddef>
 //#include <memory>
 
 namespace iDynTree {
 
-    class VectorDynSize;
     class MatrixDynSize;
 
 namespace optimalcontrol {
-    class Controller;
 
     /**
      * @warning This class is still in active development, and so API interface can change between iDynTree versions.
@@ -48,38 +48,35 @@ namespace optimalcontrol {
 
         virtual bool dynamics(const VectorDynSize& state,
                               double time,
-                              VectorDynSize& stateDynamics);
+                              VectorDynSize& stateDynamics) = 0;
 
-        virtual bool dynamics(const VectorDynSize &state, const VectorDynSize &control,
-                              double time, VectorDynSize &stateDynamics);
+        virtual bool setControlInput(const VectorDynSize &control);
 
-        virtual const VectorDynSize& initialState() const = 0;
+        virtual const VectorDynSize& controlInput() const;
+
+        virtual double controlInput(unsigned int index) const;
+
+        virtual const VectorDynSize& initialState() const;
+
+        virtual double initialState(unsigned int index) const;
 
         virtual bool setInitialState(const VectorDynSize &state);
 
-        //TODO: for now putting these functions as not virtual
         //TODO: add also second derivative?
         virtual bool dynamicsStateFirstDerivative(const VectorDynSize& state,
-                                                  const VectorDynSize& control,
                                                   double time,
                                                   MatrixDynSize& dynamicsDerivative);
 
         virtual bool dynamicsControlFirstDerivative(const VectorDynSize& state,
-                                                    const VectorDynSize& control,
                                                     double time,
                                                     MatrixDynSize& dynamicsDerivative);
-
-//        bool setController(std::shared_ptr<Controller> controllerPointer); //For the time being we have difficulties to abstract the controller. This avoid the usage of casts.
-
-//        const std::weak_ptr<const Controller> controller() const;
-
-
 
     private:
         // TODO: does it make sense to have members in this abstrac class?
         size_t m_stateSize;
         size_t m_controlSize;
-//        std::shared_ptr<Controller> m_controller_ptr;
+        VectorDynSize m_initialState;
+        VectorDynSize m_controlInput;
     };
     
 }

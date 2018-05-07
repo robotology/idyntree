@@ -13,15 +13,19 @@
 #include "iDynTree/Constraint.h"
 #include "iDynTree/Core/Utils.h"
 
+#include <cassert>
+
 namespace iDynTree {
     namespace optimalcontrol {
 
         Constraint::Constraint(size_t size, const std::string name)
         : m_constraintSize(size)
         , m_constraintName(name)
+        , m_valueBuffer(static_cast<unsigned int>(size))
         , m_isLowerBounded(false)
         , m_isUpperBounded(false)
         {
+            m_valueBuffer.zero();
             m_lowerBound.resize(static_cast<unsigned int>(size));
             m_upperBound.resize(static_cast<unsigned int>(size));
         }
@@ -71,6 +75,25 @@ namespace iDynTree {
             if (upperBound.size() != m_upperBound.size())
                 upperBound.resize(m_upperBound.size());
             upperBound = m_upperBound;
+            return true;
+        }
+
+        bool Constraint::isFeasiblePoint(double time, const VectorDynSize &state, const VectorDynSize &control)
+        {
+            if (!m_isUpperBounded && !m_isLowerBounded)
+                return true;
+
+            assert(evaluateConstraint(time, state, control, m_valueBuffer));
+
+            for (unsigned int i = 0; i < constraintSize(); ++i){
+                if (m_isLowerBounded)
+                    if (m_valueBuffer(i) < m_lowerBound(i))
+                        return false;
+
+                if (m_isUpperBounded)
+                    if (m_valueBuffer(i) > m_upperBound(i))
+                        return false;
+            }
             return true;
         }
 

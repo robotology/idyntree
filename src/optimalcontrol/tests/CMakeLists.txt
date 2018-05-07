@@ -15,4 +15,8 @@ endmacro()
 
 add_oc_test(ConstraintsGroup)
 add_oc_test(Integrators)
-add_oc_test(Optimizer)
+if (IDYNTREE_USES_IPOPT)
+    add_oc_test(Optimizer)
+endif()
+#add_oc_test(MultipleShooting) it must be finished
+#add_oc_test(OCProblem)

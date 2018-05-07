@@ -20,23 +20,6 @@ public:
         constraint(0) = state(0);
         return true;
     }
-
-    bool isFeasiblePoint(double time, const VectorDynSize &state, const VectorDynSize &control){
-        if (state.size() != 1){
-            return false;
-        }
-        VectorDynSize constraint;
-
-        if(!evaluateConstraint(time, state, control,constraint))
-            return false;
-
-        if (constraint(0) < m_upperBound(0))
-            return true;
-
-        return false;
-
-    }
-
 };
 
 bool groupTest(){

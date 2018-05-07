@@ -37,6 +37,8 @@ namespace integrators {
 
                 m_stateJacBuffer.resize(nx, nx);
                 m_controlJacBuffer.resize(nx,nu);
+                m_zeroBuffer.resize(nx,nu);
+                m_zeroBuffer.zero();
 
                 return true;
             }
@@ -112,7 +114,12 @@ namespace integrators {
                 if (constraintValue.size() != m_dynamicalSystem_ptr->stateSpaceSize())
                     constraintValue.resize(static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize()));
 
-                if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[0], controlInputs[0], time, m_computationBuffer))){
+                if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[0])))){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while setting the control input.");
+                    return false;
+                }
+
+                if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[0], time, m_computationBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while evaluating the dynamical system.");
                     return false;
                 }
@@ -158,7 +165,12 @@ namespace integrators {
                 if ((stateJacobianValues[0].rows() != nx) || (stateJacobianValues[0].cols() != nx))
                     stateJacobianValues[0].resize(nx,nx);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsStateFirstDerivative(collocationPoints[0], controlInputs[0], time, m_stateJacBuffer))){
+                if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[0])))){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian", "Error while setting the control input.");
+                    return false;
+                }
+
+                if (!(m_dynamicalSystem_ptr->dynamicsStateFirstDerivative(collocationPoints[0], time, m_stateJacBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
                                 "Error while evaluating the dynamical system jacobian.");
                     return false;
@@ -179,7 +191,7 @@ namespace integrators {
                 if ((controlJacobianValues[0].rows() != nx) || (controlJacobianValues[0].cols() != nu))
                     controlJacobianValues[0].resize(nx,nu);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[0], controlInputs[0], time, m_controlJacBuffer))){
+                if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[0], time, m_controlJacBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
                                 "Error while evaluating the dynamical system control jacobian.");
                     return false;
@@ -190,7 +202,7 @@ namespace integrators {
                 if ((controlJacobianValues[1].rows() != nx) || (controlJacobianValues[1].cols() != nu))
                     controlJacobianValues[1].resize(nx,nu);
 
-                controlJacobianValues[1].zero();
+                controlJacobianValues[1] = m_zeroBuffer;
 
                 return true;
             }

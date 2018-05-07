@@ -30,7 +30,7 @@ namespace iDynTree {
             class ForwardEuler : public FixedStepIntegrator{
 
                 VectorDynSize m_computationBuffer;
-                MatrixDynSize m_stateJacBuffer, m_controlJacBuffer, m_identity;
+                MatrixDynSize m_stateJacBuffer, m_controlJacBuffer, m_identity, m_zeroBuffer;
 
                 bool allocateBuffers() override;
 

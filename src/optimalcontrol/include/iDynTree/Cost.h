@@ -34,7 +34,7 @@ namespace iDynTree {
 
             virtual ~Cost();
 
-            const std::string name() const; //the name must not be changed
+            const std::string& name() const; //the name must not be changed
 
             virtual bool costEvaluation(double time,
                                         const iDynTree::VectorDynSize& state,

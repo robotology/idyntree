@@ -21,37 +21,64 @@ namespace iDynTree {
                                          size_t controlSpaceSize)
         : m_stateSize(stateSpaceSize)
         , m_controlSize(controlSpaceSize)
-        {}
+        , m_initialState(static_cast<unsigned int>(stateSpaceSize))
+        ,m_controlInput(static_cast<unsigned int>(controlSpaceSize))
+        {
+            m_initialState.zero();
+            m_controlInput.zero();
+        }
 
         DynamicalSystem::~DynamicalSystem() {}
 
         size_t DynamicalSystem::stateSpaceSize() const{ return m_stateSize; }
         size_t DynamicalSystem::controlSpaceSize() const{ return m_controlSize; }
 
-        bool DynamicalSystem::dynamics(const VectorDynSize &state, double time, VectorDynSize &stateDynamics)
+        bool DynamicalSystem::setControlInput(const VectorDynSize &control)
         {
-            reportError("DynamicalSystem", "dynamics", "No autonomous dynamics specified.");
-            return false;
+            if (control.size() != controlSpaceSize()) {
+                reportError("DynamicalSystem", "setControlInput", "Wrong control dimension.");
+                return false;
+            }
+            m_controlInput = control;
+            return true;
         }
 
-        bool DynamicalSystem::dynamics(const VectorDynSize &state, const VectorDynSize &control, double time, VectorDynSize &stateDynamics)
+        const VectorDynSize &DynamicalSystem::controlInput() const
         {
-            reportError("DynamicalSystem", "dynamics", "No controlled dynamics specified.");
-            return false;
+            return m_controlInput;
+        }
+
+        double DynamicalSystem::controlInput(unsigned int index) const
+        {
+            return m_controlInput(index);
+        }
+
+        const VectorDynSize &DynamicalSystem::initialState() const
+        {
+            return m_initialState;
+        }
+
+        double DynamicalSystem::initialState(unsigned int index) const
+        {
+            return m_initialState(index);
         }
 
         bool DynamicalSystem::setInitialState(const VectorDynSize &state)
         {
-            reportError("DynamicalSystem", "setInitialState", "Method not implemented.");
-            return false;
+            if (state.size() != m_initialState.size()){
+                reportError("DynamicalSystem", "setInitialState", "Wrong initial state dimension.");
+                return false;
+            }
+            m_initialState = state;
+            return true;
         }
 
-        bool  DynamicalSystem::dynamicsStateFirstDerivative(const VectorDynSize& state, const VectorDynSize &control,
+        bool  DynamicalSystem::dynamicsStateFirstDerivative(const VectorDynSize& state,
                                                             double time,
                                                             MatrixDynSize& dynamicsDerivative)
         { return false; }
 
-        bool DynamicalSystem::dynamicsControlFirstDerivative(const VectorDynSize& state, const VectorDynSize &control,
+        bool DynamicalSystem::dynamicsControlFirstDerivative(const VectorDynSize& state,
                                                              double time,
                                                              MatrixDynSize& dynamicsDerivative)
         { return false; }

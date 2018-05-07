@@ -17,6 +17,7 @@ option(BUILD_SHARED_LIBS "Build libraries as shared" TRUE)
 
 set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/DynamicalSystem.h
+                   include/iDynTree/ControlledDynamicalSystem.h
                    include/iDynTree/LinearSystem.h
                    include/iDynTree/MultiBodySystem.h
                    include/iDynTree/Integrator.h
@@ -25,7 +26,6 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/OptimalControlProblem.h
                    include/iDynTree/OptimalControlSolver.h
                    include/iDynTree/SystemLineariser.h
-                   include/iDynTree/OCSolvers/MultipleShootingSolver.h
                    include/iDynTree/Cost.h
                    include/iDynTree/Constraint.h
                    include/iDynTree/QuadraticCost.h
@@ -39,9 +39,11 @@ set(INTEGRATORS_PUBLIC_HEADERS include/iDynTree/Integrators/FixedStepIntegrator.
                                include/iDynTree/Integrators/RK4.h
                                include/iDynTree/Integrators/ImplicitTrapezoidal.h
                                include/iDynTree/Integrators/ForwardEuler.h)
+set(OCSOLVERS_PUBLIC_HEADERS include/iDynTree/OCSolvers/MultipleShootingSolver.h)
 
 
 set(SOURCES src/DynamicalSystem.cpp
+            src/ControlledDynamicalSystem.cpp
             src/LinearSystem.cpp
             src/MultiBodySystem.cpp
             src/Integrator.cpp
@@ -77,7 +79,7 @@ if (IDYNTREE_USES_IPOPT)
     list(APPEND INCLUDE_LIST ${IPOPT_INCLUDE_DIRS})
 endif()
 
-add_library(${libraryname} ${PUBLIC_HEADERS} ${INTEGRATORS_PUBLIC_HEADERS} ${OPTIMIZERS_HEADERS} ${SOURCES} ${OPTIMIZERS_SOURCES})
+add_library(${libraryname} ${PUBLIC_HEADERS} ${INTEGRATORS_PUBLIC_HEADERS} ${OCSOLVERS_PUBLIC_HEADERS} ${OPTIMIZERS_HEADERS} ${SOURCES} ${OPTIMIZERS_SOURCES})
 target_include_directories(${libraryname} SYSTEM PUBLIC ${INCLUDE_LIST})
 target_include_directories(${libraryname} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 target_include_directories(${libraryname} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
@@ -100,6 +102,8 @@ install(TARGETS ${libraryname}
 
 install(FILES ${INTEGRATORS_PUBLIC_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Integrators)
 install(FILES ${OPTIMIZERS_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Optimizers)
+install(FILES ${OCSOLVERS_PUBLIC_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/OCSolvers)
+
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)

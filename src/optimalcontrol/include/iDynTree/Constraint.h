@@ -49,7 +49,7 @@ namespace iDynTree {
 
             virtual bool isFeasiblePoint(double time,
                                          const VectorDynSize& state,
-                                         const VectorDynSize& control) = 0;
+                                         const VectorDynSize& control);
 
             virtual bool evaluateConstraint(double time,
                                             const VectorDynSize& state,
@@ -74,6 +74,7 @@ namespace iDynTree {
         private:
             size_t m_constraintSize;
             std::string m_constraintName;
+            VectorDynSize m_valueBuffer;
         protected:
             VectorDynSize m_lowerBound;
             VectorDynSize m_upperBound;

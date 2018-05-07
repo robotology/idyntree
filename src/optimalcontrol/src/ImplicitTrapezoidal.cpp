@@ -92,14 +92,24 @@ namespace iDynTree {
                 }
 
                 if (constraintValue.size() != m_dynamicalSystem_ptr->stateSpaceSize())
-                    constraintValue.resize(m_dynamicalSystem_ptr->stateSpaceSize());
+                    constraintValue.resize(static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize()));
 
-                if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[0], controlInputs[0], time, m_computationBuffer))){
+                if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[0])))){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while setting the control input.");
+                    return false;
+                }
+
+                if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[0], time, m_computationBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while evaluating the dynamical system.");
                     return false;
                 }
 
-                if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[1], controlInputs[1], time+dT, m_computationBuffer2))){
+                if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[1])))){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while setting the control input.");
+                    return false;
+                }
+
+                if (!(m_dynamicalSystem_ptr->dynamics(collocationPoints[1], time+dT, m_computationBuffer2))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while evaluating the dynamical system.");
                     return false;
                 }
@@ -139,15 +149,21 @@ namespace iDynTree {
                 unsigned int nx = static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize());
                 unsigned int nu = static_cast<unsigned int>(m_dynamicalSystem_ptr->controlSpaceSize());
 
-                //State Jacobians
-
                 if (stateJacobianValues.size() != 2)
                     stateJacobianValues.resize(2);
+
+                if (controlJacobianValues.size() != 2)
+                    controlJacobianValues.resize(2);
 
                 if ((stateJacobianValues[0].rows() != nx) || (stateJacobianValues[0].cols() != nx))
                     stateJacobianValues[0].resize(nx,nx);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsStateFirstDerivative(collocationPoints[0], controlInputs[0], time, m_stateJacBuffer))){
+                if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[0])))){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian", "Error while setting the control input.");
+                    return false;
+                }
+
+                if (!(m_dynamicalSystem_ptr->dynamicsStateFirstDerivative(collocationPoints[0], time, m_stateJacBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
                                 "Error while evaluating the dynamical system jacobian.");
                     return false;
@@ -155,26 +171,12 @@ namespace iDynTree {
 
                 toEigen(stateJacobianValues[0]) = toEigen(m_identity) + dT/2*toEigen(m_stateJacBuffer);
 
-                if ((stateJacobianValues[1].rows() != nx) || (stateJacobianValues[1].cols() != nx))
-                    stateJacobianValues[1].resize(nx,nx);
-
-                if (!(m_dynamicalSystem_ptr->dynamicsStateFirstDerivative(collocationPoints[1], controlInputs[1], time+dT, m_stateJacBuffer))){
-                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
-                                "Error while evaluating the dynamical system jacobian.");
-                    return false;
-                }
-
-                toEigen(stateJacobianValues[1]) = -toEigen(m_identity) + dT/2*toEigen(m_stateJacBuffer);
-
-                //Control Jacobians
-
-                if (controlJacobianValues.size() != 2)
-                    controlJacobianValues.resize(2);
 
                 if ((controlJacobianValues[0].rows() != nx) || (controlJacobianValues[0].cols() != nu))
                     controlJacobianValues[0].resize(nx,nu);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[0], controlInputs[0], time, m_controlJacBuffer))){
+
+                if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[0], time, m_controlJacBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
                                 "Error while evaluating the dynamical system control jacobian.");
                     return false;
@@ -182,10 +184,27 @@ namespace iDynTree {
 
                 toEigen(controlJacobianValues[0]) = dT/2.0*toEigen(m_controlJacBuffer);
 
+                if ((stateJacobianValues[1].rows() != nx) || (stateJacobianValues[1].cols() != nx))
+                    stateJacobianValues[1].resize(nx,nx);
+
+                if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[1])))){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian", "Error while setting the control input.");
+                    return false;
+                }
+
+                if (!(m_dynamicalSystem_ptr->dynamicsStateFirstDerivative(collocationPoints[1], time+dT, m_stateJacBuffer))){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
+                                "Error while evaluating the dynamical system jacobian.");
+                    return false;
+                }
+
+                toEigen(stateJacobianValues[1]) = -toEigen(m_identity) + dT/2*toEigen(m_stateJacBuffer);
+
+
                 if ((controlJacobianValues[1].rows() != nx) || (controlJacobianValues[1].cols() != nu))
                     controlJacobianValues[1].resize(nx,nu);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[1], controlInputs[1], time + dT, m_controlJacBuffer))){
+                if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[1], time + dT, m_controlJacBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
                                 "Error while evaluating the dynamical system control jacobian.");
                     return false;
