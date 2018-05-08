@@ -352,6 +352,15 @@ void testBerdyHelpers(std::string fileName)
     ok = berdyHelper.init(estimator.model(), estimator.sensors(), options);
     ASSERT_IS_TRUE(ok);
     testBerdySensorMatrices(berdyHelper, fileName);
+    
+    // Test includeAllJointTorqueAsSensors option 
+    options.berdyVariant = iDynTree::BERDY_FLOATING_BASE;
+    // For now floating berdy needs all the ext wrenches as dynamic variables
+    options.includeAllNetExternalWrenchesAsDynamicVariables = true;
+    options.includeAllJointTorquesAsSensors = true;
+    ok = berdyHelper.init(estimator.model(), estimator.sensors(), options);
+    ASSERT_IS_TRUE(ok);
+    testBerdySensorMatrices(berdyHelper, fileName);
 
 }
 
