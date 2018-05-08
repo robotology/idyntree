@@ -1260,33 +1260,32 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         }
         else 
         {
-          assert(false);
-          // It should be something like a submatrix with S^T (see lines 907)
-          // We have to map the joint wrench to the joint torques, since joint wrench is considered as dynamic variable
-          for (TraversalIndex traversalEl = 1;
-               traversalEl < static_cast<TraversalIndex>(m_dynamicsTraversal.getNrOfVisitedLinks());
-               traversalEl++)
-          {
-            LinkConstPtr visitedLink = m_dynamicsTraversal.getLink(traversalEl);
-            LinkConstPtr parentLink = m_dynamicsTraversal.getParentLink(traversalEl);
-            IJointConstPtr toParentJoint = m_dynamicsTraversal.getParentJoint(traversalEl);
-            LinkIndex visitedLinkIdx = visitedLink->getIndex();
-            LinkIndex parentLinkIdx = parentLink->getIndex();
-            
-            size_t jointDOFs = toParentJoint->getNrOfDOFs();
-            size_t dofOffset = toParentJoint->getDOFsOffset();
-            
-            for (size_t localDof = 0; localDof < jointDOFs; localDof++)
+            assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
+            // We have to map the joint wrench to the joint torques, since joint wrench is considered as dynamic variable
+            for (TraversalIndex traversalEl = 1;
+                traversalEl < static_cast<TraversalIndex>(m_dynamicsTraversal.getNrOfVisitedLinks());
+                traversalEl++)
             {
-              SpatialMotionVector S = toParentJoint->getMotionSubspaceVector(localDof, visitedLinkIdx, parentLinkIdx);
-              Matrix1x6 SdynTree;
-              toEigen(SdynTree) = toEigen(S).transpose();
+                LinkConstPtr visitedLink = m_dynamicsTraversal.getLink(traversalEl);
+                LinkConstPtr parentLink = m_dynamicsTraversal.getParentLink(traversalEl);
+                IJointConstPtr toParentJoint = m_dynamicsTraversal.getParentJoint(traversalEl);
+                LinkIndex visitedLinkIdx = visitedLink->getIndex();
+                LinkIndex parentLinkIdx = parentLink->getIndex();
+            
+                size_t jointDOFs = toParentJoint->getNrOfDOFs();
+                size_t dofOffset = toParentJoint->getDOFsOffset();
+            
+                for (size_t localDof = 0; localDof < jointDOFs; localDof++)
+                {
+                    SpatialMotionVector S = toParentJoint->getMotionSubspaceVector(localDof, visitedLinkIdx, parentLinkIdx);
+                    Matrix1x6 SdynTree;
+                    toEigen(SdynTree) = toEigen(S).transpose();
               
-              matrixYElements.addSubMatrix(getRangeDOFSensorVariable(DOF_TORQUE_SENSOR, dofOffset + localDof).offset,
-                                           getRangeJointVariable(JOINT_WRENCH, toParentJoint->getIndex()).offset,
-                                           SdynTree);
+                    matrixYElements.addSubMatrix(getRangeDOFSensorVariable(DOF_TORQUE_SENSOR, dofOffset + localDof).offset,
+                                                 getRangeJointVariable(JOINT_WRENCH, toParentJoint->getIndex()).offset,
+                                                 SdynTree);
+                }
             }
-          }
         }
     }
 
