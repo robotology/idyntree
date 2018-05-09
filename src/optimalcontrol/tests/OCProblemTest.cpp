@@ -2,9 +2,14 @@
 #include <iDynTree/DynamicalSystem.h>
 #include <iDynTree/Constraint.h>
 #include <iDynTree/Cost.h>
+#include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/ConstraintsGroup.h>
+#include <iDynTree/TimeRange.h>
+#include <Eigen/Dense>
+#include <iDynTree/Core/EigenHelpers.h>
 #include <string>
 #include <cassert>
 
@@ -65,7 +70,7 @@ public:
         upperBound(0) = 10;
         assert(setUpperBound(upperBound));
     }
-    TestConstraint(std::string& name)
+    TestConstraint(const std::string& name)
         :iDynTree::optimalcontrol::Constraint(1, name)
     {
         iDynTree::VectorDynSize upperBound(1);
@@ -121,13 +126,13 @@ public:
 };
 TestConstraint::~TestConstraint(){}
 
-class TestCost : iDynTree::optimalcontrol::Cost {
+class TestCost : public iDynTree::optimalcontrol::Cost {
 public:
     TestCost()
     :iDynTree::optimalcontrol::Cost("testCost")
     {}
 
-    TestCost(std::string& name)
+    TestCost(const std::string& name)
         :iDynTree::optimalcontrol::Cost(name)
     {}
 
@@ -235,5 +240,110 @@ public:
 TestCost::~TestCost(){}
 
 int main() {
+    iDynTree::optimalcontrol::OptimalControlProblem problem;
+
+    //Definition
+    std::shared_ptr<TestSystem> system(new TestSystem());
+    std::shared_ptr<TestConstraint> constraint1(new TestConstraint("constraint1"));
+    std::shared_ptr<TestConstraint> constraint2(new TestConstraint("constraint2"));
+    std::shared_ptr<iDynTree::optimalcontrol::ConstraintsGroup> group1(new iDynTree::optimalcontrol::ConstraintsGroup("group1", 1));
+    std::shared_ptr<TestCost> cost1(new TestCost("cost1"));
+    std::shared_ptr<TestCost> cost2(new TestCost("cost2"));
+
+
+    //Set-up
+    iDynTree::VectorDynSize newBounds(1);
+    newBounds(0) = 5.0;
+    iDynTree::assertTrue(constraint2->setUpperBound(newBounds));
+
+    iDynTree::assertTrue(problem.setTimeHorizon(1.0, 5.0));
+    iDynTree::assertTrue(problem.dynamicalSystem().expired());
+    iDynTree::assertTrue(problem.setDynamicalSystemConstraint(system));
+    iDynTree::assertTrue(!(problem.dynamicalSystem().expired()));
+    iDynTree::assertTrue(problem.addGroupOfConstraints(group1));
+    iDynTree::assertTrue(group1->addConstraint(constraint2, iDynTree::optimalcontrol::TimeRange(4.0, 5.0)));
+    iDynTree::assertTrue(problem.addContraint(constraint1));
+    iDynTree::assertTrue(problem.addLagrangeTerm(1.0, cost1));
+    iDynTree::assertTrue(problem.addMayerTerm(1.0, cost2));
+
+    iDynTree::VectorDynSize testState(2), testControl(3);
+    iDynTree::getRandomVector(testState, -10.0, 10.0);
+    iDynTree::getRandomVector(testControl, -10.0, 10.0);
+
+    //--------------- Checking Cost
+
+    double expectedCost1, expectedCost2, obtainedCost;
+    iDynTree::VectorDynSize expectedGradient1(2), expectedGradient2(2), gradientSum(2), obtainedGradient(2), expectedCtrlGradient1(3), expectedCtrlGradient2(3), ctrlSum(3), obtainedCtrlGradient(3);
+
+    //Test before changing time range
+    iDynTree::assertTrue(cost1->costEvaluation(0.0, testState, testControl, expectedCost1));
+    iDynTree::assertTrue(cost1->costFirstPartialDerivativeWRTState(0.0, testState, testControl, expectedGradient1));
+    iDynTree::assertTrue(cost1->costFirstPartialDerivativeWRTControl(0.0, testState, testControl, expectedCtrlGradient1));
+    iDynTree::assertTrue(cost2->costEvaluation(0.0, testState, testControl, expectedCost2));
+    iDynTree::assertTrue(cost2->costFirstPartialDerivativeWRTState(0.0, testState, testControl, expectedGradient2));
+    iDynTree::assertTrue(cost2->costFirstPartialDerivativeWRTControl(0.0, testState, testControl, expectedCtrlGradient2));
+    iDynTree::toEigen(gradientSum) = iDynTree::toEigen(expectedGradient1) + iDynTree::toEigen(expectedGradient2);
+    iDynTree::toEigen(ctrlSum) = iDynTree::toEigen(expectedCtrlGradient1) + iDynTree::toEigen(expectedCtrlGradient2);
+
+    iDynTree::assertTrue(problem.costsEvaluation(4.0, testState, testControl, obtainedCost));
+    iDynTree::assertDoubleAreEqual(expectedCost1, obtainedCost);
+
+    iDynTree::assertTrue(problem.costsFirstPartialDerivativeWRTState(4.0, testState, testControl, obtainedGradient));
+    iDynTree::assertVectorAreEqual(expectedGradient1, obtainedGradient,iDynTree::DEFAULT_TOL, "", 1);
+
+    iDynTree::assertTrue(problem.costsFirstPartialDerivativeWRTControl(4.0, testState, testControl, obtainedCtrlGradient));
+    iDynTree::assertVectorAreEqual(expectedCtrlGradient1, obtainedCtrlGradient,iDynTree::DEFAULT_TOL, "", 1);
+
+    iDynTree::assertTrue(problem.costsEvaluation(5.0, testState, testControl, obtainedCost));
+    iDynTree::assertDoubleAreEqual(expectedCost1 + expectedCost2, obtainedCost);
+
+    iDynTree::assertTrue(problem.costsFirstPartialDerivativeWRTState(5.0, testState, testControl, obtainedGradient));
+    iDynTree::assertVectorAreEqual(gradientSum, obtainedGradient,iDynTree::DEFAULT_TOL, "", 1);
+
+    iDynTree::assertTrue(problem.costsFirstPartialDerivativeWRTControl(5.0, testState, testControl, obtainedCtrlGradient));
+    iDynTree::assertVectorAreEqual(ctrlSum, obtainedCtrlGradient,iDynTree::DEFAULT_TOL, "", 1);
+
+    // Changing time horizon
+    iDynTree::assertTrue(problem.setTimeHorizon(1.0, 5.5));
+
+    //Test after changing time range
+    iDynTree::assertTrue(problem.costsEvaluation(5.0, testState, testControl, obtainedCost));
+    iDynTree::assertDoubleAreEqual(expectedCost1, obtainedCost);
+
+    iDynTree::assertTrue(problem.costsFirstPartialDerivativeWRTState(5.0, testState, testControl, obtainedGradient));
+    iDynTree::assertVectorAreEqual(expectedGradient1, obtainedGradient,iDynTree::DEFAULT_TOL, "", 1);
+
+    iDynTree::assertTrue(problem.costsFirstPartialDerivativeWRTControl(5.0, testState, testControl, obtainedCtrlGradient));
+    iDynTree::assertVectorAreEqual(expectedCtrlGradient1, obtainedCtrlGradient,iDynTree::DEFAULT_TOL, "", 1);
+
+    iDynTree::assertTrue(problem.costsEvaluation(5.5, testState, testControl, obtainedCost));
+    iDynTree::assertDoubleAreEqual(expectedCost1 + expectedCost2, obtainedCost);
+
+    iDynTree::assertTrue(problem.costsFirstPartialDerivativeWRTState(5.5, testState, testControl, obtainedGradient));
+    iDynTree::assertVectorAreEqual(gradientSum, obtainedGradient,iDynTree::DEFAULT_TOL, "", 1);
+
+    iDynTree::assertTrue(problem.costsFirstPartialDerivativeWRTControl(5.5, testState, testControl, obtainedCtrlGradient));
+    iDynTree::assertVectorAreEqual(ctrlSum, obtainedCtrlGradient,iDynTree::DEFAULT_TOL, "", 1);
+
+    //---------Checking Constraints
+    iDynTree::VectorDynSize expectedConstraints(2), obtainedConstraints;
+    iDynTree::MatrixDynSize expectedStatejac(2,2), expectedControlJac(2,3), obtainedStatejac, obtainedControlJac;
+    expectedStatejac.zero();
+    expectedControlJac.zero();
+    expectedControlJac(0,0) = 1.0;
+    expectedControlJac(1,0) = 1.0;
+
+    expectedConstraints(0) = testControl(0);
+    expectedConstraints(1) = testControl(0);
+    iDynTree::assertTrue(problem.constraintsEvaluation(4.0, testState, testControl, obtainedConstraints));
+    iDynTree::assertVectorAreEqual(expectedConstraints, obtainedConstraints, iDynTree::DEFAULT_TOL, "", 1);
+    iDynTree::assertTrue(problem.constraintsJacobianWRTState(4.0, testState, testControl, obtainedStatejac));
+    iDynTree::assertMatrixAreEqual(expectedStatejac, obtainedStatejac, iDynTree::DEFAULT_TOL, "", 1);
+    iDynTree::assertTrue(problem.constraintsJacobianWRTControl(4.0, testState, testControl, obtainedControlJac));
+    iDynTree::assertMatrixAreEqual(expectedControlJac, obtainedControlJac, iDynTree::DEFAULT_TOL, "", 1);
+    testControl(0) = 6.0;
+    iDynTree::assertTrue(problem.isFeasiblePoint(3.0, testState, testControl));
+    iDynTree::assertTrue(!(problem.isFeasiblePoint(4.0, testState, testControl)));
+
     return EXIT_SUCCESS;
 }

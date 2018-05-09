@@ -18,5 +18,6 @@ add_oc_test(Integrators)
 if (IDYNTREE_USES_IPOPT)
     add_oc_test(Optimizer)
 endif()
+add_oc_test(OCProblem)
 #add_oc_test(MultipleShooting) it must be finished
-#add_oc_test(OCProblem)
+

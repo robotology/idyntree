@@ -23,6 +23,7 @@ namespace iDynTree {
         }
 
         TimeRange::TimeRange(const double init, const double end)
+        :m_anyTime(false)
         {
             if(!setTimeInterval(init, end)){
                 reportError("TimeRange", "TimeRange", "Invalid initialization. Setting equal to AnyTime.");

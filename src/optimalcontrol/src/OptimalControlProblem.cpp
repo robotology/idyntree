@@ -145,6 +145,10 @@ namespace iDynTree {
             BufferedGroup newGroup;
             newGroup.group_ptr = groupOfConstraints;
             newGroup.constraintsBuffer.resize(groupOfConstraints->constraintsDimension());
+            if (m_pimpl->dynamicalSystem) {
+                newGroup.stateJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->stateSpaceSize()));
+                newGroup.controlJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->controlSpaceSize()));
+            }
 
             std::pair< ConstraintsGroupsMap::iterator, bool> groupResult;
             groupResult = m_pimpl->constraintsGroups.insert(std::pair< std::string, BufferedGroup>(groupOfConstraints->name(), newGroup));
@@ -752,12 +756,13 @@ namespace iDynTree {
             Eigen::Index offset = 0;
 
             for (auto group : m_pimpl->constraintsGroups){
-                if (! group.second.group_ptr->evaluateConstraints(time, state, control, group.second.constraintsBuffer)){
+                if (!(group.second.group_ptr->evaluateConstraints(time, state, control, group.second.constraintsBuffer))){
                     std::ostringstream errorMsg;
                     errorMsg << "Error while evaluating constraint " << group.second.group_ptr->name() <<".";
                     reportError("OptimalControlProblem", "constraintsEvaluation", errorMsg.str().c_str());
                     return false;
                 }
+
                 constraintsEvaluation.segment(offset, group.second.constraintsBuffer.size()) = toEigen(group.second.constraintsBuffer);
                 offset += group.second.constraintsBuffer.size();
             }
@@ -839,9 +844,9 @@ namespace iDynTree {
             Eigen::Index offset = 0;
 
             for (auto group : m_pimpl->constraintsGroups){
-                if (! group.second.group_ptr->constraintJacobianWRTState(time, state, control, group.second.stateJacobianBuffer)){
+                if (!(group.second.group_ptr->constraintJacobianWRTState(time, state, control, group.second.stateJacobianBuffer))){
                     std::ostringstream errorMsg;
-                    errorMsg << "Error while evaluating constraint " << group.second.group_ptr->name() <<".";
+                    errorMsg << "Error while evaluating constraint group " << group.second.group_ptr->name() <<".";
                     reportError("OptimalControlProblem", "constraintsJacobianWRTState", errorMsg.str().c_str());
                     return false;
                 }
