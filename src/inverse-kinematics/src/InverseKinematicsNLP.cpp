@@ -492,9 +492,12 @@ namespace kinematics {
         //J = Sum_i^#targets  Error on rotation   + ||q - q_des ||^2 (as regularization term)
 
         Eigen::VectorXd jointError = iDynTree::toEigen(jointsAtOptimisationStep)-iDynTree::toEigen(m_data.m_preferredJointsConfiguration);
-        const double& jointCostWeight = m_data.m_preferredJointsWeight;
+        const iDynTree::VectorDynSize& jointCostWeight = m_data.m_preferredJointsWeight;
 
-        obj_value = 0.5 * jointCostWeight * jointError.squaredNorm();
+        obj_value = 0;
+        for (size_t i = 0; i < jointError.size(); ++i) {
+            obj_value += 0.5 * jointCostWeight(i) * jointError(i) * jointError(i);
+        }
 
         //compute errors on rotation
         for (TransformMap::const_iterator target = m_data.m_targets.begin();
@@ -572,11 +575,14 @@ namespace kinematics {
 
         //First part of the gradient: the part of the cost depending only on q_j
         Eigen::Map<Eigen::VectorXd> qj = iDynTree::toEigen(jointsAtOptimisationStep);
+        Eigen::VectorXd jointError = iDynTree::toEigen(jointsAtOptimisationStep)-iDynTree::toEigen(m_data.m_preferredJointsConfiguration);
 
         Ipopt::Index baseSize = 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization);
         //last n - baseSize elements are the ones corresponding to qj
-        const double & jointCostWeight = m_data.m_preferredJointsWeight;
-        gradient.tail(n - baseSize) = jointCostWeight * (qj - iDynTree::toEigen(m_data.m_preferredJointsConfiguration)).transpose();
+        iDynTree::VectorDynSize & jointCostWeight = m_data.m_preferredJointsWeight;
+        for (size_t i = baseSize; i < n; ++i){
+            gradient(i) = jointCostWeight(i - baseSize) * jointError(i - baseSize);
+        }
 
         //Second part of the gradient: this part depends on all q, i.e. x
         //compute errors on rotation

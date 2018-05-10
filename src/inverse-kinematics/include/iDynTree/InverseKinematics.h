@@ -661,7 +661,10 @@ public:
     IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setDesiredFullJointsConfiguration or setDesiredReducedJointConfiguration instead")
     bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
     bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+    bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const iDynTree::VectorDynSize& weights);
     bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+    bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const iDynTree::VectorDynSize& weights);
+
 
 
     /*!

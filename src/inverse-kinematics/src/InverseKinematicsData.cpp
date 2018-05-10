@@ -139,7 +139,8 @@ namespace kinematics {
         m_jointsResults.zero();
         m_preferredJointsConfiguration.resize(m_dofs);
         m_preferredJointsConfiguration.zero();
-        m_preferredJointsWeight = 1e-6;
+        m_preferredJointsWeight.resize(m_dofs);
+       iDynTree::toEigen(m_preferredJointsWeight).setConstant(1e-6);
 
         m_state.jointsConfiguration.resize(m_dofs);
         m_state.jointsConfiguration.zero();
@@ -286,22 +287,22 @@ namespace kinematics {
         }
 
         //2) Check joint limits..
-        for (size_t i = 0; i < m_jointInitialConditions.size(); ++i) {
+        for (size_t i = 0; i < m_reducedVariablesInfo.modelJointsToOptimisedJoints.size(); ++i) {
             //check joint to be inside limit
-            double &jointValue = m_jointInitialConditions(i);
-            if (jointValue < m_jointLimits[i].first || jointValue > m_jointLimits[i].second) {
+            double &jointValue = m_jointInitialConditions(m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]);
+            if (jointValue < m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].first || jointValue > m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].second) {
                 std::cerr
-                << "[WARNING] InverseKinematics: joint " << m_dynamics.model().getJointName(i)
-                << " (index " << i << ") initial condition is outside the limits "
-                << m_jointLimits[i].first << " " << m_jointLimits[i].second
+                << "[WARNING] InverseKinematics: joint " << m_dynamics.model().getJointName(m_reducedVariablesInfo.modelJointsToOptimisedJoints[i])
+                << " (index " << m_reducedVariablesInfo.modelJointsToOptimisedJoints[i] << ") initial condition is outside the limits "
+                << m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].first << " " << m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].second
                 << ". Actual value: " << jointValue <<  std::endl;
                 //set the initial value to at the limit
-                if (jointValue < m_jointLimits[i].first) {
-                    jointValue = m_jointLimits[i].first;
+                if (jointValue < m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].first) {
+                    jointValue = m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].first;
                 }
 
-                if (jointValue > m_jointLimits[i].second) {
-                    jointValue = m_jointLimits[i].second;
+                if (jointValue > m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].second) {
+                    jointValue = m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].second;
                 }
             }
         }
