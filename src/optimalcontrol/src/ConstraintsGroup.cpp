@@ -396,11 +396,33 @@ namespace optimalcontrol {
                                                             MatrixDynSize &jacobian)
         {
             if (isAnyTimeGroup()){
-                return m_pimpl->group.begin()->second.get()->constraint->constraintJacobianWRTControl(time, state, control, jacobian);
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintJacobianWRTControl(time, state, control, loneConstraint->controlJacobianBuffer))){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (loneConstraint->controlJacobianBuffer.rows() != loneConstraint->constraint->constraintSize()){
+                    std::ostringstream errorMsg;
+                    errorMsg << "The control jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the constraint." << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (loneConstraint->controlJacobianBuffer.cols() != control.size()){
+                    std::ostringstream errorMsg;
+                    errorMsg << "The control jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the control size." << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                jacobian = m_pimpl->group.begin()->second.get()->controlJacobianBuffer;
             }
 
-            if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != state.size()))
-                jacobian.resize(m_pimpl->maxConstraintSize, state.size());
+            if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != control.size()))
+                jacobian.resize(m_pimpl->maxConstraintSize, control.size());
 
             std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
             if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint

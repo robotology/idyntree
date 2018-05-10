@@ -146,9 +146,9 @@ namespace iDynTree {
                 hessianNonZeros = 0;
             }
 
-            void addNonZero(std::vector<size_t> input, size_t position, size_t toBeAdded){
-                assert(input.size() + 1 >= position);
-                if (position > input.size())
+            void addNonZero(std::vector<size_t>& input, size_t position, size_t toBeAdded){
+                assert(input.size() >= position);
+                if (position >= input.size())
                     input.push_back(toBeAdded);
                 else input[position] = toBeAdded;
             }
@@ -215,27 +215,27 @@ namespace iDynTree {
                 //TODO: I should consider also the possibility to have auxiliary variables in the integrator
                 if (collocationStateBuffer.size() != 2)
                     collocationStateBuffer.resize(2);
-                for (auto buf : collocationStateBuffer)
-                    if (buf.size() != nx)
-                        buf.resize(static_cast<unsigned int>(nx));
+                for (size_t i = 0; i < 2; ++i)
+                    if (collocationStateBuffer[i].size() != nx)
+                        collocationStateBuffer[i].resize(static_cast<unsigned int>(nx));
 
                 if (collocationControlBuffer.size() != 2)
                     collocationControlBuffer.resize(2);
-                for (auto buf : collocationControlBuffer)
-                    if (buf.size() != nu)
-                        buf.resize(static_cast<unsigned int>(nu));
+                for (size_t i = 0; i < 2; ++i)
+                    if (collocationControlBuffer[i].size() != nu)
+                        collocationControlBuffer[i].resize(static_cast<unsigned int>(nu));
 
                 if (collocationStateJacBuffer.size() != 2)
                     collocationStateJacBuffer.resize(2);
-                for (auto buf : collocationStateJacBuffer)
-                    if ((buf.rows() != nx) || (buf.cols() != nx))
-                        buf.resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nx));
+                for (size_t i = 0; i < 2; ++i)
+                    if ((collocationStateJacBuffer[i].rows() != nx) || (collocationStateJacBuffer[i].cols() != nx))
+                        collocationStateJacBuffer[i].resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nx));
 
                 if (collocationControlJacBuffer.size() != 2)
                     collocationControlJacBuffer.resize(2);
-                for (auto buf : collocationControlJacBuffer)
-                    if ((buf.rows() != nx) || (buf.cols() != nu))
-                        buf.resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nu));
+                for (size_t i = 0; i < 2; ++i)
+                    if ((collocationControlJacBuffer[i].rows() != nx) || (collocationControlJacBuffer[i].cols() != nu))
+                        collocationControlJacBuffer[i].resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nu));
 
                 if ((constraintsStateJacBuffer.rows() != constraintsPerInstant) || (constraintsStateJacBuffer.cols() != nx))
                     constraintsStateJacBuffer.resize(static_cast<unsigned int>(constraintsPerInstant), static_cast<unsigned int>(nx));
@@ -345,6 +345,73 @@ namespace iDynTree {
             return controlMeshes;
         }
 
+        bool MultipleShootingTranscription::preliminaryChecks()
+        {
+            if (!(m_pimpl->ocproblem)){
+                reportError("MultipleShootingTranscription", "prepare",
+                            "Optimal control problem not set.");
+                return false;
+            }
+
+            if (!(m_pimpl->integrator)) {
+                reportError("MultipleShootingTranscription", "prepare",
+                            "Integrator not set.");
+                return false;
+            }
+
+            if ((m_pimpl->ocproblem->finalTime() - m_pimpl->ocproblem->initialTime()) < m_pimpl->minStepSize){
+                reportError("MultipleShootingTranscription", "prepare",
+                            "The time horizon defined in the OptimalControlProblem is smaller than the minimum step size.");
+                return false;
+            }
+
+            if (m_pimpl->controlPeriod < m_pimpl->minStepSize){
+                reportError("MultipleShootingTranscription", "prepare", "The control period cannot be lower than the minimum step size.");
+                return false;
+            }
+
+            if ((m_pimpl->controlPeriod >= m_pimpl->maxStepSize) && (m_pimpl->controlPeriod <= (2 * m_pimpl->minStepSize))){
+                reportError("MultipleShootingTranscription", "prepare",
+                            "Cannot add control mesh points when the controller period is in the range [dTMax, 2*dTmin]."); // the first mesh point is a control mesh. The second mesh than would be too far from the first but not far enough to put a state mesh point in the middle.
+                return false;
+            }
+
+            if (!(m_pimpl->prepared)){
+                if (m_pimpl->ocproblem->dynamicalSystem().expired()){
+                    if (m_pimpl->integrator->dynamicalSystem().expired()){
+                        reportError("MultipleShootingTranscription", "prepare",
+                                    "No dynamical system set, neither to the OptimalControlProblem nor to the Integrator object.");
+                        return false;
+                    }
+                    if (!(m_pimpl->ocproblem->setDynamicalSystemConstraint(m_pimpl->integrator->dynamicalSystem().lock()))){
+                        reportError("MultipleShootingTranscription", "prepare",
+                                    "Error while setting the dynamicalSystem to the OptimalControlProblem using the one pointer provided by the Integrator object.");
+                        return false;
+                    }
+                } else {
+                    if (!(m_pimpl->integrator->dynamicalSystem().expired()) &&
+                            (m_pimpl->integrator->dynamicalSystem().lock() != m_pimpl->ocproblem->dynamicalSystem().lock())){
+                        reportError("MultipleShootingTranscription", "prepare",
+                                    "The selected OptimalControlProblem and the Integrator point to two different dynamical systems.");
+                        return false;
+                    } else if (m_pimpl->integrator->dynamicalSystem().expired()) {
+                        if (!(m_pimpl->integrator->setDynamicalSystem(m_pimpl->ocproblem->dynamicalSystem().lock()))){
+                            reportError("MultipleShootingTranscription", "prepare",
+                                        "Error while setting the dynamicalSystem to the Integrator using the one pointer provided by the OptimalControlProblem object.");
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            if (!(m_pimpl->integrator->setMaximumStepSize(m_pimpl->maxStepSize))){
+                reportError("MultipleShootingTranscription", "prepare","Error while setting the maximum step size to the integrator.");
+                return false;
+            }
+
+            return true;
+        }
+
 
         bool MultipleShootingTranscription::setMeshPoints()
         {
@@ -403,18 +470,20 @@ namespace iDynTree {
             //adding mesh points for the constraint time ranges
             newMeshPoint.type = MeshPointType::State;
             for (size_t i = 0; i < constraintsTRs.size(); ++i){
-                if (constraintsTRs[i].isInstant() && !(constraintsTRs[i].isInRange(initTime))){
-                    newMeshPoint.origin = MeshPointOrigin::Instant();
-                    newMeshPoint.time = constraintsTRs[i].initTime();
-                    m_pimpl->addMeshPoint(newMeshPoint);
-                }
-                else {
-                    newMeshPoint.origin = MeshPointOrigin::TimeRange();
-                    if (constraintsTRs[i].initTime() > initTime){
+                if (constraintsTRs[i].isInstant()) {
+                    if (!(constraintsTRs[i].isInRange(initTime)) && !(constraintsTRs[i].isInRange(endTime)) && (constraintsTRs[i].initTime() > initTime)){ //we will have a mesh there in any case
+                        newMeshPoint.origin = MeshPointOrigin::Instant();
                         newMeshPoint.time = constraintsTRs[i].initTime();
                         m_pimpl->addMeshPoint(newMeshPoint);
                     }
-                    if (constraintsTRs[i].endTime() < endTime){
+                }
+                else {
+                    newMeshPoint.origin = MeshPointOrigin::TimeRange();
+                    if ((constraintsTRs[i].initTime() > initTime) && (constraintsTRs[i].initTime() < endTime)){
+                        newMeshPoint.time = constraintsTRs[i].initTime();
+                        m_pimpl->addMeshPoint(newMeshPoint);
+                    }
+                    if ((constraintsTRs[i].endTime() > initTime) && (constraintsTRs[i].endTime() < endTime)){
                         newMeshPoint.time = constraintsTRs[i].endTime();
                         m_pimpl->addMeshPoint(newMeshPoint);
                     }
@@ -424,18 +493,20 @@ namespace iDynTree {
 
             //adding mesh points for the costs time ranges
             for (size_t i = 0; i < costsTRs.size(); ++i){
-                if (costsTRs[i].isInstant() && !(costsTRs[i].isInRange(initTime))){
-                    newMeshPoint.origin = MeshPointOrigin::Instant();
-                    newMeshPoint.time = costsTRs[i].initTime();
-                    m_pimpl->addMeshPoint(newMeshPoint);
-                }
-                else {
-                    newMeshPoint.origin = MeshPointOrigin::TimeRange();
-                    if (costsTRs[i].initTime() > initTime){
+                if (costsTRs[i].isInstant()){
+                    if (!(costsTRs[i].isInRange(initTime)) && !(costsTRs[i].isInRange(endTime)) && (costsTRs[i].initTime() > initTime)) { //we will have a mesh there in any case
+                        newMeshPoint.origin = MeshPointOrigin::Instant();
                         newMeshPoint.time = costsTRs[i].initTime();
                         m_pimpl->addMeshPoint(newMeshPoint);
                     }
-                    if (costsTRs[i].endTime() < endTime){
+                }
+                else {
+                    newMeshPoint.origin = MeshPointOrigin::TimeRange();
+                    if ((costsTRs[i].initTime() > initTime) && (costsTRs[i].initTime() < endTime)){
+                        newMeshPoint.time = costsTRs[i].initTime();
+                        m_pimpl->addMeshPoint(newMeshPoint);
+                    }
+                    if ((costsTRs[i].endTime() > initTime) && (costsTRs[i].endTime() < endTime)){
                         newMeshPoint.time = costsTRs[i].endTime();
                         m_pimpl->addMeshPoint(newMeshPoint);
                     }
@@ -630,7 +701,7 @@ namespace iDynTree {
                 return false;
             }
 
-            if (maxStepsize <= (2 * maxStepsize)){
+            if (maxStepsize <= (2 * minStepSize)){
                 reportError("MultipleShootingSolver", "setStepSizeBounds","The maximum step size is expected to be greater than twice the minimum."); //imagine to have a distance between two mesh points slightly greater than the max. It would be impossible to add a mesh point in the middle
                 return false;
             }
@@ -698,8 +769,14 @@ namespace iDynTree {
         bool MultipleShootingTranscription::getTimings(std::vector<double> &stateEvaluations, std::vector<double> &controlEvaluations)
         {
             if (!(m_pimpl->prepared)){
-                reportError("MultipleShootingTranscription", "getTimings", "First you need to call the prepare method");
-                return false;
+                reportWarning("MultipleShootingTranscription", "getTimings", "The method solve was not called yet. Computing new mesh points. These may be overwritten when calling the solve method.");
+
+                if (!preliminaryChecks())
+                    return false;
+
+                if (!setMeshPoints()){
+                    return false;
+                }
             }
 
             if (stateEvaluations.size() != (m_pimpl->totalMeshes - 1))
@@ -768,66 +845,10 @@ namespace iDynTree {
 
         bool MultipleShootingTranscription::prepare()
         {
-            if (!(m_pimpl->ocproblem)){
-                reportError("MultipleShootingTranscription", "prepare",
-                            "Optimal control problem not set.");
-                return false;
-            }
 
-            if (!(m_pimpl->integrator)) {
-                reportError("MultipleShootingTranscription", "prepare",
-                            "Integrator not set.");
+            if (!preliminaryChecks())
                 return false;
-            }
 
-            if ((m_pimpl->ocproblem->finalTime() - m_pimpl->ocproblem->initialTime()) < m_pimpl->minStepSize){
-                reportError("MultipleShootingTranscription", "prepare",
-                            "The time horizon defined in the OptimalControlProblem is smaller than the minimum step size.");
-                return false;
-            }
-
-            if (m_pimpl->controlPeriod < m_pimpl->minStepSize){
-                reportError("MultipleShootingTranscription", "prepare", "The control period cannot be lower than the minimum step size.");
-                return false;
-            }
-
-            if ((m_pimpl->controlPeriod >= m_pimpl->maxStepSize) && (m_pimpl->controlPeriod <= (2 * m_pimpl->minStepSize))){
-                reportError("MultipleShootingTranscription", "prepare",
-                            "Cannot add control mesh points when the controller period is in the range [dTMax, 2*dTmin]."); // the first mesh point is a control mesh. The second mesh than would be too far from the first but not far enough to put a state mesh point in the middle.
-                return false;
-            }
-
-            if (!(m_pimpl->prepared)){
-                if (m_pimpl->ocproblem->dynamicalSystem().expired()){
-                    if (m_pimpl->integrator->dynamicalSystem().expired()){
-                        reportError("MultipleShootingTranscription", "prepare",
-                                    "No dynamical system set, neither to the OptimalControlProblem nor to the Integrator object.");
-                        return false;
-                    }
-                    if (!(m_pimpl->ocproblem->setDynamicalSystemConstraint(m_pimpl->integrator->dynamicalSystem().lock()))){
-                        reportError("MultipleShootingTranscription", "prepare",
-                                    "Error while setting the dynamicalSystem to the OptimalControlProblem using the one pointer provided by the Integrator object.");
-                        return false;
-                    }
-                } else {
-                    if (!(m_pimpl->integrator->dynamicalSystem().expired()) &&
-                            (m_pimpl->integrator->dynamicalSystem().lock() != m_pimpl->ocproblem->dynamicalSystem().lock())){
-                        reportError("MultipleShootingTranscription", "prepare",
-                                    "The selected OptimalControlProblem and the Integrator point to two different dynamical systems.");
-                        return false;
-                    }
-                    if (!(m_pimpl->integrator->setDynamicalSystem(m_pimpl->ocproblem->dynamicalSystem().lock()))){
-                        reportError("MultipleShootingTranscription", "prepare",
-                                    "Error while setting the dynamicalSystem to the Integrator using the one pointer provided by the OptimalControlProblem object.");
-                        return false;
-                    }
-                }
-            }
-
-            if (!(m_pimpl->integrator->setMaximumStepSize(m_pimpl->maxStepSize))){
-                reportError("MultipleShootingTranscription", "prepare","Error while setting the maximum step size to the integrator.");
-                return false;
-            }
 
             if (!setMeshPoints()){
                 return false;

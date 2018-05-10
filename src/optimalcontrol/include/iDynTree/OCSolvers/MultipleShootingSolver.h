@@ -50,6 +50,8 @@ namespace iDynTree {
 
             size_t setControlMeshPoints();
 
+            bool preliminaryChecks();
+
             bool setMeshPoints();
 
             bool setOptimalControlProblem(const std::shared_ptr<OptimalControlProblem> problem);
