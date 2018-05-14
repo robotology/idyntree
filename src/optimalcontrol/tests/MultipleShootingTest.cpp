@@ -262,7 +262,7 @@ public:
         assert(m_problem);
         iDynTree::assertTrue(m_problem->prepare());
         dummyVariables.resize(m_problem->numberOfVariables());
-        dummyVariables.zero();
+        iDynTree::toEigen(dummyVariables).setConstant(1.0);
         iDynTree::assertTrue(m_problem->getConstraintsBounds(dummy1, dummy2));
         m_problem->getVariablesUpperBound(dummy1);
         m_problem->getVariablesLowerBound(dummy1);
@@ -271,9 +271,12 @@ public:
         iDynTree::assertTrue(m_problem->setVariables(dummyVariables));
         iDynTree::assertTrue(m_problem->evaluateCostFunction(dummyCost));
         iDynTree::assertTrue(m_problem->evaluateCostGradient(dummy1));
+//        std::cerr << "Cost Gradient" << std::endl << dummy1.toString() << std::endl << std::endl;
         iDynTree::assertTrue(m_problem->evaluateCostHessian(dummyMatrix));
+//        std::cerr << "Cost Hessian" << std::endl << dummyMatrix.toString() << std::endl << std::endl;
         iDynTree::assertTrue(m_problem->evaluateConstraints(dummy1));
         iDynTree::assertTrue(m_problem->evaluateConstraintsJacobian(dummyMatrix));
+//        std::cerr << "Cost Jacobian" << std::endl << dummyMatrix.toString() << std::endl << std::endl;
         //not evaluating the constraint hessian for the moment
 
         return true;

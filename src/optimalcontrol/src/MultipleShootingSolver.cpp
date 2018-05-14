@@ -42,7 +42,12 @@ namespace iDynTree {
             std::string m_description;
             int m_priority;
         public:
-            MeshPointOrigin(){}
+            MeshPointOrigin()
+            :m_name("ERROR")
+            ,m_description("A meshPointOrigin not initialized")
+            ,m_priority(-1)
+            {}
+
             MeshPointOrigin(const std::string& name, int priority, const std::string& description) : m_name(name), m_description(description), m_priority(priority){}
             static MeshPointOrigin FirstPoint() {return MeshPointOrigin("FirstPoint", 9, "The first point");}
             static MeshPointOrigin LastPoint() {return MeshPointOrigin("LastPoint", 8, "The last point");}
@@ -112,8 +117,11 @@ namespace iDynTree {
             std::vector<MeshPoint>::iterator findNextMeshPoint(std::vector<MeshPoint>::iterator& start){
                 std::vector<MeshPoint>::iterator nextMesh = start;
                 MeshPointOrigin ignored = MeshPointOrigin::Ignored();
+                assert(nextMesh != meshPoints.end());
+                assert(nextMesh->origin.name().size() > 0);
                 do {
                     nextMesh++;
+                    assert(nextMesh->origin.name().size() > 0);
                     assert(nextMesh != meshPoints.end());
                 } while (nextMesh->origin == ignored); //find next valid mesh
 
@@ -513,7 +521,7 @@ namespace iDynTree {
                 }
             }
 
-            m_pimpl->cleanLeftoverMeshes(); //setto ignored the leftover meshes, i.e. those that were set in a previous call
+            m_pimpl->cleanLeftoverMeshes(); //set to ignored the leftover meshes, i.e. those that were set in a previous call
 
             double tMin = m_pimpl->minStepSize;
             std::sort(m_pimpl->meshPoints.begin(), m_pimpl->meshPointsEnd,
@@ -542,11 +550,13 @@ namespace iDynTree {
                 if (timeDistance > m_pimpl->maxStepSize){ //two consecutive points are too distant
                     unsigned int additionalPoints = static_cast<unsigned int>(std::ceil(timeDistance/(m_pimpl->maxStepSize))) - 1;
                     double dtAdd = timeDistance / (additionalPoints + 1); //additionalPoints + 1 is the number of segments.
+                    long nextPosition = nextMesh - m_pimpl->meshPoints.begin();
                     //since tmin < tmax/2, dtAdd > tmin. Infact, the worst case is when timeDistance is nearly equal to tmax.
                     for (unsigned int i = 0; i < additionalPoints; ++i) {
                         newMeshPoint.time = mesh->time + (i + 1)*dtAdd;
                         m_pimpl->addMeshPoint(newMeshPoint);
                     }
+                    nextMesh = m_pimpl->meshPoints.begin() + nextPosition;
                     mesh = nextMesh;
 
                 } else if (timeDistance < m_pimpl->minStepSize){ //too consecutive points are too close
@@ -606,7 +616,6 @@ namespace iDynTree {
                                         m_pimpl->setIgnoredMesh(nextMesh);
                                         toBeRemoved--;
                                         totalMeshes--;
-                                        mesh = nextNextMesh;
                                     } else {
                                         mesh = nextMesh;
                                     }
@@ -633,12 +642,15 @@ namespace iDynTree {
                                     unsigned int possibleMeshes = static_cast<unsigned int>(std::ceil(timeDistance/(m_pimpl->minStepSize))) - 1;
                                     unsigned int meshToAddHere = std::min(toBeAdded, possibleMeshes);
                                     double dT = timeDistance/(meshToAddHere + 1);
+                                    long nextPosition = nextMesh - m_pimpl->meshPoints.begin();
                                     for(unsigned int m = 1; m <= meshToAddHere; m++){
                                         newMeshPoint.time = mesh->time + m*dT;
                                         m_pimpl->addMeshPoint(newMeshPoint);
                                         totalMeshes++;
                                     }
+                                    nextMesh = m_pimpl->meshPoints.begin() + nextPosition;
                                 }
+                                mesh = nextMesh;
                             }
 
                             if (toBeAdded > 0){
