@@ -256,8 +256,8 @@ public:
 
     virtual bool solve() override {
         iDynTree::VectorDynSize dummyVariables, dummy1, dummy2;
-        iDynTree::MatrixDynSize dummyMatrix;
-        std::vector<size_t> dummy3, dummy4;
+        iDynTree::MatrixDynSize dummyMatrix, jacobian;
+        std::vector<size_t> dummy3, dummy4, nnzeroRows, nnzeroCols;
         double dummyCost;
         assert(m_problem);
         iDynTree::assertTrue(m_problem->prepare());
@@ -266,7 +266,9 @@ public:
         iDynTree::assertTrue(m_problem->getConstraintsBounds(dummy1, dummy2));
         m_problem->getVariablesUpperBound(dummy1);
         m_problem->getVariablesLowerBound(dummy1);
-        iDynTree::assertTrue(m_problem->getConstraintsJacobianInfo(dummy3, dummy4));
+        iDynTree::assertTrue(m_problem->getConstraintsJacobianInfo(nnzeroRows, nnzeroCols));
+        assert(nnzeroRows.size() == nnzeroCols.size());
+
         iDynTree::assertTrue(m_problem->getHessianInfo(dummy3, dummy4));
         iDynTree::assertTrue(m_problem->setVariables(dummyVariables));
         iDynTree::assertTrue(m_problem->evaluateCostFunction(dummyCost));
@@ -275,7 +277,17 @@ public:
         iDynTree::assertTrue(m_problem->evaluateCostHessian(dummyMatrix));
 //        std::cerr << "Cost Hessian" << std::endl << dummyMatrix.toString() << std::endl << std::endl;
         iDynTree::assertTrue(m_problem->evaluateConstraints(dummy1));
-        iDynTree::assertTrue(m_problem->evaluateConstraintsJacobian(dummyMatrix));
+        jacobian.resize(m_problem->numberOfConstraints(), m_problem->numberOfVariables());
+        jacobian.zero();
+        iDynTree::assertTrue(m_problem->evaluateConstraintsJacobian(jacobian));
+        dummyMatrix.resize(jacobian.rows(), jacobian.cols());
+        dummyMatrix.zero();
+
+        for (size_t i =0; i < nnzeroRows.size(); ++i){
+            jacobian(nnzeroRows[i], nnzeroCols[i]) = 0;
+        }
+
+        iDynTree::assertMatrixAreEqual(dummyMatrix, jacobian, iDynTree::DEFAULT_TOL, "", 0); //check the sparsity structure
 //        std::cerr << "Cost Jacobian" << std::endl << dummyMatrix.toString() << std::endl << std::endl;
         //not evaluating the constraint hessian for the moment
 
