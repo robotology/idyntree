@@ -13,8 +13,8 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_INTEGRATOR_H
 #define IDYNTREE_OPTIMALCONTROL_INTEGRATOR_H
 
-#include "iDynTree/Core/VectorDynSize.h"
-#include "iDynTree/Core/MatrixDynSize.h"
+#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/MatrixDynSize.h>
 #include <vector>
 #include <string>
 #include <memory>

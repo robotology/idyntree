@@ -22,25 +22,53 @@ namespace iDynTree {
 
     namespace optimalcontrol {
 
-    /**
-     * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-     * \ingroup iDynTreeExperimental
-     */
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
 
+        /**
+         * @brief The Cost virtual class definition.
+         * Publicly inherit from this class to specify a Cost to be used in a optimal control problem.
+         */
         class Cost {
         public:
 
+            /**
+             * @brief Cost constructor
+             * @param[in] costName Univocal name of the cost.
+             */
             Cost(const std::string& costName);
 
             virtual ~Cost();
 
+            /**
+             * @brief Get the name of the cost
+             * @return The name of the cost
+             */
             const std::string& name() const; //the name must not be changed
 
+            /**
+             * @brief Evaluate the cost function.
+             * @param[in] time The time at which the cost is evaluated.
+             * @param[in] state The state value with which the cost has to be evaluated.
+             * @param[in] control The control value with which the cost has to be evaluated.
+             * @param[out] costValue The cost value given the above inputs.
+             * @return True if successfull, false otherwise.
+             */
             virtual bool costEvaluation(double time,
                                         const iDynTree::VectorDynSize& state,
                                         const iDynTree::VectorDynSize& control,
                                         double& costValue) = 0;
 
+            /**
+             * @brief costFirstPartialDerivativeWRTState
+             * @param time
+             * @param state
+             * @param control
+             * @param partialDerivative
+             * @return
+             */
             virtual bool costFirstPartialDerivativeWRTState(double time,
                                                             const iDynTree::VectorDynSize& state,
                                                             const iDynTree::VectorDynSize& control,

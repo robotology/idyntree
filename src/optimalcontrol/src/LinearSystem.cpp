@@ -10,8 +10,8 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/LinearSystem.h"
-#include "iDynTree/Controller.h"
+#include <iDynTree/LinearSystem.h>
+#include <iDynTree/Controller.h>
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>

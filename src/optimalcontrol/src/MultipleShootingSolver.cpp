@@ -10,11 +10,11 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/OCSolvers/MultipleShootingSolver.h"
+#include <iDynTree/OCSolvers/MultipleShootingSolver.h>
 
-#include "iDynTree/OptimalControlProblem.h"
-#include "iDynTree/DynamicalSystem.h"
-#include "iDynTree/Integrator.h"
+#include <iDynTree/OptimalControlProblem.h>
+#include <iDynTree/DynamicalSystem.h>
+#include <iDynTree/Integrator.h>
 #include <iDynTree/TimeRange.h>
 
 #include <iDynTree/Core/VectorDynSize.h>

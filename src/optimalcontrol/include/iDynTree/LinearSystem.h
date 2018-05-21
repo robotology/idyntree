@@ -13,7 +13,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_LINEARSYSTEM_H
 #define IDYNTREE_OPTIMALCONTROL_LINEARSYSTEM_H
 
-#include "DynamicalSystem.h"
+#include <iDynTree/DynamicalSystem.h>
 
 #include <vector>
 namespace iDynTree {

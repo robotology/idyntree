@@ -10,7 +10,7 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/Controller.h"
+#include <iDynTree/Controller.h>
 
 namespace iDynTree {
     namespace optimalcontrol {
@@ -22,7 +22,7 @@ namespace iDynTree {
     Controller::~Controller()
     {}
 
-    bool Controller::setStateFeedback(const double t, const VectorDynSize &stateFeedback){
+    bool Controller::setStateFeedback(double time, const VectorDynSize &stateFeedback){
         return false;
     }
 

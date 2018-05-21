@@ -11,8 +11,8 @@
  */
 
 #include <iDynTree/Core/VectorDynSize.h>
-#include "iDynTree/Optimizer.h"
-#include "iDynTree/Core/Utils.h"
+#include <iDynTree/Optimizer.h>
+#include <iDynTree/Core/Utils.h>
 
 namespace iDynTree {
     namespace optimization {

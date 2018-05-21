@@ -13,7 +13,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_IMPLICITTRAPEZOIDAL_H
 #define IDYNTREE_OPTIMALCONTROL_IMPLICITTRAPEZOIDAL_H
 
-#include "iDynTree/Integrators/FixedStepIntegrator.h"
+#include <iDynTree/Integrators/FixedStepIntegrator.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

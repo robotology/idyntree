@@ -13,10 +13,10 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_RK4_H
 #define IDYNTREE_OPTIMALCONTROL_RK4_H
 
-#include "iDynTree/Integrators/FixedStepIntegrator.h"
-#include "Eigen/Sparse"
-#include "Eigen/Dense"
-#include "iDynTree/Core/VectorDynSize.h"
+#include <iDynTree/Integrators/FixedStepIntegrator.h>
+#include <Eigen/Sparse>
+#include <Eigen/Dense>
+#include <iDynTree/Core/VectorDynSize.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

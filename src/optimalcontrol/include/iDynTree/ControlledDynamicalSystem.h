@@ -13,8 +13,8 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_CONTROLLEDDYNAMICALSYSTEM_H
 #define IDYNTREE_OPTIMALCONTROL_CONTROLLEDDYNAMICALSYSTEM_H
 
-#include "iDynTree/DynamicalSystem.h"
-#include "iDynTree/Controller.h"
+#include <iDynTree/DynamicalSystem.h>
+#include <iDynTree/Controller.h>
 
 #include <memory>
 
@@ -22,6 +22,10 @@ namespace iDynTree {
     class VectorDynSize;
     namespace optimalcontrol {
 
+        /**
+         * @brief The ControlledDynamicalSystem class allows to easily connect a DynamicalSystem with a Controller.
+         * It defines a controlled dynamical system that can be integrated using an Integrator class.
+         */
         class ControlledDynamicalSystem {
         public:
             ControlledDynamicalSystem();
@@ -30,10 +34,27 @@ namespace iDynTree {
 
             ~ControlledDynamicalSystem();
 
+            /**
+             * @brief Set the DynamicalSystem pointer.
+             * The usePreviousController flag allows to use again the controller stored in memory after a previous call to setController. This allow to call the method setController before setting the dynamical system.
+             * @param[in] autonomousSystem The DynamicalSystem pointer.
+             * @param usePreviousController A flag specifying whether the previously specified controller should be used. Default is false.
+             * @return True if successfull. Possible sources of failures: empty pointer, usePreviouController is true and the dynamicalSystem and the previous controller are not compatible.
+             */
             bool setDynamicalSystem(std::shared_ptr<DynamicalSystem> autonomousSystem, bool usePreviousController = false);
 
+            /**
+             * @brief Set the controller pointer.
+             * @param[in] controller Controller pointer.
+             * @return True if successfull. Possible causes of failures: empty pointer, the controller is not compatible with the already specified dynamical system.
+             */
             bool setController(std::shared_ptr<Controller> controller);
 
+            /**
+             * @brief Returns a pointer to a DynamicalSystem object.
+             * The DynamicalSystem pointer can be used inside an Integrator.
+             * @return A pointer to a DynamicalSystem object.
+             */
             std::shared_ptr<DynamicalSystem> asDynamicalSystem();
 
         private:

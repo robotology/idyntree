@@ -13,8 +13,8 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_FIXEDSTEPINTEGRATOR_H
 #define IDYNTREE_OPTIMALCONTROL_FIXEDSTEPINTEGRATOR_H
 
-#include "iDynTree/Integrator.h"
-#include "iDynTree/Core/VectorDynSize.h"
+#include <iDynTree/Integrator.h>
+#include <iDynTree/Core/VectorDynSize.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

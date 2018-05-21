@@ -217,7 +217,7 @@ int main () {
 
 
     // Problem description
-    iDynTree::assertTrue(problem->setTimeHorizon(0.0, 10.0));
+    iDynTree::assertTrue(problem->setTimeHorizon(0.0, 1.0));
     iDynTree::assertTrue(problem->setDynamicalSystemConstraint(doubleIntegrator));
     iDynTree::assertTrue(problem->addLagrangeTerm(1.0, cost));
     bound(0) = 0.8;
@@ -225,7 +225,7 @@ int main () {
     bound(0) = -0.9;
     iDynTree::assertTrue(problem->setControlLowerBound(bound));
 
-    iDynTree::assertTrue(group->addConstraint(constraint, iDynTree::optimalcontrol::TimeRange(6.0, 10.0)));
+    iDynTree::assertTrue(group->addConstraint(constraint, iDynTree::optimalcontrol::TimeRange(0.6, 1.0)));
     iDynTree::assertTrue(problem->addGroupOfConstraints(group));
 
     // Multiple Shooting settings
@@ -258,9 +258,9 @@ int main () {
     std::cerr << "Last state: " << states.back().toString() << std::endl;
     std::cerr << "First control: " << controls.front().toString() << std::endl;
     std::cerr << "Last control: " << controls.back().toString() << std::endl;
-    std::cerr << "Elapsed time: " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 << std::endl;
+    std::cerr << "Elapsed time: " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 <<" ms."<<std::endl;
 
-    for (int i=0; i < 10; ++i){
+    for (int i=0; i < 2; ++i){
 
         std::cerr << "------------" << std::endl;
 
@@ -279,7 +279,7 @@ int main () {
         std::cerr << "Last state: " << states.back().toString() << std::endl;
         std::cerr << "First control: " << controls.front().toString() << std::endl;
         std::cerr << "Last control: " << controls.back().toString() << std::endl;
-        std::cerr << "Elapsed time: " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 << std::endl;
+        std::cerr << "Elapsed time: " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 <<" ms."<<std::endl;
     }
 
     return EXIT_SUCCESS;

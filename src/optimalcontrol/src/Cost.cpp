@@ -10,8 +10,8 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/Cost.h"
-#include "iDynTree/Core/Utils.h"
+#include <iDynTree/Cost.h>
+#include <iDynTree/Core/Utils.h>
 #include <sstream>
 
 namespace iDynTree {

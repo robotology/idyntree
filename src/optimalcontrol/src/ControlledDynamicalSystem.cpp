@@ -236,6 +236,11 @@ namespace iDynTree {
 
         bool ControlledDynamicalSystem::setController(std::shared_ptr<Controller> controller)
         {
+            if (!controller) {
+                reportError("ControlledDynamicalSystem", "setController", "Empty controller pointer.");
+                return false;
+            }
+
             if (m_pimpl->controlledSystem->stateSpaceSize() != 0)
                 if (!(m_pimpl->controlledSystem->setController(m_pimpl->lastController)))
                     return false;

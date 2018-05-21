@@ -13,7 +13,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_MULTIBODYSYSTEM_H
 #define IDYNTREE_OPTIMALCONTROL_MULTIBODYSYSTEM_H
 
-#include "DynamicalSystem.h"
+#include <iDynTree/DynamicalSystem.h>
 
 namespace iDynTree {
 

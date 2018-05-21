@@ -13,7 +13,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_FORWARDEULER_H
 #define IDYNTREE_OPTIMALCONTROL_FORWARDEULER_H
 
-#include "iDynTree/Integrators/FixedStepIntegrator.h"
+#include <iDynTree/Integrators/FixedStepIntegrator.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

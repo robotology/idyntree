@@ -10,14 +10,14 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/Core/VectorDynSize.h"
-#include "iDynTree/Core/MatrixDynSize.h"
-#include "iDynTree/Core/Utils.h"
-#include "iDynTree/ConstraintsGroup.h"
-#include "iDynTree/Constraint.h"
-#include "iDynTree/TimeRange.h"
-#include "iDynTree/Core/EigenHelpers.h"
-#include "Eigen/Dense"
+#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/Core/Utils.h>
+#include <iDynTree/ConstraintsGroup.h>
+#include <iDynTree/Constraint.h>
+#include <iDynTree/TimeRange.h>
+#include <iDynTree/Core/EigenHelpers.h>
+#include <Eigen/Dense>
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
@@ -149,13 +149,13 @@ namespace optimalcontrol {
         {
             if (timeRange == TimeRange::AnyTime()){
                 if (numberOfConstraints() != 1){
-                    reportError("ConstraintsGroup", "addConstraint",
+                    reportError("ConstraintsGroup", "updateTimeRange",
                                 "Only one constraint is allowed in a group if the timeRange is AnyTime.");
                     return false;
                 }
             } else {
                 if (!timeRange.isValid()){
-                    reportError("ConstraintsGroup", "addConstraint", "Invalid timeRange.");
+                    reportError("ConstraintsGroup", "updateTimeRange", "Invalid timeRange.");
                     return false;
                 }
             }
@@ -223,7 +223,7 @@ namespace optimalcontrol {
             return true;
         }
 
-        std::vector<TimeRange>& ConstraintsGroup::getTimeRanges() const
+        std::vector<TimeRange>& ConstraintsGroup::getTimeRanges()
         {
             if (m_pimpl->timeRanges.size() != numberOfConstraints())
                 m_pimpl->timeRanges.resize(numberOfConstraints());

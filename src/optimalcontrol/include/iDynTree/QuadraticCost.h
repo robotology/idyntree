@@ -13,7 +13,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_QUADRATICCOST_H
 #define IDYNTREE_OPTIMALCONTROL_QUADRATICCOST_H
 
-#include "Cost.h"
+#include <iDynTree/Cost.h>
 
 #include <iDynTree/Core/MatrixDynSize.h>
 

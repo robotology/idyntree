@@ -10,9 +10,9 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/Integrators/RK4.h"
-#include "iDynTree/DynamicalSystem.h"
-#include "iDynTree/Core/EigenHelpers.h"
+#include <iDynTree/Integrators/RK4.h>
+#include <iDynTree/DynamicalSystem.h>
+#include <iDynTree/Core/EigenHelpers.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

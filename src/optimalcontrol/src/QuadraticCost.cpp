@@ -10,7 +10,7 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/QuadraticCost.h"
+#include <iDynTree/QuadraticCost.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
 

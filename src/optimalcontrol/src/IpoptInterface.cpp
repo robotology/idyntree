@@ -22,8 +22,8 @@
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
-#include "iDynTree/Optimizers/IpoptInterface.h"
-#include "iDynTree/Core/Utils.h"
+#include <iDynTree/Optimizers/IpoptInterface.h>
+#include <iDynTree/Core/Utils.h>
 
 #include <cassert>
 #include <ostream>

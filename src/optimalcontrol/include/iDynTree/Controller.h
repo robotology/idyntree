@@ -19,27 +19,50 @@ namespace iDynTree {
 
     class VectorDynSize;
 
-namespace optimalcontrol{
+    namespace optimalcontrol{
 
-/**
- * @warning This class is still in active development, and so API interface can change between iDynTree versions.
- * \ingroup iDynTreeExperimental
- */
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
 
-    class Controller{
-        size_t m_controllerSize;
-    public:
-        Controller(size_t controlSpaceSize);
+        /**
+         * @brief Class describing a generic controller.
+         */
+        class Controller{
+            size_t m_controllerSize;
+        public:
+            /**
+             * @brief Controller's constructor
+             * @param[in] controlSpaceSize The control space dimension.
+             */
+            Controller(size_t controlSpaceSize);
 
-        virtual ~Controller();
+            virtual ~Controller();
 
-        virtual bool doControl(VectorDynSize& controllerOutput) = 0;
+            /**
+             * @brief Evaluate the control action
+             * @param[out] controllerOutput The output of the controller.
+             * @return True if successfull.
+             */
+            virtual bool doControl(VectorDynSize& controllerOutput) = 0;
 
-        virtual bool setStateFeedback(const double t, const VectorDynSize& stateFeedback);
+            /**
+             * @brief Set the state feedback to be used inside the controller.
+             * If the controller depends upon some outputs of the dynamical system, those outputs should be computed inside this method using the state and time specified.
+             * @param[in] time The time in which the feedback is obtained.
+             * @param[in] stateFeedback The state feedback
+             * @return True if successfull. In this specific class, this methods always outputs false.
+             */
+            virtual bool setStateFeedback(double time, const VectorDynSize& stateFeedback);
 
-        size_t controlSpaceSize();
-    };
-}
+            /**
+             * @brief The dimension of control space.
+             * @return The dimension of control space.
+             */
+            size_t controlSpaceSize();
+        };
+    }
 }
 
 

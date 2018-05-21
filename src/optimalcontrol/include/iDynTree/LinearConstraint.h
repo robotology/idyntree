@@ -13,7 +13,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_LINEARCONSTRAINT_H
 #define IDYNTREE_OPTIMALCONTROL_LINEARCONSTRAINT_H
 
-#include "Constraint.h"
+#include <iDynTree/Constraint.h>
 
 #include <iDynTree/Core/MatrixDynSize.h>
 
