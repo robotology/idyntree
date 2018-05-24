@@ -86,5 +86,10 @@ namespace iDynTree
         return ret;
     }
 
+    bool checkDoublesAreEqual(const double &val1, const double &val2, double tol)
+    {
+        return (fabs(val1-val2) < tol);
+    }
+
 
 }

@@ -18,6 +18,7 @@
 #include <iDynTree/TimeRange.h>
 
 #include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/Utils.h>
 
 #include <Eigen/Dense>
 #include <iDynTree/Core/EigenHelpers.h>
@@ -319,9 +320,9 @@ namespace iDynTree {
             newMeshPoint.type = MeshPointType::Control;
 
             while (time <= endTime){
-                if (time == initTime)
+                if (checkDoublesAreEqual(time,initTime))//(time == initTime)
                     newMeshPoint.origin = MeshPointOrigin::FirstPoint();
-                else if (time == endTime)
+                else if (checkDoublesAreEqual(time,endTime))//(time == endTime)
                     newMeshPoint.origin = MeshPointOrigin::LastPoint();
                 else
                     newMeshPoint.origin = MeshPointOrigin::Control();

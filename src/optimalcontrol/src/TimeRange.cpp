@@ -103,7 +103,7 @@ namespace iDynTree {
             if (this ->m_anyTime)
                 return false;
 
-            return ((this->m_initTime == rhs.initTime())&&(this->m_endTime == rhs.endTime()));
+            return (checkDoublesAreEqual(this->m_initTime, rhs.initTime()) && checkDoublesAreEqual(this->m_endTime, rhs.endTime()));//((this->m_initTime == rhs.initTime())&&(this->m_endTime == rhs.endTime()));
         }
 
         bool TimeRange::operator!=(const TimeRange &rhs) const
@@ -120,12 +120,16 @@ namespace iDynTree {
         {
             if (m_anyTime)
                 return true;
+
+            if (isInstant())
+                return checkDoublesAreEqual(m_initTime, time);
+
             return ((m_initTime <= time) && (m_endTime >= time));
         }
 
         bool TimeRange::isInstant() const
         {
-            return (!m_anyTime) && (m_initTime == m_endTime);
+            return (!m_anyTime) && checkDoublesAreEqual(m_initTime, m_endTime);
         }
 
     }
