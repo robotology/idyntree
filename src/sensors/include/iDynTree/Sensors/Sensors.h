@@ -144,7 +144,8 @@ namespace iDynTree {
         virtual bool updateIndices(const Model & model) = 0;
 
         // Deprecated
-        virtual bool IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead") updateIndeces(const Model & model)
+        IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead")
+        virtual bool updateIndeces(const Model & model)
         {
             return updateIndices(model);
         }
