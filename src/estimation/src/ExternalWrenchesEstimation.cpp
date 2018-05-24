@@ -601,13 +601,17 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
    // Now we compute the A matrix
    computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(model,traversal,unknownWrenches,jointPos,subModelIndex,bufs);
 
-   // Now we compute the pseudo inverse
-   pseudoInverse(toEigen(bufs.A[subModelIndex]),
-                 toEigen(bufs.pinvA[subModelIndex]),
-                 tol);
+   // If A has no unkowns then pseudoInverse can not be computed
+   // In that case, we do not compute the x vector because it will have zero elements 
+   if (bufs.A[subModelIndex].rows() > 0 && bufs.A[subModelIndex].cols() > 0) {
+       // Now we compute the pseudo inverse
+       pseudoInverse(toEigen(bufs.A[subModelIndex]),
+                     toEigen(bufs.pinvA[subModelIndex]),
+                     tol);
 
-   // Now we compute the unknowns
-   toEigen(bufs.x[subModelIndex]) = toEigen(bufs.pinvA[subModelIndex])*toEigen(bufs.b[subModelIndex]);
+       // Now we compute the unknowns
+       toEigen(bufs.x[subModelIndex]) = toEigen(bufs.pinvA[subModelIndex])*toEigen(bufs.b[subModelIndex]);
+   }
 
    // We copy the estimated unknowns in the outputContactWrenches
    // Note that the logic of conversion between input/output contacts should be
@@ -653,13 +657,17 @@ bool estimateExternalWrenches(const Model& model,
         // Now we compute the A matrix
         computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(model,subModelTraversal,unknownWrenches,jointPos,sm,bufs);
 
-        // Now we compute the pseudo inverse
-        pseudoInverse(toEigen(bufs.A[sm]),
-                      toEigen(bufs.pinvA[sm]),
-                      tol);
+        // If A has no unkowns then pseudoInverse can not be computed
+        // In that case, we do not compute the x vector because it will have zero elements 
+        if (bufs.A[sm].rows() > 0 && bufs.A[sm].cols() > 0) {
+            // Now we compute the pseudo inverse
+            pseudoInverse(toEigen(bufs.A[sm]),
+                          toEigen(bufs.pinvA[sm]),
+                          tol);
 
-        // Now we compute the unknowns
-        toEigen(bufs.x[sm]) = toEigen(bufs.pinvA[sm])*toEigen(bufs.b[sm]);
+            // Now we compute the unknowns
+            toEigen(bufs.x[sm]) = toEigen(bufs.pinvA[sm])*toEigen(bufs.b[sm]);
+        }
 
         // Check if there are any nan in the estimation results
         bool someResultIsNan = false;
