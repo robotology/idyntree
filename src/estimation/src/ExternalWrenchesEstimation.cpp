@@ -603,7 +603,7 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
 
    // If A has no unkowns then pseudoInverse can not be computed
    // In that case, we do not compute the x vector because it will have zero elements 
-   if (bufs.A[sm].rows() > 0 && bufs.A[sm].cols() > 0) {
+   if (bufs.A[subModelIndex].rows() > 0 && bufs.A[subModelIndex].cols() > 0) {
        // Now we compute the pseudo inverse
        pseudoInverse(toEigen(bufs.A[subModelIndex]),
                      toEigen(bufs.pinvA[subModelIndex]),
