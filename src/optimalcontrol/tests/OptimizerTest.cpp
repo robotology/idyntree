@@ -205,10 +205,10 @@ int main(){
         ASSERT_IS_TRUE(ipoptSolver.solve());
         double optimalCost;
         ASSERT_IS_TRUE(ipoptSolver.getOptimalCost(optimalCost));
-        iDynTree::assertDoubleAreEqual(optimalCost, problem->expectedMinimum(), 1e-5);
+        ASSERT_EQUAL_DOUBLE_TOL(optimalCost, problem->expectedMinimum(), 1e-5);
         iDynTree::VectorDynSize solution;
         ASSERT_IS_TRUE(ipoptSolver.getPrimalVariables(solution));
-        iDynTree::assertVectorAreEqual(solution, problem->expectedVariables(), 1e-5, "", 1);
+        ASSERT_EQUAL_VECTOR_TOL(solution, problem->expectedVariables(), 1e-5);
         ASSERT_IS_TRUE(ipoptSolver.getDualVariables(dummy1, dummy2, dummy3));
     }
     return EXIT_SUCCESS;

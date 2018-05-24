@@ -23,7 +23,6 @@
 #include <Eigen/Dense>
 #include <iDynTree/Core/EigenHelpers.h>
 #include <string>
-#include <cassert>
 
 class TestSystem : public iDynTree::optimalcontrol::DynamicalSystem {
 public:
@@ -34,7 +33,7 @@ public:
         if (state.size() != 2)
             return false;
 
-        assert(stateDynamics.size() == 2);
+        ASSERT_IS_TRUE(stateDynamics.size() == 2);
 
         stateDynamics(0) = state(0) + controlInput()(0) + 2 * controlInput()(1);
         stateDynamics(1) = state(1) + controlInput()(0) + 2 * controlInput()(2);
@@ -47,7 +46,7 @@ public:
         if (state.size() != 2)
             return false;
 
-        assert((dynamicsDerivative.rows() == 2) && (dynamicsDerivative.cols() == 2));
+        ASSERT_IS_TRUE((dynamicsDerivative.rows() == 2) && (dynamicsDerivative.cols() == 2));
 
         dynamicsDerivative.zero();
         dynamicsDerivative(0, 0) = 1.0;
@@ -61,7 +60,7 @@ public:
         if (state.size() != 2)
             return false;
 
-        assert((dynamicsDerivative.rows() == 2) && (dynamicsDerivative.cols() == 3));
+        ASSERT_IS_TRUE((dynamicsDerivative.rows() == 2) && (dynamicsDerivative.cols() == 3));
 
         dynamicsDerivative.zero();
         dynamicsDerivative(0, 0) = 1.0;
@@ -101,7 +100,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert(constraint.size() == 1);
+        ASSERT_IS_TRUE(constraint.size() == 1);
 
         constraint(0) = control(0);
 
@@ -112,7 +111,7 @@ public:
                                             const iDynTree::VectorDynSize& state,
                                             const iDynTree::VectorDynSize& control,
                                             iDynTree::MatrixDynSize& jacobian) override {
-        assert((jacobian.rows() == 1) && (jacobian.cols() == 2));
+        ASSERT_IS_TRUE((jacobian.rows() == 1) && (jacobian.cols() == 2));
         jacobian.zero();
         return true;
     }
@@ -121,7 +120,7 @@ public:
                                               const iDynTree::VectorDynSize& state,
                                               const iDynTree::VectorDynSize& control,
                                               iDynTree::MatrixDynSize& jacobian) override {
-        assert((jacobian.rows() == 1) && (jacobian.cols() == 3));
+        ASSERT_IS_TRUE((jacobian.rows() == 1) && (jacobian.cols() == 3));
         jacobian.zero();
         jacobian(0,0) = 1.0;
 
@@ -172,7 +171,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert(partialDerivative.size() == 2);
+        ASSERT_IS_TRUE(partialDerivative.size() == 2);
 
         partialDerivative(0) = 20 * state(0);
         partialDerivative(1) = 20 * state(1);
@@ -189,7 +188,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert(partialDerivative.size() == 3);
+        ASSERT_IS_TRUE(partialDerivative.size() == 3);
 
         partialDerivative(0) = 2 * control(0);
         partialDerivative(1) = 2 * control(1);
@@ -207,7 +206,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert((partialDerivative.rows() == 2) && (partialDerivative.cols() == 2));
+        ASSERT_IS_TRUE((partialDerivative.rows() == 2) && (partialDerivative.cols() == 2));
 
         partialDerivative.zero();
         partialDerivative(0,0) = 20;
@@ -224,7 +223,7 @@ public:
           if (control.size() != 3)
               return false;
 
-          assert((partialDerivative.rows() == 3) && (partialDerivative.cols() == 3));
+          ASSERT_IS_TRUE((partialDerivative.rows() == 3) && (partialDerivative.cols() == 3));
 
           partialDerivative.zero();
           partialDerivative(0, 0) = 2;
@@ -242,7 +241,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert((partialDerivative.rows() == 2) && (partialDerivative.cols() == 3));
+        ASSERT_IS_TRUE((partialDerivative.rows() == 2) && (partialDerivative.cols() == 3));
 
         partialDerivative.zero();
 
@@ -298,44 +297,44 @@ int main() {
     iDynTree::toEigen(ctrlSum) = iDynTree::toEigen(expectedCtrlGradient1) + iDynTree::toEigen(expectedCtrlGradient2);
 
     ASSERT_IS_TRUE(problem.costsEvaluation(4.0, testState, testControl, obtainedCost));
-    iDynTree::assertDoubleAreEqual(expectedCost1, obtainedCost);
+    ASSERT_EQUAL_DOUBLE(expectedCost1, obtainedCost);
 
     ASSERT_IS_TRUE(problem.costsFirstPartialDerivativeWRTState(4.0, testState, testControl, obtainedGradient));
-    iDynTree::assertVectorAreEqual(expectedGradient1, obtainedGradient,iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_VECTOR_TOL(expectedGradient1, obtainedGradient,iDynTree::DEFAULT_TOL);
 
     ASSERT_IS_TRUE(problem.costsFirstPartialDerivativeWRTControl(4.0, testState, testControl, obtainedCtrlGradient));
-    iDynTree::assertVectorAreEqual(expectedCtrlGradient1, obtainedCtrlGradient,iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_VECTOR_TOL(expectedCtrlGradient1, obtainedCtrlGradient,iDynTree::DEFAULT_TOL);
 
     ASSERT_IS_TRUE(problem.costsEvaluation(5.0, testState, testControl, obtainedCost));
-    iDynTree::assertDoubleAreEqual(expectedCost1 + expectedCost2, obtainedCost);
+    ASSERT_EQUAL_DOUBLE(expectedCost1 + expectedCost2, obtainedCost);
 
     ASSERT_IS_TRUE(problem.costsFirstPartialDerivativeWRTState(5.0, testState, testControl, obtainedGradient));
-    iDynTree::assertVectorAreEqual(gradientSum, obtainedGradient,iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_VECTOR_TOL(gradientSum, obtainedGradient,iDynTree::DEFAULT_TOL);
 
     ASSERT_IS_TRUE(problem.costsFirstPartialDerivativeWRTControl(5.0, testState, testControl, obtainedCtrlGradient));
-    iDynTree::assertVectorAreEqual(ctrlSum, obtainedCtrlGradient,iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_VECTOR_TOL(ctrlSum, obtainedCtrlGradient,iDynTree::DEFAULT_TOL);
 
     // Changing time horizon
     ASSERT_IS_TRUE(problem.setTimeHorizon(1.0, 5.5));
 
     //Test after changing time range
     ASSERT_IS_TRUE(problem.costsEvaluation(5.0, testState, testControl, obtainedCost));
-    iDynTree::assertDoubleAreEqual(expectedCost1, obtainedCost);
+    ASSERT_EQUAL_DOUBLE(expectedCost1, obtainedCost);
 
     ASSERT_IS_TRUE(problem.costsFirstPartialDerivativeWRTState(5.0, testState, testControl, obtainedGradient));
-    iDynTree::assertVectorAreEqual(expectedGradient1, obtainedGradient,iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_VECTOR_TOL(expectedGradient1, obtainedGradient,iDynTree::DEFAULT_TOL);
 
     ASSERT_IS_TRUE(problem.costsFirstPartialDerivativeWRTControl(5.0, testState, testControl, obtainedCtrlGradient));
-    iDynTree::assertVectorAreEqual(expectedCtrlGradient1, obtainedCtrlGradient,iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_VECTOR_TOL(expectedCtrlGradient1, obtainedCtrlGradient,iDynTree::DEFAULT_TOL);
 
     ASSERT_IS_TRUE(problem.costsEvaluation(5.5, testState, testControl, obtainedCost));
-    iDynTree::assertDoubleAreEqual(expectedCost1 + expectedCost2, obtainedCost);
+    ASSERT_EQUAL_DOUBLE(expectedCost1 + expectedCost2, obtainedCost);
 
     ASSERT_IS_TRUE(problem.costsFirstPartialDerivativeWRTState(5.5, testState, testControl, obtainedGradient));
-    iDynTree::assertVectorAreEqual(gradientSum, obtainedGradient,iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_VECTOR_TOL(gradientSum, obtainedGradient,iDynTree::DEFAULT_TOL);
 
     ASSERT_IS_TRUE(problem.costsFirstPartialDerivativeWRTControl(5.5, testState, testControl, obtainedCtrlGradient));
-    iDynTree::assertVectorAreEqual(ctrlSum, obtainedCtrlGradient,iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_VECTOR_TOL(ctrlSum, obtainedCtrlGradient,iDynTree::DEFAULT_TOL);
 
     //---------Checking Constraints
     iDynTree::VectorDynSize expectedConstraints(2), obtainedConstraints;
@@ -348,11 +347,11 @@ int main() {
     expectedConstraints(0) = testControl(0);
     expectedConstraints(1) = testControl(0);
     ASSERT_IS_TRUE(problem.constraintsEvaluation(4.0, testState, testControl, obtainedConstraints));
-    iDynTree::assertVectorAreEqual(expectedConstraints, obtainedConstraints, iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_VECTOR_TOL(expectedConstraints, obtainedConstraints, iDynTree::DEFAULT_TOL);
     ASSERT_IS_TRUE(problem.constraintsJacobianWRTState(4.0, testState, testControl, obtainedStatejac));
-    iDynTree::assertMatrixAreEqual(expectedStatejac, obtainedStatejac, iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_MATRIX_TOL(expectedStatejac, obtainedStatejac, iDynTree::DEFAULT_TOL);
     ASSERT_IS_TRUE(problem.constraintsJacobianWRTControl(4.0, testState, testControl, obtainedControlJac));
-    iDynTree::assertMatrixAreEqual(expectedControlJac, obtainedControlJac, iDynTree::DEFAULT_TOL, "", 1);
+    ASSERT_EQUAL_MATRIX_TOL(expectedControlJac, obtainedControlJac, iDynTree::DEFAULT_TOL);
     testControl(0) = 6.0;
     ASSERT_IS_TRUE(problem.isFeasiblePoint(3.0, testState, testControl));
     ASSERT_IS_FALSE(problem.isFeasiblePoint(4.0, testState, testControl));

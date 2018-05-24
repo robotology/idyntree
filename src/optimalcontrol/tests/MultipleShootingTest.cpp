@@ -27,7 +27,6 @@
 #include <Eigen/Dense>
 #include <iDynTree/Core/EigenHelpers.h>
 #include <string>
-#include <cassert>
 
 class TestSystem : public iDynTree::optimalcontrol::DynamicalSystem {
 public:
@@ -38,7 +37,7 @@ public:
         if (state.size() != 2)
             return false;
 
-        assert(stateDynamics.size() == 2);
+        ASSERT_IS_TRUE(stateDynamics.size() == 2);
 
         stateDynamics(0) = state(0) + controlInput()(0) + 2 * controlInput()(1);
         stateDynamics(1) = state(1) + controlInput()(0) + 2 * controlInput()(2);
@@ -51,7 +50,7 @@ public:
         if (state.size() != 2)
             return false;
 
-        assert((dynamicsDerivative.rows() == 2) && (dynamicsDerivative.cols() == 2));
+        ASSERT_IS_TRUE((dynamicsDerivative.rows() == 2) && (dynamicsDerivative.cols() == 2));
 
         dynamicsDerivative.zero();
         dynamicsDerivative(0, 0) = 1.0;
@@ -65,7 +64,7 @@ public:
         if (state.size() != 2)
             return false;
 
-        assert((dynamicsDerivative.rows() == 2) && (dynamicsDerivative.cols() == 3));
+        ASSERT_IS_TRUE((dynamicsDerivative.rows() == 2) && (dynamicsDerivative.cols() == 3));
 
         dynamicsDerivative.zero();
         dynamicsDerivative(0, 0) = 1.0;
@@ -84,14 +83,14 @@ public:
     {
         iDynTree::VectorDynSize upperBound(1);
         upperBound(0) = 10;
-        assert(setUpperBound(upperBound));
+        ASSERT_IS_TRUE(setUpperBound(upperBound));
     }
     TestConstraint(const std::string& name)
         :iDynTree::optimalcontrol::Constraint(1, name)
     {
         iDynTree::VectorDynSize upperBound(1);
         upperBound(0) = 10;
-        assert(setUpperBound(upperBound));
+        ASSERT_IS_TRUE(setUpperBound(upperBound));
     }
     virtual ~TestConstraint() override;
 
@@ -105,7 +104,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert(constraint.size() == 1);
+        ASSERT_IS_TRUE(constraint.size() == 1);
 
         constraint(0) = control(0);
 
@@ -116,7 +115,7 @@ public:
                                             const iDynTree::VectorDynSize& state,
                                             const iDynTree::VectorDynSize& control,
                                             iDynTree::MatrixDynSize& jacobian) override {
-        assert((jacobian.rows() == 1) && (jacobian.cols() == 2));
+        ASSERT_IS_TRUE((jacobian.rows() == 1) && (jacobian.cols() == 2));
         jacobian.zero();
         return true;
     }
@@ -125,7 +124,7 @@ public:
                                               const iDynTree::VectorDynSize& state,
                                               const iDynTree::VectorDynSize& control,
                                               iDynTree::MatrixDynSize& jacobian) override {
-        assert((jacobian.rows() == 1) && (jacobian.cols() == 3));
+        ASSERT_IS_TRUE((jacobian.rows() == 1) && (jacobian.cols() == 3));
         jacobian.zero();
         jacobian(0,0) = 1.0;
 
@@ -176,7 +175,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert(partialDerivative.size() == 2);
+        ASSERT_IS_TRUE(partialDerivative.size() == 2);
 
         partialDerivative(0) = 20 * state(0);
         partialDerivative(1) = 20 * state(1);
@@ -193,7 +192,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert(partialDerivative.size() == 3);
+        ASSERT_IS_TRUE(partialDerivative.size() == 3);
 
         partialDerivative(0) = 2 * control(0);
         partialDerivative(1) = 2 * control(1);
@@ -211,7 +210,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert((partialDerivative.rows() == 2) && (partialDerivative.cols() == 2));
+        ASSERT_IS_TRUE((partialDerivative.rows() == 2) && (partialDerivative.cols() == 2));
 
         partialDerivative.zero();
         partialDerivative(0,0) = 20;
@@ -228,7 +227,7 @@ public:
           if (control.size() != 3)
               return false;
 
-          assert((partialDerivative.rows() == 3) && (partialDerivative.cols() == 3));
+          ASSERT_IS_TRUE((partialDerivative.rows() == 3) && (partialDerivative.cols() == 3));
 
           partialDerivative.zero();
           partialDerivative(0, 0) = 2;
@@ -246,7 +245,7 @@ public:
         if (control.size() != 3)
             return false;
 
-        assert((partialDerivative.rows() == 2) && (partialDerivative.cols() == 3));
+        ASSERT_IS_TRUE((partialDerivative.rows() == 2) && (partialDerivative.cols() == 3));
 
         partialDerivative.zero();
 
@@ -271,7 +270,7 @@ public:
         iDynTree::MatrixDynSize dummyMatrix, jacobian;
         std::vector<size_t> dummy3, dummy4, nnzeroRows, nnzeroCols;
         double dummyCost;
-        assert(m_problem);
+        ASSERT_IS_TRUE(m_problem != nullptr);
         ASSERT_IS_TRUE(m_problem->prepare());
         dummyVariables.resize(m_problem->numberOfVariables());
         iDynTree::toEigen(dummyVariables).setConstant(1.0);
@@ -279,7 +278,7 @@ public:
         m_problem->getVariablesUpperBound(dummy1);
         m_problem->getVariablesLowerBound(dummy1);
         ASSERT_IS_TRUE(m_problem->getConstraintsJacobianInfo(nnzeroRows, nnzeroCols));
-        assert(nnzeroRows.size() == nnzeroCols.size());
+        ASSERT_IS_TRUE(nnzeroRows.size() == nnzeroCols.size());
 
         ASSERT_IS_TRUE(m_problem->getHessianInfo(dummy3, dummy4));
         ASSERT_IS_TRUE(m_problem->setVariables(dummyVariables));
@@ -299,7 +298,7 @@ public:
             jacobian(nnzeroRows[i], nnzeroCols[i]) = 0;
         }
 
-        iDynTree::assertMatrixAreEqual(dummyMatrix, jacobian, iDynTree::DEFAULT_TOL, "", 0); //check the sparsity structure
+        ASSERT_EQUAL_MATRIX_TOL(dummyMatrix, jacobian, iDynTree::DEFAULT_TOL); //check the sparsity structure
 //        std::cerr << "Cost Jacobian" << std::endl << dummyMatrix.toString() << std::endl << std::endl;
         //not evaluating the constraint hessian for the moment
 
@@ -307,7 +306,7 @@ public:
     }
 
     virtual bool getPrimalVariables(iDynTree::VectorDynSize &primalVariables) override {
-        assert(m_problem);
+        ASSERT_IS_TRUE(m_problem != nullptr);
         primalVariables.resize(m_problem->numberOfVariables());
         primalVariables.zero();
         return true;
@@ -316,7 +315,7 @@ public:
     virtual bool getDualVariables(iDynTree::VectorDynSize &constraintsMultipliers,
                                   iDynTree::VectorDynSize &lowerBoundsMultipliers,
                                   iDynTree::VectorDynSize &upperBoundsMultipliers) override {
-        assert(m_problem);
+        ASSERT_IS_TRUE(m_problem != nullptr);
         constraintsMultipliers.resize(m_problem->numberOfConstraints());
         lowerBoundsMultipliers.resize(m_problem->numberOfVariables());
         upperBoundsMultipliers.resize(m_problem->numberOfVariables());
@@ -329,7 +328,7 @@ public:
     }
 
     virtual bool getOptimalConstraintsValues(iDynTree::VectorDynSize &constraintsValues) override {
-        assert(m_problem);
+        ASSERT_IS_TRUE(m_problem != nullptr);
         constraintsValues.resize(m_problem->numberOfConstraints());
         constraintsValues.zero();
         return true;
@@ -385,7 +384,7 @@ int main(){
     for (size_t i = 0; i < controlTimings.size(); ++i){
         ASSERT_IS_TRUE((controlTimings[i] >= initTime) && (controlTimings[i] <= endTime));
         if (i > 0)
-            iDynTree::assertDoubleAreEqual((controlTimings[i] - controlTimings[i-1]), controlPeriod);
+            ASSERT_EQUAL_DOUBLE((controlTimings[i] - controlTimings[i-1]), controlPeriod);
     }
 
     ASSERT_IS_TRUE(solver.solve());

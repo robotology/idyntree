@@ -64,7 +64,7 @@ bool groupTest(){
 
     ASSERT_IS_TRUE(newGroup.isFeasibilePoint(1.5, dummyState, dummyControl));
     ASSERT_IS_TRUE(newGroup.evaluateConstraints(1.5, dummyState, dummyControl, result));
-    iDynTree::assertVectorAreEqual(result, expected, 1e-10,"",-1);
+    ASSERT_EQUAL_VECTOR_TOL(result, expected, 1e-10);
 
     dummyState(0) = -2.0;
     expected(0) = dummyState(0);
@@ -72,7 +72,7 @@ bool groupTest(){
 
     ASSERT_IS_TRUE(newGroup.isFeasibilePoint(0.5, dummyState, dummyControl));
     ASSERT_IS_TRUE(newGroup.evaluateConstraints(0.5, dummyState, dummyControl, result));
-    iDynTree::assertVectorAreEqual(result, expected, 1e-10,"",-1);
+    ASSERT_EQUAL_VECTOR_TOL(result, expected, 1e-10);
 
     return true;
 }

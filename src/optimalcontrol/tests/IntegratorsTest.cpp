@@ -167,7 +167,7 @@ void IntegratorTest1(Integrator &toBeTested) {
         t = initTime + dT*i;
         ASSERT_IS_TRUE(toBeTested.getSolution(t, sol));
         expected = x1 * std::exp(lambda1*(t - initTime));
-        assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
+        ASSERT_EQUAL_DOUBLE_TOL(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
     }
 
 }
@@ -185,9 +185,9 @@ void IntegratorTest2(Integrator &toBeTested) {
         t = initTime + dT*i;
         ASSERT_IS_TRUE(toBeTested.getSolution(t, sol));
         expected = x1 * std::exp(lambda1*(t - initTime));
-        assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
+        ASSERT_EQUAL_DOUBLE_TOL(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
         expected = x2 * std::exp(lambda2*(t - initTime));
-        assertDoubleAreEqual(expected, sol(1), std::abs(expected)*relTol); //up to the eight significative digit
+        ASSERT_EQUAL_DOUBLE_TOL(expected, sol(1), std::abs(expected)*relTol); //up to the eight significative digit
     }
 }
 
@@ -205,7 +205,7 @@ void IntegratorTest3(Integrator &toBeTested) {
         t = initTime + dT*i;
         ASSERT_IS_TRUE(toBeTested.getSolution(t, sol));
         expected = x1 * std::exp(lambda1*(t - initTime));
-        assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
+        ASSERT_EQUAL_DOUBLE_TOL(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
     }
 
 }

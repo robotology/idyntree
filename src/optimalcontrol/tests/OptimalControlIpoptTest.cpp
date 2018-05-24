@@ -24,7 +24,6 @@
 #include <iDynTree/Optimizers/IpoptInterface.h>
 #include <iDynTree/OptimalControlProblem.h>
 
-#include <cassert>
 #include <vector>
 #include <ctime>
 
@@ -40,8 +39,8 @@ public:
     virtual bool dynamics(const iDynTree::VectorDynSize& state,
                           double time,
                           iDynTree::VectorDynSize& stateDynamics) override {
-        assert(state.size() == 2);
-        assert(stateDynamics.size() == 2);
+        ASSERT_IS_TRUE(state.size() == 2);
+        ASSERT_IS_TRUE(stateDynamics.size() == 2);
 
         stateDynamics(0) = state(1);
         stateDynamics(1) = controlInput(0);
@@ -52,8 +51,8 @@ public:
     virtual bool dynamicsStateFirstDerivative(const iDynTree::VectorDynSize& state,
                                               double time,
                                               iDynTree::MatrixDynSize& dynamicsDerivative) override {
-        assert(state.size() == 2);
-        assert(dynamicsDerivative.rows() == 2 && dynamicsDerivative.cols() == 2);
+        ASSERT_IS_TRUE(state.size() == 2);
+        ASSERT_IS_TRUE(dynamicsDerivative.rows() == 2 && dynamicsDerivative.cols() == 2);
         dynamicsDerivative.zero();
         dynamicsDerivative(0,1) = 1.0;
 
@@ -63,8 +62,8 @@ public:
     virtual bool dynamicsControlFirstDerivative(const iDynTree::VectorDynSize& state,
                                                 double time,
                                                 iDynTree::MatrixDynSize& dynamicsDerivative) override {
-        assert(state.size() == 2);
-        assert(dynamicsDerivative.rows() == 2 && dynamicsDerivative.cols() == 1);
+        ASSERT_IS_TRUE(state.size() == 2);
+        ASSERT_IS_TRUE(dynamicsDerivative.rows() == 2 && dynamicsDerivative.cols() == 1);
         dynamicsDerivative.zero();
         dynamicsDerivative(1,0) = 1.0;
 
@@ -84,8 +83,8 @@ public:
                                 const iDynTree::VectorDynSize& state,
                                 const iDynTree::VectorDynSize& control,
                                 double& costValue) override {
-        assert(state.size() == 2);
-        assert(control.size() == 1);
+        ASSERT_IS_TRUE(state.size() == 2);
+        ASSERT_IS_TRUE(control.size() == 1);
         costValue = state(0) * state(0) + state(1) * state(1) + control(0) * control(0);
         return true;
      }
@@ -94,9 +93,9 @@ public:
                                                     const iDynTree::VectorDynSize& state,
                                                     const iDynTree::VectorDynSize& control,
                                                     iDynTree::VectorDynSize& partialDerivative) override {
-        assert(state.size() == 2);
-        assert(control.size() == 1);
-        assert(partialDerivative.size() == 2);
+        ASSERT_IS_TRUE(state.size() == 2);
+        ASSERT_IS_TRUE(control.size() == 1);
+        ASSERT_IS_TRUE(partialDerivative.size() == 2);
         partialDerivative(0) = 2*state(0);
         partialDerivative(1) = 2*state(1);
         return true;
@@ -106,9 +105,9 @@ public:
                                                       const iDynTree::VectorDynSize& state,
                                                       const iDynTree::VectorDynSize& control,
                                                       iDynTree::VectorDynSize& partialDerivative) override {
-        assert(state.size() == 2);
-        assert(control.size() == 1);
-        assert(partialDerivative.size() == 1);
+        ASSERT_IS_TRUE(state.size() == 2);
+        ASSERT_IS_TRUE(control.size() == 1);
+        ASSERT_IS_TRUE(partialDerivative.size() == 1);
         partialDerivative(0) = 2*control(0);
         return true;
     }
@@ -117,9 +116,9 @@ public:
                                                      const iDynTree::VectorDynSize& state,
                                                      const iDynTree::VectorDynSize& control,
                                                      iDynTree::MatrixDynSize& partialDerivative) override {
-        assert(state.size() == 2);
-        assert(control.size() == 1);
-        assert(partialDerivative.rows() == 2 && partialDerivative.cols() == 2);
+        ASSERT_IS_TRUE(state.size() == 2);
+        ASSERT_IS_TRUE(control.size() == 1);
+        ASSERT_IS_TRUE(partialDerivative.rows() == 2 && partialDerivative.cols() == 2);
         partialDerivative.zero();
         partialDerivative(0,0) = 2;
         partialDerivative(1,1) = 2;
@@ -130,9 +129,9 @@ public:
                                                        const iDynTree::VectorDynSize& state,
                                                        const iDynTree::VectorDynSize& control,
                                                        iDynTree::MatrixDynSize& partialDerivative) override {
-        assert(state.size() == 2);
-        assert(control.size() == 1);
-        assert(partialDerivative.rows() == 1 && partialDerivative.cols() == 1);
+        ASSERT_IS_TRUE(state.size() == 2);
+        ASSERT_IS_TRUE(control.size() == 1);
+        ASSERT_IS_TRUE(partialDerivative.rows() == 1 && partialDerivative.cols() == 1);
         partialDerivative(0,0) = 2;
         return true;
     }
@@ -142,9 +141,9 @@ public:
                                                             const iDynTree::VectorDynSize& state,
                                                             const iDynTree::VectorDynSize& control,
                                                             iDynTree::MatrixDynSize& partialDerivative) override {
-        assert(state.size() == 2);
-        assert(control.size() == 1);
-        assert(partialDerivative.rows() == 2 && partialDerivative.cols() == 1);
+        ASSERT_IS_TRUE(state.size() == 2);
+        ASSERT_IS_TRUE(control.size() == 1);
+        ASSERT_IS_TRUE(partialDerivative.rows() == 2 && partialDerivative.cols() == 1);
         partialDerivative.zero();
         return true;
     }
@@ -179,7 +178,7 @@ public:
         if (control.size() != 1)
             return false;
 
-        assert(constraint.size() == 1);
+        ASSERT_IS_TRUE(constraint.size() == 1);
 
         constraint(0) = control(0);
 
@@ -190,7 +189,7 @@ public:
                                             const iDynTree::VectorDynSize& state,
                                             const iDynTree::VectorDynSize& control,
                                             iDynTree::MatrixDynSize& jacobian) override {
-        assert((jacobian.rows() == 1) && (jacobian.cols() == 2));
+        ASSERT_IS_TRUE((jacobian.rows() == 1) && (jacobian.cols() == 2));
         jacobian.zero();
         return true;
     }
@@ -199,7 +198,7 @@ public:
                                               const iDynTree::VectorDynSize& state,
                                               const iDynTree::VectorDynSize& control,
                                               iDynTree::MatrixDynSize& jacobian) override {
-        assert((jacobian.rows() == 1) && (jacobian.cols() == 1));
+        ASSERT_IS_TRUE((jacobian.rows() == 1) && (jacobian.cols() == 1));
         jacobian.zero();
         jacobian(0,0) = 1.0;
 
