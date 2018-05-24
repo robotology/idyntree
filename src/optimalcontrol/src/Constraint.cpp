@@ -83,7 +83,10 @@ namespace iDynTree {
             if (!m_isUpperBounded && !m_isLowerBounded)
                 return true;
 
-            assert(evaluateConstraint(time, state, control, m_valueBuffer));
+            if (!evaluateConstraint(time, state, control, m_valueBuffer)){
+                reportError("Constraint", "isFeasiblePoint", "Failed to evaluate constraint.");
+                assert(false);
+            }
 
             for (unsigned int i = 0; i < constraintSize(); ++i){
                 if (m_isLowerBounded)

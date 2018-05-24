@@ -1,3 +1,15 @@
+/*
+ * Copyright (C) 2014,2018 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Francesco Romano, Stefano Dafarra
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *
+ * Originally developed for Prioritized Optimal Control (2014)
+ * Refactored in 2018.
+ * Design inspired by
+ * - ACADO toolbox (http://acado.github.io)
+ * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
+ */
+
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/VectorDynSize.h>
@@ -146,14 +158,14 @@ public:
     {
         iDynTree::VectorDynSize upperBound(1);
         upperBound(0) = 0.5;
-        assert(setUpperBound(upperBound));
+        ASSERT_IS_TRUE(setUpperBound(upperBound));
     }
     TestConstraint(const std::string& name)
         :iDynTree::optimalcontrol::Constraint(1, name)
     {
         iDynTree::VectorDynSize upperBound(1);
         upperBound(0) = 0.5;
-        assert(setUpperBound(upperBound));
+        ASSERT_IS_TRUE(setUpperBound(upperBound));
     }
     virtual ~TestConstraint() override;
 
@@ -217,42 +229,42 @@ int main () {
 
 
     // Problem description
-    iDynTree::assertTrue(problem->setTimeHorizon(0.0, 1.0));
-    iDynTree::assertTrue(problem->setDynamicalSystemConstraint(doubleIntegrator));
-    iDynTree::assertTrue(problem->addLagrangeTerm(1.0, cost));
+    ASSERT_IS_TRUE(problem->setTimeHorizon(0.0, 1.0));
+    ASSERT_IS_TRUE(problem->setDynamicalSystemConstraint(doubleIntegrator));
+    ASSERT_IS_TRUE(problem->addLagrangeTerm(1.0, cost));
     bound(0) = 0.8;
-    iDynTree::assertTrue(problem->setControlUpperBound(bound));
+    ASSERT_IS_TRUE(problem->setControlUpperBound(bound));
     bound(0) = -0.9;
-    iDynTree::assertTrue(problem->setControlLowerBound(bound));
+    ASSERT_IS_TRUE(problem->setControlLowerBound(bound));
 
-    iDynTree::assertTrue(group->addConstraint(constraint, iDynTree::optimalcontrol::TimeRange(0.6, 1.0)));
-    iDynTree::assertTrue(problem->addGroupOfConstraints(group));
+    ASSERT_IS_TRUE(group->addConstraint(constraint, iDynTree::optimalcontrol::TimeRange(0.6, 1.0)));
+    ASSERT_IS_TRUE(problem->addGroupOfConstraints(group));
 
     // Multiple Shooting settings
-    iDynTree::assertTrue(solver.setIntegrator(integrator));
-    iDynTree::assertTrue(solver.setOptimizer(optimizer));
-    iDynTree::assertTrue(solver.setStepSizeBounds(0.001, 0.01));
-    iDynTree::assertTrue(solver.setControlPeriod(0.01));
+    ASSERT_IS_TRUE(solver.setIntegrator(integrator));
+    ASSERT_IS_TRUE(solver.setOptimizer(optimizer));
+    ASSERT_IS_TRUE(solver.setStepSizeBounds(0.001, 0.01));
+    ASSERT_IS_TRUE(solver.setControlPeriod(0.01));
 
     iDynTree::VectorDynSize initialState(2);
     iDynTree::getRandomVector(initialState, -2.0, 2.0);
-    iDynTree::assertTrue(solver.setInitialState(initialState));
+    ASSERT_IS_TRUE(solver.setInitialState(initialState));
 
 
     // Optimizer settings
-    //iDynTree::assertTrue(optimizer->setIpoptOption("linear_solver", "ma27"));
-    iDynTree::assertTrue(optimizer->setIpoptOption("print_level", 0));
-    iDynTree::assertTrue(optimizer->setIpoptOption("hessian_constant", "yes"));
-    iDynTree::assertTrue(optimizer->setIpoptOption("jac_c_constant", "yes"));
-    iDynTree::assertTrue(optimizer->setIpoptOption("jac_d_constant", "yes"));
+    //ASSERT_IS_TRUE(optimizer->setIpoptOption("linear_solver", "ma27"));
+    ASSERT_IS_TRUE(optimizer->setIpoptOption("print_level", 0));
+    ASSERT_IS_TRUE(optimizer->setIpoptOption("hessian_constant", "yes"));
+    ASSERT_IS_TRUE(optimizer->setIpoptOption("jac_c_constant", "yes"));
+    ASSERT_IS_TRUE(optimizer->setIpoptOption("jac_d_constant", "yes"));
 
     clock_t initT, endT;
     initT = clock();
-    iDynTree::assertTrue(solver.solve());
+    ASSERT_IS_TRUE(solver.solve());
     endT = clock();
 
     std::vector<iDynTree::VectorDynSize> states, controls;
-    iDynTree::assertTrue(solver.getSolution(states, controls));
+    ASSERT_IS_TRUE(solver.getSolution(states, controls));
     std::cerr << "Initial state: " << initialState.toString() << std::endl;
     std::cerr << "First state: " << states.front().toString() << std::endl;
     std::cerr << "Last state: " << states.back().toString() << std::endl;
@@ -266,14 +278,14 @@ int main () {
 
         //iDynTree::getRandomVector(initialState, -2.0, 2.0);
         initialState = states.front();
-        iDynTree::assertTrue(solver.setInitialState(initialState));
+        ASSERT_IS_TRUE(solver.setInitialState(initialState));
 
         initT = clock();
-        iDynTree::assertTrue(solver.solve());
+        ASSERT_IS_TRUE(solver.solve());
         endT = clock();
 
 
-        iDynTree::assertTrue(solver.getSolution(states, controls));
+        ASSERT_IS_TRUE(solver.getSolution(states, controls));
         std::cerr << "Initial state: " << initialState.toString() << std::endl;
         std::cerr << "First state: " << states.front().toString() << std::endl;
         std::cerr << "Last state: " << states.back().toString() << std::endl;

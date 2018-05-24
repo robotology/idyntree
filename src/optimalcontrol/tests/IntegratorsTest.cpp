@@ -1,3 +1,15 @@
+/*
+ * Copyright (C) 2014,2018 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Francesco Romano, Stefano Dafarra
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *
+ * Originally developed for Prioritized Optimal Control (2014)
+ * Refactored in 2018.
+ * Design inspired by
+ * - ACADO toolbox (http://acado.github.io)
+ * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
+ */
+
 #include <iDynTree/DynamicalSystem.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/VectorDynSize.h>
@@ -143,8 +155,8 @@ double relTol = 1E-8;
 
 void IntegratorTest1(Integrator &toBeTested) {
 
-    assertTrue(toBeTested.setMaximumStepSize(dT));
-    assertTrue(toBeTested.integrate(initTime, endTime));
+    ASSERT_IS_TRUE(toBeTested.setMaximumStepSize(dT));
+    ASSERT_IS_TRUE(toBeTested.integrate(initTime, endTime));
 
     int iterations = std::round((endTime-initTime)/dT);
     double t = initTime;
@@ -153,7 +165,7 @@ void IntegratorTest1(Integrator &toBeTested) {
 
     for (int i = 0; i <= iterations; ++i){
         t = initTime + dT*i;
-        assertTrue(toBeTested.getSolution(t, sol));
+        ASSERT_IS_TRUE(toBeTested.getSolution(t, sol));
         expected = x1 * std::exp(lambda1*(t - initTime));
         assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
     }
@@ -161,8 +173,8 @@ void IntegratorTest1(Integrator &toBeTested) {
 }
 
 void IntegratorTest2(Integrator &toBeTested) {
-    assertTrue(toBeTested.setMaximumStepSize(dT));
-    assertTrue(toBeTested.integrate(initTime, endTime));
+    ASSERT_IS_TRUE(toBeTested.setMaximumStepSize(dT));
+    ASSERT_IS_TRUE(toBeTested.integrate(initTime, endTime));
 
     int iterations = std::round((endTime-initTime)/dT);
     double t = initTime;
@@ -171,7 +183,7 @@ void IntegratorTest2(Integrator &toBeTested) {
 
     for (int i = 0; i <= iterations; ++i){
         t = initTime + dT*i;
-        assertTrue(toBeTested.getSolution(t, sol));
+        ASSERT_IS_TRUE(toBeTested.getSolution(t, sol));
         expected = x1 * std::exp(lambda1*(t - initTime));
         assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
         expected = x2 * std::exp(lambda2*(t - initTime));
@@ -181,8 +193,8 @@ void IntegratorTest2(Integrator &toBeTested) {
 
 void IntegratorTest3(Integrator &toBeTested) {
 
-    assertTrue(toBeTested.setMaximumStepSize(dT));
-    assertTrue(toBeTested.integrate(initTime, endTime));
+    ASSERT_IS_TRUE(toBeTested.setMaximumStepSize(dT));
+    ASSERT_IS_TRUE(toBeTested.integrate(initTime, endTime));
 
     int iterations = std::round((endTime-initTime)/dT);
     double t = initTime;
@@ -191,7 +203,7 @@ void IntegratorTest3(Integrator &toBeTested) {
 
     for (int i = 0; i <= iterations; ++i){
         t = initTime + dT*i;
-        assertTrue(toBeTested.getSolution(t, sol));
+        ASSERT_IS_TRUE(toBeTested.getSolution(t, sol));
         expected = x1 * std::exp(lambda1*(t - initTime));
         assertDoubleAreEqual(expected, sol(0), std::abs(expected)*relTol); //up to the eight significative digit
     }

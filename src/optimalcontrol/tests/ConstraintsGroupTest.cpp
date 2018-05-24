@@ -1,3 +1,14 @@
+/*
+ * Copyright (C) 2014,2018 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Francesco Romano, Stefano Dafarra
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *
+ * Originally developed for Prioritized Optimal Control (2014)
+ * Refactored in 2018.
+ * Design inspired by
+ * - ACADO toolbox (http://acado.github.io)
+ * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
+ */
 #include <iDynTree/Constraint.h>
 #include <iDynTree/ConstraintsGroup.h>
 #include <iDynTree/TimeRange.h>
@@ -30,20 +41,20 @@ bool groupTest(){
     iDynTree::VectorDynSize upperbound(1);
     upperbound.zero();
 
-    iDynTree::assertTrue(constraint1->setUpperBound(upperbound));
-    iDynTree::assertTrue(constraint2->setUpperBound(upperbound));
+    ASSERT_IS_TRUE(constraint1->setUpperBound(upperbound));
+    ASSERT_IS_TRUE(constraint2->setUpperBound(upperbound));
 
 
     ConstraintsGroup newGroup("dummyGroup", 2);
 
     TimeRange range;
-    iDynTree::assertTrue(range.setTimeInterval(1.0, 2.0));
+    ASSERT_IS_TRUE(range.setTimeInterval(1.0, 2.0));
 
-    iDynTree::assertTrue(newGroup.addConstraint(constraint1, range));
+    ASSERT_IS_TRUE(newGroup.addConstraint(constraint1, range));
 
-    iDynTree::assertTrue(range.setTimeInterval(0.0, 1.0));
+    ASSERT_IS_TRUE(range.setTimeInterval(0.0, 1.0));
 
-    iDynTree::assertTrue(newGroup.addConstraint(constraint2, range));
+    ASSERT_IS_TRUE(newGroup.addConstraint(constraint2, range));
 
     iDynTree::VectorDynSize dummyState(1), dummyControl, expected(2), result;
 
@@ -51,16 +62,16 @@ bool groupTest(){
     expected(0) = dummyState(0);
     expected(1) = 0.0;
 
-    iDynTree::assertTrue(newGroup.isFeasibilePoint(1.5, dummyState, dummyControl));
-    iDynTree::assertTrue(newGroup.evaluateConstraints(1.5, dummyState, dummyControl, result));
+    ASSERT_IS_TRUE(newGroup.isFeasibilePoint(1.5, dummyState, dummyControl));
+    ASSERT_IS_TRUE(newGroup.evaluateConstraints(1.5, dummyState, dummyControl, result));
     iDynTree::assertVectorAreEqual(result, expected, 1e-10,"",-1);
 
     dummyState(0) = -2.0;
     expected(0) = dummyState(0);
     expected(1) = 0.0;
 
-    iDynTree::assertTrue(newGroup.isFeasibilePoint(0.5, dummyState, dummyControl));
-    iDynTree::assertTrue(newGroup.evaluateConstraints(0.5, dummyState, dummyControl, result));
+    ASSERT_IS_TRUE(newGroup.isFeasibilePoint(0.5, dummyState, dummyControl));
+    ASSERT_IS_TRUE(newGroup.evaluateConstraints(0.5, dummyState, dummyControl, result));
     iDynTree::assertVectorAreEqual(result, expected, 1e-10,"",-1);
 
     return true;
@@ -68,6 +79,6 @@ bool groupTest(){
 
 
 int main(){
-    iDynTree::assertTrue(groupTest());
+    ASSERT_IS_TRUE(groupTest());
     return 0;
 }

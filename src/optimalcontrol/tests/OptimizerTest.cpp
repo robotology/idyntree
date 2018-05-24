@@ -1,3 +1,15 @@
+/*
+ * Copyright (C) 2014,2018 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Francesco Romano, Stefano Dafarra
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *
+ * Originally developed for Prioritized Optimal Control (2014)
+ * Refactored in 2018.
+ * Design inspired by
+ * - ACADO toolbox (http://acado.github.io)
+ * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
+ */
+
 #include <iDynTree/OptimizationProblem.h>
 #include <iDynTree/Optimizers/IpoptInterface.h>
 #include <iDynTree/Core/TestUtils.h>
@@ -85,7 +97,7 @@ public:
     } //costs and constraints together
 
     virtual bool setVariables(const iDynTree::VectorDynSize& variables) override {
-        iDynTree::assertTrue(variables.size()==2);
+        ASSERT_IS_TRUE(variables.size()==2);
         m_variables = variables;
         return true;
     }
@@ -106,7 +118,7 @@ public:
         hessian.resize(2,2);
         hessian.zero();
         hessian(0,0) = 2*m_a1;
-        hessian(1,1) = 2*m_a1;
+        hessian(1,1) = 2*m_a2;
         return true;
     }
 
@@ -182,22 +194,22 @@ int main(){
     iDynTree::VectorDynSize guess(2), dummy1, dummy2, dummy3;
     guess.zero();
 
-    iDynTree::assertTrue(ipoptSolver.setIpoptOption("nlp_lower_bound_inf", -1.0e20));
-    iDynTree::assertTrue(ipoptSolver.setIpoptOption("print_level", 0));
-    iDynTree::assertTrue(ipoptSolver.setInitialGuess(guess));
+    ASSERT_IS_TRUE(ipoptSolver.setIpoptOption("nlp_lower_bound_inf", -1.0e20));
+    ASSERT_IS_TRUE(ipoptSolver.setIpoptOption("print_level", 0));
+    ASSERT_IS_TRUE(ipoptSolver.setInitialGuess(guess));
 
-    iDynTree::assertTrue(problem->setMinusInfinity(ipoptSolver.minusInfinity()));
-    iDynTree::assertTrue(problem->setPlusInfinity(ipoptSolver.plusInfinity()));
-    iDynTree::assertTrue(ipoptSolver.setProblem(problem));
+    ASSERT_IS_TRUE(problem->setMinusInfinity(ipoptSolver.minusInfinity()));
+    ASSERT_IS_TRUE(problem->setPlusInfinity(ipoptSolver.plusInfinity()));
+    ASSERT_IS_TRUE(ipoptSolver.setProblem(problem));
     for (int i = 0; i < 5; ++i){
-        iDynTree::assertTrue(ipoptSolver.solve());
+        ASSERT_IS_TRUE(ipoptSolver.solve());
         double optimalCost;
-        iDynTree::assertTrue(ipoptSolver.getOptimalCost(optimalCost));
+        ASSERT_IS_TRUE(ipoptSolver.getOptimalCost(optimalCost));
         iDynTree::assertDoubleAreEqual(optimalCost, problem->expectedMinimum(), 1e-5);
         iDynTree::VectorDynSize solution;
-        iDynTree::assertTrue(ipoptSolver.getPrimalVariables(solution));
+        ASSERT_IS_TRUE(ipoptSolver.getPrimalVariables(solution));
         iDynTree::assertVectorAreEqual(solution, problem->expectedVariables(), 1e-5, "", 1);
-        iDynTree::assertTrue(ipoptSolver.getDualVariables(dummy1, dummy2, dummy3));
+        ASSERT_IS_TRUE(ipoptSolver.getDualVariables(dummy1, dummy2, dummy3));
     }
     return EXIT_SUCCESS;
 }

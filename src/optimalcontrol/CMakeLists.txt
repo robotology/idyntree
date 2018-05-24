@@ -7,8 +7,6 @@ set(libraryname idyntree-optimalcontrol)
 
 idyntree_enable_cxx11()
 
-option(BUILD_SHARED_LIBS "Build libraries as shared" TRUE)
-
 # Dependencies
 # IPOPT
 # SUNDIALS (?)
@@ -67,23 +65,20 @@ set(SOURCES src/DynamicalSystem.cpp
             src/Optimizer.cpp
             src/ForwardEuler.cpp)
 
-set(OPTIMIZERS_HEADERS)
-set(OPTIMIZERS_SOURCES)
-list(APPEND LINK_LIST idyntree-core idyntree-model)
-list(APPEND INCLUDE_LIST ${EIGEN3_INCLUDE_DIR})
-
 if (IDYNTREE_USES_IPOPT)
-    set(OPTIMIZERS_HEADERS ${OPTIMIZERS_HEADERS} include/iDynTree/Optimizers/IpoptInterface.h)
-    set(OPTIMIZERS_SOURCES ${OPTIMIZERS_SOURCES} src/IpoptInterface.cpp)
+    list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/IpoptInterface.h)
+    list(APPEND OPTIMIZERS_SOURCES src/IpoptInterface.cpp)
     list(APPEND LINK_LIST ${IPOPT_LIBRARIES})
     list(APPEND INCLUDE_LIST ${IPOPT_INCLUDE_DIRS})
 endif()
 
 add_library(${libraryname} ${PUBLIC_HEADERS} ${INTEGRATORS_PUBLIC_HEADERS} ${OCSOLVERS_PUBLIC_HEADERS} ${OPTIMIZERS_HEADERS} ${SOURCES} ${OPTIMIZERS_SOURCES})
-target_include_directories(${libraryname} SYSTEM PUBLIC ${INCLUDE_LIST})
+target_include_directories(${libraryname} SYSTEM PUBLIC ${EIGEN3_INCLUDE_DIR})
+target_include_directories(${libraryname} SYSTEM PRIVATE ${INCLUDE_LIST})
 target_include_directories(${libraryname} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 target_include_directories(${libraryname} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-target_link_libraries(${libraryname} PUBLIC ${LINK_LIST})
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model)
+target_link_libraries(${libraryname} PRIVATE ${LINK_LIST})
 
 if (IDYNTREE_USES_IPOPT)
     target_compile_definitions(${libraryname} PRIVATE ${IPOPT_DEFINITIONS})

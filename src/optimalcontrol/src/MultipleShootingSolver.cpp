@@ -1026,7 +1026,7 @@ namespace iDynTree {
                     }
 
                 }
-                mesh++;
+                ++mesh;
             }
             assert(index == m_pimpl->numberOfVariables);
             assert(constraintIndex == m_pimpl->numberOfConstraints);

@@ -827,7 +827,7 @@ namespace iDynTree {
         bool OptimalControlProblem::isFeasiblePoint(double time, const VectorDynSize &state, const VectorDynSize &control)
         {
             for(auto group : m_pimpl->constraintsGroups){
-                if(!group.second.group_ptr->isFeasibilePoint(time, state, control)){
+                if(!(group.second.group_ptr->isFeasibilePoint(time, state, control))){
                     return false;
                 }
             }

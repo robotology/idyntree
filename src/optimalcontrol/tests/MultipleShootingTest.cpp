@@ -1,3 +1,15 @@
+/*
+ * Copyright (C) 2014,2018 Fondazione Istituto Italiano di Tecnologia
+ * Authors: Francesco Romano, Stefano Dafarra
+ * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ *
+ * Originally developed for Prioritized Optimal Control (2014)
+ * Refactored in 2018.
+ * Design inspired by
+ * - ACADO toolbox (http://acado.github.io)
+ * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
+ */
+
 #include <iDynTree/OptimalControlProblem.h>
 #include <iDynTree/ConstraintsGroup.h>
 #include <iDynTree/DynamicalSystem.h>
@@ -260,26 +272,26 @@ public:
         std::vector<size_t> dummy3, dummy4, nnzeroRows, nnzeroCols;
         double dummyCost;
         assert(m_problem);
-        iDynTree::assertTrue(m_problem->prepare());
+        ASSERT_IS_TRUE(m_problem->prepare());
         dummyVariables.resize(m_problem->numberOfVariables());
         iDynTree::toEigen(dummyVariables).setConstant(1.0);
-        iDynTree::assertTrue(m_problem->getConstraintsBounds(dummy1, dummy2));
+        ASSERT_IS_TRUE(m_problem->getConstraintsBounds(dummy1, dummy2));
         m_problem->getVariablesUpperBound(dummy1);
         m_problem->getVariablesLowerBound(dummy1);
-        iDynTree::assertTrue(m_problem->getConstraintsJacobianInfo(nnzeroRows, nnzeroCols));
+        ASSERT_IS_TRUE(m_problem->getConstraintsJacobianInfo(nnzeroRows, nnzeroCols));
         assert(nnzeroRows.size() == nnzeroCols.size());
 
-        iDynTree::assertTrue(m_problem->getHessianInfo(dummy3, dummy4));
-        iDynTree::assertTrue(m_problem->setVariables(dummyVariables));
-        iDynTree::assertTrue(m_problem->evaluateCostFunction(dummyCost));
-        iDynTree::assertTrue(m_problem->evaluateCostGradient(dummy1));
+        ASSERT_IS_TRUE(m_problem->getHessianInfo(dummy3, dummy4));
+        ASSERT_IS_TRUE(m_problem->setVariables(dummyVariables));
+        ASSERT_IS_TRUE(m_problem->evaluateCostFunction(dummyCost));
+        ASSERT_IS_TRUE(m_problem->evaluateCostGradient(dummy1));
 //        std::cerr << "Cost Gradient" << std::endl << dummy1.toString() << std::endl << std::endl;
-        iDynTree::assertTrue(m_problem->evaluateCostHessian(dummyMatrix));
+        ASSERT_IS_TRUE(m_problem->evaluateCostHessian(dummyMatrix));
 //        std::cerr << "Cost Hessian" << std::endl << dummyMatrix.toString() << std::endl << std::endl;
-        iDynTree::assertTrue(m_problem->evaluateConstraints(dummy1));
+        ASSERT_IS_TRUE(m_problem->evaluateConstraints(dummy1));
         jacobian.resize(m_problem->numberOfConstraints(), m_problem->numberOfVariables());
         jacobian.zero();
-        iDynTree::assertTrue(m_problem->evaluateConstraintsJacobian(jacobian));
+        ASSERT_IS_TRUE(m_problem->evaluateConstraintsJacobian(jacobian));
         dummyMatrix.resize(jacobian.rows(), jacobian.cols());
         dummyMatrix.zero();
 
@@ -343,40 +355,40 @@ int main(){
     //Set-up
     iDynTree::VectorDynSize newBounds(1);
     newBounds(0) = 5.0;
-    iDynTree::assertTrue(constraint2->setUpperBound(newBounds));
+    ASSERT_IS_TRUE(constraint2->setUpperBound(newBounds));
     double initTime = 1.0, endTime = 5.0;
     double minStep = 0.003, maxStep = 0.07, controlPeriod = 0.011;
 
-    iDynTree::assertTrue(problem->setTimeHorizon(initTime, endTime));
-    iDynTree::assertTrue(problem->dynamicalSystem().expired());
-    iDynTree::assertTrue(problem->setDynamicalSystemConstraint(system));
-    iDynTree::assertTrue(!(problem->dynamicalSystem().expired()));
-    iDynTree::assertTrue(problem->addGroupOfConstraints(group1));
-    iDynTree::assertTrue(group1->addConstraint(constraint2, iDynTree::optimalcontrol::TimeRange(4.0, 5.0)));
-    iDynTree::assertTrue(problem->addContraint(constraint1));
-    iDynTree::assertTrue(problem->addLagrangeTerm(1.0, cost1));
-    iDynTree::assertTrue(problem->addMayerTerm(1.0, cost2));
+    ASSERT_IS_TRUE(problem->setTimeHorizon(initTime, endTime));
+    ASSERT_IS_TRUE(problem->dynamicalSystem().expired());
+    ASSERT_IS_TRUE(problem->setDynamicalSystemConstraint(system));
+    ASSERT_IS_TRUE(!(problem->dynamicalSystem().expired()));
+    ASSERT_IS_TRUE(problem->addGroupOfConstraints(group1));
+    ASSERT_IS_TRUE(group1->addConstraint(constraint2, iDynTree::optimalcontrol::TimeRange(4.0, 5.0)));
+    ASSERT_IS_TRUE(problem->addContraint(constraint1));
+    ASSERT_IS_TRUE(problem->addLagrangeTerm(1.0, cost1));
+    ASSERT_IS_TRUE(problem->addMayerTerm(1.0, cost2));
 
-    iDynTree::assertTrue(solver.setIntegrator(integrator));
-    iDynTree::assertTrue(solver.setStepSizeBounds(minStep, maxStep));
-    iDynTree::assertTrue(solver.setControlPeriod(controlPeriod));
-    iDynTree::assertTrue(solver.setOptimizer(optimizer));
+    ASSERT_IS_TRUE(solver.setIntegrator(integrator));
+    ASSERT_IS_TRUE(solver.setStepSizeBounds(minStep, maxStep));
+    ASSERT_IS_TRUE(solver.setControlPeriod(controlPeriod));
+    ASSERT_IS_TRUE(solver.setOptimizer(optimizer));
 
     std::vector<double> stateTimings, controlTimings;
-    iDynTree::assertTrue(solver.getTimings(stateTimings, controlTimings));
+    ASSERT_IS_TRUE(solver.getTimings(stateTimings, controlTimings));
     for (size_t i = 0; i < stateTimings.size(); ++i){
-        iDynTree::assertTrue((stateTimings[i] > initTime) && (stateTimings[i] <= endTime));
+        ASSERT_IS_TRUE((stateTimings[i] > initTime) && (stateTimings[i] <= endTime));
         if (i > 0)
-            iDynTree::assertTrue(((stateTimings[i] - stateTimings[i-1]) >= minStep) && ((stateTimings[i] - stateTimings[i-1]) <= maxStep));
+            ASSERT_IS_TRUE(((stateTimings[i] - stateTimings[i-1]) >= minStep) && ((stateTimings[i] - stateTimings[i-1]) <= maxStep));
     }
 
     for (size_t i = 0; i < controlTimings.size(); ++i){
-        iDynTree::assertTrue((controlTimings[i] >= initTime) && (controlTimings[i] <= endTime));
+        ASSERT_IS_TRUE((controlTimings[i] >= initTime) && (controlTimings[i] <= endTime));
         if (i > 0)
             iDynTree::assertDoubleAreEqual((controlTimings[i] - controlTimings[i-1]), controlPeriod);
     }
 
-    iDynTree::assertTrue(solver.solve());
+    ASSERT_IS_TRUE(solver.solve());
 
 
     return EXIT_SUCCESS;
