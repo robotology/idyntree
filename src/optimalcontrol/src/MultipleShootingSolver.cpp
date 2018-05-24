@@ -1,10 +1,10 @@
 /*
- * Copyright (C) 2014,2017 Fondazione Istituto Italiano di Tecnologia
+ * Copyright (C) 2014,2018 Fondazione Istituto Italiano di Tecnologia
  * Authors: Francesco Romano
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  *
  * Originally developed for Prioritized Optimal Control (2014)
- * Refactored in 2017.
+ * Refactored in 2018.
  * Design inspired by
  * - ACADO toolbox (http://acado.github.io)
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
@@ -110,7 +110,7 @@ namespace iDynTree {
                     meshPointsEnd = meshPoints.end();
                 } else {
                     *meshPointsEnd = newMeshPoint;
-                    meshPointsEnd++;
+                    ++meshPointsEnd;
                 }
             }
 
@@ -120,7 +120,7 @@ namespace iDynTree {
                 assert(nextMesh != meshPoints.end());
                 assert(nextMesh->origin.name().size() > 0);
                 do {
-                    nextMesh++;
+                    ++nextMesh;
                     assert(nextMesh->origin.name().size() > 0);
                     assert(nextMesh != meshPoints.end());
                 } while (nextMesh->origin == ignored); //find next valid mesh
@@ -568,7 +568,7 @@ namespace iDynTree {
                         m_pimpl->priorityWarning(mesh, timeRangeOrigin);
                         m_pimpl->setIgnoredMesh(mesh);
                         do {
-                            mesh--;
+                            --mesh;
                         } while (mesh->origin == ignored);
                         nextMesh = mesh;
                     }
@@ -588,7 +588,7 @@ namespace iDynTree {
                     controlMeshes++;
                 }
                 totalMeshes++;
-                mesh++;
+                ++mesh;
             }
             totalMeshes++; //the last mesh
             m_pimpl->meshPointsEnd = m_pimpl->meshPoints.begin() + static_cast<long>(totalMeshes);
