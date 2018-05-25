@@ -162,7 +162,9 @@ bool YARPRobotStatePublisherModule::close()
 
     m_baseFrameIndex = iDynTree::FRAME_INVALID_INDEX;
 
-    delete m_rosNode;
+    if(m_rosNode)
+        delete m_rosNode;
+    m_rosNode = nullptr;
 
     return true;
 }
