@@ -227,6 +227,9 @@ void YARPRobotStatePublisherModule::onRead(JointState &v)
     // Publish the frames on TF
     for (size_t frameIdx=0; frameIdx < model.getNrOfFrames(); frameIdx++)
     {
+        if(m_baseFrameIndex == frameIdx)    // skip self-tranform
+            continue;
+
         iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
         iDynTree::toYarp(base_H_frame.asHomogeneousTransform(), m_buf4x4);
         m_iframetrans->setTransform(model.getFrameName(frameIdx),
