@@ -215,7 +215,7 @@ void YARPRobotStatePublisherModule::onRead(JointState &v)
         if (jntIndex == iDynTree::JOINT_INVALID_INDEX)
         {
             yError() << "Impossible to find joint " << v.name[i] << " in the model.";
-            return;
+            continue;
         }
 
         m_jointPos(model.getJoint(jntIndex)->getDOFsOffset()) = v.position[i];
