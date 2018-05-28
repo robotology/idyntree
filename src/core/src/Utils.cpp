@@ -88,7 +88,7 @@ namespace iDynTree
 
     bool checkDoublesAreEqual(const double &val1, const double &val2, double tol)
     {
-        return (fabs(val1-val2) < tol);
+        return (std::fabs(val1-val2) < tol);
     }
 
 

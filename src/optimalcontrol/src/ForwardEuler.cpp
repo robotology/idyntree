@@ -19,8 +19,8 @@
 #include <iDynTree/Core/EigenHelpers.h>
 
 namespace iDynTree {
-namespace optimalcontrol {
-namespace integrators {
+    namespace optimalcontrol {
+        namespace integrators {
 
             bool ForwardEuler::allocateBuffers()
             {

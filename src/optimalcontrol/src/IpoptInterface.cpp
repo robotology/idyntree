@@ -51,10 +51,10 @@ namespace iDynTree {
             VectorDynSize lowerBoundMultipliers, upperBoundMultipliers, constraintMultipliers;
 
             NLPImplementation()
-            :minusInfinity(-1e19)
-            ,plusInfinity(1e19)
-            ,initialGuessSet(false)
-            ,exitCode(-6)
+            : minusInfinity(-1e19)
+            , plusInfinity(1e19)
+            , initialGuessSet(false)
+            , exitCode(-6)
             {}
 
             virtual ~NLPImplementation() override;
@@ -422,12 +422,12 @@ namespace iDynTree {
             size_t previousJacobianNonZeros, previousHessianNonZeros;
 
             IpoptInterfaceImplementation()
-            :nlpPointer(new NLPImplementation())
-            ,loader(IpoptApplicationFactory())
-            ,previousNumberOfVariables(0)
-            ,previousNumberOfConstraints(0)
-            ,previousJacobianNonZeros(0)
-            ,previousHessianNonZeros(0)
+            : nlpPointer(new NLPImplementation())
+            , loader(IpoptApplicationFactory())
+            , previousNumberOfVariables(0)
+            , previousNumberOfConstraints(0)
+            , previousJacobianNonZeros(0)
+            , previousHessianNonZeros(0)
             {
             }
 
@@ -442,7 +442,7 @@ namespace iDynTree {
         };
 
         IpoptInterface::IpoptInterface()
-        :m_pimpl(new IpoptInterfaceImplementation())
+        : m_pimpl(new IpoptInterfaceImplementation())
         {
             assert(m_pimpl);
         }

@@ -147,6 +147,16 @@ namespace iDynTree {
                 return true;
             }
 
+            IntegratorInfoData::IntegratorInfoData():name("Integrator"),isExplicit(true),numberOfStages(1){}
+
+            IntegratorInfo::IntegratorInfo(std::shared_ptr<IntegratorInfoData> data):m_data(data){}
+
+            const std::string &IntegratorInfo::name() const {return m_data->name;}
+
+            bool IntegratorInfo::isExplicit() const {return m_data->isExplicit;}
+
+            size_t IntegratorInfo::numberOfStages() const {return m_data->numberOfStages;}
+
         }
 
     }

@@ -22,7 +22,7 @@ namespace iDynTree {
         : m_stateSize(stateSpaceSize)
         , m_controlSize(controlSpaceSize)
         , m_initialState(static_cast<unsigned int>(stateSpaceSize))
-        ,m_controlInput(static_cast<unsigned int>(controlSpaceSize))
+        , m_controlInput(static_cast<unsigned int>(controlSpaceSize))
         {
             m_initialState.zero();
             m_controlInput.zero();

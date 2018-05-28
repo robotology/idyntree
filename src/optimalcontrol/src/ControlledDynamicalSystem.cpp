@@ -24,16 +24,16 @@ namespace iDynTree {
         public:
 
             DerivedDynamicalSystem()
-            :DynamicalSystem(0,0)
-            ,m_autonomousSystem(nullptr)
-            ,m_controller(nullptr)
+            : DynamicalSystem(0,0)
+            , m_autonomousSystem(nullptr)
+            , m_controller(nullptr)
             {}
 
             DerivedDynamicalSystem(std::shared_ptr<DynamicalSystem> autonomousSystem)
-            :DynamicalSystem(autonomousSystem->stateSpaceSize(), autonomousSystem->controlSpaceSize())
-            ,m_autonomousSystem(autonomousSystem)
-            ,m_controller(nullptr)
-            ,m_controlBuffer(static_cast<unsigned int>(autonomousSystem->controlSpaceSize()))
+            : DynamicalSystem(autonomousSystem->stateSpaceSize(), autonomousSystem->controlSpaceSize())
+            , m_autonomousSystem(autonomousSystem)
+            , m_controller(nullptr)
+            , m_controlBuffer(static_cast<unsigned int>(autonomousSystem->controlSpaceSize()))
             {}
 
             virtual ~DerivedDynamicalSystem();
@@ -237,7 +237,7 @@ namespace iDynTree {
         bool ControlledDynamicalSystem::setController(std::shared_ptr<Controller> controller)
         {
             if (!controller) {
-                reportError("ControlledDynamicalSystem", "setController", "Empty controller pointer.");
+                reportError("ControlledDynamicalSystem", "setController", "Empty controller  pointer.");
                 return false;
             }
 

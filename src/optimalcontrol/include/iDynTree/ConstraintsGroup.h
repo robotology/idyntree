@@ -39,7 +39,7 @@ namespace iDynTree {
          * If the constraint size is smaller than the maxConstraintSize, dummy constraints as the above will be added on the bottom. This allow to keep a constant structure even if the constraints have different dimensions.
          * A typical example is when a constraint is enabled only for a certain period of time.
          */
-        class ConstraintsGroup{ //The group of constraint is used when there is a TimeRange associated with the constraint
+        class ConstraintsGroup{
         public:
             /**
              * @brief Default constructor
@@ -136,7 +136,7 @@ namespace iDynTree {
              * @param[out] lowerBound The lowerBound value.
              * @return True if, for the given instant, a lower bound is set. False otherwise.
              */
-            bool getLowerBound(double time, VectorDynSize& lowerBound); //return false if no lower bound is set
+            bool getLowerBound(double time, VectorDynSize& lowerBound);
 
             /**
              * @brief Get the constraints upper bound.
@@ -145,7 +145,7 @@ namespace iDynTree {
              * @param[out] upperBound The upperBound value.
              * @return True if, for the given instant, a upper bound is set. False otherwise.
              */
-            bool getUpperBound(double time, VectorDynSize& upperBound); //return false if no upper bound is set
+            bool getUpperBound(double time, VectorDynSize& upperBound);
 
             /**
              * @brief Evaluate the constraint jacobian with respect to the state, given the specified time instant.

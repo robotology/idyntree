@@ -42,7 +42,7 @@ namespace optimalcontrol {
             class IntegratorInfoData {
             protected:
                 friend class Integrator;
-                IntegratorInfoData():name("Integrator"),isExplicit(true),numberOfStages(1){}
+                IntegratorInfoData();
             public:
                 std::string name;
 
@@ -55,17 +55,17 @@ namespace optimalcontrol {
             private:
                 std::shared_ptr<IntegratorInfoData> m_data;
             public:
-                IntegratorInfo(std::shared_ptr<IntegratorInfoData> data):m_data(data){}
+                IntegratorInfo(std::shared_ptr<IntegratorInfoData> data);
 
                 IntegratorInfo() = delete;
 
                 IntegratorInfo(const IntegratorInfo &other) = delete;
 
-                const std::string &name() const {return m_data->name;}
+                const std::string &name() const;
 
-                 bool isExplicit() const {return m_data->isExplicit;}
+                 bool isExplicit() const;
 
-                 size_t numberOfStages() const {return m_data->numberOfStages;}
+                 size_t numberOfStages() const;
             };
 
             /**

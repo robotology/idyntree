@@ -62,7 +62,7 @@ namespace iDynTree {
              * @brief Getter for the constraint name.
              * @return The name of the constraint.
              */
-            const std::string& name() const; //the name must not be changed
+            const std::string& name() const;
 
             /**
              * @brief Set the constraint lower bound.
@@ -74,7 +74,7 @@ namespace iDynTree {
              * @brief Get the constraint lower bound.
              * @return True if the constraint has a lower bound. False otherwise.
              */
-            bool getLowerBound(VectorDynSize& lowerBound); //return false if not lower bounded
+            bool getLowerBound(VectorDynSize& lowerBound);
 
             /**
              * @brief Set the constraint upper bound.
@@ -86,11 +86,12 @@ namespace iDynTree {
              * @brief Get the constraint upper bound.
              * @return True if the constraint has a lower bound. False otherwise.
              */
-            bool getUpperBound(VectorDynSize& upperBound); //return false if not upper bounded
+            bool getUpperBound(VectorDynSize& upperBound);
 
             /**
              * @brief Check if the constraint is satisfied given the specified state and control.
              * This method has a default implementation which exploits the definition of the bounds and the method evaluateConstraint.
+             *
              * Unless particular implementations are needed, there is no need of overriding this method.
              * @param[in] time The time at which the constraint is evaluated.
              * @param[in] state The state at which the constraint is evaluated.
