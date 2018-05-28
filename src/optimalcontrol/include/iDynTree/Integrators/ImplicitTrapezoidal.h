@@ -1,6 +1,6 @@
 /*
 * Copyright (C) 2014,2018 Fondazione Istituto Italiano di Tecnologia
-* Authors: Francesco Romano, Stefano Dafarra
+*
 * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
 *
 * Originally developed for Prioritized Optimal Control (2014)
