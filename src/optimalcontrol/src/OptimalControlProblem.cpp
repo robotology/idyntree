@@ -93,8 +93,9 @@ namespace iDynTree {
 
         bool OptimalControlProblem::setTimeHorizon(double startingTime, double finalTime)
         {
-            if (!(m_pimpl->horizon.setTimeInterval(startingTime,finalTime)))
+            if (!(m_pimpl->horizon.setTimeInterval(startingTime,finalTime))) {
                 return false;
+            }
 
             CostsMap::iterator costIterator;
             for (auto mayerCost : m_pimpl->mayerCostnames){
@@ -416,10 +417,11 @@ namespace iDynTree {
         bool OptimalControlProblem::removeCost(const std::string &name)
         {
             if (m_pimpl->costs.erase(name)){
-                for (auto mayerCost : m_pimpl->mayerCostnames)
-                    if (name == mayerCost)
+                for (auto mayerCost : m_pimpl->mayerCostnames) {
+                    if (name == mayerCost) {
                         mayerCost.erase();
-
+                    }
+                }
                 return true;
             }
 
@@ -431,8 +433,9 @@ namespace iDynTree {
 
         std::vector<TimeRange> &OptimalControlProblem::getCostsTimeRanges() const
         {
-            if (m_pimpl->costTimeRanges.size() != m_pimpl->costs.size())
+            if (m_pimpl->costTimeRanges.size() != m_pimpl->costs.size()) {
                 m_pimpl->costTimeRanges.resize(m_pimpl->costs.size());
+            }
 
             size_t i = 0;
             for (auto c : m_pimpl->costs){
@@ -573,11 +576,13 @@ namespace iDynTree {
 
         bool OptimalControlProblem::costsFirstPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &partialDerivative)
         {
-            if (partialDerivative.size() != state.size())
+            if (partialDerivative.size() != state.size()) {
                 partialDerivative.resize(state.size());
+            }
 
-            if (m_pimpl->costStateJacobianBuffer.size() != state.size())
+            if (m_pimpl->costStateJacobianBuffer.size() != state.size()) {
                 m_pimpl->costStateJacobianBuffer.resize(state.size());
+            }
 
             bool first = true;
 
@@ -608,11 +613,13 @@ namespace iDynTree {
 
         bool OptimalControlProblem::costsFirstPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &partialDerivative)
         {
-            if (partialDerivative.size() != control.size())
+            if (partialDerivative.size() != control.size()) {
                 partialDerivative.resize(control.size());
+            }
 
-            if (m_pimpl->costControlJacobianBuffer.size() != control.size())
+            if (m_pimpl->costControlJacobianBuffer.size() != control.size()) {
                 m_pimpl->costControlJacobianBuffer.resize(control.size());
+            }
 
             bool first = true;
 
@@ -643,11 +650,13 @@ namespace iDynTree {
 
         bool OptimalControlProblem::costsSecondPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
         {
-            if ((partialDerivative.rows() != state.size()) || (partialDerivative.cols() != state.size()))
+            if ((partialDerivative.rows() != state.size()) || (partialDerivative.cols() != state.size())) {
                 partialDerivative.resize(state.size(), state.size());
+            }
 
-            if ((m_pimpl->costStateHessianBuffer.rows() != state.size()) || (m_pimpl->costStateHessianBuffer.cols() != state.size()))
+            if ((m_pimpl->costStateHessianBuffer.rows() != state.size()) || (m_pimpl->costStateHessianBuffer.cols() != state.size())) {
                 m_pimpl->costStateHessianBuffer.resize(state.size(), state.size());
+            }
 
             bool first = true;
 
@@ -679,11 +688,13 @@ namespace iDynTree {
 
         bool OptimalControlProblem::costsSecondPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
         {
-            if ((partialDerivative.rows() != control.size()) || (partialDerivative.cols() != control.size()))
+            if ((partialDerivative.rows() != control.size()) || (partialDerivative.cols() != control.size())) {
                 partialDerivative.resize(control.size(), control.size());
+            }
 
-            if ((m_pimpl->costControlHessianBuffer.rows() != control.size()) || (m_pimpl->costControlHessianBuffer.cols() != control.size()))
+            if ((m_pimpl->costControlHessianBuffer.rows() != control.size()) || (m_pimpl->costControlHessianBuffer.cols() != control.size())) {
                 m_pimpl->costControlHessianBuffer.resize(control.size(), control.size());
+            }
 
             bool first = true;
 
@@ -716,11 +727,13 @@ namespace iDynTree {
 
         bool OptimalControlProblem::costsSecondPartialDerivativeWRTStateControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &partialDerivative)
         {
-            if ((partialDerivative.rows() != state.size()) || (partialDerivative.cols() != control.size()))
+            if ((partialDerivative.rows() != state.size()) || (partialDerivative.cols() != control.size())) {
                 partialDerivative.resize(state.size(), control.size());
+            }
 
-            if ((m_pimpl->costMixedHessianBuffer.rows() != state.size()) || (m_pimpl->costMixedHessianBuffer.cols() != control.size()))
+            if ((m_pimpl->costMixedHessianBuffer.rows() != state.size()) || (m_pimpl->costMixedHessianBuffer.cols() != control.size())) {
                 m_pimpl->costMixedHessianBuffer.resize(state.size(), control.size());
+            }
 
             bool first = true;
 
@@ -753,8 +766,9 @@ namespace iDynTree {
 
         bool OptimalControlProblem::constraintsEvaluation(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &constraintsValue)
         {
-            if (constraintsValue.size() != getConstraintsDimension())
+            if (constraintsValue.size() != getConstraintsDimension()) {
                 constraintsValue.resize(getConstraintsDimension());
+            }
 
             Eigen::Map< Eigen::VectorXd > constraintsEvaluation = toEigen(constraintsValue);
             Eigen::Index offset = 0;
@@ -776,8 +790,9 @@ namespace iDynTree {
 
         bool OptimalControlProblem::getConstraintsUpperBound(double time, double infinity, VectorDynSize &upperBound)
         {
-            if (upperBound.size() != getConstraintsDimension())
+            if (upperBound.size() != getConstraintsDimension()) {
                 upperBound.resize(getConstraintsDimension());
+            }
 
             Eigen::Map< Eigen::VectorXd > upperBoundMap = toEigen(upperBound);
             Eigen::Index offset = 0;
@@ -803,8 +818,9 @@ namespace iDynTree {
 
         bool OptimalControlProblem::getConstraintsLowerBound(double time, double infinity, VectorDynSize &lowerBound)
         {
-            if (lowerBound.size() != getConstraintsDimension())
+            if (lowerBound.size() != getConstraintsDimension()) {
                 lowerBound.resize(getConstraintsDimension());
+            }
 
             Eigen::Map< Eigen::VectorXd > lowerBoundMap = toEigen(lowerBound);
             Eigen::Index offset = 0;
@@ -841,8 +857,9 @@ namespace iDynTree {
         bool OptimalControlProblem::constraintsJacobianWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
         {
             unsigned int nc = getConstraintsDimension();
-            if ((jacobian.rows() != nc) || (jacobian.cols() != state.size()))
+            if ((jacobian.rows() != nc) || (jacobian.cols() != state.size())) {
                 jacobian.resize(nc, state.size());
+            }
 
             iDynTreeEigenMatrixMap jacobianMap = toEigen(jacobian);
             Eigen::Index offset = 0;
@@ -864,8 +881,9 @@ namespace iDynTree {
         bool OptimalControlProblem::constraintsJacobianWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
         {
             unsigned int nc = getConstraintsDimension();
-            if ((jacobian.rows() != nc) || (jacobian.cols() != control.size()))
+            if ((jacobian.rows() != nc) || (jacobian.cols() != control.size())) {
                 jacobian.resize(nc, control.size());
+            }
 
             iDynTreeEigenMatrixMap jacobianMap = toEigen(jacobian);
             Eigen::Index offset = 0;

@@ -35,14 +35,15 @@ class TestEquation1 : public DynamicalSystem{
     VectorDynSize m_initialConditions;
 public:
     TestEquation1(double lambda)
-        :DynamicalSystem(1,0)
-        ,m_lambda(lambda)
-        ,m_initialConditions(1)
+        : DynamicalSystem(1,0)
+        , m_lambda(lambda)
+        , m_initialConditions(1)
     {}
 
     bool dynamics(const VectorDynSize &state, double time, VectorDynSize &stateDynamics){
-        if (state.size() != 1)
+        if (state.size() != 1) {
             return false;
+        }
         stateDynamics.resize(1);
         stateDynamics(0) = m_lambda * state(0);
         return true;

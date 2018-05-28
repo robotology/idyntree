@@ -161,9 +161,11 @@ namespace iDynTree {
 
             void addNonZero(std::vector<size_t>& input, size_t position, size_t toBeAdded){
                 assert(input.size() >= position);
-                if (position >= input.size())
+                if (position >= input.size()){
                     input.push_back(toBeAdded);
-                else input[position] = toBeAdded;
+                } else {
+                    input[position] = toBeAdded;
+                }
             }
 
             void addJacobianBlock(size_t initRow, size_t rows, size_t initCol, size_t cols){
@@ -187,74 +189,100 @@ namespace iDynTree {
             }
 
             void allocateBuffers(){
-                if (stateBuffer.size() != nx)
+                if (stateBuffer.size() != nx) {
                     stateBuffer.resize(static_cast<unsigned int>(nx));
+                }
 
-                if (costStateGradientBuffer.size() != nx)
+                if (costStateGradientBuffer.size() != nx) {
                     costStateGradientBuffer.resize(static_cast<unsigned int>(nx));
+                }
 
-                if ((costHessianStateBuffer.rows() != nx) || (costHessianStateBuffer.cols() != nx))
+                if ((costHessianStateBuffer.rows() != nx) || (costHessianStateBuffer.cols() != nx)) {
                     costHessianStateBuffer.resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nx));
+                }
 
-                if (controlBuffer.size() != nu)
+                if (controlBuffer.size() != nu) {
                     controlBuffer.resize(static_cast<unsigned int>(nu));
+                }
 
-                if (costControlGradientBuffer.size() != nu)
+                if (costControlGradientBuffer.size() != nu) {
                     costControlGradientBuffer.resize(static_cast<unsigned int>(nu));
+                }
 
-                if ((costHessianControlBuffer.rows() != nu) || (costHessianControlBuffer.cols() != nu))
+                if ((costHessianControlBuffer.rows() != nu) || (costHessianControlBuffer.cols() != nu)) {
                     costHessianControlBuffer.resize(static_cast<unsigned int>(nu), static_cast<unsigned int>(nu));
+                }
 
-                if ((costHessianStateControlBuffer.rows() != nx) || (costHessianStateControlBuffer.cols() != nu))
+                if ((costHessianStateControlBuffer.rows() != nx) || (costHessianStateControlBuffer.cols() != nu)) {
                     costHessianStateControlBuffer.resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nu));
+                }
 
-                if ((costHessianControlStateBuffer.rows() != nu) || (costHessianControlStateBuffer.cols() != nx))
+                if ((costHessianControlStateBuffer.rows() != nu) || (costHessianControlStateBuffer.cols() != nx)) {
                     costHessianControlStateBuffer.resize(static_cast<unsigned int>(nu), static_cast<unsigned int>(nx));
+                }
 
 
                 //TODO: I should consider also the possibility to have auxiliary variables in the integrator
-                if (variablesBuffer.size() != numberOfVariables)
+                if (variablesBuffer.size() != numberOfVariables) {
                     variablesBuffer.resize(static_cast<unsigned int>(numberOfVariables));
+                }
 
-                if (constraintsBuffer.size() != constraintsPerInstant)
+                if (constraintsBuffer.size() != constraintsPerInstant) {
                     constraintsBuffer.resize(static_cast<unsigned int>(constraintsPerInstant));
+                }
 
-                if (constraintsLowerBound.size() != numberOfConstraints)
+                if (constraintsLowerBound.size() != numberOfConstraints) {
                     constraintsLowerBound.resize(static_cast<unsigned int>(numberOfConstraints));
+                }
 
-                if (constraintsUpperBound.size() != numberOfConstraints)
+                if (constraintsUpperBound.size() != numberOfConstraints) {
                     constraintsUpperBound.resize(static_cast<unsigned int>(numberOfConstraints));
+                }
 
                 //TODO: I should consider also the possibility to have auxiliary variables in the integrator
-                if (collocationStateBuffer.size() != 2)
+                if (collocationStateBuffer.size() != 2) {
                     collocationStateBuffer.resize(2);
-                for (size_t i = 0; i < 2; ++i)
-                    if (collocationStateBuffer[i].size() != nx)
+                }
+                for (size_t i = 0; i < 2; ++i) {
+                    if (collocationStateBuffer[i].size() != nx) {
                         collocationStateBuffer[i].resize(static_cast<unsigned int>(nx));
+                    }
+                }
 
-                if (collocationControlBuffer.size() != 2)
+                if (collocationControlBuffer.size() != 2) {
                     collocationControlBuffer.resize(2);
-                for (size_t i = 0; i < 2; ++i)
-                    if (collocationControlBuffer[i].size() != nu)
+                }
+                for (size_t i = 0; i < 2; ++i) {
+                    if (collocationControlBuffer[i].size() != nu) {
                         collocationControlBuffer[i].resize(static_cast<unsigned int>(nu));
+                    }
+                }
 
-                if (collocationStateJacBuffer.size() != 2)
+                if (collocationStateJacBuffer.size() != 2) {
                     collocationStateJacBuffer.resize(2);
-                for (size_t i = 0; i < 2; ++i)
-                    if ((collocationStateJacBuffer[i].rows() != nx) || (collocationStateJacBuffer[i].cols() != nx))
+                }
+                for (size_t i = 0; i < 2; ++i) {
+                    if ((collocationStateJacBuffer[i].rows() != nx) || (collocationStateJacBuffer[i].cols() != nx)) {
                         collocationStateJacBuffer[i].resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nx));
+                    }
+                }
 
-                if (collocationControlJacBuffer.size() != 2)
+                if (collocationControlJacBuffer.size() != 2) {
                     collocationControlJacBuffer.resize(2);
-                for (size_t i = 0; i < 2; ++i)
-                    if ((collocationControlJacBuffer[i].rows() != nx) || (collocationControlJacBuffer[i].cols() != nu))
+                }
+                for (size_t i = 0; i < 2; ++i) {
+                    if ((collocationControlJacBuffer[i].rows() != nx) || (collocationControlJacBuffer[i].cols() != nu)) {
                         collocationControlJacBuffer[i].resize(static_cast<unsigned int>(nx), static_cast<unsigned int>(nu));
+                    }
+                }
 
-                if ((constraintsStateJacBuffer.rows() != constraintsPerInstant) || (constraintsStateJacBuffer.cols() != nx))
+                if ((constraintsStateJacBuffer.rows() != constraintsPerInstant) || (constraintsStateJacBuffer.cols() != nx)) {
                     constraintsStateJacBuffer.resize(static_cast<unsigned int>(constraintsPerInstant), static_cast<unsigned int>(nx));
+                }
 
-                if ((constraintsControlJacBuffer.rows() != constraintsPerInstant) || (constraintsControlJacBuffer.cols() != nu))
+                if ((constraintsControlJacBuffer.rows() != constraintsPerInstant) || (constraintsControlJacBuffer.cols() != nu)) {
                     constraintsStateJacBuffer.resize(static_cast<unsigned int>(constraintsPerInstant), static_cast<unsigned int>(nu));
+                }
             }
 
 
@@ -788,19 +816,22 @@ namespace iDynTree {
             if (!(m_pimpl->prepared)){
                 reportWarning("MultipleShootingTranscription", "getTimings", "The method solve was not called yet. Computing new mesh points. These may be overwritten when calling the solve method.");
 
-                if (!preliminaryChecks())
+                if (!preliminaryChecks()) {
                     return false;
+                }
 
                 if (!setMeshPoints()){
                     return false;
                 }
             }
 
-            if (stateEvaluations.size() != (m_pimpl->totalMeshes - 1))
+            if (stateEvaluations.size() != (m_pimpl->totalMeshes - 1)) {
                 stateEvaluations.resize(m_pimpl->totalMeshes - 1);
+            }
 
-            if (controlEvaluations.size() != m_pimpl->controlMeshes)
+            if (controlEvaluations.size() != m_pimpl->controlMeshes) {
                 controlEvaluations.resize(m_pimpl->controlMeshes);
+            }
 
             size_t stateIndex = 0, controlIndex = 0;
 
@@ -827,11 +858,13 @@ namespace iDynTree {
                 return false;
             }
 
-            if (states.size() != (m_pimpl->totalMeshes - 1))
+            if (states.size() != (m_pimpl->totalMeshes - 1)) {
                 states.resize((m_pimpl->totalMeshes - 1));
+            }
 
-            if (controls.size() != m_pimpl->controlMeshes)
+            if (controls.size() != m_pimpl->controlMeshes) {
                 controls.resize(m_pimpl->controlMeshes);
+            }
 
             Eigen::Map<Eigen::VectorXd> solutionMap = toEigen(m_pimpl->solution);
 
@@ -841,15 +874,17 @@ namespace iDynTree {
 
             for (auto mesh = m_pimpl->meshPoints.begin(); mesh != m_pimpl->meshPointsEnd; ++mesh){
                 if (mesh->origin != first){
-                    if (states[stateIndex].size() !=  m_pimpl->nx)
+                    if (states[stateIndex].size() !=  m_pimpl->nx) {
                         states[stateIndex].resize(m_pimpl->nx);
+                    }
 
                     toEigen(states[stateIndex]) = solutionMap.segment(mesh->stateIndex, m_pimpl->nx);
                     stateIndex++;
                 }
                 if (mesh->type == MeshPointType::Control){
-                    if (controls[controlIndex].size() !=  m_pimpl->nu)
+                    if (controls[controlIndex].size() !=  m_pimpl->nu) {
                         controls[controlIndex].resize(m_pimpl->nu);
+                    }
 
                     toEigen(controls[controlIndex]) = solutionMap.segment(mesh->controlIndex, m_pimpl->nu);
                     controlIndex++;
@@ -863,8 +898,9 @@ namespace iDynTree {
         bool MultipleShootingTranscription::prepare()
         {
 
-            if (!preliminaryChecks())
+            if (!preliminaryChecks()){
                 return false;
+            }
 
 
             if (!setMeshPoints()){
@@ -1067,11 +1103,13 @@ namespace iDynTree {
                 return false;
             }
 
-            if (constraintsLowerBounds.size() != numberOfConstraints())
+            if (constraintsLowerBounds.size() != numberOfConstraints()) {
                 constraintsLowerBounds.resize(numberOfConstraints());
+            }
 
-            if (constraintsUpperBounds.size() != numberOfConstraints())
+            if (constraintsUpperBounds.size() != numberOfConstraints()) {
                 constraintsUpperBounds.resize(numberOfConstraints());
+            }
 
             constraintsLowerBounds = m_pimpl->constraintsLowerBound;
             constraintsUpperBounds = m_pimpl->constraintsUpperBound;
@@ -1096,11 +1134,13 @@ namespace iDynTree {
                 controlBufferMap.setConstant(m_pimpl->plusInfinity);
             }
 
-            if (!controlBounded && !stateBounded)
+            if (!controlBounded && !stateBounded) {
                 return false;
+            }
 
-            if (variablesUpperBound.size() != m_pimpl->numberOfVariables)
+            if (variablesUpperBound.size() != m_pimpl->numberOfVariables) {
                 variablesUpperBound.resize(m_pimpl->numberOfVariables);
+            }
             Eigen::Map<Eigen::VectorXd> upperBoundMap = toEigen(variablesUpperBound);
 
             Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
@@ -1137,11 +1177,13 @@ namespace iDynTree {
                 controlBufferMap.setConstant(m_pimpl->minusInfinity);
             }
 
-            if (!controlBounded && !stateBounded)
+            if (!controlBounded && !stateBounded) {
                 return false;
+            }
 
-            if (variablesLowerBound.size() != m_pimpl->numberOfVariables)
+            if (variablesLowerBound.size() != m_pimpl->numberOfVariables) {
                 variablesLowerBound.resize(m_pimpl->numberOfVariables);
+            }
             Eigen::Map<Eigen::VectorXd> lowerBoundMap = toEigen(variablesLowerBound);
 
             Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
@@ -1168,11 +1210,13 @@ namespace iDynTree {
                 return false;
             }
 
-            if (nonZeroElementRows.size() != m_pimpl->jacobianNonZeros)
+            if (nonZeroElementRows.size() != m_pimpl->jacobianNonZeros) {
                 nonZeroElementRows.resize(static_cast<unsigned int>(m_pimpl->jacobianNonZeros));
+            }
 
-            if (nonZeroElementColumns.size() != m_pimpl->jacobianNonZeros)
+            if (nonZeroElementColumns.size() != m_pimpl->jacobianNonZeros) {
                 nonZeroElementColumns.resize(static_cast<unsigned int>(m_pimpl->jacobianNonZeros));
+            }
 
 
             for (unsigned int i = 0; i < m_pimpl->jacobianNonZeros; ++i){
@@ -1190,11 +1234,13 @@ namespace iDynTree {
                 return false;
             }
 
-            if (nonZeroElementRows.size() != m_pimpl->hessianNonZeros)
+            if (nonZeroElementRows.size() != m_pimpl->hessianNonZeros) {
                 nonZeroElementRows.resize(static_cast<unsigned int>(m_pimpl->hessianNonZeros));
+            }
 
-            if (nonZeroElementColumns.size() != m_pimpl->hessianNonZeros)
+            if (nonZeroElementColumns.size() != m_pimpl->hessianNonZeros) {
                 nonZeroElementColumns.resize(static_cast<unsigned int>(m_pimpl->hessianNonZeros));
+            }
 
             for (unsigned int i = 0; i < m_pimpl->hessianNonZeros; ++i){
                 nonZeroElementRows[i] = m_pimpl->hessianNZRows[i];
@@ -1271,8 +1317,9 @@ namespace iDynTree {
             Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
             Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
 
-            if (gradient.size() != m_pimpl->numberOfVariables)
+            if (gradient.size() != m_pimpl->numberOfVariables) {
                 gradient.resize(static_cast<unsigned int>(m_pimpl->numberOfVariables));
+            }
 
             Eigen::Map<Eigen::VectorXd> gradientMap = toEigen(gradient);
 
@@ -1333,8 +1380,9 @@ namespace iDynTree {
             Eigen::Index nx = static_cast<Eigen::Index>(m_pimpl->nx);
             Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
 
-            if ((hessian.rows() != m_pimpl->numberOfVariables) || (hessian.cols() != m_pimpl->numberOfVariables))
+            if ((hessian.rows() != m_pimpl->numberOfVariables) || (hessian.cols() != m_pimpl->numberOfVariables)) {
                 hessian.resize(static_cast<unsigned int>(m_pimpl->numberOfVariables), static_cast<unsigned int>(m_pimpl->numberOfVariables));
+            }
 
             iDynTreeEigenMatrixMap hessianMap = toEigen(hessian);
 
@@ -1405,8 +1453,9 @@ namespace iDynTree {
             Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
             Eigen::Index nc = static_cast<Eigen::Index>(m_pimpl->constraintsPerInstant);
 
-            if (constraints.size() != m_pimpl->numberOfConstraints)
+            if (constraints.size() != m_pimpl->numberOfConstraints) {
                 constraints.resize(static_cast<unsigned int>(m_pimpl->numberOfConstraints));
+            }
 
             Eigen::Map<Eigen::VectorXd> constraintsMap = toEigen(constraints);
 
@@ -1471,8 +1520,9 @@ namespace iDynTree {
             Eigen::Index nu = static_cast<Eigen::Index>(m_pimpl->nu);
             Eigen::Index nc = static_cast<Eigen::Index>(m_pimpl->constraintsPerInstant);
 
-            if (jacobian.rows() != m_pimpl->numberOfConstraints || jacobian.cols() != m_pimpl->numberOfVariables)
+            if (jacobian.rows() != m_pimpl->numberOfConstraints || jacobian.cols() != m_pimpl->numberOfVariables) {
                 jacobian.resize(static_cast<unsigned int>(m_pimpl->numberOfConstraints), static_cast<unsigned int>(m_pimpl->numberOfVariables));
+            }
 
             iDynTreeEigenMatrixMap jacobianMap = toEigen(jacobian);
 
@@ -1502,17 +1552,19 @@ namespace iDynTree {
                         return false;
                     }
 
-                    if ((mesh -1)->origin != first)
+                    if ((mesh -1)->origin != first) {
                         jacobianMap.block(constraintIndex, (mesh-1)->stateIndex, nx, nx) = toEigen(m_pimpl->collocationStateJacBuffer[0]);
+                    }
 
                     jacobianMap.block(constraintIndex, mesh->stateIndex, nx, nx) = toEigen(m_pimpl->collocationStateJacBuffer[1]);
 
                     jacobianMap.block(constraintIndex, mesh->controlIndex, nx, nu) = toEigen(m_pimpl->collocationControlJacBuffer[1]);
 
-                    if (mesh->type == MeshPointType::Control)
+                    if (mesh->type == MeshPointType::Control) {
                         jacobianMap.block(constraintIndex, mesh->previousControlIndex, nx, nu) = toEigen(m_pimpl->collocationControlJacBuffer[0]);
-                    else if (mesh->type == MeshPointType::State)
+                    } else if (mesh->type == MeshPointType::State) {
                         jacobianMap.block(constraintIndex, mesh->previousControlIndex, nx, nu) += toEigen(m_pimpl->collocationControlJacBuffer[0]); //the previous and the current control coincides
+                    }
                     constraintIndex += nx;
                 }
 
@@ -1523,8 +1575,9 @@ namespace iDynTree {
                     return false;
                 }
 
-                if (mesh->origin != first)
+                if (mesh->origin != first) {
                     jacobianMap.block(constraintIndex, mesh->stateIndex, nc, nx) = toEigen(m_pimpl->constraintsStateJacBuffer);
+                }
 
                 if (!(m_pimpl->ocproblem->constraintsJacobianWRTControl(mesh->time, m_pimpl->collocationStateBuffer[1], m_pimpl->collocationControlBuffer[1], m_pimpl->constraintsControlJacBuffer))){
                     std::ostringstream errorMsg;

@@ -57,8 +57,9 @@ namespace iDynTree {
                     reportError(m_info.name().c_str(), "oneStepIntegration", "Dynamical system not set.");
                 }
 
-                if (x.size() != m_dynamicalSystem_ptr->stateSpaceSize())
+                if (x.size() != m_dynamicalSystem_ptr->stateSpaceSize()) {
                     x.resize(m_dynamicalSystem_ptr->stateSpaceSize());
+                }
 
                 Eigen::Map<Eigen::VectorXd> x_map(x.data(), x.size());
                 const Eigen::Map<const Eigen::VectorXd> x0_map(x0.data(), x0.size());
@@ -82,8 +83,9 @@ namespace iDynTree {
 
             bool RK4::allocateBuffers()
             {
-                if (!m_dynamicalSystem_ptr)
+                if (!m_dynamicalSystem_ptr) {
                     return false;
+                }
 
                 m_K.resize(m_dynamicalSystem_ptr->stateSpaceSize(), 4);
 

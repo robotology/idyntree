@@ -82,30 +82,38 @@ namespace iDynTree {
 
         bool TimeRange::operator<(const TimeRange &rhs) const
         {
-            if (this->m_anyTime && rhs.m_anyTime)
+            if (this->m_anyTime && rhs.m_anyTime) {
                 return false;
+            }
 
-            if (rhs.m_anyTime)
+            if (rhs.m_anyTime) {
                 return true;
+            }
 
-            if (this ->m_anyTime)
+            if (this ->m_anyTime) {
                 return false;
+            }
 
-            if(this->m_initTime != rhs.initTime())
+            if(this->m_initTime != rhs.initTime()) {
                 return this->m_initTime < rhs.initTime();
-            else return this->m_endTime < rhs.endTime();
+            } else {
+                return this->m_endTime < rhs.endTime();
+            }
         }
 
         bool TimeRange::operator==(const TimeRange &rhs) const
         {
-            if (this->m_anyTime && rhs.m_anyTime)
+            if (this->m_anyTime && rhs.m_anyTime) {
                 return true;
+            }
 
-            if (rhs.m_anyTime)
+            if (rhs.m_anyTime) {
                 return false;
+            }
 
-            if (this ->m_anyTime)
+            if (this ->m_anyTime) {
                 return false;
+            }
 
             return (checkDoublesAreEqual(this->m_initTime, rhs.initTime()) && checkDoublesAreEqual(this->m_endTime, rhs.endTime()));//((this->m_initTime == rhs.initTime())&&(this->m_endTime == rhs.endTime()));
         }
@@ -122,11 +130,13 @@ namespace iDynTree {
 
         bool TimeRange::isInRange(double time) const
         {
-            if (m_anyTime)
+            if (m_anyTime) {
                 return true;
+            }
 
-            if (isInstant())
+            if (isInstant()) {
                 return checkDoublesAreEqual(m_initTime, time);
+            }
 
             return ((m_initTime <= time) && (m_endTime >= time));
         }

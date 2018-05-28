@@ -29,8 +29,9 @@ namespace iDynTree {
 
             bool ImplicitTrapezoidal::allocateBuffers()
             {
-                if (!m_dynamicalSystem_ptr)
+                if (!m_dynamicalSystem_ptr) {
                     return false;
+                }
 
                 m_computationBuffer.resize(m_dynamicalSystem_ptr->stateSpaceSize());
                 m_computationBuffer2.resize(m_dynamicalSystem_ptr->stateSpaceSize());
@@ -211,8 +212,9 @@ namespace iDynTree {
                 toEigen(stateJacobianValues[1]) = -toEigen(m_identity) + dT/2*toEigen(m_stateJacBuffer);
 
 
-                if ((controlJacobianValues[1].rows() != nx) || (controlJacobianValues[1].cols() != nu))
+                if ((controlJacobianValues[1].rows() != nx) || (controlJacobianValues[1].cols() != nu)) {
                     controlJacobianValues[1].resize(nx,nu);
+                }
 
                 if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[1], time + dT, m_controlJacBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",

@@ -68,31 +68,39 @@ namespace iDynTree {
 
                 n = static_cast<Ipopt::Index>(numberOfVariables); //set in the solve method
 
-                if (m_variablesBuffer.size() != numberOfVariables)
+                if (m_variablesBuffer.size() != numberOfVariables) {
                     m_variablesBuffer.resize(numberOfVariables);
+                }
 
-                if (m_costGradientBuffer.size() != numberOfVariables)
+                if (m_costGradientBuffer.size() != numberOfVariables) {
                     m_costGradientBuffer.resize(numberOfVariables);
+                }
 
-                if ((m_costHessianBuffer.rows() != numberOfVariables) || (m_costHessianBuffer.cols() != numberOfVariables))
+                if ((m_costHessianBuffer.rows() != numberOfVariables) || (m_costHessianBuffer.cols() != numberOfVariables)) {
                     m_costHessianBuffer.resize(numberOfVariables, numberOfVariables);
+                }
 
-                if ((m_constraintsHessianBuffer.rows() != numberOfVariables) || (m_constraintsHessianBuffer.cols() != numberOfVariables))
+                if ((m_constraintsHessianBuffer.rows() != numberOfVariables) || (m_constraintsHessianBuffer.cols() != numberOfVariables)) {
                     m_constraintsHessianBuffer.resize(numberOfVariables, numberOfVariables);
+                }
 
-                if ((m_lagrangianHessianBuffer.rows() != numberOfVariables) || (m_lagrangianHessianBuffer.cols() != numberOfVariables))
+                if ((m_lagrangianHessianBuffer.rows() != numberOfVariables) || (m_lagrangianHessianBuffer.cols() != numberOfVariables)) {
                     m_lagrangianHessianBuffer.resize(numberOfVariables, numberOfVariables);
+                }
 
                 m = static_cast<Ipopt::Index>(numberOfConstraints); //set in the solve method
 
-                if (m_constraintsBuffer.size() != numberOfConstraints)
+                if (m_constraintsBuffer.size() != numberOfConstraints) {
                     m_constraintsBuffer.resize(numberOfConstraints);
+                }
 
-                if (constraintMultipliers.size() != numberOfConstraints)
+                if (constraintMultipliers.size() != numberOfConstraints) {
                     constraintMultipliers.resize(numberOfConstraints);
+                }
 
-                if ((m_jacobianBuffer.rows() != numberOfConstraints) || (m_jacobianBuffer.cols() != numberOfVariables))
+                if ((m_jacobianBuffer.rows() != numberOfConstraints) || (m_jacobianBuffer.cols() != numberOfVariables)) {
                     m_jacobianBuffer.resize(numberOfConstraints, numberOfVariables);
+                }
 
                 nnz_jac_g = static_cast<Ipopt::Index>(constraintsJacNNZRows.size()); //set in the solve method
 
@@ -119,13 +127,17 @@ namespace iDynTree {
                 Eigen::Map<Eigen::VectorXd> variablesLBInput = toEigen(m_variablesLowerBounds);
                 Eigen::Map<Eigen::VectorXd> variablesUBInput = toEigen(m_variablesUpperBounds);
 
-                if (variablesLowerBounded)
+                if (variablesLowerBounded) {
                     variablesLB = variablesLBInput;
-                else variablesLB.setConstant(minusInfinity);
+                } else {
+                    variablesLB.setConstant(minusInfinity);
+                }
 
-                if (variablesUpperBounded)
+                if (variablesUpperBounded) {
                     variablesUB = variablesUBInput;
-                else variablesUB.setConstant(plusInfinity);
+                } else {
+                    variablesUB.setConstant(plusInfinity);
+                }
 
                 if (!(problem->getConstraintsBounds(m_constraintsLowerBounds, m_constraintsUpperBounds))){
                     reportError("IpoptInterface", "solve", "Error while retrieving constraints info.");
@@ -157,9 +169,11 @@ namespace iDynTree {
                 if (init_lambda)
                 {
                     Eigen::Map<Eigen::VectorXd> lambdaMap(lambda, m);
-                    if (constraintMultipliers.size() == static_cast<unsigned int>(m))
+                    if (constraintMultipliers.size() == static_cast<unsigned int>(m)) {
                         lambdaMap = iDynTree::toEigen(constraintMultipliers);
-                    else lambdaMap.setZero();
+                    } else {
+                        lambdaMap.setZero();
+                    }
                 }
 
                 if(init_x){
@@ -169,14 +183,18 @@ namespace iDynTree {
                             x_map = iDynTree::toEigen(initialGuess);
                         } else {
                             reportWarning("NLPImplementation", "get_starting_point", "The specified initial guess has dimension different from the number of variables. Ignoring.");
-                            if (solution.size() == static_cast<unsigned int>(n))
+                            if (solution.size() == static_cast<unsigned int>(n)) {
                                 x_map = toEigen(solution);
-                            else x_map.setZero();
+                            } else {
+                                x_map.setZero();
+                            }
                         }
                     } else {
-                        if (solution.size() == static_cast<unsigned int>(n))
+                        if (solution.size() == static_cast<unsigned int>(n)) {
                             x_map = toEigen(solution);
-                        else x_map.setZero();
+                        } else {
+                            x_map.setZero();
+                        }
                     }
                 }
                 return true;
@@ -335,11 +353,13 @@ namespace iDynTree {
                 if((status == Ipopt::SUCCESS)||status == Ipopt::STOP_AT_ACCEPTABLE_POINT){
                     Eigen::Map< const Eigen::VectorXd > x_map (x, n);
 
-                    if (solution.size() != static_cast<unsigned int>(n))
+                    if (solution.size() != static_cast<unsigned int>(n)) {
                         solution.resize(static_cast<unsigned int>(n));
+                    }
 
-                    if (initialGuess.size() != static_cast<unsigned int>(n))
+                    if (initialGuess.size() != static_cast<unsigned int>(n)) {
                         initialGuess.resize(static_cast<unsigned int>(n));
+                    }
 
                     toEigen(solution) = x_map;
                     toEigen(initialGuess) = x_map;
@@ -348,11 +368,13 @@ namespace iDynTree {
                     Eigen::Map<const Eigen::VectorXd> zlMap(z_L, n);
                     Eigen::Map<const Eigen::VectorXd> zuMap(z_U, n);
 
-                    if (lowerBoundMultipliers.size() != static_cast<unsigned int>(n))
+                    if (lowerBoundMultipliers.size() != static_cast<unsigned int>(n)) {
                         lowerBoundMultipliers.resize(static_cast<unsigned int>(n));
+                    }
 
-                    if (upperBoundMultipliers.size() != static_cast<unsigned int>(n))
+                    if (upperBoundMultipliers.size() != static_cast<unsigned int>(n)) {
                         upperBoundMultipliers.resize(static_cast<unsigned int>(n));
+                    }
 
                     toEigen(lowerBoundMultipliers) = zlMap;
                     toEigen(upperBoundMultipliers) = zuMap;
@@ -362,16 +384,18 @@ namespace iDynTree {
 
                     optimalCostValue = obj_value;
 
-                    if (optimalConstraintsValue.size() != static_cast<unsigned int>(m))
+                    if (optimalConstraintsValue.size() != static_cast<unsigned int>(m)) {
                         optimalConstraintsValue.resize(static_cast<unsigned int>(m));
+                    }
 
                     Eigen::Map<const Eigen::VectorXd> gMap(g, m);
                     toEigen(optimalConstraintsValue) = gMap;
 
                     if(status == Ipopt::SUCCESS){
                         exitCode = 0;
+                    } else {
+                        exitCode = 1;
                     }
-                    else exitCode = 1;
                 } else {
                     std::ostringstream errorMsg;
                     errorMsg << "Optimization problem failed due to ";

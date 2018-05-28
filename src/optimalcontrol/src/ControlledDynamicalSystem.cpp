@@ -106,15 +106,17 @@ namespace iDynTree {
             }
 
             virtual const VectorDynSize& initialState() const final {
-                if (m_autonomousSystem)
+                if (m_autonomousSystem) {
                     return m_autonomousSystem->initialState();
+                }
                 reportError("ControlledDynamicalSystem", "initialState", "No dynamical system set");
                 return m_empty;
             }
 
             virtual bool setInitialState(const VectorDynSize &state) final{
-                if (m_autonomousSystem)
+                if (m_autonomousSystem) {
                     return m_autonomousSystem->setInitialState(state);
+                }
                 reportError("ControlledDynamicalSystem", "setInitialState", "No dynamical system set");
                 return false;
             }
@@ -215,8 +217,9 @@ namespace iDynTree {
 
         ControlledDynamicalSystem::~ControlledDynamicalSystem()
         {
-            if (m_pimpl)
+            if (m_pimpl) {
                 delete m_pimpl;
+            }
             m_pimpl = nullptr;
         }
 
@@ -230,8 +233,9 @@ namespace iDynTree {
             m_pimpl->controlledSystem.reset(new DerivedDynamicalSystem(autonomousSystem));
 
             if (usePreviousController && (m_pimpl->lastController)) {
-                if (!(m_pimpl->controlledSystem->setController(m_pimpl->lastController)))
+                if (!(m_pimpl->controlledSystem->setController(m_pimpl->lastController))) {
                     return false;
+                }
             }
 
             m_pimpl->asDynamicalSystem = m_pimpl->controlledSystem;
@@ -245,9 +249,11 @@ namespace iDynTree {
                 return false;
             }
 
-            if (m_pimpl->controlledSystem->stateSpaceSize() != 0)
-                if (!(m_pimpl->controlledSystem->setController(m_pimpl->lastController)))
+            if (m_pimpl->controlledSystem->stateSpaceSize() != 0) {
+                if (!(m_pimpl->controlledSystem->setController(m_pimpl->lastController))) {
                     return false;
+                }
+            }
 
             m_pimpl->lastController = controller;
             return true;

@@ -229,8 +229,9 @@ namespace optimalcontrol {
 
         std::vector<TimeRange>& ConstraintsGroup::getTimeRanges()
         {
-            if (m_pimpl->timeRanges.size() != numberOfConstraints())
+            if (m_pimpl->timeRanges.size() != numberOfConstraints()) {
                 m_pimpl->timeRanges.resize(numberOfConstraints());
+            }
 
             size_t i=0;
             for (auto constraint : m_pimpl->group) {
@@ -247,8 +248,9 @@ namespace optimalcontrol {
             }
 
             std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
-            if (constraintIterator == m_pimpl->orderedIntervals.rend()) //it means that there are no constraints at that time
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()) {//it means that there are no constraints at that time
                 return true;
+            }
 
             return constraintIterator->get()->constraint->isFeasiblePoint(time, state, control);
         }
@@ -256,8 +258,9 @@ namespace optimalcontrol {
         bool ConstraintsGroup::evaluateConstraints(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &constraints)
         {
             if (isAnyTimeGroup()) {
-                if (!(m_pimpl->group.begin()->second.get()->constraint->evaluateConstraint(time, state, control, constraints)))
+                if (!(m_pimpl->group.begin()->second.get()->constraint->evaluateConstraint(time, state, control, constraints))) {
                     return false;
+                }
                 if (constraints.size() > m_pimpl->maxConstraintSize) {
                     std::ostringstream errorMsg;
                     errorMsg << "Constraint named "<<m_pimpl->group.begin()->first<< "output a vector bigger than the specified size.";
@@ -266,8 +269,9 @@ namespace optimalcontrol {
                 }
             }
 
-            if (constraints.size() < m_pimpl->maxConstraintSize)
+            if (constraints.size() < m_pimpl->maxConstraintSize) {
                 constraints.resize(m_pimpl->maxConstraintSize);
+            }
 
             std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
             if (constraintIterator == m_pimpl->orderedIntervals.rend()) { //it means that there are no constraints at that time, what should be the constraint value?
@@ -275,8 +279,9 @@ namespace optimalcontrol {
                 return true;
             }
             
-            if(!(constraintIterator->get()->constraint->evaluateConstraint(time, state, control, constraintIterator->get()->constraintBuffer)))
+            if(!(constraintIterator->get()->constraint->evaluateConstraint(time, state, control, constraintIterator->get()->constraintBuffer))) {
                 return false;
+            }
 
             if (constraintIterator->get()->constraintBuffer.size() > m_pimpl->maxConstraintSize) {
                 std::ostringstream errorMsg;
@@ -308,8 +313,9 @@ namespace optimalcontrol {
                 return false; //to be considered as unbounded
             }
 
-            if (!(constraintIterator->get()->constraint->getLowerBound(lowerBound)))
+            if (!(constraintIterator->get()->constraint->getLowerBound(lowerBound))) {
                 return false;
+            }
 
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize) {
                 lowerBound.resize(m_pimpl->maxConstraintSize);
@@ -333,8 +339,9 @@ namespace optimalcontrol {
                 return false; //to be considered as unbounded
             }
 
-            if (!(constraintIterator->get()->constraint->getUpperBound(upperBound)))
+            if (!(constraintIterator->get()->constraint->getUpperBound(upperBound))) {
                 return false;
+            }
 
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize){
                 upperBound.resize(m_pimpl->maxConstraintSize);
@@ -351,8 +358,9 @@ namespace optimalcontrol {
                 return m_pimpl->group.begin()->second.get()->constraint->constraintJacobianWRTState(time, state, control, jacobian);
             }
 
-            if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != state.size()))
+            if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != state.size())) {
                 jacobian.resize(m_pimpl->maxConstraintSize, state.size());
+            }
 
             std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
             if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
@@ -425,8 +433,9 @@ namespace optimalcontrol {
                 jacobian = m_pimpl->group.begin()->second.get()->controlJacobianBuffer;
             }
 
-            if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != control.size()))
+            if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != control.size())) {
                 jacobian.resize(m_pimpl->maxConstraintSize, control.size());
+            }
 
             std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
             if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
@@ -470,8 +479,9 @@ namespace optimalcontrol {
 
         bool ConstraintsGroup::isAnyTimeGroup()
         {
-            if ((numberOfConstraints() == 1) && (m_pimpl->group.begin()->second.get()->timeRange == TimeRange::AnyTime()))
+            if ((numberOfConstraints() == 1) && (m_pimpl->group.begin()->second.get()->timeRange == TimeRange::AnyTime())) {
                 return true;
+            }
             return false;
         }
 
@@ -483,8 +493,9 @@ namespace optimalcontrol {
         const std::vector<std::string> ConstraintsGroup::listConstraints() const
         {
             std::vector<std::string> output;
-            for (auto constraint: m_pimpl->group)
+            for (auto constraint: m_pimpl->group) {
                 output.push_back(constraint.second->constraint->name()); //MEMORY ALLOCATION
+            }
             return output;
         }
 

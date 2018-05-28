@@ -28,8 +28,9 @@ namespace iDynTree {
 
             bool ForwardEuler::allocateBuffers()
             {
-                if (!m_dynamicalSystem_ptr)
+                if (!m_dynamicalSystem_ptr) {
                     return false;
+                }
 
                 unsigned int nx = static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize());
                 unsigned int nu = static_cast<unsigned int>(m_dynamicalSystem_ptr->controlSpaceSize());
@@ -115,8 +116,9 @@ namespace iDynTree {
                     return false;
                 }
 
-                if (constraintValue.size() != m_dynamicalSystem_ptr->stateSpaceSize())
+                if (constraintValue.size() != m_dynamicalSystem_ptr->stateSpaceSize()) {
                     constraintValue.resize(static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize()));
+                }
 
                 if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[0])))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraint", "Error while setting the control input.");
@@ -163,11 +165,13 @@ namespace iDynTree {
                 unsigned int nx = static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize());
                 unsigned int nu = static_cast<unsigned int>(m_dynamicalSystem_ptr->controlSpaceSize());
 
-                if (stateJacobianValues.size() != 2)
+                if (stateJacobianValues.size() != 2) {
                     stateJacobianValues.resize(2);
+                }
 
-                if ((stateJacobianValues[0].rows() != nx) || (stateJacobianValues[0].cols() != nx))
+                if ((stateJacobianValues[0].rows() != nx) || (stateJacobianValues[0].cols() != nx)) {
                     stateJacobianValues[0].resize(nx,nx);
+                }
 
                 if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[0])))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian", "Error while setting the control input.");
@@ -182,18 +186,21 @@ namespace iDynTree {
 
                 toEigen(stateJacobianValues[0]) = toEigen(m_identity) + dT*toEigen(m_stateJacBuffer);
 
-                if ((stateJacobianValues[1].rows() != nx) || (stateJacobianValues[1].cols() != nx))
+                if ((stateJacobianValues[1].rows() != nx) || (stateJacobianValues[1].cols() != nx)) {
                     stateJacobianValues[1].resize(nx,nx);
+                }
 
                 toEigen(stateJacobianValues[1]) = -toEigen(m_identity);
 
                 //Control Jacobians
 
-                if (controlJacobianValues.size() != 2)
+                if (controlJacobianValues.size() != 2) {
                     controlJacobianValues.resize(2);
+                }
 
-                if ((controlJacobianValues[0].rows() != nx) || (controlJacobianValues[0].cols() != nu))
+                if ((controlJacobianValues[0].rows() != nx) || (controlJacobianValues[0].cols() != nu)) {
                     controlJacobianValues[0].resize(nx,nu);
+                }
 
                 if (!(m_dynamicalSystem_ptr->dynamicsControlFirstDerivative(collocationPoints[0], time, m_controlJacBuffer))){
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian",
@@ -203,8 +210,9 @@ namespace iDynTree {
 
                 toEigen(controlJacobianValues[0]) = dT*toEigen(m_controlJacBuffer);
 
-                if ((controlJacobianValues[1].rows() != nx) || (controlJacobianValues[1].cols() != nu))
+                if ((controlJacobianValues[1].rows() != nx) || (controlJacobianValues[1].cols() != nu)) {
                     controlJacobianValues[1].resize(nx,nu);
+                }
 
                 controlJacobianValues[1] = m_zeroBuffer;
 

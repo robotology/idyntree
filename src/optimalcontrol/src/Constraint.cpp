@@ -53,17 +53,19 @@ namespace iDynTree {
 
         bool Constraint::getLowerBound(VectorDynSize &lowerBound)
         {
-            if (!m_isLowerBounded)
+            if (!m_isLowerBounded) {
                     return false;
-            if (lowerBound.size() != m_lowerBound.size())
+            }
+            if (lowerBound.size() != m_lowerBound.size()) {
                 lowerBound.resize(m_lowerBound.size());
+            }
             lowerBound = m_lowerBound;
             return true;
         }
 
         bool Constraint::setUpperBound(const VectorDynSize &upperBound)
         {
-            if (upperBound.size() != m_constraintSize){
+            if (upperBound.size() != m_constraintSize) {
                 reportError("Constraint", "setUpperBound", "The upperBound dimension is not coherent with the constraint size.");
                 return false;
             }
@@ -74,18 +76,21 @@ namespace iDynTree {
 
         bool Constraint::getUpperBound(VectorDynSize &upperBound)
         {
-            if (!m_isUpperBounded)
+            if (!m_isUpperBounded) {
                     return false;
-            if (upperBound.size() != m_upperBound.size())
+            }
+            if (upperBound.size() != m_upperBound.size()) {
                 upperBound.resize(m_upperBound.size());
+            }
             upperBound = m_upperBound;
             return true;
         }
 
         bool Constraint::isFeasiblePoint(double time, const VectorDynSize &state, const VectorDynSize &control)
         {
-            if (!m_isUpperBounded && !m_isLowerBounded)
+            if (!m_isUpperBounded && !m_isLowerBounded) {
                 return true;
+            }
 
             if (!evaluateConstraint(time, state, control, m_valueBuffer)){
                 reportError("Constraint", "isFeasiblePoint", "Failed to evaluate constraint.");
@@ -93,13 +98,17 @@ namespace iDynTree {
             }
 
             for (unsigned int i = 0; i < constraintSize(); ++i){
-                if (m_isLowerBounded)
-                    if (m_valueBuffer(i) < m_lowerBound(i))
+                if (m_isLowerBounded) {
+                    if (m_valueBuffer(i) < m_lowerBound(i)) {
                         return false;
+                    }
+                }
 
-                if (m_isUpperBounded)
-                    if (m_valueBuffer(i) > m_upperBound(i))
+                if (m_isUpperBounded) {
+                    if (m_valueBuffer(i) > m_upperBound(i)) {
                         return false;
+                    }
+                }
             }
             return true;
         }
