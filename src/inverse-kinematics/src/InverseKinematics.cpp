@@ -497,7 +497,28 @@ namespace iDynTree {
         assert(IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration.size() == desiredJointConfiguration.size());
         IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration = desiredJointConfiguration;
         if (weight >= 0.0) {
-            IK_PIMPL(m_pimpl)->m_preferredJointsWeight = weight;
+            iDynTree::toEigen(IK_PIMPL(m_pimpl)->m_preferredJointsWeight).setConstant(weight);
+        }
+        return true;
+    }
+
+    bool InverseKinematics::setDesiredFullJointsConfiguration(const VectorDynSize &desiredJointConfiguration, const VectorDynSize &weights)
+    {
+        assert(m_pimpl);
+        assert(IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration.size() == desiredJointConfiguration.size());
+
+        if (desiredJointConfiguration.size() != weights.size()){
+            reportError("InverseKinematics", "setDesiredFullJointsConfiguration", "The dimension of the desired weights is different from the desiredJointConfiguration size.");
+            return false;
+        }
+
+        IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration = desiredJointConfiguration;
+
+        assert(IK_PIMPL(m_pimpl)->m_preferredJointsWeight.size() == weights.size());
+        for (unsigned int i = 0; i < weights.size(); ++i){
+            if (weights(i) >= 0.0) {
+                IK_PIMPL(m_pimpl)->m_preferredJointsWeight(i) = weights(i);
+            }
         }
         return true;
     }
@@ -511,8 +532,28 @@ namespace iDynTree {
         }
 
         if (weight >= 0.0) {
-            IK_PIMPL(m_pimpl)->m_preferredJointsWeight = weight;
+            iDynTree::toEigen(IK_PIMPL(m_pimpl)->m_preferredJointsWeight).setConstant(weight);
         }
+        return true;
+    }
+
+    bool InverseKinematics::setDesiredReducedJointConfiguration(const VectorDynSize &desiredJointConfiguration, const VectorDynSize &weights)
+    {
+        assert(m_pimpl);
+        assert(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size() == desiredJointConfiguration.size());
+
+        if (desiredJointConfiguration.size() != weights.size()){
+            reportError("InverseKinematics", "setDesiredFullJointsConfiguration", "The dimension of the desired weights is different from the desiredJointConfiguration size.");
+            return false;
+        }
+
+        for (size_t i = 0; i < desiredJointConfiguration.size(); ++i) {
+            IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = desiredJointConfiguration(i);
+            if (weights(i) >= 0.0) {
+                IK_PIMPL(m_pimpl)->m_preferredJointsWeight(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = weights(i);
+            }
+        }
+
         return true;
     }
 

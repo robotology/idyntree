@@ -119,7 +119,7 @@ public:
     //Preferred joints configuration for the optimization
     //Size: getNrOfDOFs of the considered model
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
-    double m_preferredJointsWeight;
+    iDynTree::VectorDynSize m_preferredJointsWeight;
 
     bool m_areBaseInitialConditionsSet; /*!< True if initial condition for the base pose are provided by the user */
     
