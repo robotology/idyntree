@@ -18,72 +18,75 @@
 #define IDYNTREE_OPTIMALCONTROL_QUADRATICCOST_H
 
 #include <iDynTree/Cost.h>
-
+#include <iDynTree/TimeVaryingObject.h>
+#include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <memory>
 
 namespace iDynTree {
     namespace optimalcontrol {
-
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
-
-        /*@
-         * Models a cost of the form
-         * \f[
-         * x^\top Q x + u^\top R u
-         * \f]
-         * where \f$x \in \mathbb{R}^n\f$ is the state and
-         * \f$u \in \mathbb{R}^n\f$ is the control
-         */
-        class QuadraticCost
-        : public Cost {
-
-            QuadraticCost(const iDynTree::MatrixDynSize& Q,
-                          const iDynTree::MatrixDynSize& R,
-                          const std::string& costName);
-
-
-            virtual bool costEvaluation(double time,
-                                        const iDynTree::VectorDynSize& state,
-                                        const iDynTree::VectorDynSize& control,
-                                        double& costValue) override;
-
-            virtual bool costFirstPartialDerivativeWRTState(double time,
-                                                            const iDynTree::VectorDynSize& state,
-                                                            const iDynTree::VectorDynSize& control,
-                                                            iDynTree::VectorDynSize& partialDerivative) override;
-
-            virtual bool costFirstPartialDerivativeWRTControl(double time,
-                                                              const iDynTree::VectorDynSize& state,
-                                                              const iDynTree::VectorDynSize& control,
-                                                              iDynTree::VectorDynSize& partialDerivative) override;
-
-            virtual bool costSecondPartialDerivativeWRTState(double time,
-                                                             const iDynTree::VectorDynSize& state,
-                                                             const iDynTree::VectorDynSize& control,
-                                                             iDynTree::MatrixDynSize& partialDerivative) override;
-
-            virtual bool costSecondPartialDerivativeWRTControl(double time,
-                                                               const iDynTree::VectorDynSize& state,
-                                                               const iDynTree::VectorDynSize& control,
-                                                               iDynTree::MatrixDynSize& partialDerivative) override;
-
-
-            virtual bool costSecondPartialDerivativeWRTStateControl(double time,
-                                                                    const iDynTree::VectorDynSize& state,
-                                                                    const iDynTree::VectorDynSize& control,
-                                                                    iDynTree::MatrixDynSize& partialDerivative) override;
-
-        protected:
-            iDynTree::MatrixDynSize m_stateCostMatrix;
-            iDynTree::MatrixDynSize m_controlCostMatrix;
-            iDynTree::MatrixDynSize m_stateControlCostDerivativeMatrix;
-
-        };
-
+       class QuadraticCost;
     }
 }
+
+/**
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
+
+class iDynTree::optimalcontrol::QuadraticCost
+: public Cost {
+
+public:
+    QuadraticCost(const std::string& costName);
+
+    bool setStateCost(const iDynTree::MatrixDynSize& stateHessian, const iDynTree::VectorDynSize& stateGradient);
+
+    //bool setStateCost(const iDynTree::MatrixDynSize& stateHessian,
+    //                  std::shared_ptr<ReferenceTrajectory<VectorDynSize>> timeVaryingStateGradient);
+
+    bool setControlCost(const iDynTree::MatrixDynSize& controlHessian, const iDynTree::VectorDynSize& controlGradient);
+
+    //bool setControlCost(const iDynTree::MatrixDynSize& controlHessian, const iDynTree::VectorDynSize& controlGradient);
+
+
+    virtual bool costEvaluation(double time,
+                                const iDynTree::VectorDynSize& state,
+                                const iDynTree::VectorDynSize& control,
+                                double& costValue) override;//0.5 xT H x + gx
+
+    virtual bool costFirstPartialDerivativeWRTState(double time,
+                                                    const iDynTree::VectorDynSize& state,
+                                                    const iDynTree::VectorDynSize& control,
+                                                    iDynTree::VectorDynSize& partialDerivative) override;
+
+    virtual bool costFirstPartialDerivativeWRTControl(double time,
+                                                      const iDynTree::VectorDynSize& state,
+                                                      const iDynTree::VectorDynSize& control,
+                                                      iDynTree::VectorDynSize& partialDerivative) override;
+
+    virtual bool costSecondPartialDerivativeWRTState(double time,
+                                                     const iDynTree::VectorDynSize& state,
+                                                     const iDynTree::VectorDynSize& control,
+                                                     iDynTree::MatrixDynSize& partialDerivative) override;
+
+    virtual bool costSecondPartialDerivativeWRTControl(double time,
+                                                       const iDynTree::VectorDynSize& state,
+                                                       const iDynTree::VectorDynSize& control,
+                                                       iDynTree::MatrixDynSize& partialDerivative) override;
+
+
+    virtual bool costSecondPartialDerivativeWRTStateControl(double time,
+                                                            const iDynTree::VectorDynSize& state,
+                                                            const iDynTree::VectorDynSize& control,
+                                                            iDynTree::MatrixDynSize& partialDerivative) override;
+
+protected:
+    iDynTree::MatrixDynSize m_stateHessian;
+    iDynTree::VectorDynSize m_stateGradient;
+    iDynTree::MatrixDynSize m_controlHessian;
+    iDynTree::VectorDynSize m_controlGradient;
+    double m_stateCostScale, m_controlCostScale;
+};
 
 #endif /* end of include guard: IDYNTREE_OPTIMALCONTROL_QUADRATICCOST_H */

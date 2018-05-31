@@ -15,20 +15,56 @@
  */
 
 #include <iDynTree/QuadraticCost.h>
+#include <iDynTree/Core/Utils.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
+#include <cmath>
 
 namespace iDynTree {
     namespace optimalcontrol {
 
-        QuadraticCost::QuadraticCost(const iDynTree::MatrixDynSize& Q,
-                                     const iDynTree::MatrixDynSize& R, const std::string &costName)
-        : Cost(costName)
-        , m_stateCostMatrix(Q)
-        , m_controlCostMatrix(R)
-        , m_stateControlCostDerivativeMatrix(Q.rows(), R.rows())
+        QuadraticCost::QuadraticCost(const std::string &costName)
+            : Cost(costName)
+            , m_stateCostScale(0.0)
+            , m_controlCostScale(0.0)
+        { }
+
+        bool QuadraticCost::setStateCost(const MatrixDynSize &stateHessian, const VectorDynSize &stateGradient)
         {
-            m_stateControlCostDerivativeMatrix.zero();
+            if (stateHessian.rows() != stateHessian.cols()) {
+                reportError("QuadraticCost", "setStateCost", "The stateHessian matrix is supposed to be square.");
+                return false;
+            }
+
+            if (stateHessian.rows() != stateGradient.size()) {
+                reportError("QuadraticCost", "setStateCost", "stateHessian and stateGradient have inconsistent dimensions.");
+                return false;
+            }
+
+            m_stateHessian = stateHessian;
+            m_stateGradient = stateGradient;
+            m_stateCostScale = 1.0;
+
+            return true;
+        }
+
+        bool QuadraticCost::setControlCost(const MatrixDynSize &controlHessian, const VectorDynSize &controlGradient)
+        {
+            if (controlHessian.rows() != controlHessian.cols()) {
+                reportError("QuadraticCost", "setControlCost", "The controlHessian matrix is supposed to be square.");
+                return false;
+            }
+
+            if (controlHessian.rows() != controlGradient.size()) {
+                reportError("QuadraticCost", "setControlCost", "controlHessian and controlGradient have inconsistent dimensions.");
+                return false;
+            }
+
+            m_controlHessian = controlHessian;
+            m_controlGradient = controlGradient;
+            m_controlCostScale = 1.0;
+
+            return true;
         }
 
         bool QuadraticCost::costEvaluation(double /*time*/,
@@ -36,58 +72,112 @@ namespace iDynTree {
                                            const iDynTree::VectorDynSize& control,
                                            double& costValue)
         {
-            costValue = 0.5 * (iDynTree::toEigen(state).transpose() * iDynTree::toEigen(m_stateCostMatrix) * iDynTree::toEigen(state)
-                          + iDynTree::toEigen(control).transpose() * iDynTree::toEigen(m_controlCostMatrix) * iDynTree::toEigen(control))(0);
+            double stateCost = 0, controlCost = 0;
+
+            if (!checkDoublesAreEqual(m_stateCostScale, 0, 1E-30)){
+                if (m_stateHessian.rows() != state.size()) {
+                    reportError("QuadraticCost", "costEvaluation", "The specified state hessian matrix dimensions do not match the state dimension.");
+                    return false;
+                }
+                stateCost = m_stateCostScale * 0.5 * (toEigen(state).transpose() * toEigen(m_stateHessian) * toEigen(state))(0) + toEigen(m_stateGradient).transpose()*toEigen(state);
+            }
+
+            if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
+                if (m_controlHessian.rows() != control.size()) {
+                    reportError("QuadraticCost", "costEvaluation", "The specified control hessian matrix dimensions do not match the control dimension.");
+                    return false;
+                }
+                controlCost = m_controlCostScale * 0.5 * (toEigen(control).transpose() * toEigen(m_controlHessian) * toEigen(control))(0) + toEigen(m_controlGradient).transpose()*toEigen(control);
+            }
+
+            costValue = stateCost + controlCost;
             return true;
         }
 
-        bool QuadraticCost::costFirstPartialDerivativeWRTState(double time,
+        bool QuadraticCost::costFirstPartialDerivativeWRTState(double /*time*/,
                                                                const iDynTree::VectorDynSize& state,
-                                                               const iDynTree::VectorDynSize& control,
+                                                               const iDynTree::VectorDynSize& /*control*/,
                                                                iDynTree::VectorDynSize& partialDerivative)
         {
-            // TODO: to be checked with the formalism needed: A x or x^T A ?
-            iDynTree::toEigen(partialDerivative) = iDynTree::toEigen(m_stateCostMatrix) * iDynTree::toEigen(state);
+            partialDerivative.resize(state.size());
+
+            if (!checkDoublesAreEqual(m_stateCostScale, 0, 1E-30)){
+                if (m_stateHessian.rows() != state.size()) {
+                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTState", "The specified state hessian matrix dimensions do not match the state dimension.");
+                    return false;
+                }
+                toEigen(partialDerivative) = m_stateCostScale * toEigen(m_stateHessian) * toEigen(state) + toEigen(m_stateGradient);
+            } else {
+                partialDerivative.zero();
+            }
+
             return true;
         }
 
-        bool QuadraticCost::costFirstPartialDerivativeWRTControl(double time,
-                                                          const iDynTree::VectorDynSize& state,
+        bool QuadraticCost::costFirstPartialDerivativeWRTControl(double /*time*/,
+                                                          const iDynTree::VectorDynSize& /*state*/,
                                                           const iDynTree::VectorDynSize& control,
                                                           iDynTree::VectorDynSize& partialDerivative)
         {
-            // TODO: to be checked with the formalism needed: A x or x^T A ?
-            iDynTree::toEigen(partialDerivative) = iDynTree::toEigen(m_controlCostMatrix) * iDynTree::toEigen(control);
+            partialDerivative.resize(control.size());
+
+            if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
+                if (m_controlHessian.rows() != control.size()) {
+                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTControl", "The specified control hessian matrix dimensions do not match the control dimension.");
+                    return false;
+                }
+                toEigen(partialDerivative) = m_controlCostScale * toEigen(m_controlHessian) * toEigen(control) + toEigen(m_controlGradient);
+            } else {
+                partialDerivative.zero();
+            }
             return true;
         }
 
-        bool QuadraticCost::costSecondPartialDerivativeWRTState(double time,
+        bool QuadraticCost::costSecondPartialDerivativeWRTState(double /*time*/,
                                                          const iDynTree::VectorDynSize& state,
-                                                         const iDynTree::VectorDynSize& control,
+                                                         const iDynTree::VectorDynSize& /*control*/,
                                                          iDynTree::MatrixDynSize& partialDerivative)
         {
-            partialDerivative = m_stateCostMatrix;
+            partialDerivative.resize(state.size(), state.size());
+            if (!checkDoublesAreEqual(m_stateCostScale, 0, 1E-30)){
+                if (m_stateHessian.rows() != state.size()) {
+                    reportError("QuadraticCost", "costSecondPartialDerivativeWRTState", "The specified state hessian matrix dimensions do not match the state dimension.");
+                    return false;
+                }
+                toEigen(partialDerivative) = m_stateCostScale * toEigen(m_stateHessian);
+            } else {
+                partialDerivative.zero();
+            }
             return true;
         }
 
-        bool QuadraticCost::costSecondPartialDerivativeWRTControl(double time,
-                                                           const iDynTree::VectorDynSize& state,
+        bool QuadraticCost::costSecondPartialDerivativeWRTControl(double /*time*/,
+                                                           const iDynTree::VectorDynSize& /*state*/,
                                                            const iDynTree::VectorDynSize& control,
                                                            iDynTree::MatrixDynSize& partialDerivative)
         {
-            partialDerivative = m_controlCostMatrix;
+            partialDerivative.resize(control.size(), control.size());
+
+            if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
+                if (m_controlHessian.rows() != control.size()) {
+                    reportError("QuadraticCost", "costSecondPartialDerivativeWRTControl", "The specified control hessian matrix dimensions do not match the control dimension.");
+                    return false;
+                }
+                toEigen(partialDerivative) = m_controlCostScale * toEigen(m_controlHessian);
+            } else {
+                partialDerivative.zero();
+            }
             return true;
         }
 
 
-        bool QuadraticCost::costSecondPartialDerivativeWRTStateControl(double time,
+        bool QuadraticCost::costSecondPartialDerivativeWRTStateControl(double /*time*/,
                                                                 const iDynTree::VectorDynSize& state,
                                                                 const iDynTree::VectorDynSize& control,
                                                                 iDynTree::MatrixDynSize& partialDerivative)
         {
-            // return empty matrix
-            // or simply zero the matrix??
-            partialDerivative = m_stateControlCostDerivativeMatrix;
+            partialDerivative.resize(state.size(), control.size());
+            partialDerivative.zero();
             return true;
         }
 

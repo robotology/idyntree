@@ -4,11 +4,6 @@ project(idyntree_optimalcontrol)
 
 set(libraryname idyntree-optimalcontrol)
 
-# Dependencies
-# IPOPT
-# SUNDIALS (?)
-# find_package(IPOPT REQUIRED)
-
 
 set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/DynamicalSystem.h
@@ -24,12 +19,14 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/Cost.h
                    include/iDynTree/Constraint.h
                    include/iDynTree/QuadraticCost.h
+                   include/iDynTree/L2NormCost.h
                    include/iDynTree/LinearConstraint.h
                    include/iDynTree/Controller.h
                    include/iDynTree/TimeRange.h
                    include/iDynTree/ConstraintsGroup.h
                    include/iDynTree/OptimizationProblem.h
-                   include/iDynTree/Optimizer.h)
+                   include/iDynTree/Optimizer.h
+                   include/iDynTree/TimeVaryingObject.h)
 set(INTEGRATORS_PUBLIC_HEADERS include/iDynTree/Integrators/FixedStepIntegrator.h
                                include/iDynTree/Integrators/RK4.h
                                include/iDynTree/Integrators/ImplicitTrapezoidal.h
@@ -51,6 +48,7 @@ set(SOURCES src/DynamicalSystem.cpp
             src/Cost.cpp
             src/Constraint.cpp
             src/QuadraticCost.cpp
+            src/L2NormCost.cpp
             src/LinearConstraint.cpp
             src/Controller.cpp
             src/FixedStepIntegrator.cpp
