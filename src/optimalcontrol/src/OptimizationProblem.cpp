@@ -22,6 +22,8 @@ namespace iDynTree {
     namespace optimization {
 
         OptimizationProblem::OptimizationProblem()
+        :m_infoData(new OptimizationProblemInfoData)
+        ,m_info(m_infoData)
         {
         }
 
@@ -110,6 +112,66 @@ namespace iDynTree {
         {
             reportError("OptimizationProblem", "evaluateConstraintsHessian", "Method not implemented.");
             return false;
+        }
+
+        const OptimizationProblemInfo &OptimizationProblem::info() const
+        {
+            return m_info;
+        }
+
+        OptimizationProblemInfoData::OptimizationProblemInfoData()
+        : hasLinearConstraints(false)
+        , hasNonLinearConstraints(true)
+        , hasLinearCost(false)
+        , hasQuadraticCost(false)
+        , hasNonLinearCost(true)
+        , hasSparseConstraintJacobian(false)
+        , hasSparseHessian(false)
+        , hessianIsProvided(false)
+        { }
+
+        OptimizationProblemInfo::OptimizationProblemInfo(std::shared_ptr<OptimizationProblemInfoData> data)
+            : m_data(data)
+        { }
+
+        bool OptimizationProblemInfo::hasLinearConstraints() const
+        {
+            return m_data->hasLinearConstraints;
+        }
+
+        bool OptimizationProblemInfo::hasNonLinearConstraints() const
+        {
+            return m_data->hasNonLinearConstraints;
+        }
+
+        bool OptimizationProblemInfo::hasLinearCost() const
+        {
+            return m_data->hasLinearCost;
+        }
+
+        bool OptimizationProblemInfo::hasQuadraticCost() const
+        {
+            return m_data->hasQuadraticCost;
+        }
+
+        bool OptimizationProblemInfo::hasNonLinearCost() const
+        {
+            return m_data->hasNonLinearCost;
+        }
+
+        bool OptimizationProblemInfo::hasSparseConstraintJacobian() const
+        {
+            return m_data->hasSparseConstraintJacobian;
+        }
+
+        bool OptimizationProblemInfo::hasSparseHessian() const
+        {
+            return m_data->hasSparseHessian;
+        }
+
+        bool OptimizationProblemInfo::hessianIsProvided() const
+        {
+            return m_data->hessianIsProvided;
         }
 
     }

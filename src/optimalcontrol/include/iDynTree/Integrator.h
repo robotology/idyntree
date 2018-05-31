@@ -67,9 +67,9 @@ namespace optimalcontrol {
 
                 const std::string &name() const;
 
-                 bool isExplicit() const;
+                bool isExplicit() const;
 
-                 size_t numberOfStages() const;
+                size_t numberOfStages() const;
             };
 
             /**

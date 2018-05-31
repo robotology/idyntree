@@ -18,6 +18,7 @@
 #define IDYNTREE_OPTIMALCONTROL_OPTIMIZATIONPROBLEM_H
 
 #include <vector>
+#include <memory>
 #include <cstddef>
 
 namespace iDynTree {
@@ -32,6 +33,55 @@ namespace iDynTree {
          * @warning This class is still in active development, and so API interface can change between iDynTree versions.
          * \ingroup iDynTreeExperimental
          */
+
+        class OptimizationProblemInfoData {
+        protected:
+            friend class OptimizationProblem;
+            OptimizationProblemInfoData();
+        public:
+            bool hasLinearConstraints;
+
+            bool hasNonLinearConstraints;
+
+            bool hasLinearCost;
+
+            bool hasQuadraticCost;
+
+            bool hasNonLinearCost;
+
+            bool hasSparseConstraintJacobian;
+
+            bool hasSparseHessian;
+
+            bool hessianIsProvided;
+        };
+
+        class OptimizationProblemInfo {
+        private:
+            std::shared_ptr<OptimizationProblemInfoData> m_data;
+        public:
+            OptimizationProblemInfo(std::shared_ptr<OptimizationProblemInfoData> data);
+
+            OptimizationProblemInfo() = delete;
+
+            OptimizationProblemInfo(const OptimizationProblemInfo &other) = delete;
+
+            bool hasLinearConstraints() const;
+
+            bool hasNonLinearConstraints() const;
+
+            bool hasLinearCost() const;
+
+            bool hasQuadraticCost() const;
+
+            bool hasNonLinearCost() const;
+
+            bool hasSparseConstraintJacobian() const;
+
+            bool hasSparseHessian() const;
+
+            bool hessianIsProvided() const;
+        };
 
         class OptimizationProblem {
 
@@ -73,6 +123,11 @@ namespace iDynTree {
 
             virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers, MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained
 
+            const OptimizationProblemInfo& info() const;
+
+        protected:
+            std::shared_ptr<OptimizationProblemInfoData> m_infoData;
+            OptimizationProblemInfo m_info;
         };
     }
 }
