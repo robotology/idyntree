@@ -660,9 +660,71 @@ public:
      */
     IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setDesiredFullJointsConfiguration or setDesiredReducedJointConfiguration instead")
     bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+
+    /*!
+     * Sets a desired final configuration for all the robot joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same serialisation of the joints in the specified model
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weight weight for the joint configuration cost.
+     *                   If it is not passed, the previous passed value will be mantained.
+     *                   If the value was never passed, its value is 1e-6 .
+     *
+     * @return true if successful, false otherwise.
+     */
     bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+
+    /*!
+     * Sets a desired final configuration for all the robot joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same serialisation of the joints in the specified model
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weights Joint-wise weights for the joint configuration cost.
+     *                   This vector should have the same dimension of the desiredJointConfiguration.
+     *                   If one of its elements is negative, the previous value will be kept.
+     *                   If the value was never passed, its value is 1e-6, equal for all joints.
+     *
+     * @return true if successful, false otherwise.
+     */
     bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const iDynTree::VectorDynSize& weights);
+
+    /*!
+     * Sets a desired final configuration for the set of considered joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same order of the joints in the consideredJoints list.
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weight weight for the joint configuration cost.
+     *                   If it is not passed, the previous passed value will be mantained.
+     *                   If the value was never passed, its value is 1e-6 .
+     *
+     * @return true if successful, false otherwise.
+     */
     bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+
+    /*!
+     * Sets a desired final configuration for the set of considered joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same order of the joints in the consideredJoints list.
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weights Joint-wise weights for the joint configuration cost.
+     *                   This vector should have the same dimension of the desiredJointConfiguration.
+     *                   If one of its elements is negative, the previous value will be kept.
+     *                   If the value was never passed, its value is 1e-6, equal for all joints.
+     *
+     * @return true if successful, false otherwise.
+     */
     bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const iDynTree::VectorDynSize& weights);
 
 
