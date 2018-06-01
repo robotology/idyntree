@@ -58,7 +58,8 @@ set(SOURCES src/DynamicalSystem.cpp
             src/ConstraintsGroup.cpp
             src/OptimizationProblem.cpp
             src/Optimizer.cpp
-            src/ForwardEuler.cpp)
+            src/ForwardEuler.cpp
+            src/TimeVaryingObject.cpp)
 
 if (IDYNTREE_USES_IPOPT)
     list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/IpoptInterface.h)

@@ -20,6 +20,7 @@
 
 #include <iDynTree/QuadraticCost.h>
 #include <iDynTree/TimeVaryingObject.h>
+#include <memory>
 #include <string>
 
 namespace iDynTree {
@@ -38,25 +39,31 @@ namespace iDynTree {
             class L2NormCostImplementation;
             L2NormCostImplementation *m_pimpl;
 
-            using QuadraticCost::setStateCost;
+            using QuadraticCost::setStateCost;  //avoid the user to access these methods to avoid confusion
             using QuadraticCost::setControlCost;
 
         public:
-            L2NormCost(const std::string& name);
 
-            L2NormCost(const std::string& name, const MatrixDynSize& stateSelector); //stateSelector premultiplies the state in the L2-norm
+            L2NormCost(const std::string& name, unsigned int stateDimension, unsigned int controlDimension); //assume identity as selector. Set the dimension to 0 to avoid weighting either the state or the cost
 
-            L2NormCost(const std::string& name, const MatrixDynSize& stateSelector, const MatrixDynSize& controlSelector); //controlSelector premultiplies the control in the L2-norm
+            L2NormCost(const std::string& name, const MatrixDynSize& stateSelector, const MatrixDynSize& controlSelector); //The selector premultiplies the state and the control in the L2-norm. Set some dimension to 0 to avoid weighting either the state or the cost
+
+            L2NormCost(const L2NormCost& other) = delete;
 
             ~L2NormCost();
 
-            bool setStateWeight(const VectorDynSize& stateWeights);
-
             bool setStateWeight(const MatrixDynSize& stateWeights);
 
-            bool setControlWeight(const VectorDynSize& controlWeights);
+            bool setStateDesiredPoint(const VectorDynSize& desiredPoint);
+
+            bool setStateDesiredTrajectory(std::shared_ptr<TimeVaryingVector> stateDesiredTrajectory);
 
             bool setControlWeight(const MatrixDynSize& controlWeights);
+
+            bool setControlDesiredPoint(const VectorDynSize& desiredPoint);
+
+            bool setControlDesiredTrajectory(std::shared_ptr<TimeVaryingVector> controlDesiredTrajectory);
+
         };
 
     }

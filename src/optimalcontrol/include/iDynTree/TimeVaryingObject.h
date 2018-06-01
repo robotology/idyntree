@@ -34,15 +34,43 @@ namespace iDynTree {
         public:
             TimeVaryingObject(){}
 
-            virtual ~TimeVaryingObject(){}
+            virtual ~TimeVaryingObject() {}
 
-            virtual bool getReference(double time, Object& objectAtTime) = 0;
+            virtual const Object& getObject(double time, bool &isValid) = 0;
 
         };
 
-        typedef TimeVaryingObject<VectorDynSize> TimeVaryngVector;
+        typedef TimeVaryingObject<VectorDynSize> TimeVaryingVector;
 
-        typedef TimeVaryingObject<MatrixDynSize> TimeVaryngMatrix;
+        typedef TimeVaryingObject<MatrixDynSize> TimeVaryingMatrix;
+
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
+        class TimeInvariantVector : public TimeVaryingVector {
+            VectorDynSize m_timeInvariantVector;
+        public:
+            TimeInvariantVector();
+
+            TimeInvariantVector(const VectorDynSize& timeInvariantVector);
+
+            VectorDynSize& get();
+
+            virtual const VectorDynSize& getObject(double time, bool &isValid) override;
+        };
+
+        class TimeInvariantMatrix : public TimeVaryingMatrix {
+            MatrixDynSize m_timeInvariantMatrix;
+        public:
+            TimeInvariantMatrix();
+
+            TimeInvariantMatrix(const MatrixDynSize& timeInvariantMatrix);
+
+            MatrixDynSize& get();
+
+            virtual const MatrixDynSize& getObject(double time, bool &isValid) override;
+        };
 
     }
 }

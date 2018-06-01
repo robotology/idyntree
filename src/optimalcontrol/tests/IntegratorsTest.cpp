@@ -24,6 +24,7 @@
 #include <memory>
 #include <cmath>
 #include <iostream>
+#include <ctime>
 
 using namespace iDynTree;
 using namespace iDynTree::optimalcontrol;
@@ -56,6 +57,21 @@ public:
     const VectorDynSize& initialState() const{
         return m_initialConditions;
     }
+
+    bool  dynamicsStateFirstDerivative(const VectorDynSize& state,
+                                                        double time,
+                                                        MatrixDynSize& dynamicsDerivative) override
+    {
+        dynamicsDerivative.resize(1,1);
+        dynamicsDerivative(0,0) =m_lambda;
+        return true; }
+
+    bool dynamicsControlFirstDerivative(const VectorDynSize& state,
+                                                         double time,
+                                                         MatrixDynSize& dynamicsDerivative) override
+    {
+        dynamicsDerivative.resize(0,0);
+        return true; }
 
 };
 
@@ -259,6 +275,32 @@ int main(){
     IntegratorTest3(RK4_3);
     relTol = 5E-2;
     IntegratorTest3(FE_3);
+
+
+    iDynTree::VectorDynSize v1(1), v2(1), v3;
+    iDynTree::getRandomVector(v1);
+    iDynTree::getRandomVector(v2);
+    std::vector<VectorDynSize> c1(2), c2(2), c3;
+    c1[0] = v1;
+    c1[1] = v2;
+
+    std::shared_ptr<Integrator> ptr = std::make_shared<ForwardEuler>(dynamicalSystem);
+    ForwardEuler direct(dynamicalSystem);
+
+    clock_t initT, endT;
+    initT = clock();
+    for (int i = 0; i < 10000; ++i) {
+        ASSERT_IS_TRUE(ptr->evaluateCollocationConstraint(0.0, c1, c2, dT, v3));
+    }
+    endT = clock();
+    std::cerr << "Elapsed time (ptr): " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 <<" ms."<<std::endl;
+
+    initT = clock();
+    for (int i = 0; i < 10000; ++i) {
+        ASSERT_IS_TRUE(direct.evaluateCollocationConstraint(0.0, c1, c2, dT, v3));
+    }
+    endT = clock();
+    std::cerr << "Elapsed time (direct): " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 <<" ms."<<std::endl;
 
     return EXIT_SUCCESS;
 }
