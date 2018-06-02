@@ -14,8 +14,8 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#ifndef IDYNTREE_OPTIMALCONTROL_QUADRATILIKECCOST_H
-#define IDYNTREE_OPTIMALCONTROL_QUADRATILIKECCOST_H
+#ifndef IDYNTREE_OPTIMALCONTROL_QUADRATICLIKECOST_H
+#define IDYNTREE_OPTIMALCONTROL_QUADRATICLIKECOST_H
 
 #include <iDynTree/Cost.h>
 #include <iDynTree/TimeVaryingObject.h>
@@ -81,4 +81,4 @@ namespace iDynTree {
     }
 }
 
-#endif // IDYNTREE_OPTIMALCONTROL_QUADRATILIKECCOST_H
+#endif // IDYNTREE_OPTIMALCONTROL_QUADRATICLIKECOST_H

@@ -48,6 +48,10 @@ namespace iDynTree {
 
             if (m_costsState){
                 bool isValid = false;
+                if (!m_timeVaryingStateHessian) {
+                    reportError("QuadraticLikeCost", "costEvaluation", "The state cost is activated but the timeVaryingStateHessian pointer is empty.");
+                    return false;
+                }
                 const MatrixDynSize &hessian = m_timeVaryingStateHessian->get(time, isValid);
 
                 if (!isValid) {
@@ -71,6 +75,11 @@ namespace iDynTree {
                     return false;
                 }
 
+                if (!m_timeVaryingStateGradient) {
+                    reportError("QuadraticLikeCost", "costEvaluation", "The state cost is activated but the timeVaryingStateGradient pointer is empty.");
+                    return false;
+                }
+
                 isValid = false;
                 const VectorDynSize &gradient = m_timeVaryingStateGradient->get(time, isValid);
 
@@ -88,6 +97,10 @@ namespace iDynTree {
                     return false;
                 }
 
+                if (!m_timeVaryingStateCostBias) {
+                    reportError("QuadraticLikeCost", "costEvaluation", "The state cost is activated but the timeVaryingStateCostBias pointer is empty.");
+                    return false;
+                }
                 isValid = false;
                 double stateBias = m_timeVaryingStateCostBias->get(time, isValid);
 
@@ -102,6 +115,11 @@ namespace iDynTree {
             }
 
             if (m_costsControl){
+                if (!m_timeVaryingControlHessian) {
+                    reportError("QuadraticLikeCost", "costEvaluation", "The control cost is activated but the timeVaryingControlHessian pointer is empty.");
+                    return false;
+                }
+
                 bool isValid = false;
                 const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);
 
@@ -126,6 +144,11 @@ namespace iDynTree {
                     return false;
                 }
 
+                if (!m_timeVaryingControlGradient) {
+                    reportError("QuadraticLikeCost", "costEvaluation", "The control cost is activated but the timeVaryingControlGradient pointer is empty.");
+                    return false;
+                }
+
                 isValid = false;
                 const VectorDynSize &gradient = m_timeVaryingControlGradient->get(time, isValid);
 
@@ -140,6 +163,11 @@ namespace iDynTree {
                     std::ostringstream errorMsg;
                     errorMsg << "The control hessian and the gradient at time: " << time << " have different dimensions.";
                     reportError("QuadraticLikeCost", "costEvaluation", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (!m_timeVaryingControlCostBias) {
+                    reportError("QuadraticLikeCost", "costEvaluation", "The control cost is activated but the timeVaryingControlCostBias pointer is empty.");
                     return false;
                 }
 
@@ -168,6 +196,11 @@ namespace iDynTree {
             partialDerivative.resize(state.size());
 
             if (m_costsState){
+                if (!m_timeVaryingStateHessian) {
+                    reportError("QuadraticLikeCost", "costFirstPartialDerivativeWRTState", "The state cost is activated but the timeVaryingStateHessian pointer is empty.");
+                    return false;
+                }
+
                 bool isValid = false;
                 const MatrixDynSize &hessian = m_timeVaryingStateHessian->get(time, isValid);
 
@@ -189,6 +222,11 @@ namespace iDynTree {
                     std::ostringstream errorMsg;
                     errorMsg << "The hessian at time: " << time << " does not match the state dimension.";
                     reportError("QuadraticLikeCost", "costFirstPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (!m_timeVaryingStateGradient) {
+                    reportError("QuadraticLikeCost", "costFirstPartialDerivativeWRTState", "The state cost is activated but the timeVaryingStateGradient pointer is empty.");
                     return false;
                 }
 
@@ -225,6 +263,11 @@ namespace iDynTree {
             partialDerivative.resize(control.size());
 
             if (m_costsControl){
+                if (!m_timeVaryingControlHessian) {
+                    reportError("QuadraticLikeCost", "costFirstPartialDerivativeWRTControl", "The control cost is activated but the timeVaryingControlHessian pointer is empty.");
+                    return false;
+                }
+
                 bool isValid = false;
                 const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);
 
@@ -249,6 +292,10 @@ namespace iDynTree {
                     return false;
                 }
 
+                if (!m_timeVaryingControlGradient) {
+                    reportError("QuadraticLikeCost", "costFirstPartialDerivativeWRTControl", "The control cost is activated but the timeVaryingControlGradient pointer is empty.");
+                    return false;
+                }
                 isValid = false;
                 const VectorDynSize &gradient = m_timeVaryingControlGradient->get(time, isValid);
 
@@ -280,6 +327,10 @@ namespace iDynTree {
         {
             partialDerivative.resize(state.size(), state.size());
             if (m_costsState){
+                if (!m_timeVaryingStateHessian) {
+                    reportError("QuadraticLikeCost", "costSecondPartialDerivativeWRTState", "The state cost is activated but the timeVaryingStateHessian pointer is empty.");
+                    return false;
+                }
                 bool isValid = false;
                 const MatrixDynSize &hessian = m_timeVaryingStateHessian->get(time, isValid);
 
@@ -319,6 +370,10 @@ namespace iDynTree {
             partialDerivative.resize(control.size(), control.size());
 
             if (m_costsControl){
+                if (!m_timeVaryingControlHessian) {
+                    reportError("QuadraticLikeCost", "costSecondPartialDerivativeWRTControl", "The control cost is activated but the timeVaryingControlHessian pointer is empty.");
+                    return false;
+                }
                 bool isValid = false;
                 const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);
 
