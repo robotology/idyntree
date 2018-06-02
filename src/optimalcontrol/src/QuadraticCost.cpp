@@ -24,17 +24,8 @@ namespace iDynTree {
     namespace optimalcontrol {
 
         QuadraticCost::QuadraticCost(const std::string &costName)
-            : Cost(costName)
-            , m_timeVaryingStateHessian(nullptr)
-            , m_timeVaryingStateGradient(nullptr)
-            , m_timeVaryingControlHessian(nullptr)
-            , m_timeVaryingControlGradient(nullptr)
-            , m_stateCostScale(0.0)
-            , m_controlCostScale(0.0)
-        {
-            m_timeVaryingStateCostBias = std::make_shared<TimeInvariantDouble>(0.0);
-            m_timeVaryingControlCostBias = std::make_shared<TimeInvariantDouble>(0.0);
-        }
+            : QuadraticLikeCost(costName)
+        { }
 
         QuadraticCost::~QuadraticCost()
         { }
@@ -53,7 +44,7 @@ namespace iDynTree {
 
             m_timeVaryingStateHessian.reset(new TimeInvariantMatrix(stateHessian));
             m_timeVaryingStateGradient.reset(new TimeInvariantVector(stateGradient));
-            m_stateCostScale = 1.0;
+            m_costsState = true;
 
             return true;
         }
@@ -72,6 +63,7 @@ namespace iDynTree {
 
             m_timeVaryingStateHessian = timeVaryingStateHessian;
             m_timeVaryingStateGradient = timeVaryingStateGradient;
+            m_costsState = true;
 
             return true;
         }
@@ -90,7 +82,7 @@ namespace iDynTree {
 
             m_timeVaryingControlHessian.reset(new TimeInvariantMatrix(controlHessian));
             m_timeVaryingControlGradient.reset(new TimeInvariantVector(controlGradient));
-            m_controlCostScale = 1.0;
+            m_costsControl = true;
 
             return true;
         }
@@ -109,6 +101,7 @@ namespace iDynTree {
 
             m_timeVaryingControlHessian = timeVaryingControlHessian;
             m_timeVaryingControlGradient = timeVaryingControlGradient;
+            m_costsControl = true;
 
             return true;
         }
@@ -137,329 +130,6 @@ namespace iDynTree {
             m_timeVaryingControlCostBias = timeVaryingControlCostBias;
             return true;
         }
-
-        bool QuadraticCost::costEvaluation(double time,
-                                           const iDynTree::VectorDynSize& state,
-                                           const iDynTree::VectorDynSize& control,
-                                           double& costValue)
-        {
-            double stateCost = 0, controlCost = 0;
-
-            if (!checkDoublesAreEqual(m_stateCostScale, 0, 1E-30)){
-                bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingStateHessian->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid state hessian at time: " << time << ".";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != hessian.cols()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The state hessian at time: " << time << " is not squared.";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != state.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The hessian at time: " << time << " does not match the state dimension.";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                isValid = false;
-                const VectorDynSize &gradient = m_timeVaryingStateGradient->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid state gradient at time: " << time << ".";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != gradient.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The state hessian and the gradient at time: " << time << " have different dimensions.";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                isValid = false;
-                double stateBias = m_timeVaryingStateCostBias->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid state cost bias at time: " << time << ".";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                stateCost = m_stateCostScale * 0.5 * (toEigen(state).transpose() * toEigen(hessian) * toEigen(state))(0) + toEigen(gradient).transpose()*toEigen(state) + stateBias;
-            }
-
-            if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
-                bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid control hessian at time: " << time << ".";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != hessian.cols()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The control hessian at time: " << time << " is not squared.";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != control.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The hessian at time: " << time << " does not match the control dimension.";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                isValid = false;
-                const VectorDynSize &gradient = m_timeVaryingControlGradient->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid control gradient at time: " << time << ".";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != gradient.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The control hessian and the gradient at time: " << time << " have different dimensions.";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                isValid = false;
-                double controlBias = m_timeVaryingControlCostBias->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid control cost bias at time: " << time << ".";
-                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
-                    return false;
-                }
-
-                controlCost = m_controlCostScale * 0.5 * (toEigen(control).transpose() * toEigen(hessian) * toEigen(control))(0) + toEigen(gradient).transpose()*toEigen(control) + controlBias;
-            }
-
-            costValue = stateCost + controlCost;
-            return true;
-        }
-
-        bool QuadraticCost::costFirstPartialDerivativeWRTState(double time,
-                                                               const iDynTree::VectorDynSize& state,
-                                                               const iDynTree::VectorDynSize& /*control*/,
-                                                               iDynTree::VectorDynSize& partialDerivative)
-        {
-            partialDerivative.resize(state.size());
-
-            if (!checkDoublesAreEqual(m_stateCostScale, 0, 1E-30)){
-                bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingStateHessian->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid state hessian at time: " << time << ".";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTState", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != hessian.cols()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The state hessian at time: " << time << " is not squared.";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTState", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != state.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The hessian at time: " << time << " does not match the state dimension.";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTState", errorMsg.str().c_str());
-                    return false;
-                }
-
-                isValid = false;
-                const VectorDynSize &gradient = m_timeVaryingStateGradient->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid state gradient at time: " << time << ".";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTState", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != gradient.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The state hessian and the gradient at time: " << time << " have different dimensions.";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTState", errorMsg.str().c_str());
-                    return false;
-                }
-
-                toEigen(partialDerivative) = m_stateCostScale * toEigen(hessian) * toEigen(state) + toEigen(gradient);
-            } else {
-                partialDerivative.zero();
-            }
-
-            return true;
-        }
-
-        bool QuadraticCost::costFirstPartialDerivativeWRTControl(double time,
-                                                                 const iDynTree::VectorDynSize& /*state*/,
-                                                                 const iDynTree::VectorDynSize& control,
-                                                                 iDynTree::VectorDynSize& partialDerivative)
-        {
-            partialDerivative.resize(control.size());
-
-            if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
-                bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid control hessian at time: " << time << ".";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != hessian.cols()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The control hessian at time: " << time << " is not squared.";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != control.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The hessian at time: " << time << " does not match the control dimension.";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
-                    return false;
-                }
-
-                isValid = false;
-                const VectorDynSize &gradient = m_timeVaryingControlGradient->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid control gradient at time: " << time << ".";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != gradient.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The control hessian and the gradient at time: " << time << " have different dimensions.";
-                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
-                    return false;
-                }
-
-                toEigen(partialDerivative) = m_controlCostScale * toEigen(hessian) * toEigen(control) + toEigen(gradient);
-            } else {
-                partialDerivative.zero();
-            }
-            return true;
-        }
-
-        bool QuadraticCost::costSecondPartialDerivativeWRTState(double time,
-                                                                const iDynTree::VectorDynSize& state,
-                                                                const iDynTree::VectorDynSize& /*control*/,
-                                                                iDynTree::MatrixDynSize& partialDerivative)
-        {
-            partialDerivative.resize(state.size(), state.size());
-            if (!checkDoublesAreEqual(m_stateCostScale, 0, 1E-30)){
-                bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingStateHessian->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid state hessian at time: " << time << ".";
-                    reportError("QuadraticCost", "costSecondPartialDerivativeWRTState", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != hessian.cols()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The state hessian at time: " << time << " is not squared.";
-                    reportError("QuadraticCost", "costSecondPartialDerivativeWRTState", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != state.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The hessian at time: " << time << " does not match the state dimension.";
-                    reportError("QuadraticCost", "costSecondPartialDerivativeWRTState", errorMsg.str().c_str());
-                    return false;
-                }
-
-                toEigen(partialDerivative) = m_stateCostScale * toEigen(hessian);
-            } else {
-                partialDerivative.zero();
-            }
-            return true;
-        }
-
-        bool QuadraticCost::costSecondPartialDerivativeWRTControl(double time,
-                                                                  const iDynTree::VectorDynSize& /*state*/,
-                                                                  const iDynTree::VectorDynSize& control,
-                                                                  iDynTree::MatrixDynSize& partialDerivative)
-        {
-            partialDerivative.resize(control.size(), control.size());
-
-            if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
-                bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);
-
-                if (!isValid) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "Unable to retrieve a valid control hessian at time: " << time << ".";
-                    reportError("QuadraticCost", "costSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != hessian.cols()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The control hessian at time: " << time << " is not squared.";
-                    reportError("QuadraticCost", "costSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
-                    return false;
-                }
-
-                if (hessian.rows() != control.size()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The hessian at time: " << time << " does not match the control dimension.";
-                    reportError("QuadraticCost", "costSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
-                    return false;
-                }
-
-                toEigen(partialDerivative) = m_controlCostScale * toEigen(hessian);
-            } else {
-                partialDerivative.zero();
-            }
-            return true;
-        }
-
-
-        bool QuadraticCost::costSecondPartialDerivativeWRTStateControl(double /*time*/,
-                                                                const iDynTree::VectorDynSize& state,
-                                                                const iDynTree::VectorDynSize& control,
-                                                                iDynTree::MatrixDynSize& partialDerivative)
-        {
-            partialDerivative.resize(state.size(), control.size());
-            partialDerivative.zero();
-            return true;
-        }
-
 
     }
 }

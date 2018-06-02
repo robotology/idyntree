@@ -18,7 +18,6 @@
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/TestUtils.h>
 #include <cassert>
 
 #include <Eigen/Dense>
@@ -209,7 +208,7 @@ namespace iDynTree {
 
 
         L2NormCost::L2NormCost(const std::string &name, unsigned int stateDimension, unsigned int controlDimension)
-        : QuadraticCost(name)
+        : QuadraticLikeCost(name)
         , m_pimpl(new L2NormCostImplementation)
         {
             assert(m_pimpl);
@@ -217,34 +216,34 @@ namespace iDynTree {
             m_pimpl->initialize(stateDimension, controlDimension);
 
             if (m_pimpl->stateGradient) {
-                bool ok;
-                ok = setStateCost(m_pimpl->stateHessian, m_pimpl->stateGradient);
-                ASSERT_IS_TRUE(ok);
+                m_timeVaryingStateHessian = m_pimpl->stateHessian;
+                m_timeVaryingStateGradient = m_pimpl->stateGradient;
+                m_costsState = true;
             }
 
             if (m_pimpl->controlGradient) {
-                bool ok;
-                ok = setControlCost(m_pimpl->controlHessian, m_pimpl->controlGradient);
-                ASSERT_IS_TRUE(ok);
+                m_timeVaryingControlHessian = m_pimpl->controlHessian;
+                m_timeVaryingControlGradient = m_pimpl->controlGradient;
+                m_costsControl = true;
             }
         }
 
         L2NormCost::L2NormCost(const std::string &name, const MatrixDynSize &stateSelector, const MatrixDynSize &controlSelector)
-        : QuadraticCost(name)
+        : QuadraticLikeCost(name)
         , m_pimpl(new L2NormCostImplementation)
         {
             m_pimpl->initialize(stateSelector, controlSelector);
 
             if (m_pimpl->stateGradient) {
-                bool ok;
-                ok = setStateCost(m_pimpl->stateHessian, m_pimpl->stateGradient);
-                ASSERT_IS_TRUE(ok);
+                m_timeVaryingStateHessian = m_pimpl->stateHessian;
+                m_timeVaryingStateGradient = m_pimpl->stateGradient;
+                m_costsState = true;
             }
 
             if (m_pimpl->controlGradient) {
-                bool ok;
-                ok = setControlCost(m_pimpl->controlHessian, m_pimpl->controlGradient);
-                ASSERT_IS_TRUE(ok);
+                m_timeVaryingControlHessian = m_pimpl->controlHessian;
+                m_timeVaryingControlGradient = m_pimpl->controlGradient;
+                m_costsControl = true;
             }
         }
 
@@ -260,19 +259,20 @@ namespace iDynTree {
         {
             m_pimpl->addConstantPart = addItToTheCost;
             if (m_pimpl->addConstantPart) {
+                if (m_pimpl->stateGradient) {
+                    m_timeVaryingStateCostBias = m_pimpl->stateCostBias;
+                }
+                if (m_pimpl->controlGradient) {
+                    m_timeVaryingControlCostBias = m_pimpl->controlCostBias;
+                }
+            } else {
                 std::shared_ptr<TimeVaryingDouble> stateBias(new TimeInvariantDouble(0.0)), controlBias(new TimeInvariantDouble(0.0));
                 if (m_pimpl->stateGradient) {
-                    stateBias = m_pimpl->stateCostBias;
+                    m_timeVaryingStateCostBias = stateBias;
                 }
-
                 if (m_pimpl->controlGradient) {
-                    controlBias = m_pimpl->controlCostBias;
+                    m_timeVaryingControlCostBias = controlBias;
                 }
-
-                setCostBias(stateBias, controlBias);
-
-            } else {
-                setCostBias(0.0, 0.0);
             }
         }
 

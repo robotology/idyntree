@@ -18,7 +18,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_L2NORMCOST_H
 #define IDYNTREE_OPTIMALCONTROL_L2NORMCOST_H
 
-#include <iDynTree/QuadraticCost.h>
+#include <iDynTree/QuadraticLikeCost.h>
 #include <iDynTree/TimeVaryingObject.h>
 #include <memory>
 #include <string>
@@ -35,13 +35,9 @@ namespace iDynTree {
          * \ingroup iDynTreeExperimental
          */
 
-        class L2NormCost : public QuadraticCost {
+        class L2NormCost : public QuadraticLikeCost {
             class L2NormCostImplementation;
             L2NormCostImplementation *m_pimpl;
-
-            using QuadraticCost::setStateCost;  //avoid the user to access these methods to avoid confusion
-            using QuadraticCost::setControlCost;
-            using QuadraticCost::setCostBias;
 
         public:
 

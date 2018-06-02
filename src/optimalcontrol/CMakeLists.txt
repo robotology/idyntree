@@ -18,6 +18,7 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/SystemLineariser.h
                    include/iDynTree/Cost.h
                    include/iDynTree/Constraint.h
+                   include/iDynTree/QuadraticLikeCost.h
                    include/iDynTree/QuadraticCost.h
                    include/iDynTree/L2NormCost.h
                    include/iDynTree/LinearConstraint.h
@@ -48,6 +49,7 @@ set(SOURCES src/DynamicalSystem.cpp
             src/Cost.cpp
             src/Constraint.cpp
             src/QuadraticCost.cpp
+            src/QuadraticLikeCost.cpp
             src/L2NormCost.cpp
             src/LinearConstraint.cpp
             src/Controller.cpp
