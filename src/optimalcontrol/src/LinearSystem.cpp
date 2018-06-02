@@ -15,7 +15,6 @@
  */
 
 #include <iDynTree/LinearSystem.h>
-#include <iDynTree/Controller.h>
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
@@ -31,32 +30,26 @@ namespace iDynTree {
         class LinearSystem::LinearSystemPimpl
         {
         public:
-            bool timeVarying;
-            size_t stateSpaceSize;
-            size_t controlSpaceSize;
-
-            iDynTree::MatrixDynSize stateMatrix;
-            iDynTree::MatrixDynSize controlMatrix;
-
-            Controller* controllerPointer;
-            iDynTree::VectorDynSize controlOutput;
-
-            LinearSystemPimpl()
-                :controllerPointer(nullptr)
-            {}
-
-            ~LinearSystemPimpl(){}
+            std::shared_ptr<TimeVaryingMatrix> stateMatrix;
+            std::shared_ptr<TimeVaryingMatrix> controlMatrix;
         };
 
 
         LinearSystem::LinearSystem(size_t stateSize,
-                                   size_t controlSize,
-                                   bool isTimeVarying)
+                                   size_t controlSize)
         : DynamicalSystem(stateSize, controlSize)
         , m_pimpl(new LinearSystemPimpl())
         {
             assert(m_pimpl);
-            m_pimpl->controlOutput.resize(controlSize);
+            std::shared_ptr<TimeInvariantMatrix> tempState = std::make_shared<TimeInvariantMatrix>();
+            tempState->get().resize(static_cast<unsigned int>(stateSize), static_cast<unsigned int>(stateSize));
+            tempState->get().zero();
+            m_pimpl->stateMatrix = tempState;
+
+            std::shared_ptr<TimeInvariantMatrix> tempControl = std::make_shared<TimeInvariantMatrix>();
+            tempControl->get().resize(static_cast<unsigned int>(stateSize), static_cast<unsigned int>(controlSize));
+            tempControl->get().zero();
+            m_pimpl->controlMatrix = tempControl;
         }
 
         LinearSystem::~LinearSystem()
@@ -67,27 +60,44 @@ namespace iDynTree {
             }
         }
 
-        bool LinearSystem::isTimeVarying()
+        bool LinearSystem::setStateMatrix(const MatrixDynSize &stateMatrix)
         {
-            assert(m_pimpl);
-            return m_pimpl->timeVarying;
+            if ((stateMatrix.rows() != stateSpaceSize()) || (stateMatrix.cols() != stateSpaceSize())) {
+                reportError("LinearSystem", "setStateMatrix", "The stateMatrix does not match the specified state space size.");
+                return false;
+            }
+            m_pimpl->stateMatrix.reset(new TimeInvariantMatrix(stateMatrix));
+            return true;
         }
 
-        iDynTree::MatrixDynSize& LinearSystem::stateMatrix(double time) const
+        bool LinearSystem::setControlMatrix(const MatrixDynSize &controlMatrix)
         {
-            assert(m_pimpl);
-            //if (!m_pimpl->timeVarying) {
-                return m_pimpl->stateMatrix;
-            //}
-
+            if ((controlMatrix.rows() != stateSpaceSize()) || (controlMatrix.cols() != controlSpaceSize())) {
+                reportError("LinearSystem", "setControlMatrix", "The controlMatrix does not match the specified state/control space size.");
+                return false;
+            }
+            m_pimpl->controlMatrix.reset(new TimeInvariantMatrix(controlMatrix));
+            return true;
         }
 
-        iDynTree::MatrixDynSize& LinearSystem::controlMatrix(double time) const
+        bool LinearSystem::setStateMatrix(std::shared_ptr<TimeVaryingMatrix> stateMatrix)
         {
-            assert(m_pimpl);
-            //if (!m_pimpl->timeVarying) {
-                return m_pimpl->controlMatrix;
-            //}
+            if (!stateMatrix) {
+                reportError("LinearSystem", "setStateMatrix", "Empty stateMatrix pointer.");
+                return false;
+            }
+            m_pimpl->stateMatrix = stateMatrix;
+            return true;
+        }
+
+        bool LinearSystem::setControlMatrix(std::shared_ptr<TimeVaryingMatrix> controlMatrix)
+        {
+            if (!controlMatrix) {
+                reportError("LinearSystem", "setControlMatrix", "Empty controlMatrix pointer.");
+                return false;
+            }
+            m_pimpl->controlMatrix = controlMatrix;
+            return true;
         }
 
 
@@ -95,35 +105,91 @@ namespace iDynTree {
                                     double time,
                                     VectorDynSize& stateDynamics)
         {
-            if(!m_pimpl->controllerPointer){
-                reportError("LinearSystem", "dynamics", "Controller not set.");
+            bool isValid = false;
+            const MatrixDynSize& stateMatrix = m_pimpl->stateMatrix->getObject(time, isValid);
+
+            if (!isValid) {
+                std::ostringstream errorMsg;
+                errorMsg << "Unable to retrieve a valid state matrix at time: " << time << ".";
+                reportError("LinearSystem", "dynamics", errorMsg.str().c_str());
                 return false;
             }
-            if(!m_pimpl->controllerPointer->setStateFeedback(time, state)){
-                reportError("LinearSystem", "dynamics", "Error while setting the feedback to the controller.");
+
+            if ((stateMatrix.rows() != stateSpaceSize()) || (stateMatrix.cols() != stateSpaceSize())) {
+                std::ostringstream errorMsg;
+                errorMsg << "The state matrix at time: " << time << " has dimensions not matching with the specified state space dimension.";
+                reportError("LinearSystem", "dynamics", errorMsg.str().c_str());
                 return false;
             }
-            if(!m_pimpl->controllerPointer->doControl(m_pimpl->controlOutput)){
-                reportError("LinearSystem", "dynamics", "Error while retrieving the control input.");
+
+            isValid = false;
+            const MatrixDynSize& controlMatrix = m_pimpl->controlMatrix->getObject(time, isValid);
+
+            if (!isValid) {
+                std::ostringstream errorMsg;
+                errorMsg << "Unable to retrieve a valid control matrix at time: " << time << ".";
+                reportError("LinearSystem", "dynamics", errorMsg.str().c_str());
                 return false;
             }
-            iDynTree::toEigen(stateDynamics) = iDynTree::toEigen(stateMatrix(time)) * iDynTree::toEigen(state) + iDynTree::toEigen(controlMatrix(time)) * iDynTree::toEigen(m_pimpl->controlOutput);
+
+            if ((controlMatrix.rows() != stateSpaceSize()) || (controlMatrix.cols() != controlSpaceSize())) {
+                std::ostringstream errorMsg;
+                errorMsg << "The control matrix at time: " << time << " has dimensions not matching with the specified state/control space dimension.";
+                reportError("LinearSystem", "dynamics", errorMsg.str().c_str());
+                return false;
+            }
+
+            iDynTree::toEigen(stateDynamics) = iDynTree::toEigen(stateMatrix) * iDynTree::toEigen(state) + iDynTree::toEigen(controlMatrix) * iDynTree::toEigen(controlInput());
             return true;
         }
 
-        bool LinearSystem::dynamicsStateFirstDerivative(const VectorDynSize& state,
+        bool LinearSystem::dynamicsStateFirstDerivative(const VectorDynSize& /*state*/,
                                                   double time,
                                                   MatrixDynSize& dynamicsDerivative)
         {
-            dynamicsDerivative = stateMatrix(time);
+            bool isValid = false;
+            const MatrixDynSize& stateMatrix = m_pimpl->stateMatrix->getObject(time, isValid);
+
+            if (!isValid) {
+                std::ostringstream errorMsg;
+                errorMsg << "Unable to retrieve a valid state matrix at time: " << time << ".";
+                reportError("LinearSystem", "dynamicsStateFirstDerivative", errorMsg.str().c_str());
+                return false;
+            }
+
+            if ((stateMatrix.rows() != stateSpaceSize()) || (stateMatrix.cols() != stateSpaceSize())) {
+                std::ostringstream errorMsg;
+                errorMsg << "The state matrix at time: " << time << " has dimensions not matching with the specified state space dimension.";
+                reportError("LinearSystem", "dynamicsStateFirstDerivative", errorMsg.str().c_str());
+                return false;
+            }
+
+            dynamicsDerivative = stateMatrix;
             return true;
         }
 
-        bool LinearSystem::dynamicsControlFirstDerivative(const VectorDynSize& state,
+        bool LinearSystem::dynamicsControlFirstDerivative(const VectorDynSize& /*state*/,
                                                     double time,
                                                     MatrixDynSize& dynamicsDerivative)
         {
-            dynamicsDerivative = controlMatrix(time);
+            bool isValid = false;
+            const MatrixDynSize& controlMatrix = m_pimpl->controlMatrix->getObject(time, isValid);
+
+            if (!isValid) {
+                std::ostringstream errorMsg;
+                errorMsg << "Unable to retrieve a valid control matrix at time: " << time << ".";
+                reportError("LinearSystem", "dynamicsControlFirstDerivative", errorMsg.str().c_str());
+                return false;
+            }
+
+            if ((controlMatrix.rows() != stateSpaceSize()) || (controlMatrix.cols() != controlSpaceSize())) {
+                std::ostringstream errorMsg;
+                errorMsg << "The control matrix at time: " << time << " has dimensions not matching with the specified state/control space dimension.";
+                reportError("LinearSystem", "dynamicsControlFirstDerivative", errorMsg.str().c_str());
+                return false;
+            }
+
+            dynamicsDerivative = controlMatrix;
             return true;
         }
 
