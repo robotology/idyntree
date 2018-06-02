@@ -41,6 +41,7 @@ namespace iDynTree {
 
             using QuadraticCost::setStateCost;  //avoid the user to access these methods to avoid confusion
             using QuadraticCost::setControlCost;
+            using QuadraticCost::setCostBias;
 
         public:
 
@@ -51,6 +52,8 @@ namespace iDynTree {
             L2NormCost(const L2NormCost& other) = delete;
 
             ~L2NormCost();
+
+            void computeConstantPart(bool addItToTheCost = true); //by default the constant part is not added since it adds computational burden. Use it if you need the cost evaluation to be exactly equal to an L2 norm
 
             bool setStateWeight(const MatrixDynSize& stateWeights);
 

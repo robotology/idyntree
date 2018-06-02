@@ -44,6 +44,8 @@ namespace iDynTree {
 
         typedef TimeVaryingObject<MatrixDynSize> TimeVaryingMatrix;
 
+        typedef TimeVaryingObject<double> TimeVaryingDouble;
+
         /**
          * @warning This class is still in active development, and so API interface can change between iDynTree versions.
          * \ingroup iDynTreeExperimental
@@ -70,6 +72,18 @@ namespace iDynTree {
             MatrixDynSize& get();
 
             virtual const MatrixDynSize& getObject(double time, bool &isValid) override;
+        };
+
+        class TimeInvariantDouble : public TimeVaryingDouble {
+            double m_timeInvariantDouble;
+        public:
+            TimeInvariantDouble();
+
+            TimeInvariantDouble(double timeInvariantDouble);
+
+            double& get();
+
+            virtual const double& getObject(double time, bool &isValid) override;
         };
 
     }

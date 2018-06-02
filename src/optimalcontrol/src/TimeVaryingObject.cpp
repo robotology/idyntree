@@ -23,7 +23,7 @@ namespace iDynTree {
         { }
 
         TimeInvariantVector::TimeInvariantVector(const VectorDynSize &timeInvariantVector)
-            : m_timeInvariantVector(timeInvariantVector)
+        : m_timeInvariantVector(timeInvariantVector)
         { }
 
         VectorDynSize &TimeInvariantVector::get()
@@ -41,7 +41,7 @@ namespace iDynTree {
         { }
 
         TimeInvariantMatrix::TimeInvariantMatrix(const MatrixDynSize &timeInvariantMatrix)
-            : m_timeInvariantMatrix(timeInvariantMatrix)
+        : m_timeInvariantMatrix(timeInvariantMatrix)
         { }
 
         MatrixDynSize &TimeInvariantMatrix::get()
@@ -54,5 +54,24 @@ namespace iDynTree {
             isValid = true;
             return m_timeInvariantMatrix;
         }
+
+        TimeInvariantDouble::TimeInvariantDouble()
+        { }
+
+        TimeInvariantDouble::TimeInvariantDouble(double timeInvariantDouble)
+            : m_timeInvariantDouble(timeInvariantDouble)
+        { }
+
+        double &TimeInvariantDouble::get()
+        {
+            return m_timeInvariantDouble;
+        }
+
+        const double &TimeInvariantDouble::getObject(double /*time*/, bool &isValid)
+        {
+            isValid = true;
+            return m_timeInvariantDouble;
+        }
+
     }
 }

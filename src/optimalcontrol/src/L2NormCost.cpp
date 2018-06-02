@@ -27,96 +27,154 @@
 namespace iDynTree {
     namespace optimalcontrol {
 
-    class TimeVaryingGradient : public TimeVaryingVector {
-        MatrixDynSize m_selectorMatrix, m_weightMatrix;
-        MatrixDynSize m_subMatrix; //weightMatrix times selector
-        std::shared_ptr<TimeVaryingVector> m_desiredTrajectory;
-        VectorDynSize m_outputVector;
-    public:
-        TimeVaryingGradient(const MatrixDynSize& selectorMatrix)
-        : m_selectorMatrix(selectorMatrix)
-        , m_desiredTrajectory(nullptr)
-        {
-            m_weightMatrix.resize(m_selectorMatrix.rows(), m_selectorMatrix.rows());
-            toEigen(m_weightMatrix).setIdentity();
-            m_subMatrix = /*m_pimpl->stateWeight * */ m_selectorMatrix;
-            m_outputVector.resize(m_selectorMatrix.cols());
-            m_outputVector.zero();
-        }
-
-        ~TimeVaryingGradient() override;
-
-        bool setDesiredTrajectory(std::shared_ptr<TimeVaryingVector> desiredTrajectory) {
-            if (!desiredTrajectory) {
-                reportError("TimeVaryingGradient", "desiredTrajectory", "Empty desired trajectory pointer.");
-                return false;
-            }
-            m_desiredTrajectory = desiredTrajectory;
-            return true;
-        }
-
-        bool setWeightMatrix(const MatrixDynSize &weights)
-        {
-            if (weights.rows() != weights.cols()) {
-                reportError("TimeVaryingGradient", "setWeightMatrix", "The weights matrix is supposed to be squared.");
-                return false;
+        class TimeVaryingGradient : public TimeVaryingVector {
+            MatrixDynSize m_selectorMatrix, m_weightMatrix;
+            MatrixDynSize m_subMatrix; //weightMatrix times selector
+            std::shared_ptr<TimeVaryingVector> m_desiredTrajectory;
+            VectorDynSize m_outputVector;
+        public:
+            TimeVaryingGradient(const MatrixDynSize& selectorMatrix)
+            : m_selectorMatrix(selectorMatrix)
+            , m_desiredTrajectory(nullptr)
+            {
+                m_weightMatrix.resize(m_selectorMatrix.rows(), m_selectorMatrix.rows());
+                toEigen(m_weightMatrix).setIdentity();
+                m_subMatrix = /*m_pimpl->stateWeight * */ m_selectorMatrix;
+                m_outputVector.resize(m_selectorMatrix.cols());
+                m_outputVector.zero();
             }
 
-            if (weights.cols() != m_selectorMatrix.rows()) {
-                reportError("TimeVaryingGradient", "setWeightMatrix", "The weights matrix dimensions do not match those of the specified selector.");
-                return false;
+            ~TimeVaryingGradient() override;
+
+            bool setDesiredTrajectory(std::shared_ptr<TimeVaryingVector> desiredTrajectory) {
+                if (!desiredTrajectory) {
+                    reportError("TimeVaryingGradient", "desiredTrajectory", "Empty desired trajectory pointer.");
+                    return false;
+                }
+                m_desiredTrajectory = desiredTrajectory;
+                return true;
             }
 
-            m_weightMatrix = weights;
-            toEigen(m_subMatrix) = toEigen(m_weightMatrix) * toEigen(m_selectorMatrix);
+            bool setWeightMatrix(const MatrixDynSize &weights)
+            {
+                if (weights.rows() != weights.cols()) {
+                    reportError("TimeVaryingGradient", "setWeightMatrix", "The weights matrix is supposed to be squared.");
+                    return false;
+                }
 
-            return true;
-        }
+                if (weights.cols() != m_selectorMatrix.rows()) {
+                    reportError("TimeVaryingGradient", "setWeightMatrix", "The weights matrix dimensions do not match those of the specified selector.");
+                    return false;
+                }
 
-        virtual const VectorDynSize& getObject(double time, bool &isValid) override {
-            if (!m_desiredTrajectory) {
+                m_weightMatrix = weights;
+                toEigen(m_subMatrix) = toEigen(m_weightMatrix) * toEigen(m_selectorMatrix);
+
+                return true;
+            }
+
+            virtual const VectorDynSize& getObject(double time, bool &isValid) override {
+                if (!m_desiredTrajectory) {
+                    isValid = true;
+                    return m_outputVector; //should be zero from the initialization
+                }
+                bool ok = false;
+                const VectorDynSize &desiredPoint = m_desiredTrajectory->getObject(time, ok);
+
+                if (!ok) {
+                    isValid = false;
+                    m_outputVector.zero();
+                    return m_outputVector;
+                }
+
+                if (desiredPoint.size() != m_subMatrix.rows()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The specified desired point at time: " << time << " has size not matching the specified selector.";
+                    reportError("TimeVaryingGradient", "getObject", errorMsg.str().c_str());
+                    isValid = false;
+                    m_outputVector.zero();
+                    return m_outputVector;
+                }
+
+                toEigen(m_outputVector) = -1.0 * toEigen(desiredPoint).transpose() * toEigen(m_subMatrix);
+
                 isValid = true;
-                return m_outputVector; //should be zero from the initialization
-            }
-            bool ok = false;
-            const VectorDynSize &desiredPoint = m_desiredTrajectory->getObject(time, ok);
-
-            if (!ok) {
-                isValid = false;
-                m_outputVector.zero();
                 return m_outputVector;
             }
 
-            if (desiredPoint.size() != m_subMatrix.rows()) {
-                std::ostringstream errorMsg;
-                errorMsg << "The specified desired point at time: " << time << " has size not matching the specified selector.";
-                reportError("TimeVaryingGradient", "getObject", errorMsg.str().c_str());
-                isValid = false;
-                m_outputVector.zero();
-                return m_outputVector;
+            const MatrixDynSize& selector() {
+                return m_selectorMatrix;
             }
 
-            toEigen(m_outputVector) = -1.0 * toEigen(desiredPoint).transpose() * toEigen(m_subMatrix);
+            const MatrixDynSize& subMatrix() {
+                return m_subMatrix;
+            }
 
-            isValid = true;
-            return m_outputVector;
-        }
+            const MatrixDynSize& weightMatrix() {
+                return m_weightMatrix;
+            }
 
-        const MatrixDynSize& selector() {
-            return m_selectorMatrix;
-        }
+            std::shared_ptr<TimeVaryingVector> desiredTrajectory() {
+                return m_desiredTrajectory;
+            }
+        };
+        TimeVaryingGradient::~TimeVaryingGradient() {};
 
-        const MatrixDynSize& subMatrix() {
-            return m_subMatrix;
-        }
-    };
-    TimeVaryingGradient::~TimeVaryingGradient() {};
+        class TimeVaryingBias : public TimeVaryingDouble {
+            std::shared_ptr<TimeVaryingGradient> m_associatedGradient;
+            double m_output;
+        public:
+            TimeVaryingBias(std::shared_ptr<TimeVaryingGradient> associatedGradient)
+            :m_associatedGradient(associatedGradient)
+            { }
+
+            ~TimeVaryingBias() override;
+
+            virtual const double& getObject(double time, bool &isValid) override{
+                if (!(m_associatedGradient)) {
+                    isValid = false;
+                    m_output = 0.0;
+                    return m_output;
+                }
+
+                if (!(m_associatedGradient->desiredTrajectory())) {
+                    isValid = true;
+                    m_output = 0.0;
+                    return m_output;
+                }
+
+                bool ok = false;
+                const VectorDynSize &desiredPoint = m_associatedGradient->desiredTrajectory()->getObject(time, ok);
+
+                if (!ok) {
+                    isValid = false;
+                    m_output = 0.0;
+                    return m_output;
+                }
+
+                if (desiredPoint.size() != m_associatedGradient->weightMatrix().rows()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The specified desired point at time: " << time << " has size not matching the specified weight matrix.";
+                    reportError("TimeVaryingBias", "getObject", errorMsg.str().c_str());
+                    isValid = false;
+                    m_output = 0.0;
+                    return m_output;
+                }
+
+                isValid = true;
+                m_output = 0.5 * toEigen(desiredPoint).transpose() * toEigen(m_associatedGradient->weightMatrix()) * toEigen(desiredPoint);
+                return m_output;
+            }
+        };
+        TimeVaryingBias::~TimeVaryingBias() { }
 
 
         class L2NormCost::L2NormCostImplementation {
             public:
-            std::shared_ptr<TimeVaryingGradient> stateGradient, controlGradient;
+            std::shared_ptr<TimeVaryingGradient> stateGradient = nullptr, controlGradient = nullptr;
             std::shared_ptr<TimeInvariantMatrix> stateHessian, controlHessian;
+            std::shared_ptr<TimeVaryingBias> stateCostBias, controlCostBias;
+            bool addConstantPart = false;
 
             void initialize(const MatrixDynSize &stateSelector, const MatrixDynSize &controlSelector) {
                 if ((stateSelector.rows() != 0) && (stateSelector.cols() != 0)) {
@@ -124,6 +182,7 @@ namespace iDynTree {
                     stateHessian = std::make_shared<TimeInvariantMatrix>();
                     stateHessian->get().resize(stateSelector.cols(), stateSelector.cols());
                     toEigen(stateHessian->get()) = toEigen(stateGradient->selector()).transpose() * toEigen(stateGradient->subMatrix());
+                    stateCostBias = std::make_shared<TimeVaryingBias>(stateGradient);
                 } else {
                     stateGradient = nullptr;
                 }
@@ -133,6 +192,7 @@ namespace iDynTree {
                     controlHessian = std::make_shared<TimeInvariantMatrix>();
                     controlHessian->get().resize(controlSelector.cols(), controlSelector.cols());
                     toEigen(controlHessian->get()) = toEigen(controlGradient->selector()).transpose() * toEigen(controlGradient->subMatrix());
+                    controlCostBias = std::make_shared<TimeVaryingBias>(controlGradient);
                 } else {
                     controlGradient = nullptr;
                 }
@@ -193,6 +253,26 @@ namespace iDynTree {
             if (m_pimpl){
                 delete m_pimpl;
                 m_pimpl = nullptr;
+            }
+        }
+
+        void L2NormCost::computeConstantPart(bool addItToTheCost)
+        {
+            m_pimpl->addConstantPart = addItToTheCost;
+            if (m_pimpl->addConstantPart) {
+                std::shared_ptr<TimeVaryingDouble> stateBias(new TimeInvariantDouble(0.0)), controlBias(new TimeInvariantDouble(0.0));
+                if (m_pimpl->stateGradient) {
+                    stateBias = m_pimpl->stateCostBias;
+                }
+
+                if (m_pimpl->controlGradient) {
+                    controlBias = m_pimpl->controlCostBias;
+                }
+
+                setCostBias(stateBias, controlBias);
+
+            } else {
+                setCostBias(0.0, 0.0);
             }
         }
 

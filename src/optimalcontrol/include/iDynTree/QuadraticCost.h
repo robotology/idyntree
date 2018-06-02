@@ -49,10 +49,15 @@ namespace iDynTree {
            bool setControlCost(std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> timeVaryingControlHessian,
                                std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> timeVaryingControlGradient);
 
+           bool setCostBias(double stateCostBias, double controlCostBias);
+
+           bool setCostBias(std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingStateCostBias,
+                            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingControlCostBias);
+
            virtual bool costEvaluation(double time,
                                        const iDynTree::VectorDynSize& state,
                                        const iDynTree::VectorDynSize& control,
-                                       double& costValue) override;//0.5 xT H x + gx
+                                       double& costValue) override;//0.5 xT H x + gx + c
 
            virtual bool costFirstPartialDerivativeWRTState(double time,
                                                            const iDynTree::VectorDynSize& state,
@@ -83,8 +88,11 @@ namespace iDynTree {
        protected:
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> m_timeVaryingStateHessian;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> m_timeVaryingStateGradient;
+           std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> m_timeVaryingStateCostBias;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> m_timeVaryingControlHessian;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> m_timeVaryingControlGradient;
+           std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> m_timeVaryingControlCostBias;
+
            double m_stateCostScale, m_controlCostScale;
        };
     }

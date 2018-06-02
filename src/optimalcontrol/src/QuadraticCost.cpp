@@ -25,9 +25,16 @@ namespace iDynTree {
 
         QuadraticCost::QuadraticCost(const std::string &costName)
             : Cost(costName)
+            , m_timeVaryingStateHessian(nullptr)
+            , m_timeVaryingStateGradient(nullptr)
+            , m_timeVaryingControlHessian(nullptr)
+            , m_timeVaryingControlGradient(nullptr)
             , m_stateCostScale(0.0)
             , m_controlCostScale(0.0)
-        { }
+        {
+            m_timeVaryingStateCostBias = std::make_shared<TimeInvariantDouble>(0.0);
+            m_timeVaryingControlCostBias = std::make_shared<TimeInvariantDouble>(0.0);
+        }
 
         QuadraticCost::~QuadraticCost()
         { }
@@ -106,6 +113,31 @@ namespace iDynTree {
             return true;
         }
 
+        bool QuadraticCost::setCostBias(double stateCostBias, double controlCostBias)
+        {
+            m_timeVaryingStateCostBias.reset(new TimeInvariantDouble(stateCostBias));
+            m_timeVaryingControlCostBias.reset(new TimeInvariantDouble(controlCostBias));
+            return true;
+        }
+
+        bool QuadraticCost::setCostBias(std::shared_ptr<TimeVaryingDouble> timeVaryingStateCostBias,
+                                        std::shared_ptr<TimeVaryingDouble> timeVaryingControlCostBias)
+        {
+            if (!timeVaryingStateCostBias) {
+                reportError("QuadraticCost", "addCostBias", "The timeVaryingStateCostBias pointer is empty.");
+                return false;
+            }
+
+            if (!timeVaryingControlCostBias) {
+                reportError("QuadraticCost", "addCostBias", "The timeVaryingControlCostBias pointer is empty.");
+                return false;
+            }
+
+            m_timeVaryingStateCostBias = timeVaryingStateCostBias;
+            m_timeVaryingControlCostBias = timeVaryingControlCostBias;
+            return true;
+        }
+
         bool QuadraticCost::costEvaluation(double time,
                                            const iDynTree::VectorDynSize& state,
                                            const iDynTree::VectorDynSize& control,
@@ -141,6 +173,13 @@ namespace iDynTree {
                 isValid = false;
                 const VectorDynSize &gradient = m_timeVaryingStateGradient->getObject(time, isValid);
 
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid state gradient at time: " << time << ".";
+                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
+                    return false;
+                }
+
                 if (hessian.rows() != gradient.size()) {
                     std::ostringstream errorMsg;
                     errorMsg << "The state hessian and the gradient at time: " << time << " have different dimensions.";
@@ -148,7 +187,17 @@ namespace iDynTree {
                     return false;
                 }
 
-                stateCost = m_stateCostScale * 0.5 * (toEigen(state).transpose() * toEigen(hessian) * toEigen(state))(0) + toEigen(gradient).transpose()*toEigen(state);
+                isValid = false;
+                double stateBias = m_timeVaryingStateCostBias->getObject(time, isValid);
+
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid state cost bias at time: " << time << ".";
+                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
+                    return false;
+                }
+
+                stateCost = m_stateCostScale * 0.5 * (toEigen(state).transpose() * toEigen(hessian) * toEigen(state))(0) + toEigen(gradient).transpose()*toEigen(state) + stateBias;
             }
 
             if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
@@ -179,6 +228,13 @@ namespace iDynTree {
                 isValid = false;
                 const VectorDynSize &gradient = m_timeVaryingControlGradient->getObject(time, isValid);
 
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid control gradient at time: " << time << ".";
+                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
+                    return false;
+                }
+
                 if (hessian.rows() != gradient.size()) {
                     std::ostringstream errorMsg;
                     errorMsg << "The control hessian and the gradient at time: " << time << " have different dimensions.";
@@ -186,7 +242,17 @@ namespace iDynTree {
                     return false;
                 }
 
-                controlCost = m_controlCostScale * 0.5 * (toEigen(control).transpose() * toEigen(hessian) * toEigen(control))(0) + toEigen(gradient).transpose()*toEigen(control);
+                isValid = false;
+                double controlBias = m_timeVaryingControlCostBias->getObject(time, isValid);
+
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid control cost bias at time: " << time << ".";
+                    reportError("QuadraticCost", "costEvaluation", errorMsg.str().c_str());
+                    return false;
+                }
+
+                controlCost = m_controlCostScale * 0.5 * (toEigen(control).transpose() * toEigen(hessian) * toEigen(control))(0) + toEigen(gradient).transpose()*toEigen(control) + controlBias;
             }
 
             costValue = stateCost + controlCost;
@@ -227,6 +293,13 @@ namespace iDynTree {
 
                 isValid = false;
                 const VectorDynSize &gradient = m_timeVaryingStateGradient->getObject(time, isValid);
+
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid state gradient at time: " << time << ".";
+                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
 
                 if (hessian.rows() != gradient.size()) {
                     std::ostringstream errorMsg;
@@ -277,6 +350,13 @@ namespace iDynTree {
 
                 isValid = false;
                 const VectorDynSize &gradient = m_timeVaryingControlGradient->getObject(time, isValid);
+
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid control gradient at time: " << time << ".";
+                    reportError("QuadraticCost", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
 
                 if (hessian.rows() != gradient.size()) {
                     std::ostringstream errorMsg;
