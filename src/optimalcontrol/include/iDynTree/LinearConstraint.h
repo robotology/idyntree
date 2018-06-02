@@ -51,17 +51,17 @@ namespace iDynTree {
             virtual bool evaluateConstraint(double time,
                                             const VectorDynSize& state,
                                             const VectorDynSize& control,
-                                            VectorDynSize& constraint) override;// lu <= [Ax, Au][x;u] <= lU
+                                            VectorDynSize& constraint) final;// lu <= [Ax, Au][x;u] <= lU
 
             virtual bool constraintJacobianWRTState(double time,
                                                     const VectorDynSize& state,
                                                     const VectorDynSize& control,
-                                                    MatrixDynSize& jacobian) override;
+                                                    MatrixDynSize& jacobian) final;
 
             virtual bool constraintJacobianWRTControl(double time,
                                                       const VectorDynSize& state,
                                                       const VectorDynSize& control,
-                                                      MatrixDynSize& jacobian) override;
+                                                      MatrixDynSize& jacobian) final;
 
         private:
             bool m_constrainsState, m_constrainsControl;

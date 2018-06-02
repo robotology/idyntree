@@ -55,15 +55,15 @@ namespace iDynTree {
 
             virtual bool dynamics(const VectorDynSize& state,
                                   double time,
-                                  VectorDynSize& stateDynamics) override;
+                                  VectorDynSize& stateDynamics) final;
 
             virtual bool dynamicsStateFirstDerivative(const VectorDynSize& state,
                                                       double time,
-                                                      MatrixDynSize& dynamicsDerivative) override;
+                                                      MatrixDynSize& dynamicsDerivative) final;
 
             virtual bool dynamicsControlFirstDerivative(const VectorDynSize& state,
                                                         double time,
-                                                        MatrixDynSize& dynamicsDerivative) override;
+                                                        MatrixDynSize& dynamicsDerivative) final;
 
 
         private:
