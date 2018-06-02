@@ -106,7 +106,7 @@ namespace iDynTree {
                                     VectorDynSize& stateDynamics)
         {
             bool isValid = false;
-            const MatrixDynSize& stateMatrix = m_pimpl->stateMatrix->getObject(time, isValid);
+            const MatrixDynSize& stateMatrix = m_pimpl->stateMatrix->get(time, isValid);
 
             if (!isValid) {
                 std::ostringstream errorMsg;
@@ -123,7 +123,7 @@ namespace iDynTree {
             }
 
             isValid = false;
-            const MatrixDynSize& controlMatrix = m_pimpl->controlMatrix->getObject(time, isValid);
+            const MatrixDynSize& controlMatrix = m_pimpl->controlMatrix->get(time, isValid);
 
             if (!isValid) {
                 std::ostringstream errorMsg;
@@ -148,7 +148,7 @@ namespace iDynTree {
                                                   MatrixDynSize& dynamicsDerivative)
         {
             bool isValid = false;
-            const MatrixDynSize& stateMatrix = m_pimpl->stateMatrix->getObject(time, isValid);
+            const MatrixDynSize& stateMatrix = m_pimpl->stateMatrix->get(time, isValid);
 
             if (!isValid) {
                 std::ostringstream errorMsg;
@@ -173,7 +173,7 @@ namespace iDynTree {
                                                     MatrixDynSize& dynamicsDerivative)
         {
             bool isValid = false;
-            const MatrixDynSize& controlMatrix = m_pimpl->controlMatrix->getObject(time, isValid);
+            const MatrixDynSize& controlMatrix = m_pimpl->controlMatrix->get(time, isValid);
 
             if (!isValid) {
                 std::ostringstream errorMsg;

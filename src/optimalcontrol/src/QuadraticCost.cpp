@@ -147,7 +147,7 @@ namespace iDynTree {
 
             if (!checkDoublesAreEqual(m_stateCostScale, 0, 1E-30)){
                 bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingStateHessian->getObject(time, isValid);
+                const MatrixDynSize &hessian = m_timeVaryingStateHessian->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -171,7 +171,7 @@ namespace iDynTree {
                 }
 
                 isValid = false;
-                const VectorDynSize &gradient = m_timeVaryingStateGradient->getObject(time, isValid);
+                const VectorDynSize &gradient = m_timeVaryingStateGradient->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -188,7 +188,7 @@ namespace iDynTree {
                 }
 
                 isValid = false;
-                double stateBias = m_timeVaryingStateCostBias->getObject(time, isValid);
+                double stateBias = m_timeVaryingStateCostBias->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -202,7 +202,7 @@ namespace iDynTree {
 
             if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
                 bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingControlHessian->getObject(time, isValid);
+                const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -226,7 +226,7 @@ namespace iDynTree {
                 }
 
                 isValid = false;
-                const VectorDynSize &gradient = m_timeVaryingControlGradient->getObject(time, isValid);
+                const VectorDynSize &gradient = m_timeVaryingControlGradient->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -243,7 +243,7 @@ namespace iDynTree {
                 }
 
                 isValid = false;
-                double controlBias = m_timeVaryingControlCostBias->getObject(time, isValid);
+                double controlBias = m_timeVaryingControlCostBias->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -268,7 +268,7 @@ namespace iDynTree {
 
             if (!checkDoublesAreEqual(m_stateCostScale, 0, 1E-30)){
                 bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingStateHessian->getObject(time, isValid);
+                const MatrixDynSize &hessian = m_timeVaryingStateHessian->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -292,7 +292,7 @@ namespace iDynTree {
                 }
 
                 isValid = false;
-                const VectorDynSize &gradient = m_timeVaryingStateGradient->getObject(time, isValid);
+                const VectorDynSize &gradient = m_timeVaryingStateGradient->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -325,7 +325,7 @@ namespace iDynTree {
 
             if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
                 bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingControlHessian->getObject(time, isValid);
+                const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -349,7 +349,7 @@ namespace iDynTree {
                 }
 
                 isValid = false;
-                const VectorDynSize &gradient = m_timeVaryingControlGradient->getObject(time, isValid);
+                const VectorDynSize &gradient = m_timeVaryingControlGradient->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -380,7 +380,7 @@ namespace iDynTree {
             partialDerivative.resize(state.size(), state.size());
             if (!checkDoublesAreEqual(m_stateCostScale, 0, 1E-30)){
                 bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingStateHessian->getObject(time, isValid);
+                const MatrixDynSize &hessian = m_timeVaryingStateHessian->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;
@@ -419,7 +419,7 @@ namespace iDynTree {
 
             if (!checkDoublesAreEqual(m_controlCostScale, 0, 1E-30)){
                 bool isValid = false;
-                const MatrixDynSize &hessian = m_timeVaryingControlHessian->getObject(time, isValid);
+                const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);
 
                 if (!isValid) {
                     std::ostringstream errorMsg;

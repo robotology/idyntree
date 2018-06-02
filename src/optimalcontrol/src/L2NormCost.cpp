@@ -73,13 +73,13 @@ namespace iDynTree {
                 return true;
             }
 
-            virtual const VectorDynSize& getObject(double time, bool &isValid) override {
+            virtual const VectorDynSize& get(double time, bool &isValid) override {
                 if (!m_desiredTrajectory) {
                     isValid = true;
                     return m_outputVector; //should be zero from the initialization
                 }
                 bool ok = false;
-                const VectorDynSize &desiredPoint = m_desiredTrajectory->getObject(time, ok);
+                const VectorDynSize &desiredPoint = m_desiredTrajectory->get(time, ok);
 
                 if (!ok) {
                     isValid = false;
@@ -130,7 +130,7 @@ namespace iDynTree {
 
             ~TimeVaryingBias() override;
 
-            virtual const double& getObject(double time, bool &isValid) override{
+            virtual const double& get(double time, bool &isValid) override{
                 if (!(m_associatedGradient)) {
                     isValid = false;
                     m_output = 0.0;
@@ -144,7 +144,7 @@ namespace iDynTree {
                 }
 
                 bool ok = false;
-                const VectorDynSize &desiredPoint = m_associatedGradient->desiredTrajectory()->getObject(time, ok);
+                const VectorDynSize &desiredPoint = m_associatedGradient->desiredTrajectory()->get(time, ok);
 
                 if (!ok) {
                     isValid = false;

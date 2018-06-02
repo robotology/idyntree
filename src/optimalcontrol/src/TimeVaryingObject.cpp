@@ -19,59 +19,33 @@
 namespace iDynTree {
     namespace optimalcontrol {
 
-        TimeInvariantVector::TimeInvariantVector()
+        template<typename Object>
+        TimeInvariantObject<Object>::TimeInvariantObject()
         { }
 
-        TimeInvariantVector::TimeInvariantVector(const VectorDynSize &timeInvariantVector)
-        : m_timeInvariantVector(timeInvariantVector)
+        template<typename Object>
+        TimeInvariantObject<Object>::TimeInvariantObject(const Object &timeInvariantObject)
+            : m_invariantObject(timeInvariantObject)
         { }
 
-        VectorDynSize &TimeInvariantVector::get()
+        template<typename Object>
+        Object &TimeInvariantObject<Object>::get()
         {
-            return m_timeInvariantVector;
+            return m_invariantObject;
         }
 
-        const VectorDynSize &TimeInvariantVector::getObject(double /*time*/, bool &isValid)
-        {
-            isValid = true;
-            return m_timeInvariantVector;
-        }
-
-        TimeInvariantMatrix::TimeInvariantMatrix()
-        { }
-
-        TimeInvariantMatrix::TimeInvariantMatrix(const MatrixDynSize &timeInvariantMatrix)
-        : m_timeInvariantMatrix(timeInvariantMatrix)
-        { }
-
-        MatrixDynSize &TimeInvariantMatrix::get()
-        {
-            return m_timeInvariantMatrix;
-        }
-
-        const MatrixDynSize &TimeInvariantMatrix::getObject(double /*time*/, bool &isValid)
+        template<typename Object>
+        const Object &TimeInvariantObject<Object>::get(double /*time*/, bool &isValid)
         {
             isValid = true;
-            return m_timeInvariantMatrix;
+            return m_invariantObject;
         }
 
-        TimeInvariantDouble::TimeInvariantDouble()
-        { }
+        template class TimeInvariantObject<double>;
 
-        TimeInvariantDouble::TimeInvariantDouble(double timeInvariantDouble)
-            : m_timeInvariantDouble(timeInvariantDouble)
-        { }
+        template class TimeInvariantObject<VectorDynSize>;
 
-        double &TimeInvariantDouble::get()
-        {
-            return m_timeInvariantDouble;
-        }
-
-        const double &TimeInvariantDouble::getObject(double /*time*/, bool &isValid)
-        {
-            isValid = true;
-            return m_timeInvariantDouble;
-        }
+        template class TimeInvariantObject<MatrixDynSize>;
 
     }
 }

@@ -85,14 +85,13 @@ namespace iDynTree {
                                                                    const iDynTree::VectorDynSize& control,
                                                                    iDynTree::MatrixDynSize& partialDerivative) override;
 
-       protected:
+       private:
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> m_timeVaryingStateHessian;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> m_timeVaryingStateGradient;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> m_timeVaryingStateCostBias;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> m_timeVaryingControlHessian;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> m_timeVaryingControlGradient;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> m_timeVaryingControlCostBias;
-
            double m_stateCostScale, m_controlCostScale;
        };
     }

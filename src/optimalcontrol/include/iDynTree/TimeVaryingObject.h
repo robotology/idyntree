@@ -36,8 +36,7 @@ namespace iDynTree {
 
             virtual ~TimeVaryingObject() {}
 
-            virtual const Object& getObject(double time, bool &isValid) = 0;
-
+            virtual const Object& get(double time, bool &isValid) = 0;
         };
 
         typedef TimeVaryingObject<VectorDynSize> TimeVaryingVector;
@@ -50,42 +49,31 @@ namespace iDynTree {
          * @warning This class is still in active development, and so API interface can change between iDynTree versions.
          * \ingroup iDynTreeExperimental
          */
-        class TimeInvariantVector : public TimeVaryingVector {
-            VectorDynSize m_timeInvariantVector;
+
+        template <typename Object>
+        class TimeInvariantObject : public TimeVaryingObject<Object> {
+            Object m_invariantObject;
         public:
-            TimeInvariantVector();
+            TimeInvariantObject();
 
-            TimeInvariantVector(const VectorDynSize& timeInvariantVector);
+            TimeInvariantObject(const Object& timeInvariantObject);
 
-            VectorDynSize& get();
+            Object& get();
 
-            virtual const VectorDynSize& getObject(double time, bool &isValid) override;
+            virtual const Object& get(double time, bool &isValid) final;
         };
 
-        class TimeInvariantMatrix : public TimeVaryingMatrix {
-            MatrixDynSize m_timeInvariantMatrix;
-        public:
-            TimeInvariantMatrix();
+        extern template class TimeInvariantObject<double>;
 
-            TimeInvariantMatrix(const MatrixDynSize& timeInvariantMatrix);
+        extern template class TimeInvariantObject<VectorDynSize>;
 
-            MatrixDynSize& get();
+        extern template class TimeInvariantObject<MatrixDynSize>;
 
-            virtual const MatrixDynSize& getObject(double time, bool &isValid) override;
-        };
+        typedef TimeInvariantObject<double> TimeInvariantDouble;
 
-        class TimeInvariantDouble : public TimeVaryingDouble {
-            double m_timeInvariantDouble;
-        public:
-            TimeInvariantDouble();
+        typedef TimeInvariantObject<VectorDynSize> TimeInvariantVector;
 
-            TimeInvariantDouble(double timeInvariantDouble);
-
-            double& get();
-
-            virtual const double& getObject(double time, bool &isValid) override;
-        };
-
+        typedef TimeInvariantObject<MatrixDynSize> TimeInvariantMatrix;
     }
 }
 
