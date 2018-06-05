@@ -218,13 +218,11 @@ namespace iDynTree {
             if (m_pimpl->stateGradient) {
                 m_timeVaryingStateHessian = m_pimpl->stateHessian;
                 m_timeVaryingStateGradient = m_pimpl->stateGradient;
-                m_costsState = true;
             }
 
             if (m_pimpl->controlGradient) {
                 m_timeVaryingControlHessian = m_pimpl->controlHessian;
                 m_timeVaryingControlGradient = m_pimpl->controlGradient;
-                m_costsControl = true;
             }
         }
 
@@ -237,13 +235,11 @@ namespace iDynTree {
             if (m_pimpl->stateGradient) {
                 m_timeVaryingStateHessian = m_pimpl->stateHessian;
                 m_timeVaryingStateGradient = m_pimpl->stateGradient;
-                m_costsState = true;
             }
 
             if (m_pimpl->controlGradient) {
                 m_timeVaryingControlHessian = m_pimpl->controlHessian;
                 m_timeVaryingControlGradient = m_pimpl->controlGradient;
-                m_costsControl = true;
             }
         }
 

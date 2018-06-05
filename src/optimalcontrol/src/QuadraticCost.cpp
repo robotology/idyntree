@@ -44,7 +44,6 @@ namespace iDynTree {
 
             m_timeVaryingStateHessian.reset(new TimeInvariantMatrix(stateHessian));
             m_timeVaryingStateGradient.reset(new TimeInvariantVector(stateGradient));
-            m_costsState = true;
 
             return true;
         }
@@ -63,7 +62,6 @@ namespace iDynTree {
 
             m_timeVaryingStateHessian = timeVaryingStateHessian;
             m_timeVaryingStateGradient = timeVaryingStateGradient;
-            m_costsState = true;
 
             return true;
         }
@@ -82,7 +80,6 @@ namespace iDynTree {
 
             m_timeVaryingControlHessian.reset(new TimeInvariantMatrix(controlHessian));
             m_timeVaryingControlGradient.reset(new TimeInvariantVector(controlGradient));
-            m_costsControl = true;
 
             return true;
         }
@@ -101,7 +98,6 @@ namespace iDynTree {
 
             m_timeVaryingControlHessian = timeVaryingControlHessian;
             m_timeVaryingControlGradient = timeVaryingControlGradient;
-            m_costsControl = true;
 
             return true;
         }

@@ -37,7 +37,7 @@ namespace iDynTree {
        public:
            QuadraticCost(const std::string& costName);
 
-           virtual ~QuadraticCost() override;
+           ~QuadraticCost();
 
            bool setStateCost(const iDynTree::MatrixDynSize& stateHessian, const iDynTree::VectorDynSize& stateGradient);
 

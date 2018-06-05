@@ -22,6 +22,7 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/QuadraticCost.h
                    include/iDynTree/L2NormCost.h
                    include/iDynTree/LinearConstraint.h
+                   include/iDynTree/LinearCost.h
                    include/iDynTree/Controller.h
                    include/iDynTree/TimeRange.h
                    include/iDynTree/ConstraintsGroup.h
@@ -52,6 +53,7 @@ set(SOURCES src/DynamicalSystem.cpp
             src/QuadraticLikeCost.cpp
             src/L2NormCost.cpp
             src/LinearConstraint.cpp
+            src/LinearCost.cpp
             src/Controller.cpp
             src/FixedStepIntegrator.cpp
             src/RK4.cpp
