@@ -1,37 +1,40 @@
 /*
- * Copyright (C) 2014,2017 Fondazione Istituto Italiano di Tecnologia
- * Authors: Francesco Romano, Stefano Dafarra
- * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ * Copyright (C) 2014,2018 Fondazione Istituto Italiano di Tecnologia
+ *
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
  *
  * Originally developed for Prioritized Optimal Control (2014)
- * Refactored in 2017.
+ * Refactored in 2018.
  * Design inspired by
  * - ACADO toolbox (http://acado.github.io)
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/TimeRange.h"
-#include "iDynTree/Core/Utils.h"
+#include <iDynTree/TimeRange.h>
+#include <iDynTree/Core/Utils.h>
 
 namespace iDynTree {
     namespace optimalcontrol {
         TimeRange::TimeRange()
         :m_initTime(0.0)
         ,m_endTime(0.0)
+        ,m_anyTime(false)
         {
         }
 
         TimeRange::TimeRange(const double init, const double end)
+        :m_anyTime(false)
         {
             if(!setTimeInterval(init, end)){
                 reportError("TimeRange", "TimeRange", "Invalid initialization. Setting equal to AnyTime.");
                 m_initTime = -1;
                 m_endTime = -1;
+                m_anyTime = true;
             }
-        }
-
-        TimeRange::~TimeRange()
-        {
         }
 
         double TimeRange::initTime() const
@@ -52,11 +55,6 @@ namespace iDynTree {
 
         bool TimeRange::setTimeInterval(const double init, const double end)
         {
-            if((init < 0)||(end < 0)){
-                reportError("TimeRange", "setTimeInterval", "Both the init time and the end time should be grater than zero.");
-                return false;
-            }
-
             if(init > end){
                 reportError("TimeRange", "setTimeInterval", "The init time should be grater than the end.");
                 return false;
@@ -73,44 +71,79 @@ namespace iDynTree {
             TimeRange output;
             output.m_initTime = -1;
             output.m_endTime = -1;
+            output.m_anyTime = true;
             return output;
         }
 
         TimeRange TimeRange::Instant(const double time)
         {
-            if (time < 0)
-                return AnyTime();
-
             return TimeRange(time, time);
         }
 
-        bool TimeRange::operator<(const TimeRange rhs) const
+        bool TimeRange::operator<(const TimeRange &rhs) const
         {
-            if(this->m_initTime != rhs.initTime())
+            if (this->m_anyTime && rhs.m_anyTime) {
+                return false;
+            }
+
+            if (rhs.m_anyTime) {
+                return true;
+            }
+
+            if (this ->m_anyTime) {
+                return false;
+            }
+
+            if(this->m_initTime != rhs.initTime()) {
                 return this->m_initTime < rhs.initTime();
-            else return this->m_endTime < rhs.endTime();
+            } else {
+                return this->m_endTime < rhs.endTime();
+            }
         }
 
-        bool TimeRange::operator==(const TimeRange rhs) const
+        bool TimeRange::operator==(const TimeRange &rhs) const
         {
-            return ((this->m_initTime == rhs.initTime())&&(this->m_endTime == rhs.endTime()));
+            if (this->m_anyTime && rhs.m_anyTime) {
+                return true;
+            }
+
+            if (rhs.m_anyTime) {
+                return false;
+            }
+
+            if (this ->m_anyTime) {
+                return false;
+            }
+
+            return (checkDoublesAreEqual(this->m_initTime, rhs.initTime()) && checkDoublesAreEqual(this->m_endTime, rhs.endTime()));//((this->m_initTime == rhs.initTime())&&(this->m_endTime == rhs.endTime()));
         }
 
-        bool TimeRange::operator!=(const TimeRange rhs) const
+        bool TimeRange::operator!=(const TimeRange &rhs) const
         {
             return !(this->operator==(rhs));
         }
 
         bool TimeRange::isValid() const
         {
-            return !((m_initTime < 0) || (m_endTime < 0) || (m_initTime > m_endTime));
+            return !(m_initTime >= m_endTime);
         }
 
         bool TimeRange::isInRange(double time) const
         {
-            if ((m_initTime == -1) && (m_endTime == -1))
+            if (m_anyTime) {
                 return true;
+            }
+
+            if (isInstant()) {
+                return checkDoublesAreEqual(m_initTime, time);
+            }
+
             return ((m_initTime <= time) && (m_endTime >= time));
+        }
+
+        bool TimeRange::isInstant() const
+        {
+            return (!m_anyTime) && checkDoublesAreEqual(m_initTime, m_endTime);
         }
 
     }

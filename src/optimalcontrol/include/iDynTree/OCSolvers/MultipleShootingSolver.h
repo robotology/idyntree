@@ -1,10 +1,14 @@
 /*
- * Copyright (C) 2014,2017 Fondazione Istituto Italiano di Tecnologia
- * Authors: Francesco Romano
- * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+ * Copyright (C) 2014,2018 Fondazione Istituto Italiano di Tecnologia
+ *
+ * Licensed under either the GNU Lesser General Public License v3.0 :
+ * https://www.gnu.org/licenses/lgpl-3.0.html
+ * or the GNU Lesser General Public License v2.1 :
+ * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * at your option.
  *
  * Originally developed for Prioritized Optimal Control (2014)
- * Refactored in 2017.
+ * Refactored in 2018.
  * Design inspired by
  * - ACADO toolbox (http://acado.github.io)
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
@@ -13,41 +17,144 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_MULTIPLESHOOTINGSOLVER_H
 #define IDYNTREE_OPTIMALCONTROL_MULTIPLESHOOTINGSOLVER_H
 
-#include "iDynTree/OptimalControlSolver.h"
+#include <iDynTree/OptimalControlSolver.h>
+#include <iDynTree/OptimizationProblem.h>
+#include <iDynTree/Optimizer.h>
+
+#include <vector>
+#include <memory>
 
 namespace iDynTree {
+
+    class VectorDynSize;
+
     namespace optimalcontrol {
 
         class OptimalControlProblem;
+
+        namespace integrators {
+            class Integrator;
+        }
+        using namespace integrators;
 
         /**
          * @warning This class is still in active development, and so API interface can change between iDynTree versions.
          * \ingroup iDynTreeExperimental
          */
 
-        class MultipleShootingSolver
-        : public OptimalControlSolver {
+        class MultipleShootingTranscription : public optimization::OptimizationProblem {
+
+            friend class MultipleShootingSolver;
+
+            MultipleShootingTranscription();
+
+            MultipleShootingTranscription(const std::shared_ptr<OptimalControlProblem> problem, const std::shared_ptr<Integrator> integrationMethod);
+
+            MultipleShootingTranscription(const MultipleShootingTranscription& other) = delete;
+
+            size_t setControlMeshPoints();
+
+            bool preliminaryChecks();
+
+            bool setMeshPoints();
+
+            bool setOptimalControlProblem(const std::shared_ptr<OptimalControlProblem> problem);
+
+            bool setIntegrator(const std::shared_ptr<Integrator> integrationMethod);
+
+            bool setStepSizeBounds(const double minStepSize, const double maxStepsize);
+
+            bool setControlPeriod(double period);
+
+            bool setAdditionalStateMeshPoints(const std::vector<double>& stateMeshes);
+
+            bool setAdditionalControlMeshPoints(const std::vector<double>& controlMeshes);
+
+            void setPlusInfinity(double plusInfinity);
+
+            void setMinusInfinity(double minusInfinity);
+
+            bool setInitialState(const VectorDynSize &initialState);
+
+            bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
+
+            bool getSolution(std::vector<VectorDynSize>& states, std::vector<VectorDynSize>& controls);
+
+            class MultipleShootingTranscriptionPimpl;
+            MultipleShootingTranscriptionPimpl *m_pimpl;
 
         public:
-            MultipleShootingSolver(OptimalControlProblem&);
 
-            // FIXME: These two cannot be used as VectorDynTree
-            // as they are trajectories, not single vectors
-            void setInitialGuess(const iDynTree::VectorDynSize& initialGuess);
-            const iDynTree::VectorDynSize& lastSolution();
+            virtual ~MultipleShootingTranscription() override;
 
-            
-            void setNumberOfMeshPoints(size_t numberOfMeshPoints);
+            virtual bool prepare() override;
 
-            virtual bool initialize() override;
+            virtual void reset() override;
+
+            virtual unsigned int numberOfVariables() override;
+
+            virtual unsigned int numberOfConstraints() override;
+
+            virtual bool getConstraintsBounds(VectorDynSize& constraintsLowerBounds, VectorDynSize& constraintsUpperBounds) override;
+
+            virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound) override;
+
+            virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound) override;
+
+            virtual bool getConstraintsJacobianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) override;
+
+            virtual bool getHessianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) override;
+
+            virtual bool setVariables(const VectorDynSize& variables) override;
+
+            virtual bool evaluateCostFunction(double& costValue) override;
+
+            virtual bool evaluateCostGradient(VectorDynSize& gradient) override;
+
+            virtual bool evaluateCostHessian(MatrixDynSize& hessian) override; //using dense matrices, but the sparsity pattern is still obtained
+
+            virtual bool evaluateConstraints(VectorDynSize& constraints) override;
+
+            virtual bool evaluateConstraintsJacobian(MatrixDynSize& jacobian) override; //using dense matrices, but the sparsity pattern is still obtained
+
+            virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers, MatrixDynSize& hessian) override; //using dense matrices, but the sparsity pattern is still obtained
+
+        };
+
+
+        class MultipleShootingSolver : public OptimalControlSolver {
+
+        public:
+            MultipleShootingSolver(const std::shared_ptr<OptimalControlProblem>& ocProblem);
+
+            MultipleShootingSolver(const MultipleShootingSolver& other) = delete;
+
+            bool setStepSizeBounds(double minStepSize, double maxStepsize);
+
+            bool setIntegrator(const std::shared_ptr<Integrator> integrationMethod);
+
+            bool setControlPeriod(double period);
+
+            bool setAdditionalStateMeshPoints(const std::vector<double>& stateMeshes);
+
+            bool setAdditionalControlMeshPoints(const std::vector<double>& controlMeshes);
+
+            bool setOptimizer(std::shared_ptr<optimization::Optimizer> optimizer);
+
+            bool setInitialState(const VectorDynSize &initialState);
+
+            bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
+
             virtual bool solve() override;
 
+            bool getSolution(std::vector<VectorDynSize>& states, std::vector<VectorDynSize>& controls);
+
+            void resetTranscription();
+
+
         private:
-
-            class MultipleShootingSolverPimpl;
-            MultipleShootingSolverPimpl* m_pimpl;
-
-
+            std::shared_ptr<MultipleShootingTranscription> m_transcription;
+            std::shared_ptr<optimization::Optimizer> m_optimizer;
         };
 
     }

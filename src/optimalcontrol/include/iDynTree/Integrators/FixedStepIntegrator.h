@@ -14,12 +14,10 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#ifndef IDYNTREE_OPTIMALCONTROL_RK4_H
-#define IDYNTREE_OPTIMALCONTROL_RK4_H
+#ifndef IDYNTREE_OPTIMALCONTROL_FIXEDSTEPINTEGRATOR_H
+#define IDYNTREE_OPTIMALCONTROL_FIXEDSTEPINTEGRATOR_H
 
-#include <iDynTree/Integrators/FixedStepIntegrator.h>
-#include <Eigen/Sparse>
-#include <Eigen/Dense>
+#include <iDynTree/Integrator.h>
 #include <iDynTree/Core/VectorDynSize.h>
 
 namespace iDynTree {
@@ -34,27 +32,24 @@ namespace iDynTree {
          * \ingroup iDynTreeExperimental
          */
 
-            class RK4 : public FixedStepIntegrator
+            class FixedStepIntegrator : public Integrator
             {
-                Eigen::SparseMatrix<double> m_aCoefficents;
-                Eigen::VectorXd m_bCoefficients;
-                Eigen::VectorXd m_cCoefficients;
-                Eigen::MatrixXd m_K;
-                VectorDynSize m_computationBuffer;
+            protected:
 
-                bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
-
-                bool allocateBuffers() override;
+                virtual bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) = 0;
 
             public:
-                RK4();
+                FixedStepIntegrator();
 
-                RK4(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
+                FixedStepIntegrator(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
-                virtual ~RK4();
+                virtual ~FixedStepIntegrator();
+
+                virtual bool integrate(double initialTime, double finalTime) override;
+
             };
         }
     }
 }
 
-#endif // RK4_H
+#endif // IDYNTREE_OPTIMALCONTROL_FIXEDSTEPINTEGRATOR_H

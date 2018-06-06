@@ -14,4 +14,23 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include <iDynTree/MPC.h>
+#ifndef IDYNTREE_OPTIMALCONTROL_LINEAR_MPC_H
+#define IDYNTREE_OPTIMALCONTROL_LINEAR_MPC_H
+
+namespace iDynTree {
+    namespace optimalcontrol {
+
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
+
+        class LinearMPC {
+
+
+        };
+
+    }
+}
+
+#endif /* end of include guard: IDYNTREE_OPTIMALCONTROL_LINEAR_MPC_H */
