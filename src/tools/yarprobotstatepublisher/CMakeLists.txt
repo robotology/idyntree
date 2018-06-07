@@ -2,8 +2,6 @@
 # All Rights Reserved.
 # Authors: Silvio Traversaro <silvio.traversaro@iit.it>
 
-idyntree_enable_cxx11()
-
 project(yarprobotstatepublisher)
 
 set(ROS_IDL_FILES JointState.msg)
