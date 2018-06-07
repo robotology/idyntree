@@ -292,19 +292,19 @@ int main(){
     ASSERT_IS_TRUE(direct.evaluateCollocationConstraint(0.0, c1, c2, dT, v3)); //for eventual memory allocation
     ASSERT_IS_TRUE(ptr->evaluateCollocationConstraint(0.0, c1, c2, dT, v3));
 
+    initT = clock();
     for (int i = 0; i < 10000; ++i) {
-        initT = clock();
-        ASSERT_IS_TRUE(direct.evaluateCollocationConstraint(0.0, c1, c2, dT, v3));
-        endT = clock();
-        sumDirect += (endT-initT);
-
-        initT = clock();
-        ASSERT_IS_TRUE(ptr->evaluateCollocationConstraint(0.0, c1, c2, dT, v3));
-        endT = clock();
-        sumPtr += (endT-initT);
+        ptr->evaluateCollocationConstraint(0.0, c1, c2, dT, v3);
     }
-    std::cerr << "Elapsed time (direct): " <<  static_cast<double>(sumDirect) *1000 / CLOCKS_PER_SEC <<" ms."<<std::endl;
-    std::cerr << "Elapsed time (ptr): " <<  static_cast<double>(sumPtr) *1000 / CLOCKS_PER_SEC <<" ms."<<std::endl; //Multiplying first to avoid decimation issues
+    endT = clock();
+    std::cerr << "Elapsed time (ptr): " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 <<" ms."<<std::endl;
+
+    initT = clock();
+    for (int i = 0; i < 10000; ++i) {
+        direct.evaluateCollocationConstraint(0.0, c1, c2, dT, v3);
+    }
+    endT = clock();
+    std::cerr << "Elapsed time (direct): " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 <<" ms."<<std::endl;
 
     return EXIT_SUCCESS;
 }

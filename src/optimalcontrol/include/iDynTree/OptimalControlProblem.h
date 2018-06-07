@@ -21,6 +21,8 @@
 #include <vector>
 #include <string>
 
+#include <iDynTree/Core/Utils.h>
+
 namespace iDynTree {
 
     class VectorDynSize;
@@ -30,8 +32,11 @@ namespace iDynTree {
 
         class DynamicalSystem;
         class Constraint;
+        class LinearConstraint;
         class ConstraintsGroup;
         class Cost;
+        class QuadraticLikeCost;
+        class LinearCost;
         class TimeRange;
 
         /**
@@ -59,28 +64,66 @@ namespace iDynTree {
 
             bool removeGroupOfConstraints(const std::string& name);
 
-            bool addContraint(std::shared_ptr<Constraint> newConstraint); // this apply for the full horizon. It creates a group named with the same name and containing only newConstraint
+            IDYNTREE_DEPRECATED_WITH_MSG("Use addConstraint() instead")
+            bool addContraint(std::shared_ptr<Constraint> newConstraint) {
+                return addConstraint(newConstraint);
+            }
+
+            bool addConstraint(std::shared_ptr<Constraint> newConstraint); // this apply for the full horizon. It creates a group named with the same name and containing only newConstraint
+
+            bool addConstraint(std::shared_ptr<LinearConstraint> newConstraint);
+
             bool removeConstraint(const std::string& name); //this removes only the constraints added with the above method
+
             unsigned int countConstraints() const;
+
+            unsigned int countLinearConstraints() const;
+
             unsigned int getConstraintsDimension() const;
+
             const std::vector<std::string> listConstraints() const;
+
             const std::vector<std::string> listGroups() const; //the i-th entry of the list contains the i-th constraint displayed with listConstraints()
 
             std::vector<TimeRange>& getConstraintsTimeRanges() const;
+
+            std::vector<size_t>& getLinearConstraintsIndeces() const;
 
             // Cost can be:
             // Mayer term
             // Lagrange term
             bool addMayerTerm(double weight, std::shared_ptr<Cost> cost); // final cost
 
+            bool addMayerTerm(double weight, std::shared_ptr<QuadraticLikeCost> quadraticCost); // final cost
+
+            bool addMayerTerm(double weight, std::shared_ptr<LinearCost> linearCost); // final cost
+
             bool addLagrangeTerm(double weight, std::shared_ptr<Cost> cost); // integral cost
+
+            bool addLagrangeTerm(double weight, std::shared_ptr<QuadraticLikeCost> quadraticCost); // integral cost
+
+            bool addLagrangeTerm(double weight, std::shared_ptr<LinearCost> linearCost); // integral cost
 
             bool addLagrangeTerm(double weight,
                                  double startingTime,
                                  double finalTime,
                                  std::shared_ptr<Cost> cost); // integral cost with explicit integration limits
 
+            bool addLagrangeTerm(double weight,
+                                 double startingTime,
+                                 double finalTime,
+                                 std::shared_ptr<QuadraticLikeCost> quadraticCost); // integral cost with explicit integration limits
+
+            bool addLagrangeTerm(double weight,
+                                 double startingTime,
+                                 double finalTime,
+                                 std::shared_ptr<LinearCost> linearCost); // integral cost with explicit integration limits
+
             bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<Cost> cost);
+
+            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<QuadraticLikeCost> quadraticCost);
+
+            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<LinearCost> linearCost);
 
             bool updateCostTimeRange(const std::string& name, double newStartingTime, double newEndTime);
 
@@ -89,6 +132,10 @@ namespace iDynTree {
             bool removeCost(const std::string& name);
 
             std::vector<TimeRange>& getCostsTimeRanges() const;
+
+            bool hasOnlyLinearCosts() const;
+
+            bool hasOnlyQuadraticCosts() const;
 
             bool setStateLowerBound(const VectorDynSize& minState);
 

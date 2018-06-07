@@ -368,7 +368,7 @@ int main(){
     ASSERT_IS_TRUE(!(problem->dynamicalSystem().expired()));
     ASSERT_IS_TRUE(problem->addGroupOfConstraints(group1));
     ASSERT_IS_TRUE(group1->addConstraint(constraint2, iDynTree::optimalcontrol::TimeRange(4.0, 5.0)));
-    ASSERT_IS_TRUE(problem->addContraint(constraint1));
+    ASSERT_IS_TRUE(problem->addConstraint(constraint1));
     ASSERT_IS_TRUE(problem->addLagrangeTerm(1.0, cost1));
     ASSERT_IS_TRUE(problem->addMayerTerm(1.0, cost2));
 
