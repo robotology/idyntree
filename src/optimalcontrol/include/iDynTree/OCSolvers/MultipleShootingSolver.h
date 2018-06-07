@@ -18,7 +18,6 @@
 #define IDYNTREE_OPTIMALCONTROL_MULTIPLESHOOTINGSOLVER_H
 
 #include <iDynTree/OptimalControlSolver.h>
-#include <iDynTree/OptimizationProblem.h>
 #include <iDynTree/Optimizer.h>
 
 #include <vector>
