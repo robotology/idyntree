@@ -31,6 +31,7 @@ namespace iDynTree {
     namespace optimalcontrol {
 
         class DynamicalSystem;
+        class LinearSystem;
         class Constraint;
         class LinearConstraint;
         class ConstraintsGroup;
@@ -54,11 +55,18 @@ namespace iDynTree {
             OptimalControlProblem(const OptimalControlProblem& other) = delete;
 
             bool setTimeHorizon(double startingTime, double finalTime);
+
             double initialTime() const;
+
             double finalTime() const;
 
             bool setDynamicalSystemConstraint(std::shared_ptr<DynamicalSystem> dynamicalSystem);
+
+            bool setDynamicalSystemConstraint(std::shared_ptr<LinearSystem> linearSystem);
+
             const std::weak_ptr<DynamicalSystem> dynamicalSystem() const;
+
+            bool systemIsLinear() const;
 
             bool addGroupOfConstraints(std::shared_ptr<ConstraintsGroup> groupOfConstraints); //to be used when the constraints applies only for a time interval
 

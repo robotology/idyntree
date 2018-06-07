@@ -16,6 +16,7 @@
 
 #include <iDynTree/OptimalControlProblem.h>
 #include <iDynTree/DynamicalSystem.h>
+#include <iDynTree/LinearSystem.h>
 #include <iDynTree/ConstraintsGroup.h>
 #include <iDynTree/Constraint.h>
 #include <iDynTree/LinearConstraint.h>
@@ -73,6 +74,7 @@ namespace iDynTree {
             std::vector<std::string> mayerCostnames;
             std::vector<TimeRange> constraintsTimeRanges, costTimeRanges;
             std::vector<size_t> linearConstraintIndeces;
+            bool systemIsLinear = false;
 
             bool addCost(double weight, const TimeRange& timeRange, std::shared_ptr<Cost> cost, bool isLinear, bool isQuadratic, const std::string& methodName) {
                 if (!cost){
@@ -168,9 +170,25 @@ namespace iDynTree {
             return true;
         }
 
+        bool OptimalControlProblem::setDynamicalSystemConstraint(std::shared_ptr<LinearSystem> linearSystem)
+        {
+            if (m_pimpl->dynamicalSystem){
+                reportError("OptimalControlProblem", "setDynamicalSystemConstraint", "Change dynamical system is forbidden.");
+                return false;
+            }
+            m_pimpl->dynamicalSystem = linearSystem;
+            m_pimpl->systemIsLinear = true;
+            return true;
+        }
+
         const std::weak_ptr<DynamicalSystem> OptimalControlProblem::dynamicalSystem() const
         {
             return m_pimpl->dynamicalSystem;
+        }
+
+        bool OptimalControlProblem::systemIsLinear() const
+        {
+            return m_pimpl->systemIsLinear;
         }
 
         bool OptimalControlProblem::addGroupOfConstraints(std::shared_ptr<ConstraintsGroup> groupOfConstraints)

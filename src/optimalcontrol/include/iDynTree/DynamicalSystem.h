@@ -48,6 +48,7 @@ namespace optimalcontrol {
         virtual ~DynamicalSystem();
 
         size_t stateSpaceSize() const;
+
         size_t controlSpaceSize() const;
 
         virtual bool dynamics(const VectorDynSize& state,
@@ -76,7 +77,6 @@ namespace optimalcontrol {
                                                     MatrixDynSize& dynamicsDerivative);
 
     private:
-        // TODO: does it make sense to have members in this abstrac class?
         size_t m_stateSize;
         size_t m_controlSize;
         VectorDynSize m_initialState;
