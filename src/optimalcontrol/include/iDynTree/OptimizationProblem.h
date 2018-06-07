@@ -43,11 +43,11 @@ namespace iDynTree {
 
             bool hasNonLinearConstraints;
 
-            bool hasLinearCost;
+            bool costIsLinear;
 
-            bool hasQuadraticCost;
+            bool costIsQuadratic;
 
-            bool hasNonLinearCost;
+            bool costIsNonLinear;
 
             bool hasSparseConstraintJacobian;
 
@@ -70,11 +70,11 @@ namespace iDynTree {
 
             bool hasNonLinearConstraints() const;
 
-            bool hasLinearCost() const;
+            bool costIsLinear() const;
 
-            bool hasQuadraticCost() const;
+            bool costIsQuadratic() const;
 
-            bool hasNonLinearCost() const;
+            bool costIsNonLinear() const;
 
             bool hasSparseConstraintJacobian() const;
 

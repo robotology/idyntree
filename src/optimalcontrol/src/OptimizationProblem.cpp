@@ -122,9 +122,9 @@ namespace iDynTree {
         OptimizationProblemInfoData::OptimizationProblemInfoData()
         : hasLinearConstraints(false)
         , hasNonLinearConstraints(true)
-        , hasLinearCost(false)
-        , hasQuadraticCost(false)
-        , hasNonLinearCost(true)
+        , costIsLinear(false)
+        , costIsQuadratic(false)
+        , costIsNonLinear(true)
         , hasSparseConstraintJacobian(false)
         , hasSparseHessian(false)
         , hessianIsProvided(false)
@@ -144,19 +144,19 @@ namespace iDynTree {
             return m_data->hasNonLinearConstraints;
         }
 
-        bool OptimizationProblemInfo::hasLinearCost() const
+        bool OptimizationProblemInfo::costIsLinear() const
         {
-            return m_data->hasLinearCost;
+            return m_data->costIsLinear;
         }
 
-        bool OptimizationProblemInfo::hasQuadraticCost() const
+        bool OptimizationProblemInfo::costIsQuadratic() const
         {
-            return m_data->hasQuadraticCost;
+            return m_data->costIsQuadratic;
         }
 
-        bool OptimizationProblemInfo::hasNonLinearCost() const
+        bool OptimizationProblemInfo::costIsNonLinear() const
         {
-            return m_data->hasNonLinearCost;
+            return m_data->costIsNonLinear;
         }
 
         bool OptimizationProblemInfo::hasSparseConstraintJacobian() const

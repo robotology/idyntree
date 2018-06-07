@@ -899,6 +899,16 @@ namespace iDynTree {
                 size_t nc = m_constraintsPerInstant;
                 m_numberOfConstraints = (m_totalMeshes - 1) * nx + (m_constraintsPerInstant) * (m_totalMeshes); //dynamical constraints (removing the initial state) and normal constraints
 
+                //Determine problem type
+                m_infoData->hasLinearConstraints = (m_ocproblem->countLinearConstraints() != 0) || m_ocproblem->systemIsLinear();
+                m_infoData->hasNonLinearConstraints = (m_ocproblem->countLinearConstraints() != m_constraintsPerInstant) || !(m_ocproblem->systemIsLinear());
+                m_infoData->costIsLinear = m_ocproblem->hasOnlyLinearCosts();
+                m_infoData->costIsQuadratic = m_ocproblem->hasOnlyQuadraticCosts();
+                m_infoData->costIsNonLinear = !(m_ocproblem->hasOnlyLinearCosts()) && !(m_ocproblem->hasOnlyQuadraticCosts());
+                m_infoData->hasSparseHessian = true;
+                m_infoData->hasSparseConstraintJacobian = true;
+                m_infoData->hessianIsProvided = !(m_infoData->hasNonLinearConstraints);
+
                 allocateBuffers();
 
                 Eigen::Map<Eigen::VectorXd> lowerBoundMap = toEigen(m_constraintsLowerBound);
@@ -937,7 +947,9 @@ namespace iDynTree {
                         constraintIndex += nc;
 
                         //Saving the hessian structure
-                        addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
+                        if (!m_info.costIsLinear() && m_info.hasLinearConstraints()) {
+                            addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
+                        }
 
                     } else if (mesh->type == MeshPointType::Control) {
                         mesh->previousControlIndex = previousControlMesh->controlIndex;
@@ -981,18 +993,22 @@ namespace iDynTree {
                         constraintIndex += nc;
 
                         //Saving the hessian structure
-                        addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
-                        addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
+                        if (!m_info.costIsLinear() && m_info.hasLinearConstraints()) {
+                            addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
+                            addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
 
-                        addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
-                        addHessianBlock(mesh->stateIndex, nx, mesh->controlIndex, nu);
+                            addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
+                            addHessianBlock(mesh->stateIndex, nx, mesh->controlIndex, nu);
 
-                        addHessianBlock(mesh->previousControlIndex, nu, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and u-1
-                        addHessianBlock(mesh->stateIndex, nx, mesh->previousControlIndex, nu);
+                            addHessianBlock(mesh->previousControlIndex, nu, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and u-1
+                            addHessianBlock(mesh->stateIndex, nx, mesh->previousControlIndex, nu);
+                        }
 
-                        if ((mesh - 1)->origin != first){
-                            addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
-                            addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
+                        if (!(m_ocproblem->systemIsLinear())) {
+                            if ((mesh - 1)->origin != first){
+                                addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
+                                addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
+                            }
                         }
 
 
@@ -1034,15 +1050,19 @@ namespace iDynTree {
                         constraintIndex += nc;
 
                         //Saving the hessian structure
-                        addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
-                        addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
+                        if (!m_info.costIsLinear() && m_info.hasLinearConstraints()) {
+                            addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
+                            addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
 
-                        addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
-                        addHessianBlock(mesh->stateIndex, nx, mesh->controlIndex, nu);
+                            addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
+                            addHessianBlock(mesh->stateIndex, nx, mesh->controlIndex, nu);
+                        }
 
-                        if ((mesh - 1)->origin != first){
-                            addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
-                            addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
+                        if (!(m_ocproblem->systemIsLinear())) {
+                            if ((mesh - 1)->origin != first){
+                                addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
+                                addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
+                            }
                         }
 
                     }
@@ -1564,8 +1584,11 @@ namespace iDynTree {
             }
 
             virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers, MatrixDynSize& hessian) override {
-                if (!(toEigen(constraintsMultipliers).isZero(0))){
-                    reportWarning("MultipleShootingTranscription", "evaluateConstraintsHessian", "The constraints hessian is currently unavailable.");
+                if (m_info.hasNonLinearConstraints()) {
+                    if (!(toEigen(constraintsMultipliers).isZero(0))){
+                        reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", "The constraints hessian is currently unavailable.");
+                        return false;
+                    }
                 }
                 hessian.zero();
                 return true;
