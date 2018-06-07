@@ -9,7 +9,7 @@ classdef FrameFreeFloatingJacobian < iDynTree.MatrixDynSize
       else
         tmp = iDynTreeMEX(1176, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
@@ -21,7 +21,7 @@ classdef FrameFreeFloatingJacobian < iDynTree.MatrixDynSize
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1179, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

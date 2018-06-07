@@ -3,7 +3,7 @@ classdef LinkSensor < iDynTree.Sensor
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1277, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = getParentLink(self,varargin)

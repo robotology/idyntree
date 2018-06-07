@@ -11,7 +11,7 @@ classdef RotationSemantics < SwigRef
       else
         tmp = iDynTreeMEX(722, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = setToUnknown(self,varargin)
@@ -65,7 +65,7 @@ classdef RotationSemantics < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(741, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

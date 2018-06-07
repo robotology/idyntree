@@ -11,7 +11,7 @@ classdef DOFSpatialMotionArray < SwigRef
       else
         tmp = iDynTreeMEX(1171, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
@@ -26,7 +26,7 @@ classdef DOFSpatialMotionArray < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1175, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

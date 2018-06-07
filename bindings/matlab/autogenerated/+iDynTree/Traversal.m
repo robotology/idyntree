@@ -11,13 +11,13 @@ classdef Traversal < SwigRef
       else
         tmp = iDynTreeMEX(1046, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1047, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = getNrOfVisitedLinks(self,varargin)

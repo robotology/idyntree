@@ -9,13 +9,13 @@ classdef RotationalInertiaRaw < iDynTree.Matrix3x3
       else
         tmp = iDynTreeMEX(645, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(647, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

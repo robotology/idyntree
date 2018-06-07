@@ -9,7 +9,7 @@ classdef Rotation < iDynTree.RotationRaw
       else
         tmp = iDynTreeMEX(742, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = getSemantics(self,varargin)
@@ -60,7 +60,7 @@ classdef Rotation < iDynTree.RotationRaw
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(772, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

@@ -6,7 +6,7 @@ classdef MatlabSwigIterator < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(5, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = value(self,varargin)

@@ -9,7 +9,7 @@ classdef Position < iDynTree.PositionRaw
       else
         tmp = iDynTreeMEX(370, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = getSemantics(self,varargin)
@@ -48,7 +48,7 @@ classdef Position < iDynTree.PositionRaw
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(385, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

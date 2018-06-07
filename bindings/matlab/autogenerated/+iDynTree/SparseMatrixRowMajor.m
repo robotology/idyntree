@@ -11,13 +11,13 @@ classdef SparseMatrixRowMajor < SwigRef
       else
         tmp = iDynTreeMEX(123, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(124, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = numberOfNonZeros(self,varargin)

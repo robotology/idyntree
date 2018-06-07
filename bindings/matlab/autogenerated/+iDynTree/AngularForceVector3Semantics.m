@@ -9,7 +9,7 @@ classdef AngularForceVector3Semantics < iDynTree.ForceVector3Semantics__AngularF
       else
         tmp = iDynTreeMEX(512, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = changePoint(self,varargin)
@@ -18,7 +18,7 @@ classdef AngularForceVector3Semantics < iDynTree.ForceVector3Semantics__AngularF
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(515, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

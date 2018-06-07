@@ -11,7 +11,7 @@ classdef Link < SwigRef
       else
         tmp = iDynTreeMEX(870, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = inertia(self,varargin)
@@ -32,7 +32,7 @@ classdef Link < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(876, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

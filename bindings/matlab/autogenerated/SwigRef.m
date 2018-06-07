@@ -13,7 +13,8 @@ classdef SwigRef < handle
   end
   methods
     function out = saveobj(self)
-      error('Serializing SWIG objects not supported.')
+      warning('Serializing SWIG objects not supported.');
+      out = saveobj('Serializing SWIG object not supported');
     end
     function b = isnull(self)
       b = isempty(self.swigPtr);
@@ -49,8 +50,17 @@ classdef SwigRef < handle
     function SwigSet(self,ptr)
         self.swigPtr = ptr;
     end
+    function SwigClear(self)
+        self.swigPtr = [];
+    end
     function ptr = SwigGet(self)
         ptr = self.swigPtr;
+    end
+  end
+   methods(Static)
+    function obj = loadobj(s)
+      warning('Serializing SWIG objects not supported.');
+      obj = SwigRef.Null();
     end
   end
 end

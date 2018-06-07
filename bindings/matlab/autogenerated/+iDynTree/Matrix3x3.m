@@ -11,7 +11,7 @@ classdef Matrix3x3 < SwigRef
       else
         tmp = iDynTreeMEX(202, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = paren(self,varargin)
@@ -56,7 +56,7 @@ classdef Matrix3x3 < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(216, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

@@ -11,7 +11,7 @@ classdef SpatialForceVectorSemanticsBase < SwigRef
       else
         tmp = iDynTreeMEX(524, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = check_linear2angularConsistency(self,varargin)
@@ -26,7 +26,7 @@ classdef SpatialForceVectorSemanticsBase < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(528, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

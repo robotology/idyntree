@@ -9,13 +9,13 @@ classdef PrismaticJoint < iDynTree.MovableJointImpl1
       else
         tmp = iDynTreeMEX(1021, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1022, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)

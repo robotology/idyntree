@@ -20,13 +20,13 @@ classdef ContactWrench < SwigRef
       else
         tmp = iDynTreeMEX(1214, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1215, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

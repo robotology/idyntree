@@ -11,7 +11,7 @@ classdef LinkVelArray < SwigRef
       else
         tmp = iDynTreeMEX(856, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
@@ -32,7 +32,7 @@ classdef LinkVelArray < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(862, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

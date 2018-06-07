@@ -6,7 +6,7 @@ classdef Sensor < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1262, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = getName(self,varargin)

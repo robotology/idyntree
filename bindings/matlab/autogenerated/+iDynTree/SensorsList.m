@@ -11,13 +11,13 @@ classdef SensorsList < SwigRef
       else
         tmp = iDynTreeMEX(1285, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1286, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = addSensor(self,varargin)
@@ -58,6 +58,9 @@ classdef SensorsList < SwigRef
     end
     function varargout = getGyroscopeSensor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1299, self, varargin{:});
+    end
+    function varargout = getThreeAxisAngularAccelerometerSensor(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1300, self, varargin{:});
     end
   end
   methods(Static)

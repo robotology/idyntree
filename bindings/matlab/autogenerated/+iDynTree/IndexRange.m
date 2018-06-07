@@ -34,13 +34,13 @@ classdef IndexRange < SwigRef
       else
         tmp = iDynTreeMEX(102, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(103, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

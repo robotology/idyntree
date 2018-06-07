@@ -9,7 +9,7 @@ classdef JointPosDoubleArray < iDynTree.VectorDynSize
       else
         tmp = iDynTreeMEX(1158, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
@@ -21,7 +21,7 @@ classdef JointPosDoubleArray < iDynTree.VectorDynSize
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1161, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

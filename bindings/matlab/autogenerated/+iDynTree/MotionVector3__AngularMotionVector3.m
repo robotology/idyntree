@@ -9,7 +9,7 @@ classdef MotionVector3__AngularMotionVector3 < iDynTree.GeomVector3__AngularMoti
       else
         tmp = iDynTreeMEX(489, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = cross(self,varargin)
@@ -18,7 +18,7 @@ classdef MotionVector3__AngularMotionVector3 < iDynTree.GeomVector3__AngularMoti
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(491, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

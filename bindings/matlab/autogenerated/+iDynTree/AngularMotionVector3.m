@@ -9,7 +9,7 @@ classdef AngularMotionVector3 < iDynTree.MotionVector3__AngularMotionVector3
       else
         tmp = iDynTreeMEX(505, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = exp(self,varargin)
@@ -18,7 +18,7 @@ classdef AngularMotionVector3 < iDynTree.MotionVector3__AngularMotionVector3
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(507, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

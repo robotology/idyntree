@@ -3,7 +3,7 @@ classdef Box < iDynTree.SolidShape
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1084, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)
@@ -48,7 +48,7 @@ classdef Box < iDynTree.SolidShape
       else
         tmp = iDynTreeMEX(1092, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
   end

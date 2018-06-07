@@ -3,7 +3,7 @@ classdef JointSensor < iDynTree.Sensor
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1271, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = getParentJoint(self,varargin)

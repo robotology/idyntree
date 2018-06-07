@@ -11,7 +11,7 @@ classdef DOFSpatialForceArray < SwigRef
       else
         tmp = iDynTreeMEX(1166, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
@@ -26,7 +26,7 @@ classdef DOFSpatialForceArray < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1170, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end
