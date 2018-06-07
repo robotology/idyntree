@@ -42,14 +42,12 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 
 target_link_libraries(${libraryname} LINK_PUBLIC iKin skinDynLib idyntree-core idyntree-model idyntree-yarp idyntree-estimation)
 
-if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
-    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
-endif()
+target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
 target_include_directories(${libraryname} INTERFACE ${skinDynLib_INCLUDE_DIRS})
-include_directories(SYSTEM ${skinDynLib_INCLUDE_DIRS})
+target_include_directories(${libraryname} PRIVATE SYSTEM ${skinDynLib_INCLUDE_DIRS})
 target_include_directories(${libraryname} INTERFACE ${iKin_INCLUDE_DIRS})
-include_directories(SYSTEM ${iKin_INCLUDE_DIRS})
+target_include_directories(${libraryname} PRIVATE SYSTEM ${iKin_INCLUDE_DIRS})
 
 
 install(TARGETS ${libraryname}

@@ -57,9 +57,7 @@ target_link_libraries(${libraryname} LINK_PUBLIC idyntree-core
                                                  idyntree-model)
 
 # enable warnings on this part of the add_library
-if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
-    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
-endif()
+target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
 # To avoid having to regenerate the SWIG bindings code, we compile the visualization library
 # even if irrlicht is not used, this can be removed when we stop to commit swig generated code
@@ -67,9 +65,8 @@ endif()
 if(IDYNTREE_USES_IRRLICHT)
     find_package(OpenGL)
     find_package(Irrlicht REQUIRED)
-    # Restore this once we have CMake 3.0 as a minimum version and we can support target_include_directories(.. SYSTEM)
-    # target_include_directories(idyntree-visualization PRIVATE SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
-    include_directories(SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
+
+    target_include_directories(${libraryname} PRIVATE SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
     target_link_libraries(${libraryname} LINK_PRIVATE ${IRRLICHT_LIBRARY} ${OPENGL_LIBRARIES})
     add_definitions(-DIDYNTREE_USES_IRRLICHT)
 

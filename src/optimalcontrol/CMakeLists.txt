@@ -4,9 +4,6 @@ project(idyntree_optimalcontrol)
 
 set(libraryname idyntree-optimalcontrol)
 
-
-idyntree_enable_cxx11()
-
 # Dependencies
 # IPOPT
 # SUNDIALS (?)
