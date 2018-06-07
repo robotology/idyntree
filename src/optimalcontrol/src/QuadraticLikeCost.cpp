@@ -28,12 +28,11 @@ namespace iDynTree {
             : Cost(costName)
             , m_timeVaryingStateHessian(nullptr)
             , m_timeVaryingStateGradient(nullptr)
+            , m_timeVaryingStateCostBias(nullptr)
             , m_timeVaryingControlHessian(nullptr)
             , m_timeVaryingControlGradient(nullptr)
-        {
-            m_timeVaryingStateCostBias = std::make_shared<TimeInvariantDouble>(0.0);
-            m_timeVaryingControlCostBias = std::make_shared<TimeInvariantDouble>(0.0);
-        }
+            , m_timeVaryingControlCostBias(nullptr)
+        { }
 
         QuadraticLikeCost::~QuadraticLikeCost()
         { }

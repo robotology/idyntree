@@ -113,9 +113,9 @@ namespace iDynTree {
 
             virtual bool evaluateCostFunction(double& costValue);
 
-            virtual bool evaluateCostGradient(VectorDynSize& gradient);
+            virtual bool evaluateCostGradient(VectorDynSize& gradient); //for quadratic costs this corresponds to Hx + g !
 
-            virtual bool evaluateCostHessian(MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained
+            virtual bool evaluateCostHessian(MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained. Initialize hessian to zero in case of dense solvers
 
             virtual bool evaluateConstraints(VectorDynSize& constraints);
 

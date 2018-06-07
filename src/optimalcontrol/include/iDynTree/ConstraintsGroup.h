@@ -29,6 +29,7 @@ namespace iDynTree {
     namespace optimalcontrol {
 
         class Constraint;
+        class LinearConstraint;
         class TimeRange;
 
         /**
@@ -75,6 +76,14 @@ namespace iDynTree {
              * @return True if successfull. Posible causes of failures are: empty pointer, dimension bigger than maxConstraintSize, invalid TimeRange.
              */
             bool addConstraint(std::shared_ptr<Constraint> constraint, const TimeRange& timeRange);
+
+            /**
+             * @brief Add a linear constraint to the group
+             * @param[in] constraint Shared pointer to the user defined constraint.
+             * @param[in] timeRange Time range in which the constraint will be enabled.
+             * @return True if successfull. Posible causes of failures are: empty pointer, dimension bigger than maxConstraintSize, invalid TimeRange.
+             */
+            bool addConstraint(std::shared_ptr<LinearConstraint> linearConstraint, const TimeRange& timeRange);
 
             /**
              * @brief Update the TimeRange of a previously added constraint.
@@ -198,6 +207,12 @@ namespace iDynTree {
              * @return The list of the names of the constraints added to the group.
              */
             const std::vector<std::string> listConstraints() const;
+
+            /**
+             * @brief Tells if the groups contains only linear constraints.
+             * @return true if contains only linear constraints. False if at least one generic constraint is added.
+             */
+            bool isLinearGroup() const;
 
         private:
             class ConstraintsGroupPimpl;

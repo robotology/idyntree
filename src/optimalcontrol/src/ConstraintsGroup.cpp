@@ -19,6 +19,7 @@
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/ConstraintsGroup.h>
 #include <iDynTree/Constraint.h>
+#include <iDynTree/LinearConstraint.h>
 #include <iDynTree/TimeRange.h>
 #include <iDynTree/Core/EigenHelpers.h>
 #include <Eigen/Dense>
@@ -50,12 +51,76 @@ namespace optimalcontrol {
             std::string name;
             unsigned int maxConstraintSize;
             std::vector<TimeRange> timeRanges;
+            bool isLinearGroup = true;
 
             std::vector<TimedConstraint_ptr>::reverse_iterator findActiveConstraint(double time){
                 return std::find_if(orderedIntervals.rbegin(),
                                     orderedIntervals.rend(),
                                     [time](const TimedConstraint_ptr & a) -> bool { return a->timeRange.isInRange(time); }); //find the last element in the vector with init time lower than the specified time
             }
+
+            bool addConstraint(std::shared_ptr<Constraint> constraint, const TimeRange &timeRange)
+            {
+                if (!constraint){
+                    reportError("ConstraintsGroup", "addConstraint", "Empty constraint pointer.");
+                    return false;
+                }
+
+                if (constraint->constraintSize() > maxConstraintSize){
+                    reportError("ConstraintsGroup", "addConstraint", "The constraint dimension is greater than the maximum allowed by the group.");
+                    return false;
+                }
+
+                if (timeRange == TimeRange::AnyTime()){
+                    if (group.size() != 0){
+                        reportError("ConstraintsGroup", "addConstraint",
+                                    "Only one constraint is allowed in a group if the timeRange is AnyTime.");
+                        return false;
+                    }
+                } else {
+                    if (!timeRange.isValid()){
+                        reportError("ConstraintsGroup", "addConstraint", "Invalid timeRange.");
+                        return false;
+                    }
+                }
+
+                if(group.size() > 0){
+                    GroupOfConstraintsMap::iterator constraintIterator;
+                    constraintIterator = group.find(constraint->name());
+                    if(constraintIterator != group.end()){
+                        std::ostringstream errorMsg;
+                        errorMsg << "A constraint named " << constraint->name()
+                                 <<" already exists in the group "<< name << " .";
+                        reportError("ConstraintsGroup", "addConstraint", errorMsg.str().c_str());
+                        return false;
+                    }
+                }
+
+                //add constraints in the group
+                TimedConstraint_ptr newConstraint = std::make_shared<TimedConstraint>();
+
+                newConstraint->timeRange = timeRange;
+                newConstraint->constraint = constraint;
+                newConstraint->constraintBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()));
+                newConstraint->stateJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedStateSpaceSize()));
+                newConstraint->controlJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedControlSpaceSize()));
+
+                std::pair< GroupOfConstraintsMap::iterator, bool> result;
+                result = group.insert(GroupOfConstraintsMap::value_type(constraint->name(), newConstraint));
+
+                if(!result.second){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to add constraint "<<constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "addConstraint", errorMsg.str().c_str());
+                    return false;
+                }
+
+                orderedIntervals.push_back(result.first->second); //register the time range in order to have the constraints ordered by init time. result.first->second is the TimedConstraint_ptr of the newly inserted TimedConstraint.
+                std::sort(orderedIntervals.begin(), orderedIntervals.end(), [](const TimedConstraint_ptr&a, const TimedConstraint_ptr&b) { return a->timeRange < b->timeRange;}); //reorder the vector
+
+                return true;
+            }
+
         };
 
         ConstraintsGroup::ConstraintsGroup(const std::string &name, unsigned int maxConstraintSize)
@@ -86,67 +151,13 @@ namespace optimalcontrol {
 
         bool ConstraintsGroup::addConstraint(std::shared_ptr<Constraint> constraint, const TimeRange &timeRange)
         {
-            if (!constraint){
-                reportError("ConstraintsGroup", "addConstraint", "Empty constraint pointer.");
-                return false;
-            }
+            m_pimpl->isLinearGroup = false;
+            return m_pimpl->addConstraint(constraint, timeRange);
+        }
 
-            if (constraint->constraintSize() > m_pimpl->maxConstraintSize){
-                reportError("ConstraintsGroup", "addConstraint", "The constraint dimension is greater than the maximum allowed by the group.");
-                return false;
-            }
-
-            if (timeRange == TimeRange::AnyTime()){
-                if (numberOfConstraints() != 0){
-                    reportError("ConstraintsGroup", "addConstraint",
-                                "Only one constraint is allowed in a group if the timeRange is AnyTime.");
-                    return false;
-                }
-            } else {
-                if (!timeRange.isValid()){
-                    reportError("ConstraintsGroup", "addConstraint", "Invalid timeRange.");
-                    return false;
-                }
-            }
-
-            if(m_pimpl->group.size() > 0){
-                GroupOfConstraintsMap::iterator constraintIterator;
-                constraintIterator = m_pimpl->group.find(constraint->name());
-                if(constraintIterator != m_pimpl->group.end()){
-                    std::ostringstream errorMsg;
-                    errorMsg << "A constraint named " << constraint->name()
-                             <<" already exists in the group "<< m_pimpl->name << " .";
-                    reportError("ConstraintsGroup", "addConstraint", errorMsg.str().c_str());
-                    return false;
-                }
-            }
-
-            //add constraints in the group
-            TimedConstraint_ptr newConstraint = std::make_shared<TimedConstraint>();
-
-            newConstraint->timeRange = timeRange;
-            newConstraint->constraint = constraint;
-            newConstraint->constraintBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()));
-            newConstraint->stateJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedStateSpaceSize()));
-            newConstraint->controlJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedControlSpaceSize()));
-
-            std::pair< GroupOfConstraintsMap::iterator, bool> result;
-            result = m_pimpl->group.insert(GroupOfConstraintsMap::value_type(constraint->name(), newConstraint));
-
-            if(!result.second){
-                std::ostringstream errorMsg;
-                errorMsg << "Unable to add constraint "<<constraint->name() << std::endl;
-                reportError("ConstraintsGroup", "addConstraint", errorMsg.str().c_str());
-                return false;
-            }
-
-            m_pimpl->orderedIntervals.push_back(result.first->second); //register the time range in order to have the constraints ordered by init time. result.first->second is the TimedConstraint_ptr of the newly inserted TimedConstraint.
-            std::sort(m_pimpl->orderedIntervals.begin(), m_pimpl->orderedIntervals.end(), [](const TimedConstraint_ptr&a, const TimedConstraint_ptr&b) { return a->timeRange < b->timeRange;}); //reorder the vector
-
-
-            //the jacobian should be updated
-
-            return true;
+        bool ConstraintsGroup::addConstraint(std::shared_ptr<LinearConstraint> linearConstraint, const TimeRange &timeRange)
+        {
+            return m_pimpl->addConstraint(linearConstraint, timeRange);
         }
 
         bool ConstraintsGroup::updateTimeRange(const std::string &name, const TimeRange &timeRange)
@@ -497,6 +508,11 @@ namespace optimalcontrol {
                 output.push_back(constraint.second->constraint->name()); //MEMORY ALLOCATION
             }
             return output;
+        }
+
+        bool ConstraintsGroup::isLinearGroup() const
+        {
+            return m_pimpl->isLinearGroup;
         }
 
     }
