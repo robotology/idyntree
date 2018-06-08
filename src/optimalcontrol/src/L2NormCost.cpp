@@ -101,6 +101,17 @@ namespace iDynTree {
                 return m_outputVector;
             }
 
+            bool updateSelector(const MatrixDynSize& selector) {
+                if ((selector.rows() != m_selectorMatrix.rows()) || (selector.cols() != m_selectorMatrix.cols())) {
+                    reportError("TimeVaryingGradient", "getObject", "The new selector dimensionsions do not match the old one.");
+                    return false;
+                }
+                m_selectorMatrix = selector;
+                toEigen(m_subMatrix) = toEigen(m_weightMatrix) * toEigen(m_selectorMatrix);
+
+                return true;
+            }
+
             const MatrixDynSize& selector() {
                 return m_selectorMatrix;
             }
@@ -372,6 +383,26 @@ namespace iDynTree {
             }
 
             return m_pimpl->controlGradient->setDesiredTrajectory(controlDesiredTrajectory);
+        }
+
+        bool L2NormCost::updatStateSelector(const MatrixDynSize &stateSelector)
+        {
+            if (!(m_pimpl->stateGradient->updateSelector(stateSelector))) {
+                reportError("L2NormCost", "updatStateSelector", "Error when updating state selector.");
+                return false;
+            }
+            toEigen(m_pimpl->stateHessian->get()) = toEigen(m_pimpl->stateGradient->selector()).transpose() * toEigen(m_pimpl->stateGradient->subMatrix());
+            return true;
+        }
+
+        bool L2NormCost::updatControlSelector(const MatrixDynSize &controlSelector)
+        {
+            if (!(m_pimpl->controlGradient->updateSelector(controlSelector))) {
+                reportError("L2NormCost", "updatControlSelector", "Error when updating state selector.");
+                return false;
+            }
+            toEigen(m_pimpl->controlHessian->get()) = toEigen(m_pimpl->controlGradient->selector()).transpose() * toEigen(m_pimpl->controlGradient->subMatrix());
+            return true;
         }
 
     }

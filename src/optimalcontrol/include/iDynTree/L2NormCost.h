@@ -63,6 +63,10 @@ namespace iDynTree {
 
             bool setControlDesiredTrajectory(std::shared_ptr<TimeVaryingVector> controlDesiredTrajectory);
 
+            bool updatStateSelector(const MatrixDynSize& stateSelector);
+
+            bool updatControlSelector(const MatrixDynSize& controlSelector);
+
         };
 
     }
