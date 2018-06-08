@@ -87,7 +87,7 @@ namespace iDynTree {
                 newCost.weight = weight;
                 newCost.timeRange = timeRange;
                 newCost.isLinear = isLinear;
-                newCost.isLinear = isQuadratic;
+                newCost.isQuadratic = isQuadratic;
 
                 std::pair<CostsMap::iterator, bool> costResult;
                 costResult = costs.insert(std::pair<std::string, TimedCost>(cost->name(), newCost));
