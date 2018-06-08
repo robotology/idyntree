@@ -366,16 +366,9 @@ namespace iDynTree {
 
                 if (!(m_prepared)){
                     if (m_ocproblem->dynamicalSystem().expired()){
-                        if (m_integrator->dynamicalSystem().expired()){
-                            reportError("MultipleShootingTranscription", "prepare",
-                                        "No dynamical system set, neither to the OptimalControlProblem nor to the Integrator object.");
-                            return false;
-                        }
-                        if (!(m_ocproblem->setDynamicalSystemConstraint(m_integrator->dynamicalSystem().lock()))){
-                            reportError("MultipleShootingTranscription", "prepare",
-                                        "Error while setting the dynamicalSystem to the OptimalControlProblem using the one pointer provided by the Integrator object.");
-                            return false;
-                        }
+                        reportError("MultipleShootingTranscription", "prepare",
+                                    "No dynamical system set to the OptimalControlProblem.");
+                        return false;
                     } else {
                         if (!(m_integrator->dynamicalSystem().expired()) &&
                                 (m_integrator->dynamicalSystem().lock() != m_ocproblem->dynamicalSystem().lock())){
