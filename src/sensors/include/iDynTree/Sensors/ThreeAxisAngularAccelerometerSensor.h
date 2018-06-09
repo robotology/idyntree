@@ -127,11 +127,14 @@ namespace iDynTree {
         * Simulate the measurement of the Three Axis angular accelerometer
         *
         * @param[in] linkAcc the left trivialized acceleration of the link frame w.r.t. to an inertial frame
-        * @param[in] linkTwist the left trivialized velocity of the link frame w.r.t. to an inertial frame
         *
         * @return the predicted measurement as a AngAcceleration
         */
-       Vector3 predictMeasurement(const iDynTree::SpatialAcc &linkAcc, const iDynTree::Twist &linkTwist);
+        Vector3 predictMeasurement(const iDynTree::SpatialAcc &linkAcc);
+
+        // Deprecated
+        IDYNTREE_DEPRECATED_WITH_MSG("Use predictMeasurement(const iDynTree::SpatialAcc &linkAcc) instead")
+        Vector3 predictMeasurement(const iDynTree::SpatialAcc &linkAcc, const iDynTree::Twist &linkTwist);
     };
 
 

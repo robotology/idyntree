@@ -12,6 +12,7 @@
 #include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Sensors/AccelerometerSensor.h>
 #include <iDynTree/Sensors/GyroscopeSensor.h>
+#include <iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h>
 #include <iDynTree/Sensors/SixAxisFTSensor.h>
 #include <iDynTree/Sensors/Sensors.h>
 
@@ -80,7 +81,7 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& /*model*/,
         SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)sensorsList.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
 
         Wrench predictedWrench = ftSens->predictMeasurement(traversal,buf_internalWrenches);
-        predictedMeasurement.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,idx,predictedWrench);
+        retVal = retVal && predictedMeasurement.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,idx,predictedWrench);
     }
 
 
@@ -93,7 +94,7 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& /*model*/,
         LinkIndex parentLinkId = accelerometer->getParentLinkIndex();
         LinAcceleration predictedAcc = accelerometer->predictMeasurement(buf_linkProperAcc(parentLinkId),
                                                                          buf_linkVel(parentLinkId));
-        predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,predictedAcc);
+        retVal = retVal && predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,predictedAcc);
     }
 
     unsigned int numGyro = sensorsList.getNrOfSensors(iDynTree::GYROSCOPE);
@@ -102,9 +103,18 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& /*model*/,
         GyroscopeSensor * gyroscope = (GyroscopeSensor*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
         LinkIndex parentLinkId = gyroscope->getParentLinkIndex();
         AngVelocity predictedAngVel = gyroscope->predictMeasurement(buf_linkVel(parentLinkId));
-        predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);
+        retVal = retVal && predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);
     }
 
+    unsigned int numAngAccl = sensorsList.getNrOfSensors(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER);
+    for(size_t idx = 0; idx<numAngAccl; idx++)
+    {
+        ThreeAxisAngularAccelerometerSensor * angAccelerometer =
+        (ThreeAxisAngularAccelerometerSensor*)sensorsList.getSensor(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER, idx);
+        LinkIndex parentLinkId = angAccelerometer->getParentLinkIndex();
+        Vector3 predictedAngAcc = angAccelerometer->predictMeasurement(buf_linkProperAcc(parentLinkId));
+        retVal = retVal && predictedMeasurement.setMeasurement(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER,idx,predictedAngAcc);
+    }
 
     return retVal;
 }
