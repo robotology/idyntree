@@ -665,6 +665,8 @@ namespace iDynTree {
             } else {
                 if (m_pimpl->solver.isInitialized()) {
                     m_pimpl->solver.clearSolver();
+                    m_pimpl->solver.data()->clearHessianMatrix();
+                    m_pimpl->solver.data()->clearLinearConstraintsMatrix();
                 }
                 m_pimpl->alreadySolved = false;
 
