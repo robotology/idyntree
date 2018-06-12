@@ -41,7 +41,12 @@ if (IDYNTREE_USES_ICUB)
   find_package(ICUB REQUIRED)
 endif ()
 
-idyntree_handle_dependency(YARP MINIMUM_VERSION 2.3.62)
+idyntree_handle_dependency(YARP)
+set(YARP_REQUIRED_VERSION 2.3.62)
+if(${YARP_VERSION} VERSION_LESS ${YARP_REQUIRED_VERSION})
+  message(FATAL_ERROR "YARP version ${YARP_VERSION} not sufficient, at least version ${YARP_REQUIRED_VERSION} is required.")
+endif()
+
 idyntree_handle_dependency(IPOPT)
 idyntree_handle_dependency(Irrlicht)
 idyntree_handle_dependency(Qt5 COMPONENTS Qml Quick Widgets)
