@@ -183,6 +183,14 @@ namespace iDynTree {
                 }
             }
 
+            void addIdentityJacobianBlock(size_t initRow, size_t initCol, size_t dimension){
+                for (size_t i = 0; i < dimension; ++i){
+                    addNonZero(m_jacobianNZRows, m_jacobianNonZeros, initRow + i);
+                    addNonZero(m_jacobianNZCols, m_jacobianNonZeros, initCol + i);
+                    m_jacobianNonZeros++;
+                }
+            }
+
             void addHessianBlock(size_t initRow, size_t rows, size_t initCol, size_t cols){
                 for (size_t i = 0; i < rows; ++i){
                     for (size_t j = 0; j < cols; ++j){
@@ -833,42 +841,42 @@ namespace iDynTree {
 
             MultipleShootingTranscription()
             : m_ocproblem(nullptr)
-            ,m_integrator(nullptr)
-            ,m_totalMeshes(0)
-            ,m_controlMeshes(0)
-            ,m_prepared(false)
-            ,m_meshPointsEnd(m_meshPoints.end())
-            ,m_minStepSize(0.001)
-            ,m_maxStepSize(0.01)
-            ,m_controlPeriod(0.01)
-            ,m_nx(0)
-            ,m_nu(0)
-            ,m_numberOfVariables(0)
-            ,m_constraintsPerInstant(0)
-            ,m_numberOfConstraints(0)
-            ,m_plusInfinity(1e19)
-            ,m_minusInfinity(-1e19)
-            ,m_solved(false)
+            , m_integrator(nullptr)
+            , m_totalMeshes(0)
+            , m_controlMeshes(0)
+            , m_prepared(false)
+            , m_meshPointsEnd(m_meshPoints.end())
+            , m_minStepSize(0.001)
+            , m_maxStepSize(0.01)
+            , m_controlPeriod(0.01)
+            , m_nx(0)
+            , m_nu(0)
+            , m_numberOfVariables(0)
+            , m_constraintsPerInstant(0)
+            , m_numberOfConstraints(0)
+            , m_plusInfinity(1e19)
+            , m_minusInfinity(-1e19)
+            , m_solved(false)
             { }
 
             MultipleShootingTranscription(const std::shared_ptr<OptimalControlProblem> problem, const std::shared_ptr<Integrator> integrationMethod)
-            :m_ocproblem(problem)
-            ,m_integrator(integrationMethod)
-            ,m_totalMeshes(0)
-            ,m_controlMeshes(0)
-            ,m_prepared(false)
-            ,m_meshPointsEnd(m_meshPoints.end())
-            ,m_minStepSize(0.001)
-            ,m_maxStepSize(0.01)
-            ,m_controlPeriod(0.01)
-            ,m_nx(0)
-            ,m_nu(0)
-            ,m_numberOfVariables(0)
-            ,m_constraintsPerInstant(0)
-            ,m_numberOfConstraints(0)
-            ,m_plusInfinity(1e19)
-            ,m_minusInfinity(-1e19)
-            ,m_solved(false)
+            : m_ocproblem(problem)
+            , m_integrator(integrationMethod)
+            , m_totalMeshes(0)
+            , m_controlMeshes(0)
+            , m_prepared(false)
+            , m_meshPointsEnd(m_meshPoints.end())
+            , m_minStepSize(0.001)
+            , m_maxStepSize(0.01)
+            , m_controlPeriod(0.01)
+            , m_nx(0)
+            , m_nu(0)
+            , m_numberOfVariables(0)
+            , m_constraintsPerInstant(0)
+            , m_numberOfConstraints(0)
+            , m_plusInfinity(1e19)
+            , m_minusInfinity(-1e19)
+            , m_solved(false)
             { }
 
             MultipleShootingTranscription(const MultipleShootingTranscription& other) = delete;
@@ -892,11 +900,11 @@ namespace iDynTree {
                 m_nu = nu;
 
                 //TODO: I should consider also the possibility to have auxiliary variables in the integrator
-                m_numberOfVariables = (m_totalMeshes - 1) * nx + m_controlMeshes * nu; //the -1 removes the initial state from the set of optimization varibales
+                m_numberOfVariables = (m_totalMeshes) * nx + m_controlMeshes * nu; //also the initial state should be an optimization variable. This allows to use only the constraint jacobian in case of a linear problem
 
                 m_constraintsPerInstant = m_ocproblem->getConstraintsDimension();
                 size_t nc = m_constraintsPerInstant;
-                m_numberOfConstraints = (m_totalMeshes - 1) * nx + (m_constraintsPerInstant) * (m_totalMeshes); //dynamical constraints (removing the initial state) and normal constraints
+                m_numberOfConstraints = (m_totalMeshes) * nx + (m_constraintsPerInstant) * (m_totalMeshes); //dynamical constraints (plus identity constraint for the initial state) and normal constraints
 
                 //Determine problem type
                 m_infoData->hasLinearConstraints = (m_ocproblem->countLinearConstraints() != 0) || m_ocproblem->systemIsLinear();
@@ -921,10 +929,17 @@ namespace iDynTree {
                 while (mesh != m_meshPointsEnd){
                     if (mesh->origin == first){
                         //setting up the indeces
+                        mesh->stateIndex = index; //the initial state goes first
+                        index += nx;
                         mesh->controlIndex = index;
                         mesh->previousControlIndex = index;
                         index += nu;
                         previousControlMesh = mesh;
+
+                        lowerBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
+                        upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
+                        addIdentityJacobianBlock(constraintIndex, mesh->stateIndex, nx);
+                        constraintIndex += nx;
 
                         //Saving constraints bounds
                         if (!(m_ocproblem->getConstraintsLowerBound(mesh->time, m_minusInfinity, m_constraintsBuffer))){
@@ -946,8 +961,16 @@ namespace iDynTree {
                         constraintIndex += nc;
 
                         //Saving the hessian structure
+                        //Saving the hessian structure
                         if (!m_info.costIsLinear() && m_info.hasLinearConstraints()) {
                             addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
+                            addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
+
+                            addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
+                            addHessianBlock(mesh->stateIndex, nx, mesh->controlIndex, nu);
+
+                            addHessianBlock(mesh->previousControlIndex, nu, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and u-1
+                            addHessianBlock(mesh->stateIndex, nx, mesh->previousControlIndex, nu);
                         }
 
                     } else if (mesh->type == MeshPointType::Control) {
@@ -966,9 +989,8 @@ namespace iDynTree {
                         addJacobianBlock(constraintIndex, nx, mesh->previousControlIndex, nu);
                         addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
                         addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
-                        if ((mesh - 1)->origin != first){
-                            addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
-                        }
+                        addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
+
                         constraintIndex += nx;
 
                         //Saving constraints bounds
@@ -1004,10 +1026,8 @@ namespace iDynTree {
                         }
 
                         if (!(m_ocproblem->systemIsLinear())) {
-                            if ((mesh - 1)->origin != first){
-                                addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
-                                addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
-                            }
+                            addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
+                            addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
                         }
 
 
@@ -1024,9 +1044,7 @@ namespace iDynTree {
                         //Saving the jacobian structure due to the dynamical constraints
                         addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
                         addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
-                        if ((mesh - 1)->origin != first){
-                            addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
-                        }
+                        addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
                         constraintIndex += nx;
 
                         //Saving constraints bounds
@@ -1058,10 +1076,8 @@ namespace iDynTree {
                         }
 
                         if (!(m_ocproblem->systemIsLinear())) {
-                            if ((mesh - 1)->origin != first){
-                                addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
-                                addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
-                            }
+                            addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
+                            addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
                         }
 
                     }
@@ -1143,6 +1159,7 @@ namespace iDynTree {
                 MeshPointOrigin first = MeshPointOrigin::FirstPoint();
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
+                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_plusInfinity); //avoiding setting bounds on the initial state
                         upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
                     } else if (mesh->type == MeshPointType::Control) {
                         upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
@@ -1186,6 +1203,7 @@ namespace iDynTree {
                 MeshPointOrigin first = MeshPointOrigin::FirstPoint();
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
+                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_minusInfinity); //avoiding setting bounds on the initial state
                         lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
                     } else if (mesh->type == MeshPointType::Control) {
                         lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
@@ -1269,13 +1287,9 @@ namespace iDynTree {
                 costValue = 0;
                 double singleCost;
 
-                MeshPointOrigin first = MeshPointOrigin::FirstPoint();
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
-                    if (mesh->origin == first){
-                        stateBufferMap = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                    } else {
-                        stateBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
-                    }
+
+                    stateBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
                     controlBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
 
                     if (!(m_ocproblem->costsEvaluation(mesh->time, m_stateBuffer, m_controlBuffer, singleCost))){
@@ -1313,25 +1327,20 @@ namespace iDynTree {
 
                 Eigen::Map<Eigen::VectorXd> gradientMap = toEigen(gradient);
 
-                MeshPointOrigin first = MeshPointOrigin::FirstPoint();
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
-                    if (mesh->origin == first){
-                        stateBufferMap = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                    } else {
-                        stateBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
-                    }
+
+                    stateBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
                     controlBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
 
-                    if (mesh->origin != first){
-                        if (!(m_ocproblem->costsFirstPartialDerivativeWRTState(mesh->time, m_stateBuffer, m_controlBuffer, m_costStateGradientBuffer))){
-                            std::ostringstream errorMsg;
-                            errorMsg << "Error while evaluating cost state gradient at time t = " << mesh->time << ".";
-                            reportError("MultipleShootingTranscription", "evaluateCostGradient", errorMsg.str().c_str());
-                            return false;
-                        }
-
-                        gradientMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = costStateGradient;
+                    if (!(m_ocproblem->costsFirstPartialDerivativeWRTState(mesh->time, m_stateBuffer, m_controlBuffer, m_costStateGradientBuffer))){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost state gradient at time t = " << mesh->time << ".";
+                        reportError("MultipleShootingTranscription", "evaluateCostGradient", errorMsg.str().c_str());
+                        return false;
                     }
+
+                    gradientMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = costStateGradient;
+
 
                     if (!(m_ocproblem->costsFirstPartialDerivativeWRTControl(mesh->time, m_stateBuffer, m_controlBuffer, m_costControlGradientBuffer))){
                         std::ostringstream errorMsg;
@@ -1376,36 +1385,30 @@ namespace iDynTree {
 
                 iDynTreeEigenMatrixMap hessianMap = toEigen(hessian);
 
-                MeshPointOrigin first = MeshPointOrigin::FirstPoint();
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
-                    if (mesh->origin == first){
-                        stateBufferMap = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                    } else {
-                        stateBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
-                    }
+
+                    stateBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
                     controlBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
 
-                    if (mesh->origin != first){
-                        if (!(m_ocproblem->costsSecondPartialDerivativeWRTState(mesh->time, m_stateBuffer, m_controlBuffer, m_costHessianStateBuffer))){
-                            std::ostringstream errorMsg;
-                            errorMsg << "Error while evaluating cost state hessian at time t = " << mesh->time << ".";
-                            reportError("MultipleShootingTranscription", "evaluateCostHessian", errorMsg.str().c_str());
-                            return false;
-                        }
-
-                        hessianMap.block(static_cast<Eigen::Index>(mesh->stateIndex), static_cast<Eigen::Index>(mesh->stateIndex), nx, nx) = costStateHessian;
-
-                        if (!(m_ocproblem->costsSecondPartialDerivativeWRTStateControl(mesh->time, m_stateBuffer, m_controlBuffer, m_costHessianStateControlBuffer))){
-                            std::ostringstream errorMsg;
-                            errorMsg << "Error while evaluating cost state-control hessian at time t = " << mesh->time << ".";
-                            reportError("MultipleShootingTranscription", "evaluateCostHessian", errorMsg.str().c_str());
-                            return false;
-                        }
-
-                        hessianMap.block(static_cast<Eigen::Index>(mesh->stateIndex), static_cast<Eigen::Index>(mesh->controlIndex), nx, nu) = costStateControlHessian;
-                        costControlStateHessian = costStateControlHessian.transpose();
-                        hessianMap.block(static_cast<Eigen::Index>(mesh->controlIndex), static_cast<Eigen::Index>(mesh->stateIndex), nu, nx) = costControlStateHessian;
+                    if (!(m_ocproblem->costsSecondPartialDerivativeWRTState(mesh->time, m_stateBuffer, m_controlBuffer, m_costHessianStateBuffer))){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost state hessian at time t = " << mesh->time << ".";
+                        reportError("MultipleShootingTranscription", "evaluateCostHessian", errorMsg.str().c_str());
+                        return false;
                     }
+
+                    hessianMap.block(static_cast<Eigen::Index>(mesh->stateIndex), static_cast<Eigen::Index>(mesh->stateIndex), nx, nx) = costStateHessian;
+
+                    if (!(m_ocproblem->costsSecondPartialDerivativeWRTStateControl(mesh->time, m_stateBuffer, m_controlBuffer, m_costHessianStateControlBuffer))){
+                        std::ostringstream errorMsg;
+                        errorMsg << "Error while evaluating cost state-control hessian at time t = " << mesh->time << ".";
+                        reportError("MultipleShootingTranscription", "evaluateCostHessian", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    hessianMap.block(static_cast<Eigen::Index>(mesh->stateIndex), static_cast<Eigen::Index>(mesh->controlIndex), nx, nu) = costStateControlHessian;
+                    costControlStateHessian = costStateControlHessian.transpose();
+                    hessianMap.block(static_cast<Eigen::Index>(mesh->controlIndex), static_cast<Eigen::Index>(mesh->stateIndex), nu, nx) = costControlStateHessian;
 
                     if (!(m_ocproblem->costsSecondPartialDerivativeWRTControl(mesh->time, m_stateBuffer, m_controlBuffer, m_costHessianControlBuffer))){
                         std::ostringstream errorMsg;
@@ -1453,20 +1456,17 @@ namespace iDynTree {
                 Eigen::Index constraintIndex = 0;
                 double dT = 0;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
-                    if (mesh->origin == first){
-                         currentState= toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                    } else {
-                        currentState = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
-                        if ((mesh -1)->origin == first){
-                            previousState = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                        } else {
-                            previousState = variablesBuffer.segment(static_cast<Eigen::Index>((mesh - 1)->stateIndex), nx);
-                        }
-                    }
+
+                    currentState = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
+
                     currentControl  = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
                     previousControl = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->previousControlIndex), nu);
 
-                    if (mesh->origin != first){
+                    if (mesh->origin == first) {
+                        constraintsMap.segment(constraintIndex, nx) = currentState; //identity constraint for the initial state
+                        constraintIndex += nx;
+                    } else {
+                        previousState = variablesBuffer.segment(static_cast<Eigen::Index>((mesh - 1)->stateIndex), nx);
                         dT = mesh->time - (mesh - 1)->time;
                         if (!(m_integrator->evaluateCollocationConstraint(mesh->time, m_collocationStateBuffer, m_collocationControlBuffer, dT, m_stateBuffer))){
                             std::ostringstream errorMsg;
@@ -1519,20 +1519,18 @@ namespace iDynTree {
                 Eigen::Index constraintIndex = 0;
                 double dT = 0;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
-                    if (mesh->origin == first){
-                         currentState= toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                    } else {
-                        currentState = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
-                        if ((mesh -1)->origin == first){
-                            previousState = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                        } else {
-                            previousState = variablesBuffer.segment(static_cast<Eigen::Index>((mesh - 1)->stateIndex), nx);
-                        }
-                    }
+
+                    currentState = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
                     currentControl  = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
                     previousControl = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->previousControlIndex), nu);
 
-                    if (mesh->origin != first){
+                    if (mesh->origin == first) {
+
+                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nx, nx).setIdentity();
+                        constraintIndex += nx;
+
+                    } else {
+                        previousState = variablesBuffer.segment(static_cast<Eigen::Index>((mesh - 1)->stateIndex), nx);
                         dT = mesh->time - (mesh - 1)->time;
                         if (!(m_integrator->evaluateCollocationConstraintJacobian(mesh->time, m_collocationStateBuffer, m_collocationControlBuffer, dT, m_collocationStateJacBuffer, m_collocationControlJacBuffer))){
                             std::ostringstream errorMsg;
@@ -1541,9 +1539,8 @@ namespace iDynTree {
                             return false;
                         }
 
-                        if ((mesh -1)->origin != first) {
-                            jacobianMap.block(constraintIndex, static_cast<Eigen::Index>((mesh-1)->stateIndex), nx, nx) = toEigen(m_collocationStateJacBuffer[0]);
-                        }
+
+                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>((mesh-1)->stateIndex), nx, nx) = toEigen(m_collocationStateJacBuffer[0]);
 
                         jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nx, nx) = toEigen(m_collocationStateJacBuffer[1]);
 
@@ -1564,9 +1561,7 @@ namespace iDynTree {
                         return false;
                     }
 
-                    if (mesh->origin != first) {
-                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nc, nx) = toEigen(m_constraintsStateJacBuffer);
-                    }
+                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nc, nx) = toEigen(m_constraintsStateJacBuffer);                    
 
                     if (!(m_ocproblem->constraintsJacobianWRTControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsControlJacBuffer))){
                         std::ostringstream errorMsg;

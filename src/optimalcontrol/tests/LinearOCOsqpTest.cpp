@@ -26,6 +26,7 @@
 #include <iDynTree/Integrators/ForwardEuler.h>
 #include <iDynTree/OCSolvers/MultipleShootingSolver.h>
 #include <iDynTree/Optimizers/OsqpInterface.h>
+//#include <iDynTree/Optimizers/IpoptInterface.h>
 #include <iDynTree/OptimalControlProblem.h>
 
 #include <vector>
@@ -77,7 +78,14 @@ int main() {
 
     std::shared_ptr<integrators::ForwardEuler> integrator(new integrators::ForwardEuler);
     ASSERT_IS_TRUE(solver.setIntegrator(integrator));
+
+
     std::shared_ptr<optimization::OsqpInterface> optimizer(new optimization::OsqpInterface);
+    optimizer->settings().verbose = false;
+
+//    std::shared_ptr<optimization::IpoptInterface> optimizer(new optimization::IpoptInterface);
+//    ASSERT_IS_TRUE(optimizer->setIpoptOption("print_level", 0));
+
     ASSERT_IS_TRUE(solver.setOptimizer(optimizer));
     ASSERT_IS_TRUE(solver.setStepSizeBounds(0.001, 0.01));
     ASSERT_IS_TRUE(solver.setControlPeriod(0.01));
@@ -85,7 +93,6 @@ int main() {
     iDynTree::VectorDynSize initialState(2);
     iDynTree::getRandomVector(initialState, -2.0, 2.0);
     ASSERT_IS_TRUE(solver.setInitialState(initialState));
-    optimizer->settings().verbose = true;
 
     clock_t initT, endT;
     initT = clock();

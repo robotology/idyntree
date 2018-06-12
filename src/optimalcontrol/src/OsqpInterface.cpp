@@ -113,9 +113,9 @@ namespace iDynTree {
 
                 assert(m_nnzIndex < m_colIndeces->size());
 
-                m_triplet.m_row = m_rowIndeces->operator[](m_nnzIndex);
+                m_triplet.m_row = m_rowIndeces->operator[](m_nnzIndex) + m_nnzIdentity;
                 m_triplet.m_col = m_colIndeces->operator[](m_nnzIndex);
-                unsigned int row = static_cast<unsigned int>(m_triplet.m_row);
+                unsigned int row = static_cast<unsigned int>(m_rowIndeces->operator[](m_nnzIndex));
                 unsigned int col = static_cast<unsigned int>(m_triplet.m_col);
                 m_triplet.m_value = m_denseMatrix->operator()(row, col);
                 return m_triplet;
@@ -135,7 +135,9 @@ namespace iDynTree {
                                        std::shared_ptr<MatrixDynSize> denseMatrix,
                                        bool addIdentityOnTop = false) {
                 TripletIterator m_end(rowIndeces, colIndeces, denseMatrix, addIdentityOnTop);
-                m_end.m_nnzIdentity = denseMatrix->cols();
+                if (addIdentityOnTop) {
+                    m_end.m_nnzIdentity = denseMatrix->cols();
+                }
                 m_end.m_nnzIndex = rowIndeces->size();
                 return m_end;
             }
@@ -202,9 +204,9 @@ namespace iDynTree {
                 assert(m_rowIndex < m_denseMatrix->rows());
                 assert(m_colIndex < m_denseMatrix->cols());
 
-                m_triplet.m_row = m_rowIndex;
+                m_triplet.m_row = m_rowIndex + m_nnzIdentity;
                 m_triplet.m_col = m_colIndex;
-                unsigned int row = static_cast<unsigned int>(m_triplet.m_row);
+                unsigned int row = static_cast<unsigned int>(m_rowIndex);
                 unsigned int col = static_cast<unsigned int>(m_triplet.m_col);
                 m_triplet.m_value = m_denseMatrix->operator()(row, col);
                 return m_triplet;
@@ -219,7 +221,9 @@ namespace iDynTree {
             static DenseIterator end(std::shared_ptr<MatrixDynSize> denseMatrix,
                                      bool addIdentityOnTop = false) {
                 DenseIterator m_end(denseMatrix, addIdentityOnTop);
-                m_end.m_nnzIdentity = denseMatrix->cols();
+                if (addIdentityOnTop) {
+                    m_end.m_nnzIdentity = denseMatrix->cols();
+                }
                 m_end.m_rowIndex = denseMatrix->rows();
                 m_end.m_colIndex = denseMatrix->cols();
                 return m_end;
@@ -710,6 +714,11 @@ namespace iDynTree {
                         return false;
                     }
                 }
+            }
+
+            if (!(m_pimpl->solver.isInitialized())) {
+                reportError("OsqpInterface", "solve", "The solver does not seem to be initialized correctly.");
+                return false;
             }
 
             if (!(m_pimpl->solver.solve())) {
