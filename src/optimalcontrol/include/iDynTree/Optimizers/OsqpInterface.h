@@ -90,7 +90,7 @@ namespace iDynTree {
 
             virtual double plusInfinity() override;
 
-            const OsqpSettings& settings() const;
+            OsqpSettings& settings();
         };
 
     }

@@ -83,12 +83,20 @@ namespace iDynTree {
                 return *this;
             }
 
-            bool  operator==(const TripletIterator& rhs) const{
-                return ((rhs.m_nnzIndex == this->m_nnzIndex) && (rhs.m_nnzIdentity == this->m_nnzIdentity));
+            bool  operator==(const TripletIterator& rhs) const {
+                if (m_addIdentity) {
+                    return ((rhs.m_nnzIndex == this->m_nnzIndex) && (rhs.m_nnzIdentity == this->m_nnzIdentity));
+                } else {
+                    return (rhs.m_nnzIndex == this->m_nnzIndex);
+                }
             }
 
             bool operator!=(const TripletIterator& rhs) const {
-                return ((rhs.m_nnzIndex != this->m_nnzIndex) || (rhs.m_nnzIdentity != this->m_nnzIdentity));
+                if (m_addIdentity) {
+                    return ((rhs.m_nnzIndex != this->m_nnzIndex) || (rhs.m_nnzIdentity != this->m_nnzIdentity));
+                } else {
+                    return (rhs.m_nnzIndex != this->m_nnzIndex);
+                }
             }
 
             Triplet* operator->() {
@@ -104,6 +112,7 @@ namespace iDynTree {
                 }
 
                 assert(m_nnzIndex < m_colIndeces->size());
+
                 m_triplet.m_row = m_rowIndeces->operator[](m_nnzIndex);
                 m_triplet.m_col = m_colIndeces->operator[](m_nnzIndex);
                 unsigned int row = static_cast<unsigned int>(m_triplet.m_row);
@@ -117,6 +126,7 @@ namespace iDynTree {
                                          std::shared_ptr<MatrixDynSize> denseMatrix,
                                          bool addIdentityOnTop = false) {
                 TripletIterator m_begin(rowIndeces, colIndeces, denseMatrix, addIdentityOnTop);
+                assert(rowIndeces->size() == colIndeces->size());
                 return m_begin;
             }
 
@@ -166,7 +176,11 @@ namespace iDynTree {
             }
 
             bool  operator==(const DenseIterator& rhs) const{
-                return ((rhs.m_rowIndex == this->m_rowIndex) && (rhs.m_colIndex == this->m_colIndex) && (rhs.m_nnzIdentity == this->m_nnzIdentity));
+                if (m_addIdentity) {
+                    return ((rhs.m_rowIndex == this->m_rowIndex) && (rhs.m_colIndex == this->m_colIndex) && (rhs.m_nnzIdentity == this->m_nnzIdentity));
+                } else {
+                    return ((rhs.m_rowIndex == this->m_rowIndex) && (rhs.m_colIndex == this->m_colIndex));
+                }
             }
 
             bool operator!=(const DenseIterator& rhs) const {
@@ -444,6 +458,11 @@ namespace iDynTree {
                 return false;
             }
 
+            if (!m_problem->prepare()){
+                reportError("OsqpInterface", "solve", "Error while preparing the optimization problem.");
+                return false;
+            }
+
             if (!(m_problem->info().costIsQuadratic()) || (m_problem->info().hasNonLinearConstraints())) {
                 reportError("OsqpInterface", "solve", "The specified optimization problem cannot be solved by this solver. It needs to be a QP.");
                 return false;
@@ -451,11 +470,6 @@ namespace iDynTree {
 
             if (!(m_problem->info().hessianIsProvided())) {
                 reportError("OsqpInterface", "solve", "Hessian must be provided. Only the cost hessian will be evaluated.");
-                return false;
-            }
-
-            if (!m_problem->prepare()){
-                reportError("OsqpInterface", "solve", "Error while preparing the optimization problem.");
                 return false;
             }
 
@@ -833,7 +847,7 @@ namespace iDynTree {
             return OsqpEigen::INFTY;
         }
 
-        const OsqpSettings &OsqpInterface::settings() const
+        OsqpSettings &OsqpInterface::settings()
         {
             return m_pimpl->settings;
         }

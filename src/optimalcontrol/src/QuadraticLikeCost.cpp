@@ -351,8 +351,6 @@ namespace iDynTree {
             partialDerivative.resize(control.size(), control.size());
 
             if (m_timeVaryingControlHessian) {
-                reportError("QuadraticLikeCost", "costSecondPartialDerivativeWRTControl", "The control cost is activated but the timeVaryingControlHessian pointer is empty.");
-                return false;
 
                 bool isValid = false;
                 const MatrixDynSize &hessian = m_timeVaryingControlHessian->get(time, isValid);

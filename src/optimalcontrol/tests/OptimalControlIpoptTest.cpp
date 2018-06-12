@@ -257,9 +257,6 @@ int main () {
     // Optimizer settings
     //ASSERT_IS_TRUE(optimizer->setIpoptOption("linear_solver", "ma27"));
     ASSERT_IS_TRUE(optimizer->setIpoptOption("print_level", 0));
-    ASSERT_IS_TRUE(optimizer->setIpoptOption("hessian_constant", "yes"));
-    ASSERT_IS_TRUE(optimizer->setIpoptOption("jac_c_constant", "yes"));
-    ASSERT_IS_TRUE(optimizer->setIpoptOption("jac_d_constant", "yes"));
 
     clock_t initT, endT;
     initT = clock();

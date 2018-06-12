@@ -22,6 +22,8 @@
 #include <iDynTree/LinearConstraint.h>
 #include <iDynTree/Cost.h>
 #include <iDynTree/QuadraticLikeCost.h>
+#include <iDynTree/QuadraticCost.h>
+#include <iDynTree/L2NormCost.h>
 #include <iDynTree/LinearCost.h>
 #include <iDynTree/TimeRange.h>
 #include <iDynTree/Core/VectorDynSize.h>
@@ -420,7 +422,18 @@ namespace iDynTree {
             return true;
         }
 
-        bool OptimalControlProblem::addMayerTerm(double weight, std::shared_ptr<QuadraticLikeCost> quadraticCost)
+        bool OptimalControlProblem::addMayerTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost)
+        {
+            TimeRange newTimerange(m_pimpl->horizon.endTime(), m_pimpl->horizon.endTime());
+            if (!(m_pimpl->addCost(weight, newTimerange, quadraticCost, false, true, "addMayerTerm"))) {
+                return false;
+            }
+            m_pimpl->mayerCostnames.push_back(quadraticCost->name());
+
+            return true;
+        }
+
+        bool OptimalControlProblem::addMayerTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost)
         {
             TimeRange newTimerange(m_pimpl->horizon.endTime(), m_pimpl->horizon.endTime());
             if (!(m_pimpl->addCost(weight, newTimerange, quadraticCost, false, true, "addMayerTerm"))) {
@@ -447,7 +460,12 @@ namespace iDynTree {
             return (m_pimpl->addCost(weight, TimeRange::AnyTime(), cost, false, false, "addLagrangeTerm"));
         }
 
-        bool OptimalControlProblem::addLagrangeTerm(double weight, std::shared_ptr<QuadraticLikeCost> quadraticCost)
+        bool OptimalControlProblem::addLagrangeTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost)
+        {
+            return (m_pimpl->addCost(weight, TimeRange::AnyTime(), quadraticCost, false, true, "addLagrangeTerm"));
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost)
         {
             return (m_pimpl->addCost(weight, TimeRange::AnyTime(), quadraticCost, false, true, "addLagrangeTerm"));
         }
@@ -471,7 +489,21 @@ namespace iDynTree {
             return (m_pimpl->addCost(weight, timeRange, cost, false, false, "addLagrangeTerm"));
         }
 
-        bool OptimalControlProblem::addLagrangeTerm(double weight, double startingTime, double finalTime, std::shared_ptr<QuadraticLikeCost> quadraticCost)
+        bool OptimalControlProblem::addLagrangeTerm(double weight, double startingTime, double finalTime, std::shared_ptr<QuadraticCost> quadraticCost)
+        {
+            TimeRange timeRange;
+
+            if (!timeRange.setTimeInterval(startingTime, finalTime)){
+                std::ostringstream errorMsg;
+                errorMsg << "The cost named " << quadraticCost->name() <<" has invalid time settings.";
+                reportError("OptimalControlProblem", "addLagrangeTerm", errorMsg.str().c_str());
+                return false;
+            }
+
+            return (m_pimpl->addCost(weight, timeRange, quadraticCost, false, true, "addLagrangeTerm"));
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, double startingTime, double finalTime, std::shared_ptr<L2NormCost> quadraticCost)
         {
             TimeRange timeRange;
 
@@ -504,7 +536,12 @@ namespace iDynTree {
             return (m_pimpl->addCost(weight, timeRange, cost, false, false, "addLagrangeTerm"));
         }
 
-        bool OptimalControlProblem::addLagrangeTerm(double weight, const TimeRange &timeRange, std::shared_ptr<QuadraticLikeCost> quadraticCost)
+        bool OptimalControlProblem::addLagrangeTerm(double weight, const TimeRange &timeRange, std::shared_ptr<QuadraticCost> quadraticCost)
+        {
+            return (m_pimpl->addCost(weight, timeRange, quadraticCost, false, true, "addLagrangeTerm"));
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, const TimeRange &timeRange, std::shared_ptr<L2NormCost> quadraticCost)
         {
             return (m_pimpl->addCost(weight, timeRange, quadraticCost, false, true, "addLagrangeTerm"));
         }

@@ -36,7 +36,8 @@ namespace iDynTree {
         class LinearConstraint;
         class ConstraintsGroup;
         class Cost;
-        class QuadraticLikeCost;
+        class QuadraticCost;
+        class L2NormCost;
         class LinearCost;
         class TimeRange;
 
@@ -102,13 +103,17 @@ namespace iDynTree {
             // Lagrange term
             bool addMayerTerm(double weight, std::shared_ptr<Cost> cost); // final cost
 
-            bool addMayerTerm(double weight, std::shared_ptr<QuadraticLikeCost> quadraticCost); // final cost
+            bool addMayerTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost); // final cost
+
+            bool addMayerTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost); // final cost
 
             bool addMayerTerm(double weight, std::shared_ptr<LinearCost> linearCost); // final cost
 
             bool addLagrangeTerm(double weight, std::shared_ptr<Cost> cost); // integral cost
 
-            bool addLagrangeTerm(double weight, std::shared_ptr<QuadraticLikeCost> quadraticCost); // integral cost
+            bool addLagrangeTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost); // integral cost
+
+            bool addLagrangeTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost); // integral cost
 
             bool addLagrangeTerm(double weight, std::shared_ptr<LinearCost> linearCost); // integral cost
 
@@ -120,7 +125,12 @@ namespace iDynTree {
             bool addLagrangeTerm(double weight,
                                  double startingTime,
                                  double finalTime,
-                                 std::shared_ptr<QuadraticLikeCost> quadraticCost); // integral cost with explicit integration limits
+                                 std::shared_ptr<QuadraticCost> quadraticCost); // integral cost with explicit integration limits
+
+            bool addLagrangeTerm(double weight,
+                                 double startingTime,
+                                 double finalTime,
+                                 std::shared_ptr<L2NormCost> quadraticCost); // integral cost with explicit integration limits
 
             bool addLagrangeTerm(double weight,
                                  double startingTime,
@@ -129,7 +139,9 @@ namespace iDynTree {
 
             bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<Cost> cost);
 
-            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<QuadraticLikeCost> quadraticCost);
+            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<QuadraticCost> quadraticCost);
+
+            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<L2NormCost> quadraticCost);
 
             bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<LinearCost> linearCost);
 

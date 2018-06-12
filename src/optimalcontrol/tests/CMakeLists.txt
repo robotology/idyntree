@@ -21,3 +21,9 @@ if (IDYNTREE_USES_IPOPT)
     add_oc_test(Optimizer)
     add_oc_test(OptimalControlIpopt)
 endif()
+
+if (OC_USE_OSQP)
+    add_oc_test(LinearOCOsqp)
+endif()
+
+
