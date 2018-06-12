@@ -124,7 +124,7 @@ namespace iDynTree {
                 }
             }
 
-            std::vector<MeshPoint>::iterator findNextMeshPoint(std::vector<MeshPoint>::iterator& start){
+            std::vector<MeshPoint>::iterator findNextMeshPoint(const std::vector<MeshPoint>::iterator& start){
                 std::vector<MeshPoint>::iterator nextMesh = start;
                 MeshPointOrigin ignored = MeshPointOrigin::Ignored();
                 assert(nextMesh != m_meshPoints.end());
@@ -318,6 +318,7 @@ namespace iDynTree {
                 if ((lastControlMeshIterator->origin == MeshPointOrigin::LastPoint()) && (m_integrator->info().isExplicit())) {//the last control input would have no effect
                     controlMeshes--;
                     setIgnoredMesh(lastControlMeshIterator);
+                    lastControlMeshIterator--;
                 }
 
                 newMeshPoint.origin = MeshPointOrigin::LastPoint();
@@ -517,14 +518,17 @@ namespace iDynTree {
 
                     nextMesh = findNextMeshPoint(mesh); //find next valid mesh
                     timeDistance = std::abs(nextMesh->time - mesh->time); //for the way I have ordered the vector, it can be negative
+                    assert(timeDistance < (endTime - initTime));
 
                     if (timeDistance > m_maxStepSize){ //two consecutive points are too distant
                         unsigned int additionalPoints = static_cast<unsigned int>(std::ceil(timeDistance/(m_maxStepSize))) - 1;
                         double dtAdd = timeDistance / (additionalPoints + 1); //additionalPoints + 1 is the number of segments.
                         long nextPosition = nextMesh - m_meshPoints.begin();
                         //since tmin < tmax/2, dtAdd > tmin. Infact, the worst case is when timeDistance is nearly equal to tmax.
+                        double startTime = std::min(mesh->time, nextMesh->time);
                         for (unsigned int i = 0; i < additionalPoints; ++i) {
-                            newMeshPoint.time = mesh->time + (i + 1)*dtAdd;
+                            newMeshPoint.time = startTime + (i + 1)*dtAdd;
+                            assert((newMeshPoint.time >= initTime) && (newMeshPoint.time <= endTime));
                             addMeshPoint(newMeshPoint);
                         }
                         nextMesh = m_meshPoints.begin() + nextPosition;
@@ -606,6 +610,7 @@ namespace iDynTree {
                                 newMeshPoint.origin = MeshPointOrigin::FillVariables();
                                 newMeshPoint.type = MeshPointType::State;
                                 while ((mesh->origin != last) && (toBeAdded > 0)){
+                                    toBeAdded = static_cast<unsigned int>(m_totalMeshes - newTotalMeshes);
                                     nextMesh = findNextMeshPoint(mesh); //find next valid mesh
                                     timeDistance = std::abs(nextMesh->time - mesh->time);
 
@@ -614,8 +619,9 @@ namespace iDynTree {
                                         unsigned int meshToAddHere = std::min(toBeAdded, possibleMeshes);
                                         double dT = timeDistance/(meshToAddHere + 1);
                                         long nextPosition = nextMesh - m_meshPoints.begin();
+                                        double startTime = std::min(mesh->time, nextMesh->time);
                                         for(unsigned int m = 1; m <= meshToAddHere; m++){
-                                            newMeshPoint.time = mesh->time + m*dT;
+                                            newMeshPoint.time = startTime + m*dT;
                                             addMeshPoint(newMeshPoint);
                                             newTotalMeshes++;
                                         }
