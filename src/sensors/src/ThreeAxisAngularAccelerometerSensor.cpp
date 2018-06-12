@@ -155,7 +155,7 @@ Transform ThreeAxisAngularAccelerometerSensor::getLinkSensorTransform() const
     return(this->pimpl->link_H_sensor);
 }
 
-Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& )
+Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc& linkAcc)
 {
     Vector3 returnAcc;
     returnAcc.zero();
@@ -167,4 +167,10 @@ Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc
     return returnAcc;
 }
 
+// Deprecated
+Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& )
+{
+    return this->predictMeasurement(linkAcc);
+}
+    
 }

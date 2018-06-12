@@ -9,7 +9,7 @@ classdef Direction < iDynTree.Vector3
       else
         tmp = iDynTreeMEX(618, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = Normalize(self,varargin)
@@ -33,7 +33,7 @@ classdef Direction < iDynTree.Vector3
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(626, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

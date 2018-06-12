@@ -3,7 +3,7 @@ classdef Sphere < iDynTree.SolidShape
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1079, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)
@@ -28,7 +28,7 @@ classdef Sphere < iDynTree.SolidShape
       else
         tmp = iDynTreeMEX(1083, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
   end

@@ -6,7 +6,7 @@ classdef SolidShape < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1063, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)

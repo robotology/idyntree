@@ -3,7 +3,7 @@ classdef MovableJointImpl1 < iDynTree.IJoint
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(942, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = getNrOfPosCoords(self,varargin)

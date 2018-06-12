@@ -9,13 +9,13 @@ classdef AngularMotionVector3Semantics < iDynTree.GeomVector3Semantics__AngularM
       else
         tmp = iDynTreeMEX(503, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(504, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

@@ -3,7 +3,7 @@ classdef Cylinder < iDynTree.SolidShape
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1093, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)
@@ -38,7 +38,7 @@ classdef Cylinder < iDynTree.SolidShape
       else
         tmp = iDynTreeMEX(1099, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
   end

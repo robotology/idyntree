@@ -11,7 +11,7 @@ classdef SpatialInertiaRaw < SwigRef
       else
         tmp = iDynTreeMEX(648, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = fromRotationalInertiaWrtCenterOfMass(self,varargin)
@@ -38,7 +38,7 @@ classdef SpatialInertiaRaw < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(657, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

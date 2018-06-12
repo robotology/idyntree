@@ -11,7 +11,7 @@ classdef Vector6 < SwigRef
       else
         tmp = iDynTreeMEX(303, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = paren(self,varargin)
@@ -50,7 +50,7 @@ classdef Vector6 < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(315, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

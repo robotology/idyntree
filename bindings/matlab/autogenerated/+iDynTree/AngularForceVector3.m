@@ -9,7 +9,7 @@ classdef AngularForceVector3 < iDynTree.ForceVector3__AngularForceVector3
       else
         tmp = iDynTreeMEX(516, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = changePoint(self,varargin)
@@ -18,7 +18,7 @@ classdef AngularForceVector3 < iDynTree.ForceVector3__AngularForceVector3
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(518, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

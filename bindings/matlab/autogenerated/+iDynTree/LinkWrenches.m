@@ -11,7 +11,7 @@ classdef LinkWrenches < SwigRef
       else
         tmp = iDynTreeMEX(838, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
@@ -35,7 +35,7 @@ classdef LinkWrenches < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(845, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

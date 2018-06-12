@@ -3,7 +3,7 @@ classdef ExternalMesh < iDynTree.SolidShape
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1100, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)
@@ -38,7 +38,7 @@ classdef ExternalMesh < iDynTree.SolidShape
       else
         tmp = iDynTreeMEX(1106, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
   end

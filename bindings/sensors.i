@@ -30,6 +30,13 @@ namespace iDynTree{
             static_cast<iDynTree::GyroscopeSensor*>($self->getSensor(iDynTree::GYROSCOPE,sensor_index));
         return p;
     }
+
+    iDynTree::ThreeAxisAngularAccelerometerSensor * getThreeAxisAngularAccelerometerSensor(int sensor_index) const
+    {
+        iDynTree::ThreeAxisAngularAccelerometerSensor* p =
+            static_cast<iDynTree::ThreeAxisAngularAccelerometerSensor*>($self->getSensor(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER,sensor_index));
+        return p;
+    }
 }
 
 }

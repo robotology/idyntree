@@ -9,13 +9,13 @@ classdef FixedJoint < iDynTree.IJoint
       else
         tmp = iDynTreeMEX(911, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(912, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)

@@ -11,7 +11,7 @@ classdef LinkInertias < SwigRef
       else
         tmp = iDynTreeMEX(846, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
@@ -26,7 +26,7 @@ classdef LinkInertias < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(850, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

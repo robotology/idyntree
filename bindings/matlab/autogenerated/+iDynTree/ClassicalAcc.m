@@ -9,7 +9,7 @@ classdef ClassicalAcc < iDynTree.Vector6
       else
         tmp = iDynTreeMEX(612, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = changeCoordFrame(self,varargin)
@@ -24,7 +24,7 @@ classdef ClassicalAcc < iDynTree.Vector6
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(617, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

@@ -6,7 +6,7 @@ classdef IJoint < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(877, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)

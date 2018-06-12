@@ -11,7 +11,7 @@ classdef LinkContactWrenches < SwigRef
       else
         tmp = iDynTreeMEX(1216, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
@@ -38,7 +38,7 @@ classdef LinkContactWrenches < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1224, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

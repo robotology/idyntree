@@ -11,7 +11,7 @@ classdef FreeFloatingPos < SwigRef
       else
         tmp = iDynTreeMEX(1187, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
@@ -29,7 +29,7 @@ classdef FreeFloatingPos < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(1192, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end
