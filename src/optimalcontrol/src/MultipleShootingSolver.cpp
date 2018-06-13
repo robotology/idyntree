@@ -618,7 +618,6 @@ namespace iDynTree {
                                 newMeshPoint.origin = MeshPointOrigin::FillVariables();
                                 newMeshPoint.type = MeshPointType::State;
                                 while ((mesh->origin != last) && (toBeAdded > 0)){
-                                    toBeAdded = static_cast<unsigned int>(m_totalMeshes - newTotalMeshes);
                                     nextMesh = findNextMeshPoint(mesh); //find next valid mesh
                                     timeDistance = std::abs(nextMesh->time - mesh->time);
 
@@ -632,6 +631,7 @@ namespace iDynTree {
                                             newMeshPoint.time = startTime + m*dT;
                                             addMeshPoint(newMeshPoint);
                                             newTotalMeshes++;
+                                            toBeAdded--;
                                         }
                                         nextMesh = m_meshPoints.begin() + nextPosition;
                                     }
