@@ -26,6 +26,8 @@ ContactStateMachine::contactTransition ContactStateMachine::contactTransitionMod
     
     if (m_previousState == 1 && m_currentState == 1)
         return STABLE_ONCONTACT;  // 1
+
+    return UNKNOWN_TRANSITION;
 }
 
 double ContactStateMachine::lastUpdateTime()

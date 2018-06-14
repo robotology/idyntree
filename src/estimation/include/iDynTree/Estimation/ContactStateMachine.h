@@ -78,7 +78,12 @@ namespace iDynTree
             /**
              * previous state: off contact, current state: on contact
              */
-            CONTACT_MAKE       // 3
+            CONTACT_MAKE,       // 3
+
+ 	    /**
+	     * Unknown transition
+             */
+            UNKNOWN_TRANSITION = -1
         };
         
         /**
