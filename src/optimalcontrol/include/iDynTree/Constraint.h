@@ -27,10 +27,6 @@ namespace iDynTree {
 
     namespace optimalcontrol {
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
 
         /**
          * @brief The Constraint virtual class definition
@@ -38,6 +34,10 @@ namespace iDynTree {
          * Inherit publicly from this class to define a constraint of an optimal control problem.
         */
 
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
         class Constraint {
         public:
 

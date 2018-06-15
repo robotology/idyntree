@@ -18,6 +18,9 @@
 #include <iDynTree/Controller.h>
 #include <iDynTree/Core/Utils.h>
 
+#include <cstddef>
+
+
 namespace iDynTree {
     namespace optimalcontrol {
 

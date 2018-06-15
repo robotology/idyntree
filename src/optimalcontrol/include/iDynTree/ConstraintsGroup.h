@@ -39,8 +39,9 @@ namespace iDynTree {
 
         /**
          * @brief Class grouping constraints associated with a TimeRange.
+         *
          * This class allows to define a set of constraints which are enabled only for a particular time range. This allow to change the constraint structure depending on time. Given a specific time instant, only one constraint is enabled (the one whose TimeRange contains the instant and has the higher initTime).
-         * If the specified time instant does not fall into any time constraint time range, a summy constraint wil be evaluated, i.e. -1 <= 0 <= 1. All the constraints that will be added to the group should have dimension at most equal to maxConstraintSize.
+         * If the specified time instant does not fall into any time constraint time range, a dummy constraint wil be evaluated, i.e. \f$ -1 \leq 0 \leq 1 \f$. All the constraints that will be added to the group should have dimension at most equal to maxConstraintSize.
          * If the constraint size is smaller than the maxConstraintSize, dummy constraints as the above will be added on the bottom. This allow to keep a constant structure even if the constraints have different dimensions.
          * A typical example is when a constraint is enabled only for a certain period of time.
          */
