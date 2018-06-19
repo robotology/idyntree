@@ -242,7 +242,7 @@ namespace iDynTree {
             bool hasBoxConstraints;
             std::shared_ptr<std::vector<size_t>> constraintNNZRows, constraintNNZCols;
             std::shared_ptr<std::vector<size_t>> hessianNNZRows, hessianNNZCols;
-            VectorDynSize variablesBuffer, solutionBuffer;
+            VectorDynSize variablesBuffer, solutionBuffer, constraintsBuffer;
             VectorDynSize costGradient;
             std::shared_ptr<MatrixDynSize> costHessian;
             std::shared_ptr<MatrixDynSize> constraintJacobian;
@@ -507,19 +507,6 @@ namespace iDynTree {
                 return false;
             }
 
-            m_pimpl->unifiedLowerBounds.resize(m_pimpl->nc);
-            m_pimpl->unifiedUpperBounds.resize(m_pimpl->nc);
-            if (m_pimpl->hasBoxConstraints) {
-                m_pimpl->unifiedLowerBounds.head(m_pimpl->nv) = toEigen(m_pimpl->variablesLowerBounds);
-                m_pimpl->unifiedLowerBounds.tail(m_problem->numberOfConstraints()) = toEigen(m_pimpl->constraintsLowerBounds);
-
-                m_pimpl->unifiedUpperBounds.head(m_pimpl->nv) = toEigen(m_pimpl->variablesUpperBounds);
-                m_pimpl->unifiedUpperBounds.tail(m_problem->numberOfConstraints()) = toEigen(m_pimpl->constraintsUpperBounds);
-            } else {
-                m_pimpl->unifiedLowerBounds = toEigen(m_pimpl->constraintsLowerBounds);
-                m_pimpl->unifiedUpperBounds = toEigen(m_pimpl->constraintsUpperBounds);
-            }
-
             if (m_pimpl->variablesBuffer.size() != m_pimpl->nv) {
                 m_pimpl->variablesBuffer.resize(m_pimpl->nv);
                 m_pimpl->variablesBuffer.zero();
@@ -528,6 +515,28 @@ namespace iDynTree {
             if (!(m_problem->setVariables(m_pimpl->variablesBuffer))) {
                 reportError("OsqpInterface", "solve", "Error while setting to optimization variables to the problem.");
                 return false;
+            }
+
+            m_pimpl->constraintsBuffer.resize(m_pimpl->nc);
+
+            if (!(m_problem->evaluateConstraints(m_pimpl->constraintsBuffer))) {
+                reportError("OsqpInterface", "solve", "Error while evaluating constraints.");
+                return false;
+            }
+
+            m_pimpl->unifiedLowerBounds.resize(m_pimpl->nc);
+            m_pimpl->unifiedUpperBounds.resize(m_pimpl->nc);
+            if (m_pimpl->hasBoxConstraints) {
+                m_pimpl->unifiedLowerBounds.head(m_pimpl->nv) = toEigen(m_pimpl->variablesLowerBounds);
+                m_pimpl->unifiedLowerBounds.tail(m_problem->numberOfConstraints()) =
+                        toEigen(m_pimpl->constraintsLowerBounds) - toEigen(m_pimpl->constraintsBuffer); //remove eventual bias in the constraints
+
+                m_pimpl->unifiedUpperBounds.head(m_pimpl->nv) = toEigen(m_pimpl->variablesUpperBounds);
+                m_pimpl->unifiedUpperBounds.tail(m_problem->numberOfConstraints()) =
+                        toEigen(m_pimpl->constraintsUpperBounds) - toEigen(m_pimpl->constraintsBuffer); //remove eventual bias in the constraints;
+            } else {
+                m_pimpl->unifiedLowerBounds = toEigen(m_pimpl->constraintsLowerBounds);
+                m_pimpl->unifiedUpperBounds = toEigen(m_pimpl->constraintsUpperBounds);
             }
 
             if (!(m_problem->evaluateCostGradient(m_pimpl->costGradient))) {
