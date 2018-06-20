@@ -126,7 +126,7 @@ bool DynTree::loadURDFModel(const std::string & urdf_file)
     {
         std::cerr << "DynTree loadURDFModel: Could not generate robot model from file " << urdf_file << std::endl;
         std::cerr << "If you believe iDynTree is failing to parse a valid URDF file, please open a bug at " << std::endl;
-        std::cerr << "https://github.com/robotology-playground/idyntree/issues/new" << std::endl;
+        std::cerr << "https://github.com/robotology/idyntree/issues/new" << std::endl;
     }
 
     return ok;

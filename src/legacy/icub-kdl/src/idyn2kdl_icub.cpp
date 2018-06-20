@@ -332,7 +332,7 @@ bool toKDL(const iCub::iDyn::iCubWholeBody & icub_idyn,
         KDL::RigidBodyInertia l_upper_foot_I = KDL::RigidBodyInertia(ankle_2_weight);
 
         // use always feetV2 dynamics, but depending on the type of leg use feetV1 or feetV2 kinematics
-        // see https://github.com/robotology-playground/icub-model-generator/issues/9 for more info
+        // see https://github.com/robotology/icub-model-generator/issues/9 for more info
         KDL::Segment r_ankle_2("r_ankle_2",r_foot_original_no_ft.getJoint(),r_foot_original_no_ft.getFrameToTip()*old_ee_T_ss,r_upper_foot_I);
         KDL::Segment l_ankle_2("l_ankle_2",l_foot_original_no_ft.getJoint(),l_foot_original_no_ft.getFrameToTip()*old_ee_T_ss,l_upper_foot_I);
 
