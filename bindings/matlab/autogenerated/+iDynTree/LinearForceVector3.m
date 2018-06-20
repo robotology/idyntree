@@ -9,13 +9,13 @@ classdef LinearForceVector3 < iDynTree.ForceVector3__LinearForceVector3
       else
         tmp = iDynTreeMEX(510, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(511, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

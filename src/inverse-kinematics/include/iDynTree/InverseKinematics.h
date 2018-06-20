@@ -139,6 +139,22 @@ public:
      */
     bool setModel(const iDynTree::Model &model,
                   const std::vector<std::string> &consideredJoints = std::vector<std::string>());
+    
+    /*!
+     * Set new joint limits
+     * \author Yue Hu
+     * @param jointLimits vector of new joint limits to be imposed
+     * @return true if successfull, false otherwise
+     */
+    bool setJointLimits(std::vector<std::pair<double, double> >& jointLimits);
+    
+    /*!
+     * Get current joint limits
+     * \author Yue Hu
+     * @param jointLimits vector of current joint limits
+     * @return true if successfull, false otherwise
+     */
+    bool getJointLimits(std::vector<std::pair<double, double> >& jointLimits);
 
     /*!
      * Reset the variables.
@@ -161,9 +177,9 @@ public:
      *
      * @return true if successful, false otherwise.
      */
-    bool IDYNTREE_DEPRECATED_WITH_MSG("Use setCurrentRobotConfiguration instead")
-    setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
-                          const iDynTree::VectorDynSize& jointConfiguration);
+    IDYNTREE_DEPRECATED_WITH_MSG("Use setCurrentRobotConfiguration instead")
+    bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
+                               const iDynTree::VectorDynSize& jointConfiguration);
 
     /*!
      * Sets the robot current configuration
@@ -357,12 +373,44 @@ public:
                                     const iDynTree::Transform& constraintValue);
 
     /*!
-     * Add a constant inequality constraint on the projection of the center of mass,
-     * assuming one support links.
+     * Activate a given constraint previously added with an addFrame**Constraint method.
      *
-     * This method assume that the position of two links is constrained by a FrameConstraint,
-     * and adds a inequality constraint to ensure that the center of mass projection lies on the
-     * convex hull of the contact polygon.
+     * \note In this version of iDynTree, it is not possible to change the nature of the constraint
+     *       (Full, Position or Rotation) when activating it again.
+     *
+     * @note This method returns true even if the frame constraint was already activate, it only
+     *       returns false if the constraint was never added.
+     * @warning This method is not meant to be called at each IK loop, and it can increase the computational
+     *          time of the next call to solve.
+     *
+     * @param frameName       the name of the frame on which to attach the constraint
+     * @param newConstraintValue the pose of the constrained frame (r) in the world frame (w), i.e. ʷHᵣ .
+     * @return true if successful, false otherwise.
+     */
+    bool activateFrameConstraint(const std::string& frameName,
+                                 const Transform& newConstraintValue);
+    /*!
+     * Deactivate a given constraint previously added with an addFrame**Constraint method.
+     *
+     * @note This method returns true even if the frame constraint was already deactivated, it only
+     *       returns false if the constraint was never added.
+     *
+     * @param frameName       the name of the frame on which to attach the constraint
+     * @return true if successful (i.e. the constraint is present) , false otherwise.
+     */
+    bool deactivateFrameConstraint(const std::string& frameName);
+
+    /*!
+     * Check if a given constraint is active or not.
+
+     *
+     * @param frameName       the name of the constrained frame
+     * @return true if the constraint is active, false if it is not active or it does not exist, or if the frame does not exist.
+     */
+    bool isFrameConstraintActive(const std::string& frameName) const;
+
+    /*!
+     * Specialization of addCenterOfMassProjectionConstraint when only two support frames are specified.
      */
     bool addCenterOfMassProjectionConstraint(const std::string& firstSupportFrame,
                                              const Polygon& firstSupportPolygon,
@@ -371,12 +419,7 @@ public:
                                              const iDynTree::Position originOfPlaneInWorld = iDynTree::Position::Zero());
 
     /*!
-     * Add a constant inequality constraint on the projection of the center of mass,
-     * assuming two support links.
-     *
-     * This method assume that the position of two links is constrained by a FrameConstraint,
-     * and adds a inequality constraint to ensure that the center of mass projection lies on the
-     * convex hull of the contact polygons.
+     * Specialization of addCenterOfMassProjectionConstraint when only two support frames are specified.
      */
     bool addCenterOfMassProjectionConstraint(const std::string& firstSupportFrame,
                                              const Polygon& firstSupportPolygon,
@@ -390,9 +433,9 @@ public:
      * Add a constant inequality constraint on the projection of the center of mass,
      * assuming an arbitrary number of support links.
      *
-     * This method assume that the position of two links is constrained by a FrameConstraint,
-     * and adds a inequality constraint to ensure that the center of mass projection lies on the
-     * convex hull of the contact polygons.
+     * If a subset of the supportFrames is contrained by a FrameConstraint (both position and constraint) and such
+     * constraint is active, this constraint adds a inequality constraint to ensure that the center of mass projection
+     * lies on the convex hull of the contact polygons.
      */
     bool addCenterOfMassProjectionConstraint(const std::vector<std::string>& supportFrames,
                                              const std::vector<Polygon>& supportPolygons,
@@ -615,10 +658,75 @@ public:
      *
      * @return true if successful, false otherwise.
      */
-    bool IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setDesiredFullJointsConfiguration or setDesiredReducedJointConfiguration instead")
-    setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+    IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setDesiredFullJointsConfiguration or setDesiredReducedJointConfiguration instead")
+    bool setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+
+    /*!
+     * Sets a desired final configuration for all the robot joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same serialisation of the joints in the specified model
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weight weight for the joint configuration cost.
+     *                   If it is not passed, the previous passed value will be mantained.
+     *                   If the value was never passed, its value is 1e-6 .
+     *
+     * @return true if successful, false otherwise.
+     */
     bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+
+    /*!
+     * Sets a desired final configuration for all the robot joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same serialisation of the joints in the specified model
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weights Joint-wise weights for the joint configuration cost.
+     *                   This vector should have the same dimension of the desiredJointConfiguration.
+     *                   If one of its elements is negative, the previous value will be kept.
+     *                   If the value was never passed, its value is 1e-6, equal for all joints.
+     *
+     * @return true if successful, false otherwise.
+     */
+    bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const iDynTree::VectorDynSize& weights);
+
+    /*!
+     * Sets a desired final configuration for the set of considered joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same order of the joints in the consideredJoints list.
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weight weight for the joint configuration cost.
+     *                   If it is not passed, the previous passed value will be mantained.
+     *                   If the value was never passed, its value is 1e-6 .
+     *
+     * @return true if successful, false otherwise.
+     */
     bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+
+    /*!
+     * Sets a desired final configuration for the set of considered joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same order of the joints in the consideredJoints list.
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weights Joint-wise weights for the joint configuration cost.
+     *                   This vector should have the same dimension of the desiredJointConfiguration.
+     *                   If one of its elements is negative, the previous value will be kept.
+     *                   If the value was never passed, its value is 1e-6, equal for all joints.
+     *
+     * @return true if successful, false otherwise.
+     */
+    bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const iDynTree::VectorDynSize& weights);
+
 
 
     /*!
@@ -629,8 +737,8 @@ public:
      * @param initialCondition  initial joints configuration
      * @return
      */
-    bool IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setFullJointsInitialCondition or setReducedInitialCondition instead")
-    setInitialCondition(const iDynTree::Transform* baseTransform,
+    IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit setFullJointsInitialCondition or setReducedInitialCondition instead")
+    bool setInitialCondition(const iDynTree::Transform* baseTransform,
                         const iDynTree::VectorDynSize* initialCondition);
 
     bool setFullJointsInitialCondition(const iDynTree::Transform* baseTransform,
@@ -650,9 +758,10 @@ public:
      * @param[out] baseTransformSolution  solution for the base position
      * @param[out] shapeSolution       solution for the shape (the internal configurations)
      */
-    void IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit getFullJointsSolution or getReducedSolution instead")
-    getSolution(iDynTree::Transform& baseTransformSolution,
-                iDynTree::VectorDynSize& shapeSolution);
+    IDYNTREE_DEPRECATED_WITH_MSG("Use the explicit getFullJointsSolution or getReducedSolution instead")
+    void getSolution(iDynTree::Transform& baseTransformSolution,
+                     iDynTree::VectorDynSize& shapeSolution);
+
 
     void getFullJointsSolution(iDynTree::Transform& baseTransformSolution,
                                iDynTree::VectorDynSize& shapeSolution);

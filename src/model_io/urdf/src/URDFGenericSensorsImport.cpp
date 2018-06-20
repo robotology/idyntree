@@ -143,8 +143,9 @@ bool sensorsFromURDFString(const std::string& urdfXml,
     sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("sonar");
     sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("rfidtag");
     sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("rfid");
-    // Pressure sensors is another type widely used in the wild
+    // Some another type of sensors used in existing models that for sure are not typos 
     sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("pressure");
+    sensorTypesUsedInURDFButNotSupportedInIDynTree.push_back("ultrasound");
 
 
     // Get all the sensors elements of robot element

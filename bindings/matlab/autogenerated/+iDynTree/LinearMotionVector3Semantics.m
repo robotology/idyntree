@@ -9,7 +9,7 @@ classdef LinearMotionVector3Semantics < iDynTree.GeomVector3Semantics__LinearMot
       else
         tmp = iDynTreeMEX(496, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = changePoint(self,varargin)
@@ -18,7 +18,7 @@ classdef LinearMotionVector3Semantics < iDynTree.GeomVector3Semantics__LinearMot
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(499, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

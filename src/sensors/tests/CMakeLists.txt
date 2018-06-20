@@ -15,3 +15,5 @@ endmacro()
 
 add_unit_test(SensorsList)
 add_unit_test(ThreeAxisForceTorqueContactSensor)
+add_unit_test(ReducedModelWithFT)
+target_link_libraries(ReducedModelWithFTUnitTest idyntree-high-level)

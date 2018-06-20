@@ -5,8 +5,10 @@ project(iDynTree_InverseKinematics CXX)
 set(libraryname idyntree-inverse-kinematics)
 
 set(IDYN_TREE_IK_SOURCES src/ConvexHullHelpers.cpp
+                         src/BoundingBoxHelpers.cpp
                          src/InverseKinematics.cpp)
 set(IDYN_TREE_IK_HEADERS include/iDynTree/ConvexHullHelpers.h
+                         include/iDynTree/BoundingBoxHelpers.h
                          include/iDynTree/InverseKinematics.h)
 
 set(PRIVATE_IDYN_TREE_IK_SOURCES src/InverseKinematicsNLP.cpp
@@ -18,8 +20,6 @@ set(PRIVATE_IDYN_TREE_IK_HEADERS include/private/InverseKinematicsNLP.h
 
 source_group("Private\\Header Files" FILES ${PRIVATE_IDYN_TREE_IK_HEADERS})
 source_group("Private\\Source Files" FILES ${PRIVATE_IDYN_TREE_IK_SOURCES})
-
-idyntree_enable_cxx11()
 
 add_library(${libraryname} ${IDYN_TREE_IK_HEADERS} ${IDYN_TREE_IK_SOURCES}
                            ${PRIVATE_IDYN_TREE_IK_SOURCES} ${PRIVATE_IDYN_TREE_IK_HEADERS})

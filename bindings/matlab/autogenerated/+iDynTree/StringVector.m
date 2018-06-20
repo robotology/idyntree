@@ -56,7 +56,7 @@ classdef StringVector < SwigRef
       else
         tmp = iDynTreeMEX(36, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = push_back(self,varargin)
@@ -86,7 +86,7 @@ classdef StringVector < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(45, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

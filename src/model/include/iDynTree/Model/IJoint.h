@@ -336,7 +336,7 @@ namespace iDynTree
          * @return true if everything went correctly, false otherwise
          *         (for example if the joint does not support joint position limits)
          */
-        virtual bool enablePosLimits(bool enable) = 0;
+        virtual bool enablePosLimits(const bool enable) = 0;
 
         /**
          * Get min and max position limits of the joint, for the _index dof.

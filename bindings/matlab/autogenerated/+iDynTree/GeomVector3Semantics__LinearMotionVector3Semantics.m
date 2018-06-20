@@ -11,7 +11,7 @@ classdef GeomVector3Semantics__LinearMotionVector3Semantics < SwigRef
       else
         tmp = iDynTreeMEX(386, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = setToUnknown(self,varargin)
@@ -38,7 +38,7 @@ classdef GeomVector3Semantics__LinearMotionVector3Semantics < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(396, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

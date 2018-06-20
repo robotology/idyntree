@@ -11,7 +11,7 @@ classdef Axis < SwigRef
       else
         tmp = iDynTreeMEX(627, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = getDirection(self,varargin)
@@ -65,7 +65,7 @@ classdef Axis < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(644, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

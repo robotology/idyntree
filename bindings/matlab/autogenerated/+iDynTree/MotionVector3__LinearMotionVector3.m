@@ -9,7 +9,7 @@ classdef MotionVector3__LinearMotionVector3 < iDynTree.GeomVector3__LinearMotion
       else
         tmp = iDynTreeMEX(486, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = cross(self,varargin)
@@ -18,7 +18,7 @@ classdef MotionVector3__LinearMotionVector3 < iDynTree.GeomVector3__LinearMotion
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(488, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

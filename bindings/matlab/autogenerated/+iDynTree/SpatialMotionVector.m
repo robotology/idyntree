@@ -9,7 +9,7 @@ classdef SpatialMotionVector < iDynTree.SpatialMotionVectorBase
       else
         tmp = iDynTreeMEX(581, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = mtimes(self,varargin)
@@ -30,7 +30,7 @@ classdef SpatialMotionVector < iDynTree.SpatialMotionVectorBase
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(587, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

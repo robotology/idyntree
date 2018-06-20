@@ -120,6 +120,10 @@ namespace iDynTree
         ColumnMajor /*!< Column Major ordering, i.e. matrix is serialized row by column */
     };
 
+    /**
+     * Check whether two doubles are equal given a tolerance tol.
+     */
+    bool checkDoublesAreEqual(const double & val1, const double & val2, double tol = DEFAULT_TOL);
 
 }
 

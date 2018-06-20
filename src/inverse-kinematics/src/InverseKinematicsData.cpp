@@ -11,6 +11,7 @@
 #include "InverseKinematicsData.h"
 #include "InverseKinematicsNLP.h"
 #include "TransformConstraint.h"
+#include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/SpatialAcc.h>
@@ -138,7 +139,8 @@ namespace kinematics {
         m_jointsResults.zero();
         m_preferredJointsConfiguration.resize(m_dofs);
         m_preferredJointsConfiguration.zero();
-        m_preferredJointsWeight = 1e-6;
+        m_preferredJointsWeight.resize(m_dofs);
+       iDynTree::toEigen(m_preferredJointsWeight).setConstant(1e-6);
 
         m_state.jointsConfiguration.resize(m_dofs);
         m_state.jointsConfiguration.zero();
@@ -285,22 +287,22 @@ namespace kinematics {
         }
 
         //2) Check joint limits..
-        for (size_t i = 0; i < m_jointInitialConditions.size(); ++i) {
+        for (size_t i = 0; i < m_reducedVariablesInfo.modelJointsToOptimisedJoints.size(); ++i) {
             //check joint to be inside limit
-            double &jointValue = m_jointInitialConditions(i);
-            if (jointValue < m_jointLimits[i].first || jointValue > m_jointLimits[i].second) {
+            double &jointValue = m_jointInitialConditions(m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]);
+            if (jointValue < m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].first || jointValue > m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].second) {
                 std::cerr
-                << "[WARNING] InverseKinematics: joint " << m_dynamics.model().getJointName(i)
-                << " (index " << i << ") initial condition is outside the limits "
-                << m_jointLimits[i].first << " " << m_jointLimits[i].second
+                << "[WARNING] InverseKinematics: joint " << m_dynamics.model().getJointName(m_reducedVariablesInfo.modelJointsToOptimisedJoints[i])
+                << " (index " << m_reducedVariablesInfo.modelJointsToOptimisedJoints[i] << ") initial condition is outside the limits "
+                << m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].first << " " << m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].second
                 << ". Actual value: " << jointValue <<  std::endl;
                 //set the initial value to at the limit
-                if (jointValue < m_jointLimits[i].first) {
-                    jointValue = m_jointLimits[i].first;
+                if (jointValue < m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].first) {
+                    jointValue = m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].first;
                 }
 
-                if (jointValue > m_jointLimits[i].second) {
-                    jointValue = m_jointLimits[i].second;
+                if (jointValue > m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].second) {
+                    jointValue = m_jointLimits[m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]].second;
                 }
             }
         }
@@ -437,16 +439,19 @@ namespace kinematics {
         m_numberOfOptimisationConstraints = 0;
         for (auto && constraint : m_constraints) {
             //Frame constraint: it can have position, rotation or both elements
-            if (constraint.second.hasPositionConstraint()) {
-                m_numberOfOptimisationConstraints += 3;
-            }
-            if (constraint.second.hasRotationConstraint()) {
-                m_numberOfOptimisationConstraints += sizeOfRotationParametrization(m_rotationParametrization);
+            if (constraint.second.isActive()) {
+                if (constraint.second.hasPositionConstraint()) {
+                    m_numberOfOptimisationConstraints += 3;
+                }
+                if (constraint.second.hasRotationConstraint()) {
+                    m_numberOfOptimisationConstraints += sizeOfRotationParametrization(m_rotationParametrization);
+                }
             }
         }
 
         // COM Convex Hull constraint
         if (m_comHullConstraint.isActive()) {
+            this->configureCenterOfMassProjectionConstraint();
             m_numberOfOptimisationConstraints += m_comHullConstraint.getNrOfConstraints();
         }
 
@@ -482,6 +487,73 @@ namespace kinematics {
         m_nlpProblem->initializeInternalData();
 
         m_problemInitialized = true;
+    }
+
+    void InverseKinematicsData::configureCenterOfMassProjectionConstraint()
+    {
+        this->m_comHullConstraint.supportFrameIndices.resize(0);
+        std::vector<iDynTree::Transform> world_H_support;
+        std::vector<iDynTree::Polygon> used_polygons;
+
+        // We iterate on all possible support frames
+        for (int i=0; i < m_comHullConstraint_supportFramesIndeces.size(); i++)
+        {
+            // check for transform
+            int frameIndex = m_comHullConstraint_supportFramesIndeces[i];
+
+            internal::kinematics::TransformMap::iterator constraintIt = this->m_constraints.find(frameIndex);
+
+            if (constraintIt->second.isActive())
+            {
+                // Store the constrained value for this frame
+                world_H_support.push_back(constraintIt->second.getTransform());
+                used_polygons.push_back(m_comHullConstraint_supportPolygons[i]);
+                this->m_comHullConstraint.supportFrameIndices.push_back(frameIndex);
+            }
+        }
+
+        iDynTree::Axis projectionPlaneXaxisInAbsoluteFrame(m_comHullConstraint_xAxisOfPlaneInWorld, m_comHullConstraint_originOfPlaneInWorld);
+        iDynTree::Axis projectionPlaneYaxisInAbsoluteFrame(m_comHullConstraint_yAxisOfPlaneInWorld, m_comHullConstraint_originOfPlaneInWorld);
+
+        // Initialize the COM's projection direction in such a way that is along the lien perpendicular to the xy-axes of the World
+        this->m_comHullConstraint.setProjectionAlongDirection(m_comHullConstraint_projDirection);
+
+        // Compute the constraint
+        bool ok = this->m_comHullConstraint.buildConvexHull(m_comHullConstraint_xAxisOfPlaneInWorld,
+                                                            m_comHullConstraint_yAxisOfPlaneInWorld,
+                                                            m_comHullConstraint_originOfPlaneInWorld,
+                                                            used_polygons,
+                                                            world_H_support);
+
+        // Save some info on the constraints
+        this->m_comHullConstraint.absoluteFrame_X_supportFrame = world_H_support;
+
+        return;
+    }
+    
+    bool InverseKinematicsData::setJointLimits(std::vector<std::pair<double, double> >& jointLimits)
+    {        
+        // check that the dimension of the vector is correct  
+        if(jointLimits.size() != m_jointLimits.size())
+            return false;
+
+        // clear the old limits and assign new limits
+        m_jointLimits.clear();
+        m_jointLimits = jointLimits;
+
+        return true;
+    }
+    
+    bool InverseKinematicsData::getJointLimits(std::vector<std::pair<double, double> >& jointLimits)
+    {        
+      // check that the dimension of the vector is correct  
+      if(jointLimits.size() != m_jointLimits.size())
+        return false;
+      
+      // return the current limits
+      jointLimits = m_jointLimits;
+      
+      return true;
     }
 
 }

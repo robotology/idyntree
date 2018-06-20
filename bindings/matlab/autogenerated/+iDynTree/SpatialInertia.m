@@ -9,7 +9,7 @@ classdef SpatialInertia < iDynTree.SpatialInertiaRaw
       else
         tmp = iDynTreeMEX(658, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = asMatrix(self,varargin)
@@ -45,7 +45,7 @@ classdef SpatialInertia < iDynTree.SpatialInertiaRaw
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(674, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

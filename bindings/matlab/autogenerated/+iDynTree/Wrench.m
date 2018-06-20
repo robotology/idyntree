@@ -9,7 +9,7 @@ classdef Wrench < iDynTree.SpatialForceVector
       else
         tmp = iDynTreeMEX(597, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = plus(self,varargin)
@@ -24,7 +24,7 @@ classdef Wrench < iDynTree.SpatialForceVector
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(601, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

@@ -62,7 +62,7 @@ bool checkURDF2DH(std::string urdf_file_name)
     if( !treeFromUrdfFile(urdf_file_name,kdl_tree,root_inertia_workaround) )
     {
         cerr << "urdf2dh_tests: Could not parse urdf robot model" << endl;
-        std::cerr << "urdf2dh_tests: Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
+        std::cerr << "urdf2dh_tests: Please open an issue at https://github.com/robotology/idyntree/issues " << std::endl;
 
         return false;
     }

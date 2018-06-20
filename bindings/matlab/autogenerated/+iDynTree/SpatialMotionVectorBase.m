@@ -11,7 +11,7 @@ classdef SpatialMotionVectorBase < SwigRef
       else
         tmp = iDynTreeMEX(529, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = getLinearVec3(self,varargin)
@@ -77,7 +77,7 @@ classdef SpatialMotionVectorBase < SwigRef
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(553, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

@@ -106,12 +106,20 @@ public:
 
     TransformMap m_constraints; /*!< list of hard constraints */
     TransformMap m_targets; /*!< list of targets */
+
+    // Attributes relative to the COM Projection constraint (TODO(traversaro): move most of them in a constraint-specific class)
     iDynTree::ConvexHullProjectionConstraint m_comHullConstraint; /*!< Helper to implement COM constraint */
+    iDynTree::Vector3 m_comHullConstraint_projDirection;
+    std::vector<iDynTree::FrameIndex> m_comHullConstraint_supportFramesIndeces;
+    std::vector<iDynTree::Polygon> m_comHullConstraint_supportPolygons;
+    iDynTree::Direction m_comHullConstraint_xAxisOfPlaneInWorld;
+    iDynTree::Direction m_comHullConstraint_yAxisOfPlaneInWorld;
+    iDynTree::Position m_comHullConstraint_originOfPlaneInWorld;
     
     //Preferred joints configuration for the optimization
     //Size: getNrOfDOFs of the considered model
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
-    double m_preferredJointsWeight;
+    iDynTree::VectorDynSize m_preferredJointsWeight;
 
     bool m_areBaseInitialConditionsSet; /*!< True if initial condition for the base pose are provided by the user */
     
@@ -152,6 +160,11 @@ public:
      */
     void computeProblemSizeAndResizeBuffers();
 
+    /*!
+     * Configure the COM projection constraints given the current active contraints.
+     */
+    void configureCenterOfMassProjectionConstraint();
+
     /*! @name Optimization-related parameters
      */
     ///@{
@@ -177,6 +190,22 @@ public:
      * @return true if successfull, false otherwise
      */
     bool setModel(const iDynTree::Model& model, const std::vector<std::string> &consideredJoints = std::vector<std::string>());
+
+    /*!
+     * Set new joint limits
+     * \author Yue Hu
+     * @param jointLimits vector of new joint limits to be imposed
+     * @return true if successfull, false otherwise
+     */
+    bool setJointLimits(std::vector<std::pair<double, double> >& jointLimits);
+
+    /*!
+     * Get current joint limits
+     * \author Yue Hu
+     * @param jointLimits vector of current joint limits
+     * @return true if successfull, false otherwise
+     */
+    bool getJointLimits(std::vector<std::pair<double, double> >& jointLimits);
 
     /*!
      * Reset variables to defaults

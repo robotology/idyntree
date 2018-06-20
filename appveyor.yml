@@ -6,8 +6,8 @@ environment:
   Eigen3_DIR:          C:/Program Files (x86)/Eigen/lib/cmake/eigen3/
 
 os:
- - Visual Studio 2013
  - Visual Studio 2015
+ - Visual Studio 2017
 
 install:
 

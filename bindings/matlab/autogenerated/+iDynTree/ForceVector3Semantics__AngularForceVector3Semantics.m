@@ -9,13 +9,13 @@ classdef ForceVector3Semantics__AngularForceVector3Semantics < iDynTree.GeomVect
       else
         tmp = iDynTreeMEX(482, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(485, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

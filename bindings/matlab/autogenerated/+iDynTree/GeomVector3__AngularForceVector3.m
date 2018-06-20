@@ -19,7 +19,7 @@ classdef GeomVector3__AngularForceVector3 < iDynTree.Vector3
       else
         tmp = iDynTreeMEX(468, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = setSemantics(self,varargin)
@@ -43,7 +43,7 @@ classdef GeomVector3__AngularForceVector3 < iDynTree.Vector3
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(477, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

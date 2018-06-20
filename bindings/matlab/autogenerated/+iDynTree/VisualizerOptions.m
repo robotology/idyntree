@@ -7,40 +7,40 @@ classdef VisualizerOptions < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1688, self);
+        varargout{1} = iDynTreeMEX(1731, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1689, self, varargin{1});
+        iDynTreeMEX(1732, self, varargin{1});
       end
     end
     function varargout = winWidth(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1690, self);
+        varargout{1} = iDynTreeMEX(1733, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1691, self, varargin{1});
+        iDynTreeMEX(1734, self, varargin{1});
       end
     end
     function varargout = winHeight(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1692, self);
+        varargout{1} = iDynTreeMEX(1735, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1693, self, varargin{1});
+        iDynTreeMEX(1736, self, varargin{1});
       end
     end
     function varargout = rootFrameArrowsDimension(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1694, self);
+        varargout{1} = iDynTreeMEX(1737, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1695, self, varargin{1});
+        iDynTreeMEX(1738, self, varargin{1});
       end
     end
     function self = VisualizerOptions(varargin)
@@ -49,15 +49,15 @@ classdef VisualizerOptions < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1696, varargin{:});
+        tmp = iDynTreeMEX(1739, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1697, self);
-        self.swigPtr=[];
+        iDynTreeMEX(1740, self);
+        self.SwigClear();
       end
     end
   end

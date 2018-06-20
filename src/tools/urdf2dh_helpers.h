@@ -131,7 +131,7 @@ bool checkChainsAreEqual(KDL::Chain kdl_random_chain, iCub::iKin::iKinLimb & iki
               std::cerr << "urdf2dh Element " << i << " " << j << " of the result matrix does not match" << std::endl;
               std::cerr << "H from iKinChain: " << std::endl << H_yarp.toString() << std::endl
                         << "H from KDL::Chain " << std::endl << H_yarp_kdl.toString() << std::endl;
-              std::cerr << "Please open an issue at https://github.com/robotology-playground/idyntree/issues " << std::endl;
+              std::cerr << "Please open an issue at https://github.com/robotology/idyntree/issues " << std::endl;
               return false;
           }
 

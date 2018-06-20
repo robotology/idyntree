@@ -6,7 +6,7 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 3.5)
 
 project(iDynTree CXX)
 
@@ -24,8 +24,8 @@ endif()
 set(VARS_PREFIX "iDynTree")
 
 set(${VARS_PREFIX}_MAJOR_VERSION 0)
-set(${VARS_PREFIX}_MINOR_VERSION 8)
-set(${VARS_PREFIX}_PATCH_VERSION 2)
+set(${VARS_PREFIX}_MINOR_VERSION 10)
+set(${VARS_PREFIX}_PATCH_VERSION 0)
 set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
@@ -34,10 +34,6 @@ set(IDYNTREE_MODULE_PATH ${IDYNTREE_MODULE_DIR})
 list(APPEND CMAKE_MODULE_PATH ${IDYNTREE_MODULE_PATH})
 
 include(GNUInstallDirs)
-if (CMAKE_VERSION LESS 3.0)
-    # workaround for http://public.kitware.com/pipermail/cmake-developers/2014-January/009435.html
-    set(CMAKE_INSTALL_LIBDIR lib)
-endif()
 
 #Use options specified in iDynTreeOptions.cmake file
 include(iDynTreeOptions)
@@ -77,16 +73,6 @@ if(NOT IDYNTREE_ONLY_DOCS)
     include(AddUninstallTarget)
 
     add_subdirectory(bindings)
-
-    # Add reminder to remove include_directories(SYSTEM as soon as we depend on CMake 2.8.12
-    if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 2.8.12)
-        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. include_directories(SYSTEM ..) can be substituted by target_include_directories(<target> SYSTEM ...).")
-        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. We can now drop the if surrounding calls to target_compile_options")
-    endif()
-
-    if(NOT ${CMAKE_MINIMUM_REQUIRED_VERSION} VERSION_LESS 3.0)
-        message(AUTHOR_WARNING "CMAKE_MINIMUM_REQUIRED_VERSION is now ${CMAKE_MINIMUM_REQUIRED_VERSION}. Multiline string are now supported,so we can have a readable matlab/octave test script.")
-    endif()
 endif()
 
 # add a dox target to generate doxygen documentation

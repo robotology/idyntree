@@ -11,13 +11,13 @@ classdef TransformDerivative < SwigRef
       else
         tmp = iDynTreeMEX(800, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         iDynTreeMEX(801, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = getRotationDerivative(self,varargin)

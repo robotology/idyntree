@@ -8,13 +8,15 @@
 
 project(iDynTree_Estimation CXX)
 
-idyntree_enable_cxx11()
-
 set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdyHelper.h
                                 include/iDynTree/Estimation/ExternalWrenchesEstimation.h
                                 include/iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h
                                 include/iDynTree/Estimation/SimpleLeggedOdometry.h
-                                include/iDynTree/Estimation/BerdySparseMAPSolver.h)
+                                include/iDynTree/Estimation/BerdySparseMAPSolver.h
+                                include/iDynTree/Estimation/SchmittTrigger.h
+                                include/iDynTree/Estimation/ContactStateMachine.h
+                                include/iDynTree/Estimation/BipedFootContactClassifier.h
+                                include/iDynTree/Estimation/GravityCompensationHelpers.h)
 
 set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES )
 
@@ -22,7 +24,11 @@ set(IDYNTREE_ESTIMATION_SOURCES src/BerdyHelper.cpp
                                 src/ExternalWrenchesEstimation.cpp
                                 src/ExtWrenchesAndJointTorquesEstimator.cpp
                                 src/SimpleLeggedOdometry.cpp
-                                src/BerdySparseMAPSolver.cpp)
+                                src/BerdySparseMAPSolver.cpp
+                                src/SchmittTrigger.cpp
+                                src/ContactStateMachine.cpp
+                                src/BipedFootContactClassifier.cpp
+                                src/GravityCompensationHelpers.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_HEADERS})
@@ -33,7 +39,7 @@ add_library(${libraryname} ${IDYNTREE_ESTIMATION_SOURCES} ${IDYNTREE_ESTIMATION_
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
-include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
+target_include_directories(${libraryname} PRIVATE SYSTEM ${EIGEN3_INCLUDE_DIR})
 
 target_link_libraries(${libraryname} idyntree-core idyntree-model idyntree-sensors idyntree-modelio-urdf)
 
@@ -41,9 +47,7 @@ target_link_libraries(${libraryname} idyntree-core idyntree-model idyntree-senso
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
 
-if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
-    target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
-endif()
+target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_ESTIMATION_HEADERS})
 

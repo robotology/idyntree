@@ -80,6 +80,7 @@
 #include "iDynTree/Model/FixedJoint.h"
 #include "iDynTree/Model/MovableJointImpl.h"
 #include "iDynTree/Model/RevoluteJoint.h"
+#include "iDynTree/Model/PrismaticJoint.h"
 #include "iDynTree/Model/Traversal.h"
 #include "iDynTree/Model/SolidShapes.h"
 #include "iDynTree/Model/Model.h"
@@ -97,6 +98,7 @@
 #include "iDynTree/Sensors/SixAxisFTSensor.h"
 #include "iDynTree/Sensors/AccelerometerSensor.h"
 #include "iDynTree/Sensors/GyroscopeSensor.h"
+#include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
 #include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
 // Model loading from external formats
@@ -271,6 +273,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %template(MovableJointImpl6) iDynTree::MovableJointImpl<6,6>;
 
 %include "iDynTree/Model/RevoluteJoint.h"
+%include "iDynTree/Model/PrismaticJoint.h"
 %include "iDynTree/Model/Traversal.h"
 %include "iDynTree/Model/SolidShapes.h"
 %include "iDynTree/Model/Model.h"
@@ -290,6 +293,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Sensors/SixAxisFTSensor.h"
 %include "iDynTree/Sensors/AccelerometerSensor.h"
 %include "iDynTree/Sensors/GyroscopeSensor.h"
+%include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
 %include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
 %include "sensors.i"
