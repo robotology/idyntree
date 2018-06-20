@@ -109,6 +109,7 @@ before_script:
   # Build YARP 
   - git clone https://github.com/robotology/yarp
   - cd yarp
+  - git checkout devel 
   - mkdir build
   - cd build 
   - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCREATE_LIB_MATH:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
@@ -118,6 +119,7 @@ before_script:
   # Build ICUB
   - git clone https://github.com/robotology/icub-main
   - cd icub-main
+  - git checkout devel 
   - mkdir build
   - cd build 
   - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
