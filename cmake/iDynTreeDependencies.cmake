@@ -26,13 +26,15 @@ endmacro ()
 
 # Eigen is compulsory (minimum version 3.2.92)
 find_package(Eigen3 3.2.92 REQUIRED)
+find_package(LibXml2 REQUIRED)
 
 # For orocos_kdl we have custom logic, because we want to set it to FALSE by default
 option(IDYNTREE_USES_KDL "Build the part of iDynTree that depends on package orocos_kdl" FALSE)
 if (IDYNTREE_USES_KDL)
+    # KDL requires a system version of TinyXML
+  find_package(TinyXML REQUIRED)
   include(OrocosKDLFindLogic)
   find_package(orocos_kdl REQUIRED)
-  find_package(TinyXML    REQUIRED)
 endif ()
 
 find_package(ICUB)
@@ -53,11 +55,3 @@ idyntree_handle_dependency(IPOPT)
 idyntree_handle_dependency(Irrlicht)
 idyntree_handle_dependency(Qt5 COMPONENTS Qml Quick Widgets)
 
-
-# If KDL is not used, an external TinyXML is not compulsory
-# (because no public headers contain TinyXML includes)
-# and so we can use the internal copy of TinyXML, see logic
-# in extern/CMakeLists.txt . For this reason we just check
-# the system if a local copy of TinyXML exists, and otherwise
-# we use the copy in extern/CMakeLists.txt
-find_package(TinyXML)
