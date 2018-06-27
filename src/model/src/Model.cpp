@@ -398,7 +398,126 @@ JointIndex Model::addJointAndLink(const std::string& existingLink,
                           jointName,joint);
 }
 
+JointIndex Model::insertLinkToExistingJointAndAddJointForDisplacedLink(const std::string & existingJointName,
+                                     const std::string & unmovableLink,
+                                     const Transform& _unmovableLink_X_newLink,
+                                  const std::string& jointName, IJointConstPtr joint,
+                                  const std::string& newLinkName, Link& newLink)
+{
 
+
+    // check the unmovableLink exists
+    if( !(this->isLinkNameUsed(unmovableLink)) )
+    {
+        std::string error = "a link of name " + unmovableLink + " is not present in the model";
+        reportError("Model","insertJointAndLink",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+
+    LinkIndex newAddedLink = this->addLink(newLinkName,newLink);
+
+    if( newAddedLink == LINK_INVALID_INDEX )
+    {
+        std::string error = "Error adding link of name " + newLinkName;
+        reportError("Model","insertJointAndLink",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+
+    // check joint exists
+    if( !(this->isJointNameUsed(existingJointName)) )
+    {
+        std::string error = "a joint of name " + existingJointName + " is not present in the model";
+        reportError("Model","insertJointAndLink",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+
+    JointIndex existingJointIndex=this->getJointIndex(existingJointName);
+    IJointPtr existingJoint=this->getJoint(existingJointIndex);
+
+    // get current link indexes of the links attached to existing joint
+    LinkIndex unmovableLinkIndex=this->getLinkIndex(unmovableLink);
+    int LinkPositionInJoint=0;
+
+    LinkIndex displacedLinkIndex;
+
+    if (existingJoint->getFirstAttachedLink() == unmovableLinkIndex )
+    {
+        displacedLinkIndex=existingJoint->getSecondAttachedLink();
+        LinkPositionInJoint=1;
+    }
+
+    if (existingJoint->getSecondAttachedLink() == unmovableLinkIndex )
+    {
+        displacedLinkIndex=existingJoint->getFirstAttachedLink();
+        LinkPositionInJoint=2;
+    }
+
+    // check if the unmovable link is indeed attached to the joint
+    if (LinkPositionInJoint == 0 ){
+        std::string error = "a link of name " + unmovableLink + " is not attached to joint of name " + existingJointName + " in the model";
+        reportError("Model","insertJointAndLink",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+
+    // edit connections of existing link
+    if (LinkPositionInJoint==1){
+        existingJoint->setAttachedLinks(unmovableLinkIndex,newAddedLink);
+        existingJoint->setRestTransform(_unmovableLink_X_newLink);
+    }
+    else
+    {
+        existingJoint->setAttachedLinks(newAddedLink,unmovableLinkIndex);
+        existingJoint->setRestTransform(_unmovableLink_X_newLink.inverse());
+    }
+
+    // Check neighbors connections to find the previous connection index
+    int previousConnectionIndex=-1;
+    for(int i=0;i<this->neighbors[unmovableLinkIndex].size();i++ )
+    {
+        if ( this->neighbors[unmovableLinkIndex].at(i).neighborLink == displacedLinkIndex )
+        {
+            previousConnectionIndex=i;
+        }
+    }
+    if (previousConnectionIndex == -1)
+    {
+        std::string error = "could not find neighbor connection from " + unmovableLink + " to " + this->getJointName(displacedLinkIndex) + " in the model";
+        reportError("Model","insertJointAndLink",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+
+    // Update the adjacency list
+    Neighbor unmovableLinkNeighbor;
+    unmovableLinkNeighbor.neighborLink = newAddedLink;
+    unmovableLinkNeighbor.neighborJoint = existingJointIndex;
+    this->neighbors[unmovableLinkIndex].at(previousConnectionIndex)=unmovableLinkNeighbor;
+
+    Neighbor newAddedLinkNeighbor;
+    newAddedLinkNeighbor.neighborLink = unmovableLinkIndex;
+    newAddedLinkNeighbor.neighborJoint = existingJointIndex;
+    this->neighbors[newAddedLink].push_back(newAddedLinkNeighbor);
+
+    // Erase neighbor connection from movable link to unmovable link
+    previousConnectionIndex=-1;
+    for(int i=0;i<this->neighbors[displacedLinkIndex].size();i++ )
+    {
+        if ( this->neighbors[displacedLinkIndex].at(i).neighborLink == unmovableLinkIndex )
+        {
+            previousConnectionIndex=i;
+        }
+    }
+    if (previousConnectionIndex == -1)
+    {
+        std::string error = "could not find neighbor connection from " + this->getJointName(displacedLinkIndex) + " to " + unmovableLink + " in the model";
+        reportError("Model","insertJointAndLink",error.c_str());
+        return JOINT_INVALID_INDEX;
+    }
+    this->neighbors[displacedLinkIndex].erase(neighbors[displacedLinkIndex].begin()+previousConnectionIndex);
+    const std::string movableLinkName=this->getLinkName(displacedLinkIndex);
+    // we assume the rest transform for the new joint was set as newLink_x_movableLink
+    return this->addJoint(newLinkName,movableLinkName,
+                          jointName,joint);
+}
 
 
 size_t Model::getNrOfPosCoords() const
