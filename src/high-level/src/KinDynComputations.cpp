@@ -32,7 +32,7 @@
 #include <iDynTree/Model/Dynamics.h>
 #include <iDynTree/Model/Jacobians.h>
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 
 #include <cassert>
 #include <iostream>
@@ -333,49 +333,23 @@ void KinDynComputations::computeBiasAccFwdKinematics()
 bool KinDynComputations::loadRobotModelFromFile(const std::string& filename,
                                                   const std::string& filetype)
 {
-    if( filetype != "urdf" )
-    {
-        std::cerr << "[ERROR] unknown format " << filetype <<
-                     " . Currently only the urdf format is supported." << std::endl;
+    ModelLoader loader;
+    if (!loader.loadModelFromFile(filename, filetype)) {
+        reportError("KinDynComputations", "loadRobotModelFromFile", "Error in loading robot model");
         return false;
     }
-
-    std::ifstream ifs(filename.c_str());
-
-    if( !ifs )
-    {
-        std::cerr << "[ERROR] impossible to open file " << filename << std::endl;
-        return false;
-    }
-
-    std::string model_string( (std::istreambuf_iterator<char>(ifs) ),
-                            (std::istreambuf_iterator<char>()    ) );
-
-    return this->loadRobotModelFromString(model_string);
+    return this->loadRobotModel(loader.model());
 }
 
 bool KinDynComputations::loadRobotModelFromString(const std::string& modelString,
                                                   const std::string& filetype)
 {
-    if( filetype != "urdf" )
-    {
-        std::cerr << "[ERROR] unknown format " << filetype <<
-                     " . Currently only the urdf format is supported." << std::endl;
+    ModelLoader loader;
+    if (!loader.loadModelFromString(modelString, filetype)) {
+        reportError("KinDynComputations", "loadRobotModelFromString", "Error in loading robot model");
         return false;
     }
-
-    Model model;
-    bool ok = modelFromURDFString(modelString,model);
-
-    if( !ok )
-    {
-        std::cerr << "[ERROR] error in loading robot model" << std::endl;
-        return false;
-    }
-    else
-    {
-        return this->loadRobotModel(model);
-    }
+    return this->loadRobotModel(loader.model());
 }
 
 bool KinDynComputations::loadRobotModel(const Model& model)

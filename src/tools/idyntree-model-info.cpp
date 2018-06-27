@@ -9,7 +9,7 @@
  */
 
 #include <iDynTree/Model/Model.h>
-#include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/KinDynComputations.h>
 
 #include "cmdline.h"
@@ -163,10 +163,10 @@ int main(int argc, char** argv)
 
     // Read model
     std::string modelPath = cmd.get<std::string>("model");
+    iDynTree::ModelLoader loader;
+    bool ok = loader.loadModelFromFile(modelPath);
     iDynTree::KinDynComputations model;
-    bool ok = model.loadRobotModelFromFile(modelPath);
-
-    if( !ok )
+    if( !ok || !model.loadRobotModel(loader.model()))
     {
         std::cerr << "Impossible to read model at file " << modelPath << std::endl;
         return EXIT_FAILURE;

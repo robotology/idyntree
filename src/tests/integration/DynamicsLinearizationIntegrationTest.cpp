@@ -15,8 +15,6 @@
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
-
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/Dynamics.h>
 #include <iDynTree/Model/DynamicsLinearization.h>
@@ -27,6 +25,8 @@
 #include <iDynTree/Model/FreeFloatingMatrices.h>
 
 #include <iDynTree/Model/ModelTestUtils.h>
+
+#include <iDynTree/ModelIO/ModelLoader.h>
 
 #include "testModels.h"
 
@@ -535,8 +535,10 @@ int main()
     {
         std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
         std::cerr << "Checking DynamicsLinearization test on " << urdfFileName << std::endl;
-        Model model;
-        bool ok = modelFromURDF(urdfFileName,model);
+
+        ModelLoader loader;
+        loader.loadModelFromFile(urdfFileName);
+        Model model = loader.model();
         checkABAandABALinearizationAreConsistent(model);
     }
 }

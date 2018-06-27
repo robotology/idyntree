@@ -13,6 +13,8 @@
 
 #include <string>
 
+#include <iDynTree/Core/Utils.h>
+
 namespace iDynTree
 
 {
@@ -30,7 +32,7 @@ class ModelSolidShapes;
  *
  * @deprecated Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::ModelSolidShapes from a URDF file.
  */
-[[deprecated("Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::ModelSolidShapes from a URDF file.")]]
+IDYNTREE_DEPRECATED_WITH_MSG("Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::ModelSolidShapes from a URDF file.")
 bool solidShapesFromURDF(const std::string & urdf_filename,
                          const Model & model,
                          const std::string urdfGeometryType,
@@ -47,7 +49,7 @@ bool solidShapesFromURDF(const std::string & urdf_filename,
  * @return true if all went well, false otherwise.
  * @deprecated Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::ModelSolidShapes from a URDF string.
  */
-[[deprecated("Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::ModelSolidShapes from a URDF string.")]]
+IDYNTREE_DEPRECATED_WITH_MSG("Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::ModelSolidShapes from a URDF string.")
 bool solidShapesFromURDFString(const std::string & urdf_string,
                                const std::string & urdf_filename,
                                const Model & model,

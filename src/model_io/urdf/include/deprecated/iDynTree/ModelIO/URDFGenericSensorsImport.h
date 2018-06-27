@@ -13,6 +13,8 @@
 
 #include <string>
 
+#include <iDynTree/Core/Utils.h>
+
 #ifdef __DEPRECATED
   #warning <iDynTree/ModelIO/URDFGenericSensorsImport.h> is deprecated. Please use <iDynTree/ModelIO/ModelLoader.h> and the classes contained in it. To disable this warning use -Wno-deprecated.
 #endif
@@ -34,7 +36,7 @@ class Model;
  * @return true if all went ok, false otherwise.
  * @deprecated Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::SensorsList from a URDF file.
  */
-[[deprecated("Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::SensorsList from a URDF file.")]]
+IDYNTREE_DEPRECATED_WITH_MSG("Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::SensorsList from a URDF file.")
 bool sensorsFromURDF(const std::string & urdf_filename,
                      iDynTree::SensorsList & output);
 
@@ -49,7 +51,7 @@ bool sensorsFromURDF(const std::string & urdf_filename,
  * @return true if all went ok, false otherwise.
  * @deprecated Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::SensorsList from a URDF file.
  */
-[[deprecated("Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::SensorsList from a URDF file.")]]
+IDYNTREE_DEPRECATED_WITH_MSG("Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::SensorsList from a URDF file.")
 bool sensorsFromURDF(const std::string & urdf_filename,
                      const Model & model,
                      iDynTree::SensorsList & output);
@@ -63,7 +65,7 @@ bool sensorsFromURDF(const std::string & urdf_filename,
  * @return true if all went ok, false otherwise.
  * @deprecated Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::SensorsList from a URDF string.
  */
-[[deprecated("Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::SensorsList from a URDF string.")]]
+IDYNTREE_DEPRECATED_WITH_MSG("Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::SensorsList from a URDF string.")
 bool sensorsFromURDFString(const std::string & urdf_string,
                            iDynTree::SensorsList & output);
 
@@ -77,7 +79,7 @@ bool sensorsFromURDFString(const std::string & urdf_string,
  * @return true if all went ok, false otherwise.
  * @deprecated Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::SensorsList from a URDF string.
  */
-[[deprecated("Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::SensorsList from a URDF string.")]]
+IDYNTREE_DEPRECATED_WITH_MSG("Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::SensorsList from a URDF string.")
 bool sensorsFromURDFString(const std::string & urdf_string,
                            const Model & model,
                            iDynTree::SensorsList & output);

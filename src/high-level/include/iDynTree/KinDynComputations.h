@@ -15,6 +15,8 @@
 
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/Core/Utils.h>
+
 
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/FreeFloatingMatrices.h>
@@ -124,6 +126,7 @@ public:
      * @param filetype type of the file to load, currently supporting only urdf type.
      *
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Use iDynTree::ModelLoader::loadRobotModelFromFile and pass the Model to loadRobotModel")
     bool loadRobotModelFromFile(const std::string & filename, const std::string & filetype="urdf");
 
     /**
@@ -133,6 +136,7 @@ public:
      * @param filetype type of the file to load, currently supporting only urdf type.
      *
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Use iDynTree::ModelLoader::loadRobotModelFromString and pass the Model to loadRobotModel")
     bool loadRobotModelFromString(const std::string & modelString, const std::string & filetype="urdf");
 
     /**

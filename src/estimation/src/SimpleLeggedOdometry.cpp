@@ -17,8 +17,7 @@
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/ModelTransformers.h>
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
-#include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 
 #include <sstream>
 
@@ -185,50 +184,30 @@ bool SimpleLeggedOdometry::setModel(const Model& _model)
 
 
 bool SimpleLeggedOdometry::loadModelFromFile(const std::string filename,
-                                             const std::string /*filetype*/)
+                                             const std::string filetype)
 {
-    Model _model;
-
-    bool parsingCorrect = false;
-
-    parsingCorrect = modelFromURDF(filename,_model);
-
-    if( !parsingCorrect )
-    {
+    ModelLoader loader;
+    if (!loader.loadModelFromFile(filename, filetype)) {
         reportError("SimpleLeggedOdometry",
                     "loadModelFromFile",
                     "Error in parsing model from URDF.");
         return false;
     }
-
-    return setModel(_model);
+    return setModel(loader.model());
 }
 
 bool SimpleLeggedOdometry::loadModelFromFileWithSpecifiedDOFs(const std::string filename,
-                                                              const std::vector< std::string >& consideredDOFs,
-                                                              const std::string /*filetype*/)
+                                                              const std::vector<std::string>& consideredDOFs,
+                                                              const std::string filetype)
 {
-    Model _modelFull;
-
-    bool parsingCorrect = false;
-
-    parsingCorrect = modelFromURDF(filename,_modelFull);
-
-    if( !parsingCorrect )
-    {
+    ModelLoader loader;
+    if (!loader.loadReducedModelFromFile(filename, consideredDOFs, filetype)) {
         reportError("SimpleLeggedOdometry",
                     "loadModelFromFileWithSpecifiedDOFs",
                     "Error in parsing model from URDF.");
         return false;
     }
-
-
-    Model _modelReduced;
-
-    // Create a reduced model: this will lump all not considered joints
-    iDynTree::createReducedModel(_modelFull,consideredDOFs,_modelReduced);
-
-    return setModel(_modelReduced);
+    return setModel(loader.model());
 }
 
 
