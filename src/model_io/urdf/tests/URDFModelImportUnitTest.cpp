@@ -198,14 +198,16 @@ void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
 
 int main()
 {
+    checkURDF(getAbsModelPath("/simple_model.urdf"),1,0,0,1,"link1");
     checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,"link1");
     checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,6,"link1");
     checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,62,"root_link");
     checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,111,"root_link");
+    checkURDF(getAbsModelPath("icalibrate.urdf"), 6, 5, 3, 7,"base");
 
     checkModelLoderForURDFFile(getAbsModelPath("/oneLink.urdf"));
     checkModelLoaderFromURDFString("this is not an xml", false);
-    
+
     checkLimitsForJointsAreDefinedFromFileName(getAbsModelPath("iCubGenova02.urdf"));
 
     checkLoadReducedModelOrderIsKept(getAbsModelPath("iCubGenova02.urdf"));

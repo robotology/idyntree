@@ -354,6 +354,8 @@ int main()
     testModelConsistencyAllRepresentations("threeLinks.urdf");
     testModelConsistencyAllRepresentations("bigman.urdf");
     testModelConsistencyAllRepresentations("icub_skin_frames.urdf");
+    testModelConsistencyAllRepresentations("iCubGenova02.urdf");
+    testModelConsistencyAllRepresentations("icalibrate.urdf");
 
     return EXIT_SUCCESS;
 }

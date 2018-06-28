@@ -1,0 +1,233 @@
+<robot name="iCalibrate">
+  <link name="base">
+    <inertial>
+      <origin xyz="-0.023311 2.79438e-05 0.0393667" rpy="0 0 0"/>
+      <mass value="1.81551"/>
+      <inertia ixx="0.014577" ixy="-1.18095e-06" ixz="0.00516452" iyy="0.0165818" iyz="1.54004e-06" izz="0.00329704"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_032_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="base_color">
+        <color rgba="0.504854 0.015455 0.015455 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_032_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="shoulder_1">
+    <inertial>
+      <origin xyz="-0.007719 0 5.83064e-05" rpy="0 0 0"/>
+      <mass value="0.433677"/>
+      <inertia ixx="0.000179137" ixy="0.0" ixz="6.89842e-07" iyy="0.000232754" iyz="0.0" izz="0.000259833"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_031_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="shoulder_1_color">
+        <color rgba="0.504854 0.015455 0.015455 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_031_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="shoulder_pitch" type="revolute">
+    <origin xyz="-0.1 0 0.23" rpy="-1.57079632679 0 0"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <parent link="base"/>
+    <child link="shoulder_1"/>
+    <limit effort="50000" lower="-1.57079632679" upper="1.57079632679" velocity="50000"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="shoulder_2">
+    <inertial>
+      <origin xyz="-0.000492745 0 -0.0225" rpy="0 0 0"/>
+      <mass value="0.344921"/>
+      <inertia ixx="0.000138355" ixy="0.0" ixz="0.0" iyy="0.000134882" iyz="0.0" izz="0.000156825"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.0225" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_030_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="shoulder_2_color">
+        <color rgba="0.504854 0.015455 0.015455 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0225" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_030_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="shoulder_roll" type="revolute">
+    <origin xyz="-0.04 0 0.000319398" rpy="0 1.57079632679 0"/>
+    <axis xyz="2.22044604925e-16 0.0 1.0"/>
+    <parent link="shoulder_1"/>
+    <child link="shoulder_2"/>
+    <limit effort="50000" lower="-3.14159265359" upper="3.14159265359" velocity="50000"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="sensor_support">
+    <inertial>
+      <origin xyz="-8.1806e-05 -1e-06 0.028916" rpy="0 0 0"/>
+      <mass value="0.282006"/>
+      <inertia ixx="0.000128336" ixy="-2.23728e-09" ixz="-4.89892e-07" iyy="0.000119933" iyz="2.06092e-09" izz="9.55933e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_035_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_035_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="FT_support_fixed_joint" type="fixed">
+    <origin xyz="0 0 -0.0475" rpy="3.14159265359 0 0"/>
+    <parent link="shoulder_2"/>
+    <child link="sensor_support"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="weight_interface">
+    <inertial>
+      <origin xyz="0 -0.0002751281 0.012993" rpy="0 0 1.57079632679"/>
+      <mass value="0.162007"/>
+      <inertia ixx="5.29953e-05" ixy="0.0" ixz="-4.07284e-07" iyy="4.90329e-05" iyz="0.0" izz="5.63972e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.0025" rpy="0 0 1.57079632679"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_023_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="weight_interface_color">
+        <color rgba="0.79 0.627018 0.390245 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0025" rpy="0 0 1.57079632679"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_023_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="FT_sensor_joint" type="fixed">
+    <origin xyz="0 0 0.0508" rpy="0 0 1.57079632679"/>
+    <parent link="sensor_support"/>
+    <child link="weight_interface"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="weight">
+    <inertial>
+      <origin xyz="0 0 -0.091879" rpy="0 0 0"/>
+      <mass value="2.70605"/>
+      <inertia ixx="0.0066332" ixy="0.0" ixz="0.0" iyy="0.00663239" iyz="0.0" izz="0.00270841"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.018" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_036_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.018" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/stl/ical_ft_p_036_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="weight_passive_joint" type="revolute">
+    <origin xyz="0 0 0.025" rpy="3.14159265359 0 0"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <parent link="weight_interface"/>
+    <child link="weight"/>
+    <limit effort="50000" lower="-1.57079632679" upper="1.57079632679" velocity="50000"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <gazebo reference="FT_sensor_joint">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+  <gazebo reference="base">
+    <visual>
+      <material>
+        <ambient>0.4543686 0.0139095 0.0139095 1.0</ambient>
+        <diffuse>0.504854 0.015455 0.015455 1.0</diffuse>
+        <specular>0.4543686 0.0139095 0.0139095 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="shoulder_1">
+    <visual>
+      <material>
+        <ambient>0.4543686 0.0139095 0.0139095 1.0</ambient>
+        <diffuse>0.504854 0.015455 0.015455 1.0</diffuse>
+        <specular>0.4543686 0.0139095 0.0139095 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="shoulder_2">
+    <visual>
+      <material>
+        <ambient>0.4543686 0.0139095 0.0139095 1.0</ambient>
+        <diffuse>0.504854 0.015455 0.015455 1.0</diffuse>
+        <specular>0.4543686 0.0139095 0.0139095 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="weight_interface">
+    <visual>
+      <material>
+        <ambient>0.4345 0.3448599 0.21463475 1.0</ambient>
+        <diffuse>0.711 0.5643162 0.3512205 1.0</diffuse>
+        <specular>0.474 0.3762108 0.234147 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="FT_sensor_joint">
+      <sensor name="FT_sensor_joint" type="force_torque">
+      <always_on>1</always_on>
+      <update_rate>100</update_rate>
+      <force_torque>
+        <frame>child</frame>
+        <measure_direction>child_to_parent</measure_direction>
+      </force_torque>
+      <plugin name="FT_sensor_joint_plugin" filename="libgazebo_yarp_forcetorque.so">
+          <yarpConfigurationFile>model://conf/gazebo_icalibrate_ft.ini</yarpConfigurationFile>
+      </plugin>
+    </sensor>
+  </gazebo>
+  <sensor name="FT_sensor_joint" type="force_torque">
+    <parent joint="FT_sensor_joint"/>
+    <force_torque>
+      <frame>child</frame>
+      <measure_direction>child_to_parent</measure_direction>
+    </force_torque>
+  </sensor>
+  <gazebo>
+    <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+  </gazebo>
+</robot>
+

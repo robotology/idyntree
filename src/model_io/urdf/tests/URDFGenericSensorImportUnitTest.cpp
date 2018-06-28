@@ -21,7 +21,8 @@ using namespace iDynTree;
 
 void checkURDF(std::string fileName,
                unsigned int expectedNrOfAccelerometers,
-               unsigned int expectedNrOfGyroscopes)
+               unsigned int expectedNrOfGyroscopes,
+               unsigned int expectedNrOfFTs)
 {
     ModelLoader loader;
     ASSERT_IS_TRUE(loader.loadModelFromFile(fileName));
@@ -32,6 +33,7 @@ void checkURDF(std::string fileName,
 
     ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::ACCELEROMETER),expectedNrOfAccelerometers);
     ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::GYROSCOPE),expectedNrOfGyroscopes);
+    ASSERT_EQUAL_DOUBLE(sensorList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),expectedNrOfFTs);
 
     // Load the reduced model without any joint (this will clamp all the link in one big link)
     std::vector<std::string> consideredJoints;
@@ -48,10 +50,13 @@ void checkURDF(std::string fileName,
 int main()
 {
     std::cout<<"Generic Sensor test running (one Link):\n";
-    checkURDF(getAbsModelPath("oneLink.urdf"),2,1);
+    checkURDF(getAbsModelPath("oneLink.urdf"),2, 1, 0);
 
     std::cout<<"Generic Sensor test running (two Link):\n";
-    checkURDF(getAbsModelPath("/twoLinks.urdf"),2,1);
+    checkURDF(getAbsModelPath("/twoLinks.urdf"),2, 1, 0);
+
+    std::cout<<"Generic Sensor test running (icalibrate):\n";
+    checkURDF(getAbsModelPath("/icalibrate.urdf"), 0, 0, 1);
 
     std::cout <<"Generic Sensor test just ran\n";
     return 0;
