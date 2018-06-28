@@ -14,11 +14,51 @@
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Sensors/Sensors.h>
 
+#include <memory>
 #include <string>
 #include <vector>
 
 namespace iDynTree
 {
+
+/**
+ * \ingroup iDynTreeModelIO
+ *
+ * Options for the iDynTree parser.
+ */
+struct ModelParserOptions
+{
+    // TODO: migrate to set/get
+    // ???: what about adding a search dir instead of a filename?
+public:
+
+    /**
+     * If true, add to the model the sensor frames
+     * as additional frames with the same name of the sensor.
+     * If there is already a link or additional frame with the same
+     * name of the sensor, a warning is printed and no frame is added.
+     */
+    bool addSensorFramesAsAdditionalFrames;
+
+    /**
+     * Original filename of the URDF sensor parsed.
+     *
+     * This attribute is the original filename of the URDF sensor parsed.
+     * It is useful when loading a model from a string, if that URDF string
+     * has <geometry> tags that point to external meshes. To find the location
+     * of this external meshes, we need also the original filename of the URDF file.
+     */
+    std::string originalFilename;
+
+    /** Default options
+     *
+     * - addSensorFramesAsAdditionalFrames = True
+     * - originalFilename = empty string
+     */
+    ModelParserOptions();
+
+};
+
 
 /**
  * \ingroup iDynTreeModelIO
@@ -29,11 +69,9 @@ namespace iDynTree
 class ModelLoader
 {
 private:
-    Model m_model;
-    SensorsList m_sensors;
-    bool m_isModelValid;
 
-    bool setModelAndSensors(const Model& _model, const SensorsList& _sensors);
+    class ModelLoaderPimpl;
+    std::unique_ptr<ModelLoaderPimpl> m_pimpl;
 
 public:
 
@@ -48,6 +86,8 @@ public:
      */
     ModelLoader();
 
+    ~ModelLoader();
+
     //@}
 
     /**
@@ -55,6 +95,10 @@ public:
      * This methods are used to load the structure of your model.
      */
     //@{
+    const ModelParserOptions& parsingOptions() const;
+
+    void setParsingOptions(const ModelParserOptions& options);
+
     /**
      * Load the model of the robot  from a string.
      *

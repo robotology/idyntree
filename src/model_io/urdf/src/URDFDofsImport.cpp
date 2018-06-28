@@ -8,9 +8,9 @@
  * at your option.
  */
 
-#include <iDynTree/ModelIO/URDFDofsImport.h>
+#include "iDynTree/ModelIO/URDFDofsImport.h"
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
+#include "iDynTree/ModelIO/ModelLoader.h"
 
 #include <iDynTree/Model/Model.h>
 
@@ -48,9 +48,10 @@ bool dofsListFromURDFString(const std::string & urdf_string,
     dofs.resize(0);
 
     // Load a iDynTree::Model and dump the dofs name in the vector
-    iDynTree::Model model;
 
-    bool ok = modelFromURDFString(urdf_string,model);
+    ModelLoader loader;
+    bool ok = loader.loadModelFromString(urdf_string);
+    iDynTree::Model model = loader.model();
 
     for(size_t jnt = 0; jnt < model.getNrOfJoints(); jnt++)
     {

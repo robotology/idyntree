@@ -6,6 +6,10 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
+# Specify a base directory where tests file can be located by the unit tests
+set(IDYNTREE_MODELIO_TESTFILES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests/format_examples)
+
+add_subdirectory(xml)
 add_subdirectory(urdf)
 
 if(IDYNTREE_USES_KDL)
