@@ -38,18 +38,17 @@ namespace iDynTree
      * by joints. Each joint can have from 0 to 6 degrees of freedom.
      *
      * Each link has a "link frame" rigidly attached to it.
-     * For each link more rigidly attached frames can be defined,
-     * in addition to "link frame".
+     * Additionally, other rigidly attachable frames can be defined for each link.
      *
-     * The model contains also a serialization for the different elements
-     *  in a model, i.e. a function between:
+     * The model contains also a serialization for the different elements,
+     * i.e. a function between:
      *  * joint names and the integers 0..getNrOfJoints()-1
      *  * dof   names and the integers 0..getNrOfDOFs()-1
      *  * link  names and the integers 0..getNrOfLinks()-1
      *  * frame names and the integers 0..getNrOfFrames()-1
      *
-     * For simplicity, this mappings are build when building the model.
-     * In particular the joint and link indices are assigned when the links
+     * For simplicity, these mappings are build when building the model.
+     * In particular the link and joint indices are assigned when the links
      * and joint are added to the model using the `addLink` and `addJoint`
      * methods.
      *
@@ -57,15 +56,15 @@ namespace iDynTree
      * with the addJoint method. For example if a model is composed only of
      * 0 or 1 DOF joints and the 1 DOFs joints are added before the 0 DOFs then
      * the joint index and dof index for 1 DOF joints will be coincident (this is
-     * how the URDF parser is actually implemented). For this reason as the moment
-     * there is no concept of DOF explicit identifier, i.e. no getDOFName(DOFIndex dofIndex)
-     * method.
+     * how the URDF parser is actually implemented). For this reason the current 
+     * implementation does not have a concept of DOF explicit identifier, 
+     * i.e. a getDOFName(DOFIndex dofIndex) method does not exist.
      *
      * The frame indices between 0 and getNrOfLinks()-1 are always assigned to the
      * "main" link frame of the link with the same index. The frame indices
      * between getNrOfLinks() and getNrOfFrames()-1 are assigned when the additional
      * frame is added to the model with the addAdditionalFrameToLink call. All the additional
-     * frame indices are increased of 1 whenever a new link is added, to ensure that
+     * frame indices are incremented by 1 whenever a new link is added, to ensure that
      * its "link frame" has a frame index in the 0...getNrOfLinks()-1 range.
      *
      *
@@ -213,7 +212,7 @@ namespace iDynTree
         size_t getNrOfJoints() const;
 
         /**
-         * Get the name of a link given its index, or
+         * Get the name of a joint given its index, or
          * an JOINT_INVALID_NAME if linkIndex < 0 or >= getNrOfLinks()
          */
         std::string getJointName(const JointIndex index) const;
@@ -378,7 +377,7 @@ namespace iDynTree
          * with refFrame : the link main frame and frame : the
          *  frame with index frameIndex .
          *
-         * @param[in] frameIndex the index of the frame for which
+         * @param[in] frameIndex the index of the frame for which transform is requested.
          * @return the link_H_frame transform, or an identity tranform
          *         if frameIndex < 0 or frameIndex >= getNrOfFrames .
          */
@@ -413,6 +412,8 @@ namespace iDynTree
          * If no link are present in model, returns LINK_INVALID_INDEX.
          * If setDefaultBaseLink was never called but at least a link has been added
          * to the model, returns 0 (i.e. the index of the first link added to the model.
+         * 
+         * @return index of the default base link, if valid
          */
         LinkIndex getDefaultBaseLink() const;
 
@@ -421,11 +422,13 @@ namespace iDynTree
          * at the default base.
          *
          * \warning The traversal computed with this function contains pointers to the joints
-         *          and links present in this model. Whener this pointer are invalidated,
+         *          and links present in this model. Whenever these pointers are invalidated,
          *          for example because a link or a joint is added or the model is copied,
          *          the traversal need to be recomputed.
          *
          * \warning this function works only on Models without cycles.
+         * @param[out] traversal traversal of all links in the model
+         * @return true if all went well, false otherwise.
          */
         bool computeFullTreeTraversal(Traversal & traversal) const;
 
@@ -434,11 +437,14 @@ namespace iDynTree
          * at the given traversalBase.
          *
          * \warning The traversal computed with this function contains pointers to the joints
-         *          and links present in this model. Whener this pointer are invalidated,
+         *          and links present in this model. Whenever these pointers are invalidated,
          *          for example because a link or a joint is added or the model is copied,
          *          the traversal need to be recomputed.
-         *
+         *.
          * \warning this function works only on Models without cycles.
+         * @param[out] traversal traversal of all links in the model
+         * @param[in]  traversalBase base (root) link in the traversal
+         * @return true if all went well, false otherwise
          */
         bool computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase) const;
 
@@ -456,6 +462,7 @@ namespace iDynTree
          * The mapping between the SpatialInertia class and the Vector10 elements is the one
          * defined in SpatialInertia::asVector() method.
          *
+         * @param[out] modelInertialParams vector of inertial parameters
          * @return true if all went well, false otherwise.
          *
          */
@@ -478,6 +485,7 @@ namespace iDynTree
          * @note For efficency reason, inertial parameters are not checked for full physical
          *       consistency before being update.
          *
+         * @param[in] modelInertialParams vector of inertial parameters
          * @return true if all went well, false otherwise.
          *
          */
