@@ -38,7 +38,7 @@ namespace iDynTree
      * by joints. Each joint can have from 0 to 6 degrees of freedom.
      *
      * Each link has a "link frame" rigidly attached to it.
-     * Additionally, other rigidly attachable lframes can be defined for each link.
+     * Additionally, other rigidly attachable frames can be defined for each link.
      *
      * The model contains also a serialization for the different elements,
      * i.e. a function between:
