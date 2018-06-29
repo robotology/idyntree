@@ -1,3 +1,3 @@
 function varargout = dofsListFromURDF(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1397, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1399, varargin{:});
 end
