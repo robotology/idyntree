@@ -9,58 +9,58 @@ classdef SparseMatrixColMajor < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(139, varargin{:});
+        tmp = iDynTreeMEX(140, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(140, self);
+        iDynTreeMEX(141, self);
         self.SwigClear();
       end
     end
     function varargout = numberOfNonZeros(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(141, self, varargin{:});
-    end
-    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(142, self, varargin{:});
     end
-    function varargout = reserve(self,varargin)
+    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(143, self, varargin{:});
     end
-    function varargout = zero(self,varargin)
+    function varargout = reserve(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(144, self, varargin{:});
     end
-    function varargout = setFromConstTriplets(self,varargin)
+    function varargout = zero(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(145, self, varargin{:});
     end
-    function varargout = setFromTriplets(self,varargin)
+    function varargout = setFromConstTriplets(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(146, self, varargin{:});
     end
-    function varargout = getValue(self,varargin)
+    function varargout = setFromTriplets(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(147, self, varargin{:});
     end
-    function varargout = setValue(self,varargin)
+    function varargout = getValue(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(148, self, varargin{:});
     end
-    function varargout = rows(self,varargin)
+    function varargout = setValue(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(149, self, varargin{:});
     end
-    function varargout = columns(self,varargin)
+    function varargout = rows(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(150, self, varargin{:});
     end
-    function varargout = description(self,varargin)
+    function varargout = columns(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(151, self, varargin{:});
     end
-    function varargout = toMatlab(self,varargin)
+    function varargout = description(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(152, self, varargin{:});
     end
-    function varargout = toMatlabDense(self,varargin)
+    function varargout = toMatlab(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(153, self, varargin{:});
     end
-    function varargout = fromMatlab(self,varargin)
+    function varargout = toMatlabDense(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(154, self, varargin{:});
+    end
+    function varargout = fromMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(155, self, varargin{:});
     end
   end
   methods(Static)
