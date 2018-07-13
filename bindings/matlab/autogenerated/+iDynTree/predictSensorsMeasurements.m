@@ -1,3 +1,3 @@
 function varargout = predictSensorsMeasurements(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1387, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1388, varargin{:});
 end
