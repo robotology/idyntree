@@ -99,6 +99,7 @@
 #include "iDynTree/Sensors/AccelerometerSensor.h"
 #include "iDynTree/Sensors/GyroscopeSensor.h"
 #include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
+#include "iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h"
 #include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
 // Model loading from external formats
@@ -294,6 +295,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Sensors/AccelerometerSensor.h"
 %include "iDynTree/Sensors/GyroscopeSensor.h"
 %include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
+%include "iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h"
 %include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
 %include "sensors.i"
