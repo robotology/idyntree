@@ -17,7 +17,7 @@
 #include <iDynTree/ModelIO/impl/urdf_sensor_import.hpp>
 
 #include "iDynTree/Sensors/Sensors.h"
-#include "iDynTree/Sensors/SixAxisFTSensor.h"
+#include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
 #include <iDynTree/Core/Transform.h>
 
 #include <kdl_codyco/rnea_loops.hpp>

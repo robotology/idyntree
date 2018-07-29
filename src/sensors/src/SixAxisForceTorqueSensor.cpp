@@ -8,7 +8,7 @@
  * at your option.
  */
 #include "iDynTree/Core/Wrench.h"
-#include "iDynTree/Sensors/SixAxisFTSensor.h"
+#include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
 
 #include "iDynTree/Core/Transform.h"
 

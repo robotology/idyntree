@@ -16,7 +16,7 @@ include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/AllSensorsTypes.h
                              include/iDynTree/Sensors/Sensors.h
-                             include/iDynTree/Sensors/SixAxisFTSensor.h
+                             include/iDynTree/Sensors/SixAxisForceTorqueSensor.h
                              include/iDynTree/Sensors/GyroscopeSensor.h
                              include/iDynTree/Sensors/AccelerometerSensor.h
                              include/iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h
@@ -25,7 +25,7 @@ set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/AllSensorsTypes.h
                              include/iDynTree/Sensors/ModelSensorsTransformers.h)
 
 set(IDYNTREE_SENSORS_SOURCES src/Sensors.cpp
-                             src/SixAxisFTSensor.cpp
+                             src/SixAxisForceTorqueSensor.cpp
                              src/AccelerometerSensor.cpp
                              src/GyroscopeSensor.cpp
                              src/ThreeAxisAngularAccelerometerSensor.cpp

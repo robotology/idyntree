@@ -26,7 +26,7 @@
 
 
 #include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 #include <kdl_codyco/regressors/dirl_utils.hpp>
 
 

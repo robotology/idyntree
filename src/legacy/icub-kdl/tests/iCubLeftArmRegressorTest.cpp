@@ -14,7 +14,7 @@
 #include <kdl/tree.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
 #include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 
 #include <kdl_codyco/KDLConversions.h>
 

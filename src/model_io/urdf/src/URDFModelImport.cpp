@@ -22,7 +22,7 @@
 #include <iDynTree/Model/ModelTransformers.h>
 
 #include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 
 #include <tinyxml.h>
 
