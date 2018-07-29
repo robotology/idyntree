@@ -62,6 +62,9 @@ classdef SensorsList < SwigRef
     function varargout = getThreeAxisAngularAccelerometerSensor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1301, self, varargin{:});
     end
+    function varargout = getThreeAxisForceTorqueContactSensor(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1302, self, varargin{:});
+    end
   end
   methods(Static)
   end
