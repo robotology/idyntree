@@ -14,6 +14,7 @@
 #include <vector>
 #include <string>
 #include <cassert>
+#include <yarp/sig/Vector.h>
 
 namespace iCub {
     namespace iDyn {
@@ -33,7 +34,6 @@ namespace KDL {
 
 namespace yarp {
     namespace sig {
-        class Vector;
         class Matrix;
     }
 }
