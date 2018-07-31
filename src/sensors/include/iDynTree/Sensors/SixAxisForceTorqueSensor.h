@@ -9,8 +9,8 @@
  */
 
 
-#ifndef SIX_AXIS_FORCE_TORQUE_HPP
-#define SIX_AXIS_FORCE_TORQUE_HPP
+#ifndef IDYNTREE_SIX_AXIS_FORCE_TORQUE_H
+#define IDYNTREE_SIX_AXIS_FORCE_TORQUE_H
 
 namespace iDynTree
 {
