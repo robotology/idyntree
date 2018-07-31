@@ -189,11 +189,11 @@ void testInverseDynamics(KinDynComputations & dynComp)
         shapeAccs.zero();
         if( i < 6 )
         {
-            baseAcc(i) = 0.0;
+            baseAcc(i) = 1.0;
         }
         else
         {
-            shapeAccs(i-6) = 0.0;
+            shapeAccs(i-6) = 1.0;
         }
 
         FreeFloatingGeneralizedTorques invDynForces(dynComp.model());
