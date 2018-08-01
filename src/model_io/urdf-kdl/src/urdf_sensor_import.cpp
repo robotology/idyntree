@@ -17,7 +17,7 @@
 #include <kdl_codyco/KDLConversions.h>
 
 #include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 
 
 #include <fstream>

@@ -20,7 +20,7 @@
 // #include "iDynTree/Sensors/IMeasurement.hpp"
 #include <iDynTree/Sensors/Sensors.h>
 
-#include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 #include <iDynTree/Sensors/AccelerometerSensor.h>
 #include <iDynTree/Sensors/GyroscopeSensor.h>
 

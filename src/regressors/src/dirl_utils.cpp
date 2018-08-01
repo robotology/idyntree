@@ -12,7 +12,7 @@
 
 #include "kdl_codyco/regressor_utils.hpp"
 
-#include "iDynTree/Sensors/SixAxisFTSensor.h"
+#include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
 #include "iDynTree/Core/Transform.h"
 #include "kdl_codyco/KDLConversions.h"
 #include <iostream>

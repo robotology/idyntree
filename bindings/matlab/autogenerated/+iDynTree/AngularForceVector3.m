@@ -7,17 +7,17 @@ classdef AngularForceVector3 < iDynTree.ForceVector3__AngularForceVector3
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(516, varargin{:});
+        tmp = iDynTreeMEX(517, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(517, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(518, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(518, self);
+        iDynTreeMEX(519, self);
         self.SwigClear();
       end
     end

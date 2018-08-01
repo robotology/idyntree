@@ -7,24 +7,24 @@ classdef AngularForceVector3Semantics < iDynTree.ForceVector3Semantics__AngularF
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(512, varargin{:});
+        tmp = iDynTreeMEX(513, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(513, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(514, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(515, self);
+        iDynTreeMEX(516, self);
         self.SwigClear();
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(514, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(515, varargin{:});
     end
   end
 end
