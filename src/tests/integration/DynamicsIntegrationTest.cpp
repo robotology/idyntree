@@ -14,7 +14,7 @@
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/Dynamics.h>
@@ -117,9 +117,10 @@ int main()
     {
         std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
         std::cout << "Checking dynamics test on " << urdfFileName << std::endl;
-        Model model;
-        bool ok = modelFromURDF(urdfFileName,model);
+        ModelLoader loader;
+        bool ok = loader.loadModelFromFile(urdfFileName);
         assert(ok);
+        Model model = loader.model();
         Traversal traversal;
         ok = model.computeFullTreeTraversal(traversal);
         assert(ok);

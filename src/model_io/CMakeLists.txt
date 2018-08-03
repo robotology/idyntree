@@ -6,10 +6,20 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
+# Specify a base directory where tests file can be located by the unit tests
+set(IDYNTREE_MODELIO_TESTFILES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests/format_examples)
+
+add_subdirectory(xml)
 add_subdirectory(urdf)
 
-if(IDYNTREE_USES_KDL)
-    add_subdirectory(urdf-kdl)
+find_package(TinyXML QUIET)
+if (${TinyXML_FOUND})
+    if(IDYNTREE_USES_KDL)
+        add_subdirectory(urdf-kdl)
+        if(IDYNTREE_COMPILE_TESTS)
+            add_subdirectory(tests)
+        endif()
+    endif()
 endif()
 
 option(IDYNTREE_ENABLE_SYMORO_PAR "Enable support for SyMoRo par format" TRUE)
@@ -21,6 +31,6 @@ if(IDYNTREE_USES_ICUB_MAIN AND IDYNTREE_USES_KDL)
     add_subdirectory(iKin-kdl)
 endif()
 
-if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_KDL)
-    add_subdirectory(tests)
-endif()
+# if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_KDL)
+#     add_subdirectory(tests)
+# endif()

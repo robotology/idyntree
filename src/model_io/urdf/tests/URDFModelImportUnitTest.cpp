@@ -13,7 +13,6 @@
 #include <iDynTree/Core/TestUtils.h>
 
 #include <iDynTree/Model/Model.h>
-#include <iDynTree/ModelIO/URDFModelImport.h>
 #include <iDynTree/ModelIO/URDFDofsImport.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 
@@ -30,6 +29,7 @@ void checkParsingOfDofsFromURDF(std::string fileName,
 {
     std::vector<std::string> dofsNameList;
     bool ok = dofsListFromURDF(fileName,dofsNameList);
+    ASSERT_IS_TRUE(ok);
 
     ASSERT_EQUAL_DOUBLE(dofsNameList.size(),expectedNrOfDOFs);
 }
@@ -41,8 +41,9 @@ void checkURDF(std::string fileName,
                   unsigned int expectedNrOfFrames,
                   std::string expectedDefaultBase)
 {
-    Model model;
-    bool ok = modelFromURDF(fileName,model);
+    ModelLoader loader;
+    bool ok = loader.loadModelFromFile(fileName);
+    Model model = loader.model();
     assert(ok);
 
     std::cerr << "Model loaded from " << fileName << std::endl;
@@ -128,8 +129,10 @@ void checkLimitsForJointsAreDefined(Model & model)
 
 void checkLimitsForJointsAreDefinedFromFileName(std::string urdfFileName)
 {
-    Model model;
-    bool ok = modelFromURDF(urdfFileName,model);
+    ModelLoader loader;
+    bool ok = loader.loadModelFromFile(urdfFileName);
+    Model model = loader.model();
+
     ASSERT_IS_TRUE(ok);
     
     checkLimitsForJointsAreDefined(model);
@@ -148,8 +151,7 @@ void checkLimitsForJointsAreDefinedFromFileName(std::string urdfFileName)
     ok = dofsListFromURDF(urdfFileName,dofsOfModel);
     ASSERT_IS_TRUE(ok);
 
-    ModelLoader loader;
-    ok = loader.loadReducedModelFromFile(urdfFileName,dofsOfModel);
+    ok = loader.loadReducedModelFromFile(urdfFileName, dofsOfModel);
     
     ASSERT_IS_TRUE(ok);
     
@@ -196,14 +198,16 @@ void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
 
 int main()
 {
+    checkURDF(getAbsModelPath("/simple_model.urdf"),1,0,0,1,"link1");
     checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,"link1");
     checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,6,"link1");
     checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,62,"root_link");
     checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,111,"root_link");
+    checkURDF(getAbsModelPath("icalibrate.urdf"), 6, 5, 3, 7,"base");
 
     checkModelLoderForURDFFile(getAbsModelPath("/oneLink.urdf"));
     checkModelLoaderFromURDFString("this is not an xml", false);
-    
+
     checkLimitsForJointsAreDefinedFromFileName(getAbsModelPath("iCubGenova02.urdf"));
 
     checkLoadReducedModelOrderIsKept(getAbsModelPath("iCubGenova02.urdf"));

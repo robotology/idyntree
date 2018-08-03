@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot name="oneLink">
+    <material name="blue">
+        <color rgba="0 0 .8 1"/>
+    </material>
+    <link name="link1">
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <cylinder length="0.6" radius="0.2"/>
+            </geometry>
+            <material name="blue" />
+        </visual>
+    </link>
+</robot>

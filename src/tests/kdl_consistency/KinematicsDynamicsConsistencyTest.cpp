@@ -20,6 +20,8 @@
 #include <iDynTree/ModelIO/impl/urdf_import.hpp>
 
 // iDynTree includes
+#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Core/EigenHelpers.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
@@ -31,12 +33,8 @@
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 #include <iDynTree/Model/FreeFloatingMatrices.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
-
-#include <iDynTree/Core/TestUtils.h>
-
-#include <iDynTree/Core/EigenHelpers.h>
 
 using namespace iDynTree;
 
@@ -58,8 +56,9 @@ void testFwdKinConsistency(std::string modelFilePath)
 
 
     // Load iDynTree model and compute a default traversal
-    iDynTree::Model model;
-    modelFromURDF(modelFilePath,model);
+    ModelLoader loader;
+    loader.loadModelFromFile(modelFilePath);
+    iDynTree::Model model = loader.model();
     iDynTree::Traversal traversal;
     model.computeFullTreeTraversal(traversal);
 

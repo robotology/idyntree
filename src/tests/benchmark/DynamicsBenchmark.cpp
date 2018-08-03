@@ -32,7 +32,7 @@
 #include <iDynTree/Model/FreeFloatingState.h>
 #include <iDynTree/Model/FreeFloatingMatrices.h>
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 
 #include <iDynTree/Core/TestUtils.h>
 
@@ -57,8 +57,9 @@ void dynamicsBenchmark(std::string modelFilePath, unsigned int nrOfTrials)
     std::cout << "Benchmarking dynamics algorithms for " << modelFilePath << std::endl;
 
     // initialization variables
-    iDynTree::Model model;
-    modelFromURDF(modelFilePath,model);
+    ModelLoader loader;
+    loader.loadModelFromFile(modelFilePath);
+    iDynTree::Model model = loader.model();
     iDynTree::Traversal traversal;
     model.computeFullTreeTraversal(traversal);
 

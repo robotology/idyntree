@@ -11,7 +11,13 @@
 #ifndef IDYNTREE_URDF_MODEL_IMPORT_H
 #define IDYNTREE_URDF_MODEL_IMPORT_H
 
+#ifdef __DEPRECATED
+  #warning <iDynTree/ModelIO/URDFModelImport.h> is deprecated. Please use <iDynTree/ModelIO/ModelLoader.h> and the classes contained in it. To disable this warning use -Wno-deprecated.
+#endif
+
 #include <string>
+
+#include <iDynTree/Core/Utils.h>
 
 namespace iDynTree
 
@@ -24,7 +30,8 @@ class Model;
  *
  * Options for the iDynTree URDF parser.
  */
-struct URDFParserOptions
+
+struct IDYNTREE_DEPRECATED URDFParserOptions
 {
     /**
      * If true, add to the model the sensor frames
@@ -66,7 +73,10 @@ struct URDFParserOptions
  *
  * @param[in] options the URDFParserOptions struct of options passed to the parser
  * @return true if all went ok, false otherwise.
+ *
+ * @deprecated Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::Model from a URDF file.
  */
+IDYNTREE_DEPRECATED_WITH_MSG("Please use iDynTree::ModelLoader::loadModelFromFile to load a iDynTree::Model from a URDF file.")
 bool modelFromURDF(const std::string & urdf_filename,
                    iDynTree::Model & output,
                    const URDFParserOptions options=URDFParserOptions());
@@ -82,7 +92,10 @@ bool modelFromURDF(const std::string & urdf_filename,
  *
  * @param[in] options the URDFParserOptions struct of options passed to the parser
  * @return true if all went ok, false otherwise.
+ *
+ * @deprecated Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::Model from a URDF string.
  */
+IDYNTREE_DEPRECATED_WITH_MSG("Please use iDynTree::ModelLoader::loadModelFromString to load a iDynTree::Model from a URDF string.")
 bool modelFromURDFString(const std::string & urdf_string,
                          iDynTree::Model & output,
                          const URDFParserOptions options=URDFParserOptions());

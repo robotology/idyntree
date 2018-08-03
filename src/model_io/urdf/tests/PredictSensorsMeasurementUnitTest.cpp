@@ -10,11 +10,10 @@
 
 #include <iostream>
 
-# include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
 # include <iDynTree/Sensors/Sensors.h>
 #include "testModels.h"
 #include <iDynTree/Model/Model.h>
-#include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/ModelIO/URDFDofsImport.h>
 #include <iDynTree/Sensors/PredictSensorsMeasurements.h>
 #include <iDynTree/Model/Traversal.h>
@@ -33,8 +32,10 @@ void init(std::string fileName, Model &model, Traversal &traversal,
           SensorsList &sensorsList, SensorsMeasurements &predictedMeasurement)
 {
     // load URDF model
-    bool ok = modelFromURDF(fileName,model);
-    ASSERT_EQUAL_DOUBLE(ok,true);
+    ModelLoader loader;
+    bool ok = loader.loadModelFromFile(fileName);
+    model = loader.model();
+    ASSERT_IS_TRUE(ok);
     std::cout<<"Model "<<fileName.c_str()<<" created with :"<<model.getNrOfDOFs()<<" DoFs"<<std::endl;
 
     ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(),2);
@@ -48,7 +49,7 @@ void init(std::string fileName, Model &model, Traversal &traversal,
     ASSERT_EQUAL_DOUBLE(ok,true);
 
     // Load sensorList
-    sensorsFromURDF(fileName,sensorsList);
+    sensorsList = loader.sensors();
 
     ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(ACCELEROMETER),2);
     ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(GYROSCOPE),1);
@@ -114,7 +115,7 @@ void runTest(const int& expID,const Model& model,const Traversal& traversal,
     std::cout<<"Predicted Measurement (accl2): " <<accl2.toString()<<"\n";
     std::cout<<"Predicted Measurement (gyro1): " <<gyro1.toString()<<"\n";
     std::cout<<"Predicted Measurement vectorised : "<<measurementVect.toString()<<"\n";
-    ASSERT_EQUAL_DOUBLE(ok,true);
+    ASSERT_IS_TRUE(ok);
     //checking obtained results
     switch(expID)
     {

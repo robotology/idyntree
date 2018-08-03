@@ -5,8 +5,7 @@
 #include <iDynTree/Sensors/ModelSensorsTransformers.h>
 #include <iDynTree/Model/ModelTransformers.h>
 #include <iDynTree/Model/Model.h>
-#include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
-#include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 #include "testModels.h"
 #include <iostream>
 #include <memory>
@@ -59,22 +58,22 @@ std::vector<std::string> get_iCubJointsSensorised()
 
 Model getModel(const std::string& fileName)
 {
-    Model model;
-
+    ModelLoader loader;
+    bool ok = loader.loadModelFromFile(fileName);
     // Load model
-    bool ok = modelFromURDF(fileName, model);
     ASSERT_IS_TRUE(ok);
+    Model model = loader.model();
 
     return model;
 }
 
 SensorsList getSensors(const std::string& fileName)
 {
-    SensorsList sensorList;
-
-    // Load sensors
-    bool ok = sensorsFromURDF(fileName, sensorList);
+    ModelLoader loader;
+    bool ok = loader.loadModelFromFile(fileName);
+    // Load model
     ASSERT_IS_TRUE(ok);
+    SensorsList sensorList = loader.sensors();
 
     return sensorList;
 }

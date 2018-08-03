@@ -19,8 +19,6 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/VectorFixSize.h>
 
-#include <tinyxml.h>
-
 namespace iDynTree
 {
 
@@ -118,45 +116,6 @@ bool inline vector3FromString(const std::string & vector_str, Vector3 & out)
     return true;
 }
 
-
-bool inline transformFromURDFXML(TiXmlElement* xml,
-                                 Transform & transform)
-{
-    // Default transform is identify
-    transform = Transform::Identity();
-
-    if (xml)
-    {
-        const char* xyz_str = xml->Attribute("xyz");
-        if (xyz_str != NULL)
-        {
-            Position xyz;
-            if( vector3FromString(xyz_str,xyz) )
-            {
-                transform.setPosition(xyz);
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        const char* rpy_str = xml->Attribute("rpy");
-        if (rpy_str != NULL)
-        {
-            Vector3 rpy;
-            if( vector3FromString(rpy_str,rpy) )
-            {
-                transform.setRotation(Rotation::RPY(rpy(0),rpy(1),rpy(2)));
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
-    return true;
-}
 
 bool inline vector4FromString(const std::string & vector_str, Vector4 & out)
 {

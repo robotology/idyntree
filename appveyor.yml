@@ -4,13 +4,20 @@ clone_folder: c:\projects\idyntree
 
 environment:
   Eigen3_DIR:          C:/Program Files (x86)/Eigen/lib/cmake/eigen3/
+  CMAKE_PREFIX_PATH:   c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\;c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\debug
 
 os:
  - Visual Studio 2015
  - Visual Studio 2017
 
 install:
-
+  # download and install libxml2 
+  - ps: Start-FileDownload https://github.com/robotology-playground/robotology-additional-dependencies/releases/download/v0.1.0/robotology-additional-dependencies-0.1.0-v14-x86.zip -FileName c:\projects\rad.zip -Timeout 300000
+  - ps: Expand-Archive c:\projects\rad.zip -DestinationPath c:\projects\rad
+  # Check env variables 
+  - cmd: echo CMAKE_PREFIX_PATH %CMAKE_PREFIX_PATH%
+  - cmd: set PATH=%PATH%;c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\bin;c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\debug\bin
+  - cmd: echo PATH %PATH%
 build:
 
 build_script:

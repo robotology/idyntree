@@ -48,8 +48,7 @@
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/PredictSensorsMeasurements.h>
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
-#include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 #include <iDynTree/yarp/YARPConversions.h>
 #include <iDynTree/skinDynLibConversions.h>
@@ -263,7 +262,7 @@ bool addSingleContact(iCub::iDynTree::TorqueEstimationTree & estimation_model,
 }
 
 void getJointSerializationFromDynTree(DynTree & dynTree,
-                                      iDynTree::Model & model,
+                                      const iDynTree::Model & model,
                                       std::vector<std::string>& joints)
 {
     joints.resize(0);
@@ -304,19 +303,25 @@ int main(int argc, char ** argv)
     iCub::iDynTree::TorqueEstimationTree * icub_model_estimation =
         new iCub::iDynTree::TorqueEstimationTree(urdf_filename,dof_serialization,ft_serialization,"imu_frame");
 
-    // Creating the new iDynTree based data structures
-    iDynTree::Model fullModel, model;
-    iDynTree::modelFromURDF(urdf_filename,fullModel);
+    // Creating a model from file just to get the joints
+    iDynTree::ModelLoader preliminaryLoader;
+    preliminaryLoader.loadModelFromFile(urdf_filename);
+
     // Get the same serialization of joints used in iDynTree
     std::vector<std::string> usedJoints;
-    getJointSerializationFromDynTree(*icub_model_estimation,fullModel,usedJoints);
-    bool ok = iDynTree::createReducedModel(fullModel,usedJoints,model);
+    getJointSerializationFromDynTree(*icub_model_estimation,preliminaryLoader.model(),usedJoints);
+
+    // Get model with exactly the same serialization of the legacy DynTree class
+    iDynTree::ModelLoader loader;
+    bool ok = loader.loadReducedModelFromFile(urdf_filename, usedJoints);
+
     if( !ok )
     {
         std::cerr << "Error in creating reduced model" << std::endl;
         return EXIT_FAILURE;
     }
 
+    iDynTree::Model model = loader.model();
 
     assert(model.getNrOfDOFs() == icub_model_estimation->getNrOfDOFs());
 
@@ -332,8 +337,7 @@ int main(int argc, char ** argv)
     ASSERT_EQUAL_DOUBLE(ok,true);
 
     // Create sensors list with FT sensors (TODO)
-    iDynTree::SensorsList sensors;
-    iDynTree::sensorsFromURDF(urdf_filename,model,sensors);
+    iDynTree::SensorsList sensors = loader.sensors();
     sensors.setSerialization(iDynTree::SIX_AXIS_FORCE_TORQUE,ft_serialization);
 
     // Create submodel decomposition

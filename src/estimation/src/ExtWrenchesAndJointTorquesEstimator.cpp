@@ -30,8 +30,7 @@
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 #include <iDynTree/Sensors/PredictSensorsMeasurements.h>
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
-#include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
 
@@ -119,56 +118,28 @@ bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model
 }
 
 bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFile(const std::string filename,
-                                                                      const std::string /*filetype*/)
+                                                                      const std::string filetype)
 {
-    Model _model;
-    SensorsList _sensors;
-
-    bool parsingCorrect = false;
-
-    parsingCorrect = modelFromURDF(filename,_model);
-
-    if( !parsingCorrect )
-    {
-        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFile","Error in parsing model from URDF.");
+    ModelLoader loader;
+    if (!loader.loadModelFromFile(filename, filetype)) {
+        reportError("ExtWrenchesAndJointTorquesEstimator", "loadModelAndSensorsFromFile", "Error in parsing from URDF.");
         return false;
     }
-
-    parsingCorrect = sensorsFromURDF(filename,_model,_sensors);
-
-    if( !parsingCorrect )
-    {
-        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFile","Error in parsing sensors from URDF.");
-        return false;
-    }
-
-    return setModelAndSensors(_model,_sensors);
+    return setModelAndSensors(loader.model(), loader.sensors());
 }
 
 bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifiedDOFs(const std::string filename,
                                                                                        const std::vector< std::string >& consideredDOFs,
-                                                                                       const std::string /*filetype*/)
+                                                                                       const std::string filetype)
 {
-    Model _modelFull;
-    SensorsList _sensorsFull;
-
-    bool parsingCorrect = false;
-
-    parsingCorrect = modelFromURDF(filename,_modelFull);
-
-    if( !parsingCorrect )
-    {
-        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFileWithSpecifiedDOFs","Error in parsing model from URDF.");
+    ModelLoader loader;
+    if (!loader.loadModelFromFile(filename, filetype)) {
+        reportError("ExtWrenchesAndJointTorquesEstimator", "loadModelAndSensorsFromFileWithSpecifiedDOFs", "Error in parsing from URDF.");
         return false;
     }
 
-    parsingCorrect = sensorsFromURDF(filename,_modelFull,_sensorsFull);
-
-    if( !parsingCorrect )
-    {
-        reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFileWithSpecifiedDOFs","Error in parsing sensors from URDF.");
-        return false;
-    }
+    Model _modelFull = loader.model();
+    SensorsList _sensorsFull = loader.sensors();
 
     // We need to create a reduced model, inclusing only the consideredDOFs and the joints used by the FT sensors
     std::vector< std::string > consideredJoints = consideredDOFs;
@@ -177,22 +148,22 @@ bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifi
     std::vector< std::string > ftJointNames;
     getFTJointNames(_sensorsFull,ftJointNames);
 
-    for(size_t i=0; i < ftJointNames.size(); i++)
+    for (size_t i = 0; i < ftJointNames.size(); i++)
     {
         // Only add an F/T sensor joint if it is not already in consideredDOFs
-        if( std::find(consideredJoints.begin(),consideredJoints.end(),ftJointNames[i]) == consideredJoints.end() )
-	{
-	    consideredJoints.push_back(ftJointNames[i]);
-	}
+        if (std::find(consideredJoints.begin(), consideredJoints.end(), ftJointNames[i]) == consideredJoints.end())
+        {
+            consideredJoints.push_back(ftJointNames[i]);
+        }
     }
 
 
     Model _modelReduced;
     SensorsList _sensorsReduced;
 
-    parsingCorrect = createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
+    bool parsingCorrect = createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
 
-    if( !parsingCorrect )
+    if (!parsingCorrect)
     {
         reportError("ExtWrenchesAndJointTorquesEstimator","loadModelAndSensorsFromFileWithSpecifiedDOFs","Error in creating reduced model and sensors.");
         return false;

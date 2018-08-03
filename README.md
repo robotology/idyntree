@@ -81,7 +81,7 @@ For more info on how to modify the matlab bindings, see https://github.com/robot
 Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
 
 ## Documentation
-The documentation for the complete API of iDynTree is automatically extracted from the C++ code using [Doxygen](www.doxygen.org),
+The documentation for the complete API of iDynTree is automatically extracted from the C++ code using [Doxygen](http://www.doxygen.org),
 and is available at the URL : [http://wiki.icub.org/codyco/dox/html/idyntree/html/](http://wiki.icub.org/codyco/dox/html/idyntree/html/).
 
 ## Announcements 

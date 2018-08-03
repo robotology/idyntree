@@ -87,6 +87,18 @@ namespace iDynTree
     void reportWarning(const char * className, const char* methodName, const char * errorMessage);
 
     /**
+     * Helper function for reporting information messages in iDynTree
+     *
+     */
+    void reportInfo(const char* className, const char* methodName, const char* message);
+    
+    /**
+     * Helper function for reporting debug messages in iDynTree
+     *
+     */
+    void reportDebug(const char* className, const char* methodName, const char* message);
+    
+    /**
      * Convert a double from degrees to radians.
      */
     double deg2rad(const double valueInDeg);

@@ -7,11 +7,10 @@
  * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  * at your option.
  */
-# include <iDynTree/ModelIO/URDFGenericSensorsImport.h>
 # include <iDynTree/Sensors/Sensors.h>
 #include "testModels.h"
 #include <iDynTree/Model/Model.h>
-#include <iDynTree/ModelIO/URDFModelImport.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/ModelIO/URDFDofsImport.h>
 
 #include <iDynTree/Core/TestUtils.h>
@@ -32,15 +31,14 @@ void checkURDF(std::string fileName,
               )
 {
     std::cout<<"Tying to load model from URDF"<<std::endl;
-    Model model;
     // load URDF model
-    bool ok = modelFromURDF(fileName,model);
-    ASSERT_EQUAL_DOUBLE(ok,true);
+    ModelLoader loader;
+    bool ok = loader.loadModelFromFile(fileName);
+    ASSERT_IS_TRUE(ok);
+    Model model = loader.model();
     std::cout<<"Model "<<fileName.c_str()<<" created with :"<<model.getNrOfDOFs()<<" DoFs"<<std::endl;
 
-    iDynTree::SensorsList sensorList;
-    ok = iDynTree::sensorsFromURDF(fileName,sensorList);
-    ASSERT_EQUAL_DOUBLE(ok,true);
+    iDynTree::SensorsList sensorList = loader.sensors();
     std::cout<<"Sensor list created from URDF. num accel : "<<sensorList.getNrOfSensors(ACCELEROMETER)<<", num gyro : "<<sensorList.getNrOfSensors(iDynTree::GYROSCOPE)<<std::endl;
 
     std::cout<<"Accelerometer Sensors in URDF :\n";

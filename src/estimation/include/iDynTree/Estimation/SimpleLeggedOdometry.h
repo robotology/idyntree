@@ -121,26 +121,31 @@ public:
     /**
      * Load model from file.
      *
+     * @deprecated Use iDynTree::ModelLoader::loadModelFromFile and call setModel on the parsed Model
+     *
      * @param[in] filename path to the file to load.
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
      * @return true if all went well (files were correctly loaded and consistent), false otherwise.
      *
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Use iDynTree::ModelLoader::loadModelFromFile and call setModel on the parsed Model")
     bool loadModelFromFile(const std::string filename, const std::string filetype="");
 
     /**
      * Load model from file, specifieng the dof considered for the estimation.
+     *
+     * @deprecated Use iDynTree::ModelLoader::loadReducedModelFromFile and call setModel on the parsed Model
+     *
+     * @note this will create e a reduced model only with the joint specified in consideredDOFs
      *
      * @param[in] filename path to the file to load.
      * @param[in] consideredDOFs list of dof to consider in the model.
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
      * @return true if all went well (files were correctly loaded and consistent), false otherwise.
-     *
-     *
-     * \note this will create e a reduced model only with the joint specified in consideredDOFs
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Use iDynTree::ModelLoader::loadReducedModelFromFile and call setModel on the parsed Model")
     bool loadModelFromFileWithSpecifiedDOFs(const std::string filename,
                                             const std::vector<std::string> & consideredDOFs,
                                             const std::string filetype="");
