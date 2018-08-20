@@ -28,7 +28,7 @@ namespace iDynTree {
 
         class TimeVaryingGradient : public TimeVaryingVector {
             MatrixDynSize m_selectorMatrix, m_weightMatrix;
-            MatrixDynSize m_subMatrix; //weightMatrix times selector
+            MatrixDynSize m_hessianMatrix, m_gradientSubMatrix;
             std::shared_ptr<TimeVaryingVector> m_desiredTrajectory;
             VectorDynSize m_outputVector;
         public:
@@ -38,7 +38,10 @@ namespace iDynTree {
             {
                 m_weightMatrix.resize(m_selectorMatrix.rows(), m_selectorMatrix.rows());
                 toEigen(m_weightMatrix).setIdentity();
-                m_subMatrix = /*m_pimpl->stateWeight * */ m_selectorMatrix;
+                m_hessianMatrix.resize(m_selectorMatrix.cols(), m_selectorMatrix.cols());
+                toEigen(m_hessianMatrix) = toEigen(m_selectorMatrix).transpose() * toEigen(m_selectorMatrix);
+                m_gradientSubMatrix.resize(m_selectorMatrix.rows(), m_selectorMatrix.cols());
+                toEigen(m_gradientSubMatrix) = -1 * toEigen(m_selectorMatrix);
                 m_outputVector.resize(m_selectorMatrix.cols());
                 m_outputVector.zero();
             }
@@ -67,7 +70,8 @@ namespace iDynTree {
                 }
 
                 m_weightMatrix = weights;
-                toEigen(m_subMatrix) = toEigen(m_weightMatrix) * toEigen(m_selectorMatrix);
+                toEigen(m_hessianMatrix) = toEigen(m_selectorMatrix).transpose() * toEigen(m_weightMatrix) * toEigen(m_selectorMatrix);
+                toEigen(m_gradientSubMatrix) = -0.5 * (toEigen(m_weightMatrix).transpose() * toEigen(m_selectorMatrix) + toEigen(m_weightMatrix) * toEigen(m_selectorMatrix));
 
                 return true;
             }
@@ -86,7 +90,7 @@ namespace iDynTree {
                     return m_outputVector;
                 }
 
-                if (desiredPoint.size() != m_subMatrix.rows()) {
+                if (desiredPoint.size() != m_gradientSubMatrix.rows()) {
                     std::ostringstream errorMsg;
                     errorMsg << "The specified desired point at time: " << time << " has size not matching the specified selector.";
                     reportError("TimeVaryingGradient", "getObject", errorMsg.str().c_str());
@@ -95,7 +99,7 @@ namespace iDynTree {
                     return m_outputVector;
                 }
 
-                toEigen(m_outputVector) = -1.0 * toEigen(desiredPoint).transpose() * toEigen(m_subMatrix);
+                toEigen(m_outputVector) = toEigen(desiredPoint).transpose() * toEigen(m_gradientSubMatrix);
 
                 isValid = true;
                 return m_outputVector;
@@ -107,7 +111,8 @@ namespace iDynTree {
                     return false;
                 }
                 m_selectorMatrix = selector;
-                toEigen(m_subMatrix) = toEigen(m_weightMatrix) * toEigen(m_selectorMatrix);
+                toEigen(m_hessianMatrix) = toEigen(m_selectorMatrix).transpose() * toEigen(m_weightMatrix) * toEigen(m_selectorMatrix);
+                toEigen(m_gradientSubMatrix) = -0.5 * (toEigen(m_weightMatrix).transpose() * toEigen(m_selectorMatrix) + toEigen(m_weightMatrix) * toEigen(m_selectorMatrix));
 
                 return true;
             }
@@ -116,8 +121,8 @@ namespace iDynTree {
                 return m_selectorMatrix;
             }
 
-            const MatrixDynSize& subMatrix() {
-                return m_subMatrix;
+            const MatrixDynSize& hessianMatrix() {
+                return m_hessianMatrix;
             }
 
             const MatrixDynSize& weightMatrix() {
@@ -191,7 +196,7 @@ namespace iDynTree {
                     stateGradient = std::make_shared<TimeVaryingGradient>(stateSelector);
                     stateHessian = std::make_shared<TimeInvariantMatrix>();
                     stateHessian->get().resize(stateSelector.cols(), stateSelector.cols());
-                    toEigen(stateHessian->get()) = toEigen(stateGradient->selector()).transpose() * toEigen(stateGradient->subMatrix());
+                    stateHessian->get() = stateGradient->hessianMatrix();
                     stateCostBias = std::make_shared<TimeVaryingBias>(stateGradient);
                 } else {
                     stateGradient = nullptr;
@@ -201,7 +206,7 @@ namespace iDynTree {
                     controlGradient = std::make_shared<TimeVaryingGradient>(controlSelector);
                     controlHessian = std::make_shared<TimeInvariantMatrix>();
                     controlHessian->get().resize(controlSelector.cols(), controlSelector.cols());
-                    toEigen(controlHessian->get()) = toEigen(controlGradient->selector()).transpose() * toEigen(controlGradient->subMatrix());
+                    controlHessian->get() = controlGradient->hessianMatrix();
                     controlCostBias = std::make_shared<TimeVaryingBias>(controlGradient);
                 } else {
                     controlGradient = nullptr;
@@ -310,7 +315,7 @@ namespace iDynTree {
                 return false;
             }
 
-            if (desiredPoint.size() != (m_pimpl->stateGradient->subMatrix().rows())) {
+            if (desiredPoint.size() != (m_pimpl->stateGradient->selector().rows())) {
                 reportError("L2NormCost", "setStateDesiredPoint", "The desiredPoint size do not match the dimension of the specified selector.");
                 return false;
             }
@@ -361,7 +366,7 @@ namespace iDynTree {
                 return false;
             }
 
-            if (desiredPoint.size() != (m_pimpl->controlGradient->subMatrix().rows())) {
+            if (desiredPoint.size() != (m_pimpl->controlGradient->selector().rows())) {
                 reportError("L2NormCost", "setControlDesiredPoint", "The desiredPoint size do not match the dimension of the specified selector.");
                 return false;
             }
@@ -391,7 +396,7 @@ namespace iDynTree {
                 reportError("L2NormCost", "updatStateSelector", "Error when updating state selector.");
                 return false;
             }
-            toEigen(m_pimpl->stateHessian->get()) = toEigen(m_pimpl->stateGradient->selector()).transpose() * toEigen(m_pimpl->stateGradient->subMatrix());
+            m_pimpl->stateHessian->get() = m_pimpl->stateGradient->hessianMatrix();
             return true;
         }
 
@@ -401,7 +406,7 @@ namespace iDynTree {
                 reportError("L2NormCost", "updatControlSelector", "Error when updating state selector.");
                 return false;
             }
-            toEigen(m_pimpl->controlHessian->get()) = toEigen(m_pimpl->controlGradient->selector()).transpose() * toEigen(m_pimpl->controlGradient->subMatrix());
+            m_pimpl->controlHessian->get() = m_pimpl->controlGradient->hessianMatrix();
             return true;
         }
 
