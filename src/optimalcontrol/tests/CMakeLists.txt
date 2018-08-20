@@ -22,7 +22,7 @@ if (IDYNTREE_USES_IPOPT)
     add_oc_test(OptimalControlIpopt)
 endif()
 
-if (OC_USE_OSQP)
+if (IDYNTREE_USES_OSQPEIGEN)
     add_oc_test(LinearOCOsqp)
 endif()
 

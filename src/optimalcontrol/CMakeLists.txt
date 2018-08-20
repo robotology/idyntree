@@ -72,20 +72,11 @@ if (IDYNTREE_USES_IPOPT)
     list(APPEND INCLUDE_LIST ${IPOPT_INCLUDE_DIRS})
 endif()
 
-find_package(OsqpEigen QUIET)
-if (${OsqpEigen_FOUND})
-    option(OC_USE_OSQP "Use OSQP as a solver in optimalcontrol." ON)
-else()
-    set(OC_USE_OSQP OFF)
-endif()
-
-if (OC_USE_OSQP)
+if (IDYNTREE_USES_OSQPEIGEN)
     list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/OsqpInterface.h)
     list(APPEND OPTIMIZERS_SOURCES src/OsqpInterface.cpp)
     list(APPEND LINK_LIST   OsqpEigen::OsqpEigen osqp::osqp)
 endif()
-
-
 
 
 add_library(${libraryname} ${PUBLIC_HEADERS} ${INTEGRATORS_PUBLIC_HEADERS} ${OCSOLVERS_PUBLIC_HEADERS} ${OPTIMIZERS_HEADERS} ${SOURCES} ${OPTIMIZERS_SOURCES})

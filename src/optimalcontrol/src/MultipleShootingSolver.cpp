@@ -326,7 +326,7 @@ namespace iDynTree {
                 if ((lastControlMeshIterator->origin == MeshPointOrigin::LastPoint()) && (m_integrator->info().isExplicit())) {//the last control input would have no effect
                     controlMeshes--;
                     setIgnoredMesh(lastControlMeshIterator);
-                    lastControlMeshIterator--;
+                    --lastControlMeshIterator;
                 }
 
                 newMeshPoint.origin = MeshPointOrigin::LastPoint();
