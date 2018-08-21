@@ -20,10 +20,10 @@ env:
   global:
     - TRAVIS_CMAKE_GENERATOR="Unix Makefiles"
   matrix:
-    - TRAVIS_BUILD_TYPE="Release" UBUNTU="xenial"
-    - TRAVIS_BUILD_TYPE="Debug" UBUNTU="xenial"
-    - TRAVIS_BUILD_TYPE="Release" UBUNTU="bionic"
-    - TRAVIS_BUILD_TYPE="Debug" UBUNTU="bionic"
+    - TRAVIS_BUILD_TYPE="Release" UBUNTU="xenial" VALGRIND_TESTS="ON" COMPILE_BINDINGS="ON" FULL_DEPS="ON"
+    - TRAVIS_BUILD_TYPE="Debug" UBUNTU="xenial" VALGRIND_TESTS="ON" COMPILE_BINDINGS="ON" FULL_DEPS="ON"
+    - TRAVIS_BUILD_TYPE="Release" UBUNTU="bionic" VALGRIND_TESTS="ON" COMPILE_BINDINGS="ON" FULL_DEPS="ON"
+    - TRAVIS_BUILD_TYPE="Debug" UBUNTU="bionic" VALGRIND_TESTS="ON" COMPILE_BINDINGS="ON" FULL_DEPS="ON"
 
 # ===================
 # STAGE: test (linux)
@@ -43,6 +43,9 @@ script:
       --env TRAVIS_BUILD_DIR \
       --env TRAVIS_BUILD_TYPE \
       --env TRAVIS_CMAKE_GENERATOR \
+      --env VALGRIND_TESTS \
+      --env COMPILE_BINDINGS \
+      --env FULL_DEPS \
       ubuntu:$UBUNTU \
       sh .ci/install_debian_and_script.sh
 
@@ -86,11 +89,17 @@ jobs:
       env:
         TRAVIS_CMAKE_GENERATOR="Xcode"
         TRAVIS_BUILD_TYPE="Debug"
+        VALGRIND_TESTS="OFF"
+        COMPILE_BINDINGS="OFF"
+        FULL_DEPS="OFF"
     - <<: *osx_template
       compiler: clang
       env:
         TRAVIS_CMAKE_GENERATOR="Unix Makefiles"
         TRAVIS_BUILD_TYPE="Debug"
+        VALGRIND_TESTS="OFF"
+        COMPILE_BINDINGS="OFF"
+        FULL_DEPS="OFF"
 
 
 notifications:
