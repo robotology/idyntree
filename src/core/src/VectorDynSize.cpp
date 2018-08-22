@@ -95,7 +95,7 @@ VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
     return *this;
 }
 
-VectorDynSize &VectorDynSize::operator=(const Span<double> &vec)
+VectorDynSize &VectorDynSize::operator=(const Span<const double> &vec)
 {
     // if the size don't match, reallocate the data
     if( this->m_size != vec.size() )
@@ -109,7 +109,7 @@ VectorDynSize &VectorDynSize::operator=(const Span<double> &vec)
     // Copy data if the size is not 0
     if( this->m_size > 0 )
     {
-        std::memcpy(this->m_data,vec.data(),this->m_size*sizeof(double));
+        std::memcpy(this->m_data, vec.data(), this->m_size*sizeof(double));
     }
 
     return *this;
