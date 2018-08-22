@@ -30,6 +30,8 @@ namespace iDynTree
 {
     //Useful typedefs
     //TODO: change methods below to use these typedefs
+    typedef Eigen::Map<Eigen::VectorXd> iDynTreeEigenVector;
+    typedef Eigen::Map<Eigen::VectorXd> iDynTreeEigenConstVector;
     typedef Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> iDynTreeEigenMatrix;
     typedef const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> iDynTreeEigenConstMatrix;
     typedef Eigen::Map<iDynTreeEigenMatrix> iDynTreeEigenMatrixMap;
@@ -59,6 +61,16 @@ inline Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::Row
 inline Eigen::Map<const Eigen::VectorXd> toEigen(const VectorDynSize & vec)
 {
     return Eigen::Map<const Eigen::VectorXd>(vec.data(),vec.size());
+}
+
+inline Eigen::Map<const Eigen::VectorXd> toEigen(Span<const double> vec)
+{
+    return Eigen::Map<const Eigen::VectorXd>(vec.data(),vec.size());
+}
+
+inline Eigen::Map<Eigen::VectorXd> toEigen(iDynTree::Span<double> vec)
+{
+    return Eigen::Map<Eigen::VectorXd>(vec.data(),vec.size());
 }
 
 inline Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > toEigen(const MatrixDynSize & mat)

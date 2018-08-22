@@ -9,6 +9,7 @@
  */
 
 #include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/TestUtils.h>
 
 
@@ -45,4 +46,19 @@ int main()
 
     ASSERT_EQUAL_DOUBLE(vec.size(),15);
     ASSERT_EQUAL_DOUBLE(vec.capacity(),15);
+
+
+    VectorDynSize test1, testToSpan;
+    testToSpan.resize(15);
+    iDynTree::getRandomVector(testToSpan);
+
+    test1 = iDynTree::make_span(testToSpan);
+    ASSERT_EQUAL_VECTOR(test1, testToSpan);
+
+    iDynTree::Vector16 test2, check;
+    iDynTree::getRandomVector(test2);
+    check = iDynTree::make_span(test2);
+    ASSERT_EQUAL_VECTOR(test2, check);
+
+    return EXIT_SUCCESS;
 }

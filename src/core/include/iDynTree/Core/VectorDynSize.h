@@ -14,6 +14,7 @@
 
 
 #include <string>
+#include <iDynTree/Core/Span.h>
 
 namespace iDynTree
 {
@@ -97,6 +98,17 @@ namespace iDynTree
         VectorDynSize & operator=(const VectorDynSize& vec);
 
         /**
+         * Copy assignment operator.
+         *
+         * The vector will be resize to match the
+         * size of the argument, and the data will
+         * then be copied.
+         *
+         * \warning performs dynamic memory allocation operations
+         */
+        VectorDynSize & operator=(const Span<const double>& vec);
+
+        /**
          * @name Vector interface methods.
          * Methods exposing a vector-like interface to PositionRaw.
          */
@@ -175,6 +187,17 @@ namespace iDynTree
          */
         void fillBuffer(double * buf) const;
 
+        /** Typedefs to enable make_span.
+         */
+        ///@{
+        typedef double value_type;
+
+        typedef std::allocator<double> allocator_type;
+
+        typedef typename std::allocator_traits<std::allocator<double>>::pointer pointer;
+
+        typedef typename std::allocator_traits<std::allocator<double>>::const_pointer const_pointer;
+        ///@}
 
         /** @name Output helpers.
          *  Output helpers.
