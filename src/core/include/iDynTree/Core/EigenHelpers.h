@@ -61,9 +61,14 @@ inline Eigen::Map<const Eigen::VectorXd> toEigen(const VectorDynSize & vec)
     return Eigen::Map<const Eigen::VectorXd>(vec.data(),vec.size());
 }
 
-inline Eigen::Map<const Eigen::VectorXd> toEigen(const Span<double> & vec)
+inline Eigen::Map<const Eigen::VectorXd> toEigen(Span<const double> vec)
 {
     return Eigen::Map<const Eigen::VectorXd>(vec.data(),vec.size());
+}
+
+inline Eigen::Map<Eigen::VectorXd> toEigen(iDynTree::Span<double> vec)
+{
+    return Eigen::Map<Eigen::VectorXd>(vec.data(),vec.size());
 }
 
 inline Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > toEigen(const MatrixDynSize & mat)
