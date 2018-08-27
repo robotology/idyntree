@@ -86,7 +86,7 @@ namespace iDynTree
          *  \begin{bmatrix} \omega \times  & 0 \\
          *                  v \times  & \omega \times
          *  \end{bmatrix}
-         *  \begin{bmatrix} m & -mc\times \\
+         *  \begin{bmatrix} m 1_3 & -mc\times \\
          *                  mc\times & I
          *  \end{bmatrix}
          *  \begin{bmatrix} v \\ \omega \end{bmatrix} = \\
