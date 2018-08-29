@@ -18,13 +18,71 @@
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/Span.h>
 #include <cassert>
-
 #include <Eigen/Dense>
 #include <iDynTree/Core/EigenHelpers.h>
 
 namespace iDynTree {
     namespace optimalcontrol {
+
+    //
+    // Implementation of selector matrix
+    //
+        class Selector {
+        protected:
+            VectorDynSize m_selected;
+        public:
+            Selector(unsigned int selectedSize) : m_selected(selectedSize) { }
+
+            virtual ~Selector();
+
+            virtual const VectorDynSize& select(const VectorDynSize& fullVector) = 0;
+
+            unsigned int size() const {
+                return m_selected.size();
+            }
+
+        };
+        Selector::~Selector(){}
+
+        class IndexSelector : public Selector {
+            IndexRange m_selectedIndex;
+        public:
+            IndexSelector(const IndexRange& selectedRange)
+                : Selector(static_cast<unsigned int>(selectedRange.size))
+                , m_selectedIndex(selectedRange) {}
+
+            ~IndexSelector() override;
+
+            virtual const VectorDynSize& select(const VectorDynSize& fullVector) final
+            {
+                m_selected = make_span(fullVector).subspan(m_selectedIndex.offset, m_selectedIndex.size);
+                return m_selected;
+            }
+        };
+        IndexSelector::~IndexSelector(){}
+
+        class MatrixSelector : public Selector {
+            MatrixDynSize m_selectorMatrix;
+        public:
+            MatrixSelector(const MatrixDynSize& selectorMatrix)
+                : Selector(selectorMatrix.rows())
+                , m_selectorMatrix(selectorMatrix) {}
+
+            ~MatrixSelector() override;
+
+            virtual const VectorDynSize& select(const VectorDynSize& fullVector) final
+            {
+                iDynTree::toEigen(m_selected) = iDynTree::toEigen(m_selectorMatrix) * iDynTree::toEigen(fullVector);
+                return m_selected;
+            }
+        };
+        MatrixSelector::~MatrixSelector(){}
+
+    //
+    // Implementation of TimeVaryingGradient
+    //
 
         class TimeVaryingGradient : public TimeVaryingVector {
             MatrixDynSize m_selectorMatrix, m_weightMatrix;
@@ -135,69 +193,28 @@ namespace iDynTree {
         };
         TimeVaryingGradient::~TimeVaryingGradient() {};
 
-        class TimeVaryingBias : public TimeVaryingDouble {
-            std::shared_ptr<TimeVaryingGradient> m_associatedGradient;
-            double m_output;
-        public:
-            TimeVaryingBias(std::shared_ptr<TimeVaryingGradient> associatedGradient)
-            :m_associatedGradient(associatedGradient)
-            { }
+        //
+        // End of implementation of TimeVaryingGradient
+        //
 
-            ~TimeVaryingBias() override;
-
-            virtual const double& get(double time, bool &isValid) override{
-                if (!(m_associatedGradient)) {
-                    isValid = false;
-                    m_output = 0.0;
-                    return m_output;
-                }
-
-                if (!(m_associatedGradient->desiredTrajectory())) {
-                    isValid = true;
-                    m_output = 0.0;
-                    return m_output;
-                }
-
-                bool ok = false;
-                const VectorDynSize &desiredPoint = m_associatedGradient->desiredTrajectory()->get(time, ok);
-
-                if (!ok) {
-                    isValid = false;
-                    m_output = 0.0;
-                    return m_output;
-                }
-
-                if (desiredPoint.size() != m_associatedGradient->weightMatrix().rows()) {
-                    std::ostringstream errorMsg;
-                    errorMsg << "The specified desired point at time: " << time << " has size not matching the specified weight matrix.";
-                    reportError("TimeVaryingBias", "getObject", errorMsg.str().c_str());
-                    isValid = false;
-                    m_output = 0.0;
-                    return m_output;
-                }
-
-                isValid = true;
-                m_output = 0.5 * toEigen(desiredPoint).transpose() * toEigen(m_associatedGradient->weightMatrix()) * toEigen(desiredPoint);
-                return m_output;
-            }
-        };
-        TimeVaryingBias::~TimeVaryingBias() { }
-
-
+        //
+        // Definition of pimpl
+        //
         class L2NormCost::L2NormCostImplementation {
             public:
             std::shared_ptr<TimeVaryingGradient> stateGradient = nullptr, controlGradient = nullptr;
             std::shared_ptr<TimeInvariantMatrix> stateHessian, controlHessian;
-            std::shared_ptr<TimeVaryingBias> stateCostBias, controlCostBias;
-            bool addConstantPart = false;
+            std::shared_ptr<Selector> stateSelector_ptr, controlSelector_ptr;
+            iDynTree::VectorDynSize stateCostBuffer, controlCostBuffer;
 
-            void initialize(const MatrixDynSize &stateSelector, const MatrixDynSize &controlSelector) {
+            void initializeHessianAndGradient(const MatrixDynSize &stateSelector, const MatrixDynSize &controlSelector) {
                 if ((stateSelector.rows() != 0) && (stateSelector.cols() != 0)) {
                     stateGradient = std::make_shared<TimeVaryingGradient>(stateSelector);
                     stateHessian = std::make_shared<TimeInvariantMatrix>();
                     stateHessian->get().resize(stateSelector.cols(), stateSelector.cols());
                     stateHessian->get() = stateGradient->hessianMatrix();
-                    stateCostBias = std::make_shared<TimeVaryingBias>(stateGradient);
+                    stateCostBuffer.resize(stateSelector.rows());
+                    stateCostBuffer.zero();
                 } else {
                     stateGradient = nullptr;
                 }
@@ -207,21 +224,49 @@ namespace iDynTree {
                     controlHessian = std::make_shared<TimeInvariantMatrix>();
                     controlHessian->get().resize(controlSelector.cols(), controlSelector.cols());
                     controlHessian->get() = controlGradient->hessianMatrix();
-                    controlCostBias = std::make_shared<TimeVaryingBias>(controlGradient);
+                    controlCostBuffer.resize(controlSelector.rows());
+                    controlCostBuffer.zero();
                 } else {
                     controlGradient = nullptr;
                 }
             }
 
-            void initialize(unsigned int stateDimension, unsigned int controlDimension) {
+            void initializeHessianAndGradient(unsigned int stateDimension, unsigned int controlDimension) {
                 MatrixDynSize stateSelector(stateDimension, stateDimension), controlSelector(controlDimension, controlDimension);
                 toEigen(stateSelector).setIdentity();
                 toEigen(controlSelector).setIdentity();
-                initialize(stateSelector, controlSelector);
+                initializeHessianAndGradient(stateSelector, controlSelector);
+            }
+
+            void initializeHessianAndGradient(const IndexRange &stateSelector, unsigned int totalStateDimension, const IndexRange &controlSelector, unsigned int totalControlDimension) {
+                MatrixDynSize stateSelectorMatrix, controlSelectorMatrix;
+
+                if (stateSelector.isValid()) {
+                    stateSelectorMatrix.resize(static_cast<unsigned int>(stateSelector.size), totalStateDimension);
+                    iDynTree::toEigen(stateSelectorMatrix).block(0, stateSelector.offset, stateSelector.size, stateSelector.size).setIdentity();
+                } else {
+                    stateSelectorMatrix.resize(0,0);
+                }
+
+                if (controlSelector.isValid()) {
+                    controlSelectorMatrix.resize(static_cast<unsigned int>(controlSelector.size), totalControlDimension);
+                    iDynTree::toEigen(controlSelectorMatrix).block(0, controlSelector.offset, controlSelector.size, controlSelector.size).setIdentity();
+                } else {
+                    controlSelectorMatrix.resize(0,0);
+                }
+
+                initializeHessianAndGradient(stateSelectorMatrix, controlSelectorMatrix);
             }
 
         };
 
+        //
+        //End of definition of pimpl
+        //
+
+        //
+        //Implementation of L2NormCost
+        //
 
         L2NormCost::L2NormCost(const std::string &name, unsigned int stateDimension, unsigned int controlDimension)
         : QuadraticLikeCost(name)
@@ -229,16 +274,24 @@ namespace iDynTree {
         {
             assert(m_pimpl);
 
-            m_pimpl->initialize(stateDimension, controlDimension);
+            m_pimpl->initializeHessianAndGradient(stateDimension, controlDimension);
 
             if (m_pimpl->stateGradient) {
                 m_timeVaryingStateHessian = m_pimpl->stateHessian;
                 m_timeVaryingStateGradient = m_pimpl->stateGradient;
+                IndexRange stateRange;
+                stateRange.offset = 0;
+                stateRange.size = stateDimension;
+                m_pimpl->stateSelector_ptr = std::make_shared<IndexSelector>(stateRange);
             }
 
             if (m_pimpl->controlGradient) {
                 m_timeVaryingControlHessian = m_pimpl->controlHessian;
                 m_timeVaryingControlGradient = m_pimpl->controlGradient;
+                IndexRange controlRange;
+                controlRange.offset = 0;
+                controlRange.size = stateDimension;
+                m_pimpl->controlSelector_ptr = std::make_shared<IndexSelector>(controlRange);
             }
         }
 
@@ -246,16 +299,37 @@ namespace iDynTree {
         : QuadraticLikeCost(name)
         , m_pimpl(new L2NormCostImplementation)
         {
-            m_pimpl->initialize(stateSelector, controlSelector);
+            m_pimpl->initializeHessianAndGradient(stateSelector, controlSelector);
 
             if (m_pimpl->stateGradient) {
                 m_timeVaryingStateHessian = m_pimpl->stateHessian;
                 m_timeVaryingStateGradient = m_pimpl->stateGradient;
+                m_pimpl->stateSelector_ptr = std::make_shared<MatrixSelector>(stateSelector);
             }
 
             if (m_pimpl->controlGradient) {
                 m_timeVaryingControlHessian = m_pimpl->controlHessian;
                 m_timeVaryingControlGradient = m_pimpl->controlGradient;
+                m_pimpl->controlSelector_ptr = std::make_shared<MatrixSelector>(controlSelector);
+            }
+        }
+
+        L2NormCost::L2NormCost(const std::string &name, const IndexRange &stateSelector, unsigned int totalStateDimension, const IndexRange &controlSelector, unsigned int totalControlDimension)
+            : QuadraticLikeCost (name)
+            , m_pimpl(new L2NormCostImplementation)
+        {
+            m_pimpl->initializeHessianAndGradient(stateSelector, totalStateDimension, controlSelector, totalControlDimension);
+
+            if (m_pimpl->stateGradient) {
+                m_timeVaryingStateHessian = m_pimpl->stateHessian;
+                m_timeVaryingStateGradient = m_pimpl->stateGradient;
+                m_pimpl->stateSelector_ptr = std::make_shared<IndexSelector>(stateSelector);
+            }
+
+            if (m_pimpl->controlGradient) {
+                m_timeVaryingControlHessian = m_pimpl->controlHessian;
+                m_timeVaryingControlGradient = m_pimpl->controlGradient;
+                m_pimpl->controlSelector_ptr = std::make_shared<IndexSelector>(controlSelector);
             }
         }
 
@@ -264,27 +338,6 @@ namespace iDynTree {
             if (m_pimpl){
                 delete m_pimpl;
                 m_pimpl = nullptr;
-            }
-        }
-
-        void L2NormCost::computeConstantPart(bool addItToTheCost)
-        {
-            m_pimpl->addConstantPart = addItToTheCost;
-            if (m_pimpl->addConstantPart) {
-                if (m_pimpl->stateGradient) {
-                    m_timeVaryingStateCostBias = m_pimpl->stateCostBias;
-                }
-                if (m_pimpl->controlGradient) {
-                    m_timeVaryingControlCostBias = m_pimpl->controlCostBias;
-                }
-            } else {
-                std::shared_ptr<TimeVaryingDouble> stateBias(new TimeInvariantDouble(0.0)), controlBias(new TimeInvariantDouble(0.0));
-                if (m_pimpl->stateGradient) {
-                    m_timeVaryingStateCostBias = stateBias;
-                }
-                if (m_pimpl->controlGradient) {
-                    m_timeVaryingControlCostBias = controlBias;
-                }
             }
         }
 
@@ -407,6 +460,84 @@ namespace iDynTree {
                 return false;
             }
             m_pimpl->controlHessian->get() = m_pimpl->controlGradient->hessianMatrix();
+            return true;
+        }
+
+        bool L2NormCost::costEvaluation(double time, const VectorDynSize &state, const VectorDynSize &control, double &costValue)
+        {
+            double stateCost = 0, controlCost = 0;
+
+            bool isValid = false;
+            if (m_pimpl->stateGradient) {
+
+                if (state.size() != m_pimpl->stateGradient->selector().cols()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The state dimension is not the one expected from the specified selector.";
+                    reportError("L2NormCost", "costEvaluation", errorMsg.str().c_str());
+                    return false;
+                }
+
+                iDynTree::toEigen(m_pimpl->stateCostBuffer) = iDynTree::toEigen(m_pimpl->stateSelector_ptr->select(state));
+
+                if (m_pimpl->stateGradient->desiredTrajectory()) {
+                    const VectorDynSize& desired = m_pimpl->stateGradient->desiredTrajectory()->get(time, isValid);
+
+                    if (!isValid) {
+                        std::ostringstream errorMsg;
+                        errorMsg << "Unable to retrieve a valid desired state at time: " << time << ".";
+                        reportError("L2NormCost", "costEvaluation", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    if (m_pimpl->stateSelector_ptr->size() != desired.size()) {
+                        std::ostringstream errorMsg;
+                        errorMsg << "The desired state dimension does not match the size of the selector at time: " << time << ".";
+                        reportError("L2NormCost", "costEvaluation", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    iDynTree::toEigen(m_pimpl->stateCostBuffer) -= iDynTree::toEigen(desired);
+                }
+
+                stateCost = 0.5 * iDynTree::toEigen(m_pimpl->stateCostBuffer).transpose() * (iDynTree::toEigen(m_pimpl->stateGradient->weightMatrix()) * iDynTree::toEigen(m_pimpl->stateCostBuffer));
+            }
+
+            if (m_pimpl->controlGradient) {
+
+                if (control.size() != m_pimpl->controlGradient->selector().cols()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The control dimension is not the one expected from the specified selector.";
+                    reportError("L2NormCost", "costEvaluation", errorMsg.str().c_str());
+                    return false;
+                }
+
+                iDynTree::toEigen(m_pimpl->controlCostBuffer) = iDynTree::toEigen(m_pimpl->controlSelector_ptr->select(control));
+
+                if (m_pimpl->controlGradient->desiredTrajectory()) {
+                    const VectorDynSize& desired = m_pimpl->controlGradient->desiredTrajectory()->get(time, isValid);
+
+                    if (!isValid) {
+                        std::ostringstream errorMsg;
+                        errorMsg << "Unable to retrieve a valid desired control at time: " << time << ".";
+                        reportError("L2NormCost", "costEvaluation", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    if (m_pimpl->controlSelector_ptr->size() != desired.size()) {
+                        std::ostringstream errorMsg;
+                        errorMsg << "The desired control dimension does not match the size of the selector at time: " << time << ".";
+                        reportError("L2NormCost", "costEvaluation", errorMsg.str().c_str());
+                        return false;
+                    }
+
+                    iDynTree::toEigen(m_pimpl->controlCostBuffer) -= iDynTree::toEigen(desired);
+                }
+
+                controlCost = 0.5 * iDynTree::toEigen(m_pimpl->controlCostBuffer).transpose() * (iDynTree::toEigen(m_pimpl->controlGradient->weightMatrix()) * iDynTree::toEigen(m_pimpl->controlCostBuffer));
+            }
+
+            costValue = stateCost + controlCost;
+
             return true;
         }
 

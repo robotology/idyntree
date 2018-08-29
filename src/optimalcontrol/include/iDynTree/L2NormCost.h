@@ -20,6 +20,7 @@
 
 #include <iDynTree/QuadraticLikeCost.h>
 #include <iDynTree/TimeVaryingObject.h>
+#include <iDynTree/Core/Utils.h>
 #include <memory>
 #include <string>
 
@@ -41,15 +42,16 @@ namespace iDynTree {
 
         public:
 
-            L2NormCost(const std::string& name, unsigned int stateDimension, unsigned int controlDimension); //assume identity as selector. Set the dimension to 0 to avoid weighting either the state or the cost
+            L2NormCost(const std::string& name, unsigned int stateDimension, unsigned int controlDimension); //assume identity as selector. Set the dimension to 0 to avoid weighting either the state or the control
 
-            L2NormCost(const std::string& name, const MatrixDynSize& stateSelector, const MatrixDynSize& controlSelector); //The selector premultiplies the state and the control in the L2-norm. Set some dimension to 0 to avoid weighting either the state or the cost
+            L2NormCost(const std::string& name, const MatrixDynSize& stateSelector, const MatrixDynSize& controlSelector); //The selector premultiplies the state and the control in the L2-norm. Set some dimension to 0 to avoid weighting either the state or the control
+
+            L2NormCost(const std::string& name, const IndexRange& stateSelector, unsigned int totalStateDimension,
+                       const IndexRange& controlSelector, unsigned int totalControlDimension); //Pass an invalid range to avoid weighting either the state or the control.
 
             L2NormCost(const L2NormCost& other) = delete;
 
             ~L2NormCost();
-
-            void computeConstantPart(bool addItToTheCost = true); //by default the constant part is not added since it adds computational burden. Use it if you need the cost evaluation to be exactly equal to an L2 norm
 
             bool setStateWeight(const MatrixDynSize& stateWeights);
 
@@ -67,6 +69,10 @@ namespace iDynTree {
 
             bool updatControlSelector(const MatrixDynSize& controlSelector);
 
+            virtual bool costEvaluation(double time,
+                                        const iDynTree::VectorDynSize& state,
+                                        const iDynTree::VectorDynSize& control,
+                                        double& costValue) final;
         };
 
     }
