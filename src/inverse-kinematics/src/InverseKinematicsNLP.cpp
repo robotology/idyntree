@@ -24,9 +24,154 @@
 #include <cmath>
 
 
-
 namespace internal {
 namespace kinematics {
+
+    // Check of MatrixFixSize
+    template<typename>
+    struct is_matrixfixsize : std::false_type {};
+
+    template<unsigned row, unsigned col>
+    struct is_matrixfixsize<iDynTree::MatrixFixSize<row, col>> : std::true_type {};
+
+    //MARK: - SparsityHelper implementation
+
+    const std::vector<size_t> SparsityHelper::s_nullVector = std::vector<size_t>();
+    const std::vector<size_t>& SparsityHelper::NullIndicesVector() { return s_nullVector; }
+
+    SparsityHelper::SparsityHelper()
+    {
+        m_numberOfNonZeros.resize(1, 0);
+    }
+
+    void SparsityHelper::clear()
+    {
+        m_nonZeroIndices.clear();
+        m_numberOfNonZeros.clear();
+        m_numberOfNonZeros.resize(1, 0);
+    }
+
+    template <typename MatrixType>
+    bool SparsityHelper::addConstraintSparsityPatternTemplated(const MatrixType& newConstraint, const iDynTree::IndexRange& constraintRange)
+    {
+        static_assert(std::is_base_of<MatrixType, iDynTree::MatrixDynSize>::value
+                      || is_matrixfixsize<MatrixType>::value,
+                      "addConstraintSparsityPatternTemplated can be called only with iDynTree::MatrixFixSize and iDynTree::MatrixDynSize");
+
+        size_t constraintSize = constraintRange.size;
+        if (constraintSize == 0) return false;
+        size_t previousConstraintSize = m_nonZeroIndices.size();
+
+        // append this constraint to the current pattern
+        // Update the number of nonzeros
+        m_numberOfNonZeros.resize(1 + previousConstraintSize + constraintSize, m_numberOfNonZeros[previousConstraintSize]);
+        m_nonZeroIndices.resize(previousConstraintSize + constraintSize);
+        for (size_t row = 0; row < constraintSize; ++row) {
+            size_t numberOfNonZeros = static_cast<size_t>(iDynTree::toEigen(newConstraint).row(constraintRange.offset + row).sum());
+            m_numberOfNonZeros[1 + previousConstraintSize + row] = totalNumberOfNonZerosBeforeRow(previousConstraintSize + row) +  numberOfNonZeros;
+            assert(numberOfNonZeros == numberOfNonZerosForRow(previousConstraintSize + row));
+
+            // Update indices
+            m_nonZeroIndices[previousConstraintSize + row].reserve(numberOfNonZeros);
+            for (size_t col = 0; col < newConstraint.cols(); ++col) {
+                if (std::abs(newConstraint(constraintRange.offset + row, col) - 1) < iDynTree::DEFAULT_TOL) {
+                    m_nonZeroIndices[previousConstraintSize + row].push_back(col);
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    bool SparsityHelper::addConstraintSparsityPattern(const iDynTree::MatrixDynSize& newConstraint)
+    {
+        return addConstraintSparsityPattern(newConstraint, {0, newConstraint.rows()});
+    }
+
+    template<unsigned int nRows, unsigned int nCols>
+    bool SparsityHelper::addConstraintSparsityPattern(const iDynTree::MatrixFixSize<nRows, nCols>& newConstraint)
+    {
+        return addConstraintSparsityPattern(newConstraint, {0, newConstraint.rows()});
+    }
+
+    bool SparsityHelper::addConstraintSparsityPattern(const iDynTree::MatrixDynSize& newConstraint,
+                                                      const iDynTree::IndexRange& constraintRange)
+    {
+        return addConstraintSparsityPatternTemplated(newConstraint, constraintRange);
+    }
+
+    template<unsigned int nRows, unsigned int nCols>
+    bool SparsityHelper::addConstraintSparsityPattern(const iDynTree::MatrixFixSize<nRows, nCols>& newConstraint,
+                                                      const iDynTree::IndexRange& constraintRange)
+    {
+        return addConstraintSparsityPatternTemplated(newConstraint, constraintRange);
+    }
+
+
+
+    size_t SparsityHelper::numberOfNonZerosForRow(size_t rowIndex) const
+    {
+        if (rowIndex >= m_numberOfNonZeros.size() - 1) return 0;
+        return m_numberOfNonZeros[rowIndex + 1] - m_numberOfNonZeros[rowIndex];
+    }
+    size_t SparsityHelper::numberOfNonZeros() const { return m_numberOfNonZeros[m_numberOfNonZeros.size() - 1]; }
+    size_t SparsityHelper::totalNumberOfNonZerosBeforeRow(size_t rowIndex) const
+    {
+        if (rowIndex >= m_numberOfNonZeros.size() - 1) return 0;
+        return m_numberOfNonZeros[rowIndex];
+    }
+
+    const std::vector<size_t>& SparsityHelper::nonZeroIndicesForRow(size_t rowIndex) const
+    {
+        if (rowIndex > m_nonZeroIndices.size()) return s_nullVector;
+        return m_nonZeroIndices[rowIndex];
+    }
+
+    void SparsityHelper::assignActualMatrixValues(const iDynTree::IndexRange& constraintRange,
+                                                  const iDynTree::MatrixDynSize& fullMatrix,
+                                                  size_t fullMatrixStartingRowIndex,
+                                                  Ipopt::Number *outputBuffer)
+    {
+        for (size_t row = 0; row < constraintRange.size; ++row) {
+            // get the current row in the sparsity pattern matrix
+            const std::vector<size_t>& currentSparsityRow = nonZeroIndicesForRow(constraintRange.offset + row);
+            Ipopt::Number *startingValue = &outputBuffer[totalNumberOfNonZerosBeforeRow(constraintRange.offset + row)];
+
+            for (size_t colIndex = 0; colIndex < currentSparsityRow.size(); ++colIndex) {
+                startingValue[colIndex] = fullMatrix(fullMatrixStartingRowIndex + row, currentSparsityRow[colIndex]);
+            }
+        }
+    }
+
+    std::string SparsityHelper::toString() const
+    {
+        size_t maxCol = 0;
+        for (const auto& row : m_nonZeroIndices) {
+            if (row.empty()) continue;
+            maxCol = std::max(maxCol, 1 + *(--row.end()));
+        }
+
+        iDynTree::MatrixDynSize matrix(m_nonZeroIndices.size(), maxCol);
+        matrix.zero();
+        if (maxCol > 0) {
+            for (size_t row = 0; row < m_nonZeroIndices.size(); ++row) {
+                for (const auto& col : m_nonZeroIndices[row]) {
+                    matrix(row, col) = 1;
+                }
+            }
+        }
+        return matrix.toString();
+    }
+
+    //MARK: - InverseKinematicsNLP implementation
+
+#ifndef NDEBUG
+    bool InverseKinematicsNLP::eval_f_called = false;
+    bool InverseKinematicsNLP::eval_grad_f_called = false;
+    bool InverseKinematicsNLP::eval_g_called = false;
+    bool InverseKinematicsNLP::eval_jac_g_called = false;
+#endif
 
     //To understand IPOpt log:
     //http://www.coin-or.org/Ipopt/documentation/node36.html#sec:output
@@ -76,6 +221,151 @@ namespace kinematics {
         comInfo.comJacobian.resize(3, m_data.m_dofs + 6);
         comInfo.comJacobianAnalytical.resize(3, m_data.m_dofs + 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization));
         comInfo.projectedComJacobian.resize(m_data.m_comHullConstraint.getNrOfConstraints(), m_data.m_dofs + 3 + sizeOfRotationParametrization(m_data.m_rotationParametrization));
+
+        initializeSparsityInformation();
+    }
+
+void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
+                                                               const internal::kinematics::TransformConstraint& constraint)
+    {
+        //For each constraint compute its jacobian pattern
+        FrameInfo &constraintInfo = constraintsInfo[constraintID];
+        // iDynTree pattern
+        m_data.dynamics().getFrameFreeFloatingJacobianSparsityPattern(constraintID, constraintInfo.jacobian);
+        // Now we have to modify it depending on the orientation parametrization
+
+
+        if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
+
+            // Create sparsity of quaternion inverse and direct maps
+            // Does not have any sparsity.
+            iDynTree::MatrixFixSize<3, 4> quaternionDerivativeInverseMap;
+            iDynTree::toEigen(quaternionDerivativeInverseMap).setOnes();
+            iDynTree::MatrixFixSize<4, 3> quaternionDerivativeMap;
+            iDynTree::toEigen(quaternionDerivativeMap).setOnes();
+
+            finalJacobianBuffer.zero();
+            computeConstraintJacobian(constraintInfo.jacobian, // this has the sparsity
+                                      quaternionDerivativeMap, // this is a all 1s matrix
+                                      quaternionDerivativeInverseMap, // this is a all 1s matrix
+                                      ComputeContraintJacobianOptionLinearPart|ComputeContraintJacobianOptionAngularPart,
+                                      finalJacobianBuffer);
+
+
+        } else if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
+            //RPY sparsity parametrization for the base
+            /*  -       -
+             * | x  x  0 |
+             * | x  x  0 |
+             * | x  0  x |
+             *  -       -
+             */
+            iDynTree::Matrix3x3 RPYToOmega;
+            iDynTree::toEigen(RPYToOmega).setIdentity();
+            iDynTree::toEigen(RPYToOmega).topLeftCorner<2, 2>().setOnes();
+            RPYToOmega(2, 0) = 1.0;
+
+            // RPY sparsity parametrization for the constraint
+            /*  -       -
+             * | x  x  0 |
+             * | x  x  0 |
+             * | x  x  x |
+             *  -       -
+             */
+            iDynTree::Matrix3x3 omegaToRPYMap_target;
+            iDynTree::toEigen(omegaToRPYMap_target).setZero();
+            iDynTree::toEigen(omegaToRPYMap_target).topLeftCorner<2, 2>().setOnes();
+            iDynTree::toEigen(omegaToRPYMap_target).bottomRows<1>().setOnes();
+
+
+            computeConstraintJacobianRPY(constraintInfo.jacobian,
+                                         omegaToRPYMap_target,
+                                         RPYToOmega,
+                                         ComputeContraintJacobianOptionLinearPart|ComputeContraintJacobianOptionAngularPart,
+                                         finalJacobianBuffer);
+        }
+
+        // Now "normalize" (i.e. only 0.0 and 1.0) the result
+        for (unsigned row = 0; row < finalJacobianBuffer.rows(); ++row) {
+            for (unsigned col = 0; col < finalJacobianBuffer.cols(); ++col) {
+                finalJacobianBuffer(row, col) = std::abs(finalJacobianBuffer(row, col)) < iDynTree::DEFAULT_TOL ? 0.0 : 1.0;
+            }
+        }
+
+        //Now that we computed the actual Jacobian needed by IPOPT
+        //We have to assign it to the correct variable
+        if (constraint.hasPositionConstraint()) {
+            //Position part
+            m_jacobianSparsityHelper.addConstraintSparsityPattern(finalJacobianBuffer, {0, 3});
+        }
+        if (constraint.hasRotationConstraint()) {
+            //Orientation part
+            m_jacobianSparsityHelper.addConstraintSparsityPattern(finalJacobianBuffer, {3, sizeOfRotationParametrization(m_data.m_rotationParametrization)});
+        }
+    }
+
+    void InverseKinematicsNLP::initializeSparsityInformation()
+    {
+        m_jacobianSparsityHelper.clear();
+
+        for (TransformMap::const_iterator constraint = m_data.m_constraints.begin();
+             constraint != m_data.m_constraints.end(); ++constraint) {
+            if (constraint->second.isActive()) {
+                addSparsityInformationForConstraint(constraint->first, constraint->second);
+            }
+        }
+
+        //For COM constraint
+        //RPY parametrization for the base
+        if (m_data.m_comHullConstraint.isActive() || (m_data.isCoMTargetActive() && m_data.isCoMaConstraint())) {
+            //TODO: implement quaternion part
+            assert(m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
+
+            // CoM Jacobian is always full by definition
+            iDynTree::toEigen(comInfo.comJacobianAnalytical).setOnes();
+
+            if (m_data.m_comHullConstraint.isActive()) {
+                iDynTree::toEigen(comInfo.projectedComJacobian).setOnes();
+                m_jacobianSparsityHelper.addConstraintSparsityPattern(comInfo.projectedComJacobian);
+            }
+
+            if (m_data.isCoMTargetActive()) {
+                m_jacobianSparsityHelper.addConstraintSparsityPattern(comInfo.comJacobianAnalytical);
+            }
+        }
+
+
+        //For all targets enforced as constraints
+        for (TransformMap::const_iterator target = m_data.m_targets.begin();
+             target != m_data.m_targets.end(); ++target) {
+
+            if (target->second.isActive()) {
+                //Depending if we need position and/or orientation
+                //we have to adapt different parts of the jacobian
+                int computationOption = 0;
+                if (target->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly)
+                    computationOption |= ComputeContraintJacobianOptionLinearPart;
+                if (target->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly)
+                    computationOption |= ComputeContraintJacobianOptionAngularPart;
+
+                if (computationOption == 0) continue; // no need for further computations
+
+                addSparsityInformationForConstraint(target->first, target->second);
+            }
+
+        }
+
+
+        //Finally, the norm of the base orientation quaternion parametrization
+        if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
+            iDynTree::MatrixFixSize<1, 7> baseQuaternionConstraint;
+            baseQuaternionConstraint.zero();
+            iDynTree::toEigen(baseQuaternionConstraint).rightCols<4>().setOnes();
+            m_jacobianSparsityHelper.addConstraintSparsityPattern(baseQuaternionConstraint);
+        }
+
+
+
     }
 
     bool InverseKinematicsNLP::updateState(const Ipopt::Number * x)
@@ -257,13 +547,7 @@ namespace kinematics {
         n = m_data.m_numberOfOptimisationVariables;
         m = m_data.m_numberOfOptimisationConstraints;
 
-        nnz_jac_g = m * n;
-
-        if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
-            // constraints already considers the quaternion constraints.
-            // so the Jacobian should be changed
-            nnz_jac_g = (m - 1) * n + 4;
-        }
+        nnz_jac_g = m_jacobianSparsityHelper.numberOfNonZeros();
 
         nnz_h_lag = n * n; //this is currently ignored
 
@@ -482,11 +766,21 @@ namespace kinematics {
     {
         UNUSED_VARIABLE(n);
         if (new_x) {
+#ifndef NDEBUG
+            eval_f_called = false;
+            eval_grad_f_called = false;
+            eval_g_called = false;
+            eval_jac_g_called = false;
+#endif
             //First time we get called with this new value for the solution
             //Update the state and variables
             if (!updateState(x))
                 return false;
         }
+#ifndef NDEBUG
+        assert(!eval_f_called);
+        eval_f_called = true;
+#endif
 
         //Cost function
         //J = Sum_i^#targets  Error on rotation   + ||q - q_des ||^2 (as regularization term)
@@ -564,11 +858,21 @@ namespace kinematics {
                                            Ipopt::Number* grad_f)
     {
         if (new_x) {
+#ifndef NDEBUG
+            eval_f_called = false;
+            eval_grad_f_called = false;
+            eval_g_called = false;
+            eval_jac_g_called = false;
+#endif
             //First time we get called with this new value for the solution
             //Update the state and variables
             if (!updateState(x))
                 return false;
         }
+#ifndef NDEBUG
+        assert(!eval_grad_f_called);
+        eval_grad_f_called = true;
+#endif
 
         Eigen::Map<Eigen::VectorXd> gradient(grad_f, n);
         gradient.setZero();
@@ -697,11 +1001,21 @@ namespace kinematics {
     {
         UNUSED_VARIABLE(n);
         if (new_x) {
+#ifndef NDEBUG
+            eval_f_called = false;
+            eval_grad_f_called = false;
+            eval_g_called = false;
+            eval_jac_g_called = false;
+#endif
             //First time we get called with this new value for the solution
             //Update the state and variables
             if (!updateState(x))
                 return false;
         }
+#ifndef NDEBUG
+        assert(!eval_g_called);
+        eval_g_called = true;
+#endif
 
         Ipopt::Index index = 0;
         Eigen::Map<Eigen::VectorXd> constraints(g, m);
@@ -801,53 +1115,36 @@ namespace kinematics {
             //Define the sparsity pattern of the jacobian
             Ipopt::Index index = 0;
 
-            //As we do not have sparse jacobians for now
-            //the jacobian has the same number of rows as the constraints
-            Ipopt::Index jacobianRows = m;
-            //The only exception is the base expressed in quaternion which is sparse
-            //So we remove one line as we add it back after the dense part
-            if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
-                jacobianRows--;
-            }
-            //Fill sparsity structure of the jacobian
-            //For now the jacobian is dense, so I don't care of the pattern
-            for (Ipopt::Index row = 0; row < jacobianRows; row++) {
-                for (Ipopt::Index col = 0; col < n; col++) {
-                    //row-based indexing
-                    iRow[row * n + col] = row;
-                    jCol[row * n + col] = col;
-                    index++;
+            for (Ipopt::Index row = 0; row < m; row++) {
+                auto columnIndices = m_jacobianSparsityHelper.nonZeroIndicesForRow(row);
+                size_t numberOfPreviousNonzeros = m_jacobianSparsityHelper.totalNumberOfNonZerosBeforeRow(row);
+                for (size_t col = 0; col < columnIndices.size(); ++col) {
+                    iRow[numberOfPreviousNonzeros + col] = row;
+                    jCol[numberOfPreviousNonzeros + col] = columnIndices[col];
+                    ++index;
                 }
             }
-
-            //If the base orientation is parametrized in quaternion
-            //add the sparsity of the jacobian for that constraint
-            if (m_data.m_rotationParametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
-                iRow[index] = m - 1;
-                jCol[index] = 3;
-                index++;
-                iRow[index] = m - 1;
-                jCol[index] = 4;
-                index++;
-                iRow[index] = m - 1;
-                jCol[index] = 5;
-                index++;
-                iRow[index] = m - 1;
-                jCol[index] = 6;
-                index++;
-            }
-
             assert(nele_jac == index);
 
         } else {
+            
             //This is called every time
             if (new_x) {
+#ifndef NDEBUG
+                eval_f_called = false;
+                eval_grad_f_called = false;
+                eval_g_called = false;
+                eval_jac_g_called = false;
+#endif
                 //First time we get called with this new value for the solution
                 //Update the state and variables
                 if (!updateState(x))
                     return false;
             }
-
+#ifndef NDEBUG
+            assert(!eval_jac_g_called);
+            eval_jac_g_called = true;
+#endif
             Ipopt::Index constraintIndex = 0;
 
             for (TransformMap::const_iterator constraint = m_data.m_constraints.begin();
@@ -894,22 +1191,22 @@ namespace kinematics {
                                                      finalJacobianBuffer);
                     }
 
+
                     //Now that we computed the actual Jacobian needed by IPOPT
                     //We have to assign it to the correct variable
                     if (constraint->second.hasPositionConstraint()) {
                         //Position part
-                        Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(
-                                &values[constraintIndex * finalJacobianBuffer.cols()], 3, n);
-                        currentConstraint = toEigen(finalJacobianBuffer).topRows<3>();
+                        m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex, 3},
+                                                                          finalJacobianBuffer, 0,
+                                                                          values);
                         constraintIndex += 3;
                     }
                     if (constraint->second.hasRotationConstraint()) {
                         //Orientation part
-                        Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(
-                                &values[constraintIndex * finalJacobianBuffer.cols()],
-                                sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
-                        currentConstraint = toEigen(finalJacobianBuffer).bottomRows(
-                                sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                        m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex,
+                                                                           sizeOfRotationParametrization(m_data.m_rotationParametrization)},
+                                                                          finalJacobianBuffer, 3,
+                                                                          values);
                         constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                     }
                 }
@@ -929,14 +1226,17 @@ namespace kinematics {
                     iDynTree::toEigen(comInfo.projectedComJacobian) =
                             iDynTree::toEigen(m_data.m_comHullConstraint.A) * iDynTree::toEigen(m_data.m_comHullConstraint.Pdirection) * iDynTree::toEigen(comInfo.comJacobianAnalytical);
 
-                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*n], comInfo.projectedComJacobian.rows(), n);
-                    currentConstraint = iDynTree::toEigen(comInfo.projectedComJacobian);
+                    m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex, comInfo.projectedComJacobian.rows()},
+                                                                      comInfo.projectedComJacobian, 0,
+                                                                      values);
+
                     constraintIndex += comInfo.projectedComJacobian.rows();
                 }
                 
                 if (m_data.isCoMTargetActive()) {
-                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex*n], comInfo.comJacobianAnalytical.rows(), n);
-                    currentConstraint = iDynTree::toEigen(comInfo.comJacobianAnalytical);
+                    m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex, comInfo.comJacobianAnalytical.rows()},
+                                                                      comInfo.comJacobianAnalytical, 0,
+                                                                      values);
                     constraintIndex += 3;
                 }
             }
@@ -992,17 +1292,19 @@ namespace kinematics {
                     && target->second.hasPositionConstraint()) {
 
                     //Copy position part
-                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex * finalJacobianBuffer.cols()], 3, n);
-                    currentConstraint = toEigen(finalJacobianBuffer).topRows<3>();
+                    m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex, 3},
+                                                                      finalJacobianBuffer, 0,
+                                                                      values);
                     constraintIndex += 3;
                 }
 
                 if (target->second.targetResolutionMode() & iDynTree::InverseKinematicsTreatTargetAsConstraintRotationOnly
                     && target->second.hasRotationConstraint()) {
                     //Orientation part
-
-                    Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > currentConstraint(&values[constraintIndex * finalJacobianBuffer.cols()], sizeOfRotationParametrization(m_data.m_rotationParametrization), n);
-                    currentConstraint = toEigen(finalJacobianBuffer).bottomRows(sizeOfRotationParametrization(m_data.m_rotationParametrization));
+                    m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex,
+                        sizeOfRotationParametrization(m_data.m_rotationParametrization)},
+                                                                      finalJacobianBuffer, 3,
+                                                                      values);
                     constraintIndex += sizeOfRotationParametrization(m_data.m_rotationParametrization);
                 }
             }

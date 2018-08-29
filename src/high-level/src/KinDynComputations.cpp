@@ -413,6 +413,139 @@ const Model& KinDynComputations::model() const
     return pimpl->m_robot_model;
 }
 
+bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::FrameIndex refFrameIndex,
+                                                            const iDynTree::FrameIndex frameIndex,
+                                                            iDynTree::MatrixDynSize & outJacobian) const
+    {
+        if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
+        {
+            reportError("KinDynComputations","getRelativeJacobian","Frame index out of bounds");
+            return false;
+        }
+        if (!pimpl->m_robot_model.isValidFrameIndex(refFrameIndex))
+        {
+            reportError("KinDynComputations","getRelativeJacobian","Reference frame index out of bounds");
+            return false;
+        }
+
+        // This method computes the sparsity pattern of the relative Jacobian.
+        // For details on how to compute the relative Jacobian, see Traversaro's PhD thesis, 3.37
+        // or getRelativeJacobianExplicit method.
+        // Here we simply implement the same code, but trying to obtain only 1 and zeros.
+
+        // Get the links to which the frames are attached
+        LinkIndex jacobianLinkIndex = pimpl->m_robot_model.getFrameLink(frameIndex);
+        LinkIndex refJacobianLink = pimpl->m_robot_model.getFrameLink(refFrameIndex);
+
+        //I have the two links. Create the jacobian
+        outJacobian.resize(6, pimpl->m_robot_model.getNrOfDOFs());
+        outJacobian.zero();
+
+        iDynTree::Traversal& relativeTraversal = pimpl->m_traversalCache.getTraversalWithLinkAsBase(pimpl->m_robot_model, refJacobianLink);
+
+        // Compute joint part
+        // We iterate from the link up in the traveral until we reach the base
+        LinkIndex visitedLinkIdx = jacobianLinkIndex;
+
+        // Generic adjoint transform matrix (6x6).
+        // Rotations are filled with 1.
+        Matrix6x6 genericAdjointTransform;
+        genericAdjointTransform.zero();
+        // Set 1 to rotation matrix (top left)
+        iDynTree::toEigen(genericAdjointTransform).topLeftCorner(3, 3).setOnes();
+        // Set 1 to p \times R (top right)
+        iDynTree::toEigen(genericAdjointTransform).topRightCorner(3, 3).setOnes();
+        // Set 1 to rotation matrix (top left)
+        iDynTree::toEigen(genericAdjointTransform).bottomRightCorner(3, 3).setOnes();
+
+
+        while (visitedLinkIdx != relativeTraversal.getBaseLink()->getIndex())
+        {
+            //get the pair of links in the traversal
+            LinkIndex parentLinkIdx = relativeTraversal.getParentLinkFromLinkIndex(visitedLinkIdx)->getIndex();
+            IJointConstPtr joint = relativeTraversal.getParentJointFromLinkIndex(visitedLinkIdx);
+
+            //Now for each Dof get the motion subspace
+            //{}^F s_{E,F}, i.e. the velocity of F wrt E written in F.
+            size_t dofOffset = joint->getDOFsOffset();
+            for (int i = 0; i < joint->getNrOfDOFs(); ++i)
+            {
+                // This is actually where we specify the pattern
+                SpatialMotionVector column = joint->getMotionSubspaceVector(i, visitedLinkIdx, parentLinkIdx);
+                for (size_t c = 0; c < column.size(); ++c) {
+                    column(c) = std::abs(column(c)) < iDynTree::DEFAULT_TOL ? 0.0 : 1.0;
+                }
+                toEigen(outJacobian).col(dofOffset + i) = toEigen(genericAdjointTransform) * toEigen(column);
+                //have only 0 and 1 => divide component wise the column by itself
+                for (size_t r = 0; r < toEigen(outJacobian).col(dofOffset + i).size(); ++r) {
+                    toEigen(outJacobian).col(dofOffset + i).coeffRef(r) = std::abs(toEigen(outJacobian).col(dofOffset + i).coeffRef(r)) < iDynTree::DEFAULT_TOL ? 0.0 : 1.0;
+                }
+
+            }
+
+            visitedLinkIdx = parentLinkIdx;
+        }
+        return true;
+    }
+
+    bool KinDynComputations::getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
+                                                                         iDynTree::MatrixDynSize & outJacobianPattern) const
+    {
+        if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
+        {
+            reportError("KinDynComputations","getFrameJacobian","Frame index out of bounds");
+            return false;
+        }
+
+        // Get the link to which the frame is attached
+        LinkIndex jacobLink = pimpl->m_robot_model.getFrameLink(frameIndex);
+
+        Matrix6x6 genericAdjointTransform;
+        genericAdjointTransform.zero();
+        // Set 1 to rotation matrix (top left)
+        iDynTree::toEigen(genericAdjointTransform).topLeftCorner(3, 3).setOnes();
+        // Set 1 to p \times R (top right)
+        iDynTree::toEigen(genericAdjointTransform).topRightCorner(3, 3).setOnes();
+        // Set 1 to rotation matrix (top left)
+        iDynTree::toEigen(genericAdjointTransform).bottomRightCorner(3, 3).setOnes();
+
+        // We zero the jacobian
+        outJacobianPattern.resize(6, 6 + getNrOfDegreesOfFreedom());
+        outJacobianPattern.zero();
+
+        // Compute base part
+        toEigen(outJacobianPattern).leftCols<6>() = toEigen(genericAdjointTransform);
+
+        // Compute joint part
+        // We iterate from the link up in the traveral until we reach the base
+        LinkIndex visitedLinkIdx = jacobLink;
+
+        while (visitedLinkIdx != pimpl->m_traversal.getBaseLink()->getIndex())
+        {
+            LinkIndex parentLinkIdx = pimpl->m_traversal.getParentLinkFromLinkIndex(visitedLinkIdx)->getIndex();
+            IJointConstPtr joint = pimpl->m_traversal.getParentJointFromLinkIndex(visitedLinkIdx);
+
+            size_t dofOffset = joint->getDOFsOffset();
+            for (unsigned i = 0; i < joint->getNrOfDOFs(); ++i)
+            {
+                SpatialMotionVector jointMotionSubspace = joint->getMotionSubspaceVector(i, visitedLinkIdx, parentLinkIdx);
+                // 1 or 0 in vector
+                for (size_t c = 0; c < jointMotionSubspace.size(); ++c) {
+                    jointMotionSubspace(c) = std::abs(jointMotionSubspace(c)) < iDynTree::DEFAULT_TOL ? 0.0 : 1.0;
+                }
+                toEigen(outJacobianPattern).col(6 + dofOffset + i) = toEigen(genericAdjointTransform) * toEigen(jointMotionSubspace);
+                //have only 0 and 1 => divide component wise the column by itself
+                for (size_t r = 0; r < toEigen(outJacobianPattern).col(6 + dofOffset + i).size(); ++r) {
+                    toEigen(outJacobianPattern).col(6 + dofOffset + i).coeffRef(r) = std::abs(toEigen(outJacobianPattern).col(6 + dofOffset + i).coeffRef(r)) < iDynTree::DEFAULT_TOL ? 0.0 : 1.0;
+                }
+            }
+
+            visitedLinkIdx = parentLinkIdx;
+        }
+
+        return true;
+    }
+
 //////////////////////////////////////////////////////////////////////////////
 //// Degrees of freedom related methods
 //////////////////////////////////////////////////////////////////////////////
