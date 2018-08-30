@@ -210,7 +210,7 @@ namespace iDynTree {
                     reportError("QuadraticLikeCost", "costFirstPartialDerivativeWRTState", errorMsg.str().c_str());
                     return false;
                 }
-                toEigen(partialDerivative) += toEigen(hessian) * toEigen(state);
+                toEigen(partialDerivative) += 0.5 * (toEigen(hessian) + toEigen(hessian).transpose()) * toEigen(state);
             }
 
             if (m_timeVaryingStateGradient) {
@@ -271,7 +271,7 @@ namespace iDynTree {
                     reportError("QuadraticLikeCost", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
                     return false;
                 }
-                toEigen(partialDerivative) += toEigen(hessian) * toEigen(control);
+                toEigen(partialDerivative) += 0.5 * (toEigen(hessian) + toEigen(hessian).transpose()) * toEigen(control);
             }
 
             if (m_timeVaryingControlGradient) {
@@ -333,7 +333,7 @@ namespace iDynTree {
                     return false;
                 }
 
-                partialDerivative = hessian;
+                toEigen(partialDerivative) = 0.5 * (toEigen(hessian) + toEigen(hessian).transpose());
 
             } else {
 
@@ -376,7 +376,7 @@ namespace iDynTree {
                     return false;
                 }
 
-                partialDerivative = hessian;
+                toEigen(partialDerivative) = 0.5 * (toEigen(hessian) + toEigen(hessian).transpose());
             } else {
                 partialDerivative.zero();
             }

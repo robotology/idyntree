@@ -18,7 +18,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_L2NORMCOST_H
 #define IDYNTREE_OPTIMALCONTROL_L2NORMCOST_H
 
-#include <iDynTree/QuadraticLikeCost.h>
+#include <iDynTree/Cost.h>
 #include <iDynTree/TimeVaryingObject.h>
 #include <iDynTree/Core/Utils.h>
 #include <memory>
@@ -36,7 +36,7 @@ namespace iDynTree {
          * \ingroup iDynTreeExperimental
          */
 
-        class L2NormCost : public QuadraticLikeCost {
+        class L2NormCost : public Cost {
             class L2NormCostImplementation;
             L2NormCostImplementation *m_pimpl;
 
@@ -73,6 +73,28 @@ namespace iDynTree {
                                         const iDynTree::VectorDynSize& state,
                                         const iDynTree::VectorDynSize& control,
                                         double& costValue) final;
+
+            virtual bool costFirstPartialDerivativeWRTState(double time,
+                                                            const iDynTree::VectorDynSize& state, const iDynTree::VectorDynSize&,
+                                                            iDynTree::VectorDynSize& partialDerivative) final;
+
+            virtual bool costFirstPartialDerivativeWRTControl(double time, const iDynTree::VectorDynSize&,
+                                                              const iDynTree::VectorDynSize& control,
+                                                              iDynTree::VectorDynSize& partialDerivative) final;
+
+            virtual bool costSecondPartialDerivativeWRTState(double,
+                                                             const iDynTree::VectorDynSize& state, const iDynTree::VectorDynSize&,
+                                                             iDynTree::MatrixDynSize& partialDerivative) final;
+
+            virtual bool costSecondPartialDerivativeWRTControl(double, const iDynTree::VectorDynSize&,
+                                                               const iDynTree::VectorDynSize& control,
+                                                               iDynTree::MatrixDynSize& partialDerivative) final;
+
+
+            virtual bool costSecondPartialDerivativeWRTStateControl(double,
+                                                                    const iDynTree::VectorDynSize& state,
+                                                                    const iDynTree::VectorDynSize& control,
+                                                                    iDynTree::MatrixDynSize& partialDerivative) final;
         };
 
     }
