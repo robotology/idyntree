@@ -14,7 +14,7 @@
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/ModelSensorsTransformers.h>
 
-#include <iDynTree/Sensors/SixAxisFTSensor.h>
+#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 
 
 #include <cassert>

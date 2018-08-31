@@ -15,7 +15,7 @@
 #include "kdl_codyco/undirectedtree.hpp"
 
 #include "iDynTree/Sensors/Sensors.h"
-#include "iDynTree/Sensors/SixAxisFTSensor.h"
+#include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
 #include "iDynTree/Core/Wrench.h"
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
 

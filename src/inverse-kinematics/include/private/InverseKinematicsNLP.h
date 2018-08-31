@@ -28,8 +28,161 @@ namespace internal {
 namespace kinematics {
     class InverseKinematicsNLP;
     class InverseKinematicsData;
+    class TransformConstraint;
+
+    class SparsityHelper;
 }
 }
+
+/*! @brief Helper class to manage sparsity
+ */
+class internal::kinematics::SparsityHelper
+{
+    std::vector<size_t> m_numberOfNonZeros; /*!< number of non zeros for each rows */
+    std::vector<std::vector<size_t>> m_nonZeroIndices; /*!< nonzero columns for each row */
+
+    static const std::vector<size_t> s_nullVector; /*!< invalid vector */
+
+
+    /**
+     * Adds a constraint sparsity pattern from the specified matrix
+     * and constraint range
+     *
+     * @note this is the templated function that accepts fix and dynamic size matrices
+     * @param newConstraint the matrix containing the pattern (1 for nonzero, 0 otherwise)
+     * @param constraintRange contiguous subset of the newConstraint matrix to be considered
+     * @return true on success. False otherwise
+     */
+    template <typename MatrixType>
+    bool addConstraintSparsityPatternTemplated(const MatrixType& newConstraint, const iDynTree::IndexRange& constraintRange);
+
+public:
+
+
+    /**
+     * The invalid null indices vector
+     *
+     * @return The invalid null indices vector
+     */
+    static const std::vector<size_t>& NullIndicesVector();
+
+    /** Default constructor */
+    SparsityHelper();
+
+    SparsityHelper(const SparsityHelper&) = delete;
+    SparsityHelper& operator=(const SparsityHelper&) = delete;
+
+    SparsityHelper(SparsityHelper&&) = default;
+    SparsityHelper& operator=(SparsityHelper&&) = default;
+
+
+    /**
+     * Remove all constraint sparsity patterns
+     */
+    void clear();
+
+    /**
+     * Adds a constraint sparsity pattern from the specified matrix
+     *
+     * @param newConstraint the matrix containing the pattern (1 for nonzero, 0 otherwise)
+     * @return true on success. False otherwise
+     */
+    bool addConstraintSparsityPattern(const iDynTree::MatrixDynSize& newConstraint);
+
+    /**
+     * Adds a constraint sparsity pattern from the specified matrix
+     *
+     * @param newConstraint the matrix containing the pattern (1 for nonzero, 0 otherwise)
+     * @return true on success. False otherwise
+     */
+    template<unsigned int nRows, unsigned int nCols>
+    bool addConstraintSparsityPattern(const iDynTree::MatrixFixSize<nRows, nCols>& newConstraint);
+
+    /**
+     * Adds a constraint sparsity pattern from the specified matrix
+     * and constraint range
+     *
+     * @param newConstraint the matrix containing the pattern (1 for nonzero, 0 otherwise)
+     * @param constraintRange contiguous subset of the newConstraint matrix to be considered
+     * @return true on success. False otherwise
+     */
+    bool addConstraintSparsityPattern(const iDynTree::MatrixDynSize& newConstraint,
+                                      const iDynTree::IndexRange& constraintRange);
+
+    /**
+     * Adds a constraint sparsity pattern from the specified matrix
+     * and constraint range
+     *
+     * @param newConstraint the matrix containing the pattern (1 for nonzero, 0 otherwise)
+     * @param constraintRange contiguous subset of the newConstraint matrix to be considered
+     * @return true on success. False otherwise
+     */
+    template<unsigned int nRows, unsigned int nCols>
+    bool addConstraintSparsityPattern(const iDynTree::MatrixFixSize<nRows, nCols>& newConstraint,
+                                      const iDynTree::IndexRange& constraintRange);
+
+
+    /**
+     * Returns the number of nonzeros in the specified row
+     *
+     * @param rowIndex index of the row
+     * @return number of nonzeros
+     */
+    size_t numberOfNonZerosForRow(size_t rowIndex) const;
+
+
+    /**
+     * Returns the total number of nonzeros in the sparsity pattern
+     *
+     * @return the total number of nonzeros in the sparsity pattern
+     */
+    size_t numberOfNonZeros() const;
+
+
+    /**
+     * Returns the cumulative number of nonzeros in all the rows before the specified one
+     *
+     * @param rowIndex the row (excluded) to compute the cumulative number of nonzeros
+     * @return the cumulative number of nonzeros in all the rows before the specified one
+     */
+    size_t totalNumberOfNonZerosBeforeRow(size_t rowIndex) const;
+
+    
+    /**
+     * Returns a vector with the indices of the non zero columns for the specified contraint (row)
+     *
+     * @param rowIndex the specified constraint
+     * @return a vector with the indices of the non zero columns
+     */
+    const std::vector<size_t>& nonZeroIndicesForRow(size_t rowIndex) const;
+
+
+    /**
+     * Helper function to assign values to a contiguous buffer given the current sparsity pattern
+     *
+     * @param constraintRange range of the constraint that should be sparsified
+     * @param fullMatrix matrix specifying the non sparse constraint
+     * @param fullMatrixStartingRowIndex starting row index of the non sparse matrix to be considered. The
+     *                                   size is automatically inferred by the constraint size
+     * @param outputBuffer the buffer on which the sparsified values should be written
+     */
+    void assignActualMatrixValues(const iDynTree::IndexRange& constraintRange,
+                                  const iDynTree::MatrixDynSize& fullMatrix,
+                                  size_t fullMatrixStartingRowIndex,
+                                  Ipopt::Number *outputBuffer);
+
+
+    /**
+     * @brief Returns a textual description of the sparsity pattern
+     *
+     * Useful for debug
+     * @note this method perform dynamic memory allocation
+     * @return a textual description of the sparsity pattern
+     */
+    std::string toString() const;
+
+};
+
 
 /*!
  * @brief Implementation of the inverse kinematics with IPOPT
@@ -66,6 +219,8 @@ namespace kinematics {
  *   between iDynTree DoFs and optimizer DoFs which was not present before
  */
 class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
+
+    SparsityHelper m_jacobianSparsityHelper;
 
     /*! @brief information about a Frame during optimization
      * All the values are computed given the current robot configuration
@@ -167,6 +322,34 @@ class internal::kinematics::InverseKinematicsNLP : public Ipopt::TNLP {
      */
     void omegaToRPYParameters(const iDynTree::Vector3& rpyAngles,
                               iDynTree::Matrix3x3& map);
+
+
+    /**
+     * Helper method to create sparity information for a specific constraint
+     *
+     * @param constraintID id of the constraint
+     * @param constraint constraint object
+     */
+    void addSparsityInformationForConstraint(int constraintID, const internal::kinematics::TransformConstraint& constraint);
+
+    /**
+     * Initialize the sparsity information
+     * @note this method should be called after all constraints have been specified.
+     * It also uses the buffers created for the constraints, so it should not be called at runtime
+     */
+    void initializeSparsityInformation();
+
+#ifndef NDEBUG
+    // IpOpt should not call the same callback twice for the same set of input parameters
+    // To be sure of this, we add some assert in the code
+    // In the case, in the future, IpOpt changes behaviour, this asserts will
+    // notify us of this change, and we can (easily, at the cost of adding more functions)
+    // circunvent this with our code.
+    static bool eval_f_called;
+    static bool eval_grad_f_called;
+    static bool eval_g_called;
+    static bool eval_jac_g_called;
+#endif
 
 public:
     /*! Constructor

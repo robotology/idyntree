@@ -9,14 +9,14 @@ classdef Dummy < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(580, varargin{:});
+        tmp = iDynTreeMEX(582, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(581, self);
+        iDynTreeMEX(583, self);
         self.SwigClear();
       end
     end

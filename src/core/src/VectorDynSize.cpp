@@ -95,6 +95,26 @@ VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
     return *this;
 }
 
+VectorDynSize &VectorDynSize::operator=(const Span<const double> &vec)
+{
+    // if the size don't match, reallocate the data
+    if( this->m_size != vec.size() )
+    {
+        resize(static_cast<unsigned int>(vec.size()));
+    }
+
+    // After reallocation, the size should match
+    assert(this->m_size == vec.size());
+
+    // Copy data if the size is not 0
+    if( this->m_size > 0 )
+    {
+        std::memcpy(this->m_data, vec.data(), this->m_size*sizeof(double));
+    }
+
+    return *this;
+}
+
 
 void VectorDynSize::zero()
 {

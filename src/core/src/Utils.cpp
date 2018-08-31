@@ -62,6 +62,16 @@ namespace iDynTree
     {
         std::cerr << "[WARNING] " << className << " :: " << methodName << " : " << errorMessage <<  "\n";
     }
+    
+    void reportInfo(const char* className, const char* methodName, const char* message)
+    {
+        std::cerr << "[INFO] " << className << " :: " << methodName << " : " << message <<  "\n";
+    }
+    
+    void reportDebug(const char* className, const char* methodName, const char* message)
+    {
+        std::cerr << "[DEBUG] " << className << " :: " << methodName << " : " << message <<  "\n";
+    }
 
     double deg2rad(const double valueInDeg)
     {

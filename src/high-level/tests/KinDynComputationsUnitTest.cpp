@@ -189,11 +189,11 @@ void testInverseDynamics(KinDynComputations & dynComp)
         shapeAccs.zero();
         if( i < 6 )
         {
-            baseAcc(i) = 0.0;
+            baseAcc(i) = 1.0;
         }
         else
         {
-            shapeAccs(i-6) = 0.0;
+            shapeAccs(i-6) = 1.0;
         }
 
         FreeFloatingGeneralizedTorques invDynForces(dynComp.model());
@@ -236,7 +236,6 @@ void testRelativeJacobians(KinDynComputations & dynComp)
     } else {
         //Pick two frames at random
         frame = real_random_int(0, dynComp.getNrOfFrames());
-        refFrame = -1;
         //be sure to pick two different frames
         do {
             refFrame = real_random_int(0, dynComp.getNrOfFrames());
@@ -345,6 +344,109 @@ void testModelConsistencyAllRepresentations(std::string modelName)
     testModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
 }
 
+void testRelativeJacobianSparsity(KinDynComputations & dynComp)
+{
+    // take two frames
+    if (dynComp.getNrOfLinks() < 2) return;
+    FrameIndex frame = -1;
+    FrameIndex refFrame = -1;
+
+    if (dynComp.getNrOfLinks() == 2) {
+        frame = 0;
+        refFrame = 1;
+    } else {
+        //Pick two frames at random
+        frame = real_random_int(0, dynComp.getNrOfFrames());
+        //be sure to pick two different frames
+        do {
+            refFrame = real_random_int(0, dynComp.getNrOfFrames());
+        } while (refFrame == frame && frame >= 0);
+    }
+    
+    // get sparsity pattern
+    MatrixDynSize jacobianPattern(6, dynComp.getNrOfDegreesOfFreedom());
+    bool ok = dynComp.getRelativeJacobianSparsityPattern(refFrame, frame, jacobianPattern);
+    ASSERT_IS_TRUE(ok);
+
+    // Now computes the actual jacobian
+    MatrixDynSize jacobian(6, dynComp.getNrOfDegreesOfFreedom());
+    ok = dynComp.getRelativeJacobian(refFrame, frame, jacobian);
+    ASSERT_IS_TRUE(ok);
+
+    ASSERT_IS_TRUE(jacobian.rows() == jacobianPattern.rows() && jacobian.cols() == jacobian.cols());
+
+    for (size_t row = 0; row < jacobian.rows(); ++row) {
+        for (size_t col = 0; col < jacobian.cols(); ++col) {
+            // if jacobian has value != 0, pattern should have 1
+            if (std::abs(jacobian(row, col)) > iDynTree::DEFAULT_TOL) {
+                ASSERT_EQUAL_DOUBLE(jacobianPattern(row, col), 1.0);
+            }
+        }
+    }
+}
+
+void testAbsoluteJacobianSparsity(KinDynComputations & dynComp)
+{
+    // take one frames
+    if (dynComp.getNrOfLinks() < 1) return;
+    FrameIndex frame = -1;
+
+    if (dynComp.getNrOfLinks() == 1) {
+        frame = 0;
+    } else {
+        //Pick one frames at random
+        frame = real_random_int(0, dynComp.getNrOfFrames());
+    }
+
+    // get sparsity pattern
+    MatrixDynSize jacobianPattern(6, 6 + dynComp.getNrOfDegreesOfFreedom());
+    bool ok = dynComp.getFrameFreeFloatingJacobianSparsityPattern(frame, jacobianPattern);
+    ASSERT_IS_TRUE(ok);
+
+    // Now computes the actual jacobian
+    MatrixDynSize jacobian(6, 6 + dynComp.getNrOfDegreesOfFreedom());
+    ok = dynComp.getFrameFreeFloatingJacobian(frame, jacobian);
+    ASSERT_IS_TRUE(ok);
+
+    ASSERT_IS_TRUE(jacobian.rows() == jacobianPattern.rows() && jacobian.cols() == jacobian.cols());
+
+    for (size_t row = 0; row < jacobian.rows(); ++row) {
+        for (size_t col = 0; col < jacobian.cols(); ++col) {
+            // if jacobian has value != 0, pattern should have 1
+            if (std::abs(jacobian(row, col)) > iDynTree::DEFAULT_TOL) {
+                ASSERT_EQUAL_DOUBLE(jacobianPattern(row, col), 1.0);
+            }
+        }
+    }
+}
+
+void testSparsityPattern(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
+{
+    iDynTree::KinDynComputations dynComp;
+
+    bool ok = dynComp.loadRobotModelFromFile(modelFilePath);
+    ASSERT_IS_TRUE(ok);
+
+    ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
+    ASSERT_IS_TRUE(ok);
+
+    for(int i=0; i < 10; i++)
+    {
+        setRandomState(dynComp);
+        testRelativeJacobianSparsity(dynComp);
+        testAbsoluteJacobianSparsity(dynComp);
+    }
+}
+
+void testSparsityPatternAllRepresentations(std::string modelName)
+{
+    std::string urdfFileName = getAbsModelPath(modelName);
+    std::cout << "Testing file " << urdfFileName <<  std::endl;
+    testSparsityPattern(urdfFileName,iDynTree::MIXED_REPRESENTATION);
+    testSparsityPattern(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
+    testSparsityPattern(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
+}
+
 int main()
 {
     // Just run the tests on a handful of models to avoid
@@ -354,6 +456,16 @@ int main()
     testModelConsistencyAllRepresentations("threeLinks.urdf");
     testModelConsistencyAllRepresentations("bigman.urdf");
     testModelConsistencyAllRepresentations("icub_skin_frames.urdf");
+    testModelConsistencyAllRepresentations("iCubGenova02.urdf");
+    testModelConsistencyAllRepresentations("icalibrate.urdf");
+
+    testSparsityPatternAllRepresentations("oneLink.urdf");
+    testSparsityPatternAllRepresentations("twoLinks.urdf");
+    testSparsityPatternAllRepresentations("threeLinks.urdf");
+    testSparsityPatternAllRepresentations("bigman.urdf");
+    testSparsityPatternAllRepresentations("icub_skin_frames.urdf");
+
+
 
     return EXIT_SUCCESS;
 }

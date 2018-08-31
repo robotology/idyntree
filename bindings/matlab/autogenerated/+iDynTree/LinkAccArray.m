@@ -9,29 +9,29 @@ classdef LinkAccArray < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(864, varargin{:});
+        tmp = iDynTreeMEX(866, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(865, self, varargin{:});
-    end
-    function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(866, self, varargin{:});
-    end
-    function varargout = paren(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(867, self, varargin{:});
     end
-    function varargout = getNrOfLinks(self,varargin)
+    function varargout = isConsistent(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(868, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = paren(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(869, self, varargin{:});
+    end
+    function varargout = getNrOfLinks(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(870, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(871, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(870, self);
+        iDynTreeMEX(872, self);
         self.SwigClear();
       end
     end

@@ -28,7 +28,8 @@ set(IDYNTREE_TESTS_URDFS icub.urdf
                          iCubDarmstadt01.urdf
                          twoLinksWithoutBaseSensors.urdf
                          twoLinksRotationOnZAxis.urdf
-                         frame.urdf)
+                         frame.urdf
+                         icalibrate.urdf)
 
 
 # configure an header containing the path

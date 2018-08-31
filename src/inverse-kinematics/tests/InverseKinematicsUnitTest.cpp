@@ -105,6 +105,7 @@ void simpleChainIK(int minNrOfJoints, int maxNrOfJoints, const iDynTree::Inverse
 
         // Create IK
         iDynTree::InverseKinematics ik;
+        ik.setVerbosity(0);
         bool ok = ik.setModel(chain);
         ASSERT_IS_TRUE(ok);
         // Always express the target as cost

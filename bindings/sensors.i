@@ -37,6 +37,13 @@ namespace iDynTree{
             static_cast<iDynTree::ThreeAxisAngularAccelerometerSensor*>($self->getSensor(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER,sensor_index));
         return p;
     }
+
+    iDynTree::ThreeAxisForceTorqueContactSensor * getThreeAxisForceTorqueContactSensor(int sensor_index) const
+    {
+        iDynTree::ThreeAxisForceTorqueContactSensor* p =
+            static_cast<iDynTree::ThreeAxisForceTorqueContactSensor*>($self->getSensor(iDynTree::THREE_AXIS_FORCE_TORQUE_CONTACT,sensor_index));
+        return p;
+    }
 }
 
 }

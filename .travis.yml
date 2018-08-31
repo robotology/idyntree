@@ -1,185 +1,106 @@
-sudo: required
 dist: trusty
-osx_image: xcode7.3
 language: cpp
-cache: ccache
-group: deprecated-2017Q3
+services: docker
 
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-      - llvm-toolchain-trusty-5.0
-    packages:
-      # gcc
-      - gcc-5
-      - g++-5
-      # clang
-      - clang-5.0
-      # build tools
-      - cmake3 
-      - valgrind
-      - ccache
-      # libraries
-      - qtbase5-dev
-      - qtdeclarative5-dev
-      - qtmultimedia5-dev
-      - libqt5opengl5-dev
-      - libboost-system-dev 
-      - libboost-filesystem-dev 
-      - libboost-thread-dev
-      - libace-dev 
-      - libgsl0-dev 
-      - libcv-dev 
-      - libhighgui-dev 
-      - libcvaux-dev 
-      - libtinyxml-dev
-      - libode-dev 
-      # Bindings
-      - swig
-      # C# bindings
-      - mono-mcs
-      # Lua bindings
-      - liblua5.1-0-dev
-      - lua5.1
-      # Python bindings
-      - python-dev
+os: linux
 
-matrix:
-  include:
-    - os: linux
-      compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="ON"
-    - os: linux
-      compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="ON"
-    - os: linux
-      compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="ON"
-    - os: linux
-      compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Release",VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="ON"
-    - os: linux
-      compiler: gcc
-      env: TRAVIS_CMAKE_GENERATOR="Unix Makefiles", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="ON", COMPILE_BINDINGS="ON", FULL_DEPS="OFF"
-  allow_failures:
-    - os: osx
-      compiler: clang
-      env: TRAVIS_CMAKE_GENERATOR="Xcode", TRAVIS_BUILD_TYPE="Debug", VALGRIND_TESTS="OFF", COMPILE_BINDINGS="OFF", FULL_DEPS="ON"
+cache:
+  directories:
+    - $HOME/.ccache
+    - $HOME/Library/Caches/Homebrew
+
+stages:
+  - test # Default stage with job matrix
+  - osx
+
+compiler:
+  - gcc
+
+env:
+  global:
+    - TRAVIS_CMAKE_GENERATOR="Unix Makefiles"
+  matrix:
+    - TRAVIS_BUILD_TYPE="Release" UBUNTU="xenial" VALGRIND_TESTS="ON" COMPILE_BINDINGS="ON" FULL_DEPS="ON"
+    - TRAVIS_BUILD_TYPE="Debug" UBUNTU="xenial" VALGRIND_TESTS="OFF" COMPILE_BINDINGS="ON" FULL_DEPS="ON"
+    - TRAVIS_BUILD_TYPE="Release" UBUNTU="bionic" VALGRIND_TESTS="OFF" COMPILE_BINDINGS="ON" FULL_DEPS="ON"
+    - TRAVIS_BUILD_TYPE="Debug" UBUNTU="bionic" VALGRIND_TESTS="OFF" COMPILE_BINDINGS="ON" FULL_DEPS="ON"
+
+# ===================
+# STAGE: test (linux)
+# ===================
 
 before_script:
-  # Update homebrew on osx
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
-  
-  # Install ccache on osx
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ccache; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PATH="/usr/local/opt/ccache/libexec:$PATH"; fi
-
-  # Use ccache also for clang and clang++ on linux
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "clang" ]; then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang; fi; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CXX" == "clang++" ]; then sudo ln -s ../../bin/ccache /usr/lib/ccache/clang++; fi; fi
-
-  # Force gcc-5
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "gcc" ]; then export CC=gcc-5; export CXX=g++-5; fi; fi
-
-  # Force clang-5.0
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then if [ "$CC" == "clang" ]; then export CC=clang-5.0; export CXX=clang++-5.0; fi; fi
-
-  # install system dependencies using apt (linux) or homebrew (macos)
-  # note: we install a lot of dependencies, as we compile iDynTree with all dependencies enabled
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository ppa:octave/stable -y; fi 
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository ppa:nschloe/eigen-backports -y; fi 
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo sh -c 'echo "deb http://www.icub.org/ubuntu trusty contrib/science" > /etc/apt/sources.list.d/icub.list'; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi 
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install --allow-unauthenticated build-essential icub-common libeigen3-dev liboctave-dev; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ace eigen cmake boost tinyxml swig gsl pkg-config jpeg sqlite readline tinyxml dartsim/dart/ipopt octave; fi 
- 
-  # avoid using openblas
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install libatlas-base-dev; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo update-alternatives --set libblas.so.3  /usr/lib/atlas-base/atlas/libblas.so.3 ; fi
-  
-  # check cmake version
-  - cmake --version
-  
-  # build everything else from source (opyionsl dependencies)
-  - pwd 
-  # Switch to the parent directory of the git repository folder 
-  - cd ..
-  
-  # Build YARP 
-  - git clone https://github.com/robotology/yarp
-  - cd yarp
-  - git checkout devel 
-  - mkdir build
-  - cd build 
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCREATE_LIB_MATH:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
-  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
-  - cd ../..
-  
-  # Build ICUB
-  - git clone https://github.com/robotology/icub-main
-  - cd icub-main
-  - git checkout devel 
-  - mkdir build
-  - cd build 
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
-  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
-  - cd ../..
-  
-  # Dependencies of the deprecated part of iDynTree that depends on KDL, but we need to keep testing that part 
-  # Build console_bridge
-  - git clone https://github.com/ros/console_bridge
-  - cd console_bridge
-  - mkdir build
-  - cd build 
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
-  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
-  - cd ../..
- 
-  # Build urdfdom_headers 
-  - git clone https://github.com/ros/urdfdom_headers 
-  - cd urdfdom_headers
-  - mkdir build
-  - cd build 
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
-  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
-  - cd ../..
-  
-  # Build urdfdom 
-  - git clone https://github.com/ros/urdfdom
-  - cd urdfdom
-  - mkdir build
-  - cd build 
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
-  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
-  - cd ../..
-  
-  # Build orocos_kdl 
-  - git clone https://github.com/orocos/orocos_kinematics_dynamics
-  - cd orocos_kinematics_dynamics/orocos_kdl
-  - mkdir build
-  - cd build 
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} ..
-  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
-  - cd ../../..
-  
-  # Prepare iDynTree build
-  - cd idyntree
-  - mkdir build
-  - cd build
-  # Xcode has support for multiple configurations. Passing -DCMAKE_BUILD_TYPE is ignored
-  - cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=${VALGRIND_TESTS} -DCODYCO_TRAVIS_CI:BOOL=ON -DIDYNTREE_USES_KDL:BOOL=${FULL_DEPS} -DIDYNTREE_USES_YARP:BOOL=${FULL_DEPS} -DIDYNTREE_USES_ICUB_MAIN:BOOL=${FULL_DEPS}  -DIDYNTREE_USES_PYTHON:BOOL=${COMPILE_BINDINGS} -DIDYNTREE_USES_LUA:BOOL=${COMPILE_BINDINGS} -DIDYNTREE_USES_OCTAVE:BOOL=${COMPILE_BINDINGS} ..
+  - docker pull ubuntu:$UBUNTU
 
 script:
-  - cmake --build . --config ${TRAVIS_BUILD_TYPE}
-  - sudo cmake --build . --config ${TRAVIS_BUILD_TYPE} --target install
-  - ctest --output-on-failure --build-config ${TRAVIS_BUILD_TYPE}
-  # test examples (only on macOS because on Trusty Eigen3 does not ship with an Eigen3Config.cmake
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cd ../examples ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mkdir build ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cd build ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cmake -G"${TRAVIS_CMAKE_GENERATOR}" -DCODYCO_TRAVIS_CI:BOOL=ON -DCMAKE_BUILD_TYPE=${TRAVIS_BUILD_TYPE} .. ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cmake --build . --config ${TRAVIS_BUILD_TYPE} ; fi
+  - >-
+    docker run -it \
+      -v $TRAVIS_BUILD_DIR:$TRAVIS_BUILD_DIR \
+      -v $HOME/.ccache:$HOME/.ccache \
+      -w $TRAVIS_BUILD_DIR \
+      --env CC \
+      --env CXX \
+      --env TRAVIS_BUILD_DIR \
+      --env TRAVIS_BUILD_TYPE \
+      --env TRAVIS_CMAKE_GENERATOR \
+      --env VALGRIND_TESTS \
+      --env COMPILE_BINDINGS \
+      --env FULL_DEPS \
+      ubuntu:$UBUNTU \
+      sh .ci/install_debian_and_script.sh
+
+# ==========
+# STAGE: osx
+# ==========
+
+stage_osx:
+  install: &osx_install
+    # Setup ccache
+    - brew update
+    - brew install ccache
+    - export PATH="/usr/local/opt/ccache/libexec:$PATH"
+    # Install dependencies
+    - brew install ace eigen boost tinyxml swig qt5 gsl pkg-config jpeg sqlite tinyxml
+    - export Qt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5
+  script: &osx_script
+    - cd $TRAVIS_BUILD_DIR/.ci
+    - sh ./script.sh
+
+# ======================
+# BUILD JOBS FROM STAGES
+# ======================
+
+jobs:
+  include:
+    # ---------
+    # STAGE OSX
+    # ---------
+    - &osx_template
+      stage: osx
+      os: osx
+      osx_image: xcode9.4
+      before_install: skip
+      install: *osx_install
+      before_script: skip
+      script: *osx_script
+      after_failure: skip
+      after_success: skip
+      after_script: skip
+      env:
+        TRAVIS_CMAKE_GENERATOR="Xcode"
+        TRAVIS_BUILD_TYPE="Debug"
+        VALGRIND_TESTS="OFF"
+        COMPILE_BINDINGS="OFF"
+        FULL_DEPS="OFF"
+    - <<: *osx_template
+      compiler: clang
+      env:
+        TRAVIS_CMAKE_GENERATOR="Unix Makefiles"
+        TRAVIS_BUILD_TYPE="Debug"
+        VALGRIND_TESTS="OFF"
+        COMPILE_BINDINGS="OFF"
+        FULL_DEPS="OFF"
+
 
 notifications:
   email:

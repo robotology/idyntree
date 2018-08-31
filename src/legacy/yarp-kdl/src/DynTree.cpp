@@ -23,7 +23,7 @@
 #include <kdl_codyco/regressor_utils.hpp>
 #include <kdl_codyco/generalizedjntpositions.hpp>
 
-#include "iDynTree/Sensors/SixAxisFTSensor.h"
+#include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
 #include "kdl_codyco/KDLConversions.h"
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Wrench.h"

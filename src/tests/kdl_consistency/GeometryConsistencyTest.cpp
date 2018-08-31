@@ -24,8 +24,6 @@
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
-#include <iDynTree/ModelIO/URDFModelImport.h>
-
 #include <iDynTree/Core/TestUtils.h>
 
 #include <iDynTree/Core/EigenHelpers.h>

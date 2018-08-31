@@ -33,6 +33,17 @@ void testSpatialVectors()
     }
 }
 
+void testSpanToEigen(const Vector3& input) {
+    //Checks if compiles
+    Vector3 randVec, check;
+    getRandomVector(randVec);
+    Span<double> spanCheck = make_span(check);
+    toEigen(spanCheck) = toEigen(randVec);
+    toEigen(make_span(check)) = toEigen(randVec);
+    toEigen(randVec) = toEigen(make_span(check));
+    toEigen(check) = toEigen(make_span(input));
+}
+
 int main()
 {
     Vector3 vec;
@@ -44,6 +55,8 @@ int main()
     validateSkewUnskew(vec);
 
     testSpatialVectors();
+
+    testSpanToEigen(vec);
 
 
     return EXIT_SUCCESS;

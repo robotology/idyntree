@@ -15,6 +15,8 @@
 
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/Core/Utils.h>
+
 
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/FreeFloatingMatrices.h>
@@ -124,6 +126,7 @@ public:
      * @param filetype type of the file to load, currently supporting only urdf type.
      *
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Use iDynTree::ModelLoader::loadRobotModelFromFile and pass the Model to loadRobotModel")
     bool loadRobotModelFromFile(const std::string & filename, const std::string & filetype="urdf");
 
     /**
@@ -133,6 +136,7 @@ public:
      * @param filetype type of the file to load, currently supporting only urdf type.
      *
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Use iDynTree::ModelLoader::loadRobotModelFromString and pass the Model to loadRobotModel")
     bool loadRobotModelFromString(const std::string & modelString, const std::string & filetype="urdf");
 
     /**
@@ -250,6 +254,48 @@ public:
     const Model & getRobotModel() const;
 
     //@}
+
+    /**
+     * @name Methods to obtain the sparity patterns of Jacobians and Hessians
+     * @note Sparsity patterns does not depend on the particular joint configuration.
+     * The only requirement is that the model has been loaded before
+     */
+    //@{
+
+    /**
+     * Returns the sparsity pattern of the relative Jacobian for the specified frames
+     *
+     * The resulting matrix has the same size of the free floating Jacobian (6 x #DoFs)
+     * It is filled with only 0 and 1 with the following meaning:
+     * - 0: the element will always have 0 (for every robot configuration)
+     * - 1: it exists a robot configuration such that the element have a value different from zero.
+     * @param refFrameIndex refence frame for the Jacobian
+     * @param frameIndex Jacobian frame
+     * @param outJacobianPattern the Jacobian sparsity pattern
+     * @return true on success. False otherwise
+     */
+    bool getRelativeJacobianSparsityPattern(const iDynTree::FrameIndex refFrameIndex,
+                                            const iDynTree::FrameIndex frameIndex,
+                                            iDynTree::MatrixDynSize & outJacobianPattern) const;
+
+
+    /**
+     * Returns the sparsity pattern of the free floating Jacobian for the specified frame
+     *
+     * The resulting matrix has the same size of the free floating Jacobian (6 x 6 + #DoFs)
+     * It is filled with only 0 and 1 with the following meaning:
+     * - 0: the element will always have 0 (for every robot configuration)
+     * - 1: it exists a robot configuration such that the element have a value different from zero.
+     * @param frameIndex Jacobian frame
+     * @param outJacobianPattern the Jacobian sparsity pattern
+     * @return true on success. False otherwise
+     */
+    bool getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
+                                                     iDynTree::MatrixDynSize & outJacobianPattern) const;
+
+
+    //@}
+
 
     /**
       * @name Methods to submit the input data for dynamics computations.

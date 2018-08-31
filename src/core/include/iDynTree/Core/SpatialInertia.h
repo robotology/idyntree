@@ -21,10 +21,8 @@
 namespace iDynTree
 {
     /**
-     * Class representing a spatial inertia
+     * @brief Class representing a six dimensional inertia.
      *
-     *
-     * Currently this class does not support semantics.
      *
      * \ingroup iDynTreeCore
      */
@@ -47,7 +45,24 @@ namespace iDynTree
         static SpatialInertia combine(const SpatialInertia & op1,
                                       const SpatialInertia & op2);
 
-        // Get the SpatialInertia as a 6x6 matrix
+        /**
+         * @brief Get the SpatialInertia as a 6x6 matrix
+         *
+         * If \f$ m \in \mathbb{R} \f$ is the mass,
+         * \f$ c \in \mathbb{R}^3 \f$ is the center of mass,
+         * \f$ I \in \mathbb{R}^{3 \times 3} \f$ is the 3d inertia, and
+         * \f$ 1_3 \in \mathbb{R}^{3 \times 3} \f$ is the 3d identity matrix this
+         * method returns the \f$ \mathbb{M} \in \mathbb{R}^{6 \times 6} \f$ matrix such that:
+         * \f[
+         *  \mathbb{M} =
+         *  \begin{bmatrix}
+         *    m 1_3 & -m c \times \\
+         *    m c \times & I
+         *  \end{bmatrix}
+         * \f].
+         *
+         * @note As all quantities in iDynTree, this inertia assumes the linear-angular serialization.
+         */
         Matrix6x6 asMatrix() const;
 
         Twist applyInverse(const SpatialMomentum& mom) const;
@@ -62,16 +77,16 @@ namespace iDynTree
         // Efficient operations
 
         /**
-         * Return the bias wrench V.cross(M*V).
+         * Return the bias wrench v.cross(M*v).
          *
-         * Defining \f$ M \f$ as this inertia, return
-         * the bias wrench V.cross(M*V), defined in math as:
+         * Defining \f$ \mathbb{M} \f$ as this inertia, return
+         * the bias wrench v.cross(M*v), defined in math as:
          * \f[
-         *  V \bar\times^* M V = \\
+         *  \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} = \\
          *  \begin{bmatrix} \omega \times  & 0 \\
          *                  v \times  & \omega \times
          *  \end{bmatrix}
-         *  \begin{bmatrix} m & -mc\times \\
+         *  \begin{bmatrix} m 1_3 & -mc\times \\
          *                  mc\times & I
          *  \end{bmatrix}
          *  \begin{bmatrix} v \\ \omega \end{bmatrix} = \\
@@ -84,14 +99,15 @@ namespace iDynTree
         Wrench biasWrench(const Twist & V) const;
 
         /**
-         * Return the derivative of the bias wrench with respect to the link twist.
+         * @brief Return the derivative of the bias wrench with respect to the link 6D velocity.
          *
-         * Defining \f$ M \f$ as this inertia, return the derivative
-         * with respect to V  of the bias wrench V.cross(M*V).
+         * Defining \f$ \mathbb{M} \in \mathbb{R}^{6 \times 6} \f$ as this inertia, return the derivative
+         * with respect to \f$ \mathrm{v} = \begin{bmatrix} v \\ \omega \end{bmatrix} \in \mathbb{R}^6 \f$
+         * of the bias wrench \f$ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} \f$ (i.e. v.cross(M*v)).
          *
          * The bias wrench is:
          * \f[
-         *  V \bar\times^* M V = \\
+         *  \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} = \\
          *  \begin{bmatrix}
          *   m \omega \times v - \omega \times ( m c \times \omega) \\
          *   m c \times ( \omega \times v ) + \omega \times I \omega
@@ -100,7 +116,7 @@ namespace iDynTree
          *
          * So the derivative with respect to the twist V is :
          * \f[
-         *  \partial_V ( V \bar\times^* M V ) = \\
+         *  \partial_\mathrm{v} ( \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} ) = \\
          *  \begin{bmatrix}
          *   m \omega \times             &  - m v \times + ( m c \times \omega) \times - (\omega \times) (mc \times)   \\
          *   (m c \times) ( \omega \times)  & - (m c \times )(v \times) + \omega \times I - (I \omega) \times
@@ -120,13 +136,13 @@ namespace iDynTree
          * | Elements | Symbol |  Description |
          * |:--------:|:-------:|:--------:|
          * |     0    | \f$ m \f$ | The mass of the rigid body |
-         * |  2-4     |  \f$ m c \f$      | The first moment of mass of the rigid body |
-         * |  5-9     | \f$ \operatorname{vech}(I_o) \f$ | The 6 indipendent elements of the 3d inertia matrix (\f$ I_{xx} I_{xy} I_{xz} I_{yy} I_{yz} I_{zz} \f$). |
+         * |  1-3     |  \f$ m c \f$      | The first moment of mass of the rigid body |
+         * |  4-9     | \f$ \mathop{vech}(I) \f$ | The 6 independent elements of the 3d inertia matrix, i.e. \f$ \begin{bmatrix} I_{xx} \\  I_{xy} \\  I_{xz} \\  I_{yy} \\  I_{yz} \\  I_{zz} \end{bmatrix} \f$ . |
          *
          * The first moment of mass is the center of mass (\f$ c \in \mathbb{R}^3 \f$ ) w.r.t. to the frame where this
          *  rigid body inertia is expressed multiplied by the rigid body mass \f$ m \f$.
          *
-         * The 3d rigid body inertia \f$ I_o \in \mathbb{R}^{3 \times 3} \f$ is expressed with the orientation of the frame
+         * The 3d rigid body inertia \f$ I \in \mathbb{R}^{3 \times 3} \f$ is expressed with the orientation of the frame
          * in which this rigid body inertia is expressed, and with respect to the frame origin.
          *
          */
@@ -158,14 +174,15 @@ namespace iDynTree
          *
          * Get the matrix
          * \f[
-         *   Y(v) \in \mathbb{R}^{6 \times 10}
+         *   Y(\mathrm{v}) \in \mathbb{R}^{6 \times 10}
          * \f]
          * such that:
          * \f[
-         *   I v = Y(v)\alpha
+         *   \mathbb{M} \mathrm{v} = Y(\mathrm{v}) \alpha
          * \f]
          *
-         * If \f$ \alpha \in \mathbb{R}^10 \f$ is the inertial parameters representation of \f$ I \f$ .
+         * If \f$ \alpha \in \mathbb{R}^{10} \f$ is the inertial parameters representation of \f$ \mathbb{M} \f$,
+         * as returned by the asVector method.
          */
         static Matrix6x10 momentumRegressor(const iDynTree::Twist & v);
 
@@ -174,14 +191,15 @@ namespace iDynTree
          *
          * Get the matrix
          * \f[
-         *   Y(v,a) \in \mathbb{R}^{6 \times 10}
+         *   Y(\mathrm{v},a) \in \mathbb{R}^{6 \times 10}
          * \f]
          * such that:
          * \f[
-         *   I a + v \overline{\times}^{*} I v   = Y(v,a)\alpha
+         *   \mathbb{M} a + \mathrm{v} \overline{\times}^{*} \mathbb{M} \mathrm{v}   = Y(\mathrm{v}, a)\alpha
          * \f]
          *
-         * If \f$ \alpha \in \mathbb{R}^10 \f$ is the inertial parameters representation of \f$ I \f$
+         * If \f$ \alpha \in \mathbb{R}^{10} \f$ is the inertial parameters representation of \f$ \mathbb{M} \f$,
+         * as returned by the asVector method.
          *
          * This is also the regressor of the net wrench acting on a rigid body.
          * As such, it is the building block of all other algorithms to compute dynamics
@@ -195,17 +213,18 @@ namespace iDynTree
          *
          * Get the matrix
          * \f[
-         *   Y(v,v_r,a_r) \in \mathbb{R}^{6\times6}
+         *   Y(\mathrm{v},\mathrm{v}_r,a_r) \in \mathbb{R}^{6\times10}
          * \f]
          * such that:
          * \f[
-         *   I a_r + (v \overline{\times}^{*} I - I v \times)  v_r   = Y(v,v_r,a_r)\alpha
+         *   \mathbb{M} a_r + (\mathrm{v} \overline{\times}^{*} \mathbb{M} - \mathbb{M} \mathrm{v} \times) \mathrm{v}_r   = Y(\mathrm{v},\mathrm{v}_r,a_r)\alpha
          * \f]
          *
-         * If \f$ \alpha \in \mathbb{R}^10 \f$ is the inertial parameters representation of \f$ I \f$
+         * If \f$ \alpha \in \mathbb{R}^{10} \f$ is the inertial parameters representation of \f$ \mathbb{M} \f$, as returned by the
+         * asVector method.
          *
-         * Notice that if \f$ v = v_r \f$, this regressor reduces to the one computed by momentumDerivativeRegressor.
-         * The main difference is that (assuming constant \f$ I \f$) this regressor respect the passivity condition and
+         * Notice that if \f$ \mathrm{v} = \mathrm{v}_r \f$, this regressor reduces to the one computed by momentumDerivativeRegressor.
+         * The main difference is that (assuming constant \f$ \mathbb{M} \f$) this regressor respect the passivity condition and
          * thus is the basic building block for building Slotine Li style regressors.
          *
          * For more on this, please check:
