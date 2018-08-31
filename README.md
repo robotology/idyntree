@@ -17,9 +17,9 @@ iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) 
 * **[Acknowledgments](#acknowledgments)**
 
 ## Installation
-iDynTree is mainly developed and mantained by the [Dynamic Interaction Control research line](https://www.iit.it/research/lines/dynamic-interaction-control) at the [Italian Institute of Technology](https://www.iit.it/), as part of [iCub project](http://www.icub.org/) .
+iDynTree is mainly developed and mantained by the [Dynamic Interaction Control research line](https://www.iit.it/research/lines/dynamic-interaction-control) at the [Italian Institute of Technology](https://www.iit.it/), as part of the [iCub project](http://www.icub.org/) .
 
-For this reason it is usually installed throught the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). For more informations on the superbuild concept, please check [YCM documentation](http://robotology.github.io/ycm/gh-pages/master/index.html#superbuild). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild.
+For this reason it is usually installed through the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). For more informations on the superbuild concept, please check [YCM documentation](http://robotology.github.io/ycm/gh-pages/master/index.html#superbuild). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild.
 
 If you are not interested in installing all the robotology software it is still possible to install iDynTree without installing the rest of the robotology software, and please read the rest of the Readme for more info on this.
 
@@ -47,8 +47,8 @@ but you can manually make sure that iDynTree searches or ignores a given depende
 
 #### Install dependencies
 
-If you need to install also `YARP` and `ICUB`, is is reccomended that you use the [`robotology-superbuild`](https://github.com/robotology/robotology-superbuild), but if you want to install them manually please
-check the documentation at [ICub Software Installation](http://wiki.icub.org/wiki/ICub_Software_Installation). The rest of the dependencies can be install using standard operating system package managers.
+If you need to install also `YARP` and `ICUB`, is is recommended that you use the [`robotology-superbuild`](https://github.com/robotology/robotology-superbuild), but if you want to install them manually please
+check the documentation at [ICub Software Installation](http://wiki.icub.org/wiki/ICub_Software_Installation). The rest of the dependencies can be installed using standard operating system package managers.
 
 ##### Windows
 
@@ -57,9 +57,7 @@ There are two ways of installing the required and optional dependencies of iDynT
 ###### Installers
 There are several installers that provide the binary dependencies of iDynTree on Windows.
 
-In particular you can run the binary installer of YARP
-( http://www.yarp.it/download.html#download_windows ) to install Eigen3, Qt5 and YARP itself, the binary installer of ICUB software ( http://wiki.icub.org/wiki/Windows:_installation_from_sources#Getting_iCub.27s_dependenceis ) to install Ipopt and ICUB and the robotology-additional-dependencies
-installer ( https://github.com/robotology-playground/robotology-additional-dependencies ) to install Libxml2 .
+In particular you can run the [binary installer of YARP](http://www.yarp.it/download.html#download_windows) to install Eigen3, Qt5 and YARP itself, the [binary installer of ICUB software](http://wiki.icub.org/wiki/Windows:_installation_from_sources#Getting_iCub.27s_dependenceis) to install Ipopt and ICUB, and the [robotology-additional-dependencies installer](https://github.com/robotology-playground/robotology-additional-dependencies) to install Libxml2 .
 **Important: make sure that you are installing the 64-bit installers, if you want to compile the robotology-superbuild using the the 64-bit compiler!**
 These installers will set automatically all the enviroment variables necessary to make sure that these libraries are found by CMake, and they will modify the PATH enviroment variable to make sure that the libraries can be used when launching the programs that use them.
 
@@ -113,6 +111,9 @@ $ cmake --build . --target INSTALL --config Release
 
 If you need more help on how to build CMake-based projects, please check [CGold's First step](https://cgold.readthedocs.io/en/latest/first-step.html) section.
 
+In the rest of the documentation, `<prefix>` will indicate the installation prefix in which you installed iDynTree, i.e. the value that you passed as [`CMAKE_INSTALL_PREFIX`](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) during the CMake configuration.
+
+
 ### Link
 Once the library is installed, you can link it using `CMake` with as little effort as writing the following line of code in your project's `CMakeLists.txt`:
 ```cmake
@@ -123,28 +124,31 @@ target_link_libraries(<target> PRIVATE ${iDynTree_LIBRARIES})
 ...
 ```
 
+Note that unless you did not use the default value of `CMAKE_INSTALL_PREFIX`, the `<prefix>` in which you installed iDynTree will need to be appended to the `CMAKE_PREFIX_PATH` enviromental
+variable to ensure that `find_package` can find your iDynTree installation.
+
 See [CMake's reference documentation](https://cmake.org/cmake/help/latest/) if you need more info on the [`find_package`](https://cmake.org/cmake/help/latest/command/find_package.html) or [`target_link_libraries`](https://cmake.org/cmake/help/latest/command/target_link_libraries.html) CMake commands.
 
 ### Bindings
 To compile bindings to iDynTree in several scriping languages, you should enable them using the `IDYNTREE_USES_PYTHON`, `IDYNTREE_USES_LUA`, `IDYNTREE_USES_MATLAB`, `IDYNTREE_USES_OCTAVE` CMake options.
 
-Several examples for using the bindigs are available in https://github.com/robotology-playground/idyntree/blob/master/doc/geometric_classes.md .
+Several examples for using the bindings are available in https://github.com/robotology-playground/idyntree/blob/master/doc/geometric_classes.md .
 
 Then, properly accessing bindings to iDynTree can require some additional steps.
+
 #### Python
 You should add to the `PYTHONPATH` enviromental variable the install path of the `iDynTree.py` file.
-For a typical installation of the `robotology-superbuild`, this will require adding to the `.bashrc` a line similar to this:
 ~~~
-export PYTHONPATH=$PYTHONPATH:~/src/robotology-superbuild/build/install/lib/python2.7/dist-packages/
+export PYTHONPATH=$PYTHONPATH:<prefix>/lib/python2.7/dist-packages/
 ~~~
 
 #### Matlab
-You should add to Matlab path the `{CMAKE_INSTALL_PREFIX}/mex` directory. By default this directory should be `/usr/local/mex`, or if you used a [YCM](https://github.com/robotology/ycm/) superbuild something like `SUPERBUILD_BUILD_DIRECTORY/install/mex`.
-You can modify the installation location for Matlab bindings files using the `IDYNTREE_INSTALL_MATLAB_LIBDIR` and `IDYNTREE_INSTALL_MATLAB_MFILESDIR` CMake options.
+You should add to Matlab path the `<prefix>/mex` directory.
+You can modify the relative location for Matlab bindings files in the installation prefix using the `IDYNTREE_INSTALL_MATLAB_LIBDIR` and `IDYNTREE_INSTALL_MATLAB_MFILESDIR` CMake options.
 
 #### Octave
-You should add to Octave path the `{CMAKE_INSTALL_PREFIX}/octave` directory. By default this directory should be `/usr/local/octave`, or if you used a [YCM](https://github.com/robotology/ycm/) superbuild something like `SUPERBUILD_BUILD_DIRECTORY/install/octave`.
-You can modify the installation location for Octave bindings files using the `IDYNTREE_INSTALL_OCTAVE_LIBDIR` and `IDYNTREE_INSTALL_OCTAVE_MFILESDIR` CMake options.
+You should add to Octave path the `<prefix>/octave` directory.
+You can modify the relative location for Matlab bindings files in the installation prefix using the`IDYNTREE_INSTALL_OCTAVE_LIBDIR` and `IDYNTREE_INSTALL_OCTAVE_MFILESDIR` CMake options.
 
 
 ##### Matlab/Octave bindings modifications
