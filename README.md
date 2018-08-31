@@ -1,4 +1,4 @@
-iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=maste2013-r)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/1uecfmyvxb2dujt9/branch/master?svg=true)](https://ci.appveyor.com/project/robotology/idyntree/branch/master) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![License: LGPL v2](https://img.shields.io/badge/License-LGPL%20v2-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1) [![CLA assistant](https://cla-assistant.io/readme/badge/robotology/idyntree)](https://cla-assistant.io/robotology/idyntree)  [![Shipping faster with ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com)
+iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=maste2013-r)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/1uecfmyvxb2dujt9/branch/master?svg=true)](https://ci.appveyor.com/project/robotology/idyntree/branch/master) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![License: LGPL v2](https://img.shields.io/badge/License-LGPL%20v2-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1) (https://cla-assistant.io/robotology/idyntree)  [![Shipping faster with ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com)
 ===========
 
 iDynTree is a library of robots dynamics algorithms for control, estimation and simulation.
@@ -47,7 +47,7 @@ but you can manually make sure that iDynTree searches or ignores a given depende
 
 #### Install dependencies
 
-If you need to install also `YARP` and `ICUB`, is is recommended that you use the [`robotology-superbuild`](https://github.com/robotology/robotology-superbuild), but if you want to install them manually please
+If you need to install also `YARP` and `ICUB`, it is recommended that you use the [`robotology-superbuild`](https://github.com/robotology/robotology-superbuild), but if you want to install them manually please
 check the documentation at [ICub Software Installation](http://wiki.icub.org/wiki/ICub_Software_Installation). The rest of the dependencies can be installed using standard operating system package managers.
 
 ##### Windows
