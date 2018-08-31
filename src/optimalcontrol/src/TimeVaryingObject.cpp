@@ -47,5 +47,10 @@ namespace iDynTree {
 
         template class TimeInvariantObject<MatrixDynSize>;
 
+        template class TimeInvariantObject<Transform>;
+
+        template class TimeInvariantObject<Rotation>;
+
+        template class TimeInvariantObject<Position>;
     }
 }

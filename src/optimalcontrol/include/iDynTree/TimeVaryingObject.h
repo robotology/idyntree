@@ -20,6 +20,7 @@
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/Core/Transform.h>
 
 namespace iDynTree {
 
@@ -45,6 +46,13 @@ namespace iDynTree {
 
         typedef TimeVaryingObject<double> TimeVaryingDouble;
 
+        typedef TimeVaryingObject<Transform> TimeVaryingTransform;
+
+        typedef TimeVaryingObject<Rotation> TimeVaryingRotation;
+
+        typedef TimeVaryingObject<Position> TimeVaryingPosition;
+
+
         /**
          * @warning This class is still in active development, and so API interface can change between iDynTree versions.
          * \ingroup iDynTreeExperimental
@@ -69,11 +77,23 @@ namespace iDynTree {
 
         extern template class TimeInvariantObject<MatrixDynSize>;
 
+        extern template class TimeInvariantObject<Transform>;
+
+        extern template class TimeInvariantObject<Rotation>;
+
+        extern template class TimeInvariantObject<Position>;
+
         typedef TimeInvariantObject<double> TimeInvariantDouble;
 
         typedef TimeInvariantObject<VectorDynSize> TimeInvariantVector;
 
         typedef TimeInvariantObject<MatrixDynSize> TimeInvariantMatrix;
+
+        typedef TimeInvariantObject<Transform> TimeInvariantTransform;
+
+        typedef TimeInvariantObject<Rotation> TimeInvariantRotation;
+
+        typedef TimeInvariantObject<Position> TimeInvariantPosition;
     }
 }
 
