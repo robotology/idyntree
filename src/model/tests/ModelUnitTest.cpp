@@ -301,6 +301,58 @@ void checkSimpleModel()
     }
 }
 
+void checkInsertJointAndLink()
+{
+    std::cout << "Checking InsertJointAndLink... " << std::endl;
+
+    double rotInertiaData[3*3] = {14.0,0.0,0.0,
+                                  0.0,12.0,0.0,
+                                  0.0,0.0,10.0};
+
+    SpatialInertia inertiaLink0(1.0,Position(100,0,0),RotationalInertiaRaw(rotInertiaData,3,3));
+
+    Link link0;
+    link0.setInertia(inertiaLink0);
+
+    Link link1(link0);
+
+
+    FixedJoint fixJoint(0,1,Transform(Rotation::Identity(),Position(1,3,4)));
+
+    Link linkToInsert(link0);
+    FixedJoint newJoint(2,1,Transform(Rotation::Identity(),Position(1,3,4)));
+    Transform newTransform(Rotation::Identity(),Position(1,3,4));
+
+    {
+        Model model;
+
+        model.addLink("link0",link0);
+        model.addLink("link1",link1);
+
+        model.addJoint("fixedJoint",&fixJoint);
+
+        std::cerr << "Inserting link named insertedLink and joint named newJoint "<< std::endl;
+        JointIndex ok= model.insertLinkToExistingJointAndAddJointForDisplacedLink("fixedJoint","link0",newTransform,"newJoint",&newJoint,"insertedLink",linkToInsert);
+        //std::cerr << "Return value of insert JointAndLink "<<ok << std::endl;
+        std::cerr <<model.toString()<< std::endl;
+        if (ok==-1)
+        {
+            ASSERT_EQUAL_DOUBLE(ok,1);
+        }
+        //std::cout << "Inserted link and joint "<< std::endl;
+
+        ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(),3);
+        ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(),2);
+        ASSERT_EQUAL_DOUBLE(model.getNrOfNeighbors(0),1);
+        ASSERT_EQUAL_DOUBLE(model.getNrOfNeighbors(1),1);
+        ASSERT_EQUAL_DOUBLE(model.getNrOfNeighbors(2),2);
+        ASSERT_EQUAL_DOUBLE(model.getNeighbor(0,0).neighborLink,2);
+        ASSERT_EQUAL_DOUBLE(model.getNeighbor(1,0).neighborLink,2);
+        ASSERT_EQUAL_DOUBLE(model.getNeighbor(2,0).neighborLink,0);
+        ASSERT_EQUAL_DOUBLE(model.getNeighbor(2,1).neighborLink,1);
+    }
+}
+
 void checkRandomChains()
 {
     std::cout << "Checking random chains..." << std::endl;
@@ -335,6 +387,6 @@ int main()
     checkSimpleModel();
     checkRandomChains();
     checkRandomModels();
-
+    checkInsertJointAndLink();
     return EXIT_SUCCESS;
 }

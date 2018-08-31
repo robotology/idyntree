@@ -273,7 +273,7 @@ namespace iDynTree
         /**
          * Add a joint to the model, and specify the two links that are connected
          * by the specified joints. The setAttachedLinks of the passed joint
-         * is called appropriatly, to ensure consistency in the model.
+         * is called appropriately, to ensure consistency in the model.
          * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
          *         there was an error in adding the joint.
          */
@@ -285,11 +285,33 @@ namespace iDynTree
          * The added joints connects an existing link of the model to the newly
          * added link.
          * The setAttachedLinks of the passed joint
-         * is called appropriatly, to ensure consistency in the model.
+         * is called appropriately, to ensure consistency in the model.
          * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
          *         there was an error in adding the joint.
          */
         JointIndex addJointAndLink(const std::string & existingLink,
+                                   const std::string & jointName, IJointConstPtr joint,
+                                   const std::string & newLinkName, Link & newLink);
+
+        /**
+         * \brief Displace a link by inserting a new link and a new joint.
+         * Displace a link by replacing it with a new link in the existing joint and insert new joint between the new link and the displaced link.
+         * Inputs:
+         * @param[in] existingJoint is where the new link will be inserted.
+         * @param[in] unmovableLink is the link that was previously connected to the displaced link by the existingJoint.
+         * @param[in] _unmovable_X_newLink is the transformation matrix from the unmovableLink to the new Link.
+         * @param[in] jointName is the name of the new joint.
+         * @param[in] joint is the new joint connecting the new link and the link that was displaced.
+         * @param[in] newLinkName is the name of the new link.
+         * @param[in] newLink is the new link that will be attached to the unmovable link using the existingJoint.
+         * The setAttachedLinks of the new joint
+         * and the existing joint are edited appropriately, to ensure consistency in the model.
+         * @return the JointIndex of the added joint, or JOINT_INVALID_INDEX if
+         *         there was an error in adding the joint.
+         */
+        JointIndex insertLinkToExistingJointAndAddJointForDisplacedLink(const std::string & existingJoint,
+                                      const std::string & unmovableLink,
+                                      const Transform& _unmovableLink_X_newLink,
                                    const std::string & jointName, IJointConstPtr joint,
                                    const std::string & newLinkName, Link & newLink);
 
