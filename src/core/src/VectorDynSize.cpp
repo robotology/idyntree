@@ -95,6 +95,7 @@ VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
     return *this;
 }
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
 VectorDynSize &VectorDynSize::operator=(const Span<const double> &vec)
 {
     // if the size don't match, reallocate the data
@@ -114,7 +115,7 @@ VectorDynSize &VectorDynSize::operator=(const Span<const double> &vec)
 
     return *this;
 }
-
+#endif
 
 void VectorDynSize::zero()
 {
@@ -266,9 +267,5 @@ std::string VectorDynSize::reservedToString() const
 {
     return this->toString();
 }
-
-
-
-
 
 }
