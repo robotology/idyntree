@@ -37,13 +37,9 @@ namespace iDynTree {
             element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
                 m_mass = 0;
                 auto mass = attributes.find("value");
-                if (mass != attributes.end()) {
-                    try {
-                        m_mass = std::stod(mass->second->value());
-                    } catch(const std::invalid_argument& ia) {
-                        std::string message = std::string("Failed to obtain floating point representation from ") + ia.what();
-                        reportWarning("InertialElement", "childElementForName::mass::f_attribute", message.c_str());
-                    }
+                if (mass != attributes.end()
+                    && !stringToDoubleWithClassicLocale(mass->second->value(), m_mass)) {
+                    reportWarning("InertiaElement", "childElementForName::mass::f_attribute", "Failed to obtain floating point representation for the mass element.");
                 }
                 return true;
             });
