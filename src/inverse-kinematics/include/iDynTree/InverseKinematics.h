@@ -453,6 +453,22 @@ public:
      */
     double getCenterOfMassProjectionMargin();
 
+
+    /*!
+     *
+     * \brief Get the active convex hull
+     *
+     * The convex hull returned is expressed in the plane defined by the xAxisOfPlaneInWorld,
+     * yAxisOfPlaneInWorld and originOfPlaneInWorld arguments of the addCenterOfMassProjectionConstraint methods.
+     *
+     * The transform world_H_constraintFrame that describe how the support polygon for each support frame is transformed
+     * in the world frame are the one set in the addFrameConstraint method.
+     *
+     * @param[out] convexHull constraint convex hull for the projected center of mass.
+     * @return true if the center of mass projection constraint is active, false otherwise.
+     */
+    bool getCenterOfMassProjectConstraintConvexHull(Polygon2D& convexHull);
+
     ///@}
 
     /*! @name Target-related methods
