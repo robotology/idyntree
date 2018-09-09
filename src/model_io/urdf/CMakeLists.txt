@@ -12,7 +12,9 @@ find_package(LibXml2 REQUIRED)
 
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFDofsImport.h
                                   include/iDynTree/ModelIO/ModelLoader.h
-                                  include/deprecated/iDynTree/ModelIO/URDFModelImport.h)
+                                  include/deprecated/iDynTree/ModelIO/URDFModelImport.h
+                                  include/deprecated/iDynTree/ModelIO/URDFGenericSensorsImport.h
+                                  include/deprecated/iDynTree/ModelIO/URDFSolidShapesImport.h)
 
 set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS include/private/URDFDocument.h
                                           include/private/InertialElement.h
