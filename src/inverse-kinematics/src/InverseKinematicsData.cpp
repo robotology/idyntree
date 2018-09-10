@@ -181,6 +181,10 @@ namespace kinematics {
 
         //add the constraint to the set
         std::pair<TransformMap::iterator, bool> result = m_constraints.insert(TransformMap::value_type(frameIndex, frameTransformConstraint));
+
+        // If this method is called again to reconfigure the constraint, the problem needs to be reinitialized
+        IK_PIMPL(m_pimpl)->m_problemInitialized = false;
+
         return result.second;
     }
 
@@ -195,6 +199,10 @@ namespace kinematics {
         if (result.second) {
             result.first->second.setTargetResolutionMode(m_defaultTargetResolutionMode);
         }
+
+        // If this method is called again to reconfigure the constraint, the problem needs to be reinitialized
+        IK_PIMPL(m_pimpl)->m_problemInitialized = false;
+
         return result.second;
     }
 
