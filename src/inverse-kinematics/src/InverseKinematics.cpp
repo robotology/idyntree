@@ -375,6 +375,9 @@ namespace iDynTree {
         IK_PIMPL(m_pimpl)->m_comHullConstraint_yAxisOfPlaneInWorld = yAxisOfPlaneInWorld;
         IK_PIMPL(m_pimpl)->m_comHullConstraint_originOfPlaneInWorld = originOfPlaneInWorld;
 
+        // If this method is called again to reconfigure the constraint, the problem needs to be reinitialized
+        IK_PIMPL(m_pimpl)->m_problemInitialized = false;
+
         return true;
     }
 
