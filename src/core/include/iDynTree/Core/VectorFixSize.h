@@ -12,7 +12,9 @@
 #define IDYNTREE_VECTOR_FIX_SIZE_H
 
 #include <iDynTree/Core/Utils.h>
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
 #include <iDynTree/Core/Span.h>
+#endif
 #include <string>
 #include <sstream>
 #include <cassert>
@@ -69,6 +71,7 @@ namespace iDynTree
 
         ///@}
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
         /**
          * Copy assignment operator for spans.
          *
@@ -76,6 +79,7 @@ namespace iDynTree
          *
          */
         VectorFixSize & operator=(const Span<const double>& vec);
+#endif
 
         /**
          * Raw data accessor
@@ -120,6 +124,7 @@ namespace iDynTree
         std::string reservedToString() const;
         ///@}
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
         /** Typedefs to enable make_span.
          */
         ///@{
@@ -131,6 +136,7 @@ namespace iDynTree
 
         typedef typename std::allocator_traits<std::allocator<double>>::const_pointer const_pointer;
         ///@}
+#endif
 
     };
 
@@ -185,12 +191,14 @@ namespace iDynTree
         return VecSize;
     }
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
     template<unsigned int VecSize>
     VectorFixSize<VecSize> & VectorFixSize<VecSize>::operator=(const Span<const double>& vec) {
         assert(VecSize == vec.size());
         std::memcpy(this->m_data, vec.data(), VecSize*sizeof(double));
         return *this;
     }
+#endif
 
     template<unsigned int VecSize>
     double VectorFixSize<VecSize>::operator()(const unsigned int index) const

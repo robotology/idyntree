@@ -11,10 +11,11 @@
 #ifndef IDYNTREE_DYNAMIC_SIZE_VECTOR_H
 #define IDYNTREE_DYNAMIC_SIZE_VECTOR_H
 
-
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+#include <iDynTree/Core/Span.h>
+#endif
 
 #include <string>
-#include <iDynTree/Core/Span.h>
 
 namespace iDynTree
 {
@@ -97,6 +98,7 @@ namespace iDynTree
          */
         VectorDynSize & operator=(const VectorDynSize& vec);
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
         /**
          * Copy assignment operator.
          *
@@ -107,7 +109,7 @@ namespace iDynTree
          * \warning performs dynamic memory allocation operations
          */
         VectorDynSize & operator=(const Span<const double>& vec);
-
+#endif
         /**
          * @name Vector interface methods.
          * Methods exposing a vector-like interface to PositionRaw.
@@ -187,6 +189,7 @@ namespace iDynTree
          */
         void fillBuffer(double * buf) const;
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
         /** Typedefs to enable make_span.
          */
         ///@{
@@ -198,6 +201,7 @@ namespace iDynTree
 
         typedef typename std::allocator_traits<std::allocator<double>>::const_pointer const_pointer;
         ///@}
+#endif
 
         /** @name Output helpers.
          *  Output helpers.
