@@ -21,6 +21,8 @@
 #include <iDynTree/Core/EigenHelpers.h>
 
 #include <iDynTree/KinDynComputations.h>
+
+#include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
@@ -180,7 +182,10 @@ void testInverseDynamics(KinDynComputations & dynComp)
     iDynTree::JointDOFsDoubleArray shapeAccs(dynComp.model());
 
     iDynTree::LinkNetExternalWrenches netExternalWrenches(dynComp.model());
-    netExternalWrenches.zero();
+    for(unsigned int link=0; link < dynComp.model().getNrOfLinks(); link++ )
+    {
+        netExternalWrenches(link) = getRandomWrench();
+    }
 
     // Go component for component, for simplifyng debugging
     for(int i=0; i < 6+dofs; i++)
@@ -198,6 +203,7 @@ void testInverseDynamics(KinDynComputations & dynComp)
 
         FreeFloatingGeneralizedTorques invDynForces(dynComp.model());
         FreeFloatingGeneralizedTorques massMatrixInvDynForces(dynComp.model());
+        FreeFloatingGeneralizedTorques regressorInvDynForces(dynComp.model());
 
         // Run classical inverse dynamics
         bool ok = dynComp.inverseDynamics(baseAcc,shapeAccs,netExternalWrenches,invDynForces);
@@ -212,14 +218,38 @@ void testInverseDynamics(KinDynComputations & dynComp)
         ok = dynComp.generalizedBiasForces(invDynBiasForces);
         ASSERT_IS_TRUE(ok);
 
+        FreeFloatingGeneralizedTorques invDynExtForces(dynComp.model());
+        ok = dynComp.generalizedExternalForces(netExternalWrenches, invDynExtForces);
+        ASSERT_IS_TRUE(ok);
+
         VectorDynSize massMatrixInvDynForcesContinuous(6+dofs);
-        toEigen(massMatrixInvDynForcesContinuous) = toEigen(massMatrix)*toEigen(baseAcc,shapeAccs) + toEigen(invDynBiasForces);
+        toEigen(massMatrixInvDynForcesContinuous) = toEigen(massMatrix)*toEigen(baseAcc,shapeAccs) + toEigen(invDynBiasForces) + toEigen(invDynExtForces);
         toEigen(massMatrixInvDynForces.baseWrench().getLinearVec3()) = toEigen(massMatrixInvDynForcesContinuous).segment<3>(0);
         toEigen(massMatrixInvDynForces.baseWrench().getAngularVec3()) = toEigen(massMatrixInvDynForcesContinuous).segment<3>(3);
         toEigen(massMatrixInvDynForces.jointTorques()) = toEigen(massMatrixInvDynForcesContinuous).segment(6,dofs);
 
         ASSERT_EQUAL_SPATIAL_FORCE(massMatrixInvDynForces.baseWrench(),invDynForces.baseWrench());
         ASSERT_EQUAL_VECTOR(massMatrixInvDynForces.jointTorques(),invDynForces.jointTorques());
+
+        // Run inverse dynamics with regressor matrix
+        MatrixDynSize regressor(dynComp.model().getNrOfDOFs()+6, 10*dynComp.model().getNrOfLinks());
+        ok = dynComp.inverseDynamicsInertialParametersRegressor(baseAcc, shapeAccs, regressor);
+        ASSERT_IS_TRUE(ok);
+
+
+
+        VectorDynSize inertialParams(10*dynComp.model().getNrOfLinks());
+        ok = dynComp.model().getInertialParameters(inertialParams);
+        ASSERT_IS_TRUE(ok);
+
+        VectorDynSize regressorInvDynForcesContinuous(6+dofs);
+        toEigen(regressorInvDynForcesContinuous) = toEigen(regressor)*toEigen(inertialParams) + toEigen(invDynExtForces);
+        toEigen(regressorInvDynForces.baseWrench().getLinearVec3()) = toEigen(regressorInvDynForcesContinuous).segment<3>(0);
+        toEigen(regressorInvDynForces.baseWrench().getAngularVec3()) = toEigen(regressorInvDynForcesContinuous).segment<3>(3);
+        toEigen(regressorInvDynForces.jointTorques()) = toEigen(regressorInvDynForcesContinuous).segment(6,dofs);
+
+        ASSERT_EQUAL_SPATIAL_FORCE(regressorInvDynForces.baseWrench(),invDynForces.baseWrench());
+        ASSERT_EQUAL_VECTOR(regressorInvDynForces.jointTorques(),invDynForces.jointTorques());
 
     }
 }

@@ -697,6 +697,39 @@ public:
      */
     bool generalizedGravityForces(FreeFloatingGeneralizedTorques & generalizedGravityForces);
 
+    /**
+     * Compute the getNrOfDOFS()+6 vector of generalized external forces.
+     *
+     * The semantics of baseAcc, the base part of baseForceAndJointTorques
+     * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @param[out] generalizedExternalForces the output external generalized forces
+     * @return true if all went well, false otherwise
+     */
+    bool generalizedExternalForces(const LinkNetExternalWrenches & linkExtForces,
+                                         FreeFloatingGeneralizedTorques & generalizedExternalForces);
+
+    /**
+     * @brief Compute the free floating inverse dynamics as a linear function of inertial parameters.
+     *
+     * The semantics of baseAcc, the base part (first six rows) of baseForceAndJointTorques
+     * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @see iDynTree::InverseDynamicsInertialParametersRegressor for more info on the underlying algorithm.
+     *
+     * @param[in] baseAcc the acceleration of the base link
+     * @param[in] s_ddot the accelerations of the joints
+     * @param[out] baseForceAndJointTorquesRegressor The (6+model.getNrOfDOFs() X 10*model.getNrOfLinks()) inverse dynamics regressor.
+     * @return true if all went well, false otherwise
+     */
+    bool inverseDynamicsInertialParametersRegressor(const Vector6& baseAcc,
+                                                    const VectorDynSize& s_ddot,
+                                                          MatrixDynSize& baseForceAndJointTorquesRegressor);
+
     //@}
 
 

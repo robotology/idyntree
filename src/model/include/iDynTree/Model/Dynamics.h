@@ -11,8 +11,9 @@
 #ifndef IDYNTREE_INVERSE_DYNAMICS_H
 #define IDYNTREE_INVERSE_DYNAMICS_H
 
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Core/MatrixDynSize.h>
 
+#include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/JointState.h>
 
@@ -60,12 +61,26 @@ namespace iDynTree
                                                        const LinkAccArray & linkBiasAcc,
                                                              Wrench& totalMomentumBias);
 
-
+    /**
+     * \ingroup iDynTreeModel
+     *
+     * @brief Compute the inverse dynamics, i.e. the generalized torques corresponding to a given set of robot accelerations and external force/torques.
+     *
+     * @param[in] model The model used for the computation.
+     * @param[in] traversal The traversal used for the computation, it defines the used base link.
+     * @param[in] jointPos The (internal) joint position of the model.
+     * @param[in] linksVel Vector of left-trivialized velocities for each link of the model (for each link \f$L\f$, the corresponding velocity is \f${}^L \mathrm{v}_{A, L}\f$).
+     * @param[in] linksProperAcc Vector of left-trivialized proper acceleration for each link of the model
+     *                           (for each link \f$L\f$, the corresponding proper acceleration is \f${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} \f$), where \f$ {}^A g \in \mathbb{R}^3 \f$ is the gravity acceleration expressed in an inertial frame \f$A\f$ . See iDynTree::LinkNetExternalWrenches .
+     * @param[in] linkExtForces Vector of external 6D force/torques applied to the links. For each link \f$L\f$, the corresponding external force is \f${}_L \mathrm{f}^x_L\f$, i.e. the force that the enviroment applies on the on the link \f$L\f$, expressed in the link frame \f$L\f$.
+     * @param[out] linkIntWrenches Vector of internal joint force/torques. See iDynTree::LinkInternalWrenches .
+     * @param[out] baseForceAndJointTorques Generalized torques output. The base element is the residual force on the base (that is equal to zero if the robot acceleration and the external forces provided in LinkNetExternalWrenches were consistent), while the joint part is composed by the joint torques.
+     */
     bool RNEADynamicPhase(const iDynTree::Model & model,
                           const iDynTree::Traversal & traversal,
                           const iDynTree::JointPosDoubleArray & jointPos,
                           const iDynTree::LinkVelArray & linksVel,
-                          const iDynTree::LinkAccArray & linksAcc,
+                          const iDynTree::LinkAccArray & linksProperAcc,
                           const iDynTree::LinkNetExternalWrenches & linkExtForces,
                                 iDynTree::LinkInternalWrenches       & linkIntWrenches,
                                 iDynTree::FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
@@ -128,6 +143,8 @@ namespace iDynTree
     };
 
     /**
+     * \ingroup iDynTreeModel
+     *
      * Compute the floating base acceleration of an unconstrianed
      * robot, using as input the external forces and the joint torques.
      * We follow the algorithm described in Featherstone 2008, modified
@@ -142,6 +159,37 @@ namespace iDynTree
                                   const JointDOFsDoubleArray & jointTorques,
                                         ArticulatedBodyAlgorithmInternalBuffers & buffers,
                                         FreeFloatingAcc & robotAcc);
+
+    /**
+     * \ingroup iDynTreeModel
+     *
+     *
+     * @brief Compute the inverse dynamics of the model as linear function of the inertial parameters.
+     *
+     * This function computes the matrix that multiplied by the vector of inertial parameters of a model (see iDynTree::Model::getInertialParameters)
+     * returns the inverse dynamics generalized torques. In particular it is consistent with the result of the iDynTree::RNEADynamicPhase function, i.e.
+     * the first six rows of the regressor correspond to the sum of all external force/torques acting on the robot, expressed in the origin
+     * and with the orientation of the specified referenceFrame, as defined by the referenceFrame_H_link argument.
+     *
+     *
+     * @note The regressor only computes the inverse dynamics generalized torques assuming that the external forces are equal to zero,
+     *       as the contribution of the external forces to the inverse dynamics is indipendent from inertial parameters.
+     *
+     * @param[in] model The model used for the computation.
+     * @param[in] traversal The traversal used for the computation, it defines the used base link.
+     * @param[in] referenceFrame_H_link Position of  each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link \f$L\f$, the corresponding transform is \f${}^D H_L\f$.
+     * @param[in] linksVel Vector of left-trivialized velocities for each link of the model (for each link \f$L\f$, the corresponding velocity is \f${}^L \mathrm{v}_{A, L}\f$).
+     * @param[in] linksProperAcc Vector of left-trivialized proper acceleration for each link of the model
+     *                           (for each link \f$L\f$, the corresponding proper acceleration is \f${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} \f$), where \f$ {}^A g \in \mathbb{R}^3 \f$ is the gravity acceleration expressed in an inertial frame \f$A\f$ .
+     * @param[out] baseForceAndJointTorquesRegressor The (6+model.getNrOfDOFs() X 10*model.getNrOfLinks()) inverse dynamics regressor.
+     *
+     */
+    bool InverseDynamicsInertialParametersRegressor(const iDynTree::Model & model,
+                                                    const iDynTree::Traversal & traversal,
+                                                    const iDynTree::LinkPositions& referenceFrame_H_link,
+                                                    const iDynTree::LinkVelArray & linksVel,
+                                                    const iDynTree::LinkAccArray & linksAcc,
+                                                          iDynTree::MatrixDynSize & baseForceAndJointTorquesRegressor);
 
 
 
