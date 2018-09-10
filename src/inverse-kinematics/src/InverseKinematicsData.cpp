@@ -183,7 +183,7 @@ namespace kinematics {
         std::pair<TransformMap::iterator, bool> result = m_constraints.insert(TransformMap::value_type(frameIndex, frameTransformConstraint));
 
         // If this method is called again to reconfigure the constraint, the problem needs to be reinitialized
-        IK_PIMPL(m_pimpl)->m_problemInitialized = false;
+        m_problemInitialized = false;
 
         return result.second;
     }
@@ -201,7 +201,7 @@ namespace kinematics {
         }
 
         // If this method is called again to reconfigure the constraint, the problem needs to be reinitialized
-        IK_PIMPL(m_pimpl)->m_problemInitialized = false;
+        m_problemInitialized = false;
 
         return result.second;
     }
