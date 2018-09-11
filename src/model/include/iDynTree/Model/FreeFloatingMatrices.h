@@ -19,9 +19,15 @@ namespace iDynTree
 class Model;
 
 /**
- * Enum describing the possible frame velocity representation convention.
+ * @brief Possible frame velocity representation convention.
  *
- * See KinDynComputations documentation for more details.
+ * Given a link \f$L\f$ and an absolute frame \f$A\f$, the
+ * the possible frame velocity representation are the following:
+ * * `INERTIAL_FIXED_REPRESENTATION` : Velocity representation is \f${}^{A} \mathrm{v}_{A,B}\f$,
+ * * `BODY_FIXED_REPRESENTATION` : Velocity representation is \f${}^{B} \mathrm{v}_{A,B}\f$,
+ * * `MIXED_REPRESENTATION` : Velocity representation is \f${}^{B[A]} \mathrm{v}_{A,B}\f$.
+ *
+ * See iDynTree::KinDynComputations documentation for more details.
  */
 enum FrameVelocityRepresentation
 {
