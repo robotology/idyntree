@@ -15,7 +15,7 @@
 
 namespace iDynTree {
 /**
- * \ingroup iDynTreeEstimation
+ * \ingroup iDynTreeDeprecated
  *
  * A simple legged odometry for a legged robot.
  *
