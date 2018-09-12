@@ -84,6 +84,7 @@ private:
 
     // Resize internal data structures after a model has been successfully loaded
     void resizeInternalDataStructures();
+
 public:
 
     /**
@@ -456,11 +457,31 @@ public:
      */
     iDynTree::Twist getFrameVel(const FrameIndex frameIdx);
 
+    /**
+     * Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .
+     *
+     * @warning As this method recomputes the accelerations of all links for each call, it may be computationally expensive.
+     */
+    Vector6 getFrameAcc(const std::string & frameName,
+                        const Vector6& baseAcc,
+                        const VectorDynSize& s_ddot);
+
+    /**
+     * Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .
+     *
+     * @warning As this method recomputes the accelerations of all links for each call, it may be computationally expensive.
+     */
+    Vector6 getFrameAcc(const FrameIndex frameIdx,
+                        const Vector6& baseAcc,
+                        const VectorDynSize& s_ddot);
+
     bool getFrameFreeFloatingJacobian(const std::string & frameName,
                                       iDynTree::MatrixDynSize & outJacobian);
 
     bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
                                       iDynTree::MatrixDynSize & outJacobian);
+
+
 
 
     /**

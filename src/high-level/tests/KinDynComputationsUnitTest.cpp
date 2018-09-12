@@ -21,6 +21,7 @@
 #include <iDynTree/Core/EigenHelpers.h>
 
 #include <iDynTree/KinDynComputations.h>
+#include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
@@ -64,7 +65,7 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
 
     for(int i=0; i < 6; i++)
     {
-        baseVel(i) = i; //real_random_double();
+        baseVel(i) = real_random_double();
     }
 
     for(size_t dof=0; dof < dofs; dof++)
@@ -305,12 +306,53 @@ void testRelativeJacobians(KinDynComputations & dynComp)
 
 // Dummy test: for now it just prints the frameBiasAcc, to check there is no
 // usage of not initialized memory
-void testFrameBiasAcc(KinDynComputations & dynComp)
+void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
 {
     FrameIndex frame = real_random_int(0, dynComp.getNrOfFrames());
 
-    // Compute and print frameBiasAcc
-    std::cerr << "Computed frameBiasAcc " << dynComp.getFrameBiasAcc(frame).toString() << std::endl;
+    // Test Jacobian consistency
+
+    // Get robot velocity
+    iDynTree::VectorDynSize nu(6+dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getModelVel(nu);
+
+    // Compute frame velocity and jacobian
+    Twist frameVel = dynComp.getFrameVel(frame);
+    Vector6 frameVelJac;
+    FrameFreeFloatingJacobian jac(dynComp.model());
+    dynComp.getFrameFreeFloatingJacobian(frame, jac);
+    toEigen(frameVelJac) = toEigen(jac)*toEigen(nu);
+
+    ASSERT_EQUAL_VECTOR(frameVel.asVector(), frameVelJac);
+
+    std::cerr << "nu: " << nu.toString() << std::endl;
+
+    // Compute frame acceleration, and bias acceleration
+    Vector6 baseAcc;
+    baseAcc.zero();
+    baseAcc(0) = 1;
+    baseAcc(1) = 0;
+    baseAcc(2) = 0;
+    baseAcc(3) = 0;
+    baseAcc(4) = 0;
+    baseAcc(5) = 0;
+
+    VectorDynSize sddot(dynComp.model().getNrOfDOFs());
+    for(int i=0; i < sddot.size(); i++)
+    {
+        sddot(i) = i*0.1;
+    }
+
+    iDynTree::VectorDynSize nuDot(6+dynComp.getNrOfDegreesOfFreedom());
+    toEigen(nuDot) = toEigen(baseAcc, sddot);
+
+
+    Vector6 frameAcc = dynComp.getFrameAcc(frame, baseAcc, sddot);
+    Vector6 biasAcc = dynComp.getFrameBiasAcc(frame);
+    Vector6 frameAccJac;
+    toEigen(frameAccJac) = toEigen(jac)*toEigen(nuDot) + toEigen(biasAcc);
+
+    ASSERT_EQUAL_VECTOR(frameAcc, frameAccJac);
 }
 
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
@@ -330,7 +372,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
         testAverageVelocityAndTotalMomentumJacobian(dynComp);
         testInverseDynamics(dynComp);
         testRelativeJacobians(dynComp);
-        testFrameBiasAcc(dynComp);
+        testAbsoluteJacobiansAndFrameBiasAcc(dynComp);
     }
 
 }
@@ -339,8 +381,11 @@ void testModelConsistencyAllRepresentations(std::string modelName)
 {
     std::string urdfFileName = getAbsModelPath(modelName);
     std::cout << "Testing file " << urdfFileName <<  std::endl;
+    std::cout << "Testing MIXED_REPRESENTATION " << urdfFileName <<  std::endl;
     testModelConsistency(urdfFileName,iDynTree::MIXED_REPRESENTATION);
+    std::cout << "Testing BODY_FIXED_REPRESENTATION " << urdfFileName <<  std::endl;
     testModelConsistency(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
+    std::cout << "Testing INERTIAL_FIXED_REPRESENTATION " << urdfFileName <<  std::endl;
     testModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
 }
 
