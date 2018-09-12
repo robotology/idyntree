@@ -108,6 +108,7 @@ public:
     /**
      * @name Model loading and definition methods
      * This methods are used to load the structure of your model.
+     *
      */
     //@{
 
@@ -148,11 +149,14 @@ public:
 
     /**
      * Set the used FrameVelocityRepresentation.
+     *
+     * @see FrameVelocityRepresentation
      */
     bool setFrameVelocityRepresentation(const FrameVelocityRepresentation frameVelRepr) const;
 
     /**
-     * Get the used FrameVelocityRepresentation.
+     * @brief Get the used FrameVelocityRepresentation.
+     * @see setFrameVelocityRepresentation
      */
     FrameVelocityRepresentation getFrameVelocityRepresentation() const;
     //@}
@@ -189,20 +193,6 @@ public:
     unsigned int getNrOfLinks() const;
 
     /**
-     * Get a human readable description of a given link in the model.
-     *
-     * @return a human readable description of a given link in the model.
-     */
-    //std::string getDescriptionOfLink(int link_index);
-
-    /**
-     * Get a human readable description of all links considered in the model.
-     *
-     * @return a std::string containing the description of all the links.
-     */
-    //std::string getDescriptionOfLinks();
-
-    /**
      * Get the number of frames contained in the model.
      *
      * \note The number of frames is always greater than or equal to
@@ -211,20 +201,6 @@ public:
      *       can associated to a given link.
      */
     unsigned int getNrOfFrames() const;
-
-    /**
-     * Get a human readable description of a given frame considered in the model.
-     *
-     * @return a human readable description of a given frame considered in the model.
-     */
-    //std::string getDescriptionOfFrame(int frame_index);
-
-    /**
-     * Get a human readable description of all frames considered in the model.
-     *
-     * @return a std::string containing the description of all the frame considered in the model.
-     */
-    //std::string getDescriptionOfLinks();
 
     /**
      * Get the name of the link considered as the floating base.
@@ -368,8 +344,7 @@ public:
     //@}
 
     /**
-      * @name Methods to get transform information between frames in the model,
-      *       given the current state.
+      * @name Methods to get transform information between frames in the model, given the current state.
       */
     //@{
 
@@ -623,12 +598,54 @@ public:
 
 
     /**
-      * @name Methods to get quantities related to dynamics matrices.
+      * @name Methods to get quantities related to unconstrained free floating equation of motions.
+      *
+      * This methods permits to compute several quantities related to free floating equation of methods.
+      * Note that this equations needs to be coupled with a description of the interaction between the model
+      * and the enviroment (such as a contant model, a bilateral constraint on some links or by considering
+      * some external forces as inputs) to actually obtain a dynamical system description of the mechanical model evolution.
+      *
+      * The equations of motion of a free floating mechanical system under the effect of a uniform gravitational field are:
+      * \f[
+      * M(q) \dot{\nu} +
+      * C(q, \nu) \nu +
+      * G(q)
+      * =
+      * \begin{bmatrix}
+      * 0_{6\times1} \newline
+      * \tau
+      * \end{bmatrix}
+      * +
+      * \sum_{L \in \mathcal{L}}
+      * J_L^T \mathrm{f}_L^x
+      * \f]
+      *
+      * where:
+      *
+      * * \f$n_{PC}\f$ is the value returned by Model::getNrOfPosCoords,
+      * * \f$n_{DOF}\f$ is the value returned by Model::getNrOfDOFs,
+      * * \f$n_{L}\f$ is the value returned by Model::getNrOfLinks,
+      * * \f$q \in \mathbb{R}^3 \times \textrm{SO}(3) \times \mathbb{R}^{n_{PC}}\f$ is the robot position,
+      * * \f$\nu \in \mathbb{R}^{6+n_{DOF}}\f$ is the robot velocity,
+      * * \f$\dot{\nu} \in \mathbb{R}^{6+n_{DOF}}\f$ is the robot acceleration,
+      * * \f$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}\f$ is the free floating mass matrix,
+      * * \f$C(q, \nu)  \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}\f$ is the coriolis matrix,
+      * * \f$G(q) \in \mathbb{R}^{6+n_{DOF}}\f$ is the vector of gravity generalized forces,
+      * * \f$\tau \in \mathbb{R}^6\f$ is the vector of torques applied on the joint of the multibody model,
+      * * \f$\mathcal{L}\f$ is the set of all the links contained in the multibody model,
+      * * \f$J_L \in \mathbb{R}^{6+n_{DOF}}\f$ is the free floating jacobian of link \f$L\f$ as obtained by KinDynComputations::getFrameFreeFloatingJacobian,
+      * * \f$\mathrm{f}_L^x\f$ is the 6D force/torque applied by the enviroment on link \f$L\f$.
+      *
+      * The precise definition of each quantity (in particular the part related to the base) actually depends on the
+      * choice of FrameVelocityRepresentation, specified with the setFrameVelocityRepresentation method.
+      *
       */
     //@{
 
     /**
-     * Get the free floating mass matrix of the system.
+     * @brief Get the free floating mass matrix of the system.
+     *
+     * This method computes \f$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}\f$.
      *
      * The mass matrix depends on the joint positions, specified by the setRobotState methods.
      * If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or INERTIAL_FIXED_REPRESENTATION,
@@ -645,15 +662,11 @@ public:
      */
     bool getFreeFloatingMassMatrix(MatrixDynSize & freeFloatingMassMatrix);
 
-    //@}
 
     /**
-      * @name Methods to unconstrained free floating dynamics.
-      */
-    //@{
-
-    /**
-     * Compute the free floating inverse dynamics.
+     * @brief Compute the free floating inverse dynamics.
+     *
+     * This method computes \f$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}\f$.
      *
      * The semantics of baseAcc, the base part of baseForceAndJointTorques
      * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
@@ -672,10 +685,11 @@ public:
                                FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
 
     /**
-     * Compute the getNrOfDOFS()+6 vector of generalized bias (gravity+coriolis) forces.
+     * @brief Compute the getNrOfDOFS()+6 vector of generalized bias (gravity+coriolis) forces.
      *
-     * The semantics of baseAcc, the base part of baseForceAndJointTorques
-     * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
+     * This method computes \f$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}\f$.
+     *
+     * The semantics of the base part of generalizedBiasForces depend of the chosen FrameVelocityRepresentation .
      *
      * The state is the one given set by the setRobotState method.
      *
@@ -685,10 +699,11 @@ public:
     bool generalizedBiasForces(FreeFloatingGeneralizedTorques & generalizedBiasForces);
 
     /**
-     * Compute the getNrOfDOFS()+6 vector of generalized gravity forces.
+     * @brief Compute the getNrOfDOFS()+6 vector of generalized gravity forces.
      *
-     * The semantics of baseAcc, the base part of baseForceAndJointTorques
-     * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
+     * This method computes \f$G(q) \in \mathbb{R}^{6+n_{DOF}}\f$.
+     *
+     * The semantics of the base part of generalizedGravityForces depend of the chosen FrameVelocityRepresentation .
      *
      * The state is the one given set by the setRobotState method.
      *
@@ -696,6 +711,51 @@ public:
      * @return true if all went well, false otherwise
      */
     bool generalizedGravityForces(FreeFloatingGeneralizedTorques & generalizedGravityForces);
+
+    /**
+     * @brief Compute the getNrOfDOFS()+6 vector of generalized external forces.
+     *
+     * This method computes \f$ -\sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}} \f$.
+     *
+     * @warning Note that this method returns the **negated** sum of the product of jacobian and the external force,
+     *          consistently with how the generalized external forces are computed in the KinDynComputations::inverseDynamics method.
+     *
+     * The semantics of the base part of generalizedExternalForces
+     * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @param[out] generalizedExternalForces the output external generalized forces
+     * @return true if all went well, false otherwise
+     */
+    bool generalizedExternalForces(const LinkNetExternalWrenches & linkExtForces,
+                                         FreeFloatingGeneralizedTorques & generalizedExternalForces);
+
+    /**
+     * @brief Compute the free floating inverse dynamics as a linear function of inertial parameters.
+     *
+     * This methods computes the \f$ Y(\dot{\nu}, \nu, q) \in \mathbb{R}^{ (6+n_{DOF}) \times (10n_{L}) } \f$ matrix such that:
+     * \f[
+     *  Y(\dot{\nu}, \nu, q) \phi = M(q) \dot{\nu} + C(q, \nu) \nu + G(q)
+     * \f]
+     *
+     * where \f$\phi \in \mathbb{R}^{10n_{L}}\f$ is the vector of inertial parameters returned by the Model::getInertialParameters .
+     *
+     * The semantics of baseAcc, the base part (first six rows) of baseForceAndJointTorquesRegressor
+     * depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @see iDynTree::InverseDynamicsInertialParametersRegressor for more info on the underlying algorithm.
+     *
+     * @param[in] baseAcc the acceleration of the base link
+     * @param[in] s_ddot the accelerations of the joints
+     * @param[out] baseForceAndJointTorquesRegressor The (6+model.getNrOfDOFs() X 10*model.getNrOfLinks()) inverse dynamics regressor.
+     * @return true if all went well, false otherwise
+     */
+    bool inverseDynamicsInertialParametersRegressor(const Vector6& baseAcc,
+                                                    const VectorDynSize& s_ddot,
+                                                          MatrixDynSize& baseForceAndJointTorquesRegressor);
 
     //@}
 

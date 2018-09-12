@@ -168,6 +168,9 @@ public:
     /** Buffer of link velocities, always set to zero for gravity computations */
     LinkVelArray m_invDynZeroLinkVel;
 
+    /** Buffer of link proper accelerations, always set to zero for external forces */
+    LinkAccArray m_invDynZeroLinkProperAcc;
+
     KinDynComputationsPrivateAttributes()
     {
         m_isModelValid = false;
@@ -242,6 +245,7 @@ void KinDynComputations::resizeInternalDataStructures()
     this->pimpl->m_invDynZeroVel.baseVel().zero();
     this->pimpl->m_invDynZeroVel.jointVel().zero();
     this->pimpl->m_invDynZeroLinkVel.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_invDynZeroLinkProperAcc.resize(this->pimpl->m_robot_model);
     this->pimpl->m_traversalCache.resize(this->pimpl->m_robot_model);
 
     for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(pimpl->m_robot_model.getNrOfLinks()); lnkIdx++)
@@ -1905,6 +1909,118 @@ bool KinDynComputations::generalizedGravityForces(FreeFloatingGeneralizedTorques
     // Convert output base force
     generalizedGravityForces.baseWrench() = pimpl->fromBodyFixedToUsedRepresentation(generalizedGravityForces.baseWrench(),
                                                                               pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex()));
+
+    return true;
+}
+
+bool KinDynComputations::generalizedExternalForces(const LinkNetExternalWrenches & linkExtForces,
+                                                   FreeFloatingGeneralizedTorques & generalizedExternalForces)
+{
+    // Convert input external forces
+    if( pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION ||
+        pimpl->m_frameVelRepr == MIXED_REPRESENTATION )
+    {
+        this->computeFwdKinematics();
+
+        for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(pimpl->m_robot_model.getNrOfLinks()); lnkIdx++)
+        {
+            const Transform & inertialFrame_X_link = pimpl->m_linkPos(lnkIdx);
+            pimpl->m_invDynNetExtWrenches(lnkIdx) = pimpl->fromUsedRepresentationToBodyFixed(linkExtForces(lnkIdx),inertialFrame_X_link);
+        }
+    }
+    else
+    {
+        for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(pimpl->m_robot_model.getNrOfLinks()); lnkIdx++)
+        {
+            pimpl->m_invDynNetExtWrenches(lnkIdx) = linkExtForces(lnkIdx);
+        }
+    }
+
+    // Call usual RNEA, but with both velocity and **proper acceleration** set to zero buffers
+    RNEADynamicPhase(pimpl->m_robot_model,
+                     pimpl->m_traversal,
+                     pimpl->m_pos.jointPos(),
+                     pimpl->m_invDynZeroLinkVel,
+                     pimpl->m_invDynZeroLinkProperAcc,
+                     pimpl->m_invDynNetExtWrenches,
+                     pimpl->m_invDynInternalWrenches,
+                     generalizedExternalForces);
+
+    // Convert output base force
+    generalizedExternalForces.baseWrench() = pimpl->fromBodyFixedToUsedRepresentation(generalizedExternalForces.baseWrench(),
+                                                                              pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex()));
+    return true;
+}
+
+bool KinDynComputations::inverseDynamicsInertialParametersRegressor(const Vector6& baseAcc,
+                                                                    const VectorDynSize& s_ddot,
+                                                                          MatrixDynSize& regressor)
+{
+    // Needed for using pimpl->m_linkVel
+    this->computeFwdKinematics();
+
+    // Convert input base acceleration
+    if( pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION )
+    {
+        fromEigen(pimpl->m_invDynBaseAcc,toEigen(baseAcc));
+    }
+    else if( pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION )
+    {
+        pimpl->m_invDynBaseAcc = convertInertialAccelerationToBodyFixedAcceleration(baseAcc,pimpl->m_pos.worldBasePos());
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+        pimpl->m_invDynBaseAcc = convertMixedAccelerationToBodyFixedAcceleration(baseAcc,
+                                                                                 pimpl->m_vel.baseVel(),
+                                                                                 pimpl->m_pos.worldBasePos().getRotation());
+    }
+
+    // Prepare the vector of generalized proper accs
+    pimpl->m_invDynGeneralizedProperAccs.baseAcc() = pimpl->m_invDynBaseAcc;
+    toEigen(pimpl->m_invDynGeneralizedProperAccs.baseAcc().getLinearVec3()) =
+        toEigen(pimpl->m_invDynBaseAcc.getLinearVec3()) - toEigen(pimpl->m_gravityAccInBaseLinkFrame);
+    toEigen(pimpl->m_invDynGeneralizedProperAccs.jointAcc()) = toEigen(s_ddot);
+
+    // Run inverse dynamics
+    ForwardAccKinematics(pimpl->m_robot_model,
+                         pimpl->m_traversal,
+                         pimpl->m_pos,
+                         pimpl->m_vel,
+                         pimpl->m_invDynGeneralizedProperAccs,
+                         pimpl->m_linkVel,
+                         pimpl->m_invDynLinkProperAccs);
+
+    // Compute the inverse dynamics regressor, using the absolute frame A as the reference frame in which the base dynamics is expressed
+    // (this is done out of convenience because the pimpl->m_linkPos (that contains for each link L the transform A_H_L) is already available
+    InverseDynamicsInertialParametersRegressor(pimpl->m_robot_model,
+                                               pimpl->m_traversal,
+                                               pimpl->m_linkPos,
+                                               pimpl->m_linkVel,
+                                               pimpl->m_invDynLinkProperAccs,
+                                               regressor);
+
+    // Transform the first six rows of the regressor according to the choosen frame velocity representation
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        int cols = regressor.cols();
+        Matrix6x6 B_X_A = pimpl->m_pos.worldBasePos().inverse().asAdjointTransformWrench();
+        toEigen(regressor).block(0, 0, 6, cols) =
+            toEigen(B_X_A)*toEigen(regressor).block(0, 0, 6, cols);
+
+    }
+    else if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+    {
+        // In this case, the first six rows are already with the correct value
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+        int cols = regressor.cols();
+        Matrix6x6 B_A_X_A = Transform(Rotation::Identity(), pimpl->m_pos.worldBasePos().getPosition()).inverse().asAdjointTransformWrench();
+        toEigen(regressor).block(0, 0, 6, cols) =
+            toEigen(B_A_X_A)*toEigen(regressor).block(0, 0, 6, cols);
+    }
 
     return true;
 }

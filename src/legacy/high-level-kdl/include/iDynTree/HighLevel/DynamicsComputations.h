@@ -30,7 +30,7 @@ class Wrench;
 namespace HighLevel {
 
 /**
- * \ingroup iDynTreeHighLevel
+ * \ingroup iDynTreeDeprecated
  *
  * The dynamics computations class is an high level class stateful to access
  * several algorithms related to kinematics and dynamics of free floating
