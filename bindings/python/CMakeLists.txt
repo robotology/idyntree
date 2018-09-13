@@ -1,3 +1,5 @@
+find_package(NumPy REQUIRED)
+
 set(CMAKE_SWIG_FLAGS "-Wextra;-module;iDynTree;-threads")
 set(IDYNTREE_USES_PYTHON_VERSION "" CACHE STRING "Specify python version to use" )
 
@@ -8,7 +10,7 @@ set(IDYNTREE_USES_PYTHON_VERSION_ARGS)
   endif()
 
 find_package(PythonLibs ${IDYNTREE_USES_PYTHON_VERSION} EXACT)
-include_directories(${PYTHON_INCLUDE_PATH})
+include_directories(${PYTHON_INCLUDE_PATH} ${PYTHON_NUMPY_INCLUDE_DIR})
 link_libraries(${PYTHON_LIBRARY})
 
 ## in Windows it seems necessary to declare explictly the link_directory
