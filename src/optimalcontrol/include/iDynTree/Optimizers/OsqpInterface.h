@@ -70,6 +70,8 @@ namespace iDynTree {
 
             virtual ~OsqpInterface() override;
 
+            virtual bool isAvailable() override;
+
             virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem) override;
 
             virtual bool setInitialGuess(VectorDynSize &initialGuess) override;

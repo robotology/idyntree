@@ -437,6 +437,11 @@ namespace iDynTree {
             }
         }
 
+        bool OsqpInterface::isAvailable()
+        {
+            return true;
+        }
+
         bool OsqpInterface::setProblem(std::shared_ptr<OptimizationProblem> problem)
         {
             if (!problem){
@@ -529,7 +534,7 @@ namespace iDynTree {
             if (m_pimpl->hasBoxConstraints) {
                 m_pimpl->unifiedLowerBounds.head(m_pimpl->nv) = toEigen(m_pimpl->variablesLowerBounds);
                 m_pimpl->unifiedLowerBounds.tail(m_problem->numberOfConstraints()) =
-                        toEigen(m_pimpl->constraintsLowerBounds) - toEigen(m_pimpl->constraintsBuffer); //remove eventual bias in the constraints
+                        toEigen(m_pimpl->constraintsLowerBounds) - toEigen(m_pimpl->constraintsBuffer); //remove eventual bias in the constraints. Infact, suppose that the constraint is written as Ax - b = 0, it is not enough to consider only the constraint jacobian A.
 
                 m_pimpl->unifiedUpperBounds.head(m_pimpl->nv) = toEigen(m_pimpl->variablesUpperBounds);
                 m_pimpl->unifiedUpperBounds.tail(m_problem->numberOfConstraints()) =

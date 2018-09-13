@@ -265,6 +265,10 @@ public:
 
     virtual ~OptimizerTest() override {}
 
+    virtual bool isAvailable() override{
+        return true;
+    }
+
     virtual bool setInitialGuess(iDynTree::VectorDynSize &initialGuess) override{
         return true;
     }

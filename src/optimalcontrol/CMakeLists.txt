@@ -73,17 +73,21 @@ set(SOURCES src/DynamicalSystem.cpp
             src/ForwardEuler.cpp
             src/TimeVaryingObject.cpp)
 
+list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/IpoptInterface.h)
 if (IDYNTREE_USES_IPOPT)
-    list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/IpoptInterface.h)
     list(APPEND OPTIMIZERS_SOURCES src/IpoptInterface.cpp)
     list(APPEND LINK_LIST ${IPOPT_LIBRARIES})
     list(APPEND INCLUDE_LIST ${IPOPT_INCLUDE_DIRS})
+else()
+    list(APPEND OPTIMIZERS_SOURCES src/IpoptInterfaceNotImplemented.cpp)
 endif()
 
+list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/OsqpInterface.h)
 if (IDYNTREE_USES_OSQPEIGEN)
-    list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/OsqpInterface.h)
     list(APPEND OPTIMIZERS_SOURCES src/OsqpInterface.cpp)
     list(APPEND LINK_LIST   OsqpEigen::OsqpEigen osqp::osqp)
+else()
+    list(APPEND OPTIMIZERS_SOURCES src/OsqpInterfaceNotImplemented.cpp)
 endif()
 
 

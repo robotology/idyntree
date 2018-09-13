@@ -13,12 +13,24 @@
  * - ACADO toolbox (http://acado.github.io)
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
-
-#define HAVE_STDDEF_H
-#define HAVE_CSTDDEF
-#include <IpTNLP.hpp>
-#undef HAVE_STDDEF_H
-#undef HAVE_CSTDDEF //workaroud for missing libraries
+#ifndef HAVE_STDDEF_H
+    #ifndef HAVE_CSTDDEF
+        #define HAVE_CSTDDEF
+        #include <IpTNLP.hpp>
+        #undef HAVE_CSTDDEF
+    #else
+        #include <IpTNLP.hpp>
+    #endif
+    #undef HAVE_STDDEF_H
+#else
+    #ifndef HAVE_CSTDDEF
+        #define HAVE_CSTDDEF
+        #include <IpTNLP.hpp>
+        #undef HAVE_CSTDDEF
+    #else
+        #include <IpTNLP.hpp>
+    #endif
+#endif
 #include <IpIpoptApplication.hpp>
 
 #include <Eigen/Dense>
@@ -481,6 +493,11 @@ namespace iDynTree {
                 delete m_pimpl;
                 m_pimpl = nullptr;
             }
+        }
+
+        bool IpoptInterface::isAvailable()
+        {
+            return true;
         }
 
         bool IpoptInterface::setProblem(std::shared_ptr<OptimizationProblem> problem)
