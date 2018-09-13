@@ -39,7 +39,7 @@ namespace iDynTree {
            virtual bool costEvaluation(double time,
                                        const iDynTree::VectorDynSize& state,
                                        const iDynTree::VectorDynSize& control,
-                                       double& costValue) override;//0.5 xT H x + gx + c
+                                       double& costValue) final;//0.5 xT H x + gx + c
 
            virtual bool costFirstPartialDerivativeWRTState(double time,
                                                            const iDynTree::VectorDynSize& state,
