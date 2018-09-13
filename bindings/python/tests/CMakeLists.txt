@@ -6,3 +6,4 @@ add_custom_command(TARGET copy_python_tests_in_build PRE_BUILD
 
 add_test(NAME PythonGeometryTests COMMAND ${PYTHON_EXECUTABLE} geometry.py)
 add_test(NAME PythonJointTests COMMAND ${PYTHON_EXECUTABLE} joints.py)
+add_test(NAME PythonHelperTests COMMAND ${PYTHON_EXECUTABLE} helpers.py)
