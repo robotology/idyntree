@@ -142,8 +142,20 @@ public:
     // Bias accelerations buffers
     bool m_areBiasAccelerationsUpdated;
 
+    // Storate of base bias acceleration
+    SpatialAcc m_baseBiasAcc;
+
     // storage of bias accelerations buffers (contains the bias acceleration for the given link in body-fixed)
     LinkAccArray m_linkBiasAcc;
+
+    /** Base acceleration, in body-fixed representation */
+    SpatialAcc m_baseAcc;
+
+    /** Generalized acceleration, base part in body-fixed representation */
+    FreeFloatingAcc m_generalizedAccs;
+
+    /** Acceleration of each link, in body-fixed representation, i.e. \f$ {}^L \mathrm{v}_{A,L} \f$ */
+    LinkAccArray m_linkAccs;
 
     // Inverse dynamics buffers
 
@@ -180,6 +192,93 @@ public:
         m_areBiasAccelerationsUpdated = false;
     }
 };
+
+
+typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+/**
+ * Function to convert a body fixed acceleration to a mixed acceleration.
+ *
+ * TODO refactor in a more general handling of conversion between the three
+ * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
+ * acceleration.
+ *
+ * @return The mixed acceleration
+ */
+Vector6 convertBodyFixedAccelerationToMixedAcceleration(const SpatialAcc & bodyFixedAcc,
+                                                        const Twist & bodyFixedVel,
+                                                        const Rotation & inertial_R_body)
+{
+    Vector6 mixedAcceleration;
+
+    Eigen::Map<const Eigen::Vector3d> linBodyFixedAcc(bodyFixedAcc.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angBodyFixedAcc(bodyFixedAcc.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> linBodyFixedTwist(bodyFixedVel.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angBodyFixedTwist(bodyFixedVel.getAngularVec3().data());
+
+    Eigen::Map<Eigen::Vector3d> linMixedAcc(mixedAcceleration.data());
+    Eigen::Map<Eigen::Vector3d> angMixedAcc(mixedAcceleration.data()+3);
+
+    Eigen::Map<const Matrix3dRowMajor> inertial_R_body_eig(inertial_R_body.data());
+
+    // First we account for the effect of linear/angular velocity
+    linMixedAcc = inertial_R_body_eig*(linBodyFixedAcc + angBodyFixedTwist.cross(linBodyFixedTwist));
+
+    // Angular acceleration can be copied
+    angMixedAcc = inertial_R_body_eig*angBodyFixedAcc;
+
+    return mixedAcceleration;
+}
+
+/**
+ * Function to convert mixed acceleration to body fixed acceleration
+ *
+ * TODO refactor in a more general handling of conversion between the three
+ * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
+ * acceleration.
+ *
+ * @return The body fixed acceleration
+ */
+SpatialAcc convertMixedAccelerationToBodyFixedAcceleration(const Vector6 & mixedAcc,
+                                                           const Twist & bodyFixedVel,
+                                                           const Rotation & inertial_R_body)
+{
+    SpatialAcc bodyFixedAcc;
+
+    Eigen::Map<const Eigen::Vector3d> linMixedAcc(mixedAcc.data());
+    Eigen::Map<const Eigen::Vector3d> angMixedAcc(mixedAcc.data()+3);
+
+    Eigen::Map<const Eigen::Vector3d> linBodyFixedTwist(bodyFixedVel.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angBodyFixedTwist(bodyFixedVel.getAngularVec3().data());
+
+    Eigen::Map<const Matrix3dRowMajor> inertial_R_body_eig(inertial_R_body.data());
+
+    Eigen::Map<Eigen::Vector3d> linBodyFixedAcc(bodyFixedAcc.getLinearVec3().data());
+    Eigen::Map<Eigen::Vector3d> angBodyFixedAcc(bodyFixedAcc.getAngularVec3().data());
+
+    linBodyFixedAcc = inertial_R_body_eig.transpose()*linMixedAcc - angBodyFixedTwist.cross(linBodyFixedTwist);
+    angBodyFixedAcc = inertial_R_body_eig.transpose()*angMixedAcc;
+
+    return bodyFixedAcc;
+}
+
+/**
+ * Function to convert inertial acceleration to body acceleration.
+ *
+ * TODO refactor in a more general handling of conversion between the three
+ * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
+ * acceleration.
+ *
+ * @return The body fixed acceleration
+ */
+SpatialAcc convertInertialAccelerationToBodyFixedAcceleration(const Vector6 & inertialAcc,
+                                                              const Transform & inertial_H_body)
+{
+    SpatialAcc inertialAccProperForm;
+    fromEigen(inertialAccProperForm,toEigen(inertialAcc));
+    return inertial_H_body.inverse()*inertialAccProperForm;
+}
+
 
 KinDynComputations::KinDynComputations():
 pimpl(new KinDynComputationsPrivateAttributes)
@@ -220,6 +319,7 @@ void KinDynComputations::invalidateCache()
 {
     this->pimpl->m_isFwdKinematicsUpdated = false;
     this->pimpl->m_isRawMassMatrixUpdated = false;
+    this->pimpl->m_areBiasAccelerationsUpdated = false;
 }
 
 void KinDynComputations::resizeInternalDataStructures()
@@ -235,7 +335,11 @@ void KinDynComputations::resizeInternalDataStructures()
     this->pimpl->m_rawMassMatrix.zero();
     this->pimpl->m_jacBuffer.resize(6,6+this->pimpl->m_robot_model.getNrOfDOFs());
     this->pimpl->m_jacBuffer.zero();
+    this->pimpl->m_baseBiasAcc.zero();
     this->pimpl->m_linkBiasAcc.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_baseAcc.zero();
+    this->pimpl->m_generalizedAccs.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_linkAccs.resize(this->pimpl->m_robot_model);
     this->pimpl->m_invDynBaseAcc.zero();
     this->pimpl->m_invDynGeneralizedProperAccs.resize(this->pimpl->m_robot_model);
     this->pimpl->m_invDynNetExtWrenches.resize(this->pimpl->m_robot_model);
@@ -321,11 +425,31 @@ void KinDynComputations::computeBiasAccFwdKinematics()
         return;
     }
 
+    // Convert input base acceleration, that in this case is zero
+    Vector6 zeroBaseAcc;
+    zeroBaseAcc.zero();
+    if( pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION )
+    {
+        fromEigen(pimpl->m_baseBiasAcc,toEigen(zeroBaseAcc));
+    }
+    else if( pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION )
+    {
+        pimpl->m_baseBiasAcc = convertInertialAccelerationToBodyFixedAcceleration(zeroBaseAcc, pimpl->m_pos.worldBasePos());
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+        pimpl->m_baseBiasAcc = convertMixedAccelerationToBodyFixedAcceleration(zeroBaseAcc,
+                                                                               pimpl->m_vel.baseVel(),
+                                                                               pimpl->m_pos.worldBasePos().getRotation());
+    }
+
     // Compute body-fixed bias accelerations
     bool ok = ForwardBiasAccKinematics(pimpl->m_robot_model,
                                        pimpl->m_traversal,
                                        pimpl->m_pos,
                                        pimpl->m_vel,
+                                       pimpl->m_baseBiasAcc,
                                        pimpl->m_linkVel,
                                        pimpl->m_linkBiasAcc);
 
@@ -384,6 +508,15 @@ bool KinDynComputations::setFrameVelocityRepresentation(const FrameVelocityRepre
     {
         reportError("KinDynComputations","setFrameVelocityRepresentation","unknown frame velocity representation");
         return false;
+    }
+
+    // If there is a change in FrameVelocityRepresentation, we should also invalidate the bias acceleration cache, as
+    // the bias acceleration depends on the frameVelRepr even if it is always expressed in body fixed representation.
+    // All the other cache are fine because they are always stored in BODY_FIXED, and they do not depend on the frameVelRepr,
+    // as they are converted on the fly when the relative retrieval method is called.
+    if (frameVelRepr != pimpl->m_frameVelRepr)
+    {
+        this->pimpl->m_areBiasAccelerationsUpdated = false;
     }
 
     pimpl->m_frameVelRepr = frameVelRepr;
@@ -988,6 +1121,90 @@ Twist KinDynComputations::getFrameVel(const FrameIndex frameIdx)
 
 }
 
+Vector6 KinDynComputations::getFrameAcc(const std::string & frameName,
+                    const Vector6& baseAcc,
+                    const VectorDynSize& s_ddot)
+{
+    return getFrameAcc(getFrameIndex(frameName), baseAcc, s_ddot);
+}
+
+Vector6 KinDynComputations::getFrameAcc(const FrameIndex frameIdx,
+                                      const Vector6& baseAcc,
+                                      const VectorDynSize& s_ddot)
+{
+    if (!pimpl->m_robot_model.isValidFrameIndex(frameIdx))
+    {
+        reportError("KinDynComputations","getFrameAcc","Frame index out of bounds");
+        Vector6 ret;
+        ret.zero();
+        return ret;
+    }
+
+    // compute fwd kinematics (if necessary)
+    this->computeFwdKinematics();
+
+    // Convert input base acceleration
+    if( pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION )
+    {
+        fromEigen(pimpl->m_baseAcc,toEigen(baseAcc));
+    }
+    else if( pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION )
+    {
+        pimpl->m_baseAcc = convertInertialAccelerationToBodyFixedAcceleration(baseAcc,pimpl->m_pos.worldBasePos());
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+        pimpl->m_baseAcc = convertMixedAccelerationToBodyFixedAcceleration(baseAcc,
+                                                                           pimpl->m_vel.baseVel(),
+                                                                           pimpl->m_pos.worldBasePos().getRotation());
+    }
+
+    // Prepare the vector of generalized  accs (note: w.r.t. to inverseDynamics
+    // here we do not include the gravity in the acceleration of the base!
+    pimpl->m_generalizedAccs.baseAcc() = pimpl->m_baseAcc;
+    toEigen(pimpl->m_generalizedAccs.jointAcc()) = toEigen(s_ddot);
+
+    // Run acceleration kinematics
+    ForwardAccKinematics(pimpl->m_robot_model,
+                         pimpl->m_traversal,
+                         pimpl->m_pos,
+                         pimpl->m_vel,
+                         pimpl->m_generalizedAccs,
+                         pimpl->m_linkVel,
+                         pimpl->m_linkAccs);
+
+    // Convert the link body fixed kinematics to the required rappresentation
+    Transform frame_X_link = pimpl->m_robot_model.getFrameTransform(frameIdx).inverse();
+
+    SpatialAcc acc_frame_body_fixed = frame_X_link*pimpl->m_linkAccs(pimpl->m_robot_model.getFrameLink(frameIdx));
+    Twist      vel_frame_body_fixed      = frame_X_link*pimpl->m_linkVel(pimpl->m_robot_model.getFrameLink(frameIdx));
+
+    // In body fixed and inertial representation, we can transform the bias acceleration with just a adjoint
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        return acc_frame_body_fixed.asVector();
+    }
+    else
+    {
+        // To convert the twist to a mixed or inertial representation, we need world_H_frame
+        Transform world_H_frame = getWorldTransform(frameIdx);
+
+        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION )
+        {
+            return (world_H_frame*acc_frame_body_fixed).asVector();
+        }
+        else
+        {
+            // In the mixed case, we need to account for the non-vanishing term related to the
+            // derivative of the transform between mixed and body representation
+            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+            return convertBodyFixedAccelerationToMixedAcceleration(acc_frame_body_fixed, vel_frame_body_fixed, world_H_frame.getRotation());
+        }
+    }
+
+}
+
 
 bool KinDynComputations::getFrameFreeFloatingJacobian(const std::string& frameName,
                                           MatrixDynSize& outJacobian)
@@ -1179,91 +1396,6 @@ Vector6 KinDynComputations::getFrameBiasAcc(const std::string & frameName)
     return getFrameBiasAcc(getFrameIndex(frameName));
 }
 
-
-typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
-/**
- * Function to convert a body fixed acceleration to a mixed acceleration.
- *
- * TODO refactor in a more general handling of conversion between the three
- * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
- * acceleration.
- *
- * @return The mixed acceleration
- */
-Vector6 convertBodyFixedAccelerationToMixedAcceleration(const SpatialAcc & bodyFixedAcc,
-                                                        const Twist & bodyFixedVel,
-                                                        const Rotation & inertial_R_body)
-{
-    Vector6 mixedAcceleration;
-
-    Eigen::Map<const Eigen::Vector3d> linBodyFixedAcc(bodyFixedAcc.getLinearVec3().data());
-    Eigen::Map<const Eigen::Vector3d> angBodyFixedAcc(bodyFixedAcc.getAngularVec3().data());
-
-    Eigen::Map<const Eigen::Vector3d> linBodyFixedTwist(bodyFixedVel.getLinearVec3().data());
-    Eigen::Map<const Eigen::Vector3d> angBodyFixedTwist(bodyFixedVel.getAngularVec3().data());
-
-    Eigen::Map<Eigen::Vector3d> linMixedAcc(mixedAcceleration.data());
-    Eigen::Map<Eigen::Vector3d> angMixedAcc(mixedAcceleration.data()+3);
-
-    Eigen::Map<const Matrix3dRowMajor> inertial_R_body_eig(inertial_R_body.data());
-
-    // First we account for the effect of linear/angular velocity
-    linMixedAcc = inertial_R_body_eig*(linBodyFixedAcc + angBodyFixedTwist.cross(linBodyFixedTwist));
-
-    // Angular acceleration can be copied
-    angMixedAcc = inertial_R_body_eig*angBodyFixedAcc;
-
-    return mixedAcceleration;
-}
-
-/**
- * Function to convert mixed acceleration to body fixed acceleration
- *
- * TODO refactor in a more general handling of conversion between the three
- * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
- * acceleration.
- *
- * @return The body fixed acceleration
- */
-SpatialAcc convertMixedAccelerationToBodyFixedAcceleration(const Vector6 & mixedAcc,
-                                                           const Twist & bodyFixedVel,
-                                                           const Rotation & inertial_R_body)
-{
-    SpatialAcc bodyFixedAcc;
-
-    Eigen::Map<const Eigen::Vector3d> linMixedAcc(mixedAcc.data());
-    Eigen::Map<const Eigen::Vector3d> angMixedAcc(mixedAcc.data()+3);
-
-    Eigen::Map<const Eigen::Vector3d> linBodyFixedTwist(bodyFixedVel.getLinearVec3().data());
-    Eigen::Map<const Eigen::Vector3d> angBodyFixedTwist(bodyFixedVel.getAngularVec3().data());
-
-    Eigen::Map<const Matrix3dRowMajor> inertial_R_body_eig(inertial_R_body.data());
-
-    Eigen::Map<Eigen::Vector3d> linBodyFixedAcc(bodyFixedAcc.getLinearVec3().data());
-    Eigen::Map<Eigen::Vector3d> angBodyFixedAcc(bodyFixedAcc.getAngularVec3().data());
-
-    linBodyFixedAcc = inertial_R_body_eig.transpose()*linMixedAcc - angBodyFixedTwist.cross(linBodyFixedTwist);
-    angBodyFixedAcc = inertial_R_body_eig.transpose()*angMixedAcc;
-
-    return bodyFixedAcc;
-}
-
-/**
- * Function to convert inertial acceleration to body acceleration.
- *
- * TODO refactor in a more general handling of conversion between the three
- * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
- * acceleration.
- *
- * @return The body fixed acceleration
- */
-SpatialAcc convertInertialAccelerationToBodyFixedAcceleration(const Vector6 & inertialAcc,
-                                                              const Transform & inertial_H_body)
-{
-    SpatialAcc inertialAccProperForm;
-    fromEigen(inertialAccProperForm,toEigen(inertialAcc));
-    return inertial_H_body.inverse()*inertialAccProperForm;
-}
 
 
 Vector6 KinDynComputations::getFrameBiasAcc(const FrameIndex frameIdx)

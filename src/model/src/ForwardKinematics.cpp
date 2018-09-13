@@ -236,6 +236,7 @@ bool ForwardBiasAccKinematics(const Model& model,
                               const Traversal& traversal,
                               const FreeFloatingPos & robotPos,
                               const FreeFloatingVel & robotVel,
+                              const SpatialAcc& baseBiasAcc,
                               const LinkVelArray & linkVel,
                                     LinkAccArray & linkBiasAcc)
 {
@@ -250,8 +251,9 @@ bool ForwardBiasAccKinematics(const Model& model,
         if( parentLink == 0 )
         {
             // If the visited link is the base, the base has no parent.
-            // In this case the bias acceleration is (by definition) zero
-            linkBiasAcc(visitedLink->getIndex()).zero();
+            // In this case the bias acceleration is tipically zero,
+            // or in strange cases the one specified by the baseBiasAcc argument
+            linkBiasAcc(visitedLink->getIndex()) = baseBiasAcc;
         }
         else
         {
@@ -266,6 +268,17 @@ bool ForwardBiasAccKinematics(const Model& model,
     }
 
     return retValue;
+}
+
+bool ForwardBiasAccKinematics(const Model& model,
+                              const Traversal& traversal,
+                              const FreeFloatingPos & robotPos,
+                              const FreeFloatingVel & robotVel,
+                              const LinkVelArray & linkVel,
+                                    LinkAccArray & linkBiasAcc)
+{
+    return ForwardBiasAccKinematics(model, traversal, robotPos, robotVel,
+                                    SpatialAcc::Zero(), linkVel, linkBiasAcc);
 }
 
 }
