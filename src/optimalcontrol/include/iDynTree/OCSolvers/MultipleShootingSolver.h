@@ -64,6 +64,8 @@ namespace iDynTree {
 
             bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
 
+            bool getPossibleTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
+
             virtual bool solve() override;
 
             bool getSolution(std::vector<VectorDynSize>& states, std::vector<VectorDynSize>& controls);

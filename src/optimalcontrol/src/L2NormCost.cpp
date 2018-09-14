@@ -155,6 +155,20 @@ namespace iDynTree {
                 return true;
             }
 
+            bool setWeightMatrix(const VectorDynSize &weights)
+            {
+                if (weights.size() != this->selector->size()) {
+                    reportError("L2NormCost", "setWeightMatrix", "The weights matrix dimensions do not match those of the specified selector.");
+                    return false;
+                }
+
+                iDynTree::toEigen(this->weightMatrix) = iDynTree::toEigen(weights).asDiagonal();
+                toEigen(this->gradientSubMatrix) = 0.5 * toEigen(this->selector->asSelectorMatrix()).transpose() * (toEigen(this->weightMatrix) + toEigen(this->weightMatrix).transpose());
+                toEigen(this->hessianMatrix) = toEigen(this->gradientSubMatrix) * toEigen(this->selector->asSelectorMatrix());
+
+                return true;
+            }
+
             bool changeSelector(const MatrixDynSize& inputSelector) {
                 if ((inputSelector.rows() != this->selector->size()) || (inputSelector.cols() != this->selector->asSelectorMatrix().cols())) {
                     reportError("L2NormCost", "getObject", "The new selector dimensionsions do not match the old one.");
@@ -368,6 +382,21 @@ namespace iDynTree {
             return true;
         }
 
+        bool L2NormCost::setStateWeight(const VectorDynSize &stateWeights)
+        {
+            if (!(m_pimpl->stateCost.isValid())) {
+                reportError("L2NormCost", "setStateWeight", "The state cost portion has been deactivated, given the provided selectors.");
+                return false;
+            }
+
+            if (!(m_pimpl->stateCost.setWeightMatrix(stateWeights))) {
+                reportError("L2NormCost", "setStateWeight", "Error when specifying the state weights.");
+                return false;
+            }
+
+            return true;
+        }
+
         bool L2NormCost::setStateDesiredPoint(const VectorDynSize &desiredPoint)
         {
             if (!(m_pimpl->stateCost.isValid())) {
@@ -406,6 +435,21 @@ namespace iDynTree {
                 return false;
             }
 
+            if (!(m_pimpl->stateCost.isValid())) {
+                reportError("L2NormCost", "setControlWeight", "The control cost portion has been deactivated, given the provided selectors.");
+                return false;
+            }
+
+            if (!(m_pimpl->controlCost.setWeightMatrix(controlWeights))) {
+                reportError("L2NormCost", "setControlWeight", "Error when specifying the control weights.");
+                return false;
+            }
+
+            return true;
+        }
+
+        bool L2NormCost::setControlWeight(const VectorDynSize &controlWeights)
+        {
             if (!(m_pimpl->stateCost.isValid())) {
                 reportError("L2NormCost", "setControlWeight", "The control cost portion has been deactivated, given the provided selectors.");
                 return false;

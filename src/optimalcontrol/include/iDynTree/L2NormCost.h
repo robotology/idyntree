@@ -55,11 +55,15 @@ namespace iDynTree {
 
             bool setStateWeight(const MatrixDynSize& stateWeights);
 
+            bool setStateWeight(const VectorDynSize& stateWeights);
+
             bool setStateDesiredPoint(const VectorDynSize& desiredPoint);
 
             bool setStateDesiredTrajectory(std::shared_ptr<TimeVaryingVector> stateDesiredTrajectory);
 
             bool setControlWeight(const MatrixDynSize& controlWeights);
+
+            bool setControlWeight(const VectorDynSize& controlWeights);
 
             bool setControlDesiredPoint(const VectorDynSize& desiredPoint);
 

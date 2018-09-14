@@ -756,9 +756,11 @@ namespace iDynTree {
                 return true;
             }
 
-            bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations) {
+            bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations, bool printWarning) {
                 if (!(m_prepared)){
-                    reportWarning("MultipleShootingTranscription", "getTimings", "The method solve was not called yet. Computing new mesh points. These may be overwritten when calling the solve method.");
+                    if (printWarning) {
+                        reportWarning("MultipleShootingTranscription", "getTimings", "The method solve was not called yet. Computing new mesh points. These may be overwritten when calling the solve method.");
+                    }
 
                     if (!preliminaryChecks()) {
                         return false;
@@ -1653,7 +1655,12 @@ namespace iDynTree {
 
         bool MultipleShootingSolver::getTimings(std::vector<double> &stateEvaluations, std::vector<double> &controlEvaluations)
         {
-            return m_transcription->getTimings(stateEvaluations, controlEvaluations);
+            return m_transcription->getTimings(stateEvaluations, controlEvaluations, true);
+        }
+
+        bool MultipleShootingSolver::getPossibleTimings(std::vector<double> &stateEvaluations, std::vector<double> &controlEvaluations)
+        {
+            return m_transcription->getTimings(stateEvaluations, controlEvaluations, false);
         }
 
 

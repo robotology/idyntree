@@ -265,7 +265,7 @@ public:
 
     virtual ~OptimizerTest() override {}
 
-    virtual bool isAvailable() override{
+    virtual bool isAvailable() const override{
         return true;
     }
 
@@ -382,7 +382,7 @@ int main(){
     ASSERT_IS_TRUE(solver.setOptimizer(optimizer));
 
     std::vector<double> stateTimings, controlTimings;
-    ASSERT_IS_TRUE(solver.getTimings(stateTimings, controlTimings));
+    ASSERT_IS_TRUE(solver.getPossibleTimings(stateTimings, controlTimings));
     for (size_t i = 0; i < stateTimings.size(); ++i){
         ASSERT_IS_TRUE((stateTimings[i] > initTime) && (stateTimings[i] <= endTime));
         if (i > 0)
