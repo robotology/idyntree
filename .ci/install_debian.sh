@@ -16,7 +16,7 @@ apt-get install -y build-essential libboost-system-dev libboost-filesystem-dev l
 apt-get install -y liblua5.1-dev lua5.1
 
 # Python
-apt-get install -y python-dev
+apt-get install -y python-dev python-numpy
 
 # Octave
 apt-get install -y liboctave-dev
