@@ -24,7 +24,7 @@ set(libraryname idyntree-modelio-ikin-kdl)
 
 add_library(${libraryname} ${IDYNTREE_MODELIO_IKIN_KDL_SOURCES} ${IDYNTREE_MODELIO_IKIN_KDL_HEADERS})
 
-target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                                  ${orocos_kdl_INCLUDE_DIRS}
                                                  ${iKin_INCLUDE_DIRS}

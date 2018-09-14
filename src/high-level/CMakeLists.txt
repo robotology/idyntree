@@ -27,7 +27,6 @@ target_link_libraries(${libraryname} idyntree-core idyntree-model idyntree-senso
 
 # Ensure that build include directories are always included before system ones
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_HIGH_LEVEL_HEADERS})
 
