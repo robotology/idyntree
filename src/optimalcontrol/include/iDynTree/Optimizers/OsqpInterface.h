@@ -70,7 +70,7 @@ namespace iDynTree {
 
             virtual ~OsqpInterface() override;
 
-            virtual bool isAvailable() override;
+            virtual bool isAvailable() const override;
 
             virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem) override;
 

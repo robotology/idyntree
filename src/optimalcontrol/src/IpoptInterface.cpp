@@ -495,7 +495,7 @@ namespace iDynTree {
             }
         }
 
-        bool IpoptInterface::isAvailable()
+        bool IpoptInterface::isAvailable() const
         {
             return true;
         }

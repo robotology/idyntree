@@ -42,7 +42,7 @@ namespace iDynTree {
 
             virtual ~Optimizer();
 
-            virtual bool isAvailable() = 0; //is the desired interface implemented?
+            virtual bool isAvailable() const = 0; //is the desired interface implemented?
 
             virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem);
 

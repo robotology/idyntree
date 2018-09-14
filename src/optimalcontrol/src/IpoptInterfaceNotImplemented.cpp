@@ -29,7 +29,7 @@ IpoptInterface::~IpoptInterface()
 
 }
 
-bool IpoptInterface::isAvailable()
+bool IpoptInterface::isAvailable() const
 {
     return false;
 }

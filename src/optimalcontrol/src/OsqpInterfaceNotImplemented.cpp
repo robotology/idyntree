@@ -26,7 +26,7 @@ OsqpInterface::OsqpInterface()
 OsqpInterface::~OsqpInterface()
 { }
 
-bool OsqpInterface::isAvailable()
+bool OsqpInterface::isAvailable() const
 {
     return false;
 }

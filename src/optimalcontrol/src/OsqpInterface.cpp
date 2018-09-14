@@ -437,7 +437,7 @@ namespace iDynTree {
             }
         }
 
-        bool OsqpInterface::isAvailable()
+        bool OsqpInterface::isAvailable() const
         {
             return true;
         }
