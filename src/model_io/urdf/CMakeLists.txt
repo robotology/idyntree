@@ -66,7 +66,6 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/deprecated>"
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/private>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                  ${IDYNTREE_TREE_INCLUDE_DIRS}
                                           PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                   ${LIBXML2_INCLUDE_DIR})
 
