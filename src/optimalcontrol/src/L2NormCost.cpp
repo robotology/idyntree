@@ -435,7 +435,7 @@ namespace iDynTree {
                 return false;
             }
 
-            if (!(m_pimpl->stateCost.isValid())) {
+            if (!(m_pimpl->controlCost.isValid())) {
                 reportError("L2NormCost", "setControlWeight", "The control cost portion has been deactivated, given the provided selectors.");
                 return false;
             }
@@ -450,7 +450,7 @@ namespace iDynTree {
 
         bool L2NormCost::setControlWeight(const VectorDynSize &controlWeights)
         {
-            if (!(m_pimpl->stateCost.isValid())) {
+            if (!(m_pimpl->controlCost.isValid())) {
                 reportError("L2NormCost", "setControlWeight", "The control cost portion has been deactivated, given the provided selectors.");
                 return false;
             }
@@ -465,7 +465,7 @@ namespace iDynTree {
 
         bool L2NormCost::setControlDesiredPoint(const VectorDynSize &desiredPoint)
         {
-            if (!(m_pimpl->stateCost.isValid())) {
+            if (!(m_pimpl->controlCost.isValid())) {
                 reportError("L2NormCost", "setControlDesiredPoint", "The control cost portion has been deactivated, given the provided selectors.");
                 return false;
             }
@@ -481,7 +481,7 @@ namespace iDynTree {
 
         bool L2NormCost::setControlDesiredTrajectory(std::shared_ptr<TimeVaryingVector> controlDesiredTrajectory)
         {
-            if (!(m_pimpl->stateCost.isValid())) {
+            if (!(m_pimpl->controlCost.isValid())) {
                 reportError("L2NormCost", "setControlDesiredTrajectory", "The control cost portion has been deactivated, given the provided selectors.");
                 return false;
             }
