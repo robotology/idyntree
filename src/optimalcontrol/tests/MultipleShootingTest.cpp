@@ -363,7 +363,7 @@ int main(){
     iDynTree::VectorDynSize newBounds(1);
     newBounds(0) = 5.0;
     ASSERT_IS_TRUE(constraint2->setUpperBound(newBounds));
-    double initTime = 1.0, endTime = 5.0;
+    double initTime = 1.0, endTime = 2.0;
     double minStep = 0.003, maxStep = 0.07, controlPeriod = 0.011;
 
     ASSERT_IS_TRUE(problem->setTimeHorizon(initTime, endTime));
