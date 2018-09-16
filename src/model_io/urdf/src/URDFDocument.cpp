@@ -127,7 +127,7 @@ namespace iDynTree {
             return false;
         }
 
-        std::string baseLinkName = m_model.getLinkName(m_model.getDefaultBaseLink());
+        std::string baseLinkName = newModel.getLinkName(newModel.getDefaultBaseLink());
         if (!createModelWithNormalizedJointNumbering(newModel, baseLinkName, normalizedModel)) {
             reportError("URDFDocument", "documentHasBeenParsed", "Failed to remove fake links from the model");
             return false;
