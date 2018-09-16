@@ -66,6 +66,27 @@ bool createReducedModel(const Model& fullModel,
                         const std::vector<std::string>& jointsInReducedModel,
                         Model& reducedModel);
 
+/**
+ * @brief Given a specified base, return a model with a "normalized" joint numbering for that base.
+ *
+ * This function takes in input a iDynTree::Model and a name of a link in that model.
+ * It returns a model identical to the one in input, but with the joint serialization
+ * of the non-fixed joint modified in such a way that a non-fixed joint has an index higher than
+ * all the non-fixed joints on the path between it and the base. After all the non-fixed joints,
+ * the fixed joints are also added with the same criteria, but applied to fixed joints.
+ *
+ * @note This method make sure that the non-fixed joint in the model have a "regular numbering"
+ *       as described in Featherstone "Rigid Body Dynamics Algorithm", section 4.1.2 . Note that
+ *       this numbering is not required by any algorithm in iDynTree, but it may be useful for
+ *       example to ensure that for a chain model the joint numbering is the one induced by the
+ *       kinematic structure.
+ *
+ * @return true if all went well, false if there was an error in conversion.
+ */
+bool createModelWithNormalizedJointNumbering(const Model& model,
+                                             const std::string& baseForNormalizedJointNumbering,
+                                             Model& reducedModel);
+
 
 }
 
