@@ -37,7 +37,7 @@ if (IDYNTREE_USES_KDL)
   find_package(orocos_kdl REQUIRED)
 endif ()
 
-find_package(ICUB)
+find_package(ICUB QUIET)
 option(IDYNTREE_USES_ICUB_MAIN "Build the part of iDynTree that depends on package ICUB" ${ICUB_FOUND})
 if (IDYNTREE_USES_ICUB)
   find_package(ICUB REQUIRED)
