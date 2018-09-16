@@ -24,7 +24,7 @@ source_group("Private\\Source Files" FILES ${PRIVATE_IDYN_TREE_IK_SOURCES})
 add_library(${libraryname} ${IDYN_TREE_IK_HEADERS} ${IDYN_TREE_IK_SOURCES}
                            ${PRIVATE_IDYN_TREE_IK_SOURCES} ${PRIVATE_IDYN_TREE_IK_HEADERS})
 
-target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 target_include_directories(${libraryname} PRIVATE include/private)
 

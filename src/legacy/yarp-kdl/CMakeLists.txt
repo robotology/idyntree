@@ -39,7 +39,7 @@ set_target_properties(idyntree-yarp-kdl PROPERTIES VERSION ${${VARS_PREFIX}_VERS
                                            PUBLIC_HEADER "${iDynTree_YARP_KDL_header}")
 
 
-target_include_directories(idyntree-yarp-kdl PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
+target_include_directories(idyntree-yarp-kdl PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
