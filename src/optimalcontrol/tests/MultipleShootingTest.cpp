@@ -386,7 +386,7 @@ int main(){
     for (size_t i = 0; i < stateTimings.size(); ++i){
         ASSERT_IS_TRUE((stateTimings[i] > initTime) && (stateTimings[i] <= endTime));
         if (i > 0)
-            ASSERT_IS_TRUE(((stateTimings[i] - stateTimings[i-1]) >= minStep) && ((stateTimings[i] - stateTimings[i-1]) <= maxStep));
+            ASSERT_IS_TRUE(((stateTimings[i] - stateTimings[i-1]) >= (0.999 * minStep)) && ((stateTimings[i] - stateTimings[i-1]) <= (1.001 * maxStep)));
     }
 
     for (size_t i = 0; i < controlTimings.size(); ++i){
@@ -396,6 +396,29 @@ int main(){
     }
 
     ASSERT_IS_TRUE(solver.solve());
+
+    minStep = 0.003;
+    maxStep = 0.07;
+    controlPeriod = 0.003;
+    ASSERT_IS_TRUE(solver.setStepSizeBounds(minStep, maxStep));
+    ASSERT_IS_TRUE(solver.setControlPeriod(controlPeriod));
+
+
+    ASSERT_IS_TRUE(solver.getPossibleTimings(stateTimings, controlTimings));
+    for (size_t i = 0; i < stateTimings.size(); ++i){
+        ASSERT_IS_TRUE((stateTimings[i] > initTime) && (stateTimings[i] <= endTime));
+        if (i > 0)
+            ASSERT_IS_TRUE(((stateTimings[i] - stateTimings[i-1]) >= (0.999 * minStep)) && ((stateTimings[i] - stateTimings[i-1]) <= (1.001 * maxStep)));
+    }
+
+    for (size_t i = 0; i < controlTimings.size(); ++i){
+        ASSERT_IS_TRUE((controlTimings[i] >= initTime) && (controlTimings[i] <= endTime));
+        if (i > 0)
+            ASSERT_EQUAL_DOUBLE((controlTimings[i] - controlTimings[i-1]), controlPeriod);
+    }
+
+    ASSERT_IS_TRUE(solver.solve());
+
 
 
     return EXIT_SUCCESS;

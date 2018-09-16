@@ -317,8 +317,9 @@ namespace iDynTree {
                     newMeshPoint.time = time;
 
                     addMeshPoint(newMeshPoint);
-                    time += m_controlPeriod;
                     controlMeshes++;
+
+                    time = initTime + controlMeshes * m_controlPeriod;
                 }
 
                 std::vector<MeshPoint>::iterator lastControlMeshIterator = (m_meshPointsEnd)-1;
@@ -337,6 +338,7 @@ namespace iDynTree {
                     if ((lastControlMeshIterator->time + m_minStepSize) > endTime){ //if last control mesh point is too close to the end, remove it and place a state mesh point at the end
                         setIgnoredMesh(lastControlMeshIterator);
                         controlMeshes--;
+                        m_meshPointsEnd = lastControlMeshIterator;
                     }
                     addMeshPoint(newMeshPoint);  //add a mesh point at the end;
                 }
@@ -756,19 +758,11 @@ namespace iDynTree {
                 return true;
             }
 
-            bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations, bool printWarning) {
+            bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations) {
                 if (!(m_prepared)){
-                    if (printWarning) {
-                        reportWarning("MultipleShootingTranscription", "getTimings", "The method solve was not called yet. Computing new mesh points. These may be overwritten when calling the solve method.");
-                    }
+                    reportWarning("MultipleShootingTranscription", "getTimings", "The method solve was not called yet. Use the method getPossibleTimings instead.");
 
-                    if (!preliminaryChecks()) {
-                        return false;
-                    }
-
-                    if (!setMeshPoints()){
-                        return false;
-                    }
+                    return false;
                 }
 
                 if (stateEvaluations.size() != (m_totalMeshes - 1)) {
@@ -782,8 +776,52 @@ namespace iDynTree {
                 size_t stateIndex = 0, controlIndex = 0;
 
                 MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+                MeshPointOrigin ignored = MeshPointOrigin::Ignored();
 
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
+
+                    assert(mesh->origin != ignored);
+
+                    if (mesh->origin != first){
+                        stateEvaluations[stateIndex] = mesh->time;
+                        stateIndex++;
+                    }
+                    if (mesh->type == MeshPointType::Control){
+                        controlEvaluations[controlIndex] = mesh->time;
+                        controlIndex++;
+                    }
+                }
+
+                return true;
+            }
+
+            bool getPossibleTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations) {
+
+                if (!preliminaryChecks()) {
+                    return false;
+                }
+
+                if (!setMeshPoints()){
+                    return false;
+                }
+
+                if (stateEvaluations.size() != (m_totalMeshes - 1)) {
+                    stateEvaluations.resize(m_totalMeshes - 1);
+                }
+
+                if (controlEvaluations.size() != m_controlMeshes) {
+                    controlEvaluations.resize(m_controlMeshes);
+                }
+
+                size_t stateIndex = 0, controlIndex = 0;
+
+                MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+                MeshPointOrigin ignored = MeshPointOrigin::Ignored();
+
+                for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
+
+                    assert(mesh->origin != ignored);
+
                     if (mesh->origin != first){
                         stateEvaluations[stateIndex] = mesh->time;
                         stateIndex++;
@@ -1655,12 +1693,12 @@ namespace iDynTree {
 
         bool MultipleShootingSolver::getTimings(std::vector<double> &stateEvaluations, std::vector<double> &controlEvaluations)
         {
-            return m_transcription->getTimings(stateEvaluations, controlEvaluations, true);
+            return m_transcription->getTimings(stateEvaluations, controlEvaluations);
         }
 
         bool MultipleShootingSolver::getPossibleTimings(std::vector<double> &stateEvaluations, std::vector<double> &controlEvaluations)
         {
-            return m_transcription->getTimings(stateEvaluations, controlEvaluations, false);
+            return m_transcription->getPossibleTimings(stateEvaluations, controlEvaluations);
         }
 
 
