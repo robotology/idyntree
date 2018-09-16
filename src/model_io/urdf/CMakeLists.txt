@@ -8,7 +8,9 @@
 
 project(iDynTree_ModelIO_URDF CXX)
 
-find_package(LibXml2 REQUIRED)
+if(NOT LIBXML2_LIBRARY OR NOT LIBXML2_INCLUDE_DIR)
+    find_package(LibXml2 REQUIRED)
+endif()
 
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFDofsImport.h
                                   include/iDynTree/ModelIO/ModelLoader.h
