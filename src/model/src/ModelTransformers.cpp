@@ -504,5 +504,53 @@ bool createReducedModel(const Model& fullModel,
     return ok;
 }
 
+bool createModelWithNormalizedJointNumbering(const Model& model,
+                                             const std::string& baseForNormalizedJointNumbering,
+                                             Model& normalizedModel)
+{
+    if (!model.isLinkNameUsed(baseForNormalizedJointNumbering))
+    {
+        std::cerr << "[ERROR] createModelWithNormalizedJointNumbering error : "
+                      << " Link " << baseForNormalizedJointNumbering << " not found in the input model"
+                      << std::endl;
+        return false;
+    }
+
+    Traversal traversal;
+    model.computeFullTreeTraversal(traversal, model.getLinkIndex(baseForNormalizedJointNumbering));
+
+    // Ordering for non-fixed joints
+    std::vector<std::string> jointOrderingNonFixed;
+
+    // Ordering for fixed joints
+    std::vector<std::string> jointOrderingFixed;
+
+    // Iterate with the traversal to compute the normalized order
+    for(TraversalIndex traversalEl=1; traversalEl < traversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        IJointConstPtr visitedJoint = traversal.getParentJoint(traversalEl);
+        if (visitedJoint->getNrOfDOFs() !=0)
+        {
+            jointOrderingNonFixed.push_back(model.getJointName(visitedJoint->getIndex()));
+        }
+        else
+        {
+            jointOrderingFixed.push_back(model.getJointName(visitedJoint->getIndex()));
+        }
+    }
+
+    // Compute complete ordering
+    std::vector<std::string> jointOrdering;
+    jointOrdering.insert(jointOrdering.end(), jointOrderingNonFixed.begin(), jointOrderingNonFixed.end());
+    jointOrdering.insert(jointOrdering.end(), jointOrderingFixed.begin(), jointOrderingFixed.end());
+
+    assert(jointOrdering.size() == model.getNrOfJoints());
+
+    // Create the new model
+    bool ok = createReducedModel(model, jointOrdering, normalizedModel);
+
+    return ok;
+}
+
 
 }

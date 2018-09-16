@@ -15,6 +15,7 @@
 
 #include <iDynTree/Model/PrismaticJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/ModelTransformers.h>
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 
 #include <algorithm>
@@ -27,7 +28,7 @@ namespace iDynTree {
                                                          std::unordered_map<std::string, JointElement::JointInfo>& joints,
                                                          std::unordered_map<std::string, JointElement::JointInfo>& fixed_joints);
     static bool isFakeLink(const iDynTree::Model& modelWithFakeLinks, const iDynTree::LinkIndex linkToCheck);
-    static bool removeFakeLinks(const iDynTree::Model &originalModel, iDynTree::Model& cleanModel);
+    static bool p_removeFakeLinks(const iDynTree::Model &originalModel, iDynTree::Model& cleanModel);
     static bool processSensors(const Model& model,
                                const std::vector<std::shared_ptr<SensorHelper>>& helpers,
                                iDynTree::SensorsList& sensors);
@@ -119,13 +120,20 @@ namespace iDynTree {
 
         // set the default root in the model
         m_model.setDefaultBaseLink(m_model.getLinkIndex(rootCandidates[0]));
-        iDynTree::Model newModel;
+        iDynTree::Model newModel, normalizedModel;
 
-        if (!removeFakeLinks(m_model, newModel)) {
+        if (!p_removeFakeLinks(m_model, newModel)) {
             reportError("URDFDocument", "documentHasBeenParsed", "Failed to remove fake links from the model");
             return false;
         }
-        m_model = newModel;
+
+        std::string baseLinkName = m_model.getLinkName(m_model.getDefaultBaseLink());
+        if (!createModelWithNormalizedJointNumbering(newModel, baseLinkName, normalizedModel)) {
+            reportError("URDFDocument", "documentHasBeenParsed", "Failed to remove fake links from the model");
+            return false;
+        }
+
+        m_model = normalizedModel;
 
         if (!processSensors(m_model, m_buffers.sensorHelpers, m_sensors))
         {
@@ -237,7 +245,7 @@ namespace iDynTree {
         return true;
     }
 
-    bool removeFakeLinks(const iDynTree::Model &originalModel, iDynTree::Model& cleanModel)
+    bool p_removeFakeLinks(const iDynTree::Model &originalModel, iDynTree::Model& cleanModel)
     {
         // Clear the output model
         cleanModel = iDynTree::Model();
