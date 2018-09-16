@@ -109,6 +109,8 @@ namespace iDynTree {
 
             virtual bool getHessianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns); //costs and constraints together
 
+            virtual bool getGuess(VectorDynSize &guess);
+
             virtual bool setVariables(const VectorDynSize& variables);
 
             virtual bool evaluateCostFunction(double& costValue);

@@ -49,8 +49,6 @@ namespace iDynTree {
 
             virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem) override;
 
-            virtual bool setInitialGuess(VectorDynSize &initialGuess) override;
-
             virtual bool solve() override;
 
             virtual bool getPrimalVariables(VectorDynSize &primalVariables) override;

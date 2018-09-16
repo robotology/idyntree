@@ -48,8 +48,6 @@ namespace iDynTree {
 
             virtual const std::weak_ptr<OptimizationProblem> problem() const;
 
-            virtual bool setInitialGuess(VectorDynSize &initialGuess);
-
             virtual bool solve() = 0; //warm start capabilities should be implemented in the solver specific interface
 
             virtual bool getPrimalVariables(VectorDynSize &primalVariables);

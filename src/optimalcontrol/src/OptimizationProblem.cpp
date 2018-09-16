@@ -72,6 +72,11 @@ namespace iDynTree {
             return false;
         }
 
+        bool OptimizationProblem::getGuess(VectorDynSize &guess)
+        {
+            return false;
+        }
+
         bool OptimizationProblem::setVariables(const VectorDynSize &variables)
         {
             reportError("OptimizationProblem", "setVariables", "Method not implemented.");

@@ -269,10 +269,6 @@ public:
         return true;
     }
 
-    virtual bool setInitialGuess(iDynTree::VectorDynSize &initialGuess) override{
-        return true;
-    }
-
     virtual bool solve() override {
         iDynTree::VectorDynSize dummyVariables, dummy1, dummy2;
         iDynTree::MatrixDynSize dummyMatrix, jacobian;

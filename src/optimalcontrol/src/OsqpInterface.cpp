@@ -243,7 +243,7 @@ namespace iDynTree {
             std::shared_ptr<std::vector<size_t>> constraintNNZRows, constraintNNZCols;
             std::shared_ptr<std::vector<size_t>> hessianNNZRows, hessianNNZCols;
             VectorDynSize variablesBuffer, solutionBuffer, constraintsBuffer;
-            VectorDynSize costGradient;
+            VectorDynSize costGradient, iDynTreeInitialGuess;
             std::shared_ptr<MatrixDynSize> costHessian;
             std::shared_ptr<MatrixDynSize> constraintJacobian;
             unsigned int nv, nc, previous_nv, previous_nc;
@@ -452,14 +452,6 @@ namespace iDynTree {
             return true;
         }
 
-        bool OsqpInterface::setInitialGuess(VectorDynSize &initialGuess)
-        {
-            m_pimpl->initialGuessSet = true;
-            m_pimpl->eigenInitialGuess.resize(initialGuess.size());
-            m_pimpl->eigenInitialGuess = toEigen(initialGuess);
-            return true;
-        }
-
         bool OsqpInterface::solve()
         {
             if (!m_problem) {
@@ -653,6 +645,9 @@ namespace iDynTree {
                     return false;
                 }
 
+                m_pimpl->initialGuessSet = m_problem->getGuess(m_pimpl->iDynTreeInitialGuess);
+                m_pimpl->eigenInitialGuess.resize(m_pimpl->iDynTreeInitialGuess.size());
+                m_pimpl->eigenInitialGuess = toEigen(m_pimpl->iDynTreeInitialGuess);
                 if (m_pimpl->initialGuessSet) {
                     if (m_pimpl->eigenInitialGuess.size() != m_pimpl->nv) {
                         reportError("OsqpInterface", "solve", "The specified intial guess has dimension different from the number of variables.");
@@ -719,6 +714,9 @@ namespace iDynTree {
                     return false;
                 }
 
+                m_pimpl->initialGuessSet = m_problem->getGuess(m_pimpl->iDynTreeInitialGuess);
+                m_pimpl->eigenInitialGuess.resize(m_pimpl->iDynTreeInitialGuess.size());
+                m_pimpl->eigenInitialGuess = toEigen(m_pimpl->iDynTreeInitialGuess);
                 if (m_pimpl->initialGuessSet) {
                     if (m_pimpl->eigenInitialGuess.size() != m_pimpl->nv) {
                         reportError("OsqpInterface", "solve", "The specified intial guess has dimension different from the number of variables.");

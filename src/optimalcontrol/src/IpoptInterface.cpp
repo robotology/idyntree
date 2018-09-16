@@ -190,6 +190,7 @@ namespace iDynTree {
 
                 if(init_x){
                     Eigen::Map<Eigen::VectorXd> x_map(x, n);
+                    initialGuessSet = problem->getGuess(initialGuess);
                     if (initialGuessSet) {
                         if (initialGuess.size() == static_cast<unsigned int>(n)){
                             x_map = iDynTree::toEigen(initialGuess);
@@ -508,13 +509,6 @@ namespace iDynTree {
             }
             m_problem = problem;
             m_pimpl->nlpPointer->problem = problem;
-            return true;
-        }
-
-        bool IpoptInterface::setInitialGuess(VectorDynSize &initialGuess)
-        {
-            m_pimpl->nlpPointer->initialGuessSet = true;
-            m_pimpl->nlpPointer->initialGuess = initialGuess;
             return true;
         }
 
