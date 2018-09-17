@@ -8,7 +8,9 @@
 
 project(iDynTree_ModelIO_URDF CXX)
 
-find_package(LibXml2 REQUIRED)
+if(NOT LIBXML2_LIBRARY OR NOT LIBXML2_INCLUDE_DIR)
+    find_package(LibXml2 REQUIRED)
+endif()
 
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFDofsImport.h
                                   include/iDynTree/ModelIO/ModelLoader.h
@@ -66,7 +68,6 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/deprecated>"
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/private>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                                  ${IDYNTREE_TREE_INCLUDE_DIRS}
                                           PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                   ${LIBXML2_INCLUDE_DIR})
 
