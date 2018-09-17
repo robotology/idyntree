@@ -43,7 +43,7 @@ void JointStateSuscriber::attach(YARPRobotStatePublisherModule* module)
 }
 
 /************************************************************/
-void JointStateSuscriber::onRead(JointState& v)
+void JointStateSuscriber::onRead(yarp::rosmsg::sensor_msgs::JointState& v)
 {
     m_module->onRead(v);
 }
@@ -63,7 +63,6 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 {
     string name="yarprobotstatepublisher";
     m_rosNode = new yarp::os::Node("/yarprobotstatepublisher");
-    string robot=rf.check("robot",Value("isaacSim")).asString();
     string modelFileName=rf.check("model",Value("model.urdf")).asString();
     m_period=rf.check("period",Value(0.010)).asDouble();
 
@@ -72,14 +71,16 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
     pTransformclient_cfg.put("local", "/"+name+"/transformClient");
     pTransformclient_cfg.put("remote", "/transformServer");
 
+    m_tfPrefix = rf.check("tfPrefix",Value("")).asString();
+
     bool ok_client = m_ddtransformclient.open(pTransformclient_cfg);
     if (!ok_client)
     {
         yError()<<"Problem in opening the transformClient device";
+        yError()<<"Is the transform server running?";
         close();
         return false;
     }
-
     if (!m_ddtransformclient.view(m_iframetrans))
     {
         yError()<<"IFrameTransform I/F is not implemented";
@@ -131,9 +132,10 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
     }
 
     // Setup the topic and configureisValid the onRead callback
+    string jointStatesTopicName = rf.check("jointstates-topic",Value("/joint_states")).asString();
     m_jointStateSubscriber = new JointStateSuscriber();
     m_jointStateSubscriber->attach(this);
-    m_jointStateSubscriber->topic("/joint_states");
+    m_jointStateSubscriber->topic(jointStatesTopicName);
     m_jointStateSubscriber->useCallback();
 
     return true;
@@ -186,7 +188,7 @@ bool YARPRobotStatePublisherModule::updateModule()
 }
 
 /************************************************************/
-void YARPRobotStatePublisherModule::onRead(JointState &v)
+void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState &v)
 {
     yarp::os::LockGuard guard(m_mutex);
 
@@ -222,16 +224,50 @@ void YARPRobotStatePublisherModule::onRead(JointState &v)
     m_kinDynComp.setJointPos(m_jointPos);
 
     // Publish the frames on TF
-    for (size_t frameIdx=0; frameIdx < model.getNrOfFrames(); frameIdx++)
-    {
-        if(m_baseFrameIndex == frameIdx)    // skip self-tranform
-            continue;
+    bool m_publishGlobalTF = false; // TODO
+    if (m_publishGlobalTF) {
+        // Read the last TF from the world (ground) to the base
+        yarp::sig::Matrix world_H_base_yarp;
+        if (!m_iframetrans->getTransform(m_tfPrefix + m_baseFrameName, "ground", world_H_base_yarp)) {
+            yError() << "Failed to retrieve the relative transform between ground and"
+                     << m_tfPrefix + m_baseFrameName;
+            return;
+        }
 
-        iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
-        iDynTree::toYarp(base_H_frame.asHomogeneousTransform(), m_buf4x4);
-        m_iframetrans->setTransform(model.getFrameName(frameIdx),
-                                    model.getFrameName(m_baseFrameIndex),
-                                    m_buf4x4);
+        // Convert the transform from Yarp to iDynTree
+        iDynTree::Transform world_H_base;
+        iDynTree::toiDynTree(world_H_base_yarp, world_H_base);
+
+        for (size_t frameIdx=0; frameIdx < model.getNrOfFrames(); frameIdx++) {
+            // skip self-tranform
+            if (m_baseFrameIndex == frameIdx) {
+                continue;
+            }
+
+            // skip publishing the world to base transform
+            if (model.getFrameName(frameIdx) == m_baseFrameName) {
+                continue;
+            }
+
+            iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
+            iDynTree::toYarp(world_H_base * base_H_frame.asHomogeneousTransform(), m_buf4x4);
+            m_iframetrans->setTransform(m_tfPrefix + model.getFrameName(frameIdx),
+                                        "ground",
+                                        m_buf4x4);
+        }
+    }
+    else {
+        for (size_t frameIdx=0; frameIdx < model.getNrOfFrames(); frameIdx++)
+        {
+            if(m_baseFrameIndex == frameIdx)    // skip self-tranform
+                continue;
+
+            iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
+            iDynTree::toYarp(base_H_frame.asHomogeneousTransform(), m_buf4x4);
+            m_iframetrans->setTransform(m_tfPrefix + model.getFrameName(frameIdx),
+                                        m_tfPrefix + model.getFrameName(m_baseFrameIndex),
+                                        m_buf4x4);
+        }
     }
 
     return;
