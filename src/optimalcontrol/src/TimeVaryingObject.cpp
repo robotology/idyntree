@@ -29,6 +29,10 @@ namespace iDynTree {
         { }
 
         template<typename Object>
+        TimeInvariantObject<Object>::~TimeInvariantObject()
+        { }
+
+        template<typename Object>
         Object &TimeInvariantObject<Object>::get()
         {
             return m_invariantObject;

@@ -66,6 +66,8 @@ namespace iDynTree {
 
             TimeInvariantObject(const Object& timeInvariantObject);
 
+            ~TimeInvariantObject() final;
+
             Object& get();
 
             virtual const Object& get(double time, bool &isValid) final;
