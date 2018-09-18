@@ -25,7 +25,9 @@ if (IDYNTREE_USES_IPOPT)
   add_subdirectory(inverse-kinematics)
 endif()
 
-add_subdirectory(optimalcontrol)
+if (IDYNTREE_COMPILES_OPTIMALCONTROL)
+  add_subdirectory(optimalcontrol)
+endif()
 
 if(IDYNTREE_USES_YARP)
     add_subdirectory(yarp)
