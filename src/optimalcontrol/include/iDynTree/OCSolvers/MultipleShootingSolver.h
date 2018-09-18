@@ -18,6 +18,7 @@
 #define IDYNTREE_OPTIMALCONTROL_MULTIPLESHOOTINGSOLVER_H
 
 #include <iDynTree/OptimalControlSolver.h>
+#include <iDynTree/TimeVaryingObject.h>
 #include <iDynTree/Optimizer.h>
 
 #include <vector>
@@ -61,6 +62,9 @@ namespace iDynTree {
             bool setOptimizer(std::shared_ptr<optimization::Optimizer> optimizer);
 
             bool setInitialState(const VectorDynSize &initialState);
+
+            bool setGuesses(std::shared_ptr<optimalcontrol::TimeVaryingVector> stateGuesses,
+                            std::shared_ptr<optimalcontrol::TimeVaryingVector> controlGuesses);
 
             bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
 

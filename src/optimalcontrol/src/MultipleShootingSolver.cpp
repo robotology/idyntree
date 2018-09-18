@@ -100,12 +100,13 @@ namespace iDynTree {
             size_t m_jacobianNonZeros, m_hessianNonZeros;
             double m_plusInfinity, m_minusInfinity;
             VectorDynSize m_constraintsLowerBound, m_constraintsUpperBound;
-            VectorDynSize m_constraintsBuffer, m_stateBuffer, m_controlBuffer, m_variablesBuffer, m_costStateGradientBuffer, m_costControlGradientBuffer;
+            VectorDynSize m_constraintsBuffer, m_stateBuffer, m_controlBuffer, m_variablesBuffer, m_guessBuffer, m_costStateGradientBuffer, m_costControlGradientBuffer;
             MatrixDynSize m_costHessianStateBuffer, m_costHessianControlBuffer, m_costHessianStateControlBuffer, m_costHessianControlStateBuffer;
             std::vector<VectorDynSize> m_collocationStateBuffer, m_collocationControlBuffer;
             std::vector<MatrixDynSize> m_collocationStateJacBuffer, m_collocationControlJacBuffer;
             MatrixDynSize m_constraintsStateJacBuffer, m_constraintsControlJacBuffer;
             VectorDynSize m_solution;
+            std::shared_ptr<TimeVaryingVector> m_stateGuesses, m_controlGuesses;
             bool m_solved;
 
             friend class MultipleShootingSolver;
@@ -239,6 +240,8 @@ namespace iDynTree {
                 if (m_variablesBuffer.size() != m_numberOfVariables) {
                     m_variablesBuffer.resize(static_cast<unsigned int>(m_numberOfVariables));
                 }
+
+                m_guessBuffer.resize(static_cast<unsigned int>(m_numberOfVariables));
 
                 if (m_constraintsBuffer.size() != m_constraintsPerInstant) {
                     m_constraintsBuffer.resize(static_cast<unsigned int>(m_constraintsPerInstant));
@@ -896,6 +899,8 @@ namespace iDynTree {
             , m_numberOfConstraints(0)
             , m_plusInfinity(1e19)
             , m_minusInfinity(-1e19)
+            , m_stateGuesses(nullptr)
+            , m_controlGuesses(nullptr)
             , m_solved(false)
             { }
 
@@ -916,6 +921,8 @@ namespace iDynTree {
             , m_numberOfConstraints(0)
             , m_plusInfinity(1e19)
             , m_minusInfinity(-1e19)
+            , m_stateGuesses(nullptr)
+            , m_controlGuesses(nullptr)
             , m_solved(false)
             { }
 
@@ -1297,6 +1304,84 @@ namespace iDynTree {
                     nonZeroElementRows[i] = m_hessianNZRows[i];
                     nonZeroElementColumns[i] = m_hessianNZCols[i];
                 }
+
+                return true;
+            }
+
+            bool getGuess(VectorDynSize &guess) override {
+                if (!m_stateGuesses || !m_controlGuesses) { //no guess is available (this is not an error)
+                    return false;
+                }
+
+                if (!(m_prepared)){
+                    reportError("MultipleShootingTranscription", "getGuess", "First you need to call the prepare method");
+                    return false;
+                }
+
+                iDynTreeEigenVector guessMap = toEigen(m_guessBuffer);
+                Eigen::Index nx = static_cast<Eigen::Index>(m_nx);
+                Eigen::Index nu = static_cast<Eigen::Index>(m_nu);
+
+                MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+                bool isValid = false;
+                for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
+                    if (mesh->origin == first){
+                        guessMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) =
+                                toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
+
+                        const iDynTree::VectorDynSize &controlGuess = m_controlGuesses->get(mesh->time, isValid);
+
+                        if (!isValid || (controlGuess.size() != nu)) {
+                            std::ostringstream errorMsg;
+                            errorMsg << "Unable to get a valid control guess at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "getGuess", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        guessMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = toEigen(controlGuess);
+
+                        guessMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) =
+                                toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
+
+                    } else if (mesh->type == MeshPointType::Control) {
+
+                        const iDynTree::VectorDynSize &controlGuess = m_controlGuesses->get(mesh->time, isValid);
+
+                        if (!isValid || (controlGuess.size() != nu)) {
+                            std::ostringstream errorMsg;
+                            errorMsg << "Unable to get a valid control guess at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "getGuess", errorMsg.str().c_str());
+                            return false;
+                        }
+
+
+                        const iDynTree::VectorDynSize &stateGuess = m_stateGuesses->get(mesh->time, isValid);
+
+                        if (!isValid || (stateGuess.size() != nx)) {
+                            std::ostringstream errorMsg;
+                            errorMsg << "Unable to get a valid state guess at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "getGuess", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        guessMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = toEigen(controlGuess);
+                        guessMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = toEigen(stateGuess);
+                    } else if (mesh->type == MeshPointType::State) {
+
+                        const iDynTree::VectorDynSize &stateGuess = m_stateGuesses->get(mesh->time, isValid);
+
+                        if (!isValid || (stateGuess.size() != nx)) {
+                            std::ostringstream errorMsg;
+                            errorMsg << "Unable to get a valid state guess at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "getGuess", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        guessMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = toEigen(stateGuess);
+                    }
+                }
+
+                guess = m_guessBuffer;
 
                 return true;
             }
@@ -1691,6 +1776,26 @@ namespace iDynTree {
             return m_transcription->setInitialState(initialState);
         }
 
+        bool MultipleShootingSolver::setGuesses(std::shared_ptr<TimeVaryingVector> stateGuesses,
+                                                std::shared_ptr<TimeVaryingVector> controlGuesses)
+        {
+            if (!stateGuesses) {
+                reportError("MultipleShootingSolver", "setGuesses", "Empty state guess pointer.");
+                return false;
+            }
+
+            if (!controlGuesses) {
+                reportError("MultipleShootingSolver", "setGuesses", "Empty control guess pointer.");
+                return false;
+            }
+
+            m_transcription->m_stateGuesses = stateGuesses;
+            m_transcription->m_controlGuesses = controlGuesses;
+
+            return true;
+
+        }
+
         bool MultipleShootingSolver::getTimings(std::vector<double> &stateEvaluations, std::vector<double> &controlEvaluations)
         {
             return m_transcription->getTimings(stateEvaluations, controlEvaluations);
@@ -1718,6 +1823,10 @@ namespace iDynTree {
                 return false;
             }
             m_transcription->m_solved = true;
+
+            m_transcription->m_stateGuesses = nullptr; //Guesses are used only once
+            m_transcription->m_controlGuesses = nullptr;
+
             return true;
         }
 
