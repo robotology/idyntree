@@ -37,12 +37,6 @@ bool OsqpInterface::setProblem(std::shared_ptr<OptimizationProblem> problem)
     return false;
 }
 
-bool OsqpInterface::setInitialGuess(VectorDynSize &initialGuess)
-{
-    reportError("OsqpInterface", "setInitialGuess", "OsqpInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_OSQPEIGEN set to ON?");
-    return false;
-}
-
 bool OsqpInterface::solve()
 {
     reportError("OsqpInterface", "solve", "OsqpInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_OSQPEIGEN set to ON?");

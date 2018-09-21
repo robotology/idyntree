@@ -40,12 +40,6 @@ bool IpoptInterface::setProblem(std::shared_ptr<OptimizationProblem> problem)
     return false;
 }
 
-bool IpoptInterface::setInitialGuess(VectorDynSize &initialGuess)
-{
-    reportError("IpoptInterface", "setInitialGuess", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
-    return false;
-}
-
 bool IpoptInterface::solve()
 {
     reportError("IpoptInterface", "solve", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
