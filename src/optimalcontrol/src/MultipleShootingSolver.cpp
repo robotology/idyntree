@@ -579,6 +579,9 @@ namespace iDynTree {
                     newTotalMeshes++;
                     ++mesh;
                 }
+                if (mesh->type == MeshPointType::Control){
+                    newControlMeshes++;
+                }
                 newTotalMeshes++; //the last mesh
                 m_meshPointsEnd = m_meshPoints.begin() + static_cast<long>(newTotalMeshes);
                 assert((m_meshPointsEnd - 1)->origin == last);
