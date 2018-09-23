@@ -1007,6 +1007,14 @@ namespace iDynTree {
                         }
                         upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nc)) = toEigen(m_constraintsBuffer);
 
+                        for (unsigned int i = 0; i < nc; ++i) {
+                            if ((m_constraintsLowerBound(static_cast<unsigned int>(constraintIndex + i)) <= m_minusInfinity) &&
+                                    (m_constraintsUpperBound(static_cast<unsigned int>(constraintIndex + i)) >= m_plusInfinity)) { //unbounded case
+                                m_constraintsLowerBound(static_cast<unsigned int>(constraintIndex + i)) = m_constraintsLowerBound(static_cast<unsigned int>(constraintIndex + i))/2; //avoid unboundness
+                                m_constraintsUpperBound(static_cast<unsigned int>(constraintIndex + i)) = m_constraintsUpperBound(static_cast<unsigned int>(constraintIndex + i))/2; //avoid unboundness
+                            }
+                        }
+
                         //Saving the jacobian structure due to the constraints
                         addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
                         constraintIndex += nc;
@@ -1058,6 +1066,14 @@ namespace iDynTree {
                             reportError("MultipleShootingSolver", "prepare", errorMsg.str().c_str());
                         }
                         upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nc)) = toEigen(m_constraintsBuffer);
+
+                        for (unsigned int i = 0; i < nc; ++i) {
+                            if ((m_constraintsLowerBound(static_cast<unsigned int>(constraintIndex + i)) <= m_minusInfinity) &&
+                                    (m_constraintsUpperBound(static_cast<unsigned int>(constraintIndex + i)) >= m_plusInfinity)) { //unbounded case
+                                m_constraintsLowerBound(static_cast<unsigned int>(constraintIndex + i)) = m_constraintsLowerBound(static_cast<unsigned int>(constraintIndex + i))/2; //avoid unboundness
+                                m_constraintsUpperBound(static_cast<unsigned int>(constraintIndex + i)) = m_constraintsUpperBound(static_cast<unsigned int>(constraintIndex + i))/2; //avoid unboundness
+                            }
+                        }
 
                         //Saving the jacobian structure due to the constraints
                         addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
@@ -1112,6 +1128,14 @@ namespace iDynTree {
                             reportError("MultipleShootingSolver", "prepare", errorMsg.str().c_str());
                         }
                         upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nc)) = toEigen(m_constraintsBuffer);
+
+                        for (unsigned int i = 0; i < nc; ++i) {
+                            if ((m_constraintsLowerBound(static_cast<unsigned int>(constraintIndex + i)) <= m_minusInfinity) &&
+                                    (m_constraintsUpperBound(static_cast<unsigned int>(constraintIndex + i)) >= m_plusInfinity)) { //unbounded case
+                                m_constraintsLowerBound(static_cast<unsigned int>(constraintIndex + i)) = m_constraintsLowerBound(static_cast<unsigned int>(constraintIndex + i))/2; //avoid unboundness
+                                m_constraintsUpperBound(static_cast<unsigned int>(constraintIndex + i)) = m_constraintsUpperBound(static_cast<unsigned int>(constraintIndex + i))/2; //avoid unboundness
+                            }
+                        }
 
                         addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
                         addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);

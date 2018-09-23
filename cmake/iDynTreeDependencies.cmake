@@ -51,8 +51,20 @@ if(IDYNTREE_USES_YARP AND YARP_FOUND)
   endif()
 endif()
 
+find_library(WORHP_LIB worhp HINTS ENV WORHP_DIR)
+option(IDYNTREE_USES_WORHP "Use WORHP as a solver in optimalcontrol." WORHP_LIB)
+if (IDYNTREE_USES_WORHP)
+    if (NOT WORHP_LIB)
+        message(FATAL_ERROR "The IDYNTREE_USES_WORHP option was selected, but it was not possible to find WORHP.")
+    endif()
+
+    find_path(WORHP_INCLUDE_DIRS worhp HINTS ENV WORHP_DIR)
+
+endif()
+
 idyntree_handle_dependency(IPOPT)
 idyntree_handle_dependency(Irrlicht)
 idyntree_handle_dependency(Qt5 COMPONENTS Qml Quick Widgets)
 idyntree_handle_dependency(OsqpEigen)
+idyntree_handle_dependency(ALGLIB)
 

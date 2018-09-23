@@ -27,7 +27,7 @@ add_oc_test(OCProblem)
 add_oc_test(MultipleShooting)
 add_oc_test(L2Norm)
 if (IDYNTREE_USES_IPOPT)
-    add_oc_test(Optimizer)
+    add_oc_test(IpoptInterface)
     add_oc_test(OptimalControlIpopt)
 endif()
 
@@ -35,4 +35,11 @@ if (IDYNTREE_USES_OSQPEIGEN)
     add_oc_test(LinearOCOsqp)
 endif()
 
+if (IDYNTREE_USES_ALGLIB)
+    add_oc_test(AlglibInterface)
+endif()
+
+if (IDYNTREE_USES_WORHP)
+    add_oc_test(WorhpInterface)
+endif()
 
