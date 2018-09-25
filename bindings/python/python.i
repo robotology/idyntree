@@ -183,10 +183,13 @@ PyObject* toNumPy() {
             PyObject* innerList = PyList_GetItem(arg, r);
             for (Py_ssize_t c = 0; c < cols; ++c) {
                 PyObject* object = PyList_GetItem(innerList, c);
+                PyErr_Clear();
                 double value = PyFloat_AsDouble(object);
-                PyObject *conversionError = PyErr_Occurred();
-                if (conversionError) {
-                    throw std::invalid_argument("Element at index (" + std::to_string(r) + "," + std::to_string(c) +") cannot be converted to double");
+                if (value == -1) {
+                    PyObject *conversionError = PyErr_Occurred();
+                    if (conversionError) {
+                        throw std::invalid_argument("Element at index (" + std::to_string(r) + "," + std::to_string(c) +") cannot be converted to double");
+                    }
                 }
                 destination.setVal(r, c, value);
             }
@@ -400,3 +403,34 @@ PyObject* toNumPy() {
 }
 
 }
+
+
+%pythoncode %{
+#these need to be called after iDynTree module has been loaded
+def init_helpers():
+    import warnings
+    def _fromList_deprecated_wrapper(cls, list):
+        warnings.warn("'fromList' is deprecated. Please use 'fromPython'.", FutureWarning)
+        return cls.FromPython(list)
+
+    VectorDynSize.fromList = classmethod(_fromList_deprecated_wrapper)
+
+    LinearForceVector3.fromList = classmethod(_fromList_deprecated_wrapper)
+    LinearMotionVector3.fromList = classmethod(_fromList_deprecated_wrapper)
+    AngularForceVector3.fromList = classmethod(_fromList_deprecated_wrapper)
+    AngularMotionVector3.fromList = classmethod(_fromList_deprecated_wrapper)
+
+    SpatialAcc.fromList = classmethod(_fromList_deprecated_wrapper)
+    ClassicalAcc.fromList = classmethod(_fromList_deprecated_wrapper)
+    SpatialInertia.fromList = classmethod(_fromList_deprecated_wrapper)
+    SpatialMomentum.fromList = classmethod(_fromList_deprecated_wrapper)
+    SpatialMotionVector.fromList = classmethod(_fromList_deprecated_wrapper)
+    Twist.fromList = classmethod(_fromList_deprecated_wrapper)
+    Wrench.fromList = classmethod(_fromList_deprecated_wrapper)
+
+    warnings.warn("init_helpers is deprecated. Please use 'fromPython' instead of 'fromList' and remove the call to 'init_helpers'.", FutureWarning)
+
+def init_numpy_helpers():
+    import warnings
+    warnings.warn("init_numpy_helpers is deprecated. Support for toNumPy is now enabled by default. Please, remove the call to 'init_numpy_helpers'.", FutureWarning)
+%}
