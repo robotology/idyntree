@@ -52,5 +52,7 @@ add_integration_exe(DynamicsLinearization)
 
 # Some tests
 if (IDYNTREE_USES_ASSIMP)
-  add_integration_test(InertialParametersHelpers)
+  # Until we fixed the mesh loading ( https://github.com/robotology/idyntree/issues/291 )
+  # we just compiled this test without executing it
+  add_integration_exe(InertialParametersHelpers)
 endif ()
