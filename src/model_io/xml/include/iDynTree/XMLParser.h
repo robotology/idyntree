@@ -187,6 +187,26 @@ public:
      * @return true if the XML document is valid and successfully parsed.
      */
     bool parseXMLString(std::string xmlString);
+
+    /**
+     * Write the current parsed document to a XML file.
+     *
+     * @see parseXMLString(std::string)
+     *
+     * @param absoluteFileName the XML file to be written.
+     * @return true if the document is valid and it was successfully written to the specified file.
+     */
+    bool saveToXMLFile(std::string absoluteFileName);
+
+    /**
+     * Write the current parsed document to a string.
+     *
+     * @see parseXMLFile(std::string)
+     *
+     * @param xmlString the output XML string.
+     * @return true if the document is valid and successfully written to a string.
+     */
+    bool saveToXMLString(std::string& xmlString);
     
     /**
      * Set the factory function responsible of creating a new XMLDocument element.
