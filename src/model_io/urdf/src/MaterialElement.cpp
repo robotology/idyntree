@@ -59,6 +59,7 @@ namespace iDynTree {
 
     bool MaterialElement::setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes)
     {
+        XMLElement::setAttributes(attributes);
         auto found = attributes.find("name");
         if (found == attributes.end()) {
             reportError("MaterialElement", "setAttributes", "Impossible to parse URDF material. Missing 'name' attribute.");

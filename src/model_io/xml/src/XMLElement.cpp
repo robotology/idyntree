@@ -134,19 +134,25 @@ namespace iDynTree {
         return m_pimpl->m_charactersStream.str();
     }
     
-    std::string XMLElement::description() const
+    std::string XMLElement::description(const size_t depth) const
     {
+        std::string indent = "  ";
+        std::string totalIndent = "";
+        for (size_t i=0; i < depth; i++) {
+            totalIndent = totalIndent + indent;
+        }
+
         std::ostringstream str;
-        str << "<" << m_pimpl->m_name;
+        str << totalIndent << "<" << m_pimpl->m_name;
         for (const auto& attribute : m_pimpl->m_attributes) {
             str << " " << attribute.second->description();
         }
         str << ">" << std::endl;
         for (const auto& child : m_pimpl->m_children) {
-            str << child->description() << std::endl;
+            str << child->description(depth+1);
         }
-        str << getParsedTextContent();
-        str << "</" << m_pimpl->m_name << ">" << std::endl;
+        //str << getParsedTextContent();
+        str << totalIndent << "</" << m_pimpl->m_name << ">" << std::endl;
         return str.str();
     }
 }

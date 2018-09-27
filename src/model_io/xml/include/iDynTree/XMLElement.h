@@ -128,7 +128,7 @@ public:
     
     std::string getParsedTextContent() const;
     
-    std::string description() const;
+    virtual std::string description(const size_t depth=0) const;
 
 };
 

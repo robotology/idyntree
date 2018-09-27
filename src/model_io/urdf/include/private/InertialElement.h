@@ -30,10 +30,14 @@ class iDynTree::InertialElement: public iDynTree::XMLElement {
     
 public:
     InertialElement(iDynTree::Link &link);
-    
+
+    void setInertia(iDynTree::SpatialInertia& inertia);
+
     std::shared_ptr<iDynTree::XMLElement> childElementForName(const std::string& name) override;
     
     virtual void exitElementScope() override;
+
+    virtual std::string description(const size_t depth=0) const override;
     
 };
 

@@ -21,7 +21,6 @@ set(IDYNTREE_MODELIO_XML_SOURCES src/XMLParser.cpp
                                  src/XMLElement.cpp
                                  src/XMLAttribute.cpp
                                  src/XMLDocument.cpp)
-								  
 
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_XML_SOURCES})
