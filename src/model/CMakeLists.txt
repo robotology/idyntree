@@ -20,6 +20,7 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
                            include/iDynTree/Model/DynamicsLinearizationHelpers.h
                            include/iDynTree/Model/Indeces.h
                            include/iDynTree/Model/Indices.h
+                           include/iDynTree/Model/InertialParametersHelpers.h
                            include/iDynTree/Model/Jacobians.h
                            include/iDynTree/Model/JointState.h
                            include/iDynTree/Model/LinkTraversalsCache.h
@@ -43,6 +44,7 @@ set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/FreeFloatingState.cpp
                            src/FreeFloatingMatrices.cpp
                            src/Indices.cpp
+                           src/InertialParametersHelpers.cpp
                            src/Dynamics.cpp
                            src/DynamicsLinearization.cpp
                            src/DynamicsLinearizationHelpers.cpp
@@ -72,7 +74,17 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                           PRIVATE ${EIGEN3_INCLUDE_DIR})
 
-target_link_libraries(${libraryname} idyntree-core)
+target_link_libraries(${libraryname} PUBLIC idyntree-core)
+
+# Depending on the IDYNTREE_USES_ASSIMP option, some function are implemented or not
+# Note that this flag needs to be considered only in .cpp files, otherwise it could
+# create ABI inconsistencies as it is not defined for the downstream compilation units
+if (IDYNTREE_USES_ASSIMP)
+  target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_ASSIMP)
+  target_include_directories(${libraryname} PRIVATE "${ASSIMP_INCLUDE_DIRS}")
+  link_directories("${ASSIMP_LIBRARY_DIRS}")
+  target_link_libraries(${libraryname} PRIVATE "${ASSIMP_LIBRARIES}")
+endif()
 
 # Ensure that build include directories are always included before system ones
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)

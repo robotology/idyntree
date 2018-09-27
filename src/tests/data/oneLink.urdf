@@ -11,6 +11,18 @@
             <mass value="1" />
             <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
         </inertial>
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="cube.stl"/>
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="cube.stl"/>
+          </geometry>
+        </collision>
     </link>
     <!-- frames , modeled as "fake links" -->
      <joint name="frame1_fixed_joint" type="fixed">

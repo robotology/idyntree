@@ -54,4 +54,4 @@ endif()
 idyntree_handle_dependency(IPOPT)
 idyntree_handle_dependency(Irrlicht)
 idyntree_handle_dependency(Qt5 COMPONENTS Qml Quick Widgets)
-
+idyntree_handle_dependency(ASSIMP)

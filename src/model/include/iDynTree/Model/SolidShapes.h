@@ -63,6 +63,14 @@ namespace iDynTree
         double radius;
     };
 
+    /**
+     * @brief Box, i.e. 3D rectangular parallelepiped.
+     *
+     * The box is centered in the mesh frame, its sides
+     * are aligned with the axis of the mesh frame, and
+     * the side lenghts in the x, y and z direction are given
+     * by the attributes x, y and z.
+     */
     class Box: public SolidShape
     {
     public:
