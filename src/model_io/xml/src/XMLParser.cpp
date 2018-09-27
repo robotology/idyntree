@@ -23,6 +23,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <fstream>
 #include <stack>
 #include <vector>
 #include <cstdarg>
@@ -46,6 +47,8 @@ static const std::string stringFromFormattedCString(const char *message, va_list
 
     return std::string(buffer.begin(), buffer.end());
 }
+
+// iDynTree::XMLdocument to libxml2's xmlDoc
 
 namespace iDynTree {
     
@@ -371,7 +374,39 @@ namespace iDynTree {
         int result = xmlSAXUserParseMemory(m_pimpl->callbackHandler(), this, xmlString.c_str(), xmlString.length());
         return result == 0;
     }
-    
+
+    bool XMLParser::saveToXMLFile(std::string absoluteFileName)
+    {
+        if (!m_pimpl->m_keepInMemory) {
+           return false;
+        }
+
+        std::ofstream outputFile(absoluteFileName);
+
+        if (!outputFile.is_open()) {
+            std::string message = std::string("Failed to open file ") + absoluteFileName + " for writing the XML file.";
+            reportError("XMLParser", "saveToXMLFile", message.c_str());
+            return false;
+        }
+
+        std::string xmlString;
+        bool ok = this->saveToXMLString(xmlString);
+
+        outputFile << xmlString;
+        outputFile.close();
+
+        return ok;
+    }
+
+    bool XMLParser::saveToXMLString(std::string& xmlString)
+    {
+        if (!m_pimpl->m_keepInMemory) {
+           return false;
+        }
+        xmlString = m_pimpl->m_document->description();
+        return true;
+    }
+
     std::shared_ptr<const XMLDocument> XMLParser::document() const
     {
         assert(m_pimpl);

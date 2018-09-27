@@ -25,6 +25,7 @@ namespace iDynTree {
 
     bool OriginElement::setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes)
     {
+        XMLElement::setAttributes(attributes);
         auto xyz = attributes.find("xyz");
         if (xyz != attributes.end()) {
             Position origin;

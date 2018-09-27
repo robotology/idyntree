@@ -92,7 +92,14 @@ namespace iDynTree {
         }
         return std::make_shared<iDynTree::XMLElement>(name);
     }
-    
+
+    void InertialElement::setInertia(iDynTree::SpatialInertia& inertia) {
+        m_mass = inertia.getMass();
+        m_centerOfMass = iDynTree::Transform(Rotation::Identity(), inertia.getCenterOfMass());
+        m_rotationalInertiaWRTCoM = inertia.getRotationalInertiaWrtCenterOfMass();
+        m_link.setInertia(inertia);
+    }
+
     void InertialElement::exitElementScope() {
         Position com_wrt_link = m_centerOfMass.getPosition();
         Rotation link_R_com   = m_centerOfMass.getRotation();
@@ -103,5 +110,47 @@ namespace iDynTree {
 
         m_link.setInertia(inertia);
     }
+
+    std::string InertialElement::description(const size_t depth) const {
+        std::string indent = "  ";
+        std::string totalIndent = "";
+        for (size_t i=0; i < depth; i++) {
+            totalIndent = totalIndent + indent;
+        }
+
+        std::string totalIndentPlusOne = totalIndent + indent;
+
+        std::ostringstream str;
+        str << totalIndent << "<inertial>" << std::endl;
+
+        // TODO(traversaro) : handle locale
+        Position com_wrt_link = m_centerOfMass.getPosition();
+        Rotation link_R_com   = m_centerOfMass.getRotation();
+        RotationalInertiaRaw rotInertia = link_R_com*m_rotationalInertiaWRTCoM;
+
+
+        // Mass
+        str << totalIndentPlusOne << "<mass value=\"" << m_mass << "\" >" << std::endl;
+        str << totalIndentPlusOne << "</mass>" << std::endl;
+        str << totalIndentPlusOne << "<origin rpy=\"0.0 0.0 0.0\" xyz=\"" << com_wrt_link(0)
+                                                                          << " "
+                                                                          << com_wrt_link(1)
+                                                                          << " "
+                                                                          << com_wrt_link(2)
+                                                                          << "\">" << std::endl;
+        str << totalIndentPlusOne << "</origin>" << std::endl;
+        str << totalIndentPlusOne << "<inertia ixx=\"" << m_rotationalInertiaWRTCoM(0, 0) << "\" "
+                                           << "ixy=\"" << m_rotationalInertiaWRTCoM(0, 1) << "\" "
+                                           << "ixz=\"" << m_rotationalInertiaWRTCoM(0, 2) << "\" "
+                                           << "iyy=\"" << m_rotationalInertiaWRTCoM(1, 1) << "\" "
+                                           << "iyz=\"" << m_rotationalInertiaWRTCoM(1, 2) << "\" "
+                                           << "izz=\"" << m_rotationalInertiaWRTCoM(2, 2) << "\" "
+                                                       << ">" << std::endl;
+        str << totalIndentPlusOne << "</inertia>" << std::endl;
+
+        str << totalIndent << "</inertial>" << std::endl;
+        return str.str();
+    }
+
     
 }

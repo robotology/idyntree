@@ -72,6 +72,7 @@ namespace iDynTree {
 
     bool SensorElement::setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes)
     {
+        XMLElement::setAttributes(attributes);
         auto found = attributes.find("name");
         if (found == attributes.end()) {
             reportError("SensorElement", "setAttributes", "name is required for the <sensor> element.");

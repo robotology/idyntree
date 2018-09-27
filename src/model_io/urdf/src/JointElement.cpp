@@ -35,6 +35,7 @@ namespace iDynTree {
     , m_axis(Axis(Direction(1.0, 0.0, 0.0), Position(0.0, 0.0, 0.0))) { }
     
     bool JointElement::setAttributes(const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
+        XMLElement::setAttributes(attributes);
         // attributes: name
         auto found = attributes.find("name");
         if (found != attributes.end()) {
