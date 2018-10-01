@@ -78,6 +78,31 @@ namespace iDynTree
         return m_pimpl->m_isModelValid;
     }
 
+    bool ModelCalibrationHelper::loadModelFromString(const std::string& xmlString,
+                                                     const std::string& /*filetype*/)
+    {
+        // Allocate parser
+        m_pimpl->m_parser = std::make_shared<XMLParser>();
+
+        // We need to save the model model in memory
+        m_pimpl->m_parser->setKeepTreeInMemory(true);
+
+        m_pimpl->m_parser->setDocumentFactory([]{ return std::shared_ptr<XMLDocument>(new URDFDocument); });
+        if (!m_pimpl->m_parser->parseXMLString(xmlString)) {
+            reportError("ModelCalibrationHelper", "loadModelFromString", "Error in parsing model from URDF.");
+            return false;
+        }
+        // Retrieving the parsed document, which is an instance of URDFDocument
+        std::shared_ptr<const XMLDocument> document = m_pimpl->m_parser->document();
+        std::shared_ptr<const URDFDocument> urdfDocument = std::dynamic_pointer_cast<const URDFDocument>(document);
+        if (!urdfDocument) {
+            reportError("ModelCalibrationHelper", "loadModelFromString", "Fatal error in retrieving the parsed model.");
+            return false;
+        }
+
+        return m_pimpl->setModelAndSensors(urdfDocument->model(),urdfDocument->sensors());
+    }
+
     bool ModelCalibrationHelper::loadModelFromFile(const std::string& filename,
                                         const std::string& /*filetype*/)
     {

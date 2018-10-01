@@ -88,6 +88,8 @@
 #include "iDynTree/Model/FreeFloatingMatrices.h"
 #include "iDynTree/Model/FreeFloatingState.h"
 #include "iDynTree/Model/ContactWrench.h"
+#include "iDynTree/Model/InertialParametersHelpers.h"
+
 
 // Kinematics & Dynamics related functions
 #include "iDynTree/Model/ForwardKinematics.h"
@@ -107,6 +109,8 @@
 #include "iDynTree/ModelIO/URDFDofsImport.h"
 #include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 #include "iDynTree/ModelIO/ModelLoader.h"
+#include "iDynTree/ModelIO/ModelCalibrationHelper.h"
+
 
 // Estimation related classes
 #include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
@@ -282,6 +286,8 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Model/FreeFloatingMatrices.h"
 %include "iDynTree/Model/FreeFloatingState.h"
 %include "iDynTree/Model/ContactWrench.h"
+%include "iDynTree/Model/InertialParametersHelpers.h"
+
 
 %include "joints.i"
 
@@ -305,6 +311,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/ModelIO/URDFDofsImport.h"
 %include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 %include "iDynTree/ModelIO/ModelLoader.h"
+%include "iDynTree/ModelIO/ModelCalibrationHelper.h"
 
 // Estimation related classes
 %include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
