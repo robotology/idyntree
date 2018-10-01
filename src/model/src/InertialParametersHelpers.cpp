@@ -31,8 +31,6 @@ namespace iDynTree
 SpatialInertia boxGet6DInertiaInLinkFrameFromDensity(const Box& box,
                                                      double density)
 {
-    std::cerr << "boxGet6DInertiaInLinkFrameFromDensity " << box.x << " " << box.y << " " << box.z << std::endl;
-
     double boxVolume = box.x*box.y*box.z;
     double boxMass   = density*boxVolume;
     // Assuming uniform density, the center of mass is coincident with the box center
@@ -49,10 +47,6 @@ SpatialInertia boxGet6DInertiaInLinkFrameFromDensity(const Box& box,
     rotInertiaInGeomFrame(2, 2) = (boxMass/12.0)*(x2+y2);
 
     SpatialInertia inertiaInGeometryFrame = SpatialInertia(boxMass, comInGeomFrame, rotInertiaInGeomFrame);
-
-    std::cerr << "boxGet6DInertiaInLinkFrameFromDensity " << inertiaInGeometryFrame.getRotationalInertiaWrtFrameOrigin().toString() << std::endl;
-    std::cerr << "boxGet6DInertiaInLinkFrameFromDensity " << (box.link_H_geometry*inertiaInGeometryFrame).getRotationalInertiaWrtFrameOrigin().toString() << std::endl;
-
 
     return box.link_H_geometry*inertiaInGeometryFrame;
 }
@@ -179,8 +173,6 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
         offset_bb_wrt_geom(1) = (maxY+minY)/2.0;
         offset_bb_wrt_geom(2) = (maxZ+minZ)/2.0;
 
-        std::cerr << "  extMesh->link_H_geometry " <<  extMesh->link_H_geometry.toString() << std::endl;
-
         // Workaround for bug
         Position offset_bb_wrt_link = extMesh->link_H_geometry*offset_bb_wrt_geom;
 
@@ -251,23 +243,23 @@ bool getBoundingBoxOfLinkGeometries(iDynTree::Model& model,
     for (LinkIndex lnkIdx=0; lnkIdx < model.getNrOfLinks(); lnkIdx++)
     {
         // We should have a for like the following, but for now we assume that there is one geometry for link
-        // for(int shapeIdx=0; shapeIdx < fullModel.visualSolidShapes().linkSolidShapes[visitedLinkIndex].size(); shapeIdx++)
-        if (model.visualSolidShapes().linkSolidShapes[lnkIdx].size() > 1)
+        // for(int shapeIdx=0; shapeIdx < fullModel.collisionSolidShapes().linkSolidShapes[visitedLinkIndex].size(); shapeIdx++)
+        if (model.collisionSolidShapes().linkSolidShapes[lnkIdx].size() > 1)
         {
         //    reportError("", "boxGet6DInertiaInLinkFrameFromDensity", "Only one shape for link supported at the moment.");
         //    return false;
         }
 
-        if (model.visualSolidShapes().linkSolidShapes[lnkIdx].size() == 0)
+        if (model.collisionSolidShapes().linkSolidShapes[lnkIdx].size() == 0)
         {
             Box box;
             box.x = box.y = box.z = 0.0;
             linkBBsInLinkFrame[lnkIdx] = box;
         }
 
-        //if (model.visualSolidShapes().linkSolidShapes[lnkIdx].size() == 1)
+        //if (model.collisionSolidShapes().linkSolidShapes[lnkIdx].size() == 1)
         //{
-            SolidShape * shape = model.visualSolidShapes().linkSolidShapes[lnkIdx][0];
+            SolidShape * shape = model.collisionSolidShapes().linkSolidShapes[lnkIdx][0];
             bool ok = BBFromShape(shape, linkBBsInLinkFrame[lnkIdx]);
             if (!ok) return false;
         //}
