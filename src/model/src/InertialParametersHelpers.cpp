@@ -309,7 +309,7 @@ bool estimateInertialParametersFromLinkBoundingBoxesAndTotalMass(const double to
     return true;
 #else
     reportError("", "estimateInertialParametersFromLinkBoundingBoxesAndTotalMass", "IDYNTREE_USES_ASSIMP CMake option need to be set to ON to use estimateInertialParametersFromLinkBoundingBoxesAndTotalMass");
-    return false
+    return false;
 #endif
 }
 
