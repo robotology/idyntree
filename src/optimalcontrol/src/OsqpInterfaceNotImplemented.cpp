@@ -19,6 +19,7 @@
 
 
 using namespace iDynTree::optimization;
+using namespace iDynTree;
 
 OsqpInterface::OsqpInterface()
 { }
