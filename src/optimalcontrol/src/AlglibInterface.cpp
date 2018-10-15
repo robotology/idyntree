@@ -21,7 +21,7 @@
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
-#include "iDynTree/Core/Utils.h"
+#include <iDynTree/Core/Utils.h>
 
 #include <optimization.h>
 #include <stdafx.h>
@@ -54,32 +54,35 @@ namespace iDynTree {
             alglib::minnlcreport alglibReport;
             alglib::real_1d_array alglibScaling;
             int exitCode;
-            double epsg;
-            double epsf;
             double epsx;
             alglib::ae_int_t maxits;
             alglib::ae_int_t outerits;
             double rho;
 
 
-            AlglibInterfaceImplementation(){
+            AlglibInterfaceImplementation() {
                 nlpData = new(SharedData);
                 assert(nlpData);
                 nlpData->problem = nullptr;
                 exitCode = -10;
-                epsg = 0;
-                epsf = 0;
                 epsx = 0.000001;
                 maxits = 0;
                 outerits = 5;
                 rho = 1000;
             }
 
+            ~AlglibInterfaceImplementation() {
+                if (nlpData){
+                    delete nlpData;
+                    nlpData = nullptr;
+                }
+            }
+
         };
 
         void ALGLIB_NLP(const alglib::real_1d_array &x, alglib::real_1d_array &fi, alglib::real_2d_array &jac, void *ptr){
             // See http://www.alglib.net/translator/man/manual.cpp.html#example_minnlc_d_inequality
-            SharedData* pimpl = (SharedData*) ptr;
+            SharedData* pimpl = reinterpret_cast<SharedData*>(ptr);
             assert(pimpl->problem);
             Eigen::Map<const Eigen::VectorXd> x_map(x.getcontent(), x.length());
             Eigen::Map<Eigen::VectorXd> f_map(fi.getcontent(), fi.length());
@@ -154,14 +157,6 @@ namespace iDynTree {
 
         AlglibInterface::~AlglibInterface()
         {
-            if (m_pimpl){
-                if (m_pimpl->nlpData){
-                    delete m_pimpl->nlpData;
-                    m_pimpl->nlpData = nullptr;
-                }
-                delete m_pimpl;
-                m_pimpl = nullptr;
-            }
 
         }
 
@@ -241,7 +236,7 @@ namespace iDynTree {
             unsigned int inequalities = 0, equalities = 0;
             ConstraintInfo newConstraint;
             for (unsigned int i=0; i < nc; ++i){
-                if (m_pimpl->constraintsLowerBounds(i) == m_pimpl->constraintsUpperBounds(i)){
+                if (checkDoublesAreEqual(m_pimpl->constraintsLowerBounds(i), m_pimpl->constraintsUpperBounds(i))){
                     newConstraint.boundValue = -1.0 * m_pimpl->constraintsUpperBounds(i);
                     newConstraint.constraintSign = +1.0;
                     newConstraint.index = i;
@@ -310,7 +305,7 @@ namespace iDynTree {
             }
 
             alglib::minnlcsetalgoaul(m_pimpl->alglibState, m_pimpl->rho, m_pimpl->outerits);
-            alglib::minnlcsetcond(m_pimpl->alglibState, m_pimpl->epsg, m_pimpl->epsf, m_pimpl->epsx, m_pimpl->maxits);
+            alglib::minnlcsetcond(m_pimpl->alglibState, m_pimpl->epsx, m_pimpl->maxits);
             alglib::minnlcsetscale(m_pimpl->alglibState, m_pimpl->alglibScaling);
             alglib::minnlcsetprecinexact(m_pimpl->alglibState);
 
@@ -438,25 +433,13 @@ namespace iDynTree {
             return true;
         }
 
-        bool AlglibInterface::setStoppingConditions(double epsG, double epsF, double epsX)
+        bool AlglibInterface::setStoppingCondition(double epsX)
         {
-            if (epsG < 0){
-                reportError("ALGLIBInterface", "setStoppingConditions", "The epsG parameter is supposed to be non negative");
-                return false;
-            }
-
-            if (epsF < 0){
-                reportError("ALGLIBInterface", "setStoppingConditions", "The epsF parameter is supposed to be non negative");
-                return false;
-            }
-
             if (epsX < 0){
-                reportError("ALGLIBInterface", "setStoppingConditions", "The epsX parameter is supposed to be non negative");
+                reportError("ALGLIBInterface", "setStoppingCondition", "The epsX parameter is supposed to be non negative");
                 return false;
             }
 
-            m_pimpl->epsg = epsG;
-            m_pimpl->epsf = epsF;
             m_pimpl->epsx = epsX;
 
             return true;

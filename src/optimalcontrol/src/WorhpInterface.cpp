@@ -655,7 +655,11 @@ bool WorhpInterface::solve()
     if (m_pimpl->worhp.cnt.status <= TerminateError) {
         reportError("WorhpInterface", "solve", "Failed to solve the problem. Here additional infos:");
         m_pimpl->previouslySolved = false;
+        int printLevel;
+        getWorhpParam("NLPprint", printLevel);
+        setWorhpParam("NLPprint", 0);
         StatusMsg(&m_pimpl->worhp.opt, &m_pimpl->worhp.wsp, &m_pimpl->worhp.par, &m_pimpl->worhp.cnt);
+        setWorhpParam("NLPprint", printLevel);
         return false;
     }
     m_pimpl->previouslySolved = true;

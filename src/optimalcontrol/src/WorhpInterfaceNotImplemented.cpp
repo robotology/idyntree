@@ -18,6 +18,8 @@
 #include <iDynTree/Core/Utils.h>
 
 using namespace iDynTree::optimization;
+using namespace iDynTree;
+
 
 WorhpInterface::WorhpInterface()
 {

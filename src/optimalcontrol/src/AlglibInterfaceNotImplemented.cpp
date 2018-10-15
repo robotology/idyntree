@@ -18,6 +18,7 @@
 #include <iDynTree/Core/Utils.h>
 
 using namespace iDynTree::optimization;
+using namespace iDynTree;
 
 AlglibInterface::AlglibInterface()
 {
@@ -36,50 +37,74 @@ bool AlglibInterface::isAvailable() const
 
 bool AlglibInterface::setProblem(std::shared_ptr<OptimizationProblem> problem)
 {
-    reportError("AlglibInterface", "setProblem", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("AlglibInterface", "setProblem", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
     return false;
 }
 
 bool AlglibInterface::solve()
 {
-    reportError("AlglibInterface", "solve", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("AlglibInterface", "solve", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
     return false;
 }
 
 bool AlglibInterface::getPrimalVariables(VectorDynSize &primalVariables)
 {
-    reportError("AlglibInterface", "getPrimalVariables", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("AlglibInterface", "getPrimalVariables", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
     return false;
 }
 
 bool AlglibInterface::getDualVariables(VectorDynSize &constraintsMultipliers, VectorDynSize &lowerBoundsMultipliers, VectorDynSize &upperBoundsMultipliers)
 {
-    reportError("AlglibInterface", "getDualVariables", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("AlglibInterface", "getDualVariables", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
     return false;
 }
 
 bool AlglibInterface::getOptimalCost(double &optimalCost)
 {
-    reportError("AlglibInterface", "getOptimalCost", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("AlglibInterface", "getOptimalCost", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
     return false;
 }
 
 bool AlglibInterface::getOptimalConstraintsValues(VectorDynSize &constraintsValues)
 {
-    reportError("AlglibInterface", "getOptimalConstraintsValues", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("AlglibInterface", "getOptimalConstraintsValues", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
     return false;
 }
 
 double AlglibInterface::minusInfinity()
 {
-    reportError("AlglibInterface", "minusInfinity", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("AlglibInterface", "minusInfinity", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
     return Optimizer::minusInfinity();
 }
 
 double AlglibInterface::plusInfinity()
 {
-    reportError("AlglibInterface", "plusInfinity", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("AlglibInterface", "plusInfinity", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
     return Optimizer::plusInfinity();
+}
+
+bool AlglibInterface::setRHO(double rho)
+{
+    reportError("AlglibInterface", "setRHO", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
+    return false;
+}
+
+bool AlglibInterface::setOuterIterations(unsigned int outerIterations)
+{
+    reportError("AlglibInterface", "setOuterIterations", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
+    return false;
+}
+
+bool AlglibInterface::setStoppingCondition(double epsX)
+{
+    reportError("AlglibInterface", "setStoppingCondition", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
+    return false;
+}
+
+bool AlglibInterface::setMaximumIterations(unsigned int maxIter)
+{
+    reportError("AlglibInterface", "setMaximumIterations", "AlglibInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_ALGLIB set to ON?");
+    return false;
 }
 
 

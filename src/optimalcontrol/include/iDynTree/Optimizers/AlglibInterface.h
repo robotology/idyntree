@@ -18,6 +18,7 @@
 #define IDYNTREE_OPTIMALCONTROL_ALGLIBINTERFACE_H
 
 #include <iDynTree/Optimizer.h>
+#include <memory>
 
 namespace iDynTree {
 
@@ -33,7 +34,7 @@ namespace iDynTree {
         class AlglibInterface : public Optimizer {
 
             class AlglibInterfaceImplementation;
-            AlglibInterfaceImplementation *m_pimpl;
+            std::unique_ptr<AlglibInterfaceImplementation> m_pimpl;
 
         public:
 
@@ -71,11 +72,9 @@ namespace iDynTree {
             //See http://www.alglib.net/translator/man/manual.cpp.html#sub_minnlcsetalgoaul
             bool setOuterIterations(unsigned int outerIterations);
 
-            //epsG: stopping criterion on the (scaled) cost gradient. Stops if its norm is lower than epsG.
-            //epsF: stopping criterion on the variation of the cost function
             //epsX: stopping criterion on the variation of optimization variables
             //See http://www.alglib.net/translator/man/manual.cpp.html#sub_minnlcsetcond
-            bool setStoppingConditions(double epsG, double epsF, double epsX);
+            bool setStoppingCondition(double epsX);
 
             bool setMaximumIterations(unsigned int maxIter);
 
