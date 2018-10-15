@@ -35,10 +35,14 @@ namespace iDynTree {
 
                 VectorDynSize m_computationBuffer, m_computationBuffer2;
                 MatrixDynSize m_identity, m_stateJacBuffer, m_controlJacBuffer;
+                bool m_hasStateSparsity = true;
+                bool m_hasControlSparsity = true;
+                std::vector<CollocationSparsityVectors> m_stateJacobianSparsity;
+                std::vector<CollocationSparsityVectors> m_controlJacobianSparsity;
 
-                bool allocateBuffers() override;
+                virtual bool allocateBuffers() override;
 
-                bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
+                virtual bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
 
             public:
 
@@ -48,14 +52,18 @@ namespace iDynTree {
 
                 virtual ~ImplicitTrapezoidal() override;
 
-                bool evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
-                                                   const std::vector<VectorDynSize> &controlInputs, double dT,
-                                                   VectorDynSize &constraintValue) override;
-
-                bool evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize> &collocationPoints,
+                virtual bool evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
                                                            const std::vector<VectorDynSize> &controlInputs, double dT,
-                                                           std::vector<MatrixDynSize> &stateJacobianValues,
-                                                           std::vector<MatrixDynSize> &controlJacobianValues) override;
+                                                           VectorDynSize &constraintValue) override;
+
+                virtual bool evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                                   const std::vector<VectorDynSize> &controlInputs, double dT,
+                                                                   std::vector<MatrixDynSize> &stateJacobianValues,
+                                                                   std::vector<MatrixDynSize> &controlJacobianValues) override;
+
+                virtual bool getCollocationConstraintJacobianStateSparsity(std::vector<CollocationSparsityVectors>& stateJacobianSparsity) override;
+
+                virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<CollocationSparsityVectors>& controlJacobianSparsity) override;
 
             };
 

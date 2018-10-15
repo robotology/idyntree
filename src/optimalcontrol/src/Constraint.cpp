@@ -133,5 +133,15 @@ namespace iDynTree {
             return 0;
         }
 
+        bool Constraint::constraintJacobianWRTStateSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintJacobianWRTControlSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        {
+            return false;
+        }
+
     }
 }

@@ -101,5 +101,16 @@ namespace iDynTree
         return (std::fabs(val1-val2) < tol);
     }
 
+    void addNonZeroIfNotPresent(size_t newRow, size_t newCol, std::vector<size_t> &nonZerosRows, std::vector<size_t> &nonZerosCols)
+    {
+        for (size_t i = 0; i < nonZerosRows.size(); ++i) {
+            if ((newRow == nonZerosRows[i]) && (newCol == nonZerosCols[i])) {
+                return;
+            }
+        }
+        nonZerosRows.push_back(newRow);
+        nonZerosCols.push_back(newCol);
+    }
+
 
 }

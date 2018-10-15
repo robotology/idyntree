@@ -162,6 +162,26 @@ namespace iDynTree {
              */
             virtual size_t expectedControlSpaceSize() const;
 
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, stateDimension) respectively.
+             * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
+             * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintJacobianWRTStateSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively.
+             * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
+             * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintJacobianWRTControlSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+
 
         private:
             size_t m_constraintSize;

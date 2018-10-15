@@ -146,7 +146,7 @@ namespace optimalcontrol {
          * By default it return false;
          *
          * @param[in] state The state value at which computing the partial derivative.
-         * @param[in] control The control value at which computing the partial derivative.
+         * @param[in] time The time at which computing the partial derivative.
          * @param[out] dynamicsDerivative The output derivative. It has to be a square matrix with dimension equal to the state size.
          * @return True if successful, false otherwise (or if not implemented).
          */
@@ -161,13 +161,30 @@ namespace optimalcontrol {
          * By default it return false;
          *
          * @param[in] state The state value at which computing the partial derivative.
-         * @param[in] control The control value at which computing the partial derivative.
+         * @param[in] time The time at which computing the partial derivative.
          * @param[out] dynamicsDerivative The output derivative. It has to be a matrix with number of rows equal to the state size and number of columns equal to the control size.
          * @return True if successful, false otherwise (or if not implemented).
          */
         virtual bool dynamicsControlFirstDerivative(const VectorDynSize& state,
                                                     double time,
                                                     MatrixDynSize& dynamicsDerivative);
+
+
+        /**
+         * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian
+         * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
+         * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+         * @return true if the sparsity is available. False otherwise.
+         */
+        virtual bool dynamicsStateFirstDerivativeSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+
+        /**
+         * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian
+         * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
+         * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+         * @return true if the sparsity is available. False otherwise.
+         */
+        virtual bool dynamicsControlFirstDerivativeSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
 
     private:
         size_t m_stateSize;

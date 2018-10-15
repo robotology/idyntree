@@ -129,6 +129,16 @@ namespace iDynTree {
                 return false;
             }
 
+            bool Integrator::getCollocationConstraintJacobianStateSparsity(std::vector<Integrator::CollocationSparsityVectors> &stateJacobianSparsity)
+            {
+                return false;
+            }
+
+            bool Integrator::getCollocationConstraintJacobianControlSparsity(std::vector<Integrator::CollocationSparsityVectors> &controlJacobianSparsity)
+            {
+                return false;
+            }
+
             const IntegratorInfo &Integrator::info() const
             {
                 return m_info;

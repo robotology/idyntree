@@ -48,10 +48,15 @@ namespace optimalcontrol {
         public:
             GroupOfConstraintsMap group;
             std::vector<TimedConstraint_ptr> orderedIntervals;
+            std::vector<size_t> nonZeroStateRows, nonZeroStateCols;
+            std::vector<size_t> nonZeroControlRows, nonZeroControlCols;
             std::string name;
             unsigned int maxConstraintSize;
             std::vector<TimeRange> timeRanges;
             bool isLinearGroup = true;
+            bool stateSparsityProvided = true;
+            bool controlSparsityProvided = true;
+
 
             std::vector<TimedConstraint_ptr>::reverse_iterator findActiveConstraint(double time){
                 return std::find_if(orderedIntervals.rbegin(),
@@ -117,6 +122,41 @@ namespace optimalcontrol {
 
                 orderedIntervals.push_back(result.first->second); //register the time range in order to have the constraints ordered by init time. result.first->second is the TimedConstraint_ptr of the newly inserted TimedConstraint.
                 std::sort(orderedIntervals.begin(), orderedIntervals.end(), [](const TimedConstraint_ptr&a, const TimedConstraint_ptr&b) { return a->timeRange < b->timeRange;}); //reorder the vector
+
+                std::vector<size_t> newConstraintNNZRowsState, newConstraintNNZRowsControl;
+                std::vector<size_t> newConstraintNNZColsState, newConstraintNNZColsControl;
+
+                if (stateSparsityProvided
+                        && constraint->constraintJacobianWRTStateSparsity(newConstraintNNZRowsState, newConstraintNNZColsState)) {
+
+                    if (newConstraintNNZRowsState.size() != newConstraintNNZColsState.size()) {
+                        reportError("ConstraintsGroup", "addConstraint", "The state sparsity is provided but the dimension of the two vectors do not match.");
+                        return false;
+                    }
+
+                    for (size_t i = 0; i < newConstraintNNZRowsState.size(); ++i) {
+                        addNonZeroIfNotPresent(newConstraintNNZRowsState[i], newConstraintNNZColsState[i], nonZeroStateRows, nonZeroStateCols);
+                    }
+
+                } else {
+                    stateSparsityProvided = false;
+                }
+
+                if (controlSparsityProvided
+                        && constraint->constraintJacobianWRTControlSparsity(newConstraintNNZRowsControl, newConstraintNNZColsControl)) {
+
+                    if (newConstraintNNZRowsControl.size() != newConstraintNNZColsControl.size()) {
+                        reportError("ConstraintsGroup", "addConstraint", "The control sparsity is provided but the dimension of the two vectors do not match.");
+                        return false;
+                    }
+
+                    for (size_t i = 0; i < newConstraintNNZRowsControl.size(); ++i) {
+                        addNonZeroIfNotPresent(newConstraintNNZRowsControl[i], newConstraintNNZColsControl[i], nonZeroControlRows, nonZeroControlCols);
+                    }
+
+                } else {
+                    controlSparsityProvided = false;
+                }
 
                 return true;
             }
@@ -404,7 +444,7 @@ namespace optimalcontrol {
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize) {
                 toEigen(jacobian).block(0, 0, constraintIterator->get()->stateJacobianBuffer.rows(), state.size()) =
                         toEigen(constraintIterator->get()->stateJacobianBuffer);
-                int nMissing = m_pimpl->maxConstraintSize - constraintIterator->get()->constraint->constraintSize();
+                unsigned int nMissing = m_pimpl->maxConstraintSize - static_cast<unsigned int>(constraintIterator->get()->constraint->constraintSize());
                 toEigen(jacobian).block(constraintIterator->get()->stateJacobianBuffer.rows(), 0, nMissing, state.size()).setZero();
             } else {
                 jacobian = constraintIterator->get()->stateJacobianBuffer;
@@ -479,11 +519,35 @@ namespace optimalcontrol {
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize) {
                 toEigen(jacobian).block(0, 0, constraintIterator->get()->controlJacobianBuffer.rows(), state.size()) =
                         toEigen(constraintIterator->get()->controlJacobianBuffer);
-                int nMissing = m_pimpl->maxConstraintSize - constraintIterator->get()->constraint->constraintSize();
+                unsigned int nMissing = m_pimpl->maxConstraintSize - static_cast<unsigned int>(constraintIterator->get()->constraint->constraintSize());
                 toEigen(jacobian).block(constraintIterator->get()->controlJacobianBuffer.rows(), 0, nMissing, state.size()).setZero();
             } else {
                 jacobian = constraintIterator->get()->controlJacobianBuffer;
             }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintJacobianWRTStateSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns) const
+        {
+            if (!(m_pimpl->stateSparsityProvided)) {
+                return false;
+            }
+
+            nonZeroElementRows = m_pimpl->nonZeroStateRows;
+            nonZeroElementColumns = m_pimpl->nonZeroStateCols;
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintJacobianWRTControlSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns) const
+        {
+            if (!(m_pimpl->controlSparsityProvided)) {
+                return false;
+            }
+
+            nonZeroElementRows = m_pimpl->nonZeroControlRows;
+            nonZeroElementColumns = m_pimpl->nonZeroControlCols;
 
             return true;
         }
@@ -498,7 +562,7 @@ namespace optimalcontrol {
 
         unsigned int ConstraintsGroup::numberOfConstraints() const
         {
-            return m_pimpl->group.size();
+            return static_cast<unsigned int>(m_pimpl->group.size());
         }
 
         const std::vector<std::string> ConstraintsGroup::listConstraints() const

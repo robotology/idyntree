@@ -96,6 +96,8 @@ namespace iDynTree {
 
             /**
              * @brief Remove a previously added constraint.
+             *
+             * Note: the sparsity pattern is not updated.
              * @param[in] name The name of the constraint that has to be removed
              * @return True if successfull. Possible causes of failure: a constraint does not exist with the specified name.
              */
@@ -188,6 +190,22 @@ namespace iDynTree {
                                               const VectorDynSize& state,
                                               const VectorDynSize& control,
                                               MatrixDynSize& jacobian);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian
+             * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
+             * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            bool constraintJacobianWRTStateSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) const;
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian
+             * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
+             * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            bool constraintJacobianWRTControlSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) const;
 
             /**
              * @brief Flag returning true if the group is an "AnyTime" group.

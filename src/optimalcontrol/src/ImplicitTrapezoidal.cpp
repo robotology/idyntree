@@ -33,17 +33,40 @@ namespace iDynTree {
                     return false;
                 }
 
-                m_computationBuffer.resize(m_dynamicalSystem_ptr->stateSpaceSize());
-                m_computationBuffer2.resize(m_dynamicalSystem_ptr->stateSpaceSize());
+                m_computationBuffer.resize(static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize()));
+                m_computationBuffer2.resize(static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize()));
 
-                size_t nx = m_dynamicalSystem_ptr->stateSpaceSize();
-                size_t nu = m_dynamicalSystem_ptr->controlSpaceSize();
+                unsigned int nx = static_cast<unsigned int>(m_dynamicalSystem_ptr->stateSpaceSize());
+                unsigned int nu = static_cast<unsigned int>(m_dynamicalSystem_ptr->controlSpaceSize());
 
                 m_identity.resize(nx, nx);
                 toEigen(m_identity) = iDynTreeEigenMatrix::Identity(nx, nx);
 
                 m_stateJacBuffer.resize(nx, nx);
                 m_controlJacBuffer.resize(nx,nu);
+
+                m_stateJacobianSparsity.resize(2);
+                m_controlJacobianSparsity.resize(2);
+
+                if (m_dynamicalSystem_ptr->dynamicsStateFirstDerivativeSparsity(m_stateJacobianSparsity[0].nonZeroElementRows, m_stateJacobianSparsity[0].nonZeroElementColumns)) {
+
+                    for (size_t i = 0; i < m_dynamicalSystem_ptr->stateSpaceSize(); ++i) {
+                        addNonZeroIfNotPresent(i, i, m_stateJacobianSparsity[0].nonZeroElementRows, m_stateJacobianSparsity[0].nonZeroElementColumns);
+                    }
+                    m_stateJacobianSparsity[1] = m_stateJacobianSparsity[0];
+
+                } else {
+                    m_hasStateSparsity = false;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsControlFirstDerivativeSparsity(m_controlJacobianSparsity[0].nonZeroElementRows, m_controlJacobianSparsity[0].nonZeroElementColumns)) {
+
+                    m_controlJacobianSparsity[1] = m_controlJacobianSparsity[0];
+
+                } else {
+                    m_hasControlSparsity = false;
+                }
+
                 return true;
             }
 
@@ -228,6 +251,25 @@ namespace iDynTree {
 
             }
 
+            bool ImplicitTrapezoidal::getCollocationConstraintJacobianStateSparsity(std::vector<Integrator::CollocationSparsityVectors> &stateJacobianSparsity)
+            {
+                if (!m_hasStateSparsity) {
+                    return false;
+                }
+
+                stateJacobianSparsity = m_stateJacobianSparsity;
+                return true;
+            }
+
+            bool ImplicitTrapezoidal::getCollocationConstraintJacobianControlSparsity(std::vector<Integrator::CollocationSparsityVectors> &controlJacobianSparsity)
+            {
+                if (!m_hasControlSparsity) {
+                    return false;
+                }
+
+                controlJacobianSparsity = m_controlJacobianSparsity;
+                return true;
+            }
 
         }
     }
