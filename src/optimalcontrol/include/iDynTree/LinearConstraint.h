@@ -18,7 +18,7 @@
 #define IDYNTREE_OPTIMALCONTROL_LINEARCONSTRAINT_H
 
 #include <iDynTree/Constraint.h>
-
+#include <string>
 #include <iDynTree/Core/MatrixDynSize.h>
 
 namespace iDynTree {
@@ -40,26 +40,34 @@ namespace iDynTree {
         : public Constraint {
         public:
 
-            virtual ~LinearConstraint();
+            LinearConstraint(size_t size, const std::string name);
+
+            virtual ~LinearConstraint() override;
+
+            bool setStateConstraintMatrix(const MatrixDynSize& constraintMatrix);
+
+            bool setControlConstraintMatrix(const MatrixDynSize& constraintMatrix);
 
             virtual bool evaluateConstraint(double time,
                                             const VectorDynSize& state,
                                             const VectorDynSize& control,
-                                            VectorDynSize& constraint) override;
+                                            VectorDynSize& constraint) final;// lu <= [Ax, Au][x;u] <= lU
 
             virtual bool constraintJacobianWRTState(double time,
                                                     const VectorDynSize& state,
                                                     const VectorDynSize& control,
-                                                    MatrixDynSize& jacobian) override;
+                                                    MatrixDynSize& jacobian) final;
 
             virtual bool constraintJacobianWRTControl(double time,
                                                       const VectorDynSize& state,
                                                       const VectorDynSize& control,
-                                                      MatrixDynSize& jacobian) override;
+                                                      MatrixDynSize& jacobian) final;
 
         private:
+            bool m_constrainsState, m_constrainsControl;
             iDynTree::MatrixDynSize m_stateConstraintMatrix;
             iDynTree::MatrixDynSize m_controlConstraintMatrix;
+            iDynTree::VectorDynSize m_stateConstraintsBuffer, m_controlConstraintsBuffer;
         };
 
     }

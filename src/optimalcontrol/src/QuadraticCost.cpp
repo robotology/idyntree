@@ -15,82 +15,117 @@
  */
 
 #include <iDynTree/QuadraticCost.h>
+#include <iDynTree/Core/Utils.h>
 
 #include <iDynTree/Core/EigenHelpers.h>
+#include <cmath>
 
 namespace iDynTree {
     namespace optimalcontrol {
 
-        QuadraticCost::QuadraticCost(const iDynTree::MatrixDynSize& Q,
-                                     const iDynTree::MatrixDynSize& R, const std::string &costName)
-        : Cost(costName)
-        , m_stateCostMatrix(Q)
-        , m_controlCostMatrix(R)
-        , m_stateControlCostDerivativeMatrix(Q.rows(), R.rows())
-        {
-            m_stateControlCostDerivativeMatrix.zero();
-        }
+        QuadraticCost::QuadraticCost(const std::string &costName)
+            : QuadraticLikeCost(costName)
+        { }
 
-        bool QuadraticCost::costEvaluation(double /*time*/,
-                                           const iDynTree::VectorDynSize& state,
-                                           const iDynTree::VectorDynSize& control,
-                                           double& costValue)
+        QuadraticCost::~QuadraticCost()
+        { }
+
+        bool QuadraticCost::setStateCost(const MatrixDynSize &stateHessian, const VectorDynSize &stateGradient)
         {
-            costValue = 0.5 * (iDynTree::toEigen(state).transpose() * iDynTree::toEigen(m_stateCostMatrix) * iDynTree::toEigen(state)
-                          + iDynTree::toEigen(control).transpose() * iDynTree::toEigen(m_controlCostMatrix) * iDynTree::toEigen(control))(0);
+            if (stateHessian.rows() != stateHessian.cols()) {
+                reportError("QuadraticCost", "setStateCost", "The stateHessian matrix is supposed to be square.");
+                return false;
+            }
+
+            if (stateHessian.rows() != stateGradient.size()) {
+                reportError("QuadraticCost", "setStateCost", "stateHessian and stateGradient have inconsistent dimensions.");
+                return false;
+            }
+
+            m_timeVaryingStateHessian.reset(new TimeInvariantMatrix(stateHessian));
+            m_timeVaryingStateGradient.reset(new TimeInvariantVector(stateGradient));
+
             return true;
         }
 
-        bool QuadraticCost::costFirstPartialDerivativeWRTState(double time,
-                                                               const iDynTree::VectorDynSize& state,
-                                                               const iDynTree::VectorDynSize& control,
-                                                               iDynTree::VectorDynSize& partialDerivative)
+        bool QuadraticCost::setStateCost(std::shared_ptr<TimeVaryingMatrix> timeVaryingStateHessian, std::shared_ptr<TimeVaryingVector> timeVaryingStateGradient)
         {
-            // TODO: to be checked with the formalism needed: A x or x^T A ?
-            iDynTree::toEigen(partialDerivative) = iDynTree::toEigen(m_stateCostMatrix) * iDynTree::toEigen(state);
+            if (!timeVaryingStateHessian) {
+                reportError("QuadraticCost", "setStateCost", "Empty hessian pointer.");
+                return false;
+            }
+
+            if (!timeVaryingStateGradient) {
+                reportError("QuadraticCost", "setStateCost", "Empty gradient pointer.");
+                return false;
+            }
+
+            m_timeVaryingStateHessian = timeVaryingStateHessian;
+            m_timeVaryingStateGradient = timeVaryingStateGradient;
+
             return true;
         }
 
-        bool QuadraticCost::costFirstPartialDerivativeWRTControl(double time,
-                                                          const iDynTree::VectorDynSize& state,
-                                                          const iDynTree::VectorDynSize& control,
-                                                          iDynTree::VectorDynSize& partialDerivative)
+        bool QuadraticCost::setControlCost(const MatrixDynSize &controlHessian, const VectorDynSize &controlGradient)
         {
-            // TODO: to be checked with the formalism needed: A x or x^T A ?
-            iDynTree::toEigen(partialDerivative) = iDynTree::toEigen(m_controlCostMatrix) * iDynTree::toEigen(control);
+            if (controlHessian.rows() != controlHessian.cols()) {
+                reportError("QuadraticCost", "setControlCost", "The controlHessian matrix is supposed to be square.");
+                return false;
+            }
+
+            if (controlHessian.rows() != controlGradient.size()) {
+                reportError("QuadraticCost", "setControlCost", "controlHessian and controlGradient have inconsistent dimensions.");
+                return false;
+            }
+
+            m_timeVaryingControlHessian.reset(new TimeInvariantMatrix(controlHessian));
+            m_timeVaryingControlGradient.reset(new TimeInvariantVector(controlGradient));
+
             return true;
         }
 
-        bool QuadraticCost::costSecondPartialDerivativeWRTState(double time,
-                                                         const iDynTree::VectorDynSize& state,
-                                                         const iDynTree::VectorDynSize& control,
-                                                         iDynTree::MatrixDynSize& partialDerivative)
+        bool QuadraticCost::setControlCost(std::shared_ptr<TimeVaryingMatrix> timeVaryingControlHessian, std::shared_ptr<TimeVaryingVector> timeVaryingControlGradient)
         {
-            partialDerivative = m_stateCostMatrix;
+            if (!timeVaryingControlHessian) {
+                reportError("QuadraticCost", "setControlCost", "Empty hessian pointer.");
+                return false;
+            }
+
+            if (!timeVaryingControlGradient) {
+                reportError("QuadraticCost", "setControlCost", "Empty gradient pointer.");
+                return false;
+            }
+
+            m_timeVaryingControlHessian = timeVaryingControlHessian;
+            m_timeVaryingControlGradient = timeVaryingControlGradient;
+
             return true;
         }
 
-        bool QuadraticCost::costSecondPartialDerivativeWRTControl(double time,
-                                                           const iDynTree::VectorDynSize& state,
-                                                           const iDynTree::VectorDynSize& control,
-                                                           iDynTree::MatrixDynSize& partialDerivative)
+        bool QuadraticCost::setCostBias(double stateCostBias, double controlCostBias)
         {
-            partialDerivative = m_controlCostMatrix;
+            m_timeVaryingStateCostBias.reset(new TimeInvariantDouble(stateCostBias));
+            m_timeVaryingControlCostBias.reset(new TimeInvariantDouble(controlCostBias));
             return true;
         }
 
-
-        bool QuadraticCost::costSecondPartialDerivativeWRTStateControl(double time,
-                                                                const iDynTree::VectorDynSize& state,
-                                                                const iDynTree::VectorDynSize& control,
-                                                                iDynTree::MatrixDynSize& partialDerivative)
+        bool QuadraticCost::setCostBias(std::shared_ptr<TimeVaryingDouble> timeVaryingStateCostBias,
+                                        std::shared_ptr<TimeVaryingDouble> timeVaryingControlCostBias)
         {
-            // return empty matrix
-            // or simply zero the matrix??
-            partialDerivative = m_stateControlCostDerivativeMatrix;
+            if (!timeVaryingStateCostBias) {
+                reportError("QuadraticCost", "addCostBias", "The timeVaryingStateCostBias pointer is empty.");
+                return false;
+            }
+
+            if (!timeVaryingControlCostBias) {
+                reportError("QuadraticCost", "addCostBias", "The timeVaryingControlCostBias pointer is empty.");
+                return false;
+            }
+
+            m_timeVaryingStateCostBias = timeVaryingStateCostBias;
+            m_timeVaryingControlCostBias = timeVaryingControlCostBias;
             return true;
         }
-
 
     }
 }

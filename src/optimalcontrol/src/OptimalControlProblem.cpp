@@ -16,9 +16,15 @@
 
 #include <iDynTree/OptimalControlProblem.h>
 #include <iDynTree/DynamicalSystem.h>
+#include <iDynTree/LinearSystem.h>
 #include <iDynTree/ConstraintsGroup.h>
 #include <iDynTree/Constraint.h>
+#include <iDynTree/LinearConstraint.h>
 #include <iDynTree/Cost.h>
+#include <iDynTree/QuadraticLikeCost.h>
+#include <iDynTree/QuadraticCost.h>
+#include <iDynTree/L2NormCost.h>
+#include <iDynTree/LinearCost.h>
 #include <iDynTree/TimeRange.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
@@ -42,12 +48,16 @@ namespace iDynTree {
             MatrixDynSize stateJacobianBuffer, controlJacobianBuffer;
         } BufferedGroup;
 
-        typedef std::map< std::string, BufferedGroup> ConstraintsGroupsMap;
+        typedef std::shared_ptr<BufferedGroup> BufferedGroup_ptr;
+
+        typedef std::map< std::string, BufferedGroup_ptr> ConstraintsGroupsMap;
 
         typedef struct{
             std::shared_ptr<Cost> cost;
             double weight;
             TimeRange timeRange;
+            bool isLinear;
+            bool isQuadratic;
         } TimedCost;
 
         typedef std::map< std::string, TimedCost> CostsMap;
@@ -65,6 +75,33 @@ namespace iDynTree {
             VectorDynSize stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
             std::vector<std::string> mayerCostnames;
             std::vector<TimeRange> constraintsTimeRanges, costTimeRanges;
+            std::vector<size_t> linearConstraintIndeces;
+            bool systemIsLinear = false;
+
+            bool addCost(double weight, const TimeRange& timeRange, std::shared_ptr<Cost> cost, bool isLinear, bool isQuadratic, const std::string& methodName) {
+                if (!cost){
+                    reportError("OptimalControlProblem", methodName.c_str(), "Empty cost pointer");
+                    return false;
+                }
+
+                TimedCost newCost;
+                newCost.cost = cost;
+                newCost.weight = weight;
+                newCost.timeRange = timeRange;
+                newCost.isLinear = isLinear;
+                newCost.isQuadratic = isQuadratic;
+
+                std::pair<CostsMap::iterator, bool> costResult;
+                costResult = costs.insert(std::pair<std::string, TimedCost>(cost->name(), newCost));
+                if(!costResult.second){
+                    std::ostringstream errorMsg;
+                    errorMsg << "A cost named " << cost->name() <<" already exists.";
+                    reportError("OptimalControlProblem", methodName.c_str(), errorMsg.str().c_str());
+                    return false;
+                }
+                return true;
+            }
+
         };
 
 
@@ -135,9 +172,25 @@ namespace iDynTree {
             return true;
         }
 
+        bool OptimalControlProblem::setDynamicalSystemConstraint(std::shared_ptr<LinearSystem> linearSystem)
+        {
+            if (m_pimpl->dynamicalSystem){
+                reportError("OptimalControlProblem", "setDynamicalSystemConstraint", "Change dynamical system is forbidden.");
+                return false;
+            }
+            m_pimpl->dynamicalSystem = linearSystem;
+            m_pimpl->systemIsLinear = true;
+            return true;
+        }
+
         const std::weak_ptr<DynamicalSystem> OptimalControlProblem::dynamicalSystem() const
         {
             return m_pimpl->dynamicalSystem;
+        }
+
+        bool OptimalControlProblem::systemIsLinear() const
+        {
+            return m_pimpl->systemIsLinear;
         }
 
         bool OptimalControlProblem::addGroupOfConstraints(std::shared_ptr<ConstraintsGroup> groupOfConstraints)
@@ -147,16 +200,16 @@ namespace iDynTree {
                  return false;
             }
 
-            BufferedGroup newGroup;
-            newGroup.group_ptr = groupOfConstraints;
-            newGroup.constraintsBuffer.resize(groupOfConstraints->constraintsDimension());
+            BufferedGroup_ptr newGroup = std::make_shared<BufferedGroup>();
+            newGroup->group_ptr = groupOfConstraints;
+            newGroup->constraintsBuffer.resize(groupOfConstraints->constraintsDimension());
             if (m_pimpl->dynamicalSystem) {
-                newGroup.stateJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->stateSpaceSize()));
-                newGroup.controlJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->controlSpaceSize()));
+                newGroup->stateJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->stateSpaceSize()));
+                newGroup->controlJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->controlSpaceSize()));
             }
 
             std::pair< ConstraintsGroupsMap::iterator, bool> groupResult;
-            groupResult = m_pimpl->constraintsGroups.insert(std::pair< std::string, BufferedGroup>(groupOfConstraints->name(), newGroup));
+            groupResult = m_pimpl->constraintsGroups.insert(std::pair< std::string, BufferedGroup_ptr>(groupOfConstraints->name(), newGroup));
 
             if(!groupResult.second){
                 std::ostringstream errorMsg;
@@ -188,10 +241,10 @@ namespace iDynTree {
             return false;
         }
 
-        bool OptimalControlProblem::addContraint(std::shared_ptr<Constraint> newConstraint)
+        bool OptimalControlProblem::addConstraint(std::shared_ptr<Constraint> newConstraint)
         {
             if (!newConstraint){
-                reportError("OptimalControlProblem", "addContraint", "Invalid constraint pointer.");
+                reportError("OptimalControlProblem", "addConstraint", "Invalid constraint pointer.");
                 return false;
             }
 
@@ -199,11 +252,32 @@ namespace iDynTree {
                     std::make_shared<ConstraintsGroup>(newConstraint->name(),newConstraint->constraintSize());
 
             if(!dummyGroup){
-                reportError("OptimalControlProblem", "addContraint", "Failed in adding constraint.");
+                reportError("OptimalControlProblem", "addConstraint", "Failed in adding constraint.");
                 return false;
             }
 
             if(!(dummyGroup->addConstraint(newConstraint, TimeRange::AnyTime()))){
+                return false;
+            }
+            return addGroupOfConstraints(dummyGroup);
+        }
+
+        bool OptimalControlProblem::addConstraint(std::shared_ptr<LinearConstraint> newConstraint)
+        {
+            if (!newConstraint){
+                reportError("OptimalControlProblem", "addConstraint", "Invalid constraint pointer.");
+                return false;
+            }
+
+            std::shared_ptr<ConstraintsGroup> dummyGroup =
+                    std::make_shared<ConstraintsGroup>(newConstraint->name(),newConstraint->constraintSize());
+
+            if(!dummyGroup){
+                reportError("OptimalControlProblem", "addConstraint", "Failed in adding constraint.");
+                return false;
+            }
+
+            if(!(dummyGroup->addConstraint(newConstraint, TimeRange::AnyTime()))){ //here is important to pass a LinearConstraint pointer
                 return false;
             }
             return addGroupOfConstraints(dummyGroup);
@@ -214,7 +288,7 @@ namespace iDynTree {
             ConstraintsGroupsMap::iterator groupIterator;
             groupIterator = m_pimpl->constraintsGroups.find(name);
             if(groupIterator != m_pimpl->constraintsGroups.end()){
-                if(groupIterator->second.group_ptr->isAnyTimeGroup()){
+                if(groupIterator->second->group_ptr->isAnyTimeGroup()){
                     if(m_pimpl->constraintsGroups.erase(name)){
                         return true;
                     }
@@ -243,7 +317,20 @@ namespace iDynTree {
             unsigned int number = 0;
 
             for(auto group: m_pimpl->constraintsGroups){
-                number += group.second.group_ptr->numberOfConstraints();
+                number += group.second->group_ptr->numberOfConstraints();
+            }
+
+            return number;
+        }
+
+        unsigned int OptimalControlProblem::countLinearConstraints() const
+        {
+            unsigned int number = 0;
+
+            for(auto group: m_pimpl->constraintsGroups){
+                if (group.second->group_ptr->isLinearGroup()) {
+                    number += group.second->group_ptr->constraintsDimension();
+                }
             }
 
             return number;
@@ -254,7 +341,7 @@ namespace iDynTree {
             unsigned int dimension = 0;
 
             for (auto group: m_pimpl->constraintsGroups){
-                dimension += group.second.group_ptr->constraintsDimension();
+                dimension += group.second->group_ptr->constraintsDimension();
             }
             return dimension;
         }
@@ -265,7 +352,7 @@ namespace iDynTree {
             std::vector<std::string> temp;
 
             for(auto group: m_pimpl->constraintsGroups){
-                temp =  group.second.group_ptr->listConstraints();
+                temp =  group.second->group_ptr->listConstraints();
                 output.insert(output.end(), temp.begin(), temp.end());
             }
             return output;
@@ -276,7 +363,7 @@ namespace iDynTree {
             std::vector<std::string> output;
 
             for(auto group: m_pimpl->constraintsGroups){
-                output.insert(output.end(), group.second.group_ptr->numberOfConstraints(), group.second.group_ptr->name());
+                output.insert(output.end(), group.second->group_ptr->numberOfConstraints(), group.second->group_ptr->name());
             }
             return output;
         }
@@ -291,7 +378,7 @@ namespace iDynTree {
             size_t index = 0;
 
             for (auto group : m_pimpl->constraintsGroups){
-                std::vector<TimeRange> &groupTimeRanges = group.second.group_ptr->getTimeRanges();
+                std::vector<TimeRange> &groupTimeRanges = group.second->group_ptr->getTimeRanges();
                 for (size_t i = 0; i < groupTimeRanges.size(); ++i){
                     m_pimpl->constraintsTimeRanges[index] = groupTimeRanges[i];
                     ++index;
@@ -300,50 +387,92 @@ namespace iDynTree {
             return m_pimpl->constraintsTimeRanges;
         }
 
+        std::vector<size_t> &OptimalControlProblem::getLinearConstraintsIndeces() const
+        {
+            unsigned int nl = countLinearConstraints();
+
+            if (m_pimpl->linearConstraintIndeces.size() != nl)
+                m_pimpl->linearConstraintIndeces.resize(nl);
+
+            size_t vectorIndex = 0, constraintIndex = 0;
+
+            unsigned int nc = 0;
+            for (auto group : m_pimpl->constraintsGroups){
+                nc = group.second->group_ptr->constraintsDimension();
+
+                if (group.second->group_ptr->isLinearGroup()) {
+                    for (size_t i = 0; i < nc; ++i){
+                        m_pimpl->linearConstraintIndeces[vectorIndex] = constraintIndex + i;
+                        ++vectorIndex;
+                    }
+                }
+                constraintIndex += nc;
+            }
+            return m_pimpl->linearConstraintIndeces;
+        }
+
         bool OptimalControlProblem::addMayerTerm(double weight, std::shared_ptr<Cost> cost)
         {
-            if (!cost){
-                reportError("OptimalControlProblem", "addMayerTerm", "Empty cost pointer");
-                return false;
-            }
-            TimedCost newCost;
-            newCost.cost = cost;
-            newCost.weight = weight;
-            newCost.timeRange.setTimeInterval(m_pimpl->horizon.endTime(), m_pimpl->horizon.endTime());
-
-            std::pair<CostsMap::iterator, bool> costResult;
-            costResult = m_pimpl->costs.insert(std::pair<std::string, TimedCost>(cost->name(), newCost));
-            if(!costResult.second){
-                std::ostringstream errorMsg;
-                errorMsg << "A cost named " << cost->name() <<" already exists.";
-                reportError("OptimalControlProblem", "addMayerTerm", errorMsg.str().c_str());
+            TimeRange newTimerange(m_pimpl->horizon.endTime(), m_pimpl->horizon.endTime());
+            if (!(m_pimpl->addCost(weight, newTimerange, cost, false, false, "addMayerTerm"))) {
                 return false;
             }
             m_pimpl->mayerCostnames.push_back(cost->name());
+
+            return true;
+        }
+
+        bool OptimalControlProblem::addMayerTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost)
+        {
+            TimeRange newTimerange(m_pimpl->horizon.endTime(), m_pimpl->horizon.endTime());
+            if (!(m_pimpl->addCost(weight, newTimerange, quadraticCost, false, true, "addMayerTerm"))) {
+                return false;
+            }
+            m_pimpl->mayerCostnames.push_back(quadraticCost->name());
+
+            return true;
+        }
+
+        bool OptimalControlProblem::addMayerTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost)
+        {
+            TimeRange newTimerange(m_pimpl->horizon.endTime(), m_pimpl->horizon.endTime());
+            if (!(m_pimpl->addCost(weight, newTimerange, quadraticCost, false, true, "addMayerTerm"))) {
+                return false;
+            }
+            m_pimpl->mayerCostnames.push_back(quadraticCost->name());
+
+            return true;
+        }
+
+        bool OptimalControlProblem::addMayerTerm(double weight, std::shared_ptr<LinearCost> linearCost)
+        {
+            TimeRange newTimerange(m_pimpl->horizon.endTime(), m_pimpl->horizon.endTime());
+            if (!(m_pimpl->addCost(weight, newTimerange, linearCost, true, true, "addMayerTerm"))) {
+                return false;
+            }
+            m_pimpl->mayerCostnames.push_back(linearCost->name());
+
             return true;
         }
 
         bool OptimalControlProblem::addLagrangeTerm(double weight, std::shared_ptr<Cost> cost)
         {
-            if (!cost){
-                reportError("OptimalControlProblem", "addLagrangeTerm", "Empty cost pointer");
-                return false;
-            }
+            return (m_pimpl->addCost(weight, TimeRange::AnyTime(), cost, false, false, "addLagrangeTerm"));
+        }
 
-            TimedCost newCost;
-            newCost.cost = cost;
-            newCost.weight = weight;
-            newCost.timeRange = TimeRange::AnyTime();
+        bool OptimalControlProblem::addLagrangeTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost)
+        {
+            return (m_pimpl->addCost(weight, TimeRange::AnyTime(), quadraticCost, false, true, "addLagrangeTerm"));
+        }
 
-            std::pair<CostsMap::iterator, bool> costResult;
-            costResult = m_pimpl->costs.insert(std::pair<std::string, TimedCost>(cost->name(), newCost));
-            if(!costResult.second){
-                std::ostringstream errorMsg;
-                errorMsg << "A cost named " << cost->name() <<" already exists.";
-                reportError("OptimalControlProblem", "addLagrangeTerm", errorMsg.str().c_str());
-                return false;
-            }
-            return true;
+        bool OptimalControlProblem::addLagrangeTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost)
+        {
+            return (m_pimpl->addCost(weight, TimeRange::AnyTime(), quadraticCost, false, true, "addLagrangeTerm"));
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, std::shared_ptr<LinearCost> linearCost)
+        {
+            return (m_pimpl->addCost(weight, TimeRange::AnyTime(), linearCost, true, true, "addLagrangeTerm"));
         }
 
         bool OptimalControlProblem::addLagrangeTerm(double weight, double startingTime, double finalTime, std::shared_ptr<Cost> cost)
@@ -357,25 +486,69 @@ namespace iDynTree {
                 return false;
             }
 
-            return addLagrangeTerm(weight, timeRange, cost);
+            return (m_pimpl->addCost(weight, timeRange, cost, false, false, "addLagrangeTerm"));
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, double startingTime, double finalTime, std::shared_ptr<QuadraticCost> quadraticCost)
+        {
+            TimeRange timeRange;
+
+            if (!timeRange.setTimeInterval(startingTime, finalTime)){
+                std::ostringstream errorMsg;
+                errorMsg << "The cost named " << quadraticCost->name() <<" has invalid time settings.";
+                reportError("OptimalControlProblem", "addLagrangeTerm", errorMsg.str().c_str());
+                return false;
+            }
+
+            return (m_pimpl->addCost(weight, timeRange, quadraticCost, false, true, "addLagrangeTerm"));
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, double startingTime, double finalTime, std::shared_ptr<L2NormCost> quadraticCost)
+        {
+            TimeRange timeRange;
+
+            if (!timeRange.setTimeInterval(startingTime, finalTime)){
+                std::ostringstream errorMsg;
+                errorMsg << "The cost named " << quadraticCost->name() <<" has invalid time settings.";
+                reportError("OptimalControlProblem", "addLagrangeTerm", errorMsg.str().c_str());
+                return false;
+            }
+
+            return (m_pimpl->addCost(weight, timeRange, quadraticCost, false, true, "addLagrangeTerm"));
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, double startingTime, double finalTime, std::shared_ptr<LinearCost> linearCost)
+        {
+            TimeRange timeRange;
+
+            if (!timeRange.setTimeInterval(startingTime, finalTime)){
+                std::ostringstream errorMsg;
+                errorMsg << "The cost named " << linearCost->name() <<" has invalid time settings.";
+                reportError("OptimalControlProblem", "addLagrangeTerm", errorMsg.str().c_str());
+                return false;
+            }
+
+            return (m_pimpl->addCost(weight, timeRange, linearCost, true, true, "addLagrangeTerm"));
         }
 
         bool OptimalControlProblem::addLagrangeTerm(double weight, const TimeRange &timeRange, std::shared_ptr<Cost> cost)
         {
-            TimedCost newCost;
-            newCost.cost = cost;
-            newCost.weight = weight;
-            newCost.timeRange = timeRange;
+            return (m_pimpl->addCost(weight, timeRange, cost, false, false, "addLagrangeTerm"));
+        }
 
-            std::pair<CostsMap::iterator, bool> costResult;
-            costResult = m_pimpl->costs.insert(std::pair<std::string, TimedCost>(cost->name(), newCost));
-            if(!costResult.second){
-                std::ostringstream errorMsg;
-                errorMsg << "A cost named " << cost->name() <<" already exists.";
-                reportError("OptimalControlProblem", "addLagrangeTerm", errorMsg.str().c_str());
-                return false;
-            }
-            return true;
+        bool OptimalControlProblem::addLagrangeTerm(double weight, const TimeRange &timeRange, std::shared_ptr<QuadraticCost> quadraticCost)
+        {
+            return (m_pimpl->addCost(weight, timeRange, quadraticCost, false, true, "addLagrangeTerm"));
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, const TimeRange &timeRange, std::shared_ptr<L2NormCost> quadraticCost)
+        {
+            return (m_pimpl->addCost(weight, timeRange, quadraticCost, false, true, "addLagrangeTerm"));
+        }
+
+        bool OptimalControlProblem::addLagrangeTerm(double weight, const TimeRange &timeRange, std::shared_ptr<LinearCost> linearCost)
+        {
+            return (m_pimpl->addCost(weight, timeRange, linearCost, true, true, "addLagrangeTerm"));
         }
 
         bool OptimalControlProblem::updateCostTimeRange(const std::string &name, double newStartingTime, double newEndTime)
@@ -443,6 +616,26 @@ namespace iDynTree {
                 ++i;
             }
             return m_pimpl->costTimeRanges;
+        }
+
+        bool OptimalControlProblem::hasOnlyLinearCosts() const
+        {
+            for (auto c : m_pimpl->costs) {
+                if (!(c.second.isLinear)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::hasOnlyQuadraticCosts() const
+        {
+            for (auto c : m_pimpl->costs) {
+                if (!(c.second.isQuadratic)) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         bool OptimalControlProblem::setStateLowerBound(const VectorDynSize &minState)
@@ -774,15 +967,15 @@ namespace iDynTree {
             Eigen::Index offset = 0;
 
             for (auto group : m_pimpl->constraintsGroups){
-                if (!(group.second.group_ptr->evaluateConstraints(time, state, control, group.second.constraintsBuffer))){
+                if (!(group.second->group_ptr->evaluateConstraints(time, state, control, group.second->constraintsBuffer))){
                     std::ostringstream errorMsg;
-                    errorMsg << "Error while evaluating constraint " << group.second.group_ptr->name() <<".";
+                    errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
                     reportError("OptimalControlProblem", "constraintsEvaluation", errorMsg.str().c_str());
                     return false;
                 }
 
-                constraintsEvaluation.segment(offset, group.second.constraintsBuffer.size()) = toEigen(group.second.constraintsBuffer);
-                offset += group.second.constraintsBuffer.size();
+                constraintsEvaluation.segment(offset, group.second->constraintsBuffer.size()) = toEigen(group.second->constraintsBuffer);
+                offset += group.second->constraintsBuffer.size();
             }
 
             return true;
@@ -798,19 +991,19 @@ namespace iDynTree {
             Eigen::Index offset = 0;
 
             for (auto group : m_pimpl->constraintsGroups){
-                if (! group.second.group_ptr->getUpperBound(time, group.second.constraintsBuffer)){
-                    toEigen(group.second.constraintsBuffer).setConstant(std::abs(infinity)); //if not upper bounded
+                if (! group.second->group_ptr->getUpperBound(time, group.second->constraintsBuffer)){
+                    toEigen(group.second->constraintsBuffer).setConstant(std::abs(infinity)); //if not upper bounded
                 }
 
-                if (group.second.constraintsBuffer.size() != group.second.group_ptr->constraintsDimension()){
+                if (group.second->constraintsBuffer.size() != group.second->group_ptr->constraintsDimension()){
                     std::ostringstream errorMsg;
-                    errorMsg << "Upper bound dimension different from dimension of group " << group.second.group_ptr->name() << ".";
+                    errorMsg << "Upper bound dimension different from dimension of group " << group.second->group_ptr->name() << ".";
                     reportError("OptimalControlProblem", "getConstraintsUpperBound", errorMsg.str().c_str());
                     return false;
                 }
 
-                upperBoundMap.segment(offset, group.second.constraintsBuffer.size()) = toEigen(group.second.constraintsBuffer);
-                offset += group.second.constraintsBuffer.size();
+                upperBoundMap.segment(offset, group.second->constraintsBuffer.size()) = toEigen(group.second->constraintsBuffer);
+                offset += group.second->constraintsBuffer.size();
             }
 
             return true;
@@ -826,19 +1019,19 @@ namespace iDynTree {
             Eigen::Index offset = 0;
 
             for (auto group : m_pimpl->constraintsGroups){
-                if (! group.second.group_ptr->getLowerBound(time, group.second.constraintsBuffer)){
-                    toEigen(group.second.constraintsBuffer).setConstant(-std::abs(infinity)); //if not lower bounded
+                if (! group.second->group_ptr->getLowerBound(time, group.second->constraintsBuffer)){
+                    toEigen(group.second->constraintsBuffer).setConstant(-std::abs(infinity)); //if not lower bounded
                 }
 
-                if (group.second.constraintsBuffer.size() != group.second.group_ptr->constraintsDimension()){
+                if (group.second->constraintsBuffer.size() != group.second->group_ptr->constraintsDimension()){
                     std::ostringstream errorMsg;
-                    errorMsg << "Lower bound dimension different from dimension of group " << group.second.group_ptr->name() << ".";
+                    errorMsg << "Lower bound dimension different from dimension of group " << group.second->group_ptr->name() << ".";
                     reportError("OptimalControlProblem", "getConstraintsUpperBound", errorMsg.str().c_str());
                     return false;
                 }
 
-                lowerBoundMap.segment(offset, group.second.constraintsBuffer.size()) = toEigen(group.second.constraintsBuffer);
-                offset += group.second.constraintsBuffer.size();
+                lowerBoundMap.segment(offset, group.second->constraintsBuffer.size()) = toEigen(group.second->constraintsBuffer);
+                offset += group.second->constraintsBuffer.size();
             }
 
             return true;
@@ -847,7 +1040,7 @@ namespace iDynTree {
         bool OptimalControlProblem::isFeasiblePoint(double time, const VectorDynSize &state, const VectorDynSize &control)
         {
             for(auto group : m_pimpl->constraintsGroups){
-                if(!(group.second.group_ptr->isFeasibilePoint(time, state, control))){
+                if(!(group.second->group_ptr->isFeasibilePoint(time, state, control))){
                     return false;
                 }
             }
@@ -865,15 +1058,15 @@ namespace iDynTree {
             Eigen::Index offset = 0;
 
             for (auto group : m_pimpl->constraintsGroups){
-                if (!(group.second.group_ptr->constraintJacobianWRTState(time, state, control, group.second.stateJacobianBuffer))){
+                if (!(group.second->group_ptr->constraintJacobianWRTState(time, state, control, group.second->stateJacobianBuffer))){
                     std::ostringstream errorMsg;
-                    errorMsg << "Error while evaluating constraint group " << group.second.group_ptr->name() <<".";
+                    errorMsg << "Error while evaluating constraint group " << group.second->group_ptr->name() <<".";
                     reportError("OptimalControlProblem", "constraintsJacobianWRTState", errorMsg.str().c_str());
                     return false;
                 }
 
-                jacobianMap.block(offset, 0, group.second.group_ptr->constraintsDimension(), state.size()) = toEigen(group.second.stateJacobianBuffer);
-                offset += group.second.stateJacobianBuffer.rows();
+                jacobianMap.block(offset, 0, group.second->group_ptr->constraintsDimension(), state.size()) = toEigen(group.second->stateJacobianBuffer);
+                offset += group.second->stateJacobianBuffer.rows();
             }
             return true;
         }
@@ -889,14 +1082,14 @@ namespace iDynTree {
             Eigen::Index offset = 0;
 
             for (auto group : m_pimpl->constraintsGroups){
-                if (! group.second.group_ptr->constraintJacobianWRTControl(time, state, control, group.second.controlJacobianBuffer)){
+                if (! group.second->group_ptr->constraintJacobianWRTControl(time, state, control, group.second->controlJacobianBuffer)){
                     std::ostringstream errorMsg;
-                    errorMsg << "Error while evaluating constraint " << group.second.group_ptr->name() <<".";
+                    errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
                     reportError("OptimalControlProblem", "constraintsJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
-                jacobianMap.block(offset, 0, group.second.group_ptr->constraintsDimension(), control.size()) = toEigen(group.second.controlJacobianBuffer);
-                offset += group.second.controlJacobianBuffer.rows();
+                jacobianMap.block(offset, 0, group.second->group_ptr->constraintsDimension(), control.size()) = toEigen(group.second->controlJacobianBuffer);
+                offset += group.second->controlJacobianBuffer.rows();
             }
             return true;
         }

@@ -13,12 +13,24 @@
  * - ACADO toolbox (http://acado.github.io)
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
-
-#define HAVE_STDDEF_H
-#define HAVE_CSTDDEF
-#include <IpTNLP.hpp>
-#undef HAVE_STDDEF_H
-#undef HAVE_CSTDDEF //workaroud for missing libraries
+#ifndef HAVE_STDDEF_H
+    #ifndef HAVE_CSTDDEF
+        #define HAVE_CSTDDEF
+        #include <IpTNLP.hpp>
+        #undef HAVE_CSTDDEF
+    #else
+        #include <IpTNLP.hpp>
+    #endif
+    #undef HAVE_STDDEF_H
+#else
+    #ifndef HAVE_CSTDDEF
+        #define HAVE_CSTDDEF
+        #include <IpTNLP.hpp>
+        #undef HAVE_CSTDDEF
+    #else
+        #include <IpTNLP.hpp>
+    #endif
+#endif
 #include <IpIpoptApplication.hpp>
 
 #include <Eigen/Dense>
@@ -178,6 +190,7 @@ namespace iDynTree {
 
                 if(init_x){
                     Eigen::Map<Eigen::VectorXd> x_map(x, n);
+                    initialGuessSet = problem->getGuess(initialGuess);
                     if (initialGuessSet) {
                         if (initialGuess.size() == static_cast<unsigned int>(n)){
                             x_map = iDynTree::toEigen(initialGuess);
@@ -483,6 +496,11 @@ namespace iDynTree {
             }
         }
 
+        bool IpoptInterface::isAvailable() const
+        {
+            return true;
+        }
+
         bool IpoptInterface::setProblem(std::shared_ptr<OptimizationProblem> problem)
         {
             if (!problem){
@@ -491,13 +509,6 @@ namespace iDynTree {
             }
             m_problem = problem;
             m_pimpl->nlpPointer->problem = problem;
-            return true;
-        }
-
-        bool IpoptInterface::setInitialGuess(VectorDynSize &initialGuess)
-        {
-            m_pimpl->nlpPointer->initialGuessSet = true;
-            m_pimpl->nlpPointer->initialGuess = initialGuess;
             return true;
         }
 
@@ -520,25 +531,61 @@ namespace iDynTree {
 
             m_pimpl->nlpPointer->numberOfConstraints = m_problem->numberOfConstraints();
 
-            if (!(m_problem->getConstraintsJacobianInfo(m_pimpl->nlpPointer->constraintsJacNNZRows,
-                                                        m_pimpl->nlpPointer->constraintsJacNNZCols))){
-                reportError("IpoptInterface", "solve", "Error while retrieving constraints jacobian info.");
-                return false;
+            if (!(m_problem->info().hessianIsProvided())) {
+                m_pimpl->loader->Options()->SetStringValue("hessian_approximation", "limited-memory");
             }
-            if (!(m_problem->getHessianInfo(m_pimpl->nlpPointer->hessianNNZRows,
-                                            m_pimpl->nlpPointer->hessianNNZCols))){
-                reportError("IpoptInterface", "solve", "Error while retrieving hessian info.");
-                return false;
+
+            if (!(m_problem->info().hasNonLinearConstraints())) {
+                m_pimpl->loader->Options()->SetStringValue("jac_c_constant", "yes");
+                m_pimpl->loader->Options()->SetStringValue("jac_d_constant", "yes");
+
+                if (m_problem->info().costIsQuadratic()) {
+                    m_pimpl->loader->Options()->SetStringValue("hessian_constant", "yes");
+                }
+            }
+
+            if (m_problem->info().hasSparseConstraintJacobian()) {
+                if (!(m_problem->getConstraintsJacobianInfo(m_pimpl->nlpPointer->constraintsJacNNZRows,
+                                                            m_pimpl->nlpPointer->constraintsJacNNZCols))){
+                    reportError("IpoptInterface", "solve", "Error while retrieving constraints jacobian info.");
+                    return false;
+                }
+            } else { //dense jacobian
+                m_pimpl->nlpPointer->constraintsJacNNZCols.clear();
+                m_pimpl->nlpPointer->constraintsJacNNZRows.clear();
+                for (unsigned int i = 0; i < m_pimpl->nlpPointer->numberOfConstraints; i++) {
+                    for (unsigned int j = 0; j < m_pimpl->nlpPointer->numberOfVariables; ++j) {
+                        m_pimpl->nlpPointer->constraintsJacNNZRows.push_back(i);
+                        m_pimpl->nlpPointer->constraintsJacNNZCols.push_back(j);
+                    }
+                }
+            }
+
+            if (m_problem->info().hasSparseHessian()) {
+                if (!(m_problem->getHessianInfo(m_pimpl->nlpPointer->hessianNNZRows,
+                                                m_pimpl->nlpPointer->hessianNNZCols))){
+                    reportError("IpoptInterface", "solve", "Error while retrieving hessian info.");
+                    return false;
+                }
+            } else { //dense hessian
+                m_pimpl->nlpPointer->hessianNNZRows.clear();
+                m_pimpl->nlpPointer->hessianNNZCols.clear();
+                for (unsigned int i = 0; i < m_pimpl->nlpPointer->numberOfVariables; i++) {
+                    for (unsigned int j = 0; j < m_pimpl->nlpPointer->numberOfVariables; ++j) {
+                        m_pimpl->nlpPointer->hessianNNZRows.push_back(i);
+                        m_pimpl->nlpPointer->hessianNNZCols.push_back(j);
+                    }
+                }
             }
 
             if (m_pimpl->possibleReOptimize()){ //reoptimize possibility
-                m_pimpl->loader->Options()->SetStringValue("warm_start_init_point", "yes");
-                m_pimpl->loader->Options()->SetStringValue("warm_start_same_structure", "yes");
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_bound_frac", 1e-6);
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_bound_push", 1e-6);
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_mult_bound_push", 1e-6);
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_slack_bound_frac", 1e-6);
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_slack_bound_push", 1e-6);
+                m_pimpl->loader->Options()->SetStringValueIfUnset("warm_start_init_point", "yes");
+                m_pimpl->loader->Options()->SetStringValueIfUnset("warm_start_same_structure", "yes");
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_bound_frac", 1e-6);
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_bound_push", 1e-6);
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_mult_bound_push", 1e-6);
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_slack_bound_frac", 1e-6);
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_slack_bound_push", 1e-6);
 
                 m_pimpl->loader->ReOptimizeTNLP(m_pimpl->nlpPointer);
                 if (m_pimpl->nlpPointer->exitCode < 0) {

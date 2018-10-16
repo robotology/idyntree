@@ -22,6 +22,8 @@ namespace iDynTree {
     namespace optimization {
 
         OptimizationProblem::OptimizationProblem()
+        :m_infoData(new OptimizationProblemInfoData)
+        ,m_info(m_infoData)
         {
         }
 
@@ -70,6 +72,11 @@ namespace iDynTree {
             return false;
         }
 
+        bool OptimizationProblem::getGuess(VectorDynSize &guess)
+        {
+            return false;
+        }
+
         bool OptimizationProblem::setVariables(const VectorDynSize &variables)
         {
             reportError("OptimizationProblem", "setVariables", "Method not implemented.");
@@ -110,6 +117,66 @@ namespace iDynTree {
         {
             reportError("OptimizationProblem", "evaluateConstraintsHessian", "Method not implemented.");
             return false;
+        }
+
+        const OptimizationProblemInfo &OptimizationProblem::info() const
+        {
+            return m_info;
+        }
+
+        OptimizationProblemInfoData::OptimizationProblemInfoData()
+        : hasLinearConstraints(false)
+        , hasNonLinearConstraints(true)
+        , costIsLinear(false)
+        , costIsQuadratic(false)
+        , costIsNonLinear(true)
+        , hasSparseConstraintJacobian(false)
+        , hasSparseHessian(false)
+        , hessianIsProvided(false)
+        { }
+
+        OptimizationProblemInfo::OptimizationProblemInfo(std::shared_ptr<OptimizationProblemInfoData> data)
+            : m_data(data)
+        { }
+
+        bool OptimizationProblemInfo::hasLinearConstraints() const
+        {
+            return m_data->hasLinearConstraints;
+        }
+
+        bool OptimizationProblemInfo::hasNonLinearConstraints() const
+        {
+            return m_data->hasNonLinearConstraints;
+        }
+
+        bool OptimizationProblemInfo::costIsLinear() const
+        {
+            return m_data->costIsLinear;
+        }
+
+        bool OptimizationProblemInfo::costIsQuadratic() const
+        {
+            return m_data->costIsQuadratic;
+        }
+
+        bool OptimizationProblemInfo::costIsNonLinear() const
+        {
+            return m_data->costIsNonLinear;
+        }
+
+        bool OptimizationProblemInfo::hasSparseConstraintJacobian() const
+        {
+            return m_data->hasSparseConstraintJacobian;
+        }
+
+        bool OptimizationProblemInfo::hasSparseHessian() const
+        {
+            return m_data->hasSparseHessian;
+        }
+
+        bool OptimizationProblemInfo::hessianIsProvided() const
+        {
+            return m_data->hessianIsProvided;
         }
 
     }

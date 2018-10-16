@@ -18,17 +18,14 @@
 #define IDYNTREE_OPTIMALCONTROL_LINEARSYSTEM_H
 
 #include <iDynTree/DynamicalSystem.h>
+#include <iDynTree/TimeVaryingObject.h>
+#include <memory>
 
-#include <vector>
 namespace iDynTree {
 
     class MatrixDynSize;
 
     namespace optimalcontrol {
-
-        class Controller;
-        // Add somewhere the idea of output. In case of time varying system it may share the same parameter of
-        // the A or B matrix
 
         /**
          * @warning This class is still in active development, and so API interface can change between iDynTree versions.
@@ -40,49 +37,33 @@ namespace iDynTree {
 
         public:
 
-            LinearSystem(size_t stateSize,
-                         size_t controlSize,
-                         bool isTimeVarying);
+            LinearSystem(size_t stateSize, size_t controlSize);
 
             LinearSystem(const LinearSystem& other) = delete;
 
-            ~LinearSystem();
-
-            bool isTimeVarying();
+            ~LinearSystem() override;
 
             // time invariant system: single matrix
-            void setConstantStateMatrix(const iDynTree::MatrixDynSize&);
-            void setConstantControlMatrix(const iDynTree::MatrixDynSize&);
+            bool setStateMatrix(const iDynTree::MatrixDynSize& stateMatrix);
 
-            // time varying cases:
-            // 1) preallocate matrices [initialTime, finalTime)
-            void setStateMatrixForTimeRange(const iDynTree::MatrixDynSize&, double initialTime, double finalTime);
-            //or
-            void setStateMatricesForTimeRanges(std::vector<const iDynTree::MatrixDynSize&>,
-                                               std::vector<std::pair<double, double> >);
+            bool setControlMatrix(const iDynTree::MatrixDynSize& controlMatrix);
 
-            // 2) lambda which will be called at runtime (how this will work with eventual derivatives?)
-            // Is this feasible?
-            // Ideally I would call the lambda as  (sender, time)-> iDynTree::MatrixDynSize&
-            // But if the lambda captures variable it cannot be passed as function pointer.
-            // Alternatevely, I can do a C-style call, like registering a function pointer of time
-            // iDynTree::MatrixDynSize& (*stateCallback)(const LinearSystem& sender, double time, void* context)
-            // context can be anything, only the caller knows about it.
+            //time variant case
+            bool setStateMatrix(std::shared_ptr<TimeVaryingMatrix> stateMatrix);
 
-            iDynTree::MatrixDynSize& stateMatrix(double time) const;
-            iDynTree::MatrixDynSize& controlMatrix(double time) const;
+            bool setControlMatrix(std::shared_ptr<TimeVaryingMatrix> controlMatrix);
 
             virtual bool dynamics(const VectorDynSize& state,
                                   double time,
-                                  VectorDynSize& stateDynamics) override;
+                                  VectorDynSize& stateDynamics) final;
 
             virtual bool dynamicsStateFirstDerivative(const VectorDynSize& state,
                                                       double time,
-                                                      MatrixDynSize& dynamicsDerivative) override;
+                                                      MatrixDynSize& dynamicsDerivative) final;
 
             virtual bool dynamicsControlFirstDerivative(const VectorDynSize& state,
                                                         double time,
-                                                        MatrixDynSize& dynamicsDerivative) override;
+                                                        MatrixDynSize& dynamicsDerivative) final;
 
 
         private:

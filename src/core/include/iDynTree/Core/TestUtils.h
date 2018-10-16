@@ -179,6 +179,7 @@ namespace iDynTree
         {
             std::cerr << vec(i) << "\n";
         }
+        std::cerr << "\n";
     }
 
     /**

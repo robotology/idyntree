@@ -265,7 +265,7 @@ public:
 
     virtual ~OptimizerTest() override {}
 
-    virtual bool setInitialGuess(iDynTree::VectorDynSize &initialGuess) override{
+    virtual bool isAvailable() const override{
         return true;
     }
 
@@ -359,7 +359,7 @@ int main(){
     iDynTree::VectorDynSize newBounds(1);
     newBounds(0) = 5.0;
     ASSERT_IS_TRUE(constraint2->setUpperBound(newBounds));
-    double initTime = 1.0, endTime = 5.0;
+    double initTime = 1.0, endTime = 2.0;
     double minStep = 0.003, maxStep = 0.07, controlPeriod = 0.011;
 
     ASSERT_IS_TRUE(problem->setTimeHorizon(initTime, endTime));
@@ -368,7 +368,7 @@ int main(){
     ASSERT_IS_TRUE(!(problem->dynamicalSystem().expired()));
     ASSERT_IS_TRUE(problem->addGroupOfConstraints(group1));
     ASSERT_IS_TRUE(group1->addConstraint(constraint2, iDynTree::optimalcontrol::TimeRange(4.0, 5.0)));
-    ASSERT_IS_TRUE(problem->addContraint(constraint1));
+    ASSERT_IS_TRUE(problem->addConstraint(constraint1));
     ASSERT_IS_TRUE(problem->addLagrangeTerm(1.0, cost1));
     ASSERT_IS_TRUE(problem->addMayerTerm(1.0, cost2));
 
@@ -378,11 +378,11 @@ int main(){
     ASSERT_IS_TRUE(solver.setOptimizer(optimizer));
 
     std::vector<double> stateTimings, controlTimings;
-    ASSERT_IS_TRUE(solver.getTimings(stateTimings, controlTimings));
+    ASSERT_IS_TRUE(solver.getPossibleTimings(stateTimings, controlTimings));
     for (size_t i = 0; i < stateTimings.size(); ++i){
         ASSERT_IS_TRUE((stateTimings[i] > initTime) && (stateTimings[i] <= endTime));
         if (i > 0)
-            ASSERT_IS_TRUE(((stateTimings[i] - stateTimings[i-1]) >= minStep) && ((stateTimings[i] - stateTimings[i-1]) <= maxStep));
+            ASSERT_IS_TRUE(((stateTimings[i] - stateTimings[i-1]) >= (0.999 * minStep)) && ((stateTimings[i] - stateTimings[i-1]) <= (1.001 * maxStep)));
     }
 
     for (size_t i = 0; i < controlTimings.size(); ++i){
@@ -392,6 +392,29 @@ int main(){
     }
 
     ASSERT_IS_TRUE(solver.solve());
+
+    minStep = 0.003;
+    maxStep = 0.07;
+    controlPeriod = 0.003;
+    ASSERT_IS_TRUE(solver.setStepSizeBounds(minStep, maxStep));
+    ASSERT_IS_TRUE(solver.setControlPeriod(controlPeriod));
+
+
+    ASSERT_IS_TRUE(solver.getPossibleTimings(stateTimings, controlTimings));
+    for (size_t i = 0; i < stateTimings.size(); ++i){
+        ASSERT_IS_TRUE((stateTimings[i] > initTime) && (stateTimings[i] <= endTime));
+        if (i > 0)
+            ASSERT_IS_TRUE(((stateTimings[i] - stateTimings[i-1]) >= (0.999 * minStep)) && ((stateTimings[i] - stateTimings[i-1]) <= (1.001 * maxStep)));
+    }
+
+    for (size_t i = 0; i < controlTimings.size(); ++i){
+        ASSERT_IS_TRUE((controlTimings[i] >= initTime) && (controlTimings[i] <= endTime));
+        if (i > 0)
+            ASSERT_EQUAL_DOUBLE((controlTimings[i] - controlTimings[i-1]), controlPeriod);
+    }
+
+    ASSERT_IS_TRUE(solver.solve());
+
 
 
     return EXIT_SUCCESS;

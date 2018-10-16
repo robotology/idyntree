@@ -58,6 +58,12 @@ public:
         return 2;
     }
 
+    virtual bool getGuess(iDynTree::VectorDynSize &guess) override {
+        guess.resize(2);
+        guess.zero();
+        return true;
+    }
+
     virtual bool getConstraintsBounds(iDynTree::VectorDynSize& constraintsLowerBounds, iDynTree::VectorDynSize& constraintsUpperBounds) override {
         constraintsLowerBounds.resize(2);
         constraintsUpperBounds.resize(2);
@@ -200,7 +206,6 @@ int main(){
 
     ASSERT_IS_TRUE(ipoptSolver.setIpoptOption("nlp_lower_bound_inf", -1.0e20));
     ASSERT_IS_TRUE(ipoptSolver.setIpoptOption("print_level", 0));
-    ASSERT_IS_TRUE(ipoptSolver.setInitialGuess(guess));
 
     ASSERT_IS_TRUE(problem->setMinusInfinity(ipoptSolver.minusInfinity()));
     ASSERT_IS_TRUE(problem->setPlusInfinity(ipoptSolver.plusInfinity()));

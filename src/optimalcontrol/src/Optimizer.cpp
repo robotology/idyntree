@@ -42,12 +42,6 @@ namespace iDynTree {
             return m_problem;
         }
 
-        bool Optimizer::setInitialGuess(VectorDynSize &initialGuess)
-        {
-            reportError("Optimizer", "setInitialGuess", "Method not implemented.");
-            return false;
-        }
-
         bool Optimizer::getPrimalVariables(VectorDynSize &primalVariables)
         {
             reportError("Optimizer", "getPrimalVariables", "Method not implemented.");

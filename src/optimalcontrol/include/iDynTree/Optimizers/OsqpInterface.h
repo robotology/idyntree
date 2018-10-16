@@ -14,8 +14,8 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#ifndef IDYNTREE_OPTIMALCONTROL_IPOPTINTERFACE_H
-#define IDYNTREE_OPTIMALCONTROL_IPOPTINTERFACE_H
+#ifndef IDYNTREE_OPTIMALCONTROL_OSQPINTERFACE_H
+#define IDYNTREE_OPTIMALCONTROL_OSQPINTERFACE_H
 
 #include <memory>
 #include <string>
@@ -32,18 +32,43 @@ namespace iDynTree {
          * \ingroup iDynTreeExperimental
          */
 
-        class IpoptInterface : public Optimizer {
+        typedef struct {
+            double rho = 0.1; //>0
+            double sigma = 1e-06; //>0, when changed prevent reOptimize
+            unsigned int max_iter = 4000; // >0
+            double eps_abs = 1e-03; //>=0
+            double eps_rel = 1e-03; //>=0
+            double eps_prim_inf = 1e-04; //>=0
+            double eps_dual_inf  = 1e-04; //>=0
+            double alpha = 1.6; // 0 < x < 2
+            unsigned int linsys_solver = 0; //0/1, when changed prevent reOptimize
+            double delta = 1e-06; //<0
+            bool polish = false;
+            unsigned int polish_refine_iter = 3; //>0
+            bool verbose = true;
+            bool scaled_termination = false;
+            unsigned int check_termination = 25;
+            bool warm_start = true;
+            unsigned int scaling = 10; //when changed prevent reOptimize
+            bool adaptive_rho = true; // when changed prevent reOptimize
+            unsigned int adaptive_rho_interval = 0; // when changed prevent reOptimize
+            double adaptive_rho_tolerance = 5; //>=1, when changed prevent reOptimize
+            double adaptive_rho_fraction = 0.4; //>0// when changed prevent reOptimize
+            double time_limit = 0; //>=0
+        } OsqpSettings;
 
-            class IpoptInterfaceImplementation;
-            IpoptInterfaceImplementation *m_pimpl;
+        class OsqpInterface : public Optimizer {
+
+            class OsqpInterfaceImplementation;
+            OsqpInterfaceImplementation *m_pimpl;
 
         public:
 
-            IpoptInterface();
+            OsqpInterface();
 
-            IpoptInterface(const IpoptInterface &other) = delete;
+            OsqpInterface(const OsqpInterface &other) = delete;
 
-            virtual ~IpoptInterface() override;
+            virtual ~OsqpInterface() override;
 
             virtual bool isAvailable() const override;
 
@@ -65,21 +90,11 @@ namespace iDynTree {
 
             virtual double plusInfinity() override;
 
-            bool setIpoptOption(const std::string &tag, const std::string &value);
-
-            bool setIpoptOption(const std::string &tag, double value);
-
-            bool setIpoptOption(const std::string &tag, int value);
-
-            bool getIpoptOption(const std::string &tag, std::string &value);
-
-            bool getIpoptOption(const std::string &tag, double &value);
-
-            bool getIpoptOption(const std::string &tag, int &value);
+            OsqpSettings& settings();
         };
 
     }
 
 }
 
-#endif // IDYNTREE_OPTIMALCONTROL_IPOPTINTERFACE_H
+#endif // IDYNTREE_OPTIMALCONTROL_OSQPINTERFACE_H

@@ -47,6 +47,11 @@ endif()
 # Turn on compilation of geometrical relations semantics check.
 option(IDYNTREE_USES_SEMANTICS "Compile iDynTree semantics check" FALSE)
 
+
+#########################################################################
+# Turn off compilation of optimal control part.
+option(IDYNTREE_COMPILES_OPTIMALCONTROL "Compile iDynTree optimal control part." TRUE)
+
 #########################################################################
 # Deal with RPATH
 option(IDYNTREE_ENABLE_RPATH "Enable RPATH for the library" TRUE)
