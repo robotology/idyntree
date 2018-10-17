@@ -1073,12 +1073,7 @@ namespace iDynTree {
                             }
                         }
 
-                        //Saving the jacobian structure due to the constraints
-                        if (ocHasStateSparsisty) {
-                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateNZRows, m_ocStateNZCols);
-                        } else {
-                            addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
-                        }
+                        //Saving the jacobian structure due to the constraints (state should not be constrained here)
                         if (ocHasControlSparsisty) {
                             addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlNZRows, m_ocControlNZCols);
                         } else {
@@ -1735,7 +1730,14 @@ namespace iDynTree {
                         constraintIndex += nx;
                     }
 
-                    if (!(m_ocproblem->constraintsEvaluation(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsBuffer))){
+                    bool okConstraint = true;
+                    if (mesh->origin == first) {
+                        okConstraint = m_ocproblem->constraintsEvaluation(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_constraintsBuffer);
+
+                    } else {
+                        okConstraint = m_ocproblem->constraintsEvaluation(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsBuffer);
+                    }
+                    if (!okConstraint){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating the constraints at time " << mesh->time << ".";
                         reportError("MultipleShootingTranscription", "evaluateConstraints", errorMsg.str().c_str());
@@ -1811,23 +1813,38 @@ namespace iDynTree {
                         constraintIndex += nx;
                     }
 
-                    if (!(m_ocproblem->constraintsJacobianWRTState(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsStateJacBuffer))){
-                        std::ostringstream errorMsg;
-                        errorMsg << "Error while evaluating the constraints state jacobian at time " << mesh->time << ".";
-                        reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
-                        return false;
+
+                    if (mesh->origin == first) {
+
+                        if (!(m_ocproblem->constraintsJacobianWRTControl(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_constraintsControlJacBuffer))){
+                            std::ostringstream errorMsg;
+                            errorMsg << "Error while evaluating the constraints control jacobian at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->controlIndex), nc, nu) = toEigen(m_constraintsControlJacBuffer);
+
+                    } else {
+
+                        if (!(m_ocproblem->constraintsJacobianWRTState(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsStateJacBuffer))){
+                            std::ostringstream errorMsg;
+                            errorMsg << "Error while evaluating the constraints state jacobian at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nc, nx) = toEigen(m_constraintsStateJacBuffer);
+
+                        if (!(m_ocproblem->constraintsJacobianWRTControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsControlJacBuffer))){
+                            std::ostringstream errorMsg;
+                            errorMsg << "Error while evaluating the constraints control jacobian at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->controlIndex), nc, nu) = toEigen(m_constraintsControlJacBuffer);
                     }
-
-                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nc, nx) = toEigen(m_constraintsStateJacBuffer);                    
-
-                    if (!(m_ocproblem->constraintsJacobianWRTControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsControlJacBuffer))){
-                        std::ostringstream errorMsg;
-                        errorMsg << "Error while evaluating the constraints control jacobian at time " << mesh->time << ".";
-                        reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
-                        return false;
-                    }
-
-                    jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->controlIndex), nc, nu) = toEigen(m_constraintsControlJacBuffer);
                     constraintIndex += nc;
                 }
                 assert(static_cast<size_t>(constraintIndex) == m_numberOfConstraints);
