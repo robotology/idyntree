@@ -57,15 +57,15 @@ namespace iDynTree {
                         m_stateJacobianSparsity[1].nonZeroElementRows.push_back(i);
                         m_stateJacobianSparsity[1].nonZeroElementColumns.push_back(i);
                     }
-                } else {
-                    m_hasStateSparsity = false;
+
+                    m_hasStateSparsity = true;
                 }
 
                 if (m_dynamicalSystem_ptr->dynamicsControlFirstDerivativeSparsity(m_controlJacobianSparsity[0].nonZeroElementRows, m_controlJacobianSparsity[0].nonZeroElementColumns)) {
                     m_controlJacobianSparsity[1].nonZeroElementRows.clear();
                     m_controlJacobianSparsity[1].nonZeroElementColumns.clear();
-                } else {
-                    m_hasControlSparsity = false;
+
+                    m_hasControlSparsity = true;
                 }
 
                 return true;
@@ -242,7 +242,7 @@ namespace iDynTree {
                 return true;
             }
 
-            bool ForwardEuler::getCollocationConstraintJacobianStateSparsity(std::vector<Integrator::CollocationSparsityVectors> &stateJacobianSparsity)
+            bool ForwardEuler::getCollocationConstraintJacobianStateSparsity(std::vector<CollocationSparsityVectors> &stateJacobianSparsity)
             {
                 if (!m_hasStateSparsity) {
                     return false;
@@ -252,7 +252,7 @@ namespace iDynTree {
                 return true;
             }
 
-            bool ForwardEuler::getCollocationConstraintJacobianControlSparsity(std::vector<Integrator::CollocationSparsityVectors> &controlJacobianSparsity)
+            bool ForwardEuler::getCollocationConstraintJacobianControlSparsity(std::vector<CollocationSparsityVectors> &controlJacobianSparsity)
             {
                 if (!m_hasControlSparsity) {
                     return false;

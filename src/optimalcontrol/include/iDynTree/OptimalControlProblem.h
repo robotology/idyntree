@@ -225,6 +225,10 @@ namespace iDynTree {
                                                const VectorDynSize& control,
                                                MatrixDynSize& jacobian);
 
+            bool constraintJacobianWRTStateSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+
+            bool constraintJacobianWRTControlSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+
         private:
             class OptimalControlProblemPimpl;
             OptimalControlProblemPimpl* m_pimpl;

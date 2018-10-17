@@ -52,6 +52,11 @@ namespace optimalcontrol {
                 double time;
             };
 
+            typedef struct {
+                std::vector<size_t> nonZeroElementRows;
+                std::vector<size_t> nonZeroElementColumns;
+            } CollocationSparsityVectors;
+
 
             class IntegratorInfoData {
             protected:
@@ -233,11 +238,6 @@ namespace optimalcontrol {
                                                                    const std::vector<VectorDynSize>& controlInputs, double dT,
                                                                    std::vector<MatrixDynSize>& stateJacobianValues,
                                                                    std::vector<MatrixDynSize>& controlJacobianValues);
-
-                typedef struct {
-                    std::vector<size_t> nonZeroElementRows;
-                    std::vector<size_t> nonZeroElementColumns;
-                } CollocationSparsityVectors;
 
                 virtual bool getCollocationConstraintJacobianStateSparsity(std::vector<CollocationSparsityVectors>& stateJacobianSparsity);
 

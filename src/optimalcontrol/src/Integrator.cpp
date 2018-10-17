@@ -129,12 +129,12 @@ namespace iDynTree {
                 return false;
             }
 
-            bool Integrator::getCollocationConstraintJacobianStateSparsity(std::vector<Integrator::CollocationSparsityVectors> &stateJacobianSparsity)
+            bool Integrator::getCollocationConstraintJacobianStateSparsity(std::vector<CollocationSparsityVectors> &stateJacobianSparsity)
             {
                 return false;
             }
 
-            bool Integrator::getCollocationConstraintJacobianControlSparsity(std::vector<Integrator::CollocationSparsityVectors> &controlJacobianSparsity)
+            bool Integrator::getCollocationConstraintJacobianControlSparsity(std::vector<CollocationSparsityVectors> &controlJacobianSparsity)
             {
                 return false;
             }

@@ -97,6 +97,9 @@ namespace iDynTree {
             double m_minStepSize, m_maxStepSize, m_controlPeriod;
             size_t m_nx, m_nu, m_numberOfVariables, m_constraintsPerInstant, m_numberOfConstraints;
             std::vector<size_t> m_jacobianNZRows, m_jacobianNZCols, m_hessianNZRows, m_hessianNZCols;
+            std::vector<size_t> m_ocStateNZRows, m_ocStateNZCols, m_ocControlNZRows, m_ocControlNZCols;
+            std::vector<integrators::CollocationSparsityVectors> m_collocationStateNZ, m_collocationControlNZ;
+            integrators::CollocationSparsityVectors m_mergedCollocationControlNZ;
             size_t m_jacobianNonZeros, m_hessianNonZeros;
             double m_plusInfinity, m_minusInfinity;
             VectorDynSize m_constraintsLowerBound, m_constraintsUpperBound;
@@ -184,6 +187,14 @@ namespace iDynTree {
                 }
             }
 
+            void addJacobianBlock(size_t initRow, size_t initCol, const std::vector<size_t> &nonZeroRows, const std::vector<size_t> &nonZeroCols){
+                for (size_t i = 0; i < nonZeroRows.size(); ++i) {
+                    addNonZero(m_jacobianNZRows, m_jacobianNonZeros, initRow + nonZeroRows[i]);
+                    addNonZero(m_jacobianNZCols, m_jacobianNonZeros, initCol + nonZeroCols[i]);
+                    m_jacobianNonZeros++;
+                }
+            }
+
             void addIdentityJacobianBlock(size_t initRow, size_t initCol, size_t dimension){
                 for (size_t i = 0; i < dimension; ++i){
                     addNonZero(m_jacobianNZRows, m_jacobianNonZeros, initRow + i);
@@ -198,6 +209,36 @@ namespace iDynTree {
                         addNonZero(m_hessianNZRows, m_hessianNonZeros, initRow + i);
                         addNonZero(m_hessianNZCols, m_hessianNonZeros, initCol + j);
                         m_hessianNonZeros++;
+                    }
+                }
+            }
+
+            void mergeSparsityVectors(const std::vector<integrators::CollocationSparsityVectors>& original, integrators::CollocationSparsityVectors& merged) {
+                const std::vector<size_t>& firstRows = original[0].nonZeroElementRows;
+                const std::vector<size_t>& firstCols = original[0].nonZeroElementColumns;
+                const std::vector<size_t>& secondRows = original[1].nonZeroElementRows;
+                const std::vector<size_t>& secondCols = original[1].nonZeroElementColumns;
+                size_t mergedNonZeros = 0;
+                for (size_t i = 0; i < firstRows.size(); ++i) {
+                    addNonZero(merged.nonZeroElementRows, mergedNonZeros, firstRows[i]);
+                    addNonZero(merged.nonZeroElementColumns, mergedNonZeros, firstCols[i]);
+                    mergedNonZeros++;
+                }
+
+                for (size_t j = 0; j < secondRows.size(); ++j) {
+                    bool duplicate = false;
+                    size_t i = 0;
+                    while (!duplicate && (i < firstRows.size())) {
+                        if ((secondRows[j] == firstRows[i]) && (secondCols[j] == firstCols[i])) {
+                            duplicate = true;
+                        }
+                        ++i;
+                    }
+
+                    if (!duplicate) {
+                        addNonZero(merged.nonZeroElementRows, mergedNonZeros, secondRows[j]);
+                        addNonZero(merged.nonZeroElementColumns, mergedNonZeros, secondCols[j]);
+                        mergedNonZeros++;
                     }
                 }
             }
@@ -972,6 +1013,23 @@ namespace iDynTree {
                 Eigen::Map<Eigen::VectorXd> lowerBoundMap = toEigen(m_constraintsLowerBound);
                 Eigen::Map<Eigen::VectorXd> upperBoundMap = toEigen(m_constraintsUpperBound);
 
+                bool ocHasStateSparsisty = m_ocproblem->constraintJacobianWRTStateSparsity(m_ocStateNZRows, m_ocStateNZCols);
+                if (!ocHasStateSparsisty) {
+                    reportWarning("MultipleShootingTranscription", "prepare", "Failed to retrieve state sparsity of optimal control problem constraints. Assuming dense matrix.");
+                }
+
+                bool ocHasControlSparsisty = m_ocproblem->constraintJacobianWRTControlSparsity(m_ocControlNZRows, m_ocControlNZCols);
+                if (!ocHasControlSparsisty) {
+                    reportWarning("MultipleShootingTranscription", "prepare", "Failed to retrieve control sparsity of optimal control problem constraints. Assuming dense matrix.");
+                }
+
+                bool systemHasStateSparsity = m_integrator->getCollocationConstraintJacobianStateSparsity(m_collocationStateNZ);
+                bool systemHasControlSparsity = m_integrator->getCollocationConstraintJacobianControlSparsity(m_collocationControlNZ);
+
+                if (systemHasControlSparsity) {
+                    mergeSparsityVectors(m_collocationControlNZ, m_mergedCollocationControlNZ);
+                }
+
                 resetNonZerosCount();
 
                 std::vector<MeshPoint>::iterator mesh = m_meshPoints.begin(), previousControlMesh = mesh;
@@ -1016,7 +1074,16 @@ namespace iDynTree {
                         }
 
                         //Saving the jacobian structure due to the constraints
-                        addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        if (ocHasStateSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateNZRows, m_ocStateNZCols);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
+                        }
+                        if (ocHasControlSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlNZRows, m_ocControlNZCols);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        }
                         constraintIndex += nc;
 
                         //Saving the hessian structure
@@ -1045,10 +1112,21 @@ namespace iDynTree {
                         upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)).setZero();
 
                         //Saving the jacobian structure due to the dynamical constraints
-                        addJacobianBlock(constraintIndex, nx, mesh->previousControlIndex, nu);
-                        addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
-                        addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
-                        addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
+                        if (systemHasControlSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_collocationControlNZ[1].nonZeroElementRows, m_collocationControlNZ[1].nonZeroElementColumns);
+                            addJacobianBlock(constraintIndex, mesh->previousControlIndex, m_collocationControlNZ[0].nonZeroElementRows, m_collocationControlNZ[0].nonZeroElementColumns);
+                        } else {
+                            addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
+                            addJacobianBlock(constraintIndex, nx, mesh->previousControlIndex, nu);
+                        }
+
+                        if (systemHasStateSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_collocationStateNZ[1].nonZeroElementRows, m_collocationStateNZ[1].nonZeroElementColumns);
+                            addJacobianBlock(constraintIndex, (mesh - 1)->stateIndex, m_collocationStateNZ[0].nonZeroElementRows, m_collocationStateNZ[0].nonZeroElementColumns);
+                        } else {
+                            addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
+                            addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
+                        }
 
                         constraintIndex += nx;
 
@@ -1076,8 +1154,16 @@ namespace iDynTree {
                         }
 
                         //Saving the jacobian structure due to the constraints
-                        addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
-                        addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        if (ocHasStateSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateNZRows, m_ocStateNZCols);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
+                        }
+                        if (ocHasControlSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlNZRows, m_ocControlNZCols);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        }
                         constraintIndex += nc;
 
                         //Saving the hessian structure
@@ -1109,9 +1195,19 @@ namespace iDynTree {
                         upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)).setZero();
 
                         //Saving the jacobian structure due to the dynamical constraints
-                        addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
-                        addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
-                        addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
+                        if (systemHasControlSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_mergedCollocationControlNZ.nonZeroElementRows, m_mergedCollocationControlNZ.nonZeroElementColumns);
+                        } else {
+                            addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
+                        }
+
+                        if (systemHasStateSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_collocationStateNZ[1].nonZeroElementRows, m_collocationStateNZ[1].nonZeroElementColumns);
+                            addJacobianBlock(constraintIndex, (mesh - 1)->stateIndex, m_collocationStateNZ[0].nonZeroElementRows, m_collocationStateNZ[0].nonZeroElementColumns);
+                        } else {
+                            addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
+                            addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
+                        }
                         constraintIndex += nx;
 
                         //Saving constraints bounds
@@ -1137,8 +1233,16 @@ namespace iDynTree {
                             }
                         }
 
-                        addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
-                        addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        if (ocHasStateSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateNZRows, m_ocStateNZCols);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
+                        }
+                        if (ocHasControlSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlNZRows, m_ocControlNZCols);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        }
                         constraintIndex += nc;
 
                         //Saving the hessian structure

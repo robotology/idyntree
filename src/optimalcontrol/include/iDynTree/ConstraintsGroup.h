@@ -80,7 +80,7 @@ namespace iDynTree {
 
             /**
              * @brief Add a linear constraint to the group
-             * @param[in] constraint Shared pointer to the user defined constraint.
+             * @param[in] linearConstraint Shared pointer to a linear constraint.
              * @param[in] timeRange Time range in which the constraint will be enabled.
              * @return True if successfull. Posible causes of failures are: empty pointer, dimension bigger than maxConstraintSize, invalid TimeRange.
              */

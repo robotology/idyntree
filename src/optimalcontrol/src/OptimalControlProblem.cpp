@@ -38,7 +38,6 @@
 #include <sstream>
 
 
-
 namespace iDynTree {
     namespace optimalcontrol {
 
@@ -46,6 +45,10 @@ namespace iDynTree {
             std::shared_ptr<ConstraintsGroup> group_ptr;
             VectorDynSize constraintsBuffer;
             MatrixDynSize stateJacobianBuffer, controlJacobianBuffer;
+            std::vector<size_t> nonZeroStateRows, nonZeroStateCols;
+            std::vector<size_t> nonZeroControlRows, nonZeroControlCols;
+            bool hasStateSparsity = false;
+            bool hasControlSparsity = false;
         } BufferedGroup;
 
         typedef std::shared_ptr<BufferedGroup> BufferedGroup_ptr;
@@ -73,6 +76,8 @@ namespace iDynTree {
             MatrixDynSize costStateHessianBuffer, costControlHessianBuffer, costMixedHessianBuffer;
             bool stateLowerBounded, stateUpperBounded, controlLowerBounded, controlUpperBounded;
             VectorDynSize stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
+            std::vector<size_t> nonZeroStateRows, nonZeroStateCols;
+            std::vector<size_t> nonZeroControlRows, nonZeroControlCols;
             std::vector<std::string> mayerCostnames;
             std::vector<TimeRange> constraintsTimeRanges, costTimeRanges;
             std::vector<size_t> linearConstraintIndeces;
@@ -135,7 +140,7 @@ namespace iDynTree {
             }
 
             CostsMap::iterator costIterator;
-            for (auto mayerCost : m_pimpl->mayerCostnames){
+            for (auto& mayerCost : m_pimpl->mayerCostnames){
                 if (mayerCost.size() > 0){
                     costIterator = m_pimpl->costs.find(mayerCost);
                     if (costIterator == m_pimpl->costs.end()){
@@ -208,6 +213,9 @@ namespace iDynTree {
                 newGroup->controlJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->controlSpaceSize()));
             }
 
+            newGroup->hasStateSparsity = groupOfConstraints->constraintJacobianWRTStateSparsity(newGroup->nonZeroStateRows, newGroup->nonZeroStateCols); //needed to allocate memory in advance
+            newGroup->hasControlSparsity = groupOfConstraints->constraintJacobianWRTControlSparsity(newGroup->nonZeroControlRows, newGroup->nonZeroControlCols); //needed to allocate memory in advance
+
             std::pair< ConstraintsGroupsMap::iterator, bool> groupResult;
             groupResult = m_pimpl->constraintsGroups.insert(std::pair< std::string, BufferedGroup_ptr>(groupOfConstraints->name(), newGroup));
 
@@ -217,6 +225,13 @@ namespace iDynTree {
                 reportError("OptimalControlProblem", "addGroupOfConstraints", errorMsg.str().c_str());
                 return false;
             }
+
+            m_pimpl->nonZeroStateRows.resize(m_pimpl->nonZeroStateRows.size() + newGroup->nonZeroStateRows.size()); //needed to allocate memory in advance
+            m_pimpl->nonZeroStateCols.resize(m_pimpl->nonZeroStateCols.size() + newGroup->nonZeroStateCols.size()); //needed to allocate memory in advance
+
+            m_pimpl->nonZeroControlRows.resize(m_pimpl->nonZeroControlRows.size() + newGroup->nonZeroControlRows.size()); //needed to allocate memory in advance
+            m_pimpl->nonZeroControlCols.resize(m_pimpl->nonZeroControlCols.size() + newGroup->nonZeroControlCols.size()); //needed to allocate memory in advance
+
             return true;
         }
 
@@ -316,7 +331,7 @@ namespace iDynTree {
         {
             unsigned int number = 0;
 
-            for(auto group: m_pimpl->constraintsGroups){
+            for(auto& group: m_pimpl->constraintsGroups){
                 number += group.second->group_ptr->numberOfConstraints();
             }
 
@@ -327,7 +342,7 @@ namespace iDynTree {
         {
             unsigned int number = 0;
 
-            for(auto group: m_pimpl->constraintsGroups){
+            for(auto& group: m_pimpl->constraintsGroups){
                 if (group.second->group_ptr->isLinearGroup()) {
                     number += group.second->group_ptr->constraintsDimension();
                 }
@@ -340,7 +355,7 @@ namespace iDynTree {
         {
             unsigned int dimension = 0;
 
-            for (auto group: m_pimpl->constraintsGroups){
+            for (auto& group: m_pimpl->constraintsGroups){
                 dimension += group.second->group_ptr->constraintsDimension();
             }
             return dimension;
@@ -351,7 +366,7 @@ namespace iDynTree {
             std::vector<std::string> output;
             std::vector<std::string> temp;
 
-            for(auto group: m_pimpl->constraintsGroups){
+            for(auto& group: m_pimpl->constraintsGroups){
                 temp =  group.second->group_ptr->listConstraints();
                 output.insert(output.end(), temp.begin(), temp.end());
             }
@@ -362,7 +377,7 @@ namespace iDynTree {
         {
             std::vector<std::string> output;
 
-            for(auto group: m_pimpl->constraintsGroups){
+            for(auto& group: m_pimpl->constraintsGroups){
                 output.insert(output.end(), group.second->group_ptr->numberOfConstraints(), group.second->group_ptr->name());
             }
             return output;
@@ -377,7 +392,7 @@ namespace iDynTree {
 
             size_t index = 0;
 
-            for (auto group : m_pimpl->constraintsGroups){
+            for (auto& group : m_pimpl->constraintsGroups){
                 std::vector<TimeRange> &groupTimeRanges = group.second->group_ptr->getTimeRanges();
                 for (size_t i = 0; i < groupTimeRanges.size(); ++i){
                     m_pimpl->constraintsTimeRanges[index] = groupTimeRanges[i];
@@ -397,7 +412,7 @@ namespace iDynTree {
             size_t vectorIndex = 0, constraintIndex = 0;
 
             unsigned int nc = 0;
-            for (auto group : m_pimpl->constraintsGroups){
+            for (auto& group : m_pimpl->constraintsGroups){
                 nc = group.second->group_ptr->constraintsDimension();
 
                 if (group.second->group_ptr->isLinearGroup()) {
@@ -567,7 +582,7 @@ namespace iDynTree {
 
         bool OptimalControlProblem::updateCostTimeRange(const std::string &name, const TimeRange &newTimeRange)
         {
-            for (auto mayerCost : m_pimpl->mayerCostnames)
+            for (auto& mayerCost : m_pimpl->mayerCostnames)
                 if (name == mayerCost){
                     std::ostringstream errorMsg;
                     errorMsg << "Cannot change the TimeRange of cost named " << name << " since it is a terminal cost." << std::endl;
@@ -611,7 +626,7 @@ namespace iDynTree {
             }
 
             size_t i = 0;
-            for (auto c : m_pimpl->costs){
+            for (auto& c : m_pimpl->costs){
                 m_pimpl->costTimeRanges[i] = c.second.timeRange;
                 ++i;
             }
@@ -620,7 +635,7 @@ namespace iDynTree {
 
         bool OptimalControlProblem::hasOnlyLinearCosts() const
         {
-            for (auto c : m_pimpl->costs) {
+            for (auto& c : m_pimpl->costs) {
                 if (!(c.second.isLinear)) {
                     return false;
                 }
@@ -630,7 +645,7 @@ namespace iDynTree {
 
         bool OptimalControlProblem::hasOnlyQuadraticCosts() const
         {
-            for (auto c : m_pimpl->costs) {
+            for (auto& c : m_pimpl->costs) {
                 if (!(c.second.isQuadratic)) {
                     return false;
                 }
@@ -752,7 +767,7 @@ namespace iDynTree {
         {
             costValue = 0;
             double addCost;
-            for(auto cost : m_pimpl->costs){
+            for(auto& cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
                     if(!cost.second.cost->costEvaluation(time, state, control, addCost)){
                         std::ostringstream errorMsg;
@@ -779,7 +794,7 @@ namespace iDynTree {
 
             bool first = true;
 
-            for(auto cost : m_pimpl->costs){
+            for(auto&  cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
                     if(!cost.second.cost->costFirstPartialDerivativeWRTState(time, state, control, m_pimpl->costStateJacobianBuffer)){
                         std::ostringstream errorMsg;
@@ -816,7 +831,7 @@ namespace iDynTree {
 
             bool first = true;
 
-            for(auto cost : m_pimpl->costs){
+            for(auto& cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
                     if (!cost.second.cost->costFirstPartialDerivativeWRTControl(time, state, control, m_pimpl->costControlJacobianBuffer)){
                         std::ostringstream errorMsg;
@@ -853,7 +868,7 @@ namespace iDynTree {
 
             bool first = true;
 
-            for (auto cost : m_pimpl->costs){
+            for (auto& cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
                     if (!cost.second.cost->costSecondPartialDerivativeWRTState(time, state, control, m_pimpl->costStateHessianBuffer)){
                         std::ostringstream errorMsg;
@@ -891,7 +906,7 @@ namespace iDynTree {
 
             bool first = true;
 
-            for (auto cost : m_pimpl->costs){
+            for (auto& cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
                     if (!cost.second.cost->costSecondPartialDerivativeWRTControl(time, state, control, m_pimpl->costControlHessianBuffer)){
                         std::ostringstream errorMsg;
@@ -930,7 +945,7 @@ namespace iDynTree {
 
             bool first = true;
 
-            for (auto cost : m_pimpl->costs){
+            for (auto& cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
                     if (!cost.second.cost->costSecondPartialDerivativeWRTStateControl(time, state, control, m_pimpl->costMixedHessianBuffer)){
                         std::ostringstream errorMsg;
@@ -966,7 +981,7 @@ namespace iDynTree {
             Eigen::Map< Eigen::VectorXd > constraintsEvaluation = toEigen(constraintsValue);
             Eigen::Index offset = 0;
 
-            for (auto group : m_pimpl->constraintsGroups){
+            for (auto& group : m_pimpl->constraintsGroups){
                 if (!(group.second->group_ptr->evaluateConstraints(time, state, control, group.second->constraintsBuffer))){
                     std::ostringstream errorMsg;
                     errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
@@ -990,7 +1005,7 @@ namespace iDynTree {
             Eigen::Map< Eigen::VectorXd > upperBoundMap = toEigen(upperBound);
             Eigen::Index offset = 0;
 
-            for (auto group : m_pimpl->constraintsGroups){
+            for (auto& group : m_pimpl->constraintsGroups){
                 if (! group.second->group_ptr->getUpperBound(time, group.second->constraintsBuffer)){
                     toEigen(group.second->constraintsBuffer).setConstant(std::abs(infinity)); //if not upper bounded
                 }
@@ -1018,7 +1033,7 @@ namespace iDynTree {
             Eigen::Map< Eigen::VectorXd > lowerBoundMap = toEigen(lowerBound);
             Eigen::Index offset = 0;
 
-            for (auto group : m_pimpl->constraintsGroups){
+            for (auto& group : m_pimpl->constraintsGroups){
                 if (! group.second->group_ptr->getLowerBound(time, group.second->constraintsBuffer)){
                     toEigen(group.second->constraintsBuffer).setConstant(-std::abs(infinity)); //if not lower bounded
                 }
@@ -1039,7 +1054,7 @@ namespace iDynTree {
 
         bool OptimalControlProblem::isFeasiblePoint(double time, const VectorDynSize &state, const VectorDynSize &control)
         {
-            for(auto group : m_pimpl->constraintsGroups){
+            for(auto& group : m_pimpl->constraintsGroups){
                 if(!(group.second->group_ptr->isFeasibilePoint(time, state, control))){
                     return false;
                 }
@@ -1057,7 +1072,7 @@ namespace iDynTree {
             iDynTreeEigenMatrixMap jacobianMap = toEigen(jacobian);
             Eigen::Index offset = 0;
 
-            for (auto group : m_pimpl->constraintsGroups){
+            for (auto& group : m_pimpl->constraintsGroups){
                 if (!(group.second->group_ptr->constraintJacobianWRTState(time, state, control, group.second->stateJacobianBuffer))){
                     std::ostringstream errorMsg;
                     errorMsg << "Error while evaluating constraint group " << group.second->group_ptr->name() <<".";
@@ -1081,7 +1096,7 @@ namespace iDynTree {
             iDynTreeEigenMatrixMap jacobianMap = toEigen(jacobian);
             Eigen::Index offset = 0;
 
-            for (auto group : m_pimpl->constraintsGroups){
+            for (auto& group : m_pimpl->constraintsGroups){
                 if (! group.second->group_ptr->constraintJacobianWRTControl(time, state, control, group.second->controlJacobianBuffer)){
                     std::ostringstream errorMsg;
                     errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
@@ -1091,6 +1106,127 @@ namespace iDynTree {
                 jacobianMap.block(offset, 0, group.second->group_ptr->constraintsDimension(), control.size()) = toEigen(group.second->controlJacobianBuffer);
                 offset += group.second->controlJacobianBuffer.rows();
             }
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintJacobianWRTStateSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        {
+            size_t nonZeroIndexState = 0;
+            size_t offset = 0;
+            for (auto& group : m_pimpl->constraintsGroups){
+
+                group.second->hasStateSparsity = group.second->group_ptr->constraintJacobianWRTStateSparsity(group.second->nonZeroStateRows, group.second->nonZeroStateCols);
+
+                if (group.second->hasStateSparsity) {
+
+                    if (m_pimpl->nonZeroStateRows.size() < (nonZeroIndexState + group.second->nonZeroStateRows.size())) {
+                        m_pimpl->nonZeroStateRows.resize(nonZeroIndexState + group.second->nonZeroStateRows.size());
+                         m_pimpl->nonZeroStateCols.resize(nonZeroIndexState + group.second->nonZeroStateRows.size());
+                    }
+
+                    for (size_t i = 0; i < group.second->nonZeroStateRows.size(); ++i) {
+                        m_pimpl->nonZeroStateRows[nonZeroIndexState] = group.second->nonZeroStateRows[i] + offset;
+                        m_pimpl->nonZeroStateCols[nonZeroIndexState] = group.second->nonZeroStateCols[i];
+                        nonZeroIndexState++;
+                    }
+
+                } else {
+
+                    if (m_pimpl->dynamicalSystem) {
+
+                        size_t rows = group.second->controlJacobianBuffer.rows();
+                        size_t cols = group.second->controlJacobianBuffer.cols();
+                        size_t nonZeros = rows * cols;
+
+                        if (m_pimpl->nonZeroStateRows.size() < (nonZeroIndexState + nonZeros)) {
+                            m_pimpl->nonZeroStateRows.resize(nonZeroIndexState + nonZeros);
+                             m_pimpl->nonZeroStateCols.resize(nonZeroIndexState + nonZeros);
+                        }
+
+                        for (size_t i = 0; i < rows; ++i) {
+                            for (size_t j = 0; j < cols; ++j) {
+                                m_pimpl->nonZeroStateRows[nonZeroIndexState] = i + offset;
+                                m_pimpl->nonZeroStateCols[nonZeroIndexState] = j;
+                                nonZeroIndexState++;
+                            }
+                        }
+                    } else {
+                        std::ostringstream errorMsg;
+                        errorMsg << "The group " << group.second->group_ptr->name() <<" has dense state jacobian and no dynamical system has been provided yet. Cannot determine the sparsity since the state dimension is unknown.";
+                        reportError("OptimalControlProblem", "constraintJacobianWRTStateSparsity", errorMsg.str().c_str());
+                        return false;
+                    }
+                }
+
+                offset += group.second->stateJacobianBuffer.rows();
+            }
+            m_pimpl->nonZeroStateRows.resize(nonZeroIndexState); //remove leftovers
+            m_pimpl->nonZeroStateCols.resize(nonZeroIndexState); //remove leftovers
+
+
+            nonZeroElementRows = m_pimpl->nonZeroStateRows;
+            nonZeroElementColumns = m_pimpl->nonZeroStateCols;
+
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintJacobianWRTControlSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        {
+            size_t nonZeroIndexControl = 0;
+            size_t offset = 0;
+            for (auto& group : m_pimpl->constraintsGroups){
+
+                group.second->hasControlSparsity = group.second->group_ptr->constraintJacobianWRTControlSparsity(group.second->nonZeroControlRows, group.second->nonZeroControlCols);
+
+                if (group.second->hasControlSparsity) {
+
+                    if (m_pimpl->nonZeroControlRows.size() < (nonZeroIndexControl + group.second->nonZeroControlRows.size())) {
+                        m_pimpl->nonZeroControlRows.resize(nonZeroIndexControl + group.second->nonZeroControlRows.size());
+                         m_pimpl->nonZeroControlCols.resize(nonZeroIndexControl + group.second->nonZeroControlRows.size());
+                    }
+
+                    for (size_t i = 0; i < group.second->nonZeroControlRows.size(); ++i) {
+                        m_pimpl->nonZeroControlRows[nonZeroIndexControl] = group.second->nonZeroControlRows[i] + offset;
+                        m_pimpl->nonZeroControlCols[nonZeroIndexControl] = group.second->nonZeroControlCols[i];
+                        nonZeroIndexControl++;
+                    }
+
+                } else {
+
+                    if (m_pimpl->dynamicalSystem) {
+
+                        size_t rows = group.second->controlJacobianBuffer.rows();
+                        size_t cols = group.second->controlJacobianBuffer.cols();
+                        size_t nonZeros = rows * cols;
+
+                        if (m_pimpl->nonZeroControlRows.size() < (nonZeroIndexControl + nonZeros)) {
+                            m_pimpl->nonZeroControlRows.resize(nonZeroIndexControl + nonZeros);
+                             m_pimpl->nonZeroControlCols.resize(nonZeroIndexControl + nonZeros);
+                        }
+
+                        for (size_t i = 0; i < rows; ++i) {
+                            for (size_t j = 0; j < cols; ++j) {
+                                m_pimpl->nonZeroControlRows[nonZeroIndexControl] = i + offset;
+                                m_pimpl->nonZeroControlCols[nonZeroIndexControl] = j;
+                                nonZeroIndexControl++;
+                            }
+                        }
+                    } else {
+                        std::ostringstream errorMsg;
+                        errorMsg << "The group " << group.second->group_ptr->name() <<" has dense control jacobian and no dynamical system has been provided yet. Cannot determine the sparsity since the control dimension is unknown.";
+                        reportError("OptimalControlProblem", "constraintJacobianWRTControlSparsity", errorMsg.str().c_str());
+                        return false;
+                    }
+                }
+
+                offset += group.second->controlJacobianBuffer.rows();
+            }
+            m_pimpl->nonZeroControlRows.resize(nonZeroIndexControl); //remove leftovers
+            m_pimpl->nonZeroControlCols.resize(nonZeroIndexControl); //remove leftovers
+
+            nonZeroElementRows = m_pimpl->nonZeroControlRows;
+            nonZeroElementColumns = m_pimpl->nonZeroControlCols;
+
             return true;
         }
 

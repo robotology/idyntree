@@ -35,8 +35,8 @@ namespace iDynTree {
 
                 VectorDynSize m_computationBuffer, m_computationBuffer2;
                 MatrixDynSize m_identity, m_stateJacBuffer, m_controlJacBuffer;
-                bool m_hasStateSparsity = true;
-                bool m_hasControlSparsity = true;
+                bool m_hasStateSparsity = false;
+                bool m_hasControlSparsity = false;
                 std::vector<CollocationSparsityVectors> m_stateJacobianSparsity;
                 std::vector<CollocationSparsityVectors> m_controlJacobianSparsity;
 
