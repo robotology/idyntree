@@ -168,6 +168,7 @@ For more info on how to modify the matlab bindings, see https://github.com/robot
 |:------:|:---:|:------:|:------:|
 | Use of the [ExtWrenchesAndJointTorquesEstimator class](http://robotology.gitlab.io/docs/idyntree/master/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors | NA | [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | NA |
 | How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](http://robotology.gitlab.io/docs/idyntree/master/classiDynTree_1_1KinDynComputations.html) | NA | [ examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | NA |
+| How to use the [InverseKinematics class](http://robotology.gitlab.io/docs/idyntree/master/classiDynTree_1_1InverseKinematics.html) for the IK of an industrial fixed-base manipulator. | [examples/InverseKinematics/README.md](examples/InverseKinematics/README.md) | NA | NA |
 
 Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
 
