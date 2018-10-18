@@ -18,6 +18,7 @@
 #define IDYNTREE_OPTIMALCONTROL_DYNAMICALSYSTEM_H
 
 #include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/SparsityStructure.h>
 
 namespace iDynTree {
 
@@ -172,19 +173,17 @@ namespace optimalcontrol {
 
         /**
          * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian
-         * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
-         * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+         * @param stateSparsity Sparsity structure of the partial derivative of the jacobian wrt state variables.
          * @return true if the sparsity is available. False otherwise.
          */
-        virtual bool dynamicsStateFirstDerivativeSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+        virtual bool dynamicsStateFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
 
         /**
          * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian
-         * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
-         * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+         * @param controlSparsity Sparsity structure of the partial derivative of the jacobian wrt state variables.
          * @return true if the sparsity is available. False otherwise.
          */
-        virtual bool dynamicsControlFirstDerivativeSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+        virtual bool dynamicsControlFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
     private:
         size_t m_stateSize;

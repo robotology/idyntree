@@ -37,8 +37,8 @@ namespace iDynTree {
                 MatrixDynSize m_stateJacBuffer, m_controlJacBuffer, m_identity, m_zeroBuffer;
                 bool m_hasStateSparsity = false;
                 bool m_hasControlSparsity = false;
-                std::vector<CollocationSparsityVectors> m_stateJacobianSparsity;
-                std::vector<CollocationSparsityVectors> m_controlJacobianSparsity;
+                std::vector<SparsityStructure> m_stateJacobianSparsity;
+                std::vector<SparsityStructure> m_controlJacobianSparsity;
 
                 bool allocateBuffers() override;
 
@@ -61,9 +61,9 @@ namespace iDynTree {
                                                            std::vector<MatrixDynSize> &stateJacobianValues,
                                                            std::vector<MatrixDynSize> &controlJacobianValues) override;
 
-                virtual bool getCollocationConstraintJacobianStateSparsity(std::vector<CollocationSparsityVectors>& stateJacobianSparsity) override;
+                virtual bool getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure>& stateJacobianSparsity) override;
 
-                virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<CollocationSparsityVectors>& controlJacobianSparsity) override;
+                virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure>& controlJacobianSparsity) override;
 
             };
         }

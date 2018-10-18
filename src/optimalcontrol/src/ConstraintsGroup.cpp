@@ -48,8 +48,8 @@ namespace optimalcontrol {
         public:
             GroupOfConstraintsMap group;
             std::vector<TimedConstraint_ptr> orderedIntervals;
-            std::vector<size_t> nonZeroStateRows, nonZeroStateCols;
-            std::vector<size_t> nonZeroControlRows, nonZeroControlCols;
+            SparsityStructure groupStateSparsity;
+            SparsityStructure groupControlSparsity;
             std::string name;
             unsigned int maxConstraintSize;
             std::vector<TimeRange> timeRanges;
@@ -123,36 +123,31 @@ namespace optimalcontrol {
                 orderedIntervals.push_back(result.first->second); //register the time range in order to have the constraints ordered by init time. result.first->second is the TimedConstraint_ptr of the newly inserted TimedConstraint.
                 std::sort(orderedIntervals.begin(), orderedIntervals.end(), [](const TimedConstraint_ptr&a, const TimedConstraint_ptr&b) { return a->timeRange < b->timeRange;}); //reorder the vector
 
-                std::vector<size_t> newConstraintNNZRowsState, newConstraintNNZRowsControl;
-                std::vector<size_t> newConstraintNNZColsState, newConstraintNNZColsControl;
+                SparsityStructure newConstraintStateSparsity, newConstraintControlSparsity;
 
                 if (stateSparsityProvided
-                        && constraint->constraintJacobianWRTStateSparsity(newConstraintNNZRowsState, newConstraintNNZColsState)) {
+                        && constraint->constraintJacobianWRTStateSparsity(newConstraintStateSparsity)) {
 
-                    if (newConstraintNNZRowsState.size() != newConstraintNNZColsState.size()) {
+                    if (!newConstraintStateSparsity.isValid()) {
                         reportError("ConstraintsGroup", "addConstraint", "The state sparsity is provided but the dimension of the two vectors do not match.");
                         return false;
                     }
 
-                    for (size_t i = 0; i < newConstraintNNZRowsState.size(); ++i) {
-                        addNonZeroIfNotPresent(newConstraintNNZRowsState[i], newConstraintNNZColsState[i], nonZeroStateRows, nonZeroStateCols);
-                    }
+                    groupStateSparsity.merge(newConstraintStateSparsity);
 
                 } else {
                     stateSparsityProvided = false;
                 }
 
                 if (controlSparsityProvided
-                        && constraint->constraintJacobianWRTControlSparsity(newConstraintNNZRowsControl, newConstraintNNZColsControl)) {
+                        && constraint->constraintJacobianWRTControlSparsity(newConstraintControlSparsity)) {
 
-                    if (newConstraintNNZRowsControl.size() != newConstraintNNZColsControl.size()) {
+                    if (!newConstraintControlSparsity.isValid()) {
                         reportError("ConstraintsGroup", "addConstraint", "The control sparsity is provided but the dimension of the two vectors do not match.");
                         return false;
                     }
 
-                    for (size_t i = 0; i < newConstraintNNZRowsControl.size(); ++i) {
-                        addNonZeroIfNotPresent(newConstraintNNZRowsControl[i], newConstraintNNZColsControl[i], nonZeroControlRows, nonZeroControlCols);
-                    }
+                    groupControlSparsity.merge(newConstraintControlSparsity);
 
                 } else {
                     controlSparsityProvided = false;
@@ -285,7 +280,7 @@ namespace optimalcontrol {
             }
 
             size_t i=0;
-            for (auto constraint : m_pimpl->group) {
+            for (auto& constraint : m_pimpl->group) {
                 m_pimpl->timeRanges[i] = constraint.second->timeRange;
                 ++i;
             }
@@ -528,26 +523,24 @@ namespace optimalcontrol {
             return true;
         }
 
-        bool ConstraintsGroup::constraintJacobianWRTStateSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns) const
+        bool ConstraintsGroup::constraintJacobianWRTStateSparsity(SparsityStructure &stateSparsity) const
         {
             if (!(m_pimpl->stateSparsityProvided)) {
                 return false;
             }
 
-            nonZeroElementRows = m_pimpl->nonZeroStateRows;
-            nonZeroElementColumns = m_pimpl->nonZeroStateCols;
+            stateSparsity = m_pimpl->groupStateSparsity;
 
             return true;
         }
 
-        bool ConstraintsGroup::constraintJacobianWRTControlSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns) const
+        bool ConstraintsGroup::constraintJacobianWRTControlSparsity(SparsityStructure &controlSparsity) const
         {
             if (!(m_pimpl->controlSparsityProvided)) {
                 return false;
             }
 
-            nonZeroElementRows = m_pimpl->nonZeroControlRows;
-            nonZeroElementColumns = m_pimpl->nonZeroControlCols;
+            controlSparsity = m_pimpl->groupControlSparsity;
 
             return true;
         }
@@ -568,7 +561,7 @@ namespace optimalcontrol {
         const std::vector<std::string> ConstraintsGroup::listConstraints() const
         {
             std::vector<std::string> output;
-            for (auto constraint: m_pimpl->group) {
+            for (auto& constraint: m_pimpl->group) {
                 output.push_back(constraint.second->constraint->name()); //MEMORY ALLOCATION
             }
             return output;

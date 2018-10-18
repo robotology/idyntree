@@ -20,6 +20,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <iDynTree/SparsityStructure.h>
 
 namespace iDynTree {
 
@@ -193,19 +194,17 @@ namespace iDynTree {
 
             /**
              * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian
-             * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
-             * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+             * @param stateSparsity Sparsity structure of the partial derivative of the jacobian wrt state variables.
              * @return true if the sparsity is available. False otherwise.
              */
-            bool constraintJacobianWRTStateSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) const;
+            bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) const;
 
             /**
              * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian
-             * @param nonZeroElementRows The row indeces of non-zero elements. The corresponding columns are in the nonZeroElementColumns vector.
-             * @param nonZeroElementColumns The column indeces of non-zero elements. The corresponding rows are in the nonZeroElementRows vector.
+             * @param controlSparsity Sparsity structure of the partial derivative of the jacobian wrt control variables.
              * @return true if the sparsity is available. False otherwise.
              */
-            bool constraintJacobianWRTControlSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) const;
+            bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) const;
 
             /**
              * @brief Flag returning true if the group is an "AnyTime" group.

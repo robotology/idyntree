@@ -22,6 +22,7 @@
 #include <string>
 
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/SparsityStructure.h>
 
 namespace iDynTree {
 
@@ -225,9 +226,9 @@ namespace iDynTree {
                                                const VectorDynSize& control,
                                                MatrixDynSize& jacobian);
 
-            bool constraintJacobianWRTStateSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+            bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
 
-            bool constraintJacobianWRTControlSparsity(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+            bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
         private:
             class OptimalControlProblemPimpl;

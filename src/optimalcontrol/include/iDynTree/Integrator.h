@@ -19,6 +19,7 @@
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/SparsityStructure.h>
 #include <vector>
 #include <string>
 #include <memory>
@@ -51,12 +52,6 @@ namespace optimalcontrol {
                  */
                 double time;
             };
-
-            typedef struct {
-                std::vector<size_t> nonZeroElementRows;
-                std::vector<size_t> nonZeroElementColumns;
-            } CollocationSparsityVectors;
-
 
             class IntegratorInfoData {
             protected:
@@ -239,9 +234,9 @@ namespace optimalcontrol {
                                                                    std::vector<MatrixDynSize>& stateJacobianValues,
                                                                    std::vector<MatrixDynSize>& controlJacobianValues);
 
-                virtual bool getCollocationConstraintJacobianStateSparsity(std::vector<CollocationSparsityVectors>& stateJacobianSparsity);
+                virtual bool getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure>& stateJacobianSparsity);
 
-                virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<CollocationSparsityVectors>& controlJacobianSparsity);
+                virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure>& controlJacobianSparsity);
 
 
                 const IntegratorInfo& info() const;

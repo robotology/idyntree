@@ -90,12 +90,12 @@ namespace iDynTree {
                                                              MatrixDynSize& dynamicsDerivative)
         { return false; }
 
-        bool DynamicalSystem::dynamicsStateFirstDerivativeSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        bool DynamicalSystem::dynamicsStateFirstDerivativeSparsity(SparsityStructure &stateSparsity)
         {
             return false;
         }
 
-        bool DynamicalSystem::dynamicsControlFirstDerivativeSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        bool DynamicalSystem::dynamicsControlFirstDerivativeSparsity(SparsityStructure &controlSparsity)
         {
             return false;
         }

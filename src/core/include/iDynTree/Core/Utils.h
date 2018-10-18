@@ -12,7 +12,6 @@
 #define IDYNTREE_UTILS_H
 
 #include <cstddef>
-#include <vector>
 
 /**
  * \brief Macro to suppress unused variable warnings
@@ -137,8 +136,6 @@ namespace iDynTree
      * Check whether two doubles are equal given a tolerance tol.
      */
     bool checkDoublesAreEqual(const double & val1, const double & val2, double tol = DEFAULT_TOL);
-
-    void addNonZeroIfNotPresent(size_t newRow, size_t newCol, std::vector<size_t>& nonZerosRows, std::vector<size_t>& nonZerosCols);
 
 }
 

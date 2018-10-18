@@ -45,8 +45,8 @@ namespace iDynTree {
             std::shared_ptr<ConstraintsGroup> group_ptr;
             VectorDynSize constraintsBuffer;
             MatrixDynSize stateJacobianBuffer, controlJacobianBuffer;
-            std::vector<size_t> nonZeroStateRows, nonZeroStateCols;
-            std::vector<size_t> nonZeroControlRows, nonZeroControlCols;
+            SparsityStructure stateSparsity;
+            SparsityStructure controlSparsity;
             bool hasStateSparsity = false;
             bool hasControlSparsity = false;
         } BufferedGroup;
@@ -76,8 +76,8 @@ namespace iDynTree {
             MatrixDynSize costStateHessianBuffer, costControlHessianBuffer, costMixedHessianBuffer;
             bool stateLowerBounded, stateUpperBounded, controlLowerBounded, controlUpperBounded;
             VectorDynSize stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
-            std::vector<size_t> nonZeroStateRows, nonZeroStateCols;
-            std::vector<size_t> nonZeroControlRows, nonZeroControlCols;
+            SparsityStructure stateSparsity;
+            SparsityStructure controlSparsity;
             std::vector<std::string> mayerCostnames;
             std::vector<TimeRange> constraintsTimeRanges, costTimeRanges;
             std::vector<size_t> linearConstraintIndeces;
@@ -213,8 +213,8 @@ namespace iDynTree {
                 newGroup->controlJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->controlSpaceSize()));
             }
 
-            newGroup->hasStateSparsity = groupOfConstraints->constraintJacobianWRTStateSparsity(newGroup->nonZeroStateRows, newGroup->nonZeroStateCols); //needed to allocate memory in advance
-            newGroup->hasControlSparsity = groupOfConstraints->constraintJacobianWRTControlSparsity(newGroup->nonZeroControlRows, newGroup->nonZeroControlCols); //needed to allocate memory in advance
+            newGroup->hasStateSparsity = groupOfConstraints->constraintJacobianWRTStateSparsity(newGroup->stateSparsity); //needed to allocate memory in advance
+            newGroup->hasControlSparsity = groupOfConstraints->constraintJacobianWRTControlSparsity(newGroup->controlSparsity); //needed to allocate memory in advance
 
             std::pair< ConstraintsGroupsMap::iterator, bool> groupResult;
             groupResult = m_pimpl->constraintsGroups.insert(std::pair< std::string, BufferedGroup_ptr>(groupOfConstraints->name(), newGroup));
@@ -226,11 +226,9 @@ namespace iDynTree {
                 return false;
             }
 
-            m_pimpl->nonZeroStateRows.resize(m_pimpl->nonZeroStateRows.size() + newGroup->nonZeroStateRows.size()); //needed to allocate memory in advance
-            m_pimpl->nonZeroStateCols.resize(m_pimpl->nonZeroStateCols.size() + newGroup->nonZeroStateCols.size()); //needed to allocate memory in advance
+            m_pimpl->stateSparsity.resize(m_pimpl->stateSparsity.size() + newGroup->stateSparsity.size()); //needed to allocate memory in advance
 
-            m_pimpl->nonZeroControlRows.resize(m_pimpl->nonZeroControlRows.size() + newGroup->nonZeroControlRows.size()); //needed to allocate memory in advance
-            m_pimpl->nonZeroControlCols.resize(m_pimpl->nonZeroControlCols.size() + newGroup->nonZeroControlCols.size()); //needed to allocate memory in advance
+            m_pimpl->controlSparsity.resize(m_pimpl->controlSparsity.size() + newGroup->controlSparsity.size()); //needed to allocate memory in advance
 
             return true;
         }
@@ -1109,24 +1107,23 @@ namespace iDynTree {
             return true;
         }
 
-        bool OptimalControlProblem::constraintJacobianWRTStateSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        bool OptimalControlProblem::constraintJacobianWRTStateSparsity(SparsityStructure &stateSparsity)
         {
             size_t nonZeroIndexState = 0;
             size_t offset = 0;
             for (auto& group : m_pimpl->constraintsGroups){
 
-                group.second->hasStateSparsity = group.second->group_ptr->constraintJacobianWRTStateSparsity(group.second->nonZeroStateRows, group.second->nonZeroStateCols);
+                group.second->hasStateSparsity = group.second->group_ptr->constraintJacobianWRTStateSparsity(group.second->stateSparsity);
 
                 if (group.second->hasStateSparsity) {
 
-                    if (m_pimpl->nonZeroStateRows.size() < (nonZeroIndexState + group.second->nonZeroStateRows.size())) {
-                        m_pimpl->nonZeroStateRows.resize(nonZeroIndexState + group.second->nonZeroStateRows.size());
-                         m_pimpl->nonZeroStateCols.resize(nonZeroIndexState + group.second->nonZeroStateRows.size());
+                    if (m_pimpl->stateSparsity.size() < (nonZeroIndexState + group.second->stateSparsity.size())) {
+                        m_pimpl->stateSparsity.resize(nonZeroIndexState + group.second->stateSparsity.size());
                     }
 
-                    for (size_t i = 0; i < group.second->nonZeroStateRows.size(); ++i) {
-                        m_pimpl->nonZeroStateRows[nonZeroIndexState] = group.second->nonZeroStateRows[i] + offset;
-                        m_pimpl->nonZeroStateCols[nonZeroIndexState] = group.second->nonZeroStateCols[i];
+                    for (size_t i = 0; i < group.second->stateSparsity.size(); ++i) {
+                        m_pimpl->stateSparsity.nonZeroElementRows[nonZeroIndexState]    = group.second->stateSparsity.nonZeroElementRows[i] + offset;
+                        m_pimpl->stateSparsity.nonZeroElementColumns[nonZeroIndexState] = group.second->stateSparsity.nonZeroElementColumns[i];
                         nonZeroIndexState++;
                     }
 
@@ -1138,15 +1135,14 @@ namespace iDynTree {
                         size_t cols = group.second->stateJacobianBuffer.cols();
                         size_t nonZeros = rows * cols;
 
-                        if (m_pimpl->nonZeroStateRows.size() < (nonZeroIndexState + nonZeros)) {
-                            m_pimpl->nonZeroStateRows.resize(nonZeroIndexState + nonZeros);
-                             m_pimpl->nonZeroStateCols.resize(nonZeroIndexState + nonZeros);
+                        if (m_pimpl->stateSparsity.size() < (nonZeroIndexState + nonZeros)) {
+                            m_pimpl->stateSparsity.resize(nonZeroIndexState + nonZeros);
                         }
 
                         for (size_t i = 0; i < rows; ++i) {
                             for (size_t j = 0; j < cols; ++j) {
-                                m_pimpl->nonZeroStateRows[nonZeroIndexState] = i + offset;
-                                m_pimpl->nonZeroStateCols[nonZeroIndexState] = j;
+                                m_pimpl->stateSparsity.nonZeroElementRows[nonZeroIndexState]    = i + offset;
+                                m_pimpl->stateSparsity.nonZeroElementColumns[nonZeroIndexState] = j;
                                 nonZeroIndexState++;
                             }
                         }
@@ -1160,34 +1156,31 @@ namespace iDynTree {
 
                 offset += group.second->stateJacobianBuffer.rows();
             }
-            m_pimpl->nonZeroStateRows.resize(nonZeroIndexState); //remove leftovers
-            m_pimpl->nonZeroStateCols.resize(nonZeroIndexState); //remove leftovers
+            m_pimpl->stateSparsity.resize(nonZeroIndexState); //remove leftovers
 
 
-            nonZeroElementRows = m_pimpl->nonZeroStateRows;
-            nonZeroElementColumns = m_pimpl->nonZeroStateCols;
+            stateSparsity = m_pimpl->stateSparsity;
 
             return true;
         }
 
-        bool OptimalControlProblem::constraintJacobianWRTControlSparsity(std::vector<size_t> &nonZeroElementRows, std::vector<size_t> &nonZeroElementColumns)
+        bool OptimalControlProblem::constraintJacobianWRTControlSparsity(SparsityStructure &controlSparsity)
         {
             size_t nonZeroIndexControl = 0;
             size_t offset = 0;
             for (auto& group : m_pimpl->constraintsGroups){
 
-                group.second->hasControlSparsity = group.second->group_ptr->constraintJacobianWRTControlSparsity(group.second->nonZeroControlRows, group.second->nonZeroControlCols);
+                group.second->hasControlSparsity = group.second->group_ptr->constraintJacobianWRTControlSparsity(group.second->controlSparsity);
 
                 if (group.second->hasControlSparsity) {
 
-                    if (m_pimpl->nonZeroControlRows.size() < (nonZeroIndexControl + group.second->nonZeroControlRows.size())) {
-                        m_pimpl->nonZeroControlRows.resize(nonZeroIndexControl + group.second->nonZeroControlRows.size());
-                         m_pimpl->nonZeroControlCols.resize(nonZeroIndexControl + group.second->nonZeroControlRows.size());
+                    if (m_pimpl->controlSparsity.size() < (nonZeroIndexControl + group.second->controlSparsity.size())) {
+                        m_pimpl->controlSparsity.resize(nonZeroIndexControl + group.second->controlSparsity.size());
                     }
 
-                    for (size_t i = 0; i < group.second->nonZeroControlRows.size(); ++i) {
-                        m_pimpl->nonZeroControlRows[nonZeroIndexControl] = group.second->nonZeroControlRows[i] + offset;
-                        m_pimpl->nonZeroControlCols[nonZeroIndexControl] = group.second->nonZeroControlCols[i];
+                    for (size_t i = 0; i < group.second->controlSparsity.size(); ++i) {
+                        m_pimpl->controlSparsity.nonZeroElementRows[nonZeroIndexControl]    = group.second->controlSparsity.nonZeroElementRows[i] + offset;
+                        m_pimpl->controlSparsity.nonZeroElementColumns[nonZeroIndexControl] = group.second->controlSparsity.nonZeroElementColumns[i];
                         nonZeroIndexControl++;
                     }
 
@@ -1199,15 +1192,14 @@ namespace iDynTree {
                         size_t cols = group.second->controlJacobianBuffer.cols();
                         size_t nonZeros = rows * cols;
 
-                        if (m_pimpl->nonZeroControlRows.size() < (nonZeroIndexControl + nonZeros)) {
-                            m_pimpl->nonZeroControlRows.resize(nonZeroIndexControl + nonZeros);
-                             m_pimpl->nonZeroControlCols.resize(nonZeroIndexControl + nonZeros);
+                        if (m_pimpl->controlSparsity.size() < (nonZeroIndexControl + nonZeros)) {
+                            m_pimpl->controlSparsity.resize(nonZeroIndexControl + nonZeros);
                         }
 
                         for (size_t i = 0; i < rows; ++i) {
                             for (size_t j = 0; j < cols; ++j) {
-                                m_pimpl->nonZeroControlRows[nonZeroIndexControl] = i + offset;
-                                m_pimpl->nonZeroControlCols[nonZeroIndexControl] = j;
+                                m_pimpl->controlSparsity.nonZeroElementRows[nonZeroIndexControl]    = i + offset;
+                                m_pimpl->controlSparsity.nonZeroElementColumns[nonZeroIndexControl] = j;
                                 nonZeroIndexControl++;
                             }
                         }
@@ -1221,11 +1213,10 @@ namespace iDynTree {
 
                 offset += group.second->controlJacobianBuffer.rows();
             }
-            m_pimpl->nonZeroControlRows.resize(nonZeroIndexControl); //remove leftovers
-            m_pimpl->nonZeroControlCols.resize(nonZeroIndexControl); //remove leftovers
+            m_pimpl->controlSparsity.resize(nonZeroIndexControl); //remove leftovers
 
-            nonZeroElementRows = m_pimpl->nonZeroControlRows;
-            nonZeroElementColumns = m_pimpl->nonZeroControlCols;
+
+            controlSparsity = m_pimpl->controlSparsity;
 
             return true;
         }
