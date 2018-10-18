@@ -1134,8 +1134,8 @@ namespace iDynTree {
 
                     if (m_pimpl->dynamicalSystem) {
 
-                        size_t rows = group.second->controlJacobianBuffer.rows();
-                        size_t cols = group.second->controlJacobianBuffer.cols();
+                        size_t rows = group.second->stateJacobianBuffer.rows();
+                        size_t cols = group.second->stateJacobianBuffer.cols();
                         size_t nonZeros = rows * cols;
 
                         if (m_pimpl->nonZeroStateRows.size() < (nonZeroIndexState + nonZeros)) {
