@@ -32,6 +32,9 @@ namespace iDynTree {
         public:
             std::shared_ptr<TimeVaryingMatrix> stateMatrix;
             std::shared_ptr<TimeVaryingMatrix> controlMatrix;
+
+            SparsityStructure stateSparsity, controlSparsity;
+            bool hasStateSparsity, hasControlSparsity;
         };
 
 
@@ -39,6 +42,24 @@ namespace iDynTree {
                                    size_t controlSize)
         : DynamicalSystem(stateSize, controlSize)
         , m_pimpl(new LinearSystemPimpl())
+        {
+            assert(m_pimpl);
+            m_pimpl->hasStateSparsity = false;
+            m_pimpl->hasControlSparsity = false;
+            std::shared_ptr<TimeInvariantMatrix> tempState = std::make_shared<TimeInvariantMatrix>();
+            tempState->get().resize(static_cast<unsigned int>(stateSize), static_cast<unsigned int>(stateSize));
+            tempState->get().zero();
+            m_pimpl->stateMatrix = tempState;
+
+            std::shared_ptr<TimeInvariantMatrix> tempControl = std::make_shared<TimeInvariantMatrix>();
+            tempControl->get().resize(static_cast<unsigned int>(stateSize), static_cast<unsigned int>(controlSize));
+            tempControl->get().zero();
+            m_pimpl->controlMatrix = tempControl;
+        }
+
+        LinearSystem::LinearSystem(size_t stateSize, size_t controlSize, const SparsityStructure &stateSparsity, const SparsityStructure &controlSparsity)
+            : DynamicalSystem(stateSize, controlSize)
+            , m_pimpl(new LinearSystemPimpl())
         {
             assert(m_pimpl);
             std::shared_ptr<TimeInvariantMatrix> tempState = std::make_shared<TimeInvariantMatrix>();
@@ -50,6 +71,17 @@ namespace iDynTree {
             tempControl->get().resize(static_cast<unsigned int>(stateSize), static_cast<unsigned int>(controlSize));
             tempControl->get().zero();
             m_pimpl->controlMatrix = tempControl;
+
+            m_pimpl->hasStateSparsity = false;
+            m_pimpl->hasControlSparsity = false;
+            if (stateSparsity.isValid()) {
+                m_pimpl->hasStateSparsity = true;
+                m_pimpl->stateSparsity = stateSparsity;
+            }
+            if (controlSparsity.isValid()) {
+                m_pimpl->hasControlSparsity = true;
+                m_pimpl->controlSparsity = controlSparsity;
+            }
         }
 
         LinearSystem::~LinearSystem()
@@ -190,6 +222,24 @@ namespace iDynTree {
             }
 
             dynamicsDerivative = controlMatrix;
+            return true;
+        }
+
+        bool LinearSystem::dynamicsStateFirstDerivativeSparsity(SparsityStructure &stateSparsity)
+        {
+            if (!(m_pimpl->hasStateSparsity)) {
+                return false;
+            }
+            stateSparsity = m_pimpl->stateSparsity;
+            return true;
+        }
+
+        bool LinearSystem::dynamicsControlFirstDerivativeSparsity(SparsityStructure &controlSparsity)
+        {
+            if (!(m_pimpl->hasControlSparsity)) {
+                return false;
+            }
+            controlSparsity = m_pimpl->controlSparsity;
             return true;
         }
 

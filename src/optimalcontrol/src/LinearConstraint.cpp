@@ -29,9 +29,32 @@ namespace iDynTree {
         , m_constrainsControl(false)
         , m_stateConstraintsBuffer(static_cast<unsigned int>(size))
         , m_controlConstraintsBuffer(static_cast<unsigned int>(size))
+        , m_hasStateSparsity(false)
+        , m_hasControlSparsity(false)
         {
             m_stateConstraintsBuffer.zero();
             m_controlConstraintsBuffer.zero();
+        }
+
+        LinearConstraint::LinearConstraint(size_t size, const std::string name, const SparsityStructure &stateSparsity, const SparsityStructure &controlSparsity)
+            : Constraint(size, name)
+            , m_constrainsState(false)
+            , m_constrainsControl(false)
+            , m_stateConstraintsBuffer(static_cast<unsigned int>(size))
+            , m_controlConstraintsBuffer(static_cast<unsigned int>(size))
+            , m_hasStateSparsity(false)
+            , m_hasControlSparsity(false)
+        {
+            m_stateConstraintsBuffer.zero();
+            m_controlConstraintsBuffer.zero();
+            if (stateSparsity.isValid()) {
+                m_hasStateSparsity = true;
+                m_stateSparsity = stateSparsity;
+            }
+            if (controlSparsity.isValid()) {
+                m_hasControlSparsity = true;
+                m_controlSparsity = controlSparsity;
+            }
         }
 
         LinearConstraint::~LinearConstraint() {}
@@ -136,6 +159,24 @@ namespace iDynTree {
                 }
             }
             jacobian = m_controlConstraintMatrix;
+            return true;
+        }
+
+        bool LinearConstraint::constraintJacobianWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            if (!m_hasStateSparsity) {
+                return false;
+            }
+            stateSparsity = m_stateSparsity;
+            return true;
+        }
+
+        bool LinearConstraint::constraintJacobianWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            if (!m_hasControlSparsity) {
+                return false;
+            }
+            controlSparsity = m_controlSparsity;
             return true;
         }
 
