@@ -17,6 +17,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_SPARSITYSTRUCTURE_H
 #define IDYNTREE_OPTIMALCONTROL_SPARSITYSTRUCTURE_H
 
+#include <iDynTree/Core/Utils.h>
 #include <vector>
 #include <cstddef>
 
@@ -37,9 +38,23 @@ public:
 
     bool merge(const SparsityStructure& other);
 
+    void addDenseBlock(size_t startRow, size_t startColumn, size_t numberOfRows, size_t numberOfColumns);
+
+    bool addDenseBlock(long startRow, long startColumn, long numberOfRows, long numberOfColumns);
+
+    bool addDenseBlock(const iDynTree::IndexRange& rowsRange, const iDynTree::IndexRange& columnsRange);
+
+    void addIdentityBlock(size_t startRow, size_t startColumn, size_t dimension);
+
+    bool addIdentityBlock(long startRow, long startColumn, long dimension);
+
     void addNonZeroIfNotPresent(size_t newRow, size_t newCol);
 
+    bool isValuePresent(size_t row, size_t col) const;
+
     void resize(size_t newSize);
+
+    void clear();
 
     size_t size() const;
 

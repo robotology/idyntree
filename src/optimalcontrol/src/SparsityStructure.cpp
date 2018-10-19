@@ -38,21 +38,120 @@ bool iDynTree::optimalcontrol::SparsityStructure::merge(const iDynTree::optimalc
     return true;
 }
 
-void iDynTree::optimalcontrol::SparsityStructure::addNonZeroIfNotPresent(size_t newRow, size_t newCol)
+void iDynTree::optimalcontrol::SparsityStructure::addDenseBlock(size_t startRow, size_t startColumn, size_t numberOfRows, size_t numberOfColumns)
 {
-    for (size_t i = 0; i < nonZeroElementRows.size(); ++i) {
-        if ((newRow == nonZeroElementRows[i]) && (newCol == nonZeroElementColumns[i])) {
-            return;
+    for (size_t i = 0; i < numberOfRows; ++i) {
+        for (size_t j = 0; j < numberOfColumns; ++j) {
+            addNonZeroIfNotPresent(startRow + i, startColumn + j);
         }
     }
-    nonZeroElementRows.push_back(newRow);
-    nonZeroElementColumns.push_back(newCol);
+}
+
+bool iDynTree::optimalcontrol::SparsityStructure::addDenseBlock(long startRow, long startColumn, long numberOfRows, long numberOfColumns)
+{
+    if (startRow < 0) {
+        reportError("SparsityStructure", "addDenseBlock", "The startRow is negative.");
+        return false;
+    }
+
+    if (startColumn < 0) {
+        reportError("SparsityStructure", "addDenseBlock", "The startColumn is negative.");
+        return false;
+    }
+
+    if (numberOfRows < 0) {
+        reportError("SparsityStructure", "addDenseBlock", "The numberOfRows is negative.");
+        return false;
+    }
+
+    if (numberOfColumns < 0) {
+        reportError("SparsityStructure", "addDenseBlock", "The numberOfColumns is negative.");
+        return false;
+    }
+
+    addDenseBlock(static_cast<size_t>(startRow),
+                  static_cast<size_t>(startColumn),
+                  static_cast<size_t>(numberOfRows),
+                  static_cast<size_t>(numberOfColumns));
+    return true;
+}
+
+bool iDynTree::optimalcontrol::SparsityStructure::addDenseBlock(const iDynTree::IndexRange &rowsRange, const iDynTree::IndexRange &columnsRange)
+{
+    if (!rowsRange.isValid()) {
+        reportError("SparsityStructure", "addDenseBlock", "The rowsRange is not valid.");
+        return false;
+    }
+
+    if (!columnsRange.isValid()) {
+        reportError("SparsityStructure", "addDenseBlock", "The columnsRange is not valid.");
+        return false;
+    }
+
+    addDenseBlock(rowsRange.offset, columnsRange.offset, rowsRange.size, columnsRange.size);
+
+    return true;
+}
+
+void iDynTree::optimalcontrol::SparsityStructure::addIdentityBlock(size_t startRow, size_t startColumn, size_t dimension)
+{
+    for (size_t i = 0; i < dimension; ++i) {
+        addNonZeroIfNotPresent(startRow + i, startColumn + i);
+    }
+}
+
+bool iDynTree::optimalcontrol::SparsityStructure::addIdentityBlock(long startRow, long startColumn, long dimension)
+{
+    if (startRow < 0) {
+        reportError("SparsityStructure", "addIdentityBlock", "The startRow is negative.");
+        return false;
+    }
+
+    if (startColumn < 0) {
+        reportError("SparsityStructure", "addIdentityBlock", "The startColumn is negative.");
+        return false;
+    }
+
+    if (dimension < 0) {
+        reportError("SparsityStructure", "addIdentityBlock", "The dimension is negative.");
+        return false;
+    }
+
+    addIdentityBlock(static_cast<size_t>(startRow),
+                     static_cast<size_t>(startColumn),
+                     static_cast<size_t>(dimension)
+                     );
+    return true;
+}
+
+void iDynTree::optimalcontrol::SparsityStructure::addNonZeroIfNotPresent(size_t newRow, size_t newCol)
+{
+    if (!isValuePresent(newRow, newCol)) {
+        nonZeroElementRows.push_back(newRow);
+        nonZeroElementColumns.push_back(newCol);
+    }
+}
+
+bool iDynTree::optimalcontrol::SparsityStructure::isValuePresent(size_t row, size_t col) const
+{
+    for (size_t i = 0; i < nonZeroElementRows.size(); ++i) {
+        if ((row == nonZeroElementRows[i]) && (col == nonZeroElementColumns[i])) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void iDynTree::optimalcontrol::SparsityStructure::resize(size_t newSize)
 {
     nonZeroElementRows.resize(newSize);
     nonZeroElementColumns.resize(newSize);
+}
+
+void iDynTree::optimalcontrol::SparsityStructure::clear()
+{
+    nonZeroElementRows.clear();
+    nonZeroElementColumns.clear();
 }
 
 size_t iDynTree::optimalcontrol::SparsityStructure::size() const

@@ -227,14 +227,7 @@ namespace iDynTree {
                 }
 
                 for (size_t j = 0; j < secondRows.size(); ++j) {
-                    bool duplicate = false;
-                    size_t i = 0;
-                    while (!duplicate && (i < firstRows.size())) {
-                        if ((secondRows[j] == firstRows[i]) && (secondCols[j] == firstCols[i])) {
-                            duplicate = true;
-                        }
-                        ++i;
-                    }
+                    bool duplicate = original[0].isValuePresent(secondRows[j], secondCols[j]);
 
                     if (!duplicate) {
                         addNonZero(merged.nonZeroElementRows, mergedNonZeros, secondRows[j]);
@@ -242,6 +235,7 @@ namespace iDynTree {
                         mergedNonZeros++;
                     }
                 }
+                merged.resize(mergedNonZeros);
             }
 
             void allocateBuffers(){
