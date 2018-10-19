@@ -23,51 +23,64 @@
 namespace iDynTree {
     namespace optimalcontrol {
 
+        class LinearConstraint::LinearConstraintImplementation {
+        public:
+            bool constrainsState, constrainsControl;
+            std::shared_ptr<TimeVaryingMatrix> stateConstraintMatrix;
+            std::shared_ptr<TimeVaryingMatrix> controlConstraintMatrix;
+            iDynTree::VectorDynSize stateConstraintsBuffer, controlConstraintsBuffer;
+            bool hasStateSparsity, hasControlSparsity;
+            SparsityStructure stateSparsity, controlSparsity;
+
+            LinearConstraintImplementation(size_t size)
+                : constrainsState(false)
+                , constrainsControl(false)
+                , stateConstraintsBuffer(static_cast<unsigned int>(size))
+                , controlConstraintsBuffer(static_cast<unsigned int>(size))
+                , hasStateSparsity(false)
+                , hasControlSparsity(false)
+            {
+                stateConstraintsBuffer.zero();
+                controlConstraintsBuffer.zero();
+            }
+        };
+
         LinearConstraint::LinearConstraint(size_t size, const std::string name)
         : Constraint(size, name)
-        , m_constrainsState(false)
-        , m_constrainsControl(false)
-        , m_stateConstraintsBuffer(static_cast<unsigned int>(size))
-        , m_controlConstraintsBuffer(static_cast<unsigned int>(size))
-        , m_hasStateSparsity(false)
-        , m_hasControlSparsity(false)
-        {
-            m_stateConstraintsBuffer.zero();
-            m_controlConstraintsBuffer.zero();
-        }
+        , m_pimpl(new LinearConstraintImplementation(size))
+        { }
 
         LinearConstraint::LinearConstraint(size_t size, const std::string name, const SparsityStructure &stateSparsity, const SparsityStructure &controlSparsity)
             : Constraint(size, name)
-            , m_constrainsState(false)
-            , m_constrainsControl(false)
-            , m_stateConstraintsBuffer(static_cast<unsigned int>(size))
-            , m_controlConstraintsBuffer(static_cast<unsigned int>(size))
-            , m_hasStateSparsity(false)
-            , m_hasControlSparsity(false)
+            , m_pimpl(new LinearConstraintImplementation(size))
         {
-            m_stateConstraintsBuffer.zero();
-            m_controlConstraintsBuffer.zero();
             if (stateSparsity.isValid()) {
-                m_hasStateSparsity = true;
-                m_stateSparsity = stateSparsity;
+                m_pimpl->hasStateSparsity = true;
+                m_pimpl->stateSparsity = stateSparsity;
             }
             if (controlSparsity.isValid()) {
-                m_hasControlSparsity = true;
-                m_controlSparsity = controlSparsity;
+                m_pimpl->hasControlSparsity = true;
+                m_pimpl->controlSparsity = controlSparsity;
             }
         }
 
-        LinearConstraint::~LinearConstraint() {}
+        LinearConstraint::~LinearConstraint()
+        {
+            if (m_pimpl) {
+                delete m_pimpl;
+                m_pimpl = nullptr;
+            }
+        }
 
         bool LinearConstraint::setStateConstraintMatrix(const MatrixDynSize &constraintMatrix)
         {
             if (constraintMatrix.rows() != constraintSize()) {
-                reportError("LinearConstraint", "setStateConstraintMatrix", "The number of rows of the constraintMatrix is different from the specified constraint size.");
+                reportError(name().c_str(), "setStateConstraintMatrix", "The number of rows of the constraintMatrix is different from the specified constraint size.");
                 return false;
             }
 
-            m_stateConstraintMatrix = constraintMatrix;
-            m_constrainsState = true;
+            m_pimpl->stateConstraintMatrix = std::make_shared<TimeInvariantMatrix>(constraintMatrix);
+            m_pimpl->constrainsState = true;
 
             return true;
         }
@@ -75,13 +88,33 @@ namespace iDynTree {
         bool LinearConstraint::setControlConstraintMatrix(const MatrixDynSize &constraintMatrix)
         {
             if (constraintMatrix.rows() != constraintSize()) {
-                reportError("LinearConstraint", "setControlConstraintMatrix", "The number of rows of the constraintMatrix is different from the specified constraint size.");
+                reportError(name().c_str(), "setControlConstraintMatrix", "The number of rows of the constraintMatrix is different from the specified constraint size.");
                 return false;
             }
 
-            m_controlConstraintMatrix = constraintMatrix;
-            m_constrainsControl = true;
+            m_pimpl->controlConstraintMatrix = std::make_shared<TimeInvariantMatrix>(constraintMatrix);
+            m_pimpl->constrainsControl = true;
 
+            return true;
+        }
+
+        bool LinearConstraint::setStateConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix)
+        {
+            if (!constraintMatrix) {
+                reportError(name().c_str(), "setStateConstraintMatrix", "Empty constraintMatrix pointer.");
+                return false;
+            }
+            m_pimpl->stateConstraintMatrix = constraintMatrix;
+            return true;
+        }
+
+        bool LinearConstraint::setControlConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix)
+        {
+            if (!constraintMatrix) {
+                reportError(name().c_str(), "setControlConstraintMatrix", "Empty constraintMatrix pointer.");
+                return false;
+            }
+            m_pimpl->controlConstraintMatrix = constraintMatrix;
             return true;
         }
 
@@ -91,92 +124,135 @@ namespace iDynTree {
                                                   const VectorDynSize& control,
                                                   VectorDynSize& constraint)
         {
-            if (m_constrainsState) {
-                if (m_stateConstraintMatrix.cols() != state.size()) {
-                    reportError("LinearConstraint", "evaluateConstraint", "The dimension of the specified constraint matrix and the state do not match.");
+            if (m_pimpl->constrainsState) {
+                bool isValid = false;
+                const MatrixDynSize& stateConstraintMatrix = m_pimpl->stateConstraintMatrix->get(time, isValid);
+
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid state constraint matrix at time: " << time << ".";
+                    reportError(name().c_str(), "evaluateConstraint", errorMsg.str().c_str());
                     return false;
                 }
-                iDynTree::iDynTreeEigenMatrixMap stateConstraint = iDynTree::toEigen(m_stateConstraintMatrix);
 
-                iDynTree::toEigen(m_stateConstraintsBuffer) = stateConstraint * iDynTree::toEigen(state);
+                if ((stateConstraintMatrix.cols() != state.size()) || (stateConstraintMatrix.rows() != constraintSize())) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The state constraint matrix at time: " << time << " has dimensions not matching with the specified state space dimension or constraint dimension.";
+                    reportError(name().c_str(), "evaluateConstraint", errorMsg.str().c_str());
+                }
+                iDynTree::iDynTreeEigenConstMatrixMap stateConstraint = iDynTree::toEigen(stateConstraintMatrix);
+
+                iDynTree::toEigen(m_pimpl->stateConstraintsBuffer) = stateConstraint * iDynTree::toEigen(state);
             }
 
 
-            if (m_constrainsControl) {
-                if (m_controlConstraintMatrix.cols() != control.size()) {
-                    reportError("LinearConstraint", "evaluateConstraint", "The dimension of the specified constraint matrix and the control do not match.");
+            if (m_pimpl->constrainsControl) {
+                bool isValid = false;
+                const MatrixDynSize& controlConstraintMatrix = m_pimpl->controlConstraintMatrix->get(time, isValid);
+
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid control constraint matrix at time: " << time << ".";
+                    reportError(name().c_str(), "evaluateConstraint", errorMsg.str().c_str());
                     return false;
                 }
 
-                iDynTree::iDynTreeEigenMatrixMap controlConstraint = iDynTree::toEigen(m_controlConstraintMatrix);
-                iDynTree::toEigen(m_controlConstraintsBuffer) = controlConstraint * iDynTree::toEigen(control);
+                if ((controlConstraintMatrix.cols() != control.size()) || (controlConstraintMatrix.rows() != constraintSize())) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The control constraint matrix at time: " << time << " has dimensions not matching with the specified control space dimension or constraint dimension.";
+                    reportError(name().c_str(), "evaluateConstraint", errorMsg.str().c_str());
+                }
+
+                iDynTree::iDynTreeEigenConstMatrixMap controlConstraint = iDynTree::toEigen(controlConstraintMatrix);
+                iDynTree::toEigen(m_pimpl->controlConstraintsBuffer) = controlConstraint * iDynTree::toEigen(control);
             }
 
             constraint.resize(static_cast<unsigned int>(constraintSize()));
-            toEigen(constraint) = iDynTree::toEigen(m_stateConstraintsBuffer) + iDynTree::toEigen(m_controlConstraintsBuffer); //the buffers are zero if not constrained
+            toEigen(constraint) = iDynTree::toEigen(m_pimpl->stateConstraintsBuffer) + iDynTree::toEigen(m_pimpl->controlConstraintsBuffer); //the buffers are zero if not constrained
 
             return true;
 
         }
 
-        bool LinearConstraint::constraintJacobianWRTState(double /*time*/,
+        bool LinearConstraint::constraintJacobianWRTState(double time,
                                                 const VectorDynSize& state,
                                                 const VectorDynSize& /*control*/,
                                                 MatrixDynSize& jacobian)
         {
-            if (m_constrainsState) {
-                if (m_stateConstraintMatrix.cols() != state.size()) {
-                    reportError("LinearConstraint", "constraintJacobianWRTState", "The dimension of the specified constraint matrix and the state do not match.");
+            jacobian.resize(static_cast<unsigned int>(constraintSize()), state.size());
+
+            if (m_pimpl->constrainsState) {
+                bool isValid = false;
+                const MatrixDynSize& stateConstraintMatrix = m_pimpl->stateConstraintMatrix->get(time, isValid);
+
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid state constraint matrix at time: " << time << ".";
+                    reportError(name().c_str(), "constraintJacobianWRTState", errorMsg.str().c_str());
                     return false;
                 }
-            } else {
-                if ((m_stateConstraintMatrix.rows() != static_cast<unsigned int>(constraintSize())) ||
-                        (m_stateConstraintMatrix.cols() != state.size())) {
-                    m_stateConstraintMatrix.resize(static_cast<unsigned int>(constraintSize()), state.size());
-                    m_stateConstraintMatrix.zero();
+
+                if ((stateConstraintMatrix.cols() != state.size()) || (stateConstraintMatrix.rows() != constraintSize())) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The state constraint matrix at time: " << time << " has dimensions not matching with the specified state space dimension or constraint dimension.";
+                    reportError(name().c_str(), "constraintJacobianWRTState", errorMsg.str().c_str());
                 }
+
+                jacobian = stateConstraintMatrix;
+            } else {
+                jacobian.zero();
             }
-            jacobian = m_stateConstraintMatrix;
 
             return true;
         }
 
-        bool LinearConstraint::constraintJacobianWRTControl(double /*time*/,
+        bool LinearConstraint::constraintJacobianWRTControl(double time,
                                                   const VectorDynSize& /*state*/,
                                                   const VectorDynSize& control,
                                                   MatrixDynSize& jacobian)
         {
-            if (m_constrainsControl) {
-                if (m_controlConstraintMatrix.cols() != control.size()) {
-                    reportError("LinearConstraint", "constraintJacobianWRTControl", "The dimension of the specified constraint matrix and the control do not match.");
+            jacobian.resize(static_cast<unsigned int>(constraintSize()), control.size());
+
+            if (m_pimpl->constrainsControl) {
+                bool isValid = false;
+                const MatrixDynSize& controlConstraintMatrix = m_pimpl->controlConstraintMatrix->get(time, isValid);
+
+                if (!isValid) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to retrieve a valid control constraint matrix at time: " << time << ".";
+                    reportError(name().c_str(), "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
-            } else {
-                if ((m_controlConstraintMatrix.rows() != static_cast<unsigned int>(constraintSize())) ||
-                        (m_controlConstraintMatrix.cols() != control.size())) {
-                    m_controlConstraintMatrix.resize(static_cast<unsigned int>(constraintSize()), control.size());
-                    m_controlConstraintMatrix.zero();
+
+                if ((controlConstraintMatrix.cols() != control.size()) || (controlConstraintMatrix.rows() != constraintSize())) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The control constraint matrix at time: " << time << " has dimensions not matching with the specified control space dimension or constraint dimension.";
+                    reportError(name().c_str(), "constraintJacobianWRTControl", errorMsg.str().c_str());
                 }
+
+                jacobian = controlConstraintMatrix;
+            } else {
+                jacobian.zero();
             }
-            jacobian = m_controlConstraintMatrix;
+
             return true;
         }
 
         bool LinearConstraint::constraintJacobianWRTStateSparsity(SparsityStructure &stateSparsity)
         {
-            if (!m_hasStateSparsity) {
+            if (!m_pimpl->hasStateSparsity) {
                 return false;
             }
-            stateSparsity = m_stateSparsity;
+            stateSparsity = m_pimpl->stateSparsity;
             return true;
         }
 
         bool LinearConstraint::constraintJacobianWRTControlSparsity(SparsityStructure &controlSparsity)
         {
-            if (!m_hasControlSparsity) {
+            if (!m_pimpl->hasControlSparsity) {
                 return false;
             }
-            controlSparsity = m_controlSparsity;
+            controlSparsity = m_pimpl->controlSparsity;
             return true;
         }
 

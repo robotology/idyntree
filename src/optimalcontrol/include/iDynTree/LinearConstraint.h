@@ -18,9 +18,11 @@
 #define IDYNTREE_OPTIMALCONTROL_LINEARCONSTRAINT_H
 
 #include <iDynTree/Constraint.h>
-#include <string>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/TimeVaryingObject.h>
 #include <iDynTree/SparsityStructure.h>
+#include <string>
+#include <memory>
 
 namespace iDynTree {
     namespace optimalcontrol {
@@ -53,6 +55,10 @@ namespace iDynTree {
 
             bool setControlConstraintMatrix(const MatrixDynSize& constraintMatrix);
 
+            bool setStateConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix);
+
+            bool setControlConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix);
+
             virtual bool evaluateConstraint(double time,
                                             const VectorDynSize& state,
                                             const VectorDynSize& control,
@@ -73,12 +79,8 @@ namespace iDynTree {
             virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
 
         private:
-            bool m_constrainsState, m_constrainsControl;
-            iDynTree::MatrixDynSize m_stateConstraintMatrix;
-            iDynTree::MatrixDynSize m_controlConstraintMatrix;
-            iDynTree::VectorDynSize m_stateConstraintsBuffer, m_controlConstraintsBuffer;
-            bool m_hasStateSparsity, m_hasControlSparsity;
-            SparsityStructure m_stateSparsity, m_controlSparsity;
+            class LinearConstraintImplementation;
+            LinearConstraintImplementation* m_pimpl;
         };
 
     }
